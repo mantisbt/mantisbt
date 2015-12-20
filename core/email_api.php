@@ -658,19 +658,19 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
  * @return void
  */
 function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event(
-		LOG_EMAIL,
-		'Issue #%d relationship added to issue #%d (relationship type %s)',
-		$p_bug_id,
-		$p_related_bug_id,
-		$p_rel_type );
-
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
+
+	log_event(
+		LOG_EMAIL,
+		'Issue #%d relationship added to issue #%d (relationship type %s)',
+		$p_bug_id,
+		$p_related_bug_id,
+		$g_relationships[$p_rel_type]['#description'] );
 
 	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
 
@@ -711,13 +711,6 @@ function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
  * @return void
  */
 function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event(
-		LOG_EMAIL,
-		'Issue #%d relationship to issue #%d (relationship type %s) deleted.',
-		$p_bug_id,
-		$p_related_bug_id,
-		$p_rel_type );
-
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );
 	global $g_relationships;
@@ -725,7 +718,14 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type )
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
 
-    $t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+	log_event(
+		LOG_EMAIL,
+		'Issue #%d relationship to issue #%d (relationship type %s) deleted.',
+		$p_bug_id,
+		$p_related_bug_id,
+		$g_relationships[$p_rel_type]['#description'] );
+
+	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
 
     # Recipient has to have access to both bugs to get the notification.
     $t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
@@ -740,7 +740,6 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type )
  * @return void
  */
 function email_relationship_child_resolved( $p_bug_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue resolved', $p_bug_id ) );
 	email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_resolved' );
 }
 
@@ -750,7 +749,6 @@ function email_relationship_child_resolved( $p_bug_id ) {
  * @return void
  */
 function email_relationship_child_closed( $p_bug_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue closed', $p_bug_id ) );
 	email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_closed' );
 }
 
@@ -762,14 +760,18 @@ function email_relationship_child_closed( $p_bug_id ) {
  * @return void
  */
 function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue resolved', $p_bug_id ) );
-
 	# retrieve all the relationships in which the bug is the destination bug
 	$t_relationship = relationship_get_all_dest( $p_bug_id );
 	$t_relationship_count = count( $t_relationship );
 	if( $t_relationship_count == 0 ) {
 		# no parent bug found
 		return;
+	}
+
+	if( $p_message_id == 'email_notification_title_for_action_relationship_child_closed' ) {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue closed', $p_bug_id ) );
+	} else {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue resolved', $p_bug_id ) );
 	}
 
 	for( $i = 0;$i < $t_relationship_count;$i++ ) {
