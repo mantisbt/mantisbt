@@ -244,10 +244,9 @@ if( $t_show_attachments ) {
 			if( $t_show_category ) {
 			?>
 			<div class="field-container">
-				<label><span><?php
-					echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
-					print_documentation_link( 'category' );
-				?></span></label>
+				<label <?php echo config_get( 'allow_no_category' ) ? '' : 'class="required"' ?>>
+					<span><?php print_documentation_link( 'category' ); ?></span>
+				</label>
 				<span class="select">
 					<?php if( $t_changed_project ) {
 						echo '[' . project_get_field( $t_bug->project_id, 'name' ) . '] ';
@@ -502,7 +501,7 @@ if( $t_show_attachments ) {
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
 
 			<div class="field-container">
-				<label><span class="required">*</span><span><?php print_documentation_link( 'summary' ) ?></span></label>
+				<label class="required"><span><?php print_documentation_link( 'summary' ) ?></span></label>
 				<span class="input">
 					<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
 				</span>
@@ -510,7 +509,7 @@ if( $t_show_attachments ) {
 			</div>
 
 			<div class="field-container">
-				<label><span><span class="required">*</span><?php print_documentation_link( 'description' ) ?></span></label>
+				<label class="required"><span><?php print_documentation_link( 'description' ) ?></span></label>
 				<span class="textarea">
 					<textarea <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
 				</span>
@@ -545,20 +544,20 @@ if( $t_show_attachments ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
+
+			$t_required_class = $t_def['require_report'] ? 'class="required" ' : '';
+
+			if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
+				$t_label_for = 'for="custom_field_' . string_attribute( $t_def['id'] ) . '" ';
+			} else {
+				$t_label_for = '';
+			}
 ?>
 			<div class="field-container">
-				<label>
-					<span>
-						<?php if( $t_def['require_report'] ) { ?>
-						<span class="required">*</span>
-						<?php } ?>
-						<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
-							<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
-						<?php } else {
-							echo string_display( lang_get_defaulted( $t_def['name'] ) );
-						} ?>
-					</span>
-				</label>
+				<label <?php echo $t_required_class, $t_label_for; ?>><span><?php
+					echo string_display( lang_get_defaulted( $t_def['name'] ) );
+				?></span></label>
+
 				<span class="input">
 					<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
 				</span>
