@@ -124,7 +124,7 @@ function log_event( $p_level, $p_msg ) {
 		}
 	}
 
-	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_caller . ' ' . $t_msg;
 
 	switch( $t_destination ) {
 		case 'none':
