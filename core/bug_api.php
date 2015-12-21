@@ -1465,7 +1465,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  * associated with the bug was modified and the total bugnote
  * count in one db query
  * @param integer $p_bug_id Integer representing bug identifier.
- * @return object consisting of bugnote stats
+ * @return object consisting of bugnote stats, null if no stats exits
  * @access public
  * @uses database_api.php
  */
@@ -1487,7 +1487,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	}
 
 	if( $t_bugnote_count === 0 ) {
-		return false;
+		return null;
 	}
 
 	$t_stats['last_modified'] = $t_row['last_modified'];
