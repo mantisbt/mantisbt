@@ -480,3 +480,35 @@ function csv_format_due_date( BugData $p_bug ) {
 function csv_format_sponsorship_total( BugData $p_bug ) {
 	return csv_escape_string( $p_bug->sponsorship_total );
 }
+
+/**
+ * return the attachment count for an issue
+ * @param BugData $p_bug A BugData object.
+ * @return string
+ * @access public
+ */
+function csv_format_attachment_count( BugData $p_bug ) {
+	# Check for attachments
+	$t_attachment_count = 0;
+	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
+		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
+	}
+	return csv_escape_string( $t_attachment_count );
+}
+
+/**
+ * return the bug note count for an issue
+ * @param BugData $p_bug A BugData object.
+ * @return string
+ * @access public
+ */
+function csv_format_bugnotes_count( BugData $p_bug ) {
+	# grab the bugnote count
+	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
+	if( $t_bugnote_stats ) {
+		$t_bugnote_count = $t_bugnote_stats['count'];
+	} else {
+		$t_bugnote_count = 0;
+	}
+	return csv_escape_string( $t_bugnote_count );
+}

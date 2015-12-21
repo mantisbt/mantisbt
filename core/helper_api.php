@@ -506,13 +506,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_keys_to_remove[] = 'selection';
 		$t_keys_to_remove[] = 'edit';
-		$t_keys_to_remove[] = 'bugnotes_count';
-		$t_keys_to_remove[] = 'attachment_count';
 		$t_keys_to_remove[] = 'overdue';
-	}
-
-	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
-		$t_keys_to_remove[] = 'attachment_count';
 	}
 
 	$t_current_project_id = helper_get_current_project();
