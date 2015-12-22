@@ -4207,9 +4207,11 @@ $g_log_level = LOG_NONE;
 /**
  * Specifies where the log data goes
  *
- * The following 4 options are available:
+ * The following five options are available:
  * - '':        The empty string means {@link http://php.net/error_log
  *              default PHP error log settings}
+ * - 'none':    Don't output the logs, but would still trigger EVENT_LOG
+ *              plugin event.
  * - 'file':    Log to a specific file, specified as an absolute path, e.g.
  *              'file:/var/log/mantis.log' (Unix) or
  *              'file:c:/temp/mantisbt.log' (Windows)
