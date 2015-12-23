@@ -121,7 +121,7 @@ else
 	else
 		myphp=php
 	fi
-	$myphp -S $HOSTNAME:$PORT &
+	$myphp -S $HOSTNAME:$PORT >& /dev/null &
 fi
 
 # needed to allow web server to create config_inc.php
