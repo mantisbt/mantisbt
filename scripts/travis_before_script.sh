@@ -3,7 +3,8 @@
 # MantisBT Travis-CI before script
 # -----------------------------------------------------------------------------
 
-# We don't need any of this when building the documentation
+# Nothing to do here for documentation builds
+# Note: Publican is installed via .travis.yml (apt add-on)
 if [[ -n $DOCBOOK ]]
 then
 	exit

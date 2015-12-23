@@ -20,10 +20,6 @@ function build_docbook() {
 	# Build the docbook if any XML files have been updated
 	if [[ -n $UPDATED_DOCBOOKS ]]
 	then
-		# Install DocBook toolchain
-		echo "Installing Publican..."
-		sudo apt-get install publican
-
 		# Build the books
 		for BOOK in $UPDATED_DOCBOOKS
 		do

@@ -42,6 +42,11 @@ matrix:
 
   allow_failures:
 
+addons:
+  apt:
+    packages:
+      - publican
+
 # -----------------------------------------------------------------------------
 # Notifications
 #
