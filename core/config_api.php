@@ -677,71 +677,15 @@ function config_eval( $p_value, $p_global = false ) {
 }
 
 /**
- * list of configuration variable which may expose web server details and should not be exposed to users or web services
+ * Check if a configuration is private.
+ * Private options must not be exposed to users or web services.
  *
  * @param string $p_config_var Configuration option.
- * @return boolean
+ * @return boolean True if private
  */
 function config_is_private( $p_config_var ) {
-	switch( $p_config_var ) {
-		case 'hostname':
-		case 'db_username':
-		case 'db_password':
-		case 'database_name':
-		case 'db_schema':
-		case 'db_type':
-		case 'master_crypto_salt':
-		case 'smtp_host':
-		case 'smtp_username':
-		case 'smtp_password':
-		case 'smtp_connection_mode':
-		case 'smtp_port':
-		case 'email_send_using_cronjob':
-		case 'absolute_path':
-		case 'core_path':
-		case 'class_path':
-		case 'library_path':
-		case 'language_path':
-		case 'session_save_path':
-		case 'session_handler':
-		case 'session_validation':
-		case 'global_settings':
-		case 'system_font_folder':
-		case 'phpMailer_method':
-		case 'attachments_file_permissions':
-		case 'file_upload_method':
-		case 'absolute_path_default_upload_folder':
-		case 'ldap_server':
-		case 'plugin_path':
-		case 'ldap_root_dn':
-		case 'ldap_organization':
-		case 'ldap_uid_field':
-		case 'ldap_bind_dn':
-		case 'ldap_bind_passwd':
-		case 'use_ldap_email':
-		case 'ldap_protocol_version':
-		case 'login_method':
-		case 'cookie_path':
-		case 'cookie_domain':
-		case 'bottom_include_page':
-		case 'top_include_page':
-		case 'css_include_file':
-		case 'css_rtl_include_file':
-		case 'meta_include_file':
-		case 'log_level':
-		case 'log_destination':
-		case 'dot_tool':
-		case 'neato_tool':
-			return true;
+	global $g_public_config_names;
 
-		# Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
-		# These can be removed once complete removal from config and db is enforced by upgrade process.
-		case 'file_upload_ftp_server':
-		case 'file_upload_ftp_user':
-		case 'file_upload_ftp_pass':
-			return true;
-	}
-
-	return false;
+	return !in_array( $p_config_var, $g_public_config_names, true );
 }
 
