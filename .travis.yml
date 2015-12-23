@@ -38,7 +38,7 @@ matrix:
     # Note: we don't really care about the PHP version here, but we need
     # one version to trigger the build
     - env: DOCBOOK=1
-      php: "5.5"
+      php: 5.6
 
   allow_failures:
 
