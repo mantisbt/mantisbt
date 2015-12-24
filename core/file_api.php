@@ -178,7 +178,7 @@ function file_bug_attachment_count( $p_bug_id ) {
 
 	# First check if we have a cache miss, if so try to load
 	if( !isset( $g_cache_file_count[$p_bug_id] ) ) {
-		file_bug_attachment_count_cache( array( $p_bug_id ) );
+		file_bug_attachment_count_cache( array( (int)$p_bug_id ) );
 	}
 
 	# If bug is valid, it should be in cache now.

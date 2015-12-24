@@ -2119,7 +2119,7 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_rows = array();
 	$t_bug_ids = array();
 	foreach( $p_rows as $t_row ) {
-		$t_bug_ids[] = $t_row['id'];
+		$t_bug_ids[] = (int)$t_row['id'];
 		if( !isset( $t_stats[$t_row['id']] ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
 		} else {
