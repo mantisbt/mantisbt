@@ -2104,7 +2104,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
  * @return array
  */
 function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
-	$t_stats = bug_get_bugnote_stats_multi( $p_id_array_lastmod );
+	$t_stats = bug_get_bugnote_stats_array( $p_id_array_lastmod );
 	$t_rows = array();
 	foreach( $p_rows as $t_row ) {
 		if( !isset( $t_stats[$t_row['id']] ) ) {
