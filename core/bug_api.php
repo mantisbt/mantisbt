@@ -1484,12 +1484,22 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	$t_array_chunks = array_chunk( $t_unique_array, 1000 );
 
 	foreach( $t_array_chunks as $t_id_array ) {
-		$t_where_string = ' WHERE n.bug_id in (' . implode( ', ', $t_id_array ) . ')';
+		# Build sql IN list
+		$t_count = count( $t_id_array );
+		$t_query_items = '';
+		for( $ix = 0; $ix < $t_count; ++$ix ) {
+			if( $ix !== 0 ) {
+				$t_query_items .= ',';
+			}
+			$t_query_items .= db_param();
+		}
+		# Build main query
 		$t_query = 'SELECT n.id, n.bug_id, n.reporter_id, n.view_state, n.last_modified, n.date_submitted, b.project_id'
-			. ' FROM {bugnote} n JOIN {bug} b ON (n.bug_id = b.id) ' . $t_where_string
+			. ' FROM {bugnote} n JOIN {bug} b ON (n.bug_id = b.id) '
+			. ' WHERE n.bug_id in (' . $t_query_items . ')'
 			. ' ORDER BY b.project_id, n.bug_id, n.last_modified';
 		# perform query
-		$t_result = db_query( $t_query );
+		$t_result = db_query( $t_query, $t_id_array );
 		$t_query_row = db_fetch_array( $t_result );
 		$t_counter = 0;
 		#We need to check for each bugnote if it has permissions to view in respective project.
