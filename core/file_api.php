@@ -99,25 +99,72 @@ function file_get_display_name( $p_filename ) {
 
 /**
  * Fills the cache with the attachement count from a list of bugs
- * using one sql query
  * @param array $p_bug_ids Array of bug ids
+ *
+ * TODO cproensa
+ * As a provisional fix for potentially breaking db limits on query size,
+ * the query is partitioning the supplied list.
+ * The sitaution referenced here: #0020423. If any methodology is
+ * proposed, this function will have to be reviewed
  */
 function file_bug_attachment_count_cache( array $p_bug_ids ) {
 	global $g_cache_file_count;
+	define( 'SQL_IN_MAX_COUNT', 500 );
 
 	if( null === $p_bug_ids || !is_array( $p_bug_ids ) ) {
 		return;
 	}
 
-	$t_sql_list= '(' . implode( ', ', $p_bug_ids ) . ')';
-	$t_query = 'SELECT B.id AS bug_id, COUNT(F.bug_id) AS attachments'
-			. ' FROM {bug} B LEFT OUTER JOIN {bug_file} F'
-			. ' ON (B.id = F.bug_id)'
-			. ' WHERE B.id IN ' . $t_sql_list . ' GROUP BY B.id';
+	$t_query_select = 'SELECT B.id AS bug_id, COUNT(F.bug_id) AS attachments'
+			. ' FROM {bug} B LEFT OUTER JOIN {bug_file} F ON (B.id = F.bug_id)';
+	$t_query_group = ' GROUP BY B.id';
 
-	$t_result = db_query( $t_query );
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_file_count[$t_row['bug_id']] = $t_row['attachments'];
+	$t_needs_partitioning = ( count($p_bug_ids) > SQL_IN_MAX_COUNT );
+	# If the array is long enough, the query needs to be iterated in succesive calls with contolled size
+	if( $t_needs_partitioning ) {
+
+		# array_chunk's last element can be of variable size
+		# we differentiate that case, and treat separetely from the rest
+		# of elements wich have the same size, and allows for query reuse.
+		$t_array_chunks = array_chunk( $p_bug_ids, SQL_IN_MAX_COUNT );
+		$t_bug_single_array = array_pop( $t_array_chunks );
+
+		# Build query
+		$t_query_items = '';
+		for( $ix = 0; $ix < SQL_IN_MAX_COUNT; ++$ix ) {
+			if( $ix !== 0 ) {
+				$t_query_items .= ',';
+			}
+			$t_query_items .= db_param();
+		}
+		$t_query = $t_query_select . ' WHERE B.id IN (' . $t_query_items . ')' . $t_query_group;
+
+		foreach( $t_array_chunks as $t_ids ) {
+			$t_result = db_query( $t_query, $t_ids );
+			while( $t_row = db_fetch_array( $t_result ) ) {
+				$g_cache_file_count[$t_row['bug_id']] = $t_row['attachments'];
+			}
+		}
+	} else {
+		$t_bug_single_array = $p_bug_ids;
+	}
+
+	# perform query for a variable sized id list
+	$t_count = count( $t_bug_single_array );
+	if( $t_count > 0 ) {
+		# Build query
+		$t_query_items = '';
+		for( $ix = 0; $ix < $t_count; ++$ix ) {
+			if( $ix !== 0 ) {
+				$t_query_items .= ',';
+			}
+			$t_query_items .= db_param();
+		}
+		$t_query = $t_query_select . ' WHERE B.id IN (' . $t_query_items . ')' . $t_query_group;
+		$t_result = db_query( $t_query, $t_bug_single_array );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$g_cache_file_count[$t_row['bug_id']] = $t_row['attachments'];
+		}
 	}
 }
 
