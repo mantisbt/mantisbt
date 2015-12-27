@@ -382,7 +382,7 @@ if( db_is_mysql() ) {
 					'Text column <em>' . htmlentities( $t_row['field'] )
 					. '</em> of type <em>' . $t_row['type']
 					. '</em> on table <em>' . htmlentities( $t_table )
-					. '</em> is is using UTF-8 collation',
+					. '</em> is using UTF-8 collation',
 					check_is_collation_utf8( $t_row['collation'] ),
 					array( false => 'Text column ' . htmlentities( $t_row['field'] )
 						. ' of type ' . $t_row['type']
