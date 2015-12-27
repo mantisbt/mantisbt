@@ -354,6 +354,19 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
+	# Check DB's default collation
+	$t_query = 'SELECT default_collation_name
+		FROM information_schema.schemata
+		WHERE schema_name = ' . db_param();
+	$t_collation = db_result( db_query( $t_query, array( $g_database_name ) ) );
+	check_print_test_row(
+		'Database default collation is UTF-8',
+		check_is_collation_utf8( $t_collation ),
+		array( false => 'Database is using '
+			. htmlentities( $t_collation )
+			. ' collation where UTF-8 collation is required.' )
+	);
+
 	$t_table_prefix_regex_safe = preg_quote( $t_table_prefix, '/' );
 	$t_table_suffix_regex_safe = preg_quote( $t_table_suffix, '/' );
 
