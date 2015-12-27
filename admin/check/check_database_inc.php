@@ -211,7 +211,7 @@ if( db_is_mysql() ) {
 		'5.4' => array( 'Discontinued' ),
 		'5.5' => array( 'GA', '5.5.8', '2010-12-03' ),
 		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
-		'5.7' => array( 'Development' ),
+		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
 	);
 	$t_support_url = 'http://www.mysql.com/support/';
