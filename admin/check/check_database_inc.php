@@ -367,13 +367,14 @@ if( db_is_mysql() ) {
 			. ' collation where UTF-8 collation is required.' )
 	);
 
-	$t_table_prefix_regex_safe = preg_quote( $t_table_prefix, '/' );
-	$t_table_suffix_regex_safe = preg_quote( $t_table_suffix, '/' );
+	$t_table_regex = '/^'
+		. preg_quote( $t_table_prefix, '/' ) . '.+?'
+		. preg_quote( $t_table_suffix, '/' ) . '$/';
 
 	$t_result = db_query( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( $t_row['comment'] !== 'VIEW' &&
-		    preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_row['name'] )
+			preg_match( $t_table_regex, $t_row['name'] )
 		) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
@@ -385,7 +386,7 @@ if( db_is_mysql() ) {
 	}
 
 	foreach( db_get_table_list() as $t_table ) {
-		if( preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_table ) ) {
+		if( preg_match( $t_table_regex, $t_table ) ) {
 			$t_result = db_query( 'SHOW FULL FIELDS FROM ' . $t_table );
 			while( $t_row = db_fetch_array( $t_result ) ) {
 				if( $t_row['collation'] === null ) {
