@@ -364,7 +364,7 @@ if( db_is_mysql() ) {
 		) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
-				substr( $t_row['collation'], 0, 5 ) === 'utf8_',
+				check_is_collation_utf8( $t_row['collation'] ),
 				array( false => 'Table ' . htmlentities( $t_row['name'] )
 					. ' is using ' . htmlentities( $t_row['collation'] )
 					. ' collation where UTF-8 collation is required.' ) );
@@ -383,7 +383,7 @@ if( db_is_mysql() ) {
 					. '</em> of type <em>' . $t_row['type']
 					. '</em> on table <em>' . htmlentities( $t_table )
 					. '</em> is is using UTF-8 collation',
-					substr( $t_row['collation'], 0, 5 ) === 'utf8_',
+					check_is_collation_utf8( $t_row['collation'] ),
 					array( false => 'Text column ' . htmlentities( $t_row['field'] )
 						. ' of type ' . $t_row['type']
 						. ' on table ' . htmlentities( $t_table )
