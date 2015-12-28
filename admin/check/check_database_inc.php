@@ -371,18 +371,30 @@ if( db_is_mysql() ) {
 		. preg_quote( $t_table_prefix, '/' ) . '.+?'
 		. preg_quote( $t_table_suffix, '/' ) . '$/';
 
+	# MySQL 5.5.3 for availability of utf8mb4 character set
+	$t_mysql_553 = version_compare( $t_db_version, '5.5.3', '>=' );
+
 	$t_result = db_query( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( $t_row['comment'] !== 'VIEW' &&
 			preg_match( $t_table_regex, $t_row['name'] )
 		) {
-			check_print_test_row(
+			$t_is_utf8 = check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
 				check_is_collation_utf8( $t_row['collation'] ),
 				array( false => 'Table ' . htmlentities( $t_row['name'] )
 					. ' is using ' . htmlentities( $t_row['collation'] )
 					. ' collation where UTF-8 collation is required.' )
 			);
+
+			if( $t_is_utf8 && $t_mysql_553 ) {
+				check_print_test_warn_row(
+					'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using utf8mb4 character set',
+					check_is_collation_utf8( $t_row['collation'], true ),
+					array( false => 'Table collation is ' . htmlentities( $t_row['collation'] )
+						. '. Use of utf8mb4 character set is recommended with MySQL 5.5.3 and above.' )
+				);
+			}
 		}
 	}
 
@@ -393,7 +405,7 @@ if( db_is_mysql() ) {
 				if( $t_row['collation'] === null ) {
 					continue;
 				}
-				check_print_test_row(
+				$t_is_utf8 = check_print_test_row(
 					'Text column <em>' . htmlentities( $t_row['field'] )
 					. '</em> of type <em>' . $t_row['type']
 					. '</em> on table <em>' . htmlentities( $t_table )
@@ -405,6 +417,16 @@ if( db_is_mysql() ) {
 						. ' is using ' . htmlentities( $t_row['collation'] )
 						. ' collation where UTF-8 collation is required.' )
 				);
+				if( $t_is_utf8 && $t_mysql_553 ) {
+					check_print_test_warn_row(
+						'Text column <em>' . htmlentities( $t_row['field'] )
+						. '</em> is using utf8mb4 character set',
+						check_is_collation_utf8( $t_row['collation'], true ),
+						array( false => 'Text column ' . htmlentities( $t_row['field'] )
+							. ' is using ' . htmlentities( $t_row['collation'] )
+							. ' collation. Use of utf8mb4 character set is recommended.' )
+					);
+				}
 			}
 		}
 	}
