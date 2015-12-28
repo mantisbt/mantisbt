@@ -783,8 +783,16 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				}
 			} else {
+				# Set character set to utf8mb4 for mysql 5.5.3 and above, utf8 otherwise
+				$t_charset = 'utf8';
+				if( db_is_mysql() ) {
+					$t_db_info = $g_db->ServerInfo();
+					if( version_compare( $t_db_info['version'], '5.5.3', '>=' ) ) {
+						$t_charset = 'utf8mb4';
+					}
+				}
 				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
-					'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
+					'mysql' => "DEFAULT CHARACTER SET $t_charset DEFAULT COLLATE {$t_charset}_unicode_ci",
 				) );
 				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 				if( $t_ret == 2 ) {
