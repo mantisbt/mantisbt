@@ -828,3 +828,14 @@ $g_upgrade[201] = array( 'CreateIndexSQL', array( 'idx_user_id_name', db_get_tab
 # Release marker: 1.3.0-rc.1
 
 # Release marker: 1.3.0
+
+
+# ----------------------------------------------------------------------------
+# End of schema definition, clear local variables
+#
+unset(
+	$t_table_options,
+	$t_notnull,
+	$t_timestamp,
+	$t_blob_default
+);
