@@ -47,7 +47,7 @@
  * Array key is the ADOdb datadict driver's name
  */
 $t_table_options = array(
-	'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
+	'mysql' => 'DEFAULT CHARSET=utf8',
 	'pgsql' => 'WITHOUT OIDS',
 );
 
