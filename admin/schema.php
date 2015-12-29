@@ -33,6 +33,15 @@
  * - NEVER SKIP AN INDEX IN THE SEQUENCE!!!
  */
 
+/**
+ * Standard table creation options
+ * Array key is the ADOdb datadict driver's name
+ */
+$t_table_options = array(
+	'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
+	'pgsql' => 'WITHOUT OIDS',
+);
+
 if( !function_exists( 'db_null_date' ) ) {
 	/**
 	 * Legacy null date function for installer backwards compatibility
@@ -79,9 +88,7 @@ $g_upgrade[0] = array( 'CreateTableSQL', array( db_get_table( 'config' ), "
 	access_reqd				I		DEFAULT '0',
 	type					I		DEFAULT '90',
 	value					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[1] = array( 'CreateIndexSQL', array( 'idx_config', db_get_table( 'config' ), 'config_id' ) );
 $g_upgrade[2] = array( 'CreateTableSQL', array( db_get_table( 'bug_file' ), "
@@ -96,9 +103,7 @@ $g_upgrade[2] = array( 'CreateTableSQL', array( db_get_table( 'bug_file' ), "
 	file_type				C(250)	NOTNULL DEFAULT \" '' \",
 	date_added				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	content					B		NOTNULL " . $t_blob_default,
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[3] = array( 'CreateIndexSQL', array( 'idx_bug_file_bug_id', db_get_table( 'bug_file' ), 'bug_id' ) );
 $g_upgrade[4] = array( 'CreateTableSQL', array( db_get_table( 'bug_history' ), "
@@ -110,9 +115,7 @@ $g_upgrade[4] = array( 'CreateTableSQL', array( db_get_table( 'bug_history' ), "
 	old_value				C(128)	$t_notnull DEFAULT \" '' \",
 	new_value				C(128)	$t_notnull DEFAULT \" '' \",
 	type					I2		NOTNULL DEFAULT '0'",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[5] = array( 'CreateIndexSQL', array( 'idx_bug_history_bug_id', db_get_table( 'bug_history' ), 'bug_id' ) );
 $g_upgrade[6] = array( 'CreateIndexSQL', array( 'idx_history_user_id', db_get_table( 'bug_history' ), 'user_id' ) );
@@ -120,18 +123,14 @@ $g_upgrade[7] = array( 'CreateTableSQL', array( db_get_table( 'bug_monitor' ), "
 	user_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	bug_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0'
 	",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[8] = array( 'CreateTableSQL', array( db_get_table( 'bug_relationship' ), "
 	id						I		UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
 	source_bug_id			I		UNSIGNED NOTNULL DEFAULT '0',
 	destination_bug_id		I		UNSIGNED NOTNULL DEFAULT '0',
 	relationship_type		I2		NOTNULL DEFAULT '0' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[9] = array( 'CreateIndexSQL', array( 'idx_relationship_source', db_get_table( 'bug_relationship' ), 'source_bug_id' ) );
 
@@ -167,9 +166,7 @@ $g_upgrade[11] = array( 'CreateTableSQL', array( db_get_table( 'bug' ), "
 	summary					C(128)	NOTNULL DEFAULT \" '' \",
 	sponsorship_total		I		NOTNULL DEFAULT '0',
 	sticky					L		$t_notnull DEFAULT  \"'0'\" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[12] = array( 'CreateIndexSQL', array( 'idx_bug_sponsorship_total', db_get_table( 'bug' ), 'sponsorship_total' ) );
 $g_upgrade[13] = array( 'CreateIndexSQL', array( 'idx_bug_fixed_in_version', db_get_table( 'bug' ), 'fixed_in_version' ) );
@@ -180,9 +177,7 @@ $g_upgrade[16] = array( 'CreateTableSQL', array( db_get_table( 'bug_text' ), "
 	description				XL		NOTNULL,
 	steps_to_reproduce		XL		$t_notnull,
 	additional_information	XL		$t_notnull",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[17] = array( 'CreateTableSQL', array( db_get_table( 'bugnote' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -194,9 +189,7 @@ $g_upgrade[17] = array( 'CreateTableSQL', array( db_get_table( 'bugnote' ), "
 	last_modified			T		NOTNULL DEFAULT '" . db_null_date() . "',
 	note_type				I		DEFAULT '0',
 	note_attr				C(250)	DEFAULT \" '' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[18] = array( 'CreateIndexSQL', array( 'idx_bug', db_get_table( 'bugnote' ), 'bug_id' ) );
 $g_upgrade[19] = array( 'CreateIndexSQL', array( 'idx_last_mod', db_get_table( 'bugnote' ), 'last_modified' ) );
@@ -207,25 +200,19 @@ $g_upgrade[19] = array( 'CreateIndexSQL', array( 'idx_last_mod', db_get_table( '
 $g_upgrade[20] = array( 'CreateTableSQL', array( db_get_table( 'bugnote_text' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	note					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[21] = array( 'CreateTableSQL', array( db_get_table( 'custom_field_project' ), "
 	field_id				I		NOTNULL PRIMARY DEFAULT '0',
 	project_id				I		UNSIGNED PRIMARY NOTNULL DEFAULT '0',
 	sequence				I2		NOTNULL DEFAULT '0' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[22] = array( 'CreateTableSQL', array( db_get_table( 'custom_field_string' ), "
 	field_id				I		NOTNULL PRIMARY DEFAULT '0',
 	bug_id					I		NOTNULL PRIMARY DEFAULT '0',
 	value					C(255)	NOTNULL DEFAULT \" '' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[23] = array( 'CreateIndexSQL', array( 'idx_custom_field_bug', db_get_table( 'custom_field_string' ), 'bug_id' ) );
 $g_upgrade[24] = array( 'CreateTableSQL', array( db_get_table( 'custom_field' ), "
@@ -248,9 +235,7 @@ $g_upgrade[24] = array( 'CreateTableSQL', array( db_get_table( 'custom_field' ),
 	display_resolved		L		NOTNULL DEFAULT \" '0' \",
 	display_closed			L		NOTNULL DEFAULT \" '0' \",
 	require_closed			L		NOTNULL DEFAULT \" '0' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[25] = array( 'CreateIndexSQL', array( 'idx_custom_field_name', db_get_table( 'custom_field' ), 'name' ) );
 $g_upgrade[26] = array( 'CreateTableSQL', array( db_get_table( 'filters' ), "
@@ -260,9 +245,7 @@ $g_upgrade[26] = array( 'CreateTableSQL', array( db_get_table( 'filters' ), "
 	is_public				L		DEFAULT NULL,
 	name					C(64)	NOTNULL DEFAULT \" '' \",
 	filter_string			XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[27] = array( 'CreateTableSQL', array( db_get_table( 'news' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -274,17 +257,13 @@ $g_upgrade[27] = array( 'CreateTableSQL', array( db_get_table( 'news' ), "
 	announcement			L		NOTNULL DEFAULT \" '0' \",
 	headline				C(64)	NOTNULL DEFAULT \" '' \",
 	body					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[28] = array( 'CreateTableSQL', array( db_get_table( 'project_category' ), "
 	project_id				I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	category				C(64)	NOTNULL PRIMARY DEFAULT \" '' \",
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[29] = array( 'CreateTableSQL', array( db_get_table( 'project_file' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -298,9 +277,7 @@ $g_upgrade[29] = array( 'CreateTableSQL', array( db_get_table( 'project_file' ),
 	file_type				C(250)	NOTNULL DEFAULT \" '' \",
 	date_added				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	content					B		NOTNULL " . $t_blob_default,
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 
 # ----------------------------------------------------------------------------
@@ -309,9 +286,7 @@ $g_upgrade[29] = array( 'CreateTableSQL', array( db_get_table( 'project_file' ),
 $g_upgrade[30] = array( 'CreateTableSQL', array( db_get_table( 'project_hierarchy' ), "
 	child_id				I		UNSIGNED NOTNULL,
 	parent_id				I		UNSIGNED NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[31] = array( 'CreateTableSQL', array( db_get_table( 'project' ), "
 	id						I		UNSIGNED PRIMARY NOTNULL AUTOINCREMENT,
@@ -322,9 +297,7 @@ $g_upgrade[31] = array( 'CreateTableSQL', array( db_get_table( 'project' ), "
 	access_min				I2		NOTNULL DEFAULT '10',
 	file_path				C(250)	NOTNULL DEFAULT \" '' \",
 	description				XL		$t_notnull",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 
 # Index autocreated when oci used
@@ -338,9 +311,7 @@ $g_upgrade[35] = array( 'CreateTableSQL', array( db_get_table( 'project_user_lis
 	project_id				I		UNSIGNED PRIMARY NOTNULL DEFAULT '0',
 	user_id					I		UNSIGNED PRIMARY NOTNULL DEFAULT '0',
 	access_level			I2		NOTNULL DEFAULT '10' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[36] = array( 'CreateIndexSQL', array( 'idx_project_user', db_get_table( 'project_user_list' ), 'user_id' ) );
 $g_upgrade[37] = array( 'CreateTableSQL', array( db_get_table( 'project_version' ), "
@@ -350,9 +321,7 @@ $g_upgrade[37] = array( 'CreateTableSQL', array( db_get_table( 'project_version'
 	date_order				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	description				XL		$t_notnull,
 	released				L		NOTNULL DEFAULT \" '1' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[38] = array( 'CreateIndexSQL', array( 'idx_project_version', db_get_table( 'project_version' ), 'project_id,version', array( 'UNIQUE' ) ) );
 $g_upgrade[39] = array( 'CreateTableSQL', array( db_get_table( 'sponsorship' ), "
@@ -364,11 +333,8 @@ $g_upgrade[39] = array( 'CreateTableSQL', array( db_get_table( 'sponsorship' ), 
 	url						C(128)	NOTNULL DEFAULT \" '' \",
 	paid					L		NOTNULL DEFAULT \" '0' \",
 	date_submitted			T		NOTNULL DEFAULT '" . db_null_date() . "',
-	last_updated			T		NOTNULL DEFAULT '" . db_null_date() . "'
-",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	last_updated			T		NOTNULL DEFAULT '" . db_null_date() . "'",
+	$t_table_options
 	) );
 
 # ----------------------------------------------------------------------------
@@ -383,9 +349,7 @@ $g_upgrade[42] = array( 'CreateTableSQL', array( db_get_table( 'tokens' ), "
 	timestamp				T		NOTNULL,
 	expiry					T,
 	value					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[43] = array( 'CreateTableSQL', array( db_get_table( 'user_pref' ), "
 	id								I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -419,16 +383,12 @@ $g_upgrade[43] = array( 'CreateTableSQL', array( db_get_table( 'user_pref' ), "
 	email_on_new_min_severity		I2		NOTNULL DEFAULT '10',
 	email_bugnote_limit				I2		NOTNULL DEFAULT '0',
 	language						C(32)	NOTNULL DEFAULT 'english' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[44] = array( 'CreateTableSQL', array( db_get_table( 'user_print_pref' ), "
 	user_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	print_pref				C(27)	NOTNULL DEFAULT \" '' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[45] = array( 'CreateTableSQL', array( db_get_table( 'user_profile' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -437,9 +397,7 @@ $g_upgrade[45] = array( 'CreateTableSQL', array( db_get_table( 'user_profile' ),
 	os						C(32)	NOTNULL DEFAULT \" '' \",
 	os_build				C(32)	NOTNULL DEFAULT \" '' \",
 	description				XL		$t_notnull",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[46] = array( 'CreateTableSQL', array( db_get_table( 'user' ), "
 	id								I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
@@ -456,9 +414,7 @@ $g_upgrade[46] = array( 'CreateTableSQL', array( db_get_table( 'user' ), "
 	lost_password_request_count		I2		NOTNULL DEFAULT '0',
 	failed_login_count				I2		NOTNULL DEFAULT '0',
 	cookie_string					C(64)	NOTNULL DEFAULT \" '' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[47] = array( 'CreateIndexSQL', array( 'idx_user_cookie_string', db_get_table( 'user' ), 'cookie_string', array( 'UNIQUE' ) ) );
 $g_upgrade[48] = array( 'CreateIndexSQL', array( 'idx_user_username', db_get_table( 'user' ), 'username', array( 'UNIQUE' ) ) );
@@ -487,9 +443,7 @@ $g_upgrade[54] = array( 'CreateTableSQL', array( db_get_table( 'email' ), "
 	submitted				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	metadata				XL		NOTNULL,
 	body					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 
 # Index autocreated when oci used
@@ -520,19 +474,14 @@ $g_upgrade[61] = array( 'CreateTableSQL', array( db_get_table( 'tag' ), "
 	description				XL		$t_notnull,
 	date_created			T		NOTNULL DEFAULT '" . db_null_date() . "',
 	date_updated			T		NOTNULL DEFAULT '" . db_null_date() . "' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[62] = array( 'CreateTableSQL', array( db_get_table( 'bug_tag' ), "
 	bug_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	tag_id					I		UNSIGNED NOTNULL PRIMARY DEFAULT '0',
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
-	date_attached			T		NOTNULL DEFAULT '" . db_null_date() . "'
-	",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	date_attached			T		NOTNULL DEFAULT '" . db_null_date() . "'",
+	$t_table_options
 	) );
 
 $g_upgrade[63] = array( 'CreateIndexSQL', array( 'idx_typeowner', db_get_table( 'tokens' ), 'type, owner' ) );
@@ -543,9 +492,7 @@ $g_upgrade[63] = array( 'CreateIndexSQL', array( 'idx_typeowner', db_get_table( 
 $g_upgrade[64] = array( 'CreateTableSQL', array( db_get_table( 'plugin' ), "
 	basename				C(40)	NOTNULL PRIMARY,
 	enabled					L		NOTNULL DEFAULT \" '0' \" ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 
 $g_upgrade[65] = array( 'AlterColumnSQL', array( db_get_table( 'user_pref' ), "
@@ -566,9 +513,7 @@ $g_upgrade[67] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
 	name					C(128)	NOTNULL DEFAULT \" '' \",
 	status					I		UNSIGNED NOTNULL DEFAULT '0' ",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[68] = array( 'CreateIndexSQL', array( 'idx_category_project_name', db_get_table( 'category' ), 'project_id, name', array( 'UNIQUE' ) ) );
 $g_upgrade[69] = array( 'InsertData', array( db_get_table( 'category' ), '
@@ -626,9 +571,7 @@ $g_upgrade[84] = array( 'CreateTableSQL', array( db_get_table( 'bug_revision' ),
 	timestamp				T		NOTNULL DEFAULT '" . db_null_date() . "',
 	type					I		UNSIGNED NOTNULL,
 	value					XL		NOTNULL",
-	array(
-		'mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8',
-		'pgsql' => 'WITHOUT OIDS' )
+	$t_table_options
 	) );
 $g_upgrade[85] = array( 'CreateIndexSQL', array( 'idx_bug_rev_id_time', db_get_table( 'bug_revision' ), 'bug_id, timestamp' ) );
 $g_upgrade[86] = array( 'CreateIndexSQL', array( 'idx_bug_rev_type', db_get_table( 'bug_revision' ), 'type' ) );
