@@ -411,10 +411,19 @@ $g_upgrade[49] = array( 'CreateIndexSQL', array( 'idx_enable', db_get_table( 'us
 # Schema version: 50
 #
 $g_upgrade[50] = array( 'CreateIndexSQL', array( 'idx_access', db_get_table( 'user' ), 'access_level' ) );
-$g_upgrade[51] = array( 'InsertData', array( db_get_table( 'user' ),
-	"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string ) VALUES
-		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . $t_timestamp . ', ' . $t_timestamp . ', \'1\', \'0\', 90, 3, 0, 0, \'' .
-			md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . '\' )' ) );
+$g_upgrade[51] = array( 'InsertData', array( db_get_table( 'user' ), "(
+		username, realname, email, password,
+		date_created, last_visit, enabled, protected, access_level,
+		login_count, lost_password_request_count, failed_login_count,
+		cookie_string
+	)
+	VALUES (
+		'administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845',
+		$t_timestamp, $t_timestamp, '1', '0', 90,
+		3, 0, 0, '"
+		. md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() )
+		. "'
+	)" ) );
 
 # Release marker: 1.0.0 - 1.0.7
 
@@ -503,9 +512,10 @@ $g_upgrade[67] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
 	$t_table_options
 	) );
 $g_upgrade[68] = array( 'CreateIndexSQL', array( 'idx_category_project_name', db_get_table( 'category' ), 'project_id, name', array( 'UNIQUE' ) ) );
-$g_upgrade[69] = array( 'InsertData', array( db_get_table( 'category' ), '
-	( project_id, user_id, name, status ) VALUES
-	( \'0\', \'0\', \'General\', \'0\' ) ' ) );
+$g_upgrade[69] = array( 'InsertData', array( db_get_table( 'category' ), "
+	( project_id, user_id, name, status )
+	VALUES
+	( '0', '0', 'General', '0' )" ) );
 
 # ----------------------------------------------------------------------------
 # Schema version: 70
@@ -522,9 +532,10 @@ $g_upgrade[74] = array( 'AddColumnSQL', array( db_get_table( 'project' ), "
 $g_upgrade[75] = array( 'CreateIndexSQL', array( 'idx_project_id', db_get_table( 'project' ), 'id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'project' ), 'idx_project_id' ) ) );
 $g_upgrade[76] = array( 'CreateIndexSQL', array( 'idx_config', db_get_table( 'config' ), 'config_id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'config' ), 'idx_config' ) ) );
 
-$g_upgrade[77] = array( 'InsertData', array( db_get_table( 'plugin' ), '
-	( basename, enabled ) VALUES
-	( \'MantisCoreFormatting\', \'1\' )' ) );
+$g_upgrade[77] = array( 'InsertData', array( db_get_table( 'plugin' ), "
+	( basename, enabled )
+	VALUES
+	( 'MantisCoreFormatting', '1' )" ) );
 
 $g_upgrade[78] = array( 'AddColumnSQL', array( db_get_table( 'project' ), "
 	inherit_global			I		UNSIGNED NOTNULL DEFAULT '0'" ) );
