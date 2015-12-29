@@ -16,21 +16,30 @@
 
 /**
  * MantisBT schema definition
- * The schema is defined a list of schema updates, stored as an array.
+ * The schema is defined as a numbered list of updates, stored as an array.
  *
  * Each upgrade step consists of two elements:
- * 1. The function to generate SQL statements. Available functions (from ADOdb
- *    library) are:
- *      CreateTableSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
- *      RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
- *      RenameColumnSQL, AlterColumnSQL, DropColumnSQL
- *    A local function "InsertData" has been provided to add data to the db
+ *
+ * 1. The function to generate SQL statements. Available functions are
+ *    - Data dictionary operations from ADOdb library; one of:
+ *      CreateTableSQL, ChangeTableSQL, RenameTableSQL, DropTableSQL,
+ *      AddColumnSQL, AlterColumnSQL, RenameColumnSQL, DropColumnSQL,
+ *      CreateIndexSQL, DropIndexSQL
+ *    - InsertData: local function to add data to the db
+ *    - UpdateFunction: local function to perform arbitrary changes;
+ *      the function must be defined in install_helper_functions_api.php
+ *      with 'install_' prefix
+ *    - null: no-op upgrade step
  *
  * 2. An array of the parameters to be passed to the function.
  *
  * The integrity of the schema relies on strict ordering of this array.
  * - ONLY ADD NEW CHANGES TO THE END OF THE TABLE!!!
+ *   Always specify the schema step (array key), for documentation purposes
  * - NEVER SKIP AN INDEX IN THE SEQUENCE!!!
+ *
+ * 'Release markers' are placed right AFTER the last schema step that is
+ * included in the corresponding release
  */
 
 /**
@@ -56,9 +65,9 @@ if( db_is_oracle() ) {
 	$t_blob_default = '';
 }
 
-# Begin schema definition
-# 'Release markers' are placed right AFTER the last schema step that is
-# included in the corresponding release
+/**
+ * Begin schema definition
+ */
 $g_upgrade[0] = array( 'CreateTableSQL', array( db_get_table( 'config' ), "
 	config_id				C(64)	NOTNULL PRIMARY,
 	project_id				I		DEFAULT '0' PRIMARY,
@@ -759,14 +768,14 @@ $g_upgrade[176] = array( 'DropColumnSQL', array( db_get_table( 'user_pref' ), 'a
 $g_upgrade[177] = array( 'DropColumnSQL', array( db_get_table( 'user_pref' ), 'advanced_update' ) );
 $g_upgrade[178] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
 
+# Release marker: 1.2.0rc2
+
 # Decrease index name length for oci8 (30 chars max )
 if( db_is_oracle() ) {
 	$t_index_name = 'idx_prj_hier_parent_id';
 } else {
 	$t_index_name = 'idx_project_hierarchy_parent_id';
 }
-
-# Release marker: 1.2.0rc2
 
 $g_upgrade[179] = array( 'CreateIndexSQL', array( $t_index_name, db_get_table( 'project_hierarchy' ), 'parent_id' ) );
 
@@ -781,7 +790,7 @@ $g_upgrade[182] = array( 'CreateIndexSQL', array( 'idx_email_id', db_get_table( 
 
 $g_upgrade[183] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
 
-# Release marker: 1.2.1 - 1.2.15
+# Release marker: 1.2.1 - 1.2.x
 
 $g_upgrade[184] = null;
 $g_upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), "
