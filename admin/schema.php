@@ -42,16 +42,6 @@ $t_table_options = array(
 	'pgsql' => 'WITHOUT OIDS',
 );
 
-if( !function_exists( 'db_null_date' ) ) {
-	/**
-	 * Legacy null date function for installer backwards compatibility
-	 * @return integer
-	 */
-	function db_null_date() {
-		return 0;
-	}
-}
-
 /**
  * Legacy date function for installer backwards compatibility
  * @return string
