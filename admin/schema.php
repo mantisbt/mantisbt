@@ -42,18 +42,6 @@ $t_table_options = array(
 	'pgsql' => 'WITHOUT OIDS',
 );
 
-/**
- * Legacy date function for installer backwards compatibility
- * @return string
- */
-function installer_db_now() {
-	global $g_db;
-
-	# Timezone must not be set to UTC prior to calling BindTimestamp(), as
-	# ADOdb assumes a local timestamp and does the UTC conversion itself.
-	return $g_db->BindTimeStamp( time() );
-}
-
 # Special handling for Oracle (oci8):
 # - Field cannot be null with oci because empty string equals NULL
 # - Oci uses a different date literal syntax
