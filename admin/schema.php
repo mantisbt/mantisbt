@@ -52,7 +52,7 @@ require_api( 'install_helper_functions_api.php' );
  * Array key is the ADOdb datadict driver's name
  */
 $t_table_options = array(
-	'mysql' => 'DEFAULT CHARSET=utf8',
+	'mysql' => '',
 	'pgsql' => 'WITHOUT OIDS',
 );
 
