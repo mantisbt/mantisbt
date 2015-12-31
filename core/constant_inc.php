@@ -583,7 +583,9 @@ define( 'EMAIL_SHUTDOWN_GENERATED', 1 );
 define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
-define( 'DB_FIELD_SIZE_USERNAME', 255 );
+# Note: 191 comes from a MySQL/InnoDB limitation on Index key size (767 bytes)
+# divided by 4 (bytes per unicode char), see #20431:52209 for details.
+define( 'DB_FIELD_SIZE_USERNAME', 191 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );

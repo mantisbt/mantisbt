@@ -827,8 +827,12 @@ $g_upgrade[192] = array( 'CreateIndexSQL', array( 'idx_bug_history_date_modified
 $g_upgrade[193] = array( 'UpdateFunction', 'check_config_serialization', array() );
 $g_upgrade[194] = array( 'UpdateFunction', 'check_token_serialization', array() );
 $g_upgrade[195] = array( 'UpdateFunction', 'stored_filter_migrate', array() );
-$g_upgrade[196] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
-	username				C(255)	$t_notnull DEFAULT \" '' \"" ) );
+
+# Step 196 used to increase length of user.username column to 255 chars.
+# This was causing issues with utf8mb4 charset on MySQL / InnoDB engine;
+# the column will be reduced to 191 chars (see upgrade step 206 below).
+$g_upgrade[196] = null;
+
 $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 	realname				C(255)	$t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
@@ -864,6 +868,9 @@ $g_upgrade[204] = array( 'AlterColumnSQL', array( db_get_table( 'project_file' )
 
 # Enable gravatar plugin if avatars are enabled
 $g_upgrade[205] = array( 'UpdateFunction', 'gravatar_plugin', array() );
+
+$g_upgrade[206] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
+	username				C(191)	$t_notnull DEFAULT \" '' \"" ) );
 
 # Release marker: 1.3.0
 
