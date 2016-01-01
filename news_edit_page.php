@@ -93,7 +93,7 @@ html_page_top( lang_get( 'edit_news_title' ) );
 
 <div id="news-update-div" class="form-container">
 	<form id="news-update-form" method="post" action="news_update.php">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'headline' ) ?></span></legend>
 			<div class="section-link"><?php print_bracket_link( 'news_menu_page.php', lang_get( 'go_back' ) ) ?></div>
 			<?php echo form_security_field( 'news_update' ); ?>

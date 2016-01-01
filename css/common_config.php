@@ -56,7 +56,7 @@ $g_display_errors = null;
  * should only be known internally to the server.
  */
 ?>
-div.form-container fieldset.has-required:after {
+div.form-container fieldset.required:after {
 	position: absolute;
 	margin: -1.75em 0em 0em .5em;
 	font-size: 8pt;

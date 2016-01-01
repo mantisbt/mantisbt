@@ -86,7 +86,7 @@ if( $g_global_profiles ) {
 ?>
 <div id="account-profile-div" class="form-container">
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'add_profile_title' ) ?></span></legend>
 			<?php  echo form_security_field( 'profile_update' )?>
 			<input type="hidden" name="action" value="add" />

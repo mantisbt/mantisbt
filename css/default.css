@@ -30,7 +30,7 @@ select				{}
 
 span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
-span.required 		{ font-size: 8pt; color: #bb0000; }
+span.required 		{ font-size: 8pt; color: red; }
 span.small 			{ font-size: 8pt; font-weight: normal; }
 span.bracket-link	{ white-space: nowrap; }
 
@@ -531,7 +531,9 @@ div.form-container fieldset legend {
 	border: none;
 	font-weight: bold;
 }
-div.form-container fieldset label.required:before {
+div.form-container fieldset label.required:before,
+th label.required:before,
+td label.required:before {
 	font-size: 8pt;
 	content: '* ';
 	color: red;

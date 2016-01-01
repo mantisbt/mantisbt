@@ -69,7 +69,7 @@ if( project_table_empty() ) {
 
 <div id="manage-project-create-div" class="form-container">
 	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
-		<fieldset class="has-required"><?php
+		<fieldset class="required"><?php
 			echo form_security_field( 'manage_proj_create' );
 			if( null !== $f_parent_id ) {
 				$f_parent_id = (int)$f_parent_id; ?>

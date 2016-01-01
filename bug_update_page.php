@@ -687,16 +687,19 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 	if( ( $t_def['display_update'] || $t_def['require_update'] ) && custom_field_has_write_access( $t_id, $t_bug_id ) ) {
 		$t_custom_fields_found = true;
 
+		$t_required_class = $t_def['require_update'] ? ' class="required" ' : '';
+
+		if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
+			$t_label_for = ' for="custom_field_' . string_attribute( $t_def['id'] ) . '" ';
+		} else {
+			$t_label_for = '';
+		}
+
 		echo '<tr>';
 		echo '<td class="category">';
-		if( $t_def['require_update'] ) {
-			echo '<span class="required">*</span>';
-		}
-		if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
-			echo '<label for="custom_field_' . string_attribute( $t_def['id'] ) . '">' . string_display( lang_get_defaulted( $t_def['name'] ) ) . '</label>';
-		} else {
-			echo string_display( lang_get_defaulted( $t_def['name'] ) );
-		}
+		echo '<label', $t_required_class, $t_label_for, '>';
+		echo '<span>', string_display( lang_get_defaulted( $t_def['name'] ) ), '</span>';
+		echo '</label>';
 		echo '</td><td colspan="5">';
 		print_custom_field_input( $t_def, $t_bug_id );
 		echo '</td></tr>';

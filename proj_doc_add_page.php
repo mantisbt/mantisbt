@@ -70,7 +70,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<th class="category" width="25%">
-		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
+		<label class="required"><span><?php echo lang_get( 'title' ) ?></span></label>
 	</th>
 	<td width="75%">
 		<input type="text" name="title" size="70" maxlength="250" />
@@ -86,7 +86,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'select_file' ); ?>
+		<label class="required"><span><?php echo lang_get( 'select_file' ) ?></span></label>
 		<br />
 		<?php print_max_filesize( $t_max_file_size ); ?>
 	</td>
