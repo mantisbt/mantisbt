@@ -1939,6 +1939,13 @@ $g_ldap_uid_field = 'uid';
 $g_ldap_realname_field = 'cn';
 
 /**
+ * Keep a local copy of the LDAP password (ON) so we can
+ * authenticate even when LDAP is unavailable.
+ * @global integer $g_ldap_cache_passwords
+ */
+$g_ldap_cache_passwords = ON;
+
+/**
  * Use the realname specified in LDAP (ON) rather than the one stored in the
  * database (OFF).
  * @global integer $g_use_ldap_realname
@@ -4262,7 +4269,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled'
+	'cdn_enabled', 'ldap_cache_passwords'
 );
 
 # Temporary variables should not remain defined in global scope

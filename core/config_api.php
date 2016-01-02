@@ -719,6 +719,7 @@ function config_is_private( $p_config_var ) {
 		case 'ldap_bind_dn':
 		case 'ldap_bind_passwd':
 		case 'use_ldap_email':
+		case 'ldap_cache_passwords':
 		case 'ldap_protocol_version':
 		case 'login_method':
 		case 'cookie_path':
