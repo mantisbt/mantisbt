@@ -3053,7 +3053,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			$t_colspan_attr = ( $t_colspan > 1 ? 'colspan="' . $t_colspan . '" ' : '' );
 			$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption"> <a href="' . $t_filters_url . string_attribute( $t_field_name ) .
-				'" id="' . string_attribute( $t_field_name ) . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
+				'" id="' . string_attribute( $t_field_name ) . '_filter"' . $t_dynamic_filter_expander_class . '>' . string_display_line( $t_filter_object->title ) . '</a> </td>';
 			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" id="' . string_attribute( $t_field_name ) . '_filter_target"> ';
 
 			if( !isset( $t_filter[$t_field_name] ) ) {
