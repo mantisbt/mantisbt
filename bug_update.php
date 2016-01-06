@@ -127,14 +127,17 @@ $t_resolve_issue = false;
 $t_close_issue = false;
 $t_reopen_issue = false;
 if( $t_existing_bug->status < $t_resolved_status &&
-	 $t_updated_bug->status >= $t_resolved_status &&
-	 $t_updated_bug->status < $t_closed_status ) {
+	$t_updated_bug->status >= $t_resolved_status &&
+	$t_updated_bug->status < $t_closed_status
+) {
 	$t_resolve_issue = true;
 } else if( $t_existing_bug->status < $t_closed_status &&
-			$t_updated_bug->status >= $t_closed_status ) {
+		   $t_updated_bug->status >= $t_closed_status
+) {
 	$t_close_issue = true;
 } else if( $t_existing_bug->status >= $t_resolved_status &&
-			$t_updated_bug->status <= config_get( 'bug_reopen_status' ) ) {
+		   $t_updated_bug->status <= config_get( 'bug_reopen_status' )
+) {
 	$t_reopen_issue = true;
 }
 
@@ -164,7 +167,8 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 
 # If resolving or closing, ensure that all dependant issues have been resolved.
 if( ( $t_resolve_issue || $t_close_issue ) &&
-	 !relationship_can_resolve_bug( $f_bug_id ) ) {
+	!relationship_can_resolve_bug( $f_bug_id )
+) {
 	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
 }
 
@@ -178,15 +182,16 @@ if( $t_existing_bug->status != $t_updated_bug->status ) {
 		# The reporter may be allowed to close or reopen the issue regardless.
 		$t_can_bypass_status_access_thresholds = false;
 		if( $t_close_issue &&
-		     $t_existing_bug->status >= $t_resolved_status &&
-		     $t_existing_bug->reporter_id == $t_current_user_id &&
-		     config_get( 'allow_reporter_close' ) ) {
+			$t_existing_bug->status >= $t_resolved_status &&
+			$t_existing_bug->reporter_id == $t_current_user_id &&
+			config_get( 'allow_reporter_close' )
+		) {
 			$t_can_bypass_status_access_thresholds = true;
 		} else if( $t_reopen_issue &&
-		            $t_existing_bug->status >= $t_resolved_status &&
-		            $t_existing_bug->status <= $t_closed_status &&
-		            $t_existing_bug->reporter_id == $t_current_user_id &&
-		            config_get( 'allow_reporter_reopen' ) ) {
+				   $t_existing_bug->status >= $t_resolved_status &&
+				   $t_existing_bug->status <= $t_closed_status &&
+				   $t_existing_bug->reporter_id == $t_current_user_id &&
+				   config_get( 'allow_reporter_reopen' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
 		}
 		if( !$t_can_bypass_status_access_thresholds ) {
@@ -219,7 +224,8 @@ if( $t_existing_bug->handler_id != $t_updated_bug->handler_id ) {
 # Check whether the category has been undefined when it's compulsory.
 if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 	if( $t_updated_bug->category_id == 0 &&
-	     !config_get( 'allow_no_category' ) ) {
+		!config_get( 'allow_no_category' )
+	) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -238,7 +244,7 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 	   )
 	|| (  $t_updated_bug->resolution == $t_reopen_resolution
 	   && (  $t_existing_bug->status < $t_resolved_status
-	      || $t_updated_bug->status >= $t_resolved_status
+		  || $t_updated_bug->status >= $t_resolved_status
 	   ) )
 	|| (  $t_updated_bug->resolution < $t_resolution_fixed_threshold
 	   && $t_updated_bug->status >= $t_resolved_status
@@ -331,11 +337,13 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 
 # Validate the new bug note (if any is provided).
 if( $t_bug_note->note ||
-	 ( config_get( 'time_tracking_enabled' ) &&
-	   helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) ) {
+	( config_get( 'time_tracking_enabled' ) &&
+	  helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 )
+) {
 	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
 	if( !$t_bug_note->note &&
-	     !config_get( 'time_tracking_without_note' ) ) {
+		!config_get( 'time_tracking_without_note' )
+	) {
 		error_parameters( lang_get( 'bugnote' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -350,11 +358,12 @@ if( $t_bug_note->note ||
 # between 'bug_submit_status' and 'bug_feedback_status'. It assumes you only
 # have one feedback, assigned and submitted status.
 if( $t_bug_note->note &&
-	 config_get( 'reassign_on_feedback' ) &&
-	 $t_existing_bug->status == config_get( 'bug_feedback_status' ) &&
-	 $t_updated_bug->status != $t_existing_bug->status &&
-	 $t_updated_bug->handler_id != $t_current_user_id &&
-	 $t_updated_bug->reporter_id == $t_current_user_id ) {
+	config_get( 'reassign_on_feedback' ) &&
+	$t_existing_bug->status == config_get( 'bug_feedback_status' ) &&
+	$t_updated_bug->status != $t_existing_bug->status &&
+	$t_updated_bug->handler_id != $t_current_user_id &&
+	$t_updated_bug->reporter_id == $t_current_user_id
+) {
 	if( $t_updated_bug->handler_id != NO_USER ) {
 		$t_updated_bug->status = config_get( 'bug_assigned_status' );
 	} else {
@@ -364,10 +373,11 @@ if( $t_bug_note->note &&
 
 # Handle automatic assignment of issues.
 if( $t_existing_bug->handler_id == NO_USER &&
-	 $t_updated_bug->handler_id != NO_USER &&
-	 $t_updated_bug->status == $t_existing_bug->status &&
-	 $t_updated_bug->status < config_get( 'bug_assigned_status' ) &&
-	 config_get( 'auto_set_status_to_assigned' ) ) {
+	$t_updated_bug->handler_id != NO_USER &&
+	$t_updated_bug->status == $t_existing_bug->status &&
+	$t_updated_bug->status < config_get( 'bug_assigned_status' ) &&
+	config_get( 'auto_set_status_to_assigned' )
+) {
 	$t_updated_bug->status = config_get( 'bug_assigned_status' );
 }
 
