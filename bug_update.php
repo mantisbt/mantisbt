@@ -258,7 +258,7 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 }
 
 # Ensure that the user has permission to change the target version of the issue.
-if( $t_existing_bug->target_version != $t_updated_bug->target_version ) {
+if( $t_existing_bug->target_version !== $t_updated_bug->target_version ) {
 	access_ensure_bug_level( config_get( 'roadmap_update_threshold' ), $f_bug_id );
 }
 
