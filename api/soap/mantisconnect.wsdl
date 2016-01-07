@@ -1061,7 +1061,7 @@
     <output message="tns:mc_project_addResponse"/>
   </operation>
   <operation name="mc_project_delete">
-    <documentation>Add a new project to the tracker (must have admin privileges)</documentation>
+    <documentation>Delete a project from the tracker (must have admin privileges)</documentation>
     <input message="tns:mc_project_deleteRequest"/>
     <output message="tns:mc_project_deleteResponse"/>
   </operation>
