@@ -203,22 +203,17 @@ $t_total_user_count = 0;
 # Get the user data in $c_sort order
 $t_result = '';
 
-if( 1 == $c_show_disabled ) {
-	$t_show_disabled_cond = '';
-} else {
-	$t_show_disabled_cond = ' AND enabled = ' . db_param();
+if( 1 != $c_show_disabled ) {
+	$t_where .= ' AND enabled = ' . db_param();
 	$t_where_params[] = true;
 }
 
-if( 0 == $c_hide_inactive ) {
-	$t_query = 'SELECT count(*) as user_count FROM {user} WHERE ' . $t_where . $t_show_disabled_cond;
-} else {
-	$t_query = 'SELECT count(*) as user_count FROM {user}
-			WHERE ' . $t_where . $t_show_disabled_cond . '
-			AND ' . db_helper_compare_time( db_param(), '<', 'last_visit', $t_days_old );
+if( 0 != $c_hide_inactive ) {
+	$t_where .= ' AND ' . db_helper_compare_time( db_param(), '<', 'last_visit', $t_days_old );
 	$t_where_params[] = db_now();
 }
 
+$t_query = 'SELECT count(*) as user_count FROM {user} WHERE ' . $t_where;
 $t_result = db_query( $t_query, $t_where_params );
 $t_row = db_fetch_array( $t_result );
 $t_total_user_count = $t_row['user_count'];
@@ -239,16 +234,8 @@ if( $f_page_number < 1 ) {
 }
 
 
-if( 0 == $c_hide_inactive ) {
-	$t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
-	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
-} else {
-	$t_query = 'SELECT * FROM {user}
-			WHERE ' . $t_where . $t_show_disabled_cond . '
-			AND ' . db_helper_compare_time( db_param(), '<', 'last_visit', $t_days_old ) . '
-			ORDER BY ' . $c_sort . ' ' . $c_dir;
-	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
-}
+$t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
+$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 
 $t_users = array();
 while( $t_row = db_fetch_array( $t_result ) ) {
