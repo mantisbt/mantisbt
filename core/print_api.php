@@ -449,6 +449,7 @@ function print_news_item_option_list() {
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
+	db_param_push();
 	if( $t_global ) {
 		$t_query = 'SELECT id, headline, announcement, view_state FROM {news} ORDER BY date_posted DESC';
 	} else {
@@ -1133,6 +1134,7 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @return void
  */
 function print_project_user_list_option_list2( $p_user_id ) {
+	db_param_push();
 	$t_query = 'SELECT DISTINCT p.id, p.name
 				FROM {project} p
 				LEFT JOIN {project_user_list} u
@@ -1940,6 +1942,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			}
 			break;
 		case DATABASE:
+			db_param_push();
 			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
 			$t_result = db_query( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
