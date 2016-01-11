@@ -211,7 +211,7 @@ class Graph {
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graph generation tool.
 	 */
-	function Graph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
+	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
