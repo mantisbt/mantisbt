@@ -93,7 +93,7 @@ class UserPreferences {
 	 * @param int $p_user_id
 	 * @param int $p_project_id
 	 */
-	function UserPreferences( $p_user_id, $p_project_id ) {
+	function __construct( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
 

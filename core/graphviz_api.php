@@ -183,7 +183,7 @@ class Graph {
 	 * @param string $p_com_module
 	 * @return null
 	 */
-	function Graph( $p_name = 'G', $p_attributes = array(), $p_tool = 'neato', $p_com_module = 'WinGraphviz.NEATO' ) {
+	function __construct( $p_name = 'G', $p_attributes = array(), $p_tool = 'neato', $p_com_module = 'WinGraphviz.NEATO' ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}

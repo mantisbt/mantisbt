@@ -41,9 +41,9 @@ class Period {
 
 	// ******* End vars *********************************************
 	/**
-	* Constructor
-	*/
-	function Period() {
+	 * Constructor
+	 */
+	function __construct() {
 		$this->start = '';
 
 		// default to today
