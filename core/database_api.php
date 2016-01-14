@@ -324,9 +324,9 @@ function db_query_bound() {
 /**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
- * This will pop the database parameter stack {@see MantisDbParam} after a 
+ * This will pop the database parameter stack {@see MantisDbParam} after a
  * successful execution, unless specified otherwise
- * 
+ *
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
@@ -448,14 +448,15 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
+	if( $p_pop_param ) {
+		$g_db_param->pop();
+	}
+
 	if( !$t_result ) {
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
 	} else {
-		if( $p_pop_param ) {
-			$g_db_param->pop();
-		}
 		return $t_result;
 	}
 }
