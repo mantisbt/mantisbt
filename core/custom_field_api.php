@@ -949,7 +949,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 
 		$query = "
-			SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
+			SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
 			FROM $t_custom_field_project_table p
 				INNER JOIN $t_custom_field_table f ON f.id = p.field_id
 				LEFT JOIN $t_custom_field_string_table s
