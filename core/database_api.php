@@ -448,7 +448,8 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
-	if( $p_pop_param ) {
+	# Restore param stack: only pop if asked to AND the query has params
+	if( $p_pop_param && !empty( $p_arr_parms ) ) {
 		$g_db_param->pop();
 	}
 
