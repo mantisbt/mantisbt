@@ -876,7 +876,7 @@ if( 3 == $t_install_state ) {
 
 		# Make sure we do the upgrades using UTF-8 if needed
 		if( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
-			$g_db->execute( 'SET NAMES UTF8' );
+			$g_db->execute( "SET NAMES $t_charset" );
 		}
 
 		if( $f_db_type == 'db2' ) {
