@@ -354,12 +354,15 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
+	# MySQL 5.5.3 for availability of utf8mb4 character set
+	$t_mysql_553 = version_compare( $t_db_version, '5.5.3', '>=' );
+
 	# Check DB's default collation
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata
 		WHERE schema_name = ' . db_param();
 	$t_collation = db_result( db_query( $t_query, array( $g_database_name ) ) );
-	check_print_test_row(
+	$t_is_utf8 = check_print_test_row(
 		'Database default collation is UTF-8',
 		check_is_collation_utf8( $t_collation ),
 		array( false => 'Database is using '
@@ -367,12 +370,18 @@ if( db_is_mysql() ) {
 			. ' collation where UTF-8 collation is required.' )
 	);
 
+	if( $t_is_utf8 && $t_mysql_553 ) {
+		check_print_test_warn_row(
+			'Database default character set is utf8mb4',
+			check_is_collation_utf8( $t_collation, true ),
+			array( false => 'Database default collation is ' . htmlentities( $t_collation )
+				. '. Use of utf8mb4 character set is recommended with MySQL 5.5.3 and above.' )
+		);
+	}
+
 	$t_table_regex = '/^'
 		. preg_quote( $t_table_prefix, '/' ) . '.+?'
 		. preg_quote( $t_table_suffix, '/' ) . '$/';
-
-	# MySQL 5.5.3 for availability of utf8mb4 character set
-	$t_mysql_553 = version_compare( $t_db_version, '5.5.3', '>=' );
 
 	$t_result = db_query( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
