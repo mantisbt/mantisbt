@@ -297,6 +297,17 @@ function db_is_oracle() {
 }
 
 /**
+ * Return the RDBMS version number
+ * @return string ('' if not connected)
+ */
+function db_version() {
+	global $g_db;
+
+	$t_info = $g_db->ServerInfo();
+	return $t_info['version'];
+}
+
+/**
  * Validates that the given identifier's length is OK for the database platform
  * Triggers an error if the identifier is too long
  * @param string $p_identifier Identifier to check.

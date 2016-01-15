@@ -166,15 +166,14 @@ if( !db_is_connected() ) {
 	return;
 }
 
-$t_database_server_info = $g_db->ServerInfo();
-$t_db_version = $t_database_server_info['version'];
+$t_db_version = db_version();
 preg_match( '/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
 $t_db_major_version = $t_matches[0];
 
 # MantisBT minimum version
 check_print_info_row(
 	'Database server version',
-	htmlentities( $t_database_server_info['version'] )
+	htmlentities( $t_db_version )
 );
 
 if( db_is_mysql() ) {
@@ -229,7 +228,7 @@ if( db_is_mysql() ) {
 			) );
 	} else {
 		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
-			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
+			$t_mysql_ga_release = version_compare( $t_db_version, $t_versions[$t_db_major_version][1], '>=' );
 			# Support end-dates as per http://www.mysql.com/support/
 			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
 			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );

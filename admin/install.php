@@ -786,8 +786,7 @@ if( 3 == $t_install_state ) {
 				# Set character set to utf8mb4 for mysql 5.5.3 and above, utf8 otherwise
 				$t_charset = 'utf8';
 				if( db_is_mysql() ) {
-					$t_db_info = $g_db->ServerInfo();
-					if( version_compare( $t_db_info['version'], '5.5.3', '>=' ) ) {
+					if( version_compare( db_version(), '5.5.3', '>=' ) ) {
 						$t_charset = 'utf8mb4';
 					}
 				}
