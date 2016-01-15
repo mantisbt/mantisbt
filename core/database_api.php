@@ -386,9 +386,14 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 							'{' => $s_prefix,
 							'}' => $s_suffix,
 							) );
+
+	# We assume that '%' tokens won't mix with db_param() generated tokens
+	# Param push is needed in case this query is happening inside an outer
+	# query which is using db_param (eg as part of an api call)
+	$g_db_param->push();
 	$p_query = preg_replace_callback(
 							array( "/%s/", "/%d/", "/%b/", "/%l/"),
-							"db_param",
+							function() use (&$p_pop_param) { $p_pop_param = false; return db_param(); },
 							$p_query
 							);
 
@@ -401,6 +406,11 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 	} else {
 		$t_result = $g_db->Execute( $p_query, $p_arr_parms );
 	}
+
+	# undo the previous param push.
+	# This also restores parameter count in ADOdb, in case this is pgsql,
+	# so that an api sql call dont break token numbering
+	$g_db_param->pop();
 
 	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 
