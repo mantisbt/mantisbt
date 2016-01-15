@@ -1048,7 +1048,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 						</row>
 						<row>
 							<entry>custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null )</entry>
-							<entry>Defines which columsn should be displayed</entry>
+							<entry>Defines which columns should be displayed</entry>
 							<entry>Array of the column names</entry>
 						</row>
 						<row>

@@ -438,7 +438,7 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediately after the line of an attachment.
-					Receives the attachement data as a parameter, in the form of an attachment array from within
+					Receives the attachment data as a parameter, in the form of an attachment array from within
 					the array returned by the <function>file_get_visible_attachments()</function> function.
 				</para>
 
