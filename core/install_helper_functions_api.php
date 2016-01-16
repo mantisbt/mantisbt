@@ -81,6 +81,18 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 }
 
 /**
+ * Legacy date function for installer backwards compatibility
+ * @return string
+ */
+function installer_db_now() {
+	global $g_db;
+
+	# Timezone must not be set to UTC prior to calling BindTimestamp(), as
+	# ADOdb assumes a local timestamp and does the UTC conversion itself.
+	return $g_db->BindTimeStamp( time() );
+}
+
+/**
  * Check PostgreSQL boolean columns' type in the DB
  * Verifies that columns defined as type "L" (logical) in the Mantis schema
  * have the correct type in the underlying database.
