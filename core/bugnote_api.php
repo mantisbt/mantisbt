@@ -727,7 +727,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	$t_results = array();
 
-	$t_query = 'SELECT username, realname, summary, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
+	$t_query = 'SELECT username, realname, summary, b.project_id project_id, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
 			FROM {user} u, {bugnote} bn, {bug} b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			' . $t_project_where . $t_from_where . $t_to_where . '
