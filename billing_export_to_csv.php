@@ -58,6 +58,7 @@ header( 'Content-Transfer-Encoding: BASE64;' );
 header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
+echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'summary' ) ) . $t_separator;
 
 if( $t_show_realname ) {
@@ -79,6 +80,7 @@ echo "\n";
 
 foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( bug_format_id( $t_billing['bug_id'] ) ) . $t_separator;
+	echo csv_escape_string( $t_billing['project_name'] ) . $t_separator;
 	echo csv_escape_string( $t_billing['bug_summary'] ) . $t_separator;
 
 	if( $t_show_realname ) {
