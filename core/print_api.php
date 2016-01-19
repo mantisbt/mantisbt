@@ -1271,6 +1271,9 @@ function print_formatted_severity_string( BugData $p_bug ) {
  * @return void
  */
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_filter = current_user_get_bug_filter();
+	$t_filter_id_param = isset( $t_filter['token_id'] ) ? '&filter=' . $t_filter['token_id'] : '' ;
+	
 	if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 			# We toggle between ASC and DESC if the user clicks the same sort order
@@ -1285,7 +1288,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 		}
 
 		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2&print=1', $p_string );
+		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2&print=1' . $t_filter_id_param, $p_string );
 	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 
@@ -1300,7 +1303,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$p_dir = 'ASC';
 		}
 		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2', $p_string );
+		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2' . $t_filter_id_param, $p_string );
 	} else {
 		echo $p_string;
 	}
