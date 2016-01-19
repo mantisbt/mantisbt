@@ -60,6 +60,7 @@ auth_ensure_user_authenticated();
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
+$f_filter_token			= gpc_get( 'filter', null );
 $f_temp_filter			= gpc_get_bool( 'temporary' );
 
 # validate filter type
@@ -359,6 +360,16 @@ if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 $f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, -1 );
 $f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
 
+# TODO @cproensa
+# It is assumed that 'temporary' parameter means setting a new filter, so here type is set to 1
+# however, the temporary nature has to be carried through the pagination links, and the column sorting
+# Currently this is achieved by passing the filter token id (stored temporary filter)
+# BUT current_user_get_bug_filter() doesnt use that number at all, only if its present,
+# and it is a number, it gets the filter from token table, regardless of its id
+# Proposal is to change semantics:
+# * 'temporary' means it is stored/read from tokens table (no id, just current user)
+#   and carry this parameter through pagination and sorting
+# * caller, eg, my_view, should set type=1 on first call, to force creation of new temporary filter.
 if( $f_temp_filter ) {
 	$f_type = 1;
 }
@@ -414,26 +425,32 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 # 	25: $f_relationship_bug
 # 	26: $f_show_profile
 
-# Set new filter values.  These are stored in a cookie
-$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
+if( null !== $f_filter_token ) {
+	# Here the filter is retrieved by the filter gpc parameter
+	$t_setting_arr = current_user_get_bug_filter();
+}
+else {
+	# Set new filter values.  These are stored in a cookie
+	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 
-# process the cookie if it exists, it may be blank in a new install
-if( !is_blank( $t_view_all_cookie ) ) {
-	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
-	if( false === $t_setting_arr ) {
-		# couldn't deserialize, if we were trying to use the filter, clear it and reload
-		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
-		if( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
-			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
+	# process the cookie if it exists, it may be blank in a new install
+	if( !is_blank( $t_view_all_cookie ) ) {
+		$t_setting_arr = filter_deserialize( $t_view_all_cookie );
+		if( false === $t_setting_arr ) {
+			# couldn't deserialize, if we were trying to use the filter, clear it and reload
+			# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
+			if( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
+				gpc_clear_cookie( 'view_all_cookie' );
+				error_proceed_url( 'view_all_set.php?type=0' );
+				trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
+				exit; # stop here
+			}
 		}
+	} else {
+		# no cookie found, set it
+		$f_type = 1;
 	}
-} else {
-	# no cookie found, set it
-	$f_type = 1;
 }
 
 $t_cookie_version = FILTER_VERSION;
@@ -595,7 +612,7 @@ $t_settings_serialized = json_encode( $t_setting_arr );
 $t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
 # If only using a temporary filter, don't store it in the database
-if( !$f_temp_filter ) {
+if( !$f_temp_filter && null === $f_filter_token ) {
 	# Store the filter string in the database: its the current filter, so some values won't change
 	$t_project_id = helper_get_current_project();
 	$t_project_id = ( $t_project_id * -1 );
@@ -612,8 +629,14 @@ if( $f_print ) {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
 
-if( $f_temp_filter ) {
+if( $f_temp_filter || null !== $f_filter_token ) {
 	$t_token_id = token_set( TOKEN_FILTER, $t_settings_serialized );
 	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
 }
+/*
+if( null !== $f_filter_token ) {
+	$t_redirect_url = $t_redirect_url . '?filter=' . $f_filter_token;
+}
+ * 
+ */
 print_header_redirect( $t_redirect_url );
