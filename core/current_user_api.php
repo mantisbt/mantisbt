@@ -247,6 +247,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 				$t_filter = json_decode( $t_token, true );
 			}
 		} else {
+			// TODO @cproensa remove this, remainders of ancient #4609
 			$t_filter = json_decode( $f_filter_string, true );
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
