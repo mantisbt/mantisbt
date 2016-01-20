@@ -1271,6 +1271,8 @@ function print_formatted_severity_string( BugData $p_bug ) {
  * @return void
  */
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	// TODO @cproensa url parameters are carried from custom_function_default_print_column_title()
+	// needing new parameters means also changing parameter definition on all print_column_title_xxxx functions!
 	if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 			# We toggle between ASC and DESC if the user clicks the same sort order
