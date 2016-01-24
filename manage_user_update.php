@@ -175,6 +175,8 @@ if( $f_protected && $t_old_protected ) {
 
 $t_result = db_query( $t_query, $t_query_params );
 
+event_signal( 'EVENT_MANAGE_USER_UPDATE', array( $c_user_id ) );
+
 if( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
 	$t_changes = '';

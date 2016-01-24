@@ -212,6 +212,117 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.createform">
+			<title>EVENT_MANAGE_USER_CREATE_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements on
+					the Create User page.  It is triggered immediately before the submit
+					button.
+				</para>
+
+				<para>
+					Any output here should follow the format found in manage_user_create_page.php.
+				</para>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.create">
+			<title>EVENT_MANAGE_USER_CREATE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of newly-created
+					users.  This event is triggered for each user created.  The
+					Manage Users create form is one possible case for triggering
+					such events, but there can be other ways users can be created.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.updateform">
+			<title>EVENT_MANAGE_USER_UPDATE_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form
+					elements in the Manage User page.  It is triggered immediately
+					before the submit button.
+				</para>
+
+				<para>
+					Any output here should follow the format found in
+					manage_user_edit_page.php.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.update">
+			<title>EVENT_MANAGE_USER_UPDATE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of modified
+					users.  This may be triggered by the Manage User page or some
+					other path.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.delete">
+			<title>EVENT_MANAGE_USER_DELETE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do pre-processing of user
+					deletion.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.manage.user.view">
+			<title>EVENT_MANAGE_USER_PAGE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display information on
+					the View User page.  It is triggered immediately after the reset password
+					segment.
+				</para>
+
+				<para>
+					Any output here should be contained within its own container.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</section>
 
 </section>

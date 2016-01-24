@@ -113,6 +113,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 				<span class="checkbox"><input type="checkbox" id="user-protected" name="protected" /></span>
 				<span class="label-style"></span>
 			</div>
+
+			<?php event_signal( 'EVENT_MANAGE_USER_CREATE_FORM' ) ?>
+
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_user_button' ) ?>" /></span>
 		</fieldset>
 	</form>

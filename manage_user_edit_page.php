@@ -172,6 +172,9 @@ print_manage_menu();
 				echo '<span class="label-style"></span>';
 				echo '</div>';
 			} ?>
+
+			<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+
 			<!-- Submit Button -->
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
 		</fieldset>
@@ -229,6 +232,8 @@ if( $t_reset || $t_unlock || $t_delete ) {
 ?>
 </div>
 <?php } ?>
+
+<?php event_signal( 'EVENT_MANAGE_USER_PAGE', array( $t_user_id ) ); ?>
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
 <?php if( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
