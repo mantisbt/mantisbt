@@ -152,13 +152,6 @@ function http_security_headers() {
 			"frame-ancestors 'none'",
 		);
 
-		$t_results = event_signal( 'EVENT_LAYOUT_CSP_RECORDS' );
-		foreach( $t_results as $t_plugin => $t_plugin_result ) {
-			foreach( $t_plugin_result as $t_callback => $t_plugin_csp_entries ) {
-				$t_csp = array_merge( $t_csp, $t_plugin_csp_entries );
-			}
-		}
-
 		$t_style_src = "style-src 'self'";
 		$t_script_src = "script-src 'self'";
 
