@@ -3,7 +3,8 @@
 # MantisBT Travis-CI before script
 # -----------------------------------------------------------------------------
 
-# We don't need any of this when building the documentation
+# Nothing to do here for documentation builds
+# Note: Publican is installed via .travis.yml (apt add-on)
 if [[ -n $DOCBOOK ]]
 then
 	exit
@@ -120,7 +121,7 @@ else
 	else
 		myphp=php
 	fi
-	$myphp -S $HOSTNAME:$PORT &
+	$myphp -S $HOSTNAME:$PORT >& /dev/null &
 fi
 
 # needed to allow web server to create config_inc.php

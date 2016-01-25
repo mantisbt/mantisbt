@@ -26,6 +26,9 @@
  * @uses config_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'lang_api.php' );
 require_api( 'config_api.php' );
@@ -40,6 +43,7 @@ header( 'Content-Type: text/css; charset=UTF-8' );
  * http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
  */
 header( 'X-Content-Type-Options: nosniff' );
+$g_display_errors = null;
 
 /**
  * WARNING: DO NOT EXPOSE SENSITIVE CONFIGURATION VALUES!
@@ -52,7 +56,7 @@ header( 'X-Content-Type-Options: nosniff' );
  * should only be known internally to the server.
  */
 ?>
-div.form-container fieldset.has-required:after {
+div.form-container fieldset.required:after {
 	position: absolute;
 	margin: -1.75em 0em 0em .5em;
 	font-size: 8pt;

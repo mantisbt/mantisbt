@@ -41,7 +41,7 @@ require_once( 'lang_api.php' );
  */
 function json_url( $p_url, $p_member = null ) {
 	$t_data = url_get( $p_url );
-	$t_json = json_decode( utf8_encode( $t_data ) );
+	$t_json = json_decode( $t_data );
 
 	if( is_null( $p_member ) ) {
 		return $t_json;

@@ -815,7 +815,6 @@ $s_updated = 'Đã cập nhật';
 $s_sticky = 'Hiển thị các Issue dính';
 $s_issue_id = 'ID issue';
 $s_recently_visited = 'Gần đây đã viếng thăm';
-$s_filter_match_type = 'Loại đối sánh';
 $s_filter_match_all = 'Tất cả Điều kiện';
 $s_filter_match_any = 'Bất kỳ Điều kiện';
 $s_none = 'không';

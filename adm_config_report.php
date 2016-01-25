@@ -157,7 +157,7 @@ function print_option_list_from_array( array $p_array, $p_filter_value ) {
 function check_config_value( $p_config ) {
 	if(    $p_config != META_FILTER_NONE
 	   && !is_blank( $p_config )
-	   && is_null( @config_get_global( $p_config ) )
+	   && is_null( @config_get( $p_config ) )
 	) {
 		return META_FILTER_NONE;
 	}
@@ -487,6 +487,8 @@ if( $t_read_write_access ) {
 <!-- Config Set Form -->
 <div class="space-10"></div>
 
+<?php if( config_can_delete( $t_edit_option ) ){ ?>
+<div id="config-edit-div">
 <form id="config_set_form" method="post" action="adm_config_set.php">
 
 		<!-- Title -->
@@ -587,6 +589,7 @@ if( $t_read_write_access ) {
 	</div>
 	</div>
 </form>
+</div>
 
 <?php
 } # end user can change config

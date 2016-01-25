@@ -889,7 +889,6 @@ $s_sort_label = 'Впорядкувати за:';
 $s_issue_id = 'Проблема #';
 $s_recently_visited = 'Недавно відвідані';
 $s_note_user_id_label = 'Коментар від:';
-$s_filter_match_type = 'Тип збігу';
 $s_filter_match_all = 'Всі Умови';
 $s_filter_match_any = 'Будь-яка умова';
 $s_none = 'Немає';

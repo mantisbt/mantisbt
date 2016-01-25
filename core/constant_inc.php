@@ -40,7 +40,7 @@ define( 'PHP_CGI', 1 );
 
 # installation
 define( 'CONFIGURED_PASSWORD', '______' );
-define( 'DB_MIN_VERSION_ADODB', '5.19' ); # For mssql, oracle and pgsql
+define( 'DB_MIN_VERSION_ADODB', '5.20.2' );  # For mssql, oracle and pgsql
 define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
 define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
 define( 'DB_MIN_VERSION_PGSQL', '9.0' );     # Earliest supported version as of August 2014
@@ -536,6 +536,7 @@ define( 'LOG_AJAX', 8 );            # logging for AJAX / XmlHttpRequests
 define( 'LOG_LDAP', 16 );           # logging for LDAP
 define( 'LOG_DATABASE', 32 );       # logging for Database
 define( 'LOG_WEBSERVICE', 64 );     # logging for Web Service Requests
+define( 'LOG_EMAIL_VERBOSE', 128 ); # logging for verbose email internals
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );

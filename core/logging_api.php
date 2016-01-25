@@ -39,11 +39,12 @@ require_api( 'utility_api.php' );
 $g_log_levels = array(
 	LOG_EMAIL => 'MAIL',
 	LOG_EMAIL_RECIPIENT => 'RECIPIENT',
+	LOG_EMAIL_VERBOSE => 'MAIL_VERBOSE',
 	LOG_FILTERING => 'FILTER',
 	LOG_AJAX => 'AJAX',
 	LOG_LDAP => 'LDAP',
 	LOG_DATABASE => 'DB',
-	LOG_WEBSERVICE => 'WEBSERVICE'
+	LOG_WEBSERVICE => 'WEBSERVICE',
 );
 
 /**
@@ -123,7 +124,7 @@ function log_event( $p_level, $p_msg ) {
 		}
 	}
 
-	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_caller . ' ' . $t_msg;
 
 	switch( $t_destination ) {
 		case 'none':

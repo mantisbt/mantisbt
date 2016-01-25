@@ -863,7 +863,6 @@ $s_sticky = 'Ukázat "sticky" problémy';
 $s_sort_label = 'Seřadit podle:';
 $s_issue_id = 'Problém číslo';
 $s_recently_visited = 'Posledně navštívené';
-$s_filter_match_type = 'Typ shody';
 $s_filter_match_all = 'Všechny podmínky';
 $s_filter_match_any = 'Jakékoliv podmínky';
 $s_none = 'žádný';

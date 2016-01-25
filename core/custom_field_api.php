@@ -872,7 +872,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 	if( !array_key_exists( $p_bug_id, $g_cached_custom_field_lists ) ) {
 		$c_project_id = (int)( bug_get_field( $p_bug_id, 'project_id' ) );
 
-		$t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
+		$t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
 			FROM {custom_field_project} p
 				INNER JOIN {custom_field} f ON f.id = p.field_id
 				LEFT JOIN {custom_field_string} s

@@ -288,10 +288,10 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
-
-	$t_count = count( $t_result );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$t_result[$i] = (int)$t_result[$i];
+	if( is_array( $t_result ) ) {
+		foreach( $t_result as $t_key => $t_value ) {
+			$t_result[$t_key] = (int)$t_value;
+		}
 	}
 
 	return $t_result;
@@ -316,9 +316,10 @@ function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	$t_count = count( $t_result );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$t_result[$i] = gpc_string_to_bool( $t_result[$i] );
+	if( is_array( $t_result ) ) {
+		foreach( $t_result as $t_key => $t_value ) {
+			$t_result[$t_key] = gpc_string_to_bool( $t_value );
+		}
 	}
 
 	return $t_result;

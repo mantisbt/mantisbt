@@ -821,7 +821,9 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				}
 			} else {
-				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array( 'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci' ) );
+				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
+					'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
+				) );
 				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 				if( $t_ret == 2 ) {
 					print_test_result( GOOD );

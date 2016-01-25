@@ -139,9 +139,10 @@ access_ensure_global_level( $f_access_level );
 # check that we are not downgrading the last administrator
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( user_is_administrator( $f_user_id ) &&
-	 $f_access_level < $t_admin_threshold &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
-	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
+	if( $f_access_level < $t_admin_threshold || $c_enabled === false ) {
+		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	}
 }
 
 # Project specific access rights override global levels, hence, for users who are changed

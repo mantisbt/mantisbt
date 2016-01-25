@@ -223,7 +223,7 @@ class UserPreferences {
 	 * @param integer $p_user_id    A valid user identifier.
 	 * @param integer $p_project_id A valid project identifier.
 	 */
-	function UserPreferences( $p_user_id, $p_project_id ) {
+	function __construct( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
 		$this->default_project = ALL_PROJECTS;
 

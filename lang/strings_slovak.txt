@@ -865,7 +865,6 @@ $s_updated = 'Aktualizácia';
 $s_sticky = 'Ukázať Fixované Problémy';
 $s_issue_id = 'Problém č.';
 $s_recently_visited = 'Naposledy Navštívené';
-$s_filter_match_type = 'Typ zhody';
 $s_filter_match_all = 'Všetky podmienky';
 $s_filter_match_any = 'Akékoľvek podmienky';
 $s_none = 'žiadny';

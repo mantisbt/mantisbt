@@ -221,6 +221,9 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php } ?>
 </div>
 
+<?php
+if ( config_get( 'subprojects_enabled') == ON ) {
+?>
 <!-- SUBPROJECTS -->
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -363,7 +366,12 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		# End of subprojects listing / update form
 	} else {
 		# If there are no subprojects, clear floats to h2 overlap on div border
-} ?>
+?>
+		<br />
+<?php }
+
+	} # are sub-projects enabled?
+?>
 
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>

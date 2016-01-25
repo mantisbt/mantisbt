@@ -91,7 +91,10 @@ function access_denied() {
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
 				print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
-				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+				print_button(
+					helper_mantis_url( config_get( 'default_home_page' ) ),
+					lang_get( 'proceed' )
+				);
 				echo '</p>';
 			}
 		} else {
@@ -102,7 +105,10 @@ function access_denied() {
 			echo '<div class="alert alert-danger">';
 			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 			echo '<p class="center">';
-			print_button( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+			print_button(
+				helper_mantis_url( config_get( 'default_home_page' ) ),
+				lang_get( 'proceed' )
+			);
 			echo '</p>';
 			echo '</div></div>';
 			layout_admin_page_end();
@@ -561,6 +567,13 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
+	$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
+
+	# Reopen status must be reachable by workflow
+	if( !bug_check_workflow( $p_bug->status, $t_reopen_status ) ) {
+		return false;
+	}
+
 	# If allow_reporter_reopen is enabled, then reporters can always reopen
 	# their own bugs as long as their access level is reporter or above
 	if( ON == config_get( 'allow_reporter_reopen', null, null, $p_bug->project_id )
@@ -573,7 +586,6 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 	# Other users's access level must allow them to reopen bugs
 	$t_reopen_bug_threshold = config_get( 'reopen_bug_threshold', null, null, $p_bug->project_id );
 	if( access_has_bug_level( $t_reopen_bug_threshold, $p_bug->id, $p_user_id ) ) {
-		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
 
 		# User must be allowed to change status to reopen status
 		$t_reopen_status_threshold = access_get_status_threshold( $t_reopen_status, $p_bug->project_id );

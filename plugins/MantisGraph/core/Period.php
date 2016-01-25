@@ -46,7 +46,7 @@ class Period {
 	/**
 	 * Constructor
 	 */
-	function Period() {
+	function __construct() {
 		$this->start = '';
 
 		# default to today

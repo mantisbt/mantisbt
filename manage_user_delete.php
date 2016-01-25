@@ -62,10 +62,10 @@ $t_user = user_get_row( $f_user_id );
 # current user.
 access_ensure_global_level( $t_user['access_level'] );
 
-# check that we are not deleting the last administrator account
+# Check that we are not deleting the last administrator account
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( user_is_administrator( $f_user_id ) &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
+	user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
 	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 }
 

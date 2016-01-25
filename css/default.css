@@ -18,6 +18,7 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 #buglist td, #buglist th	{ text-align: center; }
 #buglist .column-summary,
 #buglist .column-description,
+#buglist .column-notes,
 #buglist .column-steps-to-reproduce,
 #buglist .column-additional-information
 	{ text-align: left; }

@@ -809,7 +809,6 @@ $s_sticky = 'Prikaži lepljive probleme';
 $s_issue_id = 'Broj problema';
 $s_recently_visited = 'Nedavno posećeno';
 $s_priority_abbreviation = 'V';
-$s_filter_match_type = 'Vrsta poklapanja';
 $s_filter_match_all = 'Svi uslovi';
 $s_filter_match_any = 'Bilo koji uslov';
 $s_none = 'nema';

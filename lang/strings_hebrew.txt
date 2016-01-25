@@ -856,7 +856,6 @@ $s_updated = 'עודכן';
 $s_sticky = 'הצגת באגים דביקים';
 $s_issue_id = 'באג מס׳';
 $s_recently_visited = 'הבאגים האחרונים שצפית בהם';
-$s_filter_match_type = 'התאמת סוג';
 $s_filter_match_all = 'כל התנאים';
 $s_filter_match_any = 'תנאי כלשהו';
 $s_none = 'אין';

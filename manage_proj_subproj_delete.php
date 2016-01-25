@@ -54,6 +54,10 @@ $f_subproject_id = gpc_get_int( 'subproject_id' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	access_denied();
+}
+
 project_hierarchy_remove( $f_subproject_id, $f_project_id );
 
 form_security_purge( 'manage_proj_subproj_delete' );

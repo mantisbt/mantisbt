@@ -25,6 +25,9 @@
  * @uses config_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
 

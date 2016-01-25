@@ -265,3 +265,12 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 	return $p_pass;
 }
+
+/**
+ * Verifies that the given collation is UTF-8
+ * @param string $p_collation
+ * @return boolean True if UTF-8
+ */
+function check_is_collation_utf8( $p_collation ) {
+	return substr( $p_collation, 0, 4 ) === 'utf8';
+}

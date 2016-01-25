@@ -3053,6 +3053,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_plugin_filter_fields = array();
 		$t_column_count_by_row = array();
 		$t_row = 0;
+		$t_column_count_by_row[$t_row] = 0;
 		foreach( $t_plugin_filters as $t_field_name=>$t_filter_object ) {
 			# be sure the colspan is an integer
 			$t_colspan = (int)$t_filter_object->colspan;
@@ -3069,6 +3070,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_columns_available = $t_filter_cols - $t_column_count_by_row[$t_row];
 			if( $t_columns_available == 0 ) {
 				$t_row++;
+				$t_column_count_by_row[$t_row] = 0;
 			}
 
 			# see if there is room in the current row

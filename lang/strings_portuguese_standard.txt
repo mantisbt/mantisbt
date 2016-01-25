@@ -822,7 +822,6 @@ $s_updated = 'Atualizado';
 $s_sticky = 'Mostrar problemas colados';
 $s_issue_id = 'Problema #';
 $s_recently_visited = 'Recentemente visitado';
-$s_filter_match_type = 'Tipo de correspondência';
 $s_filter_match_all = 'Todas as condições';
 $s_filter_match_any = 'Qualquer condição';
 $s_none = 'Nenhum';

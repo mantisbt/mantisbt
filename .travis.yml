@@ -8,13 +8,6 @@ language: php
 # Environment setup and test scripts execution
 #
 
-before_install:
-  # Workaround for failing PHP 5.5 builds, per https://github.com/travis-ci/travis-ci/issues/5206
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then
-        curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar;
-        chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit;
-    fi
-
 before_script:
   - ./scripts/travis_before_script.sh
 
@@ -30,6 +23,7 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
 
 env:
   - DB=mysql
@@ -45,9 +39,14 @@ matrix:
     # Note: we don't really care about the PHP version here, but we need
     # one version to trigger the build
     - env: DOCBOOK=1
-      php: "5.5"
+      php: 5.6
 
   allow_failures:
+
+addons:
+  apt:
+    packages:
+      - publican
 
 # -----------------------------------------------------------------------------
 # Notifications

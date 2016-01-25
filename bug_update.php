@@ -69,7 +69,7 @@ $f_update_type = gpc_get_string( 'action_type', BUG_UPDATE_TYPE_NORMAL );
 
 $t_current_user_id = auth_get_current_user_id();
 
-if( helper_get_current_project() !== $t_existing_bug->project_id ) {
+if( helper_get_current_project() != $t_existing_bug->project_id ) {
 	$g_project_override = $t_existing_bug->project_id;
 }
 
@@ -113,7 +113,7 @@ $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
 $t_bug_note->view_state = gpc_get_bool( 'private', config_get( 'default_bugnote_view_status' ) == VS_PRIVATE ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 
-if( $t_existing_bug->last_updated !== $t_updated_bug->last_updated ) {
+if( $t_existing_bug->last_updated != $t_updated_bug->last_updated ) {
 	trigger_error( ERROR_BUG_CONFLICTING_EDIT, ERROR );
 }
 
@@ -127,14 +127,17 @@ $t_resolve_issue = false;
 $t_close_issue = false;
 $t_reopen_issue = false;
 if( $t_existing_bug->status < $t_resolved_status &&
-	 $t_updated_bug->status >= $t_resolved_status &&
-	 $t_updated_bug->status < $t_closed_status ) {
+	$t_updated_bug->status >= $t_resolved_status &&
+	$t_updated_bug->status < $t_closed_status
+) {
 	$t_resolve_issue = true;
 } else if( $t_existing_bug->status < $t_closed_status &&
-			$t_updated_bug->status >= $t_closed_status ) {
+		   $t_updated_bug->status >= $t_closed_status
+) {
 	$t_close_issue = true;
 } else if( $t_existing_bug->status >= $t_resolved_status &&
-			$t_updated_bug->status <= config_get( 'bug_reopen_status' ) ) {
+		   $t_updated_bug->status <= config_get( 'bug_reopen_status' )
+) {
 	$t_reopen_issue = true;
 }
 
@@ -164,12 +167,13 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 
 # If resolving or closing, ensure that all dependant issues have been resolved.
 if( ( $t_resolve_issue || $t_close_issue ) &&
-	 !relationship_can_resolve_bug( $f_bug_id ) ) {
+	!relationship_can_resolve_bug( $f_bug_id )
+) {
 	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
 }
 
 # Validate any change to the status of the issue.
-if( $t_existing_bug->status !== $t_updated_bug->status ) {
+if( $t_existing_bug->status != $t_updated_bug->status ) {
 	if( !bug_check_workflow( $t_existing_bug->status, $t_updated_bug->status ) ) {
 		error_parameters( lang_get( 'status' ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
@@ -178,15 +182,16 @@ if( $t_existing_bug->status !== $t_updated_bug->status ) {
 		# The reporter may be allowed to close or reopen the issue regardless.
 		$t_can_bypass_status_access_thresholds = false;
 		if( $t_close_issue &&
-		     $t_existing_bug->status >= $t_resolved_status &&
-		     $t_existing_bug->reporter_id === $t_current_user_id &&
-		     config_get( 'allow_reporter_close' ) ) {
+			$t_existing_bug->status >= $t_resolved_status &&
+			$t_existing_bug->reporter_id == $t_current_user_id &&
+			config_get( 'allow_reporter_close' )
+		) {
 			$t_can_bypass_status_access_thresholds = true;
 		} else if( $t_reopen_issue &&
-		            $t_existing_bug->status >= $t_resolved_status &&
-		            $t_existing_bug->status <= $t_closed_status &&
-		            $t_existing_bug->reporter_id === $t_current_user_id &&
-		            config_get( 'allow_reporter_reopen' ) ) {
+				   $t_existing_bug->status >= $t_resolved_status &&
+				   $t_existing_bug->status <= $t_closed_status &&
+				   $t_existing_bug->reporter_id == $t_current_user_id &&
+				   config_get( 'allow_reporter_reopen' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
 		}
 		if( !$t_can_bypass_status_access_thresholds ) {
@@ -201,12 +206,12 @@ if( $t_existing_bug->status !== $t_updated_bug->status ) {
 
 # Validate any change to the handler of an issue.
 $t_issue_is_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
-if( $t_existing_bug->handler_id !== $t_updated_bug->handler_id ) {
+if( $t_existing_bug->handler_id != $t_updated_bug->handler_id ) {
 	access_ensure_bug_level( config_get( 'update_bug_assign_threshold' ), $f_bug_id );
 	if( $t_issue_is_sponsored && !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
 		trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 	}
-	if( $t_updated_bug->handler_id !== NO_USER ) {
+	if( $t_updated_bug->handler_id != NO_USER ) {
 		if( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $t_updated_bug->handler_id ) ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
@@ -217,9 +222,10 @@ if( $t_existing_bug->handler_id !== $t_updated_bug->handler_id ) {
 }
 
 # Check whether the category has been undefined when it's compulsory.
-if( $t_existing_bug->category_id !== $t_updated_bug->category_id ) {
-	if( $t_updated_bug->category_id === 0 &&
-	     !config_get( 'allow_no_category' ) ) {
+if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
+	if( $t_updated_bug->category_id == 0 &&
+		!config_get( 'allow_no_category' )
+	) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -238,7 +244,7 @@ if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
 	   )
 	|| (  $t_updated_bug->resolution == $t_reopen_resolution
 	   && (  $t_existing_bug->status < $t_resolved_status
-	      || $t_updated_bug->status >= $t_resolved_status
+		  || $t_updated_bug->status >= $t_resolved_status
 	   ) )
 	|| (  $t_updated_bug->resolution < $t_resolution_fixed_threshold
 	   && $t_updated_bug->status >= $t_resolved_status
@@ -257,7 +263,7 @@ if( $t_existing_bug->target_version !== $t_updated_bug->target_version ) {
 }
 
 # Ensure that the user has permission to change the view status of the issue.
-if( (int)$t_existing_bug->view_state !== $t_updated_bug->view_state ) {
+if( $t_existing_bug->view_state != $t_updated_bug->view_state ) {
 	access_ensure_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 }
 
@@ -279,7 +285,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	# If the custom field is not set and is required, then complain!
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
 		if( $t_cf_def[$t_cf_require_check] &&
-			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
+			custom_field_is_present( $t_cf_id ) &&
 			custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 			# A value for the custom field was expected however
 			# no value was given by the user.
@@ -316,8 +322,8 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 }
 
 # Perform validation of the duplicate ID of the bug.
-if( $t_updated_bug->duplicate_id !== 0 ) {
-	if( $t_updated_bug->duplicate_id === $f_bug_id ) {
+if( $t_updated_bug->duplicate_id != 0 ) {
+	if( $t_updated_bug->duplicate_id == $f_bug_id ) {
 		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 	}
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
@@ -331,15 +337,17 @@ if( $t_updated_bug->duplicate_id !== 0 ) {
 
 # Validate the new bug note (if any is provided).
 if( $t_bug_note->note ||
-	 ( config_get( 'time_tracking_enabled' ) &&
-	   helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) ) {
+	( config_get( 'time_tracking_enabled' ) &&
+	  helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 )
+) {
 	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );
 	if( !$t_bug_note->note &&
-	     !config_get( 'time_tracking_without_note' ) ) {
+		!config_get( 'time_tracking_without_note' )
+	) {
 		error_parameters( lang_get( 'bugnote' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
-	if( $t_bug_note->view_state !== config_get( 'default_bugnote_view_status' ) ) {
+	if( $t_bug_note->view_state != config_get( 'default_bugnote_view_status' ) ) {
 		access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id );
 	}
 }
@@ -350,12 +358,13 @@ if( $t_bug_note->note ||
 # between 'bug_submit_status' and 'bug_feedback_status'. It assumes you only
 # have one feedback, assigned and submitted status.
 if( $t_bug_note->note &&
-	 config_get( 'reassign_on_feedback' ) &&
-	 $t_existing_bug->status === config_get( 'bug_feedback_status' ) &&
-	 $t_updated_bug->status !== $t_existing_bug->status &&
-	 $t_updated_bug->handler_id !== $t_current_user_id &&
-	 $t_updated_bug->reporter_id === $t_current_user_id ) {
-	if( $t_updated_bug->handler_id !== NO_USER ) {
+	config_get( 'reassign_on_feedback' ) &&
+	$t_existing_bug->status == config_get( 'bug_feedback_status' ) &&
+	$t_updated_bug->status != $t_existing_bug->status &&
+	$t_updated_bug->handler_id != $t_current_user_id &&
+	$t_updated_bug->reporter_id == $t_current_user_id
+) {
+	if( $t_updated_bug->handler_id != NO_USER ) {
 		$t_updated_bug->status = config_get( 'bug_assigned_status' );
 	} else {
 		$t_updated_bug->status = config_get( 'bug_submit_status' );
@@ -363,10 +372,12 @@ if( $t_bug_note->note &&
 }
 
 # Handle automatic assignment of issues.
-if( $t_existing_bug->handler_id === NO_USER &&
-	 $t_updated_bug->handler_id !== NO_USER &&
-	 $t_updated_bug->status < config_get( 'bug_assigned_status' ) &&
-	 config_get( 'auto_set_status_to_assigned' ) ) {
+if( $t_existing_bug->handler_id == NO_USER &&
+	$t_updated_bug->handler_id != NO_USER &&
+	$t_updated_bug->status == $t_existing_bug->status &&
+	$t_updated_bug->status < config_get( 'bug_assigned_status' ) &&
+	config_get( 'auto_set_status_to_assigned' )
+) {
 	$t_updated_bug->status = config_get( 'bug_assigned_status' );
 }
 
@@ -379,9 +390,9 @@ helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updat
 $t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_existing_bug );
 
 # Commit the bug updates to the database.
-$t_text_field_update_required = ( $t_existing_bug->description !== $t_updated_bug->description ) ||
-								( $t_existing_bug->additional_information !== $t_updated_bug->additional_information ) ||
-								( $t_existing_bug->steps_to_reproduce !== $t_updated_bug->steps_to_reproduce );
+$t_text_field_update_required = ( $t_existing_bug->description != $t_updated_bug->description ) ||
+								( $t_existing_bug->additional_information != $t_updated_bug->additional_information ) ||
+								( $t_existing_bug->steps_to_reproduce != $t_updated_bug->steps_to_reproduce );
 $t_updated_bug->update( $t_text_field_update_required, true );
 
 # Update custom field values.
@@ -395,7 +406,7 @@ if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking 
 }
 
 # Add a duplicate relationship if requested.
-if( $t_updated_bug->duplicate_id !== 0 ) {
+if( $t_updated_bug->duplicate_id != 0 ) {
 	relationship_add( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE );
 	history_log_event_special( $f_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $t_updated_bug->duplicate_id );
 	history_log_event_special( $t_updated_bug->duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_bug_id );
@@ -424,9 +435,9 @@ if( $t_resolve_issue ) {
 	email_relationship_child_closed( $f_bug_id );
 } else if( $t_reopen_issue ) {
 	email_bug_reopened( $f_bug_id );
-} else if( $t_existing_bug->handler_id !== $t_updated_bug->handler_id ) {
+} else if( $t_existing_bug->handler_id != $t_updated_bug->handler_id ) {
 	email_owner_changed( $f_bug_id, $t_existing_bug->handler_id, $t_updated_bug->handler_id );
-} else if( $t_existing_bug->status !== $t_updated_bug->status ) {
+} else if( $t_existing_bug->status != $t_updated_bug->status ) {
 	$t_new_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $t_updated_bug->status );
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );
 	email_bug_status_changed( $f_bug_id, $t_new_status_label );

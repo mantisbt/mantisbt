@@ -49,4 +49,4 @@ $('#db_type').change(
 	}
 ).change();
 
-})
+});

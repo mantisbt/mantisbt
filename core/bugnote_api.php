@@ -433,6 +433,51 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 }
 
 /**
+ * Build a string that captures all the notes visible to the logged in user along with their
+ * metadata.  The string will contain information about each note including reporter, timestamp,
+ * time tracking, view state.  This will result in multi-line string with "\n" as the line
+ * separator.
+ *
+ * @param integer $p_bug_id             A bug identifier.
+ * @param integer $p_user_bugnote_order Sort order.
+ * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
+ * @param integer $p_user_id            An user identifier.
+ * @return string The string containing all visible notes.
+ * @access public
+ */
+function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id = null ) {
+	$t_notes = bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_user_bugnote_limit, $p_user_id );
+	$t_date_format = config_get( 'normal_date_format' );
+	$t_show_time_tracking = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_bug_id );
+
+	$t_output = '';
+
+	foreach( $t_notes as $t_note ) {
+		$t_note_string = '@' . user_get_name( $t_note->reporter_id );
+		if ( $t_note->view_state != VS_PUBLIC ) {
+			$t_note_string .= ' (' . lang_get( 'private' ) . ')';
+		}
+
+		$t_note_string .= ' ' . date( $t_date_format, $t_note->date_submitted );
+
+		if ( $t_show_time_tracking && $t_note->note_type == TIME_TRACKING ) {
+			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_note->time_tracking );
+			$t_note_string .= ' ' . lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm;
+		}
+
+		$t_note_string .= "\n" . $t_note->note . "\n";
+
+		if ( !empty( $t_output ) ) {
+			$t_output .= "---\n";
+		}
+
+		$t_output .= $t_note_string;
+	}
+
+	return $t_output;
+}
+
+/**
  * Build the bugnotes array for the given bug_id.
  * Return BugnoteData class object with raw values from the tables except the field
  * last_modified - it is UNIX_TIMESTAMP.
@@ -682,7 +727,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 	$t_results = array();
 
-	$t_query = 'SELECT username, realname, summary, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
+	$t_query = 'SELECT username, realname, summary, b.project_id project_id, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
 			FROM {user} u, {bugnote} bn, {bug} b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			' . $t_project_where . $t_from_where . $t_to_where . '

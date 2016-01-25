@@ -58,6 +58,10 @@ $f_subproject_id = gpc_get_int( 'subproject_id' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	access_denied();
+}
+
 project_ensure_exists( $f_project_id );
 project_ensure_exists( $f_subproject_id );
 

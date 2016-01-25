@@ -882,7 +882,6 @@ $s_sort_label = 'Сартаваць паводле:';
 $s_issue_id = 'Праблема №';
 $s_recently_visited = 'Апошнія наведаныя';
 $s_note_user_id_label = 'Камэнтар ад:';
-$s_filter_match_type = 'Тып адпаведнасьці';
 $s_filter_match_type_label = 'Супадзеньне з тыпам:';
 $s_filter_match_all = 'Усе ўмовы';
 $s_filter_match_any = 'Любая ўмова';

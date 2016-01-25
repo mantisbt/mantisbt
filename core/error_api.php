@@ -292,7 +292,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				exit(1);
 
 			case DISPLAY_ERROR_INLINE:
-				echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+				if( !defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
+					echo '<div class="alert alert-warning">', $t_error_type, ': ', $t_error_description, '</div>';
+				}
 				$g_error_handled = true;
 				break;
 

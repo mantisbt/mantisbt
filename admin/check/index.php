@@ -137,10 +137,15 @@ if( !$g_failed_test ) {
 	include( 'check_webservice_inc.php' );
 }
 
+/*
+ * Disable integrity since the required blobs are no longer available
+ * See https://sourceforge.net/p/mantisbt/mailman/message/24608409/
+ *
 if( !$g_failed_test ) {
 	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
 	include( 'check_integrity_inc.php' );
 }
+*/
 
 if( !$g_failed_test ) {
 	define( 'CHECK_CRYPTO_INC_ALLOW', true );

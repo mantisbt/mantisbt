@@ -857,7 +857,6 @@ $s_sort_label = 'Sortiere no:';
 $s_issue_id = 'Probläm #';
 $s_recently_visited = 'Letschti ufgmacht';
 $s_note_user_id_label = 'Aagmerkt dur:';
-$s_filter_match_type = 'Träffertyp';
 $s_filter_match_all = 'Alli Bedingige';
 $s_filter_match_any = 'Kei Bedingig';
 $s_none = 'keini';

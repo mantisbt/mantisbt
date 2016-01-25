@@ -891,7 +891,6 @@ $s_issue_id = 'Ärende #';
 $s_recently_visited = 'Senast besökta';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Noterad av:';
-$s_filter_match_type = 'Matchningstyp';
 $s_filter_match_all = 'Alla villkor';
 $s_filter_match_any = 'Vilket villkor som helst';
 $s_none = 'ingen';

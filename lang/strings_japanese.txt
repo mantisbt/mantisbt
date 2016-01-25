@@ -492,6 +492,7 @@ $s_warning_plain_password_authentication = '<strong>警告:</strong> 平文の�
 $s_warning_default_administrator_account_present = '<strong>警告:</strong> 既定の \'administrator\' アカウントを無効にするかパスワードを変更してください。';
 $s_warning_admin_directory_present = '<strong>警告:</strong> Admin ディレクトリを削除してください。';
 $s_warning_change_setting = '<strong>警告:</strong> "%1$s"は標準の値ではありません(%2$s)。';
+$s_warning_security_hazard = 'これは機密情報を公開することができますが、セキュリティ上の危険です。';
 $s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古い(config(databaseversion) is0)か不正です。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。もし必要なら、メーリングリストにサポートを依頼してください。';
 $s_error_database_version_out_of_date_2 = '<strong>警告:</strong> データベースの構造が古いようです。ログインする前に、<a href="admin/install.php">アップグレード</a>してください。';
 $s_error_code_version_out_of_date = '<strong>警告:</strong> データベースの構造がインストールしたコードより新しいようです。コードをアップグレードしてください。';
@@ -883,7 +884,6 @@ $s_sort_label = 'ソート順:';
 $s_issue_id = '課題#';
 $s_recently_visited = '参照履歴';
 $s_note_user_id_label = 'コメント登録者:';
-$s_filter_match_type = '検索の種類';
 $s_filter_match_all = 'すべての条件に一致';
 $s_filter_match_any = 'いずれかの条件に一致';
 $s_none = 'なし';
