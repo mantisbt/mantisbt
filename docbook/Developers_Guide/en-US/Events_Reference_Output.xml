@@ -339,6 +339,22 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.layout.csp_records">
+			<title>EVENT_LAYOUT_CSP_RECORDS (Default)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to add new CSP rules to the
+					Content Security Policy enabling loading of resources associated with
+					the plugins.
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: List of CSPs.  See https://www.w3.org/TR/2012/CR-CSP-20121115/.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.layout.bodybegin">
 			<title>EVENT_LAYOUT_BODY_BEGIN (Output)</title>
 			<blockquote>

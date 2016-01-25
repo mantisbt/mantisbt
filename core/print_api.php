@@ -186,23 +186,18 @@ function print_successful_redirect( $p_redirect_to ) {
  * @return void
  */
 function print_avatar( $p_user_id, $p_size = 80 ) {
-	if( OFF === config_get( 'show_avatar' ) ) {
-		return;
-	}
+	$t_avatar = Avatar::get( $p_user_id, $p_size );
 
-	if( !user_exists( $p_user_id ) ) {
-		return;
-	}
+	$t_image = htmlspecialchars( $t_avatar->image );
+	$t_link = htmlspecialchars( $t_avatar->link );
+	$t_text = htmlspecialchars( $t_avatar->text );
 
-	if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-		$t_avatar = user_get_avatar( $p_user_id, $p_size );
-		if( !empty( $t_avatar ) ) {
-			$t_avatar_url = htmlspecialchars( $t_avatar[0] );
-			$t_width = $t_avatar[1];
-			$t_height = $t_avatar[2];
-			echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
-		}
-	}
+	echo '<a rel="nofollow" href="' . $t_link . '">' .
+		'<img class="avatar" src="' . $t_image . '" alt="' .
+		$t_text . '" width="' . $p_size . '" height="' .
+		$p_size . '" /></a>';
+
+	return true;
 }
 
 /**

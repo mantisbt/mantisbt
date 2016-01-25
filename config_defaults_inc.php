@@ -1069,12 +1069,6 @@ $g_sort_by_last_name = OFF;
 /**
  * Show user avatar
  *
- * The current implementation is based on http://www.gravatar.com
- * Users will need to register there the same email address used in this
- * MantisBT installation to have their avatar shown.
- * Please note: upon registration or avatar change, it takes some time for
- * the updated gravatar images to show on sites
- *
  * The config can be either set to OFF (avatars disabled) or set to a string
  * defining the default avatar to be used when none is associated with the
  * user's email. Valid values:

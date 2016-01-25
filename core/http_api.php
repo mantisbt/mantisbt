@@ -152,14 +152,11 @@ function http_security_headers() {
 			"frame-ancestors 'none'",
 		);
 
-		# Policy for images: Allow gravatar URL
-		if( config_get_global( 'show_avatar' ) ) {
-			if( http_is_protocol_https() ) {
-				$t_avatar_url = 'https://secure.gravatar.com:443';
-			} else {
-				$t_avatar_url = 'http://www.gravatar.com:80';
+		$t_results = event_signal( 'EVENT_LAYOUT_CSP_RECORDS' );
+		foreach( $t_results as $t_plugin => $t_plugin_result ) {
+			foreach( $t_plugin_result as $t_callback => $t_plugin_csp_entries ) {
+				$t_csp = array_merge( $t_csp, $t_plugin_csp_entries );
 			}
-			$t_csp[] = "img-src 'self' $t_avatar_url";
 		}
 
 		$t_style_src = "style-src 'self'";

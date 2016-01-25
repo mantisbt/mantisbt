@@ -72,23 +72,13 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_start() {
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-
-		# Avatar div
-		if( !empty( $t_avatar ) ) {
-			$t_class = 'avatar';
-			$t_src = $t_avatar[0];
-		}
-		else {
-			$t_class = 'no-avatar';
-			$t_src = 'images/notice.gif';
-		}
+		$t_avatar = Avatar::get( $this->user_id, 32 );
 
 		return sprintf(
-			'<div class="entry"><div class="%s"><img class="%s" src="%s" /></div><div class="timestamp">%s</div>',
-			$t_class,
-			$t_class,
-			$t_src,
+			'<div class="entry"><div class="avatar"><a href="%s"><img class="avatar" src="%s" alt="%s" width="32" height="32" /></a></div><div class="timestamp">%s</div>',
+			$t_avatar->link,
+			$t_avatar->image,
+			$t_avatar->text,
 			$this->format_timestamp( $this->timestamp )
 		);
 	}

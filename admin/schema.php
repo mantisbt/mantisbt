@@ -862,6 +862,12 @@ $g_upgrade[203] = array( 'AlterColumnSQL', array( db_get_table( 'bug_file' ), "
 $g_upgrade[204] = array( 'AlterColumnSQL', array( db_get_table( 'project_file' ), "
 	content					B		NULL " . $t_blob_default ) );
 
+# Enable gravatar plugin by default
+$g_upgrade[205] = array( 'InsertData', array( db_get_table( 'plugin' ), "
+	( basename, enabled )
+	VALUES
+	( 'Gravatar', '1' )" ) );
+
 # Release marker: 1.3.0
 
 
