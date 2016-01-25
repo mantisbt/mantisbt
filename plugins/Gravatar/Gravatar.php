@@ -30,6 +30,28 @@
  */
 class GravatarPlugin extends MantisPlugin {
 	/**
+	 * Default Gravatar image types
+	 *
+	 * @link http://en.gravatar.com/site/implement/images/
+	 */
+	const GRAVATAR_DEFAULT_MYSTERYMAN = 'mm';
+	const GRAVATAR_DEFAULT_IDENTICON  = 'identicon';
+	const GRAVATAR_DEFAULT_MONSTERID  = 'monsterid';
+	const GRAVATAR_DEFAULT_WAVATAR    = 'wavatar';
+	const GRAVATAR_DEFAULT_RETRO      = 'retro';
+	const GRAVATAR_DEFAULT_BLANK      = 'blank';
+
+	/**
+	 * Gravatar Ratings
+	 *
+	 * @link http://en.gravatar.com/site/implement/images/
+	 */
+	const GRAVATAR_RATING_G  = 'G';
+	const GRAVATAR_RATING_PG = 'PG';
+	const GRAVATAR_RATING_R  = 'R';
+	const GRAVATAR_RATING_X  = 'X';
+
+	/**
 	 * A method that populates the plugin information and minimum requirements.
 	 * @return void
 	 */
@@ -55,17 +77,17 @@ class GravatarPlugin extends MantisPlugin {
 	function config() {
     	$t_default_avatar = config_get( 'show_avatar' );
 
-    	# Set default avatar for legacy configuration
-    	if( ON === $t_default_avatar || OFF === $t_default_avatar) {
-    		$t_default_avatar = 'identicon';
-    	}
+		# Set default avatar for legacy configuration
+		if( ON === $t_default_avatar || OFF === $t_default_avatar) {
+			$t_default_avatar = self::GRAVATAR_DEFAULT_IDENTICON;
+		}
 
-	    return array(
+		return array(
 	        /**
 	         * The rating of the avatar to show: 'G', 'PG', 'R', 'X'
 	         * @link http://en.gravatar.com/site/implement/images/
 	         */
-	       'rating' => 'G',
+	       'rating' => self::GRAVATAR_RATING_G,
 
            /**
             * The kind of avatar to use:
