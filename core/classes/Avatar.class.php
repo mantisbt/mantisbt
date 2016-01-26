@@ -31,12 +31,15 @@
 require_api( 'access_api.php' );
 require_api( 'user_api.php' );
 
+/**
+ * A class that represents information about a user's avatar.
+ */
 class Avatar
 {
     public $image = null;
     public $link = null;
     public $text = null;
-    
+
     /**
      * Gets the avatar information for the user.  The avatars are provided by
      * plugins that can integrate with a variety of services like gravatar.com,
@@ -73,7 +76,15 @@ class Avatar
     	return $t_avatar;
     }
 
-    public function normalize( $p_user_id ) {
+    /**
+     * A method that is called on the Avatar object after it is populated by
+     * the plugins to make sure that all fields are validated correctly,
+     * missing values are defaulted, and match the expectations of the MantisBT
+     * core.
+     *
+     * @return void
+     */
+    private function normalize( $p_user_id ) {
         $t_user_exists = user_exists( $p_user_id );
 
         if( $this->image === null) {
