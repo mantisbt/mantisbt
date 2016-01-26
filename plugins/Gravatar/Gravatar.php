@@ -30,6 +30,12 @@
  */
 class GravatarPlugin extends MantisPlugin {
 	/**
+	 * Gravatar URLs
+	 */
+	const GRAVATAR_URL        = 'http://www.gravatar.com/';
+	const GRAVATAR_URL_SECURE = 'https://secure.gravatar.com/';
+
+	/**
 	 * Default Gravatar image types
 	 *
 	 * @link http://en.gravatar.com/site/implement/images/
@@ -116,14 +122,9 @@ class GravatarPlugin extends MantisPlugin {
 	function csp_headers() {
 		# Policy for images: Allow gravatar URL
 		if( config_get_global( 'show_avatar' ) !== OFF ) {
-			if( http_is_protocol_https() ) {
-				$t_avatar_url = 'https://secure.gravatar.com:443';
-			} else {
-				$t_avatar_url = 'http://www.gravatar.com:80';
-			}
-
 			# Set CSP header
-			header( "Content-Security-Policy: img-src 'self' $t_avatar_url" );
+			header( "Content-Security-Policy: img-src 'self' " .
+				self::getAvatarUrl() );
 		}
 	}
 
@@ -159,19 +160,28 @@ class GravatarPlugin extends MantisPlugin {
     	}
 
     	# Build Gravatar URL
-    	if( http_is_protocol_https() ) {
-    		$t_avatar_url = 'https://secure.gravatar.com/';
-    	} else {
-    		$t_avatar_url = 'http://www.gravatar.com/';
-    	}
-
-    	$t_avatar_url .=
-    	    'avatar/' . $t_email_hash . '?d=' . $t_default_avatar .
-    	    '&r=' . $t_rating . '&s=' . $p_size;
+		$t_avatar_url = self::getAvatarUrl() .
+			'avatar/' . $t_email_hash . '?d=' . $t_default_avatar .
+			'&r=' . $t_rating . '&s=' . $p_size;
 
         $t_avatar = new Avatar();
         $t_avatar->image = $t_avatar_url;
 
     	return $t_avatar;
     }
+
+    /**
+     * Gets the gravatar base URL
+     *
+     * @return The gravatar URL.
+     */
+    private static function getAvatarUrl() {
+		if( http_is_protocol_https() ) {
+			$t_avatar_url = self::GRAVATAR_URL_SECURE;
+		} else {
+			$t_avatar_url = self::GRAVATAR_URL;
+		}
+
+		return $t_avatar_url;
+	}
 }
