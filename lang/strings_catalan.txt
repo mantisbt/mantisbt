@@ -44,6 +44,7 @@
  * @author Dtamajon
  * @author Fitoschido
  * @author Jaumeortola
+ * @author Macofe
  * @author Martorell
  * @author Paucabot
  * @author Pitort
@@ -216,7 +217,7 @@ $s_new_account_subject = 'Registre d\'un nou compte';
 $s_new_account_greeting = 'Gràcies por registrar-se. Té un compte amb el nom d\'usuari "%1$s". Per a completar el registre, visiti la següent URL (asseguri\'s de posar-la en una sola línia) i posi la contrasenya que desitgi:';
 $s_new_account_greeting_admincreated = 'L\'usuari %1$s ha creat un compte per vostè amb el nom d\'usuari "%2$s. Per completar el procés, visiti la següent URL (asseguri\'s que és entrada en una única línia) i triï una contrasenya:';
 $s_new_account_username = 'Usuari:';
-$s_new_account_message = 'Si no ha sol·licitat cap registre, si us plau ignori aquest missatge.';
+$s_new_account_message = 'Si no heu sol·licitat cap registre, ignoreu aquest missatge.';
 $s_new_account_do_not_reply = 'NO RESPONGUI A AQUEST MISSATGE';
 $s_new_account_email = 'Correu:';
 $s_new_account_IP = 'Direcció IP remota:';
@@ -952,7 +953,7 @@ $s_custom_field_require_resolved = 'Requerit per resoldre';
 $s_custom_field_require_closed = 'Requerit per tancar';
 $s_link_custom_field_to_project_title = 'Enllaça Camp Personalitzat al Projecte';
 $s_link_custom_field_to_project_button = 'Enllaça Camp Personalitzat';
-$s_linked_projects_label = 'Projectes Enllaçats:';
+$s_linked_projects_label = 'Projectes Enllaçats';
 $s_custom_field_sequence = 'Seqüència';
 $s_custom_field_sequence_label = 'Seqüència:';
 $s_custom_field_type_enum_string = '0:Cadena,1:Numèric,2:Flotant,3:Enumeració,4:Correu,5:Casella de verificació,6:Llista,7:Selecció múltiple,8:Data,9:Ràdio, 10:Textarea';

@@ -40,6 +40,7 @@
  *
  * @author Als-Chlämens
  * @author Als-Holder
+ * @author Macofe
  * @author Purodha
  */
 
@@ -943,7 +944,7 @@ $s_custom_field_require_resolved = 'Wird brucht bim Erledige';
 $s_custom_field_require_closed = 'Wird brucht bim Zuemache';
 $s_link_custom_field_to_project_title = 'Benutzerdefiniert Fäld em Projäkt zueordne';
 $s_link_custom_field_to_project_button = 'Benutzerdefiniert Fäld zueordne';
-$s_linked_projects_label = 'Vergleichti Projäkt:';
+$s_linked_projects_label = 'Vergleichti Projäkt';
 $s_custom_field_sequence = 'Reihefolg';
 $s_custom_field_sequence_label = 'Abfolg:';
 $s_custom_field_type_enum_string = '0:Tekscht,1:Zahle,2:Gleitkommazahle,3:Ufzellig,4:E-Mail,5:Kontrollchäschtli,6:Lischt,7:Mehfachuuswahl-Lischt,8:Datum,9:Uuswahlchäschtli, 10:Textarea';

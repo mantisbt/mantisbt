@@ -42,6 +42,7 @@
  * @author Eitvys200
  * @author Garas
  * @author Ignas693
+ * @author Macofe
  * @author Mantak111
  * @author Zygimantus
  */
@@ -940,7 +941,7 @@ $s_custom_field_require_resolved = 'Reikia užpildyti sprendžiant';
 $s_custom_field_require_closed = 'Reikia užpildyti uždarant';
 $s_link_custom_field_to_project_title = 'Nuoroda pasirinktinį lauką į projektą';
 $s_link_custom_field_to_project_button = 'Nuoroda įprastinį lauką';
-$s_linked_projects_label = 'Surišti projektai:';
+$s_linked_projects_label = 'Surišti projektai';
 $s_custom_field_sequence = 'Eilės tvarka';
 $s_custom_field_sequence_label = 'Seka';
 $s_custom_field_type_enum_string = '0: String, 1: Skaitmeninė, 2: Flotacinis, 3: Suskaičiuota, 4: El.pašto adresas, 5: Checkbox, 6: Sąrašas, 7: Multiselection sąrašas, 8: Date, 9: Radijas,10:Textarea';

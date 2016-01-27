@@ -41,6 +41,7 @@
  * @author Bithunter
  * @author Elisardojm
  * @author Fitoschido
+ * @author Macofe
  * @author McDutchie
  * @author Toliño
  * @author Vivaelcelta
@@ -229,6 +230,7 @@ $s_email_notification_title_for_status_bug_resolved = 'O seguinte problema foi R
 $s_email_notification_title_for_status_bug_closed = 'O seguinte problema foi PECHADO.';
 $s_email_notification_title_for_action_bug_submitted = 'O seguinte problema foi ENVIADO.';
 $s_email_notification_title_for_action_bug_assigned = 'O seguinte problema foi ASIGNADO.';
+$s_email_notification_title_for_action_bug_unassigned = 'A seguinte incidencia foi DESASIGNADA.';
 $s_email_notification_title_for_action_bug_reopened = 'O seguinte problema foi REABERTO.';
 $s_email_notification_title_for_action_bug_deleted = 'O seguinte problema foi BORRADO.';
 $s_email_notification_title_for_action_bug_updated = 'O seguinte problema foi ACTUALIZADO.';
@@ -291,6 +293,17 @@ $s_access_level_label = 'Nivel de acceso';
 $s_update_user_button = 'Actualizar o usuario';
 $s_verify_warning = 'A información da súa conta foi verificada. A mensaxe que recibiu para a confirmación da súa conta é agora inválida.';
 $s_verify_change_password = 'Debe fixar un contrasinal aquí para permitir acceder ao sistema de novo.';
+$s_api_tokens_link = 'Tokens API';
+$s_api_token_create_form_title = 'Crear Token API';
+$s_api_token_create_button = 'Crear Token API';
+$s_api_token_name = 'Nome do Token';
+$s_api_token_disclose_message = 'Token a usar para acceder á API.';
+$s_api_token_displayed_once = 'Teña en conta que este token só se mostrará unha vez';
+$s_api_tokens_title = 'Tokens API';
+$s_api_token_revoke_button = 'Revocar';
+$s_api_token_never_used = 'Nunca usado';
+$s_api_token_revoked = 'Token API "%s" anulado.';
+$s_last_used = 'Último uso';
 $s_default_account_preferences_title = 'Preferencias da conta';
 $s_default_project = 'Proxecto por defecto';
 $s_refresh_delay = 'Atraso no refrescamento';
@@ -884,6 +897,7 @@ $s_sort_label = 'Ordenar por:';
 $s_issue_id = 'Incidencia nº';
 $s_recently_visited = 'Visitados recentemente';
 $s_note_user_id_label = 'Por nota:';
+$s_filter_match_type_label = 'Coincidencia de tipo:';
 $s_filter_match_all = 'Todas as condicións';
 $s_filter_match_any = 'Calquera condición';
 $s_none = 'ningún';
@@ -968,9 +982,9 @@ $s_custom_field_require_report = 'Obrigatorio no informe';
 $s_custom_field_require_update = 'Obrigatorio na actualización';
 $s_custom_field_require_resolved = 'Obrigatorio ao resolver';
 $s_custom_field_require_closed = 'Obrigatorio ao pechar';
-$s_link_custom_field_to_project_title = 'Ligar o campo personalizado cara ao proxecto';
+$s_link_custom_field_to_project_title = 'Ligar campo personalizado ós proxectos';
 $s_link_custom_field_to_project_button = 'Ligar o campo personalizado';
-$s_linked_projects_label = 'Proxectos ligados:';
+$s_linked_projects_label = 'Proxectos ligados';
 $s_custom_field_sequence = 'Secuencia';
 $s_custom_field_sequence_label = 'Secuencia';
 $s_custom_field_type_enum_string = '0:Corda,1:Numérico,2:Flotante,3:Enumeración,4:Correo electrónico,5:Caixa de verificación,6:Lista,7:Lista de selección múltiple,8:Data,9:Radio,10:Zona de texto';
@@ -1099,6 +1113,7 @@ $s_status_changed_to = 'O estado cambia a';
 $s_email_on_deleted = 'Enviar un correo en caso dun problema borrado';
 $s_email_on_sponsorship_changed = 'Enviar un correo en caso de cambio de patrocinador';
 $s_email_on_relationship_changed = 'Enviar un correo en caso de cambio da relación';
+$s_email_on_updated = 'Enviar un correo electrónico sobre incidencias actualizadas';
 $s_loading = 'Cargando...';
 $s_between_date = 'Entre';
 $s_on_or_before_date = 'Durante ou antes';
@@ -1342,3 +1357,5 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Advertencia: O sistema está c
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Non coinciden os tipos de datos. Habilite as mensaxes de erro detalladas para máis información.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Outro usuario actualizou a incidencia, por favor, volva á incidencia e envíe os seus cambios de novo.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Alcanzou o límite de actividade permitida de %d eventos nos últimos %d segundos; a súa acción foi bloqueada para evitar o spam. Inténteo de novo máis tarde.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'O campo "%1$s" debe ser menor ou igual a %2$d caracteres.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'O nome de token "%s" xa está en uso. Por favor, volva atrás e seleccione outro.';

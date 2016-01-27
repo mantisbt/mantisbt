@@ -44,6 +44,7 @@
  * @author Cysioland
  * @author Debeet
  * @author Expert3222
+ * @author Macofe
  * @author Py64
  * @author Rezonansowy
  * @author Sp5uhe
@@ -967,7 +968,7 @@ $s_custom_field_require_resolved = 'Wymagane przy rozwiązywaniu';
 $s_custom_field_require_closed = 'Wymagane przy zamykaniu';
 $s_link_custom_field_to_project_title = 'Dołącz pole niestandardowe do projektu';
 $s_link_custom_field_to_project_button = 'Dołącz pole ninestandardowe';
-$s_linked_projects_label = 'Powiązane projekty:';
+$s_linked_projects_label = 'Powiązane projekty';
 $s_custom_field_sequence = 'Sekwencja';
 $s_custom_field_sequence_label = 'Sekwencja';
 $s_custom_field_type_enum_string = '0:Łańcuch znaków,1:Liczba całkowita,2:Liczba zmiennoprzecinkowa,3:Wyliczanie,4:E-mail,5:Zaznaczanie,6:Lista,7:Lista wielokrotnego wyboru,8:Data,9:Jeden z wielu,10:Obszar tekstu';

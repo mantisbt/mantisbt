@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Enolp
  * @author Xuacu
  */
 
@@ -286,6 +287,8 @@ $s_access_level_label = 'Nivel d\'accesu';
 $s_update_user_button = 'Actualizar usuariu';
 $s_verify_warning = 'Comprobóse la to información de cuenta. El mensaxe de confirmación de cuenta que recibisti agora ye inválidu.';
 $s_verify_change_password = 'Tienes d\'establecer equí una contraseña pa poder volver a aniciar sesión.';
+$s_api_tokens_link = 'Pases d\'API';
+$s_api_token_name = 'Nome de pase';
 $s_default_account_preferences_title = 'Preferencies de la cuenta';
 $s_default_project = 'Proyeutu predetermináu';
 $s_refresh_delay = 'Allancia del refrescu';

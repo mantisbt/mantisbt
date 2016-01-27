@@ -43,6 +43,7 @@
  * @author DCLXVI
  * @author Desertwaste
  * @author Emostoyanov
+ * @author Macofe
  * @author RealEnder
  * @author StanProg
  * @author Vodnokon4e
@@ -79,7 +80,7 @@ $s_login_anonymously = 'Вход като гост';
 $s_anonymous = 'Гост';
 $s_jump_to_bugnotes = 'Преглед на бележките';
 $s_public_project_msg = 'Проектът е ПУБЛИЧЕН. Всички потребители имат достъп.';
-$s_private_project_msg = 'Проектът е ЧАСТЕН. Само администраторите и ръчно добавените потребители имат достъп.';
+$s_private_project_msg = 'Проектът е с ограничен достъп. Само администраторите и ръчно добавените потребители имат достъп.';
 $s_access_level_project = 'Ниво на достъп за проекта';
 $s_view_submitted_bug_link = 'Преглед на изпратения проблем %1$s';
 $s_assigned_projects = 'Възложени проекти';
@@ -100,8 +101,8 @@ $s_date_modified = 'Дата на редакция';
 $s_bugnote = 'Бележка';
 $s_change = 'Промяна';
 $s_bugnote_view_state = 'Състояние на преглед на бележката';
-$s_bug_monitor = 'Проблемът се наблюдава';
-$s_bug_end_monitor = 'Спиране проследяването на проблема';
+$s_bug_monitor = 'Проблемът е под наблюдение';
+$s_bug_end_monitor = 'Спиране на наблюдението на проблема';
 $s_announcement = 'Обява';
 $s_stays_on_top = 'Стои най-отгоре';
 $s_bugnote_link_title = 'Пряка връзка към бележка';
@@ -118,11 +119,11 @@ $s_inherit = 'Наследени категории';
 $s_inherit_global = 'Онаследи глобалните категории';
 $s_inherit_parent = 'Онаследи ,родителските категории';
 $s_update_subproject_inheritance = 'Обновяване на  структурата на подпроекта';
-$s_duplicate_of = 'Дубликат на';
+$s_duplicate_of = 'дубликат на';
 $s_has_duplicate = 'съществува дубликат';
 $s_related_to = 'отнася се до';
-$s_dependant_on = 'Зависи от';
-$s_blocks = 'Производен на';
+$s_dependant_on = 'зависи от';
+$s_blocks = 'производен на';
 $s_new_bug = 'Нов проблем';
 $s_bugnote_added = 'Бележката е добавена';
 $s_bugnote_edited = 'Бележката е редактирана';
@@ -136,7 +137,7 @@ $s_file_deleted = 'Файлът е изтрит';
 $s_bug_deleted = 'Проблемът е изтрит';
 $s_make_private = 'Промени на Частен';
 $s_make_public = 'Промени на Публичен';
-$s_create_new_project_link = 'Нов проект';
+$s_create_new_project_link = 'Създаване на нов проект';
 $s_login_link = 'Влизане';
 $s_select_option = '(избиране)';
 $s_bug_actiongroup_access = 'Няма права за извършване на действието';
@@ -935,7 +936,7 @@ $s_custom_field_require_resolved = 'Задължително при решава
 $s_custom_field_require_closed = 'Задължително при затваряне';
 $s_link_custom_field_to_project_title = 'Свързване на потребителските полета към проектите';
 $s_link_custom_field_to_project_button = 'Свържи потребителско поле';
-$s_linked_projects_label = 'Свързани проекти:';
+$s_linked_projects_label = 'Свързани проекти';
 $s_custom_field_sequence = 'Тип на полето';
 $s_custom_field_sequence_label = 'Тип на полето';
 $s_custom_field_type_enum_string = '0:Низ,1:Числова стойност,2:Дроб,3:Изброяване,4:E-поща,5:Отметка,6:Списък,7:Списък с множествен избор,8:Дата, 9:Радио, 10:Textarea';

@@ -41,7 +41,9 @@
  * @author Aotake
  * @author Fryed-peach
  * @author Hiro884
+ * @author Macofe
  * @author Mfuji
+ * @author Otokoume
  * @author Seiji
  * @author Shirayuki
  * @author SkyDaisy9
@@ -294,6 +296,14 @@ $s_access_level_label = 'アクセス レベル';
 $s_update_user_button = 'ユーザーを更新';
 $s_verify_warning = 'あなたのアカウント情報を検証しました。あなたが受け取ったアカウント確認メッセージは無効になりました。';
 $s_verify_change_password = 'ログインできるようにパスワードを設定してください。';
+$s_api_tokens_link = 'API トークン';
+$s_api_token_create_form_title = 'API トークンを作成';
+$s_api_token_create_button = 'API トークンを作成';
+$s_api_token_name = 'トークン名';
+$s_api_token_disclose_message = 'API にアクセスするために使用されるトークンです。';
+$s_api_token_displayed_once = 'このトークンは、一度しか表示されないことに注意してください。';
+$s_api_tokens_title = 'API トークン';
+$s_api_token_revoke_button = '取り消す';
 $s_default_account_preferences_title = 'アカウント設定';
 $s_default_project = '既定のプロジェクト';
 $s_refresh_delay = '再表示時間';
@@ -661,6 +671,7 @@ $s_delete_category_button = 'カテゴリを削除';
 $s_edit_project_category_title = 'プロジェクトのカテゴリの編集';
 $s_update_category_button = 'カテゴリを更新';
 $s_category_updated_msg = 'カテゴリを更新しました...';
+$s_create_first_project = '問題をログに記録することができるプロジェクトを作成します。';
 $s_add_subproject_title = 'サブプロジェクトの追加';
 $s_project_deleted_msg = 'プロジェクトを削除しました...';
 $s_project_delete_msg = 'このプロジェクトと所属するすべての課題を本当に削除しますか?';
@@ -968,9 +979,9 @@ $s_custom_field_require_report = '登録時は必須';
 $s_custom_field_require_update = '更新時は必須';
 $s_custom_field_require_resolved = '解決時は必須';
 $s_custom_field_require_closed = '完了時は必須';
-$s_link_custom_field_to_project_title = 'プロジェクトへの設定';
+$s_link_custom_field_to_project_title = 'プロジェクトへのリンクのカスタムフィールド';
 $s_link_custom_field_to_project_button = 'カスタム項目を設定';
-$s_linked_projects_label = '設定済プロジェクト:';
+$s_linked_projects_label = '設定済プロジェクト';
 $s_custom_field_sequence = '表示順';
 $s_custom_field_sequence_label = '表示順';
 $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メールアドレス,5:チェックボックス,6:リスト,7:複数選択リスト,8:日付,9:ラジオボタン,10:テキストエリア';

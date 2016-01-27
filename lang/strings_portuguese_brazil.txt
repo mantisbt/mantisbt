@@ -47,7 +47,9 @@
  * @author Jefersonfoliveira
  * @author Luckas
  * @author Luigipiccoli
+ * @author Macofe
  * @author Pedroca cerebral
+ * @author Raphaelras
  * @author TheGabrielZaum
  * @author Tuliouel
  * @author Walesson
@@ -300,6 +302,9 @@ $s_access_level_label = 'Nível de Acesso';
 $s_update_user_button = 'Atualizar Usuário';
 $s_verify_warning = 'As informações da sua conta foram verificadas. A mensagem de confirmação de conta que você recebeu não é mais válida.';
 $s_verify_change_password = 'Você deve ajustar uma senha aqui para que lhe seja permitido acessar novamente.';
+$s_api_token_revoke_button = 'Revogar';
+$s_api_token_never_used = 'Nunca usado';
+$s_last_used = 'Último uso';
 $s_default_account_preferences_title = 'Preferências da Conta';
 $s_default_project = 'Projeto Padrão';
 $s_refresh_delay = 'Tempo de Renovação';
@@ -979,7 +984,7 @@ $s_custom_field_require_resolved = 'Requerido na resolução';
 $s_custom_field_require_closed = 'Requerido no fechamento';
 $s_link_custom_field_to_project_title = 'Vincular Campo Personalizado ao projeto';
 $s_link_custom_field_to_project_button = 'Vincular Campo Personalizado';
-$s_linked_projects_label = 'Projetos Vinculados:';
+$s_linked_projects_label = 'Projetos Vinculados';
 $s_custom_field_sequence = 'Sequência';
 $s_custom_field_sequence_label = 'Sequência';
 $s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação,6:Lista,7:Lista de seleção múltipla,8:Data,9:Botão de seleção,10:Textarea';
@@ -1144,6 +1149,7 @@ $s_tag_detach = 'Remover \'%1$s\'';
 $s_tag_separate_by = '(Separar por \'%1$s\')';
 $s_tag_invalid_name = 'Nome de marcador inválido.';
 $s_tag_create_denied = 'Acesso negado para a criação.';
+$s_tag_attach_denied = 'Pedido de anexação negado';
 $s_tag_filter_default = 'Casos relacionados (%1$s)';
 $s_tag_history_attached = 'Marcador Aplicado';
 $s_tag_history_detached = 'Marcador Removido';
@@ -1158,6 +1164,7 @@ $s_time_tracking = 'Acompanhamento de tempo';
 $s_time_tracking_time_spent = 'Tempo gasto:';
 $s_time_tracking_get_info_button = 'Obter informações de acompanhamento de tempo';
 $s_time_tracking_cost_per_hour = 'Custo / Hora';
+$s_time_tracking_cost_per_hour_label = 'Custo / Hora:';
 $s_time_tracking_cost = 'Custo';
 $s_time_tracking_cost_label = 'Custo:';
 $s_total_time_for_issue = 'Tempo total para o caso = %1$s';
@@ -1199,6 +1206,7 @@ $s_month_september = 'Setembro';
 $s_month_october = 'Outubro';
 $s_month_november = 'Novembro';
 $s_month_december = 'Dezembro';
+$s_timeline_no_activity = 'Nenhuma atividade com este intervalo de tempo';
 $s_timeline_title = 'Linha do tempo';
 $s_timeline_more = 'Mais eventos...';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Um erro ocorreu durante esta ação.  Você pode querer relatar este erro ao seu administrador local.';

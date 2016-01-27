@@ -44,6 +44,7 @@
  * @author GipuzkoaKultura
  * @author Kobazulo
  * @author Subi
+ * @author Xabier Armendaritz
  */
 
 $s_actiongroup_menu_move = 'Mugitu';
@@ -183,7 +184,7 @@ $s_printing_options_link = 'Inprimatzeko Hobespenak';
 $s_bugnote_title = 'Ohar kudeatzailea';
 $s_bugnote_date = 'Oharraren data';
 $s_bugnote_description = 'Oharraren deskribapena';
-$s_error_no_proceed = 'Mesedez erabili zure nabigatzaileko "Atzera" botoia aurreko orrialdera bueltatzeko. Bertan hemen identifikaturiko erroreak konpondu ditzazkezu edo beste zeregin bat aukeratu. Nahi baduzu menu barrako aukera batetan ere klik egin dezakezu zuzenean atal berri batera joateko.';
+$s_error_no_proceed = 'Erabil ezazu zure nabigatzaileko «Atzera» botoia aurreko orrira bueltatzeko. Han, hemen identifikaturiko erroreak konpondu ditzakezu, edo beste zeregin bat aukeratu. Nahi baduzu, menu barrako aukera batean ere klik egin dezakezu, zuzenean atal berri batera joateko.';
 $s_login_error = 'Baliteke zure kontua ezgaituta edo blokeatuta egotea edo sartutako erabiltzaile/pasahitza ez da zuzena.';
 $s_login_cookies_disabled = 'Zure nabigatzaileak ez daki cookie-ak kudeatzen, edo hauek kudeatzeari uko egiten dio.';
 $s_go_back = 'Atzera itzuli';

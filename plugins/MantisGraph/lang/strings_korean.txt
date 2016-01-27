@@ -40,6 +40,7 @@
  *
  * @author Changwoo
  * @author Hong3e
+ * @author Wisewolf
  * @author 아라
  */
 
@@ -69,15 +70,15 @@ $s_plugin_MantisGraph_enabled = '켜기';
 $s_plugin_MantisGraph_disabled = '끄기';
 $s_plugin_MantisGraph_graph_imp_status_title = '상태별 종합 그래프';
 $s_plugin_MantisGraph_graph_imp_priority_title = '우선 순위별 종합 그래프';
-$s_plugin_MantisGraph_graph_imp_severity_title = '중요도별 종합 그래프';
+$s_plugin_MantisGraph_graph_imp_severity_title = '심각도별 종합 그래프';
 $s_plugin_MantisGraph_graph_imp_category_title = '카테고리별 종합 그래프';
 $s_plugin_MantisGraph_graph_imp_resolution_title = '해결별 종합 그래프';
 $s_plugin_MantisGraph_by_status_pct = '상태별 백분율';
 $s_plugin_MantisGraph_by_priority_pct = '우선 순위별 백분율';
-$s_plugin_MantisGraph_by_severity_pct = '중요도별 백분율';
+$s_plugin_MantisGraph_by_severity_pct = '심각도별 백분율';
 $s_plugin_MantisGraph_by_category_pct = '카테고리별 백분율';
 $s_plugin_MantisGraph_by_resolution_pct = '해결별 백분율';
-$s_plugin_MantisGraph_by_severity_mix = '중요도와 상태별 백분율';
+$s_plugin_MantisGraph_by_severity_mix = '심각도와 상태별 백분율';
 $s_plugin_MantisGraph_by_priority_mix = '우선 순위와 상태별 백분율';
 $s_plugin_MantisGraph_by_resolution_mix = '해결과 상태별 백분율';
 $s_plugin_MantisGraph_legend_still_open = '진행중';

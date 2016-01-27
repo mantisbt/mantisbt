@@ -42,6 +42,7 @@
  * @author Andriykopanytsia
  * @author Base
  * @author Igorko
+ * @author Macofe
  * @author Olvin
  * @author Prima klasy4na
  * @author SteveR
@@ -234,6 +235,7 @@ $s_email_notification_title_for_status_bug_resolved = 'Наступна проб
 $s_email_notification_title_for_status_bug_closed = 'Наступна проблема була ЗАКРИТА.';
 $s_email_notification_title_for_action_bug_submitted = 'З\'явилась НОВА ПРОБЛЕМА.';
 $s_email_notification_title_for_action_bug_assigned = 'Наступна проблема була ПРИЗНАЧЕНА.';
+$s_email_notification_title_for_action_bug_unassigned = 'Наступна проблема була НЕПРИЗНАЧЕНА.';
 $s_email_notification_title_for_action_bug_reopened = 'Наступна проблема була ЗНОВУ ВІДКРИТА.';
 $s_email_notification_title_for_action_bug_deleted = 'Наступна проблема була ВИДАЛЕНА.';
 $s_email_notification_title_for_action_bug_updated = 'Наступна проблема була ОНОВЛЕНА.';
@@ -296,6 +298,17 @@ $s_access_level_label = 'Рівень доступу';
 $s_update_user_button = 'Зберегти';
 $s_verify_warning = 'Ваша облікова інформація була перевірена. Повідомлення про підтвердження профілю, яке ви отримали, в даний час втратило чинність.';
 $s_verify_change_password = 'Вам необхідно встановити пароль тут, щоб дозволити вам увійти в систему знову.';
+$s_api_tokens_link = 'Маркери API';
+$s_api_token_create_form_title = 'Створити маркер API';
+$s_api_token_create_button = 'Створити маркер API';
+$s_api_token_name = 'Назва маркера';
+$s_api_token_disclose_message = 'Маркер для доступу до API.';
+$s_api_token_displayed_once = 'Зверніть увагу, що цей маркер буде відображатися тільки один раз.';
+$s_api_tokens_title = 'Маркери API';
+$s_api_token_revoke_button = 'Відкликати';
+$s_api_token_never_used = 'Невикористаний';
+$s_api_token_revoked = 'Маркер API "%s" відкликаний.';
+$s_last_used = 'Востаннє використаний';
 $s_default_account_preferences_title = 'Параметри запису';
 $s_default_project = 'Основний проект';
 $s_refresh_delay = 'Інтервал оновлення';
@@ -889,6 +902,7 @@ $s_sort_label = 'Впорядкувати за:';
 $s_issue_id = 'Проблема #';
 $s_recently_visited = 'Недавно відвідані';
 $s_note_user_id_label = 'Коментар від:';
+$s_filter_match_type_label = 'Тип збігу:';
 $s_filter_match_all = 'Всі Умови';
 $s_filter_match_any = 'Будь-яка умова';
 $s_none = 'Немає';
@@ -973,9 +987,9 @@ $s_custom_field_require_report = 'Вимагати при створенні';
 $s_custom_field_require_update = 'Вимагати при редагуванні';
 $s_custom_field_require_resolved = 'Вимагати при вирішенні';
 $s_custom_field_require_closed = 'Вимагати при закритті';
-$s_link_custom_field_to_project_title = 'Прив\'язка спеціального поля до проекту';
+$s_link_custom_field_to_project_title = 'Прив\'язка спеціального поля до проектів';
 $s_link_custom_field_to_project_button = 'Прив\'язати спеціальне поле';
-$s_linked_projects_label = 'Пов\'язані проекти:';
+$s_linked_projects_label = 'Пов\'язані проекти';
 $s_custom_field_sequence = 'Послідовність';
 $s_custom_field_sequence_label = 'Послідовність';
 $s_custom_field_type_enum_string = '0:Рядок,1:Ціле,2:Дійсне,3:Перелік,4:Ел.пошта,5:Галочка,6:Список,7:Множинний список,8:Дата,9:Перемикач,10:Текстова область';
@@ -1104,6 +1118,7 @@ $s_status_changed_to = 'Стан змінюється на';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_email_on_updated = 'Лист при оновленні';
 $s_loading = 'Завантаження…';
 $s_between_date = 'Між';
 $s_on_or_before_date = 'На дату або перед';
@@ -1347,3 +1362,5 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Попередження: Си
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Невідповідність типів даних. Увімкніть відображення докладних повідомлень про помилки для отримання додаткової інформації.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Це питання було оновлено іншим учасником, будь ласка, поверніться до цього питання і підтвердіть свою зміну ще раз.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Ви досягли дозволеного ліміту активності на %d подій впродовж останніх %d секунд; Вашу дію було заблоковано для уникнення спаму, будь ласка, повторіть спробу пізніше.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Поле "%1$s" має містити не більше %2$d символів.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Назва маркера API "%s" вже використовується. Поверніться назад і введіть іншу назву.';
