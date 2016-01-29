@@ -120,6 +120,7 @@ if( $t_ldap && config_get( 'use_ldap_email' ) ) {
 	$t_email = trim( $f_email );
 	email_ensure_valid( $t_email );
 	email_ensure_not_disposable( $t_email );
+	user_ensure_email_unique( $t_email, $f_user_id );
 }
 
 $c_email = $t_email;

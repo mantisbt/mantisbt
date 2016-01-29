@@ -179,6 +179,16 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_ensure_unique</term>
+			<listitem>
+				<para>
+					When enabled, the uniqueness of email addresses will be inforced for new
+					users as well as updates to existing ones.  Note that there can be duplicate
+					emails before this option was turned ON.  Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_limit_email_domain</term>
 			<listitem>
 				<para>Only allow and send email to addresses in the given domain.

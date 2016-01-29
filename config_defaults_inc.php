@@ -550,6 +550,11 @@ $g_validate_email = ON;
 $g_email_login_enabled = ON;
 
 /**
+ * Ensure that email addresses are unique.
+ */
+$g_email_ensure_unique = ON;
+
+/**
  * set to OFF to disable email check
  * @global integer $g_check_mx_record
  */
@@ -4271,7 +4276,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names', 'email_login_enabled'
+	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique'
 );
 
 /**
@@ -4405,6 +4410,7 @@ $g_public_config_names = array(
 	'download_attachments_threshold',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
+	'email_ensure_unique',
 	'email_login_enabled',
 	'email_padding_length',
 	'email_receive_own',
