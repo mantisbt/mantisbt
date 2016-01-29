@@ -739,6 +739,30 @@ function user_get_id_by_email( $p_email ) {
 	return false;
 }
 
+/**
+ * Given an email address, this method returns the ids of the enabled users with
+ * that address.
+ *
+ * The returned list will be sorted by higher access level first.
+ *
+ * @param string $p_email The email address, can be an empty string to get users
+ *                        without an email address.
+ *
+ * @return array The user ids or an empty array.
+ */
+function user_get_enabled_ids_by_email( $p_email ) {
+	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param() .
+		' AND enabled=' . db_param() . ' ORDER BY access_level DESC';
+	$t_result = db_query( $t_query, array( $p_email, 1 ) );
+
+	$t_user_ids = array();
+	while ( $t_row = db_fetch_array( $t_result ) ) {
+		user_cache_database_result( $t_row );
+		$t_user_ids[] = (int)$t_row['id'];
+	}
+
+	return $t_user_ids;
+}
 
 /**
  * Get a user id from their real name

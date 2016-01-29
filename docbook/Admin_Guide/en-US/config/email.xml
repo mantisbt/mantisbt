@@ -168,6 +168,17 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_login_enabled</term>
+			<listitem>
+				<para>
+					Enable support for logging in by email and password, in addition to
+					username and password.  This will only work as long as there is a single
+					user with the specified email address and the email address is not blank.
+					The default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_limit_email_domain</term>
 			<listitem>
 				<para>Only allow and send email to addresses in the given domain.

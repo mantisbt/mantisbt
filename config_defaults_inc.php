@@ -541,6 +541,15 @@ $g_email_receive_own = OFF;
 $g_validate_email = ON;
 
 /**
+ * Enable support for logging in by email and password, in addition to
+ * username and password.  This will only work as long as there is a single
+ * user with the specified email address and the email address is not blank.
+ *
+ * @global integer $g_email_login_enabled
+ */
+$g_email_login_enabled = ON;
+
+/**
  * set to OFF to disable email check
  * @global integer $g_check_mx_record
  */
@@ -4262,7 +4271,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names'
+	'cdn_enabled', 'public_config_names', 'email_login_enabled'
 );
 
 /**
@@ -4396,6 +4405,7 @@ $g_public_config_names = array(
 	'download_attachments_threshold',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
+	'email_login_enabled',
 	'email_padding_length',
 	'email_receive_own',
 	'email_separator1',
