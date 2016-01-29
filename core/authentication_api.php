@@ -209,7 +209,7 @@ function auth_auto_create_user( $p_username, $p_password ) {
 
 	if( $t_auto_create ) {
 		# attempt to create the user
-		$t_cookie_string = user_create( $p_username, md5( $p_password ) );
+		$t_cookie_string = user_create( $p_username, "!" + auth_generate_random_password() );
 		if( $t_cookie_string === false ) {
 			# it didn't work
 			return false;
