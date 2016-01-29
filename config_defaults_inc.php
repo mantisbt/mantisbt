@@ -1968,6 +1968,14 @@ $g_use_ldap_email = OFF;
  */
 $g_ldap_simulation_file_path = '';
 
+/**
+ * Cache passwords in LDAP. Disabling this will mean that you cannot log into
+ * mantis if LDAP is down
+ * @global boolean $g_ldap_cache_passwords
+ */
+
+$g_ldap_cache_passwords = ON;
+
 ###################
 # Status Settings #
 ###################
