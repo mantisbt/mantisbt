@@ -229,7 +229,7 @@ function auth_auto_create_user( $p_username, $p_password ) {
  * such address and it is not blank.
  *
  * @param string $p_login_name The login name.
- * @return user id or false.
+ * @return integer|boolean user id or false.
  */
 function auth_get_user_id_from_login_name( $p_login_name ) {
 	$t_user_id = user_get_id_by_name( $p_login_name );
@@ -238,7 +238,8 @@ function auth_get_user_id_from_login_name( $p_login_name ) {
 	# a single match.
 	if( $t_user_id === false &&
 	    !is_blank( $p_login_name ) &&
-	    config_get_global( 'email_login_enabled' ) ) {
+	    config_get_global( 'email_login_enabled' ) &&
+	    email_is_valid( $p_login_name ) ) {
 		$t_user_ids_by_email = user_get_enabled_ids_by_email( $p_login_name );
 		if ( count( $t_user_ids_by_email ) == 1 ) {
 			$t_user_id = $t_user_ids_by_email[0];

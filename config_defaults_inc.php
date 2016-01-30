@@ -551,6 +551,8 @@ $g_email_login_enabled = ON;
 
 /**
  * Ensure that email addresses are unique.
+ *
+ * @global integer $g_email_ensure_unique
  */
 $g_email_ensure_unique = ON;
 
