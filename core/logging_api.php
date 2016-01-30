@@ -67,11 +67,12 @@ function log_event( $p_level, $p_msg ) {
 		$t_event = $p_msg;
 		$t_msg = var_export( $p_msg, true );
 	} else {
-		$t_args = func_get_args();
-		array_shift( $t_args ); # skip level
-		array_shift( $t_args ); # skip message
-		$p_msg = vsprintf( $p_msg, $t_args );
-
+		if( func_num_args() > 2 ) {
+			$t_args = func_get_args();
+			array_shift( $t_args ); # skip level
+			array_shift( $t_args ); # skip message
+			$p_msg = vsprintf( $p_msg, $t_args );
+		}
 		$t_event = array( $p_msg, 0 );
 		$t_msg = $p_msg;
 	}
