@@ -30,7 +30,6 @@
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
-require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 

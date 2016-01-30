@@ -43,6 +43,11 @@
  */
 
 /**
+ * @uses install_helper_functions_api.php
+ */
+require_api( 'install_helper_functions_api.php' );
+
+/**
  * Standard table creation options
  * Array key is the ADOdb datadict driver's name
  */
