@@ -854,6 +854,8 @@ $g_upgrade[201] = array( 'CreateIndexSQL', array( 'idx_user_id_name', db_get_tab
 
 # Release marker: 1.3.0-rc.1
 
+$g_upgrade[202] = array( 'CreateIndexSQL', array( 'idx_email', db_get_table( 'user' ), 'email' ) );
+
 # Release marker: 1.3.0
 
 
