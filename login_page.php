@@ -66,6 +66,12 @@ if( !user_is_name_valid( $f_username ) ) {
 	$f_username = '';
 }
 
+if( config_get_global( 'email_login_enabled' ) ) {
+	$t_username_label = lang_get( 'username_or_email' );
+} else {
+	$t_username_label = lang_get( 'username' );
+}
+
 $t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 
 # If user is already authenticated and not anonymous
@@ -238,7 +244,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			?>
 			</ul>
 			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
+				<label for="username"><span><?php echo $t_username_label ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
