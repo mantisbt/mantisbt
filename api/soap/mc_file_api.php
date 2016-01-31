@@ -165,7 +165,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 		( ' . implode(', ', array_keys( $t_param ) ) . ' )
 	VALUES
 		( ' . $t_query_param . ' )';
-	db_query( $t_query, $t_param );
+	db_query( $t_query, array_values( $t_param ) );
 
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
