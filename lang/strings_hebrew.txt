@@ -40,6 +40,7 @@
  *
  * @author Amire80
  * @author Guycn2
+ * @author Macofe
  * @author Orentet
  * @author Rotemliss
  * @author YaronSh
@@ -937,7 +938,7 @@ $s_custom_field_require_resolved = 'חובה בפתרון באג';
 $s_custom_field_require_closed = 'חובה בסגירת באג';
 $s_link_custom_field_to_project_title = 'לקשר שדה מותאם אישית לפרויקט';
 $s_link_custom_field_to_project_button = 'לקשר שדה מותאם אישית';
-$s_linked_projects_label = 'מיזמים מקושרים:';
+$s_linked_projects_label = 'מיזמים מקושרים';
 $s_custom_field_sequence = 'רצף';
 $s_custom_field_sequence_label = 'רצף';
 $s_custom_field_type_enum_string = '0:מחרוזת תווים,1:מספר,2:מספר כלשהו,3:רשימת מילים,4:כתובת דוא״ל,5:תיבת סימון,6:רשימה,7:רשימה עם בחירה מרובה,8:תאריך,9:רדיו, 10:Textarea';

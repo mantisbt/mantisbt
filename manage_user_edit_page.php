@@ -207,6 +207,9 @@ print_manage_menu( 'manage_user_page.php' );
 					</td>
 				</tr>
 			<?php } ?>
+
+			<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
+
 			<!-- Submit Button -->
 		</fieldset>
 		</table>
@@ -280,7 +283,9 @@ if( $t_reset || $t_unlock || $t_delete ) {
 </div>
 <?php } ?>
 
-    <div class="clearfix"></div>
+<?php event_signal( 'EVENT_MANAGE_USER_PAGE', array( $t_user_id ) ); ?>
+
+<div class="clearfix"></div>
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
 <?php if( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&

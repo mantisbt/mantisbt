@@ -40,6 +40,7 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Macofe
  * @author Red Winged Duck
  * @author Wizardist
  * @author Zedlik
@@ -228,6 +229,7 @@ $s_email_notification_title_for_status_bug_resolved = 'Наступная пра
 $s_email_notification_title_for_status_bug_closed = 'Наступная праблема была ЗАКРЫТАЯ.';
 $s_email_notification_title_for_action_bug_submitted = 'Наступная праблема была ДАДАДЗЕНАЯ.';
 $s_email_notification_title_for_action_bug_assigned = 'Наступная праблема была ПРЫЗНАЧАНАЯ.';
+$s_email_notification_title_for_action_bug_unassigned = 'Наступная праблема адзначаная як НЕПРЫЗНАЧАНАЯ.';
 $s_email_notification_title_for_action_bug_reopened = 'Наступная праблема была АДКРЫТАЯ ЗНОЎ.';
 $s_email_notification_title_for_action_bug_deleted = 'Наступная праблема была ВЫДАЛЕНАЯ.';
 $s_email_notification_title_for_action_bug_updated = 'Наступная праблема была АБНОЎЛЕНАЯ.';
@@ -290,6 +292,17 @@ $s_access_level_label = 'Узровень доступу';
 $s_update_user_button = 'Абнавіць карыстальніка';
 $s_verify_warning = 'Інфармацыя Вашага рахунку была правераная. Паведамленьне пацьверджаньня Вашага рахунку, якое Вы атрымалі, цяпер ня дзейнічае.';
 $s_verify_change_password = 'Вам неабходна ўвесьці тут пароль, каб атрымаць магчымасьць увайсьці ў сыстэму зноў.';
+$s_api_tokens_link = 'API-жэтоны';
+$s_api_token_create_form_title = 'Стварэньне API-жэтону';
+$s_api_token_create_button = 'Стварыць API-жэтон';
+$s_api_token_name = 'Назва жэтону';
+$s_api_token_disclose_message = 'Жэтон для доступу да API.';
+$s_api_token_displayed_once = 'Заўважце, што гэты жэтон будзе паказаны толькі адзін раз.';
+$s_api_tokens_title = 'API-жэтоны';
+$s_api_token_revoke_button = 'Адклікаць';
+$s_api_token_never_used = 'Ніколі не ўжываўся';
+$s_api_token_revoked = 'API-жэтон «%s» адкліканы.';
+$s_last_used = 'Апошняе выкарыстаньне';
 $s_default_account_preferences_title = 'Устаноўкі рахунку';
 $s_default_project = 'Праект па змоўчваньні';
 $s_refresh_delay = 'Інтэрвал абнаўленьня';
@@ -967,9 +980,9 @@ $s_custom_field_require_report = 'Патрабаваць падчас ствар
 $s_custom_field_require_update = 'Патрабаваць падчас абнаўленьня';
 $s_custom_field_require_resolved = 'Патрабаваць падчас вырашэньня';
 $s_custom_field_require_closed = 'Патрабаваць падчас закрыцьця';
-$s_link_custom_field_to_project_title = 'Далучыць нестандартнае поле да праекту';
+$s_link_custom_field_to_project_title = 'Далучыць нестандартнае поле да праектаў';
 $s_link_custom_field_to_project_button = 'Далучыць нестандартнае поле';
-$s_linked_projects_label = 'Зьвязаныя праекты:';
+$s_linked_projects_label = 'Зьвязаныя праекты';
 $s_custom_field_sequence = 'Пасьлядоўнасьць';
 $s_custom_field_sequence_label = 'Пасьлядоўнасьць';
 $s_custom_field_type_enum_string = '0:Радок,1:Цэлае,2:З плаваючай коскай,3:Пералік,4:Адрас электроннай пошты,5:Магчымасьць,6:Сьпіс,7:Шматвыбарны сьпіс,8:Дата,9:Пераключальнік, 10:Тэкставая вобласьць';
@@ -1097,6 +1110,7 @@ $s_status_changed_to = 'Статус зьменены на';
 $s_email_on_deleted = 'Паведамляць праз электронную пошту пра выдаленьні';
 $s_email_on_sponsorship_changed = 'Паведамляць праз электронную пошту пра зьмены спансараваньня';
 $s_email_on_relationship_changed = 'Паведамляць праз электронную пошту пра зьмены сувязяў';
+$s_email_on_updated = 'Ліст пры абнаўленьні';
 $s_loading = 'Загрузка…';
 $s_between_date = 'Паміж';
 $s_on_or_before_date = 'На, ці пасьля';
@@ -1340,3 +1354,5 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Папярэджаньне: с
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Несупадзеньне тыпаў зьвестак. Уключыце дэталёвыя паведамленьні пра памылкі дзеля дадатковай інфармацыі.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Праблема была абноўленая іншым карыстальнікам, калі ласка, вярніцеся ў праблему і дадайце вашыя зьмены яшчэ раз.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Вы дасягнулі ліміту дазволенай актыўнасьці ў %d дзеяньняў на працягу %d сэкундаў; Вашыя дзеяньні былі заблякаваныя, каб пазьбегнуць спаму, калі ласка, паспрабуйце пазьней.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Поле «%1$s» мусіць мець даўжыню карацей за або роўную %2$d сымбалям.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Назва API-жэтону «%s» ужо выкарыстоўваецца. Калі ласка, вярніцеся і абярыце іншую.';

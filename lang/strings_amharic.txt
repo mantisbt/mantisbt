@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Macofe
  * @author Solomon
  */
 
@@ -407,7 +408,7 @@ $s_custom_field_require_resolved = 'ሲበየን  የሚያስፈልግ';
 $s_custom_field_require_closed = 'ሲዘጋ የሚያስፈልግ';
 $s_link_custom_field_to_project_title = ' ብጁ መስኩን ከፕሮጄክቱ ጋር አገናኝ';
 $s_link_custom_field_to_project_button = 'ብጁ መስኩን አገናኝ';
-$s_linked_projects_label = ' የተገናኘ ፕሮጄክት :';
+$s_linked_projects_label = 'የተገናኘ ፕሮጄክት';
 $s_custom_field_sequence = 'ቅደም ተከተል';
 $s_custom_field_sequence_label = 'ቅደም ተከተል';
 $s_field_delete_button = 'መስኩን ሰርዝ';

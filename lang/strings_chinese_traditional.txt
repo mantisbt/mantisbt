@@ -44,6 +44,7 @@
  * @author Frankou
  * @author LNDDYL
  * @author Liuxinyu970226
+ * @author Macofe
  * @author Mark85296341
  * @author Oapbtommy
  * @author Simon Shek
@@ -148,7 +149,7 @@ $s_login_link = '登入';
 $s_select_option = '(請選擇)';
 $s_bug_actiongroup_access = '您沒有權限執行此動作。';
 $s_bug_actiongroup_status = '此問題無法更改為指定的狀態';
-$s_bug_actiongroup_category = '此問題無法更改為指定的類別';
+$s_bug_actiongroup_category = '此問題無法變更為指定的類別';
 $s_bug_actiongroup_handler = '指定的使用者不允許處理此問題';
 $s_bug_actiongroup_version = '指定的版本並不存在於此問題的專案';
 $s_close_bugs_conf_msg = '您確定要關閉這些問題嗎?';
@@ -615,7 +616,7 @@ $s_edit_others_bugnotes = '編輯他人的說明';
 $s_edit_own_bugnotes = '編輯自己的說明';
 $s_delete_others_bugnotes = '刪除他人的說明';
 $s_delete_own_bugnotes = '刪除自己的說明';
-$s_change_view_state_own_bugnotes = '更改自已的說明檢視狀態';
+$s_change_view_state_own_bugnotes = '變更自已的附註檢視狀態';
 $s_limit_access = '限制回報人存取自己的問題';
 $s_submit_status = '收到新問題後的狀態';
 $s_assigned_status = '自動分配問題後的狀態';
@@ -976,7 +977,7 @@ $s_custom_field_require_resolved = '解決時為必填欄位';
 $s_custom_field_require_closed = '關閉時為必填欄位';
 $s_link_custom_field_to_project_title = '連結自訂欄位至專案';
 $s_link_custom_field_to_project_button = '連結自訂欄位';
-$s_linked_projects_label = '已連結的專案：';
+$s_linked_projects_label = '已連結的專案';
 $s_custom_field_sequence = '順序';
 $s_custom_field_sequence_label = '順序';
 $s_custom_field_type_enum_string = '0:字串,1:整數,2:浮點數,3:下拉式選單,4:E-Mail,5:多選核選方塊,6:單選清單,7:多選清單,8:日期,9:單選核選項目,10:文字區塊';
@@ -1060,7 +1061,7 @@ $s_view_private_issues = '檢視非公開問題';
 $s_update_readonly_issues = '更新唯讀問題';
 $s_update_issue_status = '更新問題狀態';
 $s_set_view_status = '當回報新問題或說明時設定檢視狀態';
-$s_update_view_status = '更改既有問題或說明的檢視狀態';
+$s_update_view_status = '變更既有問題或附註的檢視狀態';
 $s_show_list_of_users_monitoring_issue = '顯示追蹤此問題的使用者清單';
 $s_notes = '說明';
 $s_add_notes = '新增說明';

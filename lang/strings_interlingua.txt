@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Macofe
  * @author McDutchie
  */
 
@@ -965,7 +966,7 @@ $s_custom_field_require_resolved = 'Obligatori al resolver';
 $s_custom_field_require_closed = 'Obligatori al clauder';
 $s_link_custom_field_to_project_title = 'Ligar campo personalisate al projecto';
 $s_link_custom_field_to_project_button = 'Ligar campo personalisate';
-$s_linked_projects_label = 'Projectos ligate:';
+$s_linked_projects_label = 'Projectos ligate';
 $s_custom_field_sequence = 'Sequentia';
 $s_custom_field_sequence_label = 'Sequentia:';
 $s_custom_field_type_enum_string = '0:Catena,1:Numeric,2:Flottante,3:Enumeration,4:E-mail,5:Quadrato de selection,6:Lista,7:Lista de selection multiple,8:Data,9:Button radio,10:Area de texto';

@@ -40,6 +40,7 @@
  *
  * @author AnakngAraw
  * @author Jojit fb
+ * @author Leeheonjin
  * @author Mirzali
  * @author Sky Harbor
  */
@@ -277,6 +278,8 @@ $s_access_level = 'Antas ng Pagpasok/Akseso';
 $s_update_user_button = 'Isapanahon ang Tagagamit';
 $s_verify_warning = 'Napatotohanan na ang kabatiran hinggil sa iyong kuwenta. Hindi na ngayon angkop/mabisa ang natanggap mong mensahe hinggil sa pagtitiyak ng akawnt.';
 $s_verify_change_password = 'Dapat kang magtakda ng isang hudyat dito upang mapahintulutan kang makalagdang muli.';
+$s_api_token_never_used = 'Hindi kailan man ginamit';
+$s_last_used = 'Huling Ginamit';
 $s_default_account_preferences_title = 'Mga Kagustuhan para sa Account';
 $s_default_project = 'Likas na Nakatakdang Proyekto';
 $s_refresh_delay = 'Nabalam na Pagsasariwa';
@@ -887,6 +890,7 @@ $s_custom_field_require_resolved = 'Kailangan Sa Paglulutas';
 $s_custom_field_require_closed = 'Kailangan Sa Pagsasara';
 $s_link_custom_field_to_project_title = 'Ikawing ang pinasadyang hanay sa proyekto';
 $s_link_custom_field_to_project_button = 'Ikawing ang Pinasadyang Hanay';
+$s_linked_projects_label = 'Mga naka-kawing na proyekto';
 $s_custom_field_sequence = 'Pagkakasunud-sunod';
 $s_custom_field_type_enum_string = '0:Bagting,1:Numeriko/Bilang,2:Nakalutang,3:Enumerasyon,4:E-liham,5:Kahong lagayan ng tsek,6:Talaan,7:Talaan ng maraming pagpipilian,8:Petsa,9:Radyo,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Pangkasalukuyang nakakawing ang hanay na ito sa kahit na isang proyekto lamang. Pampamalagian na ang pagbura sa hanay kapag ipinagpatuloy mo ang lahat ng mga halaga.  Hindi na mababawi pa ang galaw na ito kapag naisakatuparan na. Kung hindi mo nais burahin ang hanay na ito, pindutin ang pindutang Bumalik (\'\'Back\'\') na nasa iyong pantingin-tingin (\'\'browser\'\'). Upang magpatuloy, pindutin ang pindutang nasa ibaba';

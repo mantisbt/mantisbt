@@ -39,6 +39,7 @@
  * @file
  *
  * @author Charmed94
+ * @author Macofe
  * @author Milicevic01
  * @author Rancher
  * @author Srdjan m
@@ -937,9 +938,9 @@ $s_custom_field_require_report = 'Потребно при пријављивањ
 $s_custom_field_require_update = 'Потребно при ажурирању';
 $s_custom_field_require_resolved = 'Потребно при решавању';
 $s_custom_field_require_closed = 'Потребно при затварању';
-$s_link_custom_field_to_project_title = 'Повежи прилагођено поље с пројектом';
+$s_link_custom_field_to_project_title = 'Повежи прилагођено поље с пројектима';
 $s_link_custom_field_to_project_button = 'Повежи прилагођено поље';
-$s_linked_projects_label = 'Повезани пројекти:';
+$s_linked_projects_label = 'Повезани пројекти';
 $s_custom_field_sequence = 'Низ';
 $s_custom_field_sequence_label = 'Низ';
 $s_custom_field_type_enum_string = '0:Ниска,1:Бројчано,2:Со остатком,3:Пребројавање,4:Е-пошта,5:Кућица за означавање,6:Списак,7:Вишеизборни списак,8:Датум,9:Радио,10:Textarea';

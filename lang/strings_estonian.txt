@@ -39,6 +39,7 @@
  * @file
  *
  * @author Avjoska
+ * @author Macofe
  * @author Pikne
  * @author Suwa
  * @author Willux
@@ -924,7 +925,7 @@ $s_custom_field_require_resolved = 'Nõutav lahendamisel';
 $s_custom_field_require_closed = 'Nõutav sulgemisel';
 $s_link_custom_field_to_project_title = 'Lingi kasutajaväli projektile';
 $s_link_custom_field_to_project_button = 'Lingi kasutajaväli';
-$s_linked_projects_label = 'Lingitud projektid:';
+$s_linked_projects_label = 'Lingitud projektid';
 $s_custom_field_sequence = 'Jada';
 $s_custom_field_sequence_label = 'Järjestus:';
 $s_custom_field_type_enum_string = '0:String,1:Numbriline,2:Ujuv,3:Nummerdus,4:E-mail,5:Checkbox,6:Valikloend,7:Mitmikvalikloend,8:Kuupäev,9:Raadio, 10:Textarea';

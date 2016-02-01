@@ -157,6 +157,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 			</div>
 			</div>
 			</div>
+
+			<?php event_signal( 'EVENT_MANAGE_USER_CREATE_FORM' ) ?>
+
 			<div class="widget-toolbox padding-8 clearfix">
 				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'create_user_button' ) ?>" />
 			</div>

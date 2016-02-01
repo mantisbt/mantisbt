@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Milicevic01
  * @author Rancher
  */
 
@@ -887,7 +888,7 @@ $s_custom_field_require_report = 'Potrebno pri prijavljivanju';
 $s_custom_field_require_update = 'Potrebno pri ažuriranju';
 $s_custom_field_require_resolved = 'Potrebno pri rešavanju';
 $s_custom_field_require_closed = 'Potrebno pri zatvaranju';
-$s_link_custom_field_to_project_title = 'Poveži prilagođeno polje s projektom';
+$s_link_custom_field_to_project_title = 'Poveži prilagođeno polje s projektima';
 $s_link_custom_field_to_project_button = 'Poveži prilagođeno polje';
 $s_custom_field_sequence = 'Niz';
 $s_custom_field_type_enum_string = '0:Niska,1:Brojčano,2:So ostatkom,3:Prebrojavanje,4:E-pošta,5:Kućica za označavanje,6:Spisak,7:Višeizborni spisak,8:Datum,9:Radio,10:Textarea';
