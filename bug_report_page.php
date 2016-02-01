@@ -254,7 +254,7 @@ if( $t_show_attachments ) {
 	<tr>
 		<th class="category" width="30%">
 			<?php
-			echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
+			echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span> ';
 			echo '<label for="category_id">';
 			print_documentation_link( 'category' );
 			echo '</label>';

@@ -590,6 +590,7 @@ if( $t_read_write_access ) {
 	</div>
 </form>
 </div>
+<?php } # end if config_can_delete ?>
 
 <?php
 } # end user can change config

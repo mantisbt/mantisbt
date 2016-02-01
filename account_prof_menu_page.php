@@ -91,7 +91,7 @@ if( $g_global_profiles ) {
 <div class="space-10"></div>
 <div id="account-profile-div" class="form-container">
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
-		<fieldset class="required">
+		<fieldset>
 			<legend><span><?php echo lang_get( 'add_profile_title' ) ?></span></legend>
 
 <div class="widget-box widget-color-blue2">
