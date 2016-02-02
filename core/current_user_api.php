@@ -240,16 +240,11 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 	$f_filter_string = gpc_get_string( 'filter', '' );
 	$t_filter = '';
 
-	if( !is_blank( $f_filter_string ) ) {
-		if( is_numeric( $f_filter_string ) ) {
-			$t_token = token_get_value( TOKEN_FILTER );
-			if( null != $t_token ) {
-				$t_filter = json_decode( $t_token, true );
-				$t_filter['token_id'] = $f_filter_string;
-			}
-		} else {
-			// TODO @cproensa remove this, remainders of ancient #4609
-			$t_filter = json_decode( $f_filter_string, true );
+	if( !is_blank( $f_filter_string ) && is_numeric( $f_filter_string ) ) {
+		$t_token = token_get_value( TOKEN_FILTER );
+		if( null != $t_token ) {
+			$t_filter = json_decode( $t_token, true );
+			$t_filter['token_id'] = $f_filter_string;
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {
