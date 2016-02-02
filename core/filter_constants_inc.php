@@ -67,3 +67,6 @@ define( 'FILTER_PROPERTY_PROFILE_ID', 'profile_id' ); # show_profile
 define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
 define( 'FILTER_PROPERTY_OS', 'os' );
 define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );
+
+# runtime properties
+define( 'FILTER_PROPERTY_TEMP_TOKEN_ID', 'token_id' );

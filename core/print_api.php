@@ -1285,7 +1285,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			return;
 	}
 
-	$t_filter_id_param = isset( $g_filter['token_id'] ) ? '&filter=' . $g_filter['token_id'] : '' ;
+	$t_filter_id_param = isset( $g_filter[FILTER_PROPERTY_TEMP_TOKEN_ID] ) ? '&filter=' . $g_filter[FILTER_PROPERTY_TEMP_TOKEN_ID] : '' ;
 
 	if( $p_sort_field == $p_sort ) {
 		# We toggle between ASC and DESC if the user clicks the same sort order

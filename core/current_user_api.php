@@ -244,7 +244,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		$t_token = token_get_value( TOKEN_FILTER );
 		if( null != $t_token ) {
 			$t_filter = json_decode( $t_token, true );
-			$t_filter['token_id'] = $f_filter_string;
+			$t_filter[FILTER_PROPERTY_TEMP_TOKEN_ID] = $f_filter_string;
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {
