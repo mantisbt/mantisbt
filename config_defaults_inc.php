@@ -547,7 +547,7 @@ $g_validate_email = ON;
  *
  * @global integer $g_email_login_enabled
  */
-$g_email_login_enabled = ON;
+$g_email_login_enabled = OFF;
 
 /**
  * Ensure that email addresses are unique.

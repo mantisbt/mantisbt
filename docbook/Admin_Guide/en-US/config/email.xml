@@ -174,7 +174,7 @@
 					Enable support for logging in by email and password, in addition to
 					username and password.  This will only work as long as there is a single
 					user with the specified email address and the email address is not blank.
-					The default value is ON.
+					The default value is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
