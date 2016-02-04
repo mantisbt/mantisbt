@@ -1195,26 +1195,33 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 }
 
 /**
- * retun an array of sub-project IDs of all project to which the user has access
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Returns an array of project and sub-project IDs of all projects to which the
+ * user has access and that are children of the specified project.
+ *
+ * @param integer $p_user_id    A valid user identifier or null for logged in user.
+ * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
+ *                              all top level projects and sub-projects.
  * @return array
  */
-function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
+function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( $p_user_id === null ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+
 	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = user_get_accessible_projects( $p_user_id );
+		$t_top_projects = user_get_accessible_projects( $p_user_id );
 
 		# Cover the case for PHP < 5.4 where array_combine() returns
 		# false and triggers warning if arrays are empty (see #16187)
-		if( empty( $t_topprojects ) ) {
+		if( empty( $t_top_projects ) ) {
 			return array();
 		}
 
 		# Create a combined array where key = value
-		$t_project_ids = array_combine( $t_topprojects, $t_topprojects );
+		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );
 
 		# Add all subprojects user has access to
-		foreach( $t_topprojects as $t_project ) {
+		foreach( $t_top_projects as $t_project ) {
 			$t_subprojects_ids = user_get_all_accessible_subprojects( $p_user_id, $t_project );
 			foreach( $t_subprojects_ids as $t_id ) {
 				$t_project_ids[$t_id] = $t_id;

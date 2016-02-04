@@ -32,16 +32,13 @@
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
+require_api( 'billing_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-if( !config_get( 'time_tracking_enabled' ) ) {
-	trigger_error( ERROR_ACCESS_DENIED, ERROR );
-}
-
-access_ensure_project_level( config_get( 'time_tracking_reporting_threshold' ) );
+billing_ensure_reporting_access();
 
 html_page_top( lang_get( 'time_tracking_billing_link' ) );
 ?>
