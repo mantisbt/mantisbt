@@ -140,28 +140,38 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . '_id';
 
+	$t_param = array(
+		$t_id_col     => $t_id,
+		'title'       => $p_title,
+		'description' => $p_desc,
+		'diskfile'    => $t_unique_name,
+		'filename'    => $p_name,
+		'folder'      => $t_file_path,
+		'filesize'    => $t_file_size,
+		'file_type'   => $p_file_type,
+		'date_added'  => db_now(),
+		'user_id'     => (int)$p_user_id,
+	);
+	# Oracle has to update BLOBs separately
+	if( !db_is_oracle() ) {
+		$t_param['content'] = $c_content;
+	}
+	$t_query_param = db_param();
+	for( $i = 1; $i < count( $t_param ); $i++ ) {
+		$t_query_param .= ', ' . db_param();
+	}
+
 	$t_query = 'INSERT INTO ' . $t_file_table . '
-				( ' . $t_id_col . ', title, description, diskfile, filename, folder, filesize, file_type, date_added, user_id )
-		VALUES
-				( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-				    . db_param() . ' )';
-	db_query( $t_query, array(
-		$t_id, $p_title, $p_desc,
-		$t_unique_name, $p_name, $t_file_path,
-		$t_file_size, $p_file_type, db_now(),
-		(int)$p_user_id,
-	) );
+		( ' . implode(', ', array_keys( $t_param ) ) . ' )
+	VALUES
+		( ' . $t_query_param . ' )';
+	db_query( $t_query, array_values( $t_param ) );
 
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
 
 	if( db_is_oracle() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
-	} else {
-		$t_query = "UPDATE $t_file_table SET content=" . db_param() . " WHERE id = " . db_param();
-		db_query( $t_query, array( $c_content, $t_attachment_id ) );
 	}
 
 	if( 'bug' == $p_table ) {
