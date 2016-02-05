@@ -373,16 +373,16 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 	# If user authenticated successfully then update the local DB with information
 	# from LDAP.  This will allow us to use the local data after login without
-	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
+	# having to go back to LDAP.
 	if( $t_authenticated ) {
 		$t_user_id = user_get_id_by_name( $p_username );
 
 		if( false !== $t_user_id ) {
-
 			$t_fields_to_update = array();
-			# Do we need to wipe a previously cached password?
+
+			# Wipe previously cached password if necessary
 			if( substr( user_get_field( $t_user_id, 'password' ), 0, 1) != '!' ) {
-				user_set_field( 'password', '!' + auth_generate_random_password() );
+				$t_fields_to_update['password'] = '!' + auth_generate_random_password();
 			}
 
 			if( ON == config_get( 'use_ldap_realname' ) ) {
