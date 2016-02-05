@@ -1539,6 +1539,10 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
  * @return void
  */
 function user_set_fields( $p_user_id, array $p_fields ) {
+	if( empty( $p_fields ) ) {
+		return;
+	}
+
 	if( !array_key_exists( 'protected', $p_fields ) ) {
 		user_ensure_unprotected( $p_user_id );
 	}
