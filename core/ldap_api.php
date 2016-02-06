@@ -381,8 +381,8 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			$t_fields_to_update = array();
 
 			# Wipe previously cached password if necessary
-			if( !auth_is_nocache_password( user_get_field( $t_user_id, 'password' ) ) ) {
-				$t_fields_to_update['password'] = auth_generate_nocache_password();
+			if( !auth_is_no_login_password( user_get_field( $t_user_id, 'password' ) ) ) {
+				$t_fields_to_update['password'] = auth_generate_no_login_password();
 			}
 
 			if( ON == config_get( 'use_ldap_realname' ) ) {
