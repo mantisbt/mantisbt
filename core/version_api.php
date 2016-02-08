@@ -415,7 +415,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
         $t_project_ids [] = $p_project_id;
     }
 
-    if (!p_obsolete_later) {
+    if (!$p_obsolete_later) {
         $t_is_cached = true;
         foreach( $t_project_ids as $t_project_id ) {
             if( !isset( $g_cache_versions_project[$t_project_id] ) ) {
