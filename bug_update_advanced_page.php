@@ -660,8 +660,12 @@ if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $tpl_bug_i
 
 	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $tpl_bug_id ) ) {
-		echo '<input ', helper_get_tab_index(), ' type="checkbox" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
+		echo '<input ', helper_get_tab_index(), ' type="radio" name="visible" value="public" ', check_checked( t_default_bugnote_view_status, VS_PUBLIC ), ' />';
+		echo lang_get( 'public' );		
+		echo '<input ', helper_get_tab_index(), ' type="radio" name="visible" value="private" ', check_checked( t_default_bugnote_view_status, VS_PRIVATE ), ' />';
 		echo lang_get( 'private' );
+		echo '<input ', helper_get_tab_index(), ' type="radio" name="visible" value="relnote" ', check_checked( t_default_bugnote_view_status, VS_RELNOTE ), ' />';
+		echo lang_get( 'relnote' );		
 	} else {
 		echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 	}

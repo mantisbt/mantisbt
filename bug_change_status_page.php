@@ -82,7 +82,7 @@
 		}
 
 		if ( $f_handler_id != NO_USER ) {
-            if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+			if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
 				trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 			}
 
@@ -193,7 +193,7 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 	</td>
 	<td>
 	<?php
-	    print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"16\" value=\"".$t_date_to_display."\" />";
+		print "<input ".helper_get_tab_index()." type=\"text\" id=\"due_date\" name=\"due_date\" size=\"20\" maxlength=\"16\" value=\"".$t_date_to_display."\" />";
 		date_print_calendar();
 	?>
 	</td>
@@ -250,7 +250,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</td>
 		<td>
-			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id );			?>
+			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id );         ?>
 		</td>
 	</tr>
 <?php
@@ -302,7 +302,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 ?>
 <!-- Bug was re-opened -->
 <?php
-		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
+		printf("    <input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
 	}
 ?>
 
@@ -325,11 +325,22 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 	<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if ( $f_new_status >= $t_resolved ) {
+			$t_default_bugnote_view_status = VS_RELNOTE;
+		}
 		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
-			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+			<input type="radio" name="visible" value="public" <?php check_checked( $t_default_bugnote_view_status, VS_PUBLIC ); ?> />
+<?php
+			echo lang_get( 'public' );
+?>
+			<input type="radio" name="visible" value="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 <?php
 			echo lang_get( 'private' );
+?>
+			<input type="radio" name="visible" value="relnote" <?php check_checked( $t_default_bugnote_view_status, VS_RELNOTE ); ?> />
+<?php
+			echo lang_get( 'relnote' );
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 		}

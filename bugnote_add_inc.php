@@ -59,9 +59,17 @@
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
-			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+			<input type="radio" name="visible" value="public" <?php check_checked( $t_default_bugnote_view_status, VS_PUBLIC ); ?> />
 <?php
-			echo lang_get( 'private' );
+			echo lang_get( 'public' );
+?>
+			<input type="radio" name="visible" value="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+<?php
+			echo lang_get( 'private' );	
+?>
+			<input type="radio" name="visible" value="relnote" <?php check_checked( $t_default_bugnote_view_status, VS_RELNOTE ); ?> />
+<?php
+			echo lang_get( 'relnote' );
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 		}

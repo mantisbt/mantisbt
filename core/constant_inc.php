@@ -117,6 +117,7 @@ define( 'ETA_OVER_ONE_MONTH', 60 );
 # project view_state
 define( 'VS_PUBLIC', 10 );
 define( 'VS_PRIVATE', 50 );
+define( 'VS_RELNOTE', 100 );
 
 # direction
 define( 'ASCENDING', 101 );

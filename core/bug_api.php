@@ -1540,7 +1540,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
  * @access public
  * @uses database_api.php
  */
-function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_private = false ) {
+function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_bugnote_relnote = false ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1573,7 +1573,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
-		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', NULL, FALSE );
+		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, $p_bugnote_relnote, 0, '', NULL, FALSE );
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
@@ -1596,13 +1596,13 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
  * @return bool (always true)
  * @access public
  */
-function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
+function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_bugnote_relnote = false, $p_time_tracking = '0:00' ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
 	# Add bugnote if supplied ignore a false return
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, $p_bugnote_relnote, 0, '', NULL, FALSE );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
@@ -1626,7 +1626,8 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
  * @return bool (always true)
  * @access public
  */
-function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_version = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
+function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_version = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_text = '', $p_bugnote_private = false, 
+						$p_bugnote_relnote = false, $p_time_tracking = '0:00' ) {
 	$c_resolution = (int) $p_resolution;
 	if( null == $p_status ) {
 		$p_status = config_get( 'bug_resolved_status_threshold' );
@@ -1636,7 +1637,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_ve
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, $p_bugnote_relnote, 0, '', NULL, FALSE );
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
@@ -1712,13 +1713,13 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_ve
  * @uses bugnote_api.php
  * @uses config_api.php
  */
-function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
+function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false, $p_bugnote_relnote = false ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, $p_bugnote_relnote, 0, '', NULL, FALSE );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );

@@ -104,6 +104,9 @@ $num_notes = count( $t_bugnotes );
 		if ( VS_PRIVATE == $t_bugnote->view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
 			$t_bugnote_note_css	= 'bugnote-note-private';
+		} else if ( VS_RELNOTE == $t_bugnote->view_state ) {
+			$t_bugnote_css		= 'bugnote-relnote';
+			$t_bugnote_note_css	= 'bugnote-note-relnote';
 		} else {
 			$t_bugnote_css		= 'bugnote-public';
 			$t_bugnote_note_css	= 'bugnote-note-public';
@@ -166,9 +169,15 @@ $num_notes = count( $t_bugnotes );
 					if ( VS_PRIVATE == $t_bugnote->view_state ) {
 						echo " ";
 						print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
+						print_button( 'bugnote_set_view_state.php?relnote=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_relnote' ) );
+					} else if ( VS_RELNOTE == $t_bugnote->view_state ) {
+						echo " ";
+						print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+						print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
 					} else {
 						echo " ";
 						print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+						print_button( 'bugnote_set_view_state.php?relnote=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_relnote' ) );
 					}
 				}
 			}
