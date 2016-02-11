@@ -722,20 +722,35 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . '_id';
 
-	$t_query = 'INSERT INTO ' . $t_file_table . ' ( ' . $t_id_col . ', title, description, diskfile, filename, folder,
-		filesize, file_type, date_added, user_id )
+	$t_param = array(
+		$t_id_col     => $t_id,
+		'title'       => $p_title,
+		'description' => $p_desc,
+		'diskfile'    => $t_unique_name,
+		'filename'    => $t_file_name,
+		'folder'      => $t_file_path,
+		'filesize'    => $t_file_size,
+		'file_type'   => $p_file['type'],
+		'date_added'  => $p_date_added,
+		'user_id'     => (int)$p_user_id,
+	);
+	# Oracle has to update BLOBs separately
+	if( !db_is_oracle() ) {
+		$t_param['content'] = $c_content;
+	}
+	$t_query_param = db_param();
+	for( $i = 1; $i < count( $t_param ); $i++ ) {
+		$t_query_param .= ', ' . db_param();
+	}
+
+	$t_query = 'INSERT INTO ' . $t_file_table . '
+		( ' . implode(', ', array_keys( $t_param ) ) . ' )
 	VALUES
-		( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() .
-		  ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $t_id, $p_title, $p_desc, $t_unique_name, $t_file_name, $t_file_path,
-									 $t_file_size, $p_file['type'], $p_date_added, (int)$p_user_id ) );
-	$t_attachment_id = db_insert_id( $t_file_table );
+		( ' . $t_query_param . ' )';
+	db_query( $t_query, array_values( $t_param ) );
 
 	if( db_is_oracle() ) {
-		db_update_blob( $t_file_table, 'content', $c_content, 'diskfile=\'$t_unique_name\'' );
-	} else {
-		$t_query = 'UPDATE ' . $t_file_table . ' SET content=' . db_param() . ' WHERE id = ' . db_param();
-		db_query( $t_query, array( $c_content, $t_attachment_id ) );
+		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
 	}
 
 	if( 'bug' == $p_table ) {

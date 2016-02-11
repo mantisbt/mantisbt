@@ -854,6 +854,14 @@ $g_upgrade[201] = array( 'CreateIndexSQL', array( 'idx_user_id_name', db_get_tab
 
 # Release marker: 1.3.0-rc.1
 
+$g_upgrade[202] = array( 'CreateIndexSQL', array( 'idx_email', db_get_table( 'user' ), 'email' ) );
+
+# Ensure consistent definition of file attachment blob columns, see #20547
+$g_upgrade[203] = array( 'AlterColumnSQL', array( db_get_table( 'bug_file' ), "
+	content					B		NULL " . $t_blob_default ) );
+$g_upgrade[204] = array( 'AlterColumnSQL', array( db_get_table( 'project_file' ), "
+	content					B		NULL " . $t_blob_default ) );
+
 # Release marker: 1.3.0
 
 

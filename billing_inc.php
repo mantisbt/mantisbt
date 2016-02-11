@@ -152,7 +152,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		# Retrieve time tracking information
 		$t_from = $t_bugnote_stats_from_y . '-' . $t_bugnote_stats_from_m . '-' . $t_bugnote_stats_from_d;
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
-		$t_bugnote_stats = bugnote_stats_get_project_array( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
+		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
 		# Sort the array by bug_id, user/real name
 		if( ON == config_get( 'show_realname' ) ) {
@@ -160,19 +160,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		} else {
 			$t_name_field = 'username';
 		}
-		$t_sort_bug = $t_sort_name = array();
-		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
-			$t_sort_bug[$t_key] = $t_item['bug_id'];
-			$t_sort_name[$t_key] = $t_item[$t_name_field];
-		}
-		array_multisort( $t_sort_bug, SORT_NUMERIC, $t_sort_name, $t_bugnote_stats );
-		unset( $t_sort_bug, $t_sort_name );
 
 		if( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
 		}
-
-		$t_prev_id = -1;
 
 		echo '<br />';
 
@@ -210,53 +201,41 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 	</tr>
 <?php
-		$t_sum_in_minutes = 0;
-		$t_user_summary = array();
+		foreach ( $t_bugnote_stats['issues'] as $t_issue_id => $t_issue ) {
+			$t_project_info = ( !isset( $f_bug_id ) && $f_project_id == ALL_PROJECTS ) ? '[' . project_get_name( $t_issue['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
+			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
+			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 
-		# Initialize the user summary array
-		foreach ( $t_bugnote_stats as $t_item ) {
-			$t_user_summary[$t_item[$t_name_field]] = 0;
-		}
-
-		# Calculate the totals
-		foreach ( $t_bugnote_stats as $t_item ) {
-			$t_sum_in_minutes += $t_item['sum_time_tracking'];
-			$t_user_summary[$t_item[$t_name_field]] += $t_item['sum_time_tracking'];
-
-			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
-			if( $t_item['bug_id'] != $t_prev_id ) {
-				$t_project_info = ( !isset( $f_bug_id ) && $f_project_id == ALL_PROJECTS ) ? '[' . project_get_name( $t_item['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
-				$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_item['summary'] );
-				echo '<tr><td colspan="4">' . $t_link . '</td></tr>';
-				$t_prev_id = $t_item['bug_id'];
-			}
+			foreach( $t_issue['users'] as $t_username => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
-			<?php echo $t_item[$t_name_field] ?>
+			<?php echo $t_username ?>
 		</td>
 		<td class="small-caption">
-			<?php echo $t_item['sum_time_tracking'] ?>
+			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ) ?>
 		</td>
 <?php		if( $t_cost_col ) { ?>
-		<td class="small-caption pull-right">
-			<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
+		<td class="small-caption right">
+			<?php echo string_attribute( number_format( $t_user_info['cost'], 2 ) ); ?>
 		</td>
 <?php		} ?>
 	</tr>
 
-<?php	} # end for loop ?>
+<?php
+			} # end of users within issues loop
+		} # end for issues loop ?>
 
 	<tr>
 		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption">
-			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
+		<td class="small-caption bold">
+			<?php echo db_minutes_to_hhmm( $t_bugnote_stats['total']['minutes'] ); ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption pull-right">
-			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
+		<td class="small-caption bold right">
+			<?php echo string_attribute( number_format( $t_bugnote_stats['total']['cost'], 2 ) ); ?>
 		</td>
 <?php 	} ?>
 	</tr>
@@ -281,32 +260,32 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
-	foreach ( $t_user_summary as $t_username => $t_total_time ) {
+	foreach ( $t_bugnote_stats['users'] as $t_username => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
 			<?php echo $t_username; ?>
 		</td>
 		<td class="small-caption">
-			<?php echo db_minutes_to_hhmm( $t_total_time ); ?>
+			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ); ?>
 		</td>
 <?php		if( $t_cost_col ) { ?>
-		<td class="small-caption pull-right">
-			<?php echo string_attribute( number_format( $t_total_time * $f_bugnote_cost / 60, 2 ) ); ?>
+		<td class="small-caption right">
+			<?php echo string_attribute( number_format( $t_user_info['cost'], 2 ) ); ?>
 		</td>
 <?php		} ?>
 	</tr>
 <?php	} ?>
-	<tr>
-		<td class="small-caption">
+	<tr class="row-category2">
+		<td class="small-caption bold">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption">
-			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
+		<td class="small-caption bold">
+			<?php echo db_minutes_to_hhmm( $t_bugnote_stats['total']['minutes'] ); ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption pull-right">
-			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
+		<td class="small-caption bold right">
+			<?php echo string_attribute( number_format( $t_bugnote_stats['total']['cost'], 2 ) ); ?>
 		</td>
 <?php	} ?>
 	</tr>

@@ -223,6 +223,33 @@ function auth_auto_create_user( $p_username, $p_password ) {
 }
 
 /**
+ * Given a login username provided by the user via the web UI or our API,
+ * get the user id.  The login username can be a username or an email address.
+ * The email address will work as long there is a single enabled account with
+ * such address and it is not blank.
+ *
+ * @param string $p_login_name The login name.
+ * @return integer|boolean user id or false.
+ */
+function auth_get_user_id_from_login_name( $p_login_name ) {
+	$t_user_id = user_get_id_by_name( $p_login_name );
+
+	# If user is not found by name, check by email as long as there is only
+	# a single match.
+	if( $t_user_id === false &&
+	    !is_blank( $p_login_name ) &&
+	    config_get_global( 'email_login_enabled' ) &&
+	    email_is_valid( $p_login_name ) ) {
+		$t_user_ids_by_email = user_get_enabled_ids_by_email( $p_login_name );
+		if ( count( $t_user_ids_by_email ) == 1 ) {
+			$t_user_id = $t_user_ids_by_email[0];
+		}
+	}
+
+	return $t_user_id;
+}
+
+/**
  * Attempt to login the user with the given password
  * If the user fails validation, false is returned
  * If the user passes validation, the cookies are set and
@@ -235,7 +262,7 @@ function auth_auto_create_user( $p_username, $p_password ) {
  * @access public
  */
 function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
-	$t_user_id = user_get_id_by_name( $p_username );
+	$t_user_id = auth_get_user_id_from_login_name( $p_username );
 
 	if( $t_user_id === false ) {
 		$t_user_id = auth_auto_create_user( $p_username, $p_password );
@@ -319,7 +346,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 		$t_password = null;
 	}
 
-	$t_user_id = user_get_id_by_name( $t_username );
+	$t_user_id = auth_get_user_id_from_login_name( $t_username );
 	if( $t_user_id === false ) {
 		$t_user_id = auth_auto_create_user( $t_username, $p_password );
 		if( $t_user_id === false ) {

@@ -66,6 +66,12 @@ if( !user_is_name_valid( $f_username ) ) {
 	$f_username = '';
 }
 
+if( config_get_global( 'email_login_enabled' ) ) {
+	$t_username_label = lang_get( 'username_or_email' );
+} else {
+	$t_username_label = lang_get( 'username' );
+}
+
 $t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 
 # If user is already authenticated and not anonymous
@@ -302,7 +308,7 @@ if( count( $t_warnings ) > 0 ) {
 }
 ?>
 </div>
-				
+
 <div class="toolbar center">
 
 <?php

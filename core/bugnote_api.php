@@ -686,67 +686,6 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 }
 
 /**
- * Returns an array of bugnote stats
- * @param integer $p_project_id A project identifier.
- * @param string  $p_from       Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param string  $p_to         Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param integer $p_cost       Cost.
- * @return array array of bugnote stats
- * @access public
- */
-function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
-	$t_params = array();
-	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
-	$c_from = strtotime( $p_from );
-
-	if( $c_to === false || $c_from === false ) {
-		error_parameters( array( $p_from, $p_to ) );
-		trigger_error( ERROR_GENERIC, ERROR );
-	}
-
-	if( ALL_PROJECTS != $p_project_id ) {
-		$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
-		$t_params[] = $p_project_id;
-	} else {
-		$t_project_where = '';
-	}
-
-	if( !is_blank( $c_from ) ) {
-		$t_from_where = ' AND bn.date_submitted >= ' . db_param();
-		$t_params[] = $c_from;
-	} else {
-		$t_from_where = '';
-	}
-
-	if( !is_blank( $c_to ) ) {
-		$t_to_where = ' AND bn.date_submitted <= ' . db_param();
-		$t_params[] = $c_to;
-	} else {
-		$t_to_where = '';
-	}
-
-	$t_results = array();
-
-	$t_query = 'SELECT username, realname, summary, b.project_id project_id, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
-			FROM {user} u, {bugnote} bn, {bug} b
-			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
-			' . $t_project_where . $t_from_where . $t_to_where . '
-			GROUP BY bn.bug_id, u.username, u.realname, b.summary
-			ORDER BY bn.bug_id';
-	$t_result = db_query( $t_query, $t_params );
-
-	$t_cost_min = $p_cost / 60.0;
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_total_cost = $t_cost_min * $t_row['sum_time_tracking'];
-		$t_row['cost'] = $t_total_cost;
-		$t_results[] = $t_row;
-	}
-
-	return $t_results;
-}
-
-/**
  * Clear a bugnote from the cache or all bug notes if no bugnote id specified.
  * @param integer $p_bugnote_id Identifier to clear (optional).
  * @return boolean

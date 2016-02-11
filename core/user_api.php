@@ -254,6 +254,53 @@ function user_ensure_name_unique( $p_username ) {
 }
 
 /**
+ * Checks if the email address is unique.
+ *
+ * @param string $p_email The email to check.
+ * @param integer $p_user_id The user id that we are validating for or null for
+ *                           the case of a new user.
+ *
+ * @return boolean true: unique or blank, false: otherwise
+ */
+function user_is_email_unique( $p_email, $p_user_id = null ) {
+	if( is_blank( $p_email ) ) {
+		return true;
+	}
+
+	$p_email = trim( $p_email );
+
+	if ( $p_user_id === null ) {
+		$t_query = 'SELECT email FROM {user} WHERE email=' . db_param();
+		$t_result = db_query( $t_query, array( $p_email ), 1 );
+	} else {
+		$t_query = 'SELECT email FROM {user} WHERE id<>' . db_param() .
+			' AND email=' . db_param();
+		$t_result = db_query( $t_query, array( $p_user_id, $p_email ), 1 );
+	}
+
+	return !db_result( $t_result );
+}
+
+/**
+ * Check if the email is unique and trigger an ERROR if it isn't
+ *
+ * @param string $p_email The email address to check.
+ * @param integer $p_user_id The user id that we are validating for or null for
+ *                           the case of a new user.
+ *
+ * @return void
+ */
+function user_ensure_email_unique( $p_email, $p_user_id = null ) {
+	if( !config_get_global( 'email_ensure_unique' ) ) {
+		return;
+	}
+
+	if( !user_is_email_unique( $p_email, $p_user_id ) ) {
+		trigger_error( ERROR_USER_EMAIL_NOT_UNIQUE, ERROR );
+	}
+}
+
+/**
  * Check if the realname is a valid username (does not account for uniqueness)
  * Return 0 if it is invalid, The number of matches + 1
  *
@@ -529,6 +576,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
+	user_ensure_email_unique( $p_email );
 	user_ensure_realname_unique( $p_username, $p_realname );
 	email_ensure_valid( $p_email );
 
@@ -596,6 +644,10 @@ function user_signup( $p_username, $p_email = null ) {
 	}
 
 	$p_email = trim( $p_email );
+
+	email_ensure_not_disposable( $p_email );
+	email_ensure_valid( $p_email );
+	user_ensure_email_unique( $p_email );
 
 	# Create random password
 	$t_password = auth_generate_random_password();
@@ -739,6 +791,30 @@ function user_get_id_by_email( $p_email ) {
 	return false;
 }
 
+/**
+ * Given an email address, this method returns the ids of the enabled users with
+ * that address.
+ *
+ * The returned list will be sorted by higher access level first.
+ *
+ * @param string $p_email The email address, can be an empty string to get users
+ *                        without an email address.
+ *
+ * @return array The user ids or an empty array.
+ */
+function user_get_enabled_ids_by_email( $p_email ) {
+	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param() .
+		' AND enabled=' . db_param() . ' ORDER BY access_level DESC';
+	$t_result = db_query( $t_query, array( $p_email, 1 ) );
+
+	$t_user_ids = array();
+	while ( $t_row = db_fetch_array( $t_result ) ) {
+		user_cache_database_result( $t_row );
+		$t_user_ids[] = (int)$t_row['id'];
+	}
+
+	return $t_user_ids;
+}
 
 /**
  * Get a user id from their real name
@@ -1119,26 +1195,33 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 }
 
 /**
- * retun an array of sub-project IDs of all project to which the user has access
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Returns an array of project and sub-project IDs of all projects to which the
+ * user has access and that are children of the specified project.
+ *
+ * @param integer $p_user_id    A valid user identifier or null for logged in user.
+ * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
+ *                              all top level projects and sub-projects.
  * @return array
  */
-function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
+function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( $p_user_id === null ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+
 	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = user_get_accessible_projects( $p_user_id );
+		$t_top_projects = user_get_accessible_projects( $p_user_id );
 
 		# Cover the case for PHP < 5.4 where array_combine() returns
 		# false and triggers warning if arrays are empty (see #16187)
-		if( empty( $t_topprojects ) ) {
+		if( empty( $t_top_projects ) ) {
 			return array();
 		}
 
 		# Create a combined array where key = value
-		$t_project_ids = array_combine( $t_topprojects, $t_topprojects );
+		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );
 
 		# Add all subprojects user has access to
-		foreach( $t_topprojects as $t_project ) {
+		foreach( $t_top_projects as $t_project ) {
 			$t_subprojects_ids = user_get_all_accessible_subprojects( $p_user_id, $t_project );
 			foreach( $t_subprojects_ids as $t_id ) {
 				$t_project_ids[$t_id] = $t_id;
@@ -1456,6 +1539,10 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
  * @return void
  */
 function user_set_fields( $p_user_id, array $p_fields ) {
+	if( empty( $p_fields ) ) {
+		return;
+	}
+
 	if( !array_key_exists( 'protected', $p_fields ) ) {
 		user_ensure_unprotected( $p_user_id );
 	}
@@ -1541,7 +1628,15 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
  * @return boolean
  */
 function user_set_email( $p_user_id, $p_email ) {
+	$p_email = trim( $p_email );
+
 	email_ensure_valid( $p_email );
+	email_ensure_not_disposable( $p_email );
+
+	$t_old_email = user_get_email( $p_user_id );
+	if( strcasecmp( $t_old_email, $p_email ) != 0 ) {
+		user_ensure_email_unique( $p_email );
+	}
 
 	return user_set_field( $p_user_id, 'email', $p_email );
 }
