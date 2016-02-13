@@ -190,11 +190,10 @@ if( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_
 				}
 
 				print_enum_string_option_list( 'resolution', $t_resolution );
-?>
-			</select>
-		</span>
-		<span class="label-style"></span>
-	</div>
+			?>
+					</select>
+				</td>
+			</tr>
 <?php
 if( $f_new_status >= $t_resolved
 	&& $f_new_status < $t_closed
@@ -236,8 +235,6 @@ if( $f_new_status >= $t_resolved
 <?php } ?>
 
 <?php
-	}
-
 	if( $t_can_update_due_date ) {
 		$t_date_to_display = '';
 
@@ -246,18 +243,17 @@ if( $f_new_status >= $t_resolved
 		}
 ?>
 	<!-- Due date -->
-	<div class="field-container">
-		<label for="due_date">
-			<span><?php echo lang_get( 'due_date' ) ?></span>
-		</label>
-		<span class="input">
- 			<input type="text" id="due_date" name="due_date"
- 				class="datetime" size="20" maxlength="16"
- 				<?php helper_get_tab_index() ?>
- 				value="<?php echo $t_date_to_display ?>" />
-		</span>
-		<span class="label-style"></span>
-	</div>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'due_date' ) ?>
+		</th>
+		<td>
+			<input type="text" id="due_date" name="due_date"
+				class="datetime" size="20" maxlength="16"
+				<?php helper_get_tab_index() ?>
+				value="<?php echo $t_date_to_display ?>" />
+		</td>
+	</tr>
 
 <?php
 	}
