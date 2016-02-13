@@ -238,7 +238,7 @@ if( $f_new_status >= $t_resolved
 <?php
 	}
 
-	if( true || $t_can_update_due_date ) {
+	if( $t_can_update_due_date ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
