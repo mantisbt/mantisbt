@@ -235,7 +235,7 @@ print_recently_visited();
 <?php
 	}
 
-	if( true || $t_can_update_due_date ) {
+	if( $t_can_update_due_date ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
