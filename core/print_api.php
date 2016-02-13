@@ -167,12 +167,13 @@ function print_successful_redirect_to_bug( $p_bug_id ) {
  */
 function print_successful_redirect( $p_redirect_to ) {
 	if( helper_log_to_page() ) {
-		html_page_top( null, $p_redirect_to );
+		layout_page_header( null, $p_redirect_to );
+		layout_page_begin();
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
 		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 		echo '</div>';
-		html_page_bottom();
+		layout_page_end();
 	} else {
 		print_header_redirect( $p_redirect_to );
 	}

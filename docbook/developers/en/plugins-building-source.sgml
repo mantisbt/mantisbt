@@ -101,7 +101,7 @@ $s_plugin_Example_reset = "Reset Value";
 		<programlisting><filename>Example/pages/config_page.php</filename>
 &lt;?php
 
-html_page_top( plugin_lang_get( 'configuration' ) );
+layout_page_header( plugin_lang_get( 'configuration' ) );
 $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 ?&gt;

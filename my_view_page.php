@@ -52,6 +52,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
+require_api( 'layout_api.php' );
 require_css( 'status_config.php' );
 
 auth_ensure_user_authenticated();
