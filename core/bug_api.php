@@ -1714,9 +1714,12 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# Add bugnote if supplied ignore a false return
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
+	# @todo cproensa: is the comment above still valid? bugnote will be added even if bug-update cant be performed
 	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->status = config_get( 'bug_closed_status_threshold' );
+	$t_bugdata->update( false, true );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );
