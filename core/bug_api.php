@@ -1657,36 +1657,41 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
 
-	# extract current information into history variables
-	$h_status = bug_get_field( $p_bug_id, 'status' );
-	$h_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_original_handler_id = $t_bugdata->handler_id;
+	$t_bugdata->handler_id = $p_user_id;
 
-	if( ( ON == config_get( 'auto_set_status_to_assigned' ) ) && ( NO_USER != $p_user_id ) ) {
-		$t_ass_val = config_get( 'bug_assigned_status' );
-	} else {
-		$t_ass_val = $h_status;
+	# Handle automatic assignment of issues.
+	if( config_get( 'auto_set_status_to_assigned' ) &&
+		$t_original_handler_id == NO_USER &&
+		$p_user_id != NO_USER &&
+		$t_bugdata->status == $t_bugdata->status &&
+		$t_bugdata->status < config_get( 'bug_assigned_status' )
+		) {
+		$t_bugdata->status = config_get( 'bug_assigned_status' );
 	}
 
-	if( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
+	if( !class_exists( 'Bug_assign_post_callback' ) ) {
+		class Bug_assign_post_callback {
+			public $bugnote_text, $bugnote_private;
+			function __invoke( $p_bugdata ) {
+				# Add bugnote if supplied ignore false return
+				bugnote_add( $p_bugdata->id, $this->bugnote_text, 0, $this->bugnote_private, 0, '', null, false );
+			}
+		}
+	}
 
-		# get user id
-		$t_query = 'UPDATE {bug}
-					  SET handler_id=' . db_param() . ', status=' . db_param() . '
-					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_user_id, $t_ass_val, $p_bug_id ) );
+	if( !empty($p_bugnote_text) ) {
+		$t_callback = new Bug_assign_post_callback();
+		$t_callback->bugnote_text = $p_bugnote_text;
+		$t_callback->bugnote_private = $p_bugnote_private;
+	} else {
+		$t_callback = null;
+	}
 
-		# log changes
-		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_ass_val );
-		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
+	$t_bugdata->update( false, false, $t_callback );
 
-		# Add bugnote if supplied ignore false return
-		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
-
-		# updated the last_updated date
-		bug_update_date( $p_bug_id );
-
-		bug_clear_cache( $p_bug_id );
-
+	if( $t_original_handler_id != $p_user_id ) {
 		# Send email for change of handler
 		email_owner_changed( $p_bug_id, $h_handler_id, $p_user_id );
 	}
