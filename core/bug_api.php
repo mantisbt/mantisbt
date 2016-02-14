@@ -549,14 +549,15 @@ class BugData {
 
 	/**
      * Update a bug from the given data structure
-     *  If the third parameter is true, also update the longer strings table
+     * A callback can be provided for executing custom code after the bug is updated
+	 *  and before the final EVENT_UPDATE_BUG is triggered.
      * @param boolean $p_update_extended Whether to update extended fields.
-     * @param boolean $p_bypass_mail     Whether to bypass sending email notifications.
-     * @internal param boolean $p_bypass_email Default false, set to true to avoid generating emails (if sending elsewhere)
+     * @param boolean $p_bypass_mail     Default false, set to true to avoid generating emails (if sending elsewhere)
+	 * @param Callable $p_callback       Callback to execute after updating, and before triggering ending event.
      * @return boolean (always true)
      * @access public
 	 */
-	function update( $p_update_extended = false, $p_bypass_mail = false ) {
+	function update( $p_update_extended = false, $p_bypass_mail = false, Callable $p_callback = null ) {
 		self::validate( $p_update_extended );
 
 		$c_bug_id = $this->id;
@@ -566,6 +567,8 @@ class BugData {
 		}
 
 		$t_old_data = bug_get( $this->id, true );
+
+		event_signal( 'EVENT_UPDATE_BUG_DATA', $this, $t_old_data );
 
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
@@ -710,6 +713,13 @@ class BugData {
 			# @todo handle priority change if it requires special handling
 			email_bug_updated( $c_bug_id );
 		}
+
+		# Execute the callback if provided.
+		if( is_callable( $p_callback ) ) {
+			$p_callback( $this, $t_old_data );
+		}
+
+		event_signal( 'EVENT_UPDATE_BUG', array( $t_old_data, $this ) );
 
 		return true;
 	}
