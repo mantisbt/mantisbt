@@ -1841,10 +1841,13 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
+	# @todo cproensa: is the comment above still valid? bugnote will be added even if bug-update cant be performed
 	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
-	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->status = config_get( 'bug_reopen_status' );
+	$t_bugdata->resolution = config_get( 'bug_reopen_resolution' );
+	$t_bugdata->update( false, true );
 
 	email_bug_reopened( $p_bug_id );
 
