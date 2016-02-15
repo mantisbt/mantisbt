@@ -291,11 +291,11 @@ if( $f_new_status >= $t_resolved
 		$t_has_write_access = custom_field_has_write_access( $t_id, $f_bug_id );
 		$t_class_required = $t_require && $t_has_write_access ? 'class="required"' : '';
 ?>
-	<div class="field-container">
-		<label <?php echo $t_class_required ?> for="due_date">
-			<span><?php echo lang_get_defaulted( $t_def['name'] ) ?></span>
-		</label>
-		<span class="input">
+	<tr>
+		<th class="category">
+			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		</th>
+		<td>
 <?php
 			if( $t_has_write_access ) {
 				print_custom_field_input( $t_def, $f_bug_id );
@@ -303,9 +303,8 @@ if( $f_new_status >= $t_resolved
 				print_custom_field_value( $t_def, $t_id, $f_bug_id );
 			}
 ?>
-		</span>
-		<span class="label-style"></span>
-	</div>
+		</td>
+	</tr>
 
 <?php
 	} # foreach( $t_related_custom_field_ids as $t_id )
