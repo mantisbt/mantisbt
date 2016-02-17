@@ -728,6 +728,7 @@ $s_create_short_link = 'Create Short Link';
 $s_filter_permalink = 'Following is a permanent link to the currently configured filter:';
 $s_manage_users_link = 'Manage Users';
 $s_manage_projects_link = 'Manage Projects';
+$s_manage_projects_view_status = 'Manage Project View Status threshold';
 $s_manage_custom_field_link = 'Manage Custom Fields';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_manage_plugin_link = 'Manage Plugins';
@@ -1739,4 +1740,3 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by anot
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
-

@@ -138,6 +138,7 @@ echo get_section_begin_apr( lang_get( 'projects_link' ) );
 echo get_capability_row( lang_get( 'create_project' ), config_get( 'create_project_threshold' ) );
 echo get_capability_row( lang_get( 'delete_project' ), config_get( 'delete_project_threshold' ) );
 echo get_capability_row( lang_get( 'manage_projects_link' ), config_get( 'manage_project_threshold' ) );
+echo get_capability_row( lang_get( 'manage_projects_view_status' ), config_get( 'project_view_status_threshold' ) );
 echo get_capability_row( lang_get( 'manage_user_access_to_project' ), config_get( 'project_user_threshold' ) );
 echo get_capability_row( lang_get( 'automatically_included_in_private_projects' ), config_get( 'private_project_threshold' ) );
 echo get_section_end();

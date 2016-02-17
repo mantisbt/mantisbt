@@ -60,7 +60,7 @@ access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
 $f_name 		= gpc_get_string( 'name' );
 $f_description 	= gpc_get_string( 'description' );
-$f_view_state	= gpc_get_int( 'view_state' );
+$f_view_state	= gpc_get_int( 'view_state',config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) );
 $f_status		= gpc_get_int( 'status' );
 $f_file_path	= gpc_get_string( 'file_path', '' );
 $f_inherit_global = gpc_get_bool( 'inherit_global', 0 );

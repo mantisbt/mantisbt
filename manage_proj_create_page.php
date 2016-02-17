@@ -111,11 +111,20 @@ if( project_table_empty() ) {
 
 			<div class="field-container">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
-				<span class="select">
-					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
+				<?php if( access_has_global_level(config_get('project_view_status_threshold'))) { ?>
+					<span class="select">
+						<select id="project-view-state" name="view_state">
+				<?php print_enum_string_option_list( 'view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
 					</select>
 				</span>
+				<?php } else { ?>
+				<span class="select">
+				<?php
+							$t_elem2 = get_enum_element( 'view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) );
+							echo string_html_specialchars($t_elem2);
+						?>
+				</span>
+				<?php } ?>
 				<span class="label-style"></span>
 			</div>
 			<?php
