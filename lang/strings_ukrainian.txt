@@ -44,6 +44,7 @@
  * @author Igorko
  * @author Macofe
  * @author Olvin
+ * @author Piramidion
  * @author Prima klasy4na
  * @author SteveR
  * @author Translatemyname
@@ -522,6 +523,7 @@ $s_choose_project = 'Оберіть проект';
 $s_login_button = 'Увійти';
 $s_signup_link = 'Новий обліковий запис';
 $s_lost_password_link = 'Забули свій пароль?';
+$s_username_or_email = 'Ім\'я користувача або адреса електронної пошти';
 $s_select_project_button = 'Вибрати проект';
 $s_lost_password_title = 'Скидання паролю';
 $s_lost_password_done_title = 'Лист про пароль був відправлений';
@@ -1244,6 +1246,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Збій при завантаженні 
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Не вдалось закачати файл.  Скидається на те, що розмір файлу більший, ніж дозволений параметрами PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Необхідний для цієї сторінки параметр (%1$s) не знайдено.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Такий користувач вже існує. Поверніться назад і введіть інше ім\'я користувача.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Ця електронна пошта вже використовується. Будь ласка, поверніться та виберіть якусь іншу.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Не вдалось знайти параметр \'%1$s\'.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Не вдалось знайти рядок \'%1$s\'.';
