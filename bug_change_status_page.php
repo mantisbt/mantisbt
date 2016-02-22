@@ -408,6 +408,7 @@ print_recently_visited();
 		<input type="submit" class="button" value="<?php echo lang_get( $t_status_label . '_bug_button' ) ?>" />
 	</span>
 
+</fieldset>
 </form>
 </div>
 
