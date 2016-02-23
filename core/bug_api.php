@@ -988,6 +988,18 @@ function bug_is_resolved( $p_bug_id ) {
 }
 
 /**
+ * Check if a given bug has a significant priority
+ * @param int p_bug_id integer representing bug id
+ * @return bool true if bug is significant, false otherwise
+ * @access public
+ * @uses config_api.php
+ */
+function bug_has_significant_priority( $p_bug_id ) {
+	$t_bug = bug_get( $p_bug_id );
+	return( $t_bug->priority >= config_get( 'priority_significant_threshold' ) );
+}
+
+/**
  * Check if a given bug is closed
  * @param integer $p_bug_id Integer representing bug identifier.
  * @return boolean true if bug is closed, false otherwise
