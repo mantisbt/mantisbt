@@ -1791,6 +1791,13 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
 $g_html_make_links = ON;
 
 /**
+ * Set this flag to have these automatically-generated links
+ * open in a new window themselves, without the [^] link
+ * @global integer $g_html_make_links_new_window
+ */
+$g_html_make_links_new_window = OFF;
+
+/**
  * These are the valid html tags for multi-line fields (e.g. description)
  * do NOT include a or img tags here
  * do NOT include tags that require attributes
@@ -4443,6 +4450,7 @@ $g_public_config_names = array(
 	'hr_size',
 	'hr_width',
 	'html_make_links',
+	'html_make_links_new_window',
 	'html_valid_tags_single_line',
 	'html_valid_tags',
 	'inline_file_exts',
