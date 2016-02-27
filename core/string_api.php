@@ -508,10 +508,12 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			$t_url_html = "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
 			if( config_get( 'html_make_links_new_window' ) ) {
 				# Have link open in a new window itself, without the [^] link
 				$t_url_html = "<a ${t_url_href} target=\"_blank\">${p_match[1]}</a>";
+			} else {
+				# Default behavior
+				$t_url_html = "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
 			}
 			return $t_url_html;
 		},
