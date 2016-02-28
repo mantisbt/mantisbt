@@ -82,6 +82,8 @@ class Avatar
      * missing values are defaulted, and match the expectations of the MantisBT
      * core.
      *
+     * @param integer $p_user_id  The user id.
+     * 
      * @return void
      */
     private function normalize( $p_user_id ) {

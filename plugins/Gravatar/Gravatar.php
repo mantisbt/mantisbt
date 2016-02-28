@@ -176,7 +176,7 @@ class GravatarPlugin extends MantisPlugin {
 	/**
 	 * Gets the gravatar base URL
 	 *
-	 * @return The gravatar URL.
+	 * @return string The gravatar URL.
 	 */
 	private static function getAvatarUrl() {
 		if( http_is_protocol_https() ) {
