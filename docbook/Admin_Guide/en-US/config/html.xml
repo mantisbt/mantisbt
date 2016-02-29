@@ -9,19 +9,12 @@
 		<varlistentry>
 			<term>$g_html_make_links</term>
 			<listitem>
-				<para>Set this flag to convert www URLs and email addresses automatically
-					into clickable links. URL links will open in the current window, with
-					a separate link ("[^]") appended to open the URL in a new window.
-					Default ON. 
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_html_make_links_new_window</term>
-			<listitem>
-				<para>If $g_html_make_links AND this flag are set, the automatically-
-					generated www links will open in a new window themselves, without
-					the appended "[^]" link. Default OFF.
+				<para>This flag controls whether www URLs and email addresses are
+					automatically converted into clickable links as well as where
+					the www links open when clicked. The options are:
+					0 = Do not convert www URLs and email addresses
+					1 = Convert to links that open in current window (DEFAULT)
+					2 = Convert to links that open in a new window
 				</para>
 			</listitem>
 		</varlistentry>

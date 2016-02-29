@@ -503,17 +503,17 @@ function string_insert_hrefs( $p_string ) {
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	# Find any URL in a string and replace it by a clickable link
+	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			if( config_get( 'html_make_links_new_window' ) ) {
-				# Have link open in a new window itself, without the [^] link
+			if( config_get( 'html_make_links' ) == 2 ) {
+				# Have link open in a new window
 				$t_url_html = "<a ${t_url_href} target=\"_blank\">${p_match[1]}</a>";
 			} else {
-				# Default behavior
-				$t_url_html = "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
+				# Have link open in the current window (default behavior)
+				$t_url_html = "<a ${t_url_href}>${p_match[1]}</a>";
 			}
 			return $t_url_html;
 		},
