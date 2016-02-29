@@ -196,8 +196,6 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
 		'<img class="avatar" src="' . $t_image . '" alt="' .
 		$t_text . '" width="' . $p_size . '" height="' .
 		$p_size . '" /></a>';
-
-	return true;
 }
 
 /**
