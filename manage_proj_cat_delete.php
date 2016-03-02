@@ -66,12 +66,7 @@ $t_project_id = $t_row['project_id'];
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
 # Protect the 'default category for moves' from deletion
-$t_default_category_id = config_get( 'default_category_for_moves', /* default */ null, ALL_USERS, ALL_PROJECTS );
-if(    $f_category_id == $t_default_category_id
-	|| config_is_defined( 'default_category_for_moves', $f_category_id )
-) {
-	trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
-}
+category_ensure_can_remove( $f_category_id );
 
 # Protect the category from deletion which is associted with an issue.
 category_ensure_can_delete( $f_category_id );

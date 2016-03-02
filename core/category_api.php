@@ -198,6 +198,7 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	$t_category_row = category_get_row( $p_category_id );
 
 	category_ensure_exists( $p_category_id );
+	category_ensure_can_remove( $p_category_id );
 	if( 0 != $p_new_category_id ) {
 		category_ensure_exists( $p_new_category_id );
 	}
@@ -219,7 +220,8 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 }
 
 /**
- * Remove all categories associated with a project
+ * Remove all categories associated with a project.
+ * This will skip processing of categories that can't be deleted.
  * @param integer $p_project_id      A Project identifier.
  * @param integer $p_new_category_id New category id (to replace existing category).
  * @return boolean
@@ -240,6 +242,10 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 
 	$t_category_ids = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		# Don't add category to the list if it can't be deleted
+		if( !category_can_remove( $t_row['id'] ) ) {
+			continue;
+		}
 		$t_category_ids[] = $t_row['id'];
 	}
 
