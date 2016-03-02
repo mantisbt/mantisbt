@@ -186,6 +186,9 @@ function print_successful_redirect( $p_redirect_to ) {
  * @return void
  */
 function print_avatar( $p_user_id, $p_size = 80 ) {
+	if( config_get( 'show_avatar' ) === OFF ) {
+		return;
+	}
 	$t_avatar = Avatar::get( $p_user_id, $p_size );
 
 	$t_image = htmlspecialchars( $t_avatar->image );
