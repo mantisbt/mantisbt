@@ -107,6 +107,33 @@ function category_ensure_unique( $p_project_id, $p_name ) {
 }
 
 /**
+ * Checks whether the category can be deleted.
+ * It is not allowed to delete a category if it is defined as 'default for moves'
+ * @see $g_default_category_for_moves
+ * @param integer $p_category_id Category identifier.
+ * @return boolean True if category can be deleted, false otherwise
+ * @access public
+ */
+function category_can_remove( $p_category_id ) {
+	$t_default_category_id = config_get( 'default_category_for_moves', null, ALL_USERS, ALL_PROJECTS );
+
+	return $p_category_id != $t_default_category_id
+		&& !config_is_defined( 'default_category_for_moves', $p_category_id );
+}
+
+/**
+ * Trigger an error if the category cannot be deleted.
+ * @param integer $p_category_id Category identifier.
+ * @return void
+ * @access public
+ */
+function category_ensure_can_remove( $p_category_id ) {
+	if( !category_can_remove( $p_category_id ) ) {
+		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
+	}
+}
+
+/**
  * Add a new category to the project
  * @param integer $p_project_id Project identifier.
  * @param string  $p_name       Category Name.
