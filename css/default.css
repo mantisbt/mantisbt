@@ -559,13 +559,11 @@ div.form-container > form > fieldset > table > tbody > tr:nth-child(odd),
 div.form-container > table > tbody > tr:nth-child(odd),
 div.form-container > table > tr:nth-child(odd),
 div.form-container div.field-container:nth-child(odd),
-div.section-container div.field-container:nth-child(odd),
-table#manage-overview-table > tr:nth-child(odd)
+div.section-container div.field-container:nth-child(odd)
 	{ background-color: #e8e8e8; }
 
 fieldset > .field-container:nth-child(even),
 form > table > tr:nth-child(even),
-table#manage-overview-table > tr:nth-child(even),
 div.table-container > table > tbody > tr:nth-child(even),
 div.table-container > table > tr:nth-child(even),
 div.summary-container > table > tbody > tr:nth-child(even),
@@ -574,8 +572,7 @@ div.form-container > form > fieldset > table > tbody > tr:nth-child(even),
 div.form-container > table > tbody > tr:nth-child(even),
 div.form-container div.field-container:nth-child(even),
 div.section-container div.field-container:nth-child(even),
-div.form-container > table > tr:nth-child(even),
-#custom-field-link-project
+div.form-container > table > tr:nth-child(even)
 	{ background-color: #d8d8d8; }
 
 form > table > tr:last-child,
