@@ -52,10 +52,8 @@ $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost );
 $t_show_realname = config_get( 'show_realname' ) == ON;
 
-header( 'Pragma: public' );
-header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $t_filename ) ) );
-header( 'Content-Transfer-Encoding: BASE64;' );
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+csv_emit_headers( $t_filename );
+echo csv_get_byteordermarker();
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;

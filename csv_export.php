@@ -68,16 +68,8 @@ columns_plugin_cache_issue_data( $t_rows );
 
 $t_filename = csv_get_default_filename();
 
-# Send headers to browser to activate mime loading
-
-# Make sure that IE can download the attachments under https.
-header( 'Pragma: public' );
-
-header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $t_filename ) ) );
-header( 'Content-Transfer-Encoding: BASE64;' );
-
-# Added Quotes (") around file name.
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+csv_emit_headers( $t_filename );
+echo csv_get_byteordermarker();
 
 # Get columns to be exported
 $t_columns = csv_get_columns();

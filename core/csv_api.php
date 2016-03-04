@@ -28,6 +28,7 @@
  * @uses category_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses project_api.php
  * @uses user_api.php
@@ -38,9 +39,32 @@ require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'user_api.php' );
+
+/**
+ * Emits headers for csv file download pages.
+ *
+ * @param  string $p_filename The filename
+ * @return void
+ */
+function csv_emit_headers( $p_filename ) {
+	header( 'Pragma: public' );
+	header( 'Content-Encoding: UTF-8' );
+	header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $p_filename ) ) . ';charset=UTF-8' );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $p_filename ) ) . '"' );
+}
+
+/**
+ * Generates the byte order marker (BOM) to be generated at the top of the csv file.
+ * @return string The byte order marker.
+ */
+function csv_get_byteordermarker() {
+	return "\xEF\xBB\xBF";
+}
 
 /**
  * get the csv file new line, can be moved to config in the future
