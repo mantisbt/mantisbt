@@ -43,7 +43,8 @@ $f_cost = gpc_get_int( 'cost' );
 $f_from = gpc_get_string( 'from' );
 $f_to = gpc_get_string( 'to' );
 
-$t_separator = ',';
+$t_new_line = csv_get_newline();
+$t_separator = csv_get_separator();
 
 billing_ensure_reporting_access( $f_project_id );
 
@@ -74,7 +75,7 @@ if( $t_show_cost ) {
 }
 
 echo csv_escape_string( 'note' );
-echo "\n";
+echo $t_new_line;
 
 foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( bug_format_id( $t_billing['bug_id'] ) ) . $t_separator;
@@ -96,7 +97,7 @@ foreach( $t_billing_rows as $t_billing ) {
 	}
 
 	echo csv_escape_string( $t_billing['note'] );
-	echo "\n";
+	echo $t_new_line;
 }
 
 
