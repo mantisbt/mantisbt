@@ -3053,14 +3053,6 @@ $g_default_manage_tag_prefix = 'ALL';
 $g_csv_separator = ',';
 
 /**
- * CSV Export
- * Add Byte Order Mark (BOM) at the beginning of the file as it helps Excel display the file in UTF-8
- * @global string $g_csv_add_bom
- */
-$g_csv_add_bom = OFF;
-
-
-/**
  * The threshold required for users to be able to manage configuration of a project.
  * This includes workflow, email notifications, columns to view, and others.
  */
@@ -4344,7 +4336,6 @@ $g_public_config_names = array(
 	'create_short_url',
 	'css_include_file',
 	'css_rtl_include_file',
-	'csv_add_bom',
 	'csv_separator',
 	'custom_field_edit_after_create',
 	'custom_field_link_threshold',
