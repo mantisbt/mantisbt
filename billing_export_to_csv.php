@@ -35,7 +35,6 @@ require_api( 'csv_api.php' );
 
 helper_begin_long_process();
 
-$t_filename = csv_get_default_filename();
 $t_date_format = config_get( 'normal_date_format' );
 
 $f_project_id = gpc_get_int( 'project_id' );
@@ -53,8 +52,7 @@ $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost );
 $t_show_realname = config_get( 'show_realname' ) == ON;
 
-csv_emit_headers( $t_filename );
-echo UTF8_BOM;
+csv_start( csv_get_default_filename() );
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;

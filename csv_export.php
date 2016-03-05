@@ -66,10 +66,7 @@ if( $t_rows === false ) {
 # pre-cache custom column data
 columns_plugin_cache_issue_data( $t_rows );
 
-$t_filename = csv_get_default_filename();
-
-csv_emit_headers( $t_filename );
-echo UTF8_BOM;
+csv_start( csv_get_default_filename() );
 
 # Get columns to be exported
 $t_columns = csv_get_columns();
