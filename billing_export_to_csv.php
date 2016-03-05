@@ -53,7 +53,9 @@ $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cos
 $t_show_realname = config_get( 'show_realname' ) == ON;
 
 csv_emit_headers( $t_filename );
-echo csv_get_byteordermarker();
+if( config_get( 'csv_add_bom' ) == ON ) {
+	echo UTF8_BOM;
+}
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;

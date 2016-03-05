@@ -602,3 +602,6 @@ define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 define ( 'JQUERY_VERSION', '1.11.3' );
 define ( 'JQUERY_UI_VERSION', '1.11.4' );
 
+# Byte Order Markers
+define( 'UTF8_BOM', "\xEF\xBB\xBF" );
+

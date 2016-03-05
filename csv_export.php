@@ -69,15 +69,12 @@ columns_plugin_cache_issue_data( $t_rows );
 $t_filename = csv_get_default_filename();
 
 csv_emit_headers( $t_filename );
-echo csv_get_byteordermarker();
+if( config_get( 'csv_add_bom' ) == ON ) {
+	echo UTF8_BOM;
+}
 
 # Get columns to be exported
 $t_columns = csv_get_columns();
-
-# export BOM
-if( config_get( 'csv_add_bom' ) == ON ) {
-	echo "\xEF\xBB\xBF";
-}
 
 # export the titles
 $t_first_column = true;

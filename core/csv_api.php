@@ -59,14 +59,6 @@ function csv_emit_headers( $p_filename ) {
 }
 
 /**
- * Generates the byte order marker (BOM) to be generated at the top of the csv file.
- * @return string The byte order marker.
- */
-function csv_get_byteordermarker() {
-	return "\xEF\xBB\xBF";
-}
-
-/**
  * get the csv file new line, can be moved to config in the future
  * @return string containing new line character
  * @access public
