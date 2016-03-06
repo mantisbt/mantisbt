@@ -135,7 +135,7 @@ class MantisPHPSession extends MantisSession {
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
-			return unserialize( $_SESSION[$this->key][$p_name] );
+			return $_SESSION[$this->key][$p_name];
 		}
 
 		if( func_num_args() > 1 ) {
@@ -153,7 +153,7 @@ class MantisPHPSession extends MantisSession {
 	 * @return void
 	 */
 	function set( $p_name, $p_value ) {
-		$_SESSION[$this->key][$p_name] = serialize( $p_value );
+		$_SESSION[$this->key][$p_name] = $p_value;
 	}
 
 	/**
