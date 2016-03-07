@@ -60,9 +60,6 @@ $f_usernames = trim( gpc_get_string( 'username', '' ) );
 $t_logged_in_user_id = auth_get_current_user_id();
 
 if( is_blank( $f_usernames ) ) {
-	if( user_is_anonymous( $t_logged_in_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
-	}
 	$t_user_ids = array( $t_logged_in_user_id );
 } else {
 	$t_usernames = preg_split( '/[,|]/', $f_usernames, -1, PREG_SPLIT_NO_EMPTY );
@@ -79,9 +76,7 @@ if( is_blank( $f_usernames ) ) {
 				trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, E_USER_ERROR );
 			}
 		}
-		if( user_is_anonymous( $t_user_id ) ) {
-			trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
-		}
+
 		$t_user_ids[$t_user_id] = $t_user_id;
 	}
 }
@@ -96,6 +91,10 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 # Check all monitors first,
 foreach( $t_user_ids as $t_user_id ) {
+	if( user_is_anonymous( $t_user_id ) ) {
+		trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
+	}
+
 	if( $t_logged_in_user_id == $t_user_id ) {
 		access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
 	} else {
