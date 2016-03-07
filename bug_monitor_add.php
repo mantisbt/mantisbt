@@ -57,6 +57,15 @@ $f_bug_id = gpc_get_int( 'bug_id' );
 $t_bug = bug_get( $f_bug_id, true );
 $f_usernames = trim( gpc_get_string( 'username', '' ) );
 
+bug_ensure_exists( $f_bug_id );
+
+if( $t_bug->project_id != helper_get_current_project() ) {
+	# in case the current project is not the same project of the bug we are
+	# viewing, override the current project. This to avoid problems with
+	# categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+}
+
 $t_logged_in_user_id = auth_get_current_user_id();
 
 if( is_blank( $f_usernames ) ) {
@@ -79,14 +88,6 @@ if( is_blank( $f_usernames ) ) {
 
 		$t_user_ids[$t_user_id] = $t_user_id;
 	}
-}
-
-bug_ensure_exists( $f_bug_id );
-
-if( $t_bug->project_id != helper_get_current_project() ) {
-	# in case the current project is not the same project of the bug we are viewing...
-	# ... override the current project. This to avoid problems with categories and handlers lists etc.
-	$g_project_override = $t_bug->project_id;
 }
 
 # Check all monitors first,
