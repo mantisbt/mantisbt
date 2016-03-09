@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1257,7 +1257,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. Datei k
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrscheinlich liegt die Dateigröße über der erlaubten für diese PHP-Installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite (%1$s) wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
-$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Diese E-Mail-Adresse wird bereits verwendet. Gehe bitte zurück und wähle eine andere aus.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Diese E-Mail-Adresse wird bereits verwendet. Gehen Sie bitte zurück und geben Sie eine andere ein.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption „%1$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Die Konfigurationsoption „%1$s“ wurde nicht in der Datenbank gefunden. Sie muss in config_inc.php definiert werden.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette „%1$s“ nicht gefunden.';
@@ -1350,6 +1350,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Der Event „%1$s“ ist bisher noch ni
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Das Plugin „%1$s“ ist nicht in MantisBT registriert.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Das Plugin „%1$s“ ist nicht geladen. Stellen Sie sicher, dass seine Abhängigkeiten erfüllt sind.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Das Plugin „%1$s“ ist bereits installiert.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'Die Klasse „%2$s“ ist im Plugin „%1$s“ nicht definiert.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Die Seite „%2$s“ wurde im Plugin „%1$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Die Datei „%2$s“ ist im Plugin „%1$s“ nicht vorhanden.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installation des Plugins fehlgeschlagen: %1$s.';
