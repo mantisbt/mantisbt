@@ -65,15 +65,15 @@ class Avatar
         	$t_avatar = event_signal(
         	    'EVENT_USER_AVATAR',
         	    array( $p_user_id, $p_size ) );
+
+            if( $t_avatar === null ) {
+                $t_avatar = new Avatar();
+            }
+
+            $t_avatar->normalize( $p_user_id );
         }
 
-        if( $t_avatar === null ) {
-            $t_avatar = new Avatar();
-        }
-
-        $t_avatar->normalize( $p_user_id );
-
-    	return $t_avatar;
+        return $t_avatar;
     }
 
     /**
