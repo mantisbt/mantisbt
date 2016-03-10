@@ -57,14 +57,15 @@ class Avatar
      * @return array The array with avatar information.
      */
     public static function get( $p_user_id, $p_size = 80 ) {
-        $t_enabled = config_get( 'show_avatar' ) !== OFF &&
-            access_has_project_level( config_get( 'show_avatar_threshold' ) );
+        $t_enabled = config_get( 'show_avatar' ) !== OFF;
         $t_avatar = null;
 
         if ( $t_enabled ) {
-        	$t_avatar = event_signal(
-        	    'EVENT_USER_AVATAR',
-        	    array( $p_user_id, $p_size ) );
+            if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
+                $t_avatar = event_signal(
+                    'EVENT_USER_AVATAR',
+                    array( $p_user_id, $p_size ) );
+            }
 
             if( $t_avatar === null ) {
                 $t_avatar = new Avatar();
