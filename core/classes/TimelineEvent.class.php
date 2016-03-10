@@ -73,6 +73,10 @@ class TimelineEvent {
 	 */
 	public function html_start() {
 		$t_avatar = Avatar::get( $this->user_id, 32 );
+		if( $t_avatar === null ) {
+			return sprintf(
+				'<div class="entry"><div class="timestamp">%s</div>', $this->format_timestamp( $this->timestamp ) );
+		}
 
 		return sprintf(
 			'<div class="entry"><div class="avatar"><a href="%s"><img class="avatar" src="%s" alt="%s" width="32" height="32" /></a></div><div class="timestamp">%s</div>',

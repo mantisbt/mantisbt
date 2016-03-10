@@ -187,6 +187,9 @@ function print_successful_redirect( $p_redirect_to ) {
  */
 function print_avatar( $p_user_id, $p_size = 80 ) {
 	$t_avatar = Avatar::get( $p_user_id, $p_size );
+	if( $t_avatar === null ) {
+		return;
+	}
 
 	$t_image = htmlspecialchars( $t_avatar->image );
 	$t_link = htmlspecialchars( $t_avatar->link );
