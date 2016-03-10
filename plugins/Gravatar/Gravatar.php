@@ -81,13 +81,6 @@ class GravatarPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function config() {
-		$t_default_avatar = config_get( 'show_avatar' );
-
-		# Set default avatar for legacy configuration
-		if( ON === $t_default_avatar || OFF === $t_default_avatar) {
-			$t_default_avatar = self::GRAVATAR_DEFAULT_IDENTICON;
-		}
-
 		return array(
 			/**
 			 * The rating of the avatar to show: 'G', 'PG', 'R', 'X'
@@ -103,7 +96,7 @@ class GravatarPlugin extends MantisPlugin {
 			 * - An URL to the default image to be used (for example,
 			 *   "http:/path/to/unknown.jpg" or "%path%images/avatar.png")
 			 */
-			'default_avatar' => $t_default_avatar,
+			'default_avatar' => self::GRAVATAR_DEFAULT_IDENTICON
 		);
 	}
 
@@ -144,12 +137,7 @@ class GravatarPlugin extends MantisPlugin {
 	 * @return object An instance of class Avatar or null.
 	 */
 	function user_get_avatar( $p_event, $p_user_id, $p_size = 80 ) {
-		$t_default_avatar = config_get( 'show_avatar' );
-
-		# Set default avatar for legacy configuration
-		if( ON === $t_default_avatar || OFF === $t_default_avatar ) {
-			$t_default_avatar = 'identicon';
-		}
+		$t_default_avatar = plugin_config_get( 'default_avatar' );
 
 		# Default avatar is either one of Gravatar's options, or
 		# assumed to be an URL to a default avatar image
