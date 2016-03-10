@@ -1067,19 +1067,8 @@ $g_differentiate_duplicates = OFF;
 $g_sort_by_last_name = OFF;
 
 /**
- * Show user avatar
- *
- * The config can be either set to OFF (avatars disabled) or set to a string
- * defining the default avatar to be used when none is associated with the
- * user's email. Valid values:
- * - OFF (default)
- * - ON (equivalent to 'identicon')
- * - One of Gravatar's defaults (mm, identicon, monsterid, wavatar, retro)
- *   @link http://en.gravatar.com/site/implement/images/
- * - An URL to the default image to be used (for example,
- *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
- *
- * @global integer|string $g_show_avatar
+ * Show user avatars
+ * @global integer $g_show_avatar
  * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
