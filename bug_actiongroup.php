@@ -286,6 +286,21 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
+		case 'UP_DUE_DATE':
+		    $t_due_date = gpc_get_string( 'due_date', null );
+		    if( $t_due_date !== null ) {
+		        if( is_blank( $t_due_date ) ) {
+		            $t_due_date = 1;
+		        } else {
+		            $t_due_date = strtotime( $t_due_date );
+		        }
+		        if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
+		            bug_set_field( $t_bug_id, 'due_date', $t_due_date );
+		        } else {
+		            $t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+		        }
+		    }
+			break;
 		case 'VIEW_STATUS':
 			if( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
 				$f_view_status = gpc_get_int( 'view_status' );
