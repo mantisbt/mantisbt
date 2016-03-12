@@ -216,6 +216,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 					ob_clean();
 				}
 
+				# If HTML error output was disabled, set an error header and stop
+				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
+					# @TODO Have a mapping for mantis error codes to appropiate HTTP error codes
+					header( ' ', true, 400 );
+					exit(1);
+				}
+
 				# don't send the page header information if it has already been sent
 				if( $g_error_send_page_header ) {
 					if( $t_html_api ) {
