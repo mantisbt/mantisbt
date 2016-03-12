@@ -44,16 +44,16 @@ class Avatar
      * Gets the avatar information for the user.  The avatars are provided by
      * plugins that can integrate with a variety of services like gravatar.com,
      * LDAP, Social Identities, etc.
-     * 
+     *
      * If logged in user doesn't have access to view avatars or not avatar is found,
      * then a default avatar will be used.
-     * 
+     *
      * Note that the provided user id may no longer has a corresponding user in the
      * system, if the user was deleted.
-     * 
+     *
      * @param integer $p_user_id  The user id.
      * @param integer $p_size     The desired width/height of the avatar.
-     * 
+     *
      * @return array The array with avatar information.
      */
     public static function get( $p_user_id, $p_size = 80 ) {
@@ -83,7 +83,7 @@ class Avatar
      * core.
      *
      * @param integer $p_user_id  The user id.
-     * 
+     *
      * @return void
      */
     private function normalize( $p_user_id ) {
@@ -92,11 +92,11 @@ class Avatar
         if( $this->image === null) {
             $this->image = config_get_global( 'path' ) . 'images/avatar.png';
         }
-    
+
         if( $this->link === null ) {
             if ( $t_user_exists ) {
                 $this->link = config_get_global( 'path' ) .
-                    '/view_user_page.php?id=' . $p_user_id;
+                    'view_user_page.php?id=' . $p_user_id;
             } else {
                 $this->link = '';
             }
