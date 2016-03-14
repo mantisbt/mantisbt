@@ -210,7 +210,7 @@ switch( $f_action ) {
 	case 'UP_DUE_DATE':
 		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
 		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
-		$t_form					= 'target_version';
+		$t_form					= 'due_date';
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
@@ -274,21 +274,18 @@ if( $t_multiple_projects ) {
 			$t_bug_id = null;
 			
 			# if there is only one issue, use its current value as default, otherwise,
-			# use the default value specified in custom field definition.
+			# use the current due_date.
 			if( count( $f_bug_arr ) == 1 ) {
-			    $t_bug_id = $f_bug_arr[0];
-			    $t_bug = bug_get( $t_bug_id );
-			    
-			    $t_date_to_display = '';
-			    if( !date_is_null( $t_bug->due_date ) ) {
-    				$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
-    			}
-    			
-                echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
-            } else {
-                echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
-            }
-            
+				$t_bug_id = $f_bug_arr[0];
+				$t_bug = bug_get( $t_bug_id );
+				
+				$t_date_to_display = '';
+				if( !date_is_null( $t_bug->due_date ) ) {
+					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+				}
+			}
+			
+			echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
         } else {
 			echo '<select name="' . $t_form . '">';
 
