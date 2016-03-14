@@ -480,6 +480,7 @@ div.form-container table th,
 div.table-container table th {
 	text-align: left;
 }
+div#verify-div,
 div#reauth-div,
 div#login-div,
 div#lost-password-div,

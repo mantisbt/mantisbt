@@ -57,17 +57,22 @@ require_api( 'utility_api.php' );
 
 form_security_validate( 'account_update' );
 
-$t_user_id = auth_get_current_user_id();
-
 # If token is set, it's a password reset request from verify.php, and if
 # not we need to reauthenticate the user
-$t_account_verification = token_get_value( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+$t_verify_user_id = gpc_get( 'verify_user_id', false );
+$t_account_verification = $t_verify_user_id ? token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) : false;
 if( !$t_account_verification ) {
 	auth_reauthenticate();
+	$t_user_id = auth_get_current_user_id();
+} else {
+	# set a temporary cookie so the login information is passed between pages.
+	auth_set_cookies( $t_verify_user_id, false );
+	# fake login so the user can set their password
+	auth_attempt_script_login( user_get_field( $t_verify_user_id, 'username' ) );
+	$t_user_id = $t_verify_user_id;
 }
 
 auth_ensure_user_authenticated();
-
 current_user_ensure_unprotected();
 
 $f_email           	= gpc_get_string( 'email', '' );
@@ -86,7 +91,9 @@ $t_realname_updated = false;
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
-if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
+# Do not update email for a user verification
+if( !( $t_ldap && config_get( 'use_ldap_email' ) )
+	&& !$t_account_verification ) {
 	if( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );
 		$t_email_updated = true;
@@ -94,7 +101,9 @@ if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
 }
 
 # Update real name (but only if LDAP isn't being used)
-if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
+# Do not update real name for a user verification
+if( !( $t_ldap && config_get( 'use_ldap_realname' ) )
+	&& !$t_account_verification	) {
 	# strip extra spaces from real name
 	$t_realname = string_normalize( $f_realname );
 	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
