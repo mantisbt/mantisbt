@@ -494,6 +494,7 @@ define( 'TOKEN_LAST_VISITED', 3 );
 define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
 define( 'TOKEN_ACCOUNT_VERIFY', 6 );
+define( 'TOKEN_ACCOUNT_ACTIVATION', 7 );
 define( 'TOKEN_USER', 1000 );
 
 # token expirations
@@ -503,6 +504,7 @@ define( 'TOKEN_EXPIRY', 60 * 60 );
 define( 'TOKEN_EXPIRY_LAST_VISITED', 24 * 60 * 60 );
 define( 'TOKEN_EXPIRY_AUTHENTICATED', 5 * 60 );
 define( 'TOKEN_EXPIRY_COLLAPSE', 365 * 24 * 60 * 60 );
+define( 'TOKEN_EXPIRY_ACCOUNT_ACTIVATION', 24 * 60 * 60 );
 
 # config types
 define( 'CONFIG_TYPE_DEFAULT', 0 );

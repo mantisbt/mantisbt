@@ -602,6 +602,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	# Send notification email
 	if( !is_blank( $p_email ) ) {
 		$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
+		token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
 		email_signup( $t_user_id, $t_confirm_hash, $p_admin_name );
 	}
 
@@ -1566,6 +1567,8 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
 	$c_cookie_string = auth_generate_unique_cookie_string();
+	# Delete token for password activation if there is any
+	token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
 
 	$c_password = auth_process_plain_password( $p_password );
 
@@ -1661,6 +1664,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		# Send notification email
 		if( $p_send_email ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
+			token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $p_user_id );
 			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 		}
 	} else {
