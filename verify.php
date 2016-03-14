@@ -61,9 +61,9 @@ if( auth_is_user_authenticated() ) {
 	print_header_redirect( 'verify.php?id=' . $f_user_id . '&confirm_hash=' . $f_confirm_hash );
 }
 
-$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
+$t_token_confirm_hash = token_get_value( TOKEN_ACCOUNT_ACTIVATION, $f_user_id );
 
-if( $f_confirm_hash != $t_calculated_confirm_hash ) {
+if( $f_confirm_hash != $t_token_confirm_hash ) {
 	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 }
 
