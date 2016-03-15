@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1339,6 +1339,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Händelse "%1$s" har ännu inte blivit 
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Insticksprogrammet "%1$s" är inte registrerat.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Insticksprogrammet "%1$s" är inte laddat, säkerställ att beroenden är uppfyllda.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Insticksprogrammet "%1$s" är redan installerat.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'Klassen "%2$s" är inte definierad i insticksmodulen "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Sida "%2$s" finns inte i insticksprogrammet "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Filen "%2$s" finns inte i insticksprogrammet "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Insticksmodulsinstallation misslyckades: %1$s.';

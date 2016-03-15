@@ -1012,9 +1012,11 @@ if( 3 == $t_install_state ) {
 					config_set( 'database_version', $i );
 				} else {
 					$t_all_sql = '';
-					foreach ( $t_sqlarray as $t_single_sql ) {
-						if( !empty( $t_single_sql ) ) {
-							$t_all_sql .= $t_single_sql . '<br />';
+					if( $t_sql ) {
+						foreach( $t_sqlarray as $t_single_sql ) {
+							if( !empty( $t_single_sql ) ) {
+								$t_all_sql .= $t_single_sql . '<br />';
+							}
 						}
 					}
 					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );

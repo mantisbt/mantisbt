@@ -401,6 +401,7 @@ define( 'ERROR_PLUGIN_NOT_LOADED', 2506 );
 define( 'ERROR_PLUGIN_INVALID_PAGE', 2507 );
 define( 'ERROR_PLUGIN_INVALID_FILE', 2508 );
 define( 'ERROR_PLUGIN_FILE_NOT_FOUND', 2509 );
+define( 'ERROR_PLUGIN_CLASS_NOT_FOUND', 2510 );
 define( 'ERROR_PLUGIN_GENERIC', 2599 );
 
 # ERROR_COLUMNS_*
@@ -600,4 +601,7 @@ define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 # JQuery and JQuery UI
 define ( 'JQUERY_VERSION', '1.11.3' );
 define ( 'JQUERY_UI_VERSION', '1.11.4' );
+
+# Byte Order Markers
+define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 

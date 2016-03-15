@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@
  * @author Dregad
  * @author Helix84
  * @author Kusavica
+ * @author Llucenic
  * @author Mikulas1
  * @author Rattkin
  * @author Rudko
@@ -293,6 +294,13 @@ $s_access_level_label = 'Úroveň prístupu';
 $s_update_user_button = 'Aktualizovať používateľa';
 $s_verify_warning = 'Informácie o Vašom účte boli overené. Vami obdržaná potvrdzujúca správa je odteraz neplatná.';
 $s_verify_change_password = 'Musíte sem zadať svoje heslo pre obnovenie prihlásenia.';
+$s_api_token_name = 'Názov tokenu';
+$s_api_token_disclose_message = 'Token pre prístup k API';
+$s_api_token_displayed_once = 'Tento token sa zobrazí iba raz.';
+$s_api_tokens_title = 'Tokeny API';
+$s_api_token_revoke_button = 'Odvolať';
+$s_api_token_never_used = 'Nepoužitý';
+$s_last_used = 'Naposledy použitý';
 $s_default_account_preferences_title = 'Nastavenia účtu';
 $s_default_project = 'Defaultný projekt';
 $s_refresh_delay = 'Interval pre refresh';
@@ -400,7 +408,7 @@ $s_reminder_list_truncated = 'zoznam príjemcov bol skrátený';
 $s_bug_send_button = 'Odoslať';
 $s_reminder = 'Upozornenie';
 $s_reminder_explain = 'Toto upozornenie bude odoslané vybraným príjemcom so žiadosťou o spätnú väzbu v tejto záležitosti.';
-$s_reminder_monitor = 'Títo príjemcovia začali sledovať tento problém. Môžu sa odhlásiť použitím tlačidla Koniec sledovania.';
+$s_reminder_monitor = 'Títo príjemcovia začnú tiež sledovať tento problém. Môžu sa odhlásiť použitím tlačidla Koniec sledovania.';
 $s_reminder_store = 'Toto upozornenie bude uložené ako poznámka k problému.';
 $s_confirm_sponsorship = 'Prosím potvrďte, že chcete sponzorovať problém %1$d z %2$s.';
 $s_stick_bug_button = 'Zafixovať';

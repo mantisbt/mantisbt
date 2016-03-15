@@ -121,6 +121,10 @@ $t_num_notes = count( $t_bugnotes );
 	$t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
 	$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 
+	# Tokens for action buttons are created only once, if needed
+	$t_security_token_state = null;
+	$t_security_token_delete = null;
+
 	for( $i=0; $i < $t_num_notes; $i++ ) {
 		$t_bugnote = $t_bugnotes[$i];
 
@@ -215,20 +219,42 @@ $t_num_notes = count( $t_bugnotes );
 
 				# show edit button if the user is allowed to edit this bugnote
 				if( $t_can_edit_bugnote ) {
-					print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
+					print_button(
+						'bugnote_edit_page.php',
+						lang_get( 'bugnote_edit_link' ),
+						array( 'bugnote_id' => $t_bugnote->id ),
+						OFF );
 				}
 
 				# show delete button if the user is allowed to delete this bugnote
 				if( $t_can_delete_bugnote ) {
-					print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
+					if ( !$t_security_token_delete ) {
+						$t_security_token_delete = form_security_token( 'bugnote_delete' );
+					}
+					print_button(
+						'bugnote_delete.php',
+						lang_get( 'delete_link' ),
+						array( 'bugnote_id' => $t_bugnote->id ),
+						$t_security_token_delete );
 				}
 
 				# show make public or make private button if the user is allowed to change the view state of this bugnote
 				if( $t_can_change_view_state ) {
+					if ( !$t_security_token_state ) {
+						$t_security_token_state = form_security_token( 'bugnote_set_view_state' );
+					}
 					if( VS_PRIVATE == $t_bugnote->view_state ) {
-						print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
+						print_button(
+							'bugnote_set_view_state.php',
+							lang_get( 'make_public' ),
+							array( 'private' => '0', 'bugnote_id' => $t_bugnote->id ),
+							$t_security_token_state );
 					} else {
-						print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+						print_button(
+							'bugnote_set_view_state.php',
+							lang_get( 'make_private' ),
+							array( 'private' => '1', 'bugnote_id' => $t_bugnote->id ),
+							$t_security_token_state );
 					}
 				}
 			}

@@ -174,8 +174,10 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 	}
 	$t_config = 'display_errors';
 	$t_errors = config_get_global( $t_config );
-	if( $t_errors[E_ALL] != DISPLAY_ERROR_HALT &&
-		$t_errors[E_USER_ERROR] != DISPLAY_ERROR_HALT
+	if( !(
+			isset( $t_errors[E_ALL] ) && $t_errors[E_ALL] == DISPLAY_ERROR_HALT
+		 ||	isset( $t_errors[E_USER_ERROR] ) && $t_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT
+		 )
 	) {
 		$t_warnings[] = debug_setting_message(
 			'integrity',

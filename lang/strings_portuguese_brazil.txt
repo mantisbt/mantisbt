@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,6 +50,7 @@
  * @author Macofe
  * @author Pedroca cerebral
  * @author Raphaelras
+ * @author Rodrigo codignoli
  * @author TheGabrielZaum
  * @author Tuliouel
  * @author Walesson
@@ -240,6 +241,7 @@ $s_email_notification_title_for_status_bug_resolved = 'O seguinte caso foi RESOL
 $s_email_notification_title_for_status_bug_closed = 'O seguinte caso foi FECHADO.';
 $s_email_notification_title_for_action_bug_submitted = 'O seguinte caso foi ENVIADO.';
 $s_email_notification_title_for_action_bug_assigned = 'O seguinte caso foi ATRIBUÍDO.';
+$s_email_notification_title_for_action_bug_unassigned = 'O seguinte caso foi APAGADO.';
 $s_email_notification_title_for_action_bug_reopened = 'O seguinte caso foi REABERTO.';
 $s_email_notification_title_for_action_bug_deleted = 'O seguinte caso foi APAGADO.';
 $s_email_notification_title_for_action_bug_updated = 'O seguinte caso foi ATUALIZADO.';
@@ -302,8 +304,16 @@ $s_access_level_label = 'Nível de Acesso';
 $s_update_user_button = 'Atualizar Usuário';
 $s_verify_warning = 'As informações da sua conta foram verificadas. A mensagem de confirmação de conta que você recebeu não é mais válida.';
 $s_verify_change_password = 'Você deve ajustar uma senha aqui para que lhe seja permitido acessar novamente.';
+$s_api_tokens_link = 'Tokens API';
+$s_api_token_create_form_title = 'Criar token API';
+$s_api_token_create_button = 'Criar Token API';
+$s_api_token_name = 'Nome do Token';
+$s_api_token_disclose_message = 'Token que deve ser usado ao acessar API.';
+$s_api_token_displayed_once = 'Tenha em conta que este token só será exibido uma vez.';
+$s_api_tokens_title = 'Tokens API';
 $s_api_token_revoke_button = 'Revogar';
 $s_api_token_never_used = 'Nunca usado';
+$s_api_token_revoked = 'O Token API "%s" foi revogado.';
 $s_last_used = 'Último uso';
 $s_default_account_preferences_title = 'Preferências da Conta';
 $s_default_project = 'Projeto Padrão';
@@ -518,6 +528,7 @@ $s_choose_project = 'Escolher Projeto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'criar uma nova conta';
 $s_lost_password_link = 'Perdeu a sua senha?';
+$s_username_or_email = 'Usuário ou endereço de e-mail';
 $s_select_project_button = 'Selecionar Projeto';
 $s_lost_password_title = 'Reajuste de Senha';
 $s_lost_password_done_title = 'Mensagem de Senha Enviada';
@@ -1068,8 +1079,8 @@ $s_reopen_issue = 'Reabrir um caso';
 $s_view_private_issues = 'Ver casos privados';
 $s_update_readonly_issues = 'Atualizar casos somente-leitura';
 $s_update_issue_status = 'Atualizar status do caso';
-$s_set_view_status = 'Definir estado de visibilidade (público vs privado)';
-$s_update_view_status = 'Atualizar estado de visibilidade (público vs privado)';
+$s_set_view_status = 'Estabelecer visibilidade quando estiver reportando um problema ou nota';
+$s_update_view_status = 'Mudar visibilidade de um problema ou nota existente';
 $s_show_list_of_users_monitoring_issue = 'Ver lista de usuários monitorando o caso';
 $s_notes = 'ANOTAÇÕES';
 $s_add_notes = 'Adicionar anotações';
@@ -1113,6 +1124,7 @@ $s_status_changed_to = 'Mudança de status para';
 $s_email_on_deleted = 'Enviar e-mail para deleção de casos';
 $s_email_on_sponsorship_changed = 'Enviar e-mail para mudança de patrocínio';
 $s_email_on_relationship_changed = 'Enviar e-mail para mudança de relações';
+$s_email_on_updated = 'Enviar e-mail com o que foi atualizado';
 $s_loading = 'Carregando...';
 $s_between_date = 'Entre';
 $s_on_or_before_date = 'Em ou Antes';
@@ -1187,11 +1199,13 @@ $s_copy_columns_from = 'Copiar Colunas De';
 $s_copy_columns_to = 'Copiar Colunas Para';
 $s_due_date = 'Data Limite';
 $s_overdue = 'Atrasados';
+$s_overdue_since = 'Atrasado desde %1$s';
 $s_view_account_title = 'Informação do Usuário';
 $s_manage_user = 'Gerenciar Usuário';
 $s_install_information = 'Informação de Instalação do MantisBT';
 $s_database_information = 'Informação de Base de Dados do MantisBT';
 $s_path_information = 'Informação de Caminho do MantisBT';
+$s_mantisbt_database_statistics = 'Estatísticas do banco de dados MantisBT';
 $s_php_version = 'Versão PHP';
 $s_adodb_version = 'Versão ADOdb';
 $s_month_january = 'Janeiro';
@@ -1206,9 +1220,22 @@ $s_month_september = 'Setembro';
 $s_month_october = 'Outubro';
 $s_month_november = 'Novembro';
 $s_month_december = 'Dezembro';
+$s_timeline_issue_created = '<span class="username">%1$s</span> criou a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_note_created = '<span class="username">%1$s</span> comentou a incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_monitor = '<span class="username">%1$s</span> esta monitorando a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_unmonitor = '<span class="username">%1$s</span> parou de monitorar a incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1$s</span> etiquetou a incidencia <span class="issue_id">%2$s</span> com <span class="tag_name">%3$s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span> removeu a etiqueta <span class="tag_name">%3$s</span> da incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1$s</span> resolveu a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_closed = '<span class="username">%1$s</span> fechou a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1$s</span> reabriu a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1$s</span> delegou a incidencia <span class="issue_id">%2$s</span> com <span class="tag_name">%3$s</span>';
+$s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> pegou a incidencia<span class="issue_id">%2$s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1$s</span> parou de monitorar a incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_no_activity = 'Nenhuma atividade com este intervalo de tempo';
 $s_timeline_title = 'Linha do tempo';
 $s_timeline_more = 'Mais eventos...';
+$s_missing_error_string = 'Linha de erro faltante: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Um erro ocorreu durante esta ação.  Você pode querer relatar este erro ao seu administrador local.';
 $MANTIS_ERROR[ERROR_SQL] = 'Erro SQL detectado.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Houve um erro em seu relatório.';
@@ -1223,11 +1250,12 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou. O arqui
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavelmente é devido ao tamanho do arquivo ser maior do que o permitido atualmente por esta instalação PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página (%1$s) não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Este nome de usuário já está sendo usado.  Por favor, volte e selecione um outro.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Este e-mail já está sendo usado.  Por favor, volte e selecione outro.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opção de configuração \'%1$s\' não encontrada.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'A opção de configuração \'%1$s\' não pode ser ajustada no banco-de-dados.  Ela deve ser ajustada em config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Texto \'%1$s\' não encontrado.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Anotação não encontrada.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projeto "%1$d" não encontrado.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projeto "%1$s" não foi encontrado.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo \'%1$s\' do banco-de-dados não encontrado.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'A pessoa atribuída ao caso não possui direitos de acesso suficientes para tratar o caso neste status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Um projeto com este nome já existe.  Por favor, volte e entre um nome diferente.';
@@ -1253,6 +1281,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Este é um arquivo duplicado.  Por favor,
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Caminho para carregamento inválido.  O diretório não existe ou não pode ser escrito pelo servidor web';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Nenhum arquivo foi carregado. Por favor, volte e escolha um arquivo antes de pressionar o botão Carregar';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'O arquivo carregado não pôde ser movido para o diretório de armazenamento. O diretório não existe ou não é gravável pelo servidor web';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'O anexo com ID "%1$d" não foi encontrado.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Você não pode ajustar um caso como duplicata de dele mesmo.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Revisão de erro não encontrada.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado não encontrado';
@@ -1261,6 +1290,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Pelo menos um projeto ainda usa este
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor inválido para o campo %1$s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definição de campo personalizado inválida';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propriedade inválida para o campo personalizado (%1$s).';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = 'O campo personalizado "%1$s" (ID %2$s) não foi vinculado ao projeto atual.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autenticação LDAP Authentication Falhou';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Atualização de Registro LDAP falhou.';
@@ -1269,6 +1299,7 @@ $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensão LDAP Não Carregada.
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%1$d: "%2$s"';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Consulta ao banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%1$d:%2$s" para a consulta: "%3$s"';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%1$d: "%2$s"';
+$MANTIS_ERROR[ERROR_DB_IDENTIFIER_TOO_LONG] = 'O identificador "%1$s" é muito grande. Tente reduzir o tamanho de g_db_table_prefix/suffix';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já existe.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
@@ -1288,6 +1319,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Patrocinador não forneceu um endereço de e-mail. Por favor, atualize seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%1$s\' tem um valor inválido \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%1$d\' é somente-leitura';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Essa incidência não pode ser resolvida até todas as incidências dependentes sejam resolvidas.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Já existe uma relação entre estes dois casos.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relação não encontrada.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Acesso negado: O caso %1$d requer um nível de acesso maior.';
@@ -1308,12 +1340,16 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Esse marcador não está aplicado a ess
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Esse marcador já está aplicado a esse caso.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Símbolo nõ foi encontrado.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O Plugin não está registrado com o MantisBT.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O Plugin já está instalado.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página do Plugin não foi encontrada.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O plugin"%1$s" não foi registrado.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'O plugin "%1$s" ainda não foi carregado. Tenha certeza que as dependências já foram cumpridas.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O plugin "%1$s" já foi instalado.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página "%%2$s" não existe no plugin "%1$s".';
+$MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'O arquivo "%2$s" não existe no plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Falha na instalação do complemento: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A atualização do schema do plugin falhou no bloco #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'O plugin "%1$s" precisa ser atualizando antes de você poder acessar esta página.';
+$MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'O formato da pagina de plugin especificada "%1$s" é invalido. Ele tem que conferir com "Plugin[/path/to]/page"';
+$MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'O formato do arquivo de plugin especificado "%1$s" é invalido. Ele tem que conferir com "Plugin[/path/to]/file[.ext]".';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ocorreu um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo "%1$s" contém uma duplicação da coluna "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo "%1$s" contém o campo "%2$s" inválido.';
@@ -1321,6 +1357,7 @@ $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Manipulador de sessão inválido
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A variável de sessão "%1$s" não foi encontrada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sua sessão foi invalidada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de segurança do formulário inválido. Isso pode ter sido provocado por esgotamento do tempo da seção, ou acidentamente, por enviar o formulário duas vezes.';
+$MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Por razões de segurança, o MantisBT não irá operar quando $g_crypto_master_salt não for especificado corretamente em config_inc.php or for menor que 16 caracteres.';
 $MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Não foi possível encontrar uma fonte aleatoriedade forte para fins criptográficos.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página não pode ser acessada através do uso deste método.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo para ordenação inválido.';
@@ -1330,3 +1367,7 @@ $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Não foi possível atualizar o fuso-ho
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Funcionalidade obsoleta: "%1$s"; utilize "%2$s" em seu lugar.';
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Aviso: o sistema está configurado para mostrar erros do MantisBT (E_USER_ERROR). A execução do programa continuará, mas puede dar lugar a problemas de integridade do sistema ou de dados.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Os tipos de dados não coincidem. Habilitar mensagens de erros detalhadas para mais informações.';
+$MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Essa incidência foi atualizada por outro usuário, por favor, retorne a incidência e reenvie suas alterações.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Você atingiu o limite permitido de atividade de %d nos últimos %d segundos, suas ações foram bloqueados para evitar spam\'s, por favor, tente novamente mais tarde.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'O campo "%1$s" deve ser menor ou igual á %2$d caracteres.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'O nome do Token API "%s" já esta em uso. Por favor, volte e selecione outro.';

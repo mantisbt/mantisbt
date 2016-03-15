@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -228,6 +228,7 @@ $s_email_notification_title_for_status_bug_resolved = 'An draen-mañ zo bet DISK
 $s_email_notification_title_for_status_bug_closed = 'An draen-mañ zo bet SERRET.';
 $s_email_notification_title_for_action_bug_submitted = 'An draen-mañ zo bet KASET.';
 $s_email_notification_title_for_action_bug_assigned = 'An draen-mañ zo bet DEVERKET.';
+$s_email_notification_title_for_action_bug_unassigned = 'An draen-mañ zo bet DILAMET.';
 $s_email_notification_title_for_action_bug_reopened = 'An draen-mañ zo bet ADDIGORET.';
 $s_email_notification_title_for_action_bug_deleted = 'An draen-mañ zo bet DILAMET.';
 $s_email_notification_title_for_action_bug_updated = 'An draen-mañ zo bet HIZIVAET.';
@@ -290,6 +291,17 @@ $s_access_level_label = 'Live moned';
 $s_update_user_button = 'Hizivaat an implijer';
 $s_verify_warning = 'Gwiriekaet eo bet titouroù ho kont. Ar gemennadenn hoc\'h eus resevet evit kadarnaat ar gont n\'eo ket gwiriek ken bremañ.';
 $s_verify_change_password = 'Ret eo deoc\'h lakaat ur ger-tremen evit gallout kevreañ en-dro.';
+$s_api_tokens_link = 'Jedoueroù API';
+$s_api_token_create_form_title = 'Krouiñ ur jedouer API';
+$s_api_token_create_button = 'Krouiñ ur jedouer API';
+$s_api_token_name = 'Anv ar Jedouer';
+$s_api_token_disclose_message = 'Jedouer da implijout evit diraez an API';
+$s_api_token_displayed_once = 'Notennit e vo diskwelet ar jedouer-mañ ur wech hepken.';
+$s_api_tokens_title = 'Jedoueroù API';
+$s_api_token_revoke_button = 'Dizober';
+$s_api_token_never_used = 'Morse n\'eo bet implijet';
+$s_api_token_revoked = 'Disc\'hraet « %s  jedouer an API';
+$s_last_used = 'Implij da ziwezhañ';
 $s_default_account_preferences_title = 'Penndibaboù ar gont';
 $s_default_project = 'Raktres dre ziouer';
 $s_refresh_delay = 'Termen freskaat';
@@ -503,6 +515,7 @@ $s_choose_project = 'Dibab ur raktres';
 $s_login_button = 'Kevreañ';
 $s_signup_link = 'Digeriñ ur gont nevez';
 $s_lost_password_link = 'Ankouaet ho ker-tremen ganeoc\'h ?';
+$s_username_or_email = 'Anv implijer pe chomlec\'h postel';
 $s_select_project_button = 'Diuzañ ur raktres';
 $s_lost_password_title = 'Adderaouekaat ar ger-tremen';
 $s_lost_password_done_title = 'Kaset eo bet ar gemennadenn gant ar ger-tremen';
@@ -1097,6 +1110,7 @@ $s_status_changed_to = 'Kemmañ ar statud da';
 $s_email_on_deleted = 'Kas ur postel pa vez dilamet';
 $s_email_on_sponsorship_changed = 'Kas ur postel pa vez cheñchet ar sponsoradur';
 $s_email_on_relationship_changed = 'Kas ur postel pa vez cheñchet un darempred';
+$s_email_on_updated = 'Postel diwar-benn an hizivaat';
 $s_loading = 'O kargañ...';
 $s_between_date = 'Etre';
 $s_on_or_before_date = 'D\'an pe a-raok an';
@@ -1222,6 +1236,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'C\'hwitet eo kargadenn ar restr. Ne c\'ha
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'C\'hwitet eo kargadenn ar restr. Moarvat e oa re vras ment ar restr evit ho kefluniadur PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un arventenn rekis evit ar bajenn-mañ (%1$s) n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'En implij emañ an anv implijer-se dija. Distroit, mar plij, ha diuzit unan all.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'En implij emañ ar postel-se dija. Distroit, mar plij, ha dibabit unan all.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'An dibarzh kefluniañ « %1$s » n\'eo ket bet kavet';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'An dibarzh kefluniañ « %1$s » ne c\'hall ket bezañ lakaet an diaz roadennoù. Ret eo e dermenañ e-barzh config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'N\'eo ket bet kavet an neudenn « %1$s ».';
@@ -1340,3 +1355,5 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Diwallit : Kefluniet eo ar rei
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Doare roadenn diembreget. Gweredekait ar c\'hemennadoù fazi dre ar munud evit gouzout hiroc\'h.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Hizivaet eo bet ar gudenn-se gant un implijer all. Distroit d\'ar gudenn-se, mar plij, ha kinnigit ho kemmoù en-dro.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tizhet ho peus bevenn obererezh aotreet %d darvoud e-pad an %d eilenn diwezhañ ; kaelet eo bet hoc\'h obererezh evit herzel ouzh ar strob, klaskit en-dro diwezhatoc\'h.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Ar vaezienn "%1$s" a rank bezañ berroc\'h eget %2$d arouezenn.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'En implij emañ anv ar jedouer API « %s ». Distroit, mar plij, ha dibabit unan all.';

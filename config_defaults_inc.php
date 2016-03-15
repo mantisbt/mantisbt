@@ -1069,12 +1069,6 @@ $g_sort_by_last_name = OFF;
 /**
  * Show user avatar
  *
- * The current implementation is based on http://www.gravatar.com
- * Users will need to register there the same email address used in this
- * MantisBT installation to have their avatar shown.
- * Please note: upon registration or avatar change, it takes some time for
- * the updated gravatar images to show on sites
- *
  * The config can be either set to OFF (avatars disabled) or set to a string
  * defining the default avatar to be used when none is associated with the
  * user's email. Valid values:
@@ -3063,14 +3057,6 @@ $g_default_manage_tag_prefix = 'ALL';
 $g_csv_separator = ',';
 
 /**
- * CSV Export
- * Add Byte Order Mark (BOM) at the beginning of the file as it helps Excel display the file in UTF-8
- * @global string $g_csv_add_bom
- */
-$g_csv_add_bom = OFF;
-
-
-/**
  * The threshold required for users to be able to manage configuration of a project.
  * This includes workflow, email notifications, columns to view, and others.
  */
@@ -4354,7 +4340,6 @@ $g_public_config_names = array(
 	'create_short_url',
 	'css_include_file',
 	'css_rtl_include_file',
-	'csv_add_bom',
 	'csv_separator',
 	'custom_field_edit_after_create',
 	'custom_field_link_threshold',

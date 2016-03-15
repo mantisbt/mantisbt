@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1339,6 +1339,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'evento "%1$s" non è stato ancora di
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Il plugin "%1$s" non registrato.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Il plugin "%1$s" non è stato caricato, assicurarsi che le sue dipendenze siano soddisfatte.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Il plugin "%1$s" è già installato.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'La classe "%2$s" non è definita nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La pagina "%2$s" non esiste nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Il file "%2$s" non esiste nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installazione del plugin non riuscita: %1$s.';

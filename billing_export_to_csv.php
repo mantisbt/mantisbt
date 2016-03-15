@@ -35,7 +35,6 @@ require_api( 'csv_api.php' );
 
 helper_begin_long_process();
 
-$t_filename = csv_get_default_filename();
 $t_date_format = config_get( 'normal_date_format' );
 
 $f_project_id = gpc_get_int( 'project_id' );
@@ -43,7 +42,8 @@ $f_cost = gpc_get_int( 'cost' );
 $f_from = gpc_get_string( 'from' );
 $f_to = gpc_get_string( 'to' );
 
-$t_separator = ',';
+$t_new_line = csv_get_newline();
+$t_separator = csv_get_separator();
 
 billing_ensure_reporting_access( $f_project_id );
 
@@ -52,10 +52,7 @@ $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost );
 $t_show_realname = config_get( 'show_realname' ) == ON;
 
-header( 'Pragma: public' );
-header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $t_filename ) ) );
-header( 'Content-Transfer-Encoding: BASE64;' );
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+csv_start( csv_get_default_filename() );
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;
@@ -76,7 +73,7 @@ if( $t_show_cost ) {
 }
 
 echo csv_escape_string( 'note' );
-echo "\n";
+echo $t_new_line;
 
 foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( bug_format_id( $t_billing['bug_id'] ) ) . $t_separator;
@@ -98,7 +95,7 @@ foreach( $t_billing_rows as $t_billing ) {
 	}
 
 	echo csv_escape_string( $t_billing['note'] );
-	echo "\n";
+	echo $t_new_line;
 }
 
 
