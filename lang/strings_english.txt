@@ -869,6 +869,7 @@ $s_category_deleted_msg = 'Category has been successfully deleted...';
 
 # manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br />Category "%1$s" contains %2$d issues.';
+$s_category_delete_confirm_msg = 'Are you sure you want to delete this category?<br />Category "%1$s" ';
 $s_delete_category_button = 'Delete Category';
 
 # manage_proj_category_edit_page.php
@@ -1673,6 +1674,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" not found for project "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'This Category cannot be deleted, because it is defined as "Default Category For Moves".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Category "%1$s" cannot be deleted, because it is associated with one or more issues.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.';
