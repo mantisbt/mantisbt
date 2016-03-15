@@ -1787,12 +1787,12 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  * This flag controls whether www URLs and email addresses
  * are automatically converted to clickable links as well as
  * where the www links open when clicked. Options:
- * 0 = Do not convert www URLs or email addresses to links
- * 1 = Convert to links that open in the current window (DEFAULT)
- * 2 = Convert to links that open in a new window
+ * OFF = Do not convert www URLs or email addresses to links
+ * LINKS_SAME_WINDOW = Convert to links that open in the current window (DEFAULT)
+ * LINKS_NEW_WINDOW = Convert to links that open in a new window
  * @global integer $g_html_make_links
  */
-$g_html_make_links = 1;
+$g_html_make_links = LINKS_SAME_WINDOW;
 
 /**
  * These are the valid html tags for multi-line fields (e.g. description)

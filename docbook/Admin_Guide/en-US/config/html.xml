@@ -12,9 +12,9 @@
 				<para>This flag controls whether www URLs and email addresses are
 					automatically converted into clickable links as well as where
 					the www links open when clicked. The options are:
-					0 = Do not convert www URLs and email addresses
-					1 = Convert to links that open in current window (DEFAULT)
-					2 = Convert to links that open in a new window
+					OFF = Do not convert www URLs and email addresses
+					LINKS_SAME_WINDOW = Convert to links that open in current window (DEFAULT)
+					LINKS_NEW_WINDOW = Convert to links that open in a new window
 				</para>
 			</listitem>
 		</varlistentry>

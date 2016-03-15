@@ -508,7 +508,7 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			if( config_get( 'html_make_links' ) == 2 ) {
+			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
 				# Have link open in a new window
 				$t_url_html = "<a ${t_url_href} target=\"_blank\">${p_match[1]}</a>";
 			} else {
