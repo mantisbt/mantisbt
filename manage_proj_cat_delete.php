@@ -73,12 +73,11 @@ if( $t_default_cat_count > 0 || $f_category_id == $t_default_category_id ) {
 	trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
 }
 
-# Get a bug count
-$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
-$t_bug_count = db_result( db_query( $t_query, array( $f_category_id ) ) );
+# Protect the category from deletion which is associted with an issue.
+category_ensure_can_delete( $f_category_id );
 
 # Confirm with the user
-helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), string_display_line( $t_name ), $t_bug_count ),
+helper_ensure_confirmed( sprintf( lang_get( 'category_delete_confirm_msg' ), string_display_line( $t_name ) ),
 	lang_get( 'delete_category_button' ) );
 
 category_remove( $f_category_id );

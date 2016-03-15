@@ -571,3 +571,29 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
 		return $t_row['name'];
 	}
 }
+
+/**
+ * Check category can be deleted 
+ * @param string $p_category_id Category identifier.
+ * @return boolean Return true if the category valid for delete, otherwise false
+ * @access public
+ */
+function category_can_delete( $p_category_id ) {
+	$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
+	$t_bug_count = db_result( db_query( $t_query, array( $p_category_id ) ) );
+	return $t_bug_count == 0;
+}
+
+/**
+ * Ensure category can be deleted, otherwise raise an error.
+ * @param string $p_category_id Category identifier.
+ * @return void
+ * @access public
+ */
+function category_ensure_can_delete( $p_category_id ) {
+	if( !category_can_delete( $p_category_id ) ) {
+		$category_name = category_get_name( $p_category_id );
+		error_parameters( $category_name );
+		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
+	}
+}
