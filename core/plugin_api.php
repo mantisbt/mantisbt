@@ -903,11 +903,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 
 	$t_basename = is_null( $p_child ) ? $p_basename : $p_child;
 	if( !isset( $g_plugin_cache[$t_basename] ) ) {
-		if( is_null( $p_child ) ) {
-			$t_classname = $p_basename . 'Plugin';
-		} else {
-			$t_classname = $p_child . 'Plugin';
-		}
+		$t_classname = $t_basename . 'Plugin';
 
 		# Include the plugin script if the class is not already declared.
 		if( !class_exists( $t_classname ) ) {
@@ -934,6 +930,9 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 			} else {
 				$g_plugin_cache[$t_basename] = $t_plugin;
 			}
+		} else {
+			error_parameters( $t_basename, $t_classname );
+			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
 		}
 	}
 

@@ -104,6 +104,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 					$t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
 					$t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
 					$t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+					filter_init( $t_filter );
 					print_filter_do_filter_by_date( true );
 				?>
 			</td>

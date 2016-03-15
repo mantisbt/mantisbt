@@ -693,6 +693,30 @@ function install_check_token_serialization() {
 }
 
 /**
+ * Schema update to install and configure new Gravatar plugin.
+ * If the instance has enabled use of avatars, then we register the plugin
+ * @return int 2 if successful
+ */
+function install_gravatar_plugin() {
+	if( config_get_global( 'show_avatar' ) ) {
+		$t_avatar_plugin = 'Gravatar';
+
+		# Register and install the plugin
+		$t_plugin = plugin_register( $t_avatar_plugin, true );
+		if( !is_null( $t_plugin ) ) {
+			plugin_install( $t_plugin );
+		} else {
+			error_parameters( $t_avatar_plugin );
+			echo '<br>' . error_string( ERROR_PLUGIN_INSTALL_FAILED );
+			return 1;
+		}
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+/**
  * create an SQLArray to insert data
  *
  * @param string $p_table Table.

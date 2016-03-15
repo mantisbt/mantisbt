@@ -192,3 +192,4 @@ config_obsolete( 'use_javascript' );
 config_obsolete( 'recently_visited', 'recently_visited_count' );
 config_obsolete( 'email_set_category' );
 config_obsolete( 'font_per_captcha' );
+config_obsolete( 'csv_add_bom' );

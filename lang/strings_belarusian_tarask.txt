@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1330,6 +1330,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Падзея «%1$s» яшчэ не б�
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Дапаўненьне «%1$s» не зарэгістраванае.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Дапаўненьне «%1$s» не загрузілася, праверце ўсе яго залежнасьці.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Дапаўненьне «%1$s» ужо ўсталяванае.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'Кляса «%2$s» ня вызначаная ў дадатку «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Старонка «%2$s» не існуе ў дапаўненьні «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Файл «%2$s» не існуе ў дапаўненьні «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Памылка ўсталяваньня плягіну: %1$s.';

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1330,6 +1330,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Настанот „%1$s“ сè ушт
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Приклучокот „%1$s“ не е регистриран во MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Приклучокот „%1$s" не е вчитан. Проверете дали неговите зависности се исполнети.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Приклучокот „%1$s“ е веќе воспоставен.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'Класата „%2$s“ не е определена во додатокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Страницата „%2$s“ не постои во приклучокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Податотеката „%2$s“ не постои во приклучокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Воспоставката на приклучокот не успеа: %1$s.';

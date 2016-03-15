@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1352,6 +1352,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'événement « %1$s » est indéfini
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Le module « %1$s » n’est pas enregistré.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Le module « %1$s » n’est pas chargé, assurez-vous que ses dépendances sont respectées.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Le module « %1$s » est déjà installé.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'La classe « %2$s » n’est pas définie dans le module « %1$s ».';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La page « %2$s » n’existe pas dans le module « %1$s ».';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Le fichier « %2$s » n’existe pas dans le module « %1$s ».';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Échec de l\'installation du plugin: %1$s.';

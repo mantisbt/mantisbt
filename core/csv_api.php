@@ -28,6 +28,7 @@
  * @uses category_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses project_api.php
  * @uses user_api.php
@@ -38,9 +39,30 @@ require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'user_api.php' );
+
+/**
+ * Emits the headers and byte order marker.  This must be called at the beginning
+ * of scripts that export CSV file before any other content is called.
+ *
+ * @param  string  $p_filename The csv filename and extension.
+ * @param  boolean $p_utf8     Use UTF8 or ASCII.
+ * @return void
+ */
+function csv_start( $p_filename ) {
+	$t_filename = urlencode( file_clean_name( $p_filename ) );
+
+	header( 'Pragma: public' );
+	header( 'Content-Encoding: UTF-8' );
+	header( 'Content-Type: text/csv; name=' . $t_filename . ';charset=UTF-8' );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename="' . $t_filename . '"' );
+
+	echo UTF8_BOM;
+}
 
 /**
  * get the csv file new line, can be moved to config in the future
