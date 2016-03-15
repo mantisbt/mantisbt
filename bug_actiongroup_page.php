@@ -207,6 +207,11 @@ switch( $f_action ) {
 		$t_button_title			= lang_get( 'target_version_group_bugs_button' );
 		$t_form					= 'target_version';
 		break;
+	case 'UP_DUE_DATE':
+		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
+		$t_form					= 'due_date';
+		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
@@ -216,7 +221,12 @@ switch( $f_action ) {
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
 }
-
+if( $f_action === 'UP_DUE_DATE' ) {
+    require_js( 'jscalendar/calendar.js' );
+    require_js( 'jscalendar/lang/calendar-en.js' );
+    require_js( 'jscalendar/calendar-setup.js' );
+    require_css( 'calendar-blue.css' );
+}
 bug_group_action_print_top();
 
 if( $t_multiple_projects ) {
@@ -260,7 +270,23 @@ if( $t_multiple_projects ) {
 			}
 
 			print_custom_field_input( $t_custom_field_def, $t_bug_id );
-		} else {
+		} else if ( $f_action === 'UP_DUE_DATE' ) {
+			$t_bug_id = null;
+			
+			# if there is only one issue, use its current value as default, otherwise,
+			# use the current due_date.
+			if( count( $f_bug_arr ) == 1 ) {
+				$t_bug_id = $f_bug_arr[0];
+				$t_bug = bug_get( $t_bug_id );
+				
+				$t_date_to_display = '';
+				if( !date_is_null( $t_bug->due_date ) ) {
+					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+				}
+			}
+			
+			echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+        } else {
 			echo '<select name="' . $t_form . '">';
 
 			switch( $f_action ) {
