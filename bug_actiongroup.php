@@ -290,7 +290,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			$t_due_date = gpc_get_string( 'due_date', null );
 			if( $t_due_date !== null ) {
 				if( is_blank( $t_due_date ) ) {
-					$t_due_date = 1;
+					$t_due_date = date_get_null();
 				} else {
 					$t_due_date = strtotime( $t_due_date );
 				}
