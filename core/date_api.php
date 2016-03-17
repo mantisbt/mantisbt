@@ -30,6 +30,7 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses user_pref_api.php
+ * @uses utility_api.php
  */
 
 require_api( 'authentication_api.php' );
@@ -39,6 +40,7 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'user_pref_api.php' );
+require_api( 'utility_api.php' );
 
 # Keeps track of whether the external files required for jscalendar to work
 # have already been included in the output sent to the client. jscalendar
@@ -65,6 +67,19 @@ function date_is_null( $p_date ) {
  */
 function date_get_null() {
 	return 1;
+}
+
+/**
+ * get timestamp when date is accepted by strtotime (http://php.net/manual/en/function.strtotime.php)
+ * @param $p_date
+ * @return int a timestamp on success, empty when $p_date is blank. 
+ * @access public
+ */
+function date_strtotime( $p_date ) {
+	if ( is_blank( $p_date ) ) {
+		return date_get_null();
+	}
+	return strtotime( $p_date );
 }
 
 /**
