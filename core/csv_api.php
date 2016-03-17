@@ -448,7 +448,12 @@ function csv_format_due_date( BugData $p_bug ) {
 	if( $s_date_format === null ) {
 		$s_date_format = config_get( 'short_date_format' );
 	}
-	return csv_escape_string( date( $s_date_format, $p_bug->due_date ) );
+	
+	$t_value = '';
+	if ( !date_is_null( $p_bug->due_date ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ) {
+		$t_value = date( $s_date_format, $p_bug->due_date );
+	}
+	return csv_escape_string( $t_value );
 }
 
 /**
