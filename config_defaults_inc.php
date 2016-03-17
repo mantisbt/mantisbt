@@ -4070,7 +4070,7 @@ $g_due_date_view_threshold = NOBODY;
  * Default due date value for newly submitted issues:
  * Empty string for no due date set.
  * Related date that is accepted by strtotime (http://php.net/manual/en/function.strtotime.php), e.g. 'today' or '+2 days'.
- * @global $g_due_date_default
+ * @global string $g_due_date_default
  */
 $g_due_date_default = '';
 
@@ -4403,9 +4403,9 @@ $g_public_config_names = array(
 	'display_bugnote_padding',
 	'display_project_padding',
 	'download_attachments_threshold',
+	'due_date_default',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
-	'due_date_default',
 	'email_ensure_unique',
 	'email_login_enabled',
 	'email_padding_length',
