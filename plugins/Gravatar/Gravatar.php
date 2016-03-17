@@ -118,9 +118,35 @@ class GravatarPlugin extends MantisPlugin {
 	function csp_headers() {
 		# Policy for images: Allow gravatar URL
 		if( config_get_global( 'show_avatar' ) !== OFF ) {
-			# Set CSP header
-			header( "Content-Security-Policy: img-src 'self' " .
-				self::getAvatarUrl() );
+			# Retrieve headers and attempt to find a CSP header entry.
+			$t_headers = headers_list();
+			foreach( $t_headers as $t_key => $t_item ) {
+				$t_pos = stripos( $t_item, 'Content-Security-Policy:' );
+				if ( $t_pos === 0 ) {
+					$t_csp = $t_item;
+					break;
+				}
+			}
+			
+			if ( $t_csp ) {
+				# Found a CSP header.
+				if ( stristr( $t_csp, 'img-src' ) ) {
+					# If we have an img-src policy already declared, inject.
+					$t_csp = preg_replace( '/(img\-src)(.*?(?=;)|(.*))/is', '$1$2 ' . 
+						self::getAvatarUrl(), $t_csp );
+				} else {
+					# Otherwise append.
+					$t_csp = $t_csp . "; img-src 'self' " .
+						self::getAvatarUrl();
+				}
+			} else {
+				# No current custom CSP header found, replace.
+				$t_csp = "Content-Security-Policy: img-src 'self' " .
+					self::getAvatarUrl();
+			}
+
+			# Set CSP header.
+			header( $t_csp );
 		}
 	}
 
