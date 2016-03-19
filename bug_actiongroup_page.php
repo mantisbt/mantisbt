@@ -271,15 +271,11 @@ if( $t_multiple_projects ) {
 
 			print_custom_field_input( $t_custom_field_def, $t_bug_id );
 		} else if ( $f_action === 'UP_DUE_DATE' ) {
-			$t_bug_id = null;
-			
-			# if there is only one issue, use its current value as default, otherwise,
-			# use the current due_date.
+			$t_date_to_display = '';
+			# if there is only one issue, use its current value as default
 			if( count( $f_bug_arr ) == 1 ) {
 				$t_bug_id = $f_bug_arr[0];
 				$t_bug = bug_get( $t_bug_id );
-				
-				$t_date_to_display = '';
 				if( !date_is_null( $t_bug->due_date ) ) {
 					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 				}
