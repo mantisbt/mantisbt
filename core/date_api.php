@@ -76,7 +76,7 @@ function date_get_null() {
  * @access public
  */
 function date_strtotime( $p_date ) {
-	if ( is_blank( $p_date ) ) {
+	if( is_blank( $p_date ) ) {
 		return date_get_null();
 	}
 	return strtotime( $p_date );
