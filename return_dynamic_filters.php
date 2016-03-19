@@ -49,7 +49,11 @@ require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 
-auth_ensure_user_authenticated();
+#if user is not authenticated, return err "401 Unauthorized"
+if( !auth_is_user_authenticated() ) {
+	header( ' ', true, 401 );
+	exit;
+}
 
 compress_enable();
 
@@ -150,7 +154,10 @@ if( function_exists( $t_function_name ) ) {
 
 	if( !$t_found ) {
 		# error - no function to populate the target (e.g., print_filter_foo)
+		# return err "400 Bad Request", and log event
 		error_parameters( $f_filter_target );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		log_event( LOG_AJAX, error_string( ERROR_FILTER_NOT_FOUND ) );
+		header( ' ', true, 400 );
+		exit;
 	}
 }
