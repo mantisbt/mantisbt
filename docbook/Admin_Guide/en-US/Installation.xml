@@ -644,15 +644,6 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>Load up <emphasis>admin/check/index.php</emphasis>
 					to validate if everything is setup correctly.
 				</para>
-				<para>NOTE (for PHP 5.2 only):
-					check.php sometimes reports the value of
-					<emphasis>register_globals</emphasis> incorrectly.
-					To confirm the correct value,
-					Create a page with this line in it:
-					<programlisting>&lt;?php phpinfo(); ?&gt;</programlisting>
-					save it with a .php extension and load it up in your
-					web browser.
-				</para>
 			</listitem>
 
 			<listitem>
