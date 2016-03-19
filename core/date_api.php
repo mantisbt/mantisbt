@@ -70,9 +70,9 @@ function date_get_null() {
 }
 
 /**
- * get timestamp when date is accepted by strtotime (http://php.net/manual/en/function.strtotime.php)
- * @param $p_date
- * @return int a timestamp on success, empty when $p_date is blank. 
+ * gets Unix timestamp from date string
+ * @param string $p_date A valid date/time string (see http://php.net/manual/en/datetime.formats.php)
+ * @return false|int a timestamp on success, null date when $p_date is blank or false on failure.
  * @access public
  */
 function date_strtotime( $p_date ) {
