@@ -2679,6 +2679,29 @@
 	 * @global string $g_source_control_fixed_regexp
 	 */
 	$g_source_control_fixed_regexp = "%source_control_regexp%";
+	
+	/**
+	 * Regular expression used to detect issue ids within $g_source_control_regexp and
+	 * $g_source_control_fixed_regexp matches. This two-step matching makes it possible
+	 * to match more elaborate patterns.
+	 *
+	 * Example:
+	 *   $g_source_control_regexp = '/\b (?: feature | bug | issue)s? (?: \s+ | : \s*) (\#\d+ (?: (?: \s* , \s* | \s+ and \s+ | \s+) \#\d+)*) \b/xi';
+	 *   $g_source_control_fixed_regexp = '/\b (?: implement(?: ed|s) | fix(?: ed|es) | clos(?: ed|es)) (?: \s+ (?: feature | bug | issue)s?)? (?: \s+ | : \s*) (\#\d+ (?: (?: \s* , \s* | \s+ and \s+ | \s+) \#\d+)*) \b/xi';
+	 *   $g_source_control_issue_regexp = '/\d+/';
+	 *
+	 * Applied to the following checking comment:
+	 *   Worked on #1, #2 and #3.
+	 *   Related bug: #4.
+	 *   Fixed bug #5 and #6.
+	 *   Implemented features #7, #8.
+	 *   Closes #9.
+	 *
+	 * Will add a comment on issues 1, 2, 3, 4 and mark issues 5, 6, 7, 8, 9 as fixed.
+	 *
+	 * @global string $g_source_control_issue_regexp
+	 */
+	$g_source_control_issue_regexp = '/\d+/';
 
 	/**
 	 * Bug Linking

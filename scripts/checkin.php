@@ -41,25 +41,30 @@ if( !defined( "STDIN" ) ) {
 # Detect references to issues + concat all lines to have the comment log.
 $t_commit_regexp = config_get( 'source_control_regexp' );
 $t_commit_fixed_regexp = config_get( 'source_control_fixed_regexp' );
+$t_commit_issue_regexp = config_get( 'source_control_issue_regexp' );
+
+function match_issues( $p_regexp, $p_issue_regexp, $p_line, &$p_issues )
+{
+	if( preg_match_all( $p_regexp, $p_line, $t_matches ) ) {
+		$t_count = count( $t_matches[0] );
+		for( $i = 0;$i < $t_count;++$i ) {
+			if( preg_match_all( $p_issue_regexp, $t_matches[1][$i], $t_issue_matches ) ) {
+				$t_issue_count = count( $t_issue_matches[0] );
+				for ( $j = 0;$j < $t_issue_count;++$j ) {
+					$p_issues[] = $t_issue_matches[0][$j];
+				}
+			}
+		}
+	}
+}
 
 $t_comment = '';
 $t_issues = array();
 $t_fixed_issues = array();
 while(( $t_line = fgets( STDIN, 1024 ) ) ) {
 	$t_comment .= $t_line;
-	if( preg_match_all( $t_commit_regexp, $t_line, $t_matches ) ) {
-		$t_count = count( $t_matches[0] );
-		for( $i = 0;$i < $t_count;++$i ) {
-			$t_issues[] = $t_matches[1][$i];
-		}
-	}
-
-	if( preg_match_all( $t_commit_fixed_regexp, $t_line, $t_matches ) ) {
-		$t_count = count( $t_matches[0] );
-		for( $i = 0;$i < $t_count;++$i ) {
-			$t_fixed_issues[] = $t_matches[1][$i];
-		}
-	}
+	match_issues( $t_commit_regexp, $t_commit_issue_regexp, $t_line, $t_issues );
+	match_issues( $t_commit_fixed_regexp, $t_commit_issue_regexp, $t_line, $t_fixed_issues );
 }
 
 # If no issues found, then no work to do.
