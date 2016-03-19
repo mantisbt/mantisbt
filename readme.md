@@ -39,7 +39,7 @@ UPGRADING
  * Copy your configuration from the old installation to the new directory,
    including config_inc.php, custom_strings_inc.php, custom_relationships_inc.php,
    custom_functions_inc.php and custom_constants_inc.php if they exist
- * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
+ * Point your browser to http://path/to/mantisbt/admin/check/index.php to ensure that
    your webserver is compatible with MantisBT and configured correctly
  * Point your browser to http://path/to/mantisbt/admin/install.php to upgrade
    the database schema

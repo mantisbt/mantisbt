@@ -384,7 +384,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 					should also be able to handle decompression of the archive.
 				</para>
 				<para>The extraction process should create a new directory like
-					<emphasis>mantisbt-1.2.x</emphasis>
+					<emphasis>mantisbt-1.3.x</emphasis>
 				</para>
 			</listitem>
 
@@ -394,7 +394,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>For new installations, you may want to rename the
 					directory just created to something simpler, e.g.
 					<emphasis>mantisbt</emphasis>
-					<programlisting>mv mantisbt-1.2.x mantisbt</programlisting>
+					<programlisting>mv mantisbt-1.3.x mantisbt</programlisting>
 				</para>
 			</listitem>
 		</orderedlist>
@@ -521,8 +521,8 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>Copy the configuration files
 				</para>
 				<para>To preserve your system settings, you should copy the
-					files listed below to the new directory, as well as any other
-					custom files such as logo, favicon, css, etc.
+					files listed below to subdirectory config of the new directory.
+					You might have to copy as well other custom files such as logo, favicon, css, etc.
 				</para>
 				<para>
 					<filename>config_inc.php</filename>,
@@ -735,10 +735,10 @@ tar -xf <emphasis>filename.tar</emphasis>
 					(or wherever the mantisbt scripts are installed)
 					and assume that the "live" directory (old version)
 					is named <emphasis>mantisbt</emphasis> and the new release
-					directory is <emphasis>mantisbt-1.2.x</emphasis>.
+					directory is <emphasis>mantisbt-1.3.x</emphasis>.
 					<programlisting>
 mv mantisbt mantisbt-old
-mv mantisbt-1.2.x mantisbt
+mv mantisbt-1.3.x mantisbt
 </programlisting>
 				</para>
 			</listitem>
