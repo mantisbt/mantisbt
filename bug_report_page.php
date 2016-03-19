@@ -172,7 +172,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
-	$f_due_date				= gpc_get_string( 'due_date', '' );
+	$f_due_date				= gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
 
 	if( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
