@@ -592,8 +592,9 @@ function category_can_delete( $p_category_id ) {
  */
 function category_ensure_can_delete( $p_category_id ) {
 	if( !category_can_delete( $p_category_id ) ) {
-		$category_name = category_get_name( $p_category_id );
-		error_parameters( $category_name );
+		$t_category_name = category_get_name( $p_category_id );
+		error_parameters( $t_category_name );
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
 	}
 }
+
