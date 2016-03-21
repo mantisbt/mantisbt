@@ -130,11 +130,11 @@ function form_security_param( $p_form_name, $p_security_token = null ) {
 	$t_string = $p_security_token === null ? form_security_token( $p_form_name ) : $p_security_token;
 
 	# Create the GET parameter to be used in a URL for a secure link
-	$t_form_token = $p_form_name . '_token';
-	$t_param = '&%s=%s';
-	$t_param = sprintf( $t_param, $t_form_token, $t_string );
-
-	return $t_param;
+	return sprintf(
+		'&%s=%s',
+		$p_form_name . '_token',
+		$t_string
+	);
 }
 
 /**
