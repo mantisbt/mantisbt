@@ -120,7 +120,7 @@ function form_security_field( $p_form_name, $p_security_token = null ) {
  * Get a URL parameter containing a generated form security token.
  * @param string $p_form_name Form name.
  * @param string $p_security_token Optional security token, previously generated for the same form.
- * @return string Hidden form element to output
+ * @return string URL parameter containing security token
  */
 function form_security_param( $p_form_name, $p_security_token = null ) {
 	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
