@@ -127,7 +127,7 @@ function form_security_param( $p_form_name, $p_security_token = null ) {
 		return '';
 	}
 
-	$t_string = $p_security_token !== null ?: form_security_token( $p_form_name );
+	$t_string = $p_security_token === null ? form_security_token( $p_form_name ) : $p_security_token;
 
 	# Create the GET parameter to be used in a URL for a secure link
 	$t_form_token = $p_form_name . '_token';
