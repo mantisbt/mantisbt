@@ -1253,10 +1253,21 @@ function html_status_legend() {
 	$t_workflow = config_get( 'status_enum_workflow' );
 	if( !empty( $t_workflow ) ) {
 		foreach( $t_status_array as $t_status => $t_name ) {
+			# Check if the workflow allows leaving the state
 			if( !isset( $t_workflow[$t_status] ) ) {
+				# Check if the workflow allows entering the state
+				$t_can_enter = false;
+				foreach( $t_workflow as $t_values ) {
+					if( MantisEnum::hasValue( $t_values, $t_status ) ) {
+						$t_can_enter = true;
+						break;
+					}
+				}
 
 				# drop elements that are not in the workflow
-				unset( $t_status_array[$t_status] );
+				if( !$t_can_enter ) {
+					unset( $t_status_array[$t_status] );
+				}
 			}
 		}
 	}
