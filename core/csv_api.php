@@ -238,6 +238,16 @@ function csv_format_target_version( BugData $p_bug ) {
 }
 
 /**
+ * return the tags
+ * @param BugData $p_bug A BugData object.
+ * @return string formatted tags string
+ * @access public
+ */
+function csv_format_tags( BugData $p_bug ) {
+	return csv_escape_string( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ? tag_bug_get_all( $p_bug->id ) : '' );
+}
+
+/**
  * return the projection
  * @param BugData $p_bug A BugData object.
  * @return string formatted projection string

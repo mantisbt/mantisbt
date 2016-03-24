@@ -161,6 +161,8 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 
 	$t_columns['notes'] = null;
 
+	$t_columns['tags'] = null;
+
 	return array_keys( $t_columns );
 }
 
@@ -609,6 +611,19 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
 	print_view_bug_sort_link( lang_get( 'fixed_in_version' ), 'fixed_in_version', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'fixed_in_version' );
 	echo '</th>';
+}
+
+/**
+ * Print table header for column tags
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
 }
 
 /**
@@ -1507,6 +1522,24 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
 		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
 	} else {
 		echo '&#160;';
+	}
+
+	echo '</td>';
+}
+
+/**
+ * Print column content for column tags
+ *
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td class="column-view-state">';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		echo string_display_line( tag_bug_get_all( $p_bug->id ) );
 	}
 
 	echo '</td>';

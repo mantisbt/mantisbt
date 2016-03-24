@@ -364,6 +364,15 @@ function excel_format_fixed_in_version( BugData $p_bug ) {
 }
 
 /**
+ * Gets the formatted tags.
+ * @param BugData $p_bug A bug object.
+ * @return string the tags.
+ */
+function excel_format_tags( BugData $p_bug ) {
+	return excel_prepare_string( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ? tag_bug_get_all( $p_bug->id ) : '' );
+}
+
+/**
  * Gets the formatted target version.
  * @param BugData $p_bug A bug object.
  * @return string the target version.
