@@ -404,8 +404,8 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 
 	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
 	foreach ( $t_rows as $t_row ) {
-		$t_string = $t_row['name'];
-		echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['name'] ), '">', string_attribute( $t_string ), '</option>';
+		echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['description'] );
+		echo '">', string_attribute( $t_row['name'] ), '</option>';
 	}
 }
 
