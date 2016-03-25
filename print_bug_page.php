@@ -541,14 +541,20 @@ if( $t_show_attachments ) {
 	echo '</td></tr>';
 }
 
+echo '</table>';
+
+define( 'PRINT_BUGNOTE_INC_ALLOW', true );
+include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
+
 #
 # Issue History
 #
 
 if( $t_show_history ) {
+	echo '<br />';
+	echo '<table class="width100" cellspacing="1">';
+	echo '<tr><td class="form-title" colspan="2">', lang_get( 'bug_history' ), '</td></tr>';
 	echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
-
-	echo '<tr><th class="form-title">', lang_get( 'bug_history' ), '</th></tr>';
 
 	echo '<tr class="print-category">';
 	echo '<th class="row-category-history">', lang_get( 'date_modified' ), '</th>';
@@ -569,12 +575,9 @@ if( $t_show_history ) {
 		echo '<td class="print">', string_display_line_links( $t_item['change'] ), '</td>';
 		echo '</tr>';
 	}
+
+	echo '</table>';
 }
-
-echo '</table>';
-
-define( 'PRINT_BUGNOTE_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
 
 last_visited_issue( $f_bug_id );
 
