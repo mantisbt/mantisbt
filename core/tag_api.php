@@ -792,6 +792,25 @@ function tag_display_attached( $p_bug_id ) {
 }
 
 /**
+ * Get all attached tags separated by the Tag Separator.
+ * @param integer $p_bug_id The bug ID to display.
+ * @return string tags separated by the configured Tag Separator
+ */
+function tag_bug_get_all( $p_bug_id ) {
+	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
+	$t_value = '';
+
+	$i = 0;
+	foreach( $t_tag_rows as $t_tag ) {
+		$t_value .= ( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
+		$t_value .= $t_tag['name'];
+		$i++;
+	}
+
+	return $t_value;
+}
+
+/**
  * Get the number of bugs a given tag is attached to.
  * @param integer $p_tag_id The tag ID to retrieve statistics on.
  * @return int Number of attached bugs
