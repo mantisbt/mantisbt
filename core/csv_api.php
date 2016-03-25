@@ -244,7 +244,13 @@ function csv_format_target_version( BugData $p_bug ) {
  * @access public
  */
 function csv_format_tags( BugData $p_bug ) {
-	return csv_escape_string( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ? tag_bug_get_all( $p_bug->id ) : '' );
+	$t_value = '';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		$t_value = tag_bug_get_all( $p_bug->id );
+	}
+
+	return csv_escape_string( $t_value );
 }
 
 /**

@@ -124,6 +124,8 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 
 	$t_columns['selection'] = null;
 	$t_columns['edit'] = null;
+	$t_columns['notes'] = null;
+	$t_columns['tags'] = null;
 
 	# Overdue icon column (icons appears if an issue is beyond due_date)
 	$t_columns['overdue'] = null;
@@ -158,10 +160,6 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
-
-	$t_columns['notes'] = null;
-
-	$t_columns['tags'] = null;
 
 	return array_keys( $t_columns );
 }
