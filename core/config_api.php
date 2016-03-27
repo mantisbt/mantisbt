@@ -78,7 +78,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 	$t_bypass_lookup = !config_can_set_in_database( $p_option );
 
 	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-
 	if( !$t_bypass_lookup ) {
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
@@ -132,7 +131,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			# @@ debug @@ echo 'pr= '; var_dump($t_projects);
 			# @@ debug @@ echo 'u= '; var_dump($t_users);
-
 			if( !$g_cache_filled ) {
 				$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}';
 				$t_result = db_query( $t_query );
@@ -689,3 +687,38 @@ function config_is_private( $p_config_var ) {
 	return !in_array( $p_config_var, $g_public_config_names, true );
 }
 
+/**
+ * Check if a configuration is defined in the database with the given value.
+ *
+ * @param string  $p_option  The configuration option to retrieve.
+ * @param string  $p_value   Value to check for (defaults to null = any value).
+ * @return boolean True if option is defined
+ */
+function config_is_defined( $p_option, $p_value = null ) {
+	global $g_cache_filled, $g_cache_config;
+
+	if( !$g_cache_filled ) {
+		config_get( $p_option, -1 );
+	}
+
+	if( !isset( $g_cache_config[$p_option] ) ) {
+		# Option is not in cache
+		return false;
+	} elseif( $p_value === null ) {
+		# We're not checking any specific value
+		return true;
+	}
+
+	# Check the cache for specified value
+	foreach( $g_cache_config[$p_option] as $t_project ) {
+		foreach( $t_project as $t_opt ) {
+			list( , $t_value ) = explode( ';', $t_opt );
+			if( $t_value == $p_value ) {
+				return true;
+			}
+		}
+	}
+
+	# Value not found in cache
+	return false;
+}
