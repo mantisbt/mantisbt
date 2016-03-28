@@ -100,7 +100,7 @@ class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id = null ) {
 		global $g_cookie_secure_flag_enabled;
 
-		$this->key = hash( 'whirlpool', 'session_key' . config_get_global( 'crypto_master_salt' ), false );
+		$this->key = hash( 'whirlpool', 'session_key_v_2' . config_get_global( 'crypto_master_salt' ), false );
 
 		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
