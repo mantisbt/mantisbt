@@ -312,12 +312,44 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
  * @return void
  */
 function auth_impersonate( $p_user_id ) {
-	# Make sure the logged in user can impersonate other users.  If user can
-	# manage users, then they would be able to impersonate them.
-	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+	auth_ensure_can_impersonate( $p_user_id );
 
 	auth_set_cookies( $p_user_id, /* perm_login */ false );
 	auth_set_tokens( $p_user_id );
+}
+
+/**
+ * Check whether the logged in user can impersonate the specified user.
+ *
+ * @param int $p_user_id  The user id to be impersonated.
+ * @return bool true: can impersonate, false: can't.
+ */
+function auth_can_impersonate( $p_user_id ) {
+	# Make sure the logged in user can impersonate other users.  If user can
+	# manage users, then they would be able to impersonate them.
+	if( !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		return false;
+	}
+
+	# User can't impersonate themselves
+	if( $p_user_id == auth_get_current_user_id() ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Ensure that the logged in user can impersonate the specified user.  If not,
+ * then an error page will be generated.
+ *
+ * @param int $p_user_id  The user id to be impersonated.
+ * @return void.
+ */
+function auth_ensure_can_impersonate( $p_user_id ) {
+	if( !auth_can_impersonate( $p_user_id ) ) {
+		access_denied();
+	}
 }
 
 /**

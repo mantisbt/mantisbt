@@ -110,7 +110,21 @@ html_page_top();
 	</div>
 	<span class="section-links">
 	<?php if( $t_can_manage ) { ?>
-			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
+		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="action-button">
+			<fieldset>
+				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
+				<span><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+			</fieldset>
+		</form>
+	<?php } ?>
+	<?php if( auth_can_impersonate( $f_user_id ) ) { ?>
+		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="action-button">
+			<fieldset>
+				<?php echo form_security_field( 'manage_user_impersonate' ) ?>
+				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
+				<span><input type="submit" class="button" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
+			</fieldset>
+		</form>
 	<?php } ?>
 	</span>
 </div><?php
