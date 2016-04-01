@@ -306,6 +306,21 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 }
 
 /**
+ * Impersonates the specified user by logging in.
+ *
+ * @param int $p_user_id The user id.
+ * @return void
+ */
+function auth_impersonate( $p_user_id ) {
+	# Make sure the logged in user can impersonate other users.  If user can
+	# manage users, then they would be able to impersonate them.
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
+
+	auth_set_cookies( $p_user_id, /* perm_login */ false );
+	auth_set_tokens( $p_user_id );
+}
+
+/**
  * Allows scripts to login using a login name or ( login name + password )
  *
  * There are multiple scenarios where this is used:

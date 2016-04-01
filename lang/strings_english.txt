@@ -977,6 +977,7 @@ $s_edit_user_title = 'Edit User';
 $s_account_unlock_button = 'Unlock Account';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
+$s_impersonate_user_button = 'Impersonate User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'All';
