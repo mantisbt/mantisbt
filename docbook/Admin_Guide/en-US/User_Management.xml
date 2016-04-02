@@ -180,6 +180,16 @@
 	resetting password will set the password to an empty string.</para>
     </section>
 
+	<section id="admin.user.impersonation">
+		<title>Impersonating a user</title>
+
+		<para>Administrators are able to impersonate users in order to reproduce
+		an issue reported by a user, test their access making sure they can
+		access the expected projects/issues/fields, or to create API tokens for
+		service accounts that are used to grant other systems limited access to
+		MantisBT.</para>
+	</section>
+
     <section id="admin.user.passwordchange">
         <title>Changing Password</title>
 

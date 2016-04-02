@@ -325,9 +325,7 @@ function auth_impersonate( $p_user_id ) {
  * @return bool true: can impersonate, false: can't.
  */
 function auth_can_impersonate( $p_user_id ) {
-	# Make sure the logged in user can impersonate other users.  If user can
-	# manage users, then they would be able to impersonate them.
-	if( !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+	if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
 		return false;
 	}
 

@@ -2764,6 +2764,12 @@ $g_project_user_threshold = MANAGER;
 $g_manage_user_threshold = ADMINISTRATOR;
 
 /**
+ * Threshold needed to impersonate a user or NOBODY to disable the feature.
+ * @global integer $g_impersonate_user_threshold
+ */
+$g_impersonate_user_threshold = ADMINISTRATOR;
+
+/**
  * Delete bug threshold
  * @global integer $g_delete_bug_threshold
  */
@@ -4429,6 +4435,7 @@ $g_public_config_names = array(
 	'html_make_links',
 	'html_valid_tags_single_line',
 	'html_valid_tags',
+	'impersonate_user_threshold',
 	'inline_file_exts',
 	'limit_reporters',
 	'logo_image',

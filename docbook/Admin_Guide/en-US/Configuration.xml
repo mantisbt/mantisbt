@@ -45,4 +45,5 @@
 	<xi:include href="config/soap.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/antispam.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/duedate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<xi:include href="config/user.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
