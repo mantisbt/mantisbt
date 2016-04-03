@@ -667,10 +667,12 @@ function layout_navbar_user_avatar( $p_img_class = '' ) {
 	}
 
 	if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-		$t_avatar = user_get_avatar( $p_user_id, 40 );
+		$t_avatar = Avatar::get( $p_user_id, 32 );
 		if( false !== $t_avatar ) {
-			$t_avatar_url = htmlspecialchars( $t_avatar[0] );
-			echo '<img class="' . $p_img_class .  '" src="' . $t_avatar_url . '" alt="User avatar" />';
+			$t_image = htmlspecialchars( $t_avatar->image );
+			$t_text = htmlspecialchars( $t_avatar->text );
+
+			echo '<img class="nav-user-photo" src="' . $t_image . '" alt="' . $t_text . '" />';
 			return;
 		}
 	}
