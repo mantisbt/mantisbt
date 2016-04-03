@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -516,6 +516,7 @@ $s_choose_project = 'Выбраць праект';
 $s_login_button = 'Увайсьці';
 $s_signup_link = 'Стварыць новы рахунак';
 $s_lost_password_link = 'Забылі пароль?';
+$s_username_or_email = 'Імя ўдзельніка ці адрас электроннай пошты';
 $s_select_project_button = 'Выбраць праект';
 $s_lost_password_title = 'Ачыстка паролю';
 $s_lost_password_done_title = 'Паведамленьне з паролем дасланае';
@@ -1236,6 +1237,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Памылка загрузкі файл�
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Памылка загрузкі файла. Гэта адбылася, хутчэй за ўсё, таму што памер файла быў большы за дазволены ў гэтым усталяваньні PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Неабходны парамэтар для гэтай старонкі (%1$s) ня быў знойдзены.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Гэтае імя карыстальніка ўжо выкарыстоўваецца. Калі ласка, вярніцеся і выберыце іншае.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Гэты адрас электроннай пошты ўжо выкарыстоўваецца. Калі ласка, вярніцеся і абярыце іншы.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Парамэтар канфігурацыі «%1$s» ня знойдзены.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Немагчыма ўстанавіць парамэтар канфігурацыі «%1$s» у базе зьвестак. Ён павінен быць устаноўлены ў config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Радок «%1$s» ня знойдзены.';
@@ -1328,6 +1330,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Падзея «%1$s» яшчэ не б�
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Дапаўненьне «%1$s» не зарэгістраванае.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Дапаўненьне «%1$s» не загрузілася, праверце ўсе яго залежнасьці.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Дапаўненьне «%1$s» ужо ўсталяванае.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'Кляса «%2$s» ня вызначаная ў дадатку «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Старонка «%2$s» не існуе ў дапаўненьні «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Файл «%2$s» не існуе ў дапаўненьні «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Памылка ўсталяваньня плягіну: %1$s.';

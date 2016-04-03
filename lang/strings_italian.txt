@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -297,7 +297,7 @@ $s_confirm_password = 'Conferma password';
 $s_current_password = 'Password attuale';
 $s_access_level = 'Livello di accesso';
 $s_access_level_label = 'Livello di accesso';
-$s_update_user_button = 'Aggiorna account';
+$s_update_user_button = 'Aggiorna utente';
 $s_verify_warning = 'Le informazioni sul tuo account sono state verificate.  Il messaggio di conferma dell\'account che hai ricevuto non è più valido.';
 $s_verify_change_password = 'Devi impostare una password per poter accedere di nuovo.';
 $s_api_tokens_link = 'Token API';
@@ -524,6 +524,7 @@ $s_choose_project = 'Seleziona progetto';
 $s_login_button = 'Login';
 $s_signup_link = 'Registrati come nuovo utente';
 $s_lost_password_link = 'Hai dimenticato la password?';
+$s_username_or_email = 'Nome utente o indirizzo e-mail';
 $s_select_project_button = 'Seleziona progetto';
 $s_lost_password_title = 'Reimposta password';
 $s_lost_password_done_title = 'Messaggio di reimpostazione password inviato';
@@ -1245,6 +1246,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Il caricamento del file è fallito.  Il f
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Il caricamento del file è fallito.  Molto probabilmente perché la sua dimensione superava quella massima consentita da questa installazione PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un parametro obbligatorio per questa pagina (%1$s) non è stato specificato.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Quel nome utente è già utilizzato.  Torna indietro e scegline uno diverso.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Questa email è già utilizzata. Torna indietro e scegline una diversa.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'opzione di configurazione "%1$s" non è stata trovata.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L\'opzione di configurazione "%1$s" non può essere impostata nel database. Deve essere specificata nel file config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'La stringa "%1$s" non è stata trovata.';
@@ -1337,6 +1339,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'evento "%1$s" non è stato ancora di
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Il plugin "%1$s" non registrato.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Il plugin "%1$s" non è stato caricato, assicurarsi che le sue dipendenze siano soddisfatte.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Il plugin "%1$s" è già installato.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'La classe "%2$s" non è definita nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La pagina "%2$s" non esiste nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'Il file "%2$s" non esiste nel plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installazione del plugin non riuscita: %1$s.';

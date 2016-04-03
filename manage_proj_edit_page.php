@@ -749,6 +749,14 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
+	# If including global users, fetch here all local user to later distinguish them
+	$t_local_users = array();
+	if( $f_show_global_users ) {
+		$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
+	}
+
+	$t_token_remove_user = form_security_token('manage_proj_user_remove');
+
 	for( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
@@ -769,8 +777,11 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					# You need global or project-specific permissions to remove users
 					#  from this project
 					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
-						if( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-							print_form_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
+						if( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) ) {
+							print_form_button( 'manage_proj_user_remove.php',
+									lang_get( 'remove_link' ),
+									array ( 'project_id' => $f_project_id, 'user_id' => $t_user['id'] ),
+									$t_token_remove_user );
 							$t_removable_users_exist = true;
 						}
 					} ?>
@@ -790,16 +801,18 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	#  from this project
 	if( !$f_show_global_users ) {
 		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ),
-			null, null, 'btn btn-sm btn-primary btn-white btn-round' );
+			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	} else {
 		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ),
-			null, null, 'btn btn-sm btn-primary btn-white btn-round' );
+			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	}
 
 	if( $t_removable_users_exist ) {
 		echo '&#160;';
-		print_form_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ),
-			null, null, 'btn btn-sm btn-primary btn-white btn-round' );
+		print_form_button( 'manage_proj_user_remove.php',
+				lang_get( 'remove_all_link' ),
+				array( 'project_id' => $f_project_id ),
+				$t_token_remove_user );
 	}
 	?>
 </div>

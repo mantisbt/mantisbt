@@ -172,7 +172,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
-	$f_due_date				= gpc_get_string( 'due_date', '' );
+	$f_due_date				= gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
 
 	if( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
@@ -201,6 +201,14 @@ $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
 $t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
 $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_show_status = in_array( 'status', $t_fields );
+$t_show_tags =
+	in_array( 'tags', $t_fields ) &&
+	access_has_global_level( config_get( 'tag_view_threshold', /* default */ null, /* user */ null, $t_project_id ) );
+$t_can_attach_tag =
+	$t_show_tags &&
+	access_has_project_level(
+		config_get( 'tag_attach_threshold', /* default */ null, /* user */ null, $t_project_id ),
+		$t_project_id );
 
 $t_show_versions = version_should_show_product_version( $t_project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
@@ -561,6 +569,19 @@ if( $t_show_attachments ) {
 			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
 		</td>
 	</tr>
+<?php
+	}
+
+	# Display tags fields
+	if( $t_show_tags ) { ?>
+		<div class="field-container">
+			<label><span><?php echo lang_get( 'tag_attach_long' ) ?></span></label>
+			<span class="input">
+				<label><?php print_tag_input( '' ); ?></label>
+				</span>
+			<span class="label-style"></span>
+		</div>
+
 <?php
 	}
 

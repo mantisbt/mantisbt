@@ -149,6 +149,12 @@ $t_lang_additional_information = lang_get( 'additional_information' );
 $t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
 $t_lang_system_profile = lang_get( 'system_profile' );
 $t_lang_attached_files = lang_get( 'attached_files' );
+$t_lang_tags = lang_get( 'tags' );
+
+$t_fields = config_get( 'bug_view_page_fields' );
+$t_fields = columns_filter_disabled( $t_fields );
+
+$t_show_tags = in_array( 'tags', $t_fields ) && access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 $t_current_user_id = auth_get_current_user_id();
 $t_user_bugnote_order = user_pref_get_pref( $t_current_user_id, 'bugnote_order' );
@@ -414,6 +420,16 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<?php echo string_display_links( $t_bug->description ) ?>
 	</td>
 </tr>
+<?php if( $t_show_tags ) { ?>
+<tr>
+	<td class="print">
+		<?php echo sprintf( lang_get( 'label' ), $t_lang_tags ) ?>
+	</td>
+	<td colspan="5">
+		<?php echo string_display_links( tag_bug_get_all( $t_bug->id ) ) ?>
+	</td>
+</tr>
+<?php }?>
 <tr>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_steps_to_reproduce ) ?>

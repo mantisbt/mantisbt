@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,11 +40,13 @@
  *
  * @author Claw eg
  * @author DRIHEM
+ * @author Maroen1990
  * @author Meno25
  * @author OsamaK
  * @author Tarawneh
  * @author Test Create account
  * @author زكريا
+ * @author محمد أحمد عبد الفتاح
  */
 
 $s_directionality = 'rtl';
@@ -290,6 +292,7 @@ $s_access_level = 'مستوى الدخول';
 $s_update_user_button = 'تحديث المستخدم';
 $s_verify_warning = 'معلومات حسابك تم تأكيدها. رسالة تأكيد الحساب التي تلقيتها الآن غير صحيحة.';
 $s_verify_change_password = 'يجب أن تضبط كلمة سر هنا ليسمح لك بتسجيل الدخول مرة ثانية.';
+$s_last_used = 'آخر استخدام';
 $s_default_account_preferences_title = 'تفضيلات الحساب';
 $s_default_project = 'المشروع الافتراضي';
 $s_refresh_delay = 'تحديث التأخير';
@@ -397,7 +400,7 @@ $s_reminder_list_truncated = 'تم اقتطاع قائمة المستلمين';
 $s_bug_send_button = 'أرسل';
 $s_reminder = 'تذكرة';
 $s_reminder_explain = 'هذه الملاحظة سيتنم إرسالها إلى المتلقين المعروضين كطالبي ردود على هذه القضية.';
-$s_reminder_monitor = 'هؤلاء المتلقون سيبدءون أيضا مراقبة القضايا. يمكنهم التوقف باستخدام زر التوقف عن المراقبة.';
+$s_reminder_monitor = 'هؤلاء المتلقون سيبدءون أيضا مراقبة القضايا. يمكنهم التوقف باستخدام زر "التوقف عن المراقبة".';
 $s_reminder_store = 'هذه الملاحظة سيتم تخزينها مع القضية.';
 $s_confirm_sponsorship = 'من فضلك أكد أنك تريد رعاية القضية %1$d ل%2$s.';
 $s_stick_bug_button = 'ثبّت';
@@ -472,9 +475,9 @@ $s_last_edited = 'آخر تعديل:';
 $s_hide_content = 'إخفاء المحتوى';
 $s_show_content = 'إظهار المحتوى';
 $s_webmaster_contact_information = 'تواصل مع <a href="mailto:%1$s" title="تواصل مع مدير الموقع عبر البريد الإلكتروني">المدير</a> للحصول على المساعدة';
-$s_total_queries_executed = '%1$d استعلامات إجمالية تم تنفيذها.';
-$s_unique_queries_executed = '%1$d استعلامات منفردة تم تنفيذها.';
-$s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s كيلوبايت';
+$s_total_queries_executed = 'استعلامات إجمالية تم تنفيذها: %1$d';
+$s_unique_queries_executed = '%1$d استعلامات منفردة تم تنفيذها: %1$d';
+$s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s KiB';
 $s_log_page_number = 'الرقم';
 $s_log_page_time = 'وقت التنفيذ';
 $s_log_page_caller = 'المتصل';
@@ -496,6 +499,7 @@ $s_choose_project = 'اختر المشروع';
 $s_login_button = 'تسجيل الدخول';
 $s_signup_link = 'تسجيل حساب جديد';
 $s_lost_password_link = 'فقدت كلمة سرك؟';
+$s_username_or_email = 'اسم المستخدم أو عنوان البريد الإلكتروني';
 $s_select_project_button = 'اختر المشروع';
 $s_lost_password_title = 'إعادة ضبط كلمة السر';
 $s_lost_password_done_title = 'رسالة كلمة السر تم إرسالها';
@@ -979,6 +983,7 @@ $s_monitored_by = 'مراقبة بواسطة';
 $s_monitored_by_label = 'يراقبها:';
 $s_attachments = 'الملحق(ات)';
 $s_bytes = 'بايت';
+$s_kb = 'كيلو بايت';
 $s_attachment_missing = 'الملفات المرفقة مفقودة';
 $s_attachment_count = 'عدد المرفقات';
 $s_view_attachments_for_issue = 'عرض %1$d المرفقات للمشكل #%2$d';
@@ -1082,6 +1087,7 @@ $s_status_changed_to = 'الحالة تتغير إلى';
 $s_email_on_deleted = 'أرسل رسالة عند الحذف';
 $s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
 $s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
+$s_email_on_updated = 'الاميل يحدث';
 $s_loading = 'جاري التحميل...';
 $s_between_date = 'بين';
 $s_on_or_before_date = 'في أو قبل';
@@ -1174,6 +1180,8 @@ $s_month_september = 'سبتمبر';
 $s_month_october = 'أكتوبر';
 $s_month_november = 'نوفمبر';
 $s_month_december = 'ديسمبر';
+$s_timeline_no_activity = 'لا فعاليات بدون خط زمني.';
+$s_timeline_title = 'خط زمني';
 $MANTIS_ERROR[ERROR_GENERIC] = 'حدث خطأ خلال هذا الفعل. ربما ترغب في إبلاغ هذا الخطأ إلى إداريك المحلي.';
 $MANTIS_ERROR[ERROR_SQL] = 'خطأ SQL تم كشفه.';
 $MANTIS_ERROR[ERROR_REPORT] = 'كان هناك خطأ في تقريرك.';
@@ -1192,7 +1200,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'خيار الضبط "%1$s" لم ي�
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'خيار الضبط "%1$s" لم يمكن ضبطه في قاعدة البيانات. يجب ضبطه في config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'السلسلة "%1$s" لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'الملاحظة لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%1$d" لم يتم العثور عليه.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'حقل قاعدة البيانات "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'معالج القضايا لا يمتلك الصلاحية الكافية لمعالجة القضايا في هذه الحالة.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'يوجد مشروع بهذا الاسم بالفعل. من فضلك عد وأدخل اسما مختلفا.';
@@ -1272,9 +1280,9 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'هذا الوسم ليس ملحقا ب�
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'هذا الوسم ملحق بالفعل بهذه العلة.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'النص لم يمكن العثور عليه.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'الحدث "%1$s" لم يتم إعلانه بعد.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة غير مسجلة مع مانتيس بي تي.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة منصبة بالفعل.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة الإضافة لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة "%1$s" غير مسجلة مع مانتيس بي تي.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة"%1$s"  منصبة بالفعل.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة"%2$s"الإضافة لم يتم العثور عليها"%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'فشل تثبيت البرنامج المساعد: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'البرنامج المساعد "%1$s" بحاجة إلى التحديث قبل أن يمكنك دخول هذه الصفحة.';

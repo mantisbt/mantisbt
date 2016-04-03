@@ -66,26 +66,10 @@ if( $t_rows === false ) {
 # pre-cache custom column data
 columns_plugin_cache_issue_data( $t_rows );
 
-$t_filename = csv_get_default_filename();
-
-# Send headers to browser to activate mime loading
-
-# Make sure that IE can download the attachments under https.
-header( 'Pragma: public' );
-
-header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $t_filename ) ) );
-header( 'Content-Transfer-Encoding: BASE64;' );
-
-# Added Quotes (") around file name.
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
+csv_start( csv_get_default_filename() );
 
 # Get columns to be exported
 $t_columns = csv_get_columns();
-
-# export BOM
-if( config_get( 'csv_add_bom' ) == ON ) {
-	echo "\xEF\xBB\xBF";
-}
 
 # export the titles
 $t_first_column = true;

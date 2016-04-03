@@ -364,6 +364,21 @@ function excel_format_fixed_in_version( BugData $p_bug ) {
 }
 
 /**
+ * Gets the formatted tags.
+ * @param BugData $p_bug A bug object.
+ * @return string the tags.
+ */
+function excel_format_tags( BugData $p_bug ) {
+	$t_value = '';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		$t_value = tag_bug_get_all( $p_bug->id );
+	}
+
+	return excel_prepare_string( $t_value );
+}
+
+/**
  * Gets the formatted target version.
  * @param BugData $p_bug A bug object.
  * @return string the target version.
@@ -544,7 +559,11 @@ function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {
  * @return string The formatted due date.
  */
 function excel_format_due_date( BugData $p_bug ) {
-	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
+	$t_value = '';
+	if ( !date_is_null( $p_bug->due_date ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ) {
+		$t_value = date( config_get( 'short_date_format' ), $p_bug->due_date );
+	}
+	return excel_prepare_string( $t_value );
 }
 
 /**

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -472,6 +472,7 @@ $s_choose_project = 'Escolher projeto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'Pedir uma nova conta';
 $s_lost_password_link = 'Perdeu a sua palavra-chave?';
+$s_username_or_email = 'Nome de utilizador(a) ou endereço de correio eletrónico';
 $s_select_project_button = 'Selecionar projeto';
 $s_lost_password_title = 'Reposição da palavra-chave';
 $s_lost_password_done_title = 'Mensagem de palavra-chave enviada';

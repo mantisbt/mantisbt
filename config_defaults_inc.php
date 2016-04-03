@@ -1056,25 +1056,8 @@ $g_differentiate_duplicates = OFF;
 $g_sort_by_last_name = OFF;
 
 /**
- * Show user avatar
- *
- * The current implementation is based on http://www.gravatar.com
- * Users will need to register there the same email address used in this
- * MantisBT installation to have their avatar shown.
- * Please note: upon registration or avatar change, it takes some time for
- * the updated gravatar images to show on sites
- *
- * The config can be either set to OFF (avatars disabled) or set to a string
- * defining the default avatar to be used when none is associated with the
- * user's email. Valid values:
- * - OFF (default)
- * - ON (equivalent to 'identicon')
- * - One of Gravatar's defaults (mm, identicon, monsterid, wavatar, retro)
- *   @link http://en.gravatar.com/site/implement/images/
- * - An URL to the default image to be used (for example,
- *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
- *
- * @global integer|string $g_show_avatar
+ * Show user avatars
+ * @global integer $g_show_avatar
  * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
@@ -2266,6 +2249,7 @@ $g_bug_report_page_fields = array(
 	'reproducibility',
 	'severity',
 	'steps_to_reproduce',
+	'tags',
 	'target_version',
 	'view_state',
 );
@@ -3053,14 +3037,6 @@ $g_default_manage_tag_prefix = 'ALL';
  * @global string $g_csv_separator
  */
 $g_csv_separator = ',';
-
-/**
- * CSV Export
- * Add Byte Order Mark (BOM) at the beginning of the file as it helps Excel display the file in UTF-8
- * @global string $g_csv_add_bom
- */
-$g_csv_add_bom = OFF;
-
 
 /**
  * The threshold required for users to be able to manage configuration of a project.
@@ -4076,6 +4052,14 @@ $g_due_date_update_threshold = NOBODY;
  */
 $g_due_date_view_threshold = NOBODY;
 
+/**
+ * Default due date value for newly submitted issues:
+ * Empty string for no due date set.
+ * Related date that is accepted by strtotime (http://php.net/manual/en/function.strtotime.php), e.g. 'today' or '+2 days'.
+ * @global string $g_due_date_default
+ */
+$g_due_date_default = '';
+
 ################
 # Sub-projects #
 ################
@@ -4346,7 +4330,6 @@ $g_public_config_names = array(
 	'create_short_url',
 	'css_include_file',
 	'css_rtl_include_file',
-	'csv_add_bom',
 	'csv_separator',
 	'custom_field_edit_after_create',
 	'custom_field_link_threshold',
@@ -4406,6 +4389,7 @@ $g_public_config_names = array(
 	'display_bugnote_padding',
 	'display_project_padding',
 	'download_attachments_threshold',
+	'due_date_default',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
 	'email_ensure_unique',

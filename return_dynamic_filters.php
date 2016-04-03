@@ -36,6 +36,9 @@
  * @uses helper_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'compress_api.php' );
@@ -49,7 +52,9 @@ require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 
-auth_ensure_user_authenticated();
+if( !auth_is_user_authenticated() ) {
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
 
 compress_enable();
 

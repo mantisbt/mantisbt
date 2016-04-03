@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -526,6 +526,7 @@ $s_choose_project = '选择项目';
 $s_login_button = '登录';
 $s_signup_link = '注册一个新帐号';
 $s_lost_password_link = '忘记密码？';
+$s_username_or_email = '用户名或电子邮件地址';
 $s_select_project_button = '选择项目';
 $s_lost_password_title = '重置密码';
 $s_lost_password_done_title = '密码邮件已发出';
@@ -1079,7 +1080,7 @@ $s_update_issue_status = '修改问题状态';
 $s_set_view_status = '当报告一个新问题或说明时设置显示状态';
 $s_update_view_status = '更改现有问题或注释的显示状态';
 $s_show_list_of_users_monitoring_issue = '显示正在监视问题的用户列表';
-$s_notes = '<b>注释</b>';
+$s_notes = '注释';
 $s_add_notes = '添加注释';
 $s_view_private_notes = '查看其他私人备注';
 $s_news = '<b>新闻</b>';
@@ -1168,10 +1169,10 @@ $s_tag_related_issues = '共享的问题（%1$s）';
 $s_tag_stats_attached = '附加的问题：%1$s';
 $s_tag_create = '创建标签';
 $s_show_all_tags = '全部';
-$s_time_tracking_billing_link = '时间记录';
-$s_time_tracking = '时间记录';
+$s_time_tracking_billing_link = '时间跟踪';
+$s_time_tracking = '时间跟踪';
 $s_time_tracking_time_spent = '花费时间：';
-$s_time_tracking_get_info_button = '获取时间记录信息';
+$s_time_tracking_get_info_button = '获取时间跟踪信息';
 $s_time_tracking_cost_per_hour = '每小时成本';
 $s_time_tracking_cost_per_hour_label = '成本/小时：';
 $s_time_tracking_cost = '成本';
@@ -1247,6 +1248,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，MantisBT 系统无�
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '文件上传失败，可能是文件大小超出 PHP 的上传上限造成的。';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '本页(%1$s)的必填参数没有提供。';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '已存在同名用户，请返回前一页另外选择一个用户名。';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = '电子邮件已被使用。请返回并选择另一个。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '没有找到设置选项“%1$s”。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '配置选项“%1$s”只能在 config_inc.php 文件中设置，不能保存到数据库中。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%1$s”。';
@@ -1339,6 +1341,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '事件"%1$s"未声明';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '插件“%1$s”未注册。';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = '插件“%1$s”未载入，请确保其满足依赖环境。';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '插件“%1$s”已安装。';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = '在插件“%1$s”中未定义“%2$s”级';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '在插件“%1$s”中不存在页面“%2$s”。';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = '在插件“%1$s”中不存在文件“%2$s”。';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '插件安装失败：%1$s。';

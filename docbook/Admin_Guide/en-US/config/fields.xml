@@ -54,6 +54,7 @@
 					severity,
 					status,
 					steps_to_reproduce,
+					tags,
 					target_version,
 					view_state.
 				</para>

@@ -72,12 +72,11 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_start( $t_action_icon = 'fa-check') {
-		$t_avatar = user_get_avatar( $this->user_id, 40 );
+		$t_avatar = Avatar::get( $this->user_id, 40 );
 		$t_html = '<div class="profile-activity clearfix">';
 
         if( !empty( $t_avatar ) ) {
-			$t_avatar_url = $t_avatar[0];
-			$t_html .= '<img class="pull-left" src="' . $t_avatar_url . '"/>';
+			$t_html .= '<img class="pull-left" src="' . $t_avatar->image . '"/>';
 		} else {
 			$t_html .= '<i class="pull-left thumbicon fa ' . $t_action_icon . ' btn-primary no-hover"></i>';
 		}

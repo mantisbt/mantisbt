@@ -269,7 +269,14 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	# find the id of the category
 	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
-	# delete the category and link all the issue to the default category
+	if( !category_can_remove( $p_category_id ) ) {
+		return SoapObjectsFactory::newSoapFault(
+			'Client',
+			"'$p_category_name' is used as default category for moves and can't be deleted."
+		);
+	}
+
+	# delete the category and link all the issues to the default category
 	return category_remove( $p_category_id, config_get( 'default_category_for_moves' ) );
 }
 

@@ -152,16 +152,6 @@ function http_security_headers() {
 			"frame-ancestors 'none'",
 		);
 
-		# Policy for images: Allow gravatar URL
-		if( config_get_global( 'show_avatar' ) ) {
-			if( http_is_protocol_https() ) {
-				$t_avatar_url = 'https://secure.gravatar.com:443';
-			} else {
-				$t_avatar_url = 'http://www.gravatar.com:80';
-			}
-			$t_csp[] = "img-src 'self' $t_avatar_url";
-		}
-
 		$t_style_src = "style-src 'self'";
 		$t_script_src = "script-src 'self'";
 

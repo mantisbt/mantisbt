@@ -195,3 +195,4 @@ config_obsolete( 'show_footer_menu' );
 config_obsolete( 'status_legend_position' );
 config_obsolete( 'status_percentage_legend' );
 config_obsolete( 'font_per_captcha' );
+config_obsolete( 'csv_add_bom' );

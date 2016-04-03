@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@
  * @author Wtspout
  * @author 고기랑
  * @author 관인생략
+ * @author 밥풀떼기
  * @author 아라
  */
 
@@ -514,6 +515,7 @@ $s_choose_project = '프로젝트 선택';
 $s_login_button = '로그인';
 $s_signup_link = '새 계정을 위한 가입';
 $s_lost_password_link = '비밀번호를 잊으셨나요?';
+$s_username_or_email = '사용자명이나 이메일 주소';
 $s_select_project_button = '프로젝트 선택';
 $s_lost_password_title = '비밀번호 초기화';
 $s_lost_password_done_title = '비밀번호 변경 메일이 보내졌습니다.';
@@ -1221,6 +1223,7 @@ $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '파일 올리기를 실패했습니다. �
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '파일 올리기를 실패했습니다.  현재 PHP 설치시 허용된 파일 크기보다 업로드하려는 파일이 큰 것 같습니다.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '이 페이지에 (%1$s) 필요한 인자가 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '이미 사용 중인 계정입니다. 다른 계정을 선택하세요.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = '이 이메일은 이미 사용하고 계십니다. 다시 돌아가서 다른 이메일을 골라 주세요.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '\'%1$s\' 설정 옵션이 없습니다.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '\'%1$s\' 구성 설정을 데이터베이스에서 설정할 수 없습니다. config_inc.php에서 설정해야 합니다.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '\'%1$s\' 문자열이 없습니다.';

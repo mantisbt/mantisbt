@@ -89,7 +89,11 @@ print_manage_menu( 'manage_custom_field_page.php' );
 				</td>
 				<td><?php echo count( custom_field_get_project_ids( $t_field_id ) ) ?></td>
 				<td><?php echo get_enum_element( 'custom_field_type', $t_desc['type'] ) ?></td>
-				<td><?php echo string_display( $t_desc['possible_values'] ) ?></td>
+				<?php
+				# workaround to enforce line break displaying custom field values
+				# @todo replace by CSS after we don't support any longer browsers without CSS3 support
+				?>
+				<td><?php echo str_replace( '|', ' | ', string_display( $t_desc['possible_values'] ) ) ?></td>
 				<td><?php echo string_display( $t_desc['default_value'] ) ?></td>
 			</tr><?php
 		} # Create Form END ?>

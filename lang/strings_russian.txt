@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@
  * @author Eroha
  * @author EugeneZelenko
  * @author Ferrer
+ * @author Iniquity
  * @author KPu3uC B Poccuu
  * @author Kirill
  * @author Okras
@@ -299,6 +300,9 @@ $s_access_level_label = 'Уровень доступа';
 $s_update_user_button = 'Изменить учетную запись';
 $s_verify_warning = 'Сведения вашей учетной записи проверены. Сообщение подтверждения учетной записи, которое вы получили, теперь недействительно.';
 $s_verify_change_password = 'Чтобы вы смогли снова войти в систему, здесь необходимо установить пароль.';
+$s_api_tokens_link = 'API-токены';
+$s_api_tokens_title = 'API-токены';
+$s_last_used = 'Последнее использование';
 $s_default_account_preferences_title = 'Настройки учетной записи';
 $s_default_project = 'Проект по умолчанию';
 $s_refresh_delay = 'Интервал обновления, с';
@@ -314,7 +318,7 @@ $s_email_on_assigned = 'Уведомлять о назначении';
 $s_email_on_feedback = 'Уведомлять о запросе обратной связи';
 $s_email_on_resolved = 'Уведомлять о решении';
 $s_email_on_closed = 'Уведомлять о закрытии';
-$s_email_on_reopened = 'Уведомлять о переоткрытии';
+$s_email_on_reopened = 'Сообщать по E-mail о переоткрытии';
 $s_email_on_bugnote_added = 'Уведомлять о добавлении комментария';
 $s_email_on_status_change = 'Уведомлять об изменении состояния';
 $s_email_on_priority_change = 'Уведомлять об изменении приоритета';
@@ -512,6 +516,7 @@ $s_choose_project = 'Выбор проекта';
 $s_login_button = 'Войти';
 $s_signup_link = 'зарегистрировать новую учетную запись';
 $s_lost_password_link = 'забыли пароль?';
+$s_username_or_email = 'Имя пользователя или адрес электронной почты';
 $s_select_project_button = 'Выбрать проект';
 $s_lost_password_title = 'Сброс пароля';
 $s_lost_password_done_title = 'Сообщение отправлено';
@@ -893,7 +898,7 @@ $s_issue_id = 'задача №';
 $s_recently_visited = 'Недавние';
 $s_priority_abbreviation = 'П';
 $s_note_user_id_label = 'Комментарий от:';
-$s_filter_match_type = 'Тип соответствия';
+$s_filter_match_type_label = 'Тип соответствия:';
 $s_filter_match_all = 'Все условия';
 $s_filter_match_any = 'Любое условие';
 $s_none = 'пустые';
@@ -978,7 +983,7 @@ $s_custom_field_require_report = 'Обязательно при создании
 $s_custom_field_require_update = 'Обязательно при изменении';
 $s_custom_field_require_resolved = 'Обязательно при решении';
 $s_custom_field_require_closed = 'Обязательно при закрытии';
-$s_link_custom_field_to_project_title = 'Привязка настраиваемых полей к проекту';
+$s_link_custom_field_to_project_title = 'Привязка настраиваемых полей к проектам';
 $s_link_custom_field_to_project_button = 'Привязать настраиваемое поле';
 $s_linked_projects_label = 'Связанные проекты:';
 $s_custom_field_sequence = 'Последовательность';
@@ -1109,6 +1114,7 @@ $s_status_changed_to = 'При изменении состояния на';
 $s_email_on_deleted = 'Извещать при удалении';
 $s_email_on_sponsorship_changed = 'Извещать при изменении оплаты';
 $s_email_on_relationship_changed = 'Извещать при изменении связей';
+$s_email_on_updated = 'Сообщить об обновлении';
 $s_loading = 'Загрузка...';
 $s_between_date = 'между';
 $s_on_or_before_date = 'на дату или до';

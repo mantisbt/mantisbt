@@ -967,50 +967,6 @@ function user_get_name( $p_user_id ) {
 }
 
 /**
-* Return the user avatar image URL
-* in this first implementation, only gravatar.com avatars are supported
-*
-* This function returns an array( URL, width, height ) or an empty array when the given user has no avatar.
-*
-* @param integer $p_user_id A valid user identifier.
-* @param integer $p_size    The required number of pixel in the image to retrieve the link for.
-* @return array
-*/
-function user_get_avatar( $p_user_id, $p_size = 80 ) {
-	$t_default_avatar = config_get( 'show_avatar' );
-
-	if( OFF === $t_default_avatar ) {
-		# Avatars are not used
-		return array();
-	}
-	# Set default avatar for legacy configuration
-	if( ON === $t_default_avatar ) {
-		$t_default_avatar = 'identicon';
-	}
-
-	# Default avatar is either one of Gravatar's options, or
-	# assumed to be an URL to a default avatar image
-	$t_default_avatar = urlencode( $t_default_avatar );
-	$t_rating = 'G';
-
-	if ( user_exists( $p_user_id ) ) {
-		$t_email_hash = md5( strtolower( trim( user_get_email( $p_user_id ) ) ) );
-	} else {
-		$t_email_hash = md5( 'generic-avatar-since-user-not-found' );
-	}
-
-	# Build Gravatar URL
-	if( http_is_protocol_https() ) {
-		$t_avatar_url = 'https://secure.gravatar.com/';
-	} else {
-		$t_avatar_url = 'http://www.gravatar.com/';
-	}
-	$t_avatar_url .= 'avatar/' . $t_email_hash . '?d=' . $t_default_avatar . '&r=' . $t_rating . '&s=' . $p_size;
-
-	return array( $t_avatar_url, $p_size, $p_size );
-}
-
-/**
  * return the user's access level
  * account for private project and the project user lists
  *
