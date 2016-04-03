@@ -569,19 +569,16 @@ if( $t_show_attachments ) {
 			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
 		</td>
 	</tr>
-<?php
-	}
-
-	# Display tags fields
-	if( $t_show_tags ) { ?>
-		<div class="field-container">
-			<label><span><?php echo lang_get( 'tag_attach_long' ) ?></span></label>
-			<span class="input">
-				<label><?php print_tag_input( '' ); ?></label>
-				</span>
-			<span class="label-style"></span>
-		</div>
-
+<?php } ?>
+<?php if( $t_show_tags ) { ?>
+	<tr>
+		<th class="category">
+			<label for="attach_tag"><?php echo lang_get( 'tag_attach_long' ) ?></label>
+		</th>
+		<td>
+			<?php print_tag_input( '' ); ?>
+		</td>
+	</tr>
 <?php
 	}
 
