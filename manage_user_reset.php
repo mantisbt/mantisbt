@@ -75,7 +75,19 @@ $t_redirect_url = 'manage_user_page.php';
 
 form_security_purge( 'manage_user_reset' );
 
-html_page_top( null, $t_result ? $t_redirect_url : null );
+$password_kind='normal';
+if( is_array($t_result) ) {
+	list( $password_kind, $password_created ) = $t_result;
+	if( $password_kind !== 'random_set' ) die( 'Internal error (not random_set)' );
+}
+
+if ($password_kind == 'random_set') {
+	# do not redirect, since we are showing here the password!
+	html_page_top();
+} else {
+	# redirect normally
+	html_page_top( null, $t_result ? $t_redirect_url : null );
+}
 
 echo '<div class="success-msg">';
 
@@ -85,7 +97,12 @@ if( $t_reset ) {
 		echo lang_get( 'account_reset_protected_msg' );
 	} else {
 		# SUCCESSFUL RESET
-		if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+		if( $password_kind === 'random_set' ) {
+			# reseted it as random text shown here directly
+			echo lang_get( 'lost_password_title' ).': ';
+			echo lang_get( 'password' ).': '.'<b>'.htmlspecialchars($password_created).'</b>';
+		}
+		else if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
 			echo lang_get( 'account_reset_msg' );
 		} else {
