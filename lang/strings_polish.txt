@@ -726,6 +726,7 @@ $s_reset_password_button = 'Nowe hasło';
 $s_delete_user_button = 'Usuń Użytkownika';
 $s_reset_password_msg = 'Resetowanie hasła wysyła potwierdzający adres URL za pomocą emaila.';
 $s_reset_password_msg2 = 'Po operacji \'Nowe hasło\' użytkownik nie będzie musiał podawać hasła przy logowaniu.';
+$s_reset_password_msg3 = 'Po operacji \'Nowe hasło\' nadamy LOSOWE hasło (i wypiszemy je tutaj jeden raz)';
 $s_show_all_users = 'WSZYSCY';
 $s_users_unused = 'NIEUŻYWANY';
 $s_users_new = 'NOWY';
