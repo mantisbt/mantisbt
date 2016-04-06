@@ -65,7 +65,9 @@ html_page_top2a();
 			</legend>
 			<ul id="login-links">
 				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
+				<?php if( ON == config_get_global( 'allow_signup' ) ) { ?>
 				<li><a href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a></li>
+				<?php } ?>
 			</ul>
 <?php
 	echo form_security_field( 'lost_pwd' );
