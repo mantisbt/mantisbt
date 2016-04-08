@@ -93,9 +93,9 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	$t_results = array();
 
 	$t_query = 'SELECT bn.id id, bn.time_tracking minutes, bn.date_submitted as date_submitted, bnt.note note,
-			u.realname realname, b.project_id project_id, b.summary bug_summary, bn.bug_id bug_id, bn.reporter_id reporter_id
-			FROM {user} u, {bugnote} bn, {bug} b, {bugnote_text} bnt
-			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id AND bnt.id = bn.bugnote_text_id
+			u.realname realname, b.project_id project_id, c.name bug_category, b.summary bug_summary, bn.bug_id bug_id, bn.reporter_id reporter_id
+			FROM {user} u, {bugnote} bn, {bug} b, {bugnote_text} bnt, {category} c
+			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id AND bnt.id = bn.bugnote_text_id AND c.id=b.category_id
 			' . $t_project_where . $t_from_where . $t_to_where . '
 			ORDER BY bn.id';
 	$t_result = db_query( $t_query, $t_params );
@@ -242,6 +242,7 @@ function billing_rows_to_array( $p_bugnotes ) {
 		$t_row['project_id'] = $t_note['project_id'];
 		$t_row['project_name'] = project_get_name( $t_note['project_id'] );
 		$t_row['bug_summary'] = $t_note['bug_summary'];
+		$t_row['bug_category'] = $t_note['bug_category'];
 		$t_row['cost'] = $t_note['cost'];
 
 		$t_billing_rows[] = $t_row;
