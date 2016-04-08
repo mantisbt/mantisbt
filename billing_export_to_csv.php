@@ -56,6 +56,7 @@ csv_start( csv_get_default_filename() );
 
 echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;
+echo csv_escape_string( lang_get( 'category' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'summary' ) ) . $t_separator;
 
 if( $t_show_realname ) {
@@ -78,6 +79,7 @@ echo $t_new_line;
 foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( bug_format_id( $t_billing['bug_id'] ) ) . $t_separator;
 	echo csv_escape_string( $t_billing['project_name'] ) . $t_separator;
+	echo csv_escape_string( $t_billing['bug_category'] ) . $t_separator;
 	echo csv_escape_string( $t_billing['bug_summary'] ) . $t_separator;
 
 	if( $t_show_realname ) {
