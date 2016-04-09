@@ -721,8 +721,6 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
  * @return boolean|null True if upgrade completed, null if problem
  */
 function plugin_upgrade( MantisPlugin $p_plugin ) {
-	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
-
 	if( !plugin_is_installed( $p_plugin->basename ) ) {
 		return null;
 	}
