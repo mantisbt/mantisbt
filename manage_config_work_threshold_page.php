@@ -229,7 +229,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 			$t_show_submit = true;
 		} else {
 			if( $t_project ) {
-				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
+				$t_value = '<i class="fa fa-check"></i>';
 			} else {
 				$t_value = '&#160;';
 			}
@@ -269,7 +269,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 		$t_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
-			$t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
+			$t_value = '<i class="fa fa-check fa-lg" title="X"></i>';
 		} else {
 			$t_value = '&#160;';
 		}

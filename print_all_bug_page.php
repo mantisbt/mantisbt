@@ -158,8 +158,8 @@ $t_icon_path = config_get( 'icon_path' );
 	$t_search = urlencode( $f_search );
 
 	$t_icons = array(
-		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.gif', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' ) );
+		array( 'print_all_bug_page_word', 'word', 'fa-file-word-o', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'fa-internet-explorer', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
 		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
@@ -169,7 +169,7 @@ $t_icon_path = config_get( 'icon_path' );
 			'&amp;export=' . $f_export .
 			'&amp;show_flag=' . $t_show_flag .
 			'">' .
-			'<img src="' . $t_icon_path . $t_icon[2] . '" alt="' . $t_icon[3] . '" /></a> ';
+			'<i class="fa ' . $t_icon[2] . '" title="' . $t_icon[3] . '"></i></a> ';
 	}
 ?>
 	</td>

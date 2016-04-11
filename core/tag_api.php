@@ -763,7 +763,7 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
-		echo '<a href="tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token . '"><img src="images/delete.png" class="delete-icon" title="' . $t_tooltip . '" alt="X"/></a>';
+		echo '<a href="tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token . '" title="' . $t_tooltip . '"><i class="fa fa-times"></i></a>';
 	}
 
 	return true;
