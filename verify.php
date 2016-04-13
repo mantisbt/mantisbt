@@ -92,12 +92,19 @@ html_page_top2a();
 <div id="reset-passwd-msg" class="important-msg">
 	<ul>
 		<?php
-		echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
-		echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+		if( $t_can_change_password ) {
+			echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+		} else {
+			echo '<li>' . lang_get( 'no_password_change' ) . '</li>';
+		}
 		?>
 	</ul>
 </div>
 
+<?php
+if( $t_can_change_password ) {
+?>
 
 <div id="verify-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
@@ -109,10 +116,8 @@ html_page_top2a();
 				<span class="label-style"></span>
 			</div>
 			<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
-			<?php echo form_security_field( 'account_update' );
-			if( $t_can_change_password ) {
-			?>
 			<?php
+			echo form_security_field( 'account_update' );
 			# When verifying account, set a token and don't display current password
 			token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
 			?>
@@ -127,10 +132,11 @@ html_page_top2a();
 				<span class="label-style"></span>
 			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
-			<?php } ?>
 		</fieldset>
 	</form>
 </div>
 
 <?php
+}
+
 html_page_bottom1a( __FILE__ );
