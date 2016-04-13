@@ -122,7 +122,7 @@ if( $t_can_change_password ) {
 			token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
 			?>
 			<div class="field-container">
-				<label for="password" class="required"><span><?php echo lang_get( 'password' ) ?></span></label>
+				<label for="password" class="required"><span><?php echo lang_get( 'new_password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>

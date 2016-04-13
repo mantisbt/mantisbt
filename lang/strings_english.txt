@@ -357,13 +357,14 @@ $s_realname_label = 'Real Name';
 $s_email = 'E-mail';
 $s_email_label = 'E-mail';
 $s_password = 'Password';
+$s_new_password = 'New password';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
 $s_current_password = 'Current Password';
 $s_access_level = 'Access Level';
 $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_warning = 'Your account information has been verified.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # API tokens page
