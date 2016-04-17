@@ -160,6 +160,12 @@ $s_CODE = STRING;
 					</para></note>
 				</listitem>
 				<listitem>
+					<para>Description is a text that will be displayed alongside the filed name
+						in the label section of form inputs. This can be used to hint the user for
+						expected values, or as informative description of its usage.
+					</para>
+				</listitem>
+				<listitem>
 					<para>Custom field type. Available types are defined as this table:
 					</para>
 					<informaltable>
