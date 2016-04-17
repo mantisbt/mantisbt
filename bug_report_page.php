@@ -575,9 +575,11 @@ if( $t_show_attachments ) {
 			}
 ?>
 			<div class="field-container">
-				<label <?php echo $t_required_class, $t_label_for; ?>><span><?php
-					echo string_display( lang_get_defaulted( $t_def['name'] ) );
-				?></span></label>
+				<label <?php echo $t_required_class, $t_label_for; ?>>
+					<span><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></span>
+					<br />
+					<span class="small"><?php echo string_display_links( $t_def['description'] ) ?></span>
+				</label>
 
 				<span class="input">
 					<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>

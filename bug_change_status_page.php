@@ -292,6 +292,8 @@ print_recently_visited();
 	<div class="field-container">
 		<label <?php echo $t_class_required ?> for="due_date">
 			<span><?php echo lang_get_defaulted( $t_def['name'] ) ?></span>
+			<br />
+			<span class="small"><?php echo string_display_links( $t_def['description'] ) ?></span>
 		</label>
 		<span class="input">
 <?php
