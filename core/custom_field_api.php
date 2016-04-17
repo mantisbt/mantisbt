@@ -475,6 +475,10 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 				$t_update .= $t_field . '=' . db_param() . ', ';
 				$t_params[] = (bool)$t_value;
 				break;
+			case 'description':
+				$t_update .= $t_field . '=' . db_param() . ', ';
+				$t_params[] = empty($t_value) ? '' : (string)$t_value;
+				break;
 		}
 	}
 

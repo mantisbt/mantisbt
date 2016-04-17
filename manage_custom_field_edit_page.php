@@ -80,6 +80,11 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
+				<label for="custom-field-description"><span><?php echo lang_get( 'description' ) ?></span></label>
+				<span class="textarea"><textarea id="custom-field-description" name="description" cols="70" rows="2"><?php echo string_textarea( $t_definition['description'] ) ?></textarea></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
 				<label for="custom-field-type"><span><?php echo lang_get( 'custom_field_type' ) ?></span></label>
 				<span class="select">
 					<select id="custom-field-type" name="type">
