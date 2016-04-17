@@ -664,6 +664,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 				'require_update' => $t_def['require_update'],
 				'require_resolved' => $t_def['require_resolved'],
 				'require_closed' => $t_def['require_closed'],
+				'description' => $t_def['description'],
 			);
 		}
 	}

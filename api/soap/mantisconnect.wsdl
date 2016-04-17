@@ -328,6 +328,7 @@
    <xsd:element name="require_update" type="xsd:boolean" minOccurs="0"/>
    <xsd:element name="require_resolved" type="xsd:boolean" minOccurs="0"/>
    <xsd:element name="require_closed" type="xsd:boolean" minOccurs="0"/>
+   <xsd:element name="description" type="xsd:string" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="FilterCustomField">
