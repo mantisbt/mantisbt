@@ -101,9 +101,7 @@ if( !( $t_ldap && config_get( 'use_ldap_email' ) )
 }
 
 # Update real name (but only if LDAP isn't being used)
-# Do not update real name for a user verification
-if( !( $t_ldap && config_get( 'use_ldap_realname' ) )
-	&& !$t_account_verification	) {
+if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
 	# strip extra spaces from real name
 	$t_realname = string_normalize( $f_realname );
 	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
