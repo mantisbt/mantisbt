@@ -884,6 +884,9 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 
 # Release marker: 1.3.0
 
+# Add description field to custom field definition
+$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'custom_field' ), "
+	description					XL		$t_notnull DEFAULT \" '' \"" ) );
 
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
