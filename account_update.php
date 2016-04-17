@@ -88,6 +88,12 @@ $t_email_updated = false;
 $t_password_updated = false;
 $t_realname_updated = false;
 
+# Do not allow blank passwords in account verification/reset
+if( $t_account_verification && is_blank( $f_password ) ) {
+	error_parameters( lang_get( 'password' ) );
+	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+}
+
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
