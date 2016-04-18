@@ -577,8 +577,10 @@ if( $t_show_attachments ) {
 			<div class="field-container">
 				<label <?php echo $t_required_class, $t_label_for; ?>>
 					<span><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></span>
-					<br />
-					<span class="small"><?php echo string_display_links( $t_def['description'] ) ?></span>
+					<?php if ( !is_blank( $t_def['description'] ) ) {
+						echo '<br />';
+						echo '<span class="small">' . string_display_links( $t_def['description'] ) . '</span>';
+					} ?>
 				</label>
 
 				<span class="input">
