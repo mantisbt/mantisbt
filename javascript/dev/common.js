@@ -103,11 +103,11 @@ function ToggleDiv( p_div ) {
 	if ( t_open_div.className == "hidden" ) {
 		t_open_div.className = "";
 		t_closed_div.className = "hidden";
-		t_cookie = t_cookie + "|" + p_div + ",1";
+		t_cookie = t_cookie + "|" + p_div + ":1";
 	} else {
 		t_closed_div.className = "";
 		t_open_div.className = "hidden";
-		t_cookie = t_cookie + "|" + p_div + ",0";
+		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 
 	SetCookie( "collapse_settings", t_cookie );

@@ -226,7 +226,7 @@ function collapse_cache_token() {
 		$t_data = explode( '|', $t_cookie );
 
 		foreach( $t_data as $t_pair ) {
-			$t_pair = explode( ',', $t_pair );
+			$t_pair = explode( ':', $t_pair );
 
 			if( false !== $t_pair && count( $t_pair ) == 2 ) {
 				$g_collapse_cache_token[$t_pair[0]] = ( true == $t_pair[1] );
