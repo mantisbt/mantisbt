@@ -372,9 +372,9 @@ if( $t_show_attachments ) {
 			<?php } ?>
 			<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
 			<?php echo lang_get( 'or_fill_in' ); ?>
-			<table class="width100" cellspacing="0">
+			<table class="table-bordered table-condensed">
 				<tr>
-					<th class="category">
+					<th class="category" width="30%">
 						<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
 					</th>
 					<td>
@@ -427,7 +427,8 @@ if( $t_show_attachments ) {
 					</td>
 				</tr>
 			</table>
-			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); echo lang_get( 'or_fill_in' );?>
+			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); ?>
+			<?php echo lang_get( 'or_fill_in' ); ?>
 			<?php collapse_end( 'profile' ); ?>
 		</td>
 	</tr>
