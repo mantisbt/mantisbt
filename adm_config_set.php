@@ -182,8 +182,8 @@ function process_complex_value( $p_value, $p_trim_quotes = false ) {
 					# Empty element - skip it
 					continue;
 				}
-				# Check if element is associative array
-				preg_match_all( '/(' . $s_regex_string . ')\s*=>\s*(.*)/', $t_element, $t_split );
+				# Check if element is in associative syntax
+				preg_match_all( '/(' . $s_regex_string . ')\s*=>\s*(' . $s_regex_element . ')/', $t_element, $t_split );
 				if( !empty( $t_split[0] ) ) {
 					# associative array
 					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
