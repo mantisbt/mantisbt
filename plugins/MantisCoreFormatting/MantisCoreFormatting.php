@@ -18,6 +18,8 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
+require_api( 'mention_api.php' );
+
 /**
  * Mantis Core Formatting plugin
  */
@@ -120,6 +122,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		if( ON == $s_buglinks ) {
 			$t_string = string_process_bug_link( $t_string );
 			$t_string = string_process_bugnote_link( $t_string );
+		}
+		
+		if( mention_enabled() ) {
+			$t_string = mention_format_text( $t_string );
 		}
 
 		return $t_string;

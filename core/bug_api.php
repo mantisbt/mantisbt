@@ -41,6 +41,7 @@
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses mention_api.php
  * @uses relationship_api.php
  * @uses sponsorship_api.php
  * @uses tag_api.php
@@ -66,6 +67,7 @@ require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'mention_api.php' );
 require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'tag_api.php' );
@@ -477,6 +479,32 @@ class BugData {
 			$this->last_updated = db_now();
 		}
 
+		$t_all_mentioned_user_ids = array();
+
+		$t_mentioned_user_ids = mention_get_users( $this->summary );
+		if( !empty( $t_mentioned_user_ids ) ) {
+			$this->summary = mention_format_text_save( $this->summary );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+		
+		$t_mentioned_user_ids = mention_get_users( $this->description );
+		if( !empty( $t_mentioned_user_ids ) ) {
+			$this->description = mention_format_text_save( $this->description );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		$t_mentioned_user_ids = mention_get_users( $this->steps_to_reproduce );
+		if( !empty( $t_mentioned_user_ids ) ) {
+			$this->steps_to_reproduce = mention_format_text_save( $this->steps_to_reproduce );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		$t_mentioned_user_ids = mention_get_users( $this->additional_information );
+		if( !empty( $t_mentioned_user_ids ) ) {
+			$this->additional_information = mention_format_text_save( $this->additional_information );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
 		# Insert text information
 		$t_query = 'INSERT INTO {bug_text}
 					    ( description, steps_to_reproduce, additional_information )
@@ -543,6 +571,9 @@ class BugData {
 		# log changes, if any (compare happens in history_log_event_direct)
 		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
+
+		# Now that the issue is added process the @ mentions
+		mention_process_user_mentions( $this->id, $t_all_mentioned_user_ids );
 
 		return $this->id;
 	}
