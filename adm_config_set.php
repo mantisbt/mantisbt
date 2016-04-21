@@ -192,7 +192,7 @@ function process_complex_value( $p_value, $p_trim_quotes = false ) {
 				} else {
 					# regular array
 					$t_new_value = process_complex_value( $t_element, true );
-					$t_processed[$t_key] = $t_new_value;
+					$t_processed[] = $t_new_value;
 				}
 			}
 		}
