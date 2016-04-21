@@ -137,7 +137,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 			$t_set = $t_flag ? 'checked="checked"' : '';
 			$t_value .= '<input type="checkbox" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
 		} else {
-			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
+			$t_value .= $t_flag ? '<i class="fa fa-check fa-lg" title="X"></i>' : '&#160;';
 		}
 
 		# Add 'reopened' label

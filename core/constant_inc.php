@@ -606,3 +606,5 @@ define ( 'JQUERY_UI_VERSION', '1.11.4' );
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
+# FontAwesome
+define ( 'FONT_AWESOME_VERSION', '4.5.0' );

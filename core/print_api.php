@@ -1742,7 +1742,7 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<img src="' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" />';
+	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" title="' . string_attribute( $t_icon['alt'] ) . ' file icon"></i>';
 }
 
 /**
@@ -1754,7 +1754,7 @@ function print_file_icon( $p_filename ) {
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
 	$t_path = config_get( 'path' );
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" alt="', $p_title, '" /></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss-square fa-lg"></i></a>';
 }
 
 /**

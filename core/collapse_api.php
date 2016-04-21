@@ -124,16 +124,16 @@ function collapse_icon( $p_name, $p_section = '' ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
-		$t_icon = 'minus.png';
+		$t_icon = 'fa-minus-square-o';
 		$t_alt = '-';
 		$t_id = $p_name . '_open_link';
 	} else {
-		$t_icon = 'plus.png';
+		$t_icon = 'fa-plus-square-o';
 		$t_alt = '+';
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" class="collapse-link"><img src="images/', $t_icon, '" alt="', $t_alt, '" /></a>';
+	echo '<a id="', $t_id, '" class="collapse-link"><i class="fa ', $t_icon, '" title="', $t_alt, '"></i></a>';
 }
 
 /**

@@ -58,7 +58,7 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $t_cookie_name = config_get( 'manage_users_cookie' );
-$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
+$t_lock_image = '<i class="fa fa-lock"></i>';
 $c_filter = '';
 
 $f_save          = gpc_get_bool( 'save' );

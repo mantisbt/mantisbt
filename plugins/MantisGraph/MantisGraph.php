@@ -118,12 +118,12 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function summary_submenu() {
 		$t_icon_path = config_get( 'icon_path' );
-		return array( '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" alt="" />' . plugin_lang_get( 'synthesis_link' ) . '</a>',
-			'<a href="' . plugin_page( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'status_link' ) . '</a>',
-			'<a href="' . plugin_page( 'summary_graph_imp_priority.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'priority_link' ) . '</a>',
-			'<a href="' . plugin_page( 'summary_graph_imp_severity.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'severity_link' ) . '</a>',
-			'<a href="' . plugin_page( 'summary_graph_imp_category.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'category_link' ) . '</a>',
-			'<a href="' . plugin_page( 'summary_graph_imp_resolution.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'resolution_link' ) . '</a>',
+		return array( ' <i class="fa fa-table"></i> <a href="' . helper_mantis_url( 'summary_page.php' ) . '">' . plugin_lang_get( 'synthesis_link' ) . '</a>',
+			' <i class="fa fa-bar-chart"></i> <a href="' . plugin_page( 'summary_graph_imp_status.php' ) . '">' . plugin_lang_get( 'status_link' ) . '</a>',
+			' <i class="fa fa-bar-chart"></i> <a href="' . plugin_page( 'summary_graph_imp_priority.php' ) . '">' . plugin_lang_get( 'priority_link' ) . '</a>',
+			' <i class="fa fa-bar-chart"></i> <a href="' . plugin_page( 'summary_graph_imp_severity.php' ) . '">' . plugin_lang_get( 'severity_link' ) . '</a>',
+			' <i class="fa fa-bar-chart"></i> <a href="' . plugin_page( 'summary_graph_imp_category.php' ) . '">' . plugin_lang_get( 'category_link' ) . '</a>',
+			' <i class="fa fa-bar-chart"></i> <a href="' . plugin_page( 'summary_graph_imp_resolution.php' ) . '">' . plugin_lang_get( 'resolution_link' ) . '</a>',
 		);
 	}
 }

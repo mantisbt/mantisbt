@@ -368,8 +368,10 @@ function html_css() {
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		echo '<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css">' . "\n";
+		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css">' . "\n";
 	} else {
 		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
+		html_css_link( 'font-awesome.min.css' );
 	}
 
 	html_css_link( 'common_config.php' );
@@ -569,7 +571,7 @@ function html_login_info() {
 		echo '<div id="rss-feed">' . "\n";
 		# Link to RSS issues feed for the selected project, including authentication details.
 		echo "\t" . '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">' . "\n";
-		echo "\t" . '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />' . "\n";
+		echo '<i class="fa fa-rss-square fa-lg"></i>';
 		echo "\t" . '</a>' . "\n";
 		echo '</div>' . "\n";
 	}
