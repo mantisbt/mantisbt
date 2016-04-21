@@ -61,7 +61,8 @@ class Avatar
         $t_avatar = null;
 
         if ( $t_enabled ) {
-            if ( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
+            if ( user_exists( $p_user_id ) &&
+                 access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
                 $t_avatar = event_signal(
                     'EVENT_USER_AVATAR',
                     array( $p_user_id, $p_size ) );
