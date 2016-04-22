@@ -81,6 +81,21 @@ class ConfigParser
 	}
 
 	/**
+	 * Check if the passed string is a constant and returns its value if yes,
+	 * or the string itself if not
+	 * @param string $p_name String to check.
+	 * @return mixed|string value of constant $p_name, or $p_name itself
+	 */
+	public static function constant_replace( $p_name ) {
+		$t_name = trim( $p_name );
+		if( is_string( $t_name ) && defined( $t_name ) ) {
+			# we have a constant
+			return constant( $t_name );
+		}
+		return $t_name;
+	}
+
+	/**
 	 * Recursively process array declarations.
 	 * @return array
 	 * @throws Exception when there's an invalid token
@@ -144,7 +159,6 @@ class ConfigParser
 	/**
 	 * Process a scalar value.
 	 * Handles string literals including defined constants
-	 * @see constant_replace()
 	 * @return mixed
 	 * @throws Exception when there's an unexpected value
 	 */
@@ -165,7 +179,7 @@ class ConfigParser
 			}
 
 			# Defined constants
-			$t_value = constant_replace( $t_value );
+			$t_value = $this->constant_replace( $t_value );
 			if( $t_value != $t_token[1] ) {
 				return $t_value;
 			}

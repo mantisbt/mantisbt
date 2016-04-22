@@ -107,10 +107,10 @@ switch( $t_type ) {
 		$t_value = $f_value;
 		break;
 	case CONFIG_TYPE_INT:
-		$t_value = (integer)constant_replace( trim( $f_value ) );
+		$t_value = (integer)ConfigParser::constant_replace( $f_value );
 		break;
 	case CONFIG_TYPE_FLOAT:
-		$t_value = (float)constant_replace( trim( $f_value ) );
+		$t_value = (float)ConfigParser::constant_replace( $f_value );
 		break;
 	case CONFIG_TYPE_COMPLEX:
 	default:
@@ -131,17 +131,3 @@ config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
 form_security_purge( 'adm_config_set' );
 
 print_successful_redirect( 'adm_config_report.php' );
-
-/**
- * Check if the passed string is a constant and returns its value
- * if yes, or the string itself if not
- * @param string $p_name String to check.
- * @return mixed|string value of constant $p_name, or $p_name itself
- */
-function constant_replace( $p_name ) {
-	if( is_string( $p_name ) && defined( $p_name ) ) {
-		# we have a constant
-		return constant( $p_name );
-	}
-	return $p_name;
-}
