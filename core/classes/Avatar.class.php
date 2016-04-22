@@ -61,7 +61,8 @@ class Avatar
         $t_avatar = null;
 
         if ( $t_enabled ) {
-            if ( user_exists( $p_user_id ) &&
+			$t_user_exists = user_exists( $p_user_id ); 
+            if ( $t_user_exists &&
                  access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
                 $t_avatar = event_signal(
                     'EVENT_USER_AVATAR',
@@ -72,7 +73,7 @@ class Avatar
                 $t_avatar = new Avatar();
             }
 
-            $t_avatar->normalize( $p_user_id );
+            $t_avatar->normalize( $p_user_id, $t_user_exists );
         }
 
         return $t_avatar;
@@ -85,18 +86,17 @@ class Avatar
      * core.
      *
      * @param integer $p_user_id  The user id.
+	 * @param bool    $p_user_exists Whether the user exists.
      *
      * @return void
      */
-    private function normalize( $p_user_id ) {
-        $t_user_exists = user_exists( $p_user_id );
-
+    private function normalize( $p_user_id, $p_user_exists ) {
         if( $this->image === null) {
             $this->image = config_get_global( 'path' ) . 'images/avatar.png';
         }
 
         if( $this->link === null ) {
-            if ( $t_user_exists ) {
+            if ( $p_user_exists ) {
                 $this->link = config_get_global( 'path' ) .
                     'view_user_page.php?id=' . $p_user_id;
             } else {
@@ -105,7 +105,7 @@ class Avatar
         }
 
         if( $this->text === null ) {
-            $this->text = $t_user_exists ? user_get_name( $p_user_id ) : '';
+            $this->text = $p_user_exists ? user_get_name( $p_user_id ) : '';
         }
     }
 }
