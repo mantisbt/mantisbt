@@ -114,7 +114,15 @@ switch( $t_type ) {
 		break;
 	case CONFIG_TYPE_COMPLEX:
 	default:
-		$t_value = process_complex_value( $f_value );
+		try {
+			$t_parser = new Parser( $f_value );
+			$t_value = $t_parser->parse();
+		}
+		catch (Exception $e) {
+			error_parameters( $f_config_option, $f_value, $e->getMessage() );
+			trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
+		}
+		var_dump($t_value);
 		break;
 }
 
@@ -124,144 +132,338 @@ form_security_purge( 'adm_config_set' );
 
 print_successful_redirect( 'adm_config_report.php' );
 
-
 /**
- * Helper function to recursively process complex types
- * We support the following kind of variables here:
- * 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
- * 2. simple arrays with the form: array( a, b, c, d )
- * 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
- * 4. multi-dimensional arrays
- * commas and '=>' within strings are handled
- *
- * @param string  $p_value      Complex value to process.
- * @param boolean $p_trim_quotes Whether to trim quotes.
- * @return parsed variable
+ * Class Tokenizer.
+ * Uses PHP's internal token_get_all() function to parse a piece of code
+ * into tokens
  */
-function process_complex_value( $p_value, $p_trim_quotes = false ) {
-	static $s_regex_array = null;
-	static $s_regex_string = null;
-	static $s_regex_element = null;
+class Tokenizer
+{
+	/**
+	 * @var array $tokens
+	 */
+	protected $tokens;
 
-	$t_value = trim( $p_value );
+	/**
+	 * Tokenizer constructor.
+	 * Builds the token array from given code, discarding whitespace and
+	 * trailing semicolons
+	 * @param string $p_code PHP code to tokenize
+	 * @throws Exception if there are no tokens to process
+	 * @throws Exception if given code is not valid
+	 */
+	public function __construct( $p_code )
+	{
+		if( empty( $p_code ) ) {
+			throw new Exception( 'No more tokens' );
+		}
 
-	# Parsing regex initialization
-	if( is_null( $s_regex_array ) ) {
-		$s_regex_array = '^array[\s]*\((.*)\)[;]*$';
-		$s_regex_string =
-			# unquoted string (word)
-			'[\w]+' . '|' .
-			# single-quoted string
-			"'(?:[^'\\\\]|\\\\.)*'" . '|' .
-			# double-quoted string
-			'"(?:[^"\\\\]|\\\\.)*"';
-		# The following complex regex will parse individual array elements,
-		# taking into consideration sub-arrays, associative arrays and single,
-		# double and un-quoted strings
-		# @TODO dregad reverse pattern logic for sub-array to avoid match on array(xxx)=>array(xxx)
-		$s_regex_element = '('
-			# Main sub-pattern - match one of
-			. '(' .
-					# sub-array: ungreedy, no-case match ignoring nested parenthesis
-					'(?:(?iU:array\s*(?:\\((?:(?>[^()]+)|(?1))*\\))))' . '|' .
-					$s_regex_string
-			. ')'
-			# Optional pattern for associative array, back-referencing the
-			# above main pattern
-			. '(?:\s*=>\s*(?2))?' .
-			')';
+		# Check syntax to make sure we get valid PHP code
+		# prepend 'return' statement to ensure the code is not actually executed
+		# Suppress errors as we can't capture STDERR with ob_ functions
+		$result = @eval( 'return; ' . $p_code . ';' );
+		if( $result === false ) {
+			throw new Exception( 'Syntax error' );
+		};
+
+		$t_tokens = token_get_all( '<?php ' . $p_code );
+
+		# Strip whitespace
+		$t_tokens = array_filter( $t_tokens,
+			function( $p_token ) {
+				return !is_array( $p_token ) || $p_token[0] !== T_WHITESPACE;
+			}
+		);
+
+		# Get rid of the opening '<?php' tag we added
+		array_shift( $t_tokens );
+
+		# Remove any trailing ';'
+		while( true ) {
+			$t_last = end( $t_tokens );
+			if( $t_last != ';' ) {
+				break;
+			}
+			array_pop( $t_tokens );
+		}
+
+		$this->tokens = $t_tokens;
 	}
 
-	if( preg_match( '/' . $s_regex_array . '/s', $t_value, $t_match ) === 1 ) {
-		# It's an array - process each element
-		$t_processed = array();
+	/**
+	 * Return true if we're at the end of the token array.
+	 * @return bool
+	 */
+	public function is_empty() {
+		return empty( $this->tokens );
+	}
 
-		if( preg_match_all( '/' . $s_regex_element . '/', $t_match[1], $t_elements ) ) {
-			foreach( $t_elements[0] as $t_key => $t_element ) {
-				if( !trim( $t_element ) ) {
-					# Empty element - skip it
-					continue;
-				}
-				# Check if element is associative array
-				preg_match_all( '/(' . $s_regex_string . ')\s*=>\s*(.*)/', $t_element, $t_split );
-				if( !empty( $t_split[0] ) ) {
-					# associative array
-					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
-					$t_new_value = process_complex_value( $t_split[2][0], true );
-					$t_processed[$t_new_key] = $t_new_value;
-				} else {
-					# regular array
-					$t_new_value = process_complex_value( $t_element );
-					$t_processed[$t_key] = $t_new_value;
-				}
+	/**
+	 * Retrieves the next token without consuming it.
+	 * @return mixed token
+	 * @throws Exception if there are no more tokens to process
+	 */
+	public function get() {
+		if( $this->is_empty() ) {
+			throw new Exception( 'No more tokens' );
+		}
+		return $this->tokens[0];
+	}
+
+	/**
+	 * Consume the next token and return it.
+	 * @return mixed token
+	 * @throws Exception
+	 */
+	public function pop() {
+		$t_token = $this->get();
+		array_shift( $this->tokens );
+		return $t_token;
+	}
+
+	/**
+	 * Get the current token's type.
+	 * @link http://php.net/manual/en/tokens.php
+	 * @return int|string Token number or character
+	 */
+	public function type() {
+		$t_token = $this->get();
+		return is_array( $t_token ) ? $t_token[0] : $t_token;
+	}
+
+	/**
+	 * Get the current token's value.
+	 * @return int|string Token number or character
+	 */
+	public function value() {
+		$t_token = $this->get();
+		return is_array( $t_token ) ? $t_token[1] : $t_token;
+	}
+
+	/**
+	 * Return true if the next token matches the given value.
+	 * @param int|string $p_value value to check
+	 * @return bool
+	 */
+	public function matches( $p_value ) {
+		$t_type = $this->type();
+		return $t_type === $p_value;
+	}
+
+	/**
+	 * Ensures the next token matches the value and consumes it.
+	 * @param int|string $p_value value to check
+	 * @throws Exception if token does not match
+	 */
+	public function ensure_matches( $p_value ) {
+		if( !$this->matches( $p_value ) ) {
+			if( is_int( $p_value ) ) {
+				$p_value = token_name( $p_value );
+			}
+			throw new Exception(
+				"Invalid token: got '" . $this->value() . "', expected '$p_value'"
+			);
+		}
+		$this->pop();
+	}
+
+	/**
+	 * Prints the tokens array.
+	 * @TODO For debugging purposes only, should be deleted
+	 */
+	public function debug_output()
+	{
+		if( count( $this->tokens ) == 0 ) {
+			echo "Empty !\n";
+		}
+		foreach ($this->tokens as $id => $token) {
+			echo "$id - ";
+			if( is_array( $token ) ) {
+				echo token_name($token[0]) . " " . var_export( $token[1], true ) . "\n";
+			} else {
+				echo $token;
 			}
 		}
-		return $t_processed;
-	} else {
-		# Scalar value
-		$t_value = trim( $t_value, " \t\n\r\0\x0B" );
+	}
 
-		if( is_numeric( $t_value ) ) {
-			return (int)$t_value;
+}
+
+/**
+ * Class Parser.
+ * Simple PHP code parser for scalar and array types
+ */
+class Parser
+{
+	/**
+	 * @var Tokenizer $tokens
+	 */
+	protected $tokens;
+
+	/**
+	 * Parser constructor.
+	 * @param $p_code PHP code to parse
+	 */
+	public function __construct( $p_code ) {
+		$this->tokens = new Tokenizer( $p_code );
+	}
+
+	/**
+	 * Parse the code for a variable assignment.
+	 * Handles scalar types, and various array types (simple, associative,
+	 * multi-dimentional)
+	 * @return mixed variable
+	 * @throws Exception when there are unexpected or extra tokens
+	 */
+	public function parse() {
+		switch( $this->tokens->type() ) {
+			case T_ARRAY:
+				$t_result = $this->process_array();
+				break;
+
+			case T_CONSTANT_ENCAPSED_STRING:
+			case T_STRING:
+			case T_LNUMBER:
+			case T_DNUMBER:
+				return $this->process_value();
+
+			default:
+				throw new Exception( 'Unexpected token' );
 		}
 
-		# if has quotation marks
-		if ( strpos( $t_value, "'" ) !== false || strpos( $t_value, '"' ) !== false ) {
-			if( $p_trim_quotes  ) {
-				$t_value = trim( $t_value, "\"'" );
+		# Make sure we have processed all tokens
+		if( !$this->tokens->is_empty() ) {
+			$this->tokens->debug_output();
+			throw new Exception("Extra tokens");
+		}
+
+		return $t_result;
+	}
+
+	/**
+	 * Recursively process array declarations.
+	 * @return array
+	 * @throws Exception when there's an invalid token
+	 */
+	protected function process_array() {
+		$t_array = array();
+		$t_count = 0;
+
+		$this->tokens->ensure_matches( T_ARRAY );
+		$this->tokens->ensure_matches( '(' );
+
+		# Loop until we reach the end of the array
+		while( !$this->tokens->matches( ')' ) ) {
+			# A comma is required before each element except the first one
+			if ($t_count > 0) {
+				$this->tokens->ensure_matches(',');
 			}
-		} else {
-			# Only replace constants when no quotation marks exist
+
+			switch( $this->tokens->type() ) {
+				# Nested array
+				case T_ARRAY:
+					$t_array[] = $this->process_array();
+					break;
+
+				# Value
+				case T_CONSTANT_ENCAPSED_STRING:
+				case T_STRING:
+				case T_LNUMBER:
+				case T_DNUMBER:
+					$t_str = $this->process_value();
+
+					if( $this->tokens->matches( T_DOUBLE_ARROW ) ) {
+						# key => value
+						$this->tokens->pop();
+						if( $this->tokens->matches( T_ARRAY ) ) {
+							$t_array[$t_str] = $this->process_array();
+						} else {
+							$t_array[$t_str] = $this->process_value();
+						}
+					} else {
+						# Simple value
+						$t_array[] = $t_str;
+					}
+					break;
+
+				case ')':
+					# Cover the trailing ',' case
+					break;
+
+				default:
+					throw new Exception("Invalid token '" . $this->tokens->value() . "'");
+			}
+
+			$t_count++;
+		}
+		$this->tokens->ensure_matches( ')' );
+
+		return $t_array;
+	}
+
+	/**
+	 * Process a scalar value.
+	 * Handles string literals including defined constants
+	 * @see constant_replace()
+	 * @return mixed
+	 * @throws Exception when there's an unexpected value
+	 */
+	protected function process_value() {
+		# String literals
+		if( $this->tokens->matches( T_STRING ) ) {
+			$t_token = $this->tokens->pop();
+			$t_value = $t_token[1];
+
+			# PHP Standard string literals
+			switch (strtolower($t_value)) {
+				case 'null':
+					return null;
+				case 'true':
+					return true;
+				case 'false':
+					return false;
+			}
+
+			# Defined constants
 			$t_value = constant_replace( $t_value );
-		}
-
-		return $t_value;
-	}
-}
-
-/**
- * Split by commas, but ignore commas that are within quotes or parenthesis.
- * Ignoring commas within parenthesis helps allow for multi-dimensional arrays.
- * @param string $p_string String to split.
- * @return array
- */
-function special_split ( $p_string ) {
-	$t_values = array();
-	$t_array_element = '';
-	$t_paren_level = 0;
-	$t_inside_quote = false;
-	$t_escape_next = false;
-
-	foreach( str_split( trim( $p_string ) ) as $t_character ) {
-		if( $t_escape_next ) {
-			$t_array_element .= $t_character;
-			$t_escape_next = false;
-		} else if( $t_character == ',' && $t_paren_level==0 && !$t_inside_quote ) {
-			array_push( $t_values, $t_array_element );
-			$t_array_element = '';
-		} else {
-			if( $t_character == '(' && !$t_inside_quote ) {
-				$t_paren_level++;
-			} else if( $t_character == ')' && !$t_inside_quote ) {
-				$t_paren_level--;
-			} else if( $t_character == '\'' ) {
-				$t_inside_quote = !$t_inside_quote;
-			} else if( $t_character == '\\' ) {
-				# escape character
-				$t_escape_next = true;
-				# keep the escape if the string will be going through another recursion
-				if( $t_paren_level > 0 ) {
-					$t_array_element .= $t_character;
-				}
-				continue;
+			if( $t_value != $t_token[1] ) {
+				return $t_value;
 			}
-			$t_array_element .= $t_character;
-		}
-	}
-	array_push( $t_values, $t_array_element );
-	return $t_values;
-}
 
+			throw new Exception("Unknown string literal '$t_value'");
+		}
+
+		# Strings
+		if( $this->tokens->matches( T_CONSTANT_ENCAPSED_STRING ) ) {
+			$t_value = $this->tokens->pop();
+			return (string)stripslashes( substr( $t_value[1], 1, -1 ) );
+		}
+
+		# Numbers
+		$t_negate = 1;
+		if( $this->tokens->matches( '-' ) ) {
+			$this->tokens->pop();
+			$t_negate = -1;
+		}
+		if( $this->tokens->matches( '+' ) ) {
+			$this->tokens->pop();
+		}
+
+		# Integers
+		if( $this->tokens->matches( T_LNUMBER ) ) {
+			$t_value = $this->tokens->pop();
+			return $t_negate * (int)$t_value[1];
+		}
+
+		# Floating point
+		if( $this->tokens->matches( T_DNUMBER ) ) {
+			$t_value = $this->tokens->pop();
+			return $t_negate * (float)$t_value[1];
+		}
+
+		# Anything else
+		throw new Exception( "Unexpected value" );
+	}
+}
 
 /**
  * Check if the passed string is a constant and returns its value
