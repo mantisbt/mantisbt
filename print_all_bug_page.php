@@ -100,7 +100,7 @@ $t_result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_
 $t_row_count = count( $t_result );
 
 # pre-cache custom column data
-columns_plugin_cache_issue_data( $t_result );
+columns_plugin_cache_issue_data( $t_result, $t_columns );
 
 # for export
 $t_show_flag = gpc_get_int( 'show_flag', 0 );

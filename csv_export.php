@@ -63,13 +63,13 @@ if( $t_rows === false ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
-# pre-cache custom column data
-columns_plugin_cache_issue_data( $t_rows );
-
-csv_start( csv_get_default_filename() );
-
 # Get columns to be exported
 $t_columns = csv_get_columns();
+
+# pre-cache custom column data
+columns_plugin_cache_issue_data( $t_rows, $t_columns );
+
+csv_start( csv_get_default_filename() );
 
 # export the titles
 $t_first_column = true;
