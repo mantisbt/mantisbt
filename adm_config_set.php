@@ -208,11 +208,11 @@ function process_complex_value( $p_value, $p_trim_quotes = false ) {
 		# if has quotation marks
 		if ( strpos( $t_value, "'" ) === 0 ) {
 			if( $p_trim_quotes  ) {
-				$t_value = trim( $t_value, "'" );
+				$t_value = str_replace( array("\\'",'\\\\'), array("'",'\\'), trim( $t_value, "'" ) );
 			}
 		} else if ( strpos( $t_value, '"' ) === 0 ) {
 			if( $p_trim_quotes  ) {
-				$t_value = trim( $t_value, '"' );
+				$t_value = str_replace( array('\\"','\\\\'), array('"','\\'), trim( $t_value, '"' ) );
 			}
 		} else {
 			# Only replace constants when no quotation marks exist
