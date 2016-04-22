@@ -1804,22 +1804,6 @@ $g_max_dropdown_length = 40;
  */
 $g_wrap_in_preformatted_text = ON;
 
-########################
-# MantisBT HR Settings #
-########################
-
-/**
- * Horizontal Rule Size
- * @global integer $g_hr_size
- */
-$g_hr_size = 1;
-
-/**
- * Horizontal Rule Width
- * @global integer $g_hr_width
- */
-$g_hr_width = 50;
-
 #############################################
 # MantisBT Authentication and LDAP Settings #
 #############################################
