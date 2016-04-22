@@ -4414,8 +4414,6 @@ $g_public_config_names = array(
 	'hide_status_default',
 	'history_default_visible',
 	'history_order',
-	'hr_size',
-	'hr_width',
 	'html_make_links',
 	'html_valid_tags_single_line',
 	'html_valid_tags',
