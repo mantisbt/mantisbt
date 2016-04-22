@@ -87,7 +87,7 @@ $t_columns = excel_get_columns();
 
 do {
 	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $t_result );
+	columns_plugin_cache_issue_data( $t_result, $t_columns );
 
 	foreach( $t_result as $t_row ) {
 		if( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {

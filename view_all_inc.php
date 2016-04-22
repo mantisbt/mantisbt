@@ -175,7 +175,7 @@ function write_bug_rows( array $p_rows ) {
 	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
 
 	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $p_rows );
+	columns_plugin_cache_issue_data( $p_rows, $g_columns );
 
 	# -- Loop over bug rows --
 
