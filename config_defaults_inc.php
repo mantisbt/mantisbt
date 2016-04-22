@@ -445,6 +445,7 @@ $g_enable_email_notification	= ON;
  *       'handler': the handler of the bug
  *       'monitor': users who are monitoring a bug
  *      'bugnotes': users who have added a bugnote to the bug
+ *      'category': category owners
  *      'explicit': users who are explicitly specified by the code based on the
  *                  action (e.g. user added to monitor list).
  * 'threshold_max': all users with access <= max
@@ -486,6 +487,7 @@ $g_default_notify_flags = array(
 	'handler'       => ON,
 	'monitor'       => ON,
 	'bugnotes'      => ON,
+	'category'      => OFF,
 	'explicit'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY

@@ -775,6 +775,7 @@ $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
+$s_category_assigned_to = 'Category Owner';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';

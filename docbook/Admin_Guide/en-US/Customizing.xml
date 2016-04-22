@@ -791,6 +791,7 @@ $g_default_notify_flags = array(
 	'handler'       => ON,
 	'monitor'       => ON,
 	'bugnotes'      => ON,
+	'category'      => OFF,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
 );
