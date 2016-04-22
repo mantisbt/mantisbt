@@ -67,6 +67,7 @@ $g_default_notify_flags = array(
 	'handler'       =&gt; ON,
 	'monitor'       =&gt; ON,
 	'bugnotes'      =&gt; ON,
+	'category'      =&gt; ON,
 	'explicit'      =&gt; ON,
 	'threshold_min' =&gt; NOBODY,
 	'threshold_max' =&gt; NOBODY
