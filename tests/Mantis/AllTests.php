@@ -32,6 +32,7 @@ require_once 'EnumTest.php';
 require_once 'HelperTest.php';
 require_once 'MentionParsingTest.php';
 require_once 'StringTest.php';
+require_once 'ConfigParserTest.php';
 
 /**
  * All Test Cases
@@ -50,6 +51,7 @@ class Mantis_AllTests extends PHPUnit_Framework_TestSuite {
 		$t_suite->addTestSuite( 'Mantis_HelperTest' );
 		$t_suite->addTestSuite( 'Mantis_StringTest' );
 		$t_suite->addTestSuite( 'MentionParsingTest' );
+		$t_suite->addTestSuite( 'Mantis_ConfigParserTest' );
 
 		return $t_suite;
 	}
