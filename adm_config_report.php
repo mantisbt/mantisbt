@@ -124,7 +124,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 	if( $t_corrupted ) {
 		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
 	} else {
-		$t_output = var_export( $t_value, true );
+		$t_output = json_encode( $t_value, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK );
 	}
 
 	if( $p_for_display ) {
