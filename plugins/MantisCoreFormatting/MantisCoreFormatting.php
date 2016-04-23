@@ -124,9 +124,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_bugnote_link( $t_string );
 		}
 		
-		if( mention_enabled() ) {
-			$t_string = mention_format_text( $t_string );
-		}
+		$t_string = mention_format_text( $t_string, /* html */ true );
 
 		return $t_string;
 	}
@@ -164,6 +162,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_bugnote_link( $t_string, true, false, true );
 		}
 
+		$t_string = mention_format_text( $t_string, /* html */ true );
+
 		return $t_string;
 	}
 
@@ -191,6 +191,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_bug_link( $t_string, false );
 			$t_string = string_process_bugnote_link( $t_string, false );
 		}
+
+		$t_string = mention_format_text( $t_string, /* html */ false );
 
 		return $t_string;
 	}

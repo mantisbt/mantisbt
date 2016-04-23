@@ -266,7 +266,10 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# Now that the note is added process the @ mentions
-	mention_process_user_mentions( $p_bug_id, $t_mentioned_user_ids );
+	mention_process_user_mentions(
+		$p_bug_id,
+		$t_mentioned_user_ids,
+		$t_bugnote_text );
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );

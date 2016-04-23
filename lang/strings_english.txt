@@ -540,6 +540,9 @@ $s_reminder_explain = 'This note will be sent to the selected recipients, reques
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue; they can unsubscribe using the "End Monitoring" button.';
 $s_reminder_store = 'The note will be stored with the issue.';
 
+# mentions
+$s_mentioned_you = 'mentioned you on:';
+
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %1$d for %2$s.';
 

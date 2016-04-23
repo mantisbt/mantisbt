@@ -105,12 +105,11 @@ function mention_get_users( $p_text ) {
  *
  * @param int $p_bug_id The bug id.
  * @param array $p_mentioned_user_ids An array of user ids
+ * @param string $p_message The message containing the mentions.
  * @return void
  */
-function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids ) {
-	foreach( $p_mentioned_user_ids as $t_mentioned_user_id ) {
-		bug_monitor( $p_bug_id, $t_mentioned_user_id );
-	}
+function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_message = '' ) {
+	email_user_mention( $p_bug_id, $p_mentioned_user_ids, $p_message );
 }
 
 /**
@@ -118,9 +117,10 @@ function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids ) {
  * If user is deleted, use user123.
  *
  * @param string $p_text The text to process.
+ * @param bool $p_html true for html, false otherwise.
  * @return string The processed text.
  */
-function mention_format_text( $p_text ) {
+function mention_format_text( $p_text, $p_html = true ) {
 	if ( !mention_enabled() ) {
 		return $p_text;
 	}
@@ -138,15 +138,19 @@ function mention_format_text( $p_text ) {
 		foreach( $t_matched_mentions as $t_mention ) {
 			$t_user_id = substr( $t_mention, 3, strlen( $t_mention ) - 4 );
 			if( $t_username = user_get_name( $t_user_id ) ) {
-				$t_username = string_display_line( $t_username );
+				if( $p_html ) {
+					$t_username = string_display_line( $t_username );
 
-				if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
-					$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">@' . $t_username . '</a>';
+					if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
+						$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">@' . $t_username . '</a>';
+					} else {
+						$t_user_url = '<del class="user">@' . $t_username . '</del>';
+					}
+
+					$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
 				} else {
-					$t_user_url = '<del class="user">@' . $t_username . '</del>';
-				}
-
-				$t_formatted_mentions[$t_mention] = "<span class='mention'>{$t_user_url}</span>";
+					$t_formatted_mentions[$t_mention] = '@' . $t_username;
+				}				
 			}
 		}
 
