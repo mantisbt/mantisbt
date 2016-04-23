@@ -91,18 +91,15 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		# Check that the parsed array matches the model array
 		$t_parser = new ConfigParser( $p_text );
 		$t_parsed = $t_parser->parse();
-		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed ), $t_message  );
-		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed ), $t_message  );
+		$this->assertEquals( $t_parsed, $p_expected_array, $t_message  );
 
 		# Export the converted array, and parse again.
 		# The result should match both the model and the previously parsed array
 		$t_export = var_export( $p_expected_array , true );
 		$t_parser = new ConfigParser( $t_export );
 		$t_parsed2 = $t_parser->parse();
-		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed2 ), $t_message );
-		$this->assertEquals( json_encode( $t_parsed ), json_encode( $t_parsed2 ), $t_message );
-		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed2 ), $t_message );
-		$this->assertEquals( serialize( $t_parsed ), serialize( $t_parsed2 ), $t_message );
+		$this->assertEquals( $t_parsed2, $p_expected_array, $t_message  );
+		$this->assertEquals( $t_parsed2, $t_parsed, $t_message  );
 	}
 
 	/**
