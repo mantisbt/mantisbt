@@ -102,26 +102,31 @@ if( $f_type == CONFIG_TYPE_DEFAULT ) {
 	$t_type = $f_type;
 }
 
-switch( $t_type ) {
-	case CONFIG_TYPE_STRING:
-		$t_value = $f_value;
-		break;
-	case CONFIG_TYPE_INT:
-		$t_value = (integer)ConfigParser::constant_replace( $f_value );
-		break;
-	case CONFIG_TYPE_FLOAT:
-		$t_value = (float)ConfigParser::constant_replace( $f_value );
-		break;
-	case CONFIG_TYPE_COMPLEX:
-	default:
-		try {
-			$t_parser = new ConfigParser( $f_value );
-			$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+# Parse the value
+if( $t_type == CONFIG_TYPE_STRING ) {
+	# Return strings as is
+	$t_value = $f_value;
+} else {
+	try {
+		$t_parser = new ConfigParser( $f_value );
+		$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+
+		switch( $t_type ) {
+			case CONFIG_TYPE_INT:
+				$t_value = (int)$t_value;
+				break;
+			case CONFIG_TYPE_FLOAT:
+				$t_value = (float)$t_value;
+				break;
 		}
-		catch (Exception $e) {
-			error_parameters( $f_config_option, $f_value, $e->getMessage() );
-			trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
-		}
+	}
+	catch (Exception $e) {
+		error_parameters( $f_config_option, $e->getMessage() );
+		trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
+	}
+
+}
+
 		var_dump($t_value);
 		break;
 }
