@@ -190,7 +190,7 @@ class ConfigParser
 
 			# Defined constants
 			$t_value = $this->constant_replace( $t_value );
-			if( $t_value != $t_token[1] ) {
+			if( $t_value !== $t_token[1] ) {
 				return $t_value;
 			}
 
