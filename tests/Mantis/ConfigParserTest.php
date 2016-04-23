@@ -19,7 +19,7 @@
  *
  * @package    Tests
  * @subpackage UnitTests
- * @copyright Copyright 2002-2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -28,7 +28,9 @@
  */
 require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
 
-require_once 'config_api.php';
+# Mantis Core required for class autoloader and constants
+require_mantis_core();
+
 
 /**
  * Test cases for config API parser
@@ -173,14 +175,16 @@ EOT;
 				. "<<<------------------------\n";
 
 		# Check that the parsed array matches the model array
-		$t_parsed = config_process_complex_value( $p_text );
+		$t_parser = new ConfigParser( $p_text );
+		$t_parsed = $t_parser->parse();
 		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed ), $t_message  );
 		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed ), $t_message  );
 
 		# Export the converted array, and parse again.
 		# The result should match both the model and the previously parsed array
 		$t_export = var_export( $p_expected_array , true );
-		$t_parsed2 = config_process_complex_value( $t_export );
+		$t_parser = new ConfigParser( $t_export );
+		$t_parsed2 = $t_parser->parse();
 		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed2 ), $t_message );
 		$this->assertEquals( json_encode( $t_parsed ), json_encode( $t_parsed2 ), $t_message );
 		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed2 ), $t_message );
