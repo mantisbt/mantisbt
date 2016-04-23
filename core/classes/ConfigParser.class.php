@@ -84,7 +84,6 @@ class ConfigParser
 
 		# Make sure we have processed all tokens
 		if( $p_extra_tokens == self::EXTRA_TOKENS_ERROR && !$this->tokens->is_empty() ) {
-			$this->tokens->debug_output();
 			throw new Exception( 'Extra tokens found "' . $this->tokens->get_string() .'":' );
 		}
 

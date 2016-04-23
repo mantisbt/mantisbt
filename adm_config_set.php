@@ -124,11 +124,6 @@ if( $t_type == CONFIG_TYPE_STRING ) {
 		error_parameters( $f_config_option, $e->getMessage() );
 		trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
 	}
-
-}
-
-		var_dump($t_value);
-		break;
 }
 
 config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
