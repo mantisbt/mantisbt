@@ -142,7 +142,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	 * @throws Exception
 	 */
 	public function testSyntaxError() {
-		$this->setExpectedExceptionRegExp('Exception', '/^Syntax error/');
+		$this->setExpectedExceptionRegExp('Exception', '/^syntax error/');
 
 		$t_parser = new ConfigParser( 'array(' );
 		$t_parser->parse();
