@@ -116,7 +116,7 @@ switch( $t_type ) {
 	default:
 		try {
 			$t_parser = new ConfigParser( $f_value );
-			$t_value = $t_parser->parse();
+			$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
 		}
 		catch (Exception $e) {
 			error_parameters( $f_config_option, $f_value, $e->getMessage() );

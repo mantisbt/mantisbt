@@ -36,6 +36,12 @@
 class ConfigParser
 {
 	/**
+	 * Define how extra tokens should be handled by parse() method
+	 */
+	const EXTRA_TOKENS_IGNORE = 0;
+	const EXTRA_TOKENS_ERROR = 1;
+
+	/**
 	 * @var Tokenizer $tokens
 	 */
 	protected $tokens;
@@ -52,10 +58,15 @@ class ConfigParser
 	 * Parse the code for a variable assignment.
 	 * Handles scalar types, and various array types (simple, associative,
 	 * multi-dimentional)
+	 * @param bool $p_extra_tokens Define how extra tokens should be handled
+	 *                             - EXTRA_TOKENS_IGNORE silently ignore any
+	 *                               extra code given after the first token
+	 *                             - EXTRA_TOKENS_ERROR (default) throws an
+	 *                               exception if extra code is found
 	 * @return mixed variable
 	 * @throws Exception when there are unexpected or extra tokens
 	 */
-	public function parse() {
+	public function parse( $p_extra_tokens = self::EXTRA_TOKENS_ERROR ) {
 		switch( $this->tokens->type() ) {
 			case T_ARRAY:
 				$t_result = $this->process_array();
@@ -72,9 +83,9 @@ class ConfigParser
 		}
 
 		# Make sure we have processed all tokens
-		if( !$this->tokens->is_empty() ) {
+		if( $p_extra_tokens == self::EXTRA_TOKENS_ERROR && !$this->tokens->is_empty() ) {
 			$this->tokens->debug_output();
-			throw new Exception("Extra tokens");
+			throw new Exception( 'Extra tokens found "' . $this->tokens->get_string() .'":' );
 		}
 
 		return $t_result;
