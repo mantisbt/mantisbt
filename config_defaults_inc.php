@@ -1576,9 +1576,9 @@ $g_history_default_visible = ON;
  */
 $g_history_order = 'ASC';
 
-##############################
-# MantisBT Reminder Settings #
-##############################
+##########################################
+# MantisBT Reminder and Mention Settings #
+##########################################
 
 /**
  * are reminders stored as bugnotes
@@ -1606,6 +1606,13 @@ $g_default_reminder_view_status = VS_PUBLIC;
  * @global integer $g_reminder_receive_threshold
  */
 $g_reminder_receive_threshold = DEVELOPER;
+
+/**
+ * Enables or disables @ mentions feature.
+ *
+ * @global integer $g_mentions_enabled
+ */
+$g_mentions_enabled = ON;
 
 #################################
 # MantisBT Sponsorship Settings #
@@ -4711,9 +4718,3 @@ $g_webservice_error_when_version_not_found = ON;
  */
 $g_webservice_version_when_not_found = '';
 
-/**
- * Enables or disables @ mentions feature.
- *
- * @global integer $g_mentions_enabled
- */
-$g_mentions_enabled = ON;
