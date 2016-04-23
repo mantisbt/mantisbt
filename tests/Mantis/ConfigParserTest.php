@@ -71,7 +71,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 			$t_parsed_result = $t_parser->parse();
 
 			$this->assertInternalType( $t_expected_type, $t_parsed_result );
-			$this->assertEquals( $t_parsed_result, $t_reference_result );
+			$this->assertEquals( $t_parsed_result, $t_reference_result, $this->errorMessage( $t_string ) );
 		}
 	}
 
@@ -83,25 +83,27 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function checkParserArray( $p_text, $p_expected_array ) {
-		$t_message = "Original input was :\n"
-				. ">>>------------------------\n"
-				. $p_text . "\n"
-				. "<<<------------------------\n";
-
 		# Check that the parsed array matches the model array
 		$t_parser = new ConfigParser( $p_text );
 		$t_parsed = $t_parser->parse();
-		$this->assertEquals( $t_parsed, $p_expected_array, $t_message  );
+		$this->assertEquals( $t_parsed, $p_expected_array, $this->errorMessage( $p_text )  );
 
 		# Export the converted array, and parse again.
 		# The result should match both the model and the previously parsed array
 		$t_export = var_export( $p_expected_array , true );
 		$t_parser = new ConfigParser( $t_export );
 		$t_parsed2 = $t_parser->parse();
-		$this->assertEquals( $t_parsed2, $p_expected_array, $t_message  );
-		$this->assertEquals( $t_parsed2, $t_parsed, $t_message  );
+		$this->assertEquals( $t_parsed2, $p_expected_array, $this->errorMessage( $p_text )  );
+		$this->assertEquals( $t_parsed2, $t_parsed, $this->errorMessage( $p_text )  );
 	}
 
+	private function errorMessage( $p_text ) {
+		return "Original input:\n"
+			. ">>>------------------------\n"
+			. $p_text . "\n"
+			. "<<<------------------------\n";
+	}
+	
 	/**
 	 * Adds a new test case to the list
 	 *
