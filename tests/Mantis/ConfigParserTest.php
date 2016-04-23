@@ -75,26 +75,22 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testParserCorrectSyntax() {
+	public function testArrays() {
 		foreach( $this->cases_array as $t_string ) {
-			$t_eval_result = eval( 'return ' . $t_string . ';' );
-			$this->checkParserArray( $t_string, $t_eval_result );
+			$t_reference_result = eval( 'return ' . $t_string . ';' );
+
+			# Check that the parsed array matches the model array
+			$t_parser = new ConfigParser( $t_string );
+			$t_parsed_1 = $t_parser->parse();
+			$this->assertEquals( $t_parsed_1, $t_reference_result, $this->errorMessage( $t_string )  );
+
+			# Export the converted array, and parse again.
+			# The result should match both the model and the previously parsed array
+			$t_parser = new ConfigParser( var_export( $t_reference_result , true ) );
+			$t_parsed_2 = $t_parser->parse();
+			$this->assertEquals( $t_parsed_2, $t_reference_result, $this->errorMessage( $t_string )  );
+			$this->assertEquals( $t_parsed_2, $t_parsed_1, $this->errorMessage( $t_string )  );
 		}
-	}
-
-	private function checkParserArray( $p_text, $p_expected_array ) {
-		# Check that the parsed array matches the model array
-		$t_parser = new ConfigParser( $p_text );
-		$t_parsed = $t_parser->parse();
-		$this->assertEquals( $t_parsed, $p_expected_array, $this->errorMessage( $p_text )  );
-
-		# Export the converted array, and parse again.
-		# The result should match both the model and the previously parsed array
-		$t_export = var_export( $p_expected_array , true );
-		$t_parser = new ConfigParser( $t_export );
-		$t_parsed2 = $t_parser->parse();
-		$this->assertEquals( $t_parsed2, $p_expected_array, $this->errorMessage( $p_text )  );
-		$this->assertEquals( $t_parsed2, $t_parsed, $this->errorMessage( $p_text )  );
 	}
 
 	private function errorMessage( $p_text ) {
