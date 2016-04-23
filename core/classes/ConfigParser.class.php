@@ -76,7 +76,8 @@ class ConfigParser
 			case T_STRING:
 			case T_LNUMBER:
 			case T_DNUMBER:
-				return $this->process_value();
+				$t_result = $this->process_value();
+				break;
 
 			default:
 				throw new Exception( 'Unexpected token "' . $this->tokens->value() . '"' );
