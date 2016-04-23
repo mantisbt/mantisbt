@@ -134,14 +134,11 @@ EOT
 		);
 
 		# nested quotes
-		# @TODO this fails
-		/*
 		$this->addCase(
 <<<'EOT'
 array( '"a""b"""', "'a''b'''" )
 EOT
 		);
-		 */
 
 		# associative
 		$this->addCase( "array( 0 => 'a', 1 => 'b' )" );
@@ -161,7 +158,6 @@ EOT
 		# mixed associative, overwriting implicit keys
 		$this->addCase( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" );
 
-		#@TODO this fails
 		$this->addCase(
 <<<'EOT'
 array(
