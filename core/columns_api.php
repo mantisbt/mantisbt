@@ -653,7 +653,7 @@ function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COL
 	global $t_icon_path;
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
-	$t_view_state_icon = '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	$t_view_state_icon = ' <i class="fa fa-lock" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '"></i>';
 	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</th>';
@@ -987,7 +987,7 @@ function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMN
 	global $t_icon_path;
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
-	$t_overdue_icon = '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text . '" />';
+	$t_overdue_icon = ' <i class="fa fa-times-circle-o" alt="' . $t_overdue_text . '" title="' . $t_overdue_text . '"></i>';
 	print_view_bug_sort_link( $t_overdue_icon, 'due_date', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'due_date' );
 	echo '</th>';
@@ -1085,9 +1085,9 @@ function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<img width="16" height="16" src="' . $t_icon_path . 'update.png';
+		echo '<i class="fa fa-pencil fa-lg';
 		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
-		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
+		echo ' title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
 	} else {
 		echo '&#160;';
 	}
@@ -1525,7 +1525,7 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
-		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+		echo ' <i class="fa fa-lock" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '"></i>';
 	} else {
 		echo '&#160;';
 	}
@@ -1594,7 +1594,7 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 		bug_is_overdue( $p_bug->id ) ) {
 		$t_overdue_text = lang_get( 'overdue' );
 		$t_overdue_text_hover = sprintf( lang_get( 'overdue_since' ), date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-		echo '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . string_display_line( $t_overdue_text_hover ) . '" />';
+		echo '<i class="fa fa-times-circle-o" alt="' . $t_overdue_text . '" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
 	} else {
 		echo '&#160;';
 	}
