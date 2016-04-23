@@ -39,87 +39,90 @@ require_mantis_core();
  */
 class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 
-	# This array contains definition of arrays with a PHP correct syntax
-	# This test cases will be parsed and compared to its eval() version 
-	# interpreted by PHP
-	private $test_correct_syntax = array();
-
+	/**
+	 * @var array List of test cases: strings as entered in adm_config_report page.
+	 *      These will be parsed by MantisBT core, and the result compared to
+	 *      PHP's interpretation using eval().
+	 */           
+	private $cases = array();
+	
 	public function __construct() {
-		$this->test_correct_syntax[] = "array( 'a' => 1, 2 )";
-
+		$this->addCase( "array( 'a' => 1, 2 )" );
+ 
 /*
  * Template
 
 		# comment
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
-EOT;
-
- *
+EOT
+ 		);
  */
 
 		# no whitespace
-		$this->test_correct_syntax[] = "array(1,2,3)";
+		$this->addCase( "array(1,2,3)" );
 
 		# formatted whitespace
-		$this->test_correct_syntax[] = "array ( 1, 2, 3 )";
+		$this->addCase( "array ( 1, 2, 3 )" );
 
 		# arbitrary whitespace
-		$this->test_correct_syntax[] = "  array(  1,2  ,    3 )  ";
+		$this->addCase( "  array(  1,2  ,    3 )  " );
 
 		# one element
-		$this->test_correct_syntax[] = "array( 1 )";
+		$this->addCase( "array( 1 )" );
 
 		# several elements, trailing delimiter
-		$this->test_correct_syntax[] = "array( 1, 2, )";
+		$this->addCase( "array( 1, 2, )" );
 
 		# empty
-		$this->test_correct_syntax[] = "array( )";
+		$this->addCase( "array( )" );
 
 		# mixed types, quotes
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array( 1, 'a', "b" )
-EOT;
+EOT
+		);
 
 		# nested quotes
 		# @TODO this fails
 		/*
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array( '"a""b"""', "'a''b'''" )
-EOT;
-		 *
+EOT
+		);
 		 */
 
 		# associative
-		$this->test_correct_syntax[] = "array( 0 => 'a', 1 => 'b' )";
+		$this->addCase( "array( 0 => 'a', 1 => 'b' )" );
 
 		# associative, unordered keys
-		$this->test_correct_syntax[] = "array( 5 => 'a', 2 => 'b' )";
+		$this->addCase( "array( 5 => 'a', 2 => 'b' )" );
 
 		# associative, text keys
-		$this->test_correct_syntax[] = "array( 'i' => 'a', 'j' => 'b' )";
+		$this->addCase( "array( 'i' => 'a', 'j' => 'b' )" );
 
 		# associative, mixed keys
-		$this->test_correct_syntax[] = "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )";
+		$this->addCase( "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" );
 
 		# mixed associative, omitting some keys
-		$this->test_correct_syntax[] = "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )";
+		$this->addCase( "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" );
 
 		# mixed associative, overwriting implicit keys
-		$this->test_correct_syntax[] = "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )";
+		$this->addCase( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" );
 
 		#@TODO this fails
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array(
 	array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
 )
-EOT;
+EOT
+		);
 
 		# Test case for issue #0020787
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array (
 	'additional_info',
@@ -129,16 +132,18 @@ array (
 	'description',
 	'due_date',
 )
-EOT;
+EOT
+		);
 
 		# Test case for issue #0020850
-		$this->test_correct_syntax[] =
+		$this->addCase( 
 <<<'EOT'
 array ( 0 => '""a"' )
-EOT;
+EOT
+		);
 
 		# Test case for issue #0020812
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array (
 	0 =>
@@ -148,21 +153,23 @@ array (
 		2 => 3,
 	),
 )
-EOT;
+EOT
+		);
 
 		# Test case for issue #0020851
-		$this->test_correct_syntax[] =
+		$this->addCase(
 <<<'EOT'
 array (
 	'a' => 'x1',
 	'x2',
 )
-EOT;
+EOT
+		);
 
 	}
 
 	public function testParserCorrectSyntax() {
-		foreach( $this->test_correct_syntax as $t_string ) {
+		foreach( $this->cases as $t_string ) {
 			$t_eval_result = eval( 'return ' . $t_string . ';' );
 			$this->checkParserArray( $t_string, $t_eval_result );
 		}
@@ -190,5 +197,13 @@ EOT;
 		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed2 ), $t_message );
 		$this->assertEquals( serialize( $t_parsed ), serialize( $t_parsed2 ), $t_message );
 	}
-}
 
+	/**
+	 * Adds a new test case to the list
+	 *
+	 * @param string $p_string
+	 */
+	private function addCase( $p_string ) {
+		$this->cases[] = $p_string;
+	}
+}
