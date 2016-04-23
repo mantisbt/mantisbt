@@ -94,6 +94,18 @@ class Tokenizer
 	}
 
 	/**
+	 * Returns all remaining tokens as PHP Code
+	 * @return string
+	 */
+	public function get_string() {
+		$t_code = '';
+		foreach ($this->tokens as $t_token) {
+			$t_code .= is_array( $t_token ) ? $t_token[1] : $t_token;
+		}
+		return $t_code;
+	}
+
+	/**
 	 * Retrieves the next token without consuming it.
 	 * @return mixed token
 	 * @throws Exception if there are no more tokens to process
@@ -156,7 +168,7 @@ class Tokenizer
 				$p_value = token_name( $p_value );
 			}
 			throw new Exception(
-				"Invalid token: got '" . $this->value() . "', expected '$p_value'"
+				'Invalid token: got "' . $this->value() . '", expected "$p_value"'
 			);
 		}
 		$this->pop();

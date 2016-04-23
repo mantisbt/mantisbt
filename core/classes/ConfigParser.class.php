@@ -79,7 +79,7 @@ class ConfigParser
 				return $this->process_value();
 
 			default:
-				throw new Exception( 'Unexpected token' );
+				throw new Exception( 'Unexpected token "' . $this->tokens->value() . '"' );
 		}
 
 		# Make sure we have processed all tokens
@@ -227,6 +227,6 @@ class ConfigParser
 		}
 
 		# Anything else
-		throw new Exception( "Unexpected value" );
+		throw new Exception( "Unexpected value" . $this->tokens->value() );
 	}
 }
