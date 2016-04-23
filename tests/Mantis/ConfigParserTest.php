@@ -56,6 +56,9 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	 */
 	private $cases_array = array();
 
+	/**
+	 * Mantis_ConfigParserTest constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -63,6 +66,12 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$this->initArrayTestCases();
 	}
 
+	/**
+	 * Test a list of strings representing scalar values, making sure
+	 * the value and the type match
+	 *
+	 * @throws Exception
+	 */
 	public function testScalarTypes() {
 		foreach( $this->cases_scalar as $t_string => $t_expected_type ) {
 			$t_reference_result = eval( 'return ' . $t_string . ';' );
@@ -75,6 +84,12 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
+	/**
+	 * Test various types of arrays
+	 *
+	 * @see initArrayTestCases
+	 * @throws Exception
+	 */
 	public function testArrays() {
 		foreach( $this->cases_array as $t_string ) {
 			$t_reference_result = eval( 'return ' . $t_string . ';' );
@@ -91,6 +106,11 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
+	/**
+	 * Test failure if we get extra tokens when the parser is set to error
+	 *
+	 * @throws Exception
+	 */
 	public function testExtraTokensError() {
 		$this->setExpectedExceptionRegExp('Exception', '/^Extra tokens found/');
 
@@ -101,6 +121,11 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
 	}
 
+	/**
+	 * Test no errors if we get extra tokens when the parser is set to ignore
+	 *
+	 * @throws Exception
+	 */
 	public function testExtraTokensIgnore() {
 		$t_parser = new ConfigParser( '1; 2' );
 		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
@@ -111,6 +136,11 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $t_result, array() );
 	}
 
+	/**
+	 * Parser should error out if given string is not syntactically correct
+	 *
+	 * @throws Exception
+	 */
 	public function testSyntaxError() {
 		$this->setExpectedExceptionRegExp('Exception', '/^Syntax error/');
 
@@ -118,6 +148,11 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$t_parser->parse();
 	}
 
+	/**
+	 * Parser only accepts arrays, scalar types and constants
+	 *
+	 * @throws Exception
+	 */
 	public function testInvalidTokensError() {
 		$this->setExpectedExceptionRegExp('Exception', '/^Unexpected token/');
 
@@ -125,6 +160,11 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$t_parser->parse();
 	}
 
+	/**
+	 * Use of undefined constant should trigger an error
+	 *
+	 * @throws Exception
+	 */
 	public function testUnknownConstantError() {
 		$this->setExpectedExceptionRegExp('Exception', '/^Unknown string literal/');
 
@@ -137,6 +177,12 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		$t_parser->parse();
 	}
 
+	/**
+	 * Display original string in case of error to help troubleshooting
+	 *
+	 * @param $p_text
+	 * @return string
+	 */
 	private function errorMessage( $p_text ) {
 		return "Original input:\n"
 			. ">>>------------------------\n"
@@ -194,7 +240,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * Initialize the test cases list
+	 * Initialize the array test cases list
 	 */
 	private function initArrayTestCases() {
 		/**
