@@ -91,6 +91,52 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
+	public function testExtraTokensError() {
+		$this->setExpectedExceptionRegExp('Exception', '/^Extra tokens found/');
+
+		$t_parser = new ConfigParser( '1; 2' );
+		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
+
+		$t_parser = new ConfigParser( 'array(); 2' );
+		$t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
+	}
+
+	public function testExtraTokensIgnore() {
+		$t_parser = new ConfigParser( '1; 2' );
+		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
+		$this->assertEquals( $t_result, 1 );
+
+		$t_parser = new ConfigParser( 'array(); 2' );
+		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+		$this->assertEquals( $t_result, array() );
+	}
+
+	public function testSyntaxError() {
+		$this->setExpectedExceptionRegExp('Exception', '/^Syntax error/');
+
+		$t_parser = new ConfigParser( 'array(' );
+		$t_parser->parse();
+	}
+
+	public function testInvalidTokensError() {
+		$this->setExpectedExceptionRegExp('Exception', '/^Unexpected token/');
+
+		$t_parser = new ConfigParser( 'echo 1;' );
+		$t_parser->parse();
+	}
+
+	public function testUnknownConstantError() {
+		$this->setExpectedExceptionRegExp('Exception', '/^Unknown string literal/');
+
+		# Make sure we have a string that is not a defined constant
+		$t_constant = 'UNDEFINED_CONSTANT';
+		while( defined($t_constant) ) {
+			$t_constant .= '_' . rand(0, 9999);
+		}
+		$t_parser = new ConfigParser( $t_constant );
+		$t_parser->parse();
+	}
+
 	private function errorMessage( $p_text ) {
 		return "Original input:\n"
 			. ">>>------------------------\n"
