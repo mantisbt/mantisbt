@@ -47,10 +47,58 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	private $cases = array();
 	
 	public function __construct() {
+		parent::__construct();
+
+		$this->initTestCases();
+	}
+
+	public function testParserCorrectSyntax() {
+		foreach( $this->cases as $t_string ) {
+			$t_eval_result = eval( 'return ' . $t_string . ';' );
+			$this->checkParserArray( $t_string, $t_eval_result );
+		}
+	}
+
+	private function checkParserArray( $p_text, $p_expected_array ) {
+		$t_message = "Original input was :\n"
+				. ">>>------------------------\n"
+				. $p_text . "\n"
+				. "<<<------------------------\n";
+
+		# Check that the parsed array matches the model array
+		$t_parser = new ConfigParser( $p_text );
+		$t_parsed = $t_parser->parse();
+		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed ), $t_message  );
+		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed ), $t_message  );
+
+		# Export the converted array, and parse again.
+		# The result should match both the model and the previously parsed array
+		$t_export = var_export( $p_expected_array , true );
+		$t_parser = new ConfigParser( $t_export );
+		$t_parsed2 = $t_parser->parse();
+		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed2 ), $t_message );
+		$this->assertEquals( json_encode( $t_parsed ), json_encode( $t_parsed2 ), $t_message );
+		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed2 ), $t_message );
+		$this->assertEquals( serialize( $t_parsed ), serialize( $t_parsed2 ), $t_message );
+	}
+
+	/**
+	 * Adds a new test case to the list
+	 *
+	 * @param string $p_string
+	 */
+	private function addCase( $p_string ) {
+		$this->cases[] = $p_string;
+	}
+
+	/**
+	 * Initialize the test cases list
+	 */
+	private function initTestCases() {
 		$this->addCase( "array( 'a' => 1, 2 )" );
- 
-/*
- * Template
+
+		/*
+		 * Template
 
 		# comment
 		$this->addCase(
@@ -165,45 +213,5 @@ array (
 )
 EOT
 		);
-
-	}
-
-	public function testParserCorrectSyntax() {
-		foreach( $this->cases as $t_string ) {
-			$t_eval_result = eval( 'return ' . $t_string . ';' );
-			$this->checkParserArray( $t_string, $t_eval_result );
-		}
-	}
-
-	private function checkParserArray( $p_text, $p_expected_array ) {
-		$t_message = "Original input was :\n"
-				. ">>>------------------------\n"
-				. $p_text . "\n"
-				. "<<<------------------------\n";
-
-		# Check that the parsed array matches the model array
-		$t_parser = new ConfigParser( $p_text );
-		$t_parsed = $t_parser->parse();
-		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed ), $t_message  );
-		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed ), $t_message  );
-
-		# Export the converted array, and parse again.
-		# The result should match both the model and the previously parsed array
-		$t_export = var_export( $p_expected_array , true );
-		$t_parser = new ConfigParser( $t_export );
-		$t_parsed2 = $t_parser->parse();
-		$this->assertEquals( json_encode( $p_expected_array ), json_encode( $t_parsed2 ), $t_message );
-		$this->assertEquals( json_encode( $t_parsed ), json_encode( $t_parsed2 ), $t_message );
-		$this->assertEquals( serialize( $p_expected_array ), serialize( $t_parsed2 ), $t_message );
-		$this->assertEquals( serialize( $t_parsed ), serialize( $t_parsed2 ), $t_message );
-	}
-
-	/**
-	 * Adds a new test case to the list
-	 *
-	 * @param string $p_string
-	 */
-	private function addCase( $p_string ) {
-		$this->cases[] = $p_string;
 	}
 }
