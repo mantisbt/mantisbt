@@ -95,17 +95,18 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	 * Initialize the test cases list
 	 */
 	private function initTestCases() {
-		$this->addCase( "array( 'a' => 1, 2 )" );
-
 		/*
-		 * Template
-
+		 * Template to add a new test case
+		 * -------------------------------
 		# comment
 		$this->addCase(
 <<<'EOT'
 EOT
  		);
+		 * -------------------------------
  */
+		$this->addCase( "array( 'a' => 1, 2 )" );
+
 
 		# no whitespace
 		$this->addCase( "array(1,2,3)" );
