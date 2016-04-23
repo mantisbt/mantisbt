@@ -124,42 +124,41 @@ function mention_format_text( $p_text, $p_html = true ) {
 	if ( !mention_enabled() ) {
 		return $p_text;
 	}
-	
+
 	$t_text = $p_text;
 
-	preg_match_all( "/(?<!@)@{U[0-9]+}/", $p_text, $t_matches );
+	$t_mentioned_users = mention_get_users( $p_text );
+	if( empty( $t_mentioned_users ) ) {
+		return $p_text;
+	}
 
-	if( !empty( $t_matches[0] ) ) {
-		$t_matched_mentions = $t_matches[0];
-		$t_matched_mentions = array_unique( $t_matched_mentions );
+	$t_formatted_mentions = array();
 
-		$t_formatted_mentions = array();
+	foreach( $t_mentioned_users as $t_user_name => $t_user_id  ) {
+		if( $t_username = user_get_name( $t_user_id ) ) {
+			$t_mention = '@' . user_get_field( $t_user_id, 'username' );
 
-		foreach( $t_matched_mentions as $t_mention ) {
-			$t_user_id = substr( $t_mention, 3, strlen( $t_mention ) - 4 );
-			if( $t_username = user_get_name( $t_user_id ) ) {
-				if( $p_html ) {
-					$t_username = string_display_line( $t_username );
+			if( $p_html ) {
+				$t_username = string_display_line( $t_username );
 
-					if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
-						$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">@' . $t_username . '</a>';
-					} else {
-						$t_user_url = '<del class="user">@' . $t_username . '</del>';
-					}
-
-					$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
+				if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
+					$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">@' . $t_username . '</a>';
 				} else {
-					$t_formatted_mentions[$t_mention] = '@' . $t_username;
-				}				
+					$t_user_url = '<del class="user">@' . $t_username . '</del>';
+				}
+
+				$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
+			} else {
+				$t_formatted_mentions[$t_mention] = '@' . $t_username;
 			}
 		}
-
-		$t_text = str_replace(
-			array_keys( $t_formatted_mentions ),
-			array_values( $t_formatted_mentions ),
-			$p_text
-		);
 	}
+
+	$t_text = str_replace(
+		array_keys( $t_formatted_mentions ),
+		array_values( $t_formatted_mentions ),
+		$p_text
+	);
 
 	return $t_text;
 }
@@ -197,3 +196,43 @@ function mention_format_text_save( $p_text ) {
 	return $t_text;
 }
 
+/**
+ * Given a block of text, replace placeholders with usernames.
+ *
+ * For example, '@{U10}' will be replaced with '@vboctor' assuming user
+ * 'vboctor' has id 10.
+ *
+ * @param string $p_text The text to process.
+ * @return string The processed text.
+ */
+function mention_format_text_load( $p_text ) {
+	if ( !mention_enabled() ) {
+		return $p_text;
+	}
+	
+	$t_text = $p_text;
+
+	preg_match_all( "/(?<!@)@{U[0-9]+}/", $p_text, $t_matches );
+
+	if( !empty( $t_matches[0] ) ) {
+		$t_matched_mentions = $t_matches[0];
+		$t_matched_mentions = array_unique( $t_matched_mentions );
+
+		$t_formatted_mentions = array();
+
+		foreach( $t_matched_mentions as $t_mention ) {
+			$t_user_id = substr( $t_mention, 3, strlen( $t_mention ) - 4 );
+			if( $t_username = user_get_name( $t_user_id ) ) {
+				$t_formatted_mentions[$t_mention] = '@' . $t_username;
+			}
+		}
+
+		$t_text = str_replace(
+			array_keys( $t_formatted_mentions ),
+			array_values( $t_formatted_mentions ),
+			$t_text
+		);
+	}
+
+	return $t_text;
+}

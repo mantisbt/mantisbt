@@ -799,6 +799,8 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
+	$t_row['summary'] = mention_format_text_load( $t_row['summary'] );
+
 	return bug_add_to_cache( $t_row );
 }
 
@@ -902,6 +904,10 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
+	
+	$t_row['description'] = mention_format_text_load( $t_row['description'] );
+	$t_row['additional_information'] = mention_format_text_load( $t_row['additional_information'] );
+	$t_row['steps_to_reproduce'] = mention_format_text_load( $t_row['steps_to_reproduce'] );
 
 	$g_cache_bug_text[$c_bug_id] = $t_row;
 
@@ -1600,8 +1606,12 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'fixed_in_version':
 		case 'target_version':
 		case 'build':
-		case 'summary':
 			$c_value = $p_value;
+			break;
+
+		# string with mentions
+		case 'summary':
+			$c_value = mention_format_text_save( $p_value );
 			break;
 
 		# dates

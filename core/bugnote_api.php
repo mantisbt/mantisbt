@@ -532,7 +532,7 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			$t_bugnote->id = $t_row['id'];
 			$t_bugnote->bug_id = $t_row['bug_id'];
 			$t_bugnote->bugnote_text_id = $t_row['bugnote_text_id'];
-			$t_bugnote->note = $t_row['note'];
+			$t_bugnote->note = mention_format_text_load( $t_row['note'] );
 			$t_bugnote->view_state = $t_row['view_state'];
 			$t_bugnote->reporter_id = $t_row['reporter_id'];
 			$t_bugnote->date_submitted = $t_row['date_submitted'];

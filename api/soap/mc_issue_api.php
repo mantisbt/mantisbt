@@ -577,10 +577,11 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
-
+	
 	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
-	$t_result = db_query( $t_query, array( $p_summary ), 1 );
+	$t_summary = mention_format_text_save( $p_summary );
+	$t_result = db_query( $t_query, array( $t_summary ), 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;

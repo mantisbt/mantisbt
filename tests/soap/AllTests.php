@@ -44,6 +44,7 @@ require_once 'VersionTest.php';
 require_once 'RelationshipTest.php';
 require_once 'UserTest.php';
 require_once 'TagTest.php';
+require_once 'MentionTest.php';
 
 /**
  * Soap Test Suite
@@ -86,6 +87,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 		$t_suite->addTestSuite( 'RelationshipTest' );
 		$t_suite->addTestSuite( 'UserTest' );
 		$t_suite->addTestSuite( 'TagTest' );
+		$t_suite->addTestSuite( 'MentionTest' );
 
 		return $t_suite;
 	}
