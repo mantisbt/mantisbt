@@ -86,7 +86,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 
 			# Export the converted array, and parse again.
 			# The result should match both the model and the previously parsed array
-			$t_parser = new ConfigParser( var_export( $t_reference_result , true ) );
+			$t_parser = new ConfigParser( var_export( $t_parsed_1 , true ) );
 			$t_parsed_2 = $t_parser->parse();
 			$this->assertEquals( $t_parsed_2, $t_reference_result, $this->errorMessage( $t_string )  );
 			$this->assertEquals( $t_parsed_2, $t_parsed_1, $this->errorMessage( $t_string )  );
