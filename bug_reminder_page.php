@@ -124,6 +124,10 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	if( ON == config_get( 'store_reminders' ) ) {
 		echo lang_get( 'reminder_store' );
 	}
+
+	if( mention_enabled() ) {
+		echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>@' . user_get_field( auth_get_current_user_id(), 'username' ) . '</strong>' );
+	}
 ?>
 			</span>
 
