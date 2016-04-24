@@ -134,9 +134,16 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	$t_formatted_mentions = array();
 
-	foreach( $t_mentioned_users as $t_user_name => $t_user_id  ) {
-		if( $t_username = user_get_name( $t_user_id ) ) {
-			$t_mention = '@' . user_get_field( $t_user_id, 'username' );
+	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
+		if( user_exists( $t_user_id ) ) {
+			$t_mention = '@' . $t_username;
+			
+			# Uncomment the line below to use realname / username based on settings
+			# The reason we always use username is to avoid confusing users by showing
+			# @ mentions using realname but only supporting it using usernames.
+			# We could support realnames if we assume they contain no spaces, but that
+			# is unlikely to be the case.
+			# $t_username = user_get_name( $t_user_id );
 
 			if( $p_html ) {
 				$t_username = string_display_line( $t_username );
@@ -189,8 +196,8 @@ function mention_format_text_save( $p_text, $p_mentioned_users = null ) {
 
 	$t_formatted_mentions = array();
 
-	foreach( $t_mentioned_users as $t_user_name => $t_user_id  ) {
-		$t_formatted_mentions[$t_user_name] = "{U" . $t_user_id . "}";
+	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
+		$t_formatted_mentions[$t_username] = "{U" . $t_user_id . "}";
 	}
 
 	$t_text = str_replace(
@@ -237,7 +244,8 @@ function mention_format_text_load( $p_text, $p_user_lookup = null ) {
 					$t_username = false;
 				}
 			} else {
-				$t_username = user_get_name( $t_user_id );
+				# Use username rather than name since we don't want to use realname.
+				$t_username = user_get_field( $t_user_id, 'username' );
 			}
 
 			if( $t_username ) {
