@@ -3576,7 +3576,7 @@ function print_filter_reporter_id() {
 				check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID] );
+		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID], filter_get_included_projects() );
 	}?>
 		</select>
 		<?php
@@ -3602,7 +3602,7 @@ function print_filter_user_monitor() {
 	$t_has_project_level = access_has_project_level( $t_threshold );
 
 	if( $t_has_project_level ) {
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		print_monitor_user_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], filter_get_included_projects() );
 	}
 	?>
 		</select>
@@ -3628,7 +3628,7 @@ function print_filter_handler_id() {
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID], filter_get_included_projects() );
 	}?>
 		</select>
 		<?php
@@ -4048,7 +4048,7 @@ function print_filter_note_user_id() {
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
 
-			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], filter_get_included_projects() );
 		}
 	?>
 	</select>
@@ -4840,4 +4840,22 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
+}
+
+function filter_get_included_projects() {
+	global $g_filter;
+
+	if( 'simple' == $g_filter['_view_type'] ) {
+		# simple filters search in current project and desdendants
+		return user_get_all_accessible_projects( auth_get_current_user_id(), helper_get_current_project() );
+	} else {
+		# advanced filters search only in specified projects
+		$t_projects = $g_filter[FILTER_PROPERTY_PROJECT_ID];
+		# if there is the meta value "current", replace with actual project id
+		$t_meta_current = array_search( META_FILTER_CURRENT, $t_projects );
+		if( false !== $t_meta_current ) {
+			$t_projects[$t_meta_current] = helper_get_current_project();
+		}
+		return $t_projects;
+	}
 }

@@ -655,3 +655,28 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 		}
 	}
 }
+
+/**
+ * Converts an access level threshold, which can be an integer or an array
+ * of access levels, to an array of access levels.
+ * E.g. threshold >= 40 results in [40,55,80,90], being the numbers those
+ * access levels defined in configuration.
+ * If input is already an array, it's returned as is.
+ * @param integer|array $p_threshold input threshold or array
+ * @return array Array of specific access levels that satisfy the threshold
+ */
+function access_convert_threshold_to_array( $p_threshold ) {
+	if( is_array( $p_threshold ) ){
+		return $p_threshold;
+	}
+	else {
+		$t_values = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+		$t_count = count($t_values);
+		for( $i = 0; $i < $t_count; $i++ ) {
+			if( $t_values[$i] < $p_threshold ) {
+				unset ($t_values[$i]);
+			}
+		}
+		return $t_values;
+	}
+}

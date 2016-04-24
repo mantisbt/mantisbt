@@ -592,122 +592,222 @@ function project_get_local_user_rows( $p_project_id ) {
 }
 
 /**
- * Return an array of info about users who have access to the the given project
- * For each user we have 'id', 'username', and 'access_level' (overall access level)
- * If the second parameter is given, return only users with an access level
- * higher than the given value.
- * if the first parameter is given as 'ALL_PROJECTS', return the global access level (without
- * any reference to the specific project
- * @param integer $p_project_id           A project identifier.
- * @param integer $p_access_level         Access level.
+ * Return an array of info about users who have access to the the given project(s)
+ * For each user we have:
+ * 'id', 'username', 'realname', 'displayname' and 'access_level' (overall access level)
+ * 'displayname' is calculated according to default preferences to contain 
+ * either 'username' or 'realname'.
+ * 
+ * Parameter inline_include is an array of user rows to be included in the result set,
+ * included here manually to benefit from native sorting.
+ * Note that if a user included by this method may appear in the actual results, 
+ * it should have the correct user_id to avoid duplicating it.
+ * 
+ * (see "project_get_all_user_rows" for more details about parameter uses)
+ * 
+ * The query is ordered by default config to sort either by username or realname.
+ * Sort by last name is NOT available becasue that is not a field in user table.
+ * In that case, external sort must be applied.
+ 
+ * @param integer|array		$p_project_id	Project id or rray of projects.
+ * @param integer|array|string $p_access_level  Access level threshold, or array of specific
+ *		 levels to match, or string for a access level name to be checked against each project
  * @param boolean $p_include_global_users Whether to include global users.
+ * @return complex|null unprocessed result set from db_query()
+ */
+function project_get_all_user_rows_dbquery( $p_projects , $p_access_level, $p_include_global_users = true, $p_inline_include = null ) {
+
+	if( NOBODY == $p_access_level ) {
+		return null;
+	}	
+	
+	# prepare for special cases
+	$t_force_global_access = null;
+	if( !is_array( $p_projects ) ) {
+		if( ALL_PROJECTS === (int)$p_projects ){
+			# bypass any specific project calculation, and store access level for later use
+			$t_force_global_access = access_convert_threshold_to_array( $p_access_level );
+			$p_projects = array();
+		} else {
+			# one single project: format as array
+			$p_projects = array( $p_projects );
+		}
+	}
+	
+	# Explode access levels and configuration for each project.
+	# Since we are fetching users for several projects, some configurations
+	#  can be project-dependant. Store all of them for later use.
+	# All access thresholds are normalized (to an array of numeric access levels)
+
+	# Access values arrays for each project, for requested config eg 'report_bug_threshold', eg arr[ pr_id => arr[40,50,90] ]A
+	$t_access_per_project =  array(); 
+	# Access values arrays for eachproject, for private project global users. eg arr[ pr_id => arr[40,50,90] ]
+	$t_private_per_project = array();
+	# Values of project visibitily for each project. eg arr[ pr_id => VS_PUBLIC ]
+	$t_viewstate_per_project = array();
+	# Consolidated access values for private project global users, eg arr[40,50,90]
+	$t_access_global_users = array();
+	
+	foreach( $p_projects as $t_pr ) {
+		# If access level is string, its a config permission that can be different for each project
+		if( !is_numeric( $p_access_level ) ) {
+			# Get specific configuration for threshold
+			$t_config= config_get( $p_access_level, null, ALL_USERS, $t_pr );
+			if( null === $t_config ) $t_config= config_get( $p_access_level, null, ALL_USERS, ALL_PROJECTS );
+			if( null === $t_config ) $t_config= config_get_global( $p_access_level );
+			$t_access_per_project[$t_pr] = access_convert_threshold_to_array( $t_config );
+		} else {
+			# Apply access level parameter to all projects
+			$t_access_per_project[$t_pr] = access_convert_threshold_to_array( $p_access_level );
+		}
+		
+		# Get private_project_threshold configuration for each project
+		if( $p_include_global_users ){
+			$t_config= config_get( 'private_project_threshold', null, ALL_USERS, $t_pr );
+			if( null === $t_config ) $t_config= config_get( 'private_project_threshold', null, ALL_USERS, ALL_PROJECTS );
+			if( null === $t_config ) $t_config= config_get_global( 'private_project_threshold' );
+			$t_private_per_project[$t_pr] = access_convert_threshold_to_array( $t_config );
+		}
+		
+		# Get view state of projects
+		$t_viewstate_per_project[$t_pr] = project_get_field( $t_pr, 'view_state' );
+		
+		# Union of global users access values. This results in a consolidated array of common appearances.
+		if ( VS_PRIVATE === (int)$t_viewstate_per_project[$t_pr] ) {
+			# If project is private, add global access-level for which users are automatically included
+			$t_access_global_users = array_unique( array_merge( $t_access_global_users, $t_private_per_project[$t_pr] ) );
+		} else {
+			# If project is public, add global access threshold from requested input parameters
+			$t_access_global_users = array_unique( array_merge( $t_access_global_users, $t_access_per_project[$t_pr] ) );
+		}
+	}
+
+	$t_params = array();
+	$t_subquerys = array();
+	#
+	# prepare subquery for global users
+	#
+	if( $t_force_global_access ) {
+		# special case for ALL_PROJECTS, force the query for global users.
+		$t_access_global_users = $t_force_global_access;
+	}
+	if( $p_include_global_users && count( $t_access_global_users ) > 0 ) {
+		$t_global_access_clause = db_helper_in_clause( $t_access_global_users );
+		$t_subquerys[] = 'SELECT U.id, U.username, U.realname, U.access_level'
+				. ' FROM {user} U'
+				. ' WHERE U.enabled = ' . db_prepare_bool( true ) . ' AND access_level ' . $t_global_access_clause;
+		$t_params =  array_merge( $t_params, $t_access_global_users );
+	}
+	
+	#
+	# Build subquery for project users
+	#
+	if( ALL_PROJECTS !== (int)$p_projects  ) {
+		$t_array_pairs = array();
+		# build project/access_level pairs
+		foreach( $p_projects as $t_pr ) {
+			foreach( $t_access_per_project[$t_pr] as $t_level ) {
+				$t_array_pairs[] = array( $t_pr, $t_level);
+			}
+		}
+		$t_access_clause = db_helper_in2_clause( $t_array_pairs );
+		$t_add_params = call_user_func_array('array_merge', $t_array_pairs);
+		$t_subquerys[] = 'SELECT U.id, U.username, U.realname, P.access_level'
+			. ' FROM {project_user_list} P JOIN {user} U'
+			. ' ON ( P.user_id = U.id )'
+			. ' WHERE U.enabled = ' . db_prepare_bool( true )
+			. ' AND (P.project_id, P.access_level) ' . $t_access_clause;
+		$t_params = array_merge( $t_params, $t_add_params );
+	}
+	
+	#
+	# Build subquery for inline additions
+	#
+	if( $p_inline_include ) {
+		foreach( $p_inline_include as $t_row ) {
+			$t_sub = 'SELECT ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ' FROM DUAL';
+			$t_add_params = array( $t_row['id'], $t_row['username'], $t_row['realname'], $t_row['access_level']);
+			$t_params = array_merge( $t_params, $t_add_params );
+			$t_subquerys[] = $t_sub;
+		}
+	}
+	
+	#
+	# Build main query
+	#
+	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+	$t_show_realname = ON == config_get( 'show_realname' );
+	$t_union = '';
+	$t_display_field = ( $t_show_realname ) ? 'realname' : 'username';
+	$t_main_query = 'SELECT distinct id, username, realname, MAX(access_level) AS access_level, ' . $t_display_field . ' AS displayname'
+			. ' FROM (' . implode(' UNION ALL ', $t_subquerys ) . ') all_users'
+			. ' GROUP BY id, username, realname, displayname'
+			. ' ORDER BY ' . $t_display_field;
+
+	$t_result = db_query( $t_main_query, $t_params );
+	return $t_result;
+
+# Example of generated query:
+//	SELECT distinct id, username, realname, MAX(access_level) AS access_level, username AS displayname
+//	FROM (
+//		SELECT U.id, U.username, U.realname, U.access_level
+//			FROM mantis_user_table U
+//			WHERE U.enabled = 1 AND access_level = 90
+//		UNION ALL 
+//		SELECT U.id, U.username, U.realname, P.access_level
+//		FROM mantis_project_user_list_table P JOIN mantis_user_table U ON (P.user_id = U.id)
+//		WHERE U.enabled = 1 AND (P.project_id , P.access_level)
+//			IN ((21,25), (21,40), (21,55), (21,70), (21,90), (51,25), (51,40), (51,55), (51,70), (51,90))
+//		UNION ALL
+//		SELECT '-3','@@added','@@added','25' FROM DUAL
+//		) all_users
+//	GROUP BY id , username , realname , displayname
+//	ORDER BY username	
+}
+
+/**
+ * Return an array of info about users who have access to the the given project(s)
+ *  If the second parameter is given, using a single value returns only users with an access level
+ *  higher than the given value, using an array of values returns users who match the specified
+ *  access levels.
+ * If the first parameter is given as 'ALL_PROJECTS', return the global access level (without
+ *  any reference to the specific project.
+ * Access level can also be sepecified as string, meaning a config name that will be checked
+ *  against each project (eg, "report_bug_threshold")
+ * 
+ * @param integer|array $p_project_id      A project identifier, or array of projects
+ * @param integer|array $p_access_level    Access level threshold, or array of specific levels
+ * @param boolean $p_include_global_users  Whether to include global users.
  * @return array List of users, array key is user ID
  */
-function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true ) {
-	$c_project_id = (int)$p_project_id;
+function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true, $p_inline_include = null ) {
 
-	# Optimization when access_level is NOBODY
-	if( NOBODY == $p_access_level ) {
+	$t_result = project_get_all_user_rows_dbquery( $p_project_id, $p_access_level, $p_include_global_users, $p_inline_include );
+
+	if( $t_result ) {
+		$t_users = array();
+		$t_show_realname = ( ON == config_get( 'show_realname' ) );
+		$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_key = (int)$t_row['id'];
+			$t_users[$t_key] = $t_row;
+
+			# fix realname if it was empty
+			if( $t_show_realname && $t_row['realname'] == '' ){
+				$t_users[$t_key]['displayname'] = $t_row['username'];
+			}
+			# calculate last name
+			if( $t_show_realname && $t_sort_by_last_name ) {
+				$t_name_bits = explode( ' ', utf8_strtolower( string_attribute( $t_row['realname']) ), 2 );
+				$t_users[$t_key]['displayname'] = ( isset( $t_name_bits[1] ) ? $t_name_bits[1] . ', ' : '' ) . $t_name_bits[0];
+			}
+		}
+
+		return $t_users;
+	}
+	else {
 		return array();
 	}
-
-	$t_on = ON;
-	$t_users = array();
-
-	$t_global_access_level = $p_access_level;
-	if( $c_project_id != ALL_PROJECTS && $p_include_global_users ) {
-
-		# looking for specific project
-		if( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
-			# @todo (thraxisp) this is probably more complex than it needs to be
-			# When a new project is created, those who meet 'private_project_threshold' are added
-			# automatically, but don't have an entry in project_user_list_table.
-			#  if they did, you would not have to add global levels.
-			$t_private_project_threshold = config_get( 'private_project_threshold' );
-			if( is_array( $t_private_project_threshold ) ) {
-				if( is_array( $p_access_level ) ) {
-					# both private threshold and request are arrays, use intersection
-					$t_global_access_level = array_intersect( $p_access_level, $t_private_project_threshold );
-				} else {
-					# private threshold is an array, but request is a number, use values in threshold higher than request
-					$t_global_access_level = array();
-					foreach( $t_private_project_threshold as $t_threshold ) {
-						if( $p_access_level <= $t_threshold ) {
-							$t_global_access_level[] = $t_threshold;
-						}
-					}
-				}
-			} else {
-				if( is_array( $p_access_level ) ) {
-					# private threshold is a number, but request is an array, use values in request higher than threshold
-					$t_global_access_level = array();
-					foreach( $p_access_level as $t_threshold ) {
-						if( $t_threshold >= $t_private_project_threshold ) {
-							$t_global_access_level[] = $t_threshold;
-						}
-					}
-				} else {
-					# both private threshold and request are numbers, use maximum
-					$t_global_access_level = max( $p_access_level, $t_private_project_threshold );
-				}
-			}
-		}
-	}
-
-	if( is_array( $t_global_access_level ) ) {
-		if( 0 == count( $t_global_access_level ) ) {
-			$t_global_access_clause = '>= ' . NOBODY . ' ';
-		} else if( 1 == count( $t_global_access_level ) ) {
-			$t_global_access_clause = '= ' . array_shift( $t_global_access_level ) . ' ';
-		} else {
-			$t_global_access_clause = 'IN (' . implode( ',', $t_global_access_level ) . ')';
-		}
-	} else {
-		$t_global_access_clause = '>= ' . $t_global_access_level . ' ';
-	}
-
-	if( $p_include_global_users ) {
-		$t_query = 'SELECT id, username, realname, access_level
-				FROM {user}
-				WHERE enabled = ' . db_param() . '
-					AND access_level ' . $t_global_access_clause;
-
-		$t_result = db_query( $t_query, array( $t_on ) );
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_users[(int)$t_row['id']] = $t_row;
-		}
-	}
-
-	if( $c_project_id != ALL_PROJECTS ) {
-		# Get the project overrides
-		$t_query = 'SELECT u.id, u.username, u.realname, l.access_level
-				FROM {project_user_list} l, {user} u
-				WHERE l.user_id = u.id
-				AND u.enabled = ' . db_param() . '
-				AND l.project_id = ' . db_param();
-
-		$t_result = db_query( $t_query, array( $t_on, $c_project_id ) );
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			if( is_array( $p_access_level ) ) {
-				$t_keep = in_array( $t_row['access_level'], $p_access_level );
-			} else {
-				$t_keep = $t_row['access_level'] >= $p_access_level;
-			}
-
-			if( $t_keep ) {
-				$t_users[(int)$t_row['id']] = $t_row;
-			} else {
-				# If user's overridden level is lower than required, so remove
-				#  them from the list if they were previously there
-				unset( $t_users[(int)$t_row['id']] );
-			}
-		}
-	}
-
-	user_cache_array_rows( array_keys( $t_users ) );
-
-	return $t_users;
 }
 
 /**

@@ -257,46 +257,35 @@ function print_captcha_input( $p_field_name ) {
 
 /**
  * This populates an option list with the appropriate users by access level
- * @todo from print_reporter_option_list
+ * ALL_PROJECTS is a valid input, and show users from all accesible projects
+ * User ids passed asparameter are user to set the default checked state 
+ *  on select field
+ * Access parameter is an access threshold or array of acces levels, (e.g. those 
+ * from config option "report_bug_threshold")
  * @param integer|array $p_user_id    A user identifier or a list of them.
- * @param integer       $p_project_id A project identifier.
- * @param integer       $p_access     An access level.
+ * @param integer|array $p_project_id A project identifier, or array of prjects.
+ * @param integer|array $p_access     An access level.
  * @return void
  */
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
-	$t_current_user = auth_get_current_user_id();
 
+	$t_current_user = auth_get_current_user_id();
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
 
-	if( $p_project_id === ALL_PROJECTS ) {
-		$t_projects = user_get_accessible_projects( $t_current_user );
-
-		# Get list of users having access level for all accessible projects
-		$t_users = array();
-		foreach( $t_projects as $t_project_id ) {
-			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
-			# Do a 'smart' merge of the project's user list, into an
-			# associative array (to remove duplicates)
-			foreach( $t_project_users_list as $t_id => $t_user ) {
-				$t_users[$t_id] = $t_user;
-			}
-			# Clear the array to release memory
-			unset( $t_project_users_list );
-		}
-		unset( $t_projects );
+	if( !is_array($p_project_id) && ALL_PROJECTS === (int)$p_project_id ) {
+		# expand ALL_PROJECTS
+		$t_projects = user_get_all_accessible_projects( $t_current_user, ALL_PROJECTS );
 	} else {
-		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+		$t_projects = $p_project_id;
 	}
-
+	
 	# Add the specified user ID to the list
 	# If we have an array of user IDs, then we've been called from a filter
 	# so don't add anything
-	if( !is_array( $p_user_id ) &&
-		$p_user_id != NO_USER &&
-		!array_key_exists( $p_user_id, $t_users )
-	) {
+	$t_user_rows = array();
+	if( !is_array( $p_user_id ) && $p_user_id != NO_USER ) {
 		$t_row = user_get_row( $p_user_id );
 		if( $t_row === false ) {
 			# User doesn't exist - create a dummy record for display purposes
@@ -305,44 +294,55 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 				'id' => $p_user_id,
 				'username' => $t_name,
 				'realname' => $t_name,
+				'access_level' => 0
 			);
 		}
-		$t_users[$p_user_id] = $t_row;
 	}
-
-	$t_display = array();
-	$t_sort = array();
+	
+	# If config is set to sort by last name, we have to fetch the whole array
+	# becasue last name is not in user table, and the query cant be sorted
+	# then perform sorting based on calculated last name
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
-	foreach( $t_users as $t_key => $t_user ) {
-		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
-		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
-			$t_user_name = string_attribute( $t_user['realname'] );
-			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
-			}
+	if( $t_show_realname && $t_sort_by_last_name ) {
+		# fetch all data
+		$t_users = project_get_all_user_rows( $t_projects, $p_access, true, $t_user_rows );
+		$t_sort = array();
+		foreach( $t_users as $t_user ) {
+			# last name is already in field 'displayname'
+				$t_sort[] = strtolower( $t_user['displayname'] );
 		}
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users);
+		unset( $t_sort );
+		# print the html options
+		foreach( $t_users as $t_row ) {
+			echo '<option value="' . $t_row['id'] . '" ';
+			check_selected( $p_user_id, (int)$t_row['id'] );
+			echo '>' . $t_row['displayname'] . '</option>';
+		}
 	}
-	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	unset( $t_sort );
-	$t_count = count( $t_users );
-	for( $i = 0;$i < $t_count;$i++ ) {
-		$t_row = $t_users[$i];
-		echo '<option value="' . $t_row['id'] . '" ';
-		check_selected( $p_user_id, (int)$t_row['id'] );
-		echo '>' . $t_display[$i] . '</option>';
+	else {
+		# Sort is either by username, or realname, then the raw result set
+		#  is already ordered. Use query result directly to not use memory
+		$t_result= project_get_all_user_rows_dbquery( $t_projects, $p_access, true, $t_user_rows );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			# fix realname if it was empty
+			if( $t_show_realname && $t_row['realname'] == '' ){
+				$t_row['displayname'] = $t_row['username'];
+				}
+			# print the html option
+			echo '<option value="' . $t_row['id'] . '" ';
+			check_selected( $p_user_id, (int)$t_row['id'] );
+			echo '>' . $t_row['displayname'] . '</option>';
+		}
 	}
+
 }
 
 /**
  * This populates the reporter option list with the appropriate users
- *
+ * Parameter for user id(s) will set those values as defaulted in
+ * the select input field.
  * @todo ugly functions  need to be refactored
  * @todo This function really ought to print out all the users, I think.
  *  I just encountered a situation where a project used to be public and
@@ -350,12 +350,23 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
  *  actually reported the bugs at the time. Maybe we could get all user
  *  who are listed as the reporter in any bug?  It would probably be a
  *  faster query actually.
- * @param integer $p_user_id    A user identifier.
- * @param integer $p_project_id A project identifier.
+ * @param integer|array $p_user_id    A user identifier, or array of users
+ * @param integer|array $p_project_id A project identifier, or array of projects
  * @return void
  */
 function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
-	print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
+	print_user_option_list( $p_user_id, $p_project_id, 'report_bug_threshold' );
+}
+
+/**
+ * This populates the reporter option list with the appropriate users
+ * Parameter for user id(s) will set those values as defaulted in
+ * the select input field.
+ * @param integer|array $p_user_id	A user identifier, or array of users
+ * @param integer|array $p_project_id	A project identifier, or array of projects
+ */
+function print_monitor_user_option_list( $p_user_id, $p_project_id = null ) {
+	print_user_option_list( $p_user_id, $p_project_id, 'monitor_bug_threshold' );
 }
 
 /**
@@ -560,30 +571,20 @@ function print_news_string_by_news_id( $p_news_id ) {
  * Print User option list for assigned to field
  * @param integer|string $p_user_id    A user identifier.
  * @param integer        $p_project_id A project identifier.
- * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-	if( null === $p_threshold ) {
-		$p_threshold = config_get( 'handle_bug_threshold' );
-	}
-
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+function print_assign_to_option_list( $p_user_id, $p_project_id = null) {
+	print_user_option_list( $p_user_id, $p_project_id, 'handle_bug_threshold' );
 }
 
 /**
  * Print User option list for bugnote filter field
- * @param integer|string $p_user_id    A user identifier.
+ * @param integer|array $p_user_id    A user identifier, or array of ids
  * @param integer        $p_project_id A project identifier.
- * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-	if( null === $p_threshold ) {
-		$p_threshold = config_get( 'add_bugnote_threshold' );
-	}
-
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+function print_note_option_list( $p_user_id, $p_project_id = null ) {
+	print_user_option_list( $p_user_id, $p_project_id, 'add_bugnote_threshold' );
 }
 
 /**

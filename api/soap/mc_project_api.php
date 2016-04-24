@@ -1063,6 +1063,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 
 /**
  * Get appropriate users assigned to a project by access level.
+ * @TODO cproensa: Do we need to call user_cache_array_rows() here?
  *
  * @param string  $p_username   The name of the user trying to access the versions.
  * @param string  $p_password   The password of the user.
