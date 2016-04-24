@@ -570,7 +570,21 @@ class BugData {
 			$this->id,
 			$t_all_mentioned_user_ids );
 
-		mention_process_user_mentions( $this->id, $t_all_mentioned_user_ids );
+		if( !empty( $t_all_mentioned_user_ids ) ) {
+			$t_mention_text = $this->description . "\n\n";
+
+			if( !is_blank( $this->steps_to_reproduce ) ) {
+				$t_mention_text .= lang_get( 'email_steps_to_reproduce' ) . "\n\n";
+				$t_mention_text .= $this->steps_to_reproduce . "\n\n";
+			}
+
+			if( !is_blank( $this->additional_information ) ) {
+				$t_mention_text .= lang_get( 'email_additional_information' ) . "\n\n";
+				$t_mention_text .= $this->additional_information . "\n\n";
+			}
+
+			mention_process_user_mentions( $this->id, $t_all_mentioned_user_ids, $t_mention_text );
+		}
 
 		return $this->id;
 	}
