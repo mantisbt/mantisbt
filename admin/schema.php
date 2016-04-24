@@ -865,6 +865,25 @@ $g_upgrade[204] = array( 'AlterColumnSQL', array( db_get_table( 'project_file' )
 # Enable gravatar plugin if avatars are enabled
 $g_upgrade[205] = array( 'UpdateFunction', 'gravatar_plugin', array() );
 
+$g_upgrade[206] = array('CreateTableSQL', array( db_get_table( 'temp_int' ), "
+	id						I		UNSIGNED NOTNULL,
+	seq						I		UNSIGNED NOTNULL,
+	i1						I		DEFAULT NULL,
+	i2						I		DEFAULT NULL,
+	i3						I		DEFAULT NULL"
+	,
+	$t_table_options
+	) );
+
+$g_upgrade[207] = array('CreateTableSQL', array( db_get_table( 'temp_header' ), "
+	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+	expiry					I		UNSIGNED DEFAULT NULL"
+	,
+	$t_table_options
+	) );
+
+$g_upgrade[208] = array( 'CreateIndexSQL', array( 'idx_temp_int_1', db_get_table( 'temp_int' ), 'id,seq,i1,i2,i3' ) );
+
 # Release marker: 1.3.0
 
 
