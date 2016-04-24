@@ -40,6 +40,14 @@ function mention_enabled() {
 }
 
 /**
+ * Get the tag to use for mentions.
+ * @return string The mentions tag.
+ */
+function mentions_tag() {
+	return config_get( 'mentions_tag', null, ALL_USERS, ALL_PROJECTS );
+}
+
+/**
  * A method that takes in a text argument and extracts all candidate @ mentions
  * from it.  The return list will not include the @ sign and will not include
  * duplicates.  This method is mainly for testability and it doesn't take into
@@ -50,8 +58,9 @@ function mention_enabled() {
  * @private
  */
 function mention_get_candidates( $p_text ) {
-	preg_match_all( "/(?<!@)@[A-Za-z0-9_\.]+/", $p_text, $t_matches );
-	
+	$t_mentions_tag = mentions_tag();
+	preg_match_all( "/(?<!" . $t_mentions_tag. ")" . $t_mentions_tag . "[A-Za-z0-9_\.]+/", $p_text, $t_matches );
+
 	$t_mentions = array();
 
 	foreach( $t_matches[0] as $t_mention ) {
@@ -113,8 +122,7 @@ function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_mes
 }
 
 /**
- * Replace the @{U123} with the username or realname based on configuration.
- * If user is deleted, use user123.
+ * Format and hyperlink mentions
  *
  * @param string $p_text The text to process.
  * @param bool $p_html true for html, false otherwise.
@@ -132,11 +140,12 @@ function mention_format_text( $p_text, $p_html = true ) {
 		return $p_text;
 	}
 
+	$t_mentions_tag = mentions_tag();
 	$t_formatted_mentions = array();
 
 	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
 		if( user_exists( $t_user_id ) ) {
-			$t_mention = '@' . $t_username;
+			$t_mention = $t_mentions_tag . $t_username;
 			
 			# Uncomment the line below to use realname / username based on settings
 			# The reason we always use username is to avoid confusing users by showing
@@ -149,14 +158,14 @@ function mention_format_text( $p_text, $p_html = true ) {
 				$t_username = string_display_line( $t_username );
 
 				if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
-					$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">@' . $t_username . '</a>';
+					$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mentions_tag . $t_username . '</a>';
 				} else {
-					$t_user_url = '<del class="user">@' . $t_username . '</del>';
+					$t_user_url = '<del class="user">' . $t_mentions_tag . $t_username . '</del>';
 				}
 
 				$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
 			} else {
-				$t_formatted_mentions[$t_mention] = '@' . $t_username;
+				$t_formatted_mentions[$t_mention] = $t_mentions_tag . $t_username;
 			}
 		}
 	}

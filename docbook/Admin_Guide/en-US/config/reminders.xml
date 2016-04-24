@@ -53,4 +53,13 @@
 			</para>
 		</listitem>
 	</varlistentry>
+
+	<varlistentry>
+		<term>$g_mentions_tag</term>
+		<listitem>
+			<para>
+				The tag to use for prefixing mentions.  Default is '@'.
+			</para>
+		</listitem>
+	</varlistentry>
 </section>

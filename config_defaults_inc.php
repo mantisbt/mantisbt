@@ -1614,6 +1614,12 @@ $g_reminder_receive_threshold = DEVELOPER;
  */
 $g_mentions_enabled = ON;
 
+/**
+ * The tag to use for mentions.
+ * @var string $g_mentions_tag
+ */
+$g_mentions_tag = '@';
+
 #################################
 # MantisBT Sponsorship Settings #
 #################################
