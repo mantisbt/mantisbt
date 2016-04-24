@@ -542,6 +542,7 @@ $s_reminder_store = 'The note will be stored with the issue.';
 
 # mentions
 $s_mentioned_you = 'mentioned you on:';
+$s_mentioned_in = 'Mentioned in %1$s';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %1$d for %2$s.';

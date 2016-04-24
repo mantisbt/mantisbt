@@ -1325,6 +1325,7 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 	$t_sender = user_get_name( $t_sender_id );
 
 	$t_subject = email_build_subject( $p_bug_id );
+	$t_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
 	$t_date = date( config_get( 'normal_date_format' ) );
 
 	$t_result = array();
