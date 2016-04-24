@@ -821,11 +821,6 @@ function print_admin_menu_bar( $p_page ) {
 	echo '<a href="system_utils.php">System Utilities</a>' . "\n";
 	echo '</li>' . "\n";
 
-	$t_active = 'test_icons.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
-	echo '<a href="test_icons.php">Test Icons</a></li>' . "\n";
-	echo '</li>' . "\n";
-
 	$t_active = 'test_langs.php' == $p_page ? 'active' : '';
 	echo '<li class="' . $t_active . '">' . "\n";
 	echo '<a href="test_langs.php">Test Langs</a>' . "\n";
