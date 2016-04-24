@@ -173,10 +173,16 @@ function mention_format_text( $p_text, $p_html = true ) {
  * 'vboctor' has id 10.
  *
  * @param string $p_text The text to process.
+ * @param array $p_mentioned_users This is used for testing (key: username, value: id).
  * @return string The processed text.
  */
-function mention_format_text_save( $p_text ) {
-	$t_mentioned_users = mention_get_users( $p_text );
+function mention_format_text_save( $p_text, $p_mentioned_users = null ) {
+	if ( $p_mentioned_users !== null ) {
+		$t_mentioned_users = $p_mentioned_users;	
+	} else {
+		$t_mentioned_users = mention_get_users( $p_text );
+	}
+
 	if( empty( $t_mentioned_users ) ) {
 		return $p_text;
 	}
@@ -203,9 +209,10 @@ function mention_format_text_save( $p_text ) {
  * 'vboctor' has id 10.
  *
  * @param string $p_text The text to process.
+ * @param array $p_user_lookup key: user id, value: username - used for testing.
  * @return string The processed text.
  */
-function mention_format_text_load( $p_text ) {
+function mention_format_text_load( $p_text, $p_user_lookup = null ) {
 	if ( !mention_enabled() ) {
 		return $p_text;
 	}
@@ -222,8 +229,21 @@ function mention_format_text_load( $p_text ) {
 
 		foreach( $t_matched_mentions as $t_mention ) {
 			$t_user_id = substr( $t_mention, 3, strlen( $t_mention ) - 4 );
-			if( $t_username = user_get_name( $t_user_id ) ) {
+			
+			if( $p_user_lookup !== null ) {
+				if( isset( $p_user_lookup[$t_user_id] ) ) {
+					$t_username = $p_user_lookup[$t_user_id];
+				} else {
+					$t_username = false;
+				}
+			} else {
+				$t_username = user_get_name( $t_user_id );
+			}
+
+			if( $t_username ) {
 				$t_formatted_mentions[$t_mention] = '@' . $t_username;
+			} else {
+				$t_formatted_mentions[$t_mention] = '@user' . $t_user_id;
 			}
 		}
 
