@@ -479,28 +479,6 @@ class BugData {
 			$this->last_updated = db_now();
 		}
 
-		$t_all_mentioned_user_ids = array();
-
-		$t_mentioned_user_ids = mention_get_users( $this->summary );
-		if( !empty( $t_mentioned_user_ids ) ) {
-			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		}
-		
-		$t_mentioned_user_ids = mention_get_users( $this->description );
-		if( !empty( $t_mentioned_user_ids ) ) {
-			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		}
-
-		$t_mentioned_user_ids = mention_get_users( $this->steps_to_reproduce );
-		if( !empty( $t_mentioned_user_ids ) ) {
-			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		}
-
-		$t_mentioned_user_ids = mention_get_users( $this->additional_information );
-		if( !empty( $t_mentioned_user_ids ) ) {
-			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
-		}
-
 		# Insert text information
 		$t_query = 'INSERT INTO {bug_text}
 					    ( description, steps_to_reproduce, additional_information )
@@ -569,6 +547,29 @@ class BugData {
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
 
 		# Now that the issue is added process the @ mentions
+		$t_all_mentioned_user_ids = array();
+
+		$t_mentioned_user_ids = mention_get_users( $this->summary );
+		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		
+		$t_mentioned_user_ids = mention_get_users( $this->description );
+		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+
+		if( !is_blank( $this->steps_to_reproduce ) ) {
+			$t_mentioned_user_ids = mention_get_users( $this->steps_to_reproduce );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		if( !is_blank( $this->additional_information ) ) {
+			$t_mentioned_user_ids = mention_get_users( $this->additional_information );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		$t_all_mentioned_user_ids = access_has_bug_level_filter(
+			config_get( 'view_bug_threshold' ),
+			$this->id,
+			$t_all_mentioned_user_ids );
+
 		mention_process_user_mentions( $this->id, $t_all_mentioned_user_ids );
 
 		return $this->id;

@@ -58,6 +58,10 @@ function mentions_tag() {
  * @private
  */
 function mention_get_candidates( $p_text ) {
+	if( is_blank( $p_text ) ) {
+		return array();
+	}
+
 	$t_mentions_tag = mentions_tag();
 	preg_match_all( "/(?<!" . $t_mentions_tag. ")" . $t_mentions_tag . "[A-Za-z0-9_\.]+/", $p_text, $t_matches );
 

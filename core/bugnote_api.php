@@ -261,9 +261,13 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 	}
 
-	# Now that the note is added process the @ mentions.  Use the original
-	# bugnote text before changing mentions to their placeholders.
+	# Process the mentions that have access to the issue note
 	$t_mentioned_user_ids = mention_get_users( $t_bugnote_text );
+	$t_mentioned_user_ids = access_has_bugnote_level_filter(
+		config_get( 'view_bug_threshold' ),
+		$t_bugnote_id,
+		$t_mentioned_user_ids );
+
 	mention_process_user_mentions(
 		$p_bug_id,
 		$t_mentioned_user_ids,
