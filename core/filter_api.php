@@ -2091,6 +2091,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_id_array_lastmod = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_id_array_lastmod[] = (int)$t_row['id'];
+		$t_row['summary'] = mention_format_text_load( $t_row['summary'] );
 		$t_rows[] = $t_row;
 	}
 
