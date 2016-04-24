@@ -641,7 +641,7 @@ class BugData {
 						due_date=' . db_param() . '
 					WHERE id=' . db_param();
 		$t_fields[] = $this->view_state;
-		$t_fields[] = $this->summary;
+		$t_fields[] = mention_format_text_save( $this->summary );
 		$t_fields[] = $this->sponsorship_total;
 		$t_fields[] = (bool)$this->sticky;
 		$t_fields[] = $this->due_date;
@@ -688,7 +688,11 @@ class BugData {
 								steps_to_reproduce=' . db_param() . ',
 								additional_information=' . db_param() . '
 							WHERE id=' . db_param();
-			db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information, $t_bug_text_id ) );
+			db_query( $t_query, array(
+				mention_format_text_save( $this->description ),
+				mention_format_text_save( $this->steps_to_reproduce ),
+				mention_format_text_save( $this->additional_information ),
+				$t_bug_text_id ) );
 
 			bug_text_clear_cache( $c_bug_id );
 
