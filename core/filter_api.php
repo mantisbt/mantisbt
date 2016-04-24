@@ -2011,6 +2011,22 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
+			
+			$t_search_term_mentions = mention_format_text_save( $t_search_term );
+			if( $t_search_term != $t_search_term_mentions ) {
+				$t_textsearch_where_clause .= ' OR ' . db_helper_like( '{bug}.summary' ) .
+					' OR ' . db_helper_like( '{bug_text}.description' ) .
+					' OR ' . db_helper_like( '{bug_text}.steps_to_reproduce' ) .
+					' OR ' . db_helper_like( '{bug_text}.additional_information' ) .
+					' OR ' . db_helper_like( '{bugnote_text}.note' );
+
+				$c_search_term_mentions = '%' . $t_search_term_mentions . '%';
+				$t_where_params[] = $c_search_term_mentions;
+				$t_where_params[] = $c_search_term_mentions;
+				$t_where_params[] = $c_search_term_mentions;
+				$t_where_params[] = $c_search_term_mentions;
+				$t_where_params[] = $c_search_term_mentions;
+			}
 
 			if( is_numeric( $t_search_term ) ) {
 				# PostgreSQL on 64-bit OS hack (see #14014)
