@@ -345,7 +345,9 @@ function bugnote_get_text( $p_bugnote_id ) {
 	$t_query = 'SELECT note FROM {bugnote_text} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $t_bugnote_text_id ) );
 
-	return db_result( $t_result );
+	$t_note = db_result( $t_result );
+	$t_note = mention_format_text_load( $t_note );
+	return $t_note;
 }
 
 /**
@@ -605,8 +607,10 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 		bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $t_old_text, $p_bugnote_id, $t_timestamp );
 	}
 
+	$t_bugnote_text = mention_format_text_save( $p_bugnote_text );
+
 	$t_query = 'UPDATE {bugnote_text} SET note=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( $p_bugnote_text, $t_bugnote_text_id ) );
+	db_query( $t_query, array( $t_bugnote_text, $t_bugnote_text_id ) );
 
 	# updated the last_updated date
 	bugnote_date_update( $p_bugnote_id );
