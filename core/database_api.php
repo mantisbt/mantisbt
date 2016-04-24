@@ -1286,7 +1286,8 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
  */
 function db_sql_in ( array $p_data ) {
 	if( count( $p_data ) > MAX_SQL_IN_COUNT && DBTempData::is_supported_array( $p_data) ) {
-		return '(' . ( new DBTempData( $p_data ) )->sql_select() . ')';
+		$t_tmpdata = new DBTempData( $p_data );
+		return '(' . $t_tmpdata->sql_select() . ')';
 	} else {
 		return db_sql_in_values( $p_data );
 	}
