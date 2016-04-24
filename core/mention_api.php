@@ -256,3 +256,22 @@ function mention_format_text_load( $p_text, $p_user_lookup = null ) {
 
 	return $t_text;
 }
+
+/**
+ * Given a field name, check if it supports mentions.
+ *
+ * @param string $p_field_name Field name (e.g. 'summary').
+ * @return bool true: supported, false: otherwise.
+ */
+function mention_issue_field_supported( $p_field_name ) {
+	switch( $p_field_name ) {
+		case 'summary':
+		case 'description':
+		case 'additional_information':
+		case 'steps_to_reproduce':
+			return true;
+	}
+	
+	return false;
+}
+
