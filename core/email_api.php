@@ -1328,6 +1328,7 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 	$t_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
 	$t_date = date( config_get( 'normal_date_format' ) );
 	$t_user_id = auth_get_current_user_id();
+	$t_users_processed = array();
 
 	$t_result = array();
 	foreach( $p_recipients as $t_recipient ) {
@@ -1335,6 +1336,13 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 		if( $t_recipient == $t_user_id ) {
 			continue;
 		}
+
+		# Don't process a user more than once
+		if( isset( $t_users_processed[$t_recipient] ) ) {
+			continue;
+		}
+
+		$t_users_processed[$t_recipient] = true;
 
 		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
