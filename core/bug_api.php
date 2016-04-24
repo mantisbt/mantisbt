@@ -917,7 +917,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
-	
+
 	$g_cache_bug_text[$c_bug_id] = $t_row;
 
 	return $t_row;

@@ -2011,7 +2011,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
-			
+
 			if( is_numeric( $t_search_term ) ) {
 				# PostgreSQL on 64-bit OS hack (see #14014)
 				if( PHP_INT_MAX > 0x7FFFFFFF && db_is_pgsql() ) {
