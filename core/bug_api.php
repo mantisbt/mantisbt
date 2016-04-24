@@ -565,10 +565,12 @@ class BugData {
 			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 		}
 
-		$t_all_mentioned_user_ids = access_has_bug_level_filter(
+		$t_filtered_mentioned_user_ids = access_has_bug_level_filter(
 			config_get( 'view_bug_threshold' ),
 			$this->id,
 			$t_all_mentioned_user_ids );
+
+		$t_removed_mentions_user_ids = array_diff( $t_all_mentioned_user_ids, $t_filtered_mentioned_user_ids );
 
 		if( !empty( $t_all_mentioned_user_ids ) ) {
 			$t_mention_text = $this->description . "\n\n";
@@ -583,7 +585,11 @@ class BugData {
 				$t_mention_text .= $this->additional_information . "\n\n";
 			}
 
-			mention_process_user_mentions( $this->id, $t_all_mentioned_user_ids, $t_mention_text );
+			mention_process_user_mentions(
+				$this->id,
+				$t_filtered_mentioned_user_ids,
+				$t_mention_text,
+				$t_removed_mentions_user_ids );
 		}
 
 		return $this->id;

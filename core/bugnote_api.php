@@ -263,15 +263,18 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# Process the mentions that have access to the issue note
 	$t_mentioned_user_ids = mention_get_users( $t_bugnote_text );
-	$t_mentioned_user_ids = access_has_bugnote_level_filter(
+	$t_filtered_mentioned_user_ids = access_has_bugnote_level_filter(
 		config_get( 'view_bug_threshold' ),
 		$t_bugnote_id,
 		$t_mentioned_user_ids );
 
+	$t_removed_mentions_user_ids = array_diff( $t_mentioned_user_ids, $t_filtered_mentioned_user_ids );
+
 	mention_process_user_mentions(
 		$p_bug_id,
-		$t_mentioned_user_ids,
-		$p_bugnote_text );
+		$t_filtered_mentioned_user_ids,
+		$p_bugnote_text,
+		$t_removed_mentions_user_ids );
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );

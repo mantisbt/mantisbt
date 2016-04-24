@@ -1305,19 +1305,15 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * or an issue note.
  *
  * @param integer       $p_bug_id     Issue for which the reminder is sent.
- * @param integer|array $p_recipients User id or list of user ids array.
+ * @param array         $p_mention_user_ids User id or list of user ids array.
  * @param string        $p_message    Optional message to add to the e-mail.
+ * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
  * @return array List of users ids to whom the reminder e-mail was actually sent
  */
-function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
+function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
 		return array();
-	}
-
-	if( !is_array( $p_recipients ) ) {
-		$p_recipients = array(
-			$p_recipients,
-		);
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -1330,25 +1326,30 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 	$t_user_id = auth_get_current_user_id();
 	$t_users_processed = array();
 
+	foreach( $p_removed_mention_user_ids as $t_remove_mention_user_id ) {
+		log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_mention_user_id . ' (no access to issue or note).' );
+	}
+
 	$t_result = array();
-	foreach( $p_recipients as $t_recipient ) {
+	foreach( $p_mention_user_ids as $t_mention_user_id ) {
 		# Don't trigger mention emails for self mentions
-		if( $t_recipient == $t_user_id ) {
+		if( $t_mention_user_id == $t_user_id ) {
+			log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_mention_user_id . ' (self-mention).' );
 			continue;
 		}
 
 		# Don't process a user more than once
-		if( isset( $t_users_processed[$t_recipient] ) ) {
+		if( isset( $t_users_processed[$t_mention_user_id] ) ) {
 			continue;
 		}
 
-		$t_users_processed[$t_recipient] = true;
+		$t_users_processed[$t_mention_user_id] = true;
 
-		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
+		lang_push( user_pref_get_language( $t_mention_user_id, $t_project_id ) );
 
-		$t_email = user_get_email( $t_recipient );
+		$t_email = user_get_email( $t_mention_user_id );
 
-		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
+		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_mention_user_id ) ) {
 			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
 		} else {
 			$t_sender_email = '';
@@ -1359,10 +1360,10 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 
 		$t_id = email_store( $t_email, $t_subject, $t_contents );
 		if( $t_id !== null ) {
-			$t_result[] = $t_recipient;
+			$t_result[] = $t_mention_user_id;
 		}
 
-		log_event( LOG_EMAIL_VERBOSE, 'queued mention email ' . $t_id . ' for U' . $t_recipient );
+		log_event( LOG_EMAIL_VERBOSE, 'queued mention email ' . $t_id . ' for U' . $t_mention_user_id );
 
 		lang_pop();
 	}
