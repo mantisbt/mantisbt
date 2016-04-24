@@ -128,7 +128,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testExtraTokensIgnore() {
 		$t_parser = new ConfigParser( '1; 2' );
-		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_ERROR );
+		$t_result = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
 		$this->assertEquals( $t_result, 1 );
 
 		$t_parser = new ConfigParser( 'array(); 2' );
@@ -222,6 +222,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 
 		# String
 		$this->addScalarCase( '"1"', PHPUnit_Type::TYPE_STRING );
+		$this->addScalarCase( "'1'", PHPUnit_Type::TYPE_STRING );
 
 		# Built-in string literals
 		$this->addScalarCase( 'null', PHPUnit_Type::TYPE_NULL );
@@ -355,6 +356,20 @@ array(
 		'bugnotes' => OFF,
 		'threshold_min' => DEVELOPER,
 		'threshold_max' => MANAGER,
+	),
+	'owner' => array (
+		'reporter' => 1,
+		'handler' => 1,
+		'monitor' => 1,
+		'bugnotes' => 1,
+		'threshold_min' => 55,
+	),
+	'reopened' => array (
+		'reporter' => 1,
+		'handler' => 1,
+		'monitor' => 1,
+		'bugnotes' => 1,
+		'threshold_max' => ANYBODY,
 	),
 )
 EOT
