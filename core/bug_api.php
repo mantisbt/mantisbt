@@ -833,6 +833,7 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_row['summary'] = mention_format_text_load( $t_row['summary'] );
 		bug_add_to_cache( $t_row );
 	}
 	return;
