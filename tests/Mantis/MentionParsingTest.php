@@ -33,11 +33,11 @@ require_mantis_core();
 require_api( 'mention_api.php' );
 
 /**
- * Test cases for mention API.
+ * Test cases for parsing functionality in mention API.
  * @package    Tests
  * @subpackage Mention
  */
-class MentionTest extends PHPUnit_Framework_TestCase {
+class MentionParsingTest extends PHPUnit_Framework_TestCase {
 	public function testNoMention() {
 		$this->checkMentions( 'some random string.', array() );
 	}
