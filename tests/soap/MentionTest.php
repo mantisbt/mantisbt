@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Mantis Webservice Tests
+ * Mantis Webservice Tests for Mentions
  *
  * @package Tests
  * @subpackage UnitTests
@@ -87,8 +87,8 @@ class MentionTest extends SoapBase {
 
 		$t_note_data = array(
 			'text' => 'first note @administrator',
-		    'note_type' => 2,
-		    'note_attr' => 'attr_value'
+			'note_type' => 2,
+			'note_attr' => 'attr_value'
 		);
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
@@ -101,6 +101,4 @@ class MentionTest extends SoapBase {
 		$this->assertEquals( $t_issue_note_id, $t_note->id );
 		$this->assertEquals( $t_note_data['text'], $t_note->text );
 	}
-
-	# TODO: Add test case for free text search with mention.
 }

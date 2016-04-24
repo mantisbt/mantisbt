@@ -238,11 +238,11 @@ function bug_revision_last( $p_bug_id, $p_type = REV_ANY, $p_bugnote_id = 0 ) {
 	$t_result = db_query( $t_query, $t_params, 1 );
 
 	$t_row = db_fetch_array( $t_result );
-  	if( $t_row ) {
- 		return $t_row;
+	if( $t_row ) {
+		return $t_row;
 	} else {
 		return null;
- 	}
+	}
 }
 
 /**
