@@ -1327,9 +1327,15 @@ function email_user_mention( $p_bug_id, $p_recipients, $p_message = '' ) {
 	$t_subject = email_build_subject( $p_bug_id );
 	$t_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
 	$t_date = date( config_get( 'normal_date_format' ) );
+	$t_user_id = auth_get_current_user_id();
 
 	$t_result = array();
 	foreach( $p_recipients as $t_recipient ) {
+		# Don't trigger mention emails for self mentions
+		if( $t_recipient == $t_user_id ) {
+			continue;
+		}
+
 		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
 		$t_email = user_get_email( $t_recipient );
