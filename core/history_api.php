@@ -84,12 +84,6 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
 
-		# Process mentions
-		if( mention_issue_field_supported( $c_field_name ) ) {
-			$c_old_value = mention_format_text_save( $c_old_value );
-			$c_new_value = mention_format_text_save( $c_new_value );
-		}
-
 		$t_query = 'INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
@@ -325,12 +319,6 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 			if( !bug_exists( $t_related_bug_id ) || !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_related_bug_id, $t_user_id ) ) {
 				continue;
 			}
-		}
-
-		# Process mentions
-		if( mention_issue_field_supported( $v_field_name ) ) {
-			$v_old_value = mention_format_text_load( $v_old_value );
-			$v_new_value = mention_format_text_load( $v_new_value );
 		}
 
 		$t_event = array();

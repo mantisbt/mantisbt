@@ -483,25 +483,21 @@ class BugData {
 
 		$t_mentioned_user_ids = mention_get_users( $this->summary );
 		if( !empty( $t_mentioned_user_ids ) ) {
-			$this->summary = mention_format_text_save( $this->summary );
 			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 		}
 		
 		$t_mentioned_user_ids = mention_get_users( $this->description );
 		if( !empty( $t_mentioned_user_ids ) ) {
-			$this->description = mention_format_text_save( $this->description );
 			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 		}
 
 		$t_mentioned_user_ids = mention_get_users( $this->steps_to_reproduce );
 		if( !empty( $t_mentioned_user_ids ) ) {
-			$this->steps_to_reproduce = mention_format_text_save( $this->steps_to_reproduce );
 			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 		}
 
 		$t_mentioned_user_ids = mention_get_users( $this->additional_information );
 		if( !empty( $t_mentioned_user_ids ) ) {
-			$this->additional_information = mention_format_text_save( $this->additional_information );
 			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
 		}
 
@@ -641,7 +637,7 @@ class BugData {
 						due_date=' . db_param() . '
 					WHERE id=' . db_param();
 		$t_fields[] = $this->view_state;
-		$t_fields[] = mention_format_text_save( $this->summary );
+		$t_fields[] = $this->summary;
 		$t_fields[] = $this->sponsorship_total;
 		$t_fields[] = (bool)$this->sticky;
 		$t_fields[] = $this->due_date;
@@ -689,9 +685,9 @@ class BugData {
 								additional_information=' . db_param() . '
 							WHERE id=' . db_param();
 			db_query( $t_query, array(
-				mention_format_text_save( $this->description ),
-				mention_format_text_save( $this->steps_to_reproduce ),
-				mention_format_text_save( $this->additional_information ),
+				$this->description,
+				$this->steps_to_reproduce,
+				$this->additional_information,
 				$t_bug_text_id ) );
 
 			bug_text_clear_cache( $c_bug_id );
@@ -803,8 +799,6 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$t_row['summary'] = mention_format_text_load( $t_row['summary'] );
-
 	return bug_add_to_cache( $t_row );
 }
 
@@ -833,7 +827,6 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_row['summary'] = mention_format_text_load( $t_row['summary'] );
 		bug_add_to_cache( $t_row );
 	}
 	return;
@@ -910,10 +903,6 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 	
-	$t_row['description'] = mention_format_text_load( $t_row['description'] );
-	$t_row['additional_information'] = mention_format_text_load( $t_row['additional_information'] );
-	$t_row['steps_to_reproduce'] = mention_format_text_load( $t_row['steps_to_reproduce'] );
-
 	$g_cache_bug_text[$c_bug_id] = $t_row;
 
 	return $t_row;
@@ -1611,12 +1600,8 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'fixed_in_version':
 		case 'target_version':
 		case 'build':
-			$c_value = $p_value;
-			break;
-
-		# string with mentions
 		case 'summary':
-			$c_value = mention_format_text_save( $p_value );
+			$c_value = $p_value;
 			break;
 
 		# dates

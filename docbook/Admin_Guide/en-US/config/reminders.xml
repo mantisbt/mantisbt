@@ -43,18 +43,13 @@
 		<listitem>
 			<para>
 				Enables or disables the @ mentions feature.  Default is ON.
-				When a user is @ mentioned, they are added to the monitor list
-				and hence they get a notification about the event (e.g. note addition
-				or issue submission). Users can be @ mentioned using their username
-				and not realname.
+				When a user is @ mentioned in an issue or a note, they receive an email
+				notification to get their attention.  Users can be @ mentioned using their
+				username and not realname.
 			</para>
 			<para>
 				This feature works with fields like summary, description, additional info,
-				steps to reproduce and notes.  Before such fields are saved the @ mention
-				for username is replaced with a reference to the user id (e.g. @{U123}).
-				At display time, the reference to the user id is replaced by the username
-				or real name based on settings.  This also allows retaining @ mentions
-				correctly even if a username is changed or as a user is deleted.
+				steps to reproduce and notes.
 			</para>
 		</listitem>
 	</varlistentry>

@@ -59,8 +59,6 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 		$t_timestamp = $p_timestamp;
 	}
 	
-	$t_value = mention_format_text_save( $p_value );
-
 	$t_query = 'INSERT INTO {bug_revision} (
 			bug_id, bugnote_id, user_id,
 			timestamp, type, value
@@ -69,7 +67,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 			db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array(
 			$p_bug_id, $p_bugnote_id, $p_user_id,
-			$t_timestamp, $p_type, $t_value ) );
+			$t_timestamp, $p_type, $p_value ) );
 
 	return db_insert_id( db_get_table( 'bug_revision' ) );
 }
@@ -103,8 +101,6 @@ function bug_revision_get( $p_revision_id ) {
 	if( !$t_row ) {
 		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
 	}
-
-	$t_row['value'] = mention_format_text_load( $t_row['value'] );
 
 	return $t_row;
 }
@@ -243,7 +239,6 @@ function bug_revision_last( $p_bug_id, $p_type = REV_ANY, $p_bugnote_id = 0 ) {
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
-		$t_row['value'] = mention_format_text_load( $t_row['value'] );
 		return $t_row;
 	}
 
@@ -278,7 +273,6 @@ function bug_revision_list( $p_bug_id, $p_type = REV_ANY, $p_bugnote_id = 0 ) {
 
 	$t_revisions = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_row['value'] = mention_format_text_load( $t_row['value'] );
 		$t_revisions[$t_row['id']] = $t_row;
 	}
 
@@ -325,7 +319,6 @@ function bug_revision_like( $p_rev_id ) {
 
 	$t_revisions = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_row['value'] = mention_format_text_load( $t_row['value'] );
 		$t_revisions[$t_row['id']] = $t_row;
 	}
 

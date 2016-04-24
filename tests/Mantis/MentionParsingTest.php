@@ -102,34 +102,6 @@ class MentionParsingTest extends PHPUnit_Framework_TestCase {
 		$this->checkMentions( "Check with:\n@vboctor\n@someone.", array( 'vboctor', 'someone' ) );
 	}
 
-	public function testPlaceholderToValue() {
-		$t_lookup = array( 1 => 'vboctor' );
-		$t_text = '@{U1}';
-		$t_processed = mention_format_text_load( $t_text, $t_lookup );
-		$this->assertEquals( '@vboctor', $t_processed );
-	}
-
-	public function testPlaceholderToValueNonExistent() {
-		$t_lookup = array( 1 => 'vboctor' );
-		$t_text = '@{U2}';
-		$t_processed = mention_format_text_load( $t_text, $t_lookup );
-		$this->assertEquals( '@user2', $t_processed );
-	}
-
-	public function testTextToPlaceholder() {		
-		$t_lookup = array( 'vboctor' => 1 );
-		$t_text = 'This is a mention for @vboctor';
-		$t_processed = mention_format_text_save( $t_text, $t_lookup );
-		$this->assertEquals( 'This is a mention for @{U1}', $t_processed );
-	}
-
-	public function testTextToPlaceholderNonExistent() {
-		$t_lookup = array( 'vboctor' => 1 );
-		$t_text = 'This is a mention for @vboctor and @someone';
-		$t_processed = mention_format_text_save( $t_text, $t_lookup );
-		$this->assertEquals( 'This is a mention for @{U1} and @someone', $t_processed );
-	}
-
 	private function checkMentions( $p_text, $p_expected_array ) {
 		$t_array = mention_get_candidates( $p_text );
 		
