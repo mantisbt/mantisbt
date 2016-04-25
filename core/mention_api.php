@@ -63,6 +63,7 @@ function mention_get_candidates( $p_text ) {
 	}
 
 	$t_mentions_tag = mentions_tag();
+	$t_mentions_tag_length = strlen( $t_mentions_tag );
 	$t_separators = "\n\r\t,;:/\\| ";
 	$t_token = strtok( $p_text, $t_separators );
 
@@ -77,7 +78,7 @@ function mention_get_candidates( $p_text ) {
 			continue;
 		}
 
-		$t_mention = substr( $t_mention, 1 );
+		$t_mention = substr( $t_mention, $t_mentions_tag_length );
 		if( is_blank( $t_mention ) ) {
 			continue;
 		}
