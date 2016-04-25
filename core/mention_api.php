@@ -63,12 +63,42 @@ function mention_get_candidates( $p_text ) {
 	}
 
 	$t_mentions_tag = mentions_tag();
-	preg_match_all( "/(?<!" . $t_mentions_tag. ")" . $t_mentions_tag . "[A-Za-z0-9_\.]+/", $p_text, $t_matches );
+	$t_separators = "\n\r\t,;:/\\| ";
+	$t_token = strtok( $p_text, $t_separators );
 
 	$t_mentions = array();
 
-	foreach( $t_matches[0] as $t_mention ) {
+	while( $t_token !== false ) {
+		$t_mention = $t_token;
+		$t_token = strtok( $t_separators );
+
+		# make sure token has @
+		if( stripos( $t_mention, $t_mentions_tag ) !== 0 ) {
+			continue;
+		}
+
 		$t_mention = substr( $t_mention, 1 );
+		if( is_blank( $t_mention ) ) {
+			continue;
+		}
+
+		# Filter out the @@vboctor case.
+		if( stripos( $t_mention, $t_mentions_tag ) === 0 ) {
+			continue;
+		}
+
+		$t_valid = true;
+		for( $i = 0; $i < strlen( $t_mention ); $i++ ) {
+			$t_char = $t_mention[$i];
+			if( !ctype_alnum( $t_char ) && $t_char != '.' && $t_char != '_' ) {
+				$t_valid = false;
+				break;
+			}
+		}
+
+		if( !$t_valid ) {
+			continue;
+		}
 
 		# "victor.boctor" is valid, "vboctor." should be "vboctor"
 		$t_mention = trim( $t_mention, '.' );

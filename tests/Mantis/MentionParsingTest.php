@@ -102,6 +102,30 @@ class MentionParsingTest extends PHPUnit_Framework_TestCase {
 		$this->checkMentions( "Check with:\n@vboctor\n@someone.", array( 'vboctor', 'someone' ) );
 	}
 
+	public function testMentionWithEmailAddress() {
+		$this->checkMentions( 'xxx@example.com', array() );
+	}
+
+	public function testMentionWithLocalhost() {
+		$this->checkMentions( 'xxx@localhost', array() );
+	}
+
+	public function testMentionAtEndOfWord() {
+		$this->checkMentions( "vboctor@", array() );
+	}
+
+	public function testMentionWithInvalidChars() {
+		$this->checkMentions( "@vboctor%%%%%", array() );
+	}
+
+	public function testMentionUsernameThatIsAnEmailAddress() {
+		$this->checkMentions( "@vboctor@example.com", array() );
+	}
+
+	public function testMentionUsernameThatIsLocalhost() {
+		$this->checkMentions( "@vboctor@localhost", array() );
+	}
+
 	private function checkMentions( $p_text, $p_expected_array ) {
 		$t_array = mention_get_candidates( $p_text );
 		
