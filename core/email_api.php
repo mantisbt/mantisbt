@@ -1326,8 +1326,8 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 	$t_user_id = auth_get_current_user_id();
 	$t_users_processed = array();
 
-	foreach( $p_removed_mention_user_ids as $t_remove_mention_user_id ) {
-		log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_mention_user_id . ' (no access to issue or note).' );
+	foreach( $p_removed_mention_user_ids as $t_removed_mention_user_id ) {
+		log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_removed_mention_user_id . ' (no access to issue or note).' );
 	}
 
 	$t_result = array();

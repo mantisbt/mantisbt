@@ -86,7 +86,7 @@ function mention_get_candidates( $p_text ) {
  * feature is disabled.
  *
  * @param string $p_text The text to process.
- * @return Array with valid usernames as keys and their ids as values.
+ * @return array with valid usernames as keys and their ids as values.
  */
 function mention_get_users( $p_text ) {
 	if ( !mention_enabled() ) {
@@ -119,10 +119,11 @@ function mention_get_users( $p_text ) {
  * @param int $p_bug_id The bug id.
  * @param array $p_mentioned_user_ids An array of user ids
  * @param string $p_message The message containing the mentions.
+ * @param array $p_removed_mentions_user_ids The list of ids removed due to lack of access to issue or note.
  * @return void
  */
-function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_message = '' ) {
-	email_user_mention( $p_bug_id, $p_mentioned_user_ids, $p_message );
+function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_message, $p_removed_mentions_user_ids ) {
+	email_user_mention( $p_bug_id, $p_mentioned_user_ids, $p_message, $p_removed_mentions_user_ids );
 }
 
 /**
@@ -137,8 +138,6 @@ function mention_format_text( $p_text, $p_html = true ) {
 		return $p_text;
 	}
 
-	$t_text = $p_text;
-
 	$t_mentioned_users = mention_get_users( $p_text );
 	if( empty( $t_mentioned_users ) ) {
 		return $p_text;
@@ -148,29 +147,27 @@ function mention_format_text( $p_text, $p_html = true ) {
 	$t_formatted_mentions = array();
 
 	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
-		if( user_exists( $t_user_id ) ) {
-			$t_mention = $t_mentions_tag . $t_username;
-			
-			# Uncomment the line below to use realname / username based on settings
-			# The reason we always use username is to avoid confusing users by showing
-			# @ mentions using realname but only supporting it using usernames.
-			# We could support realnames if we assume they contain no spaces, but that
-			# is unlikely to be the case.
-			# $t_username = user_get_name( $t_user_id );
+		$t_mention = $t_mentions_tag . $t_username;
+		
+		# Uncomment the line below to use realname / username based on settings
+		# The reason we always use username is to avoid confusing users by showing
+		# @ mentions using realname but only supporting it using usernames.
+		# We could support realnames if we assume they contain no spaces, but that
+		# is unlikely to be the case.
+		# $t_username = user_get_name( $t_user_id );
 
-			if( $p_html ) {
-				$t_username = string_display_line( $t_username );
+		if( $p_html ) {
+			$t_username = string_display_line( $t_username );
 
-				if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
-					$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mentions_tag . $t_username . '</a>';
-				} else {
-					$t_user_url = '<del class="user">' . $t_mentions_tag . $t_username . '</del>';
-				}
-
-				$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
+			if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
+				$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mentions_tag . $t_username . '</a>';
 			} else {
-				$t_formatted_mentions[$t_mention] = $t_mentions_tag . $t_username;
+				$t_user_url = '<del class="user">' . $t_mentions_tag . $t_username . '</del>';
 			}
+
+			$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
+		} else {
+			$t_formatted_mentions[$t_mention] = $t_mentions_tag . $t_username;
 		}
 	}
 

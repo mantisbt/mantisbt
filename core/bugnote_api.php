@@ -194,19 +194,17 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	antispam_check();
 
-	$t_bugnote_text = $p_bugnote_text;
-
 	if( REMINDER !== $p_type ) {
 		# Check if this is a time-tracking note
 		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
 		if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
 			$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
-			if( is_blank( $t_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
+			if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
 				error_parameters( lang_get( 'bugnote' ) );
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
 			$c_type = TIME_TRACKING;
-		} else if( is_blank( $t_bugnote_text ) ) {
+		} else if( is_blank( $p_bugnote_text ) ) {
 			# This is not time tracking (i.e. it's a normal bugnote)
 			# @todo should we not trigger an error in this case ?
 			return false;
@@ -214,7 +212,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# Event integration
-	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $t_bugnote_text, $c_bug_id );
+	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
 
 	# insert bugnote text
 	$t_query = 'INSERT INTO {bugnote_text} ( note ) VALUES ( ' . db_param() . ' )';
@@ -273,7 +271,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	mention_process_user_mentions(
 		$p_bug_id,
 		$t_filtered_mentioned_user_ids,
-		$p_bugnote_text,
+		$t_bugnote_text,
 		$t_removed_mentions_user_ids );
 
 	# Event integration
