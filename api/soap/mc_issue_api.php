@@ -787,6 +787,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
+	$t_bug_data->process_mentions();
+
 	log_event( LOG_WEBSERVICE, 'created new issue id \'' . $t_issue_id . '\'' );
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
@@ -821,6 +823,9 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				$t_note_attr,
 				$t_user_id,
 				false ); # don't send mail
+
+			bugnote_process_mentions( $t_issue_id, $t_note_id, $t_note['text'] );
+
 			log_event( LOG_WEBSERVICE, 'bugnote id \'' . $t_note_id . '\' added to issue \'' . $t_issue_id . '\'' );
 		}
 	}
@@ -1239,7 +1244,11 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	$t_note_attr = isset( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
 	log_event( LOG_WEBSERVICE, 'adding bugnote to issue \'' . $p_issue_id . '\'' );
-	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_reporter_id );
+	$t_bugnote_id = bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_reporter_id );
+
+	bugnote_process_mentions( $p_issue_id, $t_bugnote_id, $p_note['text'] );
+
+	return $t_bugnote_id;
 }
 
 /**

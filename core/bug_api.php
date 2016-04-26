@@ -546,6 +546,15 @@ class BugData {
 		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
 
+		return $this->id;
+	}
+
+	/**
+	 * Process mentions in the current issue, for example, after the issue is created.
+	 * @return void
+	 * @access public
+	 */
+	function process_mentions() {
 		# Now that the issue is added process the @ mentions
 		$t_all_mentioned_user_ids = array();
 
@@ -591,8 +600,6 @@ class BugData {
 				$t_mention_text,
 				$t_removed_mentions_user_ids );
 		}
-
-		return $this->id;
 	}
 
 	/**
@@ -1713,7 +1720,8 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
-		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
@@ -1742,7 +1750,8 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# Add bugnote if supplied ignore a false return
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
@@ -1772,7 +1781,8 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
@@ -1857,7 +1867,8 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );

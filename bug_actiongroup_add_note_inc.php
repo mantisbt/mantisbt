@@ -150,6 +150,7 @@ function action_add_note_validate( $p_bug_id ) {
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 	$f_view_state = gpc_get_int( 'view_state' );
-	bugnote_add( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $f_bugnote_text );
 	return null;
 }

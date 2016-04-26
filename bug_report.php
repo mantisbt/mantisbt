@@ -196,9 +196,9 @@ if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bu
 	$t_bug_data->handler_id = auth_get_current_user_id();
 }
 
-
 # Create the bug
 $t_bug_id = $t_bug_data->create();
+$t_bug_data->process_mentions();
 
 # Mark the added issue as visited so that it appears on the last visited list.
 last_visited_issue( $t_bug_id );
@@ -271,6 +271,8 @@ if( $f_master_bug_id > 0 ) {
 				0,
 				0,
 				false );
+
+			# Note: we won't trigger mentions in the clone scenario.
 		}
 	}
 

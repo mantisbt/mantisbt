@@ -212,7 +212,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 					# Add bugnote if supplied
 					if( !is_blank( $f_bug_notetext ) ) {
-						bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+						$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+						bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
 						# No need to call email_generic(), bugnote_add() does it
 					} else {
 						email_bug_updated( $t_bug_id );
