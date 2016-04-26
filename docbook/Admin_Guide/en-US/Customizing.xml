@@ -700,7 +700,9 @@ $s_access_levels_enum_string =
     <section id="admin.customize.email">
         <title>Email Notifications</title>
 
-        <para>See Email in the Configuration section.</para>
+        <para>See <xref linkend="admin.customize.email" />
+        	in the Configuration section.
+        </para>
 
         <para>Examples:
             <itemizedlist>
