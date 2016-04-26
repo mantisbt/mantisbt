@@ -1345,6 +1345,11 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 
 		$t_users_processed[$t_mention_user_id] = true;
 
+		# Don't email mention notifications to disabled users.
+		if( !user_is_enabled( $t_mention_user_id ) ) {
+			continue;
+		}
+
 		lang_push( user_pref_get_language( $t_mention_user_id, $t_project_id ) );
 
 		$t_email = user_get_email( $t_mention_user_id );
