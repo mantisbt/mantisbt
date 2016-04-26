@@ -179,27 +179,21 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
 		$t_mention = $t_mentions_tag . $t_username;
-		
-		# Uncomment the line below to use realname / username based on settings
-		# The reason we always use username is to avoid confusing users by showing
-		# @ mentions using realname but only supporting it using usernames.
-		# We could support realnames if we assume they contain no spaces, but that
-		# is unlikely to be the case.
-		# $t_username = user_get_name( $t_user_id );
+		$t_mention_formatted = $t_mention;
 
 		if( $p_html ) {
-			$t_username = string_display_line( $t_username );
+			$t_mention_formatted = string_display_line( $t_mention_formatted );
 
-			if( user_exists( $t_user_id ) && user_get_field( $t_user_id, 'enabled' ) ) {
-				$t_user_url = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mentions_tag . $t_username . '</a>';
-			} else {
-				$t_user_url = '<del class="user">' . $t_mentions_tag . $t_username . '</del>';
+			$t_mention_formatted = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
+
+			if( !user_is_enabled( $t_user_id ) ) {
+				$t_mention_formatted = '<strike>' . $t_mention_formatted . '</strike>';
 			}
 
-			$t_formatted_mentions[$t_mention] = '<span class="mention">' . $t_user_url . '</span>';
-		} else {
-			$t_formatted_mentions[$t_mention] = $t_mentions_tag . $t_username;
+			$t_mention_formatted = '<span class="mention">' . $t_mention_formatted . '</span>';
 		}
+
+		$t_formatted_mentions[$t_mention] = $t_mention_formatted;
 	}
 
 	$t_text = str_replace(
