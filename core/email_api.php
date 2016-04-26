@@ -1412,6 +1412,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
+
+	if( isset( $p_visible_bug_data['email_due_date'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_due_date' );
+	}
+
 	$t_message .= $t_email_separator1 . " \n";
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
@@ -1556,6 +1561,10 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	$t_bug_data['email_date_submitted'] = $t_row['date_submitted'];
 	$t_bug_data['email_last_modified'] = $t_row['last_updated'];
+
+	if( !date_is_null( $t_row['due_date'] ) && access_compare_level( $t_user_access_level, config_get( 'due_date_view_threshold' ) ) ) {
+		$t_bug_data['email_due_date'] = date( config_get( 'short_date_format' ), $t_row['due_date'] );
+	}
 
 	$t_bug_data['email_status'] = $t_row['status'];
 	$t_bug_data['email_severity'] = $t_row['severity'];
