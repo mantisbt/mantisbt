@@ -1,11 +1,32 @@
-Mantis Bug Tracker (MantisBT)
-=============================
+Mantis Bug Tracker (MantisBT) Modern UI
+=======================================
+
 [![Build Status](https://img.shields.io/travis/mantisbt/mantisbt/master.svg)](https://travis-ci.org/mantisbt/mantisbt)
 [![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+The Modern UI was built by [MantisHub](http://www.mantishub.com) and is based on [MantisBT v1.3.x](http://github.com/mantisbt/mantisbt).  We will keep it in sync with v1.3.x and will integrate it into the next version of MantisBT once v1.3.x release is out.
+
+Demo
+----
+
+The Modern UI was built by [MantisHub](http://www.mantishub.com) and can be tested by signing up for a [free trial](http://www.mantishub.com).
+
+Screenshots
+-----------
+
+![Build Status](doc/modern_view_issues.png)
+
+![Build Status](doc/modern_my_view.png)
+
+![Build Status](doc/modern_view_issue.png)
+
+Documentation
+-------------
 
 For complete documentation, please read the administration guide included with
 this release in the doc/<lang> directory.  The guide is available in text, PDF,
 and HTML formats.
+
 
 Requirements
 ------------
