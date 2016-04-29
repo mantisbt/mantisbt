@@ -1627,4 +1627,19 @@ class DBTempData {
 			db_query( $t_query );
 		}
 	}
+
+	/**
+	 * Provides insertion from a prebuilt sql select statement
+	 *
+	 * @param array $p_columns  Array of columns to be selected from subquery
+	 * @param type $p_query     Subquery for data selection to be inserted
+	 * @param type $p_params    Optional, parameters passed through for subquery execution
+	 */
+	public function insert_select( array $p_columns, $p_query, $p_params = array() ) {
+		$this->value_count = count( $p_columns );
+		$t_query_insert = 'INSERT INTO ' . db_get_table( static::$value_table ) . '(id,' . $this->sql_column_names() . ')'
+				. ' SELECT ' . $this->id . ',' . implode( ',', $p_columns )
+				. ' FROM (' . $p_query . ') SUB';
+		db_query( $t_query_insert, $p_params );
+	}
 }
