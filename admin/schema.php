@@ -872,14 +872,20 @@ $g_upgrade[206] = array('CreateTableSQL', array( db_get_table( 'temp_int' ), "
 	i2						I		DEFAULT NULL,
 	i3						I		DEFAULT NULL"
 	,
-	$t_table_options
+	array(
+		'mysql' => 'ENGINE=MEMORY CHARSET=utf8',
+		'pgsql' => 'WITHOUT OIDS',
+		)
 	) );
 
 $g_upgrade[207] = array('CreateTableSQL', array( db_get_table( 'temp_header' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	expiry					I		UNSIGNED DEFAULT NULL"
 	,
-	$t_table_options
+	array(
+		'mysql' => 'ENGINE=MEMORY CHARSET=utf8',
+		'pgsql' => 'WITHOUT OIDS',
+		)
 	) );
 
 $g_upgrade[208] = array( 'CreateIndexSQL', array( 'idx_temp_int_1', db_get_table( 'temp_int' ), 'id,seq,i1,i2,i3' ) );
