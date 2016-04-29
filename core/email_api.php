@@ -1464,6 +1464,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
+
+	if( isset( $p_visible_bug_data['email_tag'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_tag' );
+	}
+
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
@@ -1634,6 +1639,12 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	$t_category_name = category_full_name( $t_row['category_id'], false );
 	$t_bug_data['email_category'] = $t_category_name;
+
+	if( count( $t_tag_rows = tag_bug_get_attached( $p_bug_id ) ) !== 0 && access_compare_level( $t_user_access_level, config_get( 'tag_view_threshold' ) ) ) {
+		foreach( $t_tag_rows as $t_tag ) {
+			$t_bug_data['email_tag'] .= tag_get_link( $t_tag ) . ' ';
+		}
+	}
 
 	$t_bug_data['email_date_submitted'] = $t_row['date_submitted'];
 	$t_bug_data['email_last_modified'] = $t_row['last_updated'];
