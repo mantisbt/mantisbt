@@ -705,8 +705,6 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 		}
 	}
 
-	user_cache_array_rows( array_keys( $t_users ) );
-
 	return $t_users;
 }
 
