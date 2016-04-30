@@ -102,20 +102,28 @@ if( $f_type == CONFIG_TYPE_DEFAULT ) {
 	$t_type = $f_type;
 }
 
-switch( $t_type ) {
-	case CONFIG_TYPE_STRING:
-		$t_value = $f_value;
-		break;
-	case CONFIG_TYPE_INT:
-		$t_value = (integer)constant_replace( trim( $f_value ) );
-		break;
-	case CONFIG_TYPE_FLOAT:
-		$t_value = (float)constant_replace( trim( $f_value ) );
-		break;
-	case CONFIG_TYPE_COMPLEX:
-	default:
-		$t_value = process_complex_value( $f_value );
-		break;
+# Parse the value
+if( $t_type == CONFIG_TYPE_STRING ) {
+	# Return strings as is
+	$t_value = $f_value;
+} else {
+	try {
+		$t_parser = new ConfigParser( $f_value );
+		$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+
+		switch( $t_type ) {
+			case CONFIG_TYPE_INT:
+				$t_value = (int)$t_value;
+				break;
+			case CONFIG_TYPE_FLOAT:
+				$t_value = (float)$t_value;
+				break;
+		}
+	}
+	catch (Exception $e) {
+		error_parameters( $f_config_option, $e->getMessage() );
+		trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
+	}
 }
 
 config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
@@ -123,156 +131,3 @@ config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
 form_security_purge( 'adm_config_set' );
 
 print_successful_redirect( 'adm_config_report.php' );
-
-
-/**
- * Helper function to recursively process complex types
- * We support the following kind of variables here:
- * 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
- * 2. simple arrays with the form: array( a, b, c, d )
- * 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
- * 4. multi-dimensional arrays
- * commas and '=>' within strings are handled
- *
- * @param string  $p_value      Complex value to process.
- * @param boolean $p_trim_quotes Whether to trim quotes.
- * @return parsed variable
- */
-function process_complex_value( $p_value, $p_trim_quotes = false ) {
-	static $s_regex_array = null;
-	static $s_regex_string = null;
-	static $s_regex_element = null;
-
-	$t_value = trim( $p_value );
-
-	# Parsing regex initialization
-	if( is_null( $s_regex_array ) ) {
-		$s_regex_array = '^array[\s]*\((.*)\)[;]*$';
-		$s_regex_string =
-			# unquoted string (word)
-			'[\w]+' . '|' .
-			# single-quoted string
-			"'(?:[^'\\\\]|\\\\.)*'" . '|' .
-			# double-quoted string
-			'"(?:[^"\\\\]|\\\\.)*"';
-		# The following complex regex will parse individual array elements,
-		# taking into consideration sub-arrays, associative arrays and single,
-		# double and un-quoted strings
-		# @TODO dregad reverse pattern logic for sub-array to avoid match on array(xxx)=>array(xxx)
-		$s_regex_element = '('
-			# Main sub-pattern - match one of
-			. '(' .
-					# sub-array: ungreedy, no-case match ignoring nested parenthesis
-					'(?:(?iU:array\s*(?:\\((?:(?>[^()]+)|(?1))*\\))))' . '|' .
-					$s_regex_string
-			. ')'
-			# Optional pattern for associative array, back-referencing the
-			# above main pattern
-			. '(?:\s*=>\s*(?2))?' .
-			')';
-	}
-
-	if( preg_match( '/' . $s_regex_array . '/s', $t_value, $t_match ) === 1 ) {
-		# It's an array - process each element
-		$t_processed = array();
-
-		if( preg_match_all( '/' . $s_regex_element . '/', $t_match[1], $t_elements ) ) {
-			foreach( $t_elements[0] as $t_key => $t_element ) {
-				if( !trim( $t_element ) ) {
-					# Empty element - skip it
-					continue;
-				}
-				# Check if element is associative array
-				preg_match_all( '/(' . $s_regex_string . ')\s*=>\s*(.*)/', $t_element, $t_split );
-				if( !empty( $t_split[0] ) ) {
-					# associative array
-					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
-					$t_new_value = process_complex_value( $t_split[2][0], true );
-					$t_processed[$t_new_key] = $t_new_value;
-				} else {
-					# regular array
-					$t_new_value = process_complex_value( $t_element );
-					$t_processed[$t_key] = $t_new_value;
-				}
-			}
-		}
-		return $t_processed;
-	} else {
-		# Scalar value
-		$t_value = trim( $t_value, " \t\n\r\0\x0B" );
-
-		if( is_numeric( $t_value ) ) {
-			return (int)$t_value;
-		}
-
-		# if has quotation marks
-		if ( strpos( $t_value, "'" ) !== false || strpos( $t_value, '"' ) !== false ) {
-			if( $p_trim_quotes  ) {
-				$t_value = trim( $t_value, "\"'" );
-			}
-		} else {
-			# Only replace constants when no quotation marks exist
-			$t_value = constant_replace( $t_value );
-		}
-
-		return $t_value;
-	}
-}
-
-/**
- * Split by commas, but ignore commas that are within quotes or parenthesis.
- * Ignoring commas within parenthesis helps allow for multi-dimensional arrays.
- * @param string $p_string String to split.
- * @return array
- */
-function special_split ( $p_string ) {
-	$t_values = array();
-	$t_array_element = '';
-	$t_paren_level = 0;
-	$t_inside_quote = false;
-	$t_escape_next = false;
-
-	foreach( str_split( trim( $p_string ) ) as $t_character ) {
-		if( $t_escape_next ) {
-			$t_array_element .= $t_character;
-			$t_escape_next = false;
-		} else if( $t_character == ',' && $t_paren_level==0 && !$t_inside_quote ) {
-			array_push( $t_values, $t_array_element );
-			$t_array_element = '';
-		} else {
-			if( $t_character == '(' && !$t_inside_quote ) {
-				$t_paren_level++;
-			} else if( $t_character == ')' && !$t_inside_quote ) {
-				$t_paren_level--;
-			} else if( $t_character == '\'' ) {
-				$t_inside_quote = !$t_inside_quote;
-			} else if( $t_character == '\\' ) {
-				# escape character
-				$t_escape_next = true;
-				# keep the escape if the string will be going through another recursion
-				if( $t_paren_level > 0 ) {
-					$t_array_element .= $t_character;
-				}
-				continue;
-			}
-			$t_array_element .= $t_character;
-		}
-	}
-	array_push( $t_values, $t_array_element );
-	return $t_values;
-}
-
-
-/**
- * Check if the passed string is a constant and returns its value
- * if yes, or the string itself if not
- * @param string $p_name String to check.
- * @return mixed|string value of constant $p_name, or $p_name itself
- */
-function constant_replace( $p_name ) {
-	if( is_string( $p_name ) && defined( $p_name ) ) {
-		# we have a constant
-		return constant( $p_name );
-	}
-	return $p_name;
-}
