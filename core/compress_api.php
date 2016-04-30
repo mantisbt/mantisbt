@@ -85,6 +85,13 @@ function compress_handler_is_enabled() {
  * @access public
  */
 function compress_start_handler() {
+	# Do not start compress handler if we got any output so far, as this
+	# denotes that an error has occurred. Enabling compression in this case
+	# will likely cause a Content Encoding Error when displaying the page.
+	if( ob_get_length() ) {
+		return;
+	}
+
 	if( compress_handler_is_enabled() ) {
 		# Before doing anything else, start output buffering so we don't prevent
 		# headers from being sent if there's a blank line in an included file
