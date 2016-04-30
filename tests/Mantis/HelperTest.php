@@ -34,7 +34,7 @@ require_mantis_core();
  * @package Tests
  * @subpackage String
  */
-class Mantis_HelperTest extends PHPUnit_Framework_TestCase {
+class MantisHelperTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests helper_array_transpose()

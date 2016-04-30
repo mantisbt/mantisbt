@@ -53,7 +53,7 @@ require_once 'MentionTest.php';
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class Soap_AllTests extends PHPUnit_Framework_TestSuite
+class SoapAllTests extends PHPUnit_Framework_TestSuite
 {
 	/**
 	 * setUp
@@ -67,10 +67,10 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 
 	/**
 	 * Initialises Soap Test Suite
-	 * @return Soap_AllTests
+	 * @return SoapAllTests
 	 */
 	public static function suite() {
-		$t_suite = new Soap_AllTests( 'SOAP Interface' );
+		$t_suite = new SoapAllTests( 'SOAP Interface' );
 
 		$t_suite->addTestSuite( 'EnumTest' );
 		$t_suite->addTestSuite( 'IssueAddTest' );

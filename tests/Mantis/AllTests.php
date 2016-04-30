@@ -39,19 +39,19 @@ require_once 'ConfigParserTest.php';
  * @package    Tests
  * @subpackage UnitTests
  */
-class Mantis_AllTests extends PHPUnit_Framework_TestSuite {
+class MantisAllTests extends PHPUnit_Framework_TestSuite {
 	/**
 	 * Defines test suite
-	 * @return Mantis_AllTests
+	 * @return MantisAllTests
 	 */
 	public static function suite() {
-		$t_suite = new Mantis_AllTests( 'Main Code' );
+		$t_suite = new MantisAllTests( 'Main Code' );
 
 		$t_suite->addTestSuite( 'MantisEnumTest' );
-		$t_suite->addTestSuite( 'Mantis_HelperTest' );
-		$t_suite->addTestSuite( 'Mantis_StringTest' );
+		$t_suite->addTestSuite( 'MantisHelperTest' );
+		$t_suite->addTestSuite( 'MantisStringTest' );
 		$t_suite->addTestSuite( 'MentionParsingTest' );
-		$t_suite->addTestSuite( 'Mantis_ConfigParserTest' );
+		$t_suite->addTestSuite( 'MantisConfigParserTest' );
 
 		return $t_suite;
 	}

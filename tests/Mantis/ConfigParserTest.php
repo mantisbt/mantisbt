@@ -44,7 +44,7 @@ use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
  * @package    Tests
  * @subpackage ConfigParser
  */
-class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
+class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var array List of test cases for scalar types
@@ -57,7 +57,7 @@ class Mantis_ConfigParserTest extends PHPUnit_Framework_TestCase {
 	private $cases_array = array();
 
 	/**
-	 * Mantis_ConfigParserTest constructor.
+	 * MantisConfigParserTest constructor.
 	 */
 	public function __construct() {
 		parent::__construct();
