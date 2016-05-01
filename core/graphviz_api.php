@@ -505,8 +505,8 @@ class Digraph extends Graph {
 	 * @param string $p_com_module
 	 * @return null
 	 */
-	function Digraph( $p_name = 'G', $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
-		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
+	function __construct( $p_name = 'G', $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
+		parent::__construct( $p_name, $p_attributes, $p_tool, $p_com_module );
 	}
 
 	/** 
