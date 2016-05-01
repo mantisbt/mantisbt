@@ -4088,11 +4088,11 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 		case FILTER_TYPE_MULTI_STRING:
 			echo '<select', $g_select_modifier, ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
-				check_selected( $g_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+				check_selected( $g_filter[$p_field_name], (string)META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', string_attribute( $t_option_value ), '" ',
-					check_selected( $g_filter[$p_field_name], $t_option_value ), '>',
+					check_selected( $g_filter[$p_field_name], $t_option_value, false ), '>',
 					string_display_line( $t_option_name ), '</option>';
 			}
 
