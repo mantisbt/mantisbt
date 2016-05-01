@@ -462,8 +462,8 @@ class Digraph extends Graph {
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
 	 */
-	function Digraph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot' ) {
-		parent::Graph( $p_name, $p_attributes, $p_tool );
+	function __construct( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot' ) {
+		parent::__construct( $p_name, $p_attributes, $p_tool );
 	}
 
 	/**
