@@ -297,7 +297,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$p_user_id != NO_USER &&
 		!array_key_exists( $p_user_id, $t_users )
 	) {
-		$t_row = user_get_row( $p_user_id );
+		$t_row = user_cache_row( $p_user_id, /* trigger_error */ false );
 		if( $t_row === false ) {
 			# User doesn't exist - create a dummy record for display purposes
 			$t_name = user_get_name( $p_user_id );

@@ -504,7 +504,7 @@ class BugData {
 			$t_result = db_query( $t_query, array( $this->category_id ) );
 			$t_handler = db_result( $t_result );
 
-			if( $t_handler !== false ) {
+			if( $t_handler !== false && user_exists( $t_handler ) ) {
 				$this->handler_id = $t_handler;
 			}
 		}
