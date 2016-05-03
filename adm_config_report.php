@@ -217,6 +217,7 @@ $t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == 
 $t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
 $t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
 $t_edit_value           = gpc_get_string( 'value', '' );
+$t_edit_action          = gpc_get_string( 'action', 'action_create' );
 
 # Apply filters
 
@@ -412,6 +413,21 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'config_option' => $v_config_id,
 					'type'          => $v_type,
 					'value'         => $v_value,
+					'action'        => 'action_edit',
+				),
+				OFF );
+
+			# Clone button
+			print_button(
+				'#config_set_form',
+				lang_get( 'create_child_bug_button' ),
+				array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+					'type'          => $v_type,
+					'value'         => $v_value,
+					'action'        => 'action_clone',
 				),
 				OFF );
 
@@ -457,7 +473,7 @@ if( $t_read_write_access ) {
 
 		<!-- Title -->
 		<legend><span>
-			<?php echo lang_get( 'set_configuration_option' ) ?>
+			<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>
 		</span></legend>
 
 		<!-- Username -->
@@ -471,6 +487,7 @@ if( $t_read_write_access ) {
 					</option>
 					<?php print_user_option_list( $t_edit_user_id ) ?>
 				</select>
+				<input type="hidden" name="original_user_id" value="<?php echo $t_edit_user_id; ?>" />
 			</span>
 			<span class="label-style"></span>
 		</div>
@@ -486,6 +503,7 @@ if( $t_read_write_access ) {
 						</option>
 						<?php print_project_option_list( $t_edit_project_id, false ) ?>
 					</select>
+					<input type="hidden" name="original_project_id" value="<?php echo $t_edit_project_id; ?>" />
 				</span>
 				<span class="label-style"></span>
 			</div>
@@ -497,6 +515,7 @@ if( $t_read_write_access ) {
 					<input type="text" name="config_option"
 						value="<?php echo string_attribute( $t_edit_option ); ?>"
 						size="64" maxlength="64" />
+					<input type="hidden" name="original_config_option" value="<?php echo $t_edit_option; ?>" />
 				</span>
 				<span class="label-style"></span>
 			</div>
@@ -524,7 +543,10 @@ if( $t_read_write_access ) {
 			</div>
 
 			<!-- Submit button -->
-			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" /></span>
+			<span class="submit-button">
+				<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
+				<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>" />
+			</span>
 		</fieldset>
 	</form>
 </div>

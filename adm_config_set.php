@@ -52,6 +52,11 @@ $f_project_id = gpc_get_int( 'project_id' );
 $f_config_option = trim( gpc_get_string( 'config_option' ) );
 $f_type = gpc_get_string( 'type' );
 $f_value = gpc_get_string( 'value' );
+$f_original_user_id = gpc_get_int( 'original_user_id' );
+$f_original_project_id = gpc_get_int( 'original_project_id' );
+$f_original_config_option = gpc_get_string( 'original_config_option' );
+$f_edit_action = gpc_get_string( 'action' );
+
 
 if( is_blank( $f_config_option ) ) {
 	error_parameters( 'config_option' );
@@ -124,6 +129,15 @@ if( $t_type == CONFIG_TYPE_STRING ) {
 		error_parameters( $f_config_option, $e->getMessage() );
 		trigger_error(ERROR_CONFIG_OPT_BAD_SYNTAX, ERROR);
 	}
+}
+
+if( 'action_edit' === $f_edit_action ){
+	# EDIT action doesn't keep original if key values are different.
+	if ( $f_original_config_option !== $f_config_option
+			|| $f_original_user_id !== $f_user_id
+			|| $f_original_project_id !== $f_project_id ){
+		config_delete( $f_original_config_option, $f_original_user_id, $f_original_project_id );
+		}
 }
 
 config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
