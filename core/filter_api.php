@@ -4555,6 +4555,33 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 $g_cache_filter = array();
 $g_cache_filter_db_filters = array();
 
+function filter_cache_rows( array $p_filter_ids ) {
+	global $g_cache_filter;
+
+	if( empty( $p_filter_ids ) ) {
+		return;
+	}
+	$t_ids_not_found = array();
+	$t_params = array();
+	$t_sql_params = array();
+	db_param_push();
+	foreach( $p_filter_ids as $t_id ) {
+		$t_sql_params[] = db_param();
+		$t_params[] = (int)$t_id;
+		$t_ids_not_found[$t_id] = $t_id;
+	}
+	$t_query = 'SELECT * FROM {filters} WHERE id IN ('
+			. implode( ',', $t_sql_params ) . ')';
+	$t_result = db_query( $t_query, $t_params );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$g_cache_filter[$t_row['id']] = $t_row;
+		unset( $t_ids_not_found[$t_row['id']] );
+	}
+	foreach( $t_ids_not_found as $t_id ) {
+		$g_cache_filter[$t_id] = false;
+	}
+}
+
 /**
  *  Cache a filter row if necessary and return the cached copy
  *  If the second parameter is true (default), trigger an error
@@ -4567,26 +4594,15 @@ $g_cache_filter_db_filters = array();
 function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	global $g_cache_filter;
 
-	if( isset( $g_cache_filter[$p_filter_id] ) ) {
-		return $g_cache_filter[$p_filter_id];
+	if( !isset( $g_cache_filter[$p_filter_id] ) ) {
+		filter_cache_rows( array($p_filter_id) );
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_filter_id ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		if( $p_trigger_errors ) {
-			error_parameters( $p_filter_id );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-		} else {
-			return false;
-		}
+	$t_row = $g_cache_filter[$p_filter_id];
+	if( $p_trigger_errors && !$t_row ) {
+		error_parameters( $p_filter_id );
+		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 	}
-
-	$g_cache_filter[$p_filter_id] = $t_row;
 
 	return $t_row;
 }
@@ -4761,21 +4777,18 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 function filter_db_get_name( $p_filter_id ) {
 	$c_filter_id = (int)$p_filter_id;
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_filter_id ) );
-
-	if( $t_row = db_fetch_array( $t_result ) ) {
-		if( $t_row['user_id'] != auth_get_current_user_id() ) {
-			if( $t_row['is_public'] != true ) {
-				return null;
-			}
-		}
-
-		return $t_row['name'];
+	$t_filter_row = filter_get_row( $c_filter_id );
+	if( !$t_filter_row ) {
+		return null;
 	}
 
-	return null;
+	if( $t_filter_row['user_id'] != auth_get_current_user_id() ) {
+		if( $t_filter_row['is_public'] != true ) {
+			return null;
+		}
+	}
+
+	return $t_filter_row['name'];
 }
 
 /**
@@ -4792,19 +4805,14 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 		return true;
 	}
 
-	db_param_push();
-	$t_query = 'SELECT id
-				  FROM {filters}
-				  WHERE id=' . db_param() . '
-				  AND user_id=' . db_param() . '
-				  AND project_id!=' . db_param();
-	$t_result = db_query( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
-
-	if( db_result( $t_result ) > 0 ) {
+	$t_filter_row = filter_get_row( $c_filter_id );
+	if( $t_filter_row
+		&& $t_filter_row['user_id'] == $t_user_id
+		&& $t_filter_row['project_id'] >= 0	) {
 		return true;
+	} else {
+		return false;
 	}
-
-	return false;
 }
 
 /**
@@ -4836,6 +4844,42 @@ function filter_db_delete_current_filters() {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query( $t_query, array( $t_all_id, '' ) );
+}
+
+function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_public = null ) {
+	$t_params = array();
+	if( null === $p_project_id ) {
+		$t_where_project = null;
+	} else {
+		$t_where_project = 'project_id = ' . db_param();
+		$t_params[] = (int)$p_project_id;
+	}
+	if( null === $p_user_id ) {
+		$t_where_user = null;
+	} else {
+		$t_where_user = 'user_id = ' . db_param();
+		$t_params[] = (int)$p_user_id;
+	}
+	if( null === $p_public ) {
+		$t_where_public = null;
+	} else {
+		$t_where_public = 'is_public = ' . db_param();
+		$t_params[] = ( $p_public ) ? true : false;
+	}
+
+	$t_query = 'SELECT id, name FROM {filters}'
+			. ' WHERE project_id >= 0'
+			. ( $t_where_project ? ' AND ' . $t_where_project : '' )
+			. ( $t_where_user ? ' AND ' . $t_where_user : '' )
+			. ( $t_where_public ? ' AND ' . $t_where_public : '' );
+
+	$t_result = db_query( $t_query, $t_params );
+
+	$t_query_arr = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_query_arr[$t_row['id']] = $t_row['name'];
+	}
+	return $t_query_arr;
 }
 
 /**
