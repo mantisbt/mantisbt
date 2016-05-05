@@ -2318,7 +2318,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		}
 	}
 
-	$t_filters_url = 'view_filters_page.php?for_screen=' . $p_for_screen;
+	$t_filters_url = 'view_filters_page.php?for_screen=' . $p_for_screen . '&static=' . ON;
 	if( 'advanced' == $t_view_type ) {
 		$t_filters_url = $t_filters_url . '&amp;view_type=advanced';
 	}
