@@ -4193,7 +4193,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 		</tr>
 <?php
 
-		if( 'on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+		if( ON != $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
 			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
