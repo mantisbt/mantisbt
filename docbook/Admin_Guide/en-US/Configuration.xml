@@ -5,6 +5,59 @@
 <chapter id="admin.config">
 	<title>Configuration</title>
 
+	<para>MantisBT is highly customizable through the web interface and
+		configuration files. Configuration options can be set globally as well as
+		customized for a specific project or user (except for options listed in
+		<emphasis>$g_global_settings</emphasis>).
+	</para>
+
+	<para>Configuration options can be set in
+		<emphasis>config_inc.php</emphasis> and in the
+		<emphasis>database</emphasis> (using the various manage pages).
+		Values stored in the database take precedence over values defined in
+		<emphasis>config_inc.php</emphasis>. Options stored in the database
+		can also be viewed and updated on
+		"Manage > Manage Configuration > Configuration Report" page.
+	</para>
+
+	<para>The sequence below describes how MantisBT determines which value
+		to use if an option was overridden:
+	</para>
+
+	<orderedlist>
+		<listitem>
+			<para>Look for the specified configuration option in the
+				database for current user and current project.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Look for the specified configuration option in the
+				database for current user and all projects.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Look for the specified configuration option in the
+				database for all users and current project.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Look for the specified configuration option in the
+				database for all users and all projects.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Look for the specified configuration option in
+				<emphasis>config_inc.php</emphasis> (where you might have some
+				code to distinguish between projects and/or users).
+			</para>
+		</listitem>
+		<listitem>
+			<para>Look for the specified configuration option in
+				<emphasis>config_defaults_inc.php</emphasis>.
+			</para>
+		</listitem>
+	</orderedlist>
+
 	<xi:include href="config/database.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/path.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/webserver.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
