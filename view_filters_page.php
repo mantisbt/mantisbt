@@ -65,7 +65,22 @@ compress_enable();
 
 html_page_top();
 
-$t_filter = current_user_get_bug_filter();
+$f_filter_id = gpc_get( 'filter_id', null );
+if( null === $f_filter_id ) {
+	$t_filter = current_user_get_bug_filter();
+	$t_named_filter = false;
+} else {
+	$c_filter_id = (int)$f_filter_id;
+	$t_filter_string = filter_db_get_filter( $c_filter_id );
+	if( !$t_filter_string ) {
+		access_denied();
+	} else {
+		$t_filter = filter_deserialize( $t_filter_string );
+		$t_named_filter = true;
+		filter_cache_row( $c_filter_id );
+	}
+}
+
 filter_init( $t_filter );
 
 $t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]' );
@@ -168,7 +183,14 @@ $f_static = gpc_get_bool( 'static', false );
 			}
 		?>
 
-		<h2><?php echo lang_get('edit_filter') ?></h2>
+		<h2>
+			<?php
+			echo lang_get('edit_filter');
+			if( $t_named_filter ) {
+				echo ': ' . filter_get_field( $c_filter_id, 'name' );
+			}
+			?>
+		</h2>
 
 		<div class="section-link">
 			<?php
@@ -196,7 +218,7 @@ $f_static = gpc_get_bool( 'static', false );
 						</label>
 					</td>
 					<td class="right">
-						<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>">
+						<input type="submit" name="filter" value="<?php echo lang_get( 'use_query' ) ?>">
 					</td>
 				</tr>
 			</tbody>
