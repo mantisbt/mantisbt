@@ -20,40 +20,36 @@
 		"Manage > Manage Configuration > Configuration Report" page.
 	</para>
 
-	<para>The sequence below describes how MantisBT determines which value
-		to use if an option was overridden:
+	<para>To determine which value to use MantisBT sequentially searches for
+		the specified configuration option. If the value is set, it starts
+		using it. Otherwise, goes to the next step.
 	</para>
 
 	<orderedlist>
 		<listitem>
-			<para>Look for the specified configuration option in the
-				database for current user and current project.
+			<para>database: the value for current user and current project
 			</para>
 		</listitem>
 		<listitem>
-			<para>Look for the specified configuration option in the
-				database for current user and all projects.
+			<para>database: the value for current user and all projects
 			</para>
 		</listitem>
 		<listitem>
-			<para>Look for the specified configuration option in the
-				database for all users and current project.
+			<para>database: the value for all users and current project
 			</para>
 		</listitem>
 		<listitem>
-			<para>Look for the specified configuration option in the
-				database for all users and all projects.
+			<para>database: the value for all users and all projects
 			</para>
 		</listitem>
 		<listitem>
-			<para>Look for the specified configuration option in
-				<emphasis>config_inc.php</emphasis> (where you might have some
-				code to distinguish between projects and/or users).
+			<para>
+				<emphasis>config_inc.php</emphasis>
 			</para>
 		</listitem>
 		<listitem>
-			<para>Look for the specified configuration option in
-				<emphasis>config_defaults_inc.php</emphasis>.
+			<para>
+				<emphasis>config_defaults_inc.php</emphasis>
 			</para>
 		</listitem>
 	</orderedlist>
