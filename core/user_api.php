@@ -497,24 +497,24 @@ function user_is_enabled( $p_user_id ) {
 /**
  * Count the number of users at or greater than a specific level
  *
- * @param integer $p_level Access Level to count users. The default is to include ANYBODY.
- * @param bool $p_enabled true: must be enabled, false: must be disabled, null: don't care.
+ * @param integer $p_level   Access Level to count users. The default is to include ANYBODY.
+ * @param bool    $p_enabled true: must be enabled, false: must be disabled, null: don't care.
  * @return integer The number of users.
  */
 function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
-	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level>=' . db_param();
-	if( $p_enabled === true ) {
-		$t_query .= ' AND enabled = 1';
-	} else if( $p_enabled === false ) {
-		$t_query .= ' AND enabled = 0';
+	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level >= ' . db_param();
+	$t_param = array( $p_level );
+
+	if( $p_enabled !== null ) {
+		$t_query .= ' AND enabled = ' . db_param();
+		$t_param[] = (bool)$p_enabled;
 	}
 
-	$t_result = db_query( $t_query, array( $p_level ) );
+	# Get the number of users
+	$t_result = db_query( $t_query, $t_param );
+	$t_count = db_result( $t_result );
 
-	# Get the list of connected users
-	$t_users = db_result( $t_result );
-
-	return $t_users;
+	return $t_count;
 }
 
 /**
