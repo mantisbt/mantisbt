@@ -79,7 +79,7 @@ $g_db_schema			= '';
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
- * DB2             db2           ibm-db2   experimental
+ * DB2             db2           ibm-db2   unsupported (backwards compatibility only)
  *
  * @global string $g_db_type
  */

@@ -591,7 +591,8 @@ if( !$g_database_upgrade ) {
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
-				'db2'         => 'IBM DB2',
+				# Hidden for new installs per #17336
+				# 'db2'         => 'IBM DB2 (unsupported)',
 			);
 			# mysql is deprecated as of PHP 5.5.0
 			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
