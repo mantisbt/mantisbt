@@ -1549,11 +1549,13 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 			$t_time_tracking = '';
 		}
 
+		$t_access_level_string = ' - ';
 		if( user_exists( $t_bugnote->reporter_id ) ) {
 			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'], $t_bugnote->reporter_id );
-			$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
-		} else {
-			$t_access_level_string = '';
+			# Only display access level when higher than 0 (ANYBODY)
+			if( $t_access_level > ANYBODY ) {
+				$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
+			}
 		}
 
 		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . $t_access_level_string . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
