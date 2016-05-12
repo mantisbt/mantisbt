@@ -1792,7 +1792,7 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" />';
+	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16"></i>';
 }
 
 /**
