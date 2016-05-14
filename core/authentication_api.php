@@ -306,6 +306,51 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 }
 
 /**
+ * Impersonates the specified user by logging in.
+ *
+ * @param int $p_user_id The user id.
+ * @return void
+ */
+function auth_impersonate( $p_user_id ) {
+	auth_ensure_can_impersonate( $p_user_id );
+
+	auth_set_cookies( $p_user_id, /* perm_login */ false );
+	auth_set_tokens( $p_user_id );
+}
+
+/**
+ * Check whether the logged in user can impersonate the specified user.
+ *
+ * @param int $p_user_id  The user id to be impersonated.
+ * @return bool true: can impersonate, false: can't.
+ */
+function auth_can_impersonate( $p_user_id ) {
+	if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
+		return false;
+	}
+
+	# User can't impersonate themselves
+	if( $p_user_id == auth_get_current_user_id() ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Ensure that the logged in user can impersonate the specified user.  If not,
+ * then an error page will be generated.
+ *
+ * @param int $p_user_id  The user id to be impersonated.
+ * @return void.
+ */
+function auth_ensure_can_impersonate( $p_user_id ) {
+	if( !auth_can_impersonate( $p_user_id ) ) {
+		access_denied();
+	}
+}
+
+/**
  * Allows scripts to login using a login name or ( login name + password )
  *
  * There are multiple scenarios where this is used:

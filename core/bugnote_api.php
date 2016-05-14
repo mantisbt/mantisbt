@@ -37,6 +37,7 @@
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses mention_api.php
  * @uses user_api.php
  * @uses utility_api.php
  */
@@ -55,6 +56,7 @@ require_api( 'event_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'mention_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
@@ -266,6 +268,32 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	return $t_bugnote_id;
+}
+
+/**
+ * Process mentions in bugnote, typically after its added.
+ *
+ * @param  int $p_bug_id          The bug id
+ * @param  int $p_bugnote_id      The bugnote id
+ * @param  string $p_bugnote_text The bugnote text
+ * @return void
+ * @access public
+ */
+function bugnote_process_mentions( $p_bug_id, $p_bugnote_id, $p_bugnote_text ) {
+	# Process the mentions that have access to the issue note
+	$t_mentioned_user_ids = mention_get_users( $p_bugnote_text );
+	$t_filtered_mentioned_user_ids = access_has_bugnote_level_filter(
+		config_get( 'view_bug_threshold' ),
+		$p_bugnote_id,
+		$t_mentioned_user_ids );
+
+	$t_removed_mentions_user_ids = array_diff( $t_mentioned_user_ids, $t_filtered_mentioned_user_ids );
+
+	mention_process_user_mentions(
+		$p_bug_id,
+		$t_filtered_mentioned_user_ids,
+		$p_bugnote_text,
+		$t_removed_mentions_user_ids );
 }
 
 /**

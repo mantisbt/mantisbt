@@ -94,6 +94,9 @@ if( !$t_bugnote_id ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
+# Process the mentions in the added note
+bugnote_process_mentions( $t_bug->id, $t_bugnote_id, $f_bugnote_text );
+
 # Handle the reassign on feedback feature. Note that this feature generally
 # won't work very well with custom workflows as it makes a lot of assumptions
 # that may not be true. It assumes you don't have any statuses in the workflow

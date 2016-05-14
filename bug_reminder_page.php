@@ -71,7 +71,7 @@ layout_page_begin();
 
 <?php # Send reminder Form BEGIN ?>
 
-<div class="col-md-12 col-xs-12">
+<div id="send-reminder-div" class="col-md-12 col-xs-12">
 <form method="post" action="bug_reminder.php">
 <?php echo form_security_field( 'bug_reminder' ) ?>
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
@@ -91,7 +91,7 @@ layout_page_begin();
 		<?php echo lang_get( 'to' ) ?>
 	</th>
 	<td>
-		<select name="to[]" multiple="multiple" size="9" class="width-100">
+		<select id="recipient" name="to[]" multiple="multiple" size="9" class="width-100">
 			<?php
 			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 			$t_access_level = config_get( 'reminder_receive_threshold' );
@@ -128,6 +128,10 @@ layout_page_begin();
 			}
 			if( ON == config_get( 'store_reminders' ) ) {
 				echo lang_get( 'reminder_store' );
+			}
+
+			if( mention_enabled() ) {
+				echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>' . mentions_tag() . user_get_field( auth_get_current_user_id(), 'username' ) . '</strong>' );
 			}
 		?>
 		</p>

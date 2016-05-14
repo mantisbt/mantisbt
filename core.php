@@ -224,8 +224,8 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 shutdown_functions_register();
 
 # Initialise plugins
+require_api( 'plugin_api.php' );  // necessary for some upgrade steps
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'plugin_api.php' );
 	plugin_init_installed();
 }
 

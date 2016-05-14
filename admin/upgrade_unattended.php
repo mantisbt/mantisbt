@@ -125,6 +125,12 @@ $i = $t_last_update + 1;
 $t_count_done = 0;
 
 while( ( $i <= $t_last_id ) && !$g_failed ) {
+	if ( $g_upgrade[$i] === null ) {
+		$i++;
+		$t_count_done++;
+		continue;
+	}
+
 	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];

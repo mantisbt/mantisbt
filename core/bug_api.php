@@ -41,6 +41,7 @@
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses mention_api.php
  * @uses relationship_api.php
  * @uses sponsorship_api.php
  * @uses tag_api.php
@@ -66,6 +67,7 @@ require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'mention_api.php' );
 require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'tag_api.php' );
@@ -502,7 +504,7 @@ class BugData {
 			$t_result = db_query( $t_query, array( $this->category_id ) );
 			$t_handler = db_result( $t_result );
 
-			if( $t_handler !== false ) {
+			if( $t_handler !== false && user_exists( $t_handler ) ) {
 				$this->handler_id = $t_handler;
 			}
 		}
@@ -545,6 +547,59 @@ class BugData {
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
 
 		return $this->id;
+	}
+
+	/**
+	 * Process mentions in the current issue, for example, after the issue is created.
+	 * @return void
+	 * @access public
+	 */
+	function process_mentions() {
+		# Now that the issue is added process the @ mentions
+		$t_all_mentioned_user_ids = array();
+
+		$t_mentioned_user_ids = mention_get_users( $this->summary );
+		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		
+		$t_mentioned_user_ids = mention_get_users( $this->description );
+		$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+
+		if( !is_blank( $this->steps_to_reproduce ) ) {
+			$t_mentioned_user_ids = mention_get_users( $this->steps_to_reproduce );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		if( !is_blank( $this->additional_information ) ) {
+			$t_mentioned_user_ids = mention_get_users( $this->additional_information );
+			$t_all_mentioned_user_ids = array_merge( $t_all_mentioned_user_ids, $t_mentioned_user_ids );
+		}
+
+		$t_filtered_mentioned_user_ids = access_has_bug_level_filter(
+			config_get( 'view_bug_threshold' ),
+			$this->id,
+			$t_all_mentioned_user_ids );
+
+		$t_removed_mentions_user_ids = array_diff( $t_all_mentioned_user_ids, $t_filtered_mentioned_user_ids );
+
+		if( !empty( $t_all_mentioned_user_ids ) ) {
+			$t_mention_text = $this->description . "\n\n";
+
+			if( !is_blank( $this->steps_to_reproduce ) ) {
+				$t_mention_text .= lang_get( 'email_steps_to_reproduce' ) . "\n\n";
+				$t_mention_text .= $this->steps_to_reproduce . "\n\n";
+			}
+
+			if( !is_blank( $this->additional_information ) ) {
+				$t_mention_text .= lang_get( 'email_additional_information' ) . "\n\n";
+				$t_mention_text .= $this->additional_information . "\n\n";
+			}
+
+			mention_process_user_mentions(
+				$this->id,
+				$t_filtered_mentioned_user_ids,
+				$t_mention_text,
+				$t_removed_mentions_user_ids );
+		}
 	}
 
 	/**
@@ -657,7 +712,11 @@ class BugData {
 								steps_to_reproduce=' . db_param() . ',
 								additional_information=' . db_param() . '
 							WHERE id=' . db_param();
-			db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information, $t_bug_text_id ) );
+			db_query( $t_query, array(
+				$this->description,
+				$this->steps_to_reproduce,
+				$this->additional_information,
+				$t_bug_text_id ) );
 
 			bug_text_clear_cache( $c_bug_id );
 
@@ -1661,7 +1720,8 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
-		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
@@ -1690,7 +1750,8 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# Add bugnote if supplied ignore a false return
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
@@ -1720,7 +1781,8 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
@@ -1805,7 +1867,8 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );

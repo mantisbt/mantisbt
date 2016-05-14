@@ -1565,9 +1565,9 @@ $g_history_default_visible = ON;
  */
 $g_history_order = 'ASC';
 
-##############################
-# MantisBT Reminder Settings #
-##############################
+##########################################
+# MantisBT Reminder and Mention Settings #
+##########################################
 
 /**
  * are reminders stored as bugnotes
@@ -1595,6 +1595,19 @@ $g_default_reminder_view_status = VS_PUBLIC;
  * @global integer $g_reminder_receive_threshold
  */
 $g_reminder_receive_threshold = DEVELOPER;
+
+/**
+ * Enables or disables @ mentions feature.
+ *
+ * @global integer $g_mentions_enabled
+ */
+$g_mentions_enabled = ON;
+
+/**
+ * The tag to use for mentions.
+ * @var string $g_mentions_tag
+ */
+$g_mentions_tag = '@';
 
 #################################
 # MantisBT Sponsorship Settings #
@@ -1799,22 +1812,6 @@ $g_max_dropdown_length = 40;
  * @global integer $g_wrap_in_preformatted_text
  */
 $g_wrap_in_preformatted_text = ON;
-
-########################
-# MantisBT HR Settings #
-########################
-
-/**
- * Horizontal Rule Size
- * @global integer $g_hr_size
- */
-$g_hr_size = 1;
-
-/**
- * Horizontal Rule Width
- * @global integer $g_hr_width
- */
-$g_hr_width = 50;
 
 #############################################
 # MantisBT Authentication and LDAP Settings #
@@ -2758,6 +2755,12 @@ $g_project_user_threshold = MANAGER;
  * @global integer $g_manage_user_threshold
  */
 $g_manage_user_threshold = ADMINISTRATOR;
+
+/**
+ * Threshold needed to impersonate a user or NOBODY to disable the feature.
+ * @global integer $g_impersonate_user_threshold
+ */
+$g_impersonate_user_threshold = ADMINISTRATOR;
 
 /**
  * Delete bug threshold
@@ -4420,11 +4423,10 @@ $g_public_config_names = array(
 	'hide_status_default',
 	'history_default_visible',
 	'history_order',
-	'hr_size',
-	'hr_width',
 	'html_make_links',
 	'html_valid_tags_single_line',
 	'html_valid_tags',
+	'impersonate_user_threshold',
 	'inline_file_exts',
 	'limit_reporters',
 	'logo_image',
@@ -4448,6 +4450,8 @@ $g_public_config_names = array(
 	'max_failed_login_count',
 	'max_file_size',
 	'max_lost_password_in_progress_count',
+	'mentions_enabled',
+	'mentions_tag',
 	'meta_include_file',
 	'min_refresh_delay',
 	'minimum_sponsorship_amount',

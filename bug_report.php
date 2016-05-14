@@ -137,8 +137,8 @@ $f_files                            = gpc_get_file( 'ufile', null );
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
-$f_tag_select                       = gpc_get_int( 'tag_select' );
-$f_tag_string                       = gpc_get_string( 'tag_string' );
+$f_tag_select                       = gpc_get_int( 'tag_select', 0 );
+$f_tag_string                       = gpc_get_string( 'tag_string', '' );
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
@@ -196,9 +196,9 @@ if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bu
 	$t_bug_data->handler_id = auth_get_current_user_id();
 }
 
-
 # Create the bug
 $t_bug_id = $t_bug_data->create();
+$t_bug_data->process_mentions();
 
 # Mark the added issue as visited so that it appears on the last visited list.
 last_visited_issue( $t_bug_id );
@@ -271,6 +271,8 @@ if( $f_master_bug_id > 0 ) {
 				0,
 				0,
 				false );
+
+			# Note: we won't trigger mentions in the clone scenario.
 		}
 	}
 

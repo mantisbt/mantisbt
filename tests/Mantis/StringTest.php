@@ -36,7 +36,7 @@ require_mantis_core();
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class Mantis_StringTest extends PHPUnit_Framework_TestCase {
+class MantisStringTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests string_sanitize_url()

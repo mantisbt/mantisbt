@@ -445,6 +445,25 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 }
 
 /**
+ * Filter the provided array of user ids to those who has the specified access level for the
+ * specified bug.
+ * @param  int $p_access_level   The access level.
+ * @param  int $p_bug_id         The bug id.
+ * @param  array $p_user_ids     The array of user ids.
+ * @return array filtered array of user ids.
+ */
+function access_has_bug_level_filter( $p_access_level, $p_bug_id, $p_user_ids ) {
+	$t_users_ids_with_access = array();
+	foreach( $p_user_ids as $t_user_id ) {
+		if( access_has_bug_level( $p_access_level, $p_bug_id, $t_user_id ) ) {
+			$t_users_ids_with_access[] = $t_user_id;
+		}
+	}
+
+	return $t_users_ids_with_access;
+}
+
+/**
  * Check if the user has the specified access level for the given bug
  * and deny access to the page if not
  * @see access_has_bug_level
@@ -487,6 +506,25 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 	}
 
 	return access_has_bug_level( $p_access_level, $t_bug_id, $p_user_id );
+}
+
+/**
+ * Filter the provided array of user ids to those who has the specified access level for the
+ * specified bugnote.
+ * @param  int $p_access_level   The access level.
+ * @param  int $p_bugnote_id     The bugnote id.
+ * @param  array $p_user_ids     The array of user ids.
+ * @return array filtered array of user ids.
+ */
+function access_has_bugnote_level_filter( $p_access_level, $p_bugnote_id, $p_user_ids ) {
+	$t_users_ids_with_access = array();
+	foreach( $p_user_ids as $t_user_id ) {
+		if( access_has_bugnote_level( $p_access_level, $p_bugnote_id, $t_user_id ) ) {
+			$t_users_ids_with_access[] = $t_user_id;
+		}
+	}
+
+	return $t_users_ids_with_access;
 }
 
 /**

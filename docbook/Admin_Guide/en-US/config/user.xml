@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.users">
+	<title>User Management</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_impersonate_user_threshold</term>
+			<listitem>
+				<para>
+					The threshold for a user to be able to impersonate another user,
+					or NOBODY to disable impersonation.  Default ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_user_threshold</term>
+			<listitem>
+				<para>
+					The threshold for a user to manage user accounts.
+					Default ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

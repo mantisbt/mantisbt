@@ -544,6 +544,11 @@ if( $t_show_attachments ) {
 }
 echo '</table>';
 
+echo '</table>';
+
+define( 'PRINT_BUGNOTE_INC_ALLOW', true );
+include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
+
 #
 # Issue History
 #

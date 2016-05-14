@@ -108,7 +108,10 @@ if( ON == config_get( 'store_reminders' ) ) {
 		}
 		$t_attr .= $t_recipient;
 	}
+
 	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
+
+	# Note: we won't trigger mentions here since reminders are triggered.
 }
 
 form_security_purge( 'bug_reminder' );

@@ -336,6 +336,7 @@ $s_email_summary = 'Summary';
 $s_email_description = 'Description';
 $s_email_additional_information = 'Additional Information';
 $s_email_steps_to_reproduce = 'Steps to Reproduce';
+$s_email_tag = 'Tags';
 
 # account_delete.php
 $s_account_protected_msg = 'Account protected. Cannot change settings...';
@@ -536,9 +537,14 @@ $s_reminder_sent_none = 'No reminders could be sent';
 $s_reminder_list_truncated = 'recipients list truncated';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
+$s_reminder_mentions = 'You can now mention users to trigger notifications for them instead of using reminders feature.  For example, others can mention you by writing %1s in issues and notes and you will get an email notification.';
 $s_reminder_explain = 'This note will be sent to the selected recipients, requesting feedback on this issue.';
 $s_reminder_monitor = 'These recipients will also begin monitoring the issue; they can unsubscribe using the "End Monitoring" button.';
 $s_reminder_store = 'The note will be stored with the issue.';
+
+# mentions
+$s_mentioned_you = 'mentioned you on:';
+$s_mentioned_in = 'Mentioned in %1$s';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %1$d for %2$s.';
@@ -837,6 +843,9 @@ $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 $s_configuration_corrupted = 'The configuration in the database is corrupted.';
+$s_set_configuration_option_action_create = 'Create Configuration Option';
+$s_set_configuration_option_action_edit = 'Edit Configuration Option';
+$s_set_configuration_option_action_clone = 'Clone Configuration Option';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
@@ -977,6 +986,7 @@ $s_edit_user_title = 'Edit User';
 $s_account_unlock_button = 'Unlock Account';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
+$s_impersonate_user_button = 'Impersonate User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'All';
@@ -1626,6 +1636,7 @@ $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'That email is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option "%1$s" not found.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option "%1$s" can not be set in the database. It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Cannot set configuration option "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" not found.';

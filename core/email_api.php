@@ -1301,6 +1301,82 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 }
 
 /**
+ * Send a notification to user or set of users that were mentioned in an issue
+ * or an issue note.
+ *
+ * @param integer       $p_bug_id     Issue for which the reminder is sent.
+ * @param array         $p_mention_user_ids User id or list of user ids array.
+ * @param string        $p_message    Optional message to add to the e-mail.
+ * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
+ * @return array List of users ids to whom the reminder e-mail was actually sent
+ */
+function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return array();
+	}
+
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_sender_id = auth_get_current_user_id();
+	$t_sender = user_get_name( $t_sender_id );
+
+	$t_subject = email_build_subject( $p_bug_id );
+	$t_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
+	$t_date = date( config_get( 'normal_date_format' ) );
+	$t_user_id = auth_get_current_user_id();
+	$t_users_processed = array();
+
+	foreach( $p_removed_mention_user_ids as $t_removed_mention_user_id ) {
+		log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_removed_mention_user_id . ' (no access to issue or note).' );
+	}
+
+	$t_result = array();
+	foreach( $p_mention_user_ids as $t_mention_user_id ) {
+		# Don't trigger mention emails for self mentions
+		if( $t_mention_user_id == $t_user_id ) {
+			log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_mention_user_id . ' (self-mention).' );
+			continue;
+		}
+
+		# Don't process a user more than once
+		if( isset( $t_users_processed[$t_mention_user_id] ) ) {
+			continue;
+		}
+
+		$t_users_processed[$t_mention_user_id] = true;
+
+		# Don't email mention notifications to disabled users.
+		if( !user_is_enabled( $t_mention_user_id ) ) {
+			continue;
+		}
+
+		lang_push( user_pref_get_language( $t_mention_user_id, $t_project_id ) );
+
+		$t_email = user_get_email( $t_mention_user_id );
+
+		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_mention_user_id ) ) {
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
+		} else {
+			$t_sender_email = '';
+		}
+
+		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'mentioned_you' ) . "\n\n";
+		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message;
+
+		$t_id = email_store( $t_email, $t_subject, $t_contents );
+		if( $t_id !== null ) {
+			$t_result[] = $t_mention_user_id;
+		}
+
+		log_event( LOG_EMAIL_VERBOSE, 'queued mention email ' . $t_id . ' for U' . $t_mention_user_id );
+
+		lang_pop();
+	}
+
+	return $t_result;
+}
+
+/**
  * Send bug info to given user
  * return true on success
  * @param array   $p_visible_bug_data       Array of bug data information.
@@ -1388,6 +1464,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
+
+	if( isset( $p_visible_bug_data['email_tag'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_tag' );
+	}
+
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
@@ -1412,6 +1493,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
+
+	if( isset( $p_visible_bug_data['email_due_date'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_due_date' );
+	}
+
 	$t_message .= $t_email_separator1 . " \n";
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
@@ -1554,8 +1640,23 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	$t_category_name = category_full_name( $t_row['category_id'], false );
 	$t_bug_data['email_category'] = $t_category_name;
 
+	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
+	if( !empty( $t_tag_rows ) && access_compare_level( $t_user_access_level, config_get( 'tag_view_threshold' ) ) ) {
+		$t_bug_data['email_tag'] = '';
+
+		foreach( $t_tag_rows as $t_tag ) {
+			$t_bug_data['email_tag'] .= $t_tag['name'] . ', ';
+		}
+
+		$t_bug_data['email_tag'] = trim( $t_bug_data['email_tag'], ', ' );
+	}
+
 	$t_bug_data['email_date_submitted'] = $t_row['date_submitted'];
 	$t_bug_data['email_last_modified'] = $t_row['last_updated'];
+
+	if( !date_is_null( $t_row['due_date'] ) && access_compare_level( $t_user_access_level, config_get( 'due_date_view_threshold' ) ) ) {
+		$t_bug_data['email_due_date'] = date( config_get( 'short_date_format' ), $t_row['due_date'] );
+	}
 
 	$t_bug_data['email_status'] = $t_row['status'];
 	$t_bug_data['email_severity'] = $t_row['severity'];

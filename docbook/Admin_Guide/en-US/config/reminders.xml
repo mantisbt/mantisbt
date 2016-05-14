@@ -36,6 +36,30 @@
 				</para>
 			</listitem>
 		</varlistentry>
-	</variablelist>
 
+		<varlistentry>
+			<term>$g_mentions_enabled</term>
+			<listitem>
+				<para>
+					Enables or disables the @ mentions feature.  Default is ON.
+					When a user is @ mentioned in an issue or a note, they receive an email
+					notification to get their attention.  Users can be @ mentioned using their
+					username and not realname.
+				</para>
+				<para>
+					This feature works with fields like summary, description, additional info,
+					steps to reproduce and notes.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_mentions_tag</term>
+			<listitem>
+				<para>
+					The tag to use for prefixing mentions.  Default is '@'.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
 </section>

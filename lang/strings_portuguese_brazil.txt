@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Caçador de Palavras
  * @author Dianakc
  * @author Eduardo.mps
  * @author Elival
@@ -47,6 +48,7 @@
  * @author Jefersonfoliveira
  * @author Luckas
  * @author Luigipiccoli
+ * @author Luk3
  * @author Macofe
  * @author Pedroca cerebral
  * @author Raphaelras
@@ -68,18 +70,19 @@ $s_actiongroup_menu_update_status = 'Atualizar Status';
 $s_actiongroup_menu_update_severity = 'Atualizar Gravidade';
 $s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
 $s_actiongroup_menu_update_category = 'Atualizar Categoria';
-$s_actiongroup_menu_set_sticky = 'Marcar/Desmarcar Pegajoso';
+$s_actiongroup_menu_set_sticky = 'Fixar/Desafixar';
 $s_actiongroup_menu_update_field = 'Atualizar %1$s';
 $s_actiongroup_menu_update_product_version = 'Atualizar versão do produto';
-$s_actiongroup_menu_update_target_version = 'Atualizar Previsto para Versão';
+$s_actiongroup_menu_update_target_version = 'Atualizar Versão de Destino';
 $s_actiongroup_menu_update_fixed_in_version = 'Atualizar Corrigido na Versão';
 $s_actiongroup_menu_update_product_build = 'Atualizar Compilação do Produto';
+$s_actiongroup_menu_update_due_date = 'Atualizar prazo';
 $s_actiongroup_menu_add_note = 'Adicionar Anotação';
 $s_actiongroup_menu_attach_tags = 'Aplicar marcadores';
-$s_actiongroup_bugs = 'Casos Selecionados';
-$s_actiongroup_error_issue_is_readonly = 'O Caso é somente leitura.';
+$s_actiongroup_bugs = 'Problemas Selecionados';
+$s_actiongroup_error_issue_is_readonly = 'O problema é de somente leitura.';
 $s_all_projects = 'Todos os Projetos';
-$s_move_bugs = 'Mover Casos';
+$s_move_bugs = 'Mover Problemas';
 $s_operation_successful = 'Operação realizada com sucesso.';
 $s_date_order = 'Ordem por Data';
 $s_print_all_bug_page_link = 'Imprimir Relatórios';
@@ -171,6 +174,7 @@ $s_set_sticky_bugs_conf_msg = 'Você tem certeza que deseja marcar/desmarcar est
 $s_product_version_bugs_conf_msg = 'Atualizar versão do produto para';
 $s_fixed_in_version_bugs_conf_msg = 'Atualizar Corrigido na Versão';
 $s_target_version_bugs_conf_msg = 'Atualizar Previsto para a Versão';
+$s_due_date_bugs_conf_msg = 'Atualizar prazo para';
 $s_close_group_bugs_button = 'Fechar Casos';
 $s_delete_group_bugs_button = 'Apagar Casos';
 $s_move_group_bugs_button = 'Mover Casos';
@@ -185,6 +189,7 @@ $s_set_sticky_group_bugs_button = 'Marcar/Desmarcar Pegajosos';
 $s_product_version_group_bugs_button = 'Atualizar versão do produto';
 $s_fixed_in_version_group_bugs_button = 'Atualizar Corrigido na Versão';
 $s_target_version_group_bugs_button = 'Atualizar Previsto para a Versão';
+$s_due_date_group_bugs_button = 'Atualizar prazo';
 $s_update_severity_title = 'Atualizar Gravidade';
 $s_update_severity_msg = 'Escolha a gravidade do caso';
 $s_update_severity_button = 'Atualizar Gravidade';
@@ -680,6 +685,7 @@ $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
 $s_category_added_msg = 'A categoria foi adicionada com sucesso...';
 $s_category_deleted_msg = 'A categoria foi apagada com sucesso...';
 $s_category_delete_sure_msg = 'Você tem certeza que deseja apagar esta categoria?<br />A categoria "%1$s" contém %2$d bugs.';
+$s_category_delete_confirm_msg = 'Você tem certeza que deseja deletar a categoria "%1$s"?';
 $s_delete_category_button = 'Apagar Categoria';
 $s_edit_project_category_title = 'Alterar Categoria do Projeto';
 $s_update_category_button = 'Atualizar Categoria';
@@ -1305,6 +1311,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de c
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não foi encontrada para o projeto "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Esta Categoria não pode ser eliminada, pois é definida como "Categoria Padrão para Movimentos".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Categoria "%1$s" não pode ser deletada, pois está associada com outro ou mais problemas.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão \'%1$s\' não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é inválido. Nomes de usuário podem conter apenas letras, números, espaços, hífens, pontos, sinais de mais e sublinhados.';
@@ -1343,6 +1350,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O plugin"%1$s" não foi registrado.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'O plugin "%1$s" ainda não foi carregado. Tenha certeza que as dependências já foram cumpridas.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O plugin "%1$s" já foi instalado.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'A classe "%2$s" não foi definida no Complemento "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página "%%2$s" não existe no plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'O arquivo "%2$s" não existe no plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Falha na instalação do complemento: %1$s.';

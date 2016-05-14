@@ -58,6 +58,7 @@ echo excel_get_header( $t_filename );
 echo excel_get_start_row();
 echo excel_format_column_title( lang_get( 'issue_id' ) );
 echo excel_format_column_title( lang_get( 'project_name' ) );
+echo excel_format_column_title( lang_get( 'category' ) );
 echo excel_format_column_title( lang_get( 'summary' ) );
 
 if( $t_show_realname ) {
@@ -81,6 +82,7 @@ foreach( $t_billing_rows as $t_billing ) {
 	echo "\n<Row>\n";
 	echo excel_prepare_number( $t_billing['bug_id'] );
 	echo excel_prepare_string( $t_billing['project_name'] );
+	echo excel_prepare_string( $t_billing['bug_category'] );
 	echo excel_prepare_string( $t_billing['bug_summary'] );
 
 	if( $t_show_realname ) {
