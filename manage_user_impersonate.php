@@ -51,8 +51,10 @@ form_security_purge( 'manage_user_impersonate' );
 
 $t_redirect_to = config_get( 'default_home_page' );
 
-html_page_top( null, $t_redirect_to );
+layout_page_header();
+
+layout_page_begin( null, $t_redirect_to );
 
 html_operation_successful( $t_redirect_to );
 
-html_page_bottom();
+layout_page_end();
