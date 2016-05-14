@@ -593,6 +593,10 @@ define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
 define( 'SECONDS_PER_DAY', 86400 );
 
+# auto-generated link targets
+define( 'LINKS_SAME_WINDOW', 1 );
+define( 'LINKS_NEW_WINDOW', 2 );
+
 # Obsolete / deprecated constants
 # Defined below for backwards-compatibility purposes -- Do not use them
 #        Constant                                   # Replaced by
