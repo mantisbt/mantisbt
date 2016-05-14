@@ -308,6 +308,20 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		}
 	}
 
+	# add Category Owner
+	if( ON == email_notify_flag( $p_notify_type, 'category' ) ) {
+		$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
+
+		if( $t_category_id > 0 ) {
+			$t_category_assigned_to = category_get_field( $t_category_id, 'user_id' );
+
+			if( $t_category_assigned_to > 0 ) {
+				$t_recipients[$t_category_assigned_to] = true;
+				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Category Owner = @U%d', $p_bug_id, $t_category_assigned_to ) );
+			}
+		}
+	}
+
 	# add users who contributed bugnotes
 	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
 	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
