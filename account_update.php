@@ -57,17 +57,22 @@ require_api( 'utility_api.php' );
 
 form_security_validate( 'account_update' );
 
-$t_user_id = auth_get_current_user_id();
-
 # If token is set, it's a password reset request from verify.php, and if
 # not we need to reauthenticate the user
-$t_account_verification = token_get_value( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+$t_verify_user_id = gpc_get( 'verify_user_id', false );
+$t_account_verification = $t_verify_user_id ? token_get_value( TOKEN_ACCOUNT_VERIFY, $t_verify_user_id ) : false;
 if( !$t_account_verification ) {
 	auth_reauthenticate();
+	$t_user_id = auth_get_current_user_id();
+} else {
+	# set a temporary cookie so the login information is passed between pages.
+	auth_set_cookies( $t_verify_user_id, false );
+	# fake login so the user can set their password
+	auth_attempt_script_login( user_get_field( $t_verify_user_id, 'username' ) );
+	$t_user_id = $t_verify_user_id;
 }
 
 auth_ensure_user_authenticated();
-
 current_user_ensure_unprotected();
 
 $f_email           	= gpc_get_string( 'email', '' );
@@ -79,17 +84,24 @@ $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 $t_redirect_url = 'index.php';
 
 # @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code.
-$t_email_updated = false;
-$t_password_updated = false;
-$t_realname_updated = false;
+$t_update_email = null;
+$t_update_password = null;
+$t_update_realname = null;
+
+# Do not allow blank passwords in account verification/reset
+if( $t_account_verification && is_blank( $f_password ) ) {
+	error_parameters( lang_get( 'password' ) );
+	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+}
 
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
-if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
+# Do not update email for a user verification
+if( !( $t_ldap && config_get( 'use_ldap_email' ) )
+	&& !$t_account_verification ) {
 	if( $f_email != user_get_email( $t_user_id ) ) {
-		user_set_email( $t_user_id, $f_email );
-		$t_email_updated = true;
+		$t_update_email = $f_email;
 	}
 }
 
@@ -101,8 +113,7 @@ if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );
 		user_ensure_realname_unique( $t_username, $t_realname );
-		user_set_realname( $t_user_id, $t_realname );
-		$t_realname_updated = true;
+		$t_update_realname = $t_realname;
 	}
 }
 
@@ -116,36 +127,38 @@ if( !is_blank( $f_password ) ) {
 		}
 
 		if( !auth_does_password_match( $t_user_id, $f_password ) ) {
-			user_set_password( $t_user_id, $f_password );
-			$t_password_updated = true;
+			$t_update_password = $f_password;
 		}
 	}
-}
-
-form_security_purge( 'account_update' );
-
-# Clear the verification token
-if( $t_account_verification ) {
-	token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
 }
 
 html_page_top( null, $t_redirect_url );
 
 $t_message = '';
 
-if( $t_email_updated ) {
+if( $t_update_email ) {
+	user_set_email( $t_user_id, $f_email );
 	$t_message .= lang_get( 'email_updated' );
 }
 
-if( $t_password_updated ) {
+if( $t_update_password ) {
+	user_set_password( $t_user_id, $f_password );
 	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
 	$t_message .= lang_get( 'password_updated' );
+
+	# Clear the verification token
+	if( $t_account_verification ) {
+		token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+	}
 }
 
-if( $t_realname_updated ) {
+if( $t_update_realname ) {
+	user_set_realname( $t_user_id, $t_realname );
 	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
 	$t_message .= lang_get( 'realname_updated' );
 }
+
+form_security_purge( 'account_update' );
 
 html_operation_successful( $t_redirect_url, $t_message );
 

@@ -61,14 +61,11 @@ if( auth_is_user_authenticated() ) {
 	print_header_redirect( 'verify.php?id=' . $f_user_id . '&confirm_hash=' . $f_confirm_hash );
 }
 
-$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
+$t_token_confirm_hash = token_get_value( TOKEN_ACCOUNT_ACTIVATION, $f_user_id );
 
-if( $f_confirm_hash != $t_calculated_confirm_hash ) {
+if( $f_confirm_hash != $t_token_confirm_hash ) {
 	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 }
-
-# set a temporary cookie so the login information is passed between pages.
-auth_set_cookies( $f_user_id, false );
 
 user_reset_failed_login_count_to_zero( $f_user_id );
 user_reset_lost_password_in_progress_count_to_zero( $f_user_id );
@@ -79,5 +76,74 @@ auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 user_increment_login_count( $f_user_id );
 
 
-define( 'ACCOUNT_VERIFICATION_INC', true );
-include ( dirname( __FILE__ ) . '/account_page.php' );
+# extracts the user information
+# and prefixes it with u_
+$t_row = user_get_row( $f_user_id );
+
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
+
+$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
+
+html_page_top1();
+html_page_top2a();
+
+?>
+
+<div id="reset-passwd-msg" class="important-msg">
+	<ul>
+		<?php
+		if( $t_can_change_password ) {
+			echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+		} else {
+			echo '<li>' . lang_get( 'no_password_change' ) . '</li>';
+		}
+		?>
+	</ul>
+</div>
+
+<?php
+if( $t_can_change_password ) {
+?>
+
+<div id="verify-div" class="form-container">
+	<form id="account-update-form" method="post" action="account_update.php">
+		<fieldset class="required">
+			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
+			<div class="field-container">
+				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
+				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+				<span class="label-style"></span>
+			</div>
+			<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
+			<?php
+			echo form_security_field( 'account_update' );
+			# When verifying account, set a token and don't display current password
+			token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+			?>
+			<div class="field-container">
+				<label for="realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
+				<span class="input">
+					<input id="realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label for="password" class="required"><span><?php echo lang_get( 'new_password' ) ?></span></label>
+				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label for="password-confirm" class="required"><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
+				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div>
+
+<?php
+}
+
+html_page_bottom1a( __FILE__ );
