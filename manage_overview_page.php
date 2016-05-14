@@ -47,8 +47,6 @@ require_api( 'lang_api.php' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 
-$t_version_suffix = config_get_global( 'version_suffix' );
-
 html_page_top( lang_get( 'manage_link' ) );
 
 print_manage_menu();
@@ -58,7 +56,7 @@ print_manage_menu();
 	<table id="manage-overview-table" cellspacing="1" cellpadding="5" border="1">
 		<tr>
 			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
-			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? ' ' . $t_version_suffix : '' ) ?></td>
+			<td><?php echo MANTIS_VERSION . config_get_global( 'version_suffix' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>

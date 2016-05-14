@@ -701,7 +701,7 @@ function html_footer() {
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
 	if( config_get( 'show_version' ) == ON ) {
-		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . ' ' . config_get_global( 'version_suffix' ) );
+		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 
 	echo '<address id="mantisbt-copyright">' . "\n";
