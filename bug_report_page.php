@@ -714,7 +714,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<label>
-				<input <?php echo helper_get_tab_index() ?> type="checkbox" class="ace" id="report_stay" name="eport_stay" <?php check_checked( $f_report_stay ) ?> />
+				<input <?php echo helper_get_tab_index() ?> type="checkbox" class="ace" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> />
 				<span class="lbl"> <?php echo lang_get( 'check_report_more_bugs' ) ?> </span>
 			</label>
 		</td>
