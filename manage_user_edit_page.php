@@ -236,20 +236,9 @@ $t_impersonate = auth_can_impersonate( $t_user['id'] );
 
 if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 ?>
-<div id="manage-user-actions-div" class="col-md-5 col-xs-12 no-padding">
+<div id="manage-user-actions-div" class="col-md-6 col-xs-12 no-padding">
 <div class="space-8"></div>
 <div class="btn-group">
-
-<!-- Impersonate Button -->
-<?php if( $t_impersonate ) { ?>
-	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="action-button">
-		<fieldset>
-			<?php echo form_security_field( 'manage_user_impersonate' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" />
-		</fieldset>
-	</form>
-<?php } ?>
 
 <!-- Reset/Unlock Button -->
 <?php if( $t_reset || $t_unlock ) { ?>
@@ -277,12 +266,23 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 	</form>
 <?php } ?>
 
+<!-- Impersonate Button -->
+<?php if( $t_impersonate ) { ?>
+	<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-left">
+		<fieldset>
+			<?php echo form_security_field( 'manage_user_impersonate' ) ?>
+			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" />
+		</fieldset>
+	</form>
+<?php } ?>
+
 </div>
 </div>
 <?php } ?>
 
 <?php if( $t_reset ) { ?>
-<div class="col-md-7 col-xs-12 no-padding">
+<div class="col-md-6 col-xs-12 no-padding">
 <div class="space-4"></div>
 <div class="alert alert-info">
 	<i class="fa fa-info-circle"></i>
