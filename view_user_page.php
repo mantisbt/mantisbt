@@ -131,19 +131,19 @@ layout_page_begin();
 	</div>
 	<div class="widget-toolbox padding-8 clearfix">
 	<?php if( $t_can_manage ) { ?>
-		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="action-button">
+		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="pull-left">
 			<fieldset>
 				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
-				<input type="submit" class="btn btn-primary btn-white btn-round pull-left" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
 			</fieldset>
 		</form>
 	<?php } ?>
 	<?php if( auth_can_impersonate( $f_user_id ) ) { ?>
-		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="action-button">
+		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-right">
 			<fieldset>
 				<?php echo form_security_field( 'manage_user_impersonate' ) ?>
 				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
-				<span><input type="submit" class="btn btn-primary btn-white btn-round pull-right" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
+				<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
 			</fieldset>
 		</form>
 	<?php } ?>
