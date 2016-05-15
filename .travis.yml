@@ -19,15 +19,15 @@ script:
 #
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
+#  - 5.3
+#  - 5.4
+#  - 5.5
+#  - 5.6
   - 7.0
 
 env:
   - DB=mysql
-  - DB=pgsql
+#  - DB=pgsql
 
 branches:
   except:
@@ -36,10 +36,9 @@ branches:
 matrix:
   include:
     # Add a specific build for Documentation
-    # Note: we don't really care about the PHP version here, but we need
-    # one version to trigger the build
     - env: DOCBOOK=1
-      php: 5.6
+      # Using Ruby as it's preinstalled and we don't need PHP to build docs
+      language: ruby
       addons:
         apt:
           packages:
