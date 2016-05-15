@@ -3612,10 +3612,10 @@ $g_file_download_content_type_overrides = array (
  */
 $g_status_icon_arr = array (
 	NONE      => '',
-	LOW       => 'fa-angle-down blue',
+	LOW       => 'fa-chevron-down blue',
 	NORMAL    => 'fa-minus blue',
-	HIGH      => 'fa-angle-up red',
-	URGENT    => 'fa-angle-double-up red',
+	HIGH      => 'fa-chevron-up red',
+	URGENT    => 'fa-angle-double-up fa-lg red',
 	IMMEDIATE => 'fa-exclamation-triangle red'
 );
 
