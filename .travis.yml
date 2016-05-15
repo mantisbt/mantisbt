@@ -40,13 +40,13 @@ matrix:
     # one version to trigger the build
     - env: DOCBOOK=1
       php: 5.6
+      addons:
+        apt:
+          packages:
+            - publican
 
   allow_failures:
 
-addons:
-  apt:
-    packages:
-      - publican
 
 # -----------------------------------------------------------------------------
 # Notifications
