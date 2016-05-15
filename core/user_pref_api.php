@@ -288,9 +288,8 @@ $g_cache_current_user_pref = array();
 
 /**
  * Cache a user preferences row if necessary and return the cached copy
- *  If the third parameter is true (default), trigger an error
- *  if the preferences can't be found.  If the second parameter is
- *  false, return false if the preferences can't be found.
+ *  If $p_trigger_errors is true (default), trigger an error if the preferences can't be found.
+ *  If $p_trigger_errors is false, return false if the preferences can't be found.
  *
  * @param integer $p_user_id        A valid user identifier.
  * @param integer $p_project_id     A valid project identifier.
@@ -300,30 +299,14 @@ $g_cache_current_user_pref = array();
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
 	global $g_cache_user_pref;
 
-	if( isset( $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] ) ) {
-		return $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
+	if( !isset( $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] ) ) {
+		user_pref_cache_array_rows( array( $p_user_id ), $p_project_id );
 	}
 
-	$t_query = 'SELECT * FROM {user_pref} WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
-	$t_result = db_query( $t_query, array( (int)$p_user_id, (int)$p_project_id ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		if( $p_trigger_errors ) {
-			trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
-		} else {
-			$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = false;
-			return false;
-		}
+	$t_row = $g_cache_user_pref[(int)$p_user_id][(int)$p_project_id];
+	if( false === $t_row && $p_trigger_errors ) {
+		trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
 	}
-
-	if( !isset( $g_cache_user_pref[(int)$p_user_id] ) ) {
-		$g_cache_user_pref[(int)$p_user_id] = array();
-	}
-
-	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $t_row;
-
 	return $t_row;
 }
 
