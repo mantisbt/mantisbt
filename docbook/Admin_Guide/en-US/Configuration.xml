@@ -5,6 +5,55 @@
 <chapter id="admin.config">
 	<title>Configuration</title>
 
+	<para>MantisBT is highly customizable through the web interface and
+		configuration files. Configuration options can be set globally as well as
+		customized for a specific project or user (except for options listed in
+		<emphasis>$g_global_settings</emphasis>).
+	</para>
+
+	<para>Configuration options can be set in
+		<emphasis>config_inc.php</emphasis> and in the
+		<emphasis>database</emphasis> (using the various manage pages).
+		Values stored in the database take precedence over values defined in
+		<emphasis>config_inc.php</emphasis>. Options stored in the database
+		can also be viewed and updated on
+		"Manage > Manage Configuration > Configuration Report" page.
+	</para>
+
+	<para>To determine which value to use MantisBT sequentially searches for
+		the specified configuration option. If the value is set, it starts
+		using it. Otherwise, goes to the next step.
+	</para>
+
+	<orderedlist>
+		<listitem>
+			<para>database: the value for current user and current project
+			</para>
+		</listitem>
+		<listitem>
+			<para>database: the value for current user and all projects
+			</para>
+		</listitem>
+		<listitem>
+			<para>database: the value for all users and current project
+			</para>
+		</listitem>
+		<listitem>
+			<para>database: the value for all users and all projects
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				<emphasis>config_inc.php</emphasis>
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				<emphasis>config_defaults_inc.php</emphasis>
+			</para>
+		</listitem>
+	</orderedlist>
+
 	<xi:include href="config/database.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/path.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/webserver.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
