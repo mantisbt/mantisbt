@@ -625,6 +625,7 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
  * @access public
  */
 function category_can_delete( $p_category_id ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
 	$t_bug_count = db_result( db_query( $t_query, array( $p_category_id ) ) );
 	return $t_bug_count == 0;
