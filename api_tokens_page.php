@@ -47,17 +47,18 @@ html_page_top( lang_get( 'api_tokens_link' ) );
 	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
 		<fieldset>
 			<legend><span><?php echo lang_get( 'api_token_create_form_title' ); ?></span></legend>
-<?php echo form_security_field( 'create_api_token_form' ); ?>
+			<?php print_account_menu( 'api_tokens_page.php' ) ?>
+			<?php echo form_security_field( 'create_api_token_form' ); ?>
 
-<div class="field-container">
-	<label for="token_name"><span><?php echo lang_get( 'api_token_name' ) ?></span></label>
-	<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" /></span>
-	<span class="label-style"></span>
-</div>
+			<div class="field-container">
+				<label for="token_name"><span><?php echo lang_get( 'api_token_name' ) ?></span></label>
+				<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" /></span>
+				<span class="label-style"></span>
+			</div>
 
-<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'api_token_create_button' ) ?>" /></span>
-</fieldset>
-</form>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'api_token_create_button' ) ?>" /></span>
+		</fieldset>
+	</form>
 </div>
 <?php
 $t_user_id = auth_get_current_user_id();
