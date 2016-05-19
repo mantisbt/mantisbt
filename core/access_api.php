@@ -695,3 +695,17 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 		}
 	}
 }
+
+/**
+ * Given a access level, return the appropriate string for it
+ * @param integer $p_access_level
+ * @return string
+ */
+function access_level_get_string( $p_access_level ) {
+	if( $p_access_level > ANYBODY ) {
+		$t_access_level_string = get_enum_element( 'access_levels', $p_access_level );
+	} else {
+		$t_access_level_string = lang_get( 'no_access' );
+	}
+	return $t_access_level_string;
+}

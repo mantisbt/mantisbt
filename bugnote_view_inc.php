@@ -168,10 +168,7 @@ $t_num_notes = count( $t_bugnotes );
 		<span class="small access-level"><?php
 			if( user_exists( $t_bugnote->reporter_id ) ) {
 				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
-				# Only display access level when higher than 0 (ANYBODY)
-				if( $t_access_level > ANYBODY ) {
-					echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
-				}
+				echo '(', access_level_get_string( $t_access_level ), ')';
 			}
 		?></span>
 		</span>
