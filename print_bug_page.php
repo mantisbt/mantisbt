@@ -544,8 +544,6 @@ if( $t_show_attachments ) {
 }
 echo '</table>';
 
-echo '</table>';
-
 define( 'PRINT_BUGNOTE_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
 
@@ -555,6 +553,7 @@ include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
 
 if( $t_show_history ) {
 	echo '<table class="table table-striped table-bordered table-condensed no-margin small">';
+	echo '<tr class="spacer"><td colspan="6"></td></tr>';
 
 	echo '<tr><td colspan="6" class="bold bigger-110">', lang_get( 'bug_history' ), '</td></tr>';
 
@@ -580,9 +579,6 @@ if( $t_show_history ) {
 	echo '<tr class="spacer"><td colspan="4"></td></tr>';
 	echo '</table>';
 }
-
-define( 'PRINT_BUGNOTE_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/print_bugnote_inc.php' ) ;
 
 last_visited_issue( $f_bug_id );
 ?>
