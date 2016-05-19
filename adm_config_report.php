@@ -446,9 +446,11 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'action'        => 'action_edit',
 				),
 				OFF );
+			echo '</div>';
 
 			# Clone button
-			print_button(
+			echo '<div class="pull-left">';
+			print_form_button(
 				'#config_set_form',
 				lang_get( 'create_child_bug_button' ),
 				array(
