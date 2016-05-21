@@ -47,11 +47,11 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 		trigger_error( ERROR_PROJECT_RECURSIVE_HIERARCHY, ERROR );
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {project_hierarchy}
 		                ( child_id, parent_id, inherit_parent )
 						VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-
 	db_query( $t_query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
 }
 
@@ -63,6 +63,7 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
  * @return void
  */
 function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
+	db_param_push();
 	$t_query = 'UPDATE {project_hierarchy}
 					SET inherit_parent=' . db_param() . '
 					WHERE child_id=' . db_param() . '
@@ -77,6 +78,7 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
  * @return void
  */
 function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						AND parent_id = ' . db_param();
 
@@ -89,6 +91,7 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
  * @return void
  */
 function project_hierarchy_remove_all( $p_project_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						  OR parent_id = ' . db_param();
 
@@ -151,6 +154,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	}
 	$g_cache_show_disabled = $p_show_disabled;
 
+	db_param_push();
 	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
 
 	$t_query = 'SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent

@@ -66,6 +66,8 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
+	db_param_push();
+
 	if( ALL_PROJECTS != $p_project_id ) {
 		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
 

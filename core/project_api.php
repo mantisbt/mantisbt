@@ -102,6 +102,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		return false;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {project} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_project_id ) );
 
@@ -235,6 +236,7 @@ function project_ensure_exists( $p_project_id ) {
  * @return boolean
  */
 function project_is_name_unique( $p_name ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {project} WHERE name=' . db_param();
 	$t_result = db_query( $t_query, array( $p_name ) );
 
@@ -266,6 +268,7 @@ function project_ensure_name_unique( $p_name ) {
  * @return boolean
  */
 function project_includes_user( $p_project_id, $p_user_id ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {project_user_list}
 				  WHERE project_id=' . db_param() . ' AND
 						user_id=' . db_param();
@@ -330,6 +333,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {project}
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
@@ -385,8 +389,8 @@ function project_delete( $p_project_id ) {
 	user_pref_delete_project( $p_project_id );
 
 	# Delete the project entry
+	db_param_push();
 	$t_query = 'DELETE FROM {project} WHERE id=' . db_param();
-
 	db_query( $t_query, array( $p_project_id ) );
 
 	config_set_cache( 'enable_email_notification', $t_email_notifications, CONFIG_TYPE_INT );
@@ -436,6 +440,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
+	db_param_push();
 	$t_query = 'UPDATE {project}
 				  SET name=' . db_param() . ',
 					status=' . db_param() . ',
@@ -479,6 +484,7 @@ function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
  * @return integer
  */
 function project_get_id_by_name( $p_project_name ) {
+	db_param_push();
 	$t_query = 'SELECT id FROM {project} WHERE name = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_project_name ), 1 );
 
@@ -557,6 +563,7 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 		return false;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT access_level
 				  FROM {project_user_list}
 				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
@@ -577,8 +584,8 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
  * @return array
  */
 function project_get_local_user_rows( $p_project_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {project_user_list} WHERE project_id=' . db_param();
-
 	$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 
 	$t_user_rows = array();
@@ -667,12 +674,13 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	}
 
 	if( $p_include_global_users ) {
+		db_param_push();
 		$t_query = 'SELECT id, username, realname, access_level
 				FROM {user}
 				WHERE enabled = ' . db_param() . '
 					AND access_level ' . $t_global_access_clause;
-
 		$t_result = db_query( $t_query, array( $t_on ) );
+
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_users[(int)$t_row['id']] = $t_row;
 		}
@@ -680,12 +688,12 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	if( $c_project_id != ALL_PROJECTS ) {
 		# Get the project overrides
+		db_param_push();
 		$t_query = 'SELECT u.id, u.username, u.realname, l.access_level
 				FROM {project_user_list} l, {user} u
 				WHERE l.user_id = u.id
 				AND u.enabled = ' . db_param() . '
 				AND l.project_id = ' . db_param();
-
 		$t_result = db_query( $t_query, array( $t_on, $c_project_id ) );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
@@ -745,6 +753,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 		$t_access_level = user_get_access_level( $p_user_id );
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {project_user_list}
 				    ( project_id, user_id, access_level )
 				  VALUES
@@ -762,6 +771,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
  * @return void
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
+	db_param_push();
 	$t_query = 'UPDATE {project_user_list}
 				  SET access_level=' . db_param() . '
 				  WHERE	project_id=' . db_param() . ' AND
@@ -793,6 +803,7 @@ function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {project_user_list}
 				  WHERE project_id=' . db_param() . ' AND user_id=' . db_param();
 
@@ -809,6 +820,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  * @return void
  */
 function project_remove_all_users( $p_project_id, $p_access_level_limit = null ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {project_user_list} WHERE project_id = ' . db_param();
 
 	if( $p_access_level_limit !== null ) {

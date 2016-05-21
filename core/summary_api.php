@@ -254,6 +254,7 @@ function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 		return 0;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {bug}
 				WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_submitted', $c_time_length ) . ' AND ' . $t_specific_where;
 	$t_result = db_query( $t_query, array( db_now() ) );
@@ -278,6 +279,7 @@ function summary_resolved_bug_count_by_date( $p_num_days = 1 ) {
 		return 0;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(DISTINCT(b.id))
 				FROM {bug} b
 				LEFT JOIN {bug_history} h
@@ -345,6 +347,7 @@ function summary_print_by_activity() {
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
+	db_param_push();
 	$t_specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $t_specific_where ) {
 		return;
@@ -405,6 +408,7 @@ function summary_print_by_age() {
 	if( ' 1<>1' == $t_specific_where ) {
 		return;
 	}
+	db_param_push();
 	$t_query = 'SELECT * FROM {bug}
 				WHERE status < ' . db_param() . '
 				AND ' . $t_specific_where . '
@@ -565,6 +569,7 @@ function summary_print_by_reporter() {
 
 	foreach( $t_reporters as $t_reporter ) {
 		$v_reporter_id = $t_reporter;
+		db_param_push();
 		$t_query = 'SELECT COUNT(id) as bugcount, status FROM {bug}
 					WHERE reporter_id=' . db_param() . '
 					AND ' . $t_specific_where . '

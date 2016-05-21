@@ -77,6 +77,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	}
 
 	# Add profile
+	db_param_push();
 	$t_query = 'INSERT INTO {user_profile}
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
@@ -102,6 +103,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	}
 
 	# Delete the profile
+	db_param_push();
 	$t_query = 'DELETE FROM {user_profile} WHERE id=' . db_param() . ' AND user_id=' . db_param();
 	db_query( $t_query, array( $p_profile_id, $p_user_id ) );
 }
@@ -140,6 +142,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 	}
 
 	# Add item
+	db_param_push();
 	$t_query = 'UPDATE {user_profile}
 				  SET platform=' . db_param() . ',
 				  	  os=' . db_param() . ',
@@ -156,6 +159,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
  * @return array
  */
 function profile_get_row( $p_user_id, $p_profile_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {user_profile} WHERE id=' . db_param() . ' AND user_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_profile_id, $p_user_id ) );
 
@@ -169,6 +173,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
  * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {user_profile} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_profile_id ) );
 
@@ -182,6 +187,7 @@ function profile_get_row_direct( $p_profile_id ) {
  * @return array
  */
 function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
+	db_param_push();
 	$t_query_where = 'user_id = ' . db_param();
 	$t_param[] = (int)$p_user_id;
 
@@ -235,6 +241,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
+	db_param_push();
 	$t_query = 'SELECT DISTINCT ' . $c_field . '
 				  FROM {user_profile}
 				  WHERE ( user_id=' . db_param() . ' ) OR ( user_id = 0 )
@@ -280,6 +287,7 @@ function profile_get_all_for_project( $p_project_id ) {
  * @return string
  */
 function profile_get_default( $p_user_id ) {
+	db_param_push();
 	$t_query = 'SELECT default_profile FROM {user_pref} WHERE user_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_user_id ) );
 

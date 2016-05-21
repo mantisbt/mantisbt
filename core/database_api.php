@@ -324,7 +324,9 @@ function db_query_bound() {
 /**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
- * This will pop the database parameter stack {@see MantisDbParam} after a successful execution
+ * This will pop the database parameter stack {@see MantisDbParam} after a
+ * successful execution, unless specified otherwise
+ *
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
@@ -332,9 +334,10 @@ function db_query_bound() {
  * @param array   $p_arr_parms Array of parameters matching $p_query.
  * @param integer $p_limit     Number of results to return.
  * @param integer $p_offset    Offset query results for paging.
+ * @param boolean $p_pop_param Set to false to leave the parameters on the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
+function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
 
 	$t_db_type = config_get_global( 'db_type' );
@@ -382,11 +385,10 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 	$p_query = strtr($p_query, array(
 							'{' => $s_prefix,
 							'}' => $s_suffix,
-							'%s' => db_param(),
-							'%d' => db_param(),
-							'%b' => db_param(),
-							'%l' => db_param(),
 							) );
+
+	# Pushing params to safeguard the ADOdb parameter count (required for pgsql)
+	$g_db_param->push();
 
 	if( db_is_oracle() ) {
 		$p_query = db_oracle_adapt_query_syntax( $p_query, $p_arr_parms );
@@ -397,6 +399,9 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 	} else {
 		$t_result = $g_db->Execute( $p_query, $p_arr_parms );
 	}
+
+	# Restore ADOdb parameter count
+	$g_db_param->pop();
 
 	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 
@@ -445,12 +450,16 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
+	# Restore param stack: only pop if asked to AND the query has params
+	if( $p_pop_param && !empty( $p_arr_parms ) ) {
+		$g_db_param->pop();
+	}
+
 	if( !$t_result ) {
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
 	} else {
-		$g_db_param->pop();
 		return $t_result;
 	}
 }
@@ -473,6 +482,19 @@ function db_param() {
 function db_param_push() {
 	global $g_db_param;
 	$g_db_param->push();
+}
+
+/**
+ * Pops the previous parameter count from the stack
+ * It is generally not necessary to call this, because the param count is popped
+ * automatically whenever a query is executed via db_query(). There are some
+ * corner cases when doing it manually makes sense, e.g. when a query is built
+ * but not executed.
+ * @return void
+ */
+function db_param_pop() {
+	global $g_db_param;
+	$g_db_param->pop();
 }
 
 /**

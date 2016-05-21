@@ -671,6 +671,7 @@ function auth_generate_unique_cookie_string() {
  * @access public
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {user} WHERE cookie_string=' . db_param();
 	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
@@ -716,6 +717,7 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
+					db_param_push();
 					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
 					$t_result = db_query( $t_query, array( config_get( 'anonymous_account' ) ) );
 
@@ -877,6 +879,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 
 	# look up cookie in the database to see if it is valid
+	db_param_push();
 	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
 	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
@@ -910,6 +913,7 @@ function auth_get_current_user_id() {
 	}
 
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
+	db_param_push();
 	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
 	$t_result = db_query( $t_query, array( $t_cookie_string ) );
 
