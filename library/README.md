@@ -15,7 +15,7 @@ ezc/Graph       | Zeta Graph      | 1.5.2     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.15    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
-securimage      | PHP Captcha     | 3.6.2     | unpatched [1]
+securimage      | PHP Captcha     | 3.6.4     | unpatched [1]
 
 **Notes**
 
