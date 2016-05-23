@@ -273,6 +273,7 @@ $s_email_summary = 'Samenvatting';
 $s_email_description = 'Beschrijving';
 $s_email_additional_information = 'Extra gegevens';
 $s_email_steps_to_reproduce = 'Stappen om te reproduceren';
+$s_email_tag = 'Labels';
 $s_account_protected_msg = 'De gebruiker is beveiligd. De instellingen kunnen niet worden gewijzigd.';
 $s_account_removed_msg = 'Uw account is verwijderd...';
 $s_confirm_delete_msg = 'Weet u zeker dat u uw account wilt verwijderen?';

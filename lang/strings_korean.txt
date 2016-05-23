@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Asdfqwer51
  * @author Changwoo
  * @author Clever98
  * @author Hong3e
@@ -45,6 +46,7 @@
  * @author Revi
  * @author Wisewolf
  * @author Wtspout
+ * @author Ykhwong
  * @author 고기랑
  * @author 관인생략
  * @author 밥풀떼기
@@ -288,13 +290,14 @@ $s_realname_label = '실명';
 $s_email = '이메일';
 $s_email_label = '이메일';
 $s_password = '비밀번호';
+$s_new_password = '새 비밀번호';
 $s_no_password_change = '비밀번호는 다른 시스템에서 관리하므로 여기서 바꿀 수 없습니다.';
 $s_confirm_password = '비밀번호 확인';
 $s_current_password = '현재 비밀번호';
 $s_access_level = '접근 레벨';
 $s_access_level_label = '접근 레벨';
 $s_update_user_button = '정보 갱신';
-$s_verify_warning = '계정 정보를 확인했습니다. 수신했던 계정 확인 메시지는 이제 무효입니다.';
+$s_verify_warning = '계정 정보가 인증되었습니다.';
 $s_verify_change_password = '다시 로그인하려면 비밀번호를 설정해야 합니다.';
 $s_api_tokens_link = 'API 토큰';
 $s_api_token_create_form_title = 'API 토큰 생성';
@@ -440,7 +443,7 @@ $s_resolution_label = '해결 상태:';
 $s_status = '상태';
 $s_status_label = '상태:';
 $s_duplicate_id = '중복된 이슈 번호';
-$s_os = '운영체제';
+$s_os = '운영 체제';
 $s_os_label = 'OS:';
 $s_projection = '예상 작업량';
 $s_os_version = '버전';
@@ -1208,7 +1211,7 @@ $s_timeline_issue_resolved = '<span class="username">%1$s</span> 이/가 <span c
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> 재발생된 이슈 <span class="issue_id">%2$s</span>';
 $s_timeline_title = '타임라인';
 $s_timeline_more = '더 많은 이벤트...';
-$s_missing_error_string = '에러 문자열이 없음: %1$s';
+$s_missing_error_string = '오류 문자열이 없음: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = '이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL 오류가 발생했습니다.';
 $MANTIS_ERROR[ERROR_REPORT] = '보고에 오류가 있습니다.';
@@ -1269,8 +1272,8 @@ $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP 사용자 갱신 오류.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP 사용자 레코드가 발견되지 않습니다.';
 $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP 확장을 읽어들이지 않았습니다.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = '데이터베이스 연결이 실패했습니다. 데이터베이스에서 받은 오류는 #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '데이타베이스 쿼리 실패. 데이터베이스에서 받은 오류는 #%1$d: %2$s이며 쿼리 내용: %3$s입니다.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '데이타베이스 셀렉션 실패. 데이터베이스로부터 다음과 같은 에러메세지를 수신했습니다. #%1$d: %2$s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = '데이터베이스 쿼리 실패. 데이터베이스에서 받은 오류는 #%1$d: %2$s이며 쿼리 내용: %3$s입니다.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = '데이터베이스 셀렉션 실패. 데이터베이스로부터 다음과 같은 오류를 수신했습니다. #%1$d: %2$s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '해당 이름으로 된 분류가 존재합니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '복사 실행을 지정하지 않았습니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '카테고리를 찾을 수 없습니다.';

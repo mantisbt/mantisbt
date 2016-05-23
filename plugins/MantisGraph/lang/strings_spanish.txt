@@ -42,6 +42,7 @@
  * @author Bithunter
  * @author Crazymadlover
  * @author Locos epraix
+ * @author Macofe
  */
 
 $s_plugin_graph_title = 'Gráficos Mantis';
@@ -91,7 +92,7 @@ $s_plugin_MantisGraph_legend_reported = 'Reportada';
 $s_plugin_MantisGraph_cumulative = 'Acumulado';
 $s_plugin_MantisGraph_not_enough_data = 'No hay suficiente información para crear el gráfico';
 $s_plugin_MantisGraph_period_none = 'Ninguna';
-$s_plugin_MantisGraph_period_this_week = 'Esta Semana';
+$s_plugin_MantisGraph_period_this_week = 'Esta semana';
 $s_plugin_MantisGraph_period_last_week = 'Última Semana';
 $s_plugin_MantisGraph_period_two_weeks = 'Últimas dos Semanas';
 $s_plugin_MantisGraph_period_this_month = 'Este Mes';
@@ -101,7 +102,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Último Trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Lo que va del Año';
 $s_plugin_MantisGraph_period_select = 'Fechas Arbitrarias';
 $s_plugin_MantisGraph_period_last_year = 'Último Año';
-$s_plugin_MantisGraph_select = 'Por favor Seleccione';
+$s_plugin_MantisGraph_select = 'Selecciona';
 $s_plugin_MantisGraph_select_bystatus = 'por Estado';
 $s_plugin_MantisGraph_select_summbystatus = 'Sumario por Estado';
 $s_plugin_MantisGraph_select_bycat = 'Sumario por Categoría';

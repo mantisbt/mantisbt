@@ -49,5 +49,6 @@ $s_plugin_format_process_text = 'معالجة النص';
 $s_plugin_format_process_text_warning_notice = 'لا تقم بإطفائه إلا إذا كنت تعي ما تقوم به. في حالة الإيقاف، بالإمكان حصول هجمات البرمجة النصية (XSS).';
 $s_plugin_format_process_urls = 'معالجة المسار';
 $s_plugin_format_process_buglinks = 'روابط MantisBT ( المشكلة/ملاحظة المشكلة )';
+$s_plugin_format_process_buglinks_info = 'يحدد التكوين الخاص بك وسم <em>المشكلة</em> على أنها "<literal>%s</literal>" و وسم <em>ملاحظة المشكلة</em> على أنها "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'مفعل';
 $s_plugin_format_disabled = 'معطل';
