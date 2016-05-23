@@ -271,7 +271,7 @@ function user_is_email_unique( $p_email, $p_user_id = null ) {
 
 	$p_email = trim( $p_email );
 
-	db_push_param();
+	db_param_push();
 	if ( $p_user_id === null ) {
 		$t_query = 'SELECT email FROM {user} WHERE email=' . db_param();
 		$t_result = db_query( $t_query, array( $p_email ), 1 );
@@ -818,7 +818,7 @@ function user_get_id_by_email( $p_email ) {
  * @return array The user ids or an empty array.
  */
 function user_get_enabled_ids_by_email( $p_email ) {
-	db_push_param();
+	db_param_push();
 	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param() .
 		' AND enabled=' . db_param() . ' ORDER BY access_level DESC';
 	$t_result = db_query( $t_query, array( $p_email, 1 ) );
