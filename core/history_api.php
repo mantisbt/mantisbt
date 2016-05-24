@@ -240,6 +240,11 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
+		# Ignore entries related to non-existing bugs (see #20727)
+		if( !bug_exists( $v_bug_id ) ) {
+			continue;
+		}
+
 		# Make sure the entry belongs to current project.
 		if ( $t_project_id != ALL_PROJECTS && $t_project_id != bug_get_field( $v_bug_id, 'project_id' ) ) {
 			continue;
