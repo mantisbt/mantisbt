@@ -226,7 +226,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 
 /**
  * Gets the next accessible history event for current user and specified db result.
- * @param  string  $p_result      The database result.
+ * @param  object  $p_result      The database result.
  * @param  integer $p_user_id     The user id or null for logged in user.
  * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
  *                                          false otherwise.
