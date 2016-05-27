@@ -647,7 +647,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 	}
 
 	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $p_redirect_url, lang_get( 'proceed' ) );
+	print_bracket_link( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
 	echo '</div>';
 }
 

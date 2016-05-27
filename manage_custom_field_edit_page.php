@@ -73,7 +73,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<legend><span><?php echo lang_get( 'edit_custom_field_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_custom_field_update' ); ?>
 			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-			<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+			<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ); ?>" />
 			<div class="field-container">
 				<label for="custom-field-name"><span><?php echo lang_get( 'custom_field_name' ) ?></span></label>
 				<span class="input"><input type="text" id="custom-field-name" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" /></span>
