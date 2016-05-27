@@ -321,10 +321,11 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
-		echo '<input id="$t_input_id" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<label class="nowrap">';
+		echo '<input id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
-		echo '<label for="' . $t_input_id . '">' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo string_display_line( $t_values[$i] ) . '</label>' . "\n";
 	}
 }
 
@@ -347,10 +348,11 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'];
+		echo '<label class="nowrap">';
 		echo '<input id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_value, $t_values[$i] );
 		echo " />\n";
-		echo '<label for="' . $t_input_id . '">' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo string_display_line( $t_values[$i] ) . '</label>' . "\n";
 	}
 }
 
