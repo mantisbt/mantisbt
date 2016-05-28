@@ -473,6 +473,31 @@ function filter_offset( $p_page_number, $p_per_page ) {
 }
 
 /**
+ * Make sure the filter array contains all the fields. If any field is missing,
+ * create it with a default value.
+ * @param array $p_filter_arr Input filter array
+ * @return array Processed filter array
+ */
+function filter_ensure_fields( array $p_filter_arr ) {
+	# Fill missing filter properties with defaults
+	$t_filter_default = filter_get_default_array();
+	foreach( $t_filter_default as $t_key => $t_default_value ) {
+		if( !isset( $p_filter_arr[$t_key] ) ) {
+			$p_filter_arr[$t_key] = $t_default_value;
+		}
+	}
+
+	# Veryfy custom fields
+	foreach( $t_filter_default['custom_fields'] as $t_cfid => $t_cf_data ) {
+		if( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+			$p_filter_arr['custom_fields'][$t_cfid] = $t_cf_data;
+		}
+	}
+
+	return $p_filter_arr;
+}
+
+/**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.
  * @param array $p_filter_arr A Filter definition.
@@ -480,174 +505,37 @@ function filter_offset( $p_page_number, $p_per_page ) {
  * @todo function needs to be abstracted
  */
 function filter_ensure_valid_filter( array $p_filter_arr ) {
-	# extend current filter to add information passed via POST
-	if( !isset( $p_filter_arr['_version'] ) ) {
-		$p_filter_arr['_version'] = FILTER_VERSION;
-	}
-	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
-	if( substr( FILTER_VERSION, 1 ) > $t_cookie_vers ) {
-		# if the version is old, update it
-		$p_filter_arr['_version'] = FILTER_VERSION;
-	}
-	if( !isset( $p_filter_arr['_view_type'] ) ) {
-		$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, config_get( 'default_limit_view' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = config_get( 'default_show_changed' );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_STICKY] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_STICKY] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = 'DESC';
-	}
+	$p_filter_arr = filter_ensure_fields( $p_filter_arr );
 
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_PLATFORM] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_PLATFORM] = array(
-			0 => (string)META_FILTER_ANY,
-		);
+	$t_view_type = $p_filter_arr['_view_type'];
+	if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+		$t_view_type = 'advanced';
 	}
-
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_OS] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_OS] = array(
-			0 => (string)META_FILTER_ANY,
-		);
+	if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+		$t_view_type = 'simple';
 	}
-
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_OS_BUILD] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_OS_BUILD] = array(
-			0 => (string)META_FILTER_ANY,
-		);
+	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
+		$t_view_type = $f_default_view_type;
 	}
-
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_PROJECT_ID] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_PROJECT_ID] = array(
-			0 => META_FILTER_CURRENT,
-		);
-	}
-
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_MONTH] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_START_MONTH] = gpc_get_string( FILTER_PROPERTY_START_MONTH, date( 'm' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_DAY] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_START_DAY] = gpc_get_string( FILTER_PROPERTY_START_DAY, 1 );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_YEAR] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_START_YEAR] = gpc_get_string( FILTER_PROPERTY_START_YEAR, date( 'Y' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_MONTH] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_END_MONTH] = gpc_get_string( FILTER_PROPERTY_END_MONTH, date( 'm' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_DAY] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_END_DAY] = gpc_get_string( FILTER_PROPERTY_END_DAY, date( 'd' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_YEAR] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_END_YEAR] = gpc_get_string( FILTER_PROPERTY_END_YEAR, date( 'Y' ) );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_SEARCH] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SEARCH] = '';
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, false );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
-	} else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, -1 );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_TAG_STRING] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_TAG_STRING] = gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_TAG_SELECT] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_TAG_SELECT] = gpc_get_string( FILTER_PROPERTY_TAG_SELECT, '' );
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
-	} else {
-		settype( $p_filter_arr[FILTER_PROPERTY_MATCH_TYPE], 'int' );
-	}
-
-	# initialize plugin filters
-	$t_plugin_filters = filter_get_plugin_filters();
-	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-		if( !isset( $p_filter_arr[$t_field_name] ) ) {
-			switch( $t_filter_object->type ) {
-				case FILTER_TYPE_STRING:
-					$p_filter_arr[$t_field_name] = gpc_get_string( $t_field_name, $t_filter_object->default );
-					break;
-
-				case FILTER_TYPE_INT:
-					$p_filter_arr[$t_field_name] = gpc_get_int( $t_field_name, (int)$t_filter_object->default );
-					break;
-
-				case FILTER_TYPE_BOOLEAN:
-					$p_filter_arr[$t_field_name] = gpc_get_bool( $t_field_name, (bool)$t_filter_object->default );
-					break;
-
-				case FILTER_TYPE_MULTI_STRING:
-					$p_filter_arr[$t_field_name] = gpc_get_string_array( $t_field_name, array( 0 => (string)META_FILTER_ANY ) );
-					break;
-
-				case FILTER_TYPE_MULTI_INT:
-					$p_filter_arr[$t_field_name] = gpc_get_int_array( $t_field_name, array( 0 => META_FILTER_ANY ) );
-					break;
-
-				default:
-					$p_filter_arr[$t_field_name] = (string)META_FILTER_ANY;
-			}
-		}
-
-		if( ! $t_filter_object->validate( $p_filter_arr[$t_field_name] ) ) {
-			$p_filter_arr[$t_field_name] = $t_filter_object->default;
-		}
-	}
-
-	$t_custom_fields = custom_field_get_ids();
-
-	# @@@ (thraxisp) This should really be the linked ids, but we don't know the project
-	$f_custom_fields_data = array();
-	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
-		foreach( $t_custom_fields as $t_cfid ) {
-			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
-			} else {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, (string)META_FILTER_ANY );
-				$f_custom_fields_data[$t_cfid] = array(
-					$f_custom_fields_data[$t_cfid],
-				);
-			}
-		}
-	}
+	$p_filter_arr['_view_type'] = $t_view_type;
 
 	# validate sorting
 	$t_fields = helper_get_columns_to_view();
 	$t_n_fields = count( $t_fields );
-	for( $i = 0;$i < $t_n_fields;$i++ ) {
+	for( $i = 0; $i < $t_n_fields; $i++ ) {
 		if( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
 			unset( $t_fields[$i] );
 		}
 	}
 
 	# Make sure array is no longer than 2 elements
-	$t_sort_fields = explode( ',', $p_filter_arr['sort'] );
+	$t_sort_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	if( count( $t_sort_fields ) > 2 ) {
 		$t_sort_fields = array_slice( $t_sort_fields, 0, 2 );
 	}
 
 	# Make sure array is no longer than 2 elements
-	$t_dir_fields = explode( ',', $p_filter_arr['dir'] );
+	$t_dir_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] );
 	if( count( $t_dir_fields ) > 2 ) {
 		$t_dir_fields = array_slice( $t_dir_fields, 0, 2 );
 	}
@@ -676,12 +564,10 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		}
 	}
 	if( count( $t_sort_fields ) > 0 ) {
-		$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
-		$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
-	} else {
-		$p_filter_arr['sort'] = 'last_updated';
-		$p_filter_arr['dir'] = 'DESC';
+		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = implode( ',', $t_sort_fields );
+		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = implode( ',', $t_dir_fields );
 	}
+	# If no sort fields were specified, we already have the default values.
 
 	# validate or filter junk from other fields
 	$t_multi_select_list = array(
@@ -700,58 +586,42 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		FILTER_PROPERTY_TARGET_VERSION => 'string',
 		FILTER_PROPERTY_MONITOR_USER_ID => 'int',
 		FILTER_PROPERTY_PROFILE_ID => 'int',
+		FILTER_PROPERTY_PLATFORM => 'string',
+		FILTER_PROPERTY_OS => 'string',
+		FILTER_PROPERTY_OS_BUILD => 'string',
+		FILTER_PROPERTY_PROJECT_ID => 'int'
 	);
 	foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
-		if( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
-			if( FILTER_PROPERTY_HIDE_STATUS == $t_multi_field_name ) {
-				$p_filter_arr[$t_multi_field_name] = array(
-					config_get( 'hide_status_default' ),
-				);
-			} else if( 'custom_fields' == $t_multi_field_name ) {
-				$p_filter_arr[$t_multi_field_name] = array(
-					$f_custom_fields_data,
-				);
-			} else {
-				$t_val = META_FILTER_ANY;
-				# Ensure the filter property has the right type - see #20087
-				settype( $t_val, $t_multi_field_type );
-				$p_filter_arr[$t_multi_field_name] = array( $t_val );
-			}
-		} else {
-			if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
-				$p_filter_arr[$t_multi_field_name] = array(
-					$p_filter_arr[$t_multi_field_name],
-				);
-			}
-			$t_checked_array = array();
-			foreach( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
-				$t_filter_value = stripslashes( $t_filter_value );
-				if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
-					$t_filter_value = META_FILTER_ANY;
-				}
-				if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
-					$t_filter_value = META_FILTER_NONE;
-				}
-				# Ensure the filter property has the right type - see #20087
-				switch( $t_multi_field_type ) {
-					case 'string' :
-					case 'int' :
-						settype( $t_filter_value, $t_multi_field_type );
-						break;
-				}
-				$t_checked_array[] = $t_filter_value;
-			}
-			$p_filter_arr[$t_multi_field_name] = $t_checked_array;
+		if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
+			$p_filter_arr[$t_multi_field_name] = array(
+				$p_filter_arr[$t_multi_field_name],
+			);
 		}
+		$t_checked_array = array();
+		foreach( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
+			$t_filter_value = stripslashes( $t_filter_value );
+			if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+				$t_filter_value = META_FILTER_ANY;
+			}
+			if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
+				$t_filter_value = META_FILTER_NONE;
+			}
+			# Ensure the filter property has the right type - see #20087
+			switch( $t_multi_field_type ) {
+				case 'string' :
+				case 'int' :
+					settype( $t_filter_value, $t_multi_field_type );
+					break;
+			}
+			$t_checked_array[] = $t_filter_value;
+		}
+		$p_filter_arr[$t_multi_field_name] = $t_checked_array;
 	}
 
+	$t_custom_fields = custom_field_get_ids();
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			if( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
-				$p_filter_arr['custom_fields'][$t_cfid] = array(
-					META_FILTER_ANY,
-				);
-			} else {
+			if( isset( $p_filter_arr['custom_fields'][$t_cfid]) ) {
 				if( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 					$p_filter_arr['custom_fields'][$t_cfid] = array(
 						$p_filter_arr['custom_fields'][$t_cfid],
@@ -775,56 +645,111 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 }
 
 /**
+ * Get a filter array with default values
+ * @return array Filter array with default values
+ */
+function filter_get_default_array() {
+	$t_hide_status_default = config_get( 'hide_status_default' );
+	$t_default_show_changed = config_get( 'default_show_changed' );
+	$t_meta_filter_any_array = array( META_FILTER_ANY );
+	$t_default_view_type = 'simple';
+	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+		$t_default_view_type = 'advanced';
+	}
+
+	$t_filter = array(
+		'_version' => FILTER_VERSION,
+		'_view_type' => $t_default_view_type,
+		FILTER_PROPERTY_CATEGORY_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_SEVERITY => $t_meta_filter_any_array,
+		FILTER_PROPERTY_STATUS => $t_meta_filter_any_array,
+		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_HANDLER_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_PROJECT_ID => array( META_FILTER_CURRENT ),
+		FILTER_PROPERTY_RESOLUTION => $t_meta_filter_any_array,
+		FILTER_PROPERTY_BUILD => $t_meta_filter_any_array,
+		FILTER_PROPERTY_VERSION => $t_meta_filter_any_array,
+		FILTER_PROPERTY_HIDE_STATUS => array( $t_hide_status_default ),
+		FILTER_PROPERTY_MONITOR_USER_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
+		FILTER_PROPERTY_SORT_DIRECTION => 'DESC',
+		FILTER_PROPERTY_ISSUES_PER_PAGE => config_get( 'default_limit_view' ),
+		FILTER_PROPERTY_MATCH_TYPE => FILTER_MATCH_ALL,
+		FILTER_PROPERTY_PLATFORM => $t_meta_filter_any_array,
+		FILTER_PROPERTY_OS => $t_meta_filter_any_array,
+		FILTER_PROPERTY_OS_BUILD => $t_meta_filter_any_array,
+		FILTER_PROPERTY_FIXED_IN_VERSION => $t_meta_filter_any_array,
+		FILTER_PROPERTY_TARGET_VERSION => $t_meta_filter_any_array,
+		FILTER_PROPERTY_PROFILE_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_PRIORITY => $t_meta_filter_any_array,
+		FILTER_PROPERTY_NOTE_USER_ID => $t_meta_filter_any_array,
+		FILTER_PROPERTY_STICKY => gpc_string_to_bool( config_get( 'show_sticky_issues' ) ),
+		FILTER_PROPERTY_FILTER_BY_DATE => false,
+		FILTER_PROPERTY_START_MONTH => date( 'm' ),
+		FILTER_PROPERTY_END_MONTH => date( 'm' ),
+		FILTER_PROPERTY_START_DAY => 1,
+		FILTER_PROPERTY_END_DAY => date( 'd' ),
+		FILTER_PROPERTY_START_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_END_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_SEARCH => '',
+		FILTER_PROPERTY_VIEW_STATE => META_FILTER_ANY,
+		FILTER_PROPERTY_TAG_STRING => '',
+		FILTER_PROPERTY_TAG_SELECT => 0,
+		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
+		FILTER_PROPERTY_RELATIONSHIP_BUG => 0,
+	);
+
+	# initialize plugin filters
+	$t_plugin_filters = filter_get_plugin_filters();
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+			switch( $t_filter_object->type ) {
+				case FILTER_TYPE_STRING:
+					$t_filter[$t_field_name] = $t_filter_object->default;
+					break;
+				case FILTER_TYPE_INT:
+					$t_filter[$t_field_name] = (int)$t_filter_object->default;
+					break;
+				case FILTER_TYPE_BOOLEAN:
+					$t_filter[$t_field_name] = (bool)$t_filter_object->default;
+					break;
+				case FILTER_TYPE_MULTI_STRING:
+					$t_filter[$t_field_name] = array( (string)META_FILTER_ANY );
+					break;
+				case FILTER_TYPE_MULTI_INT:
+					$t_filter[$t_field_name] = array( META_FILTER_ANY );
+					break;
+				default:
+					$t_filter[$t_field_name] = (string)META_FILTER_ANY;
+			}
+
+		if( !$t_filter_object->validate( $t_filter[$t_field_name] ) ) {
+			$t_filter[$t_field_name] = $t_filter_object->default;
+		}
+	}
+
+	$t_custom_fields = custom_field_get_ids();
+	# @@@ (thraxisp) This should really be the linked ids, but we don't know the project
+	$f_custom_fields_data = array();
+	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
+		foreach( $t_custom_fields as $t_cfid ) {
+			$f_custom_fields_data[$t_cfid] = array( (string)META_FILTER_ANY );
+		}
+	}
+	$t_filter['custom_fields'] = $f_custom_fields_data;
+
+	return $t_filter;
+}
+
+/**
  *  Get the standard filter that is to be used when no filter was previously saved.
  *  When creating specific filters, this can be used as a basis for the filter, where
  *  specific entries can be overridden.
  * @return mixed
  */
 function filter_get_default() {
-	$t_hide_status_default = config_get( 'hide_status_default' );
-	$t_default_show_changed = config_get( 'default_show_changed' );
-
-	$t_filter = array(
-		FILTER_PROPERTY_CATEGORY_ID => array(
-			'0' => (string)META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_SEVERITY => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_STATUS => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-		FILTER_PROPERTY_REPORTER_ID => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_HANDLER_ID => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_PROJECT_ID => array(
-			'0' => META_FILTER_CURRENT,
-		),
-		FILTER_PROPERTY_RESOLUTION => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_BUILD => array(
-			'0' => (string)META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_VERSION => array(
-			'0' => (string)META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_HIDE_STATUS => array(
-			'0' => $t_hide_status_default,
-		),
-		FILTER_PROPERTY_MONITOR_USER_ID => array(
-			'0' => META_FILTER_ANY,
-		),
-		FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
-		FILTER_PROPERTY_SORT_DIRECTION => 'DESC',
-		FILTER_PROPERTY_ISSUES_PER_PAGE => config_get( 'default_limit_view' ),
-		FILTER_PROPERTY_MATCH_TYPE => FILTER_MATCH_ALL
-	);
-
+	# Create empty array, validation will fill it with defaults
+	$t_filter = array();
 	return filter_ensure_valid_filter( $t_filter );
 }
 
@@ -5185,4 +5110,219 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	}
 
 	return filter_ensure_valid_filter( $t_filter );
+}
+
+/**
+ * Performs the reading of parameters from get/post.
+ * If a filter array is passed as parameter, the read parameters will be appended,
+ * or everride existing ones.
+ * If no filter array is used as parameter, a default one will be used.
+ * @param array $p_filter An existing filter array
+ * @return array The resulting filter array
+ */
+function filter_gpc_get( array $p_filter = null ) {
+	if( null === $p_filter ) {
+		$t_filter = filter_get_default_array();
+	} else {
+		$t_filter = filter_ensure_fields( $p_filter );
+	}
+
+	$f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
+
+	# these are all possibly multiple selections for advanced filtering
+	# If a single value is provided, it will be normalized to an array with 'filter_ensure_valid_filter()'
+
+	$f_show_category = gpc_get( FILTER_PROPERTY_CATEGORY_ID, $t_filter[FILTER_PROPERTY_CATEGORY_ID] );
+	$f_platform = gpc_get( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] );
+	$f_os = gpc_get( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
+	$f_os_build = gpc_get( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
+	$f_show_severity = gpc_get( FILTER_PROPERTY_SEVERITY, $t_filter[FILTER_PROPERTY_SEVERITY] );
+	$f_show_status = gpc_get( FILTER_PROPERTY_STATUS, $t_filter[FILTER_PROPERTY_STATUS] );
+	$f_hide_status = gpc_get( FILTER_PROPERTY_HIDE_STATUS, $t_filter[FILTER_PROPERTY_HIDE_STATUS] );
+	$f_reporter_id = gpc_get( FILTER_PROPERTY_REPORTER_ID, $t_filter[FILTER_PROPERTY_REPORTER_ID] );
+	$f_handler_id = gpc_get( FILTER_PROPERTY_HANDLER_ID, $t_filter[FILTER_PROPERTY_HANDLER_ID] );
+	$f_project_id = gpc_get( FILTER_PROPERTY_PROJECT_ID, $t_filter[FILTER_PROPERTY_PROJECT_ID] );
+	$f_show_resolution = gpc_get( FILTER_PROPERTY_RESOLUTION, $t_filter[FILTER_PROPERTY_RESOLUTION] );
+	$f_show_build = gpc_get( FILTER_PROPERTY_BUILD, $t_filter[FILTER_PROPERTY_BUILD] );
+	$f_show_version = gpc_get( FILTER_PROPERTY_VERSION, $t_filter[FILTER_PROPERTY_VERSION] );
+	$f_fixed_in_version = gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION] );
+	$f_target_version = gpc_get( FILTER_PROPERTY_TARGET_VERSION, $t_filter[FILTER_PROPERTY_TARGET_VERSION] );
+	$f_show_profile = gpc_get( FILTER_PROPERTY_PROFILE_ID, $t_filter[FILTER_PROPERTY_PROFILE_ID] );
+	$f_show_priority = gpc_get( FILTER_PROPERTY_PRIORITY, $t_filter[FILTER_PROPERTY_PRIORITY] );
+	$f_user_monitor = gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+	$f_note_user_id = gpc_get( FILTER_PROPERTY_NOTE_USER_ID, $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+
+	$f_match_type = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, $t_filter[FILTER_PROPERTY_MATCH_TYPE] );
+
+	# these are only single values, even when doing advanced filtering
+	$f_per_page				= gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+	$f_highlight_changed	= gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
+	$f_sticky_issues		= gpc_get_bool( FILTER_PROPERTY_STICKY, $t_filter[FILTER_PROPERTY_STICKY] );
+
+	# sort direction
+	$f_sort_d				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, '' );
+	$f_dir_d				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, '' );
+	$f_sort_0				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_0', 'last_updated' );
+	$f_dir_0				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_0', 'DESC' );
+	$f_sort_1				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_1', '' );
+	$f_dir_1				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
+
+	# combine sort settings
+	#  (f_sort overrides f_sort_1 if set to keep old sorting code working in view_all_bug_inc)
+	$f_sort = ( ( $f_sort_d != '' ) ? $f_sort_d : $f_sort_0 ) . ( ( $f_sort_1 != '' ) ? ',' . $f_sort_1 : '' );
+	$f_dir = ( ( $f_dir_d != '' ) ? $f_dir_d : $f_dir_0 ) . ( ( $f_dir_1 != '' ) ? ',' . $f_dir_1 : '' );
+
+	# date values
+	$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
+	$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_MONTH, $t_filter[FILTER_PROPERTY_START_MONTH] );
+	$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_MONTH, $t_filter[FILTER_PROPERTY_END_MONTH] );
+	$f_start_day			= gpc_get_int( FILTER_PROPERTY_START_DAY, $t_filter[FILTER_PROPERTY_START_DAY] );
+	$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_DAY, $t_filter[FILTER_PROPERTY_END_DAY] );
+	$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_YEAR, $t_filter[FILTER_PROPERTY_START_YEAR] );
+	$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, $t_filter[FILTER_PROPERTY_END_YEAR] );
+	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
+	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
+
+	$f_tag_string			= gpc_get_string( FILTER_PROPERTY_TAG_STRING, $t_filter[FILTER_PROPERTY_TAG_STRING] );
+	$f_tag_select			= gpc_get_int( FILTER_PROPERTY_TAG_SELECT, $t_filter[FILTER_PROPERTY_TAG_SELECT] );
+
+	# plugin filter updates
+	$t_plugin_filters = filter_get_plugin_filters();
+	$t_filter_input = array();
+
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		switch( $t_filter_object->type ) {
+			case FILTER_TYPE_STRING:
+				$t_filter_input[$t_field_name] = gpc_get_string( $t_field_name, $t_filter[$t_field_name] );
+				break;
+
+			case FILTER_TYPE_INT:
+				$t_filter_input[$t_field_name] = gpc_get_int( $t_field_name, $t_filter[$t_field_name] );
+				break;
+
+			case FILTER_TYPE_BOOLEAN:
+				$t_filter_input[$t_field_name] = gpc_get_bool( $t_field_name, $t_filter[$t_field_name]);
+				break;
+
+			case FILTER_TYPE_MULTI_STRING:
+				$t_filter_input[$t_field_name] = gpc_get_string_array( $t_field_name, $t_filter[$t_field_name] );
+				break;
+
+			case FILTER_TYPE_MULTI_INT:
+				$t_filter_input[$t_field_name] = gpc_get_int_array( $t_field_name, $t_filtert[$t_field_name] );
+				break;
+		}
+	}
+
+	# custom field updates
+	$t_custom_fields 		= custom_field_get_ids(); # @todo (thraxisp) This should really be the linked ids, but we don't know the project
+	$f_custom_fields_data 	= array();
+	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
+		foreach( $t_custom_fields as $t_cfid ) {
+			if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
+				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
+
+				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null );
+				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null );
+				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null );
+				$t_start_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
+
+				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null );
+				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null );
+				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null );
+				$t_end_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
+
+				$f_custom_fields_data[$t_cfid] = array();
+				$f_custom_fields_data[$t_cfid][0] = $t_control;
+				$t_start = 1;
+				$t_end = 1;
+				$t_one_day = 86399;
+
+				switch( $t_control ) {
+					case CUSTOM_FIELD_DATE_ANY:
+					case CUSTOM_FIELD_DATE_NONE:
+						break ;
+					case CUSTOM_FIELD_DATE_BETWEEN:
+						$t_start = $t_start_date;
+						$t_end = $t_end_date + $t_one_day - 1;
+						break ;
+					case CUSTOM_FIELD_DATE_ONORBEFORE:
+						$t_end = $t_start_date + $t_one_day - 1;
+						break;
+					case CUSTOM_FIELD_DATE_BEFORE:
+						$t_end = $t_start_date;
+						break ;
+					case CUSTOM_FIELD_DATE_ON:
+						$t_start = $t_start_date;
+						$t_end = $t_start_date + $t_one_day - 1;
+						break;
+					case CUSTOM_FIELD_DATE_AFTER:
+						$t_start = $t_start_date + $t_one_day - 1;
+						$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+						break;
+					case CUSTOM_FIELD_DATE_ONORAFTER:
+						$t_start = $t_start_date;
+						$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+						break;
+				}
+				$f_custom_fields_data[$t_cfid][1] = $t_start;
+				$f_custom_fields_data[$t_cfid][2] = $t_end;
+			} else {
+				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
+				} else {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
+					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+				}
+			}
+		}
+	}
+
+	$f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+
+	log_event( LOG_FILTERING, 'filter_gpc_get: Update filters' );
+	$t_filter_input['_version'] 								= $t_cookie_version;
+	$t_filter_input['_view_type'] 							= $f_view_type;
+	$t_filter_input[FILTER_PROPERTY_CATEGORY_ID] 			= $f_show_category;
+	$t_filter_input[FILTER_PROPERTY_SEVERITY] 				= $f_show_severity;
+	$t_filter_input[FILTER_PROPERTY_STATUS] 					= $f_show_status;
+	$t_filter_input[FILTER_PROPERTY_ISSUES_PER_PAGE] 		= $f_per_page;
+	$t_filter_input[FILTER_PROPERTY_HIGHLIGHT_CHANGED] 		= $f_highlight_changed;
+	$t_filter_input[FILTER_PROPERTY_REPORTER_ID] 			= $f_reporter_id;
+	$t_filter_input[FILTER_PROPERTY_HANDLER_ID] 				= $f_handler_id;
+	$t_filter_input[FILTER_PROPERTY_PROJECT_ID] 				= $f_project_id;
+	$t_filter_input[FILTER_PROPERTY_SORT_FIELD_NAME] 		= $f_sort;
+	$t_filter_input[FILTER_PROPERTY_SORT_DIRECTION] 			= $f_dir;
+	$t_filter_input[FILTER_PROPERTY_START_MONTH] 			= $f_start_month;
+	$t_filter_input[FILTER_PROPERTY_START_DAY] 				= $f_start_day;
+	$t_filter_input[FILTER_PROPERTY_START_YEAR] 				= $f_start_year;
+	$t_filter_input[FILTER_PROPERTY_END_MONTH] 				= $f_end_month;
+	$t_filter_input[FILTER_PROPERTY_END_DAY] 				= $f_end_day;
+	$t_filter_input[FILTER_PROPERTY_END_YEAR] 				= $f_end_year;
+	$t_filter_input[FILTER_PROPERTY_SEARCH] 					= $f_search;
+	$t_filter_input[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
+	$t_filter_input[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
+	$t_filter_input[FILTER_PROPERTY_BUILD] 					= $f_show_build;
+	$t_filter_input[FILTER_PROPERTY_VERSION] 				= $f_show_version;
+	$t_filter_input[FILTER_PROPERTY_FILTER_BY_DATE] 			= $f_do_filter_by_date;
+	$t_filter_input[FILTER_PROPERTY_FIXED_IN_VERSION] 		= $f_fixed_in_version;
+	$t_filter_input[FILTER_PROPERTY_TARGET_VERSION] 			= $f_target_version;
+	$t_filter_input[FILTER_PROPERTY_PRIORITY] 				= $f_show_priority;
+	$t_filter_input[FILTER_PROPERTY_MONITOR_USER_ID] 		= $f_user_monitor;
+	$t_filter_input[FILTER_PROPERTY_VIEW_STATE] 				= $f_view_state;
+	$t_filter_input['custom_fields'] 						= $f_custom_fields_data;
+	$t_filter_input[FILTER_PROPERTY_STICKY] 					= $f_sticky_issues;
+	$t_filter_input[FILTER_PROPERTY_RELATIONSHIP_TYPE] 		= $f_relationship_type;
+	$t_filter_input[FILTER_PROPERTY_RELATIONSHIP_BUG] 		= $f_relationship_bug;
+	$t_filter_input[FILTER_PROPERTY_PROFILE_ID] 				= $f_show_profile;
+	$t_filter_input[FILTER_PROPERTY_PLATFORM] 				= $f_platform;
+	$t_filter_input[FILTER_PROPERTY_OS] 						= $f_os;
+	$t_filter_input[FILTER_PROPERTY_OS_BUILD] 				= $f_os_build;
+	$t_filter_input[FILTER_PROPERTY_TAG_STRING] 				= $f_tag_string;
+	$t_filter_input[FILTER_PROPERTY_TAG_SELECT] 				= $f_tag_select;
+	$t_filter_input[FILTER_PROPERTY_NOTE_USER_ID] 			= $f_note_user_id;
+	$t_filter_input[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
+
+	return filter_ensure_valid_filter( $t_filter_input );
 }
