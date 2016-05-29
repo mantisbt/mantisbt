@@ -94,7 +94,12 @@ function table_print_filter_row( $p_filter_id ) {
 	# Filter name
 	echo '<td>';
 	$t_name = string_display( filter_get_field( $p_filter_id, 'name' ) );
-	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
+	if( $t_editable ) {
+		print_link( 'manage_filter_edit_page.php?filter_id=' . $p_filter_id, $t_name );
+	} else {
+		# If the user can't edit the filter, follow to filter view page, where he can modify and apply as current filter
+		print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
+	}
 	echo '</td>';
 	# Filter use
 	echo '<td>';

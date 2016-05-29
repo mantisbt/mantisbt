@@ -1268,6 +1268,11 @@ $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this filter?';
 $s_edit_filter = "Edit Filter";
 $s_owner = "Owner";
+$s_update_filter = 'Update filter';
+$s_filter_access = 'Filter access';
+$s_filter_visibility = 'Filter visibility';
+$s_current_project = 'Current project';
+$s_stored_project = 'Stored project';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';

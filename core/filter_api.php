@@ -797,6 +797,18 @@ function filter_deserialize( $p_serialized_filter ) {
 }
 
 /**
+ * Creates a serialized filter with the correct format
+ * @param type $p_filter_array Filter array to be serialized
+ * @return string Serialized filter string
+ */
+function filter_serialize( $p_filter_array ) {
+	$t_cookie_version = FILTER_VERSION;
+	$t_settings_serialized = json_encode( $p_filter_array );
+	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
+	return $t_settings_string;
+}
+
+/**
  * Check if the filter cookie exists and is of the correct version.
  * @return boolean
  */
@@ -4844,6 +4856,38 @@ function filter_clear_cache( $p_filter_id = null ) {
 }
 
 /**
+ * Update a filter identified by its id
+ * Some parameters are optional and only will be updated if provided
+ * Note that values are not validated
+ * @param int $p_filter_id Filter id
+ * @param string $p_filter_string Filter string in custom serialized format
+ * @param int $p_project_id
+ * @param bool $p_is_public
+ * @param string $p_name
+ */
+function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id = null, $p_is_public = null, $p_name = null ) {
+	db_param_push();
+	$t_params = array();
+	$t_query = 'UPDATE {filters} SET filter_string=' . db_param();
+	$t_params[] = $p_filter_string;
+	if( null !== $p_project_id ) {
+		$t_query .= ', project_id=' . db_param();
+		$t_params[] = (int)$p_project_id;
+	}
+	if( null !== $p_is_public ) {
+		$t_query .= ', is_public=' . db_param();
+		$t_params[] = (bool)$p_is_public;
+	}
+	if( null !== $p_name ) {
+		$t_query .= ', name=' . db_param();
+		$t_params[] = $p_name;
+	}
+	$t_query .= ' WHERE id=' . db_param();
+	$t_params[] = (int)$p_filter_id;
+	db_query( $t_query, $t_params );
+}
+
+/**
  * Add a filter to the database for the current user
  * @param integer $p_project_id    Project id.
  * @param boolean $p_is_public     Whether filter is public or private.
@@ -5400,7 +5444,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
 
 	log_event( LOG_FILTERING, 'filter_gpc_get: Update filters' );
-	$t_filter_input['_version'] 								= $t_cookie_version;
+	$t_filter_input['_version'] 								= FILTER_VERSION;
 	$t_filter_input['_view_type'] 							= $f_view_type;
 	$t_filter_input[FILTER_PROPERTY_CATEGORY_ID] 			= $f_show_category;
 	$t_filter_input[FILTER_PROPERTY_SEVERITY] 				= $f_show_severity;
