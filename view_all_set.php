@@ -151,7 +151,6 @@ if( !is_blank( $t_view_all_cookie ) ) {
 	$f_type = 1;
 }
 
-$t_cookie_version = FILTER_VERSION;
 $t_default_show_changed = config_get( 'default_show_changed' );
 
 # Clear the source query id.  Since we have entered new filter criteria.
@@ -264,8 +263,7 @@ if( $f_view_type == 'simple' && $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] >
 	}
 }
 
-$t_settings_serialized = json_encode( $t_setting_arr );
-$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
+$t_settings_string = filter_serialize( $t_setting_arr );
 
 # If only using a temporary filter, don't store it in the database
 if( !$f_temp_filter ) {
