@@ -2392,11 +2392,16 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		$t_dynamic_filter_expander_class = '';
 	}
 
-	$print_field_header = function ( $p_url, $p_id, $p_label ) use ( $p_static, $t_dynamic_filter_expander_class ) {
+	$print_field_header = function ( $p_url, $p_id, $p_label ) use ( $p_static, $t_filter, $t_dynamic_filter_expander_class ) {
 		if( $p_static) {
 			echo $p_label;
 		} else {
-			echo '<a href="' . $p_url . '" id="' . $p_id . '"' . $t_dynamic_filter_expander_class . '>' . $p_label . '</a>';
+			if( isset( $t_filter['_source_query_id'] ) ) {
+				$t_data_filter_id = ' data-filter_id="' . $t_filter['_source_query_id'] . '"';
+			} else {
+				$t_data_filter_id = '';
+			}
+			echo '<a href="' . $p_url . '" id="' . $p_id . '"' . $t_dynamic_filter_expander_class . $t_data_filter_id . '>' . $p_label . '</a>';
 		}
 	}
 

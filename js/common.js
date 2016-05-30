@@ -75,12 +75,17 @@ $(document).ready( function() {
 	$('a.dynamic-filter-expander').click(function(event) {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
+		var filter_id = $(this).data('filter_id');
 		var targetID = fieldID + '_target';
 		var viewType = $('#filters_form_open input[name=view_type]').val();
 		$('#' + targetID).html('<span class="dynamic-filter-loading">' + translations['loading'] + "</span>");
+		var params = 'view_type=' + viewType + '&filter_target=' + fieldID;
+		if( undefined !== filter_id ) {
+			params += '&filter_id=' + filter_id;
+		}
 		$.ajax({
 			url: 'return_dynamic_filters.php',
-			data: 'view_type=' + viewType + '&filter_target=' + fieldID,
+			data: params,
 			cache: false,
 			context: $('#' + targetID),
 			success: function(html) {
