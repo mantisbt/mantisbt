@@ -83,11 +83,6 @@ if( null === $f_filter_id ) {
 
 filter_init( $t_filter );
 
-$t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]' );
-if( !isset( $t_filter[$t_target_field] ) ) {
-	$t_target_field = '';
-}
-
 /*
  * @TODO clean this code
  * $t_accessible_custom_fields_* are used as globals by filter api !!
@@ -131,10 +126,6 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 	}
-}
-
-if( !in_array( $t_target_field, $t_fields ) ) {
-	$t_target_field = '';
 }
 
 $f_for_screen = gpc_get_bool( 'for_screen', true );
@@ -194,7 +185,7 @@ $f_static = gpc_get_bool( 'static', false );
 
 		<div class="section-link">
 			<?php
-			$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&static=' . $f_static . '&view_type=';
+			$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
 				if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 					if( 'advanced' == $f_view_type ) {
 						print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
