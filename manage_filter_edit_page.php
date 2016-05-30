@@ -77,6 +77,7 @@ if( !$t_filter_string ) {
 	access_denied();
 } else {
 	$t_filter = filter_deserialize( $t_filter_string );
+	$t_filter['_source_query_id'] = $f_filter_id;
 	filter_cache_row( $f_filter_id );
 }
 filter_init( $t_filter );
