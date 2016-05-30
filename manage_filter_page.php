@@ -70,13 +70,13 @@ function table_print_filter_headers() {
 ?>
 	<thead>
 		<tr class="row-category">
-			<td></td>
 			<td><?php echo lang_get( 'query_name' ) ?></td>
 			<td></td>
 			<td><?php echo lang_get( 'rss' ) ?></td>
 			<td><?php echo lang_get( 'project_name' ) ?></td>
 			<td><?php echo lang_get( 'public' ) ?></td>
 			<td><?php echo lang_get( 'owner' ) ?></td>
+			<td><?php echo lang_get( 'actions' ) ?></td>
 		</tr>
 	</thead>
 <?php
@@ -85,12 +85,6 @@ function table_print_filter_headers() {
 function table_print_filter_row( $p_filter_id ) {
 	$t_editable = filter_db_can_delete_filter( $p_filter_id );
 	echo '<tr>';
-	# checkbox
-	echo '<td class="center">';
-	if( $t_editable ) {
-		echo '<input type="checkbox" />';
-	}
-	echo '</td>';
 	# Filter name
 	echo '<td>';
 	$t_name = string_display( filter_get_field( $p_filter_id, 'name' ) );
@@ -115,6 +109,12 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '<td class="center">' . ( filter_get_field( $p_filter_id, 'is_public' ) ? 'X' : '' ) . '</td>';
 	# Owner
 	echo '<td class="center">' . user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) . '</td>';
+	# Actions
+	echo '<td class="center">';
+	if( $t_editable ) {
+		print_button( 'manage_filter_delete.php', lang_get( 'delete_query' ), array( 'filter_id' =>  $p_filter_id ) );
+	}
+	echo '</td>';
 	echo '</tr>';
 }
 
