@@ -58,8 +58,22 @@ if( !auth_is_user_authenticated() ) {
 
 compress_enable();
 
-$t_filter = current_user_get_bug_filter();
+$f_filter_id = gpc_get( 'filter_id', null );
+if( null === $f_filter_id ) {
+	$t_filter = current_user_get_bug_filter();
+} else {
+	$c_filter_id = (int)$f_filter_id;
+	$t_filter_string = filter_db_get_filter( $c_filter_id );
+	if( !$t_filter_string ) {
+		trigger_error( ERROR_ACCESS_DENIED, ERROR );
+	} else {
+		$t_filter = filter_deserialize( $t_filter_string );
+		$t_filter['_source_query_id'] = $f_filter_id;
+		filter_cache_row( $c_filter_id );
+	}
+}
 filter_init( $t_filter );
+
 
 global $g_select_modifier;
 
