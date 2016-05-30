@@ -61,7 +61,7 @@ require_api( 'version_api.php' );
 
 auth_ensure_user_authenticated();
 
-html_page_top();
+html_page_top( lang_get( 'manage_filter_edit_page_title' ) );
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {

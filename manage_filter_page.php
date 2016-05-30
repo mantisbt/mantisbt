@@ -49,7 +49,7 @@ require_api( 'rss_api.php' );
 
 auth_ensure_user_authenticated();
 
-html_page_top( 'MANAGE FILTER PAGE' );
+html_page_top( lang_get('manage_filter_page_title' ) );
 
 $t_project_id = helper_get_current_project();
 $t_user_id = auth_get_current_user_id();
@@ -73,7 +73,7 @@ function table_print_filter_headers() {
 			<td><?php echo lang_get( 'query_name' ) ?></td>
 			<td></td>
 			<td><?php echo lang_get( 'rss' ) ?></td>
-			<td><?php echo lang_get( 'project_name' ) ?></td>
+			<td><?php echo lang_get( 'filter_visibility' ) ?></td>
 			<td><?php echo lang_get( 'public' ) ?></td>
 			<td><?php echo lang_get( 'owner' ) ?></td>
 			<td><?php echo lang_get( 'actions' ) ?></td>
@@ -152,7 +152,7 @@ function table_print_filters( array $p_filter_array ) {
 		</ul>
 	</div>
 */ ?>
-	<h2>AVAILABLE FILTERS for project: <?php echo project_get_name( $t_project_id ) ?></h2>
+	<h2><?php echo lang_get( 'available_filter_for_project' ) . ': ' . project_get_name( $t_project_id ) ?></h2>
 	<?php
 		if( count( $t_filter_ids_available ) > 0 ) {
 			table_print_filters( $t_filter_ids_available );
