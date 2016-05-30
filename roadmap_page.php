@@ -109,7 +109,7 @@ function print_version_header( array $p_version_row ) {
 
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
-	echo '<div class="pull-left"><i class="fa fa-clock-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+	echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
 	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
