@@ -2147,7 +2147,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 	<div class="manage-queries">
-		<form method="post" name="open_queries" action="query_view_page.php">
+		<form method="post" name="open_queries" action="manage_filter_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="switch_to_query_button" class="button-small" value="<?php echo lang_get( 'open_queries' )?>" />
 		</form>
