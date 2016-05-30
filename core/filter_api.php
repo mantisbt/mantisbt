@@ -2395,12 +2395,9 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 		foreach( $t_custom_fields as $t_cfid ) {
-			$t_field_info = custom_field_cache_row( $t_cfid, true );
+			$t_field_info = custom_field_get_definition( $t_cfid );
 			if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by'] ) {
 				$t_accessible_custom_fields_ids[] = $t_cfid;
-				$t_accessible_custom_fields_names[] = $t_field_info['name'];
-				$t_accessible_custom_fields_types[] = $t_field_info['type'];
-				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info );
 			}
 		}
 
@@ -2962,17 +2959,54 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		}
 
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
-
 			# -- Custom Field Searching --
 
-			if( count( $t_accessible_custom_fields_ids ) > 0 ) {
+			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+			$t_accessible_custom_fields = array();
+			foreach( $t_custom_fields as $t_cfid ) {
+				$t_cfdef = custom_field_get_definition( $t_cfid );
+				if( $t_cfdef['access_level_r'] <= $t_current_user_access_level && $t_cfdef['filter_by'] ) {
+					$t_accessible_custom_fields[] = $t_cfdef;
+				}
+			}
+			
+			if( !empty( $t_accessible_custom_fields ) ) {
 				$t_per_row = config_get( 'filter_custom_fields_per_row' );
-				$t_num_fields = count( $t_accessible_custom_fields_ids );
+				$t_num_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 				$t_row_idx = 0;
 				$t_col_idx = 0;
+				
+				$t_header_contents = array();
+				$t_values_contents = array();
+				
+				foreach( $t_accessible_custom_fields as $t_cfdef ) {
+					# Generate header
+					ob_start();
+					$print_field_header( 'custom_field_' . $t_cfdef['id'] . '_filter', string_display_line( lang_get_defaulted( $t_cfdef['name'] ) ) );
+					$t_header = ob_get_clean();
+					# Generate values
+					if( $p_static ) {
+						ob_start();
+						print_filter_custom_field( $t_cfdef['id'] );
+						$t_values = ob_get_clean();
+					} else {
+						ob_start();
+						print_filter_values_custom_field( $t_filter, $t_cfdef['id'] );
+						$t_values = ob_get_clean();
+					}
+					$t_header_contents[$t_cfdef['id']] = $t_header;
+					$t_values_contents[$t_cfdef['id']] = $t_values;
+				}
+			}
 
-				$t_fields = '';
-				$t_values = '';
+			if( count( $t_accessible_custom_fields_ids ) > 0 ) {
+				//$t_per_row = config_get( 'filter_custom_fields_per_row' );
+				//$t_num_fields = count( $t_accessible_custom_fields_ids );
+				//$t_row_idx = 0;
+				//$t_col_idx = 0;
+
+				//$t_fields = '';
+				//$t_values = '';
 
 				for( $i = 0;$i < $t_num_fields;$i++ ) {
 					if( $t_col_idx == 0 ) {
@@ -4538,52 +4572,146 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 }
 
 /**
- * print custom fields
- * @param integer $p_field_id Custom field identifier.
- * @return void
+ * Print the current value of custom field, as visible string, and as a hidden form input.
+ * @param type $p_filter	Filter array to use
+ * @param type $p_field_id	Custom field id
+ * @return type
+ */
+function print_filter_values_custom_field( $p_filter, $p_field_id ) {
+	if( CUSTOM_FIELD_TYPE_DATE == custom_field_type( $p_field_id ) ) {
+		print_filter_values_custom_field_date( $p_filter, $p_field_id );
+		return;
+	}
+
+	if( isset( $p_filter['custom_fields'][$p_field_id] ) ) {
+		$t_values = $p_filter['custom_fields'][$p_field_id];
+	} else {
+		$t_values = array();
+	}
+	$t_strings = array();
+	$t_inputs = array();
+
+	if( filter_field_is_any( $t_values ) ) {
+		$t_strings[] = lang_get( 'any' );
+	} else {
+		foreach( $t_values as $t_val ) {
+			$t_val = stripslashes( $t_val );
+			if( filter_field_is_none( $t_val ) ) {
+				$t_strings[] = lang_get( 'none' );
+			} else {
+				$t_strings[] = $t_val;
+			}
+			$t_inputs[] = '<input type="hidden" name="custom_field_' . $p_field_id . '[]" value="' . string_attribute( $t_val ) . '" />';
+		}
+	}
+
+	echo implode( '<br>', $t_strings );
+	echo implode( '', $t_inputs );
+}
+
+/**
+ * Print the current value of this filter field (for a date type field), as visible string,
+ * and as a hidden form input.
+ * @param type $p_filter	Filter array to use
+ * @param type $p_field_id	Custom field id
+ */
+function print_filter_values_custom_field_date( $p_filter, $p_field_id ) {
+	$t_short_date_format = config_get( 'short_date_format' );
+	if( !isset( $p_filter['custom_fields'][$p_field_id][1] ) ) {
+		$p_filter['custom_fields'][$p_field_id][1] = 0;
+	}
+	$t_start = date( $t_short_date_format, $p_filter['custom_fields'][$p_field_id][1] );
+
+	if( !isset( $p_filter['custom_fields'][$p_field_id][2] ) ) {
+		$p_filter['custom_fields'][$p_field_id][2] = 0;
+	}
+	$t_end = date( $t_short_date_format, $p_filter['custom_fields'][$p_field_id][2] );
+	switch( $p_filter['custom_fields'][$p_field_id][0] ) {
+		case CUSTOM_FIELD_DATE_ANY:
+			echo lang_get( 'any' );
+			break;
+		case CUSTOM_FIELD_DATE_NONE:
+			echo lang_get( 'none' );
+			break;
+		case CUSTOM_FIELD_DATE_BETWEEN:
+			echo lang_get( 'between_date' ) . '<br>';
+			echo $t_start . '<br>' . $t_end;
+			break;
+		case CUSTOM_FIELD_DATE_ONORBEFORE:
+			echo lang_get( 'on_or_before_date' ) . '<br>';
+			echo $t_end;
+			break;
+		case CUSTOM_FIELD_DATE_BEFORE:
+			echo lang_get( 'before_date' ) . '<br>';
+			echo $t_end;
+			break;
+		case CUSTOM_FIELD_DATE_ON:
+			echo lang_get( 'on_date' ) . '<br>';
+			echo $t_start;
+			break;
+		case CUSTOM_FIELD_DATE_AFTER:
+			echo lang_get( 'after_date' ) . '<br>';
+			echo $t_start;
+			break;
+		case CUSTOM_FIELD_DATE_ONORAFTER:
+			echo lang_get( 'on_or_after_date' ) . '<br>';
+			echo $t_start;
+			break;
+	}
+}
+
+
+/**
+ * Print custom field input list.
+ * This function does not validates permissions
+ * @global type $g_filter
+ * @global type $g_select_modifier
+ * @param type $p_field_id	Custom field id
  */
 function print_filter_custom_field( $p_field_id ) {
-	global $g_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $g_select_modifier;
-
-	$j = array_search( $p_field_id, $t_accessible_custom_fields_ids );
-	if( $j === null || $j === false ) {
-		?>
-			<span style="color:red;font-weight:bold;">
-				unknown custom filter (custom <?php echo $p_field_id;?>)
-			</span>
-		<?php
-	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
-		if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE ) {
-			print_filter_custom_field_date( $j, $p_field_id );
-		} else if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
-			echo '<input type="text" name="custom_field_', $p_field_id, '" size="10" value="" />';
-		} else {
+	global $g_filter, $g_select_modifier;
+	
+	$t_cfdef = custom_field_get_definition( $p_field_id );
+	
+	switch( $t_cfdef['type'] ) {
+		case CUSTOM_FIELD_TYPE_DATE:
+			print_filter_custom_field_date( $p_field_id );
+			break;
+		
+		case CUSTOM_FIELD_TYPE_TEXTAREA:
+			echo '<input type="text" name="custom_field_', $p_field_id, '" size="10" value="" >';
+			break;
+		
+		default:
 			echo '<select' . $g_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
+			# Option META_FILTER_ANY
 			echo '<option value="' . META_FILTER_ANY . '"';
 			check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
-
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
+			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
-			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
+			# Print possible values
+			$t_values = custom_field_distinct_values( $t_cfdef );
+			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
-				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
-						echo '<option value="' . string_attribute( $t_item ) . '"';
-						if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
-							check_selected( $g_filter['custom_fields'][$p_field_id], $t_item, false );
-						}
-						echo '>' . string_attribute( string_shorten( $t_item, $t_max_length ) ) . '</option>' . "\n";
+				foreach( $t_values as $t_val ) {
+					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {
+						continue;
 					}
+					echo '<option value="' . string_attribute( $t_item ) . '"';
+					if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
+						check_selected( $g_filter['custom_fields'][$p_field_id], $t_val, false );
+					}
+					echo '>' . string_attribute( string_shorten( $t_val, $t_max_length ) ) . '</option>';
 				}
 			}
 			echo '</select>';
-		}
-	}
+			break;
+	}	
 }
 
 /**
@@ -4693,27 +4821,28 @@ function print_filter_show_sort() {
 
 /**
  * Print custom field date fields
- * @param integer $p_field_num Field number.
- * @param integer $p_field_id  Field identifier.
- * @return void
+ * @global type $g_filter
+ * @param integer $p_field_id  Custom field identifier.
  */
-function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
-	global $g_filter, $t_accessible_custom_fields_values;
-
+function print_filter_custom_field_date( $p_field_id ) {
+	global $g_filter;
+	$t_cfdef = custom_field_get_definition( $p_field_id );
+	$t_values = custom_field_distinct_values( $t_cfdef );
+	
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.
-	if( is_array( $t_accessible_custom_fields_values[$p_field_num] ) ) {
-		array_multisort( $t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC );
+	if( is_array( $t_values ) ) {
+		array_multisort( $t_values, SORT_NUMERIC, SORT_ASC );
 	}
 
 	$t_sel_start_year = null;
 	$t_sel_end_year = null;
-	if( isset( $t_accessible_custom_fields_values[$p_field_num][0] ) ) {
-		$t_sel_start_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][0] );
+	if( isset( $t_values[0] ) ) {
+		$t_sel_start_year = date( 'Y', $t_values[0] );
 	}
-	$t_count = count( $t_accessible_custom_fields_values[$p_field_num] );
-	if( isset( $t_accessible_custom_fields_values[$p_field_num][$t_count - 1] ) ) {
-		$t_sel_end_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][$t_count - 1] );
+	$t_count = count( $t_values );
+	if( isset( $t_values[$t_count - 1] ) ) {
+		$t_sel_end_year = date( 'Y', $t_values[$t_count - 1] );
 	}
 
 	$t_start = date( 'U' );
