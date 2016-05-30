@@ -2332,8 +2332,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_static = false ) {
 	$t_filter = $p_filter;
 	$t_view_type = $t_filter['_view_type'];
+	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 
-	$t_project_id = helper_get_current_project();
+	# If it's a stored filter, linked to a secific project, use that project_id to render available fields
+	if( $t_source_query_id > 0 ) {
+		$t_project_id = (int)filter_get_field( $t_source_query_id, 'project_id' );
+		if( ALL_PROJECTS == $t_project_id ) {
+			# If all_projects, the filter can be used at any project, select the current project id
+			$t_project_id = helper_get_current_project();
+		} else if( $t_project_id < 0 ) {
+			# If filter is an unnamed filter, project id is stored as negative value.
+			$t_project_id = -1 * $t_project_id;
+		}
+	} else {
+		$t_project_id = helper_get_current_project();
+	}
 	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 	$t_custom_cols = $t_filter_cols;
 
@@ -2392,12 +2405,12 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		$t_dynamic_filter_expander_class = '';
 	}
 
-	$print_field_header = function ( $p_url, $p_id, $p_label ) use ( $p_static, $t_filter, $t_dynamic_filter_expander_class ) {
+	$print_field_header = function ( $p_url, $p_id, $p_label ) use ( $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
 		if( $p_static) {
 			echo $p_label;
 		} else {
-			if( isset( $t_filter['_source_query_id'] ) ) {
-				$t_data_filter_id = ' data-filter_id="' . $t_filter['_source_query_id'] . '"';
+			if( $t_source_query_id > 0 ) {
+				$t_data_filter_id = ' data-filter_id="' . $t_source_query_id . '"';
 			} else {
 				$t_data_filter_id = '';
 			}
