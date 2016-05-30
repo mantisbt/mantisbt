@@ -1267,6 +1267,9 @@ $s_filter_access = 'Filter access';
 $s_filter_visibility = 'Filter visibility';
 $s_current_project = 'Current project';
 $s_stored_project = 'Stored project';
+$s_available_filter_for_project = 'Available filters for project';
+$s_manage_filter_page_title = 'Manage Filters';
+$s_manage_filter_edit_page_title = 'Edit filter';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
