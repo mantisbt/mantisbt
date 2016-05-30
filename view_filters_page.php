@@ -81,53 +81,6 @@ if( null === $f_filter_id ) {
 	}
 }
 
-filter_init( $t_filter );
-
-/*
- * @TODO clean this code
- * $t_accessible_custom_fields_* are used as globals by filter api !!
- */
-$t_project_id = helper_get_current_project();
-
-$t_current_user_access_level = current_user_get_access_level();
-$t_accessible_custom_fields_ids = array();
-$t_accessible_custom_fields_names = array();
-$t_accessible_custom_fields_type = array() ;
-$t_accessible_custom_fields_values = array();
-$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
-$t_custom_cols = 1;
-$t_custom_rows = 0;
-
-#get valid target fields
-$t_fields = helper_get_columns_to_view();
-$t_n_fields = count( $t_fields );
-for( $i=0; $i < $t_n_fields; $i++ ) {
-	if( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
-		unset( $t_fields[$i] );
-	}
-}
-
-if( ON == config_get( 'filter_by_custom_fields' ) ) {
-	$t_custom_cols = $t_filter_cols;
-	$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
-
-	foreach ( $t_custom_fields as $t_cfid ) {
-		$t_field_info = custom_field_cache_row( $t_cfid, true );
-		if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by'] ) {
-			$t_accessible_custom_fields_ids[] = $t_cfid;
-			$t_accessible_custom_fields_names[] = $t_field_info['name'];
-			$t_accessible_custom_fields_types[] = $t_field_info['type'];
-			$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_field_info, $t_project_id );
-			$t_fields[] = 'custom_' . $t_field_info['name'];
-		}
-	}
-
-	if( count( $t_accessible_custom_fields_ids ) > 0 ) {
-		$t_per_row = config_get( 'filter_custom_fields_per_row' );
-		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
-	}
-}
-
 $f_for_screen = gpc_get_bool( 'for_screen', true );
 
 $t_action  = 'view_all_set.php?f=3';
