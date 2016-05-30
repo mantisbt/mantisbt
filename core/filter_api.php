@@ -2330,9 +2330,17 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 }
 
 function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null ) {
-	$t_filter = $p_filter;
+	# Global variables needed for print_custom_fields
+	# @TODO clean this logic
+	global $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids;
+
+	$t_filter = filter_ensure_valid_filter( $p_filter );
 	$t_view_type = $t_filter['_view_type'];
 	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
+
+	# Make the filter into $g_filter. This is needed for some print_filter_* fnctions
+	# @TODO clean this logic
+	filter_init( $t_filter );
 
 	# If it's a stored filter, linked to a secific project, use that project_id to render available fields
 	if( $t_source_query_id > 0 ) {
