@@ -2237,7 +2237,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
 		<?php
 	if( $p_expanded ) {
-		filter_draw_selection_inputs( $t_filter, $p_for_screen, false );
+		filter_draw_selection_inputs( $t_filter, $p_for_screen, false, 'view_filters_page.php' );
 	}
 
 	# expanded
@@ -2332,7 +2332,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 <?php
 }
 
-function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_static = false ) {
+function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null ) {
 	$t_filter = $p_filter;
 	$t_view_type = $t_filter['_view_type'];
 	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
@@ -2386,11 +2386,15 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		}
 	}
 
-	$t_filters_url = 'view_filters_page.php?for_screen=' . $p_for_screen . '&static=' . ON;
-	if( 'advanced' == $t_view_type ) {
-		$t_filters_url = $t_filters_url . '&amp;view_type=advanced';
+	if( null === $p_static_fallback_page ) {
+		$p_static_fallback_page = $_SERVER['PHP_SELF'];
 	}
-	$t_filters_url = $t_filters_url . '&amp;target_field=';
+	$t_filters_url = $p_static_fallback_page;
+	$t_get_params = $_GET;
+	$t_get_params['for_screen'] = $p_for_screen;
+	$t_get_params['static'] = ON;
+	$t_get_params['view_type'] = ( 'advanced' == $t_view_type ) ? 'advanced' : 'simple';
+	$t_filters_url .= '?' . http_build_query( $t_get_params );
 
 	$t_show_product_version =  version_should_show_product_version( $t_project_id );
 	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
@@ -2408,7 +2412,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		$t_dynamic_filter_expander_class = '';
 	}
 
-	$print_field_header = function ( $p_url, $p_id, $p_label ) use ( $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
+	$print_field_header = function ( $p_id, $p_label ) use ( $t_filters_url, $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
 		if( $p_static) {
 			echo $p_label;
 		} else {
@@ -2417,7 +2421,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			} else {
 				$t_data_filter_id = '';
 			}
-			echo '<a href="' . $p_url . '" id="' . $p_id . '"' . $t_dynamic_filter_expander_class . $t_data_filter_id . '>' . $p_label . '</a>';
+			echo '<a href="' . $t_filters_url . '" id="' . $p_id . '"' . $t_dynamic_filter_expander_class . $t_data_filter_id . '>' . $p_label . '</a>';
 		}
 	}
 
@@ -2425,26 +2429,26 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 	<table width="100%" cellspacing="1">
 		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]', 'reporter_id_filter', lang_get( 'reporter_label' ) ) ?>
+				<?php $print_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_MONITOR_USER_ID . '[]', 'user_monitor_filter', lang_get( 'monitored_by_label' ) ) ?>
+				<?php $print_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]', 'handler_id_filter', lang_get( 'assigned_to_label' ) ) ?>
+				<?php $print_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ) ?>
 			</td>
 			<td colspan="2" class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_CATEGORY_ID . '[]', 'show_category_filter', lang_get( 'category_label' ) ) ?>
+				<?php $print_field_header( 'show_category_filter', lang_get( 'category_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_SEVERITY . '[]', 'show_severity_filter', lang_get( 'severity_label' ) ) ?>
+				<?php $print_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_RESOLUTION . '[]', 'show_resolution_filter', lang_get( 'resolution_label' ) ) ?>
+				<?php $print_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ) ?>
 			</td>
 			<td class="small-caption">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_PROFILE_ID . '[]', 'show_profile_filter', lang_get( 'profile_label' ) ) ?>
+					<?php $print_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
@@ -2526,24 +2530,24 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		</tr>
 		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_STATUS . '[]', 'show_status_filter', lang_get( 'status_label' ) ) ?>
+				<?php $print_field_header( 'show_status_filter', lang_get( 'status_label' ) ) ?>
 			</td>
 			<td class="small-caption">
 				<?php if( 'simple' == $t_view_type ) {?>
-					<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_HIDE_STATUS . '[]', 'hide_status_filter', lang_get( 'hide_status_label' ) ) ?>
+					<?php $print_field_header( 'hide_status_filter', lang_get( 'hide_status_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<td class="small-caption">
 			<?php if( $t_show_build ) { ?>
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_BUILD . '[]', 'show_build_filter', lang_get( 'product_build_label' ) ) ?>
+				<?php $print_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ) ?>
 			<?php } ?>
 			</td>
 			<?php if( $t_show_product_version ) {?>
 			<td colspan="2" class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_VERSION . '[]', 'show_version_filter', lang_get( 'product_version_label' ) ) ?>
+				<?php $print_field_header( 'show_version_filter', lang_get( 'product_version_label' ) ) ?>
 			</td>
 			<td colspan="1" class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]', 'show_fixed_in_version_filter', lang_get( 'fixed_in_version_label' ) ) ?>
+				<?php $print_field_header( 'show_fixed_in_version_filter', lang_get( 'fixed_in_version_label' ) ) ?>
 			</td>
 			<?php } else {?>
 			<td colspan="2" class="small-caption">
@@ -2554,11 +2558,11 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			</td>
 			<?php } ?>
 			<td colspan="1" class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]', 'show_priority_filter', lang_get( 'priority_label' ) ) ?>
+				<?php $print_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ) ?>
 			</td>
 			<?php if( $t_show_product_version ) {?>
 			<td colspan="1" class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]', 'show_target_version_filter', lang_get( 'target_version_label' ) ) ?>
+				<?php $print_field_header( 'show_target_version_filter', lang_get( 'target_version_label' ) ) ?>
 			</td>
 			<?php
 			} else {?>
@@ -2670,21 +2674,21 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 
 		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE, 'per_page_filter', lang_get( 'show_label' ) ) ?>
+				<?php $print_field_header( 'per_page_filter', lang_get( 'show_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_VIEW_STATE, 'view_state_filter', lang_get( 'view_status_label' ) ) ?>
+				<?php $print_field_header( 'view_state_filter', lang_get( 'view_status_label' ) ) ?>
 			</td>
 			<td class="small-caption">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_STICKY, 'sticky_issues_filter', lang_get( 'sticky_label' ) ) ?>
+				<?php $print_field_header( 'sticky_issues_filter', lang_get( 'sticky_label' ) ) ?>
 			</td>
 			<td class="small-caption" colspan="2">
 			</td>
 			<td class="small-caption" >
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE, 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ) ?>
+				<?php $print_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ) ?>
 			</td>
 			<td class="small-caption" colspan="2">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE, 'relationship_type_filter', lang_get( 'bug_relationships_label' ) ) ?>
+				<?php $print_field_header( 'relationship_type_filter', lang_get( 'bug_relationships_label' ) ) ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
@@ -2745,22 +2749,22 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_PLATFORM, 'platform_filter', lang_get( 'platform_label' ) ) ?>
+					<?php $print_field_header( 'platform_filter', lang_get( 'platform_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<td class="small-caption">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_OS, 'os_filter', lang_get( 'os_label' ) ) ?>
+					<?php $print_field_header( 'os_filter', lang_get( 'os_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<td class="small-caption">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_OS_BUILD, 'os_build_filter', lang_get( 'os_version_label' ) ) ?>
+					<?php $print_field_header( 'os_build_filter', lang_get( 'os_version_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<td class="small-caption" colspan="5">
 				<?php if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_TAG_STRING, 'tag_string_filter', lang_get( 'tags_label' ) ) ?>
+				<?php $print_field_header( 'tag_string_filter', lang_get( 'tags_label' ) ) ?>
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
@@ -2863,7 +2867,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			if( $p_static ) {
 				$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption">' . string_display_line( $t_filter_object->title ) . '</td>';
 			} else {
-				$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption"> <a href="' . $t_filters_url . string_attribute( $t_field_name )
+				$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption"> <a href="' . $t_filters_url
 				. '" id="' . string_attribute( $t_field_name ) . '_filter"' . $t_dynamic_filter_expander_class . '>' . string_display_line( $t_filter_object->title ) . '</a> </td>';
 			}
 			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" id="' . string_attribute( $t_field_name ) . '_filter_target"> ';
@@ -2957,7 +2961,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 						if( $p_static ) {
 							$t_fields .= string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) );
 						} else {
-							$t_fields .= '<a href="' . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter"' . $t_dynamic_filter_expander_class . '>'
+							$t_fields .= '<a href="' . $t_filters_url . '" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter"' . $t_dynamic_filter_expander_class . '>'
 								. string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) ) . '</a>';
 						}
 						$t_fields .= '</td> ';
@@ -3097,7 +3101,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		?>
 		<tr class="row-1">
 			<td class="small-caption category2">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID, 'note_user_id_filter', lang_get( 'note_user_id_label' ) ) ?>
+				<?php $print_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ) ?>
 			</td>
 			<td class="small-caption" id="note_user_id_filter_target">
 		<?php
@@ -3111,7 +3115,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 
 			<!-- Sort by -->
 			<td class="small-caption category2">
-				<?php $print_field_header( $t_filters_url . 'show_sort', 'show_sort_filter', lang_get( 'sort_label' ) ) ?>
+				<?php $print_field_header( 'show_sort_filter', lang_get( 'sort_label' ) ) ?>
 			</td>
 			<td class="small-caption" id="show_sort_filter_target">
 		<?php
@@ -3127,7 +3131,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		?>
 			<!-- Project -->
 			<td class="small-caption category2" colspan="2">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_PROJECT_ID, 'project_id_filter', lang_get( 'email_project_label' ) ) ?>
+				<?php $print_field_header( 'project_id_filter', lang_get( 'email_project_label' ) ) ?>
 			</td>
 			<td class="small-caption" id="project_id_filter_target">
 		<?php
@@ -3153,7 +3157,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		<!-- Match Type -->
 		<tr class="row-1">
 			<td class="small-caption category2">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_MATCH_TYPE, 'match_type_filter', lang_get( 'filter_match_type_label' ) ) ?>
+				<?php $print_field_header( 'match_type_filter', lang_get( 'filter_match_type_label' ) ) ?>
 			</td>
 			<td class="small-caption" id="match_type_filter_target">
 			<?php
@@ -3166,7 +3170,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			</td>
 
 			<td class="small-caption category2">
-				<?php $print_field_header( $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED, 'highlight_changed_filter', lang_get( 'changed_label' ) ) ?>
+				<?php $print_field_header( 'highlight_changed_filter', lang_get( 'changed_label' ) ) ?>
 			</td>
 			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
 			<?php
