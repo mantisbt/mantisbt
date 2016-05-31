@@ -2339,19 +2339,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
  * not available on the cliuent, and the form was rendered with dynamic fields.
  * By default, the fallback is the current page.
  *
- * @global type $t_accessible_custom_fields_names
- * @global type $t_accessible_custom_fields_types
- * @global type $t_accessible_custom_fields_values
- * @global type $t_accessible_custom_fields_ids
  * @param type $p_filter	Filter array to show.
  * @param type $p_for_screen	Type of output
  * @param type $p_static	Wheter to print a static form (no dynamic fields)
  * @param type $p_static_fallback_page	Page name to use as javascript fallback
  */
 function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null ) {
-	# Global variables needed for print_custom_fields
-	# @TODO clean this logic
-	global $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids;
 
 	$t_filter = filter_ensure_valid_filter( $p_filter );
 	$t_view_type = $t_filter['_view_type'];
@@ -2377,34 +2370,11 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
 	$t_custom_cols = $t_filter_cols;
 
-	$t_current_user_access_level = current_user_get_access_level();
-	$t_accessible_custom_fields_ids = array();
-	$t_accessible_custom_fields_names = array();
-	$t_accessible_custom_fields_values = array();
-	$t_num_custom_rows = 0;
-	$t_per_row = 0;
-
 	$t_tdclass = 'small-caption';
 	$t_trclass = 'row-category2';
 	if( $p_for_screen == false ) {
 		$t_tdclass = 'print';
 		$t_trclass = '';
-	}
-
-	if( ON == config_get( 'filter_by_custom_fields' ) ) {
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
-
-		foreach( $t_custom_fields as $t_cfid ) {
-			$t_field_info = custom_field_get_definition( $t_cfid );
-			if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by'] ) {
-				$t_accessible_custom_fields_ids[] = $t_cfid;
-			}
-		}
-
-		if( count( $t_accessible_custom_fields_ids ) > 0 ) {
-			$t_per_row = config_get( 'filter_custom_fields_per_row' );
-			$t_num_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
-		}
 	}
 
 	if( null === $p_static_fallback_page ) {
@@ -2931,7 +2901,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			$t_accessible_custom_fields = array();
 			foreach( $t_custom_fields as $t_cfid ) {
 				$t_cfdef = custom_field_get_definition( $t_cfid );
-				if( $t_cfdef['access_level_r'] <= $t_current_user_access_level && $t_cfdef['filter_by'] ) {
+				if( $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
 					$t_accessible_custom_fields[] = $t_cfdef;
 				}
 			}
