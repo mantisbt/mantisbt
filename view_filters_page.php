@@ -105,11 +105,6 @@ if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 	$f_view_type = $f_default_view_type;
 }
 
-$g_select_modifier = '';
-if( 'advanced' == $f_view_type ) {
-	$g_select_modifier = ' multiple="multiple" size="10"';
-}
-
 $t_filter['_view_type'] = $f_view_type;
 
 $f_static = gpc_get_bool( 'static', false );

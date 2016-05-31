@@ -80,7 +80,6 @@ if( !$t_filter_string ) {
 	$t_filter['_source_query_id'] = $f_filter_id;
 	filter_cache_row( $f_filter_id );
 }
-filter_init( $t_filter );
 
 $f_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
@@ -95,10 +94,8 @@ if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 	$f_view_type = $f_default_view_type;
 }
 
-$g_select_modifier = '';
-if( 'advanced' == $f_view_type ) {
-	$g_select_modifier = ' multiple="multiple" size="10"';
-}
+$t_filter['_view_type'] = $f_view_type;
+filter_init( $t_filter );
 
 $t_action = 'manage_filter_edit_update.php';
 $t_current_project = helper_get_current_project();
