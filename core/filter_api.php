@@ -4658,6 +4658,11 @@ function print_filter_values_custom_field_date( $p_filter, $p_field_id ) {
 			echo $t_start;
 			break;
 	}
+	# print hidden inputs
+	$tcf = $p_filter['custom_fields'][$p_field_id];
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_control" value="' . $p_filter['custom_fields'][$p_field_id][0] . '">';
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_start_timestamp" value="' . $p_filter['custom_fields'][$p_field_id][1] . '">';
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_end_timestamp" value="' . $p_filter['custom_fields'][$p_field_id][2] . '">';
 }
 
 
@@ -5670,53 +5675,87 @@ function filter_gpc_get( array $p_filter = null ) {
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
-				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
-
-				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null );
-				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null );
-				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null );
-				$t_start_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
-
-				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null );
-				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null );
-				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null );
-				$t_end_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
-
 				$f_custom_fields_data[$t_cfid] = array();
-				$f_custom_fields_data[$t_cfid][0] = $t_control;
-				$t_start = 1;
-				$t_end = 1;
-				$t_one_day = 86399;
 
-				switch( $t_control ) {
-					case CUSTOM_FIELD_DATE_ANY:
-					case CUSTOM_FIELD_DATE_NONE:
-						break ;
-					case CUSTOM_FIELD_DATE_BETWEEN:
-						$t_start = $t_start_date;
-						$t_end = $t_end_date + $t_one_day - 1;
-						break ;
-					case CUSTOM_FIELD_DATE_ONORBEFORE:
-						$t_end = $t_start_date + $t_one_day - 1;
-						break;
-					case CUSTOM_FIELD_DATE_BEFORE:
-						$t_end = $t_start_date;
-						break ;
-					case CUSTOM_FIELD_DATE_ON:
-						$t_start = $t_start_date;
-						$t_end = $t_start_date + $t_one_day - 1;
-						break;
-					case CUSTOM_FIELD_DATE_AFTER:
-						$t_start = $t_start_date + $t_one_day - 1;
-						$t_end = 2147483647; # Some time in 2038, max value of a signed int.
-						break;
-					case CUSTOM_FIELD_DATE_ONORAFTER:
-						$t_start = $t_start_date;
-						$t_end = 2147483647; # Some time in 2038, max value of a signed int.
-						break;
+				# Get date control property
+				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
+				$f_custom_fields_data[$t_cfid][0] = $t_control;
+
+				$t_one_day = 86399;
+				# Get start date. If there is a timestamp input provided, use it,
+				# otherwise, look for individual date parts
+				$f_start_date = gpc_get( 'custom_field_' . $t_cfid . '_start_timestamp', null );
+				if( null !== $f_start_date ) {
+					$t_start_date = (int)$f_start_date;
+					$t_start = $t_start_date;
+				} else {
+					$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null );
+					$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null );
+					$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null );
+					$t_start_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
+					# calculate correct timestamps
+					$t_start = 1;
+					switch( $t_control ) {
+						case CUSTOM_FIELD_DATE_ANY:
+						case CUSTOM_FIELD_DATE_NONE:
+						case CUSTOM_FIELD_DATE_ONORBEFORE:
+						case CUSTOM_FIELD_DATE_BEFORE:
+							break ;
+						case CUSTOM_FIELD_DATE_BETWEEN:
+							$t_start = $t_start_date;
+							break ;
+						case CUSTOM_FIELD_DATE_ON:
+							$t_start = $t_start_date;
+							break;
+						case CUSTOM_FIELD_DATE_AFTER:
+							$t_start = $t_start_date + $t_one_day - 1;
+							break;
+						case CUSTOM_FIELD_DATE_ONORAFTER:
+							$t_start = $t_start_date;
+							break;
+					}
 				}
 				$f_custom_fields_data[$t_cfid][1] = $t_start;
+
+				# Get end date. If there is a timestamp input provided, use it,
+				# otherwise, look for individual date parts
+				$f_end_date = gpc_get( 'custom_field_' . $t_cfid . '_end_timestamp', null );
+				if( null !== $f_end_date ) {
+					$t_end_date = (int)$f_end_date;
+					$t_end = $t_end_date;
+				} else {
+					$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null );
+					$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null );
+					$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null );
+					$t_end_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
+					# calculate correct timestamps
+					$t_end = 1;
+					switch( $t_control ) {
+						case CUSTOM_FIELD_DATE_ANY:
+						case CUSTOM_FIELD_DATE_NONE:
+							break ;
+						case CUSTOM_FIELD_DATE_BETWEEN:
+							$t_end = $t_end_date + $t_one_day - 1;
+							break ;
+						case CUSTOM_FIELD_DATE_ONORBEFORE:
+							$t_end = $t_start_date + $t_one_day - 1;
+							break;
+						case CUSTOM_FIELD_DATE_BEFORE:
+							$t_end = $t_start_date;
+							break ;
+						case CUSTOM_FIELD_DATE_ON:
+							$t_end = $t_start_date + $t_one_day - 1;
+							break;
+						case CUSTOM_FIELD_DATE_AFTER:
+							$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+							break;
+						case CUSTOM_FIELD_DATE_ONORAFTER:
+							$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+							break;
+					}
+				}
 				$f_custom_fields_data[$t_cfid][2] = $t_end;
+
 			} else {
 				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
