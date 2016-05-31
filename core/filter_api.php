@@ -2961,8 +2961,11 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 			echo "\n\t" . '<tr class="row-1">', $t_values_row, "\n\t</tr>\n\t";
 		}
 
+		#
+		# Draw custom fields
+		#
+
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
-			# -- Custom Field Searching --
 
 			$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 			$t_accessible_custom_fields = array();
@@ -2973,15 +2976,11 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 				}
 			}
 			
+			$t_cfids = array();
 			if( !empty( $t_accessible_custom_fields ) ) {
-				$t_per_row = config_get( 'filter_custom_fields_per_row' );
-				$t_num_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
-				$t_row_idx = 0;
-				$t_col_idx = 0;
-				
 				$t_header_contents = array();
 				$t_values_contents = array();
-				
+				# Create cell contents for each custom field
 				foreach( $t_accessible_custom_fields as $t_cfdef ) {
 					# Generate header
 					ob_start();
@@ -2999,166 +2998,64 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 					}
 					$t_header_contents[$t_cfdef['id']] = $t_header;
 					$t_values_contents[$t_cfdef['id']] = $t_values;
+					$t_cfids[] = $t_cfdef['id'];
 				}
 			}
-
-			if( count( $t_accessible_custom_fields_ids ) > 0 ) {
-				//$t_per_row = config_get( 'filter_custom_fields_per_row' );
-				//$t_num_fields = count( $t_accessible_custom_fields_ids );
-				//$t_row_idx = 0;
-				//$t_col_idx = 0;
-
-				//$t_fields = '';
-				//$t_values = '';
-
-				for( $i = 0;$i < $t_num_fields;$i++ ) {
-					if( $t_col_idx == 0 ) {
-						$t_fields = '<tr class="' . $t_trclass . '">';
-						$t_values = '<tr class="row-1">';
+			
+			# group the contents in rows
+			$t_per_row = config_get( 'filter_custom_fields_per_row' );
+			# these will be arrays of arrays with N elements each. N is the per row configuration. Last array can be shorter.
+			$t_header_rows = array();
+			$t_values_rows = array();
+			
+			$t_cf_count = count( $t_cfids );
+			if( $t_cf_count > 0 ) {
+				reset( $t_cfids );
+				while( $t_cf_count > 0 ) {
+					$t_col_count = $t_per_row;
+					$t_h_row = array();
+					$t_v_row = array();
+					while( $t_cf_count > 0 && $t_col_count > 0 ) {
+						$t_h_row[current( $t_cfids )] = $t_header_contents[current( $t_cfids )];
+						$t_v_row[current( $t_cfids )] = $t_values_contents[current( $t_cfids )];
+						next( $t_cfids );
+						$t_col_count--;
+						$t_cf_count--;
 					}
-
-					if( isset( $t_accessible_custom_fields_names[$i] ) ) {
-						$t_fields .= '<td class="small-caption"> ';
-						if( $p_static ) {
-							$t_fields .= string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) );
-						} else {
-							$t_fields .= '<a href="' . $t_filters_url . '" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter"' . $t_dynamic_filter_expander_class . '>'
-								. string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) ) . '</a>';
-						}
-						$t_fields .= '</td> ';
-					}
-					$t_output = '';
-					$t_any_found = false;
-
-					$t_values .= '<td class="small-caption" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter_target"> ';
-					if( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
-						$t_values .= lang_get( 'any' );
-					} else {
-						if( $t_accessible_custom_fields_types[$i] == CUSTOM_FIELD_TYPE_DATE ) {
-							if( $p_static ) {
-								ob_start();
-								print_filter_custom_field_date( $i, $t_accessible_custom_fields_ids[$i] );
-								$t_values .= ob_get_clean();
-							} else {
-								$t_short_date_format = config_get( 'short_date_format' );
-								if( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] ) ) {
-									$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] = 0;
-								}
-								$t_start = date( $t_short_date_format, $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] );
-
-								if( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] ) ) {
-									$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] = 0;
-								}
-								$t_end = date( $t_short_date_format, $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] );
-								switch( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][0] ) {
-									case CUSTOM_FIELD_DATE_ANY:
-										$t_values .= lang_get( 'any' );
-										break;
-									case CUSTOM_FIELD_DATE_NONE:
-										$t_values .= lang_get( 'none' );
-										break;
-									case CUSTOM_FIELD_DATE_BETWEEN:
-										$t_values .= lang_get( 'between_date' ) . '<br />';
-										$t_values .= $t_start . '<br />' . $t_end;
-										break;
-									case CUSTOM_FIELD_DATE_ONORBEFORE:
-										$t_values .= lang_get( 'on_or_before_date' ) . '<br />';
-										$t_values .= $t_end;
-										break;
-									case CUSTOM_FIELD_DATE_BEFORE:
-										$t_values .= lang_get( 'before_date' ) . '<br />';
-										$t_values .= $t_end;
-										break;
-									case CUSTOM_FIELD_DATE_ON:
-										$t_values .= lang_get( 'on_date' ) . '<br />';
-										$t_values .= $t_start;
-										break;
-									case CUSTOM_FIELD_DATE_AFTER:
-										$t_values .= lang_get( 'after_date' ) . '<br />';
-										$t_values .= $t_start;
-										break;
-									case CUSTOM_FIELD_DATE_ONORAFTER:
-										$t_values .= lang_get( 'on_or_after_date' ) . '<br />';
-										$t_values .= $t_start;
-										break;
-								}
-							}
-						} else {
-							if( $p_static ) {
-								ob_start();
-								print_filter_custom_field( $t_accessible_custom_fields_ids[$i] );
-								$t_values .= ob_get_clean();
-							} else {
-								$t_first_flag = true;
-								foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
-									$t_current = stripslashes( $t_current );
-									$t_this_string = '';
-									if( filter_field_is_any( $t_current ) ) {
-										$t_any_found = true;
-									} else if( filter_field_is_none( $t_current ) ) {
-										$t_this_string = lang_get( 'none' );
-									} else {
-										$t_this_string = $t_current;
-									}
-
-									if( $t_first_flag != true ) {
-										$t_output = $t_output . '<br />';
-									} else {
-										$t_first_flag = false;
-									}
-
-									$t_output = $t_output . string_display_line( $t_this_string );
-									$t_values .= '<input type="hidden" name="custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]" value="' . string_attribute( $t_current ) . '" />';
-								}
-							}
-						}
-
-						if( true == $t_any_found ) {
-							$t_values .= lang_get( 'any' );
-						} else {
-							$t_values .= $t_output;
-						}
-					}
-					$t_values .= ' </td>';
-
-					$t_col_idx++;
-
-					if( $t_col_idx == $t_per_row ) {
-						if( $t_filter_cols > $t_per_row ) {
-							$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
-							$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
-						}
-
-						$t_fields .= '</tr>' . "\n";
-						$t_values .= '</tr>' . "\n";
-
-						echo $t_fields;
-						echo $t_values;
-
-						$t_col_idx = 0;
-						$t_row_idx++;
-					}
-				}
-
-				if( $t_col_idx > 0 ) {
-					if( $t_col_idx < $t_per_row ) {
-						$t_fields .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&#160;</td> ';
-						$t_values .= '<td colspan="' . ( $t_per_row - $t_col_idx ) . '">&#160;</td> ';
-					}
-
-					if( $t_filter_cols > $t_per_row ) {
-						$t_fields .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
-						$t_values .= '<td colspan="' . ( $t_filter_cols - $t_per_row ) . '">&#160;</td> ';
-					}
-
-					$t_fields .= '</tr>' . "\n";
-					$t_values .= '</tr>' . "\n";
-
-					echo $t_fields;
-					echo $t_values;
+					$t_header_rows[] = $t_h_row;
+					$t_values_rows[] = $t_v_row;
 				}
 			}
-		}
+			
+			# Print the rows
+			$t_rowcount = count( $t_header_rows );
+			for( $ix = 0; $ix < $t_rowcount; $ix++ ) {
+				# print header row
+				echo '<tr class="' . $t_trclass . '">';
+				foreach( $t_header_rows[$ix] as $t_cfid => $t_content ) {
+					echo '<td class="small-caption">' . $t_content . '</td>';
+				}
+				# if the row is incomplete, print a filler cell
+				if( count( $t_header_rows[$ix] ) < $t_per_row ) {
+					echo '<td colspan="' . ( $t_per_row - count( $t_header_rows[$ix] ) ) . '">&#160;</td>';
+				} 
+				echo '</tr>';
+				
+				# print values row
+				echo '<tr class="row-1">';
+				foreach( $t_values_rows[$ix] as $t_cfid => $t_content ) {
+					echo '<td class="small-caption" id="custom_field_' . $t_cfid . '_filter_target">' . $t_content . '</td>';
+				}
+				# if the row is incomplete, print a filler cell
+				if( count( $t_values_rows[$ix] ) < $t_per_row ) {
+					echo '<td colspan="' . ( $t_per_row - count( $t_values_rows[$ix] ) ) . '">&#160;</td>';
+				} 
+				echo '</tr>';
+			}
+
+		} // end: if custom fields enabled
+		
+		
 		?>
 		<tr class="row-1">
 			<td class="small-caption category2">
