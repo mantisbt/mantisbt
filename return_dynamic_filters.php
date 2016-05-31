@@ -72,10 +72,6 @@ if( null === $f_filter_id ) {
 		filter_cache_row( $c_filter_id );
 	}
 }
-filter_init( $t_filter );
-
-
-global $g_select_modifier;
 
 $f_default_view_type = 'simple';
 if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
@@ -90,10 +86,8 @@ if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'simple';
 }
 
-$g_select_modifier = '';
-if( 'advanced' == $f_view_type ) {
-	$g_select_modifier = ' multiple="multiple" size="10"';
-}
+$t_filter['_view_type'] = $f_view_type;
+filter_init( $t_filter );
 
 /**
  * Prepend headers to the dynamic filter forms that are sent as the response from this page.
