@@ -2729,7 +2729,7 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 		$t_column_count_by_row = array();
 		$t_row = 0;
 		$t_column_count_by_row[$t_row] = 0;
-		foreach( $t_plugin_filters as $t_field_name=>$t_filter_object ) {
+		foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 			# be sure the colspan is an integer
 			$t_colspan = (int)$t_filter_object->colspan;
 
@@ -2770,62 +2770,25 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 				}
 			}
 			$t_colspan_attr = ( $t_colspan > 1 ? 'colspan="' . $t_colspan . '" ' : '' );
-			if( $p_static ) {
-				$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption">' . string_display_line( $t_filter_object->title ) . '</td>';
-			} else {
-				$t_plugin_filter_links[$t_assigned_row][] = '<td ' . $t_colspan_attr . 'class="small-caption"> <a href="' . $t_filters_url
-				. '" id="' . string_attribute( $t_field_name ) . '_filter"' . $t_dynamic_filter_expander_class . '>' . string_display_line( $t_filter_object->title ) . '</a> </td>';
-			}
+
+			# Get header cell
+			$t_header_td = '<td ' . $t_colspan_attr . 'class="small-caption">';
+			ob_start();
+			$print_field_header( string_attribute( $t_field_name ) . '_filter"', string_display_line( $t_filter_object->title ) );
+			$t_header_td .= ob_get_clean();
+			$t_header_td .= '</td>';
+			$t_plugin_filter_links[$t_assigned_row][] = $t_header_td;
+
+			# Get values cell
 			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" id="' . string_attribute( $t_field_name ) . '_filter_target"> ';
 
+			ob_start();
 			if( $p_static ) {
-				ob_start();
 				print_filter_plugin_field( $t_field_name, $t_filter_object );
-				$t_values .= ob_get_clean();
 			} else {
-			if( !isset( $t_filter[$t_field_name] ) ) {
-				$t_values .= lang_get( 'any' );
-			} else {
-				switch( $t_filter_object->type ) {
-					case FILTER_TYPE_STRING:
-					case FILTER_TYPE_INT:
-						if( filter_field_is_any( $t_filter[$t_field_name] ) ) {
-							$t_values .= lang_get( 'any' );
-						} else {
-							$t_values .= string_display_line( $t_filter[$t_field_name] );
-						}
-						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . string_attribute( $t_filter[$t_field_name] ) . '"/>';
-						break;
-
-					case FILTER_TYPE_BOOLEAN:
-						$t_values .= string_display_line( $t_filter_object->display( (bool)$t_filter[$t_field_name] ) );
-						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . (bool)$t_filter[$t_field_name] . '"/>';
-						break;
-
-					case FILTER_TYPE_MULTI_STRING:
-					case FILTER_TYPE_MULTI_INT:
-						$t_first = true;
-						$t_output = '';
-
-						if( !is_array( $t_filter[$t_field_name] ) ) {
-							$t_filter[$t_field_name] = array( $t_filter[$t_field_name] );
-						}
-
-						foreach( $t_filter[$t_field_name] as $t_current ) {
-							if( filter_field_is_any( $t_current ) ) {
-								$t_output .= lang_get( 'any' );
-							} else {
-								$t_output .= ( $t_first ? '' : '<br/>' ) . string_display_line( $t_filter_object->display( $t_current ) );
-								$t_first = false;
-							}
-							$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '[]" value="' . string_attribute( $t_current ) . '"/>';
-						}
-
-						$t_values .= $t_output;
-						break;
-				}
+				print_filter_values_plugin_field( $t_filter, $t_field_name, $t_filter_object );
 			}
-			}
+			$t_values .= ob_get_clean();
 			$t_values .= '</td>';
 
 			$t_plugin_filter_fields[$t_assigned_row][] = $t_values;
@@ -4292,6 +4255,48 @@ function print_filter_note_user_id() {
 	<?php
 }
 
+
+function print_filter_values_plugin_field( $p_filter, $p_field_name, $p_filter_object ) {
+	$t_filter = $p_filter;
+	if( !isset( $p_filter[$p_field_name] ) ) {
+		echo lang_get( 'any' );
+	} else {
+		$t_value = $p_filter[$p_field_name];
+		switch( $p_filter_object->type ) {
+			case FILTER_TYPE_STRING:
+			case FILTER_TYPE_INT:
+				if( filter_field_is_any( $t_value ) ) {
+					echo lang_get( 'any' );
+				} else {
+					echo string_display_line( $t_value );
+				}
+				echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '" value="' . string_attribute( $t_value ) . '">';
+				break;
+
+			case FILTER_TYPE_BOOLEAN:
+				echo string_display_line( $p_filter_object->display( (bool)$t_value ) );
+				echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '" value="' . (bool)$t_value . '">';
+				break;
+
+			case FILTER_TYPE_MULTI_STRING:
+			case FILTER_TYPE_MULTI_INT:
+				if( !is_array( $t_value ) ) {
+					$t_value = array( $t_value );
+				}
+				$t_strings = array();
+				foreach( $t_value as $t_current ) {
+					if( filter_field_is_any( $t_current ) ) {
+						$t_strings[] = lang_get( 'any' );
+					} else {
+						$t_strings[] = string_display_line( $p_filter_object->display( $t_current ) );
+					}
+					echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '[]" value="' . string_attribute( $t_current ) . '">';
+				}
+				echo implode( '<br>', $t_strings );
+				break;
+		}
+	}
+}
 
 /**
  * Print plugin filter fields as defined by MantisFilter objects.
