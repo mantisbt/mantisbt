@@ -94,7 +94,12 @@ $t_project_id = helper_get_current_project();
 <?php html_status_legend( STATUS_LEGEND_POSITION_TOP ); ?>
 
 <div>
-<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+
+<?php
+if( access_has_project_level( config_get( 'timeline_view_threshold' ) ) ) {
+	include( $g_core_path . 'timeline_inc.php' );
+}
+?>
 
 <div class="myview_boxes_area">
 

@@ -40,6 +40,13 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_timeline_view_threshold</term>
+			<listitem>
+				<para>The default viewing status for the timeline. The default is VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_reminder_view_status</term>
 			<listitem>
 				<para>The default viewing status for the new reminders (VS_PUBLIC
