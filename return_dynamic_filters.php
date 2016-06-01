@@ -107,7 +107,7 @@ if( function_exists( $t_function_name ) ) {
 } else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
-	$t_cfdef = custom_field_get_definition( $t_custom_id, false );
+	$t_cfdef = @custom_field_get_definition( $t_custom_id );
 	# Check existence of custom field id, and if the user have access to read and filter by
 	if( $t_cfdef && $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
 		return_dynamic_filters_prepend_headers();

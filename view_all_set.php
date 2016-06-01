@@ -168,10 +168,7 @@ switch( $f_type ) {
 	# Set the sort order and direction
 	case '2':
 		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
-
-		# We only need to set those fields that we are overriding
-		$t_setting_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = $f_sort;
-		$t_setting_arr[FILTER_PROPERTY_SORT_DIRECTION] = $f_dir;
+		$t_setting_arr = filter_gpc_get();
 
 		break;
 	# This is when we want to copy another query from the
@@ -224,7 +221,7 @@ switch( $f_type ) {
 	case '5':
 		# Just set the search string value
 		log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-		$t_setting_arr[FILTER_PROPERTY_SEARCH] = $f_search;
+		$t_setting_arr = filter_gpc_get();
 		break;
 	case '6':
 		# Just set the view_state (simple / advanced) value
