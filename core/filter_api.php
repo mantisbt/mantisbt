@@ -520,6 +520,10 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	
 	$p_filter_arr = filter_ensure_fields( $p_filter_arr );
 
+	$f_default_view_type = 'simple';
+	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+		$f_default_view_type = 'advanced';
+	}
 	$t_view_type = $p_filter_arr['_view_type'];
 	if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
 		$t_view_type = 'advanced';
@@ -4591,7 +4595,7 @@ function print_filter_custom_field( $p_field_id ) {
 					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {
 						continue;
 					}
-					echo '<option value="' . string_attribute( $t_item ) . '"';
+					echo '<option value="' . string_attribute( $t_val ) . '"';
 					if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
 						check_selected( $g_filter['custom_fields'][$p_field_id], $t_val, false );
 					}
@@ -5548,7 +5552,7 @@ function filter_gpc_get( array $p_filter = null ) {
 				break;
 
 			case FILTER_TYPE_MULTI_INT:
-				$t_filter_input[$t_field_name] = gpc_get_int_array( $t_field_name, $t_filtert[$t_field_name] );
+				$t_filter_input[$t_field_name] = gpc_get_int_array( $t_field_name, $t_filter[$t_field_name] );
 				break;
 		}
 	}
