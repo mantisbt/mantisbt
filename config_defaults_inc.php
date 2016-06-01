@@ -3615,11 +3615,11 @@ $g_file_download_content_type_overrides = array (
  */
 $g_status_icon_arr = array (
 	NONE      => '',
-	LOW       => 'fa-chevron-down blue',
-	NORMAL    => 'fa-minus blue',
-	HIGH      => 'fa-chevron-up red',
-	URGENT    => 'fa-angle-double-up fa-lg red',
-	IMMEDIATE => 'fa-exclamation-triangle red'
+	LOW       => 'fa-chevron-down fa-lg green',
+	NORMAL    => 'fa-minus fa-lg orange2',
+	HIGH      => 'fa-chevron-up fa-lg red',
+	URGENT    => 'fa-arrow-up fa-lg red',
+	IMMEDIATE => 'fa-exclamation-triangle fa-lg red'
 );
 
 /**
