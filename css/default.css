@@ -2,7 +2,7 @@ span.print { font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
 
 td.category, th.category		{ background-color: #edf3f4 !important; color: #000000; font-weight: bold; vertical-align : top; }
-td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
+td.category .small, th.category .small	{ font-weight: normal;  }
 
 .small-caption	{
     border: 1px solid #fff;
