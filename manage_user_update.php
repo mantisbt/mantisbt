@@ -229,7 +229,7 @@ layout_page_begin( 'manage_overview_page.php' );
 if( $f_protected && $t_old_protected ) {				# PROTECTED
 	echo '<div class="failure-msg">';
 	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 } else if( $t_result ) {					# SUCCESS
 	html_operation_successful( $t_redirect_url );

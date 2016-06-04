@@ -195,11 +195,6 @@ $t_icon_path = config_get( 'icon_path' );
 		?>
 	</td>
 <tr>
-		<?php
-			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
-			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
-			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );
-		?>
 	</td>
 </tr>
 <tr class="row-category">

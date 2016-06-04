@@ -348,18 +348,19 @@ $t_redirect_url = 'view_all_bug_page.php';
 
 if( count( $t_failed_ids ) > 0 ) {
 	layout_page_header();
-
 	layout_page_begin();
 
 	echo '<div><br />';
-	echo '<table class="width75">';
+	echo '<div class="table-responsive">';
+	echo '<table class="table table-bordered table-condensed table-striped">';
 	$separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {
 		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
 		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
 	}
+	echo '</div>';
 	echo '</table><br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
 	layout_page_end();

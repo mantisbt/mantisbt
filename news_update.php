@@ -73,8 +73,8 @@ echo lang_get( 'operation_successful' ) ?>
 
 echo '<br />';
 
-print_bracket_link( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) );
-print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
+print_button( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) );
+print_button( 'news_menu_page.php', lang_get( 'proceed' ) );
 
 echo '<br /><br />';
 

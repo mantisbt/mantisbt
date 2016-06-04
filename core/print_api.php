@@ -171,7 +171,7 @@ function print_successful_redirect( $p_redirect_to ) {
 		layout_page_begin();
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
-		print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
+		print_button( $p_redirect_to, lang_get( 'proceed' ) );
 		echo '</div>';
 		layout_page_end();
 	} else {
@@ -1758,7 +1758,7 @@ function print_signup_link() {
 		 ( LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
-		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
+		print_button( 'signup_page.php', lang_get( 'signup_link' ) );
 	}
 }
 
@@ -1767,7 +1767,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-	print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
+	print_button( 'login_page.php', lang_get( 'login_title' ) );
 }
 
 /**
@@ -1780,7 +1780,7 @@ function print_lost_password_link() {
 		 ( ON == config_get( 'lost_password_feature' ) ) &&
 		 ( ON == config_get( 'send_reset_password' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) ) ) {
-		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
+		print_button( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 	}
 }
 
