@@ -1147,6 +1147,7 @@ function email_send( EmailData $p_email_data ) {
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
+		log_event(LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'");
 	}
 
 	try {
