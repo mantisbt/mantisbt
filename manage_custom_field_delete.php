@@ -58,7 +58,7 @@
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( $f_return, lang_get( 'proceed' ) );
+	print_bracket_link( string_sanitize_url( $f_return ), lang_get( 'proceed' ) );
 ?>
 </div>
 

@@ -115,6 +115,6 @@
 	echo lang_get( 'operation_successful' );
 
 	echo '<br />';
-	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+	print_bracket_link( string_sanitize_url( $f_redirect_url ), lang_get( 'proceed' ) );
 	echo '<br /></div>';
 	html_page_bottom();

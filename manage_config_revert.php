@@ -65,7 +65,7 @@
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ).'<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_bracket_link( string_sanitize_url( $t_redirect_url ), lang_get( 'proceed' ) );
 ?>
 </div>
 
