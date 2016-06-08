@@ -49,7 +49,6 @@ require_api( 'user_api.php' );
  * of scripts that export CSV file before any other content is called.
  *
  * @param  string  $p_filename The csv filename and extension.
- * @param  boolean $p_utf8     Use UTF8 or ASCII.
  * @return void
  */
 function csv_start( $p_filename ) {
