@@ -1293,3 +1293,79 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	$p_query = db_oracle_order_binds_sequentially( $p_query );
 	return $p_query;
 }
+
+/**
+ * Builds a value array for IN sql clauses.
+ * 1 or 2 level arrays are accepted (see comments on related methods)
+ *
+ * If data array count is greater than a defined maximum, it will try to use a
+ * temporaray table to store the values, and returns a select caluse valid for
+ * use with a IN selection
+ * (Currently only integer values are supported for a temporary table)
+ *
+ * @param array $p_data		data array of values, or tuples.
+ * @return string
+ */
+function db_sql_in ( array $p_data ) {
+	if( count( $p_data ) > MAX_SQL_IN_COUNT && DBTempData::is_supported_array( $p_data) ) {
+		$t_tmpdata = new DBTempData( $p_data );
+		return '(' . $t_tmpdata->sql_select() . ')';
+	} else {
+		return db_sql_in_values( $p_data );
+	}
+}
+
+/**
+ * Builds a SQL string for a IN sql clause
+ * Receive a data array that can be either 1 or 2 dimension array.
+ * - For a simple array, the result is:
+ *     ( 1, 2, 3, 4, ... )
+ * - For a 2 level array, the result is:
+ *     ( (1a,1b), (2a,2b), (3a,3b), ... )
+ *
+ * Integer and String data is accepted.
+ * Data array should be uniform in number of elements for each row ( the number
+ * of elements per row is computed oly by the first row of the array)
+ *
+ * @TODO cproensa Use db_param instead of harcoded values.
+ * However this is not feasible right now, because the order of bd_params generation
+ * affects the parameter subtitution in query run time. From this function, we can't know
+ * the surrounding db_params, so its safer to not mess with the caller parametrized query
+ *
+ * @param array $p_data
+ * @return string
+ */
+function db_sql_in_values ( array $p_data ) {
+	$t_row = reset( $p_data );
+	$t_nested = is_array( $t_row );
+	$t_row_item_count = $t_nested ? count( $t_row ) : 0;
+	$t_nrows = count( $p_data );
+	$t_count = 0;
+	$t_sql = '(';
+	while( $t_count < $t_nrows ) {
+		if( $t_count > 0 ) {
+			$t_sql .= ',';
+		}
+		if( $t_nested ) {
+			# When its a 2d array
+			$t_sql .= '(';
+			$t_current = reset( $t_row );
+			# Add first element
+			$t_sql .= is_int( $t_current ) ? db_prepare_int( $t_current ) : "'" . db_prepare_string( $t_current ) . "'";
+			# Add succesive elements
+			for( $i = 1; $i < $t_row_item_count; $i++ ) {
+				$t_current = next( $t_row );
+				$t_sql .= ',';
+				$t_sql .= is_int( $t_current ) ? db_prepare_int( $t_current ) : "'" . db_prepare_string( $t_current ) . "'";
+			}
+			$t_sql .= ')';
+		} else {
+			$t_sql .= is_int( $t_row ) ? db_prepare_int( $t_row ) : "'" . db_prepare_string( $t_row ) . "'";
+		}
+		$t_count++;
+		$t_row = next( $p_data );
+	}
+	$t_sql .= ')';
+
+	return $t_sql;
+}

@@ -38,6 +38,9 @@ define( 'WARN', 2 );
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
+# DB runtime constants
+define( 'MAX_SQL_IN_COUNT', 500 );
+
 # installation
 define( 'CONFIGURED_PASSWORD', '______' );
 define( 'DB_MIN_VERSION_ADODB', '5.20.2' );  # For mssql, oracle and pgsql

@@ -2107,7 +2107,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
  */
 function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
-	$t_where_string = ' WHERE {bugnote}.bug_id in (' . implode( ', ', $t_id_array_lastmod ) . ')';
+	$t_where_string = ' WHERE {bugnote}.bug_id in ' . db_sql_in( $t_id_array_lastmod );
 	$t_query = 'SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM {bugnote} ' . $t_where_string . ' GROUP BY bug_id';
 
 	# perform query
