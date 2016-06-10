@@ -1,7 +1,7 @@
 The MantisBT Entity-Relationship Diagram
 ========================================
 
-The diagram was built using MySQL Workbench [1] version 5.2.40. The MantisBT
+The diagram was built using MySQL Workbench [1] version 6.3.6. The MantisBT
 schema was reverse-engineered based on a freshly installed database, then the
 relationships between tables and corresponding cardinalities were manually
 added.
