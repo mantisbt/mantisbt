@@ -224,11 +224,10 @@
 							Oracle.
 					</para>
 					<note><para>
-						There is also experimental support for DB2, although
-						you should be aware that none of the MantisBT core
-						developers have access to this platform, therefore
-						support is very limited and likely to be removed
-						in the future..
+						DB2 is deprecated. Since none of the MantisBT core
+						developers have access to this platform, support
+						is very limited and likely to be removed in the
+						future.
 					</para></note>
 				</listitem>
 
@@ -311,7 +310,7 @@
 								<entry>PHP</entry>
 								<entry>PHP</entry>
 								<entry>5.3.2</entry>
-								<entry>5.3.x or above</entry>
+								<entry>5.5.x or above</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
 						</tbody>
