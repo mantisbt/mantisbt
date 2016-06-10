@@ -115,12 +115,13 @@ html_status_legend( STATUS_LEGEND_POSITION_TOP, true );
 		<span class="floatleft small">
 		<?php
 			# -- Print and Export links --
+			$t_filter_param =  isset( $t_filter[FILTER_PROPERTY_TEMP_TOKEN_ID] ) ? '?filter=' . $t_filter[FILTER_PROPERTY_TEMP_TOKEN_ID] : '' ;
 			echo '&#160;';
-			print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+			print_bracket_link( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
 			echo '&#160;';
-			print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
+			print_bracket_link( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
 			echo '&#160;';
-			print_bracket_link( 'excel_xml_export.php', lang_get( 'excel_export' ) );
+			print_bracket_link( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
 
 			$t_event_menu_options = $t_links = event_signal( 'EVENT_MENU_FILTER' );
 
