@@ -87,7 +87,7 @@ if ( count( $t_tokens ) > 0 ) {
 
 			$u_date_created  = date( $t_date_format, $u_date_created );
 
-			if ( (int)$u_date_used === 0 ) {
+			if( api_token_is_used( $t_token ) ) {
 				$u_date_used = lang_get( 'api_token_never_used' );
 			} else {
 				$u_date_used = date( $t_date_format, $u_date_used );

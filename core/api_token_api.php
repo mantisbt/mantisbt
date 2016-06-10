@@ -153,6 +153,16 @@ function api_token_get_all( $p_user_id ) {
 }
 
 /**
+ * Determines whether the specified token has ever been used.
+ * @param array $p_token token to check
+ * @return bool True if used
+ * @access public
+ */
+function api_token_is_used( array $p_token ) {
+	return (int)$p_token['date_used'] <= 1;
+}
+
+/**
  * Updates the last used timestamp for the api token.
  *
  * @param integer $p_api_token_id The token id.
