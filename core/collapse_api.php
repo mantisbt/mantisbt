@@ -224,7 +224,7 @@ function collapse_cache_token() {
 		if( $t_update ) {
 			$t_value = json_encode( $g_collapse_cache_token );
 			token_set( TOKEN_COLLAPSE, $t_value, TOKEN_EXPIRY_COLLAPSE );
-		} else {
+		} elseif( token_exists( $t_token['id'] ) ) {
 			token_touch( $t_token['id'] );
 		}
 
