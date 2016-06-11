@@ -159,7 +159,7 @@ function api_token_get_all( $p_user_id ) {
  * @access public
  */
 function api_token_is_used( array $p_token ) {
-	return (int)$p_token['date_used'] <= 1;
+	return (int)$p_token['date_used'] > 1;
 }
 
 /**
