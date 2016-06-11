@@ -494,7 +494,7 @@ function html_body_begin() {
  *                       from $g_logo_image
  * @return void
  */
-function html_print_logo($p_logo = null) {
+function html_print_logo( $p_logo = null ) {
 	if( !$p_logo ) {
 		$p_logo = config_get( 'logo_image' );
 	}
