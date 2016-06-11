@@ -878,8 +878,6 @@ $g_upgrade[208] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 
 $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
-	name					C(128)	NOTNULL DEFAULT \" '' \",
-	hash					C(128)	NOTNULL DEFAULT \" '' \",
 	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
 	date_used				I		UNSIGNED NOTNULL DEFAULT '1'"
 	) );
