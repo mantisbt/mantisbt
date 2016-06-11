@@ -876,6 +876,12 @@ $g_upgrade[207] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 $g_upgrade[208] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 	email					C(191)	$t_notnull DEFAULT \" '' \"" ) );
 
+$g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
+	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
+	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
+	date_used				I		UNSIGNED NOTNULL DEFAULT '1'"
+	) );
+
 # Release marker: 1.3.0
 
 
