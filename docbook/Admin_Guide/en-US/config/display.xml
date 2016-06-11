@@ -15,14 +15,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_page_title</term>
-			<listitem>
-				<para>This is a heading that is displayed in the viewing area of
-					the page.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_favicon_image</term>
 			<listitem>
 				<para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
