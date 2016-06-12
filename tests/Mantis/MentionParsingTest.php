@@ -102,6 +102,10 @@ class MentionParsingTest extends PHPUnit_Framework_TestCase {
 		$this->checkMentions( "Check with:\n@vboctor\n@someone.", array( 'vboctor', 'someone' ) );
 	}
 
+	public function testMentionNl2br() {
+		$this->checkMentions( string_nl2br( "Check with @vboctor\n" ) , array( 'vboctor' ) );
+	}
+
 	public function testMentionWithEmailAddress() {
 		$this->checkMentions( 'xxx@example.com', array() );
 	}
