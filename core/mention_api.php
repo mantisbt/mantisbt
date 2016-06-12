@@ -165,10 +165,6 @@ function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_mes
  * @return string The processed text.
  */
 function mention_format_text( $p_text, $p_html = true ) {
-	if ( !mention_enabled() ) {
-		return $p_text;
-	}
-
 	$t_mentioned_users = mention_get_users( $p_text );
 	if( empty( $t_mentioned_users ) ) {
 		return $p_text;
