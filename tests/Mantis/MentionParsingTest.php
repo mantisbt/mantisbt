@@ -49,10 +49,7 @@ class MentionParsingTest extends PHPUnit_Framework_TestCase {
 	public function testMentions( $p_input_text, array $p_expected ) {
 		$t_actual = mention_get_candidates( $p_input_text );
 
-		$this->assertEquals( count( $p_expected ), count( $t_actual ) );
-		for( $i = 0; $i < count( $p_expected ); $i++ ) {
-			$this->assertEquals( $p_expected[$i], $t_actual[$i] );
-		}
+		$this->assertEquals($p_expected, $t_actual );
 	}
 
 	/**
