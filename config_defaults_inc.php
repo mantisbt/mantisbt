@@ -2749,6 +2749,12 @@ $g_delete_project_threshold = ADMINISTRATOR;
 $g_create_project_threshold = ADMINISTRATOR;
 
 /**
+ * threshold for modify project view Status
+ * @global integer $g_project_view_status_threshold
+ */
+$g_project_view_status_threshold = MANAGER;
+
+/**
  * Threshold needed to be automatically included in private projects
  * @global integer $g_private_project_threshold
  */
@@ -4731,4 +4737,3 @@ $g_webservice_error_when_version_not_found = ON;
  * @global string $g_webservice_version_when_not_found
  */
 $g_webservice_version_when_not_found = '';
-

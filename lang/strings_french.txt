@@ -31,7 +31,7 @@
  * **********************************************************************
  */
 /** French (français)
- * 
+ *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -581,6 +581,7 @@ $s_create_short_link = 'Créer un raccourci';
 $s_filter_permalink = 'Ci-dessous un lien permanent vers le filtre actuel :';
 $s_manage_users_link = 'Gérer les utilisateurs';
 $s_manage_projects_link = 'Gérer les projets';
+$s_manage_projects_view_status = 'Gérer les droits d\'accès de modification de la visibilité d\'un projet';
 $s_manage_custom_field_link = 'Gérer les champs personnalisés';
 $s_manage_global_profiles_link = 'Gérer les profils globaux';
 $s_manage_plugin_link = 'Gérer les plugiciels';

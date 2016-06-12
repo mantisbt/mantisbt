@@ -123,9 +123,13 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<div class="field-container">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
-					<select id="project-view-state" name="view_state">
+				<?php if( access_has_global_level(config_get('project_view_status_threshold'))) { ?>
+						<select id="project-view-state" name="view_state">
 						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state'] ) ?>
-					</select>
+							</select>
+							<?php } else {
+								echo string_html_specialchars(get_enum_element( 'view_state', (int)$t_row['view_state'] ));
+							} ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
