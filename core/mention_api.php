@@ -62,53 +62,30 @@ function mention_get_candidates( $p_text ) {
 		return array();
 	}
 
-	$t_mentions_tag = mentions_tag();
-	$t_mentions_tag_length = strlen( $t_mentions_tag );
-	$t_separators = "\n\r\t,;:/\\| ";
-	$t_token = strtok( $p_text, $t_separators );
+	static $s_pattern = null;
+	if( $s_pattern === null ) {
+		# Define the @mention matching pattern based on valid username regex
+		$t_username_pattern = config_get( 'user_login_valid_regex' );
+		$t_delimiter = $t_username_pattern[0];
+		$t_quoted_delimiter = preg_quote( $t_delimiter, '|' );
 
-	$t_mentions = array();
+		# Exclude the original pattern's anchors if they exist
+		$t_pattern = '|^'
+			. $t_quoted_delimiter . '\^?(?P<pattern>.*)'
+			. $t_quoted_delimiter . '(?P<modifiers>.*)'
+			. '$|';
+		preg_match( $t_pattern, $t_username_pattern, $t_matches );
 
-	while( $t_token !== false ) {
-		$t_mention = $t_token;
-		$t_token = strtok( $t_separators );
-
-		# make sure token has @
-		if( stripos( $t_mention, $t_mentions_tag ) !== 0 ) {
-			continue;
-		}
-
-		$t_mention = substr( $t_mention, $t_mentions_tag_length );
-		if( is_blank( $t_mention ) ) {
-			continue;
-		}
-
-		# Filter out the @@vboctor case.
-		if( stripos( $t_mention, $t_mentions_tag ) === 0 ) {
-			continue;
-		}
-
-		$t_valid = true;
-		for( $i = 0; $i < strlen( $t_mention ); $i++ ) {
-			$t_char = $t_mention[$i];
-			if( !ctype_alnum( $t_char ) && $t_char != '.' && $t_char != '_' ) {
-				$t_valid = false;
-				break;
-			}
-		}
-
-		if( !$t_valid ) {
-			continue;
-		}
-
-		# "victor.boctor" is valid, "vboctor." should be "vboctor"
-		$t_mention = trim( $t_mention, '.' );
-		$t_mentions[$t_mention] = true;
+		# Build new pattern to parse the text for @mentions
+		$t_mentions_tag = mentions_tag();
+		$s_pattern = $t_delimiter
+			. $t_mentions_tag . '(' . rtrim( $t_matches['pattern'], '$' ) . ')'
+			. $t_delimiter . $t_matches['modifiers'];
 	}
 
-	$t_mentions = array_keys( $t_mentions );
+	preg_match_all( $s_pattern, $p_text, $t_mentions );
 
-	return $t_mentions;
+	return array_unique( $t_mentions[1] );
 }
 
 /**
