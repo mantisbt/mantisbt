@@ -64,23 +64,22 @@ function mention_get_candidates( $p_text ) {
 
 	static $s_pattern = null;
 	if( $s_pattern === null ) {
-		# Define the @mention matching pattern based on valid username regex
-		$t_username_pattern = config_get( 'user_login_valid_regex' );
-		$t_delimiter = $t_username_pattern[0];
-		$t_quoted_delimiter = preg_quote( $t_delimiter, '|' );
-
-		# Exclude the original pattern's anchors if they exist
-		$t_pattern = '|^'
-			. $t_quoted_delimiter . '\^?(?P<pattern>.*)'
-			. $t_quoted_delimiter . '(?P<modifiers>.*)'
-			. '$|';
-		preg_match( $t_pattern, $t_username_pattern, $t_matches );
-
-		# Build new pattern to parse the text for @mentions
-		$t_mentions_tag = mentions_tag();
-		$s_pattern = $t_delimiter
-			. $t_mentions_tag . '(' . rtrim( $t_matches['pattern'], '$' ) . ')'
-			. $t_delimiter . $t_matches['modifiers'];
+		$t_quoted_tag = preg_quote( mentions_tag() );
+		$s_pattern = '/(?:'
+			# Negative lookbehind to ensure we have whitespace or start of
+			# string before the tag - ensures we don't match a tag in the
+			# middle of a word (e.g. e-mail address)
+			. '(?<=^|[^\w])'
+			# Negative lookbehind  to ensure we don't match multiple tags
+			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
+			. ')'
+			# any word char or period, but must not end with period
+			. '([\w.]*[\w])'
+			# Lookforward to ensure next char is not a valid mention char or
+			# the end of the string, or the mention tag
+			. '(?=[^\w@]|$)'
+			. '(?!$t_quoted_tag)'
+			. '/';
 	}
 
 	preg_match_all( $s_pattern, $p_text, $t_mentions );
