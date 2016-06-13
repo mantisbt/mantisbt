@@ -240,7 +240,10 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
-		echo lang_get( 'reset_password_msg2' );
+		$msg = lang_get( 'reset_password_msg3' );
+		# if translation for random-password is missing, then create a warning based on other translated words
+		if (!strlen($msg)) $msg = lang_get( 'email' ) . ' = (' . lang_get( 'none' ) . ')';
+		echo $msg;
 	}
 ?>
 </div>

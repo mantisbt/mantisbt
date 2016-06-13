@@ -1696,12 +1696,17 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 		}
 	} else {
-		# use blank password, no emailing
-		$t_password = auth_process_plain_password( '' );
-		user_set_field( $p_user_id, 'password', $t_password );
+		# no emailing - so we will set a random password and just dump it to screen...
 
-		# reset the failed login count because in this mode there is no emailing
+		# Create random password
+		$t_password = auth_generate_random_password();
+		$t_password2 = auth_process_plain_password( $t_password );
+
+		user_set_field( $p_user_id, 'password', $t_password2 );
+
+		# reset the failed login count. (we assume it is needed in the mode with no emails, is that good?)
 		user_reset_failed_login_count_to_zero( $p_user_id );
+		return array( 'random_set' , $t_password ); // we return the new random password
 	}
 
 	return true;

@@ -993,6 +993,7 @@ $s_delete_user_button = 'Delete User';
 $s_impersonate_user_button = 'Impersonate User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
+$s_reset_password_msg3 = 'Reset Password resets the password to be RANDOM (and will display it here once).';
 $s_show_all_users = 'All';
 $s_users_unused = 'Unused';
 $s_users_new = 'New';
