@@ -74,8 +74,8 @@ $g_db_schema			= '';
  *
  * RDBMS           db_type       PHP ext   Comments
  * -----           -------       -------   --------
- * MySQL           mysql         mysql
- *                 mysqli        mysqli    default
+ * MySQL           mysqli        mysqli    default
+ *                 mysql         mysql     PHP < 5.5.0 only
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
