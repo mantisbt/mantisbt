@@ -81,6 +81,7 @@ function category_ensure_exists( $p_category_id ) {
  * @access public
  */
 function category_is_unique( $p_project_id, $p_name ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {category}
 					WHERE project_id=' . db_param() . ' AND ' . db_helper_like( 'name' );
 	$t_count = db_result( db_query( $t_query, array( $p_project_id, $p_name ) ) );
@@ -148,6 +149,7 @@ function category_add( $p_project_id, $p_name ) {
 
 	category_ensure_unique( $p_project_id, $p_name );
 
+	db_param_push();
 	$t_query = 'INSERT INTO {category} ( project_id, name )
 				  VALUES ( ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_project_id, $p_name ) );
@@ -172,12 +174,14 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 
 	$t_old_category = category_get_row( $p_category_id );
 
+	db_param_push();
 	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
 				  WHERE id=' . db_param();
 	db_query( $t_query, array( $p_name, $p_assigned_to, $p_category_id ) );
 
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
+		db_param_push();
 		$t_query = 'SELECT id FROM {bug} WHERE category_id=' . db_param();
 		$t_result = db_query( $t_query, array( $p_category_id ) );
 
@@ -203,10 +207,12 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 		category_ensure_exists( $p_new_category_id );
 	}
 
+	db_param_push();
 	$t_query = 'DELETE FROM {category} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_category_id ) );
 
 	# update bug history entries
+	db_param_push();
 	$t_query = 'SELECT id FROM {bug} WHERE category_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_category_id ) );
 
@@ -215,6 +221,7 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	}
 
 	# update bug data
+	db_param_push();
 	$t_query = 'UPDATE {bug} SET category_id=' . db_param() . ' WHERE category_id=' . db_param();
 	db_query( $t_query, array( $p_new_category_id, $p_category_id ) );
 }
@@ -237,6 +244,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	category_get_all_rows( $p_project_id );
 
 	# get a list of affected categories
+	db_param_push();
 	$t_query = 'SELECT id FROM {category} WHERE project_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_project_id ) );
 
@@ -257,6 +265,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	$t_category_ids = join( ',', $t_category_ids );
 
 	# update bug history entries
+	db_param_push();
 	$t_query = 'SELECT id, category_id FROM {bug} WHERE category_id IN ( ' . $t_category_ids . ' )';
 	$t_result = db_query( $t_query );
 
@@ -265,10 +274,12 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	}
 
 	# update bug data
+	db_param_push();
 	$t_query = 'UPDATE {bug} SET category_id=' . db_param() . ' WHERE category_id IN ( ' . $t_category_ids . ' )';
 	db_query( $t_query, array( $p_new_category_id ) );
 
 	# delete categories
+	db_param_push();
 	$t_query = 'DELETE FROM {category} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project_id ) );
 
@@ -291,6 +302,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 		return $g_category_cache[$p_category_id];
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {category} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_category_id ) );
 	$t_row = db_fetch_array( $t_result );
@@ -562,6 +574,7 @@ function category_get_name( $p_category_id ) {
 function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
 	$t_project_name = project_get_name( $p_project_id );
 
+	db_param_push();
 	$t_query = 'SELECT id FROM {category} WHERE name=' . db_param() . ' AND project_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_category_name, (int)$p_project_id ) );
 	$t_id = db_result( $t_result );
@@ -612,6 +625,7 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
  * @access public
  */
 function category_can_delete( $p_category_id ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
 	$t_bug_count = db_result( db_query( $t_query, array( $p_category_id ) ) );
 	return $t_bug_count == 0;

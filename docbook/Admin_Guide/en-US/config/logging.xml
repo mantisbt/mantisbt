@@ -31,12 +31,12 @@
 			<term>$g_debug_email</term>
 			<listitem>
 				<para>Used for debugging e-mail notifications.
-					When it is OFF, the emails are sent normally.
+					When it is '', the emails are sent normally.
 					If set to an e-mail address, all messages are sent
 					to it, with the original recipients (To, Cc, Bcc)
 					included in the message body.
 				</para>
-				<para>Default is OFF.</para>
+				<para>Default is ''.</para>
 			</listitem>
 		</varlistentry>
 

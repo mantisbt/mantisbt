@@ -313,29 +313,20 @@ function html_head_end() {
 }
 
 /**
- * Print a user-defined banner at the top of the page if there is one.
+ * Prints the logo with an URL link.
+ * @param string $p_logo Path to the logo image. If not specified, will get it
+ *                       from $g_logo_image
  * @return void
  */
-function html_top_banner() {
-	$t_page = config_get( 'top_include_page' );
-	$t_logo_image = config_get( 'logo_image' );
-	$t_logo_url = config_get( 'logo_url' );
-
-	if( is_blank( $t_logo_image ) ) {
-		$t_show_logo = false;
-	} else {
-		$t_show_logo = true;
-		if( is_blank( $t_logo_url ) ) {
-			$t_show_url = false;
-		} else {
-			$t_show_url = true;
-		}
+function html_print_logo( $p_logo = null ) {
+	if( !$p_logo ) {
+		$p_logo = config_get( 'logo_image' );
 	}
 
-	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
-		include( $t_page );
-	} else if( $t_show_logo ) {
-		echo '<div id="banner">';
+	if( !is_blank( $p_logo ) ) {
+		$t_logo_url = config_get( 'logo_url' );
+		$t_show_url = !is_blank( $t_logo_url );
+
 		if( $t_show_url ) {
 			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}
@@ -344,6 +335,24 @@ function html_top_banner() {
 		if( $t_show_url ) {
 			echo '</a>';
 		}
+	}
+}
+
+
+
+/**
+ * Print a user-defined banner at the top of the page if there is one.
+ * @return void
+ */
+function html_top_banner() {
+	$t_page = config_get( 'top_include_page' );
+	$t_logo_image = config_get( 'logo_image' );
+
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		include( $t_page );
+	} else if( !is_blank( $t_logo_image ) ) {
+		echo '<div id="banner">';
+		html_print_logo( $t_logo_image );
 		echo '</div>';
 	}
 
@@ -366,7 +375,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 	}
 
 	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
-	print_button( $p_redirect_url, lang_get( 'proceed' ) );
+	print_button( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
 	echo '</div></div>';
 }
 

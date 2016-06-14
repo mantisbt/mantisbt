@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '1.3.0-rc.2-dev' );
+define( 'MANTIS_VERSION', '2.0.0-beta.1-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -490,6 +490,7 @@ define( 'TOKEN_LAST_VISITED', 3 );
 define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
 define( 'TOKEN_ACCOUNT_VERIFY', 6 );
+define( 'TOKEN_ACCOUNT_ACTIVATION', 7 );
 define( 'TOKEN_USER', 1000 );
 
 # token expirations
@@ -499,6 +500,7 @@ define( 'TOKEN_EXPIRY', 60 * 60 );
 define( 'TOKEN_EXPIRY_LAST_VISITED', 24 * 60 * 60 );
 define( 'TOKEN_EXPIRY_AUTHENTICATED', 5 * 60 );
 define( 'TOKEN_EXPIRY_COLLAPSE', 365 * 24 * 60 * 60 );
+define( 'TOKEN_EXPIRY_ACCOUNT_ACTIVATION', 24 * 60 * 60 );
 
 # config types
 define( 'CONFIG_TYPE_DEFAULT', 0 );
@@ -575,7 +577,9 @@ define( 'EMAIL_SHUTDOWN_GENERATED', 1 );
 define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
-define( 'DB_FIELD_SIZE_USERNAME', 255 );
+# Note: 191 comes from a MySQL/InnoDB limitation on Index key size (767 bytes)
+# divided by 4 (bytes per unicode char), see #20431:52209 for details.
+define( 'DB_FIELD_SIZE_USERNAME', 191 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
@@ -584,6 +588,10 @@ define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
 define( 'SECONDS_PER_DAY', 86400 );
+
+# Auto-generated link targets
+define( 'LINKS_SAME_WINDOW', 1 );
+define( 'LINKS_NEW_WINDOW', 2 );
 
 # Obsolete / deprecated constants
 # Defined below for backwards-compatibility purposes -- Do not use them

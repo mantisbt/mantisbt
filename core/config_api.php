@@ -357,12 +357,14 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			user_ensure_exists( $p_user );
 		}
 
+		db_param_push();
 		$t_query = 'SELECT COUNT(*) from {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
 		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
 
+		db_param_push();
 		$t_params = array();
 		if( 0 < db_result( $t_result ) ) {
 			$t_set_query = 'UPDATE {config}
@@ -499,6 +501,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 			return;
 		}
 
+		db_param_push();
 		$t_query = 'DELETE FROM {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
@@ -522,6 +525,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	}
 
 	# Delete the corresponding bugnote texts
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
 	db_query( $t_query, array( $p_option, $p_user_id ) );
 }
@@ -533,6 +537,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  * @return void
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project ) );
 

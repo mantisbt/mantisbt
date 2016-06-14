@@ -104,32 +104,18 @@ $u_email = user_get_email( $u_id );
 # If the password is the default password, then prompt user to change it.
 $t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );
 
-# note if we are being included by a script of a different name, if so,
-# this is a mandatory password change request
-$t_verify = is_page_name( 'verify.php' );
-
+$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 $t_force_pw_reset = false;
 
-if( $t_verify || $t_reset_password ) {
-	$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
-
-	echo '<div class="alert alert-danger">';
-	echo '<ul>';
-
-	if( $t_verify ) {
-		echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
-
-		if( $t_can_change_password ) {
-			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
-			$t_force_pw_reset = true;
-		}
-	} else if( $t_reset_password && $t_can_change_password ) {
-		echo '<li>' . lang_get( 'warning_default_administrator_account_present' ) . '</li>';
-		$t_force_pw_reset = true;
-	}
-
-	echo '</ul>';
-	echo '</div>';
+if( $t_reset_password && $t_can_change_password ) {
+	?>
+	<div class="alert alert-danger">
+		<ul>
+			<li><?php echo lang_get( 'warning_default_administrator_account_present' ) ?></li>
+		</ul>
+	</div>
+	<?php
+	$t_force_pw_reset = true;
 }
 
 print_account_menu( 'account_page.php' );
@@ -157,7 +143,7 @@ print_account_menu( 'account_page.php' );
 		<fieldset>
 			<?php echo form_security_field( 'account_update' );
 
-			if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+			if( !$t_can_change_password ) {
 				# With LDAP -->
 			?>
 			<tr>

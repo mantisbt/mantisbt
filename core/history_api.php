@@ -84,6 +84,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
 
+		db_param_push();
 		$t_query = 'INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
@@ -124,6 +125,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 		$p_new_value = '';
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
@@ -167,6 +169,7 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 
 	$t_params = array( db_now() - $p_duration_in_seconds, $t_user_id );
 
+	db_param_push();
 	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
 				' AND user_id = ' . db_param();
 	$t_result = db_query( $t_query, $t_params );
@@ -190,6 +193,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 		$t_history_order = $p_history_order;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {bug_history}';
 	$t_params = array();
 	$t_where = array();
@@ -222,7 +226,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 
 /**
  * Gets the next accessible history event for current user and specified db result.
- * @param  string  $p_result      The database result.
+ * @param  object  $p_result      The database result.
  * @param  integer $p_user_id     The user id or null for logged in user.
  * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
  *                                          false otherwise.
@@ -235,6 +239,11 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+
+		# Ignore entries related to non-existing bugs (see #20727)
+		if( !bug_exists( $v_bug_id ) ) {
+			continue;
+		}
 
 		# Make sure the entry belongs to current project.
 		if ( $t_project_id != ALL_PROJECTS && $t_project_id != bug_get_field( $v_bug_id, 'project_id' ) ) {
@@ -701,6 +710,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @return void
  */
 function history_delete( $p_bug_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( $p_bug_id ) );
 }

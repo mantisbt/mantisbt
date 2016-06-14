@@ -659,6 +659,7 @@ function plugin_is_installed( $p_basename ) {
 		}
 	}
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
 	$t_result = db_query( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
@@ -683,6 +684,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
 		return null;
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_plugin->basename, true ) );
@@ -796,6 +798,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 		return;
 	}
 
+	db_param_push();
 	$t_query = 'DELETE FROM {plugin} WHERE basename=' . db_param();
 	db_query( $t_query, array( $p_plugin->basename ) );
 
@@ -951,6 +954,7 @@ function plugin_register_installed() {
 	}
 
 	# register plugins installed via the interface/database
+	db_param_push();
 	$t_query = 'SELECT basename, priority, protected FROM {plugin} WHERE enabled=' . db_param() . ' ORDER BY priority DESC';
 	$t_result = db_query( $t_query, array( true ) );
 

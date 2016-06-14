@@ -827,14 +827,17 @@ $g_upgrade[192] = array( 'CreateIndexSQL', array( 'idx_bug_history_date_modified
 $g_upgrade[193] = array( 'UpdateFunction', 'check_config_serialization', array() );
 $g_upgrade[194] = array( 'UpdateFunction', 'check_token_serialization', array() );
 $g_upgrade[195] = array( 'UpdateFunction', 'stored_filter_migrate', array() );
-$g_upgrade[196] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
-	username				C(255)	$t_notnull DEFAULT \" '' \"" ) );
-$g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
-	realname				C(255)	$t_notnull DEFAULT \" '' \"" ) );
+
+# Steps 196, 197 and 199 used to increase length of user.username, user.realname
+# and user.email columns to 255 chars. This causes issues with utf8mb4 charset
+# on MySQL when using the InnoDB engine due to a limitation on index key size
+# to 767 bytes.
+# The columns will be reduced to 191 chars (see upgrade steps 206-208 below).
+$g_upgrade[196] = null;
+$g_upgrade[197] = null;
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
 	password				C(64)	$t_notnull DEFAULT \" '' \"" ) );
-$g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
-	email					C(255)	$t_notnull DEFAULT \" '' \"" ) );
+$g_upgrade[199] = null;
 
 # Release marker: 1.3.0-beta.1 - 1.3.0-beta.3
 
@@ -864,6 +867,20 @@ $g_upgrade[204] = array( 'AlterColumnSQL', array( db_get_table( 'project_file' )
 
 # Enable gravatar plugin if avatars are enabled
 $g_upgrade[205] = array( 'UpdateFunction', 'gravatar_plugin', array() );
+
+# Limiting column size, planning for future MySQL utf8mb4 support (see #20465)
+$g_upgrade[206] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
+	username				C(191)	$t_notnull DEFAULT \" '' \"" ) );
+$g_upgrade[207] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
+	realname				C(191)	$t_notnull DEFAULT \" '' \"" ) );
+$g_upgrade[208] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "
+	email					C(191)	$t_notnull DEFAULT \" '' \"" ) );
+
+$g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
+	user_id					I		UNSIGNED NOTNULL DEFAULT '0',
+	date_created			I		UNSIGNED NOTNULL DEFAULT '1',
+	date_used				I		UNSIGNED NOTNULL DEFAULT '1'"
+	) );
 
 # Release marker: 1.3.0
 

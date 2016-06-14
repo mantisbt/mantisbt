@@ -295,6 +295,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 
 	# add users monitoring the bug
 	$t_monitoring_enabled = ON == email_notify_flag( $p_notify_type, 'monitor' );
+	db_param_push();
 	$t_query = 'SELECT DISTINCT user_id FROM {bug_monitor} WHERE bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
@@ -308,6 +309,20 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		}
 	}
 
+	# add Category Owner
+	if( ON == email_notify_flag( $p_notify_type, 'category' ) ) {
+		$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
+
+		if( $t_category_id > 0 ) {
+			$t_category_assigned_to = category_get_field( $t_category_id, 'user_id' );
+
+			if( $t_category_assigned_to > 0 ) {
+				$t_recipients[$t_category_assigned_to] = true;
+				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Category Owner = @U%d', $p_bug_id, $t_category_assigned_to ) );
+			}
+		}
+	}
+
 	# add users who contributed bugnotes
 	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
 	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
@@ -315,6 +330,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	$t_bug_date = $t_bug->last_updated;
 
 	$t_notes_enabled = ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) );
+	db_param_push();
 	$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -558,6 +574,9 @@ function email_notify_new_account( $p_username, $p_email ) {
 
 	$t_threshold_min = config_get( 'notify_new_user_created_threshold_min' );
 	$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
+	$t_user_ids = array_keys( $t_threshold_users );
+	user_cache_array_rows( $t_user_ids );
+	user_pref_cache_array_rows( $t_user_ids );
 
 	foreach( $t_threshold_users as $t_user ) {
 		lang_push( user_pref_get_language( $t_user['id'] ) );
@@ -1128,6 +1147,7 @@ function email_send( EmailData $p_email_data ) {
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
+		log_event(LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'");
 	}
 
 	try {
@@ -1551,12 +1571,12 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 		if( user_exists( $t_bugnote->reporter_id ) ) {
 			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'], $t_bugnote->reporter_id );
-			$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
+			$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
 		} else {
 			$t_access_level_string = '';
 		}
 
-		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . $t_access_level_string . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
+		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . $t_access_level_string . ' - ' . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
 
 		$t_message .= $t_email_separator2 . " \n";
 		$t_message .= $t_string . " \n";

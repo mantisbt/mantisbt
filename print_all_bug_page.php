@@ -203,14 +203,16 @@ $t_icon_path = config_get( 'icon_path' );
 		$t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
 
 		foreach( $t_columns as $t_column ) {
-			$t_title_function = 'print_column_title';
-			helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
+			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
 		}
 	?>
 </tr>
 <tr class="spacer">
 	<td colspan="<?php echo $t_num_of_columns ?>"></td>
 </tr>
+</thead>
+
+<tbody>
 <?php
 	for( $i=0; $i < $t_row_count; $i++ ) {
 		$t_row = $t_result[$i];
@@ -219,15 +221,14 @@ $t_icon_path = config_get( 'icon_path' );
 ?>
 <tr>
 <?php
-		foreach( $t_columns as $t_column ) {
-			$t_column_value_function = 'print_column_value';
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
-		}
+			foreach( $t_columns as $t_column ) {
+				helper_call_custom_function( 'print_column_value', array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
+			}
 ?>
 </tr>
 <?php
-	} # isset_loop
-} # for_loop
+		} # isset_loop
+	} # for_loop
 ?>
 <tr class="spacer">
     <td colspan="<?php echo $t_num_of_columns ?>"></td>

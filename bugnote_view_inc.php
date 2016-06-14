@@ -191,11 +191,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			<?php
 			if( user_exists( $t_bugnote->reporter_id ) ) {
 				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
-				# Only display access level when higher than 0 (ANYBODY)
-				if( $t_access_level > ANYBODY ) {
-					$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed-in-right';
-					echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
-				}
+				$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed-in-right';
+				echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
 			}
 			?>
 			&#160;

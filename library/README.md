@@ -7,15 +7,15 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-adodb           | adodb           | 5.20.2    | unpatched [1]
-disposable      | disposable      | 2.1.0     | unpatched [1]
+adodb           | adodb           | 5.20.4    | unpatched [1]
+disposable      | disposable      | 2.1.1     | unpatched [1]
 ezc             | Zeta Components |           |
 ezc/Base        | Zeta Base       | 1.9       | unpatched [1]
 ezc/Graph       | Zeta Graph      | 1.5.2     | unpatched [1]
-phpmailer       | PHPMailer       | 5.2.14    | unpatched [1]
+phpmailer       | PHPMailer       | 5.2.15    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
-securimage      | PHP Captcha     | 3.6.2     | unpatched [1]
+securimage      | PHP Captcha     | 3.6.4     | unpatched [1]
 
 **Notes**
 

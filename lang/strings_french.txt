@@ -50,6 +50,7 @@
  * @author Jean-Frédéric
  * @author Kropotkine 113
  * @author Lapinkiller
+ * @author Lbayle
  * @author McDutchie
  * @author Noe
  * @author Od1n
@@ -60,6 +61,7 @@
  * @author Verdy p
  * @author Vincent
  * @author Windes
+ * @author Wladek92
  * @author Wyz
  * @author Zetud
  */
@@ -223,8 +225,8 @@ $s_view_state_enum_string = '10:public,50:privé';
 $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
 $s_severity_enum_string = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:critique,80:bloquant';
 $s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:sans objet';
-$s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
-$s_resolution_enum_string = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
+$s_status_enum_string = '10:nouveau,20:retour  d\'informations,30:accepté,40:confirmé,50:affecté,80:traité,90:fermé';
+$s_resolution_enum_string = '10:ouvert,20:corrigé,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas corrigé';
 $s_projection_enum_string = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
 $s_eta_enum_string = '10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois';
 $s_sponsorship_enum_string = '0:non payé,1:demandé,2:payé';
@@ -291,6 +293,8 @@ $s_email_summary = 'Résumé';
 $s_email_description = 'Description';
 $s_email_additional_information = 'Informations complémentaires';
 $s_email_steps_to_reproduce = 'Étapes pour le reproduire';
+$s_email_tag = 'Balises';
+$s_email_due_date = 'Date d’échéance';
 $s_account_protected_msg = 'Ce compte est protégé en écriture. Impossible de modifier sa configuration...';
 $s_account_removed_msg = 'Votre compte a été supprimé...';
 $s_confirm_delete_msg = 'Voulez-vous vraiment supprimer ce compte ?';
@@ -305,13 +309,14 @@ $s_realname_label = 'Nom réel';
 $s_email = 'Courriel';
 $s_email_label = 'Courriel';
 $s_password = 'Mot de passe';
+$s_new_password = 'Nouveau mot de passe';
 $s_no_password_change = 'Le mot de passe est contrôlé par un autre système : il ne peut donc pas être modifié ici.';
 $s_confirm_password = 'Confirmez le mot de passe';
 $s_current_password = 'Mot de passe actuel';
 $s_access_level = 'Droits d\'accès';
 $s_access_level_label = 'Niveau d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
-$s_verify_warning = 'L\'information relative à votre compte a été vérifiée. Le message de confirmation de compte reçu est désormais non valide.';
+$s_verify_warning = 'L’information relative à votre compte a été vérifiée.';
 $s_verify_change_password = 'Vous devez avoir un mot de passe pour vous connecter à nouveau.';
 $s_api_tokens_link = 'Jetons de l’API';
 $s_api_token_create_form_title = 'Créer un jeton de l’API';
@@ -336,8 +341,8 @@ $s_bugnote_order_asc = 'Croissant';
 $s_bugnote_order_desc = 'Décroissant';
 $s_email_on_new = 'Courriel en cas de nouveau bogue';
 $s_email_on_assigned = 'Courriel en cas de nouvelle assignation';
-$s_email_on_feedback = 'Courriel en cas de commentaire';
-$s_email_on_resolved = 'Courriel en cas de résolution';
+$s_email_on_feedback = 'Courriel de retour utilisateur';
+$s_email_on_resolved = 'Courriel en cas résolu';
 $s_email_on_closed = 'Courriel en cas de fermeture';
 $s_email_on_reopened = 'Courriel en cas de réouverture';
 $s_email_on_bugnote_added = 'Courriel en cas de nouvelle note';
@@ -388,12 +393,12 @@ $s_realname_updated = 'Nom réel mis à jour avec succès';
 $s_password_updated = 'Mot de passe mis à jour avec succès';
 $s_multiple_projects = 'Les bogues sélectionnés proviennent de différents projets. Les paramètres ci-dessous s\'appliquent à tous les projets. Si cela ne convient pas, sélectionnez un plus petit nombre de bogues.';
 $s_new_bug_title = 'Nouveau bogue';
-$s_feedback_bug_title = 'Demander un commentaire sur le bogue';
+$s_feedback_bug_title = 'Demander des informations sur le bogue';
 $s_acknowledged_bug_title = 'Accepter le bogue';
 $s_confirmed_bug_title = 'Confirmer le bogue';
 $s_assigned_bug_title = 'Assigner le bogue';
 $s_new_bug_button = 'Nouveau bogue';
-$s_feedback_bug_button = 'Demander un commentaire';
+$s_feedback_bug_button = 'Demande de retour d\'information';
 $s_acknowledged_bug_button = 'Accepter le bogue';
 $s_confirmed_bug_button = 'Confirmer le bogue';
 $s_assigned_bug_button = 'Assigner le bogue';
@@ -416,8 +421,8 @@ $s_max_file_size_label = 'Taille maximale :';
 $s_bug_reopened_msg = 'Le bogue a été réouvert...';
 $s_reopen_add_bugnote_title = 'Ajouter une note pour la réouverture du bogue';
 $s_bugnote_add_reopen_button = 'Ajouter une note et rouvrir le bogue';
-$s_resolved_bug_title = 'Résolution d\'un bogue';
-$s_resolved_bug_button = 'Résoudre le bogue';
+$s_resolved_bug_title = 'Traitement d\'un bogue';
+$s_resolved_bug_button = 'Traiter le bogue';
 $s_bug_resolved_msg = 'Le bogue a été résolu. Entrez une note ci-dessous...';
 $s_resolve_add_bugnote_title = 'Ajouter une note pour la résolution du bogue';
 $s_bugnote_add_resolve_button = 'Ajouter une note';
@@ -430,9 +435,12 @@ $s_reminder_sent_none = 'Aucun rappel n’a pu être envoyé';
 $s_reminder_list_truncated = 'liste des destinataires tronquée';
 $s_bug_send_button = 'Envoyer';
 $s_reminder = 'Rappel';
+$s_reminder_mentions = 'Vous pouvez maintenant faire mention des utilisateurs pour activer les notifications pour eux, au lieu d’utiliser une fonctionnalité de rappel. Par exemple, d’autres peuvent vous mentionner en écrivant %1s dans les questions et remarques, et vous recevrez un courriel de notification.';
 $s_reminder_explain = 'Cette note sera envoyée aux destinataires sélectionnés, en demandant leur avis sur ce problème.';
 $s_reminder_monitor = 'Ces destinataires commenceront également à surveiller le problème ; ils pourront cesser la surveillance en utilisant le bouton « Arrêter la surveillance ».';
 $s_reminder_store = 'Cette note sera enregistrée avec le bogue.';
+$s_mentioned_you = 'vous a mentionné sur :';
+$s_mentioned_in = 'Mentionné dans %1$s';
 $s_confirm_sponsorship = 'Veuillez confirmer que vous souhaitez commanditer le bogue %1$d pour %2$s.';
 $s_stick_bug_button = 'Coller';
 $s_unstick_bug_button = 'Décoller';
@@ -607,6 +615,7 @@ $s_colour_global = 'Tous les paramètres du projet sont prioritaires par rapport
 $s_issue_reporter = 'Utilisateur ayant rapporté le bogue';
 $s_issue_handler = 'Utilisateur prenant en charge le bogue';
 $s_users_added_bugnote = 'Utilisateurs ayant ajouté des notes.';
+$s_category_assigned_to = 'Propriétaire de la catégorie';
 $s_change_configuration = 'Mettre à jour la configuration';
 $s_message = 'Message';
 $s_default_notify = 'Mise à jour des états de la notification par défaut à';
@@ -665,6 +674,9 @@ $s_all_users = 'Tous les utilisateurs';
 $s_set_configuration_option = 'Changer l\'option de configuration';
 $s_delete_config_sure_msg = 'Voulez-vous vraiment supprimer cette option de configuration ?';
 $s_configuration_corrupted = 'La configuration dans la base de données est corrompue.';
+$s_set_configuration_option_action_create = 'Créer une option de configuration';
+$s_set_configuration_option_action_edit = 'Modifier une option de configuration';
+$s_set_configuration_option_action_clone = 'Dupliquer une option de configuration';
 $s_plugin = 'Greffon';
 $s_plugins_installed = 'Plugiciels installés';
 $s_plugins_available = 'Plugiciels disponibles';
@@ -759,6 +771,7 @@ $s_edit_user_title = 'Modifier un utilisateur';
 $s_account_unlock_button = 'Déverrouiller le compte';
 $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l\'utilisateur';
+$s_impersonate_user_button = 'Se faire passer pour l’utilisateur';
 $s_reset_password_msg = 'La réinitialisation du mot de passe envoie un hyperlien de confirmation par courriel.';
 $s_reset_password_msg2 = 'Réinitialiser le mot de passe le laisse vide.';
 $s_show_all_users = 'Tous';
@@ -1266,6 +1279,7 @@ $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d\'utilisateur est déjà ut
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Cette adresse de courriel est déjà utilisée. Veuillez revenir en arrière et en sélectionner une autre.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L\'option de configuration « %1$s » n\'a pas été trouvée.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L\'option de configuration « %1$s » ne peut pas être définie dans la base de données. Elle doit être définie dans config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Impossible de définir l\'option de configuration "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %1$s » introuvable.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note introuvable.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet « %1$s » introuvable.';

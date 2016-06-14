@@ -256,6 +256,7 @@ $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+$s_no_access = 'no access';
 $s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
 $s_project_view_state_enum_string = '10:public,50:private';
 $s_view_state_enum_string = '10:public,50:private';
@@ -337,6 +338,7 @@ $s_email_description = 'Description';
 $s_email_additional_information = 'Additional Information';
 $s_email_steps_to_reproduce = 'Steps to Reproduce';
 $s_email_tag = 'Tags';
+$s_email_due_date = 'Due Date';
 
 # account_delete.php
 $s_account_protected_msg = 'Account protected. Cannot change settings...';
@@ -357,13 +359,14 @@ $s_realname_label = 'Real Name';
 $s_email = 'E-mail';
 $s_email_label = 'E-mail';
 $s_password = 'Password';
+$s_new_password = 'New password';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
 $s_current_password = 'Current Password';
 $s_access_level = 'Access Level';
 $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_warning = 'Your account information has been verified.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
 # API tokens page
@@ -775,6 +778,7 @@ $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
+$s_category_assigned_to = 'Category Owner';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';

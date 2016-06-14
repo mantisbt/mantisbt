@@ -41,6 +41,7 @@
  * @author Changwoo
  * @author Hong3e
  * @author Wisewolf
+ * @author Ykhwong
  * @author 아라
  */
 
@@ -81,7 +82,7 @@ $s_plugin_MantisGraph_by_resolution_pct = '해결별 백분율';
 $s_plugin_MantisGraph_by_severity_mix = '심각도와 상태별 백분율';
 $s_plugin_MantisGraph_by_priority_mix = '우선 순위와 상태별 백분율';
 $s_plugin_MantisGraph_by_resolution_mix = '해결과 상태별 백분율';
-$s_plugin_MantisGraph_legend_still_open = '진행중';
+$s_plugin_MantisGraph_legend_still_open = '진행 중';
 $s_plugin_MantisGraph_legend_resolved = '해결됨';
 $s_plugin_MantisGraph_legend_assigned = '할당됨';
 $s_plugin_MantisGraph_legend_total = '총계';

@@ -46,6 +46,7 @@
  * @author Dalton2
  * @author Dtamajon
  * @author Fitoschido
+ * @author Lemondoge
  * @author Locos epraix
  * @author Macofe
  * @author McDutchie
@@ -283,6 +284,8 @@ $s_email_summary = 'Resumen';
 $s_email_description = 'Descripción';
 $s_email_additional_information = 'Información adicional';
 $s_email_steps_to_reproduce = 'Pasos para reproducir';
+$s_email_tag = 'Etiquetas';
+$s_email_due_date = 'Fecha límite';
 $s_account_protected_msg = 'Cuenta protegida. No se puede cambiar la configuración…';
 $s_account_removed_msg = 'Su cuenta ha sido eliminada…';
 $s_confirm_delete_msg = '¿Está seguro de que quiere eliminar su cuenta?';
@@ -297,13 +300,14 @@ $s_realname_label = 'Nombre real';
 $s_email = 'Correo electrónico';
 $s_email_label = 'Correo electrónico';
 $s_password = 'Contraseña';
+$s_new_password = 'Contraseña nueva';
 $s_no_password_change = 'La contraseña está gestionada por otro sistema, por lo tanto no puede editarse aquí.';
 $s_confirm_password = 'Confirmar contraseña';
 $s_current_password = 'Contraseña actual';
 $s_access_level = 'Nivel de acceso';
 $s_access_level_label = 'Nivel de acceso';
 $s_update_user_button = 'Actualizar usuario';
-$s_verify_warning = 'La información de su cuenta ha sido verificada. El mensaje de confirmación de la cuenta que recibió no es válido a partir de ahora.';
+$s_verify_warning = 'La información de tu cuenta se ha verificado.';
 $s_verify_change_password = 'Debe definir una contraseña aquí para que pueda iniciar sesión de nuevo.';
 $s_api_tokens_link = 'Tokens API';
 $s_api_token_create_form_title = 'Crear Token API';
@@ -422,9 +426,12 @@ $s_reminder_sent_none = 'No se pudieron enviar los recordatorios';
 $s_reminder_list_truncated = 'lista de receptores parcial';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Recordatorio';
+$s_reminder_mentions = 'Ahora puedes mencionar a los usuarios para activar notificaciones para ellos en lugar de utilizar la función de recordatorios. Por ejemplo, otros pueden mencionarte escribiendo %1s en los problemas y las notas, y recibirás una notificación por correo electrónico.';
 $s_reminder_explain = 'Esta nota se enviará a los destinatarios seleccionados, solicitando comentarios sobre esta incidencia.';
 $s_reminder_monitor = 'Esos destinatarios empezarán a monitorizar la incidencia. Los mismos pueden desuscribirse utilizando el botón "Dejar de monitorizar".';
 $s_reminder_store = 'Esta nota se almacenará con la incidencia.';
+$s_mentioned_you = 'te mencionó en:';
+$s_mentioned_in = 'Mencionado en %1$s';
 $s_confirm_sponsorship = 'Confirme que usted quiere patrocinar la incidencia %1$d para %2$s.';
 $s_stick_bug_button = 'Fijar';
 $s_unstick_bug_button = 'Desfijar';
@@ -599,6 +606,7 @@ $s_colour_global = 'La configuración general de todos los proyectos tiene prior
 $s_issue_reporter = 'Usuario que reporta la incidencia';
 $s_issue_handler = 'Usuario que gestiona la incidencia';
 $s_users_added_bugnote = 'Usuarios que añaden Notas';
+$s_category_assigned_to = 'Dueño de la categoría';
 $s_change_configuration = 'Actualizar configuración';
 $s_message = 'Mensaje';
 $s_default_notify = 'Estableciendo los marcadores de notificación a';
@@ -654,9 +662,12 @@ $s_configuration_option = 'Opción de Configuración';
 $s_configuration_option_type = 'Tipo';
 $s_configuration_option_value = 'Valor';
 $s_all_users = 'Todos los usuarios';
-$s_set_configuration_option = 'Establecer Opción de Configuración';
+$s_set_configuration_option = 'Establecer opción de configuración';
 $s_delete_config_sure_msg = '¿Está seguro que desea borrar esta opción de configuración?';
 $s_configuration_corrupted = 'La configuración en la base de datos está corrupta.';
+$s_set_configuration_option_action_create = 'Crear opción de configuración';
+$s_set_configuration_option_action_edit = 'Editar opción de configuración';
+$s_set_configuration_option_action_clone = 'Clonar opción de configuración';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins Instalados';
 $s_plugins_available = 'Plugins Disponibles';
@@ -751,6 +762,7 @@ $s_edit_user_title = 'Editar usuario';
 $s_account_unlock_button = 'Desbloquear cuenta';
 $s_reset_password_button = 'Reinicializar Contraseña';
 $s_delete_user_button = 'Eliminar usuario';
+$s_impersonate_user_button = 'Suplantar La Identidad Del Usuario';
 $s_reset_password_msg = 'Reinicializar la contraseña envía un enlace de confirmación por correo electrónico.';
 $s_reset_password_msg2 = 'Reinicializar Contraseña establece la misma en blanco.';
 $s_show_all_users = 'TODOS';
@@ -1258,6 +1270,7 @@ $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ese nombre de usuario está en uso.
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'El correo electrónico ya está en uso. Por favor, vuelva atrás y elija otro.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'No se encuentra la opción de configuración \'%1$s\'.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'La opción de configuración \'%1$s\' no puede estár definida en la base de datos. Debe estar definida en el archivo config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'No se puede establecer la opción de configuración "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'No se encontró la cadena «%1$s».';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nota no encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyecto "%1$s" no encontrado.';

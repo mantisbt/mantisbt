@@ -49,6 +49,7 @@ $s_plugin_XmlImportExport_title = 'استورد/صدّر قضايا';
 $s_plugin_XmlImportExport_description = 'يضيف أستيراد مبني على XML  و قدرات التصدير إلى MantisBT.';
 $s_plugin_XmlImportExport_import = 'استورد قضايا';
 $s_plugin_XmlImportExport_export = 'تصدير XML';
+$s_plugin_XmlImportExport_config_title = 'استيراد/تصدير XML تهيئة مستويات الدخول';
 $s_plugin_XmlImportExport_import_threshold = 'استورد قضايا';
 $s_plugin_XmlImportExport_export_threshold = 'تصدير القضايا';
 $s_plugin_XmlImportExport_action_update = 'تحديث';

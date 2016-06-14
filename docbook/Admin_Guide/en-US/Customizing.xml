@@ -700,7 +700,7 @@ $s_access_levels_enum_string =
     <section id="admin.customize.email">
         <title>Email Notifications</title>
 
-        <para>See <xref linkend="admin.customize.email" />
+        <para>See <xref linkend="admin.config.email" />
         	in the Configuration section.
         </para>
 
@@ -791,6 +791,7 @@ $g_default_notify_flags = array(
 	'handler'       => ON,
 	'monitor'       => ON,
 	'bugnotes'      => ON,
+	'category'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
 );

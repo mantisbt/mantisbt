@@ -115,6 +115,7 @@ function email_queue_add( EmailData $p_email_data ) {
 	$c_body = $t_email_data->body;
 	$c_metadata = serialize( $t_email_data->metadata );
 
+	db_param_push();
 	$t_query = 'INSERT INTO {email}
 				    ( email, subject, body, submitted, metadata)
 				  VALUES
@@ -164,6 +165,7 @@ function email_queue_row_to_object( $p_row ) {
  * @return boolean|EmailData
  */
 function email_queue_get( $p_email_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {email} WHERE email_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_email_id ) );
 
@@ -178,6 +180,7 @@ function email_queue_get( $p_email_id ) {
  * @return void
  */
 function email_queue_delete( $p_email_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {email} WHERE email_id=' . db_param();
 	db_query( $t_query, array( $p_email_id ) );
 
@@ -189,6 +192,7 @@ function email_queue_delete( $p_email_id ) {
  * @return array
  */
 function email_queue_get_ids() {
+	db_param_push();
 	$t_query = 'SELECT email_id FROM {email} ORDER BY email_id ASC';
 	$t_result = db_query( $t_query );
 
