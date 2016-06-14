@@ -32,7 +32,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$this->description = lang_get( 'plugin_graph_description' );
 		$this->page = 'config';
 
-		$this->version = '1.3.0';
+		$this->version = MANTIS_VERSION;
 		$this->requires = array(
 			'MantisCore' => '2.0.0',
 		);
