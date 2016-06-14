@@ -121,11 +121,10 @@ if( !is_blank( $c_ref ) ) {
 
 print_header_redirect( $t_redirect_url, true, true );
 
-html_page_top1();
-html_meta_redirect( $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
 
-html_page_top1();
+layout_page_begin();
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

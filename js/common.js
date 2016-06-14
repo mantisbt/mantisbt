@@ -35,25 +35,62 @@ if (a!= -1) {
 style_display = 'block';
 
 $(document).ready( function() {
-	$('.collapse-open').show();
-	$('.collapse-closed').hide();
-	$('.collapse-link')
-		.show()
-		.css('cursor', 'pointer')
-		.click( function(event) {
-			event.preventDefault();
-			var id = $(this).attr('id');
-			var t_pos = id.indexOf('_closed_link' );
-			if( t_pos == -1 ) {
-				t_pos = id.indexOf('_open_link' );
-			}
-			var t_div = id.substring(0, t_pos );
-			ToggleDiv( t_div );
-		});
-	// Hack to adjust spacing between collapse icon and search div
-	$('.search-box').css('padding-left', '0');
+    $('.collapse-open').show();
+    $('.collapse-closed').hide();
+    $('.collapse-link').click( function(event) {
+        event.preventDefault();
+        var id = $(this).attr('id');
+        var t_pos = id.indexOf('_closed_link' );
+        if( t_pos == -1 ) {
+            t_pos = id.indexOf('_open_link' );
+        }
+        var t_div = id.substring(0, t_pos );
+        ToggleDiv( t_div );
+    });
 
-	$('input[type=text].autocomplete').autocomplete({
+    $('.widget-box').on('shown.ace.widget' , function(event) {
+       var t_id = $(this).attr('id');
+       var t_cookie = GetCookie( "collapse_settings" );
+        if ( 1 == g_collapse_clear ) {
+            t_cookie = "";
+            g_collapse_clear = 0;
+        }
+        t_cookie = t_cookie.replace("|" + t_id + ",1", '' );
+        t_cookie = t_cookie + "|" + t_id + ",0";
+        SetCookie( "collapse_settings", t_cookie );
+	});
+
+    $('.widget-box').on('hidden.ace.widget' , function(event) {
+        var t_id = $(this).attr('id');
+        var t_cookie = GetCookie( "collapse_settings" );
+        if ( 1 == g_collapse_clear ) {
+            t_cookie = "";
+            g_collapse_clear = 0;
+        }
+        t_cookie = t_cookie.replace( "|" + t_id + ",0", '' );
+        t_cookie = t_cookie + "|" + t_id + ",1";
+        SetCookie( "collapse_settings", t_cookie );
+    });
+
+    $('#sidebar.sidebar-toggle').on('click', function (event) {
+        var t_id = $(this).attr('id');
+        var t_cookie = GetCookie("collapse_settings");
+        if (1 == g_collapse_clear) {
+            t_cookie = "";
+            g_collapse_clear = 0;
+        }
+        if( $(this).parent().hasClass( "menu-min" ) ) {
+            t_cookie = t_cookie.replace("|" + t_id + ",1", '');
+            t_cookie = t_cookie + "|" + t_id + ",0";
+        } else {
+            t_cookie = t_cookie.replace("|" + t_id + ",0", '');
+            t_cookie = t_cookie + "|" + t_id + ",1";
+        }
+        SetCookie("collapse_settings", t_cookie);
+    });
+
+
+    $('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {
 			var fieldName = $(this).attr('element').attr('id');
 			var postData = {};
@@ -174,7 +211,7 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetime').each(function(index, element) {
-		$(this).after('<input type="image" class="button datetime" id="' + element.id + '_datetime_button' + '" src="' + config['icon_path'] + 'calendar-img.gif" />');
+		$(this).after('&nbsp;<i class="fa fa-calendar fa-lg datetime" id="' + element.id + '_datetime_button' + '"></i>');
 		Calendar.setup({
 			inputField: element.id,
 			timeFormat: 24,
@@ -389,8 +426,10 @@ function ToggleDiv( p_div ) {
 	}
 
 	if ( t_open_display == "none" ) {
+        t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
 		t_cookie = t_cookie + "|" + p_div + ":1";
 	} else {
+        t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
 		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 

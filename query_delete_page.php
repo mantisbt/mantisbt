@@ -56,25 +56,36 @@ if( !filter_db_can_delete_filter( $f_query_id ) ) {
 	print_header_redirect( $t_redirect_url );
 }
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin();
 ?>
-<br />
-<div class="center">
-<strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
-<?php echo lang_get( 'query_delete_msg' ); ?>
 
-<form method="post" action="<?php print $t_delete_url; ?>">
-<?php echo form_security_field( 'query_delete' ) ?>
-<br /><br />
-<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
-<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
-</form>
-
-<form method="post" action="<?php print $t_redirect_url; ?>">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-</form>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="alert alert-warning center">
+    <p class="bigger-110">
+        <?php echo lang_get( 'query_delete_msg' ); ?>
+        <div class="space-4"></div>
+        <strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
+    </p>
+    <div class="space-10"></div>
+    <div class="col-md-6 col-xs-6 no-padding">
+    <form method="post" action="<?php print $t_delete_url; ?>" class="pull-right">
+        <?php echo form_security_field( 'query_delete' ) ?>
+        <input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
+        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'delete_query' ); ?>"/>
+    </form>
+    </div>
+    <div class="col-md-6 col-xs-6 no-padding">
+    <form method="post" action="<?php print $t_redirect_url; ?>" class="pull-left">
+        <?php # CSRF protection not required here - form does not result in modifications ?>
+        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>"/>
+    </form>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
 
 <?php
-print '</div>';
-html_page_bottom();
+layout_page_end();

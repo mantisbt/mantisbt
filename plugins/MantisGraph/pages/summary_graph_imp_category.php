@@ -29,7 +29,10 @@ plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin( 'summary_page.php' );
+
 print_summary_menu( 'summary_page.php' );
 
 echo '<br />';
@@ -43,24 +46,38 @@ $t_metrics = create_category_summary();
 
 $t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 ?>
-<br />
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title">
+    
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-bar-chart-o"></i>
 		<?php echo plugin_lang_get( 'graph_imp_category_title' ) ?>
-	</td>
-</tr>
-<tr>
-	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-	</td>
-</tr>
-<tr>
-	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-	</td>
-</tr>
-</table>
+	</h4>
+</div>
+
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
-	html_page_bottom();
+layout_page_end();

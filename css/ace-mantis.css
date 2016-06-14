@@ -1,0 +1,349 @@
+.footer .footer-inner {
+    text-align: left;
+    left: 0px;
+}
+.nav-search .nav-search-input {
+    width: 120px;
+}
+
+.rtl .pull-right {
+    float: left !important;
+}
+
+.rtl .pull-left {
+    float: right !important;
+}
+
+.rtl .footer .footer-inner {
+    text-align: right;
+}
+.rtl .navbar-right {
+    float: left !important;
+}
+.rtl .navbar-left {
+    float: right !important;
+}
+
+.nav-recent {
+    line-height: 14px;
+    position: absolute;
+    right: 150px;
+    top: 13px;
+    font-size: x-small;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.widget-title .badge {
+    padding:4px 10px;
+    line-height:12px;
+    margin: 0 0 0 5px;
+}
+
+.profile-activity {
+    padding: 10px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    padding: 6px 8px;
+}
+
+.width-13 {
+    width: 13%
+}
+
+.padding-2 {
+    padding:2px;
+}
+.padding-right-2 {
+    padding-right:2px;
+}
+.padding-left-2 {
+    padding-left:2px;
+}
+.rtl .padding-right-2 {
+    padding-left:2px;
+}
+.rtl .padding-left-2 {
+    padding-right:2px;
+}
+
+.padding-4 {
+    padding:4px;
+}
+.padding-right-4 {
+    padding-right:4px;
+}
+.padding-left-4 {
+    padding-left:4px;
+}
+.rtl .padding-right-4 {
+    padding-left:4px;
+}
+.rtl .padding-left-4 {
+    padding-right:4px;
+}
+
+.padding-8 {
+    padding:8px;
+}
+.padding-left-8 {
+    padding-left:8px;
+}
+.padding-right-8 {
+    padding-right:8px;
+}
+.rtl .padding-left-8 {
+    padding-right:8px;
+}
+.rtl .padding-right-8 {
+    padding-left:8px;
+}
+
+.login-container {
+    width: 100%;
+}
+
+.signup-box .toolbar {
+    background: none repeat scroll 0 0 #393939;
+}
+
+#filter .widget-toolbar > .widget-menu > a,
+#bug-update .widget-toolbar > .widget-menu > a {
+    display: inline-block;
+    font-size: 11px;
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+table {
+    background-color: #ffffff !important;
+}
+
+/* Disable printing of link urls */
+a:link:after, a:visited:after {
+    content: normal !important;
+}
+
+/* Prevent horizontal scrolling when displaying db commands in install screen */
+pre {
+    word-break: break-all !important;
+}
+
+/* Disable theme backgrounds */
+.skin-3 .main-container:before {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+.light-login {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+/* Show pointer for active nav tabs */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    cursor: pointer !important;
+}
+
+.fa-xlg {
+    font-size: 1.6em;
+    line-height: 0.73em;
+    vertical-align: -15%;
+}
+
+.skin-3 .navbar .navbar-toggle {
+    background-color:  #777 !important;
+}
+
+.user-info {
+    line-height: 33px !important;
+}
+
+.page-content {
+    background-color: #fff;
+    margin: 0 0 10px;
+    padding: 8px 8px 24px;
+    position: relative;
+}
+
+.ace-nav .nav-user-photo {
+    border-radius: 4px !important;
+}
+.profile-activity img {
+    border-radius: 15% !important;
+    margin-bottom: 6px !important;
+}
+
+.table-responsive {
+    margin-bottom: 0 !important;
+}
+
+.avatar
+{
+    border: 2px solid #c9d6e5;
+    border-radius: 15%;
+    box-shadow: none;
+    margin:0;
+    max-width: 80px;
+}
+
+.input-sm {
+    width: 90px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 4px 6px !important;
+}
+
+.input-xs {
+    width: auto !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 1px 2px !important;
+}
+
+select.input-xs {
+    border-radius: 0;
+    padding: 0px;
+    height: 22px;
+    line-height: 8px;
+}
+
+select.input-xs option, select.form-control.input-xs option {
+    padding: 0px 2px !important;
+}
+
+textarea.input-xs, select.input-xs[multiple] {
+    height: auto;
+}
+
+.scroll-bar {
+    width: auto !important;
+}
+
+.table-condensed2 > thead > tr > th,
+.table-condensed2 > tbody > tr > th,
+.table-condensed2 > tfoot > tr > th,
+.table-condensed2 > thead > tr > td,
+.table-condensed2 > tbody > tr > td,
+.table-condensed2 > tfoot > tr > td {
+    padding: 1px 3px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .page-content {
+        padding: 8px 16px 24px;
+    }
+
+    .input-sm {
+        width: 120px !important;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+
+    .input-sm {
+        width: auto !important;
+    }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .sidebar.compact ~ .footer .footer-inner {
+        left: 125px;
+    }
+
+    .sidebar.menu-min ~ .footer .footer-inner {
+        left: 43px;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto !important;
+        margin-right: 43px !important;
+    }
+
+    .rtl .sidebar.compact ~ .footer .footer-inner {
+        right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min ~ .footer .footer-inner {
+        right: 43px !important;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+
+    .input-sm {
+        width: auto !important;
+    }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .sidebar.compact ~ .footer .footer-inner {
+        left: 125px;
+    }
+
+    .sidebar.menu-min ~ .footer .footer-inner {
+        left: 43px;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto !important;
+        margin-right: 43px !important;
+    }
+
+    .rtl .sidebar.compact ~ .footer .footer-inner {
+        right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min ~ .footer .footer-inner {
+        right: 43px !important;
+    }
+}
+

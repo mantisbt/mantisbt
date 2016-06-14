@@ -58,13 +58,26 @@ if( count( $t_query_arr ) < 1 ) {
 
 compress_enable();
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin();
 
 $t_rss_enabled = config_get( 'rss_enabled' );
 ?>
-<br />
-<div>
-<table class="width75" cellspacing="0">
+<div class="col-md-12 col-xs-12">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+<i class="ace-icon fa fa-filter"></i>
+<?php echo lang_get( 'open_queries' ) ?>
+</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
 <?php
 $t_column_count = 0;
 $t_max_column_count = 2;
@@ -86,8 +99,9 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 	print_link( 'view_all_set.php?type=3&source_query_id=' . $t_query_id, $t_name );
 
 	if( filter_db_can_delete_filter( $t_id ) ) {
-		echo ' ';
-		print_button( 'query_delete_page.php?source_query_id=' . $t_query_id, lang_get( 'delete_query' ) );
+		echo ' <div class="pull-right">';
+		print_form_button( 'query_delete_page.php?source_query_id=' . $t_query_id, lang_get( 'delete_query' ) );
+        echo ' </div>';
 	}
 
 	print '</td>';
@@ -109,5 +123,9 @@ if( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
 ?>
 </table>
 </div>
+</div>
+</div>
+</div>
+</div>
 <?php
-html_page_bottom();
+layout_page_end();

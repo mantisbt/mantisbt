@@ -132,7 +132,9 @@ if( !is_blank( $f_password ) ) {
 	}
 }
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
 
 $t_message = '';
 
@@ -162,4 +164,4 @@ form_security_purge( 'account_update' );
 
 html_operation_successful( $t_redirect_url, $t_message );
 
-html_page_bottom();
+layout_page_end();

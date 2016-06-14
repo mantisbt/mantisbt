@@ -157,14 +157,9 @@ $t_label_strings = explode( '/', utf8_substr( $t_label_string, 1, strlen( $t_lab
 # add headers for table
 if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
-	html_begin();
-	html_head_begin();
-	html_css();
-	html_content_type();
-	html_title( lang_get( 'by_status' ) );
-	html_head_end();
-	html_body_begin();
-	echo '<table class="width100"><tr><td></td>';
+    echo '<div class="space-10"></div>';
+    echo '<div class="table-responsive">';
+	echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 	if( $f_summary ) {
 		echo '<th>' . $t_label_strings[0] . '</th>';
 		echo '<th>' . $t_label_strings[1] . '</th>';
@@ -234,8 +229,7 @@ for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 }
 if( $f_show_as_table ) {
 	echo '</table>';
-	html_body_end();
-	html_end();
+    echo '</div>';
 } else {
 	graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $f_width, $f_width * $t_ar );
 }

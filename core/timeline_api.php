@@ -107,7 +107,7 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
  */
 function timeline_print_events( array $p_events ) {
 	if( empty( $p_events ) ) {
-		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
+		echo '<h6 class="padding-4">' . lang_get( 'timeline_no_activity' ) . '</h6>';
 		return 0;
 	}
 

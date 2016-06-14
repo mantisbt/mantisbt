@@ -49,23 +49,35 @@ if( !file_allow_bug_upload( $f_bug_id ) ) {
 
 $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-<br />
-
+<div class="col-md-6 col-xs-12">
+	<div class="space-10"></div>
 <?php
-	collapse_open( 'upload_form' );
+	$t_collapse_block = is_collapsed( 'upload_form' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
-<form method="post" enctype="multipart/form-data" action="bug_file_add.php">
+<form method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline auto-dropzone-form">
 <?php echo form_security_field( 'bug_file_add' ) ?>
 
-<table class="width100" cellspacing="1">
+<div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-upload"></i>
+			<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+		</h4>
+		<div class="widget-toolbar">
+			<a data-action="collapse" href="">
+				<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+			</a>
+		</div>
+	</div>
+
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
 <tr>
-	<td class="form-title" colspan="2"><?php
-		collapse_icon( 'upload_form' );
-		echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ); ?>
-	</td>
-</tr>
-<tr class="row-1">
 	<td class="category" width="15%">
 		<?php echo lang_get( $t_file_upload_max_num == 1 ? 'select_file' : 'select_files' ) ?>
 		<br />
@@ -74,6 +86,14 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	<td width="85%">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+		<div class="auto-dropzone center">
+			<div class="space-10"></div>
+			<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-2x"></i>&#160;&#160;
+			<span class="bigger-170 lighter grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+			<div class="space-8"></div>
+			<div id="auto-dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
+			</div>
+		<div class="fallback">
 <?php
 	# Display multiple file upload fields
 	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
@@ -85,24 +105,19 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		}
 	}
 ?>
-		<input type="submit" class="button"
+	<br/>
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
 			value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
 		/>
-	</td>
+	</div>
+</td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
 </form>
+</div>
 <?php
-collapse_closed( 'upload_form' );
-?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2"><?php
-		collapse_icon( 'upload_form' );
-		echo lang_get( 'upload_file' ); ?>
-	</td>
-</tr>
-</table>
-
-<?php
-collapse_end( 'upload_form' );
+include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );

@@ -51,9 +51,7 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 ?>
-<a id="bugnotestats"></a><br />
 <?php
-collapse_open( 'bugnotestats' );
 
 $t_today = date( 'd:m:Y' );
 $t_date_submitted = isset( $t_bug ) ? date( 'd:m:Y', $t_bug->date_submitted ) : $t_today;
@@ -91,57 +89,63 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 	$t_cost_col = false;
 }
 
+$t_collapse_block = is_collapsed( 'time_tracking_stats' );
+$t_block_css = $t_collapse_block ? 'collapsed' : '';
+$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
 # Time tracking date range input form
 # CSRF protection not required here - form does not result in modifications
 ?>
 
+<div class="col-md-12 col-xs-12">
+<div id="time_tracking_stats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div class="widget-header widget-header-small">
+    <h4 class="widget-title lighter">
+        <i class="ace-icon fa fa-clock-o"></i>
+        <?php echo lang_get( 'time_tracking' ) ?>
+    </h4>
+	<div class="widget-toolbar">
+		<a data-action="collapse" href="#">
+			<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+		</a>
+	</div>
+</div>
+
+
+<div class="widget-body">
 <form method="post" action="">
-	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-	<table class="width100" cellspacing="0">
-		<tr>
-			<td class="form-title" colspan="4"><?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' ); ?>
-			</td>
-		</tr>
-		<tr class="row-2">
-			<td class="category" width="25%">
-				<?php
-					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
-					$t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
-					filter_init( $t_filter );
-					print_filter_do_filter_by_date( true );
-				?>
-			</td>
-		</tr>
-<?php
-	if( $t_cost_col ) {
-?>
-		<tr class="row-1">
-			<td>
-				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
-				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
-			</td>
-		</tr>
-<?php
-	}
-?>
-		<tr>
-			<td class="center" colspan="2">
-				<input type="submit" class="button"
-					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
-				/>
-			</td>
-		</tr>
-	</table>
+    <div class="widget-main">
+        <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
+        <?php
+            $t_filter = array();
+            $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
+            $t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
+            $t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
+            $t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
+            $t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
+            $t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
+            $t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+            print_filter_do_filter_by_date( true );
+        ?>
+    <?php
+        if( $t_cost_col ) {
+    ?>
+        <div class="space-4"></div>
+        <?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
+        <input type="text" name="bugnote_cost" class="input-sm" value="<?php echo $f_bugnote_cost ?>" />
+    <?php
+        }
+    ?>
+    </div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round"
+			name="get_bugnote_stats_button"
+			value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+		/>
+	</div>
 </form>
+</div>
+</div>
 
 <?php
 	if( !is_blank( $f_get_bugnote_stats_button ) ) {
@@ -179,17 +183,18 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 		echo '<br />';
 
 ?>
-<br />
-<table class="width100" cellspacing="0">
-	<tr class="row-category2">
-		<td class="small-caption bold">
+<div class="space-10"></div>
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php	} ?>
@@ -221,8 +226,8 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 			} # end of users within issues loop
 		} # end for issues loop ?>
 
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
 		<td class="small-caption bold">
@@ -236,19 +241,19 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 	</tr>
 </table>
 
-<br />
-<br />
+<div class="space-10"></div>
 
-<table class="width100" cellspacing="0">
-	<tr class="row-category2">
-		<td class="small-caption bold">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php	} ?>
@@ -288,17 +293,8 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 <?php
 	} # end if
-	collapse_closed( 'bugnotestats' );
 ?>
 
-<table class="width100" cellspacing="0">
-	<tr>
-		<td class="form-title" colspan="4"><?php
-			collapse_icon( 'bugnotestats' );
-			echo lang_get( 'time_tracking' ); ?>
-		</td>
-	</tr>
-</table>
+</div>
 
 <?php
-	collapse_end( 'bugnotestats' );

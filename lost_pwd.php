@@ -104,11 +104,13 @@ form_security_purge( 'lost_pwd' );
 
 $t_redirect_url = 'login_page.php';
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin();
 ?>
 
-<br />
-<div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
@@ -124,8 +126,8 @@ html_page_top();
 </tr>
 </table>
 <br />
-<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+<?php print_button( 'login_page.php', lang_get( 'proceed' ) ); ?>
 </div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+layout_page_end( __FILE__ );

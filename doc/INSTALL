@@ -1,0 +1,65 @@
+-------------------------------------------------------------------------------
+MantisBT - a php based bugtracking system
+Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
+Copyright (C) 2002-2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+-------------------------------------------------------------------------------
+
+For complete documentation, please read the administration guide included with
+this release in the doc/<lang> directory.  The guide is available in text, PDF,
+and HTML formats.
+
+REQUIREMENTS
+
+ * MySQL 4.1.1+, PostgreSQL 8+, or other supported database
+ * PHP 5.1.0+
+ * a webserver (e.g. Apache or IIS)
+
+INSTALLATION
+
+ * Extract the tarball into a location readable by your web server
+
+ * Point your browser to http://path/to/mantisbt/admin/install.php to begin the
+   database installation process
+
+ * Select the database type and enter the credentials to access the database
+
+ * Click install/upgrade
+
+ * Installation is complete -- you may need to copy the default configuration
+   to mantisbt/config_inc.php if your web server does not have write access
+
+ * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
+   your webserver is compatible with MantisBT and configured correctly
+
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
+
+UPGRADING
+
+ * Backup your existing installation and database -- really!
+
+ * Extract the tarball into a clean directory; do NOT extract into an existing
+   installation, as some files have been moved or deleted between releases
+
+ * Copy your configuration from the old installation to the new directory,
+   including config_inc.php, custom_strings_inc.php, and
+   custom_constants_inc.php if they exist
+
+ * Point your browser to http://path/to/_NEW_mantisbt/admin/install.php to
+   upgrade the database schema
+
+ * Click install/upgrade
+
+ * Point your browser to http://path/to/_NEW_mantisbt/admin/check.php to ensure that
+   your webserver is compatible with MantisBT and configured correctly
+
+ * Remove the admin/ directory from within the MantisBT installation path. The
+   scripts within this directory should not be accessible on a live MantisBT
+   site or on any installation that is accessible via the Internet.
+
+ * To restore your original MantisBT URL operation it is best at this point
+   to delete the old MantisBT directory and rename the directory you
+   extracted the tarball to to the original directory name.
+
+ * Upgrading is complete

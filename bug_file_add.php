@@ -81,8 +81,10 @@ form_security_purge( 'bug_file_add' );
 # Determine which view page to redirect back to.
 $t_redirect_url = string_get_bug_view_url( $f_bug_id );
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

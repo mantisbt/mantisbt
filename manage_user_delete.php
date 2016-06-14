@@ -85,8 +85,10 @@ user_delete( $f_user_id );
 
 form_security_purge( 'manage_user_delete' );
 
-html_page_top( null, 'manage_user_page.php' );
+layout_page_header( null, 'manage_user_page.php' );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( 'manage_user_page.php' );
 
-html_page_bottom();
+layout_page_end();

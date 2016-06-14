@@ -278,21 +278,24 @@ if( isset( $t_array[1] ) ) {
 form_security_purge( 'move_attachments_project_select' );
 
 # Page header, menu
-html_page_top( 'MantisBT Administration - Moving Attachments' );
+layout_page_header( 'MantisBT Administration - Moving Attachments' );
+
+layout_admin_page_begin();
 
 ?>
 
-<div align="center">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
 <?php
 
 # Display results
 if( empty( $t_moved ) ) {
-	echo "<p>Nothing to do.</p>\n";
+	echo '<p class="lead">Nothing to do.</p>'. "\n";
 } else {
 	foreach( $t_moved as $t_row ) {
 		printf(
-			"<p class=\"bold\">Project '%s' : %d attachments %s.</p>\n",
+			"<p class=\"lead\">Project '%s' : %d attachments %s.</p>\n",
 			$t_row['name'],
 			$t_row['rows'],
 			( 0 == $t_row['failed']
@@ -301,8 +304,10 @@ if( empty( $t_moved ) ) {
 
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
-			echo '<div><table class="width75">', "\n",
-				'<tr class="row-category">',
+			echo '<div class="table-responsive">';
+			echo '<table class="table table-bordered table-condensed">';
+			echo "\n",
+				'<tr>',
 				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
 				'<th>File</th><th>Filename</th><th>Status</th>',
 				'</tr>';
@@ -311,20 +316,25 @@ if( empty( $t_moved ) ) {
 				if( $f_file_type == 'bug' ) {
 					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
 				}
-				printf( '<td class="right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
+				printf( '<td class="pull-right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
 					$t_data['id'],
 					$t_data['filename'],
 					$t_data['status'] );
 			}
-			echo '</table><br /></div>';
+			echo '</table><br />';
+			echo '</div>';
 		} else {
 			# No data rows - display error message
+			echo '<div class="alert alert-danger">';
 			echo '<p>' . $t_row['data'] . '</p>';
+			echo '</div>';
 		}
 		echo '<br />';
 	}
 }
 
-print_bracket_link( 'system_utils.php', 'Back to System Utilities' );
+print_button( 'system_utils.php', 'Back to System Utilities' );
 
-html_page_bottom();
+echo '</div>';
+
+layout_admin_page_end();

@@ -321,11 +321,12 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
-		echo '<label class="nowrap">';
-		echo '<input id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<label for="' . $t_input_id . '">' . "\n";
+		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
-		echo string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo '</label>&#160;&#160;&#160;&#160;' . "\n";
 	}
 }
 
@@ -348,11 +349,12 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'];
-		echo '<label class="nowrap">';
-		echo '<input id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<label for="' . $t_input_id . '">';
+		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_value, $t_values[$i] );
 		echo " />\n";
-		echo string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</span>' . "\n";
+		echo '</label>&#160;&#160;&#160;&#160;' . "\n";
 	}
 }
 
@@ -379,7 +381,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
  * @return void
  */
 function cfdef_input_textarea( array $p_field_def, $p_custom_field_value ) {
-	echo '<textarea ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
+	echo '<textarea class="form-control" ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
 	echo ' cols="70" rows="8">' . $p_custom_field_value .'</textarea>';
 }
 

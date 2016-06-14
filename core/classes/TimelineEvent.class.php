@@ -71,20 +71,16 @@ class TimelineEvent {
 	 * Returns html string representing the beginning block of a timeline entry
 	 * @return string
 	 */
-	public function html_start() {
-		$t_avatar = Avatar::get( $this->user_id, 32 );
-		if( $t_avatar === null ) {
-			return sprintf(
-				'<div class="entry"><div class="timestamp">%s</div>', $this->format_timestamp( $this->timestamp ) );
-		}
+	public function html_start( $t_action_icon = 'fa-check') {
+		$t_avatar = Avatar::get( $this->user_id, 40 );
+		$t_html = '<div class="profile-activity clearfix">';
 
-		return sprintf(
-			'<div class="entry"><div class="avatar"><a href="%s"><img class="avatar" src="%s" alt="%s" width="32" height="32" /></a></div><div class="timestamp">%s</div>',
-			$t_avatar->link,
-			$t_avatar->image,
-			$t_avatar->text,
-			$this->format_timestamp( $this->timestamp )
-		);
+        if( !empty( $t_avatar ) ) {
+			$t_html .= '<img class="pull-left" src="' . $t_avatar->image . '"/>';
+		} else {
+			$t_html .= '<i class="pull-left thumbicon fa ' . $t_action_icon . ' btn-primary no-hover"></i>';
+		}
+		return $t_html;
 	}
 
 	/**
@@ -92,6 +88,8 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_end() {
-		return '</div>';
+		$t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+		$t_html .= '</div>';
+		return $t_html;
 	}
 }

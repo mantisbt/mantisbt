@@ -209,7 +209,7 @@ function file_get_icon_url( $p_display_filename ) {
 	}
 
 	$t_name = $t_file_type_icons[$t_ext];
-	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $t_ext );
+	return array( 'url' => $t_name, 'alt' => $t_ext );
 }
 
 /**

@@ -75,10 +75,15 @@ $t_redirect_url = 'manage_user_page.php';
 
 form_security_purge( 'manage_user_reset' );
 
-html_page_top( null, $t_result ? $t_redirect_url : null );
+layout_page_header( null, $t_result ? $t_redirect_url : null );
 
-echo '<div class="success-msg">';
+layout_page_begin( 'manage_overview_page.php' );
 
+echo '<div class="col-md-12 col-xs-12">';
+echo '<div class="space-10"></div>';
+echo '<div class="alert alert-success">';
+
+echo '<p class="bigger-110">';
 if( $t_reset ) {
 	if( false == $t_result ) {
 		# PROTECTED
@@ -97,8 +102,8 @@ if( $t_reset ) {
 	# UNLOCK
 	echo lang_get( 'account_unlock_msg' );
 }
-
-echo '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-echo '</div>';
-html_page_bottom();
+echo '</p>';
+echo '<div class="space-10"></div>';
+print_button( $t_redirect_url, lang_get( 'proceed' ) );
+echo '</div></div>';
+layout_page_end();

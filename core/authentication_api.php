@@ -805,23 +805,35 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 			$t_error = true;
 		}
 	}
+	
+	layout_page_header();
 
-	html_page_top();
+	layout_page_begin();
 
 	?>
-<div class="important-msg">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 <?php
-	echo lang_get( 'reauthenticate_message' );
 	if( $t_error != false ) {
-		echo '<br /><span class="error-msg">', lang_get( 'login_error' ), '</span>';
+		echo '<div class="alert alert-danger">';
+		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
+		echo '</div>';
 	}
 ?>
-</div>
-<div id="reauth-div" class="form-container">
-	<form id="reauth-form" method="post" action="">
-		<fieldset>
-			<legend><span><?php echo lang_get( 'reauthenticate_title' ); ?></span></legend>
 
+<div class="form-container">
+<form id="reauth-form" method="post" action="">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-lock"></i>
+		<?php echo lang_get( 'reauthenticate_title' ) ?>
+	</h4>
+</div>
+
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<fieldset>
 		<?php
 			# CSRF protection not required here - user needs to enter password
 			# (confirmation step) before the form is accepted.
@@ -830,23 +842,39 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		?>
 
 			<input type="hidden" name="_authenticate" value="1" />
-			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' );?></span></label>
-				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
-				<span class="label-style"></span>
+			<div class="table-responsive">
+			<table class="table table-bordered table-condensed table-striped">
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'username' );?>
+					</th>
+					<td>
+						<input id="username" type="text" disabled="disabled" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
+					</td>
+				</tr>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'password' );?>
+					</th>
+					<td>
+						<input id="password" type="password" name="password" class="input-sm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
+					</td>
+				</tr>
+			</table>
 			</div>
-			<div class="field-container">
-				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>
 		</fieldset>
-	</form>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'login_button' );?>" />
+	</div>
+</div>
+</div>
+</form>
+</div>
 </div>
 
 <?php
-	html_page_bottom();
+	layout_page_end();
 	exit;
 }
 
@@ -945,7 +973,7 @@ function auth_http_prompt() {
 	header( 'status: 401 Unauthorized' );
 
 	echo '<p class="center error-msg">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
-	print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+	print_button( 'main_page.php', lang_get( 'proceed' ) );
 
 	exit;
 }

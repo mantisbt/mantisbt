@@ -53,9 +53,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	if( BAD == $p_result ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
-			echo 'bgcolor="red">BAD';
+			echo 'class="danger">BAD';
 		} else {
-			echo 'bgcolor="pink">POSSIBLE PROBLEM';
+			echo 'class="warning">POSSIBLE PROBLEM';
 		}
 		if( '' != $p_message ) {
 			echo '<br />' . $p_message;
@@ -63,7 +63,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	}
 
 	if( GOOD == $p_result ) {
-		echo 'bgcolor="green">GOOD';
+		echo 'class="success">GOOD';
 	}
 	echo '</td>';
 }
@@ -78,7 +78,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
  * @return void
  */
 function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_message = '' ) {
-	echo '<tr><td bgcolor="#ffffff">' . $p_test_description . '</td>';
+	echo '<tr><td>' . $p_test_description . '</td>';
 	print_test_result( $p_result, $p_hard_fail, $p_message );
 	echo '</tr>' . "\n";
 }
@@ -94,23 +94,17 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 #	7 = done, link to login or db updater
 $t_install_state = gpc_get_int( 'install', 0 );
 
-html_begin();
-html_head_begin();
-html_css_link( 'admin.css' );
-html_content_type();
-html_title( 'Administration - Installation' );
-html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
+layout_page_header_begin( 'Administration - Installation' );
 html_javascript_link( 'install.js' );
-html_head_end();
-?>
+layout_page_header_end();
 
-<body>
-<table width="100%" cellspacing="0" cellpadding="0">
-	<tr class="top-bar">
-		<td class="links">
-			[ <a href="index.php">Back to Administration</a> ]
-		</td>
-		<td class="title">
+layout_admin_page_begin();
+?>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+
+	<div class="page-header">
+	<h1>
 		<?php
 switch( $t_install_state ) {
 	case 7:
@@ -141,22 +135,31 @@ switch( $t_install_state ) {
 		break;
 }
 ?>
-		</td>
-	</tr>
-</table>
-<br /><br />
-
+		<div class="btn-group pull-right">
+			<a class="btn btn-sm btn-primary btn-white btn-round" href="index.php">Back to Administration</a>
+		</div>
+	</h1>
+	</div>
+</div>
 <?php
 # installation checks table header is valid both for pre-install and
 # database installation steps
 if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
-<table width="100%" cellpadding="10" cellspacing="1">
-<tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation</span>
-	</td>
-</tr>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Checking Installation
+	</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 <?php
 }
 
@@ -330,6 +333,11 @@ print_test( 'Checking if safe mode is enabled for install script',
 ?>
 
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
 <?php
 	if( false == $g_failed ) {
 		$t_install_state++;
@@ -339,6 +347,13 @@ print_test( 'Checking if safe mode is enabled for install script',
 # got database information, check and install
 if( 2 == $t_install_state ) {
 	?>
+
+<div class="col-md-12 col-xs-12">
+<div class="widget-box widget-color-blue2">
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 
 <!-- Checking DB support-->
 <?php
@@ -366,7 +381,7 @@ if( 2 == $t_install_state ) {
 	}
 ?>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Setting Admin Username
 	</td>
 	<?php
@@ -379,7 +394,7 @@ if( 2 == $t_install_state ) {
 	?>
 </tr>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Setting Admin Password
 	</td>
 	<?php
@@ -394,7 +409,7 @@ if( 2 == $t_install_state ) {
 
 <!-- connect to db -->
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Attempting to connect to database as admin
 	</td>
 	<?php
@@ -432,7 +447,7 @@ if( 2 == $t_install_state ) {
 	if( $f_db_exists ) {
 		?>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Attempting to connect to database as user
 	</td>
 	<?php
@@ -461,7 +476,7 @@ if( 2 == $t_install_state ) {
 		?>
 <!-- display database version -->
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Checking Database Server Version
 <?php
 		if( isset( $t_version_info['description'] ) ) {
@@ -507,6 +522,12 @@ if( 2 == $t_install_state ) {
 <?php
 	}?>
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 <?php
 	if( false == $g_failed ) {
 		$t_install_state++;
@@ -523,18 +544,23 @@ if( 1 == $t_install_state ) {
 
 <input name="install" type="hidden" value="2">
 
-<table width="100%" cellpadding="10" cellspacing="1">
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-<tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
 			<?php echo
 				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
 				( $g_failed ? ': Checks Failed ' : '' )
 			?>
-		</span>
-	</td>
-</tr>
+		</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 
 <?php
 # install-only fields: when upgrading, only display admin username and password
@@ -562,7 +588,7 @@ if( !$g_database_upgrade ) {
 ?>
 		</div>
 
-		<select id="db_type" name="db_type">
+		<select id="db_type" name="db_type" class="input-sm">
 <?php
 			# Build selection list of available DB types
 			$t_db_list = array(
@@ -705,7 +731,8 @@ if( !$g_database_upgrade ) {
 		Print SQL Queries instead of Writing to the Database
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+		<input name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+		<span class="lbl"></span>
 	</td>
 </tr>
 
@@ -718,11 +745,16 @@ if( !$g_database_upgrade ) {
 		?>
 	</td>
 	<td>
-		<input name="go" type="submit" class="button" value="Install/Upgrade Database">
+		<input name="go" type="submit" class="btn btn-primary btn-white btn-round" value="Install/Upgrade Database">
 	</td>
 </tr>
 
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </form>
 
 <?php
@@ -731,15 +763,21 @@ if( !$g_database_upgrade ) {
 # all checks have passed, install the database
 if( 3 == $t_install_state ) {
 	?>
-<table width="100%" cellpadding="10" cellspacing="1">
-<tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installing Database</span>
-	</td>
-</tr>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Installing Database
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed" style="table-layout:fixed">
 <?php if( !$f_log_queries ) {?>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Create database if it does not exist
 	</td>
 	<?php
@@ -815,7 +853,7 @@ if( 3 == $t_install_state ) {
 	$g_db = null;
 ?>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Attempting to connect to database as user
 	</td>
 	<?php
@@ -864,7 +902,7 @@ if( 3 == $t_install_state ) {
 		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
-			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
+			echo '<tr><td> <span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span> <pre>';
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -929,7 +967,7 @@ if( 3 == $t_install_state ) {
 
 		while( ( $i <= $t_last_id ) && !$g_failed ) {
 			if( !$f_log_queries ) {
-				echo '<tr><td bgcolor="#ffffff">';
+				echo '<tr><td>';
 			}
 
 			$t_sql = true;
@@ -1039,6 +1077,12 @@ if( 3 == $t_install_state ) {
 
 	?>
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 <?php
 }  # end install_state == 3
 
@@ -1073,18 +1117,24 @@ if( 4 == $t_install_state ) {
 if( 5 == $t_install_state ) {
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
-<table width="100%" cellpadding="10" cellspacing="1">
-<tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Write Configuration File(s)</span>
-	</td>
-</tr>
 
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Write Configuration File(s)
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 <tr>
-	<td bgcolor="#ffffff">
-		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
-		Configuration File (config/config_inc.php)<br />
-	</td>
+    <td>
+        <?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+        Configuration File (config/config_inc.php)<br />
+    </td>
 <?php
 	# Generating the config_inc.php file
 
@@ -1193,6 +1243,11 @@ if( 5 == $t_install_state ) {
 ?>
 
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 <?php
 	if( false == $g_failed ) {
@@ -1204,20 +1259,27 @@ if( 5 == $t_install_state ) {
 
 if( 6 == $t_install_state ) {
 
-	# post install checks
-	?>
-<table width="100%" cellpadding="10" cellspacing="1">
-<tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation</span>
-	</td>
-</tr>
+# post install checks
+?>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Checking Installation
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
+
 
 <!-- Checking register_globals are off -->
 <?php print_test( 'Checking for register_globals are off for mantis', !ini_get_bool( 'register_globals' ), false, 'change php.ini to disable register_globals setting' )?>
 
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		Attempting to connect to database as user
 	</td>
 	<?php
@@ -1239,7 +1301,7 @@ if( 6 == $t_install_state ) {
 	?>
 </tr>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		checking ability to SELECT records
 	</td>
 	<?php
@@ -1254,7 +1316,7 @@ if( 6 == $t_install_state ) {
 	?>
 </tr>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		checking ability to INSERT records
 	</td>
 	<?php
@@ -1269,7 +1331,7 @@ if( 6 == $t_install_state ) {
 	?>
 </tr>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		checking ability to UPDATE records
 	</td>
 	<?php
@@ -1284,7 +1346,7 @@ if( 6 == $t_install_state ) {
 	?>
 </tr>
 <tr>
-	<td bgcolor="#ffffff">
+	<td>
 		checking ability to DELETE records
 	</td>
 	<?php
@@ -1299,6 +1361,12 @@ if( 6 == $t_install_state ) {
 	?>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 <?php
 	if( false == $g_failed ) {
 		$t_install_state++;
@@ -1310,25 +1378,37 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<table width="100%" cellpadding="10" cellspacing="1">
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Installation Complete
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 <tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Complete</span>
-	</td>
-</tr>
-<tr bgcolor="#ffffff">
 	<td>
+		<span class="bigger-130">
 		MantisBT was installed successfully.
 <?php if( $f_db_exists ) {?>
 		<a href="../login_page.php">Continue</a> to log in.
 <?php } else { ?>
 		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
+		</span>
 <?php } ?>
 	</td>
 	<?php print_test_result( GOOD ); ?>
 </tr>
 </table>
-
+</div>
+</div>
+</div>
+</div>
+</div>
 <?php
 }
 
@@ -1336,15 +1416,21 @@ if( 7 == $t_install_state ) {
 
 if( $g_failed && $t_install_state != 1 ) {
 	?>
-<table width="100%" cellpadding="10" cellspacing="1">
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Installation Failed
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 <tr>
-	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Failed</span>
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ffffff">Please correct failed checks</td>
-	<td bgcolor="#ffffff">
+	<td>Please correct failed checks</td>
+	<td>
 <form method='POST'>
 		<input name="install" type="hidden" value="<?php echo $t_install_state?>">
 		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>">
@@ -1364,13 +1450,18 @@ if( $g_failed && $t_install_state != 1 ) {
 		?>">
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
-		<input name="retry" type="submit" class="button" value="Retry">
+		<input name="retry" type="submit" class="btn btn-primary btn-white btn-round" value="Retry">
 </form>
 	</td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="space-10"></div>
 <?php
 }
-?>
-</body>
-</html>
+layout_admin_page_end();

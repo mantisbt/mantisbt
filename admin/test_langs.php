@@ -50,8 +50,29 @@ lang_push( 'english' );
 
 set_time_limit( 0 );
 
-html_page_top();
+layout_page_header();
 
+layout_admin_page_begin();
+
+print_admin_menu_bar( 'test_langs.php' );
+?>
+
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-text-width"></i>
+		Test Langs
+	</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main">
+<div class="table-responsive">
+	<table>
+<?php
 # check core language files
 if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir );
@@ -69,13 +90,23 @@ if( function_exists( 'scandir' ) ) {
 
 
 # attempt to find plugin language files
-echo '<br />Trying to find+check plugin language files...<br />';
+echo '<tr><td>';
+echo "Trying to find+check plugin language files...<br />";
 if( function_exists( 'scandir' ) ) {
 	checkplugins( config_get( 'plugin_path' ) );
 } else {
 	echo 'php scandir is disabled - skipping<br />';
 }
+echo '</td></tr>';
+?>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
+<?php
 /**
  * Check plugin language files
  * @param string $p_path Plugin path.
@@ -92,7 +123,8 @@ function checkplugins( $p_path ) {
 			if( $t_plugin[0] == '.' || $t_plugin == 'Web.config' ) {
 				continue;
 			}
-			echo '<br />Checking language files for plugin ' . $t_plugin . ':<br />';
+			echo '<tr><td>';
+			echo 'Checking language files for plugin ' . $t_plugin . ':<br />';
 			checklangdir( $t_path . $t_plugin );
 		}
 	}
@@ -406,7 +438,7 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  * @return void
  */
 function print_error( $p_string, $p_type = 'ERROR' ) {
-	echo '<p class="error-msg">', $p_type . ': ' . $p_string, '</p>';
+	echo '<p class="alert alert-danger">', $p_type . ': ' . $p_string, '</p>';
 }
 
-html_page_bottom();
+layout_admin_page_end();

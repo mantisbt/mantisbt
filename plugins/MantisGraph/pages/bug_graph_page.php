@@ -49,9 +49,11 @@ $t_today = date( 'Y-m-d' );
 $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
-html_page_top1( plugin_lang_get( 'graph_page' ) );
+layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
 $t_path = config_get( 'path' );
-html_page_top2();
+layout_page_header_end();
+
+layout_page_begin();
 
 $t_period = new Period();
 $t_period->set_period_from_selector( 'interval' );
@@ -68,25 +70,42 @@ $t_show = array(
 				1 => plugin_lang_get( 'show_as_table' ),
 		  );
 ?>
-		<form id="graph_form" method="post" action="<?php echo plugin_page( 'bug_graph_page.php' ); ?>">
-			<table class="width100" cellspacing="1">
-
-				<tr>
-					<td>
+<div class="col-md-12 col-xs-12">
+    <div class="space-10"></div>
+    <form id="graph_form" method="post" action="<?php echo plugin_page( 'bug_graph_page.php' ); ?>" class="form-inline">
+        <div class="widget-box widget-color-blue2">
+        <div class="widget-body">
+        <div class="widget-main no-padding">
+            <div class="table-responsive">
+            <table class="table table-condensed">
+                <tr>
+                    <td class="center">
+                    <div class="form-group">
 						<?php echo get_dropdown( $t_types, 'graph_type', $f_type ); ?>
-					</td>
-					<td>
+					</div>
+                    </td>
+                    <td class="center">
+                    <div class="form-group">
 						<?php echo $t_period->period_selector( 'interval' ); ?>
-					</td>
-					<td>
+					</div>
+                    </td>
+                    <td class="center">
+                    <div class="form-group">
 						<?php echo get_dropdown( $t_show, 'show_table', $f_show_as_table ? 1 : 0 ); ?>
-					</td>
-					<td>
-						<input type="submit" class="button" name="show" value="<?php echo plugin_lang_get( 'show_graph' ); ?>"/>
-					</td>
+					</div>
+                    </td>
+                    <td class="center">
+                    <div class="form-group">
+						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" name="show" value="<?php echo plugin_lang_get( 'show_graph' ); ?>"/>
+					</div>
+                    </td>
 				</tr>
 			</table>
-		</form>
+            </div>
+        </div>
+        </div>
+        </div>
+    </form>
 <?php
 # build the graphs if both an interval and graph type are selected
 if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {
@@ -118,5 +137,8 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) 
 		}
 	}
 }
+?>
 
-html_page_bottom();
+</div>
+<?php
+layout_page_end();

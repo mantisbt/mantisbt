@@ -40,15 +40,15 @@ require_api( 'lang_api.php' );
 
 billing_ensure_reporting_access();
 
-html_page_top( lang_get( 'time_tracking_billing_link' ) );
-?>
+layout_page_header( lang_get( 'time_tracking_billing_link' ) );
 
-<br />
+layout_page_begin();
+?>
 
 <?php
 # Work break-down
 define( 'BILLING_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'billing_inc.php' );
 
-html_page_bottom();
+layout_page_end();
 

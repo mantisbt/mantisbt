@@ -63,8 +63,10 @@ current_user_ensure_unprotected();
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
 
-html_page_top( lang_get( 'change_preferences_link' ) );
+layout_page_header( lang_get( 'change_preferences_link' ) );
+
+layout_page_begin();
 
 edit_account_prefs();
 
-html_page_bottom();
+layout_page_end();

@@ -43,14 +43,18 @@ user_ensure_unprotected( $t_user_id );
 
 api_token_revoke( $f_token_id, $t_user_id );
 
-html_page_top1();
+layout_page_header_begin();
 html_meta_redirect( 'api_tokens_page.php' );
-html_page_top2();
+layout_page_header_end();
 
-echo '<div align="center">';
-echo '<br /><br />' . sprintf( lang_get( 'api_token_revoked' ), string_display_line( $f_token_name ) ) . '<br /><br />';
-print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
+layout_page_begin( 'api_tokens_page.php' );
+
+echo '<div class="col-md-12 col-xs-12">';
+echo '<div class="space-10"></div>';
+echo '<div class="lead">' . sprintf( lang_get( 'api_token_revoked' ), string_display_line( $f_token_name ) ) . '</div>';
+echo '<div class="space-10"></div>';
+print_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '</div>';
 
-html_page_bottom();
+layout_page_end();
 

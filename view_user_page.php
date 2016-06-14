@@ -71,19 +71,36 @@ $t_can_see_email = access_has_project_level( config_get( 'show_user_email_thresh
 $u_email = user_get_email( $u_id );
 $u_realname = user_get_realname( $u_id );
 
-html_page_top();
-?>
+layout_page_header();
 
-<div class="section-container">
-	<h2><?php echo lang_get( 'view_account_title' ) ?></h2>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
-		<span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
-		<span class="display-value"><span>
+layout_page_begin();
+?>
+<div class="col-md-12 col-xs-12" xmlns="http://www.w3.org/1999/html">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-user"></i>
+		<?php echo lang_get('view_account_title') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<fieldset>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'username' ) ?>
+		</th>
+		<td>
+			<?php echo string_display_line( $u_username ) ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'email' ) ?>
+		</th>
+		<td>
 			<?php
 				if( ! ( $t_can_manage || $t_can_see_email ) ) {
 					print error_string( ERROR_ACCESS_DENIED );
@@ -91,42 +108,48 @@ html_page_top();
 					if( !is_blank( $u_email ) ) {
 						print_email_link( $u_email, $u_email );
 					} else {
-						echo ' - ';
+						echo " - ";
 					}
 				} ?>
-		</span></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
-		<span class="display-value"><span><?php
+	</td>
+	</tr>
+	<tr>
+	<th class="category">
+		<?php echo lang_get( 'realname' ) ?>
+		</th>
+		<td><?php
 			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
 				print error_string( ERROR_ACCESS_DENIED );
 			} else {
 				echo string_display_line( $u_realname );
 			} ?>
-		</span></span>
-		<span class="label-style"></span>
+		</td>
+	</tr>
+	</fieldset>
+</table>
 	</div>
-	<span class="section-links">
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
 	<?php if( $t_can_manage ) { ?>
-		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="action-button">
+		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="pull-left">
 			<fieldset>
 				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
-				<span><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
 			</fieldset>
 		</form>
 	<?php } ?>
 	<?php if( auth_can_impersonate( $f_user_id ) ) { ?>
-		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="action-button">
+		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-right">
 			<fieldset>
 				<?php echo form_security_field( 'manage_user_impersonate' ) ?>
 				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
-				<span><input type="submit" class="button" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
+				<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
 			</fieldset>
 		</form>
 	<?php } ?>
-	</span>
-</div><?php
-
-html_page_bottom();
+	</div>
+</div>
+</div>
+</div>
+<?php
+layout_page_end();

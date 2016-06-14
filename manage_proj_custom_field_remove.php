@@ -80,8 +80,10 @@ custom_field_unlink( $f_field_id, $f_project_id );
 
 form_security_purge( 'manage_proj_custom_field_remove' );
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

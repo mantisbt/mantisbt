@@ -46,21 +46,20 @@ $t_token = api_token_create( $f_token_name, $t_user_id );
 $t_disclose_message = lang_get( 'api_token_disclose_message' );
 $t_display_once_message = lang_get( 'api_token_displayed_once' );
 
-html_page_top();
+
+layout_page_header( lang_get( 'api_tokens_link' ) );
+
+layout_page_begin();
 ?>
 
-<div align="center">
-<br /><br />
-<?php echo $t_disclose_message ?>
-<br />
-<span class="important-msg"><?php echo $t_display_once_message ?></span>
-<br /><br />
-<span class="api-token"><?php echo string_display_line( $t_token ) ?></span>
-<br /><br />
-<?php print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
-<br />
+<div class="col-md-12 col-xs-12">
+<h2><?php echo $t_disclose_message ?></h2>
+<div class="lead red"><?php echo $t_display_once_message ?></div>
+<div class="space-10"></div>
+<div class="well"><?php echo string_display_line( $t_token ) ?></div>
+<div class="space-10"></div>
+<?php print_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
 </div>
-
 <?php
-html_page_bottom();
+layout_page_end();
 

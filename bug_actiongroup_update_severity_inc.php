@@ -46,10 +46,7 @@ require_api( 'print_api.php' );
  * @return void
  */
 function action_update_severity_print_title() {
-	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
 	echo lang_get( 'update_severity_title' );
-	echo '</td></tr>';
 }
 
 /**
@@ -61,26 +58,16 @@ function action_update_severity_print_title() {
  */
 function action_update_severity_print_fields() {
 ?>
-	<tbody>
-	</tbody>
-		<tr>
-			<th class="category">
-				<?php echo lang_get( 'update_severity_msg' ); ?>
-			</th>
-			<td>
-				<select name="severity">';
-					<?php print_enum_string_option_list( 'severity' ); ?>
-				</select>
-			</td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" class="button" value="<?php echo lang_get( 'update_severity_button' ); ?>" />
-			</td>
-		</tr>
-	</tfoot>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'update_severity_msg' ); ?>
+		</th>
+		<td>
+			<select name="severity" class="input-sm">';
+				<?php print_enum_string_option_list( 'severity' ); ?>
+			</select>
+		</td>
+	</tr>
 <?php
 }
 

@@ -222,15 +222,17 @@ $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 
 form_security_purge( 'manage_user_update' );
 
-html_page_top( null, $t_result ? $t_redirect_url : null );
+layout_page_header( null, $t_result ? $t_redirect_url : null );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 if( $f_protected && $t_old_protected ) {				# PROTECTED
 	echo '<div class="failure-msg">';
 	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 } else if( $t_result ) {					# SUCCESS
 	html_operation_successful( $t_redirect_url );
 }
 
-html_page_bottom();
+layout_page_end();

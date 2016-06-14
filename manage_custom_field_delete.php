@@ -73,8 +73,10 @@ custom_field_destroy( $f_field_id );
 
 form_security_purge( 'manage_custom_field_delete' );
 
-html_page_top( null, $f_return );
+layout_page_header( null, $f_return );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $f_return );
 
-html_page_bottom();
+layout_page_end();

@@ -199,14 +199,9 @@ for( $i=0; $i<$t_count_cat; $i++ ) {
 sort( $t_category );
 if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
-	html_begin();
-	html_head_begin();
-	html_css();
-	html_content_type();
-	html_title( lang_get( 'by_category' ) );
-	html_head_end();
-	html_body_begin();
-	echo '<table class="width100"><tr><td></td>';
+    echo '<div class="space-10"></div>';
+    echo '<div class="table-responsive">';
+	echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 	foreach ( $t_category as $t_cat ) {
 		echo '<th>'.$t_cat.'</th>';
 	}
@@ -219,8 +214,7 @@ if( $f_show_as_table ) {
 		echo '</tr>';
 	}
 	echo '</table>';
-	html_body_end();
-	html_end();
+    echo '</div>';
 } else {
 	# reverse the array and reorder the data, if necessary
 	$t_metrics = array();

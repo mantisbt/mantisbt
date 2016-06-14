@@ -744,7 +744,7 @@ function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null
  */
 function tag_get_link( array $p_tag_row ) {
 	return sprintf(
-		'<a href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
+		'<a class="btn btn-xs btn-primary btn-white btn-round" href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
 		$p_tag_row['id'],
 		string_display_line( $p_tag_row['description'] ),
 		string_display_line( $p_tag_row['name'] )
@@ -777,7 +777,10 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
-		echo '<a href="tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token . '"><img src="images/delete.png" class="delete-icon" title="' . $t_tooltip . '" alt="X"/></a>';
+		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
+		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
+		echo '<i class="fa fa-times"></i>';
+		echo '</a>';
 	}
 
 	return true;

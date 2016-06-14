@@ -52,22 +52,34 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 }
 ?>
 
-<a id="history"></a><br />
+    <div class="col-md-12 col-xs-12">
+        <a id="history"></a>
+        <div class="space-10"></div>
 
 <?php
-	collapse_open( 'history', '', 'table-container' );
+	$t_collapse_block = is_collapsed( 'history' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
-<table>
+<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-history"></i>
+		<?php echo lang_get( 'bug_history' ) ?>
+	</h4>
+	<div class="widget-toolbar">
+		<a data-action="collapse" href="#">
+			<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+		</a>
+	</div>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-hover table-striped">
 	<thead>
 		<tr>
-			<td class="form-title" colspan="4"><?php
-				collapse_icon( 'history' );
-				echo lang_get( 'bug_history' ); ?>
-			</td>
-		</tr>
-
-		<tr class="row-category-history">
 			<th class="small-caption">
 				<?php echo lang_get( 'date_modified' ) ?>
 			</th>
@@ -106,17 +118,10 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 ?>
 	</tbody>
 </table>
-<?php
-	collapse_closed( 'history' );
-?>
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4"><?php
-		collapse_icon( 'history' );
-		echo lang_get( 'bug_history' ); ?>
-	</td>
-</tr>
-</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 <?php
-collapse_end( 'history' );

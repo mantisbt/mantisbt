@@ -70,85 +70,75 @@ if( profile_is_global( $f_profile_id ) ) {
 
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin( 'manage_overview_page.php' );
 
 if( profile_is_global( $f_profile_id ) ) {
-	print_manage_menu();
+	print_manage_menu( 'manage_prof_menu_page.php' );
 }
 ?>
 
 <?php # Edit Profile Form BEGIN ?>
-<br />
-<div class="form-container">
-
-<h2><?php echo lang_get( 'edit_profile_title' ) ?></h2>
-<div class="right">
-	<?php
-		if( !profile_is_global( $f_profile_id ) ) {
-			print_account_menu();
-		}
-	?>
-</div>
-
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 <form method="post" action="account_prof_update.php">
-
-<fieldset>
-	<?php echo form_security_field( 'profile_update' )?>
-
-	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
-
-	<div class="field-container">
-		<label for="platform" class="required">
-			<span><?php echo lang_get( 'platform' ) ?></span>
-		</label>
-		<span class="input">
-			<input type="text" name="platform" size="32" maxlength="32" 
-				value="<?php echo string_attribute( $v_platform ) ?>" />
-		</span>
-		<span class="label-style"></span>
-	</div>
-
-	<div class="field-container">
-		<label for="os" class="required">
-			<span><?php echo lang_get( 'os' ) ?></span>
-		</label>
-		<span class="input">
-			<input type="text" name="os" size="32" maxlength="32" 
-				value="<?php echo string_attribute( $v_os ) ?>" />
-		</span>
-		<span class="label-style"></span>
-	</div>
-
-	<div class="field-container">
-		<label for="os_version" class="required">
-			<span><?php echo lang_get( 'os_version' ) ?></span>
-		</label>
-		<span class="input">
-			<input type="text" name="os_build" size="32" maxlength="32" 
-				value="<?php echo string_attribute( $v_os_build ) ?>" />
-		</span>
-		<span class="label-style"></span>
-	</div>
-
-	<div class="field-container">
-		<label for="description" class="required">
-			<span><?php echo lang_get( 'additional_description' ) ?></span>
-		</label>
-		<span class="textarea">
-			<textarea name="description" cols="60" rows="8"><?php 
-				echo string_textarea( $v_description );
-			?></textarea>
-		</span>
-		<span class="label-style"></span>
-	</div>
-
-	<div class="submit-button">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
-	</div>
-
-</fieldset>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-user"></i>
+		<?php echo lang_get('edit_profile_title') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed">
+		<?php  echo form_security_field( 'profile_update' )?>
+		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
+<tr>
+	<th class="category" width="25%">
+		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
+	</th>
+	<td width="75%">
+		<input type="text" name="platform" class="input-sm" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
+	</td>
+</tr>
+<tr>
+	<th class="category">
+		<span class="required">*</span><?php echo lang_get( 'os' ) ?>
+	</th>
+	<td>
+		<input type="text" name="os" class="input-sm"  size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
+	</td>
+</tr>
+<tr>
+	<th class="category">
+		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
+	</th>
+	<td>
+		<input type="text" name="os_build" class="input-sm" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
+	</td>
+</tr>
+<tr>
+	<th class="category">
+		<?php echo lang_get( 'additional_description' ) ?>
+	</th>
+	<td>
+		<textarea class="form-control" name="description" cols="60" rows="8"><?php echo string_textarea( $v_description ) ?></textarea>
+	</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
+</div>
+</div>
+</div>
 </form>
 </div>
 <?php
-html_page_bottom();
+layout_page_end();

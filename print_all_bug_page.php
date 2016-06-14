@@ -105,28 +105,24 @@ columns_plugin_cache_issue_data( $t_result, $t_columns );
 # for export
 $t_show_flag = gpc_get_int( 'show_flag', 0 );
 
-html_page_top();
+layout_page_header();
 ?>
 
-<br>
-<table class="width100"><tr><td class="form-title">
+<table class="table table-condensed no-margin"><tr><td class="bold bigger-120">
 	<div class="center">
 		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
 	</div>
 </td></tr></table>
 
-<br />
-
 <form method="post" action="view_all_set.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<fieldset style="display: none">
 	<input type="hidden" name="type" value="1" />
 	<input type="hidden" name="print" value="1" />
 	<input type="hidden" name="offset" value="0" />
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
-</fieldset>
-<table class="width100">
+
+<table class="table table-striped table-bordered table-condensed no-margin">
 <?php
 #<SQLI> Excel & Print export
 #$f_bug_array stores the number of the selected rows
@@ -159,9 +155,8 @@ $t_icon_path = config_get( 'icon_path' );
 	$t_search = urlencode( $f_search );
 
 	$t_icons = array(
-		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.gif', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' )
-	);
+		array( 'print_all_bug_page_word', 'word', '', 'fa-file-word-o', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
 		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
@@ -170,22 +165,22 @@ $t_icon_path = config_get( 'icon_path' );
 			'&amp;type_page=' . $t_icon[1] .
 			'&amp;export=' . $f_export .
 			'&amp;show_flag=' . $t_show_flag .
-			'">' .
-			'<img src="' . $t_icon_path . $t_icon[2] . '" alt="' . $t_icon[3] . '" /></a> ';
+			'" ' . $t_icon[2] . '>' .
+			'<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
 	}
 ?>
+
 	</td>
 </tr>
-<?php #<SQLI> ?>
 </table>
-
 </form>
 
-<div class="form-container width100">
 <form method="post" action="print_all_bug_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
-	<h2>
+<table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
+<tr>
+    <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -196,17 +191,12 @@ $t_icon_path = config_get( 'icon_path' );
 				$v_start = 0;
 				$v_end   = 0;
 			}
-			echo ' ( ' . $v_start . ' - ' . $v_end . ' )';
-
-			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
-			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
-			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );
+			echo '( ' . $v_start . ' - ' . $v_end . ' )';
 		?>
-	</h2>
-
-<table id="buglist">
-
-<thead>
+	</td>
+<tr>
+	</td>
+</tr>
 <tr class="row-category">
 	<?php
 		$t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
@@ -218,7 +208,7 @@ $t_icon_path = config_get( 'icon_path' );
 	?>
 </tr>
 <tr class="spacer">
-	<td colspan="<?php echo $t_num_of_columns; ?>"></td>
+	<td colspan="<?php echo $t_num_of_columns ?>"></td>
 </tr>
 </thead>
 
@@ -227,7 +217,7 @@ $t_icon_path = config_get( 'icon_path' );
 	for( $i=0; $i < $t_row_count; $i++ ) {
 		$t_row = $t_result[$i];
 
-		if( isset( $t_bug_arr_sort[$t_row->id] ) || ( $t_show_flag==0 ) ) {
+		if( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
 ?>
 <tr>
 <?php
@@ -240,18 +230,18 @@ $t_icon_path = config_get( 'icon_path' );
 		} # isset_loop
 	} # for_loop
 ?>
-</tbody>
+<tr class="spacer">
+    <td colspan="<?php echo $t_num_of_columns ?>"></td>
+</tr>
+<tr>
+    <td colspan="<?php echo $t_num_of_columns ?>">
+        <input type="hidden" name="show_flag" value="1" />
+        <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
+    </td>
+</tr>
 </table>
-
-<div class="footer">
-	<fieldset style="display: none">
-		<input type="hidden" name="show_flag" value="1" />
-	</fieldset>
-	<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
-</div>
-
 </form>
-</div>
-
 <?php
-html_page_bottom();
+layout_body_javascript();
+html_body_end();
+html_end();

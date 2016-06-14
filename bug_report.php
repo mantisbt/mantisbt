@@ -300,13 +300,15 @@ if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
 
 form_security_purge( 'bug_report' );
 
-html_page_top1();
+layout_page_header_begin();
 
 if( !$f_report_stay ) {
 	html_meta_redirect( 'view_all_bug_page.php' );
 }
 
-html_page_top2();
+layout_page_header_end();
+
+layout_page_begin( 'bug_report_page.php' );
 
 # Process tags
 if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
@@ -314,17 +316,22 @@ if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
 	if ( $t_result !== true ) {
 		$t_tags_failed = $t_result;
 		if( count( $t_tags_failed ) > 0 ) {
-			echo '<div class="failure-msg">';
+			echo '<div class="alert alert-danger">';
 			print_tagging_errors_table( $t_tags_failed );
 			echo '</div>';
 		}
 	}
 }
+?>
 
-echo '<div class="success-msg">';
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div class="alert alert-success">
+
+<?php
+echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
+print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
+print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
 if( $f_report_stay ) {
 ?>
@@ -344,13 +351,14 @@ if( $f_report_stay ) {
 		<input type="hidden" name="report_stay" value="1" />
 		<input type="hidden" name="view_state" value="<?php echo string_attribute( $t_bug_data->view_state ) ?>" />
 		<input type="hidden" name="due_date" value="<?php echo string_attribute( $t_bug_data->due_date ) ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
 	</p>
 <?php
 }
 ?>
 </div>
+</div>
 
 <?php
-html_page_bottom();
+layout_page_end();

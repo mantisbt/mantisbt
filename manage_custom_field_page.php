@@ -49,14 +49,27 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-html_page_top( lang_get( 'manage_custom_field_link' ) );
+layout_page_header( lang_get( 'manage_custom_field_link' ) );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_custom_field_page.php' );
 ?>
 
-<div class="table-container">
-	<h2><?php echo lang_get( 'custom_fields_setup' ) ?></h2>
-	<table>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-flask"></i>
+		<?php echo lang_get( 'custom_fields_setup' ) ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
 				<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
@@ -86,14 +99,19 @@ print_manage_menu( 'manage_custom_field_page.php' );
 		} # Create Form END ?>
 		</tbody>
 	</table>
-	<form method="post" action="manage_custom_field_create.php">
+	</div>
+</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<form method="post" action="manage_custom_field_create.php" class="form-inline">
 		<fieldset>
 			<?php echo form_security_field( 'manage_custom_field_create' ); ?>
-			<input type="text" name="name" size="32" maxlength="64" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
+			<input type="text" class="input-sm" name="name" size="32" maxlength="64" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 		</fieldset>
 	</form>
+</div>
+</div>
+</div>
 </div><?php
 
-
-html_page_bottom();
+layout_page_end();

@@ -63,7 +63,9 @@ auth_ensure_user_authenticated();
 
 compress_enable();
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin();
 
 $t_filter = current_user_get_bug_filter();
 filter_init( $t_filter );
@@ -154,7 +156,8 @@ $t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' 
 
 $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 ?>
-<div class="filter-box">
+<div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
 
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 
@@ -168,27 +171,39 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	}
 ?>
 
-<table class="width100" cellspacing="1">
-
-<tr>
-	<td class="right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-filter"></i>
+		<?php echo lang_get('filters') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="widget-toolbox">
+<div class="btn-toolbar">
+	<div class="btn-group pull-right">
 	<?php
 		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
 
 		if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 			if( 'advanced' == $f_view_type ) {
-				print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+				print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
 			} else {
-				print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+				print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 			}
 		}
 	?>
-	</td>
-</tr>
+	</div>
+</div>
+</div>
+
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 
 <!-- Filter row 1 -->
 
-<tr class="row-category2">
+<tr>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'reporter' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'monitored_by' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'assigned_to' ) ?></th>
@@ -197,7 +212,8 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>"><?php echo lang_get( 'profile' ) ?></th>
 </tr>
-<tr class="row-1">
+
+<tr>
 	<!-- Reporter -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_reporter_id(); ?>
@@ -230,8 +246,8 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 <!-- Filter row 2 -->
 
-<tr class="row-category2">
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></td>
+<tr>
+	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo ( 'simple' == $f_view_type ) ? lang_get( 'hide_status' ) : '&#160;'; ?>
 	</th>
@@ -257,7 +273,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</th>
 <?php } ?>
 </tr>
-<tr class="row-2">
+<tr>
 	<!-- Status -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_status(); ?>
@@ -310,7 +326,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 <!-- Filter row 3 -->
 
-<tr class="row-category2">
+<tr>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></th>
@@ -327,7 +343,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 		<?php echo lang_get( 'bug_relationships' ) ?>
 	</th>
 </tr>
-<tr class="row-1">
+<tr>
 	<!-- Number of bugs per page -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_per_page(); ?>
@@ -363,7 +379,7 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 		for( $i = 0; $i < $t_num_rows; $i++ ) {
 			?>
-			<tr class="row-category2">
+			<tr>
 			<?php
 			for( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<th class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
@@ -376,7 +392,7 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			}
 			?>
 			</tr>
-			<tr class="row-2">
+			<tr>
 			<?php
 			for( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
@@ -403,9 +419,9 @@ if( 'simple' == $f_view_type ) {
 }
 ?>
 
-<tr class="row-1">
+<tr>
 	<!-- Sort by -->
-	<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<th class="small-caption category" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'sort_label' ) ?>
 	</th>
 	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
@@ -415,7 +431,7 @@ if( 'simple' == $f_view_type ) {
 	</td>
 
 	<!-- Highlight changed bugs -->
-	<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
+	<th class="small-caption category" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
 	<td colspan="<?php echo ( $t_filter_cols - 4 - $t_project_cols ) * $t_custom_cols; ?>">
 		<?php print_filter_highlight_changed(); ?>
 	</td>
@@ -424,7 +440,7 @@ if( 'simple' == $f_view_type ) {
 		if( 'advanced' == $f_view_type ) {
 	?>
 	<!-- Projects -->
-			<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+			<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<?php echo lang_get( 'email_project_label' ) ?>
 			</th>
 			<td colspan="<?php echo( 2 * $t_custom_cols ); ?>">
@@ -454,8 +470,8 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 
 	# wrap at the appropriate column
 	if( $t_column >= $t_filter_cols ) {
-		echo '<tr class="row-category2">', $t_fields, '</tr>';
-		echo '<tr class="row-1">';
+		echo '<tr>', $t_fields, '</tr>';
+		echo '<tr>';
 		foreach( $t_row_filters as $t_row_field_name ) {
 			echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
 			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[$t_row_field_name] );
@@ -474,8 +490,8 @@ if( $t_column > 0 ) {
 		$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
 	}
 
-	echo '<tr class="row-category2">', $t_fields, '</tr>';
-	echo '<tr class="row-1">';
+	echo '<tr>', $t_fields, '</tr>';
+	echo '<tr>';
 	foreach( $t_row_filters as $t_row_field_name ) {
 		echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
 		print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[$t_row_field_name] );
@@ -492,7 +508,7 @@ if( $t_column > 0 ) {
 ?>
 
 <!-- Last Filter row (Search/tags) -->
-<tr class="row-category2">
+<tr>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'search' ) ?>
 	</th>
@@ -506,7 +522,7 @@ if( $t_column > 0 ) {
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	</th>
 </tr>
-<tr class="row-1">
+<tr>
 	<!-- Search field -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
@@ -522,12 +538,15 @@ if( $t_column > 0 ) {
 
 	<!-- Submit button -->
 	<td class="center" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="submit" name="filter" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
-
 </table>
+</div>
+</div>
+</div>
+</div>
 </form>
 </div>
 <?php
-html_page_bottom();
+layout_page_end();

@@ -63,7 +63,7 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	$t_display = collapse_display( $t_block );
+	$t_display = is_collapsed( $t_block );
 
 	# make sure no other collapse section is started
 	if( $g_current_collapse_section !== null ) {
@@ -95,7 +95,7 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	$t_display = !collapse_display( $t_block );
+	$t_display = !is_collapsed( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
@@ -124,16 +124,16 @@ function collapse_icon( $p_name, $p_section = '' ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
-		$t_icon = 'minus.png';
+		$t_icon = 'fa-minus-square-o';
 		$t_alt = '-';
 		$t_id = $p_name . '_open_link';
 	} else {
-		$t_icon = 'plus.png';
+		$t_icon = 'fa-plus-square-o';
 		$t_alt = '+';
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" class="collapse-link"><img src="images/', $t_icon, '" alt="', $t_alt, '" /></a>';
+	echo '<a id="', $t_id, '" class="collapse-link"><i class="fa ', $t_icon, '" alt="', $t_alt, '"></i></a>';
 }
 
 /**
@@ -146,6 +146,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
+	is_collapsed( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
@@ -159,15 +160,15 @@ function collapse_end( $p_name, $p_section = '' ) {
 }
 
 /**
- * Determine if a block should be displayed open by default.
+ * Determine if a block should be collapsed by default.
  * @param string $p_block Collapse block.
  * @return boolean
  */
-function collapse_display( $p_block ) {
+function is_collapsed( $p_block ) {
 	global $g_collapse_cache_token;
 
 	if( !isset( $g_collapse_cache_token[$p_block] ) ) {
-		return true;
+		return false;
 	}
 
 	return( true == $g_collapse_cache_token[$p_block] );

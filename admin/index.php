@@ -28,7 +28,11 @@ require_once( 'schema.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
-html_page_top( 'MantisBT Administration' );
+layout_page_header( 'MantisBT Administration' );
+
+layout_admin_page_begin();
+
+print_admin_menu_bar( 'index.php' );
 
 /**
  * Print Check result - information only
@@ -45,25 +49,21 @@ function print_info_row( $p_description, $p_value ) {
 }
 ?>
 
-<div id="admin-menu">
-	<ul class="menu">
-		<li><a href="check/index.php">Check your installation</a></li>
-	<?php if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) { ?>
-		<li><a href="install.php"><span class="bold">Upgrade your installation</span></a></li>
-	<?php } ?>
-		<li><a href="system_utils.php">System Utilities</a></li>
-		<li><a href="test_langs.php">Test Langs</a></li>
-		<li><a href="email_queue.php">Email Queue</a></li>
-	</ul>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-download"></i>
+		<?php echo lang_get( 'install_information' ) ?>
+	</h4>
 </div>
 
-<div id="admin-overview" class="table-container">
-	<table>
-		<tr>
-			<td class="form-title" width="30%" colspan="2">
-				<?php echo lang_get( 'install_information' ) ?>
-			</td>
-		</tr>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+	<table class="table table-bordered table-condensed">
 <?php
 	if( ON == config_get( 'show_version' ) ) {
 		$t_version_suffix = config_get_global( 'version_suffix' );
@@ -74,7 +74,7 @@ function print_info_row( $p_description, $p_value ) {
 	print_info_row( lang_get( 'php_version' ), phpversion() );
 ?>
 		<tr>
-			<td class="form-title" width="30%" colspan="2">
+			<td class="bold" width="30%" colspan="2">
 				<?php echo lang_get( 'database_information' ) ?>
 			</td>
 		</tr>
@@ -83,7 +83,7 @@ function print_info_row( $p_description, $p_value ) {
 	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
 		<tr>
-			<td class="form-title" width="30%" colspan="2">
+			<td class="bold" width="30%" colspan="2">
 				<?php echo lang_get( 'path_information' ) ?>
 			</td>
 		</tr>
@@ -94,6 +94,10 @@ function print_info_row( $p_description, $p_value ) {
 ?>
 	</table>
 </div>
+</div>
+</div>
+</div>
+</div>
 
 <?php
-	html_page_bottom();
+layout_admin_page_end();

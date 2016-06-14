@@ -127,8 +127,10 @@ user_pref_set( $f_user_id, $t_prefs );
 
 form_security_purge( 'account_prefs_update' );
 
-html_page_top( null, $f_redirect_url );
+layout_page_header( null, $f_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $f_redirect_url );
 
-html_page_bottom();
+layout_page_end();

@@ -43,6 +43,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_dropzone_enabled</term>
+			<listitem>
+				<para>Whether to enable/disable drag and drop zone for uploading of attachments.
+					Default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_file_upload_max_num</term>
 			<listitem>
 				<para>Maximum number of files that can be uploaded simultaneously.

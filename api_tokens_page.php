@@ -40,24 +40,51 @@ auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
-html_page_top( lang_get( 'api_tokens_link' ) );
+layout_page_header( lang_get( 'api_tokens_link' ) );
+layout_page_begin();
+print_account_menu( 'api_tokens_page.php' );
 ?>
+
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
 <div id="api-token-create-div" class="form-container">
 	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
+
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-plus"></i>
+			<?php echo lang_get( 'api_token_create_form_title' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'api_token_create_form_title' ); ?></span></legend>
-			<?php print_account_menu( 'api_tokens_page.php' ) ?>
-			<?php echo form_security_field( 'create_api_token_form' ); ?>
+<?php echo form_security_field( 'create_api_token_form' ); ?>
 
-			<div class="field-container">
-				<label for="token_name"><span><?php echo lang_get( 'api_token_name' ) ?></span></label>
-				<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" /></span>
-				<span class="label-style"></span>
-			</div>
+<tr>
+	<td class="category">
+		<?php echo lang_get( 'api_token_name' ) ?>
+	</td>
+	<td>
+		<input class="input-sm" id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" />
+	</td>
+</tr>
 
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'api_token_create_button' ) ?>" /></span>
-		</fieldset>
+
+</fieldset>
+</table>
+		</div>
+	</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'api_token_create_button' ) ?>" />
+		</div>
+	</div>
+</div>
+
 	</form>
 </div>
 <?php
@@ -67,12 +94,20 @@ $t_date_format = config_get( 'normal_date_format' );
 
 if ( count( $t_tokens ) > 0 ) {
 ?>
-	<div id="api-tokens-list-div" class="form-container">
-	<fieldset>
-		<legend><span><?php echo lang_get( 'api_tokens_title' ); ?></span></legend>
-	</fieldset>
+	<div class="space-10"></div>
 
-	<table>
+	<div id="api-token-list-div" class="form-container">
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-ticket"></i>
+			<?php echo lang_get( 'api_tokens_title' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
 		<thead>
 			<tr class="row-category">
 				<th><?php echo lang_get( 'api_token_name' ); ?></th>
@@ -103,7 +138,7 @@ if ( count( $t_tokens ) > 0 ) {
 						<fieldset>
 							<input id="token_id" type="hidden" name="token_id" value="<?php echo $u_id ; ?>" />
 							<input id="token_name" type="hidden" name="token_name" value="<?php echo string_attribute( $u_name ); ?>" />
-							<input type="submit" class="button" value="<?php echo lang_get( 'api_token_revoke_button' ) ?>" />
+							<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'api_token_revoke_button' ) ?>" />
 						</fieldset>
 					</form>
 				</td>
@@ -112,7 +147,9 @@ if ( count( $t_tokens ) > 0 ) {
 		</tbody>
 	</table>
 </div>
+</div>
+</div>
 <?php
 }
 
-html_page_bottom();
+layout_page_end();

@@ -123,24 +123,33 @@ if( $f_username ) {
 # Login page shouldn't be indexed by search engines
 html_robots_noindex();
 
-html_page_top1();
-html_page_top2a();
+layout_login_page_begin();
 
+?>
+
+<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
+	<div class="login-container">
+		<div class="space-12 hidden-480"></div>
+		<a href="<?php echo config_get( 'logo_url' ) ?>">
+			<h1 class="center white">
+				<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+			</h1>
+		</a>
+		<div class="space-24 hidden-480"></div>
+<?php
 if( $f_error || $f_cookie_error ) {
-	echo '<div class="important-msg">';
-	echo '<ul>';
+	echo '<div class="alert alert-danger">';
 
 	# Display short greeting message
 	# echo lang_get( 'login_page_info' ) . '<br />';
 
 	# Only echo error message if error variable is set
 	if( $f_error ) {
-		echo '<li>' . lang_get( 'login_error' ) . '</li>';
+		echo '<p>' . lang_get( 'login_error' ) . '</p>';
 	}
 	if( $f_cookie_error ) {
-		echo '<li>' . lang_get( 'login_cookies_disabled' ) . '</li>';
+		echo '<p>' . lang_get( 'login_cookies_disabled' ) . '</p>';
 	}
-	echo '</ul>';
 	echo '</div>';
 }
 
@@ -209,11 +218,19 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 }
 ?>
 
+<div class="position-relative">
+	<div class="signup-box visible widget-box no-border" id="login-box">
+		<div class="widget-body">
+			<div class="widget-main">
+				<h4 class="header lighter bigger">
+					<i class="ace-icon fa fa-sign-in"></i>
+					<?php echo lang_get( 'login_title' ) ?>
+				</h4>
+				<div class="space-10"></div>
 <!-- Login Form BEGIN -->
-<div id="login-div" class="form-container">
 	<form id="login-form" method="post" action="login.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'login_title' ) ?></span></legend>
+
 			<?php
 			if( !is_blank( $f_return ) ) {
 				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
@@ -224,58 +241,59 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			}
 
 			# CSRF protection not required here - form does not result in modifications
-			echo '<ul id="login-links">';
+			?>
 
-			if( ON == config_get( 'allow_anonymous_login' ) ) {
-				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
-			}
+			<label for="username" class="block clearfix">
+				<span class="block input-icon input-icon-right">
+					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
+						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>"
+						   class="form-control <?php echo $t_username_field_autofocus ?>">
+					<i class="ace-icon fa fa-user"></i>
+				</span>
+			</label>
+			<label for="password" class="block clearfix">
+				<span class="block input-icon input-icon-right">
+					<input id="password" name="password" type="password" placeholder="<?php echo lang_get( 'password' ) ?>"
+						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
+						   class="form-control <?php echo $t_password_field_autofocus ?>">
+					<i class="ace-icon fa fa-lock"></i>
+				</span>
+			</label>
 
-			if( ( ON == config_get_global( 'allow_signup' ) ) &&
-				( LDAP != config_get_global( 'login_method' ) ) &&
-				( ON == config_get( 'enable_email_notification' ) )
-			) {
-				echo '<li><a href="signup_page.php">', lang_get( 'signup_link' ), '</a></li>';
-			}
+			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
+				<div class="clearfix">
+					<label for="remember-login" class="inline">
+						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?> />
+						<span class="lbl"> <?php echo lang_get( 'save_login' ) ?></span>
+					</label>
+				</div>
+			<?php } ?>
+			<?php if( $t_session_validation ) { ?>
+				<div class="clearfix">
+					<label for="secure-session" class="inline">
+						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?> />
+						<span class="lbl"> <?php echo lang_get( 'secure_session_long' ) ?></span>
+					</label>
+				</div>
+			<?php } ?>
+
+			<div class="space-10"></div>
+
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<div class="clearfix"></div>
+			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!
 			if( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {
-				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+				echo '<a class="pull-right" href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a>';
 			}
 			?>
-			</ul>
-			<div class="field-container">
-				<label for="username"><span><?php echo $t_username_label ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
-			<div class="field-container">
-				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
-				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
-				<span class="label-style"></span>
-			</div>
-			<?php } ?>
-			<?php if( $t_session_validation ) { ?>
-			<div class="field-container">
-				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>
-				<span class="input">
-					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
-					<span id="session-msg"><?php echo lang_get( 'secure_session_long' ); ?></span>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<?php } ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
 		</fieldset>
 	</form>
-</div>
+
+	<!-- Login Form END -->
 
 <?php
 #
@@ -283,13 +301,37 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 #
 
 if( count( $t_warnings ) > 0 ) {
-	echo '<div class="important-msg">';
-	echo '<ul>';
-	foreach( $t_warnings as $t_warning ) {
-		echo '<li>' . $t_warning . '</li>';
+	echo '<div class="space-10"></div>';
+	echo '<div class="alert alert-warning">';
+	foreach( $t_warnings AS $t_warning ) {
+		echo '<p>' . $t_warning . '</p>';
 	}
-	echo '</ul>';
 	echo '</div>';
 }
+?>
+</div>
 
-html_page_bottom1a( __FILE__ );
+<div class="toolbar center">
+
+<?php
+if( ON == config_get( 'allow_anonymous_login' ) ) {
+	echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
+}
+
+if( ( ON == config_get_global( 'allow_signup' ) ) &&
+	( LDAP != config_get_global( 'login_method' ) ) &&
+	( ON == config_get( 'enable_email_notification' ) )
+) {
+	echo '<a class="back-to-login-link pull-left" href="signup_page.php">', lang_get( 'signup_link' ), '</a>';
+}
+?>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<?php
+layout_login_page_end();

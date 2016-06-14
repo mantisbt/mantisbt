@@ -56,7 +56,8 @@ access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
 $t_read_write_access = access_has_global_level( config_get( 'set_configuration_threshold' ) );
 
-html_page_top( lang_get( 'configuration_report' ) );
+layout_page_header( lang_get( 'configuration_report' ) );
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
@@ -293,23 +294,29 @@ $t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
 $t_result = db_query( $t_query, $t_param );
 ?>
 
-<!-- FILTER FORM -->
-<div id="config-filter-div" class="table-container">
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
+<!-- FILTER FORM -->
 <form id="filter_form" method="post">
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="save" value="1" />
 
-	<table cellspacing="1">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+	<i class="ace-icon fa fa-filter"></i>
+	<?php echo lang_get( 'filters' ) ?>
+</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed">
 		<!-- Title -->
 		<thead>
 			<tr>
-				<td class="form-title" colspan="7">
-					<?php echo lang_get( 'filters' ) ?>
-				</td>
-			</tr>
-
-			<tr class="row-category2">
 				<th>
 					<?php echo lang_get( 'username' ); ?><br />
 				</th>
@@ -323,48 +330,69 @@ $t_result = db_query( $t_query, $t_param );
 		</thead>
 
 		<tbody>
-			<tr class="row-1">
+			<tr>
 				<td>
-					<select name="filter_user_id">
+					<select name="filter_user_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_users_list, $t_filter_user_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_project_id">
+					<select name="filter_project_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_projects_list, $t_filter_project_value );
 						?>
 					</select>
 				</td>
 				<td>
-					<select name="filter_config_id">
+					<select name="filter_config_id" class="input-sm">
 						<?php
 						print_option_list_from_array( $t_configs_list, $t_filter_config_value );
 						?>
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3">
-					<input name="apply_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
-					<input name="default_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'default_filter' )?>" />
-					<input name="reset_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
-				</td>
-			</tr>
 		</tbody>
 	</table>
-	</form>
 </div>
+</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<div class="btn-toolbar">
+		<div class="btn-group">
+			<input name="apply_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				value="<?php echo lang_get( 'filter_button' )?>" />
+
+			<input name="default_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				value="<?php echo lang_get( 'default_filter' )?>" />
+
+			<input name="reset_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				value="<?php echo lang_get( 'reset_query' )?>" />
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</form>
+
+
+<div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
-<div>
-<div id="adm-config-div" class="table-container" style="display: table">
-	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
-	<table cellspacing="1" width="100%">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+<i class="ace-icon fa fa-database"></i>
+<?php echo lang_get( 'database_configuration' ) ?>
+</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
-			<tr class="row-category">
+			<tr>
 				<th><?php echo lang_get( 'username' ) ?></th>
 				<th><?php echo lang_get( 'project_name' ) ?></th>
 				<th><?php echo lang_get( 'configuration_option' ) ?></th>
@@ -388,7 +416,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 ?>
 <!-- Repeated Info Rows -->
-			<tr width="100%">
+			<tr>
 				<td>
 					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 				</td>
@@ -400,11 +428,13 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 <?php
 	if( $t_read_write_access ) {
 ?>
-				<td class="center">
+<td class="center">
+	<div class="btn-group inline">
 <?php
 		if( config_can_delete( $v_config_id ) ) {
 			# Update button (will populate edit form at page bottom)
-			print_button(
+			echo '<div class="pull-left">';
+			print_form_button(
 				'#config_set_form',
 				lang_get( 'edit_link' ),
 				array(
@@ -416,9 +446,11 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'action'        => 'action_edit',
 				),
 				OFF );
+			echo '</div>';
 
 			# Clone button
-			print_button(
+			echo '<div class="pull-left">';
+			print_form_button(
 				'#config_set_form',
 				lang_get( 'create_child_bug_button' ),
 				array(
@@ -430,9 +462,11 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'action'        => 'action_clone',
 				),
 				OFF );
+			echo '</div>';
 
 			# Delete button
-			print_button(
+			echo '<div class="pull-left">';
+			print_form_button(
 				'adm_config_delete.php',
 				lang_get( 'delete_link' ),
 				array(
@@ -440,11 +474,14 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'project_id'    => $v_project_id,
 					'config_option' => $v_config_id,
 				),
-				$t_form_security_token );
+				$t_form_security_token
+			);
+			echo '</div>';
 		} else {
 			echo '&#160;';
 		}
 ?>
+	</div>
 				</td>
 <?php
 	} # end if config_can_delete
@@ -457,6 +494,8 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 	</table>
 </div>
 </div>
+</div>
+</div>
 
 <?php
 # Only display the edit form if user is authorized to change configuration
@@ -464,23 +503,37 @@ if( $t_read_write_access ) {
 ?>
 
 <!-- Config Set Form -->
+<div class="space-10"></div>
 
 <?php if( config_can_delete( $t_edit_option ) ){ ?>
-<div id="config-edit-div" class="form-container">
+<div id="config-edit-div">
 <form id="config_set_form" method="post" action="adm_config_set.php">
-	<fieldset>
-		<?php echo form_security_field( 'adm_config_set' ) ?>
 
 		<!-- Title -->
-		<legend><span>
+		<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-sliders"></i>
 			<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>
-		</span></legend>
+			</h4>
+		</div>
+
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+
+		<div id="config-edit-div" class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<fieldset>
+		<?php echo form_security_field( 'adm_config_set' ) ?>
 
 		<!-- Username -->
-		<div class="field-container">
-			<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
-			<span class="select">
-				<select id="config-user-id" name="user_id">
+		<tr>
+			<td class="category">
+				<?php echo lang_get( 'username' ) ?>
+			</td>
+			<td>
+				<select id="config-user-id" name="user_id" class="input-sm">
 					<option value="<?php echo ALL_USERS; ?>"
 						<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
 						<?php echo lang_get( 'all_users' ); ?>
@@ -488,15 +541,16 @@ if( $t_read_write_access ) {
 					<?php print_user_option_list( $t_edit_user_id ) ?>
 				</select>
 				<input type="hidden" name="original_user_id" value="<?php echo $t_edit_user_id; ?>" />
-			</span>
-			<span class="label-style"></span>
-		</div>
+			</td>
+		</tr>
 
 			<!-- Project -->
-			<div class="field-container">
-				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-				<span class="select">
-					<select id="config-project-id" name="project_id">
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'project_name' ) ?>
+				</td>
+				<td>
+					<select id="config-project-id" name="project_id" class="input-sm">
 						<option value="<?php echo ALL_PROJECTS; ?>"
 							<?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
 							<?php echo lang_get( 'all_projects' ); ?>
@@ -504,55 +558,63 @@ if( $t_read_write_access ) {
 						<?php print_project_option_list( $t_edit_project_id, false ) ?>
 					</select>
 					<input type="hidden" name="original_project_id" value="<?php echo $t_edit_project_id; ?>" />
-				</span>
-				<span class="label-style"></span>
-			</div>
+				</td>
+			</tr>
 
 			<!-- Config option name -->
-			<div class="field-container">
-				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
-				<span class="input">
-					<input type="text" name="config_option"
-						value="<?php echo string_attribute( $t_edit_option ); ?>"
-						size="64" maxlength="64" />
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'configuration_option' ) ?>
+				</td>
+				<td>
+					<input type="text" name="config_option" class="input-sm"
+						   value="<?php echo string_display_line( $t_edit_option ); ?>"
+						   size="64" maxlength="64" />
 					<input type="hidden" name="original_config_option" value="<?php echo $t_edit_option; ?>" />
-				</span>
-				<span class="label-style"></span>
-			</div>
+				</td>
+			</tr>
 
 			<!-- Option type -->
-			<div class="field-container">
-				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
-				<span class="select">
-					<select id="config-type" name="type">
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'configuration_option_type' ) ?>
+				</td>
+				<td>
+					<select id="config-type" name="type" class="input-sm">
 						<?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
 					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
+				</td>
+			</tr>
 
 			<!-- Option Value -->
-			<div class="field-container">
-				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
-				<span class="textarea">
-					<textarea name="value" cols="80" rows="10"><?php
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'configuration_option_value' ) ?>
+				</td>
+				<td>
+					<textarea class="form-control" name="value" cols="80" rows="10"><?php
 						print_config_value_as_string( $t_edit_type, $t_edit_value, false );
-					?></textarea>
-				</span>
-				<span class="label-style"></span>
-			</div>
-
-			<!-- Submit button -->
-			<span class="submit-button">
-				<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
-				<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>" />
-			</span>
+						?></textarea>
+				</td>
+			</tr>
 		</fieldset>
-	</form>
+	</table>
+	</div>
+
+	</div>
+		<div class="widget-toolbox padding-4 clearfix">
+			<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
+			<input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
+				value="<?php echo lang_get('set_configuration_option') ?>"/>
+		</div>
+	</div>
+	</div>
+	</div>
+</form>
 </div>
 <?php } # end if config_can_delete ?>
 
 <?php
 } # end user can change config
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();
