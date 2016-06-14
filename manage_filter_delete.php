@@ -17,14 +17,12 @@
 /**
  * Handler to delete a stored query.
  *
- * Takes source_query_id as a parameter
+ * Takes filter_id as a parameter
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @deprecated This page has been replaced by 'manage_filter_delete.php'
  *
  * @uses core.php
  * @uses authentication_api.php
@@ -47,35 +45,27 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-# Trigger deprecate warning
-error_parameters( 'query_delete.php', 'manage_filter_delete.php' );
-trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-
-form_security_validate( 'query_delete' );
+form_security_validate( 'manage_filter_delete' );
 
 auth_ensure_user_authenticated();
-compress_enable();
 
-$f_query_id = gpc_get_int( 'source_query_id' );
-$t_redirect_url = 'query_view_page.php';
+$f_filter_id = gpc_get_int( 'filter_id' );
+$t_redirect_url = 'manage_filter_page.php';
 
-if( !filter_db_can_delete_filter( $f_query_id ) ) {
+if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	print_header_redirect( $t_redirect_url );
-} else {
-	html_page_top();
-	filter_db_delete_filter( $f_query_id );
-	form_security_purge( 'query_delete' );
-	?>
-	<br />
-	<div class="center">
-		<strong>
-			<?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?>
-		</strong>
-		<form method="post" action="<?php print $t_redirect_url; ?>">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-		</form>
-	</div>
-	<?php
-	html_page_bottom();
+	exit;
 }
+
+helper_ensure_confirmed( lang_get( 'query_delete_msg' ) . '<br>' . lang_get( 'query_name' ) . ': ' . filter_get_field( $f_filter_id, 'name' ),
+		lang_get( 'delete_query' ) );
+
+filter_db_delete_filter( $f_filter_id );
+
+form_security_purge( 'manage_filter_delete' );
+
+html_page_top();
+
+html_operation_successful( 'manage_filter_page.php' );
+
+html_page_bottom();
