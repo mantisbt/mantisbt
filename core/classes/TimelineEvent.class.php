@@ -69,16 +69,17 @@ class TimelineEvent {
 
 	/**
 	 * Returns html string representing the beginning block of a timeline entry
+	 * @param string $p_action_icon Icon name for Font Awesome
 	 * @return string
 	 */
-	public function html_start( $t_action_icon = 'fa-check') {
+	public function html_start( $p_action_icon = 'fa-check') {
 		$t_avatar = Avatar::get( $this->user_id, 40 );
 		$t_html = '<div class="profile-activity clearfix">';
 
         if( !empty( $t_avatar ) ) {
 			$t_html .= '<img class="pull-left" src="' . $t_avatar->image . '"/>';
 		} else {
-			$t_html .= '<i class="pull-left thumbicon fa ' . $t_action_icon . ' btn-primary no-hover"></i>';
+			$t_html .= '<i class="pull-left thumbicon fa ' . $p_action_icon . ' btn-primary no-hover"></i>';
 		}
 		return $t_html;
 	}
