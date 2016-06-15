@@ -142,4 +142,4 @@ layout_login_page_begin();
 
 
 <?php
-layout_login_page_end( __FILE__ );
+layout_login_page_end();
