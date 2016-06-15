@@ -656,6 +656,13 @@ $g_smtp_connection_mode = '';
 $g_smtp_port = 25;
 
 /**
+ * Default SMTP timeout in seconds
+ * In case of SMTP errors, try raising to higher value first (e.g. 60 seconds)
+ * @global integer $g_smtp_timeout
+ */
+$g_smtp_timeout = 10;
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
