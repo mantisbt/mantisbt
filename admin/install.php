@@ -821,8 +821,15 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				}
 			} else {
+				# Set character set to utf8mb4 for mysql 5.5.3 and above, utf8 otherwise
+				$t_charset = 'utf8';
+				if( db_is_mysql() ) {
+					if( version_compare( db_version(), '5.5.3', '>=' ) ) {
+						$t_charset = 'utf8mb4';
+					}
+				}
 				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
-					'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
+					'mysql' => "DEFAULT CHARACTER SET $t_charset DEFAULT COLLATE {$t_charset}_unicode_ci",
 				) );
 				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 				if( $t_ret == 2 ) {
@@ -907,7 +914,7 @@ if( 3 == $t_install_state ) {
 
 		# Make sure we do the upgrades using UTF-8 if needed
 		if( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
-			$g_db->execute( 'SET NAMES UTF8' );
+			$g_db->execute( "SET NAMES $t_charset" );
 		}
 
 		if( $f_db_type == 'db2' ) {

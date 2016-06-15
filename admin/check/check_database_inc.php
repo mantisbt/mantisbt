@@ -166,15 +166,14 @@ if( !db_is_connected() ) {
 	return;
 }
 
-$t_database_server_info = $g_db->ServerInfo();
-$t_db_version = $t_database_server_info['version'];
+$t_db_version = db_version();
 preg_match( '/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
 $t_db_major_version = $t_matches[0];
 
 # MantisBT minimum version
 check_print_info_row(
 	'Database server version',
-	htmlentities( $t_database_server_info['version'] )
+	htmlentities( $t_db_version )
 );
 
 if( db_is_mysql() ) {
@@ -229,7 +228,7 @@ if( db_is_mysql() ) {
 			) );
 	} else {
 		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
-			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
+			$t_mysql_ga_release = version_compare( $t_db_version, $t_versions[$t_db_major_version][1], '>=' );
 			# Support end-dates as per http://www.mysql.com/support/
 			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
 			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );
@@ -354,18 +353,30 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
+	# MySQL 5.5.3 for availability of utf8mb4 character set
+	$t_mysql_553 = version_compare( $t_db_version, '5.5.3', '>=' );
+
 	# Check DB's default collation
 	$t_query = 'SELECT default_collation_name
 		FROM information_schema.schemata
 		WHERE schema_name = ' . db_param();
 	$t_collation = db_result( db_query( $t_query, array( $g_database_name ) ) );
-	check_print_test_row(
+	$t_is_utf8 = check_print_test_row(
 		'Database default collation is UTF-8',
 		check_is_collation_utf8( $t_collation ),
 		array( false => 'Database is using '
 			. htmlentities( $t_collation )
 			. ' collation where UTF-8 collation is required.' )
 	);
+
+	if( $t_is_utf8 && $t_mysql_553 ) {
+		check_print_test_warn_row(
+			'Database default character set is utf8mb4',
+			check_is_collation_utf8( $t_collation, true ),
+			array( false => 'Database default collation is ' . htmlentities( $t_collation )
+				. '. Use of utf8mb4 character set is recommended with MySQL 5.5.3 and above.' )
+		);
+	}
 
 	$t_table_regex = '/^'
 		. preg_quote( $t_table_prefix, '/' ) . '.+?'
@@ -376,13 +387,22 @@ if( db_is_mysql() ) {
 		if( $t_row['comment'] !== 'VIEW' &&
 			preg_match( $t_table_regex, $t_row['name'] )
 		) {
-			check_print_test_row(
+			$t_is_utf8 = check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
 				check_is_collation_utf8( $t_row['collation'] ),
 				array( false => 'Table ' . htmlentities( $t_row['name'] )
 					. ' is using ' . htmlentities( $t_row['collation'] )
 					. ' collation where UTF-8 collation is required.' )
 			);
+
+			if( $t_is_utf8 && $t_mysql_553 ) {
+				check_print_test_warn_row(
+					'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using utf8mb4 character set',
+					check_is_collation_utf8( $t_row['collation'], true ),
+					array( false => 'Table collation is ' . htmlentities( $t_row['collation'] )
+						. '. Use of utf8mb4 character set is recommended with MySQL 5.5.3 and above.' )
+				);
+			}
 		}
 	}
 
@@ -393,7 +413,7 @@ if( db_is_mysql() ) {
 				if( $t_row['collation'] === null ) {
 					continue;
 				}
-				check_print_test_row(
+				$t_is_utf8 = check_print_test_row(
 					'Text column <em>' . htmlentities( $t_row['field'] )
 					. '</em> of type <em>' . $t_row['type']
 					. '</em> on table <em>' . htmlentities( $t_table )
@@ -405,6 +425,16 @@ if( db_is_mysql() ) {
 						. ' is using ' . htmlentities( $t_row['collation'] )
 						. ' collation where UTF-8 collation is required.' )
 				);
+				if( $t_is_utf8 && $t_mysql_553 ) {
+					check_print_test_warn_row(
+						'Text column <em>' . htmlentities( $t_row['field'] )
+						. '</em> is using utf8mb4 character set',
+						check_is_collation_utf8( $t_row['collation'], true ),
+						array( false => 'Text column ' . htmlentities( $t_row['field'] )
+							. ' is using ' . htmlentities( $t_row['collation'] )
+							. ' collation. Use of utf8mb4 character set is recommended.' )
+					);
+				}
 			}
 		}
 	}

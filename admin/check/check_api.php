@@ -269,8 +269,12 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 /**
  * Verifies that the given collation is UTF-8
  * @param string $p_collation
+ * @param boolean $p_mb4 Check for utf8mb4 instead of utf8
  * @return boolean True if UTF-8
  */
-function check_is_collation_utf8( $p_collation ) {
+function check_is_collation_utf8( $p_collation, $p_mb4 = false ) {
+	if( $p_mb4 ) {
+		return substr( $p_collation, 0, 7 ) === 'utf8mb4';
+	}
 	return substr( $p_collation, 0, 4 ) === 'utf8';
 }
