@@ -331,7 +331,7 @@ function html_print_logo( $p_logo = null ) {
 			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $t_logo_image ) . '" />';
+		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
