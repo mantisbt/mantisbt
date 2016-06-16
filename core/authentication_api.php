@@ -816,7 +816,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 <?php
 	if( $t_error != false ) {
 		echo '<div class="alert alert-danger">';
-		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
+		echo '<p>', lang_get( 'reauthenticate_message' ), ' ', lang_get( 'login_error' ), '</p>';
 		echo '</div>';
 	}
 ?>
@@ -972,7 +972,7 @@ function auth_http_prompt() {
 	header( 'WWW-Authenticate: Basic realm="' . lang_get( 'http_auth_realm' ) . '"' );
 	header( 'status: 401 Unauthorized' );
 
-	echo '<p class="center error-msg">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+	echo '<p class="center error-msg">', error_string( ERROR_ACCESS_DENIED ), '</p>';
 	print_button( 'main_page.php', lang_get( 'proceed' ) );
 
 	exit;

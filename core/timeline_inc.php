@@ -52,20 +52,20 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                 <?php
                 $t_short_date_format = config_get( 'short_date_format' );
                 echo '&#160;&#160;';
-                echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
+                echo '<span class="label label-yellow"> ', date( $t_short_date_format, $t_start_time ), ' </span>';
                 echo  ' .. ';
-                echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_end_time ) . ' </span>';
+                echo '<span class="label label-yellow"> ', date( $t_short_date_format, $t_end_time ), ' </span>';
                 echo '&#160;&#160;';
 
                 echo '<div class="btn-group">';
-                echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
-                    ( $f_days + 7 ) . '">' . lang_get( 'prev' ) . '</a>';
+                echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=',
+                    ( $f_days + 7 ), '">', lang_get( 'prev' ), '</a>';
 
                 $t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
 
                 if( $t_next_days != $f_days ) {
-                    echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
-                        $t_next_days . '">' . lang_get( 'next' ) . '</a>';
+                    echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=',
+                        $t_next_days, '">', lang_get( 'next' ), '</a>';
                 }
 
             echo '</div></div></div><div class="widget-main no-padding"><div class="profile-feed">';
@@ -77,7 +77,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		timeline_print_events( $t_events );
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
-		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
+		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=', $f_days, '&amp;all=1">', lang_get( 'timeline_more' ), '</a>';
 		echo '</div>';
 		echo '</div>';
 	} else {

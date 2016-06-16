@@ -303,14 +303,14 @@ class Graph {
 	 * @return void
 	 */
 	function generate() {
-		echo 'graph ' . $this->name . ' {' . "\n";
+		echo 'graph ', $this->name, ' {', "\n";
 
 		$this->_print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';
 			$t_attr = $this->_build_attribute_list( $t_attr );
-			echo "\t" . $t_name . ' ' . $t_attr . ";\n";
+			echo "\t", $t_name, ' ', $t_attr, ";\n";
 		}
 
 		foreach( $this->edges as $t_edge ) {
@@ -318,7 +318,7 @@ class Graph {
 			$t_dst = '"' . addcslashes( $t_edge['dst'], "\0..\37\"\\" ) . '"';
 			$t_attr = $t_edge['attributes'];
 			$t_attr = $this->_build_attribute_list( $t_attr );
-			echo "\t" . $t_src . ' -- ' . $t_dst . ' ' . $t_attr . ";\n";
+			echo "\t", $t_src, ' -- ', $t_dst, ' ', $t_attr, ";\n";
 		}
 
 		echo "};\n";
@@ -437,17 +437,17 @@ class Graph {
 				continue;
 			}
 
-			echo "\t" . $t_name . '=' . $t_value . ";\n";
+			echo "\t", $t_name, '=', $t_value, ";\n";
 		}
 
 		if( null !== $this->default_node ) {
 			$t_attr = $this->_build_attribute_list( $this->default_node );
-			echo "\t" . 'node ' . $t_attr . ";\n";
+			echo "\t", 'node ', $t_attr, ";\n";
 		}
 
 		if( null !== $this->default_edge ) {
 			$t_attr = $this->_build_attribute_list( $this->default_edge );
-			echo "\t" . 'edge ' . $t_attr . ";\n";
+			echo "\t", 'edge ', $t_attr, ";\n";
 		}
 	}
 }
@@ -471,14 +471,14 @@ class Digraph extends Graph {
 	 * @return void
 	 */
 	function generate() {
-		echo 'digraph ' . $this->name . ' {' . "\n";
+		echo 'digraph ', $this->name, ' {', "\n";
 
 		$this->_print_graph_defaults();
 
 		foreach( $this->nodes as $t_name => $t_attr ) {
 			$t_name = '"' . addcslashes( $t_name, "\0..\37\"\\" ) . '"';
 			$t_attr = $this->_build_attribute_list( $t_attr );
-			echo "\t" . $t_name . ' ' . $t_attr . ";\n";
+			echo "\t", $t_name, ' ', $t_attr, ";\n";
 		}
 
 		foreach( $this->edges as $t_edge ) {
@@ -486,7 +486,7 @@ class Digraph extends Graph {
 			$t_dst = '"' . addcslashes( $t_edge['dst'], "\0..\37\"\\" ) . '"';
 			$t_attr = $t_edge['attributes'];
 			$t_attr = $this->_build_attribute_list( $t_attr );
-			echo "\t" . $t_src . ' -> ' . $t_dst . ' ' . $t_attr . ";\n";
+			echo "\t", $t_src, ' -> ', $t_dst, ' ', $t_attr, ";\n";
 		}
 
 		echo "};\n";

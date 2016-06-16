@@ -129,9 +129,9 @@ function print_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		$t_month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
 		if( $i == $p_month ) {
-			echo '<option value="' . $i . '" selected="selected">' . lang_get( 'month_' . strtolower( $t_month_name ) ) . '</option>';
+			echo '<option value="', $i, '" selected="selected">', lang_get( 'month_' . strtolower( $t_month_name ) ), '</option>';
 		} else {
-			echo '<option value="' . $i . '">' . lang_get( 'month_' . strtolower( $t_month_name ) ) . '</option>';
+			echo '<option value="', $i, '">', lang_get( 'month_' . strtolower( $t_month_name ) ), '</option>';
 		}
 	}
 }
@@ -146,9 +146,9 @@ function print_month_option_list( $p_month = 0 ) {
 function print_numeric_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
 		if( $i == $p_month ) {
-			echo '<option value="' . $i . '" selected="selected">' . $i . '</option>';
+			echo '<option value="', $i, '" selected="selected">', $i, '</option>';
 		} else {
-			echo '<option value="' . $i . '">' . $i . '</option>';
+			echo '<option value="', $i, '">', $i, '</option>';
 		}
 	}
 }
@@ -162,9 +162,9 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 function print_day_option_list( $p_day = 0 ) {
 	for( $i = 1;$i <= 31;$i++ ) {
 		if( $i == $p_day ) {
-			echo '<option value="' . $i . '" selected="selected">' . $i . '</option>';
+			echo '<option value="', $i, '" selected="selected">', $i, '</option>';
 		} else {
-			echo '<option value="' . $i . '">' . $i . '</option>';
+			echo '<option value="', $i, '">', $i, '</option>';
 		}
 	}
 }
@@ -181,9 +181,9 @@ function print_year_option_list( $p_year = 0 ) {
 
 	for( $i = $t_current_year;$i > 1999;$i-- ) {
 		if( $i == $p_year ) {
-			echo '<option value="' . $i . '" selected="selected">' . $i . '</option>';
+			echo '<option value="', $i, '" selected="selected">', $i, '</option>';
 		} else {
-			echo '<option value="' . $i . '">' . $i . '</option>';
+			echo '<option value="', $i, '">', $i, '</option>';
 		}
 	}
 }
@@ -220,9 +220,9 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 
 	for( $i = $t_start_year;$i <= $t_end_year;$i++ ) {
 		if( $i == $p_year ) {
-			echo '<option value="' . $i . '" selected="selected">' . $i . '</option>';
+			echo '<option value="', $i, '" selected="selected">', $i, '</option>';
 		} else {
-			echo '<option value="' . $i . '">' . $i . '</option>';
+			echo '<option value="', $i, '">', $i, '</option>';
 		}
 	}
 }
@@ -258,28 +258,28 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 
 	foreach( $t_chars as $t_char ) {
 		if( strcmp( $t_char, 'M' ) == 0 ) {
-			echo '<select class="input-sm" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo '<select class="input-sm" ', helper_get_tab_index(), ' name="', $p_name, '_month"', $t_disable, '>';
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
-			echo '</select>' . "\n";
+			echo '</select>', "\n";
 		}
 		if( strcmp( $t_char, 'm' ) == 0 ) {
-			echo '<select class="input-sm" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo '<select class="input-sm" ',  helper_get_tab_index(), ' name="', $p_name, '_month"', $t_disable, '>';
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
-			echo '</select>' . "\n";
+			echo '</select>', "\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select class="input-sm" ' . helper_get_tab_index() . ' name="' . $p_name . '_day"' . $t_disable . '>';
+			echo '<select class="input-sm" ', helper_get_tab_index(), ' name="', $p_name, '_day"', $t_disable, '>';
 			echo $t_blank_line;
 			print_day_option_list( $t_date[2] );
-			echo '</select>' . "\n";
+			echo '</select>', "\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select class="input-sm" ' .  helper_get_tab_index() . ' name="' . $p_name . '_year"' . $t_disable . '>';
+			echo '<select class="input-sm" ',  helper_get_tab_index(), ' name="', $p_name, '_year"', $t_disable, '>';
 			echo $t_blank_line;
 			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
-			echo '</select>' . "\n";
+			echo '</select>', "\n";
 		}
 	}
 }

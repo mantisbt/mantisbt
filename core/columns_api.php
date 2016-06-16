@@ -627,7 +627,7 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
+	echo '<th class="column-tags">', lang_get('tags'), '</th>';
 }
 
 /**
@@ -778,7 +778,7 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
 	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
 	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
-	echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
+	echo "\t", '<th class="column-attachments">', $t_attachment_count_icon, '</th>', "\n";
 }
 
 /**
@@ -1090,10 +1090,10 @@ function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 	echo '<td class="column-edit">';
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
+		echo '<a href="', string_get_bug_update_url( $p_bug->id ), '">';
 		echo '<i class="fa fa-pencil bigger-130 padding-2 grey';
-		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
-		echo ' title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
+		echo '" alt="', lang_get( 'update_bug_button' ), '"';
+		echo ' title="', lang_get( 'update_bug_button' ), '"></i></a>';
 	} else {
 		echo '&#160;';
 	}
@@ -1211,7 +1211,7 @@ function print_column_attachment_count( BugData $p_bug, $p_columns_target = COLU
 	if( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $p_bug->id );
-		echo '<a href="' . $t_href . '" title="' . $t_href_title . '">' . $t_attachment_count . '</a>';
+		echo '<a href="', $t_href, '" title="', $t_href_title, '">', $t_attachment_count, '</a>';
 	} else {
 		echo ' &#160; ';
 	}
@@ -1325,7 +1325,7 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	$status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
 	echo '<td class="column-status">';
 	echo '<div class="align-left">';
-	echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
+	echo '<i class="fa fa-square-o fa-xlg ', $status_label, '"></i>';
 	printf( '<span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
@@ -1437,7 +1437,7 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 		$t_summary = string_display_line_links( $p_bug->summary );
 	}
 
-	echo '<td class="column-summary">' . $t_summary . '</td>';
+	echo '<td class="column-summary">', $t_summary, '</td>';
 }
 
 /**
@@ -1531,7 +1531,7 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
-		echo ' <i class="fa fa-lock" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '"></i>';
+		echo ' <i class="fa fa-lock" alt="', $t_view_state_text, '" title="', $t_view_state_text, '"></i>';
 	} else {
 		echo '&#160;';
 	}
@@ -1600,7 +1600,7 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 		bug_is_overdue( $p_bug->id ) ) {
 		$t_overdue_text = lang_get( 'overdue' );
 		$t_overdue_text_hover = sprintf( lang_get( 'overdue_since' ), date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-		echo '<i class="fa fa-times-circle-o" alt="' . $t_overdue_text . '" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
+		echo '<i class="fa fa-times-circle-o" alt="', $t_overdue_text, '" title="', string_display_line( $t_overdue_text_hover ), '"></i>';
 	} else {
 		echo '&#160;';
 	}

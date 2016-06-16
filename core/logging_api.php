@@ -161,7 +161,7 @@ function log_event( $p_level, $p_msg ) {
 
 	# If running from command line, echo log event to stdout
 	if( $t_destination != 'none' && php_sapi_name() == 'cli' ) {
-		echo $t_php_event . PHP_EOL;
+		echo $t_php_event, PHP_EOL;
 	}
 }
 
@@ -194,10 +194,10 @@ function log_print_to_page() {
 		echo "<table id=\"log-event-list\">\n";
 		echo "\t<thead>\n";
 		echo "\t\t<tr>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_number' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_time' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_caller' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_event' ) . "</th>\n";
+		echo "\t\t\t<th>", lang_get( 'log_page_number' ), "</th>\n";
+		echo "\t\t\t<th>", lang_get( 'log_page_time' ), "</th>\n";
+		echo "\t\t\t<th>", lang_get( 'log_page_caller' ), "</th>\n";
+		echo "\t\t\t<th>", lang_get( 'log_page_event' ), "</th>\n";
 		echo "\t\t</tr>\n";
 		echo "\t</thead>\n";
 		echo "\t<tbody>\n";
@@ -230,25 +230,25 @@ function log_print_to_page() {
 					if( $t_log_event[2][2] ) {
 						$t_query_duplicate_class = ' class="duplicate-query"';
 					}
-					echo "\t\t<tr " . $t_query_duplicate_class . '><td>' . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr ", $t_query_duplicate_class, '><td>', $t_level, '-', $t_count[$t_log_event[1]], '</td><td>', $t_log_event[2][1], '</td><td>', string_html_specialchars( $t_log_event[3] ), '</td><td>', string_html_specialchars( $t_log_event[2][0] ), "</td></tr>\n";
 					break;
 				default:
-					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr><td>", $t_level, '-', $t_count[$t_log_event[1]], '</td><td>', $t_log_event[2][1], '</td><td>', string_html_specialchars( $t_log_event[3] ), '</td><td>', string_html_specialchars( $t_log_event[2][0] ), "</td></tr>\n";
 			}
 		}
 
 		# output any summary data
 		if( $t_unique_queries_count != 0 ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_unique_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td>", $g_log_levels[LOG_DATABASE], '</td><td colspan="3">', $t_unique_queries_executed, "</td></tr>\n";
 		}
 		if( $t_total_queries_count != 0 ) {
 			$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td>", $g_log_levels[LOG_DATABASE], '</td><td colspan="3">', $t_total_queries_executed, "</td></tr>\n";
 		}
 		if( $t_total_query_execution_time != 0 ) {
 			$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_query_time . "</td></tr>\n";
+			echo "\t\t<tr><td>", $g_log_levels[LOG_DATABASE], '</td><td colspan="3">', $t_total_query_time, "</td></tr>\n";
 		}
 		echo "\t</tbody>\n\t</table>\n";
 

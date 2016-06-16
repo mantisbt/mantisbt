@@ -83,7 +83,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			$p_project = $g_project_override;
 		}
 		# @@ debug @@ if( ! db_is_connected() ) { echo "no db "; }
-		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
+		# @@ debug @@ echo "lu table=", ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 		if( !$g_cache_db_table_exists ) {
 			$g_cache_db_table_exists = ( true === db_is_connected() ) && db_table_exists( db_get_table( 'config' ) );
 		}

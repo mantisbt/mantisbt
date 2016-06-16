@@ -88,7 +88,7 @@ function access_denied() {
 					$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
-				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
+				echo '<p class="center">', error_string( ERROR_ACCESS_DENIED ), '</p><p class="center">';
 				print_button( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
 				print_button(
@@ -103,7 +103,7 @@ function access_denied() {
 			echo '<div class="col-md-12 col-xs-12">';
 			echo '<div class="space-10"></div>';
 			echo '<div class="alert alert-danger">';
-			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+			echo '<div class="center bigger-130">', error_string( ERROR_ACCESS_DENIED ), '</p>';
 			echo '<p class="center">';
 			print_button(
 				helper_mantis_url( config_get( 'default_home_page' ) ),

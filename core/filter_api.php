@@ -2284,30 +2284,30 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		<tr>
 			<td class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'reporter_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_REPORTER_ID, '[]';?>" id="reporter_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'reporter_label' )?></a>
 			</td>
 			<td class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_MONITOR_USER_ID . '[]';?>" id="user_monitor_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'monitored_by_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_MONITOR_USER_ID, '[]';?>" id="user_monitor_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'monitored_by_label' )?></a>
 			</td>
 			<td class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]';?>" id="handler_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'assigned_to_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_HANDLER_ID, '[]';?>" id="handler_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'assigned_to_label' )?></a>
 			</td>
 			<td colspan="2" class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY_ID . '[]';?>" id="show_category_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'category_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_CATEGORY_ID, '[]';?>" id="show_category_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'category_label' )?></a>
 			</td>
 			<td class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY . '[]';?>" id="show_severity_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'severity_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_SEVERITY, '[]';?>" id="show_severity_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'severity_label' )?></a>
 			</td>
 			<td class="small-caption category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION . '[]';?>" id="show_resolution_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'resolution_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_RESOLUTION, '[]';?>" id="show_resolution_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'resolution_label' )?></a>
 			</td>
 			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROFILE_ID . '[]';?>" id="show_profile_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'profile_label' )?></a>
+					<a href="<?php echo $t_filters_url, FILTER_PROPERTY_PROFILE_ID, '[]';?>" id="show_profile_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'profile_label' )?></a>
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+			echo '<td class="small-caption" colspan="', ( $t_filter_cols - 8 ), '">&#160;</td>';
 		}?>
 		</tr>
 
@@ -2557,29 +2557,29 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<td></td>
 			<?php }
 				if( $t_filter_cols > 8 ) {
-					echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+					echo '<td class="small-caption" colspan="', ( $t_filter_cols - 8 ), '">&#160;</td>';
 				}?>
 		</tr>
 		<tr>
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS . '[]';?>" id="show_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'status_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_STATUS, '[]';?>" id="show_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'status_label' )?></a>
 			</td>
 			<td class="small category">
 				<?php if( 'simple' == $t_view_type ) {?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS . '[]';?>" id="hide_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'hide_status_label' )?></a>
+					<a href="<?php echo $t_filters_url, FILTER_PROPERTY_HIDE_STATUS, '[]';?>" id="hide_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'hide_status_label' )?></a>
 				<?php } ?>
 			</td>
 			<td class="small category">
 			<?php if( $t_show_build ) { ?>
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_BUILD . '[]';?>" id="show_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_build_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_BUILD, '[]';?>" id="show_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_build_label' )?></a>
 			<?php } ?>
 			</td>
 			<?php if( $t_show_product_version ) {?>
 			<td colspan="2" class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VERSION . '[]';?>" id="show_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_version_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_VERSION, '[]';?>" id="show_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_version_label' )?></a>
 			</td>
 			<td colspan="1" class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'fixed_in_version_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_FIXED_IN_VERSION, '[]';?>" id="show_fixed_in_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'fixed_in_version_label' )?></a>
 			</td>
 			<?php } else {?>
 			<td colspan="2" class="small">
@@ -2590,11 +2590,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<?php } ?>
 			<td colspan="1" class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]';?>" id="show_priority_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'priority_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_PRIORITY, '[]';?>" id="show_priority_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'priority_label' )?></a>
 			</td>
 			<?php if( $t_show_product_version ) {?>
 			<td colspan="1" class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'target_version_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_TARGET_VERSION, '[]';?>" id="show_target_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'target_version_label' )?></a>
 			</td>
 			<?php
 			} else {?>
@@ -2604,7 +2604,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 			}
 			if( $t_filter_cols > 8 ) {
-			echo '<td class="small" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
+			echo '<td class="small" colspan="', ( $t_filter_cols - 7 ), '">&#160;</td>';
 		}?>
 		</tr>
 
@@ -2671,7 +2671,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				if( true == $t_none_found ) {
 					echo lang_get( 'none' );
 				} else {
-					echo $t_output . string_display_line( $t_hide_status_post );
+					echo $t_output, string_display_line( $t_hide_status_post );
 				}
 			}
 		}
@@ -2868,31 +2868,31 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<?php }
 
 		if( $t_filter_cols > 8 ) {
-			echo '<td class="small" colspan="' . ( $t_filter_cols - 7 ) . '">&#160;</td>';
+			echo '<td class="small" colspan="', ( $t_filter_cols - 7 ), '">&#160;</td>';
 		}?>
 
 		</tr>
 
 		<tr>
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'show_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'show_label' )?></a>
 			</td>
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE;?>" id="view_state_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'view_status_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_VIEW_STATE;?>" id="view_state_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'view_status_label' )?></a>
 			</td>
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sticky_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sticky_label' )?></a>
 			</td>
 			<td class="small" colspan="2">
 			</td>
 			<td class="small category" >
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'use_date_filters_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'use_date_filters_label' )?></a>
 			</td>
 			<td class="small category" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'bug_relationships_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'bug_relationships_label' )?></a>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+			echo '<td class="small" colspan="', ( $t_filter_cols - 8 ), '">&#160;</td>';
 		}?>
 		</tr>
 		<tr>
@@ -2986,38 +2986,38 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
 			echo lang_get( 'any' );
 		} else {
-			echo relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
+			echo relationship_get_description_for_history( $c_rel_type ), ' ', $c_rel_bug;
 		}
 
 		?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+			echo '<td class="small" colspan="', ( $t_filter_cols - 8 ), '">&#160;</td>';
 		}?>
 		</tr>
 		<tr>
 			<td class="small category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'platform_label' )?></a>
+					<a href="<?php echo $t_filters_url, FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'platform_label' )?></a>
 				<?php } ?>
 			</td>
 			<td class="small category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_label' )?></a>
+					<a href="<?php echo $t_filters_url, FILTER_PROPERTY_OS;?>" id="os_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_label' )?></a>
 				<?php } ?>
 			</td>
 			<td class="small category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
-					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_version_label' )?></a>
+					<a href="<?php echo $t_filters_url, FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_version_label' )?></a>
 				<?php } ?>
 			</td>
 			<td class="small category" colspan="5">
 				<?php if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TAG_STRING;?>" id="tag_string_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'tags_label' )?></a>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_TAG_STRING;?>" id="tag_string_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'tags_label' )?></a>
 				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
-			echo '<td class="small" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+			echo '<td class="small" colspan="', ( $t_filter_cols - 8 ), '">&#160;</td>';
 		}?>
 		</tr>
 		<tr>
@@ -3157,8 +3157,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			$t_links_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_links[$i] );
 			$t_values_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_fields[$i] );
-			echo "\n\t" . '<tr>', $t_links_row, "\n\t</tr>";
-			echo "\n\t" . '<tr>', $t_values_row, "\n\t</tr>\n\t";
+			echo "\n\t", '<tr>', $t_links_row, "\n\t</tr>";
+			echo "\n\t", '<tr>', $t_values_row, "\n\t</tr>\n\t";
 		}
 
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
@@ -3309,7 +3309,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 		<tr>
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'note_user_id_label' )?>
 				</a>
 			</td>
@@ -3355,7 +3355,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 			<!-- Sort by -->
 			<td class="small category">
-				<a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+				<a href="<?php echo $t_filters_url, 'show_sort';?>" id="show_sort_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'sort_label' )?>
 				</a>
 			</td>
@@ -3376,7 +3376,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_field_name = string_get_field_name( $t_sort );
 				}
 
-				echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . utf8_strtolower( $t_dir_fields[$i] ) );
+				echo $t_field_name, ' ', lang_get( 'bugnote_order_', utf8_strtolower( $t_dir_fields[$i] ) );
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_', $i, '" value="', string_attribute( $t_sort_fields[$i] ), '" />';
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', string_attribute( $t_dir_fields[$i] ), '" />';
 			}
@@ -3388,7 +3388,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 ?>
 			<!-- Project -->
 			<td class="small category" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+				<a href="<?php echo $t_filters_url, FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'email_project_label' )?>
 				</a>
 			</td>
@@ -3425,11 +3425,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 <?php
 			if( $t_filter_cols > 6 ) {
-				echo '<td class="small" colspan="' . ( $t_filter_cols - 5 ) . '">&#160;</td>';
+				echo '<td class="small" colspan="', ( $t_filter_cols - 5 ), '">&#160;</td>';
 			}
 		} else {
 			if( $t_filter_cols > 3 ) {
-				echo '<td class="small" colspan="' . ( $t_filter_cols - 2 ) . '">&#160;</td>';
+				echo '<td class="small" colspan="', ( $t_filter_cols - 2 ), '">&#160;</td>';
 			}
 		}
 ?>
@@ -3439,7 +3439,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<tr>
 			<td class="small category">
 				<a id="match_type_filter"
-					href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>"
+					href="<?php echo $t_filters_url, FILTER_PROPERTY_MATCH_TYPE;?>"
 					<?php echo $t_dynamic_filter_expander_class; ?>>
 					<?php echo lang_get( 'filter_match_type_label' )?>
 				</a>
@@ -3461,7 +3461,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 			<td class="small category">
 				<a id="highlight_changed_filter"
-					href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
+					href="<?php echo $t_filters_url, FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
 					<?php echo $t_dynamic_filter_expander_class; ?>>
 					<?php echo lang_get( 'changed_label' )?>
 				</a>
@@ -3487,7 +3487,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	echo '<div class="form-inline">';
-	echo '<label>', lang_get( 'search' ) . '&#160', '</label>';
+	echo '<label>', lang_get( 'search' ), '&#160', '</label>';
 	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
@@ -3520,14 +3520,14 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
 			<select name="source_query_id">
-				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
+				<option value="-1"><?php echo '[', lang_get( 'reset_query' ), ']'?></option>
 				<option value="-1"></option>
 				<?php
 				$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 				foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-					echo '<option value="' . $t_query_id . '" ';
+					echo '<option value="', $t_query_id, '" ';
 					check_selected( $t_query_id, $t_source_query_id );
-					echo '>' . string_display_line( $t_query_name ) . '</option>';
+					echo '>', string_display_line( $t_query_name ), '</option>';
 				}
 				?>
 			</select>
@@ -3595,15 +3595,15 @@ function print_filter_reporter_id() {
 		if( ( isset( $t_realname ) ) && ( $t_realname > '' ) && ( ON == config_get( 'show_realname' ) ) ) {
 			$t_display_name = string_attribute( $t_realname );
 		}
-		echo '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
+		echo '<option value="', $t_id, '" selected="selected">', $t_display_name, '</option>';
 	} else {
 		?>
 		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 		<?php
 			if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
-				echo '<option value="' . META_FILTER_MYSELF . '" ';
+				echo '<option value="', META_FILTER_MYSELF, '" ';
 				check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
-				echo '>[' . lang_get( 'myself' ) . ']</option>';
+				echo '>[', lang_get( 'myself' ), ']</option>';
 			}
 		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}?>
@@ -3623,9 +3623,9 @@ function print_filter_user_monitor() {
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
-		echo '<option value="' . META_FILTER_MYSELF . '" ';
+		echo '<option value="', META_FILTER_MYSELF, '" ';
 		check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_MYSELF );
-		echo '>[' . lang_get( 'myself' ) . ']</option>';
+		echo '>[', lang_get( 'myself' ), ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
 	$t_has_project_level = access_has_project_level( $t_threshold );
@@ -3652,9 +3652,9 @@ function print_filter_handler_id() {
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-			echo '<option value="' . META_FILTER_MYSELF . '" ';
+			echo '<option value="', META_FILTER_MYSELF, '" ';
 			check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
-			echo '>[' . lang_get( 'myself' ) . ']</option>';
+			echo '>[', lang_get( 'myself' ), ']</option>';
 		}
 
 		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID] );
@@ -3893,15 +3893,15 @@ function print_filter_view_state() {
 	?><!-- View Status -->
 		<select class="input-xs" name="<?php echo FILTER_PROPERTY_VIEW_STATE;?>">
 			<?php
-			echo '<option value="' . META_FILTER_ANY . '"';
+			echo '<option value="', META_FILTER_ANY, '"';
 	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], META_FILTER_ANY );
-	echo '>[' . lang_get( 'any' ) . ']</option>';
-	echo '<option value="' . VS_PUBLIC . '"';
+	echo '>[', lang_get( 'any' ), ']</option>';
+	echo '<option value="', VS_PUBLIC, '"';
 	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], VS_PUBLIC );
-	echo '>' . lang_get( 'public' ) . '</option>';
-	echo '<option value="' . VS_PRIVATE . '"';
+	echo '>', lang_get( 'public' ), '</option>';
+	echo '<option value="', VS_PRIVATE, '"';
 	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], VS_PRIVATE );
-	echo '>' . lang_get( 'private' ) . '</option>';
+	echo '>', lang_get( 'private' ), '</option>';
 	?>
 		</select>
 		<?php
@@ -4071,9 +4071,9 @@ function print_filter_note_user_id() {
 		<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 		<?php
 			if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-				echo '<option value="' . META_FILTER_MYSELF . '"';
+				echo '<option value="', META_FILTER_MYSELF, '"';
 				check_selected( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
-				echo '>[' . lang_get( 'myself' ) . ']</option>';
+				echo '>[', lang_get( 'myself' ), ']</option>';
 			}
 
 			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID] );
@@ -4165,26 +4165,26 @@ function print_filter_custom_field( $p_field_id ) {
 		} else if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
 			echo '<input type="text" name="custom_field_', $p_field_id, '" class="input-xs" size="10" value="" />';
 		} else {
-			echo '<select class="input-xs" ' . $g_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
-			echo '<option value="' . META_FILTER_ANY . '"';
+			echo '<select class="input-xs" ', $g_select_modifier, ' name="custom_field_', $p_field_id, '[]">';
+			echo '<option value="', META_FILTER_ANY, '"';
 			check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
-			echo '>[' . lang_get( 'any' ) . ']</option>';
+			echo '>[', lang_get( 'any' ), ']</option>';
 
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 			if( !in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
-				echo '<option value="' . META_FILTER_NONE . '"';
+				echo '<option value="', META_FILTER_NONE, '"';
 				check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
-				echo '>[' . lang_get( 'none' ) . ']</option>';
+				echo '>[', lang_get( 'none' ), ']</option>';
 			}
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
 					if( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
-						echo '<option value="' . string_attribute( $t_item ) . '"';
+						echo '<option value="', string_attribute( $t_item ), '"';
 						if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
 							check_selected( $g_filter['custom_fields'][$p_field_id], $t_item, false );
 						}
-						echo '>' . string_attribute( string_shorten( $t_item, $t_max_length ) ) . '</option>' . "\n";
+						echo '>', string_attribute( string_shorten( $t_item, $t_max_length ) ), '</option>', "\n";
 					}
 				}
 			}
@@ -4232,17 +4232,17 @@ function print_filter_show_sort() {
 		# display a primary and secondary sort fields
 		echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_0">';
 		foreach( $t_shown_fields as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
+			echo '<option value="', $t_key, '"';
 			check_selected( $t_key, $t_sort_fields[0] );
-			echo '>' . $t_val . '</option>';
+			echo '>', $t_val, '</option>';
 		}
 		echo '</select>';
 
 		echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_DIRECTION, '_0">';
 		foreach( $t_shown_dirs as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
+			echo '<option value="', $t_key, '"';
 			check_selected( $t_key, $t_dir_fields[0] );
-			echo '>' . $t_val . '</option>';
+			echo '>', $t_val, '</option>';
 		}
 		echo '</select>';
 
@@ -4251,20 +4251,20 @@ function print_filter_show_sort() {
 		# for secondary sort
 		echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1">';
 		foreach( $t_shown_fields as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
+			echo '<option value="', $t_key, '"';
 			check_selected( $t_key, $t_sort_fields[1] );
-			echo '>' . $t_val . '</option>';
+			echo '>', $t_val, '</option>';
 		}
 		echo '</select>';
 		echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_DIRECTION, '_1">';
 		foreach( $t_shown_dirs as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
+			echo '<option value="', $t_key, '"';
 			check_selected( $t_key, $t_dir_fields[1] );
-			echo '>' . $t_val . '</option>';
+			echo '>', $t_val, '</option>';
 		}
 		echo '</select>';
 	} else {
-		echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
+		echo lang_get_defaulted( 'last_updated' ), lang_get( 'bugnote_order_desc' );
 		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1" value="last_updated" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_1" value="DESC" />';
 	}
@@ -4343,33 +4343,33 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 			break;
 	}
 
-	echo '<table cellspacing="0" cellpadding="0"><tr><td>' . "\n";
-	echo '<select class="input-xs" size="1" name="custom_field_' . $p_field_id . '_control">' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
+	echo '<table cellspacing="0" cellpadding="0"><tr><td>', "\n";
+	echo '<select class="input-xs" size="1" name="custom_field_', $p_field_id, '_control">', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_ANY, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
-	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_NONE . '"';
+	echo '>', lang_get( 'any' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_NONE, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
-	echo '>' . lang_get( 'none' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
+	echo '>', lang_get( 'none' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_BETWEEN, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
-	echo '>' . lang_get( 'between_date' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
+	echo '>', lang_get( 'between_date' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_ONORBEFORE, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
-	echo '>' . lang_get( 'on_or_before_date' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
+	echo '>', lang_get( 'on_or_before_date' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_BEFORE, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
-	echo '>' . lang_get( 'before_date' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
+	echo '>', lang_get( 'before_date' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_ON, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
-	echo '>' . lang_get( 'on_date' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
+	echo '>', lang_get( 'on_date' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_AFTER, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
-	echo '>' . lang_get( 'after_date' ) . '</option>' . "\n";
-	echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
+	echo '>', lang_get( 'after_date' ), '</option>', "\n";
+	echo '<option value="', CUSTOM_FIELD_DATE_ONORAFTER, '"';
 	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
-	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
-	echo '</select>' . "\n";
+	echo '>', lang_get( 'on_or_after_date' ), '</option>', "\n";
+	echo '</select>', "\n";
 
 	echo "</td></tr>\n<tr><td>";
 
