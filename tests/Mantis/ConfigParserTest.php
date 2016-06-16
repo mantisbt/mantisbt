@@ -47,11 +47,6 @@ use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
 class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var array List of test cases for scalar types
-	 */
-	private $cases_scalar = array();
-
-	/**
 	 * @var array List of test cases for arrays
 	 */
 	private $cases_array = array();
@@ -59,10 +54,9 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * MantisConfigParserTest constructor.
 	 */
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
 
-		$this->initScalarTestCases();
 		$this->initArrayTestCases();
 	}
 
@@ -82,19 +76,21 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Test a list of strings representing scalar values, making sure
 	 * the value and the type match
+	 * @dataProvider providerScalarTypes
+	 *
+	 * @param string $p_string The string to parse
+	 * @param string $p_type   Expected type (PHPUnit_Type::TYPE_xxx constant)
 	 *
 	 * @throws Exception
 	 */
-	public function testScalarTypes() {
-		foreach( $this->cases_scalar as $t_string => $t_expected_type ) {
-			$t_reference_result = eval( 'return ' . $t_string . ';' );
+	public function testScalarTypes( $p_string, $p_type ) {
+		$t_reference_result = eval( 'return ' . $p_string . ';' );
 
-			$t_parser = new ConfigParser( $t_string );
-			$t_parsed_result = $t_parser->parse();
+		$t_parser = new ConfigParser( $p_string );
+		$t_parsed_result = $t_parser->parse();
 
-			$this->assertInternalType( $t_expected_type, $t_parsed_result );
-			$this->assertEquals( $t_parsed_result, $t_reference_result, $this->errorMessage( $t_string ) );
-		}
+		$this->assertInternalType( $p_type, $t_parsed_result );
+		$this->assertEquals( $t_parsed_result, $t_reference_result, $this->errorMessage( $p_string ) );
 	}
 
 	/**
@@ -213,48 +209,38 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Adds a new scalar test case to the list
-	 *
-	 * @param string $p_string Value to check
-	 * @param string $p_type   Expected type
+	 * Data provider for Scalar types test cases.
+	 * Test case structure:
+	 *   <test case> => array( <string to test>, <expected type> )
+	 * @return array
 	 */
-	private function addScalarCase( $p_string, $p_type ) {
-		$this->cases_scalar[$p_string] = $p_type;
-	}
+	public function providerScalarTypes() {
+		return array(
+			'Integer Zero' => array( '0', PHPUnit_Type::TYPE_INT ),
+			'Integer One' => array( '1', PHPUnit_Type::TYPE_INT ),
+			'Integer with whitespace' => array( " 1\n", PHPUnit_Type::TYPE_INT ),
 
-	/**
-	 * Initialize the Scalar type test cases
-	 */
-	private function initScalarTestCases() {
-		# Integer
-		$this->addScalarCase( '0', PHPUnit_Type::TYPE_INT );
-		$this->addScalarCase( '1', PHPUnit_Type::TYPE_INT );
-		$this->addScalarCase( " 1\n", PHPUnit_Type::TYPE_INT );
+			'Float' => array( '1.1', PHPUnit_Type::TYPE_FLOAT ),
 
-		# Float
-		$this->addScalarCase( '1.1', PHPUnit_Type::TYPE_FLOAT );
-
-		# String
-		$this->addScalarCase( '""', PHPUnit_Type::TYPE_STRING );
-		$this->addScalarCase( "''", PHPUnit_Type::TYPE_STRING );
-		$this->addScalarCase( '" "', PHPUnit_Type::TYPE_STRING );
-		$this->addScalarCase( '"1"', PHPUnit_Type::TYPE_STRING );
-		$this->addScalarCase( "'1'", PHPUnit_Type::TYPE_STRING );
-
-		# Built-in string literals
-		$this->addScalarCase( 'null', PHPUnit_Type::TYPE_NULL );
-		$this->addScalarCase( 'false', PHPUnit_Type::TYPE_BOOL );
-		$this->addScalarCase( 'true', PHPUnit_Type::TYPE_BOOL );
-
-		# Constants
-		$this->addScalarCase( 'VERSION_ALL', PHPUnit_Type::TYPE_NULL );         # null
-		$this->addScalarCase( 'VERSION_FUTURE', PHPUnit_Type::TYPE_BOOL );      # false
-		$this->addScalarCase( 'VERSION_RELEASED', PHPUnit_Type::TYPE_BOOL );    # true
-		$this->addScalarCase( 'OFF', PHPUnit_Type::TYPE_INT );                  # 0
-		$this->addScalarCase( 'DEVELOPER', PHPUnit_Type::TYPE_INT );            # int
-		$this->addScalarCase( " DEVELOPER\n", PHPUnit_Type::TYPE_INT );
-		$this->addScalarCase( 'MANTIS_VERSION', PHPUnit_Type::TYPE_STRING );    #string
-		$this->addScalarCase( " MANTIS_VERSION\n", PHPUnit_Type::TYPE_STRING );
+			'String empty double-quote' => array( '""', PHPUnit_Type::TYPE_STRING ),
+			'String empty single-quote' => array( "''", PHPUnit_Type::TYPE_STRING ),
+			'String whitespace' => array( '" "', PHPUnit_Type::TYPE_STRING ),
+			'String number double-quote' => array( '"1"', PHPUnit_Type::TYPE_STRING ),
+			'String number single-quote' => array( "'1'", PHPUnit_Type::TYPE_STRING ),
+	
+			'Built-in string literal null' => array( 'null', PHPUnit_Type::TYPE_NULL ),
+			'Built-in string literal false' => array( 'false', PHPUnit_Type::TYPE_BOOL ),
+			'Built-in string literal true' => array( 'true', PHPUnit_Type::TYPE_BOOL ),
+	
+			'Constant = null' => array( 'VERSION_ALL', PHPUnit_Type::TYPE_NULL ),
+			'Constant = false' => array( 'VERSION_FUTURE', PHPUnit_Type::TYPE_BOOL ),
+			'Constant = true' => array( 'VERSION_RELEASED', PHPUnit_Type::TYPE_BOOL ),
+			'Constant = 0' => array( 'OFF', PHPUnit_Type::TYPE_INT ),
+			'Constant integer' => array( 'DEVELOPER', PHPUnit_Type::TYPE_INT ),
+			'Constant integer with whitespace' => array( " DEVELOPER\n", PHPUnit_Type::TYPE_INT ),
+			'Constant string' => array( 'MANTIS_VERSION', PHPUnit_Type::TYPE_STRING ),
+			'Constant string with whitespace' => array( " MANTIS_VERSION\n", PHPUnit_Type::TYPE_STRING ),
+		);
 	}
 
 	/**
