@@ -47,20 +47,6 @@ use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
 class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var array List of test cases for arrays
-	 */
-	private $cases_array = array();
-
-	/**
-	 * MantisConfigParserTest constructor.
-	 */
-	public function __construct( $name = null, array $data = [], $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
-
-		$this->initArrayTestCases();
-	}
-
-	/**
 	 * Test with empty string or null
 	 *
 	 * @throws Exception
@@ -95,24 +81,24 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test various types of arrays
+	 * @dataProvider providerArrays
+
+	 * @param string $p_string Representation of array (e.g. output of var_export)
 	 *
-	 * @see initArrayTestCases
 	 * @throws Exception
 	 */
-	public function testArrays() {
-		foreach( $this->cases_array as $t_string ) {
-			$t_reference_result = eval( 'return ' . $t_string . ';' );
+	public function testArrays( $p_string ) {
+		$t_reference_result = eval( 'return ' . $p_string . ';' );
 
-			# Check that the parsed array matches the model array
-			$t_parser = new ConfigParser( $t_string );
-			$t_parsed_1 = $t_parser->parse();
-			$this->assertEquals( $t_parsed_1, $t_reference_result, $this->errorMessage( $t_string )  );
+		# Check that the parsed array matches the model array
+		$t_parser = new ConfigParser( $p_string );
+		$t_parsed_1 = $t_parser->parse();
+		$this->assertEquals( $t_parsed_1, $t_reference_result, $this->errorMessage( $p_string )  );
 
-			# Export converted array and parse again: result should match the model
-			$t_parser = new ConfigParser( var_export( $t_parsed_1 , true ) );
-			$t_parsed_2 = $t_parser->parse();
-			$this->assertEquals( $t_parsed_2, $t_reference_result, $this->errorMessage( $t_string )  );
-		}
+		# Export converted array and parse again: result should match the model
+		$t_parser = new ConfigParser( var_export( $t_parsed_1 , true ) );
+		$t_parsed_2 = $t_parser->parse();
+		$this->assertEquals( $t_parsed_2, $t_reference_result, $this->errorMessage( $p_string )  );
 	}
 
 	/**
@@ -244,112 +230,98 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * Data provider for Arrays test cases.
+	 * Test case structure:
+	 *   <test case> => array( <string to test> )
+	 * @return array
 	 * Initialize the array test cases list
 	 */
-	private function initArrayTestCases() {
+	public function providerArrays() {
 		/**
 		 * Template for new test cases
 		 * ---------------------------
-		# comment
-		$this->addArrayCase(
+		'case description' => array(
 <<<'EOT'
 EOT
- 		);
+ 		),
 		 * ---------------------------
  */
 
-		/**
-		 * Simple arrays
-		 */
-
-		# empty
-		$this->addArrayCase( "array( )" );
-
-		# one element
-		$this->addArrayCase( "array( 1 )" );
-
-		# several elements, trailing delimiter
-		$this->addArrayCase( "array( 1, 2, )" );
-
-		# formatted whitespace
-		$this->addArrayCase( "array ( 1, 2, 3 )" );
-
-		# no whitespace
-		$this->addArrayCase( "array(1,2,3)" );
-
-		# arbitrary whitespace
-		$this->addArrayCase( "  array(\n1,\t2  ,    3 )\r  " );
-
-		# mixed types, quotes
-		$this->addArrayCase(
+		return array(
+			/**
+			 * Simple arrays
+			 */
+			'SimpleArray empty' => array( "array( )" ),
+			'SimpleArray one element' => array( "array( 1 )" ),
+			'SimpleArray several elements, trailing delimiter' => array( "array( 1, 2, )" ),
+			'SimpleArray formatted whitespace' => array( "array ( 1, 2, 3 )" ),
+			'SimpleArray no whitespace' => array( "array(1,2,3)" ),
+			'SimpleArray arbitrary whitespace' => array( "  array(\n1,\t2  ,    3 )\r  " ),
+			'SimpleArray mixed types, quotes' => array(
 <<<'EOT'
 array( 1, 'a', "b" )
 EOT
-		);
-
-		# nested quotes
-		$this->addArrayCase(
+			),
+			'SimpleArray nested quotes' => array(
 <<<'EOT'
 array( '"a""b"""', "'a''b'''" )
 EOT
-		);
+		),
 
-		/**
-		 * Associative arrays
-		 */
+			/**
+			 * Associative arrays
+			 */
+			'AssocArray' => array( "array( 0 => 'a', 1 => 'b' )" ),
+			'AssocArray, unordered keys' => array( "array( 5 => 'a', 2 => 'b' )" ),
+			'AssocArray, text keys' => array( "array( 'i' => 'a', 'j' => 'b' )" ),
+			'AssocArray mixed keys' => array( "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" ),
+			'AssocArray mixed, keys omitted' => array( "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" ),
 
-		# associative
-		$this->addArrayCase( "array( 0 => 'a', 1 => 'b' )" );
+			# mixed associative, overwriting implicit keys
+			'AssocArray mixed, overwritten implicit keys' => array( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" ),
 
-		# associative, unordered keys
-		$this->addArrayCase( "array( 5 => 'a', 2 => 'b' )" );
-
-		# associative, text keys
-		$this->addArrayCase( "array( 'i' => 'a', 'j' => 'b' )" );
-
-		# associative, mixed keys
-		$this->addArrayCase( "array( 'i' => 'a', 1 => 'b', 'j' => 'c', 7 => 'd' )" );
-
-		# mixed associative, omitting some keys
-		$this->addArrayCase( "array( 'i' => 'a', 1 => 'b', 'c', 'j' => 'd' )" );
-
-		# mixed associative, overwriting implicit keys
-		$this->addArrayCase( "array( 0 => 'a0', 1 => 'a1', 'axx', 2 => 'a2' )" );
-
-		$this->addArrayCase(
+			'AssocArray mixed' => array(
 <<<'EOT'
 array(
 	array ( 1, 'a', 3 => 1, 4 => 'b', 'x' => 'y' )
 )
 EOT
-		);
+			),
 
-		/**
-		 * Use of constants
-		 */
+			/**
+			 * Use of constants
+			 */
 
-		# As array values (e.g. handle_bug_threshold)
-		$this->addArrayCase( "array( DEVELOPER, MANAGER )" );
+			# e.g. handle_bug_threshold
+			'Constants as array values' => array( "array( DEVELOPER, MANAGER )" ),
 
-		# As array keys (e.g. status_enum_workflow)
-		$this->addArrayCase(
+				# e.g. status_enum_workflow
+			'Constants as array keys' => array(
 <<<'EOT'
 array (
   NEW_ => '20:feedback,30:acknowledged',
   ACKNOWLEDGED => '40:confirmed',
 )
 EOT
-		);
+			),
 
-		# both (e.g. set_status_threshold)
-		$this->addArrayCase( 'array( NEW_ => REPORTER )' );
+			# e.g. set_status_threshold
+			'Constants as both key and value' => array( 'array( NEW_ => REPORTER )' ),
 
-		/**
-		 * Multidimensional arrays
-		 */
+			/**
+			 * Multidimensional arrays
+			 */
+			'Multidimentional array' => array(
+				<<<'EOT'
+array(
+	1 => array( 1, 2 => array() ),
+	array( 'a', 'b', array(3, 4, ) ),
+	'c' => array( 'd', 5 => 'e' ),
+)
+EOT
+			),
 
-		# notify_flags sample
-		$this->addArrayCase(
+			'Multidimentional, notify_flags sample' => array(
 <<<'EOT'
 array(
 	'updated' => array (
@@ -376,24 +348,12 @@ array(
 	),
 )
 EOT
-		);
+			),
 
-		$this->addArrayCase(
-<<<'EOT'
-array(
-	1 => array( 1, 2 => array() ),
-	array( 'a', 'b', array(3, 4, ) ),
-	'c' => array( 'd', 5 => 'e' ),
-)
-EOT
-		);
-
-		/**
-		 * Test cases for specific issues reported on the bugtracker
-		 */
-
-		# Test case for issue #0020787
-		$this->addArrayCase(
+			/**
+			 * Test cases for specific issues reported on the bugtracker
+			 */
+			'Issue #0020787' => array(
 <<<'EOT'
 array (
 	'additional_info',
@@ -404,10 +364,9 @@ array (
 	'due_date',
 )
 EOT
-		);
+			),
 
-		# Test case for issue #0020812
-		$this->addArrayCase(
+			'Issue #0020812' => array(
 <<<'EOT'
 array (
 	0 =>
@@ -418,33 +377,31 @@ array (
 	),
 )
 EOT
-		);
+			),
 
-		# Test case for issue #0020813
-		$this->addArrayCase(
+			'Issue #0020813' => array(
 <<<'EOT'
 array(
  0 => "aa'aa",
  1 => "bb\"bb"
 )
 EOT
-		);
+			),
 
-		# Test case for issue #0020850
-		$this->addArrayCase(
-			<<<'EOT'
+			'Issue #0020850' => array(
+<<<'EOT'
 			array ( 0 => '""a"' )
 EOT
-		);
+			),
 
-		# Test case for issue #0020851
-		$this->addArrayCase(
+			'Issue #0020851' => array(
 <<<'EOT'
 array (
 	'a' => 'x1',
 	'x2',
 )
 EOT
+			),
 		);
 	}
 }
