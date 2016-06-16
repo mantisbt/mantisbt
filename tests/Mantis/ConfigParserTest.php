@@ -67,6 +67,19 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * Test with empty string or null
+	 *
+	 * @throws Exception
+	 */
+	public function testNoTokens() {
+		$this->setExpectedException( 'Exception', 'No more tokens' );
+		$t_parser = new ConfigParser( '' );
+		$t_parser->parse();
+		$t_parser = new ConfigParser( null );
+		$t_parser->parse();
+	}
+
+	/**
 	 * Test a list of strings representing scalar values, making sure
 	 * the value and the type match
 	 *
