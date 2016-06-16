@@ -66,14 +66,14 @@ if( auth_is_user_authenticated() ) {
 	auth_logout();
 }
 
-$f_username = gpc_get_string( 'username' );
 $f_email = gpc_get_string( 'email' );
 
 email_ensure_valid( $f_email );
 
 # @todo Consider moving this query to user_api.php
-$t_query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-$t_result = db_query( $t_query, array( $f_username, $f_email, true ) );
+db_param_push();
+$t_query = 'SELECT id FROM {user} WHERE email = ' . db_param() . ' AND enabled=' . db_param();
+$t_result = db_query( $t_query, array( $f_email, true ) );
 $t_row = db_fetch_array( $t_result );
 
 if( !$t_row ) {
