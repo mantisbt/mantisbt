@@ -76,6 +76,8 @@ class ConfigParser
 			case T_STRING:
 			case T_LNUMBER:
 			case T_DNUMBER:
+			case '-':
+			case '+':
 				$t_result = $this->process_value();
 				break;
 

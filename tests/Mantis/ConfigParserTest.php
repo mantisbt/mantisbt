@@ -205,8 +205,13 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 			'Integer Zero' => array( '0', PHPUnit_Type::TYPE_INT ),
 			'Integer One' => array( '1', PHPUnit_Type::TYPE_INT ),
 			'Integer with whitespace' => array( " 1\n", PHPUnit_Type::TYPE_INT ),
-
+			'Integer negative' => array( '-1', PHPUnit_Type::TYPE_INT ),
+			'Integer positive' => array( '+1', PHPUnit_Type::TYPE_INT ),
+	
 			'Float' => array( '1.1', PHPUnit_Type::TYPE_FLOAT ),
+			'Float negative' => array( '-1.1', PHPUnit_Type::TYPE_FLOAT ),
+			'Float positive' => array( '+1.1', PHPUnit_Type::TYPE_FLOAT ),
+			'Float scientific' => array( '1.2e3', PHPUnit_Type::TYPE_FLOAT ),
 
 			'String empty double-quote' => array( '""', PHPUnit_Type::TYPE_STRING ),
 			'String empty single-quote' => array( "''", PHPUnit_Type::TYPE_STRING ),
