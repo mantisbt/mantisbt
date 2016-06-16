@@ -1353,6 +1353,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
  * @param integer $p_hide_inactive Whether to hide inactive users.
  * @param integer $p_filter        The filter to use.
  * @param integer $p_show_disabled Whether to show disabled users.
+ * @param string  $p_class         The CSS class of the link.
  * @return void
  */
 function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_show_disabled = 0, $p_class = '' ) {
@@ -1412,6 +1413,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  * @param array  $p_args_to_post   Associative array of arguments to be posted, with
  *                                 arg name => value, defaults to null (no args).
  * @param mixed  $p_security_token Optional; null (default), OFF or security token string.
+ * @param string $p_class          The CSS class of the button.
  * @see form_security_token()
  * @return void
  */

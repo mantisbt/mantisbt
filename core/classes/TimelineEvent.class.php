@@ -72,7 +72,7 @@ class TimelineEvent {
 	 * @param string $p_action_icon Icon name for Font Awesome
 	 * @return string
 	 */
-	public function html_start( $p_action_icon = 'fa-check') {
+	public function html_start( $p_action_icon = 'fa-check' ) {
 		$t_avatar = Avatar::get( $this->user_id, 40 );
 		$t_html = '<div class="profile-activity clearfix">';
 
