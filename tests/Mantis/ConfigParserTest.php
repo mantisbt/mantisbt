@@ -189,7 +189,7 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 			. $p_text . "\n"
 			. "<<<------------------------\n";
 	}
-	
+
 	/**
 	 * Adds a new test case to the list
 	 *
@@ -239,7 +239,7 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 		$this->addScalarCase( 'MANTIS_VERSION', PHPUnit_Type::TYPE_STRING );    #string
 		$this->addScalarCase( " MANTIS_VERSION\n", PHPUnit_Type::TYPE_STRING );
 	}
-	
+
 	/**
 	 * Initialize the array test cases list
 	 */

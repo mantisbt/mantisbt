@@ -27,7 +27,7 @@
  * Configuration Parser class
  *
  * Simple PHP code parser for scalar and array types
- * 
+ *
  * @package MantisBT
  * @subpackage classes
  *

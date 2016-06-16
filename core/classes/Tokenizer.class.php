@@ -25,10 +25,10 @@
 
 /**
  * Tokenizer class
- * 
+ *
  * Uses PHP's internal token_get_all() function to parse a piece of code
  * into tokens
- * 
+ *
  * @package MantisBT
  * @subpackage classes
  */
