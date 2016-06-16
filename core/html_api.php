@@ -575,7 +575,7 @@ function print_manage_menu( $p_page = '' ) {
 
 	# Plugins menu items - these are cooked links
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<li>', $t_menu_item, '</li>';
+		echo '<li>' . $t_menu_item . '</li>';
 	}
 
 	echo '</ul>' . "\n";
