@@ -90,7 +90,8 @@ if( !config_can_delete( $f_config_option ) ) {
 
 
 # For 'default', behavior is based on the global variable's type
-if( $f_type == CONFIG_TYPE_DEFAULT ) {
+# If value is empty, process as per default to ensure proper typecast
+if( $f_type == CONFIG_TYPE_DEFAULT || empty( $f_value ) ) {
 	$t_config_global_value = config_get_global( $f_config_option );
 	if( is_string( $t_config_global_value ) ) {
 		$t_type = CONFIG_TYPE_STRING;
@@ -108,13 +109,15 @@ if( $f_type == CONFIG_TYPE_DEFAULT ) {
 }
 
 # Parse the value
-if( $t_type == CONFIG_TYPE_STRING ) {
-	# Return strings as is
-	$t_value = $f_value;
-} else {
+# - Strings are returned as-is
+# - Empty values are typecast as appropriate
+$t_value = $f_value;
+if( $t_type != CONFIG_TYPE_STRING ) {
 	try {
-		$t_parser = new ConfigParser( $f_value );
-		$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+		if( !empty( $f_value ) ) {
+			$t_parser = new ConfigParser( $f_value );
+			$t_value = $t_parser->parse( ConfigParser::EXTRA_TOKENS_IGNORE );
+		}
 
 		switch( $t_type ) {
 			case CONFIG_TYPE_INT:
