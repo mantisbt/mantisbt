@@ -227,6 +227,7 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function initScalarTestCases() {
 		# Integer
+		$this->addScalarCase( '0', PHPUnit_Type::TYPE_INT );
 		$this->addScalarCase( '1', PHPUnit_Type::TYPE_INT );
 		$this->addScalarCase( " 1\n", PHPUnit_Type::TYPE_INT );
 
@@ -234,6 +235,9 @@ class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
 		$this->addScalarCase( '1.1', PHPUnit_Type::TYPE_FLOAT );
 
 		# String
+		$this->addScalarCase( '""', PHPUnit_Type::TYPE_STRING );
+		$this->addScalarCase( "''", PHPUnit_Type::TYPE_STRING );
+		$this->addScalarCase( '" "', PHPUnit_Type::TYPE_STRING );
 		$this->addScalarCase( '"1"', PHPUnit_Type::TYPE_STRING );
 		$this->addScalarCase( "'1'", PHPUnit_Type::TYPE_STRING );
 
