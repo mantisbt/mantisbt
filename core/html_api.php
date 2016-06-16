@@ -117,7 +117,7 @@ function html_rss_link() {
 	global $g_rss_feed_url;
 
 	if( $g_rss_feed_url !== null ) {
-		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . '" />' . "\n";
+		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="', string_attribute( $g_rss_feed_url ), '" />', "\n";
 	}
 }
 
@@ -127,7 +127,7 @@ function html_rss_link() {
  * @return void
  */
 function html_javascript_link( $p_filename ) {
-	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>' . "\n";
+	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'js/' . $p_filename ), '"></script>', "\n";
 }
 
 /**
@@ -136,7 +136,7 @@ function html_javascript_link( $p_filename ) {
  * @return void
  */
 function html_javascript_cdn_link( $p_url ) {
-	echo "\t", '<script type="text/javascript" src="', $p_url, '"></script>' . "\n";
+	echo "\t", '<script type="text/javascript" src="', $p_url, '"></script>', "\n";
 }
 
 /**
@@ -179,7 +179,7 @@ function html_title( $p_page_title = null ) {
 		if( empty( $t_title ) ) {
 			echo $t_page_title;
 		} else {
-			echo $t_page_title . ' - ' . $t_title;
+			echo $t_page_title, ' - ', $t_title;
 		}
 	}
 	echo '</title>', "\n";
@@ -225,7 +225,7 @@ function html_css() {
  * @return void
  */
 function html_css_link( $p_filename ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />', "\n";
 }
 
 /**
@@ -234,7 +234,7 @@ function html_css_link( $p_filename ) {
  * @return void
  */
 function html_css_cdn_link( $p_url ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" />' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" />', "\n";
 }
 
 /**
@@ -266,7 +266,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = htmlspecialchars( $t_url );
 
-	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
+	echo "\t", '<meta http-equiv="Refresh" content="', $p_time, ';URL=', $t_url, '" />', "\n";
 
 	return true;
 }
@@ -287,12 +287,12 @@ function require_js( $p_script_path ) {
  */
 function html_head_javascript() {
 	global $g_scripts_included;
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'javascript_config.php' ), '"></script>', "\n";
+	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( 'javascript_translations.php' ), '"></script>', "\n";
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js"></script>' . "\n";
-		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js"></script>' . "\n";
+		echo "\t", '<script src="https://ajax.googleapis.com/ajax/libs/jquery/', JQUERY_VERSION, '/jquery.min.js"></script>', "\n";
+		echo "\t", '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/', JQUERY_UI_VERSION, '/jquery-ui.min.js"></script>', "\n";
 	} else {
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
@@ -331,7 +331,7 @@ function html_print_logo( $p_logo = null ) {
 			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';
+		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="', helper_mantis_url( $p_logo ), '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
@@ -371,10 +371,10 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 	echo '<div class="alert alert-success center">';
 
 	if( !is_blank( $p_message ) ) {
-		echo $p_message . '<br />';
+		echo $p_message, '<br />';
 	}
 
-	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
+	echo '<p class="bold bigger-110">', lang_get( 'operation_successful' ), '</p><br />';
 	print_button( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
 	echo '</div></div>';
 }
@@ -435,28 +435,28 @@ function print_project_menu_bar() {
 	$t_project_ids = current_user_get_accessible_projects();
 	$t_current_project_id = helper_get_current_project();
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 
 	if( ALL_PROJECTS == $t_current_project_id) {
-		echo '<li class="active">' . "\n";
+		echo '<li class="active">', "\n";
 	} else {
-		echo '<li>' . "\n";
+		echo '<li>', "\n";
 	}
-	echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ) . '">', lang_get( 'all_projects' ), '</a>' . "\n";
-	echo '</li>' . "\n";
+	echo '<a href="', helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ), '">', lang_get( 'all_projects' ), '</a>', "\n";
+	echo '</li>', "\n";
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $t_id == $t_current_project_id) {
-			echo '<li class="active">' . "\n";
+			echo '<li class="active">', "\n";
 		} else {
-			echo '<li>' . "\n";
+			echo '<li>', "\n";
 		}
-		echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . '">', string_html_specialchars( project_get_field( $t_id, 'name' ) ), '</a>' . "\n";
-		echo '</li>' . "\n";
+		echo '<a href="', helper_mantis_url( 'set_project.php?project_id=' . $t_id ), '">', string_html_specialchars( project_get_field( $t_id, 'name' ) ), '</a>', "\n";
+		echo '</li>', "\n";
 		print_subproject_menu_bar( $t_id, $t_id . ';' );
 	}
 
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -470,7 +470,7 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
 	$t_char = ':';
 	foreach( $t_subprojects as $t_subproject ) {
-		echo $t_char . ' <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . '">' . string_html_specialchars( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+		echo $t_char, ' <a href="', helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ), '">', string_html_specialchars( project_get_field( $t_subproject, 'name' ) ), '</a>';
 		print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
 		$t_char = ',';
 	}
@@ -561,24 +561,24 @@ function print_manage_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 	foreach( $t_pages AS $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active .  '">' . "\n";
+		echo '<li class="', $t_active,  '">', "\n";
 		if( $t_page['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_page['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
+			echo '<a href="', lang_get_defaulted( $t_page['url'] ), '"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
 		} else {
-			echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get_defaulted( $t_page['label'] ) . '</a>';
+			echo '<a href="', helper_mantis_url( $t_page['url'] ), '">', lang_get_defaulted( $t_page['label'] ), '</a>';
 		}
-		echo '</li>' . "\n";
+		echo '</li>', "\n";
 	}
 
 	# Plugins menu items - these are cooked links
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<li>' . $t_menu_item . '</li>';
+		echo '<li>', $t_menu_item, '</li>';
 	}
 
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -635,25 +635,25 @@ function print_manage_config_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<div class="space-10"></div>' . "\n";
-	echo '<div class="center">' . "\n";
-	echo '<div class="btn-toolbar inline">' . "\n";
-	echo '<div class="btn-group">' . "\n";
+	echo '<div class="space-10"></div>', "\n";
+	echo '<div class="center">', "\n";
+	echo '<div class="btn-toolbar inline">', "\n";
+	echo '<div class="btn-group">', "\n";
 
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<a class="btn btn-sm btn-white btn-primary ', $t_active, '" href="', helper_mantis_url( $t_page['url'] ),'">', "\n";
 		echo lang_get_defaulted( $t_page['label'] );
-		echo '</a>' . "\n";
+		echo '</a>', "\n";
 	}
 
 	foreach ( $t_menu_options as $t_menu_item ) {
 		echo $t_menu_item;
 	}
 
-	echo '</div>' . "\n";
-	echo '</div>' . "\n";
-	echo '</div>' . "\n";
+	echo '</div>', "\n";
+	echo '</div>', "\n";
+	echo '</div>', "\n";
 }
 
 /**
@@ -691,21 +691,21 @@ function print_account_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<li class="', $t_active, '">', "\n";
+		echo '<a href="', helper_mantis_url( $t_page['url'] ),'">', "\n";
 		echo lang_get( $t_page['label'] );
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
+		echo '</a>', "\n";
+		echo '</li>', "\n";
 	}
 
 	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>' . $t_menu_item . '</li>';
+		echo '<li>', $t_menu_item, '</li>';
 	}
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -747,19 +747,19 @@ function print_doc_menu( $p_page = '' ) {
 		);
 	}
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 
 	foreach ( $t_pages as $key => $t_page ) {
 		$t_active =  $key == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="' . $t_page['url'] . '">' . "\n";
+		echo '<li class="', $t_active, '">', "\n";
+		echo '<a href="', $t_page['url'], '">', "\n";
 		echo lang_get($t_page['label']);
 
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
+		echo '</a>', "\n";
+		echo '</li>', "\n";
 	}
 
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -785,23 +785,23 @@ function print_summary_menu( $p_page = '' ) {
 
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<li class="', $t_active, '">', "\n";
+		echo '<a href="', helper_mantis_url( $t_page['url'] ), '">', "\n";
 		echo lang_get( $t_page['label'] );
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
+		echo '</a>', "\n";
+		echo '</li>', "\n";
 	}
 
 	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>' . $t_menu_item . '</li>';
+		echo '<li>', $t_menu_item, '</li>';
 	}
 
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -812,35 +812,35 @@ function print_summary_menu( $p_page = '' ) {
 function print_admin_menu_bar( $p_page ) {
 	global $g_upgrade;
 	echo '<div class="space-10"></div>';
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">', "\n";
 
 	$t_active = 'index.php' == $p_page ? 'active' : '';
-	echo '<li class="green ' . $t_active . '">' . "\n";
+	echo '<li class="green ', $t_active, '">', "\n";
 	echo '<a href="index.php"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
-	echo '</li>' . "\n";
+	echo '</li>', "\n";
 
 	if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) {
-		echo '<li class="bold">' . "\n";
+		echo '<li class="bold">', "\n";
 		echo '<a class="green" href="install.php">Upgrade your installation</a>';
-		echo '</li>' . "\n";
+		echo '</li>', "\n";
 	}
 
 	$t_active = 'system_utils.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
-	echo '<a href="system_utils.php">System Utilities</a>' . "\n";
-	echo '</li>' . "\n";
+	echo '<li class="', $t_active, '">', "\n";
+	echo '<a href="system_utils.php">System Utilities</a>', "\n";
+	echo '</li>', "\n";
 
 	$t_active = 'test_langs.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
-	echo '<a href="test_langs.php">Test Langs</a>' . "\n";
-	echo '</li>' . "\n";
+	echo '<li class="', $t_active, '">', "\n";
+	echo '<a href="test_langs.php">Test Langs</a>', "\n";
+	echo '</li>', "\n";
 
 	$t_active = 'email_queue.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
-	echo '<a href="email_queue.php">Email Queue</a>' . "\n";
-	echo '</li>' . "\n";
+	echo '<li class="', $t_active, '">', "\n";
+	echo '<a href="email_queue.php">Email Queue</a>', "\n";
+	echo '</li>', "\n";
 
-	echo '</ul>' . "\n";
+	echo '</ul>', "\n";
 }
 
 /**
@@ -862,8 +862,8 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_method = 'post';
 	}
 
-	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
-	echo "\t" . '<fieldset>';
+	echo '<form method="', $t_method, '" action="', $p_action, '" class="form-inline">', "\n";
+	echo "\t", '<fieldset>';
 	# Add a CSRF token only when the form is being sent via the POST method
 	if( $t_method == 'post' ) {
 		echo form_security_field( $t_form_name[0] );
@@ -873,12 +873,12 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_key = string_attribute( $t_key );
 		$t_val = string_attribute( $t_val );
 
-		echo "\t\t" . '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
+		echo "\t\t", '<input type="hidden" name="', $t_key, '" value="', $t_val, '" />', "\n";
 	}
 
-	echo "\t\t" . '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $p_button_text . '" />' . "\n";
-	echo "\t" . '</fieldset>';
-	echo '</form>' . "\n";
+	echo "\t\t", '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="', $p_button_text, '" />', "\n";
+	echo "\t", '</fieldset>';
+	echo '</form>', "\n";
 }
 
 /**
@@ -932,23 +932,23 @@ function html_button_bug_change_status( BugData $p_bug ) {
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
-		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
+		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="', $t_button_text, '" />';
 
 		echo ' <select name="new_status" class="input-sm">';
 
 		# space at beginning of line is important
 		foreach( $t_enum_list as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '" ';
+			echo '<option value="', $t_key, '" ';
 			check_selected( $t_key, $t_default );
-			echo '>' . $t_val . '</option>';
+			echo '>', $t_val, '</option>';
 		}
 		echo '</select>';
 
 		$t_bug_id = string_attribute( $p_bug->id );
-		echo '<input type="hidden" name="id" value="' . $t_bug_id . '" />' . "\n";
-		echo '<input type="hidden" name="change_type" value="' . BUG_UPDATE_TYPE_CHANGE_STATUS . '" />' . "\n";
+		echo '<input type="hidden" name="id" value="', $t_bug_id, '" />', "\n";
+		echo '<input type="hidden" name="change_type" value="', BUG_UPDATE_TYPE_CHANGE_STATUS, '" />', "\n";
 
-		echo '</form>' . "\n";
+		echo '</form>', "\n";
 	}
 }
 
@@ -1001,11 +1001,11 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	echo '<form method="post" action="bug_update.php" class="form-inline">';
 	echo form_security_field( 'bug_update' );
-	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
-	echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_ASSIGN . '" />';
+	echo '<input type="hidden" name="last_updated" value="', $p_bug->last_updated, '" />';
+	echo '<input type="hidden" name="action_type" value="', BUG_UPDATE_TYPE_ASSIGN, '" />';
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
-	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
+	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="', $t_button_text, '" />';
 
 	echo ' <select class="input-sm" name="handler_id">';
 
@@ -1023,14 +1023,14 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 			$t_default_assign_to = $t_id;
 		}
 
-		echo '<option value="' . $t_id . '" ';
+		echo '<option value="', $t_id, '" ';
 
 		if( ( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
 			check_selected( $t_id, $t_default_assign_to );
 			$t_already_selected = true;
 		}
 
-		echo '>' . $t_caption . '</option>';
+		echo '>', $t_caption, '</option>';
 	}
 
 	# allow un-assigning if already assigned.
@@ -1043,9 +1043,9 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	echo '</select>';
 
 	$t_bug_id = string_attribute( $p_bug->id );
-	echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
+	echo '<input type="hidden" name="bug_id" value="', $t_bug_id, '" />', "\n";
 
-	echo '</form>' . "\n";
+	echo '</form>', "\n";
 }
 
 /**
