@@ -130,7 +130,7 @@ layout_page_begin();
 		<!-- Horizontal/Vertical Switch -->
 		<span class="small">
 <?php
-		if( print_small_button ) {
+		if( $t_graph_horizontal ) {
 			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
 		} else {
 			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
