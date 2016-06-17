@@ -149,7 +149,7 @@ if( $t_account_page ) {
 	</div>
 	</div>
 	<div class="widget-toolbox padding-8 clearfix">
-		<span class="required pull-right"> * required</span>
+		<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 			<?php
 			if( $t_account_page ) {
 				if( $t_project_id == ALL_PROJECTS ) { ?>

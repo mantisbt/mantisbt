@@ -283,7 +283,7 @@ print_account_menu( 'account_page.php' );
 	<?php if( $t_show_update_button ) { ?>
 		<div class="widget-toolbox padding-8 clearfix">
 			<?php if ($t_force_pw_reset) { ?>
-				<span class="required pull-right"> * required</span>
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 			<?php } ?>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</div>

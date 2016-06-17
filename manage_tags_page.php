@@ -226,7 +226,7 @@ print_manage_menu( 'manage_tags_page.php' );
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<span class="required pull-right"> * required</span>
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"
 					   value="<?php echo lang_get('tag_create') ?>"/>
 			</div>
