@@ -223,7 +223,7 @@ write_bug_rows( $t_rows );
 <?php
 		if( $g_checkboxes_exist ) {
 			echo '<label class="inline">';
-			echo '<input class="ace check_all input-small" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" />';
+			echo '<input class="ace check_all input-sm" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" />';
 			echo '<span class="lbl"> ' . lang_get( 'select_all' ) . ' </span > ';
 			echo '</label>';
 		}
