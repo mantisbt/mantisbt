@@ -310,17 +310,16 @@ echo '</div>';
 echo '<div class="widget-main no-padding">';
 echo '<div class="table-responsive">';
 echo '<table class="table table-bordered table-condensed">';
-echo '<thead><tr class="bug-nav">';
 
 if( $t_top_buttons_enabled ) {
+	echo '<thead><tr class="bug-nav">';
 	echo '<tr class="top-buttons">';
 	echo '<td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td>';
 	echo '</tr>';
+	echo '</thead>';
 }
-
-echo '</thead>';
 
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
