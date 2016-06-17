@@ -191,7 +191,7 @@ print_account_menu( 'account_page.php' );
 			} ?>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'password' ) ?>
+					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
