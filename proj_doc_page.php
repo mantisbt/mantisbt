@@ -155,10 +155,10 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			<span class="small">
 <?php
 	if( $v_project_id == ALL_PROJECTS ) {
-		echo lang_get( 'all_projects' ) . '<br/>';
+		echo lang_get( 'all_projects' ) . '<br />';
 	} else if( $v_project_id != $f_project_id ) {
 		$t_project_name = project_get_name( $v_project_id );
-		echo $t_project_name . '<br/>';
+		echo $t_project_name . '<br />';
 	}
 	echo '(' . $v_date_added . ')';
 ?>

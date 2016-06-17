@@ -114,11 +114,11 @@ $t_num_notes = db_num_rows( $t_result );
 		<td class="no-padding" width="20%">
 			<div class="small">
 						(<?php echo bugnote_format_id( $t_row['id'] ) ?>)
-						<br/>
+						<br />
 						<?php
 						print_user( $t_row['reporter_id'] );
 						?>&#160;&#160;&#160;
-						<br/>
+						<br />
 						<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 						<?php if( $t_date_submitted != $t_last_modified ) {
 							echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';

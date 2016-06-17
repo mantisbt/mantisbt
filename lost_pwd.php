@@ -119,9 +119,9 @@ layout_page_begin();
 </tr>
 <tr>
 	<td>
-		<br/>
+		<br />
 		<?php echo lang_get( 'reset_request_in_progress_msg' ) ?>
-		<br/><br/>
+		<br /><br />
 	</td>
 </tr>
 </table>

@@ -3133,7 +3133,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							if( filter_field_is_any( $t_current ) ) {
 								$t_output .= lang_get( 'any' );
 							} else {
-								$t_output .= ( $t_first ? '' : '<br/>' ) . string_display_line( $t_filter_object->display( $t_current ) );
+								$t_output .= ( $t_first ? '' : '<br />' ) . string_display_line( $t_filter_object->display( $t_current ) );
 								$t_first = false;
 							}
 							$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '[]" value="' . string_attribute( $t_current ) . '"/>';

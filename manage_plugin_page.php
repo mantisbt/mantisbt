@@ -140,15 +140,15 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 			$t_author = implode( $t_author, ', ' );
 		}
 		if( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+			$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
 				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+			$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 		}
 	}
 
 	if( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
+		$t_url = '<br />' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
 	}
 
 	$t_upgrade = plugin_needs_upgrade( $t_plugin );
@@ -171,7 +171,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 
 	if( 0 < count( $t_depends ) ) {
-		$t_depends = implode( $t_depends, '<br/>' );
+		$t_depends = implode( $t_depends, '<br />' );
 	} else {
 		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 	}
@@ -272,15 +272,15 @@ if( 0 < count( $t_plugins_available ) ) {
 				$t_author = implode( $t_author, ', ' );
 			}
 			if( !is_blank( $t_contact ) ) {
-				$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+				$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
 					'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 			} else {
-				$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+				$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 			}
 		}
 
 		if( !is_blank( $t_url ) ) {
-			$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
+			$t_url = '<br />' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
 		}
 
 		$t_ready = true;
@@ -300,7 +300,7 @@ if( 0 < count( $t_plugins_available ) ) {
 		}
 
 		if( 0 < count( $t_depends ) ) {
-			$t_depends = implode( $t_depends, '<br/>' );
+			$t_depends = implode( $t_depends, '<br />' );
 		} else {
 			$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
 		}

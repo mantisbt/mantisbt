@@ -114,7 +114,7 @@ layout_login_page_begin();
 							<div class="space-10"></div>
 
 							<div class="center">
-								<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
+								<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br />
 								<?php echo '[' . $f_username . ' - ' . $f_email . '] ' ?>
 							</div>
 
@@ -123,7 +123,7 @@ layout_login_page_begin();
 								<?php echo lang_get( 'password_emailed_msg' ) ?>
 								<br /><br />
 								<?php echo lang_get( 'no_reponse_msg' ) ?>
-								<br /><br/>
+								<br /><br />
 							</div>
 
 							<br />
