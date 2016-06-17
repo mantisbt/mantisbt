@@ -112,7 +112,9 @@ layout_login_page_begin();
 	</div>
 		<div class="toolbar center">
 			<a class="back-to-login-link pull-left" href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a>
+			<?php if( ON == config_get_global( 'allow_signup' ) ) { ?>
 			<a class="back-to-login-link pull-right" href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a>
+			<?php } ?>
 			<div class="clearfix"></div>
 		</div>
 	</div>

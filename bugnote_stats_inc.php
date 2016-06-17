@@ -114,6 +114,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
             $t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
             $t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
             $t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+            filter_init( $t_filter );
             print_filter_do_filter_by_date( true );
         ?>
     </div>
