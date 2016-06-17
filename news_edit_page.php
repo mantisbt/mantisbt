@@ -167,7 +167,7 @@ layout_page_begin( 'main_page.php' );
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<span class="required pull-right"> * required</span>
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
 				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_news_button' ) ?>" />
 			</div>
 		</div>
