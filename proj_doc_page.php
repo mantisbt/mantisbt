@@ -130,7 +130,6 @@ print_doc_menu( 'proj_doc_page.php' );
 	<th><?php echo lang_get( 'filename' ); ?></th>
 	<th><?php echo lang_get( 'description' ); ?></th>
 </tr>
-</thead>
 
 <?php
 $i = 0;
