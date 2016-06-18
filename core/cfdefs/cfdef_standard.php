@@ -27,7 +27,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] = array (
 	'#display_length_max' => true,
 	'#display_default_value' => true,
 	'#function_return_distinct_values' => null,
-	'#function_value_to_database' => null,
+	# MySQL 4-bytes UTF-8 chars workaround #21101
+	'#function_value_to_database' => 'db_mysql_fix_utf8',
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
 	'#function_string_value' => null,
@@ -41,7 +42,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_TEXTAREA] = array (
 	'#display_length_max' => true,
 	'#display_default_value' => true,
 	'#function_return_distinct_values' => null,
-	'#function_value_to_database' => null,
+	# MySQL 4-bytes UTF-8 chars workaround #21101
+	'#function_value_to_database' => 'db_mysql_fix_utf8',
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textarea',
 	'#function_string_value' => null,

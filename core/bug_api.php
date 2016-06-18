@@ -318,11 +318,21 @@ class BugData {
 				}
 				break;
 			case 'summary':
+				# MySQL 4-bytes UTF-8 chars workaround #21101
+				$p_value = db_mysql_fix_utf8( $p_value );
+				# Fall through
 			case 'build':
 				if ( !$this->loading ) {
 					$p_value = trim( $p_value );
 				}
 				break;
+			case 'description':
+			case 'steps_to_reproduce':
+			case 'additional_information':
+				# MySQL 4-bytes UTF-8 chars workaround #21101
+				$p_value = db_mysql_fix_utf8( $p_value );
+				break;
+
 		}
 		$this->$p_name = $p_value;
 	}

@@ -1202,6 +1202,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 	$t_type = custom_field_get_field( $p_field_id, 'type' );
 
 	$t_value_field = ( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) ? 'text' : 'value';
+	$t_value = custom_field_value_to_database( $p_value, $t_type );
 
 	# Determine whether an existing value needs to be updated or a new value inserted
 	db_param_push();
@@ -1218,13 +1219,13 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 					  WHERE field_id=' . db_param() . ' AND
 					  		bug_id=' . db_param();
 		$t_params = array(
-			custom_field_value_to_database( $p_value, $t_type ),
+			$t_value,
 			(int)$p_field_id,
 			(int)$p_bug_id,
 		);
 		db_query( $t_query, $t_params );
 
-		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $p_value );
+		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $t_value );
 	} else {
 		db_param_push();
 		$t_query = 'INSERT INTO {custom_field_string}
@@ -1234,12 +1235,12 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 		$t_params = array(
 			(int)$p_field_id,
 			(int)$p_bug_id,
-			custom_field_value_to_database( $p_value, $t_type ),
+			$t_value,
 		);
 		db_query( $t_query, $t_params );
 		# Don't log history events for new bug reports or on other special occasions
 		if( $p_log_insert ) {
-			history_log_event_direct( $p_bug_id, $t_name, '', $p_value );
+			history_log_event_direct( $p_bug_id, $t_name, '', $t_value );
 		}
 	}
 
