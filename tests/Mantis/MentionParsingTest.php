@@ -142,7 +142,7 @@ class MentionParsingTest extends PHPUnit_Framework_TestCase {
 			),
 			'MentionWithInvalidChars' => array(
 				"@vboctor%%%%%",
-				array()
+				array( 'vboctor' )
 			),
 			'MentionUsernameThatIsAnEmailAddress' => array(
 				"@vboctor@example.com",
