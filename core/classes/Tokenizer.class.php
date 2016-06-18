@@ -177,7 +177,7 @@ class Tokenizer
 				$p_value = token_name( $p_value );
 			}
 			throw new Exception(
-				'Invalid token: got "' . $this->value() . '", expected "$p_value"'
+				'Invalid token: got "' . $this->value() . '", expected "' . $p_value . '"'
 			);
 		}
 		$this->pop();
