@@ -168,10 +168,18 @@ function mention_format_text( $p_text, $p_html = true ) {
 		$t_formatted_mentions[$t_mention] = $t_mention_formatted;
 	}
 
-	$t_text = str_replace(
-		array_keys( $t_formatted_mentions ),
-		array_values( $t_formatted_mentions ),
-		$p_text
+	# Replace the mentions, ignoring existing anchor tags (otherwise
+	# previously set mailto links would be processed as mentions,
+	# corrupting the output
+	$t_text = string_process_exclude_anchors(
+		$p_text,
+		function( $p_string ) use ( $t_formatted_mentions ) {
+			return str_replace(
+				array_keys( $t_formatted_mentions ),
+				array_values( $t_formatted_mentions ),
+				$p_string
+			);
+		}
 	);
 
 	return $t_text;
