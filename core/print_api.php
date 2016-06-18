@@ -502,16 +502,21 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	$t_body = string_display_links( $p_body );
 	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
 
-	$t_news_css = VS_PRIVATE == $p_view_state ? 'hidden' : '';
+	$t_news_css = VS_PRIVATE == $p_view_state ? 'widget-color-red' : 'widget-color-blue2';
 	?>
 
 	<div class="space-10"></div>
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small <?php echo $t_news_css; ?>">
+	<div class="widget-box <?php echo $t_news_css ?>">
+		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-edit"></i>
 				<?php echo $t_headline ?>
 			</h4>
+			<div class="widget-toolbar">
+				<a data-action="collapse" href="#">
+					<i class="ace-icon fa fa-chevron-up bigger-125"></i>
+				</a>
+			</div>
 		</div>
 
 		<div class="widget-body">
