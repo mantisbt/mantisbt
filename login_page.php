@@ -245,7 +245,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 
 			<label for="username" class="block clearfix">
 				<span class="block input-icon input-icon-right">
-					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
+					<input id="username" name="username" type="text" placeholder="<?php echo $t_username_label ?>"
 						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>"
 						   class="form-control <?php echo $t_username_field_autofocus ?>">
 					<i class="ace-icon fa fa-user"></i>

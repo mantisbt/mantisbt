@@ -605,7 +605,7 @@ if( $t_read_write_access ) {
 		<div class="widget-toolbox padding-4 clearfix">
 			<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
 			<input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
-				value="<?php echo lang_get('set_configuration_option') ?>"/>
+				value="<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>"/>
 		</div>
 	</div>
 	</div>
