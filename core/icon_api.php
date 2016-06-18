@@ -89,7 +89,7 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	}
 
 	if( !is_blank( $t_sort_icon_arr[$t_dir] ) ) {
-		echo '&#160;<i class="fa ' . $t_sort_icon_arr[$t_dir] . ' fa-lg blue"></i>';
+		echo '&#160;<i class="fa ', $t_sort_icon_arr[$t_dir], ' fa-lg blue"></i>';
 	} else {
 		echo '&#160;';
 	}

@@ -432,7 +432,7 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 							break;
 						}
 					} else {
-						echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
+						echo( 'Invalid argument type passed to query_bound(): ', ( $i + 1 ) );
 						exit( 1 );
 					}
 					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );

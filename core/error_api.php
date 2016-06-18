@@ -177,7 +177,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
-			echo $t_error_type . ': ' . $t_error_description . "\n";
+			echo $t_error_type, ': ', $t_error_description, "\n";
 
 			if( ON == config_get_global( 'show_detailed_errors' ) ) {
 				echo "\n";
@@ -251,7 +251,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				echo '<div class="space-20"></div>';
 				echo '<div class="alert alert-danger">';
 
-				echo '<p class="bold">' . $t_error_type . '</p>';
+				echo '<p class="bold">', $t_error_type, '</p>';
 				echo '<p>', $t_error_description, '</p>';
 
 				echo '<div class="error-info">';
@@ -276,7 +276,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 					echo '<div class="col-md-12 col-xs-12">';
 					echo '<div class="space-20"></div>';
 					echo '<div class="alert alert-warning">';
-					echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';
+					echo '<div class="warning">Previous non-fatal errors occurred. Page contents follow.</div>';
 					echo '<p>';
 					echo $t_old_contents;
 					echo '</p></div></div>';
@@ -332,9 +332,9 @@ function error_print_delayed() {
 	if( !empty( $g_errors_delayed ) ) {
 		echo '<div id="delayed-errors">';
 		foreach( $g_errors_delayed as $t_error ) {
-			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
+			echo "\n", '<div class="error-inline">', $t_error, '</div>';
 		}
-		echo "\n" . '</div>';
+		echo "\n", '</div>';
 
 		$g_errors_delayed = array();
 	}

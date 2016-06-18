@@ -722,7 +722,7 @@ function install_gravatar_plugin() {
 			plugin_install( $t_plugin );
 		} else {
 			error_parameters( $t_avatar_plugin );
-			echo '<br>' . error_string( ERROR_PLUGIN_INSTALL_FAILED );
+			echo '<br>', error_string( ERROR_PLUGIN_INSTALL_FAILED );
 			return 1;
 		}
 	}

@@ -309,15 +309,15 @@ function summary_print_by_date( array $p_date_array ) {
 		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
 		$t_new_bugs_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE . '=on&amp;' . FILTER_PROPERTY_START_YEAR . '=' . date( 'Y', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_MONTH . '=' . date( 'm', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_DAY . '=' . date( 'd', $t_start_date ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">';
 
-		echo '<tr>' . "\n";
-		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
+		echo '<tr>', "\n";
+		echo '    <td class="width50">', $t_days, '</td>', "\n";
 
 		if( $t_new_count > 0 ) {
-			echo '    <td>' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
+			echo '    <td>', $t_new_bugs_link, $t_new_count, '</a></td>', "\n";
 		} else {
-			echo '    <td>' . $t_new_count . '</td>' . "\n";
+			echo '    <td>', $t_new_count, '</td>', "\n";
 		}
-		echo '    <td>' . $t_resolved_count . '</td>' . "\n";
+		echo '   <td>', $t_resolved_count, '</td>', "\n";
 
 		$t_balance = $t_new_count - $t_resolved_count;
 		$t_style = '';
@@ -333,8 +333,8 @@ function summary_print_by_date( array $p_date_array ) {
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
 
-		echo '    <td class="right' . $t_style . '">' . $t_balance . "</td>\n";
-		echo '</tr>' . "\n";
+		echo '    <td class="right', $t_style, '">', $t_balance, "</td>\n";
+		echo '</tr>', "\n";
 	}
 }
 
@@ -390,9 +390,9 @@ function summary_print_by_activity() {
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_notescount = $t_row['count'];
 
-		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_notescount . '</td>' . "\n";
-		echo '</tr>' . "\n";
+		echo '<tr>', "\n";
+		echo '<td class="small">', $t_bugid, ' - ', $t_summary, '</td><td>', $t_notescount, '</td>', "\n";
+		echo '</tr>', "\n";
 	}
 }
 
@@ -435,9 +435,9 @@ function summary_print_by_age() {
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_days_open = intval( ( time() - $t_row['date_submitted'] ) / SECONDS_PER_DAY );
 
-		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_days_open . '</td>' . "\n";
-		echo '</tr>' . "\n";
+		echo '<tr>', "\n";
+		echo '<td class="small">', $t_bugid, ' - ', $t_summary, '</td><td>', $t_days_open, '</td>', "\n";
+		echo '</tr>', "\n";
 	}
 }
 
@@ -885,7 +885,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
-					echo $t_bug_link . $t_res_bug_count . '</a>';
+					echo $t_bug_link, $t_res_bug_count, '</a>';
 				} else {
 					echo $t_res_bug_count;
 				}
@@ -1000,7 +1000,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
-					echo $t_bug_link . $t_res_bug_count . '</a>';
+					echo $t_bug_link, $t_res_bug_count, '</a>';
 				} else {
 					echo $t_res_bug_count;
 				}
@@ -1136,8 +1136,8 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 					}
 				}
 			}
-			echo '<td class="right">' . $t_total_severity . '</td>';
-			echo '<td class="right">' . $t_total_errors . '</td>';
+			echo '<td class="right">', $t_total_severity, '</td>';
+			echo '<td class="right">', $t_total_errors, '</td>';
 			printf( '<td class="right">%d</td>', $t_total_severity - $t_total_errors );
 			echo '</tr>';
 		}

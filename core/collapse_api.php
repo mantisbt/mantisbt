@@ -80,7 +80,7 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	$g_current_collapse_section = $t_block;
 
 	$t_div_id = $t_block . '_open';
-	echo "\n" . '<div id="' . $t_div_id . '" class="' . $p_css_class . '">';
+	echo "\n", '<div id="', $t_div_id, '" class="', $p_css_class, '">';
 }
 
 /**
@@ -108,8 +108,8 @@ function collapse_closed( $p_name, $p_section = '' ) {
 
 	$t_div_id = $t_block . '_closed';
 	$t_collapse_status_class = $t_display ? 'collapse-open' : 'collapse-closed';
-	echo "\n" . '<div id="', $t_div_id,
-		'" class="collapse-section-closed ' . $t_collapse_status_class . '">';
+	echo "\n", '<div id="', $t_div_id,
+		'" class="collapse-section-closed ', $t_collapse_status_class, '">';
 }
 
 /**

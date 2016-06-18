@@ -490,9 +490,9 @@ function relgraph_output_image( Graph $p_graph ) {
  * @return void
  */
 function relgraph_output_map( Graph $p_graph, $p_name ) {
-	echo '<map name="' . $p_name . '">' . "\n";
+	echo '<map name="', $p_name, '">', "\n";
 	$p_graph->output( 'cmapx' );
-	echo '</map>' . "\n";
+	echo '</map>', "\n";
 }
 
 /**

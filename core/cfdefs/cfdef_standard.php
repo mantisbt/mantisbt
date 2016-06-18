@@ -293,17 +293,17 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value ) {
 	}
 
 	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple">';
+		echo '<select ', helper_get_tab_index(), ' id="custom_field_', $p_field_def['id'], '" name="custom_field_', $p_field_def['id'], '[]" size="', $t_list_size, '" multiple="multiple">';
 	} else {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '">';
+		echo '<select ', helper_get_tab_index(), ' id="custom_field_', $p_field_def['id'], '" name="custom_field_', $p_field_def['id'], '" size="', $t_list_size, '">';
 	}
 
 	$t_selected_values = explode( '|', $p_custom_field_value );
 	foreach( $t_values as $t_option ) {
 		if( in_array( $t_option, $t_selected_values, true ) ) {
-			echo '<option value="' . string_attribute( $t_option ) . '" selected="selected"> ' . string_display_line( $t_option ) . '</option>';
+			echo '<option value="', string_attribute( $t_option ), '" selected="selected"> ', string_display_line( $t_option ), '</option>';
 		} else {
-			echo '<option value="' . string_attribute( $t_option ) . '">' . string_display_line( $t_option ) . '</option>';
+			echo '<option value="', string_attribute( $t_option ), '">', string_display_line( $t_option ), '</option>';
 		}
 	}
 	echo '</select>';
@@ -321,12 +321,12 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
-		echo '<label for="' . $t_input_id . '">' . "\n";
-		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<label for="', $t_input_id, '">', "\n";
+		echo '<input class="ace" id="', $t_input_id, '" ', helper_get_tab_index(), ' type="checkbox" name="', $t_input_name, '" value="', string_attribute( $t_values[$i] ), '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
-		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
-		echo '</label>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<span class="lbl">&#160;', string_display_line( $t_values[$i] ), '</label>', "\n";
+		echo '</label>&#160;&#160;&#160;&#160;', "\n";
 	}
 }
 
@@ -349,12 +349,12 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'];
-		echo '<label for="' . $t_input_id . '">';
-		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<label for="', $t_input_id, '">';
+		echo '<input class="ace" id="', $t_input_id, '" ', helper_get_tab_index(), ' type="radio" name="', $t_input_name, '" value="', string_attribute( $t_values[$i] ), '"';
 		check_checked( $t_checked_value, $t_values[$i] );
 		echo " />\n";
-		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</span>' . "\n";
-		echo '</label>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<span class="lbl">&#160;', string_display_line( $t_values[$i] ), '</span>', "\n";
+		echo '</label>&#160;&#160;&#160;&#160;', "\n";
 	}
 }
 
@@ -365,13 +365,13 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
  * @return void
  */
 function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
-	echo '<input ' . helper_get_tab_index() . ' type="text" id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="80"';
+	echo '<input ', helper_get_tab_index(), ' type="text" id="custom_field_', $p_field_def['id'], '" name="custom_field_', $p_field_def['id'], '" size="80"';
 	if( 0 < $p_field_def['length_max'] ) {
-		echo ' maxlength="' . $p_field_def['length_max'] . '"';
+		echo ' maxlength="', $p_field_def['length_max'], '"';
 	} else {
 		echo ' maxlength="255"';
 	}
-	echo ' value="' . string_attribute( $p_custom_field_value ) .'"></input>';
+	echo ' value="', string_attribute( $p_custom_field_value ), '"></input>';
 }
 
 /**
@@ -381,8 +381,8 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
  * @return void
  */
 function cfdef_input_textarea( array $p_field_def, $p_custom_field_value ) {
-	echo '<textarea class="form-control" ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
-	echo ' cols="70" rows="8">' . $p_custom_field_value .'</textarea>';
+	echo '<textarea class="form-control" ', helper_get_tab_index(), ' id="custom_field_', $p_field_def['id'], '" name="custom_field_', $p_field_def['id'], '"';
+	echo ' cols="70" rows="8">', $p_custom_field_value, '</textarea>';
 }
 
 /**

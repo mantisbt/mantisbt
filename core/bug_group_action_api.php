@@ -113,7 +113,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
  */
 function bug_group_action_print_hidden_fields( array $p_bug_ids_array ) {
 	foreach( $p_bug_ids_array as $t_bug_id ) {
-		echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
+		echo '<input type="hidden" name="bug_arr[]" value="', $t_bug_id, '" />', "\n";
 	}
 }
 
