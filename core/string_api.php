@@ -471,7 +471,6 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
 	static $s_email_regex = null;
-	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -522,17 +521,39 @@ function string_insert_hrefs( $p_string ) {
 	# mailto: link, making sure that we skip processing of any existing anchor
 	# tags, to avoid parts of URLs such as https://user@example.com/ or
 	# http://user:password@example.com/ to be not treated as an email.
+	$p_string = string_process_exclude_anchors(
+		$p_string,
+		function( $p_string ) use ( $s_email_regex ) {
+			return preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $p_string );
+		}
+	);
+
+	return $p_string;
+}
+
+/**
+ * Processes a string, ignoring anchor tags.
+ * Applies the specified callback function to the text between anchor tags;
+ * the anchors themselves will be left as-is.
+ * @param string   $p_string   String to process
+ * @param callable $p_callback Function to apply
+ * @return string
+ */
+function string_process_exclude_anchors( $p_string, $p_callback ) {
+	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
+
 	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
-	$p_string = '';
+
+	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {
 		if( preg_match( $s_anchor_regex, $t_piece ) ) {
-			$p_string .= $t_piece;
+			$t_string .= $t_piece;
 		} else {
-			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $t_piece );
+			$t_string .= $p_callback( $t_piece );
 		}
 	}
 
-	return $p_string;
+	return $t_string;
 }
 
 /**
