@@ -230,17 +230,20 @@ function layout_head_css() {
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/css/bootstrap.min.css' );
 		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css' );
+
+		# theme text fonts
+		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
 	} else {
 		html_css_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.css' );
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
+
+		# theme text fonts
+		html_css_link( 'open-sans.css' );
 	}
 
 	# page specific plugin styles
 
-	# theme text fonts
-	html_css_link( 'ace-fonts.css' );
-
-	# theme styles -->
+	# theme styles
 	html_css_link( 'ace.min.css' );
 	html_css_link( 'ace-mantis.css' );
 
