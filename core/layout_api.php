@@ -566,7 +566,7 @@ function layout_navbar_projects_menu() {
 }
 
 /**
- * Print navbar bottons
+ * Print navbar buttons
  * @return void
  */
 function layout_navbar_button_bar() {
@@ -582,14 +582,14 @@ function layout_navbar_button_bar() {
 	}
 
 	echo '<li class="hidden-sm hidden-xs">';
-  	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
+	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
-  	if( $t_can_report_bug ) {
+	if( $t_can_report_bug ) {
 		$t_bug_url = string_get_bug_report_url();
-	  	echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
+		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
 		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
 		echo '</a>';
-  	}
+	}
 
 	if( $t_can_invite_user ) {
 		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
@@ -598,7 +598,7 @@ function layout_navbar_button_bar() {
 	}
 
 	echo '</div>';
-  	echo '</li>';
+	echo '</li>';
 }
 
 /**
