@@ -165,7 +165,7 @@ $f_export = implode( ',', $f_bug_arr );
 			'&amp;export=' . $f_export .
 			'&amp;show_flag=' . $t_show_flag .
 			'" ' . $t_icon[2] . '>' .
-			'<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
+			'<i class="fa ' . $t_icon[3] . '" title="' . $t_icon[4] . '"></i></a> ';
 	}
 ?>
 
