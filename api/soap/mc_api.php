@@ -423,7 +423,7 @@ function mci_sanitize_xml_string ( $p_input ) {
 /**
  * Gets the url for MantisBT.
  *
- * @return MantisBT URL terminated by a /.
+ * @return string MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
 	return config_get( 'path' );

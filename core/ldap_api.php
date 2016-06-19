@@ -449,7 +449,7 @@ function ldap_simulation_get_user( $p_username ) {
  * Given a username, gets the email address or empty address if user is not found.
  *
  * @param string $p_username The user name.
- * @return The email address or blank if user is not found.
+ * @return string The email address or blank if user is not found.
  */
 function ldap_simulation_email_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );

@@ -184,7 +184,7 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * @param  integer $p_start_time     The start time to filter by, or null for all.
  * @param  integer $p_end_time       The end time to filter by, or null for all.
  * @param  string  $p_history_order  The sort order.
- * @return database result to pass into history_get_event_from_row().
+ * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
  */
 function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
 	if ( $p_history_order === null ) {
