@@ -185,7 +185,6 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_hostname               = config_get( 'hostname', '' );
 	$f_db_type                = config_get( 'db_type', '' );
 	$f_database_name          = config_get( 'database_name', '' );
-	$f_db_schema              = config_get( 'db_schema', '' );
 	$f_db_username            = config_get( 'db_username', '' );
 	$f_db_password            = config_get( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
@@ -201,7 +200,6 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
 	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
 	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
-	$f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
 	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
 	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
@@ -268,15 +266,6 @@ if( $t_config_exists ) {
 		if( 0 == $t_install_state ) {
 			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
 		}
-	}
-}
-
-if( $f_db_type == 'db2' ) {
-
-	# If schema name is supplied, then separate it from database name.
-	if( strpos( $f_database_name, '/' ) != false ) {
-		$f_db2AS400 = $f_database_name;
-		list( $f_database_name, $f_db_schema ) = explode( '/', $f_db2AS400, 2 );
 	}
 }
 
@@ -376,9 +365,6 @@ if( 2 == $t_install_state ) {
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
 	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8', true, 'database name is blank' );
 
-	if( $f_db_type == 'db2' ) {
-		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
-	}
 ?>
 <tr>
 	<td>
@@ -425,15 +411,6 @@ if( 2 == $t_install_state ) {
 			$t_db_open = true;
 			$f_db_exists = true;
 		}
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-			}
-		} else {
-			print_test_result( GOOD );
-		}
-
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
@@ -456,14 +433,6 @@ if( 2 == $t_install_state ) {
 
 		if( $t_result == true ) {
 			$t_db_open = true;
-			if( $f_db_type == 'db2' ) {
-				$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-				if( $t_result === false ) {
-					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-				}
-			} else {
-				print_test_result( GOOD );
-			}
 		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
@@ -502,7 +471,6 @@ if( 2 == $t_install_state ) {
 				}
 				break;
 			case 'pgsql':
-			case 'db2':
 			default:
 				break;
 		}
@@ -598,7 +566,6 @@ if( !$g_database_upgrade ) {
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
-				'db2'         => 'IBM DB2',
 			);
 			# mysql is deprecated as of PHP 5.5.0
 			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
@@ -783,20 +750,6 @@ if( 3 == $t_install_state ) {
 	<?php
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
-		if( $f_db_type == 'db2' ) {
-			$t_rs = $g_db->Execute( "select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" );
-			if( $t_rs === false ) {
-				echo '<br />false';
-			}
-
-			if( $t_rs->EOF ) {
-				$t_result = false;
-				echo $g_db->errorMsg();
-			} else {
-				$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			}
-		}
-
 		$t_db_open = false;
 
 		if( $t_result == true ) {
@@ -809,39 +762,26 @@ if( 3 == $t_install_state ) {
 
 			$t_dict = NewDataDictionary( $g_db );
 
-			if( $f_db_type == 'db2' ) {
-				$t_rs = $g_db->Execute( 'CREATE SCHEMA ' . $f_db_schema );
+			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
+				'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
+			) );
+			$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+			if( $t_ret == 2 ) {
+				print_test_result( GOOD );
+				$t_db_open = true;
+			} else {
+				$t_error = db_error_msg();
+				if( $f_db_type == 'oci8' ) {
+					$t_db_exists = preg_match( '/ORA-01920/', $t_error );
+				} else {
+					$t_db_exists = strstr( $t_error, 'atabase exists' );
+				}
 
-				if( !$t_rs ) {
-					$t_result = false;
+				if( $t_db_exists ) {
+					print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
+				} else {
 					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
 					$t_install_state--; # db creation failed, allow user to re-enter user/password info
-				} else {
-					print_test_result( GOOD );
-					$t_db_open = true;
-				}
-			} else {
-				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
-					'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci',
-				) );
-				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
-				if( $t_ret == 2 ) {
-					print_test_result( GOOD );
-					$t_db_open = true;
-				} else {
-					$t_error = db_error_msg();
-					if( $f_db_type == 'oci8' ) {
-						$t_db_exists = preg_match( '/ORA-01920/', $t_error );
-					} else {
-						$t_db_exists = strstr( $t_error, 'atabase exists' );
-					}
-
-					if( $t_db_exists ) {
-						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
-					} else {
-						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
-						$t_install_state--; # db creation failed, allow user to re-enter user/password info
-					}
 				}
 			}
 		}
@@ -859,14 +799,6 @@ if( 3 == $t_install_state ) {
 	<?php
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				echo $g_db->errorMsg();
-			}
-		}
-
 		if( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
@@ -908,13 +840,6 @@ if( 3 == $t_install_state ) {
 		# Make sure we do the upgrades using UTF-8 if needed
 		if( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
 			$g_db->execute( 'SET NAMES UTF8' );
-		}
-
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				echo $g_db->errorMsg();
-			}
 		}
 
 		$t_dict = NewDataDictionary( $g_db );
@@ -1154,13 +1079,6 @@ if( 5 == $t_install_state ) {
 		. '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
 		. '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
 
-	switch( $f_db_type ) {
-		case 'db2':
-			$t_config .=  '$g_db_schema              = \'' . addslashes( $f_db_schema ) . '\';' . PHP_EOL;
-			break;
-		default:
-			break;
-	}
 	$t_config .= PHP_EOL;
 
 	# Add lines for table prefix/suffix if different from default
@@ -1200,7 +1118,6 @@ if( 5 == $t_install_state ) {
 		if( ( $f_hostname != config_get( 'hostname', '' ) ) ||
 			( $f_db_type != config_get( 'db_type', '' ) ) ||
 			( $f_database_name != config_get( 'database_name', '' ) ) ||
-			( $f_db_schema != config_get( 'db_schema', '' ) ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
 			print_test_result( BAD, false, 'file ' . $t_config_filename . ' already exists and has different settings' );
@@ -1290,13 +1207,6 @@ if( 6 == $t_install_state ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result( BAD, false, 'Database user does not have access to the database ( ' . db_error_msg() . ' )' );
-	}
-
-	if( $f_db_type == 'db2' ) {
-		$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-		if( $t_result === false ) {
-			echo $g_db->errorMsg();
-		}
 	}
 	?>
 </tr>

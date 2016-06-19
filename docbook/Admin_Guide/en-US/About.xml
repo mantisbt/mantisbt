@@ -16,7 +16,7 @@
             and gained a lot of popularity, and now it has become one of the most
             popular open source bug/issue tracking systems.  MantisBT is developed
             in PHP, with support to multiple database backends including MySQL,
-            MS SQL, PostgreSQL and DB2.
+            MS SQL and PostgreSQL.
         </para>
 
         <para>

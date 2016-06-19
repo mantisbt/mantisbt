@@ -171,8 +171,7 @@
 									mysql/mysqli,
 									pgsql,
 									oci8,
-									sqlsrv,
-									ibm-db2
+									sqlsrv
 								)
 							</para></listitem>
 
@@ -223,12 +222,6 @@
 							Microsoft SQL Server and
 							Oracle.
 					</para>
-					<note><para>
-						DB2 is deprecated. Since none of the MantisBT core
-						developers have access to this platform, support
-						is very limited and likely to be removed in the
-						future.
-					</para></note>
 				</listitem>
 
 			</itemizedlist>
@@ -260,12 +253,6 @@
 								<entry>7.0</entry>
 								<entry>9.x</entry>
 								<entry>PHP extension: pgsql</entry>
-							</row>
-							<row>
-								<entry>IBM DB2</entry>
-								<entry></entry>
-								<entry></entry>
-								<entry>PHP extension: ibm-db2</entry>
 							</row>
 							<row>
 								<entry>MS SQL Server</entry>

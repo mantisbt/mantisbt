@@ -122,11 +122,10 @@ $g_db_param = new MantisDbParam();
  * @param string  $p_username      Database server username.
  * @param string  $p_password      Database server password.
  * @param string  $p_database_name Database name.
- * @param string  $p_db_schema     Schema name (only used if database type is DB2).
  * @param boolean $p_pconnect      Use a Persistent connection to database.
  * @return boolean indicating if the connection was successful
  */
-function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
+function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db;
 	$t_db_type = config_get_global( 'db_type' );
 
@@ -154,13 +153,6 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			# @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 			# @todo Is this needed for other databases?
 			db_query( 'SET NAMES UTF8' );
-		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-			$t_result2 = db_query( 'set schema ' . $p_db_schema );
-			if( $t_result2 === false ) {
-				db_error();
-				trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-				return false;
-			}
 		}
 	} else {
 		db_error();
@@ -208,9 +200,6 @@ function db_check_database_support( $p_db_type ) {
 			break;
 		case 'oci8':
 			$t_support = function_exists( 'OCILogon' );
-			break;
-		case 'db2':
-			$t_support = function_exists( 'db2_connect' );
 			break;
 		case 'odbc_mssql':
 			$t_support = function_exists( 'odbc_connect' );
@@ -265,21 +254,6 @@ function db_is_mssql() {
 		case 'mssql':
 		case 'mssqlnative':
 		case 'odbc_mssql':
-			return true;
-	}
-
-	return false;
-}
-
-/**
- * Checks if the database driver is DB2
- * @return boolean true if db2
- */
-function db_is_db2() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'db2':
 			return true;
 	}
 
@@ -775,9 +749,6 @@ function db_prepare_string( $p_string ) {
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			return addslashes( $p_string );
-		case 'db2':
-			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 		case 'mysql':
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
@@ -1010,14 +981,9 @@ function db_get_table( $p_name ) {
  * @return array containing table names
  */
 function db_get_table_list() {
-	global $g_db, $g_db_schema;
+	global $g_db;
 
-	if( db_is_db2() ) {
-		# must pass schema
-		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
-	} else {
-		$t_tables = $g_db->MetaTables( 'TABLE' );
-	}
+	$t_tables = $g_db->MetaTables( 'TABLE' );
 	return $t_tables;
 }
 

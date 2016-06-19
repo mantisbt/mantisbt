@@ -44,12 +44,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_db_schema</term>
-			<listitem>
-				<para>The database schema (used in case of DB2), otherwise should be left blank.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_db_type</term>
 			<listitem>
 				<para>The supported database types are listed in the table
@@ -98,12 +92,6 @@
 								<entry>oci8</entry>
 								<entry>oci8</entry>
 								<entry/>
-							</row>
-							<row>
-								<entry>IBM DB2</entry>
-								<entry>db2</entry>
-								<entry>db2</entry>
-								<entry>experimental</entry>
 							</row>
 						</tbody>
 					</tgroup>
