@@ -164,7 +164,6 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 			</span>
 		</span>
-		<span class="floatright">
 <?php
 	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 		echo '&#160;';
@@ -173,7 +172,6 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 		print_form_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
 	}
 ?>
-		</span>
 	</td>
 	<td>
 		<?php echo $v_description ?>
