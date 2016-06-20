@@ -789,8 +789,9 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		# Add custom options
 		$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
 		$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
+		//pre_var_dump($t_menu_options);
 		foreach ($t_menu_options as $link) {
-			layout_sidebar_menu($link, 'Like Trello', 'fa-trello');
+			layout_sidebar_menu($link->href, $link->name, $link->icon);
 		}
 
 		# Time Tracking / Billing
