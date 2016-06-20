@@ -624,7 +624,7 @@ if( $t_show_attachments ) {
 ?>
 	<tr>
 		<th class="category">
-			<label for="file"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
+			<label for="ufile[]"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
 			<br />
 			<?php print_max_filesize( $t_max_file_size ); ?>
 		</th>
@@ -637,17 +637,7 @@ if( $t_show_attachments ) {
 			</div>
 			<div class="fallback">
 				<div class="dz-message" data-dz-message></div>
-<?php
-		# Display multiple file upload fields
-		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
-?>
 			<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
-<?php
-			if( $t_file_upload_max_num > 1 ) {
-				echo '<br />';
-			}
-		}
-?>
 			</div>
 		</td>
 	</tr>

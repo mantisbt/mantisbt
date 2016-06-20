@@ -159,17 +159,7 @@ require_api( 'lang_api.php' );
 						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
 					</div>
 					<div class="fallback">
-					<?php
-					# Display multiple file upload fields
-					for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
-						?>
 						<input id="ufile[]" name="ufile[]" type="file" size="50" />
-						<?php
-						if( $t_file_upload_max_num > 1 ) {
-							echo '<br />';
-						}
-					}
-					?>
 					</div>
 				</td>
 			</tr>
