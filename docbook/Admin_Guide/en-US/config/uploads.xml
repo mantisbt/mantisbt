@@ -54,6 +54,7 @@
 			<term>$g_file_upload_max_num</term>
 			<listitem>
 				<para>Maximum number of files that can be uploaded simultaneously.
+					Default value is 10.
 				</para>
 			</listitem>
 		</varlistentry>

@@ -1714,7 +1714,7 @@ $g_max_file_size = 5000000;
  * Maximum number of files that can be uploaded simultaneously
  * @global integer $g_file_upload_max_num
  */
-$g_file_upload_max_num = 1;
+$g_file_upload_max_num = 10;
 
 /**
  * Files that are allowed or not allowed.  Separate items by commas.
