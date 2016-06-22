@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author امین اکبر
  * @author عثمان خان شاہ
  * @author محبوب عالم
  */
@@ -588,6 +589,7 @@ $s_edit_news_link = 'خبري تبدیل کرو';
 $s_docs_link = 'ڈاکس';
 $s_logout_link = 'لاگ آوٹ';
 $s_my_view_link = 'میرا ویو';
+$s_invite_users = 'صارفین کو مدعو کریں';
 $s_my_view_title_unassigned = 'سپرد نہی کیا گیا';
 $s_my_view_title_recent_mod = 'تھوڈی دیر پہلے تبدیل کیا گیا';
 $s_my_view_title_reported = 'میری طرف سے  رپورٹ';
@@ -993,3 +995,9 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'درخو�
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'یہ کام دوسرے ایشوذوں پر لوپ بنا دے  گا .';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'آپ چلا نے کے عمل کو تبدیل نہی کر سکتے صرف انتظامیہ یہ کام کر سکتی ھے.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = ' صہفے  پر واپس جانے کی حرابی ھے یقین کر لیں کوی جگہ پی ایچ پی کے خانے سے باہر تو نہی (&ایل ٹی;?پی ایج پی ?&جی ٹی;) مین config_inc.php یا custom_*.php files.';
+$s_dropzone_default_message = 'اپ لوڈ کرنے کے لیے فائلیں یہاں چھوڑیں (یا کلک کریں)';
+$s_dropzone_file_too_big = 'فائل بہت بڑی ({{filesize}}میبی بائٹ) ہے۔ زیادہ سے زیادہ فائل کے حجم کی حد {{maxFilesize}} میبی بائٹ۔';
+$s_dropzone_invalid_file_type = 'آپ اس قسم کی فائل اپ لوڈ نہیں کر سکتے';
+$s_dropzone_response_error = 'سرور نے {{statusCode}} کوڈ کے ساتھ جواب دیاہے۔';
+$s_dropzone_cancel_upload = 'اپ لوڈ منسوخ کریں';
+$s_dropzone_cancel_upload_confirmation = 'کیا آپ کو یقین ہے کہ آپ اپ لوڈ منسوخ کرنا چاہتے ہیں؟';

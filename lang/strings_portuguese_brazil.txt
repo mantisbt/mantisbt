@@ -47,6 +47,7 @@
  * @author Gusta
  * @author Jefersonfoliveira
  * @author Luckas
+ * @author LucyDiniz
  * @author Luigipiccoli
  * @author Luk3
  * @author Macofe
@@ -780,6 +781,7 @@ $s_edit_news_link = 'Alterar Notícias';
 $s_docs_link = 'Docs.';
 $s_logout_link = 'Sair';
 $s_my_view_link = 'Minha Visão';
+$s_invite_users = 'Convidar Usuários';
 $s_my_view_title_unassigned = 'Não Atribuídos';
 $s_my_view_title_recent_mod = 'Modificados Recentemente';
 $s_my_view_title_reported = 'Relatados por Mim';
@@ -1379,3 +1381,12 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Essa incidência foi atualizada por
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Você atingiu o limite permitido de atividade de %d nos últimos %d segundos, suas ações foram bloqueados para evitar spam\'s, por favor, tente novamente mais tarde.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'O campo "%1$s" deve ser menor ou igual á %2$d caracteres.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'O nome do Token API "%s" já esta em uso. Por favor, volte e selecione outro.';
+$s_dropzone_default_message = 'Arraste os arquivos até aqui para carregá-los (ou clique)';
+$s_dropzone_fallback_message = 'Seu navegador não permite carregamento de arquivos arrastando (drag\'n\'drop)';
+$s_dropzone_file_too_big = 'O arquivo é muito pesado ({{filesize}}MiB). Tamanho máximo de arquivo: {{maxFilesize}}MiB.';
+$s_dropzone_invalid_file_type = 'Você não pode carregar arquivos deste tipo.';
+$s_dropzone_response_error = 'O servidor respondeu com o código {{statusCode}}';
+$s_dropzone_cancel_upload = 'Cancelar upload';
+$s_dropzone_cancel_upload_confirmation = 'Você tem certeza que deseja cancelar este carregamento?';
+$s_dropzone_remove_file = 'Remover arquivo';
+$s_dropzone_max_files_exceeded = 'Você não pode carregar mais arquivos.';

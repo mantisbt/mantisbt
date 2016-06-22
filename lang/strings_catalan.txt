@@ -46,6 +46,7 @@
  * @author Jaumeortola
  * @author Macofe
  * @author Martorell
+ * @author Medol
  * @author Paucabot
  * @author Pitort
  * @author Ricard.nacher.roig
@@ -733,6 +734,7 @@ $s_edit_news_link = 'Edita Notícies';
 $s_docs_link = 'Documents';
 $s_logout_link = 'Sortida';
 $s_my_view_link = 'La meva vista';
+$s_invite_users = 'Convidar usuaris';
 $s_my_view_title_unassigned = 'No Assignats';
 $s_my_view_title_recent_mod = 'Modificat Recentment';
 $s_my_view_title_reported = 'Informats per Mi';
@@ -1284,3 +1286,11 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'No es pot accedir a aquesta pàgi
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'El camp d\'ordre és invàlid.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Format de la data invàlid.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'No es pot actualitzar el fus horari.';
+$s_dropzone_default_message = 'Deixeu anar aquí els arxius per carregar (o feu clic)';
+$s_dropzone_fallback_message = 'Amb el seu navegador no pot arrossegar i deixar fitxers per carregar-los.';
+$s_dropzone_invalid_file_type = 'Vostè no pot pujar arxius d\'aquest tipus.';
+$s_dropzone_response_error = 'El servidor respon amb el codi {{statusCode}}.';
+$s_dropzone_cancel_upload = 'Cancel·lar la càrrega';
+$s_dropzone_cancel_upload_confirmation = 'Segur que voleu cancel·lar aquesta càrrega?';
+$s_dropzone_remove_file = 'Elimina el fitxer';
+$s_dropzone_max_files_exceeded = 'No pot pujar més fitxers.';

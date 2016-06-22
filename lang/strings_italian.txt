@@ -38,9 +38,11 @@
  * @ingroup Language
  * @file
  *
+ * @author Alexmar983
  * @author Beta16
  * @author Darth Kule
  * @author Dregad
+ * @author Einreiher
  * @author Filippo
  * @author Giallu
  * @author Gianfranco
@@ -207,6 +209,7 @@ $s_myself = 'me stesso';
 $s_default_access_level = 'Livello di accesso di default';
 $s_issue_status_percentage = 'Stato anomalie (%)';
 $s_access_levels_enum_string = '10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore';
+$s_no_access = 'nessun accesso';
 $s_project_status_enum_string = '10:sviluppo,30:release,50:stabile,70:obsoleto';
 $s_project_view_state_enum_string = '10:pubblico,50:privato';
 $s_view_state_enum_string = '10:pubblico,50:privato';
@@ -785,6 +788,7 @@ $s_edit_news_link = 'Modifica notizie';
 $s_docs_link = 'Documentazione';
 $s_logout_link = 'Esci';
 $s_my_view_link = 'Riepilogo personale';
+$s_invite_users = 'Invita utenti';
 $s_my_view_title_unassigned = 'Non assegnate';
 $s_my_view_title_recent_mod = 'Modificate recentemente';
 $s_my_view_title_reported = 'Segnalate da me';
@@ -1385,3 +1389,12 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Questa anomalia è stata aggiornata
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'È stato raggiunto il limite di attività permesso di %d eventi negli ultimi %d secondi; l\'azione è stata bloccata per evitare lo spam, si prega di riprovare più tardi.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'il campo "%1$s" deve avere una lunghezza massima di %2$d carattere/i.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Il nome del token API "%s" è già in uso. Si prega di tornare indietro e selezionarne un altro.';
+$s_dropzone_default_message = 'Trascina qua i files per caricarli (oppure clicca)';
+$s_dropzone_fallback_message = 'Il tuo browser non supporta il caricamento dei file mediante il <i>clicca e trascina</i>.';
+$s_dropzone_file_too_big = 'Il file è troppo grande ({{filesize}} MiB). Dimensione massima file: {{maxFilesize}} MiB.';
+$s_dropzone_invalid_file_type = 'Non puoi caricare file di questo tipo.';
+$s_dropzone_response_error = 'Il server ha restituito il codice {{statusCode}}.';
+$s_dropzone_cancel_upload = 'Annulla caricamento';
+$s_dropzone_cancel_upload_confirmation = 'Sei sicuro di voler annullare questo caricamento?';
+$s_dropzone_remove_file = 'Rimuovi file';
+$s_dropzone_max_files_exceeded = 'Non puoi più caricare altri file.';
