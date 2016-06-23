@@ -20,8 +20,8 @@ item is subject to the terms of the GPL in place of the foregoing conditions (to
 
 
 
-Author affirmation of MantisBT usage requires extended license:
-===============================================================
+Author's confirmation that MantisBT usage is covered by the purchased Extended License:
+=======================================================================================
 
 Subject: RE: Extended License for MantisBT
 Date: June 21, 2016 at 10:26:13 PM PDT
