@@ -1,0 +1,42 @@
+MantisBT holds extended license for Ace-Admin theme used in building the Modern UI.
+
+Extended License Terms:
+=======================
+
+This license must be purchased if you intend to license, sublicense, redistribute, or resell the final product.
+
+1. Your use of the item may extend to multiple installations.
+2. You may use the item in work which you are creating for your own purposes or for your clients.
+3. You may license, sublicense, redistribute, or resell the item in the following circumstances:
+	3.1: the item is incorporated into a larger work you have created; or
+	3.2: if you modify the item and resell the end product.
+4. If the item contains licensed components, those components must only be used within the item and you must not extract
+and use them on a stand-alone basis.
+5. If the item was created using materials which are the subject of a GNU General Public License (GPL), your use of the
+item is subject to the terms of the GPL in place of the foregoing conditions (to the extent the GPL applies).
+
+
+*** MantisBT core team is in possession of the proof of purchase for this license ***
+
+
+
+Author affirmation of MantisBT usage requires extended license:
+===============================================================
+
+Subject: RE: Extended License for MantisBT
+Date: June 21, 2016 at 10:26:13 PM PDT
+To: Rafik Robeal <rafik@mantishub.net>
+
+Hello Rafik,
+
+Thank you for using Ace admin. I'm really glad you have been using it and your users liked it as well.
+And congratulations for MantisBT. It looks like a great service.
+
+About your question if you have an extended license that pretty much covers your case. That is, you can make a product
+with Ace as part of it and distribute it.
+
+Hope that helps,
+Let me know if you have a question
+
+Kind Regards,
+Mohsen
