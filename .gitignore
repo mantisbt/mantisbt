@@ -19,6 +19,7 @@ docbook/*/tmp
 
 # Build output
 build/
+node_modules/
 
 # Untracked plugins
 plugins/*
