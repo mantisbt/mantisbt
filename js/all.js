@@ -1,3 +1,105 @@
+var begin_form = '';
+var form_fields = new Array();
+var serialized_form_fields = new Array();
+$(document).ready(function(){
+	var i = 0;
+	$('[name=filters_open]').find('input').each(function() {
+		var formname = $(this).parent('form').attr('name');
+		if( formname != 'list_queries_open' && formname != 'open_queries' && formname != 'save_query' ) {
+			// serialize the field and add it to an array
+
+			if( $.inArray($(this).attr('name'),form_fields) == -1 ) {
+				form_fields[i] = $(this).attr('name');
+				i++;
+			}
+		}
+	});
+	$.each( form_fields, function (index, value) {
+		var escaped_field_name = value.replace(/\[\]/g, '\\[\\]');
+		serialized_form_fields[value] = $('[name=filters_open]').find('[name=' + escaped_field_name + ']').serialize();
+	});
+
+	/* Set up events to modify the form css to show when a stored query has been modified */
+	begin_form = $('[name=filters_open]').serialize();
+
+	$(document).on('change', ':input', function() {
+		filter_highlight_changes($(this));
+	});
+	$(document).on('click', ':checkbox', function() {
+		filter_highlight_changes($(this));
+	});
+});
+
+function filter_toggle_field_changed(field) {
+	var field_type = field.attr('type');
+	var starting_value = serialized_form_fields[field.attr('name')];
+	var current_value = field.serialize();
+
+	// unchecked boxes start as undefined but if checked and then unchecked it
+	// is no longer undefined so the comparison breaks.  Reset it to undefined.
+	if( field_type=='checkbox' && current_value == '') {
+		current_value = undefined;
+	}
+	if( current_value != starting_value ) {
+		// field is changed
+		filter_field_dirty(field);
+	} else {
+		// field is not changed
+		filter_field_clean(field);
+	}
+}
+
+function filter_highlight_changes(item) {
+	filter_toggle_field_changed( item );
+
+	/* Check if form is different that started with */
+	var changed_form = $('[name=filters_open]').serialize();
+	if( begin_form == changed_form ) {
+		filter_clean_all();
+	}
+}
+
+function filter_named_filter_clean() {
+	/* be sure it's clean whether it's stored filter or not */
+	var selected_text = $('[name=source_query_id] option:selected').html();
+	if(selected_text && selected_text.charAt(0) == '*' ) {
+		$('[name=source_query_id]').removeClass('tainted');
+		var reset_text = selected_text.substring(2,selected_text.length);
+		$('[name=source_query_id] option:selected').html(reset_text);
+	}
+}
+
+function filter_named_filter_dirty() {
+	var stored_query_id = $('[name=source_query_id]').val();
+	if( stored_query_id == -1 ) {
+		/* Only make it dirty if it's a stored filter */
+		return;
+	}
+	/* stored query in filter is tainted */
+	var selected_text = $('[name=source_query_id] option:selected').html();
+	if( selected_text.charAt(0) != '*' ) {
+		$('[name=source_query_id] option:selected').prepend('* ');
+		$('[name=source_query_id]').addClass('tainted');
+	}
+}
+
+function filter_field_clean( item ) {
+	item.parent().removeClass('tainted');
+}
+function filter_field_dirty( item ) {
+	if( !item.parent().hasClass('tainted') ) {
+		filter_named_filter_dirty();
+		item.parent().addClass('tainted');
+	}
+}
+
+function filter_clean_all() {
+	filter_named_filter_clean();
+	$('.tainted').each(function() {
+		$(this).removeClass('tainted');
+	});
+}
+
 /*
 # Mantis - a php based bugtracking system
 
@@ -451,3 +553,125 @@ function toggleDisplay(idTag)
 {
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
 }
+
+/*
+# Mantis - a php based bugtracking system
+
+# Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright 2013 MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+$(document).ready( function() {
+
+/**
+ * On Change event for database type selection list
+ * Preset prefix, plugin prefix and suffix fields when changing db type
+ */
+$('#db_type').change(
+	function () {
+		var db;
+		if ($(this).val() == 'oci8') {
+			db = 'oci8';
+		} else {
+			db = 'other';
+		}
+
+		$('#default_' + db + ' span').each(
+			function (i, el) {
+				var target = $('#' + $(el).attr('name'));
+				var oldVal = target.data('defval');
+				// Only change the value if not changed from default
+				if (typeof oldVal === 'undefined' || oldVal == target.val()) {
+					target.val($(el).text());
+				}
+				// Store default value
+				target.data('defval', $(el).text());
+			}
+		);
+	}
+).change();
+
+});
+
+/*
+# Mantis - a php based bugtracking system
+
+# Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright 2002 MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$(document).ready( function() {
+	// Captcha refresh
+	$('#captcha-image, #captcha-refresh li a').click( function(e) {
+		var img = $('#captcha-image img');
+		var captcha = img.attr('src');
+		img.attr('src', captcha.split('?', 1) + '?' + Math.random());
+		$('#captcha-field').focus();
+		e.preventDefault();
+	});
+});
+
+/*
+# Mantis - a php based bugtracking system
+
+# Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright 2002 MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+
+# Mantis is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# Mantis is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Handle switching between textarea custom field type and other types
+$(document).ready(function() {
+  $('#custom-field-type').on('change', function() {
+    if($(this).val() == 10) {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
+      $('#custom-field-default-value').closest('.input').hide();
+      $('#custom-field-default-value').attr('disabled', 'disabled');
+      $('#custom-field-default-value-textarea').closest('.textarea').show();
+      $('#custom-field-default-value-textarea').removeAttr('disabled');
+    } else {
+      $('#custom-field-default-value-textarea').closest('.textarea').hide();
+      $('#custom-field-default-value-textarea').attr('disabled', 'disabled');
+      $('#custom-field-default-value').closest('.input').show();
+      $('#custom-field-default-value').removeAttr('disabled');
+    }
+  });
+  $('#custom-field-type').trigger('change');
+});

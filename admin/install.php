@@ -94,9 +94,7 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 #	7 = done, link to login or db updater
 $t_install_state = gpc_get_int( 'install', 0 );
 
-layout_page_header_begin( 'Administration - Installation' );
-html_javascript_link( 'install.js' );
-layout_page_header_end();
+layout_page_header( 'Administration - Installation' );
 
 layout_admin_page_begin();
 ?>
