@@ -298,7 +298,7 @@ function html_head_javascript() {
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
 	}
 
-	html_javascript_link( 'all.min.js' );
+	html_javascript_link( 'mantis.min.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );
 	}
