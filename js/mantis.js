@@ -1,20 +1,22 @@
+'use strict';
+
 var begin_form = '';
 var form_fields = new Array();
 var serialized_form_fields = new Array();
-$(document).ready(function(){
+$(document).ready(function () {
 	var i = 0;
-	$('[name=filters_open]').find('input').each(function() {
+	$('[name=filters_open]').find('input').each(function () {
 		var formname = $(this).parent('form').attr('name');
-		if( formname != 'list_queries_open' && formname != 'open_queries' && formname != 'save_query' ) {
+		if (formname != 'list_queries_open' && formname != 'open_queries' && formname != 'save_query') {
 			// serialize the field and add it to an array
 
-			if( $.inArray($(this).attr('name'),form_fields) == -1 ) {
+			if ($.inArray($(this).attr('name'), form_fields) == -1) {
 				form_fields[i] = $(this).attr('name');
 				i++;
 			}
 		}
 	});
-	$.each( form_fields, function (index, value) {
+	$.each(form_fields, function (index, value) {
 		var escaped_field_name = value.replace(/\[\]/g, '\\[\\]');
 		serialized_form_fields[value] = $('[name=filters_open]').find('[name=' + escaped_field_name + ']').serialize();
 	});
@@ -22,10 +24,10 @@ $(document).ready(function(){
 	/* Set up events to modify the form css to show when a stored query has been modified */
 	begin_form = $('[name=filters_open]').serialize();
 
-	$(document).on('change', ':input', function() {
+	$(document).on('change', ':input', function () {
 		filter_highlight_changes($(this));
 	});
-	$(document).on('click', ':checkbox', function() {
+	$(document).on('click', ':checkbox', function () {
 		filter_highlight_changes($(this));
 	});
 });
@@ -37,10 +39,10 @@ function filter_toggle_field_changed(field) {
 
 	// unchecked boxes start as undefined but if checked and then unchecked it
 	// is no longer undefined so the comparison breaks.  Reset it to undefined.
-	if( field_type=='checkbox' && current_value == '') {
+	if (field_type == 'checkbox' && current_value == '') {
 		current_value = undefined;
 	}
-	if( current_value != starting_value ) {
+	if (current_value != starting_value) {
 		// field is changed
 		filter_field_dirty(field);
 	} else {
@@ -50,11 +52,11 @@ function filter_toggle_field_changed(field) {
 }
 
 function filter_highlight_changes(item) {
-	filter_toggle_field_changed( item );
+	filter_toggle_field_changed(item);
 
 	/* Check if form is different that started with */
 	var changed_form = $('[name=filters_open]').serialize();
-	if( begin_form == changed_form ) {
+	if (begin_form == changed_form) {
 		filter_clean_all();
 	}
 }
@@ -62,32 +64,32 @@ function filter_highlight_changes(item) {
 function filter_named_filter_clean() {
 	/* be sure it's clean whether it's stored filter or not */
 	var selected_text = $('[name=source_query_id] option:selected').html();
-	if(selected_text && selected_text.charAt(0) == '*' ) {
+	if (selected_text && selected_text.charAt(0) == '*') {
 		$('[name=source_query_id]').removeClass('tainted');
-		var reset_text = selected_text.substring(2,selected_text.length);
+		var reset_text = selected_text.substring(2, selected_text.length);
 		$('[name=source_query_id] option:selected').html(reset_text);
 	}
 }
 
 function filter_named_filter_dirty() {
 	var stored_query_id = $('[name=source_query_id]').val();
-	if( stored_query_id == -1 ) {
+	if (stored_query_id == -1) {
 		/* Only make it dirty if it's a stored filter */
 		return;
 	}
 	/* stored query in filter is tainted */
 	var selected_text = $('[name=source_query_id] option:selected').html();
-	if( selected_text.charAt(0) != '*' ) {
+	if (selected_text.charAt(0) != '*') {
 		$('[name=source_query_id] option:selected').prepend('* ');
 		$('[name=source_query_id]').addClass('tainted');
 	}
 }
 
-function filter_field_clean( item ) {
+function filter_field_clean(item) {
 	item.parent().removeClass('tainted');
 }
-function filter_field_dirty( item ) {
-	if( !item.parent().hasClass('tainted') ) {
+function filter_field_dirty(item) {
+	if (!item.parent().hasClass('tainted')) {
 		filter_named_filter_dirty();
 		item.parent().addClass('tainted');
 	}
@@ -95,10 +97,11 @@ function filter_field_dirty( item ) {
 
 function filter_clean_all() {
 	filter_named_filter_clean();
-	$('.tainted').each(function() {
+	$('.tainted').each(function () {
 		$(this).removeClass('tainted');
 	});
 }
+'use strict';
 
 /*
 # Mantis - a php based bugtracking system
@@ -129,78 +132,77 @@ var g_collapse_clear = 1;
 var a = navigator.userAgent.indexOf("MSIE");
 var style_display;
 
-if (a!= -1) {
+if (a != -1) {
 	style_display = 'block';
 } else {
 	style_display = 'table-row';
 }
 style_display = 'block';
 
-$(document).ready( function() {
-    $('.collapse-open').show();
-    $('.collapse-closed').hide();
-    $('.collapse-link').click( function(event) {
-        event.preventDefault();
-        var id = $(this).attr('id');
-        var t_pos = id.indexOf('_closed_link' );
-        if( t_pos == -1 ) {
-            t_pos = id.indexOf('_open_link' );
-        }
-        var t_div = id.substring(0, t_pos );
-        ToggleDiv( t_div );
-    });
-
-    $('.widget-box').on('shown.ace.widget' , function(event) {
-       var t_id = $(this).attr('id');
-       var t_cookie = GetCookie( "collapse_settings" );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace("|" + t_id + ",1", '' );
-        t_cookie = t_cookie + "|" + t_id + ",0";
-        SetCookie( "collapse_settings", t_cookie );
+$(document).ready(function () {
+	$('.collapse-open').show();
+	$('.collapse-closed').hide();
+	$('.collapse-link').click(function (event) {
+		event.preventDefault();
+		var id = $(this).attr('id');
+		var t_pos = id.indexOf('_closed_link');
+		if (t_pos == -1) {
+			t_pos = id.indexOf('_open_link');
+		}
+		var t_div = id.substring(0, t_pos);
+		ToggleDiv(t_div);
 	});
 
-    $('.widget-box').on('hidden.ace.widget' , function(event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie( "collapse_settings" );
-        if ( 1 == g_collapse_clear ) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        t_cookie = t_cookie.replace( "|" + t_id + ",0", '' );
-        t_cookie = t_cookie + "|" + t_id + ",1";
-        SetCookie( "collapse_settings", t_cookie );
-    });
+	$('.widget-box').on('shown.ace.widget', function (event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie("collapse_settings");
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace("|" + t_id + ",1", '');
+		t_cookie = t_cookie + "|" + t_id + ",0";
+		SetCookie("collapse_settings", t_cookie);
+	});
 
-    $('#sidebar.sidebar-toggle').on('click', function (event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie("collapse_settings");
-        if (1 == g_collapse_clear) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        if( $(this).parent().hasClass( "menu-min" ) ) {
-            t_cookie = t_cookie.replace("|" + t_id + ",1", '');
-            t_cookie = t_cookie + "|" + t_id + ",0";
-        } else {
-            t_cookie = t_cookie.replace("|" + t_id + ",0", '');
-            t_cookie = t_cookie + "|" + t_id + ",1";
-        }
-        SetCookie("collapse_settings", t_cookie);
-    });
+	$('.widget-box').on('hidden.ace.widget', function (event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie("collapse_settings");
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		t_cookie = t_cookie.replace("|" + t_id + ",0", '');
+		t_cookie = t_cookie + "|" + t_id + ",1";
+		SetCookie("collapse_settings", t_cookie);
+	});
 
+	$('#sidebar.sidebar-toggle').on('click', function (event) {
+		var t_id = $(this).attr('id');
+		var t_cookie = GetCookie("collapse_settings");
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		}
+		if ($(this).parent().hasClass("menu-min")) {
+			t_cookie = t_cookie.replace("|" + t_id + ",1", '');
+			t_cookie = t_cookie + "|" + t_id + ",0";
+		} else {
+			t_cookie = t_cookie.replace("|" + t_id + ",0", '');
+			t_cookie = t_cookie + "|" + t_id + ",1";
+		}
+		SetCookie("collapse_settings", t_cookie);
+	});
 
-    $('input[type=text].autocomplete').autocomplete({
-		source: function(request, callback) {
+	$('input[type=text].autocomplete').autocomplete({
+		source: function source(request, callback) {
 			var fieldName = $(this).attr('element').attr('id');
 			var postData = {};
-			postData['entrypoint']= fieldName + '_get_with_prefix';
+			postData['entrypoint'] = fieldName + '_get_with_prefix';
 			postData[fieldName] = request.term;
-			$.getJSON('xmlhttprequest.php', postData, function(data) {
+			$.getJSON('xmlhttprequest.php', postData, function (data) {
 				var results = [];
-				$.each(data, function(i, value) {
+				$.each(data, function (i, value) {
 					var item = {};
 					item.label = $('<div/>').text(value).html();
 					item.value = value;
@@ -211,7 +213,7 @@ $(document).ready( function() {
 		}
 	});
 
-	$('a.dynamic-filter-expander').click(function(event) {
+	$('a.dynamic-filter-expander').click(function (event) {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
 		var targetID = fieldID + '_target';
@@ -222,11 +224,11 @@ $(document).ready( function() {
 			data: 'view_type=' + viewType + '&filter_target=' + fieldID,
 			cache: false,
 			context: $('#' + targetID),
-			success: function(html) {
+			success: function success(html) {
 				$(this).html(html);
 			},
-			error: function(obj,status,error) {
-				$(this).html('<span class="error-msg">' + status + ': ' + error + '</span>');
+			error: function error(obj, status, _error) {
+				$(this).html('<span class="error-msg">' + status + ': ' + _error + '</span>');
 			}
 		});
 	});
@@ -234,7 +236,7 @@ $(document).ready( function() {
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
 	var checkAllSelectors = '';
-	$(':checkbox.check_all').each(function() {
+	$(':checkbox.check_all').each(function () {
 		var baseFieldName = $(this).attr('name').replace(/_all$/, '');
 		if (checkAllSelectors.length > 0) {
 			checkAllSelectors += ', ';
@@ -242,14 +244,14 @@ $(document).ready( function() {
 		checkAllSelectors += ':checkbox[name="' + baseFieldName + '[]"]';
 	});
 	if (checkAllSelectors.length > 0) {
-		$(checkAllSelectors).click(function() {
+		$(checkAllSelectors).click(function () {
 			var fieldName = $(this).attr('name').replace(/\[\]/g, '');
 			var checkedCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]:checked').length;
 			var totalCount = $(this).closest('form').find(':checkbox[name="' + fieldName + '[]"]').length;
 			var allSelected = checkedCount == totalCount;
 			$(this).closest('form').find(':checkbox[name=' + fieldName + '_all]').prop('checked', allSelected);
 		});
-		$(':checkbox.check_all').click(function() {
+		$(':checkbox.check_all').click(function () {
 			var baseFieldName = $(this).attr('name').replace(/_all$/, '');
 			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').prop('checked', $(this).is(':checked'));
 		});
@@ -258,7 +260,7 @@ $(document).ready( function() {
 	var stopwatch = {
 		timerID: null,
 		elapsedTime: 0,
-		tick: function() {
+		tick: function tick() {
 			this.elapsedTime += 1000;
 			var seconds = Math.floor(this.elapsedTime / 1000) % 60;
 			var minutes = Math.floor(this.elapsedTime / 60000) % 60;
@@ -275,26 +277,26 @@ $(document).ready( function() {
 			$('input[type=text].stopwatch_time').val(hours + ':' + minutes + ':' + seconds);
 			this.start();
 		},
-		reset: function() {
+		reset: function reset() {
 			this.stop();
 			this.elapsedTime = 0;
 			$('input[type=text].stopwatch_time').val('');
 		},
-		start: function() {
+		start: function start() {
 			this.stop();
 			var self = this;
-			this.timerID = window.setTimeout(function() {
+			this.timerID = window.setTimeout(function () {
 				self.tick();
 			}, 1000);
 		},
-		stop: function() {
+		stop: function stop() {
 			if (typeof this.timerID == 'number') {
 				window.clearTimeout(this.timerID);
 				delete this.timerID;
 			}
 		}
 	};
-	$('input[type=button].stopwatch_toggle').click(function() {
+	$('input[type=button].stopwatch_toggle').click(function () {
 		if (stopwatch.elapsedTime == 0) {
 			stopwatch.stop();
 			stopwatch.start();
@@ -307,12 +309,12 @@ $(document).ready( function() {
 			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
 		}
 	});
-	$('input[type=button].stopwatch_reset').click(function() {
+	$('input[type=button].stopwatch_reset').click(function () {
 		stopwatch.reset();
 		$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 	});
 
-	$('input[type=text].datetime').each(function(index, element) {
+	$('input[type=text].datetime').each(function (index, element) {
 		$(this).after('&nbsp;<i class="fa fa-calendar fa-lg datetime" id="' + element.id + '_datetime_button' + '"></i>');
 		Calendar.setup({
 			inputField: element.id,
@@ -323,34 +325,33 @@ $(document).ready( function() {
 		});
 	});
 
-
-	$('.bug-jump').find('[name=bug_id]').focus( function() {
+	$('.bug-jump').find('[name=bug_id]').focus(function () {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
-		if( $(this).val() == bug_label ) {
+		if ($(this).val() == bug_label) {
 			$(this).val('');
 			$(this).removeClass('field-default');
 		}
 	});
-	$('.bug-jump').find('[name=bug_id]').blur( function() {
+	$('.bug-jump').find('[name=bug_id]').blur(function () {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
-		if( $(this).val() == '' ) {
+		if ($(this).val() == '') {
 			$(this).val(bug_label);
 			$(this).addClass('field-default');
 		}
 	});
-	$('[name=source_query_id]').change( function() {
+	$('[name=source_query_id]').change(function () {
 		$(this).parent().submit();
 	});
 
 	/* Project selector: auto-switch on select */
-	$('#form-set-project-id').change( function() {
+	$('#form-set-project-id').change(function () {
 		$('#form-set-project').submit();
 	});
 	$('#project-selector').children('.button').hide();
 
 	setBugLabel();
 
-	$(document).on('click', 'input[type=checkbox]#use_date_filters', function() {
+	$(document).on('click', 'input[type=checkbox]#use_date_filters', function () {
 		if (!$(this).is(':checked')) {
 			$('div.filter-box select[name=start_year]').prop('disabled', true);
 			$('div.filter-box select[name=start_month]').prop('disabled', true);
@@ -369,10 +370,11 @@ $(document).ready( function() {
 	});
 
 	/* Handle custom field of date type */
-	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
+	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function () {
 		var table = $(this).closest('table');
-		switch(this.value) {
-			case '2': // between
+		switch (this.value) {
+			case '2':
+				// between
 				$(table).find("select[name*=_start_year]").prop('disabled', false);
 				$(table).find("select[name*=_start_month]").prop('disabled', false);
 				$(table).find("select[name*=_start_day]").prop('disabled', false);
@@ -385,7 +387,8 @@ $(document).ready( function() {
 			case '4': // before
 			case '5': // on
 			case '6': // after
-			case '7': // on or after
+			case '7':
+				// on or after
 				$(table).find("select[name*=_start_year]").prop('disabled', false);
 				$(table).find("select[name*=_start_month]").prop('disabled', false);
 				$(table).find("select[name*=_start_day]").prop('disabled', false);
@@ -409,7 +412,7 @@ $(document).ready( function() {
 
 	/* For Period.php bundled with the core MantisGraph plugin */
 	$('#dates > input[type=image].datetime').hide();
-	$('#period_menu > select#interval').change(function() {
+	$('#period_menu > select#interval').change(function () {
 		if ($(this).val() == 10) {
 			$('#dates > input[type=text].datetime').prop('disabled', false);
 			$('#dates > input[type=image].datetime').show();
@@ -419,7 +422,7 @@ $(document).ready( function() {
 		}
 	});
 
-	$(document).on('change', '#tag_select', function() {
+	$(document).on('change', '#tag_select', function () {
 		var tagSeparator = $('#tag_separator').val();
 		var currentTagString = $('#tag_string').val();
 		var newTagOptionID = $(this).val();
@@ -434,7 +437,7 @@ $(document).ready( function() {
 		$(this).val(0);
 	});
 
-	$('a.click-url').bind("click", function() {
+	$('a.click-url').bind("click", function () {
 		$(this).attr("href", $(this).attr("url"));
 	});
 });
@@ -442,7 +445,7 @@ $(document).ready( function() {
 function setBugLabel() {
 	var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
 	var field = $('.bug-jump').find('[name=bug_id]');
-	if( field.val() == '' ) {
+	if (field.val() == '') {
 		field.val(bug_label);
 		field.addClass('field-default');
 	}
@@ -451,7 +454,7 @@ function setBugLabel() {
 /*
  * String manipulation
  */
-function Trim( p_string ) {
+function Trim(p_string) {
 	if (typeof p_string != "string") {
 		return p_string;
 	}
@@ -461,18 +464,18 @@ function Trim( p_string ) {
 
 	// Trim beginning spaces
 
-	t_ch = t_string.substring( 0, 1 );
-	while ( t_ch == " " ) {
-		t_string = t_string.substring( 1, t_string.length );
-		t_ch = t_string.substring( 0, 1 );
+	t_ch = t_string.substring(0, 1);
+	while (t_ch == " ") {
+		t_string = t_string.substring(1, t_string.length);
+		t_ch = t_string.substring(0, 1);
 	}
 
 	// Trim trailing spaces
 
-	t_ch = t_string.substring( t_string.length-1, t_string.length );
-	while ( t_ch == " " ) {
-		t_string = t_string.substring( 0, t_string.length-1 );
-		t_ch = t_string.substring( t_string.length-1, t_string.length );
+	t_ch = t_string.substring(t_string.length - 1, t_string.length);
+	while (t_ch == " ") {
+		t_string = t_string.substring(0, t_string.length - 1);
+		t_ch = t_string.substring(t_string.length - 1, t_string.length);
 	}
 
 	return t_string;
@@ -481,20 +484,20 @@ function Trim( p_string ) {
 /*
  * Cookie functions
  */
-function GetCookie( p_cookie ) {
+function GetCookie(p_cookie) {
 	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_cookies = document.cookie;
 
-	t_cookies = t_cookies.split( ";" );
+	t_cookies = t_cookies.split(";");
 
 	var i = 0;
-	while( i < t_cookies.length ) {
-		var t_cookie = t_cookies[ i ];
+	while (i < t_cookies.length) {
+		var t_cookie = t_cookies[i];
 
-		t_cookie = t_cookie.split( "=" );
+		t_cookie = t_cookie.split("=");
 
-		if ( Trim( t_cookie[ 0 ] ) == t_cookie_name ) {
-			return( t_cookie[ 1 ] );
+		if (Trim(t_cookie[0]) == t_cookie_name) {
+			return t_cookie[1];
 		}
 		i++;
 	}
@@ -502,57 +505,56 @@ function GetCookie( p_cookie ) {
 	return -1;
 }
 
-function SetCookie( p_cookie, p_value ) {
+function SetCookie(p_cookie, p_value) {
 	var t_cookie_name = "MANTIS_" + p_cookie;
 	var t_expires = new Date();
 
-	t_expires.setTime( t_expires.getTime() + (365 * 24 * 60 * 60 * 1000));
+	t_expires.setTime(t_expires.getTime() + 365 * 24 * 60 * 60 * 1000);
 
 	document.cookie = t_cookie_name + "=" + p_value + "; expires=" + t_expires.toUTCString() + ";";
 }
 
-function ToggleDiv( p_div ) {
+function ToggleDiv(p_div) {
 	var t_open_div = '#' + p_div + "_open";
 	var t_closed_div = '#' + p_div + "_closed";
 
-	var t_cookie = GetCookie( "collapse_settings" );
-	if ( 1 == g_collapse_clear ) {
+	var t_cookie = GetCookie("collapse_settings");
+	if (1 == g_collapse_clear) {
 		t_cookie = "";
 		g_collapse_clear = 0;
 	}
 	var t_open_display = $(t_open_div).css('display');
 	$(t_open_div).toggle();
 
-	if( $(t_closed_div).length ) {
+	if ($(t_closed_div).length) {
 		$(t_closed_div).toggle();
 	}
 
-	if ( t_open_display == "none" ) {
-        t_cookie = t_cookie.replace( "|" + p_div + ":0", '' );
+	if (t_open_display == "none") {
+		t_cookie = t_cookie.replace("|" + p_div + ":0", '');
 		t_cookie = t_cookie + "|" + p_div + ":1";
 	} else {
-        t_cookie = t_cookie.replace( "|" + p_div + ":1", '' );
+		t_cookie = t_cookie.replace("|" + p_div + ":1", '');
 		t_cookie = t_cookie + "|" + p_div + ":0";
 	}
 
-	SetCookie( "collapse_settings", t_cookie );
+	SetCookie("collapse_settings", t_cookie);
 }
 
-function setDisplay(idTag, state)
-{
-	if(!document.getElementById(idTag)) alert('SetDisplay(): id '+idTag+' is empty');
+function setDisplay(idTag, state) {
+	if (!document.getElementById(idTag)) alert('SetDisplay(): id ' + idTag + ' is empty');
 	// change display visibility
-	if ( state != 0 ) {
+	if (state != 0) {
 		document.getElementById(idTag).style.display = style_display;
 	} else {
 		document.getElementById(idTag).style.display = 'none';
 	}
 }
 
-function toggleDisplay(idTag)
-{
-	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+function toggleDisplay(idTag) {
+	setDisplay(idTag, document.getElementById(idTag).style.display == 'none' ? 1 : 0);
 }
+'use strict';
 
 /*
 # Mantis - a php based bugtracking system
@@ -574,15 +576,13 @@ function toggleDisplay(idTag)
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$(document).ready(function () {
 
-$(document).ready( function() {
-
-/**
- * On Change event for database type selection list
- * Preset prefix, plugin prefix and suffix fields when changing db type
- */
-$('#db_type').change(
-	function () {
+	/**
+  * On Change event for database type selection list
+  * Preset prefix, plugin prefix and suffix fields when changing db type
+  */
+	$('#db_type').change(function () {
 		var db;
 		if ($(this).val() == 'oci8') {
 			db = 'oci8';
@@ -590,22 +590,19 @@ $('#db_type').change(
 			db = 'other';
 		}
 
-		$('#default_' + db + ' span').each(
-			function (i, el) {
-				var target = $('#' + $(el).attr('name'));
-				var oldVal = target.data('defval');
-				// Only change the value if not changed from default
-				if (typeof oldVal === 'undefined' || oldVal == target.val()) {
-					target.val($(el).text());
-				}
-				// Store default value
-				target.data('defval', $(el).text());
+		$('#default_' + db + ' span').each(function (i, el) {
+			var target = $('#' + $(el).attr('name'));
+			var oldVal = target.data('defval');
+			// Only change the value if not changed from default
+			if (typeof oldVal === 'undefined' || oldVal == target.val()) {
+				target.val($(el).text());
 			}
-		);
-	}
-).change();
-
+			// Store default value
+			target.data('defval', $(el).text());
+		});
+	}).change();
 });
+'use strict';
 
 /*
 # Mantis - a php based bugtracking system
@@ -627,9 +624,9 @@ $('#db_type').change(
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$(document).ready( function() {
+$(document).ready(function () {
 	// Captcha refresh
-	$('#captcha-image, #captcha-refresh li a').click( function(e) {
+	$('#captcha-image, #captcha-refresh li a').click(function (e) {
 		var img = $('#captcha-image img');
 		var captcha = img.attr('src');
 		img.attr('src', captcha.split('?', 1) + '?' + Math.random());
@@ -637,6 +634,7 @@ $(document).ready( function() {
 		e.preventDefault();
 	});
 });
+'use strict';
 
 /*
 # Mantis - a php based bugtracking system
@@ -659,9 +657,10 @@ $(document).ready( function() {
  */
 
 // Handle switching between textarea custom field type and other types
-$(document).ready(function() {
-  $('#custom-field-type').on('change', function() {
-    if($(this).val() == 10) {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
+$(document).ready(function () {
+  $('#custom-field-type').on('change', function () {
+    if ($(this).val() == 10) {
+      // 10: CUSTOM_FIELD_TYPE_TEXTAREA
       $('#custom-field-default-value').closest('.input').hide();
       $('#custom-field-default-value').attr('disabled', 'disabled');
       $('#custom-field-default-value-textarea').closest('.textarea').show();
