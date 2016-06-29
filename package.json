@@ -1,14 +1,13 @@
 {
   "name": "mantisbt",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.1-dev",
   "description": "Mantis Bug Tracker (MantisBT)",
   "main": "index.js",
   "directories": {
-    "doc": "doc",
+    "doc": "docbook",
     "test": "tests"
   },
   "dependencies": {
-    "gulp": "^3.9.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -29,7 +28,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mantisbt/mantisbt/issues"
+    "url": "http://www.mantisbt.org/bugs/"
   },
-  "homepage": "https://github.com/mantisbt/mantisbt#readme"
+  "homepage": "http://www.mantisbt.org/"
 }
