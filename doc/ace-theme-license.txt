@@ -1,42 +1,41 @@
-MantisBT holds extended license for Ace-Admin theme used in building the Modern UI.
+Ace Admin theme author's approval to use in MantisBT under GPL:
+===============================================================
 
-Extended License Terms:
-=======================
-
-This license must be purchased if you intend to license, sublicense, redistribute, or resell the final product.
-
-1. Your use of the item may extend to multiple installations.
-2. You may use the item in work which you are creating for your own purposes or for your clients.
-3. You may license, sublicense, redistribute, or resell the item in the following circumstances:
-	3.1: the item is incorporated into a larger work you have created; or
-	3.2: if you modify the item and resell the end product.
-4. If the item contains licensed components, those components must only be used within the item and you must not extract
-and use them on a stand-alone basis.
-5. If the item was created using materials which are the subject of a GNU General Public License (GPL), your use of the
-item is subject to the terms of the GPL in place of the foregoing conditions (to the extent the GPL applies).
-
-
-*** MantisBT core team is in possession of the proof of purchase for this license ***
-
-
-
-Author's confirmation that MantisBT usage is covered by the purchased Extended License:
-=======================================================================================
-
+From: Responsiweb Support <support@responsiweb.com>
 Subject: RE: Extended License for MantisBT
-Date: June 21, 2016 at 10:26:13 PM PDT
+Date: June 30, 2016 at 5:27:22 AM PDT
 To: Rafik Robeal <rafik@mantishub.net>
 
-Hello Rafik,
+I’ve agreed to license the files listed below from my AceAdmin theme package under the GPL license and contribute them
+to MantisBT open source project:
 
-Thank you for using Ace admin. I'm really glad you have been using it and your users liked it as well.
-And congratulations for MantisBT. It looks like a great service.
+ace-elements.min.js
+ace-extra.min.js
+ace.min.js
+ace-fonts.css
+ace-ie.min.css
+ace-mantis.css
+ace-part2.min.css
+ace-rtl.min.css
+ace-skins.min.css
+ace.min.css
 
-About your question if you have an extended license that pretty much covers your case. That is, you can make a product
-with Ace as part of it and distribute it.
 
-Hope that helps,
-Let me know if you have a question
+The following license terms will be added to the header of each of the files listed above:
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 Kind Regards,
 Mohsen
