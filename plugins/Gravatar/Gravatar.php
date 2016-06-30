@@ -117,7 +117,7 @@ class GravatarPlugin extends MantisPlugin {
 	 */
 	function csp_headers() {
 		# Policy for images: Allow gravatar URL
-		if( config_get_global( 'show_avatar' ) !== OFF ) {
+		if( config_get( 'show_avatar' ) !== OFF ) {
 			# Set CSP header
 			header( "Content-Security-Policy: img-src 'self' " .
 				self::getAvatarUrl() );
