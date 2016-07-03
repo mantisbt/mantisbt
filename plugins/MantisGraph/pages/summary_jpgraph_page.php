@@ -40,9 +40,6 @@ $t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper
 $t_wide = plugin_config_get( 'summary_graphs_per_row' );
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) / $t_wide );
-
-token_delete( TOKEN_GRAPH );
-
 ?>
 
     <div class="col-md-12 col-xs-12">

@@ -485,7 +485,6 @@ define( 'TIME_TRACKING', 2 );
 # token types
 define( 'TOKEN_UNKNOWN', 0 );
 define( 'TOKEN_FILTER', 1 );
-define( 'TOKEN_GRAPH', 2 );
 define( 'TOKEN_LAST_VISITED', 3 );
 define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
