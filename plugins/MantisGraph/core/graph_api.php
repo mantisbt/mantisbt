@@ -277,105 +277,70 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 	#   $p_metrics['resolved']
 	#   $p_metrics['closed']
 
-	$t_graph_font = graph_get_font();
+	static $s_id = 0;
 
-	# count up array portions that are set
-	$t_count = 0;
-	foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
-		if( isset( $p_metrics[$t_label] ) && is_array( $p_metrics[$t_label] ) ) {
-			$t_count += array_sum( $p_metrics[$t_label] );
-		}
-	}
+	# TODO: Fix graphing of group values
 
-	error_check( $t_count, $p_title );
+	$s_id++;
+	$t_labels = array_keys( $p_metrics['open'] );
+	$t_js_labels = graph_strings_array( $t_labels );
 
-	# calculate totals
-	$t_total = graph_total_metrics( $p_metrics );
+	$t_values = array_values( $p_metrics['open'] );
+	$t_open_values = graph_numeric_array( $t_values );
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_graph = new ezcGraphBarChart();
-		$t_graph->title = $p_title;
-		$t_graph->background->color = '#FFFFFF';
-		$t_graph->options->font = $t_graph_font ;
-		$t_graph->options->font->maxFontSize = 12;
-		$t_graph->legend = false;
+	$t_values = array_values( $p_metrics['resolved'] );
+	$t_resolved_values = graph_numeric_array( $t_values );
 
-		foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
-			$t_graph->data[$t_label] = new ezcGraphArrayDataSet( $p_metrics[$t_label] );
-		}
-		$t_graph->data['total'] = new ezcGraphArrayDataSet( $t_total );
-		# $t_graph->data['total']->displayType = ezcGraph::LINE;
-		# $t_graph->data['total']->barMargin = -20;
-		$t_graph->options->fillLines = 210;
-		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-		$t_graph->xAxis->axisLabelRenderer->angle = 45;
+	$t_values = array_values( $p_metrics['closed'] );
+	$t_closed_values = graph_numeric_array( $t_values );
 
-		$t_graph->driver = new ezcGraphGdDriver();
-		# $t_graph->driver->options->supersampling = 1;
-		$t_graph->driver->options->jpegQuality = 100;
-		$t_graph->driver->options->imageFormat = IMG_JPEG;
+	$t_colors = array( '#fcbdbd' );
+	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
+	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
-		$t_graph->renderer->options->syncAxisFonts = false;
-
-		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-	} else {
-		# defines margin according to height
-		$t_graph = new Graph( $p_graph_width, $p_graph_height );
-		$t_graph->img->SetMargin( 45, 35, 35, $p_baseline );
-		if( ON == plugin_config_get( 'jpgraph_antialias' ) ) {
-			$t_graph->img->SetAntiAliasing();
-		}
-		$t_graph->SetScale( 'textlin' );
-		$t_graph->SetMarginColor( 'white' );
-		$t_graph->SetFrame( false );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-		$t_graph->title->Set( $p_title );
-		$t_graph->xaxis->SetTickLabels( array_keys( $p_metrics['open'] ) );
-		if( FF_FONT2 <= $t_graph_font ) {
-			$t_graph->xaxis->SetLabelAngle( 60 );
-		} else {
-			$t_graph->xaxis->SetLabelAngle( 90 );
-			# can't rotate non truetype fonts
-		}
-		$t_graph->xaxis->SetFont( $t_graph_font );
-		$t_graph->legend->Pos( 0.05, 0.08 );
-		$t_graph->legend->SetFont( $t_graph_font );
-
-		$t_graph->yaxis->scale->ticks->SetDirection( -1 );
-		$t_graph->yaxis->SetFont( $t_graph_font );
-		$t_graph->yscale->SetGrace( 10 );
-
-		# adds on the same graph
-		$t_tot = new BarPlot( array_values( $t_total ) );
-		$t_tot->SetFillColor( 'lightblue' );
-		$t_tot->SetWidth( 0.7 );
-		$t_tot->SetLegend( plugin_lang_get( 'legend_total' ) );
-		$t_graph->Add( $t_tot );
-
-		$t_plot1 = new BarPlot( array_values( $p_metrics['open'] ) );
-		$t_plot1->SetFillColor( 'yellow' );
-		$t_plot1->SetWidth( 1 );
-		$t_plot1->SetLegend( plugin_lang_get( 'legend_opened' ) );
-
-		$t_plot2 = new BarPlot( array_values( $p_metrics['closed'] ) );
-		$t_plot2->SetFillColor( 'blue' );
-		$t_plot2->SetWidth( 1 );
-		$t_plot2->SetLegend( plugin_lang_get( 'legend_closed' ) );
-
-		$t_plot3 = new BarPlot( array_values( $p_metrics['resolved'] ) );
-		$t_plot3->SetFillColor( 'red' );
-		$t_plot3->SetWidth( 1 );
-		$t_plot3->SetLegend( plugin_lang_get( 'legend_resolved' ) );
-
-		$t_gbplot = new GroupBarPlot( array( $t_plot1, $t_plot3, $t_plot2 ) );
-		$t_graph->Add( $t_gbplot );
-
-		if( helper_show_query_count() ) {
-			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
-			$t_graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
-		}
-		$t_graph->Stroke();
-	}
+echo <<<EOT
+<canvas id="groupbarchart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<script>
+$(document).ready( function() {
+var ctx = document.getElementById("groupbarchart{$s_id}");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['open', 'resolved', 'closed'],
+        datasets: [
+        {
+            data: [{$t_open_values}],
+            backgroundColor: {$t_background_colors},
+            borderColor: {$t_border_colors},
+            borderWidth: 1
+        },
+        {
+            data: [{$t_resolved_values}],
+            backgroundColor: {$t_background_colors},
+            borderColor: {$t_border_colors},
+            borderWidth: 1
+        },
+        {
+            data: [{$t_closed_values}],
+            backgroundColor: {$t_background_colors},
+            borderColor: {$t_border_colors},
+            borderWidth: 1
+        }
+        ]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+});
+</script>
+EOT;
 }
 
 /**
