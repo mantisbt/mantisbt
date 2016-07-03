@@ -34,12 +34,11 @@ layout_page_begin( 'summary_page.php' );
     <br />
 <?php
 
-print_summary_menu( 'summary_jpgraph_page.php' );
+print_summary_menu( 'summary_graph_page.php' );
 
 $t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper', 'summary_graph_byreporter' );
-$t_wide = plugin_config_get( 'summary_graphs_per_row' );
-$t_width = plugin_config_get( 'window_width' );
-$t_graph_width = (int)( ( $t_width - 50 ) / $t_wide );
+$t_wide = 2;
+$t_graph_width = 500;
 ?>
 
     <div class="col-md-12 col-xs-12">

@@ -88,7 +88,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function summary_menu() {
-		return array( '<a href="' . plugin_page( 'summary_jpgraph_page' ) . '">' . plugin_lang_get( 'menu_advanced_summary' ) . '</a>', );
+		return array( '<a href="' . plugin_page( 'summary_graph_page' ) . '">' . plugin_lang_get( 'menu_advanced_summary' ) . '</a>', );
 	}
 
 	/**
