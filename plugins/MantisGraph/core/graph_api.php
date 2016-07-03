@@ -24,84 +24,26 @@
  * @link http://www.mantisbt.org
  */
 
-if( OFF == plugin_config_get( 'eczlibrary' ) ) {
-	$t_font_path = get_font_path();
-	if( $t_font_path !== '' && !defined( 'TTF_DIR' ) ) {
-		define( 'TTF_DIR', $t_font_path );
-	}
-	$t_jpgraph_path = plugin_config_get( 'jpgraph_path', '' );
-	if( $t_jpgraph_path !== '' ) {
-		require_once( $t_jpgraph_path . 'jpgraph.php' );
-		require_once( $t_jpgraph_path . 'jpgraph_line.php' );
-		require_once( $t_jpgraph_path . 'jpgraph_bar.php' );
-		require_once( $t_jpgraph_path . 'jpgraph_pie.php' );
-		require_once( $t_jpgraph_path . 'jpgraph_pie3d.php' );
-		require_once( $t_jpgraph_path . 'jpgraph_canvas.php' );
-	} else {
-		require_lib( 'jpgraph/jpgraph.php' );
-		require_lib( 'jpgraph/jpgraph_line.php' );
-		require_lib( 'jpgraph/jpgraph_bar.php' );
-		require_lib( 'jpgraph/jpgraph_pie.php' );
-		require_lib( 'jpgraph/jpgraph_pie3d.php' );
-		require_lib( 'jpgraph/jpgraph_canvas.php' );
-	}
-} else {
-	require_lib( 'ezc/Base/src/base.php' );
-}
+require_lib( 'ezc/Base/src/base.php' );
 
 /**
  * Get Font to use with graphs from configuration value
  * @return string
  */
 function graph_get_font() {
-	$t_font = plugin_config_get( 'font', 'arial' );
+	$t_font = 'arial.ttf';
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_font_map = array(
-			'arial' => 'arial.ttf',
-			'verdana' => 'verdana.ttf',
-			'trebuchet' => 'trebuc.ttf',
-			'verasans' => 'Vera.ttf',
-			'times' => 'times.ttf',
-			'georgia' => 'georgia.ttf',
-			'veraserif' => 'VeraSe.ttf',
-			'courier' => 'cour.ttf',
-			'veramono' => 'VeraMono.ttf',
-		);
-
-		if( isset( $t_font_map[$t_font] ) ) {
-			$t_font = $t_font_map[$t_font];
-		} else {
-			$t_font = 'arial.ttf';
-		}
-		$t_font_path = get_font_path();
-		if( empty( $t_font_path ) ) {
-			error_text( 'Unable to read/find font', 'Unable to read/find font' );
-		}
-		$t_font_file = $t_font_path . $t_font;
-		if( file_exists( $t_font_file ) === false || is_readable( $t_font_file ) === false ) {
-			error_text( 'Unable to read/find font', 'Unable to read/find font' );
-		}
-		return $t_font_file;
-	} else {
-		$t_font_map = array(
-			'arial' => FF_ARIAL,
-			'verdana' => FF_VERDANA,
-			'trebuchet' => FF_TREBUCHE,
-			'verasans' => FF_VERA,
-			'times' => FF_TIMES,
-			'georgia' => FF_GEORGIA,
-			'veraserif' => FF_VERASERIF,
-			'courier' => FF_COURIER,
-			'veramono' => FF_VERAMONO,
-		);
-
-		if( isset( $t_font_map[$t_font] ) ) {
-			return $t_font_map[$t_font];
-		} else {
-			return FF_FONT1;
-		}
+	$t_font_path = get_font_path();
+	if( empty( $t_font_path ) ) {
+		error_text( 'Unable to read/find font', 'Unable to read/find font' );
 	}
+
+	$t_font_file = $t_font_path . $t_font;
+	if( file_exists( $t_font_file ) === false || is_readable( $t_font_file ) === false ) {
+		error_text( 'Unable to read/find font', 'Unable to read/find font' );
+	}
+
+	return $t_font_file;
 }
 
 /**
@@ -268,10 +210,9 @@ EOT;
  * @param string  $p_title        Title.
  * @param integer $p_graph_width  Width of graph in pixels.
  * @param integer $p_graph_height Height of graph in pixels.
- * @param integer $p_baseline     Jpgraph baseline.
  * @return void
  */
-function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400, $p_baseline = 100 ) {
+function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
 	# $p_metrics is an array of three arrays
 	#   $p_metrics['open'] = array( 'enum' => value, ...)
 	#   $p_metrics['resolved']
@@ -411,114 +352,47 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_graph = new ezcGraphLineChart();
+	$t_graph = new ezcGraphLineChart();
 
-		$t_graph->background->color = '#FFFFFF';
+	$t_graph->background->color = '#FFFFFF';
 
-		$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
+	$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
 
-		$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
-		$t_graph->data[0]->label = plugin_lang_get( 'legend_reported' );
-		$t_graph->data[0]->color = '#FF0000';
+	$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
+	$t_graph->data[0]->label = plugin_lang_get( 'legend_reported' );
+	$t_graph->data[0]->color = '#FF0000';
 
-		$t_graph->data[1] = new ezcGraphArrayDataSet( $p_metrics[1] );
-		$t_graph->data[1]->label = plugin_lang_get( 'legend_resolved' );
-		$t_graph->data[1]->color = '#0000FF';
+	$t_graph->data[1] = new ezcGraphArrayDataSet( $p_metrics[1] );
+	$t_graph->data[1]->label = plugin_lang_get( 'legend_resolved' );
+	$t_graph->data[1]->color = '#0000FF';
 
-		$t_graph->data[2] = new ezcGraphArrayDataSet( $p_metrics[2] );
-		$t_graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
-		$t_graph->data[2]->color = '#000000';
+	$t_graph->data[2] = new ezcGraphArrayDataSet( $p_metrics[2] );
+	$t_graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
+	$t_graph->data[2]->color = '#000000';
 
-		$t_graph->additionalAxis[2] = $t_n_axis = new ezcGraphChartElementNumericAxis();
-		$t_n_axis->chartPosition = 1;
-		$t_n_axis->background = '#005500';
-		$t_n_axis->border = '#005500';
-		$t_n_axis->position = ezcGraph::BOTTOM;
-		$t_graph->data[2]->yAxis = $t_n_axis;
+	$t_graph->additionalAxis[2] = $t_n_axis = new ezcGraphChartElementNumericAxis();
+	$t_n_axis->chartPosition = 1;
+	$t_n_axis->background = '#005500';
+	$t_n_axis->border = '#005500';
+	$t_n_axis->position = ezcGraph::BOTTOM;
+	$t_graph->data[2]->yAxis = $t_n_axis;
 
-		$t_graph->xAxis->labelCallback =  'graph_date_format';
-		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-		$t_graph->xAxis->axisLabelRenderer->angle = -45;
+	$t_graph->xAxis->labelCallback =  'graph_date_format';
+	$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
+	$t_graph->xAxis->axisLabelRenderer->angle = -45;
 
-		$t_graph->legend->position      = ezcGraph::BOTTOM;
-		$t_graph->legend->background    = '#FFFFFF80';
+	$t_graph->legend->position      = ezcGraph::BOTTOM;
+	$t_graph->legend->background    = '#FFFFFF80';
 
-		$t_graph->driver = new ezcGraphGdDriver();
-		# $t_graph->driver->options->supersampling = 1;
-		$t_graph->driver->options->jpegQuality = 100;
-		$t_graph->driver->options->imageFormat = IMG_JPEG;
+	$t_graph->driver = new ezcGraphGdDriver();
+	# $t_graph->driver->options->supersampling = 1;
+	$t_graph->driver->options->jpegQuality = 100;
+	$t_graph->driver->options->imageFormat = IMG_JPEG;
 
-		$t_graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
-		$t_graph->options->font = $t_graph_font ;
+	$t_graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
+	$t_graph->options->font = $t_graph_font ;
 
-		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-	} else {
-		foreach( $p_metrics[0] as $i => $t_values ) {
-			if( $i > 0 ) {
-				$t_plot_date[] = $i;
-				$t_reported_plot[] = $p_metrics[0][$i];
-				$t_resolved_plot[] = $p_metrics[1][$i];
-				$t_still_open_plot[] = $p_metrics[2][$i];
-			}
-		}
-
-		$t_graph = new Graph( $p_graph_width, $p_graph_height );
-		$t_graph->img->SetMargin( 40, 40, 40, 170 );
-		if( ON == plugin_config_get( 'jpgraph_antialias' ) ) {
-			$t_graph->img->SetAntiAliasing();
-		}
-		$t_graph->SetScale( 'linlin' );
-		$t_graph->yaxis->SetColor( 'red' );
-		$t_graph->SetY2Scale( 'lin' );
-		$t_graph->SetMarginColor( 'white' );
-		$t_graph->SetFrame( false );
-		$t_graph->title->Set( plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-
-		$t_graph->legend->Pos( 0.05, 0.9, 'right', 'bottom' );
-		$t_graph->legend->SetShadow( false );
-		$t_graph->legend->SetFillColor( 'white' );
-		$t_graph->legend->SetLayout( LEGEND_HOR );
-		$t_graph->legend->SetFont( $t_graph_font );
-
-		$t_graph->yaxis->scale->ticks->SetDirection( -1 );
-		$t_graph->yaxis->SetFont( $t_graph_font );
-		$t_graph->y2axis->SetFont( $t_graph_font );
-
-		if( FF_FONT2 <= $t_graph_font ) {
-			$t_graph->xaxis->SetLabelAngle( 60 );
-		} else {
-			$t_graph->xaxis->SetLabelAngle( 90 );
-			# can't rotate non truetype fonts
-		}
-		$t_graph->xaxis->SetLabelFormatCallback( 'graph_date_format' );
-		$t_graph->xaxis->SetFont( $t_graph_font );
-
-		$t_plot1 = new LinePlot( $t_reported_plot, $t_plot_date );
-		$t_plot1->SetColor( 'blue' );
-		$t_plot1->SetCenter();
-		$t_plot1->SetLegend( plugin_lang_get( 'legend_reported' ) );
-		$t_graph->AddY2( $t_plot1 );
-
-		$t_plot3 = new LinePlot( $t_still_open_plot, $t_plot_date );
-		$t_plot3->SetColor( 'red' );
-		$t_plot3->SetCenter();
-		$t_plot3->SetLegend( plugin_lang_get( 'legend_still_open' ) );
-		$t_graph->Add( $t_plot3 );
-
-		$t_plot2 = new LinePlot( $t_resolved_plot, $t_plot_date );
-		$t_plot2->SetColor( 'black' );
-		$t_plot2->SetCenter();
-		$t_plot2->SetLegend( plugin_lang_get( 'legend_resolved' ) );
-		$t_graph->AddY2( $t_plot2 );
-
-		if( helper_show_query_count() ) {
-			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
-			$t_graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
-		}
-		$t_graph->Stroke();
-	}
+	$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
 }
 
 /**
@@ -535,93 +409,43 @@ function graph_bydate( array $p_metrics, array $p_labels, $p_title, $p_graph_wid
 	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_metrics = array();
-		$t_dates = array_shift( $p_metrics );
-		$t_cnt = count( $p_metrics );
+	$t_metrics = array();
+	$t_dates = array_shift( $p_metrics );
+	$t_cnt = count( $p_metrics );
 
-		foreach( $t_dates as $i => $t_value ) {
-			for( $j = 0; $j < $t_cnt; $j++ ) {
-				$t_metrics[$j][$t_value] = $p_metrics[$j][$i];
-			}
+	foreach( $t_dates as $i => $t_value ) {
+		for( $j = 0; $j < $t_cnt; $j++ ) {
+			$t_metrics[$j][$t_value] = $p_metrics[$j][$i];
 		}
-
-		$t_graph = new ezcGraphLineChart();
-		$t_graph->background->color = '#FFFFFF';
-
-		$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
-		for( $k = 0; $k < $t_cnt; $k++ ) {
-			$t_graph->data[$k] = new ezcGraphArrayDataSet( $t_metrics[$k] );
-			$t_graph->data[$k]->label = $p_labels[$k+1];
-		}
-
-		$t_graph->xAxis->labelCallback =  'graph_date_format';
-		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-		$t_graph->xAxis->axisLabelRenderer->angle = -60;
-		$t_graph->xAxis->axisSpace = .15;
-
-		$t_graph->legend->position      = ezcGraph::BOTTOM;
-		$t_graph->legend->background    = '#FFFFFF80';
-
-		$t_graph->driver = new ezcGraphGdDriver();
-		# $t_graph->driver->options->supersampling = 1;
-		$t_graph->driver->options->jpegQuality = 100;
-		$t_graph->driver->options->imageFormat = IMG_JPEG;
-
-		$t_graph->title = $p_title . ' ' . lang_get( 'by_date' );
-		$t_graph->title->maxHeight = .03;
-		$t_graph->options->font = $t_graph_font ;
-
-		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-	} else {
-		$t_graph = new Graph( $p_graph_width, $p_graph_height );
-		$t_graph->img->SetMargin( 40, 140, 40, 100 );
-		if( ON == plugin_config_get( 'jpgraph_antialias' ) ) {
-			$t_graph->img->SetAntiAliasing();
-		}
-		$t_graph->SetScale( 'linlin' );
-		$t_graph->SetMarginColor( 'white' );
-		$t_graph->SetFrame( false );
-		$t_graph->title->Set( $p_title . ' ' . lang_get( 'by_date' ) );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-
-		$t_graph->legend->Pos( 0.01, 0.05, 'right', 'top' );
-		$t_graph->legend->SetShadow( false );
-		$t_graph->legend->SetFillColor( 'white' );
-		$t_graph->legend->SetLayout( LEGEND_VERT );
-		$t_graph->legend->SetFont( $t_graph_font );
-
-		$t_graph->yaxis->scale->ticks->SetDirection( -1 );
-		$t_graph->yaxis->SetFont( $t_graph_font );
-		$t_graph->yaxis->scale->SetAutoMin( 0 );
-
-		if( FF_FONT2 <= $t_graph_font ) {
-			$t_graph->xaxis->SetLabelAngle( 60 );
-		} else {
-			$t_graph->xaxis->SetLabelAngle( 90 );
-			# can't rotate non truetype fonts
-		}
-		$t_graph->xaxis->SetLabelFormatCallback( 'graph_date_format' );
-		$t_graph->xaxis->SetFont( $t_graph_font );
-
-		# $t_line_colours = plugin_config_get( 'jpgraph_colors' );
-		# $t_count_colours = count( $t_line_colours );
-		$t_lines = count( $p_metrics ) - 1;
-		$t_line = array();
-		for( $i = 1;$i <= $t_lines;$i++ ) {
-			$t_line[$i] = new LinePlot( $p_metrics[$i], $p_metrics[0] );
-			# $t_line[$i]->SetColor( $t_line_colours[$i % $t_count_colours] );
-			$t_line[$i]->SetCenter();
-			$t_line[$i]->SetLegend( $p_labels[$i] );
-			$t_graph->Add( $t_line[$i] );
-		}
-
-		if( helper_show_query_count() ) {
-			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
-			$t_graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
-		}
-		$t_graph->Stroke();
 	}
+
+	$t_graph = new ezcGraphLineChart();
+	$t_graph->background->color = '#FFFFFF';
+
+	$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
+	for( $k = 0; $k < $t_cnt; $k++ ) {
+		$t_graph->data[$k] = new ezcGraphArrayDataSet( $t_metrics[$k] );
+		$t_graph->data[$k]->label = $p_labels[$k+1];
+	}
+
+	$t_graph->xAxis->labelCallback =  'graph_date_format';
+	$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
+	$t_graph->xAxis->axisLabelRenderer->angle = -60;
+	$t_graph->xAxis->axisSpace = .15;
+
+	$t_graph->legend->position      = ezcGraph::BOTTOM;
+	$t_graph->legend->background    = '#FFFFFF80';
+
+	$t_graph->driver = new ezcGraphGdDriver();
+	# $t_graph->driver->options->supersampling = 1;
+	$t_graph->driver->options->jpegQuality = 100;
+	$t_graph->driver->options->imageFormat = IMG_JPEG;
+
+	$t_graph->title = $p_title . ' ' . lang_get( 'by_date' );
+	$t_graph->title->maxHeight = .03;
+	$t_graph->options->font = $t_graph_font ;
+
+	$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
 }
 
 /**
@@ -981,24 +805,11 @@ function error_check( $p_bug_count, $p_title ) {
  * @return void
  */
 function error_text( $p_title, $p_text ) {
-	if( OFF == plugin_config_get( 'eczlibrary' ) ) {
-		$t_graph = new CanvasGraph( 300, 380 );
-		$t_graph_font = graph_get_font();
-
-		$t_text = new Text( $p_text, 150, 100 );
-		$t_text->Align( 'center', 'center', 'center' );
-		$t_text->SetFont( $t_graph_font, FS_BOLD );
-		$t_graph->title->Set( $p_title );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-		$t_graph->AddText( $t_text );
-		$t_graph->Stroke();
-	} else {
-		$t_image = imagecreate( 300, 300 );
-		$t_text_color = imagecolorallocate( $t_image, 0, 0, 0 );
-		imagestring( $t_image, 5, 0, 0, $p_text, $t_text_color );
-		header( 'Content-type: image/png' );
-		imagepng( $t_image );
-		imagedestroy( $t_image );
-	}
+	$t_image = imagecreate( 300, 300 );
+	$t_text_color = imagecolorallocate( $t_image, 0, 0, 0 );
+	imagestring( $t_image, 5, 0, 0, $p_text, $t_text_color );
+	header( 'Content-type: image/png' );
+	imagepng( $t_image );
+	imagedestroy( $t_image );
 	die;
 }
