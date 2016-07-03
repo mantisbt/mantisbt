@@ -228,10 +228,10 @@ function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_gr
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="chart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<canvas id="barchart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
 <script>
 $(document).ready( function() {
-var ctx = document.getElementById("chart{$s_id}");
+var ctx = document.getElementById("barchart{$s_id}");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -386,7 +386,7 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
  * @return void
  */
 function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350 ) {
-	static $s_id = 100;
+	static $s_id = 0;
 
 	$s_id++;
 
@@ -401,10 +401,10 @@ function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_gr
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="chart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<canvas id="piechart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}" style="width:{$p_graph_width}px; height={$p_graph_height}px;"></canvas>
 <script>
 $(document).ready( function() {
-var ctx = document.getElementById("chart{$s_id}");
+var ctx = document.getElementById("piechart{$s_id}");
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
