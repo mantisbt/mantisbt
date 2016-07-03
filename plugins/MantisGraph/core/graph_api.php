@@ -105,6 +105,106 @@ function graph_get_font() {
 }
 
 /**
+ * Converts an array of php strings into an array of javascript strings without [].
+ * @param array $p_strings The array of strings
+ * @return string The js code for the array without [], e.g. "a", "b", "c"
+ */
+function graph_strings_array( array $p_strings ) {
+	$t_js_labels = '';
+
+	foreach ( $p_strings as $t_label ) {
+		if ( !empty( $t_js_labels ) ) {
+			$t_js_labels .= ', ';
+		}
+
+		$t_js_labels .= '"' . $t_label . '"';
+	}
+
+	return $t_js_labels;
+}
+
+/**
+ * Converts an array of php numbers into an array of javascript numbers without [].
+ * @param  array $p_values The array of values.
+ * @return string The js code for the array without [], e.g. 1, 2, 3.
+ */
+function graph_numeric_array( array $p_values ) {
+	$t_js_values = '';
+
+	foreach( $p_values as $t_value ) {
+		if ( !empty( $t_js_values ) ) {
+			$t_js_values .= ', ';
+		}
+
+		$t_js_values .= $t_value;
+	}
+
+	return $t_js_values;
+}
+
+/**
+ * Converts an html color (e.g. #fcbdbd) to rgba.
+ * @param string  $p_color The html color
+ * @param float   $p_alpha    The value (e.g. 0.2)
+ * @return string The rgba with the surrounding single quotes, 'rgba(252, 189, 189, 0.2)'
+ */
+function graph_color_to_rgba( $p_color, $p_alpha ) {
+	$t_rgba = "'rgba(";
+
+	if ( $p_color[0] == '#' ) {
+		$t_color = substr( $p_color, 1 );
+	} else {
+		$t_color = $p_color;
+	}
+
+	$t_rgba .= intval( $t_color[0] . $t_color[1], 16 ) . ', ';
+	$t_rgba .= intval( $t_color[2] . $t_color[3], 16 ) . ', ';
+	$t_rgba .= intval( $t_color[4] . $t_color[5], 16 ) . ', ';
+	$t_rgba .= $p_alpha . ")'";
+
+	return $t_rgba;
+}
+
+/**
+ * Converts an array of colors + an alpha value to a set of rgbas.
+ * @param  array  $p_colors Array of html colors (e.g. #fcbdbd).
+ * @param  float  $p_alpha  The alpha value.
+ * @return string e.g. 'rgba(252, 189, 189, 0.2)', 'rgba(252, 189, 189, 0.2)'
+ */
+function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
+	$t_rgbas = '';
+
+	foreach( $p_colors as $t_color ) {
+		if ( !empty( $t_rgbas ) ) {
+			$t_rgbas .= ', ';
+		}
+
+		$t_rgbas .= graph_color_to_rgba( $t_color, $p_alpha );
+	}
+
+	return $t_rgbas;
+}
+
+/**
+ * Gets an array of html colors that corresponds to statuses.
+ * @return array An array similar to the status_colors config ordered by status enum codes.
+ */
+function graph_status_colors_to_colors() {
+	$t_status_enum = config_get( 'status_enum_string' );
+	$t_status_colors = config_get( 'status_colors' );
+	$t_statuses = MantisEnum::getValues( $t_status_enum );
+	$t_colors = array();
+
+	foreach( $t_statuses as $t_status ) {
+		$t_status_name = MantisEnum::getLabel( $t_status_enum, $t_status );
+		$t_status_color = $t_status_colors[$t_status_name];
+		$t_colors[] = $t_status_color;
+	}
+
+	return $t_colors;
+}
+
+/**
  * Generate Bar Graph
  *
  * @param array   $p_metrics      Graph Data.
@@ -114,68 +214,49 @@ function graph_get_font() {
  * @return void
  */
 function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
-	$t_graph_font = graph_get_font();
+	static $s_id = 0;
 
-	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
+	$s_id++;
+	$t_labels = array_keys( $p_metrics );
+	$t_js_labels = graph_strings_array( $t_labels );
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_graph = new ezcGraphBarChart();
-		$t_graph->title = $p_title;
-		$t_graph->background->color = '#FFFFFF';
-		$t_graph->options->font = $t_graph_font ;
-		$t_graph->options->font->maxFontSize = 12;
-		$t_graph->legend = false;
+	$t_values = array_values( $p_metrics );
+	$t_js_values = graph_numeric_array( $t_values );
 
-		$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
-		$t_graph->data[0]->color = '#FFFF00';
+	$t_colors = graph_status_colors_to_colors();
+	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
+	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
-		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-		$t_graph->xAxis->axisLabelRenderer->angle = 45;
-
-		$t_graph->driver = new ezcGraphGdDriver();
-		# $t_graph->driver->options->supersampling = 1;
-		$t_graph->driver->options->jpegQuality = 100;
-		$t_graph->driver->options->imageFormat = IMG_JPEG;
-
-		$t_graph->renderer->options->syncAxisFonts = false;
-
-		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-	} else {
-		$t_graph = new Graph( $p_graph_width, $p_graph_height );
-		$t_graph->img->SetMargin( 40, 40, 40, 170 );
-		if( ON == plugin_config_get( 'jpgraph_antialias' ) ) {
-			$t_graph->img->SetAntiAliasing();
-		}
-		$t_graph->SetScale( 'textlin' );
-		$t_graph->SetMarginColor( 'white' );
-		$t_graph->SetFrame( false );
-		$t_graph->title->Set( $p_title );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-		$t_graph->xaxis->SetTickLabels( array_keys( $p_metrics ) );
-		if( FF_FONT2 <= $t_graph_font ) {
-			$t_graph->xaxis->SetLabelAngle( 60 );
-		} else {
-			$t_graph->xaxis->SetLabelAngle( 90 );
-			# can't rotate non truetype fonts
-		}
-		$t_graph->xaxis->SetFont( $t_graph_font );
-
-		$t_graph->legend->SetFont( $t_graph_font );
-
-		$t_graph->yaxis->scale->ticks->SetDirection( -1 );
-		$t_graph->yaxis->SetFont( $t_graph_font );
-
-		$t_plot1 = new BarPlot( array_values( $p_metrics ) );
-		$t_plot1->SetFillColor( 'yellow' );
-		$t_plot1->SetWidth( 0.8 );
-		$t_graph->Add( $t_plot1 );
-		if( helper_show_query_count() ) {
-			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
-			$t_graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
-		}
-
-		$t_graph->Stroke();
-	}
+echo <<<EOT
+<canvas id="chart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<script>
+$(document).ready( function() {
+var ctx = document.getElementById("chart{$s_id}");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{$t_js_labels}],
+        datasets: [{
+            label: '# of issues',
+            data: [{$t_js_values}],
+            backgroundColor: [{$t_background_colors}],
+            borderColor: [{$t_border_colors}],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+});
+</script>
+EOT;
 }
 
 /**
@@ -302,76 +383,53 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
  * @param string        $p_title         Title.
  * @param integer       $p_graph_width   Width of graph in pixels.
  * @param integer       $p_graph_height  Height of graph in pixels.
- * @param float|integer $p_center        Jpgraph center.
- * @param float|integer $p_poshorizontal Jpgraph horizontal.
- * @param float|integer $p_posvertical   Jpgraph vertical.
  * @return void
  */
-function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350, $p_center = 0.4, $p_poshorizontal = 0.10, $p_posvertical = 0.09 ) {
-	$t_graph_font = graph_get_font();
+function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350 ) {
+	static $s_id = 100;
 
-	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
+	$s_id++;
 
-	if( plugin_config_get( 'eczlibrary' ) == ON ) {
-		$t_graph = new ezcGraphPieChart();
-		$t_graph->title = $p_title;
-		$t_graph->background->color = '#FFFFFF';
-		$t_graph->options->font = $t_graph_font ;
-		$t_graph->options->font->maxFontSize = 12;
-		$t_graph->legend = false;
+	$t_labels = array_keys( $p_metrics );
+	$t_js_labels = graph_strings_array( $t_labels );
 
-		$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics );
-		$t_graph->data[0]->color = '#FFFF00';
+	$t_values = array_values( $p_metrics );
+	$t_js_values = graph_numeric_array( $t_values );
 
-		$t_graph->renderer = new ezcGraphRenderer3d();
-		$t_graph->renderer->options->dataBorder = false;
-		$t_graph->renderer->options->pieChartShadowSize = 10;
-		$t_graph->renderer->options->pieChartGleam = .5;
-		$t_graph->renderer->options->pieChartHeight = 16;
-		$t_graph->renderer->options->legendSymbolGleam = .5;
+	$t_colors = graph_status_colors_to_colors();
+	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
+	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
-		$t_graph->driver = new ezcGraphGdDriver();
-		# $t_graph->driver->options->supersampling = 1;
-		$t_graph->driver->options->jpegQuality = 100;
-		$t_graph->driver->options->imageFormat = IMG_JPEG;
-
-		$t_graph->renderer->options->syncAxisFonts = false;
-
-		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-	} else {
-		$t_graph = new PieGraph( $p_graph_width, $p_graph_height );
-		$t_graph->img->SetMargin( 40, 40, 40, 100 );
-		$t_graph->title->Set( $p_title );
-		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-
-		$t_graph->SetMarginColor( 'white' );
-		$t_graph->SetFrame( false );
-
-		$t_graph->legend->Pos( $p_poshorizontal, $p_posvertical );
-		$t_graph->legend->SetFont( $t_graph_font );
-
-		$t_plot1 = new PiePlot3d( array_values( $p_metrics ) );
-
-		# should be reversed?
-		$t_plot1->SetTheme( 'earth' );
-
-		# $t_plot1->SetTheme("sand");
-		$t_plot1->SetCenter( $p_center );
-		$t_plot1->SetAngle( 60 );
-		$t_plot1->SetLegends( array_keys( $p_metrics ) );
-
-		# Label format
-		$t_plot1->value->SetFormat( '%2.0f' );
-		$t_plot1->value->Show();
-		$t_plot1->value->SetFont( $t_graph_font );
-
-		$t_graph->Add( $t_plot1 );
-		if( helper_show_query_count() ) {
-			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
-			$t_graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
-		}
-		$t_graph->Stroke();
-	}
+echo <<<EOT
+<canvas id="chart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<script>
+$(document).ready( function() {
+var ctx = document.getElementById("chart{$s_id}");
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: [{$t_js_labels}],
+        datasets: [{
+            label: '# of issues',
+            data: [{$t_js_values}],
+            backgroundColor: [{$t_background_colors}],
+            borderColor: [{$t_border_colors}],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+});
+</script>
+EOT;
 }
 
 /**
