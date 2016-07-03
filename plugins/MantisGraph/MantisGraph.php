@@ -30,7 +30,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function register() {
 		$this->name = lang_get( 'plugin_graph_title' );
 		$this->description = lang_get( 'plugin_graph_description' );
-		$this->page = 'config';
+		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
@@ -47,17 +47,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function config() {
-		return array(
-			'eczlibrary' => ON,
-
-			'window_width' => 800,
-			'bar_aspect' => 0.9,
-			'summary_graphs_per_row' => 2,
-			'font' => 'arial',
-
-			'jpgraph_path' => '',
-			'jpgraph_antialias' => ON,
-		);
+		return array();
 	}
 
 	/**
