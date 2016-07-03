@@ -35,12 +35,12 @@ layout_page_begin( 'summary_page.php' );
 print_summary_menu( 'summary_page.php' );
 echo '<br />';
 print_summary_submenu();
-$t_width = plugin_config_get( 'window_width' );
-$t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
-# gather the data for the graphs
-$t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
-$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
+$t_width = 500;
+$t_height = 400;
+$t_series_name = lang_get( 'bugs' );
+$t_metrics = create_bug_enum_summary( lang_get( 'severity_enum_string' ), 'severity' );
+# $t_group_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -54,29 +54,13 @@ $t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
                 </h4>
             </div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byseverity.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byseverity_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byseverity_mix.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+<?php
+graph_bar( $t_metrics, lang_get( 'by_severity' ), $t_width, $t_height, $t_series_name );
+echo '<div class="space-10"></div>';
+graph_pie( $t_metrics, plugin_lang_get( 'by_severity_pct' ), $t_width, $t_height );
+# graph_group( $t_group_metrics, lang_get( 'by_severity' ), $t_width, $t_height );
+?>
+
         </div>
     </div>
 
