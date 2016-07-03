@@ -62,53 +62,29 @@ function mention_get_candidates( $p_text ) {
 		return array();
 	}
 
-	$t_mentions_tag = mentions_tag();
-	$t_mentions_tag_length = strlen( $t_mentions_tag );
-	$t_separators = "\n\r\t,;:/\\| ";
-	$t_token = strtok( $p_text, $t_separators );
-
-	$t_mentions = array();
-
-	while( $t_token !== false ) {
-		$t_mention = $t_token;
-		$t_token = strtok( $t_separators );
-
-		# make sure token has @
-		if( stripos( $t_mention, $t_mentions_tag ) !== 0 ) {
-			continue;
-		}
-
-		$t_mention = substr( $t_mention, $t_mentions_tag_length );
-		if( is_blank( $t_mention ) ) {
-			continue;
-		}
-
-		# Filter out the @@vboctor case.
-		if( stripos( $t_mention, $t_mentions_tag ) === 0 ) {
-			continue;
-		}
-
-		$t_valid = true;
-		for( $i = 0; $i < strlen( $t_mention ); $i++ ) {
-			$t_char = $t_mention[$i];
-			if( !ctype_alnum( $t_char ) && $t_char != '.' && $t_char != '_' ) {
-				$t_valid = false;
-				break;
-			}
-		}
-
-		if( !$t_valid ) {
-			continue;
-		}
-
-		# "victor.boctor" is valid, "vboctor." should be "vboctor"
-		$t_mention = trim( $t_mention, '.' );
-		$t_mentions[$t_mention] = true;
+	static $s_pattern = null;
+	if( $s_pattern === null ) {
+		$t_quoted_tag = preg_quote( mentions_tag() );
+		$s_pattern = '/(?:'
+			# Negative lookbehind to ensure we have whitespace or start of
+			# string before the tag - ensures we don't match a tag in the
+			# middle of a word (e.g. e-mail address)
+			. '(?<=^|[^\w])'
+			# Negative lookbehind  to ensure we don't match multiple tags
+			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
+			. ')'
+			# any word char or period, but must not end with period
+			. '([\w.]*[\w])'
+			# Lookforward to ensure next char is not a valid mention char or
+			# the end of the string, or the mention tag
+			. '(?=[^\w@]|$)'
+			. '(?!$t_quoted_tag)'
+			. '/';
 	}
 
-	$t_mentions = array_keys( $t_mentions );
+	preg_match_all( $s_pattern, $p_text, $t_mentions );
 
-	return $t_mentions;
+	return array_unique( $t_mentions[1] );
 }
 
 /**
@@ -165,10 +141,6 @@ function mention_process_user_mentions( $p_bug_id, $p_mentioned_user_ids, $p_mes
  * @return string The processed text.
  */
 function mention_format_text( $p_text, $p_html = true ) {
-	if ( !mention_enabled() ) {
-		return $p_text;
-	}
-
 	$t_mentioned_users = mention_get_users( $p_text );
 	if( empty( $t_mentioned_users ) ) {
 		return $p_text;
@@ -187,7 +159,7 @@ function mention_format_text( $p_text, $p_html = true ) {
 			$t_mention_formatted = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
 
 			if( !user_is_enabled( $t_user_id ) ) {
-				$t_mention_formatted = '<strike>' . $t_mention_formatted . '</strike>';
+				$t_mention_formatted = '<s>' . $t_mention_formatted . '</s>';
 			}
 
 			$t_mention_formatted = '<span class="mention">' . $t_mention_formatted . '</span>';
@@ -196,10 +168,18 @@ function mention_format_text( $p_text, $p_html = true ) {
 		$t_formatted_mentions[$t_mention] = $t_mention_formatted;
 	}
 
-	$t_text = str_replace(
-		array_keys( $t_formatted_mentions ),
-		array_values( $t_formatted_mentions ),
-		$p_text
+	# Replace the mentions, ignoring existing anchor tags (otherwise
+	# previously set mailto links would be processed as mentions,
+	# corrupting the output
+	$t_text = string_process_exclude_anchors(
+		$p_text,
+		function( $p_string ) use ( $t_formatted_mentions ) {
+			return str_replace(
+				array_keys( $t_formatted_mentions ),
+				array_values( $t_formatted_mentions ),
+				$p_string
+			);
+		}
 	);
 
 	return $t_text;
