@@ -401,7 +401,7 @@ function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_gr
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="piechart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}" style="width:{$p_graph_width}px; height={$p_graph_height}px;"></canvas>
+<canvas id="piechart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
 <script>
 $(document).ready( function() {
 var ctx = document.getElementById("piechart{$s_id}");

@@ -29,7 +29,6 @@ plugin_require_api( 'core/graph_api.php' );
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
-
 layout_page_begin( 'summary_page.php' );
 
 print_summary_menu( 'summary_page.php' );
@@ -37,11 +36,11 @@ print_summary_menu( 'summary_page.php' );
 echo '<br />';
 print_summary_submenu();
 $t_width = plugin_config_get( 'window_width' );
-$t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
+$t_width = (int)( ( $t_width - 50 ) * 0.6 );
 
-# gather the data for the graphs
+$t_height = plugin_config_get( 'bar_aspect' ) * $t_width;
+
 $t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
-$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -55,26 +54,12 @@ $t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
                 </h4>
             </div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bystatus.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bystatus_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <?php
+            graph_bar( $t_metrics, lang_get( 'by_status' ), $t_width, $t_height );
+            echo '<div class="space-10"></div>';
+            graph_pie( $t_metrics, plugin_lang_get( 'by_status_pct' ), $t_width, $t_height );
+            ?>
         </div>
     </div>
-
 <?php
 layout_page_end();
