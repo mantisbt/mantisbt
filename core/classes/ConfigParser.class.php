@@ -27,7 +27,7 @@
  * Configuration Parser class
  *
  * Simple PHP code parser for scalar and array types
- * 
+ *
  * @package MantisBT
  * @subpackage classes
  *
@@ -76,6 +76,8 @@ class ConfigParser
 			case T_STRING:
 			case T_LNUMBER:
 			case T_DNUMBER:
+			case '-':
+			case '+':
 				$t_result = $this->process_value();
 				break;
 
