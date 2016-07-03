@@ -85,6 +85,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function hooks() {
 		$t_hooks = array(
+			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
@@ -110,6 +111,15 @@ class MantisGraphPlugin extends MantisPlugin  {
 		} else {
 			return '';
 		}
+	}
+
+	/**
+	 * Include javascript files for chart.js
+	 * @return void
+	 */
+	function resources() {
+		echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>';
+		echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>';
 	}
 
 	/**
