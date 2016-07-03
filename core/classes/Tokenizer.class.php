@@ -25,10 +25,10 @@
 
 /**
  * Tokenizer class
- * 
+ *
  * Uses PHP's internal token_get_all() function to parse a piece of code
  * into tokens
- * 
+ *
  * @package MantisBT
  * @subpackage classes
  */
@@ -44,15 +44,10 @@ class Tokenizer
 	 * Builds the token array from given code, discarding whitespace and
 	 * trailing semicolons
 	 * @param string $p_code PHP code to tokenize
-	 * @throws Exception if there are no tokens to process
 	 * @throws Exception if given code is not valid
 	 */
 	public function __construct( $p_code )
 	{
-		if( empty( $p_code ) ) {
-			throw new Exception( 'No more tokens' );
-		}
-
 		# Check syntax to make sure we get valid PHP code
 		# prepend 'return' statement to ensure the code is not actually executed
 		$t_code = 'return; ' . $p_code . ';';
@@ -182,7 +177,7 @@ class Tokenizer
 				$p_value = token_name( $p_value );
 			}
 			throw new Exception(
-				'Invalid token: got "' . $this->value() . '", expected "$p_value"'
+				'Invalid token: got "' . $this->value() . '", expected "' . $p_value . '"'
 			);
 		}
 		$this->pop();

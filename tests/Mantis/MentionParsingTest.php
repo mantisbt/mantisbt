@@ -38,100 +38,121 @@ require_api( 'mention_api.php' );
  * @subpackage Mention
  */
 class MentionParsingTest extends PHPUnit_Framework_TestCase {
-	public function testNoMention() {
-		$this->checkMentions( 'some random string.', array() );
+
+	/**
+	 * Tests user mentions
+	 * @dataProvider provider
+	 *
+	 * @param string $p_input_text
+	 * @param array  $p_expected   List of expected mentions
+	 */
+	public function testMentions( $p_input_text, array $p_expected ) {
+		$t_actual = mention_get_candidates( $p_input_text );
+
+		$this->assertEquals($p_expected, $t_actual );
 	}
 
-	public function testNoMentionWithAtSign() {
-		$this->checkMentions( 'some random string with @ sign.', array() );
-	}
+	/**
+	 * Data provider function for mentions tests.
+	 * Test case structure:
+	 *   <test case> => array( <string to test>, <list of expected mentions>)
+	 * @return array
+	 */
+	public function provider() {
+		return array(
+			'NoMention' => array(
+				'some random string.',
+				array()
+			),
+			'NoMentionWithAtSign' => array(
+				'some random string with @ sign.',
+				array()
+			),
+			'NoMentionWithMultipleAtSigns' => array(
+				'some random string with @@vboctor sign.',
+				array()
+			),
+			'JustMention' => array(
+				'@vboctor',
+				array( 'vboctor' )
+			),
+			'WithDotInMiddle' => array(
+				'@victor.boctor',
+				array( 'victor.boctor' )
+			),
+			'WithDotAtEnd' => array(
+				'@vboctor.',
+				array( 'vboctor' )
+			),
+			'MentionWithUnderscore' => array(
+				'@victor_boctor',
+				array( 'victor_boctor' )
+			),
+			'MentionAtStart' => array(
+				'@vboctor will check',
+				array( 'vboctor' )
+			),
+			'MentionAtEnd' => array(
+				'Please assign to @vboctor',
+				array( 'vboctor' )
+			),
+			'MentionAtEndWithFullstop' => array(
+				'Please assign to @vboctor.',
+				array( 'vboctor' )
+			),
+			'MentionSeparatedWithColon' => array(
+				'@vboctor: please check.',
+				array( 'vboctor' )
+			),
+			'MentionSeparatedWithSemiColon' => array(
+				'@vboctor; please check.',
+				array( 'vboctor' )
+			),
+			'MentionWithMultiple' => array(
+				'Please check with @vboctor and @someone.',
+				array( 'vboctor', 'someone' )
+			),
+			'MentionWithDuplicates' => array(
+				'Please check with @vboctor and @vboctor.',
+				array( 'vboctor' )
+			),
+			'MentionWithMultipleSlashSeparated' => array(
+				'@vboctor/@someone, please check.',
+				array( 'vboctor', 'someone' )
+			),
+			'MentionWithMultipleNewLineSeparated' => array(
+				"Check with:\n@vboctor\n@someone.",
+				array( 'vboctor', 'someone' )
+			),
+			'MentionNl2br' => array(
+				string_nl2br( "Check with @vboctor\n" ) ,
+				array( 'vboctor' )
+			),
+			'MentionWithEmailAddress' => array(
+				'xxx@example.com',
+				array()
+			),
+			'MentionWithLocalhost' => array(
+				'xxx@localhost',
+				array()
+			),
+			'MentionAtEndOfWord' => array(
+				"vboctor@",
+				array()
+			),
+			'MentionWithInvalidChars' => array(
+				"@vboctor%%%%%",
+				array( 'vboctor' )
+			),
+			'MentionUsernameThatIsAnEmailAddress' => array(
+				"@vboctor@example.com",
+				array()
+			),
+			'MentionUsernameThatIsLocalhost' => array(
+				"@vboctor@localhost",
+				array()
+			),
+		);
 
-	public function testNoMentionWithMultipleAtSigns() {
-		$this->checkMentions( 'some random string with @@vboctor sign.', array() );
-	}
-
-	public function testJustMention() {
-		$this->checkMentions( '@vboctor', array( 'vboctor' ) );
-	}
-
-	public function testWithDotInMiddle() {
-		$this->checkMentions( '@victor.boctor', array( 'victor.boctor' ) );
-	}
-
-	public function testWithDotAtEnd() {
-		$this->checkMentions( '@vboctor.', array( 'vboctor' ) );
-	}
-
-	public function testMentionWithUnderscore() {
-		$this->checkMentions( '@victor_boctor', array( 'victor_boctor' ) );
-	}
-
-	public function testMentionAtStart() {
-		$this->checkMentions( '@vboctor will check', array( 'vboctor' ) );
-	}
-
-	public function testMentionAtEnd() {
-		$this->checkMentions( 'Please assign to @vboctor', array( 'vboctor' ) );
-	}
-
-	public function testMentionAtEndWithFullstop() {
-		$this->checkMentions( 'Please assign to @vboctor.', array( 'vboctor' ) );
-	}
-
-	public function testMentionSeparatedWithColon() {
-		$this->checkMentions( '@vboctor: please check.', array( 'vboctor' ) );
-	}
-
-	public function testMentionSeparatedWithSemiColon() {
-		$this->checkMentions( '@vboctor; please check.', array( 'vboctor' ) );
-	}
-
-	public function testMentionWithMultiple() {
-		$this->checkMentions( 'Please check with @vboctor and @someone.', array( 'vboctor', 'someone' ) );
-	}
-
-	public function testMentionWithDuplicates() {
-		$this->checkMentions( 'Please check with @vboctor and @vboctor.', array( 'vboctor' ) );
-	}
-
-	public function testMentionWithMultipleSlashSeparated() {
-		$this->checkMentions( '@vboctor/@someone, please check.', array( 'vboctor', 'someone' ) );
-	}
-
-	public function testMentionWithMultipleNewLineSeparated() {
-		$this->checkMentions( "Check with:\n@vboctor\n@someone.", array( 'vboctor', 'someone' ) );
-	}
-
-	public function testMentionWithEmailAddress() {
-		$this->checkMentions( 'xxx@example.com', array() );
-	}
-
-	public function testMentionWithLocalhost() {
-		$this->checkMentions( 'xxx@localhost', array() );
-	}
-
-	public function testMentionAtEndOfWord() {
-		$this->checkMentions( "vboctor@", array() );
-	}
-
-	public function testMentionWithInvalidChars() {
-		$this->checkMentions( "@vboctor%%%%%", array() );
-	}
-
-	public function testMentionUsernameThatIsAnEmailAddress() {
-		$this->checkMentions( "@vboctor@example.com", array() );
-	}
-
-	public function testMentionUsernameThatIsLocalhost() {
-		$this->checkMentions( "@vboctor@localhost", array() );
-	}
-
-	private function checkMentions( $p_text, $p_expected_array ) {
-		$t_array = mention_get_candidates( $p_text );
-		
-		$this->assertEquals( count( $p_expected_array ), count( $t_array ) );
-		for( $i = 0; $i < count( $p_expected_array ); $i++ ) {
-			$this->assertEquals( $p_expected_array[$i], $t_array[$i] );
-		}
 	}
 }

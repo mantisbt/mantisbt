@@ -105,9 +105,9 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 			echo (integer)$p_value;
 			return;
 		case CONFIG_TYPE_STRING:
-			$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
+			$t_value = string_html_specialchars( config_eval( $p_value ) );
 			if( $p_for_display ) {
-				$t_value = '<p id="adm-config-value">\'' . $t_value . '\'</p>';
+				$t_value = '<p id="adm-config-value">\'' . string_nl2br( $t_value ) . '\'</p>';
 			}
 			echo $t_value;
 			return;

@@ -1259,3 +1259,24 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	$p_query = db_oracle_order_binds_sequentially( $p_query );
 	return $p_query;
 }
+
+/**
+ * Replace 4-byte UTF-8 chars
+ * This is a workaround to avoid data getting truncated on MySQL databases
+ * using native utf8 encoding, which only supports 3 bytes chars (see #20431)
+ * @param string $p_string
+ * @return string
+ */
+function db_mysql_fix_utf8( $p_string ) {
+	if( !db_is_mysql() ) {
+		return $p_string;
+	}
+	return preg_replace(
+		# 4-byte UTF8 chars always start with bytes 0xF0-0xF7 (0b11110xxx)
+		'/[\xF0-\xF7].../s',
+		# replace with U+FFFD to avoid potential Unicode XSS attacks,
+		# see http://unicode.org/reports/tr36/#Deletion_of_Noncharacters
+		"\xEF\xBF\xBD",
+		$p_string
+	);
+}
