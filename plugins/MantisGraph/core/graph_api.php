@@ -211,9 +211,11 @@ function graph_status_colors_to_colors() {
  * @param string  $p_title        Title.
  * @param integer $p_graph_width  Width of graph in pixels.
  * @param integer $p_graph_height Height of graph in pixels.
+ * @param string  $p_series_name  The name of the data series.
+ * @param string  $p_color        The bar color.
  * @return void
  */
-function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
+function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400, $p_series_name, $p_color = '#fcbdbd' ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -223,7 +225,7 @@ function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_gr
 	$t_values = array_values( $p_metrics );
 	$t_js_values = graph_numeric_array( $t_values );
 
-	$t_colors = graph_status_colors_to_colors();
+	$t_colors = array( $p_color );
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
@@ -237,10 +239,10 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{$t_js_labels}],
         datasets: [{
-            label: '# of issues',
+            label: '{$p_series_name}',
             data: [{$t_js_values}],
-            backgroundColor: [{$t_background_colors}],
-            borderColor: [{$t_border_colors}],
+            backgroundColor: {$t_background_colors},
+            borderColor: {$t_border_colors},
             borderWidth: 1
         }]
     },
@@ -675,9 +677,10 @@ function graph_total_metrics( array $p_metrics ) {
  *
  * @param string $p_enum_string Enumeration string.
  * @param string $p_enum        Enumeration field.
+ * @param array  $p_exclude_codes Array of codes to exclude from the enum.
  * @return array
  */
-function create_bug_enum_summary( $p_enum_string, $p_enum ) {
+function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array() ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
@@ -692,10 +695,33 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	foreach ( $t_assoc_array as $t_value => $t_label ) {
 		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE ' . $p_enum . '=' . db_param() . ' ' . $t_specific_where;
 		$t_result = db_query( $t_query, array( $t_value ) );
-		$t_metrics[$t_label] = db_result( $t_result, 0 );
+
+		if ( !in_array( $t_value, $p_exclude_codes ) ) {
+			$t_metrics[$t_label] = db_result( $t_result, 0 );
+		}
 	}
 
 	return $t_metrics;
+}
+
+/**
+ * Calculate distribution of issues by statuses excluding closed status.
+ *
+ * @return array An array with keys being status names and values being number of issues with such status.
+ */
+function create_bug_status_summary() {
+	$t_status_enum = config_get( 'status_enum_string' );
+	$t_statuses = MantisEnum::getValues( $t_status_enum );
+	$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
+
+	$t_closed_statuses = array();
+	foreach( $t_statuses as $t_status_code ) {
+		if ( $t_status_code >= $t_closed_threshold ) {
+			$t_closed_statuses[] = $t_status_code;
+		}
+	}
+
+	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses );
 }
 
 /**

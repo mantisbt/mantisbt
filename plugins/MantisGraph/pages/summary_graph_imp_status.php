@@ -35,12 +35,12 @@ print_summary_menu( 'summary_page.php' );
 
 echo '<br />';
 print_summary_submenu();
-$t_width = plugin_config_get( 'window_width' );
-$t_width = (int)( ( $t_width - 50 ) * 0.6 );
 
-$t_height = plugin_config_get( 'bar_aspect' ) * $t_width;
+$t_width = 500;
+$t_height = 400;
+$t_series_name = lang_get( 'bugs' );
 
-$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
+$t_metrics = create_bug_status_summary();
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -55,7 +55,7 @@ $t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status'
             </div>
 
             <?php
-            graph_bar( $t_metrics, lang_get( 'by_status' ), $t_width, $t_height );
+            graph_bar( $t_metrics, lang_get( 'by_status' ), $t_width, $t_height, $t_series_name );
             echo '<div class="space-10"></div>';
             graph_pie( $t_metrics, plugin_lang_get( 'by_status_pct' ), $t_width, $t_height );
             ?>
