@@ -24,21 +24,16 @@
  */
 
 require_once( 'core.php' );
+plugin_require_api( 'core/graph_api.php' );
+
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
-
 layout_page_begin( 'summary_page.php' );
 
-?>
-    <br />
-<?php
+echo '<br />';
 
 print_summary_menu( 'summary_graph_page.php' );
-
-$t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper', 'summary_graph_byreporter' );
-$t_wide = 2;
-$t_graph_width = 500;
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -52,28 +47,28 @@ $t_graph_width = 500;
                 </h4>
             </div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
+            <div class="col-md-6 col-xs-12">
+<?php
+                $t_metrics = create_cumulative_bydate();
+                graph_cumulative_bydate( $t_metrics );
+?>
+            </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-condensed">
-                            <?php
-                            $t_graph_count = count($t_graphs );
-                            for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
-                                if( 0 == ( $t_pos % $t_wide ) ) {
-                                    print( "<tr>\n" );
-                                }
-                                echo '<td>';
-                                printf( '<img src="%s.php&amp;width=%d" alt="" />', plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
-                                echo '</td>';
-                                if( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
-                                    print( "</tr>\n" );
-                                }
-                            }
-                            ?>
-                        </table>
-                    </div>
-                </div>
+            <div class="col-md-6 col-xs-12">
+<?php
+                # TODO: summary_graph_bydeveloper
+                graph_cumulative_bydate( $t_metrics );
+
+?>
+            </div>
+
+
+            <div class="col-md-6 col-xs-12">
+<?php
+                # TODO: summary_graph_byreporter
+                graph_cumulative_bydate( $t_metrics );
+
+?>
             </div>
         </div>
     </div>

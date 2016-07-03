@@ -344,55 +344,69 @@ EOT;
  * Cumulative line graph
  *
  * @param array   $p_metrics      Graph Data.
- * @param integer $p_graph_width  Width of graph in pixels.
- * @param integer $p_graph_height Height of graph in pixels.
  * @return void
  */
-function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ) {
-	$t_graph_font = graph_get_font();
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+function graph_cumulative_bydate( array $p_metrics ) {
+	static $s_id = 0;
 
-	$t_graph = new ezcGraphLineChart();
+	$s_id++;
 
-	$t_graph->background->color = '#FFFFFF';
+	$t_labels = array_keys( $p_metrics[0] );
+	$t_formatted_labels = array_map( function($label) { return date( 'Ymd', $label ); }, $t_labels );
+	$t_js_labels = graph_strings_array( $t_formatted_labels );
 
-	$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
+	$t_values = array_values( $p_metrics[0] );
+	$t_opened_values = graph_numeric_array( $t_values );
 
-	$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
-	$t_graph->data[0]->label = plugin_lang_get( 'legend_reported' );
-	$t_graph->data[0]->color = '#FF0000';
+	$t_values = array_values( $p_metrics[1] );
+	$t_resolved_values = graph_numeric_array( $t_values );
 
-	$t_graph->data[1] = new ezcGraphArrayDataSet( $p_metrics[1] );
-	$t_graph->data[1]->label = plugin_lang_get( 'legend_resolved' );
-	$t_graph->data[1]->color = '#0000FF';
+	$t_values = array_values( $p_metrics[2] );
+	$t_still_open_values = graph_numeric_array( $t_values );
 
-	$t_graph->data[2] = new ezcGraphArrayDataSet( $p_metrics[2] );
-	$t_graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
-	$t_graph->data[2]->color = '#000000';
+	$t_colors = graph_status_colors_to_colors();
+	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
+	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
-	$t_graph->additionalAxis[2] = $t_n_axis = new ezcGraphChartElementNumericAxis();
-	$t_n_axis->chartPosition = 1;
-	$t_n_axis->background = '#005500';
-	$t_n_axis->border = '#005500';
-	$t_n_axis->position = ezcGraph::BOTTOM;
-	$t_graph->data[2]->yAxis = $t_n_axis;
-
-	$t_graph->xAxis->labelCallback =  'graph_date_format';
-	$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-	$t_graph->xAxis->axisLabelRenderer->angle = -45;
-
-	$t_graph->legend->position      = ezcGraph::BOTTOM;
-	$t_graph->legend->background    = '#FFFFFF80';
-
-	$t_graph->driver = new ezcGraphGdDriver();
-	# $t_graph->driver->options->supersampling = 1;
-	$t_graph->driver->options->jpegQuality = 100;
-	$t_graph->driver->options->imageFormat = IMG_JPEG;
-
-	$t_graph->title = plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' );
-	$t_graph->options->font = $t_graph_font ;
-
-	$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
+echo <<<EOT
+<canvas id="linebydate{$s_id}" width="500" height="400"></canvas>
+<script type="text/javascript">
+$(document).ready( function() {
+    var ctx = $("#linebydate{$s_id}").get(0).getContext("2d");
+    var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+	        labels: [{$t_js_labels}],
+	        datasets: [
+	            {
+	            	label: 'opened',
+	            	backgroundColor: "rgba(255, 158, 158, 0.5)",
+	                data: [{$t_opened_values}]
+	            },
+	            {
+	            	label: 'resolved',
+	            	backgroundColor: "rgba(49, 196, 110, 0.5)",
+	                data: [{$t_resolved_values}]
+	            },
+				{
+	            	label: 'still open',
+	            	backgroundColor: "rgba(255, 0, 0, 1)",
+	                data: [{$t_still_open_values}]
+	            },	        ]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+});
+</script>
+EOT;
 }
 
 /**
@@ -718,10 +732,11 @@ function create_cumulative_bydate() {
 			WHERE ' . $t_specific_where . '
 						AND {bug}.status >= ' . db_param() . '
 						AND ( ( {bug_history}.new_value >= ' . db_param() . '
+								AND {bug_history}.old_value < ' . db_param() . '
 								AND {bug_history}.field_name = \'status\' )
 						OR {bug_history}.id is NULL )
 			ORDER BY {bug}.id, date_modified ASC';
-	$t_result = db_query( $t_query, array( $t_res_val, (string)$t_res_val ) );
+	$t_result = db_query( $t_query, array( $t_res_val, (string)$t_res_val, (string)$t_res_val ) );
 	$t_bug_count = db_num_rows( $t_result );
 
 	$t_last_id = 0;
@@ -764,10 +779,11 @@ function create_cumulative_bydate() {
 
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
+	$t_last_still_open = 0;
 	foreach( $t_calc_metrics as $i => $t_values ) {
 		$t_date = $i * SECONDS_PER_DAY;
-		$t_metrics[0][$t_date] = $t_last_opened = $t_calc_metrics[$i][0] + $t_last_opened;
-		$t_metrics[1][$t_date] = $t_last_resolved = $t_calc_metrics[$i][1] + $t_last_resolved;
+		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_calc_metrics[$i][0];
+		$t_metrics[1][$t_date] = $t_last_resolved = $t_last_resolved + $t_calc_metrics[$i][1];
 		$t_metrics[2][$t_date] = $t_metrics[0][$t_date] - $t_metrics[1][$t_date];
 	}
 	return $t_metrics;
