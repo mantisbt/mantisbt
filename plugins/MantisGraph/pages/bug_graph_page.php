@@ -109,7 +109,7 @@ $t_show = array(
 <?php
 # build the graphs if both an interval and graph type are selected
 if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {
-	$t_width = plugin_config_get( 'window_width' );
+	$t_width = 500;
 	$t_summary = ( $f_type % 2 ) != 0;
 	$t_body = (int)( $f_type / 2 );
 	$f_start = $t_period->get_start_formatted();
@@ -127,14 +127,7 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) 
 		}
 	}
 	if( ($t_body == 2 ) || ($t_body == 3) ) {
-		if( $f_show_as_table ) {
-			include( config_get_global( 'plugin_path' ) . plugin_get_current() .  '/pages/bug_graph_bycategory.php' );
-		} else {
-			echo '<br /><img src="' . plugin_page( 'bug_graph_bycategory.php' )
-				. '&amp;width=600&amp;interval=' . $f_interval
-				. '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end
-				. '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
-		}
+		include( config_get_global( 'plugin_path' ) . plugin_get_current() .  '/pages/bug_graph_bycategory.php' );
 	}
 }
 ?>

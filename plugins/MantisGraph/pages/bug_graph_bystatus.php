@@ -29,8 +29,8 @@ plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$f_width = gpc_get_int( 'width', 600 );
-$t_ar = plugin_config_get( 'bar_aspect' );
+$t_width = 500;
+$t_height = 400;
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
@@ -231,5 +231,5 @@ if( $f_show_as_table ) {
 	echo '</table>';
     echo '</div>';
 } else {
-	graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $f_width, $f_width * $t_ar );
+	graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $t_width, $t_height );
 }
