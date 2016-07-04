@@ -1,0 +1,6 @@
+{
+    "name": "mantisbt/mantisbt",
+    "description": "Mantis Bug Tracker",
+    "license": "GPL",
+    "require": {}
+}

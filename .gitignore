@@ -18,8 +18,9 @@ docbook/*/tmp
 !docbook/Admin_Guide/*/config
 
 # Build output
-build/
-node_modules/
+/build/
+/node_modules/
+/vendor/
 
 # Untracked plugins
 plugins/*
