@@ -696,6 +696,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( is_blank( $t_file_path ) ) {
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		} elseif ($t_file_path[strlen($t_file_path)-1] != '/') {
+			$t_file_path .= '/';
 		}
 	}
 
@@ -708,6 +710,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
+				//var_dump([$t_tmp_file, $t_disk_file_name]);
 				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
 					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}

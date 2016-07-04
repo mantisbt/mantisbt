@@ -754,6 +754,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		# Plugin / Event added options
 		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
 		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+//			var_dump([$t_plugin, $t_plugin_menu_options]);
 			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
@@ -788,6 +789,10 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		# Add custom options
 		$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
 		$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
+		//pre_var_dump($t_menu_options);
+		foreach ($t_menu_options as $link) {
+			layout_sidebar_menu($link->href, $link->name, $link->icon);
+		}
 
 		# Time Tracking / Billing
 		if( config_get( 'time_tracking_enabled' ) && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
