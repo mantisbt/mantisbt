@@ -14,11 +14,3 @@
 	path = library/securimage
 	url = https://github.com/mantisbt/securimage.git
 	branch = mantis
-[submodule "library/ezc/Base"]
-	path = library/ezc/Base
-	url = https://github.com/mantisbt/ZetaBase.git
-	branch = mantis
-[submodule "library/ezc/Graph"]
-	path = library/ezc/Graph
-	url = https://github.com/mantisbt/ZetaGraph.git
-	branch = mantis
