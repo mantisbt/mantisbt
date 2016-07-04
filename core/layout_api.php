@@ -285,7 +285,7 @@ function layout_head_javascript() {
 function layout_body_javascript() {
 	# bootstrap
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js' );
+		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH );
 	} else {
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
 	}
