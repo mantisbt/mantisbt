@@ -34,6 +34,8 @@ layout_page_begin( 'summary_page.php' );
 echo '<br />';
 
 print_summary_menu( 'summary_graph_page.php' );
+
+$t_series_name = lang_get( 'bugs' );
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -42,31 +44,49 @@ print_summary_menu( 'summary_graph_page.php' );
         <div class="widget-box widget-color-blue2">
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bars"></i>
+                    <i class="ace-icon fa fa-bar-chart"></i>
                     <?php echo lang_get('summary_title') ?>
                 </h4>
             </div>
 
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12 widget-box widget-color-blue2">
+                <div class="widget-header widget-header-small">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-bar-chart"></i>
+                        <?php echo 'Top Developers by Fixed Issues' ?>
+                    </h4>
+                </div>
+
+<?php
+                $t_metrics = create_developer_resolved_summary();
+                graph_bar( $t_metrics, lang_get( 'by_developer' ), $t_series_name );
+?>
+            </div>
+
+
+            <div class="col-md-6 col-xs-12 widget-box widget-color-blue2">
+                <div class="widget-header widget-header-small">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-bar-chart"></i>
+                        <?php echo 'Top Reporters' ?>
+                    </h4>
+                </div>
+<?php
+                $t_metrics = create_reporter_summary();
+                graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name );
+?>
+            </div>
+
+            <div class="col-md-6 col-xs-12 widget-box widget-color-blue2">
+                <div class="widget-header widget-header-small">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-bar-chart"></i>
+                        <?php echo 'Issues Opened, Resolved, and Remaining' ?>
+                    </h4>
+                </div>
 <?php
                 $t_metrics = create_cumulative_bydate();
                 graph_cumulative_bydate( $t_metrics );
-?>
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-<?php
-                $t_metrics = create_developer_summary();
-                graph_group( $t_metrics, lang_get( 'by_developer' ) );
-?>
-            </div>
-
-
-            <div class="col-md-6 col-xs-12">
-<?php
-                $t_series_name = lang_get( 'bugs' );
-                $t_metrics = create_reporter_summary();
-                graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name );
 ?>
             </div>
         </div>

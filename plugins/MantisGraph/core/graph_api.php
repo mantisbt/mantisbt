@@ -570,54 +570,37 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 }
 
 /**
- * Create summary table of developers
- * @return array
+ * Create summary for issues resolved by a developed
+ * @return array with key being username and value being # of issues fixed.
  */
-function create_developer_summary() {
+function create_developer_resolved_summary() {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
-	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
-	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_clo_val = config_get( 'bug_closed_status_threshold' );
+	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND status >= ' .
+		db_param() . ' AND resolution = ' . db_param() . ' GROUP BY handler_id ORDER BY count DESC';
+	$t_result = db_query( $t_query, array( $t_resolved_status_threshold, FIXED ), 20 );
 
-	$t_query = 'SELECT handler_id, status FROM {bug} WHERE handler_id > 0 ' . $t_specific_where;
-	$t_result = db_query( $t_query );
-
-	$t_handler_arr = array();
-	$t_handlers = array();
+	$t_handler_array = array();
+	$t_handler_ids = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( !isset( $t_handler_arr[$t_row['handler_id']] ) ) {
-			$t_handler_arr[$t_row['handler_id']]['res'] = 0;
-			$t_handler_arr[$t_row['handler_id']]['open'] = 0;
-			$t_handler_arr[$t_row['handler_id']]['close'] = 0;
-			$t_handlers[] = $t_row['handler_id'];
-		}
-		if( $t_row['status'] >= $t_res_val ) {
-			if( $t_row['status'] >= $t_clo_val ) {
-				$t_handler_arr[$t_row['handler_id']]['close']++;
-			} else {
-				$t_handler_arr[$t_row['handler_id']]['res']++;
-			}
-		} else {
-			$t_handler_arr[$t_row['handler_id']]['open']++;
-		}
+		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
+		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
-	if( count( $t_handler_arr ) == 0 ) {
-		return array( 'open' => array() );
+	if( count( $t_handler_array ) == 0 ) {
+		return array();
 	}
 
-	user_cache_array_rows( $t_handlers );
+	user_cache_array_rows( $t_handler_ids );
 
-	foreach( $t_handler_arr as $t_handler => $t_data ) {
-		$t_username = user_get_name( $t_handler );
-
-		$t_metrics['open'][$t_username] = $t_data['open'];
-		$t_metrics['resolved'][$t_username] = $t_data['res'];
-		$t_metrics['closed'][$t_username] = $t_data['close'];
+	foreach( $t_handler_array as $t_handler_id => $t_count ) {
+		$t_metrics[user_get_name( $t_handler_id )] = $t_count;
 	}
-	ksort( $t_metrics );
+
+	arsort( $t_metrics );
 
 	return $t_metrics;
 }
