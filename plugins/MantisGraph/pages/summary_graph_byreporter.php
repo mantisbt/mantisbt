@@ -28,7 +28,5 @@ plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$t_width = 500;
-$t_height = 400;
 $t_metrics = create_reporter_summary();
-graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_width, $t_height );
+graph_bar( $t_metrics, lang_get( 'by_reporter' ) );

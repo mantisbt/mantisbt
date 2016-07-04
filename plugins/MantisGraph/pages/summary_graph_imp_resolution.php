@@ -38,8 +38,6 @@ print_summary_menu( 'summary_page.php' );
 echo '<br />';
 print_summary_submenu();
 
-$t_width = 500;
-$t_height = 400;
 $t_series_name = lang_get( 'bugs' );
 $t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'resolution' );
 # $t_group_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution' );
@@ -56,13 +54,15 @@ $t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'res
 	</h4>
 </div>
 
-<?php
-graph_bar( $t_metrics, lang_get( 'by_resolution' ), $t_width, $t_height, $t_series_name );
-echo '<div class="space-10"></div>';
-graph_pie( $t_metrics, plugin_lang_get( 'by_resolution_pct' ), $t_width, $t_height );
-# graph_group( $t_group_metrics, lang_get( 'by_resolution' ), $t_width, $t_height );
-?>
+<div class="col-md-6 col-xs-12">
+	<?php graph_bar( $t_metrics, lang_get( 'by_resolution' ), $t_series_name ); ?>
+</div>
 
+<div class="col-md-6 col-xs-12">
+	<?php graph_pie( $t_metrics, plugin_lang_get( 'by_resolution_pct' ) ); ?>
+</div>
+
+<?php # TODO graph_group( $t_group_metrics, lang_get( 'by_resolution' ) ); ?>
 </div>
 </div>
 

@@ -38,8 +38,6 @@ echo '<br />';
 
 print_summary_submenu();
 
-$t_width = 500;
-$t_height = 400;
 $t_series_name = lang_get( 'bugs' );
 $t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority' );
 # $t_group_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority' );
@@ -56,11 +54,15 @@ $t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'prior
 	</h4>
 </div>
 
-<?php
-graph_bar( $t_metrics, lang_get( 'by_priority' ), $t_width, $t_height, $t_series_name );
-echo '<div class="space-10"></div>';
-graph_pie( $t_metrics, plugin_lang_get( 'by_priority_pct' ), $t_width, $t_height );
-# graph_group( $t_group_metrics, lang_get( 'by_priority' ), $t_width, $t_height );
+<div class="col-md-6 col-xs-12">
+<?php graph_bar( $t_metrics, lang_get( 'by_priority' ), $t_series_name ); ?>
+</div>
+
+<div class="col-md-6 col-xs-12">
+<?php graph_pie( $t_metrics, plugin_lang_get( 'by_priority_pct' ) ); ?>
+</div>
+
+# TODO: graph_group( $t_group_metrics, lang_get( 'by_priority' ) );
 ?>
 
 </div>

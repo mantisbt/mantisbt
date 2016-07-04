@@ -38,8 +38,6 @@ print_summary_menu( 'summary_page.php' );
 echo '<br />';
 print_summary_submenu();
 
-$t_width = 500;
-$t_height = 400;
 $t_series_name = lang_get( 'bugs' );
 $t_metrics = create_category_summary();
 ?>
@@ -56,9 +54,9 @@ $t_metrics = create_category_summary();
 </div>
 
 <?php
-graph_bar( $t_metrics, lang_get( 'by_category' ), $t_width, $t_height, $t_series_name );
+graph_bar( $t_metrics, lang_get( 'by_category' ), $t_series_name );
 # echo '<div class="space-10"></div>';
-# graph_pie( $t_metrics, plugin_lang_get( 'by_category_pct' ), $t_width, $t_height );
+# graph_pie( $t_metrics, plugin_lang_get( 'by_category_pct' ) );
 ?>
 
 </div>

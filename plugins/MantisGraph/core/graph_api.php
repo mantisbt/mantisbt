@@ -151,13 +151,11 @@ function graph_status_colors_to_colors() {
  *
  * @param array   $p_metrics      Graph Data.
  * @param string  $p_title        Title.
- * @param integer $p_graph_width  Width of graph in pixels.
- * @param integer $p_graph_height Height of graph in pixels.
  * @param string  $p_series_name  The name of the data series.
  * @param string  $p_color        The bar color.
  * @return void
  */
-function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400, $p_series_name, $p_color = '#fcbdbd' ) {
+function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = '#fcbdbd' ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -172,7 +170,7 @@ function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_gr
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="barchart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<canvas id="barchart{$s_id}" width="500" height="400"></canvas>
 <script>
 $(document).ready( function() {
 var ctx = document.getElementById("barchart{$s_id}");
@@ -212,7 +210,7 @@ EOT;
  * @param integer $p_graph_height Height of graph in pixels.
  * @return void
  */
-function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
+function graph_group( array $p_metrics, $p_title = '' ) {
 	# $p_metrics is an array of three arrays
 	#   $p_metrics['open'] = array( 'enum' => value, ...)
 	#   $p_metrics['resolved']
@@ -240,7 +238,7 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="groupbarchart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<canvas id="groupbarchart{$s_id}" width="500" height="400"></canvas>
 <script>
 $(document).ready( function() {
 var ctx = document.getElementById("groupbarchart{$s_id}");
@@ -289,11 +287,9 @@ EOT;
  *
  * @param array         $p_metrics       Graph Data.
  * @param string        $p_title         Title.
- * @param integer       $p_graph_width   Width of graph in pixels.
- * @param integer       $p_graph_height  Height of graph in pixels.
  * @return void
  */
-function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350 ) {
+function graph_pie( array $p_metrics, $p_title = '' ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -309,7 +305,7 @@ function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_gr
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
 echo <<<EOT
-<canvas id="piechart{$s_id}" width="{$p_graph_width}" height="{$p_graph_height}"></canvas>
+<canvas id="piechart{$s_id}" width="500" height="400"></canvas>
 <script>
 $(document).ready( function() {
 var ctx = document.getElementById("piechart{$s_id}");
