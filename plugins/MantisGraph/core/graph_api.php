@@ -364,6 +364,10 @@ function graph_cumulative_bydate( array $p_metrics ) {
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 
+	$t_legend_opened = plugin_lang_get( 'legend_reported' );
+	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
+	$t_legend_still_open = plugin_lang_get( 'legend_still_open' );
+
 echo <<<EOT
 <canvas id="linebydate{$s_id}" width="500" height="400"></canvas>
 <script type="text/javascript">
@@ -375,17 +379,17 @@ $(document).ready( function() {
 	        labels: [{$t_js_labels}],
 	        datasets: [
 	            {
-	            	label: 'opened',
+	            	label: '{$t_legend_opened}',
 	            	backgroundColor: "rgba(255, 158, 158, 0.5)",
 	                data: [{$t_opened_values}]
 	            },
 	            {
-	            	label: 'resolved',
+	            	label: '{$t_legend_resolved}',
 	            	backgroundColor: "rgba(49, 196, 110, 0.5)",
 	                data: [{$t_resolved_values}]
 	            },
 				{
-	            	label: 'still open',
+	            	label: '{$t_legend_still_open}',
 	            	backgroundColor: "rgba(255, 0, 0, 1)",
 	                data: [{$t_still_open_values}]
 	            },	        ]
