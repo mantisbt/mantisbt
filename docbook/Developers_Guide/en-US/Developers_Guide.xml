@@ -9,6 +9,7 @@
         <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
         -->
 	<xi:include href="Contributors.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Build.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Database.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Events.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Plugins.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
