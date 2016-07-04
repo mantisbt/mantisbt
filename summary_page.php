@@ -124,12 +124,9 @@ layout_page_header( lang_get( 'summary_link' ) );
 
 layout_page_begin( __FILE__ );
 
-?>
-
-<?php
 print_summary_menu( 'summary_page.php' );
-
-print_summary_submenu(); ?>
+print_summary_submenu();
+?>
 
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>

@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This page displays "improved" charts on resolutions : bars, 3Dpie and a mix resolutions per status
+ * This page displays "improved" charts on categories : categories on bars and 3Dpie
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -34,15 +34,12 @@ layout_page_header();
 layout_page_begin( 'summary_page.php' );
 
 print_summary_menu( 'summary_page.php' );
-
-echo '<br />';
 print_summary_submenu();
 
 $t_series_name = lang_get( 'bugs' );
-$t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'resolution' );
-# $t_group_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution' );
+$t_metrics = create_category_summary();
 ?>
-
+    
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 
@@ -50,19 +47,16 @@ $t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'res
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-bar-chart-o"></i>
-		<?php echo plugin_lang_get( 'graph_imp_resolution_title' ) ?>
+		<?php echo plugin_lang_get( 'graph_imp_category_title' ) ?>
 	</h4>
 </div>
 
-<div class="col-md-6 col-xs-12">
-	<?php graph_bar( $t_metrics, lang_get( 'by_resolution' ), $t_series_name ); ?>
-</div>
+<?php
+graph_bar( $t_metrics, lang_get( 'by_category' ), $t_series_name );
+# echo '<div class="space-10"></div>';
+# graph_pie( $t_metrics, plugin_lang_get( 'by_category_pct' ) );
+?>
 
-<div class="col-md-6 col-xs-12">
-	<?php graph_pie( $t_metrics, plugin_lang_get( 'by_resolution_pct' ) ); ?>
-</div>
-
-<?php # TODO graph_group( $t_group_metrics, lang_get( 'by_resolution' ) ); ?>
 </div>
 </div>
 

@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This page displays "improved" charts on severities : bars, 3Dpie and a mix severities per status
+ * This page displays "improved" charts on status : the old one and a 3D Pie
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -29,16 +29,13 @@ plugin_require_api( 'core/graph_api.php' );
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
-
 layout_page_begin( 'summary_page.php' );
 
 print_summary_menu( 'summary_page.php' );
-echo '<br />';
 print_summary_submenu();
 
 $t_series_name = lang_get( 'bugs' );
-$t_metrics = create_bug_enum_summary( lang_get( 'severity_enum_string' ), 'severity' );
-# $t_group_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
+$t_metrics = create_bug_status_summary();
 ?>
 
     <div class="col-md-12 col-xs-12">
@@ -48,21 +45,18 @@ $t_metrics = create_bug_enum_summary( lang_get( 'severity_enum_string' ), 'sever
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart-o"></i>
-                    <?php echo plugin_lang_get( 'graph_imp_severity_title' ) ?>
+                    <?php echo plugin_lang_get( 'graph_imp_status_title' ) ?>
                 </h4>
             </div>
 
             <div class="col-md-6 col-xs-12">
-                <?php graph_bar( $t_metrics, lang_get( 'by_severity' ), $t_series_name ); ?>
+            <?php graph_bar( $t_metrics, lang_get( 'by_status' ), $t_series_name ); ?>
             </div>
 
             <div class="col-md-6 col-xs-12">
-                <?php graph_pie( $t_metrics, plugin_lang_get( 'by_severity_pct' ) ); ?>
+            <?php graph_pie( $t_metrics, plugin_lang_get( 'by_status_pct' ) ); ?>
             </div>
-
-<?php # TODO: graph_group( $t_group_metrics, lang_get( 'by_severity' ) ); ?>
         </div>
     </div>
-
 <?php
 layout_page_end();
