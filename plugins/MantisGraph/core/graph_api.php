@@ -631,18 +631,14 @@ function create_reporter_summary() {
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = 'SELECT reporter_id FROM {bug} WHERE ' . $t_specific_where;
-	$t_result = db_query( $t_query );
+	$t_query = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' GROUP BY reporter_id ORDER BY count DESC';
+	$t_result = db_query( $t_query, array(), 20 );
 
 	$t_reporter_arr = array();
 	$t_reporters = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( isset( $t_reporter_arr[$t_row['reporter_id']] ) ) {
-			$t_reporter_arr[$t_row['reporter_id']]++;
-		} else {
-			$t_reporter_arr[$t_row['reporter_id']] = 1;
-			$t_reporters[] = $t_row['reporter_id'];
-		}
+		$t_reporter_arr[$t_row['reporter_id']] = $t_row['count'];
+		$t_reporters[] = $t_row['reporter_id'];
 	}
 
 	if( count( $t_reporter_arr ) == 0 ) {
@@ -654,7 +650,8 @@ function create_reporter_summary() {
 	foreach( $t_reporter_arr as $t_reporter => $t_count ) {
 		$t_metrics[user_get_name( $t_reporter )] = $t_count;
 	}
-	ksort( $t_metrics );
+
+	arsort( $t_metrics );
 
 	return $t_metrics;
 }
