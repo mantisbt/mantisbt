@@ -570,7 +570,7 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 }
 
 /**
- * Create summary for issues resolved by a developed
+ * Create summary for issues resolved by a developer
  * @return array with key being username and value being # of issues fixed.
  */
 function create_developer_resolved_summary() {
@@ -579,9 +579,46 @@ function create_developer_resolved_summary() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND status >= ' .
-		db_param() . ' AND resolution = ' . db_param() . ' GROUP BY handler_id ORDER BY count DESC';
-	$t_result = db_query( $t_query, array( $t_resolved_status_threshold, FIXED ), 20 );
+	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND handler_id <> ' .
+		db_param() . ' AND status >= ' . db_param() . ' AND resolution = ' . db_param() .
+		' GROUP BY handler_id ORDER BY count DESC';
+	$t_result = db_query( $t_query, array( NO_USER, $t_resolved_status_threshold, FIXED ), 20 );
+
+	$t_handler_array = array();
+	$t_handler_ids = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
+		$t_handler_ids[] = $t_row['handler_id'];
+	}
+
+	if( count( $t_handler_array ) == 0 ) {
+		return array();
+	}
+
+	user_cache_array_rows( $t_handler_ids );
+
+	foreach( $t_handler_array as $t_handler_id => $t_count ) {
+		$t_metrics[user_get_name( $t_handler_id )] = $t_count;
+	}
+
+	arsort( $t_metrics );
+
+	return $t_metrics;
+}
+
+/**
+ * Create summary for issues opened by a developer
+ * @return array with key being username and value being # of issues fixed.
+ */
+function create_developer_open_summary() {
+	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
+
+	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND handler_id <> ' .
+		db_param() . ' AND status < ' . db_param() . ' GROUP BY handler_id ORDER BY count DESC';
+	$t_result = db_query( $t_query, array( NO_USER, $t_resolved_status_threshold ) );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
