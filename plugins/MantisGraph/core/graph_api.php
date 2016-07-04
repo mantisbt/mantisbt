@@ -614,8 +614,9 @@ function create_reporter_summary() {
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' GROUP BY reporter_id ORDER BY count DESC';
-	$t_result = db_query( $t_query, array(), 20 );
+	$t_query = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND resolution = ' .
+		db_param() . ' GROUP BY reporter_id ORDER BY count DESC';
+	$t_result = db_query( $t_query, array( FIXED ), 20 );
 
 	$t_reporter_arr = array();
 	$t_reporters = array();
