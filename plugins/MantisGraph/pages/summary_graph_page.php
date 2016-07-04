@@ -56,18 +56,17 @@ print_summary_menu( 'summary_graph_page.php' );
 
             <div class="col-md-6 col-xs-12">
 <?php
-                # TODO: summary_graph_bydeveloper
-                graph_cumulative_bydate( $t_metrics );
-
+                $t_metrics = create_developer_summary();
+                graph_group( $t_metrics, lang_get( 'by_developer' ) );
 ?>
             </div>
 
 
             <div class="col-md-6 col-xs-12">
 <?php
-                # TODO: summary_graph_byreporter
-                graph_cumulative_bydate( $t_metrics );
-
+                $t_series_name = lang_get( 'bugs' );
+                $t_metrics = create_reporter_summary();
+                graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name );
 ?>
             </div>
         </div>
