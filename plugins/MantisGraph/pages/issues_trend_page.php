@@ -58,21 +58,13 @@ layout_page_begin();
 $t_period = new Period();
 $t_period->set_period_from_selector( 'interval' );
 $t_types = array(
-				0 => plugin_lang_get( 'select' ),
-				2 => plugin_lang_get( 'select_bystatus' ),
-				3 => plugin_lang_get( 'select_summbystatus' ),
-				4 => plugin_lang_get( 'select_bycat' ),
-				6 => plugin_lang_get( 'select_both' ),
+				1 => plugin_lang_get( 'status_link' ),
+				2 => plugin_lang_get( 'category_link' ),
 		   );
-
-$t_show = array(
-				0 => plugin_lang_get( 'show_as_graph' ),
-				1 => plugin_lang_get( 'show_as_table' ),
-		  );
 ?>
 <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
-    <form id="graph_form" method="post" action="<?php echo plugin_page( 'bug_graph_page.php' ); ?>" class="form-inline">
+    <form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
         <div class="widget-box widget-color-blue2">
         <div class="widget-body">
         <div class="widget-main no-padding">
@@ -91,12 +83,7 @@ $t_show = array(
                     </td>
                     <td class="center">
                     <div class="form-group">
-						<?php echo get_dropdown( $t_show, 'show_table', $f_show_as_table ? 1 : 0 ); ?>
-					</div>
-                    </td>
-                    <td class="center">
-                    <div class="form-group">
-						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" name="show" value="<?php echo plugin_lang_get( 'show_graph' ); ?>"/>
+						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" name="show" value="<?php echo lang_get( 'proceed' ); ?>"/>
 					</div>
                     </td>
 				</tr>
@@ -108,26 +95,24 @@ $t_show = array(
     </form>
 <?php
 # build the graphs if both an interval and graph type are selected
-if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {
-	$t_width = 500;
-	$t_summary = ( $f_type % 2 ) != 0;
-	$t_body = (int)( $f_type / 2 );
+if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
 	$f_start = $t_period->get_start_formatted();
 	$f_end = $t_period->get_end_formatted();
-	if( ($t_body == 1 ) || ($t_body == 3) ) {
-		if( $f_show_as_table ) {
-			include(
-				config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/bug_graph_bystatus.php'
-			);
-		} else {
-			echo '<br /><img src="' . plugin_page( 'bug_graph_bystatus.php' )
-				. '&amp;width=600&amp;interval=' . $f_interval
-				. '&amp;start_date=' . $f_start . '&amp;end_date=' . $f_end
-				. '&amp;summary=' . $t_summary . '&amp;show_table=0" alt="Bug Graph" />';
-		}
+
+	switch( $f_type ) {
+		case 1:
+			$t_page_to_include = 'issues_trend_bystatus_table.php';
+			break;
+		case 2:
+			$t_page_to_include = 'issues_trend_bycategory_table.php';
+			break;
+		default:
+			$t_page_to_include = '';
+			break;
 	}
-	if( ($t_body == 2 ) || ($t_body == 3) ) {
-		include( config_get_global( 'plugin_path' ) . plugin_get_current() .  '/pages/bug_graph_bycategory.php' );
+
+	if( !is_blank( $t_page_to_include ) ) {
+		include( config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/' . $t_page_to_include );
 	}
 }
 ?>

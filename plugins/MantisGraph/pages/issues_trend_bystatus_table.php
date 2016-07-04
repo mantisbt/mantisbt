@@ -29,12 +29,8 @@ plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$t_width = 500;
-$t_height = 400;
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
-$f_show_as_table = gpc_get_bool( 'show_table', false );
-$f_summary = gpc_get_bool( 'summary', false );
 
 $t_interval_days = $t_interval->get_elapsed_days();
 if( $t_interval_days <= 14 ) {
@@ -155,37 +151,27 @@ $t_label_string = lang_get( 'orct' ); # use the (open/resolved/closed/total) lab
 $t_label_strings = explode( '/', utf8_substr( $t_label_string, 1, strlen( $t_label_string ) - 2 ) );
 
 # add headers for table
-if( $f_show_as_table ) {
-	$t_date_format = config_get( 'short_date_format' );
-    echo '<div class="space-10"></div>';
-    echo '<div class="table-responsive">';
-	echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
-	if( $f_summary ) {
-		echo '<th>' . $t_label_strings[0] . '</th>';
-		echo '<th>' . $t_label_strings[1] . '</th>';
-		echo '<th>' . $t_label_strings[2] . '</th>';
-	} else {
-		foreach ( $t_view_status as $t_status => $t_label ) {
-			echo '<th>'.$t_label.' ('.$t_status.')</th>';
-		}
-	}
-	echo '</tr>';
+$t_date_format = config_get( 'short_date_format' );
+echo '<div class="space-10"></div>';
+echo '<div class="table-responsive">';
+echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+
+foreach ( $t_view_status as $t_status => $t_label ) {
+	echo '<th>'.$t_label.' ('.$t_status.')</th>';
 }
+
+echo '</tr>';
 
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
 $t_closed = config_get( 'bug_closed_status_threshold' );
 $t_bin_count = $t_ptr;
 $t_labels = array();
 $i = 0;
-if( $f_summary ) {
-	$t_labels[++$i] = $t_label_strings[0];
-	$t_labels[++$i] = $t_label_strings[1];
-	$t_labels[++$i] = $t_label_strings[2];
-} else {
-	foreach ( $t_view_status as $t_status => $t_label ) {
-		$t_labels[++$i] = isset( $t_status_labels[$t_status] ) ? $t_status_labels[$t_status] : lang_get_defaulted( $t_label );
-	}
+
+foreach ( $t_view_status as $t_status => $t_label ) {
+	$t_labels[++$i] = isset( $t_status_labels[$t_status] ) ? $t_status_labels[$t_status] : lang_get_defaulted( $t_label );
 }
+
 $t_label_count = $i;
 
 # reverse the array and consolidate the data, if necessary
@@ -193,43 +179,22 @@ $t_metrics = array();
 for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
-	if( $f_summary ) {
-		$t_metrics[1][$t_ptr] = 0;
-		$t_metrics[2][$t_ptr] = 0;
-		$t_metrics[3][$t_ptr] = 0;
-		foreach ( $t_view_status as $t_status => $t_label ) {
-			if( isset( $t_data[$t][$t_status] ) ) {
-				if( $t_status < $t_resolved ) {
-					$t_metrics[1][$t_ptr] += $t_data[$t][$t_status];
-				} else if( $t_status < $t_closed ) {
-					$t_metrics[2][$t_ptr] += $t_data[$t][$t_status];
-				} else {
-					$t_metrics[3][$t_ptr] += $t_data[$t][$t_status];
-				}
-			}
+	$i = 0;
+	foreach ( $t_view_status as $t_status => $t_label ) {
+		if( isset( $t_data[$t][$t_status] ) ) {
+			$t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
+		} else {
+			$t_metrics[++$i][$t_ptr] = 0;
 		}
-	} else {
-		$i = 0;
-		foreach ( $t_view_status as $t_status => $t_label ) {
-			if( isset( $t_data[$t][$t_status] ) ) {
-				$t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
-			} else {
-				$t_metrics[++$i][$t_ptr] = 0;
-			}
-		}
-	}
-	if( $f_show_as_table ) {
-		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
-		for( $i=1; $i<=$t_label_count; $i++ ) {
-			echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
-		}
-		echo '</tr>';
 	}
 
+	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
+	for( $i=1; $i<=$t_label_count; $i++ ) {
+		echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
+	}
+
+	echo '</tr>';
 }
-if( $f_show_as_table ) {
-	echo '</table>';
-    echo '</div>';
-} else {
-	graph_bydate( $t_metrics, $t_labels, lang_get( 'by_status' ), $t_width, $t_height );
-}
+
+echo '</table>';
+echo '</div>';

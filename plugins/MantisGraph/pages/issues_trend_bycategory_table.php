@@ -30,13 +30,8 @@ plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$t_width = 500;
-$t_height = 400;
-
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
-$f_show_as_table = gpc_get_bool( 'show_table', false );
-$f_summary = gpc_get_bool( 'summary', false );
 
 $t_interval_days = $t_interval->get_elapsed_days();
 if( $t_interval_days <= 14 ) {
@@ -198,35 +193,21 @@ for( $i=0; $i<$t_count_cat; $i++ ) {
 }
 # sort and display the results
 sort( $t_category );
-if( $f_show_as_table ) {
-	$t_date_format = config_get( 'short_date_format' );
-    echo '<div class="space-10"></div>';
-    echo '<div class="table-responsive">';
-	echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+
+$t_date_format = config_get( 'short_date_format' );
+echo '<div class="space-10"></div>';
+echo '<div class="table-responsive">';
+echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
+foreach ( $t_category as $t_cat ) {
+	echo '<th>'.$t_cat.'</th>';
+}
+echo '</tr>';
+for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+	echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
 	foreach ( $t_category as $t_cat ) {
-		echo '<th>'.$t_cat.'</th>';
+		echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
 	}
 	echo '</tr>';
-	for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
-		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
-		foreach ( $t_category as $t_cat ) {
-			echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
-		}
-		echo '</tr>';
-	}
-	echo '</table>';
-    echo '</div>';
-} else {
-	# reverse the array and reorder the data, if necessary
-	$t_metrics = array();
-	for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
-		$j = $t_bin_count - $t_ptr - 1;
-		$t_metrics[0][$t_ptr] = $t_marker[$j];
-		$i = 0;
-		foreach ( $t_category as $t_cat ) {
-			$t_metrics[++$i][$t_ptr] = isset($t_data[$j][$t_cat]) ? $t_data[$j][$t_cat] : 0;
-		}
-	}
-	array_unshift( $t_category, '' ); # add placeholder
-	graph_bydate( $t_metrics, $t_category, lang_get( 'by_category' ), $t_width, $t_height );
 }
+echo '</table>';
+echo '</div>';
