@@ -24,28 +24,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_lib( 'ezc/Base/src/base.php' );
-
-/**
- * Get Font to use with graphs from configuration value
- * @return string
- */
-function graph_get_font() {
-	$t_font = 'arial.ttf';
-
-	$t_font_path = get_font_path();
-	if( empty( $t_font_path ) ) {
-		error_text( 'Unable to read/find font', 'Unable to read/find font' );
-	}
-
-	$t_font_file = $t_font_path . $t_font;
-	if( file_exists( $t_font_file ) === false || is_readable( $t_font_file ) === false ) {
-		error_text( 'Unable to read/find font', 'Unable to read/find font' );
-	}
-
-	return $t_font_file;
-}
-
 /**
  * Converts an array of php strings into an array of javascript strings without [].
  * @param array $p_strings The array of strings
@@ -202,87 +180,6 @@ EOT;
 }
 
 /**
- * Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
- *
- * @param array   $p_metrics      Graph Data.
- * @param string  $p_title        Title.
- * @param integer $p_graph_width  Width of graph in pixels.
- * @param integer $p_graph_height Height of graph in pixels.
- * @return void
- */
-function graph_group( array $p_metrics, $p_title = '' ) {
-	# $p_metrics is an array of three arrays
-	#   $p_metrics['open'] = array( 'enum' => value, ...)
-	#   $p_metrics['resolved']
-	#   $p_metrics['closed']
-
-	static $s_id = 0;
-
-	# TODO: Fix graphing of group values
-
-	$s_id++;
-	$t_labels = array_keys( $p_metrics['open'] );
-	$t_js_labels = graph_strings_array( $t_labels );
-
-	$t_values = array_values( $p_metrics['open'] );
-	$t_open_values = graph_numeric_array( $t_values );
-
-	$t_values = array_values( $p_metrics['resolved'] );
-	$t_resolved_values = graph_numeric_array( $t_values );
-
-	$t_values = array_values( $p_metrics['closed'] );
-	$t_closed_values = graph_numeric_array( $t_values );
-
-	$t_colors = array( '#fcbdbd' );
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
-
-echo <<<EOT
-<canvas id="groupbarchart{$s_id}" width="500" height="400"></canvas>
-<script>
-$(document).ready( function() {
-var ctx = document.getElementById("groupbarchart{$s_id}");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['open', 'resolved', 'closed'],
-        datasets: [
-        {
-            data: [{$t_open_values}],
-            backgroundColor: {$t_background_colors},
-            borderColor: {$t_border_colors},
-            borderWidth: 1
-        },
-        {
-            data: [{$t_resolved_values}],
-            backgroundColor: {$t_background_colors},
-            borderColor: {$t_border_colors},
-            borderWidth: 1
-        },
-        {
-            data: [{$t_closed_values}],
-            backgroundColor: {$t_background_colors},
-            borderColor: {$t_border_colors},
-            borderWidth: 1
-        }
-        ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-});
-</script>
-EOT;
-}
-
-/**
  * Function that displays pie charts
  *
  * @param array         $p_metrics       Graph Data.
@@ -410,72 +307,6 @@ EOT;
 }
 
 /**
- * Line Chart by date
- *
- * @param array   $p_metrics      Graph Data.
- * @param array   $p_labels       Labels.
- * @param string  $p_title        Title.
- * @param integer $p_graph_width  Width of graph in pixels.
- * @param integer $p_graph_height Height of graph in pixels.
- * @return void
- */
-function graph_bydate( array $p_metrics, array $p_labels, $p_title, $p_graph_width = 300, $p_graph_height = 380 ) {
-	$t_graph_font = graph_get_font();
-	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
-
-	$t_metrics = array();
-	$t_dates = array_shift( $p_metrics );
-	$t_cnt = count( $p_metrics );
-
-	foreach( $t_dates as $i => $t_value ) {
-		for( $j = 0; $j < $t_cnt; $j++ ) {
-			$t_metrics[$j][$t_value] = $p_metrics[$j][$i];
-		}
-	}
-
-	$t_graph = new ezcGraphLineChart();
-	$t_graph->background->color = '#FFFFFF';
-
-	$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
-	for( $k = 0; $k < $t_cnt; $k++ ) {
-		$t_graph->data[$k] = new ezcGraphArrayDataSet( $t_metrics[$k] );
-		$t_graph->data[$k]->label = $p_labels[$k+1];
-	}
-
-	$t_graph->xAxis->labelCallback =  'graph_date_format';
-	$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
-	$t_graph->xAxis->axisLabelRenderer->angle = -60;
-	$t_graph->xAxis->axisSpace = .15;
-
-	$t_graph->legend->position      = ezcGraph::BOTTOM;
-	$t_graph->legend->background    = '#FFFFFF80';
-
-	$t_graph->driver = new ezcGraphGdDriver();
-	# $t_graph->driver->options->supersampling = 1;
-	$t_graph->driver->options->jpegQuality = 100;
-	$t_graph->driver->options->imageFormat = IMG_JPEG;
-
-	$t_graph->title = $p_title . ' ' . lang_get( 'by_date' );
-	$t_graph->title->maxHeight = .03;
-	$t_graph->options->font = $t_graph_font ;
-
-	$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
-}
-
-/**
- * Calculate total metrics
- *
- * @param array $p_metrics Data.
- * @return array
- */
-function graph_total_metrics( array $p_metrics ) {
-	foreach( $p_metrics['open'] as $t_enum => $t_value ) {
-		$t_total[$t_enum] = $t_value + $p_metrics['resolved'][$t_enum] + $p_metrics['closed'][$t_enum];
-	}
-	return $t_total;
-}
-
-/**
  * summarize metrics by a single ENUM field in the bug table
  *
  * @param string $p_enum_string Enumeration string.
@@ -525,52 +356,6 @@ function create_bug_status_summary() {
 	}
 
 	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses );
-}
-
-/**
- * Function which gives the absolute values according to the status (opened/closed/resolved)
- *
- * @param string $p_enum_string Enumeration string.
- * @param string $p_enum        Enumeration field.
- * @return array
- */
-function enum_bug_group( $p_enum_string, $p_enum ) {
-	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
-	$t_res_val = config_get( 'bug_resolved_status_threshold' );
-	$t_clo_val = config_get( 'bug_closed_status_threshold' );
-	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
-
-	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
-	}
-
-	$t_array_indexed_by_enum_values = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
-	foreach ( $t_array_indexed_by_enum_values as $t_value => $t_label ) {
-		# Calculates the number of bugs opened and puts the results in a table
-		$t_query = 'SELECT COUNT(*) FROM {bug}
-					WHERE ' . $p_enum . '=' . db_param() . ' AND
-						status<' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query( $t_query, array( $t_value, $t_res_val ) );
-		$t_metrics['open'][$t_label] = db_result( $t_result2, 0, 0 );
-
-		# Calculates the number of bugs closed and puts the results in a table
-		$t_query = 'SELECT COUNT(*) FROM {bug}
-					WHERE ' . $p_enum . '=' . db_param() . ' AND
-						status>=' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query( $t_query, array( $t_value, $t_clo_val ) );
-		$t_metrics['closed'][$t_label] = db_result( $t_result2, 0, 0 );
-
-		# Calculates the number of bugs resolved and puts the results in a table
-		$t_query = 'SELECT COUNT(*) FROM {bug}
-					WHERE ' . $p_enum . '=' . db_param() . ' AND
-						status>=' . db_param() . ' AND
-						status<' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query( $t_query, array(  $t_value, $t_res_val, $t_clo_val ) );
-		$t_metrics['resolved'][$t_label] = db_result( $t_result2, 0, 0 );
-	}
-
-	return $t_metrics;
 }
 
 /**
@@ -817,33 +602,3 @@ function graph_date_format( $p_date ) {
 	return date( config_get( 'short_date_format' ), $p_date );
 }
 
-/**
- * Check that there is enough data to create graph
- *
- * @param integer $p_bug_count Bug count.
- * @param string  $p_title     Title.
- * @return void
- */
-function error_check( $p_bug_count, $p_title ) {
-	if( 0 == $p_bug_count ) {
-		error_text( $p_title, plugin_lang_get( 'not_enough_data' ) );
-	}
-}
-
-/**
- * Display Error 'graph'
- *
- * @param string $p_title Error title.
- * @param string $p_text  Error text.
- * @todo check error graphs do not support utf8
- * @return void
- */
-function error_text( $p_title, $p_text ) {
-	$t_image = imagecreate( 300, 300 );
-	$t_text_color = imagecolorallocate( $t_image, 0, 0, 0 );
-	imagestring( $t_image, 5, 0, 0, $p_text, $t_text_color );
-	header( 'Content-type: image/png' );
-	imagepng( $t_image );
-	imagedestroy( $t_image );
-	die;
-}

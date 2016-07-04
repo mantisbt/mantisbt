@@ -51,25 +51,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
-	 * init function
-	 * @return void
-	 */
-	function init() {
-		spl_autoload_register( array( 'MantisGraphPlugin', 'autoload' ) );
-	}
-
-	/**
-	 * class auto loader
-	 * @param string $p_class Class name to autoload.
-	 * @return void
-	 */
-	public static function autoload( $p_class ) {
-		if( class_exists( 'ezcBase' ) ) {
-			ezcBase::autoload( $p_class );
-		}
-	}
-
-	/**
 	 * plugin hooks
 	 * @return array
 	 */

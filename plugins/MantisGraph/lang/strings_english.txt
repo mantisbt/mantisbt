@@ -73,7 +73,6 @@ $s_plugin_MantisGraph_by_resolution_mix = 'By resolution and status';
 $s_plugin_MantisGraph_legend_still_open = 'Still Open';
 $s_plugin_MantisGraph_legend_resolved = 'Resolved';
 $s_plugin_MantisGraph_legend_reported = 'Reported';
-$s_plugin_MantisGraph_not_enough_data = 'Not enough data to create graph';
 $s_plugin_MantisGraph_period_none = 'None';
 $s_plugin_MantisGraph_period_this_week = 'This Week';
 $s_plugin_MantisGraph_period_last_week = 'Last Week';
