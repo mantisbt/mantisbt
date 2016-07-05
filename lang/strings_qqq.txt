@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -46,15 +46,18 @@
  * @author Desertwaste
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Kingu
  * @author Liuxinyu970226
  * @author Lloffiwr
  * @author M42
  * @author McDutchie
  * @author Nike
+ * @author Noe
  * @author Paul Richards
  * @author Shirayuki
  * @author Siebrand
  * @author Siebrand Mazeland
+ * @author Silraks
  * @author SkyDaisy9
  * @author Umherirrender
  * @author Vincent
@@ -108,6 +111,7 @@ $s_global_categories = '{{Identical|Global category}}';
 $s_login_link = '{{Identical|Login}}';
 $s_select_option = '{{Identical|Select}}';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
+$s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
 $s_go_back = '{{Identical|Go back}}';
 $s_proceed = 'Message displayed after adding/editing/deleting something
 {{Identical|Proceed}}';
@@ -115,6 +119,8 @@ $s_switch = '{{Identical|Switch}}';
 $s_prefix_for_deleted_users = '{{Identical|User}}';
 $s_administrator = '{{Identical|Administrator}}';
 $s_myself = '{{Identical|Myself}}';
+$s_reproducibility_enum_string = 'Traduction de N/A (not applicable, not available) modifiée de S/O en sans objet.
+S/O n\'est pas une abréviation claire.';
 $s_new_account_username = '{{Identical|Username}}';
 $s_new_account_email = '{{Identical|E-mail}}';
 $s_email_project = '{{Identical|Project}}';
@@ -128,6 +134,7 @@ $s_email_duplicate = '{{Identical|Duplicate}}';
 $s_email_summary = '{{Identical|Summary}}';
 $s_email_description = '{{Identical|Description}}';
 $s_email_additional_information = '{{Identical|Additional information}}';
+$s_email_tag = '{{Identical|Tag}}';
 $s_manage_profiles_link = '{{Identical|Profile}}';
 $s_change_preferences_link = '{{Identical|Preferences}}';
 $s_username = '{{Identical|Username}}';
@@ -141,6 +148,7 @@ $s_confirm_password = '{{Identical|Confirm password}}';
 $s_current_password = '{{Identical|Current password}}';
 $s_access_level = '{{Identical|Access level}}';
 $s_access_level_label = '{{Identical|Access level}}';
+$s_api_token_revoke_button = '{{Identical|Revoke}}';
 $s_minutes = '{{Identical|Minute}}';
 $s_seconds = '{{Identical|Second}}';
 $s_bugnote_order_asc = '{{Identical|Ascending}}';
@@ -152,9 +160,12 @@ $s_edit_profile = '{{Identical|Edit profile}}';
 $s_select_profile = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 Legend for drop-down box. See screenshot.';
 $s_submit_button = '{{Identical|Submit}}';
+$s_sponsor = '{{Identical|Sponsor}}';
+$s_sponsor_verb = '{{Identical|Sponsor}}';
 $s_amount = '{{Identical|Amount}}';
 $s_sponsor_show = '{{Identical|Show all}}';
 $s_delete_bug_button = '{{Identical|Delete}}';
+$s_monitor_bug_button = '{{Identical|Monitor}}';
 $s_upload_file = '{{Identical|Upload file}}';
 $s_upload_files = '{{Identical|Upload file}}';
 $s_select_file = '{{Identical|Select file}}';
@@ -191,6 +202,8 @@ $s_status_label = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
+$s_os_version = 'J\'ai ajouté - de l\'OS- à l\'ancienne traduction car plusieurs champs version existent :
+"Product Version", "Fixed in Version", "Target Version"';
 $s_build = '{{Identical|Build}}';
 $s_votes = '{{Identical|Vote}}';
 $s_summary = '{{Identical|Summary}}';
@@ -208,6 +221,8 @@ $s_delete_link = '{{Identical|Delete}}';
 $s_add_bugnote_title = '{{Identical|Add note}}';
 $s_add_bugnote_button = '{{Identical|Add note}}';
 $s_bugnote_edit_link = '{{Identical|Edit}}';
+$s_hide_content = '{{identical|Hide content}}';
+$s_show_content = '{{identical|Show content}}';
 $s_log_page_number = '{{Identical|Number}}';
 $s_log_page_event = '{{Identical|Event}}';
 $s_please_report = 'Is displayed whenever an SQL error occurs.
@@ -267,6 +282,7 @@ $s_plugin_key_label = '{{Identical|Key}}';
 $s_delete_category_button = '{{Identical|Delete category}}';
 $s_update_category_button = '{{Identical|Update category}}';
 $s_project_name = '{{Identical|Project name}}';
+$s_view_status = 'Modifié la traduction "Afficher les statuts" en "Visibilité". L\'état d\'un projet est "public" ou "privé" ce qui conditionne sa visibilité. C\'est aussi la traduction de "View Status".';
 $s_public = '{{Identical|Public}}';
 $s_private = '{{Identical|Private}}';
 $s_categories = '{{Identical|Category}}';
@@ -296,6 +312,7 @@ $s_manage_link = '{{Identical|Manage}}';
 $s_logout_link = '{{Identical|Log out}}';
 $s_my_view_title_unassigned = '{{Identical|Unassigned}}';
 $s_my_view_title_resolved = '{{Identical|Resolved}}';
+$s_headline = '{{Identical|Headline}}';
 $s_body = '{{Identical|Body}}';
 $s_edit_post = '{{Identical|Edit post}}';
 $s_delete_post = '{{Identical|Delete post}}';
@@ -419,6 +436,7 @@ $s_add_notes = '{{Identical|Add note}}';
 $s_news = '{{Identical|News}}';
 $s_delete_attachment_button = '{{Identical|Delete}}';
 $s_filters = '{{Identical|Filter}}';
+$s_create_project = '{{Identical|Create project}}';
 $s_others = '{{Identical|Other}}';
 $s_email_notification = '{{Identical|Email notification}}';
 $s_loading = '{{Identical|Loading}}';
@@ -445,7 +463,9 @@ $s_tag_statistics = '{{Identical|Usage statistics}}';
 $s_tag_attach = '{{Identical|Attach}}';
 $s_tag_attach_long = '{{Identical|Attach tag}}';
 $s_show_all_tags = '{{Identical|All}}';
-$s_time_tracking_stopwatch_start = '{{Identical|Start}}';
+$s_time_tracking_cost = '{{Identical|Cost}}';
+$s_time_tracking_cost_label = '{{Identical|Cost}}';
+$s_time_tracking_stopwatch_start = '{{Identical|Start}} The start button on the stopwatch';
 $s_time_tracking_stopwatch_stop = '{{Identical|Stop}}';
 $s_time_tracking_stopwatch_reset = '{{Identical|Reset}}';
 $s_access_denied = '{{Identical|Access denied}}';
@@ -477,4 +497,5 @@ $s_timeline_issue_assigned_to_self = 'Parameters:
 * %1s - username
 * %2s - issue ID';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Access denied}}';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Should "in MantisBT" be appended?';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';

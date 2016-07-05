@@ -1390,6 +1390,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Du har nått gränsen för tillåten akti
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Fältet "%1$s" måste vara kortare eller lika med %2$d tecken.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API-tokennamnet "%s" används redan. Vänligen gå tillbaka och välj ett annat.';
 $s_dropzone_default_message = 'Släpp filer här för att ladda upp (eller klicka)';
+$s_dropzone_fallback_message = 'Din webbläsare stödjer inte filuppladdning med dra-och-släpp.';
 $s_dropzone_file_too_big = 'Filen är för stor ({{filesize}}MiB). Maximal filstorlek: {{maxFilesize}}MiB.';
 $s_dropzone_invalid_file_type = 'Kan du inte ladda upp filer av denna typ.';
 $s_dropzone_response_error = 'Servern svarade med koden {{statusCode}}.';

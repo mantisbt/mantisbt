@@ -1228,4 +1228,5 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página não pode ser acedid
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo de ordenação inválido.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de data inválido.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Não é possível atualizar o fuso horário.';
+$s_dropzone_cancel_upload = 'Cancelar carregamento';
 $s_dropzone_remove_file = 'Eliminar ficheiro';
