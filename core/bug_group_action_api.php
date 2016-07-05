@@ -202,12 +202,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 
 		if( !isset( $t_commands['ASSIGN'] ) &&
 			access_has_project_level( config_get( 'update_bug_assign_threshold', null, null, $t_project_id ), $t_project_id ) ) {
-			if( ON == config_get( 'auto_set_status_to_assigned', null, null, $t_project_id ) &&
-				access_has_project_level( access_get_status_threshold( config_get( 'bug_assigned_status', null, null, $t_project_id ), $t_project_id ), $t_project_id ) ) {
-				$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
-			} else {
-				$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
-			}
+			$t_commands['ASSIGN'] = lang_get( 'actiongroup_menu_assign' );
 		}
 
 		if( !isset( $t_commands['CLOSE'] ) &&
