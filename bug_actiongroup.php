@@ -151,11 +151,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'ASSIGN':
 			$f_assign = gpc_get_int( 'assign' );
-			if( ON == config_get( 'auto_set_status_to_assigned' ) ) {
-				$t_assign_status = config_get( 'bug_assigned_status' );
-			} else {
-				$t_assign_status = $t_status;
-			}
+			$t_assign_status = bug_get_status_for_assign( $t_bug->handler_id, $f_assign, $t_status );
 			# check that new handler has rights to handle the issue, and
 			#  that current user has rights to assign the issue
 			$t_threshold = access_get_status_threshold( $t_assign_status, $t_bug->project_id );
