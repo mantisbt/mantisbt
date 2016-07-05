@@ -230,7 +230,7 @@ function html_css() {
  * @return void
  */
 function html_css_link( $p_filename ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />', "\n";
 }
 
 /**
@@ -239,7 +239,7 @@ function html_css_link( $p_filename ) {
  * @return void
  */
 function html_css_cdn_link( $p_url ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" />' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" crossorigin="anonymous" />', "\n";
 }
 
 /**
