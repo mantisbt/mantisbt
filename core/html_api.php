@@ -388,7 +388,11 @@ function html_css() {
  * @return void
  */
 function html_css_link( $p_filename ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
+	# If no path is specified, look for CSS files in default directory
+	if( $p_filename == basename( $p_filename ) ) {
+		$p_filename = 'css/' . $p_filename;
+	}
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), true ), '" />' . "\n";
 }
 
 
