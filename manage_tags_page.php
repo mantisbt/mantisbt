@@ -121,7 +121,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 <div class="table-container">
 	<h2><?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]</h2>
 	<?php if( $t_can_edit ) { ?>
-	<div class="section-link"><?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?></div>
+	<div class="section-link"><?php print_link( '#manage-tags-create-div', lang_get( 'tag_create' ) ) ?></div>
 	<?php } ?>
 	<table>
 		<thead>
@@ -162,7 +162,6 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 
 <?php if( $t_can_edit ) { ?>
 <div id="manage-tags-create-div" class="form-container">
-	<a name="tagcreate"></a>
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
 		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
