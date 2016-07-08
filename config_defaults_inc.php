@@ -4732,3 +4732,11 @@ $g_webservice_error_when_version_not_found = ON;
  */
 $g_webservice_version_when_not_found = '';
 
+/**
+ * Default version to be used if the specified version is not found and
+ * $g_enable_print_resolution_in_status_resolved == OFF.
+ * (at the moment this value does not depend on the project).
+ *
+ * @global string $$g_enable_print_resolution_in_status_resolved
+ */
+$g_enable_print_resolution_in_status_resolved = OFF;

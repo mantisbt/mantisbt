@@ -40,6 +40,11 @@ form_security_validate( 'tag_create' );
 
 $f_tag_name = gpc_get_string( 'name' );
 $f_tag_description = gpc_get_string( 'description' );
+if ( config_get( 'tag_project_specific_enabled' ) ) {
+	$f_project_id = gpc_get_int( 'project_id' );
+} else {
+	$f_project_id = 0;
+}
 
 $t_tag_user = auth_get_current_user_id();
 
@@ -47,7 +52,7 @@ if( !is_null( $f_tag_name ) ) {
 	$t_tags = tag_parse_string( $f_tag_name );
 	foreach ( $t_tags as $t_tag_row ) {
 		if( -1 == $t_tag_row['id'] ) {
-			tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description );
+			tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description, $f_project_id );
 		}
 	}
 }

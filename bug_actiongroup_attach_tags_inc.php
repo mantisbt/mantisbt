@@ -119,9 +119,10 @@ function action_attach_tags_process( $p_bug_id ) {
 	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
 
 	$t_user_id = auth_get_current_user_id();
+	$t_bug = bug_get( $p_bug_id );
 
 	foreach( $g_action_attach_tags_create as $t_tag_row ) {
-		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id, '', $t_bug->project_id );
 		$g_action_attach_tags_attach[] = $t_tag_row;
 	}
 	$g_action_attach_tags_create = array();

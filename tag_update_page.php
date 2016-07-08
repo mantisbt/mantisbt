@@ -90,6 +90,19 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
+				<label for="tag-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
+				<span class="select">
+					<?php if ( config_get( 'tag_project_specific_enabled' ) ) { ?>
+						<select <?php echo helper_get_tab_index() ?> id="tag-project-id" name="project_id">
+							<?php print_project_option_list( $t_tag_row['project_id'], true ) ?>
+						</select>
+					<?php } else {
+						print( project_get_name( $t_tag_row['project_id'] ) );
+					} ?>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
 				<?php
 					if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';

@@ -50,6 +50,8 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+auth_reauthenticate();
+
 access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 compress_enable();
@@ -79,7 +81,7 @@ $t_per_page = 20;
 $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
-$t_total_tag_count = tag_count( $t_name_filter );
+$t_total_tag_count = tag_count( $t_name_filter, helper_get_current_project() );
 
 #Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
@@ -99,7 +101,7 @@ if( $f_page_number < 1 ) {
 }
 
 # Retrieve Tags from table
-$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
+$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset, helper_get_current_project() ) ;
 
 html_page_top( lang_get( 'manage_tags_link' ) );
 print_manage_menu( 'manage_tags_page.php' ); ?>
@@ -127,6 +129,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		<thead>
 			<tr class="row-category">
 				<td><?php echo lang_get( 'tag_name' ) ?></td>
+				<td><?php echo lang_get( 'project_name' ) ?></td>
 				<td><?php echo lang_get( 'tag_creator' ) ?></td>
 				<td><?php echo lang_get( 'tag_created' ) ?></td>
 				<td><?php echo lang_get( 'tag_updated' ) ?></td>
@@ -145,6 +148,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 			<?php } else { ?>
 				<td><?php echo $t_tag_name ?></td>
 			<?php } ?>
+				<td><?php echo string_display_line( project_get_name( $t_tag_row['project_id'] ) ) ?></td>
 				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
@@ -171,6 +175,15 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 				<label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
 				<span class="input"><input type="text" id="tag-name" name="name" size="40" maxlength="100" />
 				<span><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></span>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label for="tag-project"><span><?php echo lang_get( 'project_name' ) ?></span></label>
+				<span class="input">
+					<select name="project_id">
+						<?php print_project_option_list( helper_get_current_project(), true ) ?>
+					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>

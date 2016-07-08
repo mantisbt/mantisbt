@@ -51,6 +51,12 @@ compress_enable();
 $f_tag_id = gpc_get_int( 'tag_id' );
 $t_tag_row = tag_get( $f_tag_id );
 
+if ( config_get( 'tag_project_specific_enabled' ) ) {
+	$f_project_id = gpc_get_int( 'project_id' );
+} else {
+	$f_project_id = -1;
+}
+
 if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
 		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) {
@@ -66,7 +72,7 @@ if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 $f_new_name = gpc_get_string( 'name', $t_tag_row['name'] );
 $f_new_description = gpc_get_string( 'description', $t_tag_row['description'] );
 
-tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description );
+tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description, $f_project_id );
 
 form_security_purge( 'tag_update' );
 

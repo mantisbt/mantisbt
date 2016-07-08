@@ -86,11 +86,15 @@ function tag_ensure_exists( $p_tag_id ) {
  * @param string $p_name The tag name to check.
  * @return boolean True if name is unique
  */
-function tag_is_unique( $p_name ) {
+function tag_is_unique( $p_name, $p_project_id = 0 ) {
 	$c_name = trim( $p_name );
 
-	$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $c_name ) );
+	if ( config_get( 'tag_project_specific_enabled' )) {
+		$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' ) . ' AND project_id = ' . db_param();
+	} else {
+		$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' );
+	}
+	$t_result = db_query( $t_query, array( $c_name, $p_project_id ) );
 
 	if( db_result( $t_result ) ) {
 		return false;
@@ -102,9 +106,10 @@ function tag_is_unique( $p_name ) {
  * Ensure that a name is unique.
  * @param string $p_name The tag name to check.
  * @return void
+ * @param integer Project ID
  */
-function tag_ensure_unique( $p_name ) {
-	if( !tag_is_unique( $p_name ) ) {
+function tag_ensure_unique( $p_name, $p_project_id = 0 ) {
+	if( !tag_is_unique( $p_name, $p_project_id ) ) {
 		trigger_error( ERROR_TAG_DUPLICATE, ERROR );
 	}
 }
@@ -159,9 +164,10 @@ function tag_cmp_name( array $p_tag1, array $p_tag2 ) {
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
  * @param string $p_string Input string to parse.
+ * @param int Project ID
  * @return array Rows of tags parsed from input string
  */
-function tag_parse_string( $p_string ) {
+function tag_parse_string( $p_string, $p_project_id = 0 ) {
 	$t_tags = array();
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
@@ -172,19 +178,27 @@ function tag_parse_string( $p_string ) {
 		}
 
 		$t_matches = array();
-		$t_tag_row = tag_get_by_name( $t_name );
+		$t_tag_row = tag_get_by_name( $t_name, $p_project_id );
 		if( $t_tag_row !== false ) {
 			$t_tags[] = $t_tag_row;
 		} else {
-			if( tag_name_is_valid( $t_name, $t_matches ) ) {
-				$t_id = -1;
-			} else {
-				$t_id = -2;
+			if ( config_get( 'tag_project_specific_enabled' ) && $p_project_id > 0 ) {
+				// check if "global" tag exists
+				$t_tag_row = tag_get_by_name( $t_name, 0 );
 			}
-			$t_tags[] = array(
-				'id' => $t_id,
-				'name' => $t_name,
-			);
+			if( $t_tag_row !== false ) {
+				$t_tags[] = $t_tag_row;
+			} else {
+				if( tag_name_is_valid( $t_name, $t_matches ) ) {
+					$t_id = -1;
+				} else {
+					$t_id = -2;
+				}
+				$t_tags[] = array(
+					'id' => $t_id,
+					'name' => $t_name,
+				);
+			}
 		}
 	}
 	usort( $t_tags, 'tag_cmp_name' );
@@ -205,10 +219,12 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 	if( $p_tag_id === 0 && is_blank( $p_tag_string ) ) {
 		return true;
 	}
+	$t_bug = bug_get( $p_bug_id );
+	$t_project_id = $t_bug->project_id;
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 
-	$t_tags = tag_parse_string( $p_tag_string );
+	$t_tags = tag_parse_string( $p_tag_string, $t_project_id );
 	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
 
 	$t_tags_create = array();
@@ -239,7 +255,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 	}
 
 	foreach( $t_tags_create as $t_tag_row ) {
-		$t_tag_row['id'] = tag_create( $t_tag_row['name'] );
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id, '', $t_project_id );
 		$t_tags_attach[] = $t_tag_row;
 	}
 
@@ -274,6 +290,10 @@ function tag_parse_filters( $p_string ) {
 
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
 			$t_tag_row = tag_get_by_name( $t_matches[1] );
+			if( $t_tag_row === false && config_get( 'tag_project_specific_enabled' ) ) {
+				// no "global" tag found -> check project specific tag
+				$t_tag_row = tag_get_by_name( $t_matches[1], helper_get_current_project() );
+			}
 			if( $t_tag_row !== false ) {
 				$t_filter = utf8_substr( $t_name, 0, 1 );
 
@@ -304,15 +324,29 @@ function tag_parse_filters( $p_string ) {
  *
  * @return ADORecordSet|boolean Tags sorted by name, or false if the query failed.
  */
-function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
+function tag_get_all( $p_name_filter, $p_count, $p_offset, $project_id = 0 ) {
 	$t_where = '';
 	$t_where_params = array();
 
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = 'WHERE ' . db_helper_like( 'name' );
+		$t_where = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
 	}
 
+	if( $project_id !== 0 ) {
+		if( !empty($t_where) ) {
+			$t_where .= ' AND ';
+		}
+		$t_where .= 'project_id in (0, ' . db_param() . ')';
+
+		$t_where_params[] = $project_id;
+	 }
+
+	if( !empty($t_where) ) {
+		$t_where = ' WHERE ' . $t_where;
+	}
+
+	// Add project limitation if arrive the information
 	$t_query = 'SELECT * FROM {tag} ' . $t_where . ' ORDER BY name';
 
 	return db_query( $t_query, $t_where_params, $p_count, $p_offset );
@@ -323,13 +357,26 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
  * @param integer $p_name_filter A string to match the beginning of the tag name.
  * @return integer
  */
-function tag_count( $p_name_filter ) {
+function tag_count( $p_name_filter, $project_id = 0 ) {
 	$t_where = '';
 	$t_where_params = array();
 
 	if( $p_name_filter ) {
-		$t_where = ' WHERE ' . db_helper_like( 'name' );
+		$t_where = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
+	}
+
+	if( $project_id !== 0 ) {
+		if( !empty($t_where) ) {
+			$t_where .= ' AND ';
+		}
+		$t_where .= 'project_id in (0, ' . db_param() . ')';
+
+		$t_where_params[] = $project_id;
+	}
+
+	if( !empty($t_where) ) {
+		$t_where = ' WHERE ' . $t_where;
 	}
 
 	$t_query = 'SELECT count(*) FROM {tag}' . $t_where;
@@ -364,12 +411,15 @@ function tag_get( $p_tag_id ) {
 /**
  * Return a tag row for the given name.
  * @param string $p_name The tag name to retrieve from the database.
+ * @param int Project ID
  * @return array|boolean Tag row
  */
-function tag_get_by_name( $p_name ) {
+function tag_get_by_name( $p_name, $p_project_id = 0 ) {
 	db_param_push();
-	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $p_name ) );
+
+	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' ) . '
+										AND project_id = ' . db_param();
+	$t_result = db_query( $t_query, array( $p_name, $p_project_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -404,13 +454,14 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
  * @param string  $p_name        The tag name to create.
  * @param integer $p_user_id     The user ID to link the new tag to.
  * @param string  $p_description A Description for the tag.
+ * @param integer Project ID
  * @return int Tag ID
  */
-function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
+function tag_create( $p_name, $p_user_id = null, $p_description = '', $p_project_id = 0 ) {
 	access_ensure_global_level( config_get( 'tag_create_threshold' ) );
 
 	tag_ensure_name_is_valid( $p_name );
-	tag_ensure_unique( $p_name );
+	tag_ensure_unique( $p_name, $p_project_id );
 
 	if( null == $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -418,14 +469,18 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 		user_ensure_exists( $p_user_id );
 	}
 
+	$c_project_id = db_prepare_int( $p_project_id );
+	if ( !config_get( 'tag_project_specific_enabled' ) ) {
+		$c_project_id = 0;
+	}
 	$c_date_created = db_now();
 
 	db_param_push();
 	$t_query = 'INSERT INTO {tag}
-				( user_id, name, description, date_created, date_updated )
+				( user_id, project_id, name, description, date_created, date_updated )
 				VALUES
-				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+	db_query( $t_query, array( $p_user_id, $c_project_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 
 	return db_insert_id( db_get_table( 'tag' ) );
 }
@@ -438,13 +493,14 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
  * @param string  $p_description An updated description for the tag.
  * @return boolean
  */
-function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
+function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description, $p_project_id = 0 ) {
 	$t_tag_row = tag_get( $p_tag_id );
 	$t_tag_name = $t_tag_row['name'];
 
 	if( $t_tag_name == $p_name &&
 		 $t_tag_row['description'] == $p_description &&
-		 $t_tag_row['user_id'] == $p_user_id ) {
+		 $t_tag_row['user_id'] == $p_user_id &&
+		 $t_tag_row['project_id'] == $p_project_id ) {
 		# nothing has changed
 		return true;
 	}
@@ -471,12 +527,20 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	db_param_push();
 	$t_query = 'UPDATE {tag}
-					SET user_id=' . db_param() . ',
-						name=' . db_param() . ',
-						description=' . db_param() . ',
-						date_updated=' . db_param() . '
-					WHERE id=' . db_param();
-	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+							SET user_id=' . db_param() . ',
+									name=' . db_param() . ',';
+	if ( $p_project_id >= 0 ) {
+		$t_query .= ' 	project_id=' . db_param() . ',';
+	}
+	$t_query .= '			description=' . db_param() . ',
+									date_updated=' . db_param() . '
+							WHERE id=' . db_param();
+
+	if ( $p_project_id >= 0 ) {
+		db_query( $t_query, array( (int)$p_user_id, $p_name, $p_project_id, $p_description, $c_date_updated, $p_tag_id ) );
+	} else {
+		db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+	}
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
@@ -523,12 +587,20 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	$t_params = array();
 	if( 0 != $p_bug_id ) {
 		$t_params[] = $p_bug_id;
+		$t_bug = bug_get( $p_bug_id );
 
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			db_param_push();
-			$t_query = 'SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
+			if( config_get( 'tag_project_specific_enabled' ) ) {
+				$t_query = 'SELECT t.id FROM {tag} t
+						LEFT JOIN {bug_tag} b ON t.id=b.tag_id
+						WHERE (b.bug_id IS NULL OR b.bug_id != ' . db_param() . ')
+						AND t.project_id IN (0, ' . $t_bug->project_id . ')';
+			} else {
+				$t_query = 'SELECT t.id FROM {tag} t
+						LEFT JOIN {bug_tag} b ON t.id=b.tag_id
+						WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
+			}
 			$t_result = db_query( $t_query, $t_params );
 
 			$t_params = null;
@@ -546,11 +618,20 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 
 			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN ( ' . implode( ', ', $t_subquery_results ) . ')';
 		} else {
-			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
-					SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param() .
-				')';
+			if( config_get( 'tag_project_specific_enabled' ) ) {
+				$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
+						SELECT t.id FROM {tag} t
+						LEFT JOIN {bug_tag} b ON t.id=b.tag_id
+						WHERE (b.bug_id IS NULL OR b.bug_id != ' . db_param() .
+					') AND t.project_id IN (0, ' . $t_bug->project_id . '))';
+			} else {
+				$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
+						SELECT t.id FROM {tag} t
+						LEFT JOIN {bug_tag} b ON t.id=b.tag_id
+						WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param() .
+					')';
+			}
+
 		}
 	} else {
 		$t_query = 'SELECT id, name, description FROM {tag}';

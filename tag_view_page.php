@@ -83,6 +83,11 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 		<span class="label-style"></span>
 	</div>
 	<div class="field-container">
+		<span class="display-label"><span><?php echo lang_get( 'project_name' ) ?></span></span>
+		<span class="display-value"><span><?php echo string_display_line( project_get_name( $t_tag_row['project_id'] ) ) ?></span></span>
+		<span class="label-style"></span>
+	</div>
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_creator' ) ?></span></span>
 		<span class="display-value"><span><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></span></span>
 		<span class="label-style"></span>
