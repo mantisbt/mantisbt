@@ -162,7 +162,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 
 <?php if( $t_can_edit ) { ?>
 <div id="manage-tags-create-div" class="form-container">
-	<a name="tagcreate" />
+	<a name="tagcreate"></a>
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
 		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
