@@ -882,6 +882,11 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 	date_used				I		UNSIGNED NOTNULL DEFAULT '1'"
 	) );
 
+	# Release marker: 1.3.0-rc.2
+$g_upgrade[210] = array( 'AddColumnSQL', Array( db_get_table( 'mantis_tag_table' ), "
+	project_id I UNSIGNED NOTNULL DEFAULT '0'" ) );
+$g_upgrade[211] = array( 'CreateIndexSQL', Array( 'idx_project_id', db_get_table( 'mantis_tag_table' ), 'project_id' ) );
+
 # Release marker: 1.3.0
 
 
