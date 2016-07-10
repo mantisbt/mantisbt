@@ -602,12 +602,15 @@ define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 
 # JQuery and JQuery UI
-define ( 'JQUERY_VERSION', '2.1.4' );
+define ( 'JQUERY_VERSION', '2.2.4' );
+define ( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44' );
 define ( 'JQUERY_UI_VERSION', '1.11.4' );
+define ( 'JQUERY_UI_HASH', 'sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw' );
 
 # Bootstrap & FontAwesome
-define ( 'BOOTSTRAP_VERSION', '3.3.5' );
-define ( 'FONT_AWESOME_VERSION', '4.4.0' );
+define ( 'BOOTSTRAP_VERSION', '3.3.6' );
+define ( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo' );
+define ( 'FONT_AWESOME_VERSION', '4.6.3' );
 
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
