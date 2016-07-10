@@ -58,7 +58,6 @@ $t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'prior
 <div class="col-md-6 col-xs-12">
 <?php graph_pie( $t_metrics, plugin_lang_get( 'by_priority_pct' ) ); ?>
 </div>
-?>
 
 </div>
 </div>
