@@ -171,7 +171,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
     </tr>
     <tr>
         <td class="category">
-            <?php echo lang_get( 'custom_field_length_min' ) ?>
+            <?php echo lang_get( 'custom_field_length_max' ) ?>
         </td>
         <td>
             <input type="text" id="custom-field-length-max" name="length_max" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
