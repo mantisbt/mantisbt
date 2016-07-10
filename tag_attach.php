@@ -130,7 +130,7 @@ if( count( $t_tags_failed ) > 0 ) {
 	</tr>
 </table>
 <?php
-	html_page_bottom();
+	layout_page_end();
 	# end failed to attach tag
 } else {
 	foreach( $t_tags_create as $t_tag_row ) {
