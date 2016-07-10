@@ -84,8 +84,7 @@ extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
-html_page_top1();
-html_page_top2a();
+layout_login_page_begin();
 
 ?>
 
@@ -146,4 +145,4 @@ if( $t_can_change_password ) {
 <?php
 }
 
-html_page_bottom1a( __FILE__ );
+layout_login_page_end();
