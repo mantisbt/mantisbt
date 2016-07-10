@@ -3499,7 +3499,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	echo '<div class="btn-group">';
 
 	$t_stored_queries_arr = filter_db_get_available_queries();
-
+	
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
 		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
