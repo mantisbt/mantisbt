@@ -81,8 +81,13 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return void
 	 */
 	function resources() {
-		echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>';
-		echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>';
+		if ( config_get_global( 'cdn_enabled' ) == ON ) {
+			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH );
+			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH );
+		} else {
+			html_javascript_link( 'chart-' . CHARTJS_VERSION . '.min.js' );
+			html_javascript_link( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' );
+		}
 	}
 
 	/**
