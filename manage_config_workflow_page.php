@@ -398,7 +398,7 @@ function access_row() {
 		}
 
 		if( $t_can_change ) {
-			echo '<td class="' . $t_color . '"><select name="access_change_' . $t_status . ' input-sm">' . "\n";
+			echo '<td class="' . $t_color . ' input-sm"><select name="access_change_' . $t_status . '">' . "\n";
 			print_enum_string_option_list( 'access_levels', $t_level_project );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
