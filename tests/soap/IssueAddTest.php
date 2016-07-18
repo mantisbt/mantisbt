@@ -134,6 +134,9 @@ class IssueAddTest extends SoapBase {
 		$t_issue_to_add['fixed_in_version'] = 'fixed version';
 		$t_issue_to_add['target_version'] = 'target version';
 		$t_issue_to_add['sticky'] = true;
+		
+		$t_dt = new DateTime();
+		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -149,6 +152,10 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( $t_issue_to_add['fixed_in_version'], $t_issue->fixed_in_version );
 		$this->assertEquals( $t_issue_to_add['target_version'], $t_issue->target_version );
 		$this->assertEquals( $t_issue_to_add['sticky'], $t_issue->sticky );
+		
+		$t_read_dt = DateTime::createFromFormat( DateTime::ISO8601, $t_issue->last_updated );
+		
+		$this->assertEquals( $t_dt, $t_read_dt );
 	}
 
 	/**
