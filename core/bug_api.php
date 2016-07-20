@@ -523,11 +523,7 @@ class BugData {
 		}
 
 		# Check if bug was pre-assigned or auto-assigned.
-		if( ( $this->handler_id != 0 ) && ( $this->status == $t_starting_status ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
-			$t_status = config_get( 'bug_assigned_status' );
-		} else {
-			$t_status = $this->status;
-		}
+		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
 
 		# Insert the rest of the data
 		db_param_push();
@@ -1733,11 +1729,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	$h_status = bug_get_field( $p_bug_id, 'status' );
 	$h_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 
-	if( ( ON == config_get( 'auto_set_status_to_assigned' ) ) && ( NO_USER != $p_user_id ) ) {
-		$t_ass_val = config_get( 'bug_assigned_status' );
-	} else {
-		$t_ass_val = $h_status;
-	}
+	$t_ass_val = bug_get_status_for_assign( $h_handler_id, $p_user_id, $h_status );
 
 	if( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
 
@@ -2071,4 +2063,33 @@ function bug_format_id( $p_bug_id ) {
 	$t_string = sprintf( '%0' . (int)$t_padding . 'd', $p_bug_id );
 
 	return event_signal( 'EVENT_DISPLAY_BUG_ID', $t_string, array( $p_bug_id ) );
+}
+
+/**
+ * Returns the resulting status for a bug after an assignment action is performed.
+ * If the option "auto_set_status_to_assigned" is enabled, the resulting status
+ * is calculated based on current handler and status , and requested modifications.
+ * @param integer $p_current_handler	Current handler user id
+ * @param integer $p_new_handler		New handler user id
+ * @param integer $p_current_status		Current bug status
+ * @param integer $p_new_status			New bug status (as being part of a status change combined action)
+ * @return integer		Calculated status after assignment
+ */
+function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_current_status, $p_new_status = null ) {
+	if( null === $p_new_status ) {
+		$p_new_status = $p_current_status;
+	}
+	if( config_get( 'auto_set_status_to_assigned' ) ) {
+		$t_assigned_status = config_get( 'bug_assigned_status' );
+
+		if(		$p_current_handler == NO_USER &&
+				$p_new_handler != NO_USER &&
+				$p_new_status == $p_current_status &&
+				$p_new_status < $t_assigned_status &&
+				bug_check_workflow( $p_current_status, $t_assigned_status ) ) {
+
+			return $t_assigned_status;
+		}
+	}
+	return $p_new_status;
 }
