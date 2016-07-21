@@ -984,7 +984,7 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_config_var_value = config_get( 'status_enum_string', null, null, $p_project_id );
 	$t_enum_workflow = config_get( 'status_enum_workflow', null, null, $p_project_id );
 
-	if( count( $t_enum_workflow ) < 1 ) {
+	if( count( $t_enum_workflow ) < 1 || !MantisEnum::hasValue( $t_config_var_value, $p_current_value ) ) {
 		# workflow not defined, use default enumeration
 		$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 	} else {
