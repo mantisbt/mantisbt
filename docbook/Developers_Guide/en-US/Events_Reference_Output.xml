@@ -230,16 +230,16 @@
 			<title>EVENT_MENU_MAIN (Default)</title>
 			<blockquote>
 				<para>
-					This event gives plugins the opportunity to add new links to the main menu at
-					the top (or bottom) of every page in MantisBT.  New links will be added after the
-					'Docs' link, and before the 'Manage' link.  Hooked events may return multiple
-					links, in which case each link in the array will be automatically separated
-					with the '|' symbol as usual.
+					This event gives plugins the opportunity to add new menu options to main menu.
+					New links will be added AFTER the standard menu options.
+					Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: Array of menu options, each is an array of properties.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -248,16 +248,16 @@
 			<title>EVENT_MENU_MAIN_FRONT (Default)</title>
 			<blockquote>
 				<para>
-					This event gives plugins the opportunity to add new links to the main menu at
-					the top (or bottom) of every page in MantisBT.  New links will be added after the
-					'Main' link, and before the 'My View' link.  Hooked events may return multiple
-					links, in which case each link in the array will be automatically separated
-					with the '|' symbol as usual.
+					This event gives plugins the opportunity to add new menu options to main menu.
+					New links will be added BEFORE the standard menu options.
+					Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: Array of menu options, each is an array of properties.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
