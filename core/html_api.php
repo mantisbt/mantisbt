@@ -416,27 +416,6 @@ function html_end() {
 }
 
 /**
- * Prepare an array of additional menu options from a configuration variable
- * @param string $p_config Configuration variable name.
- * @return array
- */
-function prepare_custom_menu_options( $p_config ) {
-	$t_custom_menu_options = config_get( $p_config );
-	$t_options = array();
-
-	foreach( $t_custom_menu_options as $t_custom_option ) {
-		$t_access_level = $t_custom_option[1];
-		if( access_has_project_level( $t_access_level ) ) {
-			$t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
-			$t_link = string_attribute( $t_custom_option[2] );
-			$t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
-		}
-	}
-
-	return $t_options;
-}
-
-/**
  * Print the menu bar with a list of projects to which the user has access
  * @return void
  */
