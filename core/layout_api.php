@@ -715,17 +715,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
 		# Plugin / Event added options
 		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN_FRONT' );
-		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-				if( is_array( $t_callback_menu_options ) ) {
-					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-				} else {
-					if( !is_null( $t_callback_menu_options ) ) {
-						$t_menu_options[] = $t_callback_menu_options;
-					}
-				}
-			}
-		}
+		layout_plugin_menu_options_for_sidebar( $t_event_menu_options, $p_active_sidebar_page );
 
 		# My View
 		layout_sidebar_menu( 'my_view_page.php', 'my_view_link', 'fa-dashboard', $p_active_sidebar_page );
@@ -766,17 +756,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
 		# Plugin / Event added options
 		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
-		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-				if( is_array( $t_callback_menu_options ) ) {
-					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-				} else {
-					if( !is_null( $t_callback_menu_options ) ) {
-						$t_menu_options[] = $t_callback_menu_options;
-					}
-				}
-			}
-		}
+		layout_plugin_menu_options_for_sidebar( $t_event_menu_options, $p_active_sidebar_page );
 
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
@@ -813,6 +793,37 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 }
 
 /**
+ * Process plugin menu options for sidebar
+ * @param array $p_plugin_event_response The response from the plugin event signal.
+ * @param string $p_active_sidebar_page The active page on the sidebar.
+ * @return void
+ */
+function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response, $p_active_sidebar_page ) {
+	$t_menu_options = array();
+
+	foreach( $p_plugin_event_response as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	foreach( $t_menu_options as $t_menu_option ) {
+		$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
+		if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
+			continue;
+		}
+
+		layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );	
+	}
+}
+
+/**
  * Print sidebar opening elements
  * @return null
  */
@@ -843,7 +854,7 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	}
 	echo '<a href="' . helper_mantis_url( $p_page ) . '">' . "\n";
 	echo '<i class="menu-icon fa ' . $p_icon . '"></i> ' . "\n";
-	echo '<span class="menu-text"> ' . lang_get( $p_title ) . ' </span>' . "\n";
+	echo '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
 	echo '</a>' . "\n";
 	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";
