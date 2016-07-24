@@ -1,5 +1,5 @@
 $.datepicker.regional['en'] = {
-	dateFormat: config['calendar_js_date_format'],
+	dateFormat: config['calendar_jq_date_format'],
 	firstDay: 0,
 	isRTL: false,
 	showMonthAfterYear: false,
@@ -8,7 +8,7 @@ $.datepicker.regional['en'] = {
 $.datepicker.setDefaults($.datepicker.regional['en']);
 
 $.timepicker.regional['en'] = {
-	timeFormat: config['calendar_js_time_format'],
+	timeFormat: config['calendar_jq_time_format'],
 	isRTL: false
 };
 $.timepicker.setDefaults($.timepicker.regional['en']);

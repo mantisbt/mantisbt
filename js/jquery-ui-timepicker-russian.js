@@ -11,7 +11,7 @@ $.datepicker.regional['ru'] = {
 	dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
 	dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
 	weekHeader: 'Нед',
-	dateFormat: config['calendar_js_date_format'],
+	dateFormat: config['calendar_jq_date_format'],
 	firstDay: 1,
 	isRTL: false,
 	showMonthAfterYear: false,
@@ -29,7 +29,7 @@ $.timepicker.regional['ru'] = {
 	timezoneText: 'Часовой пояс',
 	currentText: 'Сейчас',
 	closeText: 'Выбрать',
-	timeFormat: config['calendar_js_time_format'],
+	timeFormat: config['calendar_jq_time_format'],
 	amNames: ['AM', 'A'],
 	pmNames: ['PM', 'P'],
 	isRTL: false
