@@ -823,11 +823,17 @@ function layout_config_menu_options_for_sidebar( $p_active_sidebar_page ) {
 	$t_custom_options = config_get( 'main_menu_custom_options' );
 
 	foreach( $t_custom_options as $t_custom_option ) {
-		$t_menu_option = array();
-		$t_menu_option['title'] = $t_custom_option[0];
-		$t_menu_option['access_level'] = $t_custom_option[1];
-		$t_menu_option['icon'] = 'fa-plug';
-		$t_menu_option['url'] = $t_custom_option[2];
+		if( isset( $t_custom_option['url'] ) ) {
+			$t_menu_option = $t_custom_option;
+		} else {
+			# Support < 2.0.0 custom menu options config format
+			$t_menu_option = array();
+			$t_menu_option['title'] = $t_custom_option[0];
+			$t_menu_option['access_level'] = $t_custom_option[1];
+			$t_menu_option['icon'] = 'fa-plug';
+			$t_menu_option['url'] = $t_custom_option[2];
+		}
+
 		$t_menu_options[] = $t_menu_option;
 	}
 

@@ -3498,14 +3498,28 @@ $g_custom_field_edit_after_create = ON;
 
 /**
  * Add custom options to the main menu.  For example:
+ *
  * $g_main_menu_custom_options = array(
- *     array( "My Link",  MANAGER,       'my_link.php' ),
- *     array( "My Link2", ADMINISTRATOR, 'my_link2.php' )
+ *     array( 
+ *         'title'        => 'My Link',
+ *         'access_level' => MANAGER,
+ *         'url'          => 'my_link.php',
+ *         'icon'         => 'fa-plug'
+ *     ),
+ *     array( 
+ *         'title'        => 'My Link2',
+ *         'access_level' => ADMINISTRATOR,
+ *         'url'          => 'my_link2.php',
+ *         'icon'         => 'fa-plug'
+ *     )
  * );
  *
- * Note that if the caption is found in custom_strings_inc.php, then it will be
- * replaced by the translated string.  Options will only be added to the menu
+ * Note that if the caption is a localized string name (in strings_english.txt or custom_strings_inc.php),
+ * then it will be replaced by the translated string.  Options will only be added to the menu
  * if the current logged in user has the appropriate access level.
+ *
+ * Use icons from http://fontawesome.io/icons/ - Add "fa-" prefix to icon name.
+ *
  * @global array $g_main_menu_custom_options
  */
 $g_main_menu_custom_options = array();

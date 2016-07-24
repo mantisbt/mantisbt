@@ -129,8 +129,18 @@
 					the link to be executed. For example:
 <programlisting>
 $g_main_menu_custom_options = array(
-	array( 'My Link', MANAGER, 'my_link.php' ),
-	array( 'My Link2', ADMINISTRATOR, 'my_link2.php' ),
+    array( 
+        'title'        =&gt; 'My Link',
+        'access_level' =&gt; MANAGER,
+        'url'          =&gt; 'my_link.php',
+        'icon'         =&gt; 'fa-plug'
+    ),
+    array( 
+        'title'        =&gt; 'My Link2',
+        'access_level' =&gt; ADMINISTRATOR,
+        'url'          =&gt; 'my_link2.php',
+        'icon'         =&gt; 'fa-plug'
+    )
 );
 </programlisting>
 					Note that if the caption is found in the
@@ -140,6 +150,10 @@ $g_main_menu_custom_options = array(
 					string. Options will only be added to the menu if
 					the current logged in user has the appropriate
 					access level.
+				</para>
+				<para>
+					Use icons from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>.
+					Add "fa-" prefix to icon name.
 				</para>
 			</listitem>
 		</varlistentry>
