@@ -273,7 +273,7 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 					print_small_button( $t_href, $t_label );
 				}
 			}
-		} else {
+		} elseif( !empty( $t_hook ) ) {
 			print_bracket_link_prepared( $t_hook );
 		}
 	}
