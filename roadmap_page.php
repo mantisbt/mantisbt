@@ -81,12 +81,11 @@ function print_version_header( array $p_version_row ) {
 	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
 	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
-	if( config_get( 'show_roadmap_dates' ) ) {
-		$t_version_timestamp = $p_version_row['date_order'];
-
+	$t_version_timestamp = $p_version_row['date_order'];
+	if( config_get( 'show_roadmap_dates' ) && !date_is_null( $t_version_timestamp ) ) {
 		$t_scheduled_release_date = lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) );
 	} else {
-		$t_scheduled_release_date = '';
+		$t_scheduled_release_date = null;
 	}
 
 	$t_block_id = 'roadmap_' . $t_version_id;
@@ -109,7 +108,9 @@ function print_version_header( array $p_version_row ) {
 
 	echo '<div class="widget-body">';
 	echo '<div class="widget-toolbox padding-8 clearfix">';
-	echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+	if( $t_scheduled_release_date ) {
+		echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+	}
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
 	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
