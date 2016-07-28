@@ -80,9 +80,8 @@ function print_version_header( array $p_version_row ) {
 
 	$t_release_title = '<a href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
-	if( config_get( 'show_roadmap_dates' ) ) {
-		$t_version_timestamp = $p_version_row['date_order'];
-
+	$t_version_timestamp = $p_version_row['date_order'];
+	if( config_get( 'show_roadmap_dates' ) && !date_is_null( $t_version_timestamp ) ) {
 		$t_scheduled_release_date = ' (' . lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) ) . ')';
 	} else {
 		$t_scheduled_release_date = '';
