@@ -795,7 +795,7 @@
                             <row>
                                 <entry>Status to set auto-assigned issues to</entry>
                                 <entry>$g_bug_assigned_status</entry>
-                                <entry>status issue is set to when assigned</entry>
+                                <entry>status to use when an issue is auto-assigned</entry>
                             </row>
                             <row>
                                 <entry>Limit reporter's access to their own issues</entry>

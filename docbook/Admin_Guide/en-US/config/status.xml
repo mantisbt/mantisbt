@@ -75,6 +75,14 @@
 					a bug is assigned to a person. Installations where assigned status
 					is to be used when the defect is in progress, rather than just put
 					in a person's queue should set it to OFF. Default is ON.
+					For the status change to be effective, these conditions must be met:
+					<itemizedlist>
+						<listitem><para>Bug has no handler, and a new handler is selected</para></listitem>
+						<listitem><para>The assignment is not part of a explicit status change</para></listitem>
+						<listitem><para>Current bug status is lower than defined "assigned" status</para></listitem>
+						<listitem><para>"Assigned" status is reachable by workflow configuration</para></listitem>
+					</itemizedlist>
+					If the conditions are not met, the assignment is still made, but status will not be modified.
 				</para>
 			</listitem>
 		</varlistentry>
