@@ -1938,52 +1938,69 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$c_resolution = (int)$p_resolution;
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# Add bugnote if supplied
-	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-	# Error condition stopped execution but status had already been changed
-	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
-	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	# @TODO
+	# If time tracking is enabled, this code is executed outside of BugData validation.
+	# These time tracking dependencies should be removed
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled ) {
+		# Add bugnote if supplied
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	}
+
+	$t_bugdata = bug_get( $p_bug_id );
+
+	$t_bugdata->status = config_get( 'bug_resolved_status_threshold' );
+	$t_bugdata->fixed_in_version = $p_fixed_in_version;
+	$t_bugdata->resolution = $c_resolution;
+
+	$t_old_handler_id = $t_bugdata->handler_id;
+	# only set handler if specified explicitly or if bug was not assigned to a handler
+	if( null == $p_handler_id ) {
+		if( $t_bugdata->handler_id == 0 ) {
+			$t_bugdata->handler_id = auth_get_current_user_id();
+		}
+	} else {
+		$t_bugdata->handler_id = $p_handler_id;
+	}
+
+	# If time tracking is disabled, the bug note is added as a callback after validation
+	# This is the proper way.
+	if( OFF == $t_time_tracking_enabled ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
 		if( $p_bug_id == $p_duplicate_id ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
-
 			# never returns
 		}
-
 		# the related bug exists...
 		bug_ensure_exists( $p_duplicate_id );
+		$t_bugdata->duplicate_id = $p_duplicate_id;
 
-		relationship_upsert( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
+		# create callback for duplicate bug actions:
+		$t_bugdata->add_update_callback( 'relationship_upsert', array( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE, /* email_for_source */ false ) );
 
 		# Copy list of users monitoring the duplicate bug to the original bug
-		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-		$t_old_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-		if( user_exists( $t_old_reporter_id ) ) {
-			bug_monitor( $p_duplicate_id, $t_old_reporter_id );
+		if( user_exists( $t_bugdata->reporter_id ) ) {
+			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_bugdata->reporter_id ) );
 		}
 		if( user_exists( $t_old_handler_id ) ) {
-			bug_monitor( $p_duplicate_id, $t_old_handler_id );
+			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_old_handler_id ) );
 		}
-		bug_monitor_copy( $p_bug_id, $p_duplicate_id );
-
-		bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
+		$t_bugdata->add_update_callback( 'bug_monitor_copy', array( $p_bug_id, $p_duplicate_id ) );
 	}
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
-	bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
-	bug_set_field( $p_bug_id, 'resolution', $c_resolution );
-
-	# only set handler if specified explicitly or if bug was not assigned to a handler
-	if( null == $p_handler_id ) {
-		if( bug_get_field( $p_bug_id, 'handler_id' ) == 0 ) {
-			$p_handler_id = auth_get_current_user_id();
-			bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
-		}
-	} else {
-		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
-	}
+	$t_bugdata->update( false, true );
 
 	email_resolved( $p_bug_id );
 	email_relationship_child_resolved( $p_bug_id );
