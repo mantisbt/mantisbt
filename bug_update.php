@@ -379,33 +379,40 @@ $t_updated_bug->status = bug_get_status_for_assign( $t_existing_bug->handler_id,
 # the new plugin system instead.
 helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updated_bug, $t_bug_note->note ) );
 
-# Allow plugins to validate/modify the update prior to it being committed.
-$t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_existing_bug );
+# set up post-update callbacks
+
+# Update custom field values.
+foreach ( $t_custom_fields_to_set as $t_custom_field_to_set ) {
+	$t_updated_bug->add_update_callback( 'custom_field_set_value', array( $t_custom_field_to_set['id'], $f_bug_id, $t_custom_field_to_set['value'] ) );
+}
+
+# Add a bug note if there is one.
+if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) {
+
+	$add_bugnote_func = function( array $p_bugnote_params ) {
+		$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+		bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+	};
+	$t_bugnote_params = array( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, BUGNOTE, '', null, false );
+	$t_updated_bug->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+}
+
+# Add a duplicate relationship if requested.
+# @TODO move this logic into BugData
+if( $t_updated_bug->duplicate_id != 0 ) {
+	$add_relatioship_func = function( $p_bug_data ) {
+		relationship_upsert( $p_bug_data->id, $p_bug_data->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
+		bug_monitor_copy( $p_bug_data->id, $p_bug_data->duplicate_id );
+	};
+
+	$t_updated_bug->add_update_callback( $add_relatioship_func, array( $t_updated_bug ) );
+}
 
 # Commit the bug updates to the database.
 $t_text_field_update_required = ( $t_existing_bug->description != $t_updated_bug->description ) ||
 								( $t_existing_bug->additional_information != $t_updated_bug->additional_information ) ||
 								( $t_existing_bug->steps_to_reproduce != $t_updated_bug->steps_to_reproduce );
 $t_updated_bug->update( $t_text_field_update_required, true );
-
-# Update custom field values.
-foreach ( $t_custom_fields_to_set as $t_custom_field_to_set ) {
-	custom_field_set_value( $t_custom_field_to_set['id'], $f_bug_id, $t_custom_field_to_set['value'] );
-}
-
-# Add a bug note if there is one.
-if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) {
-	$t_bugnote_id = bugnote_add( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, 0, '', null, false );
-	bugnote_process_mentions( $f_bug_id, $t_bugnote_id, $t_bug_note->note );
-}
-
-# Add a duplicate relationship if requested.
-if( $t_updated_bug->duplicate_id != 0 ) {
-	relationship_upsert( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
-	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
-}
-
-event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to

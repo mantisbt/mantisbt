@@ -637,6 +637,8 @@ class BugData {
 
 		$t_old_data = bug_get( $this->id, true );
 
+		event_signal( 'EVENT_UPDATE_BUG_DATA', $this, $t_old_data );
+
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
 		#  as unix timestamps which could confuse the history log and they
@@ -792,6 +794,8 @@ class BugData {
 			$t_callback = array_shift( $this->update_callbacks );
 			call_user_func_array( $t_callback['func'], $t_callback['params'] );
 		}
+
+		event_signal( 'EVENT_UPDATE_BUG', array( $t_old_data, $this ) );
 
 		return true;
 	}
