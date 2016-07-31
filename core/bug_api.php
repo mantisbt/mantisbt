@@ -1843,37 +1843,33 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	if( ( $p_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
 		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_original_handler_id = $t_bugdata->handler_id;
+	$t_original_status = $t_bugdata->status;
+	$t_bugdata->handler_id = $p_user_id;
 
-	# extract current information into history variables
-	$h_status = bug_get_field( $p_bug_id, 'status' );
-	$h_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+	$t_assigned_status = bug_get_status_for_assign( $t_original_handler_id, $t_bugdata->handler_id, $t_original_status );
+	$t_bugdata->status = $t_assigned_status;
 
-	$t_ass_val = bug_get_status_for_assign( $h_handler_id, $p_user_id, $h_status );
+	# callback for history logging:
+	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'status', $t_original_status, $t_bugdata->status ) );
+	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'handler_id', $t_original_handler_id, $t_bugdata->handler_id ) );
 
-	if( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
+	# callback for note add
+	if( !empty($p_bugnote_text) ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, 0, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
 
-		# get user id
-		db_param_push();
-		$t_query = 'UPDATE {bug}
-					  SET handler_id=' . db_param() . ', status=' . db_param() . '
-					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_user_id, $t_ass_val, $p_bug_id ) );
+	$t_bugdata->update( false, true );
 
-		# log changes
-		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_ass_val );
-		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
-
-		# Add bugnote if supplied ignore false return
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-
-		# updated the last_updated date
-		bug_update_date( $p_bug_id );
-
-		bug_clear_cache( $p_bug_id );
-
+	if( $t_original_handler_id != $t_bugdata->handler_id) {
 		# Send email for change of handler
-		email_owner_changed( $p_bug_id, $h_handler_id, $p_user_id );
+		email_owner_changed( $t_bugdata->id, $t_original_handler_id, $t_bugdata->handler_id );
 	}
 
 	return true;
