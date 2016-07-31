@@ -55,7 +55,9 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 access_ensure_bug_level( config_get( 'set_bug_sticky_threshold' ), $f_bug_id );
 
-bug_set_field( $f_bug_id, 'sticky', 'stick' == $f_action );
+$t_bugdata = bug_get( $p_bug_id );
+$t_bugdata->sticky = ( 'stick' == $f_action );
+$t_bugdata->update();
 
 form_security_purge( 'bug_stick' );
 
