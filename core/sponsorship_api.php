@@ -288,8 +288,9 @@ function sponsorship_format_amount( $p_amount ) {
  */
 function sponsorship_update_bug( $p_bug_id ) {
 	$t_total_amount = sponsorship_get_amount( sponsorship_get_all_ids( $p_bug_id ) );
-	bug_set_field( $p_bug_id, 'sponsorship_total', $t_total_amount );
-	bug_update_date( $p_bug_id );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->sponsorship_total = $t_total_amount;
+	$t_bugdata->update();
 }
 
 /**
