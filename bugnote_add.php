@@ -117,6 +117,7 @@ if( is_blank( $f_bugnote_text ) && helper_duration_to_minutes( $f_time_tracking 
 	# proper bugnote files support in db schema and object model.
 	email_bugnote_add( $t_bugnote_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
 
+
 	# Handle the reassign on feedback feature. Note that this feature generally
 	# won't work very well with custom workflows as it makes a lot of assumptions
 	# that may not be true. It assumes you don't have any statuses in the workflow
@@ -127,10 +128,11 @@ if( is_blank( $f_bugnote_text ) && helper_duration_to_minutes( $f_time_tracking 
 		 $t_bug->handler_id !== auth_get_current_user_id() &&
 		 $t_bug->reporter_id === auth_get_current_user_id() ) {
 		if( $t_bug->handler_id !== NO_USER ) {
-			bug_set_field( $t_bug->id, 'status', config_get( 'bug_assigned_status' ) );
+			$t_bug->status = config_get( 'bug_assigned_status' );
 		} else {
-			bug_set_field( $t_bug->id, 'status', config_get( 'bug_submit_status' ) );
+			$t_bug->status = config_get( 'bug_submit_status' );
 		}
+		$t_bug->update( false, true );
 	}
 }
 
