@@ -254,6 +254,12 @@ class BugData {
 	private $loading = false;
 
 	/**
+	 * an array of tuples: ( 'func' => callable, 'params' => array )
+	 * to be used as callbacks on the update process
+	 */
+	private $update_callbacks = array();
+
+	/**
 	 * return number of file attachment's linked to current bug
 	 * @return integer
 	 */
@@ -781,7 +787,23 @@ class BugData {
 			email_bug_updated( $c_bug_id );
 		}
 
+		# Execute all registered update callbacks
+		while( !empty( $this->update_callbacks ) ) {
+			$t_callback = array_shift( $this->update_callbacks );
+			call_user_func_array( $t_callback['func'], $t_callback['params'] );
+		}
+
 		return true;
+	}
+
+	function add_update_callback( callable $p_callable, array $p_params = null ) {
+		if( null === $p_params ) {
+			$p_params = array();
+		}
+		$t_callback = array();
+		$t_callback['func'] = $p_callable;
+		$t_callback['params'] = $p_params;
+		$this->update_callbacks[] = $t_callback;
 	}
 }
 
