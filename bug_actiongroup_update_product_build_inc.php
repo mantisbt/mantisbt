@@ -107,7 +107,8 @@ function action_update_product_build_validate( $p_bug_id ) {
  */
 function action_update_product_build_process( $p_bug_id ) {
 	$t_build = gpc_get_string( 'build' );
-
-	bug_set_field( $p_bug_id, 'build', $t_build );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->build = $t_build;
+	$t_bugdata->update( false, true );
 	return null;
 }

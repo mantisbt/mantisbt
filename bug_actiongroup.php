@@ -191,8 +191,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				$f_priority = gpc_get_int( 'priority' );
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_set_field( $t_bug_id, 'priority', $f_priority );
-				email_bug_updated( $t_bug_id );
+				$t_bugdata = bug_get( $t_bug_id );
+				$t_bugdata->priority = $f_priority;
+				$t_bugdata->update();
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -203,14 +204,24 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( access_get_status_threshold( $f_status, $t_bug->project_id ), $t_bug_id ) ) {
 				if( true == bug_check_workflow( $t_status, $f_status ) ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'status', $f_status );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->status = $f_status;
 
 					# Add bugnote if supplied
 					if( !is_blank( $f_bug_notetext ) ) {
-						$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
-						bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
-						# No need to call email_generic(), bugnote_add() does it
-					} else {
+						$add_bugnote_func = function( array $p_bugnote_params ) {
+							$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+							bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+						};
+						$t_bugnote_params = array( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+						$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+						}
+
+					$t_bugdata->update( false, true );
+
+					if( is_blank( $f_bug_notetext ) ) {
+						# If there is a note, bugnote add, send email notification for new note
+						# if not, notify generic update.
 						email_bug_updated( $t_bug_id );
 					}
 
@@ -227,8 +238,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				if( category_exists( $f_category_id ) ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'category_id', $f_category_id );
-					email_bug_updated( $t_bug_id );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->category_id = $f_category_id;
+					$t_bugdata->update();
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_category' );
@@ -242,8 +254,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				if( $f_product_version === '' || version_get_id( $f_product_version, $t_bug->project_id ) !== false ) {
 					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
-					bug_set_field( $t_bug_id, 'version', $f_product_version );
-					email_bug_updated( $t_bug_id );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->version = $f_product_version;
+					$t_bugdata->update();
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
@@ -257,8 +270,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 				if( $f_fixed_in_version === '' || version_get_id( $f_fixed_in_version, $t_bug->project_id ) !== false ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
-					email_bug_updated( $t_bug_id );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->fixed_in_version = $f_fixed_in_version;
+					$t_bugdata->update();
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 					} else {
 						$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
@@ -272,8 +286,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id ) ) {
 				if( $f_target_version === '' || version_get_id( $f_target_version, $t_bug->project_id ) !== false ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-					bug_set_field( $t_bug_id, 'target_version', $f_target_version );
-					email_bug_updated( $t_bug_id );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->target_version = $f_target_version;
+					$t_bugdata->update();
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
@@ -288,7 +303,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				$t_due_date = date_strtotime( $t_due_date );
 
 				if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
-					bug_set_field( $t_bug_id, 'due_date', $t_due_date );
+					$t_bugdata = bug_get( $t_bug_id );
+					$t_bugdata->due_date = $t_due_date;
+					$t_bugdata->update( false, true );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 				}
@@ -298,8 +315,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
 				$f_view_status = gpc_get_int( 'view_status' );
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_set_field( $t_bug_id, 'view_state', $f_view_status );
-				email_bug_updated( $t_bug_id );
+				$t_bugdata = bug_get( $t_bug_id );
+				$t_bugdata->view_state = $f_view_status;
+				$t_bugdata->update();
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -310,7 +328,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				$f_sticky = bug_get_field( $t_bug_id, 'sticky' );
 				# The new value is the inverted old value
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
-				bug_set_field( $t_bug_id, 'sticky', intval( !$f_sticky ) );
+				$t_bugdata = bug_get( $t_bug_id );
+				$t_bugdata->sticky = intval( !$f_sticky );
+				$t_bugdata->update( false, true );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
