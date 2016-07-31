@@ -1887,13 +1887,33 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# Add bugnote if supplied ignore a false return
-	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-	# Error condition stopped execution but status had already been changed
-	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
-	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	# @TODO
+	# If time tracking is enabled, this code is executed outside of BugData validation.
+	# These time tracking dependencies should be removed
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled ) {
+		# Add bugnote if supplied ignore a false return
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	}
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->status = config_get( 'bug_closed_status_threshold' );
+
+	# If time tracking is disabled, the bug note is added as a callback after validation
+	# This is the proper way.
+	if( OFF == $t_time_tracking_enabled ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
+
+	$t_bugdata->update( false, true );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );
