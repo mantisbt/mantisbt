@@ -1330,20 +1330,15 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
-	# Attempt to move disk based attachments to new project file directory.
-	file_move_bug_attachments( $p_bug_id, $p_target_project_id );
-
-	# Move the issue to the new project.
-	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
-
-	# Update the category if needed
-	$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->project_id = $p_target_project_id;
+	$t_category_id = $t_bugdata->category_id;
 
 	# Bug has no category
 	if( $t_category_id == 0 ) {
 		# Category is required in target project, set it to default
 		if( ON != config_get( 'allow_no_category', null, null, $p_target_project_id ) ) {
-			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves', null, null, $p_target_project_id ) );
+			$t_bugdata->category_id = config_get( 'default_category_for_moves', null, null, $p_target_project_id );
 		}
 	} else {
 		# Check if the category is global, and if not attempt mapping it to the new project
@@ -1359,9 +1354,15 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 				# Use target project's default category for moves, since there is no match by name.
 				$t_target_project_category_id = config_get( 'default_category_for_moves', null, null, $p_target_project_id );
 			}
-			bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
+			$t_bugdata->category_id = $t_target_project_category_id;
 		}
 	}
+
+	# Attempt to move disk based attachments to new project file directory.
+	$t_bugdata->add_update_callback( file_move_bug_attachments, array( $t_bugdata->id, $t_bugdata->project_id ) );
+
+	# @TODO email is bypassed, add a notification for MOVE
+	$t_bugdata->update( false, true );
 }
 
 /**
