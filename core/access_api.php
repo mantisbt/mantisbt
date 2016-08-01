@@ -414,13 +414,10 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		static $s_thresholds = array();
 		if( !isset( $s_thresholds[$t_project_id] ) ) {
 			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $p_user_id, $t_project_id );
-			if( !is_array( $t_report_bug_threshold ) ) {
-				$s_thresholds[$t_project_id] = $t_report_bug_threshold + 1;
-			} else if( empty( $t_report_bug_threshold ) ) {
+			if( empty( $t_report_bug_threshold ) ) {
 				$s_thresholds[$t_project_id] = NOBODY;
 			} else {
-				sort( $t_report_bug_threshold );
-				$s_thresholds[$t_project_id] = $t_report_bug_threshold[0] + 1;
+				$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
 			}
 		}
 		if( !access_compare_level( $t_access_level, $s_thresholds[$t_project_id] ) ) {
@@ -708,4 +705,26 @@ function access_level_get_string( $p_access_level ) {
 		$t_access_level_string = lang_get( 'no_access' );
 	}
 	return $t_access_level_string;
+}
+
+/**
+ * Return the minimum access level, as integer, that matches the threshold.
+ * $p_threshold may be a single value, or an array. If it is a single
+ * value, returns that number. If it is an array, return the value of the
+ * smallest element
+ * @param integer|array $p_threshold         Access threshold
+ * @return integer		Integer value for an access level.
+ */
+function access_threshold_min_level( $p_threshold ) {
+	if( is_array( $p_threshold ) ) {
+		if( empty( $p_threshold ) ) {
+			return NOBODY;
+		} else {
+			sort( $p_threshold );
+			return( reset( $p_threshold ) );
+		}
+	} else {
+		return $p_threshold;
+	}
+
 }
