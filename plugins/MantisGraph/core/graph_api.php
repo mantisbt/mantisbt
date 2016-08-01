@@ -33,7 +33,7 @@ function graph_strings_array( array $p_strings ) {
 	$t_js_labels = '';
 
 	foreach ( $p_strings as $t_label ) {
-		if ( !empty( $t_js_labels ) ) {
+		if ( $t_js_labels !== '' ) {
 			$t_js_labels .= ', ';
 		}
 
@@ -52,7 +52,7 @@ function graph_numeric_array( array $p_values ) {
 	$t_js_values = '';
 
 	foreach( $p_values as $t_value ) {
-		if ( !empty( $t_js_values ) ) {
+		if ( $t_js_values !== '' ) {
 			$t_js_values .= ', ';
 		}
 
