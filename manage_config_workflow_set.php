@@ -215,17 +215,20 @@ if( config_get_access( 'set_status_threshold' ) <= $t_access ) {
 	# walk through the status labels to set the status threshold
 	$t_set_new = array();
 	foreach( $t_enum_status as $t_status_id => $t_status_label ) {
-		$f_level = gpc_get_int( 'access_change_' . $t_status_id );
-		if( config_get( 'bug_submit_status' ) == $t_status_id ) {
-			if( $f_level != $t_set_parent[$t_status_id] ) {
-				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
+		$f_level = gpc_get_int( 'access_change_' . $t_status_id, -1 );
+		# Only process those inputs that exists, since not all access_change_<status> may have been editable.
+		if( $f_level > -1 ) {
+			if( config_get( 'bug_submit_status' ) == $t_status_id ) {
+				if( $f_level != $t_set_parent[$t_status_id] ) {
+					config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
+				} else {
+					config_delete( 'report_bug_threshold', ALL_USERS, $t_project );
+				}
+				unset( $t_set_parent[$t_status_id] );
+				unset( $t_set_current[$t_status_id] );
 			} else {
-				config_delete( 'report_bug_threshold', ALL_USERS, $t_project );
+				$t_set_new[$t_status_id] = $f_level;
 			}
-			unset( $t_set_parent[$t_status_id] );
-			unset( $t_set_current[$t_status_id] );
-		} else {
-			$t_set_new[$t_status_id] = $f_level;
 		}
 	}
 
