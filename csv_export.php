@@ -108,8 +108,8 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 $t_end_of_results = false;
 do {
 	# Clear cache for next block
-	unset( $g_cache_bug );
-	unset( $g_cache_bug_text );
+	bug_clear_cache();
+	bug_text_clear_cache();
 
 	# Keep reading until reaching max block size or end of result set
 	$t_read_rows = array();
