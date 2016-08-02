@@ -84,7 +84,8 @@ function config_get_access_parent( $p_project, $p_option ) {
 }
 
 
-$t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
+$t_can_change_level = min( config_get_access( 'status_enum_workflow' ), config_get_access( 'report_bug_threshold' ), config_get_access( 'set_status_threshold' )
+		, config_get_access( 'bug_submit_status' ), config_get_access( 'bug_resolved_status_threshold' ), config_get_access( 'bug_reopen_status' ) );
 access_ensure_project_level( $t_can_change_level );
 
 $t_redirect_url = 'manage_config_workflow_page.php';
