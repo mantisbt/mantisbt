@@ -93,10 +93,6 @@ if( 0 == $p_bug_count ) {
 # Execute query
 $t_result = filter_get_bug_rows_result( $t_query_clauses );
 
-
-
-define( 'EXPORT_BLOCK_SIZE', 500 );
-
 $t_end_of_results = false;
 do {
 	# Clear cache for next block

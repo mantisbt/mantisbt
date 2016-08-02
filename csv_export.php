@@ -102,9 +102,6 @@ if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 
 echo $t_header;
 
-
-define( 'EXPORT_BLOCK_SIZE', 500 );
-
 $t_end_of_results = false;
 do {
 	# Clear cache for next block
