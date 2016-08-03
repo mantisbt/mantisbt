@@ -155,6 +155,10 @@ $g_main_menu_custom_options = array(
 					Use icons from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>.
 					Add "fa-" prefix to icon name.
 				</para>
+				<para>
+					Access level is an optional field, and no check will be done if it is not set.
+					Icon is an optional field, and 'fa-plug' will be used if it is not set.
+				</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

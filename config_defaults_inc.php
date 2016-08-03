@@ -3514,9 +3514,13 @@ $g_custom_field_edit_after_create = ON;
  *     )
  * );
  *
- * Note that if the caption is a localized string name (in strings_english.txt or custom_strings_inc.php),
- * then it will be replaced by the translated string.  Options will only be added to the menu
- * if the current logged in user has the appropriate access level.
+ * Note that if the caption is a localized string name (in strings_english.txt
+ * or custom_strings_inc.php), then it will be replaced by the translated
+ * string.  Options will only be added to the menu if the current logged in
+ * user has the appropriate access level.
+ *
+ * Access level is an optional field, and no check will be done if it is not set.
+ * Icon is an optional field, and 'fa-plug' will be used if it is not set.
  *
  * Use icons from http://fontawesome.io/icons/ - Add "fa-" prefix to icon name.
  *

@@ -230,16 +230,34 @@
 			<title>EVENT_MENU_MAIN (Default)</title>
 			<blockquote>
 				<para>
-					This event gives plugins the opportunity to add new menu options to main menu.
+					This event gives plugins the opportunity to add new menu options to the main menu.
 					New links will be added AFTER the standard menu options.
-					Hooked events may return an array of menu options.
-					Each array entry will contain an associate array with keys 'title', 'url',
-					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: Array of menu options, each is an array of properties.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
+						</para>
+						<programlisting>
+							return array(
+							    array( 
+									'title' =&gt; 'My Link',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link.php',
+									'icon' =&gt; 'fa-random'
+								),
+								array(
+									'title' =&gt; 'My Link2',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link2.php',
+									'icon' =&gt; 'fa-shield'
+								)
+							);
+						</programlisting>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -250,14 +268,32 @@
 				<para>
 					This event gives plugins the opportunity to add new menu options to main menu.
 					New links will be added BEFORE the standard menu options.
-					Hooked events may return an array of menu options.
-					Each array entry will contain an associate array with keys 'title', 'url',
-					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: Array of menu options, each is an array of properties.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
+						</para>
+						<programlisting>
+							return array(
+							    array( 
+									'title' =&gt; 'My Link',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link.php',
+									'icon' =&gt; 'fa-random'
+								),
+								array(
+									'title' =&gt; 'My Link2',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link2.php',
+									'icon' =&gt; 'fa-shield'
+								)
+							);
+						</programlisting>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
