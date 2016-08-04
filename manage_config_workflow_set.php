@@ -154,9 +154,8 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 				$t_first = false;
 			}
 		}
-		if( '' <> $t_workflow_row ) {
-			$t_workflow[$t_state] = $t_workflow_row;
-		}
+		# $t_workflow_row is allowed to be empty ''
+		$t_workflow[$t_state] = $t_workflow_row;
 	}
 
 	# Get the parent's workflow, if not set default to all transitions
