@@ -52,9 +52,15 @@ function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
  */
 function workflow_parse( array $p_enum_workflow ) {
 	$t_status_arr = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	if( count( $p_enum_workflow ) == 0 ) {
-		# workflow is not set, default it to all transitions
-		foreach ( $t_status_arr as $t_status => $t_label ) {
+
+	# If workflow is not set, defaults to array(), which means that all transitions are valid
+	if( !is_array( $p_enum_workflow ) ) {
+		$p_enum_workflow = array();
+	}
+
+	# If any status row is missing, it defaults to all transitions
+	foreach( $t_status_arr as $t_status => $t_label ) {
+		if( !isset( $p_enum_workflow[$t_status] ) ) {
 			$t_temp_workflow = array();
 			foreach ( $t_status_arr as $t_next => $t_next_label ) {
 				if( $t_status != $t_next ) {
@@ -86,6 +92,7 @@ function workflow_parse( array $p_enum_workflow ) {
 	# add user defined arcs
 	$t_default = array();
 	foreach ( $t_status_arr as $t_status => $t_status_label ) {
+		$t_exit[$t_status] = array();
 		if( isset( $p_enum_workflow[$t_status] ) ) {
 			$t_next_arr = MantisEnum::getAssocArrayIndexedByValues( $p_enum_workflow[$t_status] );
 			foreach ( $t_next_arr as $t_next => $t_next_label ) {
@@ -95,8 +102,6 @@ function workflow_parse( array $p_enum_workflow ) {
 				$t_exit[$t_status][$t_next] = '';
 				$t_entry[$t_next][$t_status] = '';
 			}
-		} else {
-			$t_exit[$t_status] = array();
 		}
 		if( !isset( $t_entry[$t_status] ) ) {
 			$t_entry[$t_status] = array();
