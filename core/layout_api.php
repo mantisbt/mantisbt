@@ -830,7 +830,6 @@ function layout_config_menu_options_for_sidebar( $p_active_sidebar_page ) {
 			$t_menu_option = array();
 			$t_menu_option['title'] = $t_custom_option[0];
 			$t_menu_option['access_level'] = $t_custom_option[1];
-			$t_menu_option['icon'] = 'fa-plug';
 			$t_menu_option['url'] = $t_custom_option[2];
 		}
 
