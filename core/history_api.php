@@ -193,6 +193,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 		$t_history_order = $p_history_order;
 	}
 
+	# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
 	$t_query_clauses = filter_get_bug_rows_query_clauses( $p_filter, null, null, null );
 
 	$t_select_string = 'SELECT DISTINCT {bug}.id ';
