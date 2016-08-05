@@ -37,12 +37,17 @@ require_api( 'history_api.php' );
  * @param integer $p_start_time Timestamp representing start time of the period.
  * @param integer $p_end_time   Timestamp representing end time of the period.
  * @param integer $p_max_events The maximum number of events to return or 0 for unlimited.
+ * @param type $p_filter		Filter array to use for filtering bugs
  * @return array
  */
-function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
+function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter = null ) {
 	$t_timeline_events = array();
 
-	$t_result = history_get_range_result( /* $p_bug_id */ null, $p_start_time, $p_end_time, 'DESC' );
+	if( null === $p_filter ) {
+		# create an empty filter, to match all bugs
+		$t_filter = filter_ensure_valid_filter( array() );
+	}
+	$t_result = history_get_range_result_filter( $t_filter, $p_start_time, $p_end_time, 'DESC' );
 	$t_count = 0;
 
 	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
