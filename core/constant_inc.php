@@ -615,3 +615,6 @@ define ( 'JQUERY_UI_VERSION', '1.11.4' );
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
+# Maximum number of bugs that are treated simutaneously in export procedures,
+# to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
+define( 'EXPORT_BLOCK_SIZE', 500 );

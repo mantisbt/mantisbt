@@ -49,25 +49,27 @@ auth_ensure_user_authenticated();
 
 helper_begin_long_process();
 
-$t_page_number = 1;
-$t_per_page = -1;
-$t_bug_count = null;
-$t_page_count = null;
-
 $t_nl = csv_get_newline();
 $t_sep = csv_get_separator();
 
-# Get bug rows according to the current filter
-$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if( $t_rows === false ) {
+# Get current filter
+$t_filter = filter_get_bug_rows_filter();
+
+# Get the query clauses
+$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
+
+# Get the total number of bugs that meet the criteria.
+$p_bug_count = filter_get_bug_count( $t_query_clauses );
+
+if( 0 == $p_bug_count ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
+# Execute query
+$t_result = filter_get_bug_rows_result( $t_query_clauses );
+
 # Get columns to be exported
 $t_columns = csv_get_columns();
-
-# pre-cache custom column data
-columns_plugin_cache_issue_data( $t_rows, $t_columns );
 
 csv_start( csv_get_default_filename() );
 
@@ -100,29 +102,71 @@ if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 
 echo $t_header;
 
-# export the rows
-foreach ( $t_rows as $t_row ) {
-	$t_first_column = true;
+$t_end_of_results = false;
+do {
+	# Clear cache for next block
+	bug_clear_cache();
+	bug_text_clear_cache();
 
-	foreach ( $t_columns as $t_column ) {
-		if( !$t_first_column ) {
-			echo $t_sep;
-		} else {
-			$t_first_column = false;
+	# Keep reading until reaching max block size or end of result set
+	$t_read_rows = array();
+	$t_count = 0;
+	$t_bug_id_array = array();
+	$t_unique_user_ids = array();
+	while( $t_count < EXPORT_BLOCK_SIZE ) {
+		$t_row = db_fetch_array( $t_result );
+		if( false === $t_row ) {
+			$t_end_of_results = true;
+			break;
+		}
+		$t_bug_id_array[] = (int)$t_row['id'];
+		$t_handler_id = (int)$t_row['handler_id'];
+		$t_unique_user_ids[$t_handler_id] = $t_handler_id;
+		$t_reporter_id = (int)$t_row['reporter_id'];
+		$t_unique_user_ids[$t_reporter_id] = $t_reporter_id;
+
+		$t_read_rows[] = $t_row;
+		$t_count++;
+	}
+	# Max block size has been reached, or no more rows left to complete the block.
+	# Either way, process what we have
+
+	# convert and cache data
+	$t_rows = filter_cache_result( $t_read_rows, $t_bug_id_array );
+	user_cache_array_rows( $t_unique_user_ids );
+	columns_plugin_cache_issue_data( $t_rows, $t_columns );
+
+	# Clear arrays that are not needed
+	unset( $t_read_rows );
+	unset( $t_unique_user_ids );
+	unset( $t_bug_id_array );
+
+	# export the rows
+	foreach ( $t_rows as $t_row ) {
+		$t_first_column = true;
+
+		foreach ( $t_columns as $t_column ) {
+			if( !$t_first_column ) {
+				echo $t_sep;
+			} else {
+				$t_first_column = false;
+			}
+
+			if( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
+				ob_start();
+				$t_column_value_function = 'print_column_value';
+				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
+				$t_value = ob_get_clean();
+
+				echo csv_escape_string( $t_value );
+			} else {
+				$t_function = 'csv_format_' . $t_column;
+				echo $t_function( $t_row );
+			}
 		}
 
-		if( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
-			ob_start();
-			$t_column_value_function = 'print_column_value';
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
-			$t_value = ob_get_clean();
-
-			echo csv_escape_string( $t_value );
-		} else {
-			$t_function = 'csv_format_' . $t_column;
-			echo $t_function( $t_row );
-		}
+		echo $t_nl;
 	}
 
-	echo $t_nl;
-}
+} while ( false === $t_end_of_results );
+
