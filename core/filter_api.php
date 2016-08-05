@@ -1237,7 +1237,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		foreach( $t_project_ids as $t_pid ) {
 			# limit reporters to visible projects
-			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) + 1, $t_pid, $t_user_id ) ) ) {
+			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {
 				array_push( $t_limited_projects, '({bug}.project_id=' . $t_pid . ' AND ({bug}.reporter_id=' . $t_user_id . ') )' );
 			} else {
 				$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
@@ -3586,7 +3586,7 @@ function print_filter_reporter_id() {
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
 	#   this assumed that there aren't any holes above REPORTER where the limit would apply
 	#
-	if( ( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( config_get( 'report_bug_threshold' ) + 1 ) ) ) {
+	if( ( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold' ) ) + 1 ) ) ) {
 		$t_id = auth_get_current_user_id();
 		$t_username = user_get_field( $t_id, 'username' );
 		$t_realname = user_get_field( $t_id, 'realname' );
