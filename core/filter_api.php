@@ -1077,6 +1077,122 @@ function filter_get_bug_count( array $p_query_clauses ) {
  * @return boolean|array
  */
 function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+	# assigning to $p_* for this function writes the values back in case the caller wants to know
+
+	if( $p_custom_filter === null ) {
+		$t_filter = filter_get_bug_rows_filter( $p_project_id, $p_user_id );
+	} else {
+		$t_filter = $p_custom_filter;
+	}
+
+	# Get the query clauses
+	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
+
+	# Get the total number of bugs that meet the criteria.
+	$p_bug_count = filter_get_bug_count( $t_query_clauses );
+	if( 0 == $p_bug_count ) {
+		return array();
+	}
+
+	# Calculate pagination
+	$p_per_page = filter_per_page( $t_filter, $p_bug_count, $p_per_page );
+	$p_page_count = filter_page_count( $p_bug_count, $p_per_page );
+	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
+	$t_offset = filter_offset( $p_page_number, $p_per_page );
+	# Execute query
+	$t_result = filter_get_bug_rows_result( $t_query_clauses, $p_per_page, $t_offset );
+
+	# Read results into rows array
+	$t_bug_id_array = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_bug_id_array[] = (int)$t_row['id'];
+		$t_rows[] = $t_row;
+	}
+
+	# Return the processed rows: cache data, convert to bug objects
+	return filter_cache_result( $t_rows, $t_bug_id_array );
+}
+
+/**
+ * Get the filter defined by user and project.
+ * @param integer $p_project_id    Project id to use in filtering.
+ * @param integer $p_user_id       User id to use as current user when filtering.
+ * @return array
+ */
+function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
+	$t_current_user_id = auth_get_current_user_id();
+
+	if( $p_user_id === null || $p_user_id === 0 ) {
+		$t_user_id = $t_current_user_id;
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	if( null === $p_project_id ) {
+		# @@@ If project_id is not specified, then use the project id(s) in the filter if set, otherwise, use current project.
+		$t_project_id = helper_get_current_project();
+	} else {
+		$t_project_id = $p_project_id;
+	}
+
+	if( $t_user_id == $t_current_user_id ) {
+		$t_filter = current_user_get_bug_filter();
+	} else {
+		$t_filter = user_get_bug_filter( $t_user_id, $t_project_id );
+	}
+
+	# if filter isn't return above, create a new filter from an empty array.
+	if( false === $t_filter ) {
+		$t_filter = array();
+	}
+	return $t_filter;
+}
+
+/**
+ * Creates a sql query with the supplied filter query clauses, and returns the unprocessed result set opbject
+ * @param array   $p_query_clauses Array of query clauses
+ * @param integer $p_count         The number of rows to return
+ *                                 -1 or null indicates default query (no limits)
+ * @param integer $p_offset        Offset query results for paging (number of rows)
+ *                                 -1 or null indicates default query (no offset)
+ * @return IteratorAggregate|boolean adodb result set or false if the query failed.
+ */
+function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null ) {
+	if( null === $p_count ) {
+		$t_count = -1;
+	} else {
+		$t_count = $p_count;
+	}
+	if( null === $p_offset ) {
+		$t_offset = -1;
+	} else {
+		$t_offset = $p_offset;
+	}
+	$t_query_clauses = $p_query_clauses;
+	$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $t_query_clauses['select'] );
+	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+	$t_order_string = ' ORDER BY ' . implode( ', ', $t_query_clauses['order'] );
+	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+	if( count( $t_query_clauses['where'] ) > 0 ) {
+		$t_where_string .= ' AND ( ';
+		$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
+		$t_where_string .= ' ) ';
+	}
+
+	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $t_count, $t_offset );	
+	return $t_result;
+}
+
+/**
+ * Creates an array of formatted query clauses, based on the supplied filter and parameters
+ * @param array   $p_filter       Filter array object
+ * @param integer $p_project_id   Project id to use in filtering.
+ * @param integer $p_user_id      User id to use as current user when filtering.
+ * @param boolean $p_show_sticky  True/false - get sticky issues only.
+ * @return array
+ */
+function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
@@ -1100,24 +1216,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_project_id = $p_project_id;
 	}
 
-	if( $p_custom_filter === null ) {
-		# Prefer current_user_get_bug_filter() over user_get_filter() when applicable since it supports
-		# cookies set by previous version of the code.
-		if( $t_user_id == $t_current_user_id ) {
-			$t_filter = current_user_get_bug_filter();
-		} else {
-			$t_filter = user_get_bug_filter( $t_user_id, $t_project_id );
-		}
-	} else {
-		$t_filter = $p_custom_filter;
-	}
-
-	# if filter isn't return above, create a new filter from an empty array.
-	if( false === $t_filter ) {
-		$t_filter = array();
-	}
-
-	$t_filter = filter_ensure_valid_filter( $t_filter );
+	$t_filter = filter_ensure_valid_filter( $p_filter );
 
 	$t_view_type = $t_filter['_view_type'];
 
@@ -2067,37 +2166,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_query_clauses['operator'] = $t_join_operator;
 	$t_query_clauses = filter_get_query_sort_data( $t_filter, $p_show_sticky, $t_query_clauses );
 
-	# assigning to $p_* for this function writes the values back in case the caller wants to know
-	# Get the total number of bugs that meet the criteria.
-	$p_bug_count = filter_get_bug_count( $t_query_clauses );
-	if( 0 == $p_bug_count ) {
-		return array();
-	}
-	$p_per_page = filter_per_page( $t_filter, $p_bug_count, $p_per_page );
-	$p_page_count = filter_page_count( $p_bug_count, $p_per_page );
-	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
-	$t_offset = filter_offset( $p_page_number, $p_per_page );
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
-	$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $t_query_clauses['select'] );
-	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-	$t_order_string = ' ORDER BY ' . implode( ', ', $t_query_clauses['order'] );
-	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-	if( count( $t_query_clauses['where'] ) > 0 ) {
-		$t_where_string .= ' AND ( ';
-		$t_where_string .= implode( $t_join_operator, $t_query_clauses['where'] );
-		$t_where_string .= ' ) ';
-	}
-
-	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
-
-	$t_id_array_lastmod = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_id_array_lastmod[] = (int)$t_row['id'];
-		$t_rows[] = $t_row;
-	}
-
-	return filter_cache_result( $t_rows, $t_id_array_lastmod );
+	return $t_query_clauses;
 }
 
 /**

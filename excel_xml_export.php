@@ -65,15 +65,6 @@ $t_export_title = excel_get_default_filename();
 
 $t_short_date_format = config_get( 'short_date_format' );
 
-# This is where we used to do the entire actual filter ourselves
-$t_page_number = gpc_get_int( 'page_number', 1 );
-$t_per_page = 100;
-
-$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if( $t_result === false ) {
-	print_header_redirect( 'view_all_set.php?type=0&print=1' );
-}
-
 header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
 header( 'Pragma: public' );
 header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_export_title ) ) . '.xml"' ) ;
@@ -85,38 +76,92 @@ $f_bug_arr = explode( ',', $f_export );
 
 $t_columns = excel_get_columns();
 
+
+# Get current filter
+$t_filter = filter_get_bug_rows_filter();
+
+# Get the query clauses
+$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
+
+# Get the total number of bugs that meet the criteria.
+$p_bug_count = filter_get_bug_count( $t_query_clauses );
+
+if( 0 == $p_bug_count ) {
+	print_header_redirect( 'view_all_set.php?type=0&print=1' );
+}
+
+# Execute query
+$t_result = filter_get_bug_rows_result( $t_query_clauses );
+
+$t_end_of_results = false;
 do {
-	# pre-cache custom column data
+	# Clear cache for next block
+	bug_clear_cache();
+	bug_text_clear_cache();
+
+	# Keep reading until reaching max block size or end of result set
+	$t_read_rows = array();
+	$t_count = 0;
+	$t_bug_id_array = array();
+	$t_unique_user_ids = array();
+	while( $t_count < EXPORT_BLOCK_SIZE ) {
+		$t_row = db_fetch_array( $t_result );
+		if( false === $t_row ) {
+			$t_end_of_results = true;
+			break;
+		}
+		# @TODO, the "export" bug list parameter functionality should be implemented in a more efficient way
+		if( is_blank( $f_export ) || in_array( $t_row['id'], $f_bug_arr ) ) {
+			$t_bug_id_array[] = (int)$t_row['id'];
+			$t_handler_id = (int)$t_row['handler_id'];
+			$t_unique_user_ids[$t_handler_id] = $t_handler_id;
+			$t_reporter_id = (int)$t_row['reporter_id'];
+			$t_unique_user_ids[$t_reporter_id] = $t_reporter_id;
+
+			$t_read_rows[] = $t_row;
+			$t_count++;
+		}
+	}
+	# Max block size has been reached, or no more rows left to complete the block.
+	# Either way, process what we have
+	if( 0 === $t_count && !$t_end_of_results ) {
+		continue;
+	}
+	if( 0 === $t_count && $t_end_of_results ) {
+		break;
+	}
+
+	# convert and cache data
+	$t_rows = filter_cache_result( $t_read_rows, $t_bug_id_array );
+	user_cache_array_rows( $t_unique_user_ids );
 	columns_plugin_cache_issue_data( $t_result, $t_columns );
 
-	foreach( $t_result as $t_row ) {
-		if( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
-			echo excel_get_start_row();
+	# Clear arrays that are not needed
+	unset( $t_read_rows );
+	unset( $t_unique_user_ids );
+	unset( $t_bug_id_array );
 
-			foreach ( $t_columns as $t_column ) {
-				$t_custom_field = column_get_custom_field_name( $t_column );
-				if( $t_custom_field !== null ) {
-					echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
-				} else if( column_is_plugin_column( $t_column ) ) {
-					echo excel_format_plugin_column_value( $t_column, $t_row );
-				} else {
-					$t_function = 'excel_format_' . $t_column;
-					echo $t_function( $t_row );
-				}
+	# export the rows
+	foreach ( $t_rows as $t_row ) {
+
+		echo excel_get_start_row();
+
+		foreach ( $t_columns as $t_column ) {
+			$t_custom_field = column_get_custom_field_name( $t_column );
+			if( $t_custom_field !== null ) {
+				echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
+			} else if( column_is_plugin_column( $t_column ) ) {
+				echo excel_format_plugin_column_value( $t_column, $t_row );
+			} else {
+				$t_function = 'excel_format_' . $t_column;
+				echo $t_function( $t_row );
 			}
+		}
 
-			echo excel_get_end_row();
-		} #in_array
-	} #for loop
-
-	# Get the next page if we are not processing the last one
-	# @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
-	# one due to a submit or update that happens in parallel.
-	$t_more = ( $t_page_number < $t_page_count );
-	if( $t_more ) {
-		$t_page_number++;
-		$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+		echo excel_get_end_row();
 	}
-} while( $t_more );
+
+} while ( false === $t_end_of_results );
 
 echo excel_get_footer();
+

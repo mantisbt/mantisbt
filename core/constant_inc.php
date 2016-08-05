@@ -621,3 +621,6 @@ define ( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMi
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
+# Maximum number of bugs that are treated simutaneously in export procedures,
+# to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
+define( 'EXPORT_BLOCK_SIZE', 500 );
