@@ -1120,7 +1120,10 @@ function email_send( EmailData $p_email_data ) {
 				$t_mail->Password = config_get( 'smtp_password' );
 			}
 
-			if( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+			if( is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+				$t_mail->SMTPAutoTLS = false;
+			}
+			else {
 				$t_mail->SMTPSecure = config_get( 'smtp_connection_mode' );
 			}
 
