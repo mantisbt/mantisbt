@@ -857,7 +857,9 @@ $g_window_title = 'MantisBT';
 $g_admin_checks = ON;
 
 /**
- * Favicon image
+ * Favicon image.
+ * This icon should be of 'image/x-icon' MIME type, and its size 16x16 pixels.
+ * It is also used to decorate OpenSearch Browser search entries.
  * @global string $g_favicon_image
  */
 $g_favicon_image = 'images/favicon.ico';

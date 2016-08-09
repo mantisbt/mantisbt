@@ -17,7 +17,12 @@
 		<varlistentry>
 			<term>$g_favicon_image</term>
 			<listitem>
-				<para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
+				<para>Path to the favorites icon relative to MantisBT root folder
+					This icon should be of <emphasis>image/x-icon</emphasis> MIME type,
+					and its size 16x16 pixels. It is also used to decorate
+					OpenSearch Browser search entries.
+					(default 'images/favicon.ico').
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
