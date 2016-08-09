@@ -37,16 +37,17 @@ require_api( 'gpc_api.php' );
 $f_type = gpc_get_string( 'type', 'text' );
 
 $t_path = config_get_global( 'path' );
+$t_title = config_get_global( 'search_title' );
 $t_icon = $t_path . config_get_global( 'favicon_image' );
 $t_searchform = $t_path . 'view_all_bug_page.php';
 
 if( strtolower( $f_type ) == 'id' ) {
-	$t_shortname = 'MantisBT IssueId';
-	$t_description = 'MantisBT Issue Id Search';
+	$t_shortname = $t_title . ' IssueId';
+	$t_description = $t_title .' Issue Id Search';
 	$t_url = $t_path . 'view.php?id={searchTerms}';
 } else {
-	$t_shortname = 'MantisBT Search';
-	$t_description = 'MantisBT Text Search';
+	$t_shortname = $t_title . ' Search';
+	$t_description = $t_title . ' Text Search';
 	$t_url = $t_path . 'view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
 }
 

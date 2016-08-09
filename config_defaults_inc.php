@@ -851,6 +851,18 @@ $g_fallback_language = 'english';
 $g_window_title = 'MantisBT';
 
 /**
+ * OpenSearch ShortName prefix.
+ * This is used to describe Browser Search entries, and must be 8 chars or
+ * less to be compliant with the OpenSearch specification (since we append up to
+ * 8 chars to differentiate text- and id-based searches, and the maximum length
+ * of the ShortName element is 16 chars).
+ * @link http://www.opensearch.org/Specifications/OpenSearch/1.1
+ * @see $g_window_title
+ * @global string $g_search_title
+ */
+$g_search_title = '%window_title%';
+
+/**
  * Check for admin directory, database upgrades, etc.
  * @global integer $g_admin_checks
  */

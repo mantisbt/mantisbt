@@ -9,9 +9,23 @@
 		<varlistentry>
 			<term>$g_window_title</term>
 			<listitem>
-				<para>This is the browser window title (&lt;TITLE&gt;
-					tag).
+				<para>This is the browser window title (&lt;TITLE&gt; tag).
 				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_search_title</term>
+			<listitem>
+				<para>This is used as prefix for Browser Search entries,
+					and must be 8 chars or less to be compliant with the
+					<ulink url="http://www.opensearch.org/Specifications/OpenSearch/1.1">
+						OpenSearch specification
+					</ulink>
+					(since we append up to 8 chars to differentiate text- and
+					id-based searches, and the maximum length of the
+					<emphasis>ShortName </emphasis> element is 16 chars).
+				</para>
+				<para>Defaults to the value of $g_window_title.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
