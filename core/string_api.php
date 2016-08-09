@@ -123,7 +123,8 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				#     if other encoded characters are a problem
 				$t_piece = preg_replace( '/&#160;/', ' ', $t_piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $t_piece );
+					# Use PCRE_UTF8 modifier to ensure a correct char count
+					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/u', "$1", $t_piece );
 				} else {
 					$t_output .= $t_piece;
 				}
