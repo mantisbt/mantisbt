@@ -206,14 +206,11 @@ function html_page_top1( $p_page_title = null ) {
 
 	# Advertise the availability of the browser search plug-ins.
 	$t_title = config_get_global( 'search_title' );
-	$t_searches = array(
-		'text' => $t_title . ': ' . 'Text Search',
-		'id'   => $t_title . ': ' . 'Issue Id Search',
-	);
-	foreach( $t_searches as $t_type => $t_label ) {
+	$t_searches = array( 'text', 'id' );
+	foreach( $t_searches as $t_type ) {
 		echo "\t",
 			'<link rel="search" type="application/opensearchdescription+xml" ',
-			'title="' . $t_label . '" ',
+			'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
 			'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
 			'", />',
 			"\n";

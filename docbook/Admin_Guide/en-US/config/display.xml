@@ -16,14 +16,14 @@
 		<varlistentry>
 			<term>$g_search_title</term>
 			<listitem>
-				<para>This is used as prefix for Browser Search entries,
-					and must be 8 chars or less to be compliant with the
+				<para>This is used as prefix to describe Browser Search entries,
+					and must be short enough so that when inserted into the
+					'opensearch_XXX_short' language string, the resulting text
+					is 16 characters or less, to be compliant with the limit for
+					the ShortName element as defined in the
 					<ulink url="http://www.opensearch.org/Specifications/OpenSearch/1.1">
 						OpenSearch specification
-					</ulink>
-					(since we append up to 8 chars to differentiate text- and
-					id-based searches, and the maximum length of the
-					<emphasis>ShortName </emphasis> element is 16 chars).
+					</ulink>.
 				</para>
 				<para>Defaults to the value of $g_window_title.</para>
 			</listitem>

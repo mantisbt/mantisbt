@@ -34,20 +34,20 @@ require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'gpc_api.php' );
 
-$f_type = gpc_get_string( 'type', 'text' );
+$f_type = strtolower( gpc_get_string( 'type', 'text' ) );
 
 $t_path = config_get_global( 'path' );
 $t_title = config_get_global( 'search_title' );
 $t_icon = $t_path . config_get_global( 'favicon_image' );
 $t_searchform = $t_path . 'view_all_bug_page.php';
 
-if( strtolower( $f_type ) == 'id' ) {
-	$t_shortname = $t_title . ' IssueId';
-	$t_description = $t_title .' Issue Id Search';
+# Localized ShortName and Description elements
+$t_shortname = sprintf( lang_get( "opensearch_{$f_type}_short" ), $t_title );
+$t_description = sprintf( lang_get( "opensearch_{$f_type}_description" ), $t_title );
+
+if( $f_type == 'id' ) {
 	$t_url = $t_path . 'view.php?id={searchTerms}';
 } else {
-	$t_shortname = $t_title . ' Search';
-	$t_description = $t_title . ' Text Search';
 	$t_url = $t_path . 'view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
 }
 
