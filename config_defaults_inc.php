@@ -4529,6 +4529,7 @@ $g_public_config_names = array(
 	'roadmap_update_threshold',
 	'roadmap_view_threshold',
 	'rss_enabled',
+	'search_title',
 	'set_bug_sticky_threshold',
 	'set_configuration_threshold',
 	'set_view_status_threshold',
