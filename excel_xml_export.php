@@ -134,7 +134,7 @@ do {
 	# convert and cache data
 	$t_rows = filter_cache_result( $t_read_rows, $t_bug_id_array );
 	user_cache_array_rows( $t_unique_user_ids );
-	columns_plugin_cache_issue_data( $t_result, $t_columns );
+	columns_plugin_cache_issue_data( $t_rows, $t_columns );
 
 	# Clear arrays that are not needed
 	unset( $t_read_rows );
