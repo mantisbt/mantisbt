@@ -109,6 +109,6 @@ function action_update_product_build_process( $p_bug_id ) {
 	$t_build = gpc_get_string( 'build' );
 	$t_bugdata = bug_get( $p_bug_id );
 	$t_bugdata->build = $t_build;
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 	return null;
 }
