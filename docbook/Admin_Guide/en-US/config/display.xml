@@ -9,15 +9,34 @@
 		<varlistentry>
 			<term>$g_window_title</term>
 			<listitem>
-				<para>This is the browser window title (&lt;TITLE&gt;
-					tag).
+				<para>This is the browser window title (&lt;TITLE&gt; tag).
 				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_search_title</term>
+			<listitem>
+				<para>This is used as prefix to describe Browser Search entries,
+					and must be short enough so that when inserted into the
+					'opensearch_XXX_short' language string, the resulting text
+					is 16 characters or less, to be compliant with the limit for
+					the ShortName element as defined in the
+					<ulink url="http://www.opensearch.org/Specifications/OpenSearch/1.1">
+						OpenSearch specification
+					</ulink>.
+				</para>
+				<para>Defaults to the value of $g_window_title.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_favicon_image</term>
 			<listitem>
-				<para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
+				<para>Path to the favorites icon relative to MantisBT root folder
+					This icon should be of <emphasis>image/x-icon</emphasis> MIME type,
+					and its size 16x16 pixels. It is also used to decorate
+					OpenSearch Browser search entries.
+					(default 'images/favicon.ico').
+				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
