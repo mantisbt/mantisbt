@@ -86,7 +86,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 	}
 
 	# Advertise the availability of the browser search plug-ins.
-	$t_title = config_get_global( 'search_title' );
+	$t_title = config_get( 'search_title' );
 	$t_searches = array( 'text', 'id' );
 	foreach( $t_searches as $t_type ) {
 		echo "\t",
