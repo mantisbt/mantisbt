@@ -29,8 +29,6 @@ $g_show_errors = false;
 $g_failed_test = false;
 $g_passed_test_with_warnings = false;
 
-$g_alternate_row = 1;
-
 $g_errors_temporarily_suppressed = false;
 $g_errors_raised = array();
 
@@ -153,15 +151,14 @@ function check_print_section_header_row( $p_heading ) {
  * @return void
  */
 function check_print_info_row( $p_description, $p_info = null ) {
-	global $g_alternate_row, $g_show_all;
+	global $g_show_all;
 	if( !$g_show_all ) {
 		return;
 	}
 	echo "\t" . '<tr>' . "\n\t\t";
-	echo '<td class="description' . $g_alternate_row . '">' . $p_description . '</td>' . "\n";
-	echo "\t\t" . '<td class="info' . $g_alternate_row . '">' . $p_info . '</td>' . "\n";
+	echo '<td class="description">' . $p_description . '</td>' . "\n";
+	echo "\t\t" . '<td class="info">' . $p_info . '</td>' . "\n";
 	echo "\t" . '</tr>' . "\n";
-	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 }
 
 /**
@@ -170,17 +167,17 @@ function check_print_info_row( $p_description, $p_info = null ) {
  * @return void
  */
 function check_print_test_result( $p_result ) {
-	global $g_alternate_row, $g_failed_test, $g_passed_test_with_warnings;
+	global $g_failed_test, $g_passed_test_with_warnings;
 	switch( $p_result ) {
 		case BAD:
-			echo "\t\t" . '<td class="alert alert-danger' . $g_alternate_row . '">FAIL</td>' . "\n";
+			echo "\t\t" . '<td class="alert alert-danger">FAIL</td>' . "\n";
 			$g_failed_test = true;
 			break;
 		case GOOD:
-			echo "\t\t" . '<td class="alert alert-success' . $g_alternate_row . '">PASS</td>' . "\n";
+			echo "\t\t" . '<td class="alert alert-success">PASS</td>' . "\n";
 			break;
 		case WARN:
-			echo "\t\t" . '<td class="alert alert-warning' . $g_alternate_row . '">WARN</td>' . "\n";
+			echo "\t\t" . '<td class="alert alert-warning">WARN</td>' . "\n";
 			$g_passed_test_with_warnings = true;
 			break;
 	}
@@ -194,7 +191,7 @@ function check_print_test_result( $p_result ) {
  * @return boolean
  */
 function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
-	global $g_alternate_row, $g_show_all;
+	global $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
 	if( !$g_show_all && $p_pass && !$t_unhandled ) {
 		return $p_pass;
@@ -223,7 +220,6 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 	if( $t_unhandled ) {
 		check_print_error_rows();
 	}
-	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 	return $p_pass;
 }
 
@@ -235,7 +231,7 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
  * @return boolean
  */
 function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
-	global $g_alternate_row, $g_show_all;
+	global $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
 	if( !$g_show_all && $p_pass && !$t_unhandled ) {
 		return $p_pass;
@@ -262,7 +258,6 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	if( $t_unhandled ) {
 		check_print_error_rows();
 	}
-	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 	return $p_pass;
 }
 
