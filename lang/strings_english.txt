@@ -180,6 +180,12 @@ $s_create_new_project_link = 'Create New Project';
 
 $s_login_link = 'Login';
 
+# Browser Search - %s is the Search Engine title (@see $g_search_title)
+$s_opensearch_id_short = '%s Id';
+$s_opensearch_id_description = '%s: search by Issue Id';
+$s_opensearch_text_short = '%s Text';
+$s_opensearch_text_description = '%s: full-text search';
+
 # comboboxes default to this to instruct user to explicitly select an entry.
 $s_select_option = '(select)';
 
