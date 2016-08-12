@@ -292,6 +292,7 @@ $s_realname_label = 'ФИО пользователя';
 $s_email = 'E-mail';
 $s_email_label = 'Электронная почта';
 $s_password = 'Пароль';
+$s_new_password = 'Новый пароль';
 $s_no_password_change = 'Пароль управляется другой системой, а здесь его изменять нельзя.';
 $s_confirm_password = 'Подтверждение пароля';
 $s_current_password = 'Текущий пароль';
