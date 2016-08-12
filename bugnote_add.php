@@ -132,7 +132,7 @@ if( is_blank( $f_bugnote_text ) && helper_duration_to_minutes( $f_time_tracking 
 		} else {
 			$t_bug->status = config_get( 'bug_submit_status' );
 		}
-		$t_bug->update( false, true );
+		$t_bug->update( /* update extended */ false, /* bypass mail */ true );
 	}
 }
 

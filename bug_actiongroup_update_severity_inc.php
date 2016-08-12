@@ -102,6 +102,6 @@ function action_update_severity_process( $p_bug_id ) {
 	$f_severity = gpc_get_string( 'severity' );
 	$t_bugdata = bug_get( $p_bug_id );
 	$t_bugdata->severity = $f_severity;
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 	return null;
 }

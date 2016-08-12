@@ -800,6 +800,11 @@ class BugData {
 		return true;
 	}
 
+	/**
+	 * Add a callable item to the callback queue, which is executed after BugData update.
+	 * @param callable	A callable item, in any form of the PHP Callable interface
+	 * @param array $p_params	Params to be used with the callable item
+	 */
 	function add_update_callback( callable $p_callable, array $p_params = null ) {
 		if( null === $p_params ) {
 			$p_params = array();
@@ -1362,7 +1367,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	$t_bugdata->add_update_callback( file_move_bug_attachments, array( $t_bugdata->id, $t_bugdata->project_id ) );
 
 	# @TODO email is bypassed, add a notification for MOVE
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 }
 
 /**
@@ -1865,7 +1870,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
 	}
 
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	if( $t_original_handler_id != $t_bugdata->handler_id) {
 		# Send email for change of handler
@@ -1913,7 +1918,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
 	}
 
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );
@@ -2000,7 +2005,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		$t_bugdata->add_update_callback( 'bug_monitor_copy', array( $p_bug_id, $p_duplicate_id ) );
 	}
 
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_resolved( $p_bug_id );
 	email_relationship_child_resolved( $p_bug_id );
@@ -2051,7 +2056,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 
 	$t_bugdata->status = config_get( 'bug_reopen_status' );
 	$t_bugdata->resolution = config_get( 'bug_reopen_resolution' );
-	$t_bugdata->update( false, true );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_bug_reopened( $p_bug_id );
 

@@ -217,7 +217,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 						$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
 						}
 
-					$t_bugdata->update( false, true );
+					$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 					if( is_blank( $f_bug_notetext ) ) {
 						# If there is a note, bugnote add, send email notification for new note
@@ -305,7 +305,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
 					$t_bugdata = bug_get( $t_bug_id );
 					$t_bugdata->due_date = $t_due_date;
-					$t_bugdata->update( false, true );
+					$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 				}
@@ -330,7 +330,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				$t_bugdata = bug_get( $t_bug_id );
 				$t_bugdata->sticky = intval( !$f_sticky );
-				$t_bugdata->update( false, true );
+				$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );

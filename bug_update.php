@@ -409,10 +409,10 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 }
 
 # Commit the bug updates to the database.
-$t_text_field_update_required = ( $t_existing_bug->description != $t_updated_bug->description ) ||
-								( $t_existing_bug->additional_information != $t_updated_bug->additional_information ) ||
-								( $t_existing_bug->steps_to_reproduce != $t_updated_bug->steps_to_reproduce );
-$t_updated_bug->update( $t_text_field_update_required, true );
+$t_text_field_update_required = ( $t_existing_bug->description != $t_updated_bug->description )
+		|| ( $t_existing_bug->additional_information != $t_updated_bug->additional_information )
+		|| ( $t_existing_bug->steps_to_reproduce != $t_updated_bug->steps_to_reproduce );
+$t_updated_bug->update( /* update extended */ $t_text_field_update_required, /* bypass mail */ true );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to
