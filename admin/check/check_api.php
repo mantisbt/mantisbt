@@ -274,3 +274,13 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 function check_is_collation_utf8( $p_collation ) {
 	return substr( $p_collation, 0, 4 ) === 'utf8';
 }
+
+/**
+ * Formats a number with thousand separators and an optional unit
+ * @param float  $p_number Number to print
+ * @param string $p_unit   Printed after number
+ * @return string
+ */
+function check_format_number( $p_number, $p_unit = 'bytes' ) {
+	return number_format( (float)$p_number ) . ' ' . $p_unit;
+}

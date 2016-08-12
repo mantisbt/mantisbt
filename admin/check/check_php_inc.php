@@ -133,12 +133,12 @@ check_print_test_warn_row(
 
 check_print_info_row(
 	'php.ini directive: memory_limit',
-	htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'memory_limit' ) )
 );
 
 check_print_info_row(
 	'php.ini directive: post_max_size',
-	htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
 check_print_test_row(
@@ -154,7 +154,7 @@ check_print_info_row(
 
 check_print_info_row(
 	'php.ini directive: upload_max_filesize',
-	htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'upload_max_filesize' ) ) 
 );
 
 check_print_test_row(
