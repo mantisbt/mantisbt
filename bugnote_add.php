@@ -119,7 +119,7 @@ if( config_get( 'reassign_on_feedback' ) &&
 	} else {
 		$t_bug->status = config_get( 'bug_submit_status' );
 	}
-	$t_bug->update( false, true );
+	$t_bug->update( /* update extended */ false, /* bypass mail */ true );
 }
 
 form_security_purge( 'bugnote_add' );
