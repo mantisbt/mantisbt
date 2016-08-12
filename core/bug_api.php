@@ -774,19 +774,15 @@ class BugData {
 			# If handler changes, send out owner change email
 			if( $t_old_data->handler_id != $this->handler_id ) {
 				email_owner_changed( $c_bug_id, $t_old_data->handler_id, $this->handler_id );
-				return true;
-			}
-
-			# status changed
-			if( $t_old_data->status != $this->status ) {
+			} elseif( $t_old_data->status != $this->status ) {
+				# status changed
 				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
 				email_bug_status_changed( $c_bug_id, $t_status );
-				return true;
+			} else {
+				# @todo handle priority change if it requires special handling
+				email_bug_updated( $c_bug_id );
 			}
-
-			# @todo handle priority change if it requires special handling
-			email_bug_updated( $c_bug_id );
 		}
 
 		# Execute all registered update callbacks
