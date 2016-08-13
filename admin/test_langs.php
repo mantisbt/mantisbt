@@ -69,6 +69,12 @@ print_admin_menu_bar( 'test_langs.php' );
 
 
 <?php
+
+if( !checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true ) ) {
+	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
+	die;
+}
+
 # check core language files
 if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir );
@@ -374,7 +380,7 @@ function checktoken( $p_file, $p_base = false ) {
 							$s_basevariables[$t_current_var] = true;
 						} else {
 							if( !isset( $s_basevariables[$t_current_var] ) ) {
-								print_warning( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
+								print_error( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
 							#} else {
 							#  missing translation
 							}
@@ -423,17 +429,18 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 }
 
 /**
- * Print Language File warning and error messages
+ * Print Language File Error messages
  *
- * @param string $p_string Warning/Error string.
+ * @param string $p_string Error string.
  * @param string $p_type   Message type to display (default ERROR).
  * @return void
  */
-function print_error( $p_string, $p_type = 'ERROR' ) {
-	echo '<span class="red">', $p_type . ': ' . $p_string, '</span><br />';
-}
-function print_warning( $p_string, $p_type = 'WARNING' ) {
-	echo '<span class="orange">', $p_type . ': ' . $p_string, '</span><br />';
+function print_error($p_string, $p_type = 'ERROR' ) {
+	if ( $p_type === 'WARNING' ) {
+		echo '<span class="alert-warning">', $p_type . ': ' . $p_string, '</span><br />';
+	} else {
+		echo '<span class="alert-danger">', $p_type . ': ' . $p_string, '</span><br />';
+	}
 }
 
 layout_admin_page_end();
