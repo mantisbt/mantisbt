@@ -261,10 +261,11 @@ $t_user_count = count( $t_users );
 		<div class="pull-left">
 			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
 		</div>
-	<?php
-		if( $f_filter === 'UNUSED' )
-            print_form_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) , null, null, 'btn btn-primary btn-white btn-round' );
-	?>
+		<?php if( $f_filter === 'UNUSED' ) { ?>
+		<div class="pull-left">
+			<?php print_form_button('manage_user_prune.php', lang_get('prune_accounts'), null, null, 'btn btn-primary btn-white btn-round') ?>
+		</div>
+		<?php } ?>
 	<div class="pull-right">
 	<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
 		<fieldset>
