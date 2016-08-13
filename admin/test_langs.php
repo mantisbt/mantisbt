@@ -41,11 +41,6 @@ if( !defined( 'T_ML_COMMENT' ) ) {
 	define( 'T_DOC_COMMENT', T_ML_COMMENT );
 }
 
-if( !checkfile( $t_mantis_dir . 'lang' . DIRECTORY_SEPARATOR, STRINGS_ENGLISH, true ) ) {
-	print_error( "Language file '" . STRINGS_ENGLISH . "' failed.", 'FAILED' );
-	die;
-}
-
 lang_push( 'english' );
 
 set_time_limit( 0 );
@@ -70,8 +65,9 @@ print_admin_menu_bar( 'test_langs.php' );
 
 <div class="widget-body">
 <div class="widget-main">
-<div class="table-responsive">
-	<table>
+
+
+
 <?php
 # check core language files
 if( function_exists( 'scandir' ) ) {
@@ -88,19 +84,15 @@ if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir, $t_lang_files );
 }
 
-
 # attempt to find plugin language files
-echo '<tr><td>';
-echo "Trying to find+check plugin language files...<br />";
+echo 'Trying to find+check plugin language files...<br />';
 if( function_exists( 'scandir' ) ) {
 	checkplugins( config_get( 'plugin_path' ) );
 } else {
 	echo 'php scandir is disabled - skipping<br />';
 }
-echo '</td></tr>';
 ?>
-	</table>
-</div>
+
 </div>
 </div>
 </div>
@@ -382,7 +374,7 @@ function checktoken( $p_file, $p_base = false ) {
 							$s_basevariables[$t_current_var] = true;
 						} else {
 							if( !isset( $s_basevariables[$t_current_var] ) ) {
-								print_error( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
+								print_warning( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
 							#} else {
 							#  missing translation
 							}
@@ -431,14 +423,17 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 }
 
 /**
- * Print Language File error
+ * Print Language File warning and error messages
  *
- * @param string $p_string Error string.
+ * @param string $p_string Warning/Error string.
  * @param string $p_type   Message type to display (default ERROR).
  * @return void
  */
 function print_error( $p_string, $p_type = 'ERROR' ) {
-	echo '<p class="alert alert-danger">', $p_type . ': ' . $p_string, '</p>';
+	echo '<span class="red">', $p_type . ': ' . $p_string, '</span><br />';
+}
+function print_warning( $p_string, $p_type = 'WARNING' ) {
+	echo '<span class="orange">', $p_type . ': ' . $p_string, '</span><br />';
 }
 
 layout_admin_page_end();
