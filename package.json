@@ -1,0 +1,35 @@
+{
+  "name": "mantisbt",
+  "version": "2.0.0-beta.1-dev",
+  "description": "Mantis Bug Tracker (MantisBT)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docbook",
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.4",
+    "jshint": "^2.9.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mantisbt/mantisbt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "http://www.mantisbt.org/bugs/"
+  },
+  "homepage": "http://www.mantisbt.org/"
+}

@@ -1,0 +1,54 @@
+#secure-session-label span.input {
+	width: 57%;
+}
+#secure-session-label span.input input {
+	margin-right: .25em;
+}
+span#session-msg {
+	padding-top: .25em;
+	line-height: 1em;
+	font-size: .8em;
+}
+#captcha-field {
+	float: left;
+}
+span.captcha-image {
+	position: relative;
+	display: block;
+	float: left;
+	margin: 0em 0em 0em 1em;
+	padding: 0em;
+}
+#login-links,
+#captcha-refresh {
+	list-style: none;
+	margin: 0em;
+	padding: 0em;
+}
+#login-links {
+	position: absolute;
+	top: .5em;
+	right: 0em;
+}
+#login-links li,
+#captcha-refresh li {
+	float: left;
+	padding: 0em .25em;
+}
+#login-links li:before,
+#captcha-refresh li:before {
+	content: '[';
+}
+#login-links li:after,
+#captcha-refresh li:after {
+	content: ']';
+}
+#login-links li a,
+#captcha-refresh li a {
+	padding: 0em .35em;
+}
+
+#captcha-image {
+	cursor: pointer;
+	padding-right:3px;
+}

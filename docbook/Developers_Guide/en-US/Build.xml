@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Developers_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="dev.build">
+	<title>MantisBT Build</title>
+
+	<para>
+		MantisBT source code leverages the <ulink url="http://gulpjs.com/">Gulp</ulink> build system
+		as the task runner and tool that is used to express the different workflows needed to develop,
+		run, and publish MantisBT.
+	</para>
+
+	<section id="dev.build.php-packages">
+		<title>PHP Package Management</title>
+
+		<para>
+			The PHP <ulink url="https://getcomposer.org/">composer</ulink> is used for package management of PHP components.
+			This replaces the need for including packages in git as submodules, and takes care of common tasks like
+			tracking dependencies, component versions that are used, and an easy way to update such components.
+		</para>
+	</section>
+
+	<section id="dev.build.js-packages">
+		<title>Javascript Package Management</title>
+
+		<para>
+			For javascript component, the <ulink url="https://www.npmjs.com/">NPM</ulink> package management component is
+			used to manage such dependencies.
+		</para>
+	</section>
+
+	<section id="dev.build.js-compiling">
+		<title>Compiling Javascript</title>
+
+		<para>
+			The <ulink url="https://babeljs.io/">Babel</ulink> compiler is used to compile the latest javascript version
+			into the one that is supported by today's browsers.  The build system also runs other useful tasks like
+			concatenation of multiple source js files into one for faster load time, js linting for detecting potential
+			errors, and minification of js.
+		</para>
+	</section>
+
+
+	<section id="dev.build.css-compiling">
+		<title>Compiling CSS</title>
+
+		<para>
+			The <ulink url="http://sass-lang.com/">Sass</ulink> compiler is used to compile Sass format into CSS files.
+			This enables using the more powerful and friendly format of Sass, while providing the standard css that is
+			supported by browsers.  The build system also provides tasks like concatenation of stylesheets, minification,
+			etc.
+		</para>
+	</section>
+
+	<section id="dev.build.setup">
+		<title>Setting up the Build tools</title>
+
+		<para>
+			The following steps setup the build system:
+		</para>		
+
+		<programlisting>
+			Install Node JS: https://nodejs.org/en/
+			Install Gulp: npm install --global gulp-cli
+		</programlisting>
+	</section>
+
+	<section id="dev.build.using">
+		<title>Using the Build system during development</title>
+
+		<para>
+			The workflow for coding and testing is very simple.  The developer would just need to run the "gulp" command
+			from the MantisBT folder, and gulp do the necessary processing to prepare MantisBT for running.  In addition,
+			it will remain active and watch the files that trigger compilation steps (e.g. js/css), once the developer
+			makes changes to these files, it will re-execute the necessary build steps.  Hence, as long as gulp is running
+			the developer can just update the code and test without having to worry about building.
+		</para>
+
+		<programlisting>
+			# To download dependencies - run after updating from git.
+			php composer.phar install
+			npm install
+
+			# To run build - needed to be running during development to compiler modified files
+			gulp
+		</programlisting>
+
+		<para>
+			It is highly recommended to learn about the tools used here through their respective documentation.
+			These are very popular and powerful tools that are worth learning about.  It is outside the scope of
+			this guide to provide a comprehensive guide for such tools.
+		</para>
+	</section>
+</chapter>
+

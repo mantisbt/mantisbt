@@ -46,8 +46,6 @@ require_api( 'utility_api.php' );
 
 require_css( 'login.css' );
 
-require_js( 'login.js' );
-
 # Check for invalid access to signup page
 if( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
 	print_header_redirect( 'login_page.php' );
