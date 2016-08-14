@@ -1830,11 +1830,10 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
  */
 function print_bug_attachments_list( $p_bug_id ) {
 	$t_attachments = file_get_visible_attachments( $p_bug_id );
-	$t_security_token = form_security_token( 'bug_file_delete' );
 	echo "\n<ul>";
 	foreach ( $t_attachments as $t_attachment ) {
 		echo "\n<li>";
-		print_bug_attachment( $t_attachment, $t_security_token );
+		print_bug_attachment( $t_attachment );
 		echo "\n</li>";
 	}
 	echo "\n</ul>";
@@ -1861,6 +1860,10 @@ function print_bug_attachment( array $p_attachment, $p_security_token = null ) {
 		global $g_collapse_cache_token;
 		$g_collapse_cache_token[$t_collapse_id] = false;
 		collapse_open( $t_collapse_id );
+	}
+	# The same token is used for both links in the collapse section
+	if( null === $p_security_token ) {
+		$p_security_token = form_security_token( 'bug_file_delete' );
 	}
 	print_bug_attachment_header( $p_attachment, $p_security_token );
 	if( $t_show_attachment_preview ) {
