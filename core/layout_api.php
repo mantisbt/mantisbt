@@ -148,9 +148,12 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 
 	if( auth_is_user_authenticated() ) {
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
+			echo '<div class="row">' , "\n";
 			print_project_menu_bar();
+			echo '</div>' , "\n";
 		}
 	}
+	echo '<div class="row">' , "\n";
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 }
@@ -166,6 +169,8 @@ function layout_page_end( $p_file = null ) {
 	}
 
 	event_signal( 'EVENT_LAYOUT_CONTENT_END' );
+
+	echo '</div>' , "\n";
 
 	layout_page_content_end();
 	layout_main_content_end();
@@ -969,7 +974,6 @@ function layout_main_content_end() {
  */
 function layout_page_content_begin() {
 	echo '  <div class="page-content">' , "\n";
-	echo '    <div class="row">' , "\n";
 }
 
 /**
@@ -977,7 +981,6 @@ function layout_page_content_begin() {
  * @return null
  */
 function layout_page_content_end() {
-	echo '  </div>' , "\n";
 	echo '</div>' , "\n";
 }
 
