@@ -1770,11 +1770,11 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already
 
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Drop files here to upload (or click)';
-$s_dropzone_fallback_message = "Your browser does not support drag'n'drop file uploads.";
+$s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
 $s_dropzone_fallback_text = '';
-$s_dropzone_file_too_big = "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.";
-$s_dropzone_invalid_file_type = "You cannot upload files of this type.";
-$s_dropzone_response_error = "Server responded with {{statusCode}} code.";
+$s_dropzone_file_too_big = 'File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.';
+$s_dropzone_invalid_file_type = 'You cannot upload files of this type.';
+$s_dropzone_response_error = 'Server responded with {{statusCode}} code.';
 $s_dropzone_cancel_upload = 'Cancel upload';
 $s_dropzone_cancel_upload_confirmation = 'Are you sure you want to cancel this upload?';
 $s_dropzone_remove_file = 'Remove file';
