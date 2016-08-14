@@ -69,7 +69,7 @@ layout_page_begin( 'main_page.php' );
 
 echo '<div class="space-20"></div>';
 echo '<div class="alert alert-success">';
-echo lang_get( 'operation_successful' ) ?>
+echo lang_get( 'operation_successful' );
 
 echo '<br />';
 
