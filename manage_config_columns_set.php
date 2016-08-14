@@ -123,6 +123,8 @@ form_security_purge( 'manage_config_columns_set' );
 
 $t_redirect_url = $t_account_page ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
 
+layout_page_header();
+
 layout_page_begin();
 
 html_operation_successful( $t_redirect_url );
