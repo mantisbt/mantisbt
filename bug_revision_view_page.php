@@ -100,11 +100,10 @@ if( $f_bug_id ) {
  */
 function show_revision( array $p_revision ) {
 	static $s_can_drop = null;
-	static $s_drop_token = null;
 	static $s_user_access = null;
+
 	if( is_null( $s_can_drop ) ) {
 		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
-		$s_drop_token = form_security_param( 'bug_revision_drop' );
 	}
 
 	switch( $p_revision['type'] ) {
@@ -144,7 +143,8 @@ function show_revision( array $p_revision ) {
 			<td class="center" width="5%">
 <?php
 	if( $s_can_drop ) {
-		print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+		$t_drop_token = form_security_param( 'bug_revision_drop' );
+		print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $t_drop_token, lang_get( 'revision_drop' ) );
 	}
 ?>
 		</tr>
