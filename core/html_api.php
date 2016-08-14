@@ -453,13 +453,15 @@ function print_project_menu_bar() {
 function print_subproject_menu_bar( $t_current_project_id, $p_parent_project_id, $p_parents = '' ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_parent_project_id );
 
-	foreach( $t_subprojects as $t_subproject ) {
-		$t_active = $t_current_project_id == $t_subproject ? 'active' : '';
+	foreach( $t_subprojects as $t_subproject_id ) {
+		$t_active = $t_current_project_id == $t_subproject_id ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-default ' . $t_active .
-			'" href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . '"><i class="ace-icon fa fa-angle-double-right"></i> ' .
-			string_html_specialchars( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+			'" href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject_id ) .
+			'"><i class="ace-icon fa fa-angle-double-right"></i> ' .
+			string_html_specialchars( project_get_field( $t_subproject_id, 'name' ) ) . '</a>';
 
-		print_subproject_menu_bar( $t_current_project_id, $t_subproject, $p_parents . $t_subproject . ';' );
+		# Render this subproject's subprojects ... passing current project id to highlight selected project
+		print_subproject_menu_bar( $t_current_project_id, $t_subproject_id, $p_parents . $t_subproject_id . ';' );
 	}
 }
 
