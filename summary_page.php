@@ -115,9 +115,9 @@ $t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EM
 
 $t_orcttab = '';
 foreach ( $t_orct_arr as $t_orct_s ) {
-	$t_orcttab .= '<td>';
+	$t_orcttab .= '<th class="align-right">';
 	$t_orcttab .= $t_orct_s;
-	$t_orcttab .= '</td>';
+	$t_orcttab .= '</th>';
 }
 
 layout_page_header( lang_get( 'summary_link' ) );
@@ -153,7 +153,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_project' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_project' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -168,7 +168,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_status' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_status' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -182,7 +182,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_severity' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_severity' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -196,7 +196,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_category' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_category' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -215,7 +215,7 @@ print_summary_submenu();
 		</thead>
 		<tr>
 			<td><?php echo lang_get( 'longest_open_bug' ) ?></td>
-			<td><?php
+			<td class="align-right"><?php
 				if( $t_bug_id > 0 ) {
 					print_bug_link( $t_bug_id );
 				}
@@ -223,15 +223,15 @@ print_summary_submenu();
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'longest_open' ) ?></td>
-			<td><?php echo $t_largest_diff ?></td>
+			<td class="align-right"><?php echo $t_largest_diff ?></td>
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'average_time' ) ?></td>
-			<td><?php echo $t_average_time ?></td>
+			<td class="align-right"><?php echo $t_average_time ?></td>
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'total_time' ) ?></td>
-			<td><?php echo $t_total_time ?></td>
+			<td class="align-right"><?php echo $t_total_time ?></td>
 		</tr>
 	</table>
 	</div>
@@ -260,10 +260,10 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_date' ) ?></th>
-				<td><?php echo lang_get( 'opened' ); ?></td>
-				<td><?php echo lang_get( 'resolved' ); ?></td>
-				<td><?php echo lang_get( 'balance' ); ?></td>
+				<th class="width-35"><?php echo lang_get( 'by_date' ) ?></th>
+				<th class="align-right"><?php echo lang_get( 'opened' ); ?></th>
+				<th class="align-right"><?php echo lang_get( 'resolved' ); ?></th>
+				<th class="align-right"><?php echo lang_get( 'balance' ); ?></th>
 			</tr>
 		</thead>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
@@ -276,8 +276,8 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'most_active' ) ?></th>
-				<td><?php echo lang_get( 'score' ); ?></td>
+				<th class="width-85"><?php echo lang_get( 'most_active' ) ?></th>
+				<th class="align-right"><?php echo lang_get( 'score' ); ?></th>
 			</tr>
 		</thead>
 		<?php summary_print_by_activity() ?>
@@ -290,8 +290,8 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'longest_open' ) ?></th>
-				<td></td><?php echo lang_get( 'days' ); ?></td>
+				<th class="width-85"><?php echo lang_get( 'longest_open' ) ?></th>
+				<th class="align-right"><?php echo lang_get( 'days' ); ?></th>
 			</tr>
 		</thead>
 		<?php summary_print_by_age() ?>
@@ -304,7 +304,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_resolution' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_resolution' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -318,7 +318,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_priority' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'by_priority' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -332,7 +332,7 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'reporter_stats' ) ?></th>
+				<th class="width-35"><?php echo lang_get( 'reporter_stats' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -346,10 +346,10 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'reporter_effectiveness' ) ?></th>
-				<td><?php echo lang_get( 'severity' ); ?></td>
-				<td><?php echo lang_get( 'errors' ); ?></td>
-				<td><?php echo lang_get( 'total' ); ?></td>
+				<th class="width-35"><?php echo lang_get( 'reporter_effectiveness' ) ?></th>
+				<th class="align-right"><?php echo lang_get( 'severity' ); ?></th>
+				<th class="align-right"><?php echo lang_get( 'errors' ); ?></th>
+				<th class="align-right"><?php echo lang_get( 'total' ); ?></th>
 			</tr>
 		</thead>
 		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
@@ -367,15 +367,15 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'reporter_by_resolution' ) ?></th>
+				<th class="width-15"><?php echo lang_get( 'reporter_by_resolution' ) ?></th>
 				<?php
 					$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
 					foreach ( $t_resolutions as $t_resolution ) {
-						echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
+						echo '<th class="align-right">', get_enum_element( 'resolution', $t_resolution ), "</th>\n";
 					}
 
-					echo '<td>', lang_get( 'percentage_errors' ), "</td>\n";
+					echo '<th class="align-right">', lang_get( 'percentage_errors' ), "</th>\n";
 				?>
 			</tr>
 		</thead>
@@ -389,15 +389,15 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'developer_by_resolution' ) ?></th>
+				<th class="width-15"><?php echo lang_get( 'developer_by_resolution' ) ?></th>
 				<?php
 					$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
 					foreach ( $t_resolutions as $t_resolution ) {
-						echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
+						echo '<th class="align-right">', get_enum_element( 'resolution', $t_resolution ), "</th>\n";
 					}
 
-					echo '<td>', lang_get( 'percentage_fixed' ), "</td>\n";
+					echo '<th class="align-right">', lang_get( 'percentage_fixed' ), "</th>\n";
 				?>
 			</tr>
 		</thead>
