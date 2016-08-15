@@ -1,6 +1,28 @@
 MantisBT Release Notes
 ======================
 
+1.2.20 Security Release (2015-08-15)
+-------------------------------------------------
+
+MantisBT 1.2.20 is the final maintenance and security release for the 1.2.x
+series. All installations that are currently running any 1.2.x version are
+strongly advised to upgrade. Download it from [3].
+
+This release resolves 32 issues, including 3 security vulnerabilities:
+
+- #19301/CVE-2015-2046: XSS in adm_config_report.php
+- #19873/CVE-2015-5059: documentation visibility in private projects
+- #20956/CVE-2016-5364: Reflected XSS inside manage_custom_field_edit_page.php
+
+We would like to thank Fortinet's FortiGuard Labs, Werner Karl and Kacper Szurek
+for reporting these issues, and their cooperation in resolving them.
+
+This release also addresses a couple of PHP 7 compatibility issues.
+
+Please refer to the changelog [1] on the MantisBT web site for complete details
+on each of these issues.
+
+
 1.2.19 Security Release (2015-01-25)
 -------------------------------------------------
 
@@ -460,6 +482,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.20     http://www.mantisbt.org/bugs/changelog_page.php?version_id=240
 	1.2.19     http://www.mantisbt.org/bugs/changelog_page.php?version_id=238
 	1.2.18     http://www.mantisbt.org/bugs/changelog_page.php?version_id=191
 	1.2.17     http://www.mantisbt.org/bugs/changelog_page.php?version_id=189
