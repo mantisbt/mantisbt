@@ -212,7 +212,7 @@ function html_page_top1( $p_page_title = null ) {
 			'<link rel="search" type="application/opensearchdescription+xml" ',
 			'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
 			'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
-			'", />',
+			'"/>',
 			"\n";
 	}
 
