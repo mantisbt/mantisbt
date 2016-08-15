@@ -56,7 +56,7 @@ $t_sep = csv_get_separator();
 $t_filter = filter_get_bug_rows_filter();
 
 # Get the query clauses
-$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
+$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
 
 # Get the total number of bugs that meet the criteria.
 $p_bug_count = filter_get_bug_count( $t_query_clauses );
