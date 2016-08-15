@@ -529,7 +529,9 @@ if( $t_show_attachments ) {
 		$c_filesize = number_format( $t_attachment['size'] );
 		$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
 		if( isset( $t_attachment['icon'] ) ) {
-			echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
+			echo '<i class="ace-icon fa fa-lg ', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '"></i>&#160;';
+		} else {
+			echo '<i class="ace-icon fa fa-paperclip fa-lg"></i>&#160;';
 		}
 
 		echo $c_filename . ' (' .$c_filesize . ') <span class="italic">' . $c_date_added . '</span><br />' . $c_download_url;
