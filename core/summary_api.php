@@ -65,10 +65,10 @@ require_api( 'utility_api.php' );
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	echo '<tr>';
 	printf( '<td class="width50">%s</td>', $p_label );
-	printf( '<td class="width12 right">%s</td>', $p_open );
-	printf( '<td class="width12 right">%s</td>', $p_resolved );
-	printf( '<td class="width12 right">%s</td>', $p_closed );
-	printf( '<td class="width12 right">%s</td>', $p_total );
+	printf( '<td class="width12 align-right">%s</td>', $p_open );
+	printf( '<td class="width12 align-right">%s</td>', $p_resolved );
+	printf( '<td class="width12 align-right">%s</td>', $p_closed );
+	printf( '<td class="width12 align-right">%s</td>', $p_total );
 	echo '</tr>';
 }
 
@@ -313,27 +313,27 @@ function summary_print_by_date( array $p_date_array ) {
 		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
 
 		if( $t_new_count > 0 ) {
-			echo '    <td>' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
+			echo '    <td class="align-right">' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
 		} else {
-			echo '    <td>' . $t_new_count . '</td>' . "\n";
+			echo '    <td class="align-right">' . $t_new_count . '</td>' . "\n";
 		}
-		echo '    <td>' . $t_resolved_count . '</td>' . "\n";
+		echo '    <td class="align-right">' . $t_resolved_count . '</td>' . "\n";
 
 		$t_balance = $t_new_count - $t_resolved_count;
 		$t_style = '';
 		if( $t_balance > 0 ) {
 
 			# we are talking about bugs: a balance > 0 is "negative" for the project...
-			$t_style = ' negative';
+			$t_style = ' red';
 			$t_balance = sprintf( '%+d', $t_balance );
 
 			# "+" modifier added in PHP >= 4.3.0
 		} else if( $t_balance < 0 ) {
-			$t_style = ' positive';
+			$t_style = ' green';
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
 
-		echo '    <td class="right' . $t_style . '">' . $t_balance . "</td>\n";
+		echo '    <td class="align-right' . $t_style . '">' . $t_balance . "</td>\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -391,7 +391,7 @@ function summary_print_by_activity() {
 		$t_notescount = $t_row['count'];
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_notescount . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_notescount . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -436,7 +436,7 @@ function summary_print_by_age() {
 		$t_days_open = intval( ( time() - $t_row['date_submitted'] ) / SECONDS_PER_DAY );
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_days_open . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_days_open . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -881,7 +881,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td>';
+				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -907,7 +907,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			if( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
 				$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 			}
-			echo '<td>';
+			echo '<td class="align-right">';
 			printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
@@ -996,7 +996,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td>';
+				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -1022,7 +1022,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 			if( $t_total_user_bugs > 0 ) {
 				$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
 			}
-			echo '<td>';
+			echo '<td class="align-right">';
 			printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
@@ -1136,9 +1136,9 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 					}
 				}
 			}
-			echo '<td class="right">' . $t_total_severity . '</td>';
-			echo '<td class="right">' . $t_total_errors . '</td>';
-			printf( '<td class="right">%d</td>', $t_total_severity - $t_total_errors );
+			echo '<td class="align-right">' . $t_total_severity . '</td>';
+			echo '<td class="align-right">' . $t_total_errors . '</td>';
+			printf( '<td class="align-right">%d</td>', $t_total_severity - $t_total_errors );
 			echo '</tr>';
 		}
 	}
