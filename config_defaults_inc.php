@@ -3205,19 +3205,26 @@ $g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
 #############################
 
 /**
- *
+ * Show custom fields in the filter dialog and use these in filtering.
  * @global integer $g_filter_by_custom_fields
  */
 $g_filter_by_custom_fields = ON;
 
 /**
- *
+ * The number of custom fields to display per row.
+ * The default is 8. The value should be greater than or equal to 8.
+ * If lower, whitespace will appear on the right
  * @global integer $g_filter_custom_fields_per_row
  */
 $g_filter_custom_fields_per_row = 8;
 
 /**
- *
+ * Controls the display of the filter pages.
+ * Possible values are:
+ * - SIMPLE_ONLY - only simple view
+ * - ADVANCED_ONLY - only advanced view (allows multiple value selections)
+ * - SIMPLE_DEFAULT - defaults to simple view, but shows a link for advanced
+ * - ADVANCED_DEFAULT - defaults to advanced view, but shows a link for simple
  * @global integer $g_view_filters
  */
 $g_view_filters = SIMPLE_DEFAULT;
