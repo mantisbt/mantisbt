@@ -489,9 +489,15 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		# if the version is old, update it
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
+
+	# Filter view type - ensure it's either 'simple' or 'advanced' (prevent XSS)
 	if( !isset( $p_filter_arr['_view_type'] ) ) {
 		$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
 	}
+	if( $p_filter_arr['_view_type'] !== 'advanced' ) {
+		$p_filter_arr['_view_type'] = 'simple';
+	}
+
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, config_get( 'default_limit_view' ) );
 	}
