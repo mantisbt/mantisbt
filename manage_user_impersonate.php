@@ -53,7 +53,7 @@ $t_redirect_to = config_get( 'default_home_page' );
 
 layout_page_header();
 
-layout_page_begin( null, $t_redirect_to );
+layout_page_begin( null );
 
 html_operation_successful( $t_redirect_to );
 
