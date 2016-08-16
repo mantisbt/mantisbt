@@ -179,6 +179,59 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 }
 
 /**
+ * Creates and executes a query for the history rows related to bugs matched by the provided filter
+ * @param  array $p_filter           Filter array
+ * @param  integer $p_start_time     The start time to filter by, or null for all.
+ * @param  integer $p_end_time       The end time to filter by, or null for all.
+ * @param  string  $p_history_order  The sort order.
+ * @return database result to pass into history_get_event_from_row().
+ */
+function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	if ( $p_history_order === null ) {
+		$t_history_order = config_get( 'history_order' );
+	} else {
+		$t_history_order = $p_history_order;
+	}
+
+	# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+	$t_query_clauses = filter_get_bug_rows_query_clauses( $p_filter, null, null, null );
+
+	$t_select_string = 'SELECT DISTINCT {bug}.id ';
+	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+	if( count( $t_query_clauses['where'] ) > 0 ) {
+		$t_where_string .= ' AND ( ';
+		$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
+		$t_where_string .= ' ) ';
+	}
+
+	$t_query = 'SELECT * FROM {bug_history} JOIN'
+			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' ) B'
+			. ' ON {bug_history}.bug_id=B.id';
+
+	$t_params = $t_query_clauses['where_values'];
+	$t_where = array();
+	if ( $p_start_time !== null ) {
+		$t_where[] = 'date_modified >= ' . db_param();
+		$t_params[] = $p_start_time;
+	}
+
+	if ( $p_end_time !== null ) {
+		$t_where[] = 'date_modified < ' . db_param();
+		$t_params[] = $p_end_time;
+	}
+
+	if ( count( $t_where ) > 0 ) {
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+	}
+
+	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
+	$t_result = db_query( $t_query, $t_params );
+	return $t_result;
+}
+
+/**
  * Creates and executes a query for the history rows matching the specified criteria.
  * @param  integer $p_bug_id         The bug id or null for matching any bug.
  * @param  integer $p_start_time     The start time to filter by, or null for all.
@@ -235,18 +288,12 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
-	$t_project_id = helper_get_current_project();
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 		# Ignore entries related to non-existing bugs (see #20727)
 		if( !bug_exists( $v_bug_id ) ) {
-			continue;
-		}
-
-		# Make sure the entry belongs to current project.
-		if ( $t_project_id != ALL_PROJECTS && $t_project_id != bug_get_field( $v_bug_id, 'project_id' ) ) {
 			continue;
 		}
 
