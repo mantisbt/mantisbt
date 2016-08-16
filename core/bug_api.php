@@ -1556,13 +1556,11 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 }
 
 /**
- * For a list of bug ids, return array of bugnote stats:
- * the timestamp for the most recent time at which a bugnote
- * associated with the bug was modified and the total bugnote
- * count in one db query.
- * @param array $p_bugs_id Array of Integer representing bug identifiers.
- * @param integer|null $p_user_id User for checking access levels. null defaults to current user
- * @return array objects consisting of bugnote stats
+ * For a list of bug ids, returns an array of bugnote stats.
+ * If a bug has no visible bugnotes, returns "false" as the stats item for that bug id.
+ * @param array $p_bugs_id         Array of Integer representing bug identifiers.
+ * @param integer|null $p_user_id  User for checking access levels. null defaults to current user
+ * @return array                   Array of bugnote stats
  * @access public
  * @uses database_api.php
  */
@@ -1589,52 +1587,55 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 		$t_in_clause_elems[] = db_param();
 		$t_params[] = $t_id;
 	}
-	$t_where_string = ' WHERE n.bug_id in (' . implode( ', ', $t_id_array ) . ')';
 	$t_query = 'SELECT n.id, n.bug_id, n.reporter_id, n.view_state, n.last_modified, n.date_submitted, b.project_id'
 		. ' FROM {bugnote} n JOIN {bug} b ON (n.bug_id = b.id)'
 		. ' WHERE n.bug_id IN (' . implode( ', ', $t_in_clause_elems ) . ')'
 		. ' ORDER BY b.project_id, n.bug_id, n.last_modified';
 	# perform query
 	$t_result = db_query( $t_query, $t_params );
-	$t_query_row = db_fetch_array( $t_result );
 	$t_counter = 0;
 	$t_stats = array();
 	# We need to check for each bugnote if it has permissions to view in respective project.
 	# bugnotes are grouped by project_id and bug_id to save calls to config_get
-	if( $t_query_row ) {
-		do {
-			$c_bug_id = (int)$t_query_row['bug_id'];
-			if( 0 == $t_counter || $t_current_project_id !== $t_query_row['project_id'] ) {
-				# evaluating a new project from the rowset
-				$t_current_project_id = $t_query_row['project_id'];
-				$t_user_access_level = access_get_project_level( $t_query_row['project_id'], $t_user_id );
-				$t_private_bugnote_visible = access_compare_level( $t_user_access_level, config_get( 'private_bugnote_threshold', null, $t_user_id, $t_query_row['project_id'] ) );
-			}
-			if( 0 == $t_counter || $t_current_bug_id !== $c_bug_id ) {
-				# evaluating a new bug from the rowset
-				$t_current_bug_id = $c_bug_id;
-				$t_note_count = 0;
-				$t_last_submit_date= 0;
-			}
-			$t_note_visible = $t_private_bugnote_visible || $t_query_row['reporter_id'] == $t_user_id || ( VS_PUBLIC == $t_query_row['view_state'] );
-			if( $t_note_visible ) {
-				# only count the bugnote if user has access
-				$t_stats[$c_bug_id]['bug_id'] = $c_bug_id;
-				$t_stats[$c_bug_id]['last_modified'] = $t_query_row['last_modified'];
-				$t_stats[$c_bug_id]['count'] = ++$t_note_count;
-				$t_stats[$c_bug_id]['last_modified_bugnote'] = $t_query_row['id'];
-				if( $t_query_row['date_submitted'] > $t_last_submit_date ) {
-					$t_last_submit_date = $t_query_row['date_submitted'];
-					$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
-				}
-				if( isset( $t_id_array[$c_bug_id] ) ) {
-					unset( $t_id_array[$c_bug_id] );
-				}
-			}
-			$t_counter++;
+	$t_current_project_id = null;
+	$t_current_bug_id = null;
+	while( $t_query_row = db_fetch_array( $t_result ) ) {
+		$c_bug_id = (int)$t_query_row['bug_id'];
+		if( 0 == $t_counter || $t_current_project_id !== $t_query_row['project_id'] ) {
+			# evaluating a new project from the rowset
+			$t_current_project_id = $t_query_row['project_id'];
+			$t_user_access_level = access_get_project_level( $t_query_row['project_id'], $t_user_id );
+			$t_private_bugnote_visible = access_compare_level(
+					$t_user_access_level,
+					config_get( 'private_bugnote_threshold', null, $t_user_id, $t_query_row['project_id'] )
+					);
 		}
-		while ( $t_query_row = db_fetch_array( $t_result ) );
+		if( 0 == $t_counter || $t_current_bug_id !== $c_bug_id ) {
+			# evaluating a new bug from the rowset
+			$t_current_bug_id = $c_bug_id;
+			$t_note_count = 0;
+			$t_last_submit_date= 0;
+		}
+		$t_note_visible = $t_private_bugnote_visible
+				|| $t_query_row['reporter_id'] == $t_user_id
+				|| ( VS_PUBLIC == $t_query_row['view_state'] );
+		if( $t_note_visible ) {
+			# only count the bugnote if user has access
+			$t_stats[$c_bug_id]['bug_id'] = $c_bug_id;
+			$t_stats[$c_bug_id]['last_modified'] = $t_query_row['last_modified'];
+			$t_stats[$c_bug_id]['count'] = ++$t_note_count;
+			$t_stats[$c_bug_id]['last_modified_bugnote'] = $t_query_row['id'];
+			if( $t_query_row['date_submitted'] > $t_last_submit_date ) {
+				$t_last_submit_date = $t_query_row['date_submitted'];
+				$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
+			}
+			if( isset( $t_id_array[$c_bug_id] ) ) {
+				unset( $t_id_array[$c_bug_id] );
+			}
+		}
+		$t_counter++;
 	}
+
 	# The remaining bug ids, are those without visible notes. Save false as cached value
 	foreach( $t_id_array as $t_id ) {
 		$t_stats[$t_id] = false;
