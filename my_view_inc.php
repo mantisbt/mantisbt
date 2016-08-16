@@ -310,6 +310,18 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 ?>
 		</h4>
 		<div class="widget-toolbar">
+			<div class="widget-menu">
+				<a data-toggle="dropdown" data-action="settings" href="#" aria-expanded="true">
+					<i class="ace-icon fa fa-bars"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
+					<li>
+						<a href="<?php echo $t_box_url ?>">
+							<?php echo lang_get( 'view_bugs_link' ) ?>
+						</a>
+					</li>
+				</ul>
+			</div>
 			<a data-action="collapse" href="#">
 				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
 			</a>
@@ -421,16 +433,8 @@ for( $i = 0;$i < $t_count; $i++ ) {
 ?>
 </tbody>
 </table>
-	</div>
-	</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<?php
-			echo ' ' . $t_bug_count . ' ' . lang_get( $t_bug_string ) . ' ';
-		?>
-		<a class="btn btn-xs btn-primary btn-white btn-round" href="<?php echo $t_box_url ?>">
-			<?php echo lang_get( 'view_bugs_link' ) ?>
-		</a>
-	</div>
+</div>
+</div>
 </div>
 </div>
 <?php
