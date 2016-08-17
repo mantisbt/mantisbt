@@ -71,9 +71,6 @@ if( $f_to !== null ) {
 }
 
 if( $f_mail_test ) {
-	echo '<div class="important-msg">';
-	echo '<strong>Testing Mail</strong> - ';
-
 	lang_push( 'english' );
 
 	$t_email_data = new EmailData;
@@ -85,11 +82,18 @@ if( $f_mail_test ) {
 	$t_result = email_send( $t_email_data );
 
 	if( !$t_result ) {
+		echo '<div class="alert alert-sm alert-danger">';
+		echo '<i class="ace-icon fa fa-times fa-lg"></i> ';
+		echo '<strong>Testing Mail</strong> - ';
 		echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.';
+		echo '</div>';
 	} else {
+		echo '<div class="alert alert-sm alert-success">';
+		echo '<i class="ace-icon fa fa-check fa-lg"></i> ';
+		echo '<strong>Testing Mail</strong> - ';
 		echo ' mail() send successful.';
+		echo '</div>';
 	}
-	echo '</div>';
 }
 
 $t_ids = email_queue_get_ids();

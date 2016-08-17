@@ -59,18 +59,17 @@ print_manage_menu( 'manage_proj_page.php' );
 
 $f_parent_id = gpc_get( 'parent_id', null );
 
-if( project_table_empty() ) {
-	echo '<br />';
-	echo '<div id="create-first-project" class="important-msg">';
-	echo '<ul>';
-	echo '<li>' . lang_get( 'create_first_project' ) . '</li>';
-	echo '</ul>';
-	echo '</div>';
-}
 ?>
 
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
+		<div class="space-10"></div>
+
+<?php if( project_table_empty() ) { ?>
+	<div class="alert alert-sm alert-warning" role="alert">
+		<i class="ace-icon fa fa-warning fa-lg"></i> <?php echo lang_get( 'create_first_project' ) ?>
+	</div>
+<?php } ?>
+
 	<div id="manage-project-create-div" class="form-container">
 	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
 	<div class="widget-box widget-color-blue2">
