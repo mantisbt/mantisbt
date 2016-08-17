@@ -490,9 +490,15 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		# if the version is old, update it
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
+
+	# Filter view type - ensure it's either 'simple' or 'advanced' (prevent XSS)
 	if( !isset( $p_filter_arr['_view_type'] ) ) {
 		$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
 	}
+	if( $p_filter_arr['_view_type'] !== 'advanced' ) {
+		$p_filter_arr['_view_type'] = 'simple';
+	}
+
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, config_get( 'default_limit_view' ) );
 	}
@@ -1180,12 +1186,23 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
 		$t_where_string .= ' ) ';
 	}
 
-	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $t_count, $t_offset );	
+	$t_result = db_query(
+		$t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string,
+		$t_query_clauses['where_values'],
+		$t_count,
+		$t_offset
+	);
 	return $t_result;
 }
 
 /**
- * Creates an array of formatted query clauses, based on the supplied filter and parameters
+ * Creates an array of formatted query clauses, based on the supplied
+ * filter and parameters.
+ * Note: this function executes db_param_push():
+ *  - If the returned query is not executed, db_param_pop() should be executed
+ *    to clean up the parameter stack
+ *  - If the final query adds db_param() outside of this function,
+ *    they must be added after this function is called.
  * @param array   $p_filter       Filter array object
  * @param integer $p_project_id   Project id to use in filtering.
  * @param integer $p_user_id      User id to use as current user when filtering.

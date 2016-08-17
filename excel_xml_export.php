@@ -52,9 +52,6 @@ require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
-define( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW', true );
-include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_all_bug_options_inc.php' );
-
 auth_ensure_user_authenticated();
 
 $f_export = gpc_get_string( 'export', '' );
@@ -81,7 +78,7 @@ $t_columns = excel_get_columns();
 $t_filter = filter_get_bug_rows_filter();
 
 # Get the query clauses
-$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
+$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
 
 # Get the total number of bugs that meet the criteria.
 $p_bug_count = filter_get_bug_count( $t_query_clauses );

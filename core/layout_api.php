@@ -93,7 +93,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 			'<link rel="search" type="application/opensearchdescription+xml" ',
 				'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
 				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
-				'", />',
+				'"/>',
 			"\n";
 	}
 
@@ -871,7 +871,7 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 			}
 		}
 
-		layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );	
+		layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );
 	}
 }
 

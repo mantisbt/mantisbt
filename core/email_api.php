@@ -1344,7 +1344,6 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 	$t_sender = user_get_name( $t_sender_id );
 
 	$t_subject = email_build_subject( $p_bug_id );
-	$t_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
 	$t_date = date( config_get( 'normal_date_format' ) );
 	$t_user_id = auth_get_current_user_id();
 	$t_users_processed = array();
@@ -1383,10 +1382,11 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 			$t_sender_email = '';
 		}
 
+		$t_complete_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
 		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'mentioned_you' ) . "\n\n";
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message;
 
-		$t_id = email_store( $t_email, $t_subject, $t_contents );
+		$t_id = email_store( $t_email, $t_complete_subject, $t_contents );
 		if( $t_id !== null ) {
 			$t_result[] = $t_mention_user_id;
 		}
