@@ -88,18 +88,19 @@ layout_login_page_begin();
 
 ?>
 
-<div id="reset-passwd-msg" class="important-msg">
-	<ul>
-		<?php
-		if( $t_can_change_password ) {
-			echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
-			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
-		} else {
-			echo '<li>' . lang_get( 'no_password_change' ) . '</li>';
-		}
-		?>
-	</ul>
-</div>
+<?php
+	if( $t_can_change_password ) {
+		echo '<div id="reset-passwd-msg" class="alert alert-sm alert-danger ">';
+		echo lang_get( 'verify_warning' ) . '<br />';
+		echo lang_get( 'verify_change_password' );
+		echo '</div>';
+	} else {
+		echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
+		echo lang_get( 'no_password_change' );
+		echo '</div>';
+	}
+?>
+
 
 <?php
 if( $t_can_change_password ) {
