@@ -118,4 +118,9 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+    # Auth Plugin
+    'EVENT_AUTH_GET_PASSWORD_MAX_SIZE' => EVENT_TYPE_FIRST,
+    'EVENT_AUTH_DOES_PASSWORD_MATCH' => EVENT_TYPE_FIRST,
+    'EVENT_AUTH_AUTHENTIFICATE_BY_USERNAME' => EVENT_TYPE_FIRST,
 ) );
