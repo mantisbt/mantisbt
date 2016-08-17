@@ -154,6 +154,11 @@ function http_content_headers() {
 function http_csp_add( $p_type, $p_value ) {
 	global $g_csp;
 
+	if ( $g_csp === null ) {
+		# Development error, headers already emitted.
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
 	if ( isset( $g_csp[$p_type] ) ) {
 		if ( !in_array( $p_value, $g_csp[$p_type] ) ) {
 			$g_csp[$p_type][] = $p_value;
@@ -170,6 +175,11 @@ function http_csp_add( $p_type, $p_value ) {
 function http_csp_value() {
 	global $g_csp;
 
+	if ( $g_csp === null ) {
+		# Development error, headers already emitted.
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
 	$t_csp_value = '';
 
 	foreach ( $g_csp as $t_key => $t_values ) {
@@ -179,6 +189,17 @@ function http_csp_value() {
 	$t_csp_value = trim( $t_csp_value, '; ' );
 
 	return $t_csp_value;
+}
+
+/**
+ * Send header for Content-Security-Policy.
+ * @return void
+ */
+function http_csp_emit_header() {
+	header( 'Content-Security-Policy: ' . http_csp_value() );
+
+	global $g_csp;
+	$g_csp = null;
 }
 
 /**
@@ -209,8 +230,7 @@ function http_security_headers() {
 			http_csp_add( 'style-src', "'unsafe-inline'" );
 		}
 
-		# Set CSP header
-		header( 'Content-Security-Policy: ' . http_csp_value() );
+		http_csp_emit_header();
 
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
