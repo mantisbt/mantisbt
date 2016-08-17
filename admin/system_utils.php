@@ -25,6 +25,7 @@
  */
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
+require_once( 'schema.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 

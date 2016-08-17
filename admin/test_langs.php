@@ -28,6 +28,7 @@ define( 'STRINGS_ENGLISH', 'strings_english.txt' );
 $t_mantis_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_mantis_dir . 'core.php' );
+require_once( 'schema.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
