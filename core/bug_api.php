@@ -790,16 +790,24 @@ $g_cache_bug_text = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
- * @param array $p_bug_database_result Database row containing all columns from mantis_bug_table.
- * @param array $p_stats               An optional array representing bugnote statistics.
+ * $p_stats parameter is an optional array representing bugnote statistics.
+ * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
+ * from a still not cached stats registry.
+ * @param array $p_bug_database_result  Database row containing all columns from mantis_bug_table.
+ * @param array|boolean|null $p_stats   Optional: array representing bugnote statistics, or false to store empty cache value
  * @return array returns an array representing the bug row if bug exists
  * @access public
  */
-function bug_cache_database_result( array $p_bug_database_result, array $p_stats = null ) {
+function bug_cache_database_result( array $p_bug_database_result, $p_stats = null ) {
 	global $g_cache_bug;
 
 	if( !is_array( $p_bug_database_result ) || isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
-		return $g_cache_bug[(int)$p_bug_database_result['id']];
+		if( !is_null($p_stats) ) {
+			# force store the bugnote statistics
+			return bug_add_to_cache( $p_bug_database_result, $p_stats );
+		} else {
+			return $g_cache_bug[(int)$p_bug_database_result['id']];
+		}
 	}
 
 	return bug_add_to_cache( $p_bug_database_result, $p_stats );
@@ -873,13 +881,16 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 }
 
 /**
- * Inject a bug into the bug cache
+ * Inject a bug into the bug cache.
+ * $p_stats parameter is an optional array representing bugnote statistics.
+ * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
+ * from a still not cached stats registry.
  * @param array $p_bug_row A bug row to cache.
- * @param array $p_stats   Bugnote stats to cache.
+ * @param array|boolean|null $p_stats   Array of Bugnote stats to cache, false to store empty value, null to skip
  * @return array
  * @access private
  */
-function bug_add_to_cache( array $p_bug_row, array $p_stats = null ) {
+function bug_add_to_cache( array $p_bug_row, $p_stats = null ) {
 	global $g_cache_bug;
 
 	$g_cache_bug[(int)$p_bug_row['id']] = $p_bug_row;
@@ -1545,6 +1556,94 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 }
 
 /**
+ * For a list of bug ids, returns an array of bugnote stats.
+ * If a bug has no visible bugnotes, returns "false" as the stats item for that bug id.
+ * @param array $p_bugs_id         Array of Integer representing bug identifiers.
+ * @param integer|null $p_user_id  User for checking access levels. null defaults to current user
+ * @return array                   Array of bugnote stats
+ * @access public
+ * @uses database_api.php
+ */
+function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
+	$t_id_array = array();
+	foreach( $p_bugs_id as $t_id ) {
+		$t_id_array[$t_id] = (int)$t_id;
+	}
+	if( empty( $t_id_array ) ) {
+		return array();
+	}
+
+	if ( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	}
+	else {
+		$t_user_id = $p_user_id;
+	}
+
+	db_param_push();
+	$t_params = array();
+	$t_in_clause_elems = array();
+	foreach( $t_id_array as $t_id ) {
+		$t_in_clause_elems[] = db_param();
+		$t_params[] = $t_id;
+	}
+	$t_query = 'SELECT n.id, n.bug_id, n.reporter_id, n.view_state, n.last_modified, n.date_submitted, b.project_id'
+		. ' FROM {bugnote} n JOIN {bug} b ON (n.bug_id = b.id)'
+		. ' WHERE n.bug_id IN (' . implode( ', ', $t_in_clause_elems ) . ')'
+		. ' ORDER BY b.project_id, n.bug_id, n.last_modified';
+	# perform query
+	$t_result = db_query( $t_query, $t_params );
+	$t_counter = 0;
+	$t_stats = array();
+	# We need to check for each bugnote if it has permissions to view in respective project.
+	# bugnotes are grouped by project_id and bug_id to save calls to config_get
+	$t_current_project_id = null;
+	$t_current_bug_id = null;
+	while( $t_query_row = db_fetch_array( $t_result ) ) {
+		$c_bug_id = (int)$t_query_row['bug_id'];
+		if( 0 == $t_counter || $t_current_project_id !== $t_query_row['project_id'] ) {
+			# evaluating a new project from the rowset
+			$t_current_project_id = $t_query_row['project_id'];
+			$t_user_access_level = access_get_project_level( $t_query_row['project_id'], $t_user_id );
+			$t_private_bugnote_visible = access_compare_level(
+					$t_user_access_level,
+					config_get( 'private_bugnote_threshold', null, $t_user_id, $t_query_row['project_id'] )
+					);
+		}
+		if( 0 == $t_counter || $t_current_bug_id !== $c_bug_id ) {
+			# evaluating a new bug from the rowset
+			$t_current_bug_id = $c_bug_id;
+			$t_note_count = 0;
+			$t_last_submit_date= 0;
+		}
+		$t_note_visible = $t_private_bugnote_visible
+				|| $t_query_row['reporter_id'] == $t_user_id
+				|| ( VS_PUBLIC == $t_query_row['view_state'] );
+		if( $t_note_visible ) {
+			# only count the bugnote if user has access
+			$t_stats[$c_bug_id]['bug_id'] = $c_bug_id;
+			$t_stats[$c_bug_id]['last_modified'] = $t_query_row['last_modified'];
+			$t_stats[$c_bug_id]['count'] = ++$t_note_count;
+			$t_stats[$c_bug_id]['last_modified_bugnote'] = $t_query_row['id'];
+			if( $t_query_row['date_submitted'] > $t_last_submit_date ) {
+				$t_last_submit_date = $t_query_row['date_submitted'];
+				$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
+			}
+			if( isset( $t_id_array[$c_bug_id] ) ) {
+				unset( $t_id_array[$c_bug_id] );
+			}
+		}
+		$t_counter++;
+	}
+
+	# The remaining bug ids, are those without visible notes. Save false as cached value
+	foreach( $t_id_array as $t_id ) {
+		$t_stats[$t_id] = false;
+	}
+	return $t_stats;
+}
+
+/**
  * return the timestamp for the most recent time at which a bugnote
  * associated with the bug was modified and the total bugnote
  * count in one db query
@@ -1560,25 +1659,10 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	if( array_key_exists( '_stats', $g_cache_bug[$c_bug_id] ) ) {
 		return $g_cache_bug[$c_bug_id]['_stats'];
 	}
-
-	# @todo - optimise - max(), count()
-	db_param_push();
-	$t_query = 'SELECT last_modified FROM {bugnote} WHERE bug_id=' . db_param() . ' ORDER BY last_modified ASC';
-	$t_result = db_query( $t_query, array( $c_bug_id ) );
-
-	$t_bugnote_count = 0;
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_bugnote_count++;
+	else {
+		$t_stats = bug_get_bugnote_stats_array( array( $p_bug_id ) );
+		return $t_stats[$p_bug_id];
 	}
-
-	if( $t_bugnote_count === 0 ) {
-		return false;
-	}
-
-	$t_stats['last_modified'] = $t_row['last_modified'];
-	$t_stats['count'] = $t_bugnote_count;
-
-	return $t_stats;
 }
 
 /**

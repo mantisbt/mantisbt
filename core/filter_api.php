@@ -2194,23 +2194,14 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
  * @return array
  */
 function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
-	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
-	$t_where_string = ' WHERE {bugnote}.bug_id in (' . implode( ', ', $t_id_array_lastmod ) . ')';
-	$t_query = 'SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM {bugnote} ' . $t_where_string . ' GROUP BY bug_id';
-
-	# perform query
-	$t_result = db_query( $t_query );
-	$t_row_count = db_num_rows( $t_result );
-	while ( $t_row = db_fetch_array( $t_result ) ) {
-		$t_stats[$t_row['bug_id']] = $t_row;
-	}
-
+	$t_stats = bug_get_bugnote_stats_array( $p_id_array_lastmod );
 	$t_rows = array();
 	foreach( $p_rows as $t_row ) {
-		if( !isset( $t_stats[$t_row['id']] ) ) {
-			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
-		} else {
+		$b = $t_stats[$t_row['id']];
+		if( array_key_exists( $t_row['id'], $t_stats ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
+		} else {
+			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
 		}
 	}
 	return $t_rows;
