@@ -1185,7 +1185,12 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
 		$t_where_string .= ' ) ';
 	}
 
-	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $t_count, $t_offset );	
+	$t_result = db_query(
+		$t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string,
+		$t_query_clauses['where_values'],
+		$t_count,
+		$t_offset
+	);
 	return $t_result;
 }
 
