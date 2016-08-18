@@ -347,27 +347,6 @@ function html_print_logo( $p_logo = null ) {
 	}
 }
 
-
-
-/**
- * Print a user-defined banner at the top of the page if there is one.
- * @return void
- */
-function html_top_banner() {
-	$t_page = config_get( 'top_include_page' );
-	$t_logo_image = config_get( 'logo_image' );
-
-	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
-		include( $t_page );
-	} else if( !is_blank( $t_logo_image ) ) {
-		echo '<div id="banner">';
-		html_print_logo( $t_logo_image );
-		echo '</div>';
-	}
-
-	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
-}
-
 /**
  * A function that outputs that an operation was successful and provides a redirect link.
  * @param string $p_redirect_url The url to redirect to.

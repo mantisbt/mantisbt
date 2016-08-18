@@ -425,6 +425,8 @@ function layout_navbar() {
 
 	echo '</div>';
 	echo '</div>';
+
+	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
