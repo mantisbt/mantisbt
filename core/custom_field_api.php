@@ -731,7 +731,6 @@ function custom_field_get_ids() {
 	global $g_cache_cf_list, $g_cache_custom_field;
 
 	if( $g_cache_cf_list === null ) {
-		db_param_push();
 		$t_query = 'SELECT * FROM {custom_field} ORDER BY name ASC';
 		$t_result = db_query( $t_query );
 		$t_ids = array();
