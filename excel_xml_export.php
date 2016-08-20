@@ -81,7 +81,7 @@ $t_filter = filter_get_bug_rows_filter();
 $t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
 
 # Get the total number of bugs that meet the criteria.
-$p_bug_count = filter_get_bug_count( $t_query_clauses );
+$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
 
 if( 0 == $p_bug_count ) {
 	print_header_redirect( 'view_all_set.php?type=0&print=1' );
