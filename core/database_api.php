@@ -1314,3 +1314,13 @@ function db_mysql_fix_utf8( $p_string ) {
 		$p_string
 	);
 }
+
+/**
+ * Creates an empty record set, compatible with db_query() result
+ * This object can be used when a query can't be performed, or is not needed,
+ * and still want to return an empty result as a transparent return value.
+ * @return \ADORecordSet_empty
+ */
+function db_empty_result() {
+	return new ADORecordSet_empty();
+}

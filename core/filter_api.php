@@ -1049,6 +1049,10 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
  * @return integer
  */
 function filter_get_bug_count( array $p_query_clauses ) {
+	# If query caluses is an empty array, the query can't be created
+	if( empty( $p_query_clauses ) ) {
+		return 0;
+	}
 	$p_query_clauses = filter_unique_query_clauses( $p_query_clauses );
 	$t_select_string = 'SELECT Count( DISTINCT {bug}.id ) as idcnt ';
 	$t_from_string = ' FROM ' . implode( ', ', $p_query_clauses['from'] );
@@ -1163,6 +1167,13 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
 function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null ) {
+	# if the query can't be formed, there are no results
+	if( empty( $p_query_clauses ) ) {
+		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+		db_param_pop();
+		return db_empty_result();
+	}
+
 	if( null === $p_count ) {
 		$t_count = -1;
 	} else {
