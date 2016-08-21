@@ -126,8 +126,7 @@
     background: none repeat scroll 0 0 #393939;
 }
 
-#filter .widget-toolbar > .widget-menu > a,
-#bug-update .widget-toolbar > .widget-menu > a {
+.widget-toolbar > .widget-menu > a {
     display: inline-block;
     font-size: 11px;
     padding: 0 5px;

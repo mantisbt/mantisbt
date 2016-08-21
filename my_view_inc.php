@@ -314,6 +314,11 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
 			</a>
 		</div>
+		<div class="widget-toolbar no-border">
+			<div class="widget-menu">
+				<?php print_small_button( $t_box_url, lang_get( 'view_bugs_link' ) ); ?>
+			</div>
+		</div>
 	</div>
 
 	<div class="widget-body">
@@ -421,16 +426,8 @@ for( $i = 0;$i < $t_count; $i++ ) {
 ?>
 </tbody>
 </table>
-	</div>
-	</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<?php
-			echo ' ' . $t_bug_count . ' ' . lang_get( $t_bug_string ) . ' ';
-		?>
-		<a class="btn btn-xs btn-primary btn-white btn-round" href="<?php echo $t_box_url ?>">
-			<?php echo lang_get( 'view_bugs_link' ) ?>
-		</a>
-	</div>
+</div>
+</div>
 </div>
 </div>
 <?php
