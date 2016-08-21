@@ -299,10 +299,10 @@ function threshold_row( $p_threshold ) {
 
 	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if( $t_can_change_threshold ) {
-		echo '<td class="' . $t_color . ' input-sm"><select name="threshold_' . $p_threshold . '">';
+		echo '<td class="' . $t_color . '"><select name="threshold_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>' . "\n";
-		echo '<td class="' . $t_color_access . ' input-sm"><select name="access_' . $p_threshold . '">';
+		echo '<td class="' . $t_color_access . '"><select name="access_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 		echo '</select> </td>' . "\n";
 		$g_can_change_flags = true;
@@ -402,7 +402,7 @@ function access_row() {
 		}
 
 		if( $t_can_change ) {
-			echo '<td class="' . $t_color . ' input-sm"><select name="access_change_' . $t_status . '">' . "\n";
+			echo '<td class="' . $t_color . '"><select name="access_change_' . $t_status . '" class="input-sm">' . "\n";
 			print_enum_string_option_list( 'access_levels', $t_level_project );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
