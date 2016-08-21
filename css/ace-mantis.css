@@ -133,6 +133,10 @@
     line-height: 20px;
 }
 
+.widget-toolbar > .widget-menu > .input-xs {
+    height: 22px;
+}
+
 .bold {
     font-weight: bold;
 }
