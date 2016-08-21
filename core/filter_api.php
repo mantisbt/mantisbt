@@ -2315,31 +2315,36 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php echo lang_get( 'filters' ) ?>
 			</h4>
 			<div class="widget-toolbar">
-				<a data-action="collapse" href="#">
+				<a id="filter-toggle" data-action="collapse" href="#">
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<div class="widget-toolbar no-border">
+			<div id="filter-search-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+				<div class="widget-menu">
+					<input type="text" size="16" name="search" class="input-xs" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
+					<input type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs" value="<?php echo lang_get( 'filter_button' ) ?>" />
+				</div>
+			</div>
+			<div id="filter-button-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'none' : 'block' ?>">
 				<div class="widget-menu">
 				<?php
-				$f_switch_view_link = ( config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
-				$t_view_filters = config_get( 'view_filters' );
-				if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
-					if( 'advanced' == $t_view_type ) {
-						echo '<a class="btn btn-primary btn-xs btn-white btn-round" href="',
-						$f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a>';
-					} else {
-						echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="',
-						$f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a>';
+					$f_switch_view_link = (config_get('use_dynamic_filters')) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+					$t_view_filters = config_get('view_filters');
+					if ((SIMPLE_ONLY != $t_view_filters) && (ADVANCED_ONLY != $t_view_filters)) {
+						if ('advanced' == $t_view_type) {
+							echo '<a class="btn btn-primary btn-xs btn-white btn-round" href="',
+							$f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a>';
+						} else {
+							echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="',
+							$f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a>';
+						}
 					}
-				}
+					if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+						echo '<a class="btn btn-xs btn-white btn-primary btn-round" href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">';
+						echo lang_get( 'create_filter_link' );
+						echo '</a>';
+					}
 				?>
-				<?php
-				if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-					echo '<a class="btn btn-xs btn-white btn-primary btn-round" href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">';
-					echo lang_get( 'create_filter_link' );
-					echo '</a>';
-				} ?>
 				</div>
 			</div>
 		</div>

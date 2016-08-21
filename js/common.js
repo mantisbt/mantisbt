@@ -89,6 +89,10 @@ $(document).ready( function() {
         SetCookie("collapse_settings", t_cookie);
     });
 
+	$('#filter-toggle').on('click', function (event) {
+		$('#filter-search-bar').toggle();
+		$('#filter-button-bar').toggle();
+	});
 
     $('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {
