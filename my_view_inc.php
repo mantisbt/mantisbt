@@ -310,21 +310,14 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 ?>
 		</h4>
 		<div class="widget-toolbar">
-			<div class="widget-menu">
-				<a data-toggle="dropdown" data-action="settings" href="#" aria-expanded="true">
-					<i class="ace-icon fa fa-bars"></i>
-				</a>
-				<ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
-					<li>
-						<a href="<?php echo $t_box_url ?>">
-							<?php echo lang_get( 'view_bugs_link' ) ?>
-						</a>
-					</li>
-				</ul>
-			</div>
 			<a data-action="collapse" href="#">
 				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
 			</a>
+		</div>
+		<div class="widget-toolbar no-border">
+			<div class="widget-menu">
+				<?php print_small_button( $t_box_url, lang_get( 'view_bugs_link' ) ); ?>
+			</div>
 		</div>
 	</div>
 
