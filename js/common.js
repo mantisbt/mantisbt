@@ -55,8 +55,8 @@ $(document).ready( function() {
             t_cookie = "";
             g_collapse_clear = 0;
         }
-        t_cookie = t_cookie.replace("|" + t_id + ",1", '' );
-        t_cookie = t_cookie + "|" + t_id + ",0";
+        t_cookie = t_cookie.replace("|" + t_id + ":1", '' );
+        t_cookie = t_cookie + "|" + t_id + ":0";
         SetCookie( "collapse_settings", t_cookie );
 	});
 
@@ -67,8 +67,8 @@ $(document).ready( function() {
             t_cookie = "";
             g_collapse_clear = 0;
         }
-        t_cookie = t_cookie.replace( "|" + t_id + ",0", '' );
-        t_cookie = t_cookie + "|" + t_id + ",1";
+        t_cookie = t_cookie.replace( "|" + t_id + ":0", '' );
+        t_cookie = t_cookie + "|" + t_id + ":1";
         SetCookie( "collapse_settings", t_cookie );
     });
 
@@ -80,11 +80,11 @@ $(document).ready( function() {
             g_collapse_clear = 0;
         }
         if( $(this).parent().hasClass( "menu-min" ) ) {
-            t_cookie = t_cookie.replace("|" + t_id + ",1", '');
-            t_cookie = t_cookie + "|" + t_id + ",0";
+            t_cookie = t_cookie.replace("|" + t_id + ":1", '');
+            t_cookie = t_cookie + "|" + t_id + ":0";
         } else {
-            t_cookie = t_cookie.replace("|" + t_id + ",0", '');
-            t_cookie = t_cookie + "|" + t_id + ",1";
+            t_cookie = t_cookie.replace("|" + t_id + ":0", '');
+            t_cookie = t_cookie + "|" + t_id + ":1";
         }
         SetCookie("collapse_settings", t_cookie);
     });
