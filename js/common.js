@@ -90,8 +90,8 @@ $(document).ready( function() {
     });
 
 	$('#filter-toggle').on('click', function (event) {
+		$('#saved-filters-bar').toggle();
 		$('#filter-search-bar').toggle();
-		$('#filter-button-bar').toggle();
 	});
 
     $('input[type=text].autocomplete').autocomplete({
