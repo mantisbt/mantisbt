@@ -128,6 +128,20 @@
     padding-left:8px;
 }
 
+
+.margin-left-8 {
+    margin-left:8px;
+}
+.margin-right-8 {
+    margin-right:8px;
+}
+.rtl .margin-left-8 {
+    margin-right:8px;
+}
+.rtl .margin-right-8 {
+    margin-left:8px;
+}
+
 .login-container {
     width: 100%;
 }

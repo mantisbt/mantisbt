@@ -2315,36 +2315,73 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<?php echo lang_get( 'filters' ) ?>
 			</h4>
 			<div class="widget-toolbar">
+				<?php
+					$f_switch_view_link = (config_get('use_dynamic_filters')) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+					$t_view_filters = config_get('view_filters');
+					if ( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
+						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) { ?>
+					<div class="widget-menu">
+						<a href="#" data-action="settings" data-toggle="dropdown">
+							<i class="ace-icon fa fa-bars bigger-125"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
+							<?php
+							if ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+								echo '<li>';
+								if ('advanced' == $t_view_type) {
+									echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-filter"></i> ' . lang_get('simple_filters') . '</a>';
+								} else {
+									echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-filter"></i> ' . lang_get('advanced_filters') . '</a>';
+								}
+								echo '</li>';
+							}
+							if ( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+								echo '<li>';
+								echo '<a href="permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ) . '">';
+								echo '<i class="ace-icon fa fa-link"></i> ' . lang_get( 'create_filter_link' );
+								echo '</a>';
+								echo '</li>';
+							}
+							?>
+						</ul>
+					</div>
+			 	<?php } ?>
 				<a id="filter-toggle" data-action="collapse" href="#">
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<div id="filter-search-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-				<div class="widget-menu">
-					<input type="text" size="16" name="search" class="input-xs" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
-					<input type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs" value="<?php echo lang_get( 'filter_button' ) ?>" />
+			<div id="saved-filters-bar" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+				<div class="widget-menu margin-left-8 margin-right-8">
+					<form class="form-inline"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+						<?php # CSRF protection not required here - form does not result in modifications ?>
+						<input type="hidden" name="type" />
+						<select name="source_query_id" class="input-xs">
+							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
+							<option value="-1"></option>
+							<?php
+							$t_stored_queries_arr = filter_db_get_available_queries();
+							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
+							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
+								echo '<option value="' . $t_query_id . '" ';
+								check_selected( $t_query_id, $t_source_query_id );
+								echo '>' . string_display_line( $t_query_name ) . '</option>';
+							}
+							?>
+						</select>
+						<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-xs btn-round no-float"
+							   value="<?php echo lang_get( 'use_query' )?>" />
+					</form>
 				</div>
 			</div>
-			<div id="filter-button-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'none' : 'block' ?>">
-				<div class="widget-menu">
-				<?php
-					$f_switch_view_link = (config_get('use_dynamic_filters')) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
-					$t_view_filters = config_get('view_filters');
-					if ((SIMPLE_ONLY != $t_view_filters) && (ADVANCED_ONLY != $t_view_filters)) {
-						if ('advanced' == $t_view_type) {
-							echo '<a class="btn btn-primary btn-xs btn-white btn-round" href="',
-							$f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a>';
-						} else {
-							echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="',
-							$f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a>';
-						}
-					}
-					if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-						echo '<a class="btn btn-xs btn-white btn-primary btn-round" href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">';
-						echo lang_get( 'create_filter_link' );
-						echo '</a>';
-					}
-				?>
+			<div id="filter-search-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+				<div class="widget-menu margin-left-8 margin-right-8">
+					<input type="text" size="16" name="<?php echo FILTER_PROPERTY_SEARCH ?>" class="input-xs"
+						   placeholder="<?php echo lang_get( 'search' ) ?>"
+						   value="<?php echo string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
+					<button type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs"
+							title="<?php echo lang_get( 'filter_button' ) ?>">
+						<i class="ace-icon fa fa-search"></i>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -3607,8 +3644,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	echo '<div class="form-inline">';
-	echo '<label>', lang_get( 'search' ) . '&#160;', '</label>';
-	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" 
+		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
 	</div>
