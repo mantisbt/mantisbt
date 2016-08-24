@@ -29,6 +29,9 @@ $t_mantis_dir = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 
 require_once( $t_mantis_dir . 'core.php' );
 
+# Load schema version needed to render admin menu bar
+require_once( 'schema.php' );
+
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 if( function_exists( 'xdebug_disable' ) ) {

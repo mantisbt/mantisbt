@@ -26,6 +26,9 @@
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
+# Load schema version needed to render admin menu bar
+require_once( 'schema.php' );
+
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 layout_page_header( 'MantisBT Administration - System Utilities' );
