@@ -84,10 +84,10 @@ $t_max_column_count = 2;
 
 foreach( $t_query_arr as $t_id => $t_name ) {
 	if( $t_column_count == 0 ) {
-		print '<tr>';
+		echo '<tr>';
 	}
 
-	print '<td>';
+	echo '<td class="width-50">';
 
 	if( OFF != $t_rss_enabled ) {
 		# Use the "new" RSS link style.
@@ -104,7 +104,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
         echo ' </div>';
 	}
 
-	print '</td>';
+	echo '</td>';
 
 	$t_column_count++;
 	if( $t_column_count == $t_max_column_count ) {
