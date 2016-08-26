@@ -94,6 +94,14 @@ $(document).ready( function() {
 		$('#filter-search-bar').toggle();
 	});
 
+	$('#saved-filters-bar').on('change', function(e) {
+		$(this).closest('form').trigger('submit');
+	});
+	$('#source_query_id').on('change', function(e) {
+		$(this).closest('form').trigger('submit');
+	});
+
+
     $('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {
 			var fieldName = $(this).attr('element').attr('id');
