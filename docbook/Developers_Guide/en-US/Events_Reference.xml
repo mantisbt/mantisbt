@@ -83,6 +83,19 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.system.coreheaders">
+			<title>EVENT_CORE_HEADERS (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by the MantisBT bootstrap process just before emitting the
+					headers.  This enables plugins to emit their own headers or use API that enables
+					tweaking values of headers emitted by core.  An example, of headers that can be
+					tweaked is Content-Security-Policy header which can be tweaked using http_csp_*() APIs.
+				</para>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.system.coreready">
 			<title>EVENT_CORE_READY (Execute)</title>
 
