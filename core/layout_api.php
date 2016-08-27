@@ -470,7 +470,9 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
 
 	# My Account
-	layout_navbar_menu_item( helper_mantis_url( 'account_page.php' ), lang_get( 'account_link' ), 'fa-user' );
+	if( !current_user_is_protected() ) {
+		layout_navbar_menu_item( helper_mantis_url( 'account_page.php' ), lang_get( 'account_link' ), 'fa-user' );
+	}
 
 	# RSS Feed
 	if( OFF != config_get( 'rss_enabled' ) ) {
