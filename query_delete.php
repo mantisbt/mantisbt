@@ -61,13 +61,17 @@ if( !filter_db_can_delete_filter( $f_query_id ) ) {
 	filter_db_delete_filter( $f_query_id );
 	form_security_purge( 'query_delete' );
 	?>
-	<br />
-	<div class="center">
-		<strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong>
-		<form method="post" action="<?php print $t_redirect_url; ?>">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-		</form>
+	<div class="col-md-12 col-xs-12">
+		<div class="space-10"></div>
+		<div class="alert alert-success">
+			<div class="center">
+				<p class="bold bigger-110"><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></p>
+				<form method="post" action="<?php print $t_redirect_url; ?>">
+					<?php # CSRF protection not required here - form does not result in modifications ?>
+					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>"/>
+				</form>
+			</div>
+		</div>
 	</div>
 	<?php
 	layout_page_end();
