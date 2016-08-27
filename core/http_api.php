@@ -231,6 +231,12 @@ function http_security_headers() {
 			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
 		}
 
+		# Relaxing policy for view issue page to allow inline scripts.
+		# Should be removed once #21651 is fixed.
+		if( 'view.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+			http_csp_add( 'script-src', "'unsafe-inline'" );
+		}
+
 		http_csp_emit_header();
 
 		if( http_is_protocol_https() ) {
