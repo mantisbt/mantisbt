@@ -130,16 +130,12 @@ function user_cache_array_rows( array $p_user_id_array ) {
 }
 
 /**
- * Cache an object as a bug.
+ * Cache a user row
  * @param array $p_user_database_result A user row to cache.
- * @return array|null
+ * @return void
  */
 function user_cache_database_result( array $p_user_database_result ) {
 	global $g_cache_user;
-
-	if( isset( $g_cache_user[$p_user_database_result['id']] ) ) {
-		return $g_cache_user[$p_user_database_result['id']];
-	}
 
 	$g_cache_user[$p_user_database_result['id']] = $p_user_database_result;
 }
