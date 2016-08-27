@@ -57,10 +57,21 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function hooks() {
 		$t_hooks = array(
 			'EVENT_LAYOUT_RESOURCES' => 'resources',
+			'EVENT_CORE_HEADERS' => 'csp_headers',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
 		return $t_hooks;
+	}
+
+	/**
+	 * Add Content-Security-Policy directives that are needed to load scripts for CDN.
+	 * @return void
+	 */
+	function csp_headers() {
+		if ( config_get_global( 'cdn_enabled' ) == ON ) {
+			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' );
+		}
 	}
 
 	/**
