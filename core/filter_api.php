@@ -1046,10 +1046,24 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
 
 /**
  * Build a query with the query clauses array, query for bug count and return the result
+ *
+ * Note: The parameter $p_pop_param can be used as 'false' to keep db_params in the stack,
+ * if the same query clauses object is reused for several queries. In that case a db_param_pop()
+ * should be used manually when required.
+ * This is the case when "filter_get_bug_count" is used followed by "filter_get_bug_rows_result"
  * @param array $p_query_clauses Array of query clauses.
+ * @param type $p_pop_param      Whether to pop DB params from the stack
  * @return integer
  */
-function filter_get_bug_count( array $p_query_clauses ) {
+function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
+	# If query caluses is an empty array, the query can't be created
+	if( empty( $p_query_clauses ) ) {
+		if( $p_pop_param ) {
+			# reset the db_param stack, this woould have been done by db_query if executed
+			db_param_pop();
+		}
+		return 0;
+	}
 	$p_query_clauses = filter_unique_query_clauses( $p_query_clauses );
 	$t_select_string = 'SELECT Count( DISTINCT {bug}.id ) as idcnt ';
 	$t_from_string = ' FROM ' . implode( ', ', $p_query_clauses['from'] );
@@ -1060,7 +1074,11 @@ function filter_get_bug_count( array $p_query_clauses ) {
 		$t_where_string .= implode( $p_query_clauses['operator'], $p_query_clauses['where'] );
 		$t_where_string .= ' ) ';
 	}
-	$t_result = db_query( $t_select_string . ' ' . $t_from_string . ' ' . $t_join_string . ' ' . $t_where_string, $p_query_clauses['where_values'] );
+	$t_result = db_query(
+			$t_select_string . ' ' . $t_from_string . ' ' . $t_join_string . ' ' . $t_where_string,
+			$p_query_clauses['where_values'],
+			/* limit */ -1, /* offset */ -1,
+			$p_pop_param );
 	return db_result( $t_result );
 }
 
@@ -1095,8 +1113,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
 
 	# Get the total number of bugs that meet the criteria.
-	$p_bug_count = filter_get_bug_count( $t_query_clauses );
+	# Keep the db_params in stack for next query
+	$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
 	if( 0 == $p_bug_count ) {
+		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+		db_param_pop();
 		return array();
 	}
 
@@ -1156,14 +1177,29 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
 
 /**
  * Creates a sql query with the supplied filter query clauses, and returns the unprocessed result set opbject
+ *
+ * Note: The parameter $p_pop_param can be used as 'false' to keep db_params in the stack,
+ * if the same query clauses object is reused for several queries. In that case a db_param_pop()
+ * should be used manually when required.
+ * This is the case when "filter_get_bug_count" is used followed by "filter_get_bug_rows_result"
  * @param array   $p_query_clauses Array of query clauses
  * @param integer $p_count         The number of rows to return
  *                                 -1 or null indicates default query (no limits)
  * @param integer $p_offset        Offset query results for paging (number of rows)
  *                                 -1 or null indicates default query (no offset)
+ * @param type $p_pop_param        Whether to pop DB params from the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null ) {
+function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null, $p_pop_param = true ) {
+	# if the query can't be formed, there are no results
+	if( empty( $p_query_clauses ) ) {
+		if( $p_pop_param ) {
+			# reset the db_param stack, this woould have been done by db_query if executed
+			db_param_pop();
+		}
+		return db_empty_result();
+	}
+
 	if( null === $p_count ) {
 		$t_count = -1;
 	} else {
@@ -1190,7 +1226,8 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
 		$t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string,
 		$t_query_clauses['where_values'],
 		$t_count,
-		$t_offset
+		$t_offset,
+		$p_pop_param
 	);
 	return $t_result;
 }

@@ -196,6 +196,13 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 	# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
 	$t_query_clauses = filter_get_bug_rows_query_clauses( $p_filter, null, null, null );
 
+	# if the query can't be formed, there are no results
+	if( empty( $t_query_clauses ) ) {
+		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+		db_param_pop();
+		return db_empty_result();
+	}
+
 	$t_select_string = 'SELECT DISTINCT {bug}.id ';
 	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';

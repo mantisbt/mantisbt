@@ -192,7 +192,6 @@ function email_queue_delete( $p_email_id ) {
  * @return array
  */
 function email_queue_get_ids() {
-	db_param_push();
 	$t_query = 'SELECT email_id FROM {email} ORDER BY email_id ASC';
 	$t_result = db_query( $t_query );
 
