@@ -219,15 +219,20 @@ function http_security_headers() {
 
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
-			$t_cdn_url = 'https://ajax.googleapis.com';
-			http_csp_add( 'style-src', $t_cdn_url );
-			http_csp_add( 'script-src', $t_cdn_url );
+			http_csp_add( 'style-src', 'ajax.googleapis.com' );
+			http_csp_add( 'script-src', 'ajax.googleapis.com' );
+			http_csp_add( 'img-src', 'ajax.googleapis.com' );
 		}
 
 		# Relaxing policy for roadmap page to allow inline styles
 		# This is a workaround to fix the broken progress bars (see #19501)
 		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
 			http_csp_add( 'style-src', "'unsafe-inline'" );
+		}
+
+		# The JS Calendar control does unsafe eval, remove once we upgrade the control (see #20040)
+		if( 'bug_update_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+			http_csp_add( 'script-src', "'unsafe-eval'" );
 		}
 
 		http_csp_emit_header();
