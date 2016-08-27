@@ -87,13 +87,6 @@ if( $f_type < 0 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
-$t_hide_status_default = config_get( 'hide_status_default' );
-
-# show bugs per page
-if( $f_per_page < 0 ) {
-	$f_per_page = config_get( 'default_limit_view' );
-}
-
 # -1 is a special case stored query: it means we want to reset our filter
 if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = 0;
@@ -150,8 +143,6 @@ if( !is_blank( $t_view_all_cookie ) ) {
 	# no cookie found, set it
 	$f_type = 1;
 }
-
-$t_default_show_changed = config_get( 'default_show_changed' );
 
 # Clear the source query id.  Since we have entered new filter criteria.
 $t_setting_arr['_source_query_id'] = '';
