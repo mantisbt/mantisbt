@@ -214,6 +214,7 @@ function http_security_headers() {
 		http_csp_add( 'default-src', "'self'" );
 		http_csp_add( 'frame-ancestors', "'none'" );
 		http_csp_add( 'style-src', "'self'" );
+		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
 		http_csp_add( 'img-src', "'self'" );
 
@@ -222,12 +223,6 @@ function http_security_headers() {
 			$t_cdn_url = 'https://ajax.googleapis.com';
 			http_csp_add( 'style-src', $t_cdn_url );
 			http_csp_add( 'script-src', $t_cdn_url );
-		}
-
-		# Relaxing policy for roadmap page to allow inline styles
-		# This is a workaround to fix the broken progress bars (see #19501)
-		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-			http_csp_add( 'style-src', "'unsafe-inline'" );
 		}
 
 		http_csp_emit_header();
@@ -261,7 +256,7 @@ function http_all_headers() {
 	if( !$g_bypass_headers && !headers_sent() ) {
 		http_content_headers();
 		http_caching_headers();
-		#http_security_headers();
+		http_security_headers();
 		http_custom_headers();
 	}
 }
