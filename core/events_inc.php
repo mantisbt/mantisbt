@@ -33,6 +33,7 @@ event_declare_many( array(
 
 	# Events specific to the core system
 	'EVENT_CORE_READY' => EVENT_TYPE_EXECUTE,
+	'EVENT_CORE_HEADERS' => EVENT_TYPE_EXECUTE,
 
 	# MantisBT Layout Events
 	'EVENT_LAYOUT_RESOURCES' => EVENT_TYPE_OUTPUT,
