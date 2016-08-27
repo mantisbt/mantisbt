@@ -106,21 +106,16 @@ class GravatarPlugin extends MantisPlugin {
 	function hooks() {
 		return array(
 			'EVENT_USER_AVATAR' => 'user_get_avatar',
-			'EVENT_LAYOUT_RESOURCES' => 'csp_headers',
+			'EVENT_CORE_HEADERS' => 'csp_headers',
 		);
 	}
 
 	/**
-	 * Add Content-Security-Policy for retrieving Avatar images.
-	 *
-	 * @return void
+	 * Register gravatar url as an img-src for CSP header
 	 */
 	function csp_headers() {
-		# Policy for images: Allow gravatar URL
 		if( config_get( 'show_avatar' ) !== OFF ) {
-			# Set CSP header
-			header( "Content-Security-Policy: img-src 'self' " .
-				self::getAvatarUrl() );
+			http_csp_add( 'img-src', self::getAvatarUrl() );
 		}
 	}
 

@@ -274,6 +274,7 @@ if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
 
 # Set HTTP response headers
 require_api( 'http_api.php' );
+event_signal( 'EVENT_CORE_HEADERS' );
 http_all_headers();
 
 # Push default language to speed calls to lang_get
