@@ -906,7 +906,15 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	} else {
 		echo '<li>' . "\n";
 	}
-	echo '<a href="' . helper_mantis_url( $p_page ) . '">' . "\n";
+
+	# Handle relative / absolute urls
+	if ( stripos( $p_page, 'https:' ) === 0 || stripos( $p_page, 'http:' ) === 0 ) {
+		$t_url = $p_page;
+	} else {
+		$t_url = helper_mantis_url( $p_page );
+	}
+
+	echo '<a href="' . $t_url . '">' . "\n";
 	echo '<i class="menu-icon fa ' . $p_icon . '"></i> ' . "\n";
 	echo '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
 	echo '</a>' . "\n";
