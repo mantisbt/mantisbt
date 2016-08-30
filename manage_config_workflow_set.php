@@ -216,18 +216,25 @@ if( min( config_get_access( 'set_status_threshold' ), config_get_access( 'report
 	$t_set_new = array();
 	foreach( $t_enum_status as $t_status_id => $t_status_label ) {
 		$f_level = gpc_get_int( 'access_change_' . $t_status_id, -1 );
-		# Only process those inputs that exists, since not all access_change_<status> may have been editable.
-		if( $f_level > -1 ) {
-			if( config_get( 'bug_submit_status' ) == $t_status_id ) {
+		if( config_get( 'bug_submit_status' ) == $t_status_id ) {
+			# Check if input exists
+			if( $f_level > -1 ) {
 				if( $f_level != $t_set_parent[$t_status_id] ) {
 					config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 				} else {
 					config_delete( 'report_bug_threshold', ALL_USERS, $t_project );
 				}
-				unset( $t_set_parent[$t_status_id] );
-				unset( $t_set_current[$t_status_id] );
-			} else {
+			}
+			unset( $t_set_parent[$t_status_id] );
+			unset( $t_set_current[$t_status_id] );
+		} else {
+			# Only process those inputs that exist, since not all access_change_<status> may have been editable.
+			if( $f_level > -1 ) {
 				$t_set_new[$t_status_id] = $f_level;
+			} else {
+				if( isset( $t_set_current[$t_status_id] ) ) {
+					$t_set_new[$t_status_id] = $t_set_current[$t_status_id];
+				}
 			}
 		}
 	}

@@ -328,7 +328,6 @@ function access_row() {
 	$t_file_new = config_get_global( 'report_bug_threshold' );
 	$t_global_new = config_get( 'report_bug_threshold', null, ALL_USERS, ALL_PROJECTS );
 	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
-	$t_project_new = access_threshold_min_level( $t_report_bug_threshold );
 
 	$t_file_set = config_get_global( 'set_status_threshold' );
 	$t_global_set = config_get( 'set_status_threshold', null, ALL_USERS, ALL_PROJECTS );
@@ -343,12 +342,9 @@ function access_row() {
 
 		if( $t_status == $t_submit_status ) {
 			# 'NEW' status
-			$t_level_project = $t_project_new;
+			$t_threshold = $t_report_bug_threshold;
 
-			# If report_bug_threshold is an array (instead of an integer value), the input is not editable
-			# because it must be configured in manage_config_work_threshold_page.
-			$t_can_change = ( $g_access >= config_get_access( 'report_bug_threshold' ) )
-					&& !is_array( $t_report_bug_threshold );
+			$t_can_change = $g_access >= config_get_access( 'report_bug_threshold' );
 			$t_color = set_color_override( $t_file_new, $t_global_new, $t_report_bug_threshold );
 			set_overrides( 'report_bug_threshold', $t_can_change, $t_color );
 		} else {
@@ -362,21 +358,25 @@ function access_row() {
 			}
 
 			$t_level_global  = isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : $t_level_file;
-			$t_level_project = isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : $t_level_global;
+			$t_threshold = isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : $t_level_global;
 
 			$t_can_change = ( $g_access >= config_get_access( 'set_status_threshold' ) );
-			$t_color = set_color_override( $t_level_file, $t_level_global, $t_level_project );
+
+			$t_color = set_color_override( $t_level_file, $t_level_global, $t_threshold );
 			set_overrides( 'set_status_threshold', $t_can_change, $t_color );
 		}
 
-		if( $t_can_change ) {
+		# If threshold is an array (instead of an integer value), the input is not editable
+		$t_can_edit = !is_array( $t_threshold );
+		$t_min_level = access_threshold_min_level( $t_threshold );
+		if( $t_can_change && $t_can_edit ) {
 			echo '<td class="center ' . $t_color . '"><select name="access_change_' . $t_status . '">' . "\n";
-			print_enum_string_option_list( 'access_levels', $t_level_project );
+			print_enum_string_option_list( 'access_levels', $t_min_level );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
 		} else {
 			echo '<td class="center ' . $t_color . '">'
-				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_level_project )
+				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_min_level )
 				. '</td>' . "\n";
 		}
 
