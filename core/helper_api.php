@@ -89,13 +89,11 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
  */
 function helper_array_transpose( array $p_array ) {
-	if( !is_array( $p_array ) ) {
-		return $p_array;
-	}
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
-			return $p_array;
+			# This function can only handle bidimensional arrays
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
 		foreach( $t_sub as $t_subkey => $t_value ) {
