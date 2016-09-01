@@ -236,10 +236,6 @@ function http_security_headers() {
 		}
 
 		http_csp_emit_header();
-
-		if( http_is_protocol_https() ) {
-			header( 'Strict-Transport-Security: max-age=7776000' );
-		}
 	}
 }
 
