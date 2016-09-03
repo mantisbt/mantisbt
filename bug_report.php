@@ -188,9 +188,6 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	}
 }
 
-# Allow plugins to pre-process bug data
-$t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
-
 # Ensure that resolved bugs have a handler
 if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
 	$t_bug_data->handler_id = auth_get_current_user_id();
@@ -283,9 +280,6 @@ if( $f_master_bug_id > 0 ) {
 }
 
 helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
-
-# Allow plugins to post-process bug data with the new bug ID
-event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 email_bug_added( $t_bug_id );
 
