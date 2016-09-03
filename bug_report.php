@@ -171,6 +171,7 @@ helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
 
 # Validate the custom fields before adding the bug.
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
+$t_custom_fields_to_set = array();
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
@@ -182,15 +183,112 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if( !custom_field_validate( $t_id, gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null ) ) ) {
+	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], $t_def['default_value'] );
+	if( !custom_field_validate( $t_id, $t_new_custom_field_value ) ) {
 		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+	}
+
+	# Only set custom field value if user has write access
+	if( custom_field_has_write_access_to_project( $t_id, $t_bug_data->project_id ) ) {
+		$t_custom_fields_to_set[] = array( 'id' => $t_id, 'value' => $t_new_custom_field_value );
 	}
 }
 
 # Ensure that resolved bugs have a handler
 if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
 	$t_bug_data->handler_id = auth_get_current_user_id();
+}
+
+# set up post-update callbacks
+# operations are defined as closures that receive a BugData object as parameter
+# at that point, when the function is called, the bug_id will be defined
+
+# Handle custom field submission
+if( !empty( $t_custom_fields_to_set ) ) {
+	$t_callback_set_cf = function( BugData $p_bug, array $p_cf_values_array ) {
+		$t_bug_id = $p_bug->id;
+		foreach( $p_cf_values_array as $t_cf_input ) {
+			$t_id = $t_cf_input['id'];
+			$t_value = $t_cf_input['value'];
+			$t_def = custom_field_get_definition( $t_id );
+			if( !custom_field_set_value( $t_id, $t_bug_id, $t_value, false ) ) {
+				error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
+				trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+			}
+		}
+	};
+	$t_bug_data->add_update_callback( $t_callback_set_cf, array( $t_bug_data, $t_custom_fields_to_set ) );
+}
+
+# Handle the file upload
+if( $f_files !== null ) {
+	if( !file_allow_bug_upload( $t_bug_id ) ) {
+		access_denied();
+	}
+	$t_callback_file_upload = function( BugData $p_bug, $p_files ) {
+		file_process_posted_files_for_bug( $p_bug->id, $p_files );
+	};
+	$t_bug_data->add_update_callback( $t_callback_file_upload, array( $t_bug_data, $f_files ) );
+}
+
+# Handle bug clone and relations
+if( $f_master_bug_id > 0 ) {
+	# For a child generation add some lines in the history
+	$t_callback_child_generation = function( BugData $p_bug, $p_master_bug_id ) {
+		# update master bug last updated
+		bug_update_date( $p_master_bug_id );
+		# Add log line to record the cloning action
+		history_log_event_special( $p_bug->id, BUG_CREATED_FROM, '', $p_master_bug_id );
+		history_log_event_special( $p_master_bug_id, BUG_CLONED_TO, '', $p_bug->id );
+	};
+	$t_bug_data->add_update_callback( $t_callback_child_generation, array( $t_bug_data, $f_master_bug_id ) );
+
+	# create relationships
+	if( $f_rel_type > BUG_REL_ANY ) {
+		$t_callback_relations = function( BugData $p_bug, $p_master_bug_id, $p_rel_type ) {
+			# Add the relationship
+			relationship_add( $p_bug->id, $p_master_bug_id, $p_rel_type );
+			# Add log line to the history (both issues)
+			history_log_event_special( $p_master_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $p_rel_type ), $p_bug->id );
+			history_log_event_special( $p_bug->id, BUG_ADD_RELATIONSHIP, $p_rel_type, $p_master_bug_id );
+			# Send the email notification
+			email_relationship_added( $p_master_bug_id, $p_bug->id, relationship_get_complementary_type( $p_rel_type ) );
+		};
+		$t_bug_data->add_update_callback( $t_callback_relations, array( $t_bug_data, $f_master_bug_id, $f_rel_type ) );
+	}
+
+	# copy notes from parent
+	if( $f_copy_notes_from_parent ) {
+		$t_callback_copy_notes = function( BugData $p_bug, $p_master_bug_id ) {
+			$t_parent_bugnotes = bugnote_get_all_bugnotes( $p_master_bug_id );
+			foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+				$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
+				bugnote_add(
+					$p_bug->id,
+					$t_parent_bugnote->note,
+					$t_parent_bugnote->time_tracking,
+					$t_private,
+					$t_parent_bugnote->note_type,
+					$t_parent_bugnote->note_attr,
+					$t_parent_bugnote->reporter_id,
+					false,
+					0,
+					0,
+					false );
+				# Note: we won't trigger mentions in the clone scenario.
+			}
+		};
+		$t_bug_data->add_update_callback( $t_callback_copy_notes, array( $t_bug_data, $f_master_bug_id ) );
+	}
+
+	# copy attachments from parent
+	if( $f_copy_attachments_from_parent ) {
+		$t_callback_copy_attachments = function( BugData $p_bug, $p_master_bug_id ) {
+			file_copy_attachments( $p_master_bug_id, $p_bug->id );
+		};
+		$t_bug_data->add_update_callback( $t_callback_copy_attachments, array( $t_bug_data, $f_master_bug_id ) );
+	}
 }
 
 # Create the bug
@@ -200,69 +298,9 @@ $t_bug_data->process_mentions();
 # Mark the added issue as visited so that it appears on the last visited list.
 last_visited_issue( $t_bug_id );
 
-# Handle the file upload
-if( $f_files !== null ) {
-	if( !file_allow_bug_upload( $t_bug_id ) ) {
-		access_denied();
-	}
+helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 
-	file_process_posted_files_for_bug( $t_bug_id, $f_files );
-}
-
-# Handle custom field submission
-foreach( $t_related_custom_field_ids as $t_id ) {
-	# Do not set custom field value if user has no write access
-	if( !custom_field_has_write_access( $t_id, $t_bug_id ) ) {
-		continue;
-	}
-
-	$t_def = custom_field_get_definition( $t_id );
-	if( !custom_field_set_value( $t_id, $t_bug_id, gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], $t_def['default_value'] ), false ) ) {
-		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
-	}
-}
-
-if( $f_master_bug_id > 0 ) {
-	# it's a child generation... let's create the relationship and add some lines in the history
-
-	# update master bug last updated
-	bug_update_date( $f_master_bug_id );
-
-	# Add log line to record the cloning action
-	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
-	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
-
-	# copy notes from parent
-	if( $f_copy_notes_from_parent ) {
-
-		$t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
-
-		foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
-			$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
-
-			bugnote_add(
-				$t_bug_id,
-				$t_parent_bugnote->note,
-				$t_parent_bugnote->time_tracking,
-				$t_private,
-				$t_parent_bugnote->note_type,
-				$t_parent_bugnote->note_attr,
-				$t_parent_bugnote->reporter_id,
-				false,
-				0,
-				0,
-				false );
-
-			# Note: we won't trigger mentions in the clone scenario.
-		}
-	}
-
-	# copy attachments from parent
-	if( $f_copy_attachments_from_parent ) {
-		file_copy_attachments( $f_master_bug_id, $t_bug_id );
-	}
-}
+email_bug_added( $t_bug_id );
 
 # log status and resolution changes if they differ from the default
 if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
