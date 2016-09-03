@@ -89,9 +89,8 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
  */
 function helper_array_transpose( array $p_array ) {
-	if( !isset( $p_array[0] ) || !is_array( $p_array[0] ) ) {
-		// This function can only handle bidimentional arrays
-		trigger_error( ERROR_GENERIC, ERROR );
+	if( !is_array( $p_array ) ) {
+		return $p_array;
 	}
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
