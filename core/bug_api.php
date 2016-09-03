@@ -480,8 +480,6 @@ class BugData {
 	 * @uses lang_api.php
 	 */
 	function create() {
-		self::validate( true );
-
 		antispam_check();
 
 		# check due_date format
@@ -496,25 +494,8 @@ class BugData {
 			$this->last_updated = db_now();
 		}
 
-		# Insert text information
-		db_param_push();
-		$t_query = 'INSERT INTO {bug_text}
-					    ( description, steps_to_reproduce, additional_information )
-					  VALUES
-					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
-
-		# Get the id of the text information we just inserted
-		# NOTE: this is guaranteed to be the correct one.
-		# The value LAST_INSERT_ID is stored on a per connection basis.
-
-		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
-
 		# check to see if we want to assign this right off
-		$t_starting_status  = config_get( 'bug_submit_status' );
-		$t_original_status = $this->status;
-
-		# if not assigned, check if it should auto-assigned.
+		# if not assigned, check if it should auto-assigned by category.
 		if( 0 == $this->handler_id ) {
 			# if a default user is associated with the category and we know at this point
 			# that that the bug was not assigned to somebody, then assign it automatically.
@@ -528,8 +509,32 @@ class BugData {
 			}
 		}
 
-		# Check if bug was pre-assigned or auto-assigned.
-		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
+		# Get modified status for auto-assign option if applicable
+		$t_original_status = $this->status;
+		$this->status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
+
+		# @TODO This event must be defined as EVENT_TYPE_EXECUTE to avoid having a different object returned
+		$t_object = event_signal( 'EVENT_REPORT_BUG_DATA', $this );
+		# Check if returned object is a different object, trigger an error if it is
+		if( $t_object !== $this ) {
+			trigger_error( ERROR_TYPE_MISMATCH, ERROR );
+		}
+
+		self::validate( true );
+
+		# Insert text information
+		db_param_push();
+		$t_query = 'INSERT INTO {bug_text}
+					    ( description, steps_to_reproduce, additional_information )
+					  VALUES
+					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
+
+		# Get the id of the text information we just inserted
+		# NOTE: this is guaranteed to be the correct one.
+		# The value LAST_INSERT_ID is stored on a per connection basis.
+
+		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
 
 		# Insert the rest of the data
 		db_param_push();
@@ -550,7 +555,13 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id,
+			$this->duplicate_id, $this->priority, $this->severity, $this->reproducibility,
+			$this->status, $this->resolution, $this->projection, $this->category_id,
+			$this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os,
+			$this->os_build, $this->platform, $this->version, $this->build, $this->profile_id,
+			$this->summary, $this->view_state, $this->sponsorship_total, $this->sticky,
+			$this->fixed_in_version, $this->target_version, $this->due_date ) );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -558,8 +569,17 @@ class BugData {
 		history_log_event_special( $this->id, NEW_BUG );
 
 		# log changes, if any (compare happens in history_log_event_direct)
-		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
+		history_log_event_direct( $this->id, 'status', $t_original_status, $this->status );
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
+
+		# Execute all registered update callbacks
+		while( !empty( $this->update_callbacks ) ) {
+			$t_callback = array_shift( $this->update_callbacks );
+			call_user_func_array( $t_callback['func'], $t_callback['params'] );
+		}
+
+		# Allow plugins to post-process bug data with the new bug ID
+		event_signal( 'EVENT_REPORT_BUG', array( $this, $this->id ) );
 
 		return $this->id;
 	}
