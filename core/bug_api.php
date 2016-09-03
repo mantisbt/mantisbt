@@ -627,7 +627,6 @@ class BugData {
      * @access public
 	 */
 	function update( $p_update_extended = false, $p_bypass_mail = false ) {
-		self::validate( $p_update_extended );
 
 		if( is_blank( $this->due_date ) ) {
 			$this->due_date = date_get_null();
@@ -639,6 +638,8 @@ class BugData {
 		# @TODO This event is better defined as EVENT_TYPE_EXECUTE to avoid that situation
 		$t_updated_data = event_signal( 'EVENT_UPDATE_BUG_DATA', $this, $t_old_data );
 		$c_bug_id = $t_updated_data->id;
+
+		$t_updated_data->validate( $p_update_extended );
 
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
