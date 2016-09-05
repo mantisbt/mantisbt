@@ -139,7 +139,7 @@ if( $f_master_bug_id > 0 ) {
 
 	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
 		&& $t_project_id != $t_current_project
-		&& project_get_field( $t_project_id, 'enabled' ) ) {
+		&& project_enabled( $t_project_id ) ) {
 		helper_set_current_project( $t_project_id );
 		# Reloading the page is required so that the project browser
 		# reflects the new current project
