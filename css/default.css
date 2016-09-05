@@ -691,7 +691,8 @@ div.form-container .submit-button {
 }
 /* 30% label width - these are the defaults */
 .label-style {
-	width: 31%;
+	width: 30%;
+	padding: 0 .5em;
 }
 
 div.form-container label,
