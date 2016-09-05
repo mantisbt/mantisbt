@@ -201,6 +201,15 @@ function project_clear_cache( $p_project_id = null ) {
 }
 
 /**
+ * Check if project is enabled.
+ * @param integer $p_project_id The project id.
+ * @return boolean
+ */
+function project_enabled( $p_project_id ) {
+	return project_get_field( $p_project_id, 'enabled' ) ? true : false;
+}
+
+/**
  * check to see if project exists by id
  * return true if it does, false otherwise
  * @param integer $p_project_id A project identifier.

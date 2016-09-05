@@ -52,8 +52,8 @@ if( $f_type == 'id' ) {
 }
 
 header( 'Content-Type: application/opensearchdescription+xml' );
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
 ?>
-<?xml version="1.0" encoding="UTF-8" ?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
 	<ShortName><?php echo $t_shortname; ?></ShortName>
