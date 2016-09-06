@@ -70,7 +70,21 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' );
+			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
+		}
+
+		# Enable inline scripts for MantisGraph plugin pages unless the need for inline
+		# scripts is removed.
+		$t_page = gpc_get_string( 'page', '' );
+		if ( !is_blank( $t_page ) ) {
+			$t_pos = stripos( $t_page, '/' );
+
+			if ( $t_pos !== false ) {
+				$t_page = substr( $t_page, $t_pos + 1 );
+				if ( $_SERVER['REQUEST_URI'] == plugin_page( $t_page ) ) {
+					http_csp_add( 'script-src', "'unsafe-inline'" );
+				}
+			}
 		}
 	}
 
