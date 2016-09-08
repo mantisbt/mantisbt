@@ -203,9 +203,6 @@ $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_show_status = in_array( 'status', $t_fields );
 $t_show_tags =
 	in_array( 'tags', $t_fields ) &&
-	access_has_global_level( config_get( 'tag_view_threshold', /* default */ null, /* user */ null, $t_project_id ) );
-$t_can_attach_tag =
-	$t_show_tags &&
 	access_has_project_level(
 		config_get( 'tag_attach_threshold', /* default */ null, /* user */ null, $t_project_id ),
 		$t_project_id );
