@@ -369,24 +369,46 @@ function html_top_banner() {
 }
 
 /**
- * A function that outputs that an operation was successful and provides a redirect link.
- * @param string $p_redirect_url The url to redirect to.
+ * Outputs an operation successful message with multiple redirection buttons.
+ * @param array  $p_buttons      Array of (URL, label) pairs used to generate
+ *                               the buttons; if label is null or unspecified,
+ *                               the default 'proceed' text will be displayed.
  * @param string $p_message      Message to display to the user.
  * @return void
  */
-function html_operation_successful( $p_redirect_url, $p_message = '' ) {
+function html_operation_successful_buttons( array $p_buttons, $p_message = '' ) {
 	echo '<div class="container-fluid">';
 	echo '<div class="col-md-12 col-xs-12">';
 	echo '<div class="space-0"></div>';
 	echo '<div class="alert alert-success center">';
 
+	# Print message
 	if( !is_blank( $p_message ) ) {
 		echo $p_message . '<br />';
 	}
-
 	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
-	print_button( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
+
+	# Print buttons
+	foreach( $p_buttons as $t_button ) {
+		$t_url = string_sanitize_url( $t_button[0] );
+		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
+
+		print_button( $t_url, $t_label );
+		# @TODO spacing should be done with CSS margin
+		echo '&nbsp;&nbsp;';
+	}
+
 	echo '</div></div></div>', PHP_EOL;
+}
+
+/**
+ * Outputs an operation successful message with a single redirect link.
+ * @param string $p_redirect_url The url to redirect to.
+ * @param string $p_message      Message to display to the user.
+ * @return void
+ */
+function html_operation_successful( $p_redirect_url, $p_message = '' ) {
+	html_operation_successful_buttons( array( array( $p_redirect_url ) ), $p_message );
 }
 
 /**
