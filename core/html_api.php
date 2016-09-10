@@ -373,7 +373,8 @@ function html_top_banner() {
  * @param array  $p_buttons      Array of (URL, label) pairs used to generate
  *                               the buttons; if label is null or unspecified,
  *                               the default 'proceed' text will be displayed.
- * @param string $p_message      Message to display to the user.
+ * @param string $p_message      Message to display to the user. If none is
+ *                               provided, a default message will be printed
  * @param string $p_type         One of the constants CONFIRMATION_TYPE_SUCCESS,
  *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  * @return void
@@ -382,16 +383,16 @@ function html_operation_successful_buttons( array $p_buttons, $p_message = '', $
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
-			$t_message = lang_get( 'operation_failed' );
+			$t_message = 'operation_failed';
 			break;
 		case CONFIRMATION_TYPE_WARNING:
-			$t_message = lang_get( 'operation_warnings' );
+			$t_message = 'operation_warnings';
 			$t_alert_css = 'alert-warning';
 			break;
 		case CONFIRMATION_TYPE_SUCCESS:
 		default:
 			$t_alert_css = 'alert-success';
-			$t_message = lang_get( 'operation_successful' );
+			$t_message = 'operation_successful';
 			break;
 	}
 
@@ -401,8 +402,10 @@ function html_operation_successful_buttons( array $p_buttons, $p_message = '', $
 	echo '<div class="alert ' . $t_alert_css . ' center">';
 
 	# Print message
-	if( !is_blank( $p_message ) ) {
-		echo $p_message . '<br />';
+	if( is_blank( $p_message ) ) {
+		$t_message = lang_get( $t_message );
+	} else {
+		$t_message = $p_message;
 	}
 	echo '<p class="bold bigger-110">' . $t_message  . '</p><br />';
 
