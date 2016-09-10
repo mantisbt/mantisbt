@@ -68,15 +68,20 @@ layout_page_header();
 layout_page_begin( 'main_page.php' );
 
 echo '<div class="space-20"></div>';
+
+echo '<div class="container-fluid">';
+echo '<div class="col-md-12 col-xs-12">';
 echo '<div class="alert alert-success">';
 echo lang_get( 'operation_successful' );
-echo '<br /></div>';
-
+echo '<br /><br />';
 print_button( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) );
 echo '&nbsp;&nbsp;&nbsp;&nbsp;';
 print_button( 'news_menu_page.php', lang_get( 'proceed' ) );
+echo '</div>';
+echo '</div>';
+echo '</div>';
 
-echo '<br /><br />';
+echo '<br />';
 
 print_news_entry( $f_headline, $f_body, $t_row['poster_id'], $f_view_state, $f_announcement, $t_row['date_posted'] );
 
