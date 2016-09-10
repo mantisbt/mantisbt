@@ -374,19 +374,36 @@ function html_top_banner() {
  *                               the buttons; if label is null or unspecified,
  *                               the default 'proceed' text will be displayed.
  * @param string $p_message      Message to display to the user.
+ * @param string $p_type         One of 'success', 'warning', 'failure'
  * @return void
  */
-function html_operation_successful_buttons( array $p_buttons, $p_message = '' ) {
+function html_operation_successful_buttons( array $p_buttons, $p_message = '', $p_type = 'success' ) {
+	switch( $p_type ) {
+		case 'failure':
+			$t_alert_css = 'alert-danger';
+			$t_message = lang_get( 'operation_failed' );
+			break;
+		case 'warning':
+			$t_message = lang_get( 'operation_warnings' );
+			$t_alert_css = 'alert-warning';
+			break;
+		case 'success':
+		default:
+			$t_alert_css = 'alert-success';
+			$t_message = lang_get( 'operation_successful' );
+			break;
+	}
+
 	echo '<div class="container-fluid">';
 	echo '<div class="col-md-12 col-xs-12">';
 	echo '<div class="space-0"></div>';
-	echo '<div class="alert alert-success center">';
+	echo '<div class="alert ' . $t_alert_css . ' center">';
 
 	# Print message
 	if( !is_blank( $p_message ) ) {
 		echo $p_message . '<br />';
 	}
-	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
+	echo '<p class="bold bigger-110">' . $t_message  . '</p><br />';
 
 	# Print buttons
 	echo '<div class="btn-group">';
@@ -409,6 +426,34 @@ function html_operation_successful_buttons( array $p_buttons, $p_message = '' ) 
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 	html_operation_successful_buttons( array( array( $p_redirect_url ) ), $p_message );
+}
+
+/**
+ * Outputs a warning message with a single redirect link.
+ * @param string $p_redirect_url The url to redirect to.
+ * @param string $p_message      Message to display to the user.
+ * @return void
+ */
+function html_operation_warning( $p_redirect_url, $p_message = '' ) {
+	html_operation_successful_buttons(
+		array( array( $p_redirect_url ) ),
+		$p_message,
+		'warning'
+	);
+}
+
+/**
+ * Outputs an error message with a single redirect link.
+ * @param string $p_redirect_url The url to redirect to.
+ * @param string $p_message      Message to display to the user.
+ * @return void
+ */
+function html_operation_failure( $p_redirect_url, $p_message = '' ) {
+	html_operation_successful_buttons(
+		array( array( $p_redirect_url ) ),
+		$p_message,
+		'failure'
+	);
 }
 
 /**

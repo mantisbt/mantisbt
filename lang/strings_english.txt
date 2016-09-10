@@ -103,6 +103,8 @@ $s_actiongroup_error_issue_is_readonly = 'Issue is readonly.';
 $s_all_projects = 'All Projects';
 $s_move_bugs = 'Move Issues';
 $s_operation_successful = 'Operation successful.';
+$s_operation_warnings = 'Operation completed with warnings.';
+$s_operation_failed = 'Operation did not complete successfully.';
 $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
@@ -1255,7 +1257,7 @@ $s_select_all = 'Select All';
 # stored query strings
 $s_use_query = 'Use Filter';
 $s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
+$s_query_deleted = 'Filter "%s" Deleted';
 $s_save_query = 'Save Current Filter';
 $s_reset_query = 'Reset Filter';
 $s_query_name = 'Filter Name';
