@@ -374,20 +374,21 @@ function html_top_banner() {
  *                               the buttons; if label is null or unspecified,
  *                               the default 'proceed' text will be displayed.
  * @param string $p_message      Message to display to the user.
- * @param string $p_type         One of 'success', 'warning', 'failure'
+ * @param string $p_type         One of the constants CONFIRMATION_TYPE_SUCCESS,
+ *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  * @return void
  */
-function html_operation_successful_buttons( array $p_buttons, $p_message = '', $p_type = 'success' ) {
+function html_operation_successful_buttons( array $p_buttons, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
 	switch( $p_type ) {
-		case 'failure':
+		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
 			$t_message = lang_get( 'operation_failed' );
 			break;
-		case 'warning':
+		case CONFIRMATION_TYPE_WARNING:
 			$t_message = lang_get( 'operation_warnings' );
 			$t_alert_css = 'alert-warning';
 			break;
-		case 'success':
+		case CONFIRMATION_TYPE_SUCCESS:
 		default:
 			$t_alert_css = 'alert-success';
 			$t_message = lang_get( 'operation_successful' );
@@ -438,7 +439,7 @@ function html_operation_warning( $p_redirect_url, $p_message = '' ) {
 	html_operation_successful_buttons(
 		array( array( $p_redirect_url ) ),
 		$p_message,
-		'warning'
+		CONFIRMATION_TYPE_WARNING
 	);
 }
 
@@ -452,7 +453,7 @@ function html_operation_failure( $p_redirect_url, $p_message = '' ) {
 	html_operation_successful_buttons(
 		array( array( $p_redirect_url ) ),
 		$p_message,
-		'failure'
+		CONFIRMATION_TYPE_FAILURE
 	);
 }
 
