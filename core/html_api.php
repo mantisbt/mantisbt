@@ -375,6 +375,7 @@ function html_top_banner() {
  * @return void
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
+	echo '<div class="container-fluid">';
 	echo '<div class="col-md-12 col-xs-12">';
 	echo '<div class="space-0"></div>';
 	echo '<div class="alert alert-success center">';
@@ -385,7 +386,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 
 	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
 	print_button( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
-	echo '</div></div>';
+	echo '</div></div></div>', PHP_EOL;
 }
 
 /**
