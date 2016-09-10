@@ -389,14 +389,14 @@ function html_operation_successful_buttons( array $p_buttons, $p_message = '' ) 
 	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
 
 	# Print buttons
+	echo '<div class="btn-group">';
 	foreach( $p_buttons as $t_button ) {
 		$t_url = string_sanitize_url( $t_button[0] );
 		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
 
 		print_button( $t_url, $t_label );
-		# @TODO spacing should be done with CSS margin
-		echo '&nbsp;&nbsp;';
 	}
+	echo '</div>';
 
 	echo '</div></div></div>', PHP_EOL;
 }
