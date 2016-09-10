@@ -1068,8 +1068,10 @@ function layout_breadcrumbs() {
 	echo '</span>';
 	echo '</form>';
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '</div>';
+	echo PHP_EOL;
 }
 
 /**
