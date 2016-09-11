@@ -353,7 +353,7 @@ if( $t_show_handler || $t_show_due_date ) {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker" autocomplete="off" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
 			echo '<script type="text/javascript">$( ".datetimepicker" ).datetimepicker({});</script>';
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {

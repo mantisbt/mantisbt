@@ -286,7 +286,7 @@ if( $t_multiple_projects ) {
 				}
 			}
 
-			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker" autocomplete="off" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
 			echo '<script type="text/javascript">$( ".datetimepicker" ).datetimepicker({});</script>';
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm">';

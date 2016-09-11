@@ -243,7 +243,7 @@ if( $f_new_status >= $t_resolved
 		</th>
 		<td>
 			<input type="text" id="due_date" name="due_date"
-				class="datetimepicker" size="20" maxlength="16"
+				class="datetimepicker" autocomplete="off" size="20" maxlength="16"
 				<?php helper_get_tab_index() ?>
 				value="<?php echo $t_date_to_display ?>" />
 				<script type="text/javascript">$( ".datetimepicker" ).datetimepicker({});</script>
