@@ -349,7 +349,7 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker" autocomplete="off "size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker" autocomplete="off" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 			<script type="text/javascript">$( ".datetimepicker" ).datetimepicker({});</script>
 		</td>
 	</tr>
