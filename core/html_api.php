@@ -261,11 +261,9 @@ function html_page_top2a() {
 
 /**
  * Print the part of the page that comes below the page content
- * $p_file should always be the __FILE__ variable. This is passed to show source
- * @param string $p_file Should always be the __FILE__ variable. This is passed to show source.
  * @return void
  */
-function html_page_bottom( $p_file = null ) {
+function html_page_bottom() {
 	html_page_bottom1();
 }
 
