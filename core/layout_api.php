@@ -160,10 +160,9 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 
 /**
  * Print elements at the end of each page
- * @param string $p_file Should always be the __FILE__ variable.
  * @return void
  */
-function layout_page_end( $p_file = null ) {
+function layout_page_end() {
 	if( !db_is_connected() ) {
 		return;
 	}
