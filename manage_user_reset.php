@@ -82,8 +82,7 @@ layout_page_begin( 'manage_overview_page.php' );
 if( $t_reset ) {
 	if( false == $t_result ) {
 		# PROTECTED
-		# @TODO this should be a failure message !
-		html_operation_successful( $t_redirect_url, lang_get( 'account_reset_protected_msg' ) );
+		html_operation_failure( $t_redirect_url, lang_get( 'account_reset_protected_msg' ) );
 	} else {
 		# SUCCESSFUL RESET
 		if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {

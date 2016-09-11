@@ -69,7 +69,7 @@ layout_page_begin( 'main_page.php' );
 
 echo '<div class="space-20"></div>';
 
-html_operation_successful_buttons( array(
+html_operation_confirmation( array(
 	array( 'news_menu_page.php' ),
 	array( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) ),
 ) );

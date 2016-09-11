@@ -228,8 +228,7 @@ layout_page_begin( 'manage_overview_page.php' );
 
 if( $f_protected && $t_old_protected ) {
 	# PROTECTED
-	# @TODO this should actually be a warning message
-	html_operation_successful( $t_redirect_url, lang_get( 'manage_user_protected_msg' ) );
+	html_operation_warning( $t_redirect_url, lang_get( 'manage_user_protected_msg' ) );
 } else if( $t_result ) {
 	# SUCCESS
 	html_operation_successful( $t_redirect_url );

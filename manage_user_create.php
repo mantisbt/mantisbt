@@ -131,7 +131,7 @@ if( $t_cookie === false ) {
 layout_page_header( null, $t_redirect_url );
 
 layout_page_begin( 'manage_overview_page.php' );
-
+$t_access_level = get_enum_element( 'access_levels', $f_access_level );
 $t_message = lang_get( 'created_user_part1' )
 	. ' <span class="bold">' . $f_username . '</span> '
 	. lang_get( 'created_user_part2' )
