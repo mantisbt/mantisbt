@@ -1051,7 +1051,7 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
  * should be used manually when required.
  * This is the case when "filter_get_bug_count" is used followed by "filter_get_bug_rows_result"
  * @param array $p_query_clauses Array of query clauses.
- * @param type $p_pop_param      Whether to pop DB params from the stack
+ * @param boolean $p_pop_param      Whether to pop DB params from the stack
  * @return integer
  */
 function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
@@ -1186,7 +1186,7 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  *                                 -1 or null indicates default query (no limits)
  * @param integer $p_offset        Offset query results for paging (number of rows)
  *                                 -1 or null indicates default query (no offset)
- * @param type $p_pop_param        Whether to pop DB params from the stack
+ * @param boolean $p_pop_param        Whether to pop DB params from the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
 function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null, $p_pop_param = true ) {
