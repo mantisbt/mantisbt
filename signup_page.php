@@ -151,4 +151,4 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 </div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+html_page_bottom1a();

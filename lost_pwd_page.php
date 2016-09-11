@@ -101,4 +101,4 @@ html_page_top2a();
 </div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+html_page_bottom1a();

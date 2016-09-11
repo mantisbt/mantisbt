@@ -128,4 +128,4 @@ html_page_top();
 </div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+html_page_bottom1a();

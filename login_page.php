@@ -292,4 +292,4 @@ if( count( $t_warnings ) > 0 ) {
 	echo '</div>';
 }
 
-html_page_bottom1a( __FILE__ );
+html_page_bottom1a();

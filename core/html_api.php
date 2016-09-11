@@ -287,21 +287,16 @@ function html_page_bottom1( $p_file = null ) {
 		print_menu();
 	}
 
-	html_page_bottom1a( $p_file );
+	html_page_bottom1a();
 }
 
 /**
  * Print the part of the page that comes below the page content but leave off
  * the menu.  This is used during the login process and other times when the
  * user may not be authenticated.
- * @param string $p_file Should always be the __FILE__ variable.
  * @return void
  */
-function html_page_bottom1a( $p_file = null ) {
-	if( null === $p_file ) {
-		$p_file = basename( $_SERVER['SCRIPT_NAME'] );
-	}
-
+function html_page_bottom1a() {
 	error_print_delayed();
 
 	html_bottom_banner();

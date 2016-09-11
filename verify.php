@@ -146,4 +146,4 @@ if( $t_can_change_password ) {
 <?php
 }
 
-html_page_bottom1a( __FILE__ );
+html_page_bottom1a();
