@@ -1377,7 +1377,7 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 		$t_email = user_get_email( $t_mention_user_id );
 
 		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_mention_user_id ) ) {
-			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '> ';
 		} else {
 			$t_sender_email = '';
 		}
