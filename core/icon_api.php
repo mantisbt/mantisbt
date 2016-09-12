@@ -41,7 +41,6 @@ require_api( 'utility_api.php' );
  * @access public
  */
 function icon_get_status_icon( $p_icon ) {
-	$t_icon_path = config_get( 'icon_path' );
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 	$t_priotext = get_enum_element( 'priority', $p_icon );
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {

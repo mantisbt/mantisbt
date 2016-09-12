@@ -656,7 +656,6 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
  * @access public
  */
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
 	$t_view_state_icon = ' <i class="fa fa-lock" title="' . $t_view_state_text . '"></i>';
@@ -775,7 +774,6 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
  * @access public
  */
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
 	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" title=\"$t_attachment_count_text\" ></i>";
 	echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
@@ -990,7 +988,6 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
  * @access public
  */
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
 	$t_overdue_icon = ' <i class="fa fa-times-circle-o" title="' . $t_overdue_text . '"></i>';
@@ -1085,7 +1082,6 @@ function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_targe
  * @access public
  */
 function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-edit">';
 
@@ -1197,7 +1193,6 @@ function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_attachment_count( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	# Check for attachments
 	$t_attachment_count = 0;
@@ -1524,7 +1519,6 @@ function print_column_target_version( BugData $p_bug, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-view-state">';
 
@@ -1590,7 +1584,6 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
  * @access public
  */
 function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-overdue">';
 

@@ -140,7 +140,6 @@ for( $i=0; $i < $t_row_count; $i++ ) {
 }
 $f_export = implode( ',', $f_bug_arr );
 
-$t_icon_path = config_get( 'icon_path' );
 ?>
 
 <tr>
