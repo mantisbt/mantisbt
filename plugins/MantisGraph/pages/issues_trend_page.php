@@ -37,11 +37,6 @@ require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'plugin_api.php' );
 
-require_js( 'jscalendar/calendar.js' );
-require_js( 'jscalendar/lang/calendar-en.js' );
-require_js( 'jscalendar/calendar-setup.js' );
-require_css( 'calendar-blue.css' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );

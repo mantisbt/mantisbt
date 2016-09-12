@@ -415,6 +415,24 @@ function html_end() {
 }
 
 /**
+ * Print required js for datetimepicker
+ * @return void
+ * @access public
+ */
+function print_datetimepicker_js() {
+	require_js( 'jquery-ui-timepicker.min.js' );
+	$t_current_lang = lang_get_current();
+	$t_fallback_lang = config_get( 'fallback_language' );
+	if( $t_fallback_lang !== $t_current_lang &&
+		file_exists( $g_absolute_path . 'js' . DIRECTORY_SEPARATOR . 'jquery-ui-timepicker-' . $t_current_lang . '.js' ) ) {
+		require_js( 'jquery-ui-timepicker-' . $t_current_lang . '.js' );
+	} else {
+		require_js( 'jquery-ui-timepicker-' . $t_fallback_lang . '.js' );
+	}
+	require_css( 'jquery-ui-timepicker.min.css' );
+}
+
+/**
  * Print the menu bar with a list of projects to which the user has access
  * @return void
  */
