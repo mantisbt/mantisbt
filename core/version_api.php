@@ -472,13 +472,9 @@ function version_cache_array_rows( array $p_project_id_array ) {
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
 
-	if( $p_inherit === null ) {
-		$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
-	} else {
-		$t_inherit = $p_inherit;
-	}
-
-	if( $t_inherit ) {
+	if(    $p_inherit
+		|| $p_inherit === null && ON == config_get( 'subprojects_inherit_versions' )
+	) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
 	} else {
 		$t_project_ids[] = $p_project_id;
