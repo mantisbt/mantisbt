@@ -462,9 +462,11 @@ function version_cache_array_rows( array $p_project_id_array ) {
 /**
  * Return all versions for the specified project
  * @param integer $p_project_id A valid project id.
- * @param integer $p_released   Whether to include released versions.
+ * @param boolean $p_released   Whether to include released versions.
  * @param boolean $p_obsolete   Whether to include obsolete versions.
- * @param boolean $p_inherit    Whether to inherit versions from other projects.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return array Array of version rows (in array format)
  */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
@@ -532,7 +534,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 /**
  * Return all versions for the specified project, including sub-projects
  * @param integer $p_project_id A valid project identifier.
- * @param integer $p_released   Released status.
+ * @param boolean $p_released   Released status.
  * @param boolean $p_obsolete   Obsolete status.
  * @return array
  */
@@ -573,7 +575,9 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
  * returns false if not found, otherwise returns the id.
  * @param string  $p_version    A version string to look up.
  * @param integer $p_project_id A valid project identifier.
- * @param mixed   $p_inherit    True to look for version in parent projects, false not to, null to use default configuration.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return integer
  */
 function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
@@ -686,7 +690,9 @@ function version_should_show_product_version( $p_project_id ) {
  * Gets the where clause to use for retrieving versions.
  *
  * @param integer $p_project_id The project id to use.
- * @param boolean $p_inherit    Include versions from parent projects? true: yes, false: no, null: use default configuration.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return string The where clause not including WHERE.
  */
 function version_get_project_where_clause( $p_project_id, $p_inherit ) {
