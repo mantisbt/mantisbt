@@ -84,7 +84,8 @@ extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
-layout_login_page_begin();
+layout_page_header();
+layout_page_begin();
 
 ?>
 
@@ -106,44 +107,76 @@ layout_login_page_begin();
 if( $t_can_change_password ) {
 ?>
 
-<div id="verify-div" class="form-container">
-	<form id="account-update-form" method="post" action="account_update.php">
-		<fieldset class="required">
-			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
-			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
-				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
-				<span class="label-style"></span>
+
+	<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
+	<div class="space-10">
+	</div>
+
+	<div id="verify-div" class="form-container">
+		<form id="account-update-form" method="post" action="account_update.php">
+
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-user"></i>
+					<?php echo lang_get( 'edit_account_title' ) ?>
+				</h4>
 			</div>
-			<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
-			<?php
-			echo form_security_field( 'account_update' );
-			# When verifying account, set a token and don't display current password
-			token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
-			?>
-			<div class="field-container">
-				<label for="realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
-				<span class="input">
-					<input id="realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
-				</span>
-				<span class="label-style"></span>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+						<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
+						<?php
+						echo form_security_field( 'account_update' );
+						# When verifying account, set a token and don't display current password
+						token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+						?>
+						<table class="table table-bordered table-condensed table-striped">
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'username' ) ?>
+								</td>
+								<td>
+									<?php echo string_display_line( $u_username ) ?>
+								</td>
+							</tr>
+							<tr>
+								<td class="category"><?php lang_get( 'realname' ) ?></td>
+								<td>
+									<input id="realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+								</td>
+							</tr>
+							<tr>
+								<td class="category">
+									<span class="required"> * </span><?php echo lang_get( 'new_password' ) ?>
+								</td>
+								<td>
+									<input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+								</td>
+							</tr>
+							<tr>
+								<td class="category">
+									<span class="required"> * </span><?php echo lang_get( 'confirm_password' ) ?>
+								</td>
+								<td>
+									<input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="widget-toolbox padding-8 clearfix">
+					<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
+					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+				</div>
 			</div>
-			<div class="field-container">
-				<label for="password" class="required"><span><?php echo lang_get( 'new_password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="password-confirm" class="required"><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
-				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
-		</fieldset>
-	</form>
+		</div>
+		</form>
+	</div>
 </div>
 
 <?php
 }
 
-layout_login_page_end();
+layout_page_end();
