@@ -82,6 +82,18 @@ class VersionData {
 	protected $date_order = 1;
 
 	/**
+	 * VersionData constructor.
+	 * Initialize the object with default values, or with data from a
+	 * project_version table row.
+	 * @param array|null $p_row
+	 */
+	public function __construct( array $p_row = null ) {
+		if( $p_row !== null ) {
+			$this->set_from_db_row( $p_row );
+		}
+	}
+
+	/**
 	 * Overloaded function
 	 * @param string         $p_name  A valid property name.
 	 * @param integer|string $p_value The property value to set.
@@ -655,10 +667,7 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
 function version_get( $p_version_id ) {
 	$t_row = version_cache_row( $p_version_id );
 
-	$t_version_data = new VersionData;
-	$t_version_data->set_from_db_row( $t_row );
-
-	return $t_version_data;
+	return new VersionData( $t_row );
 }
 
 /**
