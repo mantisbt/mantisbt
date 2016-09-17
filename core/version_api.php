@@ -72,14 +72,14 @@ class VersionData {
 	protected $released = VERSION_FUTURE;
 
 	/**
-	 * Date Order
-	 */
-	protected $date_order = 1;
-
-	/**
 	 * Obsolete
 	 */
 	protected $obsolete = 0;
+
+	/**
+	 * Date Order
+	 */
+	protected $date_order = 1;
 
 	/**
 	 * Overloaded function
