@@ -661,7 +661,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>';
 		echo str_repeat( '&#160;', count( $p_parents ) * 4 );
-		if( strlen( $p_project_id ) >= strlen( $t_full_id ) && 0 == strpos ( $p_project_id,  $t_full_id ) ) {
+		if( strlen( $p_project_id ) >= strlen( $t_full_id ) && 0 == strpos( $p_project_id, $t_full_id ) ) {
 			echo '<i class="ace-icon fa fa-check"></i> ';
 		} else {
 			echo '<i class="ace-icon fa fa-fw"></i> ';
