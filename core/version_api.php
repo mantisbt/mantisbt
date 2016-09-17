@@ -671,20 +671,6 @@ function version_get( $p_version_id ) {
 }
 
 /**
- * Return a copy of the version structure with all the variables prepared for database insertion
- * @param VersionData $p_version_info A version data structure.
- * @return VersionData
- */
-function version_prepare_db( VersionData $p_version_info ) {
-	$p_version_info->id = (int)$p_version_info->id;
-	$p_version_info->project_id = (int)$p_version_info->project_id;
-	$p_version_info->released = (bool)$p_version_info->released;
-	$p_version_info->obsolete = (bool)$p_version_info->obsolete;
-
-	return $p_version_info;
-}
-
-/**
  * Checks whether the product version should be shown
  * (i.e. report, update, view, print).
  * @param integer $p_project_id The project id.
