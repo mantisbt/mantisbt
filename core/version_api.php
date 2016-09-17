@@ -114,6 +114,28 @@ class VersionData {
 	public function __get( $p_name ) {
 		return $this->{$p_name};
 	}
+
+	/**
+	 * Initialize the object with data from a database row.
+	 * @param array $p_row
+	 */
+	public function set_from_db_row( array $p_row ) {
+		static $s_vars;
+
+		if( $s_vars == null ) {
+			$t_reflection = new ReflectionClass( $this );
+			$s_vars = $t_reflection->getDefaultProperties();
+		}
+
+		# Check each variable in the class
+		foreach( $s_vars as $t_var => $t_val ) {
+			# If we got a field from the DB with the same name
+			if( array_key_exists( $t_var, $p_row ) ) {
+				# Store that value in the object
+				$this->$t_var = $p_row[$t_var];
+			}
+		}
+	}
 }
 
 $g_cache_versions = array();
@@ -631,26 +653,10 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
  * @return VersionData
  */
 function version_get( $p_version_id ) {
-	static $s_vars;
-
 	$t_row = version_cache_row( $p_version_id );
 
-	if( $s_vars == null ) {
-		$t_reflection = new ReflectionClass( 'VersionData' );
-		$s_vars = $t_reflection->getDefaultProperties();
-	}
-
 	$t_version_data = new VersionData;
-	$t_row_keys = array_keys( $t_row );
-
-	# Check each variable in the class
-	foreach( $s_vars as $t_var => $t_val ) {
-		# If we got a field from the DB with the same name
-		if( in_array( $t_var, $t_row_keys, true ) ) {
-			# Store that value in the object
-			$t_version_data->$t_var = $t_row[$t_var];
-		}
-	}
+	$t_version_data->set_from_db_row( $t_row );
 
 	return $t_version_data;
 }
