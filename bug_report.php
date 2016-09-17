@@ -323,10 +323,11 @@ if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
 	}
 }
 
-html_operation_confirmation( array(
+$t_buttons = array(
 	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
 	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
-) );
+);
+html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
 
 if( $f_report_stay ) {
 ?>
