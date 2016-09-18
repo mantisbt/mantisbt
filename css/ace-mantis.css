@@ -48,6 +48,16 @@
     font-size: x-small;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a {
+    background: #e7e7e7 none repeat scroll 0 0;
+    color: #444 !important;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
+    color: #fff !important;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
