@@ -236,8 +236,8 @@ function filter_get_url( array $p_custom_filter ) {
 	// CREATION DATE
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value(
-			FILTER_PROPERTY_FILTER_BY_DATE,
-			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off' );
+			FILTER_PROPERTY_FILTER_BY_CREATION_DATE,
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ? 'on' : 'off' );
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_CREATION_DAY] ) ) {
