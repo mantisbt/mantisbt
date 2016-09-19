@@ -233,7 +233,8 @@ function filter_get_url( array $p_custom_filter ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_HIDE_STATUS, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS] );
 	}
 
-	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
+	// CREATION DATE
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_FILTER_BY_DATE,
 			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off' );
@@ -264,6 +265,38 @@ function filter_get_url( array $p_custom_filter ) {
 		}
 	}
 
+		// LAST UPDATED DATE
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
+		$t_query[] = filter_encode_field_and_value( 
+			FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, 
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ? 'on' : 'off' );
+
+		# The start and end dates are only applicable if filter by date is set.
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+		}
+	}
+	
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 		if( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
@@ -538,6 +571,9 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		);
 	}
 
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_CREATION_DATE, false );
+	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_CREATION_MONTH] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_START_CREATION_MONTH] = gpc_get_string( FILTER_PROPERTY_START_CREATION_MONTH, date( 'm' ) );
 	}
@@ -556,11 +592,29 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_CREATION_YEAR] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_END_CREATION_YEAR] = gpc_get_string( FILTER_PROPERTY_END_CREATION_YEAR, date( 'Y' ) );
 	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, false );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] = gpc_get_string( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, date( 'm' ) );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_DAY] = gpc_get_string( FILTER_PROPERTY_START_LAST_UPDATED_DAY, 1 );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] = gpc_get_string( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, date( 'Y' ) );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] = gpc_get_string( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, date( 'm' ) );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_DAY] = gpc_get_string( FILTER_PROPERTY_END_LAST_UPDATED_DAY, date( 'd' ) );
+	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] = gpc_get_string( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, date( 'Y' ) );
+	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SEARCH] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SEARCH] = '';
-	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_CREATION_DATE, false );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
@@ -1456,6 +1510,16 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
 		array_push( $t_project_where_clauses, '({bug}.date_submitted BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
+	}
+	
+	# last updated date filter
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+		$t_start_string = $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] . ' 00:00:00';
+		$t_end_string = $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] . ' 23:59:59';
+
+		$t_where_params[] = strtotime( $t_start_string );
+		$t_where_params[] = strtotime( $t_end_string );
+		array_push( $t_project_where_clauses, '({bug}.last_updated BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
 	}
 
 	# view state
@@ -3045,7 +3109,54 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo date( 'Y', $t_time );
 				}
 			}
-		} else {
+			echo "<br />";
+		}
+		
+		if('on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE]){
+			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ), '" />';
+			echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ), '" />';
+			$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH], $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY], $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+			echo lang_get( 'last_update' )  . " : " ;
+			foreach( $t_chars as $t_char ) {
+				if( strcasecmp( $t_char, 'M' ) == 0 ) {
+					echo ' ';
+					echo date( 'm', $t_time );
+				}
+				if( strcasecmp( $t_char, 'D' ) == 0 ) {
+					echo ' ';
+					echo date( 'd', $t_time );
+				}
+				if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+					echo ' ';
+					echo date( 'Y', $t_time );
+				}
+			}
+
+			echo ' - ';
+
+			$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH], $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY], $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+			foreach( $t_chars as $t_char ) {
+				if( strcasecmp( $t_char, 'M' ) == 0 ) {
+					echo ' ';
+					echo date( 'm', $t_time );
+				}
+				if( strcasecmp( $t_char, 'D' ) == 0 ) {
+					echo ' ';
+					echo date( 'd', $t_time );
+				}
+				if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+					echo ' ';
+					echo date( 'Y', $t_time );
+				}
+			}
+		}
+		
+		if( 'on' != $t_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] && 'on' != $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE]) {
 			echo lang_get( 'no' );
 		}
 		?>
@@ -4106,6 +4217,84 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	?>
 			</td>
 		</tr>
+				<!-- Last Updated date -->
+		<tr>
+			<td colspan="2">
+				<label>
+					<input type="checkbox" id="use_last_updated_date_filters" name="<?php
+						echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"<?php
+						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
+					<?php echo lang_get( 'last_update' )?>
+				</label>
+			</td>
+		</tr>
+<?php
+
+		if( 'on' != $g_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
+			$t_menu_disabled = ' disabled="disabled" ';
+		}
+	
+	?>
+
+		<!-- Start date -->
+		<tr>
+			<td>
+			<?php echo lang_get( 'start_date_label' ) ?>
+			</td>
+			<td class="nowrap">
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $g_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $g_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $g_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
+			</td>
+		</tr>
+		<!-- End date -->
+		<tr>
+			<td>
+			<?php echo lang_get( 'end_date_label' )?>
+			</td>
+			<td>
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $g_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $g_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $g_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
+			</td>
+		</tr>
+
+
+	
 		</table>
 		<?php
 }
