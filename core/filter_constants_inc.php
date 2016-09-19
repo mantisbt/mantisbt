@@ -42,6 +42,13 @@ define( 'FILTER_PROPERTY_START_CREATION_YEAR', 'start_creation_year' );
 define( 'FILTER_PROPERTY_END_CREATION_DAY', 'end_creation_day' );
 define( 'FILTER_PROPERTY_END_CREATION_MONTH', 'end_creation_month' );
 define( 'FILTER_PROPERTY_END_CREATION_YEAR', 'end_creation_year' );
+define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' );
+define( 'FILTER_PROPERTY_START_LAST_UPDATED_DAY', 'start_last_updated_day' );
+define( 'FILTER_PROPERTY_START_LAST_UPDATED_MONTH', 'start_last_updated_month' );
+define( 'FILTER_PROPERTY_START_LAST_UPDATED_YEAR', 'start_last_updated_year' );
+define( 'FILTER_PROPERTY_END_LAST_UPDATED_DAY', 'end_last_updated_day' );
+define( 'FILTER_PROPERTY_END_LAST_UPDATED_MONTH', 'end_last_updated_month' );
+define( 'FILTER_PROPERTY_END_LAST_UPDATED_YEAR', 'end_last_updated_year' );
 
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
