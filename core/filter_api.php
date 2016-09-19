@@ -559,8 +559,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SEARCH] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SEARCH] = '';
 	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, false );
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_CREATION_DATE, false );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
@@ -1446,8 +1446,9 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		array_push( $t_project_where_clauses, $t_project_query );
 	}
 
-	# date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_YEAR] ) ) {
+	# creation date filter
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_CREATION_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_CREATION_YEAR] ) ) {
+
 
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_CREATION_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_CREATION_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_CREATION_DAY] . ' 00:00:00';
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_CREATION_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_CREATION_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_CREATION_DAY] . ' 23:59:59';
@@ -3000,21 +3001,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td class="small-caption" id="do_filter_by_date_filter_target">
 		<?php
-		if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
-			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), '" />';
+		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+		if('on' == $t_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE]){
+			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_CREATION_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_CREATION_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_CREATION_MONTH] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_CREATION_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_CREATION_DAY] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_CREATION_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_CREATION_YEAR] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_END_CREATION_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_CREATION_MONTH] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_END_CREATION_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_CREATION_DAY] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_END_CREATION_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_CREATION_YEAR] ), '" />';
-
-			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 			$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_START_CREATION_MONTH], $t_filter[FILTER_PROPERTY_START_CREATION_DAY], $t_filter[FILTER_PROPERTY_START_CREATION_YEAR] );
+			echo lang_get( 'date_submitted' )  . " : " ;
+			
 			foreach( $t_chars as $t_char ) {
 				if( strcasecmp( $t_char, 'M' ) == 0 ) {
 					echo ' ';
-					echo date( 'F', $t_time );
+					echo date( 'm', $t_time );
 				}
 				if( strcasecmp( $t_char, 'D' ) == 0 ) {
 					echo ' ';
@@ -3032,7 +3034,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			foreach( $t_chars as $t_char ) {
 				if( strcasecmp( $t_char, 'M' ) == 0 ) {
 					echo ' ';
-					echo date( 'F', $t_time );
+					echo date( 'm', $t_time );
 				}
 				if( strcasecmp( $t_char, 'D' ) == 0 ) {
 					echo ' ';
@@ -4030,19 +4032,19 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
 ?>
+		<!-- Creation date -->
 		<tr>
 			<td colspan="2">
 				<label>
-					<input type="checkbox" id="use_date_filters" name="<?php
-						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
-					<?php echo lang_get( 'use_date_filters' )?>
+					<input type="checkbox" id="use_creation_date_filters" name="<?php
+						echo FILTER_PROPERTY_FILTER_BY_CREATION_DATE ?>"<?php
+						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ), true ) ?> />
+					<?php echo lang_get( 'date_submitted' )?>
 				</label>
 			</td>
 		</tr>
 <?php
-
-		if( 'on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+		if( 'on' != $g_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) {
 			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
@@ -4051,7 +4053,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 		<!-- Start date -->
 		<tr>
 			<td>
-			<?php echo lang_get( 'start_date_label' )?>
+			<?php echo lang_get( 'start_date_label' ) ?>
 			</td>
 			<td class="nowrap">
 			<?php
