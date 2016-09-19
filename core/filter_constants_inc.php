@@ -32,13 +32,17 @@ define( 'FILTER_PROPERTY_HIDE_STATUS', 'hide_status' ); # hide_status
 define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
 define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
 define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' ); # ?
-define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
-define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
-define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
-define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
-define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
-define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
+
+# Date filters
 define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
+define( 'FILTER_PROPERTY_FILTER_BY_CREATION_DATE', 'filter_by_creation_date' );
+define( 'FILTER_PROPERTY_START_CREATION_DAY', 'start_creation_day' );
+define( 'FILTER_PROPERTY_START_CREATION_MONTH', 'start_creation_month' );
+define( 'FILTER_PROPERTY_START_CREATION_YEAR', 'start_creation_year' );
+define( 'FILTER_PROPERTY_END_CREATION_DAY', 'end_creation_day' );
+define( 'FILTER_PROPERTY_END_CREATION_MONTH', 'end_creation_month' );
+define( 'FILTER_PROPERTY_END_CREATION_YEAR', 'end_creation_year' );
+
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
 define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );

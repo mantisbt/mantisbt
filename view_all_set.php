@@ -252,12 +252,12 @@ $f_dir_1				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
 
 # date values
 $f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE );
-$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_MONTH, date( 'm' ) );
-$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_MONTH, date( 'm' ) );
-$f_start_day			= gpc_get_int( FILTER_PROPERTY_START_DAY, 1 );
-$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_DAY, date( 'd' ) );
-$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_YEAR, date( 'Y' ) );
-$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, date( 'Y' ) );
+$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_CREATION_MONTH, date( 'm' ) );
+$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_CREATION_MONTH, date( 'm' ) );
+$f_start_day			= gpc_get_int( FILTER_PROPERTY_START_CREATION_DAY, 1 );
+$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_CREATION_DAY, date( 'd' ) );
+$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_CREATION_YEAR, date( 'Y' ) );
+$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_CREATION_YEAR, date( 'Y' ) );
 $f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
 $f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
 
@@ -462,12 +462,12 @@ switch( $f_type ) {
 		$t_setting_arr[FILTER_PROPERTY_PROJECT_ID] 				= $f_project_id;
 		$t_setting_arr[FILTER_PROPERTY_SORT_FIELD_NAME] 		= $f_sort;
 		$t_setting_arr[FILTER_PROPERTY_SORT_DIRECTION] 			= $f_dir;
-		$t_setting_arr[FILTER_PROPERTY_START_MONTH] 			= $f_start_month;
-		$t_setting_arr[FILTER_PROPERTY_START_DAY] 				= $f_start_day;
-		$t_setting_arr[FILTER_PROPERTY_START_YEAR] 				= $f_start_year;
-		$t_setting_arr[FILTER_PROPERTY_END_MONTH] 				= $f_end_month;
-		$t_setting_arr[FILTER_PROPERTY_END_DAY] 				= $f_end_day;
-		$t_setting_arr[FILTER_PROPERTY_END_YEAR] 				= $f_end_year;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_MONTH] 			= $f_start_month;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_DAY] 				= $f_start_day;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_YEAR] 				= $f_start_year;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_MONTH] 				= $f_end_month;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_DAY] 				= $f_end_day;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_YEAR] 				= $f_end_year;
 		$t_setting_arr[FILTER_PROPERTY_SEARCH] 					= $f_search;
 		$t_setting_arr[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
 		$t_setting_arr[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
