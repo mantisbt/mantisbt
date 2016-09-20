@@ -117,7 +117,7 @@ function plugin_get( $p_basename = null ) {
 		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 	}
 
-	return $g_plugin_cache[$p_basename];
+	return $g_plugin_cache[$t_current];
 }
 
 /**
