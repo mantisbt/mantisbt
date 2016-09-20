@@ -329,15 +329,18 @@ if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
 	<div class="alert alert-success">
 
 <?php
-echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
-print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
-
 if( $f_report_stay ) {
 ?>
 	<p>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-	<?php # CSRF protection not required here - form does not result in modifications ?>
+	<?php # CSRF protection not required here - form does not result in modifications 
+
+		echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
+		print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
+		echo "&nbsp;";
+		print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+
+	?>
 		<input type="hidden" name="category_id" value="<?php echo string_attribute( $t_bug_data->category_id ) ?>" />
 		<input type="hidden" name="severity" value="<?php echo string_attribute( $t_bug_data->severity ) ?>" />
 		<input type="hidden" name="reproducibility" value="<?php echo string_attribute( $t_bug_data->reproducibility ) ?>" />
@@ -354,9 +357,16 @@ if( $f_report_stay ) {
 		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
 	</p>
-<?php
+<?php 
+} else {
+
+	echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
+	print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
+	echo "&nbsp;";
+	print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 }
 ?>
+
 </div>
 </div>
 
