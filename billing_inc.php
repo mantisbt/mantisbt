@@ -106,6 +106,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 		</tr>
 		<tr class="row-2">
 			<td class="category" width="25%">
+			<table cellspacing="0" cellpadding="0">
 				<?php
 					$t_filter = array();
 					$t_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] = 'on';
@@ -115,9 +116,12 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 					$t_filter[FILTER_PROPERTY_END_CREATION_DAY] = $t_bugnote_stats_to_d;
 					$t_filter[FILTER_PROPERTY_END_CREATION_MONTH] = $t_bugnote_stats_to_m;
 					$t_filter[FILTER_PROPERTY_END_CREATION_YEAR] = $t_bugnote_stats_to_y;
+					$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = 'off';
 					filter_init( $t_filter );
-					print_filter_do_filter_by_date( true );
+					
+					print_filter_do_filter_by_creation_date( true );
 				?>
+			</table>
 			</td>
 		</tr>
 <?php
