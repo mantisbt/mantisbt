@@ -169,7 +169,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	        $t_bugnote_css    .= ' bugnote-reminder';
 		}
 ?>
-<tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
+<tr class="bugnote" id="c<?php echo $t_bugnote->id ?>">
 		<td class="category">
 		<div class="pull-left padding-2"><?php print_avatar( $t_bugnote->reporter_id ); ?>
 		</div>
@@ -290,7 +290,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		</div>
 		</div>
 	</td>
-	<td class="bugnote-note">
+	<td class="bugnote-note <?php echo $t_bugnote_css ?>">
 		<?php
 			switch ( $t_bugnote->note_type ) {
 				case REMINDER:

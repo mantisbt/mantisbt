@@ -335,6 +335,15 @@ $(document).ready( function() {
 	$('a.click-url').bind("click", function() {
 		$(this).attr("href", $(this).attr("url"));
 	});
+
+	$('input[name=private].ace').bind("click", function() {
+		if ($(this).is(":checked")){
+			$('textarea[name=bugnote_text]').css("background-color", "#fcf8e3");
+		} else {
+			$('textarea[name=bugnote_text]').css("background-color", "#fff");
+		}
+	});
+
 });
 
 function setBugLabel() {
