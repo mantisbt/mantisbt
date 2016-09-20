@@ -4136,10 +4136,25 @@ function print_filter_highlight_changed() {
  * @return void
  */
 function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
-	global $g_filter;
 ?>
 		<table cellspacing="0" cellpadding="0">
 <?php
+	print_filter_do_filter_by_creation_date($p_hide_checkbox);
+	print_filter_do_filter_by_last_updated_date($p_hide_checkbox);
+?>	
+
+		</table>
+		<?php
+}
+
+/**
+ * Print filter by creation date fields
+ * @param boolean $p_hide_checkbox Hide data filter checkbox.
+ * @return void
+ */
+function print_filter_do_filter_by_creation_date( $p_hide_checkbox = false ) {
+	global $g_filter;
+	
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
 ?>
@@ -4217,7 +4232,20 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	?>
 			</td>
 		</tr>
-				<!-- Last Updated date -->
+	<?php
+}
+
+/**
+ * Print filter by last update date fields
+ * @param boolean $p_hide_checkbox Hide data filter checkbox.
+ * @return void
+ */
+function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false ) {
+	global $g_filter;
+	$t_menu_disabled =  '';
+	if( !$p_hide_checkbox ) {
+?>
+		<!-- Last Updated date -->
 		<tr>
 			<td colspan="2">
 				<label>
@@ -4233,6 +4261,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 		if( 'on' != $g_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
 			$t_menu_disabled = ' disabled="disabled" ';
 		}
+	}
 	
 	?>
 
@@ -4292,11 +4321,8 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	?>
 			</td>
 		</tr>
+<?php
 
-
-	
-		</table>
-		<?php
 }
 
 /**
