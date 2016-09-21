@@ -72,14 +72,26 @@ class VersionData {
 	protected $released = VERSION_FUTURE;
 
 	/**
+	 * Obsolete
+	 */
+	protected $obsolete = 0;
+
+	/**
 	 * Date Order
 	 */
 	protected $date_order = 1;
 
 	/**
-	 * Obsolete
+	 * VersionData constructor.
+	 * Initialize the object with default values, or with data from a
+	 * project_version table row.
+	 * @param array|null $p_row
 	 */
-	protected $obsolete = 0;
+	public function __construct( array $p_row = null ) {
+		if( $p_row !== null ) {
+			$this->set_from_db_row( $p_row );
+		}
+	}
 
 	/**
 	 * Overloaded function
@@ -113,6 +125,28 @@ class VersionData {
 	 */
 	public function __get( $p_name ) {
 		return $this->{$p_name};
+	}
+
+	/**
+	 * Initialize the object with data from a database row.
+	 * @param array $p_row
+	 */
+	public function set_from_db_row( array $p_row ) {
+		static $s_vars;
+
+		if( $s_vars == null ) {
+			$t_reflection = new ReflectionClass( $this );
+			$s_vars = $t_reflection->getDefaultProperties();
+		}
+
+		# Check each variable in the class
+		foreach( $s_vars as $t_var => $t_val ) {
+			# If we got a field from the DB with the same name
+			if( array_key_exists( $t_var, $p_row ) ) {
+				# Store that value in the object
+				$this->$t_var = $p_row[$t_var];
+			}
+		}
 	}
 }
 
@@ -631,42 +665,9 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
  * @return VersionData
  */
 function version_get( $p_version_id ) {
-	static $s_vars;
-
 	$t_row = version_cache_row( $p_version_id );
 
-	if( $s_vars == null ) {
-		$t_reflection = new ReflectionClass( 'VersionData' );
-		$s_vars = $t_reflection->getDefaultProperties();
-	}
-
-	$t_version_data = new VersionData;
-	$t_row_keys = array_keys( $t_row );
-
-	# Check each variable in the class
-	foreach( $s_vars as $t_var => $t_val ) {
-		# If we got a field from the DB with the same name
-		if( in_array( $t_var, $t_row_keys, true ) ) {
-			# Store that value in the object
-			$t_version_data->$t_var = $t_row[$t_var];
-		}
-	}
-
-	return $t_version_data;
-}
-
-/**
- * Return a copy of the version structure with all the variables prepared for database insertion
- * @param VersionData $p_version_info A version data structure.
- * @return VersionData
- */
-function version_prepare_db( VersionData $p_version_info ) {
-	$p_version_info->id = (int)$p_version_info->id;
-	$p_version_info->project_id = (int)$p_version_info->project_id;
-	$p_version_info->released = (bool)$p_version_info->released;
-	$p_version_info->obsolete = (bool)$p_version_info->obsolete;
-
-	return $p_version_info;
+	return new VersionData( $t_row );
 }
 
 /**
