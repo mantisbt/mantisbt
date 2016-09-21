@@ -233,7 +233,7 @@ function filter_get_url( array $p_custom_filter ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_HIDE_STATUS, $p_custom_filter[FILTER_PROPERTY_HIDE_STATUS] );
 	}
 
-	// CREATION DATE
+	# CREATION DATE
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_FILTER_BY_CREATION_DATE,
@@ -265,7 +265,7 @@ function filter_get_url( array $p_custom_filter ) {
 		}
 	}
 
-		// LAST UPDATED DATE
+	# LAST UPDATED DATE
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value( 
 			FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, 
