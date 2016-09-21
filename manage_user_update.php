@@ -226,12 +226,11 @@ layout_page_header( null, $t_result ? $t_redirect_url : null );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-if( $f_protected && $t_old_protected ) {				# PROTECTED
-	echo '<div class="failure-msg">';
-	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-	print_button( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
-} else if( $t_result ) {					# SUCCESS
+if( $f_protected && $t_old_protected ) {
+	# PROTECTED
+	html_operation_warning( $t_redirect_url, lang_get( 'manage_user_protected_msg' ) );
+} else if( $t_result ) {
+	# SUCCESS
 	html_operation_successful( $t_redirect_url );
 }
 

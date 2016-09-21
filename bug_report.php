@@ -322,16 +322,12 @@ if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
 		}
 	}
 }
-?>
 
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-	<div class="alert alert-success">
-
-<?php
-echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
-print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+$t_buttons = array(
+	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
+	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
+);
+html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
 
 if( $f_report_stay ) {
 ?>

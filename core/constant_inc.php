@@ -226,6 +226,11 @@ define( 'BUG_UPDATE_TYPE_CLOSE', 'close' );
 define( 'BUG_UPDATE_TYPE_REOPEN', 'reopen' );
 define( 'BUG_UPDATE_TYPE_CHANGE_STATUS', 'change_status' );
 
+# confirmation message types
+define( 'CONFIRMATION_TYPE_SUCCESS', 0 );
+define( 'CONFIRMATION_TYPE_WARNING', 1 );
+define( 'CONFIRMATION_TYPE_FAILURE', 2 );
+
 # error messages
 define( 'ERROR_GENERIC', 0 );
 define( 'ERROR_SQL', 1 );

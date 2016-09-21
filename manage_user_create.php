@@ -131,16 +131,12 @@ if( $t_cookie === false ) {
 layout_page_header( null, $t_redirect_url );
 
 layout_page_begin( 'manage_overview_page.php' );
-?>
-
-<div class="space-20"></div>
-<div class="alert alert-success">
-<?php
 $t_access_level = get_enum_element( 'access_levels', $f_access_level );
-echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
-
-echo '<div class="space-10"></div>';
-print_button( $t_redirect_url, lang_get( 'proceed' ) );
+$t_message = lang_get( 'created_user_part1' )
+	. ' <span class="bold">' . $f_username . '</span> '
+	. lang_get( 'created_user_part2' )
+	. ' <span class="bold">' . $t_access_level . '</span><br />';
+html_operation_successful( $t_redirect_url, $t_message );
 ?>
 </div>
 

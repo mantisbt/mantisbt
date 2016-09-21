@@ -69,17 +69,11 @@ layout_page_begin( 'main_page.php' );
 
 echo '<div class="space-20"></div>';
 
-echo '<div class="container-fluid">';
-echo '<div class="col-md-12 col-xs-12">';
-echo '<div class="alert alert-success">';
-echo lang_get( 'operation_successful' );
-echo '<br /><br />';
-print_button( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) );
-echo '&nbsp;&nbsp;&nbsp;&nbsp;';
-print_button( 'news_menu_page.php', lang_get( 'proceed' ) );
-echo '</div>';
-echo '</div>';
-echo '</div>';
+$t_buttons = array(
+	array( 'news_menu_page.php' ),
+	array( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) ),
+);
+html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
 
 echo '<br />';
 
