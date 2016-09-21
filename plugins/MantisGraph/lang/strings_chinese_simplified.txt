@@ -39,19 +39,20 @@
  * @file
  *
  * @author Hydra
+ * @author Liuxinyu970226
  */
 
 $s_plugin_graph_title = 'Mantis图表';
-$s_plugin_graph_description = '官方图表插件.';
+$s_plugin_graph_description = '官方图表插件。';
 $s_plugin_MantisGraph_title = 'Mantis图表';
 $s_plugin_MantisGraph_menu_advanced_summary = '先进的摘要';
 $s_plugin_MantisGraph_config = '配置';
 $s_plugin_MantisGraph_synthesis_link = '合成';
-$s_plugin_MantisGraph_status_link = '状态';
-$s_plugin_MantisGraph_priority_link = '每个优先';
-$s_plugin_MantisGraph_severity_link = '每个严重性';
-$s_plugin_MantisGraph_category_link = '每个类别';
-$s_plugin_MantisGraph_resolution_link = '每项决议';
+$s_plugin_MantisGraph_status_link = '按状态';
+$s_plugin_MantisGraph_priority_link = '按优先权';
+$s_plugin_MantisGraph_severity_link = '按严重性';
+$s_plugin_MantisGraph_category_link = '按类别';
+$s_plugin_MantisGraph_resolution_link = '按分辨率';
 $s_plugin_MantisGraph_graph_bug_page_link = '图';
 $s_plugin_MantisGraph_library = '要使用的图形库';
 $s_plugin_MantisGraph_bundled = '捆绑在一起';
@@ -65,11 +66,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph 抗锯齿';
 $s_plugin_MantisGraph_jpgraph_antialias_info = '消除锯齿可以提高某些图（多达 8x 速度较慢）的性能为代价的外观';
 $s_plugin_MantisGraph_enabled = '开';
 $s_plugin_MantisGraph_disabled = '关';
-$s_plugin_MantisGraph_graph_imp_status_title = '综合报表（按问题状态）';
-$s_plugin_MantisGraph_graph_imp_priority_title = '综合报表（按问题优先级别）';
-$s_plugin_MantisGraph_graph_imp_severity_title = '综合报表（按问题严重性）';
-$s_plugin_MantisGraph_graph_imp_category_title = '综合报表（按项目分类）';
-$s_plugin_MantisGraph_graph_imp_resolution_title = '综合报表（按处理状况）';
+$s_plugin_MantisGraph_graph_imp_status_title = '按状态图表';
+$s_plugin_MantisGraph_graph_imp_priority_title = '按优先权图表';
+$s_plugin_MantisGraph_graph_imp_severity_title = '按严重性图表';
+$s_plugin_MantisGraph_graph_imp_category_title = '按分类图表';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '按分辨率图表';
 $s_plugin_MantisGraph_by_status_pct = '按问题状态百分比';
 $s_plugin_MantisGraph_by_priority_pct = '按问题优先级别百分比';
 $s_plugin_MantisGraph_by_severity_pct = '按问题严重性百分比';

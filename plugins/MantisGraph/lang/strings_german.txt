@@ -40,6 +40,7 @@
  *
  * @author Atrol
  * @author Floh
+ * @author Metalhead64
  * @author Umherirrender
  */
 
@@ -67,11 +68,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph Anti-Aliasing';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-Aliasing verbessert das visuelle Erscheinungsbild von bestimmten Graphen auf Kosten der Performanz (bis zu 8x langsamer)';
 $s_plugin_MantisGraph_enabled = 'An';
 $s_plugin_MantisGraph_disabled = 'Aus';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Grafikzusammenstellung nach Status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafikzusammenstellung nach Priorität';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafikzusammenstellung nach Schweregrad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Grafikzusammenstellung nach Kategorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikzusammenstellung nach Lösung';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafiken nach Status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafiken nach Priorität';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafiken nach Schweregrad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafiken nach Kategorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafiken nach Lösung';
 $s_plugin_MantisGraph_by_status_pct = 'nach Status Prozent';
 $s_plugin_MantisGraph_by_priority_pct = 'nach Priorität Prozent';
 $s_plugin_MantisGraph_by_severity_pct = 'nach Schweregrad Prozent';

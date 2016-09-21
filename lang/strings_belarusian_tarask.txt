@@ -199,6 +199,7 @@ $s_myself = 'Я';
 $s_default_access_level = 'Узровень доступу па змоўчваньні';
 $s_issue_status_percentage = 'Адсоткавы статус праблемы';
 $s_access_levels_enum_string = '10:назіральнік,25:паведаміўшы,40:рэдактар,55:распрацоўшчык,70:кіраўнік,90:адміністратар';
+$s_no_access = 'няма доступу';
 $s_project_status_enum_string = '10:у распрацоўцы,30:выпушчаны,50:стабільны,70:састарэлы';
 $s_project_view_state_enum_string = '10:публічны,50:прыватны';
 $s_view_state_enum_string = '10:публічны,50:прыватны';

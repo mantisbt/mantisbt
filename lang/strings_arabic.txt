@@ -45,6 +45,7 @@
  * @author OsamaK
  * @author Tarawneh
  * @author Test Create account
+ * @author بدارين
  * @author زكريا
  * @author محمد أحمد عبد الفتاح
  */
@@ -277,6 +278,7 @@ $s_email_summary = 'الملخص';
 $s_email_description = 'الوصف';
 $s_email_additional_information = 'معلومات إضافية';
 $s_email_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
+$s_email_tag = 'وسوم';
 $s_account_protected_msg = 'الحساب تمت حمايته. لم يمكن تغيير الإعدادات...';
 $s_account_removed_msg = 'حسابك تمت إزالته...';
 $s_confirm_delete_msg = 'هل أنت متأكد أنك تريد حذف حسابك؟';
@@ -291,6 +293,7 @@ $s_realname_label = 'الاسم الحقيقي';
 $s_email = 'البريد الإلكتروني';
 $s_email_label = 'البريد الإلكتروني';
 $s_password = 'كلمة السر';
+$s_new_password = 'كلمة المرور الجديدة';
 $s_no_password_change = 'كلمة السر يتم التحكم بها بواسطة نظام آخر، لذا فلا يمكن تعديلها هنا.';
 $s_confirm_password = 'أكد كلمة السر';
 $s_current_password = 'كلمة المرور الحالية';
@@ -593,6 +596,7 @@ $s_colour_global = 'كل إعدادات المشروع تتجاوز الإعدا
 $s_issue_reporter = 'المستخدم الذي أبلغ عن القضية';
 $s_issue_handler = 'المستخدم الذي يتعامل مع القضية';
 $s_users_added_bugnote = 'المستخدمون الذين أضافوا ملاحظات العلل';
+$s_category_assigned_to = 'مالك التصنيف';
 $s_change_configuration = 'تحديث الضبط';
 $s_message = 'رسالة';
 $s_default_notify = 'ضبط أعلام الإخطار الافتراضية إلى';
@@ -656,7 +660,7 @@ $s_plugins_installed = 'الإضافات المنصبة';
 $s_plugins_available = 'الإضافات المتوفرة';
 $s_plugin_description = 'الوصف';
 $s_plugin_author = 'المؤلف: %1$s';
-$s_plugin_url = 'موقع الوب:';
+$s_plugin_url = 'موقع الويب:';
 $s_plugin_depends = 'اعتمادات';
 $s_plugin_no_depends = 'لا اعتمادات';
 $s_plugin_priority = 'أولوية';

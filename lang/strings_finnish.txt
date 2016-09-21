@@ -276,6 +276,7 @@ $s_realname_label = 'Oikea nimi';
 $s_email = 'Sähköpostiosoite';
 $s_email_label = 'Sähköposti';
 $s_password = 'Salasana';
+$s_new_password = 'Uusi salasana';
 $s_no_password_change = 'Salasanaa ei voi muokata, koska sen ylläpidosta vastaa toinen järjestelmä.';
 $s_confirm_password = 'Vahvista salasana';
 $s_current_password = 'Nykyinen salasana';

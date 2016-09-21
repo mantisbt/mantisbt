@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dvorapa
  * @author Kuvaly
  * @author Luk
  */
@@ -66,11 +67,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'Antialiasing JpGraph';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Antialiasing zlepšuje vzhled některých grafů na úkor výkonu (až 8x pomalejší)';
 $s_plugin_MantisGraph_enabled = 'Zapnuto';
 $s_plugin_MantisGraph_disabled = 'Vypnuto';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Graf podle stavu';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Graf podle priority';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Graf podle důležitosti';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Graf podle kategorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graf podle řešení';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafy podle stavu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafy podle priority';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafy podle důležitosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafy podle kategorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafy podle řešení';
 $s_plugin_MantisGraph_by_status_pct = '% podle stavu';
 $s_plugin_MantisGraph_by_priority_pct = '% podle priority';
 $s_plugin_MantisGraph_by_severity_pct = '% podle závažnosti';

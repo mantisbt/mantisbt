@@ -40,15 +40,21 @@
  *
  * @author Crt
  * @author Macofe
+ * @author Nike
  */
 
 $s_plugin_MantisGraph_config = 'Asetukset';
+$s_plugin_MantisGraph_status_link = 'Tilan mukaan';
+$s_plugin_MantisGraph_priority_link = 'Prioriteetin mukaan';
+$s_plugin_MantisGraph_severity_link = 'Vakavuusasteen mukaan';
+$s_plugin_MantisGraph_category_link = 'Luokan mukaan';
+$s_plugin_MantisGraph_resolution_link = 'Ratkaisun mukaan';
 $s_plugin_MantisGraph_font = 'Kirjasin';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Synteesitaulukot vakavuusasteen mukaan';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Synteesitaulukot kategorian mukaan';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Synteesitaulukot ratkaisuasteen mukaan';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Prioriteettikuvaajien mukaan';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Vakavuusasteen mukaan';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Luokkakuvaajien mukaan';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Ratkaisukuvaajien mukaan';
 $s_plugin_MantisGraph_by_status_pct = 'Tilaprosentin mukaan';
 $s_plugin_MantisGraph_by_priority_pct = 'Prioriteettiprosentin mukaan';
 $s_plugin_MantisGraph_by_severity_pct = 'Vakavuusasteen mukaan';
