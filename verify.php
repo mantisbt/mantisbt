@@ -106,7 +106,7 @@ layout_login_page_begin();
 
 		<?php
 			if( $t_can_change_password ) {
-				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-danger ">';
+				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">';
 				echo lang_get( 'verify_warning' ) . '<br />';
 				echo lang_get( 'verify_change_password' );
 				echo '</div>';
@@ -121,6 +121,13 @@ layout_login_page_begin();
 		<?php
 		if( $t_can_change_password ) {
 		?>
+
+			<div class="position-relative">
+			<div class="signup-box visible widget-box no-border" id="login-box">
+			<div class="widget-body">
+				<div class="widget-main">
+
+					<!-- Login Form BEGIN -->
 
 		<div id="verify-div" class="form-container">
 			<form id="account-update-form" method="post" action="account_update.php">
@@ -171,7 +178,7 @@ layout_login_page_begin();
 					</div>
 					<div class="space-18"></div>
 					<span class="submit-button">
-						<button type="submit" class="width-100 pull-right btn btn-primary btn-white btn-round">
+						<button type="submit" class="width-100 width-40 pull-right btn btn-success btn-inverse bigger-110">
 							<span class="bigger-110"><?php echo lang_get( 'update_user_button' ) ?></span>
 						</button>
 					</span>
@@ -181,6 +188,11 @@ layout_login_page_begin();
 		</div>
 	</div>
 </div>
+
+			</div>
+			</div>
+			</div>
+			</div>
 
 <?php
 }
