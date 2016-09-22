@@ -327,7 +327,7 @@ $t_buttons = array(
 	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
 	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
 );
-html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
+html_operation_confirmation( $t_buttons, '', CONFIRMATION_TYPE_SUCCESS );
 
 if( $f_report_stay ) {
 ?>
@@ -352,9 +352,5 @@ if( $f_report_stay ) {
 	</p>
 <?php
 }
-?>
-</div>
-</div>
 
-<?php
 layout_page_end();
