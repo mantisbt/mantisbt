@@ -520,7 +520,7 @@ function layout_navbar_projects_menu() {
 		echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
 		echo '</a>' . "\n";
 
-		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">' . "\n";
+		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
 		layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
 		echo '</ul>' . "\n";
 		echo '</li>' . "\n";

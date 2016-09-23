@@ -259,6 +259,12 @@ textarea.input-xs, select.input-xs[multiple] {
     padding: 1px 3px;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
