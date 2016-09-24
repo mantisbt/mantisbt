@@ -2363,7 +2363,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<div class="widget-menu margin-left-8 margin-right-8">
 					<form class="form-inline" method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 						<?php # CSRF protection not required here - form does not result in modifications ?>
-						<input type="hidden" name="type" />
 						<select name="source_query_id" class="input-xs">
 							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 							<option value="-1"></option>
