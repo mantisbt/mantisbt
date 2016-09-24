@@ -148,7 +148,11 @@
 }
 
 .widget-toolbar > .widget-menu > .input-xs {
-    height: 22px;
+    line-height: 20px;
+}
+
+.widget-toolbar > .widget-menu > .btn-xs {
+    padding: 2px 2px 2px 5px;
 }
 
 .bold {
