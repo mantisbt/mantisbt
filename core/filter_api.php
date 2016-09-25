@@ -5336,31 +5336,25 @@ function filter_db_delete_current_filters() {
  * @return array	Array of filter ids and names
  */
 function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_public = null ) {
+	db_param_push();
 	$t_params = array();
-	if( null === $p_project_id ) {
-		$t_where_project = null;
-	} else {
-		$t_where_project = 'project_id = ' . db_param();
+	$t_query = 'SELECT id, name FROM {filters} WHERE project_id >= ' . db_param();
+	$t_params[] = 0;
+
+	# build where clauses
+	if( null !== $p_project_id ) {
+		$t_query .= ' AND project_id = ' . db_param();
 		$t_params[] = (int)$p_project_id;
 	}
-	if( null === $p_user_id ) {
-		$t_where_user = null;
-	} else {
-		$t_where_user = 'user_id = ' . db_param();
+	if( null !== $p_user_id ) {
+		$t_query .= ' AND user_id = ' . db_param();
 		$t_params[] = (int)$p_user_id;
 	}
-	if( null === $p_public ) {
-		$t_where_public = null;
-	} else {
-		$t_where_public = 'is_public = ' . db_param();
-		$t_params[] = ( $p_public ) ? true : false;
+	if( null !== $p_public ) {
+		$t_query .= ' AND is_public = ' . db_param();
+		# cast $p_public to strict true/false values
+		$t_params[] = $p_public ? true : false;
 	}
-
-	$t_query = 'SELECT id, name FROM {filters}'
-			. ' WHERE project_id >= 0'
-			. ( $t_where_project ? ' AND ' . $t_where_project : '' )
-			. ( $t_where_user ? ' AND ' . $t_where_user : '' )
-			. ( $t_where_public ? ' AND ' . $t_where_public : '' );
 
 	$t_result = db_query( $t_query, $t_params );
 
