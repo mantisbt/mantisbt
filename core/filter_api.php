@@ -2357,6 +2357,17 @@ function filter_draw_selection_inputs( $p_filter, $p_for_screen = true, $p_stati
 	$t_view_type = $t_filter['_view_type'];
 	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 
+	# check if filter_id actually exists
+	if( $t_source_query_id > 0 ) {
+		$t_filter_row = filter_cache_row( $t_source_query_id, /* trigger_errors */ false );
+		if( !$t_filter_row ) {
+			# If the stored filter does not exists, ignore filter_id
+			$t_source_query_id = -1;
+		} else {
+			$t_filter = filter_ensure_valid_filter( $t_filter_row );
+		}
+	}
+
 	# Make the filter into $g_filter. This is needed for some print_filter_* fnctions
 	# @TODO clean this logic
 	filter_init( $t_filter );
