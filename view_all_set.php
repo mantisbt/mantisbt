@@ -230,7 +230,7 @@ $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 # Remove any statuses that should be excluded by the hide_status field
 if( $f_view_type == 'advanced' ) {
-	if( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+	if( !filter_field_is_none( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
 		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 		foreach( $t_statuses as $t_key=>$t_val ) {
 			if( $t_val < $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {

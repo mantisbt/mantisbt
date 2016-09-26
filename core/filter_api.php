@@ -484,7 +484,12 @@ function filter_offset( $p_page_number, $p_per_page ) {
  */
 function filter_ensure_fields( array $p_filter_arr ) {
 	# Fill missing filter properties with defaults
-	$t_filter_default = filter_get_default_array();
+	if( isset( $p_filter_arr['_view_type'] ) ) {
+		$t_filter_default = filter_get_default_array( $p_filter_arr['_view_type'] );
+	} else {
+		$t_filter_default = filter_get_default_array();
+	}
+
 	foreach( $t_filter_default as $t_key => $t_default_value ) {
 		if( !isset( $p_filter_arr[$t_key] ) ) {
 			$p_filter_arr[$t_key] = $t_default_value;
@@ -663,20 +668,31 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 
 /**
  * Get a filter array with default values
+ * Optional view type parameter is used to initialize some fields properly,
+ * as some may differ in the default content.
+ * @param string $p_view_type	"simple" or "advanced"
  * @return array Filter array with default values
  */
-function filter_get_default_array() {
-	$t_hide_status_default = config_get( 'hide_status_default' );
+function filter_get_default_array( $p_view_type = null ) {
 	$t_default_show_changed = config_get( 'default_show_changed' );
 	$t_meta_filter_any_array = array( META_FILTER_ANY );
-	$t_default_view_type = 'simple';
-	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-		$t_default_view_type = 'advanced';
+
+	if( null === $p_view_type ) {
+		$t_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
+		$t_view_type = $t_default_view_type;
+	} else {
+		$t_view_type = ( $p_view_type == 'advanced' ) ? 'advanced' : 'simple;';
+	}
+
+	if( $t_view_type == 'simple' ) {
+		$t_hide_status_default = config_get( 'hide_status_default' );
+	} else {
+		$t_hide_status_default = META_FILTER_NONE;
 	}
 
 	$t_filter = array(
 		'_version' => FILTER_VERSION,
-		'_view_type' => $t_default_view_type,
+		'_view_type' => $t_view_type,
 		FILTER_PROPERTY_CATEGORY_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_SEVERITY => $t_meta_filter_any_array,
 		FILTER_PROPERTY_STATUS => $t_meta_filter_any_array,
@@ -5511,13 +5527,13 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
  * @return array The resulting filter array
  */
 function filter_gpc_get( array $p_filter = null ) {
+	$f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
+
 	if( null === $p_filter ) {
-		$t_filter = filter_get_default_array();
+		$t_filter = filter_get_default_array( $f_view_type );
 	} else {
 		$t_filter = filter_ensure_fields( $p_filter );
 	}
-
-	$f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 
 	# these are all possibly multiple selections for advanced filtering
 	# If a single value is provided, it will be normalized to an array with 'filter_ensure_valid_filter()'
