@@ -97,7 +97,7 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '</td>';
 	# Filter use
 	echo '<td>';
-	print_link( 'view_all_set.php?type=3&source_query_id=' . $p_filter_id, lang_get( 'use_query' ) );
+	print_button( 'view_all_set.php', lang_get( 'use_query' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ) );
 	echo '</td>';
 	# RSS
 	echo '<td class="center">';
@@ -160,3 +160,6 @@ function table_print_filters( array $p_filter_array ) {
 	?>
 </div>
 
+<?php
+
+html_page_bottom();
