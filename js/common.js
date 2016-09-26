@@ -90,14 +90,21 @@ $(document).ready( function() {
     });
 
 	$('#filter-toggle').on('click', function (event) {
-		$('#saved-filters-bar').toggle();
-		$('#filter-search-bar').toggle();
+		$('#filter-bar-queries').toggle();
+		$('#filter-bar-search').toggle();
 	});
 
-	$('#saved-filters-bar').on('change', function(e) {
-		$(this).closest('form').trigger('submit');
+	$('#filter-bar-search-txt').on('change', function (event) {
+		var t_term = $('#filter-bar-search-txt').val();
+		$('#filter-search-txt').val(t_term);
 	});
-	$('#source_query_id').on('change', function(e) {
+
+	$('#filter-search-txt').on('change', function (event) {
+		var t_term = $('#filter-search-txt').val();
+		$('#filter-bar-search-txt').val(t_term);
+	});
+
+	$('#filter-bar-queries').on('change', function(e) {
 		$(this).closest('form').trigger('submit');
 	});
 
