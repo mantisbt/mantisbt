@@ -89,26 +89,6 @@ $(document).ready( function() {
         SetCookie("collapse_settings", t_cookie);
     });
 
-	$('#filter-toggle').on('click', function (event) {
-		$('#filter-bar-queries').toggle();
-		$('#filter-bar-search').toggle();
-	});
-
-	$('#filter-bar-search-txt').on('change', function (event) {
-		var t_term = $('#filter-bar-search-txt').val();
-		$('#filter-search-txt').val(t_term);
-	});
-
-	$('#filter-search-txt').on('change', function (event) {
-		var t_term = $('#filter-search-txt').val();
-		$('#filter-bar-search-txt').val(t_term);
-	});
-
-	$('#filter-bar-queries').on('change', function(e) {
-		$(this).closest('form').trigger('submit');
-	});
-
-
     $('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {
 			var fieldName = $(this).attr('element').attr('id');
