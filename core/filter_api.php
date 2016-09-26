@@ -2359,22 +2359,24 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-				<div class="widget-menu margin-left-8 margin-right-8">
-					<select id="filter-bar-query-id" class="input-xs">
-						<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
-						<option value="-1"></option>
-						<?php
-						$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
-						foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-							echo '<option value="' . $t_query_id . '" ';
-							check_selected( $t_query_id, $t_source_query_id );
-							echo '>' . string_display_line( $t_query_name ) . '</option>';
-						}
-						?>
-					</select>
+			<?php if ( count( $t_stored_queries_arr ) > 0 ) { ?>
+				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+					<div class="widget-menu margin-left-8 margin-right-8">
+						<select id="filter-bar-query-id" class="input-xs">
+							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
+							<option value="-1"></option>
+							<?php
+							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
+							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
+								echo '<option value="' . $t_query_id . '" ';
+								check_selected( $t_query_id, $t_source_query_id );
+								echo '>' . string_display_line( $t_query_name ) . '</option>';
+							}
+							?>
+						</select>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 			<div id="filter-bar-search" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
 				<div class="widget-menu margin-left-8 margin-right-8">
 					<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
