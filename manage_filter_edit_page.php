@@ -150,7 +150,7 @@ $t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
 						</label>
 					</td>
 				</tr>
-				<tr>
+				<tr class="vtop">
 					<?php
 					if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 					?>
