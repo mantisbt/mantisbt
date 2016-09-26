@@ -2331,7 +2331,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 							if ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 								echo '<li>';
-								if ('advanced' == $t_view_type) {
+								if ( 'advanced' == $t_view_type ) {
 									echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
 								} else {
 									echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
@@ -2359,9 +2359,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<div id="saved-filters-bar" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-				<div class="widget-menu margin-left-8 margin-right-8">
-					<form class="form-inline" method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+			<form class="form-inline" method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+					<div class="widget-menu margin-left-8 margin-right-8">
 						<?php # CSRF protection not required here - form does not result in modifications ?>
 						<select name="source_query_id" class="input-xs">
 							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
@@ -2375,15 +2375,15 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							}
 							?>
 						</select>
-					</form>
+					</div>
 				</div>
-			</div>
-			<div id="filter-search-bar" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+			</form>
+			<div id="filter-bar-search" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
 				<div class="widget-menu margin-left-8 margin-right-8">
-					<input type="text" size="16" name="<?php echo FILTER_PROPERTY_SEARCH ?>" class="input-xs"
+					<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
 						   placeholder="<?php echo lang_get( 'search' ) ?>"
-						   value="<?php echo string_html_specialchars( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
-					<button type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs"
+						   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
+					<button id="filter-bar-search-btn" type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs"
 							title="<?php echo lang_get( 'filter_button' ) ?>">
 						<i class="ace-icon fa fa-search"></i>
 					</button>
@@ -3649,7 +3649,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	echo '<div class="form-inline">';
-	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" 
+	echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" 
 		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
