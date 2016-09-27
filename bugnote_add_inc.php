@@ -117,8 +117,9 @@ require_api( 'lang_api.php' );
 				</th>
 				<td width="85%">
 					
-	<!-- Kimberly Keown suggested revision: As the Send A Reminder 'textarea' class adapts to browser width,
-	add the 'textarea' class to Bugnote textbox to help Form shrink to accommodate mobile device resolutions. -->
+<!-- Kimberly Keown suggested revision: 
+The Send A Reminder 'textarea' class adapts to browser width. Add Reminder 'textarea' class to Add Bugnote textbox 
+to enable accommodation of small screens, tablets, and mobile device resolution. Testing is advised.  -->
 			<span class="textarea"><textarea name="bugnote_text" cols="60" rows="20"></textarea></span>
 					
 				<!-- Original Textbox 
