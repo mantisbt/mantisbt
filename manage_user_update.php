@@ -203,13 +203,24 @@ if( $f_send_email_notification ) {
 
 	
 	if( !empty( $t_changes ) ) {
-		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
+		
+/*Kimberly Keown suggested revision. Use a custom email subject line preface to replace window title.
+Add $s_custom_preface_subject to custom_strings_inc.php (or default language file + new string option in config.php) 
+and implement into manage_user_update.php and core/email_api.php.
+
+Ex. custom_strings_inc.php: 
+$s_custom_preface_subject = 'My Company Title'
+
+$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
+becomes -> */ $t_subject = '[' . lang_get( 'custom_preface_subject' ) . '] ' . lang_get( 'email_user_updated_subject' );
+
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
 		
-/* Kimberly Keown suggested revision.
-Add $s_email_custom_signature to custom_strings.php (or default language file + new string option in config.php) 
-and implement into manage_user_update.php and email_api.php.
-	Ex. custom_strings.php: 
+/* Kimberly Keown suggested revision. Use a custom email signature in system emails.
+Add $s_email_custom_signature to custom_strings_inc.php (or default language file + new string option in config.php) 
+and implement into manage_user_update.php and core/email_api.php.
+
+Ex. custom_strings_inc.php: 
 	$s_email_custom_signature = '(linespace here = email line space also)
 	Regards,
 	My Name
