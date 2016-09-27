@@ -71,7 +71,6 @@ function table_print_filter_headers() {
 	<thead>
 		<tr class="row-category">
 			<td><?php echo lang_get( 'query_name' ) ?></td>
-			<td></td>
 			<td><?php echo lang_get( 'rss' ) ?></td>
 			<td><?php echo lang_get( 'filter_visibility' ) ?></td>
 			<td><?php echo lang_get( 'public' ) ?></td>
@@ -95,10 +94,6 @@ function table_print_filter_row( $p_filter_id ) {
 		print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
 	}
 	echo '</td>';
-	# Filter use
-	echo '<td>';
-	print_button( 'view_all_set.php', lang_get( 'use_query' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ) );
-	echo '</td>';
 	# RSS
 	echo '<td class="center">';
 	print_rss( rss_get_issues_feed_url( null, null, $p_filter_id ), lang_get( 'rss' ) );
@@ -110,9 +105,11 @@ function table_print_filter_row( $p_filter_id ) {
 	# Owner
 	echo '<td class="center">' . user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) . '</td>';
 	# Actions
-	echo '<td class="center">';
+	echo '<td class="left">';
+	print_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ) );
+	echo '&nbsp;';
 	if( $t_editable ) {
-		print_button( 'manage_filter_delete.php', lang_get( 'delete_query' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
 	}
 	echo '</td>';
 	echo '</tr>';
