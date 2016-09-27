@@ -200,11 +200,30 @@ if( $f_send_email_notification ) {
 		$t_changes .= lang_get( 'access_level_label' ) . ' ' . $t_old_access_string . ' => ' . $t_new_access_string . "\n\n";
 	}
 
+
+	
 	if( !empty( $t_changes ) ) {
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
-		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+		
+/* Kimberly Keown suggested revision.
+Add $s_email_custom_signature to custom_strings.php (or default language file + new string option in config.php) 
+and implement into manage_user_update.php and email_api.php.
+	Ex. custom_strings.php: 
+	$s_email_custom_signature = '(linespace here = email line space also)
+	Regards,
+	My Name
+	My Company
+	Email: myemail@mywebsite.com
+	www.mywebsite.com'; 
+	
+	Revised Code: */
+	$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes . "\n" . lang_get( 'email_custom_signature' );
 
+	/* Original Code:
+	$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+	*/
+		
 		if( null === email_store( $t_email, $t_subject, $t_message ) ) {
 			log_event( LOG_EMAIL, 'Notification was NOT sent to ' . $f_username );
 		} else {
