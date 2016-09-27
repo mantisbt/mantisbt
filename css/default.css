@@ -85,4 +85,6 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 .color-project		{ background-color: LightGreen; }
 
 td.overdue        	{ background-color: #d15b47; color: #ffffff; font-weight: bold; }
-td.print-overdue    { font-weight: bold;  }
+td.print-overdue    { font-weight: bold; }
+
+.collapse-link { cursor: pointer; }
