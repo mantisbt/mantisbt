@@ -519,7 +519,30 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 		$t_intro_text = sprintf( lang_get( 'new_account_greeting' ), $t_username );
 	}
 
-	$t_message = $t_intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );
+/* Kimberly Keown suggested revision to add a custom email signature. 
+	Suggested code revisions in three places here (Lines 568 and 1333), undoubtedly there are other messages to include 
+	signature in as well along with manage_user_update.php.
+	
+	Add $s_email_custom_signature to custom_strings_inc.php (or default language file + new string option in config.php) 
+	and implement into email_api.php and manage_user_update.php. 
+	
+	A custom email subject line preface could easily be implemented in a similar manner to replace window title: 
+	eg. Line 574 --> $t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
+        becomes --> $t_subject = '[' . lang_get( 'custom_preface_subject' ) . '] ' . lang_get( 'lost_password_subject' ) ;
+    
+Ex. custom_strings_inc.php: 
+	$s_email_custom_signature = '(linespace here = email line space also)
+	Regards,
+	My Name
+	My Company
+	Email: myemail@mywebsite.com
+	www.mywebsite.com'; 
+
+Revised Code:*/
+	$t_message = $t_intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'email_custom_signature' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );
+
+/* Original Code:
+	$t_message = $t_intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );*/
 
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
@@ -551,8 +574,14 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
-	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . " \n\n" . lang_get( 'new_account_do_not_reply' );
+	/* Kimberly Keown suggested revision to add a custom email signature. (See Line 522.)
+	Revised Code:*/
+	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] .  "\n\n" . lang_get( 'email_custom_signature' ) . " \n\n" . lang_get( 'new_account_do_not_reply' );
 
+	/*Original Code:
+	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . " \n\n" . lang_get( 'new_account_do_not_reply' );
+	*/
+	
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
 	if( !is_blank( $t_email ) ) {
@@ -1309,7 +1338,13 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 			$t_sender_email = '';
 		}
 		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'sent_you_this_reminder_about' ) . ': ' . "\n\n";
-		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message;
+		
+	/* Kimberly Keown suggested revision to add a custom email signature. (See Line 522.)
+	Revised Code:*/
+	$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . "\n\n" . $p_ message .  "\n\n" . lang_get( 'email_custom_signature' );
+
+	/* Original Code:
+	$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message; */
 
 		$t_id = email_store( $t_email, $t_subject, $t_contents );
 		if( $t_id !== null ) {

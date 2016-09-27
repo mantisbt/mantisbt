@@ -115,8 +115,12 @@ require_api( 'lang_api.php' );
 				<th class="category" width="15%">
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
-				<td width="85%">
-					<textarea name="bugnote_text" class="form-control" rows="7"></textarea>
+			<!-- Kimberly Keown suggested revision: -->
+				<td width="85%" class="textarea">
+				<textarea name="bugnote_text" cols="60" rows="20"></textarea>					
+			<!-- Original: 			
+			<td width="85%">
+			<textarea name="bugnote_text" class="form-control" rows="7"></textarea> -->
 				</td>
 			</tr>
 
