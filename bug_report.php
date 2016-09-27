@@ -302,7 +302,21 @@ form_security_purge( 'bug_report' );
 
 layout_page_header_begin();
 
-if( !$f_report_stay ) {
+if( $f_report_stay ) {
+	$t_fields = array(
+		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
+		'os', 'os_build', 'target_version', 'build', 'view_state', 'due_date'
+	);
+	foreach( $t_fields as $t_field ) {
+		$t_data[$t_field] = $t_bug_data->$t_field;
+	}
+	$t_data['product_version'] = $t_bug_data->version;
+	$t_data['report_stay'] = 1;
+
+	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query($t_data);
+
+	html_meta_redirect( $t_report_more_bugs_url );
+} else {
 	html_meta_redirect( 'view_all_bug_page.php' );
 }
 
@@ -327,22 +341,8 @@ $t_buttons = array(
 	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
 	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
 );
-
 if( $f_report_stay ) {
-	$t_fields = array(
-		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
-		'os', 'os_build', 'target_version', 'build', 'view_state', 'due_date'
-	);
-	foreach( $t_fields as $t_field ) {
-		$t_data[$t_field] = $t_bug_data->$t_field;
-	}
-	$t_data['product_version'] = $t_bug_data->version;
-	$t_data['report_stay'] = 1;
-
-	$t_buttons[] = array(
-		string_get_bug_report_url() . '?' . http_build_query($t_data),
-		lang_get( 'report_more_bugs' )
-	);
+	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
 }
 
 html_operation_confirmation( $t_buttons, '', CONFIRMATION_TYPE_SUCCESS );
