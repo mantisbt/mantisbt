@@ -116,7 +116,13 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
 				<td width="85%">
-					<textarea name="bugnote_text" class="form-control" rows="7"></textarea>
+					
+	<!-- Kimberly Keown suggested revision: As the Send A Reminder 'textarea' class adapts to browser width,
+	add the 'textarea' class to Bugnote textbox to help Form shrink to accommodate mobile device resolutions. -->
+			<span class="textarea"><textarea name="bugnote_text" cols="60" rows="20"></textarea></span>
+					
+				<!-- Original Textbox 
+				<textarea name="bugnote_text" class="form-control" rows="7"></textarea>-->
 				</td>
 			</tr>
 
