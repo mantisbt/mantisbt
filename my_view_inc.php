@@ -360,7 +360,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	# -- Bug ID and details link + Pencil shortcut --?>
 	<td class="nowrap width-13 my-buglist-id">
 		<?php
-			print_bug_link( $t_bug->id );
+			print_bug_link( $t_bug->id, false );
 
 			echo '<br />';
 
