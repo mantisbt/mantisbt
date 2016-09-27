@@ -519,9 +519,18 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 		$t_intro_text = sprintf( lang_get( 'new_account_greeting' ), $t_username );
 	}
 
-	/* Kimberly Keown suggested revision to add a custom email signature. Suggested code revisions in three places here (Lines 568 and 1333), undoubtedly there are other messages to include signature in as well.
-	Add $s_email_custom_signature to custom_strings.php (or default language file + new string option in config.php) and implement into email_api.php.
-	Ex. custom_strings.php: 
+/* Kimberly Keown suggested revision to add a custom email signature. 
+	Suggested code revisions in three places here (Lines 568 and 1333), undoubtedly there are other messages to include 
+	signature in as well along with manage_user_update.php.
+	
+	Add $s_email_custom_signature to custom_strings_inc.php (or default language file + new string option in config.php) 
+	and implement into email_api.php and manage_user_update.php. 
+	
+	A custom email subject line preface could easily be implemented in a similar manner to replace window title: 
+	eg. Line 574 --> $t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
+        becomes --> $t_subject = '[' . lang_get( 'custom_preface_subject' ) . '] ' . lang_get( 'lost_password_subject' ) ;
+    
+Ex. custom_strings_inc.php: 
 	$s_email_custom_signature = '(linespace here = email line space also)
 	Regards,
 	My Name
@@ -529,10 +538,10 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	Email: myemail@mywebsite.com
 	www.mywebsite.com'; 
 
-	Revised Code:*/
+Revised Code:*/
 	$t_message = $t_intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'email_custom_signature' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );
 
-	/* Original Code:
+/* Original Code:
 	$t_message = $t_intro_text . "\n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" . lang_get( 'new_account_message' ) . "\n\n" . lang_get( 'new_account_do_not_reply' );*/
 
 	# Send signup email regardless of mail notification pref
