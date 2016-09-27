@@ -117,11 +117,11 @@ require_api( 'lang_api.php' );
 				</th>
 				<td width="85%">
 					
-<!-- Kimberly Keown suggested revision: 
+<!-- Kimberly Keown suggested revision: -->
 			<span class="textarea"><textarea name="bugnote_text" cols="60" rows="20"></textarea></span>
 					
 				<!-- Original Textbox 
-				<textarea name="bugnote_text" class="form-control" rows="7"></textarea>-->
+				<textarea name="bugnote_text" class="form-control" rows="7"></textarea> -->
 				</td>
 			</tr>
 
