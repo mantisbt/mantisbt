@@ -281,8 +281,11 @@ if( 0 == $t_install_state ) {
 	?>
 
 <!-- Check PHP Version -->
-<?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
+<?php
+    print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );
 
+    print_test( ' Checking mbstring extension', extension_loaded('mbstring'), true, 'Please install and/or enable the PHP mbstring extension' );
+?>
 <!-- Check Safe Mode -->
 <?php
 print_test( 'Checking if safe mode is enabled for install script',
