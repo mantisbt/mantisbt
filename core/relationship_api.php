@@ -601,7 +601,6 @@ function relationship_can_resolve_bug( $p_bug_id ) {
  */
 function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
 	$t_summary_wrap_at = utf8_strlen( config_get( 'email_separator2' ) ) - 28;
-	$t_icon_path = config_get( 'icon_path' );
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
 		# root bug is in the source side, related bug in the destination side

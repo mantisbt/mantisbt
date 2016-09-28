@@ -100,17 +100,11 @@ function access_denied() {
 		} else {
 			layout_page_header();
 			layout_admin_page_begin();
-			echo '<div class="col-md-12 col-xs-12">';
 			echo '<div class="space-10"></div>';
-			echo '<div class="alert alert-danger">';
-			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</div>';
-			echo '<p class="center">';
-			print_button(
+			html_operation_failure(
 				helper_mantis_url( config_get( 'default_home_page' ) ),
-				lang_get( 'proceed' )
+				error_string( ERROR_ACCESS_DENIED )
 			);
-			echo '</p>';
-			echo '</div></div>';
 			layout_admin_page_end();
 		}
 	}

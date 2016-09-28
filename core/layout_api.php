@@ -160,10 +160,9 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 
 /**
  * Print elements at the end of each page
- * @param string $p_file Should always be the __FILE__ variable.
  * @return void
  */
-function layout_page_end( $p_file = null ) {
+function layout_page_end() {
 	if( !db_is_connected() ) {
 		return;
 	}
@@ -521,7 +520,7 @@ function layout_navbar_projects_menu() {
 		echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
 		echo '</a>' . "\n";
 
-		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">' . "\n";
+		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
 		layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
 		echo '</ul>' . "\n";
 		echo '</li>' . "\n";
@@ -595,16 +594,12 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	project_cache_array_rows( $t_project_ids );
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-		echo '<li><a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '"';
+		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
+		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '"';
 		if( $p_project_id !== null ) {
 			check_selected( $p_project_id, ALL_PROJECTS, false );
 		}
-		if( ALL_PROJECTS == $p_project_id ) {
-			echo '><i class="ace-icon fa fa-dot-circle-o"></i> ';
-		} else {
-			echo '><i class="ace-icon fa fa-circle-o"></i> ';
-		}
-		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
+		echo '> ' . lang_get( 'all_projects' ) . ' </a></li>' . "\n";
 		echo '<li class="divider"></li>' . "\n";
 	}
 
@@ -614,15 +609,11 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
 		}
 
-		echo '<li><a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
+		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
+		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
 		check_selected( $p_project_id, $t_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		if( $t_id == $p_project_id ) {
-			echo '><i class="ace-icon fa fa-dot-circle-o"></i> ';
-		} else {
-			echo '><i class="ace-icon fa fa-circle-o"></i> ';
-		}
-		echo string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
+		echo '> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
 	}
 }
@@ -656,19 +647,12 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 			$t_full_id = $t_id;
 		}
 
-		echo '<li>';
+		echo 0 == strcmp( $p_project_id, $t_full_id ) ? '<li class="active">' : '<li>';
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
 		check_selected( $p_project_id, $t_full_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		echo '>';
-		echo str_repeat( '&#160;', count( $p_parents ) * 4 );
-		if( $t_full_id == $p_project_id ) {
-			echo '<i class="ace-icon fa fa-dot-circle-o"></i> ';
-		} else {
-			echo '<i class="ace-icon fa fa-circle-o"></i> ';
-		}
-		echo string_attribute( project_get_field( $t_id, 'name' ) )
-			. '</a></li>' . "\n";
+		echo '> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
+		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
 
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
 	}
@@ -1000,7 +984,7 @@ function layout_page_content_end() {
  * @return null
  */
 function layout_breadcrumbs() {
-	$t_username = current_user_get_field( 'username' );
+	$t_username = user_get_name( auth_get_current_user_id() );
 	$t_protected = current_user_get_field( 'protected' );
 	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
 
@@ -1068,8 +1052,10 @@ function layout_breadcrumbs() {
 	echo '</span>';
 	echo '</form>';
 	echo '</div>';
+	echo PHP_EOL;
 
 	echo '</div>';
+	echo PHP_EOL;
 }
 
 /**

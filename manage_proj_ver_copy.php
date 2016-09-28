@@ -72,11 +72,30 @@ if( $f_copy_from ) {
 	trigger_error( ERROR_VERSION_NO_ACTION, ERROR );
 }
 
+# Get all active versions (i.e. exclude obsolete ones)
 $t_rows = version_get_all_rows( $t_src_project_id );
 
 foreach ( $t_rows as $t_row ) {
-	if( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
-		$t_version_id = version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], $t_row['date_order'] );
+	$t_dst_version_id = version_get_id( $t_row['version'], $t_dst_project_id );
+	if( $t_dst_version_id === false ) {
+		# Version does not exist in target project
+		version_add(
+			$t_dst_project_id,
+			$t_row['version'],
+			$t_row['released'],
+			$t_row['description'],
+			$t_row['date_order']
+		);
+	} else {
+		# Update existing version
+		# Since we're ignoring obsolete versions, those marked as such in the
+		# source project after an earlier copy operation will not be updated
+		# in the target project.
+		$t_version_data = new VersionData( $t_row );
+		$t_version_data->id = $t_dst_version_id;
+		$t_version_data->project_id = $t_dst_project_id;
+
+		version_update( $t_version_data );
 	}
 }
 

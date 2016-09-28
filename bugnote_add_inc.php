@@ -85,14 +85,6 @@ require_api( 'lang_api.php' );
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed">
 		<tbody>
-			<tr>
-				<th class="category" width="15%">
-					<?php echo lang_get( 'bugnote' ) ?>
-				</th>
-				<td width="85%">
-					<textarea name="bugnote_text" class="form-control" rows="7"></textarea>
-				</td>
-			</tr>
 
 <?php
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
@@ -117,9 +109,19 @@ require_api( 'lang_api.php' );
 ?>
 				</td>
 			</tr>
-<?php
-	}
+<?php }?>
 
+			<tr>
+				<th class="category" width="15%">
+					<?php echo lang_get( 'bugnote' ) ?>
+				</th>
+				<td width="85%">
+					<textarea name="bugnote_text" class="form-control" rows="7"></textarea>
+				</td>
+			</tr>
+
+
+<?php
 	if( config_get( 'time_tracking_enabled' ) ) {
 		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
 ?>

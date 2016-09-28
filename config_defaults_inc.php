@@ -213,13 +213,6 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 $g_path	= $t_protocol . '://' . $t_host . $t_path;
 
 /**
- * path to your images directory (for icons)
- * requires trailing /
- * @global string $g_icon_path
- */
-$g_icon_path = '%path%images/';
-
-/**
  * Short web path without the domain name
  * requires trailing /
  * @global string $g_short_path
@@ -4295,7 +4288,7 @@ $g_global_settings = array(
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
 	'stop_on_errors', 'version_suffix', 'debug_email',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
-	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
+	'file_type_icons', 'path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',

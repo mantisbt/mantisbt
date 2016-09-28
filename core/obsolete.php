@@ -199,3 +199,6 @@ config_obsolete( 'csv_add_bom' );
 config_obsolete( 'hr_size' );
 config_obsolete( 'hr_width' );
 config_obsolete( 'db_schema' );
+
+# changes in 2.0.0dev
+config_obsolete( 'icon_path' );

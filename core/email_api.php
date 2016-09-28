@@ -1377,7 +1377,7 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 		$t_email = user_get_email( $t_mention_user_id );
 
 		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_mention_user_id ) ) {
-			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '> ';
 		} else {
 			$t_sender_email = '';
 		}
@@ -1579,7 +1579,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 			$t_access_level_string = '';
 		}
 
-		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . $t_access_level_string . ' - ' . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
+		$t_private = ( $t_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
+
+		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) .
+			$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
+			$t_time_tracking . ' ' . $t_bugnote_link;
 
 		$t_message .= $t_email_separator2 . " \n";
 		$t_message .= $t_string . " \n";

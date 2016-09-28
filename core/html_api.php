@@ -369,23 +369,95 @@ function html_top_banner() {
 }
 
 /**
- * A function that outputs that an operation was successful and provides a redirect link.
+ * Outputs a message to confirm an operation's result.
+ * @param array   $p_buttons     Array of (URL, label) pairs used to generate
+ *                               the buttons; if label is null or unspecified,
+ *                               the default 'proceed' text will be displayed.
+ * @param string  $p_message     Message to display to the user. If none is
+ *                               provided, a default message will be printed
+ * @param integer $p_type        One of the constants CONFIRMATION_TYPE_SUCCESS,
+ *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
+ * @return void
+ */
+function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+	switch( $p_type ) {
+		case CONFIRMATION_TYPE_FAILURE:
+			$t_alert_css = 'alert-danger';
+			$t_message = 'operation_failed';
+			break;
+		case CONFIRMATION_TYPE_WARNING:
+			$t_alert_css = 'alert-warning';
+			$t_message = 'operation_warnings';
+			break;
+		case CONFIRMATION_TYPE_SUCCESS:
+		default:
+			$t_alert_css = 'alert-success';
+			$t_message = 'operation_successful';
+			break;
+	}
+
+	echo '<div class="container-fluid">';
+	echo '<div class="col-md-12 col-xs-12">';
+	echo '<div class="space-0"></div>';
+	echo '<div class="alert ' . $t_alert_css . ' center">';
+
+	# Print message
+	if( is_blank( $p_message ) ) {
+		$t_message = lang_get( $t_message );
+	} else {
+		$t_message = $p_message;
+	}
+	echo '<p class="bold bigger-110">' . $t_message  . '</p><br />';
+
+	# Print buttons
+	echo '<div class="btn-group">';
+	foreach( $p_buttons as $t_button ) {
+		$t_url = string_sanitize_url( $t_button[0] );
+		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
+
+		print_button( $t_url, $t_label );
+	}
+	echo '</div>';
+
+	echo '</div></div></div>', PHP_EOL;
+}
+
+/**
+ * Outputs an operation successful message with a single redirect link.
  * @param string $p_redirect_url The url to redirect to.
  * @param string $p_message      Message to display to the user.
  * @return void
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
-	echo '<div class="col-md-12 col-xs-12">';
-	echo '<div class="space-0"></div>';
-	echo '<div class="alert alert-success center">';
+	html_operation_confirmation( array( array( $p_redirect_url ) ), $p_message );
+}
 
-	if( !is_blank( $p_message ) ) {
-		echo $p_message . '<br />';
-	}
+/**
+ * Outputs a warning message with a single redirect link.
+ * @param string $p_redirect_url The url to redirect to.
+ * @param string $p_message      Message to display to the user.
+ * @return void
+ */
+function html_operation_warning( $p_redirect_url, $p_message = '' ) {
+	html_operation_confirmation(
+		array( array( $p_redirect_url ) ),
+		$p_message,
+		CONFIRMATION_TYPE_WARNING
+	);
+}
 
-	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
-	print_button( string_sanitize_url( $p_redirect_url ), lang_get( 'proceed' ) );
-	echo '</div></div>';
+/**
+ * Outputs an error message with a single redirect link.
+ * @param string $p_redirect_url The url to redirect to.
+ * @param string $p_message      Message to display to the user.
+ * @return void
+ */
+function html_operation_failure( $p_redirect_url, $p_message = '' ) {
+	html_operation_confirmation(
+		array( array( $p_redirect_url ) ),
+		$p_message,
+		CONFIRMATION_TYPE_FAILURE
+	);
 }
 
 /**
@@ -397,8 +469,6 @@ function html_body_end() {
 	# placed *above* this event, which needs to be the last thing to occur
 	# before the actual body ends (see #20084)
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
-
-	echo '</div>', "\n";
 
 	echo '</body>', "\n";
 }
@@ -450,18 +520,18 @@ function print_project_menu_bar() {
  * @param string  $p_parents    Parent project identifiers.
  * @return void
  */
-function print_subproject_menu_bar( $t_current_project_id, $p_parent_project_id, $p_parents = '' ) {
+function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id, $p_parents = '' ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_parent_project_id );
 
 	foreach( $t_subprojects as $t_subproject_id ) {
-		$t_active = $t_current_project_id == $t_subproject_id ? 'active' : '';
+		$t_active = $p_current_project_id == $t_subproject_id ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-default ' . $t_active .
 			'" href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject_id ) .
 			'"><i class="ace-icon fa fa-angle-double-right"></i> ' .
 			string_html_specialchars( project_get_field( $t_subproject_id, 'name' ) ) . '</a>';
 
 		# Render this subproject's subprojects ... passing current project id to highlight selected project
-		print_subproject_menu_bar( $t_current_project_id, $t_subproject_id, $p_parents . $t_subproject_id . ';' );
+		print_subproject_menu_bar( $p_current_project_id, $t_subproject_id, $p_parents . $t_subproject_id . ';' );
 	}
 }
 

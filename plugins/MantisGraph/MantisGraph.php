@@ -70,7 +70,21 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' );
+			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
+		}
+
+		# Enable inline scripts for MantisGraph plugin pages unless the need for inline
+		# scripts is removed.
+		$t_page = gpc_get_string( 'page', '' );
+		if ( !is_blank( $t_page ) ) {
+			$t_pos = stripos( $t_page, '/' );
+
+			if ( $t_pos !== false ) {
+				$t_page = substr( $t_page, $t_pos + 1 );
+				if ( $_SERVER['REQUEST_URI'] == plugin_page( $t_page ) ) {
+					http_csp_add( 'script-src', "'unsafe-inline'" );
+				}
+			}
 		}
 	}
 
@@ -106,7 +120,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function summary_submenu() {
-		$t_icon_path = config_get( 'icon_path' );
 		return array(
             '<a class="btn btn-sm btn-primary btn-white" href="' . helper_mantis_url( 'summary_page.php' ) . '"> <i class="fa fa-table"></i> ' . plugin_lang_get( 'synthesis_link' ) . '</a>',
 			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'developer_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_developer' ) . '</a>',

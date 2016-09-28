@@ -79,31 +79,23 @@ layout_page_header( null, $t_result ? $t_redirect_url : null );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-echo '<div class="col-md-12 col-xs-12">';
-echo '<div class="space-10"></div>';
-echo '<div class="alert alert-success">';
-
-echo '<p class="bigger-110">';
 if( $t_reset ) {
 	if( false == $t_result ) {
 		# PROTECTED
-		echo lang_get( 'account_reset_protected_msg' );
+		html_operation_failure( $t_redirect_url, lang_get( 'account_reset_protected_msg' ) );
 	} else {
 		# SUCCESSFUL RESET
 		if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
-			echo lang_get( 'account_reset_msg' );
+			html_operation_successful( $t_redirect_url, lang_get( 'account_reset_msg' ) );
 		} else {
 			# email notification disabled, then set the password to blank
-			echo lang_get( 'account_reset_msg2' );
+			html_operation_successful( $t_redirect_url, lang_get( 'account_reset_msg2' ) );
 		}
 	}
 } else {
 	# UNLOCK
-	echo lang_get( 'account_unlock_msg' );
+	html_operation_successful( $t_redirect_url, lang_get( 'account_unlock_msg' ) );
 }
-echo '</p>';
-echo '<div class="space-10"></div>';
-print_button( $t_redirect_url, lang_get( 'proceed' ) );
-echo '</div></div>';
+
 layout_page_end();

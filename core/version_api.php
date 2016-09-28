@@ -72,14 +72,26 @@ class VersionData {
 	protected $released = VERSION_FUTURE;
 
 	/**
+	 * Obsolete
+	 */
+	protected $obsolete = 0;
+
+	/**
 	 * Date Order
 	 */
 	protected $date_order = 1;
 
 	/**
-	 * Obsolete
+	 * VersionData constructor.
+	 * Initialize the object with default values, or with data from a
+	 * project_version table row.
+	 * @param array|null $p_row
 	 */
-	protected $obsolete = 0;
+	public function __construct( array $p_row = null ) {
+		if( $p_row !== null ) {
+			$this->set_from_db_row( $p_row );
+		}
+	}
 
 	/**
 	 * Overloaded function
@@ -113,6 +125,28 @@ class VersionData {
 	 */
 	public function __get( $p_name ) {
 		return $this->{$p_name};
+	}
+
+	/**
+	 * Initialize the object with data from a database row.
+	 * @param array $p_row
+	 */
+	public function set_from_db_row( array $p_row ) {
+		static $s_vars;
+
+		if( $s_vars == null ) {
+			$t_reflection = new ReflectionClass( $this );
+			$s_vars = $t_reflection->getDefaultProperties();
+		}
+
+		# Check each variable in the class
+		foreach( $s_vars as $t_var => $t_val ) {
+			# If we got a field from the DB with the same name
+			if( array_key_exists( $t_var, $p_row ) ) {
+				# Store that value in the object
+				$this->$t_var = $p_row[$t_var];
+			}
+		}
 	}
 }
 
@@ -428,21 +462,19 @@ function version_cache_array_rows( array $p_project_id_array ) {
 /**
  * Return all versions for the specified project
  * @param integer $p_project_id A valid project id.
- * @param integer $p_released   Whether to include released versions.
+ * @param boolean $p_released   Whether to include released versions.
  * @param boolean $p_obsolete   Whether to include obsolete versions.
- * @param boolean $p_inherit    Whether to inherit versions from other projects.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return array Array of version rows (in array format)
  */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
 
-	if( $p_inherit === null ) {
-		$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
-	} else {
-		$t_inherit = $p_inherit;
-	}
-
-	if( $t_inherit ) {
+	if(    $p_inherit
+		|| $p_inherit === null && ON == config_get( 'subprojects_inherit_versions' )
+	) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
 	} else {
 		$t_project_ids[] = $p_project_id;
@@ -498,7 +530,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 /**
  * Return all versions for the specified project, including sub-projects
  * @param integer $p_project_id A valid project identifier.
- * @param integer $p_released   Released status.
+ * @param boolean $p_released   Released status.
  * @param boolean $p_obsolete   Obsolete status.
  * @return array
  */
@@ -539,7 +571,9 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
  * returns false if not found, otherwise returns the id.
  * @param string  $p_version    A version string to look up.
  * @param integer $p_project_id A valid project identifier.
- * @param mixed   $p_inherit    True to look for version in parent projects, false not to, null to use default configuration.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return integer
  */
 function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
@@ -631,42 +665,9 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
  * @return VersionData
  */
 function version_get( $p_version_id ) {
-	static $s_vars;
-
 	$t_row = version_cache_row( $p_version_id );
 
-	if( $s_vars == null ) {
-		$t_reflection = new ReflectionClass( 'VersionData' );
-		$s_vars = $t_reflection->getDefaultProperties();
-	}
-
-	$t_version_data = new VersionData;
-	$t_row_keys = array_keys( $t_row );
-
-	# Check each variable in the class
-	foreach( $s_vars as $t_var => $t_val ) {
-		# If we got a field from the DB with the same name
-		if( in_array( $t_var, $t_row_keys, true ) ) {
-			# Store that value in the object
-			$t_version_data->$t_var = $t_row[$t_var];
-		}
-	}
-
-	return $t_version_data;
-}
-
-/**
- * Return a copy of the version structure with all the variables prepared for database insertion
- * @param VersionData $p_version_info A version data structure.
- * @return VersionData
- */
-function version_prepare_db( VersionData $p_version_info ) {
-	$p_version_info->id = (int)$p_version_info->id;
-	$p_version_info->project_id = (int)$p_version_info->project_id;
-	$p_version_info->released = (bool)$p_version_info->released;
-	$p_version_info->obsolete = (bool)$p_version_info->obsolete;
-
-	return $p_version_info;
+	return new VersionData( $t_row );
 }
 
 /**
@@ -685,7 +686,9 @@ function version_should_show_product_version( $p_project_id ) {
  * Gets the where clause to use for retrieving versions.
  *
  * @param integer $p_project_id The project id to use.
- * @param boolean $p_inherit    Include versions from parent projects? true: yes, false: no, null: use default configuration.
+ * @param boolean $p_inherit    True to include versions from parent projects,
+ *                              false not to, or null to use configuration
+ *                              setting ($g_subprojects_inherit_versions).
  * @return string The where clause not including WHERE.
  */
 function version_get_project_where_clause( $p_project_id, $p_inherit ) {

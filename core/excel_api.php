@@ -252,15 +252,6 @@ function excel_format_reporter_id( BugData $p_bug ) {
 }
 
 /**
- * Gets the formatted number of bug notes.
- * @param BugData $p_bug A bug object.
- * @return string The number of bug notes.
- */
-function excel_format_bugnotes_count( BugData $p_bug ) {
-	return excel_prepare_number( $p_bug->bugnotes_count );
-}
-
-/**
  * Gets the formatted handler id.
  * @param BugData $p_bug A bug object.
  * @return string The handler user name or empty string.
@@ -574,6 +565,38 @@ function excel_format_due_date( BugData $p_bug ) {
  */
 function excel_format_sponsorship_total( BugData $p_bug ) {
 	return excel_prepare_string( $p_bug->sponsorship_total );
+}
+
+/**
+ * Gets the attachment count for an issue
+ * @param BugData $p_bug A bug object.
+ * @return string
+ * @access public
+ */
+function excel_format_attachment_count( BugData $p_bug ) {
+	# Check for attachments
+	$t_attachment_count = 0;
+	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
+		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
+	}
+	return excel_prepare_number( $t_attachment_count );
+}
+
+/**
+ * Gets the bug note count for an issue
+ * @param BugData $p_bug A bug object.
+ * @return string
+ * @access public
+ */
+function excel_format_bugnotes_count( BugData $p_bug ) {
+	# grab the bugnote count
+	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
+	if( null !== $t_bugnote_stats ) {
+		$t_bugnote_count = $t_bugnote_stats['count'];
+	} else {
+		$t_bugnote_count = 0;
+	}
+	return excel_prepare_number( $t_bugnote_count );
 }
 
 /**

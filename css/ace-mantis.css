@@ -48,6 +48,16 @@
     font-size: x-small;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a {
+    background: #e7e7e7 none repeat scroll 0 0;
+    color: #444 !important;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
+    color: #fff !important;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
@@ -247,6 +257,12 @@ textarea.input-xs, select.input-xs[multiple] {
 .table-condensed2 > tbody > tr > td,
 .table-condensed2 > tfoot > tr > td {
     padding: 1px 3px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
 }
 
 /* Small devices (tablets, 768px and up) */

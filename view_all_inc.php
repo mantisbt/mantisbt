@@ -61,7 +61,6 @@ list( $t_dir, ) = explode( ',', $g_filter['dir'] );
 
 $g_checkboxes_exist = false;
 
-$t_icon_path = config_get( 'icon_path' );
 
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() > 0 ) {

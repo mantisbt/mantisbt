@@ -138,8 +138,8 @@ if( $f_master_bug_id > 0 ) {
 	}
 
 	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
-	 && $t_project_id != $t_current_project
-	) {
+		&& $t_project_id != $t_current_project
+		&& project_enabled( $t_project_id ) ) {
 		helper_set_current_project( $t_project_id );
 		# Reloading the page is required so that the project browser
 		# reflects the new current project
@@ -203,9 +203,6 @@ $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_show_status = in_array( 'status', $t_fields );
 $t_show_tags =
 	in_array( 'tags', $t_fields ) &&
-	access_has_global_level( config_get( 'tag_view_threshold', /* default */ null, /* user */ null, $t_project_id ) );
-$t_can_attach_tag =
-	$t_show_tags &&
 	access_has_project_level(
 		config_get( 'tag_attach_threshold', /* default */ null, /* user */ null, $t_project_id ),
 		$t_project_id );

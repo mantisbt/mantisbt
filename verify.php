@@ -40,8 +40,14 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
+require_api( 'string_api.php' );
 require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+require_css( 'login.css' );
+
 
 # check if at least one way to get here is enabled
 if( OFF == config_get( 'allow_signup' ) &&
@@ -88,60 +94,98 @@ layout_login_page_begin();
 
 ?>
 
-<?php
-	if( $t_can_change_password ) {
-		echo '<div id="reset-passwd-msg" class="alert alert-sm alert-danger ">';
-		echo lang_get( 'verify_warning' ) . '<br />';
-		echo lang_get( 'verify_change_password' );
-		echo '</div>';
-	} else {
-		echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
-		echo lang_get( 'no_password_change' );
-		echo '</div>';
-	}
-?>
+<div class="col-md-offset-4 col-md-4 col-sm-8 col-sm-offset-1">
+	<div class="login-container">
+		<div class="space-12 hidden-480"></div>
+		<a href="<?php echo config_get( 'logo_url' ) ?>">
+			<h1 class="center white">
+				<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+			</h1>
+		</a>
+		<div class="space-24 hidden-480"></div>
+
+		<?php
+			if( $t_can_change_password ) {
+				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">';
+				echo lang_get( 'verify_warning' ) . '<br />';
+				echo lang_get( 'verify_change_password' );
+				echo '</div>';
+			} else {
+				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
+				echo lang_get( 'no_password_change' );
+				echo '</div>';
+			}
+		?>
 
 
-<?php
-if( $t_can_change_password ) {
-?>
+		<?php
+		if( $t_can_change_password ) {
+		?>
 
-<div id="verify-div" class="form-container">
-	<form id="account-update-form" method="post" action="account_update.php">
-		<fieldset class="required">
-			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
-			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
-				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
-				<span class="label-style"></span>
-			</div>
-			<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
-			<?php
-			echo form_security_field( 'account_update' );
-			# When verifying account, set a token and don't display current password
-			token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
-			?>
-			<div class="field-container">
-				<label for="realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
-				<span class="input">
-					<input id="realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="password" class="required"><span><?php echo lang_get( 'new_password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="password-confirm" class="required"><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
-				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
-		</fieldset>
-	</form>
+			<div class="position-relative">
+			<div class="signup-box visible widget-box no-border" id="login-box">
+			<div class="widget-body">
+				<div class="widget-main">
+
+					<!-- Login Form BEGIN -->
+
+		<div id="verify-div" class="form-container">
+			<form id="account-update-form" method="post" action="account_update.php">
+				<fieldset>
+					<legend><span><?php echo lang_get( 'edit_account_title' ) . ' - ' . string_display_line( $u_username ) ?></span></legend>
+					<div class="space-10"></div>
+					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
+					<?php
+					echo form_security_field( 'account_update' );
+					# When verifying account, set a token and don't display current password
+					token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+					?>
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="realname" class="form-control" placeholder="<?php echo lang_get( 'realname' ) ?>" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+								<i class="ace-icon fa fa-user"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="password" class="form-control" placeholder="<?php echo lang_get( 'password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password"/>
+								<i class="ace-icon fa fa-lock"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+					
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="password-confirm" class="form-control" placeholder="<?php echo lang_get( 'confirm_password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password_confirm"/>
+								<i class="ace-icon fa fa-lock"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+					<div class="space-18"></div>
+					<span class="submit-button">
+						<button type="submit" class="width-100 width-40 pull-right btn btn-success btn-inverse bigger-110">
+							<span class="bigger-110"><?php echo lang_get( 'update_user_button' ) ?></span>
+						</button>
+					</span>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
 </div>
+
+			</div>
+			</div>
+			</div>
+			</div>
 
 <?php
 }
