@@ -338,7 +338,9 @@ print_test( 'Checking if safe mode is enabled for install script',
 
 # got database information, check and install
 if( 2 == $t_install_state ) {
-	?>
+    # By now user has picked a timezone, ensure it is set
+    date_default_timezone_set( $f_timezone );
+?>
 
 <!-- Checking DB support-->
 <?php
