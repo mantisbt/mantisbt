@@ -1260,7 +1260,7 @@ $g_default_bug_additional_info = '';
  * Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
  * @global integer $g_default_bugnote_view_status
  */
-$g_default_bugnote_view_status = VS_PUBLIC;
+$g_default_bugnote_view_status = VS_PRIVATE;
 
 /**
  * Default bug resolution when reporting a new bug
