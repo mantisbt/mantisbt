@@ -152,4 +152,5 @@ if ( count( $t_tokens ) > 0 ) {
 <?php
 }
 
+echo '</div>';
 layout_page_end();
