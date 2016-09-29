@@ -180,6 +180,75 @@ foreach( $t_bugnotes as $t_bugnote ) {
 	$t_entries[] = $t_entry;
 }
 
+/**
+ * Sort bugnotes and attachments by timestamp.  If two entries have the same
+ * timestamp, then the note should be before the attachment.
+ *
+ * @param array $p_entries The array of entries.  The array will be updated.
+ * @return void
+ */
+function entries_sort( &$p_entries ) {
+	usort( $p_entries, function( $a, $b ) {
+		if( $a['timestamp'] < $b['timestamp'] ) {
+			return -1;
+		}
+
+		if( $a['timestamp'] > $b['timestamp'] ) {
+			return 1;
+		}
+
+		if( $a['type'] == 'note' && $b['type'] == 'attachment' ) {
+			return -1;
+		}
+
+		if( $a['type'] == 'attachment' && $b['type'] == 'note' ) {
+			return 1;
+		}
+
+		return 0;
+	} );
+}
+
+/**
+ * Combine entries that were submitted together in one entry.  A user can
+ * submit N attachments along with a note.  In such case, we want to have
+ * a single entry that shows the note followed by the attachments.
+ *
+ * @param array $p_entries The array of entries.
+ * @return The updated array of entries.
+ */
+function entries_combine( $p_entries ) {
+	define( 'TIMESPAN_TO_COMBINE_ATTACHMENTS_IN_SECS', 10 );
+
+	$t_combined_entries = array();
+	$t_last_entry = null;
+
+	foreach( $p_entries as $t_entry ) {
+		if( $t_last_entry != null ) {
+			if( $t_last_entry['user_id'] == $t_entry['user_id'] &&
+			    $t_last_entry['type'] == 'note' &&
+			    $t_entry['type'] == 'attachment' &&
+			    ( $t_entry['timestamp'] - $t_last_entry['timestamp'] ) <= TIMESPAN_TO_COMBINE_ATTACHMENTS_IN_SECS ) {
+			    $t_last_entry['attachments'][] = $t_entry['attachment'];
+			} else {
+				$t_combined_entries[] = $t_last_entry;
+				$t_last_entry = $t_entry;
+			}
+		} else {
+			$t_last_entry = $t_entry;
+		}
+	}
+
+	if( $t_last_entry !== null ) {
+		$t_combined_entries[] = $t_last_entry;
+	}
+
+	return $t_combined_entries;
+}
+
+entries_sort( $t_entries );
+$t_entries = entries_combine( $t_entries );
+
 # Pre-cache users
 $t_users_to_cache = array();
 
@@ -404,8 +473,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 			echo string_display_links( $t_entry['note']->note );
 
-			if( isset( $t_entry['attachment'] ) ) {
-				print_bug_attachment( $t_entry['attachment'] );
+			if( isset( $t_entry['attachments'] ) && count( $t_entry['attachments'] ) > 0 ) {
+				echo '<br /><br />';
+				foreach( $t_entry['attachments'] as $t_attachment ) {
+					print_bug_attachment( $t_attachment );
+				}
 			}
 		} else {
 			print_bug_attachment( $t_entry['attachment'] );
