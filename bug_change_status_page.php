@@ -336,15 +336,6 @@ if( $f_new_status >= $t_resolved
 		printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
 	}
 ?>
-			<!-- Bugnote -->
-			<tr id="bug-change-status-note">
-				<th class="category">
-					<?php echo lang_get( 'add_bugnote_title' ) ?>
-				</th>
-				<td>
-					<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
-				</td>
-			</tr>
 <?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
@@ -365,8 +356,17 @@ if( $f_new_status >= $t_resolved
 ?>
 				</td>
 			</tr>
-<?php }
-
+<?php } ?>
+			<!-- Bugnote -->
+			<tr id="bug-change-status-note">
+				<th class="category">
+					<?php echo lang_get( 'add_bugnote_title' ) ?>
+				</th>
+				<td>
+					<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
+				</td>
+			</tr>
+<?php
 	if( config_get( 'time_tracking_enabled' )
 		&& access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id )
 		&& access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id )

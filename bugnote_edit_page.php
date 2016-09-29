@@ -109,6 +109,8 @@ $t_redirect_url = string_get_bug_view_url( $t_bug_id );
 layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
 layout_page_begin();
+
+$t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC ? '' : 'bugnote-private';
 ?>
 <div class="col-md-12 col-xs-12">
 
@@ -128,7 +130,8 @@ layout_page_begin();
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<td class="center" colspan="2">
-		<textarea class="form-control" cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
+		<textarea class="form-control <?php echo $t_bugnote_class; ?>" cols="80" rows="10" name="bugnote_text"
+		><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
