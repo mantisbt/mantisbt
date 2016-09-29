@@ -2320,7 +2320,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$f_switch_view_link = (config_get('use_dynamic_filters')) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
 					$t_view_filters = config_get('view_filters');
 
-					if ( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
+					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
 						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ||
 						count( $t_stored_queries_arr ) > 0 ) { ?>
 					<div class="widget-menu">
@@ -2329,16 +2329,16 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
-							if ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+							if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 								echo '<li>';
-								if ( 'advanced' == $t_view_type ) {
+								if( 'advanced' == $t_view_type ) {
 									echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
 								} else {
 									echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
 								}
 								echo '</li>';
 							}
-							if ( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 								echo '<li>';
 								echo '<a href="permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ) . '">';
 								echo '<i class="ace-icon fa fa-link"></i>&#160;&#160;' . lang_get( 'create_filter_link' );
@@ -4103,7 +4103,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 			</td>
 		</tr>
 <?php
-		if ('on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE]) {
+		if( 'on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
 			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
