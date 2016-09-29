@@ -65,8 +65,6 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 }
 
 .bug-attachment-preview-text, .bug-attachment-preview-image {
-	border-top: 1px dotted black;
-	border-bottom: 1px dotted black;
 	margin: 1em;
 	padding: 1em;
 }
