@@ -2359,7 +2359,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<?php if ( count( $t_stored_queries_arr ) > 0 ) { ?>
+			<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
 				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
 					<div class="widget-menu margin-left-8 margin-right-8">
 						<select id="filter-bar-query-id" class="input-xs">
@@ -3659,7 +3659,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<div class="btn-group">';
 
-	if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
+	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
 		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
@@ -3667,7 +3667,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</form>
 	<?php
 	}
-	if ( count( $t_stored_queries_arr ) > 0 ) { ?>
+	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 		<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
