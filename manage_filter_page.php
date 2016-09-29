@@ -135,20 +135,6 @@ function table_print_filters( array $p_filter_array ) {
 ?>
 
 <div class="table-container">
-<?php /*
-	<div id="doc-menu">
-		<ul class="menu">
-			<li>
-				<a href="#">MY FILTERS</a>
-			</li>
-		</ul>
-		<ul class="menu">
-			<li>
-				<a href="#">AVAILABLE FILTERS</a>
-			</li>
-		</ul>
-	</div>
-*/ ?>
 	<h2><?php echo lang_get( 'available_filter_for_project' ) . ': ' . project_get_name( $t_project_id ) ?></h2>
 	<?php
 		if( count( $t_filter_ids_available ) > 0 ) {
