@@ -497,7 +497,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	?>
 	</td>
 </tr>
-<?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_entry['id'], $t_entry['private'] ) ); ?>
+<?php
+if( $t_entry['type'] == ENTRY_TYPE_NOTE ) {
+	event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_entry['id'], $t_entry['private'] ) );
+}
+?>
 <tr class="spacer">
 	<td colspan="2"></td>
 </tr>
