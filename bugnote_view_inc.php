@@ -132,6 +132,7 @@ foreach( $t_bugnotes as $t_bugnote ) {
 		'user_id' => $t_bugnote->reporter_id,
 		'private' => $t_bugnote->view_state != VS_PUBLIC,
 		'style' => 'bugnote-note',
+		'attachments' => array(),
 		'note' => $t_bugnote );
 
 	if( $t_entry['private'] ) {
@@ -181,19 +182,28 @@ foreach( $t_bugnotes as $t_bugnote ) {
 }
 
 /**
- * Sort bugnotes and attachments by timestamp.  If two entries have the same
- * timestamp, then the note should be before the attachment.
+ * Sort bugnotes and attachments by timestamp then user_id.  If two entries have
+ * the same timestamp and user id, then the note should be before the attachment.
  *
  * @param array $p_entries The array of entries.  The array will be updated.
  * @return void
  */
 function entries_sort( &$p_entries ) {
-	usort( $p_entries, function( $a, $b ) {
+	$t_order = config_get( 'bugnote_order' );
+	usort( $p_entries, function( $a, $b ) use( $t_order ) {
 		if( $a['timestamp'] < $b['timestamp'] ) {
-			return -1;
+			return $t_order == 'DESC' ? 1 : -1;
 		}
 
 		if( $a['timestamp'] > $b['timestamp'] ) {
+			return $t_order == 'DESC' ? -1 : 1;
+		}
+
+		if( $a['user_id'] < $b['user_id'] ) {
+			return -1;
+		}
+
+		if( $a['user_id'] > $b['user_id'] ) {
 			return 1;
 		}
 
@@ -228,7 +238,7 @@ function entries_combine( $p_entries ) {
 			if( $t_last_entry['user_id'] == $t_entry['user_id'] &&
 			    $t_last_entry['type'] == 'note' &&
 			    $t_entry['type'] == 'attachment' &&
-			    ( $t_entry['timestamp'] - $t_last_entry['timestamp'] ) <= TIMESPAN_TO_COMBINE_ATTACHMENTS_IN_SECS ) {
+			    abs( $t_entry['timestamp'] - $t_last_entry['timestamp'] ) <= TIMESPAN_TO_COMBINE_ATTACHMENTS_IN_SECS ) {
 			    $t_last_entry['attachments'][] = $t_entry['attachment'];
 			} else {
 				$t_combined_entries[] = $t_last_entry;
