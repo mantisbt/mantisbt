@@ -118,7 +118,7 @@ foreach( $t_attachments as $t_attachment ) {
 		'attachment' => $t_attachment );
 
 	$t_entry['can_edit'] = false;
-	$t_entry['can_delete'] = !$t_bug_readonly;
+	$t_entry['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
 	$t_entry['can_change_view_state'] = false;
 
 	$t_entries[] = $t_entry;
@@ -411,7 +411,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					}
 
 					if( $t_entry['can_delete'] ) {
-						echo lang_get( 'word_separator' ) . '&#160;&#160;';
 						print_button( 'bug_file_delete.php?file_id=' . $t_entry['id'] . form_security_param( 'bug_file_delete', $t_security_token_attachments_delete ),
 							lang_get( 'delete_link' ), 'btn-xs' );
 					}
