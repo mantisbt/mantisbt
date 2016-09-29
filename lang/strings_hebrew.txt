@@ -143,6 +143,7 @@ $s_make_private = 'להגדיר כפרטית';
 $s_make_public = 'להגדיר כציבורית';
 $s_create_new_project_link = 'פרויקט חדש';
 $s_login_link = 'כניסה';
+$s_opensearch_text_description = '%s: חיפוש עבור כל הטקסט';
 $s_select_option = '(בחירה)';
 $s_bug_actiongroup_access = 'אין לך הרשאות מתאימות לבצע את הפעולה.';
 $s_bug_actiongroup_status = 'אין אפשרות לעדכן את הבאג הזה למצב המבוקש';

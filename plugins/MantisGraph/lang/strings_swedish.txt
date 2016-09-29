@@ -41,6 +41,7 @@
  * @author Lokal Profil
  * @author Tobulos1
  * @author Warrakkk
+ * @author WikiPhoenix
  */
 
 $s_plugin_graph_title = 'Mantis-grafer';
@@ -49,11 +50,11 @@ $s_plugin_MantisGraph_title = 'Mantis-grafer';
 $s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad sammanfattning';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntes';
-$s_plugin_MantisGraph_status_link = 'Per tillstånd';
-$s_plugin_MantisGraph_priority_link = 'Per prioritet';
-$s_plugin_MantisGraph_severity_link = 'Per allvarlighetsgrad';
-$s_plugin_MantisGraph_category_link = 'Per kategori';
-$s_plugin_MantisGraph_resolution_link = 'Per lösning';
+$s_plugin_MantisGraph_status_link = 'Efter status';
+$s_plugin_MantisGraph_priority_link = 'Efter prioritet';
+$s_plugin_MantisGraph_severity_link = 'Efter allvarlighetsgrad';
+$s_plugin_MantisGraph_category_link = 'Efter kategori';
+$s_plugin_MantisGraph_resolution_link = 'Efter lösning';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
 $s_plugin_MantisGraph_library = 'Grafbibliotek som ska användas';
 $s_plugin_MantisGraph_bundled = 'Buntade';
@@ -67,11 +68,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing förbättrar det visuella utseendet på vissa grafer på bekostnad av prestanda (upp till 8x långsammare)';
 $s_plugin_MantisGraph_enabled = 'På';
 $s_plugin_MantisGraph_disabled = 'Av';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Sammanfattningsgraf - status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Sammanfattningsgraf - prioritet';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Sammanfattningsgraf - allvarlighet';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Sammanfattningsgraf - kategori';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sammanfattningsgraf - lösning';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Efter statusgrafer';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Efter prioritetsgrafer';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Efter allvarlighetsgrafer';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Efter kategorigrafer';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Efter lösningsgrafer';
 $s_plugin_MantisGraph_by_status_pct = 'status (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'prioritet (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'allvarlighetsgrad (%)';

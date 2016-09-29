@@ -109,6 +109,8 @@ $s_bug_relationships = '{{Identical|Relationship}}';
 $s_bug_relationships_label = '{{Identical|Relationship}}';
 $s_global_categories = '{{Identical|Global category}}';
 $s_login_link = '{{Identical|Login}}';
+$s_opensearch_id_short = '{{Identical|ID}}';
+$s_opensearch_text_short = '{{Identical|Text}}';
 $s_select_option = '{{Identical|Select}}';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
 $s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
@@ -181,7 +183,8 @@ $s_reminder_list_truncated = '"To truncate" means "to shorten something as if by
 "refer to Issue History for full list" means "Take a look at the history of the issue if you need to compile a full list", i.e. a full list can be derived from the issue history.';
 $s_bug_send_button = '{{Identical|Send}}';
 $s_reminder = '{{Identical|Reminder}}';
-$s_stick_bug_button = 'Button label to mark an issue sticky.';
+$s_stick_bug_button = 'Button label to mark an issue sticky.
+{{Identical|Stick}}';
 $s_unstick_bug_button = 'Button label to mark an issue unsticky.';
 $s_id = '[[File:MantisBT-filter.png|150px|right]]
 Column header in bug report. See screenshot.
@@ -465,7 +468,7 @@ $s_tag_attach_long = '{{Identical|Attach tag}}';
 $s_show_all_tags = '{{Identical|All}}';
 $s_time_tracking_cost = '{{Identical|Cost}}';
 $s_time_tracking_cost_label = '{{Identical|Cost}}';
-$s_time_tracking_stopwatch_start = '{{Identical|Start}} The start button on the stopwatch';
+$s_time_tracking_stopwatch_start = '{{Identical|Start}}';
 $s_time_tracking_stopwatch_stop = '{{Identical|Stop}}';
 $s_time_tracking_stopwatch_reset = '{{Identical|Reset}}';
 $s_access_denied = '{{Identical|Access denied}}';

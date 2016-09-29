@@ -899,6 +899,7 @@ $s_field_delete_button = 'Suprimir lo camp';
 $s_confirm_custom_field_unlinking = 'Sètz segur que volètz suprimir (dissociar) aqueste camp personalizat del projècte e de suprimir totas las valors associadas ?';
 $s_field_remove_button = 'Levar lo camp';
 $s_hide_status = 'Amagar l\'estat';
+$s_hide_status_label = 'Amagar los estatuts :';
 $s_filter_closed = 'Tampat';
 $s_filter_resolved = 'Resolgut';
 $s_hide_closed = 'Amagar los tampats';

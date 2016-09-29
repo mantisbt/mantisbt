@@ -39,9 +39,11 @@
  * @file
  *
  * @author Cedric31
+ * @author Gomoko
  * @author IAlex
  * @author Peter17
  * @author Urhixidur
+ * @author Wladek92
  */
 
 $s_plugin_graph_title = 'Graphiques Mantis';
@@ -52,7 +54,7 @@ $s_plugin_MantisGraph_config = 'Configuration';
 $s_plugin_MantisGraph_synthesis_link = 'Synthèse';
 $s_plugin_MantisGraph_status_link = 'Par statut';
 $s_plugin_MantisGraph_priority_link = 'Par priorité';
-$s_plugin_MantisGraph_severity_link = 'Par sévérité';
+$s_plugin_MantisGraph_severity_link = 'Par gravité';
 $s_plugin_MantisGraph_category_link = 'Par catégorie';
 $s_plugin_MantisGraph_resolution_link = 'Par résolution';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graphique';
@@ -68,11 +70,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'Anti-alias JpGraph';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'L\'anti-alias améliore l\'apparence visuelle de certains graphiques, au détriment de la performance (jusqu\'à 8x plus lent)';
 $s_plugin_MantisGraph_enabled = 'Activé';
 $s_plugin_MantisGraph_disabled = 'Désactivé';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Graphiques de synthèse par état';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Graphiques de synthèse par priorité';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Graphiques de synthèse par sévérité';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Graphiques de synthèse par catégorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graphiques de synthèse par résolution';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Par graphes d’état';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Par graphes de priorité';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Par graphes d\'importance';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Par graphes de catégorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Par graphes de résolution';
 $s_plugin_MantisGraph_by_status_pct = 'pourcentage par état';
 $s_plugin_MantisGraph_by_priority_pct = 'pourcentage par priorité';
 $s_plugin_MantisGraph_by_severity_pct = 'pourcentage par sévérité';

@@ -39,6 +39,7 @@
  * @file
  *
  * @author Andriykopanytsia
+ * @author Piramidion
  * @author SteveR
  */
 
@@ -48,7 +49,7 @@ $s_plugin_MantisGraph_title = 'Mantis графіки';
 $s_plugin_MantisGraph_menu_advanced_summary = 'Розширений підсумок';
 $s_plugin_MantisGraph_config = 'Налаштування';
 $s_plugin_MantisGraph_synthesis_link = 'Синтез';
-$s_plugin_MantisGraph_status_link = 'На статус';
+$s_plugin_MantisGraph_status_link = 'За статусом';
 $s_plugin_MantisGraph_priority_link = 'За пріоритетом';
 $s_plugin_MantisGraph_severity_link = 'За серйозністю';
 $s_plugin_MantisGraph_category_link = 'За категорією';
@@ -67,10 +68,10 @@ $s_plugin_MantisGraph_jpgraph_antialias_info = 'Згладжування пок�
 $s_plugin_MantisGraph_enabled = 'вкл';
 $s_plugin_MantisGraph_disabled = 'викл';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Діаграми за статусами';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Діаграми пріоритетів';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Діаграми серйозності';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми категорій';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми резолюцій';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Діаграми за пріоритетами';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Діаграми за серйозністю';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми за категоріями';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми за резолюціями';
 $s_plugin_MantisGraph_by_status_pct = 'Статуси у відсотках';
 $s_plugin_MantisGraph_by_priority_pct = 'Пріоритети у відсотках';
 $s_plugin_MantisGraph_by_severity_pct = 'Серйозність у відсотках';

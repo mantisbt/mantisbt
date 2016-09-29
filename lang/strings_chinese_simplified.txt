@@ -49,6 +49,7 @@
  * @author Linforest
  * @author Liuxinyu970226
  * @author Mmyangfl
+ * @author Myy730
  * @author PhiLiP
  * @author Qiyue2001
  * @author XanaduNWH
@@ -153,6 +154,10 @@ $s_make_private = '标记为私有';
 $s_make_public = '标记为公开';
 $s_create_new_project_link = '创建新项目';
 $s_login_link = '登录';
+$s_opensearch_id_short = '%sId';
+$s_opensearch_id_description = '%s：按问题Id搜索';
+$s_opensearch_text_short = '%s文本';
+$s_opensearch_text_description = '%s：全文搜索';
 $s_select_option = '(请选择)';
 $s_bug_actiongroup_access = '你无权执行该项操作';
 $s_bug_actiongroup_status = '无法将问题的状态改成指定的状态';
@@ -298,7 +303,7 @@ $s_username_label = '用户名';
 $s_realname = '姓名';
 $s_realname_label = '真实姓名';
 $s_email = '电子邮件';
-$s_email_label = '电子邮箱';
+$s_email_label = '电子邮件';
 $s_password = '密码';
 $s_new_password = '新密码';
 $s_no_password_change = '该密码被另一个系统所控制，因此不能在这里修改。';
@@ -432,7 +437,7 @@ $s_reminder_monitor = '这些收件人也将开始监视此问题，他们可以
 $s_reminder_store = '该提醒将和问题一起储存。';
 $s_mentioned_you = '在此提到您：';
 $s_mentioned_in = '在%1$s提到您';
-$s_confirm_sponsorship = '请确认你要为 %1$d 号问题向 %2$s 提供资助。';
+$s_confirm_sponsorship = '请确认您要为%2$s发起对问题%1$d的资助。';
 $s_stick_bug_button = '置顶';
 $s_unstick_bug_button = '取消置顶';
 $s_bug_updated_msg = '问题已经被成功更新...';
@@ -677,7 +682,7 @@ $s_plugin_depends = '依赖于';
 $s_plugin_no_depends = '没有依赖项';
 $s_plugin_priority = '优先级';
 $s_plugin_protected = '受保护';
-$s_plugin_update = '升级';
+$s_plugin_update = '更新';
 $s_plugin_actions = '操作';
 $s_plugin_install = '安装';
 $s_plugin_upgrade = '升级';
@@ -1151,7 +1156,7 @@ $s_to_date = '到';
 $s_on_date = '在';
 $s_on = '在';
 $s_off = '关';
-$s_wiki = '维基';
+$s_wiki = 'Wiki';
 $s_tags = '标签';
 $s_tags_label = '标签：';
 $s_tag_details = '标签详情: %1$s';

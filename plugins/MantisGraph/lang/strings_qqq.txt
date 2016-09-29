@@ -42,6 +42,7 @@
  * @author David Hicks
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Liuxinyu970226
  * @author Shirayuki
  * @author Siebrand Mazeland
  */
@@ -55,6 +56,7 @@ $s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
 $s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
 $s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
 $s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
+$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
 $s_plugin_MantisGraph_period_none = '{{Identical|None}}';
 $s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
 $s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';

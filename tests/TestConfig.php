@@ -93,6 +93,10 @@ function require_mantis_core() {
 
 	$$t_bypass_headers = true;
 	require_once( 'core.php' );
+
+	# We need to disable MantisBT's error handler to allow PHPUnit to convert
+	# errors to exceptions, allowing us to capture and test them.
+	restore_error_handler();
 }
 
 

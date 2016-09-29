@@ -40,12 +40,17 @@
  *
  * @author Aquilax
  * @author Emostoyanov
+ * @author StanProg
  */
 
 $s_plugin_XmlImportExport_title = 'Въпроси за импортиране/експортиране';
 $s_plugin_XmlImportExport_description = 'Добавя към MantisBT възможности за XML-базирани импортиране и експортиране.';
 $s_plugin_XmlImportExport_import = 'Импортиране на проблеми';
 $s_plugin_XmlImportExport_export = 'Експорт в XML формат';
+$s_plugin_XmlImportExport_config_title = 'Създаване на нива на достъп за импортиране/експортиране на XML';
+$s_plugin_XmlImportExport_import_threshold = 'Импортиране на проблеми';
+$s_plugin_XmlImportExport_export_threshold = 'Експортиране на проблеми';
+$s_plugin_XmlImportExport_action_update = 'Обновяване';
 $s_plugin_XmlImportExport_importing_in_project = 'Импортиране на проблеми в проекта:';
 $s_plugin_XmlImportExport_import_options = 'Импортиране на опции';
 $s_plugin_XmlImportExport_cross_references = 'Кръстосани препратки';

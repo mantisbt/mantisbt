@@ -165,9 +165,11 @@ layout_page_begin();
 		</thead>
 		<tbody>
 <?php
-$t_current_resolution = $t_bug->resolution;
-$t_bug_is_open = $t_current_resolution < $t_resolved;
-if( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
+	$t_current_resolution = $t_bug->resolution;
+	$t_bug_is_open = $t_current_resolution < $t_resolved;	
+
+	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || $t_bug_is_open ) ) {
+?>
 <!-- Resolution -->
 			<tr>
 				<th class="category">
@@ -192,9 +194,8 @@ if( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_
 				</td>
 			</tr>
 <?php
-if( $f_new_status >= $t_resolved
-	&& $f_new_status < $t_closed
-	&& $t_resolution != config_get( 'bug_duplicate_resolution' ) ) { ?>
+		if( $t_resolution != config_get( 'bug_duplicate_resolution' ) ) {
+?>
 <!-- Duplicate ID -->
 			<tr>
 				<th class="category">
@@ -204,9 +205,9 @@ if( $f_new_status >= $t_resolved
 					<input type="text" class="input-sm" name="duplicate_id" maxlength="10" />
 				</td>
 			</tr>
-<?php } ?>
 
 <?php
+		}
 	}
 
 	if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {

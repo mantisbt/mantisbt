@@ -39,6 +39,7 @@
  * @file
  *
  * @author Amire80
+ * @author Guycn2
  */
 
 $s_plugin_graph_title = 'מנטיס תרשימים';
@@ -51,7 +52,7 @@ $s_plugin_MantisGraph_status_link = 'לפי מצב';
 $s_plugin_MantisGraph_priority_link = 'לפי עדיפות';
 $s_plugin_MantisGraph_severity_link = 'לפי חומרה';
 $s_plugin_MantisGraph_category_link = 'לפי קטגוריה';
-$s_plugin_MantisGraph_resolution_link = 'לפי רזולוציה';
+$s_plugin_MantisGraph_resolution_link = 'לפי פתרון';
 $s_plugin_MantisGraph_graph_bug_page_link = 'תרשים';
 $s_plugin_MantisGraph_library = 'באיזו ספריית תרשימים להשתמש';
 $s_plugin_MantisGraph_bundled = 'נכלל באריזה';
@@ -65,11 +66,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'החלקה (Anti-aliasing) באמצע
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'החלקה (Anti-aliasing) משפרת את המראה של תרשימים מסוימים, אבל המהירות עשויה לרדת עד פי 8';
 $s_plugin_MantisGraph_enabled = 'פעיל';
 $s_plugin_MantisGraph_disabled = 'כבוי';
-$s_plugin_MantisGraph_graph_imp_status_title = 'תרשימי סינתזה לפי מצב';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'תרשימי סינתזה לפי עדיפות';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'תרשימי סינתזה לפי חומרה';
-$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי סינתזה לפי קטגוריה';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'תרשימי סינתזה לפי פתרון';
+$s_plugin_MantisGraph_graph_imp_status_title = 'לפי מצבים גרפיים';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'לפי עדיפויות גרפיות';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'לפי חומרה גרפית';
+$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי קטגוריות גרפיות';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'לפי פתרונות גרפיים';
 $s_plugin_MantisGraph_by_status_pct = 'לפי אחוזי מצב';
 $s_plugin_MantisGraph_by_priority_pct = 'לפי אחוז עדיפות';
 $s_plugin_MantisGraph_by_severity_pct = 'לפי אחוז חומרה';

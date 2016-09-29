@@ -41,6 +41,7 @@
  * @author EugeneZelenko
  * @author Jim-by
  * @author Red Winged Duck
+ * @author Renessaince
  */
 
 $s_plugin_graph_title = 'Графікі MantisBT';
@@ -67,11 +68,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'Згладжваньне JpGraph';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'Згладжваньне паляпшае выгляд некаторых графікаў за кошт хуткадзейнасьці (да 8 разоў павольней)';
 $s_plugin_MantisGraph_enabled = 'Уключыць';
 $s_plugin_MantisGraph_disabled = 'Выключыць';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Сумарныя графікі па статусе';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Сумарныя графікі па прыярытэце';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Сумарныя графікі па сур’ёзнасьці';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Сумарныя графікі па катэгорыі';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Сумарны графік па вырашэньні';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Паводле графікаў статусаў';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Паводле прыярытэту графікаў';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Паводле сур’ёзнасьці графікаў';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Паводле катэгорыі графікаў';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Паводле вырашэньня графікаў';
 $s_plugin_MantisGraph_by_status_pct = 'Па статусе ў адсотках';
 $s_plugin_MantisGraph_by_priority_pct = 'Па прыярытэце ў адсотках';
 $s_plugin_MantisGraph_by_severity_pct = 'Па сур’ёзнасьці ў адсотках';
