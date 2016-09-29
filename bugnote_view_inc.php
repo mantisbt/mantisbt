@@ -64,6 +64,9 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+define( 'ENTRY_TYPE_NOTE', 'note' );
+define( 'ENTRY_TYPE_ATTACHMENT', 'attachment' );
+
 # grab the user id currently logged in
 $t_user_id = auth_get_current_user_id();
 
@@ -103,7 +106,7 @@ $t_entries = array();
 
 foreach( $t_attachments as $t_attachment ) {
 	$t_entry = array(
-		'type' => 'attachment',
+		'type' => ENTRY_TYPE_ATTACHMENT,
 		'timestamp' => $t_attachment['date_added'],
 		'modified' => false,
 		'last_modified' => $t_attachment['date_added'],
@@ -123,7 +126,7 @@ foreach( $t_attachments as $t_attachment ) {
 
 foreach( $t_bugnotes as $t_bugnote ) {
 	$t_entry = array(
-		'type' => 'note',
+		'type' => ENTRY_TYPE_NOTE,
 		'timestamp' => $t_bugnote->date_submitted,
 		'last_modified' => $t_bugnote->last_modified,
 		'modified' => $t_bugnote->date_submitted != $t_bugnote->last_modified,
@@ -207,11 +210,11 @@ function entries_sort( &$p_entries ) {
 			return 1;
 		}
 
-		if( $a['type'] == 'note' && $b['type'] == 'attachment' ) {
+		if( $a['type'] == ENTRY_TYPE_NOTE && $b['type'] == ENTRY_TYPE_ATTACHMENT ) {
 			return -1;
 		}
 
-		if( $a['type'] == 'attachment' && $b['type'] == 'note' ) {
+		if( $a['type'] == ENTRY_TYPE_ATTACHMENT && $b['type'] == ENTRY_TYPE_NOTE ) {
 			return 1;
 		}
 
@@ -236,8 +239,8 @@ function entries_combine( $p_entries ) {
 	foreach( $p_entries as $t_entry ) {
 		if( $t_last_entry != null ) {
 			if( $t_last_entry['user_id'] == $t_entry['user_id'] &&
-			    $t_last_entry['type'] == 'note' &&
-			    $t_entry['type'] == 'attachment' &&
+			    $t_last_entry['type'] == ENTRY_TYPE_NOTE &&
+			    $t_entry['type'] == ENTRY_TYPE_ATTACHMENT &&
 			    abs( $t_entry['timestamp'] - $t_last_entry['timestamp'] ) <= TIMESPAN_TO_COMBINE_ATTACHMENTS_IN_SECS ) {
 			    $t_last_entry['attachments'][] = $t_entry['attachment'];
 			} else {
@@ -322,7 +325,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	for( $i=0; $i < $t_num_entries; $i++ ) {
 		$t_entry = $t_entries[$i];
 
-		if( $t_entry['type'] == 'note' && $t_entry['note']->time_tracking != 0 ) {
+		if( $t_entry['type'] == ENTRY_TYPE_NOTE && $t_entry['note']->time_tracking != 0 ) {
 			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
 			$t_total_time += $t_entry['note']->time_tracking;
 		} else {
@@ -356,7 +359,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			}
 			?>
 			&#160;
-			<?php if( $t_entry['type'] == 'note' ) { ?>
+			<?php if( $t_entry['type'] == ENTRY_TYPE_NOTE ) { ?>
 			<i class="fa fa-link grey"></i>
 			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url( $t_entry['note']->bug_id, $t_entry['note']->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
 				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_entry['id_formatted'] ?>
@@ -392,7 +395,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			if( $t_entry['can_delete'] ) {
 				echo '<div class="pull-left">';
 
-				if( $t_entry['type'] == 'note' ) {
+				if( $t_entry['type'] == ENTRY_TYPE_NOTE ) {
 					if ( !$t_security_token_notes_delete ) {
 						$t_security_token_notes_delete = form_security_token( 'bugnote_delete' );
 					}
@@ -445,7 +448,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</td>
 	<td class="<?php echo $t_entry['style'] ?>">
 	<?php
-		if( $t_entry['type'] == 'note' ) {
+		if( $t_entry['type'] == ENTRY_TYPE_NOTE ) {
 			switch ( $t_entry['note']->note_type ) {
 				case REMINDER:
 					echo '<strong>';
