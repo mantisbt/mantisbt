@@ -2363,8 +2363,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
 					<div class="widget-menu margin-left-8 margin-right-8">
 						<select id="filter-bar-query-id" class="input-xs">
-							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 							<option value="-1"></option>
+							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 							<?php
 							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
@@ -3672,8 +3672,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
 			<select name="source_query_id">
-				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 				<option value="-1"></option>
+				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 				<?php
 				$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 				foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
