@@ -187,7 +187,7 @@ print_recently_visited();
 		<span class="label-style"></span>
 	</div>
 <?php
-	if( $t_resolution != config_get( 'bug_duplicate_resolution' ) ) {
+		if( $t_resolution != config_get( 'bug_duplicate_resolution' ) ) {
 ?>
 	<!-- Duplicate ID -->
 	<div class="field-container">
@@ -201,7 +201,7 @@ print_recently_visited();
 	</div>
 
 <?php
-	}
+		}
 	}
 
 	if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
