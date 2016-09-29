@@ -237,7 +237,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 	# Tokens for action buttons are created only once, if needed
 	$t_security_token_state = null;
-	$t_security_token_delete = null;
+	$t_security_token_notes_delete = null;
+	$t_security_token_attachments_delete = null;
 
 	for( $i=0; $i < $t_num_entries; $i++ ) {
 		$t_entry = $t_entries[$i];
@@ -310,16 +311,30 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 			# show delete button if the user is allowed to delete this bugnote
 			if( $t_entry['can_delete'] ) {
-				if ( !$t_security_token_delete ) {
-					$t_security_token_delete = form_security_token( 'bugnote_delete' );
+				echo '<div class="pull-left">';
+
+				if( $t_entry['type'] == 'note' ) {
+					if ( !$t_security_token_notes_delete ) {
+						$t_security_token_notes_delete = form_security_token( 'bugnote_delete' );
+					}
+
+					print_form_button(
+						'bugnote_delete.php',
+						lang_get( 'delete_link' ),
+						array( 'bugnote_id' => $t_entry['id'] ),
+						$t_security_token_notes_delete );
+				} else {
+					if ( !$t_security_token_attachments_delete ) {
+						$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+					}
+
+					if( $t_entry['can_delete'] ) {
+						echo lang_get( 'word_separator' ) . '&#160;&#160;';
+						print_button( 'bug_file_delete.php?file_id=' . $t_entry['id'] . form_security_param( 'bug_file_delete', $t_security_token_attachments_delete ),
+							lang_get( 'delete_link' ), 'btn-xs' );
+					}
 				}
 
-				echo '<div class="pull-left">';
-				print_form_button(
-					'bugnote_delete.php',
-					lang_get( 'delete_link' ),
-					array( 'bugnote_id' => $t_entry['id'] ),
-					$t_security_token_delete );
 				echo '</div>';
 			}
 
