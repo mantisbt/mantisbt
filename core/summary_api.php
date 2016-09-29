@@ -386,7 +386,7 @@ function summary_print_by_activity() {
 	bug_cache_array_rows( $t_summarybugs );
 
 	foreach( $t_summarydata as $t_row ) {
-		$t_bugid = string_get_bug_view_link( $t_row['id'] );
+		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_notescount = $t_row['count'];
 
@@ -431,7 +431,7 @@ function summary_print_by_age() {
 			break;
 		}
 
-		$t_bugid = string_get_bug_view_link( $t_row['id'] );
+		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_days_open = intval( ( time() - $t_row['date_submitted'] ) / SECONDS_PER_DAY );
 
