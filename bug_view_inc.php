@@ -209,7 +209,6 @@ $t_show_projection = in_array( 'projection', $t_fields );
 $t_projection = $t_show_projection ? string_display_line( get_enum_element( 'projection', $t_bug->projection ) ) : '';
 $t_show_eta = in_array( 'eta', $t_fields );
 $t_eta = $t_show_eta ? string_display_line( get_enum_element( 'eta', $t_bug->eta ) ) : '';
-$t_show_attachments = in_array( 'attachments', $t_fields );
 $t_can_attach_tag = $t_show_tags && !$t_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
 $t_show_category = in_array( 'category_id', $t_fields );
 $t_category = $t_show_category ? string_display_line( category_full_name( $t_bug->category_id ) ) : '';
@@ -692,7 +691,7 @@ if( $t_show_tags ) {
 	echo '</td></tr>';
 }
 
-# Attachments Form
+# Attach Tags
 if( $t_can_attach_tag ) {
 	echo '<tr>';
 	echo '<th class="bug-attach-tags category">', lang_get( 'tag_attach_long' ), '</th>';
@@ -728,15 +727,6 @@ if( $t_custom_fields_found ) {
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
 	echo '<tr class="hidden"></tr>';
-}
-
-# Attachments
-if( $t_show_attachments ) {
-	echo '<tr id="attachments">';
-	echo '<th class="bug-attachments category">', lang_get( 'attached_files' ), '</th>';
-	echo '<td class="bug-attachments" colspan="5">';
-	print_bug_attachments_list( $t_bug_id );
-	echo '</td></tr>';
 }
 
 echo '</tbody></table>';
