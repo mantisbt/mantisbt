@@ -24,7 +24,7 @@
  * In general a value of OFF means the feature is disabled and ON means the
  * feature is enabled.  Any other cases will have an explanation.
  *
- * For more details see http://www.mantisbt.org/docs/master-1.2.x/
+ * For more details see https://www.mantisbt.org/docs/master/
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
