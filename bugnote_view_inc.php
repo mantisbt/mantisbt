@@ -106,7 +106,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 	<i class="ace-icon fa fa-comments"></i>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
+		<?php echo lang_get( 'activities_title' ) ?>
 	</h4>
 	<div class="widget-toolbar">
 		<a data-action="collapse" href="#">
