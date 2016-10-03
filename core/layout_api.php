@@ -984,10 +984,6 @@ function layout_page_content_end() {
  * @return null
  */
 function layout_breadcrumbs() {
-	$t_username = user_get_name( auth_get_current_user_id() );
-	$t_protected = current_user_get_field( 'protected' );
-	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
-
 	echo '<div id="breadcrumbs" class="breadcrumbs">' , "\n";
 
 	# Login information
@@ -1012,9 +1008,16 @@ function layout_breadcrumbs() {
 		echo '</div>' . "\n";
 
 	} else {
+		$t_protected = current_user_get_field( 'protected' );
+		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
+		$t_display_username = string_html_specialchars( current_user_get_field( 'username' ) );
+		$t_realname = current_user_get_field( 'realname' );
+		$t_display_realname = is_blank( $t_realname ) ? '' : ' ( ' . string_html_specialchars( $t_realname ) . ' ) ';
+
 		echo '  <li><i class="fa fa-user home-icon active"></i>';
 		$t_page = ( OFF == $t_protected ) ? 'account_page.php' : 'my_view_page.php';
-		echo '  <a href="' . helper_mantis_url( $t_page ) . '">' . string_html_specialchars( $t_username ) . '</a>' . "\n";
+		echo '  <a href="' . helper_mantis_url( $t_page ) . '">' .
+			$t_display_username . $t_display_realname . '</a>' . "\n";
 
 		$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
 		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span></li>' . "\n";
