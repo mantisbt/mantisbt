@@ -304,12 +304,21 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 			if( isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {
 				echo '<br /><br />';
+
+				if ( !$t_security_token_attachments_delete ) {
+					$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+				}
+
 				foreach( $t_activity['attachments'] as $t_attachment ) {
-					print_bug_attachment( $t_attachment );
+					print_bug_attachment( $t_attachment, $t_security_token_attachments_delete );
 				}
 			}
 		} else {
-			print_bug_attachment( $t_activity['attachment'] );
+			if ( !$t_security_token_attachments_delete ) {
+				$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );
+			}
+
+			print_bug_attachment( $t_activity['attachment'], $t_security_token_attachments_delete );
 		}
 	?>
 	</td>
