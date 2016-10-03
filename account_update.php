@@ -83,10 +83,9 @@ $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
 $t_redirect_url = 'index.php';
 
-# @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code.
-$t_update_email = null;
-$t_update_password = null;
-$t_update_realname = null;
+$t_update_email = false;
+$t_update_password = false;
+$t_update_realname = false;
 
 # Do not allow blank passwords in account verification/reset
 if( $t_account_verification && is_blank( $f_password ) ) {
@@ -100,8 +99,8 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 # Do not update email for a user verification
 if( !( $t_ldap && config_get( 'use_ldap_email' ) )
 	&& !$t_account_verification ) {
-	if( $f_email != user_get_email( $t_user_id ) ) {
-		$t_update_email = $f_email;
+	if( !is_blank( $f_email ) && $f_email != user_get_email( $t_user_id ) ) {
+		$t_update_email = true;
 	}
 }
 
@@ -113,7 +112,7 @@ if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );
 		user_ensure_realname_unique( $t_username, $t_realname );
-		$t_update_realname = $t_realname;
+		$t_update_realname = true;
 	}
 }
 
@@ -127,7 +126,7 @@ if( !is_blank( $f_password ) ) {
 		}
 
 		if( !auth_does_password_match( $t_user_id, $f_password ) ) {
-			$t_update_password = $f_password;
+			$t_update_password = true;
 		}
 	}
 }
