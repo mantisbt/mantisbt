@@ -59,6 +59,13 @@ $f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
 $f_bugnote_text	= trim( gpc_get_string( 'bugnote_text', '' ) );
 $f_files		= gpc_get_file( 'ufile', null );
 
+# The UI hides the attach controls when the note is marked as private to avoid disclosure of
+# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
+# private attachments is implemented.
+if( $f_private && $f_files !== null ) {
+	$f_files = null;
+}
+
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
