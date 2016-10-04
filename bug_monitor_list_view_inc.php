@@ -52,7 +52,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 	$t_users = bug_get_monitors( $f_bug_id );
 	$t_num_users = sizeof( $t_users );
 
-	echo '<div class="col-md-6 col-xs-12">';
+	echo '<div class="col-md-12 col-xs-12">';
 	echo '<a id="monitors"></a>';
 	echo '<div class="space-10"></div>';
 

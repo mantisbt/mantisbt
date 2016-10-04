@@ -196,7 +196,6 @@ $t_show_steps_to_reproduce = !is_blank( $t_bug->steps_to_reproduce ) && in_array
 $t_show_monitor_box = !$t_force_readonly;
 $t_show_relationships_box = !$t_force_readonly;
 $t_show_sponsorships_box = config_get( 'enable_sponsorship' ) && access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id );
-$t_show_upload_form = !$t_force_readonly && !bug_is_readonly( $f_bug_id );
 $t_show_history = $f_history;
 $t_show_profiles = config_get( 'enable_profiles' );
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
@@ -741,12 +740,6 @@ if( $t_show_sponsorships_box ) {
 # Bug Relationships
 if( $t_show_relationships_box ) {
 	relationship_view_box( $t_bug->id );
-}
-
-# File upload box
-if( $t_show_upload_form ) {
-	define( 'BUG_FILE_UPLOAD_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bug_file_upload_inc.php' );
 }
 
 # User list monitoring the bug
