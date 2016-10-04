@@ -288,3 +288,6 @@ if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'event_api.php' );
 	event_signal( 'EVENT_CORE_READY' );
 }
+
+# Load Markdown functions
+require_api( 'markdown_api.php' );
