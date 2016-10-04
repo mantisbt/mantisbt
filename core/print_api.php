@@ -1883,7 +1883,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 /**
  * Prints the list of visible attachments belonging to a given bug.
  * @param integer $p_bug_id ID of the bug to print attachments list for.
- * @param string $p_security_token Optional; null (default) or security token string.
+ * @param string $p_security_token The security token to use for deleting attachments.
  * @return void
  */
 function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
@@ -1907,7 +1907,7 @@ function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
  * Use this to avoid performance issues when loading pages having many calls to
  * this function, such as print_bug_attachments_list().
  * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
- * @param string $p_security_token Optional; null (default) or security token string.
+ * @param string $p_security_token The security token to use for deleting attachments.
  * @return void
  */
 function print_bug_attachment( array $p_attachment, $p_security_token ) {
@@ -1946,7 +1946,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
  * Use this to avoid performance issues when loading pages having many calls to
  * this function, such as print_bug_attachments_list().
  * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
- * @param string $p_security_token Optional; null (default) or security token string.
+ * @param string $p_security_token The security token to use for deleting attachments.
  * @return void
  */
 function print_bug_attachment_header( array $p_attachment, $p_security_token ) {

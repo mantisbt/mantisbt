@@ -18,8 +18,7 @@
  * Bug Activity API
  *
  * @package CoreAPI
- * @subpackage AccessAPI
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @subpackage BugActivityAPI
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
@@ -178,7 +177,7 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
  * @return void
  */
 function bug_activity_sort( &$p_entries ) {
-	$t_order = config_get( 'bugnote_order' );
+	$t_order = current_user_get_pref( 'bugnote_order' );
 	usort( $p_entries, function( $a, $b ) use( $t_order ) {
 		if( $a['timestamp'] < $b['timestamp'] ) {
 			return $t_order == 'DESC' ? 1 : -1;
@@ -214,7 +213,7 @@ function bug_activity_sort( &$p_entries ) {
  * a single entry that shows the note followed by the attachments.
  *
  * @param array $p_entries The array of entries.
- * @return The updated array of activities.
+ * @return array The updated array of activities.
  */
 function bug_activity_combine( $p_entries ) {
 	$t_threshold_in_seconds =
