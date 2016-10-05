@@ -3430,6 +3430,16 @@
 	 *********************/
 
 	/**
+	 * Enable relationships feature.
+	 */
+	$g_relationship_enable = ON;
+
+	/**
+	 * Specifies the threshold for user to add/delete relationships.
+	 */
+	$g_relationship_edit_threshold = UPDATER;
+
+	/**
 	 * Enable relationship graphs support.
 	 * Show issue relationships using graphs.
 	 *
