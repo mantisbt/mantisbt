@@ -1,3 +1,9 @@
+@media print {
+	#view-issue-page .bugnote .btn { display: none; }
+	#view-issue-page .bugnote .btn-sm { display: none; }
+	.noprint { display: none; }
+}
+
 span.print { font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
 

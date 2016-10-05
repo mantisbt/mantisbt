@@ -101,7 +101,7 @@ $t_fields = columns_filter_disabled( $t_fields );
 compress_enable();
 
 if( $t_show_page_header ) {
-	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
 	layout_page_begin( 'view_all_bug_page.php' );
 }
 
@@ -155,8 +155,6 @@ if( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) 
 $t_show_reminder_link = !current_user_is_anonymous() && !bug_is_readonly( $f_bug_id ) &&
 	  access_has_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 $t_bug_reminder_link = 'bug_reminder_page.php?bug_id=' . $f_bug_id;
-
-$t_print_link = 'print_bug_page.php?bug_id=' . $f_bug_id;
 
 $t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 $t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
@@ -246,7 +244,7 @@ echo '</div>';
 
 echo '<div class="widget-body">';
 
-echo '<div class="widget-toolbox padding-8 clearfix">';
+echo '<div class="widget-toolbox padding-8 clearfix noprint">';
 echo '<div class="btn-group pull-left">';
 
 # Jump to Bugnotes
@@ -283,8 +281,6 @@ if( !is_blank( $t_history_link ) ) {
 	print_small_button( $t_history_link, lang_get( 'bug_history' ) );
 }
 
-# Print Bug
-print_small_button( $t_print_link, lang_get( 'print' ) );
 echo '</div>';
 
 # prev/next links
@@ -311,7 +307,7 @@ echo '<table class="table table-bordered table-condensed">';
 
 if( $t_top_buttons_enabled ) {
 	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons">';
+	echo '<tr class="top-buttons noprint">';
 	echo '<td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td>';
@@ -321,7 +317,7 @@ if( $t_top_buttons_enabled ) {
 
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
-	echo '<tr><td colspan="6">';
+	echo '<tr class="noprint"><td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td></tr>';
 	echo '</tfoot>';
@@ -692,7 +688,7 @@ if( $t_show_tags ) {
 
 # Attach Tags
 if( $t_can_attach_tag ) {
-	echo '<tr>';
+	echo '<tr class="noprint">';
 	echo '<th class="bug-attach-tags category">', lang_get( 'tag_attach_long' ), '</th>';
 	echo '<td class="bug-attach-tags" colspan="5">';
 	print_tag_attach_form( $t_bug_id );

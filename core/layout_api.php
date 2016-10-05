@@ -49,14 +49,16 @@ require_api( 'utility_api.php' );
  * Print the page header section
  * @param string $p_page_title   Html page title.
  * @param string $p_redirect_url URL to redirect to if necessary.
+ * @param string $p_page_id      The page id.
  * @return void
  */
-function layout_page_header( $p_page_title = null, $p_redirect_url = null ) {
+function layout_page_header( $p_page_title = null, $p_redirect_url = null, $p_page_id = null ) {
 	layout_page_header_begin( $p_page_title );
 	if( $p_redirect_url !== null ) {
 		html_meta_redirect( $p_redirect_url );
 	}
-	layout_page_header_end();
+
+	layout_page_header_end( $p_page_id );
 }
 
 /**
@@ -105,20 +107,30 @@ function layout_page_header_begin( $p_page_title = null ) {
  *  actual page content, but without login info or menus.  This is used
  *  directly during the login process and other times when the user may
  *  not be authenticated
+ *
+ * @param string $p_page_id The id of the page.
+ *
  * @return void
  */
-function layout_page_header_end() {
+function layout_page_header_end( $p_page_id = null) {
 	global $g_error_send_page_header;
 
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
 
+	if ( $p_page_id === null ) {
+		$t_body_id = '';
+	} else {
+		$t_body_id = 'id="' . $p_page_id . '" ';
+	}
+
 	# Add right-to-left css if needed
 	if( layout_is_rtl() ) {
-		echo '<body class="skin-3 rtl">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3 rtl">', "\n";
 	} else {
-		echo '<body class="skin-3">', "\n";
+		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
 	}
+
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 
 	$g_error_send_page_header = false;
@@ -1188,7 +1200,7 @@ function layout_footer() {
 function layout_footer_begin() {
 	echo '<div class="clearfix"></div>' . "\n";
 	echo '<div class="space-20"></div>' . "\n";
-	echo '<div class="footer">' . "\n";
+	echo '<div class="footer noprint">' . "\n";
 	echo '<div class="footer-inner">' . "\n";
 	echo '<div class="footer-content">' . "\n";
 }
