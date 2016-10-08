@@ -379,7 +379,7 @@ function layout_login_page_end() {
 function layout_navbar() {
 	$t_logo_url = config_get('logo_url');
 
-	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top">';
+	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 
 	echo '<div id="navbar-container" class="navbar-container">';
 
@@ -996,7 +996,11 @@ function layout_page_content_end() {
  * @return null
  */
 function layout_breadcrumbs() {
-	echo '<div id="breadcrumbs" class="breadcrumbs">' , "\n";
+	$t_username = user_get_name( auth_get_current_user_id() );
+	$t_protected = current_user_get_field( 'protected' );
+	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
+
+	echo '<div id="breadcrumbs" class="breadcrumbs noprint">' , "\n";
 
 	# Login information
 	echo '<ul class="breadcrumb">' , "\n";
