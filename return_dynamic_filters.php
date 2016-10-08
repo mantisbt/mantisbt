@@ -32,6 +32,7 @@
  * @uses error_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
+ * @uses filter_form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
  */
@@ -49,6 +50,7 @@ require_api( 'custom_field_api.php' );
 require_api( 'error_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
+require_api( 'filter_form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 
