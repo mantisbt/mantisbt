@@ -71,8 +71,11 @@ access_cache_matrix_project( helper_get_current_project() );
 $t_show_time_tracking = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
 
 # get attachments data
-$t_fields = config_get( $t_fields_config_option );
-$t_fields = columns_filter_disabled( $t_fields );
+if( !isset( $t_fields ) ) {
+	$t_fields = config_get( $t_fields_config_option );
+	$t_fields = columns_filter_disabled( $t_fields );
+}
+
 $t_show_attachments = in_array( 'attachments', $t_fields );
 
 $t_result = bug_activity_get_all( $f_bug_id, /* include_attachments */ $t_show_attachments );
