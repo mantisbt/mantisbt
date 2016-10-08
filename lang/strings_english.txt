@@ -398,7 +398,7 @@ $s_minutes = 'minutes';
 $s_redirect_delay = 'Redirect Delay';
 $s_seconds = 'seconds';
 $s_with_minimum_severity = 'With Minimum Severity of';
-$s_bugnote_order = 'Notes Sort Order';
+$s_bugnote_order = 'Activities Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'E-mail on New';
@@ -626,6 +626,7 @@ $s_bugnote_revision_dropped_history = 'Note Revision Dropped';
 $s_all_revisions = 'All Revisions';
 $s_back_to_issue = 'Back to Issue';
 $s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
+$s_activities_title = 'Activities';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';

@@ -71,9 +71,9 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	}
 
 	if( $t_display ) {
-		$p_css_class .= ' collapse-open';
+		$p_css_class .= ' collapse-open noprint';
 	} else {
-		$p_css_class .= ' collapse-closed';
+		$p_css_class .= ' collapse-closed noprint';
 	}
 
 	$g_open_collapse_section = true;
@@ -133,7 +133,7 @@ function collapse_icon( $p_name, $p_section = '' ) {
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" class="collapse-link"><i class="fa ', $t_icon, '" alt="', $t_alt, '"></i></a>';
+	echo '<a id="', $t_id, '" class="collapse-link noprint"><i class="fa ', $t_icon, '" alt="', $t_alt, '"></i></a>';
 }
 
 /**

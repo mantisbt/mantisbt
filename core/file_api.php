@@ -322,8 +322,9 @@ function file_get_visible_attachments( $p_bug_id ) {
 	$t_image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
 		$t_row = $t_attachment_rows[$i];
+		$t_user_id = (int)$t_row['user_id'];
 
-		if( !file_can_view_bug_attachments( $p_bug_id, (int)$t_row['user_id'] ) ) {
+		if( !file_can_view_bug_attachments( $p_bug_id, $t_user_id ) ) {
 			continue;
 		}
 
@@ -335,6 +336,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 		$t_attachment = array();
 		$t_attachment['id'] = $t_id;
+		$t_attachment['user_id'] = $t_user_id;
 		$t_attachment['display_name'] = file_get_display_name( $t_filename );
 		$t_attachment['size'] = $t_filesize;
 		$t_attachment['date_added'] = $t_date_added;

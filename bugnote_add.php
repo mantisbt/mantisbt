@@ -59,6 +59,13 @@ $f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
 $f_bugnote_text	= trim( gpc_get_string( 'bugnote_text', '' ) );
 $f_files		= gpc_get_file( 'ufile', null );
 
+# The UI hides the attach controls when the note is marked as private to avoid disclosure of
+# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
+# private attachments is implemented.
+if( $f_private && $f_files !== null ) {
+	$f_files = null;
+}
+
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
@@ -86,30 +93,37 @@ if( $f_files !== null ) {
 	file_process_posted_files_for_bug( $f_bug_id, $f_files );
 }
 
-# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
-# if $f_time_tracking is not 0 and the time tracking feature is enabled.
-$t_bugnote_id = bugnote_add( $t_bug->id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
-if( !$t_bugnote_id ) {
-	error_parameters( lang_get( 'bugnote' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
-}
+if( is_blank( $f_bugnote_text ) ) {
+	if( $f_files === null ) {
+		error_parameters( lang_get( 'bugnote' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+} else {
+	# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
+	# if $f_time_tracking is not 0 and the time tracking feature is enabled.
+	$t_bugnote_id = bugnote_add( $t_bug->id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
+	if( !$t_bugnote_id ) {
+		error_parameters( lang_get( 'bugnote' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
 
-# Process the mentions in the added note
-bugnote_process_mentions( $t_bug->id, $t_bugnote_id, $f_bugnote_text );
+	# Process the mentions in the added note
+	bugnote_process_mentions( $t_bug->id, $t_bugnote_id, $f_bugnote_text );
 
-# Handle the reassign on feedback feature. Note that this feature generally
-# won't work very well with custom workflows as it makes a lot of assumptions
-# that may not be true. It assumes you don't have any statuses in the workflow
-# between 'bug_submit_status' and 'bug_feedback_status'. It assumes you only
-# have one feedback, assigned and submitted status.
-if( config_get( 'reassign_on_feedback' ) &&
-	 $t_bug->status === config_get( 'bug_feedback_status' ) &&
-	 $t_bug->handler_id !== auth_get_current_user_id() &&
-	 $t_bug->reporter_id === auth_get_current_user_id() ) {
-	if( $t_bug->handler_id !== NO_USER ) {
-		bug_set_field( $t_bug->id, 'status', config_get( 'bug_assigned_status' ) );
-	} else {
-		bug_set_field( $t_bug->id, 'status', config_get( 'bug_submit_status' ) );
+	# Handle the reassign on feedback feature. Note that this feature generally
+	# won't work very well with custom workflows as it makes a lot of assumptions
+	# that may not be true. It assumes you don't have any statuses in the workflow
+	# between 'bug_submit_status' and 'bug_feedback_status'. It assumes you only
+	# have one feedback, assigned and submitted status.
+	if( config_get( 'reassign_on_feedback' ) &&
+		 $t_bug->status === config_get( 'bug_feedback_status' ) &&
+		 $t_bug->handler_id !== auth_get_current_user_id() &&
+		 $t_bug->reporter_id === auth_get_current_user_id() ) {
+		if( $t_bug->handler_id !== NO_USER ) {
+			bug_set_field( $t_bug->id, 'status', config_get( 'bug_assigned_status' ) );
+		} else {
+			bug_set_field( $t_bug->id, 'status', config_get( 'bug_submit_status' ) );
+		}
 	}
 }
 

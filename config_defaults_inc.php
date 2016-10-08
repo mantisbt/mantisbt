@@ -4459,6 +4459,7 @@ $g_public_config_names = array(
 	'html_valid_tags',
 	'impersonate_user_threshold',
 	'inline_file_exts',
+	'issue_activity_note_attachments_seconds_threshold',
 	'limit_reporters',
 	'logo_image',
 	'logo_url',
@@ -4754,3 +4755,12 @@ $g_webservice_error_when_version_not_found = ON;
  */
 $g_webservice_version_when_not_found = '';
 
+####################
+# Issue Activities #
+####################
+
+/**
+ * If a user submits a note with an attachments (with the specified # of seconds)
+ * the attachment is linked to the note.  Or 0 for disabling this feature.
+ */
+$g_issue_activity_note_attachments_seconds_threshold = 3;

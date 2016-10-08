@@ -681,7 +681,7 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	# add delete link if bug not read only and user has access level
 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' <a class="btn btn-primary btn-xs btn-white btn-round"
+			$t_relationship_info_html .= ' <a class="btn btn-primary btn-xs btn-white btn-round noprint"
 			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' .
 				lang_get( 'delete_link' ) . '</a>';
 		}
@@ -836,7 +836,7 @@ function relationship_view_box( $p_bug_id ) {
 		<?php
 			if( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
-		<div class="btn-group pull-right">
+		<div class="btn-group pull-right noprint">
 		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
 		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
 		</div>
@@ -850,7 +850,7 @@ function relationship_view_box( $p_bug_id ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			?>
 
-		<form method="post" action="bug_relationship_add.php" class="form-inline" >
+		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
 		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>

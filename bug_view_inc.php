@@ -101,7 +101,7 @@ $t_fields = columns_filter_disabled( $t_fields );
 compress_enable();
 
 if( $t_show_page_header ) {
-	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
 	layout_page_begin( 'view_all_bug_page.php' );
 }
 
@@ -156,8 +156,6 @@ $t_show_reminder_link = !current_user_is_anonymous() && !bug_is_readonly( $f_bug
 	  access_has_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 $t_bug_reminder_link = 'bug_reminder_page.php?bug_id=' . $f_bug_id;
 
-$t_print_link = 'print_bug_page.php?bug_id=' . $f_bug_id;
-
 $t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 $t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
 
@@ -196,7 +194,6 @@ $t_show_steps_to_reproduce = !is_blank( $t_bug->steps_to_reproduce ) && in_array
 $t_show_monitor_box = !$t_force_readonly;
 $t_show_relationships_box = !$t_force_readonly;
 $t_show_sponsorships_box = config_get( 'enable_sponsorship' ) && access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id );
-$t_show_upload_form = !$t_force_readonly && !bug_is_readonly( $f_bug_id );
 $t_show_history = $f_history;
 $t_show_profiles = config_get( 'enable_profiles' );
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
@@ -209,7 +206,6 @@ $t_show_projection = in_array( 'projection', $t_fields );
 $t_projection = $t_show_projection ? string_display_line( get_enum_element( 'projection', $t_bug->projection ) ) : '';
 $t_show_eta = in_array( 'eta', $t_fields );
 $t_eta = $t_show_eta ? string_display_line( get_enum_element( 'eta', $t_bug->eta ) ) : '';
-$t_show_attachments = in_array( 'attachments', $t_fields );
 $t_can_attach_tag = $t_show_tags && !$t_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
 $t_show_category = in_array( 'category_id', $t_fields );
 $t_category = $t_show_category ? string_display_line( category_full_name( $t_bug->category_id ) ) : '';
@@ -248,7 +244,7 @@ echo '</div>';
 
 echo '<div class="widget-body">';
 
-echo '<div class="widget-toolbox padding-8 clearfix">';
+echo '<div class="widget-toolbox padding-8 clearfix noprint">';
 echo '<div class="btn-group pull-left">';
 
 # Jump to Bugnotes
@@ -285,8 +281,6 @@ if( !is_blank( $t_history_link ) ) {
 	print_small_button( $t_history_link, lang_get( 'bug_history' ) );
 }
 
-# Print Bug
-print_small_button( $t_print_link, lang_get( 'print' ) );
 echo '</div>';
 
 # prev/next links
@@ -313,7 +307,7 @@ echo '<table class="table table-bordered table-condensed">';
 
 if( $t_top_buttons_enabled ) {
 	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons">';
+	echo '<tr class="top-buttons noprint">';
 	echo '<td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td>';
@@ -323,7 +317,7 @@ if( $t_top_buttons_enabled ) {
 
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
-	echo '<tr><td colspan="6">';
+	echo '<tr class="noprint"><td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td></tr>';
 	echo '</tfoot>';
@@ -692,9 +686,9 @@ if( $t_show_tags ) {
 	echo '</td></tr>';
 }
 
-# Attachments Form
+# Attach Tags
 if( $t_can_attach_tag ) {
-	echo '<tr>';
+	echo '<tr class="noprint">';
 	echo '<th class="bug-attach-tags category">', lang_get( 'tag_attach_long' ), '</th>';
 	echo '<td class="bug-attach-tags" colspan="5">';
 	print_tag_attach_form( $t_bug_id );
@@ -730,15 +724,6 @@ if( $t_custom_fields_found ) {
 	echo '<tr class="hidden"></tr>';
 }
 
-# Attachments
-if( $t_show_attachments ) {
-	echo '<tr id="attachments">';
-	echo '<th class="bug-attachments category">', lang_get( 'attached_files' ), '</th>';
-	echo '<td class="bug-attachments" colspan="5">';
-	print_bug_attachments_list( $t_bug_id );
-	echo '</td></tr>';
-}
-
 echo '</tbody></table>';
 echo '</div></div></div></div></div>';
 
@@ -751,12 +736,6 @@ if( $t_show_sponsorships_box ) {
 # Bug Relationships
 if( $t_show_relationships_box ) {
 	relationship_view_box( $t_bug->id );
-}
-
-# File upload box
-if( $t_show_upload_form ) {
-	define( 'BUG_FILE_UPLOAD_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bug_file_upload_inc.php' );
 }
 
 # User list monitoring the bug

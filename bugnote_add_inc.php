@@ -54,7 +54,7 @@ require_api( 'lang_api.php' );
 		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 
-<div class="col-md-12 col-xs-12">
+<div class="col-md-12 col-xs-12 noprint">
 <a id="addbugnote"></a>
 <div class="space-10"></div>
 
@@ -146,8 +146,10 @@ require_api( 'lang_api.php' );
 	if( file_allow_bug_upload( $f_bug_id ) ) {
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+
+		$t_attach_style = ( $t_default_bugnote_view_status != VS_PUBLIC ) ? 'display: none;' : '';
 ?>
-			<tr>
+			<tr id="bugnote-attach-files" style="<?php echo $t_attach_style ?>">
 				<th class="category">
 					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 					<br />
