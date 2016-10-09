@@ -2247,62 +2247,13 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	#
 	# Build the field items
+	# Use different sections to keep some separation among each group of fields
+	# When a section starts, its fields start in a new row.
 
-	# Section 1: main filter fields
+	# Section: main filter fields
 
 	$t_section_main = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ),
-			filter_form_get_input( $t_filter, 'reporter_id', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'reporter_id_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ),
-			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'user_monitor_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ),
-			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'handler_id_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
-			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_category_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ),
-			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_severity_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ),
-			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_resolution_filter_target' /* content id */
-			));
-	if( ON == config_get( 'enable_profiles' ) ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ),
-				filter_form_get_input( $t_filter, 'show_profile', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_profile_filter_target' /* content id */
-				));
-	}
 	$t_section_main->add_item( new TableFieldsItem(
 			$get_field_header( 'show_status_filter', lang_get( 'status_label' ) ),
 			filter_form_get_input( $t_filter, 'show_status', $t_show_inputs ),
@@ -2319,15 +2270,62 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				'hide_status_filter_target' /* content id */
 				));
 	}
-	if( $t_show_build ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ),
-				filter_form_get_input( $t_filter, 'show_build', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_build_filter_target' /* content id */
-				));
-	}
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
+			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_category_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ),
+			filter_form_get_input( $t_filter, 'reporter_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'reporter_id_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ),
+			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'handler_id_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ),
+			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_priority_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ),
+			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_severity_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ),
+			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_resolution_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ),
+			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'note_user_id_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ),
+			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'user_monitor_filter_target' /* content id */
+			));
 	if( $t_show_product_version ) {
 		$t_section_main->add_item( new TableFieldsItem(
 				$get_field_header( 'show_version_filter', lang_get( 'product_version_label' ) ),
@@ -2351,20 +2349,24 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				'show_target_version_filter_target' /* content id */
 				));
 	}
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ),
-			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_priority_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'per_page_filter', lang_get( 'show_label' ) ),
-			filter_form_get_input( $t_filter, 'per_page', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'per_page_filter_target' /* content id */
-			));
+	if( ON == config_get( 'enable_profiles' ) ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ),
+				filter_form_get_input( $t_filter, 'show_profile', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_profile_filter_target' /* content id */
+				));
+	}
+	if( $t_show_build ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ),
+				filter_form_get_input( $t_filter, 'show_build', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_build_filter_target' /* content id */
+				));
+	}
 	$t_section_main->add_item( new TableFieldsItem(
 			$get_field_header( 'view_state_filter', lang_get( 'view_status_label' ) ),
 			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
@@ -2382,7 +2384,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_section_main->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_date', $t_show_inputs ),
-			1 /* colspan */,
+			2 /* colspan */,
 			null /* class */,
 			'do_filter_by_date_filter_target' /* content id */
 			));
@@ -2426,7 +2428,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				));
 	}
 
-	# Section 2: plugin filters
+	# Section: plugin filters
 
 	$t_section_plugins = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
@@ -2451,7 +2453,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				));
 	}
 
-	# Section 3: custom fields
+	# Section: custom fields
 
 	$t_section_custom = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
@@ -2487,16 +2489,16 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		}
 	}
 
-	# Section 4: last fields, horizontal orientation
+	# Section: last fields, horizontal orientation
 
 	$t_section_last = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_HORIZONTAL );
 
 	$t_section_last->add_item( new TableFieldsItem(
-			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ),
-			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
+			$get_field_header( 'per_page_filter', lang_get( 'show_label' ) ),
+			filter_form_get_input( $t_filter, 'per_page', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
-			'note_user_id_filter_target' /* content id */
+			'per_page_filter_target' /* content id */
 			));
 	$t_section_last->add_item( new TableFieldsItem(
 			$get_field_header( 'show_sort_filter', lang_get( 'sort_label' ) ),
@@ -2531,12 +2533,11 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	?>
 	<table width="100%" cellspacing="1">
-		<?php
-			$t_section_main->render();
-			$t_section_plugins->render();
-			$t_section_custom->render();
-			$t_section_last->render();
-		?>
+		<?php $t_section_main->render() ?>
+		<?php $t_section_plugins->render() ?>
+		<?php $t_section_custom->render() ?>
+		<tr class="spacer"></tr>
+		<?php $t_section_last->render() ?>
 	</table>
 	<?php
 }
