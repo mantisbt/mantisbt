@@ -113,7 +113,7 @@ if( function_exists( $t_function_name ) ) {
 	# Check existence of custom field id, and if the user have access to read and filter by
 	if( $t_cfdef && $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
 		return_dynamic_filters_prepend_headers();
-		print_filter_custom_field( $t_custom_id );
+		print_filter_custom_field( $t_custom_id, $t_filter );
 	} else {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
 	}
@@ -123,7 +123,7 @@ if( function_exists( $t_function_name ) ) {
 	foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		if( $t_field_name . '_filter' == $f_filter_target ) {
 			return_dynamic_filters_prepend_headers();
-			print_filter_plugin_field( $t_field_name, $t_filter_object );
+			print_filter_plugin_field( $t_field_name, $t_filter_object, $t_filter );
 			$t_found = true;
 			break;
 		}
