@@ -138,7 +138,7 @@ $t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
 		<?php
 		$t_for_screen = true;
 		$t_static = gpc_get_bool( 'static', false );
-		filter_draw_selection_inputs( $t_filter, $t_for_screen, $t_static );
+		filter_form_draw_inputs( $t_filter, $t_for_screen, $t_static );
 		?>
 
 		<table>
