@@ -145,7 +145,7 @@ $f_static = gpc_get_bool( 'static', false );
 		</div>
 
 		<?php
-		filter_draw_selection_inputs( $t_filter, $f_for_screen, $f_static );
+		filter_form_draw_inputs( $t_filter, $f_for_screen, $f_static );
 		?>
 
 		<table>

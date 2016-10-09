@@ -27,10 +27,12 @@
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses current_user_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses gpc_api.php
  * @uses helper_api.php
+ * @uses html_api.php
  * @uses lang_api.php
  * @uses logging_api.php
  * @uses print_api.php
@@ -43,10 +45,12 @@ require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
+require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'print_api.php' );
@@ -72,6 +76,47 @@ require_api( 'user_api.php' );
  *      class so as to avoid all those calls to global(which are pretty ugly)
  *      These functions could also be shared by view_filters_page.php
  */
+
+/**
+ * Returns HTML for each filter field, to be used in filter form.
+ * $p_filter_target is a field name to match any of "the print_filter_..." functions,
+ * excluding those related to custom fields and plugin fields.
+ * When $p_show_options is enabled, the form inputs are returned to allow selection,
+ * if the option is disabled, returns the current value and a hidden input for that value.
+ * @param array $p_filter Filter array
+ * @param string $p_filter_target Filter field name
+ * @param boolean $p_show_options Whether to return a visible form input or a text value.
+ * @return string
+ */
+function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_inputs = true ) {
+	if( $p_show_inputs ) {
+		$t_function_prefix = 'print_filter_';
+	} else {
+		$t_function_prefix = 'print_filter_values_';
+	}
+	$t_params = array( $p_filter );
+	$t_function_name = $t_function_prefix . $p_filter_target;
+
+	# override non standard calls
+	switch( $p_filter_target ) {
+		case 'do_filter_by_date':
+			if( $p_show_inputs ) {
+				$t_params = array( false, $p_filter );
+			}
+			break;
+	}
+
+	if( function_exists( $t_function_name ) ) {
+		ob_start();
+		call_user_func_array( $t_function_name, $t_params );
+		return ob_get_clean();
+	} else {
+		# error - no function to populate the target (e.g., print_filter_foo)
+		error_parameters( $p_filter_target );
+		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+	}
+}
+
 
 /**
  * Return the input modifier to be used when a filter is of type "advanced"
@@ -2112,3 +2157,387 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 		}
 	}
 }
+
+
+/**
+ * Draw the table cells to view and edit a filter. This will usually be part of a form.
+ * This method only prints the cells, not the table definition, or any other form element
+ * outside of that.
+ * A filter array is provided, to populate the fields.
+ * The form will use javascript to show dinamic completion of fields (unless the
+ * parameter $p_static is provided).
+ * A page name can be provided to be used as a fallback script when javascript is
+ * not available on the cliuent, and the form was rendered with dynamic fields.
+ * By default, the fallback is the current page.
+ *
+ * @param array $p_filter	Filter array to show.
+ * @param boolean $p_for_screen	Type of output
+ * @param boolean $p_static	Wheter to print a static form (no dynamic fields)
+ * @param string $p_static_fallback_page	Page name to use as javascript fallback
+ * @return void
+ */
+function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null ) {
+
+	$t_filter = filter_ensure_valid_filter( $p_filter );
+	$t_view_type = $t_filter['_view_type'];
+	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
+
+	# If it's a stored filter, linked to a secific project, use that project_id to render available fields
+	if( $t_source_query_id > 0 ) {
+		$t_project_id = (int)filter_get_field( $t_source_query_id, 'project_id' );
+		if( ALL_PROJECTS == $t_project_id ) {
+			# If all_projects, the filter can be used at any project, select the current project id
+			$t_project_id = helper_get_current_project();
+		} else if( $t_project_id < 0 ) {
+			# If filter is an unnamed filter, project id is stored as negative value.
+			$t_project_id = -1 * $t_project_id;
+		}
+	} else {
+		$t_project_id = helper_get_current_project();
+	}
+
+	if( null === $p_static_fallback_page ) {
+		$p_static_fallback_page = $_SERVER['PHP_SELF'];
+	}
+	$t_filters_url = $p_static_fallback_page;
+	$t_get_params = $_GET;
+	$t_get_params['for_screen'] = $p_for_screen;
+	$t_get_params['static'] = ON;
+	$t_get_params['view_type'] = ( 'advanced' == $t_view_type ) ? 'advanced' : 'simple';
+	$t_filters_url .= '?' . http_build_query( $t_get_params );
+
+	$t_show_product_version =  version_should_show_product_version( $t_project_id );
+	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
+
+	# overload handler_id setting if user isn't supposed to see them (ref #6189)
+	if( !access_has_any_project( config_get( 'view_handler_threshold' ) ) ) {
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array(
+			META_FILTER_ANY,
+		);
+	}
+
+	if ( config_get( 'use_dynamic_filters' ) ) {
+		$t_dynamic_filter_expander_class = ' class="dynamic-filter-expander"';
+	} else {
+		$t_dynamic_filter_expander_class = '';
+	}
+
+	$get_field_header = function ( $p_id, $p_label ) use ( $t_filters_url, $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
+		if( $p_static) {
+			return $p_label;
+		} else {
+			if( $t_source_query_id > 0 ) {
+				$t_data_filter_id = ' data-filter_id="' . $t_source_query_id . '"';
+			} else {
+				$t_data_filter_id = '';
+			}
+			return '<a href="' . $t_filters_url . '" id="' . $p_id . '"' . $t_dynamic_filter_expander_class . $t_data_filter_id . '>' . $p_label . '</a>';
+		}
+	};
+
+
+	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
+
+	$t_tdclass = 'small-caption';
+	if( $p_for_screen == false ) {
+		$t_tdclass = 'print';
+	}
+
+	$t_show_inputs = $p_static;
+
+	#
+	# Build the field items
+
+	# Section 1: main filter fields
+
+	$t_section_main = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ),
+			filter_form_get_input( $t_filter, 'reporter_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'reporter_id_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ),
+			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'user_monitor_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ),
+			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'handler_id_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
+			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_category_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ),
+			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_severity_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ),
+			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_resolution_filter_target' /* content id */
+			));
+	if( ON == config_get( 'enable_profiles' ) ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ),
+				filter_form_get_input( $t_filter, 'show_profile', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_profile_filter_target' /* content id */
+				));
+	}
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_status_filter', lang_get( 'status_label' ) ),
+			filter_form_get_input( $t_filter, 'show_status', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_status_filter_target' /* content id */
+			));
+	if( 'simple' == $t_view_type ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'hide_status_filter', lang_get( 'hide_status_label' ) ),
+				filter_form_get_input( $t_filter, 'hide_status', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'hide_status_filter_target' /* content id */
+				));
+	}
+	if( $t_show_build ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ),
+				filter_form_get_input( $t_filter, 'show_build', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_build_filter_target' /* content id */
+				));
+	}
+	if( $t_show_product_version ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_version_filter', lang_get( 'product_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_version_filter_target' /* content id */
+				));
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_fixed_in_version_filter', lang_get( 'fixed_in_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_fixed_in_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_fixed_in_version_filter_target' /* content id */
+				));
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'show_target_version_filter', lang_get( 'target_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_target_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_target_version_filter_target' /* content id */
+				));
+	}
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ),
+			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_priority_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'per_page_filter', lang_get( 'show_label' ) ),
+			filter_form_get_input( $t_filter, 'per_page', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'per_page_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'view_state_filter', lang_get( 'view_status_label' ) ),
+			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'view_state_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'sticky_issues_filter', lang_get( 'sticky_label' ) ),
+			filter_form_get_input( $t_filter, 'sticky_issues', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'sticky_issues_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ),
+			filter_form_get_input( $t_filter, 'do_filter_by_date', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'do_filter_by_date_filter_target' /* content id */
+			));
+	$t_section_main->add_item( new TableFieldsItem(
+			$get_field_header( 'relationship_type_filter', lang_get( 'bug_relationships_label' ) ),
+			filter_form_get_input( $t_filter, 'relationship_type', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'relationship_type_filter_target' /* content id */
+			));
+	if( ON == config_get( 'enable_profiles' ) ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'platform_filter', lang_get( 'platform_label' ) ),
+				filter_form_get_input( $t_filter, 'platform', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'platform_filter_target' /* content id */
+				));
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'os_filter', lang_get( 'os_label' ) ),
+				filter_form_get_input( $t_filter, 'os', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'os_filter_target' /* content id */
+				));
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'os_build_filter', lang_get( 'os_version_label' ) ),
+				filter_form_get_input( $t_filter, 'os_build', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'os_build_filter_target' /* content id */
+				));
+	}
+	if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'tag_string_filter', lang_get( 'tags_label' ) ),
+				filter_form_get_input( $t_filter, 'tag_string', $t_show_inputs ),
+				5 /* colspan */,
+				null /* class */,
+				'tag_string_filter_target' /* content id */
+				));
+	}
+
+	# Section 2: plugin filters
+
+	$t_section_plugins = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+
+	$t_plugin_filters = filter_get_plugin_filters();
+	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+		$t_colspan = (int)$t_filter_object->colspan;
+		$t_header = $get_field_header( string_attribute( $t_field_name ) . '_filter"', string_display_line( $t_filter_object->title ) );
+		ob_start();
+		if( $p_static ) {
+			print_filter_plugin_field( $t_field_name, $t_filter_object, $t_filter );
+		} else {
+			print_filter_values_plugin_field( $t_filter, $t_field_name, $t_filter_object );
+		}
+		$t_content = ob_get_clean();
+
+		$t_section_plugins->add_item( new TableFieldsItem(
+				$t_header,
+				$t_content,
+				$t_colspan,
+				null /* class */,
+				string_attribute( $t_field_name ) . '_filter_target' /* content id */
+				));
+	}
+
+	# Section 3: custom fields
+
+	$t_section_custom = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+
+	if( ON == config_get( 'filter_by_custom_fields' ) ) {
+		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+		$t_accessible_custom_fields = array();
+		foreach( $t_custom_fields as $t_cfid ) {
+			$t_cfdef = custom_field_get_definition( $t_cfid );
+			if( $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
+				$t_accessible_custom_fields[] = $t_cfdef;
+			}
+		}
+
+		if( !empty( $t_accessible_custom_fields ) ) {
+			foreach( $t_accessible_custom_fields as $t_cfdef ) {
+				$t_header = $get_field_header( 'custom_field_' . $t_cfdef['id'] . '_filter', string_display_line( lang_get_defaulted( $t_cfdef['name'] ) ) );
+				ob_start();
+				if( $p_static ) {
+					print_filter_custom_field( $t_cfdef['id'], $t_filter );
+				} else {
+					print_filter_values_custom_field( $t_filter, $t_cfdef['id'] );
+				}
+				$t_content = ob_get_clean();
+
+				$t_section_custom->add_item( new TableFieldsItem(
+						$t_header,
+						$t_content,
+						1 /* colspan */,
+						null /* class */,
+						'custom_field_' . $t_cfdef['id'] . '_filter_target' /* content id */
+						));
+			}
+		}
+	}
+
+	# Section 4: last fields, horizontal orientation
+
+	$t_section_last = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_HORIZONTAL );
+
+	$t_section_last->add_item( new TableFieldsItem(
+			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ),
+			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'note_user_id_filter_target' /* content id */
+			));
+	$t_section_last->add_item( new TableFieldsItem(
+			$get_field_header( 'show_sort_filter', lang_get( 'sort_label' ) ),
+			filter_form_get_input( $t_filter, 'show_sort', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_sort_filter_target' /* content id */
+			));
+	if( 'advanced' == $t_view_type ) {
+		$t_section_last->add_item( new TableFieldsItem(
+				$get_field_header( 'project_id_filter', lang_get( 'email_project_label' ) ),
+				filter_form_get_input( $t_filter, 'project_id', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'project_id_filter_target' /* content id */
+				));
+	}
+	$t_section_last->add_item( new TableFieldsItem(
+			$get_field_header( 'match_type_filter', lang_get( 'filter_match_type_label' ) ),
+			filter_form_get_input( $t_filter, 'match_type', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'match_type_filter_target' /* content id */
+			));
+	$t_section_last->add_item( new TableFieldsItem(
+			$get_field_header( 'highlight_changed_filter', lang_get( 'changed_label' ) ),
+			filter_form_get_input( $t_filter, 'highlight_changed', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'highlight_changed_filter_target' /* content id */
+			));
+
+	?>
+	<table width="100%" cellspacing="1">
+		<?php
+			$t_section_main->render();
+			$t_section_plugins->render();
+			$t_section_custom->render();
+			$t_section_last->render();
+		?>
+	</table>
+	<?php
+}
+
