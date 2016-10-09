@@ -68,9 +68,6 @@ if( null === $f_filter_id ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-# Get filter array and do filter_init()
-# This is needed because filter api drawing code uses global $g_filter
-# @TODO refactor filter_api to not use globals
 $t_filter_string = filter_db_get_filter( $f_filter_id );
 if( !$t_filter_string ) {
 	access_denied();

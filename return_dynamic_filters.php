@@ -79,8 +79,6 @@ $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 $t_filter['_view_type'] = $f_view_type;
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
-filter_init( $t_filter );
-
 /**
  * Prepend headers to the dynamic filter forms that are sent as the response from this page.
  * @return void
@@ -95,7 +93,7 @@ $f_filter_target = gpc_get_string( 'filter_target' );
 $t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
 if( function_exists( $t_function_name ) ) {
 	return_dynamic_filters_prepend_headers();
-	call_user_func( $t_function_name );
+	call_user_func( $t_function_name, $t_filter );
 } else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
