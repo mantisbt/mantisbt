@@ -75,20 +75,10 @@ if( null === $f_filter_id ) {
 	}
 }
 
-$f_default_view_type = 'simple';
-if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-	$f_default_view_type = 'advanced';
-}
-
-$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'advanced';
-}
-if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'simple';
-}
-
+$f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 $t_filter['_view_type'] = $f_view_type;
+$t_filter = filter_ensure_valid_filter( $t_filter );
+
 filter_init( $t_filter );
 
 /**
