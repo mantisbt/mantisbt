@@ -80,21 +80,9 @@ if( !$t_filter_string ) {
 	filter_cache_row( $f_filter_id );
 }
 
-$f_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
-
-if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'advanced';
-}
-if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'simple';
-}
-if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
-	$f_view_type = $f_default_view_type;
-}
-
 $t_filter['_view_type'] = $f_view_type;
-filter_init( $t_filter );
+$t_filter = filter_ensure_valid_filter( $t_filter );
 
 $t_action = 'manage_filter_edit_update.php';
 $t_current_project = helper_get_current_project();
