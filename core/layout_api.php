@@ -398,7 +398,7 @@ function layout_navbar() {
 	}
 	echo '</button>';
 
-	echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler">';
+	echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler" data-target="#sidebar">';
 	echo '<span class="sr-only">Toggle sidebar</span>';
 	echo '<span class="icon-bar"></span>';
 	echo '<span class="icon-bar"></span>';
