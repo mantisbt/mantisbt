@@ -161,7 +161,7 @@ echo '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' 
 			</programlisting>
 
 			<para>
-				Note that while <function>plugin_page()</function> expects on the page's name,
+				Note that while <function>plugin_page()</function> expects only the page's name
 				without the extension, <function>plugin_file()</function> requires the entire
 				filename so that it can distinguish between <filename>foo.css</filename> and
 				a potential file <filename>foo.png</filename>.
