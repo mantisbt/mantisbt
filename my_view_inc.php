@@ -313,7 +313,7 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
 			</a>
 		</div>
-		<div class="widget-toolbar no-border">
+		<div class="widget-toolbar no-border hidden-xs">
 			<div class="widget-menu">
 				<?php print_small_button( $t_box_url, lang_get( 'view_bugs_link' ) ); ?>
 			</div>
