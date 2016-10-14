@@ -202,3 +202,5 @@ config_obsolete( 'db_schema' );
 
 # changes in 2.0.0dev
 config_obsolete( 'icon_path' );
+config_obsolete( 'bug_print_page_fields' );
+
