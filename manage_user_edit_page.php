@@ -185,7 +185,9 @@ print_manage_menu();
 # User action buttons: RESET/UNLOCK and DELETE
 
 $t_reset = $t_user['id'] != auth_get_current_user_id()
-	&& helper_call_custom_function( 'auth_can_change_password', array() );
+	&& helper_call_custom_function( 'auth_can_change_password', array() )
+	&& user_is_enabled( $t_user['id'] )
+	&& !user_is_protected( $t_user['id'] );
 $t_unlock = OFF != config_get( 'max_failed_login_count' ) && $t_user['failed_login_count'] > 0;
 $t_delete = !( ( user_is_administrator( $t_user_id ) && ( user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1 ) ) );
 $t_impersonate = auth_can_impersonate( $t_user['id'] );
