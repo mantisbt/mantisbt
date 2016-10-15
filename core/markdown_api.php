@@ -14,50 +14,72 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Markdown API
+ *
+ * @package CoreAPI
+ * @subpackage ColumnsAPI
+ * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses ParsedownExtension
+ */
+
 $g_parsedown = null;
 
+/**
+ * Initialise the Parsedown library
+ * We used the ParsedownExtension instead of the original library (Parsedown), its because we have
+ * our own format settings (e.g If a line starts with # and issue id, the line is treated as a header 
+ * instead of an issue reference and the # is omitted form the output)
+ *
+ * @return void
+ */
 function markdown_init() {
 	global $g_parsedown;
 	if ( $g_parsedown == null ) {
-		require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/Parsedown.php' );
-		$g_parsedown = new Parsedown();
+		require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/ParsedownExtension.php' );
+		$g_parsedown = new ParsedownExtension();
 	}
 }
 
+/**
+ * Checked if markdown is enabled from config
+ * @return boolean
+ */
 function markdown_enabled() {
 	return config_get( 'markdown_enabled' ) != OFF;
 }
 
-function markdown_trim_para( $p_text ) {
-	$t_text = $p_text;
-	$t_len = strlen( $t_text );
-
-	if ( $t_len >= 7 && stripos( $t_text, '<p>' ) == 0 && stripos( $t_text, '</p>', $t_len - 4 ) !== false ) {
-		$t_text = substr( $t_text, 3, $t_len - 7 );
-	}
-
-	return $t_text;	
-}
-
+/**
+ * Wrapped the parsedown->text as markdown_text
+ *
+ * @param string p_text
+ * @return string
+ */
 function markdown_text( $p_text ) {
 	markdown_init();
 
 	global $g_parsedown;
 
 	$t_text = $g_parsedown->text( $p_text );
-	$t_text = markdown_trim_para( $t_text );
-
+	
 	return $t_text;
 }
 
+/**
+ * Wrapped the parsedown->line as markdown_line
+ *
+ * @param string p_text
+ * @return string
+ */
 function markdown_line( $p_text ) {
 	markdown_init();
 
 	global $g_parsedown;
 
 	$t_text =  $g_parsedown->line( $p_text );
-	$t_text = markdown_trim_para( $t_text );
-
+	
 	return $t_text;
 }
-
