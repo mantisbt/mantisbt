@@ -618,3 +618,9 @@ define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 # Maximum number of bugs that are treated simutaneously in export procedures,
 # to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
 define( 'EXPORT_BLOCK_SIZE', 500 );
+
+# Maximum "safe" value to be used for integer fields in database.
+# Note: mantis ids are defined in schema as "I UNSIGNED", which Adodb maps to
+# the closest integer (4 bytes) type available. As some DBs dont support unsigned
+# types, 2^31 is a safe limit to be used for all.
+define( 'DB_MAX_INT', 2147483647 );
