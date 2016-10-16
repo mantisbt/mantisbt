@@ -91,14 +91,14 @@ $t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
 	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="filter_id" value="<?php echo $f_filter_id ?>" >
-		<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" >
+		<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type'] ?>" >
 		<h2><?php echo lang_get('edit_filter') ?></h2>
 
 		<div class="section-link">
 			<?php
 			$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
 				if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-					if( 'advanced' == $f_view_type ) {
+					if( 'advanced' == $t_filter['_view_type'] ) {
 						print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
 					} else {
 						print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
