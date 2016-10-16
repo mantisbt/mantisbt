@@ -47,7 +47,7 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 		# create an empty filter, to match all bugs
 		$t_filter = filter_ensure_valid_filter( array() );
 		# Override the default hide status, to show all bugs
-		$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array();
+		$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
 	}
 	$t_result = history_get_range_result_filter( $t_filter, $p_start_time, $p_end_time, 'DESC' );
 	$t_count = 0;
