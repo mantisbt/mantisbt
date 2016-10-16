@@ -84,7 +84,7 @@ require_api( 'user_api.php' );
  * if the option is disabled, returns the current value and a hidden input for that value.
  * @param array $p_filter Filter array
  * @param string $p_filter_target Filter field name
- * @param boolean $p_show_options Whether to return a visible form input or a text value.
+ * @param boolean $p_show_inputs Whether to return a visible form input or a text value.
  * @return string
  */
 function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_inputs = true ) {
@@ -1528,7 +1528,6 @@ function print_filter_note_user_id( array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_filter_object ) {
-	$t_filter = $p_filter;
 	if( !isset( $p_filter[$p_field_name] ) ) {
 		echo lang_get( 'any' );
 	} else {
@@ -1743,7 +1742,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 
-	$t_cfdef = custom_field_get_definition( $p_field_id, $p_filter );
+	$t_cfdef = custom_field_get_definition( $p_field_id );
 
 	switch( $t_cfdef['type'] ) {
 		case CUSTOM_FIELD_TYPE_DATE:
@@ -2236,12 +2235,6 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 
 	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
-
-	$t_tdclass = 'small-caption';
-	if( $p_for_screen == false ) {
-		$t_tdclass = 'print';
-	}
-
 	$t_show_inputs = $p_static;
 
 	#
