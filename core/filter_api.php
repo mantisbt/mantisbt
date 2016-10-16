@@ -675,11 +675,11 @@ function filter_get_default_array( $p_view_type = null ) {
 	$t_default_show_changed = config_get( 'default_show_changed' );
 	$t_meta_filter_any_array = array( META_FILTER_ANY );
 
+	$t_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
 	if( null === $p_view_type ) {
-		$t_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
 		$t_view_type = $t_default_view_type;
 	} else {
-		$t_view_type = ( $p_view_type == 'advanced' ) ? 'advanced' : 'simple;';
+		$t_view_type = ( $p_view_type == 'advanced' ) ? 'advanced' : $t_default_view_type;
 	}
 
 	if( $t_view_type == 'simple' ) {
