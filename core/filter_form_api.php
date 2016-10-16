@@ -341,7 +341,7 @@ function print_filter_values_handler_id( array $p_filter ) {
  * @return void
  */
 function print_filter_handler_id( array $p_filter = null ) {
-	global $g_filter, $f_view_type;
+	global $g_filter;
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
