@@ -228,29 +228,6 @@ switch( $f_type ) {
 
 $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
-# Remove any statuses that should be excluded by the hide_status field
-if( $f_view_type == 'advanced' ) {
-	if( !filter_field_is_none( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
-		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
-		foreach( $t_statuses as $t_key=>$t_val ) {
-			if( $t_val < $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-				$t_keep_statuses[$t_key] = $t_val;
-			}
-		}
-		$t_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
-	}
-}
-
-# If a status is selected in the status and the hide_status field,
-# remove it from hide status
-if( $f_view_type == 'simple' && $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
-	foreach( $t_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
-		if( $t_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-			unset( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
-		}
-	}
-}
-
 $t_settings_string = filter_serialize( $t_setting_arr );
 
 # If only using a temporary filter, don't store it in the database

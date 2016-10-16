@@ -664,6 +664,54 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		}
 	}
 
+	# If view_type is advanced, and hide_status is present, modify status array
+	# to remove hidden status. This may happen after switching from simple to advanced.
+	# Then, remove hide_status property, as it does not apply to advanced filter
+	if( $p_filter_arr['_view_type'] == 'advanced'
+			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
+		if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_STATUS] ) ) {
+			$t_selected_status_array = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+		} else {
+			$t_selected_status_array = $p_filter_arr[FILTER_PROPERTY_STATUS];
+		}
+		$t_hide_status = $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS][0];
+		$t_new_status_array = array();
+		foreach( $t_selected_status_array as $t_status ) {
+			if( $t_status < $t_hide_status ) {
+				$t_new_status_array[] = $t_status;
+			}
+		}
+		# If there is no status left, reset the status property to "any"
+		if( empty( $t_new_status_array ) ) {
+			$t_new_status_array[] = META_FILTER_ANY;
+		}
+		$p_filter_arr[FILTER_PROPERTY_STATUS] = $t_new_status_array;
+		$p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
+	}
+
+	#If view_type is simple, resolve conflicts between show_status and hide_status
+	if( $p_filter_arr['_view_type'] == 'simple'
+			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
+		# get array of hidden status ids
+		$t_all_status = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+		$t_hidden_status = $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS][0];
+		$t_hidden_status_array = array();
+		foreach( $t_all_status as $t_status ) {
+			if( $t_status >= $t_hidden_status ) {
+				$t_hidden_status_array[] = $t_status;
+			}
+		}
+		# remove hidden status from show_status property array
+		# note that this will keep the "any" meta value, if present
+		$t_show_status_array = array_diff( $p_filter_arr[FILTER_PROPERTY_STATUS], $t_hidden_status_array );
+		# If there is no status left, reset the status property previous values, and remove hide_status
+		if( empty( $t_show_status_array ) ) {
+			$t_show_status_array = $p_filter_arr[FILTER_PROPERTY_STATUS];
+			$p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
+		}
+		$p_filter_arr[FILTER_PROPERTY_STATUS] = $t_show_status_array;
+	}
+
 	# all of our filter values are now guaranteed to be there, and correct.
 	return $p_filter_arr;
 }
