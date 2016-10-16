@@ -1539,42 +1539,38 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	# show / hide status
 	# take a list of all available statuses then remove the ones that we want hidden, then make sure
 	# the ones we want shown are still available
-	$t_desired_statuses = array();
-	$t_available_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+	$t_desired_statuses = $t_filter[FILTER_PROPERTY_STATUS];
 
+	# simple filtering: restrict by the hide status value if present
 	if( 'simple' == $t_filter['_view_type'] ) {
-		# simple filtering: if showing any, restrict by the hide status value, otherwise ignore the hide
-		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS][0];
-		$t_this_hide_status = isset( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] )
-			? $t_filter[FILTER_PROPERTY_HIDE_STATUS][0]
-			: null;
-
-		if( filter_field_is_any( $t_this_status ) ) {
-			foreach( $t_available_statuses as $t_this_available_status ) {
-				if( $t_this_hide_status > $t_this_available_status ) {
-					$t_desired_statuses[] = $t_this_available_status;
+		if( isset( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) && !filter_field_is_none( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) ) {
+			$t_selected_status_array = $t_filter[FILTER_PROPERTY_STATUS];
+			# if we have metavalue for "any", expand to all status, to filter them
+			if( filter_field_is_any( $t_selected_status_array ) ) {
+				$t_selected_status_array = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+			}
+			$t_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS][0];
+			# Filter out status that must be hidden
+			$t_desired_statuses = array();
+			foreach( $t_selected_status_array as $t_this_status ) {
+				if( $t_hide_status > $t_this_status ) {
+					$t_desired_statuses[] = $t_this_status;
 				}
 			}
-		} else {
-			$t_desired_statuses[] = $t_this_status;
 		}
-	} else {
-		# advanced filtering: ignore the hide
-		if( filter_field_is_any( $t_filter[FILTER_PROPERTY_STATUS] ) ) {
+	}
+	# advanced filtering: ignore hide_status, do nothing.
+
+	# if show_status is "any", empty the array, to not include any condition on status.
+	if( filter_field_is_any( $t_desired_statuses ) ) {
 			$t_desired_statuses = array();
-		} else {
-			foreach( $t_filter[FILTER_PROPERTY_STATUS] as $t_this_status ) {
-				$t_desired_statuses[] = $t_this_status;
-			}
-		}
 	}
 
 	if( count( $t_desired_statuses ) > 0 ) {
 		$t_clauses = array();
 
 		foreach( $t_desired_statuses as $t_filter_member ) {
-			$c_show_status = (int)$t_filter_member;
-			array_push( $t_clauses, $c_show_status );
+			$t_clauses[] = (int)$t_filter_member;
 		}
 		if( 1 < count( $t_clauses ) ) {
 			$t_where_tmp = array();
