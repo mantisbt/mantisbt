@@ -985,10 +985,18 @@ function bug_text_clear_cache( $p_bug_id = null ) {
  * @access public
  */
 function bug_exists( $p_bug_id ) {
-	if( false == bug_cache_row( $p_bug_id, false ) ) {
+	$c_bug_id = (int)$p_bug_id;
+
+	# Check for invalid id values
+	if( $c_bug_id <= 0 || $c_bug_id > DB_MAX_INT ) {
 		return false;
-	} else {
+	}
+
+	# bug exists if bug_cache_row returns any value
+	if( bug_cache_row( $c_bug_id, false ) ) {
 		return true;
+	} else {
+		return false;
 	}
 }
 
