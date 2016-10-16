@@ -2867,7 +2867,7 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
  * @return array The resulting filter array
  */
 function filter_gpc_get( array $p_filter = null ) {
-	$f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
+	$f_view_type = gpc_get_string( 'view_type', null );
 
 	if( null === $p_filter ) {
 		$t_filter = filter_get_default_array( $f_view_type );
