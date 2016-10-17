@@ -947,81 +947,73 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  * @return array $p_query_clauses
  */
 function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
-	# if sort is blank then default the sort and direction.  This is to fix the
-	# symptoms of #3953.  Note that even if the main problem is fixed, we may
-	# have to keep this code for a while to handle filters saved with this blank field.
-	if( is_blank( $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
-		$p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
-		$p_filter[FILTER_PROPERTY_SORT_DIRECTION] = 'DESC';
-	}
 
 	$p_query_clauses['order'] = array();
-	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
-	$t_plugin_columns = columns_get_plugin_columns();
+	# Get only the visible, and sortable, column properties
+	# @TODO cproensa: this defaults to COLUMNS_TARGET_VIEW_PAGE
+	# are we sure that filters are only used with the column set for view page?
+	$p_sort_properties = filter_get_visible_sort_properties_array( $p_filter );
+	$t_sort_fields = $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
+	$t_dir_fields = $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 
 	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( null !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = '{bug}.sticky DESC';
 	}
 
 	$t_count = count( $t_sort_fields );
-	for( $i = 0;$i < $t_count;$i++ ) {
+	for( $i = 0; $i < $t_count; $i++ ) {
 		$c_sort = $t_sort_fields[$i];
 		$c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
 
-		if( !in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1 ) ) ) {
-			# if sorting by a custom field
-			if( strpos( $c_sort, 'custom_' ) === 0 ) {
-				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
-				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
-				$t_def = custom_field_get_definition( $t_custom_field_id );
-				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-				$c_cf_alias = 'custom_field_' . $t_custom_field_id;
+		# if sorting by a custom field
+		if( column_is_custom_field( $c_sort ) ) {
+			$t_custom_field = column_get_custom_field_name( $c_sort );
+			$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
+			$t_def = custom_field_get_definition( $t_custom_field_id );
+			$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
+			$c_cf_alias = 'custom_field_' . $t_custom_field_id;
 
-				# Distinguish filter table aliases from sort table aliases (see #19670)
-				$t_cf_table_alias = 'cf_sort_' . $t_custom_field_id;
-				$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
+			# Distinguish filter table aliases from sort table aliases (see #19670)
+			$t_cf_table_alias = 'cf_sort_' . $t_custom_field_id;
+			$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
 
-				# check to be sure this field wasn't already added to the query.
-				if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
-					$p_query_clauses['select'][] = $t_cf_select;
-					$p_query_clauses['join'][] = 'LEFT JOIN {custom_field_string} ' . $t_cf_table_alias . ' ON
-												{bug}.id = ' . $t_cf_table_alias . '.bug_id AND ' . $t_cf_table_alias . '.field_id = ' . $t_custom_field_id;
-				}
-
-				$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
-
-			# if sorting by plugin columns
-			} else if( isset( $t_plugin_columns[$t_sort_fields[$i]] ) ) {
-				$t_column_object = $t_plugin_columns[$t_sort_fields[$i]];
-
-				if( $t_column_object->sortable ) {
-					$t_clauses = $t_column_object->sortquery( $c_dir );
-
-					if( is_array( $t_clauses ) ) {
-						if( isset( $t_clauses['join'] ) ) {
-							$p_query_clauses['join'][] = $t_clauses['join'];
-						}
-						if( isset( $t_clauses['order'] ) ) {
-							$p_query_clauses['order'][] = $t_clauses['order'];
-						}
-					}
-				}
-
-			# standard column
-			} else {
-				$t_sort_col = '{bug}.' . $c_sort;
-
-				# when sorting by due_date, always display undefined dates last
-				if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
-					$t_sort_due_date = $t_sort_col . ' = 1';
-					$p_query_clauses['select'][] = $t_sort_due_date;
-					$t_sort_col = $t_sort_due_date . ', ' . $t_sort_col;
-				}
-
-				$p_query_clauses['order'][] = $t_sort_col . ' ' .$c_dir;
+			# check to be sure this field wasn't already added to the query.
+			if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
+				$p_query_clauses['select'][] = $t_cf_select;
+				$p_query_clauses['join'][] = 'LEFT JOIN {custom_field_string} ' . $t_cf_table_alias . ' ON
+											{bug}.id = ' . $t_cf_table_alias . '.bug_id AND ' . $t_cf_table_alias . '.field_id = ' . $t_custom_field_id;
 			}
+
+			$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
+
+		# if sorting by plugin columns
+		} else if( column_is_plugin_column( $c_sort ) ) {
+			$t_plugin_columns = columns_get_plugin_columns();
+			$t_column_object = $t_plugin_columns[$c_sort];
+
+			$t_clauses = $t_column_object->sortquery( $c_dir );
+			if( is_array( $t_clauses ) ) {
+				if( isset( $t_clauses['join'] ) ) {
+					$p_query_clauses['join'][] = $t_clauses['join'];
+				}
+				if( isset( $t_clauses['order'] ) ) {
+					$p_query_clauses['order'][] = $t_clauses['order'];
+				}
+			}
+
+		# standard column
+		} else {
+			$t_sort_col = '{bug}.' . $c_sort;
+
+			# when sorting by due_date, always display undefined dates last
+			if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
+				$t_sort_due_date = $t_sort_col . ' = 1';
+				$p_query_clauses['select'][] = $t_sort_due_date;
+				$t_sort_col = $t_sort_due_date . ', ' . $t_sort_col;
+			}
+
+			$p_query_clauses['order'][] = $t_sort_col . ' ' .$c_dir;
 		}
 	}
 
@@ -3162,4 +3154,38 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
 
 	return filter_ensure_valid_filter( $t_filter_input );
+}
+
+/**
+ * Returns the sort columns from a filter, with only those columns that are visible
+ * according to $p_columns_target user's configuration, and valid for sorting.
+ * Returns an array consisting of two respective properties of column names, and
+ * sort direction, each one already exploded into an array.
+ * Note: Filter array must be a valid filter
+ * @param array $p_filter Original filter array.
+ * @param integer $p_columns_target Target view for the columns.
+ * @return array Array of filtered columns and order
+ */
+function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	# get visible columns
+	$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
+	# filter out those that ar not sortable
+	$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+
+	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	$t_sort_array = array();
+	$t_dir_array = array();
+	$t_count = count( $t_sort_fields );
+	for( $i = 0; $i < $t_count; $i++ ) {
+		$c_sort = $t_sort_fields[$i];
+		if( in_array( $c_sort, $t_visible_columns ) ) {
+			$t_sort_array[] = $t_sort_fields[$i];
+			$t_dir_array[] = $t_dir_fields[$i];
+		}
+	}
+	return array(
+		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_array,
+		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_array
+	);
 }
