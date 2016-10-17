@@ -2940,23 +2940,37 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	$f_match_type = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, $t_filter[FILTER_PROPERTY_MATCH_TYPE] );
 
-	# these are only single values, even when doing advanced filtering
-	$f_per_page				= gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
-	$f_highlight_changed	= gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
-	$f_sticky_issues		= gpc_get_bool( FILTER_PROPERTY_STICKY, $t_filter[FILTER_PROPERTY_STICKY] );
+	# these are single column sort options, they come from clickable column headers
+	$f_sort_d = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, null );
+	$f_dir_d = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, null );
 
-	# sort direction
-	$f_sort_d				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, '' );
-	$f_dir_d				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, '' );
-	$f_sort_0				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_0', 'last_updated' );
-	$f_dir_0				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_0', 'DESC' );
-	$f_sort_1				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_1', '' );
-	$f_dir_1				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
+	# if the values are present, push them to the front of sort columns
+	if( null !== $f_sort_d ) {
+		$t_current_sort_array = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+		$t_current_dir_array = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+		# push the new values to the front, they will be validated later
+		array_unshift( $t_current_sort_array, str_replace( ',', '', $f_sort_d ) );
+		array_unshift( $t_current_dir_array, str_replace( ',', '', $f_dir_d ) );
+		$f_sort = implode( ',', $t_current_sort_array );
+		$f_dir = implode( ',', $t_current_dir_array );
+	} else {
+		# search for explicit sort columns, these will replace current sort columns
+		$t_sort_array = array();
+		$t_dir_array = array();
+		# these are multiple sort options, they come from the filter form
+		$f_sort_0 = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_0', '' );
+		$f_dir_0 = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_0', '' );
+		$t_sort_array[] = str_replace( ',', '', $f_sort_0 );
+		$t_dir_array[] = str_replace( ',', '', $f_dir_0 );
 
-	# combine sort settings
-	#  (f_sort overrides f_sort_1 if set to keep old sorting code working in view_all_bug_inc)
-	$f_sort = ( ( $f_sort_d != '' ) ? $f_sort_d : $f_sort_0 ) . ( ( $f_sort_1 != '' ) ? ',' . $f_sort_1 : '' );
-	$f_dir = ( ( $f_dir_d != '' ) ? $f_dir_d : $f_dir_0 ) . ( ( $f_dir_1 != '' ) ? ',' . $f_dir_1 : '' );
+		$f_sort_1 = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_1', '' );
+		$f_dir_1 = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
+		$t_sort_array[] = str_replace( ',', '', $f_sort_1 );
+		$t_dir_array[] = str_replace( ',', '', $f_dir_1 );
+
+		$f_sort = implode( ',', $t_sort_array );
+		$f_dir = implode( ',', $t_dir_array );
+	}
 
 	# date values
 	$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
