@@ -552,46 +552,45 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		}
 	}
 
-	# Make sure array is no longer than 2 elements
 	$t_sort_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	if( count( $t_sort_fields ) > 2 ) {
-		$t_sort_fields = array_slice( $t_sort_fields, 0, 2 );
-	}
-
-	# Make sure array is no longer than 2 elements
 	$t_dir_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] );
-	if( count( $t_dir_fields ) > 2 ) {
-		$t_dir_fields = array_slice( $t_dir_fields, 0, 2 );
-	}
+	# both arrays should be equal lenght, just in case
+	$t_sort_fields_count = min( count( $t_sort_fields ), count( $t_dir_fields ) );
 
-	# Validate the max of two segments for $t_sort_fields and $t_dir_fields
-	for( $i = 0;$i < 2;$i++ ) {
-		if( isset( $t_sort_fields[$i] ) ) {
-			$t_drop = false;
-			$t_sort = $t_sort_fields[$i];
-			if( strpos( $t_sort, 'custom_' ) === 0 ) {
-				if( false === custom_field_get_id_from_name( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) ) {
-					$t_drop = true;
-				}
-			} else {
-				if( !in_array( $t_sort, $t_fields ) ) {
-					$t_drop = true;
-				}
+	# clean up sort fields, remove invalid columns
+	$t_new_sort_array = array();
+	$t_new_dir_array = array();
+	$t_all_columns = columns_get_all_active_columns();
+	for( $ix = 0; $ix < $t_sort_fields_count; $ix++ ) {
+		if( isset( $t_sort_fields[$ix] ) &&  isset( $t_dir_fields[$ix] ) ) {
+			$t_column = $t_sort_fields[$ix];
+			# check that the column name exist
+			if( !in_array( $t_column, $t_all_columns ) ) {
+				continue;
 			}
-			if( !in_array( $t_dir_fields[$i], array( 'ASC', 'DESC' ) ) ) {
-				$t_drop = true;
+			# check that it has not been already used
+			if( in_array( $t_column, $t_new_sort_array ) ) {
+				continue;
 			}
-			if( $t_drop ) {
-				unset( $t_sort_fields[$i] );
-				unset( $t_dir_fields[$i] );
+			# check that it is sortable
+			if( !column_is_sortable( $t_column ) ) {
+				continue;
 			}
+			$t_new_sort_array[] = $t_column;
+
+			# normalize sort_dir value, defaults to DESC
+			$t_dir = $t_dir_fields[$ix] == 'ASC' ? 'ASC' : 'DESC';
+			$t_new_dir_array[] = $t_dir;
 		}
 	}
-	if( count( $t_sort_fields ) > 0 ) {
-		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = implode( ',', $t_sort_fields );
-		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = implode( ',', $t_dir_fields );
+
+	if( count( $t_new_sort_array ) > 0 ) {
+		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = implode( ',', $t_new_sort_array );
+		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = implode( ',', $t_new_dir_array );
+	} else {
+		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
+		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = 'DESC';
 	}
-	# If no sort fields were specified, we already have the default values.
 
 	# validate or filter junk from other fields
 	$t_multi_select_list = array(
