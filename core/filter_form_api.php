@@ -1791,9 +1791,9 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_show_sort( array $p_filter ) {
-	$t_filter = $p_filter;
-	$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	$p_sort_properties = filter_get_visible_sort_properties_array( $p_filter );
+	$t_sort_fields = $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
+	$t_dir_fields = $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 
 	for( $i = 0;$i < 2;$i++ ) {
 		if( isset( $t_sort_fields[$i] ) ) {
@@ -1826,35 +1826,33 @@ function print_filter_show_sort( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 
-	# get all of the displayed fields for sort, then drop ones that
-	#  are not appropriate and translate the rest
-	$t_fields = helper_get_columns_to_view();
-	$t_n_fields = count( $t_fields );
+	# get visible columns, and filter out those that ar not sortable
+	$t_visible_columns = array_filter( helper_get_columns_to_view(), 'column_is_sortable' );
+
 	$t_shown_fields[''] = '';
-	for( $i = 0;$i < $t_n_fields;$i++ ) {
-		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
-			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
-				$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_fields[$i], utf8_strlen( 'custom_' ) ) ) );
-			} else {
-				$t_field_name = string_get_field_name( $t_fields[$i] );
-			}
-			$t_shown_fields[$t_fields[$i]] = $t_field_name;
+	foreach( $t_visible_columns as $t_column ) {
+		if(column_is_custom_field( $t_column ) ) {
+			$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
+		} else {
+			$t_field_name = string_get_field_name( $t_column );
 		}
+		$t_shown_fields[$t_column] = $t_field_name;
 	}
 	$t_shown_dirs[''] = '';
 	$t_shown_dirs['ASC'] = lang_get( 'bugnote_order_asc' );
 	$t_shown_dirs['DESC'] = lang_get( 'bugnote_order_desc' );
 
-	# get default values from filter structure
-	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	# get values from filter structure
+	$p_sort_properties = filter_get_visible_sort_properties_array( $p_filter );
+	$t_sort_fields = $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
+	$t_dir_fields = $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 	if( !isset( $t_sort_fields[1] ) ) {
 		$t_sort_fields[1] = '';
 		$t_dir_fields[1] = '';
 	}
 
 	# if there are fields to display, show the dropdowns
-	if( count( $t_fields ) > 0 ) {
+	if( count( $t_visible_columns ) > 0 ) {
 		# display a primary and secondary sort fields
 		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_0">';
 		foreach( $t_shown_fields as $t_key => $t_val ) {
