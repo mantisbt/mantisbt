@@ -113,6 +113,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			html_javascript_link( 'chart-' . CHARTJS_VERSION . '.min.js' );
 			html_javascript_link( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' );
 		}
+		html_javascript_link( '../plugins/MantisGraph/MantisGraph.js' );
 	}
 
 	/**
