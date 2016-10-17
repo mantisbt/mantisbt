@@ -154,12 +154,12 @@ switch( $f_type ) {
 		break;
 	# Update filters
 	case '1':
-		$t_setting_arr = filter_gpc_get();
+		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 		break;
 	# Set the sort order and direction
 	case '2':
 		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
-		$t_setting_arr = filter_gpc_get();
+		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 
 		break;
 	# This is when we want to copy another query from the
