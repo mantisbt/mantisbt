@@ -547,7 +547,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 		return;
 	}
 	if( !user_is_enabled( $p_user_id ) ) {
-		log_event( LOG_EMAIL_RECIPIENT, 'Password reset for user @U%d not sent, user is disabled', $p_user_id );
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, user is disabled', $p_user_id );
 		return;
 	}
 	lang_push( user_pref_get_language( $p_user_id ) );
@@ -566,7 +566,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
 	} else {
-		log_event( LOG_EMAIL_RECIPIENT, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
 	}
 
 	lang_pop();
