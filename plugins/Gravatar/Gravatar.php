@@ -20,11 +20,11 @@
 
 /**
  * Mantis Gravatar Plugin
- * 
+ *
  * This is an avatar provider plugin that is based on http://www.gravatar.com.
  * Users will need to register there the same email address used in this
  * MantisBT installation to have their avatar shown.
- * 
+ *
  * Please note: upon registration or avatar change, it takes some time for
  * the updated gravatar images to show on sites
  */
