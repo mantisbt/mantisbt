@@ -41,7 +41,7 @@ class ParsedownExtension extends Parsedown
     /**
      * Disables Header elements
      *
-     * @param string $line
+     * @param string $line The Markdown syntax to parse
      * @access protected
      * @return void
      */
@@ -52,7 +52,7 @@ class ParsedownExtension extends Parsedown
     /**
      * Disables of setting the Header elements.
      *
-     * @param string $line
+     * @param string $line The Markdown syntax to parse
      * @param array $block
      * @access protected
      * @return void

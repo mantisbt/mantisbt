@@ -18,8 +18,7 @@
  * Markdown API
  *
  * @package CoreAPI
- * @subpackage ColumnsAPI
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @subpackage MarkdownAPI
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
@@ -46,7 +45,7 @@ function markdown_init() {
 
 /**
  * Checked if markdown is enabled from config
- * @return boolean
+ * @return boolean true enabled, false otherwise.
  */
 function markdown_enabled() {
 	return config_get( 'markdown_enabled' ) != OFF;
@@ -55,8 +54,15 @@ function markdown_enabled() {
 /**
  * Wrapped the parsedown->text as markdown_text
  *
- * @param string p_text
- * @return string
+ * ex: markdown_text('Hello _Parsedown_!'); 
+ *
+ * Output:
+ * <p>Hello <em>Parsedown</em>!</p>
+ * 
+ * @link http://parsedown.org/tests for more samples
+ *
+ * @param string p_text The Markdown syntax to parse
+ * @return string 
  */
 function markdown_text( $p_text ) {
 	markdown_init();
@@ -70,8 +76,16 @@ function markdown_text( $p_text ) {
 
 /**
  * Wrapped the parsedown->line as markdown_line
+ * Parse inline elements - instead of both block-level and inline elements
  *
- * @param string p_text
+ * ex: markdown_line('Hello _Parsedown_!'); 
+ *
+ * @link http://parsedown.org/tests for more samples
+ *
+ * Output:
+ * Hello <em>Parsedown</em>!
+ *
+ * @param string p_text The Markdown syntax to parse
  * @return string
  */
 function markdown_line( $p_text ) {
