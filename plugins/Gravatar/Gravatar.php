@@ -147,8 +147,15 @@ class GravatarPlugin extends MantisPlugin {
 
 		# Build Gravatar URL
 		$t_avatar_url = self::getAvatarUrl() .
-			'avatar/' . $t_email_hash . '?d=' . $t_default_avatar .
-			'&r=' . $t_rating . '&s=' . $p_size;
+			'avatar/' . $t_email_hash . '?' .
+			http_build_query(
+				array(
+					'd' => $t_default_avatar,
+					'r' => $t_rating,
+					's' => $p_size,
+				),
+				'', '&amp;'
+			);
 
 		$t_avatar = new Avatar();
 		$t_avatar->image = $t_avatar_url;
