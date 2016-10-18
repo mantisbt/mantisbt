@@ -325,7 +325,8 @@ function column_is_sortable( $p_column ) {
 
 	# plugin fields contains a 'sortable' property
 	if( column_is_plugin_column( $p_column ) ) {
-		$t_plugin_obj = columns_get_plugin_columns()[$p_column];
+		$t_plugin_columns = columns_get_plugin_columns();
+		$t_plugin_obj = $t_plugin_columns[$p_column];
 		return $t_plugin_obj->sortable;
 	}
 
