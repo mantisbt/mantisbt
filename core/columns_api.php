@@ -319,7 +319,6 @@ function column_is_sortable( $p_column ) {
 		case 'edit':
 		case 'bugnotes_count':
 		case 'attachment_count':
-		case 'selection':
 		case 'tags':
 		case 'overdue':
 			return false;

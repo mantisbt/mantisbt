@@ -1721,10 +1721,10 @@ function print_filter_values_custom_field_date( array $p_filter, $p_field_id ) {
 			break;
 	}
 	# print hidden inputs
-	$tcf = $p_filter['custom_fields'][$p_field_id];
-	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_control" value="' . $p_filter['custom_fields'][$p_field_id][0] . '">';
-	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_start_timestamp" value="' . $p_filter['custom_fields'][$p_field_id][1] . '">';
-	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_end_timestamp" value="' . $p_filter['custom_fields'][$p_field_id][2] . '">';
+	$t_cf = $p_filter['custom_fields'][$p_field_id];
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_control" value="' . $t_cf[0] . '">';
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_start_timestamp" value="' . $t_cf[1] . '">';
+	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_end_timestamp" value="' . $t_cf[2] . '">';
 }
 
 
