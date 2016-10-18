@@ -1853,39 +1853,42 @@ function print_filter_show_sort( array $p_filter = null ) {
 	$p_sort_properties = filter_get_visible_sort_properties_array( $p_filter );
 	$t_sort_fields = $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
 	$t_dir_fields = $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
-	if( !isset( $t_sort_fields[1] ) ) {
-		$t_sort_fields[1] = '';
-		$t_dir_fields[1] = '';
-	}
 
 	# @TODO cproensa: this could be a constant, or conffig.
 	$t_max_inputs_sort = 3;
 
+	$t_print_select_inputs =
+		function( $p_sort_val ='', $p_dir_val ='' ) use ( $t_shown_fields, $t_shown_dirs ) {
+			echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
+			foreach( $t_shown_fields as $t_key => $t_val ) {
+				echo '<option value="' . $t_key . '"';
+				check_selected( $t_key, $p_sort_val );
+				echo '>' . $t_val . '</option>';
+			}
+			echo '</select>';
+			echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
+			foreach( $t_shown_dirs as $t_key => $t_val ) {
+				echo '<option value="' . $t_key . '"';
+				check_selected( $t_key, $p_dir_val );
+				echo '>' . $t_val . '</option>';
+			}
+			echo '</select>';
+		};
+
 	# if there are fields to display, show the dropdowns
 	if( count( $t_visible_columns ) > 0 ) {
-		$t_count = count( $t_sort_fields );
+		$t_field_count = count( $t_sort_fields );
+		$t_count = min( $t_field_count, $t_max_inputs_sort );
 		for( $i = 0; $i < $t_count; $i++ ) {
-			if( $i < $t_max_inputs_sort ) {
-				if( $i > 0 ) {
-					echo ', ';
-				}
-
-				echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
-				foreach( $t_shown_fields as $t_key => $t_val ) {
-					echo '<option value="' . $t_key . '"';
-					check_selected( $t_key, $t_sort_fields[$i] );
-					echo '>' . $t_val . '</option>';
-				}
-				echo '</select>';
-
-				echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
-				foreach( $t_shown_dirs as $t_key => $t_val ) {
-					echo '<option value="' . $t_key . '"';
-					check_selected( $t_key, $t_dir_fields[$i] );
-					echo '>' . $t_val . '</option>';
-				}
-				echo '</select>';
+			if( $i > 0 ) {
+				echo ', ';
 			}
+			$t_print_select_inputs( $t_sort_fields[$i], $t_dir_fields[$i] );
+		}
+		# If we can have more inputs displayed, print one more as empty.
+		if( $t_field_count < $t_max_inputs_sort ) {
+			echo ', ';
+			$t_print_select_inputs();
 		}
 	} else {
 		echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
