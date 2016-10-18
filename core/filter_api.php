@@ -539,15 +539,6 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
 
-	# validate sorting
-	$t_fields = helper_get_columns_to_view();
-	$t_n_fields = count( $t_fields );
-	for( $i = 0; $i < $t_n_fields; $i++ ) {
-		if( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
-			unset( $t_fields[$i] );
-		}
-	}
-
 	$t_sort_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] );
 	# both arrays should be equal lenght, just in case
