@@ -2952,21 +2952,12 @@ function filter_gpc_get( array $p_filter = null ) {
 		$f_dir = implode( ',', $t_current_dir_array );
 	} else {
 		# search for explicit sort columns, these will replace current sort columns
-		$t_sort_array = array();
-		$t_dir_array = array();
 		# these are multiple sort options, they come from the filter form
-		$f_sort_0 = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_0', '' );
-		$f_dir_0 = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_0', '' );
-		$t_sort_array[] = str_replace( ',', '', $f_sort_0 );
-		$t_dir_array[] = str_replace( ',', '', $f_dir_0 );
+		$f_sort_array = gpc_get_string_array( FILTER_PROPERTY_SORT_FIELD_NAME . '_array', array() );
+		$f_dir_array = gpc_get_string_array( FILTER_PROPERTY_SORT_DIRECTION . '_array', array() );
 
-		$f_sort_1 = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_1', '' );
-		$f_dir_1 = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
-		$t_sort_array[] = str_replace( ',', '', $f_sort_1 );
-		$t_dir_array[] = str_replace( ',', '', $f_dir_1 );
-
-		$f_sort = implode( ',', $t_sort_array );
-		$f_dir = implode( ',', $t_dir_array );
+		$f_sort = implode( ',', $f_sort_array );
+		$f_dir = implode( ',', $f_dir_array );
 	}
 
 	# date values

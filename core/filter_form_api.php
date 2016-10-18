@@ -1854,7 +1854,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 	# if there are fields to display, show the dropdowns
 	if( count( $t_visible_columns ) > 0 ) {
 		# display a primary and secondary sort fields
-		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_0">';
+		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
 		foreach( $t_shown_fields as $t_key => $t_val ) {
 			echo '<option value="' . $t_key . '"';
 			check_selected( $t_key, $t_sort_fields[0] );
@@ -1862,7 +1862,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 		}
 		echo '</select>';
 
-		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_0">';
+		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
 		foreach( $t_shown_dirs as $t_key => $t_val ) {
 			echo '<option value="' . $t_key . '"';
 			check_selected( $t_key, $t_dir_fields[0] );
@@ -1873,14 +1873,14 @@ function print_filter_show_sort( array $p_filter = null ) {
 		echo ', ';
 
 		# for secondary sort
-		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1">';
+		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
 		foreach( $t_shown_fields as $t_key => $t_val ) {
 			echo '<option value="' . $t_key . '"';
 			check_selected( $t_key, $t_sort_fields[1] );
 			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
-		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_1">';
+		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
 		foreach( $t_shown_dirs as $t_key => $t_val ) {
 			echo '<option value="' . $t_key . '"';
 			check_selected( $t_key, $t_dir_fields[1] );
@@ -1889,8 +1889,8 @@ function print_filter_show_sort( array $p_filter = null ) {
 		echo '</select>';
 	} else {
 		echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
-		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1" value="last_updated" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_1" value="DESC" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]" value="last_updated" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]" value="DESC" />';
 	}
 }
 
