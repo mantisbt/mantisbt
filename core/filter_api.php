@@ -2935,6 +2935,11 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	$f_match_type = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, $t_filter[FILTER_PROPERTY_MATCH_TYPE] );
 
+	# these are only single values, even when doing advanced filtering
+	$f_per_page = gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+	$f_highlight_changed = gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
+	$f_sticky_issues = gpc_get_bool( FILTER_PROPERTY_STICKY, $t_filter[FILTER_PROPERTY_STICKY] );
+
 	# these are single column sort options, they come from clickable column headers
 	$f_sort_d = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, null );
 	$f_dir_d = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, null );
