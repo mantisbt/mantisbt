@@ -38,8 +38,7 @@ $g_parsedown = null;
 function markdown_init() {
 	global $g_parsedown;
 	if ( $g_parsedown == null ) {
-		require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/ParsedownExtension.php' );
-		$g_parsedown = new ParsedownExtension();
+		$g_parsedown = new MantisMarkdown();
 	}
 }
 
@@ -62,7 +61,7 @@ function markdown_enabled() {
  * @link http://parsedown.org/tests for more samples
  *
  * @param string p_text The Markdown syntax to parse
- * @return string 
+ * @return string html representation generated from markdown
  */
 function markdown_text( $p_text ) {
 	markdown_init();
@@ -86,7 +85,7 @@ function markdown_text( $p_text ) {
  * Hello <em>Parsedown</em>!
  *
  * @param string p_text The Markdown syntax to parse
- * @return string
+ * @return string html representation generated from markdown
  */
 function markdown_line( $p_text ) {
 	markdown_init();
@@ -96,4 +95,70 @@ function markdown_line( $p_text ) {
 	$t_text =  $g_parsedown->line( $p_text );
 	
 	return $t_text;
+}
+
+
+/**
+ * MantisMarkdown class
+ * @copyright Copyright 2016 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ * @subpackage parsedown
+ */
+
+
+/**
+ * MantisMarkdown Extension class
+ *
+ * Extending Parsedown library to meet the MantisBT needs
+ *
+ * @package MantisBT
+ * @subpackage parsedown
+ *
+ * @uses Parsedown
+ */
+
+require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/Parsedown.php' );
+
+class MantisMarkdown extends Parsedown
+{
+	/**
+     * Disables Header elements
+     *
+     * @param string $line The Markdown syntax to parse
+     * @access protected
+     * @return void if markdown starts with # symbol | string html representation generated from markdown.
+     */
+    protected function blockHeader($line){
+        $block = parent::blockHeader($line);
+
+        # check if string start with # symbol
+        # if string starts with # symbol then should not be treated as header
+        if (preg_match_all('/^(#\w+)/', $line['text'])) {
+            return;
+        } 
+        
+        return $block;
+    }
+
+    /**
+     * Disables of setting the Header elements.
+     *
+     * @param string $line The Markdown syntax to parse
+     * @param array $block
+     * @access protected
+     * @return void if markdown starts with # symbol | string html representation generated from markdown.
+     */
+    protected function blockSetextHeader($line, array $block = NULL){
+        
+        $block = parent::blockSetextHeader($line, $block);
+        
+        # check if string start with # symbol
+        # if string starts with # symbol then should not be treated as header
+        if (preg_match_all('/^(#\w+)/', $line['text'])) {
+            return;
+        } 
+        
+        return $block;
+    }    
 }
