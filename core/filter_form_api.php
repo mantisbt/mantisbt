@@ -1795,22 +1795,29 @@ function print_filter_values_show_sort( array $p_filter ) {
 	$t_sort_fields = $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
 	$t_dir_fields = $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 
-	for( $i = 0;$i < 2;$i++ ) {
-		if( isset( $t_sort_fields[$i] ) ) {
-			if( 0 < $i ) {
+	# @TODO cproensa: this could be a constant, or conffig.
+	$t_max_displayed_sort = 2;
+
+	$t_count = count( $t_sort_fields );
+	for( $i = 0; $i < $t_count; $i++ ) {
+		# Only show the first sort columns
+		if( $i< $t_max_displayed_sort ) {
+			if( $i > 0 ) {
 				echo ', ';
 			}
 			$t_sort = $t_sort_fields[$i];
-			if( strpos( $t_sort, 'custom_' ) === 0 ) {
-				$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) );
+			if(column_is_custom_field( $t_sort ) ) {
+				$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
 			}
-
 			echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . utf8_strtolower( $t_dir_fields[$i] ) );
-			echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_', $i, '" value="', string_attribute( $t_sort_fields[$i] ), '" />';
-			echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', string_attribute( $t_dir_fields[$i] ), '" />';
+		} elseif ( $i == $t_max_displayed_sort ) {
+			echo ', ...';
 		}
+		# All sort columns are placed in hidden fields
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]" value="', string_attribute( $t_sort_fields[$i] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]" value="', string_attribute( $t_dir_fields[$i] ), '" />';
 	}
 }
 
@@ -1851,42 +1858,35 @@ function print_filter_show_sort( array $p_filter = null ) {
 		$t_dir_fields[1] = '';
 	}
 
+	# @TODO cproensa: this could be a constant, or conffig.
+	$t_max_inputs_sort = 3;
+
 	# if there are fields to display, show the dropdowns
 	if( count( $t_visible_columns ) > 0 ) {
-		# display a primary and secondary sort fields
-		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
-		foreach( $t_shown_fields as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
-			check_selected( $t_key, $t_sort_fields[0] );
-			echo '>' . $t_val . '</option>';
-		}
-		echo '</select>';
+		$t_count = count( $t_sort_fields );
+		for( $i = 0; $i < $t_count; $i++ ) {
+			if( $i < $t_max_inputs_sort ) {
+				if( $i > 0 ) {
+					echo ', ';
+				}
 
-		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
-		foreach( $t_shown_dirs as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
-			check_selected( $t_key, $t_dir_fields[0] );
-			echo '>' . $t_val . '</option>';
-		}
-		echo '</select>';
+				echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
+				foreach( $t_shown_fields as $t_key => $t_val ) {
+					echo '<option value="' . $t_key . '"';
+					check_selected( $t_key, $t_sort_fields[$i] );
+					echo '>' . $t_val . '</option>';
+				}
+				echo '</select>';
 
-		echo ', ';
-
-		# for secondary sort
-		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
-		foreach( $t_shown_fields as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
-			check_selected( $t_key, $t_sort_fields[1] );
-			echo '>' . $t_val . '</option>';
+				echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
+				foreach( $t_shown_dirs as $t_key => $t_val ) {
+					echo '<option value="' . $t_key . '"';
+					check_selected( $t_key, $t_dir_fields[$i] );
+					echo '>' . $t_val . '</option>';
+				}
+				echo '</select>';
+			}
 		}
-		echo '</select>';
-		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
-		foreach( $t_shown_dirs as $t_key => $t_val ) {
-			echo '<option value="' . $t_key . '"';
-			check_selected( $t_key, $t_dir_fields[1] );
-			echo '>' . $t_val . '</option>';
-		}
-		echo '</select>';
 	} else {
 		echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
 		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]" value="last_updated" />';
