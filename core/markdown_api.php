@@ -38,7 +38,13 @@ require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/Parsedown.php
 
 class MantisMarkdown extends Parsedown
 {
-	/**
+
+    /**
+     * @var Custom table class $table_class
+     */
+    public $table_class = null;
+
+    /**
      * Disables Header elements
      *
      * @param string $line The Markdown syntax to parse
@@ -61,7 +67,7 @@ class MantisMarkdown extends Parsedown
      * Disables of setting the Header elements.
      *
      * @param string $line The Markdown syntax to parse
-     * @param array $block
+     * @param array $block A block-level element
      * @access protected
      * @return void if markdown starts with # symbol | string html representation generated from markdown.
      */
@@ -76,7 +82,48 @@ class MantisMarkdown extends Parsedown
         } 
         
         return $block;
-    }    
+    }
+
+    /**
+     * Add a class to table markedown elements
+     * 
+     * @param string $line The Markdown syntax to parse
+     * @param array $block A block-level element
+     * @param string $fn the function name to call (blockTable or blockTableContinue)
+     * @access private
+     * @return string html representation generated from markdown.
+     */
+    private function __doTable($line, $block, $fn) {
+
+        if($block = call_user_func('parent::' . $fn, $line, $block)) {
+        	$block['element']['attributes']['class'] = $this->table_class;
+        }
+        return $block;
+    }
+
+    /**
+     * Override the blockTable structure by adding a class element
+     *
+     * @param string $line The Markdown syntax to parse
+     * @param array $block A block-level element
+     * @access protected
+     * @return string html representation generated from markdown.
+     */
+    protected function blockTable($line, array $block = null){
+    	return $this->__doTable($line, $block, __FUNCTION__);
+    }
+
+    /**
+     * * Override the blockTableContinue structure by adding a class element
+     *
+     * @param string $line The Markdown syntax to parse
+     * @param array $block A block-level element
+     * @access protected
+     * @return string html representation generated from markdown.
+     */
+    protected function blockTableContinue($line, array $block) {
+        return $this->__doTable($line, $block, __FUNCTION__);
+    }
 }
 
 /**
@@ -87,7 +134,7 @@ class MantisMarkdown extends Parsedown
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
- * @uses ParsedownExtension
+ * @uses MantisMarkdown
  */
 
 $g_parsedown = null;
@@ -104,6 +151,8 @@ function markdown_init() {
 	global $g_parsedown;
 	if ( $g_parsedown == null ) {
 		$g_parsedown = new MantisMarkdown();
+		# set the table class
+		$g_parsedown->table_class = "table table-nonfluid";
 	}
 }
 
