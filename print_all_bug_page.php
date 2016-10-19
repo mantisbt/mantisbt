@@ -209,11 +209,9 @@ $t_icon_path = config_get( 'icon_path' );
 <thead>
 <tr class="row-category">
 	<?php
-		$t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
-		$t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
-
+		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter_cookie_arr, COLUMNS_TARGET_PRINT_PAGE );
 		foreach( $t_columns as $t_column ) {
-			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
+			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties ) );
 		}
 	?>
 </tr>
