@@ -152,11 +152,11 @@ switch( $f_type ) {
 		log_event( LOG_FILTERING, 'view_all_set.php: New cookie' );
 		$t_setting_arr = array();
 		break;
-	# Update filters
+	# Update filters. (filter_gpc_get reads a new set of parameters)
 	case '1':
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
+		$t_setting_arr = filter_gpc_get();
 		break;
-	# Set the sort order and direction
+	# Set the sort order and direction (filter_gpc_get is called over current filter)
 	case '2':
 		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
 		$t_setting_arr = filter_gpc_get( $t_setting_arr );
@@ -210,14 +210,14 @@ switch( $f_type ) {
 
 		break;
 	case '5':
-		# Just set the search string value
+		# Just set the search string value (filter_gpc_get is called over current filter)
 		log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-		$t_setting_arr = filter_gpc_get();
+		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 		break;
 	case '6':
-		# Just set the view_state (simple / advanced) value
+		# Just set the view_state (simple / advanced) value. (filter_gpc_get is called over current filter)
 		log_event( LOG_FILTERING, 'view_all_set.php: View state (simple/advanced)' );
-		$t_setting_arr['_view_type'] = $f_view_type;
+		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 
 		break;
 	default:
