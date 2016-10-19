@@ -350,7 +350,7 @@ function layout_login_page_begin() {
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
 	
-	html_head_end();
+	html_head_javascript();
 	
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
