@@ -62,23 +62,6 @@ $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
 $f_temp_filter			= gpc_get_bool( 'temporary' );
 
-# validate filter type
-$f_default_view_type = 'simple';
-if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-	$f_default_view_type = 'advanced';
-}
-
-$f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'advanced';
-}
-if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
-	$f_view_type = 'simple';
-}
-if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
-	$f_view_type = $f_default_view_type;
-}
-
 if( $f_temp_filter ) {
 	$f_type = 1;
 }

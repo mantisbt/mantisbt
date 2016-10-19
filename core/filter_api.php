@@ -523,18 +523,16 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 
 	$p_filter_arr = filter_ensure_fields( $p_filter_arr );
 
-	$f_default_view_type = 'simple';
-	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-		$f_default_view_type = 'advanced';
-	}
+	$t_config_view_filters = config_get( 'view_filters' );
 	$t_view_type = $p_filter_arr['_view_type'];
-	if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+	if( ADVANCED_ONLY == $t_config_view_filters ) {
 		$t_view_type = 'advanced';
 	}
-	if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+	if( SIMPLE_ONLY == $t_config_view_filters ) {
 		$t_view_type = 'simple';
 	}
 	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
+		$t_default_view_type = ( ADVANCED_DEFAULT == $t_config_view_filters ) ? 'advanced' : 'simple';
 		$t_view_type = $f_default_view_type;
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
@@ -719,11 +717,19 @@ function filter_get_default_array( $p_view_type = null ) {
 	$t_default_show_changed = config_get( 'default_show_changed' );
 	$t_meta_filter_any_array = array( META_FILTER_ANY );
 
-	$t_default_view_type = ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) ? 'advanced' : 'simple';
-	if( null === $p_view_type ) {
+	$t_config_view_filters = config_get( 'view_filters' );
+	$t_default_view_type = ( ADVANCED_DEFAULT == $t_config_view_filters ) ? 'advanced' : 'simple';
+	if( ADVANCED_ONLY == $t_config_view_filters ) {
+		$t_view_type = 'advanced';
+	} elseif( SIMPLE_ONLY == $t_config_view_filters ) {
+		$t_view_type = 'simple';
+	} elseif( null === $p_view_type ) {
 		$t_view_type = $t_default_view_type;
 	} else {
-		$t_view_type = ( $p_view_type == 'advanced' ) ? 'advanced' : $t_default_view_type;
+		$t_view_type = $p_view_type;
+	}
+	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
+		$t_view_type = $f_default_view_type;
 	}
 
 	if( $t_view_type == 'simple' ) {
