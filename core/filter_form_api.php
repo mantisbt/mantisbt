@@ -1816,8 +1816,8 @@ function print_filter_values_show_sort( array $p_filter ) {
 			echo ', ...';
 		}
 		# All sort columns are placed in hidden fields
-		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]" value="', string_attribute( $t_sort_fields[$i] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]" value="', string_attribute( $t_dir_fields[$i] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '[]" value="', string_attribute( $t_sort_fields[$i] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '[]" value="', string_attribute( $t_dir_fields[$i] ), '" />';
 	}
 }
 
@@ -1859,14 +1859,14 @@ function print_filter_show_sort( array $p_filter = null ) {
 
 	$t_print_select_inputs =
 		function( $p_sort_val ='', $p_dir_val ='' ) use ( $t_shown_fields, $t_shown_dirs ) {
-			echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_array[]">';
+			echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '[]">';
 			foreach( $t_shown_fields as $t_key => $t_val ) {
 				echo '<option value="' . $t_key . '"';
 				check_selected( $t_key, $p_sort_val );
 				echo '>' . $t_val . '</option>';
 			}
 			echo '</select>';
-			echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_array[]">';
+			echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '[]">';
 			foreach( $t_shown_dirs as $t_key => $t_val ) {
 				echo '<option value="' . $t_key . '"';
 				check_selected( $t_key, $p_dir_val );

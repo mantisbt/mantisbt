@@ -553,7 +553,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_new_dir_array = array();
 	$t_all_columns = columns_get_all_active_columns();
 	for( $ix = 0; $ix < $t_sort_fields_count; $ix++ ) {
-		if( isset( $t_sort_fields[$ix] ) &&  isset( $t_dir_fields[$ix] ) ) {
+		if( isset( $t_sort_fields[$ix] ) ) {
 			$t_column = $t_sort_fields[$ix];
 			# check that the column name exist
 			if( !in_array( $t_column, $t_all_columns ) ) {
@@ -569,8 +569,14 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 			}
 			$t_new_sort_array[] = $t_column;
 
-			# normalize sort_dir value, defaults to DESC
-			$t_dir = $t_dir_fields[$ix] == 'ASC' ? 'ASC' : 'DESC';
+			# if there is no dir field, set a dummy value
+			if( isset( $t_dir_fields[$ix] ) ) {
+				$t_dir = $t_dir_fields[$ix];
+			} else {
+				$t_dir = '';
+			}
+			# normalize sort_dir value
+			$t_dir = ( $t_dir == 'ASC' ) ? 'ASC' : 'DESC';
 			$t_new_dir_array[] = $t_dir;
 		}
 	}
@@ -2928,27 +2934,49 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_highlight_changed = gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] );
 	$f_sticky_issues = gpc_get_bool( FILTER_PROPERTY_STICKY, $t_filter[FILTER_PROPERTY_STICKY] );
 
-	# these are single column sort options, they come from clickable column headers
-	$f_sort_d = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, null );
-	$f_dir_d = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, null );
+	# This sort parameter is a set of comma separated values, and can be an array of parameters.
+	# sort="c1,c2" as used by permalinks
+	# sort[]="c1" sort[]="c2" as used by filter form
+	gpc_make_array( FILTER_PROPERTY_SORT_FIELD_NAME );
+	$f_sort_array = gpc_get_string_array( FILTER_PROPERTY_SORT_FIELD_NAME, array() );
 
-	# if the values are present, push them to the front of sort columns
-	if( null !== $f_sort_d ) {
-		$t_current_sort_array = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-		$t_current_dir_array = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
-		# push the new values to the front, they will be validated later
-		array_unshift( $t_current_sort_array, str_replace( ',', '', $f_sort_d ) );
-		array_unshift( $t_current_dir_array, str_replace( ',', '', $f_dir_d ) );
-		$f_sort = implode( ',', $t_current_sort_array );
-		$f_dir = implode( ',', $t_current_dir_array );
+	# This sort parameter is an incremental column addition to current sort set.
+	# Only one column/dir, which is added to the front.
+	$f_sort_add = gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_add', null );
+
+	if( !empty( $f_sort_array ) ) {
+		gpc_make_array( FILTER_PROPERTY_SORT_DIRECTION );
+		$f_dir_array = gpc_get_string_array( FILTER_PROPERTY_SORT_DIRECTION, array() );
+		$t_new_sort_array = array();
+		$t_new_dir_array = array();
+		# evaluate each parameter, checks that "dir" may be omitted in order to avoid shifting subsequent parameters
+		$t_count = count( $f_sort_array );
+		for( $ix = 0; $ix < $t_count; $ix++ ) {
+			$t_param_columns = explode( ',', $f_sort_array[$ix] );
+			if( isset( $f_dir_array[$ix] ) ) {
+				$t_param_dirs = explode( ',', $f_dir_array[$ix] );
+			} else {
+				$t_param_dirs = array();
+			}
+			# fill the gaps with dummy string, they will be defaulted by ensure_valid_filter
+			if( count( $t_param_dirs ) < count( $t_param_columns ) ) {
+				$t_param_dirs = array_pad( $t_param_dirs, count( $t_param_columns ), '' );
+			}
+			$t_new_sort_array = array_merge( $t_new_sort_array, $t_param_columns );
+			$t_new_dir_array = array_merge( $t_new_dir_array, $t_param_dirs );
+		}
+		$f_sort = implode( ',', $t_new_sort_array );
+		$f_dir = implode( ',', $t_new_dir_array );
+	} elseif( null !== $f_sort_add ) {
+		# this parameter has to be pushed in fron t of current sort set
+		$f_dir_add = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_add', '' );
+		# Plain concatenation. Empty fields, or extra commas will be cleaned by ensure_valid_filter
+		$f_sort = $f_sort_add . ',' . $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+		$f_dir = $f_dir_add . ',' . $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 	} else {
-		# search for explicit sort columns, these will replace current sort columns
-		# these are multiple sort options, they come from the filter form
-		$f_sort_array = gpc_get_string_array( FILTER_PROPERTY_SORT_FIELD_NAME . '_array', array() );
-		$f_dir_array = gpc_get_string_array( FILTER_PROPERTY_SORT_DIRECTION . '_array', array() );
-
-		$f_sort = implode( ',', $f_sort_array );
-		$f_dir = implode( ',', $f_dir_array );
+		# use the defaluts
+		$f_sort = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+		$f_dir = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 	}
 
 	# date values
