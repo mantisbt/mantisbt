@@ -51,12 +51,12 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return void if markdown starts with # symbol | string html representation generated from markdown.
      */
-    protected function blockHeader($line){
+    protected function blockHeader($line) {
         $block = parent::blockHeader($line);
 
         # check if string start with # symbol
         # if string starts with # symbol then should not be treated as header
-        if (preg_match_all('/^(#\w+)/', $line['text'])) {
+        if( preg_match_all('/^(#\w+)/', $line['text'], $matches) ) {
             return;
         } 
         
@@ -71,13 +71,13 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return void if markdown starts with # symbol | string html representation generated from markdown.
      */
-    protected function blockSetextHeader($line, array $block = NULL){
+    protected function blockSetextHeader($line, array $block = NULL) {
         
         $block = parent::blockSetextHeader($line, $block);
         
         # check if string start with # symbol
         # if string starts with # symbol then should not be treated as header
-        if (preg_match_all('/^(#\w+)/', $line['text'])) {
+        if( preg_match_all('/^(#\w+)/', $line['text']) ) {
             return;
         } 
         
@@ -95,9 +95,10 @@ class MantisMarkdown extends Parsedown
      */
     private function __doTable($line, $block, $fn) {
 
-        if($block = call_user_func('parent::' . $fn, $line, $block)) {
+        if( $block = call_user_func('parent::' . $fn, $line, $block) ) {
         	$block['element']['attributes']['class'] = $this->table_class;
         }
+
         return $block;
     }
 
@@ -109,7 +110,7 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return string html representation generated from markdown.
      */
-    protected function blockTable($line, array $block = null){
+    protected function blockTable($line, array $block = null) {
     	return $this->__doTable($line, $block, __FUNCTION__);
     }
 
