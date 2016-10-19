@@ -249,7 +249,7 @@ if( $f_print ) {
 }
 
 if( $f_temp_filter ) {
-	$t_token_id = token_set( TOKEN_FILTER, $t_settings_serialized );
+	$t_token_id = token_set( TOKEN_FILTER, json_encode( $t_setting_arr ) );
 	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
 }
 print_header_redirect( $t_redirect_url );
