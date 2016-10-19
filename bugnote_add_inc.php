@@ -87,6 +87,7 @@ require_api( 'lang_api.php' );
 		<tbody>
 
 <?php
+	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr>
@@ -94,19 +95,10 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'view_status' ) ?>
 				</th>
 				<td>
-<?php
-		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-?>
 				<label for="bugnote_add_view_status">
 					<input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 					<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
 				</label>
-<?php
-		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
-		}
-?>
 				</td>
 			</tr>
 <?php }?>
