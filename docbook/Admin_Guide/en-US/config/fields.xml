@@ -23,7 +23,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_show_product_build</term>
+			<term>$g_enable_product_build</term>
 			<listitem>
 				<para>
 					Enable or disable usage of 'Product Build' field.  Default is OFF.

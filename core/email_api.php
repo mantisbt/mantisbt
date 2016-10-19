@@ -538,11 +538,18 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
  * @return void
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	if( OFF == config_get( 'send_reset_password' ) ||
-		OFF == config_get( 'enable_email_notification' ) ) {
+	if( OFF == config_get( 'send_reset_password' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'Password reset email notifications disabled.' );
 		return;
 	}
-
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+	if( !user_is_enabled( $p_user_id ) ) {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, user is disabled', $p_user_id );
+		return;
+	}
 	lang_push( user_pref_get_language( $p_user_id ) );
 
 	# retrieve the username and email
@@ -558,6 +565,8 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
+	} else {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
 	}
 
 	lang_pop();

@@ -3016,7 +3016,7 @@ $g_status_colors = array(
 
 /**
  * The padding level when displaying project ids
- *  The bug id will be padded with 0's up to the size given
+ *  The project id will be padded with 0's up to the size given
  * @global integer $g_display_project_padding
  */
 $g_display_project_padding = 3;
@@ -3440,13 +3440,13 @@ $g_custom_field_edit_after_create = ON;
  * Add custom options to the main menu.  For example:
  *
  * $g_main_menu_custom_options = array(
- *     array( 
+ *     array(
  *         'title'        => 'My Link',
  *         'access_level' => MANAGER,
  *         'url'          => 'my_link.php',
  *         'icon'         => 'fa-plug'
  *     ),
- *     array( 
+ *     array(
  *         'title'        => 'My Link2',
  *         'access_level' => ADMINISTRATOR,
  *         'url'          => 'my_link2.php',
