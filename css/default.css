@@ -88,3 +88,7 @@ td.overdue        	{ background-color: #d15b47; color: #ffffff; font-weight: bol
 td.print-overdue    { font-weight: bold; }
 
 .collapse-link { cursor: pointer; }
+
+.table-nonfluid {
+   width: auto !important;
+}
