@@ -110,10 +110,10 @@ class MantisGraphPlugin extends MantisPlugin  {
 			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH );
 			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH );
 		} else {
-			html_javascript_link( 'chart-' . CHARTJS_VERSION . '.min.js' );
-			html_javascript_link( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' );
+			echo '<script src="' . plugin_file( 'chart-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
+			echo '<script src="' . plugin_file( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
 		}
-		html_javascript_link( '../plugins/MantisGraph/MantisGraph.js' );
+		echo '<script src="' . plugin_file( "MantisGraph.js" ) . '"></script>';
 	}
 
 	/**
