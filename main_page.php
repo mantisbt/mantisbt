@@ -96,9 +96,9 @@ echo '<div class="col-md-6 col-xs-12">';
 if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 	# Admin can edit news for All Projects (site-wide)
 	if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
-		print_button( 'news_menu_page.php', lang_get( 'edit_news_link' ), 'pull-right');
+		print_link_button( 'news_menu_page.php', lang_get( 'edit_news_link' ), 'pull-right');
 	} else {
-		print_button( 'login_select_proj_page.php', lang_get( 'edit_news_link' ), 'pull-right');
+		print_link_button( 'login_select_proj_page.php', lang_get( 'edit_news_link' ), 'pull-right');
 	}
 }
 echo '</div>';
@@ -129,21 +129,21 @@ if( news_is_enabled() ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="btn-group">';
 
-	print_button( 'news_list_page.php', lang_get( 'archives' ) );
+	print_link_button( 'news_list_page.php', lang_get( 'archives' ) );
 	$t_news_view_limit = config_get( 'news_view_limit' );
 	$f_offset_next = $f_offset + $t_news_view_limit;
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
 	if( $f_offset_prev >= 0 ) {
-		print_button( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
+		print_link_button( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
 
 	if( $t_news_count == $t_news_view_limit ) {
-		print_button( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
+		print_link_button( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
 
 	if( OFF != $t_rss_enabled ) {
-		print_button( $t_rss_link, lang_get( 'rss' ) );
+		print_link_button( $t_rss_link, lang_get( 'rss' ) );
 	}
 
 	echo '</div>';

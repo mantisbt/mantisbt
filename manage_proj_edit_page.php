@@ -336,11 +336,11 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 						</td>
 						<td class="center">
 							<div class="inline">
-							<?php print_button(
+							<?php print_link_button(
 								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
 								lang_get( 'edit_link' ), 'btn-xs' );
 							?>
-							<?php print_button(
+							<?php print_link_button(
 								"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
 								lang_get( 'unlink_link' ), 'btn-xs' );
 							?>

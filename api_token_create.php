@@ -58,7 +58,7 @@ layout_page_begin();
 <div class="space-10"></div>
 <div class="well"><?php echo string_display_line( $t_token ) ?></div>
 <div class="space-10"></div>
-<?php print_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
+<?php print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
 </div>
 <?php
 layout_page_end();

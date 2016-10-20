@@ -108,7 +108,7 @@ if( count( $t_failed_ids ) > 0 ) {
 		printf( "<p>%s%s</p>\n", $t_label, $t_reason );
 	}
 
-	print_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	print_link_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
 	echo '</div>';
 
 	layout_page_end();

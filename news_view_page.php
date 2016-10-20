@@ -66,7 +66,7 @@ if( $f_news_id !== null ) {
 ?>
 
 <div class="space-10"></div>
-	<?php print_button( 'news_list_page.php', lang_get( 'archives' ) ); ?>
+	<?php print_link_button( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 </div>
 
 <?php

@@ -973,7 +973,7 @@ function auth_http_prompt() {
 	header( 'status: 401 Unauthorized' );
 
 	echo '<p class="center error-msg">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
-	print_button( 'main_page.php', lang_get( 'proceed' ) );
+	print_link_button( 'main_page.php', lang_get( 'proceed' ) );
 
 	exit;
 }
