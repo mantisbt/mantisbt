@@ -77,7 +77,7 @@ class MantisMarkdown extends Parsedown
         
         # check if string start with # symbol
         # if string starts with # symbol then should not be treated as header
-        if( preg_match_all('/^(#\w+)/', $line['text']) ) {
+        if( preg_match_all('/^(#\w+)/', $line['text'], $matches) ) {
             return;
         } 
         
