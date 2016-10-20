@@ -36,17 +36,19 @@ $g_parsedown = null;
  * @return void
  */
 function markdown_init() {
-	global $g_parsedown;
-	if ( $g_parsedown == null ) {
+
+    global $g_parsedown;
+
+    if ( $g_parsedown == null ) {
 
         require_once( dirname( dirname( __FILE__ ) ) . '/core/classes/MantisMarkdown.php' );
-		
+
         $g_parsedown = new MantisMarkdown();
         # set the table class
         $g_parsedown->table_class = "table table-nonfluid";
         # set the border color of blockquote
         $g_parsedown->inline_style = "border-color:#847d7d";
-	}
+    }
 }
 
 /**
@@ -54,7 +56,7 @@ function markdown_init() {
  * @return boolean true enabled, false otherwise.
  */
 function markdown_enabled() {
-	return config_get( 'markdown_enabled' ) != OFF;
+    return config_get( 'markdown_enabled' ) != OFF;
 }
 
 /**
@@ -71,13 +73,14 @@ function markdown_enabled() {
  * @return string html representation generated from markdown
  */
 function markdown_text( $p_text ) {
-	markdown_init();
 
-	global $g_parsedown;
+    markdown_init();
 
-	$t_text = $g_parsedown->text( $p_text );
-	
-	return $t_text;
+    global $g_parsedown;
+
+    $t_text = $g_parsedown->text( $p_text );
+
+    return $t_text;
 }
 
 /**
@@ -95,11 +98,12 @@ function markdown_text( $p_text ) {
  * @return string html representation generated from markdown
  */
 function markdown_line( $p_text ) {
-	markdown_init();
 
-	global $g_parsedown;
+    markdown_init();
 
-	$t_text =  $g_parsedown->line( $p_text );
-	
-	return $t_text;
+    global $g_parsedown;
+
+    $t_text =  $g_parsedown->line( $p_text );
+
+    return $t_text;
 }
