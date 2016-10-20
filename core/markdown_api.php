@@ -15,119 +15,6 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * MantisMarkdown class
- * @copyright Copyright 2016 MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
- * @package MantisBT
- * @subpackage parsedown
- */
-
-
-/**
- * MantisMarkdown Extension class
- *
- * Extending Parsedown library to meet the MantisBT needs
- *
- * @package MantisBT
- * @subpackage parsedown
- *
- * @uses Parsedown
- */
-
-require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/Parsedown.php' );
-
-class MantisMarkdown extends Parsedown
-{
-
-    /**
-     * @var Custom table class $table_class
-     */
-    public $table_class = null;
-
-    /**
-     * Disables Header elements
-     *
-     * @param string $line The Markdown syntax to parse
-     * @access protected
-     * @return void if markdown starts with # symbol | string html representation generated from markdown.
-     */
-    protected function blockHeader($line) {
-        $block = parent::blockHeader($line);
-
-        # check if string start with # symbol
-        # if string starts with # symbol then should not be treated as header
-        if( preg_match_all('/^(#\w+)/', $line['text'], $matches) ) {
-            return;
-        } 
-        
-        return $block;
-    }
-
-    /**
-     * Disables of setting the Header elements.
-     *
-     * @param string $line The Markdown syntax to parse
-     * @param array $block A block-level element
-     * @access protected
-     * @return void if markdown starts with # symbol | string html representation generated from markdown.
-     */
-    protected function blockSetextHeader($line, array $block = NULL) {
-        
-        $block = parent::blockSetextHeader($line, $block);
-        
-        # check if string start with # symbol
-        # if string starts with # symbol then should not be treated as header
-        if( preg_match_all('/^(#\w+)/', $line['text'], $matches) ) {
-            return;
-        } 
-        
-        return $block;
-    }
-
-    /**
-     * Add a class to table markedown elements
-     * 
-     * @param string $line The Markdown syntax to parse
-     * @param array $block A block-level element
-     * @param string $fn the function name to call (blockTable or blockTableContinue)
-     * @access private
-     * @return string html representation generated from markdown.
-     */
-    private function __doTable($line, $block, $fn) {
-
-        if( $block = call_user_func('parent::' . $fn, $line, $block) ) {
-        	$block['element']['attributes']['class'] = $this->table_class;
-        }
-
-        return $block;
-    }
-
-    /**
-     * Override the blockTable structure by adding a class element
-     *
-     * @param string $line The Markdown syntax to parse
-     * @param array $block A block-level element
-     * @access protected
-     * @return string html representation generated from markdown.
-     */
-    protected function blockTable($line, array $block = null) {
-    	return $this->__doTable($line, $block, __FUNCTION__);
-    }
-
-    /**
-     * * Override the blockTableContinue structure by adding a class element
-     *
-     * @param string $line The Markdown syntax to parse
-     * @param array $block A block-level element
-     * @access protected
-     * @return string html representation generated from markdown.
-     */
-    protected function blockTableContinue($line, array $block) {
-        return $this->__doTable($line, $block, __FUNCTION__);
-    }
-}
-
-/**
  * Markdown API
  *
  * @package CoreAPI
@@ -142,8 +29,8 @@ $g_parsedown = null;
 
 /**
  * Initialise the Parsedown library
- * We used the ParsedownExtension instead of the original library (Parsedown), its because we have
- * our own format settings (e.g If a line starts with # and issue id, the line is treated as a header 
+ * We used our custom markdown (MantisMarkdown) instead of the original library (Parsedown), its because we have
+ * our own format settings to follow (e.g If a line starts with # and issue id, the line is treated as a header 
  * instead of an issue reference and the # is omitted form the output)
  *
  * @return void
@@ -151,9 +38,14 @@ $g_parsedown = null;
 function markdown_init() {
 	global $g_parsedown;
 	if ( $g_parsedown == null ) {
-		$g_parsedown = new MantisMarkdown();
+
+        require_once( dirname( dirname( __FILE__ ) ) . '/core/classes/MantisMarkdown.php' );
+		
+        $g_parsedown = new MantisMarkdown();
 		# set the table class
 		$g_parsedown->table_class = "table table-nonfluid";
+        # set the border color of blockquote
+        $g_parsedown->inline_style = "border-color:#847d7d";
 	}
 }
 
