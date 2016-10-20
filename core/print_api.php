@@ -2120,3 +2120,21 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
 
 }
+
+/**
+ * Print a button which presents a standalone form.
+ * This function remains for compatibility with v1.3
+ * @deprecated use print_form_button() instead
+ * @param string $p_action_page    The action page.
+ * @param string $p_label          The button label.
+ * @param array  $p_args_to_post   Associative array of arguments to be posted
+ * @param mixed  $p_security_token Optional; null (default), OFF or security token string.
+ * @see form_security_token()
+ * @see print_form_button()
+ * @return void
+ */
+function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null ) {
+	error_parameters( __FUNCTION__, 'print_form_button' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
+}
