@@ -42,8 +42,8 @@ function markdown_init() {
         require_once( dirname( dirname( __FILE__ ) ) . '/core/classes/MantisMarkdown.php' );
 		
         $g_parsedown = new MantisMarkdown();
-		# set the table class
-		$g_parsedown->table_class = "table table-nonfluid";
+        # set the table class
+        $g_parsedown->table_class = "table table-nonfluid";
         # set the border color of blockquote
         $g_parsedown->inline_style = "border-color:#847d7d";
 	}
