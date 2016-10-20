@@ -14,50 +14,93 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Markdown API
+ *
+ * @package CoreAPI
+ * @subpackage MarkdownAPI
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses MantisMarkdown
+ */
+
 $g_parsedown = null;
 
+/**
+ * Initialise the Parsedown library
+ * We used our custom markdown (MantisMarkdown) instead of the original library (Parsedown), its because we have
+ * our own format settings to follow (e.g If a line starts with # and issue id, the line is treated as a header 
+ * instead of an issue reference and the # is omitted form the output)
+ *
+ * @return void
+ */
 function markdown_init() {
-	global $g_parsedown;
-	if ( $g_parsedown == null ) {
-		require_once( dirname( dirname( __FILE__ ) ) . '/library/parsedown/Parsedown.php' );
-		$g_parsedown = new Parsedown();
-	}
+    global $g_parsedown;
+
+    if ( $g_parsedown == null ) {
+
+        require_once( dirname( dirname( __FILE__ ) ) . '/core/classes/MantisMarkdown.php' );
+
+        $g_parsedown = new MantisMarkdown();
+        # set the table class
+        $g_parsedown->table_class = "table table-nonfluid";
+        # set the border color of blockquote
+        $g_parsedown->inline_style = "border-color:#847d7d";
+    }
 }
 
+/**
+ * Checked if markdown is enabled from config
+ * @return boolean true enabled, false otherwise.
+ */
 function markdown_enabled() {
-	return config_get( 'markdown_enabled' ) != OFF;
+    return config_get( 'markdown_enabled' ) != OFF;
 }
 
-function markdown_trim_para( $p_text ) {
-	$t_text = $p_text;
-	$t_len = strlen( $t_text );
-
-	if ( $t_len >= 7 && stripos( $t_text, '<p>' ) == 0 && stripos( $t_text, '</p>', $t_len - 4 ) !== false ) {
-		$t_text = substr( $t_text, 3, $t_len - 7 );
-	}
-
-	return $t_text;	
-}
-
+/**
+ * Wrapped the parsedown->text as markdown_text
+ *
+ * ex: markdown_text('Hello _Parsedown_!'); 
+ *
+ * Output:
+ * <p>Hello <em>Parsedown</em>!</p>
+ * 
+ * @link http://parsedown.org/tests for more samples
+ *
+ * @param string p_text The Markdown syntax to parse
+ * @return string html representation generated from markdown
+ */
 function markdown_text( $p_text ) {
-	markdown_init();
+    markdown_init();
 
-	global $g_parsedown;
+    global $g_parsedown;
 
-	$t_text = $g_parsedown->text( $p_text );
-	$t_text = markdown_trim_para( $t_text );
+    $t_text = $g_parsedown->text( $p_text );
 
-	return $t_text;
+    return $t_text;
 }
 
+/**
+ * Wrapped the parsedown->line as markdown_line
+ * Parse inline elements - instead of both block-level and inline elements
+ *
+ * ex: markdown_line('Hello _Parsedown_!'); 
+ *
+ * @link http://parsedown.org/tests for more samples
+ *
+ * Output:
+ * Hello <em>Parsedown</em>!
+ *
+ * @param string p_text The Markdown syntax to parse
+ * @return string html representation generated from markdown
+ */
 function markdown_line( $p_text ) {
-	markdown_init();
+    markdown_init();
 
-	global $g_parsedown;
+    global $g_parsedown;
 
-	$t_text =  $g_parsedown->line( $p_text );
-	$t_text = markdown_trim_para( $t_text );
+    $t_text =  $g_parsedown->line( $p_text );
 
-	return $t_text;
+    return $t_text;
 }
-
