@@ -536,8 +536,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$t_view_type = 'simple';
 	}
 	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
-		$t_default_view_type = ( ADVANCED_DEFAULT == $t_config_view_filters ) ? 'advanced' : 'simple';
-		$t_view_type = $f_default_view_type;
+		$t_view_type = filter_get_default_view_type();
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
 
@@ -583,8 +582,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = implode( ',', $t_new_sort_array );
 		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = implode( ',', $t_new_dir_array );
 	} else {
-		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
-		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = 'DESC';
+		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = filter_get_default_property( FILTER_PROPERTY_SORT_FIELD_NAME, $t_view_type );
+		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = filter_get_default_property( FILTER_PROPERTY_SORT_DIRECTION, $t_view_type );
 	}
 
 	# validate or filter junk from other fields
@@ -718,22 +717,28 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
  * @return array Filter array with default values
  */
 function filter_get_default_array( $p_view_type = null ) {
+	static $t_cache_default_array = array();
+
+	$t_default_view_type = filter_get_default_view_type();
+	if( !in_array( $p_view_type, array( 'simple', 'advanced' ) ) ) {
+		$p_view_type = $t_default_view_type;
+	}
+
+	# this function is called multiple times from filter api so return a cached value if possible
+	if( isset( $t_cache_default_array[$p_view_type] ) ) {
+		return $t_cache_default_array[$p_view_type];
+	}
+
 	$t_default_show_changed = config_get( 'default_show_changed' );
 	$t_meta_filter_any_array = array( META_FILTER_ANY );
 
 	$t_config_view_filters = config_get( 'view_filters' );
-	$t_default_view_type = ( ADVANCED_DEFAULT == $t_config_view_filters ) ? 'advanced' : 'simple';
 	if( ADVANCED_ONLY == $t_config_view_filters ) {
 		$t_view_type = 'advanced';
 	} elseif( SIMPLE_ONLY == $t_config_view_filters ) {
 		$t_view_type = 'simple';
-	} elseif( null === $p_view_type ) {
-		$t_view_type = $t_default_view_type;
 	} else {
 		$t_view_type = $p_view_type;
-	}
-	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
-		$t_view_type = $f_default_view_type;
 	}
 
 	if( $t_view_type == 'simple' ) {
@@ -823,7 +828,36 @@ function filter_get_default_array( $p_view_type = null ) {
 	}
 	$t_filter['custom_fields'] = $f_custom_fields_data;
 
+	$t_cache_default_array[$p_view_type] = $t_filter;
 	return $t_filter;
+}
+
+/**
+ * Returns the default view type for filters
+ * @return string Default view type
+ */
+function filter_get_default_view_type() {
+	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+		return 'advanced';
+	} else {
+		return 'simple';
+	}
+}
+
+/**
+ * Returns the default value for a filter property.
+ * Relies on filter_get_default_array() to get a defaulted filter.
+ * @param string $p_filter_property The requested filter property name
+ * @param string $p_view_type Optional, view type for the defaulted filter (simple/advanced)
+ * @return mixed The property default value, or null if it doesn't exist
+ */
+function filter_get_default_property( $p_filter_property, $p_view_type = null ) {
+	$t_default_array = filter_get_default_array( $p_filter_property );
+	if( isset( $t_default_array[$p_filter_property] ) ) {
+		return $t_default_array[$p_filter_property];
+	} else {
+		return null;
+	}
 }
 
 /**
