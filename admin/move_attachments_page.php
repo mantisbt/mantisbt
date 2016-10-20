@@ -100,7 +100,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 ?>
 <div>
 <p>
-	<?php print_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
+	<?php print_link_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
 </p>
 </div>
 

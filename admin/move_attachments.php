@@ -333,7 +333,7 @@ if( empty( $t_moved ) ) {
 			echo '</tbody>';
 			echo '</table>';
 			echo '</div>';
-			
+
 		} else {
 			# No data rows - display error message
 			echo '<div class="alert alert-danger">';
@@ -346,7 +346,7 @@ if( empty( $t_moved ) ) {
 	}
 }
 echo "<br/>";
-print_button( 'system_utils.php', 'Back to System Utilities' );
+print_link_button( 'system_utils.php', 'Back to System Utilities' );
 
 echo '</div>';
 

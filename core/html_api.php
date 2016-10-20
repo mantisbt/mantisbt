@@ -418,7 +418,7 @@ function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type
 		$t_url = string_sanitize_url( $t_button[0] );
 		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
 
-		print_button( $t_url, $t_label );
+		print_link_button( $t_url, $t_label );
 	}
 	echo '</div>';
 
