@@ -252,12 +252,24 @@ $f_dir_1				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
 
 # date values
 $f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE );
-$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_MONTH, date( 'm' ) );
-$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_MONTH, date( 'm' ) );
-$f_start_day			= gpc_get_int( FILTER_PROPERTY_START_DAY, 1 );
-$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_DAY, date( 'd' ) );
-$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_YEAR, date( 'Y' ) );
-$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, date( 'Y' ) );
+
+# Creation date values
+$f_do_filter_by_creation_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_CREATION_DATE );
+$f_start_creation_month			= gpc_get_int( FILTER_PROPERTY_START_CREATION_MONTH, date( 'm' ) );
+$f_end_creation_month			= gpc_get_int( FILTER_PROPERTY_END_CREATION_MONTH, date( 'm' ) );
+$f_start_creation_day			= gpc_get_int( FILTER_PROPERTY_START_CREATION_DAY, 1 );
+$f_end_creation_day				= gpc_get_int( FILTER_PROPERTY_END_CREATION_DAY, date( 'd' ) );
+$f_start_creation_year			= gpc_get_int( FILTER_PROPERTY_START_CREATION_YEAR, date( 'Y' ) );
+$f_end_creation_year			= gpc_get_int( FILTER_PROPERTY_END_CREATION_YEAR, date( 'Y' ) );
+# Last Updated date values
+$f_do_filter_by_last_updated_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE );
+$f_start_last_updated_month			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, date( 'm' ) );
+$f_end_last_updated_month			= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, date( 'm' ) );
+$f_start_last_updated_day			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_DAY, 1 );
+$f_end_last_updated_day				= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_DAY, date( 'd' ) );
+$f_start_last_updated_year			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, date( 'Y' ) );
+$f_end_last_updated_year			= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, date( 'Y' ) );
+
 $f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
 $f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
 
@@ -397,22 +409,28 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 #	 8: $f_handler_id
 #	 9: $f_sort
 #	10: $f_dir
-#	11: $f_start_month
-#	12: $f_start_day
-#	13: $f_start_year
-#	14: $f_end_month
-#	15: $f_end_day
-#	16: $f_end_year
-#	17: $f_search
-#	18: $f_hide_resolved
-#	19: $f_show_resolution
-#	20: $f_show_build
-#	21: $f_show_version
-#	22: $f_do_filter_by_date
-#	23: $f_custom_field
-#	24: $f_relationship_type
-# 	25: $f_relationship_bug
-# 	26: $f_show_profile
+#	11: $f_start_creation_month
+#	12: $f_start_creation_day
+#	13: $f_start_creation_year
+#	14: $f_end_creation_month
+#	15: $f_end_creation_day
+#	16: $f_end_creation_year
+#	17: $f_start_last_updated_month
+#	18: $f_start_last_updated_day
+#	19: $f_start_last_updated_year
+#	20: $f_end_last_updated_month
+#	21: $f_end_last_updated_day
+#	22: $f_end_last_updated_year
+#	23: $f_search
+#	24: $f_hide_resolved
+#	25: $f_show_resolution
+#	26: $f_show_build
+#	27: $f_show_version
+#	28: $f_do_filter_by_date
+#	29: $f_custom_field
+#	30: $f_relationship_type
+# 	31: $f_relationship_bug
+# 	32: $f_show_profile
 
 # Set new filter values.  These are stored in a cookie
 $t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -462,18 +480,26 @@ switch( $f_type ) {
 		$t_setting_arr[FILTER_PROPERTY_PROJECT_ID] 				= $f_project_id;
 		$t_setting_arr[FILTER_PROPERTY_SORT_FIELD_NAME] 		= $f_sort;
 		$t_setting_arr[FILTER_PROPERTY_SORT_DIRECTION] 			= $f_dir;
-		$t_setting_arr[FILTER_PROPERTY_START_MONTH] 			= $f_start_month;
-		$t_setting_arr[FILTER_PROPERTY_START_DAY] 				= $f_start_day;
-		$t_setting_arr[FILTER_PROPERTY_START_YEAR] 				= $f_start_year;
-		$t_setting_arr[FILTER_PROPERTY_END_MONTH] 				= $f_end_month;
-		$t_setting_arr[FILTER_PROPERTY_END_DAY] 				= $f_end_day;
-		$t_setting_arr[FILTER_PROPERTY_END_YEAR] 				= $f_end_year;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_MONTH] 	= $f_start_creation_month;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_DAY] 		= $f_start_creation_day;
+		$t_setting_arr[FILTER_PROPERTY_START_CREATION_YEAR] 	= $f_start_creation_year;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_MONTH] 		= $f_end_creation_month;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_DAY] 		= $f_end_creation_day;
+		$t_setting_arr[FILTER_PROPERTY_END_CREATION_YEAR] 		= $f_end_creation_year;
+		$t_setting_arr[FILTER_PROPERTY_START_LAST_UPDATED_MONTH]= $f_start_last_updated_month;
+		$t_setting_arr[FILTER_PROPERTY_START_LAST_UPDATED_DAY] 	= $f_start_last_updated_day;
+		$t_setting_arr[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] = $f_start_last_updated_year;
+		$t_setting_arr[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] 	= $f_end_last_updated_month;
+		$t_setting_arr[FILTER_PROPERTY_END_LAST_UPDATED_DAY] 	= $f_end_last_updated_day;
+		$t_setting_arr[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] 	= $f_end_last_updated_year;
 		$t_setting_arr[FILTER_PROPERTY_SEARCH] 					= $f_search;
 		$t_setting_arr[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
 		$t_setting_arr[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
 		$t_setting_arr[FILTER_PROPERTY_BUILD] 					= $f_show_build;
 		$t_setting_arr[FILTER_PROPERTY_VERSION] 				= $f_show_version;
 		$t_setting_arr[FILTER_PROPERTY_FILTER_BY_DATE] 			= $f_do_filter_by_date;
+		$t_setting_arr[FILTER_PROPERTY_FILTER_BY_CREATION_DATE] = $f_do_filter_by_creation_date;
+		$t_setting_arr[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = $f_do_filter_by_last_updated_date;
 		$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION] 		= $f_fixed_in_version;
 		$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION] 			= $f_target_version;
 		$t_setting_arr[FILTER_PROPERTY_PRIORITY] 				= $f_show_priority;

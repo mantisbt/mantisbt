@@ -211,24 +211,43 @@ $(document).ready( function() {
 
 	setBugLabel();
 
-	$(document).on('click', 'input[type=checkbox]#use_date_filters', function() {
+	/* Handle date filters */
+	$(document).on('click', 'input[type=checkbox]#use_creation_date_filters', function() {
 		if (!$(this).is(':checked')) {
-			$('div.filter-box select[name=start_year]').prop('disabled', true);
-			$('div.filter-box select[name=start_month]').prop('disabled', true);
-			$('div.filter-box select[name=start_day]').prop('disabled', true);
-			$('div.filter-box select[name=end_year]').prop('disabled', true);
-			$('div.filter-box select[name=end_month]').prop('disabled', true);
-			$('div.filter-box select[name=end_day]').prop('disabled', true);
+			$('div.filter-box select[name=start_creation_year]').prop('disabled', true);
+			$('div.filter-box select[name=start_creation_month]').prop('disabled', true);
+			$('div.filter-box select[name=start_creation_day]').prop('disabled', true);
+			$('div.filter-box select[name=end_creation_year]').prop('disabled', true);
+			$('div.filter-box select[name=end_creation_month]').prop('disabled', true);
+			$('div.filter-box select[name=end_creation_day]').prop('disabled', true);
 		} else {
-			$('div.filter-box select[name=start_year]').prop('disabled', false);
-			$('div.filter-box select[name=start_month]').prop('disabled', false);
-			$('div.filter-box select[name=start_day]').prop('disabled', false);
-			$('div.filter-box select[name=end_year]').prop('disabled', false);
-			$('div.filter-box select[name=end_month]').prop('disabled', false);
-			$('div.filter-box select[name=end_day]').prop('disabled', false);
+			$('div.filter-box select[name=start_creation_year]').prop('disabled', false);
+			$('div.filter-box select[name=start_creation_month]').prop('disabled', false);
+			$('div.filter-box select[name=start_creation_day]').prop('disabled', false);
+			$('div.filter-box select[name=end_creation_year]').prop('disabled', false);
+			$('div.filter-box select[name=end_creation_month]').prop('disabled', false);
+			$('div.filter-box select[name=end_creation_day]').prop('disabled', false);
 		}
 	});
 
+	$(document).on('click', 'input[type=checkbox]#use_last_updated_date_filters', function() {
+		if (!$(this).is(':checked')) {
+			$('div.filter-box select[name=start_last_updated_year]').prop('disabled', true);
+			$('div.filter-box select[name=start_last_updated_month]').prop('disabled', true);
+			$('div.filter-box select[name=start_last_updated_day]').prop('disabled', true);
+			$('div.filter-box select[name=end_last_updated_year]').prop('disabled', true);
+			$('div.filter-box select[name=end_last_updated_month]').prop('disabled', true);
+			$('div.filter-box select[name=end_last_updated_day]').prop('disabled', true);
+		} else {
+			$('div.filter-box select[name=start_last_updated_year]').prop('disabled', false);
+			$('div.filter-box select[name=start_last_updated_month]').prop('disabled', false);
+			$('div.filter-box select[name=start_last_updated_day]').prop('disabled', false);
+			$('div.filter-box select[name=end_last_updated_year]').prop('disabled', false);
+			$('div.filter-box select[name=end_last_updated_month]').prop('disabled', false);
+			$('div.filter-box select[name=end_last_updated_day]').prop('disabled', false);
+		}
+	});
+	
 	/* Handle custom field of date type */
 	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
 		var table = $(this).closest('table');
