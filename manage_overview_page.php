@@ -95,6 +95,9 @@ print_manage_menu( 'manage_overview_page.php' );
 			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
 			<td><?php echo config_get( 'plugin_path' ) ?></td>
 		</tr>
+		<tr class="spacer">
+			<td colspan="2"></td>
+		</tr>
 	<?php
 	}
 
