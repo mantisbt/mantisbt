@@ -36,7 +36,6 @@ $g_parsedown = null;
  * @return void
  */
 function markdown_init() {
-
     global $g_parsedown;
 
     if ( $g_parsedown == null ) {
@@ -73,7 +72,6 @@ function markdown_enabled() {
  * @return string html representation generated from markdown
  */
 function markdown_text( $p_text ) {
-
     markdown_init();
 
     global $g_parsedown;
@@ -98,7 +96,6 @@ function markdown_text( $p_text ) {
  * @return string html representation generated from markdown
  */
 function markdown_line( $p_text ) {
-
     markdown_init();
 
     global $g_parsedown;

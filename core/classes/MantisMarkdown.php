@@ -38,6 +38,9 @@
 
 require_once( dirname( dirname( __FILE__ ) ) . '../../library/parsedown/Parsedown.php' );
 
+/**
+ * A class that overrides default Markdown parsing for Mantis specific scenarios.
+ */
 class MantisMarkdown extends Parsedown
 {
     /**
@@ -57,23 +60,24 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return void if markdown starts with # symbol | string html representation generated from markdown.
      */
-    protected function blockHeader($line) {
-        
-        $block = parent::blockHeader($line);
+    protected function blockHeader( $line ) {
+        $block = parent::blockHeader( $line );
 
         # make sure config option bug_link_tag == '#' only
         # check if string start with # symbol followed by numbers
         # hash[numbers] should not be treated as header, then let the app handle it
-        if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all('/^#\d+$/', $line['text'], $matches) ) {
+        if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
             return;
-        } 
-        # should be treated as headers
+        }
+
+        # Header rules
         /**
          * hash[space][numbers] - treated as header
          * hash[number][*] - treated as header since it is not a pure number
          * hash[letter][*] - treated as header
          * hash[space][letter][*] - treated as header
          */
+
         return $block;
     }
 
@@ -85,23 +89,24 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return void if markdown starts with # symbol | string html representation generated from markdown.
      */
-    protected function blockSetextHeader($line, array $block = NULL) {
-        
-        $block = parent::blockSetextHeader($line, $block);
+    protected function blockSetextHeader( $line, array $block = null ) {
+        $block = parent::blockSetextHeader( $line, $block );
         
         # make sure config option bug_link_tag == '#' only
         # check if string start with # symbol followed by numbers
         # hash[numbers] should not be treated as header, then let the app handle it
-        if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all('/^#\d+$/', $line['text'], $matches) ) {
+        if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
             return;
-        } 
-        # should be treated as headers
+		}
+
+		# Header rules
         /**
          * hash[space][numbers] - treated as header
          * hash[number][*] - treated as header since it is not a pure number
          * hash[letter][*] - treated as header
          * hash[space][letter][*] - treated as header
          */
+
         return $block;
     }
 
@@ -114,9 +119,9 @@ class MantisMarkdown extends Parsedown
      * @access private
      * @return string html representation generated from markdown.
      */
-    private function __doTable($line, $block, $fn) {
+    private function __doTable( $line, $block, $fn ) {
 
-        if( $block = call_user_func('parent::' . $fn, $line, $block) ) {
+        if( $block = call_user_func( 'parent::' . $fn, $line, $block ) ) {
         	$block['element']['attributes']['class'] = $this->table_class;
         }
 
@@ -131,8 +136,8 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return string html representation generated from markdown.
      */
-    protected function blockTable($line, array $block = null) {
-    	return $this->__doTable($line, $block, __FUNCTION__);
+    protected function blockTable( $line, array $block = null ) {
+    	return $this->__doTable( $line, $block, __FUNCTION__ );
     }
 
     /**
@@ -143,8 +148,8 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return string html representation generated from markdown.
      */
-    protected function blockTableContinue($line, array $block) {
-        return $this->__doTable($line, $block, __FUNCTION__);
+    protected function blockTableContinue( $line, array $block ) {
+        return $this->__doTable( $line, $block, __FUNCTION__ );
     }
 
     /**
@@ -156,9 +161,9 @@ class MantisMarkdown extends Parsedown
      * @access private
      * @return string html representation generated from markdown.
      */
-    private function __quote($line, $block, $fn) {
+    private function __quote( $line, $block, $fn ) {
 
-        if( $block = call_user_func('parent::' . $fn, $line, $block) ) {
+        if( $block = call_user_func( 'parent::' . $fn, $line, $block ) ) {
             $block['element']['attributes']['style'] = $this->inline_style;
         }
 
@@ -173,8 +178,8 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return string html representation generated from markdown.
      */
-    protected function blockQuote($line){
-        return $this->__quote($line, array(), __FUNCTION__);    
+    protected function blockQuote( $line ){
+        return $this->__quote( $line, array(), __FUNCTION__ );
     }
 
     /**
@@ -185,7 +190,7 @@ class MantisMarkdown extends Parsedown
      * @access protected
      * @return string html representation generated from markdown.
      */
-    protected function blockQuoteContinue($line, array $block){
-        return $this->__quote($line, $block, __FUNCTION__);
+    protected function blockQuoteContinue( $line, array $block ){
+        return $this->__quote( $line, $block, __FUNCTION__ );
     }
 }
