@@ -969,7 +969,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
 
 		# Limit the number of reporters listed
-		if( $t_row_count > $t_reporter_summary_limit ) {
+		if( $t_row_count >= $t_reporter_summary_limit ) {
 			break;
 		}
 
@@ -1097,7 +1097,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
 
 		# Limit the number of reporters listed
-		if( $t_row_count > $t_reporter_summary_limit ) {
+		if( $t_row_count >= $t_reporter_summary_limit ) {
 			break;
 		}
 
