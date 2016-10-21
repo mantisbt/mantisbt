@@ -89,4 +89,82 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
     public function testHashNumbers() {
         $this->assertEquals( '<p>#1</p>', self::$markdown->text( '#1' ) );
     }
+
+    /**
+     * Test if table class attribute is defined
+     * @return void
+     */
+    public function testTableClassDefined() {
+        self::$markdown->table_class = "table table-nonfluid";
+        
+        $markdown_table = <<<EOD
+| _header_ 1   | header 2     |
+| ------------ | ------------ |
+| _cell_ 1.1   | ~~cell~~ 1.2 |
+| `|` 2.1      | \| 2.2       |
+| `\|` 2.1     | [link](/)    |
+EOD;
+
+        $markdown_table_output = <<<EOD
+<table class="table table-nonfluid">
+<thead>
+<tr>
+<th><em>header</em> 1</th>
+<th>header 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>cell</em> 1.1</td>
+<td><del>cell</del> 1.2</td>
+</tr>
+<tr>
+<td><code>|</code> 2.1</td>
+<td>| 2.2</td>
+</tr>
+<tr>
+<td><code>\|</code> 2.1</td>
+<td><a href="/">link</a></td>
+</tr>
+</tbody>
+</table>
+EOD;
+    
+        $this->assertEquals( $markdown_table_output, self::$markdown->text( $markdown_table ) );
+    }
+
+    /**
+     * Test the quote markdown if style attribute is defined
+     * @return void
+     */
+    public function testQuoteStyleAttribute() {
+        self::$markdown->inline_style = "border-color:#847d7d";
+
+        $markdown_quote = <<<EOD
+> quote
+
+indented:
+   > quote
+
+no space after `>`:
+>quote
+EOD;
+
+        $markdown_quote_output = <<<EOD
+<blockquote style="border-color:#847d7d">
+<p>quote</p>
+</blockquote>
+<p>indented:</p>
+<blockquote style="border-color:#847d7d">
+<p>quote</p>
+</blockquote>
+<p>no space after <code>&gt;</code>:</p>
+<blockquote style="border-color:#847d7d">
+<p>quote</p>
+</blockquote>
+EOD;
+        
+        $this->assertEquals( $markdown_quote_output, self::$markdown->text( $markdown_quote ) );	 
+    }
+
 }
