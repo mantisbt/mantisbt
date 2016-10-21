@@ -40,50 +40,53 @@ require_mantis_core();
 
 class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 
-	protected static $markdown;
+    /**
+     * @var class $markdown
+     */
+    protected static $markdown;
 
-	/**
-	 * Initiazed MantisMarkdown class before a test method run
-	 * @return void
-	 */
-	public static function setUpBeforeClass(){
+    /**
+     * Initiazed MantisMarkdown class before a test method run
+     * @return void
+     */
+    public static function setUpBeforeClass() {
         self::$markdown = new MantisMarkdown();
-    }	
-
-	/**
-	 * Test If string starts with hash character followed by letters
-	 * @return void
-	 */
-	public function testHashLetters() {
-		$this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '# hello' ) );
-		$this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '#hello' ) );
     }
 
     /**
-	 * Test If string starts with hash character followed by number and letters
-	 * @return void
-	 */
-	public function testHashNumberAny() {
-		$this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '# 1abcd' ) );
-		$this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '#1abcd' ) );
+     * Test If string starts with hash character followed by letters
+     * @return void
+     */
+    public function testHashLetters() {
+        $this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '# hello' ) );
+        $this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '#hello' ) );
     }
 
-	/**
-	 * Test If string starts with hash character followed by letters and numbers
-	 * @return void
-	 */
-	public function testHashLettersAny() {
-		$this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '# abcd1234' ) );
-		$this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '#abcd1234' ) );
-	}
+    /**
+     * Test If string starts with hash character followed by number and letters
+     * @return void
+     */
+    public function testHashNumberAny() {
+        $this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '# 1abcd' ) );
+        $this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '#1abcd' ) );
+    }
 
-	/**
-	 * Test If string starts with hash character followed by numbers
-	 * @return void
-	 */
-	public function testHashNumbers() {
-		$this->assertEquals( '<p>#1</p>', self::$markdown->text( '#1' ) );
-	}
-	
-    
+    /**
+     * Test If string starts with hash character followed by letters and numbers
+     * @return void
+     */
+    public function testHashLettersAny() {
+        $this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '# abcd1234' ) );
+        $this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '#abcd1234' ) );
+    }
+
+    /**
+     * Test If string starts with hash character followed by numbers
+     * since the class overrides the default Markdown parsing on Header
+     * then the methods should return the standard text.
+     * @return void
+     */
+    public function testHashNumbers() {
+        $this->assertEquals( '<p>#1</p>', self::$markdown->text( '#1' ) );
+    }
 }
