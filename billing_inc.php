@@ -64,9 +64,9 @@ $t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
 $t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
 $t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-$t_bugnote_stats_from_d = gpc_get_int( 'start_day', $t_bugnote_stats_from_def_d );
-$t_bugnote_stats_from_m = gpc_get_int( 'start_month', $t_bugnote_stats_from_def_m );
-$t_bugnote_stats_from_y = gpc_get_int( 'start_year', $t_bugnote_stats_from_def_y );
+$t_bugnote_stats_from_d = gpc_get_int( FILTER_PROPERTY_START_DAY, $t_bugnote_stats_from_def_d );
+$t_bugnote_stats_from_m = gpc_get_int( FILTER_PROPERTY_START_MONTH, $t_bugnote_stats_from_def_m );
+$t_bugnote_stats_from_y = gpc_get_int( FILTER_PROPERTY_START_YEAR, $t_bugnote_stats_from_def_y );
 
 $t_bugnote_stats_to_def = $t_today;
 $t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
@@ -74,9 +74,9 @@ $t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 $t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
 $t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-$t_bugnote_stats_to_d = gpc_get_int( 'end_day', $t_bugnote_stats_to_def_d );
-$t_bugnote_stats_to_m = gpc_get_int( 'end_month', $t_bugnote_stats_to_def_m );
-$t_bugnote_stats_to_y = gpc_get_int( 'end_year', $t_bugnote_stats_to_def_y );
+$t_bugnote_stats_to_d = gpc_get_int( FILTER_PROPERTY_END_DAY, $t_bugnote_stats_to_def_d );
+$t_bugnote_stats_to_m = gpc_get_int( FILTER_PROPERTY_END_MONTH, $t_bugnote_stats_to_def_m );
+$t_bugnote_stats_to_y = gpc_get_int( FILTER_PROPERTY_END_YEAR, $t_bugnote_stats_to_def_y );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
