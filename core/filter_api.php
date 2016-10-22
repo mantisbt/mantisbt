@@ -1495,15 +1495,25 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		array_push( $t_project_where_clauses, $t_project_query );
 	}
 
-	# date filter
+	# creation date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
-
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_DAY] . ' 00:00:00';
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_DAY] . ' 23:59:59';
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
 		array_push( $t_project_where_clauses, '({bug}.date_submitted BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
+	}
+	
+	
+	# last update date filter
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+		$t_start_string = $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] . ' 00:00:00';
+		$t_end_string = $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] . ' 23:59:59';
+
+		$t_where_params[] = strtotime( $t_start_string );
+		$t_where_params[] = strtotime( $t_end_string );
+		array_push( $t_project_where_clauses, '({bug}.last_updated BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
 	}
 
 	# view state
