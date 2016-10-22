@@ -270,6 +270,37 @@ function filter_get_url( array $p_custom_filter ) {
 		}
 	}
 
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE,
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ? 'on' : 'off' );
+
+		# The start and end dates are only applicable if filter by date is set.
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+		}
+
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+		}
+	}
+
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
 		if( $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] != -1 ) {
 			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_RELATIONSHIP_TYPE, $p_custom_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
