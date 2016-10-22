@@ -145,6 +145,15 @@ function html_javascript_cdn_link( $p_url, $p_hash = '' ) {
 }
 
 /**
+ * Prints a <script> tag to include a dynamic generated JavaScript file from PHP script.
+ * @param string $p_scriptname Name of PHP script generating the JavaScript content file.
+ * @return void
+ */
+function html_javascript_dynamic_link( $p_scriptname ) {
+	echo "\t", '<script type="text/javascript" src="', helper_mantis_url( $p_scriptname ), '"></script>', "\n";
+}
+
+/**
  * Print the document type and the opening <html> tag
  * @return void
  */
