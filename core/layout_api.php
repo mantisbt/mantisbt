@@ -409,7 +409,6 @@ function layout_navbar() {
 
 	echo '</div>';
 
-	echo '<div class="hidden-xs">';
 	echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
@@ -421,19 +420,6 @@ function layout_navbar() {
 		layout_navbar_user_menu();
 	}
 	echo '</ul>';
-	echo '</div>';
-	echo '</div>';
-
-	# mobile view
-	echo '<div class="hidden-sm hidden-md hidden-lg">';
-	echo '<div class="navbar-menu pull-left navbar-collapse collapse" role="navigation" style="height: auto;">';
-	echo '<ul class="nav navbar-nav">';
-	if (auth_is_user_authenticated()) {
-		layout_navbar_user_menu(false);
-		layout_navbar_projects_menu();
-	}
-	echo '</ul>';
-	echo '</div>';
 	echo '</div>';
 
 	echo '</div>';
