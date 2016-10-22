@@ -3020,6 +3020,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	}
 
 	# date values
+	# creation date
 	$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
 	$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_MONTH, $t_filter[FILTER_PROPERTY_START_MONTH] );
 	$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_MONTH, $t_filter[FILTER_PROPERTY_END_MONTH] );
@@ -3027,6 +3028,15 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_DAY, $t_filter[FILTER_PROPERTY_END_DAY] );
 	$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_YEAR, $t_filter[FILTER_PROPERTY_START_YEAR] );
 	$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, $t_filter[FILTER_PROPERTY_END_YEAR] );
+	# last_updated date values
+	$f_do_filter_by_last_updated_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
+	$f_start_month			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+	$f_end_month			= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+	$f_start_day			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_DAY, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+	$f_end_day				= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_DAY, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+	$f_start_year			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+	$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+	
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
 
@@ -3187,6 +3197,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_BUILD] 					= $f_show_build;
 	$t_filter_input[FILTER_PROPERTY_VERSION] 				= $f_show_version;
 	$t_filter_input[FILTER_PROPERTY_FILTER_BY_DATE] 			= $f_do_filter_by_date;
+	$t_filter_input[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = $f_do_filter_by_last_updated_date;
 	$t_filter_input[FILTER_PROPERTY_FIXED_IN_VERSION] 		= $f_fixed_in_version;
 	$t_filter_input[FILTER_PROPERTY_TARGET_VERSION] 			= $f_target_version;
 	$t_filter_input[FILTER_PROPERTY_PRIORITY] 				= $f_show_priority;
