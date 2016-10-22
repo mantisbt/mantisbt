@@ -268,7 +268,7 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 				if( is_numeric( $t_label ) ) {
 					echo '<li>' .  $t_href . '</li>';
 				} else {
-					print_small_button( $t_href, $t_label );
+					echo '<li><a href="' . $t_href . '">' . $t_label . '</a></li>';
 				}
 			}
 		} elseif( !empty( $t_hook ) ) {
