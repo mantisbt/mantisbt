@@ -245,18 +245,20 @@ echo '</div>';
 echo '<div class="widget-body">';
 
 echo '<div class="widget-toolbox padding-8 clearfix noprint">';
-echo '<div class="btn-group pull-left">';
+
+echo '<div class="pull-left">';
+echo '<ul class="nav nav-tabs">';
 
 # Jump to Bugnotes
-print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
+echo '<li><a href="#bugnotes">' . lang_get( 'jump_to_bugnotes' ) . '</a></li>';
 
 # Send Bug Reminder
 if( $t_show_reminder_link ) {
-	print_small_button( $t_bug_reminder_link, lang_get( 'bug_reminder' ) );
+	echo '<li><a href="' . $t_bug_reminder_link . '">' . lang_get( 'bug_reminder' ) . '</a></li>';
 }
 
 if( !is_blank( $t_wiki_link ) ) {
-	print_small_button( $t_wiki_link, lang_get( 'wiki' ) );
+	echo '<li><a href="' . $t_wiki_link . '">' . lang_get( 'wiki' ) . '</a></li>';
 }
 
 foreach ( $t_links as $t_plugin => $t_hooks ) {
@@ -264,13 +266,13 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 		if( is_array( $t_hook ) ) {
 			foreach( $t_hook as $t_label => $t_href ) {
 				if( is_numeric( $t_label ) ) {
-					print_bracket_link_prepared( $t_href );
+					echo '<li>' .  $t_href . '</li>';
 				} else {
 					print_small_button( $t_href, $t_label );
 				}
 			}
 		} elseif( !empty( $t_hook ) ) {
-			print_bracket_link_prepared( $t_hook );
+			echo '<li>' .  $t_hook . '</li>';
 		}
 	}
 }
@@ -278,9 +280,9 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 # Links
 if( !is_blank( $t_history_link ) ) {
 	# History
-	print_small_button( $t_history_link, lang_get( 'bug_history' ) );
+	echo '<li><a href="' . $t_history_link . '">' . lang_get( 'bug_history' ) . '</a></li>';
 }
-
+echo '<ul>';
 echo '</div>';
 
 # prev/next links
