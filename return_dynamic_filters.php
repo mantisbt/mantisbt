@@ -90,10 +90,11 @@ function return_dynamic_filters_prepend_headers() {
 }
 
 $f_filter_target = gpc_get_string( 'filter_target' );
-$t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
+$filter_target = utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
+$t_function_name = 'print_filter_' . $filter_target; 
 if( function_exists( $t_function_name ) ) {
 	return_dynamic_filters_prepend_headers();
-	call_user_func( $t_function_name, $t_filter );
+	echo call_user_func_array( 'filter_form_get_input', array( $t_filter, $filter_target, true ) );
 } else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
