@@ -222,6 +222,8 @@ function html_css() {
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		html_css_link( $t_stylesheet_path );
 	}
+
+	html_css_link( 'dropzone.css' );
 }
 
 /**
@@ -307,6 +309,7 @@ function html_head_javascript() {
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
 	}
 
+	html_javascript_link( 'dropzone.min.js');
 	html_javascript_link( 'common.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );

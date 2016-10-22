@@ -233,10 +233,9 @@ function http_security_headers() {
 			http_csp_add( 'img-src', 'ajax.googleapis.com' );
 		}
 
-		# Relaxing policy for view issue page to allow inline scripts.
-		# Should be removed once #21651 is fixed.
-		if( 'view.php' == basename( $_SERVER['SCRIPT_NAME'] ) ||
-			'bug_report_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+		# Relaxing policy for bug report page to allow inline scripts.
+		# Should be removed once #20040 is fixed.
+		if( 'bug_report_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
 			http_csp_add( 'script-src', "'unsafe-inline'" );
 		}
 
