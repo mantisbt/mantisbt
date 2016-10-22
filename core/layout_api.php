@@ -393,7 +393,7 @@ function layout_navbar() {
 	echo '</a>';
 
 	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
-	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
+	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
 	if (auth_is_user_authenticated()) {
 		layout_navbar_user_avatar();

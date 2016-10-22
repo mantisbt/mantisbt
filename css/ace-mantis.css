@@ -286,6 +286,10 @@ textarea.input-xs, select.input-xs[multiple] {
     .input-sm {
         width: 120px !important;
     }
+
+    .navbar-toggle {
+        display: block;
+    }
 }
 
 /* Medium devices (desktops, 992px and up) */
