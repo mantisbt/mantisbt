@@ -1446,7 +1446,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		<tr>
 			<td colspan="2">
 				<label>
-					<input type="checkbox" id="use_date_filters" name="<?php
+					<input type="checkbox" id="use_last_updated_date_filters" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"<?php
 						check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
 					<?php echo lang_get( 'use_last_updated_date_filters' )?>
