@@ -812,7 +812,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_START_DAY => 1,
 		FILTER_PROPERTY_END_DAY => date( 'd' ),
 		FILTER_PROPERTY_START_YEAR => date( 'Y' ),
-		FILTER_PROPERTY_END_YEAR => date( 'Y' ),		
+		FILTER_PROPERTY_END_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE => false,
 		FILTER_PROPERTY_START_LAST_UPDATED_MONTH => date( 'm' ),
 		FILTER_PROPERTY_END_LAST_UPDATED_MONTH => date( 'm' ),
@@ -1527,7 +1527,14 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	}
 
 	# creation date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] )
+			) {
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_DAY] . ' 00:00:00';
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_DAY] . ' 23:59:59';
 
@@ -1538,7 +1545,14 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	
 	
 	# last update date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] )
+			) {
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] . ' 00:00:00';
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] . ' 23:59:59';
 

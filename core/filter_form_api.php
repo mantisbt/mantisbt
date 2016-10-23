@@ -99,10 +99,6 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 	# override non standard calls
 	switch( $p_filter_target ) {
 		case 'do_filter_by_date':
-			if( $p_show_inputs ) {
-				$t_params = array( false, $p_filter );
-			}
-			break;
 		case 'do_filter_by_last_updated_date':
 			if( $p_show_inputs ) {
 				$t_params = array( false, $p_filter );
