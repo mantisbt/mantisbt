@@ -32,6 +32,7 @@ define( 'FILTER_PROPERTY_HIDE_STATUS', 'hide_status' ); # hide_status
 define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
 define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
 define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' ); # ?
+
 define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
 define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
 define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
@@ -39,13 +40,15 @@ define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
 define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
 define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
-define( 'FILTER_PROPERTY_START_LAST_UPDATED_DAY', 'start_last_updated_day' );
-define( 'FILTER_PROPERTY_START_LAST_UPDATED_MONTH', 'start_last_updated_month' );
-define( 'FILTER_PROPERTY_START_LAST_UPDATED_YEAR', 'start_last_updated_year' );
-define( 'FILTER_PROPERTY_END_LAST_UPDATED_DAY', 'end_last_updated_day' );
-define( 'FILTER_PROPERTY_END_LAST_UPDATED_MONTH', 'end_last_updated_month' );
-define( 'FILTER_PROPERTY_END_LAST_UPDATED_YEAR', 'end_last_updated_year' );
+
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'start_last_updated_day' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'start_last_updated_month' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_YEAR', 'start_last_updated_year' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_DAY', 'end_last_updated_day' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'end_last_updated_month' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'end_last_updated_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
+
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
 define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
