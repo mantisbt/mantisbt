@@ -1223,17 +1223,17 @@ function print_filter_highlight_changed( array $p_filter = null ) {
  */
 function print_filter_values_do_filter_by_date( array $p_filter ) {
 	$t_filter = $p_filter;
-	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
-		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_YEAR] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_YEAR] ), '" />';
+	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
+		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ), '" />';
 
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_START_MONTH], $t_filter[FILTER_PROPERTY_START_DAY], $t_filter[FILTER_PROPERTY_START_YEAR] );
+		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
@@ -1251,7 +1251,7 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 
 		echo ' - ';
 
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_END_MONTH], $t_filter[FILTER_PROPERTY_END_DAY], $t_filter[FILTER_PROPERTY_END_YEAR] );
+		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
@@ -1293,15 +1293,15 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			<td colspan="2">
 				<label>
 					<input type="checkbox" id="use_date_filters" name="<?php
-						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
+						echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>"<?php
+						check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), true ) ?> />
 					<?php echo lang_get( 'use_date_filters' )?>
 				</label>
 			</td>
 		</tr>
 <?php
 
-		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
 			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
@@ -1317,18 +1317,18 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $p_filter[FILTER_PROPERTY_START_MONTH] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $p_filter[FILTER_PROPERTY_START_DAY] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $p_filter[FILTER_PROPERTY_START_YEAR] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
 			print "</select>\n";
 		}
 	}
@@ -1345,18 +1345,18 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $p_filter[FILTER_PROPERTY_END_MONTH] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $p_filter[FILTER_PROPERTY_END_DAY] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $p_filter[FILTER_PROPERTY_END_YEAR] );
+			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
 			print "</select>\n";
 		}
 	}
