@@ -1376,15 +1376,15 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 	$t_filter = $p_filter;
 	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
 		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_LAST_UPDATED_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_LAST_UPDATED_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ), '" />';
 
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH], $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY], $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
@@ -1402,7 +1402,7 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 
 		echo ' - ';
 
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH], $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY], $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 		foreach( $t_chars as $t_char ) {
 			if( strcasecmp( $t_char, 'M' ) == 0 ) {
 				echo ' ';
@@ -1468,18 +1468,18 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $p_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $p_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_START_LAST_UPDATED_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $p_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 			print "</select>\n";
 		}
 	}
@@ -1496,18 +1496,18 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $p_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $p_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_END_LAST_UPDATED_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $p_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 			print "</select>\n";
 		}
 	}

@@ -272,28 +272,28 @@ function filter_get_url( array $p_custom_filter ) {
 			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ? 'on' : 'off' );
 
 		# The start and end dates are only applicable if filter by date is set.
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_START_DAY, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 		}
 
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_DAY, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_END_DAY, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 		}
 
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_START_MONTH, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 		}
 
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_END_MONTH, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
 		}
 
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 		}
 
-		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] ) ) {
-			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, $p_custom_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
+			$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $p_custom_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 		}
 	}
 
@@ -810,12 +810,12 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_START_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_END_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE => false,
-		FILTER_PROPERTY_START_LAST_UPDATED_MONTH => date( 'm' ),
-		FILTER_PROPERTY_END_LAST_UPDATED_MONTH => date( 'm' ),
-		FILTER_PROPERTY_START_LAST_UPDATED_DAY => 1,
-		FILTER_PROPERTY_END_LAST_UPDATED_DAY => date( 'd' ),
-		FILTER_PROPERTY_START_LAST_UPDATED_YEAR => date( 'Y' ),
-		FILTER_PROPERTY_END_LAST_UPDATED_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_LAST_UPDATED_START_MONTH => date( 'm' ),
+		FILTER_PROPERTY_LAST_UPDATED_END_MONTH => date( 'm' ),
+		FILTER_PROPERTY_LAST_UPDATED_START_DAY => 1,
+		FILTER_PROPERTY_LAST_UPDATED_END_DAY => date( 'd' ),
+		FILTER_PROPERTY_LAST_UPDATED_START_YEAR => date( 'Y' ),
+		FILTER_PROPERTY_LAST_UPDATED_END_YEAR => date( 'Y' ),
 		FILTER_PROPERTY_SEARCH => '',
 		FILTER_PROPERTY_VIEW_STATE => META_FILTER_ANY,
 		FILTER_PROPERTY_TAG_STRING => '',
@@ -1542,15 +1542,15 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	
 	# last update date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] )
-			&& is_numeric( $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] )
+			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] )
 			) {
-		$t_start_string = $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] . ' 00:00:00';
-		$t_end_string = $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] . ' 23:59:59';
+		$t_start_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] . '-' . $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] . '-' . $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] . ' 00:00:00';
+		$t_end_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] . '-' . $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] . '-' . $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] . ' 23:59:59';
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
@@ -3095,12 +3095,12 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, $t_filter[FILTER_PROPERTY_END_YEAR] );
 	# last_updated date values
 	$f_do_filter_by_last_updated_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
-	$f_last_updated_start_month			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_MONTH, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] );
-	$f_last_updated_end_month			= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_MONTH, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] );
-	$f_last_updated_start_day			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_DAY, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_DAY] );
-	$f_last_updated_end_day				= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_DAY, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_DAY] );
-	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_START_LAST_UPDATED_YEAR, $t_filter[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] );
-	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_END_LAST_UPDATED_YEAR, $t_filter[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] );
+	$f_last_updated_start_month			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_MONTH, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
+	$f_last_updated_end_month			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_MONTH, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
+	$f_last_updated_start_day			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
+	$f_last_updated_end_day				= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
+	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
+	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 	
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
@@ -3258,12 +3258,12 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_END_DAY] 				= $f_end_day;
 	$t_filter_input[FILTER_PROPERTY_END_YEAR] 				= $f_end_year;
 	$t_filter_input[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = $f_do_filter_by_last_updated_date;
-	$t_filter_input[FILTER_PROPERTY_START_LAST_UPDATED_MONTH] 	= $f_last_updated_start_month;
-	$t_filter_input[FILTER_PROPERTY_START_LAST_UPDATED_DAY] 	= $f_last_updated_start_day;
-	$t_filter_input[FILTER_PROPERTY_START_LAST_UPDATED_YEAR] 	= $f_last_updated_start_year;
-	$t_filter_input[FILTER_PROPERTY_END_LAST_UPDATED_MONTH] 	= $f_last_updated_end_month;
-	$t_filter_input[FILTER_PROPERTY_END_LAST_UPDATED_DAY] 		= $f_last_updated_end_day;
-	$t_filter_input[FILTER_PROPERTY_END_LAST_UPDATED_YEAR] 		= $f_last_updated_end_year;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] 	= $f_last_updated_start_month;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_START_DAY] 	= $f_last_updated_start_day;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] 	= $f_last_updated_start_year;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] 	= $f_last_updated_end_month;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_DAY] 		= $f_last_updated_end_day;
+	$t_filter_input[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] 		= $f_last_updated_end_year;
 	$t_filter_input[FILTER_PROPERTY_SEARCH] 					= $f_search;
 	$t_filter_input[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
 	$t_filter_input[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
