@@ -128,9 +128,16 @@ class BugnoteData {
  * @access public
  */
 function bugnote_exists( $p_bugnote_id ) {
+	$c_bugnote_id = (int)$p_bugnote_id;
+
+	# Check for invalid id values
+	if( $c_bugnote_id <= 0 || $c_bugnote_id > DB_MAX_INT ) {
+		return false;
+	}
+
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {bugnote} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bugnote_id ) );
+	$t_result = db_query( $t_query, array( $c_bugnote_id ) );
 
 	if( 0 == db_result( $t_result ) ) {
 		return false;

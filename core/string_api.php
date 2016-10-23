@@ -347,13 +347,14 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		if( $p_include_anchor ) {
 			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
-					if( bug_exists( (int)$p_array[2] ) ) {
-						$t_project_id = bug_get_field( (int)$p_array[2], 'project_id' );
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
+						$t_project_id = bug_get_field( $c_bug_id, 'project_id' );
 						$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
-						if( access_has_bug_level( $t_view_bug_threshold, (int)$p_array[2] ) ) {
+						if( access_has_bug_level( $t_view_bug_threshold, $c_bug_id ) ) {
 							return $p_array[1] .
 								string_get_bug_view_link(
-									(int)$p_array[2],
+									$c_bug_id,
 									(boolean)$p_detail_info,
 									(boolean)$p_fqdn
 								);
@@ -364,10 +365,11 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		} else {
 			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
-					if( bug_exists( (int)$p_array[2] ) ) {
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
 						# Create link regardless of user's access to the bug
 						return $p_array[1] .
-							string_get_bug_view_url_with_fqdn( (int)$p_array[2] );
+							string_get_bug_view_url_with_fqdn( $c_bug_id );
 					}
 					return $p_array[0];
 				}; # end of bug link callback closure
@@ -416,8 +418,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
 					global $g_project_override;
-					if( bugnote_exists( (int)$p_array[2] ) ) {
-						$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
 							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
 							if(   access_compare_level(
@@ -425,14 +428,14 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 										bug_get_field( $t_bug_id, 'project_id' ) ),
 										config_get( 'private_bugnote_threshold' )
 								   )
-								|| bugnote_get_field( (int)$p_array[2], 'reporter_id' ) == auth_get_current_user_id()
-								|| bugnote_get_field( (int)$p_array[2], 'view_state' ) == VS_PUBLIC
+								|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == auth_get_current_user_id()
+								|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC
 							) {
 								$g_project_override = null;
 								return $p_array[1] .
 									string_get_bugnote_view_link(
 										$t_bug_id,
-										(int)$p_array[2],
+										$c_bugnote_id,
 										(boolean)$p_detail_info,
 										(boolean)$p_fqdn
 									);
@@ -445,13 +448,15 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		} else {
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
-					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
-					if( $t_bug_id && bug_exists( $t_bug_id ) ) {
-						return $p_array[1] .
-							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2] );
-					} else {
-						return $p_array[0];
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
+						if( $t_bug_id && bug_exists( $t_bug_id ) ) {
+							return $p_array[1] .
+								string_get_bugnote_view_url_with_fqdn( $t_bug_id, $c_bugnote_id );
+						}
 					}
+					return $p_array[0];
 				}; # end of bugnote link callback closure
 		}
 	}

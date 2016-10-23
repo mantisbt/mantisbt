@@ -595,9 +595,9 @@ tar -xf <emphasis>filename.tar</emphasis>
 			new configuration options.
 		</para>
 
-		<para>Open or create the file <emphasis>config_inc.php</emphasis> in an
-			editor and add or modify any values as required. These will
-			override the default values.
+		<para>Open or create the file <emphasis>config_inc.php</emphasis> in
+			subfolder config in an editor and add or modify any values as
+			required. These will override the default values.
 		</para>
 
 		<para>You may want to use the provided
