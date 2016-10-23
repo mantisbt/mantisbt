@@ -2924,6 +2924,29 @@ function filter_name_valid_length( $p_name ) {
 }
 
 /**
+ * Create a filter for getting issues modified in the last N days
+ * @param integer $p_days Number of days counting from today
+ * @param array $p_filter Add the filter conditions over this filter array. Return a new one if null
+ * @return array Filter array
+ */
+function filter_create_recently_modified( $p_days, $p_filter = null ) {
+	if( null === $p_filter ) {
+		$p_filter = filter_get_default();
+	}
+	$c_days = (int)$p_days;
+	$p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = true;
+	$t_date = new DateTime('today');
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] = $t_date->format( 'j' );
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] = $t_date->format( 'n' );
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] = $t_date->format( 'Y' );
+	$t_date->modify( '-' . $c_days . ' days' );
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] = $t_date->format( 'j' );
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] = $t_date->format( 'n' );
+	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] = $t_date->format( 'Y' );
+	return $p_filter;
+}
+
+/**
  * Create a filter for getting issues assigned to the specified project and user that
  * are not yet resolved.
  *
