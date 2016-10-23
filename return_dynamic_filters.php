@@ -91,16 +91,19 @@ function return_dynamic_filters_prepend_headers() {
 
 $f_filter_target = gpc_get_string( 'filter_target' );
 $filter_target = utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
-$t_function_name = 'print_filter_' . $filter_target; 
-if( function_exists( $t_function_name ) ) {
+$t_found = false;
+$t_content = @call_user_func_array( 'filter_form_get_input', array( $t_filter, $filter_target, true ) );
+if( false !== $t_content ) {
 	return_dynamic_filters_prepend_headers();
-	echo call_user_func_array( 'filter_form_get_input', array( $t_filter, $filter_target, true ) );
+	$t_found = true;
+	echo $t_content;
 } else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
 	$t_cfdef = @custom_field_get_definition( $t_custom_id );
 	# Check existence of custom field id, and if the user have access to read and filter by
 	if( $t_cfdef && $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
+		$t_found = true;
 		return_dynamic_filters_prepend_headers();
 		print_filter_custom_field( $t_custom_id, $t_filter );
 	} else {
@@ -108,7 +111,6 @@ if( function_exists( $t_function_name ) ) {
 	}
 } else {
 	$t_plugin_filters = filter_get_plugin_filters();
-	$t_found = false;
 	foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		if( $t_field_name . '_filter' == $f_filter_target ) {
 			return_dynamic_filters_prepend_headers();
@@ -117,10 +119,11 @@ if( function_exists( $t_function_name ) ) {
 			break;
 		}
 	}
-
-	if( !$t_found ) {
-		# error - no function to populate the target (e.g., print_filter_foo)
-		error_parameters( $f_filter_target );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-	}
 }
+
+if( !$t_found ) {
+	# error - no function to populate the target (e.g., print_filter_foo)
+	error_parameters( $f_filter_target );
+	trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+}
+
