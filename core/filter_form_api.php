@@ -1284,7 +1284,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		$p_filter = $g_filter;
 	}
 ?>
-		<table cellspacing="0" cellpadding="0">
+		<table cellspacing="0" cellpadding="0" class="js_switch_date_inputs_container">
 <?php
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
@@ -1292,7 +1292,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		<tr>
 			<td colspan="2">
 				<label>
-					<input type="checkbox" id="use_date_filters" name="<?php
+					<input type="checkbox" id="use_date_filters" class="js_switch_date_inputs_trigger" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>"<?php
 						check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), true ) ?> />
 					<?php echo lang_get( 'use_date_filters' )?>
@@ -1435,7 +1435,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		$p_filter = $g_filter;
 	}
 ?>
-		<table cellspacing="0" cellpadding="0">
+		<table cellspacing="0" cellpadding="0" class="js_switch_date_inputs_container">
 <?php
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
@@ -1443,7 +1443,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		<tr>
 			<td colspan="2">
 				<label>
-					<input type="checkbox" id="use_last_updated_date_filters" name="<?php
+					<input type="checkbox" id="use_last_updated_date_filters" class="js_switch_date_inputs_trigger" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"<?php
 						check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
 					<?php echo lang_get( 'use_last_updated_date_filters' )?>
