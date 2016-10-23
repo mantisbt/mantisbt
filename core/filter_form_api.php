@@ -85,7 +85,7 @@ require_api( 'user_api.php' );
  * @param array $p_filter Filter array
  * @param string $p_filter_target Filter field name
  * @param boolean $p_show_inputs Whether to return a visible form input or a text value.
- * @return string
+ * @return string The html content for the field requested
  */
 function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_inputs = true ) {
 	if( $p_show_inputs ) {
@@ -118,6 +118,7 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 		# error - no function to populate the target (e.g., print_filter_foo)
 		error_parameters( $p_filter_target );
 		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		return false;
 	}
 }
 
