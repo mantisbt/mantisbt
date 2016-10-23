@@ -33,13 +33,13 @@ define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
 define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
 define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' ); # ?
 
-define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
-define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
-define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
-define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
-define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
-define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
-define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_START_DAY', 'start_day' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH', 'start_month' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR', 'start_year' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_DAY', 'end_day' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH', 'end_month' );
+define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR', 'end_year' );
+define( 'FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED', 'filter_by_date' ); #do_filter_by_date
 
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'last_updated_start_day' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'last_updated_start_month' );
@@ -77,3 +77,13 @@ define( 'FILTER_PROPERTY_PROFILE_ID', 'profile_id' ); # show_profile
 define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
 define( 'FILTER_PROPERTY_OS', 'os' );
 define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );
+
+# These are old date fields names, keeping them for backward compatibility, if used externally
+define( 'FILTER_PROPERTY_START_DAY', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY );
+define( 'FILTER_PROPERTY_START_MONTH', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH );
+define( 'FILTER_PROPERTY_START_YEAR', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR );
+define( 'FILTER_PROPERTY_END_DAY', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY );
+define( 'FILTER_PROPERTY_END_MONTH', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH );
+define( 'FILTER_PROPERTY_END_YEAR', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR );
+define( 'FILTER_PROPERTY_FILTER_BY_DATE', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED );
+

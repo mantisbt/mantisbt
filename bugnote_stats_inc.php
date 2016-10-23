@@ -64,9 +64,9 @@ $t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
 $t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
 $t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
 
-$t_bugnote_stats_from_d = gpc_get_string( FILTER_PROPERTY_START_DAY, $t_bugnote_stats_from_def_d );
-$t_bugnote_stats_from_m = gpc_get_string( FILTER_PROPERTY_START_MONTH, $t_bugnote_stats_from_def_m );
-$t_bugnote_stats_from_y = gpc_get_string( FILTER_PROPERTY_START_YEAR, $t_bugnote_stats_from_def_y );
+$t_bugnote_stats_from_d = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, $t_bugnote_stats_from_def_d );
+$t_bugnote_stats_from_m = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, $t_bugnote_stats_from_def_m );
+$t_bugnote_stats_from_y = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, $t_bugnote_stats_from_def_y );
 
 $t_bugnote_stats_to_def = date( 'd:m:Y' );
 $t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
@@ -74,9 +74,9 @@ $t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 $t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
 $t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
 
-$t_bugnote_stats_to_d = gpc_get_string( FILTER_PROPERTY_END_DAY, $t_bugnote_stats_to_def_d );
-$t_bugnote_stats_to_m = gpc_get_string( FILTER_PROPERTY_END_MONTH, $t_bugnote_stats_to_def_m );
-$t_bugnote_stats_to_y = gpc_get_string( FILTER_PROPERTY_END_YEAR, $t_bugnote_stats_to_def_y );
+$t_bugnote_stats_to_d = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, $t_bugnote_stats_to_def_d );
+$t_bugnote_stats_to_m = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, $t_bugnote_stats_to_def_m );
+$t_bugnote_stats_to_y = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, $t_bugnote_stats_to_def_y );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
@@ -97,13 +97,13 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 			<td class="category" width="25%">
 				<?php
 					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
-					$t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
 					filter_init( $t_filter );
 					print_filter_do_filter_by_date( true );
 				?>
