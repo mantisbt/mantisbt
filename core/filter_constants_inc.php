@@ -41,12 +41,12 @@ define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
 define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
 
-define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'start_last_updated_day' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'start_last_updated_month' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_START_YEAR', 'start_last_updated_year' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_END_DAY', 'end_last_updated_day' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'end_last_updated_month' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'end_last_updated_year' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'last_updated_start_day' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'last_updated_start_month' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_START_YEAR', 'last_updated_start_year' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_DAY', 'last_updated_end_day' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'last_updated_end_month' );
+define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'last_updated_end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
 
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
