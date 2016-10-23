@@ -1461,7 +1461,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		<!-- Start date -->
 		<tr>
 			<td>
-			<?php echo lang_get( 'start_last_updated_date_label' )?>
+			<?php echo lang_get( 'start_date_label' )?>
 			</td>
 			<td class="nowrap">
 			<?php
@@ -1489,7 +1489,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		<!-- End date -->
 		<tr>
 			<td>
-			<?php echo lang_get( 'end_last_updated_date_label' )?>
+			<?php echo lang_get( 'end_date_label' )?>
 			</td>
 			<td>
 			<?php
