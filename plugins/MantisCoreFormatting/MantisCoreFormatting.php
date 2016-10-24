@@ -78,11 +78,11 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		}
 
 		if( ON == $s_text ) {
-			if ( markdown_enabled() ) {
+			if ( MantisMarkdown::enabled() ) {
 				if ( $p_multiline ) {
-					$t_string = markdown_text( $t_string );
+					$t_string = MantisMarkdown::convert_text( $t_string );
 				} else {
-					$t_string = markdown_line( $t_string );
+					$t_string = MantisMarkdown::convert_line( $t_string );
 				}
 			} else {
 				$t_string = string_strip_hrefs( $t_string );
@@ -123,7 +123,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
 		}
 
-		if( ON == $s_urls && !markdown_enabled() ) {
+		if( ON == $s_urls && !MantisMarkdown::enabled() ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
 
@@ -155,8 +155,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		}
 
 		if( ON == $s_text ) {
-			if ( markdown_enabled() ) {
-				$t_string = markdown_text( $t_string );
+			if ( MantisMarkdown::enabled() ) {
+				$t_string = MantisMarkdown::convert_text( $t_string );
 			} else {
 				$t_string = string_strip_hrefs( $t_string );
 				$t_string = string_html_specialchars( $t_string );
