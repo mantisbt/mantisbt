@@ -25,7 +25,6 @@
 
 # Includes
 require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-require_once dirname( dirname( __FILE__ ) ) . '/../core/classes/MantisMarkdown.php';
 
 # MantisBT Core API
 require_mantis_core();
@@ -40,64 +39,49 @@ require_mantis_core();
 
 class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 
-    /**
-     * @var class $markdown
-     */
-    protected static $markdown;
+	/**
+	 * Test If string starts with hash character followed by letters
+	 * @return void
+	 */
+	public function testHashLetters() {
+		$this->assertEquals( '<h1>hello</h1>', MantisMarkdown::convert_text( '# hello' ) );
+		$this->assertEquals( '<h1>hello</h1>', MantisMarkdown::convert_text( '#hello' ) );
+	}
 
-    /**
-     * Initiazed MantisMarkdown class before a test method run
-     * @return void
-     */
-    public static function setUpBeforeClass() {
-        self::$markdown = new MantisMarkdown();
-    }
+	/**
+	 * Test If string starts with hash character followed by number and letters
+	 * @return void
+	 */
+	public function testHashNumberAny() {
+		$this->assertEquals( '<h1>1abcd</h1>', MantisMarkdown::convert_text( '# 1abcd' ) );
+		$this->assertEquals( '<h1>1abcd</h1>', MantisMarkdown::convert_text( '#1abcd' ) );
+	}
 
-    /**
-     * Test If string starts with hash character followed by letters
-     * @return void
-     */
-    public function testHashLetters() {
-        $this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '# hello' ) );
-        $this->assertEquals( '<h1>hello</h1>', self::$markdown->text( '#hello' ) );
-    }
+	/**
+	 * Test If string starts with hash character followed by letters and numbers
+	 * @return void
+	 */
+	public function testHashLettersAny() {
+		$this->assertEquals( '<h1>abcd1234</h1>', MantisMarkdown::convert_text( '# abcd1234' ) );
+		$this->assertEquals( '<h1>abcd1234</h1>', MantisMarkdown::convert_text( '#abcd1234' ) );
+	}
 
-    /**
-     * Test If string starts with hash character followed by number and letters
-     * @return void
-     */
-    public function testHashNumberAny() {
-        $this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '# 1abcd' ) );
-        $this->assertEquals( '<h1>1abcd</h1>', self::$markdown->text( '#1abcd' ) );
-    }
+	/**
+	 * Test If string starts with hash character followed by numbers
+	 * since the class overrides the default Markdown parsing on Header
+	 * then the methods should return the standard text.
+	 * @return void
+	 */
+	public function testHashNumbers() {
+		$this->assertEquals( '<p>#1</p>', MantisMarkdown::convert_text( '#1' ) );
+	}
 
-    /**
-     * Test If string starts with hash character followed by letters and numbers
-     * @return void
-     */
-    public function testHashLettersAny() {
-        $this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '# abcd1234' ) );
-        $this->assertEquals( '<h1>abcd1234</h1>', self::$markdown->text( '#abcd1234' ) );
-    }
-
-    /**
-     * Test If string starts with hash character followed by numbers
-     * since the class overrides the default Markdown parsing on Header
-     * then the methods should return the standard text.
-     * @return void
-     */
-    public function testHashNumbers() {
-        $this->assertEquals( '<p>#1</p>', self::$markdown->text( '#1' ) );
-    }
-
-    /**
-     * Test if table class attribute is defined
-     * @return void
-     */
-    public function testTableClassDefined() {
-        self::$markdown->table_class = "table table-nonfluid";
-        
-        $markdown_table = <<<EOD
+	/**
+	* Test if table class attribute is defined
+	 * @return void
+	 */
+	public function testTableClassDefined() {
+		$markdown_table = <<<EOD
 | _header_ 1   | header 2     |
 | ------------ | ------------ |
 | _cell_ 1.1   | ~~cell~~ 1.2 |
@@ -105,7 +89,7 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 | `\|` 2.1     | [link](/)    |
 EOD;
 
-        $markdown_table_output = <<<EOD
+		$markdown_table_output = <<<EOD
 <table class="table table-nonfluid">
 <thead>
 <tr>
@@ -129,28 +113,26 @@ EOD;
 </tbody>
 </table>
 EOD;
-    
-        $this->assertEquals( $markdown_table_output, self::$markdown->text( $markdown_table ) );
-    }
 
-    /**
-     * Test the quote markdown if style attribute is defined
-     * @return void
-     */
-    public function testQuoteStyleAttribute() {
-        self::$markdown->inline_style = "border-color:#847d7d";
+		$this->assertEquals( $markdown_table_output, MantisMarkdown::convert_text( $markdown_table ) );
+	}
 
-        $markdown_quote = <<<EOD
+	/**
+	 * Test the quote markdown if style attribute is defined
+	 * @return void
+	 */
+	public function testQuoteStyleAttribute() {
+		$markdown_quote = <<<EOD
 > quote
 
 indented:
-   > quote
+	> quote
 
 no space after `>`:
 >quote
 EOD;
 
-        $markdown_quote_output = <<<EOD
+		$markdown_quote_output = <<<EOD
 <blockquote style="border-color:#847d7d">
 <p>quote</p>
 </blockquote>
@@ -163,8 +145,8 @@ EOD;
 <p>quote</p>
 </blockquote>
 EOD;
-        
-        $this->assertEquals( $markdown_quote_output, self::$markdown->text( $markdown_quote ) );	 
-    }
+
+		$this->assertEquals( $markdown_quote_output, MantisMarkdown::convert_text( $markdown_quote ) );	 
+	}
 
 }
