@@ -274,9 +274,8 @@ if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
 
 # Set HTTP response headers
 require_api( 'http_api.php' );
-require_api( 'markdown_api.php' );
 
-if( markdown_enabled() ) {  # if markdown enabled, then images can be referenced from internet.
+if( MantisMarkdown::enabled() ) {  # if markdown enabled, then images can be referenced from internet.
 	http_csp_add( 'img-src', "*" );
 }
 
@@ -294,6 +293,3 @@ if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'event_api.php' );
 	event_signal( 'EVENT_CORE_READY' );
 }
-
-require_api( 'markdown_api.php' );
-
