@@ -61,7 +61,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	enctype="multipart/form-data"
 	action="bug_file_add.php"
 	class="form-inline auto-dropzone-form"
-<?php include_once( dirname( __FILE__ ) . '/dropzone_inc.php' ) ?>>
+	<?php print_dropzone_form_data() ?>>
 <?php echo form_security_field( 'bug_file_add' ) ?>
 
 <div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
