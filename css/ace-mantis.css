@@ -277,6 +277,10 @@ textarea.input-xs, select.input-xs[multiple] {
     overflow-x: hidden;
 }
 
+.navbar-toggle {
+    display:  block;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
@@ -287,8 +291,14 @@ textarea.input-xs, select.input-xs[multiple] {
         width: 120px !important;
     }
 
-    .navbar-toggle {
-        display: block;
+    .navbar.navbar-collapse .navbar-header {
+        float: left !important;
+    }
+
+    .navbar.navbar-collapse .navbar-buttons {
+        float: right !important;
+        border-style: none !important;
+        width: auto;
     }
 }
 
@@ -341,6 +351,16 @@ textarea.input-xs, select.input-xs[multiple] {
     .rtl .sidebar.menu-min ~ .footer .footer-inner {
         right: 43px !important;
     }
+
+    .navbar.navbar-collapse .navbar-header {
+        float: left !important;
+    }
+
+    .navbar.navbar-collapse .navbar-buttons {
+        float: right !important;
+        border-style: none !important;
+        width: auto;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -392,5 +412,6 @@ textarea.input-xs, select.input-xs[multiple] {
     .rtl .sidebar.menu-min ~ .footer .footer-inner {
         right: 43px !important;
     }
+
 }
 
