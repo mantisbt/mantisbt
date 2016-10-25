@@ -228,11 +228,10 @@ function bug_activity_combine( $p_entries ) {
 	foreach( $p_entries as $t_activity ) {
 		if( $t_last_entry != null ) {
 			if( $t_last_entry['user_id'] == $t_activity['user_id'] &&
-				$t_last_entry['type'] == ENTRY_TYPE_NOTE &&
 				$t_activity['type'] == ENTRY_TYPE_ATTACHMENT &&
 				abs( $t_activity['timestamp'] - $t_last_entry['timestamp'] ) <=
 					$t_threshold_in_seconds ) {
-			$t_last_entry['attachments'][] = $t_activity['attachment'];
+				$t_last_entry['attachments'][] = $t_activity['attachment'];
 			} else {
 				$t_combined_entries[] = $t_last_entry;
 				$t_last_entry = $t_activity;
