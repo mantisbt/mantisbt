@@ -70,15 +70,6 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Check if markdown is enabled.
-	 *
-	 * @return bool true for enabled, false otherwise.
-	 */
-	public static function enabled() {
-		return config_get( 'markdown_enabled' ) != OFF;
-	}
-
-	/**
 	 * Convert a field that supports multiple lines form markdown to html.
 	 * @param string $p_text The text to convert.
 	 * @return string  The html text.
