@@ -26,19 +26,28 @@ require_api( 'mention_api.php' );
 class MantisMarkdownPlugin extends MantisPlugin {
 	
 	/**
-	 * Make sure to turn off Text Processing, causing conflict with markdown
+	 * Initialized any needed methods, api's, etc... 
+	 *
+	 * Make sure to turn off Text Processing, causing markdown to not render properly
+	 * @return void
 	 */	
 	function init() {
-		config_set( 'plugin_MantisCoreFormatting_process_text', OFF );
-		config_set( 'plugin_MantisCoreFormatting_process_urls', OFF );
 
+		if ( ON == config_get( 'plugin_MantisCoreFormatting_process_text' ) ) {
+			config_set( 'plugin_MantisCoreFormatting_process_text', OFF );
+		}
+
+		if ( ON == config_get( 'plugin_MantisCoreFormatting_process_urls' ) ) {
+			config_set( 'plugin_MantisCoreFormatting_process_urls', OFF );
+		}
+			
 		#images can be referenced from internet.
 		http_csp_add( 'img-src', "*" );
 	}
 
 	/**
-	 * Make sure to turn ON Text Processing back once uninstall
-	 * reset back to MantisCoreFormatting position
+	 * Make sure to turn ON Text Processing back on uninstall
+	 * reset it back to MantisCoreFormatting position
 	 */	
 	function uninstall() {
 		config_set( 'plugin_MantisCoreFormatting_process_text', ON );
