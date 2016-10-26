@@ -19,6 +19,7 @@
  */
 
 require_api( 'mention_api.php' );
+require_once( 'core/MantisMarkdown.php' );
 
 /**
  * Mantis Core Formatting plugin
@@ -28,7 +29,7 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	/**
 	 * Initialized any needed methods, api's, etc... 
 	 *
-	 * Make sure to turn off Text Processing, causing markdown to not render properly
+	 * Make sure to turn Text Processing off, causing markdown to not render properly
 	 * @return void
 	 */	
 	function init() {
@@ -40,18 +41,21 @@ class MantisMarkdownPlugin extends MantisPlugin {
 		if ( ON == config_get( 'plugin_MantisCoreFormatting_process_urls' ) ) {
 			config_set( 'plugin_MantisCoreFormatting_process_urls', OFF );
 		}
-			
-		#images can be referenced from internet.
-		http_csp_add( 'img-src', "*" );
+		
+		if ( ON == config_get( 'plugin_MantisCoreFormatting_process_buglinks' ) ) {
+			config_set( 'plugin_MantisCoreFormatting_process_buglinks', OFF );
+		}
+
 	}
 
 	/**
-	 * Make sure to turn ON Text Processing back on uninstall
+	 * Make sure to turn Text Processing back on uninstall
 	 * reset it back to MantisCoreFormatting position
 	 */	
 	function uninstall() {
 		config_set( 'plugin_MantisCoreFormatting_process_text', ON );
 		config_set( 'plugin_MantisCoreFormatting_process_urls', ON );
+		config_set( 'plugin_MantisCoreFormatting_process_buglinks', ON );
 	}
 
 	/**
@@ -79,7 +83,16 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	function hooks() {
 		return array(
 			'EVENT_DISPLAY_FORMATTED'	=> 'markdown',		# Formatted String Display
+			'EVENT_CORE_HEADERS' => 'csp_headers'
 		);
+	}
+
+	/**
+	 * Add img-src directives to enable to referenced images from internet.
+	 * @return void
+	 */
+	function csp_headers() {
+		http_csp_add( 'img-src', "*" );
 	}
 
 	/**
@@ -98,10 +111,8 @@ class MantisMarkdownPlugin extends MantisPlugin {
 		$t_string = $p_string;	
 		
 		# Process bug links
-		if( ON == config_get( 'plugin_MantisCoreFormatting_process_buglinks' ) ) {
-			$t_string = string_process_bug_link( $t_string );
-			$t_string = string_process_bugnote_link( $t_string );
-		}
+		$t_string = string_process_bug_link( $t_string );
+		$t_string = string_process_bugnote_link( $t_string );
 		
 		$t_string = mention_format_text( $t_string, true );
 
@@ -114,5 +125,4 @@ class MantisMarkdownPlugin extends MantisPlugin {
 
 		return $t_string;
 	}
-
 }
