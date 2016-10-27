@@ -22,7 +22,7 @@ require_api( 'mention_api.php' );
 require_once( 'core/MantisMarkdown.php' );
 
 /**
- * Mantis Core Formatting plugin
+ * Mantis Markdown Plugin
  */
 class MantisMarkdownPlugin extends MantisPlugin {
 	
