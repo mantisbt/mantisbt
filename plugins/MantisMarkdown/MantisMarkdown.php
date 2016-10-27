@@ -129,23 +129,14 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	}
 
 	/**
-	 * RSS text processing.
+	 * RSS markdown processing.
 	 * @param string $p_event  Event name.
 	 * @param string $p_string Unformatted text.
 	 * @return string Formatted text
 	 */
 	function rss( $p_event, $p_string ) {
 		
-		$t_string = $p_string;
-
-		$t_string = string_strip_hrefs( $t_string );
-		$t_string = string_html_specialchars( $t_string );
-		$t_string = string_restore_valid_html_tags( $t_string );
-		$t_string = string_nl2br( $t_string );
-		$t_string = string_insert_hrefs( $t_string );
-		$t_string = string_process_bug_link( $t_string, true, false, true );
-		$t_string = string_process_bugnote_link( $t_string, true, false, true );
-		$t_string = mention_format_text( $t_string, /* html */ true );
+		$t_string = $this->markdown( $p_event, $p_string );
 
 		return $t_string;
 	}
