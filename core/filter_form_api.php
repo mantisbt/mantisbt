@@ -2580,6 +2580,15 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				'tag_string_filter_target' /* content id */
 				));
 	}
+	if( 'advanced' == $t_view_type ) {
+		$t_section_main->add_item( new TableFieldsItem(
+				$get_field_header( 'project_id_filter', lang_get( 'email_project_label' ) ),
+				filter_form_get_input( $t_filter, 'project_id', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'project_id_filter_target' /* content id */
+				));
+	}
 
 	# Section: plugin filters
 
@@ -2660,15 +2669,6 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'show_sort_filter_target' /* content id */
 			));
-	if( 'advanced' == $t_view_type ) {
-		$t_section_last->add_item( new TableFieldsItem(
-				$get_field_header( 'project_id_filter', lang_get( 'email_project_label' ) ),
-				filter_form_get_input( $t_filter, 'project_id', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'project_id_filter_target' /* content id */
-				));
-	}
 	$t_section_last->add_item( new TableFieldsItem(
 			$get_field_header( 'match_type_filter', lang_get( 'filter_match_type_label' ) ),
 			filter_form_get_input( $t_filter, 'match_type', $t_show_inputs ),
