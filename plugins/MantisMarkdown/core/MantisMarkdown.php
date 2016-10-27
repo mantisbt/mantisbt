@@ -29,14 +29,14 @@
  * To meet and match the MantisBT styles and logic requirements, we have to override and control with it
  * For example: #2 is treated as header markdown
  * So, to make sure #2 treated as bug link (not a header), then we have to change the logic in blockHeader and blockSetextHeader method
- *      
+ *
  * @package MantisBT
  * @subpackage parsedown
  *
  * @uses Parsedown Library
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . '../../library/parsedown/Parsedown.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/library/Parsedown.php' );
 
 /**
  * A class that overrides default Markdown parsing for Mantis specific scenarios.
@@ -67,15 +67,6 @@ class MantisMarkdown extends Parsedown
 
 		# set the border color of blockquote
 		$this->inline_style = 'border-color:#847d7d';
-	}
-
-	/**
-	 * Check if markdown is enabled.
-	 *
-	 * @return bool true for enabled, false otherwise.
-	 */
-	public static function enabled() {
-		return config_get( 'markdown_enabled' ) != OFF;
 	}
 
 	/**
@@ -151,7 +142,7 @@ class MantisMarkdown extends Parsedown
 
 	/**
 	 * Add a class attribute on a table markdown elements
-	 * 
+	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @param array $block A block-level element
 	 * @param string $fn the function name to call (blockTable or blockTableContinue)
@@ -192,7 +183,7 @@ class MantisMarkdown extends Parsedown
 
 	/**
 	 * Add an inline style on a blockquote markdown elements
-	 * 
+	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @param array $block A block-level element
 	 * @param string $fn the function name to call (blockQuote or blockQuoteContinue)
