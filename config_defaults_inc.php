@@ -581,12 +581,10 @@ $g_show_user_email_threshold = NOBODY;
 $g_show_user_realname_threshold = NOBODY;
 
 /**
- * If use_x_priority is set to ON, what should the value be?
  * Urgent = 1, Not Urgent = 5, Disable = 0
- * Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
  * @global integer $g_mail_priority
  */
-$g_mail_priority = 3;
+$g_mail_priority = 0;
 
 /**
  * select the method to mail by:
