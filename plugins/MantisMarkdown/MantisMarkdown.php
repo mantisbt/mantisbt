@@ -83,9 +83,9 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	function hooks() {
 		return array(
 			'EVENT_DISPLAY_FORMATTED'	=> 'markdown',		# Formatted String Display
-			'EVENT_CORE_HEADERS' => 'csp_headers',
-			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
-			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
+			'EVENT_CORE_HEADERS' 		=> 'csp_headers',
+			'EVENT_DISPLAY_RSS'		=> 'rss',		# RSS String Display
+			'EVENT_DISPLAY_EMAIL'		=> 'email',		# Email String Display
 		);
 	}
 
@@ -142,14 +142,19 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	}
 
 	/**
-	 * Email markdown processing.
+	 * Email text processing.
 	 * @param string $p_event  Event name.
 	 * @param string $p_string Unformatted text.
 	 * @return string Formatted text
 	 */
 	function email( $p_event, $p_string ) {
 		
-		$t_string = $this->markdown( $p_event, $p_string );
+		$t_string =  $p_string;
+		
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_process_bug_link( $t_string, false );
+		$t_string = string_process_bugnote_link( $t_string, false );
+		$t_string = mention_format_text( $t_string, /* html */ false );
 
 		return $t_string;
 	}
