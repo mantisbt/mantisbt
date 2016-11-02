@@ -91,7 +91,7 @@ html_status_legend( STATUS_LEGEND_POSITION_TOP, true );
 
 ?>
 <br />
-<form id="bug_action" method="get" action="bug_actiongroup_page.php">
+<form id="bug_action" method="post" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table id="buglist" class="width100" cellspacing="1">
 <thead>
