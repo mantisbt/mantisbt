@@ -574,6 +574,7 @@ function layout_navbar_button_bar() {
 		echo '</a>';
 	}
 
+	echo '</div>';
   	echo '</li>';
 }
 
