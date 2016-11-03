@@ -112,14 +112,9 @@ class MantisMarkdownPlugin extends MantisPlugin {
 		
 		$t_string = $p_string;	
 		
-		$t_string = string_html_specialchars( $t_string );
-		$t_string = string_restore_valid_html_tags( $t_string, $p_multiline );
-
-		# We need to enabled quote conversion
-		# "> quote or >quote" is part of an html tag
-		# Make sure to replaced the restored tags with ">"
-		$t_string = str_replace( "&gt;", ">", $t_string );
-
+		# Filter any possible XSS attacks
+		$t_string = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml|input)[^>]*+>#i', '', $t_string);
+		
 		# Process bug links
 		$t_string = string_process_bug_link( $t_string );
 		$t_string = string_process_bugnote_link( $t_string );
