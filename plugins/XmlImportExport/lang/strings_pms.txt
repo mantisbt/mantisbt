@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Message documentation (Message documentation)
+/** Piedmontese (Piemontèis)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,27 +38,23 @@
  * @ingroup Language
  * @file
  *
- * @author Damien Regad
- * @author David Hicks
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand Mazeland
+ * @author Dragonòt
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
-$s_plugin_MantisGraph_font = '{{Identical|Font}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
-$s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
-$s_plugin_MantisGraph_legend_assigned = '{{Identical|Assigned}}';
-$s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
-$s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
-$s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
-$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
-$s_plugin_MantisGraph_period_none = '{{Identical|None}}';
-$s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
-$s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';
-$s_plugin_MantisGraph_select = '{{Identical|Please select}}';
+$s_plugin_XmlImportExport_title = 'Arzultà d\'Amportassion/Esportassion';
+$s_plugin_XmlImportExport_description = 'A gionta dle possibilità d\'amporté e esporté basà an slë XML a MantisBT.';
+$s_plugin_XmlImportExport_import = 'Arzultà ëd l\'amportassion';
+$s_plugin_XmlImportExport_export = 'Esportassion XML';
+$s_plugin_XmlImportExport_importing_in_project = 'Amporté arzultà an proget:';
+$s_plugin_XmlImportExport_import_options = 'Opsion d\'amportassion';
+$s_plugin_XmlImportExport_cross_references = 'Arferense ancrosià';
+$s_plugin_XmlImportExport_default_strategy = 'Strategìa ëd conversion ëd default:';
+$s_plugin_XmlImportExport_renumber = 'Rinumerassion';
+$s_plugin_XmlImportExport_renumber_desc = 'Preuva a convertì arferiment a neuva numerassion';
+$s_plugin_XmlImportExport_link = 'Colegament';
+$s_plugin_XmlImportExport_link_desc = 'Convert ant un colegament a l\'element originari';
+$s_plugin_XmlImportExport_disable = 'Disabìlita';
+$s_plugin_XmlImportExport_disable_desc = 'Disabìlita ël colegament';
+$s_plugin_XmlImportExport_fallback = 'Strategìa ëd fallback (quand la "Rinumerassion" a s\'àplica pa):';
+$s_plugin_XmlImportExport_fallback_category = 'Categorìa ëd fallback:';
+$s_plugin_XmlImportExport_keep_same_category = 'Preuva a manten-e la midema categorìa';

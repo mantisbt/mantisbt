@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Message documentation (Message documentation)
+/** Luxembourgish (Lëtzebuergesch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,27 +38,16 @@
  * @ingroup Language
  * @file
  *
- * @author Damien Regad
- * @author David Hicks
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand Mazeland
+ * @author Robby
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
-$s_plugin_MantisGraph_font = '{{Identical|Font}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
-$s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
-$s_plugin_MantisGraph_legend_assigned = '{{Identical|Assigned}}';
-$s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
-$s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
-$s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
-$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
-$s_plugin_MantisGraph_period_none = '{{Identical|None}}';
-$s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
-$s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';
-$s_plugin_MantisGraph_select = '{{Identical|Please select}}';
+$s_plugin_format_title = 'MantisBt-Formatéierung';
+$s_plugin_format_description = 'Offziell Textbeaarbechtungs- a Formatéierungs-Plugin.';
+$s_plugin_format_config = 'Astellung';
+$s_plugin_format_process_text = 'Text gëtt verschafft';
+$s_plugin_format_process_text_warning_notice = 'Net ausschalten et sief Dir wësst genee wat Dir maacht. Wann et ausgeschalt ass, si Cross-Site-Scripting (XSS) Attacke méiglech.';
+$s_plugin_format_process_urls = 'URL gëtt verschafft';
+$s_plugin_format_process_buglinks = 'MantisBT intern Linken (Problemer an Notizen zu de Problemer)';
+$s_plugin_format_process_buglinks_info = 'Är Astellung definéiert den <em>Issue</em> Tag als "<literal>%s</literal>" an den <em>Issue Note</em> Tag als "<literal>%s</literal>"';
+$s_plugin_format_enabled = 'Un';
+$s_plugin_format_disabled = 'Aus';

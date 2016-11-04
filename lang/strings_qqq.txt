@@ -199,6 +199,7 @@ $s_reporter = '{{Identical|Reporter}}';
 $s_reporter_label = '{{Identical|Reporter}}';
 $s_priority = '{{Identical|Priority}}';
 $s_priority_label = '{{Identical|Priority}}';
+$s_resolution = '{{Identical|Resolution}}';
 $s_status = '{{Identical|Status}}';
 $s_status_label = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]

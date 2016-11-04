@@ -43,6 +43,7 @@
  * @author Danmichaelo
  * @author EivindJ
  * @author Holje
+ * @author Jon Harald Søby
  * @author Kingu
  * @author Laaknor
  * @author Nghtwlkr

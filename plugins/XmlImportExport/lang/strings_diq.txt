@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Message documentation (Message documentation)
+/** Zazaki (Zazaki)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,27 +38,31 @@
  * @ingroup Language
  * @file
  *
- * @author Damien Regad
- * @author David Hicks
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand Mazeland
+ * @author Erdemaslancan
+ * @author Kumkumuk
+ * @author Marmase
+ * @author Mirzali
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
-$s_plugin_MantisGraph_font = '{{Identical|Font}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
-$s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
-$s_plugin_MantisGraph_legend_assigned = '{{Identical|Assigned}}';
-$s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
-$s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
-$s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
-$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
-$s_plugin_MantisGraph_period_none = '{{Identical|None}}';
-$s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
-$s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';
-$s_plugin_MantisGraph_select = '{{Identical|Please select}}';
+$s_plugin_XmlImportExport_title = 'Mesele Bıgi/Bıdı';
+$s_plugin_XmlImportExport_description = 'MantisBT rê zerin da XML ra huner dekeno u veceno.';
+$s_plugin_XmlImportExport_import = 'Meseleyê grotışi';
+$s_plugin_XmlImportExport_export = 'XML Bıdı';
+$s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML ateberd/azered';
+$s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
+$s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
+$s_plugin_XmlImportExport_action_update = 'Rocane ke';
+$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
+$s_plugin_XmlImportExport_import_options = 'Weçenegê grotışi';
+$s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
+$s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';
+$s_plugin_XmlImportExport_renumber = 'Fına nımre ke';
+$s_plugin_XmlImportExport_renumber_desc = 'Referansa çarnayışê nımra rê bıcerbnê';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'Orcinal nesi  açarn jew gri';
+$s_plugin_XmlImportExport_disable = 'Dewrera vec';
+$s_plugin_XmlImportExport_disable_desc = 'Grey meqefilne';
+$s_plugin_XmlImportExport_fallback = 'Strateciya peyd amayışi ("Fına nımrekerdış" dezge nêbose)';
+$s_plugin_XmlImportExport_fallback_category = 'Kategoriyo peyên:';
+$s_plugin_XmlImportExport_keep_same_category = 'Eyni kategori de tapêşê';
+$s_plugin_XmlImportExport_error_no_xml = 'Derganeya xmlreader u xmlwriter nevineya';

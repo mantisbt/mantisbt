@@ -41,6 +41,7 @@
  * @author Emperyan
  * @author Erdemaslancan
  * @author Gorizon
+ * @author HakanIST
  * @author Hedda Gabler
  * @author Incelemeelemani
  * @author Joseph
@@ -356,7 +357,7 @@ $s_sponsor_hide = 'Çözülen ve Ödeneni Gizle';
 $s_sponsor_show = 'Hepsini göster';
 $s_payment_updated = 'Ödeme bilgilerini güncellendi.';
 $s_account_updated_msg = 'Hesabınız başarıyla güncellendi...';
-$s_email_updated = 'Email address successfully updated';
+$s_email_updated = 'Eposta adresi başarıyla güncellendi';
 $s_realname_duplicated = 'Gerçek adı başka bir kullanıcı tarafından kullanılıyor';
 $s_realname_updated = 'Gerçek ad başarıyla güncelleştirildi';
 $s_password_updated = 'Şifre başarıyla güncellendi';

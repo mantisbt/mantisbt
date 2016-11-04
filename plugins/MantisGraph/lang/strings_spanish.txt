@@ -41,6 +41,8 @@
  * @author Antur
  * @author Bithunter
  * @author Crazymadlover
+ * @author Fitoschido
+ * @author Koavf
  * @author Locos epraix
  * @author Macofe
  */
@@ -57,7 +59,7 @@ $s_plugin_MantisGraph_severity_link = 'Por severidad';
 $s_plugin_MantisGraph_category_link = 'Por categoría';
 $s_plugin_MantisGraph_resolution_link = 'Por resolución';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Gráfico';
-$s_plugin_MantisGraph_library = 'Biblioteca gráfica a usar';
+$s_plugin_MantisGraph_library = 'Biblioteca gráfica para usar';
 $s_plugin_MantisGraph_bundled = 'Integrado';
 $s_plugin_MantisGraph_window_width = 'Ancho del gráfico (en píxeles)';
 $s_plugin_MantisGraph_bar_aspect = 'Relación de aspecto del gráfico de barras (alto/ancho)';
@@ -69,11 +71,11 @@ $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'El anti-aliasing mejora la presentación visual de ciertos gráficos, a expensas de la performance (hasta 8 veces más lento)';
 $s_plugin_MantisGraph_enabled = 'Activado';
 $s_plugin_MantisGraph_disabled = 'Desactivado';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Por gráficos de estado';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Por gráficos de prioridad';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Por gráficos de severidad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Por gráficos de categoría';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Por gráficos de resolución';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gráficos de síntesis por estado';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráficos de síntesis por prioridad';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráficos de síntesis por gravedad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gráficos de síntesis por categoría';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráficos de síntesis por resolución';
 $s_plugin_MantisGraph_by_status_pct = 'Por porcentaje según estado';
 $s_plugin_MantisGraph_by_priority_pct = 'Por porcentaje según prioridad';
 $s_plugin_MantisGraph_by_severity_pct = 'Por porcentaje según severidad';

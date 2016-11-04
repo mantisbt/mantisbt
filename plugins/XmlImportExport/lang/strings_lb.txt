@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Message documentation (Message documentation)
+/** Luxembourgish (Lëtzebuergesch)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,27 +38,25 @@
  * @ingroup Language
  * @file
  *
- * @author Damien Regad
- * @author David Hicks
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand Mazeland
+ * @author Robby
  */
 
-$s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
-$s_plugin_MantisGraph_font = '{{Identical|Font}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
-$s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
-$s_plugin_MantisGraph_legend_assigned = '{{Identical|Assigned}}';
-$s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
-$s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
-$s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
-$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
-$s_plugin_MantisGraph_period_none = '{{Identical|None}}';
-$s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
-$s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';
-$s_plugin_MantisGraph_select = '{{Identical|Please select}}';
+$s_plugin_XmlImportExport_title = 'Import/Export Sujeten';
+$s_plugin_XmlImportExport_description = 'Setzt XML baséiert Import an Export-Méiglechkeeten a MantisBT derbäi.';
+$s_plugin_XmlImportExport_import = 'Problemer importéieren';
+$s_plugin_XmlImportExport_export = 'XML Export';
+$s_plugin_XmlImportExport_action_update = 'Aktualiséieren';
+$s_plugin_XmlImportExport_importing_in_project = 'Sujeten an de Projet importéieren';
+$s_plugin_XmlImportExport_import_options = 'Import-Optiounen';
+$s_plugin_XmlImportExport_cross_references = 'Querverweiser';
+$s_plugin_XmlImportExport_default_strategy = 'Standard-Ëmwandlungsstrategie';
+$s_plugin_XmlImportExport_renumber = 'Nei numeréieren';
+$s_plugin_XmlImportExport_renumber_desc = 'Versichen d\'Referenzen op déi nei Numerotatioun ëmzewandelen';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'An e Link zum ursprénglechen Element ëmwandelen';
+$s_plugin_XmlImportExport_disable = 'Ausschalten';
+$s_plugin_XmlImportExport_disable_desc = 'De Link ausschalten';
+$s_plugin_XmlImportExport_fallback = 'Notfall-Strategie (wa "Renumeréieren" net uwendbar ass):';
+$s_plugin_XmlImportExport_fallback_category = 'Ersatz-Kategorie:';
+$s_plugin_XmlImportExport_keep_same_category = 'Versicht déi selwëscht Kategorie bäizebehalen';
+$s_plugin_XmlImportExport_error_no_xml = 'D\'Erweiderungen xmlreade- an xmlwriter goufen net fonnt';

@@ -40,6 +40,7 @@
  *
  * @author Lokal Profil
  * @author Tobulos1
+ * @author Velg
  * @author Warrakkk
  * @author WikiPhoenix
  */
@@ -47,12 +48,12 @@
 $s_plugin_graph_title = 'Mantis-grafer';
 $s_plugin_graph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_title = 'Mantis-grafer';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad sammanfattning';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad Sammanfattning';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntes';
-$s_plugin_MantisGraph_status_link = 'Efter status';
-$s_plugin_MantisGraph_priority_link = 'Efter prioritet';
-$s_plugin_MantisGraph_severity_link = 'Efter allvarlighetsgrad';
+$s_plugin_MantisGraph_status_link = 'Per stat';
+$s_plugin_MantisGraph_priority_link = 'Per prioriterat';
+$s_plugin_MantisGraph_severity_link = 'Per svårighetsgrad';
 $s_plugin_MantisGraph_category_link = 'Efter kategori';
 $s_plugin_MantisGraph_resolution_link = 'Efter lösning';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
