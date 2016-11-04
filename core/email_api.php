@@ -994,7 +994,6 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->body = $t_message;
 	$t_email_data->metadata = array();
 	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
-	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_email_data->metadata['charset'] = 'utf-8';
@@ -1143,7 +1142,6 @@ function email_send( EmailData $p_email_data ) {
 
 	$t_mail->IsHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
-	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
 	$t_mail->From = config_get( 'from_email' );

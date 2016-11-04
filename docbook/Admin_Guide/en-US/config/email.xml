@@ -264,15 +264,6 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_mail_priority</term>
-			<listitem>
-				<para>If use_x_priority is set to ON, what should the value be?
-					Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3
-					Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:
