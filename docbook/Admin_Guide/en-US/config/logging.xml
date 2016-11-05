@@ -28,19 +28,6 @@
 		</varlistentry>
 
 		<varlistentry>
-			<term>$g_debug_email</term>
-			<listitem>
-				<para>Used for debugging e-mail notifications.
-					When it is '', the emails are sent normally.
-					If set to an e-mail address, all messages are sent
-					to it, with the original recipients (To, Cc, Bcc)
-					included in the message body.
-				</para>
-				<para>Default is ''.</para>
-			</listitem>
-		</varlistentry>
-
-		<varlistentry>
 			<term>$g_show_queries_count</term>
 			<listitem>
 				<para>Shows the total number/unique number of queries executed to

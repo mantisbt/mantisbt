@@ -1080,7 +1080,6 @@ function email_send( EmailData $p_email_data ) {
 	$t_subject = string_email( trim( $t_email_data->subject ) );
 	$t_message = string_email_links( trim( $t_email_data->body ) );
 
-	$t_debug_email = config_get_global( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
 
 	$t_log_msg = 'ERROR: Message could not be sent - ';
@@ -1153,12 +1152,6 @@ function email_send( EmailData $p_email_data ) {
 	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
 	$t_mail->LE         = "\r\n";
 	$t_mail->Encoding   = 'quoted-printable';
-
-	if( !empty( $t_debug_email ) ) {
-		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
-		$t_recipient = $t_debug_email;
-		log_event(LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'");
-	}
 
 	try {
 		$t_mail->AddAddress( $t_recipient, '' );
