@@ -528,11 +528,21 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		return false;
 	}
 
+	# cache these checks to avoid repeated api calls
+	static $t_db_is_pgsql = null;
+	static $t_db_is_oracle = null;
+	if( null === $t_db_is_pgsql ) {
+		$t_db_is_pgsql = db_is_pgsql();
+	}
+	if( null === $t_db_is_oracle ) {
+		$t_db_is_oracle = db_is_oracle();
+	}
+
 	# Retrieve the fields from the recordset
 	$t_row = $p_result->fields;
 
 	# Additional handling for specific RDBMS
-	if( db_is_pgsql() ) {
+	if( $t_db_is_pgsql ) {
 		# pgsql's boolean fields are stored as 't' or 'f' and must be converted
 		static $s_current_result = null, $s_convert_needed;
 
@@ -562,7 +572,7 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 			}
 		}
 
-	} elseif( db_is_oracle() ) {
+	} elseif( $t_db_is_oracle ) {
 		# oci8 returns null values for empty strings, convert them back
 		foreach( $t_row as &$t_value ) {
 			if( !isset( $t_value ) ) {
