@@ -93,8 +93,7 @@ $t_result = filter_get_bug_rows_result( $t_query_clauses );
 $t_end_of_results = false;
 do {
 	# Clear cache for next block
-	bug_clear_cache();
-	bug_text_clear_cache();
+	bug_clear_cache_all();
 
 	# Keep reading until reaching max block size or end of result set
 	$t_read_rows = array();

@@ -1402,8 +1402,7 @@ function bug_delete( $p_bug_id ) {
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_bug_id ) );
 
-	bug_clear_cache( $p_bug_id );
-	bug_text_clear_cache( $p_bug_id );
+	bug_clear_cache_all( $p_bug_id );
 }
 
 /**
@@ -2184,4 +2183,18 @@ function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_curre
 		}
 	}
 	return $p_new_status;
+}
+
+/**
+ * Clear a bug from all the related caches or all bugs if no bug id specified.
+ * @param integer $p_bug_id A bug identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function bug_clear_cache_all( $p_bug_id = null ) {
+	bug_clear_cache( $p_bug_id );
+	bug_text_clear_cache( $p_bug_id );
+	file_bug_attachment_count_clear_cache( $p_bug_id );
+	bugnote_clear_bug_cache( $p_bug_id );
+	return true;
 }

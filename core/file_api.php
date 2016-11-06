@@ -160,6 +160,24 @@ function file_bug_attachment_count( $p_bug_id ) {
 }
 
 /**
+ * Clear a bug from the cache or all bugs if no bug id specified.
+ * @param integer $p_bug_id A bug identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function file_bug_attachment_count_clear_cache( $p_bug_id = null ) {
+	global $g_cache_file_count;
+
+	if( null === $p_bug_id ) {
+		$g_cache_file_count = array();
+	} else {
+		unset( $g_cache_file_count[(int)$p_bug_id] );
+	}
+
+	return true;
+}
+
+/**
  * Check if a specific bug has attachments
  * @param integer $p_bug_id A bug identifier.
  * @return boolean
