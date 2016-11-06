@@ -196,12 +196,13 @@ function auth_prepare_password( $p_password ) {
  * @return int|boolean user id or false in case of failure.
  * @access private
  */
-function auth_auto_create_user( $p_username, $p_password ) {
-	$t_login_method = config_get( 'login_method' );
+function auth_auto_create_user( $p_username, $p_password, $t_login_method ) {
+
+	global $authLdap;
 
 	if( $t_login_method == BASIC_AUTH ) {
 		$t_auto_create = true;
-	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
+	} elseif( $t_login_method == LDAP && $authLdap->authenticate_by_username( $p_username, $p_password ) ) {
 		$t_auto_create = true;
 	} else {
 		$t_auto_create = false;
@@ -265,7 +266,18 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	$t_user_id = auth_get_user_id_from_login_name( $p_username );
 
 	if( $t_user_id === false ) {
-		$t_user_id = auth_auto_create_user( $p_username, $p_password );
+		$t_login_method = config_get( 'login_method' );
+		if (is_array($t_login_method)) {
+			foreach($t_login_method as $method) {
+				$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+				if ($t_user_id != false) {
+					break; // We have now an ID and can stop the foreach
+				}
+			}
+		}
+		else {
+			$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+		}
 		if( $t_user_id === false ) {
 			return false;
 		}
@@ -393,7 +405,18 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 
 	$t_user_id = auth_get_user_id_from_login_name( $t_username );
 	if( $t_user_id === false ) {
-		$t_user_id = auth_auto_create_user( $t_username, $p_password );
+		$t_login_method = config_get( 'login_method' );
+		if (is_array($t_login_method)) {
+			foreach($t_login_method as $method) {
+				$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+				if ($t_user_id != false) {
+					break; // We have now an ID and can stop the foreach
+				}
+			}
+		}
+		else {
+			$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+		}
 		if( $t_user_id === false ) {
 			return false;
 		}
@@ -497,10 +520,44 @@ function auth_get_password_max_size() {
 function auth_does_password_match( $p_user_id, $p_test_password ) {
 	$t_configured_login_method = config_get( 'login_method' );
 
-	if( LDAP == $t_configured_login_method ) {
-		return ldap_authenticate( $p_user_id, $p_test_password );
+	global $authLdap;
+
+	if (is_array($t_configured_login_method)) {
+		foreach($t_configured_login_method as $method) {
+			if ($method == LDAP) {
+				$authenticated = $authLdap->authenticate( $p_user_id, $p_test_password );
+				if ($authenticated == true) {
+					return true;
+				}
+			}
+			else {
+				$authenticated = local_password_match( $p_user_id, $p_test_password );
+				if ($authenticated == true) {
+					return true;
+				}
+			}
+		}
+		// Non of the methods were positive
+		return false;
+	}
+	elseif( LDAP == $t_configured_login_method ) {
+		return $authLdap->authenticate( $p_user_id, $p_test_password );
 	}
 
+	return local_password_match( $p_user_id, $p_test_password );
+}
+
+
+/**
+ * Return true if the password for the user id given matches locally the
+ * given password (taking into account the global login method)
+ * @param integer $p_user_id       User id to check password against.
+ * @param string  $p_test_password Password.
+ * @return boolean indicating whether password matches given the user id
+ * @access public
+ */
+
+function local_password_match( $p_user_id, $p_test_password ) {
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_login_methods = array(
 		MD5,
@@ -805,7 +862,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 			$t_error = true;
 		}
 	}
-	
+
 	layout_page_header();
 
 	layout_page_begin();

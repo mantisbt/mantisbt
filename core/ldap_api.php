@@ -156,6 +156,127 @@ class Auth_LDAP {
 
 
 	/**
+	 * Attempt to authenticate the user against the LDAP directory
+	 * return true on successful authentication, false otherwise
+	 * @param integer $p_user_id  A valid user identifier.
+	 * @param string  $p_password A password to test against the user user.
+	 * @return boolean
+	 */
+	function authenticate( $p_user_id, $p_password ) {
+		# if password is empty and ldap allows anonymous login, then
+		# the user will be able to login, hence, we need to check
+		# for this special case.
+		if( is_blank( $p_password ) ) {
+			return false;
+		}
+
+		$t_username = user_get_field( $p_user_id, 'username' );
+
+		return $this->authenticate_by_username( $t_username, $p_password );
+	}
+
+
+	/**
+	 * Authenticates an user via LDAP given the username and password.
+	 *
+	 * @param string $p_username The user name.
+	 * @param string $p_password The password.
+	 * @return true: authenticated, false: failed to authenticate.
+	 */
+	function authenticate_by_username( $p_username, $p_password ) {
+		if( $authLdap->simulation_is_enabled() ) {
+			log_event( LOG_LDAP, 'Authenticating via LDAP simulation' );
+			$t_authenticated = $authLdap->simulation_authenticate_by_username( $p_username, $p_password );
+		} else {
+			$c_username = $authLdap->escape_string( $p_username );
+
+			$t_ldap_organization = config_get( 'ldap_organization' );
+			$t_ldap_root_dn = config_get( 'ldap_root_dn' );
+
+			$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
+			$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
+			$t_search_attrs = array(
+				$t_ldap_uid_field,
+				'dn',
+			);
+
+			# Bind
+			log_event( LOG_LDAP, 'Binding to LDAP server' );
+			$t_ds = $authLdap->connect_bind();
+			if( $t_ds === false ) {
+				return false;
+			}
+
+			# Search for the user id
+			log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
+			$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+			if( $t_sr === false ) {
+				$authLdap->log_error( $t_ds );
+				ldap_unbind( $t_ds );
+				log_event( LOG_LDAP, 'ldap search failed' );
+				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			}
+
+			$t_info = @ldap_get_entries( $t_ds, $t_sr );
+			if( $t_info === false ) {
+				$authLdap->log_error( $t_ds );
+				ldap_free_result( $t_sr );
+				ldap_unbind( $t_ds );
+				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
+			}
+
+			$t_authenticated = false;
+
+			if( $t_info['count'] > 0 ) {
+				# Try to authenticate to each until we get a match
+				for( $i = 0; $i < $t_info['count']; $i++ ) {
+					$t_dn = $t_info[$i]['dn'];
+					log_event( LOG_LDAP, 'Checking ' . $t_info[$i]['dn'] );
+
+					# Attempt to bind with the DN and password
+					if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+						$t_authenticated = true;
+						break;
+					}
+				}
+			} else {
+				log_event( LOG_LDAP, 'No matching entries found' );
+			}
+
+			log_event( LOG_LDAP, 'Unbinding from LDAP server' );
+			ldap_free_result( $t_sr );
+			ldap_unbind( $t_ds );
+		}
+
+		# If user authenticated successfully then update the local DB with information
+		# from LDAP.  This will allow us to use the local data after login without
+		# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
+		if( $t_authenticated ) {
+			$t_user_id = user_get_id_by_name( $p_username );
+
+			if( false !== $t_user_id ) {
+
+				$t_fields_to_update = array('password' => md5( $p_password ));
+
+				if( ON == config_get( 'use_ldap_realname' ) ) {
+					$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
+				}
+
+				if( ON == config_get( 'use_ldap_email' ) ) {
+					$t_fields_to_update['email'] = $authLdap->email_from_username( $p_username );
+				}
+
+				user_set_fields( $t_user_id, $t_fields_to_update );
+			}
+			log_event( LOG_LDAP, 'User \'' . $p_username . '\' authenticated' );
+		} else {
+			log_event( LOG_LDAP, 'Authentication failed' );
+		}
+
+		return $t_authenticated;
+	}
+
+	/**
 	 * Checks if the LDAP simulation mode is enabled.
 	 *
 	 * @return boolean true if enabled, false otherwise.
@@ -294,8 +415,8 @@ class Auth_LDAP {
 		}
 
 		# Search
-		$t_search_filter        = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
-		$t_search_attrs         = array( $t_ldap_uid_field, $p_field, 'dn' );
+		$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
+		$t_search_attrs  = array( $t_ldap_uid_field, $p_field, 'dn' );
 
 		log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
 		$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
@@ -337,6 +458,25 @@ class Auth_LDAP {
 		return $t_value;
 	}
 
+	/**
+	 * Return an email address from LDAP, given a username
+	 * @param string $p_username The username of a user to lookup.
+	 * @return string
+	 */
+	function email_from_username( $p_username ) {
+		if( $this->simulation_is_enabled() ) {
+			return $this->simulation_email_from_username( $p_username );
+		}
+
+		$t_email = $this->get_field_from_username( $p_username, 'mail' );
+		if( $t_email === null ) {
+			return '';
+		}
+
+		return $t_email;
+	}
+
+
 }
 
 $authLdap = new Auth_LDAP();
@@ -351,35 +491,19 @@ $g_cache_ldap_email = array();
  */
 function ldap_email( $p_user_id ) {
 	global $g_cache_ldap_email;
+	global $authLdap;
 
 	if( isset( $g_cache_ldap_email[(int)$p_user_id] ) ) {
 		return $g_cache_ldap_email[(int)$p_user_id];
 	}
 
 	$t_username = user_get_field( $p_user_id, 'username' );
-	$t_email = ldap_email_from_username( $t_username );
+	$t_email = $authLdap->email_from_username( $t_username );
 
 	$g_cache_ldap_email[(int)$p_user_id] = $t_email;
 	return $t_email;
 }
 
-/**
- * Return an email address from LDAP, given a username
- * @param string $p_username The username of a user to lookup.
- * @return string
- */
-function ldap_email_from_username( $p_username ) {
-	if( $authLdap->simulation_is_enabled() ) {
-		return $authLdap->simulation_email_from_username( $p_username );
-	}
-
-	$t_email = $authLdap->get_field_from_username( $p_username, 'mail' );
-	if( $t_email === null ) {
-		return '';
-	}
-
-	return $t_email;
-}
 
 /**
  * Gets a user's real name (common name) given the id.
@@ -399,6 +523,8 @@ function ldap_realname( $p_user_id ) {
  * @return string The user's real name.
  */
 function ldap_realname_from_username( $p_username ) {
+	global $authLdap;
+
 	if( $authLdap->simulation_is_enabled() ) {
 		return $authLdap->simulation_realname_from_username( $p_username );
 	}
@@ -412,122 +538,3 @@ function ldap_realname_from_username( $p_username ) {
 	return $t_realname;
 }
 
-/**
- * Attempt to authenticate the user against the LDAP directory
- * return true on successful authentication, false otherwise
- * @param integer $p_user_id  A valid user identifier.
- * @param string  $p_password A password to test against the user user.
- * @return boolean
- */
-function ldap_authenticate( $p_user_id, $p_password ) {
-	# if password is empty and ldap allows anonymous login, then
-	# the user will be able to login, hence, we need to check
-	# for this special case.
-	if( is_blank( $p_password ) ) {
-		return false;
-	}
-
-	$t_username = user_get_field( $p_user_id, 'username' );
-
-	return ldap_authenticate_by_username( $t_username, $p_password );
-}
-
-/**
- * Authenticates an user via LDAP given the username and password.
- *
- * @param string $p_username The user name.
- * @param string $p_password The password.
- * @return true: authenticated, false: failed to authenticate.
- */
-function ldap_authenticate_by_username( $p_username, $p_password ) {
-	if( $authLdap->simulation_is_enabled() ) {
-		log_event( LOG_LDAP, 'Authenticating via LDAP simulation' );
-		$t_authenticated = $authLdap->simulation_authenticate_by_username( $p_username, $p_password );
-	} else {
-		$c_username = $authLdap->escape_string( $p_username );
-
-		$t_ldap_organization = config_get( 'ldap_organization' );
-		$t_ldap_root_dn = config_get( 'ldap_root_dn' );
-
-		$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
-		$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
-		$t_search_attrs = array(
-			$t_ldap_uid_field,
-			'dn',
-		);
-
-		# Bind
-		log_event( LOG_LDAP, 'Binding to LDAP server' );
-		$t_ds = $authLdap->connect_bind();
-		if( $t_ds === false ) {
-			return false;
-		}
-
-		# Search for the user id
-		log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
-		$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
-		if( $t_sr === false ) {
-			$authLdap->log_error( $t_ds );
-			ldap_unbind( $t_ds );
-			log_event( LOG_LDAP, 'ldap search failed' );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
-		}
-
-		$t_info = @ldap_get_entries( $t_ds, $t_sr );
-		if( $t_info === false ) {
-			$authLdap->log_error( $t_ds );
-			ldap_free_result( $t_sr );
-			ldap_unbind( $t_ds );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
-		}
-
-		$t_authenticated = false;
-
-		if( $t_info['count'] > 0 ) {
-			# Try to authenticate to each until we get a match
-			for( $i = 0; $i < $t_info['count']; $i++ ) {
-				$t_dn = $t_info[$i]['dn'];
-				log_event( LOG_LDAP, 'Checking ' . $t_info[$i]['dn'] );
-
-				# Attempt to bind with the DN and password
-				if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
-					$t_authenticated = true;
-					break;
-				}
-			}
-		} else {
-			log_event( LOG_LDAP, 'No matching entries found' );
-		}
-
-		log_event( LOG_LDAP, 'Unbinding from LDAP server' );
-		ldap_free_result( $t_sr );
-		ldap_unbind( $t_ds );
-	}
-
-	# If user authenticated successfully then update the local DB with information
-	# from LDAP.  This will allow us to use the local data after login without
-	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
-	if( $t_authenticated ) {
-		$t_user_id = user_get_id_by_name( $p_username );
-
-		if( false !== $t_user_id ) {
-
-			$t_fields_to_update = array('password' => md5( $p_password ));
-
-			if( ON == config_get( 'use_ldap_realname' ) ) {
-				$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
-			}
-
-			if( ON == config_get( 'use_ldap_email' ) ) {
-				$t_fields_to_update['email'] = ldap_email_from_username( $p_username );
-			}
-
-			user_set_fields( $t_user_id, $t_fields_to_update );
-		}
-		log_event( LOG_LDAP, 'User \'' . $p_username . '\' authenticated' );
-	} else {
-		log_event( LOG_LDAP, 'Authentication failed' );
-	}
-
-	return $t_authenticated;
-}
