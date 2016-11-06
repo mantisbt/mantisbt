@@ -184,11 +184,11 @@ class Auth_LDAP {
 	 * @return true: authenticated, false: failed to authenticate.
 	 */
 	function authenticate_by_username( $p_username, $p_password ) {
-		if( $authLdap->simulation_is_enabled() ) {
+		if( $this->simulation_is_enabled() ) {
 			log_event( LOG_LDAP, 'Authenticating via LDAP simulation' );
-			$t_authenticated = $authLdap->simulation_authenticate_by_username( $p_username, $p_password );
+			$t_authenticated = $this->simulation_authenticate_by_username( $p_username, $p_password );
 		} else {
-			$c_username = $authLdap->escape_string( $p_username );
+			$c_username = $this->escape_string( $p_username );
 
 			$t_ldap_organization = config_get( 'ldap_organization' );
 			$t_ldap_root_dn = config_get( 'ldap_root_dn' );
@@ -202,7 +202,7 @@ class Auth_LDAP {
 
 			# Bind
 			log_event( LOG_LDAP, 'Binding to LDAP server' );
-			$t_ds = $authLdap->connect_bind();
+			$t_ds = $this->connect_bind();
 			if( $t_ds === false ) {
 				return false;
 			}
@@ -211,7 +211,7 @@ class Auth_LDAP {
 			log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
 			$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 			if( $t_sr === false ) {
-				$authLdap->log_error( $t_ds );
+				$this->log_error( $t_ds );
 				ldap_unbind( $t_ds );
 				log_event( LOG_LDAP, 'ldap search failed' );
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
@@ -219,7 +219,7 @@ class Auth_LDAP {
 
 			$t_info = @ldap_get_entries( $t_ds, $t_sr );
 			if( $t_info === false ) {
-				$authLdap->log_error( $t_ds );
+				$this->log_error( $t_ds );
 				ldap_free_result( $t_sr );
 				ldap_unbind( $t_ds );
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
