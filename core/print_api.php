@@ -2134,5 +2134,7 @@ function print_dropzone_form_data() {
  * @return void
  */
 function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null ) {
+	error_parameters( __FUNCTION__, 'print_form_button' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
 }
