@@ -38,13 +38,13 @@ require_api( 'utility_api.php' );
 
 class Auth_LDAP {
 	//@param resource $p_ds LDAP resource identifier returned by ldap_connect.
-	var $p_ds;
+	public $p_ds = null;
 
 	// LDAP data source
-	var $t_ds;
+	public $t_ds = null;
 
 	// Is simulation enabled?
-	var $simulationEnabled;
+	public $simulationEnabled =  false;
 
 	/**
 	 * Logs the most recent LDAP error
