@@ -145,7 +145,7 @@ $c_filter['resolved'] = array(
 		'0' => META_FILTER_ANY,
 	),
 );
-$t_url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 
 $c_filter['unassigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), 0 );

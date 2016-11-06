@@ -349,7 +349,9 @@ function layout_login_page_begin() {
 	# Advertise the availability of the browser search plug-ins.
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
-
+	
+	html_head_javascript();
+	
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
 
@@ -380,10 +382,16 @@ function layout_navbar() {
 	$t_logo_url = config_get('logo_url');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
-
 	echo '<div id="navbar-container" class="navbar-container">';
 
-	echo '<div class="navbar-header pull-left">';
+	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">';
+	echo '<span class="sr-only">Toggle sidebar</span>';
+	echo '<span class="icon-bar"></span>';
+	echo '<span class="icon-bar"></span>';
+	echo '<span class="icon-bar"></span>';
+	echo '</button>';
+
+	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo config_get('window_title');
@@ -391,24 +399,16 @@ function layout_navbar() {
 	echo '</a>';
 
 	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
-	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
+	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
 	if (auth_is_user_authenticated()) {
 		layout_navbar_user_avatar();
 	}
 	echo '</button>';
 
-	echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler" data-target="#sidebar">';
-	echo '<span class="sr-only">Toggle sidebar</span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '</button>';
-
 	echo '</div>';
 
-	echo '<div class="hidden-xs">';
-	echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
 		# shortcuts button bar
@@ -419,19 +419,6 @@ function layout_navbar() {
 		layout_navbar_user_menu();
 	}
 	echo '</ul>';
-	echo '</div>';
-	echo '</div>';
-
-	# mobile view
-	echo '<div class="hidden-sm hidden-md hidden-lg">';
-	echo '<div class="navbar-menu pull-left navbar-collapse collapse" role="navigation" style="height: auto;">';
-	echo '<ul class="nav navbar-nav">';
-	if (auth_is_user_authenticated()) {
-		layout_navbar_user_menu(false);
-		layout_navbar_projects_menu();
-	}
-	echo '</ul>';
-	echo '</div>';
 	echo '</div>';
 
 	echo '</div>';
@@ -587,6 +574,7 @@ function layout_navbar_button_bar() {
 		echo '</a>';
 	}
 
+	echo '</div>';
   	echo '</li>';
 }
 

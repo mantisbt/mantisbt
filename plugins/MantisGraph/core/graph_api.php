@@ -69,7 +69,7 @@ function graph_numeric_array( array $p_values ) {
  * @return string The rgba with the surrounding single quotes, 'rgba(252, 189, 189, 0.2)'
  */
 function graph_color_to_rgba( $p_color, $p_alpha ) {
-	$t_rgba = "'rgba(";
+	$t_rgba = '"rgba(';
 
 	if ( $p_color[0] == '#' ) {
 		$t_color = substr( $p_color, 1 );
@@ -80,7 +80,7 @@ function graph_color_to_rgba( $p_color, $p_alpha ) {
 	$t_rgba .= intval( $t_color[0] . $t_color[1], 16 ) . ', ';
 	$t_rgba .= intval( $t_color[2] . $t_color[3], 16 ) . ', ';
 	$t_rgba .= intval( $t_color[4] . $t_color[5], 16 ) . ', ';
-	$t_rgba .= $p_alpha . ")'";
+	$t_rgba .= $p_alpha . ')"';
 
 	return $t_rgba;
 }
@@ -143,40 +143,11 @@ function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = 
 	$t_values = array_values( $p_metrics );
 	$t_js_values = graph_numeric_array( $t_values );
 
-	$t_colors = array( $p_color );
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
-
-echo <<<EOT
-<canvas id="barchart{$s_id}" width="500" height="400"></canvas>
-<script>
-$(document).ready( function() {
-var ctx = document.getElementById("barchart{$s_id}");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [{$t_js_labels}],
-        datasets: [{
-            label: '{$p_series_name}',
-            data: [{$t_js_values}],
-            backgroundColor: {$t_background_colors},
-            borderColor: {$t_border_colors},
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-});
-</script>
-EOT;
+?>
+	<canvas id="barchart<?php echo $s_id ?>" width="500" height="400"
+		data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
+		data-values="[<?php echo $t_js_values ?>]" />
+<?php
 }
 
 /**
@@ -200,37 +171,13 @@ function graph_pie( array $p_metrics, $p_title = '' ) {
 	$t_colors = graph_status_colors_to_colors();
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
-
-echo <<<EOT
-<canvas id="piechart{$s_id}" width="500" height="400"></canvas>
-<script>
-$(document).ready( function() {
-var ctx = document.getElementById("piechart{$s_id}");
-var myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: [{$t_js_labels}],
-        datasets: [{
-            label: '# of issues',
-            data: [{$t_js_values}],
-            backgroundColor: [{$t_background_colors}],
-            borderColor: [{$t_border_colors}],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-});
-</script>
-EOT;
+?>
+	<canvas id="piechart<?php echo $s_id ?>" width="500" height="400"
+		data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
+		data-values="[<?php echo $t_js_values ?>]"
+		data-background-colors="[<?php echo htmlspecialchars( $t_background_colors, ENT_QUOTES ) ?>]"
+		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]" />
+<?php
 }
 
 /**
@@ -265,45 +212,17 @@ function graph_cumulative_bydate( array $p_metrics ) {
 	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
 	$t_legend_still_open = plugin_lang_get( 'legend_still_open' );
 
-echo <<<EOT
-<canvas id="linebydate{$s_id}" width="500" height="400"></canvas>
-<script type="text/javascript">
-$(document).ready( function() {
-    var ctx = $("#linebydate{$s_id}").get(0).getContext("2d");
-    var myChart = new Chart(ctx, {
-		type: 'line',
-		data: {
-	        labels: [{$t_js_labels}],
-	        datasets: [
-	            {
-	            	label: '{$t_legend_opened}',
-	            	backgroundColor: "rgba(255, 158, 158, 0.5)",
-	                data: [{$t_opened_values}]
-	            },
-	            {
-	            	label: '{$t_legend_resolved}',
-	            	backgroundColor: "rgba(49, 196, 110, 0.5)",
-	                data: [{$t_resolved_values}]
-	            },
-				{
-	            	label: '{$t_legend_still_open}',
-	            	backgroundColor: "rgba(255, 0, 0, 1)",
-	                data: [{$t_still_open_values}]
-	            },	        ]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:true
-	                }
-	            }]
-	        }
-	    }
-	});
-});
-</script>
-EOT;
+?>
+	<canvas id="linebydate<?php echo $s_id ?>" width="500" height="400"
+			data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
+			data-opened-label="<?php echo $t_legend_opened ?>"
+			data-opened-values="[<?php echo $t_opened_values ?>]"
+			data-resolved-label="<?php echo $t_legend_resolved ?>"
+			data-resolved-values="[<?php echo $t_resolved_values ?>]"
+			data-still-open-label="<?php echo $t_legend_still_open ?>"
+			data-still-open-values="[<?php echo $t_still_open_values ?>]" />
+<?php
+
 }
 
 /**

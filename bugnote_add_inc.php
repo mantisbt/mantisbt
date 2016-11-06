@@ -63,7 +63,12 @@ require_api( 'lang_api.php' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
-<form id="bugnoteadd" method="post" action="bugnote_add.php" enctype="multipart/form-data" class="dz dropzone-form">
+<form id="bugnoteadd"
+	method="post"
+	action="bugnote_add.php"
+	enctype="multipart/form-data"
+	class="dz dropzone-form"
+	<?php print_dropzone_form_data() ?>>
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -87,6 +92,7 @@ require_api( 'lang_api.php' );
 		<tbody>
 
 <?php
+	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr>
@@ -94,19 +100,10 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'view_status' ) ?>
 				</th>
 				<td>
-<?php
-		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-?>
 				<label for="bugnote_add_view_status">
 					<input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 					<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
 				</label>
-<?php
-		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
-		}
-?>
 				</td>
 			</tr>
 <?php }?>
@@ -184,5 +181,4 @@ require_api( 'lang_api.php' );
 </form>
 </div>
 <?php
-	include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );
 }

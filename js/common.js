@@ -220,6 +220,12 @@ $(document).ready( function() {
 		});
 	});
 
+	if( $( ".dropzone-form" ).length ) {
+		enableDropzone( "dropzone", false );
+	}
+	if( $( ".auto-dropzone-form" ).length ) {
+		enableDropzone( "auto-dropzone", true );
+	}
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
@@ -459,4 +465,58 @@ function setDisplay(idTag, state)
 function toggleDisplay(idTag)
 {
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+}
+
+// Dropzone handler
+Dropzone.autoDiscover = false;
+function enableDropzone( classPrefix, autoUpload ) {
+	try {
+		var zone = new Dropzone( "." + classPrefix + "-form", {
+			forceFallback: $(this).data('force-fallback'),
+			paramName: "ufile",
+			autoProcessQueue: autoUpload,
+			clickable: '.' + classPrefix,
+			previewsContainer: '#' + classPrefix + '-previews-box',
+			uploadMultiple: true,
+			parallelUploads: 100,
+			maxFilesize: $(this).data('max-filesize'),
+			addRemoveLinks: !autoUpload,
+			acceptedFiles: $(this).data('accepted-files'),
+			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+			dictDefaultMessage: $(this).data('default-message'),
+			dictFallbackMessage: $(this).data('fallback-message'),
+			dictFallbackText: $(this).data('fallback-text'),
+			dictFileTooBig: $(this).data('file-too-big'),
+			dictInvalidFileType: $(this).data('invalid-file-type'),
+			dictResponseError: $(this).data('response-error'),
+			dictCancelUpload: $(this).data('cancel-upload'),
+			dictCancelUploadConfirmation: $(this).data('cancel-upload-confirmation'),
+			dictRemoveFile: $(this).data('remove-file'),
+			dictRemoveFileConfirmation: $(this).data('remove-file-confirmation'),
+			dictMaxFilesExceeded: $(this).data('max-files-exceeded'),
+
+			init: function () {
+				var dropzone = this;
+				$( "input[type=submit]" ).on( "click", function (e) {
+					if( dropzone.getQueuedFiles().length ) {
+						e.preventDefault();
+						e.stopPropagation();
+						dropzone.processQueue();
+					}
+				});
+				this.on( "successmultiple", function( files, response ) {
+					document.open();
+					document.write( response );
+					document.close();
+				});
+			},
+			fallback: function() {
+				if( $( "." + classPrefix ).length ) {
+					$( "." + classPrefix ).hide();
+				}
+			}
+		});
+	} catch (e) {
+		alert( $(this).data('dropzone-not-supported') );
+	}
 }

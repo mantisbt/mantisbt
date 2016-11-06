@@ -538,11 +538,18 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
  * @return void
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	if( OFF == config_get( 'send_reset_password' ) ||
-		OFF == config_get( 'enable_email_notification' ) ) {
+	if( OFF == config_get( 'send_reset_password' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'Password reset email notifications disabled.' );
 		return;
 	}
-
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+	if( !user_is_enabled( $p_user_id ) ) {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, user is disabled', $p_user_id );
+		return;
+	}
 	lang_push( user_pref_get_language( $p_user_id ) );
 
 	# retrieve the username and email
@@ -558,6 +565,8 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
+	} else {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
 	}
 
 	lang_pop();
@@ -985,7 +994,11 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->body = $t_message;
 	$t_email_data->metadata = array();
 	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
-	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
+
+	$t_mail_priority = config_get( 'mail_priority' );
+	if( $t_mail_priority != 0 ) {
+		$t_email_data->metadata['priority'] = $t_mail_priority;
+	}
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_email_data->metadata['charset'] = 'utf-8';
@@ -1134,7 +1147,6 @@ function email_send( EmailData $p_email_data ) {
 
 	$t_mail->IsHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
-	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
 	$t_mail->From = config_get( 'from_email' );
@@ -1146,6 +1158,10 @@ function email_send( EmailData $p_email_data ) {
 	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
 	$t_mail->LE         = "\r\n";
 	$t_mail->Encoding   = 'quoted-printable';
+
+	if( isset( $t_email_data->metadata['priority'] ) ) {
+		$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
+	}
 
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;

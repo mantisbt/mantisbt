@@ -236,7 +236,11 @@ if( $t_show_attachments ) {
 }
 ?>
 <div class="col-md-12 col-xs-12">
-<form id="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1" class="dropzone-form">
+<form id="report_bug_form"
+	method="post" <?php echo $t_form_encoding; ?>
+	action="bug_report.php?posted=1"
+	class="dropzone-form"
+	<?php print_dropzone_form_data() ?>>
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -718,5 +722,4 @@ if( $t_show_attachments ) {
 </form>
 </div>
 <?php
-include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );
 layout_page_end();

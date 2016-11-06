@@ -581,12 +581,10 @@ $g_show_user_email_threshold = NOBODY;
 $g_show_user_realname_threshold = NOBODY;
 
 /**
- * If use_x_priority is set to ON, what should the value be?
  * Urgent = 1, Not Urgent = 5, Disable = 0
- * Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
  * @global integer $g_mail_priority
  */
-$g_mail_priority = 3;
+$g_mail_priority = 0;
 
 /**
  * select the method to mail by:
@@ -3016,7 +3014,7 @@ $g_status_colors = array(
 
 /**
  * The padding level when displaying project ids
- *  The bug id will be padded with 0's up to the size given
+ *  The project id will be padded with 0's up to the size given
  * @global integer $g_display_project_padding
  */
 $g_display_project_padding = 3;
@@ -3440,13 +3438,13 @@ $g_custom_field_edit_after_create = ON;
  * Add custom options to the main menu.  For example:
  *
  * $g_main_menu_custom_options = array(
- *     array( 
+ *     array(
  *         'title'        => 'My Link',
  *         'access_level' => MANAGER,
  *         'url'          => 'my_link.php',
  *         'icon'         => 'fa-plug'
  *     ),
- *     array( 
+ *     array(
  *         'title'        => 'My Link2',
  *         'access_level' => ADMINISTRATOR,
  *         'url'          => 'my_link2.php',
