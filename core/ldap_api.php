@@ -46,6 +46,16 @@ class Auth_LDAP {
 	// Is simulation enabled?
 	public $simulationEnabled =  false;
 
+	// The LDAP config parameters
+	private $config = null;
+
+
+
+	// Constructor
+	public function __construct($config) {
+		$this->config = $config;
+	}
+
 	/**
 	 * Logs the most recent LDAP error
 	 * @param resource $p_ds LDAP resource identifier returned by ldap_connect.
@@ -62,20 +72,20 @@ class Auth_LDAP {
 	 * @param string $p_password Password to use for LDAP bind.
 	 * @return resource|false
 	 */
-	function connect_bind( $p_binddn = '', $p_password = '' ) {
+	function connect_bind( ) {
 		if( !extension_loaded( 'ldap' ) ) {
 			log_event( LOG_LDAP, 'Error: LDAP extension missing in php' );
 			trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
 		}
 
-		$t_ldap_server = config_get( 'ldap_server' );
+		$t_ldap_server = $this->config['server'];
 
 		log_event( LOG_LDAP, 'Attempting connection to LDAP server/URI \'' . $t_ldap_server . '\'.' );
 		$t_ds = @ldap_connect( $t_ldap_server );
 		if( $t_ds !== false && $t_ds > 0 ) {
 			log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
 
-			$t_network_timeout = config_get( 'ldap_network_timeout' );
+			$t_network_timeout = $this->config['network_timeout'];
 			if( $t_network_timeout > 0 ) {
 				log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
 				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
@@ -84,7 +94,7 @@ class Auth_LDAP {
 				}
 			}
 
-			$t_protocol_version = config_get( 'ldap_protocol_version' );
+			$t_protocol_version = $this->config['protocol_version'];
 			if( $t_protocol_version > 0 ) {
 				log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
 				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
@@ -94,7 +104,7 @@ class Auth_LDAP {
 			}
 
 			# Set referrals flag.
-			$t_follow_referrals = ON == config_get( 'ldap_follow_referrals' );
+			$t_follow_referrals = ON == $this->config['follow_referrals'];
 			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
 			if( !$t_result ) {
 				$this->log_error( $t_ds );
@@ -102,10 +112,8 @@ class Auth_LDAP {
 
 			# If no Bind DN and Password is set, attempt to login as the configured
 			#  Bind DN.
-			if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
-				$p_binddn = config_get( 'ldap_bind_dn', '' );
-				$p_password = config_get( 'ldap_bind_passwd', '' );
-			}
+			$p_binddn = $this->config['bind_dn'];
+			$p_password = $this->config['bind_passwd'];
 
 			if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 				log_event( LOG_LDAP, 'Attempting bind to ldap server with username and password' );
@@ -190,10 +198,10 @@ class Auth_LDAP {
 		} else {
 			$c_username = $this->escape_string( $p_username );
 
-			$t_ldap_organization = config_get( 'ldap_organization' );
-			$t_ldap_root_dn = config_get( 'ldap_root_dn' );
+			$t_ldap_organization = $this->config['organization'];
+			$t_ldap_root_dn = $this->config['root_dn'];
 
-			$t_ldap_uid_field = config_get( 'ldap_uid_field', 'uid' );
+			$t_ldap_uid_field = $this->config['uid_field'];
 			$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
 			$t_search_attrs = array(
 				$t_ldap_uid_field,
@@ -263,7 +271,7 @@ class Auth_LDAP {
 				}
 
 				if( ON == config_get( 'use_ldap_email' ) ) {
-					$t_fields_to_update['email'] = $authLdap->email_from_username( $p_username );
+					$t_fields_to_update['email'] = $this->email_from_username( $p_username );
 				}
 
 				user_set_fields( $t_user_id, $t_fields_to_update );
@@ -398,9 +406,9 @@ class Auth_LDAP {
 	 * @return string The field value or null if not found.
 	 */
 	function get_field_from_username( $p_username, $p_field ) {
-		$t_ldap_organization    = config_get( 'ldap_organization' );
-		$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
-		$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
+		$t_ldap_organization    = $this->config['organization'];
+		$t_ldap_root_dn         = $this->config['root_dn'];
+		$t_ldap_uid_field		= $this->config['uid_field'];
 
 		$c_username = $this->escape_string( $p_username );
 
@@ -479,7 +487,7 @@ class Auth_LDAP {
 
 }
 
-$authLdap = new Auth_LDAP();
+$authLdap = new Auth_LDAP( config_get( 'ldap' ) );
 
 $g_cache_ldap_email = array();
 
@@ -529,7 +537,7 @@ function ldap_realname_from_username( $p_username ) {
 		return $authLdap->simulation_realname_from_username( $p_username );
 	}
 
-	$t_ldap_realname_field	= config_get( 'ldap_realname_field' );
+	$t_ldap_realname_field	= $this->config['realname_field'];
 	$t_realname = $authLdap->get_field_from_username( $p_username, $t_ldap_realname_field );
 	if( $t_realname === null ) {
 		return '';

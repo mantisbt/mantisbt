@@ -1859,30 +1859,31 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
  *   ldap://ldap.example.com/
  *   ldaps://ldap.example.com:3269/
  *
- * @global string $g_ldap_server
+ * @global string $g_ldap['server']
  */
-$g_ldap_server = 'ldaps://ldap.example.com/';
+
+$g_ldap['server'] = 'ldaps://ldap.example.com/';
 
 /**
  * The root distinguished name for LDAP searches
- * @global string $g_ldap_root_dn
+ * @global string $g_ldap['root_dn']
  */
-$g_ldap_root_dn = 'dc=example,dc=com';
+$g_ldap['root_dn'] = 'dc=example,dc=com';
 
 /**
  * LDAP search filter for the organization
  * e.g. '(organizationname=*Traffic)'
- * @global string $g_ldap_organization
+ * @global string $g_ldap['organization']
  */
-$g_ldap_organization = '';
+$g_ldap['organization'] = '';
 
 /**
  * The LDAP Protocol Version, if 0, then the protocol version is not set.
  * For Active Directory use version 3.
  *
- * @global integer $g_ldap_protocol_version
+ * @global integer $g_ldap['protocol_version']
  */
-$g_ldap_protocol_version = 0;
+$g_ldap['protocol_version'] = 0;
 
 /**
  * Duration of the timeout for TCP connection to the LDAP server (in seconds).
@@ -1891,48 +1892,48 @@ $g_ldap_protocol_version = 0;
  * server.
  * Defaults to 0 (infinite)
  *
- * @global int $g_ldap_network_timeout
+ * @global int $g_ldap['network_timeout']
  */
-$g_ldap_network_timeout = 0;
+$g_ldap['network_timeout'] = 0;
 
 /**
  * Determines whether the LDAP library automatically follows referrals returned
  * by LDAP servers or not. This maps to LDAP_OPT_REFERRALS ldap library option.
  * For Active Directory, this should be set to OFF.
  *
- * @global integer $g_ldap_follow_referrals
+ * @global integer $g_ldap['follow_referrals']
  */
-$g_ldap_follow_referrals = ON;
+$g_ldap['follow_referrals'] = ON;
 
 /**
  * The distinguished name of the service account to use for binding to the
  * LDAP server.
  * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
  *
- * @global string $g_ldap_bind_dn
+ * @global string $g_ldap['bind_dn']
  */
-$g_ldap_bind_dn = '';
+$g_ldap['bind_dn'] = '';
 
 /**
  * The password for the service account used to establish the connection to
  * the LDAP server.
  *
- * @global string $g_ldap_bind_passwd
+ * @global string $g_ldap['bind_passwd']
  */
-$g_ldap_bind_passwd = '';
+$g_ldap['bind_passwd'] = '';
 
 /**
  * The LDAP field for username
  * Use 'sAMAccountName' for Active Directory
- * @global string $g_ldap_uid_field
+ * @global string $g_ldap['uid_field']
  */
-$g_ldap_uid_field = 'uid';
+$g_ldap['uid_field'] = 'uid';
 
 /**
  * The LDAP field for the user's real name (i.e. common name).
- * @global string $g_ldap_realname_field
+ * @global string $g_ldap['realname_field']
  */
-$g_ldap_realname_field = 'cn';
+$g_ldap['realname_field'] = 'cn';
 
 /**
  * Use the realname specified in LDAP (ON) rather than the one stored in the
