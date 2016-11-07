@@ -533,11 +533,13 @@ function ldap_realname( $p_user_id ) {
 function ldap_realname_from_username( $p_username ) {
 	global $authLdap;
 
+	$config = config_get( 'ldap' );
+
 	if( $authLdap->simulation_is_enabled() ) {
 		return $authLdap->simulation_realname_from_username( $p_username );
 	}
 
-	$t_ldap_realname_field	= $this->config['realname_field'];
+	$t_ldap_realname_field	= $config['realname_field'];
 	$t_realname = $authLdap->get_field_from_username( $p_username, $t_ldap_realname_field );
 	if( $t_realname === null ) {
 		return '';
