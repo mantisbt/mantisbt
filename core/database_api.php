@@ -523,63 +523,57 @@ function db_affected_rows() {
  * @return array Database result
  */
 function db_fetch_array( IteratorAggregate &$p_result ) {
-	global $g_db, $g_db_type;
+	global $g_db_functional_type;
 
 	if( $p_result->EOF ) {
 		return false;
-	}
-
-	# cache these checks to avoid repeated api calls
-	static $t_db_is_pgsql = null;
-	static $t_db_is_oracle = null;
-	if( null === $t_db_is_pgsql ) {
-		$t_db_is_pgsql = db_is_pgsql();
-	}
-	if( null === $t_db_is_oracle ) {
-		$t_db_is_oracle = db_is_oracle();
 	}
 
 	# Retrieve the fields from the recordset
 	$t_row = $p_result->fields;
 
 	# Additional handling for specific RDBMS
-	if( $t_db_is_pgsql ) {
-		# pgsql's boolean fields are stored as 't' or 'f' and must be converted
-		static $s_current_result = null, $s_convert_needed;
+	switch( $g_db_functional_type ) {
 
-		if( $s_current_result != $p_result ) {
-			# Processing a new query
-			$s_current_result = $p_result;
-			$s_convert_needed = false;
-		} elseif( !$s_convert_needed ) {
-			# No conversion needed, return the row as-is
-			$p_result->MoveNext();
-			return $t_row;
-		}
+		case DB_TYPE_PGSQL:
+			# pgsql's boolean fields are stored as 't' or 'f' and must be converted
+			static $s_current_result = null, $s_convert_needed;
 
-		foreach( $p_result->FieldTypesArray() as $t_field ) {
-			switch( $t_field->type ) {
-				case 'bool':
-					switch( $t_row[$t_field->name] ) {
-						case 'f':
-							$t_row[$t_field->name] = false;
-							break;
-						case 't':
-							$t_row[$t_field->name] = true;
-							break;
-					}
-					$s_convert_needed = true;
-					break;
+			if( $s_current_result != $p_result ) {
+				# Processing a new query
+				$s_current_result = $p_result;
+				$s_convert_needed = false;
+			} elseif( !$s_convert_needed ) {
+				# No conversion needed, return the row as-is
+				$p_result->MoveNext();
+				return $t_row;
 			}
-		}
 
-	} elseif( $t_db_is_oracle ) {
-		# oci8 returns null values for empty strings, convert them back
-		foreach( $t_row as &$t_value ) {
-			if( !isset( $t_value ) ) {
-				$t_value = '';
+			foreach( $p_result->FieldTypesArray() as $t_field ) {
+				switch( $t_field->type ) {
+					case 'bool':
+						switch( $t_row[$t_field->name] ) {
+							case 'f':
+								$t_row[$t_field->name] = false;
+								break;
+							case 't':
+								$t_row[$t_field->name] = true;
+								break;
+						}
+						$s_convert_needed = true;
+						break;
+				}
 			}
-		}
+			break;
+
+		case DB_TYPE_ORACLE:
+			# oci8 returns null values for empty strings, convert them back
+			foreach( $t_row as &$t_value ) {
+				if( !isset( $t_value ) ) {
+					$t_value = '';
+				}
+			}
+			break;
 	}
 
 	$p_result->MoveNext();
