@@ -624,3 +624,11 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 # the closest integer (4 bytes) type available. As some DBs dont support unsigned
 # types, 2^31 is a safe limit to be used for all.
 define( 'DB_MAX_INT', 2147483647 );
+
+# Databse functional type identifiers.
+define( 'DB_TYPE_UNDEFINED', 0 );
+define( 'DB_TYPE_MYSQL', 1 );
+define( 'DB_TYPE_PGSQL', 2 );
+define( 'DB_TYPE_MSSQL', 3 );
+define( 'DB_TYPE_ORACLE', 4 );
+define( 'DB_TYPE_DB2', 5 );
