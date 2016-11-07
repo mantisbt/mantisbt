@@ -58,18 +58,22 @@ $g_cache_file_count = array();
  *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
+ * @return array Array of file info arrays.
  */
 function file_process_posted_files_for_bug( $p_bug_id, $p_files ) {
 	if( $p_files === null ) {
 		return;
 	}
 
+	$t_file_infos = array();
 	$t_files = helper_array_transpose( $p_files );
 	foreach( $t_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
-			file_add( $p_bug_id, $t_file, 'bug' );
+			$t_file_infos[] = file_add( $p_bug_id, $t_file, 'bug' );
 		}
 	}
+
+	return $t_file_infos;
 }
 
 /**
@@ -675,9 +679,11 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
  * @param integer $p_user_id         User id (defaults to current user).
  * @param integer $p_date_added      Date added.
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bug attachments).
- * @return void
+ * @return array The file info array (keys: name, size)
  */
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
+	$t_file_info = array();
+
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 	$t_tmp_file = $p_file['tmp_name'];
@@ -701,12 +707,16 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		}
 	}
 
+	$t_file_info['name'] = $t_file_name;
 	antispam_check();
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
 		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
 	}
+
+	$t_file_info['size'] = $t_file_size;
+
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
@@ -810,6 +820,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
+
+	return $t_file_info;
 }
 
 /**

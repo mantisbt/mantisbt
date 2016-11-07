@@ -629,7 +629,8 @@ $s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
 $s_vote_added_msg = 'Vote has been added...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Note added...';
+$s_bugnote_added_email_subject = '%1s commented on %2s';
+$s_bugnote_attached_files = 'Attached Files:';
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = 'Note has been successfully deleted...';
