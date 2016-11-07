@@ -83,19 +83,27 @@ if( $f_files !== null ) {
 		access_denied();
 	}
 
-	file_process_posted_files_for_bug( $f_bug_id, $f_files );
+	$t_file_infos = file_process_posted_files_for_bug( $f_bug_id, $f_files );
+} else {
+	$t_file_infos = array();
 }
 
 # We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 # if $f_time_tracking is not 0 and the time tracking feature is enabled.
-$t_bugnote_id = bugnote_add( $t_bug->id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
+$t_bugnote_id = bugnote_add( $t_bug->id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE,
+	/* attr */ '', /* user_id */ null, /* send_email */ false );
 if( !$t_bugnote_id ) {
 	error_parameters( lang_get( 'bugnote' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
 # Process the mentions in the added note
-bugnote_process_mentions( $t_bug->id, $t_bugnote_id, $f_bugnote_text );
+$t_user_ids_that_got_mention_notifications = bugnote_process_mentions( $t_bug->id, $t_bugnote_id, $f_bugnote_text );
+
+# Send email explicitly from here to have file support, this will move into the API once we have
+# proper bugnote files support in db schema and object model.
+email_bugnote_add( $t_bugnote_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
+
 
 # Handle the reassign on feedback feature. Note that this feature generally
 # won't work very well with custom workflows as it makes a lot of assumptions

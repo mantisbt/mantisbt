@@ -255,9 +255,10 @@ function email_notify_flag( $p_action, $p_flag ) {
  * @param integer $p_bug_id                  A bug identifier.
  * @param string  $p_notify_type             Notification type.
  * @param array   $p_extra_user_ids_to_email Array of additional email addresses to notify.
+ * @param integer $p_bugnote_id The bugnote id in case of bugnote, otherwise null.
  * @return array
  */
-function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array() ) {
+function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array(), $p_bugnote_id = null ) {
 	$t_recipients = array();
 
 	# add explicitly specified users
@@ -324,8 +325,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	}
 
 	# add users who contributed bugnotes
-	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
-	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	$t_bugnote_id = ( $p_bugnote_id === null ) ? bugnote_get_latest_id( $p_bug_id ) : $p_bugnote_id;
+	if( $t_bugnote_id !== 0 ) {
+		$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	}
 	$t_bug = bug_get( $p_bug_id );
 	$t_bug_date = $t_bug->last_updated;
 
@@ -453,7 +456,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
 		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $p_bug_id, $t_id )
-		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id )
+		 || ( $t_bugnote_id !== 0 &&
+				$t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id ) )
 		) {
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;
@@ -868,12 +872,81 @@ function email_bug_updated( $p_bug_id ) {
 
 /**
  * send notices when a new bugnote
- * @param int $p_bug_id
- * @return null
+ * @param int $p_bugnote_id  The bugnote id.
+ * @param array $p_files The array of file information (keys: name, size)
+ * @param array The id of users to exclude.
+ * @return void
  */
-function email_bugnote_add( $p_bug_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Note added to issue #%d', $p_bug_id ) );
-	email_generic( $p_bug_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted' );
+function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_ids = array() ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+
+	ignore_user_abort( true );
+
+	$t_bugnote = bugnote_get( $p_bugnote_id );
+
+	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
+
+	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
+	$t_user_id = auth_get_current_user_id();
+	$t_username = user_get_name( $t_user_id );
+
+	$t_subject = email_build_subject( $t_bugnote->bug_id );
+
+	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
+	$t_time_tracking_view_threshold = config_get( 'time_tracking_view_threshold' );
+
+	# send email to every recipient
+	foreach( $t_recipients as $t_user_id => $t_user_email ) {
+		if( in_array( $t_user_id, $p_exclude_user_ids ) ) {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d excluded, Email = \'%s\'.',
+				$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted', $t_user_id, $t_user_email );
+			continue;
+		}
+
+		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.',
+			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted', $t_user_id, $t_user_email );
+
+		# load (push) user language
+		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+
+		$t_message = bugnote_get_text( $p_bugnote_id ) . "\n";
+
+		# Time tracking information
+		if( $t_bugnote->time_tracking != 0 ) {
+			if( access_has_bug_level( $t_time_tracking_view_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
+				$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
+				$t_message .= "\n" . lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm . "\n";
+			}
+		}
+
+		# Files attached
+		if( count( $p_files ) > 0 )  {
+			$t_message .= "\n" . lang_get( 'bugnote_attached_files' ) . "\n";
+
+			foreach( $p_files as $t_file ) {
+				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
+					' ' . lang_get( 'bytes' ) . ")\n";
+			}
+		}
+
+		# View State (if private), otherwise it is implicitly public.
+		if( $t_bugnote->view_state === VS_PRIVATE ) {
+			$t_message .= "\n" . lang_get( 'bugnote_view_state' ) . ': ' . lang_get( 'private' ) . "\n";
+		}
+
+		$t_complete_subject = sprintf( lang_get( 'bugnote_added_email_subject' ), '@' . $t_username, $t_subject );
+		$t_contents = $t_message . "\n" . string_get_bugnote_view_url_with_fqdn( $t_bugnote->bug_id, $p_bugnote_id );
+
+		email_store( $t_user_email, $t_complete_subject, $t_contents );
+
+		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
+			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
+
+		lang_pop();
+	}
 }
 
 /**
@@ -1338,7 +1411,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * @param array         $p_mention_user_ids User id or list of user ids array.
  * @param string        $p_message    Optional message to add to the e-mail.
  * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
- * @return array List of users ids to whom the reminder e-mail was actually sent
+ * @return array        List of users ids to whom the mentioned e-mail were actually sent
  */
 function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
