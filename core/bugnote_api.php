@@ -757,8 +757,8 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 	} else {
 		if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
 			$t_note_obj = $g_cache_bugnote[(int)$p_bugnote_id];
+			# current note id will be unset in the following call
 			bugnote_clear_bug_cache( $t_note_obj->bug_id );
-			unset( $g_cache_bugnote[(int)$p_bugnote_id] );
 		}
 	}
 
