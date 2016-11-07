@@ -59,6 +59,9 @@ global $ADODB_FETCH_MODE;
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
 
+# Stores the functional database type based on db driver
+$g_db_functional_type;
+
 /**
  * Mantis Database Parameters Count class
  * Stores the current parameter count, provides method to generate parameters
@@ -126,8 +129,9 @@ $g_db_param = new MantisDbParam();
  * @return boolean indicating if the connection was successful
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
-	global $g_db_connected, $g_db;
+	global $g_db_connected, $g_db, $g_db_functional_type;
 	$t_db_type = config_get_global( 'db_type' );
+	$g_db_functional_type = db_get_type( $t_db_type );
 
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
@@ -211,19 +215,37 @@ function db_check_database_support( $p_db_type ) {
 }
 
 /**
+ * Maps a db driver type to the functional databse type
+ * @param string	$p_driver_type Database driver name
+ * @return int		Database type
+ */
+function db_get_type( $p_driver_type ) {
+	switch( $p_driver_type ) {
+		case 'mysql':
+		case 'mysqli':
+			return DB_TYPE_MYSQL;
+		case 'postgres':
+		case 'postgres7':
+		case 'pgsql':
+			return DB_TYPE_PGSQL;
+		case 'mssql':
+		case 'mssqlnative':
+		case 'odbc_mssql':
+			return DB_TYPE_MSSQL;
+		case 'oci8':
+			return DB_TYPE_ORACLE;
+		default:
+			return DB_TYPE_UNDEFINED;
+	}
+}
+
+/**
  * Checks if the database driver is MySQL
  * @return boolean true if mysql
  */
 function db_is_mysql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mysql':
-		case 'mysqli':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MYSQL == $g_db_functional_type );
 }
 
 /**
@@ -231,16 +253,8 @@ function db_is_mysql() {
  * @return boolean true if postgres
  */
 function db_is_pgsql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'postgres':
-		case 'postgres7':
-		case 'pgsql':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_PGSQL == $g_db_functional_type );
 }
 
 /**
@@ -248,16 +262,8 @@ function db_is_pgsql() {
  * @return boolean true if mssql
  */
 function db_is_mssql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mssql':
-		case 'mssqlnative':
-		case 'odbc_mssql':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MSSQL == $g_db_functional_type );
 }
 
 /**
@@ -265,9 +271,8 @@ function db_is_mssql() {
  * @return boolean true if oracle
  */
 function db_is_oracle() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	return ( $t_db_type == 'oci8' );
+	global $g_db_functional_type;
+	return( DB_TYPE_ORACLE == $g_db_functional_type );
 }
 
 /**
