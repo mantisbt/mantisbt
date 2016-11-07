@@ -96,12 +96,6 @@ if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
-if( $t_can_update_due_date ) {
-	require_js( 'jscalendar/calendar.js' );
-	require_js( 'jscalendar/lang/calendar-en.js' );
-	require_js( 'jscalendar/calendar-setup.js' );
-	require_css( 'calendar-blue.css' );
-}
 
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
@@ -246,10 +240,11 @@ layout_page_begin();
 			<?php echo lang_get( 'due_date' ) ?>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date"
-				class="datetime" size="20" maxlength="16"
-				<?php helper_get_tab_index() ?>
-				value="<?php echo $t_date_to_display ?>" />
+			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="20" maxlength="16"
+				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
+				data-picker-format="<?php echo config_get( 'calendar_js_date_format' ) ?>
+				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
+			<i class="fa fa-calendar fa-xlg"></i>';
 		</td>
 	</tr>
 
