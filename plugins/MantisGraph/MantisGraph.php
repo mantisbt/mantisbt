@@ -99,7 +99,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			echo '<script src="' . plugin_file( 'chart-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
 			echo '<script src="' . plugin_file( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
 		}
-		echo '<script type="text/css" src="' . plugin_file( "MantisGraph.js" ) . '"></script>';
+		echo '<script src="' . plugin_file( "MantisGraph.js" ) . '"></script>';
 	}
 
 	/**
