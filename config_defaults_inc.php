@@ -1137,15 +1137,15 @@ $g_normal_date_format = 'Y-m-d H:i';
 $g_complete_date_format = 'Y-m-d H:i T';
 
 /**
- * jscalendar date format string
- * go to http://www.php.net/manual/en/function.date.php
+ * calendar widget (datetimepicker) format string
+ * go to http://momentjs.com/docs/#/displaying/format/
  * for detailed instructions on date formatting
- * @global string $g_calendar_js_date_format
+ * @global string $g_calendar_date_format
  */
-$g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
+$g_calendar_js_date_format = 'Y-M-D H:m';
 
 /**
- * jscalendar date format string
+ * calendar widget (datetimepicker) format string
  * go to http://www.php.net/manual/en/function.date.php
  * for detailed instructions on date formatting
  * @global string $g_calendar_date_format

@@ -354,3 +354,20 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 		}
 	}
 }
+
+
+/**
+ * Maps current lang string to moment.js locale https://github.com/moment/moment/tree/develop/locale
+ * @return string
+ */
+
+function lang_get_current_datetime_locale() {
+	$t_lang = lang_get_current();
+
+	# Lookup $g_language_auto_map by value and then return the first key
+	$t_auto_map = config_get( 'language_auto_map' );
+	$t_entry = array_search( $t_lang, $t_auto_map );
+	$t_key_arr = explode( ',', $t_entry );
+
+	return $t_key_arr[0];
+}
