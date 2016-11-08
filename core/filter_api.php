@@ -2168,14 +2168,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_where_params[] = $c_search;
 
 			if( is_numeric( $t_search_term ) ) {
-				# PostgreSQL on 64-bit OS hack (see #14014)
-				if( PHP_INT_MAX > 0x7FFFFFFF && db_is_pgsql() ) {
-					$t_search_max = 0x7FFFFFFF;
-				} else {
-					$t_search_max = PHP_INT_MAX;
-				}
 				# Note: no need to test negative values, '-' sign has been removed
-				if( $t_search_term <= $t_search_max ) {
+				if( $t_search_term <= DB_MAX_INT ) {
 					$c_search_int = (int)$t_search_term;
 					$t_textsearch_where_clause .= ' OR {bug}.id = ' . db_param();
 					$t_textsearch_where_clause .= ' OR {bugnote}.id = ' . db_param();
