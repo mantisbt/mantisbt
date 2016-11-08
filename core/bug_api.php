@@ -2198,3 +2198,51 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	bugnote_clear_bug_cache( $p_bug_id );
 	return true;
 }
+
+/**
+ * Populate the caches related to the selected columns
+ * @param array $p_bugs	Array of BugData objects
+ * @param array $p_selected_columns	Array of columns to show
+ */
+function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
+	$t_bug_ids = array();
+	$t_user_ids = array();
+	$t_project_ids = array();
+	$t_category_ids = array();
+	foreach( $p_bugs as $t_bug ) {
+		$t_bug_ids[] = (int)$t_bug->id;
+		$t_user_ids[] = (int)$t_bug->handler_id;
+		$t_user_ids[] = (int)$t_bug->reporter_id;
+		$t_project_ids[] = (int)$t_bug->project_id;
+		$t_category_ids[] = (int)$t_bug->category_id;
+	}
+	$t_user_ids = array_unique( $t_user_ids );
+	$t_project_ids = array_unique( $t_project_ids );
+	$t_category_ids = array_unique( $t_category_ids );
+
+	foreach( $p_selected_columns as $t_column ) {
+
+		if( column_is_plugin_column( $t_column ) ) {
+			$plugin_objects = columns_get_plugin_columns();
+			$plugin_objects[$t_column]->cache( $p_bugs );
+			continue;
+		}
+
+		switch( $t_column ) {
+			case 'attachment_count':
+				file_bug_attachment_count_cache( $t_bug_ids );
+				break;
+			case 'handler_id':
+			case 'reporter_id':
+			case 'status':
+				user_cache_array_rows( $t_user_ids );
+				break;
+			case 'project_id':
+				project_cache_array_rows( $t_project_ids );
+				break;
+			case 'category_id':
+				category_cache_array_rows( $t_category_ids );
+				break;
+		}
+	}
+}

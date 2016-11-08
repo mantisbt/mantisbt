@@ -66,14 +66,11 @@ $t_icon_path = config_get( 'icon_path' );
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() > 0 ) {
 	category_get_all_rows( helper_get_current_project() );
-} else {
-	$t_categories = array();
-	foreach ( $t_rows as $t_row ) {
-		$t_categories[] = $t_row->category_id;
-	}
-	category_cache_array_rows( array_unique( $t_categories ) );
 }
+
 $g_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+
+bug_cache_columns_data( $t_rows, $g_columns );
 
 $t_col_count = count( $g_columns );
 
@@ -173,9 +170,6 @@ function write_bug_rows( array $p_rows ) {
 	global $g_columns, $g_filter;
 
 	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
-
-	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $p_rows, $g_columns );
 
 	# -- Loop over bug rows --
 
