@@ -891,6 +891,8 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
 	$t_separator = config_get( 'email_separator2' );
+	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
+	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
 
 	$t_subject = email_build_subject( $t_bugnote->bug_id );
 
@@ -912,11 +914,14 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
 
-		$t_message .= trim( email_format_bugnote( $t_bugnote, $t_project_id, $t_separator ) ) . "\n";
+		$t_show_time_tracking = access_has_bug_level( $t_time_tracking_access_threshold, $t_bugnote->bug_id, $t_user_id );
+		$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
+		$t_message .= trim( $t_formatted_note ) . "\n";
 		$t_message .= $t_separator . "\n";
 
 		# Files attached
-		if( count( $p_files ) > 0 )  {
+		if( count( $p_files ) > 0 &&
+			access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
 			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
 
 			foreach( $p_files as $t_file ) {
@@ -1525,11 +1530,12 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
  *
  * @param BugnoteData $p_bugnote The bugnote object.
  * @param integer $p_project_id  The project id
- * @param $p_date_format The date format to use.
- * @param $p_horizontal_separator The horizontal line separator to use.
+ * @param boolean $p_show_time_tracking true: show time tracking, false otherwise.
+ * @param string $p_horizontal_separator The horizontal line separator to use.
+ * @param string $p_date_format The date format to use.
  * @return string The formatted note.
  */
-function email_format_bugnote( $p_bugnote, $p_project_id, $p_horizontal_separator, $p_date_format = null ) {
+function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking, $p_horizontal_separator, $p_date_format = null ) {
 	$t_date_format = ( $p_date_format === null ) ? config_get( 'normal_date_format' ) : $p_date_format;
 
 	$t_last_modified = date( $t_date_format, $p_bugnote->last_modified );
@@ -1537,7 +1543,7 @@ function email_format_bugnote( $p_bugnote, $p_project_id, $p_horizontal_separato
 	$t_formatted_bugnote_id = bugnote_format_id( $p_bugnote->id );
 	$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $p_bugnote->id, false, false, true );
 
-	if( $p_bugnote->time_tracking > 0 ) {
+	if( $p_show_time_tracking && $p_bugnote->time_tracking > 0 ) {
 		$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $p_bugnote->time_tracking ) . "\n";
 	} else {
 		$t_time_tracking = '';
@@ -1674,8 +1680,9 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# format bugnotes
 	foreach( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
-		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'], $t_email_separator2,
-			$t_normal_date_format ) . "\n";
+		# Show time tracking is always true, since data has already been filtered out when creating the bug visible data.
+		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'],
+				/* show_time_tracking */ true,  $t_email_separator2, $t_normal_date_format ) . "\n";
 	}
 
 	# format history
