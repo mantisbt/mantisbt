@@ -49,11 +49,23 @@ class Auth_LDAP {
 	// The LDAP config parameters
 	private $config = null;
 
+	// True if there is more than one LDAP configuration
+	private $multipleLdapConfigs = false;
+
 
 
 	// Constructor
 	public function __construct($config) {
 		$this->config = $config;
+
+		// Temporary solution to find out if there are several LDAP
+		// server configurations. Ideally the authentication API would
+		// create one of more objects.
+		if ( !array_key_exists('server', $this->config)
+			&& array_key_exists('server', $this->config[0]) ) {
+
+			$this->multipleLdapConfigs = true;
+		}
 	}
 
 	/**
@@ -72,20 +84,18 @@ class Auth_LDAP {
 	 * @param string $p_password Password to use for LDAP bind.
 	 * @return resource|false
 	 */
-	function connect_bind( ) {
+	function connect_bind( $p_binddn, $p_password, $t_ldap_server,
+		$t_network_timeout, $t_protocol_version, $t_follow_referrals ) {
 		if( !extension_loaded( 'ldap' ) ) {
 			log_event( LOG_LDAP, 'Error: LDAP extension missing in php' );
 			trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
 		}
-
-		$t_ldap_server = $this->config['server'];
 
 		log_event( LOG_LDAP, 'Attempting connection to LDAP server/URI \'' . $t_ldap_server . '\'.' );
 		$t_ds = @ldap_connect( $t_ldap_server );
 		if( $t_ds !== false && $t_ds > 0 ) {
 			log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
 
-			$t_network_timeout = $this->config['network_timeout'];
 			if( $t_network_timeout > 0 ) {
 				log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
 				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
@@ -94,7 +104,6 @@ class Auth_LDAP {
 				}
 			}
 
-			$t_protocol_version = $this->config['protocol_version'];
 			if( $t_protocol_version > 0 ) {
 				log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
 				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
@@ -104,7 +113,6 @@ class Auth_LDAP {
 			}
 
 			# Set referrals flag.
-			$t_follow_referrals = ON == $this->config['follow_referrals'];
 			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
 			if( !$t_result ) {
 				$this->log_error( $t_ds );
@@ -112,9 +120,6 @@ class Auth_LDAP {
 
 			# If no Bind DN and Password is set, attempt to login as the configured
 			#  Bind DN.
-			$p_binddn = $this->config['bind_dn'];
-			$p_password = $this->config['bind_passwd'];
-
 			if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 				log_event( LOG_LDAP, 'Attempting bind to ldap server with username and password' );
 				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
@@ -196,12 +201,92 @@ class Auth_LDAP {
 			log_event( LOG_LDAP, 'Authenticating via LDAP simulation' );
 			$t_authenticated = $this->simulation_authenticate_by_username( $p_username, $p_password );
 		} else {
+
+			$t_authenticated = false;
+
+			if ($this->multipleLdapConfigs == true) {
+
+				foreach ($this->config as $config) {
+					$t_ldap_organization = $config['organization'];
+					$t_ldap_root_dn = $config['root_dn'];
+					$t_ldap_uid_field = $config['uid_field'];
+					$t_ldap_server = $config['server'];
+					$t_network_timeout = $config['network_timeout'];
+					$t_protocol_version = $config['protocol_version'];
+					$t_follow_referrals = ON == $config['follow_referrals'];
+					$p_binddn = $config['bind_dn'];
+					$p_bind_password = $config['bind_passwd'];
+
+					$t_authenticated = $this->lookup($t_ldap_organization, $t_ldap_root_dn,
+					$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+					$t_protocol_version, $t_follow_referrals,
+					$p_binddn, $p_bind_password, $p_username, $p_password);
+
+					if ($t_authenticated == true) {
+						break;
+					}
+				}
+			}
+			else {
+				$t_ldap_organization = $this->config['organization'];
+				$t_ldap_root_dn = $this->config['root_dn'];
+				$t_ldap_uid_field = $this->config['uid_field'];
+				$t_ldap_server = $this->config['server'];
+				$t_network_timeout = $this->config['network_timeout'];
+				$t_protocol_version = $this->config['protocol_version'];
+				$t_follow_referrals = ON == $this->config['follow_referrals'];
+				$p_binddn = $this->config['bind_dn'];
+				$p_bind_password = $this->config['bind_passwd'];
+
+				$t_authenticated = $this->lookup($t_ldap_organization, $t_ldap_root_dn,
+					$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+					$t_protocol_version, $t_follow_referrals,
+					$p_binddn, $p_bind_password, $p_username, $p_password);
+			}
+
+		}
+
+		# If user authenticated successfully then update the local DB with information
+		# from LDAP.  This will allow us to use the local data after login without
+		# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
+		if( $t_authenticated ) {
+			$t_user_id = user_get_id_by_name( $p_username );
+
+			if( false !== $t_user_id ) {
+
+				$t_fields_to_update = array('password' => md5( $p_password ));
+
+				if( ON == config_get( 'use_ldap_realname' ) ) {
+					$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
+				}
+
+				if( ON == config_get( 'use_ldap_email' ) ) {
+					$t_fields_to_update['email'] = $this->email_from_username( $p_username );
+				}
+
+				user_set_fields( $t_user_id, $t_fields_to_update );
+			}
+			log_event( LOG_LDAP, 'User \'' . $p_username . '\' authenticated' );
+		} else {
+			log_event( LOG_LDAP, 'Authentication failed' );
+		}
+
+		return $t_authenticated;
+	}
+
+
+	/**
+	 * Lookup on one LDAP server
+	 *
+	 */
+
+	function lookup($t_ldap_organization, $t_ldap_root_dn,
+				$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+				$t_protocol_version, $t_follow_referrals,
+				$p_binddn, $p_bind_password, $p_username, $p_password) {
+
 			$c_username = $this->escape_string( $p_username );
 
-			$t_ldap_organization = $this->config['organization'];
-			$t_ldap_root_dn = $this->config['root_dn'];
-
-			$t_ldap_uid_field = $this->config['uid_field'];
 			$t_search_filter = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
 			$t_search_attrs = array(
 				$t_ldap_uid_field,
@@ -210,7 +295,8 @@ class Auth_LDAP {
 
 			# Bind
 			log_event( LOG_LDAP, 'Binding to LDAP server' );
-			$t_ds = $this->connect_bind();
+			$t_ds = $this->connect_bind($p_binddn, $p_bind_password, $t_ldap_server,
+			$t_network_timeout, $t_protocol_version, $t_follow_referrals );
 			if( $t_ds === false ) {
 				return false;
 			}
@@ -242,7 +328,7 @@ class Auth_LDAP {
 					log_event( LOG_LDAP, 'Checking ' . $t_info[$i]['dn'] );
 
 					# Attempt to bind with the DN and password
-					if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+					if( @ldap_bind( $t_ds, $t_dn, $p_bind_password ) ) {
 						$t_authenticated = true;
 						break;
 					}
@@ -254,34 +340,8 @@ class Auth_LDAP {
 			log_event( LOG_LDAP, 'Unbinding from LDAP server' );
 			ldap_free_result( $t_sr );
 			ldap_unbind( $t_ds );
-		}
 
-		# If user authenticated successfully then update the local DB with information
-		# from LDAP.  This will allow us to use the local data after login without
-		# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
-		if( $t_authenticated ) {
-			$t_user_id = user_get_id_by_name( $p_username );
-
-			if( false !== $t_user_id ) {
-
-				$t_fields_to_update = array('password' => md5( $p_password ));
-
-				if( ON == config_get( 'use_ldap_realname' ) ) {
-					$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
-				}
-
-				if( ON == config_get( 'use_ldap_email' ) ) {
-					$t_fields_to_update['email'] = $this->email_from_username( $p_username );
-				}
-
-				user_set_fields( $t_user_id, $t_fields_to_update );
-			}
-			log_event( LOG_LDAP, 'User \'' . $p_username . '\' authenticated' );
-		} else {
-			log_event( LOG_LDAP, 'Authentication failed' );
-		}
-
-		return $t_authenticated;
+			return $t_authenticated;
 	}
 
 	/**
@@ -409,14 +469,21 @@ class Auth_LDAP {
 		$t_ldap_organization    = $this->config['organization'];
 		$t_ldap_root_dn         = $this->config['root_dn'];
 		$t_ldap_uid_field		= $this->config['uid_field'];
+		$t_ldap_server = $this->config['server'];
+		$t_network_timeout = $this->config['network_timeout'];
+		$t_protocol_version = $this->config['protocol_version'];
+		$t_follow_referrals = ON == $this->config['follow_referrals'];
+		$p_binddn = $this->config['bind_dn'];
+		$p_password = $this->config['bind_passwd'];
 
+		log_event( LOG_LDAP, 'Binding to LDAP server' );
 		$c_username = $this->escape_string( $p_username );
 
 		log_event( LOG_LDAP, 'Retrieving field \'' . $p_field . '\' for \'' . $p_username . '\'' );
 
 		# Bind
-		log_event( LOG_LDAP, 'Binding to LDAP server' );
-		$t_ds = @$this->connect_bind();
+		$t_ds = @$this->connect_bind($p_binddn, $p_password, $t_ldap_server,
+		$t_network_timeout, $t_protocol_version, $t_follow_referrals );
 		if( $t_ds === false ) {
 			$this->log_error( $t_ds );
 			return null;
