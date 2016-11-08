@@ -2233,17 +2233,13 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_stats = bug_get_bugnote_stats_array( $p_id_array_lastmod );
 	$t_rows = array();
-	$t_bug_ids = array();
 	foreach( $p_rows as $t_row ) {
-		$t_bug_ids[] = (int)$t_row['id'];
 		if( array_key_exists( $t_row['id'], $t_stats ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
 		} else {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
 		}
 	}
-	#cache the attachment count for bug list
-	file_bug_attachment_count_cache( $t_bug_ids );
 	return $t_rows;
 }
 

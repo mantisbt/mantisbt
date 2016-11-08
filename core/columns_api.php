@@ -205,26 +205,6 @@ function column_is_plugin_column( $p_column ) {
 }
 
 /**
- * Allow plugin columns to pre-cache data for a set of issues
- * rather than requiring repeated queries for each issue.
- * If the user columns parameter is provided, only plugin columns that are
- * contained in that column set will be cached.
- * @param array $p_bugs Array of BugData objects.
- * @param array $p_selected_columns Array of columns the user is visualizing
- * @return void
- */
-function columns_plugin_cache_issue_data( array $p_bugs, array $p_selected_columns = null ) {
-	$t_columns = columns_get_plugin_columns();
-	$t_all = ( null === $p_selected_columns );
-
-	foreach( $t_columns as $t_name => $t_column_object ) {
-		if( $t_all || in_array( $t_name, $p_selected_columns  ) ) {
-			$t_column_object->cache( $p_bugs );
-		}
-	}
-}
-
-/**
  * Get all accessible columns for the current project / current user.
  * @param integer $p_project_id A project identifier.
  * @return array array of columns
