@@ -890,13 +890,11 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
 
 	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
-	$t_user_id = auth_get_current_user_id();
-	$t_username = user_get_name( $t_user_id );
+	$t_separator = config_get( 'email_separator2' );
 
 	$t_subject = email_build_subject( $t_bugnote->bug_id );
 
 	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
-	$t_time_tracking_view_threshold = config_get( 'time_tracking_view_threshold' );
 
 	# send email to every recipient
 	foreach( $t_recipients as $t_user_id => $t_user_email ) {
@@ -912,35 +910,26 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 		# load (push) user language
 		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
-		$t_message = bugnote_get_text( $p_bugnote_id ) . "\n";
+		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
 
-		# Time tracking information
-		if( $t_bugnote->time_tracking != 0 ) {
-			if( access_has_bug_level( $t_time_tracking_view_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
-				$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
-				$t_message .= "\n" . lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm . "\n";
-			}
-		}
+		$t_message .= trim( email_format_bugnote( $t_bugnote, $t_project_id, $t_separator ) ) . "\n";
+		$t_message .= $t_separator . "\n";
 
 		# Files attached
 		if( count( $p_files ) > 0 )  {
-			$t_message .= "\n" . lang_get( 'bugnote_attached_files' ) . "\n";
+			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
 
 			foreach( $p_files as $t_file ) {
 				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
 					' ' . lang_get( 'bytes' ) . ")\n";
 			}
+
+			$t_message .= $t_separator . "\n";
 		}
 
-		# View State (if private), otherwise it is implicitly public.
-		if( $t_bugnote->view_state === VS_PRIVATE ) {
-			$t_message .= "\n" . lang_get( 'bugnote_view_state' ) . ': ' . lang_get( 'private' ) . "\n";
-		}
+		$t_contents = $t_message . "\n";
 
-		$t_complete_subject = sprintf( lang_get( 'bugnote_added_email_subject' ), '@' . $t_username, $t_subject );
-		$t_contents = $t_message . "\n" . string_get_bugnote_view_url_with_fqdn( $t_bugnote->bug_id, $p_bugnote_id );
-
-		email_store( $t_user_email, $t_complete_subject, $t_contents );
+		email_store( $t_user_email, $t_subject, $t_contents );
 
 		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
 			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
@@ -1532,6 +1521,50 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 }
 
 /**
+ * Generates a formatted note to be used in email notifications.
+ *
+ * @param BugnoteData $p_bugnote The bugnote object.
+ * @param integer $p_project_id  The project id
+ * @param $p_date_format The date format to use.
+ * @param $p_horizontal_separator The horizontal line separator to use.
+ * @return string The formatted note.
+ */
+function email_format_bugnote( $p_bugnote, $p_project_id, $p_horizontal_separator, $p_date_format = null ) {
+	$t_date_format = ( $p_date_format === null ) ? config_get( 'normal_date_format' ) : $p_date_format;
+
+	$t_last_modified = date( $t_date_format, $p_bugnote->last_modified );
+
+	$t_formatted_bugnote_id = bugnote_format_id( $p_bugnote->id );
+	$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $p_bugnote->id, false, false, true );
+
+	if( $p_bugnote->time_tracking > 0 ) {
+		$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $p_bugnote->time_tracking ) . "\n";
+	} else {
+		$t_time_tracking = '';
+	}
+
+	if( user_exists( $p_bugnote->reporter_id ) ) {
+		$t_access_level = access_get_project_level( $p_project_id, $p_bugnote->reporter_id );
+		$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
+	} else {
+		$t_access_level_string = '';
+	}
+
+	$t_private = ( $p_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
+
+	$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $p_bugnote->reporter_id ) .
+		$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
+		$t_time_tracking . ' ' . $t_bugnote_link;
+
+	$t_message  = $p_horizontal_separator . " \n";
+	$t_message .= $t_string . " \n";
+	$t_message .= $p_horizontal_separator . " \n";
+	$t_message .= $p_bugnote->note . " \n";
+
+	return $t_message;
+}
+
+/**
  * Build the bug info part of the message
  * @param array $p_visible_bug_data Bug data array to format.
  * @return string
@@ -1641,34 +1674,8 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# format bugnotes
 	foreach( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
-		$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
-
-		$t_formatted_bugnote_id = bugnote_format_id( $t_bugnote->id );
-		$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
-
-		if( $t_bugnote->time_tracking > 0 ) {
-			$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
-		} else {
-			$t_time_tracking = '';
-		}
-
-		if( user_exists( $t_bugnote->reporter_id ) ) {
-			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'], $t_bugnote->reporter_id );
-			$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
-		} else {
-			$t_access_level_string = '';
-		}
-
-		$t_private = ( $t_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
-
-		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) .
-			$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
-			$t_time_tracking . ' ' . $t_bugnote_link;
-
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_string . " \n";
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_bugnote->note . " \n\n";
+		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'], $t_email_separator2,
+			$t_normal_date_format ) . "\n";
 	}
 
 	# format history
