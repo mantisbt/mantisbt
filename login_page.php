@@ -335,20 +335,24 @@ if( $t_show_warnings && count( $t_warnings ) > 0 ) {
 ?>
 </div>
 
-<div class="toolbar center">
-
 <?php
-if( $t_show_anonymous_login ) {
-	echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
-}
+if( $t_show_anonymous_login || $t_show_signup ) {
+	echo '<div class="toolbar center">';
 
-if( $t_show_signup ) {
-	echo '<a class="back-to-login-link pull-left" href="signup_page.php">', lang_get( 'signup_link' ), '</a>';
+	if( $t_show_anonymous_login ) {
+		echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
+	}
+
+	if( $t_show_signup ) {
+		echo '<a class="back-to-login-link pull-left" href="signup_page.php">', lang_get( 'signup_link' ), '</a>';
+	}
+
+	echo '<div class="clearfix"></div>';
+	echo '</div>';
 }
 ?>
-<div class="clearfix"></div>
-</div>
-</div>
+
+		</div>
 </div>
 </div>
 </div>
