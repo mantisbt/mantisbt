@@ -300,6 +300,10 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				</div>
 			<?php } ?>
 
+			<?php if( $f_reauthenticate ) {
+				echo '<input id="reauthenticate" type="hidden" name="reauthenticate" value="1" />';
+			} ?>
+
 			<div class="space-10"></div>
 
 			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
