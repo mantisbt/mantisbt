@@ -45,7 +45,7 @@ class Avatar
      * plugins that can integrate with a variety of services like gravatar.com,
      * LDAP, Social Identities, etc.
      *
-     * If logged in user doesn't have access to view avatars or not avatar is found,
+     * If logged in user doesn't have access to view avatars or no avatar is found,
      * then a default avatar will be used.
      *
      * Note that the provided user id may no longer has a corresponding user in the
@@ -61,7 +61,7 @@ class Avatar
         $t_avatar = null;
 
         if ( $t_enabled ) {
-			$t_user_exists = user_exists( $p_user_id ); 
+			$t_user_exists = user_exists( $p_user_id );
             if ( $t_user_exists &&
                  access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
                 $t_avatar = event_signal(
