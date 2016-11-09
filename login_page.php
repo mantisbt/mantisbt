@@ -73,7 +73,26 @@ if( config_get_global( 'email_login_enabled' ) ) {
 	$t_username_label = lang_get( 'username' );
 }
 
-$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
+$t_session_validation = !$f_reauthenticate && ( ON == config_get_global( 'session_validation' ) );
+
+$t_show_signup = !$f_reauthenticate &&
+	( ON == config_get_global( 'allow_signup' ) ) &&
+	( LDAP != config_get_global( 'login_method' ) ) &&
+	( ON == config_get( 'enable_email_notification' ) );
+
+$t_show_anonymous_login = !$f_reauthenticate && ( ON == config_get( 'allow_anonymous_login' ) );
+
+$t_show_reset_password = !$f_reauthenticate &&
+	( LDAP != config_get_global( 'login_method' ) ) &&
+	( ON == config_get( 'lost_password_feature' ) ) &&
+	( ON == config_get( 'send_reset_password' ) ) &&
+	( ON == config_get( 'enable_email_notification' ) );
+
+$t_show_remember_me = !$f_reauthenticate && ( ON == config_get( 'allow_permanent_cookie' ) );
+
+$t_show_warnings = !$f_reauthenticate;
+
+$t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_get( 'login_title' );
 
 # If user is already authenticated and not anonymous
 if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthenticate) {
@@ -138,19 +157,22 @@ layout_login_page_begin();
 		</a>
 		<div class="space-24 hidden-480"></div>
 <?php
-if( $f_error || $f_cookie_error ) {
+if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 	echo '<div class="alert alert-danger">';
 
-	# Display short greeting message
-	# echo lang_get( 'login_page_info' ) . '<br />';
+	if( $f_reauthenticate ) {
+		echo '<p>' . lang_get( 'reauthenticate_message' ) . '</p>';
+	}
 
 	# Only echo error message if error variable is set
 	if( $f_error ) {
 		echo '<p>' . lang_get( 'login_error' ) . '</p>';
 	}
+
 	if( $f_cookie_error ) {
 		echo '<p>' . lang_get( 'login_cookies_disabled' ) . '</p>';
 	}
+
 	echo '</div>';
 }
 
@@ -225,7 +247,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
 					<i class="ace-icon fa fa-sign-in"></i>
-					<?php echo lang_get( 'login_title' ) ?>
+					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
 <!-- Login Form BEGIN -->
@@ -261,7 +283,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				</span>
 			</label>
 
-			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
+			<?php if( $t_show_remember_me ) { ?>
 				<div class="clearfix">
 					<label for="remember-login" class="inline">
 						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?> />
@@ -284,10 +306,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			<div class="clearfix"></div>
 			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!
-			if( ( LDAP != config_get_global( 'login_method' ) ) &&
-				( ON == config_get( 'lost_password_feature' ) ) &&
-				( ON == config_get( 'send_reset_password' ) ) &&
-				( ON == config_get( 'enable_email_notification' ) ) ) {
+			if( $t_show_reset_password ) {
 				echo '<a class="pull-right" href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a>';
 			}
 			?>
@@ -301,7 +320,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 # Do some checks to warn administrators of possible security holes.
 #
 
-if( count( $t_warnings ) > 0 ) {
+if( $t_show_warnings && count( $t_warnings ) > 0 ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="alert alert-warning">';
 	foreach( $t_warnings AS $t_warning ) {
@@ -315,14 +334,11 @@ if( count( $t_warnings ) > 0 ) {
 <div class="toolbar center">
 
 <?php
-if( ON == config_get( 'allow_anonymous_login' ) ) {
+if( $t_show_anonymous_login ) {
 	echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
 }
 
-if( ( ON == config_get_global( 'allow_signup' ) ) &&
-	( LDAP != config_get_global( 'login_method' ) ) &&
-	( ON == config_get( 'enable_email_notification' ) )
-) {
+if( $t_show_signup ) {
 	echo '<a class="back-to-login-link pull-left" href="signup_page.php">', lang_get( 'signup_link' ), '</a>';
 }
 ?>
