@@ -257,7 +257,7 @@ class Auth_LDAP {
 				$t_fields_to_update = array('password' => md5( $p_password ));
 
 				if( ON == config_get( 'use_ldap_realname' ) ) {
-					$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
+					$t_fields_to_update['realname'] = $this->realname( $t_user_id );
 				}
 
 				if( ON == config_get( 'use_ldap_email' ) ) {
@@ -552,66 +552,62 @@ class Auth_LDAP {
 	}
 
 
+	/**
+	 * Gets a user real name given their user name.
+	 *
+	 * @param string $p_username The user's name.
+	 * @return string The user's real name.
+	 */
+	function realname_from_username( $p_username ) {
+		$config = config_get( 'ldap' );
+
+		if( $this->simulation_is_enabled() ) {
+			return $this->simulation_realname_from_username( $p_username );
+		}
+
+		$t_ldap_realname_field	= $config['realname_field'];
+		$t_realname = $this->get_field_from_username( $p_username, $t_ldap_realname_field );
+		if( $t_realname === null ) {
+			return '';
+		}
+
+		return $t_realname;
+	}
+
+
+	/**
+	 * Gets a user's real name (common name) given the id.
+	 *
+	 * @param integer $p_user_id The user id.
+	 * @return string real name.
+	 */
+	function realname( $p_user_id ) {
+		$t_username = user_get_field( $p_user_id, 'username' );
+		return $this->realname_from_username( $t_username );
+	}
+
+
+	/**
+	 * returns an email address from LDAP, given a userid
+	 * @param integer $p_user_id A valid user identifier.
+	 * @return string
+	 */
+	function email( $p_user_id ) {
+		global $g_cache_ldap_email;
+
+		if( isset( $g_cache_ldap_email[(int)$p_user_id] ) ) {
+			return $g_cache_ldap_email[(int)$p_user_id];
+		}
+
+		$t_username = user_get_field( $p_user_id, 'username' );
+		$t_email = $this->email_from_username( $t_username );
+
+		$g_cache_ldap_email[(int)$p_user_id] = $t_email;
+		return $t_email;
+	}
+
 }
 
 $authLdap = new Auth_LDAP( config_get( 'ldap' ) );
 
 $g_cache_ldap_email = array();
-
-
-/**
- * returns an email address from LDAP, given a userid
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function ldap_email( $p_user_id ) {
-	global $g_cache_ldap_email;
-	global $authLdap;
-
-	if( isset( $g_cache_ldap_email[(int)$p_user_id] ) ) {
-		return $g_cache_ldap_email[(int)$p_user_id];
-	}
-
-	$t_username = user_get_field( $p_user_id, 'username' );
-	$t_email = $authLdap->email_from_username( $t_username );
-
-	$g_cache_ldap_email[(int)$p_user_id] = $t_email;
-	return $t_email;
-}
-
-
-/**
- * Gets a user's real name (common name) given the id.
- *
- * @param integer $p_user_id The user id.
- * @return string real name.
- */
-function ldap_realname( $p_user_id ) {
-	$t_username = user_get_field( $p_user_id, 'username' );
-	return ldap_realname_from_username( $t_username );
-}
-
-/**
- * Gets a user real name given their user name.
- *
- * @param string $p_username The user's name.
- * @return string The user's real name.
- */
-function ldap_realname_from_username( $p_username ) {
-	global $authLdap;
-
-	$config = config_get( 'ldap' );
-
-	if( $authLdap->simulation_is_enabled() ) {
-		return $authLdap->simulation_realname_from_username( $p_username );
-	}
-
-	$t_ldap_realname_field	= $config['realname_field'];
-	$t_realname = $authLdap->get_field_from_username( $p_username, $t_ldap_realname_field );
-	if( $t_realname === null ) {
-		return '';
-	}
-
-	return $t_realname;
-}
-

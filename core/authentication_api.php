@@ -34,6 +34,7 @@
  * @uses helper_api.php
  * @uses html_api.php
  * @uses lang_api.php
+ * @uses layout_api.php
  * @uses ldap_api.php
  * @uses print_api.php
  * @uses session_api.php
@@ -54,6 +55,7 @@ require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'layout_api.php' );
 require_api( 'ldap_api.php' );
 require_api( 'print_api.php' );
 require_api( 'session_api.php' );
@@ -269,7 +271,7 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 		$t_login_method = config_get( 'login_method' );
 		if (is_array($t_login_method)) {
 			foreach($t_login_method as $method) {
-				$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+				$t_user_id = auth_auto_create_user( $p_username, $p_password, $tmethod );
 				if ($t_user_id != false) {
 					break; // We have now an ID and can stop the foreach
 				}
@@ -408,7 +410,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 		$t_login_method = config_get( 'login_method' );
 		if (is_array($t_login_method)) {
 			foreach($t_login_method as $method) {
-				$t_user_id = auth_auto_create_user( $p_username, $p_password, $t_login_method );
+				$t_user_id = auth_auto_create_user( $p_username, $p_password, $method );
 				if ($t_user_id != false) {
 					break; // We have now an ID and can stop the foreach
 				}
@@ -531,7 +533,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 				}
 			}
 			else {
-				$authenticated = local_password_match( $p_user_id, $p_test_password );
+				$authenticated = local_password_match( $p_user_id, $p_test_password, $method);
 				if ($authenticated == true) {
 					return true;
 				}
@@ -544,7 +546,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 		return $authLdap->authenticate( $p_user_id, $p_test_password );
 	}
 
-	return local_password_match( $p_user_id, $p_test_password );
+	return local_password_match( $p_user_id, $p_test_password, $t_configured_login_method );
 }
 
 
@@ -557,7 +559,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @access public
  */
 
-function local_password_match( $p_user_id, $p_test_password ) {
+function local_password_match( $p_user_id, $p_test_password, $t_configured_login_method ) {
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_login_methods = array(
 		MD5,

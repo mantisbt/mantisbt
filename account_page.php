@@ -224,11 +224,12 @@ print_account_menu( 'account_page.php' );
 				</td>
 			</tr>
 			<tr><?php
+				global $authLdap;
 				if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
 					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
 					echo '<td>';
-					echo string_display_line( ldap_realname_from_username( $u_username ) );
+					echo string_display_line( $authLdap->realname_from_username( $u_username ) );
 					echo '</td>';
 				} else {
 					# Without LDAP
