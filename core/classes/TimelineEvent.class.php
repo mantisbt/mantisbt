@@ -80,9 +80,9 @@ class TimelineEvent {
 
 		return sprintf(
 			'<div class="entry"><div class="avatar"><a href="%s"><img class="avatar" src="%s" alt="%s" width="32" height="32" /></a></div><div class="timestamp">%s</div>',
-			$t_avatar->link,
-			$t_avatar->image,
-			$t_avatar->text,
+			htmlspecialchars( $t_avatar->link ),
+			htmlspecialchars( $t_avatar->image ),
+			htmlspecialchars( $t_avatar->text ),
 			$this->format_timestamp( $this->timestamp )
 		);
 	}
