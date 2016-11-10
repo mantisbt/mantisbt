@@ -100,7 +100,7 @@ class MantisMarkdownPlugin extends MantisPlugin {
 	/**
 	 * Markdown processing.
 	 *
-	 * Performs markdown and bug links processing
+	 * Performs markdown and mantis current formatting process
 	 *
 	 * @param string  $p_event     Event name.
 	 * @param string  $p_string    Raw text to process.
@@ -112,22 +112,36 @@ class MantisMarkdownPlugin extends MantisPlugin {
 		
 		$t_string = $p_string;	
 		
-		# Filter any possible XSS attacks
-		$t_string = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml|input)[^>]*+>#i', '', $t_string);
-		
+		# Keep mantis current formatting behavior 
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_html_specialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string, $p_multiline );
+
 		# Process bug links
 		$t_string = string_process_bug_link( $t_string );
 		$t_string = string_process_bugnote_link( $t_string );
-		
+
+		# Process mention
 		$t_string = mention_format_text( $t_string, true );
 
-		# Markdown processing
+		# Process markdown with multiline enabled (description, notes, etc)
 		if ( $p_multiline ) {
-			$t_string = MantisMarkdown::convert_text( $t_string );
-		} else {
-			$t_string = MantisMarkdown::convert_line( $t_string );
-		}
+			# restore and allows img tag to display
+			$t_string = preg_replace_callback( "/&quot;|'/",
+				function ( ) {
+					return "";
+				},
+				str_replace('/">', '">', preg_replace( '#&lt;img.+?src=(.*).*?&gt;#i', '<img src="$1">', $t_string ))
+			);
 
+			# We need to enabled quote conversion
+			# "> quote or >quote" is part of an html tag
+			# Make sure to replaced the restored tags with ">"
+			$t_string = str_replace( "&gt;", ">", $t_string );
+
+			$t_string = MantisMarkdown::convert_text( $t_string );
+		}
+			
 		return $t_string;
 	}
 
