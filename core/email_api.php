@@ -893,10 +893,12 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 	$t_separator = config_get( 'email_separator2' );
 	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
 	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
+	$t_message_id = 'email_notification_title_for_action_bugnote_submitted';
 
 	$t_subject = email_build_subject( $t_bugnote->bug_id );
 
 	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
+	$t_recipients_verbose = array();
 
 	# send email to every recipient
 	foreach( $t_recipients as $t_user_id => $t_user_email ) {
@@ -906,8 +908,14 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 			continue;
 		}
 
+		# Load this here per user to allow overriding this per user, or even per user per project
+		if( config_get( 'email_notifications_verbose', /* default */ null, $t_user_id, $t_project_id ) == ON ) {
+			$t_recipients_verbose[$t_user_id] = $t_user_email;
+			continue;
+		}
+
 		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.',
-			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted', $t_user_id, $t_user_email );
+			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', $t_message_id, $t_user_id, $t_user_email );
 
 		# load (push) user language
 		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
@@ -941,6 +949,13 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 		lang_pop();
 	}
+
+	# Send emails out for users that select verbose notifications
+	email_generic_to_recipients(
+		$t_bugnote->bug_id,
+		'bugnote',
+		$t_recipients_verbose,
+		$t_message_id );
 }
 
 /**
