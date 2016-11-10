@@ -639,6 +639,10 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
  * @return void
  */
 function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
+	if( empty( $p_recipients ) ) {
+		return;
+	}
+
 	if( OFF == config_get( 'enable_email_notification' ) ) {
 		return;
 	}
