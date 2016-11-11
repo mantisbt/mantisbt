@@ -37,9 +37,6 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
 class Auth_LDAP {
-	//@param resource $p_ds LDAP resource identifier returned by ldap_connect.
-	public $p_ds = null;
-
 	// LDAP data source
 	public $t_ds = null;
 
@@ -70,11 +67,11 @@ class Auth_LDAP {
 
 	/**
 	 * Logs the most recent LDAP error
-	 * @param resource $p_ds LDAP resource identifier returned by ldap_connect.
+	 * @param resource $this->p_ds LDAP resource identifier returned by ldap_connect.
 	 * @return void
 	 */
-	function log_error( $p_ds ) {
-		log_event( LOG_LDAP, 'ERROR #' . ldap_errno( $p_ds ) . ': ' . ldap_error( $p_ds ) );
+	function log_error() {
+		log_event( LOG_LDAP, 'ERROR #' . ldap_errno( $this->t_ds ) . ': ' . ldap_error( $this->t_ds ) );
 	}
 
 
@@ -92,45 +89,45 @@ class Auth_LDAP {
 		}
 
 		log_event( LOG_LDAP, 'Attempting connection to LDAP server/URI \'' . $t_ldap_server . '\'.' );
-		$t_ds = @ldap_connect( $t_ldap_server );
-		if( $t_ds !== false && $t_ds > 0 ) {
+		$this->t_ds = @ldap_connect( $t_ldap_server );
+		if( $this->t_ds !== false && $this->t_ds > 0 ) {
 			log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
 
 			if( $t_network_timeout > 0 ) {
 				log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
-				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
+				$t_result = @ldap_set_option( $this->t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
 				if( !$t_result ) {
-					$this->log_error( $t_ds );
+					$this->log_error(  );
 				}
 			}
 
 			if( $t_protocol_version > 0 ) {
 				log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
-				$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
+				$t_result = @ldap_set_option( $this->t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
 				if( !$t_result ) {
-					$this->log_error( $t_ds );
+					$this->log_error(  );
 				}
 			}
 
 			# Set referrals flag.
-			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
+			$t_result = @ldap_set_option( $this->t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
 			if( !$t_result ) {
-				$this->log_error( $t_ds );
+				$this->log_error(  );
 			}
 
 			# If no Bind DN and Password is set, attempt to login as the configured
 			#  Bind DN.
 			if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 				log_event( LOG_LDAP, 'Attempting bind to ldap server with username and password' );
-				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
+				$t_br = @ldap_bind( $this->t_ds, $p_binddn, $p_password );
 			} else {
 				# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
 				log_event( LOG_LDAP, 'Attempting anonymous bind to ldap server' );
-				$t_br = @ldap_bind( $t_ds );
+				$t_br = @ldap_bind( $this->t_ds );
 			}
 
 			if( !$t_br ) {
-				$this->log_error( $t_ds );
+				$this->log_error(  );
 				log_event( LOG_LDAP, 'Bind to ldap server failed' );
 				trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 			} else {
@@ -141,14 +138,12 @@ class Auth_LDAP {
 			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 		}
 
-		if( $t_ds === false ) {
-			$authLdap->log_error( $t_ds );
+		if( $this->t_ds === false ) {
+			$authLdap->log_error(  );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
 
-		$this->t_ds = $t_ds;
-
-		return $t_ds;
+		return $this->t_ds;
 	}
 
 
@@ -294,28 +289,28 @@ class Auth_LDAP {
 			);
 
 			# Bind
-			log_event( LOG_LDAP, 'Binding to LDAP server' );
-			$t_ds = $this->connect_bind($p_binddn, $p_bind_password, $t_ldap_server,
+			log_event( LOG_LDAP, 'Binding to LDAP server:' . $t_ldap_server );
+			$this->t_ds = $this->connect_bind($p_binddn, $p_bind_password, $t_ldap_server,
 			$t_network_timeout, $t_protocol_version, $t_follow_referrals );
-			if( $t_ds === false ) {
+			if( $this->t_ds === false ) {
 				return false;
 			}
 
 			# Search for the user id
 			log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
-			$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
+			$t_sr = ldap_search( $this->t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 			if( $t_sr === false ) {
-				$this->log_error( $t_ds );
-				ldap_unbind( $t_ds );
+				$this->log_error(  );
+				ldap_unbind( $this->t_ds );
 				log_event( LOG_LDAP, 'ldap search failed' );
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 			}
 
-			$t_info = @ldap_get_entries( $t_ds, $t_sr );
+			$t_info = @ldap_get_entries( $this->t_ds, $t_sr );
 			if( $t_info === false ) {
-				$this->log_error( $t_ds );
+				$this->log_error( );
 				ldap_free_result( $t_sr );
-				ldap_unbind( $t_ds );
+				ldap_unbind( $this->t_ds );
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 			}
 
@@ -328,7 +323,7 @@ class Auth_LDAP {
 					log_event( LOG_LDAP, 'Checking ' . $t_info[$i]['dn'] );
 
 					# Attempt to bind with the DN and password
-					if( @ldap_bind( $t_ds, $t_dn, $p_bind_password ) ) {
+					if( @ldap_bind( $this->t_ds, $t_dn, $p_password ) ) {
 						$t_authenticated = true;
 						break;
 					}
@@ -337,9 +332,9 @@ class Auth_LDAP {
 				log_event( LOG_LDAP, 'No matching entries found' );
 			}
 
-			log_event( LOG_LDAP, 'Unbinding from LDAP server' );
-			ldap_free_result( $t_sr );
-			ldap_unbind( $t_ds );
+			//log_event( LOG_LDAP, 'Unbinding from LDAP server' );
+			//ldap_free_result( $t_sr );
+			//ldap_unbind( $this->t_ds );
 
 			return $t_authenticated;
 	}
@@ -466,23 +461,72 @@ class Auth_LDAP {
 	 * @return string The field value or null if not found.
 	 */
 	function get_field_from_username( $p_username, $p_field ) {
-		$t_ldap_organization    = $this->config['organization'];
-		$t_ldap_root_dn         = $this->config['root_dn'];
-		$t_ldap_uid_field		= $this->config['uid_field'];
-		$t_ldap_server = $this->config['server'];
-		$t_network_timeout = $this->config['network_timeout'];
-		$t_protocol_version = $this->config['protocol_version'];
-		$t_follow_referrals = ON == $this->config['follow_referrals'];
-		$p_binddn = $this->config['bind_dn'];
-		$p_password = $this->config['bind_passwd'];
+		$t_fieldValue = null;
 
-		log_event( LOG_LDAP, 'Binding to LDAP server' );
+		if ($this->multipleLdapConfigs == true) {
+
+			foreach ($this->config as $config) {
+				$t_ldap_organization    = $config['organization'];
+				$t_ldap_root_dn         = $config['root_dn'];
+				$t_ldap_uid_field		= $config['uid_field'];
+				$t_ldap_server = $config['server'];
+				$t_network_timeout = $config['network_timeout'];
+				$t_protocol_version = $config['protocol_version'];
+				$t_follow_referrals = ON == $config['follow_referrals'];
+				$p_binddn = $config['bind_dn'];
+				$p_bind_password = $config['bind_passwd'];
+
+				$t_fieldValue = $this->search($t_ldap_organization, $t_ldap_root_dn,
+				$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+				$t_protocol_version, $t_follow_referrals,
+				$p_binddn, $p_bind_password, $p_username, $p_field);
+
+				if ($t_fieldValue !== null) {
+					break;
+				}
+			}
+		}
+		else {
+
+			$t_ldap_organization    = $this->config['organization'];
+			$t_ldap_root_dn         = $this->config['root_dn'];
+			$t_ldap_uid_field		= $this->config['uid_field'];
+			$t_ldap_server = $this->config['server'];
+			$t_network_timeout = $this->config['network_timeout'];
+			$t_protocol_version = $this->config['protocol_version'];
+			$t_follow_referrals = ON == $this->config['follow_referrals'];
+			$p_binddn = $this->config['bind_dn'];
+			$p_bind_password = $this->config['bind_passwd'];
+
+
+			$t_fieldValue = $this->search($t_ldap_organization, $t_ldap_root_dn,
+				$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+				$t_protocol_version, $t_follow_referrals,
+				$p_binddn, $p_bind_password, $p_username, $p_field);
+
+		}
+
+		return $t_fieldValue;
+	}
+
+
+	/**
+	 * Search for a value in one LDAP server
+	 */
+
+	 private function search($t_ldap_organization, $t_ldap_root_dn,
+				$t_ldap_uid_field, $t_ldap_server, $t_network_timeout,
+				$t_protocol_version, $t_follow_referrals,
+				$p_binddn, $p_bind_password, $p_username, $p_field) {
+
+
+		log_event( LOG_LDAP, 'Binding to LDAP server' . $t_ldap_server);
 		$c_username = $this->escape_string( $p_username );
 
 		log_event( LOG_LDAP, 'Retrieving field \'' . $p_field . '\' for \'' . $p_username . '\'' );
 
 		# Bind
-		$t_ds = @$this->connect_bind($p_binddn, $p_password, $t_ldap_server,
+		$t_ds = @$this->connect_bind($p_binddn, $p_bind_password, $t_ldap_server,
 		$t_network_timeout, $t_protocol_version, $t_follow_referrals );
 		if( $t_ds === false ) {
 			$this->log_error( $t_ds );
@@ -533,6 +577,7 @@ class Auth_LDAP {
 		return $t_value;
 	}
 
+
 	/**
 	 * Return an email address from LDAP, given a username
 	 * @param string $p_username The username of a user to lookup.
@@ -559,13 +604,19 @@ class Auth_LDAP {
 	 * @return string The user's real name.
 	 */
 	function realname_from_username( $p_username ) {
-		$config = config_get( 'ldap' );
+		$t_ldap_realname_field	= 'cn';
 
 		if( $this->simulation_is_enabled() ) {
 			return $this->simulation_realname_from_username( $p_username );
 		}
 
-		$t_ldap_realname_field	= $config['realname_field'];
+		if ( array_key_exists('realname_field', $this->config) ) {
+			$t_ldap_realname_field	= $this->config['realname_field'];
+		}
+		elseif ( array_key_exists('realname_field', $this->config[0]) ) {
+			$t_ldap_realname_field	= $this->config[0]['realname_field'];
+		}
+
 		$t_realname = $this->get_field_from_username( $p_username, $t_ldap_realname_field );
 		if( $t_realname === null ) {
 			return '';

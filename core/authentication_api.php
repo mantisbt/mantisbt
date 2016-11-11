@@ -195,6 +195,7 @@ function auth_prepare_password( $p_password ) {
  *
  * @param string  $p_username   A prepared username.
  * @param string  $p_password   A prepared password.
+ * @param string  $t_login_method The login method
  * @return int|boolean user id or false in case of failure.
  * @access private
  */
@@ -271,7 +272,7 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 		$t_login_method = config_get( 'login_method' );
 		if (is_array($t_login_method)) {
 			foreach($t_login_method as $method) {
-				$t_user_id = auth_auto_create_user( $p_username, $p_password, $tmethod );
+				$t_user_id = auth_auto_create_user( $p_username, $p_password, $method );
 				if ($t_user_id != false) {
 					break; // We have now an ID and can stop the foreach
 				}

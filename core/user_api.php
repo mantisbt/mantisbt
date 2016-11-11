@@ -923,7 +923,11 @@ function user_get_email( $p_user_id ) {
 	global $authLdap;
 	$t_email = '';
 
-	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
+	$t_login_method = config_get( 'login_method' );
+	if (is_array($t_login_method) && array_key_exists(LDAP, $t_login_method)) {
+		$t_email = $authLdap->email( $p_user_id );
+	}
+	elseif( LDAP == $t_login_method && ON == config_get( 'use_ldap_email' ) ) {
 		$t_email = $authLdap->email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
