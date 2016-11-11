@@ -3343,3 +3343,17 @@ function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_t
 		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_array
 	);
 }
+
+/**
+ * Returns true if the filter id is a named stored filter, which can be managed and edited.
+ * Returns false if it's a temporary filter, or if the filter id does not exists
+ * @param integer $p_filter_id
+ * @return boolean
+ */
+function filter_is_named_filter( $p_filter_id ) {
+	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	if( $t_filter_row ) {
+		return !empty( $t_filter_row['name'] ) && $t_filter_row['project_id'] >= 0;
+	}
+	return false;
+}
