@@ -2392,7 +2392,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	};
 
 
-	$t_filter_cols = config_get( 'filter_custom_fields_per_row' );
+	$t_filter_cols = max( 8, config_get( 'filter_custom_fields_per_row' ) );
 	$t_show_inputs = $p_static;
 
 	#
@@ -2400,11 +2400,68 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	# Use different sections to keep some separation among each group of fields
 	# When a section starts, its fields start in a new row.
 
-	# Section: main filter fields
+	$t_row1 = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
-	$t_section_main = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ),
+			filter_form_get_input( $t_filter, 'reporter_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'reporter_id_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ),
+			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'handler_id_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ),
+			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'user_monitor_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ),
+			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'note_user_id_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ),
+			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_priority_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ),
+			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_severity_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'view_state_filter', lang_get( 'view_status_label' ) ),
+			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'view_state_filter_target' /* content id */
+			));
+	$t_row1->add_item( new TableFieldsItem(
+			$get_field_header( 'sticky_issues_filter', lang_get( 'sticky_label' ) ),
+			filter_form_get_input( $t_filter, 'sticky_issues', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'sticky_issues_filter_target' /* content id */
+			));
 
-	$t_section_main->add_item( new TableFieldsItem(
+	$t_row2 = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+
+	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'show_status_filter', lang_get( 'status_label' ) ),
 			filter_form_get_input( $t_filter, 'show_status', $t_show_inputs ),
 			1 /* colspan */,
@@ -2412,7 +2469,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			'show_status_filter_target' /* content id */
 			));
 	if( 'simple' == $t_view_type ) {
-		$t_section_main->add_item( new TableFieldsItem(
+		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'hide_status_filter', lang_get( 'hide_status_label' ) ),
 				filter_form_get_input( $t_filter, 'hide_status', $t_show_inputs ),
 				1 /* colspan */,
@@ -2420,172 +2477,36 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				'hide_status_filter_target' /* content id */
 				));
 	}
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
-			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_category_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'reporter_id_filter', lang_get( 'reporter_label' ) ),
-			filter_form_get_input( $t_filter, 'reporter_id', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'reporter_id_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'handler_id_filter', lang_get( 'assigned_to_label' ) ),
-			filter_form_get_input( $t_filter, 'handler_id', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'handler_id_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_priority_filter', lang_get( 'priority_label' ) ),
-			filter_form_get_input( $t_filter, 'show_priority', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_priority_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'show_severity_filter', lang_get( 'severity_label' ) ),
-			filter_form_get_input( $t_filter, 'show_severity', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_severity_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
+	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ),
 			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_resolution_filter_target' /* content id */
 			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'note_user_id_filter', lang_get( 'note_user_id_label' ) ),
-			filter_form_get_input( $t_filter, 'note_user_id', $t_show_inputs ),
+	$t_row2->add_item( new TableFieldsItem(
+			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
+			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
-			'note_user_id_filter_target' /* content id */
+			'show_category_filter_target' /* content id */
 			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'user_monitor_filter', lang_get( 'monitored_by_label' ) ),
-			filter_form_get_input( $t_filter, 'user_monitor', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'user_monitor_filter_target' /* content id */
-			));
-	if( $t_show_product_version ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_version_filter', lang_get( 'product_version_label' ) ),
-				filter_form_get_input( $t_filter, 'show_version', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_version_filter_target' /* content id */
-				));
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_fixed_in_version_filter', lang_get( 'fixed_in_version_label' ) ),
-				filter_form_get_input( $t_filter, 'show_fixed_in_version', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_fixed_in_version_filter_target' /* content id */
-				));
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_target_version_filter', lang_get( 'target_version_label' ) ),
-				filter_form_get_input( $t_filter, 'show_target_version', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_target_version_filter_target' /* content id */
-				));
-	}
-	if( ON == config_get( 'enable_profiles' ) ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ),
-				filter_form_get_input( $t_filter, 'show_profile', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_profile_filter_target' /* content id */
-				));
-	}
-	if( $t_show_build ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ),
-				filter_form_get_input( $t_filter, 'show_build', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'show_build_filter_target' /* content id */
-				));
-	}
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'view_state_filter', lang_get( 'view_status_label' ) ),
-			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'view_state_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'sticky_issues_filter', lang_get( 'sticky_label' ) ),
-			filter_form_get_input( $t_filter, 'sticky_issues', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'sticky_issues_filter_target' /* content id */
-			));
-	$t_section_main->add_item( new TableFieldsItem(
+	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_date', $t_show_inputs ),
 			2 /* colspan */,
 			null /* class */,
 			'do_filter_by_date_filter_target' /* content id */
 			));
-	$t_section_main->add_item( new TableFieldsItem(
+	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_last_updated_date_filter', lang_get( 'use_last_updated_date_filters_label' ) ),
 			filter_form_get_input( $t_filter, 'do_filter_by_last_updated_date', $t_show_inputs ),
 			2 /* colspan */,
 			null /* class */,
 			'do_filter_by_last_updated_date_filter_target' /* content id */
 			));
-	$t_section_main->add_item( new TableFieldsItem(
-			$get_field_header( 'relationship_type_filter', lang_get( 'bug_relationships_label' ) ),
-			filter_form_get_input( $t_filter, 'relationship_type', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'relationship_type_filter_target' /* content id */
-			));
-	if( ON == config_get( 'enable_profiles' ) ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'platform_filter', lang_get( 'platform_label' ) ),
-				filter_form_get_input( $t_filter, 'platform', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'platform_filter_target' /* content id */
-				));
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'os_filter', lang_get( 'os_label' ) ),
-				filter_form_get_input( $t_filter, 'os', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'os_filter_target' /* content id */
-				));
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'os_build_filter', lang_get( 'os_version_label' ) ),
-				filter_form_get_input( $t_filter, 'os_build', $t_show_inputs ),
-				1 /* colspan */,
-				null /* class */,
-				'os_build_filter_target' /* content id */
-				));
-	}
-	if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
-		$t_section_main->add_item( new TableFieldsItem(
-				$get_field_header( 'tag_string_filter', lang_get( 'tags_label' ) ),
-				filter_form_get_input( $t_filter, 'tag_string', $t_show_inputs ),
-				5 /* colspan */,
-				null /* class */,
-				'tag_string_filter_target' /* content id */
-				));
-	}
 	if( 'advanced' == $t_view_type ) {
-		$t_section_main->add_item( new TableFieldsItem(
+		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'project_id_filter', lang_get( 'email_project_label' ) ),
 				filter_form_get_input( $t_filter, 'project_id', $t_show_inputs ),
 				1 /* colspan */,
@@ -2594,9 +2515,90 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				));
 	}
 
-	# Section: plugin filters
+	$t_row3 = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
-	$t_section_plugins = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
+	if( ON == config_get( 'enable_profiles' ) ) {
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'show_profile_filter', lang_get( 'profile_label' ) ),
+				filter_form_get_input( $t_filter, 'show_profile', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_profile_filter_target' /* content id */
+				));
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'platform_filter', lang_get( 'platform_label' ) ),
+				filter_form_get_input( $t_filter, 'platform', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'platform_filter_target' /* content id */
+				));
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'os_filter', lang_get( 'os_label' ) ),
+				filter_form_get_input( $t_filter, 'os', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'os_filter_target' /* content id */
+				));
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'os_build_filter', lang_get( 'os_version_label' ) ),
+				filter_form_get_input( $t_filter, 'os_build', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'os_build_filter_target' /* content id */
+				));
+	}
+	if( $t_show_build ) {
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'show_build_filter', lang_get( 'product_build_label' ) ),
+				filter_form_get_input( $t_filter, 'show_build', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_build_filter_target' /* content id */
+				));
+	}
+	if( $t_show_product_version ) {
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'show_version_filter', lang_get( 'product_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_version_filter_target' /* content id */
+				));
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'show_fixed_in_version_filter', lang_get( 'fixed_in_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_fixed_in_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_fixed_in_version_filter_target' /* content id */
+				));
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'show_target_version_filter', lang_get( 'target_version_label' ) ),
+				filter_form_get_input( $t_filter, 'show_target_version', $t_show_inputs ),
+				1 /* colspan */,
+				null /* class */,
+				'show_target_version_filter_target' /* content id */
+				));
+	}
+	$t_row3->add_item( new TableFieldsItem(
+			$get_field_header( 'relationship_type_filter', lang_get( 'bug_relationships_label' ) ),
+			filter_form_get_input( $t_filter, 'relationship_type', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'relationship_type_filter_target' /* content id */
+			));
+	if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
+		$t_row3->add_item( new TableFieldsItem(
+				$get_field_header( 'tag_string_filter', lang_get( 'tags_label' ) ),
+				filter_form_get_input( $t_filter, 'tag_string', $t_show_inputs ),
+				3 /* colspan */,
+				null /* class */,
+				'tag_string_filter_target' /* content id */
+				));
+	}
+
+	# plugin filters & custom fields
+
+	$t_row_extra = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
 	$t_plugin_filters = filter_get_plugin_filters();
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
@@ -2610,7 +2612,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		}
 		$t_content = ob_get_clean();
 
-		$t_section_plugins->add_item( new TableFieldsItem(
+		$t_row_extra->add_item( new TableFieldsItem(
 				$t_header,
 				$t_content,
 				$t_colspan,
@@ -2618,10 +2620,6 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				string_attribute( $t_field_name ) . '_filter_target' /* content id */
 				));
 	}
-
-	# Section: custom fields
-
-	$t_section_custom = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
 		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
@@ -2644,7 +2642,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				}
 				$t_content = ob_get_clean();
 
-				$t_section_custom->add_item( new TableFieldsItem(
+				$t_row_extra->add_item( new TableFieldsItem(
 						$t_header,
 						$t_content,
 						1 /* colspan */,
@@ -2690,9 +2688,10 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	?>
 	<table width="100%" cellspacing="1">
-		<?php $t_section_main->render() ?>
-		<?php $t_section_plugins->render() ?>
-		<?php $t_section_custom->render() ?>
+		<?php $t_row1->render() ?>
+		<?php $t_row2->render() ?>
+		<?php $t_row3->render() ?>
+		<?php $t_row_extra->render() ?>
 		<tr class="spacer"></tr>
 		<?php $t_section_last->render() ?>
 	</table>
