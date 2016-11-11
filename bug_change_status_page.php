@@ -231,7 +231,7 @@ layout_page_begin();
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'datetime_field_format' ), $t_bug->due_date );
 		}
 ?>
 	<!-- Due date -->
@@ -242,7 +242,7 @@ layout_page_begin();
 		<td>
 			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="20" maxlength="16"
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
-				data-picker-format="<?php echo config_get( 'calendar_js_date_format' ) ?>
+				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
 			<i class="fa fa-calendar fa-xlg"></i>';
 		</td>
