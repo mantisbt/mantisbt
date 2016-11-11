@@ -1174,7 +1174,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->Subject = $t_subject;
-	$t_mail->Body = make_lf_crlf( "\n" . $t_message );
+	$t_mail->Body = make_lf_crlf( $t_message );
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
