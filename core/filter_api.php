@@ -2676,41 +2676,25 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 	global $g_cache_filter_db_filters;
 	$c_filter_id = (int)$p_filter_id;
 
-	if( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
-		if( $g_cache_filter_db_filters[$p_filter_id] === false ) {
+	if( !filter_is_accessible( $c_filter_id, $p_user_id ) ) {
+		return null;
+	}
+
+	if( isset( $g_cache_filter_db_filters[$c_filter_id] ) ) {
+		if( $g_cache_filter_db_filters[$c_filter_id] === false ) {
 			return null;
 		}
-		return $g_cache_filter_db_filters[$p_filter_id];
+		return $g_cache_filter_db_filters[$c_filter_id];
 	}
 
-	if( null === $p_user_id ) {
-		$t_user_id = auth_get_current_user_id();
+	$t_filter_row = filter_cache_row( $c_filter_id, /* trigger_errors */ false );
+	if( $t_filter_row ) {
+		$g_cache_filter_db_filters[$c_filter_id] = $t_filter_row['filter_string'];
 	} else {
-		$t_user_id = $p_user_id;
+		$g_cache_filter_db_filters[$c_filter_id] = false;
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_filter_id ) );
-
-	if( $t_row = db_fetch_array( $t_result ) ) {
-		if( $t_row['user_id'] != $t_user_id ) {
-			if( $t_row['is_public'] != true ) {
-				return null;
-			}
-		}
-
-		# check that the user has access to non current filters
-		if( ( ALL_PROJECTS <= $t_row['project_id'] ) && ( !is_blank( $t_row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', null, $t_user_id, $t_row['project_id'] ) ) ) ) {
-			return null;
-		}
-
-		$g_cache_filter_db_filters[$p_filter_id] = $t_row['filter_string'];
-		return $t_row['filter_string'];
-	} else {
-		$g_cache_filter_db_filters[$p_filter_id] = false;
-		return false;
-	}
+	return $g_cache_filter_db_filters[$c_filter_id];
 }
 
 /**
@@ -3354,6 +3338,34 @@ function filter_is_named_filter( $p_filter_id ) {
 	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
 	if( $t_filter_row ) {
 		return !empty( $t_filter_row['name'] ) && $t_filter_row['project_id'] >= 0;
+	}
+	return false;
+}
+
+/**
+ * Returns true if the filter is accesible by the user, which happens when the user
+ * is the owner of the filter, or the filter is public.
+ * @param type $p_filter_id	Filter id
+ * @param type $p_user_id	User id
+ * @return boolean	true if the filter is accesible by the user
+ */
+function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	if( $t_filter_row ) {
+		if( $t_filter_row['user_id'] == $t_user_id || $t_filter_row['is_public'] ) {
+			# If the filter is a named filter, check the config options
+			if( $t_filter_row['project_id'] >= 0
+				&& !is_blank( $t_filter_row['name'] ) ) {
+				return access_has_project_level( config_get( 'stored_query_use_threshold', null, $t_user_id, $t_filter_row['project_id'] ) );
+			}
+			# it it's a "current" filter, access is ok
+			return true;
+		}
 	}
 	return false;
 }
