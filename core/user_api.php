@@ -1404,16 +1404,16 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	# when the user specific filter references a stored filter id, get that filter instead
 	if( isset( $t_filter['_source_query_id'] ) && $t_view_all_cookie_id != $t_filter['_source_query_id'] ) {
 		$t_source_query_id = $t_filter['_source_query_id'];
-		# check if filter id exists, skip errors
-		$t_filter_row = filter_cache_row( $t_source_query_id, /* trigger_errors */ false );
-		if( !$t_filter_row ) {
-			# If the stored filter does not exists, clean the referenced filter id
-			unset( $t_filter['_source_query_id'] );
-		} else {
+		# check if filter id is a proper stored filter, and is accesible
+		if( filter_is_named_filter( $t_source_query_id ) ){
 			# the actual stored filter can be retrieved
+			$t_filter_row = filter_cache_row( $t_source_query_id, /* trigger_errors */ false );
 			$t_filter = filter_deserialize( filter_db_get_filter( $t_source_query_id ) );
 			# update the referenced stored filter id
 			$t_filter['_source_query_id'] = $t_source_query_id;
+		} else {
+			# If the filter id is not valid, clean the referenced filter id
+			unset( $t_filter['_source_query_id'] );
 		}
 	}
 	$t_filter = filter_ensure_valid_filter( $t_filter );
