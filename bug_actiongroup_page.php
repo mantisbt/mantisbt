@@ -279,13 +279,13 @@ if( $t_multiple_projects ) {
 				$t_bug_id = $f_bug_arr[0];
 				$t_bug = bug_get( $t_bug_id );
 				if( !date_is_null( $t_bug->due_date ) ) {
-					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+					$t_date_to_display = date( config_get( 'datetime_field_format' ), $t_bug->due_date );
 				}
 			}
 
 			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="20" maxlength="16" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'calendar_js_date_format' ) . '"' .
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
 				'" value="' . $t_date_to_display . '" />';
 			echo '<i class="fa fa-calendar fa-xlg"></i>';
 		} else {
