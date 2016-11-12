@@ -264,14 +264,6 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_mail_priority</term>
-			<listitem>
-				<para>
-					Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 0.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:

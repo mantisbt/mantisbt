@@ -40,6 +40,7 @@
  *
  * @author Changwoo
  * @author Hong3e
+ * @author Jerrykim306
  * @author Wisewolf
  * @author Ykhwong
  * @author 아라
@@ -48,7 +49,7 @@
 $s_plugin_graph_title = '맨티스 그래프';
 $s_plugin_graph_description = '공식 그래프 플러그인.';
 $s_plugin_MantisGraph_title = '맨티스 그래프';
-$s_plugin_MantisGraph_menu_advanced_summary = '고급 요약';
+$s_plugin_MantisGraph_menu_advanced_summary = '자세한 요약';
 $s_plugin_MantisGraph_config = '설정';
 $s_plugin_MantisGraph_synthesis_link = '합성';
 $s_plugin_MantisGraph_status_link = '상태별';
@@ -56,7 +57,7 @@ $s_plugin_MantisGraph_priority_link = '우선순위별';
 $s_plugin_MantisGraph_severity_link = '심각도별';
 $s_plugin_MantisGraph_category_link = '분류별';
 $s_plugin_MantisGraph_resolution_link = '해결 상태별';
-$s_plugin_MantisGraph_graph_bug_page_link = '그래프';
+$s_plugin_MantisGraph_graph_bug_page_link = '표';
 $s_plugin_MantisGraph_library = '사용할 그래프 라이브러리';
 $s_plugin_MantisGraph_bundled = '번들 제공';
 $s_plugin_MantisGraph_window_width = '그래프 너비 (픽셀)';
@@ -85,8 +86,8 @@ $s_plugin_MantisGraph_by_resolution_mix = '해결과 상태별 백분율';
 $s_plugin_MantisGraph_legend_still_open = '진행 중';
 $s_plugin_MantisGraph_legend_resolved = '해결됨';
 $s_plugin_MantisGraph_legend_assigned = '할당됨';
-$s_plugin_MantisGraph_legend_total = '총계';
-$s_plugin_MantisGraph_legend_opened = '미해결';
+$s_plugin_MantisGraph_legend_total = '합계';
+$s_plugin_MantisGraph_legend_opened = '열림';
 $s_plugin_MantisGraph_legend_closed = '종료됨';
 $s_plugin_MantisGraph_legend_reported = '보고됨';
 $s_plugin_MantisGraph_cumulative = '누적';
@@ -107,7 +108,7 @@ $s_plugin_MantisGraph_select_bystatus = '상태별';
 $s_plugin_MantisGraph_select_summbystatus = '상태별 요약';
 $s_plugin_MantisGraph_select_bycat = '분류별 요약';
 $s_plugin_MantisGraph_select_both = '상태 및 분류별 요약';
-$s_plugin_MantisGraph_show_as_graph = '그래프로 보이기';
+$s_plugin_MantisGraph_show_as_graph = '그래프로 보기';
 $s_plugin_MantisGraph_show_as_table = '표로 보이기';
 $s_plugin_MantisGraph_show_graph = '그래프 보기';
 $s_plugin_MantisGraph_graph_page = '이슈 기록을 그래프로 그리기';

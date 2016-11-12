@@ -51,6 +51,7 @@
  * @author Nemo bis
  * @author PeppeAeco
  * @author Purodha
+ * @author Selven
  * @author Statix64
  * @author Stefano-c
  * @author Ximo17
@@ -151,6 +152,10 @@ $s_make_private = 'Rendi privata';
 $s_make_public = 'Rendi pubblica';
 $s_create_new_project_link = 'Crea nuovo progetto';
 $s_login_link = 'Accedi';
+$s_opensearch_id_short = '%s Id';
+$s_opensearch_id_description = '%s: ricerca per numero Id';
+$s_opensearch_text_short = '%s Testo';
+$s_opensearch_text_description = '%s: ricerca testo completo';
 $s_select_option = '(seleziona)';
 $s_bug_actiongroup_access = 'Non disponi dell\'autorizzazione necessaria per eseguire questa azione';
 $s_bug_actiongroup_status = 'Non è possibile impostare lo stato richiesto per la presente anomalia';
@@ -693,7 +698,7 @@ $s_category_added_msg = 'La categoria è stata inserita...';
 $s_category_deleted_msg = 'La categoria è stata eliminata...';
 $s_category_delete_sure_msg = 'Sei sicuro di voler cancellare questa categoria?<br />La categoria "%1$s" contiene %2$d bug.';
 $s_category_delete_confirm_msg = 'Sei sicuro di voler cancellare la categoria "%1$s"?';
-$s_delete_category_button = 'Elimina categoria';
+$s_delete_category_button = 'Cancella categoria';
 $s_edit_project_category_title = 'Modifica categoria del progetto';
 $s_update_category_button = 'Aggiorna categoria';
 $s_category_updated_msg = 'La categoria è stata aggiornata correttamente...';
@@ -849,7 +854,7 @@ $s_must_enter_description = 'Devi inserire una descrizione';
 $s_report_more_bugs = 'Notifica più anomalie';
 $s_submission_thanks_msg = 'Grazie per il tuo interesse!';
 $s_simple_report_link = 'Report semplificato';
-$s_enter_report_details_title = 'Report dettagliato';
+$s_enter_report_details_title = 'Inserisci dettagli anomalia';
 $s_required = 'obbligatorio';
 $s_select_category = 'Seleziona categoria';
 $s_select_reproducibility = 'Seleziona la riproducibilità';
@@ -857,7 +862,7 @@ $s_select_severity = 'Seleziona gravità';
 $s_or_fill_in = 'oppure completa';
 $s_assign_to = 'Assegna a';
 $s_additional_information = 'Ulteriori informazioni';
-$s_submit_report_button = 'Invia la segnalazione';
+$s_submit_report_button = 'Invia anomalia';
 $s_check_report_more_bugs = 'attiva per notificare più anomalie';
 $s_report_stay = 'Rimani sul report';
 $s_selected_project = 'Progetto selezionato';

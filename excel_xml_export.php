@@ -93,8 +93,7 @@ $t_result = filter_get_bug_rows_result( $t_query_clauses );
 $t_end_of_results = false;
 do {
 	# Clear cache for next block
-	bug_clear_cache();
-	bug_text_clear_cache();
+	bug_clear_cache_all();
 
 	# Keep reading until reaching max block size or end of result set
 	$t_read_rows = array();
@@ -110,11 +109,6 @@ do {
 		# @TODO, the "export" bug list parameter functionality should be implemented in a more efficient way
 		if( is_blank( $f_export ) || in_array( $t_row['id'], $f_bug_arr ) ) {
 			$t_bug_id_array[] = (int)$t_row['id'];
-			$t_handler_id = (int)$t_row['handler_id'];
-			$t_unique_user_ids[$t_handler_id] = $t_handler_id;
-			$t_reporter_id = (int)$t_row['reporter_id'];
-			$t_unique_user_ids[$t_reporter_id] = $t_reporter_id;
-
 			$t_read_rows[] = $t_row;
 			$t_count++;
 		}
@@ -130,8 +124,7 @@ do {
 
 	# convert and cache data
 	$t_rows = filter_cache_result( $t_read_rows, $t_bug_id_array );
-	user_cache_array_rows( $t_unique_user_ids );
-	columns_plugin_cache_issue_data( $t_rows, $t_columns );
+	bug_cache_columns_data( $t_rows, $t_columns );
 
 	# Clear arrays that are not needed
 	unset( $t_read_rows );

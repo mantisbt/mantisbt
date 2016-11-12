@@ -153,8 +153,7 @@ class GravatarPlugin extends MantisPlugin {
 					'd' => $t_default_avatar,
 					'r' => $t_rating,
 					's' => $p_size,
-				),
-				'', '&amp;'
+				)
 			);
 
 		$t_avatar = new Avatar();

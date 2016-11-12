@@ -1137,7 +1137,7 @@ $s_submission_thanks_msg = 'Thank you for your submission.';
 
 # report_bug_advanced_page.php
 $s_simple_report_link = 'Simple Report';
-$s_enter_report_details_title = 'Enter Report Details';
+$s_enter_report_details_title = 'Enter Issue Details';
 $s_required = 'required';
 $s_select_category = 'Select Category';
 $s_select_reproducibility = 'Select Reproducibility';
@@ -1145,7 +1145,7 @@ $s_select_severity = 'Select Severity';
 $s_or_fill_in = 'Or Fill In';
 $s_assign_to = 'Assign To';
 $s_additional_information = 'Additional Information';
-$s_submit_report_button = 'Submit Report';
+$s_submit_report_button = 'Submit Issue';
 $s_check_report_more_bugs = 'check to report more issues';
 
 # report_bug_page.php

@@ -753,10 +753,38 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 
 	if( null === $p_bugnote_id ) {
 		$g_cache_bugnote = array();
+		$g_cache_bugnotes = array();
 	} else {
-		unset( $g_cache_bugnote[(int)$p_bugnote_id] );
+		if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
+			$t_note_obj = $g_cache_bugnote[(int)$p_bugnote_id];
+			# current note id will be unset in the following call
+			bugnote_clear_bug_cache( $t_note_obj->bug_id );
+		}
 	}
-	$g_cache_bugnotes = array();
+
+	return true;
+}
+
+/**
+ * Clear the bugnotes related to a bug, or all bugs if no bug id specified.
+ * @param integer $p_bug_id Identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function bugnote_clear_bug_cache( $p_bug_id = null ) {
+	global $g_cache_bugnotes, $g_cache_bugnote;
+
+	if( null === $p_bug_id ) {
+		$g_cache_bugnotes = array();
+		$g_cache_bugnote = array();
+	} else {
+		if( isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
+			foreach( $g_cache_bugnotes[(int)$p_bug_id] as $t_note_obj ) {
+				unset( $g_cache_bugnote[(int)$t_note_obj->id] );
+			}
+			unset( $g_cache_bugnotes[(int)$p_bug_id] );
+		}
+	}
 
 	return true;
 }

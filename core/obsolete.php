@@ -200,7 +200,9 @@ config_obsolete( 'hr_size' );
 config_obsolete( 'hr_width' );
 config_obsolete( 'db_schema' );
 
+# changes in 1.3.4
+config_obsolete( 'mail_priority' );
+
 # changes in 2.0.0dev
 config_obsolete( 'icon_path' );
 config_obsolete( 'bug_print_page_fields' );
-

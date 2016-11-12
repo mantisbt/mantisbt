@@ -53,6 +53,7 @@ $s_plugin_MantisGraph_font = '{{Identical|Font}}';
 $s_plugin_MantisGraph_enabled = '{{Identical|On}}';
 $s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
 $s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
+$s_plugin_MantisGraph_legend_assigned = '{{Identical|Assigned}}';
 $s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
 $s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
 $s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';

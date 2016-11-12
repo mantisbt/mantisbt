@@ -42,6 +42,7 @@
  * @author Changwoo
  * @author Clever98
  * @author Hong3e
+ * @author Jerrykim306
  * @author Priviet
  * @author Revi
  * @author Wisewolf
@@ -234,16 +235,16 @@ $s_reset_request_in_progress_msg = '입력하신 메일 내용을 확인하셔�
 $s_email_notification_title_for_status_bug_new = '다음 이슈가 [(재)발생]했습니다.';
 $s_email_notification_title_for_status_bug_feedback = '다음 이슈는 [추가 정보]가 필요합니다.';
 $s_email_notification_title_for_status_bug_acknowledged = '다음 이슈는 [검토] 중입니다.';
-$s_email_notification_title_for_status_bug_confirmed = '다음 이슈가 [확인] 되었습니다.';
-$s_email_notification_title_for_status_bug_assigned = '다음 이슈는 [할당] 되었습니다.';
-$s_email_notification_title_for_status_bug_resolved = '다음 이슈는 [해결] 되었습니다.';
-$s_email_notification_title_for_status_bug_closed = '다음 이슈는 [종료] 되었습니다.';
-$s_email_notification_title_for_action_bug_submitted = '다음 이슈가 [보고] 되었습니다.';
-$s_email_notification_title_for_action_bug_assigned = '다음 이슈가 [할당] 되었습니다.';
+$s_email_notification_title_for_status_bug_confirmed = '다음 이슈가 [확인]되었습니다.';
+$s_email_notification_title_for_status_bug_assigned = '다음 이슈는 [할당]되었습니다.';
+$s_email_notification_title_for_status_bug_resolved = '다음 이슈는 [해결]되었습니다.';
+$s_email_notification_title_for_status_bug_closed = '다음 이슈는 [종료]되었습니다.';
+$s_email_notification_title_for_action_bug_submitted = '다음 이슈가 [보고]되었습니다.';
+$s_email_notification_title_for_action_bug_assigned = '다음 이슈가 [할당]되었습니다.';
 $s_email_notification_title_for_action_bug_unassigned = '다음 이슈가 할당 해제되었습니다.';
-$s_email_notification_title_for_action_bug_reopened = '다음 이슈가 [재발생] 되었습니다.';
-$s_email_notification_title_for_action_bug_deleted = '다음 이슈가 [삭제] 되었습니다.';
-$s_email_notification_title_for_action_bug_updated = '다음 이슈가 [갱신] 되었습니다.';
+$s_email_notification_title_for_action_bug_reopened = '다음 이슈가 [재개]되었습니다.';
+$s_email_notification_title_for_action_bug_deleted = '다음 이슈가 [삭제]되었습니다.';
+$s_email_notification_title_for_action_bug_updated = '다음 이슈가 [갱신]되었습니다.';
 $s_email_notification_title_for_action_sponsorship_added = '다음 이슈는 [후원]되고 있습니다.';
 $s_email_notification_title_for_action_sponsorship_updated = '다음 이슈의 [후원]이 갱신되었습니다.';
 $s_email_notification_title_for_action_sponsorship_deleted = '다음 이슈의 [후원]이 취소되었습니다.';
@@ -377,7 +378,7 @@ $s_payment_updated = '지불 정보를 변경했습니다.';
 $s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 $s_email_updated = '이메일 주소가 성공적으로 업데이트되었습니다';
 $s_realname_duplicated = '이 실명은 다른 사용자가 사용하고 있습니다';
-$s_realname_updated = '실명이 수정 되었습니다.';
+$s_realname_updated = '실명이 성공적으로 수정되었습니다';
 $s_password_updated = '비밀번호가 성공적으로 바뀌었습니다';
 $s_multiple_projects = '선택한 이슈는 여러가지 프로젝트에서 왔습니다. 아래의 파라미터는 모든 프로젝트의 설정에 반영됩니다. 모든 프로젝트를 바꾸는 게 아니라면 선택한 이슈에 대해서만 파라미터를 바꿔 보십시오.';
 $s_new_bug_title = '새 문제';
@@ -837,7 +838,7 @@ $s_must_enter_description = '설명을 입력해야 합니다.';
 $s_report_more_bugs = '또 다른 이슈 보고';
 $s_submission_thanks_msg = '이슈 보고를 해주셔서 감사합니다.';
 $s_simple_report_link = '간단한 보고서';
-$s_enter_report_details_title = '상세 보고 내역을 입력하세요';
+$s_enter_report_details_title = '상세 보고 내역을 입력';
 $s_required = '필수';
 $s_select_category = '분류 선택';
 $s_select_reproducibility = '재발생 가능성 선택';
@@ -1176,7 +1177,9 @@ $s_time_tracking = '시간 추적';
 $s_time_tracking_time_spent = '작동 시간:';
 $s_time_tracking_get_info_button = '시간 추적 정보 받기';
 $s_time_tracking_cost_per_hour = '시간당 비용';
+$s_time_tracking_cost_per_hour_label = '시간당 비용:';
 $s_time_tracking_cost = '비용';
+$s_time_tracking_cost_label = '가격:';
 $s_total_time_for_issue = '이슈에 사용한 전체 시간 = %1$s';
 $s_time_tracking_stopwatch_start = '시작';
 $s_time_tracking_stopwatch_stop = '중지';
@@ -1334,7 +1337,7 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = '그 이슈에 그 태그를 붙이지 �
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = '이미 그 이슈에 그 태그를 붙였습니다.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = '토큰을 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '"%1$s" 이벤트를 아직 선언하지 않았습니다.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '"%1$s" 플러그인이 등록 되지 않았습니다.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '"%1$s" 플러그인이 등록되지 않았습니다.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = '"%1$s" 플러그인이 로드되어 있지 않습니다. 의존하는 항목들이 충족하는지 확인하십시오.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '"%1$s" 플러그인이 이미 설치되어 있습니다.';
 $MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = '"%2$s" 클래스는 "%1$s" 플러그인에 정의되어 있지 않습니다.';

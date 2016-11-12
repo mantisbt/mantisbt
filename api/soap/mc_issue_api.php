@@ -1085,7 +1085,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 		# The issue has been cached earlier in the bug_get() call.  Flush the cache since it is
 		# now stale.  Otherwise, the email notification will be based on the cached data.
-		bugnote_clear_cache( $p_issue_id );
+		bugnote_clear_bug_cache( $p_issue_id );
 	}
 
 	if( isset( $p_issue['tags'] ) && is_array( $p_issue['tags'] ) ) {

@@ -406,7 +406,7 @@ $s_webmaster_contact_information = 'Palīdzībai sazinieties ar <a href="mailto:
 $s_click_to_login = 'Pieslēgties';
 $s_login_page_info = 'Sveicināti problēmu, kļūdu un jaunas funkcionalitātes pieprasījumu uzskaites un kontroles sistēmā(bugtrack)';
 $s_login_title = 'Pieslēgšanās';
-$s_save_login = 'Iegaumēt paroli';
+$s_save_login = 'Iegaumēt paroli šajā pārlūkā';
 $s_secure_session = 'Droša sesija';
 $s_secure_session_long = 'Jūsu sesijai ļaujat izmantot tikai šo IP adresi.';
 $s_choose_project = 'Izvēlaties projektu';

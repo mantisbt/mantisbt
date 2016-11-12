@@ -49,6 +49,7 @@
  * @author Skalman
  * @author Thosjo
  * @author Tor.klingberg
+ * @author Velg
  * @author Warrakkk
  * @author WikiPhoenix
  */
@@ -950,7 +951,7 @@ $s_ok = 'OK';
 $s_select_all = 'Välj alla';
 $s_use_query = 'Använd filter';
 $s_delete_query = 'Radera filter';
-$s_query_deleted = 'Filter raderat';
+$s_query_deleted = 'Filter Raderat';
 $s_save_query = 'Spara aktuellt filter';
 $s_reset_query = 'Återställ filter';
 $s_query_name = 'Filternamn';

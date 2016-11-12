@@ -581,12 +581,6 @@ $g_show_user_email_threshold = NOBODY;
 $g_show_user_realname_threshold = NOBODY;
 
 /**
- * Urgent = 1, Not Urgent = 5, Disable = 0
- * @global integer $g_mail_priority
- */
-$g_mail_priority = 0;
-
-/**
  * select the method to mail by:
  * PHPMAILER_METHOD_MAIL - mail()
  * PHPMAILER_METHOD_SENDMAIL - sendmail
@@ -4391,7 +4385,6 @@ $g_public_config_names = array(
 	'logout_redirect_page',
 	'long_process_timeout',
 	'lost_password_feature',
-	'mail_priority',
 	'manage_config_cookie',
 	'manage_configuration_threshold',
 	'manage_custom_fields_threshold',
