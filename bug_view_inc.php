@@ -710,6 +710,7 @@ echo '<tr class="hidden"></tr>';
 # Custom Fields
 $t_custom_fields_found = false;
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
+custom_field_cache_values( array( $t_bug->id ) , $t_related_custom_field_ids );
 
 foreach( $t_related_custom_field_ids as $t_id ) {
 	if( !custom_field_has_read_access( $t_id, $f_bug_id ) ) {
