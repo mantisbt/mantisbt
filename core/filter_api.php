@@ -2224,8 +2224,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 }
 
 /**
- *  Cache the filter results with bugnote stats for later use
- *  also fills bug attachment count cache
+ * Cache the filter results with bugnote stats for later use
  * @param array $p_rows             Results of the filter query.
  * @param array $p_id_array_lastmod Array of bug ids.
  * @return array
