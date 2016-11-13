@@ -878,7 +878,7 @@ function email_bug_updated( $p_bug_id ) {
  * send notices when a new bugnote
  * @param int $p_bugnote_id  The bugnote id.
  * @param array $p_files The array of file information (keys: name, size)
- * @param array The id of users to exclude.
+ * @param array $p_exclude_user_ids The id of users to exclude.
  * @return void
  */
 function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_ids = array() ) {

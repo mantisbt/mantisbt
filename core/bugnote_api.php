@@ -615,7 +615,7 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 /**
  * Gets the bugnote object given its id.
  *
- * @param $p_bugnote_id The bugnote id.
+ * @param int $p_bugnote_id The bugnote id.
  * @return BugnoteData The bugnote object.
  */
 function bugnote_get( $p_bugnote_id ) {
