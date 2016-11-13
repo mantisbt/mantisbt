@@ -442,7 +442,7 @@ $g_enable_email_notification	= ON;
  *
  * @global integer $g_email_notifications_verbose
  */
-$g_email_notifications_verbose = OFF;
+$g_email_notifications_verbose = ON;
 
 /**
  * The following two config options allow you to control who should get email
