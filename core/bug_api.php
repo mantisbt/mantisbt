@@ -2228,6 +2228,7 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 	$t_category_ids = array_unique( $t_category_ids );
 
 	$t_custom_field_ids = array();
+	$t_users_cached = false;
 	foreach( $p_selected_columns as $t_column ) {
 
 		if( column_is_plugin_column( $t_column ) ) {
@@ -2253,7 +2254,10 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 			case 'handler_id':
 			case 'reporter_id':
 			case 'status':
-				user_cache_array_rows( $t_user_ids );
+				if( !$t_users_cached ) {
+					user_cache_array_rows( $t_user_ids );
+					$t_users_cached = true;
+				}
 				break;
 			case 'project_id':
 				project_cache_array_rows( $t_project_ids );
