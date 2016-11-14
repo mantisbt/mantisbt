@@ -2197,6 +2197,7 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	file_bug_attachment_count_clear_cache( $p_bug_id );
 	bugnote_clear_bug_cache( $p_bug_id );
 	tag_clear_cache_bug_tags( $p_bug_id );
+	custom_field_clear_cache_values( $p_bug_id );
 	return true;
 }
 
