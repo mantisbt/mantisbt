@@ -65,6 +65,14 @@ abstract class MantisColumn {
 	public function cache( array $p_bugs ) {}
 
 	/**
+	 * Function to clear the cache of values that was built with the cache() method.
+	 * This can be requested as part of an export of bugs, and clearing the used
+	 * memory helps to keep a long export process within memory limits.
+	 * @return void
+	 */
+	public function clear_cache() {}
+
+	/**
 	 * Function to display column data for a given bug row.
 	 * @param BugData $p_bug            A BugData object.
 	 * @param integer $p_columns_target Column display target.

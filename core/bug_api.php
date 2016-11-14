@@ -2198,6 +2198,11 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	bugnote_clear_bug_cache( $p_bug_id );
 	tag_clear_cache_bug_tags( $p_bug_id );
 	custom_field_clear_cache_values( $p_bug_id );
+
+	$t_plugin_objects = columns_get_plugin_columns();
+	foreach( $t_plugin_objects as $t_plugin_column ) {
+		$t_plugin_column->clear_cache();
+	}
 	return true;
 }
 
