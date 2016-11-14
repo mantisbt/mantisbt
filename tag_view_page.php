@@ -56,6 +56,7 @@ access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 compress_enable();
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_name = string_display_line( $t_tag_row['name'] );

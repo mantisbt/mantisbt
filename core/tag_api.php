@@ -55,17 +55,131 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+# cache the tag definitions, indexed by tag id
+# tag ids that dont exist are stored as 'false', to avoid repeated searches
+$g_cache_tags = array();
+
+# cache the bug tags indexed by [bug_id, tag_id]. Items stored are rows (arrays) fetched from table {bug_tags}
+# bugs with no tags will be stored as 'false'.
+$g_cache_bug_tags = array();
+
+/**
+ * Loads into cache a set of tag definitions from tag table
+ * Non existant ids are cached as 'false'
+ * @global array $g_cache_tags
+ * @param array $p_tag_ids	Array of tag ids
+ * @return void
+ */
+function tag_cache_rows( array $p_tag_ids ) {
+	global $g_cache_tags;
+
+	$t_ids_to_seach = array();
+	foreach( $p_tag_ids as $t_id ) {
+		if( !isset( $g_cache_tags[(int)$t_id]) ) {
+			$t_ids_to_seach[(int)$t_id] = (int)$t_id;
+		}
+	}
+	if( empty( $t_ids_to_seach ) ) {
+		return;
+	}
+
+	db_param_push();
+	$t_sql_in_params = array();
+	$t_params = array();
+	foreach( $t_ids_to_seach as $t_id ) {
+		$t_sql_in_params[] = db_param();
+		$t_params[] = $t_id;
+	}
+	$t_query = 'SELECT * FROM {tag} where id IN (' . implode( ',', $t_sql_in_params ) . ')';
+	$t_result = db_query( $t_query, $t_params );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_id = (int)$t_row['id'];
+		$g_cache_tags[$c_id] = $t_row;
+		unset( $t_ids_to_seach[$c_id] );
+	}
+	# mark the non existant ids
+	foreach( $t_ids_to_seach as $t_id ) {
+		$g_cache_tags[$t_id] = false;
+	}
+}
+
+/**
+ * Loads into cache the tags associated to a set of bug ids
+ * A bug id that has no tags will be cached as 'false'
+ * @global array $g_cache_bug_tags
+ * @param array $p_bug_ids	Array of bug ids
+ * @return void
+ */
+function tag_cache_bug_tag_rows( array $p_bug_ids ) {
+	global $g_cache_bug_tags;
+
+	$t_ids_to_seach = array();
+	foreach( $p_bug_ids as $t_id ) {
+		if( !isset( $g_cache_bug_tags[(int)$t_id]) ) {
+			$t_ids_to_seach[] = (int)$t_id;
+		}
+	}
+	if( empty( $t_ids_to_seach ) ) {
+		return;
+	}
+
+	db_param_push();
+	$t_sql_in_params = array();
+	$t_params = array();
+	foreach( $t_ids_to_seach as $t_id ) {
+		$t_sql_in_params[] = db_param();
+		$t_params[] = $t_id;
+	}
+	$t_query = 'SELECT B.id AS bug_id, BT.tag_id, BT.user_id, BT.date_attached FROM {bug} B LEFT OUTER JOIN {bug_tag} BT ON B.id=BT.bug_id'
+			. ' WHERE B.id IN (' . implode( ',', $t_sql_in_params ) . ')';
+	$t_result = db_query( $t_query, $t_params );
+
+	$t_found_tags = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_bug_id = (int)$t_row['bug_id'];
+		$t_has_tags = null !== $t_row['tag_id'];
+		# create a bug index if needed
+		if( !isset( $g_cache_bug_tags[$c_bug_id] ) ) {
+			$g_cache_bug_tags[$c_bug_id] = $t_has_tags? array() : false;
+		}
+		if( $t_has_tags ) {
+			$c_tag_id = (int)$t_row['tag_id'];
+			$g_cache_bug_tags[$c_bug_id][$c_tag_id] = $t_row;
+			$t_found_tags[$c_tag_id] = $c_tag_id;
+		}
+	}
+	# also cache the tags founds
+	if( !empty( $t_found_tags ) ) {
+		tag_cache_rows( $t_found_tags );
+	}
+}
+
+/**
+ * Clear the bug tags cache (or just the given bug id if specified)
+ * @global array $g_cache_bug_tags
+ * @param integer $p_bug_id	Bug id
+ * @return void
+ */
+function tag_clear_cache_bug_tags( $p_bug_id = null ) {
+	global $g_cache_bug_tags;
+
+	if( null === $p_bug_id ) {
+		$g_cache_bug_tags = array();
+	} else {
+		if( isset( $g_cache_bug_tags[(int)$p_bug_id] ) ) {
+			unset( $g_cache_bug_tags[(int)$p_bug_id] );
+		}
+	}
+}
+
 /**
  * Determine if a tag exists with the given ID.
  * @param integer $p_tag_id A tag ID to check.
  * @return boolean True if tag exists
  */
 function tag_exists( $p_tag_id ) {
-	db_param_push();
-	$t_query = 'SELECT id FROM {tag} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_tag_id ) );
-
-	return ( db_result( $t_result ) !== false );
+	return ( tag_get( $p_tag_id ) !== false );
 }
 
 /**
@@ -343,22 +457,22 @@ function tag_count( $p_name_filter ) {
 /**
  * Return a tag row for the given ID.
  * @param integer $p_tag_id The tag ID to retrieve from the database.
- * @return array Tag row
+ * @return boolean|array Tag row, or false if not found
  */
 function tag_get( $p_tag_id ) {
-	tag_ensure_exists( $p_tag_id );
+	global $g_cache_tags;
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {tag} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_tag_id ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		return false;
+	$c_tag_id = (int)$p_tag_id;
+	if( !isset( $g_cache_tags[$c_tag_id] ) ) {
+		tag_cache_rows( array( $c_tag_id ) );
 	}
 
-	return $t_row;
+	$t_tag = $g_cache_tags[$c_tag_id];
+	if( null === $t_tag ) {
+		return false;
+	} else {
+		return $t_tag;
+	}
 }
 
 /**
@@ -588,11 +702,14 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  * @return array Tag attachment row
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
-	db_param_push();
-	$t_query = 'SELECT * FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
+	global $g_cache_bug_tags;
 
-	$t_row = db_fetch_array( $t_result );
+	$c_bug_id = (int)$p_bug_id;
+	if( !isset( $g_cache_bug_tags[$c_bug_id] ) ) {
+		tag_cache_bug_tag_rows( array( $c_bug_id ) );
+	}
+
+	$t_row = $g_cache_bug_tags[$c_bug_id];
 	if( !$t_row ) {
 		trigger_error( TAG_NOT_ATTACHED, ERROR );
 	}
@@ -605,21 +722,27 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
  * @return array Array of tag rows with attachment information
  */
 function tag_bug_get_attached( $p_bug_id ) {
-	db_param_push();
-	$t_query = 'SELECT t.*, b.user_id as user_attached, b.date_attached
-					FROM {tag} t
-					LEFT JOIN {bug_tag} b
-						on t.id=b.tag_id
-					WHERE b.bug_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
+	global $g_cache_bug_tags;
 
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_rows[] = $t_row;
+	$c_bug_id = (int)$p_bug_id;
+	if( !isset( $g_cache_bug_tags[$c_bug_id] ) ) {
+		tag_cache_bug_tag_rows( array( $c_bug_id ) );
 	}
 
-	usort( $t_rows, 'tag_cmp_name' );
-	return $t_rows;
+	$t_bug_tags = $g_cache_bug_tags[$c_bug_id];
+	if( !$t_bug_tags ) {
+		return array();
+	}
+
+	$t_tag_info_rows = array();
+	foreach( $t_bug_tags as $t_row ) {
+		$t_tag_data = tag_get($t_row['tag_id']);
+		$t_tag_data['user_attached'] = $t_row['user_id'];
+		$t_tag_data['date_attached'] = $t_row['date_attached'];
+		$t_tag_info_rows[] = $t_tag_data;
+	}
+	usort( $t_tag_info_rows, 'tag_cmp_name' );
+	return $t_tag_info_rows;
 }
 
 /**
@@ -671,6 +794,8 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 					( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
 
+	tag_clear_cache_bug_tags( $p_bug_id );
+
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 	history_log_event_special( $p_bug_id, TAG_ATTACHED, $t_tag_name );
 
@@ -711,6 +836,8 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
 	db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
+
+	tag_clear_cache_bug_tags( $p_bug_id );
 
 	if( $p_add_history ) {
 		$t_tag_name = tag_get_field( $p_tag_id, 'name' );
