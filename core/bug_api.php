@@ -2196,6 +2196,7 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	bug_text_clear_cache( $p_bug_id );
 	file_bug_attachment_count_clear_cache( $p_bug_id );
 	bugnote_clear_bug_cache( $p_bug_id );
+	tag_clear_cache_bug_tags( $p_bug_id );
 	return true;
 }
 
@@ -2253,6 +2254,9 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 				break;
 			case 'category_id':
 				category_cache_array_rows( $t_category_ids );
+				break;
+			case 'tags':
+				tag_cache_bug_tag_rows( $t_bug_ids );
 				break;
 		}
 	}
