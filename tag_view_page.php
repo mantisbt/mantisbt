@@ -83,7 +83,7 @@ layout_page_begin();
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
-		<?php print_button( 'search.php?tag_string='.urlencode($t_tag_row['name']),
+		<?php print_link_button( 'search.php?tag_string='.urlencode($t_tag_row['name']),
 			sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
 			'btn-sm pull-right'); ?>
 	</div>

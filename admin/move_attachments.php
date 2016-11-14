@@ -333,7 +333,7 @@ if( empty( $t_moved ) ) {
 	}
 }
 
-print_button( 'system_utils.php', 'Back to System Utilities' );
+print_link_button( 'system_utils.php', 'Back to System Utilities' );
 
 echo '</div>';
 

@@ -103,7 +103,7 @@ layout_page_begin();
 	<div class="space-10"></div>
 <?php
 echo lang_get( 'account_removed_msg' ) . '<br />';
-print_button( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ));
+print_link_button( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ));
 ?>
 </div>
 

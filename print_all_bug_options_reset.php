@@ -86,7 +86,7 @@ if( $t_result ) {
 } else {
 	echo '<div class="failure-msg">';
 	echo error_string( ERROR_GENERIC ) . '<br />';
-	print_button( $t_redirect_url, lang_get( 'proceed' ) );
+	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 }
 

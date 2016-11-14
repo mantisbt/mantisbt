@@ -89,9 +89,9 @@ function access_denied() {
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
-				print_button( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
+				print_link_button( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
-				print_button(
+				print_link_button(
 					helper_mantis_url( config_get( 'default_home_page' ) ),
 					lang_get( 'proceed' )
 				);
