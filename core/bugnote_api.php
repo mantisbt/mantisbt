@@ -60,6 +60,13 @@ require_api( 'mention_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+# Cache of bugnotes arrays related to a bug, indexed by bug_id.
+# Each item is an array of BugnoteData objects
+$g_cache_bugnotes_by_bug_id = array();
+
+# Cache of BugnoteData objects, indexed by bugnote id
+$g_cache_bugnotes_by_id = array();
+
 /**
  * Bugnote Data Structure Definition
  */
@@ -130,8 +137,8 @@ class BugnoteData {
 function bugnote_exists( $p_bugnote_id ) {
 	$c_bugnote_id = (int)$p_bugnote_id;
 
-	global $g_cache_bugnote;
-	if( isset( $g_cache_bugnote[$c_bugnote_id] ) ) {
+	global $g_cache_bugnotes_by_id;
+	if( isset( $g_cache_bugnotes_by_id[$c_bugnote_id] ) ) {
 		return true;
 	}
 
@@ -163,14 +170,10 @@ function bugnote_exists( $p_bugnote_id ) {
  * @param BugnoteData $p_bugnote The bugnote object.
  * @return void
  */
-function bugnote_cache( $p_bugnote ) {
-	global $g_cache_bugnote;
+function bugnote_cache( BugnoteData $p_bugnote ) {
+	global $g_cache_bugnotes_by_id;
 
-	if( !isset( $g_cache_bugnote ) ) {
-		$g_cache_bugnote = array();
-	}
-
-	$g_cache_bugnote[(int)$p_bugnote->id] = $p_bugnote;
+	$g_cache_bugnotes_by_id[(int)$p_bugnote->id] = $p_bugnote;
 }
 
 /**
@@ -537,11 +540,11 @@ function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p
 /**
  * Converts a bugnote database row to a bugnote object.
  *
- * @param $p_row The bugnote row (including bugnote_text note)
+ * @param array $p_row The bugnote row (including bugnote_text note)
  * @return BugnoteData The bugnote object.
  * @access private
  */
-function bugnote_row_to_object( $p_row ) {
+function bugnote_row_to_object( array $p_row ) {
 	$t_bugnote = new BugnoteData;
 
 	$t_bugnote->id = $p_row['id'];
@@ -574,18 +577,10 @@ function bugnote_row_to_object( $p_row ) {
  * @access public
  */
 function bugnote_get_all_bugnotes( $p_bug_id ) {
-	global $g_cache_bugnotes, $g_cache_bugnote;
-
-	if( !isset( $g_cache_bugnotes ) ) {
-		$g_cache_bugnotes = array();
-	}
-
-	if( !isset( $g_cache_bugnote ) ) {
-		$g_cache_bugnote = array();
-	}
+	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
 
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
+	if( !isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
 		# Now sorting by submit date and id (#11742). The date_submitted
 		# column is currently not indexed, but that does not seem to affect
 		# performance in a measurable way
@@ -606,10 +601,10 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			bugnote_cache( $t_bugnote );
 		}
 
-		$g_cache_bugnotes[(int)$p_bug_id] = $t_bugnotes;
+		$g_cache_bugnotes_by_bug_id[(int)$p_bug_id] = $t_bugnotes;
 	}
 
-	return $g_cache_bugnotes[(int)$p_bug_id];
+	return $g_cache_bugnotes_by_bug_id[(int)$p_bug_id];
 }
 
 /**
@@ -623,11 +618,11 @@ function bugnote_get( $p_bugnote_id ) {
 	# If bugnote doesn't exist, this will trigger an error.
 	bugnote_ensure_exists( $p_bugnote_id );
 
-	global $g_cache_bugnote;
+	global $g_cache_bugnotes_by_id;
 
 	# Return the object from the cache, fetched above.
-	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
-		return $g_cache_bugnote[(int)$p_bugnote_id];
+	if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
+		return $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
 	}
 
 	# if we reached here something is wrong, trigger an error.
@@ -791,14 +786,14 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
  * @access public
  */
 function bugnote_clear_cache( $p_bugnote_id = null ) {
-	global $g_cache_bugnote, $g_cache_bugnotes;
+	global $g_cache_bugnotes_by_id, $g_cache_bugnotes_by_bug_id;
 
 	if( null === $p_bugnote_id ) {
-		$g_cache_bugnote = array();
-		$g_cache_bugnotes = array();
+		$g_cache_bugnotes_by_id = array();
+		$g_cache_bugnotes_by_bug_id = array();
 	} else {
-		if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
-			$t_note_obj = $g_cache_bugnote[(int)$p_bugnote_id];
+		if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
+			$t_note_obj = $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
 			# current note id will be unset in the following call
 			bugnote_clear_bug_cache( $t_note_obj->bug_id );
 		}
@@ -814,17 +809,17 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
  * @access public
  */
 function bugnote_clear_bug_cache( $p_bug_id = null ) {
-	global $g_cache_bugnotes, $g_cache_bugnote;
+	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
 
 	if( null === $p_bug_id ) {
-		$g_cache_bugnotes = array();
-		$g_cache_bugnote = array();
+		$g_cache_bugnotes_by_bug_id = array();
+		$g_cache_bugnotes_by_id = array();
 	} else {
-		if( isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
-			foreach( $g_cache_bugnotes[(int)$p_bug_id] as $t_note_obj ) {
-				unset( $g_cache_bugnote[(int)$t_note_obj->id] );
+		if( isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
+			foreach( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] as $t_note_obj ) {
+				unset( $g_cache_bugnotes_by_id[(int)$t_note_obj->id] );
 			}
-			unset( $g_cache_bugnotes[(int)$p_bug_id] );
+			unset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] );
 		}
 	}
 
