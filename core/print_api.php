@@ -1759,7 +1759,9 @@ document.getElementById( span ).style.display = displayType;
 						$v_content = $row['content'];
 				}
 
-				echo htmlspecialchars( $v_content );
+				/* transform AmigaCLI sequences to HTML */
+				$v_content = preg_replace( '/(\x9b|&#155;|\xc2\x3f)1m/', '<b>', htmlspecialchars($v_content) );
+				echo preg_replace( '/(\x9b|&#155;|\xc2\x3f)22m/', '</b>', $v_content );
 				echo "</pre></span>\n";
 			}
 

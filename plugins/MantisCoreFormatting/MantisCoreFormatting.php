@@ -121,6 +121,10 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_process_cvs_link( $t_string );
 		}
 
+		/* transform AmigaCLI sequences to HTML */
+		$t_string = preg_replace( '/(\xc2\x9b|\xe2\x80\xba|&#155;)1m/', '<b>', $t_string );
+		$t_string = preg_replace( '/(\xc2\x9b|\xe2\x80\xba|&#155;)22m/', '</b>', $t_string );
+
 		return $t_string;
 	}
 

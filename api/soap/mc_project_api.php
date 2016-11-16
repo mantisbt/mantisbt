@@ -155,6 +155,38 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 }
 
 /**
+ * Get (only) the id and name for all projects accessible by the given user.
+ *
+ * @param string $p_username  The name of the user trying to access the project list.
+ * @param string $p_password  The password of the user.
+ * @return Array  suitable to be converted into a ProjectDataArray
+ */
+function mc_projects_get_names_user_accessible( $p_username, $p_password ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	if( !mci_has_readonly_access( $t_user_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_result = array();
+	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
+		$t_project_row = project_cache_row( $t_project_id );
+		$t_project = array();
+		$t_project['id'] = $t_project_id;
+		$t_project['name'] = $t_project_row['name'];
+		$t_project['subprojects'] = mci_user_get_names_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
+		$t_result[] = $t_project;
+	}
+
+	return $t_result;
+}
+
+/**
  * Get all categories of a project.
  *
  * @param string $p_username  The name of the user trying to access the categories.

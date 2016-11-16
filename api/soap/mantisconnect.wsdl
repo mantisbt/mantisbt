@@ -817,6 +817,11 @@
   <part name="access" type="xsd:integer" /></message>
 <message name="mc_project_set_user_accessResponse">
   <part name="return" type="xsd:integer" /></message>
+<message name="mc_projects_get_names_user_accessibleRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" /></message>
+<message name="mc_projects_get_names_user_accessibleResponse">
+  <part name="return" type="tns:ProjectDataArray" /></message>
 <portType name="MantisConnectPortType">
   <operation name="mc_version">
     <input message="tns:mc_versionRequest"/>
@@ -1166,6 +1171,11 @@
     <documentation>Add a user to a project with access level.</documentation>
     <input message="tns:mc_project_set_user_accessRequest"/>
     <output message="tns:mc_project_set_user_accessResponse"/>
+  </operation>
+  <operation name="mc_projects_get_names_user_accessible">
+    <documentation>Get the list of name/id of projects that are accessible to the logged in user.</documentation>
+    <input message="tns:mc_projects_get_names_user_accessibleRequest"/>
+    <output message="tns:mc_projects_get_names_user_accessibleResponse"/>
   </operation>
 </portType>
 <binding name="MantisConnectBinding" type="tns:MantisConnectPortType">
@@ -1517,6 +1527,11 @@
   </operation>
   <operation name="mc_project_set_user_access">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_project_set_user_access" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_projects_get_names_user_accessible">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_projects_get_names_user_accessible" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
