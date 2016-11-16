@@ -2462,11 +2462,11 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_row2 = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_VERTICAL );
 
 	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'show_status_filter', lang_get( 'status_label' ) ),
-			filter_form_get_input( $t_filter, 'show_status', $t_show_inputs ),
+			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
+			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
-			'show_status_filter_target' /* content id */
+			'show_category_filter_target' /* content id */
 			));
 	if( 'simple' == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
@@ -2478,18 +2478,18 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				));
 	}
 	$t_row2->add_item( new TableFieldsItem(
+			$get_field_header( 'show_status_filter', lang_get( 'status_label' ) ),
+			filter_form_get_input( $t_filter, 'show_status', $t_show_inputs ),
+			1 /* colspan */,
+			null /* class */,
+			'show_status_filter_target' /* content id */
+			));
+	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'show_resolution_filter', lang_get( 'resolution_label' ) ),
 			filter_form_get_input( $t_filter, 'show_resolution', $t_show_inputs ),
 			1 /* colspan */,
 			null /* class */,
 			'show_resolution_filter_target' /* content id */
-			));
-	$t_row2->add_item( new TableFieldsItem(
-			$get_field_header( 'show_category_filter', lang_get( 'category_label' ) ),
-			filter_form_get_input( $t_filter, 'show_category', $t_show_inputs ),
-			1 /* colspan */,
-			null /* class */,
-			'show_category_filter_target' /* content id */
 			));
 	$t_row2->add_item( new TableFieldsItem(
 			$get_field_header( 'do_filter_by_date_filter', lang_get( 'use_date_filters_label' ) ),
