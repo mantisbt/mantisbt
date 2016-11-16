@@ -2377,12 +2377,19 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if( $p_for_screen == false ) {
 		$t_action = 'view_all_set.php';
 	}
+	if( $p_expanded ) {
+		# in expanded form, all field are sent
+		$t_view_all_set_type = 1;
+	} else {
+		# in condensed form, only the search field is sent, to be added over current filter values.
+		$t_view_all_set_type = 5;
+	}
 	?>
 
 	<div class="filter-box">
 		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
-		<input type="hidden" name="type" value="1" />
+		<input type="hidden" name="type" value="<?php echo $t_view_all_set_type ?>" />
 		<?php
 			if( $p_for_screen == false ) {
 		echo '<input type="hidden" name="print" value="1" />';
