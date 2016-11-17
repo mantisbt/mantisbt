@@ -488,7 +488,6 @@ $s_all_revisions = 'Todas as Revisões';
 $s_back_to_issue = 'Voltar para o Caso';
 $s_confirm_revision_drop = 'Tem certeza que deseja remover essa revisão de erro?';
 $s_vote_added_msg = 'O voto foi adicionado...';
-$s_bugnote_added_msg = 'Anotação adicionada...';
 $s_bugnote_deleted_msg = 'A anotação foi apagada com sucesso...';
 $s_bug_notes_title = 'Anotações';
 $s_edit_bugnote_title = 'Alterar Anotações';

@@ -489,7 +489,6 @@ $s_all_revisions = 'Всички версии';
 $s_back_to_issue = 'Връщане към проблем';
 $s_confirm_revision_drop = 'Наистина ли искате да се откажете от преразглеждане на този въпрос?';
 $s_vote_added_msg = 'Добавена е бележка...';
-$s_bugnote_added_msg = 'Бележката е добавена...';
 $s_bugnote_deleted_msg = 'Бележката е изтрита успешно...';
 $s_bug_notes_title = 'Бележки';
 $s_edit_bugnote_title = 'Редакция на бележка';

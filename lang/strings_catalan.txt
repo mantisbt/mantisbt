@@ -463,7 +463,6 @@ $s_all_revisions = 'Totes les revisions';
 $s_back_to_issue = 'Retorna a l\'incidència';
 $s_confirm_revision_drop = 'Està segur que vol eliminar aquesta revisió de l\'error?';
 $s_vote_added_msg = 'El seu vot ha estat registrat...';
-$s_bugnote_added_msg = 'Nota agregada...';
 $s_bugnote_deleted_msg = 'La Nota ha estat eliminada...';
 $s_bug_notes_title = 'Notes';
 $s_edit_bugnote_title = 'Edita la Nota';

@@ -444,7 +444,6 @@ $s_all_revisions = 'Kõik redaktsioonid';
 $s_back_to_issue = 'Tagasi kande juurde';
 $s_confirm_revision_drop = 'Oled kindel, et soovid kustutada selle kende redaktsiooni?';
 $s_vote_added_msg = 'Hääl lisatud...';
-$s_bugnote_added_msg = 'Märkus lisatud...';
 $s_bugnote_deleted_msg = 'Märkus kustutatud...';
 $s_bug_notes_title = 'Kande märkused';
 $s_edit_bugnote_title = 'Redigeeri märkust';

@@ -458,7 +458,6 @@ $s_all_revisions = 'Toate reviziile';
 $s_back_to_issue = 'Înapoi la problemă';
 $s_confirm_revision_drop = 'Ești sigur că dorești să renunți la această revizie de problemă?';
 $s_vote_added_msg = 'Votul a fost adăugat...';
-$s_bugnote_added_msg = 'Comentariu adăugat...';
 $s_bugnote_deleted_msg = 'Comentariul a fost șters cu succes...';
 $s_bug_notes_title = 'Comentarii';
 $s_edit_bugnote_title = 'Modifică comentarii';

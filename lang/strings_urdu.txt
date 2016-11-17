@@ -391,7 +391,6 @@ $s_sticky_issue = 'مشکل ایشوذ';
 $s_profile = 'جایزہ';
 $s_updating_bug_simple_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
 $s_vote_added_msg = 'ووٹ جمہع ھو چکا ھے...';
-$s_bugnote_added_msg = ' معلومات جمہع ھو چکی ھیں ...';
 $s_bugnote_deleted_msg = ' معلومات کامیابی کے ساتھ جمہع ھو چکی ھیں...';
 $s_bug_notes_title = ' معلومات';
 $s_edit_bugnote_title = '  معلومات کو تبدیل کرو';

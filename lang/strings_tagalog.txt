@@ -430,7 +430,6 @@ $s_all_revisions = 'Lahat ng mga Pagbabago';
 $s_back_to_issue = 'Bumalik sa Labas';
 $s_confirm_revision_drop = 'Nakatitiyak ka bang nais mong ibagsak ang pagbabago ng depektong ito?';
 $s_vote_added_msg = 'Naidagdag na ang boto...';
-$s_bugnote_added_msg = 'Naidagdag na ang tala/itinala...';
 $s_bugnote_deleted_msg = 'Matagumpay na nabura ang tala/itinala...';
 $s_bug_notes_title = 'Mga pagtatala';
 $s_edit_bugnote_title = 'Baguhin ang Tala';

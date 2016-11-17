@@ -490,7 +490,6 @@ $s_all_revisions = '全リビジョン';
 $s_back_to_issue = '課題に戻る';
 $s_confirm_revision_drop = 'このバグありリビジョンを本当に破棄しますか?';
 $s_vote_added_msg = '投票しました...';
-$s_bugnote_added_msg = 'コメントを追加しました...';
 $s_bugnote_deleted_msg = 'コメントを削除しました...';
 $s_bug_notes_title = 'コメント';
 $s_edit_bugnote_title = 'コメントの編集';

@@ -484,7 +484,6 @@ $s_all_revisions = 'An holl adweladennoù';
 $s_back_to_issue = 'Distreiñ d\'an draen';
 $s_confirm_revision_drop = 'Ha sur oc\'h hoc\'h eus c\'hoant da lemel an adweladenn draen-mañ ?';
 $s_vote_added_msg = 'Ouzhpennet eo bet ar vouezh...';
-$s_bugnote_added_msg = 'Notenn ouzhpennet...';
 $s_bugnote_deleted_msg = 'Dilamet-mat eo bet an notenn...';
 $s_bug_notes_title = 'Notennoù';
 $s_edit_bugnote_title = 'Aozañ an notenn';

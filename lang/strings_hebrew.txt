@@ -468,7 +468,6 @@ $s_all_revisions = 'כל הגרסאות';
 $s_back_to_issue = 'חזרה לבאג';
 $s_confirm_revision_drop = 'האם אתה בטוח שאתה רוצה למחוק לצמיתות את גרסת הבאג הזאת?';
 $s_vote_added_msg = 'הצבעה נוספה';
-$s_bugnote_added_msg = 'הערה נוספה';
 $s_bugnote_deleted_msg = 'הערה נמחקה';
 $s_bug_notes_title = 'הערות';
 $s_edit_bugnote_title = 'עדכון הערה';

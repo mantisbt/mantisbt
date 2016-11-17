@@ -465,7 +465,6 @@ $s_all_revisions = 'Tüm Düzeltmeler';
 $s_back_to_issue = 'Soruna Geri Dön';
 $s_confirm_revision_drop = 'Bu sorun düzeltmesini bırakmak istediğinizden emin misiniz?';
 $s_vote_added_msg = 'Oy eklendi...';
-$s_bugnote_added_msg = 'Sorun notu eklendi...';
 $s_bugnote_deleted_msg = 'Sorun notu başarıyla silindi...';
 $s_bug_notes_title = 'Sorun Notları';
 $s_edit_bugnote_title = 'Sorun Notu Güncelle';

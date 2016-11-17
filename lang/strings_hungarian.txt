@@ -481,7 +481,6 @@ $s_all_revisions = 'Összes változat';
 $s_back_to_issue = 'Vissza az ügyhöz';
 $s_confirm_revision_drop = 'Biztos vagy benne, hogy el szeretnéd dobni ezt az ügyváltozatot?';
 $s_vote_added_msg = 'Szavazat hozzáadva...';
-$s_bugnote_added_msg = 'Megjegyzés hozzáadva...';
 $s_bugnote_deleted_msg = 'Megjegyzés sikeresen törölve...';
 $s_bug_notes_title = 'Megjegyzések';
 $s_edit_bugnote_title = 'Megjegyzés szerkesztése';
