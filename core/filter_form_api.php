@@ -1604,7 +1604,7 @@ function print_filter_tag_string( array $p_filter = null ) {
 
 /**
  * Print the current value of this filter field, as visible string, and as a hidden form input.
- * @param type $p_filter	Filter array
+ * @param array $p_filter	Filter array
  */
 function print_filter_values_note_user_id( array $p_filter ) {
 	$t_filter = $p_filter;
