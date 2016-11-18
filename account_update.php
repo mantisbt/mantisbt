@@ -89,6 +89,9 @@ $t_update_realname = false;
 
 # Do not allow blank passwords in account verification/reset
 if( $t_account_verification && is_blank( $f_password ) ) {
+	# log out of the temporary login used by verification
+	auth_clear_cookies();
+	auth_logout();
 	error_parameters( lang_get( 'password' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
@@ -119,6 +122,11 @@ if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
 # Update password if the two match and are not empty
 if( !is_blank( $f_password ) ) {
 	if( $f_password != $f_password_confirm ) {
+		if( $t_account_verification ) {
+			# log out of the temporary login used by verification
+			auth_clear_cookies();
+			auth_logout();
+		}
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 	} else {
 		if( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
