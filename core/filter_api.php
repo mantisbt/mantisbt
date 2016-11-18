@@ -890,7 +890,7 @@ function filter_get_default_view_type() {
  * @return mixed The property default value, or null if it doesn't exist
  */
 function filter_get_default_property( $p_filter_property, $p_view_type = null ) {
-	$t_default_array = filter_get_default_array( $p_filter_property );
+	$t_default_array = filter_get_default_array( $p_view_type );
 	if( isset( $t_default_array[$p_filter_property] ) ) {
 		return $t_default_array[$p_filter_property];
 	} else {
@@ -946,7 +946,7 @@ function filter_deserialize( $p_serialized_filter ) {
 
 /**
  * Creates a serialized filter with the correct format
- * @param type $p_filter_array Filter array to be serialized
+ * @param array $p_filter_array Filter array to be serialized
  * @return string Serialized filter string
  */
 function filter_serialize( $p_filter_array ) {
@@ -1210,6 +1210,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# Read results into rows array
 	$t_bug_id_array = array();
+	$t_rows = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_bug_id_array[] = (int)$t_row['id'];
 		$t_rows[] = $t_row;
@@ -3352,8 +3353,8 @@ function filter_is_named_filter( $p_filter_id ) {
 /**
  * Returns true if the filter is accesible by the user, which happens when the user
  * is the owner of the filter, or the filter is public.
- * @param type $p_filter_id	Filter id
- * @param type $p_user_id	User id
+ * @param integer $p_filter_id	Filter id
+ * @param integer $p_user_id	User id
  * @return boolean	true if the filter is accesible by the user
  */
 function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
