@@ -283,9 +283,7 @@ function column_get_custom_field_name( $p_column ) {
  * @access public
  */
 function columns_string_to_array( $p_string ) {
-	$t_string = utf8_strtolower( $p_string );
-
-	$t_columns = explode( ',', $t_string );
+	$t_columns = explode( ',', $p_string );
 	$t_count = count( $t_columns );
 
 	for( $i = 0; $i < $t_count; $i++ ) {
