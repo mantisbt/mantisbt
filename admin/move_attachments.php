@@ -316,7 +316,7 @@ if( empty( $t_moved ) ) {
 			echo '<thead>';
 			echo '<tr>',
 				$f_file_type == 'bug' ? '<td>Bug ID</td>' : '',
-				'<td>File</td><th>Filename</td><td>Status</td>',
+				'<td>File ID</td><th>Filename</td><td>Status</td>',
 				'</tr>';
 			echo '</thead>';
 			echo '<tbody>';
@@ -325,7 +325,7 @@ if( empty( $t_moved ) ) {
 				if( $f_file_type == 'bug' ) {
 					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
 				}
-				printf( '<td class="pull-right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
+				printf( '<td>%s</td><td>%s</td><td>%s</td></tr>',
 					$t_data['id'],
 					$t_data['filename'],
 					$t_data['status'] );
