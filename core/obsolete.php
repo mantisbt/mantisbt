@@ -203,4 +203,6 @@ config_obsolete( 'db_schema' );
 # changes in 2.0.0dev
 config_obsolete( 'icon_path' );
 config_obsolete( 'bug_print_page_fields' );
+config_obsolete( 'calendar_js_date_format' );
+config_obsolete( 'calendar_date_format' );
 
