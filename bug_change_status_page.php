@@ -244,7 +244,7 @@ layout_page_begin();
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
 				data-picker-format="<?php echo config_get( 'calendar_js_date_format' ) ?>
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
-			<i class="fa fa-calendar fa-xlg"></i>';
+			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
 	</tr>
 

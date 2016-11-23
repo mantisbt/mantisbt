@@ -212,8 +212,21 @@ $(document).ready( function() {
 	$('input[type=text].datetimepicker').each(function(index, element) {
         $(this).datetimepicker({
             locale: $(this).data('picker-locale'),
-            format: $(this).data('picker-format')
-        });
+            format: $(this).data('picker-format'),
+			icons: {
+				time: 'fa fa-clock-o',
+				date: 'fa fa-calendar',
+				up: 'fa fa-chevron-up',
+				down: 'fa fa-chevron-down',
+				previous: 'fa fa-chevron-left',
+				next: 'fa fa-chevron-right',
+				today: 'fa fa-arrows ',
+				clear: 'fa fa-trash',
+				close: 'fa fa-times'
+			}
+        }).next().on(ace.click_event, function() {
+			$(this).prev().focus();
+		});
 	});
 
 	if( $( ".dropzone-form" ).length ) {
