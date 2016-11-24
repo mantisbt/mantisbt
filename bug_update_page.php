@@ -109,7 +109,7 @@ $t_view_state = $t_show_view_state ? string_display_line( get_enum_element( 'vie
 $t_show_date_submitted = in_array( 'date_submitted', $t_fields );
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_show_reporter = in_array( 'reporter', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields );
+$t_show_handler = in_array( 'handler', $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $t_bug_id );
 $t_show_priority = in_array( 'priority', $t_fields );
 $t_show_severity = in_array( 'severity', $t_fields );
 $t_show_reproducibility = in_array( 'reproducibility', $t_fields );
@@ -316,22 +316,26 @@ if( $t_show_reporter ) {
 if( $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 2;
+	$t_spacer = 0;
 
-	# Assigned To
-	echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
-	echo '<td>';
+	if ( $t_show_handler ) {
+		# Assigned To
+		echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
+		echo '<td>';
 
-	if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
-		echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id">';
-		echo '<option value="0"></option>';
-		print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
-		echo '</select>';
+		if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
+			echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id">';
+			echo '<option value="0"></option>';
+			print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
+			echo '</select>';
+		} else {
+			echo $t_handler_name;
+		}
+
+		echo '</td>';
 	} else {
-		echo $t_handler_name;
+		$t_spacer += 2;
 	}
-
-	echo '</td>';
 
 	if( $t_show_due_date ) {
 		# Due Date
@@ -362,8 +366,9 @@ if( $t_show_handler || $t_show_due_date ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
+	if( $t_spacer > 0 ) {
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	}
 	echo '</tr>';
 }
 
