@@ -853,6 +853,9 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$c_user_id = auth_get_current_user_id();
 
 	db_param_push();
+	$t_query = 'SELECT * FROM {bug_tag}
+					WHERE tag_id != ' . db_param(); # 1st Param
+
 	$t_subquery = 'SELECT b.id FROM {bug} b
 					LEFT JOIN {project_user_list} p
 						ON p.project_id=b.project_id AND p.user_id=' . db_param() . # 2nd Param
@@ -863,9 +866,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
 						AND t.tag_id=' . db_param(); # 4th Param
 
-	$t_query = 'SELECT * FROM {bug_tag}
-					WHERE tag_id != ' . db_param() . # 1st Param
-						' AND bug_id IN ( ' . $t_subquery . ' ) ';
+	$t_query .= ' AND bug_id IN ( ' . $t_subquery . ' ) ';
 
 	$t_result = db_query( $t_query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
 

@@ -420,6 +420,15 @@ $g_return_path_email	= 'admin@example.com';
  */
 $g_enable_email_notification	= ON;
 
+/**
+ * When enabled, the email notifications will send the full issue with
+ * a hint about the change type at the top, rather than using dedicated
+ * notifications that are focused on what changed.  This change can be
+ * overridden in the database per user.
+ *
+ * @global integer $g_email_notifications_verbose
+ */
+$g_email_notifications_verbose = ON;
 
 /**
  * The following two config options allow you to control who should get email
@@ -4346,6 +4355,7 @@ $g_public_config_names = array(
 	'due_date_view_threshold',
 	'email_ensure_unique',
 	'email_login_enabled',
+	'email_notifications_verbose',
 	'email_padding_length',
 	'email_receive_own',
 	'email_separator1',

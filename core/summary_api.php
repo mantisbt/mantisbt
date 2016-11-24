@@ -1122,7 +1122,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 				$t_sev_bug_count = $t_arr2[$c_sev_s[$j]]['total'];
 				$t_sev_mult = 1;
-				if( $t_severity_multipliers[$c_sev_s[$j]] ) {
+				if( isset( $t_severity_multipliers[$c_sev_s[$j]] ) ) {
 					$t_sev_mult = $t_severity_multipliers[$c_sev_s[$j]];
 				}
 

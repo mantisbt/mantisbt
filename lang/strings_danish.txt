@@ -430,7 +430,6 @@ $s_all_revisions = 'Alle versioner';
 $s_back_to_issue = 'Tilbage til rapport';
 $s_confirm_revision_drop = 'Er du sikker på du vil droppe denne rapport revision?';
 $s_vote_added_msg = 'Stemme er blevet tilføjet...';
-$s_bugnote_added_msg = 'Bemærkning tilføjet...';
 $s_bugnote_deleted_msg = 'Bemærkning er blevet slettet..';
 $s_bug_notes_title = 'Bemærkninger';
 $s_edit_bugnote_title = 'Redigér bemærkning';

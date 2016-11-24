@@ -179,12 +179,16 @@ function columns_get_plugin_columns() {
 		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
 			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
 				if( is_array( $t_plugin_column_array ) ) {
-					foreach( $t_plugin_column_array as $t_column_class ) {
-						if( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
-							$t_column_object = new $t_column_class();
-							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
-							$s_column_array[$t_column_name] = $t_column_object;
+					foreach( $t_plugin_column_array as $t_column_item ) {
+						if( is_object( $t_column_item ) && $t_column_item instanceof MantisColumn ) {
+							$t_column_object = $t_column_item;
+						} elseif( class_exists( $t_column_item ) && is_subclass_of( $t_column_item, 'MantisColumn' ) ) {
+							$t_column_object = new $t_column_item();
+						} else {
+							continue;
 						}
+						$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
+						$s_column_array[$t_column_name] = $t_column_object;
 					}
 				}
 			}
@@ -279,9 +283,7 @@ function column_get_custom_field_name( $p_column ) {
  * @access public
  */
 function columns_string_to_array( $p_string ) {
-	$t_string = utf8_strtolower( $p_string );
-
-	$t_columns = explode( ',', $t_string );
+	$t_columns = explode( ',', $p_string );
 	$t_count = count( $t_columns );
 
 	for( $i = 0; $i < $t_count; $i++ ) {

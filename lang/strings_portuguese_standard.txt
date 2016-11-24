@@ -438,7 +438,6 @@ $s_all_revisions = 'Todas as revisões';
 $s_back_to_issue = 'Voltar ao problema';
 $s_confirm_revision_drop = 'Tem a certeza que quer apagar esta revisão do problema?';
 $s_vote_added_msg = 'Voto foi adicionado...';
-$s_bugnote_added_msg = 'Nota Adicionada...';
 $s_bugnote_deleted_msg = 'Nota foi apagada com sucesso...';
 $s_bug_notes_title = 'Notas';
 $s_edit_bugnote_title = 'Editar Nota';

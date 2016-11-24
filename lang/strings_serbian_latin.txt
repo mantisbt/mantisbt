@@ -427,7 +427,6 @@ $s_all_revisions = 'Sve izmene';
 $s_back_to_issue = 'Nazad na problem';
 $s_confirm_revision_drop = 'Želite li da odbacite izmenu ovog problema?';
 $s_vote_added_msg = 'Glas je dodat.';
-$s_bugnote_added_msg = 'Beleška je dodata.';
 $s_bugnote_deleted_msg = 'Beleška je obrisana.';
 $s_bug_notes_title = 'Beleške';
 $s_edit_bugnote_title = 'Uređivanje beleške';

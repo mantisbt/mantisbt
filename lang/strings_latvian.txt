@@ -388,7 +388,6 @@ $s_profile = 'Profils';
 $s_profile_label = 'Profils:';
 $s_updating_bug_simple_title = 'Kļūdas datu labošana';
 $s_vote_added_msg = 'Balsojums pievienots...';
-$s_bugnote_added_msg = 'Piezīme pievienota';
 $s_bugnote_deleted_msg = 'Piezīme dzēsta...';
 $s_bug_notes_title = 'Kļūdas piezīmes';
 $s_edit_bugnote_title = 'Rediģēt piezīmi';

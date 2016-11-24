@@ -455,7 +455,6 @@ $s_all_revisions = 'Tote le versiones';
 $s_back_to_issue = 'Retornar al problema';
 $s_confirm_revision_drop = 'Es tu secur de voler remove iste version del problema?';
 $s_vote_added_msg = 'Le voto ha essite addite...';
-$s_bugnote_added_msg = 'Nota addite...';
 $s_bugnote_deleted_msg = 'Le nota ha essite delite con successo...';
 $s_bug_notes_title = 'Notas';
 $s_edit_bugnote_title = 'Modificar nota';

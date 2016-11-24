@@ -488,7 +488,6 @@ $s_all_revisions = 'Alle versies';
 $s_back_to_issue = 'Terug naar de melding';
 $s_confirm_revision_drop = 'Weet u zeker dat u deze versie van de melding wilt verwijderen?';
 $s_vote_added_msg = 'De stem is toegevoegd.';
-$s_bugnote_added_msg = 'De reactie is toegevoegd.';
 $s_bugnote_deleted_msg = 'De reactie is verwijderd.';
 $s_bug_notes_title = 'Opmerkingen';
 $s_edit_bugnote_title = 'Reactie bewerken';

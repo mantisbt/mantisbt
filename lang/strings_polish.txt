@@ -466,7 +466,6 @@ $s_all_revisions = 'Wszystkie wersje';
 $s_back_to_issue = 'Powrót do zgłoszenia';
 $s_confirm_revision_drop = 'Czy na pewno chcesz odrzucić tę wersję z błędem?';
 $s_vote_added_msg = 'Głos został dodany...';
-$s_bugnote_added_msg = 'Komentarz został dodany...';
 $s_bugnote_deleted_msg = 'Komentarz został pomyślnie usunięty...';
 $s_bug_notes_title = 'Komentarze';
 $s_edit_bugnote_title = 'Edytuj Komentarz';

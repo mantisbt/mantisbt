@@ -49,6 +49,7 @@
  * @author Iniquity
  * @author Irus
  * @author KPu3uC B Poccuu
+ * @author Kareyac
  * @author Kirill
  * @author Okras
  * @author Ole Yves
@@ -434,7 +435,7 @@ $s_reminder_mentions = 'Теперь вы можете отметить поль
 $s_reminder_explain = 'Выбранным адресатам будет отправлено напоминание о желательности обратной связи на эту задачу.';
 $s_reminder_monitor = 'Они также автоматически войдет в состав тех, кто отслеживает задачу. Впоследствии адресаты могут отказаться от отслеживания кнопкой «Не отслеживать».';
 $s_reminder_store = 'Текст этого напоминания будет сохранен в задаче.';
-$s_mentioned_you = 'упомянутый вам:';
+$s_mentioned_you = 'упомянутый вас в:';
 $s_mentioned_in = 'Упоминается в %1$s';
 $s_confirm_sponsorship = 'Пожалуйста, подтвердите, что собираетесь оплатить задачу %1$d в размере %2$s.';
 $s_stick_bug_button = 'Приклеить';
@@ -495,7 +496,7 @@ $s_all_revisions = 'все редакции';
 $s_back_to_issue = 'вернуться к задаче';
 $s_confirm_revision_drop = 'Вы действительно хотите удалить эту редакцию задачи?';
 $s_vote_added_msg = 'Голос добавлен...';
-$s_bugnote_added_msg = 'Комментарий добавлен...';
+$s_bugnote_attached_files = 'Прикрепленные Файлы:';
 $s_bugnote_deleted_msg = 'Комментарий удален...';
 $s_bug_notes_title = 'Комментарии';
 $s_edit_bugnote_title = 'Изменение комментария';

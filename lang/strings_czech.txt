@@ -466,7 +466,6 @@ $s_all_revisions = 'Všechny revize';
 $s_back_to_issue = 'Zpět na problém';
 $s_confirm_revision_drop = 'Jste si jistí, že chcete zahodit tuto revizi problému?';
 $s_vote_added_msg = 'Hlas byl přidán.';
-$s_bugnote_added_msg = 'Poznámka k problému byla přidána.';
 $s_bugnote_deleted_msg = 'Poznámka k problému byla úspěšně smazána.';
 $s_bug_notes_title = 'Poznámky k problému';
 $s_edit_bugnote_title = 'Upravit poznámku k problému';

@@ -463,7 +463,6 @@ $s_all_revisions = 'Alle Revisjoner';
 $s_back_to_issue = 'Tilbake til Sak';
 $s_confirm_revision_drop = 'Er du sikker på at du vil droppe denne saksrevisjonen?';
 $s_vote_added_msg = 'Stemmen er registrert ...';
-$s_bugnote_added_msg = 'Notat lagt til ...';
 $s_bugnote_deleted_msg = 'Notater har blitt slettet ...';
 $s_bug_notes_title = 'Notater';
 $s_edit_bugnote_title = 'Redigere saksnotat';

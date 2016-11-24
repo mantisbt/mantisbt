@@ -313,7 +313,6 @@ $s_steps_to_reproduce = 'Koraki za ponovitev';
 $s_update_information_button = 'Posodobi informacije';
 $s_updating_bug_simple_title = 'Posodabljam zadevo';
 $s_vote_added_msg = 'Glas je bil dodan...';
-$s_bugnote_added_msg = 'Beležka dodana...';
 $s_bugnote_deleted_msg = 'Beležka je bila uspešno izbrisana...';
 $s_bug_notes_title = 'Beležke';
 $s_edit_bugnote_title = 'Urejanje beležke';

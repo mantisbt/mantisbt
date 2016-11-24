@@ -551,7 +551,7 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
-	$t_can_report_bug = access_has_project_level( config_get( 'report_bug_threshold' ) );
+	$t_can_report_bug = access_has_any_project_level( config_get( 'report_bug_threshold' ) );
 	$t_can_invite_user = current_user_is_administrator();
 
 	if( !$t_can_report_bug && !$t_can_invite_user ) {

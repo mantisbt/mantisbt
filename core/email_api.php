@@ -255,9 +255,10 @@ function email_notify_flag( $p_action, $p_flag ) {
  * @param integer $p_bug_id                  A bug identifier.
  * @param string  $p_notify_type             Notification type.
  * @param array   $p_extra_user_ids_to_email Array of additional email addresses to notify.
+ * @param integer $p_bugnote_id The bugnote id in case of bugnote, otherwise null.
  * @return array
  */
-function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array() ) {
+function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array(), $p_bugnote_id = null ) {
 	$t_recipients = array();
 
 	# add explicitly specified users
@@ -324,8 +325,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	}
 
 	# add users who contributed bugnotes
-	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
-	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	$t_bugnote_id = ( $p_bugnote_id === null ) ? bugnote_get_latest_id( $p_bug_id ) : $p_bugnote_id;
+	if( $t_bugnote_id !== 0 ) {
+		$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	}
 	$t_bug = bug_get( $p_bug_id );
 	$t_bug_date = $t_bug->last_updated;
 
@@ -453,7 +456,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
 		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $p_bug_id, $t_id )
-		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id )
+		 || ( $t_bugnote_id !== 0 &&
+				$t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id ) )
 		) {
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;
@@ -635,6 +639,10 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
  * @return void
  */
 function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
+	if( empty( $p_recipients ) ) {
+		return;
+	}
+
 	if( OFF == config_get( 'enable_email_notification' ) ) {
 		return;
 	}
@@ -868,12 +876,90 @@ function email_bug_updated( $p_bug_id ) {
 
 /**
  * send notices when a new bugnote
- * @param int $p_bug_id
- * @return null
+ * @param int $p_bugnote_id  The bugnote id.
+ * @param array $p_files The array of file information (keys: name, size)
+ * @param array $p_exclude_user_ids The id of users to exclude.
+ * @return void
  */
-function email_bugnote_add( $p_bug_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Note added to issue #%d', $p_bug_id ) );
-	email_generic( $p_bug_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted' );
+function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_ids = array() ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+
+	ignore_user_abort( true );
+
+	$t_bugnote = bugnote_get( $p_bugnote_id );
+
+	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
+
+	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
+	$t_separator = config_get( 'email_separator2' );
+	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
+	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
+	$t_message_id = 'email_notification_title_for_action_bugnote_submitted';
+
+	$t_subject = email_build_subject( $t_bugnote->bug_id );
+
+	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
+	$t_recipients_verbose = array();
+
+	# send email to every recipient
+	foreach( $t_recipients as $t_user_id => $t_user_email ) {
+		if( in_array( $t_user_id, $p_exclude_user_ids ) ) {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d excluded, Email = \'%s\'.',
+				$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted', $t_user_id, $t_user_email );
+			continue;
+		}
+
+		# Load this here per user to allow overriding this per user, or even per user per project
+		if( config_get( 'email_notifications_verbose', /* default */ null, $t_user_id, $t_project_id ) == ON ) {
+			$t_recipients_verbose[$t_user_id] = $t_user_email;
+			continue;
+		}
+
+		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.',
+			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', $t_message_id, $t_user_id, $t_user_email );
+
+		# load (push) user language
+		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+
+		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
+
+		$t_show_time_tracking = access_has_bug_level( $t_time_tracking_access_threshold, $t_bugnote->bug_id, $t_user_id );
+		$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
+		$t_message .= trim( $t_formatted_note ) . "\n";
+		$t_message .= $t_separator . "\n";
+
+		# Files attached
+		if( count( $p_files ) > 0 &&
+			access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
+			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
+
+			foreach( $p_files as $t_file ) {
+				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
+					' ' . lang_get( 'bytes' ) . ")\n";
+			}
+
+			$t_message .= $t_separator . "\n";
+		}
+
+		$t_contents = $t_message . "\n";
+
+		email_store( $t_user_email, $t_subject, $t_contents );
+
+		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
+			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
+
+		lang_pop();
+	}
+
+	# Send emails out for users that select verbose notifications
+	email_generic_to_recipients(
+		$t_bugnote->bug_id,
+		'bugnote',
+		$t_recipients_verbose,
+		$t_message_id );
 }
 
 /**
@@ -1342,7 +1428,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * @param array         $p_mention_user_ids User id or list of user ids array.
  * @param string        $p_message    Optional message to add to the e-mail.
  * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
- * @return array List of users ids to whom the reminder e-mail was actually sent
+ * @return array        List of users ids to whom the mentioned e-mail were actually sent
  */
 function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
 	if( OFF == config_get( 'enable_email_notification' ) ) {
@@ -1463,6 +1549,51 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 }
 
 /**
+ * Generates a formatted note to be used in email notifications.
+ *
+ * @param BugnoteData $p_bugnote The bugnote object.
+ * @param integer $p_project_id  The project id
+ * @param boolean $p_show_time_tracking true: show time tracking, false otherwise.
+ * @param string $p_horizontal_separator The horizontal line separator to use.
+ * @param string $p_date_format The date format to use.
+ * @return string The formatted note.
+ */
+function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking, $p_horizontal_separator, $p_date_format = null ) {
+	$t_date_format = ( $p_date_format === null ) ? config_get( 'normal_date_format' ) : $p_date_format;
+
+	$t_last_modified = date( $t_date_format, $p_bugnote->last_modified );
+
+	$t_formatted_bugnote_id = bugnote_format_id( $p_bugnote->id );
+	$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $p_bugnote->id, false, false, true );
+
+	if( $p_show_time_tracking && $p_bugnote->time_tracking > 0 ) {
+		$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $p_bugnote->time_tracking ) . "\n";
+	} else {
+		$t_time_tracking = '';
+	}
+
+	if( user_exists( $p_bugnote->reporter_id ) ) {
+		$t_access_level = access_get_project_level( $p_project_id, $p_bugnote->reporter_id );
+		$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
+	} else {
+		$t_access_level_string = '';
+	}
+
+	$t_private = ( $p_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
+
+	$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $p_bugnote->reporter_id ) .
+		$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
+		$t_time_tracking . ' ' . $t_bugnote_link;
+
+	$t_message  = $p_horizontal_separator . " \n";
+	$t_message .= $t_string . " \n";
+	$t_message .= $p_horizontal_separator . " \n";
+	$t_message .= $p_bugnote->note . " \n";
+
+	return $t_message;
+}
+
+/**
  * Build the bug info part of the message
  * @param array $p_visible_bug_data Bug data array to format.
  * @return string
@@ -1572,34 +1703,9 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# format bugnotes
 	foreach( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
-		$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
-
-		$t_formatted_bugnote_id = bugnote_format_id( $t_bugnote->id );
-		$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
-
-		if( $t_bugnote->time_tracking > 0 ) {
-			$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
-		} else {
-			$t_time_tracking = '';
-		}
-
-		if( user_exists( $t_bugnote->reporter_id ) ) {
-			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'], $t_bugnote->reporter_id );
-			$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
-		} else {
-			$t_access_level_string = '';
-		}
-
-		$t_private = ( $t_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
-
-		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) .
-			$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
-			$t_time_tracking . ' ' . $t_bugnote_link;
-
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_string . " \n";
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_bugnote->note . " \n\n";
+		# Show time tracking is always true, since data has already been filtered out when creating the bug visible data.
+		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'],
+				/* show_time_tracking */ true,  $t_email_separator2, $t_normal_date_format ) . "\n";
 	}
 
 	# format history

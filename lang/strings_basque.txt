@@ -42,6 +42,7 @@
  * @author Arkaitz Barnetik
  * @author Arraintxo
  * @author GipuzkoaKultura
+ * @author Gorkaazk
  * @author Kobazulo
  * @author Subi
  * @author Xabier Armendaritz
@@ -140,7 +141,7 @@ $s_bug_deleted = 'Arazoa Ezabatua';
 $s_make_private = 'Pribatua Bihurtu';
 $s_make_public = 'Publikoa Bihurtu';
 $s_create_new_project_link = 'Proiektu Berria Sortu';
-$s_login_link = 'Saioa hasi';
+$s_login_link = 'Hasi saioa';
 $s_select_option = '(aukeratu)';
 $s_bug_actiongroup_access = 'Ez zeneuzkan ekintza hori betetzeko behar ziren baimenak.';
 $s_bug_actiongroup_status = 'Arazo hau ezin da eskatutako egoerara aldatu';
@@ -375,7 +376,7 @@ $s_monitor_bug_button = 'Jarraipena';
 $s_unmonitor_bug_button = 'Jarraitzeari utzi';
 $s_file_upload_msg = 'Fitxategia arazorik gabe igo da.';
 $s_upload_file = 'Fitxategia igo';
-$s_upload_files = 'Fitxategiak igo';
+$s_upload_files = 'Kargatu fitxategiak';
 $s_select_file = 'Fitxategia Aukeratu';
 $s_select_files = 'Fitxategiak aukeratu';
 $s_upload_file_button = 'Fitxategia igo';
@@ -460,7 +461,6 @@ $s_all_revisions = 'Berrikuspen Guztiak';
 $s_back_to_issue = 'Arazora Itzuli';
 $s_confirm_revision_drop = 'Ziur arazoaren berrikusketa hau baztertu nahi duzula?';
 $s_vote_added_msg = 'Bozka gehitua izan da...';
-$s_bugnote_added_msg = 'Oharra gehitua...';
 $s_bugnote_deleted_msg = 'Oharra arazorik gabe ezabatu da...';
 $s_bug_notes_title = 'Oharrak';
 $s_edit_bugnote_title = 'Oharra Editatu';
@@ -485,7 +485,7 @@ $s_log_page_time = 'Exekuzio denbora';
 $s_log_page_caller = 'Deitzailea';
 $s_log_page_event = 'Gertaera';
 $s_please_report = 'Mesedez honen berri eman %1$s-ari';
-$s_click_to_login = 'Saioa hasi';
+$s_click_to_login = 'Hasi saioa';
 $s_warning_plain_password_authentication = '<strong>Kontuz:</strong> Zifratu gabeko pasahitz autentikazioa erabiltzen da, honek administratzaileei zure pasahitza ikusteko aukera emango die.';
 $s_warning_default_administrator_account_present = '<strong>Kontuz:</strong> lehenetsitako \'administrator\' kontua ezgaitu edo honen pasahitza aldatu beharko zenuke.';
 $s_warning_admin_directory_present = '<strong>Kontuz:</strong> Admin direktorioa ezabatuta egon beharko litzateke.';
@@ -502,7 +502,7 @@ $s_save_login = 'Gogoratu nire saioa nabigatzaile honetan.';
 $s_secure_session = 'Saio Pribatua';
 $s_secure_session_long = 'Zure saioa IP helbide honetatik bakarrik erabiltzen utzi.';
 $s_choose_project = 'Proiektua Aukeratu';
-$s_login_button = 'Saioa hasi';
+$s_login_button = 'Hasi saioa';
 $s_signup_link = 'Kontu berria sortzeko izena eman';
 $s_lost_password_link = 'Pasahitza ahaztu duzu?';
 $s_select_project_button = 'Proiektua Aukeratu';

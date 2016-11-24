@@ -39,6 +39,7 @@
  * @file
  *
  * @author Irus
+ * @author Kareyac
  * @author Kirill
  * @author Lockal
  * @author Okras
@@ -49,7 +50,7 @@
 $s_plugin_graph_title = 'Система отображения графиков в MantisBT';
 $s_plugin_graph_description = 'Официальный плагин MantisBT для отображения графиков.';
 $s_plugin_MantisGraph_title = 'Графики MantisBT';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Расширенный Резюме';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Расширенное резюме';
 $s_plugin_MantisGraph_config = 'настройка';
 $s_plugin_MantisGraph_synthesis_link = 'Сумарно';
 $s_plugin_MantisGraph_status_link = 'По статусу';

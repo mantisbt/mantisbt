@@ -451,7 +451,6 @@ $s_all_revisions = 'Alli Versione';
 $s_back_to_issue = 'Zruck zum Probläm';
 $s_confirm_revision_drop = 'Bisch sicher, ass Du dää Bug ibergumpe witt?';
 $s_vote_added_msg = 'Stimm zuegfiegt …';
-$s_bugnote_added_msg = 'Notiz zuegfiegt …';
 $s_bugnote_deleted_msg = 'Notiz erfolgryych glescht …';
 $s_bug_notes_title = 'Notiz';
 $s_edit_bugnote_title = 'Notiz bearbeite';

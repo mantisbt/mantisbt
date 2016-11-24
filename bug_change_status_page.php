@@ -328,7 +328,7 @@ layout_page_begin();
 		}
 	}
 
-	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) );
+	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id, $f_new_status ) );
 
 	if( $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 ?>

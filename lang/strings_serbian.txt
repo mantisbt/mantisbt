@@ -460,7 +460,6 @@ $s_all_revisions = 'Све измене';
 $s_back_to_issue = 'Назад на проблем';
 $s_confirm_revision_drop = 'Желите ли да одбаците измену овог проблема?';
 $s_vote_added_msg = 'Глас је додат.';
-$s_bugnote_added_msg = 'Белешка је додата.';
 $s_bugnote_deleted_msg = 'Белешка је обрисана.';
 $s_bug_notes_title = 'Белешке';
 $s_edit_bugnote_title = 'Уређивање белешке';
