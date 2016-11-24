@@ -347,7 +347,7 @@ if( $t_show_attachments ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'datetime_field_format' ), $f_due_date );
+			$t_date_to_display = date( config_get( 'normal_date_format' ), $f_due_date );
 		}
 ?>
 	<tr>
@@ -358,8 +358,8 @@ if( $t_show_attachments ) {
 			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
 				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-			 	'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
-			<i class="fa fa-calendar fa-xlg"></i>
+				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
 	</tr>
 <?php } ?>

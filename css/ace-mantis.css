@@ -281,13 +281,13 @@ textarea.input-xs, select.input-xs[multiple] {
     display:  block;
 }
 
-/* databicker */
+/* date/time picker */
 input.datetimepicker {
     margin:0 5px 0 0;
 }
 
 i.datetimepicker {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu {

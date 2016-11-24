@@ -210,9 +210,10 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
-        $(this).datetimepicker({
-            locale: $(this).data('picker-locale'),
-            format: $(this).data('picker-format'),
+		$(this).datetimepicker({
+			locale: $(this).data('picker-locale'),
+			format: $(this).data('picker-format'),
+			useCurrent: false,
 			icons: {
 				time: 'fa fa-clock-o',
 				date: 'fa fa-calendar',
@@ -224,7 +225,7 @@ $(document).ready( function() {
 				clear: 'fa fa-trash',
 				close: 'fa fa-times'
 			}
-        }).next().on(ace.click_event, function() {
+		}).next().on(ace.click_event, function() {
 			$(this).prev().focus();
 		});
 	});

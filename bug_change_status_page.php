@@ -231,7 +231,7 @@ layout_page_begin();
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'datetime_field_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 		}
 ?>
 	<!-- Due date -->
@@ -240,7 +240,7 @@ layout_page_begin();
 			<?php echo lang_get( 'due_date' ) ?>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="20" maxlength="16"
+			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16"
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
 				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
