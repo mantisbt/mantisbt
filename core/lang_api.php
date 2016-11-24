@@ -358,9 +358,8 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 
 /**
  * Maps current lang string to moment.js locale https://github.com/moment/moment/tree/develop/locale
- * @return string
+ * @return string - two chars browser language (ex. 'de' for german language)
  */
-
 function lang_get_current_datetime_locale() {
 	$t_lang = lang_get_current();
 

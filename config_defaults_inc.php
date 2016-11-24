@@ -1144,13 +1144,6 @@ $g_complete_date_format = 'Y-m-d H:i T';
  */
 $g_datetime_picker_format = 'Y-MM-DD H:m';
 
-/**
- * datetime field format string
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
- * @global string $g_datetime_field_format
- */
-$g_datetime_field_format = 'Y-m-d H:i';
 
 ##############################
 # MantisBT TimeZone Settings #
@@ -4273,7 +4266,6 @@ $g_public_config_names = array(
 	'bugnote_user_change_view_state_threshold',
 	'bugnote_user_delete_threshold',
 	'bugnote_user_edit_threshold',
-	'datetime_field_format',
 	'datetime_picker_format',
 	'cdn_enabled',
 	'change_view_status_threshold',

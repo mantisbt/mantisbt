@@ -279,7 +279,7 @@ if( $t_multiple_projects ) {
 				$t_bug_id = $f_bug_arr[0];
 				$t_bug = bug_get( $t_bug_id );
 				if( !date_is_null( $t_bug->due_date ) ) {
-					$t_date_to_display = date( config_get( 'datetime_field_format' ), $t_bug->due_date );
+					$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 				}
 			}
 
@@ -287,7 +287,7 @@ if( $t_multiple_projects ) {
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
 				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
 				'" value="' . $t_date_to_display . '" />';
-			echo '<i class="fa fa-calendar fa-xlg"></i>';
+			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm">';
 

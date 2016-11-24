@@ -313,7 +313,6 @@ function layout_head_javascript() {
  * @return null
  */
 function layout_body_javascript() {
-
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# bootstrap
 		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH );

@@ -231,7 +231,7 @@ layout_page_begin();
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'datetime_field_format' ), $t_bug->due_date );
+			$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 		}
 ?>
 	<!-- Due date -->

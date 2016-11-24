@@ -213,6 +213,7 @@ $(document).ready( function() {
         $(this).datetimepicker({
             locale: $(this).data('picker-locale'),
             format: $(this).data('picker-format'),
+            useCurrent: false,
 			icons: {
 				time: 'fa fa-clock-o',
 				date: 'fa fa-calendar',
