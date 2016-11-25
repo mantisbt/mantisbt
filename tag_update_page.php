@@ -59,6 +59,7 @@ require_api( 'user_api.php' );
 compress_enable();
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_name = string_display_line( $t_tag_row['name'] );

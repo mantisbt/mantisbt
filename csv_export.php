@@ -65,9 +65,6 @@ if( 0 == $p_bug_count ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
-# Execute query
-$t_result = filter_get_bug_rows_result( $t_query_clauses );
-
 # Get columns to be exported
 $t_columns = csv_get_columns();
 
@@ -103,9 +100,14 @@ if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 echo $t_header;
 
 $t_end_of_results = false;
+$t_offset = 0;
 do {
 	# Clear cache for next block
 	bug_clear_cache_all();
+
+	# select a new block
+	$t_result = filter_get_bug_rows_result( $t_query_clauses, EXPORT_BLOCK_SIZE, $t_offset, /* pop params */ false );
+	$t_offset += EXPORT_BLOCK_SIZE;
 
 	# Keep reading until reaching max block size or end of result set
 	$t_read_rows = array();
@@ -115,6 +117,7 @@ do {
 	while( $t_count < EXPORT_BLOCK_SIZE ) {
 		$t_row = db_fetch_array( $t_result );
 		if( false === $t_row ) {
+			# a premature end indicates end of query results. Set flag as finished
 			$t_end_of_results = true;
 			break;
 		}

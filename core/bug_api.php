@@ -2196,6 +2196,13 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 	bug_text_clear_cache( $p_bug_id );
 	file_bug_attachment_count_clear_cache( $p_bug_id );
 	bugnote_clear_bug_cache( $p_bug_id );
+	tag_clear_cache_bug_tags( $p_bug_id );
+	custom_field_clear_cache_values( $p_bug_id );
+
+	$t_plugin_objects = columns_get_plugin_columns();
+	foreach( $t_plugin_objects as $t_plugin_column ) {
+		$t_plugin_column->clear_cache();
+	}
 	return true;
 }
 
@@ -2220,12 +2227,24 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 	$t_project_ids = array_unique( $t_project_ids );
 	$t_category_ids = array_unique( $t_category_ids );
 
+	$t_custom_field_ids = array();
+	$t_users_cached = false;
 	foreach( $p_selected_columns as $t_column ) {
 
 		if( column_is_plugin_column( $t_column ) ) {
 			$plugin_objects = columns_get_plugin_columns();
 			$plugin_objects[$t_column]->cache( $p_bugs );
 			continue;
+		}
+
+		if( strncmp( $t_column, 'custom_', 7 ) === 0 ) {
+			# @TODO cproensa, this will we replaced with column_is_custom_field()
+			$t_cf_name = utf8_substr( $t_column, 7 );
+			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
+			if( $t_cf_id ) {
+				$t_custom_field_ids[] = $t_cf_id;
+				continue;
+			}
 		}
 
 		switch( $t_column ) {
@@ -2235,7 +2254,10 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 			case 'handler_id':
 			case 'reporter_id':
 			case 'status':
-				user_cache_array_rows( $t_user_ids );
+				if( !$t_users_cached ) {
+					user_cache_array_rows( $t_user_ids );
+					$t_users_cached = true;
+				}
 				break;
 			case 'project_id':
 				project_cache_array_rows( $t_project_ids );
@@ -2243,6 +2265,13 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 			case 'category_id':
 				category_cache_array_rows( $t_category_ids );
 				break;
+			case 'tags':
+				tag_cache_bug_tag_rows( $t_bug_ids );
+				break;
 		}
+	}
+
+	if( !empty( $t_custom_field_ids ) ) {
+		custom_field_cache_values( $t_bug_ids, $t_custom_field_ids );
 	}
 }
