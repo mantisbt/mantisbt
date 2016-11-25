@@ -99,6 +99,24 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</td>
 </tr>
 
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_process_markdown' )?>
+		<br />
+		<span class="small">
+			<?php echo lang_get( 'plugin_format_process_markdown_info' )?>
+		</span>
+	</th>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_markdown" value="1" <?php echo( ON == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+	</td>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_markdown" value="0" <?php echo( OFF == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+	</td>
+</tr>
+
 </table>
 </div>
 </div>
