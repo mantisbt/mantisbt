@@ -171,7 +171,7 @@ function print_successful_redirect( $p_redirect_to ) {
 		layout_page_begin();
 		echo '<br /><div class="center">';
 		echo lang_get( 'operation_successful' ) . '<br />';
-		print_button( $p_redirect_to, lang_get( 'proceed' ) );
+		print_link_button( $p_redirect_to, lang_get( 'proceed' ) );
 		echo '</div>';
 		layout_page_end();
 	} else {
@@ -1511,7 +1511,7 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
  * @param string  $p_class      The CSS class of the link.
  * @return void
  */
-function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = false ) {
+function print_link_button( $p_link, $p_url_text, $p_class = '', $p_new_window = false ) {
 	if( is_blank( $p_link ) ) {
 		echo $p_url_text;
 	} else {
@@ -1532,11 +1532,11 @@ function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = fals
  * @return void
  */
 function print_extra_small_button( $p_link, $p_url_text, $p_new_window = false ) {
-	print_button( $p_link, $p_url_text, 'btn-xs', $p_new_window );
+	print_link_button( $p_link, $p_url_text, 'btn-xs', $p_new_window );
 }
 
 function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
-	print_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
+	print_link_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
 }
 
 /**
@@ -1767,7 +1767,7 @@ function print_signup_link() {
 		 ( LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
-		print_button( 'signup_page.php', lang_get( 'signup_link' ) );
+		print_link_button( 'signup_page.php', lang_get( 'signup_link' ) );
 	}
 }
 
@@ -1776,7 +1776,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-	print_button( 'login_page.php', lang_get( 'login_title' ) );
+	print_link_button( 'login_page.php', lang_get( 'login_title' ) );
 }
 
 /**
@@ -1789,7 +1789,7 @@ function print_lost_password_link() {
 		 ( ON == config_get( 'lost_password_feature' ) ) &&
 		 ( ON == config_get( 'send_reset_password' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) ) ) {
-		print_button( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
+		print_link_button( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 	}
 }
 
@@ -2119,4 +2119,22 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
 
+}
+
+/**
+ * Print a button which presents a standalone form.
+ * This function remains for compatibility with v1.3
+ * @deprecated use print_form_button() instead
+ * @param string $p_action_page    The action page.
+ * @param string $p_label          The button label.
+ * @param array  $p_args_to_post   Associative array of arguments to be posted
+ * @param mixed  $p_security_token Optional; null (default), OFF or security token string.
+ * @see form_security_token()
+ * @see print_form_button()
+ * @return void
+ */
+function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null ) {
+	error_parameters( __FUNCTION__, 'print_form_button' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
 }

@@ -70,32 +70,32 @@ echo '<h1>', string_display( project_get_field( $f_project_id, 'name' ) ), '</h1
 echo '<p>';
 
 # View Issues
-print_button( $t_view_issues_url, lang_get( 'view_bugs_link' ) );
+print_link_button( $t_view_issues_url, lang_get( 'view_bugs_link' ) );
 
 # Changelog
-print_button( 'changelog_page.php?project_id=' . $f_project_id, lang_get( 'changelog_link' ) );
+print_link_button( 'changelog_page.php?project_id=' . $f_project_id, lang_get( 'changelog_link' ) );
 
 # Roadmap
-print_button( 'roadmap_page.php?project_id=' . $f_project_id, lang_get( 'roadmap_link' ) );
+print_link_button( 'roadmap_page.php?project_id=' . $f_project_id, lang_get( 'roadmap_link' ) );
 
 # Documentation
 if( config_get( 'enable_project_documentation' ) == ON ) {
-	print_button( 'proj_doc_page.php?project_id=' . $f_project_id, lang_get( 'docs_link' ) );
+	print_link_button( 'proj_doc_page.php?project_id=' . $f_project_id, lang_get( 'docs_link' ) );
 }
 
 # Wiki
 if( config_get( 'wiki_enable' ) == ON ) {
-	print_button( 'wiki.php?type=project&id=' . $f_project_id, lang_get( 'wiki' ) );
+	print_link_button( 'wiki.php?type=project&id=' . $f_project_id, lang_get( 'wiki' ) );
 }
 
 # Summary Page for Project
 if( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
-	print_button( 'summary_page.php?project_id=' . $f_project_id, lang_get( 'summary_link' ) );
+	print_link_button( 'summary_page.php?project_id=' . $f_project_id, lang_get( 'summary_link' ) );
 }
 
 # Manage Project Page
 if( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
-	print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'manage_link' ) );
+	print_link_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'manage_link' ) );
 }
 
 echo '</p>';

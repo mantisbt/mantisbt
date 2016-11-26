@@ -152,7 +152,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 	</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
-			<?php print_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
+			<?php print_link_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
 		</div>
 	</div>
 </div>

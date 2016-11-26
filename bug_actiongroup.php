@@ -356,7 +356,7 @@ if( count( $t_failed_ids ) > 0 ) {
 	}
 	echo '</div>';
 	echo '</table><br />';
-	print_button( $t_redirect_url, lang_get( 'proceed' ) );
+	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
 	layout_page_end();

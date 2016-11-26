@@ -112,15 +112,15 @@ layout_page_begin();
 	<!-- Links -->
 	<td class="pull-right">
 		<!-- View Issue -->
-		<span class="small"><?php print_button( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) ) ?></span>
+		<span class="small"><?php print_link_button( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) ) ?></span>
 
 		<!-- Relation/Dependency Graph Switch -->
 		<span class="small">
 <?php
 		if( $t_graph_relation ) {
-			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) );
+			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) );
 		} else {
-			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=relation', lang_get( 'relation_graph' ) );
+			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=relation', lang_get( 'relation_graph' ) );
 		}
 ?>
 		</span>
@@ -131,9 +131,9 @@ layout_page_begin();
 		<span class="small">
 <?php
 		if( $t_graph_horizontal ) {
-			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
+			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=vertical', lang_get( 'vertical' ) );
 		} else {
-			print_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
+			print_link_button( 'bug_relationship_graph.php?bug_id=' . $f_bug_id . '&graph=dependency&orientation=horizontal', lang_get( 'horizontal' ) );
 		}
 ?>
 		</span>
