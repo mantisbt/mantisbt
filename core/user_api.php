@@ -58,7 +58,10 @@ require_api( 'string_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+# Cache of user rows from {user} table, indexed by user_id
+# If id does not exists, a value of 'false' is stored
 $g_cache_user = array();
+
 $g_user_accessible_subprojects_cache = null;
 
 /**
@@ -74,35 +77,25 @@ $g_user_accessible_subprojects_cache = null;
 function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	global $g_cache_user;
 
-	if( isset( $g_cache_user[$p_user_id] ) ) {
-		return $g_cache_user[$p_user_id];
+	if( !isset( $g_cache_user[$p_user_id] ) ) {
+		user_cache_array_rows( array( $p_user_id ) );
 	}
+	$t_user_row = $g_cache_user[$p_user_id];
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {user} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id ) );
-
-	if( 0 == db_num_rows( $t_result ) ) {
-		$g_cache_user[$p_user_id] = false;
-
+	if( !$t_user_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( (integer)$p_user_id );
 			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 		}
-
 		return false;
 	}
 
-	$t_row = db_fetch_array( $t_result );
-
-	$g_cache_user[$p_user_id] = $t_row;
-
-	return $t_row;
+	return $t_user_row;
 }
 
 /**
- * Generate an array of User objects from given User ID's
- *
+ * Loads user rows in cache for a set of User ID's
+ * Store false if the user does not exists
  * @param array $p_user_id_array An array of user identifiers.
  * @return void
  */
@@ -112,21 +105,32 @@ function user_cache_array_rows( array $p_user_id_array ) {
 
 	foreach( $p_user_id_array as $t_user_id ) {
 		if( !isset( $g_cache_user[(int)$t_user_id] ) ) {
-			$c_user_id_array[] = (int)$t_user_id;
+			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
 		}
 	}
-
 	if( empty( $c_user_id_array ) ) {
 		return;
 	}
 
-	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $c_user_id_array ) . ')';
-	$t_result = db_query( $t_query );
+	db_param_push();
+	$t_params = array();
+	$t_sql_in_params = array();
+	foreach( $c_user_id_array as $t_id ) {
+		$t_params[] = $t_id;
+		$t_sql_in_params[] = db_param();
+	}
+	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $t_sql_in_params ) . ')';
+	$t_result = db_query( $t_query, $t_params );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_user[(int)$t_row['id']] = $t_row;
+		$c_user_id = (int)$t_row['id'];
+		$g_cache_user[$c_user_id] = $t_row;
+		unset( $c_user_id_array[$c_user_id] );
 	}
-	return;
+	# set the remaining ids to false as not-found
+	foreach( $c_user_id_array as $t_id ) {
+		$g_cache_user[$t_id] = false;
+	}
 }
 
 /**
@@ -186,7 +190,7 @@ function user_search_cache( $p_field, $p_value ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
 		foreach( $g_cache_user as $t_user ) {
-			if( $t_user[$p_field] == $p_value ) {
+			if( $t_user && $t_user[$p_field] == $p_value ) {
 				return $t_user;
 			}
 		}
@@ -785,7 +789,6 @@ function user_get_id_by_name( $p_username ) {
  * @return array
  */
 function user_get_id_by_email( $p_email ) {
-	global $g_cache_user;
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
 		return $t_user['id'];
 	}
@@ -835,7 +838,6 @@ function user_get_enabled_ids_by_email( $p_email ) {
  * @return array
  */
 function user_get_id_by_realname( $p_realname ) {
-	global $g_cache_user;
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
 		return $t_user['id'];
 	}
