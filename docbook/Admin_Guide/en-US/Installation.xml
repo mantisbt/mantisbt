@@ -104,7 +104,7 @@
 
 				<listitem>
 					<para>Disk</para>
-					<para>The application code is less than 20 MB
+					<para>The application code is less than 30 MB.
 					</para>
 					<para>The amount of disk space required for the database
 						will vary depending on the RDBMS and the volume of
@@ -194,10 +194,7 @@
 									requesting an attachment.
 								</para>
 								<para>This extension is included by default from
-									PHP version 5.3.x and above. For older versions
-									you will need to install the fileinfo PECL
-									extension (this requires root access to the
-									server you're using).
+									PHP version 5.3.x and above.
 							</para></listitem>
 
 							<listitem><para><emphasis>mbstring</emphasis> -
@@ -217,11 +214,39 @@
 					<para>Database</para>
 					<para>MantisBT requires a database to store its data.
 						The supported RDBMS are:
-							MySQL (recommended),
-							PostgreSQL,
-							Microsoft SQL Server and
-							Oracle.
 					</para>
+					<itemizedlist>
+						<listitem><para>MySQL (or one of its forks, e.g. MariaDB)
+						</para></listitem>
+						<listitem><para>PostgreSQL</para></listitem>
+					</itemizedlist>
+					<para>Experimental support is also available for
+					</para>
+					<itemizedlist>
+						<listitem><para>Microsoft SQL Server</para></listitem>
+						<listitem><para>Oracle</para></listitem>
+					</itemizedlist>
+					<para>Experimental support means that manual intervention
+						by a skilled Database Administrator may be required to
+						complete the installation, and/or that there may be
+						known issues or limitations when using the software.
+						Please refer to our
+						<ulink url="https://mantisbt.org/bugs/">Issue tracker</ulink>,
+						filtering on categories
+						<emphasis>db mssql</emphasis> and
+						<emphasis>db oracle</emphasis>
+						to find out more about those.
+					</para>
+					<note>
+						<para>Please note that the MantisBT development team
+							mainly works with MySQL, so testing for other
+							drivers is not as extensive as we mainly rely on
+							community contributions to improve support and fix
+							issues with other RDBMS.
+						</para>
+						<para>We therefore recommend MySQL to store your database.
+						</para>
+					</note>
 				</listitem>
 
 			</itemizedlist>
@@ -243,7 +268,7 @@
 						<tbody>
 							<row>
 								<entry morerows='4' valign='middle'>RDBMS</entry>
-								<entry>MySQL</entry>
+								<entry>MySQL / MariaDB</entry>
 								<entry>5.0.8</entry>
 								<entry>5.5.x or above</entry>
 								<entry>PHP extension: mysqli (recommended) or mysql</entry>
@@ -270,8 +295,8 @@
 							<row>
 								<entry morerows='3' valign='middle'>Web Server</entry>
 								<entry>Apache</entry>
-								<entry>1.3.x</entry>
 								<entry>2.2.x</entry>
+								<entry>2.4.x</entry>
 								<entry></entry>
 							</row>
 							<row>
@@ -282,8 +307,8 @@
 							</row>
 							<row>
 								<entry>nginx</entry>
-								<entry>0.8.x</entry>
-								<entry>0.8.x</entry>
+								<entry>1.10.x</entry>
+								<entry>1.10.x</entry>
 								<entry></entry>
 							</row>
 							<row>
@@ -303,6 +328,13 @@
 						</tbody>
 					</tgroup>
 				</informaltable>
+
+				<warning>
+					<para>Running MantisBT with versions of the software
+						components lower than the minimum requirements listed
+						above is not supported.
+					</para>
+				</warning>
 
 			</section>
 		</section>
