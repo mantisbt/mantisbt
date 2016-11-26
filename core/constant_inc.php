@@ -41,9 +41,10 @@ define( 'PHP_CGI', 1 );
 # installation
 define( 'CONFIGURED_PASSWORD', '______' );
 define( 'DB_MIN_VERSION_ADODB', '5.20.2' );  # For mssql, oracle and pgsql
-define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
-define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
-define( 'DB_MIN_VERSION_PGSQL', '9.0' );     # Earliest supported version as of August 2014
+define( 'DB_MIN_VERSION_MSSQL', '11.0.0' );  # MS SQL Server 2012
+define( 'DB_MIN_VERSION_MYSQL', '5.5.35' );  # See #20431
+define( 'DB_MIN_VERSION_PGSQL', '9.2' );     # Earliest supported version as of Nov 2016
+define( 'DB_MIN_VERSION_ORACLE', '11.2' );
 
 # error types
 define( 'ERROR', E_USER_ERROR );
