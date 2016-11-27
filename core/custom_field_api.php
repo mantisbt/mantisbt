@@ -946,8 +946,8 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	}
 
 	# A null value means a cached non existant value. It must be checked with care.
-	if( isset( $g_cache_cf_bug_values[$c_bug_id] )
-			&& !array_key_exists( $c_field_id, $g_cache_cf_bug_values[$c_bug_id] ) ) {
+	if( !isset( $g_cache_cf_bug_values[$c_bug_id] )
+			|| !array_key_exists( $c_field_id, $g_cache_cf_bug_values[$c_bug_id] ) ) {
 		custom_field_cache_values( array( $c_bug_id ), array( $c_field_id ) );
 	}
 
