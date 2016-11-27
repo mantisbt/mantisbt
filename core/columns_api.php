@@ -203,19 +203,19 @@ function columns_get_custom_fields() {
 }
 
 /**
- * Get all columns active for the current system.  * This includes standard,
- * custom fields, and plugin columns.
+ * Get all columns active for the current system.
+ * This includes standard, custom fields, and plugin columns.
  * Columns for disabled modules are removed from this list, according to system
  * configuration.
  *
  * This function cannot check on current user/project, so it can be used by core
  * in potential unlogged-in scenarios.
- * @return array Array of columns
+ * @return array Array of column names
  */
 function columns_get_all_active_columns() {
 	$t_columns = array_merge(
 			columns_get_standard(),
-			columns_get_plugin_columns(),
+			array_keys( columns_get_plugin_columns() ),
 			columns_get_custom_fields()
 			);
 	return columns_filter_disabled( $t_columns );
