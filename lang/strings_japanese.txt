@@ -49,6 +49,7 @@
  * @author Shirayuki
  * @author SkyDaisy9
  * @author Sujiniku
+ * @author ネイ
  * @author 赤城。
  */
 
@@ -845,7 +846,7 @@ $s_must_enter_description = '詳細を記入してください。';
 $s_report_more_bugs = '次の課題を報告';
 $s_submission_thanks_msg = '登録していただきありがとうございました。';
 $s_simple_report_link = '簡易';
-$s_enter_report_details_title = '課題の登録';
+$s_enter_report_details_title = '問題の詳細を入力';
 $s_required = '必須';
 $s_select_category = 'カテゴリを選択';
 $s_select_reproducibility = '再現性を選択';
@@ -853,7 +854,7 @@ $s_select_severity = '重要度を選択';
 $s_or_fill_in = 'または記入する';
 $s_assign_to = '割り当て先';
 $s_additional_information = '追加情報';
-$s_submit_report_button = '登録';
+$s_submit_report_button = '問題を送信';
 $s_check_report_more_bugs = '続けて登録する場合はチェックを入れてください';
 $s_report_stay = '次の課題';
 $s_selected_project = '選択したプロジェクト';
