@@ -257,20 +257,24 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	return $t_moved;
 }
 
-$t_array = explode( ':', $f_project_to_move, 2 );
-if( isset( $t_array[1] ) ) {
-	$f_project_id = $t_array[1];
+$t_moved = array();
 
-	if( !is_numeric( $f_project_id ) || (int)$f_project_id == 0 ) {
-		$t_moved = array();
-	} else {
-		switch( $t_array[0] ) {
-			case 'disk':
-				$t_moved = move_attachments_to_disk( $f_file_type, array( $f_project_id ) );
-				break;
-			case 'db':
-				$t_moved = move_attachments_to_db( $f_file_type, array( $f_project_id ) );
-				break;
+if ( null != $f_project_to_move ) {
+	foreach ( $f_project_to_move as $t_project_to_move) {
+		
+		$t_array = explode( ':', $t_project_to_move );
+
+		if( isset( $t_array[1] ) ) {
+			$f_project_id = $t_array[1];
+
+			switch( $t_array[0] ) {
+				case 'disk':
+					$t_moved[] = move_attachments_to_disk( $f_file_type, array( $f_project_id ) );
+					break;
+				case 'db':
+					$t_moved[] = move_attachments_to_db( $f_file_type, array( $f_project_id ) );
+					break;
+			}
 		}
 	}
 }
@@ -291,9 +295,13 @@ layout_admin_page_begin();
 
 # Display results
 if( empty( $t_moved ) ) {
-	echo '<p class="lead">Nothing to do.</p>'. "\n";
+	echo '<div class="alert alert-danger">';
+		echo '<p class="lead"><strong>Opps!</strong> Please select the project you want to move the attachment.</p>';
+	echo '</div>';
 } else {
 	foreach( $t_moved as $t_row ) {
+		$t_row = $t_row[0];
+
 		echo '<div class="widget-box widget-color-blue2">';
 		echo '<div class="widget-header widget-header-small">';
 		echo '<h4 class="widget-title lighter">';
@@ -315,8 +323,8 @@ if( empty( $t_moved ) ) {
 			echo '<table class="table table-bordered table-condensed">';
 			echo '<thead>';
 			echo '<tr>',
-				$f_file_type == 'bug' ? '<td>Bug ID</td>' : '',
-				'<td>File ID</td><th>Filename</td><td>Status</td>',
+				$f_file_type == 'bug' ? '<td width="5%">Bug ID</td>' : '',
+				'<td width="3%">File ID</td><th width="15%">Filename</td><td width="25%">Status</td>',
 				'</tr>';
 			echo '</thead>';
 			echo '<tbody>';
@@ -343,6 +351,7 @@ if( empty( $t_moved ) ) {
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
+		echo "<br/>";
 	}
 }
 echo "<br/>";

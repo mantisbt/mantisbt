@@ -119,11 +119,11 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 <table class="table table-bordered table-condensed">
 	<tr>
 		<th>Project name</th>
-		<th width="18%">File Path</th>
-		<th width="18%">Disk</th>
-		<th width="18%">Database</th>
-		<th width="18%">Attachments</th>
-		<th width="18%">Storage</th>
+		<th width="28%">File Path</th>
+		<th width="5%">Disk</th>
+		<th width="5%">Database</th>
+		<th width="5%">Attachments</th>
+		<th width="5%">Storage</th>
 		<th width="7%">To Disk</th>
 		<th width="7%">To Database</th>
 	</tr>
@@ -156,7 +156,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		echo '<tr>';
 		echo '<td>' . $t_project['name'] . '</td>';
-		echo '<td class="center">' . $t_file_path . '</td>';
+		echo '<td class="left">' . $t_file_path . '</td>';
 		echo '<td class="center">' . $t_disk_count . '</td>';
 		echo '<td class="center">' . $t_db_count . '</td>';
 		echo '<td class="center">' . ( $t_db_count + $t_disk_count ) . '</td>';
@@ -164,7 +164,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		if( $t_upload_method == DISK ) {
 			if ( !is_blank( $t_file_path ) && $t_db_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="disk:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="disk:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
@@ -172,7 +172,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		} else {
 			echo '<td class="center">-</td>';
 			if ( $t_disk_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="db:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="db:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
