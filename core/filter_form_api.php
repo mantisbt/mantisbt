@@ -1903,7 +1903,7 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 
 	switch( $t_cfdef['type'] ) {
 		case CUSTOM_FIELD_TYPE_DATE:
-			print_filter_custom_field_date( $p_field_id );
+			print_filter_custom_field_date( $p_field_id, $p_filter );
 			break;
 
 		case CUSTOM_FIELD_TYPE_TEXTAREA:
