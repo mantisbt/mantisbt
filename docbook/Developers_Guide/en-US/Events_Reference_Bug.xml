@@ -114,6 +114,11 @@
 					the data has not yet been persisted.
 				</para>
 
+				<para>
+					Note: This event is only triggered for some actions in the web UI.
+					For capturing all changes the event EVENT_API_REPORT_BUG_PRE should be used.
+				</para>
+
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
@@ -135,6 +140,11 @@
 					structure after being reported from the user and being saved to the
 					database.  At this point, the issue ID is actually known, and is passed
 					as a second parameter.
+				</para>
+
+				<para>
+					Note: This event is only triggered for some actions in the web UI.
+					For capturing all changes the event EVENT_API_REPORT_BUG_POST should be used.
 				</para>
 
 				<itemizedlist>
@@ -212,6 +222,11 @@
 					being saved to the database.
 				</para>
 
+				<para>
+					Note: This event is only triggered for some actions in the web UI.
+					For capturing all changes the event EVENT_API_UPDATE_BUG_PRE should be used.
+				</para>
+
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
@@ -232,6 +247,11 @@
 				<para>
 					This event allows plugins to perform post-processing of the bug data
 					structure after being updated.
+				</para>
+
+				<para>
+					Note: This event is only triggered for some actions in the web UI.
+					For capturing all changes the event EVENT_API_UPDATE_BUG_POST should be used.
 				</para>
 
 				<itemizedlist>
@@ -273,6 +293,102 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbugdata">
+			<title>EVENT_API_REPORT_BUG_PRE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform pre-processing of a new bug data
+					structure before the data is saved to the database. At this point,
+					the issue ID is not yet known, as the data has not yet been persisted.
+					Modifications on this structure can be made in the BugData object
+					received as parameter.
+					This event is triggered by the BugData API by any action that uses
+					the create() method.
+				</para>
+
+				<para>
+					Note: As the create action may be altered or stopped by other plugins,
+					or a final validation step before saving the data, the actions implemented
+					by this event should not have side effects outside the BugData structure.
+					Use BugData callbacks to be executed after the data is committed, and before
+					the finalization events.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.reportbugdata">
+			<title>EVENT_API_REPORT_BUG_POST (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing of the bug data
+					structure after being saved to the database in a create action.
+					This event is triggered by the BugData API by any action that uses
+					the create() method.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.updatebugdata">
+			<title>EVENT_API_UPDATE_BUG_PRE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform pre-processing of the updated
+					bug data structure before the data is saved to the database.
+					Modifications on this structure can be made in the BugData object
+					received as parameter.
+					This event is triggered by the BugData API by any action that uses
+					the update method.
+				</para>
+
+				<para>
+					Note: As the update action may be altered or stopped by other plugins,
+					or a final validation step before saving the data, the actions implemented
+					by this event should not have side effects outside the BugData structure.
+					Use BugData callbacks to be executed after the data is committed, and before
+					the finalization events.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+				</itemizedlist>
+
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.updatebug">
+			<title>EVENT_API_UPDATE_BUG_POST (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing of the bug data
+					structure after being saved to the database in an update action.
+					This event is triggered by the BugData API by any action that uses
+					the update() method.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>&lt;Complex&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
