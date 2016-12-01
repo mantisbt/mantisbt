@@ -143,4 +143,10 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+	# Core API events for Bug create and update
+	'EVENT_API_REPORT_BUG_PRE' => EVENT_TYPE_EXECUTE,
+	'EVENT_API_REPORT_BUG_POST' => EVENT_TYPE_EXECUTE,
+	'EVENT_API_UPDATE_BUG_PRE' => EVENT_TYPE_EXECUTE,
+	'EVENT_API_UPDATE_BUG_POST' => EVENT_TYPE_EXECUTE,
 ) );
