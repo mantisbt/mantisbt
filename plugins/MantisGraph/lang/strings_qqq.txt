@@ -49,6 +49,7 @@
 
 $s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
 $s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
+$s_plugin_MantisGraph_bundled = '{{Identical|Bundled}}';
 $s_plugin_MantisGraph_font = '{{Identical|Font}}';
 $s_plugin_MantisGraph_enabled = '{{Identical|On}}';
 $s_plugin_MantisGraph_disabled = '{{Identical|Off}}';

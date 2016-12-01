@@ -455,6 +455,7 @@ $s_all_revisions = 'Visos revizijos';
 $s_back_to_issue = 'Atgal prie klaidos';
 $s_confirm_revision_drop = 'Ar tikrai norite mesti šį klausimą persvarstyti?';
 $s_vote_added_msg = 'Balsas įskaičiuotas...';
+$s_bugnote_attached_files = 'Prisegti Failai:';
 $s_bugnote_deleted_msg = 'Komentaras sėkmingai ištrintas...';
 $s_bug_notes_title = 'Komentarai';
 $s_edit_bugnote_title = 'Komentaro antraštės redagavimas';

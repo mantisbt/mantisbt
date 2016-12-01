@@ -214,9 +214,9 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 
 	db_param_push();
 	$t_params= array();
-	$t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS.value, CFS.text FROM mantis_bug_table B'
-			. ' LEFT OUTER JOIN mantis_custom_field_table CF ON 1 = 1'
-			. ' LEFT OUTER JOIN mantis_custom_field_string_table CFS ON ( B.id = CFS.bug_id AND CF.id = CFS.field_id )';
+	$t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS.value, CFS.text FROM {bug} B'
+			. ' LEFT OUTER JOIN {custom_field} CF ON 1 = 1'
+			. ' LEFT OUTER JOIN {custom_field_string} CFS ON ( B.id = CFS.bug_id AND CF.id = CFS.field_id )';
 	$t_bug_in_params = array();
 	foreach( $t_bugs_to_search as $t_bug_id ) {
 		$t_bug_in_params[] = db_param();
