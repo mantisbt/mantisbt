@@ -226,7 +226,7 @@ if( !empty( $t_custom_fields_to_set ) ) {
 
 # Handle the file upload
 if( $f_files !== null ) {
-	if( !file_allow_bug_upload( $t_bug_id ) ) {
+	if( !file_allow_bug_upload() ) {
 		access_denied();
 	}
 	$t_callback_file_upload = function( BugData $p_bug, $p_files ) {
