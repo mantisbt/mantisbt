@@ -379,6 +379,9 @@ $t_updated_bug->status = bug_get_status_for_assign( $t_existing_bug->handler_id,
 # the new plugin system instead.
 helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_updated_bug, $t_bug_note->note ) );
 
+# Allow plugins to validate/modify the update prior to it being committed.
+$t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_existing_bug );
+
 # set up post-update callbacks
 
 # Update custom field values.
@@ -413,6 +416,8 @@ $t_text_field_update_required = ( $t_existing_bug->description != $t_updated_bug
 		|| ( $t_existing_bug->additional_information != $t_updated_bug->additional_information )
 		|| ( $t_existing_bug->steps_to_reproduce != $t_updated_bug->steps_to_reproduce );
 $t_updated_bug->update( /* update extended */ $t_text_field_update_required, /* bypass mail */ true );
+
+event_signal( 'EVENT_UPDATE_BUG', array( $t_existing_bug, $t_updated_bug ) );
 
 # Allow a custom function to respond to the modifications made to the bug. Note
 # that custom functions are being deprecated in MantisBT. You should migrate to
