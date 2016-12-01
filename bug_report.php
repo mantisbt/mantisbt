@@ -169,6 +169,9 @@ if( 0 != $t_bug_data->profile_id ) {
 }
 helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
 
+# Allow plugins to pre-process bug data
+$t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
+
 # Validate the custom fields before adding the bug.
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 $t_custom_fields_to_set = array();
@@ -299,6 +302,9 @@ $t_bug_data->process_mentions();
 last_visited_issue( $t_bug_id );
 
 helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
+
+# Allow plugins to post-process bug data with the new bug ID
+event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 email_bug_added( $t_bug_id );
 
