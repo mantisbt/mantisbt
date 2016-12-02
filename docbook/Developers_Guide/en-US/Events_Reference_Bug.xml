@@ -297,7 +297,7 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.reportbugdata">
+		<blockquote id="dev.eventref.bug.action.reportbugpre">
 			<title>EVENT_API_REPORT_BUG_PRE (Execute)</title>
 
 			<blockquote>
@@ -326,7 +326,7 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.reportbugdata">
+		<blockquote id="dev.eventref.bug.action.reportbugpost">
 			<title>EVENT_API_REPORT_BUG_POST (Execute)</title>
 
 			<blockquote>
@@ -344,7 +344,7 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.updatebugdata">
+		<blockquote id="dev.eventref.bug.action.updatebugpre">
 			<title>EVENT_API_UPDATE_BUG_PRE (Execute)</title>
 
 			<blockquote>
@@ -374,7 +374,7 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.updatebug">
+		<blockquote id="dev.eventref.bug.action.updatebugpost">
 			<title>EVENT_API_UPDATE_BUG_POST (Execute)</title>
 
 			<blockquote>
