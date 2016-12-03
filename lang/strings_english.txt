@@ -512,7 +512,7 @@ $s_unmonitor_bug_button = 'End Monitoring';
 # bug_file_add.php
 $s_file_upload_msg = 'File upload successful.';
 
-# bug_file_upload_inc.php
+# bugnote_add_inc.php
 $s_upload_file = 'Upload File';
 $s_upload_files = 'Upload Files';
 $s_select_file = 'Select File';
