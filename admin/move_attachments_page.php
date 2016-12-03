@@ -116,19 +116,22 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 <form name="move_attachments_project_select" method="post" action="move_attachments.php">
 <div class="table-responsive">
-<table class="table table-bordered table-condensed">
-	<tr>
-		<th>Project name</th>
-		<th width="28%">File Path</th>
-		<th width="5%">Disk</th>
-		<th width="5%">Database</th>
-		<th width="5%">Attachments</th>
-		<th width="5%">Storage</th>
-		<th width="7%">To Disk</th>
-		<th width="7%">To Database</th>
-	</tr>
-
+<table class="table table-bordered table-condensed table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Project name</th>
+			<th width="28%">File Path</th>
+			<th width="5%">Disk</th>
+			<th width="5%">Database</th>
+			<th width="5%">Attachments</th>
+			<th width="5%">Storage</th>
+			<th width="7%">To Disk</th>
+			<th width="7%">To Database</th>
+		</tr>
+	</thead>
+	
 <?php
+	echo '<tbody>';
 	# Printing rows of projects with attachments to move
 	foreach( $t_projects as $t_id => $t_project ) {
 		$t_db_count = 0;
@@ -179,10 +182,10 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		}
 		echo "</tr>\n";
 	}
-
+	echo '</tbody>';
 	echo form_security_field( 'move_attachments_project_select' );
 ?>
-
+	
 </table>
 <div class="widget-toolbox padding-8 clearfix">
 	<input name="type" type="hidden" value="<?php echo $f_file_type ?>" />
