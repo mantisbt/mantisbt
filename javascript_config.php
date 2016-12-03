@@ -33,10 +33,15 @@ require_api( 'config_api.php' );
 /**
  * Print array of configuration option->values for javascript.
  * @param string $p_config_key Configuration option.
+ * @param string $p_custom_value Set a custom value.
  * @return void
  */
-function print_config_value( $p_config_key ) {
+function print_config_value( $p_config_key, $p_custom_value = null ) {
+    if( isset( $p_custom_value ) ) {
+	echo "config['" . $p_config_key . "'] = '" . addslashes( $p_custom_value ) . "';\n";
+    } else {
 	echo "config['" . $p_config_key . "'] = '" . addslashes( config_get( $p_config_key ) ) . "';\n";
+    }
 }
 
 # Send correct MIME Content-Type header for JavaScript content.
@@ -61,3 +66,6 @@ header( 'X-Content-Type-Options: nosniff' );
 echo "var config = new Array();\n";
 print_config_value( 'calendar_js_date_format' );
 print_config_value( 'short_path' );
+print_config_value( 'allowed_files' );
+print_config_value( 'dropzone_force_fallback', !(bool)config_get( 'dropzone_enabled' ) ? 'true' : 'false' );
+print_config_value( 'max_file_size', ceil( config_get( 'max_file_size' ) / (1000 * 1024) ) );
