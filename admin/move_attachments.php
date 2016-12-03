@@ -324,7 +324,7 @@ if( null == $f_project_to_move ) {
 			if( is_array( $t_row['data'] ) ) {
 				# Display details of moved attachments
 				echo '<div class="table-responsive">';
-				echo '<table class="table table-bordered table-condensed">';
+				echo '<table class="table table-bordered table-condensed table-hover table-striped">';
 				echo '<thead>';
 				echo '<tr>',
 					$f_file_type == 'bug' ? '<td width="5%">Bug ID</td>' : '',
