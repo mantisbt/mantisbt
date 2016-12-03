@@ -472,7 +472,7 @@ Dropzone.autoDiscover = false;
 function enableDropzone( classPrefix, autoUpload ) {
 	try {
 		var zone = new Dropzone( "." + classPrefix + "-form", {
-			forceFallback: config['dropzone_force_fallback'],
+			forceFallback: $.parseJSON(config['dropzone_force_fallback']),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
 			clickable: '.' + classPrefix,
