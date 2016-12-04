@@ -60,7 +60,7 @@ $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
 
 # Stores the functional database type based on db driver
-$g_db_functional_type;
+$g_db_functional_type = db_get_type( config_get_global( 'db_type' ) );
 
 /**
  * Mantis Database Parameters Count class
