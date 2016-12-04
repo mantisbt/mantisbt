@@ -388,7 +388,6 @@ $s_profile = 'Profils';
 $s_profile_label = 'Profils:';
 $s_updating_bug_simple_title = 'Kļūdas datu labošana';
 $s_vote_added_msg = 'Balsojums pievienots...';
-$s_bugnote_added_msg = 'Piezīme pievienota';
 $s_bugnote_deleted_msg = 'Piezīme dzēsta...';
 $s_bug_notes_title = 'Kļūdas piezīmes';
 $s_edit_bugnote_title = 'Rediģēt piezīmi';
@@ -406,7 +405,7 @@ $s_webmaster_contact_information = 'Palīdzībai sazinieties ar <a href="mailto:
 $s_click_to_login = 'Pieslēgties';
 $s_login_page_info = 'Sveicināti problēmu, kļūdu un jaunas funkcionalitātes pieprasījumu uzskaites un kontroles sistēmā(bugtrack)';
 $s_login_title = 'Pieslēgšanās';
-$s_save_login = 'Iegaumēt paroli';
+$s_save_login = 'Iegaumēt paroli šajā pārlūkā';
 $s_secure_session = 'Droša sesija';
 $s_secure_session_long = 'Jūsu sesijai ļaujat izmantot tikai šo IP adresi.';
 $s_choose_project = 'Izvēlaties projektu';

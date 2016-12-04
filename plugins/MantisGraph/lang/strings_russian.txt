@@ -38,40 +38,44 @@
  * @ingroup Language
  * @file
  *
+ * @author Irus
+ * @author Kareyac
  * @author Kirill
  * @author Lockal
+ * @author Okras
  * @author Александр Сигачёв
+ * @author Туллук
  */
 
 $s_plugin_graph_title = 'Система отображения графиков в MantisBT';
 $s_plugin_graph_description = 'Официальный плагин MantisBT для отображения графиков.';
 $s_plugin_MantisGraph_title = 'Графики MantisBT';
-$s_plugin_MantisGraph_menu_advanced_summary = 'общие графики';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Расширенное резюме';
 $s_plugin_MantisGraph_config = 'настройка';
 $s_plugin_MantisGraph_synthesis_link = 'Сумарно';
 $s_plugin_MantisGraph_status_link = 'По статусу';
 $s_plugin_MantisGraph_priority_link = 'По приоритету';
-$s_plugin_MantisGraph_severity_link = 'По серьезности';
+$s_plugin_MantisGraph_severity_link = 'По уровню серьезности';
 $s_plugin_MantisGraph_category_link = 'По категориям';
-$s_plugin_MantisGraph_resolution_link = 'По решению';
-$s_plugin_MantisGraph_graph_bug_page_link = 'графики';
-$s_plugin_MantisGraph_library = 'Использовать графическую библиотеку';
-$s_plugin_MantisGraph_bundled = 'Использовать встроенную (ecz)';
+$s_plugin_MantisGraph_resolution_link = 'После решения';
+$s_plugin_MantisGraph_graph_bug_page_link = 'График';
+$s_plugin_MantisGraph_library = 'Графическая библиотека для использования';
+$s_plugin_MantisGraph_bundled = 'В комплекте';
 $s_plugin_MantisGraph_window_width = 'Ширина графика (в пикселях)';
-$s_plugin_MantisGraph_bar_aspect = 'соотношение сторон столбиковой диаграммы (высота/ширина)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Сколько графиков помещать в строку на расширенной странице описания';
+$s_plugin_MantisGraph_bar_aspect = 'Соотношение сторон столбиковой диаграммы (высота/ширина)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Графики для отображения в строке на расширенные резюме страницы';
 $s_plugin_MantisGraph_font = 'Шрифт';
 $s_plugin_MantisGraph_jpgraph_path = 'Системный путь к библиотеке JpGraph';
 $s_plugin_MantisGraph_jpgraph_path_default = 'Оставьте пустым для значения по умолчанию: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Сглаживание JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Сглаживание улучшает внешний вид некоторых графиков за счёт производительности (до 8 раз медленнее)';
-$s_plugin_MantisGraph_enabled = 'вкл';
-$s_plugin_MantisGraph_disabled = 'выкл';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Суммарный график по состоянию';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Суммарный график по приоритету';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Суммарный график по серьезности';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Суммарный график по категориям';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Суммарный график по решению';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Уточнение JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Сглаживание улучшает внешний вид некоторые графики в ущерб производительности (до 8 раз медленнее)';
+$s_plugin_MantisGraph_enabled = 'Вкл';
+$s_plugin_MantisGraph_disabled = 'Выкл';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Синтез диаграммы состояния';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтез графики по приоритету';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Суммарный график по приоритету';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Синтез графики по категориям';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Суммарный график разрешения';
 $s_plugin_MantisGraph_by_status_pct = 'соотношение по состоянию';
 $s_plugin_MantisGraph_by_priority_pct = 'соотношение по приоритету';
 $s_plugin_MantisGraph_by_severity_pct = 'соотношение по серьезности';
@@ -100,11 +104,11 @@ $s_plugin_MantisGraph_period_last_quarter = 'Предыдущий квартал
 $s_plugin_MantisGraph_period_year_to_date = 'С начала года';
 $s_plugin_MantisGraph_period_select = 'Произвольные даты';
 $s_plugin_MantisGraph_period_last_year = 'Предыдущий год';
-$s_plugin_MantisGraph_select = 'Выберите...';
-$s_plugin_MantisGraph_select_bystatus = 'по Статусу';
-$s_plugin_MantisGraph_select_summbystatus = 'Статистика по состоянию';
-$s_plugin_MantisGraph_select_bycat = 'Статистика по категориям';
-$s_plugin_MantisGraph_select_both = 'Статистика по состоянию и категориям';
+$s_plugin_MantisGraph_select = 'Выберите';
+$s_plugin_MantisGraph_select_bystatus = 'по статусу';
+$s_plugin_MantisGraph_select_summbystatus = 'Статистика по статусу';
+$s_plugin_MantisGraph_select_bycat = 'Резюме по категориям';
+$s_plugin_MantisGraph_select_both = 'Резюме по статусу и классификации';
 $s_plugin_MantisGraph_show_as_graph = 'Показать как график';
 $s_plugin_MantisGraph_show_as_table = 'Показать как таблицу';
 $s_plugin_MantisGraph_show_graph = 'Показать график';

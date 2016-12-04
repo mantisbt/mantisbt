@@ -65,14 +65,11 @@ $g_checkboxes_exist = false;
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() > 0 ) {
 	category_get_all_rows( helper_get_current_project() );
-} else {
-	$t_categories = array();
-	foreach ( $t_rows as $t_row ) {
-		$t_categories[] = $t_row->category_id;
-	}
-	category_cache_array_rows( array_unique( $t_categories ) );
 }
+
 $g_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+
+bug_cache_columns_data( $t_rows, $g_columns );
 
 $t_filter_position = config_get( 'filter_position' );
 
@@ -88,7 +85,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<form id="bug_action" method="get" action="bug_actiongroup_page.php">
+<form id="bug_action" method="post" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -172,9 +169,6 @@ function write_bug_rows( array $p_rows ) {
 	global $g_columns, $g_filter;
 
 	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
-
-	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $p_rows, $g_columns );
 
 	# -- Loop over bug rows --
 

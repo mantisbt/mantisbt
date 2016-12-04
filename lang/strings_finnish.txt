@@ -44,6 +44,7 @@
  * @author Silvonen
  * @author Str4nd
  * @author Tkh
+ * @author Valtlait
  */
 
 $s_actiongroup_menu_move = 'Siirrä';
@@ -443,7 +444,7 @@ $s_all_revisions = 'Kaikki revisiot';
 $s_back_to_issue = 'Takaisin tapahtumaan';
 $s_confirm_revision_drop = 'Vahvista tämän tapahtuman revisioiden pudotus?';
 $s_vote_added_msg = 'Ääni lisätty...';
-$s_bugnote_added_msg = 'Muistiinpano lisätty...';
+$s_bugnote_attached_files = 'Liitetiedostot:';
 $s_bugnote_deleted_msg = 'Muistiinpano poistettu...';
 $s_bug_notes_title = 'Tapahtuman muistiinpanot';
 $s_edit_bugnote_title = 'Muokkaa muistiinpanoa';

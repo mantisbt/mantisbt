@@ -1402,8 +1402,7 @@ function bug_delete( $p_bug_id ) {
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_bug_id ) );
 
-	bug_clear_cache( $p_bug_id );
-	bug_text_clear_cache( $p_bug_id );
+	bug_clear_cache_all( $p_bug_id );
 }
 
 /**
@@ -2184,4 +2183,95 @@ function bug_get_status_for_assign( $p_current_handler, $p_new_handler, $p_curre
 		}
 	}
 	return $p_new_status;
+}
+
+/**
+ * Clear a bug from all the related caches or all bugs if no bug id specified.
+ * @param integer $p_bug_id A bug identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function bug_clear_cache_all( $p_bug_id = null ) {
+	bug_clear_cache( $p_bug_id );
+	bug_text_clear_cache( $p_bug_id );
+	file_bug_attachment_count_clear_cache( $p_bug_id );
+	bugnote_clear_bug_cache( $p_bug_id );
+	tag_clear_cache_bug_tags( $p_bug_id );
+	custom_field_clear_cache_values( $p_bug_id );
+
+	$t_plugin_objects = columns_get_plugin_columns();
+	foreach( $t_plugin_objects as $t_plugin_column ) {
+		$t_plugin_column->clear_cache();
+	}
+	return true;
+}
+
+/**
+ * Populate the caches related to the selected columns
+ * @param array $p_bugs	Array of BugData objects
+ * @param array $p_selected_columns	Array of columns to show
+ */
+function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
+	$t_bug_ids = array();
+	$t_user_ids = array();
+	$t_project_ids = array();
+	$t_category_ids = array();
+	foreach( $p_bugs as $t_bug ) {
+		$t_bug_ids[] = (int)$t_bug->id;
+		$t_user_ids[] = (int)$t_bug->handler_id;
+		$t_user_ids[] = (int)$t_bug->reporter_id;
+		$t_project_ids[] = (int)$t_bug->project_id;
+		$t_category_ids[] = (int)$t_bug->category_id;
+	}
+	$t_user_ids = array_unique( $t_user_ids );
+	$t_project_ids = array_unique( $t_project_ids );
+	$t_category_ids = array_unique( $t_category_ids );
+
+	$t_custom_field_ids = array();
+	$t_users_cached = false;
+	foreach( $p_selected_columns as $t_column ) {
+
+		if( column_is_plugin_column( $t_column ) ) {
+			$plugin_objects = columns_get_plugin_columns();
+			$plugin_objects[$t_column]->cache( $p_bugs );
+			continue;
+		}
+
+		if( strncmp( $t_column, 'custom_', 7 ) === 0 ) {
+			# @TODO cproensa, this will we replaced with column_is_custom_field()
+			$t_cf_name = utf8_substr( $t_column, 7 );
+			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
+			if( $t_cf_id ) {
+				$t_custom_field_ids[] = $t_cf_id;
+				continue;
+			}
+		}
+
+		switch( $t_column ) {
+			case 'attachment_count':
+				file_bug_attachment_count_cache( $t_bug_ids );
+				break;
+			case 'handler_id':
+			case 'reporter_id':
+			case 'status':
+				if( !$t_users_cached ) {
+					user_cache_array_rows( $t_user_ids );
+					$t_users_cached = true;
+				}
+				break;
+			case 'project_id':
+				project_cache_array_rows( $t_project_ids );
+				break;
+			case 'category_id':
+				category_cache_array_rows( $t_category_ids );
+				break;
+			case 'tags':
+				tag_cache_bug_tag_rows( $t_bug_ids );
+				break;
+		}
+	}
+
+	if( !empty( $t_custom_field_ids ) ) {
+		custom_field_cache_values( $t_bug_ids, $t_custom_field_ids );
+	}
 }

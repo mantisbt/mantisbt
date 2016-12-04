@@ -92,6 +92,10 @@ $g_cache_cf_list = null;
 $g_cache_cf_linked = array();
 $g_cache_name_to_id_map = array();
 
+# Values are indexed by [ bug_id, field_id ]
+# a non existant value will have a cached value of null
+$g_cache_cf_bug_values = array();
+
 /**
  * Cache a custom field row if necessary and return the cached copy
  * If the second parameter is true (default), trigger an error
@@ -103,21 +107,16 @@ $g_cache_name_to_id_map = array();
  * @access public
  */
 function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
-	global $g_cache_custom_field, $g_cache_name_to_id_map;
+	global $g_cache_custom_field;
 
-	$p_field_id = (int)$p_field_id;
-
-	if( isset( $g_cache_custom_field[$p_field_id] ) ) {
-		return $g_cache_custom_field[$p_field_id];
+	$c_field_id = (int)$p_field_id;
+	if( !isset( $g_cache_custom_field[$c_field_id] ) ) {
+		custom_field_cache_array_rows( array( $c_field_id ) );
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {custom_field} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_id ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
+	# the cached index exist, even when not found
+	$t_cf_row = $g_cache_custom_field[$c_field_id];
+	if( !$t_cf_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( 'Custom ' . $p_field_id );
 			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
@@ -125,11 +124,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
-
-	$g_cache_custom_field[$p_field_id] = $t_row;
-	$g_cache_name_to_id_map[$t_row['name']] = $p_field_id;
-
-	return $t_row;
+	return $t_cf_row;
 }
 
 /**
@@ -139,12 +134,13 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
  * @access public
  */
 function custom_field_cache_array_rows( array $p_cf_id_array ) {
-	global $g_cache_custom_field;
+	global $g_cache_custom_field, $g_cache_name_to_id_map;
 	$c_cf_id_array = array();
 
 	foreach( $p_cf_id_array as $t_cf_id ) {
-		if( !isset( $g_cache_custom_field[(int)$t_cf_id] ) ) {
-			$c_cf_id_array[] = (int)$t_cf_id;
+		$c_id = (int)$t_cf_id;
+		if( !isset( $g_cache_custom_field[$c_id] ) ) {
+			$c_cf_id_array[$c_id] = $c_id;
 		}
 	}
 
@@ -152,19 +148,131 @@ function custom_field_cache_array_rows( array $p_cf_id_array ) {
 		return;
 	}
 
-	$t_query = 'SELECT * FROM {custom_field} WHERE id IN (' . implode( ',', $c_cf_id_array ) . ')';
-	$t_result = db_query( $t_query );
+	db_param_push();
+	$t_params = array();
+	$t_in_caluse_dbparams = array();
+	foreach( $c_cf_id_array as $t_id) {
+		$t_in_caluse_dbparams[] = db_param();
+		$t_params[] = $t_id;
+	}
+	$t_query = 'SELECT * FROM {custom_field} WHERE id IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+	$t_result = db_query( $t_query, $t_params );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_custom_field[(int)$t_row['id']] = $t_row;
+		$c_id = (int)$t_row['id'];
+		$g_cache_custom_field[$c_id] = $t_row;
+		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
+		unset( $c_cf_id_array[$c_id] );
+	}
+	# set the remaining ids as not found
+	foreach( $c_cf_id_array as $t_id) {
+		$g_cache_custom_field[$t_id] = false;
 	}
 	return;
 }
 
 /**
+ * Load in cache values of custom fields, for given bugs and field ids.
+ * When a value for a given bug and field does not exist, fill the cached value as null
+ * @global array $g_cache_cf_bug_values
+ * @param array $p_bug_id_array
+ * @param array $p_field_id_array
+ * @return void
+ */
+function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_array ) {
+	global $g_cache_cf_bug_values;
+
+	if( empty( $p_field_id_array ) ) {
+		return;
+	}
+
+	# clean fields ids
+	$t_fields_to_search = array();
+	$f_cf_defs = array();
+	foreach( $p_field_id_array as $t_field_id ) {
+		$c_field_id = (int)$t_field_id;
+		$t_fields_to_search[$c_field_id] = $c_field_id;
+		$f_cf_defs[$c_field_id] = custom_field_get_definition( $c_field_id );
+	}
+
+	# get bugs to fetch
+	$t_bugs_to_search = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		$c_bug_id = (int)$t_bug_id;
+		if( !isset( $g_cache_cf_bug_values[$c_bug_id] ) ) {
+			$t_bugs_to_search[] = $c_bug_id;
+		} else {
+			$t_diff = array_diff( $t_fields_to_search, array_keys( $g_cache_cf_bug_values[$c_bug_id] ) );
+			if( !empty( $t_diff ) ) {
+				$t_bugs_to_search[] = $c_bug_id;
+			}
+		}
+	}
+	if( empty( $t_bugs_to_search ) ) {
+		return;
+	}
+
+	db_param_push();
+	$t_params= array();
+	$t_query = 'SELECT B.id AS bug_id, CF.id AS field_id, CFS.value, CFS.text FROM {bug} B'
+			. ' LEFT OUTER JOIN {custom_field} CF ON 1 = 1'
+			. ' LEFT OUTER JOIN {custom_field_string} CFS ON ( B.id = CFS.bug_id AND CF.id = CFS.field_id )';
+	$t_bug_in_params = array();
+	foreach( $t_bugs_to_search as $t_bug_id ) {
+		$t_bug_in_params[] = db_param();
+		$t_params[] = $t_bug_id;
+	}
+	$t_query .= ' WHERE B.id IN (' . implode( ',', $t_bug_in_params ) . ')';
+	$t_field_in_params = array();
+	foreach( $t_fields_to_search as $t_field_id ) {
+		$t_field_in_params[] = db_param();
+		$t_params[] = $t_field_id;
+	}
+	$t_query .= ' AND CF.id IN (' . implode( ',', $t_field_in_params ) . ')';
+
+	$t_result = db_query( $t_query, $t_params );
+
+	# By having the left outer joins, non existant values are fetched as nulls,
+	# and can be stored in cache to mark them as not-found
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_bug_id = (int)$t_row['bug_id'];
+		# create a bug index if necessary
+		if( !isset( $g_cache_cf_bug_values[$c_bug_id] ) ) {
+			$g_cache_cf_bug_values[$c_bug_id] = array();
+		}
+		$c_field_id = (int)$t_row['field_id'];
+		$t_value_column = ( $f_cf_defs[$c_field_id]['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
+		$t_value = $t_row[$t_value_column];
+		if( null !== $t_value ) {
+			$t_value = custom_field_database_to_value( $t_value, $f_cf_defs[$c_field_id]['type'] );
+		}
+		# non-existant will be stored as null
+		$g_cache_cf_bug_values[$c_bug_id][$c_field_id] = $t_value;
+	}
+}
+
+/**
+ * Clear the custom field values cache (or just the given bug id if specified)
+ * @global array $g_cache_cf_bug_values
+ * @param integer $p_bug_id	Bug id
+ * @return void
+ */
+function custom_field_clear_cache_values( $p_bug_id = null ) {
+	global $g_cache_cf_bug_values;
+
+	if( null === $p_bug_id ) {
+		$g_cache_cf_bug_values = array();
+	} else {
+		if( isset( $g_cache_cf_bug_values[(int)$p_bug_id] ) ) {
+			unset( $g_cache_cf_bug_values[(int)$p_bug_id] );
+		}
+	}
+}
+
+/**
  * Clear the custom field cache (or just the given id if specified)
  * @param integer $p_field_id Custom field id.
- * @return boolean
+ * @return void
  * @access public
  */
 function custom_field_clear_cache( $p_field_id = null ) {
@@ -175,10 +283,10 @@ function custom_field_clear_cache( $p_field_id = null ) {
 	if( null === $p_field_id ) {
 		$g_cache_custom_field = array();
 	} else {
-		unset( $g_cache_custom_field[$p_field_id] );
+		if( isset( $g_cache_custom_field[$p_field_id] ) ) {
+			unset( $g_cache_custom_field[$p_field_id] );
+		}
 	}
-
-	return true;
 }
 
 /**
@@ -562,6 +670,7 @@ function custom_field_destroy( $p_field_id ) {
 	db_query( $t_query, array( $p_field_id ) );
 
 	custom_field_clear_cache( $p_field_id );
+	custom_field_clear_cache_values();
 }
 
 /**
@@ -582,7 +691,6 @@ function custom_field_unlink_all( $p_project_id ) {
 
 /**
  * Delete all custom values associated with the specified bug.
- * return true on success, false on failure
  *
  * To be called from bug_delete().
  * @param integer $p_bug_id A bug identifier.
@@ -593,6 +701,7 @@ function custom_field_delete_all_values( $p_bug_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {custom_field_string} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( $p_bug_id ) );
+	custom_field_clear_cache_values( $p_bug_id );
 }
 
 /**
@@ -824,29 +933,25 @@ function custom_field_get_display_name( $p_name ) {
  * @access public
  */
 function custom_field_get_value( $p_field_id, $p_bug_id ) {
-	$t_row = custom_field_cache_row( $p_field_id );
+	global $g_cache_cf_bug_values;
+	$c_bug_id = (int)$p_bug_id;
+	$c_field_id = (int)$p_field_id;
 
+	$t_row = custom_field_cache_row( $c_field_id );
 	$t_access_level_r = $t_row['access_level_r'];
-	$t_default_value = $t_row['default_value'];
 
-	if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
+	# first check permissions
+	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
 		return false;
 	}
 
-	$t_value_field = ( $t_row['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-
-	db_param_push();
-	$t_query = 'SELECT ' . $t_value_field . '
-				  FROM {custom_field_string}
-				  WHERE bug_id=' . db_param() . ' AND
-				  		field_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bug_id, $p_field_id ) );
-
-	if( db_num_rows( $t_result ) > 0 ) {
-		return custom_field_database_to_value( db_result( $t_result ), $t_row['type'] );
-	} else {
-		return null;
+	# A null value means a cached non existant value. It must be checked with care.
+	if( !isset( $g_cache_cf_bug_values[$c_bug_id] )
+			|| !array_key_exists( $c_field_id, $g_cache_cf_bug_values[$c_bug_id] ) ) {
+		custom_field_cache_values( array( $c_bug_id ), array( $c_field_id ) );
 	}
+
+	return $g_cache_cf_bug_values[$c_bug_id][$c_field_id];
 }
 
 /**
@@ -1236,7 +1341,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 		}
 	}
 
-	custom_field_clear_cache( $p_field_id );
+	custom_field_clear_cache_values( $p_bug_id );
 
 	# db_query() errors on failure so:
 	return true;

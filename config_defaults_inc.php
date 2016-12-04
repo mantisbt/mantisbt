@@ -420,6 +420,15 @@ $g_return_path_email	= 'admin@example.com';
  */
 $g_enable_email_notification	= ON;
 
+/**
+ * When enabled, the email notifications will send the full issue with
+ * a hint about the change type at the top, rather than using dedicated
+ * notifications that are focused on what changed.  This change can be
+ * overridden in the database per user.
+ *
+ * @global integer $g_email_notifications_verbose
+ */
+$g_email_notifications_verbose = ON;
 
 /**
  * The following two config options allow you to control who should get email
@@ -579,12 +588,6 @@ $g_show_user_email_threshold = NOBODY;
  * @global integer $g_show_user_realname_threshold
  */
 $g_show_user_realname_threshold = NOBODY;
-
-/**
- * Urgent = 1, Not Urgent = 5, Disable = 0
- * @global integer $g_mail_priority
- */
-$g_mail_priority = 0;
 
 /**
  * select the method to mail by:
@@ -4344,6 +4347,7 @@ $g_public_config_names = array(
 	'due_date_view_threshold',
 	'email_ensure_unique',
 	'email_login_enabled',
+	'email_notifications_verbose',
 	'email_padding_length',
 	'email_receive_own',
 	'email_separator1',
@@ -4383,7 +4387,6 @@ $g_public_config_names = array(
 	'logout_redirect_page',
 	'long_process_timeout',
 	'lost_password_feature',
-	'mail_priority',
 	'manage_config_cookie',
 	'manage_configuration_threshold',
 	'manage_custom_fields_threshold',

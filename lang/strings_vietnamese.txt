@@ -46,6 +46,7 @@
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
+ * @author Yue Ling
  */
 
 $s_actiongroup_menu_move = 'Di chuyển';
@@ -433,7 +434,7 @@ $s_all_revisions = 'Tất cả các Revision';
 $s_back_to_issue = 'Trở về issue';
 $s_confirm_revision_drop = 'Bạn có chắc bạn muốn bỏ revision issue này?';
 $s_vote_added_msg = 'Bình chọn đã được thêm...';
-$s_bugnote_added_msg = 'Ghi chú đã thêm...';
+$s_bugnote_attached_files = 'Tệp đính kèm';
 $s_bugnote_deleted_msg = 'Ghi chú được xóa thành công...';
 $s_bug_notes_title = 'Các ghi chú';
 $s_edit_bugnote_title = 'Sửa ghi chú';

@@ -311,7 +311,6 @@ $s_updating_bug_simple_title = 'Ενημέρωση Πληροφοριών Θέμ
 $s_revision_by = '%1$s από %2$s';
 $s_all_revisions = 'Όλες οι αναθεωρήσεις';
 $s_vote_added_msg = 'Η Ψήφος προστέθηκε...';
-$s_bugnote_added_msg = 'Η Σημείωση προστέθηκε...';
 $s_bugnote_deleted_msg = 'Η σημείωση διαγράφηκε με επιτυχία...';
 $s_bug_notes_title = 'Σημειώσεις';
 $s_edit_bugnote_title = 'Επεξεργασία Σημείωσης';

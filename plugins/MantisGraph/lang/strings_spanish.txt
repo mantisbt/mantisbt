@@ -41,6 +41,8 @@
  * @author Antur
  * @author Bithunter
  * @author Crazymadlover
+ * @author Fitoschido
+ * @author Koavf
  * @author Locos epraix
  * @author Macofe
  */
@@ -57,23 +59,23 @@ $s_plugin_MantisGraph_severity_link = 'Por severidad';
 $s_plugin_MantisGraph_category_link = 'Por categoría';
 $s_plugin_MantisGraph_resolution_link = 'Por resolución';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Gráfico';
-$s_plugin_MantisGraph_library = 'Biblioteca gráfica a usar';
+$s_plugin_MantisGraph_library = 'Biblioteca gráfica para usar';
 $s_plugin_MantisGraph_bundled = 'Integrado';
 $s_plugin_MantisGraph_window_width = 'Ancho del gráfico (en píxeles)';
 $s_plugin_MantisGraph_bar_aspect = 'Relación de aspecto del gráfico de barras (alto/ancho)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Gráficos a mostrar en cada fila en la página resumen avanzada';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Gráficos a mostrar en cada fila en la página de resumen avanzada';
 $s_plugin_MantisGraph_font = 'Fuente';
 $s_plugin_MantisGraph_jpgraph_path = 'Ruta de sistema de la biblioteca JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Dejar en blanco para utlizar valor por defecto: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Dejar en blanco para usar el valor predeterminado: {mantisroot}/library/jpgraph';
 $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
 $s_plugin_MantisGraph_jpgraph_antialias_info = 'El anti-aliasing mejora la presentación visual de ciertos gráficos, a expensas de la performance (hasta 8 veces más lento)';
 $s_plugin_MantisGraph_enabled = 'Activado';
 $s_plugin_MantisGraph_disabled = 'Desactivado';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Por gráficos de estado';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Por gráficos de prioridad';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Por gráficos de severidad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Por gráficos de categoría';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Por gráficos de resolución';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gráficos de síntesis por estado';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráficos de síntesis por prioridad';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráficos de síntesis por gravedad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gráficos de síntesis por categoría';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráficos de síntesis por resolución';
 $s_plugin_MantisGraph_by_status_pct = 'Por porcentaje según estado';
 $s_plugin_MantisGraph_by_priority_pct = 'Por porcentaje según prioridad';
 $s_plugin_MantisGraph_by_severity_pct = 'Por porcentaje según severidad';
@@ -103,11 +105,11 @@ $s_plugin_MantisGraph_period_year_to_date = 'Lo que va del Año';
 $s_plugin_MantisGraph_period_select = 'Fechas Arbitrarias';
 $s_plugin_MantisGraph_period_last_year = 'Último Año';
 $s_plugin_MantisGraph_select = 'Selecciona';
-$s_plugin_MantisGraph_select_bystatus = 'por Estado';
-$s_plugin_MantisGraph_select_summbystatus = 'Sumario por Estado';
-$s_plugin_MantisGraph_select_bycat = 'Sumario por Categoría';
-$s_plugin_MantisGraph_select_both = 'Sumario por Estado y Categoría';
-$s_plugin_MantisGraph_show_as_graph = 'Ver como Gráfico';
-$s_plugin_MantisGraph_show_as_table = 'Ver como Tabla';
-$s_plugin_MantisGraph_show_graph = 'Ver Gráfico';
+$s_plugin_MantisGraph_select_bystatus = 'por estado';
+$s_plugin_MantisGraph_select_summbystatus = 'Resumen por estado';
+$s_plugin_MantisGraph_select_bycat = 'Resumen por categoría';
+$s_plugin_MantisGraph_select_both = 'Resumen por estado y categoría';
+$s_plugin_MantisGraph_show_as_graph = 'Ver como gráfico';
+$s_plugin_MantisGraph_show_as_table = 'Ver como tabla';
+$s_plugin_MantisGraph_show_graph = 'Ver gráfico';
 $s_plugin_MantisGraph_graph_page = 'Historial Gráfico de la Incidencia';

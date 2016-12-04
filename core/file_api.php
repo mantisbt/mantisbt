@@ -58,18 +58,22 @@ $g_cache_file_count = array();
  *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
+ * @return array Array of file info arrays.
  */
 function file_process_posted_files_for_bug( $p_bug_id, $p_files ) {
 	if( $p_files === null ) {
 		return;
 	}
 
+	$t_file_infos = array();
 	$t_files = helper_array_transpose( $p_files );
 	foreach( $t_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
-			file_add( $p_bug_id, $t_file, 'bug' );
+			$t_file_infos[] = file_add( $p_bug_id, $t_file, 'bug' );
 		}
 	}
+
+	return $t_file_infos;
 }
 
 /**
@@ -98,6 +102,52 @@ function file_get_display_name( $p_filename ) {
 }
 
 /**
+ * Fills the cache with the attachement count from a list of bugs
+ * If the bug doesn't have attachments, cache its value as 0.
+ * @global array $g_cache_file_count
+ * @param array $p_bug_ids Array of bug ids
+ * @return void
+ */
+function file_bug_attachment_count_cache( array $p_bug_ids ) {
+	global $g_cache_file_count;
+
+	if( empty( $p_bug_ids ) ) {
+		return;
+	}
+
+	$t_ids_to_search = array();
+	foreach( $p_bug_ids as $t_id ) {
+		$c_id = (int)$t_id;
+		$t_ids_to_search[$c_id] = $c_id;
+	}
+
+	db_param_push();
+	$t_params = array();
+	$t_in_values = array();
+	foreach( $t_ids_to_search as $t_id ) {
+		$t_params[] = (int)$t_id;
+		$t_in_values[] = db_param();
+	}
+
+	$t_query = 'SELECT B.id AS bug_id, COUNT(F.bug_id) AS attachments'
+			. ' FROM {bug} B JOIN {bug_file} F ON ( B.id = F.bug_id )'
+			. ' WHERE B.id IN (' . implode( ',', $t_in_values ) . ')'
+			. ' GROUP BY B.id';
+
+	$t_result = db_query( $t_query, $t_params );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$c_bug_id = (int)$t_row['bug_id'];
+		$g_cache_file_count[$c_bug_id] = (int)$t_row['attachments'];
+		unset( $t_ids_to_search[$c_bug_id] );
+	}
+
+	# set bugs without result to 0
+	foreach( $t_ids_to_search as $t_id ) {
+		$g_cache_file_count[$t_id] = 0;
+	}
+}
+
+/**
  * Check the number of attachments a bug has (if any)
  * @param integer $p_bug_id A bug identifier.
  * @return integer
@@ -105,38 +155,30 @@ function file_get_display_name( $p_filename ) {
 function file_bug_attachment_count( $p_bug_id ) {
 	global $g_cache_file_count;
 
-	# First check if we have a cache hit
-	if( isset( $g_cache_file_count[$p_bug_id] ) ) {
-		return $g_cache_file_count[$p_bug_id];
+	# If it's not in cache, load the value
+	if( !isset( $g_cache_file_count[$p_bug_id] ) ) {
+		file_bug_attachment_count_cache( array( (int)$p_bug_id ) );
 	}
 
-	# If there is no cache hit, check if there is anything in
-	#   the cache. If the cache isn't empty and we didn't have
-	#   a hit, then there are not attachments for this bug.
-	if( count( $g_cache_file_count ) > 0 ) {
-		return 0;
+	return $g_cache_file_count[$p_bug_id];
+}
+
+/**
+ * Clear a bug from the cache or all bugs if no bug id specified.
+ * @param integer $p_bug_id A bug identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function file_bug_attachment_count_clear_cache( $p_bug_id = null ) {
+	global $g_cache_file_count;
+
+	if( null === $p_bug_id ) {
+		$g_cache_file_count = array();
+	} else {
+		unset( $g_cache_file_count[(int)$p_bug_id] );
 	}
 
-	# Otherwise build the cache and return the attachment count
-	#   for the given bug (if any).
-	$t_query = 'SELECT bug_id, COUNT(bug_id) AS attachments FROM {bug_file} GROUP BY bug_id';
-	$t_result = db_query( $t_query );
-
-	$t_file_count = 0;
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_file_count[$t_row['bug_id']] = $t_row['attachments'];
-		if( $p_bug_id == $t_row['bug_id'] ) {
-			$t_file_count = $t_row['attachments'];
-		}
-	}
-
-	# If no attachments are present, mark the cache to avoid
-	#   repeated queries for this.
-	if( count( $g_cache_file_count ) == 0 ) {
-		$g_cache_file_count['_no_files_'] = -1;
-	}
-
-	return $t_file_count;
+	return true;
 }
 
 /**
@@ -639,9 +681,11 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
  * @param integer $p_user_id         User id (defaults to current user).
  * @param integer $p_date_added      Date added.
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bug attachments).
- * @return void
+ * @return array The file info array (keys: name, size)
  */
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
+	$t_file_info = array();
+
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 	$t_tmp_file = $p_file['tmp_name'];
@@ -665,12 +709,16 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		}
 	}
 
+	$t_file_info['name'] = $t_file_name;
 	antispam_check();
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
 		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
 	}
+
+	$t_file_info['size'] = $t_file_size;
+
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
@@ -774,6 +822,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
+
+	return $t_file_info;
 }
 
 /**

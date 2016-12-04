@@ -441,7 +441,6 @@ $s_all_revisions = 'كل المراجعات';
 $s_back_to_issue = 'رجوع إلى القضية';
 $s_confirm_revision_drop = 'هل أنت متأكد أنك تريد إسقاط مراجعه العله هذه؟';
 $s_vote_added_msg = 'التصويت تمت إضافته...';
-$s_bugnote_added_msg = 'الملاحظه تمت إضافتها...';
 $s_bugnote_deleted_msg = 'الملاحظه تم حذفها بنجاح...';
 $s_bug_notes_title = 'ملاحظات';
 $s_edit_bugnote_title = 'عدل الملاحظة';

@@ -80,7 +80,6 @@ if( $f_mail_test ) {
 	$t_email_data->email = config_get_global( 'webmaster_email' );
 	$t_email_data->subject = 'Testing PHP mail() function';
 	$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
-	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 	$t_email_data->metadata['charset'] = 'utf-8';
 	$t_result = email_send( $t_email_data );
 

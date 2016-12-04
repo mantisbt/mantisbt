@@ -38,8 +38,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Jopparn
  * @author Lokal Profil
  * @author Tobulos1
+ * @author Velg
  * @author Warrakkk
  * @author WikiPhoenix
  */
@@ -47,32 +49,32 @@
 $s_plugin_graph_title = 'Mantis-grafer';
 $s_plugin_graph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_title = 'Mantis-grafer';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad sammanfattning';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Avancerad Sammanfattning';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntes';
-$s_plugin_MantisGraph_status_link = 'Efter status';
-$s_plugin_MantisGraph_priority_link = 'Efter prioritet';
-$s_plugin_MantisGraph_severity_link = 'Efter allvarlighetsgrad';
+$s_plugin_MantisGraph_status_link = 'Per stat';
+$s_plugin_MantisGraph_priority_link = 'Per prioriterat';
+$s_plugin_MantisGraph_severity_link = 'Per svårighetsgrad';
 $s_plugin_MantisGraph_category_link = 'Efter kategori';
-$s_plugin_MantisGraph_resolution_link = 'Efter lösning';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
-$s_plugin_MantisGraph_library = 'Grafbibliotek som ska användas';
+$s_plugin_MantisGraph_resolution_link = 'Efter upplösning';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Diagram';
+$s_plugin_MantisGraph_library = 'Diagrambibliotek att använda';
 $s_plugin_MantisGraph_bundled = 'Buntade';
-$s_plugin_MantisGraph_window_width = 'Grafbredd (i pixlar)';
-$s_plugin_MantisGraph_bar_aspect = 'Stapeldiagrams proportioner (höjd/bredd)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Grafer att visa per rad på den avancerade sammanfattningssidan';
+$s_plugin_MantisGraph_window_width = 'Diagrambredd (i pixlar)';
+$s_plugin_MantisGraph_bar_aspect = 'Stapeldiagramsproportioner (höjd/bredd)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Diagram att visa per rad på den avancerade sammanfattningssidan';
 $s_plugin_MantisGraph_font = 'Typsnitt';
 $s_plugin_MantisGraph_jpgraph_path = 'Sökväg till JpGraph-biblioteket';
 $s_plugin_MantisGraph_jpgraph_path_default = 'Lämna tomt för standard: {mantisroot}/library/jpgraph';
 $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing förbättrar det visuella utseendet på vissa grafer på bekostnad av prestanda (upp till 8x långsammare)';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing förbättrar det visuella utseendet på vissa diagram på bekostnad av prestanda (upp till 8x långsammare)';
 $s_plugin_MantisGraph_enabled = 'På';
 $s_plugin_MantisGraph_disabled = 'Av';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Efter statusgrafer';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Efter prioritetsgrafer';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Efter allvarlighetsgrafer';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Efter kategorigrafer';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Efter lösningsgrafer';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Förena diagram efter status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Förena diagram efter prioritet';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Förena diagram efter storlek';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Förena diagram efter kategori';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Förena diagram efter upplösning';
 $s_plugin_MantisGraph_by_status_pct = 'status (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'prioritet (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'allvarlighetsgrad (%)';
@@ -83,13 +85,13 @@ $s_plugin_MantisGraph_by_priority_mix = 'prioritet och status';
 $s_plugin_MantisGraph_by_resolution_mix = 'lösning och status';
 $s_plugin_MantisGraph_legend_still_open = 'Fortfarande öppna';
 $s_plugin_MantisGraph_legend_resolved = 'Lösta';
-$s_plugin_MantisGraph_legend_assigned = 'Tildelade';
+$s_plugin_MantisGraph_legend_assigned = 'Tildelad';
 $s_plugin_MantisGraph_legend_total = 'Totalt';
-$s_plugin_MantisGraph_legend_opened = 'Öppna';
-$s_plugin_MantisGraph_legend_closed = 'Stängda';
+$s_plugin_MantisGraph_legend_opened = 'Öppnad';
+$s_plugin_MantisGraph_legend_closed = 'Stängd';
 $s_plugin_MantisGraph_legend_reported = 'Rapporterade';
-$s_plugin_MantisGraph_cumulative = 'Sammanlagda';
-$s_plugin_MantisGraph_not_enough_data = 'Otillräckliga data för att skapa graf';
+$s_plugin_MantisGraph_cumulative = 'Sammanlagt';
+$s_plugin_MantisGraph_not_enough_data = 'Inte tillräckligt med data för att skapa diagram';
 $s_plugin_MantisGraph_period_none = 'Ingen';
 $s_plugin_MantisGraph_period_this_week = 'Denna vecka';
 $s_plugin_MantisGraph_period_last_week = 'Föregående vecka';
@@ -103,10 +105,10 @@ $s_plugin_MantisGraph_period_select = 'Valfria datum';
 $s_plugin_MantisGraph_period_last_year = 'Föregående år';
 $s_plugin_MantisGraph_select = 'Vänligen välj';
 $s_plugin_MantisGraph_select_bystatus = 'efter status';
-$s_plugin_MantisGraph_select_summbystatus = 'Statussammanfattning';
-$s_plugin_MantisGraph_select_bycat = 'Kategorisammanfattning';
+$s_plugin_MantisGraph_select_summbystatus = 'Sammanfattning av status';
+$s_plugin_MantisGraph_select_bycat = 'Sammanfattning av kategori';
 $s_plugin_MantisGraph_select_both = 'Sammanfattning av status och kategori';
-$s_plugin_MantisGraph_show_as_graph = 'Visa som graf';
+$s_plugin_MantisGraph_show_as_graph = 'Visa som diagram';
 $s_plugin_MantisGraph_show_as_table = 'Visa som matris';
-$s_plugin_MantisGraph_show_graph = 'Visa som graf';
+$s_plugin_MantisGraph_show_graph = 'Visa diagram';
 $s_plugin_MantisGraph_graph_page = 'Visa ärendehistorik som graf';

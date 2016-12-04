@@ -294,46 +294,59 @@ if( empty( $t_moved ) ) {
 	echo '<p class="lead">Nothing to do.</p>'. "\n";
 } else {
 	foreach( $t_moved as $t_row ) {
-		printf(
-			"<p class=\"lead\">Project '%s' : %d attachments %s.</p>\n",
-			$t_row['name'],
-			$t_row['rows'],
-			( 0 == $t_row['failed']
-				? 'moved successfully'
-				: 'to move, ' . $t_row['failed'] . ' failures') );
-
+		echo '<div class="widget-box widget-color-blue2">';
+		echo '<div class="widget-header widget-header-small">';
+		echo '<h4 class="widget-title lighter">';
+		echo '<i class="ace-icon fa fa-paperclip"></i>';
+			printf(
+				"Project '%s' : %d attachments %s",
+				$t_row['name'],
+				$t_row['rows'],
+				( 0 == $t_row['failed']
+					? 'moved successfully'
+					: 'to move, ' . $t_row['failed'] . ' failures') );
+		echo '</h4>';
+		echo '</div>';
+		echo '<div class="widget-body">';
+		echo '<div class="widget-main no-padding">';
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
 			echo '<div class="table-responsive">';
 			echo '<table class="table table-bordered table-condensed">';
-			echo "\n",
-				'<tr>',
-				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
-				'<th>File</th><th>Filename</th><th>Status</th>',
+			echo '<thead>';
+			echo '<tr>',
+				$f_file_type == 'bug' ? '<td>Bug ID</td>' : '',
+				'<td>File ID</td><th>Filename</td><td>Status</td>',
 				'</tr>';
+			echo '</thead>';
+			echo '<tbody>';
 			foreach( $t_row['data'] as $t_data ) {
 				echo '<tr>';
 				if( $f_file_type == 'bug' ) {
 					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
 				}
-				printf( '<td class="pull-right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
+				printf( '<td>%s</td><td>%s</td><td>%s</td></tr>',
 					$t_data['id'],
 					$t_data['filename'],
 					$t_data['status'] );
 			}
-			echo '</table><br />';
+			echo '</tbody>';
+			echo '</table>';
 			echo '</div>';
+
 		} else {
 			# No data rows - display error message
 			echo '<div class="alert alert-danger">';
 			echo '<p>' . $t_row['data'] . '</p>';
 			echo '</div>';
 		}
-		echo '<br />';
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
 	}
 }
-
-print_button( 'system_utils.php', 'Back to System Utilities' );
+echo "<br/>";
+print_link_button( 'system_utils.php', 'Back to System Utilities' );
 
 echo '</div>';
 

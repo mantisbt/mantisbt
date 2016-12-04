@@ -198,12 +198,12 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 	echo '<td class="center">';
 	if( $t_upgrade ) {
-		print_button(
+		print_link_button(
 			'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ),
 			lang_get( 'plugin_upgrade' ), 'btn-xs' );
 	}
 	if( !$t_protected ) {
-		print_button(
+		print_link_button(
 			'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ),
 			lang_get( 'plugin_uninstall' ),  'btn-xs' );
 	}

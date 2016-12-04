@@ -276,6 +276,8 @@ if( helper_get_current_project() == 0 ) {
 	category_cache_array_rows( array_unique( $t_categories ) );
 }
 
+bug_cache_columns_data( $t_rows , array( 'attachment_count' ) );
+
 $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
 $t_box_title_label = lang_get( 'my_view_title_' . $t_box_title );

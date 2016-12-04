@@ -267,7 +267,6 @@ $s_revision = 'Weergawe';
 $s_revision_by = '%1$s deur %2$s';
 $s_revision_drop = 'Skrap';
 $s_vote_added_msg = 'Stem is bygevoeg...';
-$s_bugnote_added_msg = 'Nota is bygevoeg...';
 $s_delete_link = 'Skrap';
 $s_bugnote_edit_link = 'Wysig';
 $s_hide_content = 'Versteek inhoud';

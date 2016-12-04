@@ -566,7 +566,7 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
-	$t_can_report_bug = access_has_project_level( config_get( 'report_bug_threshold' ) );
+	$t_can_report_bug = access_has_any_project_level( 'report_bug_threshold' );
 	$t_can_invite_user = current_user_is_administrator();
 
 	if( !$t_can_report_bug && !$t_can_invite_user ) {
@@ -736,7 +736,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		layout_sidebar_menu( 'view_all_bug_page.php', 'view_bugs_link', 'fa-list-alt', $p_active_sidebar_page );
 
 		# Report Bugs
-		if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
 			$t_bug_url = string_get_bug_report_url();
 			layout_sidebar_menu( $t_bug_url, 'report_bug_link', 'fa-edit', $p_active_sidebar_page );
 		}

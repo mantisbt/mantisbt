@@ -40,6 +40,7 @@
  *
  * @author Milicevic01
  * @author Rancher
+ * @author Сербијана
  */
 
 $s_directionality = 'ltr';
@@ -295,7 +296,7 @@ $s_email_on_reopened = 'Obaveštavaj o ponovo otvorenim problemima';
 $s_email_on_bugnote_added = 'Obaveštavaj o dodatim beleškama';
 $s_email_on_status_change = 'Obaveštavaj o promenama stanja';
 $s_email_on_priority_change = 'Obaveštavaj o promenama važnosti';
-$s_email_bugnote_limit = 'Ograničenje e-obaveštenja';
+$s_email_bugnote_limit = 'Ograničenje imejl obaveštenja';
 $s_language = 'Jezik';
 $s_update_prefs_button = 'Ažuriraj postavke';
 $s_reset_prefs_button = 'Poništi postavke';
@@ -426,7 +427,6 @@ $s_all_revisions = 'Sve izmene';
 $s_back_to_issue = 'Nazad na problem';
 $s_confirm_revision_drop = 'Želite li da odbacite izmenu ovog problema?';
 $s_vote_added_msg = 'Glas je dodat.';
-$s_bugnote_added_msg = 'Beleška je dodata.';
 $s_bugnote_deleted_msg = 'Beleška je obrisana.';
 $s_bug_notes_title = 'Beleške';
 $s_edit_bugnote_title = 'Uređivanje beleške';
@@ -631,7 +631,7 @@ $s_unlink_link = 'Ukloni vezu';
 $s_show_global_users = 'Prikaži korisnike s globalnim pristupom';
 $s_hide_global_users = 'Sakrij korisnike s globalnim pristupom';
 $s_add_project_title = 'Dodavanje projekta';
-$s_upload_file_path = 'Putanja za slanje datoteka';
+$s_upload_file_path = 'Putanja za otpremanje datoteka';
 $s_add_project_button = 'Dodaj projekat';
 $s_projects_title = 'Projekti';
 $s_name = 'Naziv';
