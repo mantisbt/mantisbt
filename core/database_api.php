@@ -409,36 +409,46 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 		$t_lastoffset = 0;
 		$i = 0;
 		if( !empty( $p_arr_parms ) ) {
-			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
-				$t_matches = $t_matches[0];
+			# For mysql, tokens are '?', and parameters are binded sequentially
+			# For pgsql, tokens are '$number', and parameters are binded by the denoted index (1-based) in the parameter array
+			# For oracle, tokens are ':string', but ADOdb treat them as sequential in appearance order, so they behave like mysql
+			while( preg_match( '/(?<token>\?|\$|:)(?<index>[0-9]*)/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
+				$t_match_param = $t_matches[0];
 				# Realign the offset returned by preg_match as it is byte-based,
 				# which causes issues with UTF-8 characters in the query string
 				# (e.g. from custom fields names)
-				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_matches[1] ), mb_internal_encoding() );
+				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
 				if( $i <= count( $p_arr_parms ) ) {
-					if( is_null( $p_arr_parms[$i] ) ) {
+					if( 'pgsql' == $t_db_type ) {
+						# For pgsql, the binded value is indexed by the parameter name
+						$t_index = (int)$t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index-1];
+					} else {
+						$t_value = $p_arr_parms[$i];
+					}
+					if( is_null( $t_value ) ) {
 						$t_replace = 'NULL';
-					} else if( is_string( $p_arr_parms[$i] ) ) {
-						$t_replace = "'" . $p_arr_parms[$i] . "'";
-					} else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
-						$t_replace = (float)$p_arr_parms[$i];
-					} else if( is_bool( $p_arr_parms[$i] ) ) {
+					} else if( is_string( $t_value ) ) {
+						$t_replace = "'" . $t_value . "'";
+					} else if( is_integer( $t_value ) || is_float( $t_value ) ) {
+						$t_replace = (float)$t_value;
+					} else if( is_bool( $t_value ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
-								$t_replace = '\'' . $p_arr_parms[$i] . '\'';
+								$t_replace = '\'' . $t_value . '\'';
 							break;
 						default:
-							$t_replace = $p_arr_parms[$i];
+							$t_replace = $t_value;
 							break;
 						}
 					} else {
 						echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
 						exit( 1 );
 					}
-					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );
-					$t_lastoffset = $t_matches[1] + strlen( $t_replace ) + 1;
+					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_match_param[0] ) );
+					$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
 				} else {
-					$t_lastoffset = $t_matches[1] + 1;
+					$t_lastoffset = $t_match_param[1] + 1;
 				}
 				$i++;
 			}
