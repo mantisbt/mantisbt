@@ -67,8 +67,7 @@ require_api( 'lang_api.php' );
 	method="post"
 	action="bugnote_add.php"
 	enctype="multipart/form-data"
-	class="dz dropzone-form"
-	<?php print_dropzone_form_data() ?>>
+	class="dz dropzone-form">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">

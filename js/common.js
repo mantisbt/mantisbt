@@ -472,28 +472,28 @@ Dropzone.autoDiscover = false;
 function enableDropzone( classPrefix, autoUpload ) {
 	try {
 		var zone = new Dropzone( "." + classPrefix + "-form", {
-			forceFallback: $(this).data('force-fallback'),
+			forceFallback: $.parseJSON(config['dropzone_force_fallback']),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
 			clickable: '.' + classPrefix,
 			previewsContainer: '#' + classPrefix + '-previews-box',
 			uploadMultiple: true,
 			parallelUploads: 100,
-			maxFilesize: $(this).data('max-filesize'),
+			maxFilesize: config['max_file_size'],
 			addRemoveLinks: !autoUpload,
-			acceptedFiles: $(this).data('accepted-files'),
+			acceptedFiles: config['allowed_files'],
+			dictDefaultMessage: translations['dropzone_default_message'],
+			dictFallbackMessage: translations['dropzone_fallback_message'],
+			dictFallbackText: translations['dropzone_fallback_text'],
+			dictFileTooBig: translations['dropzone_file_too_big'],
+			dictInvalidFileType: translations['dropzone_invalid_file_type'],
+			dictResponseError: translations['dropzone_response_error'],
+			dictCancelUpload: translations['dropzone_cancel_upload'],
+			dictCancelUploadConfirmation: translations['dropzone_cancel_upload_confirmation'],
+			dictRemoveFile: translations['dropzone_remove_file'],
+			dictRemoveFileConfirmation: translations['dropzone_remove_file_confirmation'],
+			dictMaxFilesExceeded: translations['dropzone_max_files_exceeded'],
 			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: $(this).data('default-message'),
-			dictFallbackMessage: $(this).data('fallback-message'),
-			dictFallbackText: $(this).data('fallback-text'),
-			dictFileTooBig: $(this).data('file-too-big'),
-			dictInvalidFileType: $(this).data('invalid-file-type'),
-			dictResponseError: $(this).data('response-error'),
-			dictCancelUpload: $(this).data('cancel-upload'),
-			dictCancelUploadConfirmation: $(this).data('cancel-upload-confirmation'),
-			dictRemoveFile: $(this).data('remove-file'),
-			dictRemoveFileConfirmation: $(this).data('remove-file-confirmation'),
-			dictMaxFilesExceeded: $(this).data('max-files-exceeded'),
 
 			init: function () {
 				var dropzone = this;
@@ -517,6 +517,6 @@ function enableDropzone( classPrefix, autoUpload ) {
 			}
 		});
 	} catch (e) {
-		alert( $(this).data('dropzone-not-supported') );
+		alert( translations['dropzone_not_supported'] );
 	}
 }
