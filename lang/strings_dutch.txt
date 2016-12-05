@@ -31,7 +31,7 @@
  * **********************************************************************
  */
 /** Dutch (Nederlands)
- * 
+ *
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -304,11 +304,7 @@ $s_current_password = 'Huidige wachtwoord';
 $s_access_level = 'Toegangsniveau';
 $s_access_level_label = 'Toegangsniveau';
 $s_update_user_button = 'Gebruiker bijwerken';
-<<<<<<< HEAD
-$s_verify_warning = 'Uw gebruikersgegevens zijn gecontroleerd.';
-=======
 $s_verify_warning = 'Uw accountgegevens zijn gecontroleerd.';
->>>>>>> origin/master-1.3.x
 $s_verify_change_password = 'Geeft een wachtwoord in zodat u opnieuw kunt aanmelden.';
 $s_api_tokens_link = 'API-sleutels';
 $s_api_token_create_form_title = 'API-sleutel maken';
