@@ -78,12 +78,18 @@ function event_declare_many( array $p_events ) {
  * @return null
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
-	global $g_event_cache;
+	global $g_event_cache, $g_event_deprecated;
 
 	if( !isset( $g_event_cache[$p_name] ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
 		return null;
+	}
+
+	# issue a warning for deprecated events
+	if( isset( $g_event_deprecated[$p_name] ) ) {
+		error_parameters( $p_name, $g_event_deprecated[$p_name] );
+		trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	}
 
 	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
