@@ -42,6 +42,7 @@
  * @author Dj
  * @author Glanthor Reviol
  * @author Leiric
+ * @author MeskoBalazs
  * @author R-Joe
  * @author Sucy
  */
@@ -423,6 +424,8 @@ $s_reminder = 'Emlékeztető';
 $s_reminder_explain = 'Ezen megjegyzést mindenki megkapja, aki visszajelzést kért az ügyről.';
 $s_reminder_monitor = 'Ezen személyek figyelni kezdik az ügyet, és leiratkozhatnak az "Figyelés vége" gomb használatával.';
 $s_reminder_store = 'Ezen megjegyzés az üggyel együtt tárolódik.';
+$s_mentioned_you = 'megemlített itt:';
+$s_mentioned_in = 'Említve itt: %1$s';
 $s_confirm_sponsorship = 'Erősítse meg, hogy a(z) %1$d ügyet %2$s összeggel kívánja támogatni.';
 $s_stick_bug_button = 'Rögzítés';
 $s_unstick_bug_button = 'Rögzítés feloldása';
@@ -481,6 +484,7 @@ $s_all_revisions = 'Összes változat';
 $s_back_to_issue = 'Vissza az ügyhöz';
 $s_confirm_revision_drop = 'Biztos vagy benne, hogy el szeretnéd dobni ezt az ügyváltozatot?';
 $s_vote_added_msg = 'Szavazat hozzáadva...';
+$s_bugnote_attached_files = 'Csatolt fájlok:';
 $s_bugnote_deleted_msg = 'Megjegyzés sikeresen törölve...';
 $s_bug_notes_title = 'Megjegyzések';
 $s_edit_bugnote_title = 'Megjegyzés szerkesztése';
@@ -497,7 +501,7 @@ $s_show_content = 'Tartalom megjelenítése';
 $s_total_queries_executed = 'Összesen lefuttatott lekérdezések: %1$d.';
 $s_unique_queries_executed = 'Egyedi lefuttatott lekérdezések: %1$d.';
 $s_total_query_execution_time = 'Összesen lekérdezés végrehajtási ideje %1$s';
-$s_page_execution_time = 'Lap végrehajtási idő: %1$ másodperc';
+$s_page_execution_time = 'Lap végrehajtási idő: %1$s másodperc';
 $s_memory_usage_in_kb = 'Memóriahasználat: %1$s KB';
 $s_log_page_number = 'Szám';
 $s_log_page_time = 'Végrehajtási idő';
