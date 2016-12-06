@@ -474,7 +474,7 @@ function enableDropzone( classPrefix, autoUpload ) {
 		var formClass = "." + classPrefix + "-form";
 		var form = $( formClass );
 		var zone = new Dropzone( formClass, {
-			forceFallback: $(this).data('force-fallback'),
+			forceFallback: form.data('force-fallback'),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
 			clickable: '.' + classPrefix,
