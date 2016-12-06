@@ -1351,6 +1351,8 @@ function bug_delete( $p_bug_id ) {
 	# call pre-deletion custom function
 	helper_call_custom_function( 'issue_delete_validate', array( $p_bug_id ) );
 
+	event_signal( 'EVENT_BUG_DELETED', array( $c_bug_id ) );
+
 	# log deletion of bug
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
