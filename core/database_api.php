@@ -1331,8 +1331,9 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 						$t_replace = $t_value;
 					}
 				} else {
-					echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
-					exit( 1 );
+					# Could not find a supported type for this parameter value.
+					# Skip this token, so replacing it with itself.
+					$t_replace = $t_match_param[0];
 				}
 				$p_query = utf8_substr( $p_query, 0, $t_utf8_offset )
 					. $t_replace
