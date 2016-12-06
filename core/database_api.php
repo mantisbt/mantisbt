@@ -1295,6 +1295,8 @@ function db_empty_result() {
  * @return string             Processed query string
  */
 function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
+	global $g_db;
+
 	$t_lastoffset = 0;
 	$i = 0;
 	if( !empty( $p_arr_parms ) ) {
@@ -1325,11 +1327,8 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 				} else if( is_integer( $t_value ) || is_float( $t_value ) ) {
 					$t_replace = (float)$t_value;
 				} else if( is_bool( $t_value ) ) {
-					if( db_is_pgsql() ) {
-						$t_replace = '\'' . $t_value . '\'';
-					} else {
-						$t_replace = $t_value;
-					}
+					# use the actual literal from db driver
+					$t_replace = $t_value ? $g_db->true : $g_db->false;
 				} else {
 					# Could not find a supported type for this parameter value.
 					# Skip this token, so replacing it with itself.
