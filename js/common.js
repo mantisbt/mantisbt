@@ -519,6 +519,6 @@ function enableDropzone( classPrefix, autoUpload ) {
 			}
 		});
 	} catch (e) {
-		alert( $(this).data('dropzone-not-supported') );
+		alert( form.data('dropzone-not-supported') );
 	}
 }
