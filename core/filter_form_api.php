@@ -2687,7 +2687,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			));
 
 	?>
-	<table width="100%" cellspacing="1">
+	<table class="table table-bordered table-condensed2">
 		<?php $t_row1->render() ?>
 		<?php $t_row2->render() ?>
 		<?php $t_row3->render() ?>
@@ -2704,7 +2704,6 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
  * filter form table
  */
 class FilterBoxGridLayout extends TableGridLayout {
-	public $tr_class = 'row-1';
 
 	/**
 	 * Prints HTML code for TD cell representing the Item header
@@ -2712,7 +2711,7 @@ class FilterBoxGridLayout extends TableGridLayout {
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
 	protected function render_td_item_header( TableFieldsItem $p_item, $p_colspan ) {
-		echo '<td class="small-caption category2 ' . $p_item->attr_class . '"';
+		echo '<td class="small-caption category ' . $p_item->attr_class . '"';
 		if( $p_colspan > 1) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
@@ -2747,7 +2746,7 @@ class FilterBoxGridLayout extends TableGridLayout {
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
 	protected function render_td_empty_header( $p_colspan ) {
-		echo '<td class="category2"';
+		echo '<td class="small-caption category"';
 		if( $p_colspan > 1) {
 			echo ' colspan="' . $p_colspan . '"';
 		}
