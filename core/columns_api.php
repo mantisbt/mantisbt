@@ -82,7 +82,6 @@ function columns_filter_disabled( array $p_columns ) {
 				if( ! $t_enable_profiles ) {
 					continue 2;
 				}
-				# don't filter
 				break;
 
 			case 'eta':
@@ -103,7 +102,13 @@ function columns_filter_disabled( array $p_columns ) {
 				}
 				break;
 
-			default:
+			case 'sponsorship_total':
+				if( config_get( 'enable_sponsorship' ) == OFF ) {
+					continue 2;
+				}
+				break;
+
+				default:
 				# don't filter
 				break;
 		}
@@ -130,28 +135,6 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	# Overdue icon column (icons appears if an issue is beyond due_date)
 	$t_columns['overdue'] = null;
 
-	if( $p_enabled_columns_only && OFF == config_get( 'enable_profiles' ) ) {
-		unset( $t_columns['os'] );
-		unset( $t_columns['os_build'] );
-		unset( $t_columns['platform'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_eta' ) == OFF ) {
-		unset( $t_columns['eta'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_projection' ) == OFF ) {
-		unset( $t_columns['projection'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_product_build' ) == OFF ) {
-		unset( $t_columns['build'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_sponsorship' ) == OFF ) {
-		unset( $t_columns['sponsorship_total'] );
-	}
-
 	# The following fields are used internally and don't make sense as columns
 	unset( $t_columns['_stats'] );
 	unset( $t_columns['profile_id'] );
@@ -161,7 +144,13 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
 
-	return array_keys( $t_columns );
+	$t_column_names = array_keys( $t_columns );
+
+	if( $p_enabled_columns_only ) {
+		$t_column_names = columns_filter_disabled( $t_column_names );
+	}
+
+	return $t_column_names;
 }
 
 /**
@@ -196,6 +185,44 @@ function columns_get_plugin_columns() {
 	}
 
 	return $s_column_array;
+}
+
+/**
+ * Get all columns for existing custom_fields
+ * @return string Array of column names
+ */
+function columns_get_custom_fields() {
+	static $t_col_names = null;
+	if( isset( $t_col_names ) ) {
+		return $t_col_names;
+	}
+
+	$t_all_cfids = custom_field_get_ids();
+	$t_col_names = array();
+	foreach( $t_all_cfids as $t_id ) {
+		$t_def = custom_field_get_definition( $t_id );
+		$t_col_names[] = 'custom_' . $t_def['name'];
+	}
+	return $t_col_names;
+}
+
+/**
+ * Get all columns active for the current system.
+ * This includes standard, custom fields, and plugin columns.
+ * Columns for disabled modules are removed from this list, according to system
+ * configuration.
+ *
+ * This function cannot check on current user/project, so it can be used by core
+ * in potential unlogged-in scenarios.
+ * @return array Array of column names
+ */
+function columns_get_all_active_columns() {
+	$t_columns = array_merge(
+			columns_get_standard(),
+			array_keys( columns_get_plugin_columns() ),
+			columns_get_custom_fields()
+			);
+	return columns_filter_disabled( $t_columns );
 }
 
 /**
@@ -256,6 +283,50 @@ function column_is_extended( $p_column ) {
 		default:
 			return false;
 	}
+}
+
+/**
+ * Checks if the specified column is a custom field column.
+ * @param string $p_column The column name.
+ * @return boolean True if its a custom field column
+ */
+function column_is_custom_field( $p_column ) {
+	$t_cf_columns = columns_get_custom_fields();
+	return in_array( $p_column, $t_cf_columns );
+}
+
+/**
+ * Checks if the specified column can be sorted
+ * @param string $p_column The column name.
+ * @return boolean True if the column can be sorted
+ */
+function column_is_sortable( $p_column ) {
+
+	# custom fields are always sortable
+	if( column_is_custom_field( $p_column ) ) {
+		return true;
+	}
+
+	# plugin fields contains a 'sortable' property
+	if( column_is_plugin_column( $p_column ) ) {
+		$t_plugin_columns = columns_get_plugin_columns();
+		$t_plugin_obj = $t_plugin_columns[$p_column];
+		return $t_plugin_obj->sortable;
+	}
+
+	#standard fields: define exceptions here
+	switch( $p_column ) {
+		case 'selection':
+		case 'edit':
+		case 'bugnotes_count':
+		case 'attachment_count':
+		case 'tags':
+		case 'overdue':
+			return false;
+	}
+
+	# after all exceptions, return true as default
+	return true;
 }
 
 /**

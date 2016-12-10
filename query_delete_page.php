@@ -22,6 +22,8 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
+ * @deprecated This page has been replaced by 'manage_filter_delete.php'
+ *
  * @uses core.php
  * @uses authentication_api.php
  * @uses compress_api.php
@@ -44,6 +46,10 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+
+# Trigger deprecate warning
+error_parameters( 'query_delete_page.php', 'manage_filter_delete.php' );
+trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
 auth_ensure_user_authenticated();
 compress_enable();

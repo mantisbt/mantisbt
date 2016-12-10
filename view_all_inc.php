@@ -150,8 +150,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 <tr class="buglist-headers">
 <?php
 	$t_title_function = 'print_column_title';
+	$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_VIEW_PAGE );
 	foreach( $g_columns as $t_column ) {
-		helper_call_custom_function( $t_title_function, array( $t_column ) );
+		helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_VIEW_PAGE, $t_sort_properties ) );
 	}
 ?>
 </tr>
