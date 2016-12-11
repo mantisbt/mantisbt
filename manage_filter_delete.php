@@ -64,9 +64,10 @@ filter_db_delete_filter( $f_filter_id );
 form_security_purge( 'manage_filter_delete' );
 
 $t_redirect_page = 'manage_filter_page.php';
+layout_page_header( null, $t_redirect_url );
 
-html_page_top( null, $t_redirect_page );
+layout_page_begin();
 
 html_operation_successful( $t_redirect_page );
 
-html_page_bottom();
+layout_page_end();

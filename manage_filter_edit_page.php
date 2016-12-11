@@ -60,7 +60,9 @@ require_api( 'version_api.php' );
 
 auth_ensure_user_authenticated();
 
-html_page_top( lang_get( 'manage_filter_edit_page_title' ) );
+layout_page_header( lang_get('manage_filter_edit_page_title' ) );
+
+layout_page_begin( 'manage_filter_edit_page.php' );
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
@@ -86,98 +88,120 @@ $t_current_project = helper_get_current_project();
 $t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
 
 ?>
+<div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
 
-<div class="filter-box table-container">
-	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
+		<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
 		<input type="hidden" name="filter_id" value="<?php echo $f_filter_id ?>" >
 		<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type'] ?>" >
-		<h2><?php echo lang_get('edit_filter') ?></h2>
 
-		<div class="section-link">
-			<?php
-			$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
-				if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-					if( 'advanced' == $t_filter['_view_type'] ) {
-						print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-					} else {
-						print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-					}
-				}
-			?>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-filter"></i>
+					<?php echo lang_get('edit_filter') ?>
+				</h4>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+
+					<div class="widget-toolbox padding-8 clearfix">
+						<div class="btn-toolbar pull-left">
+							<div class="form-inline">
+								<label>
+									<?php echo lang_get( 'query_name' ) ?>&nbsp;
+									<input type="text" size="16" name="filter_name" maxlength="64" value="<?php echo filter_get_field( $f_filter_id, 'name' ) ?>">
+								</label>
+							</div>
+						</div>
+						<div class="btn-toolbar pull-right">
+							<div class="btn-group">
+							<?php
+								$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
+								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+									if( 'advanced' == $t_filter['_view_type'] ) {
+										print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+									} else {
+										print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+									}
+								}
+							?>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<?php
+						$t_for_screen = true;
+						$t_static = gpc_get_bool( 'static', false );
+						filter_form_draw_inputs( $t_filter, $t_for_screen, $t_static );
+						?>
+					</div>
+
+					<div class="widget-toolbox padding-8 clearfix">
+						<div class="btn-toolbar pull-left">
+							<div class="form-inline">
+								<label><?php echo lang_get( 'search' ) ?>&nbsp;
+									<input type="text" size="64" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>">
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
+							<?php
+							if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+							?>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'filter_access' ) ?>:
+								</td>
+								<td>
+									<label class="inline">
+										<input type="checkbox" class="ace input-sm" name="is_public" value="1" <?php check_checked( true == filter_get_field( $f_filter_id, 'is_public' ) ) ?>>
+									<span class="lbl"> <?php echo lang_get( 'public' ) ?></span>
+									</label>
+								</td>
+							</tr>
+							<?php } ?>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'filter_visibility' ) ?>:
+								</td>
+								<td>
+									<label class="inline">
+										<input type="radio" class="ace input-sm" name="project_id" value="<?php echo ALL_PROJECTS ?>" <?php check_checked( ALL_PROJECTS == $t_filter_project ) ?>>
+										<span class="lbl"> <?php echo lang_get( 'all_projects' ) ?></span>
+									</label>
+									<br>
+									<?php if( ALL_PROJECTS != $t_filter_project ) { ?>
+									<label>
+										<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_filter_project ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project ) ?>>
+										<span class="lbl"> <?php echo lang_get( 'stored_project' ) . ' (' . project_get_name( $t_filter_project ) . ')' ?></span>
+									</label>
+									<br>
+									<?php } ?>
+									<?php if( $t_filter_project != $t_current_project ) { ?>
+									<label>
+										<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_current_project ?>">
+										<span class="lbl"> <?php echo lang_get( 'current_project' ) . ' (' . project_get_name( $t_current_project ) . ')' ?></span>
+									</label>
+									<?php } ?>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_filter' ) ?>" />
+			</div>
 		</div>
-
-		<table>
-			<tbody>
-				<tr>
-					<td>
-						<label><?php echo lang_get( 'query_name' ) ?>&nbsp;
-							<input type="text" size="16" name="filter_name" maxlength="64" value="<?php echo filter_get_field( $f_filter_id, 'name' ) ?>">
-						</label>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-		<?php
-		$t_for_screen = true;
-		$t_static = gpc_get_bool( 'static', false );
-		filter_form_draw_inputs( $t_filter, $t_for_screen, $t_static );
-		?>
-
-		<table>
-			<tbody>
-				<tr>
-					<td colspan="4">
-						<label><?php echo lang_get( 'search' ) ?>&nbsp;
-							<input type="text" size="64" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>">
-						</label>
-					</td>
-				</tr>
-				<tr class="vtop">
-					<?php
-					if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-					?>
-						<td>
-							<span class="bold"><?php echo lang_get( 'filter_access' ) ?>:</span>
-							<br>
-							<label>
-								<input type="checkbox" name="is_public" value="1" <?php check_checked( true == filter_get_field( $f_filter_id, 'is_public' ) ) ?>>
-							<?php echo lang_get( 'public' ) ?>
-							</label>
-					<?php } ?>
-					<td>
-						<span class="bold"><?php echo lang_get( 'filter_visibility' ) ?>: </span>
-						<br>
-						<label>
-							<input type="radio" name="project_id" value="<?php echo ALL_PROJECTS ?>" <?php check_checked( ALL_PROJECTS == $t_filter_project ) ?>>
-							<?php echo lang_get( 'all_projects' ) ?>
-						</label>
-						<br>
-						<?php if( ALL_PROJECTS != $t_filter_project ) { ?>
-						<label>
-							<input type="radio" name="project_id" value="<?php echo $t_filter_project ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project ) ?>>
-							<?php echo lang_get( 'stored_project' ) . ' (' . project_get_name( $t_filter_project ) . ')' ?>
-						</label>
-						<br>
-						<?php } ?>
-						<?php if( $t_filter_project != $t_current_project ) { ?>
-						<label>
-							<input type="radio" name="project_id" value="<?php echo $t_current_project ?>">
-							<?php echo lang_get( 'current_project' ) . ' (' . project_get_name( $t_current_project ) . ')' ?>
-						</label>
-						<?php } ?>
-					</td>
-				</tr>
-				<tr>
-					<td class="center" colspan="4">
-						<input type="submit" name="save" value="<?php echo lang_get( 'update_filter' ) ?>">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-	</form>
+		</form>
+	</div>
 </div>
+
 <?php
-html_page_bottom();
+layout_page_end();

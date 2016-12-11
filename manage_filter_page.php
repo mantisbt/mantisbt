@@ -48,7 +48,9 @@ require_api( 'rss_api.php' );
 
 auth_ensure_user_authenticated();
 
-html_page_top( lang_get('manage_filter_page_title' ) );
+layout_page_header( lang_get('manage_filter_page_title' ) );
+
+layout_page_begin( 'manage_filter_page.php' );
 
 $t_project_id = helper_get_current_project();
 $t_user_id = auth_get_current_user_id();
@@ -68,13 +70,13 @@ filter_cache_rows( $t_filter_ids_available );
 function table_print_filter_headers() {
 ?>
 	<thead>
-		<tr class="row-category">
-			<td><?php echo lang_get( 'query_name' ) ?></td>
-			<td><?php echo lang_get( 'rss' ) ?></td>
-			<td><?php echo lang_get( 'filter_visibility' ) ?></td>
-			<td><?php echo lang_get( 'public' ) ?></td>
-			<td><?php echo lang_get( 'owner' ) ?></td>
-			<td><?php echo lang_get( 'actions' ) ?></td>
+		<tr>
+			<th><?php echo lang_get( 'query_name' ) ?></td>
+			<th><?php echo lang_get( 'rss' ) ?></td>
+			<th><?php echo lang_get( 'filter_visibility' ) ?></td>
+			<th><?php echo lang_get( 'public' ) ?></td>
+			<th><?php echo lang_get( 'owner' ) ?></td>
+			<th><?php echo lang_get( 'actions' ) ?></td>
 		</tr>
 	</thead>
 <?php
@@ -98,25 +100,29 @@ function table_print_filter_row( $p_filter_id ) {
 	print_rss( rss_get_issues_feed_url( null, null, $p_filter_id ), lang_get( 'rss' ) );
 	echo '</td>';
 	# Project
-	echo '<td class="center">' . project_get_name( filter_get_field( $p_filter_id, 'project_id' )) . '</td>';
+	echo '<td>' . project_get_name( filter_get_field( $p_filter_id, 'project_id' )) . '</td>';
 	# Public
-	echo '<td class="center">' . ( filter_get_field( $p_filter_id, 'is_public' ) ? 'X' : '' ) . '</td>';
+	echo '<td class="center">' . trans_bool( filter_get_field( $p_filter_id, 'is_public' ) ) . '</td>';
 	# Owner
-	echo '<td class="center">' . user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) . '</td>';
+	echo '<td>' . user_get_name( filter_get_field( $p_filter_id, 'user_id' ) ) . '</td>';
 	# Actions
-	echo '<td class="left">';
-	print_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ) );
-	echo '&nbsp;';
+	echo '<td>';
+	echo '<div class="pull-left">';
+	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
+	echo '</div>';
 	if( $t_editable ) {
-		print_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
+		echo '<div class="pull-left">';
+		print_form_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
+		echo '</div>';
 	}
+	echo '</div>';
 	echo '</td>';
 	echo '</tr>';
 }
 
 function table_print_filters( array $p_filter_array ) {
 	?>
-	<table>
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<?php table_print_filter_headers() ?>
 		<tbody>
 		<?php
@@ -133,15 +139,28 @@ function table_print_filters( array $p_filter_array ) {
 
 ?>
 
-<div class="table-container">
-	<h2><?php echo lang_get( 'available_filter_for_project' ) . ': ' . project_get_name( $t_project_id ) ?></h2>
-	<?php
-		if( count( $t_filter_ids_available ) > 0 ) {
-			table_print_filters( $t_filter_ids_available );
-		}
-	?>
-</div>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-filter"></i>
+				<?php echo lang_get('available_filter_for_project') . ': ' . project_get_name( $t_project_id ) ?>
+			</h4>
+		</div>
+
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+			<?php
+			if( count( $t_filter_ids_available ) > 0 ) {
+				table_print_filters( $t_filter_ids_available );
+			}
+			?>
+			</div>
+		</div>
+	</div>
+</div>
 <?php
 
-html_page_bottom();
+layout_page_end();
