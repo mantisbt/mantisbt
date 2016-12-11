@@ -98,41 +98,49 @@ $t_filter['_view_type'] = $f_view_type;
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
 ?>
+<div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
 
-<div class="filter-box table-container">
-	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
-		<input type="hidden" name="type" value="1" />
-		<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
-		<?php
-			if( $f_for_screen == false ) {
-				print '<input type="hidden" name="print" value="1" />';
-				print '<input type="hidden" name="offset" value="0" />';
+<form method="post" name="filters" action="<?php echo $t_action; ?>">
+
+<?php # CSRF protection not required here - form does not result in modifications ?>
+<input type="hidden" name="type" value="1" />
+<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
+<?php
+	if( $f_for_screen == false ) {
+		print '<input type="hidden" name="print" value="1" />';
+		print '<input type="hidden" name="offset" value="0" />';
+	}
+?>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-filter"></i>
+		<?php echo lang_get('filters') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="widget-toolbox">
+<div class="btn-toolbar">
+	<div class="btn-group pull-right">
+	<?php
+		$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
+
+		if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+			if( 'advanced' == $f_view_type ) {
+				print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+			} else {
+				print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 			}
-		?>
+		}
+	?>
+	</div>
+</div>
+</div>
 
-		<h2>
-			<?php
-			echo lang_get('edit_filter');
-			if( $t_named_filter ) {
-				echo ': ' . filter_get_field( $c_filter_id, 'name' );
-			}
-			?>
-		</h2>
-
-		<div class="section-link">
-			<?php
-			$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
-				if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-					if( 'advanced' == $f_view_type ) {
-						print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-					} else {
-						print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-					}
-				}
-			?>
-		</div>
-
+<div class="table-responsive">
 		<?php
 		filter_form_draw_inputs( $t_filter, $f_for_screen, $f_static );
 		?>
@@ -151,8 +159,11 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 				</tr>
 			</tbody>
 		</table>
-
-	</form>
+</div>
+</div>
+</div>
+</div>
+</form>
 </div>
 <?php
 layout_page_end();
