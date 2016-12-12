@@ -89,13 +89,16 @@ reset( $t_boxes );
 #print_r ($t_boxes);
 
 $t_project_id = helper_get_current_project();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
 ?>
-<div class="col-md-7 col-xs-12">
+<div class="col-xs-12 <?php echo $t_timeline_view_class ?>">
 
 <?php
 $t_number_of_boxes = count ( $t_boxes );
 $t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 $t_counter = 0;
+$t_two_columns_applied = false;
 
 define( 'MY_VIEW_INC_ALLOW', true );
 
@@ -125,16 +128,31 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 
 			# display the box
 	else {
-		include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-		echo '<div class="space-10"></div>';
+		if( !$t_timeline_view_threshold_access ) {
+			if ($t_counter >= $t_number_of_boxes / 2 && !$t_two_columns_applied) {
+				echo '</div>';
+				echo '<div class="col-xs-12 col-md-6">';
+				$t_two_columns_applied = true;
+			} elseif ($t_counter >= $t_number_of_boxes && $t_two_columns_applied) {
+				echo '</div>';
+			} else {
+				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+				echo '<div class="space-10"></div>';
+			}
+			$t_counter++;
+		} else {
+			include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+			echo '<div class="space-10"></div>';
+		}
 	}
 }
 ?>
 </div>
 
+<?php if( $t_timeline_view_threshold_access ) { ?>
 <div class="col-md-5 col-xs-12">
-	<?php  include( $g_core_path . 'timeline_inc.php' ); ?>
+	<?php include( $g_core_path . 'timeline_inc.php' ); ?>
 	<div class="space-10"></div>
 </div>
-<?php
+<?php }
 layout_page_end();

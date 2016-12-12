@@ -2759,6 +2759,12 @@ $g_update_readonly_bug_threshold = MANAGER;
 $g_view_changelog_threshold = VIEWER;
 
 /**
+* threshold for viewing timeline
+* @global integer $g_timeline_view_threshold
+*/
+$g_timeline_view_threshold = VIEWER;
+
+/**
  * threshold for viewing roadmap
  * @global integer $g_roadmap_view_threshold
  */
