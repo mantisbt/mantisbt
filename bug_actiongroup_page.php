@@ -221,12 +221,6 @@ switch( $f_action ) {
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
 }
-if( $f_action === 'UP_DUE_DATE' ) {
-    require_js( 'jscalendar/calendar.js' );
-    require_js( 'jscalendar/lang/calendar-en.js' );
-    require_js( 'jscalendar/calendar-setup.js' );
-    require_css( 'calendar-blue.css' );
-}
 bug_group_action_print_top();
 ?>
 
@@ -285,11 +279,15 @@ if( $t_multiple_projects ) {
 				$t_bug_id = $f_bug_arr[0];
 				$t_bug = bug_get( $t_bug_id );
 				if( !date_is_null( $t_bug->due_date ) ) {
-					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+					$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 				}
 			}
 
-			echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
+				'" value="' . $t_date_to_display . '" />';
+			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm">';
 

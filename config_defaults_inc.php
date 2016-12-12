@@ -1140,20 +1140,13 @@ $g_normal_date_format = 'Y-m-d H:i';
 $g_complete_date_format = 'Y-m-d H:i T';
 
 /**
- * jscalendar date format string
- * go to http://www.php.net/manual/en/function.date.php
+ * datetime picker widget format string
+ * go to http://momentjs.com/docs/#/displaying/format/
  * for detailed instructions on date formatting
- * @global string $g_calendar_js_date_format
+ * @global string $g_datetime_picker_format
  */
-$g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
+$g_datetime_picker_format = 'Y-MM-DD H:m';
 
-/**
- * jscalendar date format string
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
- * @global string $g_calendar_date_format
- */
-$g_calendar_date_format = 'Y-m-d H:i';
 
 ##############################
 # MantisBT TimeZone Settings #
@@ -4276,8 +4269,7 @@ $g_public_config_names = array(
 	'bugnote_user_change_view_state_threshold',
 	'bugnote_user_delete_threshold',
 	'bugnote_user_edit_threshold',
-	'calendar_date_format',
-	'calendar_js_date_format',
+	'datetime_picker_format',
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
