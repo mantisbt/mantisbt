@@ -212,6 +212,14 @@ crypto_init();
 require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
+# Set the default timezone
+# To reduce overhead, we assume that the timezone configuration is valid,
+# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
+# be raised. Use admin checks to validate configuration.
+@date_default_timezone_set( config_get_global( 'default_timezone' ) );
+$t_tz = @date_default_timezone_get();
+config_set_global( 'default_timezone', $t_tz, true );
+
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	if( OFF == $g_use_persistent_connections ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -239,25 +247,17 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-# Set the current timezone
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'authentication_api.php' );
 
-	# To reduce overhead, we assume that the timezone configuration is valid,
-	# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-	# be raised. Use admin checks to validate configuration.
-	@date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	$t_tz = @date_default_timezone_get();
-	config_set_global( 'default_timezone', $t_tz, true );
-
+	# Override the default timezone according to user's preferences
 	if( auth_is_user_authenticated() ) {
-		# Determine the current timezone according to user's preferences
 		require_api( 'user_pref_api.php' );
 		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
 		@date_default_timezone_set( $t_tz );
 	}
-	unset( $t_tz );
 }
+unset( $t_tz );
 
 # Cache current user's collapse API data
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {

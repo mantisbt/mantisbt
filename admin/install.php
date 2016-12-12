@@ -273,8 +273,25 @@ if( 0 == $t_install_state ) {
 	?>
 
 <!-- Check PHP Version -->
-<?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
+<?php
+	print_test(
+		'Checking PHP version (your version is ' . phpversion() . ')',
+		check_php_version( phpversion() ),
+		true,
+		'Upgrade to a more recent version of PHP'
+	);
 
+	# UTF-8 support check
+	# We need either the 'mbstring' extension, or the utf8_encode() function
+	# (part of the 'XML parser' extension) as a fallback for Unicode support
+	# by the utf8 library.
+	print_test(
+		'Checking UTF-8 support',
+		extension_loaded( 'mbstring' ) || function_exists( 'utf8_encode' ),
+		true,
+		'Please install or enable the PHP mbstring extension'
+	);
+?>
 <!-- Check Safe Mode -->
 <?php
 print_test( 'Checking if safe mode is enabled for install script',
@@ -335,8 +352,8 @@ print_test( 'Checking if safe mode is enabled for install script',
 
 # got database information, check and install
 if( 2 == $t_install_state ) {
-    # By now user has picked a timezone, ensure it is set
-    date_default_timezone_set( $f_timezone );
+	# By now user has picked a timezone, ensure it is set
+	date_default_timezone_set( $f_timezone );
 ?>
 
 <div class="col-md-12 col-xs-12">
