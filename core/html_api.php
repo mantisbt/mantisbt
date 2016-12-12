@@ -254,7 +254,7 @@ function html_css_cdn_link( $p_url ) {
  * $p_time is the number of seconds to wait before redirecting.
  * If we have handled any errors on this page return false and don't redirect.
  *
- * @param string  $p_url      The page to redirect: has to be a relative path.
+ * @param string  $p_url      The page to redirect.
  * @param integer $p_time     Seconds to wait for before redirecting.
  * @param boolean $p_sanitize Apply string_sanitize_url to passed URL.
  * @return boolean
@@ -269,6 +269,13 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	}
 
 	$t_url = config_get( 'path' );
+
+	# Remove everything that follows the hostname to accommodate
+	# redirection to an absolute path
+	if( preg_match( '#^/#', $p_url ) && preg_match( '#\w+://[^/]+#', $t_url, $t_matches ) ) {
+		$t_url = $t_matches[0];
+	}
+
 	if( $p_sanitize ) {
 		$t_url .= string_sanitize_url( $p_url );
 	} else {
