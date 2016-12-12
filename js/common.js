@@ -471,29 +471,31 @@ function toggleDisplay(idTag)
 Dropzone.autoDiscover = false;
 function enableDropzone( classPrefix, autoUpload ) {
 	try {
-		var zone = new Dropzone( "." + classPrefix + "-form", {
-			forceFallback: $(this).data('force-fallback'),
+		var formClass = "." + classPrefix + "-form";
+		var form = $( formClass );
+		var zone = new Dropzone( formClass, {
+			forceFallback: form.data('force-fallback'),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
 			clickable: '.' + classPrefix,
 			previewsContainer: '#' + classPrefix + '-previews-box',
 			uploadMultiple: true,
 			parallelUploads: 100,
-			maxFilesize: $(this).data('max-filesize'),
+			maxFilesize: form.data('max-filesize'),
 			addRemoveLinks: !autoUpload,
-			acceptedFiles: $(this).data('accepted-files'),
+			acceptedFiles: form.data('accepted-files'),
 			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: $(this).data('default-message'),
-			dictFallbackMessage: $(this).data('fallback-message'),
-			dictFallbackText: $(this).data('fallback-text'),
-			dictFileTooBig: $(this).data('file-too-big'),
-			dictInvalidFileType: $(this).data('invalid-file-type'),
-			dictResponseError: $(this).data('response-error'),
-			dictCancelUpload: $(this).data('cancel-upload'),
-			dictCancelUploadConfirmation: $(this).data('cancel-upload-confirmation'),
-			dictRemoveFile: $(this).data('remove-file'),
-			dictRemoveFileConfirmation: $(this).data('remove-file-confirmation'),
-			dictMaxFilesExceeded: $(this).data('max-files-exceeded'),
+			dictDefaultMessage: form.data('default-message'),
+			dictFallbackMessage: form.data('fallback-message'),
+			dictFallbackText: form.data('fallback-text'),
+			dictFileTooBig: form.data('file-too-big'),
+			dictInvalidFileType: form.data('invalid-file-type'),
+			dictResponseError: form.data('response-error'),
+			dictCancelUpload: form.data('cancel-upload'),
+			dictCancelUploadConfirmation: form.data('cancel-upload-confirmation'),
+			dictRemoveFile: form.data('remove-file'),
+			dictRemoveFileConfirmation: form.data('remove-file-confirmation'),
+			dictMaxFilesExceeded: form.data('max-files-exceeded'),
 
 			init: function () {
 				var dropzone = this;
@@ -517,6 +519,6 @@ function enableDropzone( classPrefix, autoUpload ) {
 			}
 		});
 	} catch (e) {
-		alert( $(this).data('dropzone-not-supported') );
+		alert( form.data('dropzone-not-supported') );
 	}
 }
