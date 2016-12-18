@@ -513,7 +513,7 @@ class BugData {
 		$t_original_status = $this->status;
 		$this->status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
 
-		event_signal( 'EVENT_API_REPORT_BUG_PRE', array( $this ) );
+		event_signal( 'EVENT_BUG_CREATE_PRE', array( $this ) );
 
 		self::validate( true );
 
@@ -574,7 +574,7 @@ class BugData {
 		}
 
 		# Allow plugins to post-process bug data with the new bug ID
-		event_signal( 'EVENT_API_REPORT_BUG_POST', array( $this ) );
+		event_signal( 'EVENT_BUG_CREATE_POST', array( $this ) );
 
 		return $this->id;
 	}
@@ -649,7 +649,7 @@ class BugData {
 
 		$t_old_data = bug_get( $this->id, true );
 
-		event_signal( 'EVENT_API_UPDATE_BUG_PRE', array( $this, $t_old_data ) );
+		event_signal( 'EVENT_BUG_UPDATE_PRE', array( $this, $t_old_data ) );
 		$c_bug_id = $this->id;
 
 		$this->validate( $p_update_extended );
@@ -811,7 +811,7 @@ class BugData {
 			call_user_func_array( $t_callback['func'], $t_callback['params'] );
 		}
 
-		event_signal( 'EVENT_API_UPDATE_BUG_POST', array( $t_old_data, $this ) );
+		event_signal( 'EVENT_BUG_UPDATE_POST', array( $t_old_data, $this ) );
 
 		return true;
 	}

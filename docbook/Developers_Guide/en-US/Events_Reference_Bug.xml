@@ -116,7 +116,7 @@
 
 				<para>
 					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_API_REPORT_BUG_PRE should be used.
+					For capturing all changes the event EVENT_BUG_CREATE_PRE should be used.
 				</para>
 
 				<itemizedlist>
@@ -144,7 +144,7 @@
 
 				<para>
 					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_API_REPORT_BUG_POST should be used.
+					For capturing all changes the event EVENT_BUG_CREATE_POST should be used.
 				</para>
 
 				<itemizedlist>
@@ -224,7 +224,7 @@
 
 				<para>
 					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_API_UPDATE_BUG_PRE should be used.
+					For capturing all changes the event EVENT_BUG_UPDATE_PRE should be used.
 				</para>
 
 				<itemizedlist>
@@ -251,7 +251,7 @@
 
 				<para>
 					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_API_UPDATE_BUG_POST should be used.
+					For capturing all changes the event EVENT_BUG_UPDATE_POST should be used.
 				</para>
 
 				<itemizedlist>
@@ -298,7 +298,7 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.bug.action.reportbugpre">
-			<title>EVENT_API_REPORT_BUG_PRE (Execute)</title>
+			<title>EVENT_BUG_CREATE_PRE (Execute)</title>
 
 			<blockquote>
 				<para>
@@ -327,7 +327,7 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.bug.action.reportbugpost">
-			<title>EVENT_API_REPORT_BUG_POST (Execute)</title>
+			<title>EVENT_BUG_CREATE_POST (Execute)</title>
 
 			<blockquote>
 				<para>
@@ -345,7 +345,7 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.bug.action.updatebugpre">
-			<title>EVENT_API_UPDATE_BUG_PRE (Execute)</title>
+			<title>EVENT_BUG_UPDATE_PRE (Execute)</title>
 
 			<blockquote>
 				<para>
@@ -375,7 +375,7 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.bug.action.updatebugpost">
-			<title>EVENT_API_UPDATE_BUG_POST (Execute)</title>
+			<title>EVENT_BUG_UPDATE_POST (Execute)</title>
 
 			<blockquote>
 				<para>
