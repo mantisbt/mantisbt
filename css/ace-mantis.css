@@ -281,6 +281,19 @@ textarea.input-xs, select.input-xs[multiple] {
     display:  block;
 }
 
+/* date/time picker */
+input.datetimepicker {
+    margin:0 5px 0 0;
+}
+
+i.datetimepicker {
+    cursor: pointer;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    color: #333333;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

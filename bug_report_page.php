@@ -222,13 +222,6 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
-if( $t_show_due_date ) {
-	require_js( 'jscalendar/calendar.js' );
-	require_js( 'jscalendar/lang/calendar-en.js' );
-	require_js( 'jscalendar/calendar-setup.js' );
-	require_css( 'calendar-blue.css' );
-}
-
 # don't index bug report page
 html_robots_noindex();
 
@@ -354,7 +347,7 @@ if( $t_show_attachments ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
+			$t_date_to_display = date( config_get( 'normal_date_format' ), $f_due_date );
 		}
 ?>
 	<tr>
@@ -362,7 +355,11 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
 	</tr>
 <?php } ?>

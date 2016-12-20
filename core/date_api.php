@@ -42,12 +42,6 @@ require_api( 'lang_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-# Keeps track of whether the external files required for jscalendar to work
-# have already been included in the output sent to the client. jscalendar
-# will not work correctly if it is included multiple times on the same page.
-# @global bool $g_jscalendar_included_already
-$g_calendar_already_imported = false;
-
 $g_cache_timezone = array();
 
 /**

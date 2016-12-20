@@ -293,8 +293,8 @@ class Period {
 		$t_ret .= get_dropdown( $t_periods, $p_control_name, $t_default, false, false );
 		$t_ret .= "</div> <br />\n";
 		$t_ret .= "<div id=\"dates\">\n";
-		$t_ret .= lang_get( 'from_date' ) . ' <input type="text" id="start_date" name="start_date" size="12" value="' . $t_formatted_start . '" class="datetime input-xs" disabled="disabled" />' . "\n";
-		$t_ret .= lang_get( 'to_date' ) . ' <input type="text" id="end_date" name="end_date" size="12" value="' . $t_formatted_end . '" class="datetime input-xs" disabled="disabled" />' . "\n";
+		$t_ret .= lang_get( 'from_date' ) . ' <input type="text" id="start_date" name="start_date" size="12" value="' . $t_formatted_start . '" class="datetimepicker input-xs" disabled="disabled" />' . "\n";
+		$t_ret .= lang_get( 'to_date' ) . ' <input type="text" id="end_date" name="end_date" size="12" value="' . $t_formatted_end . '" class="datetimepicker input-xs" disabled="disabled" />' . "\n";
 		$t_ret .= "</div>\n";
 		return $t_ret;
 	}

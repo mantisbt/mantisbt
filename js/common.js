@@ -209,14 +209,24 @@ $(document).ready( function() {
 		$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 	});
 
-	$('input[type=text].datetime').each(function(index, element) {
-		$(this).after('&nbsp;<i class="fa fa-calendar fa-lg datetime" id="' + element.id + '_datetime_button' + '"></i>');
-		Calendar.setup({
-			inputField: element.id,
-			timeFormat: 24,
-			showsTime: true,
-			ifFormat: config['calendar_js_date_format'],
-			button: element.id + '_datetime_button'
+	$('input[type=text].datetimepicker').each(function(index, element) {
+		$(this).datetimepicker({
+			locale: $(this).data('picker-locale'),
+			format: $(this).data('picker-format'),
+			useCurrent: false,
+			icons: {
+				time: 'fa fa-clock-o',
+				date: 'fa fa-calendar',
+				up: 'fa fa-chevron-up',
+				down: 'fa fa-chevron-down',
+				previous: 'fa fa-chevron-left',
+				next: 'fa fa-chevron-right',
+				today: 'fa fa-arrows ',
+				clear: 'fa fa-trash',
+				close: 'fa fa-times'
+			}
+		}).next().on(ace.click_event, function() {
+			$(this).prev().focus();
 		});
 	});
 

@@ -617,6 +617,10 @@ define ( 'BOOTSTRAP_VERSION', '3.3.6' );
 define ( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=' );
 define ( 'FONT_AWESOME_VERSION', '4.6.3' );
 
+# Moment & DateTimePicker
+define ( 'MOMENT_VERSION', '2.15.2' );
+define ( 'DATETIME_PICKER_VERSION', '4.17.43' );
+
 # Chart JS
 define ( 'CHARTJS_VERSION', '2.1.6' );
 define ( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
