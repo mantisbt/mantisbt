@@ -1116,33 +1116,33 @@ $g_long_process_timeout = 0;
 ##########################
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_short_date_format
  */
 $g_short_date_format = 'Y-m-d';
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_normal_date_format
  */
 $g_normal_date_format = 'Y-m-d H:i';
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_complete_date_format
  */
 $g_complete_date_format = 'Y-m-d H:i T';
 
 /**
- * datetime picker widget format string
- * go to http://momentjs.com/docs/#/displaying/format/
- * for detailed instructions on date formatting
+ * Datetime picker widget format string.
+ * For detailed instructions on date formatting
+ * @see http://momentjs.com/docs/#/displaying/format/
  * @global string $g_datetime_picker_format
  */
 $g_datetime_picker_format = 'Y-MM-DD H:m';
