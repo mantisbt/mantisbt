@@ -1145,7 +1145,7 @@ $g_complete_date_format = 'Y-m-d H:i T';
  * @see http://momentjs.com/docs/#/displaying/format/
  * @global string $g_datetime_picker_format
  */
-$g_datetime_picker_format = 'Y-MM-DD H:m';
+$g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
 
 ##############################
