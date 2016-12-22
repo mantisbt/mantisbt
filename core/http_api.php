@@ -230,6 +230,7 @@ function http_security_headers() {
 
 			http_csp_add( 'script-src', 'ajax.googleapis.com' );
 			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'script-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'img-src', 'ajax.googleapis.com' );
 
