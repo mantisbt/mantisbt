@@ -268,7 +268,7 @@ function layout_head_css() {
 		html_css_link( 'open-sans.css' );
 
 		# datetimepicker
-		html_css_link( 'bootstrap-datetimepicker.min.css' );
+		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	}
 
 	# page specific plugin styles
@@ -318,15 +318,15 @@ function layout_body_javascript() {
 		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH );
 
 		# moment & datetimepicker
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js' );
-		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js' );
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH );
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
 
 		# moment & datetimepicker
-		html_javascript_link( 'moment-with-locales.min.js' );
-		html_javascript_link( 'bootstrap-datetimepicker.min.js' );
+		html_javascript_link( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );
+		html_javascript_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.js' );
 	}
 
 	# theme scripts

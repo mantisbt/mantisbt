@@ -619,7 +619,9 @@ define( 'FONT_AWESOME_VERSION', '4.6.3' );
 
 # Moment & DateTimePicker
 define( 'MOMENT_VERSION', '2.15.2' );
+define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
 define( 'DATETIME_PICKER_VERSION', '4.17.43' );
+define( 'DATETIME_PICKER_HASH', 'sha256-I8vGZkA2jL0PptxyJBvewDVqNXcgIhcgeqi+GD/aw34=' );
 
 # Chart JS
 define( 'CHARTJS_VERSION', '2.1.6' );
