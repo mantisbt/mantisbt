@@ -431,12 +431,12 @@ function create_cumulative_bydate() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	# Get all the submitted dates
-	$t_query = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
+	$t_query = 'SELECT date_submitted, last_updated FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
 	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		# rationalise the timestamp to a day to reduce the amount of data
-		$t_date = $t_row['date_submitted'];
+		$t_date = min( $t_row['date_submitted'], $t_row['last_updated'] );
 		$t_date = (int)( $t_date / SECONDS_PER_DAY );
 
 		if( isset( $t_calc_metrics[$t_date] ) ) {
