@@ -100,11 +100,12 @@ $g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
  * Note: the original regex from the spec has been modified to
  * - escape the '/' in the first character class definition
  * - remove the '^' and '$' anchors to allow matching anywhere in a string
+ * - add a limit of 64 chars on local part to avoid timeouts on very long texts with false matches.
  *
  * @return string
  */
 function email_regex_simple() {
-	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
+	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
 }
 
 /**

@@ -7,7 +7,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-adodb           | adodb           | 5.20.4    | unpatched [1]
+adodb           | adodb           | 5.20.9    | unpatched [1]
 disposable      | disposable      | 2.1.1     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.15    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
