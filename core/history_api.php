@@ -203,7 +203,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 		return db_empty_result();
 	}
 
-	$t_select_string = 'SELECT DISTINCT {bug}.id ';
+	$t_select_string = 'SELECT {bug}.id ';
 	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
 	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
@@ -213,9 +213,8 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 		$t_where_string .= ' ) ';
 	}
 
-	$t_query = 'SELECT * FROM {bug_history} JOIN'
-			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' ) B'
-			. ' ON {bug_history}.bug_id=B.id';
+	$t_query = 'SELECT * FROM {bug_history} WHERE {bug_history}.bug_id IN'
+			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
 
 	$t_params = $t_query_clauses['where_values'];
 	$t_where = array();
@@ -230,7 +229,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 	}
 
 	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+		$t_query .= ' AND ' . implode( ' AND ', $t_where );
 	}
 
 	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
