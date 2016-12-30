@@ -136,7 +136,7 @@ while( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
 
 		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
 		# When timeline is hidden, only use 1 column is displayed
-		if( ON == $t_boxes_position ) {
+		if( $t_timeline_view_threshold_access || ON == $t_boxes_position ) {
 			if( $t_timeline_view_threshold_access || 1 == $t_counter%2 ) {
 				# for even box number start new row and column
 				echo '<tr><td class="myview-left-col">';
