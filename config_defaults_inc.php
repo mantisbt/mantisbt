@@ -4524,6 +4524,7 @@ $g_public_config_names = array(
 	'time_tracking_view_threshold',
 	'time_tracking_with_billing',
 	'time_tracking_without_note',
+	'timeline_view_threshold',
 	'top_include_page',
 	'update_bug_assign_threshold',
 	'update_bug_status_threshold',
