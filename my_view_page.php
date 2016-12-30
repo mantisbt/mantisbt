@@ -88,15 +88,24 @@ reset( $t_boxes );
 #print_r ($t_boxes);
 
 $t_project_id = helper_get_current_project();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
 ?>
 
 <div>
 <?php html_status_legend( STATUS_LEGEND_POSITION_TOP ); ?>
 
 <div>
-<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+<?php
+$t_myview_boxes_class = 'myview_boxes_area';
+if( $t_timeline_view_threshold_access ) {
+	include( $g_core_path . 'timeline_inc.php' );
+} else {
+	# Override the width
+	$t_myview_boxes_class .= ' width100';
+}
+?>
 
-<div class="myview_boxes_area">
+<div class="<?php echo $t_myview_boxes_class ?>">
 
 <table class="hide" cellspacing="3" cellpadding="0">
 <?php
@@ -126,15 +135,19 @@ while( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
 		$t_counter++;
 
 		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
+		# When timeline is hidden, only use 1 column is displayed
 		if( ON == $t_boxes_position ) {
-			if( 1 == $t_counter%2 ) {
+			if( $t_timeline_view_threshold_access || 1 == $t_counter%2 ) {
 				# for even box number start new row and column
 				echo '<tr><td class="myview-left-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '</td></tr>';
+				echo '</td>';
+				if( $t_timeline_view_threshold_access ) {
+					echo '</tr>';
+				}
 			} else if( 0 == $t_counter%2 ) {
 				# for odd box number only start new column
-				echo '<tr><td class="myview-right-col">';
+				echo '<td class="myview-right-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
