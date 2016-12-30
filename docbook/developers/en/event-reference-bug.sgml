@@ -49,6 +49,48 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.view.extra">
+			<title>EVENT_VIEW_BUG_BEFORE_NOTES (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to either process information or display some
+					data in the bug view page.  It is triggered just before the bug notes are displayed.
+				</para>
+
+				<para>
+					Any output here should be contained within its own
+					<programlisting>&lt;table&gt;</programlisting> element.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.view.extra">
+			<title>EVENT_VIEW_BUG_AFTER_HISTORY (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to either process information or display some
+					data in the bug view page.  It is triggered after the history, as the last thing on the page.
+				</para>
+
+				<para>
+					Any output here should be contained within its own
+					<programlisting>&lt;table&gt;</programlisting> element.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</sect2>
 
 	<sect2 id="dev.eventref.bug.action">
