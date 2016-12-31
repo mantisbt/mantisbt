@@ -519,7 +519,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_platform_option_list( $t_bug->platform );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
+			echo '<input type="text" id="platform" name="platform" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
 		}
 
 		echo '</td>';
@@ -537,7 +537,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_os_option_list( $t_bug->os );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
+			echo '<input type="text" id="os" name="os" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
 		}
 
 		echo '</td>';
@@ -555,7 +555,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_os_build_option_list( $t_bug->os_build );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
+			echo '<input type="text" id="os_build" name="os_build" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
 		}
 
 		echo '</td>';

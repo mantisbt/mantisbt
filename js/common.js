@@ -89,6 +89,23 @@ $(document).ready( function() {
         SetCookie("collapse_settings", t_cookie);
     });
 
+    $('input[type=text].typeahead').bs_typeahead({
+		source: function(query, callback) {
+			var fieldName = this.$element.attr('id');
+			var postData = {};
+			postData['entrypoint']= fieldName + '_get_with_prefix';
+			postData[fieldName] = query;
+			$.getJSON('xmlhttprequest.php', postData, function(data) {
+				var results = [];
+				$.each(data, function(i, value) {
+					results.push(value);
+				});
+				callback(results);
+			});
+		}
+	});
+
+
 	$('a.dynamic-filter-expander').click(function(event) {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
