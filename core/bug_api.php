@@ -811,7 +811,7 @@ class BugData {
 			call_user_func_array( $t_callback['func'], $t_callback['params'] );
 		}
 
-		event_signal( 'EVENT_BUG_UPDATE_POST', array( $t_old_data, $this ) );
+		event_signal( 'EVENT_BUG_UPDATE_POST', array( $this, $t_old_data ) );
 
 		return true;
 	}
