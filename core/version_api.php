@@ -492,7 +492,12 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 		foreach( $t_project_ids as $t_project_id ) {
 			if( !empty( $g_cache_versions_project[$t_project_id]) ) {
 				foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
-					$t_versions[] = version_cache_row( $t_id );
+					$t_version_row = version_cache_row( $t_id );
+					if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
+						continue;
+					}
+
+					$t_versions[] = $t_version_row;
 				}
 			}
 		}
