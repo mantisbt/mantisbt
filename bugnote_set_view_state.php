@@ -34,6 +34,7 @@
 
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
 	$f_private		= gpc_get_bool( 'private' );
+	$f_relnote		= gpc_get_bool( 'relnote' );
 
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
@@ -59,7 +60,7 @@
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 
-	bugnote_set_view_state( $f_bugnote_id, $f_private );
+	bugnote_set_view_state( $f_bugnote_id, $f_private, $f_relnote );
 
 	form_security_purge( 'bugnote_set_view_state' );
 

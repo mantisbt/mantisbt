@@ -129,6 +129,7 @@ $s_bug_deleted = 'Issue Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
+$s_make_relnote = 'Make Release Note';
 
 $s_create_new_project_link = 'Create New Project';
 
@@ -915,6 +916,7 @@ $s_project_name = 'Project Name';
 $s_view_status = 'View Status';
 $s_public = 'public';
 $s_private = 'private';
+$s_relnote = 'Release Note';
 $s_update_project_button = 'Update Project';
 $s_delete_project_button = 'Delete Project';
 $s_copy_from = 'Copy From';

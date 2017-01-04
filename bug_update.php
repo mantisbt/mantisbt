@@ -100,7 +100,8 @@
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', $t_bug_data->steps_to_reproduce );
 	$t_bug_data->additional_information	= gpc_get_string( 'additional_information', $t_bug_data->additional_information );
 
-	$f_private						= gpc_get_bool( 'private' );
+	$f_private						= gpc_get_string( 'visible', 'public' ) == 'private';
+	$f_relnote						= gpc_get_string( 'visible', 'public' ) == 'relnote';
 	$f_bugnote_text					= gpc_get_string( 'bugnote_text', '' );
 	$f_time_tracking				= gpc_get_string( 'time_tracking', '0:00' );
 	$f_close_now					= gpc_get_string( 'close_now', false );
@@ -181,7 +182,7 @@
 				$t_bug_data->resolution, $t_bug_data->status,
 				$t_bug_data->fixed_in_version,
 				$t_bug_data->duplicate_id, $t_bug_data->handler_id,
-				$f_bugnote_text, $f_private, $f_time_tracking );
+				$f_bugnote_text, $f_private, $f_relnote, $f_time_tracking );
 			$t_notify = false;
 			$t_bug_note_set = true;
 
@@ -196,7 +197,7 @@
 		} else if ( $t_bug_data->status >= $t_closed
 			&& $t_old_bug_status < $t_closed ) {
 			# bug_close updates the status and bugnote and sends message
-			bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_time_tracking );
+			bug_close( $f_bug_id, $f_bugnote_text, $f_private, $f_relnote, $f_time_tracking );
 			$t_notify = false;
 			$t_bug_note_set = true;
 		} else if ( $t_bug_data->status == config_get( 'bug_reopen_status' )
@@ -204,7 +205,7 @@
 			# fix: update handler_id before calling bug_reopen
 			bug_set_field( $f_bug_id, 'handler_id', $t_bug_data->handler_id );
 			# bug_reopen updates the status and bugnote and sends message
-			bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private );
+			bug_reopen( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, $f_relnote );
 			$t_notify = false;
 			$t_bug_note_set = true;
 
@@ -223,7 +224,7 @@
 
 	# Add a bugnote if there is one
 	if ( false == $t_bug_note_set ) {
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, 0, '', NULL, FALSE );
+		bugnote_add( $f_bug_id, $f_bugnote_text, $f_time_tracking, $f_private, $f_relnote, 0, '', NULL, FALSE );
 	}
 
 	# Update the bug entry, notify if we haven't done so already

@@ -124,7 +124,7 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @return false|int false or indicating bugnote id added
  * @access public
  */
-function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_log_history = TRUE) {
+function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_relnote = FALSE, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_log_history = TRUE) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
 	$c_type = db_prepare_int( $p_type );
@@ -170,6 +170,8 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# @@@ VB: Should we allow users to report private bugnotes, and possibly see only their own private ones
 	if( $p_private && access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $c_user_id ) ) {
 		$t_view_state = VS_PRIVATE;
+	} else if ( $p_relnote ) {
+		$t_view_state = VS_RELNOTE;
 	} else {
 		$t_view_state = VS_PUBLIC;
 	}
@@ -378,7 +380,8 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	for ( $i = 0; ( $i < $t_bugnote_count ) && ( $t_bugnotes_found < $t_bugnote_limit ); $i++ ) {
 		$t_bugnote = array_pop( $t_all_bugnotes );
 
-		if( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
+		if( $t_private_bugnote_visible || $t_bugnote->reporter_id == $t_user_id || ( VS_PUBLIC == $t_bugnote->view_state )
+			|| ( VS_RELNOTE == $t_bugnote->view_state )) {
 
 			# If the access level specified is not enough to see time tracking information
 			# then reset it to 0.
@@ -551,12 +554,14 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
  * @return bool
  * @access public
  */
-function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
+function bugnote_set_view_state( $p_bugnote_id, $p_private, $p_relnote ) {
 	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
 	if( $p_private ) {
 		$t_view_state = VS_PRIVATE;
+	} else if( $p_relnote ) {
+		$t_view_state = VS_RELNOTE;
 	} else {
 		$t_view_state = VS_PUBLIC;
 	}
