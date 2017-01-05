@@ -135,7 +135,7 @@ class IssueAddTest extends SoapBase {
 		$t_issue_to_add['target_version'] = 'target version';
 		$t_issue_to_add['sticky'] = true;
 
-		$t_dt = new DateTime();
+		$t_dt = DateTime::createFromFormat( 'U', time() );
 		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
