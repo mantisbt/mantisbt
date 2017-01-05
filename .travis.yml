@@ -28,10 +28,6 @@ env:
   - DB=mysql
   - DB=pgsql
 
-branches:
-  except:
-    - master-2.0.x
-
 matrix:
   include:
     # Add a specific build for Documentation
