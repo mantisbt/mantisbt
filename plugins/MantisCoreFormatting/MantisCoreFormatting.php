@@ -54,7 +54,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'EVENT_DISPLAY_FORMATTED'	=> 'formatted',		# Formatted String Display
 			'EVENT_DISPLAY_RSS'			=> 'rss',			# RSS String Display
 			'EVENT_DISPLAY_EMAIL'		=> 'email',			# Email String Display
-			'EVENT_CORE_HEADERS' 		=> 'csp_headers',	# Set Headers allowed
 		);
 	}
 
@@ -69,22 +68,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			'process_buglinks'	=> ON,
 			'process_markdown'	=> OFF
 		);
-	}
-
-	/**
-	 * Add img-src directives on markdown to enable to referenced images from internet.
-	 * @return void
-	 */
-	function csp_headers() {
-		static $s_markdown;
-		
-		if( null === $s_markdown ) {
-			$s_markdown = plugin_config_get( 'process_markdown' );
-		}
-
-		if (ON == $s_markdown ) {
-			http_csp_add( 'img-src', "*" );
-		}
 	}
 
 	/**

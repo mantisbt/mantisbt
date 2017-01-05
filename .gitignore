@@ -26,7 +26,6 @@ plugins/*
 !plugins/MantisGraph
 !plugins/XmlImportExport
 !plugins/Gravatar
-!plugins/MantisMarkdown
 
 # IDE/Editor temporary files
 *~
