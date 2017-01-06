@@ -16,5 +16,5 @@
 	branch = mantis
 [submodule "library/parsedown"]
 	path = library/parsedown
-	url = https://github.com/erusev/parsedown.git
+	url = https://github.com/mantisbt/parsedown.git
 	branch = mantisbt
