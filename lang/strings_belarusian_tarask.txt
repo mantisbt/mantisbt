@@ -481,7 +481,6 @@ $s_all_revisions = 'Усе вэрсіі';
 $s_back_to_issue = 'Вярнуцца да праблемы';
 $s_confirm_revision_drop = 'Вы ўпэўнены, што жадаеце адхіліць гэтую вэрсію праблемы?';
 $s_vote_added_msg = 'Голас дададзены…';
-$s_bugnote_added_msg = 'Камэнтар дададзены…';
 $s_bugnote_deleted_msg = 'Камэнтар выдалены пасьпяхова…';
 $s_bug_notes_title = 'Камэнтары';
 $s_edit_bugnote_title = 'Рэдагаваць камэнтар';

@@ -223,26 +223,17 @@ function http_security_headers() {
 			http_csp_add( 'style-src', 'ajax.googleapis.com' );
 			http_csp_add( 'style-src', 'maxcdn.bootstrapcdn.com' );
 			http_csp_add( 'style-src', 'fonts.googleapis.com' );
+			http_csp_add( 'style-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'font-src', 'fonts.gstatic.com' );
 			http_csp_add( 'font-src', 'maxcdn.bootstrapcdn.com' );
 
 			http_csp_add( 'script-src', 'ajax.googleapis.com' );
 			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'script-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'img-src', 'ajax.googleapis.com' );
-		}
 
-		# Relaxing policy for view issue page to allow inline scripts.
-		# Should be removed once #21651 is fixed.
-		if( 'view.php' == basename( $_SERVER['SCRIPT_NAME'] ) ||
-			'bug_report_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-			http_csp_add( 'script-src', "'unsafe-inline'" );
-		}
-
-		# The JS Calendar control does unsafe eval, remove once we upgrade the control (see #20040)
-		if( 'bug_update_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-			http_csp_add( 'script-src', "'unsafe-eval'" );
 		}
 
 		http_csp_emit_header();

@@ -109,7 +109,7 @@ $t_view_state = $t_show_view_state ? string_display_line( get_enum_element( 'vie
 $t_show_date_submitted = in_array( 'date_submitted', $t_fields );
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_show_reporter = in_array( 'reporter', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields );
+$t_show_handler = in_array( 'handler', $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $t_bug_id );
 $t_show_priority = in_array( 'priority', $t_fields );
 $t_show_severity = in_array( 'severity', $t_fields );
 $t_show_reproducibility = in_array( 'reproducibility', $t_fields );
@@ -154,13 +154,6 @@ if( $t_show_product_version ) {
 
 $t_formatted_bug_id = $t_show_id ? bug_format_id( $f_bug_id ) : '';
 $t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ) : '';
-
-if( $t_show_due_date ) {
-	require_js( 'jscalendar/calendar.js' );
-	require_js( 'jscalendar/lang/calendar-en.js' );
-	require_js( 'jscalendar/calendar-setup.js' );
-	require_css( 'calendar-blue.css' );
-}
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
@@ -323,22 +316,26 @@ if( $t_show_reporter ) {
 if( $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 2;
+	$t_spacer = 0;
 
-	# Assigned To
-	echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
-	echo '<td>';
+	if ( $t_show_handler ) {
+		# Assigned To
+		echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
+		echo '<td>';
 
-	if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
-		echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
-		echo '<option value="0"></option>';
-		print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
-		echo '</select>';
+		if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
+			echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
+			echo '<option value="0"></option>';
+			print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
+			echo '</select>';
+		} else {
+			echo $t_handler_name;
+		}
+
+		echo '</td>';
 	} else {
-		echo $t_handler_name;
+		$t_spacer += 2;
 	}
-
-	echo '</td>';
 
 	if( $t_show_due_date ) {
 		# Due Date
@@ -346,7 +343,7 @@ if( $t_show_handler || $t_show_due_date ) {
 
 		if( bug_is_overdue( $t_bug_id ) ) {
 			echo '<td class="overdue">';
-		} else {
+		} else {	
 			echo '<td>';
 		}
 
@@ -354,9 +351,12 @@ if( $t_show_handler || $t_show_due_date ) {
 			$t_date_to_display = '';
 
 			if( !date_is_null( $t_bug->due_date ) ) {
-				$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
@@ -369,8 +369,9 @@ if( $t_show_handler || $t_show_due_date ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
+	if( $t_spacer > 0 ) {
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	}
 	echo '</tr>';
 }
 
@@ -518,7 +519,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_platform_option_list( $t_bug->platform );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
+			echo '<input type="text" id="platform" name="platform" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
 		}
 
 		echo '</td>';
@@ -536,7 +537,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_os_option_list( $t_bug->os );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
+			echo '<input type="text" id="os" name="os" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
 		}
 
 		echo '</td>';
@@ -554,7 +555,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 			print_os_build_option_list( $t_bug->os_build );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
+			echo '<input type="text" id="os_build" name="os_build" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
 		}
 
 		echo '</td>';

@@ -203,7 +203,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 		return db_empty_result();
 	}
 
-	$t_select_string = 'SELECT DISTINCT {bug}.id ';
+	$t_select_string = 'SELECT {bug}.id ';
 	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
 	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
@@ -213,9 +213,8 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 		$t_where_string .= ' ) ';
 	}
 
-	$t_query = 'SELECT * FROM {bug_history} JOIN'
-			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' ) B'
-			. ' ON {bug_history}.bug_id=B.id';
+	$t_query = 'SELECT * FROM {bug_history} WHERE {bug_history}.bug_id IN'
+			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
 
 	$t_params = $t_query_clauses['where_values'];
 	$t_where = array();
@@ -230,7 +229,7 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 	}
 
 	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+		$t_query .= ' AND ' . implode( ' AND ', $t_where );
 	}
 
 	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
@@ -340,12 +339,20 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
 			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
+				if( !bugnote_exists( $v_old_value ) ) {
+					continue;
+				}
+
 				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
 
 			if( $v_type == BUGNOTE_STATE_CHANGED ) {
+				if( !bugnote_exists( $v_new_value ) ) {
+					continue;
+				}
+
 				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}

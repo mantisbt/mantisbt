@@ -122,7 +122,6 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'DELETE':
 			if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
-				event_signal( 'EVENT_BUG_DELETED', array( $t_bug_id ) );
 				bug_delete( $t_bug_id );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -356,7 +355,7 @@ if( count( $t_failed_ids ) > 0 ) {
 	}
 	echo '</div>';
 	echo '</table><br />';
-	print_button( $t_redirect_url, lang_get( 'proceed' ) );
+	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
 	layout_page_end();

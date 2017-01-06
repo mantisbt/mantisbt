@@ -89,24 +89,22 @@ $(document).ready( function() {
         SetCookie("collapse_settings", t_cookie);
     });
 
-    $('input[type=text].autocomplete').autocomplete({
-		source: function(request, callback) {
-			var fieldName = $(this).attr('element').attr('id');
+    $('input[type=text].typeahead').bs_typeahead({
+		source: function(query, callback) {
+			var fieldName = this.$element.attr('id');
 			var postData = {};
 			postData['entrypoint']= fieldName + '_get_with_prefix';
-			postData[fieldName] = request.term;
+			postData[fieldName] = query;
 			$.getJSON('xmlhttprequest.php', postData, function(data) {
 				var results = [];
 				$.each(data, function(i, value) {
-					var item = {};
-					item.label = $('<div/>').text(value).html();
-					item.value = value;
-					results.push(item);
+					results.push(value);
 				});
 				callback(results);
 			});
 		}
 	});
+
 
 	$('a.dynamic-filter-expander').click(function(event) {
 		event.preventDefault();
@@ -209,17 +207,33 @@ $(document).ready( function() {
 		$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 	});
 
-	$('input[type=text].datetime').each(function(index, element) {
-		$(this).after('&nbsp;<i class="fa fa-calendar fa-lg datetime" id="' + element.id + '_datetime_button' + '"></i>');
-		Calendar.setup({
-			inputField: element.id,
-			timeFormat: 24,
-			showsTime: true,
-			ifFormat: config['calendar_js_date_format'],
-			button: element.id + '_datetime_button'
+	$('input[type=text].datetimepicker').each(function(index, element) {
+		$(this).datetimepicker({
+			locale: $(this).data('picker-locale'),
+			format: $(this).data('picker-format'),
+			useCurrent: false,
+			icons: {
+				time: 'fa fa-clock-o',
+				date: 'fa fa-calendar',
+				up: 'fa fa-chevron-up',
+				down: 'fa fa-chevron-down',
+				previous: 'fa fa-chevron-left',
+				next: 'fa fa-chevron-right',
+				today: 'fa fa-arrows ',
+				clear: 'fa fa-trash',
+				close: 'fa fa-times'
+			}
+		}).next().on(ace.click_event, function() {
+			$(this).prev().focus();
 		});
 	});
 
+	if( $( ".dropzone-form" ).length ) {
+		enableDropzone( "dropzone", false );
+	}
+	if( $( ".auto-dropzone-form" ).length ) {
+		enableDropzone( "auto-dropzone", true );
+	}
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
@@ -459,4 +473,60 @@ function setDisplay(idTag, state)
 function toggleDisplay(idTag)
 {
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+}
+
+// Dropzone handler
+Dropzone.autoDiscover = false;
+function enableDropzone( classPrefix, autoUpload ) {
+	try {
+		var formClass = "." + classPrefix + "-form";
+		var form = $( formClass );
+		var zone = new Dropzone( formClass, {
+			forceFallback: form.data('force-fallback'),
+			paramName: "ufile",
+			autoProcessQueue: autoUpload,
+			clickable: '.' + classPrefix,
+			previewsContainer: '#' + classPrefix + '-previews-box',
+			uploadMultiple: true,
+			parallelUploads: 100,
+			maxFilesize: form.data('max-filesize'),
+			addRemoveLinks: !autoUpload,
+			acceptedFiles: form.data('accepted-files'),
+			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+			dictDefaultMessage: form.data('default-message'),
+			dictFallbackMessage: form.data('fallback-message'),
+			dictFallbackText: form.data('fallback-text'),
+			dictFileTooBig: form.data('file-too-big'),
+			dictInvalidFileType: form.data('invalid-file-type'),
+			dictResponseError: form.data('response-error'),
+			dictCancelUpload: form.data('cancel-upload'),
+			dictCancelUploadConfirmation: form.data('cancel-upload-confirmation'),
+			dictRemoveFile: form.data('remove-file'),
+			dictRemoveFileConfirmation: form.data('remove-file-confirmation'),
+			dictMaxFilesExceeded: form.data('max-files-exceeded'),
+
+			init: function () {
+				var dropzone = this;
+				$( "input[type=submit]" ).on( "click", function (e) {
+					if( dropzone.getQueuedFiles().length ) {
+						e.preventDefault();
+						e.stopPropagation();
+						dropzone.processQueue();
+					}
+				});
+				this.on( "successmultiple", function( files, response ) {
+					document.open();
+					document.write( response );
+					document.close();
+				});
+			},
+			fallback: function() {
+				if( $( "." + classPrefix ).length ) {
+					$( "." + classPrefix ).hide();
+				}
+			}
+		});
+	} catch (e) {
+		alert( form.data('dropzone-not-supported') );
+	}
 }

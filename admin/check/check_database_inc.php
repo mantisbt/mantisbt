@@ -183,6 +183,8 @@ if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_PGSQL;
 } elseif( db_is_mssql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
+} elseif( db_is_oracle() ) {
+	$t_db_min_version = DB_MIN_VERSION_ORACLE;
 } else {
 	$t_db_min_version = 0;
 }
@@ -282,6 +284,8 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => EOL date
+		'9.6' => '2021-09-31',
+		'9.5' => '2021-01-31',
 		'9.4' => '2019-12-31',
 		'9.3' => '2018-09-30',
 		'9.2' => '2017-09-30',

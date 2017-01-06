@@ -82,6 +82,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	}
 
 	$t_pref = user_pref_get( $p_user_id );
+	$t_email_full_issue = (int)config_get( 'email_notifications_verbose', /* default */ null, $p_user_id, ALL_PROJECTS );
 
 # Account Preferences Form BEGIN
 ?>
@@ -328,6 +329,14 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 				<input id="email-bugnote-limit" type="text" name="email_bugnote_limit" class="input-sm" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 			</td>
 		</tr>
+		<tr>
+			<td class="category">
+				<?php echo lang_get( 'email_full_issue_details' ) ?>
+			</td>
+			<td>
+				<input id="email-full-issue" type="checkbox" name="email_full_issue" <?php check_checked( $t_email_full_issue, ON ); ?> />
+			</td>
+		</tr>
 <?php } else { ?>
 			<input type="hidden" name="email_on_new"      value="<?php echo $t_pref->email_on_new ?>" />
 			<input type="hidden" name="email_on_assigned" value="<?php echo $t_pref->email_on_assigned ?>" />
@@ -348,6 +357,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			<input type="hidden" name="email_on_status_min_severity"   value="<?php echo $t_pref->email_on_status_min_severity ?>" />
 			<input type="hidden" name="email_on_priority_min_severity" value="<?php echo $t_pref->email_on_priority_min_severity ?>" />
 			<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
+			<input type="hidden" name="email_full_issue" value="<?php echo $t_email_full_issue ?>" />
 <?php } ?>
 	<tr>
 		<td class="category">

@@ -420,6 +420,15 @@ $g_return_path_email	= 'admin@example.com';
  */
 $g_enable_email_notification	= ON;
 
+/**
+ * When enabled, the email notifications will send the full issue with
+ * a hint about the change type at the top, rather than using dedicated
+ * notifications that are focused on what changed.  This change can be
+ * overridden in the database per user.
+ *
+ * @global integer $g_email_notifications_verbose
+ */
+$g_email_notifications_verbose = ON;
 
 /**
  * The following two config options allow you to control who should get email
@@ -579,14 +588,6 @@ $g_show_user_email_threshold = NOBODY;
  * @global integer $g_show_user_realname_threshold
  */
 $g_show_user_realname_threshold = NOBODY;
-
-/**
- * If use_x_priority is set to ON, what should the value be?
- * Urgent = 1, Not Urgent = 5, Disable = 0
- * Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
- * @global integer $g_mail_priority
- */
-$g_mail_priority = 3;
 
 /**
  * select the method to mail by:
@@ -1115,44 +1116,37 @@ $g_long_process_timeout = 0;
 ##########################
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_short_date_format
  */
 $g_short_date_format = 'Y-m-d';
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_normal_date_format
  */
 $g_normal_date_format = 'Y-m-d H:i';
 
 /**
- * date format strings defaults to ISO 8601 formatting
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
+ * Date format strings defaults to ISO 8601 formatting.
+ * For detailed instructions on date formatting
+ * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_complete_date_format
  */
 $g_complete_date_format = 'Y-m-d H:i T';
 
 /**
- * jscalendar date format string
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
- * @global string $g_calendar_js_date_format
+ * Datetime picker widget format string.
+ * For detailed instructions on date formatting
+ * @see http://momentjs.com/docs/#/displaying/format/
+ * @global string $g_datetime_picker_format
  */
-$g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
+$g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
-/**
- * jscalendar date format string
- * go to http://www.php.net/manual/en/function.date.php
- * for detailed instructions on date formatting
- * @global string $g_calendar_date_format
- */
-$g_calendar_date_format = 'Y-m-d H:i';
 
 ##############################
 # MantisBT TimeZone Settings #
@@ -2765,6 +2759,12 @@ $g_update_readonly_bug_threshold = MANAGER;
 $g_view_changelog_threshold = VIEWER;
 
 /**
+* threshold for viewing timeline
+* @global integer $g_timeline_view_threshold
+*/
+$g_timeline_view_threshold = VIEWER;
+
+/**
  * threshold for viewing roadmap
  * @global integer $g_roadmap_view_threshold
  */
@@ -4275,8 +4275,7 @@ $g_public_config_names = array(
 	'bugnote_user_change_view_state_threshold',
 	'bugnote_user_delete_threshold',
 	'bugnote_user_edit_threshold',
-	'calendar_date_format',
-	'calendar_js_date_format',
+	'datetime_picker_format',
 	'cdn_enabled',
 	'change_view_status_threshold',
 	'check_mx_record',
@@ -4354,6 +4353,7 @@ $g_public_config_names = array(
 	'due_date_view_threshold',
 	'email_ensure_unique',
 	'email_login_enabled',
+	'email_notifications_verbose',
 	'email_padding_length',
 	'email_receive_own',
 	'email_separator1',
@@ -4393,7 +4393,6 @@ $g_public_config_names = array(
 	'logout_redirect_page',
 	'long_process_timeout',
 	'lost_password_feature',
-	'mail_priority',
 	'manage_config_cookie',
 	'manage_configuration_threshold',
 	'manage_custom_fields_threshold',
@@ -4525,6 +4524,7 @@ $g_public_config_names = array(
 	'time_tracking_view_threshold',
 	'time_tracking_with_billing',
 	'time_tracking_without_note',
+	'timeline_view_threshold',
 	'top_include_page',
 	'update_bug_assign_threshold',
 	'update_bug_status_threshold',

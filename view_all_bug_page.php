@@ -79,16 +79,9 @@ $t_unique_project_ids = array();
 $t_row_count = count( $t_rows );
 for( $i=0; $i < $t_row_count; $i++ ) {
 	array_push( $t_bugslist, $t_rows[$i]->id );
-	$t_handler_id = $t_rows[$i]->handler_id;
-	$t_unique_user_ids[$t_handler_id] = $t_handler_id;
-	$t_reporter_id = $t_rows[$i]->reporter_id;
-	$t_unique_user_ids[$t_reporter_id] = $t_reporter_id;
 	$t_project_id = $t_rows[$i]->project_id;
 	$t_unique_project_ids[$t_project_id] = $t_project_id;
 }
-user_cache_array_rows( $t_unique_user_ids );
-project_cache_array_rows( $t_unique_project_ids );
-
 gpc_set_cookie( config_get( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
 
 compress_enable();

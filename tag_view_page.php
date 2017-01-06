@@ -56,6 +56,7 @@ access_ensure_global_level( config_get( 'tag_view_threshold' ) );
 compress_enable();
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_name = string_display_line( $t_tag_row['name'] );
@@ -83,7 +84,7 @@ layout_page_begin();
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
-		<?php print_button( 'search.php?tag_string='.urlencode($t_tag_row['name']),
+		<?php print_link_button( 'search.php?tag_string='.urlencode($t_tag_row['name']),
 			sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
 			'btn-sm pull-right'); ?>
 	</div>

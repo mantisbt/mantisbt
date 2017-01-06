@@ -179,12 +179,16 @@ function columns_get_plugin_columns() {
 		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
 			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
 				if( is_array( $t_plugin_column_array ) ) {
-					foreach( $t_plugin_column_array as $t_column_class ) {
-						if( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
-							$t_column_object = new $t_column_class();
-							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
-							$s_column_array[$t_column_name] = $t_column_object;
+					foreach( $t_plugin_column_array as $t_column_item ) {
+						if( is_object( $t_column_item ) && $t_column_item instanceof MantisColumn ) {
+							$t_column_object = $t_column_item;
+						} elseif( class_exists( $t_column_item ) && is_subclass_of( $t_column_item, 'MantisColumn' ) ) {
+							$t_column_object = new $t_column_item();
+						} else {
+							continue;
 						}
+						$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
+						$s_column_array[$t_column_name] = $t_column_object;
 					}
 				}
 			}
@@ -202,26 +206,6 @@ function columns_get_plugin_columns() {
 function column_is_plugin_column( $p_column ) {
 	$t_plugin_columns = columns_get_plugin_columns();
 	return isset( $t_plugin_columns[$p_column] );
-}
-
-/**
- * Allow plugin columns to pre-cache data for a set of issues
- * rather than requiring repeated queries for each issue.
- * If the user columns parameter is provided, only plugin columns that are
- * contained in that column set will be cached.
- * @param array $p_bugs Array of BugData objects.
- * @param array $p_selected_columns Array of columns the user is visualizing
- * @return void
- */
-function columns_plugin_cache_issue_data( array $p_bugs, array $p_selected_columns = null ) {
-	$t_columns = columns_get_plugin_columns();
-	$t_all = ( null === $p_selected_columns );
-
-	foreach( $t_columns as $t_name => $t_column_object ) {
-		if( $t_all || in_array( $t_name, $p_selected_columns  ) ) {
-			$t_column_object->cache( $p_bugs );
-		}
-	}
 }
 
 /**
@@ -299,9 +283,7 @@ function column_get_custom_field_name( $p_column ) {
  * @access public
  */
 function columns_string_to_array( $p_string ) {
-	$t_string = utf8_strtolower( $p_string );
-
-	$t_columns = explode( ',', $t_string );
+	$t_columns = explode( ',', $p_string );
 	$t_count = count( $t_columns );
 
 	for( $i = 0; $i < $t_count; $i++ ) {

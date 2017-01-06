@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.0.0-beta.3' );
+define( 'MANTIS_VERSION', '2.0.0' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -41,9 +41,10 @@ define( 'PHP_CGI', 1 );
 # installation
 define( 'CONFIGURED_PASSWORD', '______' );
 define( 'DB_MIN_VERSION_ADODB', '5.20.2' );  # For mssql, oracle and pgsql
-define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
-define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
-define( 'DB_MIN_VERSION_PGSQL', '9.0' );     # Earliest supported version as of August 2014
+define( 'DB_MIN_VERSION_MSSQL', '11.0.0' );  # MS SQL Server 2012
+define( 'DB_MIN_VERSION_MYSQL', '5.5.35' );  # See #20431
+define( 'DB_MIN_VERSION_PGSQL', '9.2' );     # Earliest supported version as of Nov 2016
+define( 'DB_MIN_VERSION_ORACLE', '11.2' );
 
 # error types
 define( 'ERROR', E_USER_ERROR );
@@ -497,14 +498,12 @@ define( 'TOKEN_ACCOUNT_VERIFY', 6 );
 define( 'TOKEN_ACCOUNT_ACTIVATION', 7 );
 define( 'TOKEN_USER', 1000 );
 
-# token expirations
+# Token expiry durations (in seconds)
 define( 'TOKEN_EXPIRY', 60 * 60 );
-
-# Default expiration of 60 minutes ( 3600 seconds )
 define( 'TOKEN_EXPIRY_LAST_VISITED', 24 * 60 * 60 );
 define( 'TOKEN_EXPIRY_AUTHENTICATED', 5 * 60 );
 define( 'TOKEN_EXPIRY_COLLAPSE', 365 * 24 * 60 * 60 );
-define( 'TOKEN_EXPIRY_ACCOUNT_ACTIVATION', 24 * 60 * 60 );
+define( 'TOKEN_EXPIRY_ACCOUNT_ACTIVATION', 7 * 24 * 60 * 60 );
 
 # config types
 define( 'CONFIG_TYPE_DEFAULT', 0 );
@@ -606,22 +605,26 @@ define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 
-# JQuery and JQuery UI
+# JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
-define ( 'JQUERY_VERSION', '2.2.4' );
-define ( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
-define ( 'JQUERY_UI_VERSION', '1.11.4' );
-define ( 'JQUERY_UI_HASH', 'sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=' );
+define( 'JQUERY_VERSION', '2.2.4' );
+define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 
 # Bootstrap & FontAwesome
-define ( 'BOOTSTRAP_VERSION', '3.3.6' );
-define ( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=' );
-define ( 'FONT_AWESOME_VERSION', '4.6.3' );
+define( 'BOOTSTRAP_VERSION', '3.3.6' );
+define( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=' );
+define( 'FONT_AWESOME_VERSION', '4.6.3' );
+
+# Moment & DateTimePicker
+define( 'MOMENT_VERSION', '2.15.2' );
+define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
+define( 'DATETIME_PICKER_VERSION', '4.17.43' );
+define( 'DATETIME_PICKER_HASH', 'sha256-I8vGZkA2jL0PptxyJBvewDVqNXcgIhcgeqi+GD/aw34=' );
 
 # Chart JS
-define ( 'CHARTJS_VERSION', '2.1.6' );
-define ( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
-define ( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMiqY=' );
+define( 'CHARTJS_VERSION', '2.1.6' );
+define( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
+define( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMiqY=' );
 
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
@@ -629,3 +632,10 @@ define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 # Maximum number of bugs that are treated simutaneously in export procedures,
 # to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
 define( 'EXPORT_BLOCK_SIZE', 500 );
+
+# Maximum "safe" value to be used for integer fields in database.
+# Note: mantis ids are defined in schema as "I UNSIGNED", which Adodb maps to
+# the closest integer (4 bytes) type available. As some DBs dont support unsigned
+# types, 2^31 is a safe limit to be used for all.
+define( 'DB_MAX_INT', 2147483647 );
+

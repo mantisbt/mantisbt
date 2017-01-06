@@ -431,7 +431,6 @@ $s_all_revisions = 'All Versione';
 $s_back_to_issue = 'Retuhr noh dä Aanjelääjeheit';
 $s_confirm_revision_drop = 'Wells De verhaftesch heh di Version vun dä Aanjelääjeheit falle lohße?';
 $s_vote_added_msg = 'Di Shtemm es dobei jekumme.';
-$s_bugnote_added_msg = 'En Notiz es dobei jedonn.';
 $s_bugnote_deleted_msg = 'Di Notiz es fottjeschmeße.';
 $s_bug_notes_title = 'Notize';
 $s_edit_bugnote_title = 'Notiz ändere';

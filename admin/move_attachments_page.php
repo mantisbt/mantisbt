@@ -100,7 +100,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 ?>
 <div>
 <p>
-	<?php print_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
+	<?php print_link_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
 </p>
 </div>
 
@@ -116,19 +116,22 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 <form name="move_attachments_project_select" method="post" action="move_attachments.php">
 <div class="table-responsive">
-<table class="table table-bordered table-condensed">
-	<tr>
-		<th>Project name</th>
-		<th width="18%">File Path</th>
-		<th width="18%">Disk</th>
-		<th width="18%">Database</th>
-		<th width="18%">Attachments</th>
-		<th width="18%">Storage</th>
-		<th width="7%">To Disk</th>
-		<th width="7%">To Database</th>
-	</tr>
-
+<table class="table table-bordered table-condensed table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Project name</th>
+			<th width="28%">File Path</th>
+			<th width="5%">Disk</th>
+			<th width="5%">Database</th>
+			<th width="5%">Attachments</th>
+			<th width="5%">Storage</th>
+			<th width="7%">To Disk</th>
+			<th width="7%">To Database</th>
+		</tr>
+	</thead>
+	
 <?php
+	echo '<tbody>';
 	# Printing rows of projects with attachments to move
 	foreach( $t_projects as $t_id => $t_project ) {
 		$t_db_count = 0;
@@ -156,7 +159,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		echo '<tr>';
 		echo '<td>' . $t_project['name'] . '</td>';
-		echo '<td class="center">' . $t_file_path . '</td>';
+		echo '<td class="left">' . $t_file_path . '</td>';
 		echo '<td class="center">' . $t_disk_count . '</td>';
 		echo '<td class="center">' . $t_db_count . '</td>';
 		echo '<td class="center">' . ( $t_db_count + $t_disk_count ) . '</td>';
@@ -164,7 +167,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		if( $t_upload_method == DISK ) {
 			if ( !is_blank( $t_file_path ) && $t_db_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="disk:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="disk:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
@@ -172,17 +175,17 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		} else {
 			echo '<td class="center">-</td>';
 			if ( $t_disk_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="db:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="db:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
 		}
 		echo "</tr>\n";
 	}
-
+	echo '</tbody>';
 	echo form_security_field( 'move_attachments_project_select' );
 ?>
-
+	
 </table>
 <div class="widget-toolbox padding-8 clearfix">
 	<input name="type" type="hidden" value="<?php echo $f_file_type ?>" />

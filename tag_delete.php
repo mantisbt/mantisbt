@@ -47,6 +47,7 @@ form_security_validate( 'tag_delete' );
 access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 helper_ensure_confirmed( lang_get( 'tag_delete_message' ), lang_get( 'tag_delete_button' ) );

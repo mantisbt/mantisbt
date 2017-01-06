@@ -352,7 +352,6 @@ $s_sticky_issue = 'Límd verkbeiðni';
 $s_profile = 'Snið';
 $s_updating_bug_simple_title = 'Uppfæri upplýsingar um beiðni';
 $s_vote_added_msg = 'Atkvæði hefur bæst við...';
-$s_bugnote_added_msg = 'Bætt við athugasemd...';
 $s_bugnote_deleted_msg = 'Athugasemd hefur verið eytt...';
 $s_bug_notes_title = 'Athugasemd';
 $s_edit_bugnote_title = 'Skrifa athugasemd';

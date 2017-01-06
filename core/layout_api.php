@@ -257,12 +257,18 @@ function layout_head_css() {
 
 		# theme text fonts
 		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
+
+		# datetimepicker
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
 	} else {
 		html_css_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.css' );
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
 		html_css_link( 'open-sans.css' );
+
+		# datetimepicker
+		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	}
 
 	# page specific plugin styles
@@ -307,11 +313,20 @@ function layout_head_javascript() {
  * @return null
  */
 function layout_body_javascript() {
-	# bootstrap
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		# bootstrap
 		html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/js/bootstrap.min.js', BOOTSTRAP_HASH );
+
+		# moment & datetimepicker
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH );
 	} else {
+		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
+
+		# moment & datetimepicker
+		html_javascript_link( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );
+		html_javascript_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.js' );
 	}
 
 	# theme scripts
@@ -382,10 +397,16 @@ function layout_navbar() {
 	$t_logo_url = config_get('logo_url');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
-
 	echo '<div id="navbar-container" class="navbar-container">';
 
-	echo '<div class="navbar-header pull-left">';
+	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">';
+	echo '<span class="sr-only">Toggle sidebar</span>';
+	echo '<span class="icon-bar"></span>';
+	echo '<span class="icon-bar"></span>';
+	echo '<span class="icon-bar"></span>';
+	echo '</button>';
+
+	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo config_get('window_title');
@@ -393,24 +414,16 @@ function layout_navbar() {
 	echo '</a>';
 
 	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
-	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
+	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
 	if (auth_is_user_authenticated()) {
 		layout_navbar_user_avatar();
 	}
 	echo '</button>';
 
-	echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler" data-target="#sidebar">';
-	echo '<span class="sr-only">Toggle sidebar</span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '</button>';
-
 	echo '</div>';
 
-	echo '<div class="hidden-xs">';
-	echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
 		# shortcuts button bar
@@ -421,19 +434,6 @@ function layout_navbar() {
 		layout_navbar_user_menu();
 	}
 	echo '</ul>';
-	echo '</div>';
-	echo '</div>';
-
-	# mobile view
-	echo '<div class="hidden-sm hidden-md hidden-lg">';
-	echo '<div class="navbar-menu pull-left navbar-collapse collapse" role="navigation" style="height: auto;">';
-	echo '<ul class="nav navbar-nav">';
-	if (auth_is_user_authenticated()) {
-		layout_navbar_user_menu(false);
-		layout_navbar_projects_menu();
-	}
-	echo '</ul>';
-	echo '</div>';
 	echo '</div>';
 
 	echo '</div>';
@@ -566,7 +566,7 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
-	$t_can_report_bug = access_has_project_level( config_get( 'report_bug_threshold' ) );
+	$t_can_report_bug = access_has_any_project_level( 'report_bug_threshold' );
 	$t_can_invite_user = current_user_is_administrator();
 
 	if( !$t_can_report_bug && !$t_can_invite_user ) {
@@ -589,6 +589,7 @@ function layout_navbar_button_bar() {
 		echo '</a>';
 	}
 
+	echo '</div>';
   	echo '</li>';
 }
 
@@ -735,7 +736,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		layout_sidebar_menu( 'view_all_bug_page.php', 'view_bugs_link', 'fa-list-alt', $p_active_sidebar_page );
 
 		# Report Bugs
-		if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+		if( access_has_any_project_level( 'report_bug_threshold' ) ) {
 			$t_bug_url = string_get_bug_report_url();
 			layout_sidebar_menu( $t_bug_url, 'report_bug_link', 'fa-edit', $p_active_sidebar_page );
 		}

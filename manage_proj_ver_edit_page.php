@@ -51,11 +51,6 @@ require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 require_api( 'version_api.php' );
 
-require_js( 'jscalendar/calendar.js' );
-require_js( 'jscalendar/lang/calendar-en.js' );
-require_js( 'jscalendar/calendar-setup.js' );
-require_css( 'calendar-blue.css' );
-
 auth_reauthenticate();
 
 $f_version_id = gpc_get_int( 'version_id' );
@@ -102,7 +97,11 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 					<?php echo lang_get( 'date_order' ) ?>
 				</td>
 				<td>
-					<input type="text" id="proj-version-date-order" name="date_order" class="datetime input-sm" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
+					<input type="text" id="proj-version-date-order" name="date_order" class="datetimepicker input-sm"
+						data-picker-locale="<?php echo lang_get_current_datetime_locale() ?>"
+						data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
+						size="16" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
+					<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 				</td>
 			</tr>
 			<tr>

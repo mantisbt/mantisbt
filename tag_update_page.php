@@ -59,6 +59,7 @@ require_api( 'user_api.php' );
 compress_enable();
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_name = string_display_line( $t_tag_row['name'] );
@@ -87,7 +88,7 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php print_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
+			<?php print_link_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
 				'btn-sm pull-right' ); ?>
 		</div>
 		<div class="form-container">

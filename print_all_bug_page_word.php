@@ -165,8 +165,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 
 	if( $j % 50 == 0 ) {
 		# to save ram as report will list data once, clear cache after 50 bugs
-		bug_text_clear_cache();
-		bug_clear_cache();
+		bug_clear_cache_all();
 		bugnote_clear_cache();
 	}
 

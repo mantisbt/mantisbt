@@ -151,6 +151,12 @@ if( $f_master_bug_id > 0 ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
+	# Check for bug report threshold
+	if( !access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+		# If can't report on current project, show project selector if there is any other allowed project
+		access_ensure_any_project_level( 'report_bug_threshold' );
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
+	}
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
@@ -216,13 +222,6 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
-if( $t_show_due_date ) {
-	require_js( 'jscalendar/calendar.js' );
-	require_js( 'jscalendar/lang/calendar-en.js' );
-	require_js( 'jscalendar/calendar-setup.js' );
-	require_css( 'calendar-blue.css' );
-}
-
 # don't index bug report page
 html_robots_noindex();
 
@@ -236,7 +235,11 @@ if( $t_show_attachments ) {
 }
 ?>
 <div class="col-md-12 col-xs-12">
-<form id="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1" class="dropzone-form">
+<form id="report_bug_form"
+	method="post" <?php echo $t_form_encoding; ?>
+	action="bug_report.php?posted=1"
+	class="dropzone-form"
+	<?php print_dropzone_form_data() ?>>
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -344,7 +347,7 @@ if( $t_show_attachments ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $f_due_date ) ) {
-			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
+			$t_date_to_display = date( config_get( 'normal_date_format' ), $f_due_date );
 		}
 ?>
 	<tr>
@@ -352,7 +355,11 @@ if( $t_show_attachments ) {
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
 	</tr>
 <?php } ?>
@@ -382,7 +389,7 @@ if( $t_show_attachments ) {
 						</select>
 						<?php
 							} else {
-								echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
+								echo '<input type="text" id="platform" name="platform" class="typeahead input-sm" autocomplete = "off" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
 							}
 						?>
 					</td>
@@ -399,7 +406,7 @@ if( $t_show_attachments ) {
 						</select>
 						<?php
 							} else {
-								echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
+								echo '<input type="text" id="os" name="os" class="typeahead input-sm" autocomplete = "off" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
 							}
 						?>
 					</td>
@@ -418,7 +425,7 @@ if( $t_show_attachments ) {
 							</select>
 						<?php
 							} else {
-								echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
+								echo '<input type="text" id="os_build" name="os_build" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
 							}
 						?>
 					</td>
@@ -718,5 +725,4 @@ if( $t_show_attachments ) {
 </form>
 </div>
 <?php
-include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );
 layout_page_end();

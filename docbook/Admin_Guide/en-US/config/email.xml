@@ -43,6 +43,17 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_notifications_verbose</term>
+			<listitem>
+				<para>
+					When enabled, the email notifications will include the full issue with
+					a hint about the change type at the top, rather than using dedicated
+					notifications that are focused on what changed.  This change can be
+					overridden in the database per user.  Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_notify_flags</term>
 			<listitem>
 				<para>Associates a default notification flag with each action,
@@ -260,15 +271,6 @@ $g_notify_flags['new'] = array(
 				<para>This specifies the access level that is needed to have user
 					names hyperlinked with mailto: links. The default value is NOBODY,
 					hence, even administrators won't have this feature enabled.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_mail_priority</term>
-			<listitem>
-				<para>If use_x_priority is set to ON, what should the value be?
-					Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3
-					Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
 				</para>
 			</listitem>
 		</varlistentry>

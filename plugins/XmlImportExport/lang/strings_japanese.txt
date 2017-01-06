@@ -48,6 +48,7 @@ $s_plugin_XmlImportExport_title = '課題のインポート/エクスポート';
 $s_plugin_XmlImportExport_description = 'MantisBT に XML ベースのインポートおよびエクスポート機能を加える。';
 $s_plugin_XmlImportExport_import = '課題をインポート';
 $s_plugin_XmlImportExport_export = 'XMLエクスポート';
+$s_plugin_XmlImportExport_config_title = 'XMLインポート/エクスポートアクセスレベル設定';
 $s_plugin_XmlImportExport_import_threshold = '課題を読み込む';
 $s_plugin_XmlImportExport_export_threshold = '課題を書き出す';
 $s_plugin_XmlImportExport_action_update = '更新';

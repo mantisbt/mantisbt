@@ -53,7 +53,7 @@ echo '<div class="col-md-12 col-xs-12">';
 echo '<div class="space-10"></div>';
 echo '<div class="lead">' . sprintf( lang_get( 'api_token_revoked' ), string_display_line( $f_token_name ) ) . '</div>';
 echo '<div class="space-10"></div>';
-print_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
+print_link_button( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '</div>';
 
 layout_page_end();

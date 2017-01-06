@@ -60,6 +60,13 @@ require_api( 'mention_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+# Cache of bugnotes arrays related to a bug, indexed by bug_id.
+# Each item is an array of BugnoteData objects
+$g_cache_bugnotes_by_bug_id = array();
+
+# Cache of BugnoteData objects, indexed by bugnote id
+$g_cache_bugnotes_by_id = array();
+
 /**
  * Bugnote Data Structure Definition
  */
@@ -128,15 +135,45 @@ class BugnoteData {
  * @access public
  */
 function bugnote_exists( $p_bugnote_id ) {
-	db_param_push();
-	$t_query = 'SELECT COUNT(*) FROM {bugnote} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bugnote_id ) );
+	$c_bugnote_id = (int)$p_bugnote_id;
 
-	if( 0 == db_result( $t_result ) ) {
-		return false;
-	} else {
+	global $g_cache_bugnotes_by_id;
+	if( isset( $g_cache_bugnotes_by_id[$c_bugnote_id] ) ) {
 		return true;
 	}
+
+	# Check for invalid id values
+	if( $c_bugnote_id <= 0 || $c_bugnote_id > DB_MAX_INT ) {
+		return false;
+	}
+
+	db_param_push();
+	$t_query = 'SELECT b.*, t.note
+			          	FROM      {bugnote} b
+			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
+						WHERE b.id = ' . db_param();
+	$t_result = db_query( $t_query, array( $c_bugnote_id ) );
+	$t_row = db_fetch_array( $t_result );
+
+	if( $t_row === false ) {
+		return false;
+	}
+
+	$t_bugnote = bugnote_row_to_object( $t_row );
+	bugnote_cache( $t_bugnote );
+	return true;
+}
+
+/**
+ * Caches the provided bugnote object.
+ *
+ * @param BugnoteData $p_bugnote The bugnote object.
+ * @return void
+ */
+function bugnote_cache( BugnoteData $p_bugnote ) {
+	global $g_cache_bugnotes_by_id;
+
+	$g_cache_bugnotes_by_id[(int)$p_bugnote->id] = $p_bugnote;
 }
 
 /**
@@ -270,7 +307,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( true == $p_send_email && !is_blank( $t_bugnote_text ) ) {
-		email_bugnote_add( $p_bug_id );
+		email_bugnote_add( $t_bugnote_id );
 	}
 
 	return $t_bugnote_id;
@@ -282,7 +319,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
  * @param  int $p_bug_id          The bug id
  * @param  int $p_bugnote_id      The bugnote id
  * @param  string $p_bugnote_text The bugnote text
- * @return void
+ * @return array User ids that received mentioned emails.
  * @access public
  */
 function bugnote_process_mentions( $p_bug_id, $p_bugnote_id, $p_bugnote_text ) {
@@ -295,7 +332,7 @@ function bugnote_process_mentions( $p_bug_id, $p_bugnote_id, $p_bugnote_text ) {
 
 	$t_removed_mentions_user_ids = array_diff( $t_mentioned_user_ids, $t_filtered_mentioned_user_ids );
 
-	mention_process_user_mentions(
+	return mention_process_user_mentions(
 		$p_bug_id,
 		$t_filtered_mentioned_user_ids,
 		$p_bugnote_text,
@@ -382,27 +419,8 @@ function bugnote_get_text( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
-	static $s_vars;
-	global $g_cache_bugnote;
-
-	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
-		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
-	}
-
-	if( $s_vars == null ) {
-		$s_vars = getClassProperties( 'BugnoteData', 'public' );
-	}
-
-	if( !array_key_exists( $p_field_name, $s_vars ) ) {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-	}
-
-	db_param_push();
-	$t_query = 'SELECT ' . $p_field_name . ' FROM {bugnote} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bugnote_id ), 1 );
-
-	return db_result( $t_result );
+	$t_bugnote = bugnote_get( $p_bugnote_id );
+	return $t_bugnote->$p_field_name;
 }
 
 /**
@@ -520,6 +538,36 @@ function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p
 }
 
 /**
+ * Converts a bugnote database row to a bugnote object.
+ *
+ * @param array $p_row The bugnote row (including bugnote_text note)
+ * @return BugnoteData The bugnote object.
+ * @access private
+ */
+function bugnote_row_to_object( array $p_row ) {
+	$t_bugnote = new BugnoteData;
+
+	$t_bugnote->id = $p_row['id'];
+	$t_bugnote->bug_id = (int)$p_row['bug_id'];
+	$t_bugnote->bugnote_text_id = (int)$p_row['bugnote_text_id'];
+	$t_bugnote->note = $p_row['note'];
+	$t_bugnote->view_state = (int)$p_row['view_state'];
+	$t_bugnote->reporter_id = (int)$p_row['reporter_id'];
+	$t_bugnote->date_submitted = (int)$p_row['date_submitted'];
+	$t_bugnote->last_modified = (int)$p_row['last_modified'];
+	$t_bugnote->note_type = (int)$p_row['note_type'];
+	$t_bugnote->note_attr = $p_row['note_attr'];
+	$t_bugnote->time_tracking = (int)$p_row['time_tracking'];
+
+	# Handle old bugnotes before setting type to time tracking
+	if ( $t_bugnote->time_tracking != 0 ) {
+		$t_bugnote->note_type = TIME_TRACKING;
+	}
+
+	return $t_bugnote;
+}
+
+/**
  * Build the bugnotes array for the given bug_id.
  * Return BugnoteData class object with raw values from the tables except the field
  * last_modified - it is UNIX_TIMESTAMP.
@@ -529,18 +577,10 @@ function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p
  * @access public
  */
 function bugnote_get_all_bugnotes( $p_bug_id ) {
-	global $g_cache_bugnotes, $g_cache_bugnote;
-
-	if( !isset( $g_cache_bugnotes ) ) {
-		$g_cache_bugnotes = array();
-	}
-
-	if( !isset( $g_cache_bugnote ) ) {
-		$g_cache_bugnote = array();
-	}
+	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
 
 	# the cache should be aware of the sorting order
-	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
+	if( !isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
 		# Now sorting by submit date and id (#11742). The date_submitted
 		# column is currently not indexed, but that does not seem to affect
 		# performance in a measurable way
@@ -556,33 +596,37 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 		$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_bugnote = new BugnoteData;
-
-			$t_bugnote->id = $t_row['id'];
-			$t_bugnote->bug_id = $t_row['bug_id'];
-			$t_bugnote->bugnote_text_id = $t_row['bugnote_text_id'];
-			$t_bugnote->note = $t_row['note'];
-			$t_bugnote->view_state = $t_row['view_state'];
-			$t_bugnote->reporter_id = $t_row['reporter_id'];
-			$t_bugnote->date_submitted = $t_row['date_submitted'];
-			$t_bugnote->last_modified = $t_row['last_modified'];
-			$t_bugnote->note_type = $t_row['note_type'];
-			$t_bugnote->note_attr = $t_row['note_attr'];
-			$t_bugnote->time_tracking = $t_row['time_tracking'];
-
-			# Handle old bugnotes before setting type to time tracking
-			if ( $t_bugnote->time_tracking != 0 ) {
-				$t_bugnote->note_type = TIME_TRACKING;
-			}
-
+			$t_bugnote = bugnote_row_to_object( $t_row );
 			$t_bugnotes[] = $t_bugnote;
-			$g_cache_bugnote[(int)$t_bugnote->id] = $t_bugnote;
+			bugnote_cache( $t_bugnote );
 		}
 
-		$g_cache_bugnotes[(int)$p_bug_id] = $t_bugnotes;
+		$g_cache_bugnotes_by_bug_id[(int)$p_bug_id] = $t_bugnotes;
 	}
 
-	return $g_cache_bugnotes[(int)$p_bug_id];
+	return $g_cache_bugnotes_by_bug_id[(int)$p_bug_id];
+}
+
+/**
+ * Gets the bugnote object given its id.
+ *
+ * @param int $p_bugnote_id The bugnote id.
+ * @return BugnoteData The bugnote object.
+ */
+function bugnote_get( $p_bugnote_id ) {
+	# If bugnote exists but not in cache, it will be added to cache.
+	# If bugnote doesn't exist, this will trigger an error.
+	bugnote_ensure_exists( $p_bugnote_id );
+
+	global $g_cache_bugnotes_by_id;
+
+	# Return the object from the cache, fetched above.
+	if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
+		return $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
+	}
+
+	# if we reached here something is wrong, trigger an error.
+	trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 }
 
 /**
@@ -742,14 +786,42 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
  * @access public
  */
 function bugnote_clear_cache( $p_bugnote_id = null ) {
-	global $g_cache_bugnote, $g_cache_bugnotes;
+	global $g_cache_bugnotes_by_id, $g_cache_bugnotes_by_bug_id;
 
 	if( null === $p_bugnote_id ) {
-		$g_cache_bugnote = array();
+		$g_cache_bugnotes_by_id = array();
+		$g_cache_bugnotes_by_bug_id = array();
 	} else {
-		unset( $g_cache_bugnote[(int)$p_bugnote_id] );
+		if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
+			$t_note_obj = $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
+			# current note id will be unset in the following call
+			bugnote_clear_bug_cache( $t_note_obj->bug_id );
+		}
 	}
-	$g_cache_bugnotes = array();
+
+	return true;
+}
+
+/**
+ * Clear the bugnotes related to a bug, or all bugs if no bug id specified.
+ * @param integer $p_bug_id Identifier to clear (optional).
+ * @return boolean
+ * @access public
+ */
+function bugnote_clear_bug_cache( $p_bug_id = null ) {
+	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
+
+	if( null === $p_bug_id ) {
+		$g_cache_bugnotes_by_bug_id = array();
+		$g_cache_bugnotes_by_id = array();
+	} else {
+		if( isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
+			foreach( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] as $t_note_obj ) {
+				unset( $g_cache_bugnotes_by_id[(int)$t_note_obj->id] );
+			}
+			unset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] );
+		}
+	}
 
 	return true;
 }

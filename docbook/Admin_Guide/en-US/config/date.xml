@@ -37,7 +37,16 @@
 				</para>
 			</listitem>
 		</varlistentry>
-
+		<varlistentry>
+			<term>$g_datetime_picker_format</term>
+			<listitem>
+				<para>This format is used with the datetime picker widget.
+					See <ulink url="http://momentjs.com/docs/#/displaying/format/">datetime formatting guide</ulink>
+					for details.
+					Default is 'Y-MM-DD H:m'.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 
 </section>

@@ -753,7 +753,7 @@ function auth_set_tokens( $p_user_id ) {
 }
 
 /**
- * Check for authentication tokens, and display re-authentication page if needed.
+ * Check for authentication tokens, and redirect to login page for re-authentication.
  * Currently, if using BASIC or HTTP authentication methods, or if logged in anonymously,
  * this function will always "authenticate" the user (do nothing).
  *
@@ -781,101 +781,20 @@ function auth_reauthenticate() {
 			return true;
 		}
 
-		return auth_reauthenticate_page( $t_user_id, $t_username );
+		$t_request_uri = string_url( $_SERVER['REQUEST_URI'] );
+
+		$t_query_params = http_build_query(
+			array(
+				'reauthenticate' => 1,
+				'username' => $t_username,
+				'return' => $t_request_uri,
+			),
+			'', '&'
+		);
+
+		# redirect to login page
+		print_header_redirect( 'login_page.php?' . $t_query_params );
 	}
-}
-
-/**
- * Generate the intermediate authentication page.
- * @param integer $p_user_id  User ID.
- * @param string  $p_username Username.
- * @return boolean
- * @access public
- */
-function auth_reauthenticate_page( $p_user_id, $p_username ) {
-	$t_error = false;
-
-	if( true == gpc_get_bool( '_authenticate' ) ) {
-		$f_password = gpc_get_string( 'password', '' );
-
-		if( auth_attempt_login( $p_username, $f_password ) ) {
-			auth_set_tokens( $p_user_id );
-			return true;
-		} else {
-			$t_error = true;
-		}
-	}
-	
-	layout_page_header();
-
-	layout_page_begin();
-
-	?>
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-<?php
-	if( $t_error != false ) {
-		echo '<div class="alert alert-danger">';
-		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
-		echo '</div>';
-	}
-?>
-
-<div class="form-container">
-<form id="reauth-form" method="post" action="">
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-lock"></i>
-		<?php echo lang_get( 'reauthenticate_title' ) ?>
-	</h4>
-</div>
-
-<div class="widget-body">
-	<div class="widget-main no-padding">
-		<fieldset>
-		<?php
-			# CSRF protection not required here - user needs to enter password
-			# (confirmation step) before the form is accepted.
-			print_hidden_inputs( $_POST );
-			print_hidden_inputs( $_GET );
-		?>
-
-			<input type="hidden" name="_authenticate" value="1" />
-			<div class="table-responsive">
-			<table class="table table-bordered table-condensed table-striped">
-				<tr>
-					<th class="category">
-						<?php echo lang_get( 'username' );?>
-					</th>
-					<td>
-						<input id="username" type="text" disabled="disabled" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
-					</td>
-				</tr>
-				<tr>
-					<th class="category">
-						<?php echo lang_get( 'password' );?>
-					</th>
-					<td>
-						<input id="password" type="password" name="password" class="input-sm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
-					</td>
-				</tr>
-			</table>
-			</div>
-		</fieldset>
-	</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'login_button' );?>" />
-	</div>
-</div>
-</div>
-</form>
-</div>
-</div>
-
-<?php
-	layout_page_end();
-	exit;
 }
 
 /**
@@ -973,7 +892,7 @@ function auth_http_prompt() {
 	header( 'status: 401 Unauthorized' );
 
 	echo '<p class="center error-msg">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
-	print_button( 'main_page.php', lang_get( 'proceed' ) );
+	print_link_button( 'main_page.php', lang_get( 'proceed' ) );
 
 	exit;
 }

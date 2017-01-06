@@ -277,7 +277,6 @@ $s_view_revisions = 'ክለሳዎቹን ተመልከት';
 $s_revision = 'ክለሳ';
 $s_revision_drop = 'ተወው';
 $s_all_revisions = 'ሁሉም ክለሳዎች';
-$s_bugnote_added_msg = 'ማስታወሻ የተጨመረ ...';
 $s_bugnote_deleted_msg = 'ማስታወሻው በስኬት ተሰርዞዋል';
 $s_bug_notes_title = 'ማስታወሻዎች';
 $s_edit_bugnote_title = 'ማስታወሻውን ለውጥ';
