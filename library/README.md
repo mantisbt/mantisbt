@@ -9,6 +9,7 @@ directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
 adodb           | adodb           | 5.20.4    | unpatched [1]
 disposable      | disposable      | 2.1.1     | unpatched [1]
+parsedown       | parsedown       | 1.6.1     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.15    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
