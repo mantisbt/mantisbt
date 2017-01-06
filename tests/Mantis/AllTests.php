@@ -52,7 +52,7 @@ class MantisAllTests extends PHPUnit_Framework_TestSuite {
 		$t_suite->addTestSuite( 'MantisStringTest' );
 		$t_suite->addTestSuite( 'MentionParsingTest' );
 		$t_suite->addTestSuite( 'MantisConfigParserTest' );
-
+		
 		return $t_suite;
 	}
 }
