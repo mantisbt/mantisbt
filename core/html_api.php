@@ -2114,7 +2114,7 @@ class TableGridLayout {
 	 * @param TableFieldsItem $p_item Item to display
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
-	protected function render_td_item_header( TableFieldsItem $p_item = null, $p_colspan ) {
+	protected function render_td_item_header( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<th';
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
@@ -2136,7 +2136,7 @@ class TableGridLayout {
 	 * @param TableFieldsItem $p_item Item to display
 	 * @param integer $p_colspan Colspan attribute for cell
 	 */
-	protected function render_td_item_content( TableFieldsItem $p_item = null, $p_colspan  ) {
+	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan  ) {
 		echo '<td';
 		if( $p_item->attr_class ) {
 			echo 'class="' . $p_item->attr_class . '"';
