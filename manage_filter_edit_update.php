@@ -95,20 +95,13 @@ if( empty( $t_errors ) ) {
 }
 
 # If there is any error message:
-html_page_top();
-?>
+$t_error_html = '<li>' . implode( '</li><li>', $t_errors ) . '</li>';
 
-<div class="important-msg">
-	<ul>
-		<?php
-		foreach( $t_errors as $t_error_msg ) {
-			echo '<li>' . $t_error_msg . '</li>';
-		}
-		?>
-	</ul>
-</div>'
-
-<?php
-
-html_page_bottom();
-
+layout_page_header();
+layout_admin_page_begin();
+echo '<div class="space-10"></div>';
+html_operation_failure(
+				helper_mantis_url( 'manage_filter_edit_page.php?filter_id=' . $f_filter_id ),
+				$t_error_html
+			);
+layout_admin_page_end();
