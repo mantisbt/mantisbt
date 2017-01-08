@@ -65,12 +65,17 @@ $t_filter_ids_available =
 		;
 filter_cache_rows( $t_filter_ids_available );
 
+$t_rss_enabled = config_get( 'rss_enabled' );
+
 function table_print_filter_headers() {
+	global $t_rss_enabled;
 ?>
 	<thead>
 		<tr class="row-category">
 			<td><?php echo lang_get( 'query_name' ) ?></td>
-			<td><?php echo lang_get( 'rss' ) ?></td>
+			<?php if( $t_rss_enabled ) { ?>
+				<td><?php echo lang_get( 'rss' ) ?></td>
+			<?php } ?>
 			<td><?php echo lang_get( 'filter_visibility' ) ?></td>
 			<td><?php echo lang_get( 'public' ) ?></td>
 			<td><?php echo lang_get( 'owner' ) ?></td>
@@ -81,6 +86,7 @@ function table_print_filter_headers() {
 }
 
 function table_print_filter_row( $p_filter_id ) {
+	global $t_rss_enabled;
 	$t_editable = filter_db_can_delete_filter( $p_filter_id );
 	echo '<tr>';
 	# Filter name
@@ -94,9 +100,11 @@ function table_print_filter_row( $p_filter_id ) {
 	}
 	echo '</td>';
 	# RSS
-	echo '<td class="center">';
-	print_rss( rss_get_issues_feed_url( null, null, $p_filter_id ), lang_get( 'rss' ) );
-	echo '</td>';
+	if( $t_rss_enabled ) {
+		echo '<td class="center">';
+		print_rss( rss_get_issues_feed_url( null, null, $p_filter_id ), lang_get( 'rss' ) );
+		echo '</td>';
+	}
 	# Project
 	echo '<td class="center">' . project_get_name( filter_get_field( $p_filter_id, 'project_id' )) . '</td>';
 	# Public
