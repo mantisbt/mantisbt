@@ -2603,7 +2603,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_plugin_filters = filter_get_plugin_filters();
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		$t_colspan = (int)$t_filter_object->colspan;
-		$t_header = $get_field_header( string_attribute( $t_field_name ) . '_filter"', string_display_line( $t_filter_object->title ) );
+		$t_header = $get_field_header( string_attribute( $t_field_name ) . '_filter', string_display_line( $t_filter_object->title ) );
 		ob_start();
 		if( $p_static ) {
 			print_filter_plugin_field( $t_field_name, $t_filter_object, $t_filter );
