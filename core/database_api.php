@@ -380,49 +380,13 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 
 	if( ON == $g_db_log_queries ) {
-		$t_lastoffset = 0;
-		$i = 0;
-		if( !empty( $p_arr_parms ) ) {
-			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
-				$t_matches = $t_matches[0];
-				# Realign the offset returned by preg_match as it is byte-based,
-				# which causes issues with UTF-8 characters in the query string
-				# (e.g. from custom fields names)
-				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_matches[1] ), mb_internal_encoding() );
-				if( $i <= count( $p_arr_parms ) ) {
-					if( is_null( $p_arr_parms[$i] ) ) {
-						$t_replace = 'NULL';
-					} else if( is_string( $p_arr_parms[$i] ) ) {
-						$t_replace = "'" . $p_arr_parms[$i] . "'";
-					} else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
-						$t_replace = (float)$p_arr_parms[$i];
-					} else if( is_bool( $p_arr_parms[$i] ) ) {
-						switch( $t_db_type ) {
-							case 'pgsql':
-								$t_replace = '\'' . $p_arr_parms[$i] . '\'';
-							break;
-						default:
-							$t_replace = $p_arr_parms[$i];
-							break;
-						}
-					} else {
-						echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
-						exit( 1 );
-					}
-					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );
-					$t_lastoffset = $t_matches[1] + strlen( $t_replace ) + 1;
-				} else {
-					$t_lastoffset = $t_matches[1] + 1;
-				}
-				$i++;
-			}
-		}
-		$t_log_msg = array( $p_query, $t_elapsed );
-		log_event( LOG_DATABASE, $t_log_msg );
-		array_push( $g_queries_array, $t_log_msg );
+		$t_query_text = db_format_query_log_msg( $p_query, $p_arr_parms );
+		log_event( LOG_DATABASE, array( $t_query_text, $t_elapsed ) );
 	} else {
-		array_push( $g_queries_array, array( '', $t_elapsed ) );
+		# If not logging the queries the actual text is not needed
+		$t_query_text = '';
 	}
+	array_push( $g_queries_array, array( $t_query_text, $t_elapsed ) );
 
 	# Restore param stack: only pop if asked to AND the query has params
 	if( $p_pop_param && !empty( $p_arr_parms ) ) {
@@ -1288,4 +1252,63 @@ function db_mysql_fix_utf8( $p_string ) {
  */
 function db_empty_result() {
 	return new ADORecordSet_empty();
+}
+
+/**
+ * Process a query string by replacing token parameters by their bound values
+ * @param string $p_query     Query string
+ * @param array $p_arr_parms  Parameter array
+ * @return string             Processed query string
+ */
+function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
+	global $g_db;
+
+	$t_lastoffset = 0;
+	$i = 0;
+	if( !empty( $p_arr_parms ) ) {
+		# For mysql, tokens are '?', and parameters are bound sequentially
+		# For pgsql, tokens are '$number', and parameters are bound by the denoted
+		# index (1-based) in the parameter array
+		# For oracle, tokens are ':string', but mantis rewrites them as sequentially
+		# ordered, so they behave like mysql. See db_oracle_order_binds_sequentially()
+		$t_regex = '/(?<token>\?|\$|:)(?<index>[0-9]*)/';
+		while( preg_match( $t_regex , $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
+			$t_match_param = $t_matches[0];
+			# Realign the offset returned by preg_match as it is byte-based,
+			# which causes issues with UTF-8 characters in the query string
+			# (e.g. from custom fields names)
+			$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
+			if( $i <= count( $p_arr_parms ) ) {
+				if( db_is_pgsql() ) {
+					# For pgsql, the bound value is indexed by the parameter name
+					$t_index = (int)$t_matches['index'][0];
+					$t_value = $p_arr_parms[$t_index-1];
+				} else {
+					$t_value = $p_arr_parms[$i];
+				}
+				if( is_null( $t_value ) ) {
+					$t_replace = 'NULL';
+				} else if( is_string( $t_value ) ) {
+					$t_replace = "'" . $t_value . "'";
+				} else if( is_integer( $t_value ) || is_float( $t_value ) ) {
+					$t_replace = (float)$t_value;
+				} else if( is_bool( $t_value ) ) {
+					# use the actual literal from db driver
+					$t_replace = $t_value ? $g_db->true : $g_db->false;
+				} else {
+					# Could not find a supported type for this parameter value.
+					# Skip this token, so replacing it with itself.
+					$t_replace = $t_match_param[0];
+				}
+				$p_query = utf8_substr( $p_query, 0, $t_utf8_offset )
+					. $t_replace
+					. utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_match_param[0] ) );
+				$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
+			} else {
+				$t_lastoffset = $t_match_param[1] + 1;
+			}
+			$i++;
+		}
+	}
+	return $p_query;
 }
