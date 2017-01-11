@@ -203,7 +203,6 @@ class MantisMarkdown extends Parsedown
 	 * Customize the blockQuote method by adding a style attribute
 	 *
 	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
 	 * @access protected
 	 * @return string html representation generated from markdown.
 	 */
