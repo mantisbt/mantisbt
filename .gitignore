@@ -46,6 +46,6 @@ nbproject/
 web.config
 !library/securimage/web.config
 
-#libraries
+# Libraries
 library/FirePHPCore
 library/ezc
