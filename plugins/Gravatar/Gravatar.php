@@ -68,7 +68,7 @@ class GravatarPlugin extends MantisPlugin {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '2.0.0',
+			'MantisCore' => '2.1.0',
 		);
 
 		$this->author = 'Victor Boctor';
