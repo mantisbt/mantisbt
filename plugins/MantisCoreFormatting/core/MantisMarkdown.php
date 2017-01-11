@@ -64,9 +64,6 @@ class MantisMarkdown extends Parsedown
 	public function __construct() {
 		# set the table class
 		$this->table_class = 'table table-nonfluid';
-
-		# set the border color of blockquote
-		$this->inline_style = 'border-color:#847d7d';
 	}
 
 	/**
@@ -193,7 +190,8 @@ class MantisMarkdown extends Parsedown
 	private function __quote( $line, $block, $fn ) {
 
 		if( $block = call_user_func( 'parent::' . $fn, $line, $block ) ) {
-			$block['element']['attributes']['style'] = $this->inline_style;
+			# set mantis style
+			$block['element']['attributes']['style'] = 'border-color:#847d7d;font-size:13px;';
 		}
 
 		return $block;
