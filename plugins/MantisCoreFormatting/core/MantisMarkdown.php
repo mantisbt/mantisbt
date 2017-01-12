@@ -62,6 +62,10 @@ class MantisMarkdown extends Parsedown
 	 * MantisMarkdown constructor.
 	 */
 	public function __construct() {
+		
+		# enable line break by default
+		$this->breaksEnabled = true;
+
 		# set the table class
 		$this->table_class = 'table table-nonfluid';
 
