@@ -190,8 +190,8 @@ class MantisMarkdown extends Parsedown
 	private function __quote( $line, $block, $fn ) {
 
 		if( $block = call_user_func( 'parent::' . $fn, $line, $block ) ) {
-			# set mantis style
-			$block['element']['attributes']['style'] = 'border-color:#847d7d;font-size:13px;';
+			# TODO: To open another issue to track css style sheet issue vs. inline style.
+			$block['element']['attributes']['style'] = 'padding:0.13em 1em;color:#777;border-left:0.25em solid #C0C0C0;font-size:13px;';
 		}
 
 		return $block;
