@@ -145,7 +145,9 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 					<div class="btn-toolbar pull-left">
 						<div class="form-inline">
 							<label><?php echo lang_get( 'search' ) ?>&nbsp;
-								<input type="text" size="64" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>">
+								<input type="text" id="filter-search-txt" class="input-sm" size="16"
+									   name="<?php echo FILTER_PROPERTY_SEARCH ?>"
+									   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ) ?>">
 							</label>
 						</div>
 					</div>

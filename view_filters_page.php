@@ -101,69 +101,72 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 <div class="space-10"></div>
 <div class="col-md-12 col-xs-12">
 
-<form method="post" name="filters" action="<?php echo $t_action; ?>">
+	<form method="post" name="filters" action="<?php echo $t_action; ?>">
 
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="hidden" name="type" value="1" />
-<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
-<?php
-	if( $f_for_screen == false ) {
-		print '<input type="hidden" name="print" value="1" />';
-		print '<input type="hidden" name="offset" value="0" />';
-	}
-?>
-
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-filter"></i>
-		<?php echo lang_get('filters') ?>
-	</h4>
-</div>
-<div class="widget-body">
-<div class="widget-main no-padding">
-<div class="widget-toolbox">
-<div class="btn-toolbar">
-	<div class="btn-group pull-right">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
+	<input type="hidden" name="type" value="1" />
+	<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
 	<?php
-		$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
-
-		if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-			if( 'advanced' == $f_view_type ) {
-				print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-			} else {
-				print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-			}
+		if( $f_for_screen == false ) {
+			print '<input type="hidden" name="print" value="1" />';
+			print '<input type="hidden" name="offset" value="0" />';
 		}
 	?>
-	</div>
-</div>
-</div>
 
-<div class="table-responsive">
-		<?php
-		filter_form_draw_inputs( $t_filter, $f_for_screen, $f_static );
-		?>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-filter"></i>
+					<?php echo lang_get('filters') ?>
+				</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="widget-toolbox">
+						<div class="btn-toolbar">
+							<div class="btn-group pull-right">
+							<?php
+								$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
 
-		<table>
-			<tbody>
-				<tr>
-					<td>
-						<label><?php echo lang_get( 'search' ) ?>&nbsp;
-							<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>">
-						</label>
-					</td>
-					<td class="right">
-						<input type="submit" name="filter" value="<?php echo lang_get( 'use_query' ) ?>">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-</div>
-</div>
-</div>
-</div>
-</form>
+								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+									if( 'advanced' == $f_view_type ) {
+										print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+									} else {
+										print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+									}
+								}
+							?>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-responsive">
+							<?php
+							filter_form_draw_inputs( $t_filter, $f_for_screen, $f_static );
+							?>
+					</div>
+
+					<div class="widget-toolbox padding-8 clearfix">
+						<div class="btn-toolbar pull-left">
+							<div class="form-inline">
+								<label><?php echo lang_get( 'search' ) ?>&nbsp;
+									<input type="text" id="filter-search-txt" class="input-sm" size="16"
+										   name="<?php echo FILTER_PROPERTY_SEARCH ?>"
+										   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ) ?>">
+								</label>
+							</div>
+						</div>
+						<div class="btn-toolbar pull-right">
+							<div class="form-inline">
+								<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'use_query' )?>" />
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 <?php
 layout_page_end();
