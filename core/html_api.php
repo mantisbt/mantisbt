@@ -2168,7 +2168,7 @@ class TableFieldsItem {
 	 * Constructor
 	 * @param string $p_header		HTMl to be used in header cell
 	 * @param string $p_content		HTMl to be used in content cell
-	 * @param integer $p_colspan	Colspan for the content celol
+	 * @param integer $p_colspan	Colspan for the content cell
 	 * @param string $p_class		Class to be added to the cells
 	 * @param string $p_content_id	Id attribute to use for content cell
 	 * @param string $p_header_id	Id attribute to use for header cell
