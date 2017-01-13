@@ -84,8 +84,8 @@ $t_filter['_view_type'] = $f_view_type;
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
 $t_action = 'manage_filter_edit_update.php';
-$t_current_project = helper_get_current_project();
-$t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
+$t_current_project_id = helper_get_current_project();
+$t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 
 ?>
 
@@ -173,21 +173,21 @@ $t_filter_project = filter_get_field( $f_filter_id, 'project_id' );
 							</td>
 							<td>
 								<label class="inline">
-									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo ALL_PROJECTS ?>" <?php check_checked( ALL_PROJECTS == $t_filter_project ) ?>>
+									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo ALL_PROJECTS ?>" <?php check_checked( ALL_PROJECTS == $t_filter_project_id ) ?>>
 									<span class="lbl"> <?php echo lang_get( 'all_projects' ) ?></span>
 								</label>
 								<br>
-								<?php if( ALL_PROJECTS != $t_filter_project ) { ?>
+								<?php if( ALL_PROJECTS != $t_filter_project_id ) { ?>
 								<label>
-									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_filter_project ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project ) ?>>
-									<span class="lbl"> <?php echo lang_get( 'stored_project' ) . ' (' . project_get_name( $t_filter_project ) . ')' ?></span>
+									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_filter_project_id ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project_id ) ?>>
+									<span class="lbl"> <?php echo lang_get( 'stored_project' ) . ' (' . project_get_name( $t_filter_project_id ) . ')' ?></span>
 								</label>
 								<br>
 								<?php } ?>
-								<?php if( $t_filter_project != $t_current_project ) { ?>
+								<?php if( $t_filter_project_id != $t_current_project_id ) { ?>
 								<label>
-									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_current_project ?>">
-									<span class="lbl"> <?php echo lang_get( 'current_project' ) . ' (' . project_get_name( $t_current_project ) . ')' ?></span>
+									<input type="radio" class="ace input-sm" name="project_id" value="<?php echo $t_current_project_id ?>">
+									<span class="lbl"> <?php echo lang_get( 'current_project' ) . ' (' . project_get_name( $t_current_project_id ) . ')' ?></span>
 								</label>
 								<?php } ?>
 							</td>
