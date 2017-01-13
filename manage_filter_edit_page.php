@@ -95,6 +95,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
 	<input type="hidden" name="filter_id" value="<?php echo $f_filter_id ?>" >
 	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type'] ?>" >
+	<?php echo form_security_field( 'manage_filter_edit_update' ) ?>
 
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
