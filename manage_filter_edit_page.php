@@ -89,9 +89,10 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 
 <div class="filter-box table-container">
 	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="filter_id" value="<?php echo $f_filter_id ?>" >
 		<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type'] ?>" >
+		<?php echo form_security_field( 'manage_filter_edit_update' ) ?>
+
 		<h2><?php echo lang_get('edit_filter') ?></h2>
 
 		<div class="section-link">

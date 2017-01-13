@@ -28,6 +28,8 @@
 require_once( 'core.php' );
 require_api( 'filter_api.php' );
 
+form_security_validate( 'manage_filter_edit_update' );
+
 auth_ensure_user_authenticated();
 
 $t_errors = array();
@@ -88,6 +90,8 @@ if( !$t_editable ) {
 }
 
 $t_filter = filter_gpc_get( $t_filter );
+
+form_security_purge( 'manage_filter_edit_update' );
 
 if( empty( $t_errors ) ) {
 	filter_db_update_filter( $f_filter_id, filter_serialize( $t_filter ), $f_project_id, $f_is_public, $f_filter_name );
