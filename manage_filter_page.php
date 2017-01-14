@@ -94,12 +94,7 @@ function table_print_filter_row( $p_filter_id ) {
 	# Filter name
 	echo '<td>';
 	$t_name = string_display( filter_get_field( $p_filter_id, 'name' ) );
-	if( $t_editable ) {
-		print_link( 'manage_filter_edit_page.php?filter_id=' . $p_filter_id, $t_name );
-	} else {
-		# If the user can't edit the filter, follow to filter view page, where he can modify and apply as current filter
-		print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
-	}
+	print_link( 'view_filters_page.php?filter_id=' . $p_filter_id, $t_name );
 	echo '</td>';
 	# RSS
 	if( $t_rss_enabled ) {
@@ -119,6 +114,9 @@ function table_print_filter_row( $p_filter_id ) {
 	print_form_button( 'view_all_set.php', lang_get( 'apply_filter_button' ), array( 'type' => 3, 'source_query_id' =>  $p_filter_id ), /* security token */ OFF );
 	echo '</div>';
 	if( $t_editable ) {
+		echo '<div class="pull-left">';
+		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit_link' ), array( 'filter_id' =>  $p_filter_id ) );
+		echo '</div>';
 		echo '<div class="pull-left">';
 		print_form_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
