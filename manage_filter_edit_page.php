@@ -103,6 +103,29 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 				<i class="ace-icon fa fa-filter"></i>
 				<?php echo lang_get('edit_filter') ?>
 			</h4>
+
+			<div class="widget-toolbar">
+				<div class="widget-menu">
+					<a href="#" data-action="settings" data-toggle="dropdown">
+						<i class="ace-icon fa fa-bars bigger-125"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
+						<li>
+						<?php
+							$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
+							if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+								if( 'advanced' == $t_filter['_view_type'] ) {
+									echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
+								} else {
+									echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
+								}
+							}
+						?>
+						</li>
+					</ul>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="widget-body">
@@ -115,20 +138,6 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 								<?php echo lang_get( 'query_name' ) ?>&nbsp;
 								<input type="text" size="16" name="filter_name" maxlength="64" value="<?php echo filter_get_field( $f_filter_id, 'name' ) ?>">
 							</label>
-						</div>
-					</div>
-					<div class="btn-toolbar pull-right">
-						<div class="btn-group">
-						<?php
-							$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
-							if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-								if( 'advanced' == $t_filter['_view_type'] ) {
-									print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-								} else {
-									print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-								}
-							}
-						?>
 						</div>
 					</div>
 				</div>

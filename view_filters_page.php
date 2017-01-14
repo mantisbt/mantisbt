@@ -119,26 +119,32 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 					<i class="ace-icon fa fa-filter"></i>
 					<?php echo lang_get('filters') ?>
 				</h4>
-			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="widget-toolbox">
-						<div class="btn-toolbar">
-							<div class="btn-group pull-right">
+
+				<div class="widget-toolbar">
+					<div class="widget-menu">
+						<a href="#" data-action="settings" data-toggle="dropdown">
+							<i class="ace-icon fa fa-bars bigger-125"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
+							<li>
 							<?php
 								$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
-
 								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-									if( 'advanced' == $f_view_type ) {
-										print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+									if( 'advanced' == $t_filter['_view_type'] ) {
+										echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
 									} else {
-										print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+										echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
 									}
 								}
 							?>
-							</div>
-						</div>
+							</li>
+						</ul>
 					</div>
+				</div>
+
+			</div>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
 
 					<div class="table-responsive">
 							<?php
