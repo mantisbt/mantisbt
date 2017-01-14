@@ -128,7 +128,11 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<li>
 							<?php
-								$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
+								$f_switch_view_link = 'view_filters_page.php?static=' . (int)$f_static;
+								if( $t_named_filter ) {
+									$f_switch_view_link .= '&filter_id=' . $f_filter_id;
+								}
+								$f_switch_view_link .= '&view_type=';
 								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 									if( 'advanced' == $t_filter['_view_type'] ) {
 										echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
