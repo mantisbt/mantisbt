@@ -151,7 +151,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			# Get the parent of the call that triggered the error to facilitate
 			# debugging with a more useful filename and line number
 			$t_stack = debug_backtrace();
-			$t_caller = $t_stack[2];
+			if( isset( $t_stack[2] ) ) {
+				$t_caller = $t_stack[2];
+			} else {
+				# If called from main page body, there is no stack block for the funcion, use the page block instead
+				$t_caller = $t_stack[1];
+			}
 
 			$t_error_type = 'WARNING';
 			$t_error_description =  error_string( $p_error )

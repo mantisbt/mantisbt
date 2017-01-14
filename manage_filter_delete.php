@@ -17,11 +17,10 @@
 /**
  * Handler to delete a stored query.
  *
- * Takes source_query_id as a parameter
+ * Takes filter_id as a parameter
  *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -45,26 +44,30 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-form_security_validate( 'query_delete' );
+form_security_validate( 'manage_filter_delete' );
 
 auth_ensure_user_authenticated();
-compress_enable();
 
-$f_query_id = gpc_get_int( 'source_query_id' );
-$t_redirect_url = 'query_view_page.php';
+$f_filter_id = gpc_get_int( 'filter_id' );
+$t_redirect_url = 'manage_filter_page.php';
 
-if( !filter_db_can_delete_filter( $f_query_id ) ) {
+if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	print_header_redirect( $t_redirect_url );
-} else {
-	$t_message = sprintf(
-		lang_get( 'query_deleted' ),
-		filter_db_get_name( $f_query_id )
-	);
-
-	layout_page_header();
-	layout_page_begin();
-	filter_db_delete_filter( $f_query_id );
-	form_security_purge( 'query_delete' );
-	html_operation_successful( $t_redirect_url, $t_message );
-	layout_page_end();
+	exit;
 }
+
+helper_ensure_confirmed( lang_get( 'query_delete_msg' ) . '<br>' . lang_get( 'query_name' ) . ': ' . filter_get_field( $f_filter_id, 'name' ),
+		lang_get( 'delete_query' ) );
+
+filter_db_delete_filter( $f_filter_id );
+
+form_security_purge( 'manage_filter_delete' );
+
+$t_redirect_page = 'manage_filter_page.php';
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
+
+html_operation_successful( $t_redirect_page );
+
+layout_page_end();

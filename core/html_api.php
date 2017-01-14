@@ -1320,3 +1320,254 @@ function html_get_status_css_class( $p_status, $p_user = null, $p_project = null
 		return '';
 	}
 }
+
+/**
+ * Class that provides managed generation of an HTML table content, consisting of <tr> and <td> elements
+ * which are arranged sequentially on a grid.
+ * Items consist of "header" and "content", which are rendered to separate table cells.
+ * An option is provided to arrange the header and content in vertical or horizontal orientation.
+ * Vertical orientation places header on top of content, while horizontal orientation places the header
+ * to the left of content cell.
+ * Each item can have a different colspan, which is used to arrange the items efficiently. When the
+ * arrangement is made, an item with higher colspan than current free space may be placed in next row,
+ * but still fill the current row with next items if they fit. This may cause a variation in expected
+ * order, but allows for a more compact fill for rows.
+ */
+class TableGridLayout {
+	const ORIENTATION_VERTICAL = 0;
+	const ORIENTATION_HORIZONTAL = 1;
+
+	protected $cols;
+	private $_max_colspan;
+
+	public $items = array();
+	public $item_orientation;
+
+	/**
+	 * Set this variable to add a class attribute for each <tr>
+	 * @var string
+	 */
+	public $tr_class = null;
+
+	/**
+	 * Constructor.
+	 * $p_orientation may be one of this class constants:
+	 * ORIENTATION_VERTICAL, ORIENTATION_HORIZONTAL
+	 * @param integer $p_cols	Number of columns for the table
+	 * @param integer $p_orientation	Orientation for header and content cells
+	 */
+	public function __construct( $p_cols, $p_orientation = null ) {
+		# sanitize values
+		switch( $p_orientation ) {
+			case self::ORIENTATION_HORIZONTAL:
+				if( $p_cols < 2 ) {
+					$p_cols = 2;
+				}
+				$this->_max_colspan = $p_cols-1;
+				break;
+			case self::ORIENTATION_VERTICAL:
+			default:
+				$p_orientation = self::ORIENTATION_VERTICAL;
+				if( $p_cols < 1 ) {
+					$p_cols = 1;
+				}
+				$this->_max_colspan = $p_cols;
+		}
+
+		$this->cols = $p_cols;
+		$this->item_orientation = $p_orientation;
+	}
+
+	/**
+	 * Adds a item to the collection
+	 * @param TableFieldsItem $p_item An item
+	 */
+	public function add_item( TableFieldsItem $p_item ) {
+		if( $p_item->colspan > $this->_max_colspan ) {
+			$p_item->colspan = $this->_max_colspan;
+		}
+		$this->items[] = $p_item;
+	}
+
+	/**
+	 * Prints the HTMl for the generated table cells, for all items contained
+	 */
+	public function render() {
+		$t_rows_items = array();
+		$t_rows_freespace = array();
+		$t_used_rows = 0;
+
+		# Arrange the items in rows accounting for their actual cell space
+		foreach( $this->items as $t_item ) {
+			# Get the actual table colums needed to render the item
+			$t_item_cols = ( $this->item_orientation == self::ORIENTATION_VERTICAL ) ? $t_item->colspan : $t_item->colspan + 1;
+			# Search for a row with enough space to fit the item
+			$t_found = false;
+			for( $t_ix = 0; $t_ix < $t_used_rows; $t_ix++ ) {
+				if( $t_rows_freespace[$t_ix] >= $t_item_cols ) {
+					# Found a row with available space. Add the item here
+					$t_found = true;
+					$t_rows_freespace[$t_ix] -= $t_item_cols;
+					$t_rows_items[$t_ix][] = $t_item;
+					break;
+				}
+			}
+			# If no suitable row was found, create new one and add the item here
+			if( !$t_found ) {
+				$t_rows_items[] = array( $t_item );
+				$t_used_rows++;
+				$t_rows_freespace[] = $this->cols - $t_item_cols;
+			}
+		}
+
+		# Render the arranged items
+		if( $this->tr_class ) {
+			$p_tr_attr_class = ' class="' . $this->tr_class . '"';
+		} else {
+			$p_tr_attr_class = '';
+		}
+		foreach( $t_rows_items as $t_row ) {
+			switch( $this->item_orientation ) {
+
+				case self::ORIENTATION_HORIZONTAL:
+					$t_cols_left = $this->cols;
+					echo '<tr' . $p_tr_attr_class . '>';
+					foreach( $t_row as $t_item ) {
+						$this->render_td_item_header( $t_item, 1 );
+						$this->render_td_item_content( $t_item, $t_item->colspan );
+						$t_cols_left -= ( $t_item->colspan + 1 );
+					}
+					if( $t_cols_left > 0 ) {
+						$this->render_td_empty($t_cols_left);
+					}
+					echo '</tr>';
+					break;
+
+				# default is vertical orientation
+				default:
+					# row for headers
+					$t_cols_left = $this->cols;
+					echo '<tr' . $p_tr_attr_class . '>';
+					foreach( $t_row as $t_item ) {
+						$this->render_td_item_header( $t_item, $t_item->colspan );
+						$t_cols_left -= $t_item->colspan;
+					}
+					if( $t_cols_left > 0 ) {
+						$this->render_td_empty_header( $t_cols_left );
+					}
+					echo '</tr>';
+					# row for contents
+					$t_cols_left = $this->cols;
+					echo '<tr' . $p_tr_attr_class . '>';
+					foreach( $t_row as $t_item ) {
+						$this->render_td_item_content( $t_item, $t_item->colspan );
+						$t_cols_left -= $t_item->colspan;
+					}
+					if( $t_cols_left > 0 ) {
+						$this->render_td_empty($t_cols_left);
+					}
+					echo '</tr>';
+			}
+		}
+	}
+
+	/**
+	 * Prints HTML code for an empty TD cell
+	 * @param integer $p_colspan Colspan attribute for cell
+	 */
+	protected function render_td_empty( $p_colspan ) {
+		echo '<td';
+		if( $p_colspan > 1) {
+			echo ' colspan="' . $p_colspan . '"';
+		}
+		echo '>';
+		echo '&nbsp;';
+		echo '</td>';
+	}
+
+	/**
+	 * Prints HTML code for an empty TD cell, of header type
+	 * @param integer $p_colspan Colspan attribute for cell
+	 */
+	protected function render_td_empty_header( $p_colspan ) {
+		$this->render_td_empty( $p_colspan );
+	}
+
+	/**
+	 * Prints HTML code for TD cell representing the Item header
+	 * @abstract
+	 * @param TableFieldsItem $p_item Item to display
+	 * @param integer $p_colspan Colspan attribute for cell
+	 */
+	protected function render_td_item_header( TableFieldsItem $p_item, $p_colspan ) {
+		echo '<th';
+		if( $p_item->attr_class ) {
+			echo 'class="' . $p_item->attr_class . '"';
+		}
+		if( $p_colspan > 1) {
+			echo ' colspan="' . $p_colspan . '"';
+		}
+		if( $p_item->header_attr_id ) {
+			echo ' id="' . $p_item->header_attr_id . '"';
+		}
+		echo '>';
+		echo $p_item->header;
+		echo '</th>';
+	}
+
+	/**
+	 * Prints HTML code for TD cell representing the Item content
+	 * @abstract
+	 * @param TableFieldsItem $p_item Item to display
+	 * @param integer $p_colspan Colspan attribute for cell
+	 */
+	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan  ) {
+		echo '<td';
+		if( $p_item->attr_class ) {
+			echo 'class="' . $p_item->attr_class . '"';
+		}
+		if( $p_colspan > 1) {
+			echo ' colspan="' . $p_colspan . '"';
+		}
+		if( $p_item->content_attr_id ) {
+			echo ' id="' . $p_item->content_attr_id . '"';
+		}
+		echo '>';
+		echo $p_item->header;
+		echo '</td>';
+	}
+}
+
+/**
+ * Class that represent Items to use with TableGridLayout
+ */
+class TableFieldsItem {
+	public $header;
+	public $content;
+	public $colspan;
+	public $attr_class = null;
+	public $content_attr_id = null;
+	public $header_attr_id = null;
+
+	/**
+	 * Constructor
+	 * @param string $p_header		HTMl to be used in header cell
+	 * @param string $p_content		HTMl to be used in content cell
+	 * @param integer $p_colspan	Colspan for the content cell
+	 * @param string $p_class		Class to be added to the cells
+	 * @param string $p_content_id	Id attribute to use for content cell
+	 * @param string $p_header_id	Id attribute to use for header cell
+	 */
+	public function __construct( $p_header, $p_content, $p_colspan = 1, $p_class = null, $p_content_id = null, $p_header_id = null ) {
+		$this->header = $p_header;
+		$this->content = $p_content;
+		if( $p_colspan < 1 ) {
+			$p_colspan = 1;
+		}
+		$this->colspan = $p_colspan;
+		$this->atr_class = $p_class;
+		$this->content_attr_id = $p_content_id;
+		$this->header_attr_id = $p_header_id;
+	}
+}
+

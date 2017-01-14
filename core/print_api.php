@@ -1313,38 +1313,26 @@ function print_formatted_severity_string( BugData $p_bug ) {
  * @return void
  */
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	if( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) {
-		if( $p_sort_field == $p_sort ) {
-			# We toggle between ASC and DESC if the user clicks the same sort order
-			if( 'ASC' == $p_dir ) {
-				$p_dir = 'DESC';
+	switch( $p_columns_target ) {
+		case COLUMNS_TARGET_PRINT_PAGE:
+		case COLUMNS_TARGET_VIEW_PAGE:
+			if( $p_sort_field == $p_sort ) {
+				# We toggle between ASC and DESC if the user clicks the same sort order
+				if( 'ASC' == $p_dir ) {
+					$p_dir = 'DESC';
+				} else {
+					$p_dir = 'ASC';
+				}
 			} else {
+				# Otherwise always start with ascending
 				$p_dir = 'ASC';
 			}
-		} else {
-			# Otherwise always start with ascending
-			$p_dir = 'ASC';
-		}
-
-		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2&print=1', $p_string );
-	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
-		if( $p_sort_field == $p_sort ) {
-
-			# we toggle between ASC and DESC if the user clicks the same sort order
-			if( 'ASC' == $p_dir ) {
-				$p_dir = 'DESC';
-			} else {
-				$p_dir = 'ASC';
-			}
-		} else {
-			# Otherwise always start with ascending
-			$p_dir = 'ASC';
-		}
-		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2', $p_string );
-	} else {
-		echo $p_string;
+			$t_sort_field = rawurlencode( $p_sort_field );
+			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
+			print_link( 'view_all_set.php?sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=2' . $t_print_parameter, $p_string );
+			break;
+		default:
+			echo $p_string;
 	}
 }
 

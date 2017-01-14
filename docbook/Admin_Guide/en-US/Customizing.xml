@@ -1090,7 +1090,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 							<entry>None</entry>
 						</row>
 						<row>
-							<entry>custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )</entry>
+							<entry>custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, array $p_sort_properties = null )</entry>
 							<entry>Print a column's title based on its name</entry>
 							<entry>None</entry>
 						</row>
