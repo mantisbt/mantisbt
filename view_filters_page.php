@@ -99,7 +99,6 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 
 <div class="filter-box table-container">
 	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="type" value="1" />
 		<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
 		<?php
@@ -120,14 +119,18 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 
 		<div class="section-link">
 			<?php
-			$f_switch_view_link = 'view_filters_page.php?static=' . $f_static . '&view_type=';
-				if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-					if( 'advanced' == $f_view_type ) {
-						print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-					} else {
-						print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-					}
+			$f_switch_view_link = 'view_filters_page.php?static=' . (int)$f_static;
+			if( $t_named_filter ) {
+				$f_switch_view_link .= '&filter_id=' . $f_filter_id;
+			}
+			$f_switch_view_link .= '&view_type=';
+			if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+				if( 'advanced' == $f_view_type ) {
+					print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+				} else {
+					print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
 				}
+			}
 			?>
 		</div>
 
