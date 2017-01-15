@@ -682,7 +682,8 @@ if( $t_show_tags ) {
 	echo '<tr>';
 	echo '<th class="bug-tags category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="bug-tags" colspan="5">';
-	tag_display_attached( $t_bug_id );
+	echo '<input id="tagsinput" type="text" value="', tag_display_attached( $t_bug_id ), '" data-role="tagsinput" 
+	 	placeholder="', lang_get( 'tag_attach_long' ), '"/>';
 	echo '</td></tr>';
 }
 

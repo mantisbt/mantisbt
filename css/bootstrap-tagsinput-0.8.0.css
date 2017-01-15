@@ -1,0 +1,36 @@
+.bootstrap-tagsinput.form-control input::-moz-placeholder {
+    color: #777;
+    opacity: 1;
+}
+.bootstrap-tagsinput.form-control input:-ms-input-placeholder {
+    color: #777;
+}
+.bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
+    color: #777;
+}
+.bootstrap-tagsinput input:focus {
+    background-color: #fff;
+    border-color: #f59942;
+    box-shadow: none;
+    color: #696969;
+    outline: 0 none;
+    min-width: 250px;
+}
+.bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: white;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+    margin: 0 -4px 0 8px;
+    cursor: pointer;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+    content: "x";
+    padding: 0px 2px;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}

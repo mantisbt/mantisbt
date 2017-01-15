@@ -274,6 +274,7 @@ function layout_head_css() {
 	# page specific plugin styles
 
 	# theme styles
+	html_css_link( 'bootstrap-tagsinput-' . TAGS_INPUT_VERSION . '.css' );
 	html_css_link( 'ace.min.css' );
 	html_css_link( 'ace-mantis.css' );
 
@@ -342,6 +343,7 @@ function layout_body_javascript() {
 	}
 
 	# ace theme scripts
+	html_javascript_link( 'bootstrap-tagsinput-' . TAGS_INPUT_VERSION . '.js' );
 	html_javascript_link( 'ace.min.js' );
 }
 

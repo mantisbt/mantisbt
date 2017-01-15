@@ -625,6 +625,9 @@ define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
 define( 'DATETIME_PICKER_VERSION', '4.17.43' );
 define( 'DATETIME_PICKER_HASH', 'sha256-I8vGZkA2jL0PptxyJBvewDVqNXcgIhcgeqi+GD/aw34=' );
 
+# Tags input
+define( 'TAGS_INPUT_VERSION', '0.8.0' );
+
 # Chart JS
 define( 'CHARTJS_VERSION', '2.1.6' );
 define( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );

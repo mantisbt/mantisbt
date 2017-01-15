@@ -97,3 +97,25 @@ function xmlhttprequest_os_build_get_with_prefix() {
 
 	echo json_encode( $t_matching_entries );
 }
+
+/**
+ * Outputs a serialized list of tags starting with the prefix specified in the $_POST
+ * @return void
+ * @access public
+ */
+function xmlhttprequest_tag_get_with_prefix() {
+	$f_prefix = gpc_get_string( 'tag' );
+	$f_bug_id =  0;
+	$results = [];
+
+	$t_unique_entries = tag_get_candidates_for_bug( $f_bug_id );
+	if( $t_unique_entries ) {
+		foreach ($t_unique_entries as $entry) {
+			$t_name = $entry['name'];
+			if( utf8_strtolower( utf8_substr( $t_name, 0, utf8_strlen( $f_prefix ) ) ) === utf8_strtolower( $f_prefix ) ) {
+				$results[] = $t_name;
+			}
+		}
+	}
+	echo json_encode( $results );
+}

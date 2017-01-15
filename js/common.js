@@ -337,6 +337,27 @@ $(document).ready( function() {
 		}
 	});
 
+    $('input#tagsinput').tagsinput({
+        typeahead: {
+            source: function(query) {
+                var postData = {};
+                postData['entrypoint'] = 'tag_get_with_prefix';
+                postData['tag'] = query;
+				return $.getJSON('xmlhttprequest.php', postData);
+            }
+        }
+    });
+
+    $('input#tagsinput').on('beforeItemRemove', function(event) {
+        console.log('Removing tag');
+        console.log(event.item);
+    });
+
+    $('input').on('beforeItemAdd', function(event) {
+        console.log('Adding tag');
+        console.log(event.item);
+    });
+
 	$(document).on('change', '#tag_select', function() {
 		var tagSeparator = $('#tag_separator').val();
 		var currentTagString = $('#tag_string').val();

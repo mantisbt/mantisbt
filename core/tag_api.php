@@ -920,19 +920,12 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
  */
 function tag_display_attached( $p_bug_id ) {
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
-
-	if( count( $t_tag_rows ) == 0 ) {
-		echo lang_get( 'tag_none_attached' );
-	} else {
-		$i = 0;
-		foreach( $t_tag_rows as $t_tag ) {
-			echo( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
-			tag_display_link( $t_tag, $p_bug_id );
-			$i++;
-		}
+	$i = 0;
+	foreach( $t_tag_rows as $t_tag ) {
+		echo( $i > 0 ? config_get( 'tag_separator' ) . ' ' : '' );
+		echo $t_tag['name'];
+		$i++;
 	}
-
-	return true;
 }
 
 /**
