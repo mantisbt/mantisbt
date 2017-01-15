@@ -579,7 +579,6 @@ if( !$g_database_upgrade ) {
 			$t_db_list = array(
 				'mysqli'      => 'MySQL Improved',
 				'mysql'       => 'MySQL',
-				'mssql'       => 'Microsoft SQL Server',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
@@ -587,10 +586,6 @@ if( !$g_database_upgrade ) {
 			# mysql is deprecated as of PHP 5.5.0
 			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
 				unset( $t_db_list['mysql']);
-			}
-			# mssql is not supported with PHP >= 5.3
-			if( version_compare( phpversion(), '5.3' ) >= 0 ) {
-				unset( $t_db_list['mssql']);
 			}
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
