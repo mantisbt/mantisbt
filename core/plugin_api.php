@@ -458,6 +458,11 @@ function plugin_version_check( $p_version, $p_required, $p_maximum = false ) {
 		$t_operator = '<';
 	} else {
 		$t_operator = '>=';
+
+		# Special handling for dev versions: we consider them as meeting the
+		# requirement for their baseline, i.e. 2.0.0-dev matches 2.0.0.
+		preg_match( '/^(.*?)([._+-]?dev.*)?$/', $p_version, $t_matches );
+		$p_version = $t_matches[1];
 	}
 	$t_result = version_compare( $p_version, $p_required, $t_operator );
 	return $t_result ? 1 : -1;
