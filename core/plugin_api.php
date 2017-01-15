@@ -447,88 +447,20 @@ function plugin_is_loaded( $p_base_name ) {
 }
 
 /**
- * Converts a version string to an array, using some punctuation and
- * number/lettor boundaries as splitting points.
- * @param string $p_version Version string.
- * @return array Version array
- */
-function plugin_version_array( $p_version ) {
-	$t_version = preg_replace( '/([a-zA-Z]+)([0-9]+)/', '\1.\2', $p_version );
-	$t_version = preg_replace( '/([0-9]+)([a-zA-Z]+)/', '\1.\2', $t_version );
-
-	$t_search = array(
-		',',
-		'-',
-		'_',
-	);
-
-	$t_replace = array(
-		'.',
-		'.',
-		'.',
-	);
-
-	$t_version = explode( '.', str_replace( $t_search, $t_replace, $t_version ) );
-
-	return $t_version;
-}
-
-/**
- * Checks two version arrays sequentially for minimum or maximum version dependencies.
- * @param array   $p_version1 Version array to check.
- * @param array   $p_version2 Version array required.
+ * Checks two versions for minimum or maximum version dependencies.
+ * @param string  $p_version  Version number to check.
+ * @param string  $p_required Version number required.
  * @param boolean $p_maximum  Minimum (false) or maximum (true) version check.
  * @return integer 1 if the version dependency succeeds, -1 if it fails
  */
-function plugin_version_check( array $p_version1, array $p_version2, $p_maximum = false ) {
-	while( count( $p_version1 ) > 0 && count( $p_version2 ) > 0 ) {
-
-		# Grab the next version bits
-		$t_version1 = array_shift( $p_version1 );
-		$t_version2 = array_shift( $p_version2 );
-
-		# Convert to integers if possible
-		if( is_numeric( $t_version1 ) ) {
-			$t_version1 = (int)$t_version1;
-		}
-		if( is_numeric( $t_version2 ) ) {
-			$t_version2 = (int)$t_version2;
-		}
-
-		# Check for immediate version differences
-		if( $p_maximum ) {
-			if( $t_version1 < $t_version2 ) {
-				return 1;
-			} else if( $t_version1 > $t_version2 ) {
-				return -1;
-			}
-		} else {
-			if( $t_version1 > $t_version2 ) {
-				return 1;
-			} else if( $t_version1 < $t_version2 ) {
-				return -1;
-			}
-		}
-	}
-
-	# Versions matched exactly
-	if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
-		return 1;
-	}
-
-	# Handle unmatched version bits
+function plugin_version_check( $p_version, $p_required, $p_maximum = false ) {
 	if( $p_maximum ) {
-		if( count( $p_version2 ) > 0 ) {
-			return 1;
-		}
+		$t_operator = '<';
 	} else {
-		if( count( $p_version1 ) > 0 ) {
-			return 1;
-		}
+		$t_operator = '>=';
 	}
-
-	# No more comparisons
-	return -1;
+	$t_result = version_compare( $p_version, $p_required, $t_operator );
+	return $t_result ? 1 : -1;
 }
 
 /**
@@ -593,8 +525,6 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			}
 		}
 
-		$t_version_installed = plugin_version_array( $t_plugin_version );
-
 		foreach( $t_required_array as $t_required ) {
 			$t_required = trim( $t_required );
 			$t_maximum = false;
@@ -612,9 +542,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 				}
 			}
 
-			$t_version_required = plugin_version_array( $t_required );
-
-			$t_check = plugin_version_check( $t_version_installed, $t_version_required, $t_maximum );
+			$t_check = plugin_version_check( $t_plugin_version, $t_required, $t_maximum );
 
 			if( $t_check < 1 ) {
 				return $t_check;
