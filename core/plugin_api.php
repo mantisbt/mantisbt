@@ -553,6 +553,8 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			return 0;
 		}
 
+		$t_plugin_version = $g_plugin_cache[$p_base_name]->version;
+
 		$t_required_array = explode( ',', $p_required );
 
 		# If the plugin's minimum dependency for MantisCore is unspecified or
@@ -577,9 +579,9 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 		#    if and when a version 1.4 is released.
 		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
 			$t_version_core = substr(
-				MANTIS_VERSION,
+				$t_plugin_version,
 				0,
-				strpos( MANTIS_VERSION, '.', strpos( MANTIS_VERSION, '.' ) + 1 )
+				strpos( $t_plugin_version, '.', strpos( $t_plugin_version, '.' ) + 1 )
 			);
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
@@ -591,7 +593,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			}
 		}
 
-		$t_version_installed = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
+		$t_version_installed = plugin_version_array( $t_plugin_version );
 
 		foreach( $t_required_array as $t_required ) {
 			$t_required = trim( $t_required );
