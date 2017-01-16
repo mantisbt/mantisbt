@@ -484,7 +484,7 @@ if( 2 == $t_install_state ) {
 			case 'mssql':
 			case 'mssqlnative':
 				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
-					$t_error = 'SQL Server 2005 (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation.';
+					$t_error = 'SQL Server (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation.';
 				}
 				break;
 			case 'pgsql':
