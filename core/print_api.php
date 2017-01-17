@@ -2093,7 +2093,11 @@ function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
 function print_dropzone_form_data() {
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
 	echo "\t" . 'data-max-filesize="'. ceil( config_get( 'max_file_size' ) / (1000 * 1024) ) . '"' . "\n";
-	echo "\t" . 'data-accepted-files="' . config_get( 'allowed_files' ) . '"' . "\n";
+	$t_allowed_files = config_get( 'allowed_files' );
+	if ( !empty ( $t_allowed_files ) ) {
+		$t_allowed_files = '.' . implode ( ',.', explode ( ',', config_get( 'allowed_files' ) ) );
+	}
+	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
 	echo "\t" . 'data-default-message="' . htmlspecialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
 	echo "\t" . 'data-fallback-message="' . htmlspecialchars( lang_get( 'dropzone_fallback_message' ) ) . '"' . "\n";
 	echo "\t" . 'data-fallback-text="' . htmlspecialchars( lang_get( 'dropzone_fallback_text' ) ) . '"' . "\n";
