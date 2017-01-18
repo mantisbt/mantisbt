@@ -200,7 +200,7 @@ if( $t_sponsor_count === 0 ) {
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			printf( ' <i class="fa fa-lock" alt="(%s)" title="%s"></i>', lang_get( 'private' ), lang_get( 'private' ) );
+			printf( ' <i class="fa fa-lock" title="%s"></i>', lang_get( 'private' ) );
 		}
 		echo '</td>';
 
@@ -325,7 +325,7 @@ if( $t_sponsor_count === 0 ) {
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			printf( ' <i class="fa fa-lock" alt="(%s)" title="%s"></i>', lang_get( 'private' ), lang_get( 'private' ) );
+			printf( ' <i class="fa fa-lock" title="%s"></i>', lang_get( 'private' ) );
 		}
 		echo '</td>';
 

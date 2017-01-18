@@ -44,7 +44,7 @@ function icon_get_status_icon( $p_icon ) {
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 	$t_priotext = get_enum_element( 'priority', $p_icon );
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
-		return ' <i class="fa ' . $t_status_icon_arr[$p_icon] . '" alt="" title="' . $t_priotext . '"></i>';
+		return ' <i class="fa ' . $t_status_icon_arr[$p_icon] . '" title="' . $t_priotext . '"></i>';
 	} else {
 		return '&#160;';
 	}
