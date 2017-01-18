@@ -65,15 +65,10 @@
 						</thead>
 						<tbody>
 							<row>
-								<entry morerows="1" valign="middle">MySQL</entry>
+								<entry>MySQL</entry>
 								<entry>mysqli</entry>
 								<entry>mysqli</entry>
 								<entry>default</entry>
-							</row>
-							<row>
-								<entry>mysql</entry>
-								<entry>mysql</entry>
-								<entry>Deprecated as of PHP 5.5.0</entry>
 							</row>
 							<row>
 								<entry>PostgreSQL</entry>
