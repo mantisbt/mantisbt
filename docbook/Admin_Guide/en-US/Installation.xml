@@ -172,7 +172,7 @@
 							<term>Mandatory extensions</term>
 							<listitem><itemizedlist>
 								<listitem><para>The extension for the RDBMS being used (
-										mysql/mysqli,
+										mysqli,
 										pgsql,
 										oci8,
 										sqlsrv
