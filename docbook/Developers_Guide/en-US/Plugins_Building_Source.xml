@@ -38,8 +38,8 @@ class ExamplePlugin extends MantisPlugin {
 
         $this->version = '1.0';     # Plugin version string
         $this->requires = array(    # Plugin dependencies
-            'MantisCore' => '1.3, &lt; 3.0',  # Should always depend on an appropriate
-                                           # version of MantisBT
+            'MantisCore' => '2.0',  # Should always depend on an appropriate
+                                    # version of MantisBT
         );
 
         $this->author = '';         # Author/team name

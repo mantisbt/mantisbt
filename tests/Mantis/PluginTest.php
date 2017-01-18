@@ -51,7 +51,7 @@ class MantisPluginTest extends PHPUnit_Framework_TestCase {
 	const REQ_21 = '2.1';
 	const REQ_210 = '2.1.0';
 	const REQ_210_DEV = '2.1.0-dev';
-	const REQ_210_A1 = '2.1.0-beta.1';
+	const REQ_210_A1 = '2.1.0-alpha.1';
 	const REQ_210_B1 = '2.1.0-beta.1';
 	const REQ_211 = '2.1.1';
 
