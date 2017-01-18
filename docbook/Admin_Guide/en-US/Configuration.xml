@@ -85,7 +85,6 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/filters.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/misc.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/cookies.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/tables.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/speed.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/reminders.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/bughistory.xml" />
