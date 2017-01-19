@@ -23,15 +23,42 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses gpc_api.php
  */
 
 require_once( 'core.php' );
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'gpc_api.php' );
 
 $t_file = __FILE__;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_show_page_header = true;
 $t_force_readonly = false;
 $t_fields_config_option = 'bug_view_page_fields';
+$f_bug_id = gpc_get_int( 'id' );
+if( isset($g_public_urls) && (ON === $g_public_urls) ) {
+	$f_bug_token = gpc_get_string( 'token', '' );
+	$f_full_view = false;
 
-define( 'BUG_VIEW_INC_ALLOW', true );
-include( dirname( __FILE__ ) . '/bug_view_inc.php' );
+	if( '' == $f_bug_token ) {
+		$f_full_view = true;
+	} else if ( auth_is_user_authenticated() ) {
+		if ( access_has_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id ) ) {
+			$f_full_view = true;
+		} 
+	} 
+} else {
+	$f_bug_token = '';
+	$f_full_view = true;
+}	
+
+if( $f_full_view ) {
+	define( 'BUG_VIEW_INC_ALLOW', true );
+	include( dirname( __FILE__ ) . '/bug_view_inc.php' );
+} else {
+	define( 'BUG_VIEW_LIMITED_INC_ALLOW', true );
+	include( dirname( __FILE__ ) . '/bug_view_limited_inc.php' );
+}  

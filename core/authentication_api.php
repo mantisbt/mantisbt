@@ -74,6 +74,9 @@ $g_cache_cookie_valid = null;
 # @global int $g_cache_current_user_id
 $g_cache_current_user_id = null;
 
+# @global int $g_login_by_bug_token
+$g_login_by_bug_token = false;
+
 /**
  * Check that there is a user logged-in and authenticated
  * If the user's account is disabled they will be logged out
@@ -85,12 +88,15 @@ $g_cache_current_user_id = null;
  * @return void
  */
 function auth_ensure_user_authenticated( $p_return_page = '' ) {
+	global $g_login_by_bug_token;
 	# if logged in
 	if( auth_is_user_authenticated() ) {
-		# check for access enabled
-		#  This also makes sure the cookie is valid
-		if( OFF == current_user_get_field( 'enabled' ) ) {
-			print_header_redirect( 'logout_page.php' );
+		if( (!isset($g_public_urls)) || ($g_public_urls !== ON) || ($g_login_by_bug_token === false) ) {
+			# check for access enabled
+			#  This also makes sure the cookie is valid
+			if( OFF == current_user_get_field( 'enabled' ) ) {
+				print_header_redirect( 'logout_page.php' );
+			}
 		}
 	} else {
 		# not logged in
@@ -112,12 +118,16 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
  * @access public
  */
 function auth_is_user_authenticated() {
-	global $g_cache_cookie_valid, $g_login_anonymous;
-	if( $g_cache_cookie_valid == true ) {
+	global $g_cache_cookie_valid, $g_login_anonymous, $g_login_by_bug_token;
+	if( (!isset($g_public_urls)) || ($g_public_urls !== ON) || ($g_login_by_bug_token === false) ) {
+		if( $g_cache_cookie_valid == true ) {
+			return $g_cache_cookie_valid;
+		}
+		$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( $g_login_anonymous ) );
 		return $g_cache_cookie_valid;
-	}
-	$g_cache_cookie_valid = auth_is_cookie_valid( auth_get_current_user_cookie( $g_login_anonymous ) );
-	return $g_cache_cookie_valid;
+	} else {
+		return true;
+	}	
 }
 
 /**
@@ -197,6 +207,12 @@ function auth_prepare_password( $p_password ) {
  * @access private
  */
 function auth_auto_create_user( $p_username, $p_password ) {
+	global $g_login_by_bug_token;
+	
+	if( $g_login_by_bug_token !== false ) {
+		return false;
+	}
+	
 	$t_login_method = config_get( 'login_method' );
 
 	if( $t_login_method == BASIC_AUTH ) {
@@ -262,6 +278,12 @@ function auth_get_user_id_from_login_name( $p_login_name ) {
  * @access public
  */
 function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
+	global $g_login_by_bug_token;
+	
+	if( $g_login_by_bug_token !== false ) {
+		return false;
+	}
+	
 	$t_user_id = auth_get_user_id_from_login_name( $p_username );
 
 	if( $t_user_id === false ) {
@@ -325,6 +347,12 @@ function auth_impersonate( $p_user_id ) {
  * @return bool true: can impersonate, false: can't.
  */
 function auth_can_impersonate( $p_user_id ) {
+	global $g_login_by_bug_token;
+	
+	if( $g_login_by_bug_token !== false ) {
+		return false;
+	}
+	
 	if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
 		return false;
 	}
@@ -699,7 +727,11 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
  * @access public
  */
 function auth_get_current_user_cookie( $p_login_anonymous = true ) {
-	global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
+	global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string, $g_login_by_bug_token;
+
+	if( $g_login_by_bug_token !== false ) {
+		return '';
+	}
 
 	# if logging in via a script, return that cookie
 	if( $g_script_login_cookie !== null ) {
@@ -761,6 +793,12 @@ function auth_set_tokens( $p_user_id ) {
  * @access public
  */
 function auth_reauthenticate() {
+	global $g_login_by_bug_token;
+	
+	if( $g_login_by_bug_token !== false ) {
+		return true;
+	}
+	
 	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
 		return true;
 	}
@@ -845,7 +883,16 @@ function auth_is_cookie_valid( $p_cookie_string ) {
  * @access public
  */
 function auth_get_current_user_id() {
-	global $g_cache_current_user_id;
+	global $g_cache_current_user_id, $g_login_by_bug_token;
+	if( $g_login_by_bug_token !== false ) {
+		if ( $g_login_by_bug_token === true ) {
+			access_denied();
+			exit();
+		}
+		current_user_set( $g_login_by_bug_token );
+		$g_cache_current_user_id = $g_login_by_bug_token;
+		return $g_login_by_bug_token;
+	}
 
 	if( null !== $g_cache_current_user_id ) {
 		return $g_cache_current_user_id;

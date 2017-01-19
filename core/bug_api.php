@@ -219,6 +219,11 @@ class BugData {
 	protected $profile_id = 0;
 
 	/**
+	 * Bug token for public access URL
+	 */
+	protected $token = null;
+
+	/**
 	 * Description
 	 */
 	protected $description = '';
@@ -534,7 +539,7 @@ class BugData {
 					      last_updated,eta, bug_text_id,
 					      os, os_build,platform, version,build,
 					      profile_id, summary, view_state, sponsorship_total, sticky, fixed_in_version,
-					      target_version, due_date
+					      target_version, due_date, token
 					    )
 					  VALUES
 					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
@@ -543,8 +548,9 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
-					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
+					      ' . db_param() . ')';
+		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date, $this->token ) );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -844,6 +850,24 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		} else {
 			return false;
+		}
+	}
+
+	if ( is_null($t_row->token) ) {
+		$t_token = crypto_generate_uri_safe_nonce( 20 );
+		
+		db_param_push();
+		$t_query = 'UPDATE {bug} SET token = ' . db_param() . ' WHERE (token IS NULL) AND (id=' . db_param() . ')';
+		db_query( $t_query, array( $t_token, $c_bug_id ) );
+		
+		db_param_push();
+		$t_query = 'SELECT * FROM {bug} WHERE id=' . db_param();
+		$t_result = db_query( $t_query, array( $c_bug_id ) );
+
+		$t_row2 = db_fetch_array( $t_result );
+
+		if( $t_row2 ) {
+			$t_row = $t_row2;
 		}
 	}
 
