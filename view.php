@@ -39,7 +39,7 @@ $t_show_page_header = true;
 $t_force_readonly = false;
 $t_fields_config_option = 'bug_view_page_fields';
 $f_bug_id = gpc_get_int( 'id' );
-if( isset($g_public_urls) && (ON === $g_public_urls) ) {
+if( (ON === config_get_global( 'public_urls')) ) {
 	$f_bug_token = gpc_get_string( 'token', '' );
 	$f_full_view = false;
 
