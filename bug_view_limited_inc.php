@@ -93,7 +93,10 @@ $t_force_readonly = true;
 # per-project function calls use the project ID of this bug.
 $g_project_override = $t_bug->project_id;
 
-if( (ON !== config_get_global( 'public_urls')) || (!isset($f_bug_token)) || (!isset($t_bug->token)) || (is_null($f_bug_token)) || (is_null($t_bug->token)) || ('' === $f_bug_token) || ($t_bug->token != $f_bug_token) ) {
+if( ( ON !== config_get_global( 'public_urls' ) ) || ( !isset( $f_bug_token ) ) || 
+  ( !isset( $t_bug->token ) ) || ( is_null( $f_bug_token ) ) || 
+  ( is_null ( $t_bug->token ) ) || ( '' === $f_bug_token ) || 
+  ( $t_bug->token != $f_bug_token ) ) {
 	access_denied(); 
 }
 
