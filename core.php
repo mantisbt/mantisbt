@@ -247,10 +247,6 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-if( !isset( $g_login_by_bug_token ) ) {
-	$g_login_by_bug_token = false;
-}
-
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'authentication_api.php' );
 

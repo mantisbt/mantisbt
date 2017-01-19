@@ -303,13 +303,13 @@ form_security_purge( 'bug_report' );
 
 layout_page_header_begin();
 
-if ( (ON === config_get_global( 'public_urls')) && isset($t_bug_data->token) && (!is_null($t_bug_data->token)) ) {	
-	if ( isset($_SERVER) ) {
-		$t_server_name = rtrim($_SERVER['SERVER_NAME'], '/') . '/';
-		$t_https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : (isset($HTTP_SERVER_VARS['HTTPS']) ? $HTTP_SERVER_VARS['HTTPS'] : 'off');
-	} elseif ( isset($HTTP_SERVER_VARS) ) {
-		$t_server_name = rtrim($HTTP_SERVER_VARS['SERVER_NAME'], '/') . '/';
-		$t_https = isset($HTTP_SERVER_VARS['HTTPS']) ? $HTTP_SERVER_VARS['HTTPS'] : 'off';
+if ( ( ON === config_get_global( 'public_urls' ) ) && isset( $t_bug_data->token ) && ( !is_null( $t_bug_data->token ) ) ) {	
+	if ( isset( $_SERVER ) ) {
+		$t_server_name = rtrim( $_SERVER['SERVER_NAME'], '/' ) . '/';
+		$t_https = isset( $_SERVER['HTTPS'] ) ? $_SERVER['HTTPS'] : ( isset( $HTTP_SERVER_VARS['HTTPS'] ) ? $HTTP_SERVER_VARS['HTTPS'] : 'off' );
+	} elseif ( isset( $HTTP_SERVER_VARS ) ) {
+		$t_server_name = rtrim( $HTTP_SERVER_VARS['SERVER_NAME'], '/' ) . '/';
+		$t_https = isset( $HTTP_SERVER_VARS['HTTPS'] ) ? $HTTP_SERVER_VARS['HTTPS'] : 'off';
 	} else {
 		$t_server_name = '';
 		$t_https = '';

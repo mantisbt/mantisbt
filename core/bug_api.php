@@ -853,7 +853,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	if ( is_null($t_row->token) ) {
+	if ( is_null( $t_row->token ) ) {
 		$t_token = crypto_generate_uri_safe_nonce( 20 );
 		
 		db_param_push();
