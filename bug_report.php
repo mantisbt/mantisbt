@@ -128,6 +128,7 @@ $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 $t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
+$t_bug_data->token                  = crypto_generate_uri_safe_nonce( 20 );
 if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
@@ -302,6 +303,29 @@ form_security_purge( 'bug_report' );
 
 layout_page_header_begin();
 
+if ( isset($g_public_urls) && (ON === $g_public_urls) && isset($t_bug_data->token) && (!is_null($t_bug_data->token)) ) {	
+	if ( isset($_SERVER) ) {
+		$t_server_name = rtrim($_SERVER['SERVER_NAME'], '/') . '/';
+		$t_https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : (isset($HTTP_SERVER_VARS['HTTPS']) ? $HTTP_SERVER_VARS['HTTPS'] : 'off');
+	} elseif ( isset($HTTP_SERVER_VARS) ) {
+		$t_server_name = rtrim($HTTP_SERVER_VARS['SERVER_NAME'], '/') . '/';
+		$t_https = isset($HTTP_SERVER_VARS['HTTPS']) ? $HTTP_SERVER_VARS['HTTPS'] : 'off';
+	} else {
+		$t_server_name = '';
+		$t_https = '';
+	} 
+	if ( $t_https == '' ) {
+		$t_share_link = '';
+	} else if ( $t_https == 'off' ) {
+		$t_share_link = 'http://';
+	} else {
+		$t_share_link = 'https://';
+	}
+	$t_share_link = $t_share_link . $t_server_name . 'view.php?id=' . $t_bug_id . '&token=' . $t_bug_data->token;
+} else {
+	$t_share_link = '';
+}	
+
 if( $f_report_stay ) {
 	$t_fields = array(
 		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
@@ -341,6 +365,11 @@ $t_buttons = array(
 	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
 	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
 );
+
+if ( $t_share_link != '' ) {
+	$t_buttons[] = array( $t_share_link, lang_get( 'share_this_bug' ) );
+}
+
 if( $f_report_stay ) {
 	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
 }

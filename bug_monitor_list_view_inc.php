@@ -110,6 +110,16 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 		<?php } ?>
 	</td>
 </tr>
+<?php if ( isset($g_public_urls) && (ON === $g_public_urls) && isset($t_share_link) && (!is_null($t_share_link)) && ($t_share_link != '') ) { ?>	
+<tr>
+	<th class="category" width="15%">
+		<?php echo lang_get( 'bug_share_url' ); ?>
+	</th>
+	<td>
+		<input type="text" size="<?php echo(strlen($t_share_link)); ?>" value="<?php echo $t_share_link; ?>" readonly="readonly" />
+	</td>
+</tr>
+<?php } ?>
 </table>
 </div>
 </div>

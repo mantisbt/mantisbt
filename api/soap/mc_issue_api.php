@@ -138,6 +138,11 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_id ) );
 	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id, $t_user_id );
+	if( isset($g_public_urls) && (ON === $g_public_urls) ) {
+		$t_issue_data['token'] = mci_null_if_empty( $t_bug->token );
+	} else {
+		$t_issue_data['token'] = mci_null_if_empty( '' );
+	}  
 
 	return $t_issue_data;
 }
