@@ -320,6 +320,9 @@ function layout_body_javascript() {
 		# moment & datetimepicker
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH );
+		
+		# listjs
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/list.js/' . LISTJS_VERSION . '/list.min.js' );
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
@@ -617,20 +620,28 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 		echo '> ' . lang_get( 'all_projects' ) . ' </a></li>' . "\n";
 		echo '<li class="divider"></li>' . "\n";
 	}
+	
+	echo '<li>';
+	echo '<div id="projcts-dropdown">';
+	echo '<input class="search" placeholder="Search" />';
 
+    echo '<ul class="list">';
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_can_report_only ) {
 			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
 			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
 		}
 
-		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
+		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="project-name active">' : '<li>';
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
 		check_selected( $p_project_id, $t_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		echo '> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+		echo ' class="project-name"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
+		#layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
 	}
+	echo '</ul>';
+	echo '</div>';
+	echo '</li>';
 }
 
 /**
