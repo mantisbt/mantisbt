@@ -48,6 +48,15 @@ $(document).ready( function() {
         ToggleDiv( t_div );
     });
 
+	var options = {
+		valueNames: [ { name: 'project-name', attr: 'href' }  ]
+	};
+
+	$(".dropdown-toggle").click(function(e) {
+		var projectsList = new List('projects-dropdown', options);
+	});
+	
+	
     $('.widget-box').on('shown.ace.widget' , function(event) {
        var t_id = $(this).attr('id');
        var t_cookie = GetCookie( "collapse_settings" );
@@ -352,6 +361,8 @@ $(document).ready( function() {
 			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
+	
+
 });
 
 function setBugLabel() {
