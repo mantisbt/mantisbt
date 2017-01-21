@@ -128,7 +128,7 @@ $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 $t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
-$t_bug_data->token                  = crypto_generate_uri_safe_nonce( 20 );
+$t_bug_data->token                  = crypto_generate_uri_safe_nonce( PUBLIC_URL_TOKEN_LENGTH );
 if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
