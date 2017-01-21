@@ -294,6 +294,21 @@ i.datetimepicker {
     color: #333333;
 }
 
+.dropdown-menu .divider {
+    margin: 2px 0;
+}
+
+.list > li > a {
+    display: block;
+    line-height: 1.4;
+    padding: 3px 11px;
+    white-space: nowrap;
+    margin: 1px 0;
+    color: #333;
+    font-weight: 400;
+    text-decoration: none;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
