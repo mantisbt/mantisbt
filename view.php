@@ -39,23 +39,23 @@ $t_show_page_header = true;
 $t_force_readonly = false;
 $t_fields_config_option = 'bug_view_page_fields';
 $f_bug_id = gpc_get_int( 'id' );
-if( ( ON === config_get_global( 'public_urls' ) ) ) {
-	$f_bug_token = gpc_get_string( 'token', '' );
-	$f_full_view = false;
+if( ( ON === config_get_global( 'public_urls_enabled' ) ) ) {
+	$g_bug_token = gpc_get_string( 'token', '' );
+	$t_full_view = false;
 
-	if( '' == $f_bug_token ) {
-		$f_full_view = true;
+	if( '' == $g_bug_token ) {
+		$t_full_view = true;
 	} else if ( auth_is_user_authenticated() ) {
 		if ( access_has_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id ) ) {
-			$f_full_view = true;
+			$t_full_view = true;
 		} 
 	} 
 } else {
-	$f_bug_token = '';
-	$f_full_view = true;
+	$g_bug_token = '';
+	$t_full_view = true;
 }	
 
-if( $f_full_view ) {
+if( $t_full_view ) {
 	define( 'BUG_VIEW_INC_ALLOW', true );
 	include( dirname( __FILE__ ) . '/bug_view_inc.php' );
 } else {

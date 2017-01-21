@@ -639,3 +639,5 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 # types, 2^31 is a safe limit to be used for all.
 define( 'DB_MAX_INT', 2147483647 );
 
+# Length of access token for "Public Share URL" feature in characters
+define ( 'PUBLIC_URL_TOKEN_LENGTH', 20 );

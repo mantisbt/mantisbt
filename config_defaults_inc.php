@@ -2951,9 +2951,9 @@ $g_anonymous_account = '';
  * description and steps to reproduce in limited view. Private bugs will show only 
  * summary, but no description and steps to reproduce. No other data nor actions are 
  * available in the limited view for public URLs.
- * @global integer $g_public_urls
+ * @global integer $g_public_urls_enabled
  */
-$g_public_urls = OFF;	
+$g_public_urls_enabled = OFF;	
 
 /**
  * Bug Linking
@@ -4239,7 +4239,6 @@ $g_global_settings = array(
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
-	'public_urls'
 );
 
 /**

@@ -118,28 +118,7 @@ $t_product_build = $t_show_product_build ? string_display_line( $t_bug->build ) 
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields )
 	&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
-if ( ( ON === config_get_global( 'public_urls' ) ) && isset( $t_bug->token ) && ( !is_null( $t_bug->token ) ) ) {	
-	if ( isset( $_SERVER ) ) {
-		$t_server_name = rtrim( $_SERVER['SERVER_NAME'], '/' ) . '/';
-		$t_https = isset( $_SERVER['HTTPS'] ) ? $_SERVER['HTTPS'] : ( isset( $HTTP_SERVER_VARS['HTTPS'] ) ? $HTTP_SERVER_VARS['HTTPS'] : 'off' );
-	} elseif ( isset($HTTP_SERVER_VARS) ) {
-		$t_server_name = rtrim( $HTTP_SERVER_VARS['SERVER_NAME'], '/' ) . '/';
-		$t_https = isset( $HTTP_SERVER_VARS['HTTPS'] ) ? $HTTP_SERVER_VARS['HTTPS'] : 'off';
-	} else {
-		$t_server_name = '';
-		$t_https = '';
-	} 
-	if ( $t_https == '' ) {
-		$t_share_link = '';
-	} else if ( $t_https == 'off' ) {
-		$t_share_link = 'http://';
-	} else {
-		$t_share_link = 'https://';
-	}
-	$t_share_link = $t_share_link . $t_server_name . 'view.php?id=' . $f_bug_id . '&token=' . $t_bug->token;
-} else {
-	$t_share_link = '';
-}	
+$t_share_link = bug_get_public_url( $t_bug );
 	
 $t_product_version_string  = '';
 $t_target_version_string   = '';

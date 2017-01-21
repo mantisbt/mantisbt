@@ -81,4 +81,3 @@ $g_return_path_email    = 'admin@example.com';	# the return address for bounced 
 
 # --- Others ---
 # $g_default_home_page = 'my_view_page.php';	# Set to name of page to go to after login
-# $g_public_urls		= OFF;	# enable usage of public share URLs. The default setting is OFF.

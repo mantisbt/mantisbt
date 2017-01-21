@@ -853,8 +853,8 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	if ( is_null( $t_row->token ) ) {
-		$t_token = crypto_generate_uri_safe_nonce( 20 );
+	if ( is_null( $t_row['token'] ) ) {
+		$t_token = crypto_generate_uri_safe_nonce( PUBLIC_URL_TOKEN_LENGTH );
 		
 		db_param_push();
 		$t_query = 'UPDATE {bug} SET token = ' . db_param() . ' WHERE (token IS NULL) AND (id=' . db_param() . ')';
@@ -873,6 +873,37 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 
 	return bug_add_to_cache( $t_row );
 }
+
+/**
+ * Returns fully formatted public share URL for a specified bug. 
+ * @param integer|string $p_bug_id_or_bugdata Identifies bug to get URL. Can be bug ID (integer), or BugData (class).
+ * @return string
+ * @access public
+ * @uses config_api.php
+ */
+function bug_get_public_url( $p_bug_id_or_bugdata ) {
+	$t_bug_id = 0;
+	$t_token = null;
+	
+	if( is_object( $p_bug_id_or_bugdata ) ) {
+		if( isset( $p_bug_id_or_bugdata->token ) ) {
+			$t_bug_id = $p_bug_id_or_bugdata->id;
+			$t_token = $p_bug_id_or_bugdata->token;
+		}
+	} elseif( intval( $p_bug_id_or_bugdata ) > 0 ) {
+		$t_bug_id = intval( $p_bug_id_or_bugdata );
+		$t_bug = bug_get( $t_bug_id );
+		$t_token = $t_bug->token;
+	}		
+	
+	if ( ( ON === config_get_global( 'public_urls_enabled' ) ) && ( !is_null( $t_token ) ) )  {	
+		$t_share_link = config_get_global( 'path' ) . 'view.php?id=' . $t_bug_id . '&token=' . $t_token;
+	} else {
+		$t_share_link = '';
+	}	
+	
+	return $t_share_link;
+}	
 
 /**
  * Cache a set of bugs

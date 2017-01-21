@@ -91,7 +91,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 	global $g_login_by_bug_token;
 	# if logged in
 	if( auth_is_user_authenticated() ) {
-		if( ( ON !== config_get_global( 'public_urls' ) ) || ( $g_login_by_bug_token === false ) ) {
+		if( ( ON !== config_get_global( 'public_urls_enabled' ) ) || ( $g_login_by_bug_token === false ) ) {
 			# check for access enabled
 			#  This also makes sure the cookie is valid
 			if( OFF == current_user_get_field( 'enabled' ) ) {
@@ -119,7 +119,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
  */
 function auth_is_user_authenticated() {
 	global $g_cache_cookie_valid, $g_login_anonymous, $g_login_by_bug_token;
-	if( ( ON !== config_get_global( 'public_urls' ) ) || ( $g_login_by_bug_token === false ) ) {
+	if( ( ON !== config_get_global( 'public_urls_enabled' ) ) || ( $g_login_by_bug_token === false ) ) {
 		if( $g_cache_cookie_valid == true ) {
 			return $g_cache_cookie_valid;
 		}

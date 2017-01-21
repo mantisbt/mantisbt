@@ -16,7 +16,7 @@
 
 /**
  * This include file prints out the bug information
- * $f_bug_id and $f_bug_token MUST be specified before the file is included
+ * $f_bug_id and $g_bug_token MUST be specified before the file is included
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -93,10 +93,9 @@ $t_force_readonly = true;
 # per-project function calls use the project ID of this bug.
 $g_project_override = $t_bug->project_id;
 
-if( ( ON !== config_get_global( 'public_urls' ) ) || ( !isset( $f_bug_token ) ) || 
-  ( !isset( $t_bug->token ) ) || ( is_null( $f_bug_token ) ) || 
-  ( is_null ( $t_bug->token ) ) || ( '' === $f_bug_token ) || 
-  ( $t_bug->token != $f_bug_token ) ) {
+if( ( ON !== config_get_global( 'public_urls_enabled' ) ) || ( !isset( $g_bug_token ) ) || 
+  ( is_null( $g_bug_token ) ) || ( is_null ( $t_bug->token ) ) || ( '' === $g_bug_token ) || 
+  ( $t_bug->token != $g_bug_token ) ) {
 	access_denied(); 
 }
 

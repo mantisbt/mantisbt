@@ -121,9 +121,9 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_public_urls</term>
+			<term>$g_public_urls_enabled</term>
 			<listitem>
-				<para>Enable usage of public share URLs. 
+				<para>Enable usage of "Public Share URL" feature. 
 					The default setting is OFF.
 				</para>
 				<para>Enabling this option will show additional "Public Share
@@ -132,7 +132,7 @@
 					"token" field in SOAP API. The URL can be copied, 
 					used and shared. 
 				</para>
-				<para>Access via public share URL does not require loggin in
+				<para>Access via public share URL does not require logging in
 					(e.g. access is anonymous). This option does not 
 					require $g_allow_anonymous_login to be enabled.
 				</para>
@@ -144,6 +144,7 @@
 					limited view. Private bugs will show only summary, but no
 					description and steps to reproduce. No other data nor
 					actions are available in the limited view for public URLs.
+					No changes are allowed via this read-only view.
 				</para>
 			</listitem>
 		</varlistentry>
