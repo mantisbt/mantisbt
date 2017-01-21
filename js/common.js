@@ -52,7 +52,7 @@ $(document).ready( function() {
         valueNames: [ 'project-link' ]
 	};
     var list = new List('projects-list', options);
-    if(list.items.length <= 10 ) {
+    if(list.items.length <= 10) {
     	$('#projects-list .searchbox').hide();
 	}
 	
