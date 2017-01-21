@@ -131,6 +131,11 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$t_string = MantisMarkdown::convert_text( $t_string );
 
+		# markdown is unable to process '<' signs within the code block tag (backticks)
+		# markdown convert '<' signs into '&amp;lt;' after the text proccessing process
+		# therefore we need restore the entity back into its original name '&lt;'
+		$t_string = str_replace( '&amp;lt;', '&lt;', $t_string );
+
 		return $t_string;
 	}
 
