@@ -332,9 +332,8 @@ function layout_body_javascript() {
 		html_javascript_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.js' );
 
 		# listjs
-        html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
-
-    }
+		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
+	}
 
 	# theme scripts
 	html_javascript_link( 'ace-extra.min.js' );
@@ -628,9 +627,9 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	echo '<li>';
 	echo '<div id="projects-list">';
 	echo '<div class="searchbox">';
-    echo '<input class="search form-control input-sm margin-left-8 margin-right-8" placeholder="' . lang_get( 'search' ) . '" />';
-    echo '</div>';
-    echo '<ul class="list dropdown-yellow no-margin">';
+	echo '<input class="search form-control input-sm margin-left-8 margin-right-8" placeholder="' . lang_get( 'search' ) . '" />';
+	echo '</div>';
+	echo '<ul class="list dropdown-yellow no-margin">';
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_can_report_only ) {
@@ -648,7 +647,7 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	echo '</ul>';
 	echo '</div>';
-    echo '</li>';
+	echo '</li>';
 }
 
 /**
