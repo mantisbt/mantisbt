@@ -49,13 +49,12 @@ $(document).ready( function() {
     });
 
 	var options = {
-		valueNames: [ { name: 'project-name', attr: 'href' }  ]
+        valueNames: [ 'project-link' ]
 	};
-
-	$(".dropdown-toggle").click(function(e) {
-		var projectsList = new List('projects-dropdown', options);
-	});
-	
+    var list = new List('projects-list', options);
+    if(list.items.length <= 10 ) {
+    	$('#projects-list .searchbox').hide();
+	}
 	
     $('.widget-box').on('shown.ace.widget' , function(event) {
        var t_id = $(this).attr('id');

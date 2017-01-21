@@ -627,7 +627,8 @@ define( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
 define( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMiqY=' );
 
 # List JS
-define( 'LISTJS_VERSION', '1.4.0' );
+define( 'LISTJS_VERSION', '1.4.1' );
+define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
 
 
 # Byte Order Markers
