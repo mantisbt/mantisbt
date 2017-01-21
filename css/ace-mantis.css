@@ -428,3 +428,6 @@ i.datetimepicker {
 
 }
 
+#news-items .widget-header p {
+    all: unset;
+}
