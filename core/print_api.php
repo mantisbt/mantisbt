@@ -498,7 +498,7 @@ function print_news_item_option_list() {
  * @return void
  */
 function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p_announcement, $p_date_posted ) {
-	$t_headline = string_display_links( $p_headline );
+	$t_headline = string_display_line_links( $p_headline );
 	$t_body = string_display_links( $p_body );
 	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
 
