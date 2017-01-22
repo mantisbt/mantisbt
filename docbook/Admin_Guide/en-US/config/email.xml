@@ -49,7 +49,7 @@
 					When enabled, the email notifications will include the full issue with
 					a hint about the change type at the top, rather than using dedicated
 					notifications that are focused on what changed.  This change can be
-					overridden in the database per user.  Default is ON.
+					overridden in the database per user.  Default is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
