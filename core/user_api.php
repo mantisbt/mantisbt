@@ -77,16 +77,20 @@ $g_user_accessible_subprojects_cache = null;
 function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	global $g_cache_user;
 
-	if( !isset( $g_cache_user[$p_user_id] ) ) {
-		user_cache_array_rows( array( $p_user_id ) );
+	$c_user_id = (int)$p_user_id;
+
+	if( !isset( $g_cache_user[$c_user_id] ) ) {
+		user_cache_array_rows( array( $c_user_id ) );
 	}
-	$t_user_row = $g_cache_user[$p_user_id];
+
+	$t_user_row = $g_cache_user[$c_user_id];
 
 	if( !$t_user_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( (integer)$p_user_id );
 			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 		}
+
 		return false;
 	}
 
