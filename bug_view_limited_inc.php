@@ -85,7 +85,7 @@ $f_bug_id = gpc_get_int( 'id' );
 bug_ensure_exists( $f_bug_id );
 
 $t_bug = bug_get( $f_bug_id, true );
-$g_login_by_bug_token = $t_bug->reporter_id;
+$g_cache_current_user_id = $t_bug->reporter_id;
 $t_force_readonly = true;
 
 # In case the current project is not the same project of the bug we are
