@@ -242,7 +242,7 @@ echo $t_form_title;
 echo '</h4>';
 echo '</div>';
 
-echo '<div class="widget-body">';
+echo '<div class="widget-body markdown-body">';
 
 echo '<div class="widget-toolbox padding-8 clearfix noprint">';
 echo '<div class="btn-group pull-left">';

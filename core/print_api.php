@@ -519,7 +519,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 			</div>
 		</div>
 
-		<div class="widget-body">
+		<div class="widget-body markdown-body">
 			<div class="widget-toolbox padding-8 clearfix">
 				<i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
 				&#160;&#160;&#160;&#160;

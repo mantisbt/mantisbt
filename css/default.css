@@ -92,3 +92,10 @@ td.print-overdue    { font-weight: bold; }
 .table-nonfluid {
    width: auto !important;
 }
+
+/* Markdown */
+.markdown-body blockquote {
+	padding: 0.13em 1em;
+	color: #777;
+	border-left: 0.25em solid #C0C0C0; font-size: 13px;
+}
