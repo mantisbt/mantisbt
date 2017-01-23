@@ -99,3 +99,8 @@ td.print-overdue    { font-weight: bold; }
 	color: #777;
 	border-left: 0.25em solid #C0C0C0; font-size: 13px;
 }
+
+.markdown-body p code {
+	color: #777;
+	background-color: #f5f5f5;
+}
