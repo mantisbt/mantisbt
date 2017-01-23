@@ -660,6 +660,7 @@ $s_changed = 'Breytt (tími)';
 $s_viewing_bugs_title = 'Skoða beiðni';
 $s_updated = 'Uppfært';
 $s_sticky = 'Sýna límd atriði';
+$s_sort = 'Raða eftir';
 $s_issue_id = 'Beiðni #';
 $s_recently_visited = 'Nýlega sótt';
 $s_none = 'enginn';

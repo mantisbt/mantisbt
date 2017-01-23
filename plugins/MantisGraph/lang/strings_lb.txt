@@ -41,23 +41,18 @@
  * @author Robby
  */
 
-$s_plugin_MantisGraph_menu_advanced_summary = 'Erweiderte Resumé';
 $s_plugin_MantisGraph_config = 'Astellung';
 $s_plugin_MantisGraph_synthesis_link = 'Synthees';
 $s_plugin_MantisGraph_status_link = 'Nom Status';
 $s_plugin_MantisGraph_priority_link = 'No Prioritéit';
 $s_plugin_MantisGraph_severity_link = 'No der Schwieregkeet';
 $s_plugin_MantisGraph_category_link = 'No Kategorie';
-$s_plugin_MantisGraph_resolution_link = 'Pro Léisung';
-$s_plugin_MantisGraph_enabled = 'Un';
-$s_plugin_MantisGraph_disabled = 'Aus';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Synthes vun de Grafiken no Prioritéit';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Synthes vun de Grafiken no Kategorie';
+$s_plugin_MantisGraph_resolution_link = 'No Léisung';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafiken no Status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafiken no Prioritéit';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafiken no Kategorie';
 $s_plugin_MantisGraph_legend_still_open = 'Nach op';
 $s_plugin_MantisGraph_legend_resolved = 'Geléist';
-$s_plugin_MantisGraph_legend_total = 'Total';
-$s_plugin_MantisGraph_legend_opened = 'Opgemaach';
-$s_plugin_MantisGraph_legend_closed = 'Zougemaach';
 $s_plugin_MantisGraph_period_none = 'Keen';
 $s_plugin_MantisGraph_period_this_week = 'Dës Woch';
 $s_plugin_MantisGraph_period_last_week = 'Lescht Woch';
@@ -66,8 +61,3 @@ $s_plugin_MantisGraph_period_this_month = 'Dëse Mount';
 $s_plugin_MantisGraph_period_last_month = 'Leschte Mount';
 $s_plugin_MantisGraph_period_this_quarter = 'Dëst Trimester';
 $s_plugin_MantisGraph_period_last_year = 'Lescht Joer';
-$s_plugin_MantisGraph_select = 'Sicht w.e.g. eraus';
-$s_plugin_MantisGraph_select_bycat = 'Resumé pro Kategorie';
-$s_plugin_MantisGraph_show_as_graph = 'Als Graphik weisen';
-$s_plugin_MantisGraph_show_as_table = 'Als Tabell weisen';
-$s_plugin_MantisGraph_show_graph = 'Graphik weisen';

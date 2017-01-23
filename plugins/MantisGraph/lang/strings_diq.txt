@@ -39,6 +39,8 @@
  * @file
  *
  * @author Erdemaslancan
+ * @author Gambollar
+ * @author Gırd
  * @author Kumkumuk
  * @author Mirzali
  */
@@ -46,32 +48,22 @@
 $s_plugin_graph_title = 'Grafikê Mantisi';
 $s_plugin_graph_description = 'Olena grafik de resimi';
 $s_plugin_MantisGraph_title = 'Grafikê Mantisi';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Hera raverşiyaye';
 $s_plugin_MantisGraph_config = 'Vıraştış';
 $s_plugin_MantisGraph_synthesis_link = 'Sentez';
-$s_plugin_MantisGraph_status_link = 'Herg Dewlet';
-$s_plugin_MantisGraph_priority_link = 'Herg verorek';
-$s_plugin_MantisGraph_severity_link = 'Herg şiddey';
-$s_plugin_MantisGraph_category_link = 'Herg kategori';
-$s_plugin_MantisGraph_resolution_link = 'Herg Agozn';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafik';
-$s_plugin_MantisGraph_library = 'Grafik kıtıbxani bıkarnê';
-$s_plugin_MantisGraph_bundled = 'Vawıyayo';
-$s_plugin_MantisGraph_window_width = 'Herayeya grafik (pikseley heta)';
-$s_plugin_MantisGraph_bar_aspect = 'Nısbetê verniya bezna grafiker (berzey/herayey)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Pela da xulasa dê herayen dı serey disleg grafiko ke bımocne yo';
-$s_plugin_MantisGraph_font = 'Font';
-$s_plugin_MantisGraph_jpgraph_path = 'Raya kıtıbxanê sistemiya JpGraph\'i';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Veng verdış kerdış: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph nerm kerdış';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Nerm kerdış (8x dehana yawas performans dano) tay asayışê grafikan keno weş.';
-$s_plugin_MantisGraph_enabled = 'Ake';
-$s_plugin_MantisGraph_disabled = 'Racne';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Weziyeti heta senteza grafiki';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Verorey heta senteza grafik';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Verorey heta senteza grafik';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Kategoriye heta senteza grafiki';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Agozni heta senteza grafik';
+$s_plugin_MantisGraph_status_link = 'Weziyeti heta';
+$s_plugin_MantisGraph_priority_link = 'Veroren heta';
+$s_plugin_MantisGraph_severity_link = 'Ciddiyeti heta';
+$s_plugin_MantisGraph_category_link = 'Kategori heta';
+$s_plugin_MantisGraph_resolution_link = 'Agozni heta';
+$s_plugin_MantisGraph_issue_trends_link = 'Namıyayışê problemi';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Weziyetê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Verorenê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Ciddiyetê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafikê kategori heta';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikê Agozni heta';
+$s_plugin_MantisGraph_graph_developer_title = 'Hetê vıtaştoğê grafiki ra';
+$s_plugin_MantisGraph_graph_reporter_title = 'Grafikê Raporteri heta';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Problemi a biy, hal biy u ê mendey';
 $s_plugin_MantisGraph_by_status_pct = 'Seyin weziyeti heta';
 $s_plugin_MantisGraph_by_priority_pct = 'Seyin verori heta';
 $s_plugin_MantisGraph_by_severity_pct = 'Verorin da seyin heta';
@@ -82,13 +74,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'Veroroi u weziyeti heta';
 $s_plugin_MantisGraph_by_resolution_mix = 'Agozi u weziyeti heta';
 $s_plugin_MantisGraph_legend_still_open = 'Hewna Akerdeyo';
 $s_plugin_MantisGraph_legend_resolved = 'Agoziya';
-$s_plugin_MantisGraph_legend_assigned = 'Çebiya';
-$s_plugin_MantisGraph_legend_total = 'Pêro piya';
-$s_plugin_MantisGraph_legend_opened = 'Abiya';
-$s_plugin_MantisGraph_legend_closed = 'Racnaye';
 $s_plugin_MantisGraph_legend_reported = 'Xeberkerd';
-$s_plugin_MantisGraph_cumulative = 'Pêserkerdış';
-$s_plugin_MantisGraph_not_enough_data = 'Grafig vıraştışi rê hend malumat çınyo';
 $s_plugin_MantisGraph_period_none = 'Çıniyo';
 $s_plugin_MantisGraph_period_this_week = 'En Hefte';
 $s_plugin_MantisGraph_period_last_week = 'Hefteyo Verên';
@@ -100,12 +86,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Çeyrego verên';
 $s_plugin_MantisGraph_period_year_to_date = 'Serra Tarix';
 $s_plugin_MantisGraph_period_select = 'Xoseri Demey';
 $s_plugin_MantisGraph_period_last_year = 'Par';
-$s_plugin_MantisGraph_select = 'weçine lutfen';
-$s_plugin_MantisGraph_select_bystatus = 'Weziyeti heta';
-$s_plugin_MantisGraph_select_summbystatus = 'Weziyeri heta Xulasa';
-$s_plugin_MantisGraph_select_bycat = 'Kategori heta Xulasa';
-$s_plugin_MantisGraph_select_both = 'Weziyeti u Kategori heta Xulasa';
-$s_plugin_MantisGraph_show_as_graph = 'Grafik dı bıasne';
-$s_plugin_MantisGraph_show_as_table = 'Tablo dı bıasne';
-$s_plugin_MantisGraph_show_graph = 'Grafiki Bıasne';
 $s_plugin_MantisGraph_graph_page = 'Grafiga Meselan de Ravêrdan';

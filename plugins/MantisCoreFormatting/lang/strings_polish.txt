@@ -50,6 +50,6 @@ $s_plugin_format_config = 'Konfiguracja';
 $s_plugin_format_process_text = 'Edycja tekstu';
 $s_plugin_format_process_text_warning_notice = 'Nie wyłączaj, chyba że dobrze wiesz, co robisz. Jeśli wyłączone, możliwe są ataki cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Przetwarzanie adresu URL';
-$s_plugin_format_process_buglinks = 'Linki MantisBT ( Zagadnienie/Komentarz )';
+$s_plugin_format_process_buglinks = 'Linki wewnętrzne MantisBT (Zgłoszenia i Komentarze do zgłoszeń)';
 $s_plugin_format_enabled = 'zał.';
 $s_plugin_format_disabled = 'wył.';

@@ -54,6 +54,7 @@
  * @author Nike
  * @author Noe
  * @author Paul Richards
+ * @author Robby
  * @author Shirayuki
  * @author Siebrand
  * @author Siebrand Mazeland
@@ -106,7 +107,6 @@ $s_bugnote = '{{Identical|Note}}';
 $s_change = '{{Identical|Change}}';
 $s_announcement = '{{Identical|Announcement}}';
 $s_bug_relationships = '{{Identical|Relationship}}';
-$s_bug_relationships_label = '{{Identical|Relationship}}';
 $s_global_categories = '{{Identical|Global category}}';
 $s_login_link = '{{Identical|Login}}';
 $s_opensearch_id_short = '{{Identical|ID}}';
@@ -126,7 +126,6 @@ S/O n\'est pas une abréviation claire.';
 $s_new_account_username = '{{Identical|Username}}';
 $s_new_account_email = '{{Identical|E-mail}}';
 $s_email_project = '{{Identical|Project}}';
-$s_email_project_label = '{{Identical|Project}}';
 $s_email_category = '{{Identical|Category}}';
 $s_email_severity = '{{Identical|Severity}}';
 $s_email_priority = '{{Identical|Priority}}';
@@ -192,17 +191,12 @@ Column header in bug report. See screenshot.
 ID = Identification number of a bug.
 {{Identical|ID}}';
 $s_category = '{{Identical|Category}}';
-$s_category_label = '{{Identical|Category}}';
 $s_severity = '{{Identical|Severity}}';
-$s_severity_label = '{{Identical|Severity}}';
 $s_last_update = '{{Identical|Last update}}';
 $s_reporter = '{{Identical|Reporter}}';
-$s_reporter_label = '{{Identical|Reporter}}';
 $s_priority = '{{Identical|Priority}}';
-$s_priority_label = '{{Identical|Priority}}';
 $s_resolution = '{{Identical|Resolution}}';
 $s_status = '{{Identical|Status}}';
-$s_status_label = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
@@ -213,13 +207,13 @@ $s_votes = '{{Identical|Vote}}';
 $s_summary = '{{Identical|Summary}}';
 $s_description = '{{Identical|Description}}';
 $s_profile = '{{Identical|Profile}}';
-$s_profile_label = '{{Identical|Profile}}';
 $s_revision = '{{Identical|Revision}}';
 $s_revision_by = 'Parameters:
 * %1$s is a date
 * %2$s is a username
 {{Identical|By}}';
 $s_revision_drop = '{{Identical|Drop}}';
+$s_activities_title = '{{Identical|Activity}}';
 $s_bug_notes_title = '{{Identical|Note}}';
 $s_delete_link = '{{Identical|Delete}}';
 $s_add_bugnote_title = '{{Identical|Add note}}';
@@ -238,6 +232,7 @@ $s_login_button = '{{Identical|Login}}';
 $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';
 $s_archives = '{{Identical|Archive}}';
+$s_rss = '{{Identical|RSS}}';
 $s_site_information = '{{Identical|Site information}}';
 $s_created_user_part1 = '{{Identical|Created user}}';
 $s_create_new_account_title = '{{Identical|Create account}}';
@@ -357,7 +352,6 @@ Option in bug report filter. See screenshot.
 {{Identical|Any}}';
 $s_all = '{{Identical|All}}';
 $s_show = '{{Identical|Show}}';
-$s_show_label = '{{Identical|Show}}';
 $s_changed = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
 $s_viewing_bugs_title = '[[File:MantisBT-filter.png|150px|right]]
@@ -367,7 +361,9 @@ Column header for column of dates. See screenshot.
 {{Identical|Updated}}';
 $s_sticky = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
-$s_sort_label = '{{Identical|Sort by}}';
+$s_sort = '[[File:MantisBT-filter.png|150px|right]]
+Filter label in bug report filter screen. See screenshot.
+{{Identical|Sort by}}';
 $s_priority_abbreviation = '{{Optional}}';
 $s_none = '{{Identical|None}}';
 $s_current = '{{Identical|Current}}';
@@ -399,6 +395,8 @@ $s_save_query = '[[File:MantisBT-filter.png|150px|right]]
 Button label on bug report filter screen. See screenshot.';
 $s_open_queries = '[[File:MantisBT-filter.png|150px|right]]
 Button label on bug report filter screen. See screenshot.';
+$s_owner = '{{Identical|Owner}}';
+$s_delete_filter_button = '{{Identical|Delete}}';
 $s_update_bug_button = '{{Identical|Edit}}';
 $s_close_bug_button = '{{Identical|Close}}';
 $s_move_bug_button = '{{Identical|Move}}';
@@ -458,7 +456,6 @@ $s_off = 'Switch condition (for filter, for example)
 {{Identical|Off}}';
 $s_wiki = '{{Identical|Wiki}}';
 $s_tags = '{{Identical|Tag}}';
-$s_tags_label = '{{Identical|Tag}}';
 $s_tag_name = '{{Identical|Name}}';
 $s_tag_creator = '{{Identical|Creator}}';
 $s_tag_created = '{{Identical|Date created}}';

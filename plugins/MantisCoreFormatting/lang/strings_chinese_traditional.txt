@@ -39,6 +39,7 @@
  * @file
  *
  * @author Cwlin0416
+ * @author Kly
  * @author Mark85296341
  */
 
@@ -50,5 +51,7 @@ $s_plugin_format_process_text_warning_notice = '請勿關閉此項目，除非�
 $s_plugin_format_process_urls = 'URL 處理';
 $s_plugin_format_process_buglinks = 'MantisBT 內部連結 (問題/問題說明)';
 $s_plugin_format_process_buglinks_info = '您的設定定義 <em>問題</em> 標籤為 "<literal>%s</literal>" 且 <em>問題說明</em> 標籤為 "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdown標記語言處理中';
+$s_plugin_format_process_markdown_info = '因樣式能由Markdown支援，文字格式語法設計可轉換為HTML。';
 $s_plugin_format_enabled = '開啟';
 $s_plugin_format_disabled = '關閉';

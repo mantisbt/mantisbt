@@ -47,6 +47,7 @@
  * @author Kongr43gpen
  * @author Omnipaedista
  * @author Protnet
+ * @author Ανώνυμος Βικιπαιδιστής
  */
 
 $s_actiongroup_menu_move = 'Μετακίνηση';
@@ -102,7 +103,6 @@ $s_stays_on_top = 'Παραμονή στο Προσκήνιο';
 $s_delete_bugnote_button = 'Διαγραφή Σημείωσης';
 $s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το θέμα;';
 $s_bug_relationships = 'Σχέσεις';
-$s_bug_relationships_label = 'Σχέσεις:';
 $s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
 $s_empty_password_button = 'Χρήση Κενού Κωδικού';
 $s_reauthenticate_title = 'Επικυρώστε';
@@ -606,6 +606,7 @@ $s_changed = 'Μεταβολή(ώρες)';
 $s_viewing_bugs_title = 'Προβολή Θεμάτων';
 $s_updated = 'Ενημέρωση';
 $s_sticky = 'Προβολή Σημειωμένων Θεμάτων';
+$s_sort = 'Ιεράρχηση';
 $s_recently_visited = 'Πρόσφατες επισκέψεις';
 $s_none = 'Κανένα';
 $s_current = 'Παρόν';
@@ -804,3 +805,6 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Τα δεδομένα δεν ταιριάζουν με κανένα λογαριασμό';
+$s_dropzone_invalid_file_type = 'Δεν μπορείτε να ανεβάσετε τα αρχεία αυτού του τύπου.';
+$s_dropzone_max_files_exceeded = 'Δεν μπορείτε να ανεβάσετε άλλα αρχεία.';
+$s_dropzone_not_supported = 'Το Dropzone.js δεν υποστηρίζει παλαιότερα προγράμματα περιήγησης!';

@@ -31,13 +31,14 @@
  * **********************************************************************
  */
 /** Dutch (Nederlands)
- *
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Gerardwijngaarden
  * @author HanV
  * @author Hansmuller
  * @author McDutchie
@@ -74,6 +75,8 @@ $s_actiongroup_error_issue_is_readonly = 'Melding is alleen-lezen.';
 $s_all_projects = 'Alle projecten';
 $s_move_bugs = 'Meldingen verplaatsen';
 $s_operation_successful = 'Handeling uitgevoerd.';
+$s_operation_warnings = 'Bewerking is voltooid met waarschuwingen.';
+$s_operation_failed = 'De bewerking is niet gelukt.';
 $s_date_order = 'Datumvolgorde';
 $s_print_all_bug_page_link = 'Rapporten afdrukken';
 $s_csv_export = 'Naar CSV exporteren';
@@ -113,7 +116,6 @@ $s_bugnote_link_title = 'Directe koppeling naar opmerkingen';
 $s_delete_bugnote_button = 'Reactie verwijderen';
 $s_delete_bugnote_sure_msg = 'Weet u zeker dat u deze reactie wilt verwijderen?';
 $s_bug_relationships = 'Relaties';
-$s_bug_relationships_label = 'Relaties:';
 $s_empty_password_sure_msg = 'De gebruiker heeft een leeg wachtwoord. Weet u dat zeker?';
 $s_empty_password_button = 'Leeg wachtwoord gebruiken';
 $s_reauthenticate_title = 'Aanmelden';
@@ -264,7 +266,6 @@ $s_email_notification_title_for_action_monitor = 'Melding %1$s wordt nu gevolgd 
 $s_email_reporter = 'Aanmelder';
 $s_email_handler = 'Toegewezen aan';
 $s_email_project = 'Project';
-$s_email_project_label = 'Project:';
 $s_email_bug = 'Meldingsnummer';
 $s_email_category = 'Categorie';
 $s_email_reproducibility = 'Reproduceerbaarheid';
@@ -348,7 +349,6 @@ $s_profile_added_msg = 'Profiel toegevoegd...';
 $s_profile_deleted_msg = 'Profiel verwijderd...';
 $s_edit_profile_title = 'Profiel bewerken';
 $s_platform = 'Platform';
-$s_platform_label = 'Platform:';
 $s_additional_description = 'Additionele gegevens';
 $s_update_profile_button = 'Profiel bijwerken';
 $s_profile_defaulted_msg = 'Standaard profiel aangepast...';
@@ -439,36 +439,24 @@ $s_update_simple_link = 'Eenvoudig bijwerken';
 $s_updating_bug_advanced_title = 'Bezig met het bijwerken van de melding';
 $s_id = 'Meldingsnummer';
 $s_category = 'Categorie';
-$s_category_label = 'Categorie:';
 $s_severity = 'Impact';
-$s_severity_label = 'Impact:';
 $s_reproducibility = 'Reproduceerbaarheid';
 $s_date_submitted = 'Aangemeld op';
 $s_last_update = 'Gewijzigd op';
 $s_reporter = 'Aanmelder';
-$s_reporter_label = 'Aanmelder:';
 $s_assigned_to = 'Toegewezen aan';
-$s_assigned_to_label = 'Toegewezen aan:';
 $s_priority = 'Prioriteit';
-$s_priority_label = 'Prioriteit:';
 $s_resolution = 'Oplossing';
-$s_resolution_label = 'Oplossing:';
 $s_status = 'Status';
-$s_status_label = 'Status:';
 $s_duplicate_id = 'Nummer van duplicaatrapport';
 $s_os = 'OS';
-$s_os_label = 'OS:';
 $s_projection = 'Projectie';
 $s_os_version = 'OS-versie';
-$s_os_version_label = 'OS-versie:';
 $s_eta = 'Verwachte oplostijd';
 $s_product_version = 'Productversie';
-$s_product_version_label = 'Productversie:';
 $s_build = 'Build';
 $s_fixed_in_version = 'Opgelost in versie';
-$s_fixed_in_version_label = 'Opgelost in versie:';
 $s_target_version = 'Geplande versie';
-$s_target_version_label = 'Geplande versie:';
 $s_votes = 'Stemmen';
 $s_summary = 'Samenvatting';
 $s_description = 'Beschrijving';
@@ -476,7 +464,6 @@ $s_steps_to_reproduce = 'Stappen om te reproduceren';
 $s_update_information_button = 'Gegevens bijwerken';
 $s_sticky_issue = 'Stickymelding';
 $s_profile = 'Profiel';
-$s_profile_label = 'Profiel:';
 $s_updating_bug_simple_title = 'Bezig met het bijwerken van de melding';
 $s_view_revisions = 'Versies bekijken';
 $s_view_num_revisions = '%1$d versies bekijken';
@@ -705,7 +692,6 @@ $s_edit_project_title = 'Project bewerken';
 $s_project_name = 'Projectnaam';
 $s_project_name_label = 'Projectnaam:';
 $s_view_status = 'Zichtbaarheid';
-$s_view_status_label = 'Zichtbaarheid:';
 $s_public = 'openbaar';
 $s_private = 'Intern';
 $s_update_project_button = 'Project bijwerken';
@@ -911,19 +897,16 @@ $s_orct = '(open/opgelost/gesloten/totaal)';
 $s_any = 'alle';
 $s_all = 'alle';
 $s_show = 'Bekijken';
-$s_show_label = 'Weergeven:';
 $s_changed = 'Aangepast uitlichten (uren)';
-$s_changed_label = 'Aangepast uitlichten (uren):';
 $s_viewing_bugs_title = 'Meldingen bekijken';
 $s_updated = 'Bijgewerkt';
 $s_sticky = 'Sticky meldingen weergeven';
-$s_sticky_label = 'Sticky-meldingen weergeven:';
-$s_sort_label = 'Sorteren op:';
+$s_sort = 'Sorteren op';
 $s_issue_id = 'Meldingsnr.';
 $s_recently_visited = 'Recent bekeken';
 $s_priority_abbreviation = 'P';
-$s_note_user_id_label = 'Opmerking van:';
-$s_filter_match_type_label = 'Zoektype:';
+$s_note_user_id = 'Reactie van';
+$s_filter_match_type = 'Zoektype';
 $s_filter_match_all = 'Alle voorwaarden';
 $s_filter_match_any = 'Elke voorwaarde';
 $s_none = 'geen';
@@ -938,7 +921,6 @@ $s_last = 'Laatste';
 $s_start_date_label = 'Begindatum:';
 $s_end_date_label = 'Einddatum:';
 $s_use_date_filters = 'Datumfilters gebruiken';
-$s_use_date_filters_label = 'Datumfilters gebruiken:';
 $s_yes = 'Ja';
 $s_no = 'Nee';
 $s_open_filters = 'Filter wijzigen';
@@ -961,7 +943,6 @@ $s_open_queries = 'Filters beheren';
 $s_query_delete_msg = 'Weet u zeker dat u dit filter wilt verwijderen?';
 $s_view_simple_link = 'Eenvoudig overzicht';
 $s_product_build = 'Productbuild';
-$s_product_build_label = 'Productbuild:';
 $s_system_profile = 'Systeembeschrijving';
 $s_update_bug_button = 'Bewerken';
 $s_bug_assign_to_button = 'Toewijzen aan:';
@@ -1020,7 +1001,6 @@ $s_field_delete_button = 'Gebruikersveld verwijderen';
 $s_confirm_custom_field_unlinking = 'Weet u zeker dat u dit aangepaste veld wilt ontkoppelen van het project? De waarden worden niet verwijderd zo lang als het aangepaste veld zelf niet wordt verwijderd.';
 $s_field_remove_button = 'Gebruikersveld verwijderen';
 $s_hide_status = 'Status verbergen';
-$s_hide_status_label = 'Status verbergen:';
 $s_filter_closed = 'Gesloten';
 $s_filter_resolved = 'Opgelost';
 $s_hide_closed = 'Gesloten verbergen';
@@ -1029,7 +1009,6 @@ $s_and_above = 'en hoger';
 $s_advanced_filters = 'Uitgebreide filters';
 $s_simple_filters = 'Eenvoudige filters';
 $s_monitored_by = 'Gevolgd door';
-$s_monitored_by_label = 'Gevolgd door:';
 $s_attachments = 'bijlage(n)';
 $s_bytes = 'bytes';
 $s_kb = 'KB';
@@ -1153,7 +1132,6 @@ $s_on = 'Op';
 $s_off = 'Uit';
 $s_wiki = 'Wiki';
 $s_tags = 'Labels';
-$s_tags_label = 'Labels:';
 $s_tag_details = 'Tagdetails: %1$s';
 $s_tag_id = 'Tagnummer';
 $s_tag_name = 'Naam';
@@ -1244,7 +1222,7 @@ $s_timeline_issue_tagged = '<span class="username">%1$s</span> heeft de melding 
 $s_timeline_issue_untagged = '<span class="username">%1$s</span> heeft <span class="tag_name">%3$s</span> verwijderd van de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_resolved = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> opgelost';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> gesloten';
-$s_timeline_issue_reopened = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> heropent';
+$s_timeline_issue_reopened = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> heropend.';
 $s_timeline_issue_assigned = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> toegewezen aan <span class="username">%3$s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> heeft verantwoordelijkheid genomen voor de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unassigned = '<span class="username">%1$s</span> heeft de toewijzing voor de melding <span class="issue_id">%2$s</span> verwijderd';
@@ -1399,3 +1377,4 @@ $s_dropzone_cancel_upload = 'Uploaden annuleren';
 $s_dropzone_cancel_upload_confirmation = 'Weet u zeker dat u het uploaden wilt annuleren?';
 $s_dropzone_remove_file = 'Bestand verwijderen';
 $s_dropzone_max_files_exceeded = 'U kunt geen bestanden meer uploaden.';
+$s_dropzone_not_supported = 'Dropzone.js ondersteunt oudere browsers niet.';
