@@ -172,9 +172,14 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 								<?php echo lang_get( 'view_status' ) ?>:
 							</td>
 							<td>
-								<label class="inline">
-									<input type="checkbox" class="ace input-sm" name="is_public" value="1" <?php check_checked( true == filter_get_field( $f_filter_id, 'is_public' ) ) ?>>
-								<span class="lbl"> <?php echo lang_get( 'public' ) ?></span>
+								<label>
+									<input type="radio" class="ace" name="is_public" value="1" <?php check_checked( (bool)filter_get_field( $f_filter_id, 'is_public' ), true ) ?> />
+									<span class="lbl"> <?php echo lang_get( 'public' ) ?> </span>
+								</label>
+								&#160;&#160;&#160;&#160;
+								<label>
+									<input type="radio" class="ace" name="is_public" value="0" <?php check_checked( (bool)filter_get_field( $f_filter_id, 'is_public' ), false ) ?> />
+									<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
 								</label>
 							</td>
 						</tr>
