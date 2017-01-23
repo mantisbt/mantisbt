@@ -138,11 +138,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_id ) );
 	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id, $t_user_id );
-	if( ( ON === config_get_global( 'public_urls_enabled' ) ) ) {
-		$t_issue_data['token'] = mci_null_if_empty( $t_bug->token );
-	} else {
-		$t_issue_data['token'] = null;
-	}  
+	$t_issue_data['token'] = mci_null_if_empty( bug_get_token( $t_bug->id ) );
 
 	return $t_issue_data;
 }
@@ -771,7 +767,6 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		 access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 		$t_bug_data->sticky = $p_issue['sticky'];
 	}
-	$t_bug_data->token = crypto_generate_uri_safe_nonce( PUBLIC_URL_TOKEN_LENGTH );
 
 	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = SoapObjectsFactory::parseDateTimeString( $p_issue['due_date'] );
@@ -1604,11 +1599,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
 		$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
 		$t_issue['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_data->id ) );
-		if( ( ON === config_get_global( 'public_urls_enabled' ) ) ) {
-			$t_issue['token'] = mci_null_if_empty( $p_issue_data->token );
-		} else {
-			$t_issue['token'] = null;
-		}  
+		$t_issue['token'] = mci_null_if_empty( bug_get_token( $p_issue_data->id ) );
 
 		return $t_issue;
 }

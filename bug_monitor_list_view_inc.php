@@ -116,7 +116,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 		<?php echo lang_get( 'bug_share_url' ); ?>
 	</th>
 	<td>
-		<input type="text" size="<?php echo( strlen( $t_share_link ) + 2 ); ?>" value="<?php echo( $t_share_link ); ?>" readonly="readonly" />
+		<input type="text" size="<?php echo( strlen( $t_share_link ) + 4 ); ?>" value="<?php echo( $t_share_link ); ?>" readonly="readonly" />
 	</td>
 </tr>
 <?php } ?>

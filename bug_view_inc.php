@@ -118,7 +118,7 @@ $t_product_build = $t_show_product_build ? string_display_line( $t_bug->build ) 
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields )
 	&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
-$t_share_link = bug_get_public_url( $t_bug );
+$t_share_link = bug_get_public_url( $f_bug_id );
 	
 $t_product_version_string  = '';
 $t_target_version_string   = '';

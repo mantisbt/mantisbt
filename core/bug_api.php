@@ -219,11 +219,6 @@ class BugData {
 	protected $profile_id = 0;
 
 	/**
-	 * Bug token for public access URL
-	 */
-	protected $token = null;
-
-	/**
 	 * Description
 	 */
 	protected $description = '';
@@ -533,13 +528,13 @@ class BugData {
 		# Insert the rest of the data
 		db_param_push();
 		$t_query = 'INSERT INTO {bug}
-					    ( project_id,reporter_id, handler_id,duplicate_id,
-					      priority,severity, reproducibility,status,
-					      resolution,projection, category_id,date_submitted,
-					      last_updated,eta, bug_text_id,
-					      os, os_build,platform, version,build,
-					      profile_id, summary, view_state, sponsorship_total, sticky, fixed_in_version,
-					      target_version, due_date, token
+					    ( project_id, reporter_id, handler_id, duplicate_id,
+					      priority, severity, reproducibility, status,
+					      resolution, projection, category_id, date_submitted,
+					      last_updated, eta, bug_text_id, os, 
+						  os_build, platform, version, build,
+					      profile_id, summary, view_state, sponsorship_total, 
+						  sticky, fixed_in_version, target_version, due_date
 					    )
 					  VALUES
 					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
@@ -548,9 +543,16 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
-					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
-					      ' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date, $this->token ) );
+					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+		db_query( $t_query, array( 
+			$this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, 
+			$this->priority, $this->severity, $this->reproducibility, $t_status, 
+			$this->resolution, $this->projection, $this->category_id, $this->date_submitted, 
+			$this->last_updated, $this->eta, $t_text_id, $this->os, 
+			$this->os_build, $this->platform, $this->version, $this->build, 
+			$this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, 
+			$this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date 
+			) );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -853,53 +855,64 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	if ( is_null( $t_row['token'] ) ) {
-		$t_token = crypto_generate_uri_safe_nonce( PUBLIC_URL_TOKEN_LENGTH );
-		
-		db_param_push();
-		$t_query = 'UPDATE {bug} SET token = ' . db_param() . ' WHERE (token IS NULL) AND (id=' . db_param() . ')';
-		db_query( $t_query, array( $t_token, $c_bug_id ) );
-		
-		db_param_push();
-		$t_query = 'SELECT * FROM {bug} WHERE id=' . db_param();
-		$t_result = db_query( $t_query, array( $c_bug_id ) );
-
-		$t_row2 = db_fetch_array( $t_result );
-
-		if( $t_row2 ) {
-			$t_row = $t_row2;
-		}
-	}
-
 	return bug_add_to_cache( $t_row );
 }
 
 /**
+ * Returns access token for public share URL for a specified bug. 
+ * @param integer $p_bug_id Identifies bug to get URL.
+ * @return string Returns string token or NULL.
+ * @access public
+ * @uses config_api.php
+ */
+function bug_get_token( $p_bug_id ) {
+	if( ON !== config_get_global( 'public_urls_enabled' ) ) {
+		return null;
+	}
+	
+	# select existing token
+	db_param_push();
+	$t_query = 'SELECT token FROM {bug_token} WHERE bug_id = ' . db_param();
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
+	$t_token = db_result( $t_result );
+	if( false === $t_token ) {
+		# token was not created - create it
+		db_param_push();
+		$t_query = 'INSERT INTO {bug_token} ( bug_id, token ) VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+		db_query( $t_query, array( $p_bug_id, crypto_generate_uri_safe_nonce( PUBLIC_URL_TOKEN_LENGTH ) ) );
+		
+		# this is just in case of concurrency problems
+		db_param_push();
+		$t_query = 'SELECT token FROM {bug_token} WHERE bug_id = ' . db_param();
+		$t_result = db_query( $t_query, array( $p_bug_id ) );
+		$t_token = db_result( $t_result );
+		if( false === $t_token ) {
+			# something went seriosly wrong
+			$t_token = null;
+		}	
+	}
+		
+	return $t_token;
+}
+
+/**
  * Returns fully formatted public share URL for a specified bug. 
- * @param integer|string $p_bug_id_or_bugdata Identifies bug to get URL. Can be bug ID (integer), or BugData (class).
+ * @param integer $p_bug_id Identifies bug to get URL. 
  * @return string
  * @access public
  * @uses config_api.php
  */
-function bug_get_public_url( $p_bug_id_or_bugdata ) {
-	$t_bug_id = 0;
-	$t_token = null;
+function bug_get_public_url( $p_bug_id ) {
+	if( ON !== config_get_global( 'public_urls_enabled' ) ) {
+		return '';
+	}
 	
-	if( is_object( $p_bug_id_or_bugdata ) ) {
-		if( isset( $p_bug_id_or_bugdata->token ) ) {
-			$t_bug_id = $p_bug_id_or_bugdata->id;
-			$t_token = $p_bug_id_or_bugdata->token;
-		}
-	} elseif( intval( $p_bug_id_or_bugdata ) > 0 ) {
-		$t_bug_id = intval( $p_bug_id_or_bugdata );
-		$t_bug = bug_get( $t_bug_id );
-		$t_token = $t_bug->token;
-	}		
+    $t_token = bug_get_token( $p_bug_id );
 	
-	if ( ( ON === config_get_global( 'public_urls_enabled' ) ) && ( !is_null( $t_token ) ) )  {	
-		$t_share_link = config_get_global( 'path' ) . 'view.php?id=' . $t_bug_id . '&token=' . $t_token;
-	} else {
+	if ( is_null( $t_token ) ) {	
 		$t_share_link = '';
+	} else {
+		$t_share_link = config_get_global( 'path' ) . 'view.php?id=' . $p_bug_id . '&token=' . $t_token;
 	}	
 	
 	return $t_share_link;
@@ -1454,6 +1467,11 @@ function bug_delete( $p_bug_id ) {
 	$t_query = 'DELETE FROM {bug_text} WHERE id=' . db_param();
 	db_query( $t_query, array( $t_bug_text_id ) );
 
+	# Delete public share URL token
+	db_param_push();
+	$t_query = 'DELETE FROM {bug_token} WHERE bug_id=' . db_param();
+	db_query( $t_query, array( $c_bug_id ) );
+	
 	# Delete the bug entry
 	db_param_push();
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();

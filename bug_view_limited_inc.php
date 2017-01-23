@@ -92,10 +92,10 @@ $t_force_readonly = true;
 # viewing, override the current project. This ensures all config_get and other
 # per-project function calls use the project ID of this bug.
 $g_project_override = $t_bug->project_id;
-
-if( ( ON !== config_get_global( 'public_urls_enabled' ) ) || ( !isset( $g_bug_token ) ) || 
-  ( is_null( $g_bug_token ) ) || ( is_null ( $t_bug->token ) ) || ( '' === $g_bug_token ) || 
-  ( $t_bug->token != $g_bug_token ) ) {
+$t_bug_token = bug_get_token( $f_bug_id );
+if( !isset( $g_bug_token ) || is_null( $g_bug_token ) || 
+	is_null ( $t_bug_token ) || ( '' === $g_bug_token ) || 
+	( $t_bug_token != $g_bug_token ) ) {
 	access_denied(); 
 }
 
@@ -211,7 +211,7 @@ $t_show_severity = false;
 $t_severity = $t_show_severity ? string_display_line( get_enum_element( 'severity', $t_bug->severity ) ) : '';
 $t_show_reproducibility = false;
 $t_reproducibility = $t_show_reproducibility ? string_display_line( get_enum_element( 'reproducibility', $t_bug->reproducibility ) ): '';
-$t_show_status = false;
+$t_show_status = in_array( 'status', $t_fields );
 $t_status = $t_show_status ? string_display_line( get_enum_element( 'status', $t_bug->status ) ) : '';
 $t_show_resolution = true; 
 $t_resolution = $t_show_resolution ? string_display_line( get_enum_element( 'resolution', $t_bug->resolution ) ) : '';
@@ -288,13 +288,13 @@ echo '<table class="table table-bordered table-condensed">';
 
 echo '<tbody>';
 
-if( $t_show_id || $t_show_project || $t_show_category || $t_show_resolution || $t_show_date_submitted || $t_show_last_updated ) {
+if( $t_show_id || $t_show_project || $t_show_status || $t_show_resolution || $t_show_date_submitted || $t_show_last_updated ) {
 	# Labels
 	echo '<tr class="bug-header">';
 	echo '<th class="bug-id category" width="15%">', $t_show_id ? lang_get( 'id' ) : '', '</th>';
 	echo '<th class="bug-project category" width="20%">', $t_show_project ? lang_get( 'email_project' ) : '', '</th>';
+	echo '<th class="bug-status category" width="15%">', $t_show_status ? lang_get( 'status' ) : '', '</th>';
 	echo '<th class="bug-resolution category" width="15%">', $t_show_resolution ? lang_get( 'resolution' ) : '', '</th>';
-	echo '<th class="bug-category category" width="15%">', $t_show_category ? lang_get( 'category' ) : '', '</th>';
 	echo '<th class="bug-date-submitted category" width="15%">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</th>';
 	echo '<th class="bug-last-modified category" width="20%">', $t_show_last_updated ? lang_get( 'last_update' ) : '','</th>';
 	echo '</tr>';
@@ -307,11 +307,16 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_resolution || $
 	# Project
 	echo '<td class="bug-project">', $t_project_name, '</td>';
 
+	# choose color based on status
+	$t_status_label = html_get_status_css_class( $t_bug->status );
+
+	# Status
+	echo '<td class="bug-status">';
+	echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
+	echo $t_status, '</td>';
+	
 	# Resolution
 	echo '<td class="bug-resolution">', $t_resolution, '</td>';
-
-	# Category
-	echo '<td class="bug-category">', $t_category, '</td>';
 
 	# Date Submitted
 	echo '<td class="bug-date-submitted">', $t_date_submitted, '</td>';
@@ -419,24 +424,18 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 }
 
 #
-# Status, View Status
+# Category, View Status
 #
 
-if( $t_show_status || $t_show_view_state ) {
+if( $t_show_category || $t_show_view_state ) {
 	echo '<tr>';
 
 	$t_spacer = 2;
 
-	# Status
-	if( $t_show_status ) {
-		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
-
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status );
-
-		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
-		echo $t_status, '</td>';
+	# Category
+	if( $t_show_category ) {
+		echo '<th class="bug-category category">', lang_get( 'category' ), '</th>';
+		echo '<td class="bug-category">', $t_category, '</td>';
 	} else {
 		$t_spacer += 2;
 	}

@@ -885,8 +885,10 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 # Release marker: 1.3.0
 
 # Per-bug access token for "public share URL" feature, #22203
-$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
-	token					C(20)	NULL DEFAULT NULL" 
+$g_upgrade[210] = array('CreateTableSQL', array( db_get_table( 'bug_token' ), "
+	bug_id					I		UNSIGNED NOTNULL PRIMARY,
+	token					C(20)	NOTNULL",
+	$t_table_options
 	) );
 
 # ----------------------------------------------------------------------------
