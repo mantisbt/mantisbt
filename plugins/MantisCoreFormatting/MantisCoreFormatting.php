@@ -116,14 +116,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		$t_string = $p_string;
 
-		# restore and allows img tag to display
-		$t_string = preg_replace_callback( "/&quot;|'/",
-			function ( ) {
-				return "";
-			},
-			str_replace('/">', '">', preg_replace( '#&lt;img.+?src=(.*).*?&gt;#i', '<img src="$1">', $t_string ))
-		);
-
 		# We need to enabled quote conversion
 		# "> quote or >quote" is part of an html tag
 		# Make sure to replaced the restored tags with ">"
