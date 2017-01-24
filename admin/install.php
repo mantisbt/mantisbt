@@ -1203,10 +1203,6 @@ if( 6 == $t_install_state ) {
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
 
-
-<!-- Checking register_globals are off -->
-<?php print_test( 'Checking for register_globals are off for mantis', !ini_get_bool( 'register_globals' ), false, 'change php.ini to disable register_globals setting' )?>
-
 <tr>
 	<td>
 		Attempting to connect to database as user

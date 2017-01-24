@@ -82,11 +82,6 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
-
-# ########################################
-# SECURITY NOTE: cache globals are initialized here to prevent them
-#   being spoofed if register_globals is turned on
-
 $g_cache_custom_field = array();
 $g_cache_cf_list = null;
 $g_cache_cf_linked = array();
@@ -597,7 +592,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		return true;
 	}
 
-	# Reset the parameter count manually since the query was not executed	
+	# Reset the parameter count manually since the query was not executed
 	db_param_pop();
 
 	return false;

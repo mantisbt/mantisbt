@@ -1544,8 +1544,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_where_params[] = strtotime( $t_end_string );
 		array_push( $t_project_where_clauses, '({bug}.date_submitted BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
 	}
-	
-	
+
+
 	# last update date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] )
 			&& is_numeric( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
@@ -2503,7 +2503,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	echo '<div class="form-inline">';
-	echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" 
+	echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '"
 		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
@@ -2566,8 +2566,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 # CACHING
 # ==========================================================================
 
-# @internal SECURITY NOTE: cache globals are initialized here to prevent them
-# being spoofed if register_globals is turned on.
 # We cache filter requests to reduce the number of SQL queries
 # @global array $g_cache_filter
 # @global array $g_cache_filter_db_filters
@@ -3180,7 +3178,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	$f_last_updated_end_day				= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_DAY, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 	$f_last_updated_start_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_START_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 	$f_last_updated_end_year			= gpc_get_int( FILTER_PROPERTY_LAST_UPDATED_END_YEAR, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
-	
+
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
 
