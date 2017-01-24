@@ -131,10 +131,9 @@ class MantisPluginTest extends PHPUnit_Framework_TestCase {
 			array( '2.1.0', self::REQ_210_B1, true ),
 			array( '2.1.0', self::REQ_211, false ),
 			array( '2.1.0-dev', self::REQ_21, true ),
-			array( '2.1.0-dev', self::REQ_210, true ),
+			array( '2.1.0-dev', self::REQ_210, false ),
 			array( '2.1.0-dev', self::REQ_210_DEV, true ),
-			array( '2.1.0-dev', self::REQ_210_A1, true ),
-			array( '2.1.0-dev', self::REQ_210_B1, true ),
+			array( '2.1.0-dev', self::REQ_210_A1, false ),
 			array( '2.1.0-alpha.1', self::REQ_21, true ),
 			array( '2.1.0-alpha.1', self::REQ_210_DEV, true ),
 
