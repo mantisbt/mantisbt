@@ -318,6 +318,11 @@ i.datetimepicker {
     background-color: #f5f5f5;
 }
 
+.projects-searchbox input {
+    height: 30px;
+    margin: 6px 10px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

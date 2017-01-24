@@ -14,12 +14,14 @@ phpmailer       | PHPMailer       | 5.2.22    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
 securimage      | PHP Captcha     | 3.6.5     | patched [1]
+list.js         | List.js         | 1.4.1     | unpatched [3]
 
 **Notes**
 
 1. Library is tracked as a *GIT submodule*; refer to the corresponding
    repository for details
 2. removed `__autoload` function
+3. Javascript or JQuery plugin
 
 
 Upstream projects
@@ -34,3 +36,4 @@ phpmailer   | https://github.com/PHPMailer/PHPMailer
 rssbuilder  | http://code.google.com/p/flaimo-php/
 utf8        | http://sourceforge.net/projects/phputf8
 secureimage | http://www.phpcaptcha.org/ - https://github.com/mantisbt/securimage
+listjs      | http://listjs.com/ - https://github.com/javve/list.js
