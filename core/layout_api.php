@@ -626,8 +626,8 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	echo '<li>';
 	echo '<div id="projects-list">';
-	echo '<div class="searchbox">';
-	echo '<input class="search form-control input-sm margin-left-8 margin-right-8" placeholder="' . lang_get( 'search' ) . '" />';
+	echo '<div class="projects-searchbox">';
+	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
 	echo '</div>';
 	echo '<ul class="list dropdown-yellow no-margin">';
 
