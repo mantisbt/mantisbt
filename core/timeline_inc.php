@@ -32,7 +32,6 @@ $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 
-
 <div id="timeline" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
@@ -49,7 +48,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	<div class="widget-body">
 		<div class="widget-toolbox">
 			<div class="btn-toolbar">
-				<?php
+<?php
 				$t_short_date_format = config_get( 'short_date_format' );
 				echo '&#160;&#160;';
 				echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
@@ -67,20 +66,30 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
 						$t_next_days . '">' . lang_get( 'next' ) . '</a>';
 				}
+				echo '</div>';
+?>
+			</div>
+		</div>
 
-			echo '</div></div></div><div class="widget-main no-padding"><div class="profile-feed">';
+		<div class="widget-main no-padding">
+			<div class="profile-feed">
+			</div>
+		</div>
 
-	echo '</div></div>';
-
+<?php
 	if( !$f_all && count( $t_events ) > MAX_EVENTS ) {
 		$t_events = array_slice( $t_events, 0, MAX_EVENTS );
 		timeline_print_events( $t_events );
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
-		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
+		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days='
+			. $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
 		echo '</div>';
 		echo '</div>';
 	} else {
 		timeline_print_events( $t_events );
 	}
-echo '</div></div>';
+?>
+
+	</div>
+</div>
