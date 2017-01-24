@@ -51,9 +51,9 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <?php
 				$t_short_date_format = config_get( 'short_date_format' );
 				echo '&#160;&#160;';
-				echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
+				echo '<span class="label label-grey"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
 				echo  ' .. ';
-				echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_end_time ) . ' </span>';
+				echo '<span class="label label-grey"> ' . date( $t_short_date_format, $t_end_time ) . ' </span>';
 				echo '&#160;&#160;';
 
 				echo '<div class="btn-group">';
