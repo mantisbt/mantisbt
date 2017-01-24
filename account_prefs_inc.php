@@ -334,7 +334,12 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 				<?php echo lang_get( 'email_full_issue_details' ) ?>
 			</td>
 			<td>
-				<input id="email-full-issue" type="checkbox" name="email_full_issue" <?php check_checked( $t_email_full_issue, ON ); ?> />
+				<label class="inline">
+					<input type="checkbox" class="ace input-sm"
+						id="email-full-issue" name="email_full_issue"
+						<?php check_checked( $t_email_full_issue, ON ); ?> />
+					<span class="lbl"></span>
+				</label>
 			</td>
 		</tr>
 <?php } else { ?>
