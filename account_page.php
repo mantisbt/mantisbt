@@ -107,6 +107,9 @@ $t_reset_password = $u_username == 'administrator' && auth_does_password_match( 
 $t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 $t_force_pw_reset = false;
 
+# Only show the update button if there is something to update.
+$t_show_update_button = false;
+
 if( $t_reset_password && $t_can_change_password ) {
 	?>
 	<div class="alert alert-danger">
