@@ -447,88 +447,20 @@ function plugin_is_loaded( $p_base_name ) {
 }
 
 /**
- * Converts a version string to an array, using some punctuation and
- * number/lettor boundaries as splitting points.
- * @param string $p_version Version string.
- * @return array Version array
- */
-function plugin_version_array( $p_version ) {
-	$t_version = preg_replace( '/([a-zA-Z]+)([0-9]+)/', '\1.\2', $p_version );
-	$t_version = preg_replace( '/([0-9]+)([a-zA-Z]+)/', '\1.\2', $t_version );
-
-	$t_search = array(
-		',',
-		'-',
-		'_',
-	);
-
-	$t_replace = array(
-		'.',
-		'.',
-		'.',
-	);
-
-	$t_version = explode( '.', str_replace( $t_search, $t_replace, $t_version ) );
-
-	return $t_version;
-}
-
-/**
- * Checks two version arrays sequentially for minimum or maximum version dependencies.
- * @param array   $p_version1 Version array to check.
- * @param array   $p_version2 Version array required.
+ * Checks two versions for minimum or maximum version dependencies.
+ * @param string  $p_version  Version number to check.
+ * @param string  $p_required Version number required.
  * @param boolean $p_maximum  Minimum (false) or maximum (true) version check.
  * @return integer 1 if the version dependency succeeds, -1 if it fails
  */
-function plugin_version_check( array $p_version1, array $p_version2, $p_maximum = false ) {
-	while( count( $p_version1 ) > 0 && count( $p_version2 ) > 0 ) {
-
-		# Grab the next version bits
-		$t_version1 = array_shift( $p_version1 );
-		$t_version2 = array_shift( $p_version2 );
-
-		# Convert to integers if possible
-		if( is_numeric( $t_version1 ) ) {
-			$t_version1 = (int)$t_version1;
-		}
-		if( is_numeric( $t_version2 ) ) {
-			$t_version2 = (int)$t_version2;
-		}
-
-		# Check for immediate version differences
-		if( $p_maximum ) {
-			if( $t_version1 < $t_version2 ) {
-				return 1;
-			} else if( $t_version1 > $t_version2 ) {
-				return -1;
-			}
-		} else {
-			if( $t_version1 > $t_version2 ) {
-				return 1;
-			} else if( $t_version1 < $t_version2 ) {
-				return -1;
-			}
-		}
-	}
-
-	# Versions matched exactly
-	if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
-		return 1;
-	}
-
-	# Handle unmatched version bits
+function plugin_version_check( $p_version, $p_required, $p_maximum = false ) {
 	if( $p_maximum ) {
-		if( count( $p_version2 ) > 0 ) {
-			return 1;
-		}
+		$t_operator = '<';
 	} else {
-		if( count( $p_version1 ) > 0 ) {
-			return 1;
-		}
+		$t_operator = '>=';
 	}
-
-	# No more comparisons
-	return -1;
+	$t_result = version_compare( $p_version, $p_required, $t_operator );
+	return $t_result ? 1 : -1;
 }
 
 /**
@@ -553,45 +485,27 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			return 0;
 		}
 
+		$t_plugin_version = $g_plugin_cache[$p_base_name]->version;
+
 		$t_required_array = explode( ',', $p_required );
 
-		# If the plugin's minimum dependency for MantisCore is unspecified or
-		# lower than the current release (i.e. the plugin does not specifically
-		# list the current core version as supported) and the plugin does not
-		# define a maximum dependency, we add one with the current version's
-		# minor release (i.e. for 1.3.1 we would add '<1.3').
-		# The purpose of this is to avoid compatibility issues by disabling
-		# plugins which have not been updated for a new Mantis release; authors
-		# have to revise their code (if necessary), and release a new version
-		# of the plugin with updated dependencies.
-		# To indicate compatibility (e.g. with release 1.3), one can either:
-		# 1. update the minimum required version (i.e. plugin only works with
-		#    1.3; 1.2-compatible code is maintained separately):
-		#    $this->requires = array( 'MantisCore' => '1.3' );
-		# 2. add the new release as a 2nd minimum version (i.e. the plugin is
-		#    compatible with both versions):
-		#    $this->requires = array( 'MantisCore' => '1.2, 1.3' );
-		# 3. add a maximum version higher than the new release:
-		#    $this->requires = array( 'MantisCore' => '1.2, <2.0' );
-		#    Note that this may cause the plugin to face compatibility issues
-		#    if and when a version 1.4 is released.
+		# Set maximum dependency for MantisCore if none is specified.
+		# This effectively disables plugins which have not been specifically
+		# designed for a new major Mantis release to force authors to review
+		# their code, adapt it if necessary, and release a new version of the
+		# plugin with updated dependencies.
 		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
-			$t_version_core = substr(
-				MANTIS_VERSION,
-				0,
-				strpos( MANTIS_VERSION, '.', strpos( MANTIS_VERSION, '.' ) + 1 )
-			);
+			$t_version_core = utf8_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
 				$t_is_current_core_supported = $t_is_current_core_supported
 					|| version_compare( trim( $t_version_required ), $t_version_core, '>=' );
 			}
 			if( !$t_is_current_core_supported ) {
+				# Add current major version as maximum
 				$t_required_array[] = '<' . $t_version_core;
 			}
 		}
-
-		$t_version_installed = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
 
 		foreach( $t_required_array as $t_required ) {
 			$t_required = trim( $t_required );
@@ -610,9 +524,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 				}
 			}
 
-			$t_version_required = plugin_version_array( $t_required );
-
-			$t_check = plugin_version_check( $t_version_installed, $t_version_required, $t_maximum );
+			$t_check = plugin_version_check( $t_plugin_version, $t_required, $t_maximum );
 
 			if( $t_check < 1 ) {
 				return $t_check;

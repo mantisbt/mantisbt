@@ -34,7 +34,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => MANTIS_VERSION,
+			'MantisCore' => '2.0.0',
 		);
 
 		$this->author = 'MantisBT Team';

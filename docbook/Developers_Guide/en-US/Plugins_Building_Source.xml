@@ -37,9 +37,10 @@ class ExamplePlugin extends MantisPlugin {
         $this->page = '';           # Default plugin page
 
         $this->version = '1.0';     # Plugin version string
-        $this->requires = array(    # Plugin dependencies, array of basename => version pairs
-            'MantisCore' => '1.2.0, &lt;= 1.2.0',  #   Should always depend on an appropriate version of MantisBT
-            );
+        $this->requires = array(    # Plugin dependencies
+            'MantisCore' => '2.0',  # Should always depend on an appropriate
+                                    # version of MantisBT
+        );
 
         $this->author = '';         # Author/team name
         $this->contact = '';        # Author/team e-mail address

@@ -30,6 +30,7 @@ require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'HelperTest.php';
+require_once 'PluginTest.php';
 require_once 'MentionParsingTest.php';
 require_once 'StringTest.php';
 require_once 'ConfigParserTest.php';
@@ -49,6 +50,7 @@ class MantisAllTests extends PHPUnit_Framework_TestSuite {
 
 		$t_suite->addTestSuite( 'MantisEnumTest' );
 		$t_suite->addTestSuite( 'MantisHelperTest' );
+		$t_suite->addTestSuite( 'MantisPluginTest' );
 		$t_suite->addTestSuite( 'MantisStringTest' );
 		$t_suite->addTestSuite( 'MentionParsingTest' );
 		$t_suite->addTestSuite( 'MantisConfigParserTest' );
