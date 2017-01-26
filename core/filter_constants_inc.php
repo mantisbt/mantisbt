@@ -77,6 +77,7 @@ define( 'FILTER_PROPERTY_PROFILE_ID', 'profile_id' ); # show_profile
 define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
 define( 'FILTER_PROPERTY_OS', 'os' );
 define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );
+define( 'FILTER_PROPERTY_ALIAS', 'alias' );
 
 # These are old date fields names, keeping them for backward compatibility, if used externally
 define( 'FILTER_PROPERTY_START_DAY', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY );

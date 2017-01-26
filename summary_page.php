@@ -298,6 +298,30 @@ print_summary_submenu();
 	</table>
 	</div>
 
+<?php 
+	db_param_push();
+	$t_query = 'SELECT COUNT(*) FROM {bug}
+				WHERE status < ' . db_param() . '
+				AND votes > 1
+				AND ' . $t_specific_where;
+	$t_result = db_query( $t_query, array( $t_resolved ) );
+	if( db_result( $t_result ) > 0 ) {
+?>
+	<!-- HOT / MOST COUNT / VOTES -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th class="width-85"><?php echo lang_get( 'most_votes' ) ?></th>
+				<th class="align-right"><?php echo lang_get( 'count' ); ?></th>
+			</tr>
+		</thead>
+		<?php summary_print_by_votes() ?>
+	</table>
+	</div>
+<?php } ?>
+
 	<!-- BY RESOLUTION -->
 	<div class="space-10"></div>
 	<div class="widget-box table-responsive">

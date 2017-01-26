@@ -140,6 +140,7 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	unset( $t_columns['profile_id'] );
 	unset( $t_columns['sticky'] );
 	unset( $t_columns['loading'] );
+	unset( $t_columns['alias'] );
 
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
@@ -521,6 +522,22 @@ function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 	echo '<th class="column-id">';
 	print_view_bug_sort_link( lang_get( 'id' ), 'id', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'id' );
+	echo '</th>';
+}
+
+/**
+ * Print table header for column Votes
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_votes( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-votes">';
+	print_view_bug_sort_link( lang_get( 'votes_abbreviation' ), 'votes', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'votes' );
 	echo '</th>';
 }
 

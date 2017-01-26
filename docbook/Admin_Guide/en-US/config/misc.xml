@@ -224,5 +224,20 @@
 				</warning>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_max_auto_reports</term>
+			<listitem>
+				<para>Maximum number of automatic reports to collect per bug when bug is open
+					for collection of new reports (e.g. bug is not read-only, not closed, 
+					not fixed, and not switched to $g_bug_collect_reports_status_threshold state). 
+				</para>
+				<para>
+					See also $g_bug_collect_reports_status_threshold option.
+				</para>
+				<para>
+					See also SOAP.mc_issue_report function.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

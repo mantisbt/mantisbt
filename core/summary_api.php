@@ -447,6 +447,51 @@ function summary_print_by_age() {
 }
 
 /**
+ * Print list of hot bugs
+ * @return void
+ */
+function summary_print_by_votes() {
+	$t_project_id = helper_get_current_project();
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+	$t_specific_where = helper_project_specific_where( $t_project_id );
+	if( ' 1<>1' == $t_specific_where ) {
+		return;
+	}
+	db_param_push();
+	$t_query = 'SELECT * FROM {bug}
+				WHERE status < ' . db_param() . '
+				AND ' . $t_specific_where . '
+				ORDER BY votes DESC, priority DESC, date_submitted ASC';
+	$t_result = db_query( $t_query, array( $t_resolved ) );
+
+	$t_count = 0;
+	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		# as we select all from bug_table, inject into the cache.
+		bug_cache_database_result( $t_row );
+
+		# Skip private bugs unless user has proper permissions
+		if( ( VS_PRIVATE == bug_get_field( $t_row['id'], 'view_state' ) ) && ( false == access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) ) ) {
+			continue;
+		}
+
+		if( $t_count++ == 10 ) {
+			break;
+		}
+
+		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
+		$t_summary = string_display_line( $t_row['summary'] );
+		$t_votes = $t_row['votes'];
+
+		echo '<tr>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_votes . '</td>' . "\n";
+		echo '</tr>' . "\n";
+	}
+}
+
+/**
  * print bug counts by assigned to each developer
  * @return void
  */

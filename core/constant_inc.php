@@ -202,6 +202,7 @@ define( 'TAG_DETACHED', 26 );
 define( 'TAG_RENAMED', 27 );
 define( 'BUG_REVISION_DROPPED', 28 );
 define( 'BUGNOTE_REVISION_DROPPED', 29 );
+define( 'BUG_VOTED', 30 );
 define( 'PLUGIN_HISTORY', 100 );
 
 # bug revisions
@@ -488,6 +489,10 @@ define( 'BUGNOTE', 0 );
 define( 'REMINDER', 1 );
 define( 'TIME_TRACKING', 2 );
 
+# API token types
+define( 'API_TOKEN_GENERIC', 0 );
+define( 'API_TOKEN_REPORT_ONLY', 1 );
+
 # token types
 define( 'TOKEN_UNKNOWN', 0 );
 define( 'TOKEN_FILTER', 1 );
@@ -586,6 +591,7 @@ define( 'DB_FIELD_SIZE_USERNAME', 191 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
+define( 'DB_FIELD_SIZE_BUG_ALIAS', 128 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

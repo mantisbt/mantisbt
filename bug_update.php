@@ -73,6 +73,19 @@ if( helper_get_current_project() != $t_existing_bug->project_id ) {
 	$g_project_override = $t_existing_bug->project_id;
 }
 
+if( gpc_get_int( 'vote', 0 ) ) {
+	if( access_user_can_vote_for_bug( $f_bug_id, $t_current_user_id ) ) {
+		$t_existing_bug->vote();
+		
+		if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) ) {
+			bug_monitor( $f_bug_id, $t_current_user_id );	
+		}
+	}
+	form_security_purge( 'bug_update' );
+	print_successful_redirect_to_bug( $f_bug_id );	
+	die();
+}
+
 $t_updated_bug = clone $t_existing_bug;
 
 $t_updated_bug->additional_information = gpc_get_string( 'additional_information', $t_existing_bug->additional_information );

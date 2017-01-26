@@ -62,14 +62,19 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @return array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
+	if( false === $t_user_id ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_lang = mci_get_user_lang( $t_user_id );
+	return _mc_issue_get( $t_user_id, $p_issue_id );
+}
+
+# this internal function is introduced to allow call from both mc_issue_get and mc_issue_report
+function _mc_issue_get( $p_user_id, $p_issue_id ) {
+	global $g_project_override;
+
+	$t_lang = mci_get_user_lang( $p_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue does not exist' );
@@ -77,12 +82,12 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
-	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+	if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
+		return mci_soap_fault_access_denied( $p_user_id );
 	}
 
-	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $p_user_id ) ) {
+		return mci_soap_fault_access_denied( $p_user_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $p_issue_id . '\'' );
@@ -115,7 +120,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
 	if( !empty( $t_bug->handler_id ) ) {
-		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
+		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $p_user_id ) ) {
 			$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
 		}
 	}
@@ -133,11 +138,13 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_bug->additional_information ) );
 
 	$t_issue_data['attachments'] = mci_issue_get_attachments( $p_issue_id );
-	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
+	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $p_user_id );
 	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
 	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
 	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_id ) );
-	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id, $t_user_id );
+	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id, $p_user_id );
+	$t_issue_data['votes'] = $t_bug->votes;
+	$t_issue_data['alias'] = mci_null_if_empty( $t_bug->alias );
 
 	return $t_issue_data;
 }
@@ -643,12 +650,19 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
  * @return integer The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
+	if( false === $t_user_id ) {
 		return mci_soap_fault_login_failed();
 	}
+
+	$t_bug_data = _mc_issue_add( $t_user_id, $p_issue );
+	return $t_bug_data->id;
+}
+
+# this internal function is introduced to allow call from both mc_issue_add and mc_issue_report
+# returns BugData
+function _mc_issue_add( $p_user_id, stdClass $p_issue ) {
+	global $g_project_override;
 
 	$p_issue = SoapObjectsFactory::unwrapObject( $p_issue );
 	$t_project = $p_issue['project'];
@@ -656,8 +670,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_project_id = mci_get_project_id( $t_project );
 	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
 
-	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+	if( !mci_has_readwrite_access( $p_user_id, $t_project_id ) ) {
+		return mci_soap_fault_access_denied( $p_user_id );
 	}
 
 	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
@@ -677,15 +691,15 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	if( isset( $p_issue['reporter'] ) ) {
 		$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
 
-		if( $t_reporter_id != $t_user_id ) {
+		if( $t_reporter_id != $p_user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
-			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
+			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $p_user_id ) ) {
+				return mci_soap_fault_access_denied( $p_user_id, 'Active user does not have access level required to specify a different issue reporter' );
 			}
 		}
 	} else {
-		$t_reporter_id = $t_user_id;
+		$t_reporter_id = $p_user_id;
 	}
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
@@ -696,11 +710,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		}
 	}
 
-	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
+	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $p_user_id ) ) {
+		return mci_soap_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to report issues' );
 	}
 
-	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
+	$t_access_check_result = mci_issue_handler_access_check( $p_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
 	if( $t_access_check_result !== true ) {
 		return $t_access_check_result;
 	}
@@ -766,6 +780,9 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		 access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 		$t_bug_data->sticky = $p_issue['sticky'];
 	}
+	if( isset( $p_issue['alias'] ) ) {
+		$t_bug_data->alias = $p_issue['alias'];
+	}	
 
 	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = SoapObjectsFactory::parseDateTimeString( $p_issue['due_date'] );
@@ -773,7 +790,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		$t_bug_data->due_date = date_get_null();
 	}
 
-	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $p_user_id ) ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
 
@@ -787,6 +804,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
+	if( $t_bug_data->aliased ) {
+		log_event( LOG_WEBSERVICE, '+1 \'' . $t_issue_id . '\'' );
+		return $t_bug_data;
+	}
+	
 	$t_bug_data->process_mentions();
 
 	log_event( LOG_WEBSERVICE, 'created new issue id \'' . $t_issue_id . '\'' );
@@ -797,7 +819,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( isset( $p_issue['monitors'] ) ) {
-		mci_issue_set_monitors( $t_issue_id, $t_user_id, $p_issue['monitors'] );
+		mci_issue_set_monitors( $t_issue_id, $p_user_id, $p_issue['monitors'] );
 	}
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
@@ -821,7 +843,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				$t_view_state_id == VS_PRIVATE,
 				$t_note_type,
 				$t_note_attr,
-				$t_user_id,
+				$p_user_id,
 				false ); # don't send mail
 
 			bugnote_process_mentions( $t_issue_id, $t_note_id, $t_note['text'] );
@@ -831,7 +853,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( isset( $p_issue['tags'] ) && is_array( $p_issue['tags'] ) ) {
-		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
+		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $p_user_id );
 	}
 
 	email_bug_added( $t_issue_id );
@@ -844,7 +866,43 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		history_log_event( $t_issue_id, 'resolution', config_get( 'default_bug_resolution' ) );
 	}
 
-	return $t_issue_id;
+	return $t_bug_data;
+}
+
+/**
+ * Same as mc_issue_add + mc_issue_attachment_add, except returns BugData instead of just id.
+ * And respects attach submission rules set by bug_allow_more_attaches(). 
+ *
+ * @param string   $p_username    The name of the user trying to add the issue.
+ * @param string   $p_password    The password of the user.
+ * @param stdClass $p_issue       A IssueData structure containing information about the new issue.
+ * @param string   $p_attach_note Additional note to describe attachment.
+ * @param string   $p_file_name   The name of the file.
+ * @param string   $p_file_type   The mime type of the file.
+ * @param string   $p_content     The attachment to add (base64 encoded string).
+ * @return integer The id of the created issue.
+ */
+function mc_issue_report( $p_username, $p_password, stdClass $p_issue, $p_attach_note, $p_file_name, $p_file_type, $p_content ) {
+	$t_user_id = mci_check_login_report_only( $p_username, $p_password );
+	if( false === $t_user_id ) {
+		return mci_soap_fault_login_failed();
+	}
+	
+	$t_issue = _mc_issue_add( $t_user_id, $p_issue );
+	if( !is_object( $t_issue ) ) {
+		return $t_issue;
+	}
+	$t_issue_id = $t_issue->id;
+	
+	if( !is_null( $t_issue_id ) && !is_null( $p_file_name ) && !is_blank( $p_file_name ) ) { 
+		if( file_allow_bug_upload( $t_issue_id, $t_user_id ) &&
+			access_has_bug_level( config_get( 'upload_bug_file_threshold' ), $t_issue_id, $t_user_id ) &&
+			( !$t_issue->was_aliased() || bug_allow_more_attaches( $t_issue_id ) ) ) {
+			mci_file_add( $t_issue_id, $p_file_name, $p_content, $p_file_type, 'bug', 'SOAP.mc_issue_report', $p_attach_note, $t_user_id );
+		}
+	}	
+	
+	return _mc_issue_get( $t_user_id, $t_issue_id );
 }
 
 /**
@@ -1598,6 +1656,8 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
 		$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
 		$t_issue['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_data->id ) );
+		$t_issue['votes'] = $p_issue_data->votes;
+		$t_issue['alias'] = mci_null_if_empty( $p_issue_data->alias );
 
 		return $t_issue;
 }
@@ -1659,6 +1719,9 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $p_issue_data->id ) );
 		$t_issue['notes_count'] = count( mci_issue_get_notes( $p_issue_data->id ) );
 
+		$t_issue['votes'] = mci_null_if_empty( $p_issue_data->votes );
+		$t_issue['alias'] = mci_null_if_empty( $p_issue_data->alias );
+    
 		return $t_issue;
 }
 

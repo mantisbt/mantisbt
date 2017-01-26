@@ -132,6 +132,28 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>
+				$g_bug_collect_reports_status_threshold
+			</term>
+			<listitem>
+				<para>Bug becomes closed for submission of automated bug reports (attaches)
+					if its status is &gt;= $g_bug_collect_reports_threshold. The bug starts 
+					accept more bug reports again if its status becomes less than this 
+					threshold. The default is ASSIGNED. 
+				</para>
+				<para>
+					Read-only, closed and fixed bugs are closed for bug report submission 
+					regardless of this option.
+				</para>
+				<para>
+					See also $g_bug_max_auto_reports option.
+				</para>
+				<para>
+					See also SOAP.mc_issue_report function.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_status_enum_workflow</term>
 			<listitem>
 				<para>'status_enum_workflow' defines the workflow, and reflects a

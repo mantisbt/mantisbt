@@ -51,6 +51,7 @@ require_api( 'utility_api.php' );
 function get_field_names() {
 	return array (
 				'id',
+				'votes',
 				'category',
 				'severity',
 				'reproducibility',

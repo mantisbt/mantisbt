@@ -63,6 +63,7 @@ $g_soap_api_to_filter_names = array (
     'end_year' => FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR,
     'tag_string' => FILTER_PROPERTY_TAG_STRING,
     'tag_select' => FILTER_PROPERTY_TAG_SELECT,
+    'alias' => FILTER_PROPERTY_ALIAS,
 );
 
 

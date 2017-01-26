@@ -45,6 +45,7 @@
    <xsd:element name="account_data" type="tns:AccountData" minOccurs="0"/>
    <xsd:element name="access_level" type="xsd:integer" minOccurs="0"/>
    <xsd:element name="timezone" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="api_token_type" type="xsd:integer" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="AccountDataArray">
@@ -163,6 +164,8 @@
    <xsd:element name="monitors" type="tns:AccountDataArray" minOccurs="0"/>
    <xsd:element name="sticky" type="xsd:boolean" minOccurs="0"/>
    <xsd:element name="tags" type="tns:ObjectRefArray" minOccurs="0"/>
+   <xsd:element name="alias" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="votes" type="xsd:integer" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="IssueDataArray">
@@ -269,6 +272,7 @@
  <xsd:complexType name="FilterSearchData">
   <xsd:all>
    <xsd:element name="project_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="alias" type="xsd:string" minOccurs="0"/>
    <xsd:element name="search" type="xsd:string" minOccurs="0"/>
    <xsd:element name="category" type="tns:StringArray" minOccurs="0"/>
    <xsd:element name="severity_id" type="tns:IntegerArray" minOccurs="0"/>
@@ -546,6 +550,16 @@
   <part name="issue" type="tns:IssueData" /></message>
 <message name="mc_issue_addResponse">
   <part name="return" type="xsd:integer" /></message>
+<message name="mc_issue_reportRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="issue" type="tns:IssueData" />
+  <part name="attach_note" type="xsd:string" />
+  <part name="file_name" type="xsd:string" />
+  <part name="file_type" type="xsd:string" />
+  <part name="content" type="xsd:base64Binary" /></message>
+<message name="mc_issue_reportResponse">
+  <part name="return" type="tns:IssueData" /></message>
 <message name="mc_issue_updateRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -1000,6 +1014,11 @@
     <input message="tns:mc_issue_addRequest"/>
     <output message="tns:mc_issue_addResponse"/>
   </operation>
+  <operation name="mc_issue_report">
+    <documentation>Same as mc_issue_add + mc_issue_attachment_add, except returns full issue data instead of just id.</documentation>
+    <input message="tns:mc_issue_reportRequest"/>
+    <output message="tns:mc_issue_reportResponse"/>
+  </operation>
   <operation name="mc_issue_update">
     <documentation>Update Issue method.</documentation>
     <input message="tns:mc_issue_updateRequest"/>
@@ -1360,6 +1379,11 @@
   </operation>
   <operation name="mc_issue_add">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_add" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_issue_report">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_report" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>

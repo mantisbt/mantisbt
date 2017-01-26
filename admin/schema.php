@@ -884,6 +884,27 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 
 # Release marker: 1.3.0
 
+# Count / occurrences / votes 
+$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
+	votes					I		NOTNULL DEFAULT '1'",
+	) );
+$g_upgrade[211] = array( 'CreateIndexSQL', array( 'idx_bug_count', db_get_table( 'bug' ), 'votes' ) );	
+
+# A standalone table is required for "alias", because not all DB allow multiple NULLs in UNIQUE index
+$g_upgrade[212] = array('CreateTableSQL', array( db_get_table( 'bug_alias' ), "
+	bug_id					I		UNSIGNED NOTNULL PRIMARY,
+	project_id				I		UNSIGNED NOTNULL,
+	alias					C(128)	$t_notnull",
+	$t_table_options
+	) );
+$g_upgrade[213] = array( 'CreateIndexSQL', array( 'idx_bug_alias_project', db_get_table( 'bug_alias' ), 'project_id' ) );	
+$g_upgrade[214] = array( 'CreateIndexSQL', array( 'idx_bug_alias_alias', db_get_table( 'bug_alias' ), 'alias' ) );	
+$g_upgrade[215] = array( 'CreateIndexSQL', array( 'idx_bug_alias_uniq', db_get_table( 'bug_alias' ), 'project_id,alias', array( 'UNIQUE' ) ) );
+
+# Add API token kind, allowing to have different types of API tokens
+$g_upgrade[216] = array( 'AddColumnSQL', array( db_get_table( 'api_token' ), "
+	kind					I		NOTNULL DEFAULT '0'",
+	) );
 
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
