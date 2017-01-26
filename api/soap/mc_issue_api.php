@@ -656,7 +656,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	$t_bug_data = _mc_issue_add( $t_user_id, $p_issue );
-	return $t_bug_data->id;
+	if( is_object( $t_bug_data ) && is_a( $t_bug_data, 'BugData' ) ) {
+		return $t_bug_data->id;
+	} else {
+		return $t_bug_data;
+	}
 }
 
 # this internal function is introduced to allow call from both mc_issue_add and mc_issue_report
@@ -889,7 +893,7 @@ function mc_issue_report( $p_username, $p_password, stdClass $p_issue, $p_attach
 	}
 	
 	$t_issue = _mc_issue_add( $t_user_id, $p_issue );
-	if( !is_object( $t_issue ) ) {
+	if( !is_object( $t_issue ) || !is_a( $t_issue, 'BugData' ) ) {
 		return $t_issue;
 	}
 	$t_issue_id = $t_issue->id;
