@@ -130,7 +130,7 @@ class Prototype extends JavaScript  {
 			
 	}
 	
-	function update_element_function($element_id,$options=null,$block)
+	function update_element_function($element_id,$options=null,$block=null)
 	{
 		$content=(isset($options['content']))?$options['content']:'';
 		$content=$this->escape($content);
@@ -200,7 +200,7 @@ class Prototype extends JavaScript  {
 		$js_options= (is_array($options))?$this->_build_callbacks($options):array();
 		
 
-		if (isset($options['type']) && $option['type']=='synchronous')	$js_options['asynchronous'] ='false';
+		if (isset($options['type']) && $options['type']=='synchronous')	$js_options['asynchronous'] ='false';
 		
 		if (isset($options['method'])) $js_options['method']    = $this->_method_option_to_s($options['method']);
 		
@@ -292,12 +292,12 @@ class Prototype extends JavaScript  {
 	{
 		if (is_array($id)){
 
-			$arr_str='';
+			$arg_str='';
 			foreach ($id as $obj){
 				if(!empty($arg_str))$arg_str.=', ';
 				$arg_str.="'$arg'";
 			}
-			return "$A[$arg_str].each(Element.remove)";
+			return "\$A[$arg_str].each(Element.remove)";
 		}else {
 			return "Element.remove('$id')";
 		}

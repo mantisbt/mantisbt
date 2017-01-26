@@ -103,7 +103,7 @@
 		<tr>
 			<td class="print">
 				<?php
-				echo print_user( $v3_reporter_id );
+				print_user( $v3_reporter_id );
 				?>&#160;&#160;&#160;
 			</td>
 		</tr>
