@@ -323,6 +323,50 @@ i.datetimepicker {
     margin: 6px 10px;
 }
 
+/* typeahaed styling */
+input.typeahead, input.tt-query, input.tt-hint {
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 24px;
+    min-width: 175px;
+    outline: medium none;
+}
+input.tt-hint, .form-group input.tt-hint {
+    background-color: #fff !important;
+    color: #b0b0b0 !important;
+}
+.tt-menu {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    left: 0 !important;
+    margin-top: 2px;
+    min-width: 175px;
+    padding: 8px 0;
+    position: absolute;
+    right: 0 !important;
+    text-align: left;
+}
+.tt-suggestion {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 3px 12px 4px;
+}
+.tt-suggestion.tt-selectable:hover, .tt-suggestion.tt-cursor {
+    background-color: #4f99c6;
+    color: #fff;
+    cursor: pointer;
+}
+.tt-suggestion p {
+    margin: 0;
+}
+input.typeahead.scrollable ~ .tt-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

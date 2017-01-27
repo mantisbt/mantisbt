@@ -320,7 +320,10 @@ function layout_body_javascript() {
 		# moment & datetimepicker
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/' . MOMENT_VERSION . '/moment-with-locales.min.js', MOMENT_HASH );
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/js/bootstrap-datetimepicker.min.js', DATETIME_PICKER_HASH );
-		
+
+		# typeahead.js
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/' . TYPEAHEAD_VERSION . '/typeahead.jquery.min.js', TYPEAHEAD_HASH );
+
 		# listjs
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/list.js/' . LISTJS_VERSION . '/list.min.js', LISTJS_HASH );
 	} else {
@@ -331,13 +334,14 @@ function layout_body_javascript() {
 		html_javascript_link( 'moment-with-locales-' . MOMENT_VERSION . '.min.js' );
 		html_javascript_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.js' );
 
+		# typeahead.js
+		html_javascript_link( 'typeahead.jquery-' . TYPEAHEAD_VERSION . '.min.js' );
+
 		# listjs
 		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
 	}
 
-	# theme scripts
-	html_javascript_link( 'ace-extra.min.js' );
-	html_javascript_link( 'ace-elements.min.js' );
+	# ace theme scripts
 	html_javascript_link( 'ace.min.js' );
 }
 
