@@ -626,6 +626,10 @@ define( 'CHARTJS_VERSION', '2.1.6' );
 define( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
 define( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMiqY=' );
 
+# Tyeahead JS
+define( 'TYPEAHEAD_VERSION', '1.1.1' );
+define( 'TYPEAHEAD_HASH', 'sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=' );
+
 # List JS
 define( 'LISTJS_VERSION', '1.4.1' );
 define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );

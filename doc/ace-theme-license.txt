@@ -9,8 +9,6 @@ To: Rafik Robeal <rafik@mantishub.net>
 I’ve agreed to license the files listed below from my AceAdmin theme package under the GPL license and contribute them
 to MantisBT open source project:
 
-ace-elements.min.js
-ace-extra.min.js
 ace.min.js
 ace-fonts.css
 ace-ie.min.css
