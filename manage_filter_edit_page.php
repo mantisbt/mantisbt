@@ -169,7 +169,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						?>
 						<tr>
 							<td class="category">
-								<?php echo lang_get( 'view_status' ) ?>:
+								<?php echo lang_get( 'view_status' ) ?>
 							</td>
 							<td>
 								<label>
@@ -186,7 +186,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						<?php } ?>
 						<tr>
 							<td class="category">
-								<?php echo lang_get( 'email_project' ) ?>:
+								<?php echo lang_get( 'email_project' ) ?>
 							</td>
 							<td>
 								<label class="inline">
