@@ -223,7 +223,12 @@ function html_css() {
 		html_css_link( $t_stylesheet_path );
 	}
 
-	html_css_link( 'dropzone.css' );
+	# dropzone css
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' );
+	} else {
+		html_css_link( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
+	}
 }
 
 /**
@@ -302,14 +307,21 @@ function html_head_javascript() {
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		# JQuery
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js', JQUERY_UI_HASH );
+
+		# Dropzone
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH );
 	} else {
+		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
+
+		# Dropzone
+		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
 	}
 
-	html_javascript_link( 'dropzone.min.js');
 	html_javascript_link( 'common.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );
