@@ -193,6 +193,12 @@ pre {
     vertical-align: -15%;
 }
 
+.fa-status-box {
+    font-size: 1.8em;
+    line-height: 0.73em;
+    vertical-align: -25%;
+}
+
 .skin-3 .navbar .navbar-toggle {
     background-color:  #777 !important;
 }
