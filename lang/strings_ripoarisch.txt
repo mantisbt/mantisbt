@@ -353,7 +353,6 @@ $s_delete_bug_sure_msg = 'Wells De di Aanjelääjeheit verhaftesch fottschmiiße
 $s_delete_bug_button = 'Fottschmiiße!';
 $s_monitor_bug_button = 'Drobb oppaßße!';
 $s_unmonitor_bug_button = 'Nimmih drobb oppaßße!';
-$s_file_upload_msg = 'Di Dattei es huhjelahde.';
 $s_upload_file = 'Dattei huhlaade';
 $s_upload_files = 'Datteije huhlahde';
 $s_select_file = 'Dattei ußwähle';

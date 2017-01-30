@@ -391,7 +391,6 @@ $s_delete_bug_sure_msg = '¿Tas seguru de querer desaniciar esta incidencia?';
 $s_delete_bug_button = 'Desaniciar';
 $s_monitor_bug_button = 'Monitorizar';
 $s_unmonitor_bug_button = 'Dexar de monitorizar';
-$s_file_upload_msg = 'Ficheru xubíu correutamente.';
 $s_upload_file = 'Xubir ficheru';
 $s_upload_files = 'Xubir ficheros';
 $s_select_file = 'Seleicionar un ficheru';

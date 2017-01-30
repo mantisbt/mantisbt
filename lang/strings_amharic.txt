@@ -229,7 +229,6 @@ $s_close_immediately = 'ወዲያው ዝጋ:';
 $s_delete_bug_button = 'ሰርዝ';
 $s_monitor_bug_button = 'መቆጣጠር';
 $s_unmonitor_bug_button = 'ቁጥጥሩን ጨርስ';
-$s_file_upload_msg = 'ፋይል መስቀሉ የተሳካ';
 $s_upload_file = 'ፋይሉን ስቀል';
 $s_select_file = 'ፋይል ምረጥ';
 $s_upload_file_button = 'ፋይሉን ስቀል';

@@ -396,7 +396,6 @@ $s_delete_bug_sure_msg = 'Изтриване на проблема?';
 $s_delete_bug_button = 'Изтриване на проблем';
 $s_monitor_bug_button = 'Наблюдаване';
 $s_unmonitor_bug_button = 'Спри наблюдението';
-$s_file_upload_msg = 'Файлът е добавен успешно';
 $s_upload_file = 'Добавяне на файл';
 $s_upload_files = 'Добавяне на файлове';
 $s_select_file = 'Избиране на файл';

@@ -375,7 +375,6 @@ $s_delete_bug_sure_msg = 'Està segur que desitja eliminar aquesta incidència?'
 $s_delete_bug_button = 'Elimina';
 $s_monitor_bug_button = 'Monitoritza';
 $s_unmonitor_bug_button = 'Atura monitorització';
-$s_file_upload_msg = 'Arxiu penjat';
 $s_upload_file = 'Carrega arxiu';
 $s_upload_files = 'Pujar fitxers';
 $s_select_file = 'Selecciona arxiu';

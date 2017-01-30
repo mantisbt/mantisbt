@@ -404,7 +404,6 @@ $s_delete_bug_sure_msg = 'Sei sicuro di voler cancellare questa anomalia?';
 $s_delete_bug_button = 'Cancella';
 $s_monitor_bug_button = 'Tieni sotto controllo';
 $s_unmonitor_bug_button = 'Non tenere sotto controllo';
-$s_file_upload_msg = 'File caricato con successo';
 $s_upload_file = 'Carica file';
 $s_upload_files = 'Carica file';
 $s_select_file = 'Seleziona file';

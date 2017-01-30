@@ -379,7 +379,6 @@ $s_delete_bug_sure_msg = 'Skutočne chcete zmazať tento problém?';
 $s_delete_bug_button = 'Zmazať';
 $s_monitor_bug_button = 'Monitorovať';
 $s_unmonitor_bug_button = 'Skončiť monitorovanie';
-$s_file_upload_msg = 'Upload súboru prebehol úspešne';
 $s_upload_file = 'Upload súboru';
 $s_upload_files = 'Nahrať súbory';
 $s_select_file = 'Vyberte súbor';

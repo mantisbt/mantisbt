@@ -377,7 +377,6 @@ $s_delete_bug_sure_msg = 'האם אכן ברצונך למחוק את הבאג ל
 $s_delete_bug_button = 'מחיקה...';
 $s_monitor_bug_button = 'מעקב';
 $s_unmonitor_bug_button = 'ביטול מעקב';
-$s_file_upload_msg = 'הקובץ נקלט';
 $s_upload_file = 'הוספת קובץ<br />';
 $s_upload_files = 'העלאת קבצים';
 $s_select_file = 'בחירת קובץ';

@@ -362,7 +362,6 @@ $s_delete_bug_sure_msg = 'Oled kindel, et soovid selle kande kustutada?';
 $s_delete_bug_button = 'Kustuta kanne';
 $s_monitor_bug_button = 'Jälgida';
 $s_unmonitor_bug_button = 'Lõpeta kandega tegelemine';
-$s_file_upload_msg = 'Fail üles laaditud';
 $s_upload_file = 'Laadi fail üles';
 $s_select_file = 'Vali fail';
 $s_upload_file_button = 'Laadi fail üles';

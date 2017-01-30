@@ -358,7 +358,6 @@ $s_delete_bug_sure_msg = 'Er du sikker på du vil slette denne rapport?';
 $s_delete_bug_button = 'Slet';
 $s_monitor_bug_button = 'Overvåg';
 $s_unmonitor_bug_button = 'Afslut overvågning';
-$s_file_upload_msg = 'Filen er blevet overført';
 $s_upload_file = 'Overfør fil';
 $s_upload_files = 'Overfør filer';
 $s_select_file = 'Vælg fil';

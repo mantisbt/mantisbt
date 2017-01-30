@@ -329,7 +329,6 @@ $s_delete_bug_sure_msg = 'کیاآپ واقعی اس ایشوذ کو خارج ک
 $s_delete_bug_button = ' ایشوذ  خارج کرو';
 $s_monitor_bug_button = ' ایشوذ کا دھیان رکھو';
 $s_unmonitor_bug_button = ' ایشوذ کا دھیان ختم کر دو';
-$s_file_upload_msg = 'فایل کامیابی کے ساتھ اپ لوڈ ھو چکی ھے';
 $s_upload_file = ' فایل کو اپ لوڈ کرو';
 $s_select_file = '  فایل منتخب کرو';
 $s_upload_file_button = ' فایل کو اپ لوڈ کرو';

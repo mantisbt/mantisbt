@@ -300,7 +300,6 @@ $s_delete_bug_sure_msg = 'Ertu viss um að þú viljir eyða þessari beiðni?';
 $s_delete_bug_button = 'Eyða beiðni';
 $s_monitor_bug_button = 'Vakta';
 $s_unmonitor_bug_button = 'Hætta vöktun';
-$s_file_upload_msg = 'Upphal skráar tókst';
 $s_upload_file = 'Upphala skrá';
 $s_select_file = 'Velja skrá';
 $s_upload_file_button = 'Upphala skrá';

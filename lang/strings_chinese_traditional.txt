@@ -402,7 +402,6 @@ $s_delete_bug_sure_msg = '您確定要刪除此問題?';
 $s_delete_bug_button = '刪除';
 $s_monitor_bug_button = '追蹤';
 $s_unmonitor_bug_button = '取消追蹤';
-$s_file_upload_msg = '檔案上傳成功';
 $s_upload_file = '上傳檔案';
 $s_upload_files = '上傳檔案';
 $s_select_file = '選擇檔案';

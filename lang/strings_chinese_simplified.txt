@@ -408,7 +408,6 @@ $s_delete_bug_sure_msg = '确定要删除此问题吗？';
 $s_delete_bug_button = '删除';
 $s_monitor_bug_button = '监视';
 $s_unmonitor_bug_button = '取消监视';
-$s_file_upload_msg = '文件上传成功';
 $s_upload_file = '上传文件';
 $s_upload_files = '上传文件';
 $s_select_file = '选择文件';

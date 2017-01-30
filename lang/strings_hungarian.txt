@@ -393,7 +393,6 @@ $s_delete_bug_sure_msg = 'Valóban törölni akarja ezt az ügyet?';
 $s_delete_bug_button = 'Ügy törlése';
 $s_monitor_bug_button = 'Figyelés';
 $s_unmonitor_bug_button = 'Ellenőrzés vége';
-$s_file_upload_msg = 'Sikeres fájlfeltöltés';
 $s_upload_file = 'Fájl feltöltése';
 $s_upload_files = 'Fájlok feltöltése';
 $s_select_file = 'Fájl kiválasztása';

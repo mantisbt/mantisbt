@@ -411,7 +411,6 @@ $s_delete_bug_sure_msg = 'Soll dieser Eintrag wirklich gelöscht werden?';
 $s_delete_bug_button = 'Löschen';
 $s_monitor_bug_button = 'Beobachten';
 $s_unmonitor_bug_button = 'Beobachtung beenden';
-$s_file_upload_msg = 'Dateitransfer erfolgreich';
 $s_upload_file = 'Datei übertragen';
 $s_upload_files = 'Dateien übertragen';
 $s_select_file = 'Datei wählen';

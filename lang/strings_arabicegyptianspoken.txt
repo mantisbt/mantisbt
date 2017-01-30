@@ -359,7 +359,6 @@ $s_delete_bug_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه �
 $s_delete_bug_button = 'حذف القضية';
 $s_monitor_bug_button = 'تابع';
 $s_unmonitor_bug_button = 'إنهاء المراقبة';
-$s_file_upload_msg = 'رفع الملف نجح';
 $s_upload_file = 'رفع ملف';
 $s_select_file = 'اختر ملفا';
 $s_upload_file_button = 'رفع ملف';

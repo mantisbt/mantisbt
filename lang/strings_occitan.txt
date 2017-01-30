@@ -354,7 +354,6 @@ $s_delete_bug_sure_msg = 'Sètz segur que volètz suprimir aqueste bug ?';
 $s_delete_bug_button = 'Suprimir lo bòg';
 $s_monitor_bug_button = 'Susvelhar';
 $s_unmonitor_bug_button = 'Arrestar la susvelhança del bòg';
-$s_file_upload_msg = 'Fichièr mandat amb succès...';
 $s_upload_file = 'Jónher un fichièr';
 $s_upload_files = 'Importar de fichièrs';
 $s_select_file = 'Seleccionar un fichièr';

@@ -379,7 +379,6 @@ $s_delete_bug_sure_msg = 'Bu sorunu silmek istediğinizden emin misiniz?';
 $s_delete_bug_button = 'Sorun Sil';
 $s_monitor_bug_button = 'Takip et';
 $s_unmonitor_bug_button = 'İzlemeyi Sonlandır';
-$s_file_upload_msg = 'Dosya başarıyla gönderildi';
 $s_upload_file = 'Dosya Gönder';
 $s_upload_files = 'Dosyaları yükle';
 $s_select_file = 'Dosya Seç';

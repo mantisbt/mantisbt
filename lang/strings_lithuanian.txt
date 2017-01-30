@@ -366,7 +366,6 @@ $s_delete_bug_sure_msg = 'Ar tikrai norite ištrinti šią klaidą?';
 $s_delete_bug_button = 'Ištrinti klaidą';
 $s_monitor_bug_button = 'Stebėti klaidą';
 $s_unmonitor_bug_button = 'Baigti stebėjimą';
-$s_file_upload_msg = 'Failas sėkmingai įkeltas';
 $s_upload_file = 'Failo įkėlimas';
 $s_upload_files = 'Įkelti failus';
 $s_select_file = 'Pasirinkite failą';

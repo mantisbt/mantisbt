@@ -388,7 +388,6 @@ $s_delete_bug_sure_msg = 'Es tu secur de voler deler iste problema?';
 $s_delete_bug_button = 'Deler';
 $s_monitor_bug_button = 'Surveliar';
 $s_unmonitor_bug_button = 'Finir surveliantia';
-$s_file_upload_msg = 'File incargate con successo.';
 $s_upload_file = 'Incargar file';
 $s_upload_files = 'Incargar files';
 $s_select_file = 'Seliger file';

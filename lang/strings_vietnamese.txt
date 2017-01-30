@@ -362,7 +362,6 @@ $s_delete_bug_sure_msg = 'Bạn có chắc chắn xóa issue này?';
 $s_delete_bug_button = 'Xóa';
 $s_monitor_bug_button = 'Theo dõi';
 $s_unmonitor_bug_button = 'Kết thúc theo dõi';
-$s_file_upload_msg = 'Tập tin tải lên thành công';
 $s_upload_file = 'Tải tập tin lên';
 $s_upload_files = 'Tải tập tin lên';
 $s_select_file = 'Chọn tập tin';

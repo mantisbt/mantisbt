@@ -394,7 +394,6 @@ $s_delete_bug_sure_msg = 'Está seguro de querer borrar este problema?';
 $s_delete_bug_button = 'Borrar';
 $s_monitor_bug_button = 'Vixiar';
 $s_unmonitor_bug_button = 'Deixar de vixiar';
-$s_file_upload_msg = 'A carga do ficheiro realizouse correctamente.';
 $s_upload_file = 'Subir un ficheiro';
 $s_upload_files = 'Subir ficheiros';
 $s_select_file = 'Seleccionar un ficheiro';
