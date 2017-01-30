@@ -55,7 +55,7 @@ $(document).ready( function() {
     if(list.items.length <= 10) {
     	$('#projects-list .searchbox').hide();
     }
-	
+
     $('.widget-box').on('shown.ace.widget' , function(event) {
        var t_id = $(this).attr('id');
        var t_cookie = GetCookie( "collapse_settings" );
@@ -112,7 +112,6 @@ $(document).ready( function() {
 			});
 		}
 	});
-
 
 	$('a.dynamic-filter-expander').click(function(event) {
 		event.preventDefault();
@@ -273,7 +272,7 @@ $(document).ready( function() {
 	$('#project-selector').children('.button').hide();
 
 	setBugLabel();
-	
+
 	/* Handle standard filter date fields */
 	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
 		$(this).closest('.js_switch_date_inputs_container')

@@ -605,10 +605,12 @@ define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 
-# JQuery
+# JQuery and JQuery UI
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
 define( 'JQUERY_VERSION', '2.2.4' );
 define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
+define( 'JQUERY_UI_VERSION', '1.11.4' );
+define( 'JQUERY_UI_HASH', 'sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=' );
 
 # Bootstrap & FontAwesome
 define( 'BOOTSTRAP_VERSION', '3.3.6' );
