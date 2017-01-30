@@ -476,7 +476,7 @@ if( $t_show_status || $t_show_resolution ) {
 		$t_status_label = html_get_status_css_class( $t_bug->status );
 
 		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
+		echo '<i class="fa fa-square fa-status-box ' . $t_status_label . '"></i> ';
 		echo $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
