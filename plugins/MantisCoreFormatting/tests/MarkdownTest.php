@@ -24,8 +24,6 @@
  */
 
 # Includes
-//require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
 require_once  dirname( dirname( __FILE__ ) ) . '/../../tests/TestConfig.php' ;
 require_once( dirname( dirname( __FILE__ ) ) . '/core/MantisMarkdown.php' );
 
@@ -85,5 +83,5 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( '<p>#1</p>', MantisMarkdown::convert_text( $t_process_string ) );
 	}
-	
+
 }
