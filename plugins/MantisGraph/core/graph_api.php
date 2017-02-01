@@ -431,13 +431,25 @@ function create_cumulative_bydate() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	# Get all the submitted dates
-	$t_query = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
+	# Calculate the minimum value between submitted and last updated dates to
+	# account for data inconsistencies in very old versions of Mantis, where
+	# issues have an updated date older than their creation date (see #22065).
+	# We also rationalise the timestamp to a day to reduce the amount of data
+	$t_query = 'SELECT FLOOR(min_date / ' . SECONDS_PER_DAY. ') AS date_submitted
+		FROM (
+			SELECT
+				CASE WHEN last_updated < date_submitted
+					THEN last_updated
+					ELSE date_submitted
+				END AS min_date
+			FROM {bug}
+			WHERE ' . $t_specific_where . '
+			) t
+		ORDER BY min_date';
 	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		# rationalise the timestamp to a day to reduce the amount of data
 		$t_date = $t_row['date_submitted'];
-		$t_date = (int)( $t_date / SECONDS_PER_DAY );
 
 		if( isset( $t_calc_metrics[$t_date] ) ) {
 			$t_calc_metrics[$t_date][0]++;
