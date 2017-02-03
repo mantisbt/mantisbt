@@ -5,6 +5,8 @@ This directory contains a copy the 3rd-party libraries used by MantisBT.
 
 The version and status of each is summarized below:
 
+## PHP libraries
+
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
 adodb           | adodb           | 5.20.9    | unpatched [1]
@@ -15,6 +17,8 @@ rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
 securimage      | PHP Captcha     | 3.6.5     | patched [1]
 
+
+## Javascript/CSS libraries
 
 library / plugin                  | version   | status
 ----------------------------------|-----------|---------------
