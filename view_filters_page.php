@@ -126,22 +126,14 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 							<i class="ace-icon fa fa-bars bigger-125"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
-							<li>
 							<?php
-								$f_switch_view_link = 'view_filters_page.php?static=' . (int)$f_static;
+								$t_url = 'view_filters_page.php?static=' . (int)$f_static;
 								if( $t_named_filter ) {
-									$f_switch_view_link .= '&filter_id=' . $f_filter_id;
+									$t_url .= '&filter_id=' . $f_filter_id;
 								}
-								$f_switch_view_link .= '&view_type=';
-								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-									if( FILTER_VIEW_TYPE_ADVANCED == $t_filter['_view_type'] ) {
-										echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_SIMPLE . '"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
-									} else {
-										echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_ADVANCED . '"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
-									}
-								}
+								$t_url .= '&view_type=';
+								filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 							?>
-							</li>
 						</ul>
 					</div>
 				</div>

@@ -2411,9 +2411,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</h4>
 			<div class="widget-toolbar">
 				<?php
-					$f_switch_view_link = (config_get('use_dynamic_filters'))
-						? 'view_all_set.php?type=6&amp;view_type='
-						: 'view_filters_page.php?view_type=';
 					$t_view_filters = config_get('view_filters');
 
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
@@ -2425,15 +2422,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
-							if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
-								echo '<li>';
-								if( FILTER_VIEW_TYPE_ADVANCED == $t_view_type ) {
-									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_SIMPLE . '"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
-								} else {
-									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_ADVANCED . '"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
-								}
-								echo '</li>';
-							}
+							$t_url = config_get( 'use_dynamic_filters' )
+								? 'view_all_set.php?type=6&amp;view_type='
+								: 'view_filters_page.php?view_type=';
+							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
+
 							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 								echo '<li>';
 								echo '<a href="permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ) . '">';
@@ -3443,4 +3436,35 @@ function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
 		}
 	}
 	return false;
+}
+
+/**
+ * Prints the simple/advanced menu item toggle if needed
+ * @param string $p_url       Target URL, must end with 'view_type='
+ * @param string $p_view_type Filter view type (FILTER_VIEW_TYPE_SIMPLE or
+ *                            FILTER_VIEW_TYPE_ADVANCED)
+ */
+function filter_print_view_type_toggle( $p_url, $p_view_type ) {
+	$t_view_filters = config_get( 'view_filters' );
+	if( $t_view_filters == SIMPLE_ONLY || $t_view_filters == ADVANCED_ONLY ) {
+		return;
+	}
+
+	if( $p_view_type == FILTER_VIEW_TYPE_ADVANCED ) {
+		$t_url = $p_url . FILTER_VIEW_TYPE_SIMPLE;
+		$t_icon = 'fa-toggle-off';
+		$t_lang_string = 'simple_filters';
+	} else {
+		$t_url = $p_url . FILTER_VIEW_TYPE_ADVANCED;
+		$t_icon = 'fa-toggle-on';
+		$t_lang_string = 'advanced_filters';
+	}
+
+	echo '<li>';
+	printf( '<a href="%s"><i class="ace-icon fa %s"></i>&#160;&#160;%s</a>',
+		$t_url,
+		$t_icon,
+		lang_get( $t_lang_string )
+	);
+	echo '</li>';
 }
