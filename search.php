@@ -140,7 +140,7 @@ $t_my_filter['custom_fields'] = $t_custom_fields;
 
 # Must use advanced filter so that the project_id is applied and multiple
 # selections are handled.
-$t_my_filter['_view_type'] = 'advanced';
+$t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 

@@ -134,10 +134,10 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 								}
 								$f_switch_view_link .= '&view_type=';
 								if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-									if( 'advanced' == $t_filter['_view_type'] ) {
-										echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
+									if( FILTER_VIEW_TYPE_ADVANCED == $t_filter['_view_type'] ) {
+										echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_SIMPLE . '"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
 									} else {
-										echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
+										echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_ADVANCED . '"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
 									}
 								}
 							?>

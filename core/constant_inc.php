@@ -462,6 +462,10 @@ define( 'META_FILTER_NONE', - 2 );
 define( 'META_FILTER_CURRENT', - 3 );
 define( 'META_FILTER_ANY', 0 );
 
+# Filter view types
+define( 'FILTER_VIEW_TYPE_SIMPLE', 'simple' );
+define( 'FILTER_VIEW_TYPE_ADVANCED', 'advanced' );
+
 # Custom filter types
 define( 'FILTER_TYPE_STRING', 0 );
 define( 'FILTER_TYPE_INT', 1 );

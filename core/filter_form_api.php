@@ -120,12 +120,12 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 
 
 /**
- * Return the input modifier to be used when a filter is of type "advanced"
+ * Return the input modifier to be used for advanced filters.
  * @param array $p_filter	Filter array to use
  * @return string
  */
 function filter_select_modifier( array $p_filter ) {
-	if( 'advanced' == $p_filter['_view_type'] ) {
+	if( FILTER_VIEW_TYPE_ADVANCED == $p_filter['_view_type'] ) {
 		return ' multiple="multiple" size="10"';
 	} else {
 		return '';
@@ -2359,7 +2359,9 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_get_params = $_GET;
 	$t_get_params['for_screen'] = $p_for_screen;
 	$t_get_params['static'] = ON;
-	$t_get_params['view_type'] = ( 'advanced' == $t_view_type ) ? 'advanced' : 'simple';
+	$t_get_params['view_type'] = ( FILTER_VIEW_TYPE_ADVANCED == $t_view_type )
+		? FILTER_VIEW_TYPE_ADVANCED
+		: FILTER_VIEW_TYPE_SIMPLE;
 	$t_filters_url .= '?' . http_build_query( $t_get_params );
 
 	$t_show_product_version =  version_should_show_product_version( $t_project_id );
@@ -2468,7 +2470,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'show_category_filter_target' /* content id */
 			));
-	if( 'simple' == $t_view_type ) {
+	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'hide_status_filter', lang_get( 'hide_status' ) ),
 				filter_form_get_input( $t_filter, 'hide_status', $t_show_inputs ),
@@ -2505,7 +2507,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'do_filter_by_last_updated_date_filter_target' /* content id */
 			));
-	if( 'advanced' == $t_view_type ) {
+	if( FILTER_VIEW_TYPE_ADVANCED == $t_view_type ) {
 		$t_row2->add_item( new TableFieldsItem(
 				$get_field_header( 'project_id_filter', lang_get( 'email_project' ) ),
 				filter_form_get_input( $t_filter, 'project_id', $t_show_inputs ),
