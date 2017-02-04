@@ -110,18 +110,10 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						<i class="ace-icon fa fa-bars bigger-125"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
-						<li>
 						<?php
-							$f_switch_view_link = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
-							if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-								if( FILTER_VIEW_TYPE_ADVANCED == $t_filter['_view_type'] ) {
-									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_SIMPLE . '"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
-								} else {
-									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_ADVANCED . '"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
-								}
-							}
+							$t_url = 'manage_filter_edit_page.php?filter_id=' . $f_filter_id . '&view_type=';
+							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 						?>
-						</li>
 					</ul>
 				</div>
 			</div>
