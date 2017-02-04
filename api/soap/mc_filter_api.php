@@ -233,7 +233,7 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
         $t_project_id = array( ALL_PROJECTS );
     }
 
-    $t_filter = array( '_view_type' => 'advanced' );
+    $t_filter = array( '_view_type' => FILTER_VIEW_TYPE_ADVANCED );
     $t_filter['project_id'] = $t_project_id;
 
     // default fields

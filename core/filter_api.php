@@ -562,12 +562,12 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_config_view_filters = config_get( 'view_filters' );
 	$t_view_type = $p_filter_arr['_view_type'];
 	if( ADVANCED_ONLY == $t_config_view_filters ) {
-		$t_view_type = 'advanced';
+		$t_view_type = FILTER_VIEW_TYPE_ADVANCED;
 	}
 	if( SIMPLE_ONLY == $t_config_view_filters ) {
-		$t_view_type = 'simple';
+		$t_view_type = FILTER_VIEW_TYPE_SIMPLE;
 	}
-	if( !in_array( $t_view_type, array( 'simple', 'advanced' ) ) ) {
+	if( !in_array( $t_view_type, array( FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ) ) ) {
 		$t_view_type = filter_get_default_view_type();
 	}
 	$p_filter_arr['_view_type'] = $t_view_type;
@@ -692,7 +692,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# If view_type is advanced, and hide_status is present, modify status array
 	# to remove hidden status. This may happen after switching from simple to advanced.
 	# Then, remove hide_status property, as it does not apply to advanced filter
-	if( $p_filter_arr['_view_type'] == 'advanced'
+	if( $p_filter_arr['_view_type'] == FILTER_VIEW_TYPE_ADVANCED
 			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
 		if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_STATUS] ) ) {
 			$t_selected_status_array = MantisEnum::getValues( config_get( 'status_enum_string' ) );
@@ -715,7 +715,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 
 	#If view_type is simple, resolve conflicts between show_status and hide_status
-	if( $p_filter_arr['_view_type'] == 'simple'
+	if( $p_filter_arr['_view_type'] == FILTER_VIEW_TYPE_SIMPLE
 			&& !filter_field_is_none( $p_filter_arr[FILTER_PROPERTY_HIDE_STATUS] ) ) {
 		# get array of hidden status ids
 		$t_all_status = MantisEnum::getValues( config_get( 'status_enum_string' ) );
@@ -745,14 +745,14 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
  * Get a filter array with default values
  * Optional view type parameter is used to initialize some fields properly,
  * as some may differ in the default content.
- * @param string $p_view_type	"simple" or "advanced"
+ * @param string $p_view_type	FILTER_VIEW_TYPE_SIMPLE or FILTER_VIEW_TYPE_ADVANCED
  * @return array Filter array with default values
  */
 function filter_get_default_array( $p_view_type = null ) {
 	static $t_cache_default_array = array();
 
 	$t_default_view_type = filter_get_default_view_type();
-	if( !in_array( $p_view_type, array( 'simple', 'advanced' ) ) ) {
+	if( !in_array( $p_view_type, array( FILTER_VIEW_TYPE_SIMPLE, FILTER_VIEW_TYPE_ADVANCED ) ) ) {
 		$p_view_type = $t_default_view_type;
 	}
 
@@ -766,14 +766,14 @@ function filter_get_default_array( $p_view_type = null ) {
 
 	$t_config_view_filters = config_get( 'view_filters' );
 	if( ADVANCED_ONLY == $t_config_view_filters ) {
-		$t_view_type = 'advanced';
+		$t_view_type = FILTER_VIEW_TYPE_ADVANCED;
 	} elseif( SIMPLE_ONLY == $t_config_view_filters ) {
-		$t_view_type = 'simple';
+		$t_view_type = FILTER_VIEW_TYPE_SIMPLE;
 	} else {
 		$t_view_type = $p_view_type;
 	}
 
-	if( $t_view_type == 'simple' ) {
+	if( $t_view_type == FILTER_VIEW_TYPE_SIMPLE ) {
 		$t_hide_status_default = config_get( 'hide_status_default' );
 	} else {
 		$t_hide_status_default = META_FILTER_NONE;
@@ -877,9 +877,9 @@ function filter_get_default_array( $p_view_type = null ) {
  */
 function filter_get_default_view_type() {
 	if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
-		return 'advanced';
+		return FILTER_VIEW_TYPE_ADVANCED;
 	} else {
-		return 'simple';
+		return FILTER_VIEW_TYPE_SIMPLE;
 	}
 }
 
@@ -1378,7 +1378,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	);
 
 	# normalize the project filtering into an array $t_project_ids
-	if( 'simple' == $t_view_type ) {
+	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		log_event( LOG_FILTERING, 'Simple Filter' );
 		$t_project_ids = array(
 			$t_project_id,
@@ -1682,7 +1682,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	$t_desired_statuses = $t_filter[FILTER_PROPERTY_STATUS];
 
 	# simple filtering: restrict by the hide status value if present
-	if( 'simple' == $t_filter['_view_type'] ) {
+	if( FILTER_VIEW_TYPE_SIMPLE == $t_filter['_view_type'] ) {
 		if( isset( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) && !filter_field_is_none( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) ) {
 			$t_selected_status_array = $t_filter[FILTER_PROPERTY_STATUS];
 			# if we have metavalue for "any", expand to all status, to filter them
@@ -2411,7 +2411,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</h4>
 			<div class="widget-toolbar">
 				<?php
-					$f_switch_view_link = (config_get('use_dynamic_filters')) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+					$f_switch_view_link = (config_get('use_dynamic_filters'))
+						? 'view_all_set.php?type=6&amp;view_type='
+						: 'view_filters_page.php?view_type=';
 					$t_view_filters = config_get('view_filters');
 
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
@@ -2425,10 +2427,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							<?php
 							if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 								echo '<li>';
-								if( 'advanced' == $t_view_type ) {
-									echo '<a href="' . $f_switch_view_link, 'simple"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
+								if( FILTER_VIEW_TYPE_ADVANCED == $t_view_type ) {
+									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_SIMPLE . '"><i class="ace-icon fa fa-toggle-off"></i>&#160;&#160;' . lang_get('simple_filters') . '</a>';
 								} else {
-									echo '<a href="' . $f_switch_view_link, 'advanced"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
+									echo '<a href="' . $f_switch_view_link . FILTER_VIEW_TYPE_ADVANCED . '"><i class="ace-icon fa fa-toggle-on"></i>&#160;&#160;' . lang_get('advanced_filters') . '</a>';
 								}
 								echo '</li>';
 							}

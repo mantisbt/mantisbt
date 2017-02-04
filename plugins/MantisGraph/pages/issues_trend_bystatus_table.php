@@ -48,7 +48,7 @@ $t_bug_count = null;
 $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
-$t_filter['_view_type']	= 'advanced';
+$t_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 $t_filter[FILTER_PROPERTY_STATUS] = array( META_FILTER_ANY );
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
