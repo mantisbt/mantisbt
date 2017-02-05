@@ -207,13 +207,6 @@ function require_css( $p_stylesheet_path ) {
 function html_css() {
 	global $g_stylesheets_included;
 	html_css_link( config_get( 'css_include_file' ) );
-
-	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_css_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.min.css' );
-	} else {
-		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
-	}
-
 	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
@@ -309,14 +302,12 @@ function html_head_javascript() {
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js', JQUERY_HASH );
-		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js', JQUERY_UI_HASH );
 
 		# Dropzone
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH );
 	} else {
 		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
-		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
 
 		# Dropzone
 		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
