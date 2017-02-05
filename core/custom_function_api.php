@@ -111,7 +111,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	if( $t_bug->handler_id != 0 ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
-	echo '<br />';
+	echo '<div class="space-2"></div>';
 }
 
 /**
