@@ -42,6 +42,7 @@
  * @author Emostoyanov
  * @author Svetoslav.dragoev
  * @author Vodnokon4e
+ * @author АдмиралАнимЕ
  */
 
 $s_plugin_graph_title = 'MantisBT - Графики';
@@ -53,7 +54,7 @@ $s_plugin_MantisGraph_status_link = 'По състояние';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По значимост';
 $s_plugin_MantisGraph_category_link = 'По категория';
-$s_plugin_MantisGraph_resolution_link = 'По резолюция';
+$s_plugin_MantisGraph_resolution_link = 'По разрешение';
 $s_plugin_MantisGraph_issue_trends_link = 'Най-активни задачи';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Синтез на диаграми по състояние';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Синтез на диаграми по приоритет';

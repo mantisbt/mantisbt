@@ -50,5 +50,7 @@ $s_plugin_format_process_text_warning_notice = 'Arabat diweredekaat hep gouzout 
 $s_plugin_format_process_urls = 'Tretañ an URL';
 $s_plugin_format_process_buglinks = 'Liammoù diabarzh MantisBT (draen / notenn diwar-benn un draen)';
 $s_plugin_format_process_buglinks_info = 'Termenañ a ra ho kefluniadur  ar valizenn <em>Issue</em> evel « <literal>%s</literal> » ha <em>Issue Note</em> evel « <literal>%s</literal> »';
+$s_plugin_format_process_markdown = 'Tretañ Markdown';
+$s_plugin_format_process_markdown_info = 'Furmadiñ gant skoazell Markdown. Graet eo ereadur furmeladur an destenn diouzh ma c\'hallo-hi bezañ troet en HTML.';
 $s_plugin_format_enabled = 'Gweredekaet';
 $s_plugin_format_disabled = 'Diweredekaet';

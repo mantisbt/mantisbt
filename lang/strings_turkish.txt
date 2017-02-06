@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Archaeodontosaurus
  * @author Burakolik
  * @author Emperyan
  * @author Erdemaslancan
@@ -277,6 +278,8 @@ $s_email_summary = 'Özet';
 $s_email_description = 'Açıklama';
 $s_email_additional_information = 'Ek Bilgi';
 $s_email_steps_to_reproduce = 'Tekrarlamaya Yönelik Adımlar';
+$s_email_tag = 'Etiketler';
+$s_email_due_date = 'Bitiş Tarihi';
 $s_account_protected_msg = 'Hesap korunuyor. Ayarlar değiştirilemedi...';
 $s_account_removed_msg = 'Hesabınız sistemden silindi...';
 $s_confirm_delete_msg = 'Hesabınızı silmek istediğinizden emin misiniz?';

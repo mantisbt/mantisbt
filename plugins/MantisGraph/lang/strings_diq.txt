@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Asmen
  * @author Erdemaslancan
  * @author Gambollar
  * @author Gırd
@@ -62,7 +63,7 @@ $s_plugin_MantisGraph_graph_imp_severity_title = 'Ciddiyetê Grafiki heta';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Grafikê kategori heta';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikê Agozni heta';
 $s_plugin_MantisGraph_graph_developer_title = 'Hetê vıtaştoğê grafiki ra';
-$s_plugin_MantisGraph_graph_reporter_title = 'Grafikê Raporteri heta';
+$s_plugin_MantisGraph_graph_reporter_title = 'Hetê Reporter Graphsi ra';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Problemi a biy, hal biy u ê mendey';
 $s_plugin_MantisGraph_by_status_pct = 'Seyin weziyeti heta';
 $s_plugin_MantisGraph_by_priority_pct = 'Seyin verori heta';

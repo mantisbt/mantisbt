@@ -948,7 +948,6 @@ $s_open_queries = 'Управление фильтрами';
 $s_query_delete_msg = 'Вы уверены, что хотите удалить этот фильтр?';
 $s_edit_filter = 'Изменение фильтра';
 $s_owner = 'Владелец';
-$s_filter_access = 'Доступ к фильтру';
 $s_current_project = 'Текущий проект';
 $s_available_filter_for_project = 'Доступные фильтры для проекта';
 $s_manage_filter_page_title = 'Управление фильтрами';
