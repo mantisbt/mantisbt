@@ -34,6 +34,7 @@ require_once 'PluginTest.php';
 require_once 'MentionParsingTest.php';
 require_once 'StringTest.php';
 require_once 'ConfigParserTest.php';
+require_once 'MarkdownTest.php';
 
 /**
  * All Test Cases
@@ -54,6 +55,7 @@ class MantisAllTests extends PHPUnit_Framework_TestSuite {
 		$t_suite->addTestSuite( 'MantisStringTest' );
 		$t_suite->addTestSuite( 'MentionParsingTest' );
 		$t_suite->addTestSuite( 'MantisConfigParserTest' );
+		$t_suite->addTestSuite( 'MantisMarkdownTest' );
 
 		return $t_suite;
 	}
