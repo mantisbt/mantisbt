@@ -24,8 +24,8 @@
  */
 
 # Includes
-require_once  dirname( dirname( __FILE__ ) ) . '/../../tests/TestConfig.php' ;
-require_once( dirname( dirname( __FILE__ ) ) . '/core/MantisMarkdown.php' );
+require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
+require_once dirname( dirname( __FILE__ ) ) . '/../plugins/MantisCoreFormatting/core/MantisMarkdown.php';
 
 # MantisBT Core API
 require_mantis_core();
@@ -53,6 +53,13 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 		$t_string = string_html_specialchars( $t_string );
 		$t_string = string_restore_valid_html_tags( $t_string, true );
 		
+		# TODO: make sure to process the bug/note link
+		# NOTE: helper is throwing a dependency error
+		# PHP Fatal error:  Call to a member function Param() on null in core/database_api.php on line 85 
+		//$t_string = string_process_bug_link( $t_string );
+		//$t_string = string_process_bugnote_link( $t_string );
+		//$t_string = mention_format_text( $t_string, true );
+
 		return $t_string;
 	}
 
@@ -82,6 +89,8 @@ class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 		$t_process_string = $this->processText( $t_input_string );
 
 		$this->assertEquals( '<p>#1</p>', MantisMarkdown::convert_text( $t_process_string ) );
+
+
 	}
 
 }
