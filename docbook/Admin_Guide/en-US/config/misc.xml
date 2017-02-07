@@ -49,6 +49,15 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_export_issues_threshold</term>
+			<listitem>
+				<para>Access level needed to export issues with Mantis
+					embedded functions. 
+					The default value is VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_limit_reporters</term>
 			<listitem>
 				<para>Limit reporters to only viewing bugs that they
