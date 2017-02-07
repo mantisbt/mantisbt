@@ -533,6 +533,7 @@ $s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
+$s_create_fixed_in_version = 'Create Version';
 
 # bug_close.php
 $s_bug_close_msg = 'Issue has been closed...';

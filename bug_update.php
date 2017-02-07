@@ -28,6 +28,7 @@
 	require_once( 'core.php' );
 
 	require_once( 'bug_api.php' );
+	require_once( 'version_api.php' );
 	require_once( 'bugnote_api.php' );
 	require_once( 'custom_field_api.php' );
 
@@ -86,6 +87,28 @@
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 		$t_bug_data->target_version	= gpc_get_string( 'target_version', $t_bug_data->target_version );
+	}
+
+	/**
+	 * Create Fixed in Version
+	 */
+	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_bug_data->project_id, $t_user ) ){
+		$f_create_fixed_in_version = trim( gpc_get_string( 'create_fixed_in_version', '' ) );
+		if( !is_blank( $f_create_fixed_in_version ) ){
+			$t_project_id = $t_bug_data->project_id;
+			$f_create_fixed_in_version_released = gpc_get_bool( 'create_fixed_in_version_released' );
+			if( version_is_unique( $f_create_fixed_in_version, $t_project_id ) ){
+				$t_version_id = version_add( $t_project_id, $f_create_fixed_in_version );
+				event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
+				if( $f_create_fixed_in_version_released ){
+					$t_version = version_get( $t_version_id );
+					$t_version->released = $f_create_fixed_in_version_released ? VERSION_RELEASED : VERSION_FUTURE;
+					version_update( $t_version );
+					event_signal( 'EVENT_MANAGE_VERSION_UPDATE', array( $t_version->id ) );
+				}
+			}
+			$t_bug_data->fixed_in_version = $f_create_fixed_in_version;
+		}
 	}
 
 	if( $t_due_date !== null) {

@@ -274,6 +274,34 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 		<select name="fixed_in_version">
 			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
+    <?php if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_bug->project_id, $t_current_user_id ) ){ ?>
+      <div id="create_fixed_in_version">
+        <label>
+          <?php echo lang_get( 'create_fixed_in_version' ); ?>
+          <input type="text" name="create_fixed_in_version" maxlength="10" />
+        </label>
+        <label>
+          <?php echo lang_get( 'released' ); ?>
+          <input type="checkbox" name="create_fixed_in_version_released" />
+        </label>
+        <script>
+          var createFixedInVersionToggle = function(){
+            document.querySelector('select[name=fixed_in_version]').onchange = function(){
+              document.getElementById('create_fixed_in_version').style.display = (this.value == '' ? 'block' : 'none');
+            }
+            document.getElementById('create_fixed_in_version').style.display
+              = (document.querySelector('select[name=fixed_in_version]').value == '' ? 'block' : 'none');
+          }
+          (window.addEventListener
+            ? window.addEventListener('load', createFixedInVersionToggle, false)
+            : (window.attachEvent
+              ? window.attachEvent('onload', createFixedInVersionToggle)
+              : createFixedInVersionToggle()
+              )
+            );
+        </script>
+      </div>
+    <?php } ?>
 	</td>
 </tr>
 <?php
