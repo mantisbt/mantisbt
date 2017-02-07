@@ -111,10 +111,15 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		<div class="btn-toolbar">
 			<div class="btn-group pull-left">
 		<?php
-			# -- Print and Export links --
+			# -- Print link --
 			print_small_button( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-			print_small_button( 'csv_export.php', lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php', lang_get( 'excel_export' ) );
+			
+			# -- Export links --
+			$t_export_issues_threshold = config_get( 'export_issues_threshold' );
+			if( access_has_project_level( $t_export_issues_threshold ) ) {
+				print_small_button( 'csv_export.php', lang_get( 'csv_export' ) );
+				print_small_button( 'excel_xml_export.php', lang_get( 'excel_export' ) );
+			}
 
 			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
 
