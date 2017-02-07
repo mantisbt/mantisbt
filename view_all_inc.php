@@ -118,10 +118,17 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 				$t_filter_param = '?' . $t_filter_param;
 				$t_summary_link = 'summary_page.php' . $t_filter_param;
 			}
-			# -- Print and Export links --
+
+			# -- Print link --
 			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
-			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+			
+			# -- Export links --
+			$t_export_issues_threshold = config_get( 'export_issues_threshold' );
+			if( access_has_project_level( $t_export_issues_threshold ) ) {
+				print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
+				print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+			}
+
 			if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
 				print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
 			}
