@@ -2783,6 +2783,13 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
+ * Access level needed to export filtered bugs
+ * Look in the constant_inc.php file if you want to set a different value.
+ * @global integer $g_export_issues_threshold
+ */
+$g_export_issues_threshold = VIEWER;
+
+/**
  * access level needed to view private bugs
  * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bug_threshold
