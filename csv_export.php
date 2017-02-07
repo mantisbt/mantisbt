@@ -45,6 +45,11 @@ require_api( 'filter_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 
+if( !access_has_project_level( config_get( 'export_issues_threshold' ) ) ) {
+	# current user is not allowed to export content => redirection (compliant with bug_count = 0)
+	print_header_redirect( 'view_all_set.php?type=0' );
+}
+
 auth_ensure_user_authenticated();
 
 helper_begin_long_process();
