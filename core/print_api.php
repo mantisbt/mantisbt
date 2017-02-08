@@ -1903,7 +1903,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $t_show_attachment_preview ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = false;
+		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
 		collapse_open( $t_collapse_id );
 	}
 
