@@ -123,8 +123,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
 			
 			# -- Export links --
-			$t_export_issues_threshold = config_get( 'export_issues_threshold' );
-			if( access_has_project_level( $t_export_issues_threshold ) ) {
+			if( access_has_project_level( config_get( 'export_issues_threshold' ) ) ) {
 				print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
 				print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
 			}
