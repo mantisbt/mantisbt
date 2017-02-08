@@ -234,6 +234,18 @@ $t_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 #
 
 echo '<div class="col-md-12 col-xs-12">';
+
+# Bug title
+if( $t_show_summary ) {
+	echo '<div class="page-header">';
+	echo '<h1>', $t_summary, '</h1>';
+	if( $t_show_resolution ) {
+		echo '<small class="bug-resolution" title="', string_display_line(lang_get( 'resolution' )) , '">', $t_resolution, '</small>';
+	}
+	echo '</div>';
+}
+
+# Bug details
 echo '<div class="widget-box widget-color-blue2">';
 echo '<div class="widget-header widget-header-small">';
 echo '<h4 class="widget-title lighter">';
