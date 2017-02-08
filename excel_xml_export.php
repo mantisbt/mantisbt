@@ -52,12 +52,12 @@ require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
+auth_ensure_user_authenticated();
+
 if( !access_has_project_level( config_get( 'export_issues_threshold' ) ) ) {
 	# current user is not allowed to export content => redirection to print page (compliant with bug_count = 0)
 	print_header_redirect( 'view_all_set.php?type=0&print=1' );
 }
-
-auth_ensure_user_authenticated();
 
 $f_export = gpc_get_string( 'export', '' );
 
