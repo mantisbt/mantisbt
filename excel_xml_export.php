@@ -86,7 +86,7 @@ $t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
 $p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
 
 if( 0 == $p_bug_count ) {
-	print_header_redirect( 'view_all_set.php?type=0&print=1' );
+	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
 $t_end_of_results = false;
