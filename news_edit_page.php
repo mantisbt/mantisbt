@@ -116,7 +116,7 @@ layout_page_begin( 'main_page.php' );
 					<span class="required">*</span> <?php echo lang_get( 'headline' ) ?>
 				</td>
 				<td>
-					<input type="text" id="news-update-headline" name="headline" class="input-sm" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
+					<input type="text" id="news-update-headline" name="headline" class="input-sm" size="64" maxlength="64" value="<?php echo $v_headline ?>" required />
 				</td>
 			</tr>
 			<tr>
@@ -124,7 +124,7 @@ layout_page_begin( 'main_page.php' );
 					<span class="required">*</span> <?php echo lang_get( 'body' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea>
+					<textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10" required><?php echo $v_body ?></textarea>
 				</td>
 			</tr>
 			<tr>

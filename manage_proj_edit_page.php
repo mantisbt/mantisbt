@@ -116,7 +116,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
 				</td>
 				<td>
-					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" />
+					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" required />
 				</td>
 			</tr>
 			<tr>
@@ -849,7 +849,7 @@ if( count( $t_users ) > 0 ) { ?>
 				   <span class="required">*</span> <?php echo lang_get( 'username' ) ?>
 				</td>
 				<td>
-					<select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10"><?php
+					<select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10" required><?php
 						foreach( $t_users AS $t_user_id=>$t_display_name ) {
 							echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
 						} ?>

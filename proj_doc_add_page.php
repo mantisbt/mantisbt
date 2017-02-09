@@ -80,7 +80,7 @@ print_doc_menu('proj_doc_add_page.php');
 		<span class="required">*</span> <?php echo lang_get( 'title' ) ?>
 	</th>
 	<td width="75%">
-		<input type="text" name="title" class="input-sm" size="70" maxlength="250" />
+		<input type="text" name="title" class="input-sm" size="70" maxlength="250" required />
 	</td>
 </tr>
 <tr>
@@ -98,7 +98,7 @@ print_doc_menu('proj_doc_add_page.php');
 		<?php print_max_filesize( $t_max_file_size ); ?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" required />
 		<input name="file" type="file" size="70" />
 	</td>
 </tr>

@@ -101,7 +101,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
 				</td>
 				<td>
-					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" />
+					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" required />
 				</td>
 			</tr>
 			<tr>
