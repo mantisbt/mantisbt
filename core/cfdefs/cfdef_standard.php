@@ -355,9 +355,10 @@ function cfdef_prepare_date_value( $p_value ) {
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_list( array $p_field_def, $p_custom_field_value ) {
+function cfdef_input_list( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 	$t_list_size = $t_possible_values_count = count( $t_values );
 
@@ -370,9 +371,9 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value ) {
 	}
 
 	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple">';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple"' . $p_required .'>';
 	} else {
-		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '">';
+		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required .'>';
 	}
 
 	$t_selected_values = explode( '|', $p_custom_field_value );
@@ -390,16 +391,17 @@ function cfdef_input_list( array $p_field_def, $p_custom_field_value ) {
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
+function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 	$t_checked_values = explode( '|', $p_custom_field_value );
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
 		echo '<label for="' . $t_input_id . '">' . "\n";
-		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"' . $p_required;
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
 		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
@@ -411,9 +413,10 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
+function cfdef_input_radio( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 
 	$t_len = strlen( $p_custom_field_value );
@@ -427,7 +430,7 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'];
 		echo '<label for="' . $t_input_id . '">';
-		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
+		echo '<input class="ace" id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"' . $p_required;
 		check_checked( $t_checked_value, $t_values[$i] );
 		echo " />\n";
 		echo '<span class="lbl">&#160;' . string_display_line( $t_values[$i] ) . '</span>' . "\n";
@@ -439,10 +442,11 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
-	echo '<input ' . helper_get_tab_index() . ' type="text" id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="80"';
+function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
+	echo '<input ' . helper_get_tab_index() . ' type="text" id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="80"' . $p_required;
 	if( 0 < $p_field_def['length_max'] ) {
 		echo ' maxlength="' . $p_field_def['length_max'] . '"';
 	} else {
@@ -455,10 +459,11 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
  * print_custom_field_input
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_textarea( array $p_field_def, $p_custom_field_value ) {
-	echo '<textarea class="form-control" ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
+function cfdef_input_textarea( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
+	echo '<textarea class="form-control" ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"' . $p_required;
 	echo ' cols="70" rows="8">' . $p_custom_field_value .'</textarea>';
 }
 
@@ -467,10 +472,11 @@ function cfdef_input_textarea( array $p_field_def, $p_custom_field_value ) {
  *
  * @param string $p_field_def          The custom field definition.
  * @param string $p_custom_field_value The custom field value to print.
+ * @param string $p_required           The "required" attribute to add to the field
  * @return void
  */
-function cfdef_input_date( $p_field_def, $p_custom_field_value ) {
-	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true );
+function cfdef_input_date( $p_field_def, $p_custom_field_value, $p_required = '' ) {
+	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true, 0, 0, 'input-sm', $p_required );
 }
 
 /**

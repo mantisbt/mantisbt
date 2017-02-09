@@ -540,7 +540,7 @@ if( $t_show_attachments ) {
 			<span class="required">*</span><label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
 		</th>
 		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
+			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" required />
 		</td>
 	</tr>
 	<tr>
@@ -548,7 +548,7 @@ if( $t_show_attachments ) {
 			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
 		</th>
 		<td>
-			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
+			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10" required><?php echo string_textarea( $f_description ) ?></textarea>
 		</td>
 	</tr>
 
@@ -609,7 +609,7 @@ if( $t_show_attachments ) {
 			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
-			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
+			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_def['require_report'] ) ?>
 		</td>
 	</tr>
 <?php

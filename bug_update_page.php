@@ -689,7 +689,7 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 		echo '<span>', string_display( lang_get_defaulted( $t_def['name'] ) ), '</span>';
 		echo '</label>';
 		echo '</td><td colspan="5">';
-		print_custom_field_input( $t_def, $t_bug_id );
+		print_custom_field_input( $t_def, $t_bug_id, $t_def['require_update'] );
 		echo '</td></tr>';
 	}
 } # foreach( $t_related_custom_field_ids as $t_id )

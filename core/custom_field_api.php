@@ -1372,10 +1372,11 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
  * NOTE: This probably belongs in the print_api.php
  * @param array   $p_field_def Custom field definition.
  * @param integer $p_bug_id    A bug identifier.
+ * @param boolean $p_required  True if the field is required for form submission
  * @return void
  * @access public
  */
-function print_custom_field_input( array $p_field_def, $p_bug_id = null ) {
+function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_required = false ) {
 	if( null === $p_bug_id ) {
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 	} else {
@@ -1392,7 +1393,8 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null ) {
 
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
-		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def, $t_custom_field_value );
+		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def,
+			$t_custom_field_value, $p_required ? ' required ' : '' );
 		print_hidden_input( custom_field_presence_field_name( $p_field_def['id'] ), '1' );
 	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );

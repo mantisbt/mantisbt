@@ -292,7 +292,7 @@ layout_page_begin();
 		<td>
 <?php
 			if( $t_has_write_access ) {
-				print_custom_field_input( $t_def, $f_bug_id );
+				print_custom_field_input( $t_def, $f_bug_id, $t_require );
 			} elseif( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 				print_custom_field_value( $t_def, $t_id, $f_bug_id );
 			}
