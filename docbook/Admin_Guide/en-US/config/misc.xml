@@ -67,8 +67,8 @@
 		<varlistentry>
 			<term>$g_export_issues_threshold</term>
 			<listitem>
-				<para>Access level needed to export issues with Mantis
-					embedded functions. 
+				<para>Access level required to export issues from 
+					MantisBT to formats like CSV and Excel. 
 					The default value is VIEWER.
 				</para>
 			</listitem>
