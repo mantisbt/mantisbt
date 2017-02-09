@@ -448,7 +448,7 @@ $s_warning_admin_directory_present = '<strong>ATENCION :</strong> lo repertòri 
 $s_error_database_no_schema_version = '<strong>Error :</strong> L\'estructura de la basa de donadas sembla obsoleta (config(databaseversion) es a 0) o corrompuda. Verificatz que vòstra basa de donadas es en cors d\'execucion - podèm pas trobar la version de l\'esquèma de la basa de donadas. La taula « Config » a pas renviat una version valida de l\'esquèma - demandatz d\'ajuda sus la lista de difusion mantis-help se besonh.';
 $s_error_database_version_out_of_date_2 = '<strong>ATENCION :</strong> L\'estructura de la basa de donadas pòt èsser depassada. Metètz a jorn dempuèi <a href="admin/install.php">aicí</a> abans de vos identificar.';
 $s_error_code_version_out_of_date = '<strong>ATENCION :</strong> L\'estructura de la basa de donadas es mai recenta que lo logicial installat. Metètz a jorn lo logicial.';
-$s_login_page_info = 'Benvenguda sul sistèma de gestion dels bògues.';
+$s_login_page_info = 'Benvenguda sul sistèma de gestion dels bugs.';
 $s_login_title = 'Utilizaire';
 $s_save_login = 'Se remembrar de mon identificant sus aqueste ordinator.';
 $s_secure_session = 'Session securizada';

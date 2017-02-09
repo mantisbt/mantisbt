@@ -41,6 +41,7 @@
  * @author Crt
  * @author Lliehu
  * @author Nike
+ * @author Pyscowicz
  * @author Silvonen
  * @author Str4nd
  * @author Tkh
@@ -281,8 +282,9 @@ $s_confirm_password = 'Vahvista salasana';
 $s_current_password = 'Nykyinen salasana';
 $s_access_level = 'Käyttöoikeustaso';
 $s_update_user_button = 'Päivitä käyttäjätunnustiedot';
-$s_verify_warning = 'Käyttäjätilitietosi on vahvistettu. Sähköpostina vastaanottamasi käyttäjätilin vahvistusviestin vahvistustietoja ei voi enää käyttää.';
+$s_verify_warning = 'Käyttäjätilitietosi on vahvistettu.';
 $s_verify_change_password = 'Sinun pitää syöttää salasana sisäänkirjautumista varten.';
+$s_last_used = 'Viimeksi käytetty';
 $s_default_account_preferences_title = 'Käyttäjätilin asetukset';
 $s_default_project = 'Oletusprojekti';
 $s_refresh_delay = 'Virkistyksen viive';
@@ -442,6 +444,7 @@ $s_add_bugnote_button = 'Lisää muistiinpano';
 $s_bugnote_edit_link = 'Muokkaa';
 $s_closed_bug_button = 'Sulje tapahtuma';
 $s_bugnote_updated_msg = 'Muistiinpano onnistuneesti päivitetty...';
+$s_last_edited = 'Viimeksi muokattu:';
 $s_hide_content = 'Piilota sisältö';
 $s_show_content = 'Näytä sisältö';
 $s_total_queries_executed = '%1$d kyselyä suoritettu.';
@@ -853,6 +856,11 @@ $s_query_name_too_long = 'Et voi tallentaa suodattimen nimeä jonka pituus on en
 $s_query_store_error = 'Suotimen tallettamisessa tapahtui virhe.';
 $s_open_queries = 'Muokkaa suodattimia';
 $s_query_delete_msg = 'Oletko varma, että haluat poistaa tämän suotimen?';
+$s_owner = 'Omistaja';
+$s_manage_filter_page_title = 'Hallitse suodattimia';
+$s_manage_filter_edit_page_title = 'Muokkaa suodatinta';
+$s_delete_filter_button = 'Poista';
+$s_apply_filter_button = 'Käytä';
 $s_view_simple_link = 'Näytä yksinkertaiset tiedot';
 $s_product_build = 'Tuotteen kooste';
 $s_system_profile = 'Järjestelmäkuvaus';
