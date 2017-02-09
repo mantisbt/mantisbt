@@ -237,10 +237,10 @@ echo '<div class="col-md-12 col-xs-12">';
 
 # Bug title
 if( $t_show_summary ) {
-	echo '<div class="page-header">';
+	echo '<div class="col-md-12 col-xs-12">';
 	echo '<h1>', $t_summary, '</h1>';
 	if( $t_show_resolution ) {
-		echo '<small class="bug-resolution" title="', lang_get( 'resolution' ) , '">', $t_resolution, '</small>';
+		echo ' <small class="bug-resolution" title="', lang_get( 'resolution' ), '">', $t_resolution, '</small>';
 	}
 	echo '</div>';
 }
