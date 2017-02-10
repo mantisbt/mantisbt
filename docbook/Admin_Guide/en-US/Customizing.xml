@@ -785,7 +785,7 @@ $g_notify_flags['owner'] = array(
                         about. Also send new issue notifications to managers so they can
                         screen them.
 <programlisting>
-$g_mail_receive_own = OFF;
+$g_email_receive_own = OFF;
 $g_default_notify_flags = array(
 	'reporter'      => ON,
 	'handler'       => ON,
