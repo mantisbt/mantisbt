@@ -1557,7 +1557,7 @@ function print_filter_relationship_type( array $p_filter = null ) {
 	if( !$c_reltype_value ) {
 		$c_reltype_value = -1;
 	}
-	relationship_list_box( $c_reltype_value, 'relationship_type', true );
+	relationship_list_box( $c_reltype_value, 'relationship_type', true, false, "input-xs" );
 	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
