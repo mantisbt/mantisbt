@@ -317,9 +317,10 @@ function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_typ
 /**
  * Delete a relationship
  * @param integer $p_relationship_id Relationship Id to update.
+ * @param integer $p_skip_email_for_issue_id Skip email for specified issue, otherwise 0.
  * @return void
  */
-function relationship_delete( $p_relationship_id ) {
+function relationship_delete( $p_relationship_id, $p_skip_email_for_issue_id = 0 ) {
 	$t_relationship = relationship_get( $p_relationship_id );
 
 	db_param_push();
@@ -335,7 +336,10 @@ function relationship_delete( $p_relationship_id ) {
 
 	# send email and update the history for the src issue
 	history_log_event_special( $t_src_bug_id, BUG_DEL_RELATIONSHIP, $t_rel_type, $t_dest_bug_id );
-	email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
+
+	if( $t_src_bug_id != $p_skip_email_for_issue_id ) {
+		email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
+	}
 
 	if( bug_exists( $t_dest_bug_id ) ) {
 		history_log_event_special(
@@ -344,7 +348,9 @@ function relationship_delete( $p_relationship_id ) {
 			relationship_get_complementary_type( $t_rel_type ),
 			$t_src_bug_id );
 
-		email_relationship_deleted( $t_dest_bug_id, $t_src_bug_id, $t_rel_type );
+		if( $t_dest_bug_id != $p_skip_email_for_issue_id ) {
+			email_relationship_deleted( $t_dest_bug_id, $t_src_bug_id, $t_rel_type );
+		}
 	}
 }
 
@@ -354,11 +360,11 @@ function relationship_delete( $p_relationship_id ) {
  * @return void
  */
 function relationship_delete_all( $p_bug_id ) {
-	db_param_push();
-	$t_query = 'DELETE FROM {bug_relationship}
-				WHERE source_bug_id=' . db_param() . ' OR
-				destination_bug_id=' . db_param();
-	db_query( $t_query, array( (int)$p_bug_id, (int)$p_bug_id ) );
+	$t_is_different_projects = false;
+	$t_relationships = relationship_get_all( $p_bug_id, $t_is_different_projects );
+	foreach( $t_relationships as $t_relationship ) {
+		relationship_delete( $t_relationship->id, /* skip_email_for_issue_id */ $p_bug_id );
+	}
 }
 
 /**
@@ -368,23 +374,21 @@ function relationship_delete_all( $p_bug_id ) {
  * @return void
  */
 function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
-	$t_relationship = relationship_get_all_src( $p_bug_id );
-	$t_relationship_count = count( $t_relationship );
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
+	$t_relationships = relationship_get_all_src( $p_bug_id );
+	foreach( $t_relationships as $t_relationship ) {
 		relationship_add(
 			$p_new_bug_id,
-			$t_relationship[$i]->dest_bug_id,
-			$t_relationship[$i]->type,
+			$t_relationship->dest_bug_id,
+			$t_relationship->type,
 			/* email_for_source */ false );
 	}
 
-	$t_relationship = relationship_get_all_dest( $p_bug_id );
-	$t_relationship_count = count( $t_relationship );
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
+	$t_relationships = relationship_get_all_dest( $p_bug_id );
+	foreach( $t_relationships as $t_relationship ) {
 		relationship_add(
 			$p_new_bug_id,
-			$t_relationship[$i]->src_bug_id,
-			relationship_get_complementary_type( $t_relationship[$i]->type ),
+			$t_relationship->src_bug_id,
+			relationship_get_complementary_type( $t_relationship->type ),
 			/* email_for_source */ false );
 	}
 }
