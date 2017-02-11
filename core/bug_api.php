@@ -1917,12 +1917,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
 		 if( $t_id_relationship > 0 ) {
-			# Update the relationship
 			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
 		} else if( $t_id_relationship != -1 ) {
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 		} # else relationship is -1 - same type exists, do nothing
