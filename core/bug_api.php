@@ -1913,7 +1913,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		# the related bug exists...
 		bug_ensure_exists( $p_duplicate_id );
 
-		relationship_upsert( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+		relationship_upsert( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
 
 		# Copy list of users monitoring the duplicate bug to the original bug
 		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );

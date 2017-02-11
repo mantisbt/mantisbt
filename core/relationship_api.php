@@ -205,9 +205,10 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
  * @return integer The new bug relationship id.
  */
-function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
 		$c_src_bug_id = (int)$p_dest_bug_id;
@@ -234,6 +235,13 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 	bug_update_date( $p_src_bug_id );
 	bug_update_date( $p_dest_bug_id );
 
+	# send email notification to the users addressed by both the bugs
+	if( $p_email_for_source ) {
+		email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+	}
+
+	email_relationship_added( $p_dest_bug_id, $p_src_bug_id, relationship_get_complementary_type( $p_relationship_type ) );
+
 	return $t_relationship_id;
 }
 
@@ -243,9 +251,10 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
  * @return void
  */
-function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
 		$c_src_bug_id = (int)$p_dest_bug_id;
@@ -270,6 +279,13 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 
 	bug_update_date( $p_src_bug_id );
 	bug_update_date( $p_dest_bug_id );
+
+	# send email notification to the users addressed by both the bugs
+	if( $p_email_for_source ) {
+		email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+	}
+
+	email_relationship_added( $p_dest_bug_id, $p_src_bug_id, relationship_get_complementary_type( $p_relationship_type ) );
 }
 
 /**
@@ -278,17 +294,18 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
  * @return integer The new bug relationship id.
  */
-function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	# Check if there is other relationship between the bugs.
 	$t_id_relationship = relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
 
 	if( $t_id_relationship > 0 ) {
-		relationship_update( $t_id_relationship, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+		relationship_update( $t_id_relationship, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
 		$t_relationship_id = $t_id_relationship;
 	} else if( $t_id_relationship != -1 ) {
-		$t_relationship_id = relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+		$t_relationship_id = relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
 	} else {
 		# else relationship is -1 - same type exists
 		$t_relationship_id = relationship_exists( $p_src_bug_id, $p_dest_bug_id );
