@@ -1435,11 +1435,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 
 	if( $t_old_id_relationship == 0 ) {
 		log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
-		relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
-
-		# The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
-		# So we call db_insert_id in order to find the id of the created relationship.
-		$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
+		$t_relationship_id = relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
 		# Add log line to the history (both bugs)
 		history_log_event_special( $p_issue_id, BUG_ADD_RELATIONSHIP, $t_rel_type['id'], $t_dest_issue_id );
