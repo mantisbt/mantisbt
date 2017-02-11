@@ -335,6 +335,7 @@ function relationship_delete( $p_relationship_id ) {
 
 	# send email and update the history for the src issue
 	history_log_event_special( $t_src_bug_id, BUG_DEL_RELATIONSHIP, $t_rel_type, $t_dest_bug_id );
+	email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
 
 	if( bug_exists( $t_dest_bug_id ) ) {
 		history_log_event_special(
@@ -342,6 +343,8 @@ function relationship_delete( $p_relationship_id ) {
 			BUG_DEL_RELATIONSHIP,
 			relationship_get_complementary_type( $t_rel_type ),
 			$t_src_bug_id );
+
+		email_relationship_deleted( $t_dest_bug_id, $t_src_bug_id, $t_rel_type );
 	}
 }
 

@@ -1482,28 +1482,9 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 		}
 	}
 
-	$t_bug_relationship_data = relationship_get( $p_relationship_id );
-	$t_rel_type = $t_bug_relationship_data->type;
-
 	# delete relationship from the DB
 	log_event( LOG_WEBSERVICE, 'deleting relationship id \'' . $p_relationship_id . '\'' );
 	relationship_delete( $p_relationship_id );
-
-	# set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
-	if( $p_issue_id == $t_bug_relationship_data->src_bug_id ) {
-		$t_bug_rel_type = $t_rel_type;
-		$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-	} else {
-		$t_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-		$t_dest_bug_rel_type = $t_rel_type;
-	}
-
-	# send email and update the history for the src issue
-	email_relationship_deleted( $p_issue_id, $t_dest_issue_id, $t_bug_rel_type );
-
-	if( bug_exists( $t_dest_issue_id ) ) {
-		email_relationship_deleted( $t_dest_issue_id, $p_issue_id, $t_dest_bug_rel_type );
-	}
 
 	return true;
 }
