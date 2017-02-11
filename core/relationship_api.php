@@ -273,6 +273,31 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 }
 
 /**
+ * Add/Update relationship based on whether the relationship already exists or not.
+ *
+ * @param integer $p_src_bug_id        Source Bug Id.
+ * @param integer $p_dest_bug_id       Destination Bug Id.
+ * @param integer $p_relationship_type Relationship type.
+ * @return integer The new bug relationship id.
+ */
+function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+	# Check if there is other relationship between the bugs.
+	$t_id_relationship = relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+
+	if( $t_id_relationship > 0 ) {
+		relationship_update( $t_id_relationship, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+		$t_relationship_id = $t_id_relationship;
+	} else if( $t_id_relationship != -1 ) {
+		$t_relationship_id = relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+	} else {
+		# else relationship is -1 - same type exists
+		$t_relationship_id = relationship_exists( $p_src_bug_id, $p_dest_bug_id );
+	}
+
+	return $t_relationship_id;
+}
+
+/**
  * Delete a relationship
  * @param integer $p_relationship_id Relationship Id to update.
  * @return void

@@ -98,20 +98,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 		$g_project_override = $t_bug->project_id;
 	}
 
-	# check if there is other relationship between the bugs...
-	$t_old_id_relationship = relationship_same_type_exists( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
-
-	if( $t_old_id_relationship == -1 ) {
-		# the relationship type is exactly the same of the new one. No sense to proceed
-		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
-	} else if( $t_old_id_relationship > 0 ) {
-		# there is already a relationship between them -> we have to update it and not to add a new one
-		helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
-
-		relationship_update( $t_old_id_relationship, $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
-	} else {
-		relationship_add( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
-	}
+	relationship_upsert( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 
 	# send email notification to the users addressed by both the bugs
 	email_relationship_added( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
