@@ -261,6 +261,9 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 					relationship_type=' . db_param() . '
 				WHERE id=' . db_param();
 	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
+
+	history_log_event_special( $p_src_bug_id, BUG_REPLACE_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
+	history_log_event_special( $p_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
 }
 
 /**

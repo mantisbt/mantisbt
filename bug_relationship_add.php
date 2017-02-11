@@ -108,12 +108,7 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 		# there is already a relationship between them -> we have to update it and not to add a new one
 		helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
 
-		# Update the relationship
 		relationship_update( $t_old_id_relationship, $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
-
-		# Add log line to the history (both bugs)
-		history_log_event_special( $f_src_bug_id, BUG_REPLACE_RELATIONSHIP, $f_rel_type, $f_dest_bug_id );
-		history_log_event_special( $f_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $f_src_bug_id );
 	} else {
 		relationship_add( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 	}
