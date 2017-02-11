@@ -1499,12 +1499,9 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	}
 
 	# send email and update the history for the src issue
-	history_log_event_special( $p_issue_id, BUG_DEL_RELATIONSHIP, $t_bug_rel_type, $t_dest_issue_id );
 	email_relationship_deleted( $p_issue_id, $t_dest_issue_id, $t_bug_rel_type );
 
 	if( bug_exists( $t_dest_issue_id ) ) {
-		# send email and update the history for the dest issue
-		history_log_event_special( $t_dest_issue_id, BUG_DEL_RELATIONSHIP, $t_dest_bug_rel_type, $p_issue_id );
 		email_relationship_deleted( $t_dest_issue_id, $p_issue_id, $t_dest_bug_rel_type );
 	}
 

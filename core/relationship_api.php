@@ -326,8 +326,23 @@ function relationship_delete( $p_relationship_id ) {
 	$t_query = 'DELETE FROM {bug_relationship} WHERE id=' . db_param();
 	db_query( $t_query, array( (int)$p_relationship_id ) );
 
-	bug_update_date( $t_relationship->src_bug_id );
-	bug_update_date( $t_relationship->dest_bug_id );
+	$t_src_bug_id = $t_relationship->src_bug_id;
+	$t_dest_bug_id = $t_relationship->dest_bug_id;
+	$t_rel_type = $t_relationship->type;
+
+	bug_update_date( $t_src_bug_id );
+	bug_update_date( $t_dest_bug_id );
+
+	# send email and update the history for the src issue
+	history_log_event_special( $t_src_bug_id, BUG_DEL_RELATIONSHIP, $t_rel_type, $t_dest_bug_id );
+
+	if( bug_exists( $t_dest_bug_id ) ) {
+		history_log_event_special(
+			$t_dest_bug_id,
+			BUG_DEL_RELATIONSHIP,
+			relationship_get_complementary_type( $t_rel_type ),
+			$t_src_bug_id );
+	}
 }
 
 /**
