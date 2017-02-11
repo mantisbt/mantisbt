@@ -1913,14 +1913,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		# the related bug exists...
 		bug_ensure_exists( $p_duplicate_id );
 
-		# check if there is other relationship between the bugs...
-		$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-		 if( $t_id_relationship > 0 ) {
-			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-		} else if( $t_id_relationship != -1 ) {
-			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-		} # else relationship is -1 - same type exists, do nothing
+		relationship_upsert( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
 		# Copy list of users monitoring the duplicate bug to the original bug
 		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );

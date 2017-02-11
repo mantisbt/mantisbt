@@ -1431,20 +1431,15 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 		return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
 	}
 
-	$t_old_id_relationship = relationship_same_type_exists( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
+	log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
 
-	if( $t_old_id_relationship == 0 ) {
-		log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
-		$t_relationship_id = relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
+	$t_relationship_id = relationship_upsert( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
-		# send email notification to the users addressed by both the bugs
-		email_relationship_added( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
-		email_relationship_added( $t_dest_issue_id, $p_issue_id, relationship_get_complementary_type( $t_rel_type['id'] ) );
+	# send email notification to the users addressed by both the bugs
+	email_relationship_added( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
+	email_relationship_added( $t_dest_issue_id, $p_issue_id, relationship_get_complementary_type( $t_rel_type['id'] ) );
 
-		return $t_relationship_id;
-	} else {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'Relationship already exists.' );
-	}
+	return $t_relationship_id;
 }
 
 /**
