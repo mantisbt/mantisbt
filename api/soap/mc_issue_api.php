@@ -1437,10 +1437,6 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 		log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
 		$t_relationship_id = relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
-		# update bug last updated for both bugs
-		bug_update_date( $p_issue_id );
-		bug_update_date( $t_dest_issue_id );
-
 		# send email notification to the users addressed by both the bugs
 		email_relationship_added( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 		email_relationship_added( $t_dest_issue_id, $p_issue_id, relationship_get_complementary_type( $t_rel_type['id'] ) );
