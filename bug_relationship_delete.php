@@ -110,12 +110,9 @@ if( $f_bug_id == $t_bug_relationship_data->src_bug_id ) {
 }
 
 # send email and update the history for the src issue
-history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, $t_bug_rel_type, $t_dest_bug_id );
 email_relationship_deleted( $f_bug_id, $t_dest_bug_id, $t_bug_rel_type );
 
 if( bug_exists( $t_dest_bug_id ) ) {
-	# send email and update the history for the dest issue
-	history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, $t_dest_bug_rel_type, $f_bug_id );
 	email_relationship_deleted( $t_dest_bug_id, $f_bug_id, $t_dest_bug_rel_type );
 }
 
