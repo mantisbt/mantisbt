@@ -348,13 +348,21 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 	$t_relationship = relationship_get_all_src( $p_bug_id );
 	$t_relationship_count = count( $t_relationship );
 	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		relationship_add( $p_new_bug_id, $t_relationship[$i]->dest_bug_id, $t_relationship[$i]->type );
+		relationship_add(
+			$p_new_bug_id,
+			$t_relationship[$i]->dest_bug_id,
+			$t_relationship[$i]->type,
+			/* email_for_source */ false );
 	}
 
 	$t_relationship = relationship_get_all_dest( $p_bug_id );
 	$t_relationship_count = count( $t_relationship );
 	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		relationship_add( $t_relationship[$i]->src_bug_id, $p_new_bug_id, $t_relationship[$i]->type );
+		relationship_add(
+			$p_new_bug_id,
+			$t_relationship[$i]->src_bug_id,
+			relationship_get_complementary_type( $t_relationship[$i]->type ),
+			/* email_for_source */ false );
 	}
 }
 
