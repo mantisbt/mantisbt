@@ -113,10 +113,6 @@ foreach( $f_dest_bug_id_array as $f_dest_bug_id ) {
 		relationship_add( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 	}
 
-	# update bug last updated for both bugs
-	bug_update_date( $f_src_bug_id );
-	bug_update_date( $f_dest_bug_id );
-
 	# send email notification to the users addressed by both the bugs
 	email_relationship_added( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 	email_relationship_added( $f_dest_bug_id, $f_src_bug_id, relationship_get_complementary_type( $f_rel_type ) );

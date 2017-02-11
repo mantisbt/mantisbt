@@ -231,6 +231,9 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 	history_log_event_special( $p_src_bug_id, BUG_ADD_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
 	history_log_event_special( $p_dest_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
 
+	bug_update_date( $p_src_bug_id );
+	bug_update_date( $p_dest_bug_id );
+
 	return $t_relationship_id;
 }
 
@@ -264,6 +267,9 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 
 	history_log_event_special( $p_src_bug_id, BUG_REPLACE_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
 	history_log_event_special( $p_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
+
+	bug_update_date( $p_src_bug_id );
+	bug_update_date( $p_dest_bug_id );
 }
 
 /**
