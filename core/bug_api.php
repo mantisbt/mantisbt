@@ -1924,12 +1924,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
 		} else if( $t_id_relationship != -1 ) {
-			# Add the new relationship
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
 		} # else relationship is -1 - same type exists, do nothing
 
 		# Copy list of users monitoring the duplicate bug to the original bug
