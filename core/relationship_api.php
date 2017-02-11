@@ -226,7 +226,12 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 
-	return db_insert_id( db_get_table( 'bug_relationship' ) );
+	$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
+
+	history_log_event_special( $p_src_bug_id, BUG_ADD_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
+	history_log_event_special( $p_dest_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
+
+	return $t_relationship_id;
 }
 
 /**
