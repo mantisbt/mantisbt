@@ -1375,11 +1375,9 @@ function bug_delete( $p_bug_id ) {
 	# Delete all sponsorships
 	sponsorship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
-	# we delete relationships even if the feature is currently off.
+	# Delete all relationships
 	relationship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
 	# Delete files
 	file_delete_attachments( $p_bug_id );
 
