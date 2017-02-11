@@ -205,7 +205,7 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
- * @return BugRelationshipData Bug Relationship
+ * @return integer The new bug relationship id.
  */
 function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 	global $g_relationships;
@@ -224,16 +224,9 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	$t_result = db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
-	$t_relationship = db_fetch_array( $t_result );
+	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 
-	$t_bug_relationship_data = new BugRelationshipData;
-	$t_bug_relationship_data->id = $t_relationship['id'];
-	$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
-	$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
-	$t_bug_relationship_data->type = $t_relationship['relationship_type'];
-
-	return $t_bug_relationship_data;
+	return db_insert_id( db_get_table( 'bug_relationship' ) );
 }
 
 /**
@@ -242,7 +235,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
- * @return BugRelationshipData Bug Relationship
+ * @return void
  */
 function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 	global $g_relationships;
@@ -262,16 +255,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 					destination_bug_id=' . db_param() . ',
 					relationship_type=' . db_param() . '
 				WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
-	$t_relationship = db_fetch_array( $t_result );
-
-	$t_bug_relationship_data = new BugRelationshipData;
-	$t_bug_relationship_data->id = $t_relationship['id'];
-	$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
-	$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
-	$t_bug_relationship_data->type = $t_relationship['relationship_type'];
-
-	return $t_bug_relationship_data;
+	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
 }
 
 /**
