@@ -100,9 +100,6 @@ $t_rel_type = $t_bug_relationship_data->type;
 # delete relationship from the DB
 relationship_delete( $f_rel_id );
 
-# update bug last updated (just for the src bug)
-bug_update_date( $f_bug_id );
-
 # set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
 if( $f_bug_id == $t_bug_relationship_data->src_bug_id ) {
 	$t_bug_rel_type = $t_rel_type;

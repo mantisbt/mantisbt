@@ -320,9 +320,14 @@ function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_typ
  * @return void
  */
 function relationship_delete( $p_relationship_id ) {
+	$t_relationship = relationship_get( $p_relationship_id );
+
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_relationship} WHERE id=' . db_param();
 	db_query( $t_query, array( (int)$p_relationship_id ) );
+
+	bug_update_date( $t_relationship->src_bug_id );
+	bug_update_date( $t_relationship->dest_bug_id );
 }
 
 /**
