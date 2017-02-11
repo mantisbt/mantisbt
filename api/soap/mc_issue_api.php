@@ -1489,10 +1489,6 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	log_event( LOG_WEBSERVICE, 'deleting relationship id \'' . $p_relationship_id . '\'' );
 	relationship_delete( $p_relationship_id );
 
-	# update bug last updated
-	bug_update_date( $p_issue_id );
-	bug_update_date( $t_dest_issue_id );
-
 	# set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
 	if( $p_issue_id == $t_bug_relationship_data->src_bug_id ) {
 		$t_bug_rel_type = $t_rel_type;
