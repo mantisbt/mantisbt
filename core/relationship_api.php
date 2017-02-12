@@ -741,9 +741,8 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	# add delete link if bug not read only and user has access level
 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' <a class="btn btn-primary btn-xs btn-white btn-round noprint"
-			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' .
-				lang_get( 'delete_link' ) . '</a>';
+			$t_relationship_info_html .= ' <a class="noprint"
+			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '"><i class="ace-icon fa fa-trash-o"></i></a>';
 		}
 	}
 
