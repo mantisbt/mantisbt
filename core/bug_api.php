@@ -1357,6 +1357,7 @@ function bug_delete( $p_bug_id ) {
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
 	email_bug_deleted( $p_bug_id );
+	email_relationship_bug_deleted( $p_bug_id );
 
 	# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before
 	# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and

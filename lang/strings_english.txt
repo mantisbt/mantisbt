@@ -322,6 +322,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %1$s has been RESOLVED.';
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %1$s has been CLOSED.';
+$s_email_notification_title_for_action_related_issue_deleted = 'The RELATED issue %1$s has been DELETED.';
 $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by user %2$s.';
 
 $s_email_reporter = 'Reported By';
