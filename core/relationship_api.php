@@ -307,10 +307,10 @@ function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_typ
 /**
  * Delete a relationship
  * @param integer $p_relationship_id Relationship Id to update.
- * @param integer $p_skip_email_for_issue_id Skip email for specified issue, otherwise 0.
+ * @param bool $p_send_email Send email?
  * @return void
  */
-function relationship_delete( $p_relationship_id, $p_skip_email_for_issue_id = 0 ) {
+function relationship_delete( $p_relationship_id, $p_send_email = true ) {
 	$t_relationship = relationship_get( $p_relationship_id );
 
 	db_param_push();
@@ -334,7 +334,9 @@ function relationship_delete( $p_relationship_id, $p_skip_email_for_issue_id = 0
 			$t_src_bug_id );
 	}
 
-	email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
+	if( $p_send_email ) {
+		email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
+	}
 }
 
 /**
@@ -346,7 +348,7 @@ function relationship_delete_all( $p_bug_id ) {
 	$t_is_different_projects = false;
 	$t_relationships = relationship_get_all( $p_bug_id, $t_is_different_projects );
 	foreach( $t_relationships as $t_relationship ) {
-		relationship_delete( $t_relationship->id, /* skip_email_for_issue_id */ $p_bug_id );
+		relationship_delete( $t_relationship->id, /* send_email */ false );
 	}
 }
 

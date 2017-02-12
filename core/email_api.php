@@ -826,6 +826,31 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 }	
 
 /**
+ * Email related issues when a bug is deleted.  This should be deleted before the bug is deleted.
+ *
+ * @param $p_bug_id The id of the bug to be deleted.
+ * @return void
+ */
+function email_relationship_bug_deleted( $p_bug_id ) {
+	$t_ignore = false;
+	$t_relationships = relationship_get_all( $p_bug_id, $t_ignore );
+	if( empty( $t_relationships ) ) {
+		return;
+	}
+
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d has been deleted, sending notifications to related issues', $p_bug_id ) );
+
+	foreach( $t_relationships as $t_relationship ) {
+		$t_related_bug_id = $p_bug_id == $t_relationship->src_bug_id ?
+			$t_relationship->dest_bug_id : $t_relationship->src_bug_id;
+
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_bug_id );
+		email_generic( $t_related_bug_id, 'handler', 'email_notification_title_for_action_related_issue_deleted', $t_opt );
+	}
+}
+
+/**
  * send notices to all the handlers of the parent bugs when a child bug is RESOLVED
  * @param integer $p_bug_id A bug identifier.
  * @return void
