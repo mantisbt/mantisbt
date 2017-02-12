@@ -235,12 +235,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, 
 	bug_update_date( $p_src_bug_id );
 	bug_update_date( $p_dest_bug_id );
 
-	# send email notification to the users addressed by both the bugs
-	if( $p_email_for_source ) {
-		email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
-	}
-
-	email_relationship_added( $p_dest_bug_id, $p_src_bug_id, relationship_get_complementary_type( $p_relationship_type ) );
+	email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
 
 	return $t_relationship_id;
 }
@@ -280,12 +275,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 	bug_update_date( $p_src_bug_id );
 	bug_update_date( $p_dest_bug_id );
 
-	# send email notification to the users addressed by both the bugs
-	if( $p_email_for_source ) {
-		email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
-	}
-
-	email_relationship_added( $p_dest_bug_id, $p_src_bug_id, relationship_get_complementary_type( $p_relationship_type ) );
+	email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
 }
 
 /**
@@ -334,12 +324,7 @@ function relationship_delete( $p_relationship_id, $p_skip_email_for_issue_id = 0
 	bug_update_date( $t_src_bug_id );
 	bug_update_date( $t_dest_bug_id );
 
-	# send email and update the history for the src issue
 	history_log_event_special( $t_src_bug_id, BUG_DEL_RELATIONSHIP, $t_rel_type, $t_dest_bug_id );
-
-	if( $t_src_bug_id != $p_skip_email_for_issue_id ) {
-		email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
-	}
 
 	if( bug_exists( $t_dest_bug_id ) ) {
 		history_log_event_special(
@@ -347,11 +332,9 @@ function relationship_delete( $p_relationship_id, $p_skip_email_for_issue_id = 0
 			BUG_DEL_RELATIONSHIP,
 			relationship_get_complementary_type( $t_rel_type ),
 			$t_src_bug_id );
-
-		if( $t_dest_bug_id != $p_skip_email_for_issue_id ) {
-			email_relationship_deleted( $t_dest_bug_id, $t_src_bug_id, $t_rel_type );
-		}
 	}
+
+	email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
 }
 
 /**
