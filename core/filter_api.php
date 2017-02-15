@@ -3172,7 +3172,7 @@ function filter_gpc_get( array $p_filter = null ) {
 					$t_start = $t_start_date;
 				} else {
 					$t_date = gpc_get_string( 'custom_field_' . $t_cfid . '_start_date', null );
-					$t_start_date = date( config_get( 'short_date_format' ), $t_date );
+					$t_start_date = strtotime( $t_date );
 					# calculate correct timestamps
 					$t_start = 1;
 					switch( $t_control ) {
@@ -3205,7 +3205,7 @@ function filter_gpc_get( array $p_filter = null ) {
 					$t_end = $t_end_date;
 				} else {
 					$t_date = gpc_get_string( 'custom_field_' . $t_cfid . '_end_date', null );
-					$t_end_date = date( config_get( 'short_date_format' ), $t_date );
+					$t_end_date = strtotime( $t_date );
 					# calculate correct timestamps
 					$t_end = 1;
 					switch( $t_control ) {
