@@ -55,25 +55,8 @@ if( OFF == config_get( 'time_tracking_enabled' ) ) {
 
 <?php
 
-$t_bugnote_stats_from_def = date( 'd:m:Y', $t_bug->date_submitted );
-$t_bugnote_stats_from_def_ar = explode( ':', $t_bugnote_stats_from_def );
-$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
-$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
-$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
-
-$t_bugnote_stats_from_d = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, $t_bugnote_stats_from_def_d );
-$t_bugnote_stats_from_m = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, $t_bugnote_stats_from_def_m );
-$t_bugnote_stats_from_y = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, $t_bugnote_stats_from_def_y );
-
-$t_bugnote_stats_to_def = date( 'd:m:Y' );
-$t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
-$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
-$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
-$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
-
-$t_bugnote_stats_to_d = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, $t_bugnote_stats_to_def_d );
-$t_bugnote_stats_to_m = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, $t_bugnote_stats_to_def_m );
-$t_bugnote_stats_to_y = gpc_get_string( FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, $t_bugnote_stats_to_def_y );
+$t_bugnote_stats_from = date( config_get( 'short_date_format' ), $t_bug->date_submitted );
+$t_bugnote_stats_to = date( config_get( 'short_date_format' ) );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
@@ -102,48 +85,32 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
     </div>
 
 <form method="post" action="#bugnotestats">
-    <div class="widget-body">
+<div class="widget-body">
     <div class="widget-main">
-	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
-	<table class="width100" cellspacing="0">
-		<tr>
-			<td class="form-title" colspan="4"><?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' ); ?>
-			</td>
-		</tr>
-		<tr class="row-2">
-			<td class="category" width="25%">
-				<?php
-					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
-					filter_init( $t_filter );
-					print_filter_do_filter_by_date( true );
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td class="center" colspan="2">
-				<input type="submit" class="button"
-					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
-			</td>
-		</tr>
-	</table>
+	    <input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
+        <?php
+            $t_filter = array();
+            $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+            $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] = $t_bugnote_stats_from;
+            $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] = $t_bugnote_stats_to;
+            filter_init( $t_filter );
+            print_filter_do_filter_by_date( true );
+        ?>
+
+    </div>
+    <div class="widget-toolbox padding-8 clearfix">
+        <input name="get_bugnote_stats_button" class="btn btn-primary btn-sm btn-white btn-round"
+               value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" type="submit">
+    </div>
+</div>
 </form>
 
 <?php
 	# Print time tracking information if requested
 	if( !is_blank( $f_get_bugnote_stats_button ) ) {
 		# Retrieve time tracking information
-		$t_from = $t_bugnote_stats_from_y . '-' . $t_bugnote_stats_from_m . '-' . $t_bugnote_stats_from_d;
-		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
+		$t_from = $t_bugnote_stats_from;
+		$t_to = $t_bugnote_stats_to;
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 
 		# Sort the array by user/real name
@@ -205,7 +172,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 
 </form>
-</div>
 </div>
 </div>
 
