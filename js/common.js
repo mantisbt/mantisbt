@@ -138,7 +138,7 @@ $(document).ready( function() {
 			success: function(html) {
 				$(this).html(html);
                 $(this).find('input[type=text].datetimepicker').each(function(index, element) {
-                    enableDatTimePicker(this);
+                    enableDateTimePicker(this);
                 });
 			},
 			error: function(obj,status,error) {
@@ -229,7 +229,7 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
-        enableDatTimePicker(this);
+        enableDateTimePicker(this);
 	});
 
 	if( $( ".dropzone-form" ).length ) {
@@ -457,7 +457,7 @@ function toggleDisplay(idTag)
 }
 
 // Datetime picker handler
-function enableDatTimePicker( p_element ) {
+function enableDateTimePicker(p_element ) {
     $(p_element).datetimepicker({
         locale: $(p_element).data('picker-locale'),
         format: $(p_element).data('picker-format'),
