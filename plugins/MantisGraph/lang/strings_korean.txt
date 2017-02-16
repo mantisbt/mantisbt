@@ -41,6 +41,7 @@
  * @author Changwoo
  * @author Hong3e
  * @author Jerrykim306
+ * @author SeoJeongHo
  * @author Wisewolf
  * @author Ykhwong
  * @author 아라
@@ -52,7 +53,7 @@ $s_plugin_MantisGraph_title = '맨티스 그래프';
 $s_plugin_MantisGraph_config = '설정';
 $s_plugin_MantisGraph_synthesis_link = '합성';
 $s_plugin_MantisGraph_status_link = '상태별';
-$s_plugin_MantisGraph_priority_link = '우선순위별';
+$s_plugin_MantisGraph_priority_link = '우선 순위별';
 $s_plugin_MantisGraph_severity_link = '심각도별';
 $s_plugin_MantisGraph_category_link = '분류별';
 $s_plugin_MantisGraph_resolution_link = '해결 상태별';

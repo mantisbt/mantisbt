@@ -46,6 +46,7 @@
  * @author Jerrykim306
  * @author Priviet
  * @author Revi
+ * @author SeoJeongHo
  * @author Wisewolf
  * @author Wtspout
  * @author Ykhwong
@@ -931,8 +932,12 @@ $s_open_queries = '필더 관리';
 $s_query_delete_msg = '정말로 이 필터를 삭제하시겠습니까?';
 $s_edit_filter = '편집 필터';
 $s_owner = '소유자';
+$s_update_filter = '필터 업데이트';
 $s_current_project = '현재 프로젝트';
+$s_stored_project = '저장된 프로젝트';
+$s_available_filter_for_project = '프로젝트에 사용 가능한 필터';
 $s_manage_filter_page_title = '필터 관리';
+$s_manage_filter_edit_page_title = '필터 수정';
 $s_delete_filter_button = '삭제';
 $s_apply_filter_button = '적용';
 $s_view_simple_link = '간략히 보기';
