@@ -338,12 +338,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 	}
 ?>
 
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 <?php
 	if( false == $g_failed ) {
 		$t_install_state++;
@@ -355,13 +349,6 @@ if( 2 == $t_install_state ) {
 	# By now user has picked a timezone, ensure it is set
 	date_default_timezone_set( $f_timezone );
 ?>
-
-<div class="col-md-12 col-xs-12">
-<div class="widget-box widget-color-blue2">
-<div class="widget-body">
-<div class="widget-main no-padding">
-<div class="table-responsive">
-<table class="table table-bordered table-condensed">
 
 <!-- Checking DB support-->
 <?php
