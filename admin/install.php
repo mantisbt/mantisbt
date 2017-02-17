@@ -409,7 +409,7 @@ if( 2 == $t_install_state ) {
 
 	if( $t_result ) {
 		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name.'x' );
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 	}
 	if( $t_result ) {
 		$t_db_open = true;
