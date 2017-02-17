@@ -421,16 +421,18 @@ if( 2 == $t_install_state ) {
 	$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
 	if( $t_result ) {
-
 		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-		if( $t_result ) {
-			$t_db_open = true;
-			$f_db_exists = true;
-		}
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name.'x' );
+	}
+	if( $t_result ) {
+		$t_db_open = true;
+		$f_db_exists = true;
+
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
+
+		print_test_result( GOOD );
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 		$t_version_info = null;
@@ -450,6 +452,7 @@ if( 2 == $t_install_state ) {
 
 		if( $t_result == true ) {
 			$t_db_open = true;
+			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
