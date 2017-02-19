@@ -233,4 +233,29 @@ class MantisMarkdown extends Parsedown
 		}
 		return static::$mantis_markdown;
 	}
+
+	/**
+	 * Fix line indent
+	 * Make sure to indent at least one space
+	 * @param string $line The Markdown syntax to parse
+	 * @return string html representation generated from markdown.
+	 */
+	function blockList($line){
+		$line['text'] = $line['text'] . " ";
+		return parent::blockList( $line );
+	}
+
+	/**
+	 * Customize the blockListContinue method
+	 *
+	 * @param string $line The Markdown syntax to parse
+	 * @param array $block A block-level element
+	 * @return void
+	 */
+	function blockListContinue( $line, array $block ){
+		
+		if( ! isset($block['interrupted']) ){
+			return;
+		}
+	}
 }
