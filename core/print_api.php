@@ -1900,10 +1900,7 @@ function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
  * @return void
  */
 function print_bug_attachment( array $p_attachment, $p_security_token ) {
-	$t_show_attachment_preview = $p_attachment['preview']
-		&& $p_attachment['exists']
-		&& ( $p_attachment['type'] == 'text' || $p_attachment['type'] == 'image' );
-	if( $t_show_attachment_preview ) {
+	if( $p_attachment['preview'] ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
 		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
@@ -1912,7 +1909,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
 
-	if( $t_show_attachment_preview ) {
+	if( $p_attachment['preview'] ) {
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
 		if( $p_attachment['type'] == 'text' ) {
