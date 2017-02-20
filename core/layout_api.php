@@ -419,7 +419,7 @@ function layout_navbar() {
 	echo '<div class="navbar-header">';
 	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
-	echo config_get('window_title');
+	echo string_display_line( config_get('window_title') );
 	echo ' </span>';
 	echo '</a>';
 

@@ -2976,7 +2976,7 @@ function filter_name_valid_length( $p_name ) {
 }
 
 /**
- * Create a filter for getting issues modified in the last N days
+ * Create a filter for getting issues modified in the last N days.
  * @param integer $p_days Number of days counting from today
  * @param array $p_filter Add the filter conditions over this filter array. Return a new one if null
  * @return array Filter array
@@ -2984,6 +2984,8 @@ function filter_name_valid_length( $p_name ) {
 function filter_create_recently_modified( $p_days, $p_filter = null ) {
 	if( null === $p_filter ) {
 		$p_filter = filter_get_default();
+		# This filter overrides default "hide status" property
+		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
 	}
 	$c_days = (int)$p_days;
 	$p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = true;
