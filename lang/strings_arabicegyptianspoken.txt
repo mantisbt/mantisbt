@@ -933,7 +933,6 @@ $s_relationship_deleted = 'العلاقه تم حذفها';
 $s_no_relationship = 'لا علاقة';
 $s_relationship_replaced = 'العلاقه تم استبدالها';
 $s_replace_relationship_button = 'استبدال';
-$s_replace_relationship_sure_msg = 'توجد علاقه بالفعل بين هاتين القضيتين. هل أنت متأكد أنك تريد استبدالها؟';
 $s_relationship_with_parent = 'العلاقه مع القضيه الأصلية';
 $s_delete_relationship_button = 'حذف';
 $s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
@@ -1166,7 +1165,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'السماح �
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'الراعى لم يوفر عنوان بريد إلكترونى. من فضلك حدث ملفك.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%1$s" له قيمه غير صحيحه "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضيه "%1$d" للقراءه فقط.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'توجد علاقه بالفعل بين هاتين القضيتين.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'العلاقه لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'السماح مرفوض: القضيه %1$d تحتاج إلى مستو أعلى من الصلاحيات.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'القضيه لا يمكن أن تكون مرتبطه بنفسها.';

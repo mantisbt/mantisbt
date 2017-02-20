@@ -693,7 +693,6 @@ $s_relationship_deleted = 'Διαγραφή σχέσης';
 $s_no_relationship = 'καμία σχέση';
 $s_relationship_replaced = 'Αντικατάσταση σχέσης';
 $s_replace_relationship_button = 'Αντικατάσταση';
-$s_replace_relationship_sure_msg = 'Υπάρχει ήδη σχέση μεταξύ των δυο θεμάτων. Είστε σίγουρος πως θέλετε να την αντικαταστείσετε;';
 $s_relationship_with_parent = 'Σχέση με πατρικό θέμα';
 $s_delete_relationship_button = 'Διαγραφή';
 $s_create_child_bug_button = 'Κλώνος';

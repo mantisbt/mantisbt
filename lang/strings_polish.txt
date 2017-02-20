@@ -46,6 +46,7 @@
  * @author Expert3222
  * @author Macofe
  * @author Py64
+ * @author Rambro
  * @author Rezonansowy
  * @author Sp5uhe
  * @author Ty221
@@ -731,6 +732,7 @@ $s_edit_news_link = 'Wiadomości';
 $s_docs_link = 'Dokumentacja';
 $s_logout_link = 'Wyloguj';
 $s_my_view_link = 'Mój widok';
+$s_invite_users = 'Zaproś osoby';
 $s_my_view_title_unassigned = 'Nieprzypisane';
 $s_my_view_title_recent_mod = 'Ostatnio zmodyfikowane';
 $s_my_view_title_reported = 'Zgłoszone przeze mnie';
@@ -886,10 +888,11 @@ $s_ok = 'OK';
 $s_select_all = 'Wybierz wszystkie';
 $s_use_query = 'Użyj filtru';
 $s_delete_query = 'Skasuj filtr';
-$s_query_deleted = 'Filtr skasowany';
+$s_query_deleted = 'Filtr "%s" usunięty';
 $s_save_query = 'Zachowaj aktualny filtr';
 $s_reset_query = 'Wyczyść filtr';
 $s_query_name = 'Nazwa filtru';
+$s_query_name_label = 'Nazwa filtra:';
 $s_query_exists = 'Taki szczegółowy filtr prawdopodobnie już istnieje.';
 $s_query_dupe_name = 'Inny filtr o tej nazwie już istnieje. Proszę wybrać inną nazwę dla tego filtru.';
 $s_query_blank_name = 'Nie można zapisać filtru z pustą nazwą. Prosżę podac nazwę filtru przed jego zapisaniem.';
@@ -897,6 +900,10 @@ $s_query_name_too_long = 'Nie można zapisać filtru z nazwą dłuższą niż 64
 $s_query_store_error = 'Wystąpił błąd w trakcie zapisywania filtru.';
 $s_open_queries = 'Zarządzaj filtrami';
 $s_query_delete_msg = 'Czy na pewno chcesz usunąć ten filtr?';
+$s_edit_filter = 'Edytuj Filtr';
+$s_owner = 'Właściciel';
+$s_update_filter = 'Uaktualnij filtr';
+$s_current_project = 'Bieżący projekt';
 $s_view_simple_link = 'Widok prosty';
 $s_product_build = 'Kompilacja produktu';
 $s_system_profile = 'Opis systemu';
@@ -994,7 +1001,6 @@ $s_relationship_deleted = 'Powiązanie usunięte';
 $s_no_relationship = 'brak powiązań';
 $s_relationship_replaced = 'Powiązanie zastąpione';
 $s_replace_relationship_button = 'Zastąp';
-$s_replace_relationship_sure_msg = 'Istnieje już powiązanie między tymi zgłoszeniami. Czy na pewno chcesz je wymienić?';
 $s_relationship_with_parent = 'Powiązanie ze zgłoszeniem nadrzędnym';
 $s_delete_relationship_button = 'Usuń';
 $s_delete_relationship_sure_msg = 'Czy na pewno chcesz usunąć powiązanie?';
@@ -1237,7 +1243,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zakaz dostępu
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor nie podał adresu email. Proszę zaktualizować swój profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcja konfiguracji „%1$s” ma nieprawidłową wartość „%2$s”.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Akcja nie może zostać wykonana ponieważ zgłoszenie „%1$d” jest wyłącznie do odczytu.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Istnieje już powiązanie pomiędzy tymi dwoma zgłoszeniami.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Nie znaleziono powiązania.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Zgłoszenie %1$d wymaga wyższego poziomu dostępu.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Zgłoszenie nie może być powiązane z samym sobą.';

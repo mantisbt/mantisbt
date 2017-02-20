@@ -40,6 +40,7 @@
  *
  * @author DCLXVI
  * @author Emostoyanov
+ * @author StanProg
  * @author Svetoslav.dragoev
  * @author Vodnokon4e
  * @author АдмиралАнимЕ
@@ -61,9 +62,9 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Синтез на диагра
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Синтез на диаграми по значимост';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Синтез на диаграми по категории';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтез на диаграми по резолюции';
-$s_plugin_MantisGraph_graph_developer_title = 'Диаграма на разработките';
-$s_plugin_MantisGraph_graph_reporter_title = 'Диаграмма с докладами проблеми';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, затворени и останалите задачи';
+$s_plugin_MantisGraph_graph_developer_title = 'По графикони на разработчици';
+$s_plugin_MantisGraph_graph_reporter_title = 'По графикони за докладчици';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, решени и останали задачи';
 $s_plugin_MantisGraph_by_status_pct = 'По статут (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По значимост (%)';
