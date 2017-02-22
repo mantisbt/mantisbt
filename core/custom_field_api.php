@@ -1305,6 +1305,11 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 	$t_result = db_query( $t_query, array( $p_field_id, $p_bug_id ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
+		# No need to update the field if its value has not changed
+		if( $t_row[$t_value_field] == $t_value ) {
+			return true;
+		}
+
 		db_param_push();
 		$t_query = 'UPDATE {custom_field_string}
 					  SET ' . $t_value_field . '=' . db_param() . '
