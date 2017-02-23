@@ -255,6 +255,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Сл
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'Следниов проблем е отстранет како ЧЕДО на проблемот %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'ПОВРЗАНИОТ проблем %1$s е РЕШЕН.';
 $s_email_notification_title_for_action_relationship_child_closed = 'ПОВРЗАНИОТ проблем %1$s е ЗАТВОРЕН.';
+$s_email_notification_title_for_action_related_issue_deleted = 'ПОВРЗАНИОТ проблем %1$s е ИЗБРИШАН.';
 $s_email_notification_title_for_action_monitor = 'Проблемот %1$s сега е под надзор на корисникот %2$s.';
 $s_email_reporter = 'Пријавил';
 $s_email_handler = 'Доделен на';

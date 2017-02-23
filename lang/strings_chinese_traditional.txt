@@ -265,6 +265,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = '以�
 $s_email_notification_title_for_action_blocks_relationship_deleted = '以下的問題已經被取消這問題的下層問題 %1$s。';
 $s_email_notification_title_for_action_relationship_child_resolved = '這相關問題 %1$s 已經被解決。';
 $s_email_notification_title_for_action_relationship_child_closed = '這相關問題 %1$s 已經被關閉。';
+$s_email_notification_title_for_action_related_issue_deleted = '這相關問題 %1$s 已經被刪除。';
 $s_email_notification_title_for_action_monitor = '使用者 %2$s 正在追蹤問題 %1$s。';
 $s_email_reporter = '回報人';
 $s_email_handler = '處理者';

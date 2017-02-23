@@ -279,6 +279,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Le b
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'Le bogue suivant n\'est plus défini comme ENFANT du bogue %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'Le bogue LIÉ %1$s a été RÉSOLU.';
 $s_email_notification_title_for_action_relationship_child_closed = 'Le bogue LIÉ %1$s a été FERMÉ.';
+$s_email_notification_title_for_action_related_issue_deleted = 'Le problème LIÉ %1$s a été SUPPRIMÉ.';
 $s_email_notification_title_for_action_monitor = 'Le bogue %1$s est à présent suivi par l\'utilisateur %2$s.';
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Responsable';

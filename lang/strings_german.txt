@@ -274,6 +274,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Der 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'Der folgende Eintrag ist nicht mehr VORAUSSETZUNG FÜR Eintrag %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'Der VERWANDTE Eintrag %1$s wurde ERLEDIGT.';
 $s_email_notification_title_for_action_relationship_child_closed = 'Der VERWANDTE Eintrag %1$s wurde GESCHLOSSEN.';
+$s_email_notification_title_for_action_related_issue_deleted = 'Der VERWANDTE Eintrag %1$s wurde GELÖSCHT.';
 $s_email_notification_title_for_action_monitor = 'Eintrag %1$s wird nun von Benutzer %2$s überwacht.';
 $s_email_reporter = 'Berichtet von';
 $s_email_handler = 'Zugewiesen an';

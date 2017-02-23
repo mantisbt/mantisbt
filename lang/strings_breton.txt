@@ -257,6 +257,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'An d
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'An draen-mañ n\'eo ket mui ur BUGEL d\'an draen %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'DISKOULMET eo bet an draen LIAMMET %1$s.';
 $s_email_notification_title_for_action_relationship_child_closed = 'An draen LIAMMET %1$s zo bet SERRET.';
+$s_email_notification_title_for_action_related_issue_deleted = 'DIVERKET eo bet an draen LIAMMET %1$s.';
 $s_email_notification_title_for_action_monitor = 'An draen %1$s zo evezhiet bremañ gant an implijer %2$s.';
 $s_email_reporter = 'Titouret gant';
 $s_email_handler = 'Deverket da';
