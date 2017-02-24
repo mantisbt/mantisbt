@@ -770,7 +770,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
 		$t_bug_data->due_date = SoapObjectsFactory::parseDateTimeString( $p_issue['due_date'] );
 	} else {
-		$t_bug_data->due_date = date_get_null();
+		# The create API will handle setting the default value for due date.
+		$t_bug_data->due_date = '';
 	}
 
 	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {

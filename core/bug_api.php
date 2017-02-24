@@ -478,14 +478,20 @@ class BugData {
 
 		antispam_check();
 
-		# check due_date format
-		if( is_blank( $this->due_date ) ) {
-			$this->due_date = date_get_null();
+		if( is_null( $this->due_date ) || is_blank( $this->due_date ) ) {
+			$t_due_date_default = config_get( 'due_date_default' );
+
+			if( is_blank( $t_due_date_default ) ) {
+				$this->due_date = date_get_null();
+			} else {
+				$this->due_date = date_strtotime( $t_due_date_default );
+			}
 		}
-		# check date submitted and last modified
+
 		if( is_blank( $this->date_submitted ) ) {
 			$this->date_submitted = db_now();
 		}
+
 		if( is_blank( $this->last_updated ) ) {
 			$this->last_updated = db_now();
 		}
