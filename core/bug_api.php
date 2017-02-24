@@ -631,8 +631,12 @@ class BugData {
 
 		$c_bug_id = $this->id;
 
-		if( is_blank( $this->due_date ) ) {
+		if( is_null( $this->due_date ) || is_blank( $this->due_date ) ) {
 			$this->due_date = date_get_null();
+		} else if( is_numeric( $this->due_date ) ) {
+			$this->due_date = (int)$this->due_date;
+		} else {
+			$this->due_date = strtotime( $this->due_date );
 		}
 
 		$t_old_data = bug_get( $this->id, true );

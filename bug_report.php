@@ -127,7 +127,6 @@ $t_bug_data->summary                = gpc_get_string( 'summary' );
 $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
-$t_bug_data->due_date               = gpc_get_string( 'due_date', '' );
 
 $f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
 $f_files                            = gpc_get_file( 'ufile', null );
@@ -136,6 +135,10 @@ $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', fa
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
 $f_tag_select                       = gpc_get_int( 'tag_select', 0 );
 $f_tag_string                       = gpc_get_string( 'tag_string', '' );
+
+if( access_has_project_level( config_get( 'due_date_update_threshold' ), $t_bug_data->project_id ) ) {
+	$t_bug_data->due_date = gpc_get_string( 'due_date', null );
+}
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
