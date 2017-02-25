@@ -25,8 +25,11 @@
 require_once( __DIR__ . '/../../vendor/autoload.php' );
 require_once( __DIR__ . '/../../core.php' );
 require_once( __DIR__ . '/../soap/mc_core.php' );
+require_once( __DIR__ . '/restcore/VersionMiddleware.php' );
 
 $app = new \Slim\App();
+
+$app->add( new VersionMiddleware() );
 
 require_once( __DIR__ . '/restcore/issues_rest.php' );
 
