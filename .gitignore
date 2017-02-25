@@ -49,3 +49,8 @@ web.config
 # Libraries
 library/FirePHPCore
 library/ezc
+
+# Composer
+/vendor/
+composer.phar
+

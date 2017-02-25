@@ -1,0 +1,14 @@
+{
+    "name": "mantisbt/mantisbt",
+    "description": "Mantis Bug Tracker",
+    "type": "project",
+    "require": {
+    },
+    "license": "GPL v2",
+    "authors": [
+        {
+            "name": "Victor Boctor",
+            "email": "vboctor@gmail.com"
+        }
+    ]
+}
