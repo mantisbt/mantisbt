@@ -279,7 +279,7 @@ function mci_validate_enum_access( $p_username, $p_password ) {
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 	$t_result = array();
-	$t_result['id'] = $p_enum_id;
+	$t_result['id'] = (int)$p_enum_id;
 	$t_result['name'] = mci_get_enum_element( $p_enum_type, $p_enum_id, $p_lang );
 	return $t_result;
 }
