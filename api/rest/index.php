@@ -22,6 +22,9 @@
  * @link http://www.mantisbt.org
  */
 
+# Bypass default Mantis headers
+$g_bypass_headers = true;
+
 require_once( __DIR__ . '/../../vendor/autoload.php' );
 require_once( __DIR__ . '/../../core.php' );
 require_once( __DIR__ . '/../soap/mc_core.php' );
