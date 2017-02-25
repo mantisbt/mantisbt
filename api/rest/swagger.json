@@ -20,7 +20,7 @@
         "tags": [
           "Issues"
         ],
-        "operationId": "115d4145-c4c9-4240-883f-20648ba5ddd5",
+        "operationId": "issueGet",
         "parameters": [
           {
             "name": "id",
@@ -29,14 +29,6 @@
             "required": true,
             "type": "number",
             "format": "integer"
-          },
-          {
-            "name": "Authorization",
-            "required": false,
-            "in": "header",
-            "type": "string",
-            "x-title": "Authorization",
-            "description": "The user API token."
           }
         ],
         "responses": {
@@ -46,11 +38,19 @@
           "403": {
             "description": "Access denied"
           }
-        },
-        "security": []
+        }
       }
     }
   },
-  "securityDefinitions": {}
+  "security": [
+    { "Authorization": [] }
+  ],
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
 }
 
