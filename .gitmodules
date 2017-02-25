@@ -18,3 +18,6 @@
 	path = library/parsedown
 	url = https://github.com/mantisbt/parsedown.git
 	branch = mantisbt
+[submodule "api/rest/swagger"]
+	path = api/rest/swagger
+	url = https://github.com/mantisbt/swagger-ui.git
