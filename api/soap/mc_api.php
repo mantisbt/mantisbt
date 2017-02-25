@@ -43,6 +43,11 @@ require_api( 'api_token_api.php' );
  */
 class SoapObjectsFactory {
 	/**
+	 * @var bool true: SOAP API, false: REST API
+	 */
+	static public $soap = true;
+
+	/**
 	 * Generate a new Soap Fault
 	 * @param string $p_fault_code   SOAP fault code.
 	 * @param string $p_fault_string SOAP fault description.
@@ -73,7 +78,11 @@ class SoapObjectsFactory {
 	static function newDateTimeVar( $p_value ) {
 		$t_string_value = self::newDateTimeString( $p_value );
 
-		return new SoapVar( $t_string_value, XSD_DATETIME, 'xsd:dateTime' );
+		if( SoapObjectsFactory::$soap ) {
+			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
+		}
+
+		return $t_string_value;
 	}
 
 	/**

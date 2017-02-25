@@ -17,20 +17,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		return $p_response->withStatus( 404 );
 	}
 
-	# Once we refactor mantisconnect code this step will not be needed.  For now this is
-	# needed since mc_* code emits SOAP structures and not just an array for types like
-	# DateTime.
-	$t_issue = soap2rest_issue( $t_issue );
-
 	return $p_response->withStatus( 200 )->withJson( $t_issue );
 }
 
-function soap2rest_issue( $p_issue ) {
-	$t_issue = array(
-		'id' => $p_issue['id'],
-		'summary' => $p_issue['summary'],
-	);
-
-	return $t_issue;
-}
 
