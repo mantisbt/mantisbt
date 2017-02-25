@@ -434,7 +434,11 @@ function mci_null_if_empty( $p_value ) {
  * @return string the sanitized XML
  */
 function mci_sanitize_xml_string ( $p_input ) {
-	return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+	if( SoapObjectsFactory::$soap ) {
+		return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+	}
+
+	return $p_input;
 }
 
 /**

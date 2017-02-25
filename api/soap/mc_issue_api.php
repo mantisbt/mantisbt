@@ -90,7 +90,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_bug = bug_get( $p_issue_id, true );
 	$t_issue_data = array();
 
-	$t_issue_data['id'] = $p_issue_id;
+	$t_issue_data['id'] = (int)$p_issue_id;
 	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
 	$t_issue_data['last_updated'] = SoapObjectsFactory::newDateTimeVar( $t_bug->last_updated );
 
@@ -104,15 +104,23 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['summary'] = mci_sanitize_xml_string( $t_bug->summary );
 	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
 	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
-	$t_issue_data['profile_id'] = mci_null_if_empty( $t_bug->profile_id );
+	$t_issue_data['profile_id'] = (int)$t_bug->profile_id;
 	$t_issue_data['platform'] = mci_null_if_empty( $t_bug->platform );
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
 	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
 	$t_issue_data['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $t_bug->date_submitted );
-	$t_issue_data['sticky'] = $t_bug->sticky;
 
-	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
+	if( SoapObjectsFactory::$soap ) {
+		$t_issue_data['sticky'] = (int)$t_bug->sticky;
+	} else {
+		$t_issue_data['sticky'] = (int)$t_bug->sticky != 1;
+	}
+
+	# Don't show sponsorship data in REST API
+	if( SoapObjectsFactory::$soap ) {
+		$t_issue_data['sponsorship_total'] = (int)$t_bug->sponsorship_total;
+	}
 
 	if( !empty( $t_bug->handler_id ) ) {
 		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
@@ -298,7 +306,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 
 			$t_custom_field_value = array();
 			$t_custom_field_value['field'] = array();
-			$t_custom_field_value['field']['id'] = $t_id;
+			$t_custom_field_value['field']['id'] = (int)$t_id;
 			$t_custom_field_value['field']['name'] = $t_def['name'];
 			$t_custom_field_value['value'] = $t_value;
 
@@ -306,7 +314,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 		}
 	}
 
-	return( count( $t_custom_fields ) == 0 ? null : $t_custom_fields );
+	return count( $t_custom_fields ) == 0 ? null : $t_custom_fields;
 }
 
 /**
@@ -328,13 +336,24 @@ function mci_issue_get_attachments( $p_issue_id ) {
 			continue;
 		}
 		$t_attachment = array();
-		$t_attachment['id'] = $t_attachment_row['id'];
+		$t_attachment['id'] = (int)$t_attachment_row['id'];
 		$t_attachment['filename'] = $t_attachment_row['filename'];
-		$t_attachment['size'] = $t_attachment_row['filesize'];
+		$t_attachment['size'] = (int)$t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
 		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $t_attachment_row['date_added'] );
-		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
-		$t_attachment['user_id'] = $t_attachment_row['user_id'];
+
+		if( SoapObjectsFactory::$soap ) {
+			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
+		} else {
+			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&type=bug';
+		}
+
+		if( SoapObjectsFactory::$soap ) {
+			$t_attachment['user_id'] = (int)$t_attachment_row['user_id'];
+		} else {
+			$t_attachment['reporter'] = mci_account_get_array_by_id( $t_attachment_row['user_id'] );
+		}
+
 		$t_result[] = $t_attachment;
 	}
 
@@ -356,11 +375,11 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
 			$t_relationship = array();
 			$t_reltype = array();
-			$t_relationship['id'] = $t_relship_row->id;
-			$t_reltype['id'] = $t_relship_row->type;
+			$t_relationship['id'] = (int)$t_relship_row->id;
+			$t_reltype['id'] = (int)$t_relship_row->type;
 			$t_reltype['name'] = relationship_get_description_src_side( $t_relship_row->type );
 			$t_relationship['type'] = $t_reltype;
-			$t_relationship['target_id'] = $t_relship_row->dest_bug_id;
+			$t_relationship['target_id'] = (int)$t_relship_row->dest_bug_id;
 			$t_relationships[] = $t_relationship;
 		}
 	}
@@ -369,12 +388,12 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 	foreach( $t_dest_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->src_bug_id, $p_user_id ) ) {
 			$t_relationship = array();
-			$t_relationship['id'] = $t_relship_row->id;
+			$t_relationship['id'] = (int)$t_relship_row->id;
 			$t_reltype = array();
-			$t_reltype['id'] = relationship_get_complementary_type( $t_relship_row->type );
+			$t_reltype['id'] = (int)relationship_get_complementary_type( $t_relship_row->type );
 			$t_reltype['name'] = relationship_get_description_dest_side( $t_relship_row->type );
 			$t_relationship['type'] = $t_reltype;
-			$t_relationship['target_id'] = $t_relship_row->src_bug_id;
+			$t_relationship['target_id'] = (int)$t_relship_row->src_bug_id;
 			$t_relationships[] = $t_relationship;
 		}
 	}
@@ -397,20 +416,38 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
 		$t_bugnote = array();
-		$t_bugnote['id'] = $t_value->id;
+		$t_bugnote['id'] = (int)$t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
 		$t_bugnote['date_submitted'] = SoapObjectsFactory::newDateTimeString( $t_value->date_submitted );
 		$t_bugnote['last_modified'] = SoapObjectsFactory::newDateTimeString( $t_value->last_modified );
 		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
-		$t_bugnote['note_type'] = $t_value->note_type;
-		$t_bugnote['note_attr'] = $t_value->note_attr;
+
+		if( SoapObjectsFactory::$soap ) {
+			$t_bugnote['note_type'] = $t_value->note_type;
+			$t_bugnote['note_attr'] = $t_value->note_attr;
+		} else {
+			switch( $t_value->note_type ) {
+				case BUGNOTE:
+					$t_type = 'note';
+					break;
+				case REMINDER:
+					$t_type = 'reminder';
+					break;
+				case TIME_TRACKING:
+					$t_type = 'timelog';
+					break;
+			}
+
+			$t_bugnote['type'] = $t_type;
+			$t_bugnote['attr'] = $t_value->note_attr;
+		}
 
 		$t_result[] = $t_bugnote;
 	}
 
-	return (count( $t_result ) == 0 ? null : $t_result );
+	return count( $t_result ) == 0 ? null : $t_result;
 }
 
 /**
