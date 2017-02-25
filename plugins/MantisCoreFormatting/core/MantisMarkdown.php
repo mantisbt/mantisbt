@@ -77,6 +77,12 @@ class MantisMarkdown extends Parsedown
 	 */
 	public static function convert_text( $p_text ) {
 		self::init();
+
+		# Enabled quote conversion
+		# Text processing converts special character to entity name 
+		# Make sure to restore "&gt;" entity name to its characted result ">"
+		$p_text = str_replace( "&gt;", ">", $p_text );
+
 		return self::$mantis_markdown->text( $p_text );
 	}
 
@@ -222,6 +228,72 @@ class MantisMarkdown extends Parsedown
 	 */
 	protected function blockQuoteContinue( $line, array $block ){
 		return $this->__quote( $line, $block, __FUNCTION__ );
+	}
+
+	/**
+	 * Customize the inlineCode method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineCode( $block ) {
+
+		$block = parent::inlineCode( $block );
+		
+		if( isset( $block['element']['text'] )) {
+			# replaced any &amp; entity name with '&' under the code block: 
+			#
+			# Text processing will convert & sign within the code block or backtick, 
+			# into entity name, and that becomes &amp; <code>&amp;amp;</code>
+			$block['element']['text'] = str_replace( '&amp;', '&', $block['element']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
+	 * Customize the blockFencedCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockFencedCodeComplete( $block = null){
+
+		$block = parent::blockFencedCodeComplete( $block );
+		
+		if( isset( $block['element']['text']['text'] )) {
+			# replaced any &amp; entity name with '&' under the preformatted text code block: 
+			#
+			# Text processing will convert & sign within the code block or backtick, 
+			# into entity name, and that becomes &amp; <pre><code>&amp;amp;</code></pre>
+			$block['element']['text']['text'] = str_replace( '&amp;', '&', $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+	
+	/**
+	 * Customize the inlineLink method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineLink( $block ){
+
+		$block = parent::inlineLink( $block );
+
+		if( isset( $block['element']['attributes']['href'] )) {
+			# replaced any &amp; entity name with '&' under the inline link: 
+			#
+			# Text processing will convert & sign within the inline link <a>, 
+			# into entity name, and that becomes &amp; <a href="&amp;amp;">
+			$block['element']['attributes']['href'] = str_replace( '&amp;', '&', $block['element']['attributes']['href'] );
+		}
+
+		return $block;
 	}
 
 	/**
