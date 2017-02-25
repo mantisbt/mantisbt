@@ -96,6 +96,40 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 }
 
 /**
+ * Get user information given an API token.
+ *
+ * @param string $p_token The plain token.
+ * @return boolean true valid username and token, false otherwise.
+ * @access public
+ */
+function api_token_get_user( $p_token ) {
+	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
+	# This is likely called from code that supports both tokens and passwords.
+	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+		return false;
+	}
+
+	$t_encrypted_token = api_token_hash( $p_token );
+
+	db_param_push();
+
+	# TODO: add an index on just the API token hash
+	$t_query = 'SELECT * FROM {api_token} WHERE hash=' . db_param();
+	$t_result = db_query( $t_query, array( $t_encrypted_token ) );
+
+	$t_row = db_fetch_array( $t_result );
+	if( $t_row ) {
+		api_token_touch( $t_row['id'] );
+
+		return array(
+			'username' => user_get_name( $t_row['user_id'] ),
+			'id' => $t_row['user_id'] );
+	}
+
+	return false;
+}
+
+/**
  * Validate a plain token for the specified user.
  * @param string $p_username The user name.
  * @param string $p_token The plain token.

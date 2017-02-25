@@ -182,6 +182,14 @@ function mci_is_mantis_offline() {
  * @return integer|false return user_id if successful, otherwise false.
  */
 function mci_check_login( $p_username, $p_password ) {
+	static $s_already_called = false;
+
+	if( $s_already_called === true ) {
+		return auth_get_current_user_id();
+	}
+
+	$s_already_called = true;
+
 	if( mci_is_mantis_offline() ) {
 		return false;
 	}
