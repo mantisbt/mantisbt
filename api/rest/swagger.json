@@ -1,0 +1,56 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MantisBT REST API",
+    "description": "For the sandbox to work, MantisBT must be hosted at the root folder of the host. For example: http://mantishost/ rather http://host/mantisbt.  If that is not the case, then create a host alias to map it as such or edit swagger.json to change basePath to include the mantisbt folder name.",
+    "version": "1.0.0"
+  },
+  "schemes": [
+    "http", "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "basePath": "/api/rest",
+  "paths": {
+    "/issues": {
+      "get": {
+        "summary": "Request",
+        "description": "Get issue details",
+        "tags": [
+          "Issues"
+        ],
+        "operationId": "115d4145-c4c9-4240-883f-20648ba5ddd5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The issue id.",
+            "required": true,
+            "type": "number",
+            "format": "integer"
+          },
+          {
+            "name": "Authorization",
+            "required": false,
+            "in": "header",
+            "type": "string",
+            "x-title": "Authorization",
+            "description": "The user API token."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with issue details"
+          },
+          "403": {
+            "description": "Access denied"
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "securityDefinitions": {}
+}
+

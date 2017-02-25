@@ -223,7 +223,11 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			break;
 		case 'check':		# admin checks dir
 		case 'soap':
+		case 'rest':
 			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			break;
+		case 'swagger':
+			$t_path = rtrim( dirname( dirname( dirname( $t_path ) ) ), '/\\' ) . '/';
 			break;
 		case '':
 			$t_path = '/';
