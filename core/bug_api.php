@@ -478,7 +478,7 @@ class BugData {
 
 		antispam_check();
 
-		if( is_null( $this->due_date ) || is_blank( $this->due_date ) ) {
+		if( is_blank( $this->due_date ) ) {
 			$t_due_date_default = config_get( 'due_date_default' );
 
 			if( is_blank( $t_due_date_default ) ) {
@@ -631,7 +631,7 @@ class BugData {
 
 		$c_bug_id = $this->id;
 
-		if( is_null( $this->due_date ) || is_blank( $this->due_date ) ) {
+		if( is_blank( $this->due_date ) ) {
 			$this->due_date = date_get_null();
 		} else if( is_numeric( $this->due_date ) ) {
 			$this->due_date = (int)$this->due_date;
