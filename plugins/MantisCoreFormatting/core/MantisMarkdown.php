@@ -36,7 +36,7 @@
  * @uses Parsedown Library
  */
 
-require_lib( 'parsedown' . DIRECTORY_SEPARATOR . 'Parsedown.php' );
+require_once 'library/parsedown/Parsedown.php';
 
 /**
  * A class that overrides default Markdown parsing for Mantis specific scenarios.

@@ -41,6 +41,19 @@ require_mantis_core();
 class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * Mantis Text Process
+	 *
+	 */
+	private function textProcess ( $p_string ) {
+		$t_string = $p_string;
+
+		$t_string = string_strip_hrefs( $t_string );
+		$t_string = string_html_specialchars( $t_string );
+		$t_string = string_restore_valid_html_tags( $t_string, true );
+
+		return $t_string;
+	}
+	/**
 	 * Test If string starts with hash character followed by letters
 	 * @return void
 	 */
@@ -134,20 +147,75 @@ no space after `>`:
 EOD;
 
 		$markdown_quote_output = <<<EOD
-<blockquote style="border-color:#847d7d">
+<blockquote style="padding:0.13em 1em;color:#777;border-left:0.25em solid #C0C0C0;font-size:13px;">
 <p>quote</p>
 </blockquote>
 <p>indented:</p>
-<blockquote style="border-color:#847d7d">
+<blockquote style="padding:0.13em 1em;color:#777;border-left:0.25em solid #C0C0C0;font-size:13px;">
 <p>quote</p>
 </blockquote>
 <p>no space after <code>&gt;</code>:</p>
-<blockquote style="border-color:#847d7d">
+<blockquote style="padding:0.13em 1em;color:#777;border-left:0.25em solid #C0C0C0;font-size:13px;">
 <p>quote</p>
 </blockquote>
 EOD;
-
 		$this->assertEquals( $markdown_quote_output, MantisMarkdown::convert_text( $markdown_quote ) );
 	}
 
+	/**
+	 * Test the quote markdown with text processing
+	 * @return void
+	 */
+	public function testQuoteWithTextProcess() {
+
+$markdown_quote_output = <<<EOD
+<blockquote style="padding:0.13em 1em;color:#777;border-left:0.25em solid #C0C0C0;font-size:13px;">
+<p>This is a quote</p>
+</blockquote>
+EOD;
+		$t_string = $this->textProcess ( "> This is a quote" );
+
+		$t_string = str_replace( "&gt;", ">", $t_string );
+
+		$this->assertEquals( $markdown_quote_output, MantisMarkdown::convert_text( $t_string ) );
+	}
+
+	/**
+	 * Test '<' signs within the code block tag (backticks) with text processing
+	 * @return void
+	 */
+	public function testLessThanSignWithTextProcess (){
+
+$markdown = <<<EOD
+LT sign within backticks: `<`
+LT sign within code block
+```
+<
+```
+EOD;
+
+$markdown_output = <<<EOD
+<p>LT sign within backticks: <code>&lt;</code><br />
+LT sign within code block</p>
+<pre><code>&lt;</code></pre>
+EOD;
+		$t_string = $this->textProcess ( $markdown );
+		
+		$t_string = MantisMarkdown::convert_text( $t_string );
+
+		# markdown is unable to process '<' signs within the code block tag (backticks)
+		# markdown convert '<' signs into '&amp;lt;' after the text proccessing process
+		# therefore we need restore the entity back into its original name '&lt;'
+		$t_string = str_replace( '&amp;lt;', '&lt;', $t_string );
+
+		$this->assertEquals( $markdown_output,  $t_string );
+	}
 }
+
+
+
+
+
+
+
+
