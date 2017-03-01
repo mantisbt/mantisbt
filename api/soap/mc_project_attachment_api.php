@@ -40,10 +40,10 @@ function mc_project_attachment_get( $p_username, $p_password, $p_project_attachm
 	}
 
 	$t_file = mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
-	if( SoapObjectsFactory::isSoapFault( $t_file ) ) {
+	if( ApiObjectFactory::isSoapFault( $t_file ) ) {
 		return $t_file;
 	}
-	return SoapObjectsFactory::encodeBinary( $t_file );
+	return ApiObjectFactory::encodeBinary( $t_file );
 }
 
 /**
@@ -73,7 +73,7 @@ function mc_project_attachment_add( $p_username, $p_password, $p_project_id, $p_
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 	if( is_blank( $p_title ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'Title must not be empty.' );
+		return ApiObjectFactory::newSoapFault( 'Client', 'Title must not be empty.' );
 	}
 	return mci_file_add( $p_project_id, $p_name, $p_content, $p_file_type, 'project', $p_title, $p_description, $t_user_id );
 }

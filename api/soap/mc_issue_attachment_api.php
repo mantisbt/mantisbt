@@ -40,10 +40,10 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
 	}
 
 	$t_file = mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
-	if( SoapObjectsFactory::isSoapFault( $t_file ) ) {
+	if( ApiObjectFactory::isSoapFault( $t_file ) ) {
 		return $t_file;
 	}
-	return SoapObjectsFactory::encodeBinary( $t_file );
+	return ApiObjectFactory::encodeBinary( $t_file );
 }
 
 /**
