@@ -4548,6 +4548,7 @@ $g_public_config_names = array(
 	'webservice_readonly_access_level_threshold',
 	'webservice_readwrite_access_level_threshold',
 	'webservice_resolution_enum_default_when_not_found',
+	'webservice_rest_enabled',
 	'webservice_severity_enum_default_when_not_found',
 	'webservice_specify_reporter_on_add_access_level_threshold',
 	'webservice_status_enum_default_when_not_found',
@@ -4669,6 +4670,13 @@ $g_webservice_error_when_version_not_found = ON;
  * @global string $g_webservice_version_when_not_found
  */
 $g_webservice_version_when_not_found = '';
+
+/**
+ * Whether the REST API (experimental) is enabled or not.
+ *
+ * @global integer $g_webservice_rest_enabled
+ */
+$g_webservice_rest_enabled = OFF;
 
 ####################
 # Issue Activities #
