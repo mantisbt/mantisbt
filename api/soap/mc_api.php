@@ -783,3 +783,43 @@ function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 
 	return SoapObjectsFactory::newSoapFault( 'Client', $t_reason );
 }
+
+/**
+ * Remove the keys with null values from the supplied array.
+ *
+ * @param array $p_array The array to filter.
+ * @return void
+ */
+function mci_remove_null_keys( &$p_array ) {
+	$t_keys_to_remove = array();
+
+	foreach( $p_array as $t_key => $t_value ) {
+		if( is_null( $t_value ) ) {
+			$t_keys_to_remove[] = $t_key;
+		}
+	}
+
+	foreach( $t_keys_to_remove as $t_key ) {
+		unset( $p_array[$t_key] );
+	}
+}
+
+/**
+ * Remove the keys with empty arrays from the supplied array.
+ *
+ * @param array $p_array The array to filter.
+ * @return void
+ */
+function mci_remove_empty_arrays( &$p_array ) {
+	$t_keys_to_remove = array();
+
+	foreach( $p_array as $t_key => $t_value ) {
+		if( is_array( $t_value ) && empty( $t_value ) ) {
+			$t_keys_to_remove[] = $t_key;
+		}
+	}
+
+	foreach( $t_keys_to_remove as $t_key ) {
+		unset( $p_array[$t_key] );
+	}
+}
