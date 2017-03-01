@@ -87,7 +87,7 @@ class ApiObjectFactory {
 	 * @param integer $p_timestamp Integer value to format as date time string.
 	 * @return string
 	 */
-	static function newDateTimeString ( $p_timestamp ) {
+	static function newDateTimeString( $p_timestamp ) {
 		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}
@@ -100,7 +100,7 @@ class ApiObjectFactory {
 	 * @param string $p_string String value to process as a date time string.
 	 * @return integer
 	 */
-	static function parseDateTimeString ( $p_string ) {
+	static function parseDateTimeString( $p_string ) {
 		return strtotime( $p_string );
 	}
 
@@ -109,7 +109,7 @@ class ApiObjectFactory {
 	 * @param string $p_binary Binary string.
 	 * @return string
 	 */
-	static function encodeBinary ( $p_binary ) {
+	static function encodeBinary( $p_binary ) {
 		return $p_binary;
 	}
 
@@ -118,7 +118,7 @@ class ApiObjectFactory {
 	 * @param mixed $p_maybe_fault Object to check whether a SOAP fault.
 	 * @return boolean
 	 */
-	static function isSoapFault ( $p_maybe_fault ) {
+	static function isFault( $p_maybe_fault ) {
 		if( !is_object( $p_maybe_fault ) ) {
 			return false;
 		}
