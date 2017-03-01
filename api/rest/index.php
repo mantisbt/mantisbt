@@ -15,10 +15,11 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A RESTful webservice interface to Mantis Bug Tracker
+ * A webservice interface to Mantis Bug Tracker
  *
  * @package MantisBT
- * @copyright Copyright MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
