@@ -239,7 +239,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
 
-			$t_custom_field = ApiObjectFactory::unwrapObject( $t_custom_field );
+			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 			# Verify validity of custom field specification
 			$t_msg = 'Invalid Custom field specification';
 			$t_valid_cf = isset( $t_custom_field['field'] ) && isset( $t_custom_field['value'] );
@@ -478,7 +478,7 @@ function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_mo
 	# 2. build new monitors ids
 	$t_new_monitor_ids = array();
 	foreach ( $p_monitors as $t_monitor ) {
-		$t_monitor = ApiObjectFactory::unwrapObject( $t_monitor );
+		$t_monitor = ApiObjectFactory::objectToArray( $t_monitor );
 		$t_new_monitor_ids[] = $t_monitor['id'];
 	}
 
@@ -692,7 +692,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$p_issue = ApiObjectFactory::unwrapObject( $p_issue );
+	$p_issue = ApiObjectFactory::objectToArray( $p_issue );
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
@@ -844,7 +844,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
-			$t_note = ApiObjectFactory::unwrapObject( $t_note );
+			$t_note = ApiObjectFactory::objectToArray( $t_note );
 
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
@@ -923,7 +923,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
 
-	$p_issue = ApiObjectFactory::unwrapObject( $p_issue );
+	$p_issue = ApiObjectFactory::objectToArray( $p_issue );
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
 	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
@@ -1079,7 +1079,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		}
 
 		foreach( $p_issue['notes'] as $t_note ) {
-			$t_note = ApiObjectFactory::unwrapObject( $t_note );
+			$t_note = ApiObjectFactory::objectToArray( $t_note );
 
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
@@ -1236,7 +1236,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
-	$p_note = ApiObjectFactory::unwrapObject( $p_note );
+	$p_note = ApiObjectFactory::objectToArray( $p_note );
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
 		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.' );
@@ -1362,7 +1362,7 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$p_note = ApiObjectFactory::unwrapObject( $p_note );
+	$p_note = ApiObjectFactory::objectToArray( $p_note );
 
 	if( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
 		return ApiObjectFactory::fault( 'Client', 'Issue note id must not be blank.' );
@@ -1433,10 +1433,10 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 	global $g_project_override;
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
-	$p_relationship = ApiObjectFactory::unwrapObject( $p_relationship );
+	$p_relationship = ApiObjectFactory::objectToArray( $p_relationship );
 
 	$t_dest_issue_id = $p_relationship['target_id'];
-	$t_rel_type = ApiObjectFactory::unwrapObject( $p_relationship['type'] );
+	$t_rel_type = ApiObjectFactory::objectToArray( $p_relationship['type'] );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();

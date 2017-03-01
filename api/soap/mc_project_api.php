@@ -438,7 +438,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 		return mci_soap_fault_login_failed();
 	}
 
-	$p_version = ApiObjectFactory::unwrapObject( $p_version );
+	$p_version = ApiObjectFactory::objectToArray( $p_version );
 
 	$t_project_id = $p_version['project_id'];
 	$g_project_override = $t_project_id;
@@ -517,7 +517,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 		return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_version_id . '\' does not exist.' );
 	}
 
-	$p_version = ApiObjectFactory::unwrapObject( $p_version );
+	$p_version = ApiObjectFactory::objectToArray( $p_version );
 
 	$t_project_id = $p_version['project_id'];
 	$g_project_override = $t_project_id;
@@ -845,7 +845,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$p_project = ApiObjectFactory::unwrapObject( $p_project );
+	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
 	if( !isset( $p_project['name'] ) ) {
 		return ApiObjectFactory::fault( 'Client', 'Required field "name" is missing' );
@@ -928,7 +928,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 
 	$g_project_override = $p_project_id;
 
-	$p_project = ApiObjectFactory::unwrapObject( $p_project );
+	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
 	if( !isset( $p_project['name'] ) ) {
 		return ApiObjectFactory::fault( 'Client', 'Missing required field \'name\'.' );

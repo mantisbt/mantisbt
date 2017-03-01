@@ -313,7 +313,7 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * @return integer enum id
  */
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
-	$p_object_ref = ApiObjectFactory::unwrapObject( $p_object_ref );
+	$p_object_ref = ApiObjectFactory::objectToArray( $p_object_ref );
 
 	if( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int)$p_object_ref['id'] != 0 ) {
 		$t_id = (int)$p_object_ref['id'];
