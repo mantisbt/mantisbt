@@ -73,7 +73,7 @@ class ApiObjectFactory {
 	 * @return datetime in expected API format.
 	 */
 	static function datetime($p_value ) {
-		$t_string_value = self::newDateTimeString( $p_value );
+		$t_string_value = self::datetimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
 			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
@@ -85,9 +85,9 @@ class ApiObjectFactory {
 	/**
 	 * Convert a timestamp to a DateTime string
 	 * @param integer $p_timestamp Integer value to format as date time string.
-	 * @return string
+	 * @return string for provided timestamp
 	 */
-	static function newDateTimeString( $p_timestamp ) {
+	static function datetimeString($p_timestamp ) {
 		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}

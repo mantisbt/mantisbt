@@ -423,8 +423,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote = array();
 		$t_bugnote['id'] = (int)$t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
-		$t_bugnote['date_submitted'] = ApiObjectFactory::newDateTimeString( $t_value->date_submitted );
-		$t_bugnote['last_modified'] = ApiObjectFactory::newDateTimeString( $t_value->last_modified );
+		$t_bugnote['date_submitted'] = ApiObjectFactory::datetimeString( $t_value->date_submitted );
+		$t_bugnote['last_modified'] = ApiObjectFactory::datetimeString( $t_value->last_modified );
 		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
