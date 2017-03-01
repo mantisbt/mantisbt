@@ -96,15 +96,6 @@ class ApiObjectFactory {
 	}
 
 	/**
-	 * Process Date Time string with strtotime
-	 * @param string $p_string String value to process as a date time string.
-	 * @return integer
-	 */
-	static function parseDateTimeString( $p_string ) {
-		return strtotime( $p_string );
-	}
-
-	/**
 	 * Checks if an object is a SoapFault
 	 * @param mixed $p_maybe_fault Object to check whether a SOAP fault.
 	 * @return boolean

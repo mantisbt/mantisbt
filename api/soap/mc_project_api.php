@@ -449,7 +449,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	if( is_blank( $t_date_order ) ) {
 		$t_date_order = null;
 	} else {
-		$t_date_order = ApiObjectFactory::parseDateTimeString( $t_date_order );
+		$t_date_order = strtotime( $t_date_order );
 	}
 
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
@@ -524,7 +524,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
-	$t_date_order = isset( $p_version['date_order'] ) ? ApiObjectFactory::parseDateTimeString( $p_version['date_order'] ) : null;
+	$t_date_order = isset( $p_version['date_order'] ) ? strtotime( $p_version['date_order'] ) : null;
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if( is_blank( $t_project_id ) ) {
