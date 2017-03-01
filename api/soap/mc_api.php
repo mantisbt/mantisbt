@@ -105,15 +105,6 @@ class ApiObjectFactory {
 	}
 
 	/**
-	 * Perform any necessary encoding on a binary string
-	 * @param string $p_binary Binary string.
-	 * @return string
-	 */
-	static function encodeBinary( $p_binary ) {
-		return $p_binary;
-	}
-
-	/**
 	 * Checks if an object is a SoapFault
 	 * @param mixed $p_maybe_fault Object to check whether a SOAP fault.
 	 * @return boolean

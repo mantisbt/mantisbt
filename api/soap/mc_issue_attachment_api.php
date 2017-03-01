@@ -43,7 +43,7 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
 	if( ApiObjectFactory::isFault( $t_file ) ) {
 		return $t_file;
 	}
-	return ApiObjectFactory::encodeBinary( $t_file );
+	return $t_file;
 }
 
 /**
