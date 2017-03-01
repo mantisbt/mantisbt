@@ -791,8 +791,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_bug_data->resolution = $t_resolution_id;
 	$t_bug_data->projection = $t_projection_id;
 	$t_bug_data->category_id = $t_category_id;
-	$t_bug_data->date_submitted = isset( $p_issue['date_submitted'] ) ? ApiObjectFactory::parseDateTimeString($p_issue['date_submitted']) : '';
-	$t_bug_data->last_updated = isset( $p_issue['last_updated'] ) ? ApiObjectFactory::parseDateTimeString($p_issue['last_updated']) : '';
+	$t_bug_data->date_submitted = isset( $p_issue['date_submitted'] ) ? strtotime( $p_issue['date_submitted'] ) : '';
+	$t_bug_data->last_updated = isset( $p_issue['last_updated'] ) ? strtotime( $p_issue['last_updated'] ) : '';
 	$t_bug_data->eta = $t_eta_id;
 	$t_bug_data->profile_id = isset( $p_issue['profile_id'] ) ? $p_issue['profile_id'] : 0;
 	$t_bug_data->os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
@@ -810,7 +810,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
-		$t_bug_data->due_date = ApiObjectFactory::parseDateTimeString( $p_issue['due_date'] );
+		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
 	}
@@ -1053,7 +1053,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
-		$t_bug_data->due_date = ApiObjectFactory::parseDateTimeString( $p_issue['due_date'] );
+		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
 	}
