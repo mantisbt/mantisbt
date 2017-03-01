@@ -4,7 +4,7 @@ require_api( 'authentication_api.php' );
 class AuthMiddleware {
 	public function __invoke( \Slim\Http\Request $request, \Slim\Http\Response $response, callable $next ) {
 		if( mci_is_mantis_offline() ) {
-			return $response->withStatus( 500, 'Mantis Offline' );
+			return $response->withStatus( 503, 'Mantis Offline' );
 		}
 
 		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
