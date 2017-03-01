@@ -37,22 +37,28 @@ class AuthMiddleware {
 		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
 
 		if( empty( $t_authorization_header ) ) {
-			# TODO: Add support for anonymous login
-			return $response->withStatus( 403, 'API token required' );
+			$t_username = config_get( 'anonymous_account' );
+			$t_api_token = '';
+
+			if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
+				return $response->withStatus( 403, 'API token required' );
+			}
+		} else {
+			$t_api_token = $t_authorization_header;
+
+			# TODO: add an index on the token hash for the method below
+			$t_user = api_token_get_user( $t_api_token );
+			if( $t_user === false ) {
+				return $response->withStatus( 403, 'API token not found' );
+			}
+
+			$t_username = $t_user['username'];
 		}
 
-		$t_api_token = $t_authorization_header;
-
-		# TODO: add an index on the token hash for the method below
-		$t_user = api_token_get_user( $t_api_token );
-		if( $t_user === false ) {
-			return $response->withStatus( 403, 'API token not found' );
-		}
-
-		if( mci_check_login( $t_user['username'], $t_api_token ) === false ) {
+		if( mci_check_login( $t_username, $t_api_token ) === false ) {
 			return $response->withStatus( 403, 'Access denied' );
 		}
 
-		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_user['username'] );
+		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_username );
 	}
 }
