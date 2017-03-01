@@ -89,7 +89,7 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 
 	$t_valid_matches = array();
 
-	$p_tag = ApiObjectFactory::unwrapObject( $p_tag );
+	$p_tag = ApiObjectFactory::objectToArray( $p_tag );
 
 	$t_tag_name = $p_tag['name'];
 	$t_tag_description = array_key_exists( 'description', $p_tag ) ? $p_tag['description'] : '';
@@ -154,7 +154,7 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	}
 
 	foreach( $p_tags as $t_tag ) {
-		$t_tag = ApiObjectFactory::unwrapObject( $t_tag );
+		$t_tag = ApiObjectFactory::objectToArray( $t_tag );
 
 		$t_submitted_tag_ids[] = $t_tag['id'];
 

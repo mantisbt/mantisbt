@@ -59,7 +59,7 @@ class ApiObjectFactory {
 	 * @param stdClass|array $p_object Object.
 	 * @return array
 	 */
-	static function unwrapObject( $p_object ) {
+	static function objectToArray($p_object ) {
 		if( is_object( $p_object ) ) {
 			return get_object_vars( $p_object );
 		}
@@ -292,7 +292,7 @@ function mci_get_project_view_state_id( $p_view_state ) {
  * @return integer user id
  */
 function mci_get_user_id( stdClass $p_user ) {
-	$p_user = ApiObjectFactory::unwrapObject( $p_user );
+	$p_user = ApiObjectFactory::objectToArray( $p_user );
 
 	$t_user_id = 0;
 
