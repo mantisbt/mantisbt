@@ -756,7 +756,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['description'] = $t_row['description'];
 		$t_attachment['size'] = $t_row['filesize'];
 		$t_attachment['content_type'] = $t_row['file_type'];
-		$t_attachment['date_submitted'] = ApiObjectFactory::newDateTimeVar( $t_row['date_added'] );
+		$t_attachment['date_submitted'] = ApiObjectFactory::datetime( $t_row['date_added'] );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_row['id'] . '&amp;type=doc';
 		$t_attachment['user_id'] = $t_row['user_id'];
 		$t_attachments[] = $t_attachment;

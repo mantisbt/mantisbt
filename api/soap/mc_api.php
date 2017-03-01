@@ -70,9 +70,9 @@ class ApiObjectFactory {
 	/**
 	 * Convert a timestamp to a soap DateTime variable
 	 * @param integer $p_value Integer value to return as date time string.
-	 * @return SoapVar
+	 * @return datetime in expected API format.
 	 */
-	static function newDateTimeVar( $p_value ) {
+	static function datetime($p_value ) {
 		$t_string_value = self::newDateTimeString( $p_value );
 
 		if( ApiObjectFactory::$soap ) {
@@ -595,7 +595,7 @@ function mci_project_version_as_array( array $p_version ) {
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
-			'date_order' => ApiObjectFactory::newDateTimeVar( $p_version['date_order'] ),
+			'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
 			'obsolete' => $p_version['obsolete']
