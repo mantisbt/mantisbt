@@ -91,54 +91,20 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Customize the logic on Header elements
+	 * Customize the blockHeader markdown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return void if markdown starts with # symbol followed by any character | string html representation generated from markdown.
 	 */
 	protected function blockHeader( $line ) {
-		$block = parent::blockHeader( $line );
-
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
+		
+		# Parsedown is not exactly follows with # symbol as stated in http://spec.commonmark.org/0.27/#atx-heading
+		# Header need a space between the # symbol and the text as required by the original ATX implementation
+		# This fix will search for a match of # symbol followed by space only
+		if ( preg_match('/^#+ /', $line['text'] ) ) {
+			return parent::blockHeader($line);
 		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
-	}
-
-	/**
-	 * Customize the logic on setting the Header elements.
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
-	 */
-	protected function blockSetextHeader( $line, array $block = null ) {
-		$block = parent::blockSetextHeader( $line, $block );
-
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
-		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
 	}
 
 	/**
