@@ -92,7 +92,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_issue_data['id'] = (int)$p_issue_id;
 	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
-	$t_issue_data['last_updated'] = ApiObjectFactory::newDateTimeVar( $t_bug->last_updated );
+	$t_issue_data['last_updated'] = ApiObjectFactory::datetime( $t_bug->last_updated );
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
 	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
@@ -109,7 +109,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
 	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
-	$t_issue_data['date_submitted'] = ApiObjectFactory::newDateTimeVar( $t_bug->date_submitted );
+	$t_issue_data['date_submitted'] = ApiObjectFactory::datetime( $t_bug->date_submitted );
 
 	if( ApiObjectFactory::$soap ) {
 		$t_issue_data['sticky'] = (int)$t_bug->sticky;
@@ -223,7 +223,7 @@ function mci_issue_get_due_date( BugData $p_bug ) {
 		$t_value = $p_bug->due_date;
 	}
 
-	return ApiObjectFactory::newDateTimeVar( $t_value );
+	return ApiObjectFactory::datetime( $t_value );
 }
 
 /**
@@ -345,7 +345,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_attachment['filename'] = $t_attachment_row['filename'];
 		$t_attachment['size'] = (int)$t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
-		$t_attachment['date_submitted'] = ApiObjectFactory::newDateTimeVar( $t_attachment_row['date_added'] );
+		$t_attachment['date_submitted'] = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
 
 		if( ApiObjectFactory::$soap ) {
 			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
@@ -1545,7 +1545,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
-		$t_issue['last_updated'] = ApiObjectFactory::newDateTimeVar( $p_issue_data->last_updated );
+		$t_issue['last_updated'] = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
@@ -1570,7 +1570,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
-		$t_issue['date_submitted'] = ApiObjectFactory::newDateTimeVar( $p_issue_data->date_submitted );
+		$t_issue['date_submitted'] = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
 		$t_issue['sticky'] = $p_issue_data->sticky;
 
 		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
@@ -1593,7 +1593,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
 		$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
 
-		$t_issue['due_date'] = ApiObjectFactory::newDateTimeVar( $p_issue_data->due_date );
+		$t_issue['due_date'] = ApiObjectFactory::datetime( $p_issue_data->due_date );
 
 		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
@@ -1647,7 +1647,7 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $p_issue_data->view_state;
-		$t_issue['last_updated'] = ApiObjectFactory::newDateTimeVar( $p_issue_data->last_updated );
+		$t_issue['last_updated'] = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
 		$t_issue['project'] = $p_issue_data->project_id;
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );

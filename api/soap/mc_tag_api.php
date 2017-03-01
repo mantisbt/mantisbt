@@ -52,8 +52,8 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 
 	while( $t_tag = db_fetch_array( $t_tags ) ) {
 		$t_tag['user_id'] = mci_account_get_array_by_id( $t_tag['user_id'] );
-		$t_tag['date_created'] = ApiObjectFactory::newDateTimeVar( $t_tag['date_created'] );
-		$t_tag['date_updated'] = ApiObjectFactory::newDateTimeVar( $t_tag['date_updated'] );
+		$t_tag['date_created'] = ApiObjectFactory::datetime( $t_tag['date_created'] );
+		$t_tag['date_updated'] = ApiObjectFactory::datetime( $t_tag['date_updated'] );
 		$t_results[] = $t_tag;
 	}
 
