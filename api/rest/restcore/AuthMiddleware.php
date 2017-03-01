@@ -23,7 +23,7 @@ class AuthMiddleware {
 		}
 
 		if( mci_check_login( $t_user['username'], $t_api_token ) === false ) {
-			return $response->withStatus( 403, 'User disabled' );
+			return $response->withStatus( 403, 'Access denied' );
 		}
 
 		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_user['username'] );
