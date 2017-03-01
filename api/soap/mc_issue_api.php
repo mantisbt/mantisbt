@@ -72,7 +72,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue does not exist' );
+		return ApiObjectFactory::fault( 'Client', 'Issue does not exist' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -172,7 +172,7 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue does not exist' );
+		return ApiObjectFactory::fault( 'Client', 'Issue does not exist' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -252,14 +252,14 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			}
 
 			if( !$t_valid_cf ) {
-				return ApiObjectFactory::newSoapFault( 'Client', $t_msg );
+				return ApiObjectFactory::fault( 'Client', $t_msg );
 			}
 
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
-				return ApiObjectFactory::newSoapFault( 'Client', "Custom field '" . $t_field['name'] . "' not found." );
+				return ApiObjectFactory::fault( 'Client', "Custom field '" . $t_field['name'] . "' not found." );
 			}
 
 			# skip if current user doesn't have login access.
@@ -270,11 +270,11 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			$t_value = $t_custom_field['value'];
 
 			if( !custom_field_validate( $t_custom_field_id, $t_value ) ) {
-				return ApiObjectFactory::newSoapFault( 'Client', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .' );
+				return ApiObjectFactory::fault( 'Client', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .' );
 			}
 
 			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert ) ) {
-				return ApiObjectFactory::newSoapFault( 'Server', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .' );
+				return ApiObjectFactory::fault( 'Server', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .' );
 			}
 		}
 	}
@@ -589,7 +589,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $t_project_id;
 
 	if( ( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
@@ -659,7 +659,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
 	if( $p_new_handler_id != 0 ) {
 		if ( !user_exists( $p_new_handler_id ) ) {
-			return ApiObjectFactory::newSoapFault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.' );
+			return ApiObjectFactory::fault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.' );
 		}
 
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $p_project_id, $p_new_handler_id ) ) {
@@ -732,9 +732,9 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return ApiObjectFactory::newSoapFault( 'Client', "Project '" . $t_project->name . "' does not exist." );
+			return ApiObjectFactory::fault( 'Client', "Project '" . $t_project->name . "' does not exist." );
 		} else {
-			return ApiObjectFactory::newSoapFault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
+			return ApiObjectFactory::fault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
 		}
 	}
 
@@ -752,9 +752,9 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
+			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
 		} else {
-			return ApiObjectFactory::newSoapFault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_id . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_id . '\'.' );
 		}
 	}
 
@@ -764,7 +764,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::newSoapFault( 'Client', 'Version \'' . $t_version . '\' does not exist in project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Version \'' . $t_version . '\' does not exist in project \'' . $t_project_name . '\'.' );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$t_version = $t_version_when_not_found;
@@ -772,11 +772,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Mandatory field \'summary\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.' );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Mandatory field \'description\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.' );
 	}
 
 	$t_bug_data = new BugData;
@@ -908,11 +908,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -934,9 +934,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return ApiObjectFactory::newSoapFault( 'Client', 'Project \'' . $t_project['name'] . '\' does not exist.' );
+			return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project['name'] . '\' does not exist.' );
 		}
-		return ApiObjectFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
@@ -948,10 +948,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
+			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
 		} else {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::newSoapFault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_name . '\'.' );
 		}
 	}
 
@@ -959,7 +959,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::newSoapFault( 'Client', 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' . $t_project_name . '\'.' );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$p_issue['version'] = $t_version_when_not_found;
@@ -967,11 +967,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Mandatory field \'summary\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.' );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Mandatory field \'description\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.' );
 	}
 
 	# fields which we expect to always be set
@@ -1157,7 +1157,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, array $p_tag
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1193,7 +1193,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1229,17 +1229,17 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	}
 
 	if( (integer)$p_issue_id < 1 ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Invalid issue id \'' . $p_issue_id . '\'' );
+		return ApiObjectFactory::fault( 'Client', 'Invalid issue id \'' . $p_issue_id . '\'' );
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$p_note = ApiObjectFactory::unwrapObject( $p_note );
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue note text must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1310,11 +1310,11 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	if( (integer)$p_issue_note_id < 1 ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
+		return ApiObjectFactory::fault( 'Client', 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
 	}
 
 	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue note \'' . $p_issue_note_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $p_issue_note_id . '\' does not exist.' );
 	}
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
@@ -1365,17 +1365,17 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$p_note = ApiObjectFactory::unwrapObject( $p_note );
 
 	if( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue note id must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note id must not be blank.' );
 	}
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue note text must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.' );
 	}
 
 	$t_issue_note_id = $p_note['id'];
 
 	if( !bugnote_exists( $t_issue_note_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue note \'' . $t_issue_note_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $t_issue_note_id . '\' does not exist.' );
 	}
 
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
@@ -1455,12 +1455,12 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 
 	# source and destination bugs are the same bug...
 	if( $p_issue_id == $t_dest_issue_id ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'An issue can\'t be related to itself.' );
+		return ApiObjectFactory::fault( 'Client', 'An issue can\'t be related to itself.' );
 	}
 
 	# the related bug exists...
 	if( !bug_exists( $t_dest_issue_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Issue \'' . $t_dest_issue_id . '\' not found.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $t_dest_issue_id . '\' not found.' );
 	}
 
 	# bug is not read-only...

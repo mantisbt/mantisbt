@@ -50,7 +50,7 @@ class ApiObjectFactory {
 	 * @param string $p_fault_string SOAP fault description.
 	 * @return SoapFault
 	 */
-	static function newSoapFault( $p_fault_code, $p_fault_string ) {
+	static function fault($p_fault_code, $p_fault_string ) {
 		return new SoapFault( $p_fault_code, $p_fault_string );
 	}
 
@@ -755,7 +755,7 @@ function error_get_stack_trace() {
  * @return soap_fault
  */
 function mci_soap_fault_login_failed() {
-	return ApiObjectFactory::newSoapFault( 'Client', 'Access denied' );
+	return ApiObjectFactory::fault( 'Client', 'Access denied' );
 }
 
 /**
@@ -778,7 +778,7 @@ function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 	}
 
-	return ApiObjectFactory::newSoapFault( 'Client', $t_reason );
+	return ApiObjectFactory::fault( 'Client', $t_reason );
 }
 
 /**

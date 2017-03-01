@@ -77,16 +77,16 @@ function mci_file_write_local( $p_diskfile, $p_content ) {
  */
 function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'File type not allowed.' );
+		return ApiObjectFactory::fault( 'Client', 'File type not allowed.' );
 	}
 	if( !file_is_name_unique( $p_name, $p_id ) ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Duplicate filename.' );
+		return ApiObjectFactory::fault( 'Client', 'Duplicate filename.' );
 	}
 
 	$t_file_size = strlen( $p_content );
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'File is too big.' );
+		return ApiObjectFactory::fault( 'Client', 'File is too big.' );
 	}
 
 	if( 'bug' == $p_table ) {
@@ -120,7 +120,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	switch( $t_method ) {
 		case DISK:
 			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
-				return ApiObjectFactory::newSoapFault( 'Server', 'Upload folder \'' . $t_file_path . '\' doesn\'t exist.' );
+				return ApiObjectFactory::fault( 'Server', 'Upload folder \'' . $t_file_path . '\' doesn\'t exist.' );
 			}
 
 			file_ensure_valid_upload_path( $t_file_path );
@@ -205,13 +205,13 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			$t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
 			break;
 		default:
-			return ApiObjectFactory::newSoapFault( 'Server', 'Invalid file type '. $p_type . ' .' );
+			return ApiObjectFactory::fault( 'Server', 'Invalid file type '. $p_type . ' .' );
 	}
 
 	$t_result = db_query( $t_query, array( $p_file_id ) );
 
 	if( $t_result->EOF ) {
-		return ApiObjectFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
+		return ApiObjectFactory::fault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
 
 	$t_row = db_fetch_array( $t_result );
@@ -250,7 +250,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			if( file_exists( $t_diskfile ) ) {
 				return mci_file_read_local( $t_diskfile ) ;
 			} else {
-				return ApiObjectFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
+				return ApiObjectFactory::fault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 			}
 		case DATABASE:
 			return $t_content;
