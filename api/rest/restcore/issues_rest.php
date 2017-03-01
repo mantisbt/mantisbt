@@ -13,7 +13,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	$t_result = mc_issue_get( /* username */ '', /* password */ '', $p_request->getParam( 'id' ) );
 
 	# Dependency on SoapFault can be removed by refactoring mc_* code.
-	if( SoapObjectsFactory::isSoapFault( $t_result ) ) {
+	if( ApiObjectFactory::isSoapFault( $t_result ) ) {
 		return $p_response->withStatus( 404, $t_result->faultstring );
 	}
 

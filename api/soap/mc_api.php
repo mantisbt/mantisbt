@@ -36,12 +36,9 @@ require_api( 'api_token_api.php' );
 
 /**
  * A factory class that can abstract away operations that can behave differently based
- * on the underlying soap implementation.
- *
- * TODO: Consider removing this class since it currently has one implementation which
- * targets the php soap extension.
+ * on the API being accessed (SOAP vs. REST).
  */
-class SoapObjectsFactory {
+class ApiObjectFactory {
 	/**
 	 * @var bool true: SOAP API, false: REST API
 	 */
@@ -78,7 +75,7 @@ class SoapObjectsFactory {
 	static function newDateTimeVar( $p_value ) {
 		$t_string_value = self::newDateTimeString( $p_value );
 
-		if( SoapObjectsFactory::$soap ) {
+		if( ApiObjectFactory::$soap ) {
 			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
 		}
 
@@ -313,7 +310,7 @@ function mci_get_project_view_state_id( $p_view_state ) {
  * @return integer user id
  */
 function mci_get_user_id( stdClass $p_user ) {
-	$p_user = SoapObjectsFactory::unwrapObject( $p_user );
+	$p_user = ApiObjectFactory::unwrapObject( $p_user );
 
 	$t_user_id = 0;
 
@@ -434,7 +431,7 @@ function mci_null_if_empty( $p_value ) {
  * @return string the sanitized XML
  */
 function mci_sanitize_xml_string ( $p_input ) {
-	if( SoapObjectsFactory::$soap ) {
+	if( ApiObjectFactory::$soap ) {
 		return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
 	}
 
@@ -598,7 +595,7 @@ function mci_project_version_as_array( array $p_version ) {
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
-			'date_order' => SoapObjectsFactory::newDateTimeVar( $p_version['date_order'] ),
+			'date_order' => ApiObjectFactory::newDateTimeVar( $p_version['date_order'] ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
 			'obsolete' => $p_version['obsolete']
@@ -758,7 +755,7 @@ function error_get_stack_trace() {
  * @return soap_fault
  */
 function mci_soap_fault_login_failed() {
-	return SoapObjectsFactory::newSoapFault( 'Client', 'Access denied' );
+	return ApiObjectFactory::newSoapFault( 'Client', 'Access denied' );
 }
 
 /**
@@ -781,7 +778,7 @@ function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 	}
 
-	return SoapObjectsFactory::newSoapFault( 'Client', $t_reason );
+	return ApiObjectFactory::newSoapFault( 'Client', $t_reason );
 }
 
 /**
