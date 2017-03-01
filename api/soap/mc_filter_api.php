@@ -125,7 +125,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return ApiObjectFactory::newSoapFault( 'Server', 'Invalid Filter' );
+		return ApiObjectFactory::fault( 'Server', 'Invalid Filter' );
 	}
 	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -171,7 +171,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return ApiObjectFactory::newSoapFault( 'Server', 'Invalid Filter' );
+		return ApiObjectFactory::fault( 'Server', 'Invalid Filter' );
 	}
 	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
