@@ -4693,3 +4693,11 @@ $g_webservice_version_when_not_found = '';
  * the attachment is linked to the note.  Or 0 for disabling this feature.
  */
 $g_issue_activity_note_attachments_seconds_threshold = 3;
+
+# --- simpleSAMLphp ---
+$g_simplesamlphp_autoloader = '';
+$g_simplesamlphp_instance = NULL;
+$g_simplesamlphp_SP_name = '';
+$g_simplesamlphp_auth_attributes = Array();
+$g_simplesamlphp_autz_attributes = Array();
+$g_simplesamlphp_attributes = Array();
