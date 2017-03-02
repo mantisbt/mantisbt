@@ -95,13 +95,14 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return void if markdown starts with # symbol followed by any character | string html representation generated from markdown.
+	 * @return null|string HTML representation generated from markdown or null if
+                      markdown starts with # symbol immediately followed by 
+                      any character other than space.
 	 */
 	protected function blockHeader( $line ) {
 		
-		# Parsedown is not exactly follows with # symbol as stated in http://spec.commonmark.org/0.27/#atx-heading
-		# Header need a space between the # symbol and the text as required by the original ATX implementation
-		# This fix will search for a match of # symbol followed by space only
+		# Check if string starts with # symbol followed by space, 
+		# If pattern match, then let the parent blockHeader function handle it
 		if ( preg_match('/^#+ /', $line['text'] ) ) {
 			return parent::blockHeader($line);
 		}
