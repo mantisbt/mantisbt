@@ -136,20 +136,23 @@
 				$g_bug_collect_reports_status_threshold
 			</term>
 			<listitem>
-				<para>Bug becomes closed for submission of automated bug reports (attaches)
-					if its status is &gt;= $g_bug_collect_reports_threshold. The bug starts 
+				<para>Crash report bug becomes closed for new file attaches
+					if its status is >= $g_bug_collect_reports_threshold. The bug starts 
 					accept more bug reports again if its status becomes less than this 
-					threshold. The default is ASSIGNED. 
+					threshold. The default is ACKNOWLEDGED. 
 				</para>
 				<para>
 					Read-only, closed and fixed bugs are closed for bug report submission 
 					regardless of this option.
 				</para>
 				<para>
+					This setting does not affect hitcount increase.
+				</para>
+				<para>
 					See also $g_bug_max_auto_reports option.
 				</para>
 				<para>
-					See also SOAP.mc_issue_report function.
+					See also SOAP.mc_crash_report function.
 				</para>
 			</listitem>
 		</varlistentry>

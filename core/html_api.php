@@ -935,17 +935,6 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 }
 
 /**
- * Print a button to vote for the given bug
- * @param integer $p_bug_id A Bug identifier.
- * @return void
- */
-function html_button_bug_vote( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) && access_user_can_vote_for_bug( $p_bug_id ) ) {
-		html_button( 'bug_update.php', lang_get( 'vote_bug_button' ), array( 'bug_id' => $p_bug_id, 'vote' => 1 ) );
-	}
-}
-
-/**
  * Print a button to update the given bug
  * @param integer $p_bug_id A Bug identifier.
  * @return void
@@ -1241,11 +1230,6 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	echo '<div class="btn-group">';
 	if( !$t_readonly ) {
-		# VOTE button
-		echo '<div class="pull-left padding-right-8">';
-		html_button_bug_vote( $p_bug_id );
-		echo '</div>';
-
 		# UPDATE button
 		echo '<div class="pull-left padding-right-8">';
 		html_button_bug_update( $p_bug_id );

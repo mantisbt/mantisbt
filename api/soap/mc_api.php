@@ -138,23 +138,11 @@ function mc_version() {
  * @return array Array of user data for the current API user
  */
 function mc_login( $p_username, $p_password ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+	$t_user_id = mci_check_login_report_only( $p_username, $p_password );
 	if( false === $t_user_id ) {
-		$t_user_id = mci_check_login( $p_username, $p_password, API_TOKEN_REPORT_ONLY );
-		if( false === $t_user_id ) {
-			return mci_soap_fault_login_failed();
-		} else {
-			$t_kind = API_TOKEN_REPORT_ONLY;
-		}	
-	} elseif( api_token_validate( $p_username, $p_password ) ) {
-		$t_kind = API_TOKEN_GENERIC;
-	} else {	
-		$t_kind = -1;
+		return mci_soap_fault_login_failed();
 	}
-
-	$t_user_data = mci_user_get( $p_username, $p_password, $t_user_id );
-	$t_user_data['api_token_type'] = $t_kind;
-	return $t_user_data;
+	return mci_user_get( $p_username, $p_password, $t_user_id );
 }
 
 /**

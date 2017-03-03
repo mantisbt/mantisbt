@@ -443,39 +443,6 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
 }
 
 /**
- * Check if the current user has already voted (returns false) or not (returns true).
- * @param integer      $p_bug_id       Integer representing bug id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user can vote for the bug
- * @access public
- */
-function access_user_can_vote_for_bug( $p_bug_id, $p_user_id = null ) {
-	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id();
-	}
-	
-	# Deal with not logged in silently in this case
-	# @@@ we may be able to remove this and just error
-	#     and once we default to anon login, we can remove it for sure
-	if( empty( $p_user_id ) && !auth_is_user_authenticated() ) {
-		return false;
-	}
-	
-	if( user_is_anonymous( $p_user_id ) ) {
-		return false;
-	}
-
-	# Do not allow user to vote if he has already voted
-	$t_query = 'SELECT id FROM {bug_history} WHERE bug_id=' . db_param() . ' AND user_id=' . db_param() . ' AND type=' . db_param() . ' LIMIT 1';
-	$t_result = db_query( $t_query, array( $p_bug_id, $p_user_id, BUG_VOTED ) );
-	if( db_result($t_result) ) {
-		return false;
-	}
-	
-	return true;
-}
-	
-/**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
  * This function looks up the bug's project and performs an access check

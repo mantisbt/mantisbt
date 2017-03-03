@@ -884,11 +884,11 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 
 # Release marker: 1.3.0
 
-# Count / occurrences / votes 
+# Count / occurrences
 $g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
-	votes					I		NOTNULL DEFAULT '1'",
+	hitcount				I		NOTNULL DEFAULT '1'",
 	) );
-$g_upgrade[211] = array( 'CreateIndexSQL', array( 'idx_bug_count', db_get_table( 'bug' ), 'votes' ) );	
+$g_upgrade[211] = array( 'CreateIndexSQL', array( 'idx_bug_hitcount', db_get_table( 'bug' ), 'hitcount' ) );	
 
 # A standalone table is required for "alias", because not all DB allow multiple NULLs in UNIQUE index
 $g_upgrade[212] = array('CreateTableSQL', array( db_get_table( 'bug_alias' ), "

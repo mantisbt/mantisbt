@@ -225,10 +225,10 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_max_auto_reports</term>
+			<term>$g_bug_max_crash_report_attaches</term>
 			<listitem>
-				<para>Maximum number of automatic reports to collect per bug when bug is open
-					for collection of new reports (e.g. bug is not read-only, not closed, 
+				<para>Maximum number of file attaches to collect per crash report bug 
+					when bug is opened for submission (e.g. bug is not read-only, not closed, 
 					not fixed, and not switched to $g_bug_collect_reports_status_threshold state). 
 				</para>
 				<para>

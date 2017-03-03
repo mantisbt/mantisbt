@@ -342,8 +342,8 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	<td class="nowrap width-13 my-buglist-id">
 		<?php
 			print_bug_link( $t_bug->id, false );
-			if( $t_bug->votes > 1 ) {
-				echo ' ^', $t_bug->votes;
+			if( $t_bug->hitcount > 1 ) {
+				echo ' ^', $t_bug->hitcount;
 			}	
 			echo '<br />';
 

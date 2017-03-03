@@ -503,9 +503,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			$p_new_value = get_enum_element( 'priority', $p_new_value );
 			$t_field_localized = lang_get( 'priority' );
 			break;
-		case 'votes':
-			$t_field_localized = lang_get( 'count' );
-			break;
 		case 'eta':
 			$p_old_value = get_enum_element( 'eta', $p_old_value );
 			$p_new_value = get_enum_element( 'eta', $p_new_value );
@@ -627,9 +624,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			switch( $p_type ) {
 				case NEW_BUG:
 					$t_note = lang_get( 'new_bug' );
-					break;
-				case BUG_VOTED:
-					$t_note = lang_get( 'bug_voted' );
 					break;
 				case BUGNOTE_ADDED:
 					$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;

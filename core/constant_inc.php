@@ -202,7 +202,6 @@ define( 'TAG_DETACHED', 26 );
 define( 'TAG_RENAMED', 27 );
 define( 'BUG_REVISION_DROPPED', 28 );
 define( 'BUGNOTE_REVISION_DROPPED', 29 );
-define( 'BUG_VOTED', 30 );
 define( 'PLUGIN_HISTORY', 100 );
 
 # bug revisions
@@ -491,7 +490,7 @@ define( 'TIME_TRACKING', 2 );
 
 # API token types
 define( 'API_TOKEN_GENERIC', 0 );
-define( 'API_TOKEN_REPORT_ONLY', 1 );
+define( 'API_TOKEN_CRASH_REPORT', 1 );
 
 # token types
 define( 'TOKEN_UNKNOWN', 0 );

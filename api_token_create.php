@@ -38,8 +38,8 @@ auth_reauthenticate();
 
 $f_token_name = gpc_get_string( 'token_name' );
 $t_kind = API_TOKEN_GENERIC;
-if ( gpc_isset( 'restricted_token_report_only' ) ) {
-	$t_kind = API_TOKEN_REPORT_ONLY;
+if ( gpc_isset( 'crash_reporting_token' ) ) {
+	$t_kind = API_TOKEN_CRASH_REPORT;
 }
 
 $t_user_id = auth_get_current_user_id();

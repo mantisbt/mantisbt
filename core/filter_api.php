@@ -827,7 +827,6 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_TAG_SELECT => 0,
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
 		FILTER_PROPERTY_RELATIONSHIP_BUG => 0,
-		FILTER_PROPERTY_ALIAS => '',
 	);
 
 	# initialize plugin filters
@@ -1562,12 +1561,6 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
 		array_push( $t_project_where_clauses, '({bug}.last_updated BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
-	}
-
-	# alias
-	if( !is_blank( $t_filter[FILTER_PROPERTY_ALIAS] ) ) {
-		$t_where_params[] = (string)$t_filter[FILTER_PROPERTY_ALIAS];
-		array_push( $t_where_clauses, '( {bug}.id in ( SELECT bug_id FROM {bug_alias} WHERE alias = ' . db_param() . ' ) )' );
 	}
 
 	# view state
@@ -3370,7 +3363,6 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_TAG_SELECT] 				= $f_tag_select;
 	$t_filter_input[FILTER_PROPERTY_NOTE_USER_ID] 			= $f_note_user_id;
 	$t_filter_input[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
-	$t_filter_input[FILTER_PROPERTY_ALIAS] 					= '';
 
 	return filter_ensure_valid_filter( $t_filter_input );
 }

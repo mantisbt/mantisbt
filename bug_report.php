@@ -47,7 +47,6 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
- * @uses api_token_api.php
  */
 
 require_once( 'core.php' );
@@ -75,29 +74,12 @@ require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
-require_api( 'api_token_api.php' );
 
-# Check if this is a usual submission via UI or scripted autosubmission
-if( config_get( 'bug_auto_reports_submission_enabled' ) ) {
-	$f_auth_username = gpc_get_string( 'auth_username', null );
-	$f_auth_password = gpc_get_string( 'auth_password', null );
-	$t_auto_report = !is_null( $f_auth_username ) && !is_null( $f_auth_password );
-} else {
-	$t_auto_report = false;
-}	
+form_security_validate( 'bug_report' );
 
-if( !$t_auto_report ) {
-	form_security_validate( 'bug_report' );
-}
-
-# Set project
 $t_project_id = null;
-$f_alias = gpc_get_string( 'alias', null );
-if( is_null( $f_alias ) && !$t_auto_report ) {
-	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
-} else {
-	$f_master_bug_id = 0;
-}  
+
+$f_master_bug_id = gpc_get_int( 'm_id', 0 );
 if( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
 	if( bug_is_readonly( $f_master_bug_id ) ) {
@@ -112,27 +94,10 @@ if( $f_master_bug_id > 0 ) {
 }
 project_ensure_exists( $t_project_id );
 
-# Auto-login for automatic reports (API token only)
-if( $t_auto_report ) {
-  $g_project_override = $t_project_id;
-	$t_user_id = auth_get_user_id_from_login_name( $f_auth_username );
-	if( false === $t_user_id ) {
-		$t_login_ok = false;
-	} else {	
-		$t_login_ok = api_token_validate( $f_auth_username, $f_auth_password ) || 
-					  api_token_validate( $f_auth_username, $f_auth_password, API_TOKEN_REPORT_ONLY );
-		if( $t_login_ok ) {
-			$t_login_ok = auth_attempt_script_login( $f_auth_username, null );
-		};
-	}
-	if( !$t_login_ok ) {
-		access_denied();
-	}
-}	else {
-  if( $t_project_id != helper_get_current_project() ) {
-    $g_project_override = $t_project_id;
-  }
-}  
+if( $t_project_id != helper_get_current_project() ) {
+	$g_project_override = $t_project_id;
+}
+
 access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 if( isset( $_GET['posted'] ) && empty( $_FILE ) && empty( $_POST ) ) {
@@ -163,7 +128,6 @@ $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 $t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
-$t_bug_data->alias                  = $f_alias;
 if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
@@ -332,20 +296,6 @@ if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
 
 if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
 	history_log_event( $t_bug_id, 'resolution', config_get( 'default_bug_resolution' ) );
-}
-
-# Output JSON representation of posted bug when submitting auto report
-if( $t_auto_report ) {
-	bug_clear_cache_all( $t_bug_id );
-	$t_bug = bug_get( $t_bug_id, true );
-	$t_bug->get_attachment_count();
-	$t_bug->get_bugnotes_count();
-	$t_bug->alias = $f_alias;
-	$t_bug = bug_encode_json( $t_bug );
-	
-	header( 'Content-Type: application/json' );
-    echo( $t_bug );
-	die();
 }
 
 form_security_purge( 'bug_report' );
