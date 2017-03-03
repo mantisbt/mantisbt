@@ -95,15 +95,17 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return null|string HTML representation generated from markdown or null if
-                      markdown starts with # symbol immediately followed by 
-                      any character other than space.
+	 * @return null|string HTML representation generated from markdown or null 
+	 				for example text starts with # symbol and immediately followed by 
+					any character other than space.
 	 */
 	protected function blockHeader( $line ) {
 		
-		# Check if string starts with # symbol followed by space, 
-		# If pattern match, then let the parent blockHeader function handle it
-		if ( preg_match('/^#+ /', $line['text'] ) ) {
+		# Text either indented 0-3 spaces
+		# The opening sequence of # characters must be followed by a space
+		# An opening sequence of 1–6 # characters
+		# The #'s can be followed by a newline also
+		if ( preg_match( '/^\s{1,3}|#{1,6}(?:[ \t]+|$)/', $line['text'] ) ) {
 			return parent::blockHeader($line);
 		}
 	}
