@@ -102,10 +102,10 @@ class MantisMarkdown extends Parsedown
 	protected function blockHeader( $line ) {
 		
 		# Text either indented 0-3 spaces
-		# The opening sequence of # characters must be followed by a space
 		# An opening sequence of 1–6 # characters
-		# The #'s can be followed by a newline also
-		if ( preg_match( '/^\s{1,3}|#{1,6}(?:[ \t]+|$)/', $line['text'] ) ) {
+		# The opening sequence of # characters must be followed by a space
+		# The #'s can be followed by a newline as well
+		if ( preg_match( '/^ {0,3}#{1,6}( |$)/', $line['text'] ) ) {
 			return parent::blockHeader($line);
 		}
 	}
