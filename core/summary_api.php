@@ -460,7 +460,8 @@ function summary_print_by_hitcount() {
 	}
 	db_param_push();
 	$t_query = 'SELECT * FROM {bug}
-				WHERE status < ' . db_param() . '
+				WHERE hitcount > 0  
+				AND status < ' . db_param() . '
 				AND ' . $t_specific_where . '
 				ORDER BY hitcount DESC, priority DESC, date_submitted ASC';
 	$t_result = db_query( $t_query, array( $t_resolved ) );

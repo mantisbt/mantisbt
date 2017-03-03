@@ -218,7 +218,7 @@ function mci_check_login_report_only( $p_username, $p_password ) {
 	}
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( false === $t_user_id ) {
-		$t_user_id = mci_check_login( $p_username, $p_password, API_TOKEN_REPORT_ONLY );
+		$t_user_id = mci_check_login( $p_username, $p_password, API_TOKEN_CRASH_REPORT );
 	}
 	return $t_user_id;
 }
