@@ -30,7 +30,7 @@ $app->group('/issues', function() use ( $app ) {
 	# Path without URL re-writing: http://.../mantisbt/api/rest/index.php/issues/1234
 	$app->get( '', 'rest_issue_get' );
 	$app->get( '/', 'rest_issue_get' );
-})->add( new AuthMiddleware() );
+});
 
 /**
  * A method that does the work to handle getting an issue via REST API.
