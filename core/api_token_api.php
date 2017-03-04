@@ -28,8 +28,6 @@
 
 require_api( 'crypto_api.php' );
 
-define( 'API_TOKEN_LENGTH', 32 );
-
 /**
  * Create an API token
  *
@@ -99,7 +97,7 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
  * Get user information given an API token.
  *
  * @param string $p_token The plain token.
- * @return boolean true valid username and token, false otherwise.
+ * @return int|bool user id or false if no match found.
  * @access public
  */
 function api_token_get_user( $p_token ) {
@@ -120,10 +118,7 @@ function api_token_get_user( $p_token ) {
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
 		api_token_touch( $t_row['id'] );
-
-		return array(
-			'username' => user_get_name( $t_row['user_id'] ),
-			'id' => $t_row['user_id'] );
+		return $t_row['user_id'];
 	}
 
 	return false;

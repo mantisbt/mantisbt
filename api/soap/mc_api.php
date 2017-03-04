@@ -186,16 +186,24 @@ function mci_check_login( $p_username, $p_password ) {
 	# by auth_attempt_script_login().
 	$t_password = ( $p_password === null ) ? '' : $p_password;
 
-	# Validate the token
 	if( api_token_validate( $p_username, $t_password ) ) {
 		# Token is valid, then login the user without worrying about a password.
 		if( auth_attempt_script_login( $p_username, null ) === false ) {
 			return false;
 		}
 	} else {
-		# Not a valid token, validate as username + password.
-		if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
-			return false;
+		# User cookie
+		$t_user_id = auth_user_id_from_cookie( $p_password );
+		if( $t_user_id !== false ) {
+			# Cookie is valid
+			if( auth_attempt_script_login( $p_username, null ) === false ) {
+				return false;
+			}
+		} else {
+			# Use regular passwords
+			if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
+				return false;
+			}
 		}
 	}
 
