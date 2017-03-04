@@ -242,11 +242,7 @@ class MantisMarkdown extends Parsedown
 		$block = parent::inlineCode( $block );
 		
 		if( isset( $block['element']['text'] )) {
-			# replaced any &amp; entity name with '&' under the code block: 
-			#
-			# Text processing will convert & sign within the code block or backtick, 
-			# into entity name, and that becomes &amp; <code>&amp;amp;</code>
-			$block['element']['text'] = str_replace( '&amp;', '&', $block['element']['text'] );
+			$this->processAmpersand( $block['element']['text'] );
 		}
 
 		return $block;
@@ -264,11 +260,7 @@ class MantisMarkdown extends Parsedown
 		$block = parent::blockFencedCodeComplete( $block );
 		
 		if( isset( $block['element']['text']['text'] )) {
-			# replaced any &amp; entity name with '&' under the preformatted text code block: 
-			#
-			# Text processing will convert & sign within the code block or backtick, 
-			# into entity name, and that becomes &amp; <pre><code>&amp;amp;</code></pre>
-			$block['element']['text']['text'] = str_replace( '&amp;', '&', $block['element']['text']['text'] );
+			$this->processAmpersand( $block['element']['text']['text'] );
 		}
 
 		return $block;
@@ -286,11 +278,7 @@ class MantisMarkdown extends Parsedown
 		$block = parent::inlineLink( $block );
 
 		if( isset( $block['element']['attributes']['href'] )) {
-			# replaced any &amp; entity name with '&' under the inline link: 
-			#
-			# Text processing will convert & sign within the inline link <a>, 
-			# into entity name, and that becomes &amp; <a href="&amp;amp;">
-			$block['element']['attributes']['href'] = str_replace( '&amp;', '&', $block['element']['attributes']['href'] );
+			$this->processAmpersand( $block['element']['attributes']['href'] );
 		}
 
 		return $block;
@@ -305,4 +293,20 @@ class MantisMarkdown extends Parsedown
 		}
 		return static::$mantis_markdown;
 	}
+
+	/**
+	 * Replace any '&amp;' entity in the given string by '&'.
+	 *
+	 * MantisBT text processing replaces '&' signs by their entity name. Within
+	 * code blocks or backticks, Parsedown applies the same transformation again,
+	 * so they ultimately become '&amp;amp;'. This reverts the initial conversion
+	 * so ampersands are displayed correctly.
+	 *
+	 * @param string $p_text Text block to process
+	 * @return void
+	 */
+	private function processAmpersand( &$p_text ) {
+		$p_text = str_replace( '&amp;', '&', $p_text );
+	}
+
 }
