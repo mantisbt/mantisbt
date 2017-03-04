@@ -114,6 +114,26 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.system.coreready">
+			<title>EVENT_REST_API_ROUTES (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by MantisBT to enable plugins to register their own routes
+					to be accessible via the REST API.  All APIs belonging to a plugin named 'Example',
+					should live under 'https://.../api/rest/Example/'.  The route registration is done
+					using the Slim Framework app instance that is passed as a parameter.  See MantisGraph
+					core plugin for an example.
+				</para>
+
+				<para>
+					Before calling into the plugin routes, the user would be already authenticated and
+					authorization for API access in general.  However, it is the responsibility of the
+					plugin to do its own plugin specific authorization.
+				</para>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.system.log">
 			<title>EVENT_LOG (Execute)</title>
 
