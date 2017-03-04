@@ -397,11 +397,11 @@ function cfdef_input_textarea( array $p_field_def, $p_custom_field_value, $p_req
  *
  * @param string $p_field_def          The custom field definition.
  * @param string $p_custom_field_value The custom field value to print.
- * @param string $p_required          The "required" attribute to add to the field
+ * @param string $p_required           The "required" attribute to add to the field
  * @return void
  */
 function cfdef_input_date( $p_field_def, $p_custom_field_value, $p_required = '' ) {
-	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true );
+	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true, 0, 0, $p_required );
 }
 
 /**

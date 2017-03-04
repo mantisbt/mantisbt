@@ -1393,7 +1393,8 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
-		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def, $t_custom_field_value, $p_required ? ' required ' : '' );
+		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def,
+			$t_custom_field_value, $p_required ? ' required ' : '' );
 		print_hidden_input( custom_field_presence_field_name( $p_field_def['id'] ), '1' );
 	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
