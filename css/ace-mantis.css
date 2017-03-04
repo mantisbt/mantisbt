@@ -338,8 +338,8 @@ i.datetimepicker {
 input.typeahead, input.tt-query, input.tt-hint {
     border: 1px solid #ccc;
     border-radius: 0;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 18px;
     min-width: 175px;
     outline: medium none;
 }
@@ -355,15 +355,15 @@ input.tt-hint, .form-group input.tt-hint {
     left: 0 !important;
     margin-top: 2px;
     min-width: 175px;
-    padding: 8px 0;
+    padding: 4px 0;
     position: absolute;
     right: 0 !important;
     text-align: left;
 }
 .tt-suggestion {
-    font-size: 16px;
-    line-height: 24px;
-    padding: 3px 12px 4px;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 3px 6px 4px;
 }
 .tt-suggestion.tt-selectable:hover, .tt-suggestion.tt-cursor {
     background-color: #4f99c6;

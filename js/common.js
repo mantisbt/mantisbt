@@ -338,12 +338,18 @@ $(document).ready( function() {
 	});
 
     $('input#tagsinput').tagsinput({
-        typeahead: {
-            source: function(query) {
+        typeaheadjs: {
+            source: function (query, undefined, callback) {
                 var postData = {};
                 postData['entrypoint'] = 'tag_get_with_prefix';
                 postData['tag'] = query;
-				return $.getJSON('xmlhttprequest.php', postData);
+                $.getJSON('xmlhttprequest.php', postData, function (data) {
+                    var results = [];
+                    $.each(data, function (i, value) {
+                        results.push(value);
+                    });
+                    callback(results);
+                });
             }
         }
     });
