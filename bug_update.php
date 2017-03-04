@@ -308,7 +308,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_old_custom_field_value = custom_field_get_value( $t_cf_id, $f_bug_id );
 
 	# No need to update the field if its value has not changed
-	if( $t_old_custom_field_value == $t_new_custom_field_value ) {
+	if( $t_old_custom_field_value === $t_new_custom_field_value ) {
 		continue;
 	}
 

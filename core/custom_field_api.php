@@ -1306,7 +1306,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		# No need to update the field if its value has not changed
-		if( $t_row[$t_value_field] == $t_value ) {
+		if( $t_row[$t_value_field] === $t_value ) {
 			return true;
 		}
 
