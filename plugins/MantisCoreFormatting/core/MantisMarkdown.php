@@ -106,10 +106,8 @@ class MantisMarkdown extends Parsedown
 	protected function blockHeader( $line ) {
 		$block = parent::blockHeader( $line );
 
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
+		# Bug links should not be treated as headers
+		if( $this->isBugLink( $line['text'] ) ) {
 			return;
 		}
 
@@ -132,10 +130,8 @@ class MantisMarkdown extends Parsedown
 	protected function blockSetextHeader( $line, array $block = null ) {
 		$block = parent::blockSetextHeader( $line, $block );
 
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
+		# Bug links should not be treated as headers
+		if( $this->isBugLink( $line['text'] ) ) {
 			return;
 		}
 
@@ -307,6 +303,17 @@ class MantisMarkdown extends Parsedown
 	 */
 	private function processAmpersand( &$p_text ) {
 		$p_text = str_replace( '&amp;', '&', $p_text );
+	}
+
+	/**
+	 * Check if the given string is a bug link reference.
+	 *
+	 * @param string $p_text
+	 * @return bool
+	 */
+	private function isBugLink( $p_text ) {
+		return '#' == config_get_global( 'bug_link_tag' )
+			&& preg_match_all( '/^#\d+$/', $p_text, $matches );
 	}
 
 }
