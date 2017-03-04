@@ -879,6 +879,32 @@ function auth_get_current_user_id() {
 	return $t_user_id;
 }
 
+/**
+ * A method that looks up a user id given their cookie.
+ *
+ * @param string $p_cookie_string The cookie string to lookup
+ * @return bool|int The user id or false if not user match found.
+ * @access public
+ */
+function auth_user_id_from_cookie( $p_cookie_string ) {
+	# Save a db query if value provided doesn't look like a cookie
+	if( strlen( $p_cookie_string ) != AUTH_COOKIE_LENGTH ) {
+		return false;
+	}
+
+	if( $t_result = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
+		$t_user_id = (int)$t_result['id'];
+		return $t_user_id;
+	}
+
+	db_param_push();
+	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
+
+	$t_user_id = (int)db_result( $t_result );
+
+	return $t_user_id ? $t_user_id : false;
+}
 
 /**
  * Generate HTTP 401 Access Denied header and page for user, prompting for BASIC authentication

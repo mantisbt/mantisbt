@@ -36,29 +36,43 @@ class AuthMiddleware {
 
 		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
 
+		$t_password = '';
+		$t_login_method = '';
+
 		if( empty( $t_authorization_header ) ) {
 			$t_username = config_get( 'anonymous_account' );
-			$t_api_token = '';
 
 			if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
 				return $response->withStatus( 403, 'API token required' );
 			}
-		} else {
-			$t_api_token = $t_authorization_header;
 
+			$t_login_method = 'anonymous';
+		} else {
 			# TODO: add an index on the token hash for the method below
-			$t_user = api_token_get_user( $t_api_token );
-			if( $t_user === false ) {
-				return $response->withStatus( 403, 'API token not found' );
+			$t_user_id = api_token_get_user( $t_authorization_header );
+			if( $t_user_id === false ) {
+				$t_user_id = auth_user_id_from_cookie( $t_authorization_header );
+				if( $t_user_id === false ) {
+					return $response->withStatus( 403, 'API token not found' );
+				}
+
+				# use cookie to login, useful for calls from web API.
+				$t_login_method = 'cookie';
+				$t_password = $t_authorization_header;
+			} else {
+				# use api token
+				$t_login_method = 'api-token';
+				$t_password = $t_authorization_header;
 			}
 
-			$t_username = $t_user['username'];
+			$t_username = user_get_name( $t_user_id );
 		}
 
-		if( mci_check_login( $t_username, $t_api_token ) === false ) {
+		if( mci_check_login( $t_username, $t_password ) === false ) {
 			return $response->withStatus( 403, 'Access denied' );
 		}
 
-		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_username );
+		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_username )->
+			withHeader( 'X-Mantis-LoginMethod', $t_login_method );
 	}
 }
