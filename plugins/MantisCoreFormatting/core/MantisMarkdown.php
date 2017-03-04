@@ -251,10 +251,10 @@ class MantisMarkdown extends Parsedown
 	 * @access protected
 	 * @return string html representation generated from markdown.
 	 */
-	protected function blockFencedCodeComplete( $block = null){
+	protected function blockFencedCodeComplete( $block = null ) {
 
 		$block = parent::blockFencedCodeComplete( $block );
-		
+
 		if( isset( $block['element']['text']['text'] )) {
 			$this->processAmpersand( $block['element']['text']['text'] );
 		}
@@ -269,7 +269,7 @@ class MantisMarkdown extends Parsedown
 	 * @access protected
 	 * @return string html representation generated from markdown.
 	 */
-	protected function inlineLink( $block ){
+	protected function inlineLink( $block ) {
 
 		$block = parent::inlineLink( $block );
 
