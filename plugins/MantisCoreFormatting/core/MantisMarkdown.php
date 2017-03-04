@@ -101,14 +101,15 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return string|null HTML representation generated from markdown or
+	 *                     null if markdown starts with # symbol
 	 */
 	protected function blockHeader( $line ) {
 		$block = parent::blockHeader( $line );
 
 		# Bug links should not be treated as headers
 		if( $this->isBugLink( $line['text'] ) ) {
-			return;
+			return null;
 		}
 
 		# Header rules
@@ -125,14 +126,15 @@ class MantisMarkdown extends Parsedown
 	 * @param string $line The Markdown syntax to parse
 	 * @param array $block A block-level element
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return string|null HTML representation generated from markdown or
+	 *                     null if markdown starts with # symbol
 	 */
 	protected function blockSetextHeader( $line, array $block = null ) {
 		$block = parent::blockSetextHeader( $line, $block );
 
 		# Bug links should not be treated as headers
 		if( $this->isBugLink( $line['text'] ) ) {
-			return;
+			return null;
 		}
 
 		# Header rules
