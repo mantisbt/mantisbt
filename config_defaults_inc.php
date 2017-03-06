@@ -918,13 +918,6 @@ $g_logo_url = '%default_home_page%';
 $g_enable_project_documentation = OFF;
 
 /**
- * Display another instance of the menu at the bottom.  The top menu will still
- * remain.
- * @global integer $g_show_footer_menu
- */
-$g_show_footer_menu = OFF;
-
-/**
  * show extra menu bar with all available projects
  * @global integer $g_show_project_menu_bar
  */
@@ -1030,14 +1023,6 @@ $g_excel_columns = array (
  * @global integer $g_show_bug_project_links
  */
 $g_show_bug_project_links = ON;
-
-/**
- * Show a legend with percentage of bug status
- * x% of all bugs are new, y% of all bugs are assigned and so on.
- * If set to ON it will printed below the status colour legend.
- * @global integer $g_status_percentage_legend
- */
-$g_status_percentage_legend = OFF;
 
 /**
  * Position of the filter box, can be: POSITION_*
@@ -4478,7 +4463,6 @@ $g_public_config_names = array(
 	'show_bug_project_links',
 	'show_changelog_dates',
 	'show_detailed_errors',
-	'show_footer_menu',
 	'show_log_threshold',
 	'show_memory_usage',
 	'show_monitor_list_threshold',
@@ -4501,7 +4485,6 @@ $g_public_config_names = array(
 	'sponsorship_enum_string',
 	'status_enum_string',
 	'status_legend_position',
-	'status_percentage_legend',
 	'stop_on_errors',
 	'store_reminders',
 	'stored_query_create_shared_threshold',
