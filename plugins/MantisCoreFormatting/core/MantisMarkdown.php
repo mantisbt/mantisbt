@@ -95,9 +95,9 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return null|string HTML representation generated from markdown or null 
-	 				for example text starts with # symbol and immediately followed by 
-					any character other than space.
+	 * @return string|null HTML representation generated from markdown or null
+	 *				for example text starts with # symbol and immediately followed by
+	 *				any character other than space.
 	 */
 	protected function blockHeader( $line ) {
 		
