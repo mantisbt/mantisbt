@@ -105,7 +105,7 @@ class MantisMarkdown extends Parsedown
 		# An opening sequence of 1–6 # characters
 		# The opening sequence of # characters must be followed by a space
 		# The #'s can be followed by a newline as well
-		if ( preg_match( '/^ {0,3}#{1,6}( |$)/', $line['text'] ) ) {
+		if ( preg_match( '/^ {0,3}#{1,6}(?: |$)/', $line['text'] ) ) {
 			return parent::blockHeader($line);
 		}
 	}
