@@ -242,18 +242,21 @@ function project_ensure_exists( $p_project_id ) {
 /**
  * check to see if project exists by name
  * @param string $p_name The project name.
+ * @param int    $p_id   Optional project id to exclude from the check, to
+ *                       allow uniqueness check when updating.
  * @return boolean
  */
-function project_is_name_unique( $p_name ) {
+function project_is_name_unique( $p_name, $p_project_id = null ) {
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {project} WHERE name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_name ) );
-
-	if( 0 == db_result( $t_result ) ) {
-		return true;
-	} else {
-		return false;
+	$t_param = array( $p_name );
+	if( $p_project_id ) {
+		$t_query .= ' AND id <> ' . db_param();
+		$t_param[] = (int)$p_project_id;
 	}
+	$t_result = db_query( $t_query, $t_param );
+
+	return 0 == db_result( $t_result );
 }
 
 /**
@@ -261,10 +264,12 @@ function project_is_name_unique( $p_name ) {
  * if it doesn't exist then error
  * otherwise let execution continue undisturbed
  * @param string $p_name The project name.
+ * @param int    $p_id   Optional project id to exclude from the check, to
+ *                       allow uniqueness check when updating.
  * @return void
  */
-function project_ensure_name_unique( $p_name ) {
-	if( !project_is_name_unique( $p_name ) ) {
+function project_ensure_name_unique( $p_name, $p_project_id = null ) {
+	if( !project_is_name_unique( $p_name, $p_project_id ) ) {
 		trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
 	}
 }
@@ -442,7 +447,8 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	}
 
 	if( strcasecmp( $p_name, $t_old_name ) != 0 ) {
-		project_ensure_name_unique( $p_name );
+var_dump(1);
+	project_ensure_name_unique( $p_name, $p_project_id );
 	}
 
 	if( DATABASE !== config_get( 'file_upload_method', null, null, $p_project_id ) ) {
