@@ -198,8 +198,7 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
 
 	echo '<a rel="nofollow" href="' . $t_link . '">' .
 		'<img class="avatar" src="' . $t_image . '" alt="' .
-		$t_text . '" width="' . $p_size . '" height="' .
-		$p_size . '" /></a>';
+		$t_text . '" /></a>';
 }
 
 /**
