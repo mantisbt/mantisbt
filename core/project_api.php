@@ -250,7 +250,7 @@ function project_is_name_unique( $p_name, $p_exclude_id = null ) {
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {project} WHERE name=' . db_param();
 	$t_param = array( $p_name );
-	if( $p_project_id ) {
+	if( $p_exclude_id ) {
 		$t_query .= ' AND id <> ' . db_param();
 		$t_param[] = (int)$p_exclude_id;
 	}
