@@ -241,18 +241,18 @@ function project_ensure_exists( $p_project_id ) {
 
 /**
  * check to see if project exists by name
- * @param string $p_name       The project name.
- * @param int    $p_project_id Optional project id to exclude from the check,
- *                             to allow uniqueness check when updating.
+ * @param string  $p_name       The project name.
+ * @param integer $p_exclude_id Optional project id to exclude from the check,
+ *                              to allow uniqueness check when updating.
  * @return boolean
  */
-function project_is_name_unique( $p_name, $p_project_id = null ) {
+function project_is_name_unique( $p_name, $p_exclude_id = null ) {
 	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {project} WHERE name=' . db_param();
 	$t_param = array( $p_name );
 	if( $p_project_id ) {
 		$t_query .= ' AND id <> ' . db_param();
-		$t_param[] = (int)$p_project_id;
+		$t_param[] = (int)$p_exclude_id;
 	}
 	$t_result = db_query( $t_query, $t_param );
 
@@ -263,13 +263,13 @@ function project_is_name_unique( $p_name, $p_project_id = null ) {
  * check to see if project exists by id
  * if it doesn't exist then error
  * otherwise let execution continue undisturbed
- * @param string $p_name       The project name.
- * @param int    $p_project_id Optional project id to exclude from the check,
- *                             to allow uniqueness check when updating.
+ * @param string  $p_name       The project name.
+ * @param integer $p_exclude_id Optional project id to exclude from the check,
+ *                              to allow uniqueness check when updating.
  * @return void
  */
-function project_ensure_name_unique( $p_name, $p_project_id = null ) {
-	if( !project_is_name_unique( $p_name, $p_project_id ) ) {
+function project_ensure_name_unique( $p_name, $p_exclude_id = null ) {
+	if( !project_is_name_unique( $p_name, $p_exclude_id ) ) {
 		trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
 	}
 }
