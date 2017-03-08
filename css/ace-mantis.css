@@ -214,12 +214,25 @@ pre {
     position: relative;
 }
 
+.nav-user-photo-container {
+	width: 48px; 
+	height: 40px;
+	float: left;	
+}
+
 .ace-nav .nav-user-photo {
     border-radius: 4px !important;
 }
 .profile-activity img {
     border-radius: 15% !important;
     margin-bottom: 6px !important;
+}
+
+.profile-activity-img-container {
+	width: 48px; 
+	line-height: 40px;
+	float: left;	
+	text-align: center;
 }
 
 .table-responsive {
@@ -233,6 +246,13 @@ pre {
     box-shadow: none;
     margin:0;
     max-width: 80px;
+    max-height: 80px;
+}
+
+.avatar-container {
+	line-height: 80px;
+	width: 84px;
+	text-align: center;
 }
 
 .input-sm {
