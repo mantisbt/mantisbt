@@ -720,7 +720,7 @@ function layout_navbar_user_avatar( $p_img_class = '' ) {
 			$t_image = htmlspecialchars( $t_avatar->image );
 			$t_text = htmlspecialchars( $t_avatar->text );
 
-			echo '<img class="nav-user-photo" src="' . $t_image . '" alt="' . $t_text . '" />';
+			echo '<div class="nav-user-photo-container"><img class="nav-user-photo" src="' . $t_image . '" alt="' . $t_text . '" /></div>';
 			return;
 		}
 	}

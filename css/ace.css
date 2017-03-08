@@ -1392,6 +1392,7 @@ pre.prettyprint {
     border-radius: 100%;
     border: 2px solid #FFF;
     max-width: 40px;
+    max-height: 40px;
 }
 .ace-nav li.dropdown-footer a .ace-icon {
     display: inline-block;
@@ -12874,6 +12875,7 @@ li.item-default {
     border: 2px solid #C9D6E5;
     border-radius: 100%;
     max-width: 40px;
+    max-height: 40px;
     margin-right: 10px;
     margin-left: 0px;
     box-shadow: none;
