@@ -156,7 +156,7 @@ function mci_user_get( $p_username, $p_password, $p_user_id ) {
 			$t_user_data[$t_key] = $t_value;
 		}
 
-		$t_user_data['language'] = user_pref_get_pref( $p_user_id, 'language' );
+		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
 
 		$t_access_level = access_get_global_level( $p_user_id );
 		$t_user_data['access_level'] = array(
