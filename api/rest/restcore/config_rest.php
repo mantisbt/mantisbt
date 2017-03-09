@@ -89,6 +89,10 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 		}
 
 		$t_value = config_get( $t_option, /* default */ null, $t_user_id, $t_project_id );
+		if( config_is_enum( $t_option ) ) {
+			$t_value = config_get_enum_as_array( $t_option, $t_value );
+		}
+
 		$t_configs[$t_option] = $t_value;
 	}
 
@@ -99,4 +103,36 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	return $p_response->withStatus( 200 )->withJson( $t_result );
 }
 
+/**
+ * Checks if the specific config option is an enum.
+ *
+ * @param string $p_option The option name.
+ * @return bool true enum, false otherwise.
+ */
+function config_is_enum( $p_option ) {
+	return stripos( $p_option, '_enum_string' ) !== false;
+}
+
+/**
+ * Gets the enum config option as an array with the id as the key and the value
+ * as an array with name and label (localized name) keys.
+ *
+ * @param string $p_enum_name The enum config option name.
+ * @param string $p_enum_string_value The enum config option value.
+ * @return array The enum array.
+ */
+function config_get_enum_as_array( $p_enum_name, $p_enum_string_value ) {
+	$t_enum_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string_value );
+	$t_localized_enum_string = lang_get( $p_enum_name );
+
+	$t_enum_array = array();
+
+	foreach( $t_enum_assoc_array as $t_id => $t_name ) {
+		$t_label = MantisEnum::getLocalizedLabel( $p_enum_string_value, $t_localized_enum_string, $t_id );
+		$t_enum_entry = array( 'id' => $t_id, 'name' => $t_name, 'label' => $t_label );
+		$t_enum_array[$t_id] = $t_enum_entry;
+	}
+
+	return $t_enum_array;
+}
 
