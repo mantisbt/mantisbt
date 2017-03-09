@@ -24,8 +24,6 @@
  */
 
 $app->group('/issues', function() use ( $app ) {
-	# Path with URL re-writing: http://.../mantisbt/api/rest/issues/1234
-	# Path without URL re-writing: http://.../mantisbt/api/rest/index.php/issues/1234
 	$app->get( '', 'rest_issue_get' );
 	$app->get( '/', 'rest_issue_get' );
 });
