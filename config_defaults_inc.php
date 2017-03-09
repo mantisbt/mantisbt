@@ -4486,6 +4486,7 @@ $g_public_config_names = array(
 	'sponsor_threshold',
 	'sponsorship_currency',
 	'sponsorship_enum_string',
+	'status_colors',
 	'status_enum_string',
 	'status_legend_position',
 	'stop_on_errors',
