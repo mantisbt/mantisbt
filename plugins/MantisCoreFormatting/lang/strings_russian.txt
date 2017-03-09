@@ -39,6 +39,7 @@
  * @file
  *
  * @author Kirill
+ * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
  */
@@ -51,5 +52,7 @@ $s_plugin_format_process_text_warning_notice = 'Не выключайте, ес�
 $s_plugin_format_process_urls = 'обрабатывать URL';
 $s_plugin_format_process_buglinks = 'Внутренние ссылки MantisBT (задачи/комментарии)';
 $s_plugin_format_process_buglinks_info = 'Ваша конфигурация определяет тег <em>Issue</em> как «<literal>%s</literal>», а тег <em>Issue Note</em> — как «<literal>%s</literal>»';
+$s_plugin_format_process_markdown = 'Markdown выполняет обработку';
+$s_plugin_format_process_markdown_info = 'Синтаксис форматирования с поддержкой Markdown разработан таким образом, что текст может быть преобразован в HTML.';
 $s_plugin_format_enabled = 'вкл';
 $s_plugin_format_disabled = 'выкл';

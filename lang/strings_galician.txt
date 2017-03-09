@@ -259,6 +259,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'O se
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'O seguinte problema foi DESestablecido como un DEPENDENTE DO problema %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'O problema RELACIONADO %1$s foi RESOLTO.';
 $s_email_notification_title_for_action_relationship_child_closed = 'O problema RELACIONADO %1$s foi PECHADO.';
+$s_email_notification_title_for_action_related_issue_deleted = 'O problema RELACIONADO %1$s foi BORRADO.';
 $s_email_notification_title_for_action_monitor = 'O problema %1$s está agora monitorizado polo usuario %2$s.';
 $s_email_reporter = 'Reportado por';
 $s_email_handler = 'Asignado a';
