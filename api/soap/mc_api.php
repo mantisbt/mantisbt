@@ -147,11 +147,71 @@ function mci_user_get( $p_username, $p_password, $p_user_id ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
-	$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
-	$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+	if( ApiObjectFactory::$soap ) {
+		$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
+		$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+	} else {
+		$t_account_data = mci_account_get_array_by_id( $p_user_id );
+		foreach( $t_account_data as $t_key => $t_value ) {
+			$t_user_data[$t_key] = $t_value;
+		}
+
+		$t_user_data['language'] = user_pref_get_pref( $p_user_id, 'language' );
+
+		$t_access_level = access_get_global_level( $p_user_id );
+		$t_user_data['access_level'] = array(
+			'id' => $t_access_level,
+			'name' => MantisEnum::getLabel( config_get( 'access_levels_enum_string' ), $t_access_level ),
+		);
+
+		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ true );
+		$t_projects = array();
+		foreach( $t_project_ids as $t_project_id ) {
+			$t_projects[] = mci_project_get( $t_project_id );
+		}
+
+		$t_user_data['projects'] = $t_projects;
+	}
+
 	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 
 	return $t_user_data;
+}
+
+/**
+ * Get project info for the specified id.
+ *
+ * @param int $p_project_id The project id to get info for.
+ * @return array project info.
+ */
+function mci_project_get( $p_project_id ) {
+	$t_row = project_get_row( $p_project_id );
+
+	$t_user_id = auth_get_current_user_id();
+	$t_user_access_level = access_get_project_level( $p_project_id, $t_user_id );
+	$t_access_levels = config_get( 'access_levels_enum_string', /* default */ null, $t_user_id, $p_project_id );
+
+	# Get project info that makes sense to publish via API.  For example, skip file_path.
+	$t_project = array(
+		'id' => $p_project_id,
+		'name' => $t_row['name'],
+		'description' => $t_row['description'],
+		'enabled' => (int)$t_row['enabled'] != 0,
+		'status' => array(
+			'id' => (int)$t_row['status'],
+			'name' => MantisEnum::getLabel( config_get( 'project_status_enum_string' ), (int)$t_row['status'] ) ),
+		'view_state' => array(
+			'id' => (int)$t_row['view_state'],
+			'name' => MantisEnum::getLabel( config_get( 'project_view_state_enum_string' ), (int)$t_row['view_state'] ) ),
+		'access_min' => array(
+			'id' => (int)$t_row['access_min'],
+			'name' => MantisEnum::getLabel( $t_access_levels, (int)$t_row['access_min'] ) ),
+		'access_level' => array(
+			'id' => $t_user_access_level,
+			'name' => MantisEnum::getLabel( $t_access_levels, $t_user_access_level ) ),
+	);
+
+	return $t_project;
 }
 
 /**
