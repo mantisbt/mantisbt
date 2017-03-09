@@ -23,8 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( __DIR__ . '/AuthMiddleware.php' );
-
 $app->group('/issues', function() use ( $app ) {
 	# Path with URL re-writing: http://.../mantisbt/api/rest/issues/1234
 	# Path without URL re-writing: http://.../mantisbt/api/rest/index.php/issues/1234
