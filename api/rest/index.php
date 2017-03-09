@@ -46,6 +46,7 @@ $app->add( new VersionMiddleware() );
 
 event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $app ) ) );
 
+require_once( __DIR__ . '/restcore/config_rest.php' );
 require_once( __DIR__ . '/restcore/issues_rest.php' );
 
 $app->run();
