@@ -207,6 +207,9 @@ function mci_check_login( $p_username, $p_password ) {
 		}
 	}
 
+	# Set language to user's language
+	lang_push( lang_get_default() );
+
 	return auth_get_current_user_id();
 }
 
