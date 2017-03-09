@@ -105,7 +105,7 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="hidden" name="type" value="1" />
-	<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
+	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type']; ?>" />
 	<?php
 		if( $f_for_screen == false ) {
 			print '<input type="hidden" name="print" value="1" />';
