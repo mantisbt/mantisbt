@@ -691,6 +691,9 @@ function auth_get_password_max_size() {
 		case HTTP_AUTH:
 			return DB_FIELD_SIZE_PASSWORD;
 
+		case SAFE_HASH:
+			return PASSWORD_MAX_SIZE_BCRYPT;
+
 		# All other cases, i.e. password is stored as a hash
 		default:
 			return PASSWORD_MAX_SIZE_BEFORE_HASH;
@@ -718,6 +721,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_login_methods = array(
+		SAFE_HASH,
 		MD5,
 		CRYPT,
 		PLAIN,
@@ -737,7 +741,10 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 			# Check for migration to another login method and test whether the password was encrypted
 			# with our previously insecure implementation of the CRYPT method
-			if( ( $t_login_method != $t_configured_login_method ) || (( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) ) ) {
+			if( ( $t_login_method != $t_configured_login_method )
+					|| ( ( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) )
+					|| ( ( SAFE_HASH === $t_configured_login_method ) && password_needs_rehash( $t_password, PASSWORD_DEFAULT ) )
+			) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}
 
@@ -778,6 +785,13 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 			break;
 		case MD5:
 			$t_processed_password = md5( $p_password );
+			break;
+		case SAFE_HASH:
+			if( $p_salt === null ) {
+				$t_processed_password = password_hash( $p_password, PASSWORD_DEFAULT );
+			} else {
+				$t_processed_password = crypt( $p_password, $p_salt );
+			}
 			break;
 		case BASIC_AUTH:
 		case PLAIN:

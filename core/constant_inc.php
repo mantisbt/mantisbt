@@ -148,6 +148,7 @@ define( 'MD5', 3 );
 define( 'LDAP', 4 );
 define( 'BASIC_AUTH', 5 );
 define( 'HTTP_AUTH', 6 );
+define( 'SAFE_HASH', 7 );
 
 # file upload methods
 define( 'DISK', 1 );
@@ -593,6 +594,11 @@ define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
+
+# The bcrypt algorithm will truncate password to 72 characters silently.
+# To avoid this trouble, we should limit password length to 72.
+# See http://php.net/manual/en/function.crypt.php for details.
+define( 'PASSWORD_MAX_SIZE_BCRYPT', 72 );
 
 define( 'SECONDS_PER_DAY', 86400 );
 
