@@ -15,8 +15,8 @@
   "paths": {
     "/issues": {
       "get": {
-        "summary": "Request",
-        "description": "Get issue details",
+        "summary": "Get issue details",
+        "description": "Given an issue, retrieve its details.",
         "tags": [
           "Issues"
         ],
@@ -37,6 +37,117 @@
           },
           "403": {
             "description": "Access denied"
+          },
+          "503": {
+            "description": "Mantis Offline"
+          }
+        }
+      }
+    },
+    "/config": {
+      "get": {
+        "summary": "Get config options",
+        "description": "Get the value for a set of configuration options given a user and project context.  If a configuration option is invalid or is marked as private, then they will be filtered out, but request will still succeed.",
+        "tags": [
+          "Config"
+        ],
+        "operationId": "configGet",
+        "parameters": [
+          {
+            "name": "option",
+            "in": "query",
+            "description": "An array of configuration options.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "brackets"
+          },
+          {
+            "name": "project_id",
+            "in": "query",
+            "description": "The project id (default All Projects).",
+            "required": false,
+            "type": "number",
+            "format": "integer"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "The user id (default is logged in user).  This can only be set by users with access level ADMINISTRATOR.",
+            "required": false,
+            "type": "number",
+            "format": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "404": {
+            "description": "User or Project not found"
+          },
+          "503": {
+            "description": "Mantis Offline"
+          }
+        }
+      }
+    },
+    "/lang": {
+      "get": {
+        "summary": "Get localized strings",
+        "description": "Gets a set of localized strings in context of the logged in user's language.  If a localized string is not defined, then it will be filtered out.",
+        "tags": [
+          "Localization"
+        ],
+        "operationId": "langGet",
+        "parameters": [
+          {
+            "name": "string",
+            "in": "query",
+            "description": "An array of localized labels given their name string lang/strings_english.txt folder in MantisBT.  The name doesn't include $s_ prefix.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "brackets"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "503": {
+            "description": "Mantis Offline"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "Get information about logged in user",
+        "description": "Gets information about logged in user.",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "userGetMe",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access denied"
+          },
+          "503": {
+            "description": "Mantis Offline"
           }
         }
       }
@@ -53,4 +164,3 @@
     }
   }
 }
-
