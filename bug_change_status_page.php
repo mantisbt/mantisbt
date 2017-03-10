@@ -385,7 +385,7 @@ layout_page_begin();
 
 </tbody>
 </table>
-<input type="hidden" name="action_type" value="<?php echo $f_change_type; ?>" />
+<input type="hidden" name="action_type" value="<?php echo string_attribute( $f_change_type ); ?>" />
 
 </div>
 </div>
