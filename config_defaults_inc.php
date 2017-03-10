@@ -1838,13 +1838,13 @@ $g_wrap_in_preformatted_text = ON;
 
 /**
  * Login authentication method. Must be one of
- * MD5, LDAP, BASIC_AUTH or HTTP_AUTH.
+ * SAFE_HASH, MD5, LDAP, BASIC_AUTH or HTTP_AUTH.
  * Note: you may not be able to easily switch encryption methods, so this
  * should be carefully chosen at install time. However, MantisBT will attempt
  * to "fall back" to older methods if possible.
  * @global integer $g_login_method
  */
-$g_login_method = MD5;
+$g_login_method = SAFE_HASH;
 
 /**
  * Re-authentication required for admin areas
