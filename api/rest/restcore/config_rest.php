@@ -60,6 +60,10 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 		$t_project_id = ALL_PROJECTS;
 	}
 
+	if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
+		return $p_response->withStatus( 404, "Project with id '$t_project_id' not found" );
+	}
+
 	$t_user_id = $p_request->getParam( 'user_id' );
 	if( is_null( $t_user_id ) ) {
 		$t_user_id = auth_get_current_user_id();
