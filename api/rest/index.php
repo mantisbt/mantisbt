@@ -31,6 +31,7 @@ require_once( __DIR__ . '/../../core.php' );
 require_once( __DIR__ . '/../soap/mc_core.php' );
 require_once( __DIR__ . '/restcore/ApiEnabledMiddleware.php' );
 require_once( __DIR__ . '/restcore/AuthMiddleware.php' );
+require_once( __DIR__ . '/restcore/CacheMiddleware.php' );
 require_once( __DIR__ . '/restcore/VersionMiddleware.php' );
 
 # Hint to re-used mantisconnect code that it is being executed from REST rather than SOAP.
@@ -40,6 +41,7 @@ ApiObjectFactory::$soap = false;
 $app = new \Slim\App();
 
 # Add middleware - executed in reverse order of appearing here.
+$app->add( new CacheMiddleware() );
 $app->add( new AuthMiddleware() );
 $app->add( new ApiEnabledMiddleware() );
 $app->add( new VersionMiddleware() );
