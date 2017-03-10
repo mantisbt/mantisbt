@@ -18,8 +18,7 @@
  * A webservice interface to Mantis Bug Tracker
  *
  * @package MantisBT
- * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
- * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -37,7 +36,6 @@ class AuthMiddleware {
 		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
 
 		$t_password = '';
-		$t_login_method = '';
 
 		if( empty( $t_authorization_header ) ) {
 			$t_username = config_get( 'anonymous_account' );
