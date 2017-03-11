@@ -359,11 +359,13 @@ function mci_get_project_view_state_id( $p_view_state ) {
 
 /**
  * Return user id
- * @param stdClass $p_user User.
+ * @param stdClass|array $p_user User.
  * @return integer user id
  */
-function mci_get_user_id( stdClass $p_user ) {
-	$p_user = ApiObjectFactory::objectToArray( $p_user );
+function mci_get_user_id( $p_user ) {
+	if( is_object( $p_user ) ) {
+		$p_user = ApiObjectFactory::objectToArray( $p_user );
+	}
 
 	$t_user_id = 0;
 
@@ -376,6 +378,34 @@ function mci_get_user_id( stdClass $p_user ) {
 	}
 
 	return $t_user_id;
+}
+
+/**
+ * Given a profile id, return its information as an array or null
+ * if profile id is 0 or not found.
+ *
+ * @param integer $p_profile_id The profile id, can be 0.
+ * @return array|null The profile or null if not found.
+ */
+function mci_profile_as_array_by_id( $p_profile_id ) {
+	$t_profile_id = (int)$p_profile_id;
+	if( $t_profile_id == 0 ) {
+		return null;
+	}
+
+	$t_profile = profile_get_row_direct( $t_profile_id );
+	if( $t_profile === false ) {
+		return null;
+	}
+
+	return array(
+		'id' => $t_profile_id,
+		'user' => mci_account_get_array_by_id( $t_profile['user_id'] ),
+		'platform' => $t_profile['platform'],
+		'os' => $t_profile['os'],
+		'os_build' => $t_profile['os_build'],
+		'description' => $t_profile['description']
+	);
 }
 
 /**
@@ -549,21 +579,36 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 
 /**
  * Convert a category name to a category id for a given project
- * @param string  $p_category_name Category name.
+ * @param string|array $p_category Category name or array with id and/or name.
  * @param integer $p_project_id    Project id.
  * @return integer category id or 0 if not found
  */
-function translate_category_name_to_id( $p_category_name, $p_project_id ) {
-	if( !isset( $p_category_name ) ) {
+function mci_get_category_id( $p_category, $p_project_id ) {
+	if( !isset( $p_category ) ) {
 		return 0;
+	}
+
+	if( is_array( $p_category ) ) {
+		if( isset( $p_category['id'] ) ) {
+			if( category_exists( $p_category['id'] ) ) {
+				return $p_category['id'];
+			}
+		} else if( isset( $p_category['name'] ) ) {
+			$t_category_name = $p_category['name'];
+		} else {
+			return 0;
+		}
+	} else {
+		$t_category_name = $p_category;
 	}
 
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
-		if( $t_category_row['name'] == $p_category_name ) {
+		if( $t_category_row['name'] == $t_category_name ) {
 			return $t_category_row['id'];
 		}
 	}
+
 	return 0;
 }
 

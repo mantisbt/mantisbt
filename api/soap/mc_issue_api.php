@@ -95,7 +95,19 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['last_updated'] = ApiObjectFactory::datetime( $t_bug->last_updated );
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
-	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
+
+	if( ApiObjectFactory::$soap ) {
+		$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
+		$t_issue_data['profile_id'] = (int)$t_bug->profile_id;
+	} else {
+		$t_issue_data['category'] = array(
+			'id' => $t_bug->category_id,
+			'name' => mci_get_category( $t_bug->category_id )
+		);
+
+		$t_issue_data['profile'] = mci_profile_as_array_by_id( $t_bug->profile_id );
+	}
+
 	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug->priority, 'priority', $t_lang );
 	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug->severity, 'severity', $t_lang );
 	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
@@ -104,7 +116,6 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['summary'] = mci_sanitize_xml_string( $t_bug->summary );
 	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
 	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
-	$t_issue_data['profile_id'] = (int)$t_bug->profile_id;
 	$t_issue_data['platform'] = mci_null_if_empty( $t_bug->platform );
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
@@ -681,10 +692,10 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
  *
  * @param string   $p_username The name of the user trying to add the issue.
  * @param string   $p_password The password of the user.
- * @param stdClass $p_issue    A IssueData structure containing information about the new issue.
+ * @param array|stdClass $p_issue    A IssueData structure containing information about the new issue.
  * @return integer The id of the created issue.
  */
-function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
+function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	global $g_project_override;
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -692,7 +703,10 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$p_issue = ApiObjectFactory::objectToArray( $p_issue );
+	if( is_object( $p_issue ) ) {
+		$p_issue = ApiObjectFactory::objectToArray( $p_issue );
+	}
+
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
@@ -731,7 +745,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
-		if( $t_project_id == 0 ) {
+		if( $t_project_id != 0 ) {
 			return ApiObjectFactory::fault( 'Client', "Project '" . $t_project->name . "' does not exist." );
 		} else {
 			return ApiObjectFactory::fault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
@@ -749,7 +763,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
-	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
+	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
 			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
@@ -945,7 +959,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
-	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
+	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
 			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
