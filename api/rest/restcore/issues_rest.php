@@ -25,6 +25,8 @@
 $app->group('/issues', function() use ( $app ) {
 	$app->get( '', 'rest_issue_get' );
 	$app->get( '/', 'rest_issue_get' );
+	$app->post( '', 'rest_issue_add' );
+	$app->post( '/', 'rest_issue_add' );
 });
 
 /**
@@ -47,4 +49,23 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	return $p_response->withStatus( 200 )->withJson( $t_result );
 }
 
+/**
+ * Create an issue from a POST to the issues url.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue = $p_request->getParsedBody();
 
+	$t_result = mc_issue_add( /* username */ '', /* password */ '', $t_issue );
+	if( ApiObjectFactory::isFault( $t_result ) ) {
+		return $p_response->withStatus( 400, $t_result->faultstring );
+	}
+
+	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_result );
+
+	return $p_response->withJson( array( 'issue' => $t_created_issue ) );
+}
