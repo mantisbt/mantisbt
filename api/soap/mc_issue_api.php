@@ -389,13 +389,21 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 	$t_src_relationships = relationship_get_all_src( $p_issue_id );
 	foreach( $t_src_relationships as $t_relship_row ) {
 		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
+			$t_related_issue_id = (int)$t_relship_row->dest_bug_id;
+
 			$t_relationship = array();
 			$t_reltype = array();
 			$t_relationship['id'] = (int)$t_relship_row->id;
 			$t_reltype['id'] = (int)$t_relship_row->type;
 			$t_reltype['name'] = relationship_get_description_src_side( $t_relship_row->type );
 			$t_relationship['type'] = $t_reltype;
-			$t_relationship['target_id'] = (int)$t_relship_row->dest_bug_id;
+
+			if( ApiObjectFactory::$soap ) {
+				$t_relationship['target_id'] = $t_related_issue_id;
+			} else {
+				$t_relationship['issue'] = mci_related_issue_as_array_by_id( $t_related_issue_id );
+			}
+
 			$t_relationships[] = $t_relationship;
 		}
 	}

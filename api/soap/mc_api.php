@@ -409,6 +409,42 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 }
 
 /**
+ * Get basic issue info for related issues.
+ *
+ * @param integer $p_issue_id The issue id.
+ * @return array|null The issue id or null if not found.
+ */
+function mci_related_issue_as_array_by_id( $p_issue_id ) {
+	$t_issue_id = (int)$p_issue_id;
+
+	if( !bug_exists( $t_issue_id ) ) {
+		return null;
+	}
+
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_bug = bug_get( $t_issue_id );
+
+	$t_related_issue = array(
+		'id' => $t_bug->id,
+		'status' => mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang ),
+		'resolution' => mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang ),
+		'summary' => $t_bug->summary
+	);
+
+	if( !empty( $t_bug->handler_id ) ) {
+		if( access_has_bug_level(
+			config_get( 'view_handler_threshold', null, null, $t_bug->project_id ),
+			$t_issue_id, $t_user_id ) ) {
+			$t_related_issue['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		}
+	}
+
+	return $t_related_issue;
+}
+
+/**
  * Return user's default language given a user id
  * @param integer $p_user_id User id.
  * @return string language string
