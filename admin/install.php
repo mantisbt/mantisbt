@@ -408,16 +408,16 @@ if( 2 == $t_install_state ) {
 	$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
 	if( $t_result ) {
-		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-	}
-	if( $t_result ) {
-		$t_db_open = true;
-		$f_db_exists = true;
-
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
+
+		# check if db exists for the admin
+		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+		if( $t_result ) {
+			$t_db_open = true;
+			$f_db_exists = true;
+		}
 
 		print_test_result( GOOD );
 	} else {
