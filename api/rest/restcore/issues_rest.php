@@ -27,6 +27,8 @@ $app->group('/issues', function() use ( $app ) {
 	$app->get( '/', 'rest_issue_get' );
 	$app->post( '', 'rest_issue_add' );
 	$app->post( '/', 'rest_issue_add' );
+	$app->delete( '', 'rest_issue_delete' );
+	$app->delete( '/', 'rest_issue_delete' );
 });
 
 /**
@@ -69,3 +71,30 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 
 	return $p_response->withJson( array( 'issue' => $t_created_issue ) );
 }
+
+/**
+ * Delete an issue given its id.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_request->getParam( 'id' );
+
+	# Username and password below are ignored, since middleware already done the auth.
+	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
+
+	# Dependency on SoapFault can be removed by refactoring mc_* code.
+	if( ApiObjectFactory::isFault( $t_result ) ) {
+		if( !bug_exists( $t_issue_id ) ) {
+			return $p_response->withStatus( 404, "Issue '$t_issue_id' doesn't exist." );
+		}
+
+		return $p_response->withStatus( 403, $t_result->faultstring );
+	}
+
+	return $p_response->withStatus( 200 );
+}
+
