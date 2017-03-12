@@ -183,17 +183,17 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = string_insert_hrefs( $t_string );
 		}
 
-		if ( ON == $s_buglinks ) {
-			$t_string = $this->processBugAndNoteLinks( $t_string );
-		}
-
 		$t_string = mention_format_text( $t_string, /* html */ true );
 
 		# Process Markdown
 		if( ON == $s_markdown && $p_multiline ) {
 			$t_string = MantisMarkdown::convert_text( $t_string );
 		}
-
+		
+		if ( ON == $s_buglinks ) {
+			$t_string = $this->processBugAndNoteLinks( $t_string );
+		}
+		
 		return $t_string;
 	}
 
