@@ -43,9 +43,8 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	# Username and password below are ignored, since middleware already done the auth.
 	$t_result = mc_issue_get( /* username */ '', /* password */ '', $p_request->getParam( 'id' ) );
 
-	# Dependency on SoapFault can be removed by refactoring mc_* code.
 	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( 404, $t_result->faultstring );
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
 	return $p_response->withStatus( 200 )->withJson( $t_result );
@@ -64,7 +63,7 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 
 	$t_result = mc_issue_add( /* username */ '', /* password */ '', $t_issue );
 	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( 400, $t_result->faultstring );
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
 	$t_issue_id = $t_result;
@@ -88,15 +87,10 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	# Username and password below are ignored, since middleware already done the auth.
 	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
 
-	# Dependency on SoapFault can be removed by refactoring mc_* code.
 	if( ApiObjectFactory::isFault( $t_result ) ) {
-		if( !bug_exists( $t_issue_id ) ) {
-			return $p_response->withStatus( 404, "Issue '$t_issue_id' doesn't exist." );
-		}
-
-		return $p_response->withStatus( 403, $t_result->faultstring );
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
-	return $p_response->withStatus( 200 );
+	return $p_response->withStatus( 204 );
 }
 

@@ -44,7 +44,7 @@
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
@@ -52,7 +52,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -108,7 +108,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -117,7 +117,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
@@ -151,11 +151,11 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 function mc_projects_get_user_accessible( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !mci_has_readonly_access( $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_lang = mci_get_user_lang( $t_user_id );
@@ -192,7 +192,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -201,7 +201,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -225,7 +225,7 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -234,7 +234,7 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	return category_add( $p_project_id, $p_category_name );
@@ -253,7 +253,7 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -263,7 +263,7 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	# find the id of the category
@@ -299,7 +299,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	}
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -309,7 +309,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	# find the id of the category
@@ -332,7 +332,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -341,7 +341,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -365,7 +365,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -374,7 +374,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 
 	$g_project_override = $p_project_id;
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -400,7 +400,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -409,7 +409,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -435,7 +435,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$p_version = ApiObjectFactory::objectToArray( $p_version );
@@ -463,11 +463,11 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( is_blank( $t_name ) ) {
@@ -506,7 +506,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( is_blank( $p_version_id ) ) {
@@ -536,11 +536,11 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( is_blank( $t_name ) ) {
@@ -585,7 +585,7 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( is_blank( $p_version_id ) ) {
@@ -600,11 +600,11 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	return version_remove( $p_version_id );
@@ -624,7 +624,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -634,7 +634,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_result = array();
@@ -684,7 +684,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$p_project_id = (int)$p_project_id;
@@ -692,7 +692,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 
 	# Check if project documentation feature is enabled.
 	if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -700,7 +700,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_pub = VS_PUBLIC;
@@ -778,7 +778,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -788,7 +788,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	return user_get_all_accessible_subprojects( $t_user_id, $p_project_id );
@@ -818,7 +818,7 @@ function mci_project_as_array_by_id( $p_project_id ) {
 function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return project_get_id_by_name( $p_project_name );
@@ -838,11 +838,11 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
 function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !mci_has_administrator_access( $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
@@ -915,11 +915,11 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_access_denied();
+		return mci_fault_access_denied();
 	}
 
 	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -1000,7 +1000,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
@@ -1010,7 +1010,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	return project_delete( $p_project_id );
@@ -1030,7 +1030,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
 		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
@@ -1039,7 +1039,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
@@ -1076,7 +1076,7 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$g_project_override = $p_project_id;

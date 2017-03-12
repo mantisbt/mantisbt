@@ -35,11 +35,11 @@
 function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'No rights to view tags' );
+		return mci_fault_access_denied( $t_user_id, 'No rights to view tags' );
 	}
 
 	if( $p_per_page == 0 ) {
@@ -80,11 +80,11 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_create_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_valid_matches = array();
@@ -120,11 +120,11 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !tag_exists( $p_tag_id ) ) {
