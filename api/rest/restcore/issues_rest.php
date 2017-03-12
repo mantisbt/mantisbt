@@ -67,9 +67,11 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		return $p_response->withStatus( 400, $t_result->faultstring );
 	}
 
-	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_result );
+	$t_issue_id = $t_result;
 
-	return $p_response->withJson( array( 'issue' => $t_created_issue ) );
+	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+
+	return $p_response->withStatus( 201, "Issue Created with id $t_issue_id" )->withJson( array( 'issue' => $t_created_issue ) );
 }
 
 /**
