@@ -35,6 +35,32 @@ set_error_handler( 'mc_error_handler' );
 require_api( 'api_token_api.php' );
 
 /**
+ * A class to capture a RestFault
+ */
+class RestFault {
+	/**
+	 * @var integer The http status code
+	 */
+	public $status_code;
+
+	/**
+	 * @var string The http status string
+	 */
+	public $fault_string;
+
+	/**
+	 * RestFault constructor.
+	 *
+	 * @param integer $p_status_code The http status code
+	 * @param string $p_faultstring The error description
+	 */
+	function __construct( $p_status_code, $p_fault_string = '' ) {
+		$this->status_code = $p_status_code;
+		$this->fault_string = $p_fault_string === null ? '' : $p_fault_string;
+	}
+}
+
+/**
  * A factory class that can abstract away operations that can behave differently based
  * on the API being accessed (SOAP vs. REST).
  */
@@ -46,12 +72,22 @@ class ApiObjectFactory {
 
 	/**
 	 * Generate a new Soap Fault
-	 * @param string $p_fault_code   SOAP fault code.
-	 * @param string $p_fault_string SOAP fault description.
+	 * @param string $p_fault_code   SOAP fault code (Server or Client).
+	 * @param string $p_fault_string Fault description.
+	 * @param integer $p_status_code The http status code.
 	 * @return SoapFault
 	 */
-	static function fault($p_fault_code, $p_fault_string ) {
-		return new SoapFault( $p_fault_code, $p_fault_string );
+	static function fault( $p_fault_code, $p_fault_string, $p_status_code = null) {
+		# Default status code based on fault code, if not specified.
+		if( $p_status_code === null ) {
+			$p_status_code = ( $p_fault_code == 'Server' ) ? 500 : 400;
+		}
+
+		if( ApiObjectFactory::$soap ) {
+			return new SoapFault( $p_fault_code, $p_fault_string );
+		}
+
+		return new RestFault( $p_status_code, $p_fault_string );
 	}
 
 	/**
@@ -105,7 +141,15 @@ class ApiObjectFactory {
 			return false;
 		}
 
-		return get_class( $p_maybe_fault ) == 'SoapFault';
+		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault') {
+			return true;
+		}
+
+		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault') {
+			return true;
+		}
+
+		return false;
 	}
 }
 
@@ -128,7 +172,7 @@ function mc_version() {
 function mc_login( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_user_get( $p_username, $p_password, $t_user_id );
@@ -883,13 +927,13 @@ function error_get_stack_trace() {
 }
 
 /**
- * Returns a soap_fault signalling corresponding to a failed login
+ * Returns a fault signalling corresponding to a failed login
  * situation
  *
- * @return soap_fault
+ * @return RestFault|SoapFault
  */
-function mci_soap_fault_login_failed() {
-	return ApiObjectFactory::fault( 'Client', 'Access denied' );
+function mci_fault_login_failed() {
+	return ApiObjectFactory::fault( 'Client', 'Access denied', 403 );
 }
 
 /**
@@ -898,9 +942,9 @@ function mci_soap_fault_login_failed() {
  *
  * @param integer $p_user_id A user id, optional.
  * @param string  $p_detail  The optional details to append to the error message.
- * @return soap_fault
+ * @return RestFault|SoapFault
  */
-function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
+function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
 		$t_reason = 'Access denied for user '. $t_user_name . '.';
@@ -912,7 +956,7 @@ function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 	}
 
-	return ApiObjectFactory::fault( 'Client', $t_reason );
+	return ApiObjectFactory::fault( 'Client', $t_reason, 403 );
 }
 
 /**

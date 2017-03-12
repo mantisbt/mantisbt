@@ -36,7 +36,7 @@ require_once( dirname( __FILE__ ) . '/mc_core.php' );
 function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
@@ -66,23 +66,23 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue does not exist' );
+		return ApiObjectFactory::fault( 'Client', "Issue '$p_issue_id' does not exist", 404 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $p_issue_id . '\'' );
@@ -179,26 +179,26 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue does not exist' );
+		return ApiObjectFactory::fault( 'Client', "Issue '$p_issue_id' does not exist", 404 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 	$g_project_override = $t_project_id;
 
 	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
 	if( !access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'retrieving history for issue \'' . $p_issue_id . '\'' );
@@ -263,14 +263,14 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			}
 
 			if( !$t_valid_cf ) {
-				return ApiObjectFactory::fault( 'Client', $t_msg );
+				return ApiObjectFactory::fault( 'Client', $t_msg, 400 );
 			}
 
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
-				return ApiObjectFactory::fault( 'Client', "Custom field '" . $t_field['name'] . "' not found." );
+				return ApiObjectFactory::fault( 'Client', "Custom field '" . $t_field['name'] . "' not found.", 400 );
 			}
 
 			# skip if current user doesn't have login access.
@@ -281,11 +281,11 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			$t_value = $t_custom_field['value'];
 
 			if( !custom_field_validate( $t_custom_field_id, $t_value ) ) {
-				return ApiObjectFactory::fault( 'Client', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .' );
+				return ApiObjectFactory::fault( 'Client', 'Invalid custom field value for field id ' . $t_custom_field_id . '.', 400 );
 			}
 
 			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert ) ) {
-				return ApiObjectFactory::fault( 'Server', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .' );
+				return ApiObjectFactory::fault( 'Server', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id . '.', 500 );
 			}
 		}
 	}
@@ -488,7 +488,7 @@ function mci_issue_get_notes( $p_issue_id ) {
  */
 function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_monitors ) {
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $p_requesting_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $p_requesting_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	# 1. get existing monitor ids
@@ -553,7 +553,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_any = defined( 'META_FILTER_ANY' ) ? META_FILTER_ANY : 'any';
@@ -608,11 +608,11 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $t_project_id;
 
 	if( ( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.', 404 );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, $t_project_id, $t_user_id );
@@ -636,7 +636,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
@@ -678,17 +678,17 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
 	if( $p_new_handler_id != 0 ) {
 		if ( !user_exists( $p_new_handler_id ) ) {
-			return ApiObjectFactory::fault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.' );
+			return ApiObjectFactory::fault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.', 404 );
 		}
 
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $p_project_id, $p_new_handler_id ) ) {
-			return mci_soap_fault_access_denied( 'User \'' . $p_new_handler_id . '\' does not have access right to handle issues' );
+			return mci_fault_access_denied( 'User \'' . $p_new_handler_id . '\' does not have access right to handle issues' );
 		}
 	}
 
 	if( $p_old_handler_id != $p_new_handler_id ) {
 		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $p_project_id, $p_user_id ) ) {
-			return mci_soap_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
+			return mci_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
 		}
 	}
 
@@ -708,7 +708,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( is_object( $p_issue ) ) {
@@ -721,7 +721,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_handler_id = isset( $p_issue['handler'] ) ? mci_get_user_id( $p_issue['handler'] ) : 0;
@@ -745,7 +745,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
+				return mci_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
 			}
 		}
 	} else {
@@ -754,14 +754,14 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id != 0 ) {
-			return ApiObjectFactory::fault( 'Client', "Project '" . $t_project->name . "' does not exist." );
+			return ApiObjectFactory::fault( 'Client', "Project '" . $t_project->name . "' does not exist.", 404 );
 		} else {
-			return ApiObjectFactory::fault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
+			return ApiObjectFactory::fault( 'Client', "Project with id '" . $t_project_id . "' does not exist.", 404 );
 		}
 	}
 
 	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
+		return mci_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
 	}
 
 	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
@@ -774,9 +774,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
+			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.', 400 );
 		} else {
-			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_id . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_id . '\'.', 400 );
 		}
 	}
 
@@ -786,7 +786,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::fault( 'Client', 'Version \'' . $t_version . '\' does not exist in project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Version \'' . $t_version . '\' does not exist in project \'' . $t_project_name . '\'.', 400 );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$t_version = $t_version_when_not_found;
@@ -794,11 +794,11 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.', 400 );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.', 400 );
 	}
 
 	$t_bug_data = new BugData;
@@ -926,21 +926,21 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.', 404 );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' is readonly', 403 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
@@ -956,13 +956,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project['name'] . '\' does not exist.' );
+			return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project['name'] . '\' does not exist.', 404 );
 		}
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.', 404 );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
+		return mci_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -970,10 +970,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.' );
+			return ApiObjectFactory::fault( 'Client', 'Category field must be supplied.', 400 );
 		} else {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_name . '\'.', 400 );
 		}
 	}
 
@@ -981,7 +981,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' . $t_project_name . '\'.' );
+			return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' . $t_project_name . '\'.', 400 );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$p_issue['version'] = $t_version_when_not_found;
@@ -989,11 +989,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'summary\' is missing.', 400 );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.' );
+		return ApiObjectFactory::fault( 'Client', 'Mandatory field \'description\' is missing.', 400 );
 	}
 
 	# fields which we expect to always be set
@@ -1175,22 +1175,22 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, array $p_tag
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.', 404 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	mci_tag_set_for_issue( $p_issue_id, $p_tags, $t_user_id );
@@ -1211,22 +1211,22 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.', 404 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'deleting issue \'' . $p_issue_id . '\'' );
@@ -1247,36 +1247,36 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( (integer)$p_issue_id < 1 ) {
-		return ApiObjectFactory::fault( 'Client', 'Invalid issue id \'' . $p_issue_id . '\'' );
+		return ApiObjectFactory::fault( 'Client', 'Invalid issue id \'' . $p_issue_id . '\'', 400 );
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.', 404 );
 	}
 
 	$p_note = ApiObjectFactory::objectToArray( $p_note );
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.', 400 );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'You do not have access rights to add notes to this issue' );
+		return mci_fault_access_denied( $t_user_id, 'You do not have access rights to add notes to this issue' );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	if( isset( $p_note['view_state'] ) ) {
@@ -1295,7 +1295,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
+				return mci_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
 			}
 		}
 	} else {
@@ -1328,22 +1328,22 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( (integer)$p_issue_note_id < 1 ) {
-		return ApiObjectFactory::fault( 'Client', 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
+		return ApiObjectFactory::fault( 'Client', 'Invalid issue note id \'' . $p_issue_note_id . '\'.', 400 );
 	}
 
 	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $p_issue_note_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $p_issue_note_id . '\' does not exist.', 404 );
 	}
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_reporter_id = bugnote_get_field( $p_issue_note_id, 'reporter_id' );
@@ -1356,11 +1356,11 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	if( !access_has_bugnote_level( config_get( $t_threshold_config_name ), $p_issue_note_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( bug_is_readonly( $t_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
 	}
 
 	log_event( LOG_WEBSERVICE, 'deleting bugnote id \'' . $p_issue_note_id . '\'' );
@@ -1381,23 +1381,23 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$p_note = ApiObjectFactory::objectToArray( $p_note );
 
 	if( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue note id must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note id must not be blank.', 400 );
 	}
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note text must not be blank.', 400 );
 	}
 
 	$t_issue_note_id = $p_note['id'];
 
 	if( !bugnote_exists( $t_issue_note_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $t_issue_note_id . '\' does not exist.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue note \'' . $t_issue_note_id . '\' does not exist.', 404 );
 	}
 
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
@@ -1405,7 +1405,7 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_issue_author_id = bugnote_get_field( $t_issue_note_id, 'reporter_id' );
@@ -1415,19 +1415,19 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$t_user_owns_the_bugnote = bugnote_is_user_reporter( $t_issue_note_id, $t_user_id );
 	$t_user_can_update_own_bugnote = config_get( 'bugnote_user_edit_threshold', null, $t_user_id, $t_project_id );
 	if( $t_user_owns_the_bugnote && !$t_user_can_update_own_bugnote ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	# Check if the user has an access level beyond update_bugnote_threshold for the
 	# project containing the bugnote to update.
 	$t_update_bugnote_threshold = config_get( 'update_bugnote_threshold', null, $t_user_id, $t_project_id );
 	if( !$t_user_owns_the_bugnote && !access_has_bugnote_level( $t_update_bugnote_threshold, $t_issue_note_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	# Check if the bug is readonly
 	if( bug_is_readonly( $t_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
 	}
 
 	if( isset( $p_note['view_state'] ) ) {
@@ -1461,38 +1461,38 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 	$t_rel_type = ApiObjectFactory::objectToArray( $p_relationship['type'] );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to add a relationship to this issue' );
+		return mci_fault_access_denied( $t_user_id, 'Active user does not have access level required to add a relationship to this issue' );
 	}
 
 	# source and destination bugs are the same bug...
 	if( $p_issue_id == $t_dest_issue_id ) {
-		return ApiObjectFactory::fault( 'Client', 'An issue can\'t be related to itself.' );
+		return ApiObjectFactory::fault( 'Client', 'An issue can\'t be related to itself.', 400 );
 	}
 
 	# the related bug exists...
 	if( !bug_exists( $t_dest_issue_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $t_dest_issue_id . '\' not found.' );
+		return ApiObjectFactory::fault( 'Client', 'Issue \'' . $t_dest_issue_id . '\' not found.', 404 );
 	}
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly', 403 );
 	}
 
 	# user can access to the related bug at least as viewer...
 	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
+		return mci_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
 	}
 
 	log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
@@ -1517,23 +1517,23 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to remove a relationship from this issue.' );
+		return mci_fault_access_denied( $t_user_id, 'Active user does not have access level required to remove a relationship from this issue.' );
 	}
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly.' );
+		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly.' );
 	}
 
 	# retrieve the destination bug of the relationship
@@ -1542,7 +1542,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	# user can access to the related bug at least as viewer, if it's exist...
 	if( bug_exists( $t_dest_issue_id ) ) {
 		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
-			return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level.' );
+			return mci_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level.' );
 		}
 	}
 
@@ -1732,7 +1732,7 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
 
     $t_user_id = mci_check_login( $p_username, $p_password );
     if( $t_user_id === false ) {
-        return mci_soap_fault_login_failed();
+        return mci_fault_login_failed();
     }
 
     $t_lang = mci_get_user_lang( $t_user_id );
@@ -1766,7 +1766,7 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
 
     $t_user_id = mci_check_login( $p_username, $p_password );
     if( $t_user_id === false ) {
-        return mci_soap_fault_login_failed();
+        return mci_fault_login_failed();
     }
 
     $t_result = array();
