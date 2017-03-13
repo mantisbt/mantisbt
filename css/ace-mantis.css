@@ -214,21 +214,26 @@ pre {
     position: relative;
 }
 
-.nav-user-photo-container {
+.ace-nav .nav-user-photo_40_avatar_container {
 	width: 48px; 
 	height: 40px;
 	float: left;	
 }
 
-.ace-nav .nav-user-photo {
+.ace-nav .nav-user-photo_40_avatar {
+	margin: -4px 8px 0 0;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    max-width: 40px;
+    max-height: 40px;
     border-radius: 4px !important;
 }
-.profile-activity img {
+.profile-activity_40_avatar {
     border-radius: 15% !important;
     margin-bottom: 6px !important;
 }
 
-.profile-activity-img-container {
+.profile-activity_40_avatar_container {
 	width: 48px; 
 	line-height: 40px;
 	float: left;	
@@ -239,8 +244,7 @@ pre {
     margin-bottom: 0 !important;
 }
 
-.avatar
-{
+.bugnote_view_inc_80_avatar {
     border: 2px solid #c9d6e5;
     border-radius: 15%;
     box-shadow: none;
@@ -249,7 +253,7 @@ pre {
     max-height: 80px;
 }
 
-.avatar-container {
+.bugnote_view_inc_80_avatar_container {
 	line-height: 80px;
 	width: 84px;
 	text-align: center;
