@@ -22,9 +22,9 @@
  * @link http://www.mantisbt.org
  */
 
-$app->group('/lang', function() use ( $app ) {
-	$app->get( '', 'rest_lang_get' );
-	$app->get( '/', 'rest_lang_get' );
+$g_app->group('/lang', function() use ( $g_app ) {
+	$g_app->get( '', 'rest_lang_get' );
+	$g_app->get( '/', 'rest_lang_get' );
 });
 
 /**

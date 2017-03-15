@@ -22,9 +22,9 @@
  * @link http://www.mantisbt.org
  */
 
-$app->group('/config', function() use ( $app ) {
-	$app->get( '', 'rest_config_get' );
-	$app->get( '/', 'rest_config_get' );
+$g_app->group('/config', function() use ( $g_app ) {
+	$g_app->get( '', 'rest_config_get' );
+	$g_app->get( '/', 'rest_config_get' );
 });
 
 /**

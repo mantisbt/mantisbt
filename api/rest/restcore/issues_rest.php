@@ -22,13 +22,13 @@
  * @link http://www.mantisbt.org
  */
 
-$app->group('/issues', function() use ( $app ) {
-	$app->get( '', 'rest_issue_get' );
-	$app->get( '/', 'rest_issue_get' );
-	$app->post( '', 'rest_issue_add' );
-	$app->post( '/', 'rest_issue_add' );
-	$app->delete( '', 'rest_issue_delete' );
-	$app->delete( '/', 'rest_issue_delete' );
+$g_app->group('/issues', function() use ( $g_app ) {
+	$g_app->get( '', 'rest_issue_get' );
+	$g_app->get( '/', 'rest_issue_get' );
+	$g_app->post( '', 'rest_issue_add' );
+	$g_app->post( '/', 'rest_issue_add' );
+	$g_app->delete( '', 'rest_issue_delete' );
+	$g_app->delete( '/', 'rest_issue_delete' );
 });
 
 /**
