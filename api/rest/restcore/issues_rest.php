@@ -47,7 +47,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
-	return $p_response->withStatus( 200 )->withJson( $t_result );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
 /**
@@ -70,7 +70,8 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 
 	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
-	return $p_response->withStatus( 201, "Issue Created with id $t_issue_id" )->withJson( array( 'issue' => $t_created_issue ) );
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Created with id $t_issue_id" )->
+		withJson( array( 'issue' => $t_created_issue ) );
 }
 
 /**
@@ -91,6 +92,6 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
-	return $p_response->withStatus( 204 );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 

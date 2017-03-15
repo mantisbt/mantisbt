@@ -659,3 +659,13 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 # types, 2^31 is a safe limit to be used for all.
 define( 'DB_MAX_INT', 2147483647 );
 
+# HTTP Status Codes
+define( 'HTTP_STATUS_SUCCESS', 200 );
+define( 'HTTP_STATUS_CREATED', 201 );
+define( 'HTTP_STATUS_NO_CONTENT', 204 );
+define( 'HTTP_STATUS_BAD_REQUEST', 400 );
+define( 'HTTP_STATUS_FORBIDDEN', 403 );
+define( 'HTTP_STATUS_NOT_FOUND', 404 );
+define( 'HTTP_STATUS_CONFLICT', 409 );
+define( 'HTTP_STATUS_INTERNAL_SERVER_ERROR', 500 );
+

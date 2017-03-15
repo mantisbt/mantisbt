@@ -36,7 +36,7 @@ $g_app->group('/users', function() use ( $g_app ) {
  */
 function rest_user_get_me( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_result = mci_user_get( '', '', auth_get_current_user_id() );
-	return $p_response->withStatus( 200 )->withJson( $t_result );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
 

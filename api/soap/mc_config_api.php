@@ -41,11 +41,11 @@ function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 	}
 
 	if( config_is_private( $p_config_var ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Access to \'' . $p_config_var . '\' is denied', 403 );
+		return ApiObjectFactory::faultForbidden( 'Access to \'' . $p_config_var . '\' is denied' );
 	}
 
 	if( !config_is_set( $p_config_var ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Config \'' . $p_config_var . '\' is undefined', 404 );
+		return ApiObjectFactory::faultNotFound( 'Config \'' . $p_config_var . '\' is undefined' );
 	}
 
 	return config_get( $p_config_var );

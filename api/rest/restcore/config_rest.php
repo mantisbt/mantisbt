@@ -60,7 +60,7 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	}
 
 	if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
-		return $p_response->withStatus( 404, "Project with id '$t_project_id' not found" );
+		return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, "Project with id '$t_project_id' not found" );
 	}
 
 	$t_user_id = $p_request->getParam( 'user_id' );
@@ -70,11 +70,11 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 		if( $t_user_id != ALL_USERS &&
 			$t_user_id != auth_get_current_user_id() &&
 			!current_user_is_administrator() ) {
-			return $p_response->withStatus( 403, 'Admin access required to get configs for other users' );
+			return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, 'Admin access required to get configs for other users' );
 		}
 
 		if( $t_user_id != ALL_USERS && user_exists( $t_user_id ) ) {
-			return $p_response->withStatus( 404, "User with id '$t_user_id' not found" );
+			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, "User with id '$t_user_id' not found" );
 		}
 	}
 
@@ -103,7 +103,7 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 	# that belongs outside the configs response.
 	$t_result = array( 'configs' => $t_configs );
 
-	return $p_response->withStatus( 200 )->withJson( $t_result );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
 /**
