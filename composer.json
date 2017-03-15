@@ -8,8 +8,9 @@
     "license": "GPL v2",
     "authors": [
         {
-            "name": "Victor Boctor",
-            "email": "vboctor@gmail.com"
+            "name": "MantisBT Team",
+            "email": "mantisbt-dev@lists.sourceforge.net",
+            "homepage": "https://www.mantisbt.org"
         }
     ]
 }
