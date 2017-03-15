@@ -29,10 +29,6 @@ require_api( 'authentication_api.php' );
  */
 class AuthMiddleware {
 	public function __invoke( \Slim\Http\Request $request, \Slim\Http\Response $response, callable $next ) {
-		if( mci_is_mantis_offline() ) {
-			return $response->withStatus( 503, 'Mantis Offline' );
-		}
-
 		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
 
 		$t_password = '';
@@ -41,7 +37,7 @@ class AuthMiddleware {
 			$t_username = config_get( 'anonymous_account' );
 
 			if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
-				return $response->withStatus( 403, 'API token required' );
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token required' );
 			}
 
 			$t_login_method = 'anonymous';
@@ -51,7 +47,7 @@ class AuthMiddleware {
 			if( $t_user_id === false ) {
 				$t_user_id = auth_user_id_from_cookie( $t_authorization_header );
 				if( $t_user_id === false ) {
-					return $response->withStatus( 403, 'API token not found' );
+					return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
 				}
 
 				# use cookie to login, useful for calls from web API.
@@ -67,7 +63,12 @@ class AuthMiddleware {
 		}
 
 		if( mci_check_login( $t_username, $t_password ) === false ) {
-			return $response->withStatus( 403, 'Access denied' );
+			return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Access denied' );
+		}
+
+		# Now that user is logged in, check if they have the right access level to access the REST API.
+		if( !mci_has_readonly_access() ) {
+			return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Higher access level required for API access' );
 		}
 
 		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_username )->

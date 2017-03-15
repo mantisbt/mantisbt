@@ -374,23 +374,25 @@ function mci_check_login( $p_username, $p_password ) {
 
 /**
  * Check with a user has readonly access to the webservice for a given project
- * @param integer $p_user_id    A user identifier.
+ * @param integer|null $p_user_id A user id or null for logged in user.
  * @param integer $p_project_id A project identifier ( Default All Projects ).
  * @return boolean indicating whether user has readonly access
  */
-function mci_has_readonly_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
+function mci_has_readonly_access( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	$t_user_id = is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
 	return( $t_access_level >= config_get( 'webservice_readonly_access_level_threshold' ) );
 }
 
 /**
  * Check with a user has readwrite access to the webservice for a given project
- * @param integer $p_user_id    User id.
+ * @param integer|null $p_user_id User id or null for logged in user.
  * @param integer $p_project_id Project Id ( Default All Projects ).
  * @return boolean indicating whether user has readwrite access
  */
-function mci_has_readwrite_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
+function mci_has_readwrite_access( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	$t_user_id = is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
 	return( $t_access_level >= config_get( 'webservice_readwrite_access_level_threshold' ) );
 }
 
