@@ -48,7 +48,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	}
 
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -68,14 +68,14 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	} else if( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		# target id 0 for reporter doesn't make sense.
 		if( $t_target_user_id == 0 ) {
-			return ApiObjectFactory::fault( 'Client', 'Target user id must be specified for \'reported\' filter.' );
+			return ApiObjectFactory::faultBadRequest( 'Target user id must be specified for \'reported\' filter.' );
 		}
 
 		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
 	} else if( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
 		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
 	} else {
-		return ApiObjectFactory::fault( 'Client', 'Unknown filter type \'' . $p_filter_type . '\'.' );
+		return ApiObjectFactory::faultBadRequest( 'Unknown filter type \'' . $p_filter_type . '\'.' );
 	}
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
@@ -113,7 +113,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -196,7 +196,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -229,7 +229,7 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -257,7 +257,7 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -272,7 +272,8 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	if( !category_can_remove( $p_category_id ) ) {
 		return ApiObjectFactory::fault(
 			'Client',
-			"'$p_category_name' is used as default category for moves and can't be deleted."
+			"'$p_category_name' is used as default category for moves and can't be deleted.",
+			HTTP_STATUS_FORBIDDEN
 		);
 	}
 
@@ -295,7 +296,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( null === $p_assigned_to ) {
-		return ApiObjectFactory::fault( 'Client', 'p_assigned_to needed' );
+		return ApiObjectFactory::faultBadRequest( 'assigned_to needed' );
 	}
 
 	if( $t_user_id === false ) {
@@ -303,7 +304,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -336,7 +337,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -369,7 +370,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -404,7 +405,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -455,11 +456,11 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if( is_blank( $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "project_id" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
 	}
 
 	if( !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -471,11 +472,11 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	}
 
 	if( is_blank( $t_name ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "name" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "name" was missing' );
 	}
 
 	if( !version_is_unique( $t_name, $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Version exists for project' );
+		return ApiObjectFactory::faultConflict( 'Version exists for project' );
 	}
 
 	if( $t_released === false ) {
@@ -510,11 +511,11 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	}
 
 	if( is_blank( $p_version_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "version_id" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "version_id" was missing' );
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_version_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Version \'' . $p_version_id . '\' does not exist.' );
 	}
 
 	$p_version = ApiObjectFactory::objectToArray( $p_version );
@@ -528,11 +529,11 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if( is_blank( $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "project_id" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
 	}
 
 	if( !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -544,13 +545,13 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	}
 
 	if( is_blank( $t_name ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "name" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "name" was missing' );
 	}
 
 	# check for duplicates
 	$t_old_version_name = version_get_field( $p_version_id, 'version' );
 	if( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Version exists for project' );
+		return ApiObjectFactory::faultConflict( 'Version exists for project' );
 	}
 
 	if( $t_released === false ) {
@@ -589,11 +590,11 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	}
 
 	if( is_blank( $p_version_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Mandatory field "version_id" was missing' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field "version_id" was missing' );
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Version \'' . $p_version_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Version \'' . $p_version_id . '\' does not exist.' );
 	}
 
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
@@ -628,7 +629,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -696,7 +697,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -782,7 +783,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -848,7 +849,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
 	if( !isset( $p_project['name'] ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Required field "name" is missing' );
+		return ApiObjectFactory::faultBadRequest( 'Required field "name" is missing' );
 	} else {
 		$t_name = $p_project['name'];
 	}
@@ -891,7 +892,7 @@ function mc_project_add( $p_username, $p_password, stdClass $p_project ) {
 
 	# check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project name exists' );
+		return ApiObjectFactory::faultConflict( 'Project name already exists' );
 	}
 
 	$t_project_status = mci_get_project_status_id( $t_status );
@@ -923,7 +924,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -931,15 +932,15 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 	$p_project = ApiObjectFactory::objectToArray( $p_project );
 
 	if( !isset( $p_project['name'] ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Missing required field \'name\'.' );
-	} else {
-		$t_name = $p_project['name'];
+		return ApiObjectFactory::faultBadRequest( 'Missing required field \'name\'.' );
 	}
+
+	$t_name = $p_project['name'];
 
 	# check to make sure project doesn't already exist
 	if( $t_name != project_get_name( $p_project_id ) ) {
 		if( !project_is_name_unique( $t_name ) ) {
-			return ApiObjectFactory::fault( 'Client', 'Project name exists' );
+			return ApiObjectFactory::faultConflict( 'Project name conflict' );
 		}
 	}
 
@@ -1004,7 +1005,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -1033,7 +1034,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		return mci_fault_login_failed();
 	}
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;

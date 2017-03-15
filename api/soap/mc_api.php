@@ -71,13 +71,16 @@ class ApiObjectFactory {
 	static public $soap = true;
 
 	/**
-	 * Generate a new Soap Fault
+	 * Generate a new fault - this method should only be called from within this factory class.  Use methods for
+	 * specific error cases.
+	 *
 	 * @param string $p_fault_code   SOAP fault code (Server or Client).
 	 * @param string $p_fault_string Fault description.
 	 * @param integer $p_status_code The http status code.
-	 * @return SoapFault
+	 * @return RestFault|SoapFault The fault object.
+	 * @access private
 	 */
-	static function fault( $p_fault_code, $p_fault_string, $p_status_code = null) {
+	static function fault( $p_fault_code, $p_fault_string, $p_status_code = null ) {
 		# Default status code based on fault code, if not specified.
 		if( $p_status_code === null ) {
 			$p_status_code = ( $p_fault_code == 'Server' ) ? 500 : 400;
@@ -88,6 +91,58 @@ class ApiObjectFactory {
 		}
 
 		return new RestFault( $p_status_code, $p_fault_string );
+	}
+
+	/**
+	 * Fault generated when a resource doesn't exist.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultNotFound( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_NOT_FOUND );
+	}
+
+	/**
+	 * Fault generated when an operation is not allowed.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultForbidden( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_FORBIDDEN );
+	}
+
+	/**
+	 * Fault generated when a request is invalid.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultBadRequest( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_BAD_REQUEST );
+	}
+
+	/**
+	 * Fault generated when the request is failed due to conflict with current state of the data.
+	 * This can happen either due to a race condition or lack of checking on client side before
+	 * issuing the request.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultConflict( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_CONFLICT );
+	}
+
+	/**
+	 * Fault generated when a request fails due to server error.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultServerError( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Server', $p_fault_string, HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	}
 
 	/**
@@ -933,7 +988,7 @@ function error_get_stack_trace() {
  * @return RestFault|SoapFault
  */
 function mci_fault_login_failed() {
-	return ApiObjectFactory::fault( 'Client', 'Access denied', 403 );
+	return ApiObjectFactory::faultForbidden( 'Access denied' );
 }
 
 /**
@@ -956,7 +1011,7 @@ function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 	}
 
-	return ApiObjectFactory::fault( 'Client', $t_reason, 403 );
+	return ApiObjectFactory::faultForbidden( $t_reason );
 }
 
 /**

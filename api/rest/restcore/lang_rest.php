@@ -64,5 +64,5 @@ function rest_lang_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 	$t_result = array( 'strings' => $t_localized_strings );
 	$t_result['language'] = $t_current_language;
 
-	return $p_response->withStatus( 200 )->withJson( $t_result );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }

@@ -95,12 +95,12 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 	$t_tag_description = array_key_exists( 'description', $p_tag ) ? $p_tag['description'] : '';
 
 	if( !tag_name_is_valid( $t_tag_name, $t_valid_matches ) ) {
-		return ApiObjectFactory::fault( 'Client', 'Invalid tag name : "' . $t_tag_name . '"' );
+		return ApiObjectFactory::faultBadRequest( 'Invalid tag name : "' . $t_tag_name . '"' );
 	}
 
 	$t_matching_by_name = tag_get_by_name( $t_tag_name );
 	if( $t_matching_by_name != false ) {
-		return ApiObjectFactory::fault( 'Client', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
+		return ApiObjectFactory::faultConflict( 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
 	}
 
 	log_event( LOG_WEBSERVICE, 'creating tag \'' . $t_tag_name . '\' for user \'' . $t_user_id . '\'' );
@@ -128,7 +128,7 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 	}
 
 	if( !tag_exists( $p_tag_id ) ) {
-		return ApiObjectFactory::fault( 'Client', 'No tag with id ' . $p_tag_id );
+		return ApiObjectFactory::faultNotFound( 'No tag with id ' . $p_tag_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'deleting tag id \'' . $p_tag_id . '\'' );
