@@ -76,13 +76,13 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function routes( $p_event_name, $p_event_args ) {
 		$t_app = $p_event_args['app'];
-		$t_app->group( '/MantisGraph', function() use ( $t_app ) {
+		$t_app->group( plugin_route_group(), function() use ( $t_app ) {
 			$t_app->get( '/summary', function( $req, $res, $args ) {
 				if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
-					return $res->withStatus( 200 )->withJson( create_reporter_summary() );
+					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( create_reporter_summary() );
 				}
 
-				return $res->withStatus( 403 );
+				return $res->withStatus( HTTP_STATUS_FORBIDDEN );
 			} );
 		} );
 	}
