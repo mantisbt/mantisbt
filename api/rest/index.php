@@ -49,12 +49,12 @@ $g_app->add( new AuthMiddleware() );
 $g_app->add( new ApiEnabledMiddleware() );
 $g_app->add( new VersionMiddleware() );
 
-event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
-
 require_once( $t_restcore_dir . 'config_rest.php' );
 require_once( $t_restcore_dir . 'issues_rest.php' );
 require_once( $t_restcore_dir . 'lang_rest.php' );
 require_once( $t_restcore_dir . 'users_rest.php' );
+
+event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
 
 $g_app->run();
 
