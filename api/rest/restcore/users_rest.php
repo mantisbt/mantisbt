@@ -22,8 +22,8 @@
  * @link http://www.mantisbt.org
  */
 
-$app->group('/users', function() use ( $app ) {
-	$app->get( '/me', 'rest_user_get_me' );
+$g_app->group('/users', function() use ( $g_app ) {
+	$g_app->get( '/me', 'rest_user_get_me' );
 });
 
 /**
