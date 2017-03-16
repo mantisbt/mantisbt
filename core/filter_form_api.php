@@ -1287,8 +1287,8 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 				echo '<input type="text" name="' . FILTER_PROPERTY_START_DATE_SUBMITTED . '" ' .
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . convert_php_to_date_format( config_get( 'normal_date_format' ) ) . '"' .
-					' size="12" maxlength="12" value="' . $p_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] . '" />';
+					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
+					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>
@@ -1303,8 +1303,8 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 				echo '<input type="text" name="' . FILTER_PROPERTY_END_DATE_SUBMITTED . '" ' .
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . convert_php_to_date_format( config_get( 'normal_date_format' ) ) . '"' .
-					' size="12" maxlength="12" value="' . $p_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] . '" />';
+					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
+					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>
@@ -1380,8 +1380,8 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
                 echo '<input type="text" name="' . FILTER_PROPERTY_LAST_UPDATED_START_DATE . '" ' .
                     ' class="datetimepicker input-xs" ' . $t_menu_readonly .
                     ' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-                    ' data-picker-format="' . convert_php_to_date_format( config_get( 'normal_date_format' ) ) . '"' .
-                    ' size="12" maxlength="12" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] . '" />';
+                    ' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
+                    ' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] . '" />';
                 echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 	            ?>
 			</td>
@@ -1396,8 +1396,8 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 				echo '<input type="text" name="' . FILTER_PROPERTY_LAST_UPDATED_END_DATE . '" ' .
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . convert_php_to_date_format( config_get( 'normal_date_format' ) ) . '"' .
-					' size="12" maxlength="12" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] . '" />';
+					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
+					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>
