@@ -457,7 +457,7 @@ function toggleDisplay(idTag)
 }
 
 // Datetime picker handler
-function enableDateTimePicker(p_element ) {
+function enableDateTimePicker(p_element) {
     $(p_element).datetimepicker({
         locale: $(p_element).data('picker-locale'),
         format: $(p_element).data('picker-format'),
