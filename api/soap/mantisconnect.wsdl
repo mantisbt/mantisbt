@@ -163,6 +163,7 @@
    <xsd:element name="monitors" type="tns:AccountDataArray" minOccurs="0"/>
    <xsd:element name="sticky" type="xsd:boolean" minOccurs="0"/>
    <xsd:element name="tags" type="tns:ObjectRefArray" minOccurs="0"/>
+   <xsd:element name="token" type="xsd:string" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="IssueDataArray">

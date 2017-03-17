@@ -16,7 +16,7 @@
 
 /**
  * This include file prints out the bug information
- * $f_bug_id MUST be specified before the file is included
+ * $f_bug_id and $g_bug_token MUST be specified before the file is included
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -49,7 +49,7 @@
  * @uses version_api.php
  */
 
-if( !defined( 'BUG_VIEW_INC_ALLOW' ) ) {
+if( !defined( 'BUG_VIEW_LIMITED_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -85,15 +85,21 @@ $f_bug_id = gpc_get_int( 'id' );
 bug_ensure_exists( $f_bug_id );
 
 $t_bug = bug_get( $f_bug_id, true );
+$g_cache_current_user_id = $t_bug->reporter_id;
+$t_force_readonly = true;
 
 # In case the current project is not the same project of the bug we are
 # viewing, override the current project. This ensures all config_get and other
 # per-project function calls use the project ID of this bug.
 $g_project_override = $t_bug->project_id;
+$t_bug_token = bug_get_token( $f_bug_id );
+if( !isset( $g_bug_token ) || is_null( $g_bug_token ) || 
+	is_null ( $t_bug_token ) || ( '' === $g_bug_token ) || 
+	( $t_bug_token != $g_bug_token ) ) {
+	access_denied(); 
+}
 
-access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id );
-
-$f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
+$f_history = false;
 
 $t_fields = config_get( $t_fields_config_option );
 $t_fields = columns_filter_disabled( $t_fields );
@@ -102,37 +108,31 @@ compress_enable();
 
 if( $t_show_page_header ) {
 	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
-	layout_page_begin( 'view_all_bug_page.php' );
+	layout_main_container_begin();
+	layout_main_content_begin();
+	layout_page_content_begin();
+	echo '<div class="row">' , "\n";
+	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' ); 
 }
 
 $t_action_button_position = config_get( 'action_button_position' );
 
-$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
-
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
-$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
+$t_show_fixed_in_version = $t_show_versions;
 $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields )
 	&& ( config_get( 'enable_product_build' ) == ON );
 $t_product_build = $t_show_product_build ? string_display_line( $t_bug->build ) : '';
-$t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields )
-	&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
-
-$t_share_link = bug_get_public_url( $f_bug_id );
+$t_share_link = '';
 	
 $t_product_version_string  = '';
-$t_target_version_string   = '';
 $t_fixed_in_version_string = '';
 
-if( $t_show_product_version || $t_show_fixed_in_version || $t_show_target_version ) {
+if( $t_show_product_version || $t_show_fixed_in_version ) {
 	$t_version_rows = version_get_all_rows( $t_bug->project_id );
 
 	if( $t_show_product_version ) {
 		$t_product_version_string  = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->version, $t_bug->project_id ) );
-	}
-
-	if( $t_show_target_version ) {
-		$t_target_version_string   = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id ) );
 	}
 
 	if( $t_show_fixed_in_version ) {
@@ -141,29 +141,24 @@ if( $t_show_product_version || $t_show_fixed_in_version || $t_show_target_versio
 }
 
 $t_product_version_string = string_display_line( $t_product_version_string );
-$t_target_version_string = string_display_line( $t_target_version_string );
 $t_fixed_in_version_string = string_display_line( $t_fixed_in_version_string );
 
 $t_bug_id = $f_bug_id;
 $t_form_title = lang_get( 'bug_view_title' );
 $t_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
-if( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
+if( $f_history && access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
 	$t_history_link = 'view.php?id=' . $f_bug_id . '&history=1#history';
 } else {
 	$t_history_link = '';
 }
 
-$t_show_reminder_link = !current_user_is_anonymous() && !bug_is_readonly( $f_bug_id ) &&
-	  access_has_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
+$t_show_reminder_link = false;
 $t_bug_reminder_link = 'bug_reminder_page.php?bug_id=' . $f_bug_id;
-
-$t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
-$t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
 
 $t_show_project = in_array( 'project', $t_fields );
 $t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ): '';
-$t_show_id = in_array( 'id', $t_fields );
+$t_show_id = true;
 $t_formatted_bug_id = $t_show_id ? string_display_line( bug_format_id( $f_bug_id ) ) : '';
 
 $t_show_date_submitted = in_array( 'date_submitted', $t_fields );
@@ -172,14 +167,15 @@ $t_date_submitted = $t_show_date_submitted ? date( config_get( 'normal_date_form
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_last_updated = $t_show_last_updated ? date( config_get( 'normal_date_format' ), $t_bug->last_updated ) : '';
 
-$t_show_tags = in_array( 'tags', $t_fields ) && access_has_global_level( config_get( 'tag_view_threshold' ) );
+$t_show_tags = false;
+$t_show_time_tracking = false;
 
 $t_bug_overdue = bug_is_overdue( $f_bug_id );
 
-$t_show_view_state = in_array( 'view_state', $t_fields );
+$t_show_view_state = false;
 $t_bug_view_state_enum = $t_show_view_state ? string_display_line( get_enum_element( 'view_state', $t_bug->view_state ) ) : '';
 
-$t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
+$t_show_due_date = false;
 
 if( $t_show_due_date ) {
 	if( !date_is_null( $t_bug->due_date ) ) {
@@ -189,15 +185,13 @@ if( $t_show_due_date ) {
 	}
 }
 
-$t_show_reporter = in_array( 'reporter', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id );
-$t_show_additional_information = !is_blank( $t_bug->additional_information ) && in_array( 'additional_info', $t_fields );
-$t_show_steps_to_reproduce = !is_blank( $t_bug->steps_to_reproduce ) && in_array( 'steps_to_reproduce', $t_fields );
+$t_show_reporter = false;
+$t_show_handler = false;
 $t_show_monitor_box = !$t_force_readonly;
 $t_show_relationships_box = !$t_force_readonly;
-$t_show_sponsorships_box = config_get( 'enable_sponsorship' ) && access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id );
+$t_show_sponsorships_box = false;
 $t_show_history = $f_history;
-$t_show_profiles = config_get( 'enable_profiles' );
+$t_show_profiles = true;
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
 $t_platform = $t_show_platform ? string_display_line( $t_bug->platform ) : '';
 $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
@@ -208,21 +202,23 @@ $t_show_projection = in_array( 'projection', $t_fields );
 $t_projection = $t_show_projection ? string_display_line( get_enum_element( 'projection', $t_bug->projection ) ) : '';
 $t_show_eta = in_array( 'eta', $t_fields );
 $t_eta = $t_show_eta ? string_display_line( get_enum_element( 'eta', $t_bug->eta ) ) : '';
-$t_can_attach_tag = $t_show_tags && !$t_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
-$t_show_category = in_array( 'category_id', $t_fields );
+$t_can_attach_tag = false;
+$t_show_category = false; 
 $t_category = $t_show_category ? string_display_line( category_full_name( $t_bug->category_id ) ) : '';
-$t_show_priority = in_array( 'priority', $t_fields );
+$t_show_priority = false; 
 $t_priority = $t_show_priority ? string_display_line( get_enum_element( 'priority', $t_bug->priority ) ) : '';
-$t_show_severity = in_array( 'severity', $t_fields );
+$t_show_severity = false;
 $t_severity = $t_show_severity ? string_display_line( get_enum_element( 'severity', $t_bug->severity ) ) : '';
-$t_show_reproducibility = in_array( 'reproducibility', $t_fields );
+$t_show_reproducibility = false;
 $t_reproducibility = $t_show_reproducibility ? string_display_line( get_enum_element( 'reproducibility', $t_bug->reproducibility ) ): '';
 $t_show_status = in_array( 'status', $t_fields );
 $t_status = $t_show_status ? string_display_line( get_enum_element( 'status', $t_bug->status ) ) : '';
-$t_show_resolution = in_array( 'resolution', $t_fields );
+$t_show_resolution = true; 
 $t_resolution = $t_show_resolution ? string_display_line( get_enum_element( 'resolution', $t_bug->resolution ) ) : '';
-$t_show_summary = in_array( 'summary', $t_fields );
-$t_show_description = in_array( 'description', $t_fields );
+$t_show_summary = true;
+$t_show_description = ($t_bug->view_state == VS_PUBLIC);
+$t_show_steps_to_reproduce = $t_show_description;
+$t_show_additional_information = false;
 
 $t_summary = $t_show_summary ? bug_format_summary( $f_bug_id, SUMMARY_FIELD ) : '';
 $t_description = $t_show_description ? string_display_links( $t_bug->description ) : '';
@@ -249,8 +245,8 @@ echo '<div class="widget-body">';
 echo '<div class="widget-toolbox padding-8 clearfix noprint">';
 echo '<div class="btn-group pull-left">';
 
-# Jump to Bugnotes
-print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
+# Switch to normal view (top)
+print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'switch_to_full_view' ) );
 
 # Send Bug Reminder
 if( $t_show_reminder_link ) {
@@ -284,56 +280,21 @@ if( !is_blank( $t_history_link ) ) {
 }
 
 echo '</div>';
-
-# prev/next links
-echo '<div class="btn-group pull-right">';
-if( $t_bugslist ) {
-	$t_bugslist = explode( ',', $t_bugslist );
-	$t_index = array_search( $f_bug_id, $t_bugslist );
-	if( false !== $t_index ) {
-		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
-		}
-
-		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
-		}
-	}
-}
-echo '</div>';
 echo '</div>';
 
 echo '<div class="widget-main no-padding">';
 echo '<div class="table-responsive">';
 echo '<table class="table table-bordered table-condensed">';
 
-if( $t_top_buttons_enabled ) {
-	echo '<thead><tr class="bug-nav">';
-	echo '<tr class="top-buttons noprint">';
-	echo '<td colspan="6">';
-	html_buttons_view_bug_page( $t_bug_id );
-	echo '</td>';
-	echo '</tr>';
-	echo '</thead>';
-}
-
-if( $t_bottom_buttons_enabled ) {
-	echo '<tfoot>';
-	echo '<tr class="noprint"><td colspan="6">';
-	html_buttons_view_bug_page( $t_bug_id );
-	echo '</td></tr>';
-	echo '</tfoot>';
-}
-
 echo '<tbody>';
 
-if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted || $t_show_last_updated ) {
+if( $t_show_id || $t_show_project || $t_show_status || $t_show_resolution || $t_show_date_submitted || $t_show_last_updated ) {
 	# Labels
 	echo '<tr class="bug-header">';
 	echo '<th class="bug-id category" width="15%">', $t_show_id ? lang_get( 'id' ) : '', '</th>';
 	echo '<th class="bug-project category" width="20%">', $t_show_project ? lang_get( 'email_project' ) : '', '</th>';
-	echo '<th class="bug-category category" width="15%">', $t_show_category ? lang_get( 'category' ) : '', '</th>';
-	echo '<th class="bug-view-status category" width="15%">', $t_show_view_state ? lang_get( 'view_status' ) : '', '</th>';
+	echo '<th class="bug-status category" width="15%">', $t_show_status ? lang_get( 'status' ) : '', '</th>';
+	echo '<th class="bug-resolution category" width="15%">', $t_show_resolution ? lang_get( 'resolution' ) : '', '</th>';
 	echo '<th class="bug-date-submitted category" width="15%">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</th>';
 	echo '<th class="bug-last-modified category" width="20%">', $t_show_last_updated ? lang_get( 'last_update' ) : '','</th>';
 	echo '</tr>';
@@ -346,11 +307,16 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	# Project
 	echo '<td class="bug-project">', $t_project_name, '</td>';
 
-	# Category
-	echo '<td class="bug-category">', $t_category, '</td>';
+	# choose color based on status
+	$t_status_label = html_get_status_css_class( $t_bug->status );
 
-	# View Status
-	echo '<td class="bug-view-status">', $t_bug_view_state_enum, '</td>';
+	# Status
+	echo '<td class="bug-status">';
+	echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
+	echo $t_status, '</td>';
+	
+	# Resolution
+	echo '<td class="bug-resolution">', $t_resolution, '</td>';
 
 	# Date Submitted
 	echo '<td class="bug-date-submitted">', $t_date_submitted, '</td>';
@@ -359,31 +325,35 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td class="bug-last-modified">', $t_last_updated, '</td>';
 
 	echo '</tr>';
-
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
 }
 
-
 #
-# Reporter, Handler, Due Date
+# Reporter
 #
 
-if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
+if( $t_show_reporter ) {
 	echo '<tr>';
 
-	$t_spacer = 0;
+	$t_spacer = 4;
 
 	# Reporter
-	if( $t_show_reporter ) {
-		echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
-		echo '<td class="bug-reporter">';
-		print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
-		echo '</td>';
-	} else {
-		$t_spacer += 2;
-	}
+	echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
+	echo '<td class="bug-reporter">';
+	print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
+	echo '</td>';
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
+
+	echo '</tr>';
+}
+
+#
+# Handler, Due Date
+#
+
+if( $t_show_handler || $t_show_due_date ) {
+	echo '<tr>';
+
+	$t_spacer = 2;
 
 	# Handler
 	if( $t_show_handler ) {
@@ -408,10 +378,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 		$t_spacer += 2;
 	}
 
-	if( $t_spacer > 0 ) {
-		echo '<td colspan="', $t_spacer, '">&#160;</td>';
-	}
-
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	echo '</tr>';
 }
 
@@ -457,32 +424,26 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 }
 
 #
-# Status, Resolution
+# Category, View Status
 #
 
-if( $t_show_status || $t_show_resolution ) {
+if( $t_show_category || $t_show_view_state ) {
 	echo '<tr>';
 
 	$t_spacer = 2;
 
-	# Status
-	if( $t_show_status ) {
-		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
-
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status );
-
-		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square fa-status-box ' . $t_status_label . '"></i> ';
-		echo $t_status, '</td>';
+	# Category
+	if( $t_show_category ) {
+		echo '<th class="bug-category category">', lang_get( 'category' ), '</th>';
+		echo '<td class="bug-category">', $t_category, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	# Resolution
-	if( $t_show_resolution ) {
-		echo '<th class="bug-resolution category">', lang_get( 'resolution' ), '</th>';
-		echo '<td class="bug-resolution">', $t_resolution, '</td>';
+	# View Status 
+	if( $t_show_view_state ) {
+		echo '<th class="bug-view-status category">', lang_get( 'view_status' ), '</th>';
+		echo '<td class="bug-view-status">', $t_bug_view_state_enum, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -491,6 +452,45 @@ if( $t_show_status || $t_show_resolution ) {
 	if( $t_spacer > 0 ) {
 		echo '<td colspan="', $t_spacer, '">&#160;</td>';
 	}
+
+	echo '</tr>';
+}
+
+#
+# Product Version, Product Build, Fixed In Version
+#
+
+if( $t_show_product_version || $t_show_product_build || $t_show_fixed_in_version ) {
+	$t_spacer = 0;
+
+	echo '<tr>';
+
+	# Product Version
+	if( $t_show_product_version ) {
+		echo '<th class="bug-product-version category">', lang_get( 'product_version' ), '</th>';
+		echo '<td class="bug-product-version">', $t_product_version_string, '</td>';
+	} else {
+		$t_spacer += 2;
+	}
+
+	# Product Build
+	if( $t_show_product_build ) {
+		echo '<th class="bug-product-build category">', lang_get( 'product_build' ), '</th>';
+		echo '<td class="bug-product-build">', $t_product_build, '</td>';
+	} else {
+		$t_spacer += 2;
+	}
+
+	# fixed in version
+	if( $t_show_fixed_in_version ) {
+		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
+		echo '<td class="bug-fixed-in-version">', $t_fixed_in_version_string, '</td>';
+	} else {
+		$t_spacer += 2;
+	}
+	
+	# spacer
+	echo '<td colspan="', $t_spacer, '">&#160;</td>';
 
 	echo '</tr>';
 }
@@ -566,77 +566,10 @@ if( ( $t_show_platform || $t_show_os || $t_show_os_version ) &&
 }
 
 #
-# Product Version, Product Build
-#
-
-if( $t_show_product_version || $t_show_product_build ) {
-	$t_spacer = 2;
-
-	echo '<tr>';
-
-	# Product Version
-	if( $t_show_product_version ) {
-		echo '<th class="bug-product-version category">', lang_get( 'product_version' ), '</th>';
-		echo '<td class="bug-product-version">', $t_product_version_string, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# Product Build
-	if( $t_show_product_build ) {
-		echo '<th class="bug-product-build category">', lang_get( 'product_build' ), '</th>';
-		echo '<td class="bug-product-build">', $t_product_build, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
-	echo '</tr>';
-}
-
-#
-# Target Version, Fixed In Version
-#
-
-if( $t_show_target_version || $t_show_fixed_in_version ) {
-	$t_spacer = 2;
-
-	echo '<tr>';
-
-	# target version
-	if( $t_show_target_version ) {
-		# Target Version
-		echo '<th class="bug-target-version category">', lang_get( 'target_version' ), '</th>';
-		echo '<td class="bug-target-version">', $t_target_version_string, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# fixed in version
-	if( $t_show_fixed_in_version ) {
-		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
-		echo '<td class="bug-fixed-in-version">', $t_fixed_in_version_string, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
-	echo '</tr>';
-}
-
-#
 # Bug Details Event Signal
 #
 
 event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $t_bug_id ) );
-
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
 
 #
 # Bug Details (screen wide fields)
@@ -692,37 +625,16 @@ if( $t_can_attach_tag ) {
 	echo '</td></tr>';
 }
 
-# spacer
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
-echo '<tr class="hidden"></tr>';
+echo '</tbody>';
 
-# Custom Fields
-$t_custom_fields_found = false;
-$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
-custom_field_cache_values( array( $t_bug->id ) , $t_related_custom_field_ids );
+# Switch to normal view (bottom)
+echo '<tfoot>';
+echo '<tr class="noprint"><td colspan="6">';
+print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'switch_to_full_view' ) );
+echo '</td></tr>';
+echo '</tfoot>';
 
-foreach( $t_related_custom_field_ids as $t_id ) {
-	if( !custom_field_has_read_access( $t_id, $f_bug_id ) ) {
-		continue;
-	} # has read access
-
-	$t_custom_fields_found = true;
-	$t_def = custom_field_get_definition( $t_id );
-
-	echo '<tr>';
-	echo '<th class="bug-custom-field category">', string_display( lang_get_defaulted( $t_def['name'] ) ), '</th>';
-	echo '<td class="bug-custom-field" colspan="5">';
-	print_custom_field_value( $t_def, $t_id, $f_bug_id );
-	echo '</td></tr>';
-}
-
-if( $t_custom_fields_found ) {
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-	echo '<tr class="hidden"></tr>';
-}
-
-echo '</tbody></table>';
+echo '</table>';
 echo '</div></div></div></div></div>';
 
 # User list sponsoring the bug
@@ -742,41 +654,21 @@ if( $t_show_monitor_box ) {
 	include( $t_mantis_dir . 'bug_monitor_list_view_inc.php' );
 }
 
-# Bugnotes and "Add Note" box
-if( 'ASC' == current_user_get_pref( 'bugnote_order' ) ) {
-	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
-
-	if( !$t_force_readonly ) {
-		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
-	}
-} else {
-	if( !$t_force_readonly ) {
-		define( 'BUGNOTE_ADD_INC_ALLOW', true );
-		include( $t_mantis_dir . 'bugnote_add_inc.php' );
-	}
-
-	define( 'BUGNOTE_VIEW_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_view_inc.php' );
-}
-
 # Allow plugins to display stuff after notes
 event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_bug_id ) );
 
 # Time tracking statistics
-if( config_get( 'time_tracking_enabled' ) &&
-	access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-	define( 'BUGNOTE_STATS_INC_ALLOW', true );
-	include( $t_mantis_dir . 'bugnote_stats_inc.php' );
-}
+if( $t_show_time_tracking ) {
+	if( config_get( 'time_tracking_enabled' ) &&
+		access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+		define( 'BUGNOTE_STATS_INC_ALLOW', true );
+		include( $t_mantis_dir . 'bugnote_stats_inc.php' );
+	}
+}	
 
 # History
 if( $t_show_history ) {
 	define( 'HISTORY_INC_ALLOW', true );
 	include( $t_mantis_dir . 'history_inc.php' );
 }
-
 layout_page_end();
-
-last_visited_issue( $t_bug_id );

@@ -291,6 +291,8 @@ form_security_purge( 'bug_report' );
 
 layout_page_header_begin();
 
+$t_share_link = bug_get_public_url( $t_bug_id );
+
 if( $f_report_stay ) {
 	$t_fields = array(
 		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
@@ -326,10 +328,14 @@ if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
 	}
 }
 
-$t_buttons = array(
-	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
-	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
-);
+$t_buttons = array(	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ) );
+
+if ( $t_share_link != '' ) {
+	$t_buttons[] = array( $t_share_link, lang_get( 'share_this_bug' ) );
+}
+
+$t_buttons[] = ( array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) );
+
 if( $f_report_stay ) {
 	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
 }

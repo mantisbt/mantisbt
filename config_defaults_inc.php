@@ -2923,6 +2923,23 @@ $g_allow_anonymous_login = OFF;
 $g_anonymous_account = '';
 
 /**
+ * Enable usage of public share URLs. The default setting is OFF.
+ * Enabling this option will show additional "Public Share URL" read-only field 
+ * when viewing the bug (in "Users monitoring this issue" section) as well as 
+ * additional "token" field in SOAP API. The URL can be copied, used and shared. 
+ * Access via public share URL does not require loggin in (e.g. access is anonymous).
+ * This option does not require $g_allow_anonymous_login to be enabled.
+ * When user visits public share URL - he will see a limited read-only view of the 
+ * bug with "Full View" button asking to log in. User may see current status of the 
+ * bug and minor details (such as modification date). Public bugs will show summary, 
+ * description and steps to reproduce in limited view. Private bugs will show only 
+ * summary, but no description and steps to reproduce. No other data nor actions are 
+ * available in the limited view for public URLs.
+ * @global integer $g_public_urls_enabled
+ */
+$g_public_urls_enabled = OFF;	
+
+/**
  * Bug Linking
  * if a number follows this tag it will create a link to a bug.
  * eg. for # a link would be #45
@@ -4205,7 +4222,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique'
+	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
 );
 
 /**

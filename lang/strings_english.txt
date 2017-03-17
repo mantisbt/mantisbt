@@ -1115,6 +1115,7 @@ $s_must_enter_reproducibility = 'You must select a reproducibility.';
 $s_must_enter_summary = 'You must enter a summary.';
 $s_must_enter_description = 'You must enter a description.';
 $s_report_more_bugs = 'Report More Issues';
+$s_share_this_bug = 'View Public Share URL';
 $s_submission_thanks_msg = 'Thank you for your submission.';
 
 # report_bug_advanced_page.php
@@ -1281,6 +1282,8 @@ $s_bug_view_title = 'View Issue Details';
 $s_no_users_monitoring_bug = 'There are no users monitoring this issue.';
 $s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
+$s_bug_share_url = 'Public Share URL';
+$s_switch_to_full_view = 'Full View';
 
 # bug_sponsorship_list_view_inc.php
 $s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
