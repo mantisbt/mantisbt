@@ -217,7 +217,17 @@ $t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == 
 $t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
 $t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
 $t_edit_value           = gpc_get_string( 'value', '' );
-$t_edit_action          = gpc_get_string( 'action', 'action_create' );
+
+$f_edit_action          = gpc_get_string( 'action', MANAGE_CONFIG_ACTION_CREATE );
+# Ensure we exclusively use one of the defined, valid actions (XSS protection)
+$t_valid_actions = array(
+	MANAGE_CONFIG_ACTION_CREATE,
+	MANAGE_CONFIG_ACTION_CLONE,
+	MANAGE_CONFIG_ACTION_EDIT
+);
+$t_edit_action = in_array( $f_edit_action, $t_valid_actions )
+	? $f_edit_action
+	: MANAGE_CONFIG_ACTION_CREATE;
 
 # Apply filters
 
@@ -413,7 +423,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'config_option' => $v_config_id,
 					'type'          => $v_type,
 					'value'         => $v_value,
-					'action'        => 'action_edit',
+					'action'        => MANAGE_CONFIG_ACTION_EDIT,
 				),
 				OFF );
 
@@ -427,7 +437,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 					'config_option' => $v_config_id,
 					'type'          => $v_type,
 					'value'         => $v_value,
-					'action'        => 'action_clone',
+					'action'        => MANAGE_CONFIG_ACTION_CLONE,
 				),
 				OFF );
 
@@ -473,7 +483,7 @@ if( $t_read_write_access ) {
 
 		<!-- Title -->
 		<legend><span>
-			<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>
+			<?php echo lang_get( 'set_configuration_option_action_' . $t_edit_action ) ?>
 		</span></legend>
 
 		<!-- Username -->
@@ -545,7 +555,7 @@ if( $t_read_write_access ) {
 			<!-- Submit button -->
 			<span class="submit-button">
 				<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
-				<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option_' . $t_edit_action ) ?>" />
+				<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option_action_' . $t_edit_action ) ?>" />
 			</span>
 		</fieldset>
 	</form>
