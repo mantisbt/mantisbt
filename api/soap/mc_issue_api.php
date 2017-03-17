@@ -436,8 +436,7 @@ function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_mo
 	# 2. build new monitors ids
 	$t_new_monitor_ids = array();
 	foreach ( $p_monitors as $t_monitor ) {
-		$t_monitor = SoapObjectsFactory::unwrapObject( $t_monitor );
-		$t_new_monitor_ids[] = $t_monitor['id'];
+		$t_new_monitor_ids[] = mci_get_user_id( $t_monitor );
 	}
 
 	# 3. for each of the new monitor ids, add it if it does not already exist
