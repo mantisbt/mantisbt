@@ -79,14 +79,13 @@ $t_updated_bug->additional_information = gpc_get_string( 'additional_information
 $t_updated_bug->build = gpc_get_string( 'build', $t_existing_bug->build );
 $t_updated_bug->category_id = gpc_get_int( 'category_id', $t_existing_bug->category_id );
 $t_updated_bug->description = gpc_get_string( 'description', $t_existing_bug->description );
-$t_due_date = gpc_get_string( 'due_date', null );
-if( $t_due_date !== null ) {
-	if( is_blank( $t_due_date ) ) {
-		$t_updated_bug->due_date = 1;
-	} else {
-		$t_updated_bug->due_date = strtotime( $t_due_date );
-	}
+
+if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id ) ) {
+	$t_updated_bug->due_date = gpc_get_string( 'due_date', $t_existing_bug->due_date );
+} else {
+	$t_updated_bug->due_date = $t_existing_bug->due_date;
 }
+
 $t_updated_bug->duplicate_id = gpc_get_int( 'duplicate_id', 0 );
 $t_updated_bug->eta = gpc_get_int( 'eta', $t_existing_bug->eta );
 $t_updated_bug->fixed_in_version = gpc_get_string( 'fixed_in_version', $t_existing_bug->fixed_in_version );
