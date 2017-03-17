@@ -35,10 +35,11 @@ define( 'API_TOKEN_LENGTH', 32 );
  *
  * @param string $p_token_name The name (description) identifying what the token is going to be used for.
  * @param integer $p_user_id The user id.
+ * @param integer $p_kind API token kind (API_TOKEN_xyz).
  * @return string The plain token.
  * @access public
  */
-function api_token_create( $p_token_name, $p_user_id ) {
+function api_token_create( $p_token_name, $p_user_id, $p_kind = API_TOKEN_GENERIC ) {
 	if( is_blank( $p_token_name ) ) {
 		error_parameters( lang_get( 'api_token_name' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -53,14 +54,19 @@ function api_token_create( $p_token_name, $p_user_id ) {
 	api_token_name_ensure_unique( $t_token_name, $p_user_id );
 
 	$t_plain_token = crypto_generate_uri_safe_nonce( API_TOKEN_LENGTH );
-	$t_hash = api_token_hash( $t_plain_token );
 	$t_date_created = db_now();
 
+	if( API_TOKEN_GENERIC == $p_kind ) {
+		$t_hash = api_token_hash( $t_plain_token );
+	} else {
+		$t_hash = api_token_hash( $p_kind . $t_plain_token );
+	}	
+	
 	db_param_push();
 	$t_query = 'INSERT INTO {api_token}
-					( user_id, name, hash, date_created )
-					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
+					( user_id, name, kind, hash, date_created )
+					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $p_kind, $t_hash, $t_date_created ) );
 
 	return $t_plain_token;
 }
@@ -99,10 +105,11 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
  * Validate a plain token for the specified user.
  * @param string $p_username The user name.
  * @param string $p_token The plain token.
+ * @param integer $p_kind API token kind (API_TOKEN_xyz).
  * @return boolean true valid username and token, false otherwise.
  * @access public
  */
-function api_token_validate( $p_username, $p_token ) {
+function api_token_validate( $p_username, $p_token, $p_kind = API_TOKEN_GENERIC ) {
 	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
 	# This is likely called from code that supports both tokens and passwords.
 	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
@@ -117,11 +124,15 @@ function api_token_validate( $p_username, $p_token ) {
 		return false;
 	}
 
-	$t_encrypted_token = api_token_hash( $p_token );
-
+	if( API_TOKEN_GENERIC == $p_kind ) {
+		$t_encrypted_token = api_token_hash( $p_token );
+	} else {
+		$t_encrypted_token = api_token_hash( $p_kind . $p_token );
+	}	
+	
 	db_param_push();
-	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND hash=' . db_param();
-	$t_result = db_query( $t_query, array( $t_user_id, $t_encrypted_token ) );
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND hash=' . db_param() . ' AND kind=' . db_param();
+	$t_result = db_query( $t_query, array( $t_user_id, $t_encrypted_token, $p_kind ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {

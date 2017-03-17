@@ -138,11 +138,10 @@ function mc_version() {
  * @return array Array of user data for the current API user
  */
 function mc_login( $p_username, $p_password ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
+	$t_user_id = mci_check_login_report_only( $p_username, $p_password );
+	if( false === $t_user_id ) {
 		return mci_soap_fault_login_failed();
 	}
-
 	return mci_user_get( $p_username, $p_password, $t_user_id );
 }
 
@@ -179,9 +178,10 @@ function mci_is_mantis_offline() {
  * handle a soap API login
  * @param string $p_username Login username.
  * @param string $p_password Login password.
+ * @param integer $p_token_kind API token kind (API_TOKEN_xyz).
  * @return integer|false return user_id if successful, otherwise false.
  */
-function mci_check_login( $p_username, $p_password ) {
+function mci_check_login( $p_username, $p_password, $p_token_kind = API_TOKEN_GENERIC ) {
 	if( mci_is_mantis_offline() ) {
 		return false;
 	}
@@ -191,7 +191,7 @@ function mci_check_login( $p_username, $p_password ) {
 	$t_password = ( $p_password === null ) ? '' : $p_password;
 
 	# Validate the token
-	if( api_token_validate( $p_username, $t_password ) ) {
+	if( api_token_validate( $p_username, $t_password, $p_token_kind ) ) {
 		# Token is valid, then login the user without worrying about a password.
 		if( auth_attempt_script_login( $p_username, null ) === false ) {
 			return false;
@@ -204,6 +204,23 @@ function mci_check_login( $p_username, $p_password ) {
 	}
 
 	return auth_get_current_user_id();
+}
+
+/**
+ * handle a "report only" limited soap API login
+ * @param string $p_username Login username.
+ * @param string $p_password Login password.
+ * @return integer|false return user_id if successful, otherwise false.
+ */
+function mci_check_login_report_only( $p_username, $p_password ) {
+	if( mci_is_mantis_offline() ) {
+		return false;
+	}
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( false === $t_user_id ) {
+		$t_user_id = mci_check_login( $p_username, $p_password, API_TOKEN_CRASH_REPORT );
+	}
+	return $t_user_id;
 }
 
 /**

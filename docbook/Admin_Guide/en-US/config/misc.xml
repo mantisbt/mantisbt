@@ -224,5 +224,20 @@
 				</warning>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_max_crash_report_attaches</term>
+			<listitem>
+				<para>Maximum number of file attaches to collect per crash report bug 
+					when bug is opened for submission (e.g. bug is not read-only, not closed, 
+					not fixed, and not switched to $g_bug_collect_reports_status_threshold state). 
+				</para>
+				<para>
+					See also $g_bug_collect_reports_status_threshold option.
+				</para>
+				<para>
+					See also SOAP.mc_issue_report function.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

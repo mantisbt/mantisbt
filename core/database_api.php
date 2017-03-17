@@ -309,9 +309,10 @@ function db_query_bound() {
  * @param integer $p_limit     Number of results to return.
  * @param integer $p_offset    Offset query results for paging.
  * @param boolean $p_pop_param Set to false to leave the parameters on the stack
+ * @param boolean $p_silent    Set to true to supress error messages if query fails
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
+function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true, $p_silent = false ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
 
 	$t_db_type = config_get_global( 'db_type' );
@@ -394,8 +395,10 @@ function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset
 	}
 
 	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
+		if( !$p_silent ) {
+			db_error( $p_query );
+			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
+		}
 		return false;
 	} else {
 		return $t_result;

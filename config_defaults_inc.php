@@ -970,12 +970,12 @@ $g_severity_significant_threshold = MAJOR;
  * os, os_build, platform, version, fixed_in_version, target_version, view_state,
  * summary, sponsorship_total, due_date, description, steps_to_reproduce,
  * additional_info, attachment_count, bugnotes_count, selection, edit,
- * overdue
+ * overdue, hitcount
  *
  * @global array $g_view_issues_page_columns
  */
 $g_view_issues_page_columns = array (
-	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
+	'selection', 'edit', 'priority', 'id', 'sponsorship_total', 'hitcount',
 	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
 	'last_updated', 'summary'
 );
@@ -987,7 +987,7 @@ $g_view_issues_page_columns = array (
  * @global array $g_print_issues_page_columns
  */
 $g_print_issues_page_columns = array (
-	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
+	'selection', 'priority', 'id', 'sponsorship_total', 'hitcount', 'bugnotes_count',
 	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
 	'summary'
 );
@@ -999,7 +999,7 @@ $g_print_issues_page_columns = array (
  * @global array $g_csv_columns
  */
 $g_csv_columns = array (
-	'id', 'project_id', 'reporter_id', 'handler_id', 'priority',
+	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'hitcount',
 	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
@@ -1012,8 +1012,8 @@ $g_csv_columns = array (
  * @global array $g_excel_columns
  */
 $g_excel_columns = array (
-	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity',
-	'reproducibility', 'version', 'projection', 'category_id',
+	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'hitcount',
+	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
 	'last_updated', 'summary', 'status', 'resolution', 'fixed_in_version'
 );
@@ -2069,6 +2069,28 @@ $g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
 $g_bug_closed_status_threshold = CLOSED;
 
 /**
+ * Crash report bug becomes closed for new file attaches
+ * if its status is >= $g_bug_collect_reports_threshold. The bug starts 
+ * accept more bug reports again if its status becomes less than this 
+ * threshold. The default is ACKNOWLEDGED. 
+ * This setting does not affect hitcount increase.
+ * See also SOAP.mc_crash_report function.
+ * @see g_bug_max_crash_report_attaches
+ * @global integer $g_bug_collect_reports_status_threshold
+ */
+$g_bug_collect_reports_status_threshold = ACKNOWLEDGED;
+
+/**
+ * Maximum number of file attaches to collect per crash report bug 
+ * when bug is opened for submission (e.g. bug is not switched to 
+ * $g_bug_collect_reports_status_threshold state). 
+ * See also SOAP.mc_crash_report function.
+ * @see g_bug_collect_reports_status_threshold
+ * @global integer $g_bug_max_crash_report_attaches
+ */
+$g_bug_max_crash_report_attaches = 50;
+
+/**
  * Automatically set status to ASSIGNED whenever a bug is assigned to a person.
  * This is useful for installations where assigned status is to be used when
  * the bug is in progress, rather than just put in a person's queue.
@@ -2300,6 +2322,7 @@ $g_bug_report_page_fields = array(
  *   - tags
  *   - target_version
  *   - view_state
+ *   - hitcount
  *
  * Fields not listed above cannot be shown on the bug view page. Visibility of
  * custom fields is handled via the Manage => Manage Custom Fields
@@ -2340,6 +2363,7 @@ $g_bug_view_page_fields = array (
 	'tags',
 	'target_version',
 	'view_state',
+	'hitcount',
 );
 
 /**

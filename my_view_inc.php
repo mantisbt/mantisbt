@@ -338,7 +338,9 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	<td class="nowrap width-13 my-buglist-id">
 		<?php
 			print_bug_link( $t_bug->id, false );
-
+			if( $t_bug->hitcount > 1 ) {
+				echo ' ^', $t_bug->hitcount;
+			}	
 			echo '<br />';
 
 			# choose color based on status

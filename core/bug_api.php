@@ -84,6 +84,11 @@ class BugData {
 	protected $id;
 
 	/**
+	 * Count / occurencies (for crash reporting)
+	 */
+	protected $hitcount = 0;
+	
+	/**
 	 * Project ID
 	 */
 	protected $project_id = null;
@@ -302,6 +307,7 @@ class BugData {
 			case 'resolution':
 			case 'projection':
 			case 'category_id':
+			case 'hitcount':
 				$p_value = (int)$p_value;
 				break;
 			case 'target_version':
@@ -434,7 +440,7 @@ class BugData {
 	 * @param boolean $p_update_extended Whether to validate extended fields.
 	 * @return void
 	 */
-	function validate( $p_update_extended = true ) {
+	function validate( $p_update_extended = true, &$p_alias = NULL ) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {
 			error_parameters( lang_get( 'summary' ) );
@@ -464,6 +470,84 @@ class BugData {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 			# never returns
 		}
+
+		# Normalize alias field
+		if( !is_null($p_alias) ) {	
+			if( false === $p_alias ) {
+				$p_alias = null;
+			} elseif( is_blank( $p_alias ) ) {
+				$p_alias = null;
+			} else {
+				$p_alias = trim( $p_alias );
+				if( utf8_strlen( $p_alias ) > DB_FIELD_SIZE_BUG_ALIAS ) {
+					$p_alias = utf8_substr( $p_alias, 0, DB_FIELD_SIZE_BUG_ALIAS );
+				}	
+			}
+		}	
+	}
+
+	/**
+	 * Creates alias for the current bug
+	 * @return boolean success or failure
+	 * @access private
+	 * @uses database_api.php
+	 */
+	private function create_bug_alias( $p_alias ) {
+		db_param_push();
+		$t_query = 'INSERT INTO {bug_alias} ( project_id, alias, bug_id ) VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+		# query below will fail silently (and return false) if unique constraint is broken 
+		return db_query( $t_query, array( $this->project_id, $p_alias, $this->id ), -1, -1, true, true /* silent = true */ );
+	}				
+	
+	/**
+	 * Increase occurencies / count ("hitcount") for current alias
+	 * @return integer Bug ID with current alias
+	 * @access private
+	 * @uses database_api.php
+	 */
+	private function upgrade_bug_by_alias( $p_alias ) {
+		db_param_push();
+		$t_query = 'SELECT bug_id FROM {bug_alias} WHERE project_id = ' . db_param() . ' AND alias = ' . db_param();
+		$t_result = db_query( $t_query, array( $this->project_id, $p_alias ) );
+		$t_bug_id = db_result( $t_result );
+		if( false === $t_bug_id ) {
+			# no such bug
+			$t_bug_id = null;
+		} else {
+			# bug exists - then do not create a new bug, just increase Count/Votes, but only if bug is writable and not fixed
+			bug_clear_cache_all( $t_bug_id );
+			db_param_push();
+			if( config_get( 'bug_readonly_status_threshold' ) < config_get( 'bug_closed_status_threshold' ) ) {
+				$t_status = config_get( 'bug_readonly_status_threshold' );
+			} else {
+				$t_status = config_get( 'bug_closed_status_threshold' );
+			}
+			$t_query = 'UPDATE {bug} SET hitcount = hitcount + 1 WHERE id = ' . db_param() . ' AND status < ' . db_param();
+			db_query( $t_query, array( $t_bug_id, $t_status ) );
+		}
+		return $t_bug_id;
+	}				
+	
+	/**
+	 * Creates a text information for the bug.
+	 * @return integer text info identifier
+	 * @access private
+	 * @uses database_api.php
+	 */
+	private function create_text_info() {
+		# Insert text information
+		db_param_push();
+		$t_query = 'INSERT INTO {bug_text}
+					    ( description, steps_to_reproduce, additional_information )
+					  VALUES
+					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
+
+		# Get the id of the text information we just inserted
+		# NOTE: this is guaranteed to be the correct one.
+		# The value LAST_INSERT_ID is stored on a per connection basis.
+
+		return db_insert_id( db_get_table( 'bug_text' ) );
 	}
 
 	/**
@@ -473,8 +557,9 @@ class BugData {
 	 * @uses database_api.php
 	 * @uses lang_api.php
 	 */
-	function create() {
-		self::validate( true );
+	function create( $p_alias = NULL, &$p_aliased = NULL ) {
+		$t_aliased = false;
+		self::validate( true, $p_alias );
 
 		antispam_check();
 
@@ -489,20 +574,35 @@ class BugData {
 		if( is_blank( $this->last_updated ) ) {
 			$this->last_updated = db_now();
 		}
-
-		# Insert text information
-		db_param_push();
-		$t_query = 'INSERT INTO {bug_text}
-					    ( description, steps_to_reproduce, additional_information )
-					  VALUES
-					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
-
-		# Get the id of the text information we just inserted
-		# NOTE: this is guaranteed to be the correct one.
-		# The value LAST_INSERT_ID is stored on a per connection basis.
-
-		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
+		
+		# determinate if bug should be added unconditionally or looked up by alias
+		if( is_null( $p_alias ) ) {
+			# alias not set -> normal creation, always create a new bug
+			$t_bug_id = null;
+			$t_text_id = $this->create_text_info();
+			$t_hitcount = 0;
+		} else {
+			# alias is set -> check if this bug already exists
+			$t_bug_id = $this->upgrade_bug_by_alias( $p_alias );
+			if( !is_null( $t_bug_id ) ) {
+				# bug exists, so return it; insert is not needed
+				$t_aliased = true;
+				$this->assign( $t_bug_id );
+				if( !is_null( $p_aliased ) ) {
+					$p_aliased = $t_aliased;
+				}
+				return $t_bug_id; 
+			}
+			
+			# create new bug
+			$t_hitcount = 1;
+			
+			# use temporal stub for text information until bug is created
+			# this is because bug creation may fail when alias is not NULL and such bug exists 
+			# (e.g. bug was created by someone else after check above, but before insert below)
+			# this will save us from doing DELETE from bug text info table
+			$t_text_id = 0;
+		}
 
 		# check to see if we want to assign this right off
 		$t_starting_status  = config_get( 'bug_submit_status' );
@@ -525,16 +625,17 @@ class BugData {
 		# Check if bug was pre-assigned or auto-assigned.
 		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
 
-		# Insert the rest of the data
+		# Insert the main bug data
 		db_param_push();
 		$t_query = 'INSERT INTO {bug}
-					    ( project_id,reporter_id, handler_id,duplicate_id,
-					      priority,severity, reproducibility,status,
-					      resolution,projection, category_id,date_submitted,
-					      last_updated,eta, bug_text_id,
-					      os, os_build,platform, version,build,
-					      profile_id, summary, view_state, sponsorship_total, sticky, fixed_in_version,
-					      target_version, due_date
+					    ( project_id, reporter_id, handler_id, duplicate_id,
+					      priority, severity, reproducibility, status,
+					      resolution, projection, category_id, date_submitted,
+					      last_updated, eta, bug_text_id, os,
+					      os_build, platform, version, build,
+					      profile_id, summary, view_state, sponsorship_total, 
+					      sticky, fixed_in_version, target_version, due_date,
+					      hitcount
 					    )
 					  VALUES
 					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
@@ -543,19 +644,82 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
-					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
-
-		$this->id = db_insert_id( db_get_table( 'bug' ) );
+					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
+					      ' . db_param() . ')';
+		db_query( $t_query, array( 
+			$this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, 
+			$this->priority, $this->severity, $this->reproducibility, $t_status, 
+			$this->resolution, $this->projection, $this->category_id, $this->date_submitted, 
+			$this->last_updated, $this->eta, $t_text_id, $this->os, 
+			$this->os_build, $this->platform, $this->version, $this->build, 
+			$this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, 
+			$this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date, 
+			$t_hitcount ) );
+			
+		$t_bug_id = db_insert_id( db_get_table( 'bug' ) );
+		$this->id = $t_bug_id;
+		
+		# Create alias
+		if( !is_null( $p_alias ) ) {
+			if( false === $this->create_bug_alias( $p_alias ) ) {
+				# unable to create alias
+				# this is probably because someone has already inserted the bug 
+				# rollback bug creation
+				db_param_push();
+				$t_query = 'DELETE FROM {bug} WHERE id = ' . db_param();
+				db_query( $t_query, array( $t_bug_id ) );
+				bug_clear_cache_all( $t_bug_id );
+				
+				# just increase Votes/Count for the bug
+				$t_bug_id = $this->upgrade_bug_by_alias( $p_alias );
+				if( is_null( $t_bug_id ) ) {
+					# something went seriosly wrong
+					# give up
+					$t_aliased = false;
+					$this->id = null;
+				} else {	
+					# return the bug that was already added
+					$t_aliased = true;
+					$this->assign( $t_bug_id );
+				}
+				if( !is_null( $p_aliased ) ) {
+					$p_aliased = $t_aliased;
+				}
+				return $t_bug_id; 
+			}
+			
+			# alias was created successfully
+			
+			# update text info in bug to real one
+			$t_text_id = $this->create_text_info(); # $t_text_id is 0 before that line
+			db_param_push();
+			$t_query = 'UPDATE {bug} SET bug_text_id = ' . db_param() . ' WHERE id = ' . db_param();
+			db_query( $t_query, array( $t_text_id, $t_bug_id ) );
+			bug_text_clear_cache( $t_bug_id );
+		}	
 
 		# log new bug
-		history_log_event_special( $this->id, NEW_BUG );
+		history_log_event_special( $t_bug_id, NEW_BUG );
 
 		# log changes, if any (compare happens in history_log_event_direct)
-		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
-		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
+		history_log_event_direct( $t_bug_id, 'status', $t_original_status, $t_status );
+		history_log_event_direct( $t_bug_id, 'handler_id', 0, $this->handler_id );
 
-		return $this->id;
+		if( !is_null( $p_aliased ) ) {
+			$p_aliased = $t_aliased;
+		}
+		return $t_bug_id;
+	}
+
+	/**
+	 * Loads object from database
+	 * @param integer $p_bug_id       Integer representing bug identifier.
+	 * @return void
+	 * @access private
+	 */
+	private function assign( $p_bug_id ) {
+		$this->id = $p_bug_id;
+		$this->loadrow( bug_get_extended_row( $p_bug_id ) );
 	}
 
 	/**
@@ -630,6 +794,13 @@ class BugData {
 		}
 
 		$t_old_data = bug_get( $this->id, true );
+
+		# delete alias when changing projects
+		if( $t_old_data->project_id != $this->project_id ) {
+			db_param_push();
+			$t_query = 'DELETE FROM {bug_alias} WHERE bug_id = ' . db_param();
+			db_query( $t_query, array( $this->id ) );
+		}
 
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
@@ -848,6 +1019,49 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	}
 
 	return bug_add_to_cache( $t_row );
+}
+
+/**
+ * Determinates if we can add one more file attachment for this bug (as automated crash report). 
+ * @param integer $p_bug_id Identifies bug 
+ * @return boolean
+ * @access public
+ * @uses config_api.php
+ */
+function bug_allow_more_attaches( $p_bug_id ) {
+	$t_status = bug_get_field( $p_bug_id, 'status' );
+	$t_resolution = bug_get_field( $p_bug_id, 'resolution' );
+	
+	# Bug is closed for submission?
+	if( $t_status >= config_get( 'bug_collect_reports_status_threshold' ) ) {
+		return false;
+	}	
+	
+	# Has too many reports?
+	if( file_bug_attachment_count( $p_bug_id ) > config_get( 'bug_max_crash_report_attaches' ) ) {
+		return false;
+	}	
+	
+	return true;
+}
+
+/**
+ * Return bug id by alias or NULL on error.
+ * @param integer $p_project_id Project id to search alias
+ * @param string $p_alias Identifies bug 
+ * @return integer
+ * @access public
+ */
+function bug_get_id_by_alias( $p_project_id, $p_alias ) {
+	db_param_push();
+	$t_query = 'SELECT bug_id FROM {bug_alias} WHERE project_id = ' . db_param() . ' AND alias = ' . db_param();
+	$t_result = db_query( $t_query, array( $p_project_id, $p_alias ) );
+	$t_bug_id = db_result( $t_result );
+	if( false === $t_bug_id ) {
+		# no such bug
+		$t_bug_id = null;
+	}    
+	return $t_bug_id;
 }
 
 /**
@@ -1403,6 +1617,11 @@ function bug_delete( $p_bug_id ) {
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_bug_id ) );
 
+	# Delete alias 
+	db_param_push();
+	$t_query = 'DELETE FROM {bug_alias} WHERE bug_id=' . db_param();
+	db_query( $t_query, array( $c_bug_id ) );
+
 	bug_clear_cache_all( $p_bug_id );
 }
 
@@ -1736,6 +1955,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'view_state':
 		case 'profile_id':
 		case 'sponsorship_total':
+		case 'hitcount':
 			$c_value = (int)$p_value;
 			break;
 

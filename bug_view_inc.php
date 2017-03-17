@@ -221,6 +221,8 @@ $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_resolution = $t_show_resolution ? string_display_line( get_enum_element( 'resolution', $t_bug->resolution ) ) : '';
 $t_show_summary = in_array( 'summary', $t_fields );
 $t_show_description = in_array( 'description', $t_fields );
+$t_show_hitcount = in_array( 'hitcount', $t_fields ) && ($t_bug->severity != FEATURE) && ($t_bug->reproducibility != REPRODUCIBILITY_NOTAPPLICABLE);
+$t_hitcount = $t_show_hitcount ? $t_bug->hitcount : '';
 
 $t_summary = $t_show_summary ? bug_format_summary( $f_bug_id, SUMMARY_FIELD ) : '';
 $t_description = $t_show_description ? string_display_links( $t_bug->description ) : '';
@@ -458,10 +460,18 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 # Status, Resolution
 #
 
-if( $t_show_status || $t_show_resolution ) {
+if( $t_show_hitcount || $t_show_status || $t_show_resolution ) {
 	echo '<tr>';
 
-	$t_spacer = 2;
+	$t_spacer = 0;
+
+	# Hit count (occurencies for crash reports)
+	if( $t_show_hitcount ) {
+		echo '<th class="bug-hitcount category">', lang_get( 'hitcount' ), '</th>';
+		echo '<td class="bug-hitcount">', $t_hitcount, '</td>';
+	} else {
+		$t_spacer += 2;
+	}
 
 	# Status
 	if( $t_show_status ) {

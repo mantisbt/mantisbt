@@ -510,6 +510,13 @@
   <part name="issue_id" type="xsd:integer" /></message>
 <message name="mc_issue_getResponse">
   <part name="return" type="tns:IssueData" /></message>
+<message name="mc_crash_getRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="project_id" type="xsd:integer" />
+  <part name="alias" type="xsd:string" /></message>
+<message name="mc_crash_getResponse">
+  <part name="return" type="tns:IssueData" /></message>
 <message name="mc_issues_getRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -546,6 +553,17 @@
   <part name="issue" type="tns:IssueData" /></message>
 <message name="mc_issue_addResponse">
   <part name="return" type="xsd:integer" /></message>
+<message name="mc_crash_reportRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="alias" type="xsd:string" />
+  <part name="issue" type="tns:IssueData" />
+  <part name="attach_note" type="xsd:string" />
+  <part name="file_name" type="xsd:string" />
+  <part name="file_type" type="xsd:string" />
+  <part name="content" type="xsd:base64Binary" /></message>
+<message name="mc_crash_reportResponse">
+  <part name="return" type="tns:IssueData" /></message>
 <message name="mc_issue_updateRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -970,6 +988,11 @@
     <input message="tns:mc_issue_getRequest"/>
     <output message="tns:mc_issue_getResponse"/>
   </operation>
+  <operation name="mc_crash_get">
+    <documentation>Get the issue with the specified alias.</documentation>
+    <input message="tns:mc_crash_getRequest"/>
+    <output message="tns:mc_crash_getResponse"/>
+  </operation>
   <operation name="mc_issues_get">
     <documentation>Get all issues matching the ids.</documentation>
     <input message="tns:mc_issues_getRequest"/>
@@ -999,6 +1022,11 @@
     <documentation>Submit the specified issue details.</documentation>
     <input message="tns:mc_issue_addRequest"/>
     <output message="tns:mc_issue_addResponse"/>
+  </operation>
+  <operation name="mc_crash_report">
+    <documentation>Reports a bug/crash in your application. It is similar to mc_issue_add, except it offers grouping by "alias" - application defined bug hash of the crash. If Mantis finds another bug with same alias - its hit count will be increased, new issue will not be created.</documentation>
+    <input message="tns:mc_crash_reportRequest"/>
+    <output message="tns:mc_crash_reportResponse"/>
   </operation>
   <operation name="mc_issue_update">
     <documentation>Update Issue method.</documentation>
@@ -1333,6 +1361,11 @@
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
+  <operation name="mc_crash_get">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_crash_get" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
   <operation name="mc_issues_get">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issues_get" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
@@ -1360,6 +1393,11 @@
   </operation>
   <operation name="mc_issue_add">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_add" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_crash_report">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_crash_report" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>

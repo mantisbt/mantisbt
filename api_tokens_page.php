@@ -80,7 +80,10 @@ print_account_menu( 'api_tokens_page.php' );
 		</div>
 	</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'api_token_create_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round" name="generic_token"                 
+				value="<?php echo lang_get( 'api_token_create_button' ) ?>" />
+			<input type="submit" class="btn btn-primary btn-white btn-round" name="crash_reporting_token" 
+				value="<?php echo lang_get( 'api_token_crash_reporting_create_button' ) ?>" />
 		</div>
 	</div>
 </div>

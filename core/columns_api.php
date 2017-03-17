@@ -529,6 +529,22 @@ function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 }
 
 /**
+ * Print table header for column hitcount
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_hitcount( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-hitcount">';
+	print_view_bug_sort_link( lang_get( 'hitcount_abbreviation' ), 'hitcount', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'hitcount' );
+	echo '</th>';
+}
+
+/**
  * Print table header for column project id
  *
  * @param string  $p_sort           Sort.

@@ -37,12 +37,16 @@ auth_ensure_user_authenticated();
 auth_reauthenticate();
 
 $f_token_name = gpc_get_string( 'token_name' );
+$t_kind = API_TOKEN_GENERIC;
+if ( gpc_isset( 'crash_reporting_token' ) ) {
+	$t_kind = API_TOKEN_CRASH_REPORT;
+}
 
 $t_user_id = auth_get_current_user_id();
 
 user_ensure_unprotected( $t_user_id );
 
-$t_token = api_token_create( $f_token_name, $t_user_id );
+$t_token = api_token_create( $f_token_name, $t_user_id, $t_kind );
 $t_disclose_message = lang_get( 'api_token_disclose_message' );
 $t_display_once_message = lang_get( 'api_token_displayed_once' );
 
