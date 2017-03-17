@@ -515,7 +515,11 @@ if( $t_read_write_access ) {
 <!-- Config Set Form -->
 <div class="space-10"></div>
 
-<?php if( config_can_delete( $t_edit_option ) ){ ?>
+<?php
+	if( config_can_delete( $t_edit_option ) ) {
+		$t_action_label = lang_get( 'set_configuration_option_action_' . $t_edit_action );
+?>
+
 <div id="config-edit-div">
 <form id="config_set_form" method="post" action="adm_config_set.php">
 
@@ -524,7 +528,7 @@ if( $t_read_write_access ) {
 		<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-sliders"></i>
-			<?php echo lang_get( 'set_configuration_option_action_' . $t_edit_action ) ?>
+			<?php echo $t_action_label; ?>
 			</h4>
 		</div>
 
@@ -615,16 +619,20 @@ if( $t_read_write_access ) {
 		<div class="widget-toolbox padding-4 clearfix">
 			<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
 			<input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
-				value="<?php echo lang_get( 'set_configuration_option_action_' . $t_edit_action ) ?>"/>
+				value="<?php echo $t_action_label; ?>"/>
 		</div>
 	</div>
 	</div>
 	</div>
 </form>
 </div>
-<?php } # end if config_can_delete ?>
 
 <?php
-} # end user can change config
-echo '</div>';
+	} # end if config_can_delete
+} # end if user can change config (read-write access)
+?>
+
+</div>
+
+<?php
 layout_page_end();
