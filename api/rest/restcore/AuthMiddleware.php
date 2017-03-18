@@ -23,42 +23,42 @@
  */
 
 require_api( 'authentication_api.php' );
+require_api( 'user_api.php' );
 
 /**
  * A middleware class that handles authentication and authorization to access APIs.
  */
 class AuthMiddleware {
 	public function __invoke( \Slim\Http\Request $request, \Slim\Http\Response $response, callable $next ) {
-		$t_authorization_header = $request->getHeaderLine( 'Authorization' );
-
-		$t_password = '';
+		$t_authorization_header = $request->getHeaderLine( HEADER_AUTHORIZATION );
 
 		if( empty( $t_authorization_header ) ) {
-			$t_username = config_get( 'anonymous_account' );
+			# Since authorization header is empty, check if user is authenticated by checking the cookie
+			# This mode is used when Web UI javascript calls into the API.
+			if( auth_is_user_authenticated() ) {
+				$t_username = user_get_name( auth_get_current_user_id() );
+				$t_password = auth_get_current_user_cookie( /* auto-login-anonymous */ false );
+				$t_login_method = LOGIN_METHOD_COOKIE;
+			} else {
+				$t_username = config_get( 'anonymous_account' );
 
-			if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
-				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token required' );
+				if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
+					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'API token required' );
+				}
+
+				$t_login_method = LOGIN_METHOD_ANONYMOUS;
+				$t_password = '';
 			}
-
-			$t_login_method = 'anonymous';
 		} else {
 			# TODO: add an index on the token hash for the method below
 			$t_user_id = api_token_get_user( $t_authorization_header );
 			if( $t_user_id === false ) {
-				$t_user_id = auth_user_id_from_cookie( $t_authorization_header );
-				if( $t_user_id === false ) {
-					return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
-				}
-
-				# use cookie to login, useful for calls from web API.
-				$t_login_method = 'cookie';
-				$t_password = $t_authorization_header;
-			} else {
-				# use api token
-				$t_login_method = 'api-token';
-				$t_password = $t_authorization_header;
+				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
 			}
 
+			# use api token
+			$t_login_method = LOGIN_METHOD_API_TOKEN;
+			$t_password = $t_authorization_header;
 			$t_username = user_get_name( $t_user_id );
 		}
 
@@ -67,11 +67,14 @@ class AuthMiddleware {
 		}
 
 		# Now that user is logged in, check if they have the right access level to access the REST API.
-		if( !mci_has_readonly_access() ) {
+		# Don't treat web UI calls with cookies as API calls that need to be disabled for certain access levels.
+		if( $t_login_method != LOGIN_METHOD_COOKIE && !mci_has_readonly_access() ) {
 			return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'Higher access level required for API access' );
 		}
 
-		return $next( $request, $response )->withHeader( 'X-Mantis-Username', $t_username )->
-			withHeader( 'X-Mantis-LoginMethod', $t_login_method );
+		$t_force_enable = $t_login_method == LOGIN_METHOD_COOKIE;
+		return $next( $request->withAttribute( ATTRIBUTE_FORCE_API_ENABLED, $t_force_enable ), $response )->
+			withHeader( HEADER_USERNAME, $t_username )->
+			withHeader( HEADER_LOGIN_METHOD, $t_login_method );
 	}
 }
