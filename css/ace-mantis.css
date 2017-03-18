@@ -479,6 +479,10 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+.twitter-typeahead {
+    vertical-align: middle !important;
+}
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {

@@ -355,12 +355,12 @@ $(document).ready( function() {
     });
 
     $('input#tagsinput').on('beforeItemRemove', function(event) {
-        console.log('Removing tag');
+        alert('Removing tag');
         console.log(event.item);
     });
 
-    $('input').on('beforeItemAdd', function(event) {
-        console.log('Adding tag');
+    $('input#tagsinput').on('beforeItemAdd', function(event) {
+        alert('Adding tag');
         console.log(event.item);
     });
 
