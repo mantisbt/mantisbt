@@ -664,10 +664,25 @@ define( 'HTTP_STATUS_SUCCESS', 200 );
 define( 'HTTP_STATUS_CREATED', 201 );
 define( 'HTTP_STATUS_NO_CONTENT', 204 );
 define( 'HTTP_STATUS_BAD_REQUEST', 400 );
+define( 'HTTP_STATUS_UNAUTHORIZED', 401 );
 define( 'HTTP_STATUS_FORBIDDEN', 403 );
 define( 'HTTP_STATUS_NOT_FOUND', 404 );
 define( 'HTTP_STATUS_CONFLICT', 409 );
 define( 'HTTP_STATUS_INTERNAL_SERVER_ERROR', 500 );
 define( 'HTTP_STATUS_UNAVAILABLE', 503 );
+
+# HTTP HEADERS
+define( 'HEADER_AUTHORIZATION', 'Authorization' );
+define( 'HEADER_LOGIN_METHOD', 'X-Mantis-LoginMethod' );
+define( 'HEADER_USERNAME', 'X-Mantis-Username' );
+define( 'HEADER_VERSION', 'X-Mantis-Version' );
+
+# LOGIN METHODS
+define( 'LOGIN_METHOD_COOKIE', 'cookie' );
+define( 'LOGIN_METHOD_API_TOKEN', 'api-token' );
+define( 'LOGIN_METHOD_ANONYMOUS', 'anonymous' );
+
+# SLIM FRAMEWORK ATTRIBUTES
+define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 
 

@@ -47,7 +47,11 @@
 		<varlistentry>
 			<term>$g_webservice_rest_enabled</term>
 			<listitem>
-				<para>Whether the REST API (experimental) is enabled or not.  Default OFF.</para>
+				<para>
+					Whether the REST API (experimental) is enabled or not.  Note that this flag only
+					impacts API Token based auth.  Hence, even if the API is disabled, it can still be
+					used from the Web UI using cookie based authentication.  Default OFF.
+				</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

@@ -104,11 +104,10 @@ $(document).ready( function() {
 			highlight: true
 		}, {
 			source: function (query, undefined, callback) {
-				var fieldName = $this[0].id;
-				var postData = {};
-				postData['entrypoint'] = fieldName + '_get_with_prefix';
-				postData[fieldName] = query;
-				$.getJSON('xmlhttprequest.php', postData, function (data) {
+				var params = {};
+				params['field'] = $this[0].id;
+				params['prefix'] = query;
+				$.getJSON('api/rest/internal/autocomplete', params, function (data) {
 					var results = [];
 					$.each(data, function (i, value) {
 						results.push(value);

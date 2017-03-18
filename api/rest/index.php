@@ -35,6 +35,7 @@ $t_restcore_dir = __DIR__ . '/restcore/';
 require_once( $t_restcore_dir . 'ApiEnabledMiddleware.php' );
 require_once( $t_restcore_dir . 'AuthMiddleware.php' );
 require_once( $t_restcore_dir . 'CacheMiddleware.php' );
+require_once( $t_restcore_dir . 'OfflineMiddleware.php' );
 require_once( $t_restcore_dir . 'VersionMiddleware.php' );
 
 # Hint to re-used mantisconnect code that it is being executed from REST rather than SOAP.
@@ -44,12 +45,14 @@ ApiObjectFactory::$soap = false;
 $g_app = new \Slim\App();
 
 # Add middleware - executed in reverse order of appearing here.
-$g_app->add( new CacheMiddleware() );
-$g_app->add( new AuthMiddleware() );
 $g_app->add( new ApiEnabledMiddleware() );
+$g_app->add( new AuthMiddleware() );
 $g_app->add( new VersionMiddleware() );
+$g_app->add( new OfflineMiddleware() );
+$g_app->add( new CacheMiddleware() );
 
 require_once( $t_restcore_dir . 'config_rest.php' );
+require_once( $t_restcore_dir . 'internal_rest.php' );
 require_once( $t_restcore_dir . 'issues_rest.php' );
 require_once( $t_restcore_dir . 'lang_rest.php' );
 require_once( $t_restcore_dir . 'users_rest.php' );
