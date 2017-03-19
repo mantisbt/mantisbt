@@ -77,9 +77,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function routes( $p_event_name, $p_event_args ) {
 		$t_app = $p_event_args['app'];
 		$t_app->group( plugin_route_group(), function() use ( $t_app ) {
-			$t_app->get( '/summary', function( $req, $res, $args ) {
+			$t_app->get( '/reporters', function( $req, $res, $args ) {
 				if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
-					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( create_reporter_summary() );
+					$t_report_associative = create_reporter_summary();
+					$t_report = array();
+
+					foreach( $t_report_associative as $t_name => $t_count ) {
+						$t_report[] = array( "name" => $t_name, "count" => $t_count );
+					}
+
+					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_report );
 				}
 
 				return $res->withStatus( HTTP_STATUS_FORBIDDEN );
