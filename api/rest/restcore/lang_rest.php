@@ -58,7 +58,7 @@ function rest_lang_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_re
 			continue;
 		}
 
-		$t_localized_strings[$t_string] = array( 'name' => $t_string, 'localized' => lang_get( $t_string ) );
+		$t_localized_strings[] = array( 'name' => $t_string, 'localized' => lang_get( $t_string ) );
 	}
 
 	$t_result = array( 'strings' => $t_localized_strings );
