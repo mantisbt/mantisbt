@@ -96,7 +96,12 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 			$t_value = config_get_enum_as_array( $t_option, $t_value );
 		}
 
-		$t_configs[$t_option] = $t_value;
+		$t_config_pair = array(
+			"option" => $t_option,
+			"value" => $t_value
+		);
+
+		$t_configs[] = $t_config_pair;
 	}
 
 	# wrap all configs into a configs attribute to allow adding other information if needed in the future
@@ -133,7 +138,7 @@ function config_get_enum_as_array( $p_enum_name, $p_enum_string_value ) {
 	foreach( $t_enum_assoc_array as $t_id => $t_name ) {
 		$t_label = MantisEnum::getLocalizedLabel( $p_enum_string_value, $t_localized_enum_string, $t_id );
 		$t_enum_entry = array( 'id' => $t_id, 'name' => $t_name, 'label' => $t_label );
-		$t_enum_array[$t_id] = $t_enum_entry;
+		$t_enum_array[] = $t_enum_entry;
 	}
 
 	return $t_enum_array;
