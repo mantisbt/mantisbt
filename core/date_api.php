@@ -260,7 +260,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  * Converts php date format string to moment.js date format.
  * This function is used primarily with datetime picker widget.
  * @param string  $p_php_format  Php date format string: http://php.net/manual/en/function.date.php
- * @return moment.js format string: http://momentjs.com/docs/#/displaying/format/
+ * @return string in moment.js format: http://momentjs.com/docs/#/displaying/format/
  * @access public
  */
 function convert_date_format_to_momentjs( $p_php_format )
