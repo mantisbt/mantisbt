@@ -55,6 +55,7 @@
  * @author Nitch
  * @author Okras
  * @author Ole Yves
+ * @author Redredsonia
  * @author Sabbah
  * @author Semen
  * @author Volkov
@@ -524,7 +525,7 @@ $s_error_database_version_out_of_date_2 = '<strong>ПРЕДУПРЕЖДЕНИЕ:
 $s_error_code_version_out_of_date = '<strong>ПРЕДУПРЕЖДЕНИЕ:</strong> Структура базы данных более новой версии, нежели чем установленное приложение.  Пожалуйста, обновите приложение.';
 $s_login_page_info = 'Добро пожаловать в журнал задач.';
 $s_login_title = 'Вход';
-$s_save_login = 'Помнить мою учётную запись в этом браузере';
+$s_save_login = 'Оставаться в системе';
 $s_secure_session = 'Защищенная сессия';
 $s_secure_session_long = 'Доступ к этой сессии будет только с данного IP-адреса (не рекомендуется при плохой связи, когда возможны частые обновления ip-адреса).';
 $s_choose_project = 'Выбор проекта';
