@@ -764,6 +764,7 @@ $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
 $s_category_assigned_to = 'Category Owner';
+$s_email_notify_users = 'Any user with access level';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
@@ -800,6 +801,7 @@ $s_access_change_access_label = 'Who can change access levels:';
 $s_default_not_in_flow = 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.';
 
 # manage_config_work_threshold_page
+$s_allowed_access_levels = 'Allowed for any user with access level';
 $s_assign_issue = 'Assign an issue';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
