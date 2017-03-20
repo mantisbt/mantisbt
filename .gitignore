@@ -1,11 +1,3 @@
-# Config files - v1.2.x config files - keep for convenience for dev machines switching branches
-config_inc.php
-custom_constants_inc.php
-custom_functions_inc.php
-custom_relationships_inc.php
-custom_strings_inc.php
-api/soap/mc_config_inc.php
-
 # Config files
 config/
 mantis_offline.php
@@ -54,3 +46,15 @@ library/ezc
 /vendor/
 composer.phar
 
+# Settings below are for convenience when switching branches on Dev machines
+
+# v1.2.x config files
+config_inc.php
+custom_constants_inc.php
+custom_functions_inc.php
+custom_relationships_inc.php
+custom_strings_inc.php
+api/soap/mc_config_inc.php
+
+# REST API introduced in 2.3
+api/rest/
