@@ -685,4 +685,7 @@ define( 'LOGIN_METHOD_ANONYMOUS', 'anonymous' );
 # SLIM FRAMEWORK ATTRIBUTES
 define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 
-
+# Configuration management actions (adm_config_report.php)
+define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
+define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
+define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );

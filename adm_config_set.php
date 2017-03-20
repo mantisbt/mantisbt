@@ -134,7 +134,7 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 	}
 }
 
-if( 'action_edit' === $f_edit_action ){
+if( MANAGE_CONFIG_ACTION_EDIT === $f_edit_action ){
 	# EDIT action doesn't keep original if key values are different.
 	if ( $f_original_config_option !== $f_config_option
 			|| $f_original_user_id !== $f_user_id
