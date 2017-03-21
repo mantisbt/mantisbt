@@ -3235,10 +3235,16 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	# custom field updates
 	$t_custom_fields 		= custom_field_get_ids(); # @todo (thraxisp) This should really be the linked ids, but we don't know the project
-	$f_custom_fields_data 	= array();
+	$f_custom_fields_data 	= $t_filter['custom_fields'];
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
+
+				# check if gpc parameters are present, otherwise skip parsing.
+				if( !gpc_isset( 'custom_field_' . $t_cfid . '_control' ) ) {
+					continue;
+				}
+
 				$f_custom_fields_data[$t_cfid] = array();
 
 				# Get date control property
@@ -3321,6 +3327,12 @@ function filter_gpc_get( array $p_filter = null ) {
 				$f_custom_fields_data[$t_cfid][2] = $t_end;
 
 			} else {
+
+				# check if gpc parameters are present, otherwise skip parsing.
+				if( !gpc_isset( 'custom_field_' . $t_cfid ) ) {
+					continue;
+				}
+
 				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
 				} else {
