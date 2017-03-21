@@ -6,6 +6,20 @@
 	<simpara>
 		<revhistory>
 			<revision>
+				<revnumber>2.2-3</revnumber>
+				<date>Wed Mar 22 2017</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.2.2</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>2.2-2</revnumber>
 				<date>Sun Mar 12 2017</date>
 				<author>
@@ -16,20 +30,6 @@
 				<revdescription>
 					<simplelist>
 						<member>Release 2.2.1</member>
-					</simplelist>
-				</revdescription>
-			</revision>
-			<revision>
-				<revnumber>1.3-18</revnumber>
-				<date>Sun Mar 12 2017</date>
-				<author>
-					<firstname>Victor</firstname>
-					<surname>Boctor</surname>
-					<email>vboctor@mantisbt.org</email>
-				</author>
-				<revdescription>
-					<simplelist>
-						<member>Release 1.3.7</member>
 					</simplelist>
 				</revdescription>
 			</revision>
