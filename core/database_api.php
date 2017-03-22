@@ -743,7 +743,6 @@ function db_prepare_binary_string( $p_string ) {
 
 	switch( $t_db_type ) {
 		case 'mssql':
-		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
@@ -755,8 +754,9 @@ function db_prepare_binary_string( $p_string ) {
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
 			break;
+		case 'mssqlnative':
 		case 'oci8':
-			# Fall through, oci8 stores raw data in BLOB
+			# Fall through, mssqlnative, oci8 store raw data in BLOB
 		default:
 			return $p_string;
 			break;
