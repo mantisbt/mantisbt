@@ -846,7 +846,7 @@ $g_upgrade[199] = null;
 #
 $g_upgrade[200] = array('CreateTableSQL', array( db_get_table( 'api_token' ), "
 	id						I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
-	user_id					I		DEFAULT '0',
+	user_id					I		NOTNULL DEFAULT '0',
 	name					C(128)	NOTNULL,
 	hash					C(128)	NOTNULL,
 	date_created			I		UNSIGNED NOTNULL DEFAULT '0',
