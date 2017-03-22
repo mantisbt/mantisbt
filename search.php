@@ -65,6 +65,7 @@ gpc_make_array( FILTER_PROPERTY_OS_BUILD );
 gpc_make_array( FILTER_PROPERTY_PRIORITY );
 gpc_make_array( FILTER_PROPERTY_MONITOR_USER_ID );
 gpc_make_array( FILTER_PROPERTY_VIEW_STATE );
+gpc_make_array( FILTER_PROPERTY_NOTE_USER_ID );
 
 $t_my_filter = filter_get_default();
 
@@ -95,14 +96,13 @@ $t_my_filter[FILTER_PROPERTY_VERSION] = gpc_get_string_array( FILTER_PROPERTY_VE
 $t_my_filter[FILTER_PROPERTY_MATCH_TYPE] = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
 $t_my_filter[FILTER_PROPERTY_TAG_STRING] = gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
 $t_my_filter[FILTER_PROPERTY_TAG_SELECT] = gpc_get_int( FILTER_PROPERTY_TAG_SELECT, 0 );
+$t_my_filter[FILTER_PROPERTY_NOTE_USER_ID] = gpc_get_string_array( FILTER_PROPERTY_NOTE_USER_ID, $t_meta_filter_any_array );
 
-# Filtering by Date
-# Creation Date
+# Filtering by Creation Date
 $t_my_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED );
 $t_my_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] = gpc_get_string( FILTER_PROPERTY_START_DATE_SUBMITTED, '' );
 $t_my_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] = gpc_get_string( FILTER_PROPERTY_END_DATE_SUBMITTED, '' );
-
-# Last Update Date
+# Filtering by Last Update Date
 $t_my_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE );
 $t_my_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] = gpc_get_string( FILTER_PROPERTY_LAST_UPDATED_START_DATE, '' );
 $t_my_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] = gpc_get_string( FILTER_PROPERTY_LAST_UPDATED_END_DATE, '' );
