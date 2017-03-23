@@ -45,6 +45,7 @@
  * @author MeskoBalazs
  * @author R-Joe
  * @author Sucy
+ * @author Tacsipacsi
  */
 
 $s_actiongroup_menu_move = 'Mozgatás';
@@ -501,7 +502,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Figyelmeztetés:</strong> az 
 $s_error_code_version_out_of_date = '<strong>Figyelmeztetés:</strong> az adatbázis struktúra frissebb, mint a telepített programverzió. Kérlek frissítsd a programot.';
 $s_login_page_info = 'Üdvözöljük az ügykezelőben.';
 $s_login_title = 'Bejelentkezés';
-$s_save_login = 'Emlékezzen rám ezen a számítógépen';
+$s_save_login = 'Maradjak bejelentkezve';
 $s_secure_session = 'Biztonságos munkamenet';
 $s_secure_session_long = 'A munkameneted csak erről az IP címről legyen használható.';
 $s_choose_project = 'Válasszon projektet';
