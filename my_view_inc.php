@@ -265,7 +265,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 
 # -- ====================== BUG LIST ========================= --
 ?>
-<div id="<?php echo $t_box_title ?>" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div id="<?php echo $t_box_title ?>" class="widget-box widget-color-main <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-list-alt"></i>

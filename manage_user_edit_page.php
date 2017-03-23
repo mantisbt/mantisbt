@@ -100,7 +100,7 @@ print_manage_menu( 'manage_user_page.php' );
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
 	<form id="edit-user-form" method="post" action="manage_user_update.php">
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-user"></i>
@@ -308,7 +308,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 	!user_is_administrator( $t_user_id ) ) {
 ?>
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 <i class="ace-icon fa fa-user"></i>

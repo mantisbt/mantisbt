@@ -131,7 +131,7 @@ print_account_menu( 'account_page.php' );
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-user"></i>

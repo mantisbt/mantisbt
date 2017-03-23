@@ -83,7 +83,7 @@ if( profile_is_global( $f_profile_id ) ) {
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <form method="post" action="account_prof_update.php">
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-user"></i>

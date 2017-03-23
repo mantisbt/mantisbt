@@ -89,7 +89,7 @@ function get_section_begin_mcwt( $p_section_name ) {
 	global $g_access_levels;
 
 	echo '<div class="space-10"></div>';
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
 	echo '            <i class="ace-icon fa fa-sliders"></i>';

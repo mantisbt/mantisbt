@@ -240,7 +240,7 @@ if( $t_multiple_projects ) {
 		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<?php echo $t_question_title ?>

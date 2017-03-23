@@ -234,7 +234,7 @@ $t_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 #
 
 echo '<div class="col-md-12 col-xs-12">';
-echo '<div class="widget-box widget-color-blue2">';
+echo '<div class="widget-box widget-color-main">';
 echo '<div class="widget-header widget-header-small">';
 echo '<h4 class="widget-title lighter">';
 echo '<i class="ace-icon fa fa-bars"></i>';

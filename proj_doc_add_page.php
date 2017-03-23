@@ -64,7 +64,7 @@ print_doc_menu('proj_doc_add_page.php');
 <div class="form-container">
 <form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
 	<?php echo form_security_field( 'proj_doc_add' ) ?>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-upload"></i>

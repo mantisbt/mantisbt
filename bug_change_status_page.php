@@ -134,7 +134,7 @@ layout_page_begin();
 	<fieldset>
 
 	<?php echo form_security_field( 'bug_update' ) ?>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php echo lang_get( $t_status_label . '_bug_title' ) ?>

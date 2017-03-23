@@ -96,7 +96,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 	<div class="space-10"></div>
 	<div id="manage-proj-update-div" class="form-container">
 	<form id="manage-proj-update-form" method="post" action="manage_proj_update.php">
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<i class="ace-icon fa fa-puzzle-piece "></i>
@@ -228,7 +228,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div id="manage-project-update-subprojects-div" class="form-container">
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-share-alt"></i>
@@ -279,7 +279,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<form id="manage-project-update-subprojects-form" action="manage_proj_update_children.php" method="post">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-share-alt"></i>
@@ -376,7 +376,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div id="categories" class="form-container">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-sitemap"></i>
@@ -465,7 +465,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div id="project-versions-div" class="form-container">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-share-alt"></i>
@@ -571,7 +571,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div id="customfields" class="form-container">
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-flask"></i>
@@ -689,7 +689,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div id="manage-project-users-div" class="form-container">
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-users"></i>
@@ -830,7 +830,7 @@ if( count( $t_users ) > 0 ) { ?>
 	<div class="space-10"></div>
 	<div class="form-container">
 	<form id="manage-project-add-user-form" method="post" action="manage_proj_user_add.php">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-user"></i>

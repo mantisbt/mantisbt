@@ -2355,7 +2355,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		?>
 
-		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div id="filter" class="widget-box widget-color-main <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-filter"></i>

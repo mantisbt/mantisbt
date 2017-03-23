@@ -68,7 +68,7 @@ layout_page_begin();
 <div id="select-project-div" class="form-container">
 	<form id="select-project-form" method="post" action="set_project.php">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-puzzle-piece"></i>

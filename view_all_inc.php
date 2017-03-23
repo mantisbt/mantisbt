@@ -87,7 +87,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 <div class="space-10"></div>
 <form id="bug_action" method="post" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-columns"></i>

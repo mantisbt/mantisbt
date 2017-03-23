@@ -312,7 +312,7 @@ $t_result = db_query( $t_query, $t_param );
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="save" value="1" />
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 	<i class="ace-icon fa fa-filter"></i>
@@ -389,7 +389,7 @@ $t_result = db_query( $t_query, $t_param );
 <div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 <i class="ace-icon fa fa-database"></i>
@@ -524,7 +524,7 @@ if( $t_read_write_access ) {
 <form id="config_set_form" method="post" action="adm_config_set.php">
 
 		<!-- Title -->
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-sliders"></i>

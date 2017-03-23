@@ -113,7 +113,7 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 		}
 	?>
 
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-filter"></i>

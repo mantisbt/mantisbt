@@ -60,7 +60,7 @@ $t_types = array(
 <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
     <form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
-        <div class="widget-box widget-color-blue2">
+        <div class="widget-box widget-color-main">
         <div class="widget-body">
         <div class="widget-main no-padding">
             <div class="table-responsive">

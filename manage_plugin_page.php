@@ -85,7 +85,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 		<fieldset>
 		<?php echo form_security_field( 'manage_plugin_update' ) ?>
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-cubes"></i>
@@ -227,7 +227,7 @@ if( 0 < count( $t_plugins_available ) ) {
 ?>
 
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-cube"></i>

@@ -61,7 +61,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 <div class="space-10"></div>
 <div id="manage-user-create-div" class="form-container">
 	<form id="manage-user-create-form" method="post" action="manage_user_create.php">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-user"></i>

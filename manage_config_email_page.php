@@ -211,7 +211,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 	echo '<div class="space-10"></div>';
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
 	echo '            <i class="ace-icon fa fa-envelope"></i>';

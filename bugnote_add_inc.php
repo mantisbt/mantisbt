@@ -71,7 +71,7 @@ require_api( 'lang_api.php' );
 	<?php print_dropzone_form_data() ?>>
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div id="bugnote_add" class="widget-box widget-color-main <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-comment"></i>

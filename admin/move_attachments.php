@@ -306,7 +306,7 @@ if( null == $f_project_to_move ) {
 		foreach( $t_moved as $t_row ) {
 			$t_row = $t_row[0];
 
-			echo '<div class="widget-box widget-color-blue2">';
+			echo '<div class="widget-box widget-color-main">';
 			echo '<div class="widget-header widget-header-small">';
 			echo '<h4 class="widget-title lighter">';
 			echo '<i class="ace-icon fa fa-paperclip"></i>';

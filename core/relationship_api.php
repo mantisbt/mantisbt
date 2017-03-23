@@ -879,7 +879,7 @@ function relationship_view_box( $p_bug_id ) {
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	?>
-	<div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div id="relationships" class="widget-box widget-color-main <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-sitemap"></i>

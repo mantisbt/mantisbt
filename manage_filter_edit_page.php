@@ -97,7 +97,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type'] ?>" >
 	<?php echo form_security_field( 'manage_filter_edit_update' ) ?>
 
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-filter"></i>

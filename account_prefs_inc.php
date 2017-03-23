@@ -99,7 +99,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 <div id="account-prefs-update-div" class="form-container">
 	<form id="account-prefs-update-form" method="post" action="account_prefs_update.php" class="form-inline">
 
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-sliders"></i>

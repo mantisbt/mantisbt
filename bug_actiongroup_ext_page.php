@@ -59,7 +59,7 @@ bug_group_action_print_top();
 <form method="post" action="bug_actiongroup_ext.php">
 	<?php echo form_security_field( $t_form_name ); ?>
 	<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php bug_group_action_print_title( $t_external_action ); ?>

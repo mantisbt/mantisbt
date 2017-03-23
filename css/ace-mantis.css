@@ -479,6 +479,15 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+/* widget color definitions */
+.widget-color-main {
+    border-color: #5090C1;
+}
+.widget-color-main > .widget-header {
+	/* color: #FFFFFF !important; */
+    border-color: #5090C1;
+    background: #5090C1;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {

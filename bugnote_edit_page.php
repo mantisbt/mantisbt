@@ -117,7 +117,7 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <form method="post" action="bugnote_update.php">
 <?php echo form_security_field( 'bugnote_update' ) ?>
 <input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-comment"></i>

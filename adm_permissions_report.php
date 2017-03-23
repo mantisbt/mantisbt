@@ -63,7 +63,7 @@ function get_section_begin_apr( $p_section_name ) {
 	$t_output = '<div class="col-md-12 col-xs-12">';
 	$t_output .= '<div class="space-10"></div>';
 
-	$t_output .= '<div class="widget-box widget-color-blue2">';
+	$t_output .= '<div class="widget-box widget-color-main">';
 	$t_output .= '   <div class="widget-header widget-header-small">';
 	$t_output .= '        <h4 class="widget-title lighter uppercase">';
 	$t_output .= '            <i class="ace-icon fa fa-lock"></i>';

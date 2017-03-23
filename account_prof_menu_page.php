@@ -93,7 +93,7 @@ if( $g_global_profiles ) {
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
 		<fieldset>
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-file-o"></i>
@@ -165,7 +165,7 @@ if( $g_global_profiles ) {
 
 <div id="account-profile-update-div" class="form-container">
 	<form id="account-profile-update-form" method="post" action="account_prof_update.php">
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-file-o"></i>

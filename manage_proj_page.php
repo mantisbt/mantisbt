@@ -83,7 +83,7 @@ print_manage_menu( 'manage_proj_page.php' );
 
 <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-puzzle-piece"></i>
@@ -187,7 +187,7 @@ print_manage_menu( 'manage_proj_page.php' );
 
 	<div id="categories" class="form-container">
 
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-sitemap"></i>

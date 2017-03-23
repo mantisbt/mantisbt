@@ -62,7 +62,7 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
-<div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div id="history" class="widget-box widget-color-main <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		<i class="ace-icon fa fa-history"></i>

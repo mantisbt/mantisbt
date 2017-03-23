@@ -164,7 +164,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 	echo '<div class="space-10"></div>';
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
 	echo '            <i class="ace-icon fa fa-random"></i>';
@@ -254,7 +254,7 @@ function section_end() {
  */
 function threshold_begin( $p_section_name ) {
 	echo '<div class="space-10"></div>';
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
 	echo '            <i class="ace-icon fa fa-sliders"></i>';
@@ -331,7 +331,7 @@ function threshold_end() {
  */
 function access_begin( $p_section_name ) {
 	echo '<div class="space-10"></div>';
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
 	echo '            <i class="ace-icon fa fa-lock"></i>';
@@ -520,7 +520,7 @@ threshold_row( 'bug_reopen_status' );
 threshold_end();
 
 if( '' <> $t_validation_result ) {
-	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-main">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '	<h4 class="widget-title lighter">';
 	echo '		<i class="ace-icon fa fa-hand-o-right"></i>';

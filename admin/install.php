@@ -149,7 +149,7 @@ if( 0 == $t_install_state || 2 == $t_install_state ) {
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Checking Installation
@@ -522,7 +522,7 @@ if( 1 == $t_install_state ) {
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php echo
@@ -734,7 +734,7 @@ if( 3 == $t_install_state ) {
 	?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Installing Database
@@ -1047,7 +1047,7 @@ if( 5 == $t_install_state ) {
 
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Write Configuration File(s)
@@ -1182,7 +1182,7 @@ if( 6 == $t_install_state ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Checking Installation
@@ -1288,7 +1288,7 @@ if( 7 == $t_install_state ) {
 	?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Installation Complete
@@ -1326,7 +1326,7 @@ if( $g_failed && $t_install_state != 1 ) {
 	?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Installation Failed

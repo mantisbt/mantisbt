@@ -98,7 +98,7 @@ function print_version_header( $p_version_id ) {
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
+	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-main ' . $t_block_css . '">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '<h4 class="widget-title lighter">';
 	echo '<i class="ace-icon fa fa-retweet"></i>';

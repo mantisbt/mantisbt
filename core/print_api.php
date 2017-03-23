@@ -502,7 +502,7 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	$t_body = string_display_links( $p_body );
 	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
 
-	$t_news_css = VS_PRIVATE == $p_view_state ? 'widget-color-red' : 'widget-color-blue2';
+	$t_news_css = VS_PRIVATE == $p_view_state ? 'widget-color-red' : 'widget-color-main';
 	?>
 
 	<div class="space-10"></div>

@@ -102,7 +102,7 @@ $t_ids = email_queue_get_ids();
 
 if( count( $t_ids ) > 0 ) {
 ?>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 	<i class="ace-icon fa fa-envelope"></i>
@@ -153,7 +153,7 @@ if( count( $t_ids ) > 0 ) {
 	echo '<p class="lead">Email Queue Empty</p>';
 }
 ?>
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-body">
 	<div class="widget-main">
 		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>">

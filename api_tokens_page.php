@@ -51,7 +51,7 @@ print_account_menu( 'api_tokens_page.php' );
 <div id="api-token-create-div" class="form-container">
 	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-plus"></i>
@@ -97,7 +97,7 @@ if ( count( $t_tokens ) > 0 ) {
 	<div class="space-10"></div>
 
 	<div id="api-token-list-div" class="form-container">
-	<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-main">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-ticket"></i>

@@ -16,7 +16,7 @@ print_manage_menu( 'manage_plugin_page.php' );
 <div class="form-container">
 <form action="<?php echo plugin_page( 'config' ) ?>" method="post">
 <fieldset>
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
     <h4 class="widget-title lighter">
         <i class="ace-icon fa fa-exchange"></i>

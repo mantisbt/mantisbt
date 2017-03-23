@@ -56,7 +56,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 <input type="hidden" name="project_id" value="<?php echo $t_project_id;?>" />
 
-<div class="widget-box widget-color-blue2">
+<div class="widget-box widget-color-main">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
 <i class="ace-icon fa fa-upload"></i>

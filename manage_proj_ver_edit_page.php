@@ -70,7 +70,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 	<div class="space-10"></div>
 	<div id="manage-proj-version-update-div" class="form-container">
 	<form id="manage-proj-version-update-form" method="post" action="manage_proj_ver_update.php">
-		<div class="widget-box widget-color-blue2">
+		<div class="widget-box widget-color-main">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-share-alt"></i>
