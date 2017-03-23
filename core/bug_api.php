@@ -2221,9 +2221,8 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 			continue;
 		}
 
-		if( strncmp( $t_column, 'custom_', 7 ) === 0 ) {
-			# @TODO cproensa, this will we replaced with column_is_custom_field()
-			$t_cf_name = utf8_substr( $t_column, 7 );
+		if( column_is_custom_field( $t_column ) ) {
+			$t_cf_name = column_get_custom_field_name( $t_column );
 			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
 			if( $t_cf_id ) {
 				$t_custom_field_ids[] = $t_cf_id;

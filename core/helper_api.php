@@ -503,6 +503,17 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
 	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
 
+	# Fix column names for custom field columns that may be stored as lowercase in configuration. See issue #17367
+	# If the system was working fine with lowercase names, then database is case-insensitive, eg: mysql
+	# Fix by forcing a search with current name to get the id, then get the actual name by looking up this id
+	foreach( $t_columns as &$t_column_name ) {
+		$t_cf_name = column_get_custom_field_name( $t_column_name );
+		if( $t_cf_name ) {
+			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
+			$t_column_name = column_get_custom_field_column_name( $t_cf_id );
+		}
+	}
+
 	if( !$p_viewable_only ) {
 		return $t_columns;
 	}
