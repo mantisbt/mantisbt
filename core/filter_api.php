@@ -3096,13 +3096,13 @@ function filter_gpc_get( array $p_filter = null ) {
 		$f_sort = implode( ',', $t_new_sort_array );
 		$f_dir = implode( ',', $t_new_dir_array );
 	} elseif( null !== $f_sort_add ) {
-		# this parameter has to be pushed in fron t of current sort set
+		# this parameter has to be pushed in front of current sort set
 		$f_dir_add = gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_add', '' );
 		# Plain concatenation. Empty fields, or extra commas will be cleaned by ensure_valid_filter
 		$f_sort = $f_sort_add . ',' . $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
 		$f_dir = $f_dir_add . ',' . $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 	} else {
-		# use the defaluts
+		# use the defaults
 		$f_sort = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
 		$f_dir = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 	}
