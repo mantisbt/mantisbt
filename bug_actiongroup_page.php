@@ -369,7 +369,7 @@ if( $t_multiple_projects ) {
 						<?php echo lang_get( 'add_bugnote_title' ); ?>
 					</th>
 					<td>
-						<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
+						<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
 					</td>
 				</tr>
 <?php
