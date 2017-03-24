@@ -700,7 +700,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
  * @param string $p_img_class css class to use with the img tag
  * @return null
  */
-function layout_navbar_user_avatar( $p_img_class = 'nav-user-photo' ) {
+function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
 	$t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
 
 	if( OFF === config_get( 'show_avatar' ) ) {

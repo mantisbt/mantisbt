@@ -214,13 +214,13 @@ pre {
     position: relative;
 }
 
-.ace-nav .nav-user-photo-40-avatar-container {
+.ace-nav .nav-avatar-container-40 {
     width: 48px; 
     height: 40px;
     float: left;
 }
 
-.ace-nav .nav-user-photo-40-avatar {
+.ace-nav .nav-avatar-40 {
     margin: -4px 8px 0 0;
     border-radius: 100%;
     border: 2px solid #FFF;
@@ -228,12 +228,12 @@ pre {
     max-height: 40px;
     border-radius: 4px !important;    
 }
-.profile-activity-40-avatar {
+.profile-activity-avatar-40 {
     border-radius: 15% !important;
     margin-bottom: 6px !important;
 }
 
-.profile-activity-40-avatar_container {
+.profile-activity-avatar-container-40 {
     width: 48px; 
     line-height: 40px;
     float: left;
@@ -244,7 +244,7 @@ pre {
     margin-bottom: 0 !important;
 }
 
-.bugnote-80-avatar {
+.bugnote-avatar-80 {
     border: 2px solid #c9d6e5;
     border-radius: 15%;
     box-shadow: none;
@@ -253,7 +253,7 @@ pre {
     max-height: 80px;
 }
 
-.bugnote-80-avatar-container {
+.bugnote-avatar-container-80 {
     line-height: 80px;
     width: 84px;
     text-align: center;
