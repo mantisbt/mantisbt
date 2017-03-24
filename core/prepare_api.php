@@ -138,7 +138,6 @@ function prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size) {
  * @param integer $p_size           Image maximum size.
  * @return the HTML string of the avatar.
  */
-
 function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
 	if( $p_avatar === null ) {
 		return '';
