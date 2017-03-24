@@ -175,7 +175,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 </table>
 <span class="center">
 	<br />
-	<input name="type" type="hidden" value="<?php echo $f_file_type ?>" />
+	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type); ?>" />
 	<input type="submit" class="button" value="Move Attachments" />
 </span>
 
