@@ -182,24 +182,15 @@ function print_successful_redirect( $p_redirect_to ) {
 /**
  * Print avatar image for the given user ID
  *
- * @param integer $p_user_id A user identifier.
- * @param integer $p_size    Image pixel size.
+ * @param integer $p_user_id 		A user identifier.
+ * @param string $p_class_prefix	CSS classs prefix.
+ * @param integer $p_size    		Image pixel size.
  * @return void
  */
-function print_avatar( $p_user_id, $p_size = 80 ) {
+function print_avatar( $p_user_id, $p_class_prefix, $p_size = 80 ) {
 	$t_avatar = Avatar::get( $p_user_id, $p_size );
-	if( $t_avatar === null ) {
-		return;
-	}
 
-	$t_image = htmlspecialchars( $t_avatar->image );
-	$t_link = htmlspecialchars( $t_avatar->link );
-	$t_text = htmlspecialchars( $t_avatar->text );
-
-	echo '<a rel="nofollow" href="' . $t_link . '">' .
-		'<img class="avatar" src="' . $t_image . '" alt="' .
-		$t_text . '" width="' . $p_size . '" height="' .
-		$p_size . '" /></a>';
+	echo prepare_avatar( $t_avatar, $p_class_prefix, $p_size );
 }
 
 /**
