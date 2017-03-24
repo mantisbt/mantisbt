@@ -101,11 +101,11 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 <div class="space-10"></div>
 <div class="col-md-12 col-xs-12">
 
-	<form method="post" name="filters" id="filters_form_open" class="form-control" action="<?php echo $t_action; ?>">
+	<form method="post" name="filters" id="filters_form_open" action="<?php echo $t_action; ?>">
 
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="hidden" name="type" value="1" />
-	<input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
+	<input type="hidden" name="view_type" value="<?php echo $t_filter['_view_type']; ?>" />
 	<?php
 		if( $f_for_screen == false ) {
 			print '<input type="hidden" name="print" value="1" />';

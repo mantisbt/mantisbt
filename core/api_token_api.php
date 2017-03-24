@@ -28,8 +28,6 @@
 
 require_api( 'crypto_api.php' );
 
-define( 'API_TOKEN_LENGTH', 32 );
-
 /**
  * Create an API token
  *
@@ -93,6 +91,37 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 		error_parameters( $p_token_name );
 		trigger_error( ERROR_API_TOKEN_NAME_NOT_UNIQUE, ERROR );
 	}
+}
+
+/**
+ * Get user information given an API token.
+ *
+ * @param string $p_token The plain token.
+ * @return int|bool user id or false if no match found.
+ * @access public
+ */
+function api_token_get_user( $p_token ) {
+	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
+	# This is likely called from code that supports both tokens and passwords.
+	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+		return false;
+	}
+
+	$t_encrypted_token = api_token_hash( $p_token );
+
+	db_param_push();
+
+	# TODO: add an index on just the API token hash
+	$t_query = 'SELECT * FROM {api_token} WHERE hash=' . db_param();
+	$t_result = db_query( $t_query, array( $t_encrypted_token ) );
+
+	$t_row = db_fetch_array( $t_result );
+	if( $t_row ) {
+		api_token_touch( $t_row['id'] );
+		return $t_row['user_id'];
+	}
+
+	return false;
 }
 
 /**

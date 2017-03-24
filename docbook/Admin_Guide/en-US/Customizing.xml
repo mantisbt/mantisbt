@@ -16,6 +16,13 @@
 			next release.
 		</para>
 
+		<note><para>The standard MantisBT language strings are sometimes reused
+			in different contexts.
+			If you are planning to override some strings to meet your specific
+			requirements, make sure to analyze where they are used to avoids
+			unexpected issues.
+		</para></note>
+
 		<para>Two formats are supported within this file:
 		</para>
 

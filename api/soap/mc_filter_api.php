@@ -77,10 +77,10 @@ $g_soap_api_to_filter_names = array(
 function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 	$t_result = array();
 	foreach( mci_filter_db_get_available_queries( $p_project_id, $t_user_id ) as $t_filter_row ) {
@@ -111,12 +111,12 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
@@ -125,7 +125,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid Filter' );
+		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
 	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -159,10 +159,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
@@ -171,7 +171,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid Filter' );
+		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
 	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -222,12 +222,12 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		}
 		// user has not access right to any project
 		if( count( $t_project_id ) < 1 ) {
-			return mci_soap_fault_access_denied( $p_user_id );
+			return mci_fault_access_denied( $p_user_id );
 		}
 	}
 	else {
 		if( !mci_has_readonly_access( $p_user_id, ALL_PROJECTS ) ) {
-			return mci_soap_fault_access_denied( $p_user_id );
+			return mci_fault_access_denied( $p_user_id );
 		}
 
 		$t_project_id = array( ALL_PROJECTS );
@@ -295,7 +295,7 @@ function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_sea
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
@@ -323,7 +323,7 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
@@ -353,7 +353,7 @@ function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search,
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);

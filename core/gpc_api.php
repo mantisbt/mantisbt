@@ -173,14 +173,9 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
-			# date field is three dropdowns that default to 0
-			# Dropdowns are always present, so check if they are set
-			return gpc_isset( $t_field_name . '_day' ) &&
-				gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
-				gpc_isset( $t_field_name . '_month' ) &&
-				gpc_get_int( $t_field_name . '_month', 0 ) != 0 &&
-				gpc_isset( $t_field_name . '_year' ) &&
-				gpc_get_int( $t_field_name . '_year', 0 ) != 0 ;
+			# date field uses datetime picker widget
+			return gpc_isset( $t_field_name . '_date' ) &&
+				!is_blank( gpc_get_string( $t_field_name . '_date' ) );
 		case CUSTOM_FIELD_TYPE_STRING:
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 		case CUSTOM_FIELD_TYPE_FLOAT:
@@ -218,19 +213,8 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
-			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
-			$t_year = gpc_get_int( $p_var_name . '_year', 0 );
-			if( ( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
-				if( $p_default == null ) {
-					return '';
-				} else {
-					return $p_default;
-				}
-			} else {
-				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
-			}
-			break;
+			$t_date = gpc_get_string( $p_var_name . '_date', $p_default );
+			return strtotime( $t_date );
 		default:
 			return gpc_get_string( $p_var_name, $p_default );
 	}

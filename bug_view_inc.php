@@ -363,33 +363,25 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<tr class="hidden"></tr>';
 }
 
+
 #
-# Reporter
+# Reporter, Handler, Due Date
 #
 
-if( $t_show_reporter ) {
+if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 4;
+	$t_spacer = 0;
 
 	# Reporter
-	echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
-	echo '<td class="bug-reporter">';
-	print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
-	echo '</td>';
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
-	echo '</tr>';
-}
-
-#
-# Handler, Due Date
-#
-
-if( $t_show_handler || $t_show_due_date ) {
-	echo '<tr>';
-
-	$t_spacer = 2;
+	if( $t_show_reporter ) {
+		echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
+		echo '<td class="bug-reporter">';
+		print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
+		echo '</td>';
+	} else {
+		$t_spacer += 2;
+	}
 
 	# Handler
 	if( $t_show_handler ) {
@@ -414,7 +406,10 @@ if( $t_show_handler || $t_show_due_date ) {
 		$t_spacer += 2;
 	}
 
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	if( $t_spacer > 0 ) {
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	}
+
 	echo '</tr>';
 }
 

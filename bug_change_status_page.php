@@ -83,6 +83,7 @@ $f_change_type = gpc_get_string( 'change_type', BUG_UPDATE_TYPE_CHANGE_STATUS );
 $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
+$t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -160,9 +161,9 @@ layout_page_begin();
 		<tbody>
 <?php
 	$t_current_resolution = $t_bug->resolution;
-	$t_bug_is_open = $t_current_resolution < $t_resolved;	
+	$t_bug_resolution_is_fixed = $t_current_resolution >= $t_resolution_fixed;
 
-	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || $t_bug_is_open ) ) {
+	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || !$t_bug_resolution_is_fixed ) ) {
 ?>
 <!-- Resolution -->
 			<tr>
@@ -172,7 +173,7 @@ layout_page_begin();
 				<td>
 					<select name="resolution" class="input-sm">
 			<?php
-				$t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
+				$t_resolution = $t_bug_resolution_is_fixed ? $t_current_resolution : $t_resolution_fixed;
 
 				$t_relationships = relationship_get_all_src( $f_bug_id );
 				foreach( $t_relationships as $t_relationship ) {
@@ -240,9 +241,9 @@ layout_page_begin();
 			<?php echo lang_get( 'due_date' ) ?>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16"
+			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="20"
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
-				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
+				data-picker-format="<?php echo convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) ?>"
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
 			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
@@ -359,7 +360,7 @@ layout_page_begin();
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
 				<td>
-					<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
+					<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
 				</td>
 			</tr>
 <?php
@@ -385,7 +386,7 @@ layout_page_begin();
 
 </tbody>
 </table>
-<input type="hidden" name="action_type" value="<?php echo $f_change_type; ?>" />
+<input type="hidden" name="action_type" value="<?php echo string_attribute( $f_change_type ); ?>" />
 
 </div>
 </div>
