@@ -258,27 +258,6 @@ print_account_menu( 'account_page.php' );
 					<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?>
 				</td>
 			</tr>
-			<?php
-			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
-			if( count( $t_projects ) > 0 ) {
-				echo '<tr>';
-				echo '<td class="category">' . lang_get( 'assigned_projects' ) . '</td>';
-				echo '<td>';
-				foreach( $t_projects AS $t_project_id=>$t_project ) {
-					$t_project_name = string_attribute( $t_project['name'] );
-					$t_view_state = $t_project['view_state'];
-					$t_access_level = $t_project['access_level'];
-					$t_access_level = get_enum_element( 'access_levels', $t_access_level );
-					$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
-
-					echo '<div class="col-md-3 col-xs-6 no-padding">' . $t_project_name . '</div> <div class="col-md-9 col-xs-6"><span class="label label-default">' . $t_access_level . '</span><span class="bold padding-left-4">' . $t_view_state . '</span></div>';
-					echo '<div class="clearfix"></div>';
-					echo '<div class="space-4"></div>';
-				}
-				echo '</td>';
-				echo '</tr>';
-			}
-			?>
 				</fieldset>
 			</table>
 		</div>
@@ -293,6 +272,51 @@ print_account_menu( 'account_page.php' );
 	<?php } ?>
 	</div>
 </div>
+
+<?php
+$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
+if( !empty( $t_projects ) ) {
+?>
+	<div class="space-10"></div>
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-user"></i>
+				<?php echo lang_get( 'assigned_projects' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-bordered table-condensed table-striped">
+						<?php
+							echo '<tr>';
+							echo '<td class="category">' . lang_get( 'assigned_projects' ) . '</td>';
+							echo '<td>';
+							foreach( $t_projects AS $t_project_id => $t_project ) {
+								$t_project_name = string_attribute( $t_project['name'] );
+								$t_view_state = $t_project['view_state'];
+								$t_access_level = $t_project['access_level'];
+								$t_access_level = get_enum_element( 'access_levels', $t_access_level );
+								$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
+
+								echo '<div class="col-md-3 col-xs-6 no-padding">' . $t_project_name . '</div>'
+										. '<div class="col-md-9 col-xs-6">'
+										. '<span class="label label-default">' . $t_access_level . '</span>'
+										. '<span class="bold padding-left-4">' . $t_view_state . '</span></div>';
+								echo '<div class="clearfix"></div>';
+								echo '<div class="space-4"></div>';
+							}
+							echo '</td>';
+							echo '</tr>';
+						?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
 
 	</form>
 </div>
