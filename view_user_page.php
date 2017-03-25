@@ -74,8 +74,10 @@ $u_realname = user_get_realname( $u_id );
 layout_page_header();
 
 layout_page_begin();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-12";
 ?>
-<div class="col-md-12 col-xs-12">
+<div class="<?php echo $t_timeline_view_class ?> col-xs-12">
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
@@ -151,5 +153,22 @@ layout_page_begin();
 </div>
 </div>
 </div>
+
+<?php
+if( $t_timeline_view_threshold_access ) {
+	# Build a filter to show all bugs in current projects
+	$g_timeline_filter = array();
+	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
+	$g_timeline_user = $f_user_id;
+	# Override current project, to let timeline show events for all-projects
+	$g_project_override = ALL_PROJECTS;
+	?>
+	<div class="col-md-5 col-xs-12">
+		<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+		<div class="space-10"></div>
+	</div>
+<?php } ?>
+
 <?php
 layout_page_end();
