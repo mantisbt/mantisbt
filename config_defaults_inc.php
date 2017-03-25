@@ -1109,10 +1109,12 @@ $g_show_roadmap_dates = ON;
 ##########################
 
 /**
- * time for 'permanent' cookie to live in seconds (1 year)
+ * Time for long lived cookie to live in seconds.  It is also used as the default for
+ * permanent logins if $g_allow_permanent_cookie is enabled and selected.
+ * @see $g_allow_permanent_cookie
  * @global integer $g_cookie_time_length
  */
-$g_cookie_time_length = 30000000;
+$g_cookie_time_length = 60 * 60 * 24 * 365;
 
 /**
  * Allow users to opt for a 'permanent' cookie when logging in
