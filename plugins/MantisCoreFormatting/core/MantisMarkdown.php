@@ -265,6 +265,24 @@ class MantisMarkdown extends Parsedown
 	}
 	
 	/**
+	 * Customize the blockCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockCodeComplete( $block ) {
+
+		$block = parent::blockCodeComplete( $block );
+
+		if( isset( $block['element']['text']['text'] )) {
+			$this->processAmpersand( $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
 	 * Customize the inlineLink method
 	 *
 	 * @param array $block A block-level element
