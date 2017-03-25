@@ -196,7 +196,7 @@ $t_show_inline = $f_show_inline;
 $t_mime_force_inline = array(
 	'image/jpeg', 'image/gif', 'image/tiff', 'image/bmp', 'image/svg+xml', 'image/png',
 	'application/pdf' );
-$t_mime_force_attachment = array( 'application/x-shockwave-flash' );
+$t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' );
 
 $t_mime_type = substr( $t_content_type, 0, strpos( $t_content_type, ';' ) );
 
