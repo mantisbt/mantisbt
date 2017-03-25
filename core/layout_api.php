@@ -480,7 +480,7 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '<li class="grey">';
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">';
 	if( $p_show_avatar ) {
-		layout_navbar_user_avatar( 'nav-user-photo' );
+		layout_navbar_user_avatar();
 		echo '<span class="user-info">';
 		echo $t_username;
 		echo '</span>';
@@ -700,7 +700,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
  * @param string $p_img_class css class to use with the img tag
  * @return null
  */
-function layout_navbar_user_avatar( $p_img_class = '' ) {
+function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
 	$t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
 
 	if( OFF === config_get( 'show_avatar' ) ) {
@@ -715,12 +715,9 @@ function layout_navbar_user_avatar( $p_img_class = '' ) {
 	}
 
 	if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-		$t_avatar = Avatar::get( $p_user_id, 32 );
+		$t_avatar = Avatar::get( $p_user_id, 40 );
 		if( false !== $t_avatar ) {
-			$t_image = htmlspecialchars( $t_avatar->image );
-			$t_text = htmlspecialchars( $t_avatar->text );
-
-			echo '<img class="nav-user-photo" src="' . $t_image . '" alt="' . $t_text . '" />';
+			echo prepare_raw_avatar( $t_avatar, $p_img_class, 40 );
 			return;
 		}
 	}
