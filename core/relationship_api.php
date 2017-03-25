@@ -870,6 +870,16 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
  * @return void
  */
 function relationship_view_box( $p_bug_id ) {
+	$t_relationships_html = relationship_get_summary_html( $p_bug_id );
+	$t_can_update = !bug_is_readonly( $p_bug_id ) &&
+		access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id );
+
+	if( !$t_can_update && empty( $t_relationships_html ) ) {
+		return;
+	}
+
+	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
+	$t_show_top_div = $t_can_update || $t_relationship_graph;
 	?>
 	<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -892,24 +902,20 @@ function relationship_view_box( $p_bug_id ) {
 		</div>
 	</div>
 	<div class="widget-body">
+		<?php if( $t_show_top_div ) { ?>
 		<div class="widget-toolbox padding-8 clearfix">
 		<?php
-			if( ON == config_get( 'relationship_graph_enable' ) ) {
+			if( $t_relationship_graph ) {
 		?>
 		<div class="btn-group pull-right noprint">
 		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
 		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
 		</div>
 		<?php
-	}
-	?>
-<?php
-	# bug not read-only and user authenticated
-	if( !bug_is_readonly( $p_bug_id ) ) {
-		# user access level at least updater
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			?>
+			} # $t_relationship_graph
 
+			if( $t_can_update ) {
+			?>
 		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
@@ -918,20 +924,19 @@ function relationship_view_box( $p_bug_id ) {
 		<input type="text" class="input-sm" name="dest_bug_id" value="" />
 		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
-<?php
-		}
-	}
-	?>
-</div>
+			<?php
+			} # can update
+			?>
+		</div>
+		<?php } # show top div ?>
 
-	<div class="widget-main no-padding">
-		<div class="table-responsive">
-			<?php echo relationship_get_summary_html( $p_bug_id )?>
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				<?php echo $t_relationships_html; ?>
+			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
-
+	</div>
+	</div>
 <?php
 }
