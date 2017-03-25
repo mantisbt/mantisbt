@@ -282,7 +282,7 @@ if( !empty( $t_projects ) ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-user"></i>
+				<i class="ace-icon fa fa-puzzle-piece"></i>
 				<?php echo lang_get( 'assigned_projects' ) ?>
 			</h4>
 		</div>
