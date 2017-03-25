@@ -9,9 +9,10 @@
 		<varlistentry>
 			<term>$g_cookie_time_length</term>
 			<listitem>
-				<para>Time for 'permanent' cookie to live in seconds. This is what
-					is used when a user selects &quot;save login&quot;. Default is the equivalent
-					of 1 year (30000000).
+				<para>
+					Time for long lived cookie to live in seconds.  It is also used as the default for
+					permanent logins if $g_allow_permanent_cookie is enabled and selected.
+					Default is 1 year.
 				</para>
 			</listitem>
 		</varlistentry>
