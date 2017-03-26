@@ -76,11 +76,11 @@ if( config_get_global( 'email_login_enabled' ) ) {
 $t_session_validation = !$f_reauthenticate && ( ON == config_get_global( 'session_validation' ) );
 
 $t_show_signup = !$f_reauthenticate &&
-	( ON == config_get_global( 'allow_signup' ) ) &&
+	( auth_signup_enabled() ) &&
 	( LDAP != config_get_global( 'login_method' ) ) &&
 	( ON == config_get( 'enable_email_notification' ) );
 
-$t_show_anonymous_login = !$f_reauthenticate && ( ON == config_get( 'allow_anonymous_login' ) );
+$t_show_anonymous_login = !$f_reauthenticate && auth_anonymous_enabled();
 
 $t_show_reset_password = !$f_reauthenticate &&
 	( LDAP != config_get_global( 'login_method' ) ) &&
@@ -88,7 +88,7 @@ $t_show_reset_password = !$f_reauthenticate &&
 	( ON == config_get( 'send_reset_password' ) ) &&
 	( ON == config_get( 'enable_email_notification' ) );
 
-$t_show_remember_me = !$f_reauthenticate && ( ON == config_get( 'allow_permanent_cookie' ) );
+$t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login();
 
 $t_show_warnings = !$f_reauthenticate;
 
@@ -104,11 +104,18 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthen
 	}
 }
 
+# Redirect to plugin login page if applicable.
+if( !auth_can_use_standard_login( NO_USER ) ) {
+	if( auth_login_page() != 'login_page.php' ) {
+		print_header_redirect( auth_login_page() );
+	}
+}
+
 # Check for automatic logon methods where we want the logon to just be handled by login.php
 if( auth_automatic_logon_bypass_form() ) {
 	$t_uri = 'login.php';
 
-	if( ON == config_get( 'allow_anonymous_login' ) ) {
+	if( auth_anonymous_enabled() ) {
 		$t_uri = 'login_anon.php';
 	}
 

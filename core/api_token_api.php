@@ -146,6 +146,13 @@ function api_token_validate( $p_username, $p_token ) {
 		return false;
 	}
 
+	# If users can't create tokens, then they can't use them.  This can change in the future if we enabled
+	# admins to create tokens on behalf of users that are usable.  This is a defense in depth anyways for
+	# cases where users may have had tokens before this config option changes.
+	if( !auth_can_create_api_token( $t_user_id ) ) {
+		return false;
+	}
+
 	$t_encrypted_token = api_token_hash( $p_token );
 
 	db_param_push();

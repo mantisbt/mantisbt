@@ -40,9 +40,9 @@ class AuthMiddleware {
 				$t_password = auth_get_current_user_cookie( /* auto-login-anonymous */ false );
 				$t_login_method = LOGIN_METHOD_COOKIE;
 			} else {
-				$t_username = config_get( 'anonymous_account' );
+				$t_username = auth_anonymous_account();
 
-				if( config_get( 'allow_anonymous_login' ) == OFF || empty( $t_username ) ) {
+				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
 					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'API token required' );
 				}
 

@@ -80,7 +80,7 @@ layout_login_page_begin();
 			<?php
 			echo form_security_field( 'lost_pwd' );
 
-			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+			$t_allow_passwd = auth_can_set_password();
 			if( $t_allow_passwd ) { ?>
 				<label for="username" class="block clearfix">
 				<span class="block input-icon input-icon-right">
@@ -106,7 +106,7 @@ layout_login_page_begin();
 			} else {
 				echo '<div class="space-10"></div>';
 				echo '<div class="alert alert-danger">';
-				echo lang_get( 'no_password_request' );
+				echo auth_password_managed_elsewhere_message();
 				echo '</div>';
 			} ?>
 		</fieldset>
@@ -114,7 +114,7 @@ layout_login_page_begin();
 	</div>
 		<div class="toolbar center">
 			<a class="back-to-login-link pull-left" href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a>
-			<?php if( ON == config_get_global( 'allow_signup' ) ) { ?>
+			<?php if( auth_signup_enabled() ) { ?>
 			<a class="back-to-login-link pull-right" href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a>
 			<?php } ?>
 			<div class="clearfix"></div>

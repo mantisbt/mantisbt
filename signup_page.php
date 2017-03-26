@@ -49,8 +49,8 @@ require_css( 'login.css' );
 require_js( 'login.js' );
 
 # Check for invalid access to signup page
-if( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
-	print_header_redirect( 'login_page.php' );
+if( !auth_signup_enabled() || LDAP == config_get_global( 'login_method' ) ) {
+	print_header_redirect( auth_login_page() );
 }
 
 # signup page shouldn't be indexed by search engines
@@ -103,7 +103,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</label>
 
 <?php
-	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
+	$t_allow_passwd_change = auth_can_set_password( NO_USER );
 
 	# captcha image requires GD library and related option to ON
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
@@ -144,7 +144,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			if( !$t_allow_passwd_change ) {
 				echo '<div class="space-10"></div>';
 				echo '<div class="alert alert-danger">';
-				echo lang_get( 'no_password_request' );
+				echo auth_password_managed_elsewhere_message();
 				echo '</div>';
 			}
 ?>

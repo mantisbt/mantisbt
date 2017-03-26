@@ -68,7 +68,7 @@ if( $f_username !== null ) {
 		access_denied();
 	}
 } else {
-	if( OFF == config_get( 'allow_anonymous_login' ) ) {
+	if( !auth_anonymous_enabled() ) {
 		access_denied();
 	}
 }
