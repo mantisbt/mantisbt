@@ -969,9 +969,9 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 function auth_set_tokens( $p_user_id ) {
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
 	if( null == $t_auth_token ) {
-		token_set( TOKEN_AUTHENTICATED, true, config_get_global( 'reauthentication_expiry' ), $p_user_id );
+		token_set( TOKEN_AUTHENTICATED, true, auth_reauthentication_expiry(), $p_user_id );
 	} else {
-		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
+		token_touch( $t_auth_token['id'], auth_reauthentication_expiry() );
 	}
 }
 
@@ -981,7 +981,7 @@ function auth_set_tokens( $p_user_id ) {
  */
 function auth_reauthentication_enabled() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['reauthentication_enabled'] != 0;
+	return $t_auth_flags['reauthentication_enabled'] != OFF;
 }
 
 /**
@@ -1034,7 +1034,7 @@ function auth_reauthenticate() {
 		);
 
 		# redirect to login page
-		print_header_redirect( 'login_page.php?' . $t_query_params );
+		print_header_redirect( auth_login_page( $t_query_params ) );
 	}
 }
 
