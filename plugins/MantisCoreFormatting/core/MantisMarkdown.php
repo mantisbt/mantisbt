@@ -77,6 +77,12 @@ class MantisMarkdown extends Parsedown
 	 */
 	public static function convert_text( $p_text ) {
 		self::init();
+
+		# Enabled quote conversion
+		# Text processing converts special character to entity name 
+		# Make sure to restore "&gt;" entity name to its characted result ">"
+		$p_text = str_replace( "&gt;", ">", $p_text );
+
 		return self::$mantis_markdown->text( $p_text );
 	}
 
@@ -95,16 +101,15 @@ class MantisMarkdown extends Parsedown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return string|null HTML representation generated from markdown or
+	 *                     null if markdown starts with # symbol
 	 */
 	protected function blockHeader( $line ) {
 		$block = parent::blockHeader( $line );
 
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
+		# Bug links should not be treated as headers
+		if( $this->isBugLink( $line['text'] ) ) {
+			return null;
 		}
 
 		# Header rules
@@ -121,16 +126,15 @@ class MantisMarkdown extends Parsedown
 	 * @param string $line The Markdown syntax to parse
 	 * @param array $block A block-level element
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return string|null HTML representation generated from markdown or
+	 *                     null if markdown starts with # symbol
 	 */
 	protected function blockSetextHeader( $line, array $block = null ) {
 		$block = parent::blockSetextHeader( $line, $block );
 
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
+		# Bug links should not be treated as headers
+		if( $this->isBugLink( $line['text'] ) ) {
+			return null;
 		}
 
 		# Header rules
@@ -225,6 +229,60 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
+	 * Customize the inlineCode method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineCode( $block ) {
+
+		$block = parent::inlineCode( $block );
+		
+		if( isset( $block['element']['text'] )) {
+			$this->processAmpersand( $block['element']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
+	 * Customize the blockFencedCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockFencedCodeComplete( $block = null ) {
+
+		$block = parent::blockFencedCodeComplete( $block );
+
+		if( isset( $block['element']['text']['text'] )) {
+			$this->processAmpersand( $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+	
+	/**
+	 * Customize the inlineLink method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineLink( $block ) {
+
+		$block = parent::inlineLink( $block );
+
+		if( isset( $block['element']['attributes']['href'] )) {
+			$this->processAmpersand( $block['element']['attributes']['href'] );
+		}
+
+		return $block;
+	}
+
+	/**
 	 * Initialize the singleton static instance.
 	 */
 	private static function init() {
@@ -233,4 +291,31 @@ class MantisMarkdown extends Parsedown
 		}
 		return static::$mantis_markdown;
 	}
+
+	/**
+	 * Replace any '&amp;' entity in the given string by '&'.
+	 *
+	 * MantisBT text processing replaces '&' signs by their entity name. Within
+	 * code blocks or backticks, Parsedown applies the same transformation again,
+	 * so they ultimately become '&amp;amp;'. This reverts the initial conversion
+	 * so ampersands are displayed correctly.
+	 *
+	 * @param string $p_text Text block to process
+	 * @return void
+	 */
+	private function processAmpersand( &$p_text ) {
+		$p_text = str_replace( '&amp;', '&', $p_text );
+	}
+
+	/**
+	 * Check if the given string is a bug link reference.
+	 *
+	 * @param string $p_text
+	 * @return bool
+	 */
+	private function isBugLink( $p_text ) {
+		return '#' == config_get_global( 'bug_link_tag' )
+			&& preg_match_all( '/^#\d+$/', $p_text, $matches );
+	}
+
 }

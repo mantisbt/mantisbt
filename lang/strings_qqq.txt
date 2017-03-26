@@ -227,7 +227,7 @@ $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
 $s_click_to_login = '{{Identical|Login}}';
 $s_login_title = '{{Identical|Login}}';
-$s_save_login = '{{Identical|Remember my login on this computer}}';
+$s_save_login = '';
 $s_login_button = '{{Identical|Login}}';
 $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';

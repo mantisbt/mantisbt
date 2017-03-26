@@ -42,18 +42,19 @@
  * @author Fasouzafreitas
  * @author Giro720
  * @author Luckas
+ * @author Maxan
  * @author Tuliouel
  */
 
-$s_plugin_XmlImportExport_title = 'Importar/Exportar incidências';
+$s_plugin_XmlImportExport_title = 'Importar/Exportar tarefas';
 $s_plugin_XmlImportExport_description = 'Acrescenta ao MantisBT funcionalidades de importação e exportação baseadas em XML.';
-$s_plugin_XmlImportExport_import = 'Importar incidências';
+$s_plugin_XmlImportExport_import = 'Importar tarefas';
 $s_plugin_XmlImportExport_export = 'Exportação XML';
 $s_plugin_XmlImportExport_config_title = 'Configuração de níveis de acesso de importação/exportação em XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importar incidências';
-$s_plugin_XmlImportExport_export_threshold = 'Exportar incidências';
+$s_plugin_XmlImportExport_import_threshold = 'Importar tarefas';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar tarefas';
 $s_plugin_XmlImportExport_action_update = 'Atualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importando incidências para o projeto:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando tarefas para o projeto: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Opções de importação';
 $s_plugin_XmlImportExport_cross_references = 'Referências cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estratégia de conversão por padrão:';
@@ -66,4 +67,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Desativar o link';
 $s_plugin_XmlImportExport_fallback = 'Estratégia de recurso (quando "Renumerar" não é aplicável):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria de recurso:';
 $s_plugin_XmlImportExport_keep_same_category = 'Tentar manter a mesma categoria';
-$s_plugin_XmlImportExport_error_no_xml = 'não foram encontradas as extenções xmlreader exmlwriter';
+$s_plugin_XmlImportExport_error_no_xml = 'não foram encontradas as extenções xmlreader e xmlwriter';

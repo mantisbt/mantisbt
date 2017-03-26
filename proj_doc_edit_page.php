@@ -85,7 +85,7 @@ print_doc_menu();
 <div class="form-container">
 <form method="post" enctype="multipart/form-data" action="proj_doc_update.php">
 <?php echo form_security_field( 'proj_doc_update' ) ?>
-<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>"/>
+<input type="hidden" name="file_id" value="<?php echo $t_file_id ?>"/>
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">

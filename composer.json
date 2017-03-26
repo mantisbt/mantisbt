@@ -1,0 +1,16 @@
+{
+    "name": "mantisbt/mantisbt",
+    "description": "Mantis Bug Tracker",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.0"
+    },
+    "license": "GPL v2",
+    "authors": [
+        {
+            "name": "MantisBT Team",
+            "email": "mantisbt-dev@lists.sourceforge.net",
+            "homepage": "https://www.mantisbt.org"
+        }
+    ]
+}

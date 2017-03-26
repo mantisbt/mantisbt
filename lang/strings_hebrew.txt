@@ -44,6 +44,7 @@
  * @author Macofe
  * @author Orentet
  * @author Rotemliss
+ * @author Uziel302
  * @author YaronSh
  * @author Yona b
  */
@@ -480,7 +481,7 @@ $s_error_database_version_out_of_date_2 = '<strong>אזהרה:</strong> מבנה
 $s_error_code_version_out_of_date = 'אזהרה</strong>: מבנה מסד הנתונים יותר עדכני מהקוד המותקן. נא לעדכן את הקוד<strong>.';
 $s_login_page_info = 'ברוכים הבאים למערכת הבאגים.';
 $s_login_title = 'כניסה';
-$s_save_login = 'שמירת פרטי הכניסה שלי בדפדפן זה';
+$s_save_login = 'השאר אותי מחובר';
 $s_secure_session = 'שיח מאובטח';
 $s_secure_session_long = 'אפשר שיח רק מכתובת ה־IP הזאת';
 $s_choose_project = 'בחירת פרויקט';

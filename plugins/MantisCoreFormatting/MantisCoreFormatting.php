@@ -107,31 +107,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	}
 
 	/**
-	 * Process Markdown
-	 * @param string  $p_string    Raw text to process.
-	 *
-	 * @return string Formatted text
-	 */
-	private function processMarkdown( $p_string ){
-
-		$t_string = $p_string;
-
-		# We need to enabled quote conversion
-		# "> quote or >quote" is part of an html tag
-		# Make sure to replaced the restored tags with ">"
-		$t_string = str_replace( "&gt;", ">", $t_string );
-
-		$t_string = MantisMarkdown::convert_text( $t_string );
-
-		# markdown is unable to process '<' signs within the code block tag (backticks)
-		# markdown convert '<' signs into '&amp;lt;' after the text proccessing process
-		# therefore we need restore the entity back into its original name '&lt;'
-		$t_string = str_replace( '&amp;lt;', '&lt;', $t_string );
-
-		return $t_string;
-	}
-
-	/**
 	 * Plain text processing.
 	 *
 	 * @param string  $p_event     Event name.
@@ -216,7 +191,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 		# Process Markdown
 		if( ON == $s_markdown && $p_multiline ) {
-			$t_string = $this->processMarkdown ( $t_string );
+			$t_string = MantisMarkdown::convert_text( $t_string );
 		}
 
 		return $t_string;

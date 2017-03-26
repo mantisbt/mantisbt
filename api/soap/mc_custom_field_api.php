@@ -33,7 +33,7 @@
  * @return integer
  */
 function mci_get_custom_field_id_from_objectref( stdClass $p_object_ref ) {
-	$p_object_ref = SoapObjectsFactory::unwrapObject( $p_object_ref );
+	$p_object_ref = ApiObjectFactory::objectToArray( $p_object_ref );
 
 	if( isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int)$p_object_ref['id'];

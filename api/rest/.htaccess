@@ -1,0 +1,5 @@
+# Based on Slim Framework recommendation @ http://docs.slimframework.com/routing/rewrite/
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+

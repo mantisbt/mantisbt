@@ -677,3 +677,20 @@ function helper_duration_to_minutes( $p_hhmm ) {
 function shutdown_functions_register() {
 	register_shutdown_function( 'email_shutdown_function' );
 }
+
+/**
+ * Filter a set of strings by finding strings that start with a case-insensitive prefix.
+ * @param array  $p_set    An array of strings to search through.
+ * @param string $p_prefix The prefix to filter by.
+ * @return array An array of strings which match the supplied prefix.
+ */
+function helper_filter_by_prefix( array $p_set, $p_prefix ) {
+	$t_matches = array();
+	foreach ( $p_set as $p_item ) {
+		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+			$t_matches[] = $p_item;
+		}
+	}
+	return $t_matches;
+}
+

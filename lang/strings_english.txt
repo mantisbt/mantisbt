@@ -18,13 +18,6 @@
  * Language File - English (English)
  *
  * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
@@ -675,7 +668,7 @@ $s_error_code_version_out_of_date = '<strong>Warning:</strong> The database stru
 # login_page.php
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Remember my login in this browser';
+$s_save_login = 'Keep me logged in';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
@@ -771,6 +764,7 @@ $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
 $s_category_assigned_to = 'Category Owner';
+$s_email_notify_users = 'Any user with access level';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
@@ -807,6 +801,7 @@ $s_access_change_access_label = 'Who can change access levels:';
 $s_default_not_in_flow = 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.';
 
 # manage_config_work_threshold_page
+$s_allowed_access_levels = 'Allowed for any user with access level';
 $s_assign_issue = 'Assign an issue';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';

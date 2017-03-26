@@ -223,7 +223,11 @@ if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			break;
 		case 'check':		# admin checks dir
 		case 'soap':
+		case 'rest':
 			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			break;
+		case 'swagger':
+			$t_path = rtrim( dirname( dirname( dirname( $t_path ) ) ), '/\\' ) . '/';
 			break;
 		case '':
 			$t_path = '/';
@@ -918,13 +922,6 @@ $g_logo_url = '%default_home_page%';
 $g_enable_project_documentation = OFF;
 
 /**
- * Display another instance of the menu at the bottom.  The top menu will still
- * remain.
- * @global integer $g_show_footer_menu
- */
-$g_show_footer_menu = OFF;
-
-/**
  * show extra menu bar with all available projects
  * @global integer $g_show_project_menu_bar
  */
@@ -981,7 +978,7 @@ $g_severity_significant_threshold = MAJOR;
  *
  * @global array $g_view_issues_page_columns
  */
-$g_view_issues_page_columns = array (
+$g_view_issues_page_columns = array(
 	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
 	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
 	'last_updated', 'summary'
@@ -993,7 +990,7 @@ $g_view_issues_page_columns = array (
  * user can configure their own columns using My Account -> Manage Columns.
  * @global array $g_print_issues_page_columns
  */
-$g_print_issues_page_columns = array (
+$g_print_issues_page_columns = array(
 	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
 	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
 	'summary'
@@ -1005,7 +1002,7 @@ $g_print_issues_page_columns = array (
  * configure their own columns using My Account -> Manage Columns.
  * @global array $g_csv_columns
  */
-$g_csv_columns = array (
+$g_csv_columns = array(
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority',
 	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
@@ -1018,7 +1015,7 @@ $g_csv_columns = array (
  * user can configure their own columns using My Account -> Manage Columns
  * @global array $g_excel_columns
  */
-$g_excel_columns = array (
+$g_excel_columns = array(
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity',
 	'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
@@ -1030,14 +1027,6 @@ $g_excel_columns = array (
  * @global integer $g_show_bug_project_links
  */
 $g_show_bug_project_links = ON;
-
-/**
- * Show a legend with percentage of bug status
- * x% of all bugs are new, y% of all bugs are assigned and so on.
- * If set to ON it will printed below the status colour legend.
- * @global integer $g_status_percentage_legend
- */
-$g_status_percentage_legend = OFF;
 
 /**
  * Position of the filter box, can be: POSITION_*
@@ -1178,7 +1167,6 @@ $g_complete_date_format = 'Y-m-d H:i T';
  * @global string $g_datetime_picker_format
  */
 $g_datetime_picker_format = 'Y-MM-DD HH:mm';
-
 
 ##############################
 # MantisBT TimeZone Settings #
@@ -2326,7 +2314,7 @@ $g_bug_report_page_fields = array(
  *
  * @global array $g_bug_view_page_fields
  */
-$g_bug_view_page_fields = array (
+$g_bug_view_page_fields = array(
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -2399,7 +2387,7 @@ $g_bug_view_page_fields = array (
  *
  * @global array $g_bug_update_page_fields
  */
-$g_bug_update_page_fields = array (
+$g_bug_update_page_fields = array(
 	'additional_info',
 	'category_id',
 	'date_submitted',
@@ -2475,7 +2463,7 @@ $g_bug_update_page_fields = array (
  *
  * @global array $g_bug_change_status_page_fields
  */
-$g_bug_change_status_page_fields = array (
+$g_bug_change_status_page_fields = array(
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -3558,7 +3546,7 @@ $g_file_type_icons = array(
  *
  * @global array $g_file_download_content_type_overrides
  */
-$g_file_download_content_type_overrides = array (
+$g_file_download_content_type_overrides = array(
 	'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
 	'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -3573,7 +3561,7 @@ $g_file_download_content_type_overrides = array (
  * Status to icon mapping
  * @global array $g_status_icon_arr
  */
-$g_status_icon_arr = array (
+$g_status_icon_arr = array(
 	NONE      => '',
 	LOW       => 'fa-chevron-down fa-lg green',
 	NORMAL    => 'fa-minus fa-lg orange2',
@@ -3586,7 +3574,7 @@ $g_status_icon_arr = array (
  * Sort direction to icon mapping
  * @global array $g_sort_icon_arr
  */
-$g_sort_icon_arr = array (
+$g_sort_icon_arr = array(
 	ASCENDING  => 'fa-caret-up',
 	DESCENDING => 'fa-caret-down'
 );
@@ -3595,7 +3583,7 @@ $g_sort_icon_arr = array (
  * Read status to icon mapping
  * @global array $g_unread_icon_arr
  */
-$g_unread_icon_arr = array (
+$g_unread_icon_arr = array(
 	READ   => '',
 	UNREAD => 'fa-circle'
 );
@@ -3615,7 +3603,7 @@ $g_my_view_bug_count = 10;
  * A box that is not to be shown can have its value set to 0
  * @global array $g_my_view_boxes
  */
-$g_my_view_boxes = array (
+$g_my_view_boxes = array(
 	'assigned'      => '1',
 	'unassigned'    => '2',
 	'reported'      => '3',
@@ -4258,6 +4246,7 @@ $g_public_config_names = array(
 	'backward_year_count',
 	'bottom_include_page',
 	'bug_assigned_status',
+	'bug_change_status_page_fields',
 	'bug_closed_status_threshold',
 	'bug_count_hyperlink_prefix',
 	'bug_duplicate_resolution',
@@ -4268,11 +4257,14 @@ $g_public_config_names = array(
 	'bug_reminder_threshold',
 	'bug_reopen_resolution',
 	'bug_reopen_status',
+	'bug_report_page_fields',
 	'bug_resolution_fixed_threshold',
 	'bug_resolution_not_fixed_threshold',
 	'bug_resolved_status_threshold',
 	'bug_revision_drop_threshold',
 	'bug_submit_status',
+	'bug_update_page_fields',
+	'bug_view_page_fields',
 	'bugnote_link_tag',
 	'bugnote_order',
 	'bugnote_user_change_view_state_threshold',
@@ -4291,10 +4283,14 @@ $g_public_config_names = array(
 	'create_short_url',
 	'css_include_file',
 	'css_rtl_include_file',
+	'csv_columns',
 	'csv_separator',
 	'custom_field_edit_after_create',
 	'custom_field_link_threshold',
 	'custom_field_type_enum_string',
+	'custom_group_actions',
+	'custom_headers',
+	'date_partitions',
 	'datetime_picker_format',
 	'default_bug_additional_info',
 	'default_bug_eta',
@@ -4335,6 +4331,7 @@ $g_public_config_names = array(
 	'default_manage_tag_prefix',
 	'default_manage_user_prefix',
 	'default_new_account_access_level',
+	'default_notify_flags',
 	'default_project_view_status',
 	'default_redirect_delay',
 	'default_refresh_delay',
@@ -4349,6 +4346,7 @@ $g_public_config_names = array(
 	'disallowed_files',
 	'display_bug_padding',
 	'display_bugnote_padding',
+	'display_errors',
 	'display_project_padding',
 	'download_attachments_threshold',
 	'due_date_default',
@@ -4369,8 +4367,11 @@ $g_public_config_names = array(
 	'enable_projection',
 	'enable_sponsorship',
 	'eta_enum_string',
+	'excel_columns',
 	'fallback_language',
 	'favicon_image',
+	'file_download_content_type_overrides',
+	'file_type_icons',
 	'file_upload_max_num',
 	'filter_by_custom_fields',
 	'filter_custom_fields_per_row',
@@ -4389,6 +4390,9 @@ $g_public_config_names = array(
 	'impersonate_user_threshold',
 	'inline_file_exts',
 	'issue_activity_note_attachments_seconds_threshold',
+	'language_auto_map',
+	'language_choices_arr',
+	'limit_email_domains',
 	'limit_reporters',
 	'logo_image',
 	'logo_url',
@@ -4396,6 +4400,7 @@ $g_public_config_names = array(
 	'logout_redirect_page',
 	'long_process_timeout',
 	'lost_password_feature',
+	'main_menu_custom_options',
 	'manage_config_cookie',
 	'manage_configuration_threshold',
 	'manage_custom_fields_threshold',
@@ -4419,6 +4424,7 @@ $g_public_config_names = array(
 	'monitor_bug_threshold',
 	'monitor_delete_others_bug_threshold',
 	'move_bug_threshold',
+	'my_view_boxes',
 	'my_view_boxes_fixed_position',
 	'my_view_bug_count',
 	'news_enabled',
@@ -4428,10 +4434,15 @@ $g_public_config_names = array(
 	'normal_date_format',
 	'notify_flags',
 	'notify_new_user_created_threshold_min',
+	'plugin_mime_types',
 	'plugins_enabled',
+	'plugins_force_installed',
 	'preview_attachments_inline_max_size',
+	'preview_image_extensions',
 	'preview_max_height',
 	'preview_max_width',
+	'preview_text_extensions',
+	'print_issues_page_columns',
 	'priority_enum_string',
 	'priority_significant_threshold',
 	'private_bug_threshold',
@@ -4461,6 +4472,7 @@ $g_public_config_names = array(
 	'reporter_summary_limit',
 	'reproducibility_enum_string',
 	'resolution_enum_string',
+	'resolution_multipliers',
 	'return_path_email',
 	'roadmap_update_threshold',
 	'roadmap_view_threshold',
@@ -4468,8 +4480,10 @@ $g_public_config_names = array(
 	'search_title',
 	'set_bug_sticky_threshold',
 	'set_configuration_threshold',
+	'set_status_threshold',
 	'set_view_status_threshold',
 	'severity_enum_string',
+	'severity_multipliers',
 	'severity_significant_threshold',
 	'short_date_format',
 	'show_assigned_names',
@@ -4478,7 +4492,6 @@ $g_public_config_names = array(
 	'show_bug_project_links',
 	'show_changelog_dates',
 	'show_detailed_errors',
-	'show_footer_menu',
 	'show_log_threshold',
 	'show_memory_usage',
 	'show_monitor_list_threshold',
@@ -4496,12 +4509,15 @@ $g_public_config_names = array(
 	'show_version',
 	'signup_use_captcha',
 	'sort_by_last_name',
+	'sort_icon_arr',
 	'sponsor_threshold',
 	'sponsorship_currency',
 	'sponsorship_enum_string',
+	'status_colors',
 	'status_enum_string',
+	'status_enum_workflow',
+	'status_icon_arr',
 	'status_legend_position',
-	'status_percentage_legend',
 	'stop_on_errors',
 	'store_reminders',
 	'stored_query_create_shared_threshold',
@@ -4548,11 +4564,13 @@ $g_public_config_names = array(
 	'view_filters',
 	'view_handler_threshold',
 	'view_history_threshold',
+	'view_issues_page_columns',
 	'view_proj_doc_threshold',
 	'view_sponsorship_details_threshold',
 	'view_sponsorship_total_threshold',
 	'view_state_enum_string',
 	'view_summary_threshold',
+	'unread_icon_arr',
 	'webmaster_email',
 	'webservice_admin_access_level_threshold',
 	'webservice_error_when_version_not_found',
@@ -4562,6 +4580,7 @@ $g_public_config_names = array(
 	'webservice_readonly_access_level_threshold',
 	'webservice_readwrite_access_level_threshold',
 	'webservice_resolution_enum_default_when_not_found',
+	'webservice_rest_enabled',
 	'webservice_severity_enum_default_when_not_found',
 	'webservice_specify_reporter_on_add_access_level_threshold',
 	'webservice_status_enum_default_when_not_found',
@@ -4683,6 +4702,15 @@ $g_webservice_error_when_version_not_found = ON;
  * @global string $g_webservice_version_when_not_found
  */
 $g_webservice_version_when_not_found = '';
+
+/**
+ * Whether the REST API (experimental) is enabled or not.  Note that this flag only
+ * impacts API Token based auth.  Hence, even if the API is disabled, it can still be
+ * used from the Web UI using cookie based authentication.
+ *
+ * @global integer $g_webservice_rest_enabled
+ */
+$g_webservice_rest_enabled = OFF;
 
 ####################
 # Issue Activities #

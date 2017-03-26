@@ -36,14 +36,14 @@ require_once( dirname( __FILE__ ) . '/mc_core.php' );
 function mc_project_attachment_get( $p_username, $p_password, $p_project_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	$t_file = mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
-	if( SoapObjectsFactory::isSoapFault( $t_file ) ) {
+	if( ApiObjectFactory::isFault( $t_file ) ) {
 		return $t_file;
 	}
-	return SoapObjectsFactory::encodeBinary( $t_file );
+	return $t_file;
 }
 
 /**
@@ -62,18 +62,18 @@ function mc_project_attachment_get( $p_username, $p_password, $p_project_attachm
 function mc_project_attachment_add( $p_username, $p_password, $p_project_id, $p_name, $p_title, $p_description, $p_file_type, $p_content ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	# Check if project documentation feature is enabled.
 	if( OFF == config_get( 'enable_project_documentation' ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 	if( !access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 	if( is_blank( $p_title ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'Title must not be empty.' );
+		return ApiObjectFactory::faultBadRequest( 'Title must not be empty.' );
 	}
 	return mci_file_add( $p_project_id, $p_name, $p_content, $p_file_type, 'project', $p_title, $p_description, $t_user_id );
 }
@@ -89,11 +89,11 @@ function mc_project_attachment_add( $p_username, $p_password, $p_project_id, $p_
 function mc_project_attachment_delete( $p_username, $p_password, $p_project_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 	$t_project_id = file_get_field( $p_project_attachment_id, 'project_id', 'project' );
 	if( !access_has_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 	return file_delete( $p_project_attachment_id, 'project' );
 }

@@ -104,11 +104,10 @@ $(document).ready( function() {
 			highlight: true
 		}, {
 			source: function (query, undefined, callback) {
-				var fieldName = $this[0].id;
-				var postData = {};
-				postData['entrypoint'] = fieldName + '_get_with_prefix';
-				postData[fieldName] = query;
-				$.getJSON('xmlhttprequest.php', postData, function (data) {
+				var params = {};
+				params['field'] = $this[0].id;
+				params['prefix'] = query;
+				$.getJSON('api/rest/internal/autocomplete', params, function (data) {
 					var results = [];
 					$.each(data, function (i, value) {
 						results.push(value);
@@ -137,6 +136,9 @@ $(document).ready( function() {
 			context: $('#' + targetID),
 			success: function(html) {
 				$(this).html(html);
+                $(this).find('input[type=text].datetimepicker').each(function(index, element) {
+                    enableDateTimePicker(this);
+                });
 			},
 			error: function(obj,status,error) {
 				$(this).html('<span class="error-msg">' + status + ': ' + error + '</span>');
@@ -226,24 +228,7 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
-		$(this).datetimepicker({
-			locale: $(this).data('picker-locale'),
-			format: $(this).data('picker-format'),
-			useCurrent: false,
-			icons: {
-				time: 'fa fa-clock-o',
-				date: 'fa fa-calendar',
-				up: 'fa fa-chevron-up',
-				down: 'fa fa-chevron-down',
-				previous: 'fa fa-chevron-left',
-				next: 'fa fa-chevron-right',
-				today: 'fa fa-arrows ',
-				clear: 'fa fa-trash',
-				close: 'fa fa-times'
-			}
-		}).next().on(ace.click_event, function() {
-			$(this).prev().focus();
-		});
+        enableDateTimePicker(this);
 	});
 
 	if( $( ".dropzone-form" ).length ) {
@@ -282,8 +267,8 @@ $(document).ready( function() {
 	/* Handle standard filter date fields */
 	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
 		$(this).closest('table')
-				.find('select')
-				.prop('disabled', !$(this).prop('checked'));
+				.find('input')
+				.prop('readonly', !$(this).prop('checked'));
 	});
 
 	/* Handle custom field of date type */
@@ -291,12 +276,8 @@ $(document).ready( function() {
 		var table = $(this).closest('table');
 		switch(this.value) {
 			case '2': // between
-				$(table).find("select[name*=_start_year]").prop('disabled', false);
-				$(table).find("select[name*=_start_month]").prop('disabled', false);
-				$(table).find("select[name*=_start_day]").prop('disabled', false);
-				$(table).find("select[name*=_end_year]").prop('disabled', false);
-				$(table).find("select[name*=_end_month]").prop('disabled', false);
-				$(table).find("select[name*=_end_day]").prop('disabled', false);
+				$(table).find("input[name*=_start_date]").prop('readonly', false);
+				$(table).find("input[name*=_end_date]").prop('readonly', false);
 				break;
 
 			case '3': // on or before
@@ -304,23 +285,15 @@ $(document).ready( function() {
 			case '5': // on
 			case '6': // after
 			case '7': // on or after
-				$(table).find("select[name*=_start_year]").prop('disabled', false);
-				$(table).find("select[name*=_start_month]").prop('disabled', false);
-				$(table).find("select[name*=_start_day]").prop('disabled', false);
-				$(table).find("select[name*=_end_year]").prop('disabled', true);
-				$(table).find("select[name*=_end_month]").prop('disabled', true);
-				$(table).find("select[name*=_end_day]").prop('disabled', true);
+				$(table).find("input[name*=_start_date]").prop('readonly', false);
+				$(table).find("input[name*=_end_date]").prop('readonly', true);
 				break;
 
 			case '0': // any
 			case '1': // none
 			default:
-				$(table).find("select[name*=_start_year]").prop('disabled', true);
-				$(table).find("select[name*=_start_month]").prop('disabled', true);
-				$(table).find("select[name*=_start_day]").prop('disabled', true);
-				$(table).find("select[name*=_end_year]").prop('disabled', true);
-				$(table).find("select[name*=_end_month]").prop('disabled', true);
-				$(table).find("select[name*=_end_day]").prop('disabled', true);
+				$(table).find("input[name*=_start_date]").prop('readonly', true);
+				$(table).find("input[name*=_end_date]").prop('readonly', true);
 				break;
 		}
 	});
@@ -480,6 +453,28 @@ function setDisplay(idTag, state)
 function toggleDisplay(idTag)
 {
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
+}
+
+// Datetime picker handler
+function enableDateTimePicker(p_element) {
+    $(p_element).datetimepicker({
+        locale: $(p_element).data('picker-locale'),
+        format: $(p_element).data('picker-format'),
+        useCurrent: false,
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-arrows ',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        }
+    }).next().on(ace.click_event, function() {
+        $(this).prev().focus();
+    });
 }
 
 // Dropzone handler

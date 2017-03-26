@@ -18,6 +18,8 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
+require_once( __DIR__ . '/core/graph_api.php' );
+
 /**
  * Mantis Graph plugin
  */
@@ -56,12 +58,40 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function hooks() {
 		$t_hooks = array(
+			'EVENT_REST_API_ROUTES' => 'routes',
 			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
 		return $t_hooks;
+	}
+
+	/**
+	 * Add the RESTful routes that are handled by this plugin.
+	 *
+	 * @param $p_event_name The event name
+	 * @param $p_event_args The event arguments
+	 * @return void
+	 */
+	function routes( $p_event_name, $p_event_args ) {
+		$t_app = $p_event_args['app'];
+		$t_app->group( plugin_route_group(), function() use ( $t_app ) {
+			$t_app->get( '/reporters', function( $req, $res, $args ) {
+				if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
+					$t_report_associative = create_reporter_summary();
+					$t_report = array();
+
+					foreach( $t_report_associative as $t_name => $t_count ) {
+						$t_report[] = array( "name" => $t_name, "count" => $t_count );
+					}
+
+					return $res->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_report );
+				}
+
+				return $res->withStatus( HTTP_STATUS_FORBIDDEN );
+			} );
+		} );
 	}
 
 	/**

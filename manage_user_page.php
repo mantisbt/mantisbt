@@ -170,7 +170,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	} else {
 		$t_title = '';
 	}
-	$t_active = $t_prefix === $f_filter ? 'active' : '';
+	$t_active = (string)$t_prefix === $f_filter ? 'active' : '';
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
