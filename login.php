@@ -41,7 +41,7 @@ require_api( 'print_api.php' );
 require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 
-$t_allow_perm_login = ( ON == config_get( 'allow_permanent_cookie' ) );
+$t_allow_perm_login = auth_allow_perm_login();
 
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
@@ -91,7 +91,7 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
-	$t_redirect_url = 'login_page.php?' . $t_query_text;
+	$t_redirect_url = auth_login_page( $t_query_text );
 
 	if( HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_prompt();

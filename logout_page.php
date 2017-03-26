@@ -34,4 +34,4 @@ require_api( 'print_api.php' );
 
 auth_logout();
 
-print_header_redirect( config_get( 'logout_redirect_page' ), true, false );
+print_header_redirect( auth_logout_redirect_page(), true, false );

@@ -50,7 +50,7 @@ require_css( 'login.css' );
 
 
 # check if at least one way to get here is enabled
-if( OFF == config_get( 'allow_signup' ) &&
+if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
@@ -88,7 +88,7 @@ $t_row = user_get_row( $f_user_id );
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
-$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_can_change_password = auth_can_set_password( $f_user_id );
 
 layout_login_page_begin();
 
@@ -112,7 +112,7 @@ layout_login_page_begin();
 				echo '</div>';
 			} else {
 				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
-				echo lang_get( 'no_password_change' );
+				echo auth_password_change_not_allowed_message();
 				echo '</div>';
 			}
 		?>

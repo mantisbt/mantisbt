@@ -40,6 +40,10 @@ auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
+if( !auth_can_create_api_token() ) {
+	access_denied();
+}
+
 layout_page_header( lang_get( 'api_tokens_link' ) );
 layout_page_begin();
 print_account_menu( 'api_tokens_page.php' );

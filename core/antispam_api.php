@@ -36,7 +36,7 @@ require_api( 'history_api.php' );
  * error and exit the script.
  */
 function antispam_check() {
-	if( OFF == config_get_global( 'allow_signup' ) ) {
+	if( !auth_signup_enabled() ) {
 		return;
 	}
 
