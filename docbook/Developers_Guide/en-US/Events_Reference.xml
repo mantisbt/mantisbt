@@ -165,6 +165,8 @@
 					behaviors and can provide their own login flow pages.  For list of supported flags
 					check auth_flags() method in core/authentication_api.  Only a single auth plugin can be
 					hooked to this.  Flags that are not returned by the plugin will be set to defaults.
+					Checkout <ulink url="https://github.com/mantisbt-plugins/SampleAuth">SampleAuth plugin</ulink>
+					for more details.
 				</para>
 			</blockquote>
 		</blockquote>
