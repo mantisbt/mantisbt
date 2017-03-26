@@ -83,6 +83,7 @@ function auth_flags() {
 	if( is_null( $s_flags ) ) {
 		$t_default_flags = array(
 			'signup_enabled' => config_get_global( 'allow_signup' ),
+			'signup_access_level' => config_get( 'default_new_account_access_level' ),
 			'anonymous_enabled' => config_get_global( 'allow_anonymous_login' ),
 			'anonymous_account' => config_get_global( 'anonymous_account' ),
 			'access_level_set_password' => ANYBODY,
@@ -155,11 +156,28 @@ function auth_signup_enabled() {
 	return $t_auth_flags['signup_enabled'] != OFF;
 }
 
+/**
+ * Get the access level for users that signup.
+ * @return integer The access level to use.
+ */
+function auth_signup_access_level() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags['signup_access_level'];
+}
+
+/**
+ * Anonymous login enabled.
+ * @return bool true: enabled; false: otherwise.
+ */
 function auth_anonymous_enabled() {
 	$t_auth_flags = auth_flags();
 	return $t_auth_flags['anonymous_enabled'] != OFF;
 }
 
+/**
+ * Get the anonymous account username.
+ * @return string Anonymous account username.
+ */
 function auth_anonymous_account() {
 	$t_auth_flags = auth_flags();
 	if( $t_auth_flags['anonymous_enabled'] == OFF ) {

@@ -659,7 +659,7 @@ function user_signup( $p_username, $p_email = null ) {
 	# Create random password
 	$t_password = auth_generate_random_password();
 
-	return user_create( $p_username, $t_password, $p_email );
+	return user_create( $p_username, $t_password, $p_email, auth_signup_access_level() );
 }
 
 /**
