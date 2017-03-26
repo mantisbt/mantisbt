@@ -156,6 +156,18 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.auth.flags">
+			<title>EVENT_AUTH_FLAGS (First)</title>
+
+			<blockquote>
+				<para>
+					An event that enables plugins to return a set of flags that control the authentication
+					behaviors and can provide their own login flow pages.  For list of supported flags
+					check auth_flags() method in core/authentication_api.  Only a single auth plugin can be
+					hooked to this.  Flags that are not returned by the plugin will be set to defaults.
+				</para>
+			</blockquote>
+		</blockquote>
 	</section>
 
 	<xi:include href="Events_Reference_Output.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
