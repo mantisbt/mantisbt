@@ -201,7 +201,7 @@ function auth_login_page( $p_query_string = '' ) {
 
 	if( !is_blank( $p_query_string ) ) {
 		if( stripos( $t_login_page, '?' ) !== false ) {
-			$t_login_page .= '&amp;' . $p_query_string;
+			$t_login_page .= '&' . $p_query_string;
 		} else {
 			$t_login_page .= '?' . $p_query_string;
 		}
