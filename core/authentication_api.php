@@ -76,37 +76,13 @@ $g_cache_current_user_id = null;
 
 /**
  * Gets set of flags for authentication that can be overridden by configuration or auth plugins.
- * @return array The array of flags to use.
+ * @return AuthFlags The auth flags object to use.
  */
 function auth_flags() {
 	static $s_flags = null;
 	if( is_null( $s_flags ) ) {
-		$t_default_flags = array(
-			'signup_enabled' => config_get_global( 'allow_signup' ),
-			'signup_access_level' => config_get( 'default_new_account_access_level' ),
-			'anonymous_enabled' => config_get_global( 'allow_anonymous_login' ),
-			'anonymous_account' => config_get_global( 'anonymous_account' ),
-			'access_level_set_password' => ANYBODY,
-			'password_managed_elsewhere_message' => '',
-			'password_change_not_allowed_message' => '',
-			'access_level_create_api_tokens' => VIEWER,
-			'access_level_can_use_standard_login' => ANYBODY,
-			'login_page' => 'login_page.php',
-			'logout_page' => 'logout_page.php',
-			'logout_redirect_page' => config_get( 'logout_redirect_page' ),
-			'session_lifetime' => 0,
-			'perm_session_enabled' => config_get_global( 'allow_permanent_cookie' ) == ON,
-			'perm_session_lifetime' => config_get_global( 'cookie_time_length' ),
-			'reauthentication_enabled' => config_get( 'reauthentication' ),
-			'reauthentication_expiry' => config_get( 'reauthentication_expiry' ),
-		);
-
-		$s_flags = event_signal( 'EVENT_AUTH_FLAGS' );
-		if( is_null( $s_flags ) || !is_array( $s_flags ) ) {
-			$s_flags = array();
-		}
-
-		$s_flags = array_merge( $t_default_flags, $s_flags );
+		$s_flags = new AuthFlags();
+		$s_flags = event_signal( 'EVENT_AUTH_FLAGS', array( 'flags' => $s_flags ) );
 	}
 
 	return $s_flags;
@@ -118,11 +94,7 @@ function auth_flags() {
  */
 function auth_password_managed_elsewhere_message() {
 	$t_auth_flags = auth_flags();
-	if( !empty( $t_auth_flags['password_managed_elsewhere_message'] ) ) {
-		return $t_auth_flags['password_managed_elsewhere_message'];
-	}
-
-	return lang_get( 'no_password_request' );
+	return $t_auth_flags->getPasswordManagedExternallyMessage();
 }
 
 /**
@@ -131,11 +103,7 @@ function auth_password_managed_elsewhere_message() {
  */
 function auth_password_change_not_allowed_message() {
 	$t_auth_flags = auth_flags();
-	if( !empty( $t_auth_flags['password_change_not_allowed_message'] ) ) {
-		return $t_auth_flags['password_change_not_allowed_message'];
-	}
-
-	return lang_get( 'no_password_change' );
+	return $t_auth_flags->getPasswordManagedExternallyMessage();
 }
 
 /**
@@ -144,7 +112,7 @@ function auth_password_change_not_allowed_message() {
  */
 function auth_allow_perm_login() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['perm_session_enabled'];
+	return $t_auth_flags->getPermSessionEnabled();
 }
 
 /**
@@ -153,7 +121,7 @@ function auth_allow_perm_login() {
  */
 function auth_signup_enabled() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['signup_enabled'] != OFF;
+	return $t_auth_flags->getSignupEnabled();
 }
 
 /**
@@ -162,7 +130,7 @@ function auth_signup_enabled() {
  */
 function auth_signup_access_level() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['signup_access_level'];
+	return $t_auth_flags->getSignupAccessLevel();
 }
 
 /**
@@ -171,7 +139,7 @@ function auth_signup_access_level() {
  */
 function auth_anonymous_enabled() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['anonymous_enabled'] != OFF;
+	return $t_auth_flags->getAnonymousEnabled();
 }
 
 /**
@@ -180,11 +148,7 @@ function auth_anonymous_enabled() {
  */
 function auth_anonymous_account() {
 	$t_auth_flags = auth_flags();
-	if( $t_auth_flags['anonymous_enabled'] == OFF ) {
-		return '';
-	}
-
-	return $t_auth_flags['anonymous_account'];
+	return $t_auth_flags->getAnonymousAccount();
 }
 
 /**
@@ -192,17 +156,17 @@ function auth_anonymous_account() {
  * @param boolean $p_perm_login Use permanent login.
  * @return integer cookie lifetime or 0 for browser session.
  */
-function auth_session_expiry($p_perm_login ) {
+function auth_session_expiry( $p_perm_login ) {
 	$t_auth_flags = auth_flags();
 	$t_perm_login = $p_perm_login;
-	if( !$t_auth_flags['perm_session_enabled'] ) {
+	if( !$t_auth_flags->getPermSessionEnabled() ) {
 		$t_perm_login = false;
 	}
 
 	if( $t_perm_login ) {
-		$t_lifetime = $t_auth_flags['perm_session_lifetime'];
+		$t_lifetime = $t_auth_flags->getPermSessionLifetime();
 	} else {
-		$t_lifetime = $t_auth_flags['session_lifetime'];
+		$t_lifetime = $t_auth_flags->getSessionLifetime();
 	}
 
 	return $t_lifetime == 0 ? 0 : time() + $t_lifetime;
@@ -215,7 +179,7 @@ function auth_session_expiry($p_perm_login ) {
  */
 function auth_login_page( $p_query_string = '' ) {
 	$t_auth_flags = auth_flags();
-	$t_login_page = $t_auth_flags['login_page'];
+	$t_login_page = $t_auth_flags->getLoginPage();
 
 	if( !is_blank( $p_query_string ) ) {
 		if( stripos( $t_login_page, '?' ) !== false ) {
@@ -234,7 +198,7 @@ function auth_login_page( $p_query_string = '' ) {
  */
 function auth_logout_page() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['logout_page'];
+	return $t_auth_flags->getLogoutPage();
 }
 
 /**
@@ -243,7 +207,7 @@ function auth_logout_page() {
  */
 function auth_logout_redirect_page() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['logout_redirect_page'];
+	return $t_auth_flags->getLogoutRedirectPage();
 }
 
 /**
@@ -253,7 +217,7 @@ function auth_logout_redirect_page() {
  */
 function auth_can_create_api_token( $p_user_id = null ) {
 	$t_auth_flags = auth_flags();
-	return access_has_global_level( $t_auth_flags['access_level_create_api_tokens'], $p_user_id );
+	return access_has_global_level( $t_auth_flags->getCreateApiTokensThreshold(), $p_user_id );
 }
 
 /**
@@ -266,10 +230,10 @@ function auth_can_set_password( $p_user_id = null ) {
 
 	# If it is a signup scenario and user is not authenticated, return false.
 	if( $p_user_id == NO_USER ) {
-		return $t_auth_flags['access_level_set_password'] == ANYBODY;
+		return $t_auth_flags->getSetPasswordThreshold() === ANYBODY;
 	}
 
-	if( !access_has_global_level( $t_auth_flags['access_level_set_password'], $p_user_id ) ) {
+	if( !access_has_global_level( $t_auth_flags->getSetPasswordThreshold(), $p_user_id ) ) {
 		return false;
 	}
 
@@ -291,10 +255,10 @@ function auth_can_set_password( $p_user_id = null ) {
 function auth_can_use_standard_login( $p_user_id = null ) {
 	$t_auth_flags = auth_flags();
 	if( $p_user_id === NO_USER ) {
-		return $t_auth_flags['access_level_can_use_standard_login'] == ANYBODY;
+		return $t_auth_flags->getUseStandardLoginThreshold() === ANYBODY;
 	}
 
-	return access_has_global_level( $t_auth_flags['access_level_can_use_standard_login'], $p_user_id );
+	return access_has_global_level( $t_auth_flags->getUseStandardLoginThreshold(), $p_user_id );
 }
 
 /**
@@ -981,7 +945,7 @@ function auth_set_tokens( $p_user_id ) {
  */
 function auth_reauthentication_enabled() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['reauthentication_enabled'] != OFF;
+	return $t_auth_flags->getReauthenticationEnabled();
 }
 
 /**
@@ -990,7 +954,7 @@ function auth_reauthentication_enabled() {
  */
 function auth_reauthentication_expiry() {
 	$t_auth_flags = auth_flags();
-	return $t_auth_flags['reauthentication_expiry'];
+	return $t_auth_flags->getReauthenticationLifetime();
 }
 
 /**
