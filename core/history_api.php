@@ -179,6 +179,112 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 }
 
 /**
+ * Creates and executes a query for the history rows, returning a database result object.
+ * Query options is an array with parameters to build the query.
+ *
+ * Supported options are:
+ * - "bug_id" => integer | array    Limit search to these bug ids.
+ * - "start_time" => integer        Timestamp for start time to filter by (inclusive)
+ * - "end_time" => integer          Timestamp for end time to filter by (exclusive)
+ * - "user_id" => integer | array   Limit search to actions by these user ids.
+ * - "filter" => filter array       A filter array to limit history to bugs matched by this filter.
+ * - "order" => Sort order          'ASC' or 'DESC' for result order.
+ *
+ * Any option can be omitted.
+ *
+ * @param array $p_query_options	Array of query options
+ * @return database result to pass into history_get_event_from_row().
+ */
+function history_query_result( array $p_query_options ) {
+	# check query order by
+	if( isset( $p_query_options['order'] ) ) {
+		$t_history_order = $p_query_options['order'];
+	} else {
+		$t_history_order = config_get( 'history_order' );
+	}
+
+	$t_where = array();
+
+	# if a filter is provided, prepare subselect
+	if( isset( $p_query_options['filter'] ) ) {
+		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+		$t_query_clauses = filter_get_bug_rows_query_clauses( $p_query_options['filter'], null, null, null );
+		# if the query can't be formed, there are no results
+		if( empty( $t_query_clauses ) ) {
+			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+			db_param_pop();
+			return db_empty_result();
+		}
+		$t_select_string = 'SELECT {bug}.id ';
+		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+		if( count( $t_query_clauses['where'] ) > 0 ) {
+			$t_where_string .= ' AND ( ';
+			$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
+			$t_where_string .= ' ) ';
+		}
+		$t_where[] = '{bug_history}.bug_id IN'
+			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
+		$t_params = $t_query_clauses['where_values'];
+	} else {
+		db_param_push();
+		$t_params = array();
+	}
+
+	# Start time
+	if( isset( $p_query_options['start_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified >= ' . db_param();
+		$t_params[] = $p_query_options['start_time'];
+	}
+
+	# End time
+	if( isset( $p_query_options['end_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified < ' . db_param();
+		$t_params[] = $p_query_options['end_time'];
+	}
+
+	# Bug ids
+	if( isset( $p_query_options['bug_id'] ) ) {
+		if( is_array( $p_query_options['bug_id'] ) ) {
+			$t_in_strparams = array();
+			foreach ( $p_query_options['bug_id'] as $t_id ) {
+				$t_in_strparams[] = db_param();
+				$t_params[] = $t_id;
+			}
+			$t_in_str = '{bug_history}.bug_id IN (' . implode( ',', $t_in_strparams ) . ')';
+		} else {
+			$t_where[] = '{bug_history}.bug_id = ' . db_param();
+			$t_params[] = $p_query_options['bug_id'];
+		}
+	}
+
+	# User ids
+	if( isset( $p_query_options['user_id'] ) ) {
+		if( is_array( $p_query_options['user_id'] ) ) {
+			$t_in_strparams = array();
+			foreach ( $p_query_options['user_id'] as $t_id ) {
+				$t_in_strparams[] = db_param();
+				$t_params[] = $t_id;
+			}
+			$t_in_str = '{bug_history}.user_id IN (' . implode( ',', $t_in_strparams ) . ')';
+		} else {
+			$t_where[] = '{bug_history}.user_id = ' . db_param();
+			$t_params[] = $p_query_options['user_id'];
+		}
+	}
+
+	$t_query = 'SELECT * FROM {bug_history}';
+	if ( count( $t_where ) > 0 ) {
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+	}
+
+	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
+	$t_result = db_query( $t_query, $t_params );
+	return $t_result;
+}
+
+/**
  * Creates and executes a query for the history rows related to bugs matched by the provided filter
  * @param  array $p_filter           Filter array
  * @param  integer $p_start_time     The start time to filter by, or null for all.
@@ -187,54 +293,20 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * @return database result to pass into history_get_event_from_row().
  */
 function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
-	if ( $p_history_order === null ) {
-		$t_history_order = config_get( 'history_order' );
-	} else {
-		$t_history_order = $p_history_order;
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
 	}
-
-	# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
-	$t_query_clauses = filter_get_bug_rows_query_clauses( $p_filter, null, null, null );
-
-	# if the query can't be formed, there are no results
-	if( empty( $t_query_clauses ) ) {
-		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-		db_param_pop();
-		return db_empty_result();
-	}
-
-	$t_select_string = 'SELECT {bug}.id ';
-	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-	if( count( $t_query_clauses['where'] ) > 0 ) {
-		$t_where_string .= ' AND ( ';
-		$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
-		$t_where_string .= ' ) ';
-	}
-
-	$t_query = 'SELECT * FROM {bug_history} WHERE {bug_history}.bug_id IN'
-			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
-
-	$t_params = $t_query_clauses['where_values'];
-	$t_where = array();
 	if ( $p_start_time !== null ) {
-		$t_where[] = 'date_modified >= ' . db_param();
-		$t_params[] = $p_start_time;
+		$t_query_options['start_time'] = $p_start_time;
 	}
-
 	if ( $p_end_time !== null ) {
-		$t_where[] = 'date_modified < ' . db_param();
-		$t_params[] = $p_end_time;
+		$t_query_options['end_time'] = $p_end_time;
 	}
-
-	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' AND ' . implode( ' AND ', $t_where );
+	if ( $p_filter !== null ) {
+		$t_query_options['filter'] = $p_filter;
 	}
-
-	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
-	$t_result = db_query( $t_query, $t_params );
-	return $t_result;
+	return history_query_result( $t_query_options );
 }
 
 /**
@@ -246,41 +318,20 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
  * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
  */
 function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
-	if ( $p_history_order === null ) {
-		$t_history_order = config_get( 'history_order' );
-	} else {
-		$t_history_order = $p_history_order;
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
 	}
-
-	db_param_push();
-	$t_query = 'SELECT * FROM {bug_history}';
-	$t_params = array();
-	$t_where = array();
-
-	if ( $p_bug_id !== null ) {
-		$t_where[] = 'bug_id=' . db_param();
-		$t_params = array( $p_bug_id );
-	}
-
 	if ( $p_start_time !== null ) {
-		$t_where[] = 'date_modified >= ' . db_param();
-		$t_params[] = $p_start_time;
+		$t_query_options['start_time'] = $p_start_time;
 	}
-
 	if ( $p_end_time !== null ) {
-		$t_where[] = 'date_modified < ' . db_param();
-		$t_params[] = $p_end_time;
+		$t_query_options['end_time'] = $p_end_time;
 	}
-
-	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+	if ( $p_bug_id !== null ) {
+		$t_query_options['bug_id'] = $p_bug_id;
 	}
-
-	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id ' . $t_history_order;
-
-	$t_result = db_query( $t_query, $t_params );
-
-	return $t_result;
+	return history_query_result( $t_query_options );
 }
 
 /**
