@@ -264,7 +264,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  */
 function convert_date_format_to_momentjs( $p_php_format )
 {
-    $replacements = [
+    $t_replacements = array(
         'd' => 'DD',
         'D' => 'ddd',
         'j' => 'D',
@@ -302,8 +302,7 @@ function convert_date_format_to_momentjs( $p_php_format )
         'c' => '', // no equivalent
         'r' => '', // no equivalent
         'U' => 'X',
-    ];
-    $momentFormat = strtr( $p_php_format, $replacements );
+	);
 
-    return $momentFormat;
+    return strtr( $p_php_format, $t_replacements );
 }
