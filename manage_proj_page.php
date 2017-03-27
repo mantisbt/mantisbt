@@ -92,7 +92,13 @@ print_manage_menu( 'manage_proj_page.php' );
 	</div>
 	<div class="widget-body">
 	<div class="widget-main no-padding">
-
+	<div class="widget-toolbox padding-8 clearfix">
+		<?php
+		# Check the user's global access level before allowing project creation
+		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+			print_form_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
+		} ?>
+	</div>
 	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
@@ -172,13 +178,6 @@ print_manage_menu( 'manage_proj_page.php' );
 		</tbody>
 	</table>
 </div>
-	</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<?php
-		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-			print_form_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
-		} ?>
 	</div>
 	</div>
 	</div>
