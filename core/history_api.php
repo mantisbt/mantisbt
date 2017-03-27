@@ -279,6 +279,7 @@ function history_query_result( array $p_query_options ) {
 		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
 	}
 
+	# Order history lines by date. Use the storing sequence as 2nd order field for lines with the same date.
 	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
 	$t_result = db_query( $t_query, $t_params );
 	return $t_result;
@@ -291,8 +292,12 @@ function history_query_result( array $p_query_options ) {
  * @param  integer $p_end_time       The end time to filter by, or null for all.
  * @param  string  $p_history_order  The sort order.
  * @return database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
  */
 function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$t_query_options = array();
 	if ( $p_history_order !== null ) {
 		$t_query_options['order'] = $p_history_order;
@@ -316,8 +321,12 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
  * @param  integer $p_end_time       The end time to filter by, or null for all.
  * @param  string  $p_history_order  The sort order.
  * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
  */
 function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$t_query_options = array();
 	if ( $p_history_order !== null ) {
 		$t_query_options['order'] = $p_history_order;
@@ -475,14 +484,12 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	# grab history and display by date_modified then field_name
-	# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
-	# date, it's better to respect the storing order otherwise we should risk to mix different information
-	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
-	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
-	# for the new bug with the same timestamp...)
-
-	$t_result = history_get_range_result( $p_bug_id, $p_start_time, $p_end_time );
+	$t_query_options = array(
+		'bug_id' => $p_bug_id,
+		'start_time' => $p_start_time,
+		'end_time' => $p_end_time
+		);
+	$t_result = history_query_result( $t_query_options );
 
 	$t_raw_history = array();
 
