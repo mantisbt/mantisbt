@@ -97,26 +97,26 @@ print_manage_menu( 'manage_proj_page.php' );
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
-				<td><?php
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
-				</td>
+				</th>
 			</tr>
 		</thead>
 
