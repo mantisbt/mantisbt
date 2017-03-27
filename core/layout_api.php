@@ -273,6 +273,9 @@ function layout_head_css() {
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
 	}
 
+	# floating scroll (no cdn available)
+	html_css_link( 'jquery.floatingscroll-' . FLOATING_SCROLL_VERSION . '.min.css' );
+
 	# page specific plugin styles
 
 	# theme styles
@@ -331,6 +334,9 @@ function layout_body_javascript() {
 		# listjs
 		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
 	}
+
+	# floating scroll (no cdn available)
+	html_javascript_link( 'jquery.floatingscroll-' . FLOATING_SCROLL_VERSION . '.min.js' );
 
 	# ace theme scripts
 	html_javascript_link( 'ace.min.js' );

@@ -442,6 +442,12 @@ $(document).ready( function() {
 		var listobject =  new List( this, listoptions );
 		$(this).data('listobject',listobject).data('listoptions',listoptions).addClass('listjs-table');
 	});
+
+	/**
+	 * This plugin enables an always-visible horizontal scroll bar on tables
+	 * when the actual scroll bar is outside the viewport.
+	 */
+	$('.table-responsive').floatingScroll();
 });
 
 function setBugLabel() {
