@@ -62,13 +62,17 @@ require_api( 'lang_api.php' );
 	$t_collapse_block = is_collapsed( 'bugnote_add' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
 ?>
 <form id="bugnoteadd"
 	method="post"
 	action="bugnote_add.php"
 	enctype="multipart/form-data"
-	class="dz dropzone-form"
-	<?php print_dropzone_form_data() ?>>
+	<?php if( $t_allow_file_upload ) {
+		echo ' class="dz dropzone-form" ';
+		print_dropzone_form_data();
+	} ?>
+	>
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -140,7 +144,7 @@ require_api( 'lang_api.php' );
 		}
 	}
 
-	if( file_allow_bug_upload( $f_bug_id ) ) {
+	if( $t_allow_file_upload ) {
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 
