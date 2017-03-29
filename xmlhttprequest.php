@@ -40,7 +40,7 @@ $f_entrypoint = gpc_get_string( 'entrypoint' );
 
 $t_function = 'xmlhttprequest_' . $f_entrypoint;
 if( function_exists( $t_function ) ) {
-	log_event( LOG_AJAX, 'Calling {' . $t_function . '}...' );
+	log_event( LOG_AJAX, 'DEPRECATED: Calling {' . $t_function . '}. Use REST API instead.' );
 	call_user_func( $t_function );
 } else {
 	log_event( LOG_AJAX, 'Unknown function for entry point = ' . $t_function );
