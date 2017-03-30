@@ -52,7 +52,7 @@ class RestFault {
 	 * RestFault constructor.
 	 *
 	 * @param integer $p_status_code The http status code
-	 * @param string $p_faultstring The error description
+	 * @param string $p_fault_string The error description
 	 */
 	function __construct( $p_status_code, $p_fault_string = '' ) {
 		$this->status_code = $p_status_code;
