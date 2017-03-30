@@ -113,7 +113,7 @@ function prepare_version_string( $p_project_id, $p_version_id ) {
  *   The CSS classes to implement will be named [$p_class_prefix]-avatar_container-[$p_size] and 
  *   [$p_class_prefix]-avatar-[$p_size].
  * @param integer $p_size           Image maximum size.
- * @return the HTML string of the avatar.
+ * @return string the HTML string of the avatar.
  */
 function prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size) {
 	if( $p_avatar === null ) {
@@ -136,7 +136,7 @@ function prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size) {
  *   The CSS classes to implement will be named [$p_class_prefix]-avatar-container-[$p_size] and
  *   [$p_class_prefix]-avatar-[$p_size].
  * @param integer $p_size           Image maximum size.
- * @return the HTML string of the avatar.
+ * @return string the HTML string of the avatar.
  */
 function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
 	if( $p_avatar === null ) {
