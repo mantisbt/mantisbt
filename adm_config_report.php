@@ -584,7 +584,7 @@ if( $t_read_write_access ) {
 					<input type="text" name="config_option" class="input-sm"
 						   value="<?php echo string_display_line( $t_edit_option ); ?>"
 						   size="64" maxlength="64" />
-					<input type="hidden" name="original_config_option" value="<?php echo $t_edit_option; ?>" />
+					<input type="hidden" name="original_config_option" value="<?php echo string_display_line( $t_edit_option ); ?>" />
 				</td>
 			</tr>
 

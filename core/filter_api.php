@@ -586,8 +586,45 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = filter_get_default_property( FILTER_PROPERTY_SORT_DIRECTION, $t_view_type );
 	}
 
-	# validate or filter junk from other fields
-	$t_multi_select_list = array(
+	# Validate types for values.
+
+	# helper function to validate types
+	$t_function_validate_type = function( $p_value, $p_type ) {
+		$t_value = stripslashes( $p_value );
+		if( ( $t_value === 'any' ) || ( $t_value === '[any]' ) ) {
+			$t_value = META_FILTER_ANY;
+		}
+		if( ( $t_value === 'none' ) || ( $t_value === '[none]' ) ) {
+			$t_value = META_FILTER_NONE;
+		}
+		# Ensure the filter property has the right type - see #20087
+		switch( $p_type ) {
+			case 'string' :
+			case 'int' :
+				settype( $t_value, $p_type );
+				break;
+		}
+		return $t_value;
+	};
+
+	# Validate properties that must not be arrays
+	$t_single_value_list = array(
+		FILTER_PROPERTY_VIEW_STATE => 'int',
+	);
+	foreach( $t_single_value_list as $t_field_name => $t_field_type ) {
+		$t_value = $p_filter_arr[$t_field_name];
+		if( is_array( $t_value ) ) {
+			if( count( $t_value ) > 0 ) {
+				$p_filter_arr[$t_field_name] = reset( $t_value );
+			} else {
+				$p_filter_arr[$t_field_name] = filter_get_default_property( $t_field_name, $t_view_type );
+			}
+		}
+		$p_filter_arr[$t_field_name] = $t_function_validate_type( $p_filter_arr[$t_field_name], $t_field_type );
+	}
+
+	# Validate properties that must be arrays, and the type of its elements
+	$t_array_values_list = array(
 		FILTER_PROPERTY_CATEGORY_ID => 'string',
 		FILTER_PROPERTY_SEVERITY => 'int',
 		FILTER_PROPERTY_STATUS => 'int',
@@ -608,7 +645,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		FILTER_PROPERTY_OS_BUILD => 'string',
 		FILTER_PROPERTY_PROJECT_ID => 'int'
 	);
-	foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
+	foreach( $t_array_values_list as $t_multi_field_name => $t_multi_field_type ) {
 		if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
 			$p_filter_arr[$t_multi_field_name] = array(
 				$p_filter_arr[$t_multi_field_name],
@@ -616,21 +653,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		}
 		$t_checked_array = array();
 		foreach( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
-			$t_filter_value = stripslashes( $t_filter_value );
-			if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
-				$t_filter_value = META_FILTER_ANY;
-			}
-			if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
-				$t_filter_value = META_FILTER_NONE;
-			}
-			# Ensure the filter property has the right type - see #20087
-			switch( $t_multi_field_type ) {
-				case 'string' :
-				case 'int' :
-					settype( $t_filter_value, $t_multi_field_type );
-					break;
-			}
-			$t_checked_array[] = $t_filter_value;
+			$t_checked_array[] = $t_function_validate_type( $t_filter_value, $t_multi_field_type );
 		}
 		$p_filter_arr[$t_multi_field_name] = $t_checked_array;
 	}
@@ -3153,10 +3176,16 @@ function filter_gpc_get( array $p_filter = null ) {
 
 	# custom field updates
 	$t_custom_fields 		= custom_field_get_ids(); # @todo (thraxisp) This should really be the linked ids, but we don't know the project
-	$f_custom_fields_data 	= array();
+	$f_custom_fields_data 	= $t_filter['custom_fields'];
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
+
+				# check if gpc parameters are present, otherwise skip parsing.
+				if( !gpc_isset( 'custom_field_' . $t_cfid . '_control' ) ) {
+					continue;
+				}
+
 				$f_custom_fields_data[$t_cfid] = array();
 
 				# Get date control property
@@ -3235,6 +3264,12 @@ function filter_gpc_get( array $p_filter = null ) {
 				$f_custom_fields_data[$t_cfid][2] = $t_end;
 
 			} else {
+
+				# check if gpc parameters are present, otherwise skip parsing.
+				if( !gpc_isset( 'custom_field_' . $t_cfid ) ) {
+					continue;
+				}
+
 				if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
 				} else {
