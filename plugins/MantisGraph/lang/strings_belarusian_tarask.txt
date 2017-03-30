@@ -59,6 +59,7 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Паводле прыярыт�
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Паводле сур’ёзнасьці графікаў';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Паводле катэгорыі графікаў';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Паводле вырашэньня графікаў';
+$s_plugin_MantisGraph_graph_developer_title = 'Паводле распрацоўнікаў графікаў';
 $s_plugin_MantisGraph_by_status_pct = 'Па статусе ў адсотках';
 $s_plugin_MantisGraph_by_priority_pct = 'Па прыярытэце ў адсотках';
 $s_plugin_MantisGraph_by_severity_pct = 'Па сур’ёзнасьці ў адсотках';
