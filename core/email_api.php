@@ -828,7 +828,7 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 /**
  * Email related issues when a bug is deleted.  This should be deleted before the bug is deleted.
  *
- * @param $p_bug_id The id of the bug to be deleted.
+ * @param integer $p_bug_id The id of the bug to be deleted.
  * @return void
  */
 function email_relationship_bug_deleted( $p_bug_id ) {
