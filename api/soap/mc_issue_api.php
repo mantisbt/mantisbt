@@ -1000,7 +1000,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( is_blank( $t_description ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Client', 'Mandatory field \'description\' is missing.' );
+		return ApiObjectFactory::faultBadRequest( 'Mandatory field \'description\' is missing.' );
 	}
 
 	# fields which we expect to always be set
