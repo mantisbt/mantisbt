@@ -97,52 +97,21 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Customize the logic on Header elements
+	 * Customize the blockHeader markdown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return string|null HTML representation generated from markdown or
-	 *                     null if markdown starts with # symbol
+	 * @return string|null HTML representation generated from markdown or null
+	 *                if text is not a valid header per CommonMark spec
 	 */
 	protected function blockHeader( $line ) {
-		$block = parent::blockHeader( $line );
-
-		# Bug links should not be treated as headers
-		if( $this->isBugLink( $line['text'] ) ) {
-			return null;
+		# Header detection logic
+		# - the opening # may be indented 0-3 spaces
+		# - a sequence of 1–6 '#' characters
+		# - The #'s must be followed by a space or a newline
+		if ( preg_match( '/^ {0,3}#{1,6}(?: |$)/', $line['text'] ) ) {
+			return parent::blockHeader($line);
 		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
-	}
-
-	/**
-	 * Customize the logic on setting the Header elements.
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return string|null HTML representation generated from markdown or
-	 *                     null if markdown starts with # symbol
-	 */
-	protected function blockSetextHeader( $line, array $block = null ) {
-		$block = parent::blockSetextHeader( $line, $block );
-
-		# Bug links should not be treated as headers
-		if( $this->isBugLink( $line['text'] ) ) {
-			return null;
-		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
 	}
 
 	/**
@@ -265,6 +234,24 @@ class MantisMarkdown extends Parsedown
 	}
 	
 	/**
+	 * Customize the blockCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockCodeComplete( $block ) {
+
+		$block = parent::blockCodeComplete( $block );
+
+		if( isset( $block['element']['text']['text'] )) {
+			$this->processAmpersand( $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
 	 * Customize the inlineLink method
 	 *
 	 * @param array $block A block-level element
@@ -305,17 +292,6 @@ class MantisMarkdown extends Parsedown
 	 */
 	private function processAmpersand( &$p_text ) {
 		$p_text = str_replace( '&amp;', '&', $p_text );
-	}
-
-	/**
-	 * Check if the given string is a bug link reference.
-	 *
-	 * @param string $p_text
-	 * @return bool
-	 */
-	private function isBugLink( $p_text ) {
-		return '#' == config_get_global( 'bug_link_tag' )
-			&& preg_match_all( '/^#\d+$/', $p_text, $matches );
 	}
 
 }
