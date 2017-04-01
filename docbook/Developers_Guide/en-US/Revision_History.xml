@@ -8,6 +8,20 @@
 	<simpara>
 		<revhistory>
 			<revision>
+				<revnumber>2.3-1</revnumber>
+				<date>Fri Mar 31 2017</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.3.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>2.2-3</revnumber>
 				<date>Wed Mar 22 2017</date>
 				<author>
