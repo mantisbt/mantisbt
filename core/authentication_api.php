@@ -81,8 +81,8 @@ $g_cache_current_user_id = null;
 function auth_flags() {
 	static $s_flags = null;
 	if( is_null( $s_flags ) ) {
-		$s_flags = new AuthFlags();
-		$s_flags = event_signal( 'EVENT_AUTH_FLAGS', array( 'flags' => $s_flags ) );
+		$t_flags = new AuthFlags();
+		$s_flags = event_signal( 'EVENT_AUTH_FLAGS', $t_flags );
 	}
 
 	return $s_flags;
