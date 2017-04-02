@@ -2751,7 +2751,6 @@ $g_view_bug_threshold = VIEWER;
 
 /**
  * Access level needed to monitor bugs.
- * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_monitor_bug_threshold
  */
 $g_monitor_bug_threshold = REPORTER;
@@ -2765,7 +2764,6 @@ $g_show_monitor_list_threshold = DEVELOPER;
 /**
  * Access level needed to add other users to the list of users monitoring
  * a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_add_others_bug_threshold
@@ -2775,7 +2773,6 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 /**
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
- * Look in the constant_inc.php file if you want to set a different value.
  * This setting should not be lower than $g_show_monitor_list_threshold.
  * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_delete_others_bug_threshold
@@ -2784,14 +2781,12 @@ $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
  * Access level required to export issues
- * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_export_issues_threshold
  */
 $g_export_issues_threshold = VIEWER;
 
 /**
  * access level needed to view private bugs
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bug_threshold
  */
 $g_private_bug_threshold = DEVELOPER;
@@ -2813,7 +2808,6 @@ $g_update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
- * Look in the constant_inc.php file if you want to set a different value
  * @global integer $g_private_bugnote_threshold
  */
 $g_private_bugnote_threshold = DEVELOPER;
