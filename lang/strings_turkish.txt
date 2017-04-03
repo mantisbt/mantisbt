@@ -57,6 +57,7 @@
  * @author Thinkfast
  * @author Trockya
  * @author Violetanka
+ * @author Vito Genovese
  */
 
 $s_directionality = 'soldan sağa';
