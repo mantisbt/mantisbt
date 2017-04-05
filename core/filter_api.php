@@ -1516,8 +1516,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			&& is_string( $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] )
 			&& is_string( $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] )
 			) {
-		$t_start_string = $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] . ' 00:00:00';
-		$t_end_string = $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] . ' 23:59:59';
+		$t_start_string = $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED];
+		$t_end_string = $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED];
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
@@ -1530,8 +1530,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			&& is_string( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] )
 			&& is_string( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] )
 			) {
-		$t_start_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] . ' 00:00:00';
-		$t_end_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] . ' 23:59:59';
+		$t_start_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE];
+		$t_end_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE];
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
