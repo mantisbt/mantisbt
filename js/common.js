@@ -354,14 +354,27 @@ $(document).ready( function() {
         }
     });
 
-    $('input#tagsinput').on('beforeItemRemove', function(event) {
-        alert('Removing tag');
-        console.log(event.item);
+    $('input#tagsinput').on('beforeItemAdd', function(event) {
+        var postData = {};
+        postData['entrypoint'] = 'tag_attach_to_issue';
+        postData['bug_id'] = $(this).data('bug-id');
+        postData['tag_string'] = $.trim(event.item);
+        postData['tag_attach_token'] = $(this).siblings('[name="tag_attach_token"]').eq(0).attr('value');
+        $.post('xmlhttprequest.php', postData, function (data) {
+            //alert( data );
+        });
     });
 
-    $('input#tagsinput').on('beforeItemAdd', function(event) {
-        alert('Adding tag');
-        console.log(event.item);
+    $('input#tagsinput').on('beforeItemRemove', function(event) {
+        var postData = {};
+        postData['entrypoint'] = 'tag_detach_from_issue';
+        postData['bug_id'] = $(this).data('bug-id');
+        postData['tag_string'] = $.trim(event.item);
+        postData['tag_string'] = $.trim(event.item);
+        postData['tag_detach_token'] = $(this).siblings('[name="tag_detach_token"]').eq(0).attr('value');
+        $.post('xmlhttprequest.php', postData, function (data) {
+            //alert( data );
+        });
     });
 
 	$(document).on('change', '#tag_select', function() {

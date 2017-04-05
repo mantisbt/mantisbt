@@ -682,17 +682,11 @@ if( $t_show_tags ) {
 	echo '<tr>';
 	echo '<th class="bug-tags category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="bug-tags" colspan="5">';
-	echo '<input id="tagsinput" type="text" value="', tag_display_attached( $t_bug_id ), '" data-role="tagsinput" 
+	echo '<input id="tagsinput" type="text" value="', tag_display_attached( $t_bug_id ), '" 
+	    data-role="tagsinput" data-bug-id="', $t_bug_id, '"
 	 	placeholder="', lang_get( 'tag_attach_long' ), '"/>';
-	echo '</td></tr>';
-}
-
-# Attach Tags
-if( $t_can_attach_tag ) {
-	echo '<tr class="noprint">';
-	echo '<th class="bug-attach-tags category">', lang_get( 'tag_attach_long' ), '</th>';
-	echo '<td class="bug-attach-tags" colspan="5">';
-	print_tag_attach_form( $t_bug_id );
+    echo form_security_field( 'tag_attach' );
+	echo form_security_field( 'tag_detach' );
 	echo '</td></tr>';
 }
 

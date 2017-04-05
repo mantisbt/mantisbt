@@ -578,10 +578,11 @@ if( $t_show_attachments ) {
 <?php if( $t_show_tags ) { ?>
 	<tr>
 		<th class="category">
-			<label for="attach_tag"><?php echo lang_get( 'tag_attach_long' ) ?></label>
+			<label for="attach_tag"><?php echo lang_get( 'tags' ) ?></label>
 		</th>
 		<td>
-			<?php print_tag_input( '' ); ?>
+            <input id="tagsinput" type="text" value="" data-role="tagsinput" data-bug-id=""
+                     placeholder="<?php echo lang_get( 'tag_attach_long' ) ?>" />
 		</td>
 	</tr>
 <?php

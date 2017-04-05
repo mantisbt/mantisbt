@@ -373,6 +373,13 @@ input.tt-hint, .form-group input.tt-hint {
 .tt-suggestion p {
     margin: 0;
 }
+.bootstrap-tagsinput .tag {
+    margin: 3px 0;
+}
+.twitter-typeahead {
+    vertical-align: middle;
+    margin: 3px 0;
+}
 input.typeahead.scrollable ~ .tt-menu {
     max-height: 200px;
     overflow-y: auto;
@@ -477,10 +484,6 @@ input.typeahead.scrollable ~ .tt-menu {
 
 .dropzone .progress {
   margin-bottom: 10px;
-}
-
-.twitter-typeahead {
-    vertical-align: middle !important;
 }
 
 
