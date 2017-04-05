@@ -356,41 +356,51 @@ $(document).ready( function() {
 
     $('input#tagsinput').on('beforeItemAdd', function(event) {
         var postData = {};
-        postData['entrypoint'] = 'tag_attach_to_issue';
-        postData['bug_id'] = $(this).data('bug-id');
-        postData['tag_string'] = $.trim(event.item);
-        postData['tag_attach_token'] = $(this).siblings('[name="tag_attach_token"]').eq(0).attr('value');
-        $.post('xmlhttprequest.php', postData, function (data) {
-            //alert( data );
-        });
+        var bugId = $(this).data('bug-id');
+        if (bugId) {
+            postData['entrypoint'] = 'tag_attach_to_issue';
+            postData['bug_id'] = bugId;
+            postData['tag_string'] = $.trim(event.item);
+            postData['tag_attach_token'] = $(this).siblings('[name="tag_attach_token"]').eq(0).attr('value');
+            $.post('xmlhttprequest.php', postData, function (data) {
+            });
+        } else {
+            var tagSeparator = $('#tag_separator').val();
+            var currentTagString = $('#tag_string').val();
+            var newTag = $.trim(event.item);
+            if (currentTagString.indexOf(newTag) == -1) {
+                if (currentTagString.length > 0) {
+                    $('#tag_string').val(currentTagString + tagSeparator + newTag);
+                } else {
+                    $('#tag_string').val(newTag);
+                }
+            }
+		}
     });
 
     $('input#tagsinput').on('beforeItemRemove', function(event) {
         var postData = {};
-        postData['entrypoint'] = 'tag_detach_from_issue';
-        postData['bug_id'] = $(this).data('bug-id');
-        postData['tag_string'] = $.trim(event.item);
-        postData['tag_string'] = $.trim(event.item);
-        postData['tag_detach_token'] = $(this).siblings('[name="tag_detach_token"]').eq(0).attr('value');
-        $.post('xmlhttprequest.php', postData, function (data) {
-            //alert( data );
-        });
-    });
-
-	$(document).on('change', '#tag_select', function() {
-		var tagSeparator = $('#tag_separator').val();
-		var currentTagString = $('#tag_string').val();
-		var newTagOptionID = $(this).val();
-		var newTag = $('#tag_select option[value=' + newTagOptionID + ']').text();
-		if (currentTagString.indexOf(newTag) == -1) {
-			if (currentTagString.length > 0) {
-				$('#tag_string').val(currentTagString + tagSeparator + newTag);
-			} else {
-				$('#tag_string').val(newTag);
-			}
+        var bugId = $(this).data('bug-id');
+        if (bugId) {
+            postData['entrypoint'] = 'tag_detach_from_issue';
+            postData['bug_id'] = $(this).data('bug-id');
+            postData['tag_string'] = $.trim(event.item);
+            postData['tag_detach_token'] = $(this).siblings('[name="tag_detach_token"]').eq(0).attr('value');
+            $.post('xmlhttprequest.php', postData, function (data) {
+            });
+        } else {
+            var tagSeparator = $('#tag_separator').val();
+            var currentTagString = $('#tag_string').val();
+            var tag = $.trim(event.item);
+            var values = currentTagString.split(tagSeparator);
+            for(var i = 0 ; i < values.length ; i++) {
+                if(values[i] == tag) {
+                    values.splice(i, 1);
+                    $('#tag_string').val(values.join(tagSeparator));
+                }
+            }
 		}
-		$(this).val(0);
-	});
+    });
 
 	$('a.click-url').bind("click", function() {
 		$(this).attr("href", $(this).attr("url"));

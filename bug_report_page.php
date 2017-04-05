@@ -581,6 +581,8 @@ if( $t_show_attachments ) {
 			<label for="attach_tag"><?php echo lang_get( 'tags' ) ?></label>
 		</th>
 		<td>
+            <input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
+            <input type="text" name="tag_string" id="tag_string" class="hidden" value="" />
             <input id="tagsinput" type="text" value="" data-role="tagsinput" data-bug-id=""
                      placeholder="<?php echo lang_get( 'tag_attach_long' ) ?>" />
 		</td>
