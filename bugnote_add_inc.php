@@ -68,10 +68,6 @@ require_api( 'lang_api.php' );
 	method="post"
 	action="bugnote_add.php"
 	enctype="multipart/form-data"
-	<?php if( $t_allow_file_upload ) {
-		echo ' class="dz dropzone-form" ';
-		print_dropzone_form_data();
-	} ?>
 	>
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
@@ -158,7 +154,7 @@ require_api( 'lang_api.php' );
 				</th>
 				<td>
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<div class="dropzone center">
+					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
 						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
 						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
 						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
