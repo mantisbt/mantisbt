@@ -327,8 +327,8 @@ function layout_body_javascript() {
 		# listjs
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/list.js/' . LISTJS_VERSION . '/list.min.js', LISTJS_HASH );
 
-        # nicescroll.js
-        html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/' . NICESCROLL_VERSION . '/jquery.nicescroll.min.js', NICESCROLL_HASH );
+		# jquery.nicescroll
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/' . NICESCROLL_VERSION . '/jquery.nicescroll.min.js', NICESCROLL_HASH );
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
@@ -343,8 +343,8 @@ function layout_body_javascript() {
 		# listjs
 		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
 
-        # nicescroll.js
-        html_javascript_link( 'jquery.nicescroll-' . NICESCROLL_VERSION . '.min.js' );
+		# jquery.nicescroll
+		html_javascript_link( 'jquery.nicescroll-' . NICESCROLL_VERSION . '.min.js' );
 	}
 
 	# ace theme scripts
