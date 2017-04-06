@@ -32,6 +32,7 @@ dropzone.js                       | 4.3.0     | unpatched
 chart.js                          | 2.1.6     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
 list.js                           | 1.4.1     | unpatched
+jquery.nicescroll                 | 3.6.8-fix | unpatched
 
   
 **Notes**
@@ -44,21 +45,22 @@ list.js                           | 1.4.1     | unpatched
 Upstream projects
 -----------------
 
-project         | URL
-----------------|--------------------------------------------------------------------
-adodb           | http://adodb.sourceforge.net/ - https://github.com/ADOdb/ADOdb
-disposable      | http://github.com/vboctor/disposable_email_checker
-parsedown       | https://github.com/erusev/parsedown
-phpmailer       | https://github.com/PHPMailer/PHPMailer
-rssbuilder      | http://code.google.com/p/flaimo-php/
-utf8            | http://sourceforge.net/projects/phputf8
-secureimage     | http://www.phpcaptcha.org/ - https://github.com/mantisbt/securimage
-jquery          | https://jquery.com/
-bootstrap       | http://getbootstrap.com/
-fontawesome     | http://fontawesome.io/
-moment.js       | https://momentjs.com/ - https://github.com/moment/moment/
-datetimepicker  | https://github.com/Eonasdan/bootstrap-datetimepicker
-dropzone.js     | http://www.dropzonejs.com/ - https://github.com/enyo/dropzone
-chart.js        | http://www.chartjs.org/ - https://github.com/chartjs/Chart.js
-typeahead.js    | https://github.com/twitter/typeahead.js
-list.js         | http://listjs.com/ - https://github.com/javve/list.js
+project             | URL
+--------------------|--------------------------------------------------------------------
+adodb               | http://adodb.sourceforge.net/ - https://github.com/ADOdb/ADOdb
+disposable          | http://github.com/vboctor/disposable_email_checker
+parsedown           | https://github.com/erusev/parsedown
+phpmailer           | https://github.com/PHPMailer/PHPMailer
+rssbuilder          | http://code.google.com/p/flaimo-php/
+utf8                | http://sourceforge.net/projects/phputf8
+secureimage         | http://www.phpcaptcha.org/ - https://github.com/mantisbt/securimage
+jquery              | https://jquery.com/
+bootstrap           | http://getbootstrap.com/
+fontawesome         | http://fontawesome.io/
+moment.js           | https://momentjs.com/ - https://github.com/moment/moment/
+datetimepicker      | https://github.com/Eonasdan/bootstrap-datetimepicker
+dropzone.js         | http://www.dropzonejs.com/ - https://github.com/enyo/dropzone
+chart.js            | http://www.chartjs.org/ - https://github.com/chartjs/Chart.js
+typeahead.js        | https://github.com/twitter/typeahead.js
+list.js             | http://listjs.com/ - https://github.com/javve/list.js
+jquery.nicescroll   | http://nicescroll.areaaperta.com/ - https://github.com/inuyaksa/jquery.nicescroll

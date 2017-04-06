@@ -503,6 +503,9 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+.timeline-events {
+    max-height: 300px;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -522,6 +525,10 @@ input.typeahead.scrollable ~ .tt-menu {
         float: right !important;
         border-style: none !important;
         width: auto;
+    }
+
+    .timeline-events {
+        max-height: 400px;
     }
 }
 
@@ -584,6 +591,10 @@ input.typeahead.scrollable ~ .tt-menu {
         border-style: none !important;
         width: auto;
     }
+
+    .timeline-events {
+        max-height: 600px;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -636,5 +647,8 @@ input.typeahead.scrollable ~ .tt-menu {
         right: 43px !important;
     }
 
+    .timeline-events {
+        max-height: 800px;
+    }
 }
 
