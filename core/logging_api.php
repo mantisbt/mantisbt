@@ -184,19 +184,19 @@ function log_print_to_page() {
 		$t_total_event_count = count( $g_log_events );
 
 
-        echo "<div class=\"space-10\"></div>";
-        echo "\t<div class=\"row\">\n";
+		echo "<div class=\"space-10\"></div>";
+		echo "\t<div class=\"row\">\n";
 		echo "\t<div class=\"col-xs-12\">\n";
 
-        echo "\t<div class=\"widget-box widget-color-red\">\n";
-	    echo "\t<div class=\"widget-header widget-header-small\">\n";
-	    echo "\t<h4 class=\"widget-title lighter\">\n";
+		echo "\t<div class=\"widget-box widget-color-red\">\n";
+		echo "\t<div class=\"widget-header widget-header-small\">\n";
+		echo "\t<h4 class=\"widget-title lighter\">\n";
 		echo "\t<i class=\"ace-icon fa fa-flag-o\"></i>\n";
 		echo "Debug Log";
-        echo "</h4>\n";
-	    echo "</div>\n";
+		echo "</h4>\n";
+		echo "</div>\n";
 
-	    echo "\t<div class=\"widget-body\">\n";
+		echo "\t<div class=\"widget-body\">\n";
 
 		echo "\n\n<!--Mantis Debug Log Output-->";
 		if( $t_total_event_count == 0 ) {
@@ -204,7 +204,7 @@ function log_print_to_page() {
 			return;
 		}
 
-        echo "<div class=\"widget-main no-padding\">";
+		echo "<div class=\"widget-main no-padding\">";
 		echo "<div class=\"table-responsive\">\n";
 		echo "<table class=\"table table-bordered table-condensed table-striped\" id=\"log-event-list\">\n";
 		echo "\t<thead>\n";
