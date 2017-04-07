@@ -258,8 +258,8 @@ function layout_head_css() {
 		# theme text fonts
 		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
 
-		# datetimepicker
-		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
+		# perfect-scrollbar
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/' . PERFECT_SCROLLBAR_VERSION . '/css/perfect-scrollbar.min.css' );
 	} else {
 		html_css_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.css' );
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
@@ -269,6 +269,9 @@ function layout_head_css() {
 
 		# datetimepicker
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
+
+		# perfect-scrollbar
+		html_css_link( 'perfect-scrollbar-' . PERFECT_SCROLLBAR_VERSION . '.min.css' );
 	}
 
 	# page specific plugin styles
@@ -326,6 +329,9 @@ function layout_body_javascript() {
 
 		# listjs
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/list.js/' . LISTJS_VERSION . '/list.min.js', LISTJS_HASH );
+
+		# perfect-scrollbar
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/' . PERFECT_SCROLLBAR_VERSION . '/js/perfect-scrollbar.jquery.min.js', PERFECT_SCROLLBAR_HASH );
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
@@ -339,6 +345,9 @@ function layout_body_javascript() {
 
 		# listjs
 		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
+
+		# perfect-scrollbar
+		html_javascript_link( 'perfect-scrollbar-' . PERFECT_SCROLLBAR_VERSION . '.min.js' );
 	}
 
 	# ace theme scripts

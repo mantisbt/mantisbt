@@ -503,6 +503,10 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+#timeline-container {
+    position: relative;
+    height: 74vh;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {

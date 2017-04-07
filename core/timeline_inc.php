@@ -95,14 +95,14 @@ if( isset( $t_url_params['all'] ) ) {
 		</div>
 
 		<div class="widget-main no-padding">
-			<div class="profile-feed">
-			</div>
-		</div>
+            <div class="profile-feed"></div>
+            <div id="timeline-container">
 
 <?php
 	if( !$f_all && count( $t_events ) > MAX_EVENTS ) {
 		$t_events = array_slice( $t_events, 0, MAX_EVENTS );
 		timeline_print_events( $t_events );
+		echo '</div>';
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
 		$t_url_params['all'] = 1;
@@ -112,8 +112,9 @@ if( isset( $t_url_params['all'] ) ) {
 		echo '</div>';
 	} else {
 		timeline_print_events( $t_events );
+		echo '</div>';
 	}
 ?>
-
+        </div>
 	</div>
 </div>
