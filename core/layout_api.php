@@ -258,6 +258,9 @@ function layout_head_css() {
 		# theme text fonts
 		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
 
+		# datetimepicker
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
+
 		# perfect-scrollbar
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/' . PERFECT_SCROLLBAR_VERSION . '/css/perfect-scrollbar.min.css' );
 	} else {
