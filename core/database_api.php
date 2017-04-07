@@ -815,7 +815,8 @@ function db_now() {
  * @return string representing formatted duration string in hh:mm format.
  */
 function db_minutes_to_hhmm( $p_min = 0 ) {
-	return sprintf( '%02d:%02d', $p_min / 60, $p_min % 60 );
+	$t_min = round($p_min);
+	return sprintf( '%02d:%02d', $t_min / 60, $t_min % 60 );
 }
 
 /**
