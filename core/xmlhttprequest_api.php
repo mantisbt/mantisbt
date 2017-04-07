@@ -126,34 +126,34 @@ function xmlhttprequest_tag_get_with_prefix() {
  * @access public
  */
 function xmlhttprequest_tag_attach_to_issue() {
-    $f_tag_string = gpc_get_string( 'tag_string' );
-    $f_bug_id =  gpc_get_string( 'bug_id' );
+	$f_tag_string = gpc_get_string( 'tag_string' );
+	$f_bug_id =  gpc_get_string( 'bug_id' );
 
-    form_security_validate( 'tag_attach' );
-    $t_user_id = auth_get_current_user_id();
-    access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id, $t_user_id );
+	form_security_validate( 'tag_attach' );
+	$t_user_id = auth_get_current_user_id();
+	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id, $t_user_id );
 
-    $t_tag_row = tag_get_by_name( $f_tag_string );
-    if( !$t_tag_row ) {
-        if( access_has_global_level( config_get( 'tag_create_threshold' ) ) ) {
-            $t_tag_id = tag_create( $f_tag_string, $t_user_id );
-        } else {
-            # access denied
-            echo json_encode( lang_get( 'tag_attach_failed' ) );
-            return;
-        }
-    } else {
-        $t_tag_id = $t_tag_row['id'];
-    }
+	$t_tag_row = tag_get_by_name( $f_tag_string );
+	if( !$t_tag_row ) {
+		if( access_has_global_level( config_get( 'tag_create_threshold' ) ) ) {
+			$t_tag_id = tag_create( $f_tag_string, $t_user_id );
+		} else {
+			# access denied
+			echo json_encode( lang_get( 'tag_attach_failed' ) );
+			return;
+		}
+	} else {
+		$t_tag_id = $t_tag_row['id'];
+	}
 
-    # attach tag
-    if( !tag_bug_is_attached( $t_tag_id, $f_bug_id ) ) {
-        tag_bug_attach( $t_tag_id, $f_bug_id, $t_user_id );
+	# attach tag
+	if( !tag_bug_is_attached( $t_tag_id, $f_bug_id ) ) {
+		tag_bug_attach( $t_tag_id, $f_bug_id, $t_user_id );
 
-        event_signal( 'EVENT_TAG_ATTACHED', array( $f_bug_id, array( $t_tag_id ) ) );
-    }
+		event_signal( 'EVENT_TAG_ATTACHED', array( $f_bug_id, array( $t_tag_id ) ) );
+	}
 
-    echo json_encode( true );
+	echo json_encode( true );
 }
 
 /**
@@ -162,17 +162,17 @@ function xmlhttprequest_tag_attach_to_issue() {
  * @access public
  */
 function xmlhttprequest_tag_detach_from_issue() {
-    $f_tag_string = gpc_get_string( 'tag_string' );
-    $f_bug_id =  gpc_get_string( 'bug_id' );
+	$f_tag_string = gpc_get_string( 'tag_string' );
+	$f_bug_id =  gpc_get_string( 'bug_id' );
 
-    form_security_validate( 'tag_detach' );
-    $t_tag_row = tag_get_by_name( $f_tag_string );
-    if( $t_tag_row ) {
-        $t_tag_id = $t_tag_row['id'];
-        tag_bug_detach( $t_tag_id, $f_bug_id );
-    }
+	form_security_validate( 'tag_detach' );
+	$t_tag_row = tag_get_by_name( $f_tag_string );
+	if( $t_tag_row ) {
+		$t_tag_id = $t_tag_row['id'];
+		tag_bug_detach( $t_tag_id, $f_bug_id );
+	}
 
-    event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
+	event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
 
-    echo json_encode( true );
+	echo json_encode( true );
 }

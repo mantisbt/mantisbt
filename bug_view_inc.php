@@ -683,9 +683,9 @@ if( $t_show_tags ) {
 	echo '<th class="bug-tags category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="bug-tags" colspan="5">';
 	echo '<input id="tagsinput" type="text" value="', tag_display_attached( $t_bug_id ), '" 
-	    data-role="tagsinput" data-bug-id="', $t_bug_id, '"
-	 	placeholder="', lang_get( 'tag_attach_long' ), '"/>';
-    echo form_security_field( 'tag_attach' );
+		data-role="tagsinput" data-bug-id="', $t_bug_id, '"
+		placeholder="', lang_get( 'tag_attach_long' ), '"/>';
+	echo form_security_field( 'tag_attach' );
 	echo form_security_field( 'tag_detach' );
 	echo '</td></tr>';
 }

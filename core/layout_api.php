@@ -273,8 +273,10 @@ function layout_head_css() {
 
 	# page specific plugin styles
 
+	# tagsinput - this is a batched css file thus no cdn support
+	html_css_link( 'bootstrap-tagsinput-' . TAGSINPUT_VERSION . '.css' );
+
 	# theme styles
-	html_css_link( 'bootstrap-tagsinput-' . TAGS_INPUT_VERSION . '.css' );
 	html_css_link( 'ace.min.css' );
 	html_css_link( 'ace-mantis.css' );
 
@@ -327,6 +329,9 @@ function layout_body_javascript() {
 
 		# listjs
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/list.js/' . LISTJS_VERSION . '/list.min.js', LISTJS_HASH );
+
+		# tagsinput
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/' . TAGSINPUT_VERSION . '/bootstrap-tagsinput.min.js', TAGSINPUT_HASH );
 	} else {
 		# bootstrap
 		html_javascript_link( 'bootstrap-' . BOOTSTRAP_VERSION . '.min.js' );
@@ -340,10 +345,12 @@ function layout_body_javascript() {
 
 		# listjs
 		html_javascript_link( 'list-' . LISTJS_VERSION . '.min.js' );
+
+		# tagsinput
+		html_javascript_link( 'bootstrap-tagsinput-' . TAGSINPUT_VERSION . '.min.js' );
 	}
 
 	# ace theme scripts
-	html_javascript_link( 'bootstrap-tagsinput-' . TAGS_INPUT_VERSION . '.js' );
 	html_javascript_link( 'ace.min.js' );
 }
 
