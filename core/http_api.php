@@ -40,7 +40,15 @@ $g_csp = array();
  * @return boolean True if protocol is HTTPS
  */
 function http_is_protocol_https() {
-	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
+	}
+
+	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		return true;
+	}
+
+	return false;
 }
 
 /**
