@@ -75,17 +75,57 @@ $g_cache_cookie_valid = null;
 $g_cache_current_user_id = null;
 
 /**
- * Gets set of flags for authentication that can be overridden by configuration or auth plugins.
+ * Gets set of flags for authentication for the specified user.
+ * @param int|null|bool The user id or null for logged in user or NO_USER/false for user that doesn't exist
+ *                 in the system, that may be auto-provisioned.
  * @return AuthFlags The auth flags object to use.
  */
-function auth_flags() {
-	static $s_flags = null;
-	if( is_null( $s_flags ) ) {
-		$t_flags = new AuthFlags();
-		$s_flags = event_signal( 'EVENT_AUTH_FLAGS', $t_flags );
+function auth_flags( $p_user_id = null, $p_username = '' ) {
+	if( is_null( $p_user_id ) ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = (int)$p_user_id;
 	}
 
-	return $s_flags;
+	if( !$t_user_id && is_blank( $p_username ) ) {
+		# If user is not in db, must supply the name.
+		trigger_error( GENERIC_ERROR );
+	}
+
+	if( $t_user_id ) {
+		$t_username = user_get_name( $t_user_id );
+		$t_email = user_get_email( $t_user_id );
+	} else {
+		$t_username = $p_username;
+
+		# If the plugin cares about email, then it can check if user typed the email address
+		# as the username.
+		$t_email = '';
+	}
+
+	$t_event_arguments = array(
+		'user_id' => $t_user_id,
+		'username' => $t_username,
+		'email' => $t_email,
+	);
+
+	static $s_flags_cache = array();
+	if( !isset( $s_flags_cache[$t_user_id] ) ) {
+		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', array( $t_event_arguments ) );
+
+		# Don't cache in case of user not in db.
+		if( $t_user_id ) {
+			$s_flags_cache[$t_flags] = $t_flags;
+		}
+	} else {
+		$t_flags = $s_flags_cache[$t_user_id];
+	}
+
+	if( is_null( $t_flags ) ) {
+		$t_flags = new AuthFlags();
+	}
+
+	return $t_flags;
 }
 
 /**
@@ -108,10 +148,12 @@ function auth_password_change_not_allowed_message() {
 
 /**
  * Check if permanent login is enabled.
+ * @param int|bool $p_user_id The user id, or NO_USER/false for unknown user.
+ * @param string $p_username The username user typed in sign-in form.
  * @return boolean true: yes, false: otherwise.
  */
-function auth_allow_perm_login() {
-	$t_auth_flags = auth_flags();
+function auth_allow_perm_login( $p_user_id, $p_username ) {
+	$t_auth_flags = auth_flags( $p_user_id, $p_username );
 	return $t_auth_flags->getPermSessionEnabled();
 }
 

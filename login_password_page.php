@@ -115,7 +115,7 @@ $t_show_reset_password = !$f_reauthenticate &&
 	( ON == config_get( 'send_reset_password' ) ) &&
 	( ON == config_get( 'enable_email_notification' ) );
 
-$t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login();
+$t_show_remember_me = !$f_reauthenticate && auth_allow_perm_login( $t_user_id, $t_username );
 
 $t_form_title = $f_reauthenticate ? lang_get( 'reauthenticate_title' ) : lang_get( 'login_title' );
 
