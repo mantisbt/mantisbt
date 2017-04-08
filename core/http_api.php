@@ -36,22 +36,6 @@ require_api( 'config_api.php' );
 $g_csp = array();
 
 /**
- * Checks to see if script was queried through the HTTPS protocol
- * @return boolean True if protocol is HTTPS
- */
-function http_is_protocol_https() {
-	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
-		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
-	}
-
-	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-		return true;
-	}
-
-	return false;
-}
-
-/**
  * Check to see if the client is using Microsoft Internet Explorer so we can
  * enable quirks and hacky non-standards-compliant workarounds.
  * @return boolean True if Internet Explorer is detected as the user agent
