@@ -115,7 +115,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 
 		# Don't cache in case of user not in db.
 		if( $t_user_id ) {
-			$s_flags_cache[$t_flags] = $t_flags;
+			$s_flags_cache[$t_user_id] = $t_flags;
 		}
 	} else {
 		$t_flags = $s_flags_cache[$t_user_id];
@@ -218,20 +218,12 @@ function auth_login_page( $p_query_string = '' ) {
  *
  * @param string $p_query_string The query string, can be empty.
  * @param int|null $p_user_id The user id or null for current logged in user.
+ * @param string $p_username The username
  * @return string The credentials page with query string.
  */
-function auth_credential_page( $p_query_string = '', $p_user_id = null ) {
-	if( is_null( $p_user_id ) ) {
-		$p_user_id = auth_get_current_user_id();
-	}
-
-	$t_url = AUTH_PAGE_CREDENTIAL;
-	if( $p_user_id === NO_USER || !user_exists( $p_user_id ) ) {
-		return helper_url_combine( $t_url, $p_query_string );
-	}
-
-	# TODO: consult with auth plugins
-	return helper_url_combine( $t_url, $p_query_string );
+function auth_credential_page( $p_query_string, $p_user_id = null, $p_username = '' ) {
+	$t_auth_flags = auth_flags( $p_user_id, $p_username );
+	return $t_auth_flags->getCredentialsPage( $p_query_string );
 }
 
 /**
