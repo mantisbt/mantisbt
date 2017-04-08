@@ -37,20 +37,6 @@ require_api( 'user_api.php' );
  */
 class AuthFlags {
 	/**
-	 * Core signup functionality is enabled.
-	 * @see $signup_access_level
-	 * @var bool|null
-	 */
-	private $signup_enabled = null;
-
-	/**
-	 * The access level to assign to users who use core signup functionality.
-	 * @see $signup_enabled
-	 * @var int|null
-	 */
-	private $signup_access_level = null;
-
-	/**
 	 * The access level or array of access levels that can leverage MantisBT native passwords.
 	 * @var int|array|null
 	 */
@@ -139,30 +125,6 @@ class AuthFlags {
 	 * AuthFlags constructor.
 	 */
 	function __construct() {
-	}
-
-	function setSignupEnabled( $p_enabled ) {
-		$this->signup_enabled = $p_enabled;
-	}
-
-	function getSignupEnabled() {
-		if( is_null( $this->signup_enabled ) ) {
-			return config_get_global( 'allow_signup' );
-		}
-
-		return $this->signup_enabled;
-	}
-
-	function setSignupAccessLevel( $p_access_level ) {
-		$this->signup_access_level = $p_access_level;
-	}
-
-	function getSignupAccessLevel() {
-		if( is_null( $this->signup_access_level ) ) {
-			return config_get( 'default_new_account_access_level' );
-		}
-
-		return $this->signup_access_level;
 	}
 
 	function setSetPasswordThreshold( $p_threshold ) {

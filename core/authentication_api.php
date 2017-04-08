@@ -120,8 +120,7 @@ function auth_allow_perm_login() {
  * @return bool true: enabled, false otherwise.
  */
 function auth_signup_enabled() {
-	$t_auth_flags = auth_flags();
-	return $t_auth_flags->getSignupEnabled();
+	return config_get_global( 'allow_signup' );
 }
 
 /**
@@ -129,8 +128,7 @@ function auth_signup_enabled() {
  * @return integer The access level to use.
  */
 function auth_signup_access_level() {
-	$t_auth_flags = auth_flags();
-	return $t_auth_flags->getSignupAccessLevel();
+	return config_get( 'default_new_account_access_level' );
 }
 
 /**
