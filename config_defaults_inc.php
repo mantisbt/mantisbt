@@ -181,11 +181,7 @@ unset( $t_local_config );
 $t_protocol = 'http';
 $t_host = 'localhost';
 if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
-		$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
-	} else if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
-		$t_protocol = 'https';
-	}
+	$t_protocol = http_is_protocol_https() ? 'https' : 'http';
 
 	# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
 	if( isset( $_SERVER['SERVER_PORT'] ) ) {
