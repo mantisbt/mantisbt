@@ -68,7 +68,7 @@ if( $t_referer_page == auth_login_page() ) {
 }
 
 switch( $t_referer_page ) {
-	case 'login_page.php':
+	case AUTH_PAGE_USERNAME:
 	case 'signup_page.php':
 	case 'lost_pwd_page.php':
 	case 'account_update.php':

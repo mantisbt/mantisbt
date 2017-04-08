@@ -3357,7 +3357,7 @@ $g_default_home_page = 'my_view_page.php';
  * Specify where the user should be sent after logging out.
  * @global string $g_logout_redirect_page
  */
-$g_logout_redirect_page = 'login_page.php';
+$g_logout_redirect_page = AUTH_PAGE_USERNAME;
 
 ###########
 # Headers #

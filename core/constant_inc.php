@@ -682,6 +682,10 @@ define( 'LOGIN_METHOD_COOKIE', 'cookie' );
 define( 'LOGIN_METHOD_API_TOKEN', 'api-token' );
 define( 'LOGIN_METHOD_ANONYMOUS', 'anonymous' );
 
+# AUTH PAGES
+define( 'AUTH_PAGE_USERNAME', 'login_page.php' );
+define( 'AUTH_PAGE_CREDENTIAL', 'login_password_page.php' );
+
 # SLIM FRAMEWORK ATTRIBUTES
 define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 
