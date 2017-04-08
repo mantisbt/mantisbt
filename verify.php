@@ -112,7 +112,7 @@ layout_login_page_begin();
 				echo '</div>';
 			} else {
 				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
-				echo auth_password_change_not_allowed_message();
+				echo auth_password_managed_elsewhere_message();
 				echo '</div>';
 			}
 		?>
