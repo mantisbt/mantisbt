@@ -177,15 +177,28 @@ function auth_login_page( $p_query_string = '' ) {
 	$t_auth_flags = auth_flags();
 	$t_login_page = $t_auth_flags->getLoginPage();
 
-	if( !is_blank( $p_query_string ) ) {
-		if( stripos( $t_login_page, '?' ) !== false ) {
-			$t_login_page .= '&' . $p_query_string;
-		} else {
-			$t_login_page .= '?' . $p_query_string;
-		}
+	return helper_url_combine( $t_login_page, $p_query_string );
+}
+
+/**
+ * Gets the page that asks the user for credentials based on the user's authentication model.
+ *
+ * @param string $p_query_string The query string, can be empty.
+ * @param int|null $p_user_id The user id or null for current logged in user.
+ * @return string The credentials page with query string.
+ */
+function auth_credential_page( $p_query_string = '', $p_user_id = null ) {
+	if( is_null( $p_user_id ) ) {
+		$p_user_id = auth_get_current_user_id();
 	}
 
-	return $t_login_page;
+	$t_url = 'login_password_page.php';
+	if( $p_user_id === NO_USER || !user_exists( $p_user_id ) ) {
+		return helper_url_combine( $t_url, $p_query_string );
+	}
+
+	# TODO: consult with auth plugins
+	return helper_url_combine( $t_url, $p_query_string );
 }
 
 /**
@@ -998,7 +1011,7 @@ function auth_reauthenticate() {
 		);
 
 		# redirect to login page
-		print_header_redirect( auth_login_page( $t_query_params ) );
+		print_header_redirect( auth_credential_page( $t_query_params ) );
 	}
 }
 

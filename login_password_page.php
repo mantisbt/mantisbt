@@ -77,22 +77,29 @@ if( is_blank( $t_username ) ) {
 	print_header_redirect( $t_redirect_url );
 }
 
-/*
- TODO: Redirect to appropriate auth page based on provided username, if doesn't exist fallback
- to native password page (this page).
+# Get the user id and based on the user decide whether to continue with native password credential
+# page or one provided by a plugin.
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
-if( $t_user_id === false ) {
+if( $t_user_id !== false && auth_credential_page() != 'login_password_page.php' ) {
 	$t_query_args = array(
-		'error' => 1,
-		'return' => $f_return,
+		'username' => $t_username,
+        'cookie_error' => $f_cookie_error,
+        'reauthenticate' => $f_reauthenticate,
 	);
+
+	if( !is_blank( $f_error ) ) {
+		$t_query_args['error'] = $f_error;
+    }
+
+    if( !is_blank( $f_cookie_error ) ) {
+		$t_query_args['cookie_error'] = $f_cookie_error;
+    }
 
 	$t_query_text = http_build_query( $t_query_args, '', '&' );
 
-	$t_redirect_url = auth_login_page( $t_query_text );
+	$t_redirect_url = auth_credential_page( $t_query_text, $t_user_id );
 	print_header_redirect( $t_redirect_url );
 }
-*/
 
 if( config_get_global( 'email_login_enabled' ) ) {
 	$t_username_label = lang_get( 'username_or_email' );
