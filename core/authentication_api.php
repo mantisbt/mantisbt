@@ -138,15 +138,6 @@ function auth_password_managed_elsewhere_message() {
 }
 
 /**
- * The message to show to indicate to user that they can't reset or set the password.
- * @return string The message.
- */
-function auth_password_change_not_allowed_message() {
-	$t_auth_flags = auth_flags();
-	return $t_auth_flags->getPasswordManagedExternallyMessage();
-}
-
-/**
  * Check if permanent login is enabled.
  * @param int|bool $p_user_id The user id, or NO_USER/false for unknown user.
  * @param string $p_username The username user typed in sign-in form.

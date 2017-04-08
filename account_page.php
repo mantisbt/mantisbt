@@ -162,7 +162,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo lang_get( 'password' ) ?>
 				</td>
 				<td>
-					<?php echo auth_password_change_not_allowed_message() ?>
+					<?php echo auth_password_managed_elsewhere_message() ?>
 				</td>
 			</tr><?php
 			} else {
