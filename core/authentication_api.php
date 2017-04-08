@@ -138,8 +138,7 @@ function auth_signup_access_level() {
  * @return bool true: enabled; false: otherwise.
  */
 function auth_anonymous_enabled() {
-	$t_auth_flags = auth_flags();
-	return $t_auth_flags->getAnonymousEnabled();
+	return config_get_global( 'allow_anonymous_login' );
 }
 
 /**
@@ -147,8 +146,7 @@ function auth_anonymous_enabled() {
  * @return string Anonymous account username.
  */
 function auth_anonymous_account() {
-	$t_auth_flags = auth_flags();
-	return $t_auth_flags->getAnonymousAccount();
+	return config_get_global( 'anonymous_account' );
 }
 
 /**

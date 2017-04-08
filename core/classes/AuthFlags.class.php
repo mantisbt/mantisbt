@@ -51,20 +51,6 @@ class AuthFlags {
 	private $signup_access_level = null;
 
 	/**
-	 * Core anonymous login functionality is enabled.
-	 * @see $anonymous_account
-	 * @var bool|null
-	 */
-	private $anonymous_enabled = null;
-
-	/**
-	 * User account to designate as the anonymous / guest account.
-	 * @see $anonymous_enabled
-	 * @var string|null
-	 */
-	private $anonymous_account = null;
-
-	/**
 	 * The access level or array of access levels that can leverage MantisBT native passwords.
 	 * @var int|array|null
 	 */
@@ -177,30 +163,6 @@ class AuthFlags {
 		}
 
 		return $this->signup_access_level;
-	}
-
-	function setAnonymousEnabled( $p_enabled ) {
-		$this->anonymous_enabled = $p_enabled;
-	}
-
-	function getAnonymousEnabled() {
-		if( is_null( $this->anonymous_enabled ) ) {
-			return config_get_global( 'allow_anonymous_login' );
-		}
-
-		return $this->anonymous_enabled;
-	}
-
-	function setAnonymousAccount( $p_username ) {
-		$this->anonymous_account = $p_username;
-	}
-
-	function getAnonymousAccount() {
-		if( is_null( $this->anonymous_account ) ) {
-			return config_get_global( 'anonymous_account' );
-		}
-
-		return $this->anonymous_account;
 	}
 
 	function setSetPasswordThreshold( $p_threshold ) {
