@@ -260,7 +260,7 @@ function auth_logout_redirect_page() {
 function auth_can_set_password( $p_user_id = null ) {
 	$t_auth_flags = auth_flags( $p_user_id );
 
-	if( !$t_auth_flags->getCanSetPassword() ) {
+	if( !$t_auth_flags->getCanUseStandardLogin() ) {
 		return false;
 	}
 
@@ -280,12 +280,8 @@ function auth_can_set_password( $p_user_id = null ) {
  * @return bool true: can login using username and passord, false otherwise.
  */
 function auth_can_use_standard_login( $p_user_id = null ) {
-	$t_auth_flags = auth_flags();
-	if( $p_user_id === NO_USER ) {
-		return $t_auth_flags->getUseStandardLoginThreshold() === ANYBODY;
-	}
-
-	return access_has_global_level( $t_auth_flags->getUseStandardLoginThreshold(), $p_user_id );
+	$t_auth_flags = auth_flags( $p_user_id );
+	return $t_auth_flags->getCanUseStandardLogin();
 }
 
 /**

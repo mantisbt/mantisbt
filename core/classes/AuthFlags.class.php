@@ -37,22 +37,16 @@ require_api( 'user_api.php' );
  */
 class AuthFlags {
 	/**
-	 * Indicates whether the user can set their password within MantisBT or not.
+	 * Indicates whether user can use the native login via passwords in MantisBT database.
 	 * @var bool|null
 	 */
-	private $can_set_password = null;
+	private $can_use_native_login = null;
 
 	/**
 	 * The message to display indicating that passwords are not managed by MantisBT native passwords.
 	 * @var string|null
 	 */
 	private $password_managed_elsewhere_message = null;
-
-	/**
-	 * The access level or array of access levels that can use native MantisBT login.
-	 * @var int|array|null
-	 */
-	private $access_level_can_use_standard_login = null;
 
 	/**
 	 * The login page to use instead of the standard MantisBT login page.  This can be
@@ -121,14 +115,6 @@ class AuthFlags {
 	function __construct() {
 	}
 
-	function setCanSetPassword( $p_enabled ) {
-		$this->can_set_password = $p_enabled;
-	}
-
-	function getCanSetPassword() {
-		return is_null( $this->can_set_password ) ? true : $this->can_set_password;
-	}
-
 	function setPasswordManagedExternallyMessage( $p_message ) {
 		$this->password_managed_elsewhere_message = $p_message;
 	}
@@ -139,16 +125,12 @@ class AuthFlags {
 		}
 	}
 
-	function setUserStandardLoginThreshold( $p_threshold ) {
-		$this->access_level_can_use_standard_login = $p_threshold;
+	function setCanUseStandardLogin( $p_enabled ) {
+		$this->can_use_native_login = $p_enabled;
 	}
 
-	function getUseStandardLoginThreshold() {
-		if( is_null( $this->access_level_can_use_standard_login ) ) {
-			return ANYBODY;
-		}
-
-		return $this->access_level_can_use_standard_login;
+	function getCanUseStandardLogin() {
+		return is_null( $this->can_use_native_login ) ? true : $this->can_use_native_login;
 	}
 
 	function setLoginPage( $p_page ) {
