@@ -267,14 +267,9 @@ function auth_logout_redirect_page() {
  * @return bool true: can set password, false: otherwise.
  */
 function auth_can_set_password( $p_user_id = null ) {
-	$t_auth_flags = auth_flags();
+	$t_auth_flags = auth_flags( $p_user_id );
 
-	# If it is a signup scenario and user is not authenticated, return false.
-	if( $p_user_id == NO_USER ) {
-		return $t_auth_flags->getSetPasswordThreshold() === ANYBODY;
-	}
-
-	if( !access_has_global_level( $t_auth_flags->getSetPasswordThreshold(), $p_user_id ) ) {
+	if( !$t_auth_flags->getCanSetPassword() ) {
 		return false;
 	}
 

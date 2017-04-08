@@ -37,10 +37,10 @@ require_api( 'user_api.php' );
  */
 class AuthFlags {
 	/**
-	 * The access level or array of access levels that can leverage MantisBT native passwords.
-	 * @var int|array|null
+	 * Indicates whether the user can set their password within MantisBT or not.
+	 * @var bool|null
 	 */
-	private $access_level_set_password = null;
+	private $can_set_password = null;
 
 	/**
 	 * The message to display indicating that passwords are not managed by MantisBT native passwords.
@@ -121,16 +121,12 @@ class AuthFlags {
 	function __construct() {
 	}
 
-	function setSetPasswordThreshold( $p_threshold ) {
-		$this->access_level_set_password = $p_threshold;
+	function setCanSetPassword( $p_enabled ) {
+		$this->can_set_password = $p_enabled;
 	}
 
-	function getSetPasswordThreshold() {
-		if( is_null( $this->access_level_set_password ) ) {
-			return ANYBODY;
-		}
-
-		return $this->access_level_set_password;
+	function getCanSetPassword() {
+		return is_null( $this->can_set_password ) ? true : $this->can_set_password;
 	}
 
 	function setPasswordManagedExternallyMessage( $p_message ) {
