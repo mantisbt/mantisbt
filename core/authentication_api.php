@@ -311,28 +311,32 @@ function auth_is_user_authenticated() {
  * @access public
  */
 function auth_prepare_username( $p_username ) {
+	$t_username = null;
+
 	switch( config_get( 'login_method' ) ) {
 		case BASIC_AUTH:
-			$f_username = $_SERVER['REMOTE_USER'];
+			$t_username = $_SERVER['REMOTE_USER'];
 			break;
 		case HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
-					$f_username = $_SERVER['PHP_AUTH_USER'];
+					$t_username = $_SERVER['PHP_AUTH_USER'];
 				}
 			} else {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
-
-				# calls exit
-				return null;
 			}
 			break;
 		default:
-			$f_username = $p_username;
+			$t_username = $p_username;
 			break;
 	}
-	return $f_username;
+
+	if( !is_null( $t_username ) ) {
+		$t_username = user_is_name_valid( $t_username ) ? $t_username : null;
+	}
+
+	return $t_username;
 }
 
 /**
