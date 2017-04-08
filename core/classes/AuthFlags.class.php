@@ -51,14 +51,29 @@ class AuthFlags {
 	/**
 	 * The login page to use instead of the standard MantisBT login page.  This can be
 	 * a plugin page.
+	 *
+	 * @see $credentials_page
 	 * @see $logout_page
 	 * @var string|null
 	 */
 	private $login_page = null;
 
 	/**
+	 * The page to use for providing credentials.  This can be the default password page
+	 * provided by MantisBT, an auth plugin provided page that asks for credentials or
+	 * an auth plugin provided page that re-directs to an IDP.
+	 *
+	 * @see $login_page
+	 * @see $logout_page
+	 * @var string|null
+	 */
+	private $credentials_page = null;
+
+	/**
 	 * The logout page to use instead of the standard MantisBT logout page.  This can be
 	 * a plugin page.
+	 *
+	 * @see $credentials_page
 	 * @see $login_page
 	 * @see $logout_redirect_page
 	 * @var string|null
@@ -68,6 +83,7 @@ class AuthFlags {
 	/**
 	 * The page to redirect to after successful logout.  This can be a plugin page.  Such
 	 * page can display content directly to redirect to a MantisBT page to a remote page.
+	 *
 	 * @see $logout_page
 	 * @var string|null
 	 */
@@ -138,11 +154,15 @@ class AuthFlags {
 	}
 
 	function getLoginPage() {
-		if( is_null( $this->login_page ) ) {
-			return 'login_page.php';
-		}
+		return is_null( $this->login_page ) ? AUTH_PAGE_USERNAME : $this->login_page;
+	}
 
-		return $this->login_page;
+	function setCredentialsPage( $p_page ) {
+		$this->credentials_page = $p_page;
+	}
+
+	function getCredentialsPage() {
+		return is_null( $this->credentials_page ) ? AUTH_PAGE_CREDENTIAL : $this->credentials_page;
 	}
 
 	function setLogoutPage( $p_page ) {

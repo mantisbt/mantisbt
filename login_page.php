@@ -212,7 +212,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				</h4>
 				<div class="space-10"></div>
 <!-- Login Form BEGIN -->
-	<form id="login-form" method="post" action="login_password_page.php">
+	<form id="login-form" method="post" action="<?php echo AUTH_PAGE_CREDENTIAL ?>">
 		<fieldset>
 
 			<?php

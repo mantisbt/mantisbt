@@ -225,7 +225,7 @@ function auth_credential_page( $p_query_string = '', $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	$t_url = 'login_password_page.php';
+	$t_url = AUTH_PAGE_CREDENTIAL;
 	if( $p_user_id === NO_USER || !user_exists( $p_user_id ) ) {
 		return helper_url_combine( $t_url, $p_query_string );
 	}
