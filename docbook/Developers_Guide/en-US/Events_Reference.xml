@@ -157,14 +157,20 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.auth.flags">
-			<title>EVENT_AUTH_FLAGS (First)</title>
+			<title>EVENT_AUTH_USER_FLAGS (First)</title>
 
 			<blockquote>
 				<para>
 					An event that enables plugins to return a set of flags that control the authentication
-					behaviors and can provide their own login flow pages.  For list of supported flags
-					check auth_flags() method in core/authentication_api.  Only a single auth plugin can be
-					hooked to this.  Flags that are not returned by the plugin will be set to defaults.
+					behaviors for the user who is logging in or logged in.  In some cases, the user will be
+					in the system, but there will be cases where the username provided by the user doesn't
+					exist.  In case the user doesn't exist, it is up to the authentication plugin whether
+					to fail the login, validate credentials then fail, or validate credentials then auto-provision
+					the user based on information the plugin is aware of (e.g. IDP or some db of accounts).
+					If no plugin is registered for events, then defaults are used.  If plugin sets a subset
+					of the options, then the default will be used for the rest.
+				</para>
+				<para>
 					Checkout <ulink url="https://github.com/mantisbt-plugins/SampleAuth">SampleAuth plugin</ulink>
 					for more details.
 				</para>
