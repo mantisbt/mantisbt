@@ -49,12 +49,6 @@ class AuthFlags {
 	private $password_managed_elsewhere_message = null;
 
 	/**
-	 * The access level or array of access levels that can create and use API tokens.
-	 * @var int|array|null
-	 */
-	private $access_level_create_api_tokens = null;
-
-	/**
 	 * The access level or array of access levels that can use native MantisBT login.
 	 * @var int|array|null
 	 */
