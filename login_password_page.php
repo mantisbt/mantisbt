@@ -224,6 +224,8 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 
 			echo '<input type="hidden" name="username" value="', string_html_specialchars( $t_username ), '" />';
 
+			echo sprintf( lang_get( 'enter_password' ), string_html_specialchars( $t_username ) );
+
 			# CSRF protection not required here - form does not result in modifications
 			?>
 

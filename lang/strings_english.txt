@@ -676,6 +676,7 @@ $s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';
 $s_lost_password_link = 'Lost your password?';
 $s_username_or_email = 'Username or email address';
+$s_enter_password = 'Enter password for \'%s\'';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Select Project';
