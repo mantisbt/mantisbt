@@ -51,6 +51,17 @@ if( LDAP == config_get_global( 'login_method' ) ||
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 }
 
+$f_username = gpc_get_string( 'username', '' );
+$t_username = auth_prepare_username( $f_username );
+
+# Determine whether the username or password field should receive automatic focus.
+$t_username_field_autofocus = 'autofocus';
+$t_email_field_autofocus = '';
+if( $t_username ) {
+	$t_username_field_autofocus = '';
+	$t_email_field_autofocus = 'autofocus';
+}
+
 # don't index lost password page
 html_robots_noindex();
 
@@ -86,7 +97,8 @@ layout_login_page_begin();
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text"
 						placeholder="<?php echo lang_get( 'username' ) ?>"
-						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
+                        value="<?php echo string_html_specialchars( $t_username ) ?>"
+                        size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control <?php echo $t_username_field_autofocus ?>">
 					<i class="ace-icon fa fa-user"></i>
 				</span>
 				</label>
@@ -94,7 +106,7 @@ layout_login_page_begin();
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text"
 						   placeholder="<?php echo lang_get( 'email' ) ?>"
-						   size="32" maxlength="64" class="form-control">
+						   size="32" maxlength="64" class="form-control <?php echo $t_email_field_autofocus; ?>">
 					<i class="ace-icon fa fa-envelope"></i>
 				</span>
 				</label>

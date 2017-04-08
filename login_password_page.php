@@ -257,7 +257,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			<?php
 			# lost password feature disabled or reset password via email disabled -> stop here!
 			if( $t_show_reset_password ) {
-				echo '<a class="pull-right" href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a>';
+				echo '<a class="pull-right" href="lost_pwd_page.php?username=', urlencode( $t_username ), '">', lang_get( 'lost_password_link' ), '</a>';
 			}
 			?>
 		</fieldset>
