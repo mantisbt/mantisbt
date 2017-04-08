@@ -213,11 +213,13 @@ class AuthFlags {
 	 * Gets the page to use to ask for user credentials.  This should be a page that is
 	 * provided by MantisBT core or one of the plugins.  Such page can redirect as needed.
 	 *
+	 * @param string $p_query_string The query string or empty.
 	 * @return string The relative url for the credential page.
 	 * @see setCredentialsPage()
 	 */
-	function getCredentialsPage() {
-		return is_null( $this->credentials_page ) ? AUTH_PAGE_CREDENTIAL : $this->credentials_page;
+	function getCredentialsPage( $p_query_string ) {
+		$t_page = is_null( $this->credentials_page ) ? AUTH_PAGE_CREDENTIAL : $this->credentials_page;
+		return helper_url_combine( $t_page, $p_query_string );
 	}
 
 	/**
