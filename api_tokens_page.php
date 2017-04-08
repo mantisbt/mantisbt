@@ -40,7 +40,7 @@ auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
-if( !auth_can_create_api_token() ) {
+if( !api_token_can_create() ) {
 	access_denied();
 }
 

@@ -29,6 +29,16 @@
 require_api( 'crypto_api.php' );
 
 /**
+ * Checks if specified user can create API tokens.
+ * @param integer|null $p_user_id User id or null for current logged in user.
+ * @return bool true: can create tokens, false: otherwise.
+ */
+function api_token_can_create( $p_user_id = null ) {
+	$t_user_id = is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	return !user_is_protected( $t_user_id );
+}
+
+/**
  * Create an API token
  *
  * @param string $p_token_name The name (description) identifying what the token is going to be used for.
@@ -143,13 +153,6 @@ function api_token_validate( $p_username, $p_token ) {
 	# If user is not found in the database, they don't have api tokens, we won't bother with worrying about
 	# auto-creation scenario here.
 	if( $t_user_id === false ) {
-		return false;
-	}
-
-	# If users can't create tokens, then they can't use them.  This can change in the future if we enabled
-	# admins to create tokens on behalf of users that are usable.  This is a defense in depth anyways for
-	# cases where users may have had tokens before this config option changes.
-	if( !auth_can_create_api_token( $t_user_id ) ) {
 		return false;
 	}
 

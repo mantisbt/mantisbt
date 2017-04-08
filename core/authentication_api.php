@@ -220,16 +220,6 @@ function auth_logout_redirect_page() {
 }
 
 /**
- * Checks if specified user can create API tokens.
- * @param integer|null $p_user_id User id or null for current logged in user.
- * @return bool true: can create tokens, false: otherwise.
- */
-function auth_can_create_api_token( $p_user_id = null ) {
-	$t_auth_flags = auth_flags();
-	return access_has_global_level( $t_auth_flags->getCreateApiTokensThreshold(), $p_user_id );
-}
-
-/**
  * Checks if specified user can set their own password.
  * @param integer|null $p_user_id The user id or null for logged in user or 0 for signup scenarios.
  * @return bool true: can set password, false: otherwise.

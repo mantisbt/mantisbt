@@ -42,7 +42,7 @@ $t_user_id = auth_get_current_user_id();
 
 user_ensure_unprotected( $t_user_id );
 
-if( !auth_can_create_api_token() ) {
+if( !api_token_can_create() ) {
 	access_denied();
 }
 

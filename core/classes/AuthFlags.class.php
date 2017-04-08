@@ -149,18 +149,6 @@ class AuthFlags {
 		}
 	}
 
-	function setCreateApiTokensThreshold( $p_threshold ) {
-		$this->access_level_create_api_tokens = $p_threshold;
-	}
-
-	function getCreateApiTokensThreshold() {
-		if( is_null( $this->access_level_create_api_tokens ) ) {
-			return VIEWER;
-		}
-
-		return $this->access_level_create_api_tokens;
-	}
-
 	function setUserStandardLoginThreshold( $p_threshold ) {
 		$this->access_level_can_use_standard_login = $p_threshold;
 	}

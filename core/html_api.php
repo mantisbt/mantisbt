@@ -739,7 +739,7 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
 	}
 
-	if( auth_can_create_api_token() ) {
+	if( api_token_can_create() ) {
 		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
 	}
 
