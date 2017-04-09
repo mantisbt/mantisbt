@@ -1228,13 +1228,16 @@ function print_filter_highlight_changed( array $p_filter = null ) {
 function print_filter_values_do_filter_by_date( array $p_filter ) {
 	$t_filter = $p_filter;
 	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
-		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_START_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_END_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] ), '" />';
+		$t_start_string = filter_read_submitted_start_date( $t_filter );
+		$t_end_string = filter_read_submitted_end_date( $t_filter );
 
-		echo $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED];
+		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_START_DATE_SUBMITTED, '" value="', $t_start_string, '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_END_DATE_SUBMITTED, '" value="', $t_end_string, '" />';
+
+		echo $t_start_string;
 		echo ' - ';
-		echo $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED];
+		echo $t_end_string;
 	} else {
 		echo lang_get( 'no' );
 	}
@@ -1288,7 +1291,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
 					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
-					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] . '" />';
+					' size="16" maxlength="20" value="' . filter_read_submitted_start_date( $p_filter ) . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>
@@ -1304,7 +1307,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
 					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
-					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] . '" />';
+					' size="16" maxlength="20" value="' . filter_read_submitted_end_date( $p_filter ) . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>
@@ -1321,13 +1324,16 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 	$t_filter = $p_filter;
 	if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
-		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] ), '" />';
-		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] ), '" />';
+		$t_start_string = filter_read_last_updated_start_date( $t_filter );
+		$t_end_string = filter_read_last_updated_end_date( $t_filter );
 
-		echo $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE];
+		echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_START_DATE, '" value="', $t_start_string, '" />';
+		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_DATE, '" value="', $t_end_string, '" />';
+
+		echo $t_start_string;
 		echo ' - ';
-		echo $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE];
+		echo $t_end_string;
 	} else {
 		echo lang_get( 'no' );
 	}
@@ -1381,7 +1387,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
                     ' class="datetimepicker input-xs" ' . $t_menu_readonly .
                     ' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
                     ' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
-                    ' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] . '" />';
+                    ' size="16" maxlength="20" value="' . filter_read_last_updated_start_date( $p_filter ) . '" />';
                 echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 	            ?>
 			</td>
@@ -1397,7 +1403,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 					' class="datetimepicker input-xs" ' . $t_menu_readonly .
 					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
 					' data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '"' .
-					' size="16" maxlength="20" value="' . $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] . '" />';
+					' size="16" maxlength="20" value="' . filter_read_last_updated_end_date( $p_filter ) . '" />';
 				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 				?>
 			</td>

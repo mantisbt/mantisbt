@@ -497,7 +497,7 @@ function filter_ensure_fields( array $p_filter_arr ) {
 		}
 	}
 
-	# Veryfy custom fields
+	# verify custom fields
 	foreach( $t_filter_default['custom_fields'] as $t_cfid => $t_cf_data ) {
 		if( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
 			$p_filter_arr['custom_fields'][$t_cfid] = $t_cf_data;
@@ -1314,9 +1314,6 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
-	$t_where_param_count = 0;
-
 	$t_current_user_id = auth_get_current_user_id();
 
 	if( $p_user_id === null || $p_user_id === 0 ) {
@@ -1512,12 +1509,9 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	}
 
 	# creation date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] )
-			&& is_string( $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] )
-			&& is_string( $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] )
-			) {
-		$t_start_string = $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED];
-		$t_end_string = $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED];
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] )	) {
+		$t_start_string = filter_read_last_updated_start_date( $t_filter );
+		$t_end_string = filter_read_last_updated_end_date( $t_filter );
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
@@ -1526,10 +1520,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 
 	# last update date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] )
-			&& is_string( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] )
-			&& is_string( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] )
-			) {
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
 		$t_start_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE];
 		$t_end_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE];
 
@@ -3133,12 +3124,13 @@ function filter_gpc_get( array $p_filter = null ) {
 	# date values
 	# creation date
 	$f_do_filter_by_date	        = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] );
-	$f_submitted_start_date			= gpc_get_string( FILTER_PROPERTY_START_DATE_SUBMITTED, $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] );
-	$f_submitted_end_date			= gpc_get_string( FILTER_PROPERTY_END_DATE_SUBMITTED, $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] );
+	$f_submitted_start_date			= filter_read_submitted_start_date( $t_filter );
+	$f_submitted_end_date			= filter_read_submitted_end_date( $t_filter );
+
 	# last_updated date values
 	$f_do_filter_by_last_updated_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
-	$f_last_updated_start_date			= gpc_get_string( FILTER_PROPERTY_LAST_UPDATED_START_DATE, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE] );
-	$f_last_updated_end_date			= gpc_get_string( FILTER_PROPERTY_LAST_UPDATED_END_DATE, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE] );
+	$f_last_updated_start_date			= filter_read_last_updated_start_date( $t_filter );
+	$f_last_updated_end_date			= filter_read_last_updated_end_date( $t_filter );
 
 	$f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, $t_filter[FILTER_PROPERTY_SEARCH] );
 	$f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, $t_filter[FILTER_PROPERTY_VIEW_STATE] );
@@ -3200,8 +3192,10 @@ function filter_gpc_get( array $p_filter = null ) {
 					$t_start_date = (int)$f_start_date;
 					$t_start = $t_start_date;
 				} else {
-					$t_date = gpc_get_string( 'custom_field_' . $t_cfid . '_start_date', null );
-					$t_start_date = strtotime( $t_date );
+					$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null );
+					$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null );
+					$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null );
+					$t_start_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
 					# calculate correct timestamps
 					$t_start = 1;
 					switch( $t_control ) {
@@ -3233,8 +3227,10 @@ function filter_gpc_get( array $p_filter = null ) {
 					$t_end_date = (int)$f_end_date;
 					$t_end = $t_end_date;
 				} else {
-					$t_date = gpc_get_string( 'custom_field_' . $t_cfid . '_end_date', null );
-					$t_end_date = strtotime( $t_date );
+					$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null );
+					$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null );
+					$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null );
+					$t_end_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
 					# calculate correct timestamps
 					$t_end = 1;
 					switch( $t_control ) {
@@ -3377,7 +3373,7 @@ function filter_is_named_filter( $p_filter_id ) {
 }
 
 /**
- * Returns true if the filter is accesible by the user, which happens when the user
+ * Returns true if the filter is accessible by the user, which happens when the user
  * is the owner of the filter, or the filter is public.
  * @param integer $p_filter_id	Filter id
  * @param integer $p_user_id	User id
@@ -3433,4 +3429,83 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 		lang_get( $t_lang_string )
 	);
 	echo '</li>';
+}
+
+
+/**
+ * Read single date value stored in the filter. Start with date fragments (day, month, year) for
+ * backward comparability.
+ * @param array $p_filter       Filter values
+ * @param string $p_date_field  Name of the field holding full date value
+ * @param string $p_day_field   Name of the field storing day segment of the date value
+ * @param string $p_month_field  Name of the field storing month segment of the date value
+ * @param string $p_year_field  Name of the field storing year segment of the date value
+ * @return date string
+ */
+function filter_read_date_value( $p_filter, $p_date_field, $p_day_field, $p_month_field, $p_year_field )
+{
+    if( isset( $p_filter[$p_day_field] ) && isset( $p_filter[$p_month_field] ) && isset( $p_filter[$p_year_field] ) ) {
+        $t_timestamp = mktime( 0, 0, 0, $p_filter[$p_month_field], $p_filter[$p_day_field], $p_filter[$p_year_field] );
+        log_event( LOG_FILTERING, 'Rafik: combined date value: ' . date( config_get( 'normal_date_format' ), $t_timestamp ));
+        return date( config_get( 'normal_date_format' ), $t_timestamp );
+	} else {
+		log_event( LOG_FILTERING, 'Rafik: date value: ' . gpc_get_string( $p_date_field, $p_filter[$p_date_field] ));
+		return gpc_get_string( $p_date_field, $p_filter[$p_date_field] );
+	}
+}
+
+/**
+ * Read date submitted start filter value
+ * @param array $p_filter       Filter values
+ * @return date string
+ */
+function filter_read_submitted_start_date( $p_filter )
+{
+    return filter_read_date_value( $p_filter,
+        FILTER_PROPERTY_START_DATE_SUBMITTED,
+        FILTER_PROPERTY_DATE_SUBMITTED_START_DAY,
+        FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH,
+        FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR );
+}
+
+/**
+ * Read date submitted end date filter value
+ * @param array $p_filter       Filter values
+ * @return date string
+ */
+function filter_read_submitted_end_date( $p_filter )
+{
+	return filter_read_date_value( $p_filter,
+        FILTER_PROPERTY_END_DATE_SUBMITTED,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_DAY,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR );
+}
+
+/**
+ * Read last_updated start date filter value
+ * @param array $p_filter       Filter values
+ * @return date string
+ */
+function filter_read_last_updated_start_date( $p_filter )
+{
+	return filter_read_date_value( $p_filter,
+        FILTER_PROPERTY_START_DATE_SUBMITTED,
+		FILTER_PROPERTY_DATE_SUBMITTED_START_DAY,
+		FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH,
+		FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR);
+}
+
+/**
+ * Read last_updated end date filter value
+ * @param array $p_filter       Filter values
+ * @return date string
+ */
+function filter_read_last_updated_end_date( $p_filter )
+{
+	return filter_read_date_value( $p_filter,
+        FILTER_PROPERTY_END_DATE_SUBMITTED,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_DAY,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH,
+		FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR );
 }
