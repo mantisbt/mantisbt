@@ -3444,12 +3444,12 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
  */
 function filter_read_date_value( $p_filter, $p_date_field, $p_day_field, $p_month_field, $p_year_field )
 {
-    if( isset( $p_filter[$p_day_field] ) && isset( $p_filter[$p_month_field] ) && isset( $p_filter[$p_year_field] ) ) {
+    if( isset( $p_filter[$p_day_field] ) &&
+        isset( $p_filter[$p_month_field] ) &&
+        isset( $p_filter[$p_year_field] ) ) {
         $t_timestamp = mktime( 0, 0, 0, $p_filter[$p_month_field], $p_filter[$p_day_field], $p_filter[$p_year_field] );
-        log_event( LOG_FILTERING, 'Rafik: combined date value: ' . date( config_get( 'normal_date_format' ), $t_timestamp ));
         return date( config_get( 'normal_date_format' ), $t_timestamp );
 	} else {
-		log_event( LOG_FILTERING, 'Rafik: date value: ' . gpc_get_string( $p_date_field, $p_filter[$p_date_field] ));
 		return gpc_get_string( $p_date_field, $p_filter[$p_date_field] );
 	}
 }
