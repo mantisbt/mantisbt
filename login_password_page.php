@@ -15,12 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Login page POSTs results to login.php
- * Check to see if the user is already logged in
+ * Login credential page asks user for password then posts to login.php page.
+ * If an authentication plugin is installed and has its own credential page,
+ * this page will re-direct to it.
+ *
+ * This page also offers features like remember me, secure session, and forgot password.
  *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -101,12 +103,6 @@ if( $t_user_id !== false && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_
 	print_header_redirect( $t_redirect_url );
 }
 
-if( config_get_global( 'email_login_enabled' ) ) {
-	$t_username_label = lang_get( 'username_or_email' );
-} else {
-	$t_username_label = lang_get( 'username' );
-}
-
 $t_session_validation = !$f_reauthenticate && ( ON == config_get_global( 'session_validation' ) );
 
 $t_show_reset_password = !$f_reauthenticate &&
@@ -135,7 +131,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthen
 # - If errors, use the value passed in.
 if( $t_session_validation ) {
 	if( !$f_error && !$f_cookie_error ) {
-		$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
+		$t_default_secure_session = is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie;
 	} else {
 		$t_default_secure_session = $f_secure_session;
 	}
@@ -209,7 +205,6 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
-<!-- Login Form BEGIN -->
 	<form id="login-form" method="post" action="login.php">
 		<fieldset>
 
@@ -271,8 +266,6 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			?>
 		</fieldset>
 	</form>
-
-	<!-- Login Form END -->
 </div>
 </div>
 </div>
