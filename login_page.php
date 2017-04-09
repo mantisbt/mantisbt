@@ -15,8 +15,10 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Login page POSTs results to login.php
- * Check to see if the user is already logged in
+ * Login page accepts username and posts results to login_password_page.php,
+ * which may take the users credential or redirect to a plugin specific page.
+ *
+ * This page also offers features like anonymous login and signup.
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -75,8 +77,6 @@ $t_show_signup =
 	( ON == config_get( 'enable_email_notification' ) );
 
 $t_show_anonymous_login = auth_anonymous_enabled();
-
-$t_show_warnings = true;
 
 $t_form_title = lang_get( 'login_title' );
 
@@ -211,7 +211,6 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
-<!-- Login Form BEGIN -->
 	<form id="login-form" method="post" action="<?php echo AUTH_PAGE_CREDENTIAL ?>">
 		<fieldset>
 
@@ -242,14 +241,12 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 		</fieldset>
 	</form>
 
-	<!-- Login Form END -->
-
 <?php
 #
 # Do some checks to warn administrators of possible security holes.
 #
 
-if( $t_show_warnings && count( $t_warnings ) > 0 ) {
+if( count( $t_warnings ) > 0 ) {
 	echo '<div class="space-10"></div>';
 	echo '<div class="alert alert-warning">';
 	foreach( $t_warnings AS $t_warning ) {
