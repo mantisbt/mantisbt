@@ -236,14 +236,10 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
 	$t_bug_count = 0;
-	$t_filter = filter_db_get_filter( $p_filter_id );
-	$t_filter_detail = explode( '#', $t_filter, 2 );
-	if( !isset( $t_filter_detail[1] ) ) {
+	$t_filter = filter_get( $p_filter_id, null );
+	if( null === $t_filter ) {
 		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
-	$t_filter = json_decode( $t_filter_detail[1], true );
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-
 	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 

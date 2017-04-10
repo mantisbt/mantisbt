@@ -106,31 +106,20 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 # 	26: $f_show_profile
 
 # Set new filter values.  These are stored in a cookie
-$t_view_all_cookie_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-
-# process the cookie if it exists, it may be blank in a new install
-if( !is_blank( $t_view_all_cookie ) ) {
-	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
-	if( false === $t_setting_arr ) {
-		# couldn't deserialize, if we were trying to use the filter, clear it and reload
-		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
-		if( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
-			gpc_clear_cookie( 'view_all_cookie' );
-			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
-		}
-	} else {
-		$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
-	}
-} else {
+$t_cookie_name = config_get_global( 'view_all_cookie' );
+$t_cookie_filter_id = gpc_get_cookie( $t_cookie_name, null );
+if( null === $t_cookie_filter_id ) {
 	# no cookie found, set it
 	$f_type = 1;
+} else {
+	$t_setting_arr = filter_get( $t_cookie_filter_id, filter_get_default() );
 }
 
 # Clear the source query id.  Since we have entered new filter criteria.
-$t_setting_arr['_source_query_id'] = '';
+if( isset( $t_setting_arr['_source_query_id'] ) ) {
+	unset( $t_setting_arr['_source_query_id'] );
+}
+
 switch( $f_type ) {
 	# New cookie
 	case '0':
@@ -152,22 +141,16 @@ switch( $f_type ) {
 	case '3':
 		log_event( LOG_FILTERING, 'view_all_set.php: Copy another query from database' );
 
-		$t_filter_string = filter_db_get_filter( $f_source_query_id );
-		# If we can use the query that we've requested,
-		# grab it. We will overwrite the current one at the
-		# bottom of this page
-		$t_setting_arr = filter_deserialize( $t_filter_string );
-		if( false === $t_setting_arr ) {
-			# couldn't deserialize, if we were trying to use the filter, clear it and reload
-			gpc_clear_cookie( 'view_all_cookie' );
+		$t_setting_arr = filter_get( $f_source_query_id, null );
+		if( null === $t_setting_arr ) {
+			# couldn't get the filter, if we were trying to use the filter, clear it and reload
+			gpc_clear_cookie( $t_cookie_name );
 			error_proceed_url( 'view_all_set.php?type=0' );
-			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
-			exit; # stop here
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			exit;
 		} else {
-			$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
+			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		}
-		# Store the source query id to select the correct filter in the drop down.
-		$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		break;
 	case '4':
 		# Generalise the filter
@@ -225,7 +208,7 @@ if( !$f_temp_filter ) {
 	$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 
 	# set cookie values
-	gpc_set_cookie( config_get_global( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+	gpc_set_cookie( $t_cookie_name, $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
 }
 
 # redirect to print_all or view_all page
