@@ -972,20 +972,20 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 
-	# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-	# filter indices dynamically
-	$t_filter_array = array();
+	# filters from v5 onwards should cope with changing filter indices dynamically
+
+	# Decode json string. If an error happens, eg, invalid format, returns false.
 	if( isset( $t_setting_arr[1] ) ) {
 		$t_filter_array = json_decode( $t_setting_arr[1], true );
 	} else {
 		return false;
 	}
-	if( $t_filter_array['_version'] != FILTER_VERSION ) {
-		# if the version is not new enough, update it using defaults
-		return filter_ensure_valid_filter( $t_filter_array );
-	}
 
-	return $t_filter_array;
+	# Set the filter version that was loaded in the array
+	$t_filter_array['_version'] = $t_setting_arr[0];
+
+	#@TODO cproensa, write stub for filter version specific conversions, inside filter_ensure_valid_filter
+	return filter_ensure_valid_filter( $t_filter_array );
 }
 
 /**
