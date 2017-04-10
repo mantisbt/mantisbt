@@ -1471,7 +1471,6 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 		# check if filter id is a proper stored filter, and is accesible
 		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
 			# the actual stored filter can be retrieved
-			$t_filter_row = filter_cache_row( $t_source_query_id, /* trigger_errors */ false );
 			$t_filter = filter_deserialize( filter_db_get_filter( $t_source_query_id ) );
 			# update the referenced stored filter id
 			$t_filter['_source_query_id'] = $t_source_query_id;

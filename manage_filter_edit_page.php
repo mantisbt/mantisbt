@@ -76,7 +76,6 @@ if( !$t_filter_string ) {
 } else {
 	$t_filter = filter_deserialize( $t_filter_string );
 	$t_filter['_source_query_id'] = $f_filter_id;
-	filter_cache_row( $f_filter_id );
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );

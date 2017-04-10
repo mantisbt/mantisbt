@@ -127,7 +127,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 function mci_filter_delete( $p_filter_id ) {
 	$t_user_id = auth_get_current_user_id();
 
-	$t_filter = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter = filter_get_row( $p_filter_id );
 	if( !$t_filter ) {
 		return ApiObjectFactory::faultNotFound( 'Filter not found' );
 	}
