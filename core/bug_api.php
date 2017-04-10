@@ -314,7 +314,12 @@ class BugData {
 				break;
 			case 'due_date':
 				if( !is_numeric( $p_value ) ) {
-					$p_value = strtotime( $p_value );
+				    $p_value = DateTime::createFromFormat( config_get( 'normal_date_format' ), $p_value );
+				    if ( false === $p_value ) {
+				        $p_value = date_get_null();
+                    } else {
+				        $p_value = $p_value->getTimestamp();
+                    }
 				}
 				break;
 			case 'summary':

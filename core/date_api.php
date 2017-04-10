@@ -73,7 +73,11 @@ function date_strtotime( $p_date ) {
 	if( is_blank( $p_date ) ) {
 		return date_get_null();
 	}
-	return strtotime( $p_date );
+	$p_date = DateTime::createFromFormat( config_get( 'normal_date_format' ), $p_date );
+	if ( false === $p_date ) {
+	    return date_get_null();
+    }
+	return $p_date->getTimestamp();
 }
 
 /**
