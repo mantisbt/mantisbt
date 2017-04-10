@@ -72,14 +72,11 @@ if( null === $f_filter_id ) {
 	$t_filter = current_user_get_bug_filter();
 	$t_named_filter = false;
 } else {
-	$c_filter_id = (int)$f_filter_id;
-	$t_filter_string = filter_db_get_filter( $c_filter_id );
-	if( !$t_filter_string ) {
+	$t_filter = filter_get( $f_filter_id, null );
+	if( null === $t_filter ) {
 		access_denied();
-	} else {
-		$t_filter = filter_deserialize( $t_filter_string );
-		$t_named_filter = true;
 	}
+	$t_named_filter = true;
 }
 
 $f_for_screen = gpc_get_bool( 'for_screen', true );

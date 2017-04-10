@@ -172,17 +172,18 @@ if( $f_username !== null ) {
 }
 $t_show_sticky = null;
 
+# Override current user
+current_user_set( $t_user_id );
+
 if( $f_filter_id == 0 ) {
 	$t_custom_filter = filter_get_default();
 	$t_custom_filter['sort'] = $c_sort_field;
 } else {
 	# null will be returned if the user doesn't have access right to access the filter.
-	$t_custom_filter = filter_db_get_filter( $f_filter_id, $t_user_id );
+	$t_custom_filter = filter_get( $f_filter_id, null );
 	if( null === $t_custom_filter ) {
 		access_denied();
 	}
-
-	$t_custom_filter = filter_deserialize( $t_custom_filter );
 }
 
 $t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_count, $t_issues_count,

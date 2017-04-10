@@ -72,21 +72,11 @@ $t_num_of_columns = count( $t_columns );
 
 # Initialize the filter from the cookie, use default if not set
 $t_cookie_value_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
-if( is_blank( $t_cookie_value ) ) {
-	$t_filter_cookie_arr = filter_get_default();
-} else {
-	# check to see if new cookie is needed
-	if( !filter_is_cookie_valid() ) {
-		print_header_redirect( 'view_all_set.php?type=0&print=1' );
-	}
-	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
-	$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
-}
+$t_filter = filter_get( $t_cookie_value_id, filter_get_default() );
 
-$f_highlight_changed = $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-$f_sort              = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
-$f_dir               = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
+$f_highlight_changed = $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
+$f_sort              = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+$f_dir               = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 $t_project_id        = helper_get_current_project();
 
 # This replaces the actual search that used to be here
@@ -197,7 +187,7 @@ $f_export = implode( ',', $f_bug_arr );
 </tr>
 <tr class="row-category">
 	<?php
-		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter_cookie_arr, COLUMNS_TARGET_PRINT_PAGE );
+		$t_sort_properties = filter_get_visible_sort_properties_array( $t_filter, COLUMNS_TARGET_PRINT_PAGE );
 		foreach( $t_columns as $t_column ) {
 			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE, $t_sort_properties ) );
 		}

@@ -2850,18 +2850,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
  */
 function filter_load( $p_filter_id, $p_user_id = null ) {
 	if( is_numeric( $p_filter_id ) ) {
-		$p_filter_id = (int)$p_filter_id;
-		$t_filter = filter_db_get_filter( $p_filter_id );
-		if( $t_filter === null ) {
-			return null;
-		}
-
-		$t_filter_detail = explode( '#', $t_filter, 2 );
-		if( !isset( $t_filter_detail[1] ) ) {
-			return false;
-		}
-
-		$t_filter = json_decode( $t_filter_detail[1], true );
+		$t_filter = filter_get( $p_filter_id, null );
 	} else {
 		$p_filter_id = strtolower( $p_filter_id );
 		$t_project_id = helper_get_current_project();

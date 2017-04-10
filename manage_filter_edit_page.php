@@ -70,12 +70,9 @@ if( null === $f_filter_id ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-$t_filter_string = filter_db_get_filter( $f_filter_id );
-if( !$t_filter_string ) {
+$t_filter = filter_get( $f_filter_id, null );
+if( null === $t_filter ) {
 	access_denied();
-} else {
-	$t_filter = filter_deserialize( $t_filter_string );
-	$t_filter['_source_query_id'] = $f_filter_id;
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
