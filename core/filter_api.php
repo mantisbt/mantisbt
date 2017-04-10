@@ -3033,7 +3033,7 @@ function filter_db_delete_current_filters() {
  * @param boolean $p_public			Public flag for filter
  * @return array	Array of filter ids and names
  */
-function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_public = null ) {
+function filter_db_get_named_filters( $p_project_id = null, $p_user_id = null, $p_public = null ) {
 	db_param_push();
 	$t_params = array();
 	$t_query = 'SELECT id, name FROM {filters} WHERE project_id >= ' . db_param();
