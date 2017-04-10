@@ -3756,3 +3756,56 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 
 	return $t_project_ids;
 }
+
+/**
+ * Returns a filter array structure for the given filter_id
+ * A default value can be provided to be used when the filter_id doesn't exists
+ * or is not accesible
+ *
+ *  You may pass in any array as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the filter
+ *  cannot be found
+ *
+ * @param integer $p_filter_id Filter id
+ * @param array $p_default     A filter array to return when id is not found
+ * @return array	A filter array
+ */
+function filter_get( $p_filter_id, array $p_default = null ) {
+	# if no default was provided, we will trigger an error if not found
+	$t_trigger_error = func_num_args() == 1;
+
+	# This function checks for user access
+	$t_filter_string = filter_db_get_filter( $p_filter_id );
+	# If value is false, it either doesn't exists or is not accesible
+	if( !$t_filter_string ) {
+		if( $t_trigger_error ) {
+			error_parameters( $p_filter_id );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		} else {
+			return $p_default;
+		}
+	}
+	$t_filter = filter_deserialize( $t_filter_string );
+
+	# Check if the filter references a named filter
+	# This property only makes sense, and should be available on unnamed filters
+	# Note that an unnamed filter is used as a working copy for the user. This logic
+	# allows for automatic updating of a current filter when the user had selected
+	# a named filter and that filter has changed. Otherwise the updates in base filter
+	# wuould not reflect in the user's current filter
+	if( isset( $t_filter['_source_query_id'] ) && $p_filter_id != $t_filter['_source_query_id'] ) {
+		$t_source_query_id = $t_filter['_source_query_id'];
+		# check if filter id is a proper named filter, and is accesible
+		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
+			# replace filter with the referenced one
+			$t_filter = filter_deserialize( filter_db_get_filter( $t_source_query_id ) );
+			# update the referenced stored filter id for the new loaded filter
+			$t_filter['_source_query_id'] = $t_source_query_id;
+		} else {
+			# If the filter id is not valid, clean the referenced filter id
+			unset( $t_filter['_source_query_id'] );
+		}
+	}
+
+	return $t_filter;
+}
