@@ -317,9 +317,9 @@ class BugData {
 				    $p_value = DateTime::createFromFormat( config_get( 'normal_date_format' ), $p_value );
 				    if ( false === $p_value ) {
 				        $p_value = date_get_null();
-                    } else {
+				    } else {
 				        $p_value = $p_value->getTimestamp();
-                    }
+				    }
 				}
 				break;
 			case 'summary':
