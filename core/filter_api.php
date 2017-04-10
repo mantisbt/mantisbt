@@ -1510,8 +1510,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# creation date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] )	) {
-		$t_start_string = filter_read_last_updated_start_date( $t_filter );
-		$t_end_string = filter_read_last_updated_end_date( $t_filter );
+		$t_start_string = filter_read_submitted_start_date( $t_filter );
+		$t_end_string = filter_read_submitted_end_date( $t_filter );
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
@@ -1521,8 +1521,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# last update date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) ) {
-		$t_start_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DATE];
-		$t_end_string = $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DATE];
+		$t_start_string = filter_read_last_updated_start_date( $t_filter );
+		$t_end_string = filter_read_last_updated_end_date( $t_filter );
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
@@ -3450,7 +3450,7 @@ function filter_read_date_value( $p_filter, $p_date_field, $p_day_field, $p_mont
         $t_timestamp = mktime( 0, 0, 0, $p_filter[$p_month_field], $p_filter[$p_day_field], $p_filter[$p_year_field] );
         return date( config_get( 'normal_date_format' ), $t_timestamp );
 	} else {
-		return gpc_get_string( $p_date_field, $p_filter[$p_date_field] );
+        return gpc_get_string( $p_date_field, $p_filter[$p_date_field] );
 	}
 }
 
