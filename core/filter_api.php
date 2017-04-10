@@ -1035,13 +1035,21 @@ function filter_is_cookie_valid() {
 }
 
 /**
- * Get the array fields specified by $p_filter_id
+ * Get the filter db row $p_filter_id
  * using the cached row if it's available
- * @param integer $p_filter_id A filter identifier to look up in the database.
- * @return array a filter row
+ * @global array $g_cache_filter_db_rows
+ * @param integer $p_filter_id      A filter identifier to look up in the database.
+ * @return array|boolean	The row of filter data as stored in db table, or false if does not exist
  */
 function filter_get_row( $p_filter_id ) {
-	return filter_cache_row( $p_filter_id );
+	global $g_cache_filter_db_rows;
+
+	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
+		filter_cache_rows( array($p_filter_id) );
+	}
+
+	$t_row = $g_cache_filter_db_rows[$p_filter_id];
+	return $t_row;
 }
 
 /**
@@ -2688,31 +2696,6 @@ function filter_cache_rows( array $p_filter_ids ) {
 }
 
 /**
- *  Cache a filter row if necessary and return the cached copy
- *  If the second parameter is true (default), trigger an error
- *  if the filter can't be found.  If the second parameter is
- *  false, return false if the filter can't be found.
- * @param integer $p_filter_id      A filter identifier to retrieve.
- * @param boolean $p_trigger_errors Whether to trigger an error if the filter is not found.
- * @return array|boolean Array if filter exists, false if it doesn't exist and trigger errors is not set.
- */
-function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
-	global $g_cache_filter_db_rows;
-
-	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
-		filter_cache_rows( array($p_filter_id) );
-	}
-
-	$t_row = $g_cache_filter_db_rows[$p_filter_id];
-	if( $p_trigger_errors && !$t_row ) {
-		error_parameters( $p_filter_id );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-	}
-
-	return $t_row;
-}
-
-/**
  * Clear the filter cache (or just the given id if specified)
  * @param integer $p_filter_id Filter id.
  * @return boolean
@@ -2848,7 +2831,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		return $g_cache_filter_db_serialized[$c_filter_id];
 	}
 
-	$t_filter_row = filter_cache_row( $c_filter_id, /* trigger_errors */ false );
+	$t_filter_row = filter_get_row( $c_filter_id );
 	if( $t_filter_row ) {
 		$g_cache_filter_db_serialized[$c_filter_id] = $t_filter_row['filter_string'];
 	} else {
@@ -3607,7 +3590,7 @@ function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_t
  * @return boolean
  */
 function filter_is_named_filter( $p_filter_id ) {
-	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter_row = filter_get_row( $p_filter_id );
 	if( $t_filter_row ) {
 		return !empty( $t_filter_row['name'] ) && $t_filter_row['project_id'] >= 0;
 	}
@@ -3627,7 +3610,7 @@ function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
 	} else {
 		$t_user_id = $p_user_id;
 	}
-	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter_row = filter_get_row( $p_filter_id );
 	if( $t_filter_row ) {
 		if( $t_filter_row['user_id'] == $t_user_id || $t_filter_row['is_public'] ) {
 			# If the filter is a named filter, check the config options

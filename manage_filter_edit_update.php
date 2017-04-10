@@ -45,7 +45,6 @@ if( !$t_filter_string ) {
 	access_denied();
 } else {
 	$t_filter = filter_deserialize( $t_filter_string );
-	filter_cache_row( $f_filter_id );
 }
 
 $f_filter_name = gpc_get_string( 'filter_name', null );

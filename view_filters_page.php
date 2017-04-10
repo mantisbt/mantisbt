@@ -79,7 +79,6 @@ if( null === $f_filter_id ) {
 	} else {
 		$t_filter = filter_deserialize( $t_filter_string );
 		$t_named_filter = true;
-		filter_cache_row( $c_filter_id );
 	}
 }
 
