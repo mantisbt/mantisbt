@@ -82,7 +82,27 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 require_api( 'filter_form_api.php' );
 
+# @global array $g_filter	Filter array for the filter in use through view_all_bug_page
+# This gets initialized on filter load
+# @TODO cproensa	We should move towards not relying on this variable, as we reuse filter logic
+# to allow operating on other filter different that the one in use for view_all_bug_page.
+# For example: manage and edit stored filters.
 $g_filter = null;
+
+
+# ==========================================================================
+# CACHING
+# ==========================================================================
+# We cache filter requests to reduce the number of SQL queries
+
+# @global array $g_cache_filter_db_rows
+# indexed by filter_id, contains the filter rows as read from db table
+$g_cache_filter_db_rows = array();
+
+# @global array $g_cache_filter_db_serialized
+# indexed by filter_id, contains the serialized filter strings
+$g_cache_filter_db_serialized = array();
+
 
 /**
  * Initialize the filter API with the current filter.
@@ -2640,25 +2660,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 <?php
 }
 
-
-# ==========================================================================
-# CACHING
-# ==========================================================================
-
-# We cache filter requests to reduce the number of SQL queries
-# @global array $g_cache_filter
-# @global array $g_cache_filter_db_filters
-$g_cache_filter = array();
-$g_cache_filter_db_filters = array();
-
-/**
- * Cache the specified filters.
- *
- * @param array Filter ids.
- * @return array Array of filter information arrays, filters that don't exist will be set to false.
- */
 function filter_cache_rows( array $p_filter_ids ) {
-	global $g_cache_filter;
+	global $g_cache_filter_db_rows;
 
 	if( empty( $p_filter_ids ) ) {
 		return;
@@ -2676,11 +2679,11 @@ function filter_cache_rows( array $p_filter_ids ) {
 			. implode( ',', $t_sql_params ) . ')';
 	$t_result = db_query( $t_query, $t_params );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_filter[$t_row['id']] = $t_row;
+		$g_cache_filter_db_rows[$t_row['id']] = $t_row;
 		unset( $t_ids_not_found[$t_row['id']] );
 	}
 	foreach( $t_ids_not_found as $t_id ) {
-		$g_cache_filter[$t_id] = false;
+		$g_cache_filter_db_rows[$t_id] = false;
 	}
 }
 
@@ -2694,13 +2697,13 @@ function filter_cache_rows( array $p_filter_ids ) {
  * @return array|boolean Array if filter exists, false if it doesn't exist and trigger errors is not set.
  */
 function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
-	global $g_cache_filter;
+	global $g_cache_filter_db_rows;
 
-	if( !isset( $g_cache_filter[$p_filter_id] ) ) {
+	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
 		filter_cache_rows( array($p_filter_id) );
 	}
 
-	$t_row = $g_cache_filter[$p_filter_id];
+	$t_row = $g_cache_filter_db_rows[$p_filter_id];
 	if( $p_trigger_errors && !$t_row ) {
 		error_parameters( $p_filter_id );
 		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
@@ -2715,12 +2718,12 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
  * @return boolean
  */
 function filter_clear_cache( $p_filter_id = null ) {
-	global $g_cache_filter;
+	global $g_cache_filter_db_rows;
 
 	if( null === $p_filter_id ) {
-		$g_cache_filter = array();
+		$g_cache_filter_db_rows = array();
 	} else {
-		unset( $g_cache_filter[(int)$p_filter_id] );
+		unset( $g_cache_filter_db_rows[(int)$p_filter_id] );
 	}
 
 	return true;
@@ -2831,28 +2834,28 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
  * @return mixed
  */
 function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
-	global $g_cache_filter_db_filters;
+	global $g_cache_filter_db_serialized;
 	$c_filter_id = (int)$p_filter_id;
 
 	if( !filter_is_accessible( $c_filter_id, $p_user_id ) ) {
 		return null;
 	}
 
-	if( isset( $g_cache_filter_db_filters[$c_filter_id] ) ) {
-		if( $g_cache_filter_db_filters[$c_filter_id] === false ) {
+	if( isset( $g_cache_filter_db_serialized[$c_filter_id] ) ) {
+		if( $g_cache_filter_db_serialized[$c_filter_id] === false ) {
 			return null;
 		}
-		return $g_cache_filter_db_filters[$c_filter_id];
+		return $g_cache_filter_db_serialized[$c_filter_id];
 	}
 
 	$t_filter_row = filter_cache_row( $c_filter_id, /* trigger_errors */ false );
 	if( $t_filter_row ) {
-		$g_cache_filter_db_filters[$c_filter_id] = $t_filter_row['filter_string'];
+		$g_cache_filter_db_serialized[$c_filter_id] = $t_filter_row['filter_string'];
 	} else {
-		$g_cache_filter_db_filters[$c_filter_id] = false;
+		$g_cache_filter_db_serialized[$c_filter_id] = false;
 	}
 
-	return $g_cache_filter_db_filters[$c_filter_id];
+	return $g_cache_filter_db_serialized[$c_filter_id];
 }
 
 /**
