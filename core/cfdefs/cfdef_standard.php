@@ -271,7 +271,7 @@ function cfdef_prepare_email_value( $p_value ) {
  * @return string
  */
 function cfdef_prepare_date_value( $p_value ) {
-	if( $p_value != null && $p_value != 0 ) {
+	if( $p_value != null ) {
 		return date( config_get( 'short_date_format' ), $p_value );
 	}
 }
