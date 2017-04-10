@@ -506,6 +506,7 @@ input.typeahead.scrollable ~ .tt-menu {
 #timeline-container {
     position: relative;
     height: 74vh;
+    max-height: 300px;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -526,6 +527,10 @@ input.typeahead.scrollable ~ .tt-menu {
         float: right !important;
         border-style: none !important;
         width: auto;
+    }
+
+    #timeline-container {
+        max-height: 400px;
     }
 }
 
@@ -588,6 +593,10 @@ input.typeahead.scrollable ~ .tt-menu {
         border-style: none !important;
         width: auto;
     }
+
+    #timeline-container {
+        max-height: 600px;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -640,5 +649,8 @@ input.typeahead.scrollable ~ .tt-menu {
         right: 43px !important;
     }
 
+    #timeline-container {
+        max-height: 800px;
+    }
 }
 
