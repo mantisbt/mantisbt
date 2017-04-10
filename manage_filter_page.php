@@ -60,10 +60,10 @@ if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
 }
 
 $t_filter_ids_available =
-		filter_db_get_queries( ALL_PROJECTS, $t_user_id, false ) +
-		filter_db_get_queries( ALL_PROJECTS, null, true ) +
-		filter_db_get_queries( $t_project_id, $t_user_id, false ) +
-		filter_db_get_queries( $t_project_id, null, true )
+		filter_db_get_named_filters( ALL_PROJECTS, $t_user_id, false ) +
+		filter_db_get_named_filters( ALL_PROJECTS, null, true ) +
+		filter_db_get_named_filters( $t_project_id, $t_user_id, false ) +
+		filter_db_get_named_filters( $t_project_id, null, true )
 		;
 filter_cache_rows( $t_filter_ids_available );
 
