@@ -228,26 +228,25 @@ function current_user_ensure_unprotected() {
 }
 
 /**
- * Returns the issue filter parameters for the current user
+ * Returns the issue filter for the current user, which is retrieved by
+ * evaluating these steps:
+ * 1) Reads gpc vars for a token id, which means to load a temporary filter
+ * 2) Otherwise, get the filter saved as current, for the user, project 
  *
- * @param integer $p_project_id Project id. This argument is only used if a 'filter' string is not passed via the web request.
- *                              The default value is null meaning return the current filter for user's current project
-                                if a filter string is not supplied.
- * @return array User filter, if not set, then default filter.
+ * @param integer $p_project_id Project id to get the user's filter from, if needed.
+ * @return array	A filter array
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
-	$f_filter_string = gpc_get_string( 'filter', '' );
-	$t_filter = array();
+	$f_filter_token = gpc_get( 'filter', null );
 
-	if( !is_blank( $f_filter_string ) ) {
-		if( is_numeric( $f_filter_string ) ) {
-			$t_token = token_get_value( TOKEN_FILTER );
-			if( null != $t_token ) {
-				$t_filter = json_decode( $t_token, true );
-			}
-		} else {
-			$t_filter = json_decode( $f_filter_string, true );
+	if( null !== $f_filter_token && token_exists( (int)$f_filter_token ) ) {
+		# If the token id exists, try to load the value
+		# At this point, only one value can exists for each token type and user
+		# so read the token based on type, regardless of the id that was provided
+		$t_token = token_get_value( TOKEN_FILTER );
+		if( null != $t_token ) {
+			$t_filter = json_decode( $t_token, true );
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {
