@@ -66,13 +66,13 @@ layout_page_begin();
 	</h4>
 </div>
 <?php
-$t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
+$t_query_to_store = filter_db_get_filter_string( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
 $t_query_arr = filter_db_get_available_queries();
 
 # Let's just see if any of the current filters are the
 # same as the one we're about the try and save
 foreach( $t_query_arr as $t_id => $t_name ) {
-	if( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
+	if( filter_db_get_filter_string( $t_id ) == $t_query_to_store ) {
 		print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
 	}
 }

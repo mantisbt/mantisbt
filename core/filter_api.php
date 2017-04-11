@@ -1001,7 +1001,7 @@ function filter_serialize( $p_filter_array ) {
  */
 function filter_is_cookie_valid() {
 	$t_view_all_cookie_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
+	$t_view_all_cookie = filter_db_get_filter_string( $t_view_all_cookie_id );
 
 	# check to see if the cookie does not exist
 	if( is_blank( $t_view_all_cookie ) ) {
@@ -2811,7 +2811,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
  * @param integer $p_user_id   A valid user identifier.
  * @return mixed
  */
-function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
+function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
 	$c_filter_id = (int)$p_filter_id;
 
 	if( !filter_is_accessible( $c_filter_id, $p_user_id ) ) {
@@ -3745,7 +3745,7 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 	$t_trigger_error = func_num_args() == 1;
 
 	# This function checks for user access
-	$t_filter_string = filter_db_get_filter( $p_filter_id );
+	$t_filter_string = filter_db_get_filter_string( $p_filter_id );
 	# If value is false, it either doesn't exists or is not accesible
 	if( !$t_filter_string ) {
 		if( $t_trigger_error ) {
@@ -3768,7 +3768,7 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 		# check if filter id is a proper named filter, and is accesible
 		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
 			# replace filter with the referenced one
-			$t_filter = filter_deserialize( filter_db_get_filter( $t_source_query_id ) );
+			$t_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
 			# update the referenced stored filter id for the new loaded filter
 			$t_filter['_source_query_id'] = $t_source_query_id;
 		} else {
