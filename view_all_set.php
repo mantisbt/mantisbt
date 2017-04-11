@@ -75,36 +75,6 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = 0;
 }
 
-#   array contents
-#   --------------
-#	 0: version
-#	 1: $f_show_category
-#	 2: $f_show_severity
-#	 3: $f_show_status
-#	 4: $f_per_page
-#	 5: $f_highlight_changed
-#	 6: $f_hide_closed
-#	 7: $f_reporter_id
-#	 8: $f_handler_id
-#	 9: $f_sort
-#	10: $f_dir
-#	11: $f_start_month
-#	12: $f_start_day
-#	13: $f_start_year
-#	14: $f_end_month
-#	15: $f_end_day
-#	16: $f_end_year
-#	17: $f_search
-#	18: $f_hide_resolved
-#	19: $f_show_resolution
-#	20: $f_show_build
-#	21: $f_show_version
-#	22: $f_do_filter_by_date
-#	23: $f_custom_field
-#	24: $f_relationship_type
-# 	25: $f_relationship_bug
-# 	26: $f_show_profile
-
 # Get the filter in use
 $t_setting_arr = current_user_get_bug_filter();
 
