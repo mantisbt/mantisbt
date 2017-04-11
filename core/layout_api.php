@@ -1008,6 +1008,9 @@ function layout_page_content_begin() {
  * @return null
  */
 function layout_page_content_end() {
+	# Print table of log events
+	log_print_to_page();
+
 	echo '</div>' , "\n";
 }
 
@@ -1207,9 +1210,6 @@ function layout_footer() {
 		echo '</address>' . "\n";
 		echo '</div>' . "\n";
 	}
-
-	# Print table of log events
-	log_print_to_page();
 
 	layout_footer_end();
 }
