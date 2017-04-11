@@ -3032,34 +3032,33 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 		$t_result = db_query( $t_query, array( true, $t_user_id ) );
 	}
-
+	
 	$t_filters = array();
 
+	# first build the id=>name array
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( $p_return_names_only ) {
-			$t_filters[$t_row['id']] = $t_row['name'];
-		} else {
-			$t_filter_detail = explode( '#', $t_row['filter_string'], 2 );
-			if( !isset( $t_filter_detail[1] ) ) {
-				continue;
-			}
-
-			$t_filter = json_decode( $t_filter_detail[1], true );
-			$t_filter = filter_ensure_valid_filter( $t_filter );
-			$t_row['criteria'] = $t_filter;
-			$t_row['url'] = filter_get_url( $t_filter );
-			$t_filters[$t_row['name']] = $t_row;
-		}
+		$t_filters[$t_row['id']] = $t_row['name'];
 	}
+	filter_cache_rows( array_keys( $t_filters ) );
 
 	if( $p_return_names_only ) {
-		$t_filters = array_unique( $t_filters );
 		asort( $t_filters );
-	} else {
-		$t_filters = array_values( $t_filters );
+		return $t_filters;
 	}
 
-	return $t_filters;
+	# build an extended array of name=>{filter data}
+	$t_filter_data = array();
+	foreach( $t_filters as $t_filter_id => $t_filter_name ) {
+		$t_row = array();
+		$t_filter_obj = filter_get( $t_filter_id );
+		if( !$t_filter_obj ) {
+			continue;
+		}
+		$t_row['criteria'] = $t_filter_obj;
+		$t_row['url'] = filter_get_url( $t_filter_obj );
+		$t_filter_data[$t_filter_name] = $t_row;
+	}
+	return $t_filter_data;
 }
 
 /**

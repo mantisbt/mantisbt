@@ -66,7 +66,8 @@ layout_page_begin();
 	</h4>
 </div>
 <?php
-$t_query_to_store = filter_db_get_filter_string( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
+$t_current_filter_id = filter_db_get_project_current( helper_get_current_project() );
+$t_query_to_store = filter_db_get_filter_string( $t_current_filter_id );
 $t_query_arr = filter_db_get_available_queries();
 
 # Let's just see if any of the current filters are the
