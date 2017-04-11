@@ -99,11 +99,6 @@ $g_filter = null;
 # indexed by filter_id, contains the filter rows as read from db table
 $g_cache_filter_db_rows = array();
 
-# @global array $g_cache_filter_db_serialized
-# indexed by filter_id, contains the serialized filter strings
-$g_cache_filter_db_serialized = array();
-
-
 /**
  * Initialize the filter API with the current filter.
  * @param array $p_filter The filter to set as the current filter.
@@ -2817,28 +2812,14 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
  * @return mixed
  */
 function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
-	global $g_cache_filter_db_serialized;
 	$c_filter_id = (int)$p_filter_id;
 
 	if( !filter_is_accessible( $c_filter_id, $p_user_id ) ) {
 		return null;
 	}
 
-	if( isset( $g_cache_filter_db_serialized[$c_filter_id] ) ) {
-		if( $g_cache_filter_db_serialized[$c_filter_id] === false ) {
-			return null;
-		}
-		return $g_cache_filter_db_serialized[$c_filter_id];
-	}
-
 	$t_filter_row = filter_get_row( $c_filter_id );
-	if( $t_filter_row ) {
-		$g_cache_filter_db_serialized[$c_filter_id] = $t_filter_row['filter_string'];
-	} else {
-		$g_cache_filter_db_serialized[$c_filter_id] = false;
-	}
-
-	return $g_cache_filter_db_serialized[$c_filter_id];
+	return $t_filter_row['filter_string'];
 }
 
 /**
