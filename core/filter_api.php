@@ -2443,20 +2443,6 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 }
 
 /**
- * Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
- * filter display.
- * @param integer $p_page_number Page number.
- * @param boolean $p_for_screen  Whether output is for screen view.
- * @return void
- * @see filter_draw_selection_area2
- */
-function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
-	echo '<div class="col-md-12 col-xs-12">';
-	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
-	echo '</div>';
-}
-
-/**
  * Prints the filter selection area for both the bug list view screen and
  * the bug list print screen. This function was an attempt to make it easier to
  * add new filters and rearrange them on screen for both pages.
@@ -2465,7 +2451,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
  * @param boolean $p_expanded    Whether to display expanded.
  * @return void
  */
-function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
+function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
 	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
 
 	$t_filter = current_user_get_bug_filter();
@@ -2486,7 +2472,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_view_all_set_type = 5;
 	}
 	?>
-
+	<div class="col-md-12 col-xs-12">
 	<div class="filter-box">
 		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
@@ -2595,6 +2581,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		filter_form_draw_inputs( $t_filter, $p_for_screen, false, 'view_filters_page.php' );
 		?>
 
+		</div>
 		</div>
 		</div>
 		<?php
