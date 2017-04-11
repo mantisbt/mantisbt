@@ -249,8 +249,6 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 			$t_filter = json_decode( $t_token, true );
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-	} else if( !filter_is_cookie_valid() ) {
-		$t_filter = filter_get_default();
 	} else {
 		$t_user_id = auth_get_current_user_id();
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );
