@@ -70,9 +70,8 @@ $t_project_id 			= 0;
 $t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 $t_num_of_columns = count( $t_columns );
 
-# Initialize the filter from the cookie, use default if not set
-$t_cookie_value_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_filter = filter_get( $t_cookie_value_id, filter_get_default() );
+# Get the filter in use
+$t_filter = current_user_get_bug_filter();
 
 $f_highlight_changed = $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
 $f_sort              = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];

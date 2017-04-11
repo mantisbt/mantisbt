@@ -105,15 +105,8 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 # 	25: $f_relationship_bug
 # 	26: $f_show_profile
 
-# Set new filter values.  These are stored in a cookie
-$t_cookie_name = config_get_global( 'view_all_cookie' );
-$t_cookie_filter_id = gpc_get_cookie( $t_cookie_name, null );
-if( null === $t_cookie_filter_id ) {
-	# no cookie found, set it
-	$f_type = 1;
-} else {
-	$t_setting_arr = filter_get( $t_cookie_filter_id, filter_get_default() );
-}
+# Get the filter in use
+$t_setting_arr = current_user_get_bug_filter();
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
@@ -144,7 +137,6 @@ switch( $f_type ) {
 		$t_setting_arr = filter_get( $f_source_query_id, null );
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
-			gpc_clear_cookie( $t_cookie_name );
 			error_proceed_url( 'view_all_set.php?type=0' );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 			exit;
@@ -204,11 +196,10 @@ $t_settings_string = filter_serialize( $t_setting_arr );
 if( !$f_temp_filter ) {
 	# Store the filter string in the database: its the current filter, so some values won't change
 	$t_project_id = helper_get_current_project();
+	# saving a current filter, a negative project id is a hack to indicate that
+	# it's a current filter, for this project and user
 	$t_project_id = ( $t_project_id * -1 );
-	$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
-
-	# set cookie values
-	gpc_set_cookie( $t_cookie_name, $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+	filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 }
 
 # redirect to print_all or view_all page

@@ -89,11 +89,10 @@ if( $f_all_projects ) {
 	$t_project_id = 0;
 }
 
-$t_filter_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-$t_filter = filter_get( $t_filter_id, null );
-if( null === $t_filter ) {
-	access_denied();
-}
+# Get the filter in use
+# @TODO cproensa maybe we should pass the exact (current) filter id
+$t_filter = current_user_get_bug_filter();
+
 # named filters must not reference source query id
 if( isset( $t_filter['_source_query_id'] ) ) {
 	unset( $t_filter['_source_query_id'] );
