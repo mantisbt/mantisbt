@@ -1004,40 +1004,6 @@ function filter_serialize( $p_filter_array ) {
 }
 
 /**
- * Check if the filter cookie exists and is of the correct version.
- * @return boolean
- */
-function filter_is_cookie_valid() {
-	$t_view_all_cookie_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
-	$t_view_all_cookie = filter_db_get_filter_string( $t_view_all_cookie_id );
-
-	# check to see if the cookie does not exist
-	if( is_blank( $t_view_all_cookie ) ) {
-		return false;
-	}
-
-	# check to see if new cookie is needed
-	$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
-	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-		return false;
-	}
-
-	# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-	# filter indices dynamically
-	$t_filter_cookie_arr = array();
-	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
-	} else {
-		return false;
-	}
-	if( $t_filter_cookie_arr['_version'] != FILTER_VERSION ) {
-		return false;
-	}
-
-	return true;
-}
-
-/**
  * Get the filter db row $p_filter_id
  * using the cached row if it's available
  * @global array $g_cache_filter_db_rows
