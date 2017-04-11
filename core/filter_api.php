@@ -951,6 +951,10 @@ function filter_get_default() {
 
 /**
  * Deserialize filter string
+ * Expected strings have this format: "<version>#<json string>" where:
+ * - <version> is the versio number of the filter structure used. See constant FILTER_VERSION
+ * - # is a separator
+ * - <json string> is the json encoded filter array.
  * @param string $p_serialized_filter Serialized filter string.
  * @return mixed $t_filter array
  * @see filter_ensure_valid_filter
@@ -959,6 +963,10 @@ function filter_deserialize( $p_serialized_filter ) {
 	if( is_blank( $p_serialized_filter ) ) {
 		return false;
 	}
+
+	#@TODO cproensa, we could accept a pure json array, without version prefix
+	# in this case, the filter version field inside the array is to be used
+	# and if not present, set the current filter version
 
 	# check to see if new cookie is needed
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
