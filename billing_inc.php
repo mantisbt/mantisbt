@@ -53,8 +53,28 @@ require_api( 'utility_api.php' );
 ?>
 <?php
 
-$t_today = date( config_get( 'short_date_format' ) );
-$t_date_submitted = isset( $t_bug ) ? date( config_get( 'short_date_format' ), $t_bug->date_submitted ) : $t_today;
+$t_today = date( 'd:m:Y' );
+$t_date_submitted = isset( $t_bug ) ? date( 'd:m:Y', $t_bug->date_submitted ) : $t_today;
+
+$t_bugnote_stats_from_def = $t_date_submitted;
+$t_bugnote_stats_from_def_ar = explode( ':', $t_bugnote_stats_from_def );
+$t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
+$t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
+$t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
+
+$t_bugnote_stats_from_d = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, $t_bugnote_stats_from_def_d );
+$t_bugnote_stats_from_m = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, $t_bugnote_stats_from_def_m );
+$t_bugnote_stats_from_y = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, $t_bugnote_stats_from_def_y );
+
+$t_bugnote_stats_to_def = $t_today;
+$t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
+$t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
+$t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
+$t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
+
+$t_bugnote_stats_to_d = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, $t_bugnote_stats_to_def_d );
+$t_bugnote_stats_to_m = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, $t_bugnote_stats_to_def_m );
+$t_bugnote_stats_to_y = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, $t_bugnote_stats_to_def_y );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
@@ -91,42 +111,63 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</div>
 </div>
 
-<div class="widget-body">
-    <form method="post" action="">
-    <div class="widget-main">
-        <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
-        <?php
-            $t_filter = array();
-            $t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
-            $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] = $t_date_submitted;
-            $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] = $t_today;
-            filter_init( $t_filter );
-            print_filter_do_filter_by_date( true );
-        ?>
 
+<div class="widget-body">
+<form method="post" action="">
+	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
+	<table class="width100" cellspacing="0">
+		<tr>
+			<td class="form-title" colspan="4"><?php
+				collapse_icon( 'bugnotestats' );
+				echo lang_get( 'time_tracking' ); ?>
+			</td>
+		</tr>
+		<tr class="row-2">
+			<td class="category" width="25%">
+				<?php
+					$t_filter = array();
+					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
+					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
+					filter_init( $t_filter );
+					print_filter_do_filter_by_date( true );
+				?>
+			</td>
+		</tr>
 <?php
 	if( $t_cost_col ) {
 ?>
-        <div class="space-10"></div>
-        <?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
-        <input type="text" name="bugnote_cost" class="input-sm" value="<?php echo $f_bugnote_cost ?>" />
+		<tr class="row-1">
+			<td>
+				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
+				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />
+			</td>
+		</tr>
 <?php
 	}
 ?>
-    </div>
-    <div class="widget-toolbox padding-8 clearfix">
-        <input name="get_bugnote_stats_button" class="btn btn-primary btn-sm btn-white btn-round"
-               value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" type="submit">
-    </div>
-    </form>
+		<tr>
+			<td class="center" colspan="2">
+				<input type="submit" class="button"
+					name="get_bugnote_stats_button"
+					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+				/>
+			</td>
+		</tr>
+	</table>
+</form>
 </div>
 </div>
 
 <?php
 	if( !is_blank( $f_get_bugnote_stats_button ) ) {
 		# Retrieve time tracking information
-		$t_from = $t_date_submitted;
-		$t_to = $t_today;
+		$t_from = $t_bugnote_stats_from_y . '-' . $t_bugnote_stats_from_m . '-' . $t_bugnote_stats_from_d;
+		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
 		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost );
 
 		# Sort the array by bug_id, user/real name
@@ -148,12 +189,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		);
 
 		foreach( $t_exports as $t_export_label => $t_export_page ) {
-			echo '<a class="btn btn-primary btn-sm btn-white btn-round" ';
-			echo 'href="' . $t_export_page . '?';
+			echo '[ <a href="' . $t_export_page . '?';
 			echo 'from=' . $t_from . '&amp;to=' . $t_to;
 			echo '&amp;cost=' . $f_bugnote_cost;
 			echo '&amp;project_id=' . $f_project_id;
-			echo '">' . lang_get( $t_export_label ) . '</a> ';
+			echo '">' . lang_get( $t_export_label ) . '</a> ] ';
 		}
 
 		echo '<br />';
@@ -203,7 +243,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		} # end for issues loop ?>
 
 	<tr>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
 		<td class="small-caption bold">
