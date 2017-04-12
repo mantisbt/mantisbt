@@ -78,8 +78,12 @@ $t_recent_days = 30;
 $c_filter['recent_mod'] = filter_create_recently_modified( $t_recent_days );
 $t_url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS . '=none'
 		. '&' . FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_DATE . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_DATE]
-		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_DATE . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_DATE];
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_DAY . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_DAY]
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_MONTH . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_MONTH]
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_END_YEAR . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_END_YEAR]
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_DAY . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_DAY]
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_MONTH . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_MONTH]
+		. '&' . FILTER_PROPERTY_LAST_UPDATED_START_YEAR . '=' . $c_filter['recent_mod'][FILTER_PROPERTY_LAST_UPDATED_START_YEAR];
 
 $c_filter['reported'] = filter_create_reported_by( helper_get_current_project(), $t_current_user_id );
 $t_url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
