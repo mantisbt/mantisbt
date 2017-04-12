@@ -290,8 +290,12 @@ $(document).ready( function() {
 		var table = $(this).closest('table');
 		switch(this.value) {
 			case '2': // between
-				$(table).find("input[name*=_start_date]").prop('disabled', false);
-				$(table).find("input[name*=_end_date]").prop('disabled', false);
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', false);
+				$(table).find("select[name*=_end_month]").prop('disabled', false);
+				$(table).find("select[name*=_end_day]").prop('disabled', false);
 				break;
 
 			case '3': // on or before
@@ -299,15 +303,23 @@ $(document).ready( function() {
 			case '5': // on
 			case '6': // after
 			case '7': // on or after
-				$(table).find("input[name*=_start_date]").prop('disabled', false);
-				$(table).find("input[name*=_end_date]").prop('disabled', true);
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
 				break;
 
 			case '0': // any
 			case '1': // none
 			default:
-				$(table).find("input[name*=_start_date]").prop('disabled', true);
-				$(table).find("input[name*=_end_date]").prop('disabled', true);
+				$(table).find("select[name*=_start_year]").prop('disabled', true);
+				$(table).find("select[name*=_start_month]").prop('disabled', true);
+				$(table).find("select[name*=_start_day]").prop('disabled', true);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
 				break;
 		}
 	});
