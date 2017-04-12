@@ -245,64 +245,16 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	if( $p_default_disable == true ) {
 		$t_disable = ' readonly="readonly"';
 	}
+	$t_blank_line = '';
+	if( $p_allow_blank == true ) {
+		$t_blank_line = '<option value="0"></option>';
+	}
 
  	echo '<input ' . helper_get_tab_index() . ' type="text" name="' . $p_name . '_date" ' .
 		' class="datetimepicker ' . $p_input_css . '" ' . $t_disable .
 		' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-		' data-picker-format="' . convert_php_to_date_format( $p_format ) . '"' .
+		' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
 		' size="12" maxlength="12" value="' . $t_date . '" />';
 	echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 }
 
-
-/**
- * Converts php date format string to moment.js date format.
- * This function is used primarily with datetime picker widget.
- * @param string  $p_php_format  Php date format string: http://php.net/manual/en/function.date.php
- * @return string in moment.js format: http://momentjs.com/docs/#/displaying/format/
- * @access public
- */
-function convert_php_to_date_format( $p_php_format )
-{
-    $t_replacements = array(
-        'd' => 'DD',
-        'D' => 'ddd',
-        'j' => 'D',
-        'l' => 'dddd',
-        'N' => 'E',
-        'S' => 'o',
-        'w' => 'e',
-        'z' => 'DDD',
-        'W' => 'W',
-        'F' => 'MMMM',
-        'm' => 'MM',
-        'M' => 'MMM',
-        'n' => 'M',
-        't' => '', // no equivalent
-        'L' => '', // no equivalent
-        'o' => 'YYYY',
-        'Y' => 'YYYY',
-        'y' => 'YY',
-        'a' => 'a',
-        'A' => 'A',
-        'B' => '', // no equivalent
-        'g' => 'h',
-        'G' => 'H',
-        'h' => 'hh',
-        'H' => 'HH',
-        'i' => 'mm',
-        's' => 'ss',
-        'u' => 'SSS',
-        'e' => 'zz', // deprecated since version 1.6.0 of moment.js
-        'I' => '', // no equivalent
-        'O' => '', // no equivalent
-        'P' => '', // no equivalent
-        'T' => '', // no equivalent
-        'Z' => '', // no equivalent
-        'c' => '', // no equivalent
-        'r' => '', // no equivalent
-        'U' => 'X',
-	);
-
-    return strtr( $p_php_format, $t_replacements );
-}
