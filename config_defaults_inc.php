@@ -1168,6 +1168,14 @@ $g_complete_date_format = 'Y-m-d H:i T';
  */
 $g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
+/**
+ * Datetime picker widget format string for date only.
+ * For detailed instructions on date formatting
+ * @see http://momentjs.com/docs/#/displaying/format/
+ * @global string $g_datetime_picker_format
+ */
+$g_date_picker_format = 'Y-MM-DD';
+
 ##############################
 # MantisBT TimeZone Settings #
 ##############################
