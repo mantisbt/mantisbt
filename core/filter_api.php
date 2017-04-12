@@ -1000,6 +1000,7 @@ function filter_deserialize( $p_serialized_filter ) {
  */
 function filter_serialize( $p_filter_array ) {
 	$t_cookie_version = FILTER_VERSION;
+	filter_clean_runtime_properties( $p_filter_array );
 	$t_settings_serialized = json_encode( $p_filter_array );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 	return $t_settings_string;
@@ -2454,11 +2455,14 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 		<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="type" value="<?php echo $t_view_all_set_type ?>" />
 		<?php
-			if( $p_for_screen == false ) {
-		echo '<input type="hidden" name="print" value="1" />';
-		echo '<input type="hidden" name="offset" value="0" />';
-	}
-	?>
+		if( filter_is_temporary( $t_filter ) ) {
+			echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
+		}
+		if( $p_for_screen == false ) {
+			echo '<input type="hidden" name="print" value="1" />';
+			echo '<input type="hidden" name="offset" value="0" />';
+		}
+		?>
 		<input type="hidden" name="page_number" value="<?php echo $t_page_number?>" />
 		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
 	<?php
@@ -2540,7 +2544,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 					<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
 						   placeholder="<?php echo lang_get( 'search' ) ?>"
 						   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
-					<button id="filter-bar-search-btn" type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs"
+					<button id="filter-bar-search-btn" type="submit" name="filter_submit" class="btn btn-primary btn-white btn-round btn-xs"
 							title="<?php echo lang_get( 'filter_button' ) ?>">
 						<i class="ace-icon fa fa-search"></i>
 					</button>
@@ -2571,7 +2575,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 	echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '"
 		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
-	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
+	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter_submit" value="<?php echo lang_get( 'filter_button' )?>" />
 	</div>
 	<?php
 
@@ -3484,6 +3488,14 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_NOTE_USER_ID] 			= $f_note_user_id;
 	$t_filter_input[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
 
+	# copy runtime properties, if present
+	if( isset( $t_filter['_temporary_key'] ) ) {
+		$t_filter_input['_temporary_key'] = $t_filter['_temporary_key'];
+	}
+	if( isset( $t_filter['_filter_id'] ) ) {
+		$t_filter_input['_filter_id'] = $t_filter['_filter_id'];
+	}
+
 	return filter_ensure_valid_filter( $t_filter_input );
 }
 
@@ -3745,6 +3757,8 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 		}
 	}
 
+	$t_filter['_filter_id'] = $p_filter_id;
+
 	return $t_filter;
 }
 
@@ -3769,6 +3783,7 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
 		# setting here the key in the filter array only if the key exists
 		# this validates against receiving garbage input as XSS attacks
 		$t_filter = $t_session_filters[$p_filter_key];
+		$t_filter['_temporary_key'] = $p_filter_key;
 		return filter_ensure_valid_filter( $t_filter );
 	} else {
 		if( $t_trigger_error ) {
@@ -3800,6 +3815,8 @@ function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
 	} else {
 		$t_filter_key = $p_filter_key;
 	}
+
+	filter_clean_runtime_properties( $p_filter );
 	$t_session_filters = session_get( 'temporary_filters', array() );
 	$t_session_filters[$t_filter_key] = $p_filter;
 	session_set( 'temporary_filters', $t_session_filters );
@@ -3821,17 +3838,49 @@ function filter_get_temporary_key( array $p_filter ) {
 }
 
 /**
- * Returns a string formatted as GET parameter, suitable for tracking a
- * temporary filter by its session key
- * If the filter was not originated from a temporary key, returns an empty string
+ * Returns true if the filter was loaded as temporary filter
  * @param array $p_filter	Filter array
+ * @return boolean	Whether this filter is temporary
+ */
+function filter_is_temporary( array $p_filter ) {
+	return isset( $p_filter['_temporary_key'] );
+}
+
+/**
+ * Returns a string formatted as GET parameter, suitable for tracking a
+ * temporary filter by its session key.
+ * The parameter can be ither an existing key, so its used directly,
+ * or a filter array, which can contain a property with the key
+ * If a filter is provided that does not contain the key proeprty, an empty
+ * string is returned.
+ * @param array|string $p_key_or_filter	Either a string key, or a filter array
  * @return string	Formatted parameter string, or empty
  */
-function filter_get_temporary_key_param( array $p_filter ) {
-	$t_key = filter_get_temporary_key( $p_filter );
+function filter_get_temporary_key_param( $p_key_or_filter ) {
+	if( is_array( $p_key_or_filter ) ) {
+		$t_key = filter_get_temporary_key( $p_key_or_filter );
+	} else {
+		$t_key = $p_key_or_filter;
+	}
 	if( $t_key ) {
 		return 'filter=' . $t_key;
 	} else {
 		return '';
 	}
+}
+
+/**
+ * Removes runtime properties that are should not be saved as part of the filter
+ * Use this function before saving the filter.
+ * @param array $p_filter	Filter array (passed as reference, it gets modified)
+ * @return array	Modified filter array
+ */
+function filter_clean_runtime_properties( array &$p_filter ) {
+	if( isset( $p_filter['_temporary_id'] ) ) {
+		unset( $p_filter['_temporary_id'] );
+	}
+	if( isset( $p_filter['_filter_id'] ) ) {
+		unset( $p_filter['_filter_id'] );
+	}
+	return $p_filter;
 }
