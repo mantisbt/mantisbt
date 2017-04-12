@@ -267,7 +267,7 @@ $(document).ready( function() {
 	/* Handle standard filter date fields */
 	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
 		$(this).closest('table')
-				.find('input')
+				.find('select')
 				.prop('readonly', !$(this).prop('checked'));
 	});
 
