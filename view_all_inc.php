@@ -135,8 +135,8 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		</div>
 		<div class="btn-group pull-right"><?php
 			# -- Page number links --
-			$f_filter	= gpc_get_int( 'filter', 0);
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
+			$f_tmp_filter	= gpc_get_string( 'filter', 0);
+			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_tmp_filter );
 			?>
 		</div>
 	</div>
@@ -235,8 +235,8 @@ write_bug_rows( $t_rows );
 			</div>
 			<div class="btn-group pull-right">
 				<?php
-					$f_filter = gpc_get_int('filter', 0);
-					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter);
+					$f_tmp_filter = gpc_get_string('filter', 0);
+					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_tmp_filter);
 				?>
 			</div>
 <?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>

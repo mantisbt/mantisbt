@@ -28,7 +28,6 @@
  * @uses filter_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
- * @uses tokens_api.php
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
@@ -39,7 +38,6 @@ require_api( 'constant_inc.php' );
 require_api( 'filter_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
-require_api( 'tokens_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
@@ -238,17 +236,10 @@ function current_user_ensure_unprotected() {
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
-	$f_filter_token = gpc_get( 'filter', null );
+	$f_tmp_key = gpc_get_string( 'filter', 0 );
 
-	if( null !== $f_filter_token && token_exists( (int)$f_filter_token ) ) {
-		# If the token id exists, try to load the value
-		# At this point, only one value can exists for each token type and user
-		# so read the token based on type, regardless of the id that was provided
-		$t_token = token_get_value( TOKEN_FILTER );
-		if( null != $t_token ) {
-			$t_filter = json_decode( $t_token, true );
-		}
-		$t_filter = filter_ensure_valid_filter( $t_filter );
+	if( 0 !== $f_tmp_key ) {
+		$t_filter = filter_temporary_get( $f_tmp_key, filter_get_default() );
 	} else {
 		$t_user_id = auth_get_current_user_id();
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );

@@ -45,6 +45,7 @@
  * @uses profile_api.php
  * @uses project_api.php
  * @uses relationship_api.php
+ * @uses session_api.php
  * @uses string_api.php
  * @uses tag_api.php
  * @uses user_api.php
@@ -75,6 +76,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'project_api.php' );
 require_api( 'relationship_api.php' );
+require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
@@ -3744,4 +3746,92 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 	}
 
 	return $t_filter;
+}
+
+/**
+ * Returns a filter which is stored in session data, indexed by the provided key.
+ * A default value can be provided to be used when the key doesn't exists
+ *
+ *  You may pass in any array as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the key
+ *  cannot be found
+ *
+ * @param string $p_filter_key  Key to look up for in session data
+ * @param mixed $p_default		A default value to return if key not found
+ * @return array	A filter array.
+ */
+function filter_temporary_get( $p_filter_key, $p_default = null ) {
+	# if no default was provided, we will trigger an error if not found
+	$t_trigger_error = func_num_args() == 1;
+
+	$t_session_filters = session_get( 'temporary_filters', array() );
+	if( isset( $t_session_filters[$p_filter_key] ) ) {
+		# setting here the key in the filter array only if the key exists
+		# this validates against receiving garbage input as XSS attacks
+		$t_filter = $t_session_filters[$p_filter_key];
+		return filter_ensure_valid_filter( $t_filter );
+	} else {
+		if( $t_trigger_error ) {
+			error_parameters( $p_filter_id );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		} else {
+			return $p_default;
+		}
+	}
+}
+
+/**
+ * Saves a filter as a temporary filter in session data.
+ * The filter will be updated or created, indexed by provided $p_filter_key,
+ * If no key is provided, it will search in the filter property that holds
+ * its key if it was loaded as a temporary filter.
+ * If neither key is found, a new one will be created
+ * @param array $p_filter     Filter array
+ * @param type $p_filter_key  Key to update, or null
+ * @return string	The key used for storing the filter.
+ */
+function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
+	if( null === $p_filter_key ) {
+		if( isset( $p_filter['_temporary_key'] ) ) {
+			$t_filter_key = $p_filter['_temporary_key'];
+		} else {
+			$t_filter_key = uniqid();
+		}
+	} else {
+		$t_filter_key = $p_filter_key;
+	}
+	$t_session_filters = session_get( 'temporary_filters', array() );
+	$t_session_filters[$t_filter_key] = $p_filter;
+	session_set( 'temporary_filters', $t_session_filters );
+	return $t_filter_key;
+}
+
+/**
+ * Get the temporary key of the filter, if was loaded from temporary session store
+ * Return null otherwise
+ * @param array $p_filter	Filter array
+ * @return string	Key associated with this filter, null if none
+ */
+function filter_get_temporary_key( array $p_filter ) {
+	if( isset( $p_filter['_temporary_key'] ) ) {
+		return $p_filter['_temporary_key'];
+	} else {
+		return null;
+	}
+}
+
+/**
+ * Returns a string formatted as GET parameter, suitable for tracking a
+ * temporary filter by its session key
+ * If the filter was not originated from a temporary key, returns an empty string
+ * @param array $p_filter	Filter array
+ * @return string	Formatted parameter string, or empty
+ */
+function filter_get_temporary_key_param( array $p_filter ) {
+	$t_key = filter_get_temporary_key( $p_filter );
+	if( $t_key ) {
+		return 'filter=' . $t_key;
+	} else {
+		return '';
+	}
 }
