@@ -97,10 +97,19 @@ $t_filter = current_user_get_bug_filter();
 if( isset( $t_filter['_source_query_id'] ) ) {
 	unset( $t_filter['_source_query_id'] );
 }
-$t_filter_string = filter_serialize( $t_filter );
 
-$t_new_row_id = filter_db_set_for_current_user( $t_project_id, $f_is_public,
-												$f_query_name, $t_filter_string );
+# Check that the user has permission to create stored filters
+if( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
+	access_denied();
+}
+
+# ensure that we're not making this filter public if we're not allowed
+if( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+	$f_is_public = false;
+}
+
+$t_filter_string = filter_serialize( $t_filter );
+$t_new_row_id = filter_db_create_filter( $t_filter_string, auth_get_current_user_id(), $t_project_id, $f_query_name , $f_is_public );
 
 form_security_purge( 'query_store' );
 

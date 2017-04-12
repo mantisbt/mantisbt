@@ -2701,68 +2701,73 @@ function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id 
 }
 
 /**
- * Add a filter to the database for the current user
- * @param integer $p_project_id    Project id.
- * @param boolean $p_is_public     Whether filter is public or private.
- * @param string  $p_name          Filter name.
- * @param string  $p_filter_string Filter string.
- * @return integer
+ * Add a filter to the database.
+ * This fucntion does not perform any validation on access or inserted data
+ *
+ * @param string $p_filter_string  Filter string in filter-serialized format
+ * @param integer $p_user_id      User id owner of the filter
+ * @param integer $p_project_id   Project id associated to the filter
+ * @param string $p_name          Name of the filter
+ * @param boolean $p_is_public    Boolean flag to set the filter public
+ * @return integer	The id of the created row
  */
-function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
-	$t_user_id = auth_get_current_user_id();
+function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $p_name, $p_is_public ) {
 	$c_project_id = (int)$p_project_id;
+	$c_user_id = $p_user_id;
+	$c_is_public = (bool)$p_is_public;
 
-	# check that the user can save non current filters (if required)
-	if( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
-		return -1;
-	}
-
-	# ensure that we're not making this filter public if we're not allowed
-	if( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-		$p_is_public = false;
-	}
-
-	# Do I need to update or insert this value?
 	db_param_push();
-	$t_query = 'SELECT id FROM {filters}
-					WHERE user_id=' . db_param() . '
-					AND project_id=' . db_param() . '
-					AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
+	$t_query = 'INSERT INTO {filters} ( user_id, project_id, is_public, name, filter_string )'
+			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	$t_params = array( $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string );
+	db_query( $t_query, $t_params );
 
-	$t_row = db_fetch_array( $t_result );
-	if( $t_row ) {
-		db_param_push();
-		$t_query = 'UPDATE {filters}
-					  SET is_public=' . db_param() . ',
-						filter_string=' . db_param() . '
-					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
+	return db_insert_id( db_get_table( 'filters' ) );
+}
 
-		return $t_row['id'];
+/**
+ * Updates the default filter for a project and user.
+ * We only can have one filter of this kind, per project and user.
+ * These special filters are saved in database with a negative project id
+ * to differentiate from standard named filters.
+ *
+ * Note: currently this filter is how the current filter in use is persisted
+ * This means: the last used filter settings, for each project, are saved here.
+ * @TODO cproensa, theres some suggestions to clean this up:
+ * - working filters should not be tracked in database, at least not as unique per user
+ * - include a UI functionality to allow setting/clearing these default filters
+ * - ideally, the storage should be cleaner: either separated from standard filters
+ *     or use a proper field in the table, instead of relying on the negative project id
+ *
+ * @param array $p_filter        Filter array
+ * @param integer $p_project_id  Project id
+ * @param integer $p_user_id     User id
+ * @return integer	The filter id that was updated or created
+ */
+function filter_set_project_filter( array $p_filter, $p_project_id = null, $p_user_id = null ) {
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
 	} else {
-		db_param_push();
-		$t_query = 'INSERT INTO {filters}
-						( user_id, project_id, is_public, name, filter_string )
-					  VALUES
-						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
-
-		# Recall the query, we want the filter ID
-		db_param_push();
-		$t_query = 'SELECT id
-						FROM {filters}
-						WHERE user_id=' . db_param() . '
-						AND project_id=' . db_param() . '
-						AND name=' . db_param();
-		$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
-
-		if( $t_row = db_fetch_array( $t_result ) ) {
-			return $t_row['id'];
-		}
-
-		return -1;
+		$t_project_id = (int)$p_project_id;
 	}
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = (int)$p_user_id;
+	}
+
+	$p_filter_string = filter_serialize( $p_filter );
+	# Check if a row already exists
+	$t_id = filter_db_get_project_current( $t_project_id, $p_user_id );
+	if( $t_id ) {
+		# A row already esxists
+		filter_db_update_filter( $t_id, $p_filter_string );
+	} else {
+		# Must create a row
+		$t_db_project_id = -1 * $t_project_id;
+		$t_id = filter_db_create_filter( $p_filter_string, $t_user_id, $t_db_project_id, '', false );
+	}
+	return $t_id;
 }
 
 /**
@@ -2825,10 +2830,12 @@ function filter_load( $p_filter_id, $p_user_id = null ) {
  * @param integer $p_user_id    A valid user identifier.
  * @return integer
  */
-function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
-	$c_project_id = (int)$p_project_id;
-	$c_project_id = $c_project_id * -1;
-
+function filter_db_get_project_current( $p_project_id = null, $p_user_id = null ) {
+	if( null === $p_project_id ) {
+		$c_project_id = helper_get_current_project();
+	} else {
+		$c_project_id = (int)$p_project_id;
+	}
 	if( null === $p_user_id ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
@@ -2836,13 +2843,12 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 	}
 
 	# we store current filters for each project with a special project index
+	$t_filter_project_id = $c_project_id * -1;
+
 	db_param_push();
-	$t_query = 'SELECT *
-				  FROM {filters}
-				  WHERE user_id=' . db_param() . '
-					AND project_id=' . db_param() . '
-					AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $c_user_id, $c_project_id, '' ) );
+	$t_query = 'SELECT id FROM {filters} WHERE user_id = ' . db_param()
+			. ' AND project_id = ' . db_param() . ' AND name = ' . db_param();
+	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		return $t_row['id'];

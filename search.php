@@ -148,13 +148,9 @@ $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 
-$t_settings_serialized = json_encode( $t_setting_arr );
-$t_settings_string = FILTER_VERSION . '#' . $t_settings_serialized;
-
-# Store the filter string in the database: its the current filter, so some values won't change
-$t_project_id = helper_get_current_project();
-$t_project_id = ( $t_project_id * -1 );
-$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
+# set the filter for use, for current user
+# Note: This will overwrite the filter in use/default for current project and user.
+filter_set_project_filter( $t_setting_arr );
 
 # redirect to print_all or view_all page
 if( $f_print ) {
