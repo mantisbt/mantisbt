@@ -1307,7 +1307,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 <?php
 
 		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
-			$t_menu_readonly = ' readonly="readonly" ';
+			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
 ?>
@@ -1318,14 +1318,26 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			<?php echo lang_get( 'start_date_label' )?>
 			</td>
 			<td class="nowrap">
-				<?php
-				echo '<input type="text" name="' . FILTER_PROPERTY_FILTER_BY_START_DATE_SUBMITTED . '" ' .
-					' class="datetimepicker input-xs" ' . $t_menu_readonly .
-					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
-					' size="12" maxlength="12" value="" />';
-				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
-				?>
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
 			</td>
 		</tr>
 		<!-- End date -->
@@ -1334,14 +1346,26 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			<?php echo lang_get( 'end_date_label' )?>
 			</td>
 			<td>
-				<?php
-				echo '<input type="text" name="' . FILTER_PROPERTY_FILTER_BY_END_DATE_SUBMITTED . '" ' .
-					' class="datetimepicker input-xs" ' . $t_menu_readonly .
-					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
-					' size="12" maxlength="12" value="" />';
-				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
-				?>
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
 			</td>
 		</tr>
 		</table>
@@ -1418,7 +1442,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 ?>
 		<table cellspacing="0" cellpadding="0">
 <?php
-	$t_menu_readonly =  '';
+	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
 ?>
 		<tr>
@@ -1435,7 +1459,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 <?php
 
 		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
-			$t_menu_readonly = ' readonly="readonly" ';
+			$t_menu_disabled = ' disabled="disabled" ';
 		}
 	}
 ?>
@@ -1446,14 +1470,26 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			<?php echo lang_get( 'start_date_label' )?>
 			</td>
 			<td class="nowrap">
-				<?php
-                echo '<input type="text" name="' . FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_START_DATE . '" ' .
-                    ' class="datetimepicker input-xs" ' . $t_menu_readonly .
-                    ' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-                    ' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
-                    ' size="12" maxlength="12" value="" />';
-                echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
-	            ?>
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
 			</td>
 		</tr>
 		<!-- End date -->
@@ -1462,14 +1498,26 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			<?php echo lang_get( 'end_date_label' )?>
 			</td>
 			<td>
-				<?php
-				echo '<input type="text" name="' . FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_END_DATE . '" ' .
-					' class="datetimepicker input-xs" ' . $t_menu_readonly .
-					' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-					' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
-					' size="12" maxlength="12" value="" />';
-				echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
-				?>
+			<?php
+			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
+			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
+			print "</select>\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
+			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
+			print "</select>\n";
+		}
+	}
+	?>
 			</td>
 		</tr>
 		</table>
