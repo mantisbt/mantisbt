@@ -249,8 +249,8 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  	echo '<input ' . helper_get_tab_index() . ' type="text" name="' . $p_name . '_date" ' .
 		' class="datetimepicker ' . $p_input_css . '" ' . $t_disable .
 		' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-		' data-picker-format="' . convert_date_format_to_momentjs( $p_format ) . '"' .
-		' size="16" maxlength="20" value="' . $t_date . '" />';
+		' data-picker-format="' . convert_php_to_date_format( $p_format ) . '"' .
+		' size="12" maxlength="12" value="' . $t_date . '" />';
 	echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 }
 
@@ -262,7 +262,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  * @return string in moment.js format: http://momentjs.com/docs/#/displaying/format/
  * @access public
  */
-function convert_date_format_to_momentjs( $p_php_format )
+function convert_php_to_date_format( $p_php_format )
 {
     $t_replacements = array(
         'd' => 'DD',
