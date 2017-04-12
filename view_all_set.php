@@ -35,7 +35,6 @@
  * @uses html_api.php
  * @uses logging_api.php
  * @uses print_api.php
- * @uses tokens_api.php
  * @uses utility_api.php
  */
 
@@ -52,7 +51,6 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'print_api.php' );
-require_api( 'tokens_api.php' );
 require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
@@ -174,7 +172,7 @@ if( $f_print ) {
 }
 
 if( $f_temp_filter ) {
-	$t_token_id = token_set( TOKEN_FILTER, json_encode( $t_setting_arr ) );
-	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
+	$t_temp_key = filter_temporary_set( $t_setting_arr );
+	$t_redirect_url = $t_redirect_url . '?filter=' . $t_temp_key;
 }
 print_header_redirect( $t_redirect_url );
