@@ -236,9 +236,9 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0, $p_input_css = "input-sm" ) {
 	if( $p_date != 0 ) {
-		$t_date = date( $p_format, $p_date );
+		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
 	} else {
-		$t_date = '';
+		$t_date = array( 0, 0, 0, );
 	}
 
 	$t_disable = '';
@@ -250,11 +250,31 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 		$t_blank_line = '<option value="0"></option>';
 	}
 
- 	echo '<input ' . helper_get_tab_index() . ' type="text" name="' . $p_name . '_date" ' .
-		' class="datetimepicker ' . $p_input_css . '" ' . $t_disable .
-		' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-		' data-picker-format="' . config_get( 'date_picker_format' ) . '"' .
-		' size="12" maxlength="12" value="' . $t_date . '" />';
-	echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+	foreach( $t_chars as $t_char ) {
+		if( strcmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_month_option_list( $t_date[1] );
+			echo '</select>' . "\n";
+		}
+		if( strcmp( $t_char, 'm' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_month_option_list( $t_date[1] );
+			echo '</select>' . "\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_day"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_day_option_list( $t_date[2] );
+			echo '</select>' . "\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' .  helper_get_tab_index() . ' name="' . $p_name . '_year"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
+			echo '</select>' . "\n";
+		}
+	}
 }
 
