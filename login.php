@@ -36,6 +36,7 @@ require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'simplesamlphp_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'session_api.php' );
@@ -55,6 +56,14 @@ $f_install = gpc_get_bool( 'install' );
 # If upgrade required, always redirect to install page.
 if( $f_install ) {
 	$t_return = 'admin/install.php';
+}
+
+if ( SIMPLESAML_AUTH == config_get( 'login_method' ) ) {
+	ssphp_init();
+	if(ssphp_is_user_authenticated())
+		$f_username = ssphp_get_username();
+	else
+		$f_username = ssphp_authenticate_user();
 }
 
 $f_username = auth_prepare_username( $f_username );
