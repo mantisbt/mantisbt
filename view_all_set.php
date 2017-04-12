@@ -160,16 +160,10 @@ switch( $f_type ) {
 
 $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
-$t_settings_string = filter_serialize( $t_setting_arr );
-
 # If only using a temporary filter, don't store it in the database
 if( !$f_temp_filter ) {
 	# Store the filter string in the database: its the current filter, so some values won't change
-	$t_project_id = helper_get_current_project();
-	# saving a current filter, a negative project id is a hack to indicate that
-	# it's a current filter, for this project and user
-	$t_project_id = ( $t_project_id * -1 );
-	filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
+	filter_set_project_filter( $t_setting_arr );
 }
 
 # redirect to print_all or view_all page

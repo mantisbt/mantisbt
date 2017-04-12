@@ -1457,8 +1457,14 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 		$t_project_id = $p_project_id;
 	}
 
+	# Currently we use the filters saved in db as "current" special filters,
+	# to track the active settings for filters in use.
 	$t_filter_id = filter_db_get_project_current( $t_project_id, $p_user_id );
-	return filter_get( $t_filter_id );
+	if( $t_filter_id ) {
+		return filter_get( $t_filter_id );
+	} else {
+		return filter_get_default();
+	}
 }
 
 /**
