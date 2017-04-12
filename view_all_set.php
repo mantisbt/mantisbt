@@ -58,11 +58,7 @@ auth_ensure_user_authenticated();
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
-$f_temp_filter			= gpc_get_bool( 'temporary' );
-
-if( $f_temp_filter ) {
-	$f_type = 1;
-}
+$f_make_temporary		= gpc_get_bool( 'temporary' );
 
 if( $f_type < 0 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
@@ -75,6 +71,9 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 
 # Get the filter in use
 $t_setting_arr = current_user_get_bug_filter();
+$t_temp_filter = $f_make_temporary || filter_is_temporary( $t_setting_arr );
+$t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
+
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
@@ -159,7 +158,7 @@ switch( $f_type ) {
 $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 # If only using a temporary filter, don't store it in the database
-if( !$f_temp_filter ) {
+if( !$t_temp_filter ) {
 	# Store the filter string in the database: its the current filter, so some values won't change
 	filter_set_project_filter( $t_setting_arr );
 }
@@ -171,8 +170,13 @@ if( $f_print ) {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
 
-if( $f_temp_filter ) {
-	$t_temp_key = filter_temporary_set( $t_setting_arr );
-	$t_redirect_url = $t_redirect_url . '?filter=' . $t_temp_key;
+if( $t_temp_filter ) {
+	# keeping the $t_previous_temporary_key, and using it to save back the filter
+	# The key inside the filter array may have been deleted as part of some actions
+	# Note, if we reset the key here, a new filter will be created after each action.
+	# This adds a lot of orphaned filters to session store, but would allow consistency
+	# through browser back button, for example.
+	$t_temporary_key = filter_temporary_set( $t_setting_arr, $t_previous_temporary_key );
+	$t_redirect_url = $t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key );
 }
 print_header_redirect( $t_redirect_url );

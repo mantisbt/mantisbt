@@ -61,13 +61,13 @@ if( !auth_is_user_authenticated() ) {
 compress_enable();
 
 $f_filter_id = gpc_get( 'filter_id', null );
-if( null === $f_filter_id ) {
-	$t_filter = current_user_get_bug_filter();
-} else {
+if( null !== $f_filter_id ) {
 	$t_filter = filter_get( $f_filter_id, null );
 	if( null === $t_filter ) {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
 	}
+} else {
+	$t_filter = current_user_get_bug_filter();
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
