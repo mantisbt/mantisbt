@@ -72,6 +72,7 @@ $t_num_of_columns = count( $t_columns );
 
 # Get the filter in use
 $t_filter = current_user_get_bug_filter();
+filter_init( $t_filter );
 
 $f_highlight_changed = $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
 $f_sort              = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
@@ -146,14 +147,20 @@ $f_export = implode( ',', $f_bug_arr );
 		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'fa-internet-explorer', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
-		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
-			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
-			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
-			'&amp;type_page=' . $t_icon[1] .
-			'&amp;export=' . $f_export .
-			'&amp;show_flag=' . $t_show_flag .
-			'" ' . $t_icon[2] . '>' .
-			'<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
+		$t_params = array(
+			FILTER_PROPERTY_SEARCH => $t_search,
+			FILTER_PROPERTY_SORT_FIELD_NAME => $f_sort,
+			FILTER_PROPERTY_SORT_DIRECTION => $t_new_dir,
+			'type_page' => $t_icon[1],
+			'export' => $f_export,
+			'show_flag' => $t_show_flag,
+		);
+		if( filter_is_temporary( $t_filter ) ) {
+			$t_params['filter'] = filter_get_temporary_key( $t_filter );
+		}
+
+		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>'
+			. '<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
 	}
 ?>
 
@@ -162,7 +169,13 @@ $f_export = implode( ',', $f_bug_arr );
 </table>
 </form>
 
-<form method="post" action="print_all_bug_page.php">
+<?php
+$t_form_url = 'print_all_bug_page.php';
+if( filter_is_temporary( $t_filter ) ) {
+	$t_form_url .='?' . filter_get_temporary_key_param( $t_filter );
+}
+?>
+<form method="post" action="<?php echo $t_form_url ?>">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 
 <table id="buglist" class="table table-striped table-bordered table-condensed no-margin">
