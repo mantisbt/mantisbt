@@ -74,6 +74,11 @@ $t_setting_arr = current_user_get_bug_filter();
 $t_temp_filter = $f_make_temporary || filter_is_temporary( $t_setting_arr );
 $t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
 
+# If user is anonymous, force the creation of a temporary filter
+if( current_user_is_anonymous() ) {
+	$t_temp_filter = true;
+}
+
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
