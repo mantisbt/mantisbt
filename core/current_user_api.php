@@ -236,9 +236,9 @@ function current_user_ensure_unprotected() {
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
-	$f_tmp_key = gpc_get_string( 'filter', 0 );
+	$f_tmp_key = gpc_get_string( 'filter', null );
 
-	if( 0 !== $f_tmp_key ) {
+	if( null !== $f_tmp_key ) {
 		$t_filter = filter_temporary_get( $f_tmp_key, filter_get_default() );
 	} else {
 		$t_user_id = auth_get_current_user_id();

@@ -1000,7 +1000,7 @@ function filter_deserialize( $p_serialized_filter ) {
  */
 function filter_serialize( $p_filter_array ) {
 	$t_cookie_version = FILTER_VERSION;
-	filter_clean_runtime_properties( $p_filter_array );
+	$p_filter_array = filter_clean_runtime_properties( $p_filter_array );
 	$t_settings_serialized = json_encode( $p_filter_array );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 	return $t_settings_string;
@@ -3740,30 +3740,41 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 		}
 	}
 	$t_filter = filter_deserialize( $t_filter_string );
+	$t_filter = filter_clean_runtime_properties( $t_filter );
+	$t_filter['_filter_id'] = $p_filter_id;
 
+	$t_filter = filter_update_source_properties( $t_filter );
+
+	return $t_filter;
+}
+
+function filter_update_source_properties( array $p_filter ) {
 	# Check if the filter references a named filter
 	# This property only makes sense, and should be available on unnamed filters
 	# Note that an unnamed filter is used as a working copy for the user. This logic
 	# allows for automatic updating of a current filter when the user had selected
 	# a named filter and that filter has changed. Otherwise the updates in base filter
 	# wuould not reflect in the user's current filter
-	if( isset( $t_filter['_source_query_id'] ) && $p_filter_id != $t_filter['_source_query_id'] ) {
-		$t_source_query_id = $t_filter['_source_query_id'];
+	if( isset( $p_filter['_filter_id'] ) ) {
+		$t_filter_id = $p_filter['_filter_id'];
+	} else {
+		$t_filter_id = null;
+	}
+	if( isset( $p_filter['_source_query_id'] ) && $t_filter_id != $p_filter['_source_query_id'] ) {
+		$t_source_query_id = $p_filter['_source_query_id'];
 		# check if filter id is a proper named filter, and is accesible
 		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
 			# replace filter with the referenced one
-			$t_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
+			$t_new_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
 			# update the referenced stored filter id for the new loaded filter
-			$t_filter['_source_query_id'] = $t_source_query_id;
+			$t_new_filter['_source_query_id'] = $t_source_query_id;
+			$p_filter = filter_copy_runtime_properties( $p_filter, $t_new_filter );
 		} else {
 			# If the filter id is not valid, clean the referenced filter id
-			unset( $t_filter['_source_query_id'] );
+			unset( $p_filter['_source_query_id'] );
 		}
 	}
-
-	$t_filter['_filter_id'] = $p_filter_id;
-
-	return $t_filter;
+	return $p_filter;
 }
 
 /**
@@ -3820,7 +3831,7 @@ function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
 		$t_filter_key = $p_filter_key;
 	}
 
-	filter_clean_runtime_properties( $p_filter );
+	$p_filter = filter_clean_runtime_properties( $p_filter );
 	$t_session_filters = session_get( 'temporary_filters', array() );
 	$t_session_filters[$t_filter_key] = $p_filter;
 	session_set( 'temporary_filters', $t_session_filters );
@@ -3879,12 +3890,22 @@ function filter_get_temporary_key_param( $p_key_or_filter ) {
  * @param array $p_filter	Filter array (passed as reference, it gets modified)
  * @return array	Modified filter array
  */
-function filter_clean_runtime_properties( array &$p_filter ) {
-	if( isset( $p_filter['_temporary_id'] ) ) {
-		unset( $p_filter['_temporary_id'] );
+function filter_clean_runtime_properties( array $p_filter ) {
+	if( isset( $p_filter['_temporary_key'] ) ) {
+		unset( $p_filter['_temporary_key'] );
 	}
 	if( isset( $p_filter['_filter_id'] ) ) {
 		unset( $p_filter['_filter_id'] );
 	}
 	return $p_filter;
+}
+
+function filter_copy_runtime_properties( array $p_filter_from, array $p_filter_to ) {
+	if( isset( $p_filter_from['_temporary_key'] ) ) {
+		$p_filter_to['_temporary_key'] = $p_filter_from['_temporary_key'];
+	}
+	if( isset( $p_filter_from['_filter_id'] ) ) {
+		$p_filter_to['_filter_id'] = $p_filter_from['_filter_id'];
+	}
+	return $p_filter_to;
 }
