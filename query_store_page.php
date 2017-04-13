@@ -123,7 +123,11 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 </form>
 <div class="space-10"></div>
 <form action="view_all_bug_page.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
+<?php # CSRF protection not required here - form does not result in modifications
+if( filter_is_temporary( $t_filter ) ) {
+	echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
+}
+?>
 <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>" />
 </form>
 </div>
