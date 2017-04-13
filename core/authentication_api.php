@@ -198,18 +198,24 @@ function auth_prepare_password( $p_password ) {
  */
 function auth_auto_create_user( $p_username, $p_password ) {
 	$t_login_method = config_get( 'login_method' );
+	$t_email = '';
 
 	if( $t_login_method == BASIC_AUTH ) {
 		$t_auto_create = true;
 	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 		$t_auto_create = true;
+	} else if ( SIMPLESAML_AUTH == $t_login_method ) {
+		$t_auto_create = true;
+		$t_attributes = config_get('simplesamlphp_attributes');
+		$t_auth_attributes = config_get('simplesamlphp_auth_attributes');
+		$t_email = $t_attributes[$t_auth_attributes['email']][0];
 	} else {
 		$t_auto_create = false;
 	}
 
 	if( $t_auto_create ) {
 		# attempt to create the user
-		$t_cookie_string = user_create( $p_username, md5( $p_password ) );
+		$t_cookie_string = user_create( $p_username, md5( $p_password ), $t_email );
 		if( $t_cookie_string === false ) {
 			# it didn't work
 			return false;
@@ -500,6 +506,9 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	if( LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
 	}
+	if( SIMPLESAML_AUTH == $t_configured_login_method ) {
+		return TRUE;
+	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_login_methods = array(
@@ -761,7 +770,7 @@ function auth_set_tokens( $p_user_id ) {
  * @access public
  */
 function auth_reauthenticate() {
-	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) || SIMPLESAML_AUTH == config_get( 'login_method' )) {
 		return true;
 	}
 
