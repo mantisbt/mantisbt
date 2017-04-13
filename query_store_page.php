@@ -66,8 +66,11 @@ layout_page_begin();
 	</h4>
 </div>
 <?php
-$t_current_filter_id = filter_db_get_project_current( helper_get_current_project() );
-$t_query_to_store = filter_db_get_filter_string( $t_current_filter_id );
+$t_filter = current_user_get_bug_filter();
+# We are comparing filters as serialized stringsd
+# filter_serialize will remove runtime properties, so they can compare
+# @TODO cproensa, implement a better method to compare filters? is it used besides here?
+$t_query_to_store = filter_serialize( $t_filter );
 $t_query_arr = filter_db_get_available_queries();
 
 # Let's just see if any of the current filters are the
@@ -87,7 +90,12 @@ if( $t_error_msg != null ) {
 <div class="widget-body">
 	<div class="widget-main center">
 <form method="post" action="query_store.php" class="form-inline">
-<?php echo form_security_field( 'query_store' ) ?>
+<?php
+echo form_security_field( 'query_store' );
+if( filter_is_temporary( $t_filter ) ) {
+	echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
+}
+?>
 <div class="space-10"></div>
 <label class="bold inline"> <?php echo lang_get( 'query_name_label' ) . lang_get( 'word_separator' ); ?> </label>
 <input type="text" name="query_name" class="input-sm" />
