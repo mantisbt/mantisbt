@@ -90,7 +90,6 @@ if( $f_all_projects ) {
 }
 
 # Get the filter in use
-# @TODO cproensa maybe we should pass the exact (current) filter id
 $t_filter = current_user_get_bug_filter();
 
 # named filters must not reference source query id

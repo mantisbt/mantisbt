@@ -2585,7 +2585,11 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
 		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<?php # CSRF protection not required here - form does not result in modifications
+			if( filter_is_temporary( $t_filter ) ) {
+				echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
+			}
+			?>
 			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
 				value="<?php echo lang_get( 'save_query' )?>" />
 		</form>
@@ -2593,7 +2597,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 	}
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 		<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<?php # CSRF protection not required here - form does not result in modifications?>
 			<input type="hidden" name="type" value="3" />
 			<select name="source_query_id">
 				<option value="-1"></option>
