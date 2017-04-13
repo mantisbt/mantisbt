@@ -150,7 +150,7 @@ $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 
 # set the filter for use, for current user
 # Note: This will overwrite the filter in use/default for current project and user.
-filter_set_project_filter( $t_setting_arr );
+$t_temporary_key = filter_temporary_set( $t_setting_arr );
 
 # redirect to print_all or view_all page
 if( $f_print ) {
@@ -158,5 +158,6 @@ if( $f_print ) {
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
+$t_redirect_url .= '?' . filter_get_temporary_key_param( $t_temporary_key );
 
 print_header_redirect( $t_redirect_url );
