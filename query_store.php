@@ -117,5 +117,15 @@ if( $t_new_row_id == -1 ) {
 		. urlencode( lang_get( 'query_store_error' ) );
 	print_header_redirect( $t_query_redirect_url );
 } else {
-	print_header_redirect( 'view_all_bug_page.php' );
+	# Build a redirect to view_all_set to load the filter that was saved.
+	# This will make the filter name appear as selected in the filter selection box.
+	$t_params = array(
+		'type' => 3,
+		'source_query_id' => $t_new_row_id
+	);
+	if( filter_is_temporary( $t_filter ) ) {
+		$t_params['filter'] = filter_get_temporary_key( $t_filter );
+	}
+	$t_redirect = 'view_all_set.php?' . http_build_query( $t_params );
+	print_header_redirect( $t_redirect );
 }
