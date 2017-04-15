@@ -542,7 +542,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 
 	$t_sort_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] );
-	# both arrays should be equal lenght, just in case
+	# both arrays should be equal length, just in case
 	$t_sort_fields_count = min( count( $t_sort_fields ), count( $t_dir_fields ) );
 
 	# clean up sort fields, remove invalid columns

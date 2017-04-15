@@ -22,7 +22,7 @@
  * Mantis Version
  */
 define( 'MANTIS_VERSION', '2.4.0-dev' );
-define( 'FILTER_VERSION', 'v9' );
+define( 'FILTER_VERSION', 'v10' );
 
 # --- constants -------------------
 # magic numbers
