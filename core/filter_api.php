@@ -557,6 +557,30 @@ function filter_ensure_fields( array $p_filter_arr ) {
 }
 
 /**
+ * A wrapper to compare filter version syntax
+ * Note: Currently, filter versions hve this syntax: "vN",  * where N is a integer number.
+ * @param string $p_version1    First version number
+ * @param string $p_version2    Second version number
+ * @param string $p_operator    Comparison test, if provided. As expected by version_compare()
+ */
+function filter_version_compare( $p_version1, $p_version2, $p_operator = null ) {
+	return version_compare( $p_version1, $p_version2, $p_operator );
+}
+
+/**
+ * Upgrade a filter array to the current filter structure, by converting properties
+ * that have changed from previous filter versions
+ * @param array $p_filter	Filter array to upgrade
+ */
+function filter_version_upgrade( array $p_filter ) {
+	# This is a stub for future version upgrades
+
+	# After conversions are made, update filter value to current version
+	$p_filter['_version'] = FILTER_VERSION;
+	return $p_filter;
+}
+
+/**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.
  * @param array $p_filter_arr A Filter definition.
@@ -567,11 +591,9 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr['_version'] ) ) {
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
-	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
-	$t_current_version = (int)substr( FILTER_VERSION, 1 );
-	if( $t_current_version > $t_cookie_vers ) {
-		# if the version is old, update it
-		$p_filter_arr['_version'] = FILTER_VERSION;
+
+	if( filter_version_compare( $p_filter_arr['_version'], FILTER_VERSION, '<' ) ) {
+		$p_filter_arr = filter_version_upgrade( $p_filter_arr );
 	}
 
 	$p_filter_arr = filter_ensure_fields( $p_filter_arr );
@@ -989,7 +1011,6 @@ function filter_deserialize( $p_serialized_filter ) {
 	# Set the filter version that was loaded in the array
 	$t_filter_array['_version'] = $t_setting_arr[0];
 
-	#@TODO cproensa, write stub for filter version specific conversions, inside filter_ensure_valid_filter
 	return filter_ensure_valid_filter( $t_filter_array );
 }
 
