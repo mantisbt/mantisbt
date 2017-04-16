@@ -50,6 +50,7 @@
  * @uses user_api.php
  * @uses utility_api.php
  * @uses layout_api.php
+ * @uses api_token_api.php
  */
 
 require_api( 'access_api.php' );
@@ -76,6 +77,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'layout_api.php' );
+require_api( 'api_token_api.php' );
 
 $g_rss_feed_url = null;
 
