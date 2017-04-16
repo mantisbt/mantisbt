@@ -150,8 +150,10 @@ class AuthFlags {
 	 */
 	function getPasswordManagedExternallyMessage() {
 		if( empty( $this->password_managed_elsewhere_message ) ) {
-			return lang_get( 'password_managed_elsewhere_message' );
+			return lang_get( 'no_password_change' );
 		}
+
+		return $this->password_managed_elsewhere_message;
 	}
 
 	/**
@@ -385,7 +387,6 @@ class AuthFlags {
 	/**
 	 * Gets the number of seconds to re-authenticate the user after.
 	 *
-	 * @param int $p_seconds The number of seconds to prompt for re-authentication after.
 	 * @return int seconds after which the user should be re-authenticated.
 	 * @see setReauthenticationLifetime()
 	 */

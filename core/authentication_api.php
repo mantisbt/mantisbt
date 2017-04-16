@@ -76,8 +76,9 @@ $g_cache_current_user_id = null;
 
 /**
  * Gets set of flags for authentication for the specified user.
- * @param int|null|bool The user id or null for logged in user or NO_USER/false for user that doesn't exist
+ * @param int|null|bool $p_user_id The user id or null for logged in user or NO_USER/false for user that doesn't exist
  *                 in the system, that may be auto-provisioned.
+ * @param string $p_username The username or email
  * @return AuthFlags The auth flags object to use.
  */
 function auth_flags( $p_user_id = null, $p_username = '' ) {
@@ -89,7 +90,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 
 	if( !$t_user_id && is_blank( $p_username ) ) {
 		# If user is not in db, must supply the name.
-		trigger_error( GENERIC_ERROR );
+		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
 	if( $t_user_id ) {
