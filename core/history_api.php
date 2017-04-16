@@ -683,6 +683,9 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 				case NEW_BUG:
 					$t_note = lang_get( 'new_bug' );
 					break;
+				case DATA_IMPORTED:
+					$t_note = lang_get( 'data_imported' );
+					$t_change = $p_old_value.' : '.$p_new_value;
 				case BUGNOTE_ADDED:
 					$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
 					break;
