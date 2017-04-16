@@ -25,6 +25,7 @@
 
 error_reporting( E_ALL );
 @set_time_limit( 0 );
+date_default_timezone_set( 'UTC' );
 
 # Load the MantisDB core in maintenance mode. This mode will assume that
 # config/config_inc.php hasn't been specified. Thus the database will not be opened
