@@ -11,6 +11,7 @@ docbook/*/tmp
 
 # Build output
 build/
+vendor/
 
 # Untracked plugins
 plugins/*
