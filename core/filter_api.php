@@ -992,25 +992,29 @@ function filter_deserialize( $p_serialized_filter ) {
 	# in this case, the filter version field inside the array is to be used
 	# and if not present, set the current filter version
 
-	# check to see if new cookie is needed
+	# check fitler version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
-	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
+	$t_version_string = $t_setting_arr[0];
+	if( in_array( $t_version_string, array( 'v1', 'v2', 'v3', 'v4' ) ) ) {
 		# these versions can't be salvaged, they are too old to update
 		return false;
+	} elseif( in_array( $t_version_string, array( 'v5', 'v6', 'v7', 'v8' ) ) ) {
+		# filters from v5 onwards should cope with changing filter indices dynamically
+		$t_filter_array = unserialize( $t_setting_arr[1] );
+	} else {
+		# filters from v9 onwards are stored as json
+		$t_filter_array = json_decode( $t_setting_arr[1], /* assoc array */ true );
 	}
 
-	# filters from v5 onwards should cope with changing filter indices dynamically
-
-	# Decode json string. If an error happens, eg, invalid format, returns false.
-	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_array = json_decode( $t_setting_arr[1], true );
-	} else {
+	# If the unserialez data is not an array, the some error happened, eg, invalid format
+	if( !is_array( $t_filter_array ) ) {
 		return false;
 	}
 
 	# Set the filter version that was loaded in the array
 	$t_filter_array['_version'] = $t_setting_arr[0];
 
+	# If upgrade in filter content is needed, it will be done in filter_ensure_valid_filter()
 	return filter_ensure_valid_filter( $t_filter_array );
 }
 
