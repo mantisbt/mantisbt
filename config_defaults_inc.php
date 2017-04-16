@@ -1166,6 +1166,7 @@ $g_complete_date_format = 'Y-m-d H:i T';
  */
 $g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
+
 ##############################
 # MantisBT TimeZone Settings #
 ##############################
