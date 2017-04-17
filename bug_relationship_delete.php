@@ -98,4 +98,9 @@ relationship_delete( $f_rel_id );
 
 form_security_purge( 'bug_relationship_delete' );
 
-print_header_redirect_view( $f_bug_id );
+$f_redirect_url = gpc_get_string( 'redirect_url', '' );
+if( !is_blank( $f_redirect_url ) ) {
+	print_header_redirect( $f_redirect_url );
+} else {
+	print_header_redirect_view( $f_bug_id );
+}
