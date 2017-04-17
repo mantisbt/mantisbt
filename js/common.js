@@ -338,8 +338,6 @@ $(document).ready( function() {
 			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
-
-    $('#timeline-container').perfectScrollbar();
 });
 
 function setBugLabel() {
