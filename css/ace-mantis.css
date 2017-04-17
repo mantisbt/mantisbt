@@ -505,8 +505,8 @@ input.typeahead.scrollable ~ .tt-menu {
 
 #timeline-container {
     position: relative;
+    height: 300px;
     height: 74vh;
-    max-height: 300px;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -530,7 +530,8 @@ input.typeahead.scrollable ~ .tt-menu {
     }
 
     #timeline-container {
-        max-height: 400px;
+        height: 400px;
+        height: 74vh;
     }
 }
 
@@ -595,7 +596,8 @@ input.typeahead.scrollable ~ .tt-menu {
     }
 
     #timeline-container {
-        max-height: 600px;
+        height: 600px;
+        height: 74vh;
     }
 }
 
@@ -650,7 +652,8 @@ input.typeahead.scrollable ~ .tt-menu {
     }
 
     #timeline-container {
-        max-height: 800px;
+        height: 800px;
+        height: 74vh;
     }
 }
 
