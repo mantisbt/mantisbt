@@ -505,6 +505,7 @@ input.typeahead.scrollable ~ .tt-menu {
 
 #timeline-container {
     position: relative;
+    overflow-y: auto;
     height: 300px;
     height: 74vh;
 }

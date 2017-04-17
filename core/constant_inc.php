@@ -646,10 +646,6 @@ define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
 define( 'DROPZONE_VERSION', '4.3.0' );
 define( 'DROPZONE_HASH', 'sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=' );
 
-# Perfect Scrollbar JS
-define( 'PERFECT_SCROLLBAR_VERSION', '0.6.16' );
-define( 'PERFECT_SCROLLBAR_HASH', 'ASy3ztALqIEF70qFubeh9flYKLs5A1I+FkeXqUokzjk=' );
-
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 

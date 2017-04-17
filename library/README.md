@@ -32,7 +32,6 @@ dropzone.js                       | 4.3.0     | unpatched
 chart.js                          | 2.1.6     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
 list.js                           | 1.4.1     | unpatched
-perfect-scrollbar                 | 0.6.16    | unpatched
 
   
 **Notes**
@@ -63,4 +62,3 @@ dropzone.js         | http://www.dropzonejs.com/ - https://github.com/enyo/dropz
 chart.js            | http://www.chartjs.org/ - https://github.com/chartjs/Chart.js
 typeahead.js        | https://github.com/twitter/typeahead.js
 list.js             | http://listjs.com/ - https://github.com/javve/list.js
-perfect-scrollbar   | https://github.com/noraesae/perfect-scrollbar
