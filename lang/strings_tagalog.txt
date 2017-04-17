@@ -39,6 +39,7 @@
  * @file
  *
  * @author AnakngAraw
+ * @author Emem.calist
  * @author Jojit fb
  * @author Leeheonjin
  * @author Mirzali
@@ -461,6 +462,7 @@ $s_choose_project = 'Pumili ng Proyekto';
 $s_login_button = 'Mag-login';
 $s_signup_link = 'Magpatala para sa isang bagong kuwenta';
 $s_lost_password_link = 'Naiwala mo ang iyong hudyat?';
+$s_enter_password = 'Gamitin ang nasasaad na \'password\' para sa \'%s\'';
 $s_select_project_button = 'Pumili ng Proyekto';
 $s_lost_password_title = 'Muling Pagtatakda ng Hudyat';
 $s_lost_password_done_title = 'Naipadala na ang Mensahe hinggil sa Hudyat';

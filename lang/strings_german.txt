@@ -536,6 +536,7 @@ $s_login_button = 'Anmeldung';
 $s_signup_link = 'Neues Konto anmelden';
 $s_lost_password_link = 'Passwort vergessen?';
 $s_username_or_email = 'Benutzername oder E-Mail-Adresse';
+$s_enter_password = 'Passwort für „%s“ eingeben';
 $s_select_project_button = 'Projekt wählen';
 $s_lost_password_title = 'Passwort zurücksetzen';
 $s_lost_password_done_title = 'Passwort Nachricht gesendet';
