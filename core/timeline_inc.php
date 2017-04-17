@@ -79,14 +79,14 @@ if( isset( $t_url_params['all'] ) ) {
 
 				echo '<div class="btn-group">';
 				$t_url_params['days'] = $f_days + 7;
-				$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+				$t_href = htmlspecialchars( $t_url_page, ENT_QUOTES, 'UTF-8' ) . '?' . http_build_query( $t_url_params );
 				echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'prev' ) . '</a>';
 
 				$t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
 
 				if( $t_next_days != $f_days ) {
 					$t_url_params['days'] = $t_next_days;
-					$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+					$t_href = htmlspecialchars( $t_url_page, ENT_QUOTES, 'UTF-8' ) . '?' . http_build_query( $t_url_params );
 					echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'next' ) . '</a>';
 				}
 				echo '</div>';
@@ -106,7 +106,7 @@ if( isset( $t_url_params['all'] ) ) {
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
 		$t_url_params['all'] = 1;
-		$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
+		$t_href = htmlspecialchars( $t_url_page, ENT_QUOTES, 'UTF-8' ) . '?' . http_build_query( $t_url_params );
 		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="' . $t_href . '">' . lang_get( 'timeline_more' ) . '</a>';
 		echo '</div>';
 		echo '</div>';
