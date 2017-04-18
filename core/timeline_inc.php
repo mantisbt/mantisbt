@@ -46,7 +46,7 @@ $t_collapse_block = is_collapsed( 'timeline' );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-$t_url_page = $_SERVER["PHP_SELF"];
+$t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
 $t_url_params = $_GET;
 if( isset( $t_url_params['all'] ) ) {
 	unset( $t_url_params['all'] );
