@@ -235,6 +235,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @access public
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0, $p_input_css = "input-sm" ) {
+	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
 	if( $p_date != 0 ) {
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
 	} else {
