@@ -46,11 +46,7 @@ $t_collapse_block = is_collapsed( 'timeline' );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-$t_url_page = $_SERVER["PHP_SELF"];
-$t_url_params = $_GET;
-if( isset( $t_url_params['all'] ) ) {
-	unset( $t_url_params['all'] );
-}
+$t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
 ?>
 
 <div id="timeline" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -78,14 +74,14 @@ if( isset( $t_url_params['all'] ) ) {
 				echo '&#160;&#160;';
 
 				echo '<div class="btn-group">';
-				$t_url_params['days'] = $f_days + 7;
+				$t_url_params = array( 'days' => $f_days + 7 );
 				$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 				echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'prev' ) . '</a>';
 
-				$t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
+				$t_next_days = max( $f_days - 7, 0 );
 
 				if( $t_next_days != $f_days ) {
-					$t_url_params['days'] = $t_next_days;
+					$t_url_params = array( 'days' => $t_next_days );
 					$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 					echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'next' ) . '</a>';
 				}
@@ -105,7 +101,10 @@ if( isset( $t_url_params['all'] ) ) {
 		timeline_print_events( $t_events );
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
-		$t_url_params['all'] = 1;
+		$t_url_params = array(
+			'days' => $f_days,
+			'all' => 1,
+		);
 		$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="' . $t_href . '">' . lang_get( 'timeline_more' ) . '</a>';
 		echo '</div>';
