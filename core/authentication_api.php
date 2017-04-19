@@ -257,14 +257,7 @@ function auth_can_set_password( $p_user_id = null ) {
 		return false;
 	}
 
-	$t_can_change = array(
-		PLAIN,
-		CRYPT,
-		CRYPT_FULL_SALT,
-		MD5,
-	);
-
-	return in_array( config_get( 'login_method' ), $t_can_change );
+	return helper_call_custom_function( 'auth_can_change_password', array() );
 }
 
 /**

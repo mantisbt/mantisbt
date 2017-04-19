@@ -103,7 +103,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</label>
 
 <?php
-	$t_allow_passwd_change = auth_can_set_password( NO_USER );
+	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
 
 	# captcha image requires GD library and related option to ON
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
@@ -141,10 +141,11 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 
 <?php
 			}
+
 			if( !$t_allow_passwd_change ) {
 				echo '<div class="space-10"></div>';
 				echo '<div class="alert alert-danger">';
-				echo auth_password_managed_elsewhere_message();
+				echo lang_get( 'no_password_change' );;
 				echo '</div>';
 			}
 ?>

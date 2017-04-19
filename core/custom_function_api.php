@@ -269,7 +269,14 @@ function custom_function_default_issue_delete_notify( $p_issue_id ) {
  * @return boolean
  */
 function custom_function_default_auth_can_change_password() {
-	return auth_can_set_password();
+	$t_can_change = array(
+		PLAIN,
+		CRYPT,
+		CRYPT_FULL_SALT,
+		MD5,
+	);
+
+	return in_array( config_get( 'login_method' ), $t_can_change );
 }
 
 /**
