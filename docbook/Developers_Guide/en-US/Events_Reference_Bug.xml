@@ -114,10 +114,15 @@
 					the data has not yet been persisted.
 				</para>
 
-				<para>
-					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_BUG_CREATE_PRE should be used.
-				</para>
+				<note>
+					<para>
+						Note: This event is only triggered for some actions in the web UI.
+						For capturing all changes the event EVENT_BUG_CREATE_PRE should be used.
+					</para>
+					<para>
+						This event will raise an <emphasis>ERROR_DEPRECATED_SUPERSEDED</emphasis> warning.
+					</para>
+				</note>
 
 				<itemizedlist>
 					<title>Parameters</title>
@@ -142,10 +147,15 @@
 					as a second parameter.
 				</para>
 
-				<para>
-					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_BUG_CREATE_POST should be used.
-				</para>
+				<note>
+					<para>
+						Note: This event is only triggered for some actions in the web UI.
+						For capturing all changes the event EVENT_BUG_CREATE_POST should be used.
+					</para>
+					<para>
+						This event will raise an <emphasis>ERROR_DEPRECATED_SUPERSEDED</emphasis> warning.
+					</para>
+				</note>
 
 				<itemizedlist>
 					<title>Parameters</title>
@@ -222,10 +232,15 @@
 					being saved to the database.
 				</para>
 
-				<para>
-					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_BUG_UPDATE_PRE should be used.
-				</para>
+				<note>
+					<para>
+						Note: This event is only triggered for some actions in the web UI.
+						For capturing all changes the event EVENT_BUG_UPDATE_PRE should be used.
+					</para>
+					<para>
+						This event will raise an <emphasis>ERROR_DEPRECATED_SUPERSEDED</emphasis> warning.
+					</para>
+				</note>
 
 				<itemizedlist>
 					<title>Parameters</title>
@@ -249,10 +264,15 @@
 					structure after being updated.
 				</para>
 
-				<para>
-					Note: This event is only triggered for some actions in the web UI.
-					For capturing all changes the event EVENT_BUG_UPDATE_POST should be used.
-				</para>
+				<note>
+					<para>
+						Note: This event is only triggered for some actions in the web UI.
+						For capturing all changes the event EVENT_BUG_UPDATE_POST should be used.
+					</para>
+					<para>
+						This event will raise an <emphasis>ERROR_DEPRECATED_SUPERSEDED</emphasis> warning.
+					</para>
+				</note>
 
 				<itemizedlist>
 					<title>Parameters</title>
@@ -342,11 +362,6 @@
 					This event is triggered by the BugData API by any action that uses
 					the create() method.
 				</para>
-
-				<itemizedlist>
-					<title>Parameters</title>
-					<listitem><para>&lt;Complex&gt;: Bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
-				</itemizedlist>
 
 				<itemizedlist>
 					<title>Parameters</title>
