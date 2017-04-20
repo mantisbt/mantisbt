@@ -47,6 +47,7 @@
  * @author Kongr43gpen
  * @author Omnipaedista
  * @author Protnet
+ * @author Thodoris
  * @author Ανώνυμος Βικιπαιδιστής
  */
 
@@ -328,6 +329,7 @@ $s_choose_project = 'Εφαρμογή';
 $s_login_button = 'Είσοδος';
 $s_signup_link = 'Νέος χρήστης';
 $s_lost_password_link = 'Ξεχάσατε τον κωδικό;';
+$s_enter_password = 'Εισάγετε τον κωδικό για \'%s\'';
 $s_select_project_button = 'Επιλογή Εφαρμογής';
 $s_lost_password_title = 'Ακύρωση Κωδικού';
 $s_lost_password_done_title = 'Αποστολή Μηνύματος Κωδικού';

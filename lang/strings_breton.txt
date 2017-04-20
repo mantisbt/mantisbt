@@ -518,6 +518,7 @@ $s_login_button = 'Kevreañ';
 $s_signup_link = 'Digeriñ ur gont nevez';
 $s_lost_password_link = 'Ankouaet ho ker-tremen ganeoc\'h ?';
 $s_username_or_email = 'Anv implijer pe chomlec\'h postel';
+$s_enter_password = 'Lakaat ar ger-tremen evit \'%s\'';
 $s_select_project_button = 'Diuzañ ur raktres';
 $s_lost_password_title = 'Adderaouekaat ar ger-tremen';
 $s_lost_password_done_title = 'Kaset eo bet ar gemennadenn gant ar ger-tremen';
