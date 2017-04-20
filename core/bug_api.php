@@ -817,7 +817,18 @@ class BugData {
 	}
 
 	/**
-	 * Add a callable item to the callback queue, which is executed after BugData update.
+	 * Add a callable item to the callback queue, which is executed after BugData update or create.
+	 *
+	 * Example, with an existing function:
+	 * add_update_callback( 'my_function', array( A, B, C ) )
+	 *
+	 * will result in the execution of:
+	 * my_function( A, B, C )
+	 *
+	 * Example, with anonymous function:
+	 * $my_func = function ( $a, $b, $c ) { ... };
+	 * add_update_callback( $my_func, array( A, B, C ) )
+	 *
 	 * @param callable	A callable item, in any form of the PHP Callable interface
 	 * @param array $p_params	Params to be used with the callable item
 	 */
@@ -829,6 +840,15 @@ class BugData {
 		$t_callback['func'] = $p_callable;
 		$t_callback['params'] = $p_params;
 		$this->update_callbacks[] = $t_callback;
+	}
+
+	/**
+	 * Wrapper for add_update_callback(), named in context of bug creation.
+	 * @param callable	A callable item, in any form of the PHP Callable interface
+	 * @param array $p_params	Params to be used with the callable item
+	 */
+	function add_create_callback( callable $p_callable, array $p_params = null ) {
+		$this->add_update_callback( $p_callable, $p_params );
 	}
 }
 

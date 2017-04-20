@@ -221,7 +221,7 @@ if( !empty( $t_custom_fields_to_set ) ) {
 			}
 		}
 	};
-	$t_bug_data->add_update_callback( $t_callback_set_cf, array( $t_bug_data, $t_custom_fields_to_set ) );
+	$t_bug_data->add_create_callback( $t_callback_set_cf, array( $t_bug_data, $t_custom_fields_to_set ) );
 }
 
 # Handle the file upload
@@ -232,7 +232,7 @@ if( $f_files !== null ) {
 	$t_callback_file_upload = function( BugData $p_bug, $p_files ) {
 		file_process_posted_files_for_bug( $p_bug->id, $p_files );
 	};
-	$t_bug_data->add_update_callback( $t_callback_file_upload, array( $t_bug_data, $f_files ) );
+	$t_bug_data->add_create_callback( $t_callback_file_upload, array( $t_bug_data, $f_files ) );
 }
 
 # Handle bug clone and relations
@@ -245,7 +245,7 @@ if( $f_master_bug_id > 0 ) {
 		history_log_event_special( $p_bug->id, BUG_CREATED_FROM, '', $p_master_bug_id );
 		history_log_event_special( $p_master_bug_id, BUG_CLONED_TO, '', $p_bug->id );
 	};
-	$t_bug_data->add_update_callback( $t_callback_child_generation, array( $t_bug_data, $f_master_bug_id ) );
+	$t_bug_data->add_create_callback( $t_callback_child_generation, array( $t_bug_data, $f_master_bug_id ) );
 
 	# create relationships
 	if( $f_rel_type > BUG_REL_ANY ) {
@@ -258,7 +258,7 @@ if( $f_master_bug_id > 0 ) {
 			# Send the email notification
 			email_relationship_added( $p_master_bug_id, $p_bug->id, relationship_get_complementary_type( $p_rel_type ) );
 		};
-		$t_bug_data->add_update_callback( $t_callback_relations, array( $t_bug_data, $f_master_bug_id, $f_rel_type ) );
+		$t_bug_data->add_create_callback( $t_callback_relations, array( $t_bug_data, $f_master_bug_id, $f_rel_type ) );
 	}
 
 	# copy notes from parent
@@ -282,7 +282,7 @@ if( $f_master_bug_id > 0 ) {
 				# Note: we won't trigger mentions in the clone scenario.
 			}
 		};
-		$t_bug_data->add_update_callback( $t_callback_copy_notes, array( $t_bug_data, $f_master_bug_id ) );
+		$t_bug_data->add_create_callback( $t_callback_copy_notes, array( $t_bug_data, $f_master_bug_id ) );
 	}
 
 	# copy attachments from parent
@@ -290,7 +290,7 @@ if( $f_master_bug_id > 0 ) {
 		$t_callback_copy_attachments = function( BugData $p_bug, $p_master_bug_id ) {
 			file_copy_attachments( $p_master_bug_id, $p_bug->id );
 		};
-		$t_bug_data->add_update_callback( $t_callback_copy_attachments, array( $t_bug_data, $f_master_bug_id ) );
+		$t_bug_data->add_create_callback( $t_callback_copy_attachments, array( $t_bug_data, $f_master_bug_id ) );
 	}
 }
 
