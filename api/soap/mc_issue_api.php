@@ -62,8 +62,6 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @return array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
@@ -76,7 +74,6 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-	$g_project_override = $t_project_id;
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
@@ -88,81 +85,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $p_issue_id . '\'' );
 
 	$t_bug = bug_get( $p_issue_id, true );
-	$t_issue_data = array();
-
-	$t_issue_data['id'] = (int)$p_issue_id;
-	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
-	$t_issue_data['last_updated'] = ApiObjectFactory::datetime( $t_bug->last_updated );
-
-	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
-
-	if( ApiObjectFactory::$soap ) {
-		$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
-		$t_issue_data['profile_id'] = (int)$t_bug->profile_id;
-	} else {
-		$t_issue_data['category'] = array(
-			'id' => $t_bug->category_id,
-			'name' => mci_get_category( $t_bug->category_id )
-		);
-
-		$t_issue_data['profile'] = mci_profile_as_array_by_id( $t_bug->profile_id );
-	}
-
-	$t_issue_data['priority'] = mci_enum_get_array_by_id( $t_bug->priority, 'priority', $t_lang );
-	$t_issue_data['severity'] = mci_enum_get_array_by_id( $t_bug->severity, 'severity', $t_lang );
-	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
-
-	$t_issue_data['reporter'] = mci_account_get_array_by_id( $t_bug->reporter_id );
-	$t_issue_data['summary'] = mci_sanitize_xml_string( $t_bug->summary );
-	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
-	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
-	$t_issue_data['platform'] = mci_null_if_empty( $t_bug->platform );
-	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
-	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
-	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
-	$t_issue_data['date_submitted'] = ApiObjectFactory::datetime( $t_bug->date_submitted );
-
-	if( ApiObjectFactory::$soap ) {
-		$t_issue_data['sticky'] = (int)$t_bug->sticky;
-	} else {
-		$t_issue_data['sticky'] = (int)$t_bug->sticky != 1;
-	}
-
-	# Don't show sponsorship data in REST API
-	if( ApiObjectFactory::$soap ) {
-		$t_issue_data['sponsorship_total'] = (int)$t_bug->sponsorship_total;
-	}
-
-	if( !empty( $t_bug->handler_id ) ) {
-		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
-			$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
-		}
-	}
-
-	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug->projection, 'projection', $t_lang );
-	$t_issue_data['eta'] = mci_enum_get_array_by_id( $t_bug->eta, 'eta', $t_lang );
-
-	$t_issue_data['resolution'] = mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang );
-	$t_issue_data['fixed_in_version'] = mci_null_if_empty( $t_bug->fixed_in_version );
-	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
-	$t_issue_data['due_date'] = mci_issue_get_due_date( $t_bug );
-
-	$t_issue_data['description'] = mci_sanitize_xml_string( $t_bug->description );
-	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( mci_sanitize_xml_string( $t_bug->steps_to_reproduce ) );
-	$t_issue_data['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_bug->additional_information ) );
-
-	$t_issue_data['attachments'] = mci_issue_get_attachments( $p_issue_id );
-	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
-	$t_issue_data['notes'] = mci_issue_get_notes( $p_issue_id );
-	$t_issue_data['custom_fields'] = mci_issue_get_custom_fields( $p_issue_id );
-	$t_issue_data['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_id ) );
-	$t_issue_data['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_id, $t_user_id );
-
-	if( !ApiObjectFactory::$soap ) {
-		mci_remove_null_keys( $t_issue_data );
-		mci_remove_empty_arrays( $t_issue_data );
-	}
-
+	$t_issue_data = mci_issue_data_as_array( $t_bug, $t_user_id, $t_lang );
 	return $t_issue_data;
 }
 
@@ -1586,31 +1509,24 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
  * @return array The issue as an array
  */
 function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
-		$t_id = $p_issue_data->id;
+	global $g_project_override;
+	$t_project_id = $p_issue_data->project_id;
+	$g_project_override = $t_project_id;
+
+	$t_id = (int)$p_issue_data->id;
 
 		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
-		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
 		$t_issue['priority'] = mci_enum_get_array_by_id( $p_issue_data->priority, 'priority', $p_lang );
 		$t_issue['severity'] = mci_enum_get_array_by_id( $p_issue_data->severity, 'severity', $p_lang );
 		$t_issue['status'] = mci_enum_get_array_by_id( $p_issue_data->status, 'status', $p_lang );
 
 		$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
 		$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
-		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
 		$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
-
-		if( ApiObjectFactory::$soap ) {
-			$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
-		} else {
-			if( (int)$p_issue_data->profile_id != 0 ) {
-				$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
-			}
-		}
-
 		$t_issue['platform'] = mci_null_if_empty( $p_issue_data->platform );
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
@@ -1619,27 +1535,53 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_created_at = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
 		$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
-	if( ApiObjectFactory::$soap ) {
+		if( ApiObjectFactory::$soap ) {
+			$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
+			$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
+			$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
+			$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
+			$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
 			$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
 			$t_issue['sticky'] = $p_issue_data->sticky;
 			$t_issue['date_submitted'] = $t_created_at;
 			$t_issue['last_updated'] = $t_updated_at;
 		} else {
+			if( (int)$p_issue_data->profile_id != 0 ) {
+				$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
+			}
+
+			$t_issue['category'] = array(
+				'id' => $p_issue_data->category_id,
+				'name' => mci_get_category( $p_issue_data->category_id )
+			);
+
+			if( !is_blank( $p_issue_data->version ) ) {
+				$t_issue['version'] = array( 'name' => $p_issue_data->version );
+			}
+
+			if( !is_blank( $p_issue_data->fixed_in_version ) ) {
+				$t_issue['fixed_in_version'] = array( 'name' => $p_issue_data->fixed_in_version );
+			}
+
+			if( !is_blank( $p_issue_data->target_version ) ) {
+				$t_issue['target_version'] = array( 'name' => $p_issue_data->target_version );
+			}
+
 			$t_issue['sticky'] = (bool)$p_issue_data->sticky;
 			$t_issue['created_at'] = $t_created_at;
 			$t_issue['updated_at'] = $t_updated_at;
 		}
 
 		if( !empty( $p_issue_data->handler_id ) ) {
-			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
+			if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
+				$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
+			}
 		}
 
 		$t_issue['projection'] = mci_enum_get_array_by_id( $p_issue_data->projection, 'projection', $p_lang );
 		$t_issue['eta'] = mci_enum_get_array_by_id( $p_issue_data->eta, 'eta', $p_lang );
 
 		$t_issue['resolution'] = mci_enum_get_array_by_id( $p_issue_data->resolution, 'resolution', $p_lang );
-		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
-		$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
 
 		$t_issue['description'] = mci_sanitize_xml_string( bug_get_text_field( $t_id, 'description' ) );
 
@@ -1761,9 +1703,6 @@ function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
  * @return array that represents an IssueDataArray structure
  */
 function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
-
-    global $g_project_override;
-
     $t_user_id = mci_check_login( $p_username, $p_password );
     if( $t_user_id === false ) {
         return mci_fault_login_failed();
@@ -1773,9 +1712,9 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
 
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
-
-        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
-            continue;
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false ) {
+			continue;
+		}
 
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
@@ -1795,9 +1734,6 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
  * @return array that represents an IssueHeaderDataArray structure
  */
 function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
-
-    global $g_project_override;
-
     $t_user_id = mci_check_login( $p_username, $p_password );
     if( $t_user_id === false ) {
         return mci_fault_login_failed();
