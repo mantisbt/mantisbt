@@ -638,3 +638,6 @@ input.typeahead.scrollable ~ .tt-menu {
 
 }
 
+#news-items .widget-header p {
+    all: unset;
+}
