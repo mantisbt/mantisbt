@@ -281,6 +281,15 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 	$t_result = array();
 	$t_result['id'] = (int)$p_enum_id;
 	$t_result['name'] = mci_get_enum_element( $p_enum_type, $p_enum_id, $p_lang );
+
+	if( !ApiObjectFactory::$soap ) {
+		$t_enum_name = $p_enum_type . '_enum_string';
+		$t_enum_string_value = config_get( $t_enum_name );
+		$t_enum_localized_value = lang_get( $t_enum_name );
+
+		$t_result['label'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
+	}
+
 	return $t_result;
 }
 
