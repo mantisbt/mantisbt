@@ -358,12 +358,15 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_attachment['filename'] = $t_attachment_row['filename'];
 		$t_attachment['size'] = (int)$t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
-		$t_attachment['date_submitted'] = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
+
+		$t_created_at = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
 
 		if( ApiObjectFactory::$soap ) {
 			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
+			$t_attachment['date_submitted'] = $t_created_at;
 		} else {
 			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&type=bug';
+			$t_attachment['created_at'] = $t_created_at;
 		}
 
 		if( ApiObjectFactory::$soap ) {
@@ -444,15 +447,19 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote = array();
 		$t_bugnote['id'] = (int)$t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
-		$t_bugnote['date_submitted'] = ApiObjectFactory::datetimeString( $t_value->date_submitted );
-		$t_bugnote['last_modified'] = ApiObjectFactory::datetimeString( $t_value->last_modified );
 		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
 
+		$t_created_at = ApiObjectFactory::datetimeString( $t_value->date_submitted );
+		$t_modified_at = ApiObjectFactory::datetimeString( $t_value->last_modified );
+
 		if( ApiObjectFactory::$soap ) {
 			$t_bugnote['note_type'] = $t_value->note_type;
 			$t_bugnote['note_attr'] = $t_value->note_attr;
+
+			$t_bugnote['date_submitted'] = $t_created_at;
+			$t_bugnote['last_modified'] = $t_modified_at;
 		} else {
 			switch( $t_value->note_type ) {
 				case BUGNOTE:
@@ -468,6 +475,9 @@ function mci_issue_get_notes( $p_issue_id ) {
 
 			$t_bugnote['type'] = $t_type;
 			$t_bugnote['attr'] = $t_value->note_attr;
+
+			$t_bugnote['created_at'] = ApiObjectFactory::datetimeString( $t_created_at );
+			$t_bugnote['updated_at'] = ApiObjectFactory::datetimeString( $t_modified_at );
 		}
 
 		$t_result[] = $t_bugnote;
@@ -1574,7 +1584,6 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
-		$t_issue['last_updated'] = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
@@ -1599,14 +1608,25 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
-		$t_issue['date_submitted'] = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
-		$t_issue['sticky'] = $p_issue_data->sticky;
 
-		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
+		$t_created_at = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
+		$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
+
+	if( ApiObjectFactory::$soap ) {
+			$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
+			$t_issue['sticky'] = $p_issue_data->sticky;
+			$t_issue['date_submitted'] = $t_created_at;
+			$t_issue['last_updated'] = $t_updated_at;
+		} else {
+			$t_issue['sticky'] = (bool)$p_issue_data->sticky;
+			$t_issue['created_at'] = $t_created_at;
+			$t_issue['updated_at'] = $t_updated_at;
+		}
 
 		if( !empty( $p_issue_data->handler_id ) ) {
 			$t_issue['handler'] = mci_account_get_array_by_id( $p_issue_data->handler_id );
 		}
+
 		$t_issue['projection'] = mci_enum_get_array_by_id( $p_issue_data->projection, 'projection', $p_lang );
 		$t_issue['eta'] = mci_enum_get_array_by_id( $p_issue_data->eta, 'eta', $p_lang );
 
