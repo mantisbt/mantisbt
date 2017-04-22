@@ -138,11 +138,22 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
  * @return string
  */
 function mci_get_category( $p_category_id ) {
-	if( $p_category_id == 0 ) {
-		return '';
+	if( ApiObjectFactory::$soap ) {
+		if( $p_category_id == 0 ) {
+			return '';
+		}
+
+		return mci_null_if_empty( category_get_name( $p_category_id ) );
 	}
 
-	return mci_null_if_empty( category_get_name( $p_category_id ) );
+	if( $p_category_id == 0 ) {
+		return array( 'category' => null );
+	}
+
+	return array(
+		'id' => $p_category_id,
+		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
+	);
 }
 
 /**
@@ -1527,6 +1538,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
 
 	$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
+	$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
 	$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
 
 	if( !empty( $p_issue_data->handler_id ) ) {
@@ -1553,7 +1565,6 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
 	if( ApiObjectFactory::$soap ) {
-		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
 		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
 		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
 		$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
@@ -1566,11 +1577,6 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 		if( (int)$p_issue_data->profile_id != 0 ) {
 			$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
 		}
-
-		$t_issue['category'] = array(
-			'id' => $p_issue_data->category_id,
-			'name' => mci_get_category( $p_issue_data->category_id )
-		);
 
 		if( !is_blank( $p_issue_data->version ) ) {
 			$t_issue['version'] = array( 'name' => $p_issue_data->version );
