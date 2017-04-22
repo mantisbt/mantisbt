@@ -1515,97 +1515,93 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 
 	$t_id = (int)$p_issue_data->id;
 
-		$t_issue = array();
-		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
+	$t_issue = array();
+	$t_issue['id'] = $t_id;
+	$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
+	$t_issue['description'] = mci_sanitize_xml_string( bug_get_text_field( $t_id, 'description' ) );
 
-		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
-		$t_issue['priority'] = mci_enum_get_array_by_id( $p_issue_data->priority, 'priority', $p_lang );
-		$t_issue['severity'] = mci_enum_get_array_by_id( $p_issue_data->severity, 'severity', $p_lang );
-		$t_issue['status'] = mci_enum_get_array_by_id( $p_issue_data->status, 'status', $p_lang );
+	$t_steps_to_reproduce = bug_get_text_field( $t_id, 'steps_to_reproduce' );
+	$t_issue['steps_to_reproduce'] = mci_null_if_empty( mci_sanitize_xml_string( $t_steps_to_reproduce ) );
 
-		$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
-		$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
-		$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
-		$t_issue['platform'] = mci_null_if_empty( $p_issue_data->platform );
-		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
-		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
-		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
+	$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
+	$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
 
-		$t_created_at = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
-		$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
+	$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
+	$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
 
-		if( ApiObjectFactory::$soap ) {
-			$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
-			$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
-			$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
-			$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
-			$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
-			$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
-			$t_issue['sticky'] = $p_issue_data->sticky;
-			$t_issue['date_submitted'] = $t_created_at;
-			$t_issue['last_updated'] = $t_updated_at;
-		} else {
-			if( (int)$p_issue_data->profile_id != 0 ) {
-				$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
-			}
+	if( !empty( $p_issue_data->handler_id ) ) {
+		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
+			$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
+		}
+	}
 
-			$t_issue['category'] = array(
-				'id' => $p_issue_data->category_id,
-				'name' => mci_get_category( $p_issue_data->category_id )
-			);
+	$t_issue['status'] = mci_enum_get_array_by_id( $p_issue_data->status, 'status', $p_lang );
+	$t_issue['resolution'] = mci_enum_get_array_by_id( $p_issue_data->resolution, 'resolution', $p_lang );
+	$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
+	$t_issue['priority'] = mci_enum_get_array_by_id( $p_issue_data->priority, 'priority', $p_lang );
+	$t_issue['severity'] = mci_enum_get_array_by_id( $p_issue_data->severity, 'severity', $p_lang );
+	$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
+	$t_issue['projection'] = mci_enum_get_array_by_id( $p_issue_data->projection, 'projection', $p_lang );
+	$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
+	$t_issue['platform'] = mci_null_if_empty( $p_issue_data->platform );
+	$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
+	$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
+	$t_issue['eta'] = mci_enum_get_array_by_id( $p_issue_data->eta, 'eta', $p_lang );
+	$t_issue['due_date'] = ApiObjectFactory::datetime( $p_issue_data->due_date );
 
-			if( !is_blank( $p_issue_data->version ) ) {
-				$t_issue['version'] = array( 'name' => $p_issue_data->version );
-			}
+	$t_created_at = ApiObjectFactory::datetime( $p_issue_data->date_submitted );
+	$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
-			if( !is_blank( $p_issue_data->fixed_in_version ) ) {
-				$t_issue['fixed_in_version'] = array( 'name' => $p_issue_data->fixed_in_version );
-			}
-
-			if( !is_blank( $p_issue_data->target_version ) ) {
-				$t_issue['target_version'] = array( 'name' => $p_issue_data->target_version );
-			}
-
-			$t_issue['sticky'] = (bool)$p_issue_data->sticky;
-			$t_issue['created_at'] = $t_created_at;
-			$t_issue['updated_at'] = $t_updated_at;
+	if( ApiObjectFactory::$soap ) {
+		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
+		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
+		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
+		$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
+		$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
+		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
+		$t_issue['sticky'] = $p_issue_data->sticky;
+		$t_issue['date_submitted'] = $t_created_at;
+		$t_issue['last_updated'] = $t_updated_at;
+	} else {
+		if( (int)$p_issue_data->profile_id != 0 ) {
+			$t_issue['profile'] = mci_profile_as_array_by_id( $p_issue_data->profile_id );
 		}
 
-		if( !empty( $p_issue_data->handler_id ) ) {
-			if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $t_id, $p_user_id ) ) {
-				$t_issue['handler'] = mci_account_get_array_by_id($p_issue_data->handler_id);
-			}
+		$t_issue['category'] = array(
+			'id' => $p_issue_data->category_id,
+			'name' => mci_get_category( $p_issue_data->category_id )
+		);
+
+		if( !is_blank( $p_issue_data->version ) ) {
+			$t_issue['version'] = array( 'name' => $p_issue_data->version );
 		}
 
-		$t_issue['projection'] = mci_enum_get_array_by_id( $p_issue_data->projection, 'projection', $p_lang );
-		$t_issue['eta'] = mci_enum_get_array_by_id( $p_issue_data->eta, 'eta', $p_lang );
-
-		$t_issue['resolution'] = mci_enum_get_array_by_id( $p_issue_data->resolution, 'resolution', $p_lang );
-
-		$t_issue['description'] = mci_sanitize_xml_string( bug_get_text_field( $t_id, 'description' ) );
-
-		$t_steps_to_reproduce = bug_get_text_field( $t_id, 'steps_to_reproduce' );
-		$t_issue['steps_to_reproduce'] = mci_null_if_empty( mci_sanitize_xml_string( $t_steps_to_reproduce ) );
-
-		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
-		$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
-
-		$t_issue['due_date'] = ApiObjectFactory::datetime( $p_issue_data->due_date );
-
-		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
-		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
-		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
-		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
-		$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
-		$t_issue['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_data->id ) );
-
-		if( !ApiObjectFactory::$soap ) {
-			mci_remove_null_keys( $t_issue );
-			mci_remove_empty_arrays( $t_issue );
+		if( !is_blank( $p_issue_data->fixed_in_version ) ) {
+			$t_issue['fixed_in_version'] = array( 'name' => $p_issue_data->fixed_in_version );
 		}
 
-		return $t_issue;
+		if( !is_blank( $p_issue_data->target_version ) ) {
+			$t_issue['target_version'] = array( 'name' => $p_issue_data->target_version );
+		}
+
+		$t_issue['sticky'] = (bool)$p_issue_data->sticky;
+		$t_issue['created_at'] = $t_created_at;
+		$t_issue['updated_at'] = $t_updated_at;
+	}
+
+	$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
+	$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
+	$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
+	$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
+	$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
+	$t_issue['monitors'] = mci_account_get_array_by_ids( bug_get_monitors( $p_issue_data->id ) );
+
+	if( !ApiObjectFactory::$soap ) {
+		mci_remove_null_keys( $t_issue );
+		mci_remove_empty_arrays( $t_issue );
+	}
+
+	return $t_issue;
 }
 
 /**
