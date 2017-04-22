@@ -474,7 +474,14 @@ function mci_issue_get_notes( $p_issue_id ) {
 			}
 
 			$t_bugnote['type'] = $t_type;
-			$t_bugnote['attr'] = $t_value->note_attr;
+
+			if( !is_blank( $t_value->note_attr ) ) {
+				$t_bugnote['attr'] = $t_value->note_attr;
+			}
+
+			if( isset( $t_bugnote['time_tracking'] ) && ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) ) {
+				unset( $t_bugnote['time_tracking'] );
+			}
 
 			$t_bugnote['created_at'] = ApiObjectFactory::datetimeString( $t_created_at );
 			$t_bugnote['updated_at'] = ApiObjectFactory::datetimeString( $t_modified_at );
