@@ -288,6 +288,11 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 		$t_enum_localized_value = lang_get( $t_enum_name );
 
 		$t_result['label'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
+
+		if( $p_enum_type == 'status' ) {
+			$t_status_colors = config_get( 'status_colors' );
+			$t_result['color'] = $t_status_colors[$t_result['name']];
+		}
 	}
 
 	return $t_result;
