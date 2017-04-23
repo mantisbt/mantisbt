@@ -736,7 +736,8 @@ function mci_get_version( $p_version, $p_project_id ) {
 function mci_get_category( $p_category_id ) {
 	if( ApiObjectFactory::$soap ) {
 		if( $p_category_id == 0 ) {
-			return null;
+			# This should be really null, but will leaving it to avoid changing the behavior
+			return '';
 		}
 
 		return mci_null_if_empty( category_get_name( $p_category_id ) );
