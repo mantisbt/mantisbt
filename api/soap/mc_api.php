@@ -704,18 +704,27 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
  * Convert version into appropriate format for SOAP/REST.
  *
  * @param string $p_version The version
+ * @param int $p_project_id The project id
  * @return array|null|string The converted version
  */
-function mci_get_version( $p_version ) {
-	if( ApiObjectFactory::$soap ) {
-		return mci_null_if_empty( $p_version );
+function mci_get_version( $p_version, $p_project_id ) {
+	$t_version_id = version_get_id( $p_version, $p_project_id );
+	if( $t_version_id === false ) {
+		return null;
 	}
 
 	if( is_blank( $p_version ) ) {
 		return null;
 	}
 
-	return array( 'name' => $p_version );
+	if( ApiObjectFactory::$soap ) {
+		return $p_version;
+	}
+
+	return array(
+		'id' => (int)$t_version_id,
+		'name' => $p_version,
+	);
 }
 
 /**

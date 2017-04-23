@@ -1519,10 +1519,10 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 
 	$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 	$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
-	$t_issue['version'] = mci_get_version( $p_issue_data->version );
-	$t_issue['fixed_in_version'] = mci_get_version( $p_issue_data->fixed_in_version );
+	$t_issue['version'] = mci_get_version( $p_issue_data->version, $p_issue_data->project_id );
+	$t_issue['fixed_in_version'] = mci_get_version( $p_issue_data->fixed_in_version, $p_issue_data->project_id );
 	if( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_id ) ) {
-		$t_issue['target_version'] = mci_get_version( $p_issue_data->target_version );
+		$t_issue['target_version'] = mci_get_version( $p_issue_data->target_version, $p_issue_data->project_id );
 	}
 
 	$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
