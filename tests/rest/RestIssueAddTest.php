@@ -36,24 +36,24 @@ class RestIssueAddTest extends RestBase {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertTrue( is_array( $t_response ) );
-		$this->assertTrue( isset( $t_response['issue'] ) );
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+		# file_put_contents( '/tmp/response.txt', var_export( $t_body, true ) );
 
-		$t_issue = $t_response['issue'];
-
-		$this->assertTrue( isset( $t_issue['id'] ) );
-		$this->assertTrue( is_numeric($t_issue['id'] ) );
-		$this->assertEquals( $t_issue_to_add['summary'], $t_issue['summary'] );
-		$this->assertEquals( $t_issue_to_add['description'], $t_issue['description'] );
-		$this->assertEquals( $t_issue_to_add['category']['name'], $t_issue['category']['name'] );
-		$this->assertEquals( $t_issue_to_add['project']['id'], $t_issue['project']['id'] );
-		$this->assertEquals( $this->userName, $t_issue['reporter']['name'] );
+		$this->assertTrue( isset( $t_issue['id'] ), 'id set' );
+		$this->assertTrue( is_numeric($t_issue['id'] ), 'id is numeric' );
+		$this->assertEquals( $t_issue_to_add['summary'], $t_issue['summary'], 'summary' );
+		$this->assertEquals( $t_issue_to_add['description'], $t_issue['description'], 'description' );
+		$this->assertEquals( $t_issue_to_add['category']['name'], $t_issue['category']['name'], 'category name' );
+		$this->assertEquals( $t_issue_to_add['project']['id'], $t_issue['project']['id'], 'project id' );
+		$this->assertEquals( $this->userName, $t_issue['reporter']['name'], 'reporter name' );
 
 		# Verify Status
-		$this->assertEquals( 10, $t_issue['status']['id'] );
-		$this->assertEquals( '#fcbdbd', $t_issue['status']['color'] );
-		$this->assertEquals( 'new', $t_issue['status']['name'] );
-		$this->assertEquals( 'new', $t_issue['status']['label'] );
+		$this->assertEquals( 10, $t_issue['status']['id'], 'status id' );
+		$this->assertEquals( '#fcbdbd', $t_issue['status']['color'], 'status color' );
+		$this->assertEquals( 'new', $t_issue['status']['name'], 'status name' );
+		$this->assertEquals( 'new', $t_issue['status']['label'], 'status label' );
 
 		# Verify Resolution
 		$this->assertEquals( 10, $t_issue['resolution']['id'], 'resolution id' );
@@ -84,7 +84,7 @@ class RestIssueAddTest extends RestBase {
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
-		$this->deleteAfterRun( $t_response['issue']['id'] );
+		$this->deleteAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueWithEnumIds() {
@@ -99,10 +99,9 @@ class RestIssueAddTest extends RestBase {
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertTrue( is_array( $t_response ) );
-		$this->assertTrue( isset( $t_response['issue'] ) );
-
-		$t_issue = $t_response['issue'];
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
 
 		$this->assertTrue( isset( $t_issue['id'] ) );
 		$this->assertTrue( is_numeric($t_issue['id'] ) );
@@ -142,7 +141,7 @@ class RestIssueAddTest extends RestBase {
 		$this->assertTrue( isset( $t_issue['created_at'] ), 'created at' );
 		$this->assertTrue( isset( $t_issue['updated_at'] ), 'updated at' );
 
-		$this->deleteAfterRun( $t_response['issue']['id'] );
+		$this->deleteAfterRun( $t_issue['id'] );
 	}
 
 	public function testCreateIssueNoSummary() {
@@ -151,7 +150,7 @@ class RestIssueAddTest extends RestBase {
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertFalse( is_array( $t_response ) );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoDescription() {
@@ -160,7 +159,7 @@ class RestIssueAddTest extends RestBase {
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertFalse( is_array( $t_response ) );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoCategory() {
@@ -169,7 +168,7 @@ class RestIssueAddTest extends RestBase {
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertFalse( is_array( $t_response ) );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoProject() {
@@ -178,6 +177,6 @@ class RestIssueAddTest extends RestBase {
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertFalse( is_array( $t_response ) );
+		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 }

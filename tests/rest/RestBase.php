@@ -23,10 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
-$t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
-
-# MantisBT constants
-require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
+require_once( __DIR__ . '/../../vendor/autoload.php' );
+require_once ( __DIR__ . '/../../core/constant_inc.php' );
 
 /**
  * Base class for REST API test cases
@@ -116,32 +114,16 @@ class RestBase extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function delete( $p_relative_path, $p_query_string ) {
-		$t_curl = curl_init();
-
-		curl_setopt_array( $t_curl, array(
-			CURLOPT_URL => $this->base_path . $p_relative_path . '?' . $p_query_string,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => "",
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => "DELETE",
-			CURLOPT_HTTPHEADER => array(
-				'authorization: ' . $this->token,
-				'cache-control: no-cache',
+		$t_client = new \GuzzleHttp\Client();
+		$t_options = array(
+			'allow_redirects' => false,
+			'http_errors' => false,
+			'headers' => array(
+				'Authorization' => $this->token,
 			),
-		));
+		);
 
-		$t_response = curl_exec( $t_curl );
-		$t_error = curl_error( $t_curl );
-
-		curl_close( $t_curl );
-
-		if ( $t_error ) {
-			return "cURL Error #:" . $t_error;
-		}
-
-		return $t_response;
+		return $t_client->request( 'DELETE', $this->base_path . $p_relative_path . '?' . $p_query_string, $t_options );
 	}
 
 	/**
@@ -150,34 +132,17 @@ class RestBase extends PHPUnit_Framework_TestCase {
 	 * @return mixed|string The response object.
 	 */
 	protected function post( $p_relative_path, $p_payload ) {
-		$t_curl = curl_init();
-
-		curl_setopt_array( $t_curl, array(
-			CURLOPT_URL => $this->base_path . $p_relative_path,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 0,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS => json_encode( $p_payload ),
-			CURLOPT_HTTPHEADER => array(
-				'authorization: ' . $this->token,
-				'cache-control: no-cache',
-				'content-type: application/json',
+		$t_client = new \GuzzleHttp\Client();
+		$t_options = array(
+			'allow_redirects' => false,
+			'http_errors' => false,
+			'json' => $p_payload,
+			'headers' => array(
+				'Authorization' => $this->token,
 			),
-		));
+		);
 
-		$t_response = curl_exec( $t_curl );
-		$t_error = curl_error( $t_curl );
-		file_put_contents( '/tmp/response.txt', $this->base_path . $p_relative_path . ' ' . $this->token . ' ' . var_export( json_encode( $p_payload ), true ) . ' ' . var_export( $t_response, true ) . ' ' . var_export( $t_error, true ) );
-		if( $t_response == false ) {
-			return 'cURL Error #:' . $t_error;
-		}
-
-		curl_close( $t_curl );
-
-		return json_decode( $t_response, true );
+		return $t_client->request( 'POST', $this->base_path . $p_relative_path, $t_options );
 	}
 
 	/**

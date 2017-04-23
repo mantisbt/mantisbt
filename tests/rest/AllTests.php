@@ -42,9 +42,6 @@ class RestAllTests extends PHPUnit_Framework_TestSuite
 	 * @return void
 	 */
 	protected function setUp() {
-		if( !extension_loaded( 'curl' ) ) {
-			$this->markTestSuiteSkipped( 'The CURL extension is not available.' );
-		}
 	}
 
 	/**
