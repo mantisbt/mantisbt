@@ -378,7 +378,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 					$t_type = 'reminder';
 					break;
 				case TIME_TRACKING:
-					$t_type = 'timelog';
+					$t_type = $t_has_time_tracking_access ? 'timelog' : 'note';
 					break;
 			}
 
