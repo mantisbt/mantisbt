@@ -761,7 +761,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		$t_bug_data->sticky = $p_issue['sticky'];
 	}
 
-	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+	if( isset( $p_issue['due_date'] ) &&
+		access_has_project_level( config_get( 'due_date_update_threshold' ), $t_bug_data->project_id ) ) {
 		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
@@ -1007,7 +1008,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_bug_data->sticky = $p_issue['sticky'];
 	}
 
-	if( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
+	if( isset( $p_issue['due_date'] ) &&
+		access_has_project_level( config_get( 'due_date_update_threshold' ), $t_bug_data->project_id ) ) {
 		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
