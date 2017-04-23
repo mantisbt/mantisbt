@@ -610,13 +610,13 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
 		}
 
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $p_project_id, $p_new_handler_id ) ) {
-			return mci_fault_access_denied( 'User \'' . $p_new_handler_id . '\' does not have access right to handle issues' );
+			return mci_fault_access_denied( $p_user_id, 'User does not have access right to handle issues' );
 		}
 	}
 
 	if( $p_old_handler_id != $p_new_handler_id ) {
 		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $p_project_id, $p_user_id ) ) {
-			return mci_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
+			return mci_fault_access_denied( $p_user_id, 'User does not have access right to assign issues' );
 		}
 	}
 
@@ -689,7 +689,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-		return mci_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
+		return mci_fault_access_denied( $t_user_id, 'User does not have access right to report issues' );
 	}
 
 	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
