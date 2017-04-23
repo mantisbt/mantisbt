@@ -643,6 +643,18 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		$p_issue = ApiObjectFactory::objectToArray( $p_issue );
 	}
 
+	if( !isset( $p_issue['summary'] ) )  {
+		return ApiObjectFactory::faultBadRequest( 'Summary not specified' );
+	}
+
+	if( !isset( $p_issue['description'] ) )  {
+		return ApiObjectFactory::faultBadRequest( 'Description not specified' );
+	}
+
+	if( !isset( $p_issue['project'] ) )  {
+		return ApiObjectFactory::faultBadRequest( 'Project not specified' );
+	}
+
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
