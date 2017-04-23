@@ -701,6 +701,49 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 }
 
 /**
+ * Convert version into appropriate format for SOAP/REST.
+ *
+ * @param string $p_version The version
+ * @return array|null|string The converted version
+ */
+function mci_get_version( $p_version ) {
+	if( ApiObjectFactory::$soap ) {
+		return mci_null_if_empty( $p_version );
+	}
+
+	if( is_blank( $p_version ) ) {
+		return null;
+	}
+
+	return array( 'name' => $p_version );
+}
+
+/**
+ * Returns the category name, possibly null if no category is assigned
+ *
+ * @param integer $p_category_id A category identifier.
+ * @return string
+ */
+function mci_get_category( $p_category_id ) {
+	if( ApiObjectFactory::$soap ) {
+		if( $p_category_id == 0 ) {
+			return null;
+		}
+
+		return mci_null_if_empty( category_get_name( $p_category_id ) );
+	}
+
+	if( $p_category_id == 0 ) {
+		return null;
+	}
+
+	return array(
+		'id' => $p_category_id,
+		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
+	);
+}
+
+/**
  * Convert a category name to a category id for a given project
  * @param string|array $p_category Category name or array with id and/or name.
  * @param integer $p_project_id    Project id.

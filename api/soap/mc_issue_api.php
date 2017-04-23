@@ -132,31 +132,6 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 }
 
 /**
- * Returns the category name, possibly null if no category is assigned
- *
- * @param integer $p_category_id A category identifier.
- * @return string
- */
-function mci_get_category( $p_category_id ) {
-	if( ApiObjectFactory::$soap ) {
-		if( $p_category_id == 0 ) {
-			return '';
-		}
-
-		return mci_null_if_empty( category_get_name( $p_category_id ) );
-	}
-
-	if( $p_category_id == 0 ) {
-		return array( 'category' => null );
-	}
-
-	return array(
-		'id' => $p_category_id,
-		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
-	);
-}
-
-/**
  * Get due date for a given bug
  * @param BugData $p_bug A BugData object.
  * @return soapval the value to be encoded as the due date
@@ -1542,6 +1517,12 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 
 	$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 	$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
+	$t_issue['version'] = mci_get_version( $p_issue_data->version );
+	$t_issue['fixed_in_version'] = mci_get_version( $p_issue_data->fixed_in_version );
+	if( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_id ) ) {
+		$t_issue['target_version'] = mci_get_version( $p_issue_data->target_version );
+	}
+
 	$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
 
 	if( !empty( $p_issue_data->handler_id ) &&
@@ -1582,17 +1563,6 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	$t_updated_at = ApiObjectFactory::datetime( $p_issue_data->last_updated );
 
 	if( ApiObjectFactory::$soap ) {
-		# TODO: create mci_get_version
-		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
-
-		# TODO: create mci_get_version
-		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
-
-		# TODO: create mci_get_version
-		if( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_id ) ) {
-			$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
-		}
-
 		if( config_get( 'enable_profiles' ) != OFF ) {
 			$t_issue['profile_id'] = (int)$p_issue_data->profile_id;
 		}
@@ -1611,22 +1581,6 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 			if ((int)$p_issue_data->profile_id != 0) {
 				$t_issue['profile'] = mci_profile_as_array_by_id($p_issue_data->profile_id);
 			}
-		}
-
-		# TODO: create mci_get_version
-		if( !is_blank( $p_issue_data->version ) ) {
-			$t_issue['version'] = array( 'name' => $p_issue_data->version );
-		}
-
-		# TODO: create mci_get_version()
-		if( !is_blank( $p_issue_data->fixed_in_version ) ) {
-			$t_issue['fixed_in_version'] = array( 'name' => $p_issue_data->fixed_in_version );
-		}
-
-		# TODO: Create mci_get_version()
-		if( !is_blank( $p_issue_data->target_version ) &&
-			access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_id ) ) {
-			$t_issue['target_version'] = array('name' => $p_issue_data->target_version);
 		}
 
 		$t_issue['sticky'] = (bool)$p_issue_data->sticky;
