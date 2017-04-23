@@ -80,10 +80,21 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 70, $t_issue->reproducibility->id );
 		$this->assertEquals( 'have not tried', $t_issue->reproducibility->name );
 		$this->assertEquals( 0, $t_issue->sponsorship_total );
-		$this->assertEquals( 10, $t_issue->projection->id );
-		$this->assertEquals( 'none', $t_issue->projection->name );
-		$this->assertEquals( 10, $t_issue->eta->id );
-		$this->assertEquals( 'none', $t_issue->eta->name );
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' ) ) {
+			$this->assertEquals( 10, $t_issue->projection->id );
+			$this->assertEquals( 'none', $t_issue->projection->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->projection ) );
+		}
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_eta' ) ) {
+			$this->assertEquals( 10, $t_issue->eta->id );
+			$this->assertEquals( 'none', $t_issue->eta->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->eta ) );
+		}
+
 		$this->assertEquals( 10, $t_issue->resolution->id );
 		$this->assertEquals( 'open', $t_issue->resolution->name );
 	}
@@ -132,10 +143,21 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 70, $t_issue->reproducibility->id );
 		$this->assertEquals( 'have not tried', $t_issue->reproducibility->name );
 		$this->assertEquals( 0, $t_issue->sponsorship_total );
-		$this->assertEquals( 10, $t_issue->projection->id );
-		$this->assertEquals( 'none', $t_issue->projection->name );
-		$this->assertEquals( 10, $t_issue->eta->id );
-		$this->assertEquals( 'none', $t_issue->eta->name );
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' ) ) {
+			$this->assertEquals( 10, $t_issue->projection->id );
+			$this->assertEquals( 'none', $t_issue->projection->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->projection ) );
+		}
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_eta' ) ) {
+			$this->assertEquals( 10, $t_issue->eta->id );
+			$this->assertEquals( 'none', $t_issue->eta->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->eta ) );
+		}
+
 		$this->assertEquals( 10, $t_issue->resolution->id );
 		$this->assertEquals( 'open', $t_issue->resolution->name );
 	}
@@ -330,7 +352,13 @@ class IssueUpdateTest extends SoapBase {
 	 * @return void
 	 */
 	public function testUpdateWithRareFields() {
-		$this->skipIfTimeTrackingIsNotEnabled();
+		if( !$this->client->mc_config_get_string( $this->userName, $this->password, 'enable_product_build' ) ) {
+			$this->markTestSkipped( 'Product build is not enabled' );
+		}
+
+		if( !$this->client->mc_config_get_string( $this->userName, $this->password, 'allow_freetext_in_profile_fields' ) ) {
+			$this->markTestSkipped( '`allow_freetext_in_profile_fields` is not enabled' );
+		}
 
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
 
