@@ -668,20 +668,6 @@ function mci_get_mantis_path() {
 }
 
 /**
- * Given a enum string and num, return the appropriate localized string
- * @param string $p_enum_name Enumeration name.
- * @param string $p_val       Enumeration value.
- * @param string $p_lang      Language string.
- * @return string
- */
-function mci_get_enum_element( $p_enum_name, $p_val, $p_lang ) {
-	$t_enum_string = config_get( $p_enum_name . '_enum_string' );
-	$t_localized_enum_string = lang_get( $p_enum_name . '_enum_string', $p_lang );
-
-	return MantisEnum::getLocalizedLabel( $t_enum_string, $t_localized_enum_string, $p_val );
-}
-
-/**
  * Gets the sub-projects that are accessible to the specified user / project.
  * @param integer $p_user_id           User id.
  * @param integer $p_parent_project_id Parent Project id.
