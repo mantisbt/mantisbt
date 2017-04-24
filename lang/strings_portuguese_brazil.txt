@@ -44,6 +44,7 @@
  * @author Eduardo.mps
  * @author Elival
  * @author Fasouzafreitas
+ * @author Felipe L. Ewald
  * @author Giro720
  * @author Gusta
  * @author Jefersonfoliveira
@@ -538,6 +539,7 @@ $s_login_button = 'Entrar';
 $s_signup_link = 'criar uma nova conta';
 $s_lost_password_link = 'Perdeu a sua senha?';
 $s_username_or_email = 'Usuário ou endereço de e-mail';
+$s_enter_password = 'Digite a senha para \'%s\'';
 $s_select_project_button = 'Selecionar Projeto';
 $s_lost_password_title = 'Reajuste de Senha';
 $s_lost_password_done_title = 'Mensagem de Senha Enviada';
