@@ -1608,7 +1608,7 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 		$t_message .= " \n";
 	}
 
-	$t_message .= email_format_bug_message( $p_visible_bug_data );
+	$t_message .= email_format_bug_message( $p_visible_bug_data, $p_user_id );
 
 	# build headers
 	$t_bug_id = $p_visible_bug_data['email_bug'];
@@ -1676,11 +1676,14 @@ function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking,
 /**
  * Build the bug info part of the message
  * @param array $p_visible_bug_data Bug data array to format.
+ * @param integer $p_user_id    A user identifier.
  * @return string
  */
-function email_format_bug_message( array $p_visible_bug_data ) {
+function email_format_bug_message( array $p_visible_bug_data, $p_user_id ) {
 	$t_normal_date_format = config_get( 'normal_date_format' );
 	$t_complete_date_format = config_get( 'complete_date_format' );
+
+	$t_bug_view_fields = config_get( 'bug_view_page_fields', null, $p_user_id, $p_visible_bug_data['email_project_id'] );
 
 	$t_email_separator1 = config_get( 'email_separator1' );
 	$t_email_separator2 = config_get( 'email_separator2' );
@@ -1710,15 +1713,29 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
 
-	if( isset( $p_visible_bug_data['email_tag'] ) ) {
+	if( in_array( 'tags', $t_bug_view_fields ) && isset( $p_visible_bug_data['email_tag'] ) ) {
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_tag' );
 	}
 
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
+	if ( in_array( 'reproducibility', $t_bug_view_fields ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
+	}
+		
+	if ( in_array( 'severity', $t_bug_view_fields ) ) {	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
+	}
+
+	if ( in_array( 'priority', $t_bug_view_fields ) ) {	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
+	}
+
+	if ( in_array( 'status', $t_bug_view_fields ) ) {	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
+	}
+
+	if ( in_array( 'target_version', $t_bug_view_fields ) ) {	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
+	}
 
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
@@ -1749,11 +1766,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . $p_visible_bug_data['email_description'] . "\n";
 
-	if( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
+	if( in_array( 'steps_to_reproduce', $t_bug_view_fields ) && !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . $p_visible_bug_data['email_steps_to_reproduce'] . "\n";
 	}
 
-	if( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
+	if( in_array( 'additional_info', $t_bug_view_fields ) && !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . $p_visible_bug_data['email_additional_information'] . "\n";
 	}
 
@@ -1984,4 +2001,3 @@ function email_get_actions() {
 
 	return $t_actions;
 }
-
