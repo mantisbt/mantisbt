@@ -629,7 +629,7 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
  * @param string   $p_username The name of the user trying to add the issue.
  * @param string   $p_password The password of the user.
  * @param array|stdClass $p_issue    A IssueData structure containing information about the new issue.
- * @return integer The id of the created issue.
+ * @return integer|RestFault|SoapFault The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	global $g_project_override;
@@ -721,18 +721,19 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			$t_project_id . '\'.' );
 	}
 
-	if( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
-		$t_version = $p_issue['version'];
+	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_version_id ) ) {
+		return $t_version_id;
+	}
 
-		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
-		if( $t_error_when_version_not_found == ON ) {
-			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::faultBadRequest( 'Version \'' . $t_version . '\' does not exist in project \'' .
-				$t_project_name . '\'.' );
-		} else {
-			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
-			$t_version = $t_version_when_not_found;
-		}
+	$t_fixed_in_version_id = isset( $p_issue['fixed_in_version'] ) ? mci_get_version_id( $p_issue['fixed_in_version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_fixed_in_version_id ) ) {
+		return $t_fixed_in_version_id;
+	}
+
+	$t_target_version_id = isset( $p_issue['target_version'] ) ? mci_get_version_id( $p_issue['target_version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_target_version_id ) ) {
+		return $t_target_version_id;
 	}
 
 	if( is_blank( $t_summary ) ) {
@@ -762,8 +763,19 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_bug_data->os = isset( $p_issue['os'] ) ? $p_issue['os'] : '';
 	$t_bug_data->os_build = isset( $p_issue['os_build'] ) ? $p_issue['os_build'] : '';
 	$t_bug_data->platform = isset( $p_issue['platform'] ) ? $p_issue['platform'] : '';
-	$t_bug_data->version = isset( $p_issue['version'] ) ? $p_issue['version'] : '';
-	$t_bug_data->fixed_in_version = isset( $p_issue['fixed_in_version'] ) ? $p_issue['fixed_in_version'] : '';
+
+	if( $t_version_id != 0 ) {
+		$t_bug_data->version = version_get_field( $t_version_id, 'version' );
+	}
+
+	if( $t_fixed_in_version_id != 0 ) {
+		$t_bug_data->fixed_in_version = version_get_field( $t_fixed_in_version_id, 'version' );
+	}
+
+	if( $t_target_version_id != 0 && access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+		$t_bug_data->target_version = version_get_field( $t_target_version_id, 'version' );
+	}
+
 	$t_bug_data->build = isset( $p_issue['build'] ) ? $p_issue['build'] : '';
 	$t_bug_data->view_state = $t_view_state_id;
 	$t_bug_data->summary = $t_summary;
@@ -778,10 +790,6 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
-	}
-
-	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
-		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
 
 	# omitted:
@@ -862,7 +870,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  * @param string   $p_password The password of the user.
  * @param integer  $p_issue_id The issue id of the existing issue being updated.
  * @param stdClass $p_issue    A IssueData structure containing information about the new issue.
- * @return integer The id of the created issue.
+ * @return integer|RestFault|SoapFault The id of the created issue.
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_issue ) {
 	global $g_project_override;
@@ -922,16 +930,19 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			$t_project_name . '\'.' );
 	}
 
-	if( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
-		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
-		if( $t_error_when_version_not_found == ON ) {
-			$t_project_name = project_get_name( $t_project_id );
-			return ApiObjectFactory::faultBadRequest( 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' .
-				$t_project_name . '\'.' );
-		}
+	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_version_id ) ) {
+		return $t_version_id;
+	}
 
-		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
-		$p_issue['version'] = $t_version_when_not_found;
+	$t_fixed_in_version_id = isset( $p_issue['fixed_in_version'] ) ? mci_get_version_id( $p_issue['fixed_in_version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_fixed_in_version_id ) ) {
+		return $t_fixed_in_version_id;
+	}
+
+	$t_target_version_id = isset( $p_issue['target_version'] ) ? mci_get_version_id( $p_issue['target_version'], $t_project_id ) : 0;
+	if( ApiObjectFactory::isFault( $t_target_version_id ) ) {
+		return $t_target_version_id;
 	}
 
 	if( is_blank( $t_summary ) ) {
@@ -1010,11 +1021,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	if( isset( $p_issue['platform'] ) ) {
 		$t_bug_data->platform = $p_issue['platform'];
 	}
-	if( isset( $p_issue['version'] ) ) {
-		$t_bug_data->version = $p_issue['version'];
+	if( $t_version_id != 0 ) {
+		$t_bug_data->version = version_get_field( $t_version_id, 'version' );
 	}
-	if( isset( $p_issue['fixed_in_version'] ) ) {
-		$t_bug_data->fixed_in_version = $p_issue['fixed_in_version'];
+	if( $t_fixed_in_version_id != 0 ) {
+		$t_bug_data->fixed_in_version = version_get_field( $t_fixed_in_version_id, 'version' );
+	}
+	if( $t_target_version_id != 0 && access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
+		$t_bug_data->target_version = version_get_field( $t_target_version_id, 'version' );
 	}
 	if( isset( $p_issue['sticky'] ) && access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_data->id ) ) {
 		$t_bug_data->sticky = $p_issue['sticky'];
@@ -1025,10 +1039,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_bug_data->due_date = strtotime( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
-	}
-
-	if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id, $t_user_id ) ) {
-		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );

@@ -728,6 +728,51 @@ function mci_get_version( $p_version, $p_project_id ) {
 }
 
 /**
+ * Gets the version id based on version input from the API.  This can be
+ * a string or an object (with id or name or both).  If both id and name
+ * exist on the object, id takes precedence.
+ *
+ * @param string|object $p_version The version string or object with name or id or both.
+ * @param int $p_project_id The project id.
+ * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ */
+function mci_get_version_id( $p_version, $p_project_id ) {
+	$t_version_id = 0;
+	$t_version_for_error = '';
+
+	if( is_array( $p_version ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+			$t_version_id = (int)$p_version['id'];
+			$t_version_for_error = $p_version['id'];
+			if( !version_exists( $t_version_id ) ) {
+				$t_version_id = false;
+			}
+		} elseif( isset( $p_version['name'] ) ) {
+			$t_version_for_error = $p_version['name'];
+			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
+		}
+	} elseif( is_string( $p_version ) && !is_blank( $p_version ) ) {
+		$t_version_for_error = $p_version;
+		$t_version_id = version_get_id( $p_version, $p_project_id );
+	}
+
+	# Error when supplied, but not found
+	if( $t_version_id === false ) {
+		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
+		if( $t_error_when_version_not_found == ON ) {
+			$t_project_name = project_get_name( $p_project_id );
+			return ApiObjectFactory::faultBadRequest( "Version '$t_version_for_error' does not exist in project '$t_project_name'." );
+		}
+
+		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
+		$t_version_id = version_get_id( $t_version_when_not_found );
+	}
+
+	return $t_version_id;
+}
+
+
+/**
  * Returns the category name, possibly null if no category is assigned
  *
  * @param integer $p_category_id A category identifier.

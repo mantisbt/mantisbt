@@ -144,6 +144,144 @@ class RestIssueAddTest extends RestBase {
 		$this->deleteAfterRun( $t_issue['id'] );
 	}
 
+	public function testCreateIssueWithVersionString() {
+		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
+		$t_version_name = '1.3.2';
+		$t_target_version_name = '2.0.x';
+		$t_fixed_in_version_name = '2.0.0-beta.3';
+
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionString' );
+		$t_issue_to_add['version'] = $t_version_name;
+		$t_issue_to_add['target_version'] = $t_target_version_name;
+		$t_issue_to_add['fixed_in_version'] = $t_fixed_in_version_name;
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertTrue( isset( $t_issue['version'] ), 'version id set' );
+		$this->assertTrue( isset( $t_issue['version']['id'] ), 'version id set' );
+		$this->assertTrue( isset( $t_issue['version']['name'] ), 'version name set' );
+		$this->assertEquals( $t_version_name, $t_issue['version']['name'] );
+		$this->assertEquals( $t_target_version_name, $t_issue['target_version']['name'] );
+		$this->assertEquals( $t_fixed_in_version_name, $t_issue['fixed_in_version']['name'] );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithVersionObjectName() {
+		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
+		$t_version_name = '1.3.2';
+
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectName' );
+		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertTrue( isset( $t_issue['version'] ), 'version id set' );
+		$this->assertTrue( isset( $t_issue['version']['id'] ), 'version id set' );
+		$this->assertTrue( is_numeric( $t_issue['version']['id'] ), 'version id numeric' );
+		$this->assertTrue( isset( $t_issue['version']['name'] ), 'version name set' );
+		$this->assertEquals( $t_version_name, $t_issue['version']['name'] );
+		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
+		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithVersionObjectId() {
+		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
+		$t_version_name = '1.3.2';
+		$t_version_id = 255;
+
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectId' );
+		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertTrue( isset( $t_issue['version'] ), 'version set' );
+		$this->assertTrue( isset( $t_issue['version']['id'] ), 'version id set' );
+		$this->assertTrue( is_numeric( $t_issue['version']['id'] ), 'version id numeric' );
+		$this->assertTrue( isset( $t_issue['version']['name'] ), 'version name set' );
+		$this->assertEquals( $t_version_name, $t_issue['version']['name'], 'version name' );
+		$this->assertEquals( $t_version_id, $t_issue['version']['id'], 'version id' );
+		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
+		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
+		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
+		# Here we are using id for '1.3.2' and name for '1.3.1'.  ID should be used.
+		$t_wrong_version_name = '1.3.1';
+		$t_correct_version_name = '1.3.2';
+		$t_version_id = 255;  # '1.3.2'
+
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdAndMistatchingName' );
+		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertTrue( isset( $t_issue['version'] ), 'version id set' );
+		$this->assertTrue( isset( $t_issue['version']['id'] ), 'version id set' );
+		$this->assertTrue( is_numeric( $t_issue['version']['id'] ), 'version id numeric' );
+		$this->assertTrue( isset( $t_issue['version']['name'] ), 'version name set' );
+		$this->assertEquals( $t_correct_version_name, $t_issue['version']['name'], 'version name' );
+		$this->assertEquals( $t_version_id, $t_issue['version']['id'], 'version id' );
+		$this->assertFalse( isset( $t_issue['target_version'] ), 'target_version set' );
+		$this->assertFalse( isset( $t_issue['fixed_in_version'] ), 'fixed_in_version set' );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithVersionObjectIdNotFound() {
+		# Test case assumes webservice_error_when_version_not_found = ON.
+		$t_version_id = 10000;
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdNotFound' );
+		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	public function testCreateIssueWithVersionObjectNameNotFound() {
+		# Test case assumes webservice_error_when_version_not_found = ON.
+		$t_version_name = 'VersionNotFound';
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectNameNotFound' );
+		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	public function testCreateIssueWithVersionStringNotFound() {
+		# Test case assumes webservice_error_when_version_not_found = ON.
+		$t_version_name = 'VersionNotFound';
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectNameNotFound' );
+		$t_issue_to_add['version'] = $t_version_name;
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
 	public function testCreateIssueNoSummary() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoSummary' );
 		unset( $t_issue_to_add['summary'] );
