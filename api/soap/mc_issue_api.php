@@ -846,7 +846,10 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	if( isset( $p_issue['tags'] ) && is_array( $p_issue['tags'] ) ) {
-		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
+		$t_tags_result = mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
+		if( ApiObjectFactory::isFault( $t_tags_result ) ) {
+			return $t_tags_result;
+		}
 	}
 
 	email_bug_added( $t_issue_id );

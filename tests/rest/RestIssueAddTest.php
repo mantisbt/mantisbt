@@ -282,6 +282,56 @@ class RestIssueAddTest extends RestBase {
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
+	public function testCreateIssueWithTags() {
+		# TODO: Create/cleanup tags once supported by the API, till then use dump from official bug tracker
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTags' );
+		$t_issue_to_add['tags'] = array( array( 'name' => 'modern-ui' ), array( 'name' => 'patch' ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		$this->assertEquals( 201, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertTrue( isset( $t_issue['tags'] ), 'tags set' );
+		$this->assertEquals( 'modern-ui', $t_issue['tags'][0]['name'] );
+		$this->assertEquals( 'patch', $t_issue['tags'][1]['name'] );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithTagNameNotFound() {
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
+		$t_issue_to_add['tags'] = array( array( 'name' => 'tag-not-found' ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		# TODO: 404 is returned here after issue is created.  We can improve this later.
+		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
+	public function testCreateIssueWithTagIdNotFound() {
+		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
+		$t_issue_to_add['tags'] = array( array( 'id' => 100000 ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+
+		# TODO: 404 is returned here after issue is created.  We can improve this later.
+		$this->assertEquals( 404, $t_response->getStatusCode() );
+		$t_body = json_decode( $t_response->getBody(), true );
+		$t_issue = $t_body['issue'];
+
+		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
+
+		$this->deleteAfterRun( $t_issue['id'] );
+	}
+
 	public function testCreateIssueNoSummary() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoSummary' );
 		unset( $t_issue_to_add['summary'] );
