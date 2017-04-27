@@ -520,6 +520,7 @@ $s_login_button = 'Acceder';
 $s_signup_link = 'Crear unha nova conta';
 $s_lost_password_link = 'Perdeu o contrasinal?';
 $s_username_or_email = 'Nome de usuario ou dirección de correo eletrónico';
+$s_enter_password = 'Indicar o contrasinal para \'%s\'';
 $s_select_project_button = 'Seleccionar o proxecto';
 $s_lost_password_title = 'Restablecer o contrasinal';
 $s_lost_password_done_title = 'A mensaxe co contrasinal foi enviada';
