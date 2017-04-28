@@ -230,19 +230,17 @@ function mc_login( $p_username, $p_password ) {
 		return mci_fault_login_failed();
 	}
 
-	return mci_user_get( $p_username, $p_password, $t_user_id );
+	return mci_user_get( $t_user_id );
 }
 
 /**
  * Given an id, this method returns the user.
  * When calling this method make sure that the caller has the right to retrieve
  * information about the target user.
- * @param string  $p_username Login username.
- * @param string  $p_password Login password.
  * @param integer $p_user_id  A valid user identifier.
  * @return array array of user data for the supplied user id
  */
-function mci_user_get( $p_username, $p_password, $p_user_id ) {
+function mci_user_get( $p_user_id ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
