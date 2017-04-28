@@ -256,15 +256,13 @@ function mci_user_get( $p_user_id ) {
 		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
 
 		$t_access_level = access_get_global_level( $p_user_id );
-		$t_user_data['access_level'] = array(
-			'id' => $t_access_level,
-			'name' => MantisEnum::getLabel( config_get( 'access_levels_enum_string' ), $t_access_level ),
-		);
+		$t_user_data['access_level'] = mci_enum_get_array_by_id(
+			$t_access_level, 'access_levels', $t_user_data['language'] );
 
 		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
 		$t_projects = array();
 		foreach( $t_project_ids as $t_project_id ) {
-			$t_projects[] = mci_project_get( $t_project_id );
+			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'] );
 		}
 
 		$t_user_data['projects'] = $t_projects;
@@ -279,14 +277,14 @@ function mci_user_get( $p_user_id ) {
  * Get project info for the specified id.
  *
  * @param int $p_project_id The project id to get info for.
+ * @param string $p_lang The user's language.
  * @return array project info.
  */
-function mci_project_get( $p_project_id ) {
+function mci_project_get( $p_project_id, $p_lang ) {
 	$t_row = project_get_row( $p_project_id );
 
 	$t_user_id = auth_get_current_user_id();
 	$t_user_access_level = access_get_project_level( $p_project_id, $t_user_id );
-	$t_access_levels = config_get( 'access_levels_enum_string', /* default */ null, $t_user_id, $p_project_id );
 
 	# Get project info that makes sense to publish via API.  For example, skip file_path.
 	$t_project = array(
@@ -294,18 +292,10 @@ function mci_project_get( $p_project_id ) {
 		'name' => $t_row['name'],
 		'description' => $t_row['description'],
 		'enabled' => (int)$t_row['enabled'] != 0,
-		'status' => array(
-			'id' => (int)$t_row['status'],
-			'name' => MantisEnum::getLabel( config_get( 'project_status_enum_string' ), (int)$t_row['status'] ) ),
-		'view_state' => array(
-			'id' => (int)$t_row['view_state'],
-			'name' => MantisEnum::getLabel( config_get( 'project_view_state_enum_string' ), (int)$t_row['view_state'] ) ),
-		'access_min' => array(
-			'id' => (int)$t_row['access_min'],
-			'name' => MantisEnum::getLabel( $t_access_levels, (int)$t_row['access_min'] ) ),
-		'access_level' => array(
-			'id' => $t_user_access_level,
-			'name' => MantisEnum::getLabel( $t_access_levels, $t_user_access_level ) ),
+		'status' => mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang ),
+		'view_state' => mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang ),
+		'access_min' => mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang ),
+		'access_level' => mci_enum_get_array_by_id( $t_user_access_level, 'access_levels', $p_lang ),
 	);
 
 	return $t_project;
