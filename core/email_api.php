@@ -1676,7 +1676,6 @@ function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking,
 /**
  * Build the bug info part of the message
  * @param array $p_visible_bug_data Bug data array to format.
- * @param integer $p_user_id    A user identifier.
  * @return string
  */
 function email_format_bug_message( array $p_visible_bug_data ) {
@@ -1743,8 +1742,12 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	# end foreach custom field
 
 	if( isset( $t_status ) && config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
-		$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
-		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
+		
+		if ( isset( $p_visible_bug_data[ 'email_resolution' ] ) ) {
+			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
+			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
+		}
+			
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 	}
 	$t_message .= $t_email_separator1 . " \n";
@@ -1912,8 +1915,11 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	if ( in_array( 'reproducibility', $t_bug_view_fields ) ) {
 		$t_bug_data['email_reproducibility'] = $t_row['reproducibility'];
 	}
+	
+	if ( in_array( 'resolution', $t_bug_view_fields ) ) {	
+		$t_bug_data['email_resolution'] = $t_row['resolution'];
+	}
 		
-	$t_bug_data['email_resolution'] = $t_row['resolution'];
 	$t_bug_data['email_fixed_in_version'] = $t_row['fixed_in_version'];
 
 	if( in_array( 'target_version', $t_bug_view_fields ) && !is_blank( $t_row['target_version'] ) && access_compare_level( $t_user_access_level, config_get( 'roadmap_view_threshold' ) ) ) {
