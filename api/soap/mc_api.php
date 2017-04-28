@@ -254,6 +254,7 @@ function mci_user_get( $p_user_id ) {
 		}
 
 		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 
 		$t_access_level = access_get_global_level( $p_user_id );
 		$t_user_data['access_level'] = mci_enum_get_array_by_id(
@@ -262,13 +263,11 @@ function mci_user_get( $p_user_id ) {
 		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
 		$t_projects = array();
 		foreach( $t_project_ids as $t_project_id ) {
-			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'] );
+			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'], /* detail */ false );
 		}
 
 		$t_user_data['projects'] = $t_projects;
 	}
-
-	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 
 	return $t_user_data;
 }
@@ -278,9 +277,10 @@ function mci_user_get( $p_user_id ) {
  *
  * @param int $p_project_id The project id to get info for.
  * @param string $p_lang The user's language.
+ * @param bool @p_detail Include all project details vs. just reference info.
  * @return array project info.
  */
-function mci_project_get( $p_project_id, $p_lang ) {
+function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
 	$t_row = project_get_row( $p_project_id );
 
 	$t_user_id = auth_get_current_user_id();
@@ -290,13 +290,22 @@ function mci_project_get( $p_project_id, $p_lang ) {
 	$t_project = array(
 		'id' => $p_project_id,
 		'name' => $t_row['name'],
-		'description' => $t_row['description'],
-		'enabled' => (int)$t_row['enabled'] != 0,
-		'status' => mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang ),
-		'view_state' => mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang ),
-		'access_min' => mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang ),
-		'access_level' => mci_enum_get_array_by_id( $t_user_access_level, 'access_levels', $p_lang ),
 	);
+
+	if( $p_detail ) {
+		$t_project['status'] = mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang );
+		$t_project['description'] = $t_row['description'];
+		$t_project['enabled'] = (int)$t_row['enabled'] != 0;
+		$t_project['view_state'] = mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang );
+
+		# access_min field is not used
+		# $t_project['access_min'] = mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang );
+
+		$t_project['access_level'] = mci_enum_get_array_by_id( $t_user_access_level, 'access_levels', $p_lang );
+		$t_project['custom_fields'] = mci_project_get_custom_fields( $p_project_id );
+		$t_project['versions'] = mci_project_versions( $p_project_id );
+		$t_project['categories'] = mci_project_categories( $p_project_id );
+	}
 
 	return $t_project;
 }

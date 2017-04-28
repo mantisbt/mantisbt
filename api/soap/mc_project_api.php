@@ -617,59 +617,180 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
  * @param string  $p_username   The name of the user trying to access the versions.
  * @param string  $p_password   The password of the user.
  * @param integer $p_project_id The id of the project to retrieve the custom fields for.
- * @return array  representing a CustomFieldDefinitionDataArray structure.
+ * @return array|RestFault|SoapFault  representing a CustomFieldDefinitionDataArray structure.
  */
 function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
 	}
 
-	if( !project_exists( $p_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $p_project_id . '\' does not exist.' );
-	}
-
-	$g_project_override = $p_project_id;
-
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
+	return mci_project_get_custom_fields( $p_project_id );
+}
+
+/**
+ * Get the custom fields that belong to the specified project.
+ *
+ * @param integer $p_project_id The id of the project to retrieve the custom fields for.
+ * @return array|RestFault|SoapFault  representing a CustomFieldDefinitionDataArray structure.
+ */
+function mci_project_get_custom_fields( $p_project_id ) {
+	global $g_project_override;
+
+	if( !project_exists( $p_project_id ) ) {
+		return ApiObjectFactory::faultNotFound( "Project '$p_project_id' does not exist." );
+	}
+
+	$g_project_override = $p_project_id;
+
 	$t_result = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
 
-	foreach( custom_field_get_linked_ids( $p_project_id ) as $t_id ) {
+	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( access_has_project_level( $t_def['access_level_r'], $p_project_id ) ) {
-			$t_result[] = array(
-				'field' => array(
+			$t_custom_field = array();
+
+			if( ApiObjectFactory::$soap ) {
+				$t_custom_field['field'] = array(
 					'id' => $t_def['id'],
 					'name' => $t_def['name'],
-				),
-				'type' => $t_def['type'],
-				'default_value' => $t_def['default_value'],
-				'possible_values' => $t_def['possible_values'],
-				'valid_regexp' => $t_def['valid_regexp'],
-				'access_level_r' => $t_def['access_level_r'],
-				'access_level_rw' => $t_def['access_level_rw'],
-				'length_min' => $t_def['length_min'],
-				'length_max' => $t_def['length_max'],
-				'display_report' => $t_def['display_report'],
-				'display_update' => $t_def['display_update'],
-				'display_resolved' => $t_def['display_resolved'],
-				'display_closed' => $t_def['display_closed'],
-				'require_report' => $t_def['require_report'],
-				'require_update' => $t_def['require_update'],
-				'require_resolved' => $t_def['require_resolved'],
-				'require_closed' => $t_def['require_closed'],
-			);
+				);
+			} else {
+				$t_custom_field['id'] = (int)$t_def['id'];
+				$t_custom_field['name'] = $t_def['name'];
+			}
+
+			$t_custom_field['type'] = $t_def['type'];
+			$t_custom_field['default_value'] = $t_def['default_value'];
+			$t_custom_field['possible_values'] = $t_def['possible_values'];
+			$t_custom_field['valid_regexp'] = $t_def['valid_regexp'];
+			$t_custom_field['length_min'] = (int)$t_def['length_min'];
+			$t_custom_field['length_max'] = (int)$t_def['length_max'];
+
+			if( ApiObjectFactory::$soap ) {
+				$t_custom_field['access_level_r'] = $t_def['access_level_r'];
+				$t_custom_field['access_level_rw'] = $t_def['access_level_rw'];
+				$t_custom_field['display_report'] = (int)$t_def['display_report'];
+				$t_custom_field['display_update'] = (int)$t_def['display_update'];
+				$t_custom_field['display_resolved'] = (int)$t_def['display_resolved'];
+				$t_custom_field['display_closed'] = (int)$t_def['display_closed'];
+				$t_custom_field['require_report'] = (int)$t_def['require_report'];
+				$t_custom_field['require_update'] = (int)$t_def['require_update'];
+				$t_custom_field['require_resolved'] = (int)$t_def['require_resolved'];
+				$t_custom_field['require_closed'] = (int)$t_def['require_closed'];
+			} else {
+				$t_custom_field['type'] = mci_custom_field_type_name( $t_def['type'] );
+				$t_custom_field['access_level_r'] = mci_enum_get_array_by_id( $t_def['access_level_r'], 'access_levels', $t_lang );
+				$t_custom_field['access_level_rw'] = mci_enum_get_array_by_id( $t_def['access_level_rw'], 'access_levels', $t_lang );
+				$t_custom_field['display_report'] = (bool)$t_def['display_report'];
+				$t_custom_field['display_update'] = (bool)$t_def['display_update'];
+				$t_custom_field['display_resolved'] = (bool)$t_def['display_resolved'];
+				$t_custom_field['display_closed'] = (bool)$t_def['display_closed'];
+				$t_custom_field['require_report'] = (bool)$t_def['require_report'];
+				$t_custom_field['require_update'] = (bool)$t_def['require_update'];
+				$t_custom_field['require_resolved'] = (bool)$t_def['require_resolved'];
+				$t_custom_field['require_closed'] = (bool)$t_def['require_closed'];
+			}
+
+			$t_result[] = $t_custom_field;
 		}
 	}
 
 	return $t_result;
+}
+
+/**
+ * Get the custom field type name given its type id.
+ *
+ * @param int $p_type_id The custom field type id.
+ * @return string The type name or id if an unknown type.
+ */
+function mci_custom_field_type_name( $p_type_id ) {
+	switch( $p_type_id ) {
+		case CUSTOM_FIELD_TYPE_STRING:
+			return 'string';
+		case CUSTOM_FIELD_TYPE_TEXTAREA:
+			return 'textarea';
+		case CUSTOM_FIELD_TYPE_NUMERIC:
+			return 'numeric';
+		case CUSTOM_FIELD_TYPE_FLOAT:
+			return 'float';
+		case CUSTOM_FIELD_TYPE_ENUM:
+			return 'enum';
+		case CUSTOM_FIELD_TYPE_EMAIL:
+			return 'email';
+		case CUSTOM_FIELD_TYPE_CHECKBOX:
+			return 'checkbox';
+		case CUSTOM_FIELD_TYPE_LIST:
+			return 'list';
+		case CUSTOM_FIELD_TYPE_MULTILIST:
+			return 'multilist';
+		case CUSTOM_FIELD_TYPE_DATE:
+			return 'date';
+		default:
+			return $p_type_id;
+	}
+}
+
+/**
+ * Get list of versions for a project.
+ * @param int $p_project_id The project id
+ * @return array The project versions.
+ */
+function mci_project_versions( $p_project_id ) {
+	$t_versions = version_get_all_rows( $p_project_id, /* inherit */ null );
+	$t_results = array();
+
+	foreach( $t_versions as $t_version ) {
+		$t_result = array(
+			'id' => (int)$t_version['id'],
+			'name' => $t_version['version'],
+			'description' => $t_version['description'],
+			'released' => (bool)$t_version['released'],
+			'obsolete' => (bool)$t_version['obsolete'],
+			'timestamp' => ApiObjectFactory::datetime( $t_version['date_order'] ),
+		);
+
+		$t_results[] = $t_result;
+	}
+
+	return $t_results;
+}
+
+/**
+ * Get projects for the specified project.
+ *
+ * @param int $p_project_id The project id
+ * @return array The array of categories with their info.
+ */
+function mci_project_categories( $p_project_id ) {
+	$t_categories = category_get_all_rows( $p_project_id );
+	$t_results = array();
+
+	foreach( $t_categories as $t_category ) {
+		$t_result = array(
+			'id' => (int)$t_category['id'],
+			'name' => $t_category['name'],
+			'project' => array( 'id' => (int)$t_category['project_id'], 'name' => $t_category['project_name'] ),
+		);
+
+		$t_default_handler_id = (int)$t_category['user_id'];
+		if( $t_default_handler_id != 0 ) {
+			$t_result['default_handler'] = mci_user_get( $t_default_handler_id );
+		}
+
+		$t_results[] = $t_result;
+	}
+
+	return $t_results;
 }
 
 /**
