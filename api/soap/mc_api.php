@@ -263,7 +263,7 @@ function mci_user_get( $p_username, $p_password, $p_user_id ) {
 			'name' => MantisEnum::getLabel( config_get( 'access_levels_enum_string' ), $t_access_level ),
 		);
 
-		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ true );
+		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
 		$t_projects = array();
 		foreach( $t_project_ids as $t_project_id ) {
 			$t_projects[] = mci_project_get( $t_project_id );
