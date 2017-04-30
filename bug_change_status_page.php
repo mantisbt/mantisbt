@@ -283,10 +283,10 @@ layout_page_begin();
 			continue;
 		}
 		$t_has_write_access = custom_field_has_write_access( $t_id, $f_bug_id );
-		$t_class_required = $t_require && $t_has_write_access ? 'class="required"' : '';
 ?>
 	<tr>
 		<th class="category">
+			<?php if( $t_require && $t_has_write_access ) {?><span class="required">*</span><?php } ?>
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</th>
 		<td>
@@ -391,6 +391,7 @@ layout_page_begin();
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
+	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( $t_status_label . '_bug_button' ) ?>" />
 </div>
 </div>
