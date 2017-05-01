@@ -579,6 +579,8 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'possible_values':
 			case 'default_value':
 			case 'valid_regexp':
+			case 'status_vector_req':
+			case 'status_vector_disp':
 				# Possible values doesn't apply to textarea fields
 				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';

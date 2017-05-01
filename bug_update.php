@@ -302,9 +302,17 @@ $t_custom_fields_to_set = array();
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
+	$t_vector = unserialize( $t_cf_def['status_vector_req'] );
+	$t_override_require = false;
+	$t_also_require = false;
+	if( is_array( $t_vector ) ) {
+		$t_also_require = in_array( $t_updated_bug->status, $t_vector );
+		if( array_count_values( $t_vector ) > 0 ) $t_override_require = true;
+	}
+
 	# If the custom field is not set and is required, then complain!
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
-		if( $t_cf_def[$t_cf_require_check] &&
+		if( ( ( $t_cf_def[$t_cf_require_check] && !$t_override_require ) || $t_also_require )  &&
 			custom_field_is_present( $t_cf_id ) &&
 			custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 			# A value for the custom field was expected however
