@@ -691,9 +691,6 @@ function auth_get_password_max_size() {
 		case HTTP_AUTH:
 			return DB_FIELD_SIZE_PASSWORD;
 
-		case SAFE_HASH:
-			return PASSWORD_MAX_SIZE_BCRYPT;
-
 		# All other cases, i.e. password is stored as a hash
 		default:
 			return PASSWORD_MAX_SIZE_BEFORE_HASH;

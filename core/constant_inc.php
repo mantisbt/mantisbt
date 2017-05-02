@@ -592,13 +592,11 @@ define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 
-# Maximum size for the user's password when storing it as a hash
-define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
-
-# The bcrypt algorithm will truncate password to 72 characters silently.
-# To avoid this trouble, we should limit password length to 72.
-# See http://php.net/manual/en/function.crypt.php for details.
-define( 'PASSWORD_MAX_SIZE_BCRYPT', 72 );
+# Maximum size for the user's password when storing it as a hash.
+# The CRYPT_BLOWFISH algorithm used by password_hash() will silently truncate
+# passwords to 72 characters, so there is no point in allowing longer passwords.
+# @see http://php.net/function.crypt
+define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 72 );
 
 define( 'SECONDS_PER_DAY', 86400 );
 
