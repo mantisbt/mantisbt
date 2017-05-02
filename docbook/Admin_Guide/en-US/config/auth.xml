@@ -15,10 +15,15 @@
 				<listitem>
 					<para>Specifies which method will be used to
 					authenticate. It should be one of the following values
-					(defaults to <emphasis>MD5</emphasis>):
+					(defaults to <emphasis>SAFE_HASH</emphasis>):
 						<itemizedlist>
 							<listitem>
-								<para>MD5 - user's password is stored as a hash in the database</para>
+								<para>SAFE_HASH - the user's password is stored
+									as a hash in the database, relying on PHP's
+									<ulink url="http://php.net/function.password-hash">password_hash()</ulink>
+									function and using the default algorithm
+									(PASSWORD_DEFAULT, currently CRYPT_BLOWFISH).
+								</para>
 							</listitem>
 							<listitem>
 								<para>LDAP - authenticates against an LDAP (or Active Directory) server</para>
@@ -30,8 +35,13 @@
 								<para>HTTP_AUTH</para>
 							</listitem>
 						</itemizedlist>
-						In addition, the following deprecated values are supported for backwards-compatibility, and should no longer be used:
+						In addition, the following deprecated values are supported
+						for backwards-compatibility, but their use is strongly
+						discouraged for security reasons:
 						<itemizedlist>
+							<listitem>
+								<para>MD5 - user's password is stored as a simple, unsalted hash in the database</para>
+							</listitem>
 							<listitem>
 								<para>PLAIN - password is stored in plain, unencrypted text in the database</para>
 							</listitem>
@@ -41,10 +51,23 @@
 							<listitem>
 								<para>CRYPT_FULL_SALT</para>
 							</listitem>
-						</itemizedlist></para>
+						</itemizedlist>
+					</para>
 
-					<para>Note: you may not be able to easily switch encryption methods, so this should be carefully chosen at install time.
-					However, MantisBT will attempt to &quot;fall back&quot; to older methods if possible.</para>
+					<warning>
+						<para>You may not be able to easily switch encryption
+							methods, so this should be carefully chosen at
+							install time.
+						</para>
+					</warning>
+					<note>
+						<para>MantisBT will attempt to &quot;fall back&quot; to older
+							methods if possible, and to convert the DB-stored
+							hashes to the current login method after a successful
+							login (e.g. with default settings, a MD5 hash will
+							be upgraded to SAFE_HASH).
+						</para>
+					</note>
 
 				</listitem>
 			</varlistentry>

@@ -1837,12 +1837,23 @@ $g_wrap_in_preformatted_text = ON;
 #############################################
 
 /**
- * Login authentication method. Must be one of
- * SAFE_HASH, MD5, LDAP, BASIC_AUTH or HTTP_AUTH.
+ * Login authentication method.
+ *
+ * The default SAFE_HASH method relies on PHP's password_hash() function, using
+ * the default algorithm (PASSWORD_DEFAULT, currently CRYPT_BLOWFISH).
+ * @see http://php.net/function.password-hash
+ *
  * Note: you may not be able to easily switch encryption methods, so this
- * should be carefully chosen at install time. However, MantisBT will attempt
- * to "fall back" to older methods if possible.
- * @global integer $g_login_method
+ * should be carefully chosen at install time. However, if possible, MantisBT
+ * will attempt to "fall back" to older methods, and to convert the DB-stored
+ * hashes to the current login method after a successful login (e.g. with
+ * default settings, a MD5 hash will be upgraded to SAFE_HASH).
+ *
+ * @global integer $g_login_method One of: SAFE_HASH (default), LDAP, BASIC_AUTH
+ *                                 or HTTP_AUTH. Other values (PLAIN, MD5, CRYPT
+ *                                 and CRYPT_FULL_SALT) are deprecated, and
+ *                                 their use is strongly discouraged for
+ *                                 security reasons.
  */
 $g_login_method = SAFE_HASH;
 
