@@ -407,15 +407,18 @@ function auth_auto_create_user( $p_username, $p_password ) {
 
 	if( $t_login_method == BASIC_AUTH ) {
 		$t_auto_create = true;
+		$t_auto_create_password = md5( $p_password );
 	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 		$t_auto_create = true;
+		$t_cache_password = config_get( 'ldap_cache_passwords' );
+		$t_auto_create_password = $t_cache_password ? md5( $p_password ) : 'external-password';
 	} else {
 		$t_auto_create = false;
 	}
 
 	if( $t_auto_create ) {
 		# attempt to create the user
-		$t_cookie_string = user_create( $p_username, md5( $p_password ) );
+		$t_cookie_string = user_create( $p_username, $t_auto_create_password );
 		if( $t_cookie_string === false ) {
 			# it didn't work
 			return false;

@@ -283,6 +283,16 @@ ldaps://ldap.example.com:3269/
 			</varlistentry>
 
 			<varlistentry>
+				<term>$g_ldap_cache_passwords</term>
+
+				<listitem>
+					<para>Cache md5sums of passwords in the mantis database to
+					allow logins even if ldap is down. Defaults to
+					</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>$g_ldap_port</term>
 
 				<listitem>
