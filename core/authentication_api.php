@@ -717,8 +717,21 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
+
+	# Process SAFE_HASH separately from the legacy methods, to safeguard against
+	# timing attacks leveraging password_verify() function.
+	if(    SAFE_HASH == $t_configured_login_method
+		&& password_verify( $p_test_password, $t_password )
+	) {
+		# Update the password hash if it does not match the current algorithm
+		if( password_needs_rehash( $t_password, PASSWORD_DEFAULT ) ) {
+			user_set_password( $p_user_id, $p_test_password, true );
+		}
+		return true;
+	}
+
+	# Try older login methods in sequence, and set the password hash
 	$t_login_methods = array(
-		SAFE_HASH,
 		MD5,
 		CRYPT,
 		PLAIN,
@@ -738,9 +751,11 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 			# Check for migration to another login method and test whether the password was encrypted
 			# with our previously insecure implementation of the CRYPT method
-			if( ( $t_login_method != $t_configured_login_method )
-					|| ( ( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) )
-					|| ( ( SAFE_HASH === $t_configured_login_method ) && password_needs_rehash( $t_password, PASSWORD_DEFAULT ) )
+			if(    $t_login_method != $t_configured_login_method
+			|| (
+				CRYPT == $t_configured_login_method
+				&& utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 )
+			   )
 			) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}
