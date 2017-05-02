@@ -799,11 +799,7 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 			$t_processed_password = md5( $p_password );
 			break;
 		case SAFE_HASH:
-			if( $p_salt === null ) {
-				$t_processed_password = password_hash( $p_password, PASSWORD_DEFAULT );
-			} else {
-				$t_processed_password = crypt( $p_password, $p_salt );
-			}
+			$t_processed_password = password_hash( $p_password, PASSWORD_DEFAULT );
 			break;
 		case BASIC_AUTH:
 		case PLAIN:
