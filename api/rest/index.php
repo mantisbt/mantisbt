@@ -55,6 +55,7 @@ require_once( $t_restcore_dir . 'config_rest.php' );
 require_once( $t_restcore_dir . 'internal_rest.php' );
 require_once( $t_restcore_dir . 'issues_rest.php' );
 require_once( $t_restcore_dir . 'lang_rest.php' );
+require_once( $t_restcore_dir . 'projects_rest.php' );
 require_once( $t_restcore_dir . 'users_rest.php' );
 
 event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );

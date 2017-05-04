@@ -230,25 +230,24 @@ function mc_login( $p_username, $p_password ) {
 		return mci_fault_login_failed();
 	}
 
-	return mci_user_get( $p_username, $p_password, $t_user_id );
+	return mci_user_get( $t_user_id );
 }
 
 /**
  * Given an id, this method returns the user.
  * When calling this method make sure that the caller has the right to retrieve
  * information about the target user.
- * @param string  $p_username Login username.
- * @param string  $p_password Login password.
  * @param integer $p_user_id  A valid user identifier.
  * @return array array of user data for the supplied user id
  */
-function mci_user_get( $p_username, $p_password, $p_user_id ) {
+function mci_user_get( $p_user_id ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
 	if( ApiObjectFactory::$soap ) {
 		$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
 		$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 	} else {
 		$t_account_data = mci_account_get_array_by_id( $p_user_id );
 		foreach( $t_account_data as $t_key => $t_value ) {
@@ -256,23 +255,20 @@ function mci_user_get( $p_username, $p_password, $p_user_id ) {
 		}
 
 		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 
 		$t_access_level = access_get_global_level( $p_user_id );
-		$t_user_data['access_level'] = array(
-			'id' => $t_access_level,
-			'name' => MantisEnum::getLabel( config_get( 'access_levels_enum_string' ), $t_access_level ),
-		);
+		$t_user_data['access_level'] = mci_enum_get_array_by_id(
+			$t_access_level, 'access_levels', $t_user_data['language'] );
 
-		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ true );
+		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
 		$t_projects = array();
 		foreach( $t_project_ids as $t_project_id ) {
-			$t_projects[] = mci_project_get( $t_project_id );
+			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'], /* detail */ false );
 		}
 
 		$t_user_data['projects'] = $t_projects;
 	}
-
-	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 
 	return $t_user_data;
 }
@@ -281,34 +277,36 @@ function mci_user_get( $p_username, $p_password, $p_user_id ) {
  * Get project info for the specified id.
  *
  * @param int $p_project_id The project id to get info for.
+ * @param string $p_lang The user's language.
+ * @param bool @p_detail Include all project details vs. just reference info.
  * @return array project info.
  */
-function mci_project_get( $p_project_id ) {
+function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
 	$t_row = project_get_row( $p_project_id );
 
 	$t_user_id = auth_get_current_user_id();
 	$t_user_access_level = access_get_project_level( $p_project_id, $t_user_id );
-	$t_access_levels = config_get( 'access_levels_enum_string', /* default */ null, $t_user_id, $p_project_id );
 
 	# Get project info that makes sense to publish via API.  For example, skip file_path.
 	$t_project = array(
 		'id' => $p_project_id,
 		'name' => $t_row['name'],
-		'description' => $t_row['description'],
-		'enabled' => (int)$t_row['enabled'] != 0,
-		'status' => array(
-			'id' => (int)$t_row['status'],
-			'name' => MantisEnum::getLabel( config_get( 'project_status_enum_string' ), (int)$t_row['status'] ) ),
-		'view_state' => array(
-			'id' => (int)$t_row['view_state'],
-			'name' => MantisEnum::getLabel( config_get( 'project_view_state_enum_string' ), (int)$t_row['view_state'] ) ),
-		'access_min' => array(
-			'id' => (int)$t_row['access_min'],
-			'name' => MantisEnum::getLabel( $t_access_levels, (int)$t_row['access_min'] ) ),
-		'access_level' => array(
-			'id' => $t_user_access_level,
-			'name' => MantisEnum::getLabel( $t_access_levels, $t_user_access_level ) ),
 	);
+
+	if( $p_detail ) {
+		$t_project['status'] = mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang );
+		$t_project['description'] = $t_row['description'];
+		$t_project['enabled'] = (int)$t_row['enabled'] != 0;
+		$t_project['view_state'] = mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang );
+
+		# access_min field is not used
+		# $t_project['access_min'] = mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang );
+
+		$t_project['access_level'] = mci_enum_get_array_by_id( $t_user_access_level, 'access_levels', $p_lang );
+		$t_project['custom_fields'] = mci_project_get_custom_fields( $p_project_id );
+		$t_project['versions'] = mci_project_versions( $p_project_id );
+		$t_project['categories'] = mci_project_categories( $p_project_id );
+	}
 
 	return $t_project;
 }
@@ -668,20 +666,6 @@ function mci_get_mantis_path() {
 }
 
 /**
- * Given a enum string and num, return the appropriate localized string
- * @param string $p_enum_name Enumeration name.
- * @param string $p_val       Enumeration value.
- * @param string $p_lang      Language string.
- * @return string
- */
-function mci_get_enum_element( $p_enum_name, $p_val, $p_lang ) {
-	$t_enum_string = config_get( $p_enum_name . '_enum_string' );
-	$t_localized_enum_string = lang_get( $p_enum_name . '_enum_string', $p_lang );
-
-	return MantisEnum::getLocalizedLabel( $t_enum_string, $t_localized_enum_string, $p_val );
-}
-
-/**
  * Gets the sub-projects that are accessible to the specified user / project.
  * @param integer $p_user_id           User id.
  * @param integer $p_parent_project_id Parent Project id.
@@ -712,6 +696,104 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 	}
 
 	return $t_result;
+}
+
+/**
+ * Convert version into appropriate format for SOAP/REST.
+ *
+ * @param string $p_version The version
+ * @param int $p_project_id The project id
+ * @return array|null|string The converted version
+ */
+function mci_get_version( $p_version, $p_project_id ) {
+	$t_version_id = version_get_id( $p_version, $p_project_id );
+	if( $t_version_id === false ) {
+		return null;
+	}
+
+	if( is_blank( $p_version ) ) {
+		return null;
+	}
+
+	if( ApiObjectFactory::$soap ) {
+		return $p_version;
+	}
+
+	return array(
+		'id' => (int)$t_version_id,
+		'name' => $p_version,
+	);
+}
+
+/**
+ * Gets the version id based on version input from the API.  This can be
+ * a string or an object (with id or name or both).  If both id and name
+ * exist on the object, id takes precedence.
+ *
+ * @param string|object $p_version The version string or object with name or id or both.
+ * @param int $p_project_id The project id.
+ * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ */
+function mci_get_version_id( $p_version, $p_project_id ) {
+	$t_version_id = 0;
+	$t_version_for_error = '';
+
+	if( is_array( $p_version ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+			$t_version_id = (int)$p_version['id'];
+			$t_version_for_error = $p_version['id'];
+			if( !version_exists( $t_version_id ) ) {
+				$t_version_id = false;
+			}
+		} elseif( isset( $p_version['name'] ) ) {
+			$t_version_for_error = $p_version['name'];
+			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
+		}
+	} elseif( is_string( $p_version ) && !is_blank( $p_version ) ) {
+		$t_version_for_error = $p_version;
+		$t_version_id = version_get_id( $p_version, $p_project_id );
+	}
+
+	# Error when supplied, but not found
+	if( $t_version_id === false ) {
+		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
+		if( $t_error_when_version_not_found == ON ) {
+			$t_project_name = project_get_name( $p_project_id );
+			return ApiObjectFactory::faultBadRequest( "Version '$t_version_for_error' does not exist in project '$t_project_name'." );
+		}
+
+		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
+		$t_version_id = version_get_id( $t_version_when_not_found );
+	}
+
+	return $t_version_id;
+}
+
+
+/**
+ * Returns the category name, possibly null if no category is assigned
+ *
+ * @param integer $p_category_id A category identifier.
+ * @return string
+ */
+function mci_get_category( $p_category_id ) {
+	if( ApiObjectFactory::$soap ) {
+		if( $p_category_id == 0 ) {
+			# This should be really null, but will leaving it to avoid changing the behavior
+			return '';
+		}
+
+		return mci_null_if_empty( category_get_name( $p_category_id ) );
+	}
+
+	if( $p_category_id == 0 ) {
+		return null;
+	}
+
+	return array(
+		'id' => $p_category_id,
+		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
+	);
 }
 
 /**

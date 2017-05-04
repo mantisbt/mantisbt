@@ -51,3 +51,23 @@ $GLOBALS['MANTIS_TESTSUITE_EMAIL'] = 'root@localhost';
  * @name MANTIS_TESTSUITE_PROJECT_ID
  */
 $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] = 1;
+
+/**
+ * Set default timestamp to avoid errors in some test environments
+ */
+date_default_timezone_set('America/Los_Angeles');
+
+/**
+ * Enable REST API Tests
+ */
+$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] = true;
+
+/**
+ * The base url for Mantis REST APIs
+ */
+$GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://localhost/mantisbt/api/rest';
+
+/**
+ * The API token to use
+ */
+$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '';
