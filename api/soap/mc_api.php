@@ -247,6 +247,7 @@ function mci_user_get( $p_user_id ) {
 	if( ApiObjectFactory::$soap ) {
 		$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
 		$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
 	} else {
 		$t_account_data = mci_account_get_array_by_id( $p_user_id );
 		foreach( $t_account_data as $t_key => $t_value ) {

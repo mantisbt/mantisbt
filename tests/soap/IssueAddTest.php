@@ -150,9 +150,11 @@ class IssueAddTest extends SoapBase {
 
 		$t_issue_to_add['resolution'] = array( 'id' => 80 );    # suspended
 		$t_issue_to_add['status'] = array( 'id' => 40 );        # confirmed
-		$t_issue_to_add['fixed_in_version'] = 'fixed version';
-		$t_issue_to_add['target_version'] = 'target version';
 		$t_issue_to_add['sticky'] = true;
+
+		# Must use valid versions for this to work.
+		# $t_issue_to_add['fixed_in_version'] = 'fixed version';
+		# $t_issue_to_add['target_version'] = 'target version';
 
 		$t_dt = DateTime::createFromFormat( 'U', time() );
 		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
