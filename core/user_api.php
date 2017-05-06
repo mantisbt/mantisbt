@@ -1605,7 +1605,7 @@ function user_set_password( $p_user_id, $p_password, $p_hash_update = false ) {
 	$t_query = 'UPDATE {user} SET password=' . db_param();
 	$t_param = array( auth_process_plain_password( $p_password ) );
 
-	if( $p_hash_update ) {
+	if( !$p_hash_update ) {
 		# When the password is changed, invalidate the cookie to expire all
 		# active sessions, and delete password activation token if there is any.
 		token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );

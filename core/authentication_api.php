@@ -721,8 +721,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	$t_password = user_get_field( $p_user_id, 'password' );
 
-	# Process SAFE_HASH separately from the legacy methods, to safeguard against
-	# timing attacks leveraging password_verify() function.
+	# Process modern hash methods separately from the legacy ones, to safeguard
+	# against timing attacks by leveraging password_verify() function.
 	if(    HASH_BCRYPT == $t_configured_login_method
 		&& password_verify( $p_test_password, $t_password )
 	) {

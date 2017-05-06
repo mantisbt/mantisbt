@@ -1857,7 +1857,7 @@ $g_wrap_in_preformatted_text = ON;
  * should be carefully chosen at install time. However, if possible, MantisBT
  * will attempt to "fall back" to older methods, and to convert the DB-stored
  * hashes to the current login method after a successful login (e.g. with
- * default settings, a MD5 hash will be upgraded to SAFE_HASH).
+ * default settings, a MD5 hash will be upgraded to HASH_BCRYPT).
  *
  * @global integer $g_login_method One of the values listed above.
  */
