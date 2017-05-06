@@ -724,7 +724,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 		&& password_verify( $p_test_password, $t_password )
 	) {
 		# Update the password hash if it does not match the current algorithm
-		if( password_needs_rehash( $t_password, PASSWORD_DEFAULT ) ) {
+		if( password_needs_rehash( $t_password, PASSWORD_BCRYPT ) ) {
 			user_set_password( $p_user_id, $p_test_password, true );
 		}
 		return true;
@@ -795,7 +795,7 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 			$t_processed_password = md5( $p_password );
 			break;
 		case HASH_BCRYPT:
-			$t_processed_password = password_hash( $p_password, PASSWORD_DEFAULT );
+			$t_processed_password = password_hash( $p_password, PASSWORD_BCRYPT );
 			break;
 		case BASIC_AUTH:
 		case PLAIN:
