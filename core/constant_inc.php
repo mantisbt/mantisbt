@@ -148,7 +148,7 @@ define( 'MD5', 3 );
 define( 'LDAP', 4 );
 define( 'BASIC_AUTH', 5 );
 define( 'HTTP_AUTH', 6 );
-define( 'SAFE_HASH', 7 );
+define( 'HASH_BCRYPT', 7 );
 
 # file upload methods
 define( 'DISK', 1 );

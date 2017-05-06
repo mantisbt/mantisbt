@@ -720,7 +720,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	# Process SAFE_HASH separately from the legacy methods, to safeguard against
 	# timing attacks leveraging password_verify() function.
-	if(    SAFE_HASH == $t_configured_login_method
+	if(    HASH_BCRYPT == $t_configured_login_method
 		&& password_verify( $p_test_password, $t_password )
 	) {
 		# Update the password hash if it does not match the current algorithm
@@ -794,7 +794,7 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 		case MD5:
 			$t_processed_password = md5( $p_password );
 			break;
-		case SAFE_HASH:
+		case HASH_BCRYPT:
 			$t_processed_password = password_hash( $p_password, PASSWORD_DEFAULT );
 			break;
 		case BASIC_AUTH:

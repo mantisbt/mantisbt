@@ -274,7 +274,7 @@ function custom_function_default_auth_can_change_password() {
 		CRYPT,
 		CRYPT_FULL_SALT,
 		MD5,
-		SAFE_HASH,
+		HASH_BCRYPT,
 	);
 
 	return in_array( config_get( 'login_method' ), $t_can_change );

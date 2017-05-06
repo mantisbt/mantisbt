@@ -53,7 +53,7 @@ check_print_test_row(
 if( config_get_global( 'login_method' ) != LDAP ) {
 	check_print_test_warn_row(
 		'login_method is set to SAFE_HASH',
-		config_get_global( 'login_method' ) == SAFE_HASH,
+		config_get_global( 'login_method' ) == HASH_BCRYPT,
 		'SAFE_HASH password encryption is currently the strongest password storage method supported by MantisBT.'
 	);
 }

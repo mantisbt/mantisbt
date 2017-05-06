@@ -1855,7 +1855,7 @@ $g_wrap_in_preformatted_text = ON;
  *                                 their use is strongly discouraged for
  *                                 security reasons.
  */
-$g_login_method = SAFE_HASH;
+$g_login_method = HASH_BCRYPT;
 
 /**
  * Re-authentication required for admin areas
