@@ -1839,8 +1839,18 @@ $g_wrap_in_preformatted_text = ON;
 /**
  * Login authentication method.
  *
- * The default SAFE_HASH method relies on PHP's password_hash() function, using
- * the default algorithm (PASSWORD_DEFAULT, currently CRYPT_BLOWFISH).
+ * Possibles values:
+ * - HASH_BCRYPT (default) The password is hashed¹ with the CRYPT_BLOWFISH
+ *               algorithm and stored in the database
+ * - LDAP        Authenticates against an LDAP (or Active Directory) server
+ * - BASIC_AUTH
+ * - HTTP_AUTH
+ *
+ * The following values are deprecated, and kept for backwards compatibility
+ * only: MD5, CRYPT, CRYPT_FULL_SALT and PLAIN. Their use is strongly
+ * discouraged for security reasons; HASH_BCRYPT should be used instead.
+ *
+ * ¹ hashing is performed using PHP's password_hash() function
  * @see http://php.net/function.password-hash
  *
  * Note: you may not be able to easily switch encryption methods, so this
@@ -1849,11 +1859,7 @@ $g_wrap_in_preformatted_text = ON;
  * hashes to the current login method after a successful login (e.g. with
  * default settings, a MD5 hash will be upgraded to SAFE_HASH).
  *
- * @global integer $g_login_method One of: SAFE_HASH (default), LDAP, BASIC_AUTH
- *                                 or HTTP_AUTH. Other values (PLAIN, MD5, CRYPT
- *                                 and CRYPT_FULL_SALT) are deprecated, and
- *                                 their use is strongly discouraged for
- *                                 security reasons.
+ * @global integer $g_login_method One of the values listed above.
  */
 $g_login_method = HASH_BCRYPT;
 

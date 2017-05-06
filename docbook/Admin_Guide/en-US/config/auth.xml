@@ -14,42 +14,53 @@
 
 				<listitem>
 					<para>Specifies which method will be used to
-					authenticate. It should be one of the following values
-					(defaults to <emphasis>SAFE_HASH</emphasis>):
+					authenticate. It must be one of the following values
+					(defaults to <emphasis>HASH_BCRYPT</emphasis>):
 						<itemizedlist>
 							<listitem>
-								<para>SAFE_HASH - the user's password is stored
-									as a hash in the database, relying on PHP's
-									<ulink url="http://php.net/function.password-hash">password_hash()</ulink>
-									function and using the default algorithm
-									(PASSWORD_DEFAULT, currently CRYPT_BLOWFISH).
+								<para><emphasis>HASH_BCRYPT</emphasis> -
+									The password is hashed <footnote id="hash">
+										<para>
+											Hashing is performed using PHP's
+											<ulink url="http://php.net/function.password-hash">password_hash()</ulink>
+											function.
+										</para>
+									</footnote>
+									using the CRYPT_BLOWFISH algorithm, and stored in the database.
 								</para>
 							</listitem>
 							<listitem>
-								<para>LDAP - authenticates against an LDAP (or Active Directory) server</para>
+								<para><emphasis>LDAP</emphasis> -
+									authenticates against an LDAP (or Active Directory) server
+								</para>
 							</listitem>
 							<listitem>
-								<para>BASIC_AUTH</para>
+								<para><emphasis>BASIC_AUTH</emphasis></para>
 							</listitem>
 							<listitem>
-								<para>HTTP_AUTH</para>
+								<para><emphasis>HTTP_AUTH</emphasis></para>
 							</listitem>
 						</itemizedlist>
-						In addition, the following deprecated values are supported
-						for backwards-compatibility, but their use is strongly
-						discouraged for security reasons:
+						In addition, the following values are deprecated, and kept
+						for backwards compatibility reasons only. Their use is strongly
+						discouraged for security reasons; <emphasis>HASH_BCRYPT</emphasis>
+						should be used instead.
 						<itemizedlist>
 							<listitem>
-								<para>MD5 - user's password is stored as a simple, unsalted hash in the database</para>
+								<para><emphasis>MD5</emphasis> -
+									user's password is stored as a simple, unsalted hash in the database
+								</para>
 							</listitem>
 							<listitem>
-								<para>PLAIN - password is stored in plain, unencrypted text in the database</para>
+								<para><emphasis>PLAIN</emphasis> -
+									password is stored in plain, unencrypted text in the database
+								</para>
 							</listitem>
 							<listitem>
-								<para>CRYPT</para>
+								<para><emphasis>CRYPT</emphasis></para>
 							</listitem>
 							<listitem>
-								<para>CRYPT_FULL_SALT</para>
+								<para><emphasis>CRYPT_FULL_SALT</emphasis></para>
 							</listitem>
 						</itemizedlist>
 					</para>
