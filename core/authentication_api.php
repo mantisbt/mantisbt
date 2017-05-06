@@ -774,6 +774,10 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * Encrypt and return the plain password given, as appropriate for the current
  *  global login method.
  *
+ * It is the caller's responsibility to ensure that a plain-text password fits
+ * the database field (or the hash algorithm's limitations). The function will
+ * throw an error if it is bigger to avoid silent truncation.
+ *
  * When generating a new password, no salt should be passed in.
  * When encrypting a password to compare to a stored password, the stored
  *  password should be passed in as salt.  If the authentication method is CRYPT then
@@ -798,6 +802,8 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 			$t_processed_password = md5( $p_password );
 			break;
 		case HASH_BCRYPT:
+			# Note that the CRYPT_BLOWFISH algorithm used by password_hash()
+			# will silently truncate the password to 72 characters
 			$t_processed_password = password_hash( $p_password, PASSWORD_BCRYPT );
 			break;
 		case BASIC_AUTH:
@@ -807,9 +813,12 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 			break;
 	}
 
-	# cut this off to DB_FIELD_SIZE_PASSWORD characters which is the largest
-	# possible string that can be stored in the database
-	return utf8_substr( $t_processed_password, 0, DB_FIELD_SIZE_PASSWORD );
+	if( utf8_strlen( $t_processed_password) > DB_FIELD_SIZE_PASSWORD ) {
+		error_parameters( 'password', DB_FIELD_SIZE_PASSWORD );
+		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
+	}
+
+	return $t_processed_password;
 }
 
 /**
