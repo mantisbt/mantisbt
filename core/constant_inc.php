@@ -610,15 +610,6 @@ define( 'LINKS_NEW_WINDOW', 2 );
 define( 'AUTH_COOKIE_LENGTH', 64 );
 define( 'API_TOKEN_LENGTH', 32 );
 
-# Obsolete / deprecated constants
-# Defined below for backwards-compatibility purposes -- Do not use them
-#        Constant                                   # Replaced by
-define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
-define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
-define( 'FTP', 1 );                                 # DISK
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
-
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
 define( 'JQUERY_VERSION', '2.2.4' );
@@ -699,3 +690,13 @@ define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+
+# KEEP THIS SECTION AT THE END OF THE FILE
+# Obsolete / deprecated constants
+# Defined below for backwards-compatibility purposes -- Do not use them
+#        Constant                                   # Replaced by
+define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
+define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
+define( 'FTP', 1 );                                 # DISK
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
