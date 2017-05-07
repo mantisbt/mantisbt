@@ -28,11 +28,6 @@
  */
 
 /**
- * Constant for our minimum required PHP version
- */
-define( 'PHP_MIN_VERSION', '5.5.0' );
-
-/**
  * Determine if PHP is running in CLI or CGI mode and return the mode.
  * @return int PHP mode
  */
