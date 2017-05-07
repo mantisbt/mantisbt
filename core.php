@@ -197,9 +197,11 @@ require_lib( 'utf8/str_pad.php' );
 require_api( 'php_api.php' );
 
 # Enforce our minimum PHP requirements
-if( !php_version_at_least( PHP_MIN_VERSION ) ) {
+if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	@ob_end_clean();
-	echo '<strong>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</strong><br />Your version of PHP is version ' . phpversion();
+	echo '<strong>FATAL ERROR: Your version of PHP is too old. '
+		. 'MantisBT requires ' . PHP_MIN_VERSION . ' or newer</strong><br />'
+		. 'Your are running PHP version <em>' . PHP_VERSION . '</em>';
 	die();
 }
 
