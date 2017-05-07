@@ -73,7 +73,7 @@ if( config_get_global( 'email_login_enabled' ) ) {
 
 $t_show_signup =
 	( auth_signup_enabled() ) &&
-	( LDAP != config_get_global( 'login_method' ) ) &&
+	( LOGIN_METHOD_LDAP != config_get_global( 'login_method' ) ) &&
 	( ON == config_get( 'enable_email_notification' ) );
 
 $t_show_anonymous_login = auth_anonymous_enabled();

@@ -1840,15 +1840,19 @@ $g_wrap_in_preformatted_text = ON;
  * Login authentication method.
  *
  * Possibles values:
- * - HASH_BCRYPT (default) The password is hashed¹ with the CRYPT_BLOWFISH
- *               algorithm and stored in the database
- * - LDAP        Authenticates against an LDAP (or Active Directory) server
- * - BASIC_AUTH
- * - HTTP_AUTH
+ * - LOGIN_METHOD_HASH_BCRYPT (default) The password is hashed¹ with the
+ *                            CRYPT_BLOWFISH algorithm and stored in the database
+ * - LOGIN_METHOD_LDAP        Authenticates against an LDAP (or Active Directory) server
+ * - LOGIN_METHOD_BASIC_AUTH
+ * - LOGIN_METHOD_HTTP_AUTH
  *
- * The following values are deprecated, and kept for backwards compatibility
- * only: MD5, CRYPT, CRYPT_FULL_SALT and PLAIN. Their use is strongly
- * discouraged for security reasons; HASH_BCRYPT should be used instead.
+ * The following values are deprecated, and kept for backwards compatibility only:
+ * - LOGIN_METHOD_HASH_MD5
+ * - LOGIN_METHOD_HASH_CRYPT
+ * - LOGIN_METHOD_HASH_CRYPT_FULL_SALT
+ * - LOGIN_METHOD_PLAIN
+ * Their use is strongly discouraged for security reasons; LOGIN_METHOD_HASH_BCRYPT
+ * should be used instead.
  *
  * ¹ hashing is performed using PHP's password_hash() function
  * @see http://php.net/function.password-hash
@@ -1856,12 +1860,13 @@ $g_wrap_in_preformatted_text = ON;
  * Note: you may not be able to easily switch encryption methods, so this
  * should be carefully chosen at install time. However, if possible, MantisBT
  * will attempt to "fall back" to older methods, and to convert the DB-stored
- * hashes to the current login method after a successful login (e.g. with
- * default settings, a MD5 hash will be upgraded to HASH_BCRYPT).
+ * hashes to the current login method after a successful login, e.g. with
+ * default settings, an MD5 hash (LOGIN_METHOD_HASH_MD5) will be upgraded to
+ * LOGIN_METHOD_HASH_BCRYPT.
  *
  * @global integer $g_login_method One of the values listed above.
  */
-$g_login_method = HASH_BCRYPT;
+$g_login_method = LOGIN_METHOD_HASH_BCRYPT;
 
 /**
  * Re-authentication required for admin areas

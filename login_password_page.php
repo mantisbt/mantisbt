@@ -106,7 +106,7 @@ if( $t_user_id !== false && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_
 $t_session_validation = !$f_reauthenticate && ( ON == config_get_global( 'session_validation' ) );
 
 $t_show_reset_password = !$f_reauthenticate &&
-	( LDAP != config_get_global( 'login_method' ) ) &&
+	( LOGIN_METHOD_LDAP != config_get_global( 'login_method' ) ) &&
 	( ON == config_get( 'lost_password_feature' ) ) &&
 	( ON == config_get( 'send_reset_password' ) ) &&
 	( ON == config_get( 'enable_email_notification' ) );

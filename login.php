@@ -94,7 +94,7 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 
 	$t_redirect_url = auth_login_page( $t_query_text );
 
-	if( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( LOGIN_METHOD_HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_prompt();
 		exit;
 	}

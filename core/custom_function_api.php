@@ -270,11 +270,11 @@ function custom_function_default_issue_delete_notify( $p_issue_id ) {
  */
 function custom_function_default_auth_can_change_password() {
 	$t_can_change = array(
-		PLAIN,
-		CRYPT,
-		CRYPT_FULL_SALT,
-		MD5,
-		HASH_BCRYPT,
+		LOGIN_METHOD_PLAIN,
+		LOGIN_METHOD_HASH_CRYPT,
+		LOGIN_METHOD_HASH_CRYPT_FULL_SALT,
+		LOGIN_METHOD_HASH_MD5,
+		LOGIN_METHOD_HASH_BCRYPT,
 	);
 
 	return in_array( config_get( 'login_method' ), $t_can_change );

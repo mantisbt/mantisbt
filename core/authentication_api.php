@@ -333,10 +333,10 @@ function auth_prepare_username( $p_username ) {
 	$t_username = null;
 
 	switch( config_get( 'login_method' ) ) {
-		case BASIC_AUTH:
+		case LOGIN_METHOD_BASIC_AUTH:
 			$t_username = $_SERVER['REMOTE_USER'];
 			break;
-		case HTTP_AUTH:
+		case LOGIN_METHOD_HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$t_username = $_SERVER['PHP_AUTH_USER'];
@@ -367,10 +367,10 @@ function auth_prepare_username( $p_username ) {
  */
 function auth_prepare_password( $p_password ) {
 	switch( config_get( 'login_method' ) ) {
-		case BASIC_AUTH:
+		case LOGIN_METHOD_BASIC_AUTH:
 			$f_password = $_SERVER['PHP_AUTH_PW'];
 			break;
-		case HTTP_AUTH:
+		case LOGIN_METHOD_HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 
 				# this will never get hit - see auth_prepare_username
@@ -405,9 +405,9 @@ function auth_prepare_password( $p_password ) {
 function auth_auto_create_user( $p_username, $p_password ) {
 	$t_login_method = config_get( 'login_method' );
 
-	if( $t_login_method == BASIC_AUTH ) {
+	if( $t_login_method == LOGIN_METHOD_BASIC_AUTH ) {
 		$t_auto_create = true;
-	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
+	} else if( $t_login_method == LOGIN_METHOD_LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 		$t_auto_create = true;
 	} else {
 		$t_auto_create = false;
@@ -661,7 +661,7 @@ function auth_logout() {
 		helper_clear_pref_cookies();
 	}
 
-	if( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( LOGIN_METHOD_HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_set_logout_pending( true );
 	}
 
@@ -674,7 +674,7 @@ function auth_logout() {
  * @access public
  */
 function auth_automatic_logon_bypass_form() {
-	return config_get( 'login_method' ) == HTTP_AUTH;
+	return config_get( 'login_method' ) == LOGIN_METHOD_HTTP_AUTH;
 }
 
 /**
@@ -686,12 +686,12 @@ function auth_automatic_logon_bypass_form() {
 function auth_get_password_max_size() {
 	switch( config_get( 'login_method' ) ) {
 		# Max password size cannot be bigger than the database field
-		case PLAIN:
-		case BASIC_AUTH:
-		case HTTP_AUTH:
+		case LOGIN_METHOD_PLAIN:
+		case LOGIN_METHOD_BASIC_AUTH:
+		case LOGIN_METHOD_HTTP_AUTH:
 			return DB_FIELD_SIZE_PASSWORD;
 
-		case HASH_BCRYPT:
+		case LOGIN_METHOD_HASH_BCRYPT:
 			return PASSWORD_MAX_SIZE_BCRYPT;
 
 		# All other cases, i.e. password is stored as a hash
@@ -711,7 +711,7 @@ function auth_get_password_max_size() {
 function auth_does_password_match( $p_user_id, $p_test_password ) {
 	$t_configured_login_method = config_get( 'login_method' );
 
-	if( LDAP == $t_configured_login_method ) {
+	if( LOGIN_METHOD_LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
 	}
 
@@ -723,7 +723,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	# Process modern hash methods separately from the legacy ones, to safeguard
 	# against timing attacks by leveraging password_verify() function.
-	if(    HASH_BCRYPT == $t_configured_login_method
+	if(    LOGIN_METHOD_HASH_BCRYPT == $t_configured_login_method
 		&& password_verify( $p_test_password, $t_password )
 	) {
 		# Update the password hash if it does not match the current algorithm
@@ -735,10 +735,10 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	# Try older login methods in sequence, and set the password hash
 	$t_login_methods = array(
-		MD5,
-		CRYPT,
-		PLAIN,
-		BASIC_AUTH,
+		LOGIN_METHOD_HASH_MD5,
+		LOGIN_METHOD_HASH_CRYPT,
+		LOGIN_METHOD_PLAIN,
+		LOGIN_METHOD_BASIC_AUTH,
 	);
 
 	foreach( $t_login_methods as $t_login_method ) {
@@ -747,8 +747,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			# Do not support migration to PLAIN, since this would be a crazy thing to do.
 			# Also if we do, then a user will be able to login by providing the MD5 value
 			# that is copied from the database.  See #8467 for more details.
-			if( ( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) ||
-				( $t_configured_login_method != BASIC_AUTH && $t_login_method == BASIC_AUTH ) ) {
+			if( ( $t_configured_login_method != LOGIN_METHOD_PLAIN && $t_login_method == LOGIN_METHOD_PLAIN ) ||
+				( $t_configured_login_method != LOGIN_METHOD_BASIC_AUTH && $t_login_method == LOGIN_METHOD_BASIC_AUTH ) ) {
 				continue;
 			}
 
@@ -756,7 +756,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 			# with our previously insecure implementation of the CRYPT method
 			if(    $t_login_method != $t_configured_login_method
 			|| (
-				CRYPT == $t_configured_login_method
+				LOGIN_METHOD_HASH_CRYPT == $t_configured_login_method
 				&& utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 )
 			   )
 			) {
@@ -793,21 +793,21 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 	$t_login_method = $p_method !== null ? $p_method : config_get( 'login_method' );
 
 	switch( $t_login_method ) {
-		case CRYPT:
+		case LOGIN_METHOD_HASH_CRYPT:
 			# a null salt is the same as no salt, which causes a salt to be generated
 			# otherwise, use the salt given
 			$t_processed_password = crypt( $p_password, $p_salt );
 			break;
-		case MD5:
+		case LOGIN_METHOD_HASH_MD5:
 			$t_processed_password = md5( $p_password );
 			break;
-		case HASH_BCRYPT:
+		case LOGIN_METHOD_HASH_BCRYPT:
 			# Note that the CRYPT_BLOWFISH algorithm used by password_hash()
 			# will silently truncate the password to 72 characters
 			$t_processed_password = password_hash( $p_password, PASSWORD_BCRYPT );
 			break;
-		case BASIC_AUTH:
-		case PLAIN:
+		case LOGIN_METHOD_BASIC_AUTH:
+		case LOGIN_METHOD_PLAIN:
 		default:
 			$t_processed_password = $p_password;
 			break;
@@ -1016,7 +1016,7 @@ function auth_reauthentication_expiry() {
  * @access public
  */
 function auth_reauthenticate() {
-	if( !auth_reauthentication_enabled() || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( !auth_reauthentication_enabled() || LOGIN_METHOD_BASIC_AUTH == config_get( 'login_method' ) || LOGIN_METHOD_HTTP_AUTH == config_get( 'login_method' ) ) {
 		return true;
 	}
 

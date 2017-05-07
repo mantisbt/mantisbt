@@ -1743,7 +1743,7 @@ function print_documentation_link( $p_a_name = '' ) {
  */
 function print_signup_link() {
 	if( auth_signup_enabled() &&
-		 ( LDAP != config_get_global( 'login_method' ) ) &&
+		 ( LOGIN_METHOD_LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
 		print_link_button( 'signup_page.php', lang_get( 'signup_link' ) );
@@ -1764,7 +1764,7 @@ function print_login_link() {
  */
 function print_lost_password_link() {
 	# lost password feature disabled or reset password via email disabled -> stop here!
-	if( ( LDAP != config_get_global( 'login_method' ) ) &&
+	if( ( LOGIN_METHOD_LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'lost_password_feature' ) ) &&
 		 ( ON == config_get( 'send_reset_password' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) ) ) {

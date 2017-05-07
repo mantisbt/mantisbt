@@ -141,14 +141,14 @@ define( 'READ', 201 );
 define( 'UNREAD', 202 );
 
 # login methods
-define( 'PLAIN', 0 );
-define( 'CRYPT', 1 );
-define( 'CRYPT_FULL_SALT', 2 );
-define( 'MD5', 3 );
-define( 'LDAP', 4 );
-define( 'BASIC_AUTH', 5 );
-define( 'HTTP_AUTH', 6 );
-define( 'HASH_BCRYPT', 7 );
+define( 'LOGIN_METHOD_PLAIN', 0 );
+define( 'LOGIN_METHOD_BASIC_AUTH', 5 );
+define( 'LOGIN_METHOD_HTTP_AUTH', 6 );
+define( 'LOGIN_METHOD_LDAP', 4 );
+define( 'LOGIN_METHOD_HASH_CRYPT', 1 );
+define( 'LOGIN_METHOD_HASH_CRYPT_FULL_SALT', 2 );
+define( 'LOGIN_METHOD_HASH_MD5', 3 );
+define( 'LOGIN_METHOD_HASH_BCRYPT', 7 );
 
 # file upload methods
 define( 'DISK', 1 );
@@ -700,3 +700,11 @@ define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
 define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+define( 'PLAIN', LOGIN_METHOD_PLAIN );
+define( 'CRYPT', LOGIN_METHOD_HASH_CRYPT );
+define( 'CRYPT_FULL_SALT', LOGIN_METHOD_HASH_CRYPT_FULL_SALT );
+define( 'MD5', LOGIN_METHOD_HASH_MD5 );
+define( 'LDAP', LOGIN_METHOD_LDAP );
+define( 'BASIC_AUTH', LOGIN_METHOD_BASIC_AUTH );
+define( 'HTTP_AUTH', LOGIN_METHOD_HTTP_AUTH );
+define( 'HASH_BCRYPT', LOGIN_METHOD_HASH_BCRYPT );
