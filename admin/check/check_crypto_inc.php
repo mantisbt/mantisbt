@@ -54,7 +54,7 @@ $t_deprecated_login_methods = array( LOGIN_METHOD_HASH_MD5, LOGIN_METHOD_HASH_CR
 check_print_test_row(
 	'Do not use an outdated login method',
 	!in_array( $t_login_method, $t_deprecated_login_methods ),
-	array( false => 'Login method ' . login_method_name( $t_login_method )
+	array( false => login_method_name( $t_login_method )
 		. ' has been deprecated and should no longer be used for security reasons. '
 		. $t_switch_to_method
 	)
@@ -65,7 +65,7 @@ if( $t_login_method != LOGIN_METHOD_LDAP ) {
 	check_print_test_warn_row(
 		'Passwords should be stored encrypted in the database',
 		!in_array( $t_login_method, $t_plain_text_login_methods ),
-		'Login method ' . login_method_name( $t_login_method )
+		login_method_name( $t_login_method )
 		. ' causes passwords to be stored in clear text. '
 		. $t_switch_to_method
 	);
@@ -78,14 +78,14 @@ if( $t_login_method != LOGIN_METHOD_LDAP ) {
  */
 function login_method_name( $p_method ) {
 	switch( $p_method ) {
-		case LOGIN_METHOD_PLAIN:                return 'PLAIN';
-		case LOGIN_METHOD_BASIC_AUTH:           return 'BASIC_AUTH';
-		case LOGIN_METHOD_HTTP_AUTH:            return 'HTTP_AUTH';
-		case LOGIN_METHOD_HASH_CRYPT:           return 'CRYPT';
-		case LOGIN_METHOD_HASH_CRYPT_FULL_SALT: return 'CRYPT_FULL_SALT';
-		case LOGIN_METHOD_HASH_MD5:             return 'MD5';
-		case LOGIN_METHOD_HASH_BCRYPT:          return 'HASH_BCRYPT';
-		case LOGIN_METHOD_LDAP:                 return 'LDAP';
+		case LOGIN_METHOD_PLAIN:                return 'LOGIN_METHOD_PLAIN';
+		case LOGIN_METHOD_BASIC_AUTH:           return 'LOGIN_METHOD_BASIC_AUTH';
+		case LOGIN_METHOD_HTTP_AUTH:            return 'LOGIN_METHOD_HTTP_AUTH';
+		case LOGIN_METHOD_HASH_CRYPT:           return 'LOGIN_METHOD_HASH_CRYPT';
+		case LOGIN_METHOD_HASH_CRYPT_FULL_SALT: return 'LOGIN_METHOD_HASH_CRYPT_FULL_SALT';
+		case LOGIN_METHOD_HASH_MD5:             return 'LOGIN_METHOD_HASH_MD5';
+		case LOGIN_METHOD_HASH_BCRYPT:          return 'LOGIN_METHOD_HASH_BCRYPT';
+		case LOGIN_METHOD_LDAP:                 return 'LOGIN_METHOD_LDAP';
 	}
 	return 'UNKNOWN';
 }
