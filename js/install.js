@@ -30,8 +30,10 @@ $('#db_type').change(
 		var db;
 		if ($(this).val() == 'oci8') {
 			db = 'oci8';
+			$('#oracle_size_warning').show();
 		} else {
 			db = 'other';
+			$('#oracle_size_warning').hide();
 		}
 
 		$('#default_' + db + ' span').each(
