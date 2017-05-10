@@ -671,7 +671,12 @@ if( !$g_database_upgrade ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
-		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="text" value="' . $f_db_table_prefix . '">';
+		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="text" class="db-table-prefix" value="' . $f_db_table_prefix . '">';
+		if( $t_key != 'db_table_suffix' ) {
+			$t_id_sample = $t_key. '_sample';
+			echo "\n&nbsp;", '<label for="' . $t_id_sample . '">Sample table name:</label>';
+			echo "\n", '<input id="' . $t_id_sample . '" type="text" size="40" disabled>';
+		}
 		echo "\n\t</td>\n</tr>\n\n";
 	}
 
