@@ -594,7 +594,7 @@ if( !$g_database_upgrade ) {
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input name="hostname" type="text" value="<?php echo string_attribute( $f_hostname ) ?>">
 	</td>
 </tr>
 
@@ -604,7 +604,7 @@ if( !$g_database_upgrade ) {
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input name="db_username" type="text" value="<?php echo string_attribute( $f_db_username ) ?>">
 	</td>
 </tr>
 
@@ -627,7 +627,7 @@ if( !$g_database_upgrade ) {
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input name="database_name" type="text" value="<?php echo string_attribute( $f_database_name ) ?>">
 	</td>
 </tr>
 <?php
@@ -640,7 +640,7 @@ if( !$g_database_upgrade ) {
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input name="admin_username" type="text" value="<?php echo string_attribute( $f_admin_username ) ?>">
 	</td>
 </tr>
 
@@ -669,7 +669,7 @@ if( !$g_database_upgrade ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
-		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
+		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="text" value="' . $f_db_table_prefix . '">';
 		echo "\n\t</td>\n</tr>\n\n";
 	}
 
