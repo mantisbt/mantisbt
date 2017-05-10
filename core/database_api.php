@@ -523,22 +523,22 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 }
 
 /**
- * Retrieve a result returned from a specific database query
- * @param boolean|IteratorAggregate $p_result Database Query Record Set to retrieve next result for.
- * @param integer                   $p_index1 Row to retrieve (optional).
- * @param integer                   $p_index2 Column to retrieve (optional).
+ * Retrieve a specific field from a database query result
+ * @param boolean|IteratorAggregate $p_result		Database Query Record Set to retrieve the field from.
+ * @param integer                   $p_row_index	Row to retrieve, zero-based (optional).
+ * @param integer                   $p_col_index	Column to retrieve, zero-based (optional).
  * @return mixed Database result
  */
-function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
+function db_result( $p_result, $p_row_index = 0, $p_col_index = 0 ) {
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-		$p_result->Move( $p_index1 );
+		$p_result->Move( $p_row_index );
 		$t_row = db_fetch_array( $p_result );
 
 		# Make the array numerically indexed. This is required to retrieve the
 		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
 		$t_result = array_values( $t_row );
 
-		return $t_result[$p_index2];
+		return $t_result[$p_col_index];
 	}
 
 	return false;
