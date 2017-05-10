@@ -493,24 +493,26 @@ if( 2 == $t_install_state ) {
 		);
 ?>
 </tr>
-</table>
-<?php
-	}?>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 <?php
-	if( false == $g_failed ) {
-		$t_install_state++;
-	} else {
-		$t_install_state--; # a check failed, redisplay the questions
-	}
+		if( false == $g_failed ) {
+			$t_install_state++;
+		} else {
+			$t_install_state--; # a check failed, redisplay the questions
+		}
+	} # end if db open
 } # end 2 == $t_install_state
+?>
 
+</table>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<?php
 # system checks have passed, get the database information
 if( 1 == $t_install_state ) {
 	?>
