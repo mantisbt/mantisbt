@@ -532,11 +532,11 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
 		$p_result->Move( $p_index1 );
-		$t_result = $p_result->GetArray();
+		$t_row = db_fetch_array( $p_result );
 
 		# Make the array numerically indexed. This is required to retrieve the
 		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
-		$t_result = array_values( $t_result[0] );
+		$t_result = array_values( $t_row );
 
 		return $t_result[$p_index2];
 	}
