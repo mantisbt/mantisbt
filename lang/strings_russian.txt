@@ -533,6 +533,7 @@ $s_login_button = 'Войти';
 $s_signup_link = 'зарегистрировать новую учетную запись';
 $s_lost_password_link = 'забыли пароль?';
 $s_username_or_email = 'Имя пользователя или адрес электронной почты';
+$s_enter_password = 'Введите пароль для \'%s\'';
 $s_select_project_button = 'Выбрать проект';
 $s_lost_password_title = 'Сброс пароля';
 $s_lost_password_done_title = 'Сообщение отправлено';

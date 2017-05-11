@@ -49,6 +49,7 @@
  * @author Rambro
  * @author Rezonansowy
  * @author Sp5uhe
+ * @author Szmyk
  * @author Ty221
  * @author Woytecr
  */
@@ -203,6 +204,7 @@ $s_myself = 'Ja';
 $s_default_access_level = 'Domyślny poziom dostępu';
 $s_issue_status_percentage = 'Status procentowy zgłoszenia';
 $s_access_levels_enum_string = '10:obserwator,25:zgłaszający,40:aktualizujący,55:wykonawca,70:zarządca,90:administrator';
+$s_no_access = 'brak dostępu';
 $s_project_status_enum_string = '10:tworzony,30:ukończony,50:stabilny,70:zarzucony';
 $s_project_view_state_enum_string = '10:publiczny,50:prywatny';
 $s_view_state_enum_string = '10:publiczny,50:prywatny';
@@ -236,6 +238,7 @@ $s_email_notification_title_for_status_bug_resolved = 'Następujące zgłoszenie
 $s_email_notification_title_for_status_bug_closed = 'Następujące zgłoszenie zostało ZAMKNIĘTE';
 $s_email_notification_title_for_action_bug_submitted = 'Następujące zgłoszenie zostało DODANE.';
 $s_email_notification_title_for_action_bug_assigned = 'Następujące zgłoszenie zostało PRZYPISANE.';
+$s_email_notification_title_for_action_bug_unassigned = 'Następujące zgłoszenie zostało ZAMKNIĘTE.';
 $s_email_notification_title_for_action_bug_reopened = 'Następujące zgłoszenie zostało PONOWNIE OTWARTE.';
 $s_email_notification_title_for_action_bug_deleted = 'Następujące zgłoszenie zostało USUNIĘTE.';
 $s_email_notification_title_for_action_bug_updated = 'Następujące zgłoszenie zostało UAKTUALNIONE.';
@@ -304,7 +307,7 @@ $s_minutes = 'minut';
 $s_redirect_delay = 'Opóźnienie przekierowania';
 $s_seconds = 'sekund';
 $s_with_minimum_severity = 'Z minimalną ważnością';
-$s_bugnote_order = 'Kolejność sortowania komentarzy';
+$s_bugnote_order = 'Kolejność sortowania aktywności';
 $s_bugnote_order_asc = 'Rosnąco';
 $s_bugnote_order_desc = 'Malejąco';
 $s_email_on_new = 'List gdy NOWE';
