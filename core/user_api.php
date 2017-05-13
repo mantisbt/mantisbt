@@ -921,7 +921,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
  */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
-	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
+	if( LOGIN_METHOD_LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
@@ -939,7 +939,7 @@ function user_get_email( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
+	if( LOGIN_METHOD_LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
@@ -1588,31 +1588,37 @@ function user_set_default_project( $p_user_id, $p_project_id ) {
 }
 
 /**
- * Set the user's password to the given string, encoded as appropriate
+ * Set the user's password to the given string, encoded as appropriate.
  *
  * @param integer $p_user_id         A valid user identifier.
  * @param string  $p_password        A password to set.
- * @param boolean $p_allow_protected Whether Allow password change to a protected account. This defaults to false.
+ * @param boolean $p_hash_update     If True then protected accounts will be
+ *                                   processed, and the user's sessions will not
+ *                                   be expired (defaults to False).
  * @return boolean always true
  */
-function user_set_password( $p_user_id, $p_password, $p_allow_protected = false ) {
-	if( !$p_allow_protected ) {
+function user_set_password( $p_user_id, $p_password, $p_hash_update = false ) {
+	if( !$p_hash_update ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	# When the password is changed, invalidate the cookie to expire sessions that
-	# may be active on all browsers.
-	$c_cookie_string = auth_generate_unique_cookie_string();
-	# Delete token for password activation if there is any
-	token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
+	$t_query = 'UPDATE {user} SET password=' . db_param();
+	$t_param = array( auth_process_plain_password( $p_password ) );
 
-	$c_password = auth_process_plain_password( $p_password );
+	if( !$p_hash_update ) {
+		# When the password is changed, invalidate the cookie to expire all
+		# active sessions, and delete password activation token if there is any.
+		token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
+
+		$t_query .= ', cookie_string=' . db_param();
+		$t_param[] = auth_generate_unique_cookie_string();
+	}
+
+	$t_query .= ' WHERE id=' . db_param();
+	$t_param[] = (int)$p_user_id;
 
 	db_param_push();
-	$t_query = 'UPDATE {user}
-				  SET password=' . db_param() . ', cookie_string=' . db_param() . '
-				  WHERE id=' . db_param();
-	db_query( $t_query, array( $c_password, $c_cookie_string, (int)$p_user_id ) );
+	db_query( $t_query, $t_param );
 
 	return true;
 }

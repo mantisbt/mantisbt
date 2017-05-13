@@ -14,37 +14,73 @@
 
 				<listitem>
 					<para>Specifies which method will be used to
-					authenticate. It should be one of the following values
-					(defaults to <emphasis>MD5</emphasis>):
+					authenticate. It must be one of the following values
+					(defaults to <emphasis>LOGIN_METHOD_HASH_BCRYPT</emphasis>):
 						<itemizedlist>
 							<listitem>
-								<para>MD5 - user's password is stored as a hash in the database</para>
+								<para><emphasis>LOGIN_METHOD_HASH_BCRYPT</emphasis> -
+									The password is hashed <footnote id="hash">
+										<para>
+											Hashing is performed using PHP's
+											<ulink url="http://php.net/function.password-hash">password_hash()</ulink>
+											function.
+										</para>
+									</footnote>
+									using the CRYPT_BLOWFISH algorithm, and stored in the database.
+								</para>
 							</listitem>
 							<listitem>
-								<para>LDAP - authenticates against an LDAP (or Active Directory) server</para>
+								<para><emphasis>>LOGIN_METHOD_LDAP</emphasis> -
+									authenticates against an LDAP (or Active Directory) server
+								</para>
 							</listitem>
 							<listitem>
-								<para>BASIC_AUTH</para>
+								<para><emphasis>>LOGIN_METHOD_BASIC_AUTH</emphasis></para>
 							</listitem>
 							<listitem>
-								<para>HTTP_AUTH</para>
+								<para><emphasis>>LOGIN_METHOD_HTTP_AUTH</emphasis></para>
 							</listitem>
 						</itemizedlist>
-						In addition, the following deprecated values are supported for backwards-compatibility, and should no longer be used:
+						In addition, the following values are deprecated, and kept
+						for backwards compatibility reasons only. Their use is strongly
+						discouraged for security reasons;
+						<emphasis>LOGIN_METHOD_HASH_BCRYPT</emphasis>
+						should be used instead.
 						<itemizedlist>
 							<listitem>
-								<para>PLAIN - password is stored in plain, unencrypted text in the database</para>
+								<para><emphasis>LOGIN_METHOD_HASH_MD5</emphasis> -
+									user's password is stored as a simple, unsalted hash in the database
+								</para>
 							</listitem>
 							<listitem>
-								<para>CRYPT</para>
+								<para><emphasis>LOGIN_METHOD_PLAIN</emphasis> -
+									password is stored in plain, unencrypted text in the database
+								</para>
 							</listitem>
 							<listitem>
-								<para>CRYPT_FULL_SALT</para>
+								<para><emphasis>LOGIN_METHOD_HASH_CRYPT</emphasis></para>
 							</listitem>
-						</itemizedlist></para>
+							<listitem>
+								<para><emphasis>LOGIN_METHOD_HASH_CRYPT_FULL_SALT</emphasis></para>
+							</listitem>
+						</itemizedlist>
+					</para>
 
-					<para>Note: you may not be able to easily switch encryption methods, so this should be carefully chosen at install time.
-					However, MantisBT will attempt to &quot;fall back&quot; to older methods if possible.</para>
+					<warning>
+						<para>You may not be able to easily switch encryption
+							methods, so this should be carefully chosen at
+							install time.
+						</para>
+					</warning>
+					<note>
+						<para>MantisBT will attempt to &quot;fall back&quot; to older
+							methods if possible, and to convert the DB-stored
+							hashes to the current login method after a successful
+							login, e.g. with default settings, an MD5 hash
+							(LOGIN_METHOD_HASH_MD5) will be upgraded to
+							LOGIN_METHOD_HASH_BCRYPT.
+						</para>
+					</note>
 
 				</listitem>
 			</varlistentry>

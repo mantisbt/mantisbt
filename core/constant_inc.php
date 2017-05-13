@@ -141,13 +141,14 @@ define( 'READ', 201 );
 define( 'UNREAD', 202 );
 
 # login methods
-define( 'PLAIN', 0 );
-define( 'CRYPT', 1 );
-define( 'CRYPT_FULL_SALT', 2 );
-define( 'MD5', 3 );
-define( 'LDAP', 4 );
-define( 'BASIC_AUTH', 5 );
-define( 'HTTP_AUTH', 6 );
+define( 'LOGIN_METHOD_PLAIN', 0 );
+define( 'LOGIN_METHOD_BASIC_AUTH', 5 );
+define( 'LOGIN_METHOD_HTTP_AUTH', 6 );
+define( 'LOGIN_METHOD_LDAP', 4 );
+define( 'LOGIN_METHOD_HASH_CRYPT', 1 );
+define( 'LOGIN_METHOD_HASH_CRYPT_FULL_SALT', 2 );
+define( 'LOGIN_METHOD_HASH_MD5', 3 );
+define( 'LOGIN_METHOD_HASH_BCRYPT', 7 );
 
 # file upload methods
 define( 'DISK', 1 );
@@ -591,8 +592,13 @@ define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 
-# Maximum size for the user's password when storing it as a hash
+# Arbitrary maximum size for the user's password when storing it as a hash.
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
+
+# The CRYPT_BLOWFISH algorithm used by password_hash() will silently truncate
+# passwords to 72 characters, so we limit length when using that algorithm.
+# @see http://php.net/function.crypt
+define( 'PASSWORD_MAX_SIZE_BCRYPT', 72 );
 
 define( 'SECONDS_PER_DAY', 86400 );
 
@@ -603,15 +609,6 @@ define( 'LINKS_NEW_WINDOW', 2 );
 # Auth Related Constants
 define( 'AUTH_COOKIE_LENGTH', 64 );
 define( 'API_TOKEN_LENGTH', 32 );
-
-# Obsolete / deprecated constants
-# Defined below for backwards-compatibility purposes -- Do not use them
-#        Constant                                   # Replaced by
-define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
-define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
-define( 'FTP', 1 );                                 # DISK
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
@@ -693,3 +690,21 @@ define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+
+# KEEP THIS SECTION AT THE END OF THE FILE
+# Obsolete / deprecated constants
+# Defined below for backwards-compatibility purposes -- Do not use them
+#        Constant                                   # Replaced by
+define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
+define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
+define( 'FTP', 1 );                                 # DISK
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+define( 'PLAIN', LOGIN_METHOD_PLAIN );
+define( 'CRYPT', LOGIN_METHOD_HASH_CRYPT );
+define( 'CRYPT_FULL_SALT', LOGIN_METHOD_HASH_CRYPT_FULL_SALT );
+define( 'MD5', LOGIN_METHOD_HASH_MD5 );
+define( 'LDAP', LOGIN_METHOD_LDAP );
+define( 'BASIC_AUTH', LOGIN_METHOD_BASIC_AUTH );
+define( 'HTTP_AUTH', LOGIN_METHOD_HTTP_AUTH );
+define( 'HASH_BCRYPT', LOGIN_METHOD_HASH_BCRYPT );

@@ -44,16 +44,48 @@ check_print_test_row(
 	array( false => 'The crypto_master_salt option needs to be specified in config_inc.php with a minimum string length of 16 characters.' )
 );
 
+# Login method checks
+$t_login_method = config_get_global( 'login_method' );
+$t_switch_to_method = ' You should switch to '
+	. login_method_name( LOGIN_METHOD_HASH_BCRYPT )
+	. ', which is currently the strongest password storage method supported by MantisBT.';
+
+$t_deprecated_login_methods = array( LOGIN_METHOD_HASH_MD5, LOGIN_METHOD_HASH_CRYPT, LOGIN_METHOD_HASH_CRYPT_FULL_SALT, LOGIN_METHOD_PLAIN );
 check_print_test_row(
-	'login_method is not equal to CRYPT_FULL_SALT',
-	config_get_global( 'login_method' ) != CRYPT_FULL_SALT,
-	array( false => 'Login method CRYPT_FULL_SALT has been deprecated and should not be used.' )
+	'Do not use an outdated login method',
+	!in_array( $t_login_method, $t_deprecated_login_methods ),
+	array( false => login_method_name( $t_login_method )
+		. ' has been deprecated and should no longer be used for security reasons. '
+		. $t_switch_to_method
+	)
 );
 
-if( config_get_global( 'login_method' ) != LDAP ) {
+if( $t_login_method != LOGIN_METHOD_LDAP ) {
+	$t_plain_text_login_methods = array( LOGIN_METHOD_PLAIN, LOGIN_METHOD_BASIC_AUTH, LOGIN_METHOD_HTTP_AUTH );
 	check_print_test_warn_row(
-		'login_method is set to MD5',
-		config_get_global( 'login_method' ) == MD5,
-		'MD5 password encryption is currently the strongest password storage method supported by MantisBT.'
+		'Passwords should be stored encrypted in the database',
+		!in_array( $t_login_method, $t_plain_text_login_methods ),
+		login_method_name( $t_login_method )
+		. ' causes passwords to be stored in clear text. '
+		. $t_switch_to_method
 	);
+}
+
+/**
+ * Returns the login method name
+ * @param int $p_method One of the login methods constants
+ * @return string Login method name
+ */
+function login_method_name( $p_method ) {
+	switch( $p_method ) {
+		case LOGIN_METHOD_PLAIN:                return 'LOGIN_METHOD_PLAIN';
+		case LOGIN_METHOD_BASIC_AUTH:           return 'LOGIN_METHOD_BASIC_AUTH';
+		case LOGIN_METHOD_HTTP_AUTH:            return 'LOGIN_METHOD_HTTP_AUTH';
+		case LOGIN_METHOD_HASH_CRYPT:           return 'LOGIN_METHOD_HASH_CRYPT';
+		case LOGIN_METHOD_HASH_CRYPT_FULL_SALT: return 'LOGIN_METHOD_HASH_CRYPT_FULL_SALT';
+		case LOGIN_METHOD_HASH_MD5:             return 'LOGIN_METHOD_HASH_MD5';
+		case LOGIN_METHOD_HASH_BCRYPT:          return 'LOGIN_METHOD_HASH_BCRYPT';
+		case LOGIN_METHOD_LDAP:                 return 'LOGIN_METHOD_LDAP';
+	}
+	return 'UNKNOWN';
 }
