@@ -334,7 +334,9 @@ function auth_prepare_username( $p_username ) {
 
 	switch( config_get( 'login_method' ) ) {
 		case BASIC_AUTH:
-			$t_username = $_SERVER['REMOTE_USER'];
+			if( isset( $_SERVER['REMOTE_USER'] ) ) {
+				$t_username = $_SERVER['REMOTE_USER'];
+			}
 			break;
 		case HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
