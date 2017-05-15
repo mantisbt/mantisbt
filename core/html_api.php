@@ -1581,7 +1581,7 @@ class TableFieldsItem {
 			$p_colspan = 1;
 		}
 		$this->colspan = $p_colspan;
-		$this->atr_class = $p_class;
+		$this->attr_class = $p_class;
 		$this->content_attr_id = $p_content_id;
 		$this->header_attr_id = $p_header_id;
 	}
