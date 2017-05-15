@@ -693,3 +693,10 @@ define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+
+# Databse functional type identifiers.
+define( 'DB_TYPE_UNDEFINED', 0 );
+define( 'DB_TYPE_MYSQL', 1 );
+define( 'DB_TYPE_PGSQL', 2 );
+define( 'DB_TYPE_MSSQL', 3 );
+define( 'DB_TYPE_ORACLE', 4 );
