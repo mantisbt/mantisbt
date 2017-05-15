@@ -534,7 +534,9 @@ function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p
 		$t_note_string .= "\n" . $t_note->note . "\n";
 
 		if ( !empty( $t_output ) ) {
-			$t_output .= "---\n";
+			# Use a marker that doesn't confuse markdown parser.
+			# `---` or `===` would mark previous line as a header.
+			$t_output .= "=-=\n";
 		}
 
 		$t_output .= $t_note_string;
