@@ -147,7 +147,12 @@ do {
 				echo excel_format_plugin_column_value( $t_column, $t_row );
 			} else {
 				$t_function = 'excel_format_' . $t_column;
-				echo $t_function( $t_row );
+				if( function_exists( $t_function ) ) {
+					echo $t_function( $t_row );
+				} else {
+					# field is unknown
+					echo '';
+				}
 			}
 		}
 
