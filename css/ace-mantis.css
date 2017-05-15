@@ -503,6 +503,9 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+.btn-group .single-button-form {
+	margin: 0 1px 0 0;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
