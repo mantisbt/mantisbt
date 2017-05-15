@@ -1401,7 +1401,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  * @see form_security_token()
  * @return void
  */
-function print_form_button( $p_action_page, $p_label, $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
+function print_form_button( $p_action_page, $p_label, array $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
 	$t_form_name = explode( '.php', $p_action_page, 2 );
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
@@ -1412,18 +1412,14 @@ function print_form_button( $p_action_page, $p_label, $p_args_to_post = null, $p
 		echo form_security_field( $t_form_name[0], $p_security_token );
 	}
 	if( $p_class !== '') {
-		echo '<input type="submit" class="' . $p_class . '" value="', $p_label, '" />';
+		$t_class = $p_class;
 	} else {
-		echo '<input type="submit" class="btn btn-primary btn-xs btn-white btn-round" value="', $p_label, '" />';
+		$t_class = 'btn btn-primary btn-xs btn-white btn-round';
 	}
-
-	if( $p_args_to_post !== null ) {
-		foreach( $p_args_to_post as $t_var => $t_value ) {
-			echo '<input type="hidden" name="' . $t_var .
-				'" value="' . htmlentities( $t_value ) . '" />';
-		}
+	echo '<button type="submit" class="' . $t_class . '">' . $p_label . '</button>';
+	if( $p_args_to_post ) {
+		print_hidden_inputs( $p_args_to_post );
 	}
-
 	echo '</fieldset>';
 	echo '</form>';
 }
