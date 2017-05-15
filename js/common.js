@@ -378,6 +378,21 @@ $(document).ready( function() {
 	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
 		$(this).find(".dropdown-menu li.active a").focus();
 	 });
+
+	/**
+	 * Manage visiblity on hover trigger objects
+	 */
+	if( $('.visible-on-hover-toggle').length ) {
+		$('.visible-on-hover-toggle').hover(
+			function(e){ // handlerIn
+				$(e.currentTarget).find('.visible-on-hover').removeClass('invisible');
+			},
+			function(e){ // handlerOut
+				$(e.currentTarget).find('.visible-on-hover').addClass('invisible');
+			}
+		);
+		$('.visible-on-hover').addClass('invisible');
+	}
 });
 
 function setBugLabel() {

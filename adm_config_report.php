@@ -426,7 +426,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 ?>
 <!-- Repeated Info Rows -->
-			<tr>
+			<tr class="visible-on-hover-toggle">
 				<td>
 					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 				</td>
@@ -439,7 +439,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 	if( $t_read_write_access ) {
 ?>
 <td class="center">
-	<div class="btn-group inline">
+	<div class="btn-group inline visible-on-hover">
 <?php
 		if( config_can_delete( $v_config_id ) ) {
 			# Update button (will populate edit form at page bottom)
