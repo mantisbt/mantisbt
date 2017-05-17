@@ -17,9 +17,8 @@
 		<varlistentry>
 			<term>$g_filter_custom_fields_per_row</term>
 			<listitem>
-				<para>The number of custom fields to display per row.
+				<para>The number of filter fields to display per row.
 					The default is 8.
-					The value should be greater than or equal to 8.
 				</para>
 			</listitem>
 		</varlistentry>

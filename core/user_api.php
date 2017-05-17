@@ -1397,14 +1397,27 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 
 	$t_view_all_cookie_id = filter_db_get_project_current( $t_project_id, $p_user_id );
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id, $p_user_id );
-	$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
 
-	if( !isset( $t_cookie_detail[1] ) ) {
+	$t_filter = filter_deserialize( $t_view_all_cookie );
+	if( !$t_filter ) {
 		return filter_get_default();
 	}
 
-	$t_filter = json_decode( $t_cookie_detail[1], true );
-
+	# when the user specific filter references a stored filter id, get that filter instead
+	if( isset( $t_filter['_source_query_id'] ) && $t_view_all_cookie_id != $t_filter['_source_query_id'] ) {
+		$t_source_query_id = $t_filter['_source_query_id'];
+		# check if filter id is a proper stored filter, and is accesible
+		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
+			# the actual stored filter can be retrieved
+			$t_filter_row = filter_cache_row( $t_source_query_id, /* trigger_errors */ false );
+			$t_filter = filter_deserialize( filter_db_get_filter( $t_source_query_id ) );
+			# update the referenced stored filter id
+			$t_filter['_source_query_id'] = $t_source_query_id;
+		} else {
+			# If the filter id is not valid, clean the referenced filter id
+			unset( $t_filter['_source_query_id'] );
+		}
+	}
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
 	return $t_filter;
