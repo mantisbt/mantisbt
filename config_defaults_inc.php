@@ -4142,15 +4142,6 @@ $g_show_timer = OFF;
 $g_show_memory_usage = OFF;
 
 /**
- * This is used for debugging the e-mail features in mantis. By default this is blank.
- * This can be set to a valid email address when diagnosing problems with emails.
- * All e-mails are sent to this address with the original To, Cc, Bcc included in the message body.
- * Note: The email is NOT send to the recipients, only to the debug email address.
- * @global string $g_debug_email
- */
-$g_debug_email = '';
-
-/**
  * Shows the total number/unique number of queries executed to serve the page.
  *
  * @global integer $g_show_queries_count
@@ -4293,7 +4284,7 @@ $g_global_settings = array(
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
-	'stop_on_errors', 'version_suffix', 'debug_email',
+	'stop_on_errors', 'version_suffix',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
 	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
