@@ -379,7 +379,11 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		if( false !== $t_user_id ) {
 
-			$t_fields_to_update = array('password' => md5( $p_password ));
+			$t_fields_to_update = array();
+			# Do we need to wipe a previously cached password?
+			if( substr( user_get_field( $t_user_id, 'password' ), 0, 1) != '!' ) {
+				user_set_field( 'password', '!' + auth_generate_random_password() );
+			}
 
 			if( ON == config_get( 'use_ldap_realname' ) ) {
 				$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
