@@ -3615,7 +3615,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
 			?>
 			<form method="get" action="permalink_page.php">
-				<?php # CSRF protection not required here - form does not result in modifications ?>
+                <?php # Add CSRF protection, see #22702
+                echo form_security_field( 'permalink' );
+                ?>
 				<input type="hidden" name="url" value="<?php echo urlencode( filter_get_url( $t_filter ) ) ?>" />
 				<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'create_filter_link' ) ?>" />
 			</form>

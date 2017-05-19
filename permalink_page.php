@@ -36,6 +36,7 @@
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
+require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
@@ -43,7 +44,10 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
+form_security_validate( 'permalink' );
+
 html_page_top();
+
 
 access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
@@ -64,4 +68,5 @@ if( !is_blank( $t_create_short_url ) ) {
 ?>
 </div>
 <?php
+form_security_purge( 'permalink' );
 html_page_bottom();
