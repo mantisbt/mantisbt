@@ -1026,7 +1026,7 @@ function layout_breadcrumbs() {
 	echo '<ul class="breadcrumb">' , "\n";
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
-		if( isset( $_SERVER['QUERY_STRING'] ) ) {
+		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] )) {
 			$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 		}
 
