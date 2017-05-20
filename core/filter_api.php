@@ -2451,8 +2451,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 
 							if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+								# Add CSRF protection, see #22702
+								$t_permalink_url = urlencode( filter_get_url( $t_filter ) )
+									. form_security_param( 'permalink' );
 								echo '<li>';
-								echo '<a href="permalink_page.php?url=' . urlencode( filter_get_url( $t_filter ) ) . '">';
+								echo '<a href="permalink_page.php?url=' . $t_permalink_url . '">';
 								echo '<i class="ace-icon fa fa-link"></i>&#160;&#160;' . lang_get( 'create_filter_link' );
 								echo '</a>';
 								echo '</li>';
