@@ -45,6 +45,7 @@
  * @author Eleferen
  * @author Eroha
  * @author EugeneZelenko
+ * @author Facenapalm
  * @author Ferrer
  * @author Iniquity
  * @author Irus
@@ -604,6 +605,7 @@ $s_issue_reporter = 'Инициатор';
 $s_issue_handler = 'Ответственный';
 $s_users_added_bugnote = 'Комментаторы';
 $s_category_assigned_to = 'Владелец категории';
+$s_email_notify_users = 'Любой пользователь с уровнем доступа';
 $s_change_configuration = 'Изменить настройки';
 $s_message = 'Уведомление';
 $s_default_notify = 'Установка флагов уведомления по умолчанию в';
@@ -634,6 +636,7 @@ $s_desc_bug_closed_status_threshold = 'Состояние, когда задач
 $s_workflow_change_access_label = 'Кто может изменять процесс:';
 $s_access_change_access_label = 'Кто может изменять уровни доступа:';
 $s_default_not_in_flow = 'Состояние по умолчанию для %1$s не указано среди последующих состояний %2$s. Оно будет игнорироваться.';
+$s_allowed_access_levels = 'Разрешено для любого пользователя с уровнем доступа';
 $s_assign_issue = 'Назначить задачу';
 $s_allow_reporter_close = 'Разрешить инициатору закрывать задачу';
 $s_allow_reporter_reopen = 'Разрешить инициатору переоткрывать задачу';
