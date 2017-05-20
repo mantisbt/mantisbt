@@ -567,7 +567,7 @@ function db_insert_id( $p_table = null, $p_field = 'id' ) {
 		}
 		if( isset( $t_query ) ) {
 			$t_result = db_query( $t_query );
-			return db_result( $t_result );
+			return (int)db_result( $t_result );
 		}
 	}
 	return $g_db->Insert_ID();
