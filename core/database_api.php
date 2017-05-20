@@ -551,23 +551,24 @@ function db_result( $p_result, $p_row_index = 0, $p_col_index = 0 ) {
  * @return integer last successful insert id
  */
 function db_insert_id( $p_table = null, $p_field = 'id' ) {
-	global $g_db;
+	global $g_db, $g_db_functional_type;
 
 	if( isset( $p_table ) ) {
-		if( db_is_oracle() ) {
-			$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
-		} elseif( db_is_pgsql() ) {
-			$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+		switch( $g_db_functional_type ) {
+			case DB_TYPE_ORACLE:
+				$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
+				break;
+			case DB_TYPE_PGSQL:
+				$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+				break;
+			case DB_TYPE_MSSQL:
+				$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
+				break;
 		}
 		if( isset( $t_query ) ) {
 			$t_result = db_query( $t_query );
 			return db_result( $t_result );
 		}
-	}
-	if( db_is_mssql() ) {
-		$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
-		$t_result = db_query( $t_query );
-		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
 }
