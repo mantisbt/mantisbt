@@ -144,6 +144,12 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 		$t_strike_start = $t_strike_end = '';
 	}
 
+	// Put in bold issues that have a significant priority
+	if( bug_has_significant_priority( $p_issue_id ) ) {
+		$t_strike_start = "<span class=\"bold\">$t_strike_start";
+		$t_strike_end = "$t_strike_end</span>";
+	}
+
 	if( $t_bug->category_id ) {
 		$t_category_name = category_get_name( $t_bug->category_id );
 	} else {

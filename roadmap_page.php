@@ -276,7 +276,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_query = 'SELECT sbt.*, {bug_relationship}.source_bug_id, dbt.target_version as parent_version FROM {bug} sbt
 					LEFT JOIN {bug_relationship} ON sbt.id={bug_relationship}.destination_bug_id AND {bug_relationship}.relationship_type=2
 					LEFT JOIN {bug} dbt ON dbt.id={bug_relationship}.source_bug_id
-					WHERE sbt.project_id=' . db_param() . ' AND sbt.target_version=' . db_param() . ' ORDER BY sbt.status ASC, sbt.last_updated DESC';
+					WHERE sbt.project_id=' . db_param() . ' AND sbt.target_version=' . db_param() . ' ORDER BY sbt.status ASC, sbt.priority DESC';
 
 		$t_description = $t_version_row['description'];
 
