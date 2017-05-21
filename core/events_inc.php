@@ -143,4 +143,22 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+	# Core API events for Bug create and update
+	'EVENT_BUG_CREATE_PRE' => EVENT_TYPE_EXECUTE,
+	'EVENT_BUG_CREATE_POST' => EVENT_TYPE_EXECUTE,
+	'EVENT_BUG_UPDATE_PRE' => EVENT_TYPE_EXECUTE,
+	'EVENT_BUG_UPDATE_POST' => EVENT_TYPE_EXECUTE,
 ) );
+
+/**
+ * Declares deprecated events as an array of:
+ * 'EVENT_xxx' => 'replacement_suggestion'
+ * String value will be used as part of an ERROR_DEPRECATED_SUPERSEDED warning message
+ */
+$g_event_deprecated = array(
+	'EVENT_REPORT_BUG_DATA' => 'EVENT_BUG_CREATE_PRE',
+	'EVENT_REPORT_BUG' => 'EVENT_BUG_CREATE_POST',
+	'EVENT_UPDATE_BUG_DATA' => 'EVENT_BUG_UPDATE_PRE',
+	'EVENT_UPDATE_BUG' => 'EVENT_BUG_UPDATE_POST',
+);

@@ -254,6 +254,12 @@ class BugData {
 	private $loading = false;
 
 	/**
+	 * an array of tuples: ( 'func' => callable, 'params' => array )
+	 * to be used as callbacks on the update process
+	 */
+	private $update_callbacks = array();
+
+	/**
 	 * return number of file attachment's linked to current bug
 	 * @return integer
 	 */
@@ -474,8 +480,6 @@ class BugData {
 	 * @uses lang_api.php
 	 */
 	function create() {
-		self::validate( true );
-
 		antispam_check();
 
 		# check due_date format
@@ -490,25 +494,8 @@ class BugData {
 			$this->last_updated = db_now();
 		}
 
-		# Insert text information
-		db_param_push();
-		$t_query = 'INSERT INTO {bug_text}
-					    ( description, steps_to_reproduce, additional_information )
-					  VALUES
-					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
-
-		# Get the id of the text information we just inserted
-		# NOTE: this is guaranteed to be the correct one.
-		# The value LAST_INSERT_ID is stored on a per connection basis.
-
-		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
-
 		# check to see if we want to assign this right off
-		$t_starting_status  = config_get( 'bug_submit_status' );
-		$t_original_status = $this->status;
-
-		# if not assigned, check if it should auto-assigned.
+		# if not assigned, check if it should auto-assigned by category.
 		if( 0 == $this->handler_id ) {
 			# if a default user is associated with the category and we know at this point
 			# that that the bug was not assigned to somebody, then assign it automatically.
@@ -522,8 +509,27 @@ class BugData {
 			}
 		}
 
-		# Check if bug was pre-assigned or auto-assigned.
-		$t_status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
+		# Get modified status for auto-assign option if applicable
+		$t_original_status = $this->status;
+		$this->status = bug_get_status_for_assign( NO_USER, $this->handler_id, $this->status);
+
+		event_signal( 'EVENT_BUG_CREATE_PRE', array( $this ) );
+
+		self::validate( true );
+
+		# Insert text information
+		db_param_push();
+		$t_query = 'INSERT INTO {bug_text}
+					    ( description, steps_to_reproduce, additional_information )
+					  VALUES
+					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+		db_query( $t_query, array( $this->description, $this->steps_to_reproduce, $this->additional_information ) );
+
+		# Get the id of the text information we just inserted
+		# NOTE: this is guaranteed to be the correct one.
+		# The value LAST_INSERT_ID is stored on a per connection basis.
+
+		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
 
 		# Insert the rest of the data
 		db_param_push();
@@ -544,7 +550,13 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id,
+			$this->duplicate_id, $this->priority, $this->severity, $this->reproducibility,
+			$this->status, $this->resolution, $this->projection, $this->category_id,
+			$this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os,
+			$this->os_build, $this->platform, $this->version, $this->build, $this->profile_id,
+			$this->summary, $this->view_state, $this->sponsorship_total, $this->sticky,
+			$this->fixed_in_version, $this->target_version, $this->due_date ) );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -552,8 +564,17 @@ class BugData {
 		history_log_event_special( $this->id, NEW_BUG );
 
 		# log changes, if any (compare happens in history_log_event_direct)
-		history_log_event_direct( $this->id, 'status', $t_original_status, $t_status );
+		history_log_event_direct( $this->id, 'status', $t_original_status, $this->status );
 		history_log_event_direct( $this->id, 'handler_id', 0, $this->handler_id );
+
+		# Execute all registered update callbacks
+		while( !empty( $this->update_callbacks ) ) {
+			$t_callback = array_shift( $this->update_callbacks );
+			call_user_func_array( $t_callback['func'], $t_callback['params'] );
+		}
+
+		# Allow plugins to post-process bug data with the new bug ID
+		event_signal( 'EVENT_BUG_CREATE_POST', array( $this ) );
 
 		return $this->id;
 	}
@@ -621,15 +642,17 @@ class BugData {
      * @access public
 	 */
 	function update( $p_update_extended = false, $p_bypass_mail = false ) {
-		self::validate( $p_update_extended );
-
-		$c_bug_id = $this->id;
 
 		if( is_blank( $this->due_date ) ) {
 			$this->due_date = date_get_null();
 		}
 
 		$t_old_data = bug_get( $this->id, true );
+
+		event_signal( 'EVENT_BUG_UPDATE_PRE', array( $this, $t_old_data ) );
+		$c_bug_id = $this->id;
+
+		$this->validate( $p_update_extended );
 
 		# Update all fields
 		# Ignore date_submitted and last_updated since they are pulled out
@@ -711,7 +734,12 @@ class BugData {
 		history_log_event_direct( $c_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $this->sponsorship_total );
 		history_log_event_direct( $c_bug_id, 'sticky', $t_old_data->sticky, $this->sticky );
 
-		history_log_event_direct( $c_bug_id, 'due_date', ( $t_old_data->due_date != date_get_null() ) ? $t_old_data->due_date : null, ( $this->due_date != date_get_null() ) ? $this->due_date : null );
+		history_log_event_direct(
+				$c_bug_id,
+				'due_date',
+				( $t_old_data->due_date != date_get_null() ) ? $t_old_data->due_date : null,
+				( $this->due_date != date_get_null() ) ? $this->due_date : null
+				);
 
 		# Update extended info if requested
 		if( $p_update_extended ) {
@@ -766,22 +794,41 @@ class BugData {
 			# If handler changes, send out owner change email
 			if( $t_old_data->handler_id != $this->handler_id ) {
 				email_owner_changed( $c_bug_id, $t_old_data->handler_id, $this->handler_id );
-				return true;
-			}
-
-			# status changed
-			if( $t_old_data->status != $this->status ) {
+			} elseif( $t_old_data->status != $this->status ) {
+				# status changed
 				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
 				email_bug_status_changed( $c_bug_id, $t_status );
-				return true;
+			} else {
+				# @todo handle priority change if it requires special handling
+				email_bug_updated( $c_bug_id );
 			}
-
-			# @todo handle priority change if it requires special handling
-			email_bug_updated( $c_bug_id );
 		}
 
+		# Execute all registered update callbacks
+		while( !empty( $this->update_callbacks ) ) {
+			$t_callback = array_shift( $this->update_callbacks );
+			call_user_func_array( $t_callback['func'], $t_callback['params'] );
+		}
+
+		event_signal( 'EVENT_BUG_UPDATE_POST', array( $this, $t_old_data ) );
+
 		return true;
+	}
+
+	/**
+	 * Add a callable item to the callback queue, which is executed after BugData update.
+	 * @param callable	A callable item, in any form of the PHP Callable interface
+	 * @param array $p_params	Params to be used with the callable item
+	 */
+	function add_update_callback( callable $p_callable, array $p_params = null ) {
+		if( null === $p_params ) {
+			$p_params = array();
+		}
+		$t_callback = array();
+		$t_callback['func'] = $p_callable;
+		$t_callback['params'] = $p_params;
+		$this->update_callbacks[] = $t_callback;
 	}
 }
 
@@ -1304,20 +1351,15 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
-	# Attempt to move disk based attachments to new project file directory.
-	file_move_bug_attachments( $p_bug_id, $p_target_project_id );
-
-	# Move the issue to the new project.
-	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
-
-	# Update the category if needed
-	$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->project_id = $p_target_project_id;
+	$t_category_id = $t_bugdata->category_id;
 
 	# Bug has no category
 	if( $t_category_id == 0 ) {
 		# Category is required in target project, set it to default
 		if( ON != config_get( 'allow_no_category', null, null, $p_target_project_id ) ) {
-			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves', null, null, $p_target_project_id ) );
+			$t_bugdata->category_id = config_get( 'default_category_for_moves', null, null, $p_target_project_id );
 		}
 	} else {
 		# Check if the category is global, and if not attempt mapping it to the new project
@@ -1333,9 +1375,15 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 				# Use target project's default category for moves, since there is no match by name.
 				$t_target_project_category_id = config_get( 'default_category_for_moves', null, null, $p_target_project_id );
 			}
-			bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
+			$t_bugdata->category_id = $t_target_project_category_id;
 		}
 	}
+
+	# Attempt to move disk based attachments to new project file directory.
+	$t_bugdata->add_update_callback( file_move_bug_attachments, array( $t_bugdata->id, $t_bugdata->project_id ) );
+
+	# @TODO email is bypassed, add a notification for MOVE
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 }
 
 /**
@@ -1817,37 +1865,33 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	if( ( $p_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
 		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_original_handler_id = $t_bugdata->handler_id;
+	$t_original_status = $t_bugdata->status;
+	$t_bugdata->handler_id = $p_user_id;
 
-	# extract current information into history variables
-	$h_status = bug_get_field( $p_bug_id, 'status' );
-	$h_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+	$t_assigned_status = bug_get_status_for_assign( $t_original_handler_id, $t_bugdata->handler_id, $t_original_status );
+	$t_bugdata->status = $t_assigned_status;
 
-	$t_ass_val = bug_get_status_for_assign( $h_handler_id, $p_user_id, $h_status );
+	# callback for history logging:
+	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'status', $t_original_status, $t_bugdata->status ) );
+	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'handler_id', $t_original_handler_id, $t_bugdata->handler_id ) );
 
-	if( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
+	# callback for note add
+	if( !empty($p_bugnote_text) ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, 0, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
 
-		# get user id
-		db_param_push();
-		$t_query = 'UPDATE {bug}
-					  SET handler_id=' . db_param() . ', status=' . db_param() . '
-					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_user_id, $t_ass_val, $p_bug_id ) );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
-		# log changes
-		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_ass_val );
-		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
-
-		# Add bugnote if supplied ignore false return
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-
-		# updated the last_updated date
-		bug_update_date( $p_bug_id );
-
-		bug_clear_cache( $p_bug_id );
-
+	if( $t_original_handler_id != $t_bugdata->handler_id) {
 		# Send email for change of handler
-		email_owner_changed( $p_bug_id, $h_handler_id, $p_user_id );
+		email_owner_changed( $t_bugdata->id, $t_original_handler_id, $t_bugdata->handler_id );
 	}
 
 	return true;
@@ -1865,13 +1909,33 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# Add bugnote if supplied ignore a false return
-	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-	# Error condition stopped execution but status had already been changed
-	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
-	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	# @TODO
+	# If time tracking is enabled, this code is executed outside of BugData validation.
+	# These time tracking dependencies should be removed
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled ) {
+		# Add bugnote if supplied ignore a false return
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	}
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
+	$t_bugdata = bug_get( $p_bug_id );
+	$t_bugdata->status = config_get( 'bug_closed_status_threshold' );
+
+	# If time tracking is disabled, the bug note is added as a callback after validation
+	# This is the proper way.
+	if( OFF == $t_time_tracking_enabled ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
+
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_close( $p_bug_id );
 	email_relationship_child_closed( $p_bug_id );
@@ -1896,69 +1960,85 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$c_resolution = (int)$p_resolution;
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# Add bugnote if supplied
-	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-	# Error condition stopped execution but status had already been changed
-	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
-	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	# @TODO
+	# If time tracking is enabled, this code is executed outside of BugData validation.
+	# These time tracking dependencies should be removed
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled ) {
+		# Add bugnote if supplied
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	}
+
+	$t_bugdata = bug_get( $p_bug_id );
+
+	$t_bugdata->status = config_get( 'bug_resolved_status_threshold' );
+	$t_bugdata->fixed_in_version = $p_fixed_in_version;
+	$t_bugdata->resolution = $c_resolution;
+
+	$t_old_handler_id = $t_bugdata->handler_id;
+	# only set handler if specified explicitly or if bug was not assigned to a handler
+	if( null == $p_handler_id ) {
+		if( $t_bugdata->handler_id == 0 ) {
+			$t_bugdata->handler_id = auth_get_current_user_id();
+		}
+	} else {
+		$t_bugdata->handler_id = $p_handler_id;
+	}
+
+	# If time tracking is disabled, the bug note is added as a callback after validation
+	# This is the proper way.
+	if( OFF == $t_time_tracking_enabled ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
 		if( $p_bug_id == $p_duplicate_id ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
-
 			# never returns
 		}
-
 		# the related bug exists...
 		bug_ensure_exists( $p_duplicate_id );
+		$t_bugdata->duplicate_id = $p_duplicate_id;
+
+		# create callbacks for duplicate bug actions:
 
 		# check if there is other relationship between the bugs...
 		$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
-		 if( $t_id_relationship > 0 ) {
+		if( $t_id_relationship > 0 ) {
 			# Update the relationship
-			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
+			$t_bugdata->add_update_callback( 'relationship_update', array( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE ) );
 			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
+			$t_bugdata->add_update_callback( 'history_log_event_special', array( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id ) );
+			$t_bugdata->add_update_callback( 'history_log_event_special', array( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id ) );
 		} else if( $t_id_relationship != -1 ) {
 			# Add the new relationship
-			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
+			$t_bugdata->add_update_callback( 'relationship_add', array( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE ) );
 			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
+			$t_bugdata->add_update_callback( 'history_log_event_special', array( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id ) );
+			$t_bugdata->add_update_callback( 'history_log_event_special', array( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id ) );
 		} # else relationship is -1 - same type exists, do nothing
 
 		# Copy list of users monitoring the duplicate bug to the original bug
-		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-		$t_old_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-		if( user_exists( $t_old_reporter_id ) ) {
-			bug_monitor( $p_duplicate_id, $t_old_reporter_id );
+		if( user_exists( $t_bugdata->reporter_id ) ) {
+			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_bugdata->reporter_id ) );
 		}
 		if( user_exists( $t_old_handler_id ) ) {
-			bug_monitor( $p_duplicate_id, $t_old_handler_id );
+			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_old_handler_id ) );
 		}
-		bug_monitor_copy( $p_bug_id, $p_duplicate_id );
-
-		bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
+		$t_bugdata->add_update_callback( 'bug_monitor_copy', array( $p_bug_id, $p_duplicate_id ) );
 	}
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
-	bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
-	bug_set_field( $p_bug_id, 'resolution', $c_resolution );
-
-	# only set handler if specified explicitly or if bug was not assigned to a handler
-	if( null == $p_handler_id ) {
-		if( bug_get_field( $p_bug_id, 'handler_id' ) == 0 ) {
-			$p_handler_id = auth_get_current_user_id();
-			bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
-		}
-	} else {
-		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
-	}
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_resolved( $p_bug_id );
 	email_relationship_child_resolved( $p_bug_id );
@@ -1982,14 +2062,34 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# Add bugnote if supplied
-	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-	# Error condition stopped execution but status had already been changed
-	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', null, false );
-	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	# @TODO
+	# If time tracking is enabled, this code is executed outside of BugData validation.
+	# These time tracking dependencies should be removed
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled ) {
+		# Add bugnote if supplied ignore a false return
+		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
+		# Error condition stopped execution but status had already been changed
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	}
 
-	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
-	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
+	$t_bugdata = bug_get( $p_bug_id );
+
+	# If time tracking is disabled, the bug note is added as a callback after validation
+	# This is the proper way.
+	if( OFF == $t_time_tracking_enabled ) {
+		$add_bugnote_func = function( array $p_bugnote_params ) {
+			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
+			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		};
+		$t_bugnote_params = array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
+		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	}
+
+	$t_bugdata->status = config_get( 'bug_reopen_status' );
+	$t_bugdata->resolution = config_get( 'bug_reopen_resolution' );
+	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
 	email_bug_reopened( $p_bug_id );
 
