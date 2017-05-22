@@ -67,6 +67,9 @@ $g_request_time = microtime( true );
 
 ob_start();
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+
 # Load supplied constants
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 

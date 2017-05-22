@@ -196,11 +196,7 @@ function email_ensure_valid( $p_email ) {
  * @return boolean
  */
 function email_is_disposable( $p_email ) {
-	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable/disposable.php' );
-	}
-
-	return DisposableEmailChecker::is_disposable_email( $p_email );
+	return \VBoctor\Email\DisposableEmailChecker::is_disposable_email( $p_email );
 }
 
 /**

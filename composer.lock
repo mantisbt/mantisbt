@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "03a882052f1704dd022892733868bc05",
+    "content-hash": "26ff228672a9b68bd49a995e65e0d827",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -473,6 +473,50 @@
                 "router"
             ],
             "time": "2017-03-19T17:55:20+00:00"
+        },
+        {
+            "name": "vboctor/disposable_email_checker",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vboctor/disposable_email_checker.git",
+                "reference": "7a4a437082a3c5501d1199785be7a36b0d8b5106"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vboctor/disposable_email_checker/zipball/7a4a437082a3c5501d1199785be7a36b0d8b5106",
+                "reference": "7a4a437082a3c5501d1199785be7a36b0d8b5106",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VBoctor\\Email\\": "php/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Boctor",
+                    "email": "victor@mantishub.net"
+                }
+            ],
+            "description": "Library to detect disposable email addresses",
+            "keywords": [
+                "disposable",
+                "email",
+                "signup"
+            ],
+            "time": "2017-05-22T02:13:58+00:00"
         }
     ],
     "packages-dev": [],

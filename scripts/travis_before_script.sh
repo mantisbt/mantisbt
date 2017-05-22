@@ -130,6 +130,9 @@ chmod 777 config
 #  wait until server is up
 sleep 10
 
+# -----------------------------------------------------------------------------
+step "Install Composer Components"
+composer install
 
 # -----------------------------------------------------------------------------
 step "MantisBT Installation"

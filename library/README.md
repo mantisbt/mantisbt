@@ -10,7 +10,6 @@ The version and status of each is summarized below:
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
 adodb           | adodb           | 5.20.9    | unpatched [1]
-disposable      | disposable      | 2.1.1     | unpatched [1]
 parsedown       | parsedown       | 1.6.1     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.22    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
@@ -47,7 +46,6 @@ Upstream projects
 project         | URL
 ----------------|--------------------------------------------------------------------
 adodb           | http://adodb.sourceforge.net/ - https://github.com/ADOdb/ADOdb
-disposable      | http://github.com/vboctor/disposable_email_checker
 parsedown       | https://github.com/erusev/parsedown
 phpmailer       | https://github.com/PHPMailer/PHPMailer
 rssbuilder      | http://code.google.com/p/flaimo-php/
