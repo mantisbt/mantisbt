@@ -4,7 +4,8 @@
     "type": "project",
     "require": {
         "slim/slim": "^3.0",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "vboctor/disposable_email_checker": "^3.0"
     },
     "license": "GPL v2",
     "authors": [
