@@ -134,6 +134,48 @@ function csv_get_columns() {
 }
 
 /**
+ * Gets the formatted value for the specified issue id, project and custom field.
+ * @param integer $p_issue_id     The issue id.
+ * @param integer $p_project_id   The project id.
+ * @param string  $p_custom_field The custom field name (without 'custom_' prefix).
+ * @return string The custom field value.
+ */
+function csv_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field ) {
+	$t_field_id = custom_field_get_id_from_name( $p_custom_field );
+
+	if( $t_field_id === false ) {
+		$t_value = '@' . $p_custom_field . '@';
+	} else if( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
+		$t_def = custom_field_get_definition( $t_field_id );
+		$t_value = string_custom_field_value( $t_def, $t_field_id, $p_issue_id );
+	} else {
+		# field is not linked to project
+		$t_value = '';
+	}
+
+	return csv_escape_string( $t_value );
+}
+
+/**
+ * Gets the formatted value for the specified plugin column value.
+ * @param string  $p_column The plugin column name.
+ * @param BugData $p_bug    A bug object to print the column for - needed for the display function of the plugin column.
+ * @return string The plugin column value.
+ */
+function csv_format_plugin_column_value( $p_column, BugData $p_bug ) {
+	$t_plugin_columns = columns_get_plugin_columns();
+
+	if( !isset( $t_plugin_columns[$p_column] ) ) {
+		$t_value = '';
+	} else {
+		$t_column_object = $t_plugin_columns[$p_column];
+		$t_value = $t_column_object->value( $p_bug );
+	}
+
+	return csv_escape_string( $t_value );
+}
+
+/**
  * returns the formatted bug id
  * @param BugData $p_bug A BugData object.
  * @return string csv formatted bug id

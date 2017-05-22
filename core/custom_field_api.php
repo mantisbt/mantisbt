@@ -1430,11 +1430,13 @@ function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
 	if( $t_custom_field_value === null ) {
 		return '';
 	}
+
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value );
 	}
-	return string_display_links( $t_custom_field_value );
+
+	return $t_custom_field_value;
 }
 
 /**
@@ -1447,7 +1449,17 @@ function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
  * @access public
  */
 function print_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
-	echo string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
+	$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
+	if( $t_custom_field_value === null ) {
+		return;
+	}
+
+	global $g_custom_field_type_definition;
+	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_print_value'] ) ) {
+		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_print_value'], $t_custom_field_value );
+	}
+
+	echo string_display_line_links( $t_custom_field_value );
 }
 
 /**
