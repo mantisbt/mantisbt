@@ -40,8 +40,6 @@ define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_DAY', 'end_day' );
 define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH', 'end_month' );
 define( 'FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR', 'end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED', 'filter_by_date' ); #do_filter_by_date
-define( 'FILTER_PROPERTY_START_DATE_SUBMITTED', 'filter_by_start_date' );
-define( 'FILTER_PROPERTY_END_DATE_SUBMITTED', 'filter_by_end_date' );
 
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_DAY', 'last_updated_start_day' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_START_MONTH', 'last_updated_start_month' );
@@ -50,8 +48,6 @@ define( 'FILTER_PROPERTY_LAST_UPDATED_END_DAY', 'last_updated_end_day' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_MONTH', 'last_updated_end_month' );
 define( 'FILTER_PROPERTY_LAST_UPDATED_END_YEAR', 'last_updated_end_year' );
 define( 'FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE', 'filter_by_last_updated_date' ); #do_filter_by_last_updated_date
-define( 'FILTER_PROPERTY_LAST_UPDATED_START_DATE', 'last_updated_start_date' );
-define( 'FILTER_PROPERTY_LAST_UPDATED_END_DATE', 'last_updated_end_date' );
 
 define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
 define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );

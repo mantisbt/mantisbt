@@ -104,7 +104,7 @@ $u_email = user_get_email( $u_id );
 # If the password is the default password, then prompt user to change it.
 $t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );
 
-$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_can_change_password = auth_can_set_password();
 $t_force_pw_reset = false;
 
 # Only show the update button if there is something to update.
@@ -162,7 +162,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo lang_get( 'password' ) ?>
 				</td>
 				<td>
-					<?php echo lang_get( 'no_password_change' ) ?>
+					<?php echo auth_password_managed_elsewhere_message() ?>
 				</td>
 			</tr><?php
 			} else {

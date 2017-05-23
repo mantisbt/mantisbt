@@ -140,7 +140,7 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
  * @param integer $p_issue_id Issue id.
  * @param array   $p_tags     Array of tags.
  * @param integer $p_user_id  User id.
- * @return void
+ * @return void|RestFault|SoapFault
  */
 function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	$t_tag_ids_to_attach = array();
@@ -156,21 +156,37 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	foreach( $p_tags as $t_tag ) {
 		$t_tag = ApiObjectFactory::objectToArray( $t_tag );
 
-		$t_submitted_tag_ids[] = $t_tag['id'];
+		if( isset( $t_tag['id'] ) ) {
+			$t_tag_id = $t_tag['id'];
+			if( !tag_exists( $t_tag_id ) ) {
+				return ApiObjectFactory::faultNotFound( "Tag with id $t_tag_id not found." );
+			}
+		} else if( isset( $t_tag['name'] ) ) {
+			$t_tag = tag_get_by_name( $t_tag['name'] );
+			if( $t_tag === false ) {
+				return ApiObjectFactory::faultNotFound( "Tag {$t_tag['name']} not found." );
+			}
 
-		if( in_array( $t_tag['id'], $t_attached_tag_ids ) ) {
-			continue;
+			$t_tag_id = $t_tag['id'];
 		} else {
-			$t_tag_ids_to_attach[] = $t_tag['id'];
+			return ApiObjectFactory::faultBadRequest( "Tag without id or name." );
 		}
+
+		$t_submitted_tag_ids[] = $t_tag_id;
+
+		if( in_array( $t_tag_id, $t_attached_tag_ids ) ) {
+			continue;
+		}
+
+		$t_tag_ids_to_attach[] = $t_tag_id;
 	}
 
 	foreach( $t_attached_tag_ids as $t_attached_tag_id ) {
 		if( in_array( $t_attached_tag_id, $t_submitted_tag_ids ) ) {
 			continue;
-		} else {
-			$t_tag_ids_to_detach[] = $t_attached_tag_id;
 		}
+
+		$t_tag_ids_to_detach[] = $t_attached_tag_id;
 	}
 
 	foreach( $t_tag_ids_to_detach as $t_tag_id ) {

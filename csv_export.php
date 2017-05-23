@@ -148,16 +148,19 @@ do {
 				$t_first_column = false;
 			}
 
-			if( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
-				ob_start();
-				$t_column_value_function = 'print_column_value';
-				helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
-				$t_value = ob_get_clean();
-
-				echo csv_escape_string( $t_value );
+			$t_custom_field = column_get_custom_field_name( $t_column );
+			if( $t_custom_field !== null ) {
+				echo csv_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
+			} else if( column_is_plugin_column( $t_column ) ) {
+				echo csv_format_plugin_column_value( $t_column, $t_row );
 			} else {
 				$t_function = 'csv_format_' . $t_column;
-				echo $t_function( $t_row );
+				if( function_exists( $t_function ) ) {
+					echo $t_function( $t_row );
+				} else {
+					# Field is unknown
+					echo '';
+				}
 			}
 		}
 

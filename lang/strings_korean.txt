@@ -516,6 +516,7 @@ $s_login_button = '로그인';
 $s_signup_link = '새 계정을 위한 가입';
 $s_lost_password_link = '비밀번호를 잊으셨나요?';
 $s_username_or_email = '사용자 이름이나 이메일 주소';
+$s_enter_password = '\'%s\'의 암호를 입력하세요';
 $s_select_project_button = '프로젝트 선택';
 $s_lost_password_title = '비밀번호 초기화';
 $s_lost_password_done_title = '비밀번호 변경 메일이 보내졌습니다.';

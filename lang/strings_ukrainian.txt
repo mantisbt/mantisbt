@@ -41,6 +41,7 @@
  * @author Alex Khimich
  * @author Andriykopanytsia
  * @author Base
+ * @author Choomaq
  * @author Green Zero
  * @author Igorko
  * @author Macofe
@@ -524,6 +525,7 @@ $s_login_button = 'Увійти';
 $s_signup_link = 'Новий обліковий запис';
 $s_lost_password_link = 'Забули свій пароль?';
 $s_username_or_email = 'Ім\'я користувача або адреса електронної пошти';
+$s_enter_password = 'Уведіть пароль для \'%s\'';
 $s_select_project_button = 'Вибрати проект';
 $s_lost_password_title = 'Скидання паролю';
 $s_lost_password_done_title = 'Лист про пароль був відправлений';

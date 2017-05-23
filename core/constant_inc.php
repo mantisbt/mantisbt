@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.4.0-dev' );
+define( 'MANTIS_VERSION', '2.5.0-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -682,6 +682,10 @@ define( 'LOGIN_METHOD_COOKIE', 'cookie' );
 define( 'LOGIN_METHOD_API_TOKEN', 'api-token' );
 define( 'LOGIN_METHOD_ANONYMOUS', 'anonymous' );
 
+# AUTH PAGES
+define( 'AUTH_PAGE_USERNAME', 'login_page.php' );
+define( 'AUTH_PAGE_CREDENTIAL', 'login_password_page.php' );
+
 # SLIM FRAMEWORK ATTRIBUTES
 define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 
@@ -689,3 +693,10 @@ define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+
+# Databse functional type identifiers.
+define( 'DB_TYPE_UNDEFINED', 0 );
+define( 'DB_TYPE_MYSQL', 1 );
+define( 'DB_TYPE_PGSQL', 2 );
+define( 'DB_TYPE_MSSQL', 3 );
+define( 'DB_TYPE_ORACLE', 4 );

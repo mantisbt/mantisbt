@@ -512,12 +512,13 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 
 	if( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
 		$t_def = custom_field_get_definition( $t_field_id );
+		$t_value = string_custom_field_value( $t_def, $t_field_id, $p_issue_id );
 
-		if ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC ) {
-			return excel_prepare_number( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
+		if ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC && is_numeric( $t_value ) ) {
+			return excel_prepare_number( $t_value );
 		}
 
-		return excel_prepare_string( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
+		return excel_prepare_string( $t_value );
 	}
 
 	# field is not linked to project
@@ -534,14 +535,13 @@ function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
 
 	if( !isset( $t_plugin_columns[$p_column] ) ) {
-		return excel_prepare_string( '' );
+		$t_value = '';
 	} else {
 		$t_column_object = $t_plugin_columns[$p_column];
-		ob_start();
-		$t_column_object->display( $p_bug, COLUMNS_TARGET_EXCEL_PAGE );
-		$t_value = ob_get_clean();
-		return excel_prepare_string( $t_value );
+		$t_value = $t_column_object->value( $p_bug );
 	}
+
+	return excel_prepare_string( $t_value );
 }
 
 /**

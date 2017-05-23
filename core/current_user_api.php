@@ -192,7 +192,7 @@ function current_user_get_all_accessible_subprojects( $p_project_id ) {
  * @access public
  */
 function current_user_is_administrator() {
-	return user_is_administrator( auth_get_current_user_id() );
+	return auth_is_user_authenticated() && user_is_administrator( auth_get_current_user_id() );
 }
 
 /**

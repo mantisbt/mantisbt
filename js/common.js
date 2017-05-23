@@ -136,9 +136,6 @@ $(document).ready( function() {
 			context: $('#' + targetID),
 			success: function(html) {
 				$(this).html(html);
-                $(this).find('input[type=text].datetimepicker').each(function(index, element) {
-                    enableDateTimePicker(this);
-                });
 			},
 			error: function(obj,status,error) {
 				$(this).html('<span class="error-msg">' + status + ': ' + error + '</span>');
@@ -228,15 +225,31 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
-        enableDateTimePicker(this);
+		$(this).datetimepicker({
+			locale: $(this).data('picker-locale'),
+			format: $(this).data('picker-format'),
+			useCurrent: false,
+			icons: {
+				time: 'fa fa-clock-o',
+				date: 'fa fa-calendar',
+				up: 'fa fa-chevron-up',
+				down: 'fa fa-chevron-down',
+				previous: 'fa fa-chevron-left',
+				next: 'fa fa-chevron-right',
+				today: 'fa fa-arrows ',
+				clear: 'fa fa-trash',
+				close: 'fa fa-times'
+			}
+		}).next().on(ace.click_event, function() {
+			$(this).prev().focus();
+		});
 	});
 
-	if( $( ".dropzone-form" ).length ) {
-		enableDropzone( "dropzone", false );
-	}
-	if( $( ".auto-dropzone-form" ).length ) {
-		enableDropzone( "auto-dropzone", true );
-	}
+	$( 'form .dropzone' ).each(function(){
+		var classPrefix = 'dropzone';
+		var autoUpload = $(this).hasClass('auto-dropzone');
+		enableDropzone( classPrefix, autoUpload );
+	});
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
@@ -267,8 +280,8 @@ $(document).ready( function() {
 	/* Handle standard filter date fields */
 	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
 		$(this).closest('table')
-				.find('input')
-				.prop('readonly', !$(this).prop('checked'));
+				.find('select')
+				.prop('disabled', !$(this).prop('checked'));
 	});
 
 	/* Handle custom field of date type */
@@ -276,8 +289,12 @@ $(document).ready( function() {
 		var table = $(this).closest('table');
 		switch(this.value) {
 			case '2': // between
-				$(table).find("input[name*=_start_date]").prop('readonly', false);
-				$(table).find("input[name*=_end_date]").prop('readonly', false);
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', false);
+				$(table).find("select[name*=_end_month]").prop('disabled', false);
+				$(table).find("select[name*=_end_day]").prop('disabled', false);
 				break;
 
 			case '3': // on or before
@@ -285,15 +302,23 @@ $(document).ready( function() {
 			case '5': // on
 			case '6': // after
 			case '7': // on or after
-				$(table).find("input[name*=_start_date]").prop('readonly', false);
-				$(table).find("input[name*=_end_date]").prop('readonly', true);
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
 				break;
 
 			case '0': // any
 			case '1': // none
 			default:
-				$(table).find("input[name*=_start_date]").prop('readonly', true);
-				$(table).find("input[name*=_end_date]").prop('readonly', true);
+				$(table).find("select[name*=_start_year]").prop('disabled', true);
+				$(table).find("select[name*=_start_month]").prop('disabled', true);
+				$(table).find("select[name*=_start_day]").prop('disabled', true);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
 				break;
 		}
 	});
@@ -455,61 +480,41 @@ function toggleDisplay(idTag)
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
 }
 
-// Datetime picker handler
-function enableDateTimePicker(p_element) {
-    $(p_element).datetimepicker({
-        locale: $(p_element).data('picker-locale'),
-        format: $(p_element).data('picker-format'),
-        useCurrent: false,
-        icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-arrows ',
-            clear: 'fa fa-trash',
-            close: 'fa fa-times'
-        }
-    }).next().on(ace.click_event, function() {
-        $(this).prev().focus();
-    });
-}
-
 // Dropzone handler
 Dropzone.autoDiscover = false;
 function enableDropzone( classPrefix, autoUpload ) {
+	var zone_class =  '.' + classPrefix;
+	var zone = $( zone_class );
+	var form = zone.closest('form');
 	try {
-		var formClass = "." + classPrefix + "-form";
-		var form = $( formClass );
-		var zone = new Dropzone( formClass, {
-			forceFallback: form.data('force-fallback'),
+		var zone_object = new Dropzone( form[0], {
+			forceFallback: zone.data('force-fallback'),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
-			clickable: '.' + classPrefix,
+			clickable: zone_class,
 			previewsContainer: '#' + classPrefix + '-previews-box',
 			uploadMultiple: true,
 			parallelUploads: 100,
-			maxFilesize: form.data('max-filesize'),
+			maxFilesize: zone.data('max-filesize'),
 			addRemoveLinks: !autoUpload,
-			acceptedFiles: form.data('accepted-files'),
+			acceptedFiles: zone.data('accepted-files'),
 			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: form.data('default-message'),
-			dictFallbackMessage: form.data('fallback-message'),
-			dictFallbackText: form.data('fallback-text'),
-			dictFileTooBig: form.data('file-too-big'),
-			dictInvalidFileType: form.data('invalid-file-type'),
-			dictResponseError: form.data('response-error'),
-			dictCancelUpload: form.data('cancel-upload'),
-			dictCancelUploadConfirmation: form.data('cancel-upload-confirmation'),
-			dictRemoveFile: form.data('remove-file'),
-			dictRemoveFileConfirmation: form.data('remove-file-confirmation'),
-			dictMaxFilesExceeded: form.data('max-files-exceeded'),
+			dictDefaultMessage: zone.data('default-message'),
+			dictFallbackMessage: zone.data('fallback-message'),
+			dictFallbackText: zone.data('fallback-text'),
+			dictFileTooBig: zone.data('file-too-big'),
+			dictInvalidFileType: zone.data('invalid-file-type'),
+			dictResponseError: zone.data('response-error'),
+			dictCancelUpload: zone.data('cancel-upload'),
+			dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
+			dictRemoveFile: zone.data('remove-file'),
+			dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
+			dictMaxFilesExceeded: zone.data('max-files-exceeded'),
 
 			init: function () {
 				var dropzone = this;
-				$( "input[type=submit]" ).on( "click", function (e) {
+				var form = $( this.options.clickable ).closest('form');
+				form.on('submit', function (e) {
 					if( dropzone.getQueuedFiles().length ) {
 						e.preventDefault();
 						e.stopPropagation();
@@ -529,6 +534,6 @@ function enableDropzone( classPrefix, autoUpload ) {
 			}
 		});
 	} catch (e) {
-		alert( form.data('dropzone-not-supported') );
+		alert( zone.data('dropzone-not-supported') );
 	}
 }

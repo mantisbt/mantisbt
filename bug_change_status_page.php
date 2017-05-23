@@ -241,9 +241,9 @@ layout_page_begin();
 			<?php echo lang_get( 'due_date' ) ?>
 		</th>
 		<td>
-			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="20"
+			<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16"
 				data-picker-locale="<?php lang_get_current_datetime_locale() ?>"
-				data-picker-format="<?php echo convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) ?>"
+				data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
 				<?php helper_get_tab_index() ?> value="<?php echo $t_date_to_display ?>" />
 			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>

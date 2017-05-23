@@ -41,6 +41,7 @@
  * @author Charmed94
  * @author Macofe
  * @author Milicevic01
+ * @author Obsuser
  * @author Rancher
  * @author Srdjan m
  * @author Милан Јелисавчић
@@ -472,13 +473,14 @@ $s_error_database_version_out_of_date_2 = '<strong>Упозорење:</strong> 
 $s_error_code_version_out_of_date = '<strong>Упозорење:</strong> структура базе података је новија од инсталираног кода. Доградите код.';
 $s_login_page_info = 'Добро дошли у систем за праћење проблема.';
 $s_login_title = 'Пријава';
-$s_save_login = 'Запамти лозинку на овом прегледачу';
+$s_save_login = 'Остави ме пријављеним';
 $s_secure_session = 'Заштићена сесија';
 $s_secure_session_long = 'Дозволи приступ мојој сесији само преко ове ИП адресе.';
 $s_choose_project = 'Изаберите пројекат';
 $s_login_button = 'Пријави ме';
 $s_signup_link = 'Отвори нови налог';
 $s_lost_password_link = 'Заборавили сте лозинку?';
+$s_enter_password = 'Унос лозинке за \'%s\'';
 $s_select_project_button = 'Изабери пројекат';
 $s_lost_password_title = 'Обнављање лозинке';
 $s_lost_password_done_title = 'Порука о лозинци је послата';
@@ -543,6 +545,7 @@ $s_colour_global = 'Све поставке пројекта имају већу
 $s_issue_reporter = 'Корисник који је пријавио проблем';
 $s_issue_handler = 'Корисник који се занима за овај проблем';
 $s_users_added_bugnote = 'Корисници који су додали белешке о проблему';
+$s_email_notify_users = 'Било који корисник са нивоом приступа';
 $s_change_configuration = 'Ажурирање поставки';
 $s_message = 'Порука';
 $s_default_notify = 'Постављање подразумеваних обавештајних ознака на';
@@ -571,6 +574,7 @@ $s_desc_bug_reopen_status = 'Стање на које је назначен по
 $s_desc_bug_resolved_status_threshold = 'Стање где се проблем сматра решеним';
 $s_desc_bug_closed_status_threshold = 'Стање где се проблем сматра затвореним';
 $s_default_not_in_flow = 'Подразумевано стање %1$s није изабрано у следећим стањима за %2$s. Због тога ће бити занемарено.';
+$s_allowed_access_levels = 'Дозвољено за било којег корисника са нивоом приступа';
 $s_assign_issue = 'Додели проблем';
 $s_allow_reporter_close = 'Дозволи известиоцу да затвори проблем';
 $s_allow_reporter_reopen = 'Дозволи известиоцу да поново отвори проблем';

@@ -540,6 +540,7 @@ $s_login_button = 'Ouvrir la session';
 $s_signup_link = 'Ouvrir un nouveau compte';
 $s_lost_password_link = 'Oublié votre mot de passe ?';
 $s_username_or_email = 'Nom d’utilisateur ou adresse de courriel';
+$s_enter_password = 'Saisir le mot de passe pour \'%s\'';
 $s_select_project_button = 'Choisir un projet';
 $s_lost_password_title = 'Réinitialisation de mot de passe';
 $s_lost_password_done_title = 'Message de mot de passe envoyé';

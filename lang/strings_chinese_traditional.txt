@@ -526,6 +526,7 @@ $s_login_button = '登入';
 $s_signup_link = '註冊新帳號';
 $s_lost_password_link = '忘記密碼';
 $s_username_or_email = '使用者名稱或電子郵件信箱';
+$s_enter_password = '輸入用於「%s」的密碼';
 $s_select_project_button = '選擇專案';
 $s_lost_password_title = '重新設定密碼';
 $s_lost_password_done_title = '重設密碼訊息已經送出';

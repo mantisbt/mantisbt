@@ -39,6 +39,7 @@
  * @file
  *
  * @author Milicevic01
+ * @author Obsuser
  * @author Rancher
  * @author Сербијана
  */
@@ -451,7 +452,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Upozorenje:</strong> struktur
 $s_error_code_version_out_of_date = '<strong>Upozorenje:</strong> struktura baze podataka je novija od instaliranog koda. Dogradite kod.';
 $s_login_page_info = 'Dobro došli u sistem za praćenje problema.';
 $s_login_title = 'Prijava';
-$s_save_login = 'Zapamti lozinku na ovom pregledaču';
+$s_save_login = 'Ostavi me prijavljenim';
 $s_secure_session = 'Zaštićena sesija';
 $s_secure_session_long = 'Dozvoli pristup mojoj sesiji samo preko ove IP adrese.';
 $s_choose_project = 'Izaberite projekat';

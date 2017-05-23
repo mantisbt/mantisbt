@@ -1486,8 +1486,8 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
  * print a HTML link with a button look
  * @param string  $p_link       The page URL.
  * @param string  $p_url_text   The displayed text for the link.
- * @param boolean $p_new_window Whether to open in a new window.
  * @param string  $p_class      The CSS class of the link.
+ * @param boolean $p_new_window Whether to open in a new window.
  * @return void
  */
 function print_link_button( $p_link, $p_url_text, $p_class = '', $p_new_window = false ) {
@@ -1742,7 +1742,7 @@ function print_documentation_link( $p_a_name = '' ) {
  * @return void
  */
 function print_signup_link() {
-	if( ( ON == config_get_global( 'allow_signup' ) ) &&
+	if( auth_signup_enabled() &&
 		 ( LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
@@ -1755,7 +1755,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-	print_link_button( 'login_page.php', lang_get( 'login_title' ) );
+	print_link_button( auth_login_page(), lang_get( 'login_title' ) );
 }
 
 /**

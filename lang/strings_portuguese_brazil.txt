@@ -44,10 +44,12 @@
  * @author Eduardo.mps
  * @author Elival
  * @author Fasouzafreitas
+ * @author Felipe L. Ewald
  * @author Giro720
  * @author Gusta
  * @author Jefersonfoliveira
  * @author Joao Xavier
+ * @author Lowvy
  * @author Luckas
  * @author LucyDiniz
  * @author Luigipiccoli
@@ -529,7 +531,7 @@ $s_error_database_version_out_of_date_2 = '<strong>AVISO:</strong> A estrutura d
 $s_error_code_version_out_of_date = '<strong>AVISO:</strong> A estrutura da base de dados está mais atualizada que o código instalado. Por favor atualize o código.';
 $s_login_page_info = 'Bem-vindo ao Gerenciador de Tarefas.';
 $s_login_title = 'Entrar';
-$s_save_login = 'Recordar os meus dados neste computador';
+$s_save_login = 'Mantenha-me conectado(a)';
 $s_secure_session = 'Sessão Segura';
 $s_secure_session_long = 'Somente permitir que sua sessão seja utilizada a partir deste endereço IP.';
 $s_choose_project = 'Escolher Projeto';
@@ -537,6 +539,7 @@ $s_login_button = 'Entrar';
 $s_signup_link = 'criar uma nova conta';
 $s_lost_password_link = 'Perdeu a sua senha?';
 $s_username_or_email = 'Usuário ou endereço de e-mail';
+$s_enter_password = 'Digite a senha para \'%s\'';
 $s_select_project_button = 'Selecionar Projeto';
 $s_lost_password_title = 'Reajuste de Senha';
 $s_lost_password_done_title = 'Mensagem de Senha Enviada';
@@ -606,6 +609,7 @@ $s_issue_reporter = 'Usuário que criou a tarefa';
 $s_issue_handler = 'Usuário que está tratando a tarefa';
 $s_users_added_bugnote = 'Usuários que adicionaram anotações';
 $s_category_assigned_to = 'Categoria Proprietário';
+$s_email_notify_users = 'Qualquer usuário com nível de acesso';
 $s_change_configuration = 'Atualizar Configuração';
 $s_message = 'Mensagem';
 $s_default_notify = 'Ajustando opções de notificação padrão para';
@@ -636,6 +640,7 @@ $s_desc_bug_closed_status_threshold = 'Status no qual uma tarefa é considerada 
 $s_workflow_change_access_label = 'Quem pode alterar o fluxo de trabalho:';
 $s_access_change_access_label = 'Quem pode alterar os níveis de acesso:';
 $s_default_not_in_flow = 'O status padrão de %1$s não está selecionado nos próximos status de %2$s. Este será ignorado';
+$s_allowed_access_levels = 'Permitido para qualquer usuário com nível de acesso';
 $s_assign_issue = 'Atribuir uma tarefa';
 $s_allow_reporter_close = 'Permitir ao relator fechar a tarefa';
 $s_allow_reporter_reopen = 'Permitir ao relator reabrir a tarefa';

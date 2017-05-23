@@ -173,9 +173,14 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
-			# date field uses datetime picker widget
-			return gpc_isset( $t_field_name . '_date' ) &&
-				!is_blank( gpc_get_string( $t_field_name . '_date' ) );
+			# date field is three dropdowns that default to 0
+			# Dropdowns are always present, so check if they are set
+			return gpc_isset( $t_field_name . '_day' ) &&
+				gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
+				gpc_isset( $t_field_name . '_month' ) &&
+				gpc_get_int( $t_field_name . '_month', 0 ) != 0 &&
+				gpc_isset( $t_field_name . '_year' ) &&
+				gpc_get_int( $t_field_name . '_year', 0 ) != 0 ;
 		case CUSTOM_FIELD_TYPE_STRING:
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 		case CUSTOM_FIELD_TYPE_FLOAT:
@@ -213,8 +218,19 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			$t_date = gpc_get_string( $p_var_name . '_date', $p_default );
-			return strtotime( $t_date );
+			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
+			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
+			$t_year = gpc_get_int( $p_var_name . '_year', 0 );
+			if( ( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
+				if( $p_default == null ) {
+					return '';
+				} else {
+					return $p_default;
+				}
+			} else {
+				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
+			}
+			break;
 		default:
 			return gpc_get_string( $p_var_name, $p_default );
 	}
@@ -344,7 +360,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
  * @param string  $p_name     Cookie name to set.
  * @param string  $p_value    Cookie value to set.
- * @param boolean $p_expire   Cookie Expiry - default is false.
+ * @param boolean|integer $p_expire true: current browser session, false/0: cookie_time_length, otherwise: expiry time.
  * @param string  $p_path     Cookie Path - default cookie_path configuration variable.
  * @param string  $p_domain   Cookie Domain - default is cookie_domain configuration variable.
  * @param boolean $p_httponly Default true.
@@ -352,15 +368,18 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  */
 function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true ) {
 	global $g_cookie_secure_flag_enabled;
+
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	} else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
+
 	if( null === $p_path ) {
 		$p_path = config_get( 'cookie_path' );
 	}
+
 	if( null === $p_domain ) {
 		$p_domain = config_get( 'cookie_domain' );
 	}

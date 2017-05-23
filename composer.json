@@ -3,7 +3,8 @@
     "description": "Mantis Bug Tracker",
     "type": "project",
     "require": {
-        "slim/slim": "^3.0"
+        "slim/slim": "^3.0",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "license": "GPL v2",
     "authors": [

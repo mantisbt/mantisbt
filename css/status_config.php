@@ -61,8 +61,15 @@ header( 'X-Content-Type-Options: nosniff' );
 $t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
 	? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
 	: basename( __FILE__ );
+
+if( $t_referer_page == auth_login_page() ) {
+	# custom status colors not needed.
+	exit;
+}
+
 switch( $t_referer_page ) {
-	case 'login_page.php':
+	case AUTH_PAGE_USERNAME:
+	case AUTH_PAGE_CREDENTIAL:
 	case 'signup_page.php':
 	case 'lost_pwd_page.php':
 	case 'account_update.php':

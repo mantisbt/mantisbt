@@ -42,11 +42,13 @@
  * @author Consta
  * @author Crazymadlover
  * @author Evropi
+ * @author FirehawkV17
  * @author Geraki
  * @author Glavkos
  * @author Kongr43gpen
  * @author Omnipaedista
  * @author Protnet
+ * @author Thodoris
  * @author Ανώνυμος Βικιπαιδιστής
  */
 
@@ -63,12 +65,15 @@ $s_actiongroup_menu_update_view_status = 'Αλλαγή Προβολής Κατά
 $s_actiongroup_menu_update_category = 'Αλλαγή Κατηγορίας';
 $s_actiongroup_menu_set_sticky = 'Εν/Απενεργοποιήσε σε Προσκήνιο';
 $s_actiongroup_menu_update_field = 'Ενημέρωση %1$s';
+$s_actiongroup_menu_update_product_version = 'Ενημέρωση Έκδοσης προϊόντος';
 $s_actiongroup_menu_add_note = 'Προσθήκη Σημείωσης';
 $s_actiongroup_menu_attach_tags = 'Προσάρτηση Ετικετών';
 $s_actiongroup_bugs = 'Επιλεγμένα Θέματα';
 $s_all_projects = 'Όλες';
 $s_move_bugs = 'Μετακίνηση Θεμάτων';
 $s_operation_successful = 'Διαδικασία Επιτυχής.';
+$s_operation_warnings = 'Η εργασία ολοκληρώθηκε με προειδοποιήσεις.';
+$s_operation_failed = 'Η εργασία δεν ολοκληρώθηκε επιτυχημένα.';
 $s_date_order = 'Χρονολογική Σειρά';
 $s_print_all_bug_page_link = 'Εκτύπωση Αναφορών';
 $s_csv_export = 'Εξαγωγή CSV';
@@ -81,11 +86,15 @@ $s_private_project_msg = 'Η εφαρμογή είναι ΙΔΙΩΤΙΚΗ. Μο�
 $s_access_level_project = 'Επίπεδο στην Εφαρμογή';
 $s_view_submitted_bug_link = 'Προβολή Απεσταλμένου Θέματος %1$s';
 $s_assigned_projects = 'Ανατεθέντες Εφαρμογές';
+$s_assigned_projects_label = 'Ανατεθέντες Εφαρμογές';
+$s_unassigned_projects_label = 'Εφαρμογές σε αναμονή';
 $s_print = 'Εκτύπωση';
 $s_jump = 'Μετάβαση';
 $s_copy_users = 'Αντιγραφή Χρηστών';
 $s_copy_categories_from = 'Αντιγραφή Κατηγοριών Από';
 $s_copy_categories_to = 'Αντιγραφή Κατηγοριών Προς';
+$s_copy_versions_from = 'Αντιγραφή έκδοσης απο';
+$s_copy_versions_to = 'Αντιγραφή έκδοσης προς';
 $s_copy_users_from = 'Αντιγραφή Χρηστών Από';
 $s_copy_users_to = 'Αντιγραφή Χρηστών Προς';
 $s_bug_history = 'Ιστορικό Αναφορών';
@@ -328,6 +337,7 @@ $s_choose_project = 'Εφαρμογή';
 $s_login_button = 'Είσοδος';
 $s_signup_link = 'Νέος χρήστης';
 $s_lost_password_link = 'Ξεχάσατε τον κωδικό;';
+$s_enter_password = 'Εισάγετε τον κωδικό για \'%s\'';
 $s_select_project_button = 'Επιλογή Εφαρμογής';
 $s_lost_password_title = 'Ακύρωση Κωδικού';
 $s_lost_password_done_title = 'Αποστολή Μηνύματος Κωδικού';

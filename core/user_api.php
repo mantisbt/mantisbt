@@ -456,10 +456,7 @@ function user_is_administrator( $p_user_id ) {
  * @access public
  */
 function user_is_protected( $p_user_id ) {
-	if( user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' ) ) {
-		return true;
-	}
-	return false;
+	return user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' );
 }
 
 /**
@@ -471,10 +468,7 @@ function user_is_protected( $p_user_id ) {
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
-	if( ON == config_get( 'allow_anonymous_login' ) && user_get_field( $p_user_id, 'username' ) == config_get( 'anonymous_account' ) ) {
-		return true;
-	}
-	return false;
+	return auth_anonymous_enabled() && user_get_field( $p_user_id, 'username' ) == auth_anonymous_account();
 }
 
 /**
@@ -665,7 +659,7 @@ function user_signup( $p_username, $p_email = null ) {
 	# Create random password
 	$t_password = auth_generate_random_password();
 
-	return user_create( $p_username, $t_password, $p_email );
+	return user_create( $p_username, $t_password, $p_email, auth_signup_access_level() );
 }
 
 /**

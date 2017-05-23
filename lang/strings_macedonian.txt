@@ -516,6 +516,7 @@ $s_login_button = 'Најави ме';
 $s_signup_link = 'Регистрирај нова сметка';
 $s_lost_password_link = 'Ја заборавивте лозинката?';
 $s_username_or_email = 'Корисничко име или е-пошта';
+$s_enter_password = 'Внесете лозинка за „%s“';
 $s_select_project_button = 'Одберете проект';
 $s_lost_password_title = 'Смени лозинка';
 $s_lost_password_done_title = 'Пораката со лозинката е испратена';

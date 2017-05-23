@@ -237,9 +237,7 @@ if( $t_show_attachments ) {
 <div class="col-md-12 col-xs-12">
 <form id="report_bug_form"
 	method="post" <?php echo $t_form_encoding; ?>
-	action="bug_report.php?posted=1"
-	class="dropzone-form"
-	<?php print_dropzone_form_data() ?>>
+	action="bug_report.php?posted=1">
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -357,8 +355,8 @@ if( $t_show_attachments ) {
 		<td>
 			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . convert_date_format_to_momentjs( config_get( 'normal_date_format' ) ) . '" ' .
-				'size="16" maxlength="20" value="' . $t_date_to_display . '" />' ?>
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>
 	</tr>
@@ -634,7 +632,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-			<div class="dropzone center">
+			<div class="dropzone center" <?php print_dropzone_form_data() ?>>
 				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
 				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
 				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>

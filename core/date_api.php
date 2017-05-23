@@ -235,74 +235,47 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @access public
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0, $p_input_css = "input-sm" ) {
+	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
 	if( $p_date != 0 ) {
-		$t_date = date( $p_format, $p_date );
+		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
 	} else {
-		$t_date = '';
+		$t_date = array( 0, 0, 0, );
 	}
 
 	$t_disable = '';
 	if( $p_default_disable == true ) {
-		$t_disable = ' readonly="readonly"';
+		$t_disable = ' disabled="disabled"';
+	}
+	$t_blank_line = '';
+	if( $p_allow_blank == true ) {
+		$t_blank_line = '<option value="0"></option>';
 	}
 
- 	echo '<input ' . helper_get_tab_index() . ' type="text" name="' . $p_name . '_date" ' .
-		' class="datetimepicker ' . $p_input_css . '" ' . $t_disable .
-		' data-picker-locale="' . lang_get_current_datetime_locale() . '"' .
-		' data-picker-format="' . convert_date_format_to_momentjs( $p_format ) . '"' .
-		' size="16" maxlength="20" value="' . $t_date . '" />';
-	echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+	foreach( $t_chars as $t_char ) {
+		if( strcmp( $t_char, 'M' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_month_option_list( $t_date[1] );
+			echo '</select>' . "\n";
+		}
+		if( strcmp( $t_char, 'm' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_month_option_list( $t_date[1] );
+			echo '</select>' . "\n";
+		}
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_day"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_day_option_list( $t_date[2] );
+			echo '</select>' . "\n";
+		}
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			echo '<select class="' . $p_input_css . '" ' .  helper_get_tab_index() . ' name="' . $p_name . '_year"' . $t_disable . '>';
+			echo $t_blank_line;
+			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
+			echo '</select>' . "\n";
+		}
+	}
 }
 
-
-/**
- * Converts php date format string to moment.js date format.
- * This function is used primarily with datetime picker widget.
- * @param string  $p_php_format  Php date format string: http://php.net/manual/en/function.date.php
- * @return string in moment.js format: http://momentjs.com/docs/#/displaying/format/
- * @access public
- */
-function convert_date_format_to_momentjs( $p_php_format )
-{
-    $t_replacements = array(
-        'd' => 'DD',
-        'D' => 'ddd',
-        'j' => 'D',
-        'l' => 'dddd',
-        'N' => 'E',
-        'S' => 'o',
-        'w' => 'e',
-        'z' => 'DDD',
-        'W' => 'W',
-        'F' => 'MMMM',
-        'm' => 'MM',
-        'M' => 'MMM',
-        'n' => 'M',
-        't' => '', // no equivalent
-        'L' => '', // no equivalent
-        'o' => 'YYYY',
-        'Y' => 'YYYY',
-        'y' => 'YY',
-        'a' => 'a',
-        'A' => 'A',
-        'B' => '', // no equivalent
-        'g' => 'h',
-        'G' => 'H',
-        'h' => 'hh',
-        'H' => 'HH',
-        'i' => 'mm',
-        's' => 'ss',
-        'u' => 'SSS',
-        'e' => 'zz', // deprecated since version 1.6.0 of moment.js
-        'I' => '', // no equivalent
-        'O' => '', // no equivalent
-        'P' => '', // no equivalent
-        'T' => '', // no equivalent
-        'Z' => '', // no equivalent
-        'c' => '', // no equivalent
-        'r' => '', // no equivalent
-        'U' => 'X',
-	);
-
-    return strtr( $p_php_format, $t_replacements );
-}

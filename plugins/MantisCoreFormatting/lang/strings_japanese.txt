@@ -40,6 +40,8 @@
  *
  * @author Aotake
  * @author Fryed-peach
+ * @author Mirinano
+ * @author Omotecho
  * @author Shirayuki
  */
 
@@ -50,5 +52,6 @@ $s_plugin_format_process_text = 'テキスト処理';
 $s_plugin_format_process_text_warning_notice = '何をしているかを完全には理解していない場合は OFF にしないでください。OFF の状態ではクロス サイト スクリプティング (XSS) 攻撃ができてしまいます。';
 $s_plugin_format_process_urls = 'URL 処理';
 $s_plugin_format_process_buglinks = 'MantisBT 内部リンク (課題と課題コメント)';
+$s_plugin_format_process_buglinks_info = 'あなたの設定により<em>Issue</em>タグは「<literal>%s</literal>」と、<em>Issue Note</em>タグは「<literal>%s</literal>」と定義されました。';
 $s_plugin_format_enabled = 'ON';
 $s_plugin_format_disabled = 'OFF';

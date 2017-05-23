@@ -42,6 +42,10 @@ $t_user_id = auth_get_current_user_id();
 
 user_ensure_unprotected( $t_user_id );
 
+if( !api_token_can_create() ) {
+	access_denied();
+}
+
 $t_token = api_token_create( $f_token_name, $t_user_id );
 $t_disclose_message = lang_get( 'api_token_disclose_message' );
 $t_display_once_message = lang_get( 'api_token_displayed_once' );
