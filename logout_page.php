@@ -32,6 +32,7 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'print_api.php' );
 
+//Cache the current logout redirect page as it will be cleared by the standard logout process
 $t_logout_redirect = auth_logout_redirect_page();
 
 auth_logout();
