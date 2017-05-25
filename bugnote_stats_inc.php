@@ -207,5 +207,4 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </form>
 </div>
 </div>
-</div>
 
