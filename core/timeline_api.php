@@ -79,7 +79,11 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 				}
 				break;
 			case BUG_UNMONITOR:
-				$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
+				# Skip removing other users from monitoring list, only add unmonitor events where removed
+				# user is the same as the logged in user.
+				if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
+					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
+				}
 				break;
 			case TAG_ATTACHED:
 				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], true );
