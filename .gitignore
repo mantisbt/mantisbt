@@ -36,7 +36,6 @@ nbproject/
 
 # IIS7
 web.config
-!library/securimage/web.config
 
 # Libraries
 library/FirePHPCore

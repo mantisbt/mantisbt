@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "992e2d7ba9fb33a42f216ecfda3d7727",
+    "content-hash": "8fa92058842b21268bf02afb0df28eaf",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -90,6 +90,55 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "dapphp/securimage",
+            "version": "dev-mantis",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mantisbt/securimage.git",
+                "reference": "65d446e137db4fe84e7f7edb9e7b06fce521a63b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mantisbt/securimage/zipball/65d446e137db4fe84e7f7edb9e7b06fce521a63b",
+                "reference": "65d446e137db4fe84e7f7edb9e7b06fce521a63b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.2.0"
+            },
+            "suggest": {
+                "ext-pdo": "For database storage support",
+                "ext-pdo_mysql": "For MySQL database support",
+                "ext-pdo_sqlite": "For SQLite3 database support"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "securimage.php"
+                ]
+            },
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Drew Phillips",
+                    "email": "drew@drew-phillips.com"
+                }
+            ],
+            "description": "PHP CAPTCHA Library",
+            "homepage": "https://www.phpcaptcha.org",
+            "keywords": [
+                "captcha",
+                "security"
+            ],
+            "support": {
+                "source": "https://github.com/mantisbt/securimage/tree/mantis"
+            },
+            "time": "2017-01-13 17:01:24"
         },
         {
             "name": "erusev/parsedown",
@@ -694,7 +743,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dapphp/securimage": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
