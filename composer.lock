@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5fc1bafa4e3950690777ab5bb973a56",
+    "content-hash": "ae0495b540a4514816fa6a2cfd7201bc",
     "packages": [
+        {
+            "name": "adodb/adodb-php",
+            "version": "v5.20.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ADOdb/ADOdb.git",
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/f601748cca1ccb86dfd427620a1692a70e681075",
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "adodb.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "John Lim",
+                    "email": "jlim@natsoft.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Damien Regad",
+                    "role": "Current maintainer"
+                },
+                {
+                    "name": "Mark Newnham",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ADOdb is a PHP database abstraction layer library",
+            "homepage": "http://adodb.org/",
+            "keywords": [
+                "abstraction",
+                "database",
+                "layer",
+                "library",
+                "php"
+            ],
+            "time": "2016-12-21T17:19:42+00:00"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",

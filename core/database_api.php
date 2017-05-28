@@ -37,8 +37,7 @@ require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
-define( 'ADODB_DIR', config_get( 'library_path' ) . 'adodb' );
-require_lib( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
+require_lib( 'adodb/adodb-php/adodb.inc.php' );
 
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array

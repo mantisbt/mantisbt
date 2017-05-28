@@ -153,6 +153,12 @@ $g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
 $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
 
 /**
+ * Path to vendor folder for 3rd party libraries. Requires trailing / or \
+ * @global string $g_library_path
+ */
+$g_vendor_path = $g_absolute_path . 'vendor' . DIRECTORY_SEPARATOR;
+
+/**
  * Path to lang folder for language files. Requires trailing / or \
  * @global string $g_language_path
  */
