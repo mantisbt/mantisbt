@@ -74,8 +74,6 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_lib( 'phpmailer/PHPMailerAutoload.php' );
-
 # reusable object of class SMTP
 $g_phpMailer = null;
 

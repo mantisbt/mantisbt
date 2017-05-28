@@ -9,7 +9,6 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-phpmailer       | PHPMailer       | 5.2.22    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
 securimage      | PHP Captcha     | 3.6.5     | patched [1]
@@ -43,7 +42,6 @@ Upstream projects
 
 project         | URL
 ----------------|--------------------------------------------------------------------
-phpmailer       | https://github.com/PHPMailer/PHPMailer
 rssbuilder      | http://code.google.com/p/flaimo-php/
 utf8            | http://sourceforge.net/projects/phputf8
 secureimage     | http://www.phpcaptcha.org/ - https://github.com/mantisbt/securimage
