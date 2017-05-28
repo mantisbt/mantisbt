@@ -8,8 +8,15 @@
         "vboctor/disposable_email_checker": "^3.0",
         "adodb/adodb-php": "^5.20",
         "phpmailer/phpmailer": "^5.2",
-        "erusev/parsedown": "^1.6"
+        "erusev/parsedown": "^1.6",
+        "dapphp/securimage": "dev-mantis"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mantisbt/securimage"
+        }
+    ],
     "license": "GPL v2",
     "authors": [
         {
