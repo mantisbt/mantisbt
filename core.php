@@ -116,19 +116,30 @@ function require_api( $p_api_name ) {
  */
 function require_lib( $p_library_name ) {
 	static $s_libraries_included;
-	global $g_library_path;
+
 	if( !isset( $s_libraries_included[$p_library_name] ) ) {
+		global $g_library_path;
 		$t_library_file_path = $g_library_path . $p_library_name;
-		if( !file_exists( $t_library_file_path ) ) {
-			echo 'External library \'' . $t_library_file_path . '\' not found.';
-			exit;
+
+		if( file_exists( $t_library_file_path ) ) {
+			require_once( $t_library_file_path );
+		} else {
+			global $g_vendor_path;
+			$t_library_file_path = $g_vendor_path . $p_library_name;
+
+			if( file_exists( $t_library_file_path ) ) {
+				require_once( $t_library_file_path );
+			} else {
+				echo 'External library \'' . $t_library_file_path . '\' not found.';
+				exit;
+			}
 		}
 
-		require_once( $t_library_file_path );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
+
 		$s_libraries_included[$p_library_name] = 1;
 	}
 }
