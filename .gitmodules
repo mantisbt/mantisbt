@@ -1,7 +1,3 @@
-[submodule "library/phpmailer"]
-	path = library/phpmailer
-	url = https://github.com/mantisbt/PHPMailer
-	branch = mantis
 [submodule "api/rest/swagger"]
 	path = api/rest/swagger
 	url = https://github.com/mantisbt/swagger-ui.git
