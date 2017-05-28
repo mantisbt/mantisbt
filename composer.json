@@ -5,7 +5,8 @@
     "require": {
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
-        "vboctor/disposable_email_checker": "^3.0"
+        "vboctor/disposable_email_checker": "^3.0",
+        "erusev/parsedown": "^1.6"
     },
     "license": "GPL v2",
     "authors": [
