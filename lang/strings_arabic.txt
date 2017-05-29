@@ -42,6 +42,7 @@
  * @author DRIHEM
  * @author Maroen1990
  * @author Meno25
+ * @author Mido
  * @author OsamaK
  * @author Tarawneh
  * @author Test Create account
@@ -1109,7 +1110,7 @@ $s_email_on_deleted = 'أرسل رسالة عند الحذف';
 $s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
 $s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
 $s_email_on_updated = 'الاميل يحدث';
-$s_loading = 'جاري التحميل...';
+$s_loading = 'جارٍ التحميل...';
 $s_between_date = 'بين';
 $s_on_or_before_date = 'في أو قبل';
 $s_before_date = 'قبل';
