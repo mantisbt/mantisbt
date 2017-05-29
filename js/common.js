@@ -363,6 +363,12 @@ $(document).ready( function() {
 			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
+
+    $('.timeline-events').niceScroll({
+    	cursorcolor:"#bbd4e5",
+        cursorwidth: "8px",
+        hidecursordelay: 1000
+    });
 });
 
 function setBugLabel() {
@@ -373,6 +379,7 @@ function setBugLabel() {
 		field.addClass('field-default');
 	}
 }
+
 
 /*
  * String manipulation

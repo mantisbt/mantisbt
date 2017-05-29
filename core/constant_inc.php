@@ -646,6 +646,10 @@ define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
 define( 'DROPZONE_VERSION', '4.3.0' );
 define( 'DROPZONE_HASH', 'sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=' );
 
+# Nicescroll JS
+define( 'NICESCROLL_VERSION', '3.6.8-fix' );
+define( 'NICESCROLL_HASH', 'tDz9b15dfrl9wPamxHVDonB6SLi7UtVuYasyqoHXRTo=' );
+
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
