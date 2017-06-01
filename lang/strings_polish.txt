@@ -45,6 +45,7 @@
  * @author Debeet
  * @author Expert3222
  * @author Macofe
+ * @author Mazab IZW
  * @author Py64
  * @author Rambro
  * @author Rezonansowy
@@ -1080,6 +1081,7 @@ $s_status_changed_to = 'Status zmieniony na';
 $s_email_on_deleted = 'Email przy usunięciu';
 $s_email_on_sponsorship_changed = 'Email przy zmianie sponsorowania';
 $s_email_on_relationship_changed = 'Email przy zmianie powiązania';
+$s_email_on_updated = 'E-mail dla aktualizacji.';
 $s_loading = 'Ładuję...';
 $s_between_date = 'Pomiędzy';
 $s_on_or_before_date = 'W lub przed';

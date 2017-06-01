@@ -50,6 +50,7 @@
  * @author Liuxinyu970226
  * @author Mmyangfl
  * @author Myy730
+ * @author Paopao
  * @author PhiLiP
  * @author Qiyue2001
  * @author XanaduNWH
@@ -68,13 +69,13 @@ $s_actiongroup_menu_resolve = '处理状况';
 $s_actiongroup_menu_update_priority = '更新优先级';
 $s_actiongroup_menu_update_status = '更新状态';
 $s_actiongroup_menu_update_severity = '更新严重性';
-$s_actiongroup_menu_update_view_status = '更改查看权限';
+$s_actiongroup_menu_update_view_status = '更新查看权限';
 $s_actiongroup_menu_update_category = '更新类别';
 $s_actiongroup_menu_set_sticky = '设置/取消置顶';
 $s_actiongroup_menu_update_field = '更新%1$s';
 $s_actiongroup_menu_update_product_version = '更新产品版本';
-$s_actiongroup_menu_update_target_version = '更改目标版本';
-$s_actiongroup_menu_update_fixed_in_version = '更改修正版本';
+$s_actiongroup_menu_update_target_version = '更新目标版本';
+$s_actiongroup_menu_update_fixed_in_version = '更新修正版本';
 $s_actiongroup_menu_update_product_build = '更新产品架构';
 $s_actiongroup_menu_update_due_date = '更新到期日';
 $s_actiongroup_menu_add_note = '添加注释';
@@ -455,7 +456,7 @@ $s_last_update = '最后更新';
 $s_reporter = '报告员';
 $s_assigned_to = '分派给';
 $s_priority = '优先级';
-$s_resolution = '分辨率';
+$s_resolution = '处理状况';
 $s_status = '状态';
 $s_duplicate_id = '重复编号';
 $s_os = '操作系统';
@@ -887,7 +888,7 @@ $s_by_developer = '按处理员';
 $s_by_reporter = '按报告员';
 $s_reporter_by_resolution = '报告员/处理状况';
 $s_reporter_effectiveness = '报告员效率';
-$s_developer_by_resolution = '处理员/处理状况';
+$s_developer_by_resolution = '开发人员/处理状况';
 $s_percentage_fixed = '% 已修正';
 $s_percentage_errors = '% 无效';
 $s_errors = '无效';
@@ -1378,7 +1379,7 @@ $MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = '无法找到�
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = '无法使用该方法访问此页面';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = '无效的排序字段。';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = '无效日期格式';
-$MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = '决定“%1$s”不允许用于状态“%2$s”。';
+$MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = '处理状况“%1$s”不允许用于状态“%2$s”。';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = '无法更新时区';
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '弃用功能：“%1$s”，应使用“%2$s”。';
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：系统配置为内联显示MantisBT错误（E_USER_ERROR）。程序将继续执行；这将导致系统/数据完整性问题。';
