@@ -190,8 +190,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		$t_string = mention_format_text( $t_string, /* html */ true );
 
 		# Process Markdown
-		if( ON == $s_markdown && $p_multiline ) {
-			$t_string = MantisMarkdown::convert_text( $t_string );
+		if( ON == $s_markdown ) {
+			if( $p_multiline ) {
+				$t_string = MantisMarkdown::convert_text( $t_string );
+			} else {
+				$t_string = MantisMarkdown::convert_line( $t_string );
+			}
 		}
 
 		return $t_string;
