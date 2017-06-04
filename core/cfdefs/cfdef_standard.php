@@ -262,8 +262,8 @@ function cfdef_prepare_list_value_for_email( $p_value ) {
 
 /**
  * Print the value of the email custom field.
- * @param $p_value The database value
- * @return string The html value.
+ * @param string $p_value The database value
+ * @return void
  */
 function cfdef_print_email_value( $p_value ) {
 	if( !is_blank( $p_value ) ) {
