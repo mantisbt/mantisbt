@@ -107,7 +107,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_EMAIL] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
-	'#function_print_value' => null,
+	'#function_print_value' => 'cfdef_print_email_value',
 	'#function_string_value' => 'cfdef_prepare_email_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_email_value_for_email',
 );
@@ -261,12 +261,23 @@ function cfdef_prepare_list_value_for_email( $p_value ) {
 }
 
 /**
- * Format email address for email
- * @param string $p_value Value.
- * @return string
+ * Print the value of the email custom field.
+ * @param string $p_value The database value
+ * @return void
+ */
+function cfdef_print_email_value( $p_value ) {
+	if( !is_blank( $p_value ) ) {
+		echo '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
+	}
+}
+
+/**
+ * Format email address for text email
+ * @param string $p_value The database value.
+ * @return string The plain text value
  */
 function cfdef_prepare_email_value_for_email( $p_value ) {
-	return 'mailto:' . $p_value;
+	return is_null( $p_value ) ? '' : $p_value;
 }
 
 /**
@@ -321,12 +332,12 @@ function cfdef_prepare_list_value( $p_value ) {
 }
 
 /**
- * Prepare email value
- * @param string $p_value Email address.
- * @return string
+ * Get the value for the email custom field.
+ * @param string $p_value The database value
+ * @return string The email value.
  */
 function cfdef_prepare_email_value( $p_value ) {
-	return '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
+	return $p_value;
 }
 
 /**
