@@ -98,35 +98,34 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
-	<tr>
-		<th class="category">
-			<?php echo lang_get( 'email' ) ?>
-		</th>
-		<td>
-			<?php
-				if( ! ( $t_can_manage || $t_can_see_email ) ) {
-					print error_string( ERROR_ACCESS_DENIED );
-				} else {
-					if( !is_blank( $u_email ) ) {
-						print_email_link( $u_email, $u_email );
-					} else {
-						echo " - ";
-					}
-				} ?>
-	</td>
-	</tr>
-	<tr>
-	<th class="category">
-		<?php echo lang_get( 'realname' ) ?>
-		</th>
-		<td><?php
-			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-				print error_string( ERROR_ACCESS_DENIED );
-			} else {
-				echo string_display_line( $u_realname );
-			} ?>
-		</td>
-	</tr>
+	<?php
+		if( $t_can_manage || $t_can_see_email ) { ?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'email' ) ?>
+				</th>
+				<td>
+				    <?php
+						if( !is_blank( $u_email ) ) {
+							print_email_link( $u_email, $u_email );
+						} else {
+							echo " - ";
+						}
+					?>
+				</td>
+			</tr>
+	<?php } ?>
+	<?php
+		if( $t_can_manage || $t_can_see_realname ) { ?>
+			<tr>
+			<th class="category">
+				<?php echo lang_get( 'realname' ) ?>
+			</th>
+			<td>
+				<?php echo string_display_line( $u_realname ); ?>
+			</td>
+			</tr>
+	<?php } ?>
 	</fieldset>
 </table>
 	</div>
