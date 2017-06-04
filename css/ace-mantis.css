@@ -503,6 +503,12 @@ input.typeahead.scrollable ~ .tt-menu {
   margin-bottom: 10px;
 }
 
+#timeline-container {
+    position: relative;
+    overflow-y: auto;
+    height: 300px;
+    height: 74vh;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -522,6 +528,11 @@ input.typeahead.scrollable ~ .tt-menu {
         float: right !important;
         border-style: none !important;
         width: auto;
+    }
+
+    #timeline-container {
+        height: 400px;
+        height: 74vh;
     }
 }
 
@@ -584,6 +595,11 @@ input.typeahead.scrollable ~ .tt-menu {
         border-style: none !important;
         width: auto;
     }
+
+    #timeline-container {
+        height: 600px;
+        height: 74vh;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -636,5 +652,9 @@ input.typeahead.scrollable ~ .tt-menu {
         right: 43px !important;
     }
 
+    #timeline-container {
+        height: 800px;
+        height: 74vh;
+    }
 }
 
