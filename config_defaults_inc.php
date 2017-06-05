@@ -705,6 +705,12 @@ $g_email_separator2 = str_pad('', 70, '-');
  */
 $g_email_padding_length	= 28;
 
+/**
+ * enable HTML format in emails
+ * @global integer $g_enable_html_email
+ */
+$g_enable_html_email = OFF;
+
 ###########################
 # MantisBT Version String #
 ###########################
