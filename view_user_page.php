@@ -108,8 +108,6 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 				    <?php
 						if( !is_blank( $u_email ) ) {
 							print_email_link( $u_email, $u_email );
-						} else {
-							echo " - ";
 						}
 					?>
 				</td>
