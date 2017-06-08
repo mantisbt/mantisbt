@@ -52,7 +52,7 @@ $t_series_name = lang_get( 'bugs' );
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart"></i>
-                    <?php echo 'Top Developers by Fixed Issues' ?>
+                    <?php echo plugin_lang_get('graph_topdev') ?>
                 </h4>
             </div>
 
@@ -66,7 +66,7 @@ $t_series_name = lang_get( 'bugs' );
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart"></i>
-                    <?php echo 'Developers by Open Issues' ?>
+                    <?php echo plugin_lang_get('graph_opendev') ?>
                 </h4>
             </div>
 

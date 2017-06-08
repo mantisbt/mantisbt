@@ -52,7 +52,7 @@ $t_series_name = lang_get( 'bugs' );
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart"></i>
-                    <?php echo 'Top Reporters by Fixed Issues' ?>
+                    <?php echo plugin_lang_get('graph_topreporter_fixed') ?>
                 </h4>
             </div>
 <?php
