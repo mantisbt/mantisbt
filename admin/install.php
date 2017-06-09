@@ -495,12 +495,12 @@ if( 2 == $t_install_state ) {
 </tr>
 
 <?php
-		if( false == $g_failed ) {
-			$t_install_state++;
-		} else {
-			$t_install_state--; # a check failed, redisplay the questions
-		}
 	} # end if db open
+	if( false == $g_failed ) {
+		$t_install_state++;
+	} else {
+		$t_install_state--; # a check failed, redisplay the questions
+	}
 } # end 2 == $t_install_state
 ?>
 
