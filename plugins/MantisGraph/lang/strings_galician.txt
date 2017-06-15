@@ -84,3 +84,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'O que vai de ano';
 $s_plugin_MantisGraph_period_select = 'Datas arbitrarias';
 $s_plugin_MantisGraph_period_last_year = 'Último ano';
 $s_plugin_MantisGraph_graph_page = 'Historial gráfico do erro';
+$s_plugin_MantisGraph_graph_topdev = 'Desenvolvedores máis activos por problema resolto';
+$s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por problema aberto';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Reporteiros máis activos por problema resolto';

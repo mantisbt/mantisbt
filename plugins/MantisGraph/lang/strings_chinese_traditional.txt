@@ -84,3 +84,6 @@ $s_plugin_MantisGraph_period_year_to_date = '本年度至今';
 $s_plugin_MantisGraph_period_select = '任何日期';
 $s_plugin_MantisGraph_period_last_year = '去年';
 $s_plugin_MantisGraph_graph_page = '問題記錄圖表';
+$s_plugin_MantisGraph_graph_topdev = '依修正問題的熱門開發者';
+$s_plugin_MantisGraph_graph_opendev = '依開放問題的開發者';
+$s_plugin_MantisGraph_graph_topreporter_fixed = '依修正問題的熱門回報人';

@@ -88,3 +88,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Година до дата';
 $s_plugin_MantisGraph_period_select = 'Произволни дати';
 $s_plugin_MantisGraph_period_last_year = 'Последната година';
 $s_plugin_MantisGraph_graph_page = 'Хронология на графиките';
+$s_plugin_MantisGraph_graph_topdev = 'Най-добри разработчици по решени проблеми';
+$s_plugin_MantisGraph_graph_opendev = 'Разработчици по отворени проблеми';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Най-добри докладчици по решени проблеми';

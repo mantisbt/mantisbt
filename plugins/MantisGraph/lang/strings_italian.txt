@@ -41,6 +41,7 @@
  * @author Beta16
  * @author Massimo itaca
  * @author Nemo bis
+ * @author Ontsed
  * @author Selven
  */
 
@@ -86,3 +87,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Quest\'anno';
 $s_plugin_MantisGraph_period_select = 'Date arbitrarie';
 $s_plugin_MantisGraph_period_last_year = 'Anno scorso';
 $s_plugin_MantisGraph_graph_page = 'Grafico della storia delle anomalie';
+$s_plugin_MantisGraph_graph_topdev = 'Migliori sviluppatori per problemi risolti';
+$s_plugin_MantisGraph_graph_opendev = 'Sviluppatori per problemi aperti';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Migliori segnalatori per problemi risolti';
