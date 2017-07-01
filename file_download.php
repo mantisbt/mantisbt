@@ -200,7 +200,7 @@ $t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' )
 
 # extract mime type from content type
 if( strpos( $t_content_type, ';' ) === false ) {
-        $t_mime_type = $t_content_type;
+	$t_mime_type = $t_content_type;
 } else {
 	$t_mime_type = substr( $t_content_type, 0, strpos( $t_content_type, ';' ) );
 }
