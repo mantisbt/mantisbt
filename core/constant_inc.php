@@ -689,6 +689,9 @@ define( 'AUTH_PAGE_CREDENTIAL', 'login_password_page.php' );
 # SLIM FRAMEWORK ATTRIBUTES
 define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
 
+# Default parent pages for sub-menu items
+define( 'PAGE_CONFIG_DEFAULT', 'adm_permissions_report.php' );
+
 # Configuration management actions (adm_config_report.php)
 define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
