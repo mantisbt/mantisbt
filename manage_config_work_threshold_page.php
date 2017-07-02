@@ -57,8 +57,7 @@ layout_page_header( lang_get( 'manage_threshold_config' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'adm_config_report.php' );
-
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
 $g_user = auth_get_current_user_id();
