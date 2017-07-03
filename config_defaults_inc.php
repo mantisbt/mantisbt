@@ -3618,6 +3618,10 @@ $g_my_view_boxes = array(
  */
 $g_my_view_boxes_fixed_position = ON;
 
+/**
+ * Toggle whether 'Timeline' boxes show summary of issue after issue ID
+ */
+$g_timeline_show_issue_summary = OFF;
 
 #############
 # RSS Feeds #

@@ -52,6 +52,12 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
+		$t_show_summary = config_get( 'timeline_show_issue_summary' );
+		if ( $t_show_summary ) {
+			$t_link = string_get_bug_view_link_with_summary( $this->issue_id );
+		} else {
+			$t_link = string_get_bug_view_link( $this->issue_id );
+		}
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_untagged' );
 		$t_tag_row = tag_get_by_name( $this->tag_name );
 
@@ -60,7 +66,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 			. sprintf(
 				$t_string,
 				user_get_name( $this->user_id ),
-				string_get_bug_view_link( $this->issue_id ),
+				$t_link,
 				$t_tag_row ? tag_get_link( $t_tag_row ) : $this->tag_name
 			)
 			. '</div>';

@@ -677,6 +677,41 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
  * @param integer $p_bug_id      A bug identifier.
+ * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
+ * @param boolean $p_fqdn        Whether to return an absolute or relative link.
+ * @return string
+ */
+function string_get_bug_view_link_with_summary( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
+	if( bug_exists( $p_bug_id ) ) {
+		$t_link = '<a href="';
+		if( $p_fqdn ) {
+			$t_link .= config_get_global( 'path' );
+		} else {
+			$t_link .= config_get_global( 'short_path' );
+		}
+		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
+		if( $p_detail_info ) {
+			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
+			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
+			$t_link .= ' title="' . bug_format_id( $p_bug_id ) . ': [' . $t_status . '] ' . $t_summary . '"';
+
+			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );
+			if( $t_resolved ) {
+				$t_link .= ' class="resolved"';
+			}
+		}
+		$t_link .= '>' . $t_summary . '</a>';
+	} else {
+		$t_link = bug_format_id( $p_bug_id );
+	}
+
+	return $t_link;
+}
+
+/**
+ * return an href anchor that links to a bug VIEW page for the given bug
+ * @param integer $p_bug_id      A bug identifier.
  * @param integer $p_bugnote_id  A bugnote identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.

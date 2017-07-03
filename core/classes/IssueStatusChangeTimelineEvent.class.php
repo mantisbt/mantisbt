@@ -91,13 +91,19 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
+		$t_show_summary = config_get( 'timeline_show_issue_summary' );
+		if ( $t_show_summary ) {
+			$t_link = string_get_bug_view_link_with_summary( $this->issue_id );
+		} else {
+			$t_link = string_get_bug_view_link( $this->issue_id );
+		}
 		switch( $this->type ) {
 			case IssueStatusChangeTimelineEvent::RESOLVED:
                 $t_html = $this->html_start( 'fa-thumbs-o-up' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_resolved' ),
 					user_get_name( $this->user_id ),
-					string_get_bug_view_link( $this->issue_id )
+					$t_link
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::CLOSED:
@@ -105,7 +111,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_closed' ),
 					user_get_name( $this->user_id ),
-					string_get_bug_view_link( $this->issue_id )
+					$t_link
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::REOPENED:
@@ -113,7 +119,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_reopened' ),
 					user_get_name( $this->user_id ),
-					string_get_bug_view_link( $this->issue_id )
+					$t_link
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::IGNORED:

@@ -49,15 +49,21 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
+		$t_show_summary = config_get( 'timeline_show_issue_summary' );
+		if ( $t_show_summary ) {
+			$t_link = string_get_bug_view_link_with_summary( $this->issue_id );
+		} else {
+			$t_link = string_get_bug_view_link( $this->issue_id );
+		}
 		if( $this->user_id == $this->handler_id ) {
 			$t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), $t_link );
 		} else if( $this->handler_id != NO_USER ) {
 			$t_html = $this->html_start( 'fa-hand-o-right' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), $t_link, user_get_name( $this->handler_id ) );
 		} else {
             $t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), $t_link );
 		}
 
 		$t_html .= '<div class="action">' . $t_string . '</div>';
