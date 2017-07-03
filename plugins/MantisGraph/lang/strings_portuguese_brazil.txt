@@ -88,3 +88,5 @@ $s_plugin_MantisGraph_period_year_to_date = 'Este ano';
 $s_plugin_MantisGraph_period_select = 'Especificar período';
 $s_plugin_MantisGraph_period_last_year = 'Ano Passado';
 $s_plugin_MantisGraph_graph_page = 'Gráfico do histórico da tarefa';
+$s_plugin_MantisGraph_graph_topdev = 'Principais desenvolvedores por problemas corrigidos';
+$s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por questões abertas';

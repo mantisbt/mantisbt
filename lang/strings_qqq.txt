@@ -63,6 +63,7 @@
  * @author SkyDaisy9
  * @author Umherirrender
  * @author Vincent
+ * @author Vuh
  * @author Waldir
  */
 
@@ -442,7 +443,7 @@ $s_filters = '{{Identical|Filter}}';
 $s_create_project = '{{Identical|Create project}}';
 $s_others = '{{Identical|Other}}';
 $s_email_notification = '{{Identical|Email notification}}';
-$s_email_on_updated = 'E-mail dla aktualizacji.';
+$s_email_on_updated = 'E-mail on Updated';
 $s_loading = '{{Identical|Loading}}';
 $s_between_date = '{{Identical|Between}}';
 $s_before_date = '{{Identical|Before}}';
