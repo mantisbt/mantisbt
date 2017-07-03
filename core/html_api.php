@@ -640,7 +640,7 @@ function print_manage_menu( $p_page = '' ) {
 		echo '</li>' . "\n";
 	}
 
-	# Plugins menu items - these are cooked links
+	# Plugins menu items - these are html hyperlinks (<a> tags)
 	foreach( $t_menu_options as $t_menu_item ) {
 		$t_active = $p_page && strpos( $t_menu_item, $p_page ) !== false
 			? ' class="active"'
