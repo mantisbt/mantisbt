@@ -25,10 +25,14 @@
 $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_issue_get' );
 	$g_app->get( '/', 'rest_issue_get' );
+	$g_app->get( '/{id}', 'rest_issue_get' );
+	$g_app->get( '/{id}/', 'rest_issue_get' );
 	$g_app->post( '', 'rest_issue_add' );
 	$g_app->post( '/', 'rest_issue_add' );
 	$g_app->delete( '', 'rest_issue_delete' );
 	$g_app->delete( '/', 'rest_issue_delete' );
+	$g_app->delete( '/{id}', 'rest_issue_delete' );
+	$g_app->delete( '/{id}/', 'rest_issue_delete' );
 });
 
 /**
@@ -40,7 +44,7 @@ $g_app->group('/issues', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = $p_request->getParam( 'id' );
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
 	if( !is_blank( $t_issue_id ) ) {
 		# Get Issue By Id
@@ -115,7 +119,7 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = $p_request->getParam( 'id' );
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
 	# Username and password below are ignored, since middleware already done the auth.
 	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
