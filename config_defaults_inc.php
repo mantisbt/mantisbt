@@ -3623,6 +3623,11 @@ $g_my_view_boxes_fixed_position = ON;
  */
 $g_timeline_show_issue_summary = OFF;
 
+/**
+ * Control the maximum length of each summary shown in timeline when $g_timeline_show_issue_summary is ON.
+ */
+$g_timeline_issue_summary_length = 20;
+
 #############
 # RSS Feeds #
 #############

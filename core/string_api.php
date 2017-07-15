@@ -644,9 +644,10 @@ function string_get_bug_page( $p_action ) {
  * @param integer $p_bug_id	     A bug identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
+ * @param boolean $p_long_link 	 When set to false, the returned link is displayed as bug ID. When set to true, the return string is displayed as ID: summary.
  * @return string
  */
-function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false, $p_long_link = false ) {
 	if( bug_exists( $p_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
@@ -666,42 +667,15 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 				$t_link .= ' class="resolved"';
 			}
 		}
-		$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
-	} else {
-		$t_link = bug_format_id( $p_bug_id );
-	}
-
-	return $t_link;
-}
-
-/**
- * return an href anchor that links to a bug VIEW page for the given bug
- * @param integer $p_bug_id      A bug identifier.
- * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
- * @param boolean $p_fqdn        Whether to return an absolute or relative link.
- * @return string
- */
-function string_get_bug_view_link_with_summary( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
-	if( bug_exists( $p_bug_id ) ) {
-		$t_link = '<a href="';
-		if( $p_fqdn ) {
-			$t_link .= config_get_global( 'path' );
-		} else {
-			$t_link .= config_get_global( 'short_path' );
+		$t_link .= '>' . bug_format_id( $p_bug_id );
+		if ( $p_long_link ) {
+			$t_short_summary = $t_summary;
+			$t_summary_length = config_get( 'timeline_issue_summary_length' );
+			$t_short_summary = mb_strimwidth( $t_summary, 0, $t_summary_length, '...', 'utf-8' );
+			$t_link .= $t_short_summary;
 		}
-		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
-		if( $p_detail_info ) {
-			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
-			$t_link .= ' title="' . bug_format_id( $p_bug_id ) . ': [' . $t_status . '] ' . $t_summary . '"';
-
-			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );
-			if( $t_resolved ) {
-				$t_link .= ' class="resolved"';
-			}
-		}
-		$t_link .= '>' . $t_summary . '</a>';
+		$t_link .= '</a>';
+		
 	} else {
 		$t_link = bug_format_id( $p_bug_id );
 	}
