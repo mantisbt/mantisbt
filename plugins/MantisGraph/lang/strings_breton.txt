@@ -84,3 +84,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Er bloaz-mañ';
 $s_plugin_MantisGraph_period_select = 'Diuzañ an deiziadoù';
 $s_plugin_MantisGraph_period_last_year = 'Warlene';
 $s_plugin_MantisGraph_graph_page = 'Grafik istor an draen';
+$s_plugin_MantisGraph_graph_topdev = 'Diorroeien oberiantañ dre zanvez Reizhet';
+$s_plugin_MantisGraph_graph_opendev = 'Diorroerien dre zanvez Digor';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Danevelleren oberiantañ dre zanvez Reizhet';

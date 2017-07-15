@@ -54,6 +54,6 @@ $s_plugin_format_process_urls = 'Traitement des URL';
 $s_plugin_format_process_buglinks = 'Liens internes de MantisBT (bogues et notes sur un bogue)';
 $s_plugin_format_process_buglinks_info = 'Votre configuration définit la balise <em>Issue</em> comme « <literal>%s</literal> » et <em>Issue Note</em> comme « <literal>%s</literal> »';
 $s_plugin_format_process_markdown = 'Traitement Markdown';
-$s_plugin_format_process_markdown_info = 'Mise en forme utilisant le support Markdown, la syntaxe du formatage du texte est faite de sorte à ce que celui-ci puisse être converti en HTML.';
+$s_plugin_format_process_markdown_info = 'Mise en forme utilisant la prise en charge Markdown, la syntaxe du formatage du texte permet que celui-ci puisse être converti en HTML.';
 $s_plugin_format_enabled = 'Activé';
 $s_plugin_format_disabled = 'Désactivé';
