@@ -61,7 +61,7 @@ $t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<i class="fa fa-lock fa-lg" alt="' . lang_get( 'protected' ) . '" />';
 
 $f_save          = gpc_get_bool( 'save' );
-$f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+$f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
