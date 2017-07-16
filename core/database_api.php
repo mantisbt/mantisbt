@@ -715,7 +715,7 @@ function db_prepare_string( $p_string ) {
 			return addslashes( $p_string );
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, mb_strlen( $t_escaped ) - 2 );
+			return mb_substr( $t_escaped, 1, mb_strlen( $t_escaped ) - 2 );
 		case 'pgsql':
 			return pg_escape_string( $p_string );
 		case 'oci8':
@@ -1320,9 +1320,9 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 					# Skip this token, so replacing it with itself.
 					$t_replace = $t_match_param[0];
 				}
-				$p_query = utf8_substr( $p_query, 0, $t_utf8_offset )
+				$p_query = mb_substr( $p_query, 0, $t_utf8_offset )
 					. $t_replace
-					. utf8_substr( $p_query, $t_utf8_offset + mb_strlen( $t_match_param[0] ) );
+					. mb_substr( $p_query, $t_utf8_offset + mb_strlen( $t_match_param[0] ) );
 				$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
 			} else {
 				$t_lastoffset = $t_match_param[1] + 1;

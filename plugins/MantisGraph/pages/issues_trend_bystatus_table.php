@@ -148,7 +148,7 @@ ksort( $t_view_status );
 # @todo - these should probably be separate strings, but in the summary page context,
 # the string is used as the title for all columns
 $t_label_string = lang_get( 'orct' ); # use the (open/resolved/closed/total) label
-$t_label_strings = explode( '/', utf8_substr( $t_label_string, 1, strlen( $t_label_string ) - 2 ) );
+$t_label_strings = explode( '/', mb_substr( $t_label_string, 1, strlen( $t_label_string ) - 2 ) );
 
 # add headers for table
 $t_date_format = config_get( 'short_date_format' );

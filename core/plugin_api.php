@@ -511,7 +511,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 		# their code, adapt it if necessary, and release a new version of the
 		# plugin with updated dependencies.
 		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
-			$t_version_core = utf8_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
+			$t_version_core = mb_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
 				$t_is_current_core_supported = $t_is_current_core_supported
@@ -530,12 +530,12 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			# check for a less-than-or-equal version requirement
 			$t_ltpos = strpos( $t_required, '<=' );
 			if( $t_ltpos !== false ) {
-				$t_required = trim( utf8_substr( $t_required, $t_ltpos + 2 ) );
+				$t_required = trim( mb_substr( $t_required, $t_ltpos + 2 ) );
 				$t_maximum = true;
 			} else {
 				$t_ltpos = strpos( $t_required, '<' );
 				if( $t_ltpos !== false ) {
-					$t_required = trim( utf8_substr( $t_required, $t_ltpos + 1 ) );
+					$t_required = trim( mb_substr( $t_required, $t_ltpos + 1 ) );
 					$t_maximum = true;
 				}
 			}

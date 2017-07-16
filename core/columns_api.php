@@ -343,7 +343,7 @@ function column_is_sortable( $p_column ) {
  */
 function column_get_custom_field_name( $p_column ) {
 	if( strncmp( $p_column, 'custom_', 7 ) === 0 ) {
-		return utf8_substr( $p_column, 7 );
+		return mb_substr( $p_column, 7 );
 	}
 
 	return null;

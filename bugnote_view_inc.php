@@ -280,7 +280,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						echo lang_get( 'reminder_sent_none' );
 					} else {
 						# If recipients list's last char is not a delimiter, it was truncated
-						$t_truncated = ( '|' != utf8_substr( $t_activity['note']->note_attr, mb_strlen( $t_activity['note']->note_attr ) - 1 ) );
+						$t_truncated = ( '|' != mb_substr( $t_activity['note']->note_attr, mb_strlen( $t_activity['note']->note_attr ) - 1 ) );
 
 						# Build recipients list for display
 						$t_to = array();

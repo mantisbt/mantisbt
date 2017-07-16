@@ -91,7 +91,7 @@ $t_header = ob_get_clean();
 # Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
 # See Microsoft Knowledge Base Article - 323626
 # http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
-$t_first_three_chars = utf8_substr( $t_header, 0, 3 );
+$t_first_three_chars = mb_substr( $t_header, 0, 3 );
 if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 	$t_header = str_replace( 'ID' . $t_sep, 'Id' . $t_sep, $t_header );
 }

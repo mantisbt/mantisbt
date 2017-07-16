@@ -47,17 +47,3 @@ function php_mode() {
 
 	return $s_mode;
 }
-
-# If mb_* not defined, define it to map to standard methods.
-if( !function_exists( 'mb_substr' ) ) {
-	/**
-	 * Map mb_substr to utf8_substr if mb extension is not found
-	 * @param string  $p_text  Text string.
-	 * @param integer $p_index Start position.
-	 * @param integer $p_size  Size.
-	 * @return string
-	 */
-	function mb_substr( $p_text, $p_index, $p_size ) {
-		return utf8_substr( $p_text, $p_index, $p_size );
-	}
-}

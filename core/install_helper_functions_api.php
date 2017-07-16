@@ -550,7 +550,7 @@ function install_update_history_long_custom_fields() {
 	$t_result = db_query( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		if( mb_strlen( $t_field['name'] ) > 32 ) {
-			$t_custom_fields[utf8_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
+			$t_custom_fields[mb_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
 		}
 	}
 	if( !isset( $t_custom_fields ) ) {

@@ -393,7 +393,7 @@ function tag_parse_filters( $p_string ) {
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
 			$t_tag_row = tag_get_by_name( $t_matches[1] );
 			if( $t_tag_row !== false ) {
-				$t_filter = utf8_substr( $t_name, 0, 1 );
+				$t_filter = mb_substr( $t_name, 0, 1 );
 
 				if( '+' == $t_filter ) {
 					$t_tag_row['filter'] = 1;
