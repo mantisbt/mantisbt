@@ -176,7 +176,7 @@ function columns_get_plugin_columns() {
 						} else {
 							continue;
 						}
-						$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
+						$t_column_name = mb_strtolower( $t_plugin . '_' . $t_column_object->column );
 						$s_column_array[$t_column_name] = $t_column_object;
 					}
 				}
@@ -453,11 +453,11 @@ function column_get_title( $p_column ) {
  * @access public
  */
 function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, array $p_columns_all ) {
-	$t_columns_all_lower = array_map( 'utf8_strtolower', $p_columns_all );
+	$t_columns_all_lower = array_map( 'mb_strtolower', $p_columns_all );
 
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
-		if( !in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( !in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
 			return false;
@@ -467,7 +467,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	# Check for duplicate fields
 	$t_columns_no_duplicates = array();
 	foreach( $p_columns_to_validate as $t_column ) {
-		$t_column_lower = utf8_strtolower( $t_column );
+		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
@@ -489,11 +489,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
  * @access public
  */
 function columns_remove_invalid( array $p_columns, array $p_columns_all ) {
-	$t_columns_all_lower = array_values( array_map( 'utf8_strtolower', $p_columns_all ) );
+	$t_columns_all_lower = array_values( array_map( 'mb_strtolower', $p_columns_all ) );
 	$t_columns = array();
 
 	foreach( $p_columns as $t_column ) {
-		if( in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			$t_columns[] = $t_column;
 		}
 	}

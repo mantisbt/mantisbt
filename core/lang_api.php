@@ -153,7 +153,7 @@ function lang_map_auto() {
 
 		# Find encoding
 		foreach( $t_accept_langs as $t_accept_lang ) {
-			$t_tmp = explode( ';', utf8_strtolower( $t_accept_lang ) );
+			$t_tmp = explode( ';', mb_strtolower( $t_accept_lang ) );
 
 			if( isset( $t_auto_map_exp[trim( $t_tmp[0] )] ) ) {
 				$t_valid_langs = config_get( 'language_choices_arr' );

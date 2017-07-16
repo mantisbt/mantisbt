@@ -288,7 +288,7 @@ function version_update( VersionData $p_version_info ) {
 	$t_old_version_name = version_get_field( $p_version_info->id, 'version' );
 
 	# check for duplicates
-	if( ( utf8_strtolower( $t_old_version_name ) != utf8_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
+	if( ( mb_strtolower( $t_old_version_name ) != mb_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
 		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
 	}
 

@@ -116,7 +116,7 @@ function filter_get_plugin_filters() {
 						} else {
 							continue;
 						}
-						$t_filter_name = utf8_strtolower( $t_plugin . '_' . $t_filter_object->field );
+						$t_filter_name = mb_strtolower( $t_plugin . '_' . $t_filter_object->field );
 						$s_field_array[$t_filter_name] = $t_filter_object;
 					}
 				}

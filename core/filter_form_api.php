@@ -1970,7 +1970,7 @@ function print_filter_values_show_sort( array $p_filter ) {
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
 			}
-			echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . utf8_strtolower( $t_dir_fields[$i] ) );
+			echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . mb_strtolower( $t_dir_fields[$i] ) );
 		} elseif ( $i == $t_max_displayed_sort ) {
 			echo ', ...';
 		}

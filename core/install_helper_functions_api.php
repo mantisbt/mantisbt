@@ -209,7 +209,7 @@ function install_category_migrate() {
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_user_id ) {
-			$t_lower_name = utf8_strtolower( trim( $t_name ) );
+			$t_lower_name = mb_strtolower( trim( $t_name ) );
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
 				db_param_push();
 				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( ' .

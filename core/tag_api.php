@@ -593,7 +593,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	tag_ensure_name_is_valid( $p_name );
 
 	$t_rename = false;
-	if( utf8_strtolower( $p_name ) != utf8_strtolower( $t_tag_name ) ) {
+	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
 		tag_ensure_unique( $p_name );
 		$t_rename = true;
 	}
