@@ -92,11 +92,8 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 */
 	public function html() {
 		$t_show_summary = config_get( 'timeline_show_issue_summary' );
-		if ( $t_show_summary ) {
-			$t_link = string_get_bug_view_link_with_summary( $this->issue_id );
-		} else {
-			$t_link = string_get_bug_view_link( $this->issue_id );
-		}
+		$t_link = string_get_bug_view_link( $this->issue_id, true, false, $t_show_summary );
+		
 		switch( $this->type ) {
 			case IssueStatusChangeTimelineEvent::RESOLVED:
                 $t_html = $this->html_start( 'fa-thumbs-o-up' );
