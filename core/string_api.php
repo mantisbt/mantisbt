@@ -829,7 +829,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int)$p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( mb_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -842,7 +842,7 @@ function string_shorten( $p_string, $p_max = null ) {
 			$t_string .= '...';
 		} else {
 			foreach( $t_bits as $t_bit ) {
-				if( ( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+				if( ( mb_strlen( $t_string ) + mb_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 					$t_string .= $t_bit;
 				} else {
 					break;

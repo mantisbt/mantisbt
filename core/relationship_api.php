@@ -730,7 +730,7 @@ function relationship_can_resolve_bug( $p_bug_id ) {
  * @return string
  */
 function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
-	$t_summary_wrap_at = utf8_strlen( config_get( 'email_separator2' ) ) - 28;
+	$t_summary_wrap_at = mb_strlen( config_get( 'email_separator2' ) ) - 28;
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
 		# root bug is in the source side, related bug in the destination side
@@ -801,7 +801,7 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 			$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" alt="(%s)" title="%s" />', lang_get( 'private' ), lang_get( 'private' ) );
 		}
 	} else {
-		if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+		if( mb_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 			$t_relationship_info_text .= string_email_links( $t_bug->summary );
 		} else {
 			$t_relationship_info_text .= utf8_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';

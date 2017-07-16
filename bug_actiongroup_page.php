@@ -130,7 +130,7 @@ foreach( $t_custom_group_actions as $t_custom_group_action ) {
 # Check if user selected to update a custom field.
 $t_custom_fields_prefix = 'custom_field_';
 if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
-	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
+	$t_custom_field_id = (int)substr( $f_action, mb_strlen( $t_custom_fields_prefix ) );
 	$f_action = 'CUSTOM';
 	$t_event_params['action'] = $f_action;
 }

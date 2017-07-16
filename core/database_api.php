@@ -715,7 +715,7 @@ function db_prepare_string( $p_string ) {
 			return addslashes( $p_string );
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
+			return utf8_substr( $t_escaped, 1, mb_strlen( $t_escaped ) - 2 );
 		case 'pgsql':
 			return pg_escape_string( $p_string );
 		case 'oci8':
@@ -1297,7 +1297,7 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 			# Realign the offset returned by preg_match as it is byte-based,
 			# which causes issues with UTF-8 characters in the query string
 			# (e.g. from custom fields names)
-			$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
+			$t_utf8_offset = mb_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
 			if( $i <= count( $p_arr_parms ) ) {
 				if( db_is_pgsql() ) {
 					# For pgsql, the bound value is indexed by the parameter name
@@ -1322,7 +1322,7 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 				}
 				$p_query = utf8_substr( $p_query, 0, $t_utf8_offset )
 					. $t_replace
-					. utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_match_param[0] ) );
+					. utf8_substr( $p_query, $t_utf8_offset + mb_strlen( $t_match_param[0] ) );
 				$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
 			} else {
 				$t_lastoffset = $t_match_param[1] + 1;

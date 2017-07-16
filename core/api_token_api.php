@@ -53,7 +53,7 @@ function api_token_create( $p_token_name, $p_user_id ) {
 	}
 
 	$t_token_name = trim( $p_token_name );
-	if( utf8_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
+	if( mb_strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
 		error_parameters( lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME );
 		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
 	}
@@ -113,7 +113,7 @@ function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
 function api_token_get_user( $p_token ) {
 	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
 	# This is likely called from code that supports both tokens and passwords.
-	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+	if( is_blank( $p_token ) || mb_strlen( $p_token ) != API_TOKEN_LENGTH ) {
 		return false;
 	}
 
@@ -144,7 +144,7 @@ function api_token_get_user( $p_token ) {
 function api_token_validate( $p_username, $p_token ) {
 	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
 	# This is likely called from code that supports both tokens and passwords.
-	if( is_blank( $p_token ) || utf8_strlen( $p_token ) != API_TOKEN_LENGTH ) {
+	if( is_blank( $p_token ) || mb_strlen( $p_token ) != API_TOKEN_LENGTH ) {
 		return false;
 	}
 

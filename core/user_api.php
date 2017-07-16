@@ -330,7 +330,7 @@ function user_ensure_email_unique( $p_email, $p_user_id = null ) {
  */
 function user_is_name_valid( $p_username ) {
 	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
-	if( utf8_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
+	if( mb_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
 		return false;
 	}
 

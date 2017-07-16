@@ -302,7 +302,7 @@ function cfdef_prepare_date_default( $p_value ) {
 	}
 
 	$t_value = trim( $p_value );
-	$t_value_length = utf8_strlen( $t_value );
+	$t_value_length = mb_strlen( $t_value );
 
 	# We are expanding {tomorrow}, {yesterday}, {+3 days}, {-7 days}, {next week}
 	# See strtotime() for more details about supported formats.
