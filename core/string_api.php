@@ -669,10 +669,9 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 		}
 		$t_link .= '>' . bug_format_id( $p_bug_id );
 		if ( $p_long_link ) {
-			$t_short_summary = $t_summary;
 			$t_summary_length = config_get( 'timeline_issue_summary_length' );
-			$t_short_summary = mb_strimwidth( $t_summary, 0, $t_summary_length, '...', 'utf-8' );
-			$t_link .= $t_short_summary;
+			$t_short_summary = mb_strimwidth( $t_summary, 0, $t_summary_length, '...' );
+			$t_link .= ': ' . $t_short_summary;
 		}
 		$t_link .= '</a>';
 		
