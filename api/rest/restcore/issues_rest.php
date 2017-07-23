@@ -33,6 +33,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->delete( '/', 'rest_issue_delete' );
 	$g_app->delete( '/{id}', 'rest_issue_delete' );
 	$g_app->delete( '/{id}/', 'rest_issue_delete' );
+
+	# Notes
+	$g_app->post( '/{id}/notes/', 'rest_issue_note_add' );
+	$g_app->post( '/{id}/notes', 'rest_issue_note_add' );
 });
 
 /**
@@ -131,3 +135,41 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 
+function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_note_info = $p_request->getParsedBody();
+
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+
+	$t_note = new stdClass();
+	$t_note->text = isset( $t_note_info['text'] ) ? $t_note_info['text'] : '';
+
+	if( isset( $t_note_info['view_state'] ) ) {
+		$t_note->view_state = $t_note_info['view_state'];
+	}
+
+	if( isset( $t_note_info['reporter'] ) ) {
+		$t_note->reporter = $t_note_info['reporter'];
+	}
+
+	# TODO: support time tracking notes
+	# TODO: support reminder notes
+	# TODO: support note attachments
+
+	$t_result = mc_issue_note_add( /* username */ '', /* password */ '', $t_issue_id, $t_note );
+	if( ApiObjectFactory::isFault( $t_result ) ) {
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+	}
+
+	$t_note_id = $t_result;
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	foreach( $t_issue['notes'] as $t_current_note ) {
+		if( $t_current_note['id'] == $t_note_id ) {
+			$t_note = $t_current_note;
+			break;
+		}
+	}
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Note Created with id $t_issue_id" )->
+		withJson( array( 'note' => $t_note, 'issue' => $t_issue ) );
+}
