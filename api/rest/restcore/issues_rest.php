@@ -37,6 +37,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	# Notes
 	$g_app->post( '/{id}/notes/', 'rest_issue_note_add' );
 	$g_app->post( '/{id}/notes', 'rest_issue_note_add' );
+	$g_app->delete( '/{id}/notes/{note_id}/', 'rest_issue_note_delete' );
+	$g_app->delete( '/{id}/notes/{note_id}', 'rest_issue_note_delete' );
 });
 
 /**
@@ -172,4 +174,18 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Note Created with id $t_issue_id" )->
 		withJson( array( 'note' => $t_note, 'issue' => $t_issue ) );
+}
+
+function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_issue_note_id = isset( $p_args['note_id'] ) ? $p_args['note_id'] : $p_request->getParam( 'note_id' );
+
+	$t_result = mc_issue_note_delete( '', '', $t_issue_note_id );
+	if( ApiObjectFactory::isFault( $t_result ) ) {
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+	}
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
+		withJson( array( 'issue' => $t_issue ) );
 }
