@@ -57,12 +57,22 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 	$t_result = history_query_result( $t_query_options );
 	$t_count = 0;
 
+	$t_previous_history_event = null;
 	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
 		$t_event = null;
 		$t_user_id = $t_history_event['userid'];
 		$t_timestamp = $t_history_event['date'];
 		$t_issue_id = $t_history_event['bug_id'];
 
+		if ( $t_previous_history_event != null ) {  //check repeated event
+			if ( $t_previous_history_event['userid'] == $t_history_event['userid'] &&
+				 $t_previous_history_event['date'] == $t_history_event['date'] &&
+				 $t_previous_history_event['bug_id'] == $t_history_event['bug_id'] &&
+				 $t_previous_history_event['type'] == $t_history_event['type']	) {
+				continue;
+			}
+		}
+		
 		switch( $t_history_event['type'] ) {
 			case NEW_BUG:
 				$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
@@ -101,11 +111,16 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 						break;
 				}
 				break;
+			case FILE_ADDED:
+ 				$t_bugnote_id = $t_history_event['old_value'];
+				$t_event = new IssueFileAddedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_bugnote_id );
+ 				break;
 		}
 
 		# Do not include skipped events
 		if( $t_event != null && !$t_event->skip() ) {
 			$t_timeline_events[] = $t_event;
+			$t_previous_history_event = $t_history_event;
 			$t_count++;
 
 			if ( $p_max_events > 0 && $t_count >= $p_max_events ) {
