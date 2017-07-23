@@ -389,8 +389,8 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 			unset( $t_bugnote['time_tracking'] );
 		}
 
-		$t_bugnote['created_at'] = ApiObjectFactory::datetimeString( $t_created_at );
-		$t_bugnote['updated_at'] = ApiObjectFactory::datetimeString( $t_modified_at );
+		$t_bugnote['created_at'] = $t_created_at;
+		$t_bugnote['updated_at'] = $t_modified_at;
 	}
 
 	return $t_bugnote;
