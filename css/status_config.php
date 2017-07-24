@@ -91,8 +91,3 @@ foreach( $t_statuses as $t_id => $t_label ) {
 			. " { color: {$t_colors[$t_label]}; background-color: {$t_colors[$t_label]}; }\n";
 	}
 }
-
-# Status legend width class
-$t_color_count = count( $t_colors );
-$t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
-echo ".status-legend-width { width: $t_color_width%; }\n";
