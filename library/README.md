@@ -9,8 +9,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-rssbuilder      | RSSBuilder      | 2.2.1     | patched [1]
-utf8            | phputf8         | 0.5       | unpatched
+rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 
 
 ## Javascript/CSS libraries
@@ -40,7 +39,6 @@ Upstream projects
 project         | URL
 ----------------|--------------------------------------------------------------------
 rssbuilder      | http://code.google.com/p/flaimo-php/
-utf8            | http://sourceforge.net/projects/phputf8
 jquery          | https://jquery.com/
 bootstrap       | http://getbootstrap.com/
 fontawesome     | http://fontawesome.io/
