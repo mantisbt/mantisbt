@@ -282,10 +282,9 @@ function print_filter_user_monitor( array $p_filter = null ) {
 		echo '>[' . lang_get( 'myself' ) . ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
-	$t_has_project_level = access_has_project_level( $t_threshold );
 
-	if( $t_has_project_level ) {
-		print_reporter_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+	if( access_has_project_level( $t_threshold ) ) {
+		print_user_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], null, config_get( 'monitor_bug_threshold' ) );
 	}
 	?>
 		</select>
