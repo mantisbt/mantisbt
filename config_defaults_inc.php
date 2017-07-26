@@ -680,6 +680,14 @@ $g_smtp_connection_mode = '';
  */
 $g_smtp_port = 25;
 
+/** 
+ * When sending e-mail via ssl or tls, the mail server you are sending to may be
+ * using a self-signed certificate. If so then you must set this value to false
+ * otherwise mantis will silently fail to send your e-mails.
+ * @global bool $g_smtp_ssl_verify_peer
+ */
+$g_smtp_ssl_verify_peer = true;
+
 /**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
