@@ -198,7 +198,9 @@ $t_mime_force_inline = array(
 	'application/pdf' );
 $t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' );
 
-$t_mime_type = substr( $t_content_type, 0, strpos( $t_content_type, ';' ) );
+# extract mime type from content type
+$t_mime_type = explode( ';', $t_content_type, 2 );
+$t_mime_type = $t_mime_type[0];
 
 if( in_array( $t_mime_type, $t_mime_force_inline ) ) {
 	$t_show_inline = true;
