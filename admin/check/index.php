@@ -202,6 +202,8 @@ if( !$g_failed_test ) {
 <div class="alert alert-success"  id="check-notice-passed">
 	All tests passed.
 </div>
+<?php } ?>
+
 </div>
-<?php }
+<?php
 layout_admin_page_end();
