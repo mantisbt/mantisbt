@@ -146,7 +146,8 @@ if( $f_error || $f_cookie_error ) {
 
 $t_warnings = array();
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin' ) ) {
+
+if( config_get_global( 'admin_checks' ) == ON ) {
 	# Check if the admin directory is accessible
 	$t_admin_dir = dirname( __FILE__ ) . '/admin';
 	$t_admin_dir_is_accessible = @file_exists( $t_admin_dir . '/.' );
@@ -200,17 +201,21 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-	$t_upgrades_reqd = count( $g_upgrade ) - 1;
+	if( $t_admin_dir_is_accessible ) {
+		require_once( 'admin/schema.php' );
+		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
-	if( ( 0 < $t_db_version ) &&
+		if( ( 0 < $t_db_version ) &&
 			( $t_db_version != $t_upgrades_reqd ) ) {
 
-		if( $t_db_version < $t_upgrades_reqd ) {
-			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
-			$t_upgrade_required = true;
-		} else {
-			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+			if( $t_db_version < $t_upgrades_reqd ) {
+				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2'
+				);
+				$t_upgrade_required = true;
+			}
+			else {
+				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+			}
 		}
 	}
 }
