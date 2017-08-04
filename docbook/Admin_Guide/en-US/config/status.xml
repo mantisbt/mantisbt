@@ -228,6 +228,15 @@
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_parent_of_unresolved_to_close</term>
+			<listitem>
+				<para>If set, no check is performed on the status of a bug's children,
+					which allows the parent to be closed whether or not the children
+					have been resolved. The default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 
 	<para>See also:
