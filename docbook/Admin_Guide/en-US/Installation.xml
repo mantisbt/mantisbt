@@ -677,21 +677,35 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>Test your configuration
 				</para>
 				<para>Load up <emphasis>admin/check/index.php</emphasis>
-					to validate if everything is setup correctly.
+					to validate whether everything is setup correctly, and
+					take corrective action as needed.
 				</para>
 			</listitem>
 
 			<listitem>
 				<para>Delete the <emphasis>admin</emphasis> folder
 				</para>
-				<para>For security reasons, the scripts within this directory
-					should not be accessible on a live MantisBT site or on any
-					installation that is accessible via the Internet.
-				</para>
-				<para>Once you have confirmed that the install/upgrade
-					was successful, you should delete this directory
+				<para>Once you have confirmed that the install or upgrade
+					process was successful, you should delete this directory
 					<programlisting>rm -r admin</programlisting>
 				</para>
+				<para>For security reasons, the scripts within this directory
+					should not be freely accessible on a live MantisBT site,
+					particularly one which is accessible via the Internet, as
+					they can allow unauthorized people (e.g. hackers) to gain
+					technical knowledge about the system, as well as perform
+					administrative tasks.
+				</para>
+				<warning>
+					<para>Omitting this important step will leave your MantisBT
+						instance exposed to several potentially severe attacks, e.g.
+						<ulink url="http://mantisbt.org/bugs/view.php?id=23173">
+							issue #23173</ulink> (if
+						<ulink url="http://php.net/manual/en/mysqli.configuration.php#ini.mysqli.allow-local-infile">
+							mysqli.allow_local_infile</ulink>
+						is enabled in php.ini).
+					</para>
+				</warning>
 			</listitem>
 		</orderedlist>
 	</section>
