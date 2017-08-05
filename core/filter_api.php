@@ -2284,8 +2284,14 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				' OR ' . db_helper_like( '{bug_text}.description' ) .
 				' OR ' . db_helper_like( '{bug_text}.steps_to_reproduce' ) .
 				' OR ' . db_helper_like( '{bug_text}.additional_information' ) .
-				' OR ' . db_helper_like( '{bugnote_text}.note' );
+				' OR ' . db_helper_like( '{bugnote_text}.note' ) .
+				' OR ' . db_helper_like( '{tag}.name' ) .
+				' OR ' . db_helper_like( '{custom_field_string}.value' ) .
+				' OR ' . db_helper_like( '{category}.name' );
 
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
+			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
@@ -2314,6 +2320,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_join_clauses[] = 'LEFT JOIN {bugnote} ON {bug}.id = {bugnote}.bug_id';
 			# Outer join required otherwise we don't retrieve issues without notes
 			$t_join_clauses[] = 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id';
+			$t_join_clauses[] = 'LEFT JOIN {bug_tag} ON {bug}.id = {bug_tag}.bug_id';
+			$t_join_clauses[] = 'LEFT JOIN {tag} ON {bug_tag}.tag_id = {tag}.id';
+			$t_join_clauses[] = 'LEFT JOIN {custom_field_string} ON {bug}.id = {custom_field_string}.bug_id';
+			$t_join_clauses[] = 'LEFT JOIN {category} ON {bug}.category_id = {category}.id';
 			$t_where_clauses[] = $t_textsearch_where_clause;
 		}
 	}
