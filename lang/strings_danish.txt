@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -358,7 +358,6 @@ $s_delete_bug_sure_msg = 'Er du sikker på du vil slette denne rapport?';
 $s_delete_bug_button = 'Slet';
 $s_monitor_bug_button = 'Overvåg';
 $s_unmonitor_bug_button = 'Afslut overvågning';
-$s_file_upload_msg = 'Filen er blevet overført';
 $s_upload_file = 'Overfør fil';
 $s_upload_files = 'Overfør filer';
 $s_select_file = 'Vælg fil';
@@ -430,7 +429,6 @@ $s_all_revisions = 'Alle versioner';
 $s_back_to_issue = 'Tilbage til rapport';
 $s_confirm_revision_drop = 'Er du sikker på du vil droppe denne rapport revision?';
 $s_vote_added_msg = 'Stemme er blevet tilføjet...';
-$s_bugnote_added_msg = 'Bemærkning tilføjet...';
 $s_bugnote_deleted_msg = 'Bemærkning er blevet slettet..';
 $s_bug_notes_title = 'Bemærkninger';
 $s_edit_bugnote_title = 'Redigér bemærkning';
@@ -812,8 +810,10 @@ $s_changed = 'Ændret(timer)';
 $s_viewing_bugs_title = 'Vis rapporter';
 $s_updated = 'Opdateret';
 $s_sticky = 'Vis klæbrige rapporter';
+$s_sort = 'Sorter efter';
 $s_issue_id = 'Rapport #';
 $s_recently_visited = 'For nylig besøgte';
+$s_note_user_id = 'Bemærkning fra';
 $s_filter_match_type = 'Resultattype';
 $s_filter_match_all = 'Alle betingelser';
 $s_filter_match_any = 'Enhver betingelse';
@@ -939,7 +939,6 @@ $s_relationship_deleted = 'Relation fjernet';
 $s_no_relationship = 'ingen relation';
 $s_relationship_replaced = 'Relation erstattet';
 $s_replace_relationship_button = 'Erstat';
-$s_replace_relationship_sure_msg = 'Der er allerede angivet en relation mellem disse to rapporter. Er du sikker på at du vil erstatte den?';
 $s_relationship_with_parent = 'Relation med overordnet rapport';
 $s_delete_relationship_button = 'Slet';
 $s_delete_relationship_sure_msg = 'Er du sikker på at du vil fjerne denne relation?';
@@ -1181,7 +1180,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Adgang nægtet
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angivet en e-mailadresse. Opdater din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden "%1$s" har en ugyldig værdi "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi rapporten "%1$d" er skrivebeskyttet';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Der er allerede en afhængighed mellem disse to rapporter.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Afhængighed ikke fundet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Adgang nægtet: Rapporten %1$d kræver et højere adgangsniveau.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En rapport kan ikke gøres afhængig af sig selv.';

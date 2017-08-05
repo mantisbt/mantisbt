@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -42,20 +42,14 @@
  * @author David Hicks
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Liuxinyu970226
  * @author Shirayuki
  * @author Siebrand Mazeland
  */
 
 $s_plugin_MantisGraph_config = '{{Identical|Configuration}}';
-$s_plugin_MantisGraph_graph_bug_page_link = '{{Identical|Graph}}';
-$s_plugin_MantisGraph_font = '{{Identical|Font}}';
-$s_plugin_MantisGraph_enabled = '{{Identical|On}}';
-$s_plugin_MantisGraph_disabled = '{{Identical|Off}}';
 $s_plugin_MantisGraph_legend_resolved = '{{Identical|Resolved}}';
-$s_plugin_MantisGraph_legend_total = '{{Identical|Total}}';
-$s_plugin_MantisGraph_legend_opened = '{{Identical|Opened}}';
-$s_plugin_MantisGraph_legend_closed = '{{Identical|Closed}}';
+$s_plugin_MantisGraph_legend_reported = '{{Identical|Reported}}';
 $s_plugin_MantisGraph_period_none = '{{Identical|None}}';
 $s_plugin_MantisGraph_period_last_week = '{{Identical|Last week}}';
 $s_plugin_MantisGraph_period_last_month = '{{Identical|Last month}}';
-$s_plugin_MantisGraph_select = '{{Identical|Please select}}';

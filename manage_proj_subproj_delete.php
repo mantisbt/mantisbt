@@ -54,14 +54,20 @@ $f_subproject_id = gpc_get_int( 'subproject_id' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	access_denied();
+}
+
 project_hierarchy_remove( $f_subproject_id, $f_project_id );
 
 form_security_purge( 'manage_proj_subproj_delete' );
 
 $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -38,21 +38,31 @@
  * @ingroup Language
  * @file
  *
+ * @author FirehawkV17
  * @author Omnipaedista
+ * @author Ανώνυμος Βικιπαιδιστής
  */
 
 $s_plugin_graph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_config = 'Διαμόρφωση';
 $s_plugin_MantisGraph_synthesis_link = 'Σύνθεση';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Γράφημα';
-$s_plugin_MantisGraph_library = 'Βιβλιοθήκη γραφημάτων για να χρησιμοποιήσετε';
+$s_plugin_MantisGraph_status_link = 'Ανά Κατάσταση';
+$s_plugin_MantisGraph_priority_link = 'Ανά Προτεραιότητα';
+$s_plugin_MantisGraph_severity_link = 'Ανά Σπουδαιότητα';
+$s_plugin_MantisGraph_category_link = 'Ανά Κατηγορία';
+$s_plugin_MantisGraph_resolution_link = 'Ανά Λύση';
+$s_plugin_MantisGraph_issue_trends_link = 'Τάσεις Ζητημάτων';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Γραφήματα ανά Κατάσταση';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Γραφήματα ανά Προτεραιότητα';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Γραφήματα ανά Σπουδαιότητα';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Γραφήματα ανά Κατηγορία';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Γραφήματα ανά Ανάλυση';
+$s_plugin_MantisGraph_graph_developer_title = 'Γραφήματα ανά Προγραμματιστή';
+$s_plugin_MantisGraph_graph_reporter_title = 'Γραφήματα ανά Αναφορά';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Ζητήματα Ανοιχτά, Επιλυμένα και Εναπομείναντα';
 $s_plugin_MantisGraph_legend_resolved = 'Επιλυμένος';
-$s_plugin_MantisGraph_legend_total = 'Σύνολο';
-$s_plugin_MantisGraph_legend_opened = 'Ανοιγμένος';
-$s_plugin_MantisGraph_legend_closed = 'Κλειστός';
 $s_plugin_MantisGraph_legend_reported = 'Αναφερόμενος';
-$s_plugin_MantisGraph_cumulative = 'Σωρευτικός';
 $s_plugin_MantisGraph_period_none = 'Κανένα';
 $s_plugin_MantisGraph_period_this_week = 'Αυτή τη Βδομάδα';
 $s_plugin_MantisGraph_period_this_month = 'Αυτό το Μήνα';

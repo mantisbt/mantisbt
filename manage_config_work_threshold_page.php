@@ -53,9 +53,11 @@ require_api( 'user_api.php' );
 
 auth_reauthenticate();
 
-html_page_top( lang_get( 'manage_threshold_config' ) );
+layout_page_header( lang_get( 'manage_threshold_config' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
 $g_user = auth_get_current_user_id();
@@ -85,17 +87,26 @@ function set_overrides( $p_config ) {
 function get_section_begin_mcwt( $p_section_name ) {
 	global $g_access_levels;
 
-	echo '<div class="form-container">'. "\n";
-	echo '<table>';
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
+	echo '<table class="table table-striped table-bordered table-condensed">';
 	echo '<thead>';
-	echo '<tr><td class="form-title" colspan="' . ( count( $g_access_levels ) + 2 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	echo '<tr class="row-category2">';
-	echo '<th class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
-	echo '<th class="form-title" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
-	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
-	echo '</tr><tr class="row-category2">';
+	echo '<tr>';
+	echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+	echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'allowed_access_levels' ) . '</th>';
+	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
+	echo '</tr><tr>';
 	foreach( $g_access_levels as $t_access_level => $t_access_label ) {
-		echo '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+		echo '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
 	}
 	echo '</tr>' . "\n";
 	echo '</thead>';
@@ -154,7 +165,7 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 
 	echo '<td class="' . $t_color . '">';
 	if( $p_can_change ) {
-		echo '<select name="access_' . $p_threshold . '">';
+		echo '<select name="access_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( 'access_levels', $t_project_access );
 		echo '</select>';
 	} else {
@@ -225,11 +236,12 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 		if( $t_can_change ) {
 			$t_checked = $t_project ? 'checked="checked"' : '';
-			$t_value = '<input type="checkbox" name="flag_thres_' . $p_threshold . '[]" value="' . $t_access_level . '" ' . $t_checked . '/>';
+			$t_value = '<label><input type="checkbox" class="ace" name="flag_thres_' . $p_threshold .
+				'[]" value="' . $t_access_level . '" ' . $t_checked . ' /><span class="lbl"></span></label>';
 			$t_show_submit = true;
 		} else {
 			if( $t_project ) {
-				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
+				$t_value = '<i class="fa fa-check fa-lg blue"></i>';
 			} else {
 				$t_value = '&#160;';
 			}
@@ -265,11 +277,12 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	if( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? 'checked="checked"' : '';
-		$t_value = '<input type="checkbox" name="flag_' . $p_threshold . '" value="1" ' . $t_checked . ' />';
+		$t_value = '<label><input type="checkbox" class="ace" name="flag_' . $p_threshold . '" value="1" ' .
+			$t_checked . ' /><span class="lbl"></span></label>';
 		$t_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
-			$t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
+			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
 		} else {
 			$t_value = '&#160;';
 		}
@@ -307,7 +320,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	echo "\t" . '<td class="left ' . $t_color . '" colspan="3">';
 	if( $t_can_change ) {
-		echo '<select name="flag_' . $p_threshold . '">';
+		echo '<select name="flag_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
 		echo '</select>';
 		$t_show_submit = true;
@@ -327,24 +340,29 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
  * @return void
  */
 function get_section_end() {
-	echo '</tbody></table></div><br />' . "\n";
+	echo '</tbody></table></div>' . "\n";
+	echo '</div></div></div> ' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 
-
-echo '<br /><br />' . "\n";
+echo '<br />' . "\n";
 
 if( ALL_PROJECTS == $g_project_id ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
 	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $g_project_id ) ) );
 }
-echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+
+echo '<div class="col-md-12 col-xs-12">' . "\n";
+echo '<div class="well">' . "\n";
+echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
 	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '</div>' . "\n";
 
 echo '<form id="mail_config_action" method="post" action="manage_config_work_threshold_set.php">' . "\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
@@ -399,18 +417,18 @@ get_section_end();
 
 
 if( $t_show_submit ) {
-	echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
+	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 }
 
 echo '</form>' . "\n";
 
 if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
-	echo '<div class="right"><form id="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
+	echo '<div class="pull-right"><form id="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
 	echo form_security_field( 'manage_config_revert' );
 	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
 	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';
 	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
-	echo '<input type="submit" class="button" value="';
+	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="';
 	if( ALL_PROJECTS == $g_project_id ) {
 		echo lang_get( 'revert_to_system' );
 	} else {
@@ -419,5 +437,5 @@ if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
 	echo '" />' . "\n";
 	echo '</form></div>' . "\n";
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

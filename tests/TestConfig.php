@@ -29,6 +29,7 @@ ob_start();
 # Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
 @include_once 'PHPUnit/Framework.php';
 
+define( 'MANTIS_MAINTENANCE_MODE', true );
 
 /**
  * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
@@ -92,6 +93,10 @@ function require_mantis_core() {
 
 	$$t_bypass_headers = true;
 	require_once( 'core.php' );
+
+	# We need to disable MantisBT's error handler to allow PHPUnit to convert
+	# errors to exceptions, allowing us to capture and test them.
+	restore_error_handler();
 }
 
 

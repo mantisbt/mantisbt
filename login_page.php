@@ -15,8 +15,10 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Login page POSTs results to login.php
- * Check to see if the user is already logged in
+ * Login page accepts username and posts results to login_password_page.php,
+ * which may take the users credential or redirect to a plugin specific page.
+ *
+ * This page also offers features like anonymous login and signup.
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -57,16 +59,26 @@ $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
 $f_username              = gpc_get_string( 'username', '' );
-$f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
 $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
 
 # Set username to blank if invalid to prevent possible XSS exploits
-if( !user_is_name_valid( $f_username ) ) {
-	$f_username = '';
+$t_username = auth_prepare_username( $f_username );
+
+if( config_get_global( 'email_login_enabled' ) ) {
+	$t_username_label = lang_get( 'username_or_email' );
+} else {
+	$t_username_label = lang_get( 'username' );
 }
 
-$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
+$t_show_signup =
+	( auth_signup_enabled() ) &&
+	( LDAP != config_get_global( 'login_method' ) ) &&
+	( ON == config_get( 'enable_email_notification' ) );
+
+$t_show_anonymous_login = auth_anonymous_enabled();
+
+$t_form_title = lang_get( 'login_title' );
 
 # If user is already authenticated and not anonymous
 if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
@@ -82,7 +94,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 if( auth_automatic_logon_bypass_form() ) {
 	$t_uri = 'login.php';
 
-	if( ON == config_get( 'allow_anonymous_login' ) ) {
+	if( auth_anonymous_enabled() ) {
 		$t_uri = 'login_anon.php';
 	}
 
@@ -94,53 +106,48 @@ if( auth_automatic_logon_bypass_form() ) {
 	exit;
 }
 
-# Determine if secure_session should default on or off?
-# - If no errors, and no cookies set, default to on.
-# - If no errors, but cookie is set, use the cookie value.
-# - If errors, use the value passed in.
-if( $t_session_validation ) {
-	if( !$f_error && !$f_cookie_error ) {
-		$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
-	} else {
-		$t_default_secure_session = $f_secure_session;
-	}
-}
-
-# Determine whether the username or password field should receive automatic focus.
-$t_username_field_autofocus = 'autofocus';
-$t_password_field_autofocus = '';
-if( $f_username ) {
-	$t_username_field_autofocus = '';
-	$t_password_field_autofocus = 'autofocus';
-}
-
 # Login page shouldn't be indexed by search engines
 html_robots_noindex();
 
-html_page_top1();
-html_page_top2a();
+layout_login_page_begin();
+?>
 
+<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
+	<div class="login-container">
+		<div class="space-12 hidden-480"></div>
+		<a href="<?php echo config_get( 'logo_url' ) ?>">
+			<h1 class="center white">
+				<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+			</h1>
+		</a>
+		<div class="space-24 hidden-480"></div>
+<?php
 if( $f_error || $f_cookie_error ) {
-	echo '<div class="important-msg">';
-	echo '<ul>';
-
-	# Display short greeting message
-	# echo lang_get( 'login_page_info' ) . '<br />';
+	echo '<div class="alert alert-danger">';
 
 	# Only echo error message if error variable is set
 	if( $f_error ) {
-		echo '<li>' . lang_get( 'login_error' ) . '</li>';
+		echo '<p>' . lang_get( 'login_error' ) . '</p>';
 	}
+
 	if( $f_cookie_error ) {
-		echo '<li>' . lang_get( 'login_cookies_disabled' ) . '</li>';
+		echo '<p>' . lang_get( 'login_cookies_disabled' ) . '</p>';
 	}
-	echo '</ul>';
+
 	echo '</div>';
 }
 
 $t_warnings = array();
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin' ) ) {
+
+if( config_get_global( 'admin_checks' ) == ON ) {
+	# Check if the admin directory is accessible
+	$t_admin_dir = dirname( __FILE__ ) . '/admin';
+	$t_admin_dir_is_accessible = @file_exists( $t_admin_dir . '/.' );
+	if( $t_admin_dir_is_accessible ) {
+		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
+	}
+
 	# Generate a warning if default user administrator/root is valid.
 	$t_admin_user_id = user_get_id_by_name( 'administrator' );
 	if( $t_admin_user_id !== false ) {
@@ -168,7 +175,11 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 	}
 	$t_config = 'display_errors';
 	$t_errors = config_get_global( $t_config );
-	if( $t_errors[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
+	if( !(
+			isset( $t_errors[E_ALL] ) && $t_errors[E_ALL] == DISPLAY_ERROR_HALT
+		 ||	isset( $t_errors[E_USER_ERROR] ) && $t_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT
+		 )
+	) {
 		$t_warnings[] = debug_setting_message(
 			'integrity',
 			$t_config . '[E_USER_ERROR]',
@@ -183,29 +194,38 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 	}
 
 	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	# Note: install_helper_functions_api.php required for db_null_date() function definition
-	require_api( 'install_helper_functions_api.php' );
-	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-	$t_upgrades_reqd = count( $g_upgrade ) - 1;
+	if( $t_admin_dir_is_accessible ) {
+		require_once( 'admin/schema.php' );
+		$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
-	if( ( 0 < $t_db_version ) &&
+		if( ( 0 < $t_db_version ) &&
 			( $t_db_version != $t_upgrades_reqd ) ) {
 
-		if( $t_db_version < $t_upgrades_reqd ) {
-			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
-			$t_upgrade_required = true;
-		} else {
-			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+			if( $t_db_version < $t_upgrades_reqd ) {
+				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2'
+				);
+				$t_upgrade_required = true;
+			}
+			else {
+				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+			}
 		}
 	}
 }
 ?>
 
-<!-- Login Form BEGIN -->
-<div id="login-div" class="form-container">
-	<form id="login-form" method="post" action="login.php">
+<div class="position-relative">
+	<div class="signup-box visible widget-box no-border" id="login-box">
+		<div class="widget-body">
+			<div class="widget-main">
+				<h4 class="header lighter bigger">
+					<i class="ace-icon fa fa-sign-in"></i>
+					<?php echo $t_form_title ?>
+				</h4>
+				<div class="space-10"></div>
+	<form id="login-form" method="post" action="<?php echo AUTH_PAGE_CREDENTIAL ?>">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'login_title' ) ?></span></legend>
+
 			<?php
 			if( !is_blank( $f_return ) ) {
 				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
@@ -216,58 +236,22 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 			}
 
 			# CSRF protection not required here - form does not result in modifications
-			echo '<ul id="login-links">';
-
-			if( ON == config_get( 'allow_anonymous_login' ) ) {
-				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
-			}
-
-			if( ( ON == config_get_global( 'allow_signup' ) ) &&
-				( LDAP != config_get_global( 'login_method' ) ) &&
-				( ON == config_get( 'enable_email_notification' ) )
-			) {
-				echo '<li><a href="signup_page.php">', lang_get( 'signup_link' ), '</a></li>';
-			}
-			# lost password feature disabled or reset password via email disabled -> stop here!
-			if( ( LDAP != config_get_global( 'login_method' ) ) &&
-				( ON == config_get( 'lost_password_feature' ) ) &&
-				( ON == config_get( 'send_reset_password' ) ) &&
-				( ON == config_get( 'enable_email_notification' ) ) ) {
-				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
-			}
 			?>
-			</ul>
-			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
-			<div class="field-container">
-				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
-				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
-				<span class="label-style"></span>
-			</div>
-			<?php } ?>
-			<?php if( $t_session_validation ) { ?>
-			<div class="field-container">
-				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>
-				<span class="input">
-					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>
-					<span id="session-msg"><?php echo lang_get( 'secure_session_long' ); ?></span>
+
+			<label for="username" class="block clearfix">
+				<span class="block input-icon input-icon-right">
+					<input id="username" name="username" type="text" placeholder="<?php echo $t_username_label ?>"
+						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $t_username ); ?>"
+						   class="form-control autofocus">
+					<i class="ace-icon fa fa-user"></i>
 				</span>
-				<span class="label-style"></span>
-			</div>
-			<?php } ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" /></span>
+			</label>
+
+			<div class="space-10"></div>
+
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
 		</fieldset>
 	</form>
-</div>
 
 <?php
 #
@@ -275,13 +259,38 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 #
 
 if( count( $t_warnings ) > 0 ) {
-	echo '<div class="important-msg">';
-	echo '<ul>';
-	foreach( $t_warnings as $t_warning ) {
-		echo '<li>' . $t_warning . '</li>';
+	echo '<div class="space-10"></div>';
+	echo '<div class="alert alert-warning">';
+	foreach( $t_warnings AS $t_warning ) {
+		echo '<p>' . $t_warning . '</p>';
 	}
-	echo '</ul>';
 	echo '</div>';
 }
+?>
+</div>
 
-html_page_bottom1a( __FILE__ );
+<?php
+if( $t_show_anonymous_login || $t_show_signup ) {
+	echo '<div class="toolbar center">';
+
+	if( $t_show_anonymous_login ) {
+		echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
+	}
+
+	if( $t_show_signup ) {
+		echo '<a class="back-to-login-link pull-left" href="signup_page.php">', lang_get( 'signup_link' ), '</a>';
+	}
+
+	echo '<div class="clearfix"></div>';
+	echo '</div>';
+}
+?>
+
+		</div>
+</div>
+</div>
+</div>
+</div>
+
+<?php
+layout_login_page_end();

@@ -1,25 +1,41 @@
 Mantis Bug Tracker (MantisBT)
 =============================
-[![Build Status](https://travis-ci.org/mantisbt/mantisbt.svg?branch=master)](https://travis-ci.org/mantisbt/mantisbt)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Build Status](https://img.shields.io/travis/mantisbt/mantisbt/master.svg)](https://travis-ci.org/mantisbt/mantisbt)
+[![Gitter](https://img.shields.io/gitter/room/mantisbt/mantisbt.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Screenshots
+-----------
+
+![Build Status](doc/modern_view_issues.png)
+
+![Build Status](doc/modern_my_view.png)
+
+![Build Status](doc/modern_view_issue.png)
+
+Documentation
+-------------
 
 For complete documentation, please read the administration guide included with
 this release in the doc/<lang> directory.  The guide is available in text, PDF,
 and HTML formats.
 
+
 Requirements
 ------------
 
- * MySQL 4.1.1+, PostgreSQL 8+, or other supported database
- * PHP 5.3.2+
+ * MySQL 5.5.35+, PostgreSQL 9.2+, or other supported database
+ * PHP 5.5.9+
  * a webserver (e.g. Apache or IIS)
+
+Please refer to section 2.2 in the administration guide for further details.
 
 Installation
 ------------
 
  * Extract the tarball into a location readable by your web server
- * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
-   your webserver is compatible with MantisBT and configured correctly
+ * Point your browser to http://path/to/mantisbt/admin/check/index.php to ensure
+   that your webserver is compatible with MantisBT and configured correctly
  * Point your browser to http://path/to/mantisbt/admin/install.php to begin the
    database installation process
  * Select the database type and enter the credentials to access the database
@@ -39,7 +55,7 @@ UPGRADING
  * Copy your configuration from the old installation to the new directory,
    including config_inc.php, custom_strings_inc.php, custom_relationships_inc.php,
    custom_functions_inc.php and custom_constants_inc.php if they exist
- * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
+ * Point your browser to http://path/to/mantisbt/admin/check/index.php to ensure that
    your webserver is compatible with MantisBT and configured correctly
  * Point your browser to http://path/to/mantisbt/admin/install.php to upgrade
    the database schema
@@ -58,7 +74,7 @@ detailed doc can be found at http://www.mantisbt.org/docs/
 * config_defaults_inc.php
   - this file contains the default values for all the site-wide variables.
 * config/config_inc.php
-  - You should create this file to change config variable values.  Your
+  - You should use this file to change config variable values.  Your
     values from this file will be used instead of the defaults.  This file
     will not be overwritten when you upgrade, but config_defaults_inc.php will.
     Look at config/config_inc.php.sample for an example.
@@ -70,7 +86,6 @@ detailed doc can be found at http://www.mantisbt.org/docs/
 * form variables are prefixed with f_
 * variables that have been cleaned for db insertiong are prefixed with c_
 * temporary variables are prefixed with t_.
-* template variables are prefixed with tpl_.
 * count variables have the word count in the variable name
 
 More detail can be seen in the coding guidelines at:
@@ -88,13 +103,7 @@ completed successfully.  The pages will automatically redirect you after a
 short amount of time.  You can shorten of lengthen the time by editing
 $g_default_redirect_delay in config_inc.php.
 
-* Edit css_inc.php to make your own page formatting.
-
 * You can set $g_top_include_page and $g_bottom_include_page
   to alter what should be visible at the top and bottom of each page.
 
 * All files were edited with TAB SPACES set to 4.
-
-As a general debugging tip you should be extremely generous in using echo,
-print and exit functions.  This is the quickest way to see if a database
-query actually contains what you want, etc.

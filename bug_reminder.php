@@ -108,14 +108,19 @@ if( ON == config_get( 'store_reminders' ) ) {
 		}
 		$t_attr .= $t_recipient;
 	}
+
 	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
+
+	# Note: we won't trigger mentions here since reminders are triggered.
 }
 
 form_security_purge( 'bug_reminder' );
 
-html_page_top( null, string_get_bug_view_url( $f_bug_id ) );
+layout_page_header( null, string_get_bug_view_url( $f_bug_id ) );
+
+layout_page_begin();
 
 $t_redirect = string_get_bug_view_url( $f_bug_id );
 html_operation_successful( $t_redirect );
 
-html_page_bottom();
+layout_page_end();

@@ -207,6 +207,11 @@ switch( $f_action ) {
 		$t_button_title			= lang_get( 'target_version_group_bugs_button' );
 		$t_form					= 'target_version';
 		break;
+	case 'UP_DUE_DATE':
+		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
+		$t_form					= 'due_date';
+		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
@@ -216,33 +221,40 @@ switch( $f_action ) {
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
 }
-
 bug_group_action_print_top();
-
-if( $t_multiple_projects ) {
-	echo '<p class="bold">' . lang_get( 'multiple_projects' ) . '</p>';
-}
 ?>
 
-<br />
-
+<div class="col-md-12 col-xs-12">
+<?php
+if( $t_multiple_projects ) {
+	echo '<div class="alert alert-warning"> <p class="bold">' . lang_get( 'multiple_projects' ) . '</p> </div>';
+}
+?>
 <div id="action-group-div" class="form-container">
 	<form method="post" action="bug_actiongroup.php">
 		<?php echo form_security_field( $t_form_name ); ?>
 		<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <?php
 	bug_group_action_print_hidden_fields( $f_bug_arr );
-
 	if( $f_action === 'CUSTOM' ) {
-		echo '<input type="hidden" name="custom_field_id" value="' . $t_custom_field_id . '" />';
+		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
-		<table>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<?php echo $t_question_title ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
 	if( !$t_finished ) {
 ?>
-				<tr class="row-1">
+				<tr>
 					<th class="category">
 						<?php echo $t_question_title ?>
 					</th>
@@ -260,8 +272,24 @@ if( $t_multiple_projects ) {
 			}
 
 			print_custom_field_input( $t_custom_field_def, $t_bug_id );
+		} else if ( $f_action === 'UP_DUE_DATE' ) {
+			$t_date_to_display = '';
+			# if there is only one issue, use its current value as default
+			if( count( $f_bug_arr ) == 1 ) {
+				$t_bug_id = $f_bug_arr[0];
+				$t_bug = bug_get( $t_bug_id );
+				if( !date_is_null( $t_bug->due_date ) ) {
+					$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
+				}
+			}
+
+			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .
+				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
+				'" value="' . $t_date_to_display . '" />';
+			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
-			echo '<select name="' . $t_form . '">';
+			echo '<select name="' . $t_form . '" class="input-sm">';
 
 			switch( $f_action ) {
 				case 'COPY':
@@ -309,12 +337,12 @@ if( $t_multiple_projects ) {
 									&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
 					if( $t_show_product_version ) {
 ?>
-				<tr class="row-2">
+				<tr>
 					<th class="category">
 						<?php echo $t_question_title2 ?>
 					</th>
 					<td>
-						<select name="<?php echo $t_form2 ?>">
+						<select name="<?php echo $t_form2 ?>" class="input-sm">
 							<?php print_version_option_list( '', null, VERSION_ALL );?>
 						</select>
 					</td>
@@ -326,7 +354,7 @@ if( $t_multiple_projects ) {
 		}
 	} else {
 ?>
-				<tr class="row-1">
+				<tr>
 					<th class="category" colspan="2">
 						<?php echo $t_question_title; ?>
 					</th>
@@ -336,12 +364,12 @@ if( $t_multiple_projects ) {
 
 	if( $t_bugnote ) {
 ?>
-				<tr class="row-1">
+				<tr>
 					<th class="category">
 						<?php echo lang_get( 'add_bugnote_title' ); ?>
 					</th>
 					<td>
-						<textarea name="bugnote_text" cols="80" rows="10"></textarea>
+						<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
 					</td>
 				</tr>
 <?php
@@ -356,9 +384,9 @@ if( $t_multiple_projects ) {
 			$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
-						<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+						<label class="lbl"> <?php echo lang_get( 'private' ); ?> </label>
 <?php
-				echo lang_get( 'private' );
 			} else {
 				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 			}
@@ -369,22 +397,21 @@ if( $t_multiple_projects ) {
 		}
 	}
 ?>
+		<tr class="spacer"></tr>
+		<?php bug_group_action_print_bug_list( $f_bug_arr ); ?>
+		<tr class="spacer"></tr>
 			</tbody>
-
-			<tfoot>
-				<tr>
-					<td class="center" colspan="2">
-						<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
-					</td>
-				</tr>
-			</tfoot>
 		</table>
-
+		</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo $t_button_title ?>" />
+		</div>
+		</div>
+		</div>
 	</form>
 </div>
-
-<br />
+</div>
 
 <?php
-bug_group_action_print_bug_list( $f_bug_arr );
 bug_group_action_print_bottom();

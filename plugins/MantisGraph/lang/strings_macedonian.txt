@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,49 +45,33 @@
 $s_plugin_graph_title = 'Графикони за MantisBT';
 $s_plugin_graph_description = 'Официјален приклучок за исцртување на графикони.';
 $s_plugin_MantisGraph_title = 'Mantis графикони';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Напреден опис';
 $s_plugin_MantisGraph_config = 'Местења';
 $s_plugin_MantisGraph_synthesis_link = 'Синтеза';
 $s_plugin_MantisGraph_status_link = 'По состојба';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По сериозност';
 $s_plugin_MantisGraph_category_link = 'По категорија';
-$s_plugin_MantisGraph_resolution_link = 'По разделеност';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Графикон';
-$s_plugin_MantisGraph_library = 'Графиконска библиотека за користење';
-$s_plugin_MantisGraph_bundled = 'Групирано';
-$s_plugin_MantisGraph_window_width = 'Ширина на графиконот (во пиксели)';
-$s_plugin_MantisGraph_bar_aspect = 'Сооднос на страните столбниот графикон (висина/ширина)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Колку графикони да се прикажат во ред на напредната описна страница';
-$s_plugin_MantisGraph_font = 'Фонт';
-$s_plugin_MantisGraph_jpgraph_path = 'Системска патека до библиотеката JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Оставете празно за употреба на основно зададеното: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph измазнување';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Измазнувањето го подобрува изгледот на некои графикони за сметка на брзината на работење (до 8 пати побавно)';
-$s_plugin_MantisGraph_enabled = 'Вкл.';
-$s_plugin_MantisGraph_disabled = 'Искл.';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Синтетички графикони по статус';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетички графикони по приоритет';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетички графикони по сериозност';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Синтетички графикони по категорија';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтетички графикони по разделеност';
+$s_plugin_MantisGraph_resolution_link = 'По разделност';
+$s_plugin_MantisGraph_issue_trends_link = 'Трендови за проблеми';
+$s_plugin_MantisGraph_graph_imp_status_title = 'По графикони за состојба';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'По графикони за приоритет';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'По графикони за сериозност';
+$s_plugin_MantisGraph_graph_imp_category_title = 'По графикони за категорија';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'По графикони за разделност';
+$s_plugin_MantisGraph_graph_developer_title = 'По графикони на развојници';
+$s_plugin_MantisGraph_graph_reporter_title = 'По графикони за известувачи';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, решени и преостанати проблеми';
 $s_plugin_MantisGraph_by_status_pct = 'По статус (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По сериозност (%)';
 $s_plugin_MantisGraph_by_category_pct = 'По категорија (%)';
-$s_plugin_MantisGraph_by_resolution_pct = 'По разделеност (%)';
+$s_plugin_MantisGraph_by_resolution_pct = 'По разделност (%)';
 $s_plugin_MantisGraph_by_severity_mix = 'По сериозност и статус';
 $s_plugin_MantisGraph_by_priority_mix = 'По приоритет и статус';
-$s_plugin_MantisGraph_by_resolution_mix = 'По разделеност и состојба';
+$s_plugin_MantisGraph_by_resolution_mix = 'По разделност и состојба';
 $s_plugin_MantisGraph_legend_still_open = 'Сè уште отворени';
 $s_plugin_MantisGraph_legend_resolved = 'Решени';
-$s_plugin_MantisGraph_legend_assigned = 'Доделено';
-$s_plugin_MantisGraph_legend_total = 'Вкупно';
-$s_plugin_MantisGraph_legend_opened = 'Отворени';
-$s_plugin_MantisGraph_legend_closed = 'Затворени';
 $s_plugin_MantisGraph_legend_reported = 'Пријавени';
-$s_plugin_MantisGraph_cumulative = 'Севкупно насобрано';
-$s_plugin_MantisGraph_not_enough_data = 'Нема доволно податоци за создавање на графикон';
 $s_plugin_MantisGraph_period_none = 'Нема';
 $s_plugin_MantisGraph_period_this_week = 'Оваа седмица';
 $s_plugin_MantisGraph_period_last_week = 'Минатата седмица';
@@ -99,12 +83,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Последното тромесе
 $s_plugin_MantisGraph_period_year_to_date = 'За точно една година';
 $s_plugin_MantisGraph_period_select = 'Произволни датуми';
 $s_plugin_MantisGraph_period_last_year = 'Лани';
-$s_plugin_MantisGraph_select = 'Одберете';
-$s_plugin_MantisGraph_select_bystatus = 'по Статус';
-$s_plugin_MantisGraph_select_summbystatus = 'Опис по Статус';
-$s_plugin_MantisGraph_select_bycat = 'Опис по Категорија';
-$s_plugin_MantisGraph_select_both = 'Опис по Статус и Категорија';
-$s_plugin_MantisGraph_show_as_graph = 'Прикажи како Графикон';
-$s_plugin_MantisGraph_show_as_table = 'Прикажи како Табела';
-$s_plugin_MantisGraph_show_graph = 'Прикажи графикон';
 $s_plugin_MantisGraph_graph_page = 'Историја на проблеми со графикон';
+$s_plugin_MantisGraph_graph_topdev = 'Најдобри разработувачи по поправени проблеми';
+$s_plugin_MantisGraph_graph_opendev = 'Разработувачи по отворени проблеми';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Најдобри пријавувачи по поправени проблеми';

@@ -94,18 +94,18 @@ auth_logout();
 
 user_delete( $t_user_id );
 
-html_page_top1();
-html_page_top2a();
+layout_page_header();
 
+layout_page_begin();
 ?>
 
-<br />
-<div>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 <?php
 echo lang_get( 'account_removed_msg' ) . '<br />';
-print_bracket_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ) );
+print_link_button( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ));
 ?>
 </div>
 
 <?php
-	html_page_bottom1a();
+layout_page_end();

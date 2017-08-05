@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,10 +42,14 @@
  * @author Consta
  * @author Crazymadlover
  * @author Evropi
+ * @author FirehawkV17
  * @author Geraki
+ * @author Glavkos
  * @author Kongr43gpen
  * @author Omnipaedista
  * @author Protnet
+ * @author Thodoris
+ * @author Ανώνυμος Βικιπαιδιστής
  */
 
 $s_actiongroup_menu_move = 'Μετακίνηση';
@@ -61,12 +65,16 @@ $s_actiongroup_menu_update_view_status = 'Αλλαγή Προβολής Κατά
 $s_actiongroup_menu_update_category = 'Αλλαγή Κατηγορίας';
 $s_actiongroup_menu_set_sticky = 'Εν/Απενεργοποιήσε σε Προσκήνιο';
 $s_actiongroup_menu_update_field = 'Ενημέρωση %1$s';
+$s_actiongroup_menu_update_product_version = 'Ενημέρωση Έκδοσης προϊόντος';
 $s_actiongroup_menu_add_note = 'Προσθήκη Σημείωσης';
 $s_actiongroup_menu_attach_tags = 'Προσάρτηση Ετικετών';
 $s_actiongroup_bugs = 'Επιλεγμένα Θέματα';
+$s_actiongroup_error_issue_is_readonly = 'Το πρόβλημα είναι μόνο για ανάγνωση.';
 $s_all_projects = 'Όλες';
 $s_move_bugs = 'Μετακίνηση Θεμάτων';
 $s_operation_successful = 'Διαδικασία Επιτυχής.';
+$s_operation_warnings = 'Η εργασία ολοκληρώθηκε με προειδοποιήσεις.';
+$s_operation_failed = 'Η εργασία δεν ολοκληρώθηκε επιτυχημένα.';
 $s_date_order = 'Χρονολογική Σειρά';
 $s_print_all_bug_page_link = 'Εκτύπωση Αναφορών';
 $s_csv_export = 'Εξαγωγή CSV';
@@ -79,11 +87,15 @@ $s_private_project_msg = 'Η εφαρμογή είναι ΙΔΙΩΤΙΚΗ. Μο�
 $s_access_level_project = 'Επίπεδο στην Εφαρμογή';
 $s_view_submitted_bug_link = 'Προβολή Απεσταλμένου Θέματος %1$s';
 $s_assigned_projects = 'Ανατεθέντες Εφαρμογές';
+$s_assigned_projects_label = 'Ανατεθέντες Εφαρμογές';
+$s_unassigned_projects_label = 'Εφαρμογές σε αναμονή';
 $s_print = 'Εκτύπωση';
 $s_jump = 'Μετάβαση';
 $s_copy_users = 'Αντιγραφή Χρηστών';
 $s_copy_categories_from = 'Αντιγραφή Κατηγοριών Από';
 $s_copy_categories_to = 'Αντιγραφή Κατηγοριών Προς';
+$s_copy_versions_from = 'Αντιγραφή έκδοσης απο';
+$s_copy_versions_to = 'Αντιγραφή έκδοσης προς';
 $s_copy_users_from = 'Αντιγραφή Χρηστών Από';
 $s_copy_users_to = 'Αντιγραφή Χρηστών Προς';
 $s_bug_history = 'Ιστορικό Αναφορών';
@@ -98,14 +110,19 @@ $s_bug_monitor = 'Θέμα Υπό Παρακολούθηση';
 $s_bug_end_monitor = 'Τέλος Παρακολούθησης Θέματος';
 $s_announcement = 'Ανακοίνωση';
 $s_stays_on_top = 'Παραμονή στο Προσκήνιο';
+$s_bugnote_link_title = 'Άμεση σύνδεση σε σημείωση';
 $s_delete_bugnote_button = 'Διαγραφή Σημείωσης';
 $s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το θέμα;';
 $s_bug_relationships = 'Σχέσεις';
-$s_bug_relationships_label = 'Σχέσεις:';
 $s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
 $s_empty_password_button = 'Χρήση Κενού Κωδικού';
 $s_reauthenticate_title = 'Επικυρώστε';
+$s_reauthenticate_message = 'Μπαίνετε μία ασφαλή σελίδα, και η ασφαλής συνεδρία έχει λήξει. Παρακαλώ συνδεθείτε για να συνεχίσετε.';
 $s_no_category = '(Καμία κατηγορία)';
+$s_global_categories = 'Παγκόσμιες Κατηγορίες';
+$s_inherit = 'Κληρονομία κατηγοριών';
+$s_inherit_global = 'Κληρονομία παγκοσμίων κατηγοριών';
+$s_inherit_parent = 'Κληρονομία κατηγοριών γονέα';
 $s_duplicate_of = 'αντίγραφο του';
 $s_has_duplicate = 'έχει αντίγραφο';
 $s_related_to = 'σε σχέση με';
@@ -127,23 +144,34 @@ $s_make_public = 'Όρισε Δημόσιο';
 $s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
 $s_login_link = 'Είσοδος';
 $s_select_option = '(επιλέξτε)';
+$s_bug_actiongroup_access = 'Δεν έχετε τα κατάλληλα δικαιώματα για να εκτελέσετε αυτή την δράση.';
+$s_bug_actiongroup_status = 'Αυτό το θέμα δεν μπορεί να αλλάξει στην ζητημένη κατάσταση.';
+$s_bug_actiongroup_category = 'Το θέμα δεν μπορεί να αλλάξει στην ζητημένη κατηγορία';
+$s_bug_actiongroup_handler = 'Ο ζητημένος χρήστης δεν επιτρέπεται να αναλάβει αυτό το θέμα.';
+$s_bug_actiongroup_version = 'Η ζητημένη έκδοση δεν υπάρχει στο θέμα του project';
+$s_close_bugs_conf_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το παρόν θέμα;';
+$s_delete_bugs_conf_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε αυτά τα θέματα;';
+$s_move_bugs_conf_msg = 'Μεταφέρετε τα θέματα πρός';
 $s_category_group_bugs_button = 'Ενημέρωση Κατηγορίας';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
 $s_printing_preferences_title = 'Επιλογή πεδίων προς εκτύπωση';
 $s_printing_options_link = 'Επιλογές Εκτύπωσης';
 $s_bugnote_date = 'Ημερομηνία σημείωσης';
 $s_bugnote_description = 'Περιγραφή σημείωσης';
-$s_error_no_proceed = 'Παρακαλώ πιέστε το "Back" στον φυλλομετρήτη σας για να επιστρέψετε στην προηγούμενη σελίδα. Εκεί μπορείτε να διορθώσετε τα λάθη που σας υποδεικνύει το μήνυμα λάθους ή να επίλεξετε άλλη σελίδα. Επίσης, μπορείτε να επιλέξετε άλλη σελίδα απευθείας απο τη μενού-μπάρα.';
+$s_error_no_proceed = 'Παρακαλώ πιέστε το "Πίσω" στον φυλλομετρήτη σας για να επιστρέψετε στην προηγούμενη σελίδα. Εκεί μπορείτε να διορθώσετε τα λάθη που σας υποδεικνύει το μήνυμα λάθους ή να επίλεξετε άλλη σελίδα. Επίσης, μπορείτε να επιλέξετε άλλη σελίδα απευθείας απο τη μενού-μπάρα.';
 $s_login_error = 'Ο λογαριασμός είναι απενεργοποιήμενος ή το όνομα/κωδικός χρήστη είναι λάθος.';
 $s_login_cookies_disabled = 'Ο browser δεν μπορεί να διαχειριστεί τα cookies ή δεν γνωρίζει πως να τα χειριστεί.';
 $s_go_back = 'Πίσω';
 $s_proceed = 'Συνέχεια';
 $s_switch = 'Αλλαγή';
-$s_logged_in_as = 'Χρήστης';
+$s_logged_in_as = 'Συνδεδεμένος ως $1';
 $s_prefix_for_deleted_users = 'χρήστης';
 $s_administrator = 'Διαχειριστής';
 $s_myself = 'Εγώ';
 $s_default_access_level = 'Προεπιλεγμένο Επίπεδο Πρόσβασης';
+$s_access_levels_enum_string = '10:θεατής,25:ρεπορτερ.40:updater,55:κατασκευαστής,70:διευθυντής,90:διαχειρηστής';
+$s_no_access = 'Χωρίς πρόσβαση';
+$s_project_status_enum_string = '10:σε ανάπτυξη,30:έκδοση,50:σταθερή,70¨απαρχαιωμένη';
 $s_project_view_state_enum_string = '10:δημόσια,50:ιδιωτική';
 $s_view_state_enum_string = '10:δημόσια,50:ιδιωτική';
 $s_priority_enum_string = '10:καμία,20:χαμήλη,30:κανονική,40:υψηλή,50:επείγουσα,60:άμμεση';
@@ -255,7 +283,6 @@ $s_delete_bug_sure_msg = 'Είστε σίγουρος πως θέλετε να �
 $s_delete_bug_button = 'Διαγραφή';
 $s_monitor_bug_button = 'Παρακολούθηση';
 $s_unmonitor_bug_button = 'Τέλος Παρακ/σης';
-$s_file_upload_msg = 'Η Φόρτωση του Αρχείου ήταν επιτυχής';
 $s_upload_file = 'Φόρτωση Αρχείου';
 $s_select_file = 'Επιλογή Αρχείου';
 $s_upload_file_button = 'Φόρτωση Αρχείου';
@@ -310,7 +337,6 @@ $s_updating_bug_simple_title = 'Ενημέρωση Πληροφοριών Θέμ
 $s_revision_by = '%1$s από %2$s';
 $s_all_revisions = 'Όλες οι αναθεωρήσεις';
 $s_vote_added_msg = 'Η Ψήφος προστέθηκε...';
-$s_bugnote_added_msg = 'Η Σημείωση προστέθηκε...';
 $s_bugnote_deleted_msg = 'Η σημείωση διαγράφηκε με επιτυχία...';
 $s_bug_notes_title = 'Σημειώσεις';
 $s_edit_bugnote_title = 'Επεξεργασία Σημείωσης';
@@ -329,6 +355,7 @@ $s_choose_project = 'Εφαρμογή';
 $s_login_button = 'Είσοδος';
 $s_signup_link = 'Νέος χρήστης';
 $s_lost_password_link = 'Ξεχάσατε τον κωδικό;';
+$s_enter_password = 'Εισάγετε τον κωδικό για \'%s\'';
 $s_select_project_button = 'Επιλογή Εφαρμογής';
 $s_lost_password_title = 'Ακύρωση Κωδικού';
 $s_lost_password_done_title = 'Αποστολή Μηνύματος Κωδικού';
@@ -606,6 +633,7 @@ $s_changed = 'Μεταβολή(ώρες)';
 $s_viewing_bugs_title = 'Προβολή Θεμάτων';
 $s_updated = 'Ενημέρωση';
 $s_sticky = 'Προβολή Σημειωμένων Θεμάτων';
+$s_sort = 'Ιεράρχηση';
 $s_recently_visited = 'Πρόσφατες επισκέψεις';
 $s_none = 'Κανένα';
 $s_current = 'Παρόν';
@@ -642,7 +670,7 @@ $s_attached_files = 'Συννημένα Αρχεία';
 $s_publish = 'Δημοσίευση';
 $s_no_users_monitoring_bug = 'Δεν υπάρχουν χρήστες να παρακολουθούν το Θέμα.';
 $s_users_monitoring_bug = 'Χρήστες που παρακολουθούν το Θέμα';
-$s_monitoring_user_list = 'Λίστα Χρηστών';
+$s_monitoring_user_list = 'Κατάλογος χρηστών';
 $s_add_custom_field_button = 'Νέο Ειδικό Πεδίο';
 $s_delete_custom_field_button = 'Διαγραφή Ειδικού Πεδίου';
 $s_delete_custom_field_everywhere = 'Διαγραφή Ειδικού Πεδίου Παντού';
@@ -693,7 +721,6 @@ $s_relationship_deleted = 'Διαγραφή σχέσης';
 $s_no_relationship = 'καμία σχέση';
 $s_relationship_replaced = 'Αντικατάσταση σχέσης';
 $s_replace_relationship_button = 'Αντικατάσταση';
-$s_replace_relationship_sure_msg = 'Υπάρχει ήδη σχέση μεταξύ των δυο θεμάτων. Είστε σίγουρος πως θέλετε να την αντικαταστείσετε;';
 $s_relationship_with_parent = 'Σχέση με πατρικό θέμα';
 $s_delete_relationship_button = 'Διαγραφή';
 $s_create_child_bug_button = 'Κλώνος';
@@ -797,10 +824,13 @@ $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Επιλογή βάσης δεδομέ�
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Μια κατηγορία με αυτό το όνομα υπάρχει ήδη.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Δε βρέθηκε κατηγορία.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%1$s\' not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(_).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%1$s\' has invalid value \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%1$d\' is read-only';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Τα δεδομένα δεν ταιριάζουν με κανένα λογαριασμό';
+$s_dropzone_invalid_file_type = 'Δεν μπορείτε να ανεβάσετε τα αρχεία αυτού του τύπου.';
+$s_dropzone_max_files_exceeded = 'Δεν μπορείτε να ανεβάσετε άλλα αρχεία.';
+$s_dropzone_not_supported = 'Το Dropzone.js δεν υποστηρίζει παλαιότερα προγράμματα περιήγησης!';

@@ -84,6 +84,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
 
+		db_param_push();
 		$t_query = 'INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
@@ -124,6 +125,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 		$p_new_value = '';
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
@@ -167,6 +169,7 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 
 	$t_params = array( db_now() - $p_duration_in_seconds, $t_user_id );
 
+	db_param_push();
 	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
 				' AND user_id = ' . db_param();
 	$t_result = db_query( $t_query, $t_params );
@@ -176,53 +179,173 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 }
 
 /**
+ * Creates and executes a query for the history rows, returning a database result object.
+ * Query options is an array with parameters to build the query.
+ *
+ * Supported options are:
+ * - "bug_id" => integer | array    Limit search to these bug ids.
+ * - "start_time" => integer        Timestamp for start time to filter by (inclusive)
+ * - "end_time" => integer          Timestamp for end time to filter by (exclusive)
+ * - "user_id" => integer | array   Limit search to actions by these user ids.
+ * - "filter" => filter array       A filter array to limit history to bugs matched by this filter.
+ * - "order" => Sort order          'ASC' or 'DESC' for result order.
+ *
+ * Any option can be omitted.
+ *
+ * @param array $p_query_options	Array of query options
+ * @return database result to pass into history_get_event_from_row().
+ */
+function history_query_result( array $p_query_options ) {
+	# check query order by
+	if( isset( $p_query_options['order'] ) ) {
+		$t_history_order = $p_query_options['order'];
+	} else {
+		$t_history_order = config_get( 'history_order' );
+	}
+
+	$t_where = array();
+
+	# if a filter is provided, prepare subselect
+	if( isset( $p_query_options['filter'] ) ) {
+		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+		$t_query_clauses = filter_get_bug_rows_query_clauses( $p_query_options['filter'], null, null, null );
+		# if the query can't be formed, there are no results
+		if( empty( $t_query_clauses ) ) {
+			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+			db_param_pop();
+			return db_empty_result();
+		}
+		$t_select_string = 'SELECT {bug}.id ';
+		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+		if( count( $t_query_clauses['where'] ) > 0 ) {
+			$t_where_string .= ' AND ( ';
+			$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
+			$t_where_string .= ' ) ';
+		}
+		$t_where[] = '{bug_history}.bug_id IN'
+			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
+		$t_params = $t_query_clauses['where_values'];
+	} else {
+		db_param_push();
+		$t_params = array();
+	}
+
+	# Start time
+	if( isset( $p_query_options['start_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified >= ' . db_param();
+		$t_params[] = $p_query_options['start_time'];
+	}
+
+	# End time
+	if( isset( $p_query_options['end_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified < ' . db_param();
+		$t_params[] = $p_query_options['end_time'];
+	}
+
+	# Bug ids
+	if( isset( $p_query_options['bug_id'] ) ) {
+		if( is_array( $p_query_options['bug_id'] ) ) {
+			$t_in_strparams = array();
+			foreach ( $p_query_options['bug_id'] as $t_id ) {
+				$t_in_strparams[] = db_param();
+				$t_params[] = $t_id;
+			}
+			$t_in_str = '{bug_history}.bug_id IN (' . implode( ',', $t_in_strparams ) . ')';
+		} else {
+			$t_where[] = '{bug_history}.bug_id = ' . db_param();
+			$t_params[] = $p_query_options['bug_id'];
+		}
+	}
+
+	# User ids
+	if( isset( $p_query_options['user_id'] ) ) {
+		if( is_array( $p_query_options['user_id'] ) ) {
+			$t_in_strparams = array();
+			foreach ( $p_query_options['user_id'] as $t_id ) {
+				$t_in_strparams[] = db_param();
+				$t_params[] = $t_id;
+			}
+			$t_in_str = '{bug_history}.user_id IN (' . implode( ',', $t_in_strparams ) . ')';
+		} else {
+			$t_where[] = '{bug_history}.user_id = ' . db_param();
+			$t_params[] = $p_query_options['user_id'];
+		}
+	}
+
+	$t_query = 'SELECT * FROM {bug_history}';
+	if ( count( $t_where ) > 0 ) {
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+	}
+
+	# Order history lines by date. Use the storing sequence as 2nd order field for lines with the same date.
+	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
+	$t_result = db_query( $t_query, $t_params );
+	return $t_result;
+}
+
+/**
+ * Creates and executes a query for the history rows related to bugs matched by the provided filter
+ * @param  array $p_filter           Filter array
+ * @param  integer $p_start_time     The start time to filter by, or null for all.
+ * @param  integer $p_end_time       The end time to filter by, or null for all.
+ * @param  string  $p_history_order  The sort order.
+ * @return database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
+ */
+function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
+	}
+	if ( $p_start_time !== null ) {
+		$t_query_options['start_time'] = $p_start_time;
+	}
+	if ( $p_end_time !== null ) {
+		$t_query_options['end_time'] = $p_end_time;
+	}
+	if ( $p_filter !== null ) {
+		$t_query_options['filter'] = $p_filter;
+	}
+	return history_query_result( $t_query_options );
+}
+
+/**
  * Creates and executes a query for the history rows matching the specified criteria.
  * @param  integer $p_bug_id         The bug id or null for matching any bug.
  * @param  integer $p_start_time     The start time to filter by, or null for all.
  * @param  integer $p_end_time       The end time to filter by, or null for all.
  * @param  string  $p_history_order  The sort order.
- * @return database result to pass into history_get_event_from_row().
+ * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
  */
 function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
-	if ( $p_history_order === null ) {
-		$t_history_order = config_get( 'history_order' );
-	} else {
-		$t_history_order = $p_history_order;
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
 	}
-
-	$t_query = 'SELECT * FROM {bug_history}';
-	$t_params = array();
-	$t_where = array();
-
-	if ( $p_bug_id !== null ) {
-		$t_where[] = 'bug_id=' . db_param();
-		$t_params = array( $p_bug_id );
-	}
-
 	if ( $p_start_time !== null ) {
-		$t_where[] = 'date_modified >= ' . db_param();
-		$t_params[] = $p_start_time;
+		$t_query_options['start_time'] = $p_start_time;
 	}
-
 	if ( $p_end_time !== null ) {
-		$t_where[] = 'date_modified < ' . db_param();
-		$t_params[] = $p_end_time;
+		$t_query_options['end_time'] = $p_end_time;
 	}
-
-	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+	if ( $p_bug_id !== null ) {
+		$t_query_options['bug_id'] = $p_bug_id;
 	}
-
-	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id ' . $t_history_order;
-
-	$t_result = db_query( $t_query, $t_params );
-
-	return $t_result;
+	return history_query_result( $t_query_options );
 }
 
 /**
  * Gets the next accessible history event for current user and specified db result.
- * @param  string  $p_result      The database result.
+ * @param  object  $p_result      The database result.
  * @param  integer $p_user_id     The user id or null for logged in user.
  * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
  *                                          false otherwise.
@@ -231,13 +354,12 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
-	$t_project_id = helper_get_current_project();
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
-		# Make sure the entry belongs to current project.
-		if ( $t_project_id != ALL_PROJECTS && $t_project_id != bug_get_field( $v_bug_id, 'project_id' ) ) {
+		# Ignore entries related to non-existing bugs (see #20727)
+		if( !bug_exists( $v_bug_id ) ) {
 			continue;
 		}
 
@@ -277,12 +399,20 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
 			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
+				if( !bugnote_exists( $v_old_value ) ) {
+					continue;
+				}
+
 				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
 
 			if( $v_type == BUGNOTE_STATE_CHANGED ) {
+				if( !bugnote_exists( $v_new_value ) ) {
+					continue;
+				}
+
 				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
@@ -354,14 +484,12 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	# grab history and display by date_modified then field_name
-	# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
-	# date, it's better to respect the storing order otherwise we should risk to mix different information
-	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
-	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
-	# for the new bug with the same timestamp...)
-
-	$t_result = history_get_range_result( $p_bug_id, $p_start_time, $p_end_time );
+	$t_query_options = array(
+		'bug_id' => $p_bug_id,
+		'start_time' => $p_start_time,
+		'end_time' => $p_end_time
+		);
+	$t_result = history_query_result( $t_query_options );
 
 	$t_raw_history = array();
 
@@ -701,6 +829,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @return void
  */
 function history_delete( $p_bug_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( $p_bug_id ) );
 }

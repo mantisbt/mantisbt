@@ -43,71 +43,136 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_notifications_verbose</term>
+			<listitem>
+				<para>
+					When enabled, the email notifications will include the full issue with
+					a hint about the change type at the top, rather than using dedicated
+					notifications that are focused on what changed.  This change can be
+					overridden in the database per user.  Default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_notify_flags</term>
 			<listitem>
-				<para>Associated with each action a list of flags to control who
-					should be notified.The default will be used if the action is not
-					included in $g_notify_flags or if the flag is not included in the
-					specific action definition. The list of actions include: new,
-					assigned, resolved, bugnote, reopened, closed, deleted,
-					feedback.The default is:
-					$g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
-					=&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'explicit' =&gt; ON,
-					'threshold_min' =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
-					threshold_min and threshold_max are used to send messages to all
-					members of the project whose status is greater than or equal to
-					&quot;threshold_min&quot; and less than or equal to &quot;threshold_max&quot;. Sending
-					messages to everyone would set &quot;threshold_min&quot; to ANYBODY and
-					&quot;threshold_max to &quot;NOBODY&quot;. To send to all DEVELOPERS and above (as
-					0.17.5), use DEVELOPER and NOBODY respectively.
+				<para>Associates a default notification flag with each action,
+					to control who should be notified. The default will be used
+					if the action is not defined in <emphasis>$g_notify_flags</emphasis>
+					or if the flag is not included in the specific action definition.
+				</para>
+				<para>The list of actions include:
+					<emphasis>new</emphasis>,
+					<emphasis>assigned</emphasis>,
+					<emphasis>resolved</emphasis>,
+					<emphasis>bugnote</emphasis>,
+					<emphasis>reopened</emphasis>,
+					<emphasis>closed</emphasis>,
+					<emphasis>deleted</emphasis>,
+					<emphasis>feedback</emphasis>.
+				</para>
+				<para>The default is:
+<programlisting>
+$g_default_notify_flags = array(
+	'reporter'      =&gt; ON,
+	'handler'       =&gt; ON,
+	'monitor'       =&gt; ON,
+	'bugnotes'      =&gt; ON,
+	'category'      =&gt; ON,
+	'explicit'      =&gt; ON,
+	'threshold_min' =&gt; NOBODY,
+	'threshold_max' =&gt; NOBODY
+);
+</programlisting>
+					<emphasis>threshold_min</emphasis> and
+					<emphasis>threshold_max</emphasis> are used to send messages to all
+					members of the project whose status is
+					<itemizedlist>
+						<listitem>
+							<para>greater than or equal to <emphasis>threshold_min</emphasis>, and</para>
+						</listitem>
+						<listitem>
+							<para>less than or equal to <emphasis>threshold_max</emphasis>.</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+				<para>Sending messages to everyone would set
+					<emphasis>threshold_min</emphasis> to ANYBODY and
+					<emphasis>threshold_max</emphasis> to NOBODY.
+					To send to all DEVELOPERS and above, use DEVELOPER and
+					NOBODY respectively.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_notify_flags</term>
 			<listitem>
-				<para>Defines the notification flags that are different from the
-					defaults that are defined in $g_default_notify_flags. The following
-					code overrides the default by disabling notifications to bugnote
-					authors and users monitoring the bug on submitting a new bug:
-					$g_notify_flags['new'] = array('bugnotes' =&gt; OFF, 'monitor'
-					=&gt; OFF);
-					Available actions include:
+				<para>Defines the specific notification flags when they are
+					different from the defaults defined in
+					<emphasis>$g_default_notify_flags</emphasis>.
+				</para>
+				<para>For example, the following code overrides the default by
+					disabling notifications to bugnote authors and users
+					monitoring the bug when submitting a new bug:
+<programlisting>
+$g_notify_flags['new'] = array(
+	'bugnotes' =&gt; OFF,
+	'monitor' =&gt; OFF,
+);
+</programlisting>
+				See <xref linkend="admin.customize.email" />
+				for further examples of customizing the notification flags.
+				</para>
+				<para>Available actions include:
 					<itemizedlist>
 						<listitem>
-							<para>'new': a new bug has been added</para>
+							<para><emphasis>new</emphasis>:
+								a new bug has been added
+							</para>
 						</listitem>
 						<listitem>
-							<para>'reopened': the bug has been reopened</para>
+							<para><emphasis>reopened</emphasis>:
+								the bug has been reopened
+							</para>
 						</listitem>
 						<listitem>
-							<para>'deleted': a bug has been deleted</para>
+							<para><emphasis>deleted</emphasis>:
+								a bug has been deleted
+							</para>
 						</listitem>
 						<listitem>
-							<para>'owner': the bug has been assigned a new owner</para>
+							<para><emphasis>owner</emphasis>:
+								the bug has been assigned a new owner
+							</para>
 						</listitem>
 						<listitem>
-							<para>'bugnote': a bugnote has been added to a bug</para>
+							<para><emphasis>bugnote</emphasis>:
+								a bugnote has been added to a bug
+							</para>
 						</listitem>
 						<listitem>
-							<para>'sponsor': the sponsorship for the bug has changed
+							<para><emphasis>sponsor</emphasis>:
+								the sponsorship for the bug has changed
 								(added, deleted or updated)
 							</para>
 						</listitem>
 						<listitem>
-							<para>'relation': a relationship for the bug has changed
+							<para><emphasis>relation</emphasis>:
+								a relationship for the bug has changed
 								(added, deleted or updated)
 							</para>
 						</listitem>
 						<listitem>
-							<para>'monitor': a user is added to the monitor list.
+							<para><emphasis>monitor</emphasis>:
+								a user is added to the monitor list.
 							</para>
 						</listitem>
 					</itemizedlist>
 					In addition, an action can match the bug status in
-					$g_status_enum_string. Note that spaces in the string are replaced
-					with underscores ('_') in creating the action. Thus, using the
-					defaults, 'feedback' would be a valid action.
+					<emphasis>$g_status_enum_string</emphasis>. Note that spaces
+					in the string are replaced with underscores ('_') when
+					creating the action. Thus, using the defaults, 'feedback'
+					would be a valid action.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -168,14 +233,35 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_limit_email_domain</term>
+			<term>$g_email_login_enabled</term>
 			<listitem>
-				<para>Only allow and send email to addresses in the given domain.
+				<para>
+					Enable support for logging in by email and password, in addition to
+					username and password.  This will only work as long as there is a single
+					user with the specified email address and the email address is not blank.
+					The default value is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_ensure_unique</term>
+			<listitem>
+				<para>
+					When enabled, the uniqueness of email addresses will be inforced for new
+					users as well as updates to existing ones.  Note that there can be duplicate
+					emails before this option was turned ON.  Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_limit_email_domains</term>
+			<listitem>
+				<para>Only allow and send email to addresses in the given domain(s).
 					This is useful as a security feature and it is also useful in cases
 					like Sourceforge where its servers are only limited to send emails
 					to SourceForge email addresses in order to avoid
-					spam. $g_limit_email_domain =
-					'users.sourceforge.net';
+					spam. $g_limit_email_domains =
+					array( 'users.sourceforge.net', 'sourceforge.net' );
 				</para>
 			</listitem>
 		</varlistentry>
@@ -185,15 +271,6 @@
 				<para>This specifies the access level that is needed to have user
 					names hyperlinked with mailto: links. The default value is NOBODY,
 					hence, even administrators won't have this feature enabled.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_mail_priority</term>
-			<listitem>
-				<para>If use_x_priority is set to ON, what should the value be?
-					Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3
-					Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
 				</para>
 			</listitem>
 		</varlistentry>

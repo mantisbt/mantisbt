@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@ $s_plugin_format_config = 'Configuration';
 $s_plugin_format_process_text = 'Tractamento de texto';
 $s_plugin_format_process_text_warning_notice = 'Non disactivar sin saper precisemente lo que tu face. In stato disactivate, attaccos de scripting trans sitos (XSS) es possibile.';
 $s_plugin_format_process_urls = 'Tractamento de URL';
-$s_plugin_format_process_buglinks = 'Ligamines MantisBT (Problema/Nota)';
+$s_plugin_format_process_buglinks = 'Ligamines interne de MantisBT (problemas e notas)';
+$s_plugin_format_process_buglinks_info = 'Tu configuration defini le etiquetta <em>Issue</em> como "<literal>%s</literal>" e le etiquetta <em>Issue Note</em> como "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Active';
 $s_plugin_format_disabled = 'Non active';

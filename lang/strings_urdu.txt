@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author امین اکبر
  * @author عثمان خان شاہ
  * @author محبوب عالم
  */
@@ -328,7 +329,6 @@ $s_delete_bug_sure_msg = 'کیاآپ واقعی اس ایشوذ کو خارج ک
 $s_delete_bug_button = ' ایشوذ  خارج کرو';
 $s_monitor_bug_button = ' ایشوذ کا دھیان رکھو';
 $s_unmonitor_bug_button = ' ایشوذ کا دھیان ختم کر دو';
-$s_file_upload_msg = 'فایل کامیابی کے ساتھ اپ لوڈ ھو چکی ھے';
 $s_upload_file = ' فایل کو اپ لوڈ کرو';
 $s_select_file = '  فایل منتخب کرو';
 $s_upload_file_button = ' فایل کو اپ لوڈ کرو';
@@ -357,28 +357,21 @@ $s_update_simple_link = 'صرف ا سے تبديل ھو کر نيا ھو گيا 
 $s_updating_bug_advanced_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
 $s_id = 'پھچان/آی ڈی';
 $s_category = 'قسم';
-$s_category_label = 'زمرہ:';
 $s_severity = 'سختی';
-$s_severity_label = 'شدت:';
 $s_reproducibility = 'دوبارہ بنانا';
 $s_date_submitted = 'جمع کرا نے کی تاریخ';
 $s_last_update = 'پہلے کی تبديلی جو کی گی تھی';
 $s_reporter = 'رپوٹ کرنے والہ';
-$s_reporter_label = 'رپوٹ کرنے والا:';
 $s_assigned_to = 'اس کو سپرد کیا گیا ھے';
-$s_assigned_to_label = 'اس کو سپرد کیا گیا:';
 $s_priority = 'سبقت';
-$s_priority_label = 'ترجیح:';
 $s_resolution = 'سایز';
 $s_status = 'مقام';
-$s_status_label = 'صورتحال:';
 $s_duplicate_id = ' IDنقل والہ';
 $s_os = 'او/ايس';
 $s_projection = 'خاکہ';
 $s_os_version = '  او/ايس کا ماڈل';
 $s_eta = 'ای ٹی اے';
 $s_product_version = 'پراڈکٹ کا ماڈل';
-$s_product_version_label = 'پراڈکٹ کا ورژن:';
 $s_build = 'تعمیر';
 $s_fixed_in_version = 'ماڈل ميں پکی';
 $s_target_version = 'ٹارگٹ ماڈل';
@@ -391,7 +384,6 @@ $s_sticky_issue = 'مشکل ایشوذ';
 $s_profile = 'جایزہ';
 $s_updating_bug_simple_title = ' ایشوذ کی معلومات تبديل ھو کر ني ھو گي ھے';
 $s_vote_added_msg = 'ووٹ جمہع ھو چکا ھے...';
-$s_bugnote_added_msg = ' معلومات جمہع ھو چکی ھیں ...';
 $s_bugnote_deleted_msg = ' معلومات کامیابی کے ساتھ جمہع ھو چکی ھیں...';
 $s_bug_notes_title = ' معلومات';
 $s_edit_bugnote_title = '  معلومات کو تبدیل کرو';
@@ -588,6 +580,7 @@ $s_edit_news_link = 'خبري تبدیل کرو';
 $s_docs_link = 'ڈاکس';
 $s_logout_link = 'لاگ آوٹ';
 $s_my_view_link = 'میرا ویو';
+$s_invite_users = 'صارفین کو مدعو کریں';
 $s_my_view_title_unassigned = 'سپرد نہی کیا گیا';
 $s_my_view_title_recent_mod = 'تھوڈی دیر پہلے تبدیل کیا گیا';
 $s_my_view_title_reported = 'میری طرف سے  رپورٹ';
@@ -705,6 +698,7 @@ $s_changed = 'بدلو(گھنٹے)';
 $s_viewing_bugs_title = 'ایشوذ جو نظر آ رھے ھیں';
 $s_updated = 'اپ ڈیٹڈ';
 $s_sticky = 'سب سے گندا ایشوذ';
+$s_sort = 'الگ کر نے سے';
 $s_issue_id = 'ایشوذ #';
 $s_recently_visited = 'تھو ڈی دیر پہلے ھی وذٹ کیا ھوا';
 $s_none = 'کوی نہی';
@@ -820,7 +814,6 @@ $s_relationship_deleted = ' تعلق خارج ھو گے ھیں';
 $s_no_relationship = 'کوی تعلق نہی';
 $s_relationship_replaced = '  تعلق بدل دیاگیا ھے';
 $s_replace_relationship_button = 'بدل دو';
-$s_replace_relationship_sure_msg = 'دو ایشوذوں کے درمیان پہلے ھی تعلق ھے کیا آپ واقعی اس کو بدلنا چاھتے ھیں ?';
 $s_relationship_with_parent = 'والد ایشوذ کے ساتھ تعلق';
 $s_delete_relationship_button = 'خارج';
 $s_delete_relationship_sure_msg = '  کیا آپ واقعی اس تعلق کو خارج کرنا چاھتے ھیں  ?';
@@ -980,7 +973,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = ' داخلۂ م
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'پیش کار کادیا ھوا ای میل ٹھیک نہی ھے مھربانی کر کے اپنا ریکارڈ نیا کریں.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ساخت کے اختیار کی قیمت ٹھیک نہی ھے \'%s\' \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = ' یہ عمل نہی چل سکتا کیونکہ اس  ایشوذ کو صرف پڑھ سکتے ہیں';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'يہاں پہلے ھی دو ایشوذوں کے درمیان تہلق ھے.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = ' تہلق نہی ملا.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'ایک ایشوذ خود سے تہلق نہی رکھ سکتا .';
@@ -993,3 +985,9 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'درخو�
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'یہ کام دوسرے ایشوذوں پر لوپ بنا دے  گا .';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'آپ چلا نے کے عمل کو تبدیل نہی کر سکتے صرف انتظامیہ یہ کام کر سکتی ھے.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = ' صہفے  پر واپس جانے کی حرابی ھے یقین کر لیں کوی جگہ پی ایچ پی کے خانے سے باہر تو نہی (&ایل ٹی;?پی ایج پی ?&جی ٹی;) مین config_inc.php یا custom_*.php files.';
+$s_dropzone_default_message = 'اپ لوڈ کرنے کے لیے فائلیں یہاں چھوڑیں (یا کلک کریں)';
+$s_dropzone_file_too_big = 'فائل بہت بڑی ({{filesize}}میبی بائٹ) ہے۔ زیادہ سے زیادہ فائل کے حجم کی حد {{maxFilesize}} میبی بائٹ۔';
+$s_dropzone_invalid_file_type = 'آپ اس قسم کی فائل اپ لوڈ نہیں کر سکتے';
+$s_dropzone_response_error = 'سرور نے {{statusCode}} کوڈ کے ساتھ جواب دیاہے۔';
+$s_dropzone_cancel_upload = 'اپ لوڈ منسوخ کریں';
+$s_dropzone_cancel_upload_confirmation = 'کیا آپ کو یقین ہے کہ آپ اپ لوڈ منسوخ کرنا چاہتے ہیں؟';

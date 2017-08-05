@@ -66,23 +66,19 @@ if( auth_is_user_authenticated() ) {
 }
 
 # Check to see if signup is allowed
-if( OFF == config_get_global( 'allow_signup' ) ) {
-	print_header_redirect( 'login_page.php' );
+if( !auth_signup_enabled() ) {
+	print_header_redirect( auth_login_page() );
 	exit;
 }
 
-if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
-			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
+	helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
-	require_lib( 'securimage/securimage.php' );
-
 	$t_securimage = new Securimage();
 	if( $t_securimage->check( $f_captcha ) == false ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
 }
-
-email_ensure_not_disposable( $f_email );
 
 # notify the selected group a new user has signed-up
 if( user_signup( $f_username, $f_email ) ) {
@@ -91,31 +87,57 @@ if( user_signup( $f_username, $f_email ) ) {
 
 form_security_purge( 'signup' );
 
-html_page_top1();
-html_page_top2a();
+layout_login_page_begin();
 ?>
 
-<br />
+	<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
+		<div class="login-container">
+			<div class="space-12 hidden-480"></div>
+			<a href="<?php echo config_get( 'logo_url' ) ?>">
+				<h1 class="center white">
+					<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+				</h1>
+			</a>
+			<div class="space-24 hidden-480"></div>
 
-<div id="error-msg">
-	<div class="center">
-		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
-		<?php echo '[' . $f_username . ' - ' . $f_email . '] ' ?>
+			<div class="position-relative">
+
+				<div class="signup-box visible widget-box no-border" id="login-box">
+					<div class="widget-body">
+						<div class="widget-main">
+							<h4 class="header lighter bigger">
+								<i class="ace-icon fa fa-pencil"></i>
+								<?php echo lang_get( 'signup_title' ) ?>
+							</h4>
+							<div class="space-10"></div>
+
+							<div class="center">
+								<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br />
+								<?php echo '[' . $f_username . ' - ' . $f_email . '] ' ?>
+							</div>
+
+							<div>
+								<br />
+								<?php echo lang_get( 'password_emailed_msg' ) ?>
+								<br /><br />
+								<?php echo lang_get( 'no_reponse_msg' ) ?>
+								<br /><br />
+							</div>
+
+							<br />
+							<div class="center">
+								<a class="width-40 btn btn-inverse bigger-110 btn-success" href="<?php echo AUTH_PAGE_USERNAME ?>">
+									<?php echo lang_get( 'proceed' ) ?>
+								</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div>
-		<br />
-		<?php echo lang_get( 'password_emailed_msg' ) ?>
-		<br /><br />
-		<?php echo lang_get( 'no_reponse_msg' ) ?>
-		<br /><br/>
-	</div>
-</div>
-
-<br />
-<div class="center">
-	<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
-</div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+layout_login_page_end();

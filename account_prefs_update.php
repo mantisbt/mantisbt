@@ -106,6 +106,13 @@ $t_prefs->email_on_priority_min_severity	= gpc_get_int( 'email_on_priority_min_s
 $t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
 $t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 
+# Save user preference with regards to getting full issue details in notifications or not.
+$t_email_full_issue = gpc_get_bool( 'email_full_issue' ) ? 1 : 0;
+$t_email_full_config_option = 'email_notifications_verbose';
+if( config_get( $t_email_full_config_option, /* default */ null, $f_user_id, ALL_PROJECTS ) != $t_email_full_issue ) {
+	config_set( $t_email_full_config_option, $t_email_full_issue, $f_user_id, ALL_PROJECTS );
+}
+
 # make sure the delay isn't too low
 if( ( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
 	( $t_prefs->refresh_delay != 0 )) {
@@ -127,8 +134,10 @@ user_pref_set( $f_user_id, $t_prefs );
 
 form_security_purge( 'account_prefs_update' );
 
-html_page_top( null, $f_redirect_url );
+layout_page_header( null, $f_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $f_redirect_url );
 
-html_page_bottom();
+layout_page_end();

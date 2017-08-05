@@ -191,4 +191,20 @@ config_obsolete( 'content_expire' );
 config_obsolete( 'use_javascript' );
 config_obsolete( 'recently_visited', 'recently_visited_count' );
 config_obsolete( 'email_set_category' );
+config_obsolete( 'show_footer_menu' );
+config_obsolete( 'status_legend_position' );
+config_obsolete( 'status_percentage_legend' );
 config_obsolete( 'font_per_captcha' );
+config_obsolete( 'csv_add_bom' );
+config_obsolete( 'hr_size' );
+config_obsolete( 'hr_width' );
+config_obsolete( 'db_schema' );
+
+# changes in 1.3.4
+config_obsolete( 'mail_priority' );
+
+# changes in 2.0.0dev
+config_obsolete( 'icon_path' );
+config_obsolete( 'bug_print_page_fields' );
+config_obsolete( 'calendar_js_date_format', 'datetime_picker_format' );
+config_obsolete( 'calendar_date_format', 'normal_date_format' );

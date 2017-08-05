@@ -65,11 +65,36 @@ abstract class MantisColumn {
 	public function cache( array $p_bugs ) {}
 
 	/**
+	 * Function to clear the cache of values that was built with the cache() method.
+	 * This can be requested as part of an export of bugs, and clearing the used
+	 * memory helps to keep a long export process within memory limits.
+	 * @return void
+	 */
+	public function clear_cache() {}
+
+	/**
 	 * Function to display column data for a given bug row.
 	 * @param BugData $p_bug            A BugData object.
 	 * @param integer $p_columns_target Column display target.
 	 * @return void
 	 */
 	abstract public function display( BugData $p_bug, $p_columns_target );
+
+	/**
+	 * Function to return column value for a given bug row.  This should be overridden
+	 * to provide value without processing for html display or escaping for a specific target
+	 * output.  Default implementation is to capture display output for backward compatibility
+	 * with target COLUMNS_TARGET_CSV_PAGE.  The output will be escaped by calling code to the
+	 * appropriate format.
+	 *
+	 * @param BugData $p_bug            A BugData object.
+	 * @param integer $p_columns_target Column display target.
+	 * @return string The column value.
+	 */
+	public function value( BugData $p_bug, $p_columns_target ) {
+		ob_start();
+		$this->display( $p_bug, COLUMNS_TARGET_CSV_PAGE );
+		return ob_get_clean();
+	}
 }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.view">
+	<title>View Page Settings</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_issue_activity_note_attachments_seconds_threshold</term>
+			<listitem>
+				<para>
+					If a user submits a note with an attachments (with the
+					specified # of seconds) the attachment is linked to the note.
+					Or 0 for disabling this feature.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

@@ -186,6 +186,7 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_FLOAT:
 		case CUSTOM_FIELD_TYPE_ENUM:
 		case CUSTOM_FIELD_TYPE_EMAIL:
+		case CUSTOM_FIELD_TYPE_TEXTAREA:
 			return gpc_isset( $t_field_name ) && !is_blank( gpc_get_string( $t_field_name ) );
 		default:
 			return gpc_isset( $t_field_name );
@@ -288,10 +289,10 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
-
-	$t_count = count( $t_result );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$t_result[$i] = (int)$t_result[$i];
+	if( is_array( $t_result ) ) {
+		foreach( $t_result as $t_key => $t_value ) {
+			$t_result[$t_key] = (int)$t_value;
+		}
 	}
 
 	return $t_result;
@@ -316,9 +317,10 @@ function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
-	$t_count = count( $t_result );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$t_result[$i] = gpc_string_to_bool( $t_result[$i] );
+	if( is_array( $t_result ) ) {
+		foreach( $t_result as $t_key => $t_value ) {
+			$t_result[$t_key] = gpc_string_to_bool( $t_value );
+		}
 	}
 
 	return $t_result;
@@ -358,7 +360,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
  * @param string  $p_name     Cookie name to set.
  * @param string  $p_value    Cookie value to set.
- * @param boolean $p_expire   Cookie Expiry - default is false.
+ * @param boolean|integer $p_expire true: current browser session, false/0: cookie_time_length, otherwise: expiry time.
  * @param string  $p_path     Cookie Path - default cookie_path configuration variable.
  * @param string  $p_domain   Cookie Domain - default is cookie_domain configuration variable.
  * @param boolean $p_httponly Default true.
@@ -366,15 +368,18 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  */
 function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true ) {
 	global $g_cookie_secure_flag_enabled;
+
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	} else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
+
 	if( null === $p_path ) {
 		$p_path = config_get( 'cookie_path' );
 	}
+
 	if( null === $p_domain ) {
 		$p_domain = config_get( 'cookie_domain' );
 	}

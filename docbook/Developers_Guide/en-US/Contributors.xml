@@ -141,19 +141,20 @@ git clone YourCloneURL
 			</para>
 
 			<para>
-				MantisBT uses <ulink url="http://git-scm.com/book/en/Git-Tools-Submodules">Git submodules</ulink>
-				to store and manage some third-party libraries.
-				These require additional steps to initialize properly:
+				MantisBT uses <ulink url="https://getcomposer.org">Composer</ulink>
+				to pull libraries and components from <ulink url="https://packagist.org">Packagist</ulink>
+				and <ulink url="https://github.com">Github</ulink>.
+				<ulink url="https://getcomposer.org/download/">Install Composer</ulink> and run the following
+				command:
 <programlisting>
-cd mantisbt
-git submodule update --init
+composer install
 </programlisting>
 			</para>
 
 			<warning><para>
 				Failure to execute the submodule initialization commands
-				will result in the corresponding directories under
-				<filename>/library</filename> being empty, which will then
+				will result in critical components being missing from
+				<filename>/vendor</filename> folder, which will then
 				cause errors when running MantisBT.
 			</para></warning>
 		</section>
@@ -187,9 +188,9 @@ git remote add --tags upstream git://github.com/mantisbt/mantisbt.git
 			</para>
 			<para>
 				The following command will set up a tracking branch for the
-				current stable branch, <literal>master-1.2.x</literal>.
+				current stable branch, <literal>master-1.3.x</literal>.
 <programlisting>
-git checkout -b master-1.2.x origin/master-1.2.x
+git checkout -b master-1.3.x origin/master-1.3.x
 </programlisting>
 			</para>
 
@@ -270,7 +271,7 @@ sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -n 1 basename |xargs -I{
 			In order to keep your local repository up-to-date with the
 			official one, there are a few simple commands needed for any
 			tracking branches that you may have, including
-			<literal>master</literal> and <literal>master-1.2.x</literal>.
+			<literal>master</literal> and <literal>master-1.3.x</literal>.
 		</para>
 
 		<para>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.duedate">
+	<title>Due Date</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_due_date_update_threshold</term>
+			<listitem>
+				<para>Threshold to update due date submitted. Default is NOBODY.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_due_date_view_threshold</term>
+			<listitem>
+				<para>Threshold to see due date. Default is NOBODY.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_due_date_default</term>
+			<listitem>
+				<para>Default due date value for newly submitted issues:
+ 					Empty string for no due date set.
+ 					Related date that is accepted by <ulink url="http://php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
+ 					e.g. 'today' or '+2 days'. Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

@@ -32,6 +32,9 @@
  * @uses print_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'columns_api.php' );
@@ -46,43 +49,26 @@ auth_ensure_user_authenticated();
 
 helper_begin_long_process();
 
-$t_page_number = 1;
-$t_per_page = -1;
-$t_bug_count = null;
-$t_page_count = null;
-
 $t_nl = csv_get_newline();
 $t_sep = csv_get_separator();
 
-# Get bug rows according to the current filter
-$t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if( $t_rows === false ) {
+# Get current filter
+$t_filter = filter_get_bug_rows_filter();
+
+# Get the query clauses
+$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
+
+# Get the total number of bugs that meet the criteria.
+$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
+
+if( 0 == $p_bug_count ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
-
-# pre-cache custom column data
-columns_plugin_cache_issue_data( $t_rows );
-
-$t_filename = csv_get_default_filename();
-
-# Send headers to browser to activate mime loading
-
-# Make sure that IE can download the attachments under https.
-header( 'Pragma: public' );
-
-header( 'Content-Type: text/csv; name=' . urlencode( file_clean_name( $t_filename ) ) );
-header( 'Content-Transfer-Encoding: BASE64;' );
-
-# Added Quotes (") around file name.
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '"' );
 
 # Get columns to be exported
 $t_columns = csv_get_columns();
 
-# export BOM
-if( config_get( 'csv_add_bom' ) == ON ) {
-	echo "\xEF\xBB\xBF";
-}
+csv_start( csv_get_default_filename() );
 
 # export the titles
 $t_first_column = true;
@@ -113,29 +99,73 @@ if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 
 echo $t_header;
 
-# export the rows
-foreach ( $t_rows as $t_row ) {
-	$t_first_column = true;
+$t_end_of_results = false;
+$t_offset = 0;
+do {
+	# Clear cache for next block
+	bug_clear_cache_all();
 
-	foreach ( $t_columns as $t_column ) {
-		if( !$t_first_column ) {
-			echo $t_sep;
-		} else {
-			$t_first_column = false;
+	# select a new block
+	$t_result = filter_get_bug_rows_result( $t_query_clauses, EXPORT_BLOCK_SIZE, $t_offset, /* pop params */ false );
+	$t_offset += EXPORT_BLOCK_SIZE;
+
+	# Keep reading until reaching max block size or end of result set
+	$t_read_rows = array();
+	$t_count = 0;
+	$t_bug_id_array = array();
+	$t_unique_user_ids = array();
+	while( $t_count < EXPORT_BLOCK_SIZE ) {
+		$t_row = db_fetch_array( $t_result );
+		if( false === $t_row ) {
+			# a premature end indicates end of query results. Set flag as finished
+			$t_end_of_results = true;
+			break;
+		}
+		$t_bug_id_array[] = (int)$t_row['id'];
+		$t_read_rows[] = $t_row;
+		$t_count++;
+	}
+	# Max block size has been reached, or no more rows left to complete the block.
+	# Either way, process what we have
+
+	# convert and cache data
+	$t_rows = filter_cache_result( $t_read_rows, $t_bug_id_array );
+	bug_cache_columns_data( $t_rows, $t_columns );
+
+	# Clear arrays that are not needed
+	unset( $t_read_rows );
+	unset( $t_unique_user_ids );
+	unset( $t_bug_id_array );
+
+	# export the rows
+	foreach ( $t_rows as $t_row ) {
+		$t_first_column = true;
+
+		foreach ( $t_columns as $t_column ) {
+			if( !$t_first_column ) {
+				echo $t_sep;
+			} else {
+				$t_first_column = false;
+			}
+
+			$t_custom_field = column_get_custom_field_name( $t_column );
+			if( $t_custom_field !== null ) {
+				echo csv_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
+			} else if( column_is_plugin_column( $t_column ) ) {
+				echo csv_format_plugin_column_value( $t_column, $t_row );
+			} else {
+				$t_function = 'csv_format_' . $t_column;
+				if( function_exists( $t_function ) ) {
+					echo $t_function( $t_row );
+				} else {
+					# Field is unknown
+					echo '';
+				}
+			}
 		}
 
-		if( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
-			ob_start();
-			$t_column_value_function = 'print_column_value';
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );
-			$t_value = ob_get_clean();
-
-			echo csv_escape_string( $t_value );
-		} else {
-			$t_function = 'csv_format_' . $t_column;
-			echo $t_function( $t_row );
-		}
+		echo $t_nl;
 	}
 
-	echo $t_nl;
-}
+} while ( false === $t_end_of_results );
+

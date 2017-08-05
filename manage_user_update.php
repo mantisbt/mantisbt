@@ -120,6 +120,7 @@ if( $t_ldap && config_get( 'use_ldap_email' ) ) {
 	$t_email = trim( $f_email );
 	email_ensure_valid( $t_email );
 	email_ensure_not_disposable( $t_email );
+	user_ensure_email_unique( $t_email, $f_user_id );
 }
 
 $c_email = $t_email;
@@ -139,9 +140,10 @@ access_ensure_global_level( $f_access_level );
 # check that we are not downgrading the last administrator
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( user_is_administrator( $f_user_id ) &&
-	 $f_access_level < $t_admin_threshold &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
-	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
+	if( $f_access_level < $t_admin_threshold || $c_enabled === false ) {
+		trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	}
 }
 
 # Project specific access rights override global levels, hence, for users who are changed
@@ -173,6 +175,8 @@ if( $f_protected && $t_old_protected ) {
 }
 
 $t_result = db_query( $t_query, $t_query_params );
+
+event_signal( 'EVENT_MANAGE_USER_UPDATE', array( $c_user_id ) );
 
 if( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
@@ -218,15 +222,16 @@ $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 
 form_security_purge( 'manage_user_update' );
 
-html_page_top( null, $t_result ? $t_redirect_url : null );
+layout_page_header( null, $t_result ? $t_redirect_url : null );
 
-if( $f_protected && $t_old_protected ) {				# PROTECTED
-	echo '<div class="failure-msg">';
-	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
-} else if( $t_result ) {					# SUCCESS
+layout_page_begin( 'manage_overview_page.php' );
+
+if( $f_protected && $t_old_protected ) {
+	# PROTECTED
+	html_operation_warning( $t_redirect_url, lang_get( 'manage_user_protected_msg' ) );
+} else if( $t_result ) {
+	# SUCCESS
 	html_operation_successful( $t_redirect_url );
 }
 
-html_page_bottom();
+layout_page_end();

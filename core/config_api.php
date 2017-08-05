@@ -78,7 +78,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 	$t_bypass_lookup = !config_can_set_in_database( $p_option );
 
 	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-
 	if( !$t_bypass_lookup ) {
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
@@ -132,7 +131,6 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			# @@ debug @@ echo 'pr= '; var_dump($t_projects);
 			# @@ debug @@ echo 'u= '; var_dump($t_users);
-
 			if( !$g_cache_filled ) {
 				$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}';
 				$t_result = db_query( $t_query );
@@ -359,12 +357,14 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			user_ensure_exists( $p_user );
 		}
 
+		db_param_push();
 		$t_query = 'SELECT COUNT(*) from {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
 		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
 
+		db_param_push();
 		$t_params = array();
 		if( 0 < db_result( $t_result ) ) {
 			$t_set_query = 'UPDATE {config}
@@ -501,6 +501,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 			return;
 		}
 
+		db_param_push();
 		$t_query = 'DELETE FROM {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
@@ -524,6 +525,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	}
 
 	# Delete the corresponding bugnote texts
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
 	db_query( $t_query, array( $p_option, $p_user_id ) );
 }
@@ -535,6 +537,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  * @return void
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project ) );
 
@@ -677,71 +680,50 @@ function config_eval( $p_value, $p_global = false ) {
 }
 
 /**
- * list of configuration variable which may expose web server details and should not be exposed to users or web services
+ * Check if a configuration is private.
+ * Private options must not be exposed to users or web services.
  *
  * @param string $p_config_var Configuration option.
- * @return boolean
+ * @return boolean True if private
  */
 function config_is_private( $p_config_var ) {
-	switch( $p_config_var ) {
-		case 'hostname':
-		case 'db_username':
-		case 'db_password':
-		case 'database_name':
-		case 'db_schema':
-		case 'db_type':
-		case 'master_crypto_salt':
-		case 'smtp_host':
-		case 'smtp_username':
-		case 'smtp_password':
-		case 'smtp_connection_mode':
-		case 'smtp_port':
-		case 'email_send_using_cronjob':
-		case 'absolute_path':
-		case 'core_path':
-		case 'class_path':
-		case 'library_path':
-		case 'language_path':
-		case 'session_save_path':
-		case 'session_handler':
-		case 'session_validation':
-		case 'global_settings':
-		case 'system_font_folder':
-		case 'phpMailer_method':
-		case 'attachments_file_permissions':
-		case 'file_upload_method':
-		case 'absolute_path_default_upload_folder':
-		case 'ldap_server':
-		case 'plugin_path':
-		case 'ldap_root_dn':
-		case 'ldap_organization':
-		case 'ldap_uid_field':
-		case 'ldap_bind_dn':
-		case 'ldap_bind_passwd':
-		case 'use_ldap_email':
-		case 'ldap_protocol_version':
-		case 'login_method':
-		case 'cookie_path':
-		case 'cookie_domain':
-		case 'bottom_include_page':
-		case 'top_include_page':
-		case 'css_include_file':
-		case 'css_rtl_include_file':
-		case 'meta_include_file':
-		case 'log_level':
-		case 'log_destination':
-		case 'dot_tool':
-		case 'neato_tool':
-			return true;
+	global $g_public_config_names;
 
-		# Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
-		# These can be removed once complete removal from config and db is enforced by upgrade process.
-		case 'file_upload_ftp_server':
-		case 'file_upload_ftp_user':
-		case 'file_upload_ftp_pass':
-			return true;
-	}
-
-	return false;
+	return !in_array( $p_config_var, $g_public_config_names, true );
 }
 
+/**
+ * Check if a configuration is defined in the database with the given value.
+ *
+ * @param string  $p_option  The configuration option to retrieve.
+ * @param string  $p_value   Value to check for (defaults to null = any value).
+ * @return boolean True if option is defined
+ */
+function config_is_defined( $p_option, $p_value = null ) {
+	global $g_cache_filled, $g_cache_config;
+
+	if( !$g_cache_filled ) {
+		config_get( $p_option, -1 );
+	}
+
+	if( !isset( $g_cache_config[$p_option] ) ) {
+		# Option is not in cache
+		return false;
+	} elseif( $p_value === null ) {
+		# We're not checking any specific value
+		return true;
+	}
+
+	# Check the cache for specified value
+	foreach( $g_cache_config[$p_option] as $t_project ) {
+		foreach( $t_project as $t_opt ) {
+			list( , $t_value ) = explode( ';', $t_opt );
+			if( $t_value == $p_value ) {
+				return true;
+			}
+		}
+	}
+
+	# Value not found in cache
+	return false;
+}

@@ -583,12 +583,13 @@ class FilterTest extends SoapBase {
         $t_issue_to_add['resolution'] = array( 'id' => FIXED );
         $t_issue_to_add['sticky'] = true;
         $t_issue_to_add['view_state'] = array( 'id' => VS_PUBLIC );
-        $t_issue_to_add['fixed_in_version'] = 'test_69';
-        $t_issue_to_add['target_version'] = 'test_70';
         $t_issue_to_add['platform'] = 'test_plaform';
         $t_issue_to_add['os'] = 'test_os';
         $t_issue_to_add['os_build'] = 'test_6';
 
+        # Must use valid versions for this to work.
+		# $t_issue_to_add['fixed_in_version'] = 'test_69';
+		# $t_issue_to_add['target_version'] = 'test_70';
 
         $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -608,8 +609,9 @@ class FilterTest extends SoapBase {
                            'sort_direction' => 'DESC',
                            'sticky' => true,
                            'view_state' => array( VS_PUBLIC ),
-                           'fixed_in_version' => array( 'test_69' ),
-                           'target_version' => array( 'test_70' ),
+                           # These versions must exist for this to work
+                           # 'fixed_in_version' => array( 'test_69' ),
+                           # 'target_version' => array( 'test_70' ),
                            'platform' => array( 'test_plaform' ),
                            'os' => array( 'test_os' ),
                            'os_build' => array( 'test_6' )

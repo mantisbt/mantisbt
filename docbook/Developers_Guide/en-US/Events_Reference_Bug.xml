@@ -197,6 +197,7 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: New Status</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>

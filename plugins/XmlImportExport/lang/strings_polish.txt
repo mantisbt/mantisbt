@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,10 @@ $s_plugin_XmlImportExport_title = 'Import/eksport zgłoszeń';
 $s_plugin_XmlImportExport_description = 'Dodaje możliwości opartego na XML importu i eksportu do MantisBT.';
 $s_plugin_XmlImportExport_import = 'Import zgłoszeń';
 $s_plugin_XmlImportExport_export = 'Eksportuj do XML';
+$s_plugin_XmlImportExport_config_title = 'Ustawienia poziomów dostępu dla importu/eksportu XML';
+$s_plugin_XmlImportExport_import_threshold = 'Import zgłoszeń';
+$s_plugin_XmlImportExport_export_threshold = 'Eksport zgłoszeń';
+$s_plugin_XmlImportExport_action_update = 'Zmień';
 $s_plugin_XmlImportExport_importing_in_project = 'Importowanie zgłoszeń w projekcie:';
 $s_plugin_XmlImportExport_import_options = 'Opcje importu';
 $s_plugin_XmlImportExport_cross_references = 'Powiązania';

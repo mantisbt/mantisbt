@@ -42,7 +42,7 @@
 			<term>$g_view_summary_threshold</term>
 			<listitem>
 				<para>Specifies the access level required to view the summary
-					page. Default is VIEWER.
+					page. Default is MANAGER.
 				</para>
 			</listitem>
 		</varlistentry>

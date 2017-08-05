@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@
  * @file
  *
  * @author Luk
+ * @author Marek Kriz
  */
 
 $s_plugin_format_title = 'Formátování MantisBT';
@@ -47,6 +48,7 @@ $s_plugin_format_config = 'Konfigurace';
 $s_plugin_format_process_text = 'Zpracování textu';
 $s_plugin_format_process_text_warning_notice = 'Nevypínejte, aniž opravdu víte, co děláte. Ve vypnutém stavu hrozí útoky typu „cross site scripting“ (XSS).';
 $s_plugin_format_process_urls = 'Zpracování URL';
-$s_plugin_format_process_buglinks = 'Odkazy MantisBT (problém/poznámka k problému)';
+$s_plugin_format_process_buglinks = 'Interní odkazy MantisBT (záznamy a poznámky k záznamům)';
+$s_plugin_format_process_buglinks_info = 'Vaše konfigurace definuje štítek <em>záznamu</em> jako "<literal>%s</literal>"a štítek <em>poznámky k záznamu</em> jako "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Zapnuto';
 $s_plugin_format_disabled = 'Vypnuto';

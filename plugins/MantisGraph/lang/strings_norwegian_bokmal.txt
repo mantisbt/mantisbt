@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,38 +38,25 @@
  * @ingroup Language
  * @file
  *
+ * @author Jon Harald Søby
  * @author Nghtwlkr
  */
 
 $s_plugin_graph_title = 'Mantis Grafer';
 $s_plugin_graph_description = 'Offisiell grafutvidelse.';
 $s_plugin_MantisGraph_title = 'Mantis Grafer';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Avansert Oppsummering';
 $s_plugin_MantisGraph_config = 'Konfigurasjon';
 $s_plugin_MantisGraph_synthesis_link = 'Syntese';
 $s_plugin_MantisGraph_status_link = 'Per tilstand';
 $s_plugin_MantisGraph_priority_link = 'Per prioritet';
 $s_plugin_MantisGraph_severity_link = 'Per alvorlighetsgrad';
 $s_plugin_MantisGraph_category_link = 'Per kategori';
-$s_plugin_MantisGraph_resolution_link = 'Per løsningsstatus';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Graf';
-$s_plugin_MantisGraph_library = 'Grafbibliotek som skal brukes';
-$s_plugin_MantisGraph_bundled = 'Buntet';
-$s_plugin_MantisGraph_window_width = 'Grafbredde (i piksler)';
-$s_plugin_MantisGraph_bar_aspect = 'Søylediagrams forhold mellom høyde og bredde';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Grafer å vise per rad på den avanserte oppsummeringssiden';
-$s_plugin_MantisGraph_font = 'Skrifttype';
-$s_plugin_MantisGraph_jpgraph_path = 'Systemsti til JpGraph-bibliotek';
-$s_plugin_MantisGraph_jpgraph_path_default = 'La stå blank for standard: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing forbedrer det visuelle utseendet til enkelte grafer på bekostning av ytelse (opp til 8x saktere)';
-$s_plugin_MantisGraph_enabled = 'På';
-$s_plugin_MantisGraph_disabled = 'Av';
-$s_plugin_MantisGraph_graph_imp_status_title = 'graf etter status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'graf etter prioritet';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'graf etter vanskelighetsgrad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'grad etter kategori';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'graf etter løsningsstatus';
+$s_plugin_MantisGraph_resolution_link = 'Etter oppløsning';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Syntesegrafer etter status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Syntesegrafer etter prioritet';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Syntesegrafer etter alvorlighetsgrad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Syntesegrafer etter kategori';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Syntesegrafer etter oppløsning';
 $s_plugin_MantisGraph_by_status_pct = 'etter status prosentdel';
 $s_plugin_MantisGraph_by_priority_pct = 'etter prioritet prosentdel';
 $s_plugin_MantisGraph_by_severity_pct = 'etter vanskelighetsgrad prosentdel';
@@ -80,13 +67,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'etter prioritet og status';
 $s_plugin_MantisGraph_by_resolution_mix = 'etter løsningsstatus og status';
 $s_plugin_MantisGraph_legend_still_open = 'Fortsatt åpne';
 $s_plugin_MantisGraph_legend_resolved = 'Løste';
-$s_plugin_MantisGraph_legend_assigned = 'Delegerte';
-$s_plugin_MantisGraph_legend_total = 'Totalt';
-$s_plugin_MantisGraph_legend_opened = 'Åpne';
-$s_plugin_MantisGraph_legend_closed = 'Lukkede';
 $s_plugin_MantisGraph_legend_reported = 'Rapporterte';
-$s_plugin_MantisGraph_cumulative = 'Kumulativt';
-$s_plugin_MantisGraph_not_enough_data = 'Har ikke nok data til å vise grafen';
 $s_plugin_MantisGraph_period_none = 'Ingen';
 $s_plugin_MantisGraph_period_this_week = 'Denne uke';
 $s_plugin_MantisGraph_period_last_week = 'Forrige uke';
@@ -98,12 +79,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Forrige kvartal';
 $s_plugin_MantisGraph_period_year_to_date = 'Hittil i år';
 $s_plugin_MantisGraph_period_select = 'Valgfrie datoer';
 $s_plugin_MantisGraph_period_last_year = 'Forrige år';
-$s_plugin_MantisGraph_select = 'Vennligst velg';
-$s_plugin_MantisGraph_select_bystatus = 'etter status';
-$s_plugin_MantisGraph_select_summbystatus = 'Oppsummering etter status';
-$s_plugin_MantisGraph_select_bycat = 'Oppsummering etter kategori';
-$s_plugin_MantisGraph_select_both = 'Oppsummering etter status og kategori';
-$s_plugin_MantisGraph_show_as_graph = 'Vise som graf';
-$s_plugin_MantisGraph_show_as_table = 'Vise som tabell';
-$s_plugin_MantisGraph_show_graph = 'Vise som graf';
 $s_plugin_MantisGraph_graph_page = 'Vise sakshistorikk som graf';

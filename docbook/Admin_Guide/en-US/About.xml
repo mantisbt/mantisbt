@@ -16,7 +16,7 @@
             and gained a lot of popularity, and now it has become one of the most
             popular open source bug/issue tracking systems.  MantisBT is developed
             in PHP, with support to multiple database backends including MySQL,
-            MS SQL, PostgreSQL and DB2.
+            MS SQL and PostgreSQL.
         </para>
 
         <para>
@@ -154,16 +154,27 @@
             </listitem>
             <listitem>
                 <para>
+                    <ulink url="https://gitter.im/mantisbt/mantisbt">Gitter</ulink>
+                    is a browser-based, on-line chat that has mainly replaced the
+                    team's use of IRC. In the main chat room, you can have a live
+                    discussion with the developers and other MantisBT users.
+                    Gitter supports all modern browsers and also offers Android
+                    and iOS-based clients, as well as an
+                    <ulink url="https://irc.gitter.im/">IRC bridge</ulink>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
                     <ulink url="http://www.mantisbt.org/irc.php">IRC</ulink> -
-                    The IRC channel is mainly used by developers to engage in
-                    in-person discussion.  There are many free IRC clients:
+                    The IRC channel not very active anymore, as the developers
+                    have moved on to using Gitter for live discussions;
+                    nevertheless, the channel is still open.
+                    There are many free IRC clients:
                     XChat (for Linux), <ulink url="http://hexchat.github.io/">HexChat</ulink>,
                     <ulink url="http://www.icechat.net/">IceChat</ulink> amongst others.
                     You can also use <ulink url="http://webchat.freenode.net/">Web Chat</ulink>
-                    to connect to IRC via your web browser.
-                    This may also useful when your work firewall blocks the IRC port.
-                    Many people prefer to use IRC to ask questions to the developers and other
-                    users who are in the IRC channel.
+                    to connect to IRC via your web browser, which may also be useful when
+                    you're behind a firewall that blocks the IRC port.
                     The IRC channel logs are archived and made
                     <ulink url="http://www.mantisbt.org/irclogs.php">
                         available on the MantisBT web site</ulink>.
@@ -173,12 +184,12 @@
                 <para>
                     <ulink url="http://www.mantisbt.org">Wiki</ulink> - The
                     MantisBT Wiki has information related to "How To (recipes)",
-                    FAQ, feature requirements, etc.
+                    FAQ, feature requirements, plugins etc.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Search - A good way for locating an answer for your question
+                    Search - A good way for locating an answer to your question
                     or finding more information about a topic is to search across
                     all MantisBT website and the Internet via your favorite
                     search engine, e.g.
@@ -188,16 +199,14 @@
             </listitem>
         </itemizedlist>
 
-        <para>
-            It is important to note that support questions should not be sent
-            directly to MantisBT developers or through the MantisBT contact us
-            pages.
+        <note>
+            <para>Support questions should not be sent directly to MantisBT
+                developers or through the MantisBT website's contact pages.
         </para>
-        <para>
-            Also, our <ulink url="http://mantisbt.org/bugs/">bug tracker</ulink>
-            is reserved for reporting issues with the software, and must not be
-            used for support requests.
-        </para>
+        <para>Also, our <ulink url="http://mantisbt.org/bugs/">bug tracker</ulink>
+            is reserved for reporting issues with the software, and
+            <emphasis>must not be used for support requests</emphasis>.
+        </para></note>
     </section>
 
     <section id="admin.about.news">
@@ -230,8 +239,7 @@
                 <para>
                     <ulink url="http://twitter.com/mantisbt">Twitter</ulink> is used to
                     notify users about up-to-date details about what is happening with MantisBT development.
-                    For example, a Twitter update is automatically posted by the official bug tracker
-                    whenever an issue is resolved.  Twitter users are encouraged to follow "mantisbt".
+                    Twitter users are encouraged to follow "@mantisbt".
                 </para>
             </listitem>
         </itemizedlist>
@@ -244,7 +252,7 @@
            Our release numbering convention follows the guidelines of
            <ulink url="http://semver.org/">Semantic Versioning</ulink>.
            Given a version number <emphasis>Major.Minor.Patch</emphasis>
-           and an optional <emphasis>Suffix</emphasis> (eg. 1.2.0rc1):
+           and an optional <emphasis>Suffix</emphasis> (eg. 1.3.0-rc.1):
        </para>
 
        <itemizedlist>
@@ -269,7 +277,20 @@
             <listitem>
                 <para>
                     Suffix - Optional, indicates a development release.
-                    a1 for alpha 1, b1 for beta 1, rc1 for first release candidate, etc.
+                    <itemizedlist>
+                        <listitem><para>
+                            a<emphasis>N</emphasis> or
+                            alpha.<emphasis>N</emphasis> for
+                            alpha releases,
+                        </para></listitem>
+                        <listitem><para>
+                            b<emphasis>N</emphasis> or
+                            beta.<emphasis>N</emphasis> for
+                            beta releases, or</para></listitem>
+                        <listitem><para>rc<emphasis>N</emphasis> or
+                            rc.<emphasis>N</emphasis> for release candidates.
+                            </para></listitem>
+                    </itemizedlist>
                     Absence of suffix indicates a stable release.
                 </para>
             </listitem>

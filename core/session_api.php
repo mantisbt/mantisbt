@@ -100,7 +100,7 @@ class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id = null ) {
 		global $g_cookie_secure_flag_enabled;
 
-		$this->key = hash( 'whirlpool', 'session_key' . config_get_global( 'crypto_master_salt' ), false );
+		$this->key = hash( 'whirlpool', 'session_key_v_2' . config_get_global( 'crypto_master_salt' ), false );
 
 		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
@@ -135,7 +135,7 @@ class MantisPHPSession extends MantisSession {
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
-			return unserialize( $_SESSION[$this->key][$p_name] );
+			return $_SESSION[$this->key][$p_name];
 		}
 
 		if( func_num_args() > 1 ) {
@@ -153,7 +153,7 @@ class MantisPHPSession extends MantisSession {
 	 * @return void
 	 */
 	function set( $p_name, $p_value ) {
-		$_SESSION[$this->key][$p_name] = serialize( $p_value );
+		$_SESSION[$this->key][$p_name] = $p_value;
 	}
 
 	/**
@@ -227,7 +227,7 @@ function session_validate( $p_session ) {
 			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
 
 			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
-			echo "\t<meta http-equiv=\"Refresh\" content=\"4;URL=" . $t_url . "\" />\n";
+			echo "\t<meta http-equiv=\"Refresh\" content=\"4; URL=" . $t_url . "\" />\n";
 
 			die();
 		}

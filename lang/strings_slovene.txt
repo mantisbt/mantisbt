@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -270,7 +270,6 @@ $s_delete_bug_sure_msg = 'Ali ste prepričani, da želite izbrisati to zadevo?';
 $s_delete_bug_button = 'Izbriši';
 $s_monitor_bug_button = 'Opazuj';
 $s_unmonitor_bug_button = 'Zaključi opazovanje';
-$s_file_upload_msg = 'Datoteka se je uspešno naložila';
 $s_upload_file = 'Nalaganje datoteke';
 $s_select_file = 'Izberi datoteko';
 $s_upload_file_button = 'Naloži datoteko';
@@ -313,7 +312,6 @@ $s_steps_to_reproduce = 'Koraki za ponovitev';
 $s_update_information_button = 'Posodobi informacije';
 $s_updating_bug_simple_title = 'Posodabljam zadevo';
 $s_vote_added_msg = 'Glas je bil dodan...';
-$s_bugnote_added_msg = 'Beležka dodana...';
 $s_bugnote_deleted_msg = 'Beležka je bila uspešno izbrisana...';
 $s_bug_notes_title = 'Beležke';
 $s_edit_bugnote_title = 'Urejanje beležke';
@@ -502,8 +500,8 @@ $s_valid_project_msg = 'Izbrati morate veljaven projekt';
 $s_password_emailed_msg = 'Geslo vam po poslano po elektronski pošti.';
 $s_no_reponse_msg = 'če ne boste odgovorili v roku tedna dni, bo vaš račun mogoče izbrisan.';
 $s_signup_info = 'Vnesite uporabniško ime in veljaven elektronski naslov. Na ta naslov bomo poslali naključne ustvarjeno geslo.';
-$s_signup_title = 'Prijava';
-$s_signup_button = 'Prijava';
+$s_signup_title = 'Registracija';
+$s_signup_button = 'Registracija';
 $s_summary_title = 'Povzetek';
 $s_summary_advanced_link = 'Napredni povzetek';
 $s_by_project = 'Po projektu';
@@ -698,7 +696,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Dostop zavrnje
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcija konfiguracije \'%1$s\' ima neveljavno vrednost \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Operacija ne more biti izvedena, ker je zadeva \'%1$d\' označena samo za branje';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'NAPAKA: Med tema dvema zadevama relacija že obstaja.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'NAPAKA: Nisem našel relacije.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Dostop zavrnjen: zadeva %1$d potrebuje višji nivo dostopa.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'NAPAKA: Zadeva ne more biti v relaciji sama s seboj.';

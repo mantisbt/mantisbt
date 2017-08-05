@@ -101,31 +101,51 @@ if( $f_page_number < 1 ) {
 # Retrieve Tags from table
 $t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
 
-html_page_top( lang_get( 'manage_tags_link' ) );
-print_manage_menu( 'manage_tags_page.php' ); ?>
+layout_page_header( lang_get( 'manage_tags_link' ) );
 
-<div id="manage-tags-filter-menu">
-	<ul class="menu"><?php
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( 'manage_tags_page.php' );
+?>
+
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div class="center">
+		<div class="btn-toolbar inline">
+		<div class="btn-group">
+	<?php
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
-		if( $t_prefix == $f_filter ) {
-			$t_link = '<strong>' . $t_caption . '</strong>';
-		} else {
-			$t_link = '<a href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>';
-		}
-		echo '<li>' . $t_link . '</li>';
+		$t_active = $t_prefix == $f_filter ? 'active' : '';
+		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
+		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
 	} ?>
-	</ul>
-</div>
+		</div>
+	</div>
+	</div>
 
-<div class="table-container">
-	<h2><?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]</h2>
-	<?php if( $t_can_edit ) { ?>
-	<div class="section-link"><?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?></div>
-	<?php } ?>
-	<table>
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-tags"></i>
+			<?php echo lang_get('manage_tags_link') ?>
+			<span class="badge"><?php echo $t_total_tag_count ?></span>
+		</h4>
+	</div>
+
+	<div class="widget-body">
+		<?php if ($t_can_edit) { ?>
+			<div class="widget-toolbox padding-8 clearfix">
+				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
+			</div>
+		<?php } ?>
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
-			<tr class="row-category">
+			<tr>
 				<td><?php echo lang_get( 'tag_name' ) ?></td>
 				<td><?php echo lang_get( 'tag_creator' ) ?></td>
 				<td><?php echo lang_get( 'tag_created' ) ?></td>
@@ -154,36 +174,66 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 ?>
 		</tbody>
 	</table>
-	<div class="pager-links"><?php
+	</div>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+	<div class="btn-toolbar pull-right"><?php
 		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
 		print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
 	</div>
 </div>
+</div>
+</div>
 
 <?php if( $t_can_edit ) { ?>
-<div id="manage-tags-create-div" class="form-container">
-	<a name="tagcreate" />
+<div class="space-10"></div>
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
-		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-tag"></i>
+				<?php echo lang_get('tag_create') ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<a name="tagcreate"></a>
+			<div class="widget-main no-padding">
+		<div class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<fieldset>
 			<?php echo form_security_field( 'tag_create' ); ?>
-			<div class="field-container">
-				<label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
-				<span class="input"><input type="text" id="tag-name" name="name" size="40" maxlength="100" />
-				<span><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></span>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
-				<span class="textarea"><textarea id="tag-description" name="description" cols="80" rows="6"></textarea></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'tag_create' ) ?>" /></span>
+			<tr>
+				<td class="category">
+					<span class="required">*</span> <?php echo lang_get( 'tag_name' ) ?>
+				</td>
+				<td>
+					<input type="text" id="tag-name" name="name" class="input-sm" size="40" maxlength="100" />
+					<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></small>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_description' ) ?>
+				</td>
+				<td>
+					<textarea class="form-control" id="tag-description" name="description" cols="80" rows="6"></textarea>
+				</td>
+			</tr>
 		</fieldset>
-	</form>
-</div>
+		</table>
+		</div>
+		</div>
+		</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
+				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"
+					   value="<?php echo lang_get('tag_create') ?>"/>
+			</div>
+		</div>
+	</div>
+    </form>
 <?php
 } #End can Edit
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

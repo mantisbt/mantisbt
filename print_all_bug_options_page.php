@@ -38,6 +38,7 @@ include( dirname( __FILE__ ) . '/print_all_bug_options_inc.php' );
 
 auth_ensure_user_authenticated();
 
-html_page_top();
+layout_page_header();
+layout_page_begin();
 edit_printing_prefs();
-html_page_bottom();
+layout_page_end();

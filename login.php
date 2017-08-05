@@ -41,14 +41,12 @@ require_api( 'print_api.php' );
 require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 
-$t_allow_perm_login = ( ON == config_get( 'allow_permanent_cookie' ) );
-
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
-$f_perm_login	= $t_allow_perm_login && gpc_get_bool( 'perm_login' );
 $t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_get( 'default_home_page' ) ) ) );
 $f_from			= gpc_get_string( 'from', '' );
 $f_secure_session = gpc_get_bool( 'secure_session', false );
+$f_reauthenticate = gpc_get_bool( 'reauthenticate', false );
 $f_install = gpc_get_bool( 'install' );
 
 # If upgrade required, always redirect to install page.
@@ -58,6 +56,10 @@ if( $f_install ) {
 
 $f_username = auth_prepare_username( $f_username );
 $f_password = auth_prepare_password( $f_password );
+
+$t_user_id = auth_get_user_id_from_login_name( $f_username );
+$t_allow_perm_login = auth_allow_perm_login( $t_user_id, $f_username );
+$f_perm_login	= $t_allow_perm_login && gpc_get_bool( 'perm_login' );
 
 gpc_set_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', $f_secure_session ? '1' : '0' );
 
@@ -69,14 +71,28 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 	}
 
 	$t_redirect_url = 'login_cookie_test.php?return=' . $t_return;
-
 } else {
-	$t_redirect_url = 'login_page.php?return=' . $t_return .
-		'&error=1&username=' . urlencode( $f_username ) .
-		'&secure_session=' . ( $f_secure_session ? 1 : 0 );
-	if( $t_allow_perm_login ) {
-		$t_redirect_url .= '&perm_login=' . ( $f_perm_login ? 1 : 0 );
+	$t_query_args = array(
+		'error' => 1,
+		'username' => $f_username,
+		'return' => $t_return,
+	);
+
+	if( $f_reauthenticate ) {
+		$t_query_args['reauthenticate'] = 1;
 	}
+
+	if( $f_secure_session ) {
+		$t_query_args['secure_session'] = 1;
+	}
+
+	if( $t_allow_perm_login && $f_perm_login ) {
+		$t_query_args['perm_login'] = 1;
+	}
+
+	$t_query_text = http_build_query( $t_query_args, '', '&' );
+
+	$t_redirect_url = auth_login_page( $t_query_text );
 
 	if( HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_prompt();

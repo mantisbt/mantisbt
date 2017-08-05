@@ -90,18 +90,20 @@ if( current_user_is_anonymous() ) {
 $t_show_all = gpc_get_bool( 'show_all', false );
 
 # start the page
-html_page_top( lang_get( 'my_sponsorship' ) );
+layout_page_header( lang_get( 'my_sponsorship' ) );
+
+layout_page_begin();
 
 $t_project = helper_get_current_project();
+
+print_account_menu( 'account_sponsor_page.php' );
+
 ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title">
+	<td class="bold">
 		<?php echo lang_get( 'my_sponsorship' ) ?>
-	</td>
-	<td class="right">
-		<?php print_account_menu( 'account_sponsor_page.php' ) ?>
 	</td>
 </tr>
 </table>
@@ -150,7 +152,7 @@ if( $t_sponsor_count === 0 ) {
 	</colgroup>
 	<!-- Headings -->
 	<tr>
-		<td class="form-title" colspan="9">
+		<td class="bold" colspan="9">
 			<?php echo lang_get( 'own_sponsored' ) ?>
 		</td>
 	</tr>
@@ -189,7 +191,7 @@ if( $t_sponsor_count === 0 ) {
 		echo '<tr class="' . $t_status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
-		echo '<td class="right">' . $t_released_label . '&#160;</td>';
+		echo '<td>' . $t_released_label . '&#160;</td>';
 		echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
 		echo '<td>';
 		print_user( $t_bug->handler_id );
@@ -198,12 +200,12 @@ if( $t_sponsor_count === 0 ) {
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+			printf( ' <i class="fa fa-lock" alt="(%s)" title="%s"></i>', lang_get( 'private' ), lang_get( 'private' ) );
 		}
 		echo '</td>';
 
 		# describe sponsorship amount
-		echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+		echo '<td class="pull-right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
 		echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
 
 		if( SPONSORSHIP_PAID == $t_sponsor->paid ) {
@@ -226,13 +228,13 @@ if( $t_sponsor_count === 0 ) {
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_owing' ) ?></td>
-	<td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
 	<td colspan="2"></td>
 </tr>
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_paid' ) ?></td>
-	<td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
 	<td colspan="2"></td>
 </tr>
 </table>
@@ -277,7 +279,7 @@ if( $t_sponsor_count === 0 ) {
 	</colgroup>
 	<!-- Headings -->
 	<tr>
-		<td class="form-title" colspan="8">
+		<td class="bold" colspan="8">
 			<?php echo lang_get( 'issues_handled' ) ?>
 		</td>
 	</tr>
@@ -317,13 +319,13 @@ if( $t_sponsor_count === 0 ) {
 		echo '<tr class="' . $t_status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
-		echo '<td class="right">' . $t_released_label . '&#160;</td>';
+		echo '<td>' . $t_released_label . '&#160;</td>';
 		echo '<td><a title="' . $t_resolution . '"><span class="underline">' . $t_status . '</span>&#160;</a></td>';
 
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+			printf( ' <i class="fa fa-lock" alt="(%s)" title="%s"></i>', lang_get( 'private' ), lang_get( 'private' ) );
 		}
 		echo '</td>';
 
@@ -331,8 +333,8 @@ if( $t_sponsor_count === 0 ) {
 		echo '<td>';
 		print_user( $t_sponsor->user_id );
 		echo '</td>';
-		echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
-		echo '<td><select name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
+		echo '<td>' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+		echo '<td><select class="input-sm" name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
 		print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
 		echo '</select></td>';
 
@@ -350,13 +352,13 @@ if( $t_sponsor_count === 0 ) {
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_owing' ) ?></td>
-	<td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
 	<td></td>
 </tr>
 <tr>
 	<td colspan="5"></td>
 	<td><?php echo lang_get( 'total_paid' ) ?></td>
-	<td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
 	<td></td>
 </tr>
 	<!-- BUTTONS -->
@@ -383,4 +385,4 @@ html_button( 'account_sponsor_page.php',
 </div>
 
 <?php
-html_page_bottom();
+layout_page_end();

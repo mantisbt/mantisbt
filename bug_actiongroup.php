@@ -122,7 +122,6 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'DELETE':
 			if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
-				event_signal( 'EVENT_BUG_DELETED', array( $t_bug_id ) );
 				bug_delete( $t_bug_id );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -151,11 +150,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'ASSIGN':
 			$f_assign = gpc_get_int( 'assign' );
-			if( ON == config_get( 'auto_set_status_to_assigned' ) ) {
-				$t_assign_status = config_get( 'bug_assigned_status' );
-			} else {
-				$t_assign_status = $t_status;
-			}
+			$t_assign_status = bug_get_status_for_assign( $t_bug->handler_id, $f_assign, $t_status );
 			# check that new handler has rights to handle the issue, and
 			#  that current user has rights to assign the issue
 			$t_threshold = access_get_status_threshold( $t_assign_status, $t_bug->project_id );
@@ -212,7 +207,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 					# Add bugnote if supplied
 					if( !is_blank( $f_bug_notetext ) ) {
-						bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+						$t_bugnote_id = bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+						bugnote_process_mentions( $t_bug_id, $t_bugnote_id, $f_bug_notetext );
 						# No need to call email_generic(), bugnote_add() does it
 					} else {
 						email_bug_updated( $t_bug_id );
@@ -286,6 +282,18 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
+		case 'UP_DUE_DATE':
+			$t_due_date = gpc_get_string( 'due_date', null );
+			if( $t_due_date !== null ) {
+				$t_due_date = date_strtotime( $t_due_date );
+
+				if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
+					bug_set_field( $t_bug_id, 'due_date', $t_due_date );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+				}
+			}
+			break;
 		case 'VIEW_STATUS':
 			if( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
 				$f_view_status = gpc_get_int( 'view_status' );
@@ -334,20 +342,23 @@ form_security_purge( $t_form_name );
 $t_redirect_url = 'view_all_bug_page.php';
 
 if( count( $t_failed_ids ) > 0 ) {
-	html_page_top();
+	layout_page_header();
+	layout_page_begin();
 
 	echo '<div><br />';
-	echo '<table class="width75">';
-	$t_separator = lang_get( 'word_separator' );
+	echo '<div class="table-responsive">';
+	echo '<table class="table table-bordered table-condensed table-striped">';
+	$separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$t_label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_separator;
-		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $t_label, bug_get_field( $t_id, 'summary' ), $t_reason );
+		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
+		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
 	}
+	echo '</div>';
 	echo '</table><br />';
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
-	html_page_bottom();
+	layout_page_end();
 } else {
 	print_header_redirect( $t_redirect_url );
 }

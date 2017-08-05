@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,9 +41,11 @@
  * @author Crt
  * @author Lliehu
  * @author Nike
+ * @author Pyscowicz
  * @author Silvonen
  * @author Str4nd
  * @author Tkh
+ * @author Valtlait
  */
 
 $s_actiongroup_menu_move = 'Siirrä';
@@ -106,7 +108,6 @@ $s_bugnote_link_title = 'Suora linkki kommenttiin';
 $s_delete_bugnote_button = 'Poista muistiinpano';
 $s_delete_bugnote_sure_msg = 'Oletko varma, että haluat poistaa tämän muistiinpanon?';
 $s_bug_relationships = 'Relaatiot';
-$s_bug_relationships_label = 'Relaatiot:';
 $s_empty_password_sure_msg = 'Käyttäjällä on tyhjä salasana. Oletko varma, että tämä on haluttua?';
 $s_empty_password_button = 'Käytä tyhjää salasanaa';
 $s_reauthenticate_title = 'Autentikointi';
@@ -245,7 +246,6 @@ $s_email_notification_title_for_action_monitor = 'Käyttäjä %2$s tarkkailee ta
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
 $s_email_project = 'Projekti';
-$s_email_project_label = 'Projekti:';
 $s_email_bug = 'Tapahtuman ID';
 $s_email_category = 'Kategoria';
 $s_email_reproducibility = 'Toistettavuus';
@@ -276,13 +276,15 @@ $s_realname_label = 'Oikea nimi';
 $s_email = 'Sähköpostiosoite';
 $s_email_label = 'Sähköposti';
 $s_password = 'Salasana';
+$s_new_password = 'Uusi salasana';
 $s_no_password_change = 'Salasanaa ei voi muokata, koska sen ylläpidosta vastaa toinen järjestelmä.';
 $s_confirm_password = 'Vahvista salasana';
 $s_current_password = 'Nykyinen salasana';
 $s_access_level = 'Käyttöoikeustaso';
 $s_update_user_button = 'Päivitä käyttäjätunnustiedot';
-$s_verify_warning = 'Käyttäjätilitietosi on vahvistettu. Sähköpostina vastaanottamasi käyttäjätilin vahvistusviestin vahvistustietoja ei voi enää käyttää.';
+$s_verify_warning = 'Käyttäjätilitietosi on vahvistettu.';
 $s_verify_change_password = 'Sinun pitää syöttää salasana sisäänkirjautumista varten.';
+$s_last_used = 'Viimeksi käytetty';
 $s_default_account_preferences_title = 'Käyttäjätilin asetukset';
 $s_default_project = 'Oletusprojekti';
 $s_refresh_delay = 'Virkistyksen viive';
@@ -363,7 +365,6 @@ $s_delete_bug_sure_msg = 'Oletko varma, että haluat poistaa tämän tapahtuman?
 $s_delete_bug_button = 'Poista tapahtuma';
 $s_monitor_bug_button = 'Seuraa';
 $s_unmonitor_bug_button = 'Lopeta tapahtuman seuranta';
-$s_file_upload_msg = 'Tiedoston lähetys onnistui';
 $s_upload_file = 'Lähetä tiedosto';
 $s_select_file = 'Valitse tiedosto';
 $s_select_files = 'Valitse tiedostot';
@@ -396,33 +397,24 @@ $s_update_simple_link = 'Yksinkertainen päivitys';
 $s_updating_bug_advanced_title = 'Päivitetään tapahtuman tietoja';
 $s_id = 'Tunniste';
 $s_category = 'Kategoria';
-$s_category_label = 'Kategoria:';
 $s_severity = 'Vakavuusaste';
-$s_severity_label = 'Vakavuus:';
 $s_reproducibility = 'Toistettavuus';
 $s_date_submitted = 'Lähetysajankohta';
 $s_last_update = 'Päivitysajankohta';
 $s_reporter = 'Raportoija';
-$s_reporter_label = 'Raportoija:';
 $s_assigned_to = 'Osoitettu';
 $s_priority = 'Prioriteetti';
-$s_priority_label = 'Prioriteetti:';
 $s_resolution = 'Ratkaisuaste';
-$s_resolution_label = 'Ratkaisu:';
 $s_status = 'Tila';
-$s_status_label = 'Tila:';
 $s_duplicate_id = 'Kaksoiskappaleen ID';
 $s_os = 'Käyttöjärjestelmä';
 $s_projection = 'Projektio';
 $s_os_version = 'Käyttöjärjestelmäversio';
 $s_eta = 'Kestoarvio';
 $s_product_version = 'Tuoteversio';
-$s_product_version_label = 'Tuoteversio:';
 $s_build = 'Kooste';
 $s_fixed_in_version = 'Korjattu versiossa';
-$s_fixed_in_version_label = 'Korjattu versiossa:';
 $s_target_version = 'Kohdeversio';
-$s_target_version_label = 'Kohdeversio:';
 $s_votes = 'Ääniä';
 $s_summary = 'Yhteenveto';
 $s_description = 'Kuvaus';
@@ -430,7 +422,6 @@ $s_steps_to_reproduce = 'Toisto-ohjeet';
 $s_update_information_button = 'Päivitä tiedot';
 $s_sticky_issue = 'Päällimmäisenä pysyvä tapahtuma';
 $s_profile = 'Profiili';
-$s_profile_label = 'Profiili:';
 $s_updating_bug_simple_title = 'Päivitetään tapahtuman tietoja';
 $s_view_revisions = 'Tarkastele revisioita';
 $s_revision = 'Revisio';
@@ -442,7 +433,7 @@ $s_all_revisions = 'Kaikki revisiot';
 $s_back_to_issue = 'Takaisin tapahtumaan';
 $s_confirm_revision_drop = 'Vahvista tämän tapahtuman revisioiden pudotus?';
 $s_vote_added_msg = 'Ääni lisätty...';
-$s_bugnote_added_msg = 'Muistiinpano lisätty...';
+$s_bugnote_attached_files = 'Liitetiedostot:';
 $s_bugnote_deleted_msg = 'Muistiinpano poistettu...';
 $s_bug_notes_title = 'Tapahtuman muistiinpanot';
 $s_edit_bugnote_title = 'Muokkaa muistiinpanoa';
@@ -453,6 +444,7 @@ $s_add_bugnote_button = 'Lisää muistiinpano';
 $s_bugnote_edit_link = 'Muokkaa';
 $s_closed_bug_button = 'Sulje tapahtuma';
 $s_bugnote_updated_msg = 'Muistiinpano onnistuneesti päivitetty...';
+$s_last_edited = 'Viimeksi muokattu:';
 $s_hide_content = 'Piilota sisältö';
 $s_show_content = 'Näytä sisältö';
 $s_total_queries_executed = '%1$d kyselyä suoritettu.';
@@ -824,13 +816,14 @@ $s_orct = '(avoin/ratkaistu/suljettu/yhteensä)';
 $s_any = 'mikä tahansa';
 $s_all = 'kaikki';
 $s_show = 'Näytä';
-$s_show_label = 'Näytä:';
 $s_changed = 'Muutettu (tuntia)';
 $s_viewing_bugs_title = 'Näytetään tapahtumat';
 $s_updated = 'Päivitetty';
 $s_sticky = 'Näytä päällimmäisinä pysyvät tapahtumat';
+$s_sort = 'Lajittelujärjestys';
 $s_issue_id = 'Tapahtuma #';
 $s_recently_visited = 'Hiljattain vierailtu';
+$s_note_user_id = 'Kommentoija';
 $s_none = 'ei mikään';
 $s_current = 'nykyinen';
 $s_search = 'Haku';
@@ -843,7 +836,6 @@ $s_last = 'Viimeinen';
 $s_start_date_label = 'Aloituspäivämäärä:';
 $s_end_date_label = 'Päättymispäivämäärä:';
 $s_use_date_filters = 'Käytä päivämääräsuotimia';
-$s_use_date_filters_label = 'Käytä päivämääräsuotimia:';
 $s_yes = 'Kyllä';
 $s_no = 'Ei';
 $s_open_filters = 'Muokkaa suodinta';
@@ -864,6 +856,11 @@ $s_query_name_too_long = 'Et voi tallentaa suodattimen nimeä jonka pituus on en
 $s_query_store_error = 'Suotimen tallettamisessa tapahtui virhe.';
 $s_open_queries = 'Muokkaa suodattimia';
 $s_query_delete_msg = 'Oletko varma, että haluat poistaa tämän suotimen?';
+$s_owner = 'Omistaja';
+$s_manage_filter_page_title = 'Hallitse suodattimia';
+$s_manage_filter_edit_page_title = 'Muokkaa suodatinta';
+$s_delete_filter_button = 'Poista';
+$s_apply_filter_button = 'Käytä';
 $s_view_simple_link = 'Näytä yksinkertaiset tiedot';
 $s_product_build = 'Tuotteen kooste';
 $s_system_profile = 'Järjestelmäkuvaus';
@@ -922,7 +919,6 @@ $s_field_delete_button = 'Poista kenttä';
 $s_confirm_custom_field_unlinking = 'Haluatko varmasti irroittaa tämän mukautetun kentän tästä projektista? Arvoja ei poisteta, kunhan itse mukautettua kenttää ei poisteta.';
 $s_field_remove_button = 'Poista kenttä';
 $s_hide_status = 'Piilota tila';
-$s_hide_status_label = 'Piilota tila:';
 $s_filter_closed = 'Suljettu';
 $s_filter_resolved = 'Ratkaistu';
 $s_hide_closed = 'Piilota suljetut';
@@ -931,7 +927,6 @@ $s_and_above = 'ja korkeammat';
 $s_advanced_filters = 'Lisäsuotimet';
 $s_simple_filters = 'Yksinkertaiset suotimet';
 $s_monitored_by = 'Seuraaja';
-$s_monitored_by_label = 'Seuraajat:';
 $s_attachments = 'liitteet';
 $s_bytes = 'tavua';
 $s_attachment_missing = 'Liite puuttuu';
@@ -960,7 +955,6 @@ $s_relationship_deleted = 'Relaatio poistettu';
 $s_no_relationship = 'ei relaatiota';
 $s_relationship_replaced = 'Relaatio korvattu';
 $s_replace_relationship_button = 'Korvaa';
-$s_replace_relationship_sure_msg = 'Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?';
 $s_relationship_with_parent = 'Relaatio isätapahtuman kanssa';
 $s_delete_relationship_button = 'Poista';
 $s_delete_relationship_sure_msg = 'Oletko varma, että haluat poistaa tämän relaation?';
@@ -1047,7 +1041,6 @@ $s_on = 'Milloin';
 $s_off = 'Pois';
 $s_wiki = 'Wiki';
 $s_tags = 'Tägit';
-$s_tags_label = 'Tagit:';
 $s_tag_details = 'Tägin tiedot: %1$s';
 $s_tag_id = 'Tägin ID';
 $s_tag_name = 'Nimi';
@@ -1199,7 +1192,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pääsy estett
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsori ei ole syöttänyt sähköpostiosoitetta. Ole hyvä, ja päivitä käyttäjätietosi.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguraatioasetuksessa \'%1$s\' on virheellinen arvo \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Haluttua toimintoa ei voida suorittaa, koska tapahtumaan \'%1$d\' ei ole sallittu tehdä muutoksia';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Näiden kahden tapahtuman välillä on jo relaatio.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relaatiota ei löytynyt.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pääsy estetty: tapahtuman %1$d käsittely vaatii korkeamman käyttäjätason, kuin sinulla on.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Tapahtumaa ei voi kytkeä relaationa itseensä.';
@@ -1234,3 +1226,6 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Sivua ei voi ladata käyttämäll
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Virheellinen lajittelukenttä.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Virheellinen päivämäärämuoto.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Aikavyöhykettä ei voida päivittää.';
+$s_dropzone_invalid_file_type = 'Et voi tallentaa tämäntyyppisiä tiedostoja.';
+$s_dropzone_max_files_exceeded = 'Et voi tallentaa enempää tiedostoja.';
+$s_dropzone_not_supported = 'Dropzone.js ei tue vanhempia selaimia!';

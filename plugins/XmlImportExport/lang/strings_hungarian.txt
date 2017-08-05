@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,10 @@ $s_plugin_XmlImportExport_title = 'Ügyek importálása/exportálása';
 $s_plugin_XmlImportExport_description = 'XML alapú importálási és exportálási képességek a MantisBT-hez.';
 $s_plugin_XmlImportExport_import = 'Ügyek importálása';
 $s_plugin_XmlImportExport_export = 'XML exportálás';
+$s_plugin_XmlImportExport_config_title = 'XML Export/Import hozzáférési szintek konfigurációja';
+$s_plugin_XmlImportExport_import_threshold = 'Ügyek importálása';
+$s_plugin_XmlImportExport_export_threshold = 'Ügyek exportálása';
+$s_plugin_XmlImportExport_action_update = 'Frissítés';
 $s_plugin_XmlImportExport_importing_in_project = 'Ügyek importálása projektbe:';
 $s_plugin_XmlImportExport_import_options = 'Import-beállítások';
 $s_plugin_XmlImportExport_cross_references = 'Kereszthivatkozások';

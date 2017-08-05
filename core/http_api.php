@@ -30,12 +30,10 @@
 require_api( 'config_api.php' );
 
 /**
- * Checks to see if script was queried through the HTTPS protocol
- * @return boolean True if protocol is HTTPS
+ * The Content-Security-Policy settings array.  Use http_csp_add() to update it.
+ * @var array
  */
-function http_is_protocol_https() {
-	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
-}
+$g_csp = array();
 
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
@@ -139,6 +137,64 @@ function http_content_headers() {
 }
 
 /**
+ * Add a Content-Security-Policy directive.
+ *
+ * @param  string $p_type  The directive type, e.g. style-src, script-src.
+ * @param  string $p_value The directive value, e.g. 'self', https://ajax.googleapis.com
+ * @return void
+ */
+function http_csp_add( $p_type, $p_value ) {
+	global $g_csp;
+
+	if ( $g_csp === null ) {
+		# Development error, headers already emitted.
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
+	if ( isset( $g_csp[$p_type] ) ) {
+		if ( !in_array( $p_value, $g_csp[$p_type] ) ) {
+			$g_csp[$p_type][] = $p_value;
+		}
+	} else {
+		$g_csp[$p_type] = array( $p_value );
+	}
+}
+
+/**
+ * Constructs the value of the CSP header.
+ * @return string CSP header value.
+ */
+function http_csp_value() {
+	global $g_csp;
+
+	if ( $g_csp === null ) {
+		# Development error, headers already emitted.
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
+	$t_csp_value = '';
+
+	foreach ( $g_csp as $t_key => $t_values ) {
+		$t_csp_value .= $t_key . ' ' . implode( ' ', $t_values ) . '; ';
+	}
+
+	$t_csp_value = trim( $t_csp_value, '; ' );
+
+	return $t_csp_value;
+}
+
+/**
+ * Send header for Content-Security-Policy.
+ * @return void
+ */
+function http_csp_emit_header() {
+	header( 'Content-Security-Policy: ' . http_csp_value() );
+
+	global $g_csp;
+	$g_csp = null;
+}
+
+/**
  * Set security headers (frame busting, clickjacking/XSS/CSRF protection).
  * @return void
  */
@@ -147,46 +203,32 @@ function http_security_headers() {
 		header( 'X-Frame-Options: DENY' );
 
 		# Define Content Security Policy
-		$t_csp = array(
-			"default-src 'self'",
-			"frame-ancestors 'none'",
-		);
-
-		# Policy for images: Allow gravatar URL
-		if( config_get_global( 'show_avatar' ) ) {
-			if( http_is_protocol_https() ) {
-				$t_avatar_url = 'https://secure.gravatar.com:443';
-			} else {
-				$t_avatar_url = 'http://www.gravatar.com:80';
-			}
-			$t_csp[] = "img-src 'self' $t_avatar_url";
-		}
-
-		$t_style_src = "style-src 'self'";
-		$t_script_src = "script-src 'self'";
+		http_csp_add( 'default-src', "'self'" );
+		http_csp_add( 'frame-ancestors', "'none'" );
+		http_csp_add( 'style-src', "'self'" );
+		http_csp_add( 'style-src', "'unsafe-inline'" );
+		http_csp_add( 'script-src', "'self'" );
+		http_csp_add( 'img-src', "'self'" );
 
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
-			$t_cdn_url = 'https://ajax.googleapis.com';
-			$t_style_src .= " $t_cdn_url";
-			$t_script_src .= " $t_cdn_url";
+			http_csp_add( 'style-src', 'ajax.googleapis.com' );
+			http_csp_add( 'style-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'style-src', 'fonts.googleapis.com' );
+			http_csp_add( 'style-src', 'cdnjs.cloudflare.com' );
+
+			http_csp_add( 'font-src', 'fonts.gstatic.com' );
+			http_csp_add( 'font-src', 'maxcdn.bootstrapcdn.com' );
+
+			http_csp_add( 'script-src', 'ajax.googleapis.com' );
+			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'script-src', 'cdnjs.cloudflare.com' );
+
+			http_csp_add( 'img-src', 'ajax.googleapis.com' );
+
 		}
 
-		# Relaxing policy for roadmap page to allow inline styles
-		# This is a workaround to fix the broken progress bars (see #19501)
-		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-			$t_style_src .= " 'unsafe-inline'";
-		}
-
-		$t_csp[] = $t_style_src;
-		$t_csp[] = $t_script_src;
-
-		# Set CSP header
-		header( 'Content-Security-Policy: ' . implode('; ', $t_csp) );
-
-		if( http_is_protocol_https() ) {
-			header( 'Strict-Transport-Security: max-age=7776000' );
-		}
+		http_csp_emit_header();
 	}
 }
 

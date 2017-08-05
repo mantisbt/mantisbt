@@ -75,8 +75,10 @@ custom_field_update( $f_field_id, $t_values );
 
 form_security_purge( 'manage_custom_field_update' );
 
-html_page_top( null, $f_return );
+layout_page_header( null, $f_return );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $f_return );
 
-html_page_bottom();
+layout_page_end();

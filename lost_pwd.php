@@ -95,36 +95,20 @@ if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
 }
 
 $t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
+token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
 email_send_confirm_hash_url( $t_user_id, $t_confirm_hash );
 
 user_increment_lost_password_in_progress_count( $t_user_id );
 
 form_security_purge( 'lost_pwd' );
 
-$t_redirect_url = 'login_page.php';
+layout_page_header();
+layout_page_begin();
 
-html_page_top();
-?>
+html_operation_successful(
+	auth_login_page(),
+	'<p class="bold bigger-110">' . lang_get( 'lost_password_done_title' ) . '</p>'
+	. lang_get( 'reset_request_in_progress_msg' )
+);
 
-<br />
-<div>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="center">
-		<strong><?php echo lang_get( 'lost_password_done_title' ) ?></strong>
-	</td>
-</tr>
-<tr>
-	<td>
-		<br/>
-		<?php echo lang_get( 'reset_request_in_progress_msg' ) ?>
-		<br/><br/>
-	</td>
-</tr>
-</table>
-<br />
-<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
-</div>
-
-<?php
-html_page_bottom1a( __FILE__ );
+layout_page_end();

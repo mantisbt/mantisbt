@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,5 +51,7 @@ $s_plugin_format_process_text_warning_notice = 'Не выключайце, ка�
 $s_plugin_format_process_urls = 'Апрацоўка URL-адрасоў';
 $s_plugin_format_process_buglinks = 'Унутраныя спасылкі MantisBT (праблемы і камэнтары)';
 $s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «<literal>%s</literal>», а метку <em>Issue Note</em> як «<literal>%s</literal>»';
+$s_plugin_format_process_markdown = 'Апрацоўка Markdown';
+$s_plugin_format_process_markdown_info = 'Стылі з падтрымкай Markdown, сынтаксыс фарматаваньня тэксту створаны так, каб ён мог быць канвэртаваны ў HTML.';
 $s_plugin_format_enabled = 'Уключанае';
 $s_plugin_format_disabled = 'Выключанае';

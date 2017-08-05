@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,12 +40,18 @@
  *
  * @author Aquilax
  * @author Emostoyanov
+ * @author StanProg
+ * @author АдмиралАнимЕ
  */
 
-$s_plugin_XmlImportExport_title = 'Въпроси за импортиране/експортиране';
+$s_plugin_XmlImportExport_title = 'Въпроси за внасяне и изнасяне';
 $s_plugin_XmlImportExport_description = 'Добавя към MantisBT възможности за XML-базирани импортиране и експортиране.';
 $s_plugin_XmlImportExport_import = 'Импортиране на проблеми';
-$s_plugin_XmlImportExport_export = 'Експорт в XML формат';
+$s_plugin_XmlImportExport_export = 'Изнасяне във формат XML';
+$s_plugin_XmlImportExport_config_title = 'Създаване на нива на достъп за внасяне и изнасяне на XML';
+$s_plugin_XmlImportExport_import_threshold = 'Импортиране на проблеми';
+$s_plugin_XmlImportExport_export_threshold = 'Изнасяне на проблеми';
+$s_plugin_XmlImportExport_action_update = 'Обновяване';
 $s_plugin_XmlImportExport_importing_in_project = 'Импортиране на проблеми в проекта:';
 $s_plugin_XmlImportExport_import_options = 'Импортиране на опции';
 $s_plugin_XmlImportExport_cross_references = 'Кръстосани препратки';
@@ -53,10 +59,10 @@ $s_plugin_XmlImportExport_default_strategy = 'Стратегия за преоб
 $s_plugin_XmlImportExport_renumber = 'Преномериране';
 $s_plugin_XmlImportExport_renumber_desc = 'Опитайте се да преобразувате препратки към новото номериране';
 $s_plugin_XmlImportExport_link = 'Връзка';
-$s_plugin_XmlImportExport_link_desc = 'Конвертиране във връзка към изходния елемент';
+$s_plugin_XmlImportExport_link_desc = 'Преобразуване във връзка към изходния елемент';
 $s_plugin_XmlImportExport_disable = 'Деактивиране';
 $s_plugin_XmlImportExport_disable_desc = 'Деактивиране на връзка';
-$s_plugin_XmlImportExport_fallback = 'Резервна стратегия (когато не може да се приложи "Преномериране" ):';
-$s_plugin_XmlImportExport_fallback_category = 'Резервна категория';
+$s_plugin_XmlImportExport_fallback = 'Резервна стратегия (когато не може да се приложи „Преномериране“ ):';
+$s_plugin_XmlImportExport_fallback_category = 'Резервна категория:';
 $s_plugin_XmlImportExport_keep_same_category = 'Запазване на категорията по възможност';
 $s_plugin_XmlImportExport_error_no_xml = 'не са открити разширенията xmlreader и xmlwriter';

@@ -62,10 +62,10 @@ $t_user = user_get_row( $f_user_id );
 # current user.
 access_ensure_global_level( $t_user['access_level'] );
 
-# check that we are not deleting the last administrator account
+# Check that we are not deleting the last administrator account
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( user_is_administrator( $f_user_id ) &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
+	user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
 	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 }
 
@@ -78,15 +78,17 @@ if( auth_get_current_user_id() == $f_user_id ) {
 }
 
 helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
-	'<br/>' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
+	'<br />' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
 	lang_get( 'delete_account_button' ) );
 
 user_delete( $f_user_id );
 
 form_security_purge( 'manage_user_delete' );
 
-html_page_top( null, 'manage_user_page.php' );
+layout_page_header( null, 'manage_user_page.php' );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( 'manage_user_page.php' );
 
-html_page_bottom();
+layout_page_end();

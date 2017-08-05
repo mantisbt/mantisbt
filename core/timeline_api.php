@@ -37,12 +37,24 @@ require_api( 'history_api.php' );
  * @param integer $p_start_time Timestamp representing start time of the period.
  * @param integer $p_end_time   Timestamp representing end time of the period.
  * @param integer $p_max_events The maximum number of events to return or 0 for unlimited.
+ * @param array $p_filter		Filter array to use for filtering bugs, or null for no limit.
+ * @param integer $p_user_id	A user id, to limit timeline to a user's history, or null for no limit.
  * @return array
  */
-function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
+function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter = null, $p_user_id = null ) {
 	$t_timeline_events = array();
 
-	$t_result = history_get_range_result( /* $p_bug_id */ null, $p_start_time, $p_end_time, 'DESC' );
+	$t_query_options = array();
+	$t_query_options['start_time'] = $p_start_time;
+	$t_query_options['end_time'] = $p_end_time;
+	$t_query_options['order'] = 'DESC';
+	if( null !== $p_filter ) {
+		$t_query_options['filter'] = $p_filter;
+	}
+	if( null !== $p_user_id ) {
+		$t_query_options['user_id'] = $p_user_id;
+	}
+	$t_result = history_query_result( $t_query_options );
 	$t_count = 0;
 
 	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
@@ -67,7 +79,11 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 				}
 				break;
 			case BUG_UNMONITOR:
-				$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
+				# Skip removing other users from monitoring list, only add unmonitor events where removed
+				# user is the same as the logged in user.
+				if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
+					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
+				}
 				break;
 			case TAG_ATTACHED:
 				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], true );
@@ -104,15 +120,14 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 /**
  * Print for display an array of events
  * @param array $p_events   Array of events to display
+ * @return void
  */
 function timeline_print_events( array $p_events ) {
 	if( empty( $p_events ) ) {
-		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
-		return 0;
-	}
-
-	foreach( $p_events as $t_event ) {
-		echo $t_event->html();
+		echo '<h6 class="padding-4">' . lang_get( 'timeline_no_activity' ) . '</h6>';
+	} else {
+		foreach( $p_events as $t_event ) {
+			echo $t_event->html();
+		}
 	}
 }
-

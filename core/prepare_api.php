@@ -104,3 +104,51 @@ function prepare_version_string( $p_project_id, $p_version_id ) {
 
 	return $t_version_text;
 }
+
+/**
+ * Prepares avatar for raw outputting (only avatar image).
+ *
+ * @param Avatar $p_avatar          An instance of class Avatar.
+ * @param string $p_class_prefix    CSS class prefix to add to the avatar's surrounding div and to the img.
+ *   The CSS classes to implement will be named [$p_class_prefix]-avatar_container-[$p_size] and 
+ *   [$p_class_prefix]-avatar-[$p_size].
+ * @param integer $p_size           Image maximum size.
+ * @return string the HTML string of the avatar.
+ */
+function prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size) {
+	if( $p_avatar === null ) {
+		return '';
+	}
+
+	$t_image = htmlspecialchars( $p_avatar->image );
+	$t_text = htmlspecialchars( $p_avatar->text );
+
+	$t_avatar_class = $p_class_prefix . '-avatar' . '-' . $p_size;
+	return '<img class="' . $t_avatar_class . '" src="' . $t_image . '" alt="' .
+			$t_text . '" />';
+}
+
+/**
+ * Prepares avatar for outputting.
+ *
+ * @param Avatar $p_avatar          An instance of class Avatar.
+ * @param string $p_class_prefix    CSS class prefix to add to the avatar's surrounding div and to the img.
+ *   The CSS classes to implement will be named [$p_class_prefix]-avatar-container-[$p_size] and
+ *   [$p_class_prefix]-avatar-[$p_size].
+ * @param integer $p_size           Image maximum size.
+ * @return string the HTML string of the avatar.
+ */
+function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
+	if( $p_avatar === null ) {
+		return '';
+	}
+
+	$t_link = htmlspecialchars( $p_avatar->link );
+
+	$t_container_class = $p_class_prefix . '-avatar-container' . '-' . $p_size;
+	return '<div class="' . $t_container_class . '">' . 
+			'<a rel="nofollow" href="' . $t_link . '">' .
+			prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size ) . 
+			'</a></div>';
+}
+

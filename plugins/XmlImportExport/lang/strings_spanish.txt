@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@
  * @author Armando-Martin
  * @author Bithunter
  * @author Crazymadlover
+ * @author Fitoschido
  * @author Locos epraix
  * @author Macofe
  */
@@ -53,7 +54,7 @@ $s_plugin_XmlImportExport_config_title = 'Configuración de niveles de acceso de
 $s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
 $s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
 $s_plugin_XmlImportExport_action_update = 'Actualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importando incidencias al proyecto:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando incidencias en el proyecto: «%s»';
 $s_plugin_XmlImportExport_import_options = 'Opciones de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
 $s_plugin_XmlImportExport_default_strategy = 'Estrategia de conversión por defecto:';

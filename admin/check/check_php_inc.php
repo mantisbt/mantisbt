@@ -89,12 +89,6 @@ check_print_test_row(
 	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
 );
 
-check_print_test_row(
-	'register_globals php.ini directive is disabled',
-	!ini_get_bool( 'register_globals' ),
-	array( false => 'PHP\'s register globals feature is <a href="http://php.net/manual/en/security.globals.php">deprecated in PHP 5.3.0</a> and should not be used.' )
-);
-
 check_print_test_warn_row(
 	'register_argc_argv php.ini directive is disabled',
 	!ini_get_bool( 'register_argc_argv' ),
@@ -133,12 +127,12 @@ check_print_test_warn_row(
 
 check_print_info_row(
 	'php.ini directive: memory_limit',
-	htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'memory_limit' ) )
 );
 
 check_print_info_row(
 	'php.ini directive: post_max_size',
-	htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
 check_print_test_row(
@@ -154,7 +148,7 @@ check_print_info_row(
 
 check_print_info_row(
 	'php.ini directive: upload_max_filesize',
-	htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'upload_max_filesize' ) )
 );
 
 check_print_test_row(

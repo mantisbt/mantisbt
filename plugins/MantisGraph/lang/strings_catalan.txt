@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,13 +41,13 @@
  * @author Bernat
  * @author Dtamajon
  * @author Fitoschido
+ * @author Jaumeortola
  * @author Paucabot
  */
 
 $s_plugin_graph_title = 'Gràfics de Mantis';
 $s_plugin_graph_description = 'Plugin de gràfics oficial.';
 $s_plugin_MantisGraph_title = 'Gràfics de Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Sumari avançat';
 $s_plugin_MantisGraph_config = 'Configuració';
 $s_plugin_MantisGraph_synthesis_link = 'Síntesi';
 $s_plugin_MantisGraph_status_link = 'Per Estat';
@@ -55,19 +55,6 @@ $s_plugin_MantisGraph_priority_link = 'Per Prioritat';
 $s_plugin_MantisGraph_severity_link = 'Per Severitat';
 $s_plugin_MantisGraph_category_link = 'Per Categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per Resolució';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Gràfic';
-$s_plugin_MantisGraph_library = 'Llibreria gràfica per usar';
-$s_plugin_MantisGraph_bundled = 'Inclòs';
-$s_plugin_MantisGraph_window_width = 'Amplada del gràfic (en píxels)';
-$s_plugin_MantisGraph_bar_aspect = 'Relació d\'aspecte dels gràfics de barres (altura/amplada)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Gràfics exposats per fila en el sumari avançat';
-$s_plugin_MantisGraph_font = 'Font';
-$s_plugin_MantisGraph_jpgraph_path = 'Path de sistema de la llibreria JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Deixi en blanc per defecte: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-aliasing JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'L\'anti-aliasing millora l\'aparença visual d\'alguns gràfics a costa de rendiment (fins x8 més lent).';
-$s_plugin_MantisGraph_enabled = 'Habilitat';
-$s_plugin_MantisGraph_disabled = 'Deshabilitat';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Gràfics per l\'Estat';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Gràfics per Prioritat';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Gràfics per Gravetat';
@@ -83,16 +70,10 @@ $s_plugin_MantisGraph_by_priority_mix = 'per Prioritat i Estat';
 $s_plugin_MantisGraph_by_resolution_mix = 'per Resolució i Estat';
 $s_plugin_MantisGraph_legend_still_open = 'Encara obert';
 $s_plugin_MantisGraph_legend_resolved = 'Resolt';
-$s_plugin_MantisGraph_legend_assigned = 'Assignat';
-$s_plugin_MantisGraph_legend_total = 'Total';
-$s_plugin_MantisGraph_legend_opened = 'Obert';
-$s_plugin_MantisGraph_legend_closed = 'Tancat';
 $s_plugin_MantisGraph_legend_reported = 'Reportat';
-$s_plugin_MantisGraph_cumulative = 'Acumulat';
-$s_plugin_MantisGraph_not_enough_data = 'No hi ha  prou informació per crear el gràfic';
 $s_plugin_MantisGraph_period_none = 'Cap';
 $s_plugin_MantisGraph_period_this_week = 'Aquesta setmana';
-$s_plugin_MantisGraph_period_last_week = 'La última setmana';
+$s_plugin_MantisGraph_period_last_week = 'L\'última setmana';
 $s_plugin_MantisGraph_period_two_weeks = 'Les dues últimes setmanes';
 $s_plugin_MantisGraph_period_this_month = 'Aquest mes';
 $s_plugin_MantisGraph_period_last_month = 'L\'últim mes';
@@ -101,12 +82,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'L\'últim trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Aquest any';
 $s_plugin_MantisGraph_period_select = 'Dates arbitràries';
 $s_plugin_MantisGraph_period_last_year = 'L\'últim any';
-$s_plugin_MantisGraph_select = 'Seleccioneu';
-$s_plugin_MantisGraph_select_bystatus = 'per Estat';
-$s_plugin_MantisGraph_select_summbystatus = 'Resum per Estat';
-$s_plugin_MantisGraph_select_bycat = 'Resum per Categoria';
-$s_plugin_MantisGraph_select_both = 'Resum per Estat i Categoria';
-$s_plugin_MantisGraph_show_as_graph = 'Mostra com a gràfic';
-$s_plugin_MantisGraph_show_as_table = 'Mostra com a taula';
-$s_plugin_MantisGraph_show_graph = 'Mostra gràfic';
 $s_plugin_MantisGraph_graph_page = 'Historial gràfic de la comanda';

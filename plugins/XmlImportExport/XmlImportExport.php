@@ -36,9 +36,9 @@ class XmlImportExportPlugin extends MantisPlugin {
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = "config_page";
 
-		$this->version = '1.3.0';
+		$this->version = MANTIS_VERSION;
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 
 		$this->author = 'MantisBT Team';
@@ -85,7 +85,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 		if( !access_has_project_level( plugin_config_get( 'export_threshold' ) ) ) {
 			return array();
 		}
-		return array( '<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
+		return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
 	}
 
 	/**

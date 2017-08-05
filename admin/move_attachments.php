@@ -257,74 +257,111 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	return $t_moved;
 }
 
-$t_array = explode( ':', $f_project_to_move, 2 );
-if( isset( $t_array[1] ) ) {
-	$f_project_id = $t_array[1];
-
-	if( !is_numeric( $f_project_id ) || (int)$f_project_id == 0 ) {
-		$t_moved = array();
-	} else {
-		switch( $t_array[0] ) {
-			case 'disk':
-				$t_moved = move_attachments_to_disk( $f_file_type, array( $f_project_id ) );
-				break;
-			case 'db':
-				$t_moved = move_attachments_to_db( $f_file_type, array( $f_project_id ) );
-				break;
-		}
-	}
-}
-
 form_security_purge( 'move_attachments_project_select' );
 
 # Page header, menu
-html_page_top( 'MantisBT Administration - Moving Attachments' );
+layout_page_header( 'MantisBT Administration - Moving Attachments' );
+
+layout_admin_page_begin();
 
 ?>
 
-<div align="center">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
 <?php
 
-# Display results
-if( empty( $t_moved ) ) {
-	echo "<p>Nothing to do.</p>\n";
+if( null == $f_project_to_move ) {
+	echo '<div class="alert alert-danger">';
+	echo '<p class="lead"><strong>Opps!</strong> Please select the project you want to move the attachment.</p>';
+	echo '</div>';
 } else {
-	foreach( $t_moved as $t_row ) {
-		printf(
-			"<p class=\"bold\">Project '%s' : %d attachments %s.</p>\n",
-			$t_row['name'],
-			$t_row['rows'],
-			( 0 == $t_row['failed']
-				? 'moved successfully'
-				: 'to move, ' . $t_row['failed'] . ' failures') );
 
-		if( is_array( $t_row['data'] ) ) {
-			# Display details of moved attachments
-			echo '<div><table class="width75">', "\n",
-				'<tr class="row-category">',
-				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
-				'<th>File</th><th>Filename</th><th>Status</th>',
-				'</tr>';
-			foreach( $t_row['data'] as $t_data ) {
-				echo '<tr>';
-				if( $f_file_type == 'bug' ) {
-					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
-				}
-				printf( '<td class="right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
-					$t_data['id'],
-					$t_data['filename'],
-					$t_data['status'] );
+	$t_moved = array();
+	
+	foreach( $f_project_to_move as $t_project_to_move ) {
+		
+		$t_array = explode( ':', $t_project_to_move );
+
+		if( isset( $t_array[1] ) ) {
+			$t_project_id = $t_array[1];
+
+			switch( $t_array[0] ) {
+				case 'disk':
+					$t_moved[] = move_attachments_to_disk( $f_file_type, array( $t_project_id ) );
+					break;
+				case 'db':
+					$t_moved[] = move_attachments_to_db( $f_file_type, array( $t_project_id ) );
+					break;
 			}
-			echo '</table><br /></div>';
-		} else {
-			# No data rows - display error message
-			echo '<p>' . $t_row['data'] . '</p>';
 		}
-		echo '<br />';
+	}
+	
+	# Display results
+	if( empty( $t_moved ) ) {
+		echo '<div class="alert alert-danger">';
+		echo '<p class="lead">Nothing to do.</p>';
+		echo '</div>';
+	} else {
+		foreach( $t_moved as $t_row ) {
+			$t_row = $t_row[0];
+
+			echo '<div class="widget-box widget-color-blue2">';
+			echo '<div class="widget-header widget-header-small">';
+			echo '<h4 class="widget-title lighter">';
+			echo '<i class="ace-icon fa fa-paperclip"></i>';
+				printf(
+					"Project '%s' : %d attachments %s",
+					$t_row['name'],
+					$t_row['rows'],
+					( 0 == $t_row['failed']
+						? 'moved successfully'
+						: 'to move, ' . $t_row['failed'] . ' failures') );
+			echo '</h4>';
+			echo '</div>';
+			echo '<div class="widget-body">';
+			echo '<div class="widget-main no-padding">';
+			if( is_array( $t_row['data'] ) ) {
+				# Display details of moved attachments
+				echo '<div class="table-responsive">';
+				echo '<table class="table table-bordered table-condensed table-hover table-striped">';
+				echo '<thead>';
+				echo '<tr>',
+					$f_file_type == 'bug' ? '<td width="5%">Bug ID</td>' : '',
+					'<td width="3%">File ID</td><th width="15%">Filename</td><td width="25%">Status</td>',
+					'</tr>';
+				echo '</thead>';
+				echo '<tbody>';
+				foreach( $t_row['data'] as $t_data ) {
+					echo '<tr>';
+					if( $f_file_type == 'bug' ) {
+						printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
+					}
+					printf( '<td>%s</td><td>%s</td><td>%s</td></tr>',
+						$t_data['id'],
+						$t_data['filename'],
+						$t_data['status'] );
+				}
+				echo '</tbody>';
+				echo '</table>';
+				echo '</div>';
+
+			} else {
+				# No data rows - display error message
+				echo '<div class="alert alert-danger">';
+				echo '<p>' . $t_row['data'] . '</p>';
+				echo '</div>';
+			}
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
+			echo '<br/>';
+		}
 	}
 }
+echo '<br/>';
+print_link_button( 'system_utils.php', 'Back to System Utilities' );
 
-print_bracket_link( 'system_utils.php', 'Back to System Utilities' );
+echo '</div>';
 
-html_page_bottom();
+layout_admin_page_end();

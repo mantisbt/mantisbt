@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,37 +39,28 @@
  * @file
  *
  * @author Amire80
+ * @author Guycn2
  */
 
 $s_plugin_graph_title = 'מנטיס תרשימים';
 $s_plugin_graph_description = 'תוסף תרשימים רשמי.';
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
-$s_plugin_MantisGraph_menu_advanced_summary = 'סיכום מתקדם';
 $s_plugin_MantisGraph_config = 'הגדרות';
 $s_plugin_MantisGraph_synthesis_link = 'סינתזה';
 $s_plugin_MantisGraph_status_link = 'לפי מצב';
 $s_plugin_MantisGraph_priority_link = 'לפי עדיפות';
 $s_plugin_MantisGraph_severity_link = 'לפי חומרה';
 $s_plugin_MantisGraph_category_link = 'לפי קטגוריה';
-$s_plugin_MantisGraph_resolution_link = 'לפי רזולוציה';
-$s_plugin_MantisGraph_graph_bug_page_link = 'תרשים';
-$s_plugin_MantisGraph_library = 'באיזו ספריית תרשימים להשתמש';
-$s_plugin_MantisGraph_bundled = 'נכלל באריזה';
-$s_plugin_MantisGraph_window_width = 'רוחב תרשים (בפיקסלים)';
-$s_plugin_MantisGraph_bar_aspect = 'יחס רוחב–גובה';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'כמה תרשימים להציג בכל שורה בדף הסיכום המתקדם';
-$s_plugin_MantisGraph_font = 'גופן';
-$s_plugin_MantisGraph_jpgraph_path = 'נתיב לספריית JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'השאירו ריק לבררת מחדל: {mantisroot}‏/library‏/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'החלקה (Anti-aliasing) באמצעות JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'החלקה (Anti-aliasing) משפרת את המראה של תרשימים מסוימים, אבל המהירות עשויה לרדת עד פי 8';
-$s_plugin_MantisGraph_enabled = 'פעיל';
-$s_plugin_MantisGraph_disabled = 'כבוי';
-$s_plugin_MantisGraph_graph_imp_status_title = 'תרשימי סינתזה לפי מצב';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'תרשימי סינתזה לפי עדיפות';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'תרשימי סינתזה לפי חומרה';
-$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי סינתזה לפי קטגוריה';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'תרשימי סינתזה לפי פתרון';
+$s_plugin_MantisGraph_resolution_link = 'לפי פתרון';
+$s_plugin_MantisGraph_issue_trends_link = 'מגמות של בעיות';
+$s_plugin_MantisGraph_graph_imp_status_title = 'לפי מצבים גרפיים';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'לפי עדיפויות גרפיות';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'לפי חומרה גרפית';
+$s_plugin_MantisGraph_graph_imp_category_title = 'תרשימי קטגוריות גרפיות';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'לפי פתרונות גרפיים';
+$s_plugin_MantisGraph_graph_developer_title = 'לפי מפתחים גרפיים';
+$s_plugin_MantisGraph_graph_reporter_title = 'לפי דו"ח גרפי';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'בעיות פתוחות, פתורות ונותרות';
 $s_plugin_MantisGraph_by_status_pct = 'לפי אחוזי מצב';
 $s_plugin_MantisGraph_by_priority_pct = 'לפי אחוז עדיפות';
 $s_plugin_MantisGraph_by_severity_pct = 'לפי אחוז חומרה';
@@ -80,13 +71,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'לפי עדיפות ומצב';
 $s_plugin_MantisGraph_by_resolution_mix = 'לפי פתרון ומצב';
 $s_plugin_MantisGraph_legend_still_open = 'עדיין פתוח';
 $s_plugin_MantisGraph_legend_resolved = 'פתור';
-$s_plugin_MantisGraph_legend_assigned = 'משויך';
-$s_plugin_MantisGraph_legend_total = 'סה״כ';
-$s_plugin_MantisGraph_legend_opened = 'נפתח';
-$s_plugin_MantisGraph_legend_closed = 'נסגר';
 $s_plugin_MantisGraph_legend_reported = 'מדוּוח';
-$s_plugin_MantisGraph_cumulative = 'מצטבר';
-$s_plugin_MantisGraph_not_enough_data = 'אין מספיק מידע ליצירת תרשים';
 $s_plugin_MantisGraph_period_none = 'כלום';
 $s_plugin_MantisGraph_period_this_week = 'השבוע';
 $s_plugin_MantisGraph_period_last_week = 'השבוע האחרון';
@@ -98,12 +83,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'הרבעון הקודם';
 $s_plugin_MantisGraph_period_year_to_date = 'השנה האחרונה';
 $s_plugin_MantisGraph_period_select = 'בחירת תאריכים';
 $s_plugin_MantisGraph_period_last_year = 'השנה הקודמת';
-$s_plugin_MantisGraph_select = 'נא לבחור';
-$s_plugin_MantisGraph_select_bystatus = 'לפי מצב';
-$s_plugin_MantisGraph_select_summbystatus = 'תקציר לפי מצב';
-$s_plugin_MantisGraph_select_bycat = 'תקציר לפי קטגוריה';
-$s_plugin_MantisGraph_select_both = 'תקציר לפי מצב וקטגוריה';
-$s_plugin_MantisGraph_show_as_graph = 'להציג כתרשים';
-$s_plugin_MantisGraph_show_as_table = 'להציג כטבלה';
-$s_plugin_MantisGraph_show_graph = 'הצגת תרשים';
 $s_plugin_MantisGraph_graph_page = 'הצג תרשים היסטוריית באג';

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -300,7 +300,6 @@ $s_delete_bug_sure_msg = 'Ertu viss um að þú viljir eyða þessari beiðni?';
 $s_delete_bug_button = 'Eyða beiðni';
 $s_monitor_bug_button = 'Vakta';
 $s_unmonitor_bug_button = 'Hætta vöktun';
-$s_file_upload_msg = 'Upphal skráar tókst';
 $s_upload_file = 'Upphala skrá';
 $s_select_file = 'Velja skrá';
 $s_upload_file_button = 'Upphala skrá';
@@ -352,7 +351,6 @@ $s_sticky_issue = 'Límd verkbeiðni';
 $s_profile = 'Snið';
 $s_updating_bug_simple_title = 'Uppfæri upplýsingar um beiðni';
 $s_vote_added_msg = 'Atkvæði hefur bæst við...';
-$s_bugnote_added_msg = 'Bætt við athugasemd...';
 $s_bugnote_deleted_msg = 'Athugasemd hefur verið eytt...';
 $s_bug_notes_title = 'Athugasemd';
 $s_edit_bugnote_title = 'Skrifa athugasemd';
@@ -661,6 +659,7 @@ $s_changed = 'Breytt (tími)';
 $s_viewing_bugs_title = 'Skoða beiðni';
 $s_updated = 'Uppfært';
 $s_sticky = 'Sýna límd atriði';
+$s_sort = 'Raða eftir';
 $s_issue_id = 'Beiðni #';
 $s_recently_visited = 'Nýlega sótt';
 $s_none = 'enginn';
@@ -758,7 +757,6 @@ $s_relationship_deleted = 'Tengslum eytt';
 $s_no_relationship = 'enginn tengsl';
 $s_relationship_replaced = 'Tengsl endurnýjuð';
 $s_replace_relationship_button = 'Endurnýja';
-$s_replace_relationship_sure_msg = 'Það eru þegar tengsl milli þessara tveggja beiðna. Ertu viss um að þú viljir endurnýja þau?';
 $s_relationship_with_parent = 'Tengsl við æðri beiðni';
 $s_delete_relationship_button = 'Eyða';
 $s_delete_relationship_sure_msg = 'Ertu viss um að vilja eyða þessum tengslum?';
@@ -905,7 +903,6 @@ $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Nafnið sem valið var er það sam
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Stillimöguleiki \'%1$s\'hefur ógilt gildi \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Ekki er hægt að framkvæma aðgerðina þar sem beiðnin \'%1$d\' er aðeins lesanlegt.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Það eru þegar tengsl milli þessara beiðna.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Engin tengsl fundust.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Aðgangi hafnað: Beiðni %1$d krefst hærri aðgangs heimildar.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Beiðnin getur ekki tengst sjálfu sér.';

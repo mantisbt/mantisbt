@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@
 $s_plugin_graph_title = 'Grafice Mantis';
 $s_plugin_graph_description = 'Plugin-ul grafic oficial.';
 $s_plugin_MantisGraph_title = 'Grafice Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Rezumat avansat';
 $s_plugin_MantisGraph_config = 'Configurație';
 $s_plugin_MantisGraph_synthesis_link = 'Sinteză';
 $s_plugin_MantisGraph_status_link = 'După stare';
@@ -52,19 +51,6 @@ $s_plugin_MantisGraph_priority_link = 'După prioritate';
 $s_plugin_MantisGraph_severity_link = 'După gravitate';
 $s_plugin_MantisGraph_category_link = 'După categorie';
 $s_plugin_MantisGraph_resolution_link = 'După rezolvare';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafic';
-$s_plugin_MantisGraph_library = 'Biblioteca grafică spre a fi folosită';
-$s_plugin_MantisGraph_bundled = 'Împachetat';
-$s_plugin_MantisGraph_window_width = 'Lățime grafic (în pixeli)';
-$s_plugin_MantisGraph_bar_aspect = 'Raportul de aspect pentru grafic de tip bară (înălțime/lățime)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Grafice pentru a afişa pe rând pe pagina rezumat avansat';
-$s_plugin_MantisGraph_font = 'Font';
-$s_plugin_MantisGraph_jpgraph_path = 'Calea sistem către biblioteca JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Lasă necompletat pentru implicit: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-alias JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing îmbunătățește aspectul vizual al anumitor grafice în detrimentul performanței (până la 8 ori mai lent)';
-$s_plugin_MantisGraph_enabled = 'Activat';
-$s_plugin_MantisGraph_disabled = 'Dezactivat';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Grafic sinteză după stare';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Grafic sinteză după prioritate';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Grafic sinteză după gradul de severitate';
@@ -80,13 +66,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'după prioritate și stare';
 $s_plugin_MantisGraph_by_resolution_mix = 'după rezoluție și stare';
 $s_plugin_MantisGraph_legend_still_open = 'Deschise încă';
 $s_plugin_MantisGraph_legend_resolved = 'Rezovate';
-$s_plugin_MantisGraph_legend_assigned = 'Atribuite';
-$s_plugin_MantisGraph_legend_total = 'Total';
-$s_plugin_MantisGraph_legend_opened = 'Deschise';
-$s_plugin_MantisGraph_legend_closed = 'Închise';
 $s_plugin_MantisGraph_legend_reported = 'Raportate';
-$s_plugin_MantisGraph_cumulative = 'Cumulativ';
-$s_plugin_MantisGraph_not_enough_data = 'Nu exită destul informații pentru crearea graficului';
 $s_plugin_MantisGraph_period_none = 'Niciuna';
 $s_plugin_MantisGraph_period_this_week = 'În această săptămână';
 $s_plugin_MantisGraph_period_last_week = 'Săptămâna trecută';
@@ -98,12 +78,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Ultimul trimestru';
 $s_plugin_MantisGraph_period_year_to_date = 'Anual cumulat';
 $s_plugin_MantisGraph_period_select = 'Date arbitrare';
 $s_plugin_MantisGraph_period_last_year = 'Anul trecut';
-$s_plugin_MantisGraph_select = 'Te rog selectează';
-$s_plugin_MantisGraph_select_bystatus = 'după stare';
-$s_plugin_MantisGraph_select_summbystatus = 'Rezumat după stare';
-$s_plugin_MantisGraph_select_bycat = 'Rezumat după categorie';
-$s_plugin_MantisGraph_select_both = 'Rezumat după stare și categorie';
-$s_plugin_MantisGraph_show_as_graph = 'Afișează ca grafic';
-$s_plugin_MantisGraph_show_as_table = 'Afișează ca tabel';
-$s_plugin_MantisGraph_show_graph = 'Arată grafic';
 $s_plugin_MantisGraph_graph_page = 'Grafic istoria problemelor';

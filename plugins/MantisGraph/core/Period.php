@@ -46,7 +46,7 @@ class Period {
 	/**
 	 * Constructor
 	 */
-	function Period() {
+	function __construct() {
 		$this->start = '';
 
 		# default to today
@@ -291,10 +291,10 @@ class Period {
 		$t_formatted_end = $this->get_end_formatted();
 		$t_ret = '<div id="period_menu">';
 		$t_ret .= get_dropdown( $t_periods, $p_control_name, $t_default, false, false );
-		$t_ret .= "</div>\n";
+		$t_ret .= "</div> <br />\n";
 		$t_ret .= "<div id=\"dates\">\n";
-		$t_ret .= '<label for="start_date">' . lang_get( 'from_date' ) . '</label><input type="text" id="start_date" name="start_date" size="20" value="' . $t_formatted_start . '" class="datetime" disabled="disabled" />' . "<br />\n";
-		$t_ret .= '<label for="end_date">' . lang_get( 'to_date' ) . '</label><input type="text" id="end_date" name="end_date" size="20" value="' . $t_formatted_end . '" class="datetime" disabled="disabled" />' . "\n";
+		$t_ret .= lang_get( 'from_date' ) . ' <input type="text" id="start_date" name="start_date" size="12" value="' . $t_formatted_start . '" class="datetimepicker input-xs" disabled="disabled" />' . "\n";
+		$t_ret .= lang_get( 'to_date' ) . ' <input type="text" id="end_date" name="end_date" size="12" value="' . $t_formatted_end . '" class="datetimepicker input-xs" disabled="disabled" />' . "\n";
 		$t_ret .= "</div>\n";
 		return $t_ret;
 	}

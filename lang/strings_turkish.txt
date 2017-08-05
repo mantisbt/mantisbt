@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,9 +38,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Archaeodontosaurus
+ * @author Burakolik
  * @author Emperyan
  * @author Erdemaslancan
  * @author Gorizon
+ * @author HakanIST
  * @author Hedda Gabler
  * @author Incelemeelemani
  * @author Joseph
@@ -54,6 +57,7 @@
  * @author Thinkfast
  * @author Trockya
  * @author Violetanka
+ * @author Vito Genovese
  */
 
 $s_directionality = 'soldan sağa';
@@ -259,7 +263,6 @@ $s_email_notification_title_for_action_monitor = '%1$s sorunu %2$s kullanıcıs�
 $s_email_reporter = 'Bildirici';
 $s_email_handler = 'İlgili';
 $s_email_project = 'Proje';
-$s_email_project_label = 'Proje:';
 $s_email_bug = 'Sorun No';
 $s_email_category = 'Kategori';
 $s_email_reproducibility = 'Tekrarlanabilirlik';
@@ -276,6 +279,8 @@ $s_email_summary = 'Özet';
 $s_email_description = 'Açıklama';
 $s_email_additional_information = 'Ek Bilgi';
 $s_email_steps_to_reproduce = 'Tekrarlamaya Yönelik Adımlar';
+$s_email_tag = 'Etiketler';
+$s_email_due_date = 'Teslim Tarihi';
 $s_account_protected_msg = 'Hesap korunuyor. Ayarlar değiştirilemedi...';
 $s_account_removed_msg = 'Hesabınız sistemden silindi...';
 $s_confirm_delete_msg = 'Hesabınızı silmek istediğinizden emin misiniz?';
@@ -289,10 +294,10 @@ $s_realname = 'Gerçek İsim:';
 $s_realname_label = 'Gerçek adınız:';
 $s_email = 'E-posta';
 $s_email_label = 'E-posta';
-$s_password = 'Şifre';
+$s_password = 'Parola';
 $s_no_password_change = 'Şifre, başka bir sistem tarafından kontrol ediliyor, bu nedenle burada değiştirilemez.';
-$s_confirm_password = 'Şifre Onayla';
-$s_current_password = 'Geçerli Şifre';
+$s_confirm_password = 'Parolayı Onaylayın';
+$s_current_password = 'Güncel Parola';
 $s_access_level = 'Erişim Seviyesi';
 $s_access_level_label = 'Erişim Düzeyi';
 $s_update_user_button = 'Kullanıcıyı Güncelle';
@@ -328,7 +333,6 @@ $s_profile_added_msg = 'Profil eklendi...';
 $s_profile_deleted_msg = 'Profil silindi...';
 $s_edit_profile_title = 'Profil Düzenle';
 $s_platform = 'Platform';
-$s_platform_label = 'Platform:';
 $s_additional_description = 'Ek Bilgi';
 $s_update_profile_button = 'Profili Güncelle';
 $s_profile_defaulted_msg = 'Varsayılan Profil Güncellendi...';
@@ -356,10 +360,10 @@ $s_sponsor_hide = 'Çözülen ve Ödeneni Gizle';
 $s_sponsor_show = 'Hepsini göster';
 $s_payment_updated = 'Ödeme bilgilerini güncellendi.';
 $s_account_updated_msg = 'Hesabınız başarıyla güncellendi...';
-$s_email_updated = 'Email address successfully updated';
+$s_email_updated = 'Eposta adresi başarıyla güncellendi';
 $s_realname_duplicated = 'Gerçek adı başka bir kullanıcı tarafından kullanılıyor';
 $s_realname_updated = 'Gerçek ad başarıyla güncelleştirildi';
-$s_password_updated = 'Şifre başarıyla güncellendi';
+$s_password_updated = 'Parola başarıyla güncellendi';
 $s_multiple_projects = 'Seçmiş olduğunuz sorunlar farklı projelerden gelmektedir. Aşağıdaki parametre ayarları bütün projeler için uygulanır. Eğer bu yanlış ise, lütfen seçeceğiniz daha az sorun ile değişiklikliği tekrar deneyiniz.';
 $s_new_bug_title = 'Yeni Sorun';
 $s_feedback_bug_title = 'Sorun Hakkında Fikir Danış';
@@ -379,7 +383,6 @@ $s_delete_bug_sure_msg = 'Bu sorunu silmek istediğinizden emin misiniz?';
 $s_delete_bug_button = 'Sorun Sil';
 $s_monitor_bug_button = 'Takip et';
 $s_unmonitor_bug_button = 'İzlemeyi Sonlandır';
-$s_file_upload_msg = 'Dosya başarıyla gönderildi';
 $s_upload_file = 'Dosya Gönder';
 $s_upload_files = 'Dosyaları yükle';
 $s_select_file = 'Dosya Seç';
@@ -416,35 +419,24 @@ $s_update_simple_link = 'Basit Güncelleme';
 $s_updating_bug_advanced_title = 'Sorun Bilgileri Güncelleme';
 $s_id = 'NO';
 $s_category = 'Kategori';
-$s_category_label = 'Kategori:';
 $s_severity = 'Önem';
-$s_severity_label = 'Önem:';
 $s_reproducibility = 'Tekrarlanabilirlik';
 $s_date_submitted = 'Sisteme Giriş Tarihi';
 $s_last_update = 'Son Güncelleme';
 $s_reporter = 'Bildiren';
-$s_reporter_label = 'Bildiren:';
 $s_assigned_to = 'Atanan';
-$s_assigned_to_label = 'Atanan:';
 $s_priority = 'Öncelik';
-$s_priority_label = 'Öncelik:';
 $s_resolution = 'Çözüm';
-$s_resolution_label = 'Çözüm:';
 $s_status = 'Durum';
-$s_status_label = 'Durum:';
 $s_duplicate_id = 'Eşdeğer NO';
 $s_os = 'İşletim Sistemi';
-$s_os_label = 'İşletim Sistemi:';
 $s_projection = 'Tahmin';
 $s_os_version = 'Versiyon';
-$s_os_version_label = 'İşletim Sistemi Sürümü:';
 $s_eta = 'Tahmini Tamamlama Süresi';
 $s_product_version = 'Ürün Versiyonu';
-$s_product_version_label = 'Ürün Sürümü:';
 $s_build = 'Alt Versiyon';
 $s_fixed_in_version = 'Sürümde Düzeltildi';
 $s_target_version = 'Hedef Sürüm';
-$s_target_version_label = 'Hedef Sürüm:';
 $s_votes = 'Oylar';
 $s_summary = 'Özet';
 $s_description = 'Açıklama';
@@ -452,7 +444,6 @@ $s_steps_to_reproduce = 'Tekrarlamaya Yönelik Adımlar';
 $s_update_information_button = 'Bilgi Güncelle';
 $s_sticky_issue = 'Sabit Sorun';
 $s_profile = 'Profil';
-$s_profile_label = 'Profil:';
 $s_updating_bug_simple_title = 'Sorun bilgileri güncelleniyor';
 $s_view_revisions = 'Düzeltmeleri Görüntüle';
 $s_revision = 'Düzeltme';
@@ -463,8 +454,8 @@ $s_bugnote_revision_dropped_history = 'Not Düzeltme Bırakıldı';
 $s_all_revisions = 'Tüm Düzeltmeler';
 $s_back_to_issue = 'Soruna Geri Dön';
 $s_confirm_revision_drop = 'Bu sorun düzeltmesini bırakmak istediğinizden emin misiniz?';
+$s_activities_title = 'Aktiviteler';
 $s_vote_added_msg = 'Oy eklendi...';
-$s_bugnote_added_msg = 'Sorun notu eklendi...';
 $s_bugnote_deleted_msg = 'Sorun notu başarıyla silindi...';
 $s_bug_notes_title = 'Sorun Notları';
 $s_edit_bugnote_title = 'Sorun Notu Güncelle';
@@ -472,7 +463,7 @@ $s_no_bugnotes_msg = 'Bu sorun ile ilgili not bulunmamaktadır.';
 $s_delete_link = 'Sil';
 $s_add_bugnote_title = 'Sorun Notu Ekle';
 $s_add_bugnote_button = 'Sorun Notu Ekle';
-$s_bugnote_edit_link = 'Güncelle';
+$s_bugnote_edit_link = 'Düzenle';
 $s_closed_bug_button = 'Sorunu Kapat';
 $s_bugnote_updated_msg = 'Sorun notu başarıyla güncellendi...';
 $s_last_edited = 'Son düzenlenen:';
@@ -501,10 +492,10 @@ $s_secure_session_long = 'Yalnızca bu IP adresinden kullanılacak oturumlara iz
 $s_choose_project = 'Proje Seç';
 $s_login_button = 'Sisteme Gir';
 $s_signup_link = 'Yeni bir hesap aç';
-$s_lost_password_link = 'Şifrenizi mi unuttunuz?';
+$s_lost_password_link = 'Parolanızı mı unuttunuz?';
 $s_select_project_button = 'Proje Seç';
 $s_lost_password_title = 'Parola Sıfırlama';
-$s_lost_password_done_title = 'Şifre Mesaj Gönderildi';
+$s_lost_password_done_title = 'Parola İletisi Gönderildi';
 $s_lost_password_subject = 'Parola Sıfırlama';
 $s_lost_password_info = 'Şifrenizi hatırlayamıyorsanız, lütfen isminizi ve mail adresinizi girin. <br /><br /> Eğer girdiğiniz mail adresi geçerli ise, hesabınıza e-mail yoluyla doğrulama kodu içeren özel bir URL gönderilecektir. Lütfen şifrenizi değiştirmek için bu bağlantıyı takip edin.';
 $s_lost_password_confirm_hash_OK = 'Onay kabul edilmiştir. Lütfen şifrenizi güncelleyin.';
@@ -521,7 +512,7 @@ $s_plugin_path = 'Eklenti Yolu';
 $s_created_user_part1 = 'Oluşturulan kullanıcı';
 $s_created_user_part2 = 'bu erişim seviyesiyle aktive edildi:';
 $s_create_new_account_title = 'Yeni Hesap Aç';
-$s_verify_password = 'Şifreyi Onayla';
+$s_verify_password = 'Parolayı Doğrulayın';
 $s_enabled = 'Aktif';
 $s_enabled_label = 'Etkinleştirilmiş';
 $s_protected = 'Korumalı';
@@ -669,7 +660,7 @@ $s_add_category_button = 'Kategori Ekle';
 $s_versions = 'Versiyonlar';
 $s_add_version_button = 'Versiyon Ekle';
 $s_add_and_edit_version_button = 'Ekle ve Versiyonu Düzenle';
-$s_edit_link = 'Değiştir';
+$s_edit_link = 'Düzenle';
 $s_actions = 'İşlemler';
 $s_version = 'Versiyon/Alt Versiyon';
 $s_version_label = 'Sürüm:';
@@ -708,7 +699,7 @@ $s_prune_accounts_button = 'Azalt';
 $s_confirm_account_pruning = 'Hiç giriş yapılmamış hesapları silmek istediğinizden emin misiniz?';
 $s_edit_user_title = 'Kullanıcı Düzenle';
 $s_account_unlock_button = 'Hesap kilidini aç';
-$s_reset_password_button = 'Şifre Sıfırla';
+$s_reset_password_button = 'Parola Sıfırla';
 $s_delete_user_button = 'Kullanıcı Sil';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Şifre Sıfırla sifreyi boş hale getirir .';
@@ -723,7 +714,7 @@ $s_manage_user_protected_msg = 'Bu hesap korumalıdır, "Erişim Seviyesi" ve "A
 $s_manage_user_updated_msg = 'Hesap başarıyla güncellendi...';
 $s_email_user_updated_subject = 'Hesap güncellendi';
 $s_email_user_updated_msg = 'Hesabınız yönetici tarafından güncellendi. Yapılan güncellemedeki değişiklikleri aşağıda görebilirsiniz. İstediğiniz zaman aşağıdaki URL\'ye tıklayarak tercihlerinizi ve hesap bilgilerinizi güncelleyebilirsiniz.';
-$s_main_link = 'Ana Sayfa';
+$s_main_link = 'Anasayfa';
 $s_view_bugs_link = 'Sorunları Görüntüle';
 $s_report_bug_link = 'Sorun Bildir';
 $s_changelog_link = 'Değişiklik Günlüğü';
@@ -757,7 +748,7 @@ $s_add_news_title = 'Haber Ekle';
 $s_post_to = 'Yayınlanacak Yer';
 $s_post_news_button = 'Haber Yayınla';
 $s_edit_or_delete_news_title = 'Haber Düzenle veya Sil';
-$s_edit_post = 'Haber Değiştir';
+$s_edit_post = 'Gönderiyi Düzenle';
 $s_delete_post = 'Haber Sil';
 $s_select_post = 'Haber Seç';
 $s_news_updated_msg = 'Haber güncellendi...';
@@ -858,15 +849,14 @@ $s_orct = '(açık/çözümlenmiş/kapalı/toplam)';
 $s_any = 'hepsi';
 $s_all = 'hepsi';
 $s_show = 'Göster';
-$s_show_label = 'Göster:';
 $s_changed = 'Son Değişiklik(saat)';
 $s_viewing_bugs_title = 'Görüntülenen Sorunlar';
 $s_updated = 'Son Güncelleme';
 $s_sticky = 'Sabit Sorunları Göster';
-$s_sticky_label = 'Sabit Sorunları Göster:';
-$s_sort_label = 'Sıralama ölçütü:';
+$s_sort = 'Sıralama';
 $s_issue_id = 'Sorun #';
 $s_recently_visited = 'Son Ziyaret Edilenler';
+$s_note_user_id = 'Not Gönderen';
 $s_filter_match_type = 'Eşleme Türü';
 $s_filter_match_all = 'Tüm Koşullar';
 $s_filter_match_any = 'Herhangi Bir Koşul';
@@ -882,7 +872,6 @@ $s_last = 'Son';
 $s_start_date_label = 'Başlangıç Tarihi:';
 $s_end_date_label = 'Bitiş Tarihi:';
 $s_use_date_filters = 'Tarih Filtrelerini Kullan';
-$s_use_date_filters_label = 'Tarih Filtrelerini Kullan:';
 $s_yes = 'Evet';
 $s_no = 'Hayır';
 $s_open_filters = 'Filtreyi Değiştir';
@@ -953,7 +942,7 @@ $s_custom_field_require_resolved = 'Çözümlenmiş Olduğunda Gerekli';
 $s_custom_field_require_closed = 'Kapatıldığında Gerekli';
 $s_link_custom_field_to_project_title = 'Projelerle özel alanlar arasında bağlantı kur';
 $s_link_custom_field_to_project_button = 'Özel Alana Köprü';
-$s_linked_projects_label = 'Bağlantılı Projeler:';
+$s_linked_projects_label = 'Bağlantılı Projeler';
 $s_custom_field_sequence = 'Sıra';
 $s_custom_field_sequence_label = 'Sıra';
 $s_custom_field_type_enum_string = '0:String, 1:Numeric, 2:Float, 3:Numaralandırmalar, 4:E-posta, 5:İşaret Kutusu, 6:Liste, 7:Çoklu Seçim Listesi, 8:Tarih, 9:Radio Buton,10:Textarea';
@@ -963,7 +952,6 @@ $s_field_delete_button = 'Alanı Sil';
 $s_confirm_custom_field_unlinking = 'Bu projedeki özel alan bağlantısını kaldırmak istediğinizden emin misiniz? Özel alanın kendisi silinmediği sürece içindeki değerler de silinmeyecektir.';
 $s_field_remove_button = 'Alanı Kaldır';
 $s_hide_status = 'Durumu Gizle';
-$s_hide_status_label = 'Durumu Gizle:';
 $s_filter_closed = 'Kapalı';
 $s_filter_resolved = 'Çözümlendi';
 $s_hide_closed = 'Kapatılanları Gizle';
@@ -1001,7 +989,6 @@ $s_relationship_deleted = 'İlişki silindi';
 $s_no_relationship = 'hiçbir ilişki yok';
 $s_relationship_replaced = 'İlişki değiştirildi';
 $s_replace_relationship_button = 'Değiştir';
-$s_replace_relationship_sure_msg = 'Belirtilen iki sorun arasında zaten bir ilişki var. Var olan ilişkiyi değiştirmek istediğinizden emin misiniz?';
 $s_relationship_with_parent = 'Ana sorun ile ilişkisi';
 $s_delete_relationship_button = 'Sil';
 $s_delete_relationship_sure_msg = 'Bu ilişkiyi silmek istediğinizden emin misiniz?';
@@ -1200,7 +1187,7 @@ $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '"%1$d" no\'lu kullanıcı bulunamad
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Tarayıcınız tarafından saklanan giriş bilgileri geçersiz. Hesabınız silinmiş olabilir.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Bu kullanıcı için tercihler bulunamadı.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Haber öğesi bulunamadı.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Şifre doğrulama uyuşmuyor.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Parola, doğrulama ile eşleşmiyor.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '%1$s için bir dizi bekleniyordu ancak bir string geldi.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '%1$s için bir string bekleniyordu fakat bir dizi geldi.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s için bir sayı bekleniyordu.';
@@ -1250,7 +1237,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Erişim Engell
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Üstlenen, bir e-posta adresi vermedi. Lütfen profilinizi güncelleyin.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '"%1$s" yapılandırma seçeneği "%2$s" değerini alamaz.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Bu işlem gerçekleştirilemez, "%1$d" sorunu salt okunur.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Bu iki sorun arasında zaten bir ilişki tanımlanmış.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'İlişkisi bulunamadı.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Erişim engellendi: %1$d sorunu için daha yüksek bir erişim seviyesine ihtiyaç duyuluyor.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Sorunu kendisiyle ilişkilendiremezsiniz.';
@@ -1287,3 +1273,6 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Bu sayfaya bu şekilde erişileme
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Geçersiz alan sıralaması.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Geçersiz tarih biçimi.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Zaman dilimi güncellenemedi.';
+$s_dropzone_invalid_file_type = 'Bu türdeki dosyaları yükleyemezsiniz.';
+$s_dropzone_max_files_exceeded = 'Daha fazla dosya yükleyemezsiniz.';
+$s_dropzone_not_supported = 'Dropzone.js eski tarayıcıları desteklemez!';

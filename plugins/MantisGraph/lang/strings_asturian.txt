@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,32 +44,22 @@
 $s_plugin_graph_title = 'Gráfiques Mantis';
 $s_plugin_graph_description = 'Complementu oficial de gráfiques.';
 $s_plugin_MantisGraph_title = 'Gráfiques Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Resume avanzáu';
 $s_plugin_MantisGraph_config = 'Configuración';
 $s_plugin_MantisGraph_synthesis_link = 'Síntesis';
-$s_plugin_MantisGraph_status_link = 'Por estáu';
-$s_plugin_MantisGraph_priority_link = 'Por prioridá';
-$s_plugin_MantisGraph_severity_link = 'Por severidá';
-$s_plugin_MantisGraph_category_link = 'Por categoría';
-$s_plugin_MantisGraph_resolution_link = 'Por resolución';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Gráfica';
-$s_plugin_MantisGraph_library = 'Biblioteca de gráfiques a usar';
-$s_plugin_MantisGraph_bundled = 'Integrada';
-$s_plugin_MantisGraph_window_width = 'Anchor de la gráfica (en píxeles)';
-$s_plugin_MantisGraph_bar_aspect = 'Rellación d\'aspeutu de la gráfica de barres (altor/anchor)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Gráfiques a amosar per filera na páxina de resume avanzáu';
-$s_plugin_MantisGraph_font = 'Lletra';
-$s_plugin_MantisGraph_jpgraph_path = 'Camín del sistema a la biblioteca JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Dexar en blanco pal predetermináu: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-aliasing de JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'El anti-aliasing ameyora l\'aspeutu visual de ciertes gráfiques a costa del rindimientu (fasta 8x más lentu)';
-$s_plugin_MantisGraph_enabled = 'Activáu';
-$s_plugin_MantisGraph_disabled = 'Desactiváu';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Gráfiques de síntesis por estáu';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráfiques de síntesis por prioridá';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráfiques de síntesis por severidá';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Gráfiques de síntesis por categoría';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráfiques de síntesis por resolución';
+$s_plugin_MantisGraph_status_link = 'Per estáu';
+$s_plugin_MantisGraph_priority_link = 'Per prioridá';
+$s_plugin_MantisGraph_severity_link = 'Per severidá';
+$s_plugin_MantisGraph_category_link = 'Per categoría';
+$s_plugin_MantisGraph_resolution_link = 'Per resolución';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendencies d\'incidencia';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gráfiques per estáu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráfiques per prioridá';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráfiques per severidá';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gráfiques per categoría';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráfiques per resolvimientu';
+$s_plugin_MantisGraph_graph_developer_title = 'Gráfiques per desendolcador';
+$s_plugin_MantisGraph_graph_reporter_title = 'Gráfiques per informante';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Incidencies abiertes, resueltes y pendientes';
 $s_plugin_MantisGraph_by_status_pct = 'Por porcentaxe d\'estáu';
 $s_plugin_MantisGraph_by_priority_pct = 'Por porcentaxe de prioridá';
 $s_plugin_MantisGraph_by_severity_pct = 'Por porcentaxe de severidá';
@@ -80,13 +70,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'Por prioridá y estáu';
 $s_plugin_MantisGraph_by_resolution_mix = 'Por resolución y estáu';
 $s_plugin_MantisGraph_legend_still_open = 'Inda abiertu';
 $s_plugin_MantisGraph_legend_resolved = 'Resueltu';
-$s_plugin_MantisGraph_legend_assigned = 'Atribuíu';
-$s_plugin_MantisGraph_legend_total = 'Total';
-$s_plugin_MantisGraph_legend_opened = 'Abiertu';
-$s_plugin_MantisGraph_legend_closed = 'Zarráu';
 $s_plugin_MantisGraph_legend_reported = 'Informáu';
-$s_plugin_MantisGraph_cumulative = 'Acumuláu';
-$s_plugin_MantisGraph_not_enough_data = 'Nun hai datos abondo pa crear una gráfica';
 $s_plugin_MantisGraph_period_none = 'Dengún';
 $s_plugin_MantisGraph_period_this_week = 'Esta selmana';
 $s_plugin_MantisGraph_period_last_week = 'Cabera selmana';
@@ -98,12 +82,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Caberu trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Lo que va d\'añu';
 $s_plugin_MantisGraph_period_select = 'Dates arbitraries';
 $s_plugin_MantisGraph_period_last_year = 'Caberu añu';
-$s_plugin_MantisGraph_select = 'Seleiciona';
-$s_plugin_MantisGraph_select_bystatus = 'pol estáu';
-$s_plugin_MantisGraph_select_summbystatus = 'Resume pol estáu';
-$s_plugin_MantisGraph_select_bycat = 'Resume pola categoría';
-$s_plugin_MantisGraph_select_both = 'Resume pol estáu y categoría';
-$s_plugin_MantisGraph_show_as_graph = 'Ver como gráfica';
-$s_plugin_MantisGraph_show_as_table = 'Ver como tabla';
-$s_plugin_MantisGraph_show_graph = 'Ver la gráfica';
 $s_plugin_MantisGraph_graph_page = 'Historial gráficu de la incidencia';
+$s_plugin_MantisGraph_graph_topdev = 'Principales desendolcadores por incidencies resueltes';
+$s_plugin_MantisGraph_graph_opendev = 'Desendolcadores por incidencies abiertes';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales informantes por incidencies resueltes';

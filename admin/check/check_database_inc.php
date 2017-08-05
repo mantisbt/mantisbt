@@ -95,6 +95,14 @@ if( db_is_mysql() ) {
 		'mysql' != $t_database_type,
 		array( false => "'mysql' driver is deprecated as of PHP 5.5.0, please use 'mysqli' instead" )
 	);
+
+	check_print_test_warn_row(
+		'mysqli.allow_local_infile php.ini directive is set to 0',
+		!ini_get_bool( 'mysqli.allow_local_infile' ),
+		array( false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).' )
+	);
+
 }
 
 if( db_is_mssql() ) {
@@ -183,6 +191,8 @@ if( db_is_mysql() ) {
 	$t_db_min_version = DB_MIN_VERSION_PGSQL;
 } elseif( db_is_mssql() ) {
 	$t_db_min_version = DB_MIN_VERSION_MSSQL;
+} elseif( db_is_oracle() ) {
+	$t_db_min_version = DB_MIN_VERSION_ORACLE;
 } else {
 	$t_db_min_version = 0;
 }
@@ -211,7 +221,7 @@ if( db_is_mysql() ) {
 		'5.4' => array( 'Discontinued' ),
 		'5.5' => array( 'GA', '5.5.8', '2010-12-03' ),
 		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
-		'5.7' => array( 'Development' ),
+		'5.7' => array( 'GA', '5.7.9', '2015-10-21' ),
 		'6.0' => array( 'Discontinued' ),
 	);
 	$t_support_url = 'http://www.mysql.com/support/';
@@ -282,7 +292,9 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => EOL date
-		'9.4' => '2019-12-30',
+		'9.6' => '2021-09-31',
+		'9.5' => '2021-01-31',
+		'9.4' => '2019-12-31',
 		'9.3' => '2018-09-30',
 		'9.2' => '2017-09-30',
 		'9.1' => '2016-09-30',
@@ -354,61 +366,57 @@ check_print_test_warn_row(
 );
 
 if( db_is_mysql() ) {
-	$t_table_prefix_regex_safe = preg_quote( $t_table_prefix, '/' );
-	$t_table_suffix_regex_safe = preg_quote( $t_table_suffix, '/' );
+	# Check DB's default collation
+	$t_query = 'SELECT default_collation_name
+		FROM information_schema.schemata
+		WHERE schema_name = ' . db_param();
+	$t_collation = db_result( db_query( $t_query, array( $g_database_name ) ) );
+	check_print_test_row(
+		'Database default collation is UTF-8',
+		check_is_collation_utf8( $t_collation ),
+		array( false => 'Database is using '
+			. htmlentities( $t_collation )
+			. ' collation where UTF-8 collation is required.' )
+	);
 
-	# Field names from MySQL data dictionary
-	# mysql returns fields with uppercase first letter, whereas
-	# mysqli uses all lowercase.
-	switch( $g_db_type ) {
-		case 'mysql':
-			$t_field_name      = 'Name';
-			$t_field_comment   = 'Comment';
-			$t_field_collation = 'Collation';
-			$t_field_field     = 'Field';
-			$t_field_type      = 'Type';
-			break;
-		case 'mysqli':
-			$t_field_name      = 'name';
-			$t_field_comment   = 'comment';
-			$t_field_collation = 'collation';
-			$t_field_field     = 'field';
-			$t_field_type      = 'type';
-			break;
-	}
+	$t_table_regex = '/^'
+		. preg_quote( $t_table_prefix, '/' ) . '.+?'
+		. preg_quote( $t_table_suffix, '/' ) . '$/';
 
 	$t_result = db_query( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( $t_row[$t_field_comment] !== 'VIEW' &&
-		    preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_row[$t_field_name] )
+		if( $t_row['comment'] !== 'VIEW' &&
+			preg_match( $t_table_regex, $t_row['name'] )
 		) {
 			check_print_test_row(
-				'Table <em>' . htmlentities( $t_row[$t_field_name] ) . '</em> is using UTF-8 collation',
-				substr( $t_row[$t_field_collation], 0, 5 ) === 'utf8_',
-				array( false => 'Table ' . htmlentities( $t_row[$t_field_name] )
-					. ' is using ' . htmlentities( $t_row[$t_field_collation] )
-					. ' collation where UTF-8 collation is required.' ) );
+				'Table <em>' . htmlentities( $t_row['name'] ) . '</em> is using UTF-8 collation',
+				check_is_collation_utf8( $t_row['collation'] ),
+				array( false => 'Table ' . htmlentities( $t_row['name'] )
+					. ' is using ' . htmlentities( $t_row['collation'] )
+					. ' collation where UTF-8 collation is required.' )
+			);
 		}
 	}
 
 	foreach( db_get_table_list() as $t_table ) {
-		if( preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_table ) ) {
+		if( preg_match( $t_table_regex, $t_table ) ) {
 			$t_result = db_query( 'SHOW FULL FIELDS FROM ' . $t_table );
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				if( $t_row[$t_field_collation] === null ) {
+				if( $t_row['collation'] === null ) {
 					continue;
 				}
 				check_print_test_row(
-					'Text column <em>' . htmlentities( $t_row[$t_field_field] )
-					. '</em> of type <em>' . $t_row[$t_field_type]
+					'Text column <em>' . htmlentities( $t_row['field'] )
+					. '</em> of type <em>' . $t_row['type']
 					. '</em> on table <em>' . htmlentities( $t_table )
-					. '</em> is is using UTF-8 collation',
-					substr( $t_row[$t_field_collation], 0, 5 ) === 'utf8_',
-					array( false => 'Text column ' . htmlentities( $t_row[$t_field_field] )
-						. ' of type ' . $t_row[$t_field_type]
+					. '</em> is using UTF-8 collation',
+					check_is_collation_utf8( $t_row['collation'] ),
+					array( false => 'Text column ' . htmlentities( $t_row['field'] )
+						. ' of type ' . $t_row['type']
 						. ' on table ' . htmlentities( $t_table )
-						. ' is using ' . htmlentities( $t_row[$t_field_collation] )
-						. ' collation where UTF-8 collation is required.' ) );
+						. ' is using ' . htmlentities( $t_row['collation'] )
+						. ' collation where UTF-8 collation is required.' )
+				);
 			}
 		}
 	}
