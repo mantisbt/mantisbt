@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,12 +41,13 @@
  * @author Beta16
  * @author Massimo itaca
  * @author Nemo bis
+ * @author Ontsed
+ * @author Selven
  */
 
 $s_plugin_graph_title = 'Grafici Mantis';
 $s_plugin_graph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_title = 'Grafici Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Sommario avanzato';
 $s_plugin_MantisGraph_config = 'Configurazione';
 $s_plugin_MantisGraph_synthesis_link = 'Sintesi';
 $s_plugin_MantisGraph_status_link = 'Per stato';
@@ -54,24 +55,15 @@ $s_plugin_MantisGraph_priority_link = 'Per priorità';
 $s_plugin_MantisGraph_severity_link = 'Per gravità';
 $s_plugin_MantisGraph_category_link = 'Per categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per risoluzione';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafico';
-$s_plugin_MantisGraph_library = 'Libreria grafica da usare';
-$s_plugin_MantisGraph_bundled = 'Incorporato';
-$s_plugin_MantisGraph_window_width = 'Larghezza del grafico (in pixels)';
-$s_plugin_MantisGraph_bar_aspect = 'Rapporto grafico a barra (altezza/larghezza)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Grafici da visualizzare per riga nel sommario avanzato pagina';
-$s_plugin_MantisGraph_font = 'Carattere';
-$s_plugin_MantisGraph_jpgraph_path = 'Percorso di sistema della libreria JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Lascia "spazio" per default: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing migliora l\'aspetto visivo di alcuni grafici a discapito delle prestazioni (fino a 8 volte più lento)';
-$s_plugin_MantisGraph_enabled = 'Attivo';
-$s_plugin_MantisGraph_disabled = 'Disattivato';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Grafico di sintesi per stato';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafico di sintesi per priorità';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafico di sintesi per gravità';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Grafico di sintesi per categoria';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafico di sintesi per motivazione';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendenza anomalie';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Per grafici di stato';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Per grafici di priorità';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Per grafici di gravità';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Per grafici di categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Per grafici di risoluzione';
+$s_plugin_MantisGraph_graph_developer_title = 'Grafico per sviluppatore';
+$s_plugin_MantisGraph_graph_reporter_title = 'Grafico per segnalatore';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Anomalie aperte, risolte e restanti';
 $s_plugin_MantisGraph_by_status_pct = 'Per stato (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'Per priorità (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'Per gravità (%)';
@@ -82,30 +74,19 @@ $s_plugin_MantisGraph_by_priority_mix = 'Per priorità e stato';
 $s_plugin_MantisGraph_by_resolution_mix = 'Per motivazione e stato';
 $s_plugin_MantisGraph_legend_still_open = 'Ancora aperte';
 $s_plugin_MantisGraph_legend_resolved = 'Risolte';
-$s_plugin_MantisGraph_legend_assigned = 'Assegnate';
-$s_plugin_MantisGraph_legend_total = 'Totale';
-$s_plugin_MantisGraph_legend_opened = 'Aperte';
-$s_plugin_MantisGraph_legend_closed = 'Chiuse';
 $s_plugin_MantisGraph_legend_reported = 'Segnalate';
-$s_plugin_MantisGraph_cumulative = 'Cumulativo';
-$s_plugin_MantisGraph_not_enough_data = 'Non ci sono abbastanza dati per creare un grafico';
 $s_plugin_MantisGraph_period_none = 'Nessuno';
 $s_plugin_MantisGraph_period_this_week = 'Questa settimana';
-$s_plugin_MantisGraph_period_last_week = 'Ultima settimana';
+$s_plugin_MantisGraph_period_last_week = 'Settimana scorsa';
 $s_plugin_MantisGraph_period_two_weeks = 'Ultime due settimane';
 $s_plugin_MantisGraph_period_this_month = 'Questo mese';
-$s_plugin_MantisGraph_period_last_month = 'Ultimo mese';
+$s_plugin_MantisGraph_period_last_month = 'Mese scorso';
 $s_plugin_MantisGraph_period_this_quarter = 'Questo trimestre';
 $s_plugin_MantisGraph_period_last_quarter = 'Ultimo trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Quest\'anno';
 $s_plugin_MantisGraph_period_select = 'Date arbitrarie';
-$s_plugin_MantisGraph_period_last_year = 'Ultimo anno';
-$s_plugin_MantisGraph_select = 'Seleziona';
-$s_plugin_MantisGraph_select_bystatus = 'Per stato';
-$s_plugin_MantisGraph_select_summbystatus = 'Sommario per stato';
-$s_plugin_MantisGraph_select_bycat = 'Sommario per categoria';
-$s_plugin_MantisGraph_select_both = 'Sommario per stato e categoria';
-$s_plugin_MantisGraph_show_as_graph = 'Mostra come grafico';
-$s_plugin_MantisGraph_show_as_table = 'Mostra come tabella';
-$s_plugin_MantisGraph_show_graph = 'Mostra il grafico';
+$s_plugin_MantisGraph_period_last_year = 'Anno scorso';
 $s_plugin_MantisGraph_graph_page = 'Grafico della storia delle anomalie';
+$s_plugin_MantisGraph_graph_topdev = 'Migliori sviluppatori per problemi risolti';
+$s_plugin_MantisGraph_graph_opendev = 'Sviluppatori per problemi aperti';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Migliori segnalatori per problemi risolti';

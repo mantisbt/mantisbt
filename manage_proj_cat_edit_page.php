@@ -61,46 +61,73 @@ $t_name = $t_row['name'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
-html_page_top();
+layout_page_header();
 
-print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
+layout_page_begin( 'manage_overview_page.php' );
 
-<div id="manage-proj-category-update-div" class="form-container">
+print_manage_menu( 'manage_proj_cat_edit_page.php' );
+?>
+
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div id="manage-proj-category-update-div" class="form-container">
 	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-sitemap"></i>
+				<?php echo lang_get('edit_project_category_title') ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'edit_project_category_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<div class="field-container">
-				<label for="proj-category-name"><span><?php echo lang_get( 'category' ) ?></span></label>
-				<span class="input"><input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="proj-category-assigned-to"><span><?php echo lang_get( 'assigned_to' ) ?></span></label>
-				<span class="select">
-					<select id="proj-category-assigned-to" name="assigned_to">
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'category' ) ?>
+				</td>
+				<td>
+					<input type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'assigned_to' ) ?>
+				</td>
+				<td>
+					<select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
 						<option value="0"></option>
 						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
 					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_category_button' ) ?>" /></span>
+				</td>
+			</tr>
 		</fieldset>
+		</table>
+		</div>
+		</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_category_button' ) ?>" />
+		</div>
+	</div>
 	</form>
+	</div>
 </div>
 
-<div class="form-container">
-	<form method="post" action="manage_proj_cat_delete.php" class="action-button">
+<div class="col-md-12 col-xs-12">
+	<form method="post" action="manage_proj_cat_delete.php" class="pull-right">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
 			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_category_button' ) ?>" /></span>
+			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 		</fieldset>
 	</form>
 </div><?php
 
-html_page_bottom();
+layout_page_end();

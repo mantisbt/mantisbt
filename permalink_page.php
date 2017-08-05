@@ -36,6 +36,7 @@
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
+require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
@@ -43,25 +44,39 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-html_page_top();
+form_security_validate( 'permalink' );
+
+layout_page_header();
+
+layout_page_begin();
 
 access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 
 $f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 ?>
-<div>
-	<p>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+	<p class="lead">
 <?php
 echo lang_get( 'filter_permalink' ), '<br />';
+?>
+</p>
+<p>
+<?php
 $t_safe_url = string_display_line( $f_url );
-echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a></p>';
+echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a>';
+?>
+</p>
+<div class="space-10"></div>
+<?php
 
 $t_create_short_url = config_get( 'create_short_url' );
 
 if( !is_blank( $t_create_short_url ) ) {
-	print_bracket_link( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
+	print_small_button( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
 }
 ?>
 </div>
 <?php
-html_page_bottom();
+form_security_purge( 'permalink' );
+layout_page_end();

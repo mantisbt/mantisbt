@@ -61,11 +61,11 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
 	helper_ensure_confirmed( lang_get( 'confirm_used_custom_field_deletion' ) .
-		'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
+		'<br />' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
 		lang_get( 'field_delete_button' ) );
 } else {
 	helper_ensure_confirmed( lang_get( 'confirm_custom_field_deletion' ) .
-		'<br/>' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
+		'<br />' . lang_get( 'custom_field_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_definition['name'] ),
 		lang_get( 'field_delete_button' ) );
 }
 
@@ -73,8 +73,10 @@ custom_field_destroy( $f_field_id );
 
 form_security_purge( 'manage_custom_field_delete' );
 
-html_page_top( null, $f_return );
+layout_page_header( null, $f_return );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $f_return );
 
-html_page_bottom();
+layout_page_end();

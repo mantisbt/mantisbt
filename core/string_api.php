@@ -123,7 +123,8 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				#     if other encoded characters are a problem
 				$t_piece = preg_replace( '/&#160;/', ' ', $t_piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $t_piece );
+					# Use PCRE_UTF8 modifier to ensure a correct char count
+					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/u', "$1", $t_piece );
 				} else {
 					$t_output .= $t_piece;
 				}
@@ -274,7 +275,9 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 
 	# Start extracting regex matches
-	$t_script = $t_matches['script'];
+	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
+	# redirection to external sites
+	$t_script = strtr( $t_matches['script'], array( '\\' => '%5C' ) );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params
@@ -346,13 +349,14 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		if( $p_include_anchor ) {
 			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
-					if( bug_exists( (int)$p_array[2] ) ) {
-						$t_project_id = bug_get_field( (int)$p_array[2], 'project_id' );
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
+						$t_project_id = bug_get_field( $c_bug_id, 'project_id' );
 						$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
-						if( access_has_bug_level( $t_view_bug_threshold, (int)$p_array[2] ) ) {
+						if( access_has_bug_level( $t_view_bug_threshold, $c_bug_id ) ) {
 							return $p_array[1] .
 								string_get_bug_view_link(
-									(int)$p_array[2],
+									$c_bug_id,
 									(boolean)$p_detail_info,
 									(boolean)$p_fqdn
 								);
@@ -363,10 +367,11 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		} else {
 			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
-					if( bug_exists( (int)$p_array[2] ) ) {
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
 						# Create link regardless of user's access to the bug
 						return $p_array[1] .
-							string_get_bug_view_url_with_fqdn( (int)$p_array[2] );
+							string_get_bug_view_url_with_fqdn( $c_bug_id );
 					}
 					return $p_array[0];
 				}; # end of bug link callback closure
@@ -415,8 +420,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
 					global $g_project_override;
-					if( bugnote_exists( (int)$p_array[2] ) ) {
-						$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
 							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
 							if(   access_compare_level(
@@ -424,14 +430,14 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 										bug_get_field( $t_bug_id, 'project_id' ) ),
 										config_get( 'private_bugnote_threshold' )
 								   )
-								|| bugnote_get_field( (int)$p_array[2], 'reporter_id' ) == auth_get_current_user_id()
-								|| bugnote_get_field( (int)$p_array[2], 'view_state' ) == VS_PUBLIC
+								|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == auth_get_current_user_id()
+								|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC
 							) {
 								$g_project_override = null;
 								return $p_array[1] .
 									string_get_bugnote_view_link(
 										$t_bug_id,
-										(int)$p_array[2],
+										$c_bugnote_id,
 										(boolean)$p_detail_info,
 										(boolean)$p_fqdn
 									);
@@ -444,13 +450,15 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		} else {
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
-					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
-					if( $t_bug_id && bug_exists( $t_bug_id ) ) {
-						return $p_array[1] .
-							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2] );
-					} else {
-						return $p_array[0];
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
+						if( $t_bug_id && bug_exists( $t_bug_id ) ) {
+							return $p_array[1] .
+								string_get_bugnote_view_url_with_fqdn( $t_bug_id, $c_bugnote_id );
+						}
 					}
+					return $p_array[0];
 				}; # end of bugnote link callback closure
 		}
 	}
@@ -471,7 +479,6 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
 	static $s_email_regex = null;
-	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -503,12 +510,17 @@ function string_insert_hrefs( $p_string ) {
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	# Find any URL in a string and replace it by a clickable link
+	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			return "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
+			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
+				$t_url_target = ' target="_blank"';
+			} else {
+				$t_url_target = '';
+			}
+			return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
 		},
 		$p_string
 	);
@@ -517,17 +529,39 @@ function string_insert_hrefs( $p_string ) {
 	# mailto: link, making sure that we skip processing of any existing anchor
 	# tags, to avoid parts of URLs such as https://user@example.com/ or
 	# http://user:password@example.com/ to be not treated as an email.
+	$p_string = string_process_exclude_anchors(
+		$p_string,
+		function( $p_string ) use ( $s_email_regex ) {
+			return preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $p_string );
+		}
+	);
+
+	return $p_string;
+}
+
+/**
+ * Processes a string, ignoring anchor tags.
+ * Applies the specified callback function to the text between anchor tags;
+ * the anchors themselves will be left as-is.
+ * @param string   $p_string   String to process
+ * @param callable $p_callback Function to apply
+ * @return string
+ */
+function string_process_exclude_anchors( $p_string, $p_callback ) {
+	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
+
 	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
-	$p_string = '';
+
+	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {
 		if( preg_match( $s_anchor_regex, $t_piece ) ) {
-			$p_string .= $t_piece;
+			$t_string .= $t_piece;
 		} else {
-			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $t_piece );
+			$t_string .= $p_callback( $t_piece );
 		}
 	}
 
-	return $p_string;
+	return $t_string;
 }
 
 /**

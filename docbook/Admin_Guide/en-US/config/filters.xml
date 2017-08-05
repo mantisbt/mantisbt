@@ -17,8 +17,8 @@
 		<varlistentry>
 			<term>$g_filter_custom_fields_per_row</term>
 			<listitem>
-				<para>The number of custom fields to display per row. The default
-					is 7. The value should be greater than or equal to 7.
+				<para>The number of filter fields to display per row.
+					The default is 8.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -29,11 +29,11 @@
 					are:
 					<itemizedlist>
 						<listitem>
-							<para>SIMPLE_ONLY - only simple view</para>
+							<para>SIMPLE_ONLY - only allow use of simple view</para>
 						</listitem>
 						<listitem>
-							<para>ADVANCED_ONLY - only advanced view (allows multiple value
-								selections)
+							<para>ADVANCED_ONLY - only allow use of advanced view
+								(allows multiple value selections)
 							</para>
 						</listitem>
 						<listitem>

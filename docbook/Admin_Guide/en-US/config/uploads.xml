@@ -43,18 +43,18 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_file_upload_max_num</term>
+			<term>$g_dropzone_enabled</term>
 			<listitem>
-				<para>Maximum number of files that can be uploaded simultaneously.
+				<para>Whether to enable/disable drag and drop zone for uploading of attachments.
+					Default value is ON.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_max_file_size</term>
+			<term>$g_file_upload_max_num</term>
 			<listitem>
-				<para>The maximum file size to allow as an attachment.
-					You may also have to configure your php.ini file to increase the
-					execution time, memory limit, max post size, and max upload size.
+				<para>Maximum number of files that can be uploaded simultaneously.
+					Default value is 10.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -63,8 +63,9 @@
 			<listitem>
 				<para>Maximum file size that can be uploaded. Default value is
 					about 5MB.
-					The max file upload size is also affected by the value specified in
-					php.ini. The PHP value is usually defaulted to 2MB.
+					The maximum size is also affected by the PHP options
+					post_max_size (default 8MB), upload_max_filesize (default 2MB)
+					and memory_limit (default 128MB) specified in php.ini.
 				</para>
 			</listitem>
 		</varlistentry>

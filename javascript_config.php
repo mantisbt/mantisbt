@@ -24,6 +24,9 @@
  * @uses config_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 
@@ -56,6 +59,5 @@ header( 'X-Content-Type-Options: nosniff' );
 # should only be known internally to the server.
 
 echo "var config = new Array();\n";
-print_config_value( 'calendar_js_date_format' );
-print_config_value( 'icon_path' );
+print_config_value( 'datetime_picker_format' );
 print_config_value( 'short_path' );

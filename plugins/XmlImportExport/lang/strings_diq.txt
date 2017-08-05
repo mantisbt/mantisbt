@@ -1,0 +1,68 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Zazaki (Zazaki)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Erdemaslancan
+ * @author Kumkumuk
+ * @author Marmase
+ * @author Mirzali
+ */
+
+$s_plugin_XmlImportExport_title = 'Mesele Bıgi/Bıdı';
+$s_plugin_XmlImportExport_description = 'MantisBT rê zerin da XML ra huner dekeno u veceno.';
+$s_plugin_XmlImportExport_import = 'Meseleyê grotışi';
+$s_plugin_XmlImportExport_export = 'XML Bıdı';
+$s_plugin_XmlImportExport_config_title = 'Konfigurasyona sewiyeya hesabii de XML ateberd/azered';
+$s_plugin_XmlImportExport_import_threshold = 'Meseleyê grotışi';
+$s_plugin_XmlImportExport_export_threshold = 'Meseler ateberd';
+$s_plugin_XmlImportExport_action_update = 'Rocane ke';
+$s_plugin_XmlImportExport_importing_in_project = 'Proce dı meselê teberdara:';
+$s_plugin_XmlImportExport_import_options = 'Weçenegê grotışi';
+$s_plugin_XmlImportExport_cross_references = 'Çaprez referansi';
+$s_plugin_XmlImportExport_default_strategy = 'Strateciya çerexnayışê hesabiyayiye:';
+$s_plugin_XmlImportExport_renumber = 'Fına nımre ke';
+$s_plugin_XmlImportExport_renumber_desc = 'Referansa çarnayışê nımra rê bıcerbnê';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'Orcinal nesi  açarn jew gri';
+$s_plugin_XmlImportExport_disable = 'Dewrera vec';
+$s_plugin_XmlImportExport_disable_desc = 'Grey meqefilne';
+$s_plugin_XmlImportExport_fallback = 'Strateciya peyd amayışi ("Fına nımrekerdış" dezge nêbose)';
+$s_plugin_XmlImportExport_fallback_category = 'Kategoriyo peyên:';
+$s_plugin_XmlImportExport_keep_same_category = 'Eyni kategori de tapêşê';
+$s_plugin_XmlImportExport_error_no_xml = 'Derganeya xmlreader u xmlwriter nevineya';

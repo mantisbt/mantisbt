@@ -55,28 +55,6 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * alternate color function
- * If no index is given, continue alternating based on the last index given
- * @param integer $p_index      Current index position.
- * @param string  $p_odd_color  Color to use for odd rows.
- * @param string  $p_even_color Color to use for even rows.
- * @return string
- */
-function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
-	static $s_index = 1;
-
-	if( null !== $p_index ) {
-		$s_index = $p_index;
-	}
-
-	if( 1 == $s_index++ % 2 ) {
-		return $p_odd_color;
-	} else {
-		return $p_even_color;
-	}
-}
-
-/**
  * alternate classes for table rows
  * If no index is given, continue alternating based on the last index given
  * @param int $p_index
@@ -111,13 +89,11 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
  */
 function helper_array_transpose( array $p_array ) {
-	if( !is_array( $p_array ) ) {
-		return $p_array;
-	}
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
-			return $p_array;
+			# This function can only handle bidimensional arrays
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
 		foreach( $t_sub as $t_subkey => $t_value ) {
@@ -445,23 +421,31 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		return true;
 	}
 
-	html_page_top();
+	layout_page_header();
+	layout_page_begin();
 
-	echo '<div class="confirm-msg center">';
+	echo '<div class="col-md-12 col-xs-12">';
+	echo '<div class="space-10"></div>';
+	echo '<div class="alert alert-warning center">';
+	echo '<p class="bigger-110">';
 	echo "\n" . $p_message . "\n";
+	echo '</p>';
+	echo '<div class="space-10"></div>';
 
-	echo '<form method="post" action="">' . "\n";
+	echo '<form method="post" class="center" action="">' . "\n";
 	# CSRF protection not required here - user needs to confirm action
 	# before the form is accepted.
 	print_hidden_inputs( $_POST );
 	print_hidden_inputs( $_GET );
 
-	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
+	echo '<input type="hidden" name="_confirmed" value="1" />' , "\n";
+	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . $p_button_label . '" />';
 	echo "\n</form>\n";
 
-	echo '</div>' . "\n";
-	html_page_bottom();
+	echo '<div class="space-10"></div>';
+	echo '</div></div>';
+
+	layout_page_end();
 	exit;
 }
 
@@ -519,6 +503,17 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
 	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
 
+	# Fix column names for custom field columns that may be stored as lowercase in configuration. See issue #17367
+	# If the system was working fine with lowercase names, then database is case-insensitive, eg: mysql
+	# Fix by forcing a search with current name to get the id, then get the actual name by looking up this id
+	foreach( $t_columns as &$t_column_name ) {
+		$t_cf_name = column_get_custom_field_name( $t_column_name );
+		if( $t_cf_name ) {
+			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
+			$t_column_name = column_get_custom_field_column_name( $t_cf_id );
+		}
+	}
+
 	if( !$p_viewable_only ) {
 		return $t_columns;
 	}
@@ -528,13 +523,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_keys_to_remove[] = 'selection';
 		$t_keys_to_remove[] = 'edit';
-		$t_keys_to_remove[] = 'bugnotes_count';
-		$t_keys_to_remove[] = 'attachment_count';
 		$t_keys_to_remove[] = 'overdue';
-	}
-
-	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
-		$t_keys_to_remove[] = 'attachment_count';
 	}
 
 	$t_current_project_id = helper_get_current_project();
@@ -627,7 +616,14 @@ function helper_mantis_url( $p_url ) {
 	if( is_blank( $p_url ) ) {
 		return $p_url;
 	}
-	return config_get_global( 'short_path' ) . $p_url;
+
+	# Return URL as-is if it already starts with short path
+	$t_short_path = config_get_global( 'short_path' );
+	if( strpos( $p_url, $t_short_path ) === 0 ) {
+		return $p_url;
+	}
+
+	return $t_short_path . $p_url;
 }
 
 /**
@@ -691,4 +687,41 @@ function helper_duration_to_minutes( $p_hhmm ) {
  */
 function shutdown_functions_register() {
 	register_shutdown_function( 'email_shutdown_function' );
+}
+
+/**
+ * Filter a set of strings by finding strings that start with a case-insensitive prefix.
+ * @param array  $p_set    An array of strings to search through.
+ * @param string $p_prefix The prefix to filter by.
+ * @return array An array of strings which match the supplied prefix.
+ */
+function helper_filter_by_prefix( array $p_set, $p_prefix ) {
+	$t_matches = array();
+	foreach ( $p_set as $p_item ) {
+		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+			$t_matches[] = $p_item;
+		}
+	}
+	return $t_matches;
+}
+
+/**
+ * Combine a Mantis page with a query string.  This handles the case where the page is a native
+ * page or a plugin page.
+ * @param string $p_page The page (relative or full)
+ * @param string $p_query_string The query string
+ * @return string The combined url.
+ */
+function helper_url_combine( $p_page, $p_query_string ) {
+	$t_url = $p_page;
+
+	if( !is_blank( $p_query_string ) ) {
+		if( stripos( $p_page, '?' ) !== false ) {
+			$t_url .= '&' . $p_query_string;
+		} else {
+			$t_url .= '?' . $p_query_string;
+		}
+	}
+
+	return $t_url;
 }

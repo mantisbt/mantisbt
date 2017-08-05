@@ -67,6 +67,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {news}
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
@@ -94,6 +95,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
  * @return void
  */
 function news_delete( $p_news_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {news} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_news_id ) );
 }
@@ -105,6 +107,7 @@ function news_delete( $p_news_id ) {
  * @return void
  */
 function news_delete_all( $p_project_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {news} WHERE project_id=' . db_param();
 	db_query( $t_query, array( (int)$p_project_id ) );
 }
@@ -132,6 +135,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 	}
 
 	# Update entry
+	db_param_push();
 	$t_query = 'UPDATE {news}
 				  SET view_state=' . db_param() . ',
 					announcement=' . db_param() . ',
@@ -140,7 +144,6 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 					project_id=' . db_param() . ',
 					last_modified= ' . db_param() . '
 				  WHERE id=' . db_param();
-
 	db_query( $t_query, array( $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id, db_now(), $p_news_id ) );
 }
 
@@ -151,6 +154,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
  * @return array news article
  */
 function news_get_row( $p_news_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {news} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_news_id ) );
 
@@ -269,6 +273,8 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 	switch( config_get( 'news_limit_method' ) ) {
 		case 0:
+			db_param_push();
+			
 			# BY_LIMIT - Select the news posts
 			$t_query = 'SELECT * FROM {news}';
 
@@ -285,6 +291,8 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			$t_result = db_query( $t_query, $t_params, $t_news_view_limit, $c_offset );
 			break;
 		case 1:
+			db_param_push();
+			
 			# BY_DATE - Select the news posts
 			$t_query = 'SELECT * FROM {news} WHERE
 						( ' . db_helper_compare_time( db_param(), '<', 'date_posted', $t_news_view_limit_days ) . '

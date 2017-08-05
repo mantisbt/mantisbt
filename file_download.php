@@ -35,6 +35,9 @@
  * @uses utility_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 $g_bypass_headers = true; # suppress headers as we will send our own later
 define( 'COMPRESSION_DISABLED', true );
 
@@ -187,12 +190,25 @@ if( $t_content_type_override ) {
 	$t_content_type = $t_content_type_override;
 }
 
-# Don't allow inline flash
-if( false !== strpos( $t_content_type, 'application/x-shockwave-flash' ) ) {
-	http_content_disposition_header( $t_filename );
-} else {
-	http_content_disposition_header( $t_filename, $f_show_inline );
+# Decide what should open inline in the browser vs. download as attachment
+# https://www.thoughtco.com/mime-types-by-content-type-3469108
+$t_show_inline = $f_show_inline;
+$t_mime_force_inline = array(
+	'image/jpeg', 'image/gif', 'image/tiff', 'image/bmp', 'image/svg+xml', 'image/png',
+	'application/pdf' );
+$t_mime_force_attachment = array( 'application/x-shockwave-flash', 'text/html' );
+
+# extract mime type from content type
+$t_mime_type = explode( ';', $t_content_type, 2 );
+$t_mime_type = $t_mime_type[0];
+
+if( in_array( $t_mime_type, $t_mime_force_inline ) ) {
+	$t_show_inline = true;
+} else if( in_array( $t_mime_type, $t_mime_force_attachment ) ) {
+	$t_show_inline = false;
 }
+
+http_content_disposition_header( $t_filename, $t_show_inline );
 
 header( 'Content-Type: ' . $t_content_type );
 header( 'Content-Length: ' . $v_filesize );

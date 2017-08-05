@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,32 +44,22 @@
 $s_plugin_graph_title = 'Mantis grafieken';
 $s_plugin_graph_description = 'Officiële plugin voor grafieken.';
 $s_plugin_MantisGraph_title = 'Mantis grafieken';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Geavanceerde samenvatting';
 $s_plugin_MantisGraph_config = 'Instellingen';
 $s_plugin_MantisGraph_synthesis_link = 'Synthese';
-$s_plugin_MantisGraph_status_link = 'Per status';
-$s_plugin_MantisGraph_priority_link = 'Per prioriteit';
-$s_plugin_MantisGraph_severity_link = 'Per impact';
-$s_plugin_MantisGraph_category_link = 'Per categorie';
-$s_plugin_MantisGraph_resolution_link = 'Per oplossing';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafieken';
-$s_plugin_MantisGraph_library = 'Te gebruiken grafiekenbibliotheek';
-$s_plugin_MantisGraph_bundled = 'Bijgevoegde gebruiken';
-$s_plugin_MantisGraph_window_width = 'Grafiekbreedte (in pixels)';
-$s_plugin_MantisGraph_bar_aspect = 'staafdiagramverhouding (hoogte/breedte)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Aantal in iedere rij te plaatsen grafieken op de uitgebreide samenvattingspagina';
-$s_plugin_MantisGraph_font = 'Lettertype';
-$s_plugin_MantisGraph_jpgraph_path = 'Systeempad voor de JpGraph-bibliotheek';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Laat leeg voor standaard: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing verbetert het visuele voorkomen van een aantal grafieken ten koste van prestaties (tot acht keer trager)';
-$s_plugin_MantisGraph_enabled = 'Ingeschakeld';
-$s_plugin_MantisGraph_disabled = 'Uitgeschakeld';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Overzicht grafieken: Status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Overzicht grafieken: Prioriteit';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Overzicht grafieken: Impact';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Overzicht grafieken: Categorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Overzicht grafieken: Oplossing';
+$s_plugin_MantisGraph_status_link = 'Op status';
+$s_plugin_MantisGraph_priority_link = 'Op prioriteit';
+$s_plugin_MantisGraph_severity_link = 'Op impact';
+$s_plugin_MantisGraph_category_link = 'Op categorie';
+$s_plugin_MantisGraph_resolution_link = 'Op oplossing';
+$s_plugin_MantisGraph_issue_trends_link = 'Meldingentrends';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafieken op status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafieken op prioriteit';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafieken op impact';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafieken op categorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafieken op oplossing';
+$s_plugin_MantisGraph_graph_developer_title = 'Grafieken op ontwikkelaar';
+$s_plugin_MantisGraph_graph_reporter_title = 'Grafieken op melder';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Meldingen geopend, opgelost en open';
 $s_plugin_MantisGraph_by_status_pct = 'status percentage';
 $s_plugin_MantisGraph_by_priority_pct = 'prioriteit percentage';
 $s_plugin_MantisGraph_by_severity_pct = 'impact percentage';
@@ -80,13 +70,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'per prioriteit en status';
 $s_plugin_MantisGraph_by_resolution_mix = 'per oplossing en status';
 $s_plugin_MantisGraph_legend_still_open = 'Openstaand';
 $s_plugin_MantisGraph_legend_resolved = 'Opgelost';
-$s_plugin_MantisGraph_legend_assigned = 'Toegewezen';
-$s_plugin_MantisGraph_legend_total = 'Totaal';
-$s_plugin_MantisGraph_legend_opened = 'Geopend';
-$s_plugin_MantisGraph_legend_closed = 'Gesloten';
 $s_plugin_MantisGraph_legend_reported = 'Aangemeld';
-$s_plugin_MantisGraph_cumulative = 'Cumulatief';
-$s_plugin_MantisGraph_not_enough_data = 'Onvoldoende gegevens om een grafiek te maken';
 $s_plugin_MantisGraph_period_none = 'Geen';
 $s_plugin_MantisGraph_period_this_week = 'Deze week';
 $s_plugin_MantisGraph_period_last_week = 'Afgelopen week';
@@ -98,12 +82,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Afgelopen kwartaal';
 $s_plugin_MantisGraph_period_year_to_date = 'Dit jaar';
 $s_plugin_MantisGraph_period_select = 'Op te geven datums';
 $s_plugin_MantisGraph_period_last_year = 'Afgelopen jaar';
-$s_plugin_MantisGraph_select = 'Maak een keuze';
-$s_plugin_MantisGraph_select_bystatus = 'op status';
-$s_plugin_MantisGraph_select_summbystatus = 'Samenvatting per status';
-$s_plugin_MantisGraph_select_bycat = 'Samenvatting per categorie';
-$s_plugin_MantisGraph_select_both = 'Samenvatting per status en categorie';
-$s_plugin_MantisGraph_show_as_graph = 'Als grafiek weergeven';
-$s_plugin_MantisGraph_show_as_table = 'Als tabel weergeven';
-$s_plugin_MantisGraph_show_graph = 'Grafiek weergeven';
 $s_plugin_MantisGraph_graph_page = 'Meldingsgeschiedenis als grafiek';

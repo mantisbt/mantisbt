@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,7 +45,6 @@
 $s_plugin_graph_title = 'Wykresy Mantis';
 $s_plugin_graph_description = 'Oficjalna wtyczka wykresów.';
 $s_plugin_MantisGraph_title = 'Wykresy Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Zestawienie zaawansowane';
 $s_plugin_MantisGraph_config = 'Konfiguracja';
 $s_plugin_MantisGraph_synthesis_link = 'Synteza';
 $s_plugin_MantisGraph_status_link = 'Według statusu';
@@ -53,19 +52,6 @@ $s_plugin_MantisGraph_priority_link = 'Według priorytetu';
 $s_plugin_MantisGraph_severity_link = 'Według ważności';
 $s_plugin_MantisGraph_category_link = 'Według kategorii';
 $s_plugin_MantisGraph_resolution_link = 'Według rozwiązania';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Wykres';
-$s_plugin_MantisGraph_library = 'Użyta biblioteka wykresów';
-$s_plugin_MantisGraph_bundled = 'Dołączone';
-$s_plugin_MantisGraph_window_width = 'Szerokość wykresu (w pikselach)';
-$s_plugin_MantisGraph_bar_aspect = 'Wykres słupkowy proporcjonalny (wysokość/szerokość)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Wykresy wyświetlane dla każdego wiersza na stronie zestawienia zaawansowanego';
-$s_plugin_MantisGraph_font = 'Czcionka';
-$s_plugin_MantisGraph_jpgraph_path = 'Ścieżka systemowa do biblioteki JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Pozostaw puste by przyjąć wartość domyślną: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Antyaliasing JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Antyaliasing poprawia czytelność niektórych wykresów kosztem wydajności (spowolnienie do 8x)';
-$s_plugin_MantisGraph_enabled = 'Włączony';
-$s_plugin_MantisGraph_disabled = 'Wyłączony';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Wykres podsumowujący wg statusu';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Wykres podsumowujący wg priorytetu';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Wykres podsumowujący wg ważności';
@@ -81,13 +67,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'Wg priorytetu i statusu';
 $s_plugin_MantisGraph_by_resolution_mix = 'Wg rozwiązania i statusu';
 $s_plugin_MantisGraph_legend_still_open = 'Otwarte';
 $s_plugin_MantisGraph_legend_resolved = 'Rozwiązane';
-$s_plugin_MantisGraph_legend_assigned = 'Przypisane';
-$s_plugin_MantisGraph_legend_total = 'Łącznie';
-$s_plugin_MantisGraph_legend_opened = 'Otwarte';
-$s_plugin_MantisGraph_legend_closed = 'Zamknięte';
 $s_plugin_MantisGraph_legend_reported = 'Zgłoszone';
-$s_plugin_MantisGraph_cumulative = 'Zbiorczy';
-$s_plugin_MantisGraph_not_enough_data = 'Brak wystarczającej ilości danych do stworzenia wykresu';
 $s_plugin_MantisGraph_period_none = 'brak';
 $s_plugin_MantisGraph_period_this_week = 'Ten tydzień';
 $s_plugin_MantisGraph_period_last_week = 'Poprzedni tydzień';
@@ -99,12 +79,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Poprzedni kwartał';
 $s_plugin_MantisGraph_period_year_to_date = 'Rok do daty';
 $s_plugin_MantisGraph_period_select = 'Wybrane daty';
 $s_plugin_MantisGraph_period_last_year = 'Poprzedni rok';
-$s_plugin_MantisGraph_select = 'Wybierz';
-$s_plugin_MantisGraph_select_bystatus = 'według statusu';
-$s_plugin_MantisGraph_select_summbystatus = 'Zestawienie według statusu';
-$s_plugin_MantisGraph_select_bycat = 'Zestawnienie według kategorii';
-$s_plugin_MantisGraph_select_both = 'Zestawienie wdług statusu i kategorii';
-$s_plugin_MantisGraph_show_as_graph = 'Pokaż jako wykres';
-$s_plugin_MantisGraph_show_as_table = 'Pokaż jako tabela';
-$s_plugin_MantisGraph_show_graph = 'Pokaż wykres';
 $s_plugin_MantisGraph_graph_page = 'Wykres historii błędów';

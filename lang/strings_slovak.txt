@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@
  * @author Dregad
  * @author Helix84
  * @author Kusavica
+ * @author Llucenic
  * @author Mikulas1
  * @author Rattkin
  * @author Rudko
@@ -111,7 +112,6 @@ $s_bugnote_link_title = 'Priamy odkaz na poznámku';
 $s_delete_bugnote_button = 'Zmazať poznámku';
 $s_delete_bugnote_sure_msg = 'Naozaj chcete odstrániť túto poznámku?';
 $s_bug_relationships = 'Vzťahy príspevku';
-$s_bug_relationships_label = 'Vzťahy:';
 $s_empty_password_sure_msg = 'Používateľ má prázdné heslo. Naozaj si prajete pokračovať?';
 $s_empty_password_button = 'Použiť prázdne heslo';
 $s_reauthenticate_title = 'Overiť';
@@ -254,7 +254,6 @@ $s_email_notification_title_for_action_monitor = 'Problém %1$s je od teraz sled
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
 $s_email_project = 'Projekt';
-$s_email_project_label = 'Projekt:';
 $s_email_bug = 'ID bugu';
 $s_email_category = 'Kategória';
 $s_email_reproducibility = 'Vyvolanie';
@@ -293,6 +292,13 @@ $s_access_level_label = 'Úroveň prístupu';
 $s_update_user_button = 'Aktualizovať používateľa';
 $s_verify_warning = 'Informácie o Vašom účte boli overené. Vami obdržaná potvrdzujúca správa je odteraz neplatná.';
 $s_verify_change_password = 'Musíte sem zadať svoje heslo pre obnovenie prihlásenia.';
+$s_api_token_name = 'Názov tokenu';
+$s_api_token_disclose_message = 'Token pre prístup k API';
+$s_api_token_displayed_once = 'Tento token sa zobrazí iba raz.';
+$s_api_tokens_title = 'Tokeny API';
+$s_api_token_revoke_button = 'Odvolať';
+$s_api_token_never_used = 'Nepoužitý';
+$s_last_used = 'Naposledy použitý';
 $s_default_account_preferences_title = 'Nastavenia účtu';
 $s_default_project = 'Defaultný projekt';
 $s_refresh_delay = 'Interval pre refresh';
@@ -323,7 +329,6 @@ $s_profile_added_msg = 'Profil bol pridaný...';
 $s_profile_deleted_msg = 'Profil bol zmazaný...';
 $s_edit_profile_title = 'Upraviť profil';
 $s_platform = 'Platforma';
-$s_platform_label = 'Platforma:';
 $s_additional_description = 'Další popis';
 $s_update_profile_button = 'Uložiť profil';
 $s_profile_defaulted_msg = 'Defaultný profil aktualizovaný...';
@@ -374,7 +379,6 @@ $s_delete_bug_sure_msg = 'Skutočne chcete zmazať tento problém?';
 $s_delete_bug_button = 'Zmazať';
 $s_monitor_bug_button = 'Monitorovať';
 $s_unmonitor_bug_button = 'Skončiť monitorovanie';
-$s_file_upload_msg = 'Upload súboru prebehol úspešne';
 $s_upload_file = 'Upload súboru';
 $s_upload_files = 'Nahrať súbory';
 $s_select_file = 'Vyberte súbor';
@@ -400,7 +404,7 @@ $s_reminder_list_truncated = 'zoznam príjemcov bol skrátený';
 $s_bug_send_button = 'Odoslať';
 $s_reminder = 'Upozornenie';
 $s_reminder_explain = 'Toto upozornenie bude odoslané vybraným príjemcom so žiadosťou o spätnú väzbu v tejto záležitosti.';
-$s_reminder_monitor = 'Títo príjemcovia začali sledovať tento problém. Môžu sa odhlásiť použitím tlačidla Koniec sledovania.';
+$s_reminder_monitor = 'Títo príjemcovia začnú tiež sledovať tento problém. Môžu sa odhlásiť použitím tlačidla Koniec sledovania.';
 $s_reminder_store = 'Toto upozornenie bude uložené ako poznámka k problému.';
 $s_confirm_sponsorship = 'Prosím potvrďte, že chcete sponzorovať problém %1$d z %2$s.';
 $s_stick_bug_button = 'Zafixovať';
@@ -411,35 +415,24 @@ $s_update_simple_link = 'Jednoduchá aktulizácia';
 $s_updating_bug_advanced_title = 'Aktualizácia informácií o probléme';
 $s_id = 'ID';
 $s_category = 'Kategória';
-$s_category_label = 'Kategória:';
 $s_severity = 'Dôležitosť';
-$s_severity_label = 'Dôležitosť:';
 $s_reproducibility = 'Reprodukovateľnosť';
 $s_date_submitted = 'Dátum vloženia';
 $s_last_update = 'Posledná zmena';
 $s_reporter = 'Autor';
 $s_assigned_to = 'Priradené';
-$s_assigned_to_label = 'Priradené k:';
 $s_priority = 'Priorita';
-$s_priority_label = 'Priorita:';
 $s_resolution = 'Riešenie';
-$s_resolution_label = 'Rozlíšenie:';
 $s_status = 'Stav';
-$s_status_label = 'Stav:';
 $s_duplicate_id = 'Duplicitné ID';
 $s_os = 'OS';
-$s_os_label = 'OS:';
 $s_projection = 'Dopad';
 $s_os_version = 'Verzia';
-$s_os_version_label = 'Verzia OS:';
 $s_eta = 'Doba opravy';
 $s_product_version = 'Verzia produktu';
-$s_product_version_label = 'Produktová verzia:';
 $s_build = 'Zostavenie';
 $s_fixed_in_version = 'Vyriešené vo verzii';
-$s_fixed_in_version_label = 'Opravené vo verzii:';
 $s_target_version = 'Cieľová verzia';
-$s_target_version_label = 'Cieľové verzia:';
 $s_votes = 'Hlasy';
 $s_summary = 'Zhrnutie';
 $s_description = 'Popis';
@@ -447,7 +440,6 @@ $s_steps_to_reproduce = 'Kroky k vyvolaniu';
 $s_update_information_button = 'Uložit';
 $s_sticky_issue = 'Zafixovaný Problém';
 $s_profile = 'Profil';
-$s_profile_label = 'Profil:';
 $s_updating_bug_simple_title = 'Aktualizácia problému';
 $s_view_revisions = 'Zobraziť revízie';
 $s_view_num_revisions = 'Zobrazenie %1$d revízií';
@@ -460,7 +452,6 @@ $s_all_revisions = 'Všetky Revízie';
 $s_back_to_issue = 'Späť na Problém';
 $s_confirm_revision_drop = 'Ste si istý, že chcete zahodiť túto revíziu problému?';
 $s_vote_added_msg = 'Hlas bol pridaný...';
-$s_bugnote_added_msg = 'Poznámka k problému bola pridaná...';
 $s_bugnote_deleted_msg = 'Poznámka k problému bola úspešne zmazaná...';
 $s_bug_notes_title = 'Poznámky k problému';
 $s_edit_bugnote_title = 'Upraviť poznámku k problému';
@@ -655,7 +646,6 @@ $s_edit_project_title = 'Editovať projekt';
 $s_project_name = 'Meno projektu';
 $s_project_name_label = 'Názov projektu:';
 $s_view_status = 'Zobraziť status';
-$s_view_status_label = 'Zobraziť stav:';
 $s_public = 'verejný';
 $s_private = 'súkromný';
 $s_update_project_button = 'Aktualizovať projekt';
@@ -858,13 +848,14 @@ $s_orct = '(otvorené/vyriešené/uzatvorené/celkom)';
 $s_any = 'všetko';
 $s_all = 'všetko';
 $s_show = 'Ukázať';
-$s_show_label = 'Zobraziť:';
 $s_changed = 'Zmenené(h)';
 $s_viewing_bugs_title = 'Zobrazujú sa problémy';
 $s_updated = 'Aktualizácia';
 $s_sticky = 'Ukázať Fixované Problémy';
+$s_sort = 'Triediť podľa';
 $s_issue_id = 'Problém č.';
 $s_recently_visited = 'Naposledy Navštívené';
+$s_note_user_id = 'Poznámka Od';
 $s_filter_match_type = 'Typ zhody';
 $s_filter_match_all = 'Všetky podmienky';
 $s_filter_match_any = 'Akékoľvek podmienky';
@@ -992,7 +983,6 @@ $s_relationship_deleted = 'Vzťah odobraný';
 $s_no_relationship = 'bez vzťahu';
 $s_relationship_replaced = 'Vzťah nahradený';
 $s_replace_relationship_button = 'Nahradiť';
-$s_replace_relationship_sure_msg = 'Medzi týmito problémami už existuje vzťah. Ste si istý, že ho chcete nahradiť?';
 $s_relationship_with_parent = 'Vzťah s rodičovským problémom';
 $s_delete_relationship_button = 'Odobrať';
 $s_delete_relationship_sure_msg = 'Naozaj chcete zmazať tento vzťah?';
@@ -1244,7 +1234,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Nepovolený pr
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor nemá elektronickú adresu. Opravte prosím váš profil';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfiguračná voľba „%1$s“ má neplatnú hodnotu „%2$s“';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akcia nemôže býť uskutočnená, pretože problém „%1$d“ je v stave LEN ČÍTANIE';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Vzťah mezi týmito dvoma problémami už je.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Vzťah nenájdutý.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Prístup zakázaný: Problém %1$d vyžaduje vyššiu prístupovou úroveň.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Problém nemôže byť vo vzťahu sám so sebou.';

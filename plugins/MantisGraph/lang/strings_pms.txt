@@ -1,0 +1,82 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Piedmontese (Piemontèis)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Borichèt
+ * @author Dragonòt
+ */
+
+$s_plugin_graph_title = 'Gràfich Mantis';
+$s_plugin_graph_description = 'Prèisa ëd gràfich ofissiaj.';
+$s_plugin_MantisGraph_title = 'Gràfich ëd Mantis';
+$s_plugin_MantisGraph_config = 'Configurassion';
+$s_plugin_MantisGraph_synthesis_link = 'Sìntesi';
+$s_plugin_MantisGraph_status_link = 'Për stat';
+$s_plugin_MantisGraph_priority_link = 'Për priorità';
+$s_plugin_MantisGraph_severity_link = 'Për severità';
+$s_plugin_MantisGraph_category_link = 'Për categorìa';
+$s_plugin_MantisGraph_resolution_link = 'Për arzolussion';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gràfich ëd sìntesi për stat';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gràfich ëd sìntesi për priorità';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gràfich ëd sìntesi për severità';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gràfich ëd sìntesi për categorìa';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gràfich ëd sìntesi për arzolussion';
+$s_plugin_MantisGraph_by_status_pct = 'Përsentual për stat';
+$s_plugin_MantisGraph_by_priority_pct = 'Përsentual për priorità';
+$s_plugin_MantisGraph_by_severity_pct = 'Përsentual për severità';
+$s_plugin_MantisGraph_by_category_pct = 'Përsentual për categorìa';
+$s_plugin_MantisGraph_by_resolution_pct = 'Përsentual për arzolussion';
+$s_plugin_MantisGraph_by_severity_mix = 'Për severità e stat';
+$s_plugin_MantisGraph_by_priority_mix = 'Për priorità e stat';
+$s_plugin_MantisGraph_by_resolution_mix = 'Për arzolussion e stat';
+$s_plugin_MantisGraph_legend_still_open = 'Ancó Duvert';
+$s_plugin_MantisGraph_legend_resolved = 'Arzolvù';
+$s_plugin_MantisGraph_legend_reported = 'Signalà';
+$s_plugin_MantisGraph_period_none = 'Gnun';
+$s_plugin_MantisGraph_period_this_week = 'Sta sman-a-sì';
+$s_plugin_MantisGraph_period_last_week = 'Ùltima sman-a';
+$s_plugin_MantisGraph_period_two_weeks = 'Ùltime doe sman-e';
+$s_plugin_MantisGraph_period_this_month = 'Sto mèis-sì';
+$s_plugin_MantisGraph_period_last_month = 'Ùltim mèis';
+$s_plugin_MantisGraph_period_this_quarter = 'Ës trimestr-sì';
+$s_plugin_MantisGraph_period_last_quarter = 'Ùltim trimestr';
+$s_plugin_MantisGraph_period_year_to_date = 'St\'Ann-sì';
+$s_plugin_MantisGraph_period_select = 'Date qualsëssìa';
+$s_plugin_MantisGraph_period_last_year = 'Ùltim ann';
+$s_plugin_MantisGraph_graph_page = 'Stòria dij problema dël gràfich';

@@ -51,6 +51,10 @@ $f_project_id = gpc_get_int( 'project_id' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
+if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	access_denied();
+}
+
 $t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 foreach ( $t_subproject_ids as $t_subproject_id ) {
 	$f_inherit_child = gpc_get_bool( 'inherit_child_' . $t_subproject_id, false );

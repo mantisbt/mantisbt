@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,13 +40,13 @@
  *
  * @author Atrol
  * @author Floh
+ * @author Metalhead64
  * @author Umherirrender
  */
 
 $s_plugin_graph_title = 'MantisBT-Grafiken';
 $s_plugin_graph_description = 'Offizielles Grafik-Plugin.';
 $s_plugin_MantisGraph_title = 'MantisBT-Grafiken';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Erweiterte Zusammenfassung';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Zusammenstellung';
 $s_plugin_MantisGraph_status_link = 'Nach Status';
@@ -54,24 +54,15 @@ $s_plugin_MantisGraph_priority_link = 'Nach Priorität';
 $s_plugin_MantisGraph_severity_link = 'Nach Schweregrad';
 $s_plugin_MantisGraph_category_link = 'Nach Kategorie';
 $s_plugin_MantisGraph_resolution_link = 'Nach Lösung';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Grafik';
-$s_plugin_MantisGraph_library = 'zu benutzende Grafik-Bibliothek';
-$s_plugin_MantisGraph_bundled = 'Mitgelieferte nutzen';
-$s_plugin_MantisGraph_window_width = 'Grafik-Breite (in Pixeln)';
-$s_plugin_MantisGraph_bar_aspect = 'Seitenverhältnis der Grafiken (Höhe/Breite)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Grafiken pro Zeile in der „Erweiterten Zusammenfassung“';
-$s_plugin_MantisGraph_font = 'Schriftart';
-$s_plugin_MantisGraph_jpgraph_path = 'Systempfad für die JpGraph-Bibliothek';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Leerlassen für Standard: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph Anti-Aliasing';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-Aliasing verbessert das visuelle Erscheinungsbild von bestimmten Graphen auf Kosten der Performanz (bis zu 8x langsamer)';
-$s_plugin_MantisGraph_enabled = 'An';
-$s_plugin_MantisGraph_disabled = 'Aus';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Grafikzusammenstellung nach Status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafikzusammenstellung nach Priorität';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafikzusammenstellung nach Schweregrad';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Grafikzusammenstellung nach Kategorie';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikzusammenstellung nach Lösung';
+$s_plugin_MantisGraph_issue_trends_link = 'Eintragstrends';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Grafiken nach Status';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Grafiken nach Priorität';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Grafiken nach Schweregrad';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafiken nach Kategorie';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafiken nach Lösung';
+$s_plugin_MantisGraph_graph_developer_title = 'Grafiken nach Entwickler';
+$s_plugin_MantisGraph_graph_reporter_title = 'Grafiken nach Reporter';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Offene, erledigte und verbleibende Einträge';
 $s_plugin_MantisGraph_by_status_pct = 'nach Status Prozent';
 $s_plugin_MantisGraph_by_priority_pct = 'nach Priorität Prozent';
 $s_plugin_MantisGraph_by_severity_pct = 'nach Schweregrad Prozent';
@@ -82,13 +73,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'nach Priorität und Status';
 $s_plugin_MantisGraph_by_resolution_mix = 'nach Lösung und Status';
 $s_plugin_MantisGraph_legend_still_open = 'Noch offen';
 $s_plugin_MantisGraph_legend_resolved = 'Erledigt';
-$s_plugin_MantisGraph_legend_assigned = 'Zugewiesen';
-$s_plugin_MantisGraph_legend_total = 'Gesamt';
-$s_plugin_MantisGraph_legend_opened = 'Geöffnet';
-$s_plugin_MantisGraph_legend_closed = 'Geschlossen';
 $s_plugin_MantisGraph_legend_reported = 'Gemeldet';
-$s_plugin_MantisGraph_cumulative = 'Kumulierend';
-$s_plugin_MantisGraph_not_enough_data = 'keine ausreichenden Daten für Grafik vorhanden';
 $s_plugin_MantisGraph_period_none = 'Keine';
 $s_plugin_MantisGraph_period_this_week = 'Diese Woche';
 $s_plugin_MantisGraph_period_last_week = 'Letzte Woche';
@@ -100,12 +85,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Letztes Quartal';
 $s_plugin_MantisGraph_period_year_to_date = 'Jahr nach Datum';
 $s_plugin_MantisGraph_period_select = 'Beliebiges Datum';
 $s_plugin_MantisGraph_period_last_year = 'Letztes Jahr';
-$s_plugin_MantisGraph_select = 'Bitte wählen Sie';
-$s_plugin_MantisGraph_select_bystatus = 'nach Status';
-$s_plugin_MantisGraph_select_summbystatus = 'Übersicht nach Status';
-$s_plugin_MantisGraph_select_bycat = 'Übersicht nach Kategorie';
-$s_plugin_MantisGraph_select_both = 'Übersicht nach Status und Kategorie';
-$s_plugin_MantisGraph_show_as_graph = 'Als Grafik anzeigen';
-$s_plugin_MantisGraph_show_as_table = 'Als Tabelle anzeigen';
-$s_plugin_MantisGraph_show_graph = 'Grafik anzeigen';
 $s_plugin_MantisGraph_graph_page = 'Grafische Eintrags-Historie';
+$s_plugin_MantisGraph_graph_topdev = 'Top-Entwickler nach erledigten Einträgen';
+$s_plugin_MantisGraph_graph_opendev = 'Entwickler nach offenen Einträgen';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Top-Reporter nach erledigten Einträgen';

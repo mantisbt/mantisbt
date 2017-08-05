@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,14 +42,10 @@
  */
 
 $s_plugin_graph_description = 'الملحق الرسومى الرسمى.';
-$s_plugin_MantisGraph_menu_advanced_summary = 'ملخّص متقدم';
 $s_plugin_MantisGraph_config = 'ضبط';
 $s_plugin_MantisGraph_status_link = 'حسب الحالة';
 $s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
 $s_plugin_MantisGraph_category_link = 'حسب التصنيف';
-$s_plugin_MantisGraph_graph_bug_page_link = 'رسم';
-$s_plugin_MantisGraph_library = 'المكتبة الرسومية للاستخدام';
-$s_plugin_MantisGraph_window_width = 'عرض الرسم (بالبكسل)';
 $s_plugin_MantisGraph_graph_imp_status_title = 'صناعه الرسومات حسب الحالة';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'صناعه الرسومات حسب الأولوية';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'صناعه الرسومات حسب الشدة';
@@ -65,13 +61,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'حسب الأولويه والحالة'
 $s_plugin_MantisGraph_by_resolution_mix = 'حسب الحل والحالة';
 $s_plugin_MantisGraph_legend_still_open = 'مازالت مفتوحة';
 $s_plugin_MantisGraph_legend_resolved = 'تم حلها';
-$s_plugin_MantisGraph_legend_assigned = 'تم إيكالها';
-$s_plugin_MantisGraph_legend_total = 'إجمالي';
-$s_plugin_MantisGraph_legend_opened = 'مفتوحة';
-$s_plugin_MantisGraph_legend_closed = 'مغلقة';
 $s_plugin_MantisGraph_legend_reported = 'تم إبلاغها';
-$s_plugin_MantisGraph_cumulative = 'تراكمي';
-$s_plugin_MantisGraph_not_enough_data = 'لا بيانات كافيه لإنشاء الرسمة';
 $s_plugin_MantisGraph_period_none = 'لا شيء';
 $s_plugin_MantisGraph_period_this_week = 'هذا الأسبوع';
 $s_plugin_MantisGraph_period_last_week = 'آخر أسبوع';
@@ -83,12 +73,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'آخر ربع';
 $s_plugin_MantisGraph_period_year_to_date = 'السنه لتاريخه';
 $s_plugin_MantisGraph_period_select = 'تواريخ افتراضية';
 $s_plugin_MantisGraph_period_last_year = 'آخر سنة';
-$s_plugin_MantisGraph_select = 'من فضلك اختر';
-$s_plugin_MantisGraph_select_bystatus = 'حسب الحالة';
-$s_plugin_MantisGraph_select_summbystatus = 'الملخص حسب الحالة';
-$s_plugin_MantisGraph_select_bycat = 'الملخص حسب التصنيف';
-$s_plugin_MantisGraph_select_both = 'الملخص حسب الحاله والتصنيف';
-$s_plugin_MantisGraph_show_as_graph = 'عرض كرسمة';
-$s_plugin_MantisGraph_show_as_table = 'عرض كجدول';
-$s_plugin_MantisGraph_show_graph = 'عرض الرسمة';
 $s_plugin_MantisGraph_graph_page = 'تاريخ رسومات المشكلة';

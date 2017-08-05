@@ -50,10 +50,7 @@ require_api( 'tag_api.php' );
  * @return void
  */
 function action_attach_tags_print_title() {
-	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
 	echo lang_get( 'tag_attach_long' );
-	echo '</td></tr>';
 }
 
 /**
@@ -63,7 +60,7 @@ function action_attach_tags_print_title() {
 function action_attach_tags_print_fields() {
 	echo '<tr><th class="category">', lang_get( 'tag_attach_long' ), '</th><td>';
 	print_tag_input();
-	echo '<input type="submit" class="button" value="' . lang_get( 'tag_attach' ) . ' " /></td></tr>';
+	echo '<input type="submit" class="btn btn-primary btn-white btn-round btn-sm" value="' . lang_get( 'tag_attach' ) . ' " /></td></tr>';
 }
 
 /**

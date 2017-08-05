@@ -65,77 +65,79 @@ if( bug_is_readonly( $f_bug_id ) ) {
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
-html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+layout_page_begin();
 ?>
 
 <?php # Send reminder Form BEGIN ?>
-<br />
 
-<div id="send-reminder-div" class="form-container">
-	<form method="post" action="bug_reminder.php">
-		<fieldset>
-			<legend>
-				<span><?php echo lang_get( 'bug_reminder' ) ?></span>
-			</legend>
-
-			<?php echo form_security_field( 'bug_reminder' ) ?>
-
-			<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-
-			<div class="field-container">
-				<label for="recipient">
-					<span><?php echo lang_get( 'to' ) ?></span>
-				</label>
-				<span class="select">
-					<select id="recipient" name="to[]" multiple="multiple" size="12">
-<?php
-	$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-	$t_access_level = config_get( 'reminder_receive_threshold' );
-	if( $t_bug->view_state === VS_PRIVATE ) {
-		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-		if( $t_private_bug_threshold > $t_access_level ) {
-			$t_access_level = $t_private_bug_threshold;
-		}
-	}
-	$t_selected_user_id = 0;
-	print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
-?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
-
-			<div class="field-container">
-				<label for="reminder">
-					<span><?php echo lang_get( 'reminder' ) ?></span>
-				</label>
-				<span class="textarea">
-					<textarea id="reminder" name="body" cols="85" rows="10"></textarea>
-				</span>
-				<span class="label-style"></span>
-			</div>
-
-			<span class="info-text">
-<?php
-	echo lang_get( 'reminder_explain' ) . ' ';
-	if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
-		echo lang_get( 'reminder_monitor' ) . ' ';
-	}
-	if( ON == config_get( 'store_reminders' ) ) {
-		echo lang_get( 'reminder_store' );
-	}
-?>
-			</span>
-
-			<span class="submit-button">
-				<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
-			</span>
-
-		</fieldset>
+<div id="send-reminder-div" class="col-md-12 col-xs-12">
+<form method="post" action="bug_reminder.php">
+<?php echo form_security_field( 'bug_reminder' ) ?>
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-envelope"></i>
+		<?php echo lang_get( 'bug_reminder' ) ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+<tr>
+	<th class="category">
+		<?php echo lang_get( 'to' ) ?>
+	</th>
+	<td>
+		<select id="recipient" name="to[]" multiple="multiple" size="9" class="width-100">
+			<?php
+			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+			$t_access_level = config_get( 'reminder_receive_threshold' );
+			if( $t_bug->view_state === VS_PRIVATE ) {
+				$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+				if( $t_private_bug_threshold > $t_access_level ) {
+					$t_access_level = $t_private_bug_threshold;
+				}
+			}
+			$t_selected_user_id = 0;
+			print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+			?>
+		</select>
+	</td>
+	<td class="center">
+		<textarea class="form-control" name="body" cols="65" rows="10"></textarea>
+	</td>
+</tr>
+</table>
+	</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+		</div>
+	</div>
+	</div>
 	</form>
+	<div class="alert alert-info">
+		<p><i class="fa fa-info-circle fa-lg"> </i>
+		<?php
+			echo lang_get( 'reminder_explain' ) . ' ';
+			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
+				echo lang_get( 'reminder_monitor' ) . ' ';
+			}
+			if( ON == config_get( 'store_reminders' ) ) {
+				echo lang_get( 'reminder_store' );
+			}
+
+			if( mention_enabled() ) {
+				echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>' . mentions_tag() . user_get_field( auth_get_current_user_id(), 'username' ) . '</strong>' );
+			}
+		?>
+		</p>
+	</div>
 </div>
 
-<br />
 <?php
 $_GET['id'] = $f_bug_id;
 $t_fields_config_option = 'bug_view_page_fields';

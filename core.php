@@ -67,6 +67,9 @@ $g_request_time = microtime( true );
 
 ob_start();
 
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+
 # Load supplied constants
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
@@ -113,21 +116,48 @@ function require_api( $p_api_name ) {
  */
 function require_lib( $p_library_name ) {
 	static $s_libraries_included;
-	global $g_library_path;
+
 	if( !isset( $s_libraries_included[$p_library_name] ) ) {
+		global $g_library_path;
 		$t_library_file_path = $g_library_path . $p_library_name;
-		if( !file_exists( $t_library_file_path ) ) {
-			echo 'External library \'' . $t_library_file_path . '\' not found.';
-			exit;
+
+		if( file_exists( $t_library_file_path ) ) {
+			require_once( $t_library_file_path );
+		} else {
+			global $g_vendor_path;
+			$t_library_file_path = $g_vendor_path . $p_library_name;
+
+			if( file_exists( $t_library_file_path ) ) {
+				require_once( $t_library_file_path );
+			} else {
+				echo 'External library \'' . $t_library_file_path . '\' not found.';
+				exit;
+			}
 		}
 
-		require_once( $t_library_file_path );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
+
 		$s_libraries_included[$p_library_name] = 1;
 	}
+}
+
+/**
+ * Checks to see if script was queried through the HTTPS protocol
+ * @return boolean True if protocol is HTTPS
+ */
+function http_is_protocol_https() {
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
+	}
+
+	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		return true;
+	}
+
+	return false;
 }
 
 /**
@@ -212,11 +242,19 @@ crypto_init();
 require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
+# Set the default timezone
+# To reduce overhead, we assume that the timezone configuration is valid,
+# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
+# be raised. Use admin checks to validate configuration.
+@date_default_timezone_set( config_get_global( 'default_timezone' ) );
+$t_tz = @date_default_timezone_get();
+config_set_global( 'default_timezone', $t_tz, true );
+
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	if( OFF == $g_use_persistent_connections ) {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	} else {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, true );
 	}
 }
 
@@ -224,8 +262,8 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 shutdown_functions_register();
 
 # Initialise plugins
+require_api( 'plugin_api.php' );  // necessary for some upgrade steps
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'plugin_api.php' );
 	plugin_init_installed();
 }
 
@@ -239,25 +277,17 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-# Set the current timezone
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'authentication_api.php' );
 
-	# To reduce overhead, we assume that the timezone configuration is valid,
-	# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-	# be raised. Use admin checks to validate configuration.
-	@date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	$t_tz = @date_default_timezone_get();
-	config_set_global( 'default_timezone', $t_tz, true );
-
+	# Override the default timezone according to user's preferences
 	if( auth_is_user_authenticated() ) {
-		# Determine the current timezone according to user's preferences
 		require_api( 'user_pref_api.php' );
 		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
 		@date_default_timezone_set( $t_tz );
 	}
-	unset( $t_tz );
 }
+unset( $t_tz );
 
 # Cache current user's collapse API data
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
@@ -274,6 +304,7 @@ if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
 
 # Set HTTP response headers
 require_api( 'http_api.php' );
+event_signal( 'EVENT_CORE_HEADERS' );
 http_all_headers();
 
 # Push default language to speed calls to lang_get

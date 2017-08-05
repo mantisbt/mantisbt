@@ -38,7 +38,7 @@ require_api( 'user_api.php' );
 
 check_print_section_header_row( 'Anonymous access' );
 
-$t_anonymous_access_enabled = config_get_global( 'allow_anonymous_login' );
+$t_anonymous_access_enabled = auth_anonymous_enabled();
 check_print_info_row(
 	'Anonymous access is enabled',
 	$t_anonymous_access_enabled ? 'Yes' : 'No'
@@ -48,7 +48,7 @@ if( !$t_anonymous_access_enabled ) {
 	return;
 }
 
-$t_anonymous_account = config_get_global( 'anonymous_account' );
+$t_anonymous_account = auth_anonymous_account();
 check_print_test_row(
 	'anonymous_account configuration option is specified',
 	$t_anonymous_account !== '',

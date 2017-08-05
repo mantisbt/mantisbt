@@ -30,7 +30,6 @@
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
-require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -126,6 +125,12 @@ $i = $t_last_update + 1;
 $t_count_done = 0;
 
 while( ( $i <= $t_last_id ) && !$g_failed ) {
+	if ( $g_upgrade[$i] === null ) {
+		$i++;
+		$t_count_done++;
+		continue;
+	}
+
 	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];

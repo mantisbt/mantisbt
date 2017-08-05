@@ -245,10 +245,10 @@
         <title>My Account Page</title>
 
         <para>This page changes user alterable parameters for the system.
-            These selections are user specific.My AccountThis allows the user
-            to change their password, screen name, and email address. It also
-            reports the user's access levels on the current and other
-            projects.
+            These selections are user specific.  This allows the user to change
+            their password, username, real name and email address. It also
+            reports the user's access levels on the current project and default
+            access level used for public projects.
         </para>
 
         <section id="admin.pages.account.prefs">
@@ -295,7 +295,6 @@
                     </listitem>
                 </itemizedlist>
             </para>
-
         </section>
         <section id="admin.pages.account.profiles">
             <title>Profiles</title>
@@ -303,6 +302,25 @@
                 Profiles are shortcuts to define the values for Platform,
                 OS, and version. This page allows you to define and edit personal
                 shortcuts.
+            </para>
+        </section>
+        <section id="admin.pages.account.managecolumns">
+            <title>Manage Columns</title>
+            <para>
+                Provides the ability to select the fields to be displayed
+                in View Issues, Print Issues, CSV and Excel exports.  The changes
+                apply to the currently selected projects or All Projects for setting
+                the defaults.  It is also possible to copy such settings from/to
+                other projects.
+            </para>
+        </section>
+        <section id="admin.pages.account.apitokens">
+            <title>API Tokens</title>
+            <para>
+                Provides the ability to generate and revoke tokens that can be used by
+                applications and services to access MantisBT via its APIs.  This page
+                also provides information about the creation and last used timestamps
+                for such tokens.
             </para>
         </section>
     </section>
@@ -439,7 +457,7 @@
                 unless these values are 0. If the values are 0, the check is
                 skipped. All fields are also compared against the regular
                 expression. If the value matches the expression, then the value is
-                stored. For example, the expression "/^-?([0-9])*$/" can be used to
+                stored. For example, the expression "^-?([0-9])*$" can be used to
                 constrain an integer.The table below describes the field types and
                 the value constraints.
             </para>
@@ -777,7 +795,7 @@
                             <row>
                                 <entry>Status to set auto-assigned issues to</entry>
                                 <entry>$g_bug_assigned_status</entry>
-                                <entry>status issue is set to when assigned</entry>
+                                <entry>status to use when an issue is auto-assigned</entry>
                             </row>
                             <row>
                                 <entry>Limit reporter's access to their own issues</entry>

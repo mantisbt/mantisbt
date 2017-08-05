@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@
 $s_plugin_graph_title = 'Mga Talangguhit ng Mantis';
 $s_plugin_graph_description = 'Opisyal na pampasak ng talangguhit.';
 $s_plugin_MantisGraph_title = 'Mga Talangguhit ng Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Mas masulong na Buod';
 $s_plugin_MantisGraph_config = 'Pagkakaayos';
 $s_plugin_MantisGraph_synthesis_link = 'Pagbubuo';
 $s_plugin_MantisGraph_status_link = 'Ayon sa kalagayan';
@@ -52,19 +51,6 @@ $s_plugin_MantisGraph_priority_link = 'Ayon sa kahalagahan';
 $s_plugin_MantisGraph_severity_link = 'Ayon sa kalubhaan';
 $s_plugin_MantisGraph_category_link = 'Ayon sa kategorya';
 $s_plugin_MantisGraph_resolution_link = 'Ayon sa resolusyon';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Talangguhit';
-$s_plugin_MantisGraph_library = 'Gagamiting aklatan ng talangguhit';
-$s_plugin_MantisGraph_bundled = 'Nakabungkos';
-$s_plugin_MantisGraph_window_width = 'Lapad ng talangguhit (nasa mga piksel)';
-$s_plugin_MantisGraph_bar_aspect = 'katumbas na sukat ng aspeto ng talangguhit na bareta (taas/lapad)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Mga talangguhit na ipapakita bawat pababang hanay sa ibabaw ng pahina ng mas masulong na buod';
-$s_plugin_MantisGraph_font = 'Estilo ng titik';
-$s_plugin_MantisGraph_jpgraph_path = 'Landas ng sistema ng aklatang JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Iwanang walang laman para sa likas na pagtatakda: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Panlaban sa pagbabansag ng JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Pinapainam ng panlaban ng pagbabansag ang anyong natatanaw ng partikular na mga talangguhit kapalit ng pagganap (hanggang sa 8x na pagbagal)';
-$s_plugin_MantisGraph_enabled = 'Buhay';
-$s_plugin_MantisGraph_disabled = 'Nakapatay';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Mga talangguhit ng paglalangkap ayon sa kalagayan';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Mga talangguhit ng paglalangkap ayon sa priyoridad (dapat mauna)';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Mga talangguhit ng paglalangkap ayon sa kalubhaan';
@@ -80,13 +66,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'ayon sa priyoridad at kalagayan';
 $s_plugin_MantisGraph_by_resolution_mix = 'ayon sa kalinawan at kalagayan';
 $s_plugin_MantisGraph_legend_still_open = 'Nakabukas pa rin';
 $s_plugin_MantisGraph_legend_resolved = 'Nalutas na';
-$s_plugin_MantisGraph_legend_assigned = 'Itinakda/Itinalaga na';
-$s_plugin_MantisGraph_legend_total = 'Kabuoan';
-$s_plugin_MantisGraph_legend_opened = 'Binuksan';
-$s_plugin_MantisGraph_legend_closed = 'Isinara';
 $s_plugin_MantisGraph_legend_reported = 'Naiulat na';
-$s_plugin_MantisGraph_cumulative = 'Naiipon (kumulatibo)';
-$s_plugin_MantisGraph_not_enough_data = 'Hindi sapat ang dato upang makalikha ng talangguhit';
 $s_plugin_MantisGraph_period_none = 'Wala';
 $s_plugin_MantisGraph_period_this_week = 'Itong Linggong Ito';
 $s_plugin_MantisGraph_period_last_week = 'Noong Nakaraang Linggo';
@@ -98,12 +78,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Noong Huling Tatlong Buwan';
 $s_plugin_MantisGraph_period_year_to_date = 'Taon hanggang Ngayon';
 $s_plugin_MantisGraph_period_select = 'Itinalaga/Arbitraryong Mga Petsa';
 $s_plugin_MantisGraph_period_last_year = 'Noong Nakaraang Taon';
-$s_plugin_MantisGraph_select = 'Pumili Po Lamang';
-$s_plugin_MantisGraph_select_bystatus = 'ayon sa Kalagayan';
-$s_plugin_MantisGraph_select_summbystatus = 'Buod ayon sa Kalagayan';
-$s_plugin_MantisGraph_select_bycat = 'Buod ayon sa Kaurian';
-$s_plugin_MantisGraph_select_both = 'Buod ayon sa Kalagayan at Kaurian';
-$s_plugin_MantisGraph_show_as_graph = 'Ipakita bilang Talangguhit';
-$s_plugin_MantisGraph_show_as_table = 'Ipakita bilang Tabla';
-$s_plugin_MantisGraph_show_graph = 'Ipakita ang Talangguhit';
 $s_plugin_MantisGraph_graph_page = 'Italangguhit ang Kasaysayan ng Depekto (\'\'Bug\'\')';

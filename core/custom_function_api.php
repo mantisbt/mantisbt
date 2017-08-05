@@ -95,16 +95,23 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	}
 
 	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
-	echo utf8_str_pad( '', $p_issue_level * 6, '&#160;' ), '- ', string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
-
-	if( $t_bug->handler_id != 0 ) {
-		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
-	}
 
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $s_status[$t_bug->status], '.<br />';
+
+	# choose color based on status
+	$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+
+	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
+	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
+	echo string_get_bug_view_link( $p_issue_id );
+	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
+	if( $t_bug->handler_id != 0 ) {
+		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
+	}
+	echo '<div class="space-2"></div>';
 }
 
 /**
@@ -131,8 +138,8 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	$t_bug = bug_get( $p_issue_id );
 
 	if( bug_is_resolved( $p_issue_id ) ) {
-		$t_strike_start = '<span class="strike">';
-		$t_strike_end = '</span>';
+		$t_strike_start = '<s>';
+		$t_strike_end = '</s>';
 	} else {
 		$t_strike_start = $t_strike_end = '';
 	}
@@ -145,16 +152,22 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 
 	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
 
-	echo utf8_str_pad( '', $p_issue_level * 6, '&#160;' ), '- ', $t_strike_start, string_get_bug_view_link( $p_issue_id ), ': ', $t_category, string_display_line_links( $t_bug->summary );
-
-	if( $t_bug->handler_id != 0 ) {
-		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
-	}
-
 	if( !isset( $s_status[$t_bug->status] ) ) {
 		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $s_status[$t_bug->status], $t_strike_end, '.<br />';
+
+	# choose color based on status
+	$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+
+	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
+	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
+	echo string_get_bug_view_link( $p_issue_id );
+	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
+	if( $t_bug->handler_id != 0 ) {
+		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
+	}
+	echo '<div class="space-2"></div>';
 }
 
 /**
@@ -262,11 +275,8 @@ function custom_function_default_auth_can_change_password() {
 		CRYPT_FULL_SALT,
 		MD5,
 	);
-	if( in_array( config_get( 'login_method' ), $t_can_change ) ) {
-		return true;
-	} else {
-		return false;
-	}
+
+	return in_array( config_get( 'login_method' ), $t_can_change );
 }
 
 /**
@@ -304,12 +314,25 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 /**
  * Print the title of a column given its name.
  *
+ * @global type $t_sort             (deprecated) main sort column in use from filter
+ * @global type $t_dir              (deprecated) main sort dir in use from filter
  * @param string  $p_column         Custom_xxx for custom field xxx, or otherwise field name as in bug table.
  * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @param array $p_sort_properties  Array of filter sortin gproeprties, in the format returned from filter_get_visible_sort_properties_array()
  * @return void
  */
-function custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, array $p_sort_properties = null ) {
 	global $t_sort, $t_dir;
+
+	# if no sort properties are provided, resort to deprecated golbal vars, to keep compatibility
+	if( null === $p_sort_properties ) {
+		$t_main_sort_column = $t_sort;
+		$t_main_sort_dir = $t_dir;
+	} else {
+		# we use only the first ordered column
+		$t_main_sort_column = reset( $p_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME] );
+		$t_main_sort_dir = reset( $p_sort_properties[FILTER_PROPERTY_SORT_DIRECTION] );
+	}
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
@@ -325,8 +348,10 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 			$t_custom_field = lang_get_defaulted( $t_def['name'] );
 
 			if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-				print_view_bug_sort_link( $t_custom_field, $p_column, $t_sort, $t_dir, $p_columns_target );
-				print_sort_icon( $t_dir, $t_sort, $p_column );
+				print_view_bug_sort_link( $t_custom_field, $p_column, $t_main_sort_column, $t_main_sort_dir, $p_columns_target );
+				if( $p_column == $t_main_sort_column ) {
+					print_sort_icon( $t_main_sort_dir, $t_main_sort_column, $p_column );
+				}
 			} else {
 				echo $t_custom_field;
 			}
@@ -340,16 +365,16 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 
 		$t_function = 'print_column_title_' . $p_column;
 		if( function_exists( $t_function ) ) {
-			$t_function( $t_sort, $t_dir, $p_columns_target );
+			$t_function( $t_main_sort_column, $t_main_sort_dir, $p_columns_target );
 
 		} else if( isset( $t_plugin_columns[$p_column] ) ) {
 			$t_column_object = $t_plugin_columns[$p_column];
-			print_column_title_plugin( $p_column, $t_column_object, $t_sort, $t_dir, $p_columns_target );
+			print_column_title_plugin( $p_column, $t_column_object, $t_main_sort_column, $t_main_sort_dir, $p_columns_target );
 
 		} else {
 			echo '<th>';
-			print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
-			print_sort_icon( $t_dir, $t_sort, $p_column );
+			print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_main_sort_column, $t_main_sort_dir, $p_columns_target );
+			print_sort_icon( $t_main_sort_dir, $t_main_sort_column, $p_column );
 			echo '</th>';
 		}
 	}

@@ -31,12 +31,12 @@
 			<term>$g_debug_email</term>
 			<listitem>
 				<para>Used for debugging e-mail notifications.
-					When it is OFF, the emails are sent normally.
+					When it is '', the emails are sent normally.
 					If set to an e-mail address, all messages are sent
 					to it, with the original recipients (To, Cc, Bcc)
 					included in the message body.
 				</para>
-				<para>Default is OFF.</para>
+				<para>Default is ''.</para>
 			</listitem>
 		</varlistentry>
 
@@ -216,6 +216,15 @@ $g_display_errors = array(
 						</listitem>
 					</varlistentry>
 					<varlistentry>
+						<term>LOG_EMAIL_VERBOSE</term>
+						<listitem>
+							<para>
+								Enables extra logging for troubleshooting internals
+								of email queuing and sending.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
 						<term>LOG_EMAIL_RECIPIENT</term>
 						<listitem>
 							<para>logs the details of email recipient
@@ -270,7 +279,7 @@ or
 			<term>$g_log_destination</term>
 			<listitem>
 				<para>Specifies where the log data goes.
-					The following 4 options are available:
+					The following five options are available:
 				</para>
 
 				<variablelist>
@@ -281,6 +290,15 @@ or
 								<ulink url="http://php.net/error_log">
 									default PHP error log settings
 								</ulink>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>'none'</term>
+						<listitem>
+							<para>
+								Don't output the logs, but would still trigger EVENT_LOG
+								plugin event.
 							</para>
 						</listitem>
 					</varlistentry>

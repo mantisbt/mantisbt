@@ -127,7 +127,7 @@ $t_bug_data->summary                = gpc_get_string( 'summary' );
 $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
-$t_bug_data->due_date               = gpc_get_string( 'due_date', '' );
+$t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
 if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
@@ -137,6 +137,8 @@ $f_files                            = gpc_get_file( 'ufile', null );
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
+$f_tag_select                       = gpc_get_int( 'tag_select', 0 );
+$f_tag_string                       = gpc_get_string( 'tag_string', '' );
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
@@ -194,9 +196,9 @@ if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bu
 	$t_bug_data->handler_id = auth_get_current_user_id();
 }
 
-
 # Create the bug
 $t_bug_id = $t_bug_data->create();
+$t_bug_data->process_mentions();
 
 # Mark the added issue as visited so that it appears on the last visited list.
 last_visited_issue( $t_bug_id );
@@ -234,21 +236,6 @@ if( $f_master_bug_id > 0 ) {
 	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-	if( $f_rel_type > BUG_REL_ANY ) {
-		# Add the relationship
-		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
-
-		# Add log line to the history (both issues)
-		history_log_event_special( $f_master_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $t_bug_id );
-		history_log_event_special( $t_bug_id, BUG_ADD_RELATIONSHIP, $f_rel_type, $f_master_bug_id );
-
-		# Send the email notification
-		email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
-
-		# update relationship target bug last updated
-		bug_update_date( $t_bug_id );
-	}
-
 	# copy notes from parent
 	if( $f_copy_notes_from_parent ) {
 
@@ -269,6 +256,8 @@ if( $f_master_bug_id > 0 ) {
 				0,
 				0,
 				false );
+
+			# Note: we won't trigger mentions in the clone scenario.
 		}
 	}
 
@@ -277,13 +266,6 @@ if( $f_master_bug_id > 0 ) {
 		file_copy_attachments( $f_master_bug_id, $t_bug_id );
 	}
 }
-
-helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
-
-# Allow plugins to post-process bug data with the new bug ID
-event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
-
-email_bug_added( $t_bug_id );
 
 # log status and resolution changes if they differ from the default
 if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
@@ -294,46 +276,64 @@ if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
 	history_log_event( $t_bug_id, 'resolution', config_get( 'default_bug_resolution' ) );
 }
 
+helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
+
+# Allow plugins to post-process bug data with the new bug ID
+event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
+
+email_bug_added( $t_bug_id );
+
+if( $f_master_bug_id > 0 && $f_rel_type > BUG_REL_ANY ) {
+	relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type, /* email for source */ false );
+}
+
 form_security_purge( 'bug_report' );
 
-html_page_top1();
+layout_page_header_begin();
 
-if( !$f_report_stay ) {
+if( $f_report_stay ) {
+	$t_fields = array(
+		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
+		'os', 'os_build', 'target_version', 'build', 'view_state', 'due_date'
+	);
+	foreach( $t_fields as $t_field ) {
+		$t_data[$t_field] = $t_bug_data->$t_field;
+	}
+	$t_data['product_version'] = $t_bug_data->version;
+	$t_data['report_stay'] = 1;
+
+	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query($t_data);
+
+	html_meta_redirect( $t_report_more_bugs_url );
+} else {
 	html_meta_redirect( 'view_all_bug_page.php' );
 }
 
-html_page_top2();
+layout_page_header_end();
 
-echo '<div class="success-msg">';
-echo lang_get( 'operation_successful' ) . '<br />';
-print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+layout_page_begin( 'bug_report_page.php' );
 
-if( $f_report_stay ) {
-?>
-	<p>
-	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-	<?php # CSRF protection not required here - form does not result in modifications ?>
-		<input type="hidden" name="category_id" value="<?php echo string_attribute( $t_bug_data->category_id ) ?>" />
-		<input type="hidden" name="severity" value="<?php echo string_attribute( $t_bug_data->severity ) ?>" />
-		<input type="hidden" name="reproducibility" value="<?php echo string_attribute( $t_bug_data->reproducibility ) ?>" />
-		<input type="hidden" name="profile_id" value="<?php echo string_attribute( $t_bug_data->profile_id ) ?>" />
-		<input type="hidden" name="platform" value="<?php echo string_attribute( $t_bug_data->platform ) ?>" />
-		<input type="hidden" name="os" value="<?php echo string_attribute( $t_bug_data->os ) ?>" />
-		<input type="hidden" name="os_build" value="<?php echo string_attribute( $t_bug_data->os_build ) ?>" />
-		<input type="hidden" name="product_version" value="<?php echo string_attribute( $t_bug_data->version ) ?>" />
-		<input type="hidden" name="target_version" value="<?php echo string_attribute( $t_bug_data->target_version ) ?>" />
-		<input type="hidden" name="build" value="<?php echo string_attribute( $t_bug_data->build ) ?>" />
-		<input type="hidden" name="report_stay" value="1" />
-		<input type="hidden" name="view_state" value="<?php echo string_attribute( $t_bug_data->view_state ) ?>" />
-		<input type="hidden" name="due_date" value="<?php echo string_attribute( $t_bug_data->due_date ) ?>" />
-		<input type="submit" class="button" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
-	</form>
-	</p>
-<?php
+# Process tags
+if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
+	$t_result = tag_attach_many( $t_bug_id, $f_tag_string, $f_tag_select );
+	if ( $t_result !== true ) {
+		$t_tags_failed = $t_result;
+		if( count( $t_tags_failed ) > 0 ) {
+			echo '<div class="alert alert-danger">';
+			print_tagging_errors_table( $t_tags_failed );
+			echo '</div>';
+		}
+	}
 }
-?>
-</div>
 
-<?php
-html_page_bottom();
+$t_buttons = array(
+	array( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) ),
+	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
+);
+if( $f_report_stay ) {
+	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
+}
+
+html_operation_confirmation( $t_buttons, '', CONFIRMATION_TYPE_SUCCESS );
+
+layout_page_end();

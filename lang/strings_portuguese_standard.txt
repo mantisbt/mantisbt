@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -366,7 +366,6 @@ $s_delete_bug_sure_msg = 'Você tem certeza que deseja apagar este problema?';
 $s_delete_bug_button = 'Apagar';
 $s_monitor_bug_button = 'Acompanhar';
 $s_unmonitor_bug_button = 'Terminar acompanhamento';
-$s_file_upload_msg = 'Ficheiro Enviado com Sucesso';
 $s_upload_file = 'Enviar Ficheiro';
 $s_upload_files = 'Carregar Ficheiros';
 $s_select_file = 'Selecionar Ficheiro';
@@ -438,7 +437,6 @@ $s_all_revisions = 'Todas as revisões';
 $s_back_to_issue = 'Voltar ao problema';
 $s_confirm_revision_drop = 'Tem a certeza que quer apagar esta revisão do problema?';
 $s_vote_added_msg = 'Voto foi adicionado...';
-$s_bugnote_added_msg = 'Nota Adicionada...';
 $s_bugnote_deleted_msg = 'Nota foi apagada com sucesso...';
 $s_bug_notes_title = 'Notas';
 $s_edit_bugnote_title = 'Editar Nota';
@@ -472,6 +470,7 @@ $s_choose_project = 'Escolher projeto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'Pedir uma nova conta';
 $s_lost_password_link = 'Perdeu a sua palavra-chave?';
+$s_username_or_email = 'Nome de utilizador(a) ou endereço de correio eletrónico';
 $s_select_project_button = 'Selecionar projeto';
 $s_lost_password_title = 'Reposição da palavra-chave';
 $s_lost_password_done_title = 'Mensagem de palavra-chave enviada';
@@ -820,8 +819,10 @@ $s_changed = 'Modificado(hrs)';
 $s_viewing_bugs_title = 'Ver problemas';
 $s_updated = 'Atualizado';
 $s_sticky = 'Mostrar problemas colados';
+$s_sort = 'Ordenar por';
 $s_issue_id = 'Problema #';
 $s_recently_visited = 'Recentemente visitado';
+$s_note_user_id = 'Nota por';
 $s_filter_match_type = 'Tipo de correspondência';
 $s_filter_match_all = 'Todas as condições';
 $s_filter_match_any = 'Qualquer condição';
@@ -947,7 +948,6 @@ $s_relationship_deleted = 'Relacionamento apagado';
 $s_no_relationship = 'sem relacionamento';
 $s_relationship_replaced = 'Relacionamento substituído';
 $s_replace_relationship_button = 'Trocar';
-$s_replace_relationship_sure_msg = 'Já existe um relacionamento entre os dois problemas. Tem a certeza que quer substituí-lo?';
 $s_relationship_with_parent = 'Relacionamento com o problema pai';
 $s_delete_relationship_button = 'Apagar';
 $s_delete_relationship_sure_msg = 'Tem a certeza que quer remover este relacionamento?';
@@ -1166,7 +1166,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definição de campo per
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propriedade de campo personalizado inválido ( %1$s ).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Falha na Autenticação LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Falha na ligação ao servidor LDAP.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Atualização de registro LDAP falhou.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'A atualização do Registo LDAP falhou.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registo de Utilizador LDAP Não Encontrado.';
 $MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extensão LDAP Não Carregada.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Ligação à base de dados falhou. O erro recebido da base de dados foi #%1$d: %2$s.';
@@ -1191,7 +1191,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso negado:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'O patrocinador não indicou um endereço de email. Por favor, atualize o seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opção de configuração "%1$s" tem o valor inválido "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Não pode realizar esta ação porque o problema "%1$d" é só de leitura.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Já existe uma relação entre estes dois problemas.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relacionamento não encontrado.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Acesso negado: O problema %1$d requer nível de acesso mais alto.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Um problema não pode estar relacionado consigo próprio.';
@@ -1228,3 +1227,6 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página não pode ser acedid
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo de ordenação inválido.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de data inválido.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Não é possível atualizar o fuso horário.';
+$s_dropzone_cancel_upload = 'Cancelar carregamento';
+$s_dropzone_remove_file = 'Eliminar ficheiro';
+$s_dropzone_max_files_exceeded = 'Não pode carregar mais ficheiros.';

@@ -94,33 +94,7 @@ if( bug_exists( $t_dest_bug_id ) ) {
 
 helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete_relationship_button' ) );
 
-$t_bug_relationship_data = relationship_get( $f_rel_id );
-$t_rel_type = $t_bug_relationship_data->type;
-
-# delete relationship from the DB
 relationship_delete( $f_rel_id );
-
-# update bug last updated (just for the src bug)
-bug_update_date( $f_bug_id );
-
-# set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
-if( $f_bug_id == $t_bug_relationship_data->src_bug_id ) {
-	$t_bug_rel_type = $t_rel_type;
-	$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-} else {
-	$t_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-	$t_dest_bug_rel_type = $t_rel_type;
-}
-
-# send email and update the history for the src issue
-history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, $t_bug_rel_type, $t_dest_bug_id );
-email_relationship_deleted( $f_bug_id, $t_dest_bug_id, $t_bug_rel_type );
-
-if( bug_exists( $t_dest_bug_id ) ) {
-	# send email and update the history for the dest issue
-	history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, $t_dest_bug_rel_type, $f_bug_id );
-	email_relationship_deleted( $t_dest_bug_id, $f_bug_id, $t_dest_bug_rel_type );
-}
 
 form_security_purge( 'bug_relationship_delete' );
 

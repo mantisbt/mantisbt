@@ -53,9 +53,11 @@ require_api( 'workflow_api.php' );
 
 auth_reauthenticate();
 
-html_page_top( lang_get( 'manage_workflow_config' ) );
+layout_page_header( lang_get( 'manage_workflow_config' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_workflow_page.php' );
 
 # CSS class names for overrides color coding
@@ -135,14 +137,14 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		if( $g_can_change_workflow ) {
 			$t_flag_name = $p_from_status_id . ':' . $p_to_status_id;
 			$t_set = $t_flag ? 'checked="checked"' : '';
-			$t_value .= '<input type="checkbox" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
+			$t_value .= '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 		} else {
-			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
+			$t_value .= $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
 		}
 
 		# Add 'reopened' label
 		if( $p_from_status_id >= $t_resolved_status && $p_to_status_id == $t_reopen_status ) {
-			$t_value .= '<br />(' . $t_reopen_label . ')';
+			$t_value .= '<br /><small>(' . $t_reopen_label . ')</small>';
 		}
 	} else {
 		$t_value = '<td>&#160;';
@@ -160,24 +162,33 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
  */
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
-	echo '<div class="form-container">'. "\n";
-	echo '<h2>' . $p_section_name . '</h2>' . "\n";
-	echo "\t<table>\n";
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-random"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
+	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
 	echo "\t\t<thead>\n";
-	echo "\t\t" . '<tr class="row-category2">' . "\n";
-	echo "\t\t\t" . '<th class="form-title width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
-	echo "\t\t\t" . '<th class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
+	echo "\t\t" . '<tr>' . "\n";
+	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
 		. lang_get( 'next_status' ) . '</th>';
 	echo "\n\t\t" . '</tr>'. "\n";
-	echo "\t\t" . '<tr class="row-category2">' . "\n";
+	echo "\t\t" . '<tr>' . "\n";
 
 	foreach( $t_enum_statuses as $t_status ) {
-		echo "\t\t\t" . '<th class="form-title" style="text-align:center">&#160;'
+		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
 			. '&#160;</th>' ."\n";
 	}
 
-	echo "\t\t\t" . '<th class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
+	echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
 	echo "\t\t" . '</tr>' . "\n";
 	echo "\t\t</thead>\n";
 	echo "\t\t<tbody>\n";
@@ -205,7 +216,7 @@ function capability_row( $p_from_status ) {
 
 	echo "\t\t\t" . '<td class="center ' . $t_color . '">';
 	if( $g_can_change_workflow ) {
-		echo '<select name="default_' . $p_from_status . '">';
+		echo '<select name="default_' . $p_from_status . '" class="input-sm">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select>';
 	} else {
@@ -221,18 +232,18 @@ function capability_row( $p_from_status ) {
  */
 function section_end() {
 	global $g_can_change_workflow;
-	echo '</tbody></table>' . "\n";
+	echo '</tbody></table></div>' . "\n";
+	echo '</div></div></div>' . "\n";
+	echo '<div class="space-10"></div>';
 
-	echo '<div class="footer">' . "\n";
 	if( $g_can_change_workflow ) {
 		echo lang_get( 'workflow_change_access_label' ) . "&nbsp;\n";
 		echo '<select name="workflow_access">' . "\n";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
 		echo "\n" . '</select>' . "\n";
 	}
-	echo '</div>' . "\n";
 
-	echo '</div><br />' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -241,14 +252,23 @@ function section_end() {
  * @return void
  */
 function threshold_begin( $p_section_name ) {
-	echo '<div class="form-container">';
-	echo '<h2>' . $p_section_name . '</h2>' . "\n";
-	echo '<table>';
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
+	echo '<table class="table table-striped table-bordered table-condensed">';
 	echo '<thead>';
-	echo "\t" . '<tr class="row-category2">';
-	echo "\t\t" . '<th class="form-title width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
-	echo "\t\t" . '<th class="form-title" >' . lang_get( 'status_level' ) . '</th>' . "\n";
-	echo "\t\t" . '<th class="form-title" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
+	echo "\t" . '<tr>';
+	echo "\t\t" . '<th class="bold">' . lang_get( 'threshold' ) . '</th>' . "\n";
+	echo "\t\t" . '<th class="bold" >' . lang_get( 'status_level' ) . '</th>' . "\n";
+	echo "\t\t" . '<th class="bold" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
 	echo "\n";
 	echo '</thead>';
 	echo '<tbody>';
@@ -278,15 +298,15 @@ function threshold_row( $p_threshold ) {
 
 	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if( $t_can_change_threshold ) {
-		echo '<td class="center ' . $t_color . '"><select name="threshold_' . $p_threshold . '">';
+		echo '<td class="' . $t_color . '"><select name="threshold_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>' . "\n";
-		echo '<td class="' . $t_color_access . '"><select name="access_' . $p_threshold . '">';
-		print_enum_string_option_list( 'access_levels', $t_project_access );
+		echo '<td class="' . $t_color_access . '"><select name="access_' . $p_threshold . '" class="input-sm">';
+		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
 		echo '</select> </td>' . "\n";
 		$g_can_change_flags = true;
 	} else {
-		echo '<td' . $t_color . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>' . "\n";
+		echo '<td class="' . $t_color . '">' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>' . "\n";
 		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>' . "\n";
 	}
 
@@ -298,7 +318,9 @@ function threshold_row( $p_threshold ) {
  * @return void
  */
 function threshold_end() {
-	echo '</tbody></table></div><br />' . "\n";
+	echo '</tbody></table></div>' . "\n";
+	echo '</div></div></div>' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -307,13 +329,22 @@ function threshold_end() {
  * @return void
  */
 function access_begin( $p_section_name ) {
-	echo '<div class="form-container">' . "\n";
-	echo '<h2>' . $p_section_name . '</h2>' . "\n";
-	echo '<table>';
-	echo '<thead>' . "\n";
-	echo "\t\t" . '<tr class="row-category2"><th class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
-	echo '</thead>' . "\n";
-	echo '<tbody>' . "\n";
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-lock"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+    echo '        <div class="widget-toolbox padding-8 clearfix">';
+    echo            lang_get( 'access_change' );
+    echo '        </div>';
+    echo '        <div class="table-responsive">';
+    echo '        <table class="table table-striped table-bordered table-condensed">';
+    echo '        <tbody>';
 }
 
 /**
@@ -327,7 +358,7 @@ function access_row() {
 
 	$t_file_new = config_get_global( 'report_bug_threshold' );
 	$t_global_new = config_get( 'report_bug_threshold', null, ALL_USERS, ALL_PROJECTS );
-	$t_project_new = config_get( 'report_bug_threshold' );
+	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
 
 	$t_file_set = config_get_global( 'set_status_threshold' );
 	$t_global_set = config_get( 'set_status_threshold', null, ALL_USERS, ALL_PROJECTS );
@@ -337,15 +368,15 @@ function access_row() {
 
 	# Print the table rows
 	foreach( $t_enum_status as $t_status => $t_status_label ) {
-		echo "\t\t" . '<tr><td class="width30">'
+		echo "\t\t" . '<tr><td>'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>' . "\n";
 
 		if( $t_status == $t_submit_status ) {
 			# 'NEW' status
-			$t_level_project = $t_project_new;
+			$t_threshold = $t_report_bug_threshold;
 
-			$t_can_change = ( $g_access >= config_get_access( 'report_bug_threshold' ) );
-			$t_color = set_color_override( $t_file_new, $t_global_new, $t_project_new );
+			$t_can_change = $g_access >= config_get_access( 'report_bug_threshold' );
+			$t_color = set_color_override( $t_file_new, $t_global_new, $t_report_bug_threshold );
 			set_overrides( 'report_bug_threshold', $t_can_change, $t_color );
 		} else {
 			# Other statuses
@@ -358,21 +389,25 @@ function access_row() {
 			}
 
 			$t_level_global  = isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : $t_level_file;
-			$t_level_project = isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : $t_level_global;
+			$t_threshold = isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : $t_level_global;
 
 			$t_can_change = ( $g_access >= config_get_access( 'set_status_threshold' ) );
-			$t_color = set_color_override( $t_level_file, $t_level_global, $t_level_project );
+
+			$t_color = set_color_override( $t_level_file, $t_level_global, $t_threshold );
 			set_overrides( 'set_status_threshold', $t_can_change, $t_color );
 		}
 
-		if( $t_can_change ) {
-			echo '<td class="center ' . $t_color . '"><select name="access_change_' . $t_status . '">' . "\n";
-			print_enum_string_option_list( 'access_levels', $t_level_project );
+		# If threshold is an array (instead of an integer value), the input is not editable
+		$t_can_edit = !is_array( $t_threshold );
+		$t_min_level = access_threshold_min_level( $t_threshold );
+		if( $t_can_change && $t_can_edit ) {
+			echo '<td class="' . $t_color . '"><select name="access_change_' . $t_status . '" class="input-sm">' . "\n";
+			print_enum_string_option_list( 'access_levels', $t_min_level );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
 		} else {
-			echo '<td class="center ' . $t_color . '">'
-				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_level_project )
+			echo '<td class="' . $t_color . '">'
+				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_min_level )
 				. '</td>' . "\n";
 		}
 
@@ -387,22 +422,21 @@ function access_row() {
 function access_end() {
 	global $g_access;
 
-	echo '</tbody></table>' . "\n";
+	echo '</tbody></table></div>' . "\n";
+	echo '</div></div></div>' . "\n";
+	echo '<div class="space-10"></div>';
 
-	echo '<div class="footer">' . "\n";
 	if( $g_access >= config_get_access( 'set_status_threshold' ) ) {
 		echo lang_get( 'access_change_access_label' ) . "&nbsp;\n";
 		echo '<select name="status_access">' . "\n\t\t";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
 		echo "\n" . '</select>' . "\n";
 	}
-	echo '</div>' . "\n";
 
-	echo '</div>' . "\n";
-	echo '<br />' . "\n\n";
+	echo '<div class="space-10"></div>';
 }
 
-echo '<br /><br />';
+echo '<div class="space-10"></div>';
 
 # count arcs in and out of each status
 $t_enum_status = config_get( 'status_enum_string' );
@@ -423,7 +457,7 @@ foreach( $t_status_arr as $t_status => $t_label ) {
 	if( isset( $g_project_workflow['exit'][$t_status][$t_status] ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td></tr>';
+						. '</td><td class="alert alert-warning">' . lang_get( 'superfluous' ) . '</td></tr>';
 	}
 }
 
@@ -432,7 +466,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $g_project_workflow['exit'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'unreachable' ) . '</td></tr>';
 	}
 }
 
@@ -441,7 +475,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 < count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
@@ -450,7 +484,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
@@ -464,12 +498,16 @@ if( ALL_PROJECTS == $t_project ) {
 } else {
 	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
 }
-echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+
+echo '<div class="col-md-12 col-xs-12">' . "\n";
+echo '<div class="well">' . "\n";
+echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
 	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span class="' . COLOR_GLOBAL . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '</div>' . "\n";
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );
@@ -481,13 +519,21 @@ threshold_row( 'bug_reopen_status' );
 threshold_end();
 
 if( '' <> $t_validation_result ) {
-	echo '<table class="width100">';
-	echo '<tr><td class="form-title" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title width30">' . lang_get( 'status' ) . '</td>';
-	echo '<td class="form-title" >' . lang_get( 'comment' ) . '</td></tr>';
-	echo "\n";
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '	<h4 class="widget-title lighter">';
+	echo '		<i class="ace-icon fa fa-hand-o-right"></i>';
+	echo 		lang_get( 'validation' );
+	echo '	</h4>';
+	echo '</div>';
+	echo '<div class="widget-body">';
+	echo '	<div class="widget-main no-padding">';
+	echo '<div class="table-responsive">';
+	echo '<table class="table table-bordered table-condensed table-striped">';
+	echo '	<tr><td class="bold">' . lang_get( 'status' ) . '</td>';
+	echo '	<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
 	echo $t_validation_result;
-	echo '</table><br /><br />';
+	echo '</table></div></div></div></div>';
 }
 
 # Initialization for 'reopened' label handling
@@ -509,22 +555,18 @@ access_row();
 access_end();
 
 if( $g_can_change_flags ) {
-	echo '<div class="center">' . "\n";
-	echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
-	echo '</div>' . "\n";
-
+	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 	echo '</form>' . "\n";
 
 	if( 0 < count( $g_overrides ) ) {
-		echo '<div class="form-container">';
-		echo '<div class="submit-button">' . "\n";
+		echo '<div class="pull-right">';
 		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
 		echo '<fieldset>' . "\n";
 		echo form_security_field( 'manage_config_revert' );
 		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />';
 		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'" />';
-		echo '<input type="submit" class="button" value="';
+		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value=';
 		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
@@ -532,13 +574,12 @@ if( $g_can_change_flags ) {
 		}
 		echo '" />' . "\n";
 		echo '</fieldset>' . "\n";
-		echo '</form>' . "\n";
-		echo '</div></div>' . "\n";
+		echo '</form></div>' . "\n";
 	}
 
 
 } else {
 	echo '</form>' . "\n";
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

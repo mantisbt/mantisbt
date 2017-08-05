@@ -65,10 +65,10 @@ require_api( 'utility_api.php' );
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	echo '<tr>';
 	printf( '<td class="width50">%s</td>', $p_label );
-	printf( '<td class="width12 right">%s</td>', $p_open );
-	printf( '<td class="width12 right">%s</td>', $p_resolved );
-	printf( '<td class="width12 right">%s</td>', $p_closed );
-	printf( '<td class="width12 right">%s</td>', $p_total );
+	printf( '<td class="width12 align-right">%s</td>', $p_open );
+	printf( '<td class="width12 align-right">%s</td>', $p_resolved );
+	printf( '<td class="width12 align-right">%s</td>', $p_closed );
+	printf( '<td class="width12 align-right">%s</td>', $p_total );
 	echo '</tr>';
 }
 
@@ -159,14 +159,14 @@ function summary_print_by_enum( $p_enum ) {
 					}
 				}
 				if( 0 < $t_bugs_closed ) {
-					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+					$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 				} else {
 					if( ( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ) {
 						$t_bugs_closed = '-';
 					}
 				}
 				if( 0 < $t_bugs_total ) {
-					$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+					$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 				}
 			}
 
@@ -223,14 +223,14 @@ function summary_print_by_enum( $p_enum ) {
 				}
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 			} else {
 				if( ( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ) {
 					$t_bugs_closed = '-';
 				}
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
 		}
 
@@ -254,6 +254,7 @@ function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 		return 0;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {bug}
 				WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_submitted', $c_time_length ) . ' AND ' . $t_specific_where;
 	$t_result = db_query( $t_query, array( db_now() ) );
@@ -278,6 +279,7 @@ function summary_resolved_bug_count_by_date( $p_num_days = 1 ) {
 		return 0;
 	}
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(DISTINCT(b.id))
 				FROM {bug} b
 				LEFT JOIN {bug_history} h
@@ -305,33 +307,38 @@ function summary_print_by_date( array $p_date_array ) {
 		$t_resolved_count = summary_resolved_bug_count_by_date( $t_days );
 
 		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
-		$t_new_bugs_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE . '=on&amp;' . FILTER_PROPERTY_START_YEAR . '=' . date( 'Y', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_MONTH . '=' . date( 'm', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_DAY . '=' . date( 'd', $t_start_date ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">';
+		$t_new_bugs_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' )
+				. '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED . '=on'
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH . '=' . date( 'm', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_DAY . '=' . date( 'd', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">';
 
 		echo '<tr>' . "\n";
 		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
 
 		if( $t_new_count > 0 ) {
-			echo '    <td class="right">' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
+			echo '    <td class="align-right">' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
 		} else {
-			echo '    <td class="right">' . $t_new_count . '</td>' . "\n";
+			echo '    <td class="align-right">' . $t_new_count . '</td>' . "\n";
 		}
-		echo '    <td class="right">' . $t_resolved_count . '</td>' . "\n";
+		echo '    <td class="align-right">' . $t_resolved_count . '</td>' . "\n";
 
 		$t_balance = $t_new_count - $t_resolved_count;
 		$t_style = '';
 		if( $t_balance > 0 ) {
 
 			# we are talking about bugs: a balance > 0 is "negative" for the project...
-			$t_style = ' negative';
+			$t_style = ' red';
 			$t_balance = sprintf( '%+d', $t_balance );
 
 			# "+" modifier added in PHP >= 4.3.0
 		} else if( $t_balance < 0 ) {
-			$t_style = ' positive';
+			$t_style = ' green';
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
 
-		echo '    <td class="right' . $t_style . '">' . $t_balance . "</td>\n";
+		echo '    <td class="align-right' . $t_style . '">' . $t_balance . "</td>\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -345,6 +352,7 @@ function summary_print_by_activity() {
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
+	db_param_push();
 	$t_specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $t_specific_where ) {
 		return;
@@ -383,12 +391,12 @@ function summary_print_by_activity() {
 	bug_cache_array_rows( $t_summarybugs );
 
 	foreach( $t_summarydata as $t_row ) {
-		$t_bugid = string_get_bug_view_link( $t_row['id'] );
+		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_notescount = $t_row['count'];
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="right">' . $t_notescount . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_notescount . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -405,6 +413,7 @@ function summary_print_by_age() {
 	if( ' 1<>1' == $t_specific_where ) {
 		return;
 	}
+	db_param_push();
 	$t_query = 'SELECT * FROM {bug}
 				WHERE status < ' . db_param() . '
 				AND ' . $t_specific_where . '
@@ -427,12 +436,12 @@ function summary_print_by_age() {
 			break;
 		}
 
-		$t_bugid = string_get_bug_view_link( $t_row['id'] );
+		$t_bugid = string_get_bug_view_link( $t_row['id'], false );
 		$t_summary = string_display_line( $t_row['summary'] );
 		$t_days_open = intval( ( time() - $t_row['date_submitted'] ) / SECONDS_PER_DAY );
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="right">' . $t_days_open . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="align-right">' . $t_days_open . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -489,10 +498,10 @@ function summary_print_by_developer() {
 				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
 
 			summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
@@ -525,10 +534,10 @@ function summary_print_by_developer() {
 			$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 		}
 		if( 0 < $t_bugs_closed ) {
-			$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+			$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 		}
 		if( 0 < $t_bugs_total ) {
-			$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+			$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 		}
 
 		summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
@@ -565,6 +574,7 @@ function summary_print_by_reporter() {
 
 	foreach( $t_reporters as $t_reporter ) {
 		$v_reporter_id = $t_reporter;
+		db_param_push();
 		$t_query = 'SELECT COUNT(id) as bugcount, status FROM {bug}
 					WHERE reporter_id=' . db_param() . '
 					AND ' . $t_specific_where . '
@@ -602,10 +612,10 @@ function summary_print_by_reporter() {
 				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
 
 			summary_helper_print_row( $t_user, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
@@ -666,10 +676,10 @@ function summary_print_by_category() {
 				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
 
 			summary_helper_print_row( string_display_line( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
@@ -710,10 +720,10 @@ function summary_print_by_category() {
 				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}
 		}
 
@@ -876,7 +886,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td class="right">';
+				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -902,7 +912,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			if( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
 				$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 			}
-			echo '<td class="right">';
+			echo '<td class="align-right">';
 			printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
@@ -964,7 +974,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
 
 		# Limit the number of reporters listed
-		if( $t_row_count > $t_reporter_summary_limit ) {
+		if( $t_row_count >= $t_reporter_summary_limit ) {
 			break;
 		}
 
@@ -991,7 +1001,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td class="right">';
+				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -1017,7 +1027,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 			if( $t_total_user_bugs > 0 ) {
 				$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
 			}
-			echo '<td class="right">';
+			echo '<td class="align-right">';
 			printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
@@ -1092,7 +1102,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
 
 		# Limit the number of reporters listed
-		if( $t_row_count > $t_reporter_summary_limit ) {
+		if( $t_row_count >= $t_reporter_summary_limit ) {
 			break;
 		}
 
@@ -1117,7 +1127,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 				$t_sev_bug_count = $t_arr2[$c_sev_s[$j]]['total'];
 				$t_sev_mult = 1;
-				if( $t_severity_multipliers[$c_sev_s[$j]] ) {
+				if( isset( $t_severity_multipliers[$c_sev_s[$j]] ) ) {
 					$t_sev_mult = $t_severity_multipliers[$c_sev_s[$j]];
 				}
 
@@ -1131,9 +1141,9 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 					}
 				}
 			}
-			echo '<td class="right">' . $t_total_severity . '</td>';
-			echo '<td class="right">' . $t_total_errors . '</td>';
-			printf( '<td class="right">%d</td>', $t_total_severity - $t_total_errors );
+			echo '<td class="align-right">' . $t_total_severity . '</td>';
+			echo '<td class="align-right">' . $t_total_errors . '</td>';
+			printf( '<td class="align-right">%d</td>', $t_total_severity - $t_total_errors );
 			echo '</tr>';
 		}
 	}

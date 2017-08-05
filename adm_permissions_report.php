@@ -43,10 +43,13 @@ require_api( 'string_api.php' );
 
 access_ensure_project_level( config_get( 'manage_configuration_threshold' ) );
 
-html_page_top( lang_get( 'permissions_summary_report' ) );
+layout_page_header( lang_get( 'permissions_summary_report' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'adm_permissions_report.php' );
+
 
 /**
  * return html for start of administration report section
@@ -56,15 +59,28 @@ print_manage_config_menu( 'adm_permissions_report.php' );
 function get_section_begin_apr( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_output = '<div class="table-container">';
-	$t_output .= '<table>';
+	$t_output = '<div class="col-md-12 col-xs-12">';
+	$t_output .= '<div class="space-10"></div>';
+
+	$t_output .= '<div class="widget-box widget-color-blue2">';
+	$t_output .= '   <div class="widget-header widget-header-small">';
+	$t_output .= '        <h4 class="widget-title lighter uppercase">';
+	$t_output .= '            <i class="ace-icon fa fa-lock"></i>';
+	$t_output .= $p_section_name;
+	$t_output .= '       </h4>';
+	$t_output .= '   </div>';
+	$t_output .= '   <div class="widget-body">';
+	$t_output .= '   <div class="widget-main no-padding">';
+
+	$t_output .= '       <div class="table-responsive">';
+	$t_output .= '           <table class="table table-striped table-hover table-bordered table-condensed">';
+
 	$t_output .= '<thead>';
-	$t_output .= '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	$t_output .= '<tr class="row-category2">';
-	$t_output .= '<th class="form-title">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+	$t_output .= '<tr>';
+	$t_output .= '<th class="bold">' . lang_get( 'perm_rpt_capability' ) . '</th>';
 
 	foreach( $t_access_levels as $t_access_level ) {
-		$t_output .= '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+		$t_output .= '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
 	}
 
 	$t_output .= '</tr>' . "\n";
@@ -86,7 +102,7 @@ function get_capability_row( $p_caption, $p_access_level ) {
 	$t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
 	foreach( $t_access_levels as $t_access_level ) {
 		if( $t_access_level >= (int)$p_access_level ) {
-			$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
+			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
 		} else {
 			$t_value = '&#160;';
 		}
@@ -104,7 +120,9 @@ function get_capability_row( $p_caption, $p_access_level ) {
  * @return string
  */
 function get_section_end() {
-	$t_output = '</tbody></table></div><br />' . "\n";
+	$t_output = '</tbody></table></div> ' . "\n";
+	$t_output .= '</div></div></div></div> ' . "\n";
+	$t_output .= '<div class="space-10"></div>';
 	return $t_output;
 }
 
@@ -177,4 +195,4 @@ echo get_capability_row( lang_get( 'manage_users_link' ), config_get( 'manage_us
 echo get_capability_row( lang_get( 'notify_of_new_user_created' ), config_get( 'notify_new_user_created_threshold_min' ) );
 echo get_section_end();
 
-html_page_bottom();
+layout_page_end();

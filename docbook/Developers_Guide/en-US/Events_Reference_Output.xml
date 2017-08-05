@@ -230,16 +230,34 @@
 			<title>EVENT_MENU_MAIN (Default)</title>
 			<blockquote>
 				<para>
-					This event gives plugins the opportunity to add new links to the main menu at
-					the top (or bottom) of every page in MantisBT.  New links will be added after the
-					'Docs' link, and before the 'Manage' link.  Hooked events may return multiple
-					links, in which case each link in the array will be automatically separated
-					with the '|' symbol as usual.
+					This event gives plugins the opportunity to add new menu options to the main menu.
+					New links will be added AFTER the standard menu options.
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
+						</para>
+						<programlisting>
+							return array(
+							    array( 
+									'title' =&gt; 'My Link',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link.php',
+									'icon' =&gt; 'fa-random'
+								),
+								array(
+									'title' =&gt; 'My Link2',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link2.php',
+									'icon' =&gt; 'fa-shield'
+								)
+							);
+						</programlisting>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -248,16 +266,34 @@
 			<title>EVENT_MENU_MAIN_FRONT (Default)</title>
 			<blockquote>
 				<para>
-					This event gives plugins the opportunity to add new links to the main menu at
-					the top (or bottom) of every page in MantisBT.  New links will be added after the
-					'Main' link, and before the 'My View' link.  Hooked events may return multiple
-					links, in which case each link in the array will be automatically separated
-					with the '|' symbol as usual.
+					This event gives plugins the opportunity to add new menu options to main menu.
+					New links will be added BEFORE the standard menu options.
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: Hooked events may return an array of menu options.
+					Each array entry will contain an associate array with keys 'title', 'url',
+					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
+						</para>
+						<programlisting>
+							return array(
+							    array( 
+									'title' =&gt; 'My Link',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link.php',
+									'icon' =&gt; 'fa-random'
+								),
+								array(
+									'title' =&gt; 'My Link2',
+									'access_level' =&gt; DEVELOPER,
+									'url' =&gt; 'my_link2.php',
+									'icon' =&gt; 'fa-shield'
+								)
+							);
+						</programlisting>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -438,7 +474,7 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediately after the line of an attachment.
-					Receives the attachement data as a parameter, in the form of an attachment array from within
+					Receives the attachment data as a parameter, in the form of an attachment array from within
 					the array returned by the <function>file_get_visible_attachments()</function> function.
 				</para>
 

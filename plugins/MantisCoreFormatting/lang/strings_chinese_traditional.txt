@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,16 +39,19 @@
  * @file
  *
  * @author Cwlin0416
+ * @author Kly
  * @author Mark85296341
  */
 
 $s_plugin_format_title = 'MantisBT 格式化文字';
 $s_plugin_format_description = '官方文字處理及格式化元件';
-$s_plugin_format_config = '設定';
+$s_plugin_format_config = '設置';
 $s_plugin_format_process_text = '文字處理';
-$s_plugin_format_process_text_warning_notice = '請勿關閉此項目，除非您已明白可能導致的問題。當此項目關閉時可能導致跨網站指令碼(XSS)攻擊。';
+$s_plugin_format_process_text_warning_notice = '請勿關閉此項目，除非您已明白可能導致的問題。當此項目關閉時可能導致跨網站指令碼 (XSS) 攻擊。';
 $s_plugin_format_process_urls = 'URL 處理';
 $s_plugin_format_process_buglinks = 'MantisBT 內部連結 (問題/問題說明)';
-$s_plugin_format_process_buglinks_info = '您的設定定義 <em>問題</em> 標籤為 "<literal>%s</literal>" 且 <em>問題說明</em> 標籤為 "<literal>%s</literal>"';
+$s_plugin_format_process_buglinks_info = '您的設置定義 <em>問題</em> 標籤為 "<literal>%s</literal>" 且 <em>問題說明</em> 標籤為 "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdown 標記語言處理中';
+$s_plugin_format_process_markdown_info = '因樣式能由 Markdown 支援，文字格式語法設計可轉換為 HTML。';
 $s_plugin_format_enabled = '開啟';
 $s_plugin_format_disabled = '關閉';

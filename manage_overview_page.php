@@ -47,18 +47,29 @@ require_api( 'lang_api.php' );
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 
-$t_version_suffix = config_get_global( 'version_suffix' );
+layout_page_header( lang_get( 'manage_link' ) );
 
-html_page_top( lang_get( 'manage_link' ) );
+layout_page_begin( __FILE__ );
 
-print_manage_menu();
+print_manage_menu( 'manage_overview_page.php' );
 ?>
-<div id="manage-overview-div" class="table-container">
-	<h2><?php echo lang_get( 'site_information' ) ?></h2>
-	<table id="manage-overview-table" cellspacing="1" cellpadding="5" border="1">
+
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-info"></i>
+			<?php echo lang_get('site_information') ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table id="manage-overview-table" class="table table-hover table-bordered table-condensed">
 		<tr>
 			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
-			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? ' ' . $t_version_suffix : '' ) ?></td>
+			<td><?php echo MANTIS_VERSION . config_get_global( 'version_suffix' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
@@ -93,7 +104,11 @@ print_manage_menu();
 	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
 	?>
 	</table>
+	</div>
+	</div>
+	</div>
+	</div>
 </div>
 <?php
-html_page_bottom();
+layout_page_end();
 

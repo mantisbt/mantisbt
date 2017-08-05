@@ -128,17 +128,17 @@ if( $t_cookie === false ) {
 	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $t_user_id;
 }
 
-html_page_top( null, $t_redirect_url );
-?>
+layout_page_header( null, $t_redirect_url );
 
-<br />
-<div class="success-msg">
-<?php
+layout_page_begin( 'manage_overview_page.php' );
 $t_access_level = get_enum_element( 'access_levels', $f_access_level );
-echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
-
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+$t_message = lang_get( 'created_user_part1' )
+	. ' <span class="bold">' . $f_username . '</span> '
+	. lang_get( 'created_user_part2' )
+	. ' <span class="bold">' . $t_access_level . '</span><br />';
+html_operation_successful( $t_redirect_url, $t_message );
 ?>
 </div>
 
-<?php html_page_bottom();
+<?php
+layout_page_end();

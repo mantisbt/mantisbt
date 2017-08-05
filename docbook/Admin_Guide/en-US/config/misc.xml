@@ -153,14 +153,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_register_globals</term>
-			<listitem>
-				<para>If your register_globals is Off then set this to OFF. Check
-					your register_globals setting in php.ini or phpinfo().
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_enable_project_documentation</term>
 			<listitem>
 				<para>Specifies whether to enable support for project documents or
@@ -230,14 +222,6 @@
 						which is a potential security risk.
 					</para>
 				</warning>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_csv_add_bom</term>
-			<listitem>
-				<para>Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8.
-				The default value is OFF;
-				</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

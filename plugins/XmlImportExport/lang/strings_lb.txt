@@ -1,0 +1,62 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Luxembourgish (Lëtzebuergesch)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Robby
+ */
+
+$s_plugin_XmlImportExport_title = 'Import/Export Sujeten';
+$s_plugin_XmlImportExport_description = 'Setzt XML baséiert Import an Export-Méiglechkeeten a MantisBT derbäi.';
+$s_plugin_XmlImportExport_import = 'Problemer importéieren';
+$s_plugin_XmlImportExport_export = 'XML Export';
+$s_plugin_XmlImportExport_action_update = 'Aktualiséieren';
+$s_plugin_XmlImportExport_importing_in_project = 'Sujeten an de Projet importéieren';
+$s_plugin_XmlImportExport_import_options = 'Import-Optiounen';
+$s_plugin_XmlImportExport_cross_references = 'Querverweiser';
+$s_plugin_XmlImportExport_default_strategy = 'Standard-Ëmwandlungsstrategie';
+$s_plugin_XmlImportExport_renumber = 'Nei numeréieren';
+$s_plugin_XmlImportExport_renumber_desc = 'Versichen d\'Referenzen op déi nei Numerotatioun ëmzewandelen';
+$s_plugin_XmlImportExport_link = 'Link';
+$s_plugin_XmlImportExport_link_desc = 'An e Link zum ursprénglechen Element ëmwandelen';
+$s_plugin_XmlImportExport_disable = 'Ausschalten';
+$s_plugin_XmlImportExport_disable_desc = 'De Link ausschalten';
+$s_plugin_XmlImportExport_fallback = 'Notfall-Strategie (wa "Renumeréieren" net uwendbar ass):';
+$s_plugin_XmlImportExport_fallback_category = 'Ersatz-Kategorie:';
+$s_plugin_XmlImportExport_keep_same_category = 'Versicht déi selwëscht Kategorie bäizebehalen';
+$s_plugin_XmlImportExport_error_no_xml = 'D\'Erweiderungen xmlreade- an xmlwriter goufen net fonnt';

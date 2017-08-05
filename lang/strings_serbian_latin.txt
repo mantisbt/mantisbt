@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Milicevic01
+ * @author Obsuser
  * @author Rancher
+ * @author Сербијана
  */
 
 $s_directionality = 'ltr';
@@ -273,14 +276,14 @@ $s_no_password_change = 'Lozinkom upravlja drugi sistem, pa zato ne može da se 
 $s_confirm_password = 'Potvrdite lozinku';
 $s_access_level = 'Stepen pristupa';
 $s_update_user_button = 'Ažuriraj korisnika';
-$s_verify_warning = 'Podaci vašeg naloga su potvrđeni. Potvrdna poruka koju ste primili sada više ne važi.';
+$s_verify_warning = 'Podaci vašeg naloga su potvrđeni.';
 $s_verify_change_password = 'Ovde morate da postavite lozinku da biste mogli da se ponovo prijavite.';
 $s_default_account_preferences_title = 'Postavke naloga';
 $s_default_project = 'Podrazumevani projekat';
 $s_refresh_delay = 'Odlaganje osvežavanja';
 $s_minutes = 'min.';
 $s_redirect_delay = 'Kašnjenje pre preusmeravanja';
-$s_seconds = 'sek.';
+$s_seconds = 'sekundi';
 $s_with_minimum_severity = 'S najmanjom težinom od';
 $s_bugnote_order = 'Redosled razvrstavanja beleški';
 $s_bugnote_order_asc = 'Rastući';
@@ -294,7 +297,7 @@ $s_email_on_reopened = 'Obaveštavaj o ponovo otvorenim problemima';
 $s_email_on_bugnote_added = 'Obaveštavaj o dodatim beleškama';
 $s_email_on_status_change = 'Obaveštavaj o promenama stanja';
 $s_email_on_priority_change = 'Obaveštavaj o promenama važnosti';
-$s_email_bugnote_limit = 'Ograničenje e-obaveštenja';
+$s_email_bugnote_limit = 'Ograničenje imejl obaveštenja';
 $s_language = 'Jezik';
 $s_update_prefs_button = 'Ažuriraj postavke';
 $s_reset_prefs_button = 'Poništi postavke';
@@ -355,7 +358,6 @@ $s_delete_bug_sure_msg = 'Želite li da obrišete ovaj problem?';
 $s_delete_bug_button = 'Obriši';
 $s_monitor_bug_button = 'Nadgledaj';
 $s_unmonitor_bug_button = 'Prekini nadgledanje';
-$s_file_upload_msg = 'Datoteka je otpremljena.';
 $s_upload_file = 'Otpremanje';
 $s_upload_files = 'Otpremanje datoteka';
 $s_select_file = 'Izaberi datoteku';
@@ -425,7 +427,6 @@ $s_all_revisions = 'Sve izmene';
 $s_back_to_issue = 'Nazad na problem';
 $s_confirm_revision_drop = 'Želite li da odbacite izmenu ovog problema?';
 $s_vote_added_msg = 'Glas je dodat.';
-$s_bugnote_added_msg = 'Beleška je dodata.';
 $s_bugnote_deleted_msg = 'Beleška je obrisana.';
 $s_bug_notes_title = 'Beleške';
 $s_edit_bugnote_title = 'Uređivanje beleške';
@@ -451,7 +452,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Upozorenje:</strong> struktur
 $s_error_code_version_out_of_date = '<strong>Upozorenje:</strong> struktura baze podataka je novija od instaliranog koda. Dogradite kod.';
 $s_login_page_info = 'Dobro došli u sistem za praćenje problema.';
 $s_login_title = 'Prijava';
-$s_save_login = 'Zapamti lozinku na ovom pregledaču';
+$s_save_login = 'Ostavi me prijavljenim';
 $s_secure_session = 'Zaštićena sesija';
 $s_secure_session_long = 'Dozvoli pristup mojoj sesiji samo preko ove IP adrese.';
 $s_choose_project = 'Izaberite projekat';
@@ -630,7 +631,7 @@ $s_unlink_link = 'Ukloni vezu';
 $s_show_global_users = 'Prikaži korisnike s globalnim pristupom';
 $s_hide_global_users = 'Sakrij korisnike s globalnim pristupom';
 $s_add_project_title = 'Dodavanje projekta';
-$s_upload_file_path = 'Putanja za slanje datoteka';
+$s_upload_file_path = 'Putanja za otpremanje datoteka';
 $s_add_project_button = 'Dodaj projekat';
 $s_projects_title = 'Projekti';
 $s_name = 'Naziv';
@@ -806,9 +807,11 @@ $s_changed = 'Izmenjeno';
 $s_viewing_bugs_title = 'Pregled problema';
 $s_updated = 'Ažurirano';
 $s_sticky = 'Prikaži lepljive probleme';
+$s_sort = 'Poređaj po';
 $s_issue_id = 'Broj problema';
 $s_recently_visited = 'Nedavno posećeno';
 $s_priority_abbreviation = 'V';
+$s_note_user_id = 'Beleška od';
 $s_filter_match_type = 'Vrsta poklapanja';
 $s_filter_match_all = 'Svi uslovi';
 $s_filter_match_any = 'Bilo koji uslov';
@@ -888,7 +891,7 @@ $s_custom_field_require_report = 'Potrebno pri prijavljivanju';
 $s_custom_field_require_update = 'Potrebno pri ažuriranju';
 $s_custom_field_require_resolved = 'Potrebno pri rešavanju';
 $s_custom_field_require_closed = 'Potrebno pri zatvaranju';
-$s_link_custom_field_to_project_title = 'Poveži prilagođeno polje s projektom';
+$s_link_custom_field_to_project_title = 'Poveži prilagođeno polje s projektima';
 $s_link_custom_field_to_project_button = 'Poveži prilagođeno polje';
 $s_custom_field_sequence = 'Niz';
 $s_custom_field_type_enum_string = '0:Niska,1:Brojčano,2:So ostatkom,3:Prebrojavanje,4:E-pošta,5:Kućica za označavanje,6:Spisak,7:Višeizborni spisak,8:Datum,9:Radio,10:Textarea';
@@ -934,7 +937,6 @@ $s_relationship_deleted = 'Odnos je obrisan';
 $s_no_relationship = 'nema odnosa';
 $s_relationship_replaced = 'Odnos je zamenjen';
 $s_replace_relationship_button = 'Zameni';
-$s_replace_relationship_sure_msg = 'Već postoji odnos između dva problema. Želite li da ga zamenite?';
 $s_relationship_with_parent = 'Odnos s nadređenim problemom';
 $s_delete_relationship_button = 'Obriši';
 $s_delete_relationship_sure_msg = 'Želite li da obrišete ovaj odnos?';
@@ -1177,7 +1179,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pristup je odb
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Pokrovitelj nije naveo e-adresu. Ažurirajte svoj profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Postavka „%1$s“ ima neispravnu vrednost „%2$s“.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Radnja ne može da se izvrši jer je problem „%1$d“ zatvoren za uređivanje.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Već postoji odnos između ova dva problema.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Ne mogu da pronađem odnos.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pristup je odbijen. Problem %1$d zahteva viši stepen pristupa.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Problem ne može biti povezan sam sa sobom.';

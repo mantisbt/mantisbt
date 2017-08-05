@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -46,18 +46,24 @@
  * @author Desertwaste
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Kingu
  * @author Liuxinyu970226
  * @author Lloffiwr
  * @author M42
+ * @author Mazab IZW
  * @author McDutchie
  * @author Nike
+ * @author Noe
  * @author Paul Richards
+ * @author Robby
  * @author Shirayuki
  * @author Siebrand
  * @author Siebrand Mazeland
+ * @author Silraks
  * @author SkyDaisy9
  * @author Umherirrender
  * @author Vincent
+ * @author Vuh
  * @author Waldir
  */
 
@@ -103,11 +109,13 @@ $s_bugnote = '{{Identical|Note}}';
 $s_change = '{{Identical|Change}}';
 $s_announcement = '{{Identical|Announcement}}';
 $s_bug_relationships = '{{Identical|Relationship}}';
-$s_bug_relationships_label = '{{Identical|Relationship}}';
 $s_global_categories = '{{Identical|Global category}}';
 $s_login_link = '{{Identical|Login}}';
+$s_opensearch_id_short = '{{Identical|ID}}';
+$s_opensearch_text_short = '{{Identical|Text}}';
 $s_select_option = '{{Identical|Select}}';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
+$s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
 $s_go_back = '{{Identical|Go back}}';
 $s_proceed = 'Message displayed after adding/editing/deleting something
 {{Identical|Proceed}}';
@@ -115,10 +123,11 @@ $s_switch = '{{Identical|Switch}}';
 $s_prefix_for_deleted_users = '{{Identical|User}}';
 $s_administrator = '{{Identical|Administrator}}';
 $s_myself = '{{Identical|Myself}}';
+$s_reproducibility_enum_string = 'Traduction de N/A (not applicable, not available) modifiée de S/O en sans objet.
+S/O n\'est pas une abréviation claire.';
 $s_new_account_username = '{{Identical|Username}}';
 $s_new_account_email = '{{Identical|E-mail}}';
 $s_email_project = '{{Identical|Project}}';
-$s_email_project_label = '{{Identical|Project}}';
 $s_email_category = '{{Identical|Category}}';
 $s_email_severity = '{{Identical|Severity}}';
 $s_email_priority = '{{Identical|Priority}}';
@@ -128,6 +137,7 @@ $s_email_duplicate = '{{Identical|Duplicate}}';
 $s_email_summary = '{{Identical|Summary}}';
 $s_email_description = '{{Identical|Description}}';
 $s_email_additional_information = '{{Identical|Additional information}}';
+$s_email_tag = '{{Identical|Tag}}';
 $s_manage_profiles_link = '{{Identical|Profile}}';
 $s_change_preferences_link = '{{Identical|Preferences}}';
 $s_username = '{{Identical|Username}}';
@@ -141,6 +151,7 @@ $s_confirm_password = '{{Identical|Confirm password}}';
 $s_current_password = '{{Identical|Current password}}';
 $s_access_level = '{{Identical|Access level}}';
 $s_access_level_label = '{{Identical|Access level}}';
+$s_api_token_revoke_button = '{{Identical|Revoke}}';
 $s_minutes = '{{Identical|Minute}}';
 $s_seconds = '{{Identical|Second}}';
 $s_bugnote_order_asc = '{{Identical|Ascending}}';
@@ -152,9 +163,12 @@ $s_edit_profile = '{{Identical|Edit profile}}';
 $s_select_profile = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 Legend for drop-down box. See screenshot.';
 $s_submit_button = '{{Identical|Submit}}';
+$s_sponsor = '{{Identical|Sponsor}}';
+$s_sponsor_verb = '{{Identical|Sponsor}}';
 $s_amount = '{{Identical|Amount}}';
 $s_sponsor_show = '{{Identical|Show all}}';
 $s_delete_bug_button = '{{Identical|Delete}}';
+$s_monitor_bug_button = '{{Identical|Monitor}}';
 $s_upload_file = '{{Identical|Upload file}}';
 $s_upload_files = '{{Identical|Upload file}}';
 $s_select_file = '{{Identical|Select file}}';
@@ -170,7 +184,8 @@ $s_reminder_list_truncated = '"To truncate" means "to shorten something as if by
 "refer to Issue History for full list" means "Take a look at the history of the issue if you need to compile a full list", i.e. a full list can be derived from the issue history.';
 $s_bug_send_button = '{{Identical|Send}}';
 $s_reminder = '{{Identical|Reminder}}';
-$s_stick_bug_button = 'Button label to mark an issue sticky.';
+$s_stick_bug_button = 'Button label to mark an issue sticky.
+{{Identical|Stick}}';
 $s_unstick_bug_button = 'Button label to mark an issue unsticky.';
 $s_id = '[[File:MantisBT-filter.png|150px|right]]
 Column header in bug report. See screenshot.
@@ -178,47 +193,48 @@ Column header in bug report. See screenshot.
 ID = Identification number of a bug.
 {{Identical|ID}}';
 $s_category = '{{Identical|Category}}';
-$s_category_label = '{{Identical|Category}}';
 $s_severity = '{{Identical|Severity}}';
-$s_severity_label = '{{Identical|Severity}}';
 $s_last_update = '{{Identical|Last update}}';
 $s_reporter = '{{Identical|Reporter}}';
-$s_reporter_label = '{{Identical|Reporter}}';
 $s_priority = '{{Identical|Priority}}';
-$s_priority_label = '{{Identical|Priority}}';
+$s_resolution = '{{Identical|Resolution}}';
 $s_status = '{{Identical|Status}}';
-$s_status_label = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
+$s_os_version = 'J\'ai ajouté - de l\'OS- à l\'ancienne traduction car plusieurs champs version existent :
+"Product Version", "Fixed in Version", "Target Version"';
 $s_build = '{{Identical|Build}}';
 $s_votes = '{{Identical|Vote}}';
 $s_summary = '{{Identical|Summary}}';
 $s_description = '{{Identical|Description}}';
 $s_profile = '{{Identical|Profile}}';
-$s_profile_label = '{{Identical|Profile}}';
 $s_revision = '{{Identical|Revision}}';
 $s_revision_by = 'Parameters:
 * %1$s is a date
 * %2$s is a username
 {{Identical|By}}';
 $s_revision_drop = '{{Identical|Drop}}';
+$s_activities_title = '{{Identical|Activity}}';
 $s_bug_notes_title = '{{Identical|Note}}';
 $s_delete_link = '{{Identical|Delete}}';
 $s_add_bugnote_title = '{{Identical|Add note}}';
 $s_add_bugnote_button = '{{Identical|Add note}}';
 $s_bugnote_edit_link = '{{Identical|Edit}}';
+$s_hide_content = '{{identical|Hide content}}';
+$s_show_content = '{{identical|Show content}}';
 $s_log_page_number = '{{Identical|Number}}';
 $s_log_page_event = '{{Identical|Event}}';
 $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
 $s_click_to_login = '{{Identical|Login}}';
 $s_login_title = '{{Identical|Login}}';
-$s_save_login = '{{Identical|Remember my login on this computer}}';
+$s_save_login = '';
 $s_login_button = '{{Identical|Login}}';
 $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';
 $s_archives = '{{Identical|Archive}}';
+$s_rss = '{{Identical|RSS}}';
 $s_site_information = '{{Identical|Site information}}';
 $s_created_user_part1 = '{{Identical|Created user}}';
 $s_create_new_account_title = '{{Identical|Create account}}';
@@ -267,6 +283,7 @@ $s_plugin_key_label = '{{Identical|Key}}';
 $s_delete_category_button = '{{Identical|Delete category}}';
 $s_update_category_button = '{{Identical|Update category}}';
 $s_project_name = '{{Identical|Project name}}';
+$s_view_status = 'Modifié la traduction "Afficher les statuts" en "Visibilité". L\'état d\'un projet est "public" ou "privé" ce qui conditionne sa visibilité. C\'est aussi la traduction de "View Status".';
 $s_public = '{{Identical|Public}}';
 $s_private = '{{Identical|Private}}';
 $s_categories = '{{Identical|Category}}';
@@ -296,6 +313,7 @@ $s_manage_link = '{{Identical|Manage}}';
 $s_logout_link = '{{Identical|Log out}}';
 $s_my_view_title_unassigned = '{{Identical|Unassigned}}';
 $s_my_view_title_resolved = '{{Identical|Resolved}}';
+$s_headline = '{{Identical|Headline}}';
 $s_body = '{{Identical|Body}}';
 $s_edit_post = '{{Identical|Edit post}}';
 $s_delete_post = '{{Identical|Delete post}}';
@@ -336,7 +354,6 @@ Option in bug report filter. See screenshot.
 {{Identical|Any}}';
 $s_all = '{{Identical|All}}';
 $s_show = '{{Identical|Show}}';
-$s_show_label = '{{Identical|Show}}';
 $s_changed = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
 $s_viewing_bugs_title = '[[File:MantisBT-filter.png|150px|right]]
@@ -346,7 +363,9 @@ Column header for column of dates. See screenshot.
 {{Identical|Updated}}';
 $s_sticky = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
-$s_sort_label = '{{Identical|Sort by}}';
+$s_sort = '[[File:MantisBT-filter.png|150px|right]]
+Filter label in bug report filter screen. See screenshot.
+{{Identical|Sort by}}';
 $s_priority_abbreviation = '{{Optional}}';
 $s_none = '{{Identical|None}}';
 $s_current = '{{Identical|Current}}';
@@ -378,6 +397,8 @@ $s_save_query = '[[File:MantisBT-filter.png|150px|right]]
 Button label on bug report filter screen. See screenshot.';
 $s_open_queries = '[[File:MantisBT-filter.png|150px|right]]
 Button label on bug report filter screen. See screenshot.';
+$s_owner = '{{Identical|Owner}}';
+$s_delete_filter_button = '{{Identical|Delete}}';
 $s_update_bug_button = '{{Identical|Edit}}';
 $s_close_bug_button = '{{Identical|Close}}';
 $s_move_bug_button = '{{Identical|Move}}';
@@ -419,8 +440,10 @@ $s_add_notes = '{{Identical|Add note}}';
 $s_news = '{{Identical|News}}';
 $s_delete_attachment_button = '{{Identical|Delete}}';
 $s_filters = '{{Identical|Filter}}';
+$s_create_project = '{{Identical|Create project}}';
 $s_others = '{{Identical|Other}}';
 $s_email_notification = '{{Identical|Email notification}}';
+$s_email_on_updated = 'E-mail on Updated';
 $s_loading = '{{Identical|Loading}}';
 $s_between_date = '{{Identical|Between}}';
 $s_before_date = '{{Identical|Before}}';
@@ -436,7 +459,6 @@ $s_off = 'Switch condition (for filter, for example)
 {{Identical|Off}}';
 $s_wiki = '{{Identical|Wiki}}';
 $s_tags = '{{Identical|Tag}}';
-$s_tags_label = '{{Identical|Tag}}';
 $s_tag_name = '{{Identical|Name}}';
 $s_tag_creator = '{{Identical|Creator}}';
 $s_tag_created = '{{Identical|Date created}}';
@@ -445,6 +467,8 @@ $s_tag_statistics = '{{Identical|Usage statistics}}';
 $s_tag_attach = '{{Identical|Attach}}';
 $s_tag_attach_long = '{{Identical|Attach tag}}';
 $s_show_all_tags = '{{Identical|All}}';
+$s_time_tracking_cost = '{{Identical|Cost}}';
+$s_time_tracking_cost_label = '{{Identical|Cost}}';
 $s_time_tracking_stopwatch_start = '{{Identical|Start}}';
 $s_time_tracking_stopwatch_stop = '{{Identical|Stop}}';
 $s_time_tracking_stopwatch_reset = '{{Identical|Reset}}';
@@ -477,4 +501,5 @@ $s_timeline_issue_assigned_to_self = 'Parameters:
 * %1s - username
 * %2s - issue ID';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Access denied}}';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Should "in MantisBT" be appended?';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';

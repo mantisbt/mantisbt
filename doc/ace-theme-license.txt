@@ -1,0 +1,39 @@
+Ace Admin theme author's approval to use in MantisBT under GPL:
+===============================================================
+
+From: Responsiweb Support <support@responsiweb.com>
+Subject: RE: Extended License for MantisBT
+Date: June 30, 2016 at 5:27:22 AM PDT
+To: Rafik Robeal <rafik@mantishub.net>
+
+I’ve agreed to license the files listed below from my AceAdmin theme package under the GPL license and contribute them
+to MantisBT open source project:
+
+ace.min.js
+ace-fonts.css
+ace-ie.min.css
+ace-mantis.css
+ace-part2.min.css
+ace-rtl.min.css
+ace-skins.min.css
+ace.min.css
+
+
+The following license terms will be added to the header of each of the files listed above:
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+Kind Regards,
+Mohsen

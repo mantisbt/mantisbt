@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -41,6 +41,7 @@
  * @author Bugoslav
  * @author Herr Mlinka
  * @author KWiki
+ * @author Teoo3
  */
 
 $s_all_projects = 'Svi projekti';
@@ -59,7 +60,7 @@ $s_print = 'Ispiši';
 $s_jump = 'Skoči';
 $s_copy_users = 'Kopiraj korisnike';
 $s_go_back = 'Idi natrag';
-$s_proceed = 'Klikni ovdje za nastavak';
+$s_proceed = 'Nastavi';
 $s_switch = 'Prebaci';
 $s_logged_in_as = 'Prijavljen kao';
 $s_prefix_for_deleted_users = 'suradnik';
@@ -147,7 +148,7 @@ $s_closed_bug_title = 'Zatvori bug';
 $s_bug_deleted_msg = 'Bug je obrisan...';
 $s_delete_bug_sure_msg = 'Jeste li sigurni da želite obrisati bug?';
 $s_delete_bug_button = 'Obriši bug';
-$s_monitor_bug_button = 'Nadgledaj bug';
+$s_monitor_bug_button = 'Nadgledaj';
 $s_unmonitor_bug_button = 'Završi nadgledanje';
 $s_file_upload_msg = 'Upload datoteke uspješan';
 $s_upload_file = 'Upload datoteka';
@@ -199,7 +200,7 @@ $s_bugnote_updated_msg = 'Bilješka je uspješno ažurirana...';
 $s_click_to_login = 'Prijavi se';
 $s_login_page_info = 'Dobrodošli u HelpDesk';
 $s_login_title = 'Prijava';
-$s_save_login = 'Pohrani prijavu';
+$s_save_login = 'Zapamti prijavu s ovog preglednika';
 $s_choose_project = 'Odaberi projekt';
 $s_login_button = 'Prijava';
 $s_signup_link = 'Prijavi se za novi korisnički račun';
@@ -280,7 +281,7 @@ $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_account_reset_protected_msg = 'Korisnički račun zaštićen. Ne mogu resetirati zaporku.';
 $s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Postavljena je prazna korisnička zaporka...';
-$s_manage_user_protected_msg = 'Korisnički račun zaštićen. Razina pristupa zaštićena. Inače, korisnički račun je ažuriran...';
+$s_manage_user_protected_msg = 'Korisnički račun zaštićen; polja \'Razina pristupa\' i \'Omogućeno\' ne mogu se promijeniti. Ostala polja su uspješno ažurirana.';
 $s_manage_user_updated_msg = 'Korisnički račun uspješno ažuriran...';
 $s_main_link = 'Glavni';
 $s_view_bugs_link = 'Pregledaj bugove';
@@ -380,7 +381,7 @@ $s_reporter_stats = 'status uzvjestitelja';
 $s_orct = '(otvoreni/riješeni/zatvoreni/ukupno)';
 $s_any = 'bilo koji';
 $s_show = 'Prikaži';
-$s_changed = 'Promijenjeni(sati)';
+$s_changed = 'Označi promijenjeno (sati)';
 $s_viewing_bugs_title = 'Pregled bugova';
 $s_updated = 'Ažurirani';
 $s_none = 'ništa';
@@ -390,8 +391,8 @@ $s_view_next_link = 'Vidi slijedeće';
 $s_view_simple_link = 'Vidi jednostavno';
 $s_product_build = 'Produkt Build';
 $s_system_profile = 'Opis sustava';
-$s_update_bug_button = 'Ažuriraj bug';
-$s_reopen_bug_button = 'Ponovno otvori bug';
+$s_update_bug_button = 'Uredi';
+$s_reopen_bug_button = 'Ponovno otvori';
 $s_attached_files = 'Pridružene datoteke';
 $s_month_january = 'siječnja';
 $s_month_february = 'veljače';

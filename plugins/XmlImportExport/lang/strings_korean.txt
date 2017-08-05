@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@
  * @file
  *
  * @author Changwoo
+ * @author Wisewolf
  */
 
 $s_plugin_XmlImportExport_title = '이슈 가져오기/내보내기';
@@ -46,6 +47,9 @@ $s_plugin_XmlImportExport_description = '맨티스에 XML을 사용하는 가져
 $s_plugin_XmlImportExport_import = '이슈 가져오기';
 $s_plugin_XmlImportExport_export = 'XML 내보내기';
 $s_plugin_XmlImportExport_config_title = 'XML 가져오기/내보내기 접근 권한 설정';
+$s_plugin_XmlImportExport_import_threshold = '이슈 가져오기';
+$s_plugin_XmlImportExport_export_threshold = '이슈 내보내기';
+$s_plugin_XmlImportExport_action_update = '업데이트';
 $s_plugin_XmlImportExport_importing_in_project = '프로젝트의 이슈 가져오기:';
 $s_plugin_XmlImportExport_import_options = '옵션 가져오기';
 $s_plugin_XmlImportExport_cross_references = '상호 참조';

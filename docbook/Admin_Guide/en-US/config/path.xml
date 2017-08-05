@@ -24,16 +24,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_icon_path</term>
-			<listitem>
-				<para>This is the URL to the icons (images) directory as seen from
-					the web browser. All MantisBT images/icons are loaded from this URL.
-					The default value for this URL is based on $g_path (i.e. '%path%images/').  Note that a trailing
-					'/' is required.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_short_path</term>
 			<listitem>
 				<para>Short web path without the domain name.  This requires the trailing '/'.

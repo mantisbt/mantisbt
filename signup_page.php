@@ -49,58 +49,65 @@ require_css( 'login.css' );
 require_js( 'login.js' );
 
 # Check for invalid access to signup page
-if( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
-	print_header_redirect( 'login_page.php' );
+if( !auth_signup_enabled() || LDAP == config_get_global( 'login_method' ) ) {
+	print_header_redirect( auth_login_page() );
 }
 
 # signup page shouldn't be indexed by search engines
 html_robots_noindex();
 
-html_page_top1();
-html_page_top2a();
+layout_login_page_begin();
 
 $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 ?>
 
-<div id="signup-div" class="form-container">
+<div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
+    <div class="login-container">
+	<div class="space-12 hidden-480"></div>
+	<a href="<?php echo config_get( 'logo_url' ) ?>">
+		<h1 class="center white">
+			<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+		</h1>
+	</a>
+	<div class="space-24 hidden-480"></div>
+
+	<div class="position-relative">
+
+		<div class="signup-box visible widget-box no-border" id="login-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<h4 class="header lighter bigger">
+						<i class="ace-icon fa fa-pencil"></i>
+						<?php echo lang_get( 'signup_title' ) ?>
+					</h4>
+					<div class="space-10"></div>
+
 	<form id="signup-form" method="post" action="signup.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'signup_title' ) ?></span></legend>
 			<?php echo form_security_field( 'signup' ); ?>
 
-			<ul id="login-links">
-				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
-<?php
-	# lost password feature disabled or reset password via email disabled
-	if( ( LDAP != config_get_global( 'login_method' ) ) &&
-		( ON == config_get( 'lost_password_feature' ) ) &&
-		( ON == config_get( 'send_reset_password' ) ) &&
-		( ON == config_get( 'enable_email_notification' ) ) ) {
-?>
-				<li><a href="lost_pwd_page.php"><?php echo lang_get( 'lost_password_link' ); ?></a></li>
-<?php
-	}
-?>
-			</ul>
+			<label for="username" class="block clearfix">
+				<span class="block input-icon input-icon-right">
+					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
+					<i class="ace-icon fa fa-user"></i>
+				</span>
+			</label>
 
-			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
-				<span class="label-style"></span>
-			</div>
-
-			<div class="field-container">
-				<label for="email-field"><span><?php echo lang_get( 'email_label' ) ?></span></label>
-				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
-				<span class="label-style"></span>
-			</div>
+			<label for="email-field" class="block clearfix">
+				<span class="block input-icon input-icon-right">
+					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
+						size="32" maxlength="64" class="form-control">
+					<i class="ace-icon fa fa-envelope"></i>
+				</span>
+			</label>
 
 <?php
 	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
 
 	# captcha image requires GD library and related option to ON
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
-		$t_securimage_path = 'library/securimage';
+		$t_securimage_path = 'vendor/dapphp/securimage';
 		$t_securimage_show = $t_securimage_path . '/securimage_show.php';
 		$t_securimage_play = $t_securimage_path . '/securimage_play.swf?'
 			. http_build_query( array(
@@ -112,9 +119,9 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				'borderColor=' => '#000',
 			) );
 ?>
-			<div class="field-container">
-				<label for="captcha-field">
-					<span><?php echo lang_get( 'signup_captcha_request_label' ); ?></span>
+
+				<label for="captcha-field" class="block clearfix">
+					<strong><?php echo lang_get( 'signup_captcha_request_label' ); ?></strong>
 				</label>
 				<span id="captcha-input" class="input">
 					<?php print_captcha_input( 'captcha' ); ?>
@@ -132,23 +139,46 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 					</object>
 				</span>
 
-				<span class="label-style"></span>
-			</div>
 <?php
-	}
+			}
 
-	if( !$t_allow_passwd_change ) {
+			if( !$t_allow_passwd_change ) {
+				echo '<div class="space-10"></div>';
+				echo '<div class="alert alert-danger">';
+				echo lang_get( 'no_password_change' );;
+				echo '</div>';
+			}
 ?>
-			<span class="info-text"><?php echo lang_get( 'no_password_request' ); ?></span>
-<?php
-	}
-?>
-			<span class="info-text"><?php echo lang_get( 'signup_info' ); ?></span>
 
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
+			<div class="clearfix"></div>
+			<div class="space-10"></div>
+			<?php echo lang_get( 'signup_info' ); ?>
+			<div class="space-10"></div>
+
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'signup_button' ) ?>" />
 		</fieldset>
 	</form>
 </div>
 
+	<div class="toolbar center">
+		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login_link' ); ?></a>
+		<?php
+		# lost password feature disabled or reset password via email disabled
+		if( ( LDAP != config_get_global( 'login_method' ) ) &&
+			( ON == config_get( 'lost_password_feature' ) ) &&
+			( ON == config_get( 'send_reset_password' ) ) &&
+			( ON == config_get( 'enable_email_notification' ) ) ) {
+			?>
+			<a class="back-to-login-link pull-right" href="lost_pwd_page.php"><?php echo lang_get( 'lost_password_link' ); ?></a>
+		<?php
+		}
+		?>
+		<div class="clearfix"></div>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
 <?php
-html_page_bottom1a( __FILE__ );
+layout_login_page_end();

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
+ * @author Yue Ling
  */
 
 $s_actiongroup_menu_move = 'Di chuyển';
@@ -361,7 +362,6 @@ $s_delete_bug_sure_msg = 'Bạn có chắc chắn xóa issue này?';
 $s_delete_bug_button = 'Xóa';
 $s_monitor_bug_button = 'Theo dõi';
 $s_unmonitor_bug_button = 'Kết thúc theo dõi';
-$s_file_upload_msg = 'Tập tin tải lên thành công';
 $s_upload_file = 'Tải tập tin lên';
 $s_upload_files = 'Tải tập tin lên';
 $s_select_file = 'Chọn tập tin';
@@ -433,7 +433,7 @@ $s_all_revisions = 'Tất cả các Revision';
 $s_back_to_issue = 'Trở về issue';
 $s_confirm_revision_drop = 'Bạn có chắc bạn muốn bỏ revision issue này?';
 $s_vote_added_msg = 'Bình chọn đã được thêm...';
-$s_bugnote_added_msg = 'Ghi chú đã thêm...';
+$s_bugnote_attached_files = 'Tệp đính kèm';
 $s_bugnote_deleted_msg = 'Ghi chú được xóa thành công...';
 $s_bug_notes_title = 'Các ghi chú';
 $s_edit_bugnote_title = 'Sửa ghi chú';
@@ -813,8 +813,10 @@ $s_changed = 'Thay đổi (giờ)';
 $s_viewing_bugs_title = 'Xem các issue';
 $s_updated = 'Đã cập nhật';
 $s_sticky = 'Hiển thị các Issue dính';
+$s_sort = 'Sắp xếp theo';
 $s_issue_id = 'ID issue';
 $s_recently_visited = 'Gần đây đã viếng thăm';
+$s_note_user_id = 'Chú ý:';
 $s_filter_match_type = 'Loại đối sánh';
 $s_filter_match_all = 'Tất cả Điều kiện';
 $s_filter_match_any = 'Bất kỳ Điều kiện';
@@ -939,7 +941,6 @@ $s_relationship_deleted = 'Mối quan hệ đã bị xóa';
 $s_no_relationship = 'không có mối quan hệ';
 $s_relationship_replaced = 'Mối quan hệ đã được thay thế';
 $s_replace_relationship_button = 'Thay thế';
-$s_replace_relationship_sure_msg = 'Đã có một mối quan hệ giữa hai vấn đề. Bạn có chắc chắn muốn thay thế nó?';
 $s_relationship_with_parent = 'Mối quan hệ với các vấn đề cấp cha';
 $s_delete_relationship_button = 'Xóa';
 $s_delete_relationship_sure_msg = 'Bạn có chắc chắn muốn xóa các mối quan hệ này?';
@@ -1181,7 +1182,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Truy cập b�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Nhà tài trợ đã không được cung cấp một địa chỉ e-mail. Xin vui lòng cập nhật hồ sơ của bạn.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Cấu hình tùy chọn "%1$s" có giá trị không hợp lệ "%2$s"';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Hành động không thể thực hiện vì issue "%1$d" là chỉ đọc.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Đã có một mối quan hệ giữa hai issue này';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Mối quan hệ không tìm thấy.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Truy cập bị từ chối: Issue %1$d đòi hỏi cấp độ truy cập cao hơn.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Một issue không thể quan hệ đến chính nó.';

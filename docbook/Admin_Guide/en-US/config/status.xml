@@ -52,7 +52,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_reopen_resolution</term>
+			<term>$g_bug_duplicate_resolution</term>
 			<listitem>
 				<para>Default resolution to assign to a bug when it is
 					resolved as being a duplicate of another issue.
@@ -61,7 +61,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_duplicate_resolution</term>
+			<term>$g_bug_reopen_resolution</term>
 			<listitem>
 				<para>Resolution to assign to the bug when reopened. Default value
 					is REOPENED.
@@ -75,6 +75,14 @@
 					a bug is assigned to a person. Installations where assigned status
 					is to be used when the defect is in progress, rather than just put
 					in a person's queue should set it to OFF. Default is ON.
+					For the status change to be effective, these conditions must be met:
+					<itemizedlist>
+						<listitem><para>Bug has no handler, and a new handler is selected</para></listitem>
+						<listitem><para>The assignment is not part of a explicit status change</para></listitem>
+						<listitem><para>Current bug status is lower than defined "assigned" status</para></listitem>
+						<listitem><para>"Assigned" status is reachable by workflow configuration</para></listitem>
+					</itemizedlist>
+					If the conditions are not met, the assignment is still made, but status will not be modified.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -92,7 +100,7 @@
 			<listitem>
 				<para>Threshold resolution which denotes that a bug has
 					been resolved and successfully fixed by developers.
-					Resolutions above this threshold and below
+					Resolutions above and including this threshold and below
 					$g_bug_resolution_not_fixed_threshold are considered
 					to be resolved successfully. Default value is FIXED.
 				</para>

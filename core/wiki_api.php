@@ -35,21 +35,12 @@ require_api( 'event_api.php' );
 require_api( 'plugin_api.php' );
 
 /**
- * Returns whether wiki functionality is enabled
- * @return boolean indicating whether wiki is enabled
- * @access public
- */
-function wiki_enabled() {
-	return( config_get_global( 'wiki_enable' ) == ON );
-}
-
-/**
  * Initialise wiki engine
  * @return void
  * @access public
  */
 function wiki_init() {
-	if( !wiki_enabled() ) {
+	if( config_get_global( 'wiki_enable' ) == OFF ) {
 		return;
 	}
 

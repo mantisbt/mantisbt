@@ -64,7 +64,7 @@ access_ensure_global_level( $t_user['access_level'] );
 
 # If the password can be changed, we reset it, otherwise we unlock
 # the account (i.e. reset failed login count)
-$t_reset = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_reset = auth_can_set_password( $f_user_id );
 if( $t_reset ) {
 	$t_result = user_reset_password( $f_user_id );
 } else {
@@ -75,30 +75,27 @@ $t_redirect_url = 'manage_user_page.php';
 
 form_security_purge( 'manage_user_reset' );
 
-html_page_top( null, $t_result ? $t_redirect_url : null );
+layout_page_header( null, $t_result ? $t_redirect_url : null );
 
-echo '<div class="success-msg">';
+layout_page_begin( 'manage_overview_page.php' );
 
 if( $t_reset ) {
 	if( false == $t_result ) {
 		# PROTECTED
-		echo lang_get( 'account_reset_protected_msg' );
+		html_operation_failure( $t_redirect_url, lang_get( 'account_reset_protected_msg' ) );
 	} else {
 		# SUCCESSFUL RESET
 		if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
-			echo lang_get( 'account_reset_msg' );
+			html_operation_successful( $t_redirect_url, lang_get( 'account_reset_msg' ) );
 		} else {
 			# email notification disabled, then set the password to blank
-			echo lang_get( 'account_reset_msg2' );
+			html_operation_successful( $t_redirect_url, lang_get( 'account_reset_msg2' ) );
 		}
 	}
 } else {
 	# UNLOCK
-	echo lang_get( 'account_unlock_msg' );
+	html_operation_successful( $t_redirect_url, lang_get( 'account_unlock_msg' ) );
 }
 
-echo '<br />';
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-echo '</div>';
-html_page_bottom();
+layout_page_end();

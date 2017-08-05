@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 MantisBT - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact project administrators by sending a message to the
@@ -20,8 +20,10 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Robert Munteaunu (rombert)
+Robert Munteanu (rombert)
 Roland Becker (atrol)
+Carlos Proensa (cproensa)
+Rafik Robeal (syncguru)
 
 
 Ex-Administrators
@@ -57,68 +59,81 @@ Glenn Henshaw
 Julian Fitzell
 David Hicks
 John Reese
+Carlos Proensa
+Rafik Robeal
 Jeroen Latour
 Siebrand Mazeland
+Roland Becker
 Robert Munteanu
 Gianluca Sforna
 André Eisenbach
 Daryn Warriner
-Roland Becker
 bigbadger
 Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
+translatewiki.net
 Bastian Pfenningschmidt
 Kornel Lesinski
+Joel C. Llano
 Adrian Spinei
-Martin Fuchs
 zakman
+Martin Fuchs
 jbrugger
 jctrosset
-Rafik Robeal
-ryandesign
-rufinus
+Vladimir Shulev
 Kirill Krasnov
+ryandesign
+Bob Le Bricodeur
+rufinus
+jhuggins
 David Newcomb
 Rasmus Lerdorf
-jhuggins
 yarick123
-jotel
 robertjf
+jotel
 Frank Rodgers
-Chris Fitch
-Johan Guilbaud
-davidu
+Luke Lee
 planser
-Franck Villaume
-Matej Habrnal
-Véronique Maginot
+Chris Fitch
+Tamás Gulácsi
+davidu
+Johan Guilbaud
 myplacedk
+Véronique Maginot
 smhanson
 vwegert
-Daniel Tschinder
+Matej Habrnal
+Franck Villaume
 Stefan Pettersson
 Vincent Sels
-Dominik Blunk
-Giovanni Giacobbi
-Jim Hanley
-Stéphane Veyret
-Tamás Gulácsi
-cyclespersecond
+Daniel Tschinder
 scoates
+Dominik Blunk
+cyclespersecond
+Martin Schleußer
+Val Kulkov
+Giovanni Giacobbi
+Stéphane Veyret
+Jim Hanley
 torija
-Alexander Menk
-Carlos Proensa
-Christian Weiske
-Dan Moore
-Markus Schneider
+Sebastian Limbach
 Matt McCutchen
-Tarik Sedlarevic
-badfiles
-jeckyhl
+Dan Moore
 mfoXen
+Christian Weiske
 puklos
+Tarik Sedlarevic
+Alexander Menk
+Manilal
+libregeek
+jeckyhl
+Alexander Ishmuradov
+Markus Schneider
+atrol
+Romain CABASSOT
+naveenbali
 Alexander Maringer
 Andreas Schopper
 Andreas Stieger
@@ -135,11 +150,17 @@ Florent Daigniere
 Gulacsi Tamas
 Heiko Schneider-Lange
 Henning Eiben
+Ian MacKenzie
 Jacky Alcine
 Jacob Hoover
+Jeremy Vriens
 Jonas Nockert
+José D. Grieco
 Karl Wiggisser
+Larry Lewis
 Laszlo Kovacs
+LeoZandvliet
+MS-Astra
 Marcin Kłeczek
 Marco Dings
 MatthieuR
@@ -147,10 +168,13 @@ Michael Lorer
 Michael Weibel
 Murray Crane
 Olivier Mengué
+Patrick Massot
+Peter Dave Hello
 Pier-Luc Duchaine
 Raul Baldner junior
 Raymond van Asperen
 Ross Nelson
+Ryan Rafe Lee
 SL-Gundam
 Sebastian Kayser
 Sergio Del Franco
@@ -160,11 +184,14 @@ cheesecracker
 cybd
 davethegr8
 dwethell
+epenet
 gcompagnon
 greenius
 mbaranski
 petertc
+spidgorny
 tfromm
+wapznw
 watergad
 Adrian Spinei
 

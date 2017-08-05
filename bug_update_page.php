@@ -109,7 +109,7 @@ $t_view_state = $t_show_view_state ? string_display_line( get_enum_element( 'vie
 $t_show_date_submitted = in_array( 'date_submitted', $t_fields );
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_show_reporter = in_array( 'reporter', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields );
+$t_show_handler = in_array( 'handler', $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $t_bug_id );
 $t_show_priority = in_array( 'priority', $t_fields );
 $t_show_severity = in_array( 'severity', $t_fields );
 $t_show_reproducibility = in_array( 'reproducibility', $t_fields );
@@ -155,35 +155,35 @@ if( $t_show_product_version ) {
 $t_formatted_bug_id = $t_show_id ? bug_format_id( $f_bug_id ) : '';
 $t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ) : '';
 
-if( $t_show_due_date ) {
-	require_js( 'jscalendar/calendar.js' );
-	require_js( 'jscalendar/lang/calendar-en.js' );
-	require_js( 'jscalendar/calendar-setup.js' );
-	require_css( 'calendar-blue.css' );
-}
+layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
-html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-
-print_recently_visited();
+layout_page_begin();
 
 ?>
-<br />
+<div class="col-md-12 col-xs-12">
 <div id="bug-update" class="form-container">
 	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
-		<table>
-			<thead>
-				<tr>
-					<td class="form-title" colspan="3">
-						<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
-						<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
-						<?php echo lang_get( 'updating_bug_advanced_title' ); ?>
-					</td>
-					<td class="right" colspan="3">
-						<?php print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) );
-						?>
-					</td>
-				</tr>
+		<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
+        <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
+
+		<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-comments"></i>
+				<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
+			</h4>
+			<div class="widget-toolbar no-border">
+				<div class="widget-menu">
+					<?php print_small_button( string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) ); ?>
+				</div>
+			</div>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<thead>
 
 <?php
 # Submit Button
@@ -235,7 +235,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-		echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id">';
+		echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id" class="input-sm">';
 		print_category_option_list( $t_bug->category_id, $t_bug->project_id );
 		echo '</select>';
 	}
@@ -246,7 +246,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_can_change_view_state ) {
-		echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state">';
+		echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state" class="input-sm">';
 		print_enum_string_option_list( 'view_state', (int)$t_bug->view_state );
 		echo '</select>';
 	} else if( $t_show_view_state ) {
@@ -269,13 +269,13 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 }
 
 #
-# Reporter
+# Reporter, Assigned To, Due Date
 #
 
-if( $t_show_reporter ) {
+if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 4;
+	$t_spacer = 0;
 
 	if( $t_show_reporter ) {
 		# Reporter
@@ -285,7 +285,7 @@ if( $t_show_reporter ) {
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( ON == config_get( 'limit_reporters' )
-		&&  !access_has_project_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) + 1, $t_bug->project_id )
+			&&  !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) ) + 1, $t_bug->project_id )
 		) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
@@ -303,35 +303,24 @@ if( $t_show_reporter ) {
 		$t_spacer += 2;
 	}
 
-	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	if ( $t_show_handler ) {
+		# Assigned To
+		echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
+		echo '<td>';
 
-	echo '</tr>';
-}
+		if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
+			echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
+			echo '<option value="0"></option>';
+			print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
+			echo '</select>';
+		} else {
+			echo $t_handler_name;
+		}
 
-#
-# Assigned To, Due Date
-#
-
-if( $t_show_handler || $t_show_due_date ) {
-	echo '<tr>';
-
-	$t_spacer = 2;
-
-	# Assigned To
-	echo '<th class="category"><label for="handler_id">' . lang_get( 'assigned_to' ) . '</label></th>';
-	echo '<td>';
-
-	if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
-		echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id">';
-		echo '<option value="0"></option>';
-		print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
-		echo '</select>';
+		echo '</td>';
 	} else {
-		echo $t_handler_name;
+		$t_spacer += 2;
 	}
-
-	echo '</td>';
 
 	if( $t_show_due_date ) {
 		# Due Date
@@ -339,7 +328,7 @@ if( $t_show_handler || $t_show_due_date ) {
 
 		if( bug_is_overdue( $t_bug_id ) ) {
 			echo '<td class="overdue">';
-		} else {
+		} else {	
 			echo '<td>';
 		}
 
@@ -347,9 +336,12 @@ if( $t_show_handler || $t_show_due_date ) {
 			$t_date_to_display = '';
 
 			if( !date_is_null( $t_bug->due_date ) ) {
-				$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
+				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
+				'maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
@@ -362,8 +354,9 @@ if( $t_show_handler || $t_show_due_date ) {
 	}
 
 	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
+	if( $t_spacer > 0 ) {
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	}
 	echo '</tr>';
 }
 
@@ -379,7 +372,7 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_priority ) {
 		# Priority
 		echo '<th class="category"><label for="priority">' . lang_get( 'priority' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="priority" name="priority">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="priority" name="priority" class="input-sm">';
 		print_enum_string_option_list( 'priority', $t_bug->priority );
 		echo '</select></td>';
 	} else {
@@ -389,7 +382,7 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_severity ) {
 		# Severity
 		echo '<th class="category"><label for="severity">' . lang_get( 'severity' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="severity" name="severity">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="severity" name="severity" class="input-sm">';
 		print_enum_string_option_list( 'severity', $t_bug->severity );
 		echo '</select></td>';
 	} else {
@@ -399,7 +392,7 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_reproducibility ) {
 		# Reproducibility
 		echo '<th class="category"><label for="reproducibility">' . lang_get( 'reproducibility' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility" class="input-sm">';
 		print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility );
 		echo '</select></td>';
 	} else {
@@ -442,7 +435,7 @@ if( $t_show_status || $t_show_resolution ) {
 	if( $t_show_resolution ) {
 		# Resolution
 		echo '<th class="category"><label for="resolution">' . lang_get( 'resolution' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="resolution" name="resolution">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="resolution" name="resolution" class="input-sm">';
 		print_enum_string_option_list( 'resolution', $t_bug->resolution );
 		echo '</select></td>';
 	} else {
@@ -469,7 +462,7 @@ if( $t_show_projection || $t_show_eta ) {
 	if( $t_show_projection ) {
 		# Projection
 		echo '<th class="category"><label for="projection">' . lang_get( 'projection' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="projection" name="projection">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="projection" name="projection" class="input-sm">';
 		print_enum_string_option_list( 'projection', $t_bug->projection );
 		echo '</select></td>';
 	} else {
@@ -479,7 +472,7 @@ if( $t_show_projection || $t_show_eta ) {
 	# ETA
 	if( $t_show_eta ) {
 		echo '<th class="category"><label for="eta">' . lang_get( 'eta' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="eta" name="eta">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="eta" name="eta" class="input-sm">';
 		print_enum_string_option_list( 'eta', (int)$t_bug->eta );
 		echo '</select></td>';
 	} else {
@@ -507,11 +500,11 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 		echo '<td>';
 
 		if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-			echo '<select ' . helper_get_tab_index() . ' id="platform" name="platform"><option value=""></option>';
+			echo '<select ' . helper_get_tab_index() . ' id="platform" name="platform" class="input-sm"><option value=""></option>';
 			print_platform_option_list( $t_bug->platform );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="platform" name="platform" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
+			echo '<input type="text" id="platform" name="platform" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
 		}
 
 		echo '</td>';
@@ -525,11 +518,11 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 		echo '<td>';
 
 		if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-			echo '<select ' . helper_get_tab_index() . ' id="os" name="os"><option value=""></option>';
+			echo '<select ' . helper_get_tab_index() . ' id="os" name="os" class="input-sm"><option value=""></option>';
 			print_os_option_list( $t_bug->os );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os" name="os" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
+			echo '<input type="text" id="os" name="os" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
 		}
 
 		echo '</td>';
@@ -543,11 +536,11 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 		echo '<td>';
 
 		if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-			echo '<select ' . helper_get_tab_index() . ' id="os_build" name="os_build"><option value=""></option>';
+			echo '<select ' . helper_get_tab_index() . ' id="os_build" name="os_build" class="input-sm"><option value=""></option>';
 			print_os_build_option_list( $t_bug->os_build );
 			echo '</select>';
 		} else {
-			echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
+			echo '<input type="text" id="os_build" name="os_build" class="typeahead input-sm" autocomplete = "off" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
 		}
 
 		echo '</td>';
@@ -575,7 +568,7 @@ if( $t_show_product_version || $t_show_product_build ) {
 	# Product Version  or Product Build, if version is suppressed
 	if( $t_show_product_version ) {
 		echo '<th class="category"><label for="version">' . lang_get( 'product_version' ) . '</label></th>';
-		echo '<td>', '<select ', helper_get_tab_index(), ' id="version" name="version">';
+		echo '<td>', '<select ', helper_get_tab_index(), ' id="version" name="version" class="input-sm">';
 		print_version_option_list( $t_bug->version, $t_bug->project_id, $t_product_version_released_mask );
 		echo '</select></td>';
 	} else {
@@ -585,7 +578,7 @@ if( $t_show_product_version || $t_show_product_build ) {
 	if( $t_show_product_build ) {
 		echo '<th class="category"><label for="build">' . lang_get( 'product_build' ) . '</label></th>';
 		echo '<td>';
-		echo '<input type="text" id="build" name="build" size="16" maxlength="32" ' . helper_get_tab_index() . ' value="' . $t_product_build_attribute . '" />';
+		echo '<input type="text" id="build" name="build" class="input-sm" size="16" maxlength="32" ' . helper_get_tab_index() . ' value="' . $t_product_build_attribute . '" />';
 		echo '</td>';
 	} else {
 		$t_spacer += 2;
@@ -609,7 +602,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	# Target Version
 	if( $t_show_target_version ) {
 		echo '<th class="category"><label for="target_version">' . lang_get( 'target_version' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="target_version" name="target_version">';
+		echo '<td><select ' . helper_get_tab_index() . ' id="target_version" name="target_version" class="input-sm">';
 		print_version_option_list( $t_bug->target_version, $t_bug->project_id, VERSION_FUTURE );
 		echo '</select></td>';
 	} else {
@@ -620,7 +613,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	if( $t_show_fixed_in_version ) {
 		echo '<th class="category"><label for="fixed_in_version">' . lang_get( 'fixed_in_version' ) . '</label></th>';
 		echo '<td>';
-		echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version">';
+		echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version" class="input-sm">';
 		print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL );
 		echo '</select>';
 		echo '</td>';
@@ -653,7 +646,7 @@ if( $t_show_description ) {
 	echo '<tr>';
 	echo '<th class="category"><label for="description">' . lang_get( 'description' ) . '</label></th>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" id="description" name="description">', $t_description_textarea, '</textarea>';
+	echo '<textarea class="form-control" ', helper_get_tab_index(), ' cols="80" rows="10" id="description" name="description">', $t_description_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
@@ -662,7 +655,7 @@ if( $t_show_steps_to_reproduce ) {
 	echo '<tr>';
 	echo '<th class="category"><label for="steps_to_reproduce">' . lang_get( 'steps_to_reproduce' ) . '</label></th>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" id="steps_to_reproduce" name="steps_to_reproduce">', $t_steps_to_reproduce_textarea, '</textarea>';
+	echo '<textarea class="form-control" ', helper_get_tab_index(), ' cols="80" rows="10" id="steps_to_reproduce" name="steps_to_reproduce">', $t_steps_to_reproduce_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
@@ -671,7 +664,7 @@ if( $t_show_additional_information ) {
 	echo '<tr>';
 	echo '<th class="category"><label for="additional_information">' . lang_get( 'additional_information' ) . '</label></th>';
 	echo '<td colspan="5">';
-	echo '<textarea ', helper_get_tab_index(), ' cols="80" rows="10" id="additional_information" name="additional_information">', $t_additional_information_textarea, '</textarea>';
+	echo '<textarea class="form-control" ', helper_get_tab_index(), ' cols="80" rows="10" id="additional_information" name="additional_information">', $t_additional_information_textarea, '</textarea>';
 	echo '</td></tr>';
 }
 
@@ -687,16 +680,19 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 	if( ( $t_def['display_update'] || $t_def['require_update'] ) && custom_field_has_write_access( $t_id, $t_bug_id ) ) {
 		$t_custom_fields_found = true;
 
+		$t_required_class = $t_def['require_update'] ? ' class="required" ' : '';
+
+		if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
+			$t_label_for = ' for="custom_field_' . string_attribute( $t_def['id'] ) . '" ';
+		} else {
+			$t_label_for = '';
+		}
+
 		echo '<tr>';
 		echo '<td class="category">';
-		if( $t_def['require_update'] ) {
-			echo '<span class="required">*</span>';
-		}
-		if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
-			echo '<label for="custom_field_' . string_attribute( $t_def['id'] ) . '">' . string_display( lang_get_defaulted( $t_def['name'] ) ) . '</label>';
-		} else {
-			echo string_display( lang_get_defaulted( $t_def['name'] ) );
-		}
+		echo '<label', $t_required_class, $t_label_for, '>';
+		echo '<span>', string_display( lang_get_defaulted( $t_def['name'] ) ), '</span>';
+		echo '</label>';
 		echo '</td><td colspan="5">';
 		print_custom_field_input( $t_def, $t_bug_id );
 		echo '</td></tr>';
@@ -712,7 +708,7 @@ if( $t_custom_fields_found ) {
 # Bugnote Text Box
 echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
+echo '<td colspan="5"><textarea class="form-control" ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
@@ -722,8 +718,10 @@ if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id )
 
 	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_bug_id ) ) {
-		echo '<input ', helper_get_tab_index(), ' type="checkbox" id="private" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
-		echo lang_get( 'private' );
+		echo '<label>';
+		echo '<input ', helper_get_tab_index(), ' type="checkbox" class="ace" id="private" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
+		echo '<span class="lbl"></span>';
+		echo '</label>';
 	} else {
 		echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 	}
@@ -736,35 +734,37 @@ if( config_get( 'time_tracking_enabled' ) ) {
 	if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
 		echo '<tr>';
 		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
-		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" size="5" placeholder="hh:mm" /></td></tr>';
+		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
 	}
 }
 
 event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
 
+echo '</table>';
+echo '</div>';
+echo '</div>';
+echo '</div>';
+
 # Submit Button
 if( $t_bottom_buttons_enabled ) {
 ?>
-			<tfoot>
-				<tr>
-					<td class="center" colspan="6">
-						<input <?php helper_get_tab_index(); ?>
-							type="submit" class="button"
-							value="<?php echo lang_get( 'update_information_button' ); ?>" />
-					</td>
-				</tr>
-			</tfoot>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input <?php helper_get_tab_index(); ?>
+			type="submit" class="btn btn-primary btn-white btn-round"
+			value="<?php echo lang_get( 'update_information_button' ); ?>" />
+	</div>
 <?php
 }
 ?>
 
-		</table>
-	</form>
+</div>
+</form>
+</div>
 </div>
 
 <?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
-html_page_bottom();
+layout_page_end();
 
 last_visited_issue( $t_bug_id );

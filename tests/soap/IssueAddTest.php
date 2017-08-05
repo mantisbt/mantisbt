@@ -81,14 +81,24 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 70, $t_issue->reproducibility->id );
 		$this->assertEquals( 'have not tried', $t_issue->reproducibility->name );
 		$this->assertEquals( 0, $t_issue->sponsorship_total );
-		$this->assertEquals( 10, $t_issue->projection->id );
-		$this->assertEquals( 'none', $t_issue->projection->name );
-		$this->assertEquals( 10, $t_issue->eta->id );
-		$this->assertEquals( 'none', $t_issue->eta->name );
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' ) ) {
+			$this->assertEquals( 10, $t_issue->projection->id );
+			$this->assertEquals( 'none', $t_issue->projection->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->projection ) );
+		}
+
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_eta' ) ) {
+			$this->assertEquals( 10, $t_issue->eta->id );
+			$this->assertEquals( 'none', $t_issue->eta->name );
+		} else {
+			$this->assertFalse( isset( $t_issue->eta ) );
+		}
+
 		$this->assertEquals( 10, $t_issue->resolution->id );
 		$this->assertEquals( 'open', $t_issue->resolution->name );
 		$this->assertEquals( false, $t_issue->sticky );
-
 	}
 
 	/**
@@ -127,13 +137,27 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithRareFields() {
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
 
-		$t_issue_to_add['projection'] = array( 'id' => 90 );    # redesign
-		$t_issue_to_add['eta'] = array( 'id' => 60 );           # > 1 month
+		$t_eta_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_eta' );
+		$t_projection_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_projection' );
+
+		if( $t_projection_enabled ) {
+			$t_issue_to_add['projection'] = array( 'id' => 90 );    # redesign
+		}
+
+		if( $t_eta_enabled ) {
+			$t_issue_to_add['eta'] = array( 'id' => 60 );           # > 1 month
+		}
+
 		$t_issue_to_add['resolution'] = array( 'id' => 80 );    # suspended
 		$t_issue_to_add['status'] = array( 'id' => 40 );        # confirmed
-		$t_issue_to_add['fixed_in_version'] = 'fixed version';
-		$t_issue_to_add['target_version'] = 'target version';
 		$t_issue_to_add['sticky'] = true;
+
+		# Must use valid versions for this to work.
+		# $t_issue_to_add['fixed_in_version'] = 'fixed version';
+		# $t_issue_to_add['target_version'] = 'target version';
+
+		$t_dt = DateTime::createFromFormat( 'U', time() );
+		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -142,13 +166,25 @@ class IssueAddTest extends SoapBase {
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# explicitly specified fields
-		$this->assertEquals( $t_issue_to_add['projection']['id'], $t_issue->projection->id );
-		$this->assertEquals( $t_issue_to_add['eta']['id'], $t_issue->eta->id );
+		if( $t_projection_enabled ) {
+			$this->assertEquals( $t_issue_to_add['projection']['id'], $t_issue->projection->id );
+		}
+
+		if( $t_eta_enabled ) {
+			$this->assertEquals( $t_issue_to_add['eta']['id'], $t_issue->eta->id );
+		}
+
 		$this->assertEquals( $t_issue_to_add['resolution']['id'], $t_issue->resolution->id );
 		$this->assertEquals( $t_issue_to_add['status']['id'], $t_issue->status->id );
-		$this->assertEquals( $t_issue_to_add['fixed_in_version'], $t_issue->fixed_in_version );
-		$this->assertEquals( $t_issue_to_add['target_version'], $t_issue->target_version );
 		$this->assertEquals( $t_issue_to_add['sticky'], $t_issue->sticky );
+
+		# Since versions are not defined, they are not going to be set
+		$this->assertFalse( isset( $t_issue->fixed_in_version ) );
+		$this->assertFalse( isset( $t_issue->target_version ) );
+
+		$t_read_dt = DateTime::createFromFormat( DateTime::ISO8601, $t_issue->last_updated );
+
+		$this->assertEquals( $t_dt, $t_read_dt );
 	}
 
 	/**

@@ -1,0 +1,640 @@
+/*
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+*/
+.footer .footer-inner {
+    text-align: left;
+    left: 0px;
+}
+.nav-search .nav-search-input {
+    width: 120px;
+}
+
+.rtl .pull-right {
+    float: left !important;
+}
+
+.rtl .pull-left {
+    float: right !important;
+}
+
+.rtl .footer .footer-inner {
+    text-align: right;
+}
+.rtl .navbar-right {
+    float: left !important;
+}
+.rtl .navbar-left {
+    float: right !important;
+}
+
+.nav-recent {
+    line-height: 14px;
+    position: absolute;
+    right: 150px;
+    top: 13px;
+    font-size: x-small;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.widget-title .badge {
+    padding:4px 10px;
+    line-height:12px;
+    margin: 0 0 0 5px;
+}
+
+.profile-activity {
+    padding: 10px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    padding: 6px 8px;
+}
+
+.width-13 {
+    width: 13%
+}
+
+.padding-2 {
+    padding:2px;
+}
+.padding-right-2 {
+    padding-right:2px;
+}
+.padding-left-2 {
+    padding-left:2px;
+}
+.rtl .padding-right-2 {
+    padding-left:2px;
+}
+.rtl .padding-left-2 {
+    padding-right:2px;
+}
+
+.padding-4 {
+    padding:4px;
+}
+.padding-right-4 {
+    padding-right:4px;
+}
+.padding-left-4 {
+    padding-left:4px;
+}
+.rtl .padding-right-4 {
+    padding-left:4px;
+}
+.rtl .padding-left-4 {
+    padding-right:4px;
+}
+
+.padding-8 {
+    padding:8px;
+}
+.padding-left-8 {
+    padding-left:8px;
+}
+.padding-right-8 {
+    padding-right:8px;
+}
+.rtl .padding-left-8 {
+    padding-right:8px;
+}
+.rtl .padding-right-8 {
+    padding-left:8px;
+}
+
+
+.margin-left-8 {
+    margin-left:8px;
+}
+.margin-right-8 {
+    margin-right:8px;
+}
+.rtl .margin-left-8 {
+    margin-right:8px;
+}
+.rtl .margin-right-8 {
+    margin-left:8px;
+}
+
+.login-container {
+    width: 100%;
+}
+
+.signup-box .toolbar {
+    background: none repeat scroll 0 0 #393939;
+}
+
+.widget-toolbar > .widget-menu > a {
+    display: inline-block;
+    font-size: 11px;
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+.widget-toolbar > .widget-menu > .input-xs {
+    line-height: 20px;
+}
+
+.widget-toolbar > .widget-menu > .btn-xs {
+    padding: 2px 5px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+table {
+    background-color: #ffffff !important;
+}
+
+/* Disable printing of link urls */
+a:link:after, a:visited:after {
+    content: normal !important;
+}
+
+/* Prevent horizontal scrolling when displaying db commands in install screen */
+pre {
+    word-break: break-all !important;
+}
+
+/* Disable theme backgrounds */
+.skin-3 .main-container:before {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+.light-login {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+/* Show pointer for active nav tabs */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    cursor: pointer !important;
+}
+
+.fa-xlg {
+    font-size: 1.6em;
+    line-height: 0.73em;
+    vertical-align: -15%;
+}
+
+.fa-status-box {
+    font-size: 1.8em;
+    line-height: 0.73em;
+    vertical-align: -25%;
+}
+
+.skin-3 .navbar .navbar-toggle {
+    background-color:  #777 !important;
+}
+
+.user-info {
+    line-height: 33px !important;
+}
+
+.page-content {
+    background-color: #fff;
+    margin: 0 0 10px;
+    padding: 8px 8px 24px;
+    position: relative;
+}
+
+.ace-nav .nav-avatar-container-40 {
+    width: 48px; 
+    height: 40px;
+    float: left;
+}
+
+.ace-nav .nav-avatar-40 {
+    margin: -4px 8px 0 0;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 4px !important;    
+}
+.profile-activity-avatar-40 {
+    border-radius: 15% !important;
+    margin-bottom: 6px !important;
+}
+
+.profile-activity-avatar-container-40 {
+    width: 48px; 
+    line-height: 40px;
+    float: left;
+    text-align: center;
+}
+
+.table-responsive {
+    margin-bottom: 0 !important;
+}
+
+.bugnote-avatar-80 {
+    border: 2px solid #c9d6e5;
+    border-radius: 15%;
+    box-shadow: none;
+    margin:0;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.bugnote-avatar-container-80 {
+    line-height: 80px;
+    width: 84px;
+    text-align: center;
+}
+
+.input-sm {
+    width: 90px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 4px 6px !important;
+}
+
+.input-xs {
+    width: auto !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 1px 2px !important;
+}
+
+select.input-xs {
+    border-radius: 0;
+    padding: 0px;
+    height: 22px;
+    line-height: 8px;
+}
+
+select.input-xs option, select.form-control.input-xs option {
+    padding: 0px 2px !important;
+}
+
+select[disabled] {
+    background-color: #eee !important;
+    color: #848484 !important;
+}
+
+textarea.input-xs, select.input-xs[multiple] {
+    height: auto;
+}
+
+.scroll-bar {
+    width: auto !important;
+}
+
+.table-condensed2 > thead > tr > th,
+.table-condensed2 > tbody > tr > th,
+.table-condensed2 > tfoot > tr > th,
+.table-condensed2 > thead > tr > td,
+.table-condensed2 > tbody > tr > td,
+.table-condensed2 > tfoot > tr > td {
+    padding: 1px 3px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
+}
+
+.navbar-toggle {
+    display:  block;
+}
+
+/* date/time picker */
+input.datetimepicker {
+    margin:0 5px 0 0;
+}
+
+i.datetimepicker {
+    cursor: pointer;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    color: #333333;
+}
+
+.dropdown-menu .divider {
+    margin: 2px 0;
+}
+
+.list > li {
+    height: 30px;
+    line-height: 22px;
+}
+.list > li > a {
+    display: block;
+    padding: 3px 12px;
+    white-space: nowrap;
+    margin: 1px 0;
+    color: #333;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.list > li > a:focus, list > li > a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.projects-searchbox input {
+    height: 30px;
+    margin: 6px 10px;
+}
+
+/* typeahaed styling */
+input.typeahead, input.tt-query, input.tt-hint {
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 24px;
+    min-width: 175px;
+    outline: medium none;
+}
+input.tt-hint, .form-group input.tt-hint {
+    background-color: #fff !important;
+    color: #b0b0b0 !important;
+}
+.tt-menu {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    left: 0 !important;
+    margin-top: 2px;
+    min-width: 175px;
+    padding: 8px 0;
+    position: absolute;
+    right: 0 !important;
+    text-align: left;
+}
+.tt-suggestion {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 3px 12px 4px;
+}
+.tt-suggestion.tt-selectable:hover, .tt-suggestion.tt-cursor {
+    background-color: #4f99c6;
+    color: #fff;
+    cursor: pointer;
+}
+.tt-suggestion p {
+    margin: 0;
+}
+input.typeahead.scrollable ~ .tt-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* dropzone styling */
+.dropzone {
+    background: rgba(0, 0, 0, 0.03) none repeat scroll 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    min-height: 60px;
+}
+
+.dropzone .dz-preview, .dropzone-previews .dz-preview {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+    font-size: 14px;
+}
+
+.dropzone .dz-preview, .dropzone-previews .dz-preview {
+    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+    border: 1px solid #acacac;
+    display: inline-block;
+    margin: 17px;
+    padding: 6px;
+    position: relative;
+    vertical-align: top;
+}
+
+.dropzone .dz-preview .dz-details, .dropzone-previews .dz-preview .dz-details {
+    background: #ebebeb none repeat scroll 0 0;
+    height: 100px;
+    margin-bottom: 22px;
+    padding: 5px;
+    position: relative;
+    width: 100px;
+}
+
+.dropzone .dz-preview .dz-details .dz-filename:not(:hover) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropzone .dz-preview .dz-details .dz-size, .dropzone-previews .dz-preview .dz-details .dz-size {
+    font-size: 14px;
+    bottom: -38px;
+    height: 28px;
+    left: 3px;
+    line-height: 28px;
+    position: absolute;
+}
+
+.dropzone .dz-preview .dz-details img, .dropzone-previews .dz-preview .dz-details img {
+    height: 100px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100px;
+}
+
+.dropzone a.dz-remove, .dropzone-previews a.dz-remove {
+    background: #d15b47 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px !important;
+}
+
+.dropzone a.dz-remove:hover, .dropzone-previews a.dz-remove:hover {
+    background: #b74635 none repeat scroll 0 0;
+    color: #fff;
+    text-decoration: none !important;
+}
+
+.dropzone .dz-preview .dz-success-mark, .dropzone-previews .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
+    display: none;
+    font-size: 30px;
+    height: 40px;
+    position: absolute;
+    right: -10px;
+    text-align: center;
+    top: -10px;
+    width: 40px;
+}
+
+.dropzone .dz-preview .dz-error-mark, .dropzone-previews .dz-preview .dz-error-mark {
+    background-position: -268px -123px;
+    color: #ee162d;
+}
+
+.dropzone .dz-preview .dz-error-message, .dropzone-previews .dz-preview .dz-error-message {
+    background: rgba(245, 245, 245, 0.8) none repeat scroll 0 0;
+    color: #800;
+    display: none;
+    left: -20px;
+    max-width: 500px;
+    min-width: 140px;
+    padding: 8px 10px;
+    position: absolute;
+    top: -5px;
+    z-index: 500;
+}
+
+.dropzone .progress {
+  margin-bottom: 10px;
+}
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .page-content {
+        padding: 8px 16px 24px;
+    }
+
+    .input-sm {
+        width: 120px !important;
+    }
+
+    .navbar.navbar-collapse .navbar-header {
+        float: left !important;
+    }
+
+    .navbar.navbar-collapse .navbar-buttons {
+        float: right !important;
+        border-style: none !important;
+        width: auto;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+
+    .input-sm {
+        width: auto !important;
+    }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .sidebar.compact ~ .footer .footer-inner {
+        left: 125px;
+    }
+
+    .sidebar.menu-min ~ .footer .footer-inner {
+        left: 43px;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto !important;
+        margin-right: 43px !important;
+    }
+
+    .rtl .sidebar.compact ~ .footer .footer-inner {
+        right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min ~ .footer .footer-inner {
+        right: 43px !important;
+    }
+
+    .navbar.navbar-collapse .navbar-header {
+        float: left !important;
+    }
+
+    .navbar.navbar-collapse .navbar-buttons {
+        float: right !important;
+        border-style: none !important;
+        width: auto;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+
+    .input-sm {
+        width: auto !important;
+    }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .sidebar.compact ~ .footer .footer-inner {
+        left: 125px;
+    }
+
+    .sidebar.menu-min ~ .footer .footer-inner {
+        left: 43px;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto !important;
+        margin-right: 43px !important;
+    }
+
+    .rtl .sidebar.compact ~ .footer .footer-inner {
+        right: 125px !important;
+    }
+
+    .rtl .sidebar.menu-min ~ .footer .footer-inner {
+        right: 43px !important;
+    }
+
+}
+

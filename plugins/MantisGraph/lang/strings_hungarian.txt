@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,37 +40,28 @@
  *
  * @author Dj
  * @author Glanthor Reviol
+ * @author MeskoBalazs
  */
 
 $s_plugin_graph_title = 'Mantis diagramok';
 $s_plugin_graph_description = 'Hivatalos diagram bővítmény.';
 $s_plugin_MantisGraph_title = 'Mantis diagramok';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Haladó összefoglaló';
 $s_plugin_MantisGraph_config = 'Beállítás';
 $s_plugin_MantisGraph_synthesis_link = 'Szintézis';
 $s_plugin_MantisGraph_status_link = 'Állapot szerint';
 $s_plugin_MantisGraph_priority_link = 'Prioritás szerint';
 $s_plugin_MantisGraph_severity_link = 'Súlyosság szerint';
 $s_plugin_MantisGraph_category_link = 'Kategória szerint';
-$s_plugin_MantisGraph_resolution_link = 'Felbontás szerint';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Diagram';
-$s_plugin_MantisGraph_library = 'Használandó diagramkönyvtár';
-$s_plugin_MantisGraph_bundled = 'Használd a beépítettet';
-$s_plugin_MantisGraph_window_width = 'Grafikon szélessége (képpontban)';
-$s_plugin_MantisGraph_bar_aspect = 'Oszlopdiagram képaránya (magasság/szélesség)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Soronként megjelenítendő grafikonok a haladó összefoglaló lapon';
-$s_plugin_MantisGraph_font = 'Betűtípus';
-$s_plugin_MantisGraph_jpgraph_path = 'JpGraph könyvtár elérési útja';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Hagyd üresen az alapértelmezésért: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph élsimítás';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Az élsimítás javítja egyes grafikonok képi megjelenését a teljesítmény rovására (akár 8× lassabb)';
-$s_plugin_MantisGraph_enabled = 'Be';
-$s_plugin_MantisGraph_disabled = 'Ki';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Összesített diagram státusz szerint';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Összesített diagram prioritás szerint';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Összesített diagram súlyosság szerint';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Összesített diagram kategória szerint';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Összesített diagram döntés szerint';
+$s_plugin_MantisGraph_resolution_link = 'Döntés szerint';
+$s_plugin_MantisGraph_issue_trends_link = 'Ügy trendek';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Összesítő grafikon állapot alapján';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Összesítő grafikon prioritás alapján';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Összesítő grafikon súlyosság alapján';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Összesítő grafikon kategória alapján';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Döntési diagram alapján';
+$s_plugin_MantisGraph_graph_developer_title = 'Fejlesztői diagram szerint';
+$s_plugin_MantisGraph_graph_reporter_title = 'Jelentői diagram szerint';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Megnyitott, megoldott és maradék ügyek';
 $s_plugin_MantisGraph_by_status_pct = 'státusz százalék szerint';
 $s_plugin_MantisGraph_by_priority_pct = 'prioritás százalék szerint';
 $s_plugin_MantisGraph_by_severity_pct = 'súlyosság százalék szerint';
@@ -81,13 +72,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'prioritás és státusz szerint';
 $s_plugin_MantisGraph_by_resolution_mix = 'döntés és státusz szerint';
 $s_plugin_MantisGraph_legend_still_open = 'Még nyitva';
 $s_plugin_MantisGraph_legend_resolved = 'Megoldva';
-$s_plugin_MantisGraph_legend_assigned = 'Hozzárendelve';
-$s_plugin_MantisGraph_legend_total = 'Összesen';
-$s_plugin_MantisGraph_legend_opened = 'Nyitva';
-$s_plugin_MantisGraph_legend_closed = 'Lezárva';
 $s_plugin_MantisGraph_legend_reported = 'Bejelentve';
-$s_plugin_MantisGraph_cumulative = 'Halmozódó';
-$s_plugin_MantisGraph_not_enough_data = 'Nincs elég adat diagramkészítéshez';
 $s_plugin_MantisGraph_period_none = 'Nincs';
 $s_plugin_MantisGraph_period_this_week = 'Ezen a héten';
 $s_plugin_MantisGraph_period_last_week = 'Múlt héten';
@@ -99,12 +84,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Utolsó negyedévben';
 $s_plugin_MantisGraph_period_year_to_date = 'Folyó évben';
 $s_plugin_MantisGraph_period_select = 'Tetszőleges dátum szerint';
 $s_plugin_MantisGraph_period_last_year = 'Utolsó évben';
-$s_plugin_MantisGraph_select = 'Kérjük, válasszon';
-$s_plugin_MantisGraph_select_bystatus = 'státusz szerint';
-$s_plugin_MantisGraph_select_summbystatus = 'Összesítés státuszonként';
-$s_plugin_MantisGraph_select_bycat = 'Összesítés kategóriánként';
-$s_plugin_MantisGraph_select_both = 'Összesítés státuszonként és kategóriánként';
-$s_plugin_MantisGraph_show_as_graph = 'Megjelenítés diagramon';
-$s_plugin_MantisGraph_show_as_table = 'Megjelenítés táblázatban';
-$s_plugin_MantisGraph_show_graph = 'Diagram megjelenítése';
 $s_plugin_MantisGraph_graph_page = 'Ügytörténeti diagram';

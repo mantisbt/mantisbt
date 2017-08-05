@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,11 +47,11 @@ $s_plugin_XmlImportExport_title = '匯入/匯出問題';
 $s_plugin_XmlImportExport_description = '開啟 MantisBT XML 匯入/匯出功能。';
 $s_plugin_XmlImportExport_import = '匯入問題';
 $s_plugin_XmlImportExport_export = 'XML 匯出';
-$s_plugin_XmlImportExport_config_title = 'XML 匯入/匯出存取等級設定';
+$s_plugin_XmlImportExport_config_title = 'XML 匯入/匯出存取權限設置';
 $s_plugin_XmlImportExport_import_threshold = '匯入問題';
-$s_plugin_XmlImportExport_export_threshold = '匯入問題';
+$s_plugin_XmlImportExport_export_threshold = '匯出問題';
 $s_plugin_XmlImportExport_action_update = '更新';
-$s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案:';
+$s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案: \'%s\'';
 $s_plugin_XmlImportExport_import_options = '匯入選項';
 $s_plugin_XmlImportExport_cross_references = '交叉參照';
 $s_plugin_XmlImportExport_default_strategy = '預設轉換方式';
@@ -62,6 +62,6 @@ $s_plugin_XmlImportExport_link_desc = '轉換為連結至原來項目';
 $s_plugin_XmlImportExport_disable = '關閉';
 $s_plugin_XmlImportExport_disable_desc = '關閉連結';
 $s_plugin_XmlImportExport_fallback = '還原方式 (當 重新編號 無法使用時):';
-$s_plugin_XmlImportExport_fallback_category = '還原類別:';
-$s_plugin_XmlImportExport_keep_same_category = '嘗試保留在相同類別';
+$s_plugin_XmlImportExport_fallback_category = '備用類別:';
+$s_plugin_XmlImportExport_keep_same_category = '嘗試使用在相同類別';
 $s_plugin_XmlImportExport_error_no_xml = '找不到 xmlreader 與 xmlwriter 擴充套件';

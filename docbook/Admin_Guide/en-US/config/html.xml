@@ -7,6 +7,34 @@
 
 	<variablelist>
 		<varlistentry>
+			<term>$g_html_make_links</term>
+			<listitem>
+				<para>This flag controls whether www URLs and email addresses are
+					automatically converted into clickable links as well as where
+					the www links open when clicked. The options are:
+					<itemizedlist>
+						<listitem>
+							<para><emphasis>OFF</emphasis> - do not convert URLs or emails
+							</para>
+						</listitem>
+						<listitem>
+							<para><emphasis>LINKS_SAME_WINDOW</emphasis> -
+								convert to links that open in current tab/window.
+								NOTE: for backwards-compatibility, this is
+								equivalent to <emphasis>ON</emphasis>.
+							</para>
+						</listitem>
+						<listitem>
+							<para><emphasis>LINKS_NEW_WINDOW</emphasis> -
+								convert to links that open in a new tab/window
+							</para>
+						</listitem>
+					</itemizedlist>
+					Default is <emphasis>LINKS_SAME_WINDOW</emphasis>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_html_valid_tags</term>
 			<listitem>
 				<para>This is the list of HTML tags that are allowed.Do NOT
@@ -15,35 +43,50 @@
 					is. The $g_allow_href_tags does not have to be enabled to make URL
 					links. The package will automatically hyperlink properly formatted
 					URLs eg. http://blah.blah/ or
-					mailto://me@more.com/ 
+					mailto://me@more.com/
 				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_hr_size</term>
-			<listitem>
-				<para>hr size.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_hr_width</term>
-			<listitem>
-				<para>hr width. Leave off the percentage (%) symbol.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_bottom_include_page</term>
 			<listitem>
-				<para>If this page exists it will be displayed at the bottom of
-					every page. It makes a good company branding include page.
+				<para>Specifies a file to be included at the bottom of each page.
+					It can be used e.g. for company branding, to include Google
+					Analytics script, etc.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_top_include_page</term>
 			<listitem>
-				<para>If this page exists it will be displayed at the top of every
-					page. It makes a good company branding include page.
+				<para>Specifies a file to be included at the top of each page.
+					It can be used e.g. for company branding.
+				</para>
+				<para>If a file is supplied, the logo specified by
+					<literal>$g_logo_image</literal> (see
+					<xref linkend="admin.config.display" />) will not be shown,
+					and the include file will have to handle display of the logo.
+					To do so you can use the <literal>html_print_logo()</literal>
+					API function, which will display the logo with an URL link if
+					one has been specified in <literal>$g_logo_url</literal>
+				</para>
+				<para>Example top include PHP file with logo and centered page title:
+<programlisting>
+&lt;div id="banner" style="display: flex; align-items: center;"&gt;
+	&lt;div style="width: 10%;"&gt;
+		&lt;?php html_print_logo(); ?&gt;
+	&lt;/div&gt;
+
+	&lt;div class="center"&gt;
+		&lt;span class="pagetitle"&gt;
+			&lt;?php global $g_window_title; echo $g_window_title; ?&gt;
+		&lt;/span&gt;
+	&lt;/div&gt;
+
+	&lt;div style="width: 10%;"&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</programlisting>
 				</para>
 			</listitem>
 		</varlistentry>
@@ -86,8 +129,18 @@
 					the link to be executed. For example:
 <programlisting>
 $g_main_menu_custom_options = array(
-	array( 'My Link', MANAGER, 'my_link.php' ),
-	array( 'My Link2', ADMINISTRATOR, 'my_link2.php' ),
+    array( 
+        'title'        =&gt; 'My Link',
+        'access_level' =&gt; MANAGER,
+        'url'          =&gt; 'my_link.php',
+        'icon'         =&gt; 'fa-plug'
+    ),
+    array( 
+        'title'        =&gt; 'My Link2',
+        'access_level' =&gt; ADMINISTRATOR,
+        'url'          =&gt; 'my_link2.php',
+        'icon'         =&gt; 'fa-plug'
+    )
 );
 </programlisting>
 					Note that if the caption is found in the
@@ -97,6 +150,14 @@ $g_main_menu_custom_options = array(
 					string. Options will only be added to the menu if
 					the current logged in user has the appropriate
 					access level.
+				</para>
+				<para>
+					Use icons from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>.
+					Add "fa-" prefix to icon name.
+				</para>
+				<para>
+					Access level is an optional field, and no check will be done if it is not set.
+					Icon is an optional field, and 'fa-plug' will be used if it is not set.
 				</para>
 			</listitem>
 		</varlistentry>

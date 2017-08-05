@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@
 $s_plugin_graph_title = 'Graphicos de Mantis';
 $s_plugin_graph_description = 'Plug-in official de graphicos.';
 $s_plugin_MantisGraph_title = 'Graphicos de Mantis';
-$s_plugin_MantisGraph_menu_advanced_summary = 'Summario avantiate';
 $s_plugin_MantisGraph_config = 'Configuration';
 $s_plugin_MantisGraph_synthesis_link = 'Synthese';
 $s_plugin_MantisGraph_status_link = 'Per stato';
@@ -52,24 +51,11 @@ $s_plugin_MantisGraph_priority_link = 'Per prioritate';
 $s_plugin_MantisGraph_severity_link = 'Per severitate';
 $s_plugin_MantisGraph_category_link = 'Per categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per resolution';
-$s_plugin_MantisGraph_graph_bug_page_link = 'Graphico';
-$s_plugin_MantisGraph_library = 'Bibliotheca de graphicos a usar';
-$s_plugin_MantisGraph_bundled = 'Integrate';
-$s_plugin_MantisGraph_window_width = 'Latitude del graphico (in pixeles)';
-$s_plugin_MantisGraph_bar_aspect = 'Proportion del graphico a barras (altitude/latitude)';
-$s_plugin_MantisGraph_summary_graphs_per_row = 'Graphicos a monstrar per linea in le pagina de summario avantiate';
-$s_plugin_MantisGraph_font = 'Typo de litteras';
-$s_plugin_MantisGraph_jpgraph_path = 'Cammino de systema del bibliotheca JpGraph';
-$s_plugin_MantisGraph_jpgraph_path_default = 'Lassar vacue pro predefinition: {mantisroot}/library/jpgraph';
-$s_plugin_MantisGraph_jpgraph_antialias = 'Anti-aliasing JpGraph';
-$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing meliora le apparentia visual de certe graphicos al costo del performance (usque a 8 vices plus lente)';
-$s_plugin_MantisGraph_enabled = 'Active';
-$s_plugin_MantisGraph_disabled = 'Non active';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Graphicos de synthese per stato';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Graphicos de synthese per prioritate';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Graphicos de synthese per severitate';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Graphicos de synthese per categoria';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Graphicos de synthese per resolution';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Per graphicos de stato';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Per graphicos de prioritate';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Per graphicos de severitate';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Per graphicos de categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Per graphicos de resolution';
 $s_plugin_MantisGraph_by_status_pct = 'Per percentage de stato';
 $s_plugin_MantisGraph_by_priority_pct = 'Per percentage de prioritate';
 $s_plugin_MantisGraph_by_severity_pct = 'Per percentage de severitate';
@@ -80,13 +66,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'Per prioritate e stato';
 $s_plugin_MantisGraph_by_resolution_mix = 'Per resolution e stato';
 $s_plugin_MantisGraph_legend_still_open = 'Ancora aperte';
 $s_plugin_MantisGraph_legend_resolved = 'Resolvite';
-$s_plugin_MantisGraph_legend_assigned = 'Assignate';
-$s_plugin_MantisGraph_legend_total = 'Total';
-$s_plugin_MantisGraph_legend_opened = 'Aperite';
-$s_plugin_MantisGraph_legend_closed = 'Claudite';
 $s_plugin_MantisGraph_legend_reported = 'Reportate';
-$s_plugin_MantisGraph_cumulative = 'Cumulative';
-$s_plugin_MantisGraph_not_enough_data = 'Non satis de datos pro crear graphicos';
 $s_plugin_MantisGraph_period_none = 'Nulle';
 $s_plugin_MantisGraph_period_this_week = 'Iste septimana';
 $s_plugin_MantisGraph_period_last_week = 'Ultime septimana';
@@ -98,12 +78,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Ultime trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Iste anno';
 $s_plugin_MantisGraph_period_select = 'Qualcunque datas';
 $s_plugin_MantisGraph_period_last_year = 'Ultime anno';
-$s_plugin_MantisGraph_select = 'Per favor selige';
-$s_plugin_MantisGraph_select_bystatus = 'per stato';
-$s_plugin_MantisGraph_select_summbystatus = 'Summario per stato';
-$s_plugin_MantisGraph_select_bycat = 'Summario per categoria';
-$s_plugin_MantisGraph_select_both = 'Summario per stato e categoria';
-$s_plugin_MantisGraph_show_as_graph = 'Monstrar como graphico';
-$s_plugin_MantisGraph_show_as_table = 'Monstrar como tabella';
-$s_plugin_MantisGraph_show_graph = 'Monstrar graphico';
 $s_plugin_MantisGraph_graph_page = 'Facer graphico del historia del problema';

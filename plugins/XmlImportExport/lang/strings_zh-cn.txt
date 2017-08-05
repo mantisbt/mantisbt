@@ -1,0 +1,60 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Chinese (China) (中文（中国大陆）‎)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Yanmiao liu
+ */
+
+$s_plugin_XmlImportExport_title = '导入/导出问题';
+$s_plugin_XmlImportExport_description = '为 MantisBT 添加基于 XML 的导入导出功能。';
+$s_plugin_XmlImportExport_import = '导入问题';
+$s_plugin_XmlImportExport_export = 'XML 导出';
+$s_plugin_XmlImportExport_importing_in_project = '导入问题到项目:';
+$s_plugin_XmlImportExport_import_options = '导入选项';
+$s_plugin_XmlImportExport_cross_references = '交叉引用';
+$s_plugin_XmlImportExport_default_strategy = '默认转换策略:';
+$s_plugin_XmlImportExport_renumber = '重新编号';
+$s_plugin_XmlImportExport_renumber_desc = '尝试将引用转换成新的编号';
+$s_plugin_XmlImportExport_link = '链接';
+$s_plugin_XmlImportExport_link_desc = '转换为原条目的一个链接';
+$s_plugin_XmlImportExport_disable = '禁用';
+$s_plugin_XmlImportExport_disable_desc = '禁用链接';
+$s_plugin_XmlImportExport_fallback = '备选策略 (当不使用"重新编号"时):';
+$s_plugin_XmlImportExport_fallback_category = '备选分类:';
+$s_plugin_XmlImportExport_keep_same_category = '尽量保持同一类别';

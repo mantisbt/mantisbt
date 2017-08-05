@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@
  * @file
  *
  * @author DRIHEM
+ * @author Maroen1990
  * @author Meno25
  * @author OsamaK
  * @author Test Create account
@@ -48,6 +49,8 @@ $s_plugin_XmlImportExport_title = 'استورد/صدّر قضايا';
 $s_plugin_XmlImportExport_description = 'يضيف أستيراد مبني على XML  و قدرات التصدير إلى MantisBT.';
 $s_plugin_XmlImportExport_import = 'استورد قضايا';
 $s_plugin_XmlImportExport_export = 'تصدير XML';
+$s_plugin_XmlImportExport_config_title = 'استيراد/تصدير XML تهيئة مستويات الدخول';
+$s_plugin_XmlImportExport_import_threshold = 'استورد قضايا';
 $s_plugin_XmlImportExport_export_threshold = 'تصدير القضايا';
 $s_plugin_XmlImportExport_action_update = 'تحديث';
 $s_plugin_XmlImportExport_importing_in_project = 'أستيراد القضايا في المشروع:';

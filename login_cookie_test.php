@@ -51,7 +51,7 @@ if( auth_is_user_authenticated() ) {
 
 	$t_redirect_url = $c_return;
 } else {
-	$t_redirect_url = 'login_page.php?cookie_error=1';
+	$t_redirect_url = auth_login_page( 'cookie_error=1' );
 }
 
 print_header_redirect( $t_redirect_url, true, true );

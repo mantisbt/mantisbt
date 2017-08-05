@@ -40,11 +40,17 @@ require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
+require_api( 'string_api.php' );
 require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+require_css( 'login.css' );
+
 
 # check if at least one way to get here is enabled
-if( OFF == config_get( 'allow_signup' ) &&
+if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
@@ -61,14 +67,11 @@ if( auth_is_user_authenticated() ) {
 	print_header_redirect( 'verify.php?id=' . $f_user_id . '&confirm_hash=' . $f_confirm_hash );
 }
 
-$t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
+$t_token_confirm_hash = token_get_value( TOKEN_ACCOUNT_ACTIVATION, $f_user_id );
 
-if( $f_confirm_hash != $t_calculated_confirm_hash ) {
+if( $t_token_confirm_hash == null || $f_confirm_hash !== $t_token_confirm_hash ) {
 	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 }
-
-# set a temporary cookie so the login information is passed between pages.
-auth_set_cookies( $f_user_id, false );
 
 user_reset_failed_login_count_to_zero( $f_user_id );
 user_reset_lost_password_in_progress_count_to_zero( $f_user_id );
@@ -79,5 +82,112 @@ auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 user_increment_login_count( $f_user_id );
 
 
-define( 'ACCOUNT_VERIFICATION_INC', true );
-include ( dirname( __FILE__ ) . '/account_page.php' );
+# extracts the user information
+# and prefixes it with u_
+$t_row = user_get_row( $f_user_id );
+
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
+
+$t_can_change_password = auth_can_set_password( $f_user_id );
+
+layout_login_page_begin();
+
+?>
+
+<div class="col-md-offset-4 col-md-4 col-sm-8 col-sm-offset-1">
+	<div class="login-container">
+		<div class="space-12 hidden-480"></div>
+		<a href="<?php echo config_get( 'logo_url' ) ?>">
+			<h1 class="center white">
+				<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+			</h1>
+		</a>
+		<div class="space-24 hidden-480"></div>
+
+		<?php
+			if( $t_can_change_password ) {
+				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning ">';
+				echo lang_get( 'verify_warning' ) . '<br />';
+				echo lang_get( 'verify_change_password' );
+				echo '</div>';
+			} else {
+				echo '<div id="reset-passwd-msg" class="alert alert-sm alert-warning">';
+				echo auth_password_managed_elsewhere_message();
+				echo '</div>';
+			}
+		?>
+
+
+		<?php
+		if( $t_can_change_password ) {
+		?>
+
+			<div class="position-relative">
+			<div class="signup-box visible widget-box no-border" id="login-box">
+			<div class="widget-body">
+				<div class="widget-main">
+
+					<!-- Login Form BEGIN -->
+
+		<div id="verify-div" class="form-container">
+			<form id="account-update-form" method="post" action="account_update.php">
+				<fieldset>
+					<legend><span><?php echo lang_get( 'edit_account_title' ) . ' - ' . string_display_line( $u_username ) ?></span></legend>
+					<div class="space-10"></div>
+					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
+					<?php
+					echo form_security_field( 'account_update' );
+					# When verifying account, set a token and don't display current password
+					token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+					?>
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="realname" class="form-control" placeholder="<?php echo lang_get( 'realname' ) ?>" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
+								<i class="ace-icon fa fa-user"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="password" class="form-control" placeholder="<?php echo lang_get( 'password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password"/>
+								<i class="ace-icon fa fa-lock"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+					
+					<div class="field-container">
+						<label class="block clearfix">
+							<span class="block input-icon input-icon-right">
+								<input id="password-confirm" class="form-control" placeholder="<?php echo lang_get( 'confirm_password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password_confirm"/>
+								<i class="ace-icon fa fa-lock"></i>
+							</span>
+						</label>
+						<span class="label-style"></span>
+					</div>
+					<div class="space-18"></div>
+					<span class="submit-button">
+						<button type="submit" class="width-100 width-40 pull-right btn btn-success btn-inverse bigger-110">
+							<span class="bigger-110"><?php echo lang_get( 'update_user_button' ) ?></span>
+						</button>
+					</span>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+			</div>
+			</div>
+			</div>
+			</div>
+
+<?php
+}
+
+layout_login_page_end();

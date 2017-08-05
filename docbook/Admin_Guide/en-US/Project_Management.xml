@@ -220,10 +220,6 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         <title>Time Tracking</title>
 
         <para>
-					This is currently a work in progress. To follow the work have a look on the wiki page <ulink url="http://www.mantisbt.org/wiki/doku.php/mantisbt:issue:4428">Time Tracking (Issue 4428)</ulink>
-				</para>
-
-        <para>
 					To activate the Time Tracking feature you have to set the configuration option "time_tracking_enabled" to ON. To activating the Time Tracking you can :
 					<itemizedlist>
 						<listitem><para>

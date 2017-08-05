@@ -85,7 +85,7 @@ if( $t_show_sponsorships ) {
 <table class="width100" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
-			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" />
+			<i class="fa fa-usd" alt="<?php echo lang_get( 'sponsor_verb' ) ?>"></i>
 		</td>
 		<td class="form-title" colspan="2"><?php
 			collapse_icon( 'sponsorship' );
@@ -103,15 +103,15 @@ if( $t_show_sponsorships ) {
 <?php
 	if( $t_can_sponsor ) {
 ?>
-	<tr class="row-1">
+	<tr>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
 		<td>
 			<form method="post" action="bug_set_sponsorship.php">
 				<?php echo form_security_field( 'bug_set_sponsorship' ) ?>
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
-				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
-				<input type="submit" class="button" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
+				<input type="text" name="amount" class="input-sm" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
 			</form>
 		</td>
 	</tr>
@@ -121,7 +121,7 @@ if( $t_show_sponsorships ) {
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if( $t_total_sponsorship > 0 ) {
 ?>
-	<tr class="row-2">
+	<tr>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
 		<td>
 		<?php

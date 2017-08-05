@@ -16,6 +16,13 @@
 			next release.
 		</para>
 
+		<note><para>The standard MantisBT language strings are sometimes reused
+			in different contexts.
+			If you are planning to override some strings to meet your specific
+			requirements, make sure to analyze where they are used to avoids
+			unexpected issues.
+		</para></note>
+
 		<para>Two formats are supported within this file:
 		</para>
 
@@ -398,7 +405,7 @@ switch( $g_active_language ) {
 		break;
 
 	default:
-		# Default language, as defined in config_inc.php
+		# Default language, as defined in config/config_inc.php
 		# ($g_default_language, English in this case)
 		$s_my_start_date = 'Start Date';
 		break;
@@ -646,7 +653,7 @@ $s_access_levels_enum_string =
 			</para>
         </formalpara>
         <para>
-            The file <filename>custom_constants_inc.php</filename> is supported for the
+            The file <filename>config/custom_constants_inc.php</filename> is supported for the
             exclusive purpose of allowing administrators to define their own
             constants while maintaining a simple upgrade path for future
             releases of MantisBT. Note that this file is not distributed with
@@ -659,7 +666,7 @@ define( 'SENIOR_DEVELOPER', 60 );
         </para>
 
         <para>
-            In <filename>config_inc.php</filename>
+            In <filename>config/config_inc.php</filename>
 <programlisting>
 // Remove Updater and add Senior Developer
 $g_access_levels_enum_string =
@@ -700,7 +707,9 @@ $s_access_levels_enum_string =
     <section id="admin.customize.email">
         <title>Email Notifications</title>
 
-        <para>See Email in the Configuration section.</para>
+        <para>See <xref linkend="admin.config.email" />
+        	in the Configuration section.
+        </para>
 
         <para>Examples:
             <itemizedlist>
@@ -783,12 +792,13 @@ $g_notify_flags['owner'] = array(
                         about. Also send new issue notifications to managers so they can
                         screen them.
 <programlisting>
-$g_mail_receive_own = OFF;
+$g_email_receive_own = OFF;
 $g_default_notify_flags = array(
 	'reporter'      => ON,
 	'handler'       => ON,
 	'monitor'       => ON,
 	'bugnotes'      => ON,
+	'category'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
 );
@@ -820,7 +830,7 @@ $g_notify_flags['new'] = array(
 			<orderedlist>
 				<listitem>
 					<para>Define a constant to map the new status to.</para>
-					<para>In the main MantisBT directory, locate and edit file
+					<para>In subfolder config, locate and edit file
 						<emphasis>custom_constants_inc.php</emphasis>;
 						(create it if it does not exist)
 						<programlisting>
@@ -835,7 +845,7 @@ $g_notify_flags['new'] = array(
 					<para>Define the new status in the enumeration, as well as
 						the corresponding color code.
 					</para>
-					<para>In the main mantisbt directory, edit your
+					<para>In subfolder config, edit your
 						<emphasis>config_inc.php</emphasis>
 
 						<programlisting>
@@ -876,7 +886,7 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 						underscores in the language strings names (e.g.
 						for '35:pending user', use '$s_pending_user_bug_button')
 					</para>
-					<para>In the main mantisbt directory, locate and edit
+					<para>In subfolder config, locate and edit
 						the <emphasis>Custom Strings File</emphasis>
 						(see <xref linkend="admin.customize.strings"/>),
 						create it if it does not exist
@@ -1048,7 +1058,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 						</row>
 						<row>
 							<entry>custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null )</entry>
-							<entry>Defines which columsn should be displayed</entry>
+							<entry>Defines which columns should be displayed</entry>
 							<entry>Array of the column names</entry>
 						</row>
 						<row>
@@ -1087,7 +1097,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 							<entry>None</entry>
 						</row>
 						<row>
-							<entry>custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )</entry>
+							<entry>custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, array $p_sort_properties = null )</entry>
 							<entry>Print a column's title based on its name</entry>
 							<entry>None</entry>
 						</row>

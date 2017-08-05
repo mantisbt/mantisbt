@@ -59,6 +59,7 @@ require_api( 'user_api.php' );
 compress_enable();
 
 $f_tag_id = gpc_get_int( 'tag_id' );
+tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
 $t_name = string_display_line( $t_tag_row['name'] );
@@ -70,57 +71,90 @@ if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 	access_denied();
 }
 
-html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
+layout_page_header( sprintf( lang_get( 'tag_update' ), $t_name ) );
+
+layout_page_begin();
 ?>
-<div class="form-container">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 	<form method="post" action="tag_update.php">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-tag"></i>
+				<?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="widget-toolbox padding-8 clearfix">
+			<?php print_link_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
+				'btn-sm pull-right' ); ?>
+		</div>
+		<div class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<legend><span><?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?></span></legend>
-			<div class="section-link"><?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ) ); ?></div>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
 			<?php echo form_security_field( 'tag_update' ) ?>
-			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
-				<span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="tag-name"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
-				<span class="input"><input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_id' ) ?>
+				</td>
+				<td><?php echo $t_tag_row['id'] ?></td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_name' ) ?>
+				</td>
+				<td>
+					<input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" class="input-sm" value="<?php echo $t_name ?>"/>
+				</td>
+			</tr>
+			<tr>
 				<?php
-					if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
-						echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
-						print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
-						echo '</select></span>';
-					} else { ?>
-						<span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
-						<span class="display-value"><span><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ); ?></span></span><?php
-					} ?>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
-				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
-				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
-				<span class="textarea"><textarea id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'tag_update_button' ) ?>" /></span>
+				if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+					echo '<td class="category">', lang_get( 'tag_creator' ), '</td>';
+					echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id" class="input-sm">';
+					print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
+					echo '</select></td>';
+				} else { ?>
+					<td class="category"><?php echo lang_get( 'tag_creator' ); ?></td>
+					<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></td><?php
+				} ?>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_created' ) ?>
+				</td>
+				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_updated' ) ?>
+				</td>
+				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'tag_description' ) ?>
+				</td>
+				<td>
+					<textarea class="form-control" id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
+				</td>
+			</tr>
 		</fieldset>
+		</table>
+		</div>
+		</div>
+		</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
+		</div>
+		</div>
 	</form>
 </div>
 
 <?php
-html_page_bottom();
+layout_page_end();

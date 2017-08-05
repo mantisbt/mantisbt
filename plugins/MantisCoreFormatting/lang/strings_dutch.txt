@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,5 +49,7 @@ $s_plugin_format_process_text_warning_notice = 'Niet uitschakelen tenzij u preci
 $s_plugin_format_process_urls = 'URL-verwerking';
 $s_plugin_format_process_buglinks = 'MantisBT-koppelingen (meldingen/opmerkingen)';
 $s_plugin_format_process_buglinks_info = 'In uw instellingen wordt het label <em>Melding</em> gedefinieerd als "<literal>%s</literal>" en het label <em>Meldingnotitie</em> als "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdownverwerking';
+$s_plugin_format_process_markdown_info = 'Opmaak met ondersteuning voor Markdown, opmaaksyntaxis zodanig ontworpen dat het kan worden omgezet naar HTML.';
 $s_plugin_format_enabled = 'Aan';
 $s_plugin_format_disabled = 'Uit';

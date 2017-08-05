@@ -39,6 +39,15 @@
 				</para>
 			</listitem>
 		</varlistentry>
+        <varlistentry>
+            <term>$g_timeline_view_threshold</term>
+            <listitem>
+                <para>Threshold for viewing timeline information. Use NOBODY to turn it off.
+                    If the timeline is turned off, the other widgets are displayed in a two column view.
+                    The default is VIEWER.
+                </para>
+            </listitem>
+		</varlistentry>
 		<varlistentry>
 			<term>$g_default_reminder_view_status</term>
 			<listitem>

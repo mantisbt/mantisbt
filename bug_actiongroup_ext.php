@@ -98,20 +98,20 @@ $g_project_override = null;
 form_security_purge( $t_form_name );
 
 if( count( $t_failed_ids ) > 0 ) {
-	html_page_top();
+	layout_page_header();
+	layout_page_begin();
 
 	echo '<div>';
-
 	$t_word_separator = lang_get( 'word_separator' );
 	foreach( $t_failed_ids as $t_id => $t_reason ) {
 		$t_label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
 		printf( "<p>%s%s</p>\n", $t_label, $t_reason );
 	}
 
-	print_bracket_link( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	print_link_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
 	echo '</div>';
 
-	html_page_bottom();
+	layout_page_end();
 } else {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
