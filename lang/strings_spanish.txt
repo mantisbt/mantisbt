@@ -50,6 +50,7 @@
  * @author Lemondoge
  * @author Leshurex
  * @author Locos epraix
+ * @author Luisangelrg
  * @author Macofe
  * @author McDutchie
  * @author Pertile
@@ -75,7 +76,7 @@ $s_actiongroup_menu_update_category = 'Actualizar categoría';
 $s_actiongroup_menu_set_sticky = 'Fijar/Desfijar';
 $s_actiongroup_menu_update_field = 'Actualizar %1$s';
 $s_actiongroup_menu_update_product_version = 'Actualizar la versión del producto';
-$s_actiongroup_menu_update_target_version = 'Actualizar Previsto para Versión';
+$s_actiongroup_menu_update_target_version = 'Actualizar la Versión del Objetivo';
 $s_actiongroup_menu_update_fixed_in_version = 'Actualizar Resuelta en Versión';
 $s_actiongroup_menu_update_product_build = 'Actualizar compilación del producto';
 $s_actiongroup_menu_update_due_date = 'Actualizar fecha límite';
