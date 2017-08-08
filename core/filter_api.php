@@ -1070,10 +1070,10 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 	# until for loop below
 	if( !isset( $s_fk_map ) ) {
 		$s_fk_map = array(
-				'category_id' => array('table' => db_get_table( 'category' ), 'sort_field' => 'name' ),
-				'project_id'  => array('table' => db_get_table( 'project' ), 'sort_field' => 'name' ),
-				'handler_id'  => array('table' => db_get_table( 'user' ), ),
-				'reporter_id' => array('table' => db_get_table( 'user' ), ),
+				'category_id' => array( 'table' => '{category}', 'sort_field' => 'name' ),
+				'project_id'  => array( 'table' => '{project}' , 'sort_field' => 'name' ),
+				'handler_id'  => array( 'table' => '{user}' )  ,
+				'reporter_id' => array( 'table' => '{user}' )  ,
 		);
 	}
 
@@ -1130,7 +1130,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			# however string concatenation operator '||' has a different meaning
 			# in MySQL, so we use CONCAT function which exists in all DBs
 			if( !array_key_exists( 'sort_field', $s_fk_map[$c_sort] ) ) {
-				$t_select = "CASE WHEN $c_sort = 0 THEN NULL ";
+				$t_select = "CASE WHEN {bug}.$c_sort = 0 THEN NULL ";
 				if( ON == config_get( 'show_realname' ) ) {
 					$t_select .=
 							  "WHEN COALESCE( $t_fk_table_alias.realname, '' ) <> '' "
@@ -1139,7 +1139,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				$t_select .=
 						  "WHEN COALESCE( $t_fk_table_alias.username, '' ) <> '' "
 						. "THEN $t_fk_table_alias.username "
-						. "ELSE CONCAT( '". lang_get( 'prefix_for_deleted_users' ) . "', $c_sort ) "
+						. "ELSE CONCAT( '". lang_get( 'prefix_for_deleted_users' ) . "', {bug}.$c_sort ) "
 						. "END";
 				$s_fk_map[$c_sort]['select']     = $t_select;
 				$s_fk_map[$c_sort]['sort_field'] = "sort_$c_sort";
