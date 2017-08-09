@@ -732,7 +732,6 @@ function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
  */
 function layout_print_sidebar( $p_active_sidebar_page = null ) {
 	if( auth_is_user_authenticated() ) {
-		$t_protected = current_user_get_field( 'protected' );
 		$t_current_project = helper_get_current_project();
 
 		# Starting sidebar markup
@@ -760,17 +759,17 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Changelog Page
-		if( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'view_changelog_threshold', $t_current_project ) ) ) {
 			layout_sidebar_menu( 'changelog_page.php', 'changelog_link', 'fa-retweet', $p_active_sidebar_page );
 		}
 
 		# Roadmap Page
-		if( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_current_project ) ) {
 			layout_sidebar_menu( 'roadmap_page.php', 'roadmap_link', 'fa-road', $p_active_sidebar_page );
 		}
 
 		# Summary Page
-		if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
 			layout_sidebar_menu( 'summary_page.php', 'summary_link', 'fa-bar-chart-o', $p_active_sidebar_page );
 		}
 
@@ -790,7 +789,6 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		} else {
 			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
-				$t_current_project = helper_get_current_project();
 				if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 					$t_link = 'manage_user_page.php';
 				} else {
@@ -805,7 +803,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Time Tracking / Billing
-		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
+		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
 			layout_sidebar_menu( 'billing_page.php', 'time_tracking_billing_link', 'fa-clock-o', $p_active_sidebar_page );
 		}
 
