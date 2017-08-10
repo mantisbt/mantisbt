@@ -406,6 +406,10 @@ function layout_login_page_end() {
 function layout_navbar() {
 	$t_logo_url = config_get( 'logo_url' );
 	$t_toggle_class = ( OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img' );
+
+	ob_start();
+	event_signal( 'EVENT_LAYOUT_NAVBAR' );
+	$t_event_navbar_output = ob_get_clean();
 	?>
 	<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">
 		<div id="navbar-container" class="navbar-container">
@@ -418,11 +422,16 @@ function layout_navbar() {
 			</button>
 
 			<div class="navbar-header">
-				<a href="<?php echo $t_logo_url ?>" class="navbar-brand">
-					<span class="smaller-75">
-						<?php echo string_display_line( config_get( 'window_title' ) ) ?>
-					</span>
-				</a>
+				<?php
+				# if there was no output from the event, use the default content
+				if( is_blank( $t_event_navbar_output ) ) {
+					echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
+					echo '<span class="smaller-75">' . string_display_line( config_get( 'window_title' ) ) . '</span>';
+					echo '</a>';
+				} else {
+					echo $t_event_navbar_output;
+				}
+				?>
 
 				<button type="button" class="navbar-toggle <?php echo $t_toggle_class ?> collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
 					<span class="sr-only">Toggle user menu</span>
