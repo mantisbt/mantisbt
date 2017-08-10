@@ -1520,7 +1520,7 @@ function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
  * @param string  $p_text           The displayed text for the link.
  * @param integer $p_page_no        The page number to link to.
  * @param integer $p_page_cur       The current page number.
- * @param integer $p_temp_filter_key Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
 function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_key = null ) {
@@ -1548,7 +1548,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @param integer $p_start          The first page number.
  * @param integer $p_end            The last page number.
  * @param integer $p_current        The current page number.
- * @param integer $p_temp_filter_key Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_key = null ) {
