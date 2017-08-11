@@ -3827,7 +3827,7 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
 		return filter_ensure_valid_filter( $t_filter );
 	} else {
 		if( $t_trigger_error ) {
-			error_parameters( $p_filter_id );
+			error_parameters( $p_filter_key );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 		} else {
 			return $p_default;
