@@ -172,40 +172,43 @@ $(document).ready( function() {
 		startTime: null,
 		zeroTime: moment('0', 's'),
 		tick: function() {
-			$('input[type=text].stopwatch_time').val(this.zeroTime.clone().add(moment().diff(this.startTime)).format('HH:mm:ss'));
+			var elapsedDiff = moment().diff(this.startTime),
+				elapsedTime = this.zeroTime.clone().add(elapsedDiff);
+
+			$('input[type=text].stopwatch_time').val(elapsedTime.format('HH:mm:ss'));
 		},
 		reset: function() {
 			this.stop();
 			$('input[type=text].stopwatch_time').val('');
 		},
 		start: function() {
-			var self = this, 
-				timeFormat = '', 
+			var self = this,
+				timeFormat = '',
 				stoppedTime = $('input[type=text].stopwatch_time').val();
 
-			self.stop();
+			this.stop();
 
 			if (stoppedTime) {
 				switch (stoppedTime.split(':').length) {
-						case 1:
-								timeFormat = 'ss';
-								break;
+					case 1:
+						timeFormat = 'ss';
+						break;
 
-						case 2:
-								timeFormat = 'mm:ss';
-								break;
+					case 2:
+						timeFormat = 'mm:ss';
+						break;
 
-						default:
-								timeFormat = 'HH:mm:ss';
+					default:
+						timeFormat = 'HH:mm:ss';
 				}
 
-				self.startTime = moment().add(self.zeroTime.clone().diff(moment(stoppedTime, timeFormat)));
+				this.startTime = moment().add(this.zeroTime.clone().diff(moment(stoppedTime, timeFormat)));
 			} else {
-				self.startTime = moment();
+				this.startTime = moment();
 			}
 
-			self.timerID = window.setInterval(function() {
-					self.tick();
+			this.timerID = window.setInterval(function() {
+				self.tick();
 			}, 1000);
 
 			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
