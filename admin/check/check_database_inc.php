@@ -95,6 +95,14 @@ if( db_is_mysql() ) {
 		'mysql' != $t_database_type,
 		array( false => "'mysql' driver is deprecated as of PHP 5.5.0, please use 'mysqli' instead" )
 	);
+
+	check_print_test_warn_row(
+		'mysqli.allow_local_infile php.ini directive is set to 0',
+		!ini_get_bool( 'mysqli.allow_local_infile' ),
+		array( false => 'mysqli.allow_local_infile should be disabled to prevent remote attackers to access local files '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=23173">#23173</a>).' )
+	);
+
 }
 
 if( db_is_mssql() ) {

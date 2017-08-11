@@ -340,62 +340,74 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 }
 
 /**
+ * Convert a note row into an array.
+ * @param $p_bugnote_row The note row object.
+ * @return array The note array.
+ */
+function mci_issue_note_data_as_array( $p_bugnote_row ) {
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_bugnote_row->bug_id );
+
+	$t_bugnote = array();
+	$t_bugnote['id'] = (int)$p_bugnote_row->id;
+	$t_bugnote['reporter'] = mci_account_get_array_by_id( $p_bugnote_row->reporter_id );
+	$t_bugnote['text'] = mci_sanitize_xml_string( $p_bugnote_row->note );
+	$t_bugnote['view_state'] = mci_enum_get_array_by_id( $p_bugnote_row->view_state, 'view_state', $t_lang );
+	$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $p_bugnote_row->time_tracking : 0;
+
+	$t_created_at = ApiObjectFactory::datetimeString( $p_bugnote_row->date_submitted );
+	$t_modified_at = ApiObjectFactory::datetimeString( $p_bugnote_row->last_modified );
+
+	if( ApiObjectFactory::$soap ) {
+		$t_bugnote['note_type'] = $p_bugnote_row->note_type;
+		$t_bugnote['note_attr'] = $p_bugnote_row->note_attr;
+
+		$t_bugnote['date_submitted'] = $t_created_at;
+		$t_bugnote['last_modified'] = $t_modified_at;
+	} else {
+		switch( $p_bugnote_row->note_type ) {
+			case REMINDER:
+				$t_type = 'reminder';
+				break;
+			case TIME_TRACKING:
+				$t_type = $t_has_time_tracking_access ? 'timelog' : 'note';
+				break;
+			case BUGNOTE:
+			default:
+				$t_type = 'note';
+				break;
+		}
+
+		$t_bugnote['type'] = $t_type;
+
+		if( !is_blank( $p_bugnote_row->note_attr ) ) {
+			$t_bugnote['attr'] = $p_bugnote_row->note_attr;
+		}
+
+		if( isset( $t_bugnote['time_tracking'] ) && ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) ) {
+			unset( $t_bugnote['time_tracking'] );
+		}
+
+		$t_bugnote['created_at'] = $t_created_at;
+		$t_bugnote['updated_at'] = $t_modified_at;
+	}
+
+	return $t_bugnote;
+}
+
+/**
  * Get all visible notes for a specific issue
  *
  * @param integer $p_issue_id The id of the issue to retrieve the notes for.
  * @return array that represents an SOAP IssueNoteData structure
  */
 function mci_issue_get_notes( $p_issue_id ) {
-	$t_user_id = auth_get_current_user_id();
-	$t_lang = mci_get_user_lang( $t_user_id );
 	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
-	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
 
 	$t_result = array();
 	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
-		$t_bugnote = array();
-		$t_bugnote['id'] = (int)$t_value->id;
-		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
-		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
-		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
-		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
-
-		$t_created_at = ApiObjectFactory::datetimeString( $t_value->date_submitted );
-		$t_modified_at = ApiObjectFactory::datetimeString( $t_value->last_modified );
-
-		if( ApiObjectFactory::$soap ) {
-			$t_bugnote['note_type'] = $t_value->note_type;
-			$t_bugnote['note_attr'] = $t_value->note_attr;
-
-			$t_bugnote['date_submitted'] = $t_created_at;
-			$t_bugnote['last_modified'] = $t_modified_at;
-		} else {
-			switch( $t_value->note_type ) {
-				case BUGNOTE:
-					$t_type = 'note';
-					break;
-				case REMINDER:
-					$t_type = 'reminder';
-					break;
-				case TIME_TRACKING:
-					$t_type = $t_has_time_tracking_access ? 'timelog' : 'note';
-					break;
-			}
-
-			$t_bugnote['type'] = $t_type;
-
-			if( !is_blank( $t_value->note_attr ) ) {
-				$t_bugnote['attr'] = $t_value->note_attr;
-			}
-
-			if( isset( $t_bugnote['time_tracking'] ) && ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) ) {
-				unset( $t_bugnote['time_tracking'] );
-			}
-
-			$t_bugnote['created_at'] = ApiObjectFactory::datetimeString( $t_created_at );
-			$t_bugnote['updated_at'] = ApiObjectFactory::datetimeString( $t_modified_at );
-		}
-
+		$t_bugnote = mci_issue_note_data_as_array( $t_value );
 		$t_result[] = $t_bugnote;
 	}
 
@@ -1250,6 +1262,10 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
 	if( isset( $p_note['reporter'] ) ) {
 		$t_reporter_id = mci_get_user_id( $p_note['reporter'] );
+
+		if( !$t_reporter_id ) {
+			return ApiObjectFactory::faultBadRequest( 'Invalid reporter.' );
+		}
 
 		if( $t_reporter_id != $t_user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.

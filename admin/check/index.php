@@ -202,6 +202,16 @@ if( !$g_failed_test ) {
 <div class="alert alert-success"  id="check-notice-passed">
 	All tests passed.
 </div>
+<?php } ?>
+
+<div class="alert alert-danger" id="notice-delete-admin">
+	For security reasons, you should delete (or at least restrict access to) the
+	<em>admin</em> directory.
+	Refer to the <a href="http://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
+		MantisBT Admin Guide</a>
+	for further details.
 </div>
-<?php }
+
+</div>
+<?php
 layout_admin_page_end();

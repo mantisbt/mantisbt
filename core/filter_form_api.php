@@ -282,10 +282,9 @@ function print_filter_user_monitor( array $p_filter = null ) {
 		echo '>[' . lang_get( 'myself' ) . ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
-	$t_has_project_level = access_has_project_level( $t_threshold );
 
-	if( $t_has_project_level ) {
-		print_reporter_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+	if( access_has_project_level( $t_threshold ) ) {
+		print_user_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], null, config_get( 'monitor_bug_threshold' ) );
 	}
 	?>
 		</select>
@@ -1929,7 +1928,8 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			# Print possible values
-			$t_values = custom_field_distinct_values( $t_cfdef );
+			$t_current_project = helper_get_current_project();
+			$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
 			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
@@ -2073,7 +2073,8 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$t_cfdef = custom_field_get_definition( $p_field_id );
-	$t_values = custom_field_distinct_values( $t_cfdef );
+	$t_current_project = helper_get_current_project();
+	$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.

@@ -86,3 +86,4 @@ $s_plugin_MantisGraph_period_year_to_date = '到目前为止一年';
 $s_plugin_MantisGraph_period_select = '任意日期';
 $s_plugin_MantisGraph_period_last_year = '去年';
 $s_plugin_MantisGraph_graph_page = '图问题历史记录';
+$s_plugin_MantisGraph_graph_opendev = '按开放问题排序开发者';

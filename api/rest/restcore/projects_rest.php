@@ -39,11 +39,21 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_project_ids = user_get_accessible_projects( $t_user_id, /* disabled */ false );
+	$t_project_ids = user_get_all_accessible_projects( $t_user_id, /* disabled */ false );
 	$t_projects = array();
 
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
+		$t_subproject_ids = user_get_accessible_subprojects( $t_user_id, $t_project_id );
+		if( !empty( $t_subproject_ids ) ) {
+			$t_subprojects = array();
+			foreach( $t_subproject_ids as $t_subproject_id ) {
+				$t_subprojects[] = mci_project_as_array_by_id( $t_subproject_id );
+			}
+
+			$t_project['subProjects'] = $t_subprojects;
+		}
+
 		$t_projects[] = $t_project;
 	}
 

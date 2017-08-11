@@ -59,7 +59,7 @@ $t_read_write_access = access_has_global_level( config_get( 'set_configuration_t
 layout_page_header( lang_get( 'configuration_report' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'adm_permissions_report.php' );
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'adm_config_report.php' );
 
 $t_config_types = array(

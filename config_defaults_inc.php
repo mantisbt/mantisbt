@@ -4513,7 +4513,6 @@ $g_public_config_names = array(
 	'status_enum_string',
 	'status_enum_workflow',
 	'status_icon_arr',
-	'status_legend_position',
 	'stop_on_errors',
 	'store_reminders',
 	'stored_query_create_shared_threshold',

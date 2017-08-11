@@ -236,7 +236,7 @@ function layout_is_rtl() {
 
 /**
  * Print meta tags for the page head
- * @return null
+ * @return void
  */
 function layout_head_meta() {
 	# use the following meta to force IE use its most up to date rendering engine
@@ -247,7 +247,7 @@ function layout_head_meta() {
 
 /**
  * Print css link directives for the head section of the page
- * @return null
+ * @return void
  */
 function layout_head_css() {
 	# bootstrap & fontawesome
@@ -296,7 +296,7 @@ function layout_head_css() {
 
 /**
  * Print javascript directives for the head section of the page
- * @return null
+ * @return void
  */
 function layout_head_javascript() {
 	# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -310,7 +310,7 @@ function layout_head_javascript() {
 
 /**
  * Print javascript directives before the closing of the page body element
- * @return null
+ * @return void
  */
 function layout_body_javascript() {
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
@@ -348,7 +348,7 @@ function layout_body_javascript() {
 
 /**
  * Print opening markup for login/signup/register pages
- * @return null
+ * @return void
  */
 function layout_login_page_begin() {
 	html_begin();
@@ -388,7 +388,7 @@ function layout_login_page_begin() {
 
 /**
  * Print closing markup for login/signup/register pages
- * @return null
+ * @return void
  */
 function layout_login_page_end() {
 	echo '</div>';
@@ -401,7 +401,7 @@ function layout_login_page_end() {
 
 /**
  * Render navbar at the top of the page
- * @return null
+ * @return void
  */
 function layout_navbar() {
 	$t_logo_url = config_get('logo_url');
@@ -455,7 +455,7 @@ function layout_navbar() {
  * @param string $p_url destination url of the menu item
  * @param string $p_title menu item title
  * @param string $p_icon icon to use for this menu
- * @return null
+ * @return void
  */
 function layout_navbar_menu_item( $p_url, $p_title, $p_icon ) {
 	echo '<li>';
@@ -468,7 +468,7 @@ function layout_navbar_menu_item( $p_url, $p_title, $p_icon ) {
 /**
  * Print navbar user menu at the top right of the page
  * @param bool $p_show_avatar decide whether to show logged in user avatar
- * @return null
+ * @return void
  */
 function layout_navbar_user_menu( $p_show_avatar = true ) {
 	if( !auth_is_user_authenticated() ) {
@@ -513,7 +513,7 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 
 /**
  * Print navbar projects menu at the top right of the page
- * @return null
+ * @return void
  */
 function layout_navbar_projects_menu() {
 	if( !auth_is_user_authenticated() ) {
@@ -569,7 +569,7 @@ function layout_navbar_projects_menu() {
 
 /**
  * Print navbar bottons
- * @return null
+ * @return void
  */
 function layout_navbar_button_bar() {
 	if( !auth_is_user_authenticated() ) {
@@ -611,6 +611,7 @@ function layout_navbar_button_bar() {
  * @param int|null $p_filter_project_id  The id of a project to exclude or null.
  * @param string|bool $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
  * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
+ * @return void
  */
 function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
 	$t_user_id = auth_get_current_user_id();
@@ -698,7 +699,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 /**
  * Print user avatar in the navbar
  * @param string $p_img_class css class to use with the img tag
- * @return null
+ * @return void
  */
 function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
 	$t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
@@ -732,7 +733,6 @@ function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
  */
 function layout_print_sidebar( $p_active_sidebar_page = null ) {
 	if( auth_is_user_authenticated() ) {
-		$t_protected = current_user_get_field( 'protected' );
 		$t_current_project = helper_get_current_project();
 
 		# Starting sidebar markup
@@ -760,17 +760,17 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Changelog Page
-		if( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'view_changelog_threshold', $t_current_project ) ) ) {
 			layout_sidebar_menu( 'changelog_page.php', 'changelog_link', 'fa-retweet', $p_active_sidebar_page );
 		}
 
 		# Roadmap Page
-		if( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'roadmap_view_threshold' ), $t_current_project ) ) {
 			layout_sidebar_menu( 'roadmap_page.php', 'roadmap_link', 'fa-road', $p_active_sidebar_page );
 		}
 
 		# Summary Page
-		if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
 			layout_sidebar_menu( 'summary_page.php', 'summary_link', 'fa-bar-chart-o', $p_active_sidebar_page );
 		}
 
@@ -790,7 +790,6 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		} else {
 			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
 			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
-				$t_current_project = helper_get_current_project();
 				if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 					$t_link = 'manage_user_page.php';
 				} else {
@@ -805,7 +804,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Time Tracking / Billing
-		if( config_get( 'time_tracking_enabled' ) && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
+		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold', $t_current_project ) ) ) {
 			layout_sidebar_menu( 'billing_page.php', 'time_tracking_billing_link', 'fa-clock-o', $p_active_sidebar_page );
 		}
 
@@ -896,7 +895,7 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 
 /**
  * Print sidebar opening elements
- * @return null
+ * @return void
  */
 function layout_sidebar_begin() {
 	$t_collapse_block = is_collapsed( 'sidebar' );
@@ -914,7 +913,7 @@ function layout_sidebar_begin() {
  * @param string $p_title menu title in english
  * @param string $p_icon icon to use for this menu
  * @param string $p_active_sidebar_page page name to set as active
- * @return null
+ * @return void
  */
 function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page = null ) {
 	if( $p_page == $p_active_sidebar_page ||
@@ -942,7 +941,7 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 
 /**
  * Print sidebar closing elements
- * @return null
+ * @return void
  */
 function layout_sidebar_end() {
 	echo '</ul>';
@@ -965,7 +964,7 @@ function layout_sidebar_end() {
 
 /**
  * Render opening markup for main container
- * @return null
+ * @return void
  */
 function layout_main_container_begin() {
 	echo '<div class="main-container" id="main-container">', "\n";
@@ -973,7 +972,7 @@ function layout_main_container_begin() {
 
 /**
  * Render closing markup for main container
- * @return null
+ * @return void
  */
 function layout_main_container_end() {
 	echo '</div>' , "\n";
@@ -981,7 +980,7 @@ function layout_main_container_end() {
 
 /**
  * Render opening markup for main content
- * @return null
+ * @return void
  */
 function layout_main_content_begin() {
 	echo '<div class="main-content">' , "\n";
@@ -989,7 +988,7 @@ function layout_main_content_begin() {
 
 /**
  * Render closing markup for main content
- * @return null
+ * @return void
  */
 function layout_main_content_end() {
 	echo '</div>' , "\n";
@@ -997,7 +996,7 @@ function layout_main_content_end() {
 
 /**
  * Render opening markup for main page content
- * @return null
+ * @return void
  */
 function layout_page_content_begin() {
 	echo '  <div class="page-content">' , "\n";
@@ -1005,7 +1004,7 @@ function layout_page_content_begin() {
 
 /**
  * Render closing markup for main page content
- * @return null
+ * @return void
  */
 function layout_page_content_end() {
 	# Print table of log events
@@ -1017,7 +1016,7 @@ function layout_page_content_end() {
 
 /**
  * Render breadcrumbs bar.
- * @return null
+ * @return void
  */
 function layout_breadcrumbs() {
 	echo '<div id="breadcrumbs" class="breadcrumbs noprint">' , "\n";
@@ -1216,7 +1215,7 @@ function layout_footer() {
 
 /**
  * Render opening markup for footer section
- * @return null
+ * @return void
  */
 function layout_footer_begin() {
 	echo '<div class="clearfix"></div>' . "\n";
@@ -1228,7 +1227,7 @@ function layout_footer_begin() {
 
 /**
  * Render closing markup for footer section
- * @return null
+ * @return void
  */
 function layout_footer_end() {
 	echo '</div>' . "\n";
@@ -1238,7 +1237,7 @@ function layout_footer_end() {
 
 /**
  * Render scroll up link to go at the bottom of the page
- * @return null
+ * @return void
  */
 function layout_scroll_up_button() {
 	echo '<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">' . "\n";
