@@ -176,7 +176,7 @@ $t_date_submitted = $t_show_date_submitted ? date( config_get( 'normal_date_form
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_last_updated = $t_show_last_updated ? date( config_get( 'normal_date_format' ), $t_bug->last_updated ) : '';
 
-$t_show_tags = in_array( 'tags', $t_fields ) && access_has_global_level( config_get( 'tag_view_threshold' ) );
+$t_show_tags = in_array( 'tags', $t_fields ) && access_has_bug_level( config_get( 'tag_view_threshold' ), $t_bug_id );
 
 $t_bug_overdue = bug_is_overdue( $f_bug_id );
 
