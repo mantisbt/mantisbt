@@ -39,7 +39,7 @@ function utf8_strlen($str){
 /**
 * UTF-8 aware alternative to strpos
 * Find position of first occurrence of a string
-* Note: This will get alot slower if offset is used
+* Note: This will get a lot slower if offset is used
 * Note: requires utf8_strlen amd utf8_substr to be loaded
 * @param string haystack
 * @param string needle (you should validate this with utf8_is_valid)
@@ -83,7 +83,7 @@ function utf8_strpos($str, $needle, $offset = NULL) {
 /**
 * UTF-8 aware alternative to strrpos
 * Find position of last occurrence of a char in a string
-* Note: This will get alot slower if offset is used
+* Note: This will get a lot slower if offset is used
 * Note: requires utf8_substr and utf8_strlen to be loaded
 * @param string haystack
 * @param string needle (you should validate this with utf8_is_valid)

@@ -18,7 +18,7 @@ from reading: http://www.phpwact.org/php/i18n/utf-8
 
 Important Note: For sake of performance most of the functions here are
 not "defensive" (e.g. there is not extensive parameter checking, well
-formed UTF-8 is assumed). This is particularily relevant when is comes to
+formed UTF-8 is assumed). This is particularly relevant when is comes to
 catching badly formed UTF-8 - you should screen input on the "outer
 perimeter" with help from functions in the utf8_validation.php and
 utf8_bad.php files.
@@ -34,7 +34,7 @@ http://sourceforge.net/tracker/?group_id=142846&atid=753842
 
 For feature requests / faster implementation of functions found here,
 please drop them in via the RFE tracker: http://sourceforge.net/tracker/?group_id=142846&atid=753845
-Particularily interested in faster implementations!
+Particularly interested in faster implementations!
 
 For general support / help, use:
 http://sourceforge.net/tracker/?group_id=142846&atid=753843
@@ -71,7 +71,7 @@ which code came from elsewhere can be found in the source code itself.
 
 +Andreas Gohr / Chris Smith - Dokuwiki
 There is a fair degree of collaboration / exchange of ideas and code
-beteen Dokuwiki's UTF-8 library;
+between Dokuwiki's UTF-8 library;
 http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php
 and phputf8. Although Dokuwiki is released under GPL, its UTF-8
 library is released under LGPL, hence no conflict with phputf8

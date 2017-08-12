@@ -76,7 +76,7 @@
 2006-10-01 01:51  harryf
 
 	* utils/ascii.php: Change is_ascii test - returns true on empty
-	  strings - also changed regex so it doesnt capture matches in
+	  strings - also changed regex so it doesn't capture matches in
 	  memory
 
 2006-10-01 01:38  harryf
@@ -606,7 +606,7 @@
 
 2005-12-08 12:53  harryf
 
-	* utf8_ascii.php: Add seperate implementations with or without
+	* utf8_ascii.php: Add separate implementations with or without
 	  ASCII device control codes
 
 2005-12-08 12:49  harryf
