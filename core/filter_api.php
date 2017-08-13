@@ -2094,28 +2094,43 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
 			}
 
+			$t_tag_counter = 0;
 			if( count( $t_tags_all ) ) {
-				$t_clauses = array();
 				foreach( $t_tags_all as $t_tag_row ) {
-					array_push( $t_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE {bug_tag}.tag_id = ' . $t_tag_row['id'] . ')' );
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					array_push( $t_join_clauses, 'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
 				}
-				array_push( $t_where_clauses, '(' . implode( ' AND ', $t_clauses ) . ')' );
 			}
 
 			if( count( $t_tags_any ) ) {
-				$t_clauses = array();
+				$t_check_not_null = array();
 				foreach( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, '{bug_tag}.tag_id = ' . $t_tag_row['id'] );
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					array_push( $t_join_clauses, 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
+					$t_check_not_null[] = $t_tag_alias . '.tag_id';
 				}
-				array_push( $t_where_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
+				# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer joins
+				if( !count( $t_tags_all ) ) {
+					if( count( $t_check_not_null ) > 1 ) {
+						array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_not_null ) . ') IS NOT NULL' );
+					} else {
+						array_push( $t_where_clauses, $t_check_not_null[0] . ' IS NOT NULL' );
+					}
+				}
 			}
 
 			if( count( $t_tags_none ) ) {
-				$t_clauses = array();
+				$t_check_null = array();
 				foreach( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, '{bug_tag}.tag_id = ' . $t_tag_row['id'] );
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					array_push( $t_join_clauses, 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
+					$t_check_null[] = $t_tag_alias . '.tag_id';
 				}
-				array_push( $t_where_clauses, '{bug}.id NOT IN ( SELECT bug_id FROM {bug_tag} WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
+				if( count( $t_check_null ) > 1 ) {
+					array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_null ) . ') IS NULL' );
+				} else {
+					array_push( $t_where_clauses, $t_check_null[0] . ' IS NULL' );
+				}
 			}
 		}
 	}
