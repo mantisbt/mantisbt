@@ -28,7 +28,6 @@
  * @subpackage classes
  */
 class IssueStatusChangeTimelineEvent extends TimelineEvent {
-	private $issue_id;
 	private $old_status;
 	private $new_status;
 	private $type;
@@ -50,7 +49,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 * @param integer $p_new_status New status value of issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
-		parent::__construct( $p_timestamp, $p_user_id );
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->old_status = $p_old_status;
@@ -91,16 +90,14 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
-		$t_show_summary = config_get( 'timeline_show_issue_summary' );
-		$t_link = string_get_bug_view_link( $this->issue_id, true, false, $t_show_summary );
-		
+
 		switch( $this->type ) {
 			case IssueStatusChangeTimelineEvent::RESOLVED:
                 $t_html = $this->html_start( 'fa-thumbs-o-up' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_resolved' ),
 					user_get_name( $this->user_id ),
-					$t_link
+					$this->format_link_to_issue()
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::CLOSED:
@@ -108,7 +105,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_closed' ),
 					user_get_name( $this->user_id ),
-					$t_link
+					$this->format_link_to_issue()
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::REOPENED:
@@ -116,7 +113,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_reopened' ),
 					user_get_name( $this->user_id ),
-					$t_link
+					$this->format_link_to_issue()
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::IGNORED:

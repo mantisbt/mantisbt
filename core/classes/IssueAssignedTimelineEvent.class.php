@@ -28,7 +28,6 @@
  * @subpackage classes
  */
 class IssueAssignedTimelineEvent extends TimelineEvent {
-	private $issue_id;
 	private $handler_id;
 
 	/**
@@ -38,9 +37,8 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	 * @param integer $p_handler_id An user identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
-		parent::__construct( $p_timestamp, $p_user_id );
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
-		$this->issue_id = $p_issue_id;
 		$this->handler_id = $p_handler_id;
 	}
 
@@ -49,18 +47,16 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
-		$t_show_summary = config_get( 'timeline_show_issue_summary' );
-		$t_link = string_get_bug_view_link( $this->issue_id, true, false, $t_show_summary );
 
 		if( $this->user_id == $this->handler_id ) {
 			$t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), $t_link );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), $this->format_link_to_issue() );
 		} else if( $this->handler_id != NO_USER ) {
 			$t_html = $this->html_start( 'fa-hand-o-right' );
-			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), $t_link, user_get_name( $this->handler_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), $this->format_link_to_issue(), user_get_name( $this->handler_id ) );
 		} else {
             $t_html = $this->html_start( 'fa-flag-o' );
-			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), $t_link );
+			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), $this->format_link_to_issue() );
 		}
 
 		$t_html .= '<div class="action">' . $t_string . '</div>';
