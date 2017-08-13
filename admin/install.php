@@ -288,12 +288,10 @@ if( 0 == $t_install_state ) {
 	);
 
 	# UTF-8 support check
-	# We need either the 'mbstring' extension, or the utf8_encode() function
-	# (part of the 'XML parser' extension) as a fallback for Unicode support
-	# by the utf8 library.
+	# We need the 'mbstring' extension
 	print_test(
 		'Checking UTF-8 support',
-		extension_loaded( 'mbstring' ) || function_exists( 'utf8_encode' ),
+		extension_loaded( 'mbstring' ),
 		true,
 		'Please install or enable the PHP mbstring extension'
 	);
