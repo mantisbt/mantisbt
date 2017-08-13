@@ -334,10 +334,11 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 	return access_compare_level( $t_access_level, $p_access_level );
 }
 
-
 /**
- * Check the current user's access against the given value, in each of the provided projects,
- * and return true if the user's access is equal to or higher in any of the projects, false otherwise.
+ * Filters an array of project ids, based on an access level, returning an array
+ * containing only those projects which meet said access level.
+ * An optional limit for the number of results is provided as a shortcut for access checks.
+ *
  * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
  *                                              - integer: for a simple threshold
  *                                              - array: for an array threshold
@@ -346,13 +347,13 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
  *                                               to use all user accesible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
- * @access public
+ * @param integer               $p_limit        Maximum number of results, default is 0 for all results
+ * @return array                The filtered array of project ids
  */
-function access_has_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+function access_project_array_filter( $p_access_level, array $p_project_ids = null, $p_user_id = null, $p_limit = 0 ) {
 	# Short circuit the check in this case
 	if( NOBODY == $p_access_level ) {
-		return false;
+		return array();
 	}
 
 	if( null === $p_user_id ) {
@@ -371,19 +372,42 @@ function access_has_any_project_level( $p_access_level, array $p_project_ids = n
 	}
 
 	$t_check_level = $p_access_level;
-	$t_has_access = false;
+	$t_filtered_projects = array();
 	foreach( $p_project_ids as $t_project_id ) {
 		# If a config string is provided, evaluate for each project
 		if( is_string( $p_access_level ) ) {
 			$t_check_level = config_get( $p_access_level, $t_default, $p_user_id, $t_project_id );
 		}
 		if( access_has_project_level( $t_check_level, $t_project_id, $p_user_id ) ) {
-			$t_has_access = true;
-			break;
+			$t_filtered_projects[] = $t_project_id;
+			# Shortcut if the result limit has been reached
+			if( --$p_limit == 0 ) {
+				break;
+			}
 		}
 	}
 
-	return $t_has_access;
+	return $t_filtered_projects;
+}
+
+/**
+ * Check the current user's access against the given value, in each of the provided projects,
+ * and return true if the user's access is equal to or higher in any of the projects, false otherwise.
+ * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
+ *                                              - integer: for a simple threshold
+ *                                              - array: for an array threshold
+ *                                              - string: for a threshold option which will be evaluated
+ *                                                 for each project context
+ * @param array                 $p_project_ids  Array of project ids to check access against, default to null
+ *                                               to use all user accesible projects
+ * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
+ * @return boolean              True if user has the specified access level for any of the projects
+ * @access public
+ */
+function access_has_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+	# We only need 1 matching project to return positive
+	$t_matches = access_project_array_filter( $p_access_level, $p_project_ids, $p_user_id, 1 );
+	return !empty( $t_matches );
 }
 
 /**
