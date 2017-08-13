@@ -1237,7 +1237,6 @@ $s_month_october = '10 月';
 $s_month_november = '11 月';
 $s_month_december = '12 月';
 $s_timeline_issue_created = '<span class="username">%1$s</span> 已建立問題 <span class="issue_id">%2$s</span>';
-$s_timeline_issue_file_added = '<span class="username">%1$s</span> 已新增檔案於議題 <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> 已說明問題 <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> 正在監視問題 <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> 停止監視問題 <span class="issue_id">%2$s</span>';

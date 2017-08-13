@@ -65,10 +65,11 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 		$t_issue_id = $t_history_event['bug_id'];
 
 		if ( $t_previous_history_event != null ) {  //check repeated event
-			if ( $t_previous_history_event['userid'] == $t_history_event['userid'] &&
-				 $t_previous_history_event['date'] == $t_history_event['date'] &&
-				 $t_previous_history_event['bug_id'] == $t_history_event['bug_id'] &&
-				 $t_previous_history_event['type'] == $t_history_event['type']	) {
+			if (    $t_previous_history_event['userid'] == $t_history_event['userid']
+				 && $t_previous_history_event['date'] == $t_history_event['date']
+				 && $t_previous_history_event['bug_id'] == $t_history_event['bug_id']
+				 && $t_previous_history_event['type'] == $t_history_event['type']	
+			) {
 				continue;
 			}
 		}
