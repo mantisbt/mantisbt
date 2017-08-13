@@ -96,7 +96,7 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 	# Put the first element into queue.
 	array_push( $v_queue, array( 0, $p_bug_id ) );
 
-	# And now we process it
+	# And now we proccess it
 	while( !empty( $v_queue ) ) {
 		list( $t_depth, $t_id ) = array_shift( $v_queue );
 

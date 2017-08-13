@@ -63,7 +63,7 @@
 				</itemizedlist>
 				With PHP default values, sessions created more than 1440 seconds (24 minutes) ago
 				have a 1% chance to be invalidated each time a new session is initialized.
-				This explains the seemingly random occurrence of this error.
+				This explains the seemingly random occurence of this error.
 			</para>
 
 			<para>Unfortunately, this problem cannot be fixed without a major rework of the way sessions and

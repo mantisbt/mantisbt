@@ -23,7 +23,7 @@
  *    the child bug has to be resolved before resolving the parent bug (the child bug "blocks" the parent bug)
  *    example: bug A is child bug of bug B. It means: A blocks B and B is blocked by A
  * * General relationship:
- *    two bugs related each other without any hierarchy dependence
+ *    two bugs related each other without any hierarchy dependance
  *    bugs A and B are related
  * * Duplicates:
  *    it's used to mark a bug as duplicate of an other bug already stored in the database

@@ -160,7 +160,7 @@ event_hook( $events, [$plugin] );
 				<itemizedlist>
 					<listitem>
 						<para>
-							null, or omitted: The returned values are printed without further processing
+							null, or ommited: The returned values are printed without further processing
 						</para>
 					</listitem>
 					<listitem>

@@ -39,7 +39,7 @@
 * Description:
 * 		wsdl-viewer.xsl is a lightweight XSLT 1.0 transformation with minimal
 * 		usage of any hacks that extend the possibilities of the transformation
-* 		over the XSLT 1.0 constraints but eventually would harm the engine independence.
+* 		over the XSLT 1.0 constraints but eventually would harm the engine independance.
 *
 * 		The transformation has to run even in the browser offered XSLT engines
 * 		(tested in IE 6 and Firefox) and in ANT "batch" processing.
@@ -63,7 +63,7 @@
 * 	2. Namespace support
 * 		2.1 Namespaces are not taken in account by processing (references with NS)
 * 	3. Source code
-* 		3.1 Only the source code already processed by the XML parser is rendered - implications:
+* 		3.1 Only the source code allready processed by the XML parser is rendered - implications:
 * 			== no access to the XML head line (<?xml version="1.0" encoding="utf-8"?>)
 * 			== "expanded" CDATA blocks (parser processes the CDATA,
 * 				XSLT does not have access to the original code)

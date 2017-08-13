@@ -117,7 +117,7 @@ $g_db_table_suffix = '_table';
  * e.g. 'Example' plugin's table 'foo' => 'mantis_plugin_Example_foo_table'.
  * To avoid the 30-char limit on identifiers in Oracle (< 12cR2), the prefix
  * should be kept as short as possible (e.g. 'plg'); it is however strongly
- * recommended not to use an empty string here.
+ * recomended not to use an empty string here.
  * @see $g_db_table_prefix
  * @global string $g_db_table_prefix
  */
@@ -962,7 +962,7 @@ $g_severity_significant_threshold = MAJOR;
 
 /**
  * The default columns to be included in the View Issues Page.
- * This can be overridden using Manage -> Manage Configuration -> Manage Columns
+ * This can be overriden using Manage -> Manage Configuration -> Manage Columns
  * Also each user can configure their own columns using My Account -> Manage
  * Columns. Some of the columns specified here can be removed automatically if
  * they conflict with other configuration. Or if the current user doesn't have
@@ -3547,7 +3547,7 @@ $g_file_type_icons = array(
 
 /**
  *
- * Content types which will be overridden when downloading files
+ * Content types which will be overriden when downloading files
  *
  * @global array $g_file_download_content_type_overrides
  */

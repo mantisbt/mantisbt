@@ -1156,7 +1156,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
  * Returns a possibly override content type for a file name
  *
  * @param string $p_filename The filename of the file which will be downloaded.
- * @return string the content type, or empty if it should not be overridden
+ * @return string the content type, or empty if it should not be overriden
  */
 function file_get_content_type_override( $p_filename ) {
 	global $g_file_download_content_type_overrides;

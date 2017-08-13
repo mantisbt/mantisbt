@@ -655,7 +655,7 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 
 # Maximum "safe" value to be used for integer fields in database.
 # Note: mantis ids are defined in schema as "I UNSIGNED", which Adodb maps to
-# the closest integer (4 bytes) type available. As some DBs don't support unsigned
+# the closest integer (4 bytes) type available. As some DBs dont support unsigned
 # types, 2^31 is a safe limit to be used for all.
 define( 'DB_MAX_INT', 2147483647 );
 

@@ -917,7 +917,7 @@ if( 3 == $t_install_state ) {
 						true,
 						print_r( $t_sqlarray, true ) );
 					if( $g_failed ) {
-						# Error occurred, bail out
+						# Error occured, bail out
 						break;
 					}
 				}

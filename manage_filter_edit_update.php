@@ -78,7 +78,7 @@ if( $f_filter_name != filter_get_field( $f_filter_id, 'name' ) ) {
 if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 	$f_is_public = gpc_get_bool( 'is_public' );
 } else {
-	# don't modify it
+	# dont modify it
 	$f_is_public = null;
 }
 

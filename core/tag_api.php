@@ -56,7 +56,7 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
 # cache the tag definitions, indexed by tag id
-# tag ids that don't exist are stored as 'false', to avoid repeated searches
+# tag ids that dont exist are stored as 'false', to avoid repeated searches
 $g_cache_tags = array();
 
 # cache the bug tags indexed by [bug_id, tag_id]. Items stored are rows (arrays) fetched from table {bug_tags}
@@ -65,7 +65,7 @@ $g_cache_bug_tags = array();
 
 /**
  * Loads into cache a set of tag definitions from tag table
- * Non existent ids are cached as 'false'
+ * Non existant ids are cached as 'false'
  * @global array $g_cache_tags
  * @param array $p_tag_ids	Array of tag ids
  * @return void
@@ -98,7 +98,7 @@ function tag_cache_rows( array $p_tag_ids ) {
 		$g_cache_tags[$c_id] = $t_row;
 		unset( $t_ids_to_seach[$c_id] );
 	}
-	# mark the non existent ids
+	# mark the non existant ids
 	foreach( $t_ids_to_seach as $t_id ) {
 		$g_cache_tags[$t_id] = false;
 	}

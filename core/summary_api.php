@@ -823,7 +823,7 @@ function summary_print_by_project( array $p_projects = array(), $p_level = 0, ar
 function summary_print_developer_resolution( $p_resolution_enum_string ) {
 	$t_project_id = helper_get_current_project();
 
-	# Get the resolution values to use
+	# Get the resolution values ot use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
 	$t_enum_res_count = count( $c_res_s );
 
@@ -931,7 +931,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 
 	$t_project_id = helper_get_current_project();
 
-	# Get the resolution values to use
+	# Get the resolution values ot use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
 	$t_enum_res_count = count( $c_res_s );
 

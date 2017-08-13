@@ -165,7 +165,7 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 	}
 }
 
-# If resolving or closing, ensure that all dependent issues have been resolved.
+# If resolving or closing, ensure that all dependant issues have been resolved.
 if( ( $t_resolve_issue || $t_close_issue ) &&
 	!relationship_can_resolve_bug( $f_bug_id )
 ) {

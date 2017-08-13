@@ -100,7 +100,7 @@ function installer_db_now() {
  * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
  * versions created them as BOOLEAN.
  * @return mixed true if columns check OK
- *               error message string if errors occurred
+ *               error message string if errors occured
  *               array of invalid columns otherwise (empty if all columns check OK)
  */
 function check_pgsql_bool_columns() {
@@ -258,7 +258,7 @@ function install_date_migrate( array $p_data ) {
 		$t_first_column = true;
 
 		# In order to handle large databases where we may timeout during the upgrade, we don't
-		# start from the beginning every time.  Here we will only pickup rows where at least one
+		# start from the beginning everytime.  Here we will only pickup rows where at least one
 		# of the datetime fields wasn't upgraded yet and upgrade them all.
 		foreach ( $p_data[3] as $t_new_column_name ) {
 			if( $t_first_column ) {
