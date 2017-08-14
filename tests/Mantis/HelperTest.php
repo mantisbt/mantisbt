@@ -45,12 +45,12 @@ class MantisHelperTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function assertMantisError( Exception $e, array $p_expected_errors = array( ERROR_GENERIC ) ) {
 		$this->assertEquals( E_USER_ERROR, $e->getCode(),
-			'Unexpected error occured: ' . $e->getMessage()
+			'Unexpected error occurred: ' . $e->getMessage()
 		);
 
 		$t_code = $e->getMessage();
 		$this->assertContains( $t_code, $p_expected_errors,
-			"Unexpected Mantis error #$t_code occured: " . error_string( $t_code )
+			"Unexpected Mantis error #$t_code occurred: " . error_string( $t_code )
 		);
 	}
 

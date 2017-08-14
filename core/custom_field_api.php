@@ -88,7 +88,7 @@ $g_cache_cf_linked = array();
 $g_cache_name_to_id_map = array();
 
 # Values are indexed by [ bug_id, field_id ]
-# a non existant value will have a cached value of null
+# a non existent value will have a cached value of null
 $g_cache_cf_bug_values = array();
 
 /**
@@ -227,7 +227,7 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 
 	$t_result = db_query( $t_query, $t_params );
 
-	# By having the left outer joins, non existant values are fetched as nulls,
+	# By having the left outer joins, non existent values are fetched as nulls,
 	# and can be stored in cache to mark them as not-found
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_bug_id = (int)$t_row['bug_id'];
@@ -940,7 +940,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 		return false;
 	}
 
-	# A null value means a cached non existant value. It must be checked with care.
+	# A null value means a cached non existent value. It must be checked with care.
 	if( !isset( $g_cache_cf_bug_values[$c_bug_id] )
 			|| !array_key_exists( $c_field_id, $g_cache_cf_bug_values[$c_bug_id] ) ) {
 		custom_field_cache_values( array( $c_bug_id ), array( $c_field_id ) );

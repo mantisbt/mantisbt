@@ -223,7 +223,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 				# If HTML error output was disabled, set an error header and stop
 				if( defined( 'DISABLE_INLINE_ERROR_REPORTING' ) ) {
-					# @TODO Have a mapping for mantis error codes to appropiate HTTP error codes
+					# @TODO Have a mapping for mantis error codes to appropriate HTTP error codes
 					header( ' ', true, 400 );
 					exit(1);
 				}
