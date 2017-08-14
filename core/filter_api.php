@@ -2044,50 +2044,43 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 					foreach( $t_tags_all as $t_tag_row ) {
 						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
 						array_push( $t_join_clauses,
-								'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
-								. $t_tag_projects_clause
+							'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+							. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
+							. $t_tag_projects_clause
 						);
 					}
 				}
 
 				if( count( $t_tags_any ) ) {
-					$t_check_not_null = array();
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					$t_tag_ids = array();
 					foreach( $t_tags_any as $t_tag_row ) {
-						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
-						array_push( $t_join_clauses,
-								'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
-								. $t_tag_projects_clause
-						);
-						$t_check_not_null[] = $t_tag_alias . '.tag_id';
+						$t_tag_ids[] = (int)$t_tag_row['id'];
 					}
-					# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer joins
+					array_push( $t_join_clauses,
+						'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+						. ' AND ' . $t_tag_alias . '.tag_id IN (' . implode( ',', $t_tag_ids ) . ')'
+						. $t_tag_projects_clause
+					);
+
+					# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer join
 					if( !count( $t_tags_all ) ) {
-						if( count( $t_check_not_null ) > 1 ) {
-							array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_not_null ) . ') IS NOT NULL' );
-						} else {
-							array_push( $t_where_clauses, $t_check_not_null[0] . ' IS NOT NULL' );
-						}
+						array_push( $t_where_clauses, $t_tag_alias . '.tag_id IS NOT NULL' );
 					}
 				}
 
 				if( count( $t_tags_none ) ) {
-					$t_check_null = array();
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					$t_tag_ids = array();
 					foreach( $t_tags_none as $t_tag_row ) {
-						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
-						array_push( $t_join_clauses,
-								'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
-								. $t_tag_projects_clause
-						);
-						$t_check_null[] = $t_tag_alias . '.tag_id';
+						$t_tag_ids[] = (int)$t_tag_row['id'];
 					}
-					if( count( $t_check_null ) > 1 ) {
-						array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_null ) . ') IS NULL' );
-					} else {
-						array_push( $t_where_clauses, $t_check_null[0] . ' IS NULL' );
-					}
+					array_push( $t_join_clauses,
+						'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+						. ' AND ' . $t_tag_alias . '.tag_id IN (' . implode( ',', $t_tag_ids ) . ')'
+						. $t_tag_projects_clause
+					);
+					array_push( $t_where_clauses, $t_tag_alias . '.tag_id IS NULL' );
 				}
 			}
 		}
