@@ -2010,64 +2010,87 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 		if( count( $t_tags ) ) {
 
-			$t_tags_all = array();
-			$t_tags_any = array();
-			$t_tags_none = array();
-
-			foreach( $t_tags as $t_tag_row ) {
-				switch( $t_tag_row['filter'] ) {
-					case 1:
-						$t_tags_all[] = $t_tag_row;
-						break;
-					case 0:
-						$t_tags_any[] = $t_tag_row;
-						break;
-					case -1:
-						$t_tags_none[] = $t_tag_row;
-						break;
+			$t_projects_can_view_tags = access_project_array_filter( 'tag_view_threshold', $t_included_project_ids, $t_user_id );
+			if( !empty( $t_projects_can_view_tags ) ) {
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_tags );
+				# If tags can't be viewed in all included project, a filter must be used
+				if( empty( $t_diff ) ) {
+					$t_tag_projects_clause = '';
+				} else {
+					$t_tag_projects_clause = ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_tags ) . ')';
 				}
-			}
 
-			if( 0 < $t_filter[FILTER_PROPERTY_TAG_SELECT] && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
-				$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
-			}
+				$t_tags_all = array();
+				$t_tags_any = array();
+				$t_tags_none = array();
 
-			$t_tag_counter = 0;
-			if( count( $t_tags_all ) ) {
-				foreach( $t_tags_all as $t_tag_row ) {
-					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
-					array_push( $t_join_clauses, 'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
-				}
-			}
-
-			if( count( $t_tags_any ) ) {
-				$t_check_not_null = array();
-				foreach( $t_tags_any as $t_tag_row ) {
-					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
-					array_push( $t_join_clauses, 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
-					$t_check_not_null[] = $t_tag_alias . '.tag_id';
-				}
-				# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer joins
-				if( !count( $t_tags_all ) ) {
-					if( count( $t_check_not_null ) > 1 ) {
-						array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_not_null ) . ') IS NOT NULL' );
-					} else {
-						array_push( $t_where_clauses, $t_check_not_null[0] . ' IS NOT NULL' );
+				foreach( $t_tags as $t_tag_row ) {
+					switch( $t_tag_row['filter'] ) {
+						case 1:
+							$t_tags_all[] = $t_tag_row;
+							break;
+						case 0:
+							$t_tags_any[] = $t_tag_row;
+							break;
+						case -1:
+							$t_tags_none[] = $t_tag_row;
+							break;
 					}
 				}
-			}
 
-			if( count( $t_tags_none ) ) {
-				$t_check_null = array();
-				foreach( $t_tags_none as $t_tag_row ) {
-					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
-					array_push( $t_join_clauses, 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id'] );
-					$t_check_null[] = $t_tag_alias . '.tag_id';
+				if( 0 < $t_filter[FILTER_PROPERTY_TAG_SELECT] && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
+					$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
 				}
-				if( count( $t_check_null ) > 1 ) {
-					array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_null ) . ') IS NULL' );
-				} else {
-					array_push( $t_where_clauses, $t_check_null[0] . ' IS NULL' );
+
+				$t_tag_counter = 0;
+				if( count( $t_tags_all ) ) {
+					foreach( $t_tags_all as $t_tag_row ) {
+						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+						array_push( $t_join_clauses,
+								'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
+								. $t_tag_projects_clause
+						);
+					}
+				}
+
+				if( count( $t_tags_any ) ) {
+					$t_check_not_null = array();
+					foreach( $t_tags_any as $t_tag_row ) {
+						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+						array_push( $t_join_clauses,
+								'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
+								. $t_tag_projects_clause
+						);
+						$t_check_not_null[] = $t_tag_alias . '.tag_id';
+					}
+					# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer joins
+					if( !count( $t_tags_all ) ) {
+						if( count( $t_check_not_null ) > 1 ) {
+							array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_not_null ) . ') IS NOT NULL' );
+						} else {
+							array_push( $t_where_clauses, $t_check_not_null[0] . ' IS NOT NULL' );
+						}
+					}
+				}
+
+				if( count( $t_tags_none ) ) {
+					$t_check_null = array();
+					foreach( $t_tags_none as $t_tag_row ) {
+						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+						array_push( $t_join_clauses,
+								'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+								. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
+								. $t_tag_projects_clause
+						);
+						$t_check_null[] = $t_tag_alias . '.tag_id';
+					}
+					if( count( $t_check_null ) > 1 ) {
+						array_push( $t_where_clauses, 'COALESCE(' . implode( ',', $t_check_null ) . ') IS NULL' );
+					} else {
+						array_push( $t_where_clauses, $t_check_null[0] . ' IS NULL' );
+					}
 				}
 			}
 		}
