@@ -144,11 +144,11 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	# Check if admin directory is accessible as URL by retrieving HTTP headers.
 	# Note: using file_get_contents is faster than get_headers() which does a
 	# GET by default, and avoids changing the default stream context.
-	$t_admin_url = config_get_global('path') . 'admin/';
+	$t_admin_url = config_get_global( 'path' ) . 'admin/';
 	$context = stream_context_create( array(
 		'http' => array( 'method' => 'HEAD', 'follow_location' => 0 )
 	) );
-	@file_get_contents($t_admin_url, NULL, $context );
+	@file_get_contents( $t_admin_url, NULL, $context );
 	$t_admin_dir_is_accessible = strpos( $http_response_header[0], '200' ) !== false;
 
 	if( $t_admin_dir_is_accessible ) {
