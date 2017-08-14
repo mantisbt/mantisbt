@@ -1999,16 +1999,12 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# tags
 	$c_tag_string = trim( $t_filter[FILTER_PROPERTY_TAG_STRING] );
-	$c_tag_select = trim( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
-	if( is_blank( $c_tag_string ) && !is_blank( $c_tag_select ) && $c_tag_select != 0 && tag_exists( $c_tag_select ) ) {
-		$t_tag = tag_get( $c_tag_select );
-		$c_tag_string = $t_tag['name'];
-	}
+	$c_tag_select = (int)$t_filter[FILTER_PROPERTY_TAG_SELECT];
 
-	if( !is_blank( $c_tag_string ) ) {
+	if( !is_blank( $c_tag_string ) || $c_tag_select > 0 ) {
 		$t_tags = tag_parse_filters( $c_tag_string );
 
-		if( count( $t_tags ) ) {
+		if( count( $t_tags ) || $c_tag_select > 0 ) {
 
 			$t_projects_can_view_tags = access_project_array_filter( 'tag_view_threshold', $t_included_project_ids, $t_user_id );
 			if( !empty( $t_projects_can_view_tags ) ) {
@@ -2038,8 +2034,9 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 					}
 				}
 
-				if( 0 < $t_filter[FILTER_PROPERTY_TAG_SELECT] && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
-					$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
+				# Add the tag id to the array, from filter field "tag_select"
+				if( 0 < $c_tag_select && tag_exists( $c_tag_select ) ) {
+					$t_tags_any[] = tag_get( $c_tag_select );
 				}
 
 				$t_tag_counter = 0;
