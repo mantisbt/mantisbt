@@ -737,93 +737,70 @@ function custom_field_get_id_from_name( $p_field_name ) {
  * Return an array of ids of custom fields bound to the specified project
  *
  * The ids will be sorted based on the sequence number associated with the binding
- * @param integer $p_project_id A project identifier.
- * @return array
+ * @param integer|array $p_project_id A project identifier, or array of project ids
+ * @return array	Array of custom field ids
  * @access public
  */
 function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_cf_linked;
 
-	if( !isset( $g_cache_cf_linked[$p_project_id] ) ) {
-		db_param_push();
+	if( !is_array( $p_project_id ) && isset( $g_cache_cf_linked[$p_project_id] ) ) {
+		return $g_cache_cf_linked[$p_project_id];
+	}
 
-		if( ALL_PROJECTS == $p_project_id ) {
-			$t_user_id = auth_get_current_user_id();
+	if( ALL_PROJECTS == $p_project_id ) {
+		$t_user_id = auth_get_current_user_id();
+		# Select all projects accesible by the user
+		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
+	} elseif( !is_array( $p_project_id ) ) {
+		$t_project_ids = array( $p_project_id );
+	} else {
+		$t_project_ids = $p_project_id;
+	}
 
-			# Select only the ids of custom fields in projects the user has access to
-			#  - all custom fields in public projects,
-			#  - those in private projects where the user is listed
-			#  - in private projects where the user is implicitly listed
-			$t_query = 'SELECT DISTINCT cft.id
-				FROM {custom_field} cft
-					JOIN {custom_field_project} cfpt ON cfpt.field_id = cft.id
-					JOIN {project} pt
-						ON pt.id = cfpt.project_id AND pt.enabled = ' . db_prepare_bool( true ) . '
-					LEFT JOIN {project_user_list} pult
-						ON pult.project_id = cfpt.project_id AND pult.user_id = ' . db_param() . '
-					, {user} ut
-				WHERE ut.id = ' . db_param() . '
-					AND (  pt.view_state = ' . VS_PUBLIC . '
-						OR pult.user_id = ut.id
-						';
-			$t_params = array( $t_user_id, $t_user_id );
-
-			# Add private access clause and related parameter
-			$t_private_access = config_get( 'private_project_threshold' );
-			if( is_array( $t_private_access ) ) {
-				if( 1 == count( $t_private_access ) ) {
-					$t_access_clause = '= ' . db_param();
-					$t_params[] = array_shift( $t_private_access );
-				} else {
-					$t_access_clause = 'IN (';
-					foreach( $t_private_access as $t_elem ) {
-						$t_access_clause .= db_param() . ',';
-						$t_params[] = $t_elem;
-					}
-					$t_access_clause = rtrim( $t_access_clause, ',' ) . ')';
-				}
-			} else {
-				$t_access_clause = '>=' . db_param();
-				$t_params[] = $t_private_access;
-			}
-			$t_query .= 'OR ( pult.user_id IS NULL AND ut.access_level ' . $t_access_clause . ' ) )';
+	$t_field_ids = array();
+	$t_uncached_projects = array();
+	foreach( $t_project_ids as $t_pr_id ) {
+		if( isset( $g_cache_cf_linked[$t_pr_id] ) ) {
+			$t_field_ids = array_merge( $t_field_ids, $g_cache_cf_linked[$t_pr_id] );
 		} else {
-			if( is_array( $p_project_id ) ) {
-				if( 1 == count( $p_project_id ) ) {
-					$t_project_clause = '= ' . db_param();
-					$t_params[] = array_shift( $p_project_id );
-				} else {
-					$t_project_clause = 'IN (';
-					foreach( $p_project_id as $t_project ) {
-						$t_project_clause .= db_param() . ',';
-						$t_params[] = $t_project;
-					}
-					$t_project_clause = rtrim( $t_project_clause, ',' ) . ')';
-				}
-			} else {
-				$t_project_clause = '= ' . db_param();
-				$t_params[] = $p_project_id;
-			}
-			$t_query = 'SELECT cft.id
-				FROM {custom_field} cft
-					JOIN {custom_field_project} cfpt ON cfpt.field_id = cft.id
-				WHERE cfpt.project_id ' . $t_project_clause . '
-				ORDER BY sequence ASC, name ASC';
+			$t_uncached_projects[] = $t_pr_id;
 		}
+	}
+
+	if( !empty( $t_uncached_projects) ) {
+		db_param_push();
+		$t_params = array();
+		$t_project_clause = 'IN (';
+		foreach( $t_uncached_projects as $t_project ) {
+			$t_project_clause .= db_param() . ',';
+			$t_params[] = $t_project;
+		}
+		$t_project_clause = rtrim( $t_project_clause, ',' ) . ')';
+		$t_query = 'SELECT CFP.project_id, CF.id FROM {custom_field} CF '
+				. ' JOIN {custom_field_project} CFP ON CFP.field_id = CF.id'
+				. ' WHERE CFP.project_id ' . $t_project_clause
+				. '	ORDER BY sequence ASC, name ASC';
 
 		$t_result = db_query( $t_query, $t_params );
-		$t_ids = array();
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			array_push( $t_ids, $t_row['id'] );
+			$t_project_id = $t_row['project_id'];
+			if( !isset( $g_cache_cf_linked[$t_project_id] ) ) {
+				$g_cache_cf_linked[$t_project_id] = array();
+			}
+			$g_cache_cf_linked[$t_project_id][] = $t_row['id'];
+			$t_field_ids[] = $t_row['id'];
 		}
-		custom_field_cache_array_rows( $t_ids );
-
-		$g_cache_cf_linked[$p_project_id] = $t_ids;
-	} else {
-		$t_ids = $g_cache_cf_linked[$p_project_id];
 	}
-	return $t_ids;
+
+	$t_field_ids = array_unique( $t_field_ids );
+	# If original query was for ALL_PROJECTS, save as cached values too
+	if( ALL_PROJECTS == $p_project_id ) {
+		$g_cache_cf_linked[ALL_PROJECTS] = $t_field_ids;
+	}
+
+	return $t_field_ids;
 }
 
 /**
