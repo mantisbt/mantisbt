@@ -2631,11 +2631,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	}
 
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+		$t_filter_included_projects = filter_get_included_projects( $t_filter );
+		$t_custom_fields = custom_field_get_linked_ids( $t_filter_included_projects );
 		$t_accessible_custom_fields = array();
 		foreach( $t_custom_fields as $t_cfid ) {
 			$t_cfdef = custom_field_get_definition( $t_cfid );
-			if( $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
+			$t_projects_to_check = array_intersect( $t_filter_included_projects, custom_field_get_project_ids( $t_cfid ) );
+			if( $t_cfdef['filter_by']
+				&& access_has_any_project_level( (int)$t_cfdef['access_level_r'], $t_projects_to_check ) ) {
 				$t_accessible_custom_fields[] = $t_cfdef;
 			}
 		}
