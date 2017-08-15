@@ -1400,17 +1400,17 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		' JOIN {project} ON {project}.id = {bug}.project_id',
 	);
 
-	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id );
-	$t_all_accesible_projects = user_get_all_accessible_projects( $t_user_id );
-	$t_project_diff = array_diff( $t_all_accesible_projects, $t_included_project_ids );
-	# If the projects selected by the filter are the same as all accesible projects,
-	# we can assume that ALL_PROJECTS was used
-	$t_all_projects_found = empty( $t_project_diff );
-
 	$t_projects_query_required = true;
-	if( $t_all_projects_found && user_is_administrator( $t_user_id ) ) {
-		log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
-		$t_projects_query_required = false;
+	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id, true /* return all projects */ );
+
+	if( ALL_PROJECTS == $t_included_project_ids ) {
+		# The list of expanded projects is needed later even if project_query is not required
+		$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id, false /* return all projects */ );
+		# this special case can skip the projects query clause:
+		if( user_is_administrator( $t_user_id ) ) {
+			log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
+			$t_projects_query_required = false;
+		}
 	}
 
 	if( $t_projects_query_required ) {
@@ -3480,12 +3480,17 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 /**
  * Returns an array of project ids which are included in the filter.
  * This array includes all individual projects/subprojects that are in the search scope.
- * @param array $p_filter         Filter array
- * @param integer $p_project_id   Project id to use in filtering, if applicable by filter type
- * @param integer $p_user_id      User id to use as current user when filtering
- * @return array
+ * If ALL_PROJECTS were included directly, or indirectly, and the parameter $p_return_all_projects
+ * is set to true, the value ALL_PROJECTS will be returned. Otherwise the array will be expanded
+ * to all actual accesible projects
+ * @param array $p_filter                 Filter array
+ * @param integer $p_project_id           Project id to use in filtering, if applicable by filter type
+ * @param integer $p_user_id              User id to use as current user when filtering
+ * @param boolean $p_return_all_projects  If true, return ALL_PROJECTS directly if found, instead of
+ *                                         expanding to individual project ids
+ * @return array|integer	Array of project ids, or ALL_PROJECTS if applicable.
  */
-function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null ) {
+function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null, $p_return_all_projects = false ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -3535,6 +3540,11 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 		}
 
 		$t_new_project_ids[] = $t_pid;
+	}
+
+	# if not expanding ALL_PROJECTS, shortcut return directly
+	if( $t_all_projects_found && $p_return_all_projects ) {
+		return ALL_PROJECTS;
 	}
 
 	if( $t_all_projects_found ) {
