@@ -1928,8 +1928,8 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			# Print possible values
-			$t_current_project = helper_get_current_project();
-			$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
+			$t_included_projects = filter_get_included_projects( $p_filter );
+			$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
 			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
@@ -2073,8 +2073,8 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$t_cfdef = custom_field_get_definition( $p_field_id );
-	$t_current_project = helper_get_current_project();
-	$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
+	$t_included_projects = filter_get_included_projects( $p_filter );
+	$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.

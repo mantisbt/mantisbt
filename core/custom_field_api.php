@@ -1149,8 +1149,8 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
- * @param array   $p_field_def  Custom field definition.
- * @param integer $p_project_id Project identifier.
+ * @param array         $p_field_def   Custom field definition.
+ * @param integer|array $p_project_id  Project identifier, or array of project ids
  * @return boolean|array
  * @access public
  */
@@ -1169,9 +1169,14 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 		$t_params[] = $p_field_def['id'];
 
 		if( ALL_PROJECTS != $p_project_id ) {
+			$t_project_ids = is_array( $p_project_id ) ? $p_project_id : array( $p_project_id );
 			$t_from .= ' JOIN {bug} bt ON bt.id = cfst.bug_id';
-			$t_where2 = 'AND bt.project_id = ' . db_param();
-			$t_params[] = $p_project_id;
+			$t_project_clause = 'IN (';
+			foreach( $t_project_ids as $t_project ) {
+				$t_project_clause .= db_param() . ',';
+				$t_params[] = (int)$t_project;
+			}
+			$t_where2 .= 'AND bt.project_id ' . rtrim( $t_project_clause, ',' ) . ')';
 		} else {
 			$t_where2 = '';
 		}
