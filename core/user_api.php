@@ -620,7 +620,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 /**
  * Signup a user.
  * If the use_ldap_email config option is on then tries to find email using
- * ldap. $p_email may be empty, but the user wont get any emails.
+ * ldap. $p_email may be empty, but the user won't get any emails.
  * returns false if error, the generated cookie string if ok
  * @param string $p_username The username to sign up.
  * @param string $p_email    The email address of the user signing up.

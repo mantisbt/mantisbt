@@ -44,7 +44,7 @@ require_lib( 'adodb/adodb-php/adodb.inc.php' );
 $g_queries_array = array();
 
 
-# Stores whether a database connection was succesfully opened.
+# Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected
 $g_db_connected = false;
 
@@ -682,7 +682,7 @@ function db_error_msg() {
 }
 
 /**
- * send both the error number and error message and query (optional) as paramaters for a triggered error
+ * send both the error number and error message and query (optional) as parameters for a triggered error
  * @param string $p_query Query that generated the error.
  * @return void
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
