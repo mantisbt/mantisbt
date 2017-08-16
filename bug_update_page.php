@@ -183,21 +183,16 @@ layout_page_begin();
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
-		<thead>
 
 <?php
 # Submit Button
 if( $t_top_buttons_enabled ) {
 ?>
-				<tr>
-					<td class="center" colspan="6">
-						<input <?php helper_get_tab_index(); ?>
-							type="submit" class="button"
-							value="<?php echo lang_get( 'update_information_button' ); ?>" />
-					</td>
-				</tr>
-			</thead>
-
+				<div class="widget-toolbox padding-8 clearfix">
+					<input <?php helper_get_tab_index(); ?>
+						type="submit" class="btn btn-primary btn-white btn-round"
+						value="<?php echo lang_get( 'update_information_button' ); ?>" />
+				</div>
 <?php
 }
 ?>
