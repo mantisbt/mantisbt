@@ -2134,11 +2134,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# custom field filters
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
-		# custom field filtering
-		# @@@ At the moment this gets the linked fields relating to the current project
-		#     It should get the ones relating to the project in the filter or all projects
-		#     if multiple projects.
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+		$t_custom_fields = custom_field_get_linked_ids( $t_included_project_ids );
 
 		foreach( $t_custom_fields as $t_cfid ) {
 			$t_field_info = custom_field_cache_row( $t_cfid, true );
@@ -2154,13 +2150,25 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			# Ignore all custom filters that are not set, or that are set to '' or "any"
 			if( !filter_field_is_any( $t_field ) ) {
 				$t_def = custom_field_get_definition( $t_cfid );
-				$t_table_name = '{custom_field_string}_' . $t_cfid;
+				$t_table_name = 'cf_alias_' . $t_cfid;
 
 				# We need to filter each joined table or the result query will explode in dimensions
 				# Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
 				# and only after this process ends (if it is able to) the result query will be filtered
 				# by the WHERE clause and by the DISTINCT clause
-				$t_cf_join_clause = 'LEFT JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
+				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
+
+				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_included_project_ids, $t_user_id );
+				if( empty( $t_projects_can_view_field ) ) {
+					continue;
+				}
+				# This diff will contain those included projects that can't view this custom field
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
+				# If not empty, it means there are some projects that can't view the field values,
+				# so a project filter must be used to not include values from those projects
+				if( !empty( $t_diff ) ) {
+					$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
+				}
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
@@ -2197,7 +2205,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 							$t_filter_member = '';
 
 							# but also add those _not_ present in the custom field string table
-							array_push( $t_filter_array, '{bug}.id NOT IN (SELECT bug_id FROM {custom_field_string} WHERE field_id=' . $t_cfid . ')' );
+							array_push( $t_filter_array, $t_table_name . '.value IS NULL' );
 						}
 
 						switch( $t_def['type'] ) {
