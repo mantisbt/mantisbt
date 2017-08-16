@@ -1162,39 +1162,67 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'], $p_field_def );
 	} else {
-		db_param_push();
+		# Get the existing values for the custom field.
+		# Only values that are viewable by the user should be retrieved, so we must account for:
+		# - View issue permissions: if the issue is private or public
+		# - Project level permissions: if a private project is accessible directly, or indirectly
+		# - Limit view issues for reporters: if the option is enabled.
+		# - Custom field definition for viewing threshold
+		# Viewable issues can be resolved by using a filter, which already accounts for those restrictions
+		# So here we only need to additionally check for custom field view threshold on each project.
 
-		$t_from = '{custom_field_string} cfst';
-		$t_where1 = 'cfst.field_id = ' . db_param();
-		$t_params[] = $p_field_def['id'];
-
-		if( ALL_PROJECTS != $p_project_id ) {
-			$t_project_ids = is_array( $p_project_id ) ? $p_project_id : array( $p_project_id );
-			$t_from .= ' JOIN {bug} bt ON bt.id = cfst.bug_id';
-			$t_project_clause = 'IN (';
-			foreach( $t_project_ids as $t_project ) {
-				$t_project_clause .= db_param() . ',';
-				$t_params[] = (int)$t_project;
-			}
-			$t_where2 .= 'AND bt.project_id ' . rtrim( $t_project_clause, ',' ) . ')';
+		# Build a project list where custom fields are viewable by the user.
+		if( ALL_PROJECTS == $p_project_id ) {
+			$t_project_ids = user_get_all_accessible_projects();
+		} elseif( is_array( $p_project_id ) ) {
+			$t_project_ids = $p_project_id;
 		} else {
-			$t_where2 = '';
+			$t_project_ids = array( $p_project_id );
 		}
-		$t_query = 'SELECT DISTINCT cfst.value
-			FROM ' . $t_from . '
-			WHERE ' . $t_where1 . $t_where2 . '
-			ORDER BY cfst.value';
+		$t_projects_can_view = access_project_array_filter( (int)$p_field_def['access_level_r'], $t_project_ids );
+		if( empty( $t_projects_can_view ) ) {
+			return false;
+		}
+
+		# Build a subquery for issues based on a filter
+		$t_filter = array(
+			FILTER_PROPERTY_HIDE_STATUS => array( META_FILTER_NONE ),
+			FILTER_PROPERTY_PROJECT_ID => $t_projects_can_view,
+			'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
+		);
+		$t_filter = filter_ensure_valid_filter( $t_filter );
+		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+		$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
+		# if the query can't be formed, there are no results
+		if( empty( $t_query_clauses ) ) {
+			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+			db_param_pop();
+			return false;
+		}
+		$t_select_string = 'SELECT {bug}.id ';
+		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+		if( count( $t_query_clauses['where'] ) > 0 ) {
+			$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
+		}
+		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
+		$t_params = $t_query_clauses['where_values'];
+
+		$t_query = 'SELECT DISTINCT cfst.value FROM {custom_field_string} cfst'
+			. ' WHERE cfst.bug_id IN ' . $t_filter_in
+			. ' AND cfst.field_id = ' . db_param()
+			. ' ORDER BY cfst.value';
+		$t_params[] = (int)$p_field_def['id'];
 		$t_result = db_query( $t_query, $t_params );
-		$t_row_count = 0;
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_row_count++;
 			if( !is_blank( trim( $t_row['value'] ) ) ) {
 				array_push( $t_return_arr, $t_row['value'] );
 			}
 		}
 
-		if( 0 == $t_row_count ) {
+		if( empty( $t_return_arr ) ) {
 			return false;
 		}
 	}
