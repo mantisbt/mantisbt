@@ -615,9 +615,13 @@ function layout_navbar_button_bar() {
  */
 function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
 	$t_user_id = auth_get_current_user_id();
+
+	# Cache all needed projects
+	project_cache_array_rows( user_get_all_accessible_projects( $t_user_id ) );
+
+	# Get top level projects
 	$t_project_ids = user_get_accessible_projects( $t_user_id );
 	$t_can_report = true;
-	project_cache_array_rows( $t_project_ids );
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
