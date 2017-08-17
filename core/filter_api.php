@@ -1492,6 +1492,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_private_and_public_project_ids = array();
 		$t_limited_projects = array();
 
+		# make sure the project rows are cached, as they will be used to check access levels.
+		project_cache_array_rows( $t_project_ids );
 		foreach( $t_project_ids as $t_pid ) {
 			# limit reporters to visible projects
 			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {
