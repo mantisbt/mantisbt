@@ -252,15 +252,15 @@ function columns_get_all( $p_project_id = null ) {
 	} else {
 		$t_project_id = $p_project_id;
 	}
-
-	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+	# Get custom fields from this project and sub-projects
+	$t_projects = user_get_all_accessible_projects( null, $t_project_id );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_projects );
 	foreach( $t_related_custom_field_ids as $t_id ) {
-		if( !custom_field_has_read_access_by_project_id( $t_id, $t_project_id ) ) {
-			continue;
+		$t_cfdef = custom_field_get_definition( $t_id );
+		$t_projects_to_check = array_intersect( $t_projects, custom_field_get_project_ids( $t_id ) );
+		if( access_has_any_project_level( (int)$t_cfdef['access_level_r'], $t_projects_to_check ) ) {
+			$t_columns[] = column_get_custom_field_column_name( $t_id );
 		}
-
-		$t_def = custom_field_get_definition( $t_id );
-		$t_columns[] = 'custom_' . $t_def['name'];
 	}
 
 	return $t_columns;
