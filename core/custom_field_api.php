@@ -790,10 +790,11 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 	$t_field_ids = array();
 	$t_uncached_projects = array();
 	foreach( $t_project_ids as $t_pr_id ) {
-		if( isset( $g_cache_cf_linked[$t_pr_id] ) ) {
-			$t_field_ids = array_merge( $t_field_ids, $g_cache_cf_linked[$t_pr_id] );
+		$c_pr_id = (int)$t_pr_id;
+		if( isset( $g_cache_cf_linked[$c_pr_id] ) ) {
+			$t_field_ids = array_merge( $t_field_ids, $g_cache_cf_linked[$c_pr_id] );
 		} else {
-			$t_uncached_projects[] = $t_pr_id;
+			$t_uncached_projects[$c_pr_id] = $c_pr_id;
 		}
 	}
 
@@ -814,12 +815,20 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 		$t_result = db_query( $t_query, $t_params );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_project_id = $t_row['project_id'];
+			$t_project_id = (int)$t_row['project_id'];
 			if( !isset( $g_cache_cf_linked[$t_project_id] ) ) {
 				$g_cache_cf_linked[$t_project_id] = array();
 			}
-			$g_cache_cf_linked[$t_project_id][] = $t_row['id'];
-			$t_field_ids[] = $t_row['id'];
+			$g_cache_cf_linked[$t_project_id][] = (int)$t_row['id'];
+			$t_field_ids[] = (int)$t_row['id'];
+			unset( $t_uncached_projects[$t_project_id] );
+		}
+
+		# save empty array for those projects that dont appear in the results
+		if( !empty( $t_uncached_projects ) ) {
+			foreach( $t_uncached_projects as $t_pr_id ) {
+				$g_cache_cf_linked[$t_pr_id] = array();
+			}
 		}
 	}
 
