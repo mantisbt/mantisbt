@@ -1933,30 +1933,18 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# @TODO
-	# If time tracking is enabled, this code is executed outside of BugData validation.
-	# These time tracking dependencies should be removed
-	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
-	if( ON == $t_time_tracking_enabled ) {
-		# Add bugnote if supplied ignore a false return
-		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-		# Error condition stopped execution but status had already been changed
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-	}
+	# Ensure validity for timetracking required note text, if applicable.
+	# An error will be thrown and will stop further changes
+	bugnote_ensure_timetracking_valid( $p_bugnote_text, $p_time_tracking );
 
 	$t_bugdata = bug_get( $p_bug_id );
 	$t_bugdata->status = config_get( 'bug_closed_status_threshold' );
 
-	# If time tracking is disabled, the bug note is added as a callback after validation
-	# This is the proper way.
-	if( OFF == $t_time_tracking_enabled ) {
-		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
-			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
-			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-		};
-		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
-	}
+	$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	};
+	$t_bugdata->add_update_callback( $cb_add_bugnote, array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 
 	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
 
@@ -1983,17 +1971,9 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$c_resolution = (int)$p_resolution;
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# @TODO
-	# If time tracking is enabled, this code is executed outside of BugData validation.
-	# These time tracking dependencies should be removed
-	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
-	if( ON == $t_time_tracking_enabled ) {
-		# Add bugnote if supplied
-		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-		# Error condition stopped execution but status had already been changed
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-	}
+	# Ensure validity for timetracking required note text, if applicable.
+	# An error will be thrown and will stop further changes
+	bugnote_ensure_timetracking_valid( $p_bugnote_text, $p_time_tracking );
 
 	$t_bugdata = bug_get( $p_bug_id );
 
@@ -2011,15 +1991,11 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		$t_bugdata->handler_id = $p_handler_id;
 	}
 
-	# If time tracking is disabled, the bug note is added as a callback after validation
-	# This is the proper way.
-	if( OFF == $t_time_tracking_enabled ) {
-		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
-			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
-			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-		};
-		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
-	}
+	$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	};
+	$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
@@ -2077,29 +2053,17 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
 	$p_bugnote_text = trim( $p_bugnote_text );
 
-	# @TODO
-	# If time tracking is enabled, this code is executed outside of BugData validation.
-	# These time tracking dependencies should be removed
-	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
-	if( ON == $t_time_tracking_enabled ) {
-		# Add bugnote if supplied ignore a false return
-		# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
-		# Error condition stopped execution but status had already been changed
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-	}
+	# Ensure validity for timetracking required note text, if applicable.
+	# An error will be thrown and will stop further changes
+	bugnote_ensure_timetracking_valid( $p_bugnote_text, $p_time_tracking );
 
 	$t_bugdata = bug_get( $p_bug_id );
 
-	# If time tracking is disabled, the bug note is added as a callback after validation
-	# This is the proper way.
-	if( OFF == $t_time_tracking_enabled ) {
-		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
-			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
-			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
-		};
-		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
-	}
+	$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+	};
+	$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 
 	$t_bugdata->status = config_get( 'bug_reopen_status' );
 	$t_bugdata->resolution = config_get( 'bug_reopen_resolution' );

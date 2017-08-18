@@ -206,6 +206,25 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
 }
 
 /**
+ * Check if a bugnote is valid for current timetracking configuration, as it may be
+ * restricted to not accept a bugnote with timetracking info and no text.
+ * If that conditionis met, throw an error.
+ * @param string  $p_bugnote_text    The bugnote text to add.
+ * @param string  $p_time_tracking   Time tracking value - hh:mm string.
+ */
+function bugnote_ensure_timetracking_valid( $p_bugnote_text, $p_time_tracking ) {
+	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
+	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+	if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
+		$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
+		if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
+			error_parameters( lang_get( 'bugnote' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+	}
+}
+
+/**
  * Add a bugnote to a bug
  * return the ID of the new bugnote
  * @param integer $p_bug_id          A bug identifier.
@@ -236,11 +255,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 		# Check if this is a time-tracking note
 		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
 		if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
-			$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
-			if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
-				error_parameters( lang_get( 'bugnote' ) );
-				trigger_error( ERROR_EMPTY_FIELD, ERROR );
-			}
+			bugnote_ensure_timetracking_valid( $p_bugnote_text, $p_time_tracking );
 			$c_type = TIME_TRACKING;
 		} else if( is_blank( $p_bugnote_text ) ) {
 			# This is not time tracking (i.e. it's a normal bugnote)
