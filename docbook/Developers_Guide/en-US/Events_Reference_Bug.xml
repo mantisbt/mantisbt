@@ -347,7 +347,7 @@
 				<itemizedlist>
 					<title>Parameter array contents</title>
 					<para>The parameter array contains elements for these indexes:</para>
-					<listitem><para>'new_bug' =&gt; &lt;BugData&gt;: Bug data structure for new bug (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'new' =&gt; &lt;BugData&gt;: Bug data structure for new bug (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -371,7 +371,7 @@
 				<itemizedlist>
 					<title>Parameter array contents</title>
 					<para>The parameter array contains elements for these indexes:</para>
-					<listitem><para>'new_bug' =&gt; &lt;BugData&gt;: Bug data structure for new bug (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'new' =&gt; &lt;BugData&gt;: Bug data structure for new bug (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -405,8 +405,8 @@
 				<itemizedlist>
 					<title>Parameter array contents</title>
 					<para>The parameter array contains elements for these indexes:</para>
-					<listitem><para>'modified_bug' =&gt; &lt;BugData&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
-					<listitem><para>'original_bug' =&gt; &lt;BugData&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'new' =&gt; &lt;BugData&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'old' =&gt; &lt;BugData&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 
 			</blockquote>
@@ -431,8 +431,8 @@
 				<itemizedlist>
 					<title>Parameter array contents</title>
 					<para>The parameter array contains elements for these indexes:</para>
-					<listitem><para>'modified_bug' =&gt; &lt;BugData&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
-					<listitem><para>'original_bug' =&gt; &lt;BugData&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'new' =&gt; &lt;BugData&gt;: Updated bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
+					<listitem><para>'old' =&gt; &lt;BugData&gt;: Original bug data structure (see <filename>core/bug_api.php</filename>)</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
