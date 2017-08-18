@@ -82,9 +82,13 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
+# cache of custom field definitions, indexed by field id: array( id => array of properties )
 $g_cache_custom_field = array();
+# cache of all custom fields, array of ids
 $g_cache_cf_list = null;
+# cache of field ids linked to a project, indexed by project id: array( pr_id => array(field ids) )
 $g_cache_cf_linked = array();
+# cache of mapping of custom field names to field id: array( 'name' => id )
 $g_cache_name_to_id_map = array();
 
 # Values are indexed by [ bug_id, field_id ]
@@ -124,43 +128,68 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 
 /**
  * Cache custom fields contained within an array of field id's
- * @param array $p_cf_id_array Array of custom field id's.
+ * If ids parameter is omitted, all fields will be cached
+ * @param array|null $p_cf_id_array Array of custom field ids.
  * @return void
  * @access public
  */
-function custom_field_cache_array_rows( array $p_cf_id_array ) {
+function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	global $g_cache_custom_field, $g_cache_name_to_id_map;
+
 	$c_cf_id_array = array();
+	$t_cache_all = ( null === $p_cf_id_array );
 
-	foreach( $p_cf_id_array as $t_cf_id ) {
-		$c_id = (int)$t_cf_id;
-		if( !isset( $g_cache_custom_field[$c_id] ) ) {
-			$c_cf_id_array[$c_id] = $c_id;
+	# cache main data
+	if( $t_cache_all ) {
+		$t_query = 'SELECT * FROM {custom_field}';
+		$t_result = db_query( $t_query );
+	} else {
+		foreach( $p_cf_id_array as $t_cf_id ) {
+			$c_id = (int)$t_cf_id;
+			if( !isset( $g_cache_custom_field[$c_id] ) ) {
+				$c_cf_id_array[$c_id] = $c_id;
+			}
 		}
+		if( empty( $c_cf_id_array ) ) {
+			return;
+		}
+		db_param_push();
+		$t_params = array();
+		$t_in_caluse_dbparams = array();
+		foreach( $c_cf_id_array as $t_id) {
+			$t_in_caluse_dbparams[] = db_param();
+			$t_params[] = $t_id;
+		}
+		$t_where_id_in = ' IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+		$t_query = 'SELECT * FROM {custom_field} WHERE id' . $t_where_id_in;
+		$t_result = db_query( $t_query, $t_params );
 	}
 
-	if( empty( $c_cf_id_array ) ) {
-		return;
-	}
-
-	db_param_push();
-	$t_params = array();
-	$t_in_caluse_dbparams = array();
-	foreach( $c_cf_id_array as $t_id) {
-		$t_in_caluse_dbparams[] = db_param();
-		$t_params[] = $t_id;
-	}
-	$t_query = 'SELECT * FROM {custom_field} WHERE id IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
-	$t_result = db_query( $t_query, $t_params );
-
+	$t_ids_not_found = $c_cf_id_array;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
 		$g_cache_custom_field[$c_id] = $t_row;
 		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
-		unset( $c_cf_id_array[$c_id] );
+		$g_cache_custom_field[$c_id]['linked_projects'] = array();
+		unset( $t_ids_not_found[$c_id] );
 	}
+
+	# cache linked projects
+	if( $t_cache_all ) {
+		$t_query = 'SELECT field_id, project_id FROM {custom_field_project}';
+		$t_result = db_query( $t_query );
+	} else {
+		db_param_push();
+		# reuse previous db_params and $t_params array, since the query is structurally the same
+		$t_query = 'SELECT field_id, project_id FROM {custom_field_project} WHERE field_id' . $t_where_id_in;
+		$t_result = db_query( $t_query, $t_params );
+	}
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$g_cache_custom_field[(int)$t_row['field_id']]['linked_projects'][] = (int)$t_row['project_id'];
+	}
+
 	# set the remaining ids as not found
-	foreach( $c_cf_id_array as $t_id) {
+	foreach( $t_ids_not_found as $t_id) {
 		$g_cache_custom_field[$t_id] = false;
 	}
 	return;
@@ -811,21 +840,11 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 function custom_field_get_ids() {
 	global $g_cache_cf_list, $g_cache_custom_field;
 
-	if( $g_cache_cf_list === null ) {
-		$t_query = 'SELECT * FROM {custom_field} ORDER BY name ASC';
-		$t_result = db_query( $t_query );
-		$t_ids = array();
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$g_cache_custom_field[(int)$t_row['id']] = $t_row;
-
-			array_push( $t_ids, $t_row['id'] );
-		}
-		$g_cache_cf_list = $t_ids;
-	} else {
-		$t_ids = $g_cache_cf_list;
+	if( !$g_cache_cf_list ) {
+		custom_field_cache_array_rows();
+		$g_cache_cf_list = array_keys( $g_cache_custom_field );
 	}
-	return $t_ids;
+	return $g_cache_cf_list;
 }
 
 /**
@@ -836,17 +855,8 @@ function custom_field_get_ids() {
  * @access public
  */
 function custom_field_get_project_ids( $p_field_id ) {
-	db_param_push();
-	$t_query = 'SELECT project_id FROM {custom_field_project} WHERE field_id = ' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_id ) );
-
-	$t_ids = array();
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		array_push( $t_ids, $t_row['project_id'] );
-	}
-
-	return $t_ids;
+	$t_def = custom_field_get_definition( $p_field_id );
+	return $t_def['linked_projects'];
 }
 
 /**
