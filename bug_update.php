@@ -386,29 +386,31 @@ $t_updated_bug = event_signal( 'EVENT_UPDATE_BUG_DATA', $t_updated_bug, $t_exist
 
 # Update custom field values.
 foreach ( $t_custom_fields_to_set as $t_custom_field_to_set ) {
-	$t_updated_bug->add_update_callback( 'custom_field_set_value', array( $t_custom_field_to_set['id'], $f_bug_id, $t_custom_field_to_set['value'] ) );
+	$cb_custom_field_set_value = function( $p_field_id, $p_bug_id, $p_value ) {
+		custom_field_set_value( $p_field_id, $p_bug_id, $p_value );
+	};
+	$t_updated_bug->add_update_callback( $cb_custom_field_set_value, array( $t_custom_field_to_set['id'], $f_bug_id, $t_custom_field_to_set['value'] ) );
 }
 
 # Add a bug note if there is one.
 if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) {
 
-	$add_bugnote_func = function( array $p_bugnote_params ) {
-		$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-		bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+	$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 	};
-	$t_bugnote_params = array( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, BUGNOTE, '', null, false );
-	$t_updated_bug->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+	$t_updated_bug->add_update_callback( $cb_add_bugnote, array( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE ) );
 }
 
 # Add a duplicate relationship if requested.
 # @TODO move this logic into BugData
 if( $t_updated_bug->duplicate_id != 0 ) {
-	$add_relatioship_func = function( $p_bug_data ) {
+	$cb_add_relatioship = function( $p_bug_data ) {
 		relationship_upsert( $p_bug_data->id, $p_bug_data->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
 		bug_monitor_copy( $p_bug_data->id, $p_bug_data->duplicate_id );
 	};
 
-	$t_updated_bug->add_update_callback( $add_relatioship_func, array( $t_updated_bug ) );
+	$t_updated_bug->add_update_callback( $cb_add_relatioship, array( $t_updated_bug ) );
 }
 
 # Commit the bug updates to the database.

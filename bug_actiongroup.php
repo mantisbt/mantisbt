@@ -209,12 +209,11 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 					# Add bugnote if supplied
 					if( !is_blank( $f_bug_notetext ) ) {
-						$add_bugnote_func = function( array $p_bugnote_params ) {
-							$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-							bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+						$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_private ) {
+							$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, null, $p_private );
+							bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 						};
-						$t_bugnote_params = array( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
-						$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+						$t_bugdata->add_update_callback( $cb_add_bugnote, array( $t_bug_id, $f_bug_notetext, $f_bug_noteprivate ) );
 						}
 
 					$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );

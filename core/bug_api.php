@@ -1400,7 +1400,10 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	}
 
 	# Attempt to move disk based attachments to new project file directory.
-	$t_bugdata->add_update_callback( file_move_bug_attachments, array( $t_bugdata->id, $t_bugdata->project_id ) );
+	$cb_file_move_bug_attachments = function( $p_bug_id, $p_project_id_to ) {
+		file_move_bug_attachments( $p_bug_id, $p_project_id_to );
+	};
+	$t_bugdata->add_update_callback( $cb_file_move_bug_attachments, array( $t_bugdata->id, $t_bugdata->project_id ) );
 
 	# @TODO email is bypassed, add a notification for MOVE
 	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
@@ -1893,17 +1896,19 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	$t_bugdata->status = $t_assigned_status;
 
 	# callback for history logging:
-	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'status', $t_original_status, $t_bugdata->status ) );
-	$t_bugdata->add_update_callback( 'history_log_event_direct', array( $t_bugdata->id, 'handler_id', $t_original_handler_id, $t_bugdata->handler_id ) );
+	$cb_history_log_event_direct = function( $p_bug_id, $p_field_name, $p_old_value, $p_new_value ) {
+		history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value );
+	};
+	$t_bugdata->add_update_callback( $cb_history_log_event_direct, array( $t_bugdata->id, 'status', $t_original_status, $t_bugdata->status ) );
+	$t_bugdata->add_update_callback( $cb_history_log_event_direct, array( $t_bugdata->id, 'handler_id', $t_original_handler_id, $t_bugdata->handler_id ) );
 
 	# callback for note add
 	if( !empty($p_bugnote_text) ) {
-		$add_bugnote_func = function( array $p_bugnote_params ) {
-			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_private ) {
+			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_private, BUGNOTE, '', null, false );
+			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 		};
-		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, 0, $p_bugnote_private, BUGNOTE, '', null, false );
-		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $t_bugdata->id, $p_bugnote_text, $p_bugnote_private ) );
 	}
 
 	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
@@ -1946,12 +1951,11 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 	# If time tracking is disabled, the bug note is added as a callback after validation
 	# This is the proper way.
 	if( OFF == $t_time_tracking_enabled ) {
-		$add_bugnote_func = function( array $p_bugnote_params ) {
-			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 		};
-		$t_bugnote_params = array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $t_bugdata->id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 	}
 
 	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
@@ -2010,12 +2014,11 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	# If time tracking is disabled, the bug note is added as a callback after validation
 	# This is the proper way.
 	if( OFF == $t_time_tracking_enabled ) {
-		$add_bugnote_func = function( array $p_bugnote_params ) {
-			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 		};
-		$t_bugnote_params = array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 	}
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
@@ -2029,16 +2032,25 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		$t_bugdata->duplicate_id = $p_duplicate_id;
 
 		# create callback for duplicate bug actions:
-		$t_bugdata->add_update_callback( 'relationship_upsert', array( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE, /* email_for_source */ false ) );
+		$cb_relationship_upsert = function( $p_src_bug_id, $p_dest_bug_id ) {
+			relationship_upsert( $p_src_bug_id, $p_dest_bug_id, BUG_DUPLICATE, /* email_for_source */ false );
+		};
+		$t_bugdata->add_update_callback( $cb_relationship_upsert, array( $p_bug_id, $p_duplicate_id ) );
 
 		# Copy list of users monitoring the duplicate bug to the original bug
+		$cb_bug_monitor = function( $p_bug_id, $p_user_id ) {
+			bug_monitor( $p_bug_id, $p_user_id );
+		};
 		if( user_exists( $t_bugdata->reporter_id ) ) {
-			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_bugdata->reporter_id ) );
+			$t_bugdata->add_update_callback( $cb_bug_monitor, array( $p_duplicate_id, $t_bugdata->reporter_id ) );
 		}
 		if( user_exists( $t_old_handler_id ) ) {
-			$t_bugdata->add_update_callback( 'bug_monitor', array( $p_duplicate_id, $t_old_handler_id ) );
+			$t_bugdata->add_update_callback( $cb_bug_monitor, array( $p_duplicate_id, $t_old_handler_id ) );
 		}
-		$t_bugdata->add_update_callback( 'bug_monitor_copy', array( $p_bug_id, $p_duplicate_id ) );
+		$cb_bug_monitor_copy = function( $p_src_bug_id, $p_dest_bug_id ) {
+			bug_monitor_copy( $p_src_bug_id, $p_dest_bug_id );
+		};
+		$t_bugdata->add_update_callback( $cb_bug_monitor_copy, array( $p_bug_id, $p_duplicate_id ) );
 	}
 
 	$t_bugdata->update( /* update extended */ false, /* bypass mail */ true );
@@ -2082,12 +2094,11 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	# If time tracking is disabled, the bug note is added as a callback after validation
 	# This is the proper way.
 	if( OFF == $t_time_tracking_enabled ) {
-		$add_bugnote_func = function( array $p_bugnote_params ) {
-			$t_bugnote_id = call_user_func_array( 'bugnote_add', $p_bugnote_params );
-			bugnote_process_mentions( $p_bugnote_params[0], $t_bugnote_id, $p_bugnote_params[1] );
+		$cb_add_bugnote = function( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private ) {
+			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_private, BUGNOTE, '', null, false );
+			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
 		};
-		$t_bugnote_params = array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, BUGNOTE, '', null, false );
-		$t_bugdata->add_update_callback( $add_bugnote_func, array( $t_bugnote_params ) );
+		$t_bugdata->add_update_callback( $cb_add_bugnote, array( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private ) );
 	}
 
 	$t_bugdata->status = config_get( 'bug_reopen_status' );

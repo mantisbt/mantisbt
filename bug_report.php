@@ -209,7 +209,7 @@ if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bu
 
 # Handle custom field submission
 if( !empty( $t_custom_fields_to_set ) ) {
-	$t_callback_set_cf = function( BugData $p_bug, array $p_cf_values_array ) {
+	$cb_custom_field_set_value = function( BugData $p_bug, array $p_cf_values_array ) {
 		$t_bug_id = $p_bug->id;
 		foreach( $p_cf_values_array as $t_cf_input ) {
 			$t_id = $t_cf_input['id'];
@@ -221,7 +221,7 @@ if( !empty( $t_custom_fields_to_set ) ) {
 			}
 		}
 	};
-	$t_bug_data->add_create_callback( $t_callback_set_cf, array( $t_bug_data, $t_custom_fields_to_set ) );
+	$t_bug_data->add_create_callback( $cb_custom_field_set_value, array( $t_bug_data, $t_custom_fields_to_set ) );
 }
 
 # Handle the file upload
@@ -229,27 +229,27 @@ if( $f_files !== null ) {
 	if( !file_allow_bug_upload() ) {
 		access_denied();
 	}
-	$t_callback_file_upload = function( BugData $p_bug, $p_files ) {
+	$cb_file_process_posted_files_for_bug = function( BugData $p_bug, $p_files ) {
 		file_process_posted_files_for_bug( $p_bug->id, $p_files );
 	};
-	$t_bug_data->add_create_callback( $t_callback_file_upload, array( $t_bug_data, $f_files ) );
+	$t_bug_data->add_create_callback( $cb_file_process_posted_files_for_bug, array( $t_bug_data, $f_files ) );
 }
 
 # Handle bug clone and relations
 if( $f_master_bug_id > 0 ) {
 	# For a child generation add some lines in the history
-	$t_callback_child_generation = function( BugData $p_bug, $p_master_bug_id ) {
+	$cb_child_generation = function( BugData $p_bug, $p_master_bug_id ) {
 		# update master bug last updated
 		bug_update_date( $p_master_bug_id );
 		# Add log line to record the cloning action
 		history_log_event_special( $p_bug->id, BUG_CREATED_FROM, '', $p_master_bug_id );
 		history_log_event_special( $p_master_bug_id, BUG_CLONED_TO, '', $p_bug->id );
 	};
-	$t_bug_data->add_create_callback( $t_callback_child_generation, array( $t_bug_data, $f_master_bug_id ) );
+	$t_bug_data->add_create_callback( $cb_child_generation, array( $t_bug_data, $f_master_bug_id ) );
 
 	# create relationships
 	if( $f_rel_type > BUG_REL_ANY ) {
-		$t_callback_relations = function( BugData $p_bug, $p_master_bug_id, $p_rel_type ) {
+		$cb_relations = function( BugData $p_bug, $p_master_bug_id, $p_rel_type ) {
 			# Add the relationship
 			relationship_add( $p_bug->id, $p_master_bug_id, $p_rel_type );
 			# Add log line to the history (both issues)
@@ -258,12 +258,12 @@ if( $f_master_bug_id > 0 ) {
 			# Send the email notification
 			email_relationship_added( $p_master_bug_id, $p_bug->id, relationship_get_complementary_type( $p_rel_type ) );
 		};
-		$t_bug_data->add_create_callback( $t_callback_relations, array( $t_bug_data, $f_master_bug_id, $f_rel_type ) );
+		$t_bug_data->add_create_callback( $cb_relations, array( $t_bug_data, $f_master_bug_id, $f_rel_type ) );
 	}
 
 	# copy notes from parent
 	if( $f_copy_notes_from_parent ) {
-		$t_callback_copy_notes = function( BugData $p_bug, $p_master_bug_id ) {
+		$cb_copy_notes = function( BugData $p_bug, $p_master_bug_id ) {
 			$t_parent_bugnotes = bugnote_get_all_bugnotes( $p_master_bug_id );
 			foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
 				$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
@@ -282,15 +282,15 @@ if( $f_master_bug_id > 0 ) {
 				# Note: we won't trigger mentions in the clone scenario.
 			}
 		};
-		$t_bug_data->add_create_callback( $t_callback_copy_notes, array( $t_bug_data, $f_master_bug_id ) );
+		$t_bug_data->add_create_callback( $cb_copy_notes, array( $t_bug_data, $f_master_bug_id ) );
 	}
 
 	# copy attachments from parent
 	if( $f_copy_attachments_from_parent ) {
-		$t_callback_copy_attachments = function( BugData $p_bug, $p_master_bug_id ) {
+		$cb_file_copy_attachments = function( BugData $p_bug, $p_master_bug_id ) {
 			file_copy_attachments( $p_master_bug_id, $p_bug->id );
 		};
-		$t_bug_data->add_create_callback( $t_callback_copy_attachments, array( $t_bug_data, $f_master_bug_id ) );
+		$t_bug_data->add_create_callback( $cb_file_copy_attachments, array( $t_bug_data, $f_master_bug_id ) );
 	}
 }
 
