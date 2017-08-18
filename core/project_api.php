@@ -569,26 +569,13 @@ function project_get_name( $p_project_id, $p_trigger_errors = true ) {
  * @param integer $p_project_id A project identifier.
  * @param integer $p_user_id    A user identifier.
  * @return integer
+ * @deprecated     access_get_local_level() should be used in preference to this function
+ *                 This function has been deprecated in version 2.6
  */
 function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
-	$p_project_id = (int)$p_project_id;
-
-	if( ALL_PROJECTS == $p_project_id ) {
-		return false;
-	}
-
-	db_param_push();
-	$t_query = 'SELECT access_level
-				  FROM {project_user_list}
-				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
-	$t_result = db_query( $t_query, array( (int)$p_user_id, $p_project_id ) );
-
-	$t_level = db_result( $t_result );
-	if( $t_level ) {
-		return (int)$t_level;
-	} else {
-		return false;
-	}
+	error_parameters( __FUNCTION__ . '()', 'access_get_local_level()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	return access_get_local_level( $p_user_id, $p_project_id );
 }
 
 /**

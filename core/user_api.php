@@ -994,7 +994,7 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		return $t_access_level;
 	}
 
-	$t_project_access_level = project_get_local_user_access_level( $p_project_id, $p_user_id );
+	$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );
 
 	if( false === $t_project_access_level ) {
 		return $t_access_level;
