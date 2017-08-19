@@ -374,6 +374,10 @@ $(document).ready( function() {
 			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
+
+	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
+		$(this).find(".dropdown-menu li.active a").focus();
+	 });
 });
 
 function setBugLabel() {

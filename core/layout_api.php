@@ -531,7 +531,7 @@ function layout_navbar_projects_menu() {
 	}
 
 	if( $t_show_project_selector ) {
-		echo '<li class="grey">' . "\n";
+		echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
 		echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
 		$t_current_project_id = helper_get_current_project();
