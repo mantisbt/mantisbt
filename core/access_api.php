@@ -417,12 +417,27 @@ function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_
 
 /**
  * Check whether the user has the specified access level for any project project
+ *
+ * Warning: this function may mislead into incorrect validations. Usually you want to
+ * check that a user meets a threshold for any project, but that threshold may be configured
+ * differently for each project, and the user may also have different access levels in each
+ * project due to private projects assignment.
+ * In that scenario, $p_access_level can't be a static threshold, but a "threshold identifier"
+ * instead, that must be evaluated for each project.
+ * Function "access_has_any_project_level()" provides that functionality, also covers the basic
+ * usage of this function.
+ * For such reasons, this function has been deprecated.
+ *
  * @param integer      $p_access_level Integer representing access level.
  * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
  * @return boolean whether user has access level specified
  * @access public
+ * @deprecated	access_has_any_project_level() should be used in preference to this function (since verrsion 2.6)
  */
 function access_has_any_project( $p_access_level, $p_user_id = null ) {
+	error_parameters( __FUNCTION__ . '()', 'access_has_any_project_level()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	# Short circuit the check in this case
 	if( NOBODY == $p_access_level ) {
 		return false;
