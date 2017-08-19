@@ -1079,7 +1079,8 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 	global $g_checkboxes_exist;
 
 	echo '<td class="column-selection">';
-	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ) ) ||
+	if( # check report_bug_threshold for the actions "copy" or "move" into any other project
+		access_has_any_project_level( 'report_bug_threshold' ) ||
 		# !TODO: check if any other projects actually exist for the bug to be moved to
 		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		# !TODO: factor in $g_auto_set_status_to_assigned == ON
