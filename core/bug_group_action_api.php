@@ -189,7 +189,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 		}
 
 		if( !isset( $t_commands['COPY'] ) &&
-			access_has_any_project( config_get( 'report_bug_threshold', null, null, $t_project_id ) ) ) {
+			access_has_any_project_level( 'report_bug_threshold' ) ) {
 			$t_commands['COPY'] = lang_get( 'actiongroup_menu_copy' );
 		}
 

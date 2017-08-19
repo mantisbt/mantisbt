@@ -2375,7 +2375,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
 
 	# overload handler_id setting if user isn't supposed to see them (ref #6189)
-	if( !access_has_any_project( config_get( 'view_handler_threshold' ) ) ) {
+	if( !access_has_any_project_level( 'view_handler_threshold' ) ) {
 		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array(
 			META_FILTER_ANY,
 		);
