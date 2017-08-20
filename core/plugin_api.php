@@ -35,6 +35,7 @@
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses logging_api.php
  */
 
 require_api( 'access_api.php' );
@@ -46,6 +47,7 @@ require_api( 'event_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'logging_api.php' );
 
 # Cache variables #####
 
@@ -1014,5 +1016,22 @@ function plugin_init( $p_basename ) {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+function plugin_log_event( $p_msg, $p_basename = null ) {
+	$t_current_plugin = plugin_get_current();
+	if( is_null( $p_basename ) ) {
+		$t_basename = $t_current_plugin;
+	} else {
+		$t_basename = $p_basename;
+	}
+
+	if( $t_basename != $t_current_plugin ) {
+		plugin_push_current( $t_basename );
+		log_event( LOG_PLUGIN, $p_msg);
+		plugin_pop_current();
+	} else {
+		log_event( LOG_PLUGIN, $p_msg);
 	}
 }
