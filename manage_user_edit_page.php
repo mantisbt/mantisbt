@@ -195,18 +195,6 @@ print_manage_menu( 'manage_user_page.php' );
 					</label>
 				</td>
 			</tr>
-			<?php
-			if( config_get( 'enable_email_notification' ) == ON ) { ?>
-				<tr>
-					<td class="category"> <?php echo lang_get( 'notify_user' ) ?> </td>
-					<td>
-						<label>
-							<input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked" ?>
-							<span class="lbl"></span>
-						</label>
-					</td>
-				</tr>
-			<?php } ?>
 
 			<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
 
@@ -219,6 +207,14 @@ print_manage_menu( 'manage_user_page.php' );
 
 		<div class="widget-toolbox padding-8 clearfix">
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+			<?php
+			if( config_get( 'enable_email_notification' ) == ON ) { ?>
+				&nbsp;
+				<label class="inline">
+					<input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked">
+					<span class="lbl"> <?php echo lang_get( 'notify_user' ) ?></span>
+				</label>
+			<?php } ?>
 		</div>
 		</div>
 		</div>

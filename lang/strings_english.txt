@@ -967,7 +967,7 @@ $s_account_deleted_msg = 'Account deleted...';
 $s_delete_account_sure_msg = 'Are you sure you wish to delete this account?';
 
 # manage_user_edit_page.php
-$s_notify_user = 'Notify User';
+$s_notify_user = 'Notify user of this change';
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
