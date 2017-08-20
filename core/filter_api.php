@@ -2158,7 +2158,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				# by the WHERE clause and by the DISTINCT clause
 				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
 
-				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_included_project_ids, $t_user_id );
+				$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_cfid ) );
+				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
 				if( empty( $t_projects_can_view_field ) ) {
 					continue;
 				}
