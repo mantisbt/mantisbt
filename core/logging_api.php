@@ -122,7 +122,11 @@ function log_event( $p_level, $p_msg ) {
 				}
 			}
 		} else {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+			if( isset(  $t_backtrace[1]['class'] ) ) {
+				$t_caller .= ' ' . $t_backtrace[1]['class'] . '::' . $t_backtrace[1]['function'] . '()';
+			} else {
+				$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+			}
 		}
 	} else {
 		# or from a script directly?
