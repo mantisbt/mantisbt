@@ -45,6 +45,7 @@ $g_log_levels = array(
 	LOG_LDAP => 'LDAP',
 	LOG_DATABASE => 'DB',
 	LOG_WEBSERVICE => 'WEBSERVICE',
+	LOG_PLUGIN => 'PLUGIN',
 );
 
 /**
@@ -78,8 +79,31 @@ function log_event( $p_level, $p_msg ) {
 	}
 
 	$t_backtrace = debug_backtrace();
-	$t_caller = basename( $t_backtrace[0]['file'] );
-	$t_caller .= ':' . $t_backtrace[0]['line'];
+	$t_caller = '';
+	if( $p_level == LOG_PLUGIN ) {
+		$t_caller .= plugin_get_current() . ' ';
+		# remove the trace step for plugin.php::include()
+		# so we will consider the included plugin page as the base script
+		$t_trace_last = end( $t_backtrace );
+		if( isset( $t_trace_last['function'] ) && $t_trace_last['function'] == 'include' ) {
+			array_pop( $t_backtrace );
+		}
+		# If plugin_log_event() was used, remove that trace step, so that we can
+		# later retrieve the actual function that started the logging
+		# Set here the file and line depending on how this was called
+		if( isset( $t_backtrace[1]['function'] ) && $t_backtrace[1]['function'] == 'plugin_log_event' ) {
+			$t_caller .= basename( $t_backtrace[1]['file'] );
+			$t_caller .= ':' . $t_backtrace[1]['line'];
+			unset( $t_backtrace[1] );
+			$t_backtrace = array_values( $t_backtrace );
+		} else {
+			$t_caller .= basename( $t_backtrace[0]['file'] );
+			$t_caller .= ':' . $t_backtrace[0]['line'];
+		}
+	} else {
+		$t_caller .= basename( $t_backtrace[0]['file'] );
+		$t_caller .= ':' . $t_backtrace[0]['line'];
+	}
 
 	# Is this called from another function?
 	if( isset( $t_backtrace[1] ) ) {
@@ -102,7 +126,11 @@ function log_event( $p_level, $p_msg ) {
 		}
 	} else {
 		# or from a script directly?
-		$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
+		# ignore plugin logs, since its page is included via plugin.php, the script name
+		# will always be plugin.php, which is not very useful
+		if( $p_level != LOG_PLUGIN ) {
+			$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
+		}
 	}
 
 	$t_now = date( config_get_global( 'complete_date_format' ) );

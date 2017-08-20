@@ -256,6 +256,13 @@ $g_display_errors = array(
 						</listitem>
 					</varlistentry>
 					<varlistentry>
+						<term>LOG_PLUGIN</term>
+						<listitem>
+							<para>Enables logging from plugins.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
 						<term>LOG_ALL</term>
 						<listitem>
 							<para>combines all of the above log levels

@@ -4137,7 +4137,7 @@ $g_stop_on_errors = OFF;
  * The available log channels are:
  *
  * LOG_NONE, LOG_EMAIL, LOG_EMAIL_RECIPIENT, LOG_EMAIL_VERBOSE, LOG_FILTERING,
- * LOG_AJAX, LOG_LDAP, LOG_DATABASE, LOG_WEBSERVICE, LOG_ALL
+ * LOG_AJAX, LOG_LDAP, LOG_DATABASE, LOG_WEBSERVICE, LOG_PLUGIN, LOG_ALL
  *
  * and can be combined using
  * {@link http://php.net/language.operators.bitwise PHP bitwise operators}
