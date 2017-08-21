@@ -85,58 +85,58 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 # CSRF protection not required here - form does not result in modifications
 ?>
 <div class="col-md-12 col-xs-12 noprint">
-<a id="bugnotestats"></a>
-<div class="space-10"></div>
-<div id="bugnotestats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<a id="bugnotestats"></a>
+	<div class="space-10"></div>
+	<div id="bugnotestats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 
-    <div class="widget-header widget-header-small">
-        <h4 class="widget-title lighter">
-            <i class="ace-icon fa fa-clock-o"></i>
-            <?php echo lang_get( 'time_tracking' ) ?>
-        </h4>
-		<div class="widget-toolbar">
-			<a data-action="collapse" href="#">
-				<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
-			</a>
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-clock-o"></i>
+				<?php echo lang_get( 'time_tracking' ) ?>
+			</h4>
+			<div class="widget-toolbar">
+				<a data-action="collapse" href="#">
+					<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+				</a>
+			</div>
 		</div>
-    </div>
 
-<form method="post" action="#bugnotestats">
-    <div class="widget-body">
-    <div class="widget-main">
-	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
-	<table class="width100" cellspacing="0">
-		<tr>
-			<td class="form-title" colspan="4"><?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' ); ?>
-			</td>
-		</tr>
-		<tr class="row-2">
-			<td class="category" width="25%">
-				<?php
-					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
-					filter_init( $t_filter );
-					print_filter_do_filter_by_date( true );
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td class="center" colspan="2">
-				<input type="submit" class="button"
-					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
-			</td>
-		</tr>
-	</table>
-</form>
+		<form method="post" action="#bugnotestats">
+			<div class="widget-body">
+				<div class="widget-main">
+					<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
+					<table class="width100" cellspacing="0">
+						<tr>
+							<td class="form-title" colspan="4"><?php
+								collapse_icon( 'bugnotestats' );
+								echo lang_get( 'time_tracking' ); ?>
+							</td>
+						</tr>
+						<tr class="row-2">
+							<td class="category" width="25%">
+								<?php
+									$t_filter = array();
+									$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
+									$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
+									filter_init( $t_filter );
+									print_filter_do_filter_by_date( true );
+								?>
+							</td>
+						</tr>
+						<tr>
+							<td class="center" colspan="2">
+								<input type="submit" class="button"
+									name="get_bugnote_stats_button"
+									value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
+							</td>
+						</tr>
+					</table>
+
 
 <?php
 	# Print time tracking information if requested
@@ -160,51 +160,53 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		unset( $t_sort_name );
 ?>
 
-<div class="space-10"></div>
-<div class="table-responsive">
-<table class="table table-bordered table-condensed table-striped">
-	<tr>
-		<td class="small-caption align-left">
-			<?php echo lang_get( $t_name_field ) ?>
-		</td>
-		<td class="small-caption align-left">
-			<?php echo lang_get( 'time_tracking' ) ?>
-		</td>
-	</tr>
-<?php
-		# Loop on all time tracking entries
-		$t_sum_in_minutes = 0;
-		foreach ( $t_bugnote_stats as $t_item ) {
-			$t_sum_in_minutes += $t_item['sum_time_tracking'];
-			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
-?>
-	<tr>
-		<td class="small-caption">
-			<?php echo string_display_line( $t_item[$t_name_field] ) ?>
-		</td>
-		<td class="small-caption">
-			<?php echo $t_item['sum_time_tracking'] ?>
-		</td>
-	</tr>
-<?php
-		} # end for loop
-?>
-	<tr>
-		<td class="small-caption">
-			<?php echo lang_get( 'total_time' ) ?>
-		</td>
-		<td class="small-caption">
-			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ) ?>
-		</td>
-	</tr>
-</table>
-</div>
+					<div class="space-10"></div>
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
+							<tr>
+								<td class="small-caption align-left">
+									<?php echo lang_get( $t_name_field ) ?>
+								</td>
+								<td class="small-caption align-left">
+									<?php echo lang_get( 'time_tracking' ) ?>
+								</td>
+							</tr>
+						<?php
+								# Loop on all time tracking entries
+								$t_sum_in_minutes = 0;
+								foreach ( $t_bugnote_stats as $t_item ) {
+									$t_sum_in_minutes += $t_item['sum_time_tracking'];
+									$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
+						?>
+							<tr>
+								<td class="small-caption">
+									<?php echo string_display_line( $t_item[$t_name_field] ) ?>
+								</td>
+								<td class="small-caption">
+									<?php echo $t_item['sum_time_tracking'] ?>
+								</td>
+							</tr>
+						<?php
+								} # end for loop
+						?>
+							<tr>
+								<td class="small-caption">
+									<?php echo lang_get( 'total_time' ) ?>
+								</td>
+								<td class="small-caption">
+									<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ) ?>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
 
 <?php
 	} # end if
 ?>
 
-</form>
-</div>
+		</form>
+	</div>
 </div>
 
