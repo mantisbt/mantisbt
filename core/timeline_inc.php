@@ -47,6 +47,18 @@ $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 $t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
+# Timeline shows shows next/prev buttons that reload the page with new timeline parameters
+# we must preserve parent script query parameters
+$t_url_params = array();
+if( !empty( $_GET ) ) {
+	# Sanitize request values to avoid xss
+	foreach( $_GET as $t_key => $t_value ) {
+		$t_url_params[$t_key] = htmlspecialchars( $t_value );
+	}
+}
+# clear timeline own parameters, which will be added later as needed
+unset( $t_url_params['days'] );
+unset( $t_url_params['all'] );
 ?>
 
 <div id="timeline" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -74,14 +86,14 @@ $t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
 				echo '&#160;&#160;';
 
 				echo '<div class="btn-group">';
-				$t_url_params = array( 'days' => $f_days + 7 );
+				$t_url_params['days'] = $f_days + 7;
 				$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 				echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'prev' ) . '</a>';
 
 				$t_next_days = max( $f_days - 7, 0 );
 
 				if( $t_next_days != $f_days ) {
-					$t_url_params = array( 'days' => $t_next_days );
+					$t_url_params['days'] = $t_next_days;
 					$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 					echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="' . $t_href . '">' . lang_get( 'next' ) . '</a>';
 				}
@@ -101,10 +113,8 @@ $t_url_page = string_sanitize_url( basename( $_SERVER['SCRIPT_NAME'] ) );
 		timeline_print_events( $t_events );
 		echo '<div class="widget-toolbox">';
 		echo '<div class="btn-toolbar">';
-		$t_url_params = array(
-			'days' => $f_days,
-			'all' => 1,
-		);
+		$t_url_params['days'] = $f_days;
+		$t_url_params['all'] = 1;
 		$t_href = $t_url_page . '?' . http_build_query( $t_url_params );
 		echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="' . $t_href . '">' . lang_get( 'timeline_more' ) . '</a>';
 		echo '</div>';
