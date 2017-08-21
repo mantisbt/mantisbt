@@ -294,7 +294,8 @@ if( $t_multiple_projects ) {
 			switch( $f_action ) {
 				case 'COPY':
 				case 'MOVE':
-					print_project_option_list( null, false );
+					print_project_option_list( null /* $p_project_id */, false /* $p_include_all_projects */,
+							null /* $p_filter_project_id */, false /* $p_trace */, true /* $p_can_report_only */ );
 					break;
 				case 'ASSIGN':
 					print_assign_to_option_list( 0, $t_project_id );
