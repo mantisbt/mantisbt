@@ -902,10 +902,17 @@ $g_admin_checks = ON;
 $g_favicon_image = 'images/favicon.ico';
 
 /**
- * Logo
+ * Location for logo image
  * @global string $g_logo_image
  */
 $g_logo_image = 'images/mantis_logo.png';
+
+/**
+ * Location for logo image to be displayed in navbar header
+ * This image should be of small enough size to not distort the navbar layout.
+ * Note, navbar has: min-height: 45px
+ */
+$g_navbar_logo_image = '';
 
 /**
  * Logo URL link

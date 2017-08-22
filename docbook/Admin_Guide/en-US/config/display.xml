@@ -52,6 +52,16 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_navbar_logo_image</term>
+			<listitem>
+				<para>Path to the logo image to be shown in navbar header, relative to MantisBT root folder (default is empty).
+					An empty value ('') for this configurationoption means that navbar will not show any logo.
+				</para>
+				<para>Note that the size of this image must be accounted for the correct rendering of the navbar area. By default, the navbarheader is sized at 45px height.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_show_project_menu_bar</term>
 			<listitem>
 				<para>This option specifies whether to add menu at the top of the

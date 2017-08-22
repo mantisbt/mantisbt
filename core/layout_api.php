@@ -405,6 +405,7 @@ function layout_login_page_end() {
  */
 function layout_navbar() {
 	$t_logo_url = config_get( 'logo_url' );
+	$t_logo_img = config_get_global( 'navbar_logo_image', '' );
 	$t_toggle_class = ( OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img' );
 	?>
 	<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">
@@ -418,9 +419,18 @@ function layout_navbar() {
 			</button>
 
 			<div class="navbar-header">
+				<?php if( !empty( $t_logo_img ) ) { ?>
+					<span class="hidden-xs pull-left" id="navbar_logo_image">
+						<a href="<?php echo $t_logo_url ?>">
+							<img src="<?php echo $t_logo_img ?>">
+						</a>
+					</span>
+					&nbsp;
+				<?php } ?>
+
 				<a href="<?php echo $t_logo_url ?>" class="navbar-brand">
 					<span class="smaller-75">
-						<?php echo string_display_line( config_get( 'window_title' ) ) ?>
+					<?php echo string_display_line( config_get( 'window_title' ) ) ?>
 					</span>
 				</a>
 
