@@ -507,6 +507,11 @@ input.typeahead.scrollable ~ .tt-menu {
 	margin: 0 1px 0 0;
 }
 
+/* override small screen menu button, adds margin-right */
+.navbar .navbar-toggle.pull-left {
+    margin: 5px 6px 4px 6px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
