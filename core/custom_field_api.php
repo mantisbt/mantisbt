@@ -289,6 +289,7 @@ function custom_field_cache_values(array $p_bug_id_array, array $p_field_id_arra
         if (! isset($g_cache_cf_bug_refs[$c_bug_id])) {
             $g_cache_cf_bug_refs[$c_bug_id] = array ();
         }
+        $g_cache_cf_bug_refs[$c_bug_id][$c_field_id] = $t_row[$t_value_column];
     }
 }
 
