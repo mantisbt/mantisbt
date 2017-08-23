@@ -46,6 +46,7 @@
  * @author Filippo
  * @author Giallu
  * @author Gianfranco
+ * @author Greis
  * @author Massimo itaca
  * @author McDutchie
  * @author Nemo bis
@@ -89,6 +90,8 @@ $s_excel_export = 'Esporta in Excel';
 $s_login_anonymously = 'Accedi anonimamente';
 $s_anonymous = 'Anonimo';
 $s_jump_to_bugnotes = 'Vai alle note';
+$s_jump_to_history = 'Passa a Cronologia';
+$s_display_history = 'Mostra Cronologia';
 $s_public_project_msg = 'Questo progetto è PUBBLICO.  Tutti gli utenti possono accedervi.';
 $s_private_project_msg = 'Questo progetto è PRIVATO.  Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.';
 $s_access_level_project = 'Livello di accesso al progetto';
@@ -422,7 +425,7 @@ $s_bugnote_add_resolve_button = 'Inserisci nota';
 $s_from = 'Da';
 $s_to = 'A';
 $s_sent_you_this_reminder_about = 'ti invia questo memorandum a proposito dell\'anomalia';
-$s_bug_reminder = 'Invia un memorandum';
+$s_bug_reminder = 'Invia un promemoria';
 $s_reminder_sent_to = 'Memorandum spedito a';
 $s_reminder_sent_none = 'Nessun promemoria può essere inviato';
 $s_reminder_list_truncated = 'elenco destinatari troncato';
@@ -516,7 +519,7 @@ $s_warning_integrity_hazard = 'Questo comporta che MantisBT continuerà quando s
 $s_warning_debug_email = '<strong>Attenzione:</strong> "<code>debug_email</code>" non è impostato su <code>OFF</code>, tutte le e-mail di notifica sarà inviata a "%1$s".';
 $s_error_database_no_schema_version = '<strong>Errore:</strong> la versione dello schema del tuo database è 0. Ciò può accadere perché il database è danneggiato o il valore di "database_version" non è stato recuperato dalla tabella di configurazione o la struttura del database è da una versione obsoleta di MantisBT (pre 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database é obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
-$s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> la struttura di database è più recente del programma installato. Per favore, aggiorna la versione del programma.';
+$s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> la struttura del database è più recente del programma installato. Per favore, aggiorna la versione del programma.';
 $s_login_page_info = 'Benvenuti nel software di gestione anomalie e progetti.';
 $s_login_title = 'Login';
 $s_save_login = 'Mantienimi collegato';

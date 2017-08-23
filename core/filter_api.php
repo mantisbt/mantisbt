@@ -574,7 +574,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 
 	$t_sort_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] );
-	# both arrays should be equal lenght, just in case
+	# both arrays should be equal length, just in case
 	$t_sort_fields_count = min( count( $t_sort_fields ), count( $t_dir_fields ) );
 
 	# clean up sort fields, remove invalid columns
@@ -1424,7 +1424,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	log_event( LOG_FILTERING, 'include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
 
 	# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
-	# replace META_FILTER_CURRENT with the actualy current project id.
+	# replace META_FILTER_CURRENT with the actually current project id.
 	$t_all_projects_found = false;
 	$t_new_project_ids = array();
 	foreach( $t_project_ids as $t_pid ) {
@@ -1492,6 +1492,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_private_and_public_project_ids = array();
 		$t_limited_projects = array();
 
+		# make sure the project rows are cached, as they will be used to check access levels.
+		project_cache_array_rows( $t_project_ids );
 		foreach( $t_project_ids as $t_pid ) {
 			# limit reporters to visible projects
 			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {

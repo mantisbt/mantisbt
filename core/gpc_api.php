@@ -406,7 +406,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 		unset( $_COOKIE[$p_name] );
 	}
 
-	# dont try to send cookie if headers are send (guideweb)
+	# don't try to send cookie if headers are send (guideweb)
 	if( !headers_sent() ) {
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	} else {
