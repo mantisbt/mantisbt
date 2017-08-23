@@ -1064,6 +1064,8 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 		$p_query_clauses['order'][] = '{bug}.sticky DESC';
 	}
 
+	$t_included_project_ids = $p_query_clauses['metadata']['included_projects'];
+	$t_user_id = $p_query_clauses['metadata']['user_id'];
 	$t_count = count( $t_sort_fields );
 	for( $i = 0; $i < $t_count; $i++ ) {
 		$c_sort = $t_sort_fields[$i];
@@ -1075,20 +1077,29 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 			$t_def = custom_field_get_definition( $t_custom_field_id );
 			$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-			$c_cf_alias = 'custom_field_' . $t_custom_field_id;
+
+			# @TODO This code for CF visibility is the same as filter_get_bug_rows_query_clauses()
+			# It should be encapsulated and reused
 
 			# Distinguish filter table aliases from sort table aliases (see #19670)
-			$t_cf_table_alias = 'cf_sort_' . $t_custom_field_id;
-			$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
+			$t_table_name = 'cf_sort_' . $t_custom_field_id;
+			$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
 
-			# check to be sure this field wasn't already added to the query.
-			if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
-				$p_query_clauses['select'][] = $t_cf_select;
-				$p_query_clauses['join'][] = 'LEFT JOIN {custom_field_string} ' . $t_cf_table_alias . ' ON
-											{bug}.id = ' . $t_cf_table_alias . '.bug_id AND ' . $t_cf_table_alias . '.field_id = ' . $t_custom_field_id;
+			$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_custom_field_id ) );
+			$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
+			if( empty( $t_projects_can_view_field ) ) {
+				continue;
+			}
+			# This diff will contain those included projects that can't view this custom field
+			$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
+			# If not empty, it means there are some projects that can't view the field values,
+			# so a project filter must be used to not include values from those projects
+			if( !empty( $t_diff ) ) {
+				$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
 			}
 
-			$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
+			$p_query_clauses['join'][] = $t_cf_join_clause;
+			$p_query_clauses['order'][] = $t_table_name . '.' . $t_value_field . ' ' . $c_dir;
 
 		# if sorting by plugin columns
 		} else if( column_is_plugin_column( $c_sort ) ) {
@@ -1400,6 +1411,11 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		' JOIN {project} ON {project}.id = {bug}.project_id',
 	);
 
+	# Metadata array will store information needed at later points, for example,
+	# when calculating the sort clauses.
+	$t_metadata = array();
+	$t_metadata['user_id'] = $c_user_id;
+
 	$t_projects_query_required = true;
 	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id, true /* return all projects */ );
 
@@ -1412,6 +1428,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_projects_query_required = false;
 		}
 	}
+	$t_metadata['included_projects'] = $t_included_project_ids;
 
 	if( $t_projects_query_required ) {
 
@@ -2313,6 +2330,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	$t_query_clauses['where_values'] = $t_where_params;
 	$t_query_clauses['project_where'] = $t_project_where_clauses;
 	$t_query_clauses['operator'] = $t_join_operator;
+	$t_query_clauses['metadata'] = $t_metadata;
 	$t_query_clauses = filter_get_query_sort_data( $t_filter, $p_show_sticky, $t_query_clauses );
 
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
