@@ -1078,27 +1078,33 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			$t_def = custom_field_get_definition( $t_custom_field_id );
 			$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 
-			# @TODO This code for CF visibility is the same as filter_get_bug_rows_query_clauses()
-			# It should be encapsulated and reused
+			# if the custom field was filtered, there is already a calculated join, so reuse that table alias
+			# otherwise, a new join must be calculated
+			if( isset( $p_query_clauses['metadata']['cf_alias'][$t_custom_field_id] ) ) {
+				$t_table_name = $p_query_clauses['metadata']['cf_alias'][$t_custom_field_id];
+			} else {
+				# @TODO This code for CF visibility is the same as filter_get_bug_rows_query_clauses()
+				# It should be encapsulated and reused
 
-			# Distinguish filter table aliases from sort table aliases (see #19670)
-			$t_table_name = 'cf_sort_' . $t_custom_field_id;
-			$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
+				$t_table_name = 'cf_sort_' . $t_custom_field_id;
+				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
 
-			$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_custom_field_id ) );
-			$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
-			if( empty( $t_projects_can_view_field ) ) {
-				continue;
+				$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_custom_field_id ) );
+				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
+				if( empty( $t_projects_can_view_field ) ) {
+					continue;
+				}
+				# This diff will contain those included projects that can't view this custom field
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
+				# If not empty, it means there are some projects that can't view the field values,
+				# so a project filter must be used to not include values from those projects
+				if( !empty( $t_diff ) ) {
+					$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
+				}
+				$p_query_clauses['metadata']['cf_alias'][$t_custom_field_id] = $t_table_name;
+				$p_query_clauses['join'][] = $t_cf_join_clause;
 			}
-			# This diff will contain those included projects that can't view this custom field
-			$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
-			# If not empty, it means there are some projects that can't view the field values,
-			# so a project filter must be used to not include values from those projects
-			if( !empty( $t_diff ) ) {
-				$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
-			}
 
-			$p_query_clauses['join'][] = $t_cf_join_clause;
 			$p_query_clauses['order'][] = $t_table_name . '.' . $t_value_field . ' ' . $c_dir;
 
 		# if sorting by plugin columns
@@ -2187,6 +2193,8 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				if( !empty( $t_diff ) ) {
 					$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
 				}
+
+				$t_metadata['cf_alias'][$t_cfid] = $t_table_name;
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
