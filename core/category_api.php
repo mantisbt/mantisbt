@@ -89,12 +89,10 @@ function category_is_unique( $p_project_id, $p_name ) {
        SELECT COUNT(*) FROM {category}
 	   WHERE project_id=' . db_param() . ' AND ' . db_helper_like( 'name' ) . '
 	';
-	$t_count = db_result( 
-			db_query( $t_query,
-					array(
-							$p_project_id,
-							$p_name
-					) ) );
+	$t_count = db_result( db_query( $t_query, array(
+			$p_project_id,
+			$p_name
+	) ) );
 	
 	if( 0 < $t_count ) {
 		return false;
@@ -129,11 +127,9 @@ function category_ensure_unique( $p_project_id, $p_name ) {
  * @access public
  */
 function category_can_remove( $p_category_id ) {
-	$t_default_category_id = config_get( 'default_category_for_moves', null,
-			ALL_USERS, ALL_PROJECTS );
+	$t_default_category_id = config_get( 'default_category_for_moves', null, ALL_USERS, ALL_PROJECTS );
 	
-	return $p_category_id != $t_default_category_id &&
-			 ! config_is_defined( 'default_category_for_moves', $p_category_id );
+	return $p_category_id != $t_default_category_id && ! config_is_defined( 'default_category_for_moves', $p_category_id );
 }
 
 /**
@@ -186,8 +182,7 @@ function category_add( $p_project_id, $p_name ) {
  * @return void
  * @access public
  */
-function category_update( $p_category_id, $p_name, $p_assigned_to,
-		$p_language = "default" ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to, $p_language = "default" ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -201,15 +196,13 @@ function category_update( $p_category_id, $p_name, $p_assigned_to,
 		cp_create_category_localisation( $p_category_id, $p_language, $p_name );
 		return;
 	}
-	$t_query = 'UPDATE {category} SET name =' . db_param() . ', user_id =' .
-			 db_param() . '
+	$t_query = 'UPDATE {category} SET name =' . db_param() . ', user_id =' . db_param() . '
 				  WHERE id=' . db_param();
-	db_query( $t_query,
-			array(
-					$p_name,
-					$p_assigned_to,
-					$p_category_id
-			) );
+	db_query( $t_query, array(
+			$p_name,
+			$p_assigned_to,
+			$p_category_id
+	) );
 	
 	# Add bug history entries if we update the category's name
 	if( $t_old_category['name'] != $p_name ) {
@@ -220,8 +213,7 @@ function category_update( $p_category_id, $p_name, $p_assigned_to,
 		) );
 		
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-			history_log_event_direct( $t_bug_row['id'], 'category',
-					$t_old_category['name'], $p_name );
+			history_log_event_direct( $t_bug_row['id'], 'category', $t_old_category['name'], $p_name );
 		}
 	}
 }
@@ -264,20 +256,16 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	) );
 	
 	while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-		history_log_event_direct( $t_bug_row['id'], 'category',
-				$t_category_row['name'],
-				category_full_name( $p_new_category_id, false ) );
+		history_log_event_direct( $t_bug_row['id'], 'category', $t_category_row['name'], category_full_name( $p_new_category_id, false ) );
 	}
 	
 	# update bug data
 	db_param_push();
-	$t_query = 'UPDATE {bug} SET category_id=' . db_param() .
-			 ' WHERE category_id=' . db_param();
-	db_query( $t_query,
-			array(
-					$p_new_category_id,
-					$p_category_id
-			) );
+	$t_query = 'UPDATE {bug} SET category_id=' . db_param() . ' WHERE category_id=' . db_param();
+	db_query( $t_query, array(
+			$p_new_category_id,
+			$p_category_id
+	) );
 }
 
 /**
@@ -323,20 +311,16 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	$t_category_ids = join( ',', $t_category_ids );
 	
 	# update bug history entries
-	$t_query = 'SELECT id, category_id FROM {bug} WHERE category_id IN ( ' .
-			 $t_category_ids . ' )';
+	$t_query = 'SELECT id, category_id FROM {bug} WHERE category_id IN ( ' . $t_category_ids . ' )';
 	$t_result = db_query( $t_query );
 	
 	while ( $t_bug_row = db_fetch_array( $t_result ) ) {
-		history_log_event_direct( $t_bug_row['id'], 'category',
-				category_full_name( $t_bug_row['category_id'], false ),
-				category_full_name( $p_new_category_id, false ) );
+		history_log_event_direct( $t_bug_row['id'], 'category', category_full_name( $t_bug_row['category_id'], false ), category_full_name( $p_new_category_id, false ) );
 	}
 	
 	# update bug data
 	db_param_push();
-	$t_query = 'UPDATE {bug} SET category_id=' . db_param() .
-			 ' WHERE category_id IN ( ' . $t_category_ids . ' )';
+	$t_query = 'UPDATE {bug} SET category_id=' . db_param() . ' WHERE category_id IN ( ' . $t_category_ids . ' )';
 	db_query( $t_query, array(
 			$p_new_category_id
 	) );
@@ -426,18 +410,15 @@ function category_sort_rows_by_project( $p_category1, array $p_category2 = null 
 	}
 	
 	if( ! is_null( $s_project_id ) ) {
-		if( $p_category1['project_id'] == $s_project_id &&
-				 $p_category2['project_id'] != $s_project_id ) {
+		if( $p_category1['project_id'] == $s_project_id && $p_category2['project_id'] != $s_project_id ) {
 			return - 1;
 		}
-		if( $p_category1['project_id'] != $s_project_id &&
-				 $p_category2['project_id'] == $s_project_id ) {
+		if( $p_category1['project_id'] != $s_project_id && $p_category2['project_id'] == $s_project_id ) {
 			return 1;
 		}
 	}
 	
-	$t_proj_cmp = strcasecmp( $p_category1['project_name'],
-			$p_category2['project_name'] );
+	$t_proj_cmp = strcasecmp( $p_category1['project_name'], $p_category2['project_name'] );
 	if( $t_proj_cmp != 0 ) {
 		return $t_proj_cmp;
 	}
@@ -531,16 +512,14 @@ function category_get_filter_list( $p_project_id = null ) {
 	
 	$t_subproject_ids = array();
 	foreach ( $t_project_ids as $t_project_id ) {
-		$t_subproject_ids = array_merge( $t_subproject_ids,
-				current_user_get_all_accessible_subprojects( $t_project_id ) );
+		$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
 	}
 	
 	$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
 	
 	$t_categories = array();
 	foreach ( $t_project_ids as $t_id ) {
-		$t_categories = array_merge( $t_categories,
-				category_get_all_rows( $t_id ) );
+		$t_categories = array_merge( $t_categories, category_get_all_rows( $t_id ) );
 	}
 	
 	$t_unique = array();
@@ -565,8 +544,7 @@ function category_get_filter_list( $p_project_id = null ) {
  * @return array array of categories
  * @access public
  */
-function category_get_all_rows( $p_project_id, $p_inherit = null,
-		$p_sort_by_project = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
 	global $g_category_cache, $g_cache_category_project;
 	
 	if( isset( $g_cache_category_project[(int) $p_project_id] ) ) {
@@ -600,8 +578,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null,
 	
 	if( $t_inherit ) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
-		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) .
-				 ' ) ';
+		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
 	} else {
 		$t_project_where = ' project_id=' . $p_project_id . ' ';
 	}
@@ -724,18 +701,15 @@ function category_get_name( $p_category_id ) {
  * @return boolean
  * @access public
  */
-function category_get_id_by_name( $p_category_name, $p_project_id,
-		$p_trigger_errors = true ) {
+function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
 	$t_project_name = project_get_name( $p_project_id );
 	
 	db_param_push();
-	$t_query = 'SELECT id FROM {category} WHERE name=' . db_param() .
-			 ' AND project_id=' . db_param();
-	$t_result = db_query( $t_query,
-			array(
-					$p_category_name,
-					(int) $p_project_id
-			) );
+	$t_query = 'SELECT id FROM {category} WHERE name=' . db_param() . ' AND project_id=' . db_param();
+	$t_result = db_query( $t_query, array(
+			$p_category_name,
+			(int) $p_project_id
+	) );
 	$t_id = db_result( $t_result );
 	if( $t_id === false ) {
 		if( $p_trigger_errors ) {
@@ -758,8 +732,7 @@ function category_get_id_by_name( $p_category_name, $p_project_id,
  * @return string category full name
  * @access public
  */
-function category_full_name( $p_category_id, $p_show_project = true,
-		$p_current_project = null ) {
+function category_full_name( $p_category_id, $p_show_project = true, $p_current_project = null ) {
 	if( 0 == $p_category_id ) {
 		# No Category
 		return lang_get( 'no_category' );
@@ -773,8 +746,7 @@ function category_full_name( $p_category_id, $p_show_project = true,
 			$t_current_project = is_null( $p_current_project ) ? helper_get_current_project() : $p_current_project;
 			
 			if( $p_show_project && $t_project_id != $t_current_project ) {
-				return '[' . project_get_name( $t_project_id ) . '] ' .
-						 $t_row['name'];
+				return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['name'];
 			}
 			
 			return $t_row['name'];
@@ -791,10 +763,9 @@ function category_full_name( $p_category_id, $p_show_project = true,
 function category_can_delete( $p_category_id ) {
 	db_param_push();
 	$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
-	$t_bug_count = db_result( 
-			db_query( $t_query, array(
-					$p_category_id
-			) ) );
+	$t_bug_count = db_result( db_query( $t_query, array(
+			$p_category_id
+	) ) );
 	return $t_bug_count == 0;
 }
 
