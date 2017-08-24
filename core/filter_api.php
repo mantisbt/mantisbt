@@ -1105,6 +1105,8 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				$p_query_clauses['join'][] = $t_cf_join_clause;
 			}
 
+			# pgsql needs the sort expression to appear as member of the "select distinct"
+			$p_query_clauses['select'][] = $t_table_name . '.' . $t_value_field;
 			$p_query_clauses['order'][] = $t_table_name . '.' . $t_value_field . ' ' . $c_dir;
 
 		# if sorting by plugin columns
