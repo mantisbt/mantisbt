@@ -1126,13 +1126,15 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 		} else {
 			$t_sort_col = '{bug}.' . $c_sort;
 
-			# when sorting by due_date, always display undefined dates last
+			# When sorting by due_date, always display undefined dates last.
+			# Undefined date is defaulted as "1" in database, so add a special
+			# sort clause to group and sort by this.
 			if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
-				$t_sort_due_date = $t_sort_col . ' = 1';
-				$p_query_clauses['select'][] = $t_sort_due_date;
-				$t_sort_col = $t_sort_due_date . ', ' . $t_sort_col;
+				$t_null_expr = 'CASE ' . $t_sort_col . ' WHEN 1 THEN 1 ELSE 0 END';
+				$p_query_clauses['select'][] = $t_null_expr . ' AS due_date_sort_null';
+				$p_query_clauses['order'][] = 'due_date_sort_null ASC';
 			}
-
+			# main sort clause for due date
 			$p_query_clauses['order'][] = $t_sort_col . ' ' .$c_dir;
 		}
 	}
