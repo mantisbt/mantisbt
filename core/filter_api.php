@@ -2318,6 +2318,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_join_clauses[] = 'LEFT JOIN {bugnote} ON {bug}.id = {bugnote}.bug_id';
 			# Outer join required otherwise we don't retrieve issues without notes
 			$t_join_clauses[] = 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id';
+			$t_join_clauses[] = 'LEFT JOIN {custom_field_string} ON {custom_field_string}.bug_id = {bug}.id';
 			$t_where_clauses[] = $t_textsearch_where_clause;
 		}
 	}
