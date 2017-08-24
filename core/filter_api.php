@@ -2286,8 +2286,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				' OR ' . db_helper_like( '{bug_text}.description' ) .
 				' OR ' . db_helper_like( '{bug_text}.steps_to_reproduce' ) .
 				' OR ' . db_helper_like( '{bug_text}.additional_information' ) .
-				' OR ' . db_helper_like( '{bugnote_text}.note' );
+				' OR ' . db_helper_like( '{bugnote_text}.note' ).
+				' OR ' . db_helper_like( '{custom_field_string}.value' );
 
+			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
