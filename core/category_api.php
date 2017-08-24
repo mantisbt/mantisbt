@@ -5,12 +5,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
 
@@ -22,7 +22,7 @@
  * @copyright Copyright 2000 - 2002 Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *      
+ *
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses database_api.php
@@ -51,9 +51,8 @@ $g_category_cache = array();
 
 /**
  * Check whether the category exists in the project
- * 
- * @param integer $p_category_id
- *        	A Category identifier.
+ *
+ * @param integer $p_category_id A Category identifier.
  * @return boolean Return true if the category exists, false otherwise
  * @access public
  */
@@ -65,9 +64,8 @@ function category_exists( $p_category_id ) {
 /**
  * Check whether the category exists in the project
  * Trigger an error if it does not
- * 
- * @param integer $p_category_id
- *        	A Category identifier.
+ *
+ * @param integer $p_category_id A Category identifier.
  * @return void
  * @access public
  */
@@ -79,11 +77,9 @@ function category_ensure_exists( $p_category_id ) {
 
 /**
  * Check whether the category is unique within a project
- * 
- * @param integer $p_project_id
- *        	A project identifier.
- * @param string $p_name
- *        	Project name.
+ *
+ * @param integer $p_project_id A project identifier.
+ * @param string $p_name Project name.
  * @return boolean Returns true if the category is unique, false otherwise
  * @access public
  */
@@ -91,8 +87,7 @@ function category_is_unique( $p_project_id, $p_name ) {
 	db_param_push();
 	$t_query = '
        SELECT COUNT(*) FROM {category}
-	   WHERE project_id=' .
-			 db_param() . ' AND ' . db_helper_like( 'name' ) . '
+	   WHERE project_id=' . db_param() . ' AND ' . db_helper_like( 'name' ) . '
 	';
 	$t_count = db_result( 
 			db_query( $t_query,
@@ -111,11 +106,9 @@ function category_is_unique( $p_project_id, $p_name ) {
 /**
  * Check whether the category is unique within a project
  * Trigger an error if it is not
- * 
- * @param integer $p_project_id
- *        	Project identifier.
- * @param string $p_name
- *        	Category Name.
+ *
+ * @param integer $p_project_id Project identifier.
+ * @param string $p_name Category Name.
  * @return void
  * @access public
  */
@@ -129,10 +122,9 @@ function category_ensure_unique( $p_project_id, $p_name ) {
  * Checks whether the category can be deleted.
  * It is not allowed to delete a category if it is defined as 'default for
  * moves'
- * 
+ *
  * @see $g_default_category_for_moves
- * @param integer $p_category_id
- *        	Category identifier.
+ * @param integer $p_category_id Category identifier.
  * @return boolean True if category can be deleted, false otherwise
  * @access public
  */
@@ -146,9 +138,8 @@ function category_can_remove( $p_category_id ) {
 
 /**
  * Trigger an error if the category cannot be deleted.
- * 
- * @param integer $p_category_id
- *        	Category identifier.
+ *
+ * @param integer $p_category_id Category identifier.
  * @return void
  * @access public
  */
@@ -160,11 +151,9 @@ function category_ensure_can_remove( $p_category_id ) {
 
 /**
  * Add a new category to the project
- * 
- * @param integer $p_project_id
- *        	Project identifier.
- * @param string $p_name
- *        	Category Name.
+ *
+ * @param integer $p_project_id Project identifier.
+ * @param string $p_name Category Name.
  * @return integer Category ID
  * @access public
  */
@@ -178,8 +167,7 @@ function category_add( $p_project_id, $p_name ) {
 	
 	db_param_push();
 	$t_query = 'INSERT INTO {category} ( project_id, name )
-				  VALUES ( ' . db_param() . ', ' .
-			 db_param() . ' )';
+				  VALUES ( ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array(
 			$p_project_id,
 			$p_name
@@ -191,13 +179,10 @@ function category_add( $p_project_id, $p_name ) {
 
 /**
  * Update the name and user associated with the category
- * 
- * @param integer $p_category_id
- *        	Category identifier.
- * @param string $p_name
- *        	Category Name.
- * @param integer $p_assigned_to
- *        	User ID that category is assigned to.
+ *
+ * @param integer $p_category_id Category identifier.
+ * @param string $p_name Category Name.
+ * @param integer $p_assigned_to User ID that category is assigned to.
  * @return void
  * @access public
  */
@@ -230,10 +215,9 @@ function category_update( $p_category_id, $p_name, $p_assigned_to,
 	if( $t_old_category['name'] != $p_name ) {
 		db_param_push();
 		$t_query = 'SELECT id FROM {bug} WHERE category_id=' . db_param();
-		$t_result = db_query( $t_query,
-				array(
-						$p_category_id
-				) );
+		$t_result = db_query( $t_query, array(
+				$p_category_id
+		) );
 		
 		while ( $t_bug_row = db_fetch_array( $t_result ) ) {
 			history_log_event_direct( $t_bug_row['id'], 'category',
@@ -244,11 +228,10 @@ function category_update( $p_category_id, $p_name, $p_assigned_to,
 
 /**
  * Remove a category from the project
- * 
- * @param integer $p_category_id
- *        	Category identifier.
- * @param integer $p_new_category_id
- *        	New category id (to replace existing category).
+ *
+ * @param integer $p_category_id Category identifier.
+ * @param integer $p_new_category_id New category id (to replace existing
+ * category).
  * @return void
  * @access public
  */
@@ -300,11 +283,10 @@ function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 /**
  * Remove all categories associated with a project.
  * This will skip processing of categories that can't be deleted.
- * 
- * @param integer $p_project_id
- *        	A Project identifier.
- * @param integer $p_new_category_id
- *        	New category id (to replace existing category).
+ *
+ * @param integer $p_project_id A Project identifier.
+ * @param integer $p_new_category_id New category id (to replace existing
+ * category).
  * @return boolean
  * @access public
  */
@@ -374,11 +356,10 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 
 /**
  * Return the definition row for the category
- * 
- * @param integer $p_category_id
- *        	Category identifier.
- * @param boolean $p_error_if_not_exists
- *        	true: error if not exists, otherwise return false.
+ *
+ * @param integer $p_category_id Category identifier.
+ * @param boolean $p_error_if_not_exists true: error if not exists, otherwise
+ * return false.
  * @return array An array containing category details.
  * @access public
  */
@@ -429,11 +410,10 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 /**
  * Sort categories based on what project they're in.
  * Call beforehand with a single parameter to set a 'preferred' project.
- * 
- * @param int|array $p_category1
- *        	Id of preferred project or array containing category details.
- * @param array $p_category2
- *        	Array containing category details.
+ *
+ * @param int|array $p_category1 Id of preferred project or array containing
+ * category details.
+ * @param array $p_category2 Array containing category details.
  * @return integer|null An integer representing sort order.
  * @access public
  */
@@ -469,9 +449,8 @@ $g_cache_category_project = null;
 
 /**
  * Cache categories from multiple projects
- * 
- * @param array $p_project_id_array
- *        	Array of project identifiers.
+ *
+ * @param array $p_project_id_array Array of project identifiers.
  * @return void
  */
 function category_cache_array_rows_by_project( array $p_project_id_array ) {
@@ -503,8 +482,7 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
         ON a.id = b.id AND b.text_lang = " . db_param() . "
         LEFT JOIN {project} p
         ON a.project_id = p.id
-        WHERE a.id = ( " .
-			 implode( ', ', $c_project_id_array ) . " )
+        WHERE a.id = ( " . implode( ', ', $c_project_id_array ) . " )
         ORDER BY a.name;
     ";
 	$t_result = db_query( $t_query, array(
@@ -532,9 +510,8 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
  * projects.
  * For all cases, get global categories and subproject categories according to
  * configured inheritance settings.
- * 
- * @param integer|null $p_project_id
- *        	A specific project or null.
+ *
+ * @param integer|null $p_project_id A specific project or null.
  * @return array A unique array of category names
  */
 function category_get_filter_list( $p_project_id = null ) {
@@ -579,14 +556,12 @@ function category_get_filter_list( $p_project_id = null ) {
 /**
  * Return all categories for the specified project id.
  * Obeys project hierarchies and such.
- * 
- * @param integer $p_project_id
- *        	A Project identifier.
- * @param boolean $p_inherit
- *        	Indicates whether to inherit categories from parent projects, or
- *        	null to use configuration default.
- * @param boolean $p_sort_by_project
- *        	Whether to sort by project.
+ *
+ * @param integer $p_project_id A Project identifier.
+ * @param boolean $p_inherit Indicates whether to inherit categories from parent
+ * projects, or
+ * null to use configuration default.
+ * @param boolean $p_sort_by_project Whether to sort by project.
  * @return array array of categories
  * @access public
  */
@@ -667,9 +642,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null,
 
 /**
  * Cache an set of category ids
- * 
- * @param array $p_cat_id_array
- *        	Array of category identifiers.
+ *
+ * @param array $p_cat_id_array Array of category identifiers.
  * @return void
  * @access public
  */
@@ -700,8 +674,7 @@ function category_cache_array_rows( array $p_cat_id_array ) {
         ON a.id = b.id AND b.text_lang = " . db_param() . "
         LEFT JOIN {project} p
         ON a.project_id = p.id
-        WHERE a.id IN ( " .
-			 implode( ', ', $c_cat_id_array ) . " )
+        WHERE a.id IN ( " . implode( ', ', $c_cat_id_array ) . " )
         ORDER BY a.name
     ";
 	$t_result = db_query( $t_query, array(
@@ -717,11 +690,9 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 /**
  * Given a category id and a field name, this function returns the field value.
  * An error will be triggered for a non-existent category id or category id = 0.
- * 
- * @param integer $p_category_id
- *        	A category identifier.
- * @param string $p_field_name
- *        	Field name.
+ *
+ * @param integer $p_category_id A category identifier.
+ * @param string $p_field_name Field name.
  * @return string field value
  * @access public
  */
@@ -733,9 +704,8 @@ function category_get_field( $p_category_id, $p_field_name ) {
 /**
  * Given a category id, this function returns the category name.
  * An error will be triggered for a non-existent category id or category id = 0.
- * 
- * @param integer $p_category_id
- *        	A category identifier.
+ *
+ * @param integer $p_category_id A category identifier.
  * @return string category name
  * @access public
  */
@@ -747,13 +717,10 @@ function category_get_name( $p_category_id ) {
  * Given a category name and project, this function returns the category id.
  * An error will be triggered if the specified project does not have a
  * category with that name.
- * 
- * @param string $p_category_name
- *        	Category name to retrieve.
- * @param integer $p_project_id
- *        	A project identifier.
- * @param boolean $p_trigger_errors
- *        	Whether to trigger error on failure.
+ *
+ * @param string $p_category_name Category name to retrieve.
+ * @param integer $p_project_id A project identifier.
+ * @param boolean $p_trigger_errors Whether to trigger error on failure.
  * @return boolean
  * @access public
  */
@@ -784,13 +751,10 @@ function category_get_id_by_name( $p_category_name, $p_project_id,
 
 /**
  * Retrieves category name (including project name if required)
- * 
- * @param string $p_category_id
- *        	Category identifier.
- * @param boolean $p_show_project
- *        	Show project details.
- * @param integer $p_current_project
- *        	Current project id override.
+ *
+ * @param string $p_category_id Category identifier.
+ * @param boolean $p_show_project Show project details.
+ * @param integer $p_current_project Current project id override.
  * @return string category full name
  * @access public
  */
@@ -819,9 +783,8 @@ function category_full_name( $p_category_id, $p_show_project = true,
 
 /**
  * Check category can be deleted
- * 
- * @param string $p_category_id
- *        	Category identifier.
+ *
+ * @param string $p_category_id Category identifier.
  * @return boolean Return true if the category valid for delete, otherwise false
  * @access public
  */
@@ -837,9 +800,8 @@ function category_can_delete( $p_category_id ) {
 
 /**
  * Ensure category can be deleted, otherwise raise an error.
- * 
- * @param string $p_category_id
- *        	Category identifier.
+ *
+ * @param string $p_category_id Category identifier.
  * @return void
  * @access public
  */
