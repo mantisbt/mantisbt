@@ -70,7 +70,7 @@ function category_exists( $p_category_id ) {
  * @access public
  */
 function category_ensure_exists( $p_category_id ) {
-	if( ! category_exists( $p_category_id ) ) {
+	if( !category_exists( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 	}
 }
@@ -111,7 +111,7 @@ function category_is_unique( $p_project_id, $p_name ) {
  * @access public
  */
 function category_ensure_unique( $p_project_id, $p_name ) {
-	if( ! category_is_unique( $p_project_id, $p_name ) ) {
+	if( !category_is_unique( $p_project_id, $p_name ) ) {
 		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 	}
 }
@@ -129,7 +129,7 @@ function category_ensure_unique( $p_project_id, $p_name ) {
 function category_can_remove( $p_category_id ) {
 	$t_default_category_id = config_get( 'default_category_for_moves', null, ALL_USERS, ALL_PROJECTS );
 	
-	return $p_category_id != $t_default_category_id && ! config_is_defined( 'default_category_for_moves', $p_category_id );
+	return $p_category_id != $t_default_category_id && !config_is_defined( 'default_category_for_moves', $p_category_id );
 }
 
 /**
@@ -140,7 +140,7 @@ function category_can_remove( $p_category_id ) {
  * @access public
  */
 function category_ensure_can_remove( $p_category_id ) {
-	if( ! category_can_remove( $p_category_id ) ) {
+	if( !category_can_remove( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
 	}
 }
@@ -297,7 +297,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	$t_category_ids = array();
 	while ( $t_row = db_fetch_array( $t_result ) ) {
 		# Don't add category to the list if it can't be deleted
-		if( ! category_can_remove( $t_row['id'] ) ) {
+		if( !category_can_remove( $t_row['id'] ) ) {
 			continue;
 		}
 		$t_category_ids[] = $t_row['id'];
@@ -379,7 +379,7 @@ function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 	$t_result = db_query( $t_query, $t_params );
 	
 	$t_row = db_fetch_array( $t_result );
-	if( ! $t_row ) {
+	if( !$t_row ) {
 		if( $p_error_if_not_exists ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 		} else {
@@ -409,9 +409,9 @@ function category_sort_rows_by_project( $p_category1, array $p_category2 = null 
 		return null;
 	}
 	
-	if( ! is_null( $s_project_id ) ) {
+	if( !is_null( $s_project_id ) ) {
 		if( $p_category1['project_id'] == $s_project_id && $p_category2['project_id'] != $s_project_id ) {
-			return - 1;
+			return -1;
 		}
 		if( $p_category1['project_id'] != $s_project_id && $p_category2['project_id'] == $s_project_id ) {
 			return 1;
@@ -440,7 +440,7 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
 	$c_project_id_array = array();
 	
 	foreach ( $p_project_id_array as $t_project_id ) {
-		if( ! isset( $g_cache_category_project[(int) $t_project_id] ) ) {
+		if( !isset( $g_cache_category_project[(int) $t_project_id] ) ) {
 			$c_project_id_array[] = (int) $t_project_id;
 			$g_cache_category_project[(int) $t_project_id] = array();
 		}
@@ -524,7 +524,7 @@ function category_get_filter_list( $p_project_id = null ) {
 	
 	$t_unique = array();
 	foreach ( $t_categories as $t_category ) {
-		if( ! in_array( $t_category['name'], $t_unique ) ) {
+		if( !in_array( $t_category['name'], $t_unique ) ) {
 			$t_unique[] = $t_category['name'];
 		}
 	}
@@ -548,7 +548,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	global $g_category_cache, $g_cache_category_project;
 	
 	if( isset( $g_cache_category_project[(int) $p_project_id] ) ) {
-		if( ! empty( $g_cache_category_project[(int) $p_project_id] ) ) {
+		if( !empty( $g_cache_category_project[(int) $p_project_id] ) ) {
 			foreach ( $g_cache_category_project[(int) $p_project_id] as $t_id ) {
 				$t_categories[] = category_get_row( $t_id );
 			}
@@ -629,7 +629,7 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 	$c_cat_id_array = array();
 	
 	foreach ( $p_cat_id_array as $t_cat_id ) {
-		if( ! isset( $g_category_cache[(int) $t_cat_id] ) ) {
+		if( !isset( $g_category_cache[(int) $t_cat_id] ) ) {
 			$c_cat_id_array[] = (int) $t_cat_id;
 		}
 	}
@@ -737,7 +737,7 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
 		# No Category
 		return lang_get( 'no_category' );
 	} else 
-		if( ! category_exists( $p_category_id ) ) {
+		if( !category_exists( $p_category_id ) ) {
 			return '@' . $p_category_id . '@';
 		} else {
 			$t_row = category_get_row( $p_category_id );
@@ -777,7 +777,7 @@ function category_can_delete( $p_category_id ) {
  * @access public
  */
 function category_ensure_can_delete( $p_category_id ) {
-	if( ! category_can_delete( $p_category_id ) ) {
+	if( !category_can_delete( $p_category_id ) ) {
 		$t_category_name = category_get_name( $p_category_id );
 		error_parameters( $t_category_name );
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
