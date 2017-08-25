@@ -2177,6 +2177,12 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			# Ignore all custom filters that are not set, or that are set to '' or "any"
 			if( !filter_field_is_any( $t_field ) ) {
 				$t_def = custom_field_get_definition( $t_cfid );
+
+				# skip date custom fields with value of "any"
+				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE && $t_field[0] == CUSTOM_FIELD_DATE_ANY ) {
+					break;
+				}
+
 				$t_table_name = 'cf_alias_' . $t_cfid;
 
 				# We need to filter each joined table or the result query will explode in dimensions
