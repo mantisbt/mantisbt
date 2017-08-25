@@ -1078,6 +1078,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			$t_def = custom_field_get_definition( $t_custom_field_id );
 			$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 
+			$t_table_name = '';
 			# if the custom field was filtered, there is already a calculated join, so reuse that table alias
 			# otherwise, a new join must be calculated
 			if( isset( $p_query_clauses['metadata']['cf_alias'][$t_custom_field_id] ) ) {
@@ -1086,14 +1087,15 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				# @TODO This code for CF visibility is the same as filter_get_bug_rows_query_clauses()
 				# It should be encapsulated and reused
 
-				$t_table_name = 'cf_sort_' . $t_custom_field_id;
-				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
-
 				$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_custom_field_id ) );
 				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
 				if( empty( $t_projects_can_view_field ) ) {
 					continue;
 				}
+
+				$t_table_name = 'cf_sort_' . $t_custom_field_id;
+				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
+
 				# This diff will contain those included projects that can't view this custom field
 				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
 				# If not empty, it means there are some projects that can't view the field values,
@@ -1105,7 +1107,12 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				$p_query_clauses['join'][] = $t_cf_join_clause;
 			}
 
-			# pgsql needs the sort expression to appear as member of the "select distinct"
+			# if no join can be used (eg, no view access), skip this field from the order clause
+			if( empty( $t_table_name ) ) {
+				continue;
+			}
+
+			# Note: pgsql needs the sort expression to appear as member of the "select distinct"
 			$p_query_clauses['select'][] = $t_table_name . '.' . $t_value_field;
 			$p_query_clauses['order'][] = $t_table_name . '.' . $t_value_field . ' ' . $c_dir;
 
