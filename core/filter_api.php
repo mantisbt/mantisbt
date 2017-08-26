@@ -1112,9 +1112,47 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				continue;
 			}
 
+			$t_field_alias = 'cf_sortfield_' . $t_custom_field_id;
+			$t_sort_col = $t_table_name . '.' . $t_value_field;
+
+			# which types need special type cast
+			switch( $t_def['type'] ) {
+					case CUSTOM_FIELD_TYPE_FLOAT:
+						# mysql can't cast to float, use alternative syntax
+						$t_sort_expr = db_is_mysql() ? $t_sort_col . '+0.0' : 'CAST(' . $t_sort_col . ' AS FLOAT)';
+						break;
+					case CUSTOM_FIELD_TYPE_DATE:
+					case CUSTOM_FIELD_TYPE_NUMERIC:
+						$t_sort_expr = 'CAST(' . $t_sort_col . ' AS DECIMAL)';
+						break;
+					default: # no cast needed
+						$t_sort_expr = $t_sort_col;
+			}
+
+			# which types need special treatment for null sorting
+			switch( $t_def['type'] ) {
+				case CUSTOM_FIELD_TYPE_DATE:
+				case CUSTOM_FIELD_TYPE_NUMERIC:
+				case CUSTOM_FIELD_TYPE_FLOAT:
+					$t_null_last = true;
+					break;
+				default:
+					$t_null_last = false;
+			}
+
+			if( $t_null_last ) {
+				$t_null_expr = 'CASE WHEN NULLIF(' . $t_sort_col . ', \'\') IS NULL THEN 1 ELSE 0 END';
+				$t_clause_for_select = $t_null_expr . ' AS ' . $t_field_alias . '_null';
+				$t_clause_for_select .= ', ' . $t_sort_expr . ' AS ' . $t_field_alias;
+				$t_clause_for_order = $t_field_alias . '_null ASC, ' . $t_field_alias . ' ' . $c_dir;
+			} else {
+				$t_clause_for_select = $t_sort_expr . ' AS ' . $t_field_alias;
+				$t_clause_for_order = $t_field_alias . ' ' . $c_dir;
+			}
+
 			# Note: pgsql needs the sort expression to appear as member of the "select distinct"
-			$p_query_clauses['select'][] = $t_table_name . '.' . $t_value_field;
-			$p_query_clauses['order'][] = $t_table_name . '.' . $t_value_field . ' ' . $c_dir;
+			$p_query_clauses['select'][] = $t_clause_for_select;
+			$p_query_clauses['order'][] = $t_clause_for_order;
 
 		# if sorting by plugin columns
 		} else if( column_is_plugin_column( $c_sort ) ) {
