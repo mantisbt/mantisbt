@@ -2319,7 +2319,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			# Outer join required otherwise we don't retrieve issues without notes
 			$t_join_clauses[] = 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id';
 			$t_join_clauses[] = 'LEFT JOIN {custom_field_string} ON {custom_field_string}.bug_id = {bug}.id';
+			$t_join_clauses[] = 'LEFT JOIN {custom_field} ON {custom_field_string}.field_id = {custom_field}.id';
 			$t_where_clauses[] = $t_textsearch_where_clause;
+			$t_access_level_subquery = 'SELECT access_level FROM {user} WHERE id = ' . $t_current_user_id;
+			array_push( $t_where_clauses, '({custom_field}.access_level_r <= (' . $t_access_level_subquery . '))');
 		}
 	}
 
