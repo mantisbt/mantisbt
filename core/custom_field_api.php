@@ -1228,16 +1228,30 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
 		$t_params = $t_query_clauses['where_values'];
 
-		$t_query = 'SELECT DISTINCT cfst.value FROM {custom_field_string} cfst'
+		# which types need special type cast
+		switch( $p_field_def['type'] ) {
+				case CUSTOM_FIELD_TYPE_FLOAT:
+					# mysql can't cast to float, use alternative syntax
+					$t_select_expr = db_is_mysql() ? 'cfst.value+0.0' : 'CAST(cfst.value AS FLOAT)';
+					break;
+				case CUSTOM_FIELD_TYPE_DATE:
+				case CUSTOM_FIELD_TYPE_NUMERIC:
+					$t_select_expr = 'CAST(cfst.value AS DECIMAL)';
+					break;
+				default: # no cast needed
+					$t_select_expr = 'cfst.value';
+		}
+
+		$t_query = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value FROM {custom_field_string} cfst'
 			. ' WHERE cfst.bug_id IN ' . $t_filter_in
 			. ' AND cfst.field_id = ' . db_param()
-			. ' ORDER BY cfst.value';
+			. ' ORDER BY cast_value';
 		$t_params[] = (int)$p_field_def['id'];
 		$t_result = db_query( $t_query, $t_params );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			if( !is_blank( trim( $t_row['value'] ) ) ) {
-				array_push( $t_return_arr, $t_row['value'] );
+			if( !is_blank( trim( $t_row['cast_value'] ) ) ) {
+				array_push( $t_return_arr, $t_row['cast_value'] );
 			}
 		}
 
