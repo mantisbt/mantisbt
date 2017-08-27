@@ -1070,19 +1070,48 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  */
 function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	# Remove "AS" keyword, because not supported with table aliasing
-	$t_is_odd = true;
+	# - Do not remove text literal within "'" quotes
+	# - Will remove all "AS", except when it's part of a "CAST(x AS y)" expression
+	#   To do so, we will assume that the "AS" following a "CAST", is safe to be kept.
+	#   Using a counter for "CAST" appearances to allow nesting: CAST(CAST(x AS y) AS z)
+
+	# split the string by the relevant delimiters. The delimiters will be part of the splitted array
+	$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	$t_is_literal = false;
+	$t_cast = 0;
 	$t_query = '';
-	# Divide statement to skip processing string literals
-	$t_p_query_arr = explode( '\'', $p_query );
-	foreach( $t_p_query_arr as $t_p_query_part ) {
-		if( $t_query != '' ) {
-			$t_query .= '\'';
+	foreach( $t_parts as $t_part ) {
+		# if quotes, switch literal flag
+		if( $t_part == '\'' ) {
+			$t_is_literal = !$t_is_literal;
+			$t_query .= $t_part;
+			continue;
 		}
-		if( $t_is_odd ) {
-			$t_query .= preg_replace( '/ AS /im', ' ', $t_p_query_part );
+		# if this part is litereal, do not change
+		if( $t_is_literal ) {
+			$t_query .= $t_part;
+			continue;
 		} else {
-			$t_query .= $t_p_query_part;
-			$t_is_odd = true;
+			# if there is "CAST" delimiter, flag the counter
+			if( preg_match( '/^CAST\s*\($/i', $t_part ) ) {
+				$t_cast++;
+				$t_query .= $t_part;
+				continue;
+			}
+			# if there is "AS"
+			if( strcasecmp( $t_part, ' AS ' ) == 0 ) {
+				# if there's a previous CAST, keep the AS
+				if( $t_cast > 0 ) {
+					$t_cast--;
+					$t_query .= $t_part;
+				} else {
+					# otherwise, remove the " AS ", replace by a space
+					$t_query .= ' ';
+				}
+				continue;
+			}
+			$t_query .= $t_part;
+			continue;
 		}
 	}
 	$p_query = $t_query;
