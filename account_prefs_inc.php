@@ -391,23 +391,15 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	</div>
 	<div class="widget-toolbox padding-8 clearfix">
 		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+
+		<?php echo form_security_field( 'account_prefs_reset' ) ?>
+		<input type="submit" class="btn btn-primary btn-white btn-round"
+			   formaction="account_prefs_reset.php"
+			   value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</div>
 	</form>
 	</div>
 	</div>
-</div>
-
-<div class="space-10"></div>
-
-<div id="account-prefs-reset-div" class="form-container">
-	<form id="account-prefs-reset-form" method="post" action="account_prefs_reset.php">
-		<fieldset>
-			<?php echo form_security_field( 'account_prefs_reset' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
-			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
-		</fieldset>
-	</form>
 </div>
 </div>
 
