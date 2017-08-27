@@ -1299,7 +1299,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_date_filters" class="input-xs"
 						name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>"
 						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), true ) ?> />
-                    <span class="lbl small"> <?php echo lang_get( 'use_date_filters' )?></span>
+					<span class="lbl padding-6 small"><?php echo lang_get( 'use_date_filters' )?></span>
 				</label>
 			</td>
 		</tr>
@@ -1451,7 +1451,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_last_updated_date_filters" class="input-xs"
 						name="<?php echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"
 						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
-                    <span class="lbl small"> <?php echo lang_get( 'use_last_updated_date_filters' )?></span>
+					<span class="lbl padding-6 small"><?php echo lang_get( 'use_last_updated_date_filters' )?></span>
 				</label>
 			</td>
 		</tr>

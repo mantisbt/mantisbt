@@ -275,11 +275,11 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="filter" value="<?php echo string_attribute( $f_filter ); ?>" />
 			<label class="inline">
 			<input type="checkbox" class="ace" name="hideinactive" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_inactive, ON ); ?> />
-			<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
+			<span class="lbl padding-6"><?php echo lang_get( 'hide_inactive' ) ?></span>
 			</label>
 			<label class="inline">
 			<input type="checkbox" class="ace" name="showdisabled" value="<?php echo ON ?>" <?php check_checked( (int)$c_show_disabled, ON ); ?> />
-			<span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
+			<span class="lbl padding-6"><?php echo lang_get( 'show_disabled' ) ?></span>
 			</label>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>

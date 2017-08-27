@@ -102,7 +102,7 @@ require_api( 'lang_api.php' );
 				<td>
 				<label for="bugnote_add_view_status">
 					<input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-					<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
+					<span class="lbl padding-6"><?php echo lang_get( 'private' ) ?></span>
 				</label>
 				</td>
 			</tr>

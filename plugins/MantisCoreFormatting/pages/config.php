@@ -58,11 +58,11 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</th>
 	<td class="center" width="20%">
 		<label><input type="radio" class="ace" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
 	</td>
 	<td class="center" width="20%">
 		<label><input type="radio" class="ace" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
 	</td>
 </tr>
 
@@ -72,11 +72,11 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</th>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
 	</td>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
 	</td>
 </tr>
 
@@ -91,11 +91,11 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</th>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
 	</td>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
 	</td>
 </tr>
 
@@ -109,11 +109,11 @@ print_manage_menu( 'manage_plugin_page.php' );
 	</th>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_markdown" value="1" <?php echo( ON == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_enabled' )?></span></label>
 	</td>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_markdown" value="0" <?php echo( OFF == plugin_config_get( 'process_markdown' ) ) ? 'checked="checked" ' : ''?>/>
-			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+			<span class="lbl padding-6"><?php echo lang_get( 'plugin_format_disabled' )?></span></label>
 	</td>
 </tr>
 

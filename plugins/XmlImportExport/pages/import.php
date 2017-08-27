@@ -125,7 +125,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 	<td>
 		<label for="keepcategory">
 		<input type="checkbox" class="ace" checked="checked" id="keepcategory" name="keepcategory" />
-		<span class="lbl"> <?php echo plugin_lang_get( 'keep_same_category' );?> </span>
+		<span class="lbl padding-6"><?php echo plugin_lang_get( 'keep_same_category' );?></span>
 		</label>
 		<br><br>
 

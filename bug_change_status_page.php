@@ -345,7 +345,7 @@ layout_page_begin();
 ?>
 			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
 				<?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-			<label class="lbl" for="bugnote_add_view_status"> <?php echo lang_get( 'private' ) ?> </label>
+			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
 <?php
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );

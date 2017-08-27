@@ -654,12 +654,12 @@ if( $t_show_attachments ) {
 		<td>
 			<label>
 				<input <?php echo helper_get_tab_index() ?> type="radio" class="ace" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> />
-				<span class="lbl"> <?php echo lang_get( 'public' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'public' ) ?></span>
 			</label>
 			&#160;&#160;&#160;&#160;
 			<label>
 				<input <?php echo helper_get_tab_index() ?> type="radio" class="ace" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> />
-				<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'private' ) ?></span>
 			</label>
 		</td>
 	</tr>
@@ -686,12 +686,12 @@ if( $t_show_attachments ) {
 		<td>
 			<label>
 				<input <?php echo helper_get_tab_index() ?> type="checkbox" class="ace" id="copy_notes_from_parent" name="copy_notes_from_parent" <?php check_checked( $f_copy_notes_from_parent ) ?> />
-				<span class="lbl"> <?php echo lang_get( 'copy_notes_from_parent' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'copy_notes_from_parent' ) ?></span>
 			</label>
 			&#160;&#160;&#160;&#160;
 			<label>
 				<input <?php echo helper_get_tab_index() ?> type="checkbox" class="ace" id="copy_attachments_from_parent" name="copy_attachments_from_parent" <?php check_checked( $f_copy_attachments_from_parent ) ?> />
-				<span class="lbl"> <?php echo lang_get( 'copy_attachments_from_parent' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'copy_attachments_from_parent' ) ?></span>
 			</label>
 		</td>
 	</tr>
@@ -705,7 +705,7 @@ if( $t_show_attachments ) {
 		<td>
 			<label>
 				<input <?php echo helper_get_tab_index() ?> type="checkbox" class="ace" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> />
-				<span class="lbl"> <?php echo lang_get( 'check_report_more_bugs' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'check_report_more_bugs' ) ?></span>
 			</label>
 		</td>
 	</tr>

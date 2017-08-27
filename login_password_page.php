@@ -233,7 +233,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				<div class="clearfix">
 					<label for="remember-login" class="inline">
 						<input id="remember-login" type="checkbox" name="perm_login" class="ace" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?> />
-						<span class="lbl"> <?php echo lang_get( 'save_login' ) ?></span>
+						<span class="lbl padding-6"><?php echo lang_get( 'save_login' ) ?></span>
 					</label>
 				</div>
 			<?php } ?>
@@ -241,7 +241,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				<div class="clearfix">
 					<label for="secure-session" class="inline">
 						<input id="secure-session" type="checkbox" name="secure_session" class="ace" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?> />
-						<span class="lbl"> <?php echo lang_get( 'secure_session_long' ) ?></span>
+						<span class="lbl padding-6"><?php echo lang_get( 'secure_session_long' ) ?></span>
 					</label>
 				</div>
 			<?php } ?>

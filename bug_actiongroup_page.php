@@ -386,7 +386,7 @@ if( $t_multiple_projects ) {
 			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
 						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-						<label class="lbl"> <?php echo lang_get( 'private' ); ?> </label>
+						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
 				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );

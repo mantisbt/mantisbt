@@ -158,11 +158,11 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		<td>
 			<label for="bugnote-order-desc" class="inline padding-right-8">
 				<input type="radio" class="ace input-sm" id="bugnote-order-desc" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> />
-				<span class="lbl"> <?php echo lang_get( 'bugnote_order_desc' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'bugnote_order_desc' ) ?></span>
 			</label>
 			<label for="bugnote-order-asc" class="inline padding-right-8">
 				<input type="radio" class="ace input-sm" id="bugnote-order-asc" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> />
-				<span class="lbl"> <?php echo lang_get( 'bugnote_order_asc' ) ?> </span>
+				<span class="lbl padding-6"><?php echo lang_get( 'bugnote_order_asc' ) ?></span>
 			</label>
 		</td>
 	</tr>

@@ -96,7 +96,7 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 	<div class="checkbox">
 		<label>
 			<input type="checkbox" class="ace" name="is_public" value="on" />
-			<span class="lbl"> <?php print lang_get( 'make_public' ); ?> </span>
+			<span class="lbl padding-6"><?php print lang_get( 'make_public' ); ?></span>
 		</label>
 	</div>
 	&#160;&#160;&#160;&#160;
@@ -105,7 +105,7 @@ if( access_has_project_level( config_get( 'stored_query_create_shared_threshold'
 <div class="checkbox">
 	<label>
 		<input type="checkbox" class="ace" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> />
-		<span class="lbl"> <?php print lang_get( 'all_projects' ); ?> </span>
+		<span class="lbl padding-6"><?php print lang_get( 'all_projects' ); ?></span>
 	</label>
 </div>
 
