@@ -199,13 +199,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 							</tr>
 						</table>
 					</div>
-				</div>
-			</div>
-
 <?php
 	} # end if
 ?>
-
+				</div>
+			</div>
 		</form>
 	</div>
 </div>
