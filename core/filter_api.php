@@ -1119,11 +1119,11 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			switch( $t_def['type'] ) {
 					case CUSTOM_FIELD_TYPE_FLOAT:
 						# mysql can't cast to float, use alternative syntax
-						$t_sort_expr = db_is_mysql() ? $t_sort_col . '+0.0' : 'CAST(' . $t_sort_col . ' AS FLOAT)';
+						$t_sort_expr = db_is_mysql() ? $t_sort_col . '+0.0' : 'CAST(NULLIF(' . $t_sort_col . ',\'\') AS FLOAT)';
 						break;
 					case CUSTOM_FIELD_TYPE_DATE:
 					case CUSTOM_FIELD_TYPE_NUMERIC:
-						$t_sort_expr = 'CAST(' . $t_sort_col . ' AS DECIMAL)';
+						$t_sort_expr = 'CAST(NULLIF(' . $t_sort_col . ',\'\') AS DECIMAL)';
 						break;
 					default: # no cast needed
 						$t_sort_expr = $t_sort_col;

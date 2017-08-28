@@ -1232,11 +1232,11 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 		switch( $p_field_def['type'] ) {
 				case CUSTOM_FIELD_TYPE_FLOAT:
 					# mysql can't cast to float, use alternative syntax
-					$t_select_expr = db_is_mysql() ? 'cfst.value+0.0' : 'CAST(cfst.value AS FLOAT)';
+					$t_select_expr = db_is_mysql() ? 'cfst.value+0.0' : 'CAST(NULLIF(cfst.value,\'\') AS FLOAT)';
 					break;
 				case CUSTOM_FIELD_TYPE_DATE:
 				case CUSTOM_FIELD_TYPE_NUMERIC:
-					$t_select_expr = 'CAST(cfst.value AS DECIMAL)';
+					$t_select_expr = 'CAST(NULLIF(cfst.value,\'\') AS DECIMAL)';
 					break;
 				default: # no cast needed
 					$t_select_expr = 'cfst.value';
