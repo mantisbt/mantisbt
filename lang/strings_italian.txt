@@ -44,6 +44,7 @@
  * @author Dregad
  * @author Einreiher
  * @author Filippo
+ * @author Fitoschido
  * @author Giallu
  * @author Gianfranco
  * @author Greis
@@ -94,7 +95,7 @@ $s_login_anonymously = 'Accedi anonimamente';
 $s_anonymous = 'Anonimo';
 $s_jump_to_bugnotes = 'Vai alle note';
 $s_jump_to_history = 'Passa a Cronologia';
-$s_display_history = 'Mostra Cronologia';
+$s_display_history = 'Mostra cronologia';
 $s_public_project_msg = 'Questo progetto è PUBBLICO.  Tutti gli utenti possono accedervi.';
 $s_private_project_msg = 'Questo progetto è PRIVATO.  Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.';
 $s_access_level_project = 'Livello di accesso al progetto';
