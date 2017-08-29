@@ -748,6 +748,10 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
 	}
 
+	if( !current_user_is_anonymous() ) {
+		$t_pages['account_filters_page.php'] = array( 'url'=>'account_filters_page.php', 'label'=>'filters' );
+	}
+
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
 	$t_menu_options = array();
