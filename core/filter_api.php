@@ -2269,9 +2269,11 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 		}
 
-		# Subquery to get user access level 
-		$t_access_level_subquery = 'SELECT COALESCE((SELECT access_level FROM {project_user_list} WHERE user_id = ' . $t_user_id .
-		' AND project_id = ' . $t_project_id . '),(SELECT access_level FROM {user} WHERE id = ' . $t_user_id . '))';
+		# Subquery to get user access level to each custom field
+		$t_access_level_subquery = 'SELECT user.id AS user_id, project.id AS project_id, COALESCE(
+			(SELECT access_level FROM {project_user_list} WHERE user_id = user.id AND project_id =  project.id ),
+			(SELECT access_level FROM {user} WHERE id = user.id )) AS access_level
+			FROM {user} AS user JOIN {project} as project';
 
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
@@ -2291,7 +2293,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				' OR ' . db_helper_like( '{bug_text}.steps_to_reproduce' ) .
 				' OR ' . db_helper_like( '{bug_text}.additional_information' ) .
 				' OR ' . db_helper_like( '{bugnote_text}.note' ).
-				' OR ({custom_field_string}.value LIKE ? AND {custom_field}.access_level_r <= ('. $t_access_level_subquery .'))';
+				' OR ({custom_field_string}.value LIKE ?
+					AND {custom_field}.access_level_r <= user_permission.access_level
+					AND user_permission.user_id = '. $t_user_id .'
+					AND user_permission.project_id = '. $t_project_id .')';
 
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
@@ -2324,6 +2329,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_join_clauses[] = 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id';
 			$t_join_clauses[] = 'LEFT JOIN {custom_field_string} ON {custom_field_string}.bug_id = {bug}.id';
 			$t_join_clauses[] = 'LEFT JOIN {custom_field} ON {custom_field_string}.field_id = {custom_field}.id';
+			$t_join_clauses[] = 'JOIN ('. $t_access_level_subquery .') AS user_permission';
 			$t_where_clauses[] = $t_textsearch_where_clause;
 		}
 	}
