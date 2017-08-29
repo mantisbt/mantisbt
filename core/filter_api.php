@@ -2269,6 +2269,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 		}
 
+		# Subquery to get user access level 
+		$t_access_level_subquery = 'SELECT COALESCE((SELECT access_level FROM {project_user_list} WHERE user_id = ' . $t_user_id .
+		' AND project_id = ' . $t_project_id . '),(SELECT access_level FROM {user} WHERE id = ' . $t_user_id . '))';
+
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
 		$t_textsearch_where_clause = '( ';
@@ -2286,8 +2290,10 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 				' OR ' . db_helper_like( '{bug_text}.description' ) .
 				' OR ' . db_helper_like( '{bug_text}.steps_to_reproduce' ) .
 				' OR ' . db_helper_like( '{bug_text}.additional_information' ) .
-				' OR ' . db_helper_like( '{bugnote_text}.note' );
+				' OR ' . db_helper_like( '{bugnote_text}.note' ).
+				' OR ({custom_field_string}.value LIKE ? AND {custom_field}.access_level_r <= ('. $t_access_level_subquery .'))';
 
+			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
@@ -2310,22 +2316,15 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		}
 		$t_textsearch_where_clause .= ' )';
 
-		$t_access_level_subquery = 'SELECT access_level FROM {user} WHERE id = ' . $t_current_user_id;
-		$t_custom_field_subquery = 'SELECT {custom_field_string}.bug_id FROM {custom_field_string}
-																JOIN {custom_field} ON {custom_field_string}.field_id = {custom_field}.id
-																WHERE {custom_field}.access_level_r <= ('. $t_access_level_subquery .')
-																AND {custom_field_string}.value LIKE \'%' . $t_search_term . '%\'';
-
 		# add text query elements to arrays
 		if( !$t_first ) {
 			$t_join_clauses[] = 'JOIN {bug_text} ON {bug}.bug_text_id = {bug_text}.id';
 			$t_join_clauses[] = 'LEFT JOIN {bugnote} ON {bug}.id = {bugnote}.bug_id';
 			# Outer join required otherwise we don't retrieve issues without notes
 			$t_join_clauses[] = 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id';
-			$t_join_clauses[] = 'LEFT JOIN ('. $t_custom_field_subquery .') AS sub ON sub.bug_id = {bug}.id';
+			$t_join_clauses[] = 'LEFT JOIN {custom_field_string} ON {custom_field_string}.bug_id = {bug}.id';
+			$t_join_clauses[] = 'LEFT JOIN {custom_field} ON {custom_field_string}.field_id = {custom_field}.id';
 			$t_where_clauses[] = $t_textsearch_where_clause;
-
-			// array_push( $t_where_clauses, '({custom_field}.access_level_r <= (' . $t_access_level_subquery . '))');
 		}
 	}
 
