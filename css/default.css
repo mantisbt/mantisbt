@@ -92,3 +92,26 @@ td.print-overdue    { font-weight: bold; }
 .table-nonfluid {
    width: auto !important;
 }
+
+.navbar-header2 {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	min-height: 45px;
+	float: left;
+}
+
+.navbar-brand2 {
+	color: #FFF;
+	font-size: 18px;
+	text-shadow: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: auto;
+}
+
+.navbar-logo {
+	margin-left: 4px;
+	margin-right: 4px;
+}

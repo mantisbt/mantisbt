@@ -411,40 +411,38 @@ function layout_navbar() {
 	<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">
 		<div id="navbar-container" class="navbar-container">
 
-			<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">
+			<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-md hidden-lg" data-target="#sidebar">
 				<span class="sr-only">Toggle sidebar</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
 
-			<div class="navbar-header">
-				<?php if( !empty( $t_logo_img ) ) { ?>
-					<span class="hidden-xs pull-left" id="navbar_logo_image">
-						<a href="<?php echo $t_logo_url ?>">
-							<img src="<?php echo $t_logo_img ?>">
-						</a>
-					</span>
-					&nbsp;
-				<?php } ?>
-
-				<a href="<?php echo $t_logo_url ?>" class="navbar-brand">
-					<span class="smaller-75">
-					<?php echo string_display_line( config_get( 'window_title' ) ) ?>
+			<div class="navbar-header2">
+				<a href="<?php echo $t_logo_url ?>" class="">
+					<?php if( !empty( $t_logo_img ) ) { ?>
+						<span class="navbar-logo">
+							<img src="<?php echo $t_logo_img ?>" class="hidden-xs">
+						</span>
+					<?php } ?>
+					<span class="navbar-brand2">
+						<?php echo string_display_line( config_get( 'window_title' ) ) ?>
 					</span>
 				</a>
-
-				<button type="button" class="navbar-toggle <?php echo $t_toggle_class ?> collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
-					<span class="sr-only">Toggle user menu</span>
-					<?php
-					if ( auth_is_user_authenticated() ) {
-						layout_navbar_user_avatar();
-					}
-					?>
-				</button>
 			</div>
 
-			<div class="navbar-buttons navbar-header navbar-collapse collapse">
+			<button type="button" class="navbar-toggle <?php echo $t_toggle_class ?> collapsed pull-right hidden-sm hidden-md hidden-lg pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+				<span class="sr-only">Toggle user menu</span>
+				<?php
+				if ( auth_is_user_authenticated() ) {
+					layout_navbar_user_avatar();
+				}
+				?>
+			</button>
+
+			<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
+
+			<div class="navbar-buttons navbar-header navbar-collapse collapse pull-right">
 				<ul class="nav ace-nav">
 					<?php
 					if ( auth_is_user_authenticated() ) {
@@ -460,6 +458,7 @@ function layout_navbar() {
 			</div>
 
 			<div class="clearfix"></div>
+
 		</div>
 	</div>
 	<?php
