@@ -459,6 +459,7 @@ function layout_navbar() {
 				</ul>
 			</div>
 
+			<div class="clearfix"></div>
 		</div>
 	</div>
 	<?php
