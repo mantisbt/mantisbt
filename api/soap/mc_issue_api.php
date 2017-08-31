@@ -159,6 +159,11 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
 
+			# convert the rest api multi-dimensional array into a stdClass object
+			if( is_array($t_custom_field) ) {
+				$t_custom_field = json_decode(json_encode($t_custom_field));
+			}
+
 			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 			# Verify validity of custom field specification
 			$t_msg = 'Invalid Custom field specification';
