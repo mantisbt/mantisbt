@@ -1479,3 +1479,20 @@ function string_custom_field_value_for_email( $p_value, $p_type ) {
 	}
 	return $p_value;
 }
+
+/**
+ * Returns true if there is data stored for a custom field id.
+ * Empty values are ignored
+ * @param integer $p_field_id	Custom field id
+ * @return boolean		True, if non-empty values exist
+ */
+function custom_field_has_data( $p_field_id ) {
+	db_param_push();
+	$t_query = 'SELECT COUNT(*) FROM {custom_field_string}'
+			. ' WHERE field_id=' . db_param()
+			. ' AND value<>\'\'';
+	$t_result = db_query( $t_query, array( (int)$p_field_id ) );
+	$t_count = db_result( $t_result );
+
+	return $t_count > 0;
+}
