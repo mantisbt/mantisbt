@@ -303,7 +303,7 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 		if( $p_enum_type == 'status' ) {
 			$t_status_colors = config_get( 'status_colors' );
 
-			if (array_key_exists($t_result['name'], $t_status_colors)) {
+			if (!array_key_exists($t_result['name'], $t_status_colors)) {
 					log_event( LOG_WEBSERVICE, "The color for status ". $t_result['name']  ." does not exist"  );
 					$t_result['color'] = 'COLOR NOT FOUND!';
 					return $t_result;
