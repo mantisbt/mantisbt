@@ -404,50 +404,63 @@ function layout_login_page_end() {
  * @return void
  */
 function layout_navbar() {
-	$t_logo_url = config_get('logo_url');
+	$t_logo_url = config_get( 'logo_url' );
+	$t_toggle_class = ( OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img' );
 
-	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
-	echo '<div id="navbar-container" class="navbar-container">';
+	ob_start();
+	event_signal( 'EVENT_LAYOUT_NAVBAR' );
+	$t_event_navbar_output = ob_get_clean();
+	?>
+	<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">
+		<div id="navbar-container" class="navbar-container">
 
-	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">';
-	echo '<span class="sr-only">Toggle sidebar</span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '<span class="icon-bar"></span>';
-	echo '</button>';
+			<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">
+				<span class="sr-only">Toggle sidebar</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
 
-	echo '<div class="navbar-header">';
-	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
-	echo '<span class="smaller-75"> ';
-	echo string_display_line( config_get('window_title') );
-	echo ' </span>';
-	echo '</a>';
+			<div class="navbar-header">
+				<?php
+				# if there was no output from the event, use the default content
+				if( is_blank( $t_event_navbar_output ) ) {
+					echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
+					echo '<span class="smaller-75">' . string_display_line( config_get( 'window_title' ) ) . '</span>';
+					echo '</a>';
+				} else {
+					echo $t_event_navbar_output;
+				}
+				?>
 
-	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
-	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
-	echo '<span class="sr-only">Toggle user menu</span>';
-	if (auth_is_user_authenticated()) {
-		layout_navbar_user_avatar();
-	}
-	echo '</button>';
+				<button type="button" class="navbar-toggle <?php echo $t_toggle_class ?> collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+					<span class="sr-only">Toggle user menu</span>
+					<?php
+					if ( auth_is_user_authenticated() ) {
+						layout_navbar_user_avatar();
+					}
+					?>
+				</button>
+			</div>
 
-	echo '</div>';
+			<div class="navbar-buttons navbar-header navbar-collapse collapse">
+				<ul class="nav ace-nav">
+					<?php
+					if ( auth_is_user_authenticated() ) {
+						# shortcuts button bar
+						layout_navbar_button_bar();
+						# projects dropdown menu
+						layout_navbar_projects_menu();
+						# user buttons such as messages, notifications and user menu
+						layout_navbar_user_menu();
+					}
+					?>
+				</ul>
+			</div>
 
-	echo '<div class="navbar-buttons navbar-header navbar-collapse collapse">';
-	echo '<ul class="nav ace-nav">';
-	if (auth_is_user_authenticated()) {
-		# shortcuts button bar
-		layout_navbar_button_bar();
-		# projects dropdown menu
-		layout_navbar_projects_menu();
-		# user buttons such as messages, notifications and user menu
-		layout_navbar_user_menu();
-	}
-	echo '</ul>';
-	echo '</div>';
-
-	echo '</div>';
-	echo '</div>';
+		</div>
+	</div>
+	<?php
 }
 
 /**
