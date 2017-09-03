@@ -725,6 +725,8 @@ $s_manage_link = 'Správa';
 $s_edit_news_link = 'Upraviť novinky';
 $s_docs_link = 'Dokumenty';
 $s_logout_link = 'Odhlásiť';
+$s_invite_users = 'Pozvať používateľa';
+
 $s_my_view_link = 'Prehľad';
 $s_my_view_title_unassigned = 'Nepriradené';
 $s_my_view_title_recent_mod = 'Nedávno zmenené';
@@ -1139,6 +1141,7 @@ $s_database_information = 'Informácie o Databázi MantisBT';
 $s_path_information = 'Informácie o Ceste k MantisBT';
 $s_php_version = 'Verzia PHP';
 $s_adodb_version = 'Verzia ADOdb';
+
 $s_month_january = 'Január';
 $s_month_february = 'Február';
 $s_month_march = 'Marec';
@@ -1151,10 +1154,24 @@ $s_month_september = 'September';
 $s_month_october = 'Október';
 $s_month_november = 'November';
 $s_month_december = 'December';
-$s_timeline_issue_created = '<span class="username">%1$s</span> vytvoril záležitosť <span class="issue_id">%2$s</span>';
-$s_timeline_issue_note_created = '<span class="username">%1$s</span> komentoval záležitosť <span class="issue_id">%2$s</span>';
+
+# Timeline Feature Strings
+$s_timeline_issue_monitor = '<span class="username">%1$s</span> monitoruje úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_unmonitor = '<span class="username">%1$s</span> zastavil monitorovanie úlohy <span class="issue_id">%2$s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1$s</span> označil úlohu <span class="issue_id">%2$s</span> s <span class="tag_name">%3$s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span> odstránil označenie <span class="tag_name">%3$s</span> z úlohy <span class="issue_id">%2$s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1$s</span> vyriešil úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_closed = '<span class="username">%1$s</span> zatvoril úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1$s</span> znovuotvoril úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1$s</span> priradil úlohu <span class="issue_id">%2$s</span> na <span class="username">%3$s</span>';
+$s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> prijal úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1$s</span> zrušil priradenie úlohy <span class="issue_id">%2$s</span>';
+$s_timeline_no_activity = 'Žiadna aktivita vo zvolenom období.';
+$s_timeline_issue_created = '<span class="username">%1$s</span> vytvoril úlohu <span class="issue_id">%2$s</span>';
+$s_timeline_issue_note_created = '<span class="username">%1$s</span> komentoval úlohu <span class="issue_id">%2$s</span>';
 $s_timeline_title = 'Časová os';
 $s_timeline_more = 'Viac udalostí...';
+
 $MANTIS_ERROR[ERROR_GENERIC] = 'Počas tejto operácie sa vyskytla chyba. Môžete to oznámiť vám pridelenému správcovi.';
 $MANTIS_ERROR[ERROR_SQL] = 'Zistila sa chyba SQL.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Vo vašej správe bola chyba.';
@@ -1270,3 +1287,42 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Táto stránka nie je touto metó
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné radiace pole.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát dátumu.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Časová zóna sa nedá aktualizovať.';
+
+# Time Tracking
+$s_time_tracking_billing_link = 'Sledovanie času';
+$s_time_tracking = 'Sledovanie času';
+$s_time_tracking_time_spent = 'Strávený čas:';
+$s_time_tracking_get_info_button = 'Získať údaje sledovania času';
+$s_time_tracking_cost_per_hour = 'Náklady / hodinu';
+$s_time_tracking_cost_per_hour_label = 'Náklady / Hodinu:';
+$s_time_tracking_cost = 'Náklady';
+$s_time_tracking_cost_label = 'Náklady:';
+$s_total_time_for_issue = 'Celkový čas riešenia úlohy = %1$s';
+$s_time_tracking_stopwatch_start = 'Štart';
+$s_time_tracking_stopwatch_stop = 'Stop';
+$s_time_tracking_stopwatch_reset = 'Reset';
+
+# Changelog
+$s_changelog = 'Denník zmien';
+$s_changelog_empty = 'Denník zmien je prázdny';
+$s_changelog_empty_manager = 'Denník zmien je prázdny.  Úlohy budú zobrazené keď projekt bude mať verzie a budú ukončené so zadaným "opravené vo verzii".';
+
+# Roadmap
+$s_roadmap = 'Plán postupu';
+$s_resolved_progress = '%1$d z %2$d úloh vyriešených. Postup (%3$d%%).';
+$s_roadmap_empty = 'Žiadne informácie o Pláne postupu.';
+$s_roadmap_empty_manager = 'Žiadne informácie o Pláne postupu. Úlohy budú zobrazené keď projekt bude mať verzie a budú obsahovať nastavenie "cieľová verzia".';
+
+# dropzone.js - placeholders format is defined by the library
+$s_dropzone_default_message = 'Pre nahratie presuňte súbory do okna (alebo kliknite)';
+$s_dropzone_fallback_message = 'Váš prehliadač nepodporuje nahrávanie súborov systémom drag\'n\'drop.';
+$s_dropzone_fallback_text = '';
+$s_dropzone_file_too_big = 'Súbor je príliš veľký  ({{filesize}}MiB). Maximálna veľkosť je: {{maxFilesize}}MiB.';
+$s_dropzone_invalid_file_type = 'Nemôžete nahrávať súbory tohto typu.';
+$s_dropzone_response_error = 'Server odpovedal kódovým hlásením {{statusCode}}.';
+$s_dropzone_cancel_upload = 'Zrušiť nahrávanie';
+$s_dropzone_cancel_upload_confirmation = 'Naozaj chcete zrušiť toto nahrávanie?';
+$s_dropzone_remove_file = 'Odstrániť súbor';
+$s_dropzone_remove_file_confirmation = '';
+$s_dropzone_max_files_exceeded = 'Viac súborov už nemôžete nahrať.';
+$s_dropzone_not_supported = 'Dropzone.js nepodporuje staré prehliadače!';
