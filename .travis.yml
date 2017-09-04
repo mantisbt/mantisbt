@@ -10,7 +10,7 @@ language: php
 
 before_install:
   # If PHP >= 7.0, force use of PHPunit 5.7
-  - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '7.0', '>=' ) );"; then mkdir ~/bin && wget -O ~/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar && chmod +x ~/bin/phpunit; fi
+  - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '7.0', '>=' ) );"; then mkdir -p ~/bin && wget -O ~/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar && chmod +x ~/bin/phpunit; fi
 
 before_script:
   - ./scripts/travis_before_script.sh
