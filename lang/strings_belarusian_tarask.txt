@@ -146,6 +146,7 @@ $s_create_new_project_link = 'Стварыць новы праект';
 $s_login_link = 'Увайсьці ў сыстэму';
 $s_opensearch_id_short = '%s Id';
 $s_opensearch_id_description = '%s: пошук паводле Id праблемы';
+$s_opensearch_text_short = '%s тэкст';
 $s_select_option = '(выбраць)';
 $s_bug_actiongroup_access = 'Вы ня маеце правоў для выкананьня гэтага дзеяньня.';
 $s_bug_actiongroup_status = 'Немагчыма зьмяніць статус гэтай праблемы на пададзены';

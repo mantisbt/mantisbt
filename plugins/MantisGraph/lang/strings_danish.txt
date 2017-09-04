@@ -39,6 +39,7 @@
  * @file
  *
  * @author Christian List
+ * @author Joedalton
  * @author Tjernobyl
  */
 
@@ -47,16 +48,20 @@ $s_plugin_graph_description = 'Officiel graf plugin.';
 $s_plugin_MantisGraph_title = 'Mantis grafer';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntese';
-$s_plugin_MantisGraph_status_link = 'Pr. tilstand';
-$s_plugin_MantisGraph_priority_link = 'Pr. prioritet';
-$s_plugin_MantisGraph_severity_link = 'Pr. alvorlighedsgrad';
-$s_plugin_MantisGraph_category_link = 'Pr. kategori';
-$s_plugin_MantisGraph_resolution_link = 'Pr. løsningsstatus';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Sammenfattende grafik efter status';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Sammenfattende grafik efter prioritet';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Sammenfattende grafik efter alvorlighed';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Sammenfattende grafik efter kategori';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sammenfattende grafik efter løsning';
+$s_plugin_MantisGraph_status_link = 'Efter tilstand';
+$s_plugin_MantisGraph_priority_link = 'Efter prioritet';
+$s_plugin_MantisGraph_severity_link = 'Efter alvorlighedsgrad';
+$s_plugin_MantisGraph_category_link = 'Efter kategori';
+$s_plugin_MantisGraph_resolution_link = 'Efter løsningsstatus';
+$s_plugin_MantisGraph_issue_trends_link = 'Trend for problemstillinger';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Efter status-grafer';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Efter prioritet-grafer';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Efter alvor-grafer';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Efter kategori-grafer';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Efter løsning-grafer';
+$s_plugin_MantisGraph_graph_developer_title = 'Efter udvikler-grafer';
+$s_plugin_MantisGraph_graph_reporter_title = 'Efter rapportør-grafer';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Fejlrapporter åbnet, løst og tilbageværende';
 $s_plugin_MantisGraph_by_status_pct = 'efter status i procent';
 $s_plugin_MantisGraph_by_priority_pct = 'efter prioritet i procent';
 $s_plugin_MantisGraph_by_severity_pct = 'efter alvorlighed i procent';
@@ -80,3 +85,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'År til dato';
 $s_plugin_MantisGraph_period_select = 'Vilkårlige datoer';
 $s_plugin_MantisGraph_period_last_year = 'Sidste år';
 $s_plugin_MantisGraph_graph_page = 'Vis rapporthistorik som graf';
+$s_plugin_MantisGraph_graph_topdev = 'Topudviklere efter løste fejlrapporter';
+$s_plugin_MantisGraph_graph_opendev = 'Udviklere efter åbne fejlrapporter';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Toprapportører efter løste fejlrapporter';
