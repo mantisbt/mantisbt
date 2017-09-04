@@ -36,7 +36,7 @@ class AuthMiddleware {
 			# Since authorization header is empty, check if user is authenticated by checking the cookie
 			# This mode is used when Web UI javascript calls into the API.
 			if( auth_is_user_authenticated() ) {
-				$t_username = user_get_name( auth_get_current_user_id() );
+				$t_username = user_get_field( auth_get_current_user_id(), 'username' );
 				$t_password = auth_get_current_user_cookie( /* auto-login-anonymous */ false );
 				$t_login_method = LOGIN_METHOD_COOKIE;
 			} else {
