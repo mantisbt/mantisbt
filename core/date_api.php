@@ -231,7 +231,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @param integer $p_year_start      First year to display in drop down.
  * @param integer $p_year_end        Last year to display in drop down.
  * @param string  $p_input_css       CSS classes to use with input fields
- * @param string $p_required         The "required" attribute to add to the field
+ * @param string  $p_required        The "required" attribute to add to the field
  * @return void
  * @access public
  */
