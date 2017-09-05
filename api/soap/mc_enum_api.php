@@ -290,22 +290,14 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 		$t_result['name'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
 	} else {
 		$t_enum_array = MantisEnum::getAssocArrayIndexedByValues( $t_enum_string_value );
-
-		if (!array_key_exists($p_enum_id, $t_enum_array)) {
-				log_event( LOG_WEBSERVICE, "Id '$p_enum_id' does not exist in the '$p_enum_type' enumeration"  );
-				$t_result['name'] = $t_result['label'] = 'NOT FOUND!';
-				return $t_result;
-		}
-
-		$t_result['name'] = $t_enum_array[$p_enum_id];
+		$t_result['name'] = MantisEnum::getLabel( $t_enum_string_value, $p_enum_id );
 		$t_result['label'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
 
 		if( $p_enum_type == 'status' ) {
 			$t_status_colors = config_get( 'status_colors' );
 
-			if (!array_key_exists($t_result['name'], $t_status_colors)) {
-					log_event( LOG_WEBSERVICE, "The color for status ". $t_result['name']  ." does not exist"  );
-					$t_result['color'] = 'COLOR NOT FOUND!';
+			if( !array_key_exists( $t_result['name'], $t_status_colors ) ) {
+					$t_result['color'] = 'currentcolor';
 					return $t_result;
 			}
 
