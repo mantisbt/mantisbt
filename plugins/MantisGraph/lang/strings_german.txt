@@ -86,3 +86,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Jahr nach Datum';
 $s_plugin_MantisGraph_period_select = 'Beliebiges Datum';
 $s_plugin_MantisGraph_period_last_year = 'Letztes Jahr';
 $s_plugin_MantisGraph_graph_page = 'Grafische Eintrags-Historie';
+$s_plugin_MantisGraph_graph_topdev = 'Top-Entwickler nach erledigten Einträgen';
+$s_plugin_MantisGraph_graph_opendev = 'Entwickler nach offenen Einträgen';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Top-Reporter nach erledigten Einträgen';

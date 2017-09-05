@@ -45,9 +45,12 @@
  * @author Debeet
  * @author Expert3222
  * @author Macofe
+ * @author Mazab IZW
  * @author Py64
+ * @author Rambro
  * @author Rezonansowy
  * @author Sp5uhe
+ * @author Szmyk
  * @author Ty221
  * @author Woytecr
  */
@@ -202,6 +205,7 @@ $s_myself = 'Ja';
 $s_default_access_level = 'Domyślny poziom dostępu';
 $s_issue_status_percentage = 'Status procentowy zgłoszenia';
 $s_access_levels_enum_string = '10:obserwator,25:zgłaszający,40:aktualizujący,55:wykonawca,70:zarządca,90:administrator';
+$s_no_access = 'brak dostępu';
 $s_project_status_enum_string = '10:tworzony,30:ukończony,50:stabilny,70:zarzucony';
 $s_project_view_state_enum_string = '10:publiczny,50:prywatny';
 $s_view_state_enum_string = '10:publiczny,50:prywatny';
@@ -235,6 +239,7 @@ $s_email_notification_title_for_status_bug_resolved = 'Następujące zgłoszenie
 $s_email_notification_title_for_status_bug_closed = 'Następujące zgłoszenie zostało ZAMKNIĘTE';
 $s_email_notification_title_for_action_bug_submitted = 'Następujące zgłoszenie zostało DODANE.';
 $s_email_notification_title_for_action_bug_assigned = 'Następujące zgłoszenie zostało PRZYPISANE.';
+$s_email_notification_title_for_action_bug_unassigned = 'Następujące zgłoszenie zostało ZAMKNIĘTE.';
 $s_email_notification_title_for_action_bug_reopened = 'Następujące zgłoszenie zostało PONOWNIE OTWARTE.';
 $s_email_notification_title_for_action_bug_deleted = 'Następujące zgłoszenie zostało USUNIĘTE.';
 $s_email_notification_title_for_action_bug_updated = 'Następujące zgłoszenie zostało UAKTUALNIONE.';
@@ -303,7 +308,7 @@ $s_minutes = 'minut';
 $s_redirect_delay = 'Opóźnienie przekierowania';
 $s_seconds = 'sekund';
 $s_with_minimum_severity = 'Z minimalną ważnością';
-$s_bugnote_order = 'Kolejność sortowania komentarzy';
+$s_bugnote_order = 'Kolejność sortowania aktywności';
 $s_bugnote_order_asc = 'Rosnąco';
 $s_bugnote_order_desc = 'Malejąco';
 $s_email_on_new = 'List gdy NOWE';
@@ -484,7 +489,7 @@ $s_error_database_version_out_of_date_2 = '<strong>UWAGA!</strong> Struktura baz
 $s_error_code_version_out_of_date = '<strong>UWAGA!</strong> Struktura bazy danych jest nowsza od zainstalowanego kodu. Uaktualnij oprogramowanie.';
 $s_login_page_info = 'Witaj w programie do śledzenia i rozwiązywania zgłoszeń.';
 $s_login_title = 'Logowanie';
-$s_save_login = 'Zapamiętaj moje hasło w tej przeglądarce';
+$s_save_login = 'Nie wylogowuj mnie';
 $s_secure_session = 'Sesja bezpieczna';
 $s_secure_session_long = 'Zezwala wyłącznie na Twoją sesję z tego adresu IP.';
 $s_choose_project = 'Wybierz projekt';
@@ -731,6 +736,7 @@ $s_edit_news_link = 'Wiadomości';
 $s_docs_link = 'Dokumentacja';
 $s_logout_link = 'Wyloguj';
 $s_my_view_link = 'Mój widok';
+$s_invite_users = 'Zaproś osoby';
 $s_my_view_title_unassigned = 'Nieprzypisane';
 $s_my_view_title_recent_mod = 'Ostatnio zmodyfikowane';
 $s_my_view_title_reported = 'Zgłoszone przeze mnie';
@@ -886,10 +892,11 @@ $s_ok = 'OK';
 $s_select_all = 'Wybierz wszystkie';
 $s_use_query = 'Użyj filtru';
 $s_delete_query = 'Skasuj filtr';
-$s_query_deleted = 'Filtr skasowany';
+$s_query_deleted = 'Filtr "%s" usunięty';
 $s_save_query = 'Zachowaj aktualny filtr';
 $s_reset_query = 'Wyczyść filtr';
 $s_query_name = 'Nazwa filtru';
+$s_query_name_label = 'Nazwa filtra:';
 $s_query_exists = 'Taki szczegółowy filtr prawdopodobnie już istnieje.';
 $s_query_dupe_name = 'Inny filtr o tej nazwie już istnieje. Proszę wybrać inną nazwę dla tego filtru.';
 $s_query_blank_name = 'Nie można zapisać filtru z pustą nazwą. Prosżę podac nazwę filtru przed jego zapisaniem.';
@@ -897,6 +904,10 @@ $s_query_name_too_long = 'Nie można zapisać filtru z nazwą dłuższą niż 64
 $s_query_store_error = 'Wystąpił błąd w trakcie zapisywania filtru.';
 $s_open_queries = 'Zarządzaj filtrami';
 $s_query_delete_msg = 'Czy na pewno chcesz usunąć ten filtr?';
+$s_edit_filter = 'Edytuj Filtr';
+$s_owner = 'Właściciel';
+$s_update_filter = 'Uaktualnij filtr';
+$s_current_project = 'Bieżący projekt';
 $s_view_simple_link = 'Widok prosty';
 $s_product_build = 'Kompilacja produktu';
 $s_system_profile = 'Opis systemu';
@@ -994,7 +1005,6 @@ $s_relationship_deleted = 'Powiązanie usunięte';
 $s_no_relationship = 'brak powiązań';
 $s_relationship_replaced = 'Powiązanie zastąpione';
 $s_replace_relationship_button = 'Zastąp';
-$s_replace_relationship_sure_msg = 'Istnieje już powiązanie między tymi zgłoszeniami. Czy na pewno chcesz je wymienić?';
 $s_relationship_with_parent = 'Powiązanie ze zgłoszeniem nadrzędnym';
 $s_delete_relationship_button = 'Usuń';
 $s_delete_relationship_sure_msg = 'Czy na pewno chcesz usunąć powiązanie?';
@@ -1071,6 +1081,7 @@ $s_status_changed_to = 'Status zmieniony na';
 $s_email_on_deleted = 'Email przy usunięciu';
 $s_email_on_sponsorship_changed = 'Email przy zmianie sponsorowania';
 $s_email_on_relationship_changed = 'Email przy zmianie powiązania';
+$s_email_on_updated = 'E-mail dla aktualizacji.';
 $s_loading = 'Ładuję...';
 $s_between_date = 'Pomiędzy';
 $s_on_or_before_date = 'W lub przed';
@@ -1237,7 +1248,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zakaz dostępu
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor nie podał adresu email. Proszę zaktualizować swój profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcja konfiguracji „%1$s” ma nieprawidłową wartość „%2$s”.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Akcja nie może zostać wykonana ponieważ zgłoszenie „%1$d” jest wyłącznie do odczytu.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Istnieje już powiązanie pomiędzy tymi dwoma zgłoszeniami.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Nie znaleziono powiązania.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Zgłoszenie %1$d wymaga wyższego poziomu dostępu.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Zgłoszenie nie może być powiązane z samym sobą.';

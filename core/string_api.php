@@ -275,7 +275,9 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 
 	# Start extracting regex matches
-	$t_script = $t_matches['script'];
+	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
+	# redirection to external sites
+	$t_script = strtr( $t_matches['script'], array( '\\' => '%5C' ) );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params
@@ -324,7 +326,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
  * the URL
  *
  * The bug tag ('#' by default) must be at the beginning of the string or
- * preceeded by a character that is not a letter, a number or an underscore
+ * preceded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
  * @param string  $p_string         String to be processed.
@@ -394,7 +396,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
  * the URL
  *
  * The bugnote tag ('~' by default) must be at the beginning of the string or
- * preceeded by a character that is not a letter, a number or an underscore
+ * preceded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
  * @param string  $p_string         String to be processed.
@@ -470,7 +472,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 
 /**
  * Search email addresses and URLs for a few common protocols in the given
- * string, and replace occurences with href anchors.
+ * string, and replace occurrences with href anchors.
  * @param string $p_string String to be processed.
  * @return string
  */

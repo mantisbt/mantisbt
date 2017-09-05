@@ -44,6 +44,7 @@
  * @author Macofe
  * @author Orentet
  * @author Rotemliss
+ * @author Uziel302
  * @author YaronSh
  * @author Yona b
  */
@@ -480,7 +481,7 @@ $s_error_database_version_out_of_date_2 = '<strong>אזהרה:</strong> מבנה
 $s_error_code_version_out_of_date = 'אזהרה</strong>: מבנה מסד הנתונים יותר עדכני מהקוד המותקן. נא לעדכן את הקוד<strong>.';
 $s_login_page_info = 'ברוכים הבאים למערכת הבאגים.';
 $s_login_title = 'כניסה';
-$s_save_login = 'שמירת פרטי הכניסה שלי בדפדפן זה';
+$s_save_login = 'השאר אותי מחובר';
 $s_secure_session = 'שיח מאובטח';
 $s_secure_session_long = 'אפשר שיח רק מכתובת ה־IP הזאת';
 $s_choose_project = 'בחירת פרויקט';
@@ -980,7 +981,6 @@ $s_relationship_deleted = 'קשר נמחק';
 $s_no_relationship = 'אין קשר';
 $s_relationship_replaced = 'קשר הוחלף';
 $s_replace_relationship_button = 'החלפה...';
-$s_replace_relationship_sure_msg = 'כבר קיים קשר בין שני הבאגים - האם ברצונך להחליפו?';
 $s_relationship_with_parent = 'קשר אל באג-אב';
 $s_delete_relationship_button = 'מחיקה';
 $s_delete_relationship_sure_msg = 'נא לאשר שברצונך למחוק את הקשר';
@@ -1231,7 +1231,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'גישה חס�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'נותן החסות לא הגדיר כתובת דוא״ל. נא לעדכן את הפרופיל שלך.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'לאפשרות התצורה „%1$s” יש ערך בלתי־תקין „%2$s”.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'הפעולה אינה יכולה להתבצע משום שהבאג „%1$d” מוגדר לקריאה בלבד.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'יש כבר קשר בין שני הבאגים הללו.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'קשר לא נמצא.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'הגישה חסומה: באג %1$d דורש רמת גישה גבוהה יותר.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'באג לא יכול להיות קשור לעצמו.';

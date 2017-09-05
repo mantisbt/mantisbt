@@ -79,7 +79,7 @@ if( $f_username !== null ) {
 		access_denied();
 	}
 } else {
-	if( OFF == config_get( 'allow_anonymous_login' ) ) {
+	if( !auth_anonymous_enabled() ) {
 		access_denied();
 	}
 }
@@ -168,7 +168,7 @@ $t_project_id = $f_project_id;
 if( $f_username !== null ) {
 	$t_user_id = user_get_id_by_name( $f_username );
 } else {
-	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
+	$t_user_id = user_get_id_by_name( auth_anonymous_account() );
 }
 $t_show_sticky = null;
 

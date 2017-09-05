@@ -121,6 +121,8 @@ if( !is_blank( $t_view_all_cookie ) ) {
 			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
 			exit; # stop here
 		}
+	} else {
+		$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 	}
 } else {
 	# no cookie found, set it
@@ -161,6 +163,8 @@ switch( $f_type ) {
 			error_proceed_url( 'view_all_set.php?type=0' );
 			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
 			exit; # stop here
+		} else {
+			$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 		}
 		# Store the source query id to select the correct filter in the drop down.
 		$t_setting_arr['_source_query_id'] = $f_source_query_id;

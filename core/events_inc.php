@@ -35,6 +35,9 @@ event_declare_many( array(
 	'EVENT_CORE_READY' => EVENT_TYPE_EXECUTE,
 	'EVENT_CORE_HEADERS' => EVENT_TYPE_EXECUTE,
 
+	# REST API Events
+	'EVENT_REST_API_ROUTES' => EVENT_TYPE_EXECUTE,
+
 	# MantisBT Layout Events
 	'EVENT_LAYOUT_RESOURCES' => EVENT_TYPE_OUTPUT,
 	'EVENT_LAYOUT_BODY_BEGIN' => EVENT_TYPE_OUTPUT,
@@ -143,4 +146,7 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+	# Authentication Events
+	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
 ) );

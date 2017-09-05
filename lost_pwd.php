@@ -102,13 +102,13 @@ user_increment_lost_password_in_progress_count( $t_user_id );
 
 form_security_purge( 'lost_pwd' );
 
-$t_redirect_url = 'login_page.php';
-
 layout_page_header();
 layout_page_begin();
+
 html_operation_successful(
-	'login_page.php',
+	auth_login_page(),
 	'<p class="bold bigger-110">' . lang_get( 'lost_password_done_title' ) . '</p>'
 	. lang_get( 'reset_request_in_progress_msg' )
 );
+
 layout_page_end();

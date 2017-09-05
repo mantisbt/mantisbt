@@ -457,7 +457,7 @@
                 unless these values are 0. If the values are 0, the check is
                 skipped. All fields are also compared against the regular
                 expression. If the value matches the expression, then the value is
-                stored. For example, the expression "/^-?([0-9])*$/" can be used to
+                stored. For example, the expression "^-?([0-9])*$" can be used to
                 constrain an integer.The table below describes the field types and
                 the value constraints.
             </para>

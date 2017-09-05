@@ -75,6 +75,208 @@ $g_cache_cookie_valid = null;
 $g_cache_current_user_id = null;
 
 /**
+ * Gets set of flags for authentication for the specified user.
+ * @param int|null|bool $p_user_id The user id or null for logged in user or NO_USER/false for user that doesn't exist
+ *                 in the system, that may be auto-provisioned.
+ * @param string $p_username The username or email
+ * @return AuthFlags The auth flags object to use.
+ */
+function auth_flags( $p_user_id = null, $p_username = '' ) {
+	if( is_null( $p_user_id ) ) {
+		# If user id is not provided and user is not authenticated return default flags.
+		# Otherwise, we can get into a loop as in #22740
+		if( !auth_is_user_authenticated() ) {
+			return new AuthFlags();
+		}
+
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = (int)$p_user_id;
+	}
+
+	if( !$t_user_id && is_blank( $p_username ) ) {
+		# If user is not in db, must supply the name.
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
+
+	if( $t_user_id ) {
+		$t_username = user_get_name( $t_user_id );
+		$t_email = user_get_email( $t_user_id );
+	} else {
+		$t_username = $p_username;
+
+		# If the plugin cares about email, then it can check if user typed the email address
+		# as the username.
+		$t_email = '';
+	}
+
+	$t_event_arguments = array(
+		'user_id' => $t_user_id,
+		'username' => $t_username,
+		'email' => $t_email,
+	);
+
+	static $s_flags_cache = array();
+	if( !isset( $s_flags_cache[$t_user_id] ) ) {
+		$t_flags = event_signal( 'EVENT_AUTH_USER_FLAGS', array( $t_event_arguments ) );
+
+		# Don't cache in case of user not in db.
+		if( $t_user_id ) {
+			$s_flags_cache[$t_user_id] = $t_flags;
+		}
+	} else {
+		$t_flags = $s_flags_cache[$t_user_id];
+	}
+
+	if( is_null( $t_flags ) ) {
+		$t_flags = new AuthFlags();
+	}
+
+	return $t_flags;
+}
+
+/**
+ * The message to show to indicate to user that password is managed elsewhere.
+ * @return string The message.
+ */
+function auth_password_managed_elsewhere_message() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getPasswordManagedExternallyMessage();
+}
+
+/**
+ * Check if permanent login is enabled.
+ * @param int|bool $p_user_id The user id, or NO_USER/false for unknown user.
+ * @param string $p_username The username user typed in sign-in form.
+ * @return boolean true: yes, false: otherwise.
+ */
+function auth_allow_perm_login( $p_user_id, $p_username ) {
+	$t_auth_flags = auth_flags( $p_user_id, $p_username );
+	return $t_auth_flags->getPermSessionEnabled();
+}
+
+/**
+ * Check if signup is enabled.
+ * @return bool true: enabled, false otherwise.
+ */
+function auth_signup_enabled() {
+	return config_get_global( 'allow_signup' );
+}
+
+/**
+ * Get the access level for users that signup.
+ * @return integer The access level to use.
+ */
+function auth_signup_access_level() {
+	return config_get( 'default_new_account_access_level' );
+}
+
+/**
+ * Anonymous login enabled.
+ * @return bool true: enabled; false: otherwise.
+ */
+function auth_anonymous_enabled() {
+	return config_get_global( 'allow_anonymous_login' );
+}
+
+/**
+ * Get the anonymous account username.
+ * @return string Anonymous account username.
+ */
+function auth_anonymous_account() {
+	return config_get_global( 'anonymous_account' );
+}
+
+/**
+ * Get the auth cookie expiry time.
+ * @param boolean $p_perm_login Use permanent login.
+ * @return integer cookie lifetime or 0 for browser session.
+ */
+function auth_session_expiry( $p_perm_login ) {
+	$t_auth_flags = auth_flags();
+	$t_perm_login = $p_perm_login;
+	if( !$t_auth_flags->getPermSessionEnabled() ) {
+		$t_perm_login = false;
+	}
+
+	if( $t_perm_login ) {
+		$t_lifetime = $t_auth_flags->getPermSessionLifetime();
+	} else {
+		$t_lifetime = $t_auth_flags->getSessionLifetime();
+	}
+
+	return $t_lifetime == 0 ? 0 : time() + $t_lifetime;
+}
+
+/**
+ * Gets the login page to redirect to when login is needed, it will return a relative url.
+ * @param string $p_query_string query string parameters.
+ * @return string login page (e.g. 'login_page.php' )
+ */
+function auth_login_page( $p_query_string = '' ) {
+	$t_auth_flags = auth_flags();
+	$t_login_page = $t_auth_flags->getLoginPage();
+
+	return helper_url_combine( $t_login_page, $p_query_string );
+}
+
+/**
+ * Gets the page that asks the user for credentials based on the user's authentication model.
+ *
+ * @param string $p_query_string The query string, can be empty.
+ * @param int|null $p_user_id The user id or null for current logged in user.
+ * @param string $p_username The username
+ * @return string The credentials page with query string.
+ */
+function auth_credential_page( $p_query_string, $p_user_id = null, $p_username = '' ) {
+	$t_auth_flags = auth_flags( $p_user_id, $p_username );
+	return $t_auth_flags->getCredentialsPage( $p_query_string );
+}
+
+/**
+ * Gets the logout page to redirect to for logging out the user, it will return a relative url
+ * @return string logout page (e.g. 'logout_page.php' )
+ */
+function auth_logout_page() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getLogoutPage();
+}
+
+/**
+ * Gets the page to redirect to after logout.
+ * @return string the logout redirect page.
+ */
+function auth_logout_redirect_page() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getLogoutRedirectPage();
+}
+
+/**
+ * Checks if specified user can set their own password.
+ * @param integer|null $p_user_id The user id or null for logged in user or 0 for signup scenarios.
+ * @return bool true: can set password, false: otherwise.
+ */
+function auth_can_set_password( $p_user_id = null ) {
+	$t_auth_flags = auth_flags( $p_user_id );
+
+	if( !$t_auth_flags->getCanUseStandardLogin() ) {
+		return false;
+	}
+
+	return helper_call_custom_function( 'auth_can_change_password', array() );
+}
+
+/**
+ * Checks if specified user can use standard login (e.g. username and password).
+ * @param integer|null $p_user_id The user id or null for logged in user.
+ * @return bool true: can login using username and passord, false otherwise.
+ */
+function auth_can_use_standard_login( $p_user_id = null ) {
+	$t_auth_flags = auth_flags( $p_user_id );
+	return $t_auth_flags->getCanUseStandardLogin();
+}
+
+/**
  * Check that there is a user logged-in and authenticated
  * If the user's account is disabled they will be logged out
  * If there is no user logged in, redirect to the login page
@@ -90,7 +292,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 		# check for access enabled
 		#  This also makes sure the cookie is valid
 		if( OFF == current_user_get_field( 'enabled' ) ) {
-			print_header_redirect( 'logout_page.php' );
+			print_header_redirect( auth_logout_page() );
 		}
 	} else {
 		# not logged in
@@ -101,7 +303,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 			$p_return_page = $_SERVER['REQUEST_URI'];
 		}
 		$p_return_page = string_url( $p_return_page );
-		print_header_redirect( 'login_page.php?return=' . $p_return_page );
+		print_header_redirect( auth_login_page( 'return=' . $p_return_page ) );
 	}
 }
 
@@ -128,28 +330,34 @@ function auth_is_user_authenticated() {
  * @access public
  */
 function auth_prepare_username( $p_username ) {
+	$t_username = null;
+
 	switch( config_get( 'login_method' ) ) {
 		case BASIC_AUTH:
-			$f_username = $_SERVER['REMOTE_USER'];
+			if( isset( $_SERVER['REMOTE_USER'] ) ) {
+				$t_username = $_SERVER['REMOTE_USER'];
+			}
 			break;
 		case HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
-					$f_username = $_SERVER['PHP_AUTH_USER'];
+					$t_username = $_SERVER['PHP_AUTH_USER'];
 				}
 			} else {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
-
-				# calls exit
-				return null;
 			}
 			break;
 		default:
-			$f_username = $p_username;
+			$t_username = $p_username;
 			break;
 	}
-	return $f_username;
+
+	if( !is_null( $t_username ) ) {
+		$t_username = user_is_name_valid( $t_username ) ? $t_username : null;
+	}
+
+	return $t_username;
 }
 
 /**
@@ -271,11 +479,6 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 		}
 	}
 
-	# check for disabled account
-	if( !user_is_enabled( $t_user_id ) ) {
-		return false;
-	}
-
 	# max. failed login attempts achieved...
 	if( !user_is_login_request_allowed( $t_user_id ) ) {
 		return false;
@@ -284,23 +487,37 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	# check for anonymous login
 	if( !user_is_anonymous( $t_user_id ) ) {
 		# anonymous login didn't work, so check the password
-
 		if( !auth_does_password_match( $t_user_id, $p_password ) ) {
 			user_increment_failed_login_count( $t_user_id );
 			return false;
 		}
 	}
 
+	return auth_login_user( $t_user_id, $p_perm_login );
+}
+
+/**
+ * Login the user with the specified id, if enabled.  This is typically used by auth plugins.
+ * @param integer $p_user_id The user id.
+ * @param boolean $p_perm_login Whether to create a long-term cookie.
+ * @return bool true: success; false; otherwise.
+ */
+function auth_login_user( $p_user_id, $p_perm_login = false ) {
+	# check for disabled account
+	if( !user_is_enabled( $p_user_id ) ) {
+		return false;
+	}
+
 	# ok, we're good to login now
 	# increment login count
-	user_increment_login_count( $t_user_id );
+	user_increment_login_count( $p_user_id );
 
-	user_reset_failed_login_count_to_zero( $t_user_id );
-	user_reset_lost_password_in_progress_count_to_zero( $t_user_id );
+	user_reset_failed_login_count_to_zero( $p_user_id );
+	user_reset_lost_password_in_progress_count_to_zero( $p_user_id );
 
 	# set the cookies
-	auth_set_cookies( $t_user_id, $p_perm_login );
-	auth_set_tokens( $t_user_id );
+	auth_set_cookies( $p_user_id, $p_perm_login );
+	auth_set_tokens( $p_user_id );
 
 	return true;
 }
@@ -372,9 +589,9 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	$t_username = $p_username;
 	$t_password = $p_password;
 
-	$t_anon_allowed = config_get( 'allow_anonymous_login' );
+	$t_anon_allowed = auth_anonymous_enabled();
 	if( $t_anon_allowed == ON ) {
-		$t_anonymous_account = config_get( 'anonymous_account' );
+		$t_anonymous_account = auth_anonymous_account();
 	} else {
 		$t_anonymous_account = '';
 	}
@@ -455,15 +672,11 @@ function auth_logout() {
 
 /**
  * Identicates whether to bypass logon form e.g. when using http authentication
- * @return boolean
+ * @return boolean true: by pass, false: show form.
  * @access public
  */
 function auth_automatic_logon_bypass_form() {
-	switch( config_get( 'login_method' ) ) {
-		case HTTP_AUTH:
-			return true;
-	}
-	return false;
+	return config_get( 'login_method' ) == HTTP_AUTH;
 }
 
 /**
@@ -499,6 +712,10 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	if( LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
+	}
+
+	if( !auth_can_use_standard_login( $p_user_id ) ) {
+		return false;
 	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
@@ -614,16 +831,8 @@ function auth_generate_confirm_hash( $p_user_id ) {
  */
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
-
 	$t_cookie_name = config_get( 'string_cookie' );
-
-	if( $p_perm_login ) {
-		# set permanent cookie (1 year)
-		gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
-	} else {
-		# set temp cookie, cookie dies after browser closes
-		gpc_set_cookie( $t_cookie_name, $t_cookie_string, false );
-	}
+	gpc_set_cookie( $t_cookie_name, $t_cookie_string, auth_session_expiry( $p_perm_login ) );
 }
 
 /**
@@ -712,14 +921,13 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 
 	# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
 	if( is_blank( $t_cookie ) ) {
-		if( $p_login_anonymous && ON == config_get( 'allow_anonymous_login' ) ) {
+		if( $p_login_anonymous && auth_anonymous_enabled() ) {
 			if( $g_cache_anonymous_user_cookie_string === null ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
-
 					# get anonymous information if database is available
 					db_param_push();
 					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
-					$t_result = db_query( $t_query, array( config_get( 'anonymous_account' ) ) );
+					$t_result = db_query( $t_query, array( auth_anonymous_account() ) );
 
 					if( $t_row = db_fetch_array( $t_result ) ) {
 						$t_cookie = $t_row['cookie_string'];
@@ -746,10 +954,28 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 function auth_set_tokens( $p_user_id ) {
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED, $p_user_id );
 	if( null == $t_auth_token ) {
-		token_set( TOKEN_AUTHENTICATED, true, config_get_global( 'reauthentication_expiry' ), $p_user_id );
+		token_set( TOKEN_AUTHENTICATED, true, auth_reauthentication_expiry(), $p_user_id );
 	} else {
-		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
+		token_touch( $t_auth_token['id'], auth_reauthentication_expiry() );
 	}
+}
+
+/**
+ * Checks if reauthentication is enabled.
+ * @return bool true: enabled; false: otherwise.
+ */
+function auth_reauthentication_enabled() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getReauthenticationEnabled();
+}
+
+/**
+ * Gets the reauthentication timeout/expiry.
+ * @return integer The re-authentication expiry in seconds.
+ */
+function auth_reauthentication_expiry() {
+	$t_auth_flags = auth_flags();
+	return $t_auth_flags->getReauthenticationLifetime();
 }
 
 /**
@@ -761,17 +987,17 @@ function auth_set_tokens( $p_user_id ) {
  * @access public
  */
 function auth_reauthenticate() {
-	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( !auth_reauthentication_enabled() || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
 		return true;
 	}
 
 	$t_auth_token = token_get( TOKEN_AUTHENTICATED );
 	if( null != $t_auth_token ) {
-		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
+		token_touch( $t_auth_token['id'], auth_reauthentication_expiry() );
 		return true;
 	} else {
-		$t_anon_account = config_get( 'anonymous_account' );
-		$t_anon_allowed = config_get( 'allow_anonymous_login' );
+		$t_anon_account = auth_anonymous_account();
+		$t_anon_allowed = auth_anonymous_enabled();
 
 		$t_user_id = auth_get_current_user_id();
 		$t_username = user_get_field( $t_user_id, 'username' );
@@ -793,7 +1019,7 @@ function auth_reauthenticate() {
 		);
 
 		# redirect to login page
-		print_header_redirect( 'login_page.php?' . $t_query_params );
+		print_header_redirect( auth_credential_page( $t_query_params ) );
 	}
 }
 
@@ -879,6 +1105,32 @@ function auth_get_current_user_id() {
 	return $t_user_id;
 }
 
+/**
+ * A method that looks up a user id given their cookie.
+ *
+ * @param string $p_cookie_string The cookie string to lookup
+ * @return bool|int The user id or false if not user match found.
+ * @access public
+ */
+function auth_user_id_from_cookie( $p_cookie_string ) {
+	# Save a db query if value provided doesn't look like a cookie
+	if( strlen( $p_cookie_string ) != AUTH_COOKIE_LENGTH ) {
+		return false;
+	}
+
+	if( $t_result = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
+		$t_user_id = (int)$t_result['id'];
+		return $t_user_id;
+	}
+
+	db_param_push();
+	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
+
+	$t_user_id = (int)db_result( $t_result );
+
+	return $t_user_id ? $t_user_id : false;
+}
 
 /**
  * Generate HTTP 401 Access Denied header and page for user, prompting for BASIC authentication

@@ -188,7 +188,7 @@ function print_filter_reporter_id( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?>
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
 		<?php
 	# if current user is a reporter, and limited reports set to ON, only display that name
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
@@ -273,7 +273,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
 	}
 	?>
 	<!-- Monitored by -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -282,10 +282,9 @@ function print_filter_user_monitor( array $p_filter = null ) {
 		echo '>[' . lang_get( 'myself' ) . ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
-	$t_has_project_level = access_has_project_level( $t_threshold );
 
-	if( $t_has_project_level ) {
-		print_reporter_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+	if( access_has_project_level( $t_threshold ) ) {
+		print_user_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], null, config_get( 'monitor_bug_threshold' ) );
 	}
 	?>
 		</select>
@@ -349,7 +348,7 @@ function print_filter_handler_id( array $p_filter = null ) {
 	}
 	?>
 		<!-- Handler -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
@@ -415,7 +414,7 @@ function print_filter_show_category( array $p_filter = null ) {
 	}
 	?>
 		<!-- Category -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_category_filter_option_list( $p_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
@@ -444,7 +443,7 @@ function print_filter_platform( array $p_filter = null ) {
 	}
 	?>
 		<!-- Platform -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PLATFORM;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PLATFORM;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_PLATFORM], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				log_event( LOG_FILTERING, 'Platform = ' . var_export( $p_filter[FILTER_PROPERTY_PLATFORM], true ) );
@@ -476,7 +475,7 @@ function print_filter_os( array $p_filter = null ) {
 	}
 	?>
 		<!-- OS -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_OS;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_OS;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_OS], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_os_option_list( $p_filter[FILTER_PROPERTY_OS] )?>
 		</select>
@@ -505,7 +504,7 @@ function print_filter_os_build( array $p_filter = null ) {
 	}
 	?>
 		<!-- OS Build -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_OS_BUILD;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_OS_BUILD;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_OS_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_os_build_option_list( $p_filter[FILTER_PROPERTY_OS_BUILD] )?>
 		</select>
@@ -560,7 +559,7 @@ function print_filter_show_severity( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Severity -->
-			<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
+			<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
 				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 				<?php print_enum_string_option_list( 'severity', $p_filter[FILTER_PROPERTY_SEVERITY] )?>
 			</select>
@@ -615,7 +614,7 @@ function print_filter_show_resolution( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Resolution -->
-			<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
+			<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
 				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 				<?php print_enum_string_option_list( 'resolution', $p_filter[FILTER_PROPERTY_RESOLUTION] )?>
 			</select>
@@ -670,7 +669,7 @@ function print_filter_show_status( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?>	<!-- Status -->
-			<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_STATUS;?>[]">
+			<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_STATUS;?>[]">
 				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_STATUS], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 				<?php print_enum_string_option_list( 'status', $p_filter[FILTER_PROPERTY_STATUS] )?>
 			</select>
@@ -729,7 +728,7 @@ function print_filter_hide_status( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Hide Status -->
-			<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS;?>[]">
+			<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS;?>[]">
 				<option value="<?php echo META_FILTER_NONE?>">[<?php echo lang_get( 'none' )?>]</option>
 				<?php print_enum_string_option_list( 'status', $p_filter[FILTER_PROPERTY_HIDE_STATUS] )?>
 			</select>
@@ -786,7 +785,7 @@ function print_filter_show_build( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Build -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_BUILD;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_BUILD;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_build_option_list( $p_filter[FILTER_PROPERTY_BUILD] )?>
@@ -845,7 +844,7 @@ function print_filter_show_version( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Version -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_VERSION], null, VERSION_ALL, false, true )?>
@@ -903,7 +902,7 @@ function print_filter_show_fixed_in_version( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Fixed in Version -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
@@ -962,7 +961,7 @@ function print_filter_show_target_version( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Fixed in Version -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
@@ -1018,7 +1017,7 @@ function print_filter_show_priority( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Priority -->
-	<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PRIORITY;?>[]">
+	<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PRIORITY;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_PRIORITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_enum_string_option_list( 'priority', $p_filter[FILTER_PROPERTY_PRIORITY] )?>
 	</select>
@@ -1073,7 +1072,7 @@ function print_filter_show_profile( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Profile -->
-		<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_profile_option_list_for_project( helper_get_current_project(), $p_filter[FILTER_PROPERTY_PROFILE_ID] );?>
 		</select>
@@ -1103,7 +1102,7 @@ function print_filter_per_page( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Number of bugs per page -->
-		<input type="text" name="<?php echo FILTER_PROPERTY_ISSUES_PER_PAGE;?>" size="3" maxlength="7" value="<?php echo $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]?>" />
+		<input class="input-xs" type="text" name="<?php echo FILTER_PROPERTY_ISSUES_PER_PAGE;?>" size="3" maxlength="7" value="<?php echo $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]?>" />
 		<?php
 }
 
@@ -1137,7 +1136,7 @@ function print_filter_view_state( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- View Status -->
-		<select name="<?php echo FILTER_PROPERTY_VIEW_STATE;?>">
+		<select class="input-xs" name="<?php echo FILTER_PROPERTY_VIEW_STATE;?>">
 			<?php
 			echo '<option value="' . META_FILTER_ANY . '"';
 	check_selected( $p_filter[FILTER_PROPERTY_VIEW_STATE], META_FILTER_ANY );
@@ -1182,7 +1181,10 @@ function print_filter_sticky_issues( array $p_filter = null ) {
 	}
 	?><!-- Show or hide sticky bugs -->
 			<input type="hidden" name="<?php echo FILTER_PROPERTY_STICKY ?>" value="<?php echo OFF ?>">
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ), true );?> />
+            <label>
+			    <input class="input-xs ace" type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ), true );?> />
+			    <span class="lbl"></span>
+            </label>
 		<?php
 }
 
@@ -1213,7 +1215,7 @@ function print_filter_highlight_changed( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	?><!-- Highlight changed bugs -->
-			<input type="text" name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" size="3" maxlength="7" value="<?php echo $p_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]?>" />
+			<input class="input-xs" type="text" name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" size="3" maxlength="7" value="<?php echo $p_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]?>" />
 		<?php
 }
 
@@ -1285,7 +1287,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 		$p_filter = $g_filter;
 	}
 ?>
-		<table cellspacing="0" cellpadding="0" class="js_switch_date_inputs_container">
+		<table cellspacing="0" cellpadding="0">
 <?php
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
@@ -1294,10 +1296,10 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			<td colspan="2">
 				<input type="hidden" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>" value="<?php echo OFF ?>" />
 				<label>
-					<input type="checkbox" id="use_date_filters" class="js_switch_date_inputs_trigger"
+					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_date_filters" class="input-xs"
 						name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>"
 						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), true ) ?> />
-					<?php echo lang_get( 'use_date_filters' )?>
+                    <span class="lbl small"> <?php echo lang_get( 'use_date_filters' )?></span>
 				</label>
 			</td>
 		</tr>
@@ -1319,17 +1321,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
 			print "</select>\n";
 		}
@@ -1347,17 +1349,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, array $p_filt
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
 			print "</select>\n";
 		}
@@ -1437,7 +1439,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 		$p_filter = $g_filter;
 	}
 ?>
-		<table cellspacing="0" cellpadding="0" class="js_switch_date_inputs_container">
+		<table cellspacing="0" cellpadding="0">
 <?php
 	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
@@ -1446,10 +1448,10 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			<td colspan="2">
 				<input type="hidden" name="<?php echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>" value="<?php echo OFF ?>" />
 				<label>
-					<input type="checkbox" id="use_last_updated_date_filters" class="js_switch_date_inputs_trigger"
+					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_last_updated_date_filters" class="input-xs"
 						name="<?php echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"
 						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
-					<?php echo lang_get( 'use_last_updated_date_filters' )?>
+                    <span class="lbl small"> <?php echo lang_get( 'use_last_updated_date_filters' )?></span>
 				</label>
 			</td>
 		</tr>
@@ -1471,17 +1473,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 			print "</select>\n";
 		}
@@ -1499,17 +1501,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 			print "</select>\n";
 		}
@@ -1554,8 +1556,8 @@ function print_filter_relationship_type( array $p_filter = null ) {
 	if( !$c_reltype_value ) {
 		$c_reltype_value = -1;
 	}
-	relationship_list_box( $c_reltype_value, 'relationship_type', true );
-	echo '<input type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
+	relationship_list_box( $c_reltype_value, 'relationship_type', true, false, "input-xs" );
+	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
 /**
@@ -1595,8 +1597,8 @@ function print_filter_tag_string( array $p_filter = null ) {
 	}
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-		<input type="text" name="<?php echo FILTER_PROPERTY_TAG_STRING;?>" id="<?php echo FILTER_PROPERTY_TAG_STRING;?>" size="40" value="<?php echo string_attribute( $t_tag_string )?>" />
-		<select <?php echo helper_get_tab_index()?> name="<?php echo FILTER_PROPERTY_TAG_SELECT;?>" id="<?php echo FILTER_PROPERTY_TAG_SELECT;?>">
+		<input class="input-xs" type="text" name="<?php echo FILTER_PROPERTY_TAG_STRING;?>" id="<?php echo FILTER_PROPERTY_TAG_STRING;?>" size="25" value="<?php echo string_attribute( $t_tag_string )?>" />
+		<select class="input-xs" <?php echo helper_get_tab_index()?> name="<?php echo FILTER_PROPERTY_TAG_SELECT;?>" id="<?php echo FILTER_PROPERTY_TAG_SELECT;?>">
 			<?php print_tag_option_list();?>
 		</select>
 		<?php
@@ -1658,7 +1660,7 @@ function print_filter_note_user_id( array $p_filter = null ) {
 	}
 	?>
 	<!-- BUGNOTE REPORTER -->
-	<select<?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_NOTE_USER_ID;?>[]">
+	<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_NOTE_USER_ID;?>[]">
 		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 		<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
 		<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
@@ -1742,25 +1744,28 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, array $p_fi
 
 	switch( $p_filter_object->type ) {
 		case FILTER_TYPE_STRING:
-			echo '<input name="', string_attribute( $p_field_name ), '"',
+			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
 				string_attribute( $p_filter[$p_field_name] ), '"/>';
 			break;
 
 		case FILTER_TYPE_INT:
-			echo '<input name="', string_attribute( $p_field_name ), '"',
+			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
 				(int)$p_filter[$p_field_name], '"/>';
 			break;
 
 		case FILTER_TYPE_BOOLEAN:
 			echo '<input name="', string_attribute( $p_field_name ), '" type="hidden" value="', OFF ,'"/>';
-			echo '<input name="', string_attribute( $p_field_name ), '" type="checkbox"',
+			echo '<label>';
+			echo '<input class="input-xs" name="', string_attribute( $p_field_name ), '" type="checkbox"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), check_checked( (bool)$p_filter[$p_field_name] ) , '"/>';
+			echo '<span class="lbl"></span>';
+			echo '</label>';
 			break;
 
 		case FILTER_TYPE_MULTI_STRING:
-			echo '<select' . filter_select_modifier( $p_filter ) . ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
+			echo '<select class="input-xs" ' . filter_select_modifier( $p_filter ) . ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
 				check_selected( $p_filter[$p_field_name], (string)META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
@@ -1774,7 +1779,7 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, array $p_fi
 			break;
 
 		case FILTER_TYPE_MULTI_INT:
-			echo '<select' . filter_select_modifier( $p_filter ) . ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
+			echo '<select class="input-xs"' . filter_select_modifier( $p_filter ) . ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
 				check_selected( $p_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
@@ -1907,11 +1912,11 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			break;
 
 		case CUSTOM_FIELD_TYPE_TEXTAREA:
-			echo '<input type="text" name="custom_field_', $p_field_id, '" size="10" value="" >';
+			echo '<input class="input-xs" type="text" name="custom_field_', $p_field_id, '" size="10" value="" >';
 			break;
 
 		default:
-			echo '<select' . filter_select_modifier( $p_filter ) . ' name="custom_field_' . $p_field_id . '[]">';
+			echo '<select class="input-xs" ' . filter_select_modifier( $p_filter ) . ' name="custom_field_' . $p_field_id . '[]">';
 			# Option META_FILTER_ANY
 			echo '<option value="' . META_FILTER_ANY . '"';
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
@@ -1923,7 +1928,8 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			# Print possible values
-			$t_values = custom_field_distinct_values( $t_cfdef );
+			$t_current_project = helper_get_current_project();
+			$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
 			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
@@ -2016,14 +2022,14 @@ function print_filter_show_sort( array $p_filter = null ) {
 
 	$t_print_select_inputs =
 		function( $p_sort_val ='', $p_dir_val ='' ) use ( $t_shown_fields, $t_shown_dirs ) {
-			echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '[]">';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '[]">';
 			foreach( $t_shown_fields as $t_key => $t_val ) {
 				echo '<option value="' . $t_key . '"';
 				check_selected( $t_key, $p_sort_val );
 				echo '>' . $t_val . '</option>';
 			}
 			echo '</select>';
-			echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '[]">';
+			echo '<select class="input-xs" name="', FILTER_PROPERTY_SORT_DIRECTION, '[]">';
 			foreach( $t_shown_dirs as $t_key => $t_val ) {
 				echo '<option value="' . $t_key . '"';
 				check_selected( $t_key, $p_dir_val );
@@ -2067,7 +2073,8 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$t_cfdef = custom_field_get_definition( $p_field_id );
-	$t_values = custom_field_distinct_values( $t_cfdef );
+	$t_current_project = helper_get_current_project();
+	$t_values = custom_field_distinct_values( $t_cfdef, $t_current_project );
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.
@@ -2132,7 +2139,7 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 	}
 
 	echo '<table cellspacing="0" cellpadding="0"><tr><td>' . "\n";
-	echo '<select size="1" name="custom_field_' . $p_field_id . '_control">' . "\n";
+	echo '<select class="input-xs" size="1" name="custom_field_' . $p_field_id . '_control">' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
 	check_selected( (int)$p_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
 	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
@@ -2161,9 +2168,9 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 
 	echo "</td></tr>\n<tr><td>";
 
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
 	print "</td></tr>\n<tr><td>";
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year );
+	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
 	print "</td></tr>\n</table>";
 }
 
@@ -2216,7 +2223,7 @@ function print_filter_project_id( array $p_filter = null ) {
 	}
 	?>
 		<!-- Project -->
-		<select <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
 			<option value="<?php echo META_FILTER_CURRENT ?>"
 				<?php check_selected( $p_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>
 				[<?php echo lang_get( 'current' )?>]
@@ -2260,7 +2267,7 @@ function print_filter_match_type( array $p_filter = null ) {
 	}
 ?>
 		<!-- Project -->
-		<select <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
+		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
 			<option value="<?php echo FILTER_MATCH_ALL?>" <?php check_selected( $p_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ALL );?>>[<?php echo lang_get( 'filter_match_all' )?>]</option>
 			<option value="<?php echo FILTER_MATCH_ANY?>" <?php check_selected( $p_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ANY );?>>[<?php echo lang_get( 'filter_match_any' )?>]</option>
 		</select>

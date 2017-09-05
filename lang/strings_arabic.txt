@@ -42,6 +42,7 @@
  * @author DRIHEM
  * @author Maroen1990
  * @author Meno25
+ * @author Mido
  * @author OsamaK
  * @author Tarawneh
  * @author Test Create account
@@ -1032,7 +1033,6 @@ $s_relationship_deleted = 'العلاقة تم حذفها';
 $s_no_relationship = 'لا علاقة';
 $s_relationship_replaced = 'العلاقة تم استبدالها';
 $s_replace_relationship_button = 'استبدال';
-$s_replace_relationship_sure_msg = 'توجد علاقة بالفعل بين هاتين القضيتين. هل أنت متأكد أنك تريد استبدالها؟';
 $s_relationship_with_parent = 'العلاقة مع القضية الأصلية';
 $s_delete_relationship_button = 'حذف';
 $s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
@@ -1110,7 +1110,7 @@ $s_email_on_deleted = 'أرسل رسالة عند الحذف';
 $s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
 $s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
 $s_email_on_updated = 'الاميل يحدث';
-$s_loading = 'جاري التحميل...';
+$s_loading = 'جارٍ التحميل...';
 $s_between_date = 'بين';
 $s_on_or_before_date = 'في أو قبل';
 $s_before_date = 'قبل';
@@ -1294,7 +1294,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'الراعي لم يوفر 
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%1$s" له قيمة غير صحيحة "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضية "%1$d" للقراءة فقط.';
 $MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'لا يمكن حل هذه المشكلة إلا بعد حل جميع القضايا التابعة.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'توجد علاقة بالفعل بين هاتين القضيتين.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'العلاقة لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'السماح مرفوض: القضية %1$d تحتاج إلى مستو أعلى من الصلاحيات.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'القضية لا يمكن أن تكون مرتبطة بنفسها.';

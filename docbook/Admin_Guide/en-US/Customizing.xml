@@ -16,6 +16,13 @@
 			next release.
 		</para>
 
+		<note><para>The standard MantisBT language strings are sometimes reused
+			in different contexts.
+			If you are planning to override some strings to meet your specific
+			requirements, make sure to analyze where they are used to avoids
+			unexpected issues.
+		</para></note>
+
 		<para>Two formats are supported within this file:
 		</para>
 
@@ -785,7 +792,7 @@ $g_notify_flags['owner'] = array(
                         about. Also send new issue notifications to managers so they can
                         screen them.
 <programlisting>
-$g_mail_receive_own = OFF;
+$g_email_receive_own = OFF;
 $g_default_notify_flags = array(
 	'reporter'      => ON,
 	'handler'       => ON,

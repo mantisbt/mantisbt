@@ -42,24 +42,25 @@
  * @author Gomoko
  * @author IAlex
  * @author Jocelyn
+ * @author Urhixidur
  */
 
-$s_plugin_XmlImportExport_title = 'Importer / Exporter des bugs';
+$s_plugin_XmlImportExport_title = 'Importer / Exporter des bogues';
 $s_plugin_XmlImportExport_description = 'Permet d\'importer et exporter des fichiers au format XML compatible avec MantisBT.';
-$s_plugin_XmlImportExport_import = 'Importer des bugs';
+$s_plugin_XmlImportExport_import = 'Importer des bogues';
 $s_plugin_XmlImportExport_export = 'Export XML';
 $s_plugin_XmlImportExport_config_title = 'Configuration des niveaux d’accès d’import/export XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importer des bugs';
-$s_plugin_XmlImportExport_export_threshold = 'Exporter des bugs';
+$s_plugin_XmlImportExport_import_threshold = 'Importer des bogues';
+$s_plugin_XmlImportExport_export_threshold = 'Exporter des bogues';
 $s_plugin_XmlImportExport_action_update = 'Mettre à jour';
-$s_plugin_XmlImportExport_importing_in_project = 'Importer les bugs dans le projet :';
+$s_plugin_XmlImportExport_importing_in_project = 'Importation des bogues dans le projet : \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Options d\'importation';
 $s_plugin_XmlImportExport_cross_references = 'Références croisées';
 $s_plugin_XmlImportExport_default_strategy = 'Stratégie de conversion par défaut :';
 $s_plugin_XmlImportExport_renumber = 'Renuméroter';
 $s_plugin_XmlImportExport_renumber_desc = 'Essayer de convertir les références au nouveau numérotage';
 $s_plugin_XmlImportExport_link = 'Lien';
-$s_plugin_XmlImportExport_link_desc = 'Convertir vers un lien vers le bug original';
+$s_plugin_XmlImportExport_link_desc = 'Convertir vers un lien vers le bogue original';
 $s_plugin_XmlImportExport_disable = 'Désactiver';
 $s_plugin_XmlImportExport_disable_desc = 'Désactiver le lien';
 $s_plugin_XmlImportExport_fallback = 'Stratégie de secours (quand la renumérotation ne s\'applique pas) :';

@@ -214,25 +214,49 @@ pre {
     position: relative;
 }
 
-.ace-nav .nav-user-photo {
-    border-radius: 4px !important;
+.ace-nav .nav-avatar-container-40 {
+    width: 48px; 
+    height: 40px;
+    float: left;
 }
-.profile-activity img {
+
+.ace-nav .nav-avatar-40 {
+    margin: -4px 8px 0 0;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 4px !important;    
+}
+.profile-activity-avatar-40 {
     border-radius: 15% !important;
     margin-bottom: 6px !important;
+}
+
+.profile-activity-avatar-container-40 {
+    width: 48px; 
+    line-height: 40px;
+    float: left;
+    text-align: center;
 }
 
 .table-responsive {
     margin-bottom: 0 !important;
 }
 
-.avatar
-{
+.bugnote-avatar-80 {
     border: 2px solid #c9d6e5;
     border-radius: 15%;
     box-shadow: none;
     margin:0;
     max-width: 80px;
+    max-height: 80px;
+}
+
+.bugnote-avatar-container-80 {
+    line-height: 80px;
+    width: 84px;
+    text-align: center;
 }
 
 .input-sm {
@@ -258,6 +282,11 @@ select.input-xs {
 
 select.input-xs option, select.form-control.input-xs option {
     padding: 0px 2px !important;
+}
+
+select[disabled] {
+    background-color: #eee !important;
+    color: #848484 !important;
 }
 
 textarea.input-xs, select.input-xs[multiple] {

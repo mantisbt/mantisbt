@@ -39,6 +39,7 @@
  * @file
  *
  * @author Christian List
+ * @author Joedalton
  * @author Tjernobyl
  */
 
@@ -46,6 +47,10 @@ $s_plugin_XmlImportExport_title = 'Importer/Eksporter rapporter';
 $s_plugin_XmlImportExport_description = 'Tilføjer XML-baseret import- og eksport-muligheder til MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importer rapporter';
 $s_plugin_XmlImportExport_export = 'XML-eksport';
+$s_plugin_XmlImportExport_config_title = 'XML-import/Eksport af adgangsniveaukonfiguration';
+$s_plugin_XmlImportExport_import_threshold = 'Importer fejlrapporter';
+$s_plugin_XmlImportExport_export_threshold = 'Eksporter fejlrapporter';
+$s_plugin_XmlImportExport_action_update = 'Opdater';
 $s_plugin_XmlImportExport_importing_in_project = 'Importere rapporter i projektet:';
 $s_plugin_XmlImportExport_import_options = 'Importindstillinger';
 $s_plugin_XmlImportExport_cross_references = 'Krydsreferencer';

@@ -30,7 +30,7 @@
  */
 function mci_account_get_array_by_id( $p_user_id ) {
 	$t_result = array();
-	$t_result['id'] = $p_user_id;
+	$t_result['id'] = (int)$p_user_id;
 
 	if( user_exists( $p_user_id ) ) {
 

@@ -147,7 +147,13 @@ $t_form_title = lang_get( 'bug_view_title' );
 $t_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
 if( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
-	$t_history_link = 'view.php?id=' . $f_bug_id . '&history=1#history';
+	if( $f_history ) {
+		$t_history_link = '#history';
+		$t_history_label = lang_get( 'jump_to_history' );
+	} else {
+		$t_history_link = 'view.php?id=' . $f_bug_id . '&history=1#history';
+		$t_history_label = lang_get( 'display_history' );
+	}
 } else {
 	$t_history_link = '';
 }
@@ -247,9 +253,6 @@ echo '<div class="widget-body">';
 echo '<div class="widget-toolbox padding-8 clearfix noprint">';
 echo '<div class="btn-group pull-left">';
 
-# Jump to Bugnotes
-print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
-
 # Send Bug Reminder
 if( $t_show_reminder_link ) {
 	print_small_button( $t_bug_reminder_link, lang_get( 'bug_reminder' ) );
@@ -275,10 +278,12 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 	}
 }
 
-# Links
+# Jump to Bugnotes
+print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
+
+# Display or Jump to History
 if( !is_blank( $t_history_link ) ) {
-	# History
-	print_small_button( $t_history_link, lang_get( 'bug_history' ) );
+	print_small_button( $t_history_link, $t_history_label );
 }
 
 echo '</div>';
@@ -363,33 +368,25 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<tr class="hidden"></tr>';
 }
 
+
 #
-# Reporter
+# Reporter, Handler, Due Date
 #
 
-if( $t_show_reporter ) {
+if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 4;
+	$t_spacer = 0;
 
 	# Reporter
-	echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
-	echo '<td class="bug-reporter">';
-	print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
-	echo '</td>';
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
-	echo '</tr>';
-}
-
-#
-# Handler, Due Date
-#
-
-if( $t_show_handler || $t_show_due_date ) {
-	echo '<tr>';
-
-	$t_spacer = 2;
+	if( $t_show_reporter ) {
+		echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
+		echo '<td class="bug-reporter">';
+		print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
+		echo '</td>';
+	} else {
+		$t_spacer += 2;
+	}
 
 	# Handler
 	if( $t_show_handler ) {
@@ -414,7 +411,10 @@ if( $t_show_handler || $t_show_due_date ) {
 		$t_spacer += 2;
 	}
 
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	if( $t_spacer > 0 ) {
+		echo '<td colspan="', $t_spacer, '">&#160;</td>';
+	}
+
 	echo '</tr>';
 }
 

@@ -141,19 +141,20 @@ git clone YourCloneURL
 			</para>
 
 			<para>
-				MantisBT uses <ulink url="http://git-scm.com/book/en/Git-Tools-Submodules">Git submodules</ulink>
-				to store and manage some third-party libraries.
-				These require additional steps to initialize properly:
+				MantisBT uses <ulink url="https://getcomposer.org">Composer</ulink>
+				to pull libraries and components from <ulink url="https://packagist.org">Packagist</ulink>
+				and <ulink url="https://github.com">Github</ulink>.
+				<ulink url="https://getcomposer.org/download/">Install Composer</ulink> and run the following
+				command:
 <programlisting>
-cd mantisbt
-git submodule update --init
+composer install
 </programlisting>
 			</para>
 
 			<warning><para>
 				Failure to execute the submodule initialization commands
-				will result in the corresponding directories under
-				<filename>/library</filename> being empty, which will then
+				will result in critical components being missing from
+				<filename>/vendor</filename> folder, which will then
 				cause errors when running MantisBT.
 			</para></warning>
 		</section>

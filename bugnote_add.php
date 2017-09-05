@@ -95,7 +95,7 @@ if( $f_files !== null ) {
 	$t_file_infos = array();
 }
 
-if( is_blank( $f_bugnote_text ) ) {
+if( is_blank( $f_bugnote_text ) && helper_duration_to_minutes( $f_time_tracking ) == 0 ) {
 	if( $f_files === null ) {
 		error_parameters( lang_get( 'bugnote' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );

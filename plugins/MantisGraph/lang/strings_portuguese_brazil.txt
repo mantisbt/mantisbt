@@ -39,10 +39,12 @@
  * @file
  *
  * @author Eduardo Addad de Oliveira
+ * @author Felipe L. Ewald
  * @author Giro720
  * @author Joao Xavier
  * @author Luckas
  * @author Luckas Blade
+ * @author Maxan
  */
 
 $s_plugin_graph_title = 'Gráficos Mantis';
@@ -55,7 +57,7 @@ $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por Gravidade';
 $s_plugin_MantisGraph_category_link = 'Por categoria';
 $s_plugin_MantisGraph_resolution_link = 'Por resolução';
-$s_plugin_MantisGraph_issue_trends_link = 'Tendências de Problema';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendências entre as Tarefas';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Gráfico de síntese por status';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Gráfico de síntese por prioridade';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Gráfico de síntese por gravidade';
@@ -86,4 +88,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'Última Quinzena';
 $s_plugin_MantisGraph_period_year_to_date = 'Este ano';
 $s_plugin_MantisGraph_period_select = 'Especificar período';
 $s_plugin_MantisGraph_period_last_year = 'Ano Passado';
-$s_plugin_MantisGraph_graph_page = 'Gráfico do histórico do caso';
+$s_plugin_MantisGraph_graph_page = 'Gráfico do histórico da tarefa';
+$s_plugin_MantisGraph_graph_topdev = 'Principais desenvolvedores por problemas corrigidos';
+$s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por questões abertas';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Principais Repórteres por Problemas Corrigidos';

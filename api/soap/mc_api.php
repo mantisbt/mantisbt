@@ -35,21 +35,114 @@ set_error_handler( 'mc_error_handler' );
 require_api( 'api_token_api.php' );
 
 /**
- * A factory class that can abstract away operations that can behave differently based
- * on the underlying soap implementation.
- *
- * TODO: Consider removing this class since it currently has one implementation which
- * targets the php soap extension.
+ * A class to capture a RestFault
  */
-class SoapObjectsFactory {
+class RestFault {
 	/**
-	 * Generate a new Soap Fault
-	 * @param string $p_fault_code   SOAP fault code.
-	 * @param string $p_fault_string SOAP fault description.
-	 * @return SoapFault
+	 * @var integer The http status code
 	 */
-	static function newSoapFault( $p_fault_code, $p_fault_string ) {
-		return new SoapFault( $p_fault_code, $p_fault_string );
+	public $status_code;
+
+	/**
+	 * @var string The http status string
+	 */
+	public $fault_string;
+
+	/**
+	 * RestFault constructor.
+	 *
+	 * @param integer $p_status_code The http status code
+	 * @param string $p_fault_string The error description
+	 */
+	function __construct( $p_status_code, $p_fault_string = '' ) {
+		$this->status_code = $p_status_code;
+		$this->fault_string = $p_fault_string === null ? '' : $p_fault_string;
+	}
+}
+
+/**
+ * A factory class that can abstract away operations that can behave differently based
+ * on the API being accessed (SOAP vs. REST).
+ */
+class ApiObjectFactory {
+	/**
+	 * @var bool true: SOAP API, false: REST API
+	 */
+	static public $soap = true;
+
+	/**
+	 * Generate a new fault - this method should only be called from within this factory class.  Use methods for
+	 * specific error cases.
+	 *
+	 * @param string $p_fault_code   SOAP fault code (Server or Client).
+	 * @param string $p_fault_string Fault description.
+	 * @param integer $p_status_code The http status code.
+	 * @return RestFault|SoapFault The fault object.
+	 * @access private
+	 */
+	static function fault( $p_fault_code, $p_fault_string, $p_status_code = null ) {
+		# Default status code based on fault code, if not specified.
+		if( $p_status_code === null ) {
+			$p_status_code = ( $p_fault_code == 'Server' ) ? 500 : 400;
+		}
+
+		if( ApiObjectFactory::$soap ) {
+			return new SoapFault( $p_fault_code, $p_fault_string );
+		}
+
+		return new RestFault( $p_status_code, $p_fault_string );
+	}
+
+	/**
+	 * Fault generated when a resource doesn't exist.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultNotFound( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_NOT_FOUND );
+	}
+
+	/**
+	 * Fault generated when an operation is not allowed.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultForbidden( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_FORBIDDEN );
+	}
+
+	/**
+	 * Fault generated when a request is invalid.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultBadRequest( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_BAD_REQUEST );
+	}
+
+	/**
+	 * Fault generated when the request is failed due to conflict with current state of the data.
+	 * This can happen either due to a race condition or lack of checking on client side before
+	 * issuing the request.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultConflict( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_CONFLICT );
+	}
+
+	/**
+	 * Fault generated when a request fails due to server error.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultServerError( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Server', $p_fault_string, HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	}
 
 	/**
@@ -57,7 +150,7 @@ class SoapObjectsFactory {
 	 * @param stdClass|array $p_object Object.
 	 * @return array
 	 */
-	static function unwrapObject( $p_object ) {
+	static function objectToArray($p_object ) {
 		if( is_object( $p_object ) ) {
 			return get_object_vars( $p_object );
 		}
@@ -68,20 +161,24 @@ class SoapObjectsFactory {
 	/**
 	 * Convert a timestamp to a soap DateTime variable
 	 * @param integer $p_value Integer value to return as date time string.
-	 * @return SoapVar
+	 * @return datetime in expected API format.
 	 */
-	static function newDateTimeVar( $p_value ) {
-		$t_string_value = self::newDateTimeString( $p_value );
+	static function datetime($p_value ) {
+		$t_string_value = self::datetimeString( $p_value );
 
-		return new SoapVar( $t_string_value, XSD_DATETIME, 'xsd:dateTime' );
+		if( ApiObjectFactory::$soap ) {
+			return new SoapVar($t_string_value, XSD_DATETIME, 'xsd:dateTime');
+		}
+
+		return $t_string_value;
 	}
 
 	/**
 	 * Convert a timestamp to a DateTime string
 	 * @param integer $p_timestamp Integer value to format as date time string.
-	 * @return string
+	 * @return string for provided timestamp
 	 */
-	static function newDateTimeString ( $p_timestamp ) {
+	static function datetimeString($p_timestamp ) {
 		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}
@@ -90,34 +187,24 @@ class SoapObjectsFactory {
 	}
 
 	/**
-	 * Process Date Time string with strtotime
-	 * @param string $p_string String value to process as a date time string.
-	 * @return integer
-	 */
-	static function parseDateTimeString ( $p_string ) {
-		return strtotime( $p_string );
-	}
-
-	/**
-	 * Perform any necessary encoding on a binary string
-	 * @param string $p_binary Binary string.
-	 * @return string
-	 */
-	static function encodeBinary ( $p_binary ) {
-		return $p_binary;
-	}
-
-	/**
 	 * Checks if an object is a SoapFault
 	 * @param mixed $p_maybe_fault Object to check whether a SOAP fault.
 	 * @return boolean
 	 */
-	static function isSoapFault ( $p_maybe_fault ) {
+	static function isFault( $p_maybe_fault ) {
 		if( !is_object( $p_maybe_fault ) ) {
 			return false;
 		}
 
-		return get_class( $p_maybe_fault ) == 'SoapFault';
+		if( ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'SoapFault') {
+			return true;
+		}
+
+		if( !ApiObjectFactory::$soap && get_class( $p_maybe_fault ) == 'RestFault') {
+			return true;
+		}
+
+		return false;
 	}
 }
 
@@ -140,30 +227,88 @@ function mc_version() {
 function mc_login( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
-	return mci_user_get( $p_username, $p_password, $t_user_id );
+	return mci_user_get( $t_user_id );
 }
 
 /**
  * Given an id, this method returns the user.
  * When calling this method make sure that the caller has the right to retrieve
  * information about the target user.
- * @param string  $p_username Login username.
- * @param string  $p_password Login password.
  * @param integer $p_user_id  A valid user identifier.
  * @return array array of user data for the supplied user id
  */
-function mci_user_get( $p_username, $p_password, $p_user_id ) {
+function mci_user_get( $p_user_id ) {
 	$t_user_data = array();
 
 	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
-	$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
-	$t_user_data['access_level'] = access_get_global_level( $p_user_id );
-	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+	if( ApiObjectFactory::$soap ) {
+		$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
+		$t_user_data['access_level'] = access_get_global_level( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+	} else {
+		$t_account_data = mci_account_get_array_by_id( $p_user_id );
+		foreach( $t_account_data as $t_key => $t_value ) {
+			$t_user_data[$t_key] = $t_value;
+		}
+
+		$t_user_data['language'] = mci_get_user_lang( $p_user_id );
+		$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
+
+		$t_access_level = access_get_global_level( $p_user_id );
+		$t_user_data['access_level'] = mci_enum_get_array_by_id(
+			$t_access_level, 'access_levels', $t_user_data['language'] );
+
+		$t_project_ids = user_get_accessible_projects( $p_user_id, /* disabled */ false );
+		$t_projects = array();
+		foreach( $t_project_ids as $t_project_id ) {
+			$t_projects[] = mci_project_get( $t_project_id, $t_user_data['language'], /* detail */ false );
+		}
+
+		$t_user_data['projects'] = $t_projects;
+	}
 
 	return $t_user_data;
+}
+
+/**
+ * Get project info for the specified id.
+ *
+ * @param int $p_project_id The project id to get info for.
+ * @param string $p_lang The user's language.
+ * @param bool @p_detail Include all project details vs. just reference info.
+ * @return array project info.
+ */
+function mci_project_get( $p_project_id, $p_lang, $p_detail ) {
+	$t_row = project_get_row( $p_project_id );
+
+	$t_user_id = auth_get_current_user_id();
+	$t_user_access_level = access_get_project_level( $p_project_id, $t_user_id );
+
+	# Get project info that makes sense to publish via API.  For example, skip file_path.
+	$t_project = array(
+		'id' => $p_project_id,
+		'name' => $t_row['name'],
+	);
+
+	if( $p_detail ) {
+		$t_project['status'] = mci_enum_get_array_by_id( (int)$t_row['status'], 'project_status', $p_lang );
+		$t_project['description'] = $t_row['description'];
+		$t_project['enabled'] = (int)$t_row['enabled'] != 0;
+		$t_project['view_state'] = mci_enum_get_array_by_id( (int)$t_row['view_state'], 'view_state', $p_lang );
+
+		# access_min field is not used
+		# $t_project['access_min'] = mci_enum_get_array_by_id( (int)$t_row['access_min'], 'access_levels', $p_lang );
+
+		$t_project['access_level'] = mci_enum_get_array_by_id( $t_user_access_level, 'access_levels', $p_lang );
+		$t_project['custom_fields'] = mci_project_get_custom_fields( $p_project_id );
+		$t_project['versions'] = mci_project_versions( $p_project_id );
+		$t_project['categories'] = mci_project_categories( $p_project_id );
+	}
+
+	return $t_project;
 }
 
 /**
@@ -182,6 +327,14 @@ function mci_is_mantis_offline() {
  * @return integer|false return user_id if successful, otherwise false.
  */
 function mci_check_login( $p_username, $p_password ) {
+	static $s_already_called = false;
+
+	if( $s_already_called === true ) {
+		return auth_get_current_user_id();
+	}
+
+	$s_already_called = true;
+
 	if( mci_is_mantis_offline() ) {
 		return false;
 	}
@@ -190,41 +343,54 @@ function mci_check_login( $p_username, $p_password ) {
 	# by auth_attempt_script_login().
 	$t_password = ( $p_password === null ) ? '' : $p_password;
 
-	# Validate the token
 	if( api_token_validate( $p_username, $t_password ) ) {
 		# Token is valid, then login the user without worrying about a password.
 		if( auth_attempt_script_login( $p_username, null ) === false ) {
 			return false;
 		}
 	} else {
-		# Not a valid token, validate as username + password.
-		if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
-			return false;
+		# User cookie
+		$t_user_id = auth_user_id_from_cookie( $p_password );
+		if( $t_user_id !== false ) {
+			# Cookie is valid
+			if( auth_attempt_script_login( $p_username, null ) === false ) {
+				return false;
+			}
+		} else {
+			# Use regular passwords
+			if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
+				return false;
+			}
 		}
 	}
+
+	# Set language to user's language
+	lang_push( lang_get_default() );
 
 	return auth_get_current_user_id();
 }
 
 /**
  * Check with a user has readonly access to the webservice for a given project
- * @param integer $p_user_id    A user identifier.
+ * @param integer|null $p_user_id A user id or null for logged in user.
  * @param integer $p_project_id A project identifier ( Default All Projects ).
  * @return boolean indicating whether user has readonly access
  */
-function mci_has_readonly_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
+function mci_has_readonly_access( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	$t_user_id = is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
 	return( $t_access_level >= config_get( 'webservice_readonly_access_level_threshold' ) );
 }
 
 /**
  * Check with a user has readwrite access to the webservice for a given project
- * @param integer $p_user_id    User id.
+ * @param integer|null $p_user_id User id or null for logged in user.
  * @param integer $p_project_id Project Id ( Default All Projects ).
  * @return boolean indicating whether user has readwrite access
  */
-function mci_has_readwrite_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
+function mci_has_readwrite_access( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	$t_user_id = is_null( $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+	$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
 	return( $t_access_level >= config_get( 'webservice_readwrite_access_level_threshold' ) );
 }
 
@@ -292,11 +458,13 @@ function mci_get_project_view_state_id( $p_view_state ) {
 
 /**
  * Return user id
- * @param stdClass $p_user User.
+ * @param stdClass|array $p_user User.
  * @return integer user id
  */
-function mci_get_user_id( stdClass $p_user ) {
-	$p_user = SoapObjectsFactory::unwrapObject( $p_user );
+function mci_get_user_id( $p_user ) {
+	if( is_object( $p_user ) ) {
+		$p_user = ApiObjectFactory::objectToArray( $p_user );
+	}
 
 	$t_user_id = 0;
 
@@ -309,6 +477,70 @@ function mci_get_user_id( stdClass $p_user ) {
 	}
 
 	return $t_user_id;
+}
+
+/**
+ * Given a profile id, return its information as an array or null
+ * if profile id is 0 or not found.
+ *
+ * @param integer $p_profile_id The profile id, can be 0.
+ * @return array|null The profile or null if not found.
+ */
+function mci_profile_as_array_by_id( $p_profile_id ) {
+	$t_profile_id = (int)$p_profile_id;
+	if( $t_profile_id == 0 ) {
+		return null;
+	}
+
+	$t_profile = profile_get_row_direct( $t_profile_id );
+	if( $t_profile === false ) {
+		return null;
+	}
+
+	return array(
+		'id' => $t_profile_id,
+		'user' => mci_account_get_array_by_id( $t_profile['user_id'] ),
+		'platform' => $t_profile['platform'],
+		'os' => $t_profile['os'],
+		'os_build' => $t_profile['os_build'],
+		'description' => $t_profile['description']
+	);
+}
+
+/**
+ * Get basic issue info for related issues.
+ *
+ * @param integer $p_issue_id The issue id.
+ * @return array|null The issue id or null if not found.
+ */
+function mci_related_issue_as_array_by_id( $p_issue_id ) {
+	$t_issue_id = (int)$p_issue_id;
+
+	if( !bug_exists( $t_issue_id ) ) {
+		return null;
+	}
+
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_bug = bug_get( $t_issue_id );
+
+	$t_related_issue = array(
+		'id' => $t_bug->id,
+		'status' => mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang ),
+		'resolution' => mci_enum_get_array_by_id( $t_bug->resolution, 'resolution', $t_lang ),
+		'summary' => $t_bug->summary
+	);
+
+	if( !empty( $t_bug->handler_id ) ) {
+		if( access_has_bug_level(
+			config_get( 'view_handler_threshold', null, null, $t_bug->project_id ),
+			$t_issue_id, $t_user_id ) ) {
+			$t_related_issue['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		}
+	}
+
+	return $t_related_issue;
 }
 
 /**
@@ -417,7 +649,11 @@ function mci_null_if_empty( $p_value ) {
  * @return string the sanitized XML
  */
 function mci_sanitize_xml_string ( $p_input ) {
-	return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+	if( ApiObjectFactory::$soap ) {
+		return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input );
+	}
+
+	return $p_input;
 }
 
 /**
@@ -427,20 +663,6 @@ function mci_sanitize_xml_string ( $p_input ) {
  */
 function mci_get_mantis_path() {
 	return config_get( 'path' );
-}
-
-/**
- * Given a enum string and num, return the appropriate localized string
- * @param string $p_enum_name Enumeration name.
- * @param string $p_val       Enumeration value.
- * @param string $p_lang      Language string.
- * @return string
- */
-function mci_get_enum_element( $p_enum_name, $p_val, $p_lang ) {
-	$t_enum_string = config_get( $p_enum_name . '_enum_string' );
-	$t_localized_enum_string = lang_get( $p_enum_name . '_enum_string', $p_lang );
-
-	return MantisEnum::getLocalizedLabel( $t_enum_string, $t_localized_enum_string, $p_val );
 }
 
 /**
@@ -477,22 +699,135 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 }
 
 /**
+ * Convert version into appropriate format for SOAP/REST.
+ *
+ * @param string $p_version The version
+ * @param int $p_project_id The project id
+ * @return array|null|string The converted version
+ */
+function mci_get_version( $p_version, $p_project_id ) {
+	$t_version_id = version_get_id( $p_version, $p_project_id );
+	if( $t_version_id === false ) {
+		return null;
+	}
+
+	if( is_blank( $p_version ) ) {
+		return null;
+	}
+
+	if( ApiObjectFactory::$soap ) {
+		return $p_version;
+	}
+
+	return array(
+		'id' => (int)$t_version_id,
+		'name' => $p_version,
+	);
+}
+
+/**
+ * Gets the version id based on version input from the API.  This can be
+ * a string or an object (with id or name or both).  If both id and name
+ * exist on the object, id takes precedence.
+ *
+ * @param string|object $p_version The version string or object with name or id or both.
+ * @param int $p_project_id The project id.
+ * @return int|RestFault|SoapFault The version id, 0 if not supplied.
+ */
+function mci_get_version_id( $p_version, $p_project_id ) {
+	$t_version_id = 0;
+	$t_version_for_error = '';
+
+	if( is_array( $p_version ) ) {
+		if( isset( $p_version['id'] ) && is_numeric( $p_version['id'] ) ) {
+			$t_version_id = (int)$p_version['id'];
+			$t_version_for_error = $p_version['id'];
+			if( !version_exists( $t_version_id ) ) {
+				$t_version_id = false;
+			}
+		} elseif( isset( $p_version['name'] ) ) {
+			$t_version_for_error = $p_version['name'];
+			$t_version_id = version_get_id( $p_version['name'], $p_project_id );
+		}
+	} elseif( is_string( $p_version ) && !is_blank( $p_version ) ) {
+		$t_version_for_error = $p_version;
+		$t_version_id = version_get_id( $p_version, $p_project_id );
+	}
+
+	# Error when supplied, but not found
+	if( $t_version_id === false ) {
+		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
+		if( $t_error_when_version_not_found == ON ) {
+			$t_project_name = project_get_name( $p_project_id );
+			return ApiObjectFactory::faultBadRequest( "Version '$t_version_for_error' does not exist in project '$t_project_name'." );
+		}
+
+		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
+		$t_version_id = version_get_id( $t_version_when_not_found );
+	}
+
+	return $t_version_id;
+}
+
+
+/**
+ * Returns the category name, possibly null if no category is assigned
+ *
+ * @param integer $p_category_id A category identifier.
+ * @return string
+ */
+function mci_get_category( $p_category_id ) {
+	if( ApiObjectFactory::$soap ) {
+		if( $p_category_id == 0 ) {
+			# This should be really null, but will leaving it to avoid changing the behavior
+			return '';
+		}
+
+		return mci_null_if_empty( category_get_name( $p_category_id ) );
+	}
+
+	if( $p_category_id == 0 ) {
+		return null;
+	}
+
+	return array(
+		'id' => $p_category_id,
+		'name' => mci_null_if_empty( category_get_name( $p_category_id ) ),
+	);
+}
+
+/**
  * Convert a category name to a category id for a given project
- * @param string  $p_category_name Category name.
+ * @param string|array $p_category Category name or array with id and/or name.
  * @param integer $p_project_id    Project id.
  * @return integer category id or 0 if not found
  */
-function translate_category_name_to_id( $p_category_name, $p_project_id ) {
-	if( !isset( $p_category_name ) ) {
+function mci_get_category_id( $p_category, $p_project_id ) {
+	if( !isset( $p_category ) ) {
 		return 0;
+	}
+
+	if( is_array( $p_category ) ) {
+		if( isset( $p_category['id'] ) ) {
+			if( category_exists( $p_category['id'] ) ) {
+				return $p_category['id'];
+			}
+		} else if( isset( $p_category['name'] ) ) {
+			$t_category_name = $p_category['name'];
+		} else {
+			return 0;
+		}
+	} else {
+		$t_category_name = $p_category;
 	}
 
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
-		if( $t_category_row['name'] == $p_category_name ) {
+		if( $t_category_row['name'] == $t_category_name ) {
 			return $t_category_row['id'];
 		}
 	}
+
 	return 0;
 }
 
@@ -577,7 +912,7 @@ function mci_project_version_as_array( array $p_version ) {
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
-			'date_order' => SoapObjectsFactory::newDateTimeVar( $p_version['date_order'] ),
+			'date_order' => ApiObjectFactory::datetime( $p_version['date_order'] ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
 			'obsolete' => $p_version['obsolete']
@@ -731,13 +1066,13 @@ function error_get_stack_trace() {
 }
 
 /**
- * Returns a soap_fault signalling corresponding to a failed login
+ * Returns a fault signalling corresponding to a failed login
  * situation
  *
- * @return soap_fault
+ * @return RestFault|SoapFault
  */
-function mci_soap_fault_login_failed() {
-	return SoapObjectsFactory::newSoapFault( 'Client', 'Access denied' );
+function mci_fault_login_failed() {
+	return ApiObjectFactory::faultForbidden( 'Access denied' );
 }
 
 /**
@@ -746,9 +1081,9 @@ function mci_soap_fault_login_failed() {
  *
  * @param integer $p_user_id A user id, optional.
  * @param string  $p_detail  The optional details to append to the error message.
- * @return soap_fault
+ * @return RestFault|SoapFault
  */
-function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
+function mci_fault_access_denied($p_user_id = 0, $p_detail = '' ) {
 	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
 		$t_reason = 'Access denied for user '. $t_user_name . '.';
@@ -760,5 +1095,45 @@ function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 	}
 
-	return SoapObjectsFactory::newSoapFault( 'Client', $t_reason );
+	return ApiObjectFactory::faultForbidden( $t_reason );
+}
+
+/**
+ * Remove the keys with null values from the supplied array.
+ *
+ * @param array $p_array The array to filter.
+ * @return void
+ */
+function mci_remove_null_keys( &$p_array ) {
+	$t_keys_to_remove = array();
+
+	foreach( $p_array as $t_key => $t_value ) {
+		if( is_null( $t_value ) ) {
+			$t_keys_to_remove[] = $t_key;
+		}
+	}
+
+	foreach( $t_keys_to_remove as $t_key ) {
+		unset( $p_array[$t_key] );
+	}
+}
+
+/**
+ * Remove the keys with empty arrays from the supplied array.
+ *
+ * @param array $p_array The array to filter.
+ * @return void
+ */
+function mci_remove_empty_arrays( &$p_array ) {
+	$t_keys_to_remove = array();
+
+	foreach( $p_array as $t_key => $t_value ) {
+		if( is_array( $t_value ) && empty( $t_value ) ) {
+			$t_keys_to_remove[] = $t_key;
+		}
+	}
+
+	foreach( $t_keys_to_remove as $t_key ) {
+		unset( $p_array[$t_key] );
+	}
 }

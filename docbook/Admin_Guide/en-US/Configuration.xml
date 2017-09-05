@@ -97,7 +97,7 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/fields.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/logging.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/timetracking.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/soap.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/api.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/antispam.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/duedate.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/user.xml" />

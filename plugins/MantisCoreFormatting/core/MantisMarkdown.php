@@ -36,8 +36,6 @@
  * @uses Parsedown Library
  */
 
-require_lib( 'parsedown' . DIRECTORY_SEPARATOR . 'Parsedown.php' );
-
 /**
  * A class that overrides default Markdown parsing for Mantis specific scenarios.
  */
@@ -77,6 +75,12 @@ class MantisMarkdown extends Parsedown
 	 */
 	public static function convert_text( $p_text ) {
 		self::init();
+
+		# Enabled quote conversion
+		# Text processing converts special character to entity name 
+		# Make sure to restore "&gt;" entity name to its characted result ">"
+		$p_text = str_replace( "&gt;", ">", $p_text );
+
 		return self::$mantis_markdown->text( $p_text );
 	}
 
@@ -91,54 +95,21 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
-	 * Customize the logic on Header elements
+	 * Customize the blockHeader markdown
 	 *
 	 * @param string $line The Markdown syntax to parse
 	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
+	 * @return string|null HTML representation generated from markdown or null
+	 *                if text is not a valid header per CommonMark spec
 	 */
 	protected function blockHeader( $line ) {
-		$block = parent::blockHeader( $line );
-
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
+		# Header detection logic
+		# - the opening # may be indented 0-3 spaces
+		# - a sequence of 1–6 '#' characters
+		# - The #'s must be followed by a space or a newline
+		if ( preg_match( '/^ {0,3}#{1,6}(?: |$)/', $line['text'] ) ) {
+			return parent::blockHeader($line);
 		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
-	}
-
-	/**
-	 * Customize the logic on setting the Header elements.
-	 *
-	 * @param string $line The Markdown syntax to parse
-	 * @param array $block A block-level element
-	 * @access protected
-	 * @return void if markdown starts with # symbol | string html representation generated from markdown.
-	 */
-	protected function blockSetextHeader( $line, array $block = null ) {
-		$block = parent::blockSetextHeader( $line, $block );
-
-		# make sure config option bug_link_tag == '#' only
-		# check if string start with # symbol followed by numbers
-		# hash[numbers] should not be treated as header, then let the app handle it
-		if( '#' == config_get_global( 'bug_link_tag' ) && preg_match_all( '/^#\d+$/', $line['text'], $matches ) ) {
-			return;
-		}
-
-		# Header rules
-		# hash[space][numbers] - treated as header
-		# hash[number][*] - treated as header since it is not a pure number
-		# hash[letter][*] - treated as header
-		# hash[space][letter][*] - treated as header
-		return $block;
 	}
 
 	/**
@@ -225,6 +196,78 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
+	 * Customize the inlineCode method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineCode( $block ) {
+
+		$block = parent::inlineCode( $block );
+		
+		if( isset( $block['element']['text'] )) {
+			$this->processAmpersand( $block['element']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
+	 * Customize the blockFencedCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockFencedCodeComplete( $block = null ) {
+
+		$block = parent::blockFencedCodeComplete( $block );
+
+		if( isset( $block['element']['text']['text'] )) {
+			$this->processAmpersand( $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+	
+	/**
+	 * Customize the blockCodeComplete method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function blockCodeComplete( $block ) {
+
+		$block = parent::blockCodeComplete( $block );
+
+		if( isset( $block['element']['text']['text'] )) {
+			$this->processAmpersand( $block['element']['text']['text'] );
+		}
+
+		return $block;
+	}
+
+	/**
+	 * Customize the inlineLink method
+	 *
+	 * @param array $block A block-level element
+	 * @access protected
+	 * @return string html representation generated from markdown.
+	 */
+	protected function inlineLink( $block ) {
+
+		$block = parent::inlineLink( $block );
+
+		if( isset( $block['element']['attributes']['href'] )) {
+			$this->processAmpersand( $block['element']['attributes']['href'] );
+		}
+
+		return $block;
+	}
+
+	/**
 	 * Initialize the singleton static instance.
 	 */
 	private static function init() {
@@ -233,4 +276,20 @@ class MantisMarkdown extends Parsedown
 		}
 		return static::$mantis_markdown;
 	}
+
+	/**
+	 * Replace any '&amp;' entity in the given string by '&'.
+	 *
+	 * MantisBT text processing replaces '&' signs by their entity name. Within
+	 * code blocks or backticks, Parsedown applies the same transformation again,
+	 * so they ultimately become '&amp;amp;'. This reverts the initial conversion
+	 * so ampersands are displayed correctly.
+	 *
+	 * @param string $p_text Text block to process
+	 * @return void
+	 */
+	private function processAmpersand( &$p_text ) {
+		$p_text = str_replace( '&amp;', '&', $p_text );
+	}
+
 }

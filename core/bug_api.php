@@ -1357,6 +1357,7 @@ function bug_delete( $p_bug_id ) {
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
 	email_bug_deleted( $p_bug_id );
+	email_relationship_bug_deleted( $p_bug_id );
 
 	# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before
 	# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
@@ -1375,11 +1376,9 @@ function bug_delete( $p_bug_id ) {
 	# Delete all sponsorships
 	sponsorship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
-	# we delete relationships even if the feature is currently off.
+	# Delete all relationships
 	relationship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
 	# Delete files
 	file_delete_attachments( $p_bug_id );
 
@@ -1913,24 +1912,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		# the related bug exists...
 		bug_ensure_exists( $p_duplicate_id );
 
-		# check if there is other relationship between the bugs...
-		$t_id_relationship = relationship_same_type_exists( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-		 if( $t_id_relationship > 0 ) {
-			# Update the relationship
-			relationship_update( $t_id_relationship, $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		} else if( $t_id_relationship != -1 ) {
-			# Add the new relationship
-			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		} # else relationship is -1 - same type exists, do nothing
+		relationship_upsert( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
 
 		# Copy list of users monitoring the duplicate bug to the original bug
 		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
@@ -2239,9 +2221,8 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 			continue;
 		}
 
-		if( strncmp( $t_column, 'custom_', 7 ) === 0 ) {
-			# @TODO cproensa, this will we replaced with column_is_custom_field()
-			$t_cf_name = utf8_substr( $t_column, 7 );
+		if( column_is_custom_field( $t_column ) ) {
+			$t_cf_name = column_get_custom_field_name( $t_column );
 			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
 			if( $t_cf_id ) {
 				$t_custom_field_ids[] = $t_cf_id;

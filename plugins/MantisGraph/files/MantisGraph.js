@@ -7,7 +7,7 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data: $(this).data('values'),
-                    backgroundColor: 'rgba(252, 189, 189, 0.2)',
+                    backgroundColor: 'rgba(252, 189, 189, 0.7)',
                     borderColor: 'rgba(252, 189, 189, 1)',
                     borderWidth: 1
                 }]
@@ -36,15 +36,6 @@ $(document).ready( function() {
                     borderColor: $(this).data('border-colors'),
                     borderWidth: 1
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
         });
     });

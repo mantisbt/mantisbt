@@ -49,5 +49,7 @@ $s_plugin_format_process_text_warning_notice = 'Nun desactive esto si nun sabe r
 $s_plugin_format_process_urls = 'Procesamientu de URL';
 $s_plugin_format_process_buglinks = 'Enllaces internos MantisBT (Incidencies y Notes d\'incidencies)';
 $s_plugin_format_process_buglinks_info = 'La to configuración define la etiqueta <em>Incidencia</em> como "<literal>%s</literal>" y la etiqueta <em>Nota</em> como "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Procesamientu de llinguax de marques';
+$s_plugin_format_process_markdown_info = 'Diseñar con encontu Markdown, sintaxis de formatu de testu diseñáu pa que pueda convertise a HTML.';
 $s_plugin_format_enabled = 'Activáu';
 $s_plugin_format_disabled = 'Desactiváu';

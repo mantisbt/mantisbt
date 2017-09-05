@@ -129,9 +129,9 @@ $t_bugnote_class = bugnote_get_field( $f_bugnote_id, 'view_state' ) == VS_PUBLIC
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 <tr>
-	<td class="center" colspan="2">
+	<td colspan="2">
 		<textarea class="form-control <?php echo $t_bugnote_class; ?>" cols="80" rows="10" name="bugnote_text"
-		><?php echo $t_bugnote_text ?></textarea>
+		id="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <?php if( config_get( 'time_tracking_enabled' ) ) { ?>

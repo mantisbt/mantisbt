@@ -104,11 +104,10 @@ $(document).ready( function() {
 			highlight: true
 		}, {
 			source: function (query, undefined, callback) {
-				var fieldName = $this[0].id;
-				var postData = {};
-				postData['entrypoint'] = fieldName + '_get_with_prefix';
-				postData[fieldName] = query;
-				$.getJSON('xmlhttprequest.php', postData, function (data) {
+				var params = {};
+				params['field'] = $this[0].id;
+				params['prefix'] = query;
+				$.getJSON('api/rest/internal/autocomplete', params, function (data) {
 					var results = [];
 					$.each(data, function (i, value) {
 						results.push(value);
@@ -169,60 +168,71 @@ $(document).ready( function() {
 	}
 
 	var stopwatch = {
-		timerID: null,
-		elapsedTime: 0,
+		timerID: 0,
+		startTime: null,
+		zeroTime: moment('0', 's'),
 		tick: function() {
-			this.elapsedTime += 1000;
-			var seconds = Math.floor(this.elapsedTime / 1000) % 60;
-			var minutes = Math.floor(this.elapsedTime / 60000) % 60;
-			var hours = Math.floor(this.elapsedTime / 3600000) % 60;
-			if (seconds < 10) {
-				seconds = '0' + seconds;
-			}
-			if (minutes < 10) {
-				minutes = '0' + minutes;
-			}
-			if (hours < 10) {
-				hours = '0' + hours;
-			}
-			$('input[type=text].stopwatch_time').val(hours + ':' + minutes + ':' + seconds);
-			this.start();
+			var elapsedDiff = moment().diff(this.startTime),
+				elapsedTime = this.zeroTime.clone().add(elapsedDiff);
+
+			$('input[type=text].stopwatch_time').val(elapsedTime.format('HH:mm:ss'));
 		},
 		reset: function() {
 			this.stop();
-			this.elapsedTime = 0;
 			$('input[type=text].stopwatch_time').val('');
 		},
 		start: function() {
+			var self = this,
+				timeFormat = '',
+				stoppedTime = $('input[type=text].stopwatch_time').val();
+
 			this.stop();
-			var self = this;
-			this.timerID = window.setTimeout(function() {
+
+			if (stoppedTime) {
+				switch (stoppedTime.split(':').length) {
+					case 1:
+						timeFormat = 'ss';
+						break;
+
+					case 2:
+						timeFormat = 'mm:ss';
+						break;
+
+					default:
+						timeFormat = 'HH:mm:ss';
+				}
+
+				this.startTime = moment().add(this.zeroTime.clone().diff(moment(stoppedTime, timeFormat)));
+			} else {
+				this.startTime = moment();
+			}
+
+			this.timerID = window.setInterval(function() {
 				self.tick();
 			}, 1000);
+
+			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
 		},
 		stop: function() {
-			if (typeof this.timerID == 'number') {
-				window.clearTimeout(this.timerID);
-				delete this.timerID;
+			if (this.timerID) {
+				window.clearInterval(this.timerID);
+				this.timerID = 0;
 			}
+
+			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 		}
 	};
+
 	$('input[type=button].stopwatch_toggle').click(function() {
-		if (stopwatch.elapsedTime == 0) {
-			stopwatch.stop();
+		if (!stopwatch.timerID) {
 			stopwatch.start();
-			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
-		} else if (typeof stopwatch.timerID == 'number') {
-			stopwatch.stop();
-			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 		} else {
-			stopwatch.start();
-			$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_stop']);
+			stopwatch.stop();
 		}
 	});
+
 	$('input[type=button].stopwatch_reset').click(function() {
 		stopwatch.reset();
-		$('input[type=button].stopwatch_toggle').val(translations['time_tracking_stopwatch_start']);
 	});
 
 	$('input[type=text].datetimepicker').each(function(index, element) {
@@ -246,12 +256,11 @@ $(document).ready( function() {
 		});
 	});
 
-	if( $( ".dropzone-form" ).length ) {
-		enableDropzone( "dropzone", false );
-	}
-	if( $( ".auto-dropzone-form" ).length ) {
-		enableDropzone( "auto-dropzone", true );
-	}
+	$( 'form .dropzone' ).each(function(){
+		var classPrefix = 'dropzone';
+		var autoUpload = $(this).hasClass('auto-dropzone');
+		enableDropzone( classPrefix, autoUpload );
+	});
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
 		var bug_label = $('.bug-jump-form').find('[name=bug_label]').val();
@@ -281,8 +290,8 @@ $(document).ready( function() {
 
 	/* Handle standard filter date fields */
 	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
-		$(this).closest('.js_switch_date_inputs_container')
-				.find(':input').not(this)
+		$(this).closest('table')
+				.find('select')
 				.prop('disabled', !$(this).prop('checked'));
 	});
 
@@ -485,36 +494,38 @@ function toggleDisplay(idTag)
 // Dropzone handler
 Dropzone.autoDiscover = false;
 function enableDropzone( classPrefix, autoUpload ) {
+	var zone_class =  '.' + classPrefix;
+	var zone = $( zone_class );
+	var form = zone.closest('form');
 	try {
-		var formClass = "." + classPrefix + "-form";
-		var form = $( formClass );
-		var zone = new Dropzone( formClass, {
-			forceFallback: form.data('force-fallback'),
+		var zone_object = new Dropzone( form[0], {
+			forceFallback: zone.data('force-fallback'),
 			paramName: "ufile",
 			autoProcessQueue: autoUpload,
-			clickable: '.' + classPrefix,
+			clickable: zone_class,
 			previewsContainer: '#' + classPrefix + '-previews-box',
 			uploadMultiple: true,
 			parallelUploads: 100,
-			maxFilesize: form.data('max-filesize'),
+			maxFilesize: zone.data('max-filesize'),
 			addRemoveLinks: !autoUpload,
-			acceptedFiles: form.data('accepted-files'),
+			acceptedFiles: zone.data('accepted-files'),
 			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: form.data('default-message'),
-			dictFallbackMessage: form.data('fallback-message'),
-			dictFallbackText: form.data('fallback-text'),
-			dictFileTooBig: form.data('file-too-big'),
-			dictInvalidFileType: form.data('invalid-file-type'),
-			dictResponseError: form.data('response-error'),
-			dictCancelUpload: form.data('cancel-upload'),
-			dictCancelUploadConfirmation: form.data('cancel-upload-confirmation'),
-			dictRemoveFile: form.data('remove-file'),
-			dictRemoveFileConfirmation: form.data('remove-file-confirmation'),
-			dictMaxFilesExceeded: form.data('max-files-exceeded'),
+			dictDefaultMessage: zone.data('default-message'),
+			dictFallbackMessage: zone.data('fallback-message'),
+			dictFallbackText: zone.data('fallback-text'),
+			dictFileTooBig: zone.data('file-too-big'),
+			dictInvalidFileType: zone.data('invalid-file-type'),
+			dictResponseError: zone.data('response-error'),
+			dictCancelUpload: zone.data('cancel-upload'),
+			dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
+			dictRemoveFile: zone.data('remove-file'),
+			dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
+			dictMaxFilesExceeded: zone.data('max-files-exceeded'),
 
 			init: function () {
 				var dropzone = this;
-				$( "input[type=submit]" ).on( "click", function (e) {
+				var form = $( this.options.clickable ).closest('form');
+				form.on('submit', function (e) {
 					if( dropzone.getQueuedFiles().length ) {
 						e.preventDefault();
 						e.stopPropagation();
@@ -534,6 +545,6 @@ function enableDropzone( classPrefix, autoUpload ) {
 			}
 		});
 	} catch (e) {
-		alert( form.data('dropzone-not-supported') );
+		alert( zone.data('dropzone-not-supported') );
 	}
 }

@@ -41,6 +41,7 @@
  * @author Bithunter
  * @author Fitoschido
  * @author Locos epraix
+ * @author Luisangelrg
  */
 
 $s_plugin_format_title = 'Formateado MantisBT';
@@ -51,5 +52,7 @@ $s_plugin_format_process_text_warning_notice = 'No lo desactive a menos que sepa
 $s_plugin_format_process_urls = 'Procesamiento de URL';
 $s_plugin_format_process_buglinks = 'Enlaces internos MantisBT (Incidencias/Notas)';
 $s_plugin_format_process_buglinks_info = 'Su configuración define las etiquedas de la siguiente forma: <em>Incidencia</em> como "<literal>%s</literal>" y <em>Nota</em> como "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Procesando Markdown';
+$s_plugin_format_process_markdown_info = 'Aplicando estilo con soporte Markdown, la síntaxis de formato de texto diseñada para que pueda ser convertida a HTML.';
 $s_plugin_format_enabled = 'Habilitado';
 $s_plugin_format_disabled = 'Desactivado';

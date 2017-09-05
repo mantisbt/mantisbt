@@ -74,8 +74,10 @@ $u_realname = user_get_realname( $u_id );
 layout_page_header();
 
 layout_page_begin();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-12";
 ?>
-<div class="col-md-12 col-xs-12">
+<div class="<?php echo $t_timeline_view_class ?> col-xs-12">
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
@@ -96,35 +98,32 @@ layout_page_begin();
 			<?php echo string_display_line( $u_username ) ?>
 		</td>
 	</tr>
-	<tr>
-		<th class="category">
-			<?php echo lang_get( 'email' ) ?>
-		</th>
-		<td>
-			<?php
-				if( ! ( $t_can_manage || $t_can_see_email ) ) {
-					print error_string( ERROR_ACCESS_DENIED );
-				} else {
-					if( !is_blank( $u_email ) ) {
-						print_email_link( $u_email, $u_email );
-					} else {
-						echo " - ";
-					}
-				} ?>
-	</td>
-	</tr>
-	<tr>
-	<th class="category">
-		<?php echo lang_get( 'realname' ) ?>
-		</th>
-		<td><?php
-			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-				print error_string( ERROR_ACCESS_DENIED );
-			} else {
-				echo string_display_line( $u_realname );
-			} ?>
-		</td>
-	</tr>
+	<?php
+		if( $t_can_manage || $t_can_see_email ) { ?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'email' ) ?>
+				</th>
+				<td>
+				    <?php
+						if( !is_blank( $u_email ) ) {
+							print_email_link( $u_email, $u_email );
+						}
+					?>
+				</td>
+			</tr>
+	<?php } ?>
+	<?php
+		if( $t_can_manage || $t_can_see_realname ) { ?>
+			<tr>
+			<th class="category">
+				<?php echo lang_get( 'realname' ) ?>
+			</th>
+			<td>
+				<?php echo string_display_line( $u_realname ); ?>
+			</td>
+			</tr>
+	<?php } ?>
 	</fieldset>
 </table>
 	</div>
@@ -151,5 +150,20 @@ layout_page_begin();
 </div>
 </div>
 </div>
+
+<?php
+if( $t_timeline_view_threshold_access ) {
+	# Build a filter to show all bugs in current projects
+	$g_timeline_filter = array();
+	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
+	$g_timeline_user = $f_user_id;
+	?>
+	<div class="col-md-5 col-xs-12">
+		<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+		<div class="space-10"></div>
+	</div>
+<?php } ?>
+
 <?php
 layout_page_end();

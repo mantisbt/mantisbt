@@ -30,8 +30,10 @@ $('#db_type').change(
 		var db;
 		if ($(this).val() == 'oci8') {
 			db = 'oci8';
+			$('#oracle_size_warning').show();
 		} else {
 			db = 'other';
+			$('#oracle_size_warning').hide();
 		}
 
 		$('#default_' + db + ' span').each(
@@ -46,7 +48,33 @@ $('#db_type').change(
 				target.data('defval', $(el).text());
 			}
 		);
+
+		update_sample_table_names();
 	}
 ).change();
 
+/**
+ * Populate sample table names based on given prefix/suffix
+ */
+$('.db-table-prefix').on('input', update_sample_table_names);
+
+update_sample_table_names();
 });
+
+function update_sample_table_names() {
+	var prefix = $('#db_table_prefix').val().trim();
+	if(prefix && prefix.substr(-1) != '_') {
+		prefix += '_';
+	}
+	var suffix = $('#db_table_suffix').val().trim();
+	if(suffix && suffix.substr(0,1) != '_') {
+		suffix = '_' + suffix;
+	}
+	var plugin = $('#db_table_plugin_prefix').val().trim();
+	if(plugin && plugin.substr(-1) != '_') {
+		plugin += '_';
+	}
+
+	$('#db_table_prefix_sample').val(prefix + '<CORE TABLE>' + suffix);
+	$('#db_table_plugin_prefix_sample').val(prefix + plugin + '<PLUGIN>_<TABLE>' + suffix);
+}

@@ -57,8 +57,7 @@ layout_page_header( lang_get( 'manage_threshold_config' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'adm_config_report.php' );
-
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
 $g_user = auth_get_current_user_id();
@@ -103,7 +102,7 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
-	echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
+	echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'allowed_access_levels' ) . '</th>';
 	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
 	echo '</tr><tr>';
 	foreach( $g_access_levels as $t_access_level => $t_access_label ) {

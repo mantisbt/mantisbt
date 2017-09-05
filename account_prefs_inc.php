@@ -98,6 +98,10 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 
 <div id="account-prefs-update-div" class="form-container">
 	<form id="account-prefs-update-form" method="post" action="account_prefs_update.php" class="form-inline">
+		<fieldset>
+			<?php echo form_security_field( 'account_prefs_update' ) ?>
+			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
+			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -111,11 +115,6 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	<div class="widget-main no-padding">
 	<div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
-
-		<fieldset>
-			<?php echo form_security_field( 'account_prefs_update' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
-			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 
 	<tr>
 		<td class="category">
@@ -385,30 +384,23 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		</td>
 	</tr>
 	<?php event_signal( 'EVENT_ACCOUNT_PREF_UPDATE_FORM', array( $p_user_id ) ); ?>
-	</fieldset>
 	</table>
 	</div>
 	</div>
 	<div class="widget-toolbox padding-8 clearfix">
 		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
-	</div>
-	</form>
-	</div>
-	</div>
-</div>
 
-<div class="space-10"></div>
-
-<div id="account-prefs-reset-div" class="form-container">
-	<form id="account-prefs-reset-form" method="post" action="account_prefs_reset.php">
-		<fieldset>
-			<?php echo form_security_field( 'account_prefs_reset' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
-			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+		<?php echo form_security_field( 'account_prefs_reset' ) ?>
+		<input type="submit" class="btn btn-primary btn-white btn-round"
+			   formaction="account_prefs_reset.php"
+			   value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	</div>
+	</div>
+	</div>
 		</fieldset>
 	</form>
 </div>
+
 </div>
 
 <?php

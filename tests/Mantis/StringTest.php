@@ -82,6 +82,7 @@ class MantisStringTest extends PHPUnit_Framework_TestCase {
 			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'),
 			array( 'login_page.php?return=http://google.com/', 'index.php'),
 			array( 'javascript:alert(1);', 'index.php'),
+			array( '\/csrf-22702', '%5C/csrf-22702' ),
 		);
 
 		# @FIXME

@@ -84,7 +84,7 @@ if( !config_can_set_in_database( $f_config_option ) ) {
 
 if( !config_can_delete( $f_config_option ) ) {
 	error_parameters( $f_config_option );
-	# @TODO define an error code for values that cant be set in DB, nor config_inc
+	# @TODO define an error code for values that can't be set in DB, nor config_inc
 	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
 }
 
@@ -134,7 +134,7 @@ if( $t_type != CONFIG_TYPE_STRING ) {
 	}
 }
 
-if( 'action_edit' === $f_edit_action ){
+if( MANAGE_CONFIG_ACTION_EDIT === $f_edit_action ){
 	# EDIT action doesn't keep original if key values are different.
 	if ( $f_original_config_option !== $f_config_option
 			|| $f_original_user_id !== $f_user_id

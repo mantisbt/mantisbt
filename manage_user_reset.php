@@ -64,7 +64,7 @@ access_ensure_global_level( $t_user['access_level'] );
 
 # If the password can be changed, we reset it, otherwise we unlock
 # the account (i.e. reset failed login count)
-$t_reset = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_reset = auth_can_set_password( $f_user_id );
 if( $t_reset ) {
 	$t_result = user_reset_password( $f_user_id );
 } else {

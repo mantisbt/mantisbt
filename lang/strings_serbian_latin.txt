@@ -39,6 +39,7 @@
  * @file
  *
  * @author Milicevic01
+ * @author Obsuser
  * @author Rancher
  * @author Сербијана
  */
@@ -282,7 +283,7 @@ $s_default_project = 'Podrazumevani projekat';
 $s_refresh_delay = 'Odlaganje osvežavanja';
 $s_minutes = 'min.';
 $s_redirect_delay = 'Kašnjenje pre preusmeravanja';
-$s_seconds = 'sek.';
+$s_seconds = 'sekundi';
 $s_with_minimum_severity = 'S najmanjom težinom od';
 $s_bugnote_order = 'Redosled razvrstavanja beleški';
 $s_bugnote_order_asc = 'Rastući';
@@ -451,7 +452,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Upozorenje:</strong> struktur
 $s_error_code_version_out_of_date = '<strong>Upozorenje:</strong> struktura baze podataka je novija od instaliranog koda. Dogradite kod.';
 $s_login_page_info = 'Dobro došli u sistem za praćenje problema.';
 $s_login_title = 'Prijava';
-$s_save_login = 'Zapamti lozinku na ovom pregledaču';
+$s_save_login = 'Ostavi me prijavljenim';
 $s_secure_session = 'Zaštićena sesija';
 $s_secure_session_long = 'Dozvoli pristup mojoj sesiji samo preko ove IP adrese.';
 $s_choose_project = 'Izaberite projekat';
@@ -936,7 +937,6 @@ $s_relationship_deleted = 'Odnos je obrisan';
 $s_no_relationship = 'nema odnosa';
 $s_relationship_replaced = 'Odnos je zamenjen';
 $s_replace_relationship_button = 'Zameni';
-$s_replace_relationship_sure_msg = 'Već postoji odnos između dva problema. Želite li da ga zamenite?';
 $s_relationship_with_parent = 'Odnos s nadređenim problemom';
 $s_delete_relationship_button = 'Obriši';
 $s_delete_relationship_sure_msg = 'Želite li da obrišete ovaj odnos?';
@@ -1179,7 +1179,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Pristup je odb
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Pokrovitelj nije naveo e-adresu. Ažurirajte svoj profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Postavka „%1$s“ ima neispravnu vrednost „%2$s“.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Radnja ne može da se izvrši jer je problem „%1$d“ zatvoren za uređivanje.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Već postoji odnos između ova dva problema.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Ne mogu da pronađem odnos.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Pristup je odbijen. Problem %1$d zahteva viši stepen pristupa.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Problem ne može biti povezan sam sa sobom.';

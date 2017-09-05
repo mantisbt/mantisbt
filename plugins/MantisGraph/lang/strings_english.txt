@@ -85,3 +85,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Year to Date';
 $s_plugin_MantisGraph_period_select = 'Arbitrary Dates';
 $s_plugin_MantisGraph_period_last_year = 'Last Year';
 $s_plugin_MantisGraph_graph_page = 'Graph Issue History';
+$s_plugin_MantisGraph_graph_topdev = 'Top Developers by Fixed Issues';
+$s_plugin_MantisGraph_graph_opendev = 'Developers by Open Issues';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Top Reporters by Fixed Issues';

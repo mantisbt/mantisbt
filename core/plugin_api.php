@@ -141,6 +141,22 @@ function plugin_page( $p_page, $p_redirect = false, $p_base_name = null ) {
 }
 
 /**
+ * Gets the route group (base path under '/api/rest', e.g. /plugins/Example
+ *
+ * @param string $p_base_name The basename for plugin or null for current plugin.
+ * @return string The route group path to use.
+ */
+function plugin_route_group( $p_base_name = null ) {
+	if( is_null( $p_base_name ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_base_name;
+	}
+
+	return '/plugins/' . $t_current;
+}
+
+/**
  * Return a path to a plugin file.
  * @param string $p_filename  File name.
  * @param string $p_base_name Plugin base name.

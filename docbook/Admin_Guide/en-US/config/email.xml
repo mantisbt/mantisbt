@@ -254,14 +254,14 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_limit_email_domain</term>
+			<term>$g_limit_email_domains</term>
 			<listitem>
-				<para>Only allow and send email to addresses in the given domain.
+				<para>Only allow and send email to addresses in the given domain(s).
 					This is useful as a security feature and it is also useful in cases
 					like Sourceforge where its servers are only limited to send emails
 					to SourceForge email addresses in order to avoid
-					spam. $g_limit_email_domain =
-					'users.sourceforge.net';
+					spam. $g_limit_email_domains =
+					array( 'users.sourceforge.net', 'sourceforge.net' );
 				</para>
 			</listitem>
 		</varlistentry>

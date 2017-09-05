@@ -49,7 +49,7 @@
  */
 
 $s_plugin_graph_title = 'Graphiques Mantis';
-$s_plugin_graph_description = 'Plugin de graphiques officiel.';
+$s_plugin_graph_description = 'Greffon graphique officiel.';
 $s_plugin_MantisGraph_title = 'Graphiques de Mantis';
 $s_plugin_MantisGraph_config = 'Configuration';
 $s_plugin_MantisGraph_synthesis_link = 'Synthèse';
@@ -90,3 +90,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Annuel cumulatif';
 $s_plugin_MantisGraph_period_select = 'Sélectionner les dates';
 $s_plugin_MantisGraph_period_last_year = 'L\'année dernière';
 $s_plugin_MantisGraph_graph_page = 'Afficher le graphique de l’historique';
+$s_plugin_MantisGraph_graph_topdev = 'Développeurs les plus actifs par sujet Corrigé';
+$s_plugin_MantisGraph_graph_opendev = 'Développeurs par sujet Ouvert';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Rapporteurs les plus actifs par sujet Corrigé';

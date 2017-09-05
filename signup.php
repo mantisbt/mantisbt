@@ -66,16 +66,14 @@ if( auth_is_user_authenticated() ) {
 }
 
 # Check to see if signup is allowed
-if( OFF == config_get_global( 'allow_signup' ) ) {
-	print_header_redirect( 'login_page.php' );
+if( !auth_signup_enabled() ) {
+	print_header_redirect( auth_login_page() );
 	exit;
 }
 
-if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
+if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 &&
 	helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
-	require_lib( 'securimage/securimage.php' );
-
 	$t_securimage = new Securimage();
 	if( $t_securimage->check( $f_captcha ) == false ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
@@ -128,7 +126,7 @@ layout_login_page_begin();
 
 							<br />
 							<div class="center">
-								<a class="width-40 btn btn-inverse bigger-110 btn-success" href="login_page.php">
+								<a class="width-40 btn btn-inverse bigger-110 btn-success" href="<?php echo AUTH_PAGE_USERNAME ?>">
 									<?php echo lang_get( 'proceed' ) ?>
 								</a>
 							</div>

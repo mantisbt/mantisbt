@@ -237,9 +237,7 @@ if( $t_show_attachments ) {
 <div class="col-md-12 col-xs-12">
 <form id="report_bug_form"
 	method="post" <?php echo $t_form_encoding; ?>
-	action="bug_report.php?posted=1"
-	class="dropzone-form"
-	<?php print_dropzone_form_data() ?>>
+	action="bug_report.php?posted=1">
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -595,8 +593,6 @@ if( $t_show_attachments ) {
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 
-			$t_required_class = $t_def['require_report'] ? 'class="required" ' : '';
-
 			if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) {
 				$t_label_for = 'for="custom_field_' . string_attribute( $t_def['id'] ) . '" ';
 			} else {
@@ -634,7 +630,7 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-			<div class="dropzone center">
+			<div class="dropzone center" <?php print_dropzone_form_data() ?>>
 				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
 				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
 				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>

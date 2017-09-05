@@ -696,7 +696,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Dostop zavrnje
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcija konfiguracije \'%1$s\' ima neveljavno vrednost \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Operacija ne more biti izvedena, ker je zadeva \'%1$d\' označena samo za branje';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'NAPAKA: Med tema dvema zadevama relacija že obstaja.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'NAPAKA: Nisem našel relacije.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Dostop zavrnjen: zadeva %1$d potrebuje višji nivo dostopa.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'NAPAKA: Zadeva ne more biti v relaciji sama s seboj.';

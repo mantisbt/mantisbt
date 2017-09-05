@@ -40,6 +40,7 @@
  *
  * @author DCLXVI
  * @author Emostoyanov
+ * @author StanProg
  * @author Svetoslav.dragoev
  * @author Vodnokon4e
  * @author АдмиралАнимЕ
@@ -55,15 +56,15 @@ $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По значимост';
 $s_plugin_MantisGraph_category_link = 'По категория';
 $s_plugin_MantisGraph_resolution_link = 'По разрешение';
-$s_plugin_MantisGraph_issue_trends_link = 'Най-активни задачи';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Синтез на диаграми по състояние';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтез на диаграми по приоритет';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Синтез на диаграми по значимост';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Синтез на диаграми по категории';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтез на диаграми по резолюции';
-$s_plugin_MantisGraph_graph_developer_title = 'Диаграма на разработките';
-$s_plugin_MantisGraph_graph_reporter_title = 'Диаграмма с докладами проблеми';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, затворени и останалите задачи';
+$s_plugin_MantisGraph_issue_trends_link = 'Статистика за проблеми';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Диаграма по състояние';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Диаграма по приоритет';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Диаграма по критичност';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Диаграма по категории';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Диаграма по решения';
+$s_plugin_MantisGraph_graph_developer_title = 'По графикони на разработчици';
+$s_plugin_MantisGraph_graph_reporter_title = 'По графикони за докладчици';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, решени и останали задачи';
 $s_plugin_MantisGraph_by_status_pct = 'По статут (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По значимост (%)';
@@ -87,3 +88,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Година до дата';
 $s_plugin_MantisGraph_period_select = 'Произволни дати';
 $s_plugin_MantisGraph_period_last_year = 'Последната година';
 $s_plugin_MantisGraph_graph_page = 'Хронология на графиките';
+$s_plugin_MantisGraph_graph_topdev = 'Най-добри разработчици по решени проблеми';
+$s_plugin_MantisGraph_graph_opendev = 'Разработчици по отворени проблеми';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Най-добри докладчици по решени проблеми';

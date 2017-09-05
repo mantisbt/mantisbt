@@ -165,7 +165,7 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 	}
 }
 
-# If resolving or closing, ensure that all dependant issues have been resolved.
+# If resolving or closing, ensure that all dependent issues have been resolved.
 if( ( $t_resolve_issue || $t_close_issue ) &&
 	!relationship_can_resolve_bug( $f_bug_id )
 ) {
@@ -327,12 +327,11 @@ if( $t_updated_bug->duplicate_id != 0 ) {
 	if( $t_updated_bug->duplicate_id == $f_bug_id ) {
 		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 	}
+
 	bug_ensure_exists( $t_updated_bug->duplicate_id );
+
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_updated_bug->duplicate_id ) ) {
 		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
-	}
-	if( relationship_exists( $f_bug_id, $t_updated_bug->duplicate_id ) ) {
-		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
 	}
 }
 
@@ -402,15 +401,16 @@ if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking 
 
 # Add a duplicate relationship if requested.
 if( $t_updated_bug->duplicate_id != 0 ) {
-	relationship_add( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE );
-	history_log_event_special( $f_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $t_updated_bug->duplicate_id );
-	history_log_event_special( $t_updated_bug->duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_bug_id );
+	relationship_upsert( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
+
 	if( user_exists( $t_existing_bug->reporter_id ) ) {
 		bug_monitor( $f_bug_id, $t_existing_bug->reporter_id );
 	}
+
 	if( user_exists( $t_existing_bug->handler_id ) ) {
 		bug_monitor( $f_bug_id, $t_existing_bug->handler_id );
 	}
+
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 

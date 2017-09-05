@@ -40,9 +40,11 @@
  *
  * @author Cyklopas
  * @author Eitvys200
+ * @author Nersip
  */
 
 $s_plugin_MantisGraph_config = 'Konfigūracija';
+$s_plugin_MantisGraph_synthesis_link = 'Sintezė';
 $s_plugin_MantisGraph_status_link = 'Pagal Būseną';
 $s_plugin_MantisGraph_priority_link = 'Pagal Prioritetą';
 $s_plugin_MantisGraph_severity_link = 'Pagal Sunkumą';
@@ -75,4 +77,6 @@ $s_plugin_MantisGraph_period_this_month = 'Šį mėnesį';
 $s_plugin_MantisGraph_period_last_month = 'Praeitą mėnesį';
 $s_plugin_MantisGraph_period_this_quarter = 'Šį ketvirtį';
 $s_plugin_MantisGraph_period_last_quarter = 'Praeitą ketvirtį';
+$s_plugin_MantisGraph_period_year_to_date = 'Nuo metų pradžios';
+$s_plugin_MantisGraph_period_select = 'Pasirinkta data';
 $s_plugin_MantisGraph_period_last_year = 'Praeitais metais';

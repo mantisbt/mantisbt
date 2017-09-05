@@ -36,11 +36,11 @@ require_api( 'history_api.php' );
  * error and exit the script.
  */
 function antispam_check() {
-	if( OFF == config_get_global( 'allow_signup' ) ) {
+	if( !auth_signup_enabled() ) {
 		return;
 	}
 
-	if( access_get_global_level() > config_get( 'default_new_account_access_level' ) ) {
+	if( access_get_global_level() > auth_signup_access_level() ) {
 		return;
 	}
 

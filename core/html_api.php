@@ -50,6 +50,7 @@
  * @uses user_api.php
  * @uses utility_api.php
  * @uses layout_api.php
+ * @uses api_token_api.php
  */
 
 require_api( 'access_api.php' );
@@ -76,6 +77,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'layout_api.php' );
+require_api( 'api_token_api.php' );
 
 $g_rss_feed_url = null;
 
@@ -638,9 +640,12 @@ function print_manage_menu( $p_page = '' ) {
 		echo '</li>' . "\n";
 	}
 
-	# Plugins menu items - these are cooked links
+	# Plugins menu items - these are html hyperlinks (<a> tags)
 	foreach( $t_menu_options as $t_menu_item ) {
-		echo '<li>', $t_menu_item, '</li>';
+		$t_active = $p_page && strpos( $t_menu_item, $p_page ) !== false
+			? ' class="active"'
+			: '';
+		echo "<li{$t_active}>", $t_menu_item, '</li>';
 	}
 
 	echo '</ul>' . "\n";
@@ -739,7 +744,9 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
 	}
 
-	$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
+	if( api_token_can_create() ) {
+		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
+	}
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
@@ -1577,7 +1584,7 @@ class TableFieldsItem {
 			$p_colspan = 1;
 		}
 		$this->colspan = $p_colspan;
-		$this->atr_class = $p_class;
+		$this->attr_class = $p_class;
 		$this->content_attr_id = $p_content_id;
 		$this->header_attr_id = $p_header_id;
 	}

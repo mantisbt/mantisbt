@@ -18,13 +18,6 @@
  * Language File - English (English)
  *
  * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
@@ -112,6 +105,8 @@ $s_excel_export = 'Excel Export';
 $s_login_anonymously = 'Login Anonymously';
 $s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Jump to Notes';
+$s_jump_to_history = 'Jump to History';
+$s_display_history = 'Display History';
 $s_public_project_msg = 'This project is public. All users have access.';
 $s_private_project_msg = 'This project is private. Only administrators and manually added users have access.';
 $s_access_level_project = 'Project Access Level';
@@ -322,6 +317,7 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %1$s has been RESOLVED.';
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %1$s has been CLOSED.';
+$s_email_notification_title_for_action_related_issue_deleted = 'The RELATED issue %1$s has been DELETED.';
 $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by user %2$s.';
 
 $s_email_reporter = 'Reported By';
@@ -537,7 +533,7 @@ $s_bugnote_add_resolve_button = 'Add Note';
 $s_from = 'From';
 $s_to = 'To';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
+$s_bug_reminder = 'Send a Reminder';
 $s_reminder_sent_to = 'Reminder sent to';
 $s_reminder_sent_none = 'No reminders could be sent';
 $s_reminder_list_truncated = 'recipients list truncated';
@@ -662,19 +658,19 @@ $s_click_to_login = 'Login';
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
-$s_warning_admin_directory_present = '<strong>Warning:</strong> Admin directory should be removed.';
+$s_warning_admin_directory_present = '<strong>Warning:</strong> "admin" directory should be removed, or access to it restricted.';
 $s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its default value (%2$s).';
 $s_warning_security_hazard = 'This is a potential security hazard as it can expose sensitive information.';
 $s_warning_integrity_hazard = 'This will cause MantisBT to continue when errors occurs and may lead to system/data integrity issues.';
 $s_warning_debug_email = '<strong>Warning:</strong> "<code>debug_email</code>" is not set to <code>OFF</code>, all notification e-mails will be sent to "%1$s".';
-$s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0) or corrupt. Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
+$s_error_database_no_schema_version = '<strong>Error:</strong> Your Database schema version is 0. This can happen either because the database is corrupt or the value of "database_version" could not be retrieved from the config table or the database structure is from an outdated version of MantisBT (pre 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.';
-$s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more up-to-date than the code installed. Please upgrade the code.';
+$s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more recent than the installed code. Please upgrade the code.';
 
 # login_page.php
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Remember my login in this browser';
+$s_save_login = 'Keep me logged in';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
@@ -682,6 +678,7 @@ $s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';
 $s_lost_password_link = 'Lost your password?';
 $s_username_or_email = 'Username or email address';
+$s_enter_password = 'Enter password for \'%s\'';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Select Project';
@@ -770,6 +767,7 @@ $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
 $s_category_assigned_to = 'Category Owner';
+$s_email_notify_users = 'Any user with access level';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
@@ -806,6 +804,7 @@ $s_access_change_access_label = 'Who can change access levels:';
 $s_default_not_in_flow = 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.';
 
 # manage_config_work_threshold_page
+$s_allowed_access_levels = 'Allowed for any user with access level';
 $s_assign_issue = 'Assign an issue';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
@@ -968,7 +967,7 @@ $s_account_deleted_msg = 'Account deleted...';
 $s_delete_account_sure_msg = 'Are you sure you wish to delete this account?';
 
 # manage_user_edit_page.php
-$s_notify_user = 'Notify User';
+$s_notify_user = 'Notify user of this change';
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
@@ -1384,7 +1383,6 @@ $s_relationship_deleted = 'Relationship deleted';
 $s_no_relationship = 'no relationship';
 $s_relationship_replaced = 'Relationship replaced';
 $s_replace_relationship_button = 'Replace';
-$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
 $s_relationship_with_parent = 'Relationship with the parent issue';
 $s_delete_relationship_button = 'Delete';
 $s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
@@ -1465,7 +1463,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
-$s_email_on_updated = 'Email on Updated';
+$s_email_on_updated = 'E-mail on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';
@@ -1702,7 +1700,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option "%1$s" has invalid value "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue "%1$d" is read-only.';
 $MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %1$d requires higher access level.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';

@@ -183,21 +183,16 @@ layout_page_begin();
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
-		<thead>
 
 <?php
 # Submit Button
 if( $t_top_buttons_enabled ) {
 ?>
-				<tr>
-					<td class="center" colspan="6">
-						<input <?php helper_get_tab_index(); ?>
-							type="submit" class="button"
-							value="<?php echo lang_get( 'update_information_button' ); ?>" />
-					</td>
-				</tr>
-			</thead>
-
+				<div class="widget-toolbox padding-8 clearfix">
+					<input <?php helper_get_tab_index(); ?>
+						type="submit" class="btn btn-primary btn-white btn-round"
+						value="<?php echo lang_get( 'update_information_button' ); ?>" />
+				</div>
 <?php
 }
 ?>
@@ -269,13 +264,13 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 }
 
 #
-# Reporter
+# Reporter, Assigned To, Due Date
 #
 
-if( $t_show_reporter ) {
+if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	echo '<tr>';
 
-	$t_spacer = 4;
+	$t_spacer = 0;
 
 	if( $t_show_reporter ) {
 		# Reporter
@@ -285,7 +280,7 @@ if( $t_show_reporter ) {
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( ON == config_get( 'limit_reporters' )
-		&&  !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) ) + 1, $t_bug->project_id )
+			&&  !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) ) + 1, $t_bug->project_id )
 		) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
@@ -302,21 +297,6 @@ if( $t_show_reporter ) {
 	} else {
 		$t_spacer += 2;
 	}
-
-	# spacer
-	echo '<td colspan="', $t_spacer, '">&#160;</td>';
-
-	echo '</tr>';
-}
-
-#
-# Assigned To, Due Date
-#
-
-if( $t_show_handler || $t_show_due_date ) {
-	echo '<tr>';
-
-	$t_spacer = 0;
 
 	if ( $t_show_handler ) {
 		# Assigned To
@@ -355,7 +335,7 @@ if( $t_show_handler || $t_show_due_date ) {
 			}
 			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'" maxlength="16" value="' . $t_date_to_display . '" />';
+				'maxlength="16" value="' . $t_date_to_display . '" />';
 			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {

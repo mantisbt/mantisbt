@@ -51,6 +51,7 @@ $s_plugin_MantisGraph_priority_link = 'Per prioritat';
 $s_plugin_MantisGraph_severity_link = 'Per gravetat';
 $s_plugin_MantisGraph_category_link = 'Per categoria';
 $s_plugin_MantisGraph_resolution_link = 'Per resolucion';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendéncias dels problèmas';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Per grafics d\'estat';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Per grafics de prioritat';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Per grafics de gravetat';

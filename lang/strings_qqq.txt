@@ -50,6 +50,7 @@
  * @author Liuxinyu970226
  * @author Lloffiwr
  * @author M42
+ * @author Mazab IZW
  * @author McDutchie
  * @author Nike
  * @author Noe
@@ -62,6 +63,7 @@
  * @author SkyDaisy9
  * @author Umherirrender
  * @author Vincent
+ * @author Vuh
  * @author Waldir
  */
 
@@ -227,7 +229,7 @@ $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
 $s_click_to_login = '{{Identical|Login}}';
 $s_login_title = '{{Identical|Login}}';
-$s_save_login = '{{Identical|Remember my login on this computer}}';
+$s_save_login = '';
 $s_login_button = '{{Identical|Login}}';
 $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';
@@ -441,6 +443,7 @@ $s_filters = '{{Identical|Filter}}';
 $s_create_project = '{{Identical|Create project}}';
 $s_others = '{{Identical|Other}}';
 $s_email_notification = '{{Identical|Email notification}}';
+$s_email_on_updated = 'E-mail on Updated';
 $s_loading = '{{Identical|Loading}}';
 $s_between_date = '{{Identical|Between}}';
 $s_before_date = '{{Identical|Before}}';

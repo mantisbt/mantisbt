@@ -41,6 +41,7 @@
  * @author Charmed94
  * @author Macofe
  * @author Milicevic01
+ * @author Obsuser
  * @author Rancher
  * @author Srdjan m
  * @author Милан Јелисавчић
@@ -297,7 +298,7 @@ $s_default_project = 'Подразумевани пројекат';
 $s_refresh_delay = 'Одлагање освежавања';
 $s_minutes = 'мин.';
 $s_redirect_delay = 'Кашњење пре преусмеравања';
-$s_seconds = 'сек.';
+$s_seconds = 'секунди';
 $s_with_minimum_severity = 'С најмањом тежином од';
 $s_bugnote_order = 'Редослед разврставања белешки';
 $s_bugnote_order_asc = 'Растући';
@@ -472,13 +473,14 @@ $s_error_database_version_out_of_date_2 = '<strong>Упозорење:</strong> 
 $s_error_code_version_out_of_date = '<strong>Упозорење:</strong> структура базе података је новија од инсталираног кода. Доградите код.';
 $s_login_page_info = 'Добро дошли у систем за праћење проблема.';
 $s_login_title = 'Пријава';
-$s_save_login = 'Запамти лозинку на овом прегледачу';
+$s_save_login = 'Остави ме пријављеним';
 $s_secure_session = 'Заштићена сесија';
 $s_secure_session_long = 'Дозволи приступ мојој сесији само преко ове ИП адресе.';
 $s_choose_project = 'Изаберите пројекат';
 $s_login_button = 'Пријави ме';
 $s_signup_link = 'Отвори нови налог';
 $s_lost_password_link = 'Заборавили сте лозинку?';
+$s_enter_password = 'Унос лозинке за \'%s\'';
 $s_select_project_button = 'Изабери пројекат';
 $s_lost_password_title = 'Обнављање лозинке';
 $s_lost_password_done_title = 'Порука о лозинци је послата';
@@ -543,6 +545,7 @@ $s_colour_global = 'Све поставке пројекта имају већу
 $s_issue_reporter = 'Корисник који је пријавио проблем';
 $s_issue_handler = 'Корисник који се занима за овај проблем';
 $s_users_added_bugnote = 'Корисници који су додали белешке о проблему';
+$s_email_notify_users = 'Било који корисник са нивоом приступа';
 $s_change_configuration = 'Ажурирање поставки';
 $s_message = 'Порука';
 $s_default_notify = 'Постављање подразумеваних обавештајних ознака на';
@@ -571,6 +574,7 @@ $s_desc_bug_reopen_status = 'Стање на које је назначен по
 $s_desc_bug_resolved_status_threshold = 'Стање где се проблем сматра решеним';
 $s_desc_bug_closed_status_threshold = 'Стање где се проблем сматра затвореним';
 $s_default_not_in_flow = 'Подразумевано стање %1$s није изабрано у следећим стањима за %2$s. Због тога ће бити занемарено.';
+$s_allowed_access_levels = 'Дозвољено за било којег корисника са нивоом приступа';
 $s_assign_issue = 'Додели проблем';
 $s_allow_reporter_close = 'Дозволи известиоцу да затвори проблем';
 $s_allow_reporter_reopen = 'Дозволи известиоцу да поново отвори проблем';
@@ -968,7 +972,6 @@ $s_relationship_deleted = 'Однос је обрисан';
 $s_no_relationship = 'нема односа';
 $s_relationship_replaced = 'Однос је замењен';
 $s_replace_relationship_button = 'Замени';
-$s_replace_relationship_sure_msg = 'Већ постоји однос између два проблема. Желите ли да га замените?';
 $s_relationship_with_parent = 'Однос с надређеним проблемом';
 $s_delete_relationship_button = 'Обриши';
 $s_delete_relationship_sure_msg = 'Желите ли да обришете овај однос?';
@@ -1216,7 +1219,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Приступ
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Покровитељ није навео е-адресу. Ажурирајте свој профил.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Поставка „%1$s“ има неисправну вредност „%2$s“.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Радња не може да се изврши јер је проблем „%1$d“ затворен за уређивање.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Већ постоји однос између ова два проблема.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Не могу да пронађем однос.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Приступ је одбијен. Проблем %1$d захтева виши степен приступа.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Проблем не може бити повезан сам са собом.';

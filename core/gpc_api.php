@@ -360,7 +360,7 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  * @todo this function is to be modified by Victor to add CRC... for now it just passes the parameters through to setcookie()
  * @param string  $p_name     Cookie name to set.
  * @param string  $p_value    Cookie value to set.
- * @param boolean $p_expire   Cookie Expiry - default is false.
+ * @param boolean|integer $p_expire true: current browser session, false/0: cookie_time_length, otherwise: expiry time.
  * @param string  $p_path     Cookie Path - default cookie_path configuration variable.
  * @param string  $p_domain   Cookie Domain - default is cookie_domain configuration variable.
  * @param boolean $p_httponly Default true.
@@ -368,15 +368,18 @@ function gpc_get_cookie( $p_var_name, $p_default = null ) {
  */
 function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $p_domain = null, $p_httponly = true ) {
 	global $g_cookie_secure_flag_enabled;
+
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	} else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
+
 	if( null === $p_path ) {
 		$p_path = config_get( 'cookie_path' );
 	}
+
 	if( null === $p_domain ) {
 		$p_domain = config_get( 'cookie_domain' );
 	}
@@ -403,7 +406,7 @@ function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 		unset( $_COOKIE[$p_name] );
 	}
 
-	# dont try to send cookie if headers are send (guideweb)
+	# don't try to send cookie if headers are send (guideweb)
 	if( !headers_sent() ) {
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	} else {

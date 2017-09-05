@@ -899,7 +899,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Dä Schponser hät kein Add
 <i lang="en" xml:lang="en" dir="ltr" title="„de eläktrohnesche Poß“">e-mail</i> aanjejovve. Beß esu johd un donn Ding Profihl aanpaße.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'För di Enshtellung „%1$s“ es dä onjöltijje Wäät „%2$s“ ußjesöhk.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Di Aanjelääjeheit „%1$d“ es bloß för ze Lässe, dröm jeiht dat nit ze maache.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Di zwei Aanjelääjeheite han ald ene Bezoch.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Dä Bezoch wood nit jefonge.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Keine Zohjang: Di Aanjelääjeheit bruch e hüüter Nivoh för der Zohjang.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En Aanjelääjeheit kam_mer nit op sech sellver betrecke.';

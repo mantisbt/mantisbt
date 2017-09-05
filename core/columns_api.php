@@ -200,8 +200,7 @@ function columns_get_custom_fields() {
 	$t_all_cfids = custom_field_get_ids();
 	$t_col_names = array();
 	foreach( $t_all_cfids as $t_id ) {
-		$t_def = custom_field_get_definition( $t_id );
-		$t_col_names[] = 'custom_' . $t_def['name'];
+		$t_col_names[] = column_get_custom_field_column_name( $t_id );
 	}
 	return $t_col_names;
 }
@@ -322,6 +321,10 @@ function column_is_sortable( $p_column ) {
 		case 'attachment_count':
 		case 'tags':
 		case 'overdue':
+		case 'additional_information':
+		case 'description':
+		case 'notes':
+		case 'steps_to_reproduce':
 			return false;
 	}
 
@@ -344,6 +347,21 @@ function column_get_custom_field_name( $p_column ) {
 	}
 
 	return null;
+}
+
+/**
+ * Returns the name of a column corresponding to a custom field, providing the id as parameter.
+ *
+ * @param integer $p_cf_id	Custom field id
+ * @return string	The column name
+ */
+function column_get_custom_field_column_name( $p_cf_id ) {
+	$t_def = custom_field_get_definition( $p_cf_id );
+	if( $t_def ) {
+		return 'custom_' . $t_def['name'];
+	} else {
+		return null;
+	}
 }
 
 /**

@@ -31,7 +31,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_STRING] = array (
 	'#function_value_to_database' => 'db_mysql_fix_utf8',
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
-	'#function_string_value' => null,
+	'#function_print_value' => null,
+	'#function_string_value' => 'cfdef_prepare_string',
 	'#function_string_value_for_email' => null,
 );
 
@@ -46,7 +47,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_TEXTAREA] = array (
 	'#function_value_to_database' => 'db_mysql_fix_utf8',
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textarea',
-	'#function_string_value' => null,
+	'#function_print_value' => 'cfdef_print_textarea',
+	'#function_string_value' => 'cfdef_prepare_string',
 	'#function_string_value_for_email' => null,
 );
 
@@ -60,7 +62,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_NUMERIC] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
-	'#function_string_value' => null,
+	'#function_print_value' => 'cfdef_print_numeric',
+	'#function_string_value' => 'cfdef_prepare_numeric',
 	'#function_string_value_for_email' => null,
 );
 
@@ -74,7 +77,8 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_FLOAT] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
-	'#function_string_value' => null,
+	'#function_print_value' => 'cfdef_print_float',
+	'#function_string_value' => 'cfdef_prepare_float',
 	'#function_string_value_for_email' => null,
 );
 
@@ -88,6 +92,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_ENUM] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_list',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 );
@@ -102,6 +107,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_EMAIL] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_textbox',
+	'#function_print_value' => 'cfdef_print_email_value',
 	'#function_string_value' => 'cfdef_prepare_email_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_email_value_for_email',
 );
@@ -116,6 +122,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_CHECKBOX] = array (
 	'#function_value_to_database' => 'cfdef_prepare_list_value_to_database',
 	'#function_database_to_value' => 'cfdef_prepare_list_database_to_value',
 	'#function_print_input' => 'cfdef_input_checkbox',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 );
@@ -130,6 +137,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_RADIO] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_radio',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 );
@@ -144,6 +152,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_LIST] = array (
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
 	'#function_print_input' => 'cfdef_input_list',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 );
@@ -158,6 +167,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_MULTILIST] = array (
 	'#function_value_to_database' => 'cfdef_prepare_list_value_to_database',
 	'#function_database_to_value' => 'cfdef_prepare_list_database_to_value',
 	'#function_print_input' => 'cfdef_input_list',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
 );
@@ -173,6 +183,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_DATE] = array (
 	'#function_database_to_value' => null,
 	'#function_default_to_value' => 'cfdef_prepare_date_default',
 	'#function_print_input' => 'cfdef_input_date',
+	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_date_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_date_value_for_email',
 );
@@ -187,6 +198,59 @@ function cfdef_prepare_list_database_to_value( $p_value ) {
 }
 
 /**
+ * Print value of text area custom field with sanitization and link processing.
+ * @param string $p_value The custom field value.
+ */
+function cfdef_print_textarea( $p_value ) {
+	echo string_display_links( $p_value );
+}
+
+/**
+ * Print value of numeric custom field with sanitization and link processing.
+ * @param string $p_value The custom field value.
+ */
+function cfdef_print_numeric( $p_value ) {
+	echo (int)$p_value;
+}
+
+/**
+ * Print value of float custom field with sanitization and link processing.
+ * @param string $p_value The custom field value.
+ */
+function cfdef_print_float( $p_value ) {
+	echo (float)$p_value;
+}
+
+/**
+ * Prepare value for custom fields of type numeric.
+ * @param string $p_value The string value.
+ * @return int The numeric value.
+ */
+function cfdef_prepare_numeric( $p_value ) {
+	$t_value = (int)$p_value;
+	return $t_value;
+}
+
+/**
+ * Prepare value for custom fields of type float.
+ * @param string $p_value The string value.
+ * @return float The float value.
+ */
+function cfdef_prepare_float( $p_value ) {
+	$t_value = (float)$p_value;
+	return $t_value;
+}
+
+/**
+ * Prepare value for custom fields of type string.
+ * @param string $p_value The string value.
+ * @return string The string value.
+ */
+function cfdef_prepare_string( $p_value ) {
+	return $p_value;
+}
+
+/**
  * Prepare List Value for email
  * @param string $p_value Value.
  * @return string
@@ -197,12 +261,23 @@ function cfdef_prepare_list_value_for_email( $p_value ) {
 }
 
 /**
- * Format email address for email
- * @param string $p_value Value.
- * @return string
+ * Print the value of the email custom field.
+ * @param string $p_value The database value
+ * @return void
+ */
+function cfdef_print_email_value( $p_value ) {
+	if( !is_blank( $p_value ) ) {
+		echo '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
+	}
+}
+
+/**
+ * Format email address for text email
+ * @param string $p_value The database value.
+ * @return string The plain text value
  */
 function cfdef_prepare_email_value_for_email( $p_value ) {
-	return 'mailto:' . $p_value;
+	return is_null( $p_value ) ? '' : $p_value;
 }
 
 /**
@@ -257,12 +332,12 @@ function cfdef_prepare_list_value( $p_value ) {
 }
 
 /**
- * Prepare email value
- * @param string $p_value Email address.
- * @return string
+ * Get the value for the email custom field.
+ * @param string $p_value The database value
+ * @return string The email value.
  */
 function cfdef_prepare_email_value( $p_value ) {
-	return '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
+	return $p_value;
 }
 
 /**

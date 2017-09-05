@@ -195,18 +195,6 @@ print_manage_menu( 'manage_user_page.php' );
 					</label>
 				</td>
 			</tr>
-			<?php
-			if( config_get( 'enable_email_notification' ) == ON ) { ?>
-				<tr>
-					<td class="category"> <?php echo lang_get( 'notify_user' ) ?> </td>
-					<td>
-						<label>
-							<input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked" ?>
-							<span class="lbl"></span>
-						</label>
-					</td>
-				</tr>
-			<?php } ?>
 
 			<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
 
@@ -219,6 +207,14 @@ print_manage_menu( 'manage_user_page.php' );
 
 		<div class="widget-toolbox padding-8 clearfix">
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+			<?php
+			if( config_get( 'enable_email_notification' ) == ON ) { ?>
+				&nbsp;
+				<label class="inline">
+					<input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked">
+					<span class="lbl"> <?php echo lang_get( 'notify_user' ) ?></span>
+				</label>
+			<?php } ?>
 		</div>
 		</div>
 		</div>
@@ -229,7 +225,7 @@ print_manage_menu( 'manage_user_page.php' );
 # User action buttons: RESET/UNLOCK and DELETE
 
 $t_reset = $t_user['id'] != auth_get_current_user_id()
-	&& helper_call_custom_function( 'auth_can_change_password', array() )
+	&& auth_can_set_password( $t_user['id'] )
 	&& user_is_enabled( $t_user['id'] )
 	&& !user_is_protected( $t_user['id'] );
 $t_unlock = OFF != config_get( 'max_failed_login_count' ) && $t_user['failed_login_count'] > 0;
@@ -311,7 +307,7 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-<i class="ace-icon fa fa-user"></i>
+<i class="ace-icon fa fa-puzzle-piece"></i>
 <?php echo lang_get('add_user_title') ?>
 </h4>
 </div>

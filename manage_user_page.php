@@ -170,7 +170,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	} else {
 		$t_title = '';
 	}
-	$t_active = $t_prefix === $f_filter ? 'active' : '';
+	$t_active = (string)$t_prefix === $f_filter ? 'active' : '';
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
@@ -272,7 +272,7 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
 			<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 			<input type="hidden" name="save" value="1" />
-			<input type="hidden" name="filter" value="<?php echo $f_filter ?>" />
+			<input type="hidden" name="filter" value="<?php echo string_attribute( $f_filter ); ?>" />
 			<label class="inline">
 			<input type="checkbox" class="ace" name="hideinactive" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_inactive, ON ); ?> />
 			<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>

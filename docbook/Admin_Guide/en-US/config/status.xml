@@ -100,7 +100,7 @@
 			<listitem>
 				<para>Threshold resolution which denotes that a bug has
 					been resolved and successfully fixed by developers.
-					Resolutions above this threshold and below
+					Resolutions above and including this threshold and below
 					$g_bug_resolution_not_fixed_threshold are considered
 					to be resolved successfully. Default value is FIXED.
 				</para>

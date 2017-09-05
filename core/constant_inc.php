@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.2.0-dev' );
+define( 'MANTIS_VERSION', '2.6.0' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -368,7 +368,7 @@ define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW', 1704 );
 define( 'ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL', 1705 );
 
 # ERROR RELATIONSHIP
-define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );
+define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );  # TODO: remove once no longer used in lang files
 define( 'ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW', 1801 );
 define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
 define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
@@ -545,7 +545,7 @@ define( 'LOG_NONE', 0 );            # no logging
 define( 'LOG_EMAIL', 1 );           # all emails sent
 define( 'LOG_EMAIL_RECIPIENT', 2 ); # details of email recipient determination
 define( 'LOG_FILTERING', 4 );       # logging for filtering.
-define( 'LOG_AJAX', 8 );            # logging for AJAX / XmlHttpRequests
+define( 'LOG_AJAX', 8 );            # logging for AJAX
 define( 'LOG_LDAP', 16 );           # logging for LDAP
 define( 'LOG_DATABASE', 32 );       # logging for Database
 define( 'LOG_WEBSERVICE', 64 );     # logging for Web Service Requests
@@ -600,6 +600,10 @@ define( 'SECONDS_PER_DAY', 86400 );
 define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 
+# Auth Related Constants
+define( 'AUTH_COOKIE_LENGTH', 64 );
+define( 'API_TOKEN_LENGTH', 32 );
+
 # Obsolete / deprecated constants
 # Defined below for backwards-compatibility purposes -- Do not use them
 #        Constant                                   # Replaced by
@@ -622,8 +626,8 @@ define( 'FONT_AWESOME_VERSION', '4.6.3' );
 # Moment & DateTimePicker
 define( 'MOMENT_VERSION', '2.15.2' );
 define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
-define( 'DATETIME_PICKER_VERSION', '4.17.43' );
-define( 'DATETIME_PICKER_HASH', 'sha256-I8vGZkA2jL0PptxyJBvewDVqNXcgIhcgeqi+GD/aw34=' );
+define( 'DATETIME_PICKER_VERSION', '4.17.47' );
+define( 'DATETIME_PICKER_HASH', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
 
 # Chart JS
 define( 'CHARTJS_VERSION', '2.1.6' );
@@ -651,7 +655,51 @@ define( 'EXPORT_BLOCK_SIZE', 500 );
 
 # Maximum "safe" value to be used for integer fields in database.
 # Note: mantis ids are defined in schema as "I UNSIGNED", which Adodb maps to
-# the closest integer (4 bytes) type available. As some DBs dont support unsigned
+# the closest integer (4 bytes) type available. As some DBs don't support unsigned
 # types, 2^31 is a safe limit to be used for all.
 define( 'DB_MAX_INT', 2147483647 );
 
+# HTTP Status Codes
+define( 'HTTP_STATUS_SUCCESS', 200 );
+define( 'HTTP_STATUS_CREATED', 201 );
+define( 'HTTP_STATUS_NO_CONTENT', 204 );
+define( 'HTTP_STATUS_BAD_REQUEST', 400 );
+define( 'HTTP_STATUS_UNAUTHORIZED', 401 );
+define( 'HTTP_STATUS_FORBIDDEN', 403 );
+define( 'HTTP_STATUS_NOT_FOUND', 404 );
+define( 'HTTP_STATUS_CONFLICT', 409 );
+define( 'HTTP_STATUS_INTERNAL_SERVER_ERROR', 500 );
+define( 'HTTP_STATUS_UNAVAILABLE', 503 );
+
+# HTTP HEADERS
+define( 'HEADER_AUTHORIZATION', 'Authorization' );
+define( 'HEADER_LOGIN_METHOD', 'X-Mantis-LoginMethod' );
+define( 'HEADER_USERNAME', 'X-Mantis-Username' );
+define( 'HEADER_VERSION', 'X-Mantis-Version' );
+
+# LOGIN METHODS
+define( 'LOGIN_METHOD_COOKIE', 'cookie' );
+define( 'LOGIN_METHOD_API_TOKEN', 'api-token' );
+define( 'LOGIN_METHOD_ANONYMOUS', 'anonymous' );
+
+# AUTH PAGES
+define( 'AUTH_PAGE_USERNAME', 'login_page.php' );
+define( 'AUTH_PAGE_CREDENTIAL', 'login_password_page.php' );
+
+# SLIM FRAMEWORK ATTRIBUTES
+define( 'ATTRIBUTE_FORCE_API_ENABLED', 'force_enable_api' );
+
+# Default parent pages for sub-menu items
+define( 'PAGE_CONFIG_DEFAULT', 'adm_permissions_report.php' );
+
+# Configuration management actions (adm_config_report.php)
+define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
+define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
+define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
+
+# Databse functional type identifiers.
+define( 'DB_TYPE_UNDEFINED', 0 );
+define( 'DB_TYPE_MYSQL', 1 );
+define( 'DB_TYPE_PGSQL', 2 );
+define( 'DB_TYPE_MSSQL', 3 );
+define( 'DB_TYPE_ORACLE', 4 );

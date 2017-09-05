@@ -236,21 +236,6 @@ if( $f_master_bug_id > 0 ) {
 	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-	if( $f_rel_type > BUG_REL_ANY ) {
-		# Add the relationship
-		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
-
-		# Add log line to the history (both issues)
-		history_log_event_special( $f_master_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $t_bug_id );
-		history_log_event_special( $t_bug_id, BUG_ADD_RELATIONSHIP, $f_rel_type, $f_master_bug_id );
-
-		# Send the email notification
-		email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
-
-		# update relationship target bug last updated
-		bug_update_date( $t_bug_id );
-	}
-
 	# copy notes from parent
 	if( $f_copy_notes_from_parent ) {
 
@@ -282,13 +267,6 @@ if( $f_master_bug_id > 0 ) {
 	}
 }
 
-helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
-
-# Allow plugins to post-process bug data with the new bug ID
-event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
-
-email_bug_added( $t_bug_id );
-
 # log status and resolution changes if they differ from the default
 if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
 	history_log_event( $t_bug_id, 'status', config_get( 'bug_submit_status' ) );
@@ -296,6 +274,17 @@ if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
 
 if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
 	history_log_event( $t_bug_id, 'resolution', config_get( 'default_bug_resolution' ) );
+}
+
+helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
+
+# Allow plugins to post-process bug data with the new bug ID
+event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
+
+email_bug_added( $t_bug_id );
+
+if( $f_master_bug_id > 0 && $f_rel_type > BUG_REL_ANY ) {
+	relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type, /* email for source */ false );
 }
 
 form_security_purge( 'bug_report' );

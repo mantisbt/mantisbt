@@ -104,7 +104,7 @@ $u_email = user_get_email( $u_id );
 # If the password is the default password, then prompt user to change it.
 $t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );
 
-$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
+$t_can_change_password = auth_can_set_password();
 $t_force_pw_reset = false;
 
 # Only show the update button if there is something to update.
@@ -162,7 +162,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo lang_get( 'password' ) ?>
 				</td>
 				<td>
-					<?php echo lang_get( 'no_password_change' ) ?>
+					<?php echo auth_password_managed_elsewhere_message() ?>
 				</td>
 			</tr><?php
 			} else {
@@ -258,27 +258,6 @@ print_account_menu( 'account_page.php' );
 					<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?>
 				</td>
 			</tr>
-			<?php
-			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
-			if( count( $t_projects ) > 0 ) {
-				echo '<tr>';
-				echo '<td class="category">' . lang_get( 'assigned_projects' ) . '</td>';
-				echo '<td>';
-				foreach( $t_projects AS $t_project_id=>$t_project ) {
-					$t_project_name = string_attribute( $t_project['name'] );
-					$t_view_state = $t_project['view_state'];
-					$t_access_level = $t_project['access_level'];
-					$t_access_level = get_enum_element( 'access_levels', $t_access_level );
-					$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
-
-					echo '<div class="col-md-3 col-xs-6 no-padding">' . $t_project_name . '</div> <div class="col-md-9 col-xs-6"><span class="label label-default">' . $t_access_level . '</span><span class="bold padding-left-4">' . $t_view_state . '</span></div>';
-					echo '<div class="clearfix"></div>';
-					echo '<div class="space-4"></div>';
-				}
-				echo '</td>';
-				echo '</tr>';
-			}
-			?>
 				</fieldset>
 			</table>
 		</div>
@@ -293,6 +272,52 @@ print_account_menu( 'account_page.php' );
 	<?php } ?>
 	</div>
 </div>
+
+<?php
+$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
+if( !empty( $t_projects ) ) {
+?>
+	<div class="space-10"></div>
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php echo lang_get( 'assigned_projects' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						<thead>
+							<tr>
+								<th><?php echo lang_get( 'name' ) ?></th>
+								<th><?php echo lang_get( 'access_level' ) ?></th>
+								<th><?php echo lang_get( 'view_status' ) ?></th>
+								<th><?php echo lang_get( 'description' ) ?></th>
+							</tr>
+						</thead>
+						<?php
+						foreach( $t_projects as $t_project_id => $t_project ) {
+							$t_project_name = string_attribute( $t_project['name'] );
+							$t_access_level = get_enum_element( 'access_levels', $t_project['access_level'] );
+							$t_view_state = get_enum_element( 'project_view_state', $t_project['view_state'] );
+							$t_description = string_display_links( project_get_field( $t_project_id, 'description' ) );
+							echo '<tr>';
+							echo '<td>' . $t_project_name . '</td>';
+							echo '<td>' . $t_access_level . '</td>';
+							echo '<td>' . $t_view_state . '</td>';
+							echo '<td>' . $t_description . '</td>';
+							echo '</tr>';
+						}
+						?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
 
 	</form>
 </div>

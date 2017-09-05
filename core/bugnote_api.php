@@ -477,6 +477,12 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 			# If the access level specified is not enough to see time tracking information
 			# then reset it to 0.
 			if( !$t_time_tracking_visible ) {
+				# If the time tracking is the only data in the note, then skip it.
+				if( is_blank( $t_bugnote->note ) ) {
+					continue;
+				}
+
+				# otherwise, don't return the time tracking information so that it is not visible.
 				$t_bugnote->time_tracking = 0;
 			}
 
@@ -528,7 +534,9 @@ function bugnote_get_all_visible_as_string( $p_bug_id, $p_user_bugnote_order, $p
 		$t_note_string .= "\n" . $t_note->note . "\n";
 
 		if ( !empty( $t_output ) ) {
-			$t_output .= "---\n";
+			# Use a marker that doesn't confuse markdown parser.
+			# `---` or `===` would mark previous line as a header.
+			$t_output .= "=-=\n";
 		}
 
 		$t_output .= $t_note_string;

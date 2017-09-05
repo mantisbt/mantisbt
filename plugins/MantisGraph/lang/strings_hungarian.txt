@@ -40,6 +40,7 @@
  *
  * @author Dj
  * @author Glanthor Reviol
+ * @author MeskoBalazs
  */
 
 $s_plugin_graph_title = 'Mantis diagramok';
@@ -57,9 +58,9 @@ $s_plugin_MantisGraph_graph_imp_status_title = 'Összesítő grafikon állapot a
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Összesítő grafikon prioritás alapján';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Összesítő grafikon súlyosság alapján';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Összesítő grafikon kategória alapján';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Összesítő grafikon döntés alapján';
-$s_plugin_MantisGraph_graph_developer_title = 'Fejlesztő diagram szerint';
-$s_plugin_MantisGraph_graph_reporter_title = 'Jelentő diagram szerint';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Döntési diagram alapján';
+$s_plugin_MantisGraph_graph_developer_title = 'Fejlesztői diagram szerint';
+$s_plugin_MantisGraph_graph_reporter_title = 'Jelentői diagram szerint';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Megnyitott, megoldott és maradék ügyek';
 $s_plugin_MantisGraph_by_status_pct = 'státusz százalék szerint';
 $s_plugin_MantisGraph_by_priority_pct = 'prioritás százalék szerint';

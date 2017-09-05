@@ -230,7 +230,7 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
 	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
 	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'category_assigned_to' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'email_notify_users' ) . '&#160;</th>' . "\n";
 	echo '  </tr><tr>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
@@ -281,8 +281,7 @@ layout_page_header( lang_get( 'manage_email_config' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'adm_config_report.php' );
-
+print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'manage_config_email_page.php' );
 
 $t_access = current_user_get_access_level();

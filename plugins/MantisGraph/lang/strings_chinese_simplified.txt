@@ -41,6 +41,7 @@
  * @author Hydra
  * @author Hzy980512
  * @author Liuxinyu970226
+ * @author Paopao
  */
 
 $s_plugin_graph_title = 'Mantis图表';
@@ -52,13 +53,13 @@ $s_plugin_MantisGraph_status_link = '按状态';
 $s_plugin_MantisGraph_priority_link = '按优先权';
 $s_plugin_MantisGraph_severity_link = '按严重性';
 $s_plugin_MantisGraph_category_link = '按分类';
-$s_plugin_MantisGraph_resolution_link = '按分辨率';
+$s_plugin_MantisGraph_resolution_link = '按处理状况';
 $s_plugin_MantisGraph_issue_trends_link = '问题趋势';
 $s_plugin_MantisGraph_graph_imp_status_title = '按状态图表';
 $s_plugin_MantisGraph_graph_imp_priority_title = '按优先权图表';
 $s_plugin_MantisGraph_graph_imp_severity_title = '按严重性图表';
 $s_plugin_MantisGraph_graph_imp_category_title = '按分类图表';
-$s_plugin_MantisGraph_graph_imp_resolution_title = '按分辨率图表';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '按处理状况图表';
 $s_plugin_MantisGraph_graph_developer_title = '按开发者图表';
 $s_plugin_MantisGraph_graph_reporter_title = '按汇报者图表';
 $s_plugin_MantisGraph_graph_issues_trend_title = '开启的、解决的和剩余的问题';
@@ -66,10 +67,10 @@ $s_plugin_MantisGraph_by_status_pct = '按问题状态百分比';
 $s_plugin_MantisGraph_by_priority_pct = '按问题优先级别百分比';
 $s_plugin_MantisGraph_by_severity_pct = '按问题严重性百分比';
 $s_plugin_MantisGraph_by_category_pct = '按项目分类百分比';
-$s_plugin_MantisGraph_by_resolution_pct = '按分辨率百分比';
+$s_plugin_MantisGraph_by_resolution_pct = '按处理状况百分比';
 $s_plugin_MantisGraph_by_severity_mix = '按严重性和状态';
 $s_plugin_MantisGraph_by_priority_mix = '按优先权和状态';
-$s_plugin_MantisGraph_by_resolution_mix = '按分辨率和状态';
+$s_plugin_MantisGraph_by_resolution_mix = '按处理状况和状态';
 $s_plugin_MantisGraph_legend_still_open = '仍然开启';
 $s_plugin_MantisGraph_legend_resolved = '已解决';
 $s_plugin_MantisGraph_legend_reported = '已报告';
@@ -85,3 +86,4 @@ $s_plugin_MantisGraph_period_year_to_date = '到目前为止一年';
 $s_plugin_MantisGraph_period_select = '任意日期';
 $s_plugin_MantisGraph_period_last_year = '去年';
 $s_plugin_MantisGraph_graph_page = '图问题历史记录';
+$s_plugin_MantisGraph_graph_opendev = '按开放问题排序开发者';

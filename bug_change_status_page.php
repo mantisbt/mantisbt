@@ -83,6 +83,7 @@ $f_change_type = gpc_get_string( 'change_type', BUG_UPDATE_TYPE_CHANGE_STATUS );
 $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
+$t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -160,9 +161,9 @@ layout_page_begin();
 		<tbody>
 <?php
 	$t_current_resolution = $t_bug->resolution;
-	$t_bug_is_open = $t_current_resolution < $t_resolved;	
+	$t_bug_resolution_is_fixed = $t_current_resolution >= $t_resolution_fixed;
 
-	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || $t_bug_is_open ) ) {
+	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || !$t_bug_resolution_is_fixed ) ) {
 ?>
 <!-- Resolution -->
 			<tr>
@@ -172,7 +173,7 @@ layout_page_begin();
 				<td>
 					<select name="resolution" class="input-sm">
 			<?php
-				$t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
+				$t_resolution = $t_bug_resolution_is_fixed ? $t_current_resolution : $t_resolution_fixed;
 
 				$t_relationships = relationship_get_all_src( $f_bug_id );
 				foreach( $t_relationships as $t_relationship ) {
@@ -282,10 +283,10 @@ layout_page_begin();
 			continue;
 		}
 		$t_has_write_access = custom_field_has_write_access( $t_id, $f_bug_id );
-		$t_class_required = $t_require && $t_has_write_access ? 'class="required"' : '';
 ?>
 	<tr>
 		<th class="category">
+			<?php if( $t_require && $t_has_write_access ) {?><span class="required">*</span><?php } ?>
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</th>
 		<td>
@@ -359,7 +360,7 @@ layout_page_begin();
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
 				<td>
-					<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
+					<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
 				</td>
 			</tr>
 <?php
@@ -385,11 +386,12 @@ layout_page_begin();
 
 </tbody>
 </table>
-<input type="hidden" name="action_type" value="<?php echo $f_change_type; ?>" />
+<input type="hidden" name="action_type" value="<?php echo string_attribute( $f_change_type ); ?>" />
 
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
+	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( $t_status_label . '_bug_button' ) ?>" />
 </div>
 </div>

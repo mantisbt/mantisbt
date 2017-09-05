@@ -83,3 +83,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Lo que va d\'añu';
 $s_plugin_MantisGraph_period_select = 'Dates arbitraries';
 $s_plugin_MantisGraph_period_last_year = 'Caberu añu';
 $s_plugin_MantisGraph_graph_page = 'Historial gráficu de la incidencia';
+$s_plugin_MantisGraph_graph_topdev = 'Principales desendolcadores por incidencies resueltes';
+$s_plugin_MantisGraph_graph_opendev = 'Desendolcadores por incidencies abiertes';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales informantes por incidencies resueltes';

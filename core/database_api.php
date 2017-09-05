@@ -37,15 +37,14 @@ require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
-define( 'ADODB_DIR', config_get( 'library_path' ) . 'adodb' );
-require_lib( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
+require_lib( 'adodb/adodb-php/adodb.inc.php' );
 
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array
 $g_queries_array = array();
 
 
-# Stores whether a database connection was succesfully opened.
+# Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected
 $g_db_connected = false;
 
@@ -58,6 +57,9 @@ $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) )
 global $ADODB_FETCH_MODE;
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
+
+# Stores the functional database type based on db driver
+$g_db_functional_type = db_get_type( config_get_global( 'db_type' ) );
 
 /**
  * Mantis Database Parameters Count class
@@ -126,8 +128,9 @@ $g_db_param = new MantisDbParam();
  * @return boolean indicating if the connection was successful
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
-	global $g_db_connected, $g_db;
+	global $g_db_connected, $g_db, $g_db_functional_type;
 	$t_db_type = config_get_global( 'db_type' );
+	$g_db_functional_type = db_get_type( $t_db_type );
 
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
@@ -211,19 +214,37 @@ function db_check_database_support( $p_db_type ) {
 }
 
 /**
+ * Maps a db driver type to the functional databse type
+ * @param string	$p_driver_type Database driver name
+ * @return int		Database type
+ */
+function db_get_type( $p_driver_type ) {
+	switch( $p_driver_type ) {
+		case 'mysql':
+		case 'mysqli':
+			return DB_TYPE_MYSQL;
+		case 'postgres':
+		case 'postgres7':
+		case 'pgsql':
+			return DB_TYPE_PGSQL;
+		case 'mssql':
+		case 'mssqlnative':
+		case 'odbc_mssql':
+			return DB_TYPE_MSSQL;
+		case 'oci8':
+			return DB_TYPE_ORACLE;
+		default:
+			return DB_TYPE_UNDEFINED;
+	}
+}
+
+/**
  * Checks if the database driver is MySQL
  * @return boolean true if mysql
  */
 function db_is_mysql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mysql':
-		case 'mysqli':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MYSQL == $g_db_functional_type );
 }
 
 /**
@@ -231,16 +252,8 @@ function db_is_mysql() {
  * @return boolean true if postgres
  */
 function db_is_pgsql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'postgres':
-		case 'postgres7':
-		case 'pgsql':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_PGSQL == $g_db_functional_type );
 }
 
 /**
@@ -248,16 +261,8 @@ function db_is_pgsql() {
  * @return boolean true if mssql
  */
 function db_is_mssql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mssql':
-		case 'mssqlnative':
-		case 'odbc_mssql':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MSSQL == $g_db_functional_type );
 }
 
 /**
@@ -265,9 +270,8 @@ function db_is_mssql() {
  * @return boolean true if oracle
  */
 function db_is_oracle() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	return ( $t_db_type == 'oci8' );
+	global $g_db_functional_type;
+	return( DB_TYPE_ORACLE == $g_db_functional_type );
 }
 
 /**
@@ -460,7 +464,7 @@ function db_affected_rows() {
  * @return array Database result
  */
 function db_fetch_array( IteratorAggregate &$p_result ) {
-	global $g_db, $g_db_type;
+	global $g_db_functional_type;
 
 	if( $p_result->EOF ) {
 		return false;
@@ -470,43 +474,47 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 	$t_row = $p_result->fields;
 
 	# Additional handling for specific RDBMS
-	if( db_is_pgsql() ) {
-		# pgsql's boolean fields are stored as 't' or 'f' and must be converted
-		static $s_current_result = null, $s_convert_needed;
+	switch( $g_db_functional_type ) {
 
-		if( $s_current_result != $p_result ) {
-			# Processing a new query
-			$s_current_result = $p_result;
-			$s_convert_needed = false;
-		} elseif( !$s_convert_needed ) {
-			# No conversion needed, return the row as-is
-			$p_result->MoveNext();
-			return $t_row;
-		}
+		case DB_TYPE_PGSQL:
+			# pgsql's boolean fields are stored as 't' or 'f' and must be converted
+			static $s_current_result = null, $s_convert_needed;
 
-		foreach( $p_result->FieldTypesArray() as $t_field ) {
-			switch( $t_field->type ) {
-				case 'bool':
-					switch( $t_row[$t_field->name] ) {
-						case 'f':
-							$t_row[$t_field->name] = false;
-							break;
-						case 't':
-							$t_row[$t_field->name] = true;
-							break;
-					}
-					$s_convert_needed = true;
-					break;
+			if( $s_current_result != $p_result ) {
+				# Processing a new query
+				$s_current_result = $p_result;
+				$s_convert_needed = false;
+			} elseif( !$s_convert_needed ) {
+				# No conversion needed, return the row as-is
+				$p_result->MoveNext();
+				return $t_row;
 			}
-		}
 
-	} elseif( db_is_oracle() ) {
-		# oci8 returns null values for empty strings, convert them back
-		foreach( $t_row as &$t_value ) {
-			if( !isset( $t_value ) ) {
-				$t_value = '';
+			foreach( $p_result->FieldTypesArray() as $t_field ) {
+				switch( $t_field->type ) {
+					case 'bool':
+						switch( $t_row[$t_field->name] ) {
+							case 'f':
+								$t_row[$t_field->name] = false;
+								break;
+							case 't':
+								$t_row[$t_field->name] = true;
+								break;
+						}
+						$s_convert_needed = true;
+						break;
+				}
 			}
-		}
+			break;
+
+		case DB_TYPE_ORACLE:
+			# oci8 returns null values for empty strings, convert them back
+			foreach( $t_row as &$t_value ) {
+				if( !isset( $t_value ) ) {
+					$t_value = '';
+				}
+			}
+			break;
 	}
 
 	$p_result->MoveNext();
@@ -514,22 +522,22 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 }
 
 /**
- * Retrieve a result returned from a specific database query
- * @param boolean|IteratorAggregate $p_result Database Query Record Set to retrieve next result for.
- * @param integer                   $p_index1 Row to retrieve (optional).
- * @param integer                   $p_index2 Column to retrieve (optional).
+ * Retrieve a specific field from a database query result
+ * @param boolean|IteratorAggregate $p_result		Database Query Record Set to retrieve the field from.
+ * @param integer                   $p_row_index	Row to retrieve, zero-based (optional).
+ * @param integer                   $p_col_index	Column to retrieve, zero-based (optional).
  * @return mixed Database result
  */
-function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
+function db_result( $p_result, $p_row_index = 0, $p_col_index = 0 ) {
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-		$p_result->Move( $p_index1 );
-		$t_result = $p_result->GetArray();
+		$p_result->Move( $p_row_index );
+		$t_row = db_fetch_array( $p_result );
 
 		# Make the array numerically indexed. This is required to retrieve the
 		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
-		$t_result = array_values( $t_result[0] );
+		$t_result = array_values( $t_row );
 
-		return $t_result[$p_index2];
+		return $t_result[$p_col_index];
 	}
 
 	return false;
@@ -542,23 +550,24 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
  * @return integer last successful insert id
  */
 function db_insert_id( $p_table = null, $p_field = 'id' ) {
-	global $g_db;
+	global $g_db, $g_db_functional_type;
 
 	if( isset( $p_table ) ) {
-		if( db_is_oracle() ) {
-			$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
-		} elseif( db_is_pgsql() ) {
-			$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+		switch( $g_db_functional_type ) {
+			case DB_TYPE_ORACLE:
+				$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
+				break;
+			case DB_TYPE_PGSQL:
+				$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+				break;
+			case DB_TYPE_MSSQL:
+				$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
+				break;
 		}
 		if( isset( $t_query ) ) {
 			$t_result = db_query( $t_query );
-			return db_result( $t_result );
+			return (int)db_result( $t_result );
 		}
-	}
-	if( db_is_mssql() ) {
-		$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
-		$t_result = db_query( $t_query );
-		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
 }
@@ -673,7 +682,7 @@ function db_error_msg() {
 }
 
 /**
- * send both the error number and error message and query (optional) as paramaters for a triggered error
+ * send both the error number and error message and query (optional) as parameters for a triggered error
  * @param string $p_query Query that generated the error.
  * @return void
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
@@ -743,7 +752,6 @@ function db_prepare_binary_string( $p_string ) {
 
 	switch( $t_db_type ) {
 		case 'mssql':
-		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
@@ -755,8 +763,9 @@ function db_prepare_binary_string( $p_string ) {
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
 			break;
+		case 'mssqlnative':
 		case 'oci8':
-			# Fall through, oci8 stores raw data in BLOB
+			# Fall through, mssqlnative, oci8 store raw data in BLOB
 		default:
 			return $p_string;
 			break;
@@ -911,8 +920,8 @@ function db_time_queries() {
  * @return string containing full database table name (with prefix and suffix)
  */
 function db_get_table( $p_name ) {
-	if( strpos( $p_name, 'mantis_' ) === 0 ) {
-		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
+	if( preg_match( '/^mantis_(.*)_table$/', $p_name, $t_matches ) ) {
+		$t_table = $t_matches[1];
 		error_parameters(
 			__FUNCTION__ . "( '$p_name' )",
 			__FUNCTION__ . "( '$t_table' )"

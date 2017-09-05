@@ -62,9 +62,6 @@ auth_ensure_user_authenticated();
 $f_search		= gpc_get_string( FILTER_PROPERTY_SEARCH, false ); # @todo need a better default
 $f_offset		= gpc_get_int( 'offset', 0 );
 
-$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
-
 $f_highlight_changed 	= 0;
 $f_sort 				= null;
 $f_dir		 			= null;
@@ -73,22 +70,24 @@ $t_project_id 			= 0;
 $t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 $t_num_of_columns = count( $t_columns );
 
-# check to see if the cookie exists
-if( !is_blank( $t_cookie_value ) ) {
-
+# Initialize the filter from the cookie, use default if not set
+$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+$t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
+if( is_blank( $t_cookie_value ) ) {
+	$t_filter_cookie_arr = filter_get_default();
+} else {
 	# check to see if new cookie is needed
 	if( !filter_is_cookie_valid() ) {
 		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
-
 	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
 	$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
-
-	$f_highlight_changed 	= $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-	$f_sort 				= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
-	$f_dir		 			= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
-	$t_project_id 			= helper_get_current_project();
 }
+
+$f_highlight_changed = $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
+$f_sort              = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
+$f_dir               = $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
+$t_project_id        = helper_get_current_project();
 
 # This replaces the actual search that used to be here
 $f_page_number = gpc_get_int( 'page_number', 1 );

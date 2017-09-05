@@ -38,10 +38,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Facenapalm
  * @author Irus
  * @author Kareyac
  * @author Kirill
  * @author Lockal
+ * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
  * @author Туллук
@@ -52,16 +54,20 @@ $s_plugin_graph_description = 'Официальный плагин MantisBT дл
 $s_plugin_MantisGraph_title = 'Графики MantisBT';
 $s_plugin_MantisGraph_config = 'настройка';
 $s_plugin_MantisGraph_synthesis_link = 'Сумарно';
-$s_plugin_MantisGraph_status_link = 'По статусу';
+$s_plugin_MantisGraph_status_link = 'По состоянию';
 $s_plugin_MantisGraph_priority_link = 'По приоритету';
 $s_plugin_MantisGraph_severity_link = 'По уровню серьезности';
 $s_plugin_MantisGraph_category_link = 'По категориям';
-$s_plugin_MantisGraph_resolution_link = 'После решения';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Синтез диаграммы состояния';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Синтез графики по приоритету';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Суммарный график по приоритету';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Синтез графики по категориям';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Суммарный график разрешения';
+$s_plugin_MantisGraph_resolution_link = 'По решению';
+$s_plugin_MantisGraph_issue_trends_link = 'Статистика инцидента';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Диаграмма по состоянию';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Диаграмма по приоритету';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Диаграмма по критичности';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Диаграмма по категориям';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Диаграмма по решениям';
+$s_plugin_MantisGraph_graph_developer_title = 'Диаграмма по разработчикам';
+$s_plugin_MantisGraph_graph_reporter_title = 'Диаграмма по инициаторам';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Задачи открытые, отработанные и оставшиеся';
 $s_plugin_MantisGraph_by_status_pct = 'соотношение по состоянию';
 $s_plugin_MantisGraph_by_priority_pct = 'соотношение по приоритету';
 $s_plugin_MantisGraph_by_severity_pct = 'соотношение по серьезности';
@@ -85,3 +91,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'С начала года';
 $s_plugin_MantisGraph_period_select = 'Произвольные даты';
 $s_plugin_MantisGraph_period_last_year = 'Предыдущий год';
 $s_plugin_MantisGraph_graph_page = 'График истории инцидентов';
+$s_plugin_MantisGraph_graph_topdev = 'Лучшие разработчики по исправленным инцидентам';
+$s_plugin_MantisGraph_graph_opendev = 'Разработчики по открытым инцидентам';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Лучшие докладчики исправленных инцидентов';

@@ -36,5 +36,5 @@ require_api( 'print_api.php' );
 if( auth_is_user_authenticated() ) {
 	print_header_redirect( config_get( 'default_home_page' ) );
 } else {
-	print_header_redirect( 'login_page.php' );
+	print_header_redirect( auth_login_page() );
 }

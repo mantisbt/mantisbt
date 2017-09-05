@@ -169,7 +169,7 @@ function graph_pie( array $p_metrics, $p_title = '' ) {
 	$t_js_values = graph_numeric_array( $t_values );
 
 	$t_colors = graph_status_colors_to_colors();
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
+	$t_background_colors = graph_colors_to_rgbas( $t_colors, 1.0 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 ?>
 	<canvas id="piechart<?php echo $s_id ?>" width="500" height="400"
