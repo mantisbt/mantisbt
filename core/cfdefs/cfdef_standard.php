@@ -476,7 +476,7 @@ function cfdef_input_textarea( array $p_field_def, $p_custom_field_value, $p_req
  * @return void
  */
 function cfdef_input_date( $p_field_def, $p_custom_field_value, $p_required = '' ) {
-	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true, 0, 0, $p_required );
+	print_date_selection_set( 'custom_field_' . $p_field_def['id'], config_get( 'short_date_format' ), $p_custom_field_value, false, true, 0, 0, 'input-sm', $p_required );
 }
 
 /**
