@@ -86,6 +86,7 @@ function summary_helper_get_developer_label ( $p_user_id ) {
 			&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $p_user_id . '
 			&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $p_user_id . '
 			&amp;' . FILTER_PROPERTY_NOTE_USER_ID . '=' . $p_user_id . '
+			&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '
 			&amp;' . FILTER_PROPERTY_MATCH_TYPE . '=' . FILTER_MATCH_ANY . '">' . $t_user . '</a>';
 
 }
@@ -312,7 +313,7 @@ function summary_print_by_date( array $p_date_array ) {
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH . '=' . date( 'm', $t_start_date )
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_DAY . '=' . date( 'd', $t_start_date )
-				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">';
+				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 
 		echo '<tr>' . "\n";
 		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
@@ -888,8 +889,10 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 
 				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
-					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
-					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
+					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix .
+						'&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id .
+						'&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] .
+						'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 					echo $t_bug_link . $t_res_bug_count . '</a>';
 				} else {
 					echo $t_res_bug_count;
@@ -1003,8 +1006,10 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 
 				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
-					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
+					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) .
+						'&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id .
+						'&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] .
+						'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 					echo $t_bug_link . $t_res_bug_count . '</a>';
 				} else {
 					echo $t_res_bug_count;

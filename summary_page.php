@@ -254,7 +254,7 @@ print_summary_submenu();
 <!-- RIGHT COLUMN -->
 <div class="col-md-6 col-xs-12">
 
-	<!-- DEVELOPER STATS -->
+	<!-- BY DATE -->
 	<div class="space-10"></div>
 	<div class="widget-box table-responsive">
 		<table class="table table-hover table-bordered table-condensed table-striped">
