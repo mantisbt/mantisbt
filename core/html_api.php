@@ -214,6 +214,16 @@ function html_css() {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
 	}
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
+		# status_config.php is a special css file, dynamically generated.
+		# Add a hash to the query string to differentiate content based on its
+		# relevant properties. This allows a browser to cache them separately and force
+		# a reload when the content may differ.
+		if( $t_stylesheet_path == 'status_config.php' ) {
+			$t_stylesheet_path = helper_url_combine(
+				helper_mantis_url( 'css/status_config.php' ),
+				'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+			);
+		}
 		html_css_link( $t_stylesheet_path );
 	}
 
@@ -297,8 +307,19 @@ function require_js( $p_script_path ) {
  */
 function html_head_javascript() {
 	global $g_scripts_included;
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+	# Add a hash to the query string to differentiate content based on its
+	# relevant properties. This allows a browser to cache them separately and force
+	# a reload when the content may differ.
+	$t_javascript_translations = helper_url_combine(
+		helper_mantis_url( 'javascript_translations.php' ),
+		'cache_key=' . helper_generate_cache_key( array( 'lang' ) )
+	);
+	$t_javascript_config = helper_url_combine(
+		helper_mantis_url( 'javascript_config.php' ),
+		'cache_key=' . helper_generate_cache_key( array( 'user' ) )
+	);
+	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_config . '"></script>' . "\n";
+	echo "\t" . '<script type="text/javascript" src="' . $t_javascript_translations . '"></script>' . "\n";
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		# JQuery
