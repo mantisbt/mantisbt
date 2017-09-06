@@ -297,8 +297,8 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 			$t_status_colors = config_get( 'status_colors' );
 
 			if( !array_key_exists( $t_result['name'], $t_status_colors ) ) {
-					$t_result['color'] = 'currentcolor';
-					return $t_result;
+				$t_result['color'] = 'currentcolor';
+				return $t_result;
 			}
 
 			$t_result['color'] = $t_status_colors[$t_result['name']];
