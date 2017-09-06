@@ -28,8 +28,13 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
+# Suppress default headers. This allows cachig as defined in server configuration
+$g_bypass_headers = true;
+
 require_once( 'core.php' );
 require_api( 'lang_api.php' );
+
+http_security_headers();
 
 /**
  * Print Language translation for javascript
