@@ -124,6 +124,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_additional_info		= $t_bug->additional_information;
 	$f_view_state			= (int)$t_bug->view_state;
 	$f_due_date				= $t_bug->due_date;
+	$f_tag_string			= '';
 
 	$t_project_id			= $t_bug->project_id;
 } else {
@@ -179,6 +180,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
 	$f_due_date				= gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
+	$f_tag_string			= gpc_get_string( 'tag_string', '' );
 
 	if( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
@@ -579,7 +581,7 @@ if( $t_show_attachments ) {
 			<label for="attach_tag"><?php echo lang_get( 'tag_attach_long' ) ?></label>
 		</th>
 		<td>
-			<?php print_tag_input( '' ); ?>
+			<?php print_tag_input( 0, $f_tag_string ); ?>
 		</td>
 	</tr>
 <?php
@@ -590,6 +592,11 @@ if( $t_show_attachments ) {
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
+		if( intval( gpc_get_string( 'custom_field_' . string_attribute( $t_def['id'] ) . '_presence', '0') ) === 1 ){
+			$t_value = gpc_get_string( 'custom_field_' . string_attribute( $t_def['id'] ) );
+		} else {
+			$t_value = '';
+		}
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 
@@ -609,7 +616,7 @@ if( $t_show_attachments ) {
 			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
-			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
+			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_value ) ?>
 		</td>
 	</tr>
 <?php

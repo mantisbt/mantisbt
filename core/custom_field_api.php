@@ -1375,20 +1375,24 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
  * @return void
  * @access public
  */
-function print_custom_field_input( array $p_field_def, $p_bug_id = null ) {
-	if( null === $p_bug_id ) {
-		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
-	} else {
-		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
-		# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
-		if( $t_custom_field_value === null &&
-			( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_value = null ) {
+	if( null === $p_value) {
+		if( null === $p_bug_id ) {
 			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
+		} else {
+			$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
+			# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
+			if( $t_custom_field_value === null &&
+				( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
+					$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
+					$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
+					$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+				$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
+			}
 		}
-	}
+	} else {
+		$t_custom_field_value = $p_value;
+	}	
 
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
