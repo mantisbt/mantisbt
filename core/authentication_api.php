@@ -1000,7 +1000,7 @@ function auth_reauthenticate() {
 		$t_anon_allowed = auth_anonymous_enabled();
 
 		$t_user_id = auth_get_current_user_id();
-		$t_username = user_get_field( $t_user_id, 'username' );
+		$t_username = user_get_username( $t_user_id );
 
 		# check for anonymous login
 		if( ON == $t_anon_allowed && $t_anon_account == $t_username ) {

@@ -131,7 +131,7 @@ layout_page_begin();
 			}
 
 			if( mention_enabled() ) {
-				echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>' . mentions_tag() . user_get_field( auth_get_current_user_id(), 'username' ) . '</strong>' );
+				echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>' . mentions_tag() . user_get_username( auth_get_current_user_id() ) . '</strong>' );
 			}
 		?>
 		</p>

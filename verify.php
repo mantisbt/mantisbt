@@ -77,7 +77,7 @@ user_reset_failed_login_count_to_zero( $f_user_id );
 user_reset_lost_password_in_progress_count_to_zero( $f_user_id );
 
 # fake login so the user can set their password
-auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
+auth_attempt_script_login( user_get_username( $f_user_id ) );
 
 user_increment_login_count( $f_user_id );
 

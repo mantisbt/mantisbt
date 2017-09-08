@@ -135,7 +135,7 @@ function ldap_email( $p_user_id ) {
 		return $g_cache_ldap_email[(int)$p_user_id];
 	}
 
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = ldap_email_from_username( $t_username );
 
 	$g_cache_ldap_email[(int)$p_user_id] = $t_email;
@@ -167,7 +167,7 @@ function ldap_email_from_username( $p_username ) {
  * @return string real name.
  */
 function ldap_realname( $p_user_id ) {
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	return ldap_realname_from_username( $t_username );
 }
 
@@ -293,7 +293,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 		return false;
 	}
 
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 
 	return ldap_authenticate_by_username( $t_username, $p_password );
 }

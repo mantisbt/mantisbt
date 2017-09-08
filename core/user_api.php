@@ -468,7 +468,7 @@ function user_is_protected( $p_user_id ) {
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
-	return auth_anonymous_enabled() && strcasecmp( user_get_field( $p_user_id, 'username' ), auth_anonymous_account() ) == 0;
+	return auth_anonymous_enabled() && strcasecmp( user_get_username( $p_user_id ), auth_anonymous_account() ) == 0;
 }
 
 /**
@@ -928,6 +928,16 @@ function user_get_email( $p_user_id ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 	}
 	return $t_email;
+}
+
+/**
+ * Lookup the user's login name (username)
+ *
+ * @param integer $p_user_id A valid user identifier.
+ * @return string
+ */
+function user_get_username( $p_user_id ) {
+	return user_get_field( $p_user_id, 'username' );
 }
 
 /**
