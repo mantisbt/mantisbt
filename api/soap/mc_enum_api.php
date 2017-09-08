@@ -289,7 +289,6 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 		# Soap API returns the localized label as the name
 		$t_result['name'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
 	} else {
-		$t_enum_array = MantisEnum::getAssocArrayIndexedByValues( $t_enum_string_value );
 		$t_result['name'] = MantisEnum::getLabel( $t_enum_string_value, $p_enum_id );
 		$t_result['label'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
 
