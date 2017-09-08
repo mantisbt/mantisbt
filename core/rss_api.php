@@ -55,7 +55,7 @@ function rss_calculate_key( $p_user_id = null ) {
 		$t_user_id = $p_user_id;
 	}
 
-	$t_username = user_get_field( $t_user_id, 'username' );
+	$t_username = user_get_username( $t_user_id );
 	$t_password = user_get_field( $t_user_id, 'password' );
 	$t_cookie = user_get_field( $t_user_id, 'cookie_string' );
 

@@ -196,7 +196,7 @@ function print_filter_reporter_id( array $p_filter = null ) {
 	#
 	if( ( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold' ) ) + 1 ) ) ) {
 		$t_id = auth_get_current_user_id();
-		$t_username = user_get_field( $t_id, 'username' );
+		$t_username = user_get_username( $t_id );
 		$t_realname = user_get_field( $t_id, 'realname' );
 		$t_display_name = string_attribute( $t_username );
 		if( ( isset( $t_realname ) ) && ( $t_realname > '' ) && ( ON == config_get( 'show_realname' ) ) ) {

@@ -506,7 +506,7 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	#  use same language as display for the email
 	#  lang_push( user_pref_get_language( $p_user_id ) );
 	# retrieve the username and email
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = user_get_email( $p_user_id );
 
 	# Build Welcome Message
@@ -552,7 +552,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	lang_push( user_pref_get_language( $p_user_id ) );
 
 	# retrieve the username and email
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = user_get_email( $p_user_id );
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );

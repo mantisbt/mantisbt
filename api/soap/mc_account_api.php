@@ -45,7 +45,7 @@ function mci_account_get_array_by_id( $p_user_id ) {
 		$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
 		$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
-		$t_result['name'] = user_get_field( $p_user_id, 'username' );
+		$t_result['name'] = user_get_username( $p_user_id );
 
 		if ( $t_is_same_user || $t_can_manage || $t_can_see_realname ) {
 			$t_realname = user_get_realname( $p_user_id );
