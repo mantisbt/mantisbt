@@ -71,6 +71,8 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+require_js( 'manage_project_edit_page.js' );
+
 auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
@@ -111,6 +113,20 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			
+			<tr>
+				<td class="category">
+        			<?php echo lang_get( 'language' )?>
+        		</td>
+				<td><select id="project-language" name="language" class="input-sm">
+            	<?php
+					$p_user_id = auth_get_current_user_id();
+					$t_pref = user_pref_get( $p_user_id );
+					print_language_option_list( $t_pref->language, true );
+				?>
+            	</select></td>
+			</tr>
+			
 			<tr>
 				<td class="category">
 					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>

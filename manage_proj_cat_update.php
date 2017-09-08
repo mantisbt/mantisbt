@@ -8,18 +8,18 @@
 #
 # MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Update Project Categories
  *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2000 - 2002 Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -35,8 +35,7 @@
  * @uses print_api.php
  * @uses utility_api.php
  */
-
-require_once( 'core.php' );
+require_once ('core.php');
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -53,10 +52,11 @@ form_security_validate( 'manage_proj_cat_update' );
 
 auth_reauthenticate();
 
-$f_category_id		= gpc_get_int( 'category_id' );
-$f_project_id		= gpc_get_int( 'project_id', ALL_PROJECTS );
-$f_name				= trim( gpc_get_string( 'name' ) );
-$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
+$f_category_id = gpc_get_int( 'category_id' );
+$f_language = gpc_get_string( 'language' );
+$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
+$f_name = trim( gpc_get_string( 'name' ) );
+$f_assigned_to = gpc_get_int( 'assigned_to', 0 );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
@@ -73,7 +73,7 @@ if( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 
-category_update( $f_category_id, $f_name, $f_assigned_to );
+category_update( $f_category_id, $f_name, $f_assigned_to, $f_language );
 
 form_security_purge( 'manage_proj_cat_update' );
 

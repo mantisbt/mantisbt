@@ -8,18 +8,18 @@
 #
 # MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Edit Project Categories
  *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2000 - 2002 Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -35,8 +35,7 @@
  * @uses print_api.php
  * @uses string_api.php
  */
-
-require_once( 'core.php' );
+require_once ('core.php');
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'category_api.php' );
@@ -49,14 +48,16 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
+require_js( 'manage_proj_cat_edit_page.js' );
+
 auth_reauthenticate();
 
-$f_category_id		= gpc_get_int( 'id' );
-$f_project_id		= gpc_get_int( 'project_id' );
+$f_category_id = gpc_get_int( 'id' );
+$f_project_id = gpc_get_int( 'project_id' );
 
 $t_row = category_get_row( $f_category_id );
-$t_assigned_to = (int)$t_row['user_id'];
-$t_project_id = (int)$t_row['project_id'];
+$t_assigned_to = (int) $t_row['user_id'];
+$t_project_id = (int) $t_row['project_id'];
 $t_name = $t_row['name'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
@@ -71,63 +72,79 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<div id="manage-proj-category-update-div" class="form-container">
-	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-sitemap"></i>
-				<?php echo lang_get('edit_project_category_title') ?>
-			</h4>
-		</div>
-		<div class="widget-body">
-		<div class="widget-main no-padding">
-		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
-			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'category' ) ?>
-				</td>
-				<td>
-					<input type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'assigned_to' ) ?>
-				</td>
-				<td>
-					<select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
-						<option value="0"></option>
-						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
-					</select>
-				</td>
-			</tr>
-		</fieldset>
-		</table>
-		</div>
-		</div>
-		</div>
-		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_category_button' ) ?>" />
-		</div>
-	</div>
-	</form>
+		<form id="manage-proj-category-update-form" method="post"
+			action="manage_proj_cat_update.php">
+			<div class="widget-box widget-color-blue2">
+				<div class="widget-header widget-header-small">
+					<h4 class="widget-title lighter"> <i class="ace-icon fa fa-sitemap"></i>
+						<?php echo lang_get( 'edit_project_category_title' )?>
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main no-padding">
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed table-striped">
+								<fieldset>
+									<?php echo form_security_field( 'manage_proj_cat_update' )?>
+									<input type="hidden" id="proj-category-project-id" name="project_id" value="<?php echo $f_project_id?>" />
+									<input type="hidden" id="proj-category-category-id" name="category_id" value="<?php echo string_attribute( $f_category_id )?>" />
+									<tr>
+										<td class="category">
+        									<?php echo lang_get( 'language' )?>
+        								</td>
+										<td><select id="proj-category-language" name="language" class="input-sm">
+            								<?php
+												$p_user_id = auth_get_current_user_id();
+												$t_pref = user_pref_get( $p_user_id );
+												print_language_option_list( $t_pref->language, true );
+											?>
+            							</select></td>
+									</tr>
+									<tr>
+										<td class="category">
+											<?php echo lang_get( 'category' )?>
+										</td>
+										<td><input type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128"
+											value="<?php echo string_attribute( $t_name )?>" />
+										</td>
+									</tr>
+									<tr>
+										<td class="category">
+											<?php echo lang_get( 'assigned_to' )?>
+										</td>
+										<td><select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
+											<option value="0"></option>
+											<?php print_assign_to_option_list( $t_assigned_to, $t_project_id )?>
+										</select></td>
+									</tr>
+								</fieldset>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="widget-toolbox padding-8 clearfix">
+					<input type="submit" class="btn btn-primary btn-white btn-round"
+						value="<?php echo lang_get( 'update_category_button' )?>" />
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
 
 <div class="col-md-12 col-xs-12">
-	<form method="post" action="manage_proj_cat_delete.php" class="pull-right">
+	<form method="post" action="manage_proj_cat_delete.php"
+		class="pull-right">
 		<fieldset>
-			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
-			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
+			<?php echo form_security_field( 'manage_proj_cat_delete' )?>
+			<input type="hidden" name="id"
+				value="<?php echo string_attribute( $f_category_id )?>" /> <input type="hidden"
+				name="project_id"
+				value="<?php echo string_attribute( $f_project_id )?>" /> <input type="submit"
+				class="btn btn-sm btn-primary btn-white btn-round"
+				value="<?php echo lang_get('delete_category_button')?>" />
 		</fieldset>
 	</form>
-</div><?php
+</div>
 
+<?php
 layout_page_end();
