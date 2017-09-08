@@ -961,10 +961,19 @@ function user_get_realname( $p_user_id ) {
 }
 
 /**
- * return the username or a string "user<id>" if the user does not exist
- * if show_user_realname_threshold is set and real name is not empty, return it instead
+ * Return the user's name for display.
+ *
+ * The name is determined based on the following sequence:
+ * - if the user does not exist, returns the user ID prefixed by a localized
+ *   string (prefix_for_deleted_users, "user" by default);
+ * - if show_realname is ON and it is not empty, return the user's Real Name;
+ * - Otherwise, return the username
+ *
+ * NOTE: do not use this function to retrieve the user's username
+ * @see user_get_username()
  *
  * @param integer $p_user_id A valid user identifier.
+ *
  * @return string
  */
 function user_get_name( $p_user_id ) {
