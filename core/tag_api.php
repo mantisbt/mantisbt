@@ -979,45 +979,46 @@ function tag_stats_attached( $p_tag_id ) {
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$c_user_id = auth_get_current_user_id();
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {bug_tag}
-					WHERE tag_id != ' . db_param(); # 1st Param
+	# Use a filter to get all visible issues for this tag id
+	$t_filter = array(
+		FILTER_PROPERTY_HIDE_STATUS => array( META_FILTER_NONE ),
+		FILTER_PROPERTY_TAG_SELECT => $p_tag_id,
+		FILTER_PROPERTY_PROJECT_ID => array( ALL_PROJECTS ),
+		'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
+	);
+	$t_filter = filter_ensure_valid_filter( $t_filter );
 
-	$t_subquery = 'SELECT b.id FROM {bug} b
-					LEFT JOIN {project_user_list} p
-						ON p.project_id=b.project_id AND p.user_id=' . db_param() . # 2nd Param
-					' JOIN {user} u
-						ON u.id=' . db_param() . # 3rd Param
-					' JOIN {bug_tag} t
-						ON t.bug_id=b.id
-					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
-						AND t.tag_id=' . db_param(); # 4th Param
-
-	$t_query .= ' AND bug_id IN ( ' . $t_subquery . ' ) ';
-
-	$t_result = db_query( $t_query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
-
-	$t_tag_counts = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( !isset( $t_tag_counts[$t_row['tag_id']] ) ) {
-			$t_tag_counts[$t_row['tag_id']] = 1;
-		} else {
-			$t_tag_counts[$t_row['tag_id']]++;
-		}
+	# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
+	# if the query can't be formed, there are no results
+	if( empty( $t_query_clauses ) ) {
+		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+		db_param_pop();
+		return array();
 	}
+	$t_select_string = 'SELECT {bug}.id ';
+	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+	if( count( $t_query_clauses['where'] ) > 0 ) {
+		$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
+	}
+	$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
+	$t_params = $t_query_clauses['where_values'];
 
-	arsort( $t_tag_counts );
+	$t_query = 'SELECT tag_id, COUNT(1) AS tag_count FROM {bug_tag}'
+			. ' WHERE bug_id IN ' . $t_filter_in
+			. ' AND tag_id <> ' . db_param()
+			. ' GROUP BY tag_id ORDER BY COUNT(1) DESC';
+
+	$t_params[] = (int)$p_tag_id;
+	$t_result = db_query( $t_query, $t_params, $p_limit );
 
 	$t_tags = array();
-	$i = 1;
-	foreach( $t_tag_counts as $t_tag_id => $t_count ) {
-		$t_tag_row = tag_get( $t_tag_id );
-		$t_tag_row['count'] = $t_count;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_tag_row = tag_get( $t_row['tag_id'] );
+		$t_tag_row['count'] = (int)$t_row['tag_count'];
 		$t_tags[] = $t_tag_row;
-		$i++;
-		if( $i > $p_limit ) {
-			break;
-		}
 	}
 
 	return $t_tags;

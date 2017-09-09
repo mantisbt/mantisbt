@@ -1400,89 +1400,26 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		' JOIN {project} ON {project}.id = {bug}.project_id',
 	);
 
-	# normalize the project filtering into an array $t_project_ids
-	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
-		log_event( LOG_FILTERING, 'Simple Filter' );
-		$t_project_ids = array(
-			$t_project_id,
-		);
-		$t_include_sub_projects = true;
-	} else {
-		log_event( LOG_FILTERING, 'Advanced Filter' );
-		if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
-			$t_project_ids = array(
-				(int)$t_filter[FILTER_PROPERTY_PROJECT_ID],
-			);
-		} else {
-			$t_project_ids = array_map( 'intval', $t_filter[FILTER_PROPERTY_PROJECT_ID] );
-		}
-
-		$t_include_sub_projects = (( count( $t_project_ids ) == 1 ) && ( ( $t_project_ids[0] == META_FILTER_CURRENT ) || ( $t_project_ids[0] == ALL_PROJECTS ) ) );
-	}
-
-	log_event( LOG_FILTERING, 'project_ids = @P' . implode( ', @P', $t_project_ids ) );
-	log_event( LOG_FILTERING, 'include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
-
-	# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
-	# replace META_FILTER_CURRENT with the actually current project id.
-	$t_all_projects_found = false;
-	$t_new_project_ids = array();
-	foreach( $t_project_ids as $t_pid ) {
-		if( $t_pid == META_FILTER_CURRENT ) {
-			$t_pid = $t_project_id;
-		}
-
-		if( $t_pid == ALL_PROJECTS ) {
-			$t_all_projects_found = true;
-			log_event( LOG_FILTERING, 'all projects selected' );
-			break;
-		}
-
-		# filter out inaccessible projects.
-		if( !project_exists( $t_pid ) || !access_has_project_level( config_get( 'view_bug_threshold', null, $t_user_id, $t_pid ), $t_pid, $t_user_id ) ) {
-			log_event( LOG_FILTERING, 'Invalid or inaccessible project: ' . $t_pid );
-			continue;
-		}
-
-		$t_new_project_ids[] = $t_pid;
-	}
+	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id );
+	$t_all_accesible_projects = user_get_all_accessible_projects( $t_user_id );
+	$t_project_diff = array_diff( $t_all_accesible_projects, $t_included_project_ids );
+	# If the projects selected by the filter are the same as all accesible projects,
+	# we can assume that ALL_PROJECTS was used
+	$t_all_projects_found = empty( $t_project_diff );
 
 	$t_projects_query_required = true;
-	if( $t_all_projects_found ) {
-		if( user_is_administrator( $t_user_id ) ) {
-			log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
-			$t_projects_query_required = false;
-		} else {
-			$t_project_ids = user_get_accessible_projects( $t_user_id );
-		}
-	} else {
-		$t_project_ids = $t_new_project_ids;
+	if( $t_all_projects_found && user_is_administrator( $t_user_id ) ) {
+		log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
+		$t_projects_query_required = false;
 	}
 
 	if( $t_projects_query_required ) {
-		# expand project ids to include sub-projects
-		if( $t_include_sub_projects ) {
-			$t_top_project_ids = $t_project_ids;
-
-			foreach( $t_top_project_ids as $t_pid ) {
-				log_event( LOG_FILTERING, 'Getting sub-projects for project id @P' . $t_pid );
-				$t_subproject_ids = user_get_all_accessible_subprojects( $t_user_id, $t_pid );
-				if( !$t_subproject_ids ) {
-					continue;
-				}
-				$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
-			}
-
-			$t_project_ids = array_unique( $t_project_ids );
-		}
 
 		# if no projects are accessible, then return an empty array.
-		if( count( $t_project_ids ) == 0 ) {
+		if( count( $t_included_project_ids ) == 0 ) {
 			log_event( LOG_FILTERING, 'no accessible projects' );
 			return array();
 		}
-
-		log_event( LOG_FILTERING, 'project_ids after including sub-projects = @P' . implode( ', @P', $t_project_ids ) );
 
 		# this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
 		# access of the current user.
@@ -1493,8 +1430,9 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		$t_limited_projects = array();
 
 		# make sure the project rows are cached, as they will be used to check access levels.
-		project_cache_array_rows( $t_project_ids );
-		foreach( $t_project_ids as $t_pid ) {
+		project_cache_array_rows( $t_included_project_ids );
+
+		foreach( $t_included_project_ids as $t_pid ) {
 			# limit reporters to visible projects
 			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {
 				array_push( $t_limited_projects, '({bug}.project_id=' . $t_pid . ' AND ({bug}.reporter_id=' . $t_user_id . ') )' );
@@ -2061,61 +1999,89 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# tags
 	$c_tag_string = trim( $t_filter[FILTER_PROPERTY_TAG_STRING] );
-	$c_tag_select = trim( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
-	if( is_blank( $c_tag_string ) && !is_blank( $c_tag_select ) && $c_tag_select != 0 && tag_exists( $c_tag_select ) ) {
-		$t_tag = tag_get( $c_tag_select );
-		$c_tag_string = $t_tag['name'];
-	}
+	$c_tag_select = (int)$t_filter[FILTER_PROPERTY_TAG_SELECT];
 
-	if( !is_blank( $c_tag_string ) ) {
+	if( !is_blank( $c_tag_string ) || $c_tag_select > 0 ) {
 		$t_tags = tag_parse_filters( $c_tag_string );
 
-		if( count( $t_tags ) ) {
+		if( count( $t_tags ) || $c_tag_select > 0 ) {
 
-			$t_tags_all = array();
-			$t_tags_any = array();
-			$t_tags_none = array();
-
-			foreach( $t_tags as $t_tag_row ) {
-				switch( $t_tag_row['filter'] ) {
-					case 1:
-						$t_tags_all[] = $t_tag_row;
-						break;
-					case 0:
-						$t_tags_any[] = $t_tag_row;
-						break;
-					case -1:
-						$t_tags_none[] = $t_tag_row;
-						break;
+			$t_projects_can_view_tags = access_project_array_filter( 'tag_view_threshold', $t_included_project_ids, $t_user_id );
+			if( !empty( $t_projects_can_view_tags ) ) {
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_tags );
+				# If tags can't be viewed in all included project, a filter must be used
+				if( empty( $t_diff ) ) {
+					$t_tag_projects_clause = '';
+				} else {
+					$t_tag_projects_clause = ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_tags ) . ')';
 				}
-			}
 
-			if( 0 < $t_filter[FILTER_PROPERTY_TAG_SELECT] && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
-				$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
-			}
+				$t_tags_all = array();
+				$t_tags_any = array();
+				$t_tags_none = array();
 
-			if( count( $t_tags_all ) ) {
-				$t_clauses = array();
-				foreach( $t_tags_all as $t_tag_row ) {
-					array_push( $t_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE {bug_tag}.tag_id = ' . $t_tag_row['id'] . ')' );
+				foreach( $t_tags as $t_tag_row ) {
+					switch( $t_tag_row['filter'] ) {
+						case 1:
+							$t_tags_all[] = $t_tag_row;
+							break;
+						case 0:
+							$t_tags_any[] = $t_tag_row;
+							break;
+						case -1:
+							$t_tags_none[] = $t_tag_row;
+							break;
+					}
 				}
-				array_push( $t_where_clauses, '(' . implode( ' AND ', $t_clauses ) . ')' );
-			}
 
-			if( count( $t_tags_any ) ) {
-				$t_clauses = array();
-				foreach( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, '{bug_tag}.tag_id = ' . $t_tag_row['id'] );
+				# Add the tag id to the array, from filter field "tag_select"
+				if( 0 < $c_tag_select && tag_exists( $c_tag_select ) ) {
+					$t_tags_any[] = tag_get( $c_tag_select );
 				}
-				array_push( $t_where_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
-			}
 
-			if( count( $t_tags_none ) ) {
-				$t_clauses = array();
-				foreach( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, '{bug_tag}.tag_id = ' . $t_tag_row['id'] );
+				$t_tag_counter = 0;
+				if( count( $t_tags_all ) ) {
+					foreach( $t_tags_all as $t_tag_row ) {
+						$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+						array_push( $t_join_clauses,
+							'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+							. ' AND ' . $t_tag_alias . '.tag_id=' . (int)$t_tag_row['id']
+							. $t_tag_projects_clause
+						);
+					}
 				}
-				array_push( $t_where_clauses, '{bug}.id NOT IN ( SELECT bug_id FROM {bug_tag} WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
+
+				if( count( $t_tags_any ) ) {
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					$t_tag_ids = array();
+					foreach( $t_tags_any as $t_tag_row ) {
+						$t_tag_ids[] = (int)$t_tag_row['id'];
+					}
+					array_push( $t_join_clauses,
+						'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+						. ' AND ' . $t_tag_alias . '.tag_id IN (' . implode( ',', $t_tag_ids ) . ')'
+						. $t_tag_projects_clause
+					);
+
+					# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer join
+					if( !count( $t_tags_all ) ) {
+						array_push( $t_where_clauses, $t_tag_alias . '.tag_id IS NOT NULL' );
+					}
+				}
+
+				if( count( $t_tags_none ) ) {
+					$t_tag_alias = 'bug_tag_alias_' . ++$t_tag_counter;
+					$t_tag_ids = array();
+					foreach( $t_tags_none as $t_tag_row ) {
+						$t_tag_ids[] = (int)$t_tag_row['id'];
+					}
+					array_push( $t_join_clauses,
+						'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+						. ' AND ' . $t_tag_alias . '.tag_id IN (' . implode( ',', $t_tag_ids ) . ')'
+						. $t_tag_projects_clause
+					);
+					array_push( $t_where_clauses, $t_tag_alias . '.tag_id IS NULL' );
+				}
 			}
 		}
 	}
@@ -3509,4 +3475,95 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 		lang_get( $t_lang_string )
 	);
 	echo '</li>';
+}
+
+/**
+ * Returns an array of project ids which are included in the filter.
+ * This array includes all individual projects/subprojects that are in the search scope.
+ * @param array $p_filter         Filter array
+ * @param integer $p_project_id   Project id to use in filtering, if applicable by filter type
+ * @param integer $p_user_id      User id to use as current user when filtering
+ * @return array
+ */
+function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null ) {
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
+	} else {
+		$t_project_id = $p_project_id;
+	}
+	if( !$p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	$t_view_type = $p_filter['_view_type'];
+	# normalize the project filtering into an array $t_project_ids
+	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
+		log_event( LOG_FILTERING, 'Simple Filter' );
+		$t_project_ids = array( $t_project_id );
+		$t_include_sub_projects = true;
+	} else {
+		log_event( LOG_FILTERING, 'Advanced Filter' );
+		$t_project_ids = $p_filter[FILTER_PROPERTY_PROJECT_ID];
+		$t_include_sub_projects = (( count( $t_project_ids ) == 1 ) && ( ( $t_project_ids[0] == META_FILTER_CURRENT ) || ( $t_project_ids[0] == ALL_PROJECTS ) ) );
+	}
+
+	log_event( LOG_FILTERING, 'project_ids = @P' . implode( ', @P', $t_project_ids ) );
+	log_event( LOG_FILTERING, 'include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
+
+	# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
+	# replace META_FILTER_CURRENT with the actual current project id.
+
+	$t_all_projects_found = false;
+	$t_new_project_ids = array();
+	foreach( $t_project_ids as $t_pid ) {
+		if( $t_pid == META_FILTER_CURRENT ) {
+			$t_pid = $t_project_id;
+		}
+
+		if( $t_pid == ALL_PROJECTS ) {
+			$t_all_projects_found = true;
+			log_event( LOG_FILTERING, 'all projects selected' );
+			break;
+		}
+
+		# filter out inaccessible projects.
+		if( !project_exists( $t_pid ) || !access_has_project_level( config_get( 'view_bug_threshold', null, $t_user_id, $t_pid ), $t_pid, $t_user_id ) ) {
+			log_event( LOG_FILTERING, 'Invalid or inaccessible project: ' . $t_pid );
+			continue;
+		}
+
+		$t_new_project_ids[] = $t_pid;
+	}
+
+	if( $t_all_projects_found ) {
+		$t_project_ids = user_get_accessible_projects( $t_user_id );
+	} else {
+		$t_project_ids = $t_new_project_ids;
+	}
+
+	# expand project ids to include sub-projects
+	if( $t_include_sub_projects ) {
+		$t_top_project_ids = $t_project_ids;
+
+		foreach( $t_top_project_ids as $t_pid ) {
+			log_event( LOG_FILTERING, 'Getting sub-projects for project id @P' . $t_pid );
+			$t_subproject_ids = user_get_all_accessible_subprojects( $t_user_id, $t_pid );
+			if( !$t_subproject_ids ) {
+				continue;
+			}
+			$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
+		}
+
+		$t_project_ids = array_unique( $t_project_ids );
+	}
+
+	if( count( $t_project_ids ) ) {
+		log_event( LOG_FILTERING, 'project_ids after including sub-projects = @P' . implode( ', @P', $t_project_ids ) );
+	} else {
+		log_event( LOG_FILTERING, 'no accessible projects' );
+	}
+
+	return $t_project_ids;
 }
