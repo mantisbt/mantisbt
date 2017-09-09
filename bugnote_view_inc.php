@@ -153,7 +153,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			$t_time_tracking_hhmm = '';
 		}
 ?>
-<tr class="bugnote" id="c<?php echo $t_activity['id'] ?>">
+<tr class="bugnote visible-on-hover-toggle" id="c<?php echo $t_activity['id'] ?>">
 		<td class="category">
 		<div class="pull-left padding-2"><?php print_avatar( $t_activity['user_id'], 'bugnote', 80 ); ?>
 		</div>
@@ -199,7 +199,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		?>
 		<div class="clearfix"></div>
 		<div class="space-2"></div>
-		<div class="btn-group-sm">
+		<div class="btn-group visible-on-hover">
 		<?php
 			# show edit button if the user is allowed to edit this bugnote
 			if( $t_activity['can_edit'] ) {
