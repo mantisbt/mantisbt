@@ -23,7 +23,6 @@ script:
 #
 
 php:
-  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -39,6 +38,14 @@ branches:
 
 matrix:
   include:
+    # PHP 5.3 is not supported under default Travis builder (as of July 2017)
+    - php: 5.3
+      env: DB=mysql
+      dist: precise
+    - php: 5.3
+      env: DB=pgsql
+      dist: precise
+
     # Add a specific build for Documentation
     - env: DOCBOOK=1
       # Using Ruby as it's preinstalled and we don't need PHP to build docs
