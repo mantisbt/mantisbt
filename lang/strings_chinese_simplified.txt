@@ -1040,6 +1040,7 @@ $s_kb = 'KB';
 $s_attachment_missing = '附件丢失';
 $s_attachment_count = '附件计数';
 $s_view_attachments_for_issue = '查看 %1$d 问题 # %2$d 附件';
+$s_warning_update_custom_field_type = '<strong>警告：</strong>自定义字段“%1$s”已有存储值。如果现有值与字段的新类型不兼容的话，更改字段类型可能导致错误，以及产生严重后果。要继续，请点击下面的按钮';
 $s_phpmailer_language = 'zh';
 $s_sponsors = '%1$d 项资助';
 $s_sponsorship_added = '已添加资助';
