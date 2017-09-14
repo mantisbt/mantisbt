@@ -45,6 +45,7 @@
  * @author Debeet
  * @author Expert3222
  * @author Macofe
+ * @author Mansoft
  * @author Mazab IZW
  * @author Py64
  * @author Rambro
@@ -279,6 +280,7 @@ $s_email_summary = 'Temat';
 $s_email_description = 'Opis';
 $s_email_additional_information = 'Dodatkowe informacje';
 $s_email_steps_to_reproduce = 'Kroki prowadzące do odtworzenia';
+$s_email_tag = 'Tagi';
 $s_account_protected_msg = 'Konto zostało zabezpieczone. Nie można zmienić ustawień...';
 $s_account_removed_msg = 'Twoje konto zostało usunięte...';
 $s_confirm_delete_msg = 'Czy na pewno chcesz usunąć swoje konto?';
@@ -1284,3 +1286,4 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tej strony nie moża uzyskać za 
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nieprawidłowe pole sortowania.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Nieprawidłowy format daty.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Nie można zaktualizować strefy czasowej.';
+$s_dropzone_default_message = 'Upuść pliki tutaj aby przesłać (lub kliknij)';
