@@ -699,6 +699,12 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 				}
 				break;
 
+			case null:
+				# No-op upgrade step
+				$t_sqlarray = false;
+				$t_status = 2;
+				break;
+
 			default:
 				$t_sqlarray = call_user_func_array(
 					array( $t_dict, $t_schema[$i][0] ),
