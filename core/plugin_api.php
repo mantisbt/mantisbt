@@ -647,6 +647,8 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
 
 /**
  * Upgrade an installed plugin's schema.
+ * This is mostly identical to the code in the MantisBT installer, and should
+ * be reviewed and updated accordingly whenever that changes.
  * @param MantisPlugin $p_plugin Plugin basename.
  * @return boolean|null True if upgrade completed, null if problem
  */
@@ -674,24 +676,34 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 		$t_target = $t_schema[$i][1][0];
 
-		if( $t_schema[$i][0] == 'InsertData' ) {
-			$t_sqlarray = array(
-				'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-			);
-		} else if( $t_schema[$i][0] == 'UpdateSQL' ) {
-			$t_sqlarray = array(
-				'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-			);
-			$t_target = $t_schema[$i][1];
-		} else if( $t_schema[$i][0] == 'UpdateFunction' ) {
-			$t_sqlarray = false;
-			if( isset( $t_schema[$i][2] ) ) {
-				$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
-			} else {
-				$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
-			}
-		} else {
-			$t_sqlarray = call_user_func_array( array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
+		switch( $t_schema[$i][0] ) {
+			case 'InsertData':
+				$t_sqlarray = array(
+					'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
+				);
+				break;
+
+			case 'UpdateSQL':
+				$t_sqlarray = array(
+					'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
+				);
+				$t_target = $t_schema[$i][1];
+				break;
+
+			case 'UpdateFunction':
+				$t_sqlarray = false;
+				if( isset( $t_schema[$i][2] ) ) {
+					$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
+				} else {
+					$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
+				}
+				break;
+
+			default:
+				$t_sqlarray = call_user_func_array(
+					array( $t_dict, $t_schema[$i][0] ),
+					$t_schema[$i][1]
+				);
 		}
 
 		if( $t_sqlarray ) {
