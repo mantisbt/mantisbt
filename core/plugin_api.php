@@ -710,6 +710,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 					array( $t_dict, $t_schema[$i][0] ),
 					$t_schema[$i][1]
 				);
+				$t_status = false;
 		}
 
 		if( $t_sqlarray ) {
