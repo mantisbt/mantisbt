@@ -138,7 +138,7 @@ function tag_cache_bug_tag_rows( array $p_bug_ids ) {
 	$t_found_tags = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_bug_id = (int)$t_row['bug_id'];
-		$t_has_tags = null !== $t_row['tag_id'];
+		$t_has_tags = !empty( $t_row['tag_id'] );
 		# create a bug index if needed
 		if( !isset( $g_cache_bug_tags[$c_bug_id] ) ) {
 			$g_cache_bug_tags[$c_bug_id] = $t_has_tags? array() : false;
