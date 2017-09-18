@@ -1027,6 +1027,7 @@ $s_kb = 'KB';
 $s_attachment_missing = 'Vedhæftet fil mangler';
 $s_attachment_count = 'Antal vedhæftede filer';
 $s_view_attachments_for_issue = 'Vis %1$d vedhæftede fil(er) for rapporten #%2$d';
+$s_warning_update_custom_field_type = '<strong>Advarsel:</strong> Det tilpassede felt »%1$s« har allerede lagrede værdier. Ændring af felttype kan medføre fejl og uventet opførsel, hvis eksisterende værdier ikke er konsistente med feltets nye type. For at fortsætte, så klik på knappen nedenfor';
 $s_phpmailer_language = 'dk';
 $s_sponsors = '%1$d sponsor(er)';
 $s_sponsorship_added = 'Sponsorat tilføjet';
