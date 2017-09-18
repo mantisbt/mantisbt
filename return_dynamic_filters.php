@@ -102,7 +102,7 @@ if( false !== $t_content ) {
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
 	$t_cfdef = @custom_field_get_definition( $t_custom_id );
 	# Check existence of custom field id, and if the user have access to read and filter by
-	if( $t_cfdef && $t_cfdef['access_level_r'] <= current_user_get_access_level() && $t_cfdef['filter_by'] ) {
+	if( $t_cfdef && access_has_any_project_level( $t_cfdef['access_level_r'] ) && $t_cfdef['filter_by'] ) {
 		$t_found = true;
 		return_dynamic_filters_prepend_headers();
 		print_filter_custom_field( $t_custom_id, $t_filter );
