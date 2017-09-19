@@ -991,7 +991,7 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 		$c_project_id = (int)( bug_get_field( $p_bug_id, 'project_id' ) );
 
 		db_param_push();
-		$t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
+		$t_query = 'SELECT f.name, f.type, f.access_level_r, f.default_value, s.value, s.text
 			FROM {custom_field_project} p
 				INNER JOIN {custom_field} f ON f.id = p.field_id
 				LEFT JOIN {custom_field_string} s
@@ -1003,11 +1003,11 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 		$t_custom_fields = array();
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-
-			if( is_null( $t_row['value'] ) ) {
+			$t_value_column = ( $t_row['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
+			if( is_null( $t_row[$t_value_column] ) ) {
 				$t_value = $t_row['default_value'];
 			} else {
-				$t_value = custom_field_database_to_value( $t_row['value'], $t_row['type'] );
+				$t_value = custom_field_database_to_value( $t_row[$t_value_column], $t_row['type'] );
 			}
 
 			$t_custom_fields[$t_row['name']] = array(
