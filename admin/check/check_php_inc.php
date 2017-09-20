@@ -197,20 +197,6 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 	}
 }
 
-if( is_windows_server() ) {
-	check_print_test_warn_row(
-		'There is a performance issue on windows for PHP versions &lt; 5.4 in openssl_random_pseudo_bytes',
-		version_compare( phpversion(), '5.4.0', '>=' ),
-		array( false => 'For best performance upgrade to PHP > 5.4.0.' )
-	);
-}
-
-check_print_test_warn_row(
-	'Check for php bug 61443 - php 5.4.0-5.4.3, trying to use compression with no output handler set',
-	!(ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) &&
-	version_compare( PHP_VERSION, '5.4.0', '>=' ) && version_compare( PHP_VERSION, '5.4.4', '<' ) ),
-	array( false=> 'you should consider setting a php output handler, ensuring compression is disabled or upgrading to at least php 5.4.4' ) );
-
 check_print_test_warn_row(
 	'webserver: check SCRIPT_NAME is returned to PHP by web server',
 	isset( $_SERVER['SCRIPT_NAME'] ),

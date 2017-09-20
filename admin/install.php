@@ -246,7 +246,7 @@ if( $t_config_exists ) {
 
 		if( $f_db_type == 'mssql' ) {
 			print_test( 'Checking PHP support for Microsoft SQL Server driver',
-				version_compare( phpversion(), '5.3' ) < 0, true,
+				BAD, true,
 				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
 		}
 	}
@@ -578,15 +578,10 @@ if( !$g_database_upgrade ) {
 			# Build selection list of available DB types
 			$t_db_list = array(
 				'mysqli'      => 'MySQL Improved',
-				'mysql'       => 'MySQL',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
 			);
-			# mysql is deprecated as of PHP 5.5.0
-			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
-				unset( $t_db_list['mysql']);
-			}
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
 				echo '<option value="' . $t_db . '"' .

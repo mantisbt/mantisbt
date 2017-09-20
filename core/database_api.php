@@ -186,17 +186,11 @@ function db_is_connected() {
  */
 function db_check_database_support( $p_db_type ) {
 	switch( $p_db_type ) {
-		case 'mysql':
-			$t_support = function_exists( 'mysql_connect' );
-			break;
 		case 'mysqli':
 			$t_support = function_exists( 'mysqli_connect' );
 			break;
 		case 'pgsql':
 			$t_support = function_exists( 'pg_connect' );
-			break;
-		case 'mssql':
-			$t_support = function_exists( 'mssql_connect' );
 			break;
 		case 'mssqlnative':
 			$t_support = function_exists( 'sqlsrv_connect' );
@@ -220,14 +214,12 @@ function db_check_database_support( $p_db_type ) {
  */
 function db_get_type( $p_driver_type ) {
 	switch( $p_driver_type ) {
-		case 'mysql':
 		case 'mysqli':
 			return DB_TYPE_MYSQL;
 		case 'postgres':
 		case 'postgres7':
 		case 'pgsql':
 			return DB_TYPE_PGSQL;
-		case 'mssql':
 		case 'mssqlnative':
 		case 'odbc_mssql':
 			return DB_TYPE_MSSQL;
@@ -717,12 +709,10 @@ function db_prepare_string( $p_string ) {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
-		case 'mssql':
 		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			return addslashes( $p_string );
-		case 'mysql':
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
@@ -751,7 +741,6 @@ function db_prepare_binary_string( $p_string ) {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
-		case 'mssql':
 		case 'odbc_mssql':
 		case 'ado_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
