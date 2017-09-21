@@ -249,6 +249,12 @@ if( $t_config_exists ) {
 				BAD, true,
 				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
 		}
+
+		if( $f_db_type == 'mysql' ) {
+			print_test( 'Checking PHP support for MySQL driver',
+				BAD, true,
+				'mysql driver is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. The driver is no longer supported by MantisBT, please use mysqli instead' );
+		}
 	}
 
 	$g_db = ADONewConnection( $f_db_type );
