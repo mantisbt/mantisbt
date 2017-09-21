@@ -29,8 +29,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/', 'rest_issue_get' );
 	$g_app->post( '', 'rest_issue_add' );
 	$g_app->post( '/', 'rest_issue_add' );
-	$g_app->post( 'update', 'rest_issue_update' );
-	$g_app->post( 'update/', 'rest_issue_update' );
+	$g_app->post( '/update', 'rest_issue_update' );
+	$g_app->post( '/update/', 'rest_issue_update' );
 	$g_app->delete( '', 'rest_issue_delete' );
 	$g_app->delete( '/', 'rest_issue_delete' );
 	$g_app->delete( '/{id}', 'rest_issue_delete' );
