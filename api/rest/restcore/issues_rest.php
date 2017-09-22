@@ -202,6 +202,11 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
  */
 function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = (object)$p_request->getParsedBody();
+
+	if( !property_exists( $t_issue, 'id' ) ) {
+		$t_message = "Mandatory field 'id' is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
 	$t_issue_id = $t_issue->id;
 
 	$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
