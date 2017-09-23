@@ -84,6 +84,25 @@ print_manage_menu( 'manage_overview_page.php' );
 	if( $t_is_admin ) {
 	?>
 		<tr>
+			<th class="category"><?php echo lang_get( 'php_version' ) ?></th>
+			<td><?php echo phpversion() ?></td>
+		</tr>
+		<tr>
+			<th class="category"><?php echo lang_get( 'database_driver' ) ?></th>
+			<td><?php echo config_get( 'db_type' ) ?></td>
+		</tr>
+		<tr>
+			<th class="category"><?php echo lang_get( 'database_information' ) ?></th>
+			<td><?php
+					$t_database_server_info = $g_db->ServerInfo();
+					echo $t_database_server_info['version'] . ', ' . $t_database_server_info['description']
+				?>
+			</td>
+		</tr>
+		<tr class="spacer">
+			<td colspan="2"></td>
+		</tr>
+		<tr>
 			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
 			<td><?php echo config_get( 'absolute_path' ) ?></td>
 		</tr>
