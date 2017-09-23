@@ -266,7 +266,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		</div>
 		</div>
 	</td>
-	<td class="<?php echo $t_activity['style'] ?>">
+	<td class="<?php echo $t_activity['style'] ?> markdown-body">
 	<?php
 		if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
 			switch ( $t_activity['note']->note_type ) {
