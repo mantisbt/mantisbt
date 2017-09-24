@@ -501,7 +501,7 @@ $g_upgrade[65] = array( 'AlterColumnSQL', array( db_get_table( 'user_pref' ), "
 
 # Apparently mysql now has a STRICT mode, where setting a DEFAULT value on a
 # blob/text is now an error, instead of being silently ignored
-$g_upgrade[66] = ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) )
+$g_upgrade[66] = ( isset( $f_db_type ) && ( $f_db_type == 'mysqli' ) )
 	? array( 'AlterColumnSQL', array( db_get_table( 'custom_field' ), "
 		possible_values		X		NOTNULL" ) )
 	: array( 'AlterColumnSQL', array( db_get_table( 'custom_field' ), "

@@ -69,7 +69,6 @@ $g_database_name		= 'bugtracker';
  * RDBMS           db_type       PHP ext   Comments
  * -----           -------       -------   --------
  * MySQL           mysqli        mysqli    default
- *                 mysql         mysql     PHP < 5.5.0 only
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
