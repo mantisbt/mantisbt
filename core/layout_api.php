@@ -1254,9 +1254,7 @@ function layout_scroll_up_button() {
 function layout_login_page_logo() {
 	?>
 	<div class="login-logo">
-		<a href="<?php echo config_get( 'logo_url' ) ?>">
-			<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
-		</a>
+		<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
 	</div>
 	<?php
 }
