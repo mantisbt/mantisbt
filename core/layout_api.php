@@ -1250,3 +1250,13 @@ function layout_scroll_up_button() {
 	echo '<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>' . "\n";
 	echo '</a>' . "\n";
 }
+
+function layout_login_page_logo() {
+	?>
+	<div class="login-logo">
+		<a href="<?php echo config_get( 'logo_url' ) ?>">
+			<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+		</a>
+	</div>
+	<?php
+}
