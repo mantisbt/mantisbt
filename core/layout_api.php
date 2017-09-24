@@ -409,7 +409,7 @@ function layout_navbar() {
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
 
-	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg" data-target="#sidebar">';
+	echo '<button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar">';
 	echo '<span class="sr-only">Toggle sidebar</span>';
 	echo '<span class="icon-bar"></span>';
 	echo '<span class="icon-bar"></span>';
