@@ -92,3 +92,7 @@ td.print-overdue    { font-weight: bold; }
 .table-nonfluid {
    width: auto !important;
 }
+
+.login-logo {
+	text-align: center;
+}
