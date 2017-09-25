@@ -940,7 +940,6 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	echo '<i class="menu-icon fa ' . $p_icon . '"></i> ' . "\n";
 	echo '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
 	echo '</a>' . "\n";
-	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";
 }
 
