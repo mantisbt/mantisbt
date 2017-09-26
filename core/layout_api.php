@@ -1251,6 +1251,10 @@ function layout_scroll_up_button() {
 	echo '</a>' . "\n";
 }
 
+/**
+ * Render the div area with logo used in login pages
+ * @return void
+ */
 function layout_login_page_logo() {
 	?>
 	<div class="login-logo">
