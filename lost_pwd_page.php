@@ -71,11 +71,7 @@ layout_login_page_begin();
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
 <div id="lost-password-div" class="login-container">
 	<div class="space-12 hidden-480"></div>
-	<a href="<?php echo config_get( 'logo_url' ) ?>">
-		<h1 class="center white">
-			<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
-		</h1>
-	</a>
+	<?php layout_login_page_logo() ?>
 	<div class="space-24 hidden-480"></div>
 	<div class="position-relative">
 	<div class="signup-box visible widget-box no-border" id="login-box">
