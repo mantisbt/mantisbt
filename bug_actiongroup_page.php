@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
@@ -48,6 +49,7 @@ require_api( 'bug_group_action_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'custom_field_api.php' );
+require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
@@ -72,6 +74,12 @@ $t_project_id = ALL_PROJECTS;
 $t_multiple_projects = false;
 $t_projects = array();
 
+# Array of parameters to be used with plugin event
+$t_event_params = array();
+$t_event_params['bug_ids'] = $f_bug_arr;
+$t_event_params['action'] = $f_action;
+$t_event_params['has_bugnote'] = false;
+
 bug_cache_array_rows( $f_bug_arr );
 
 foreach( $f_bug_arr as $t_bug_id ) {
@@ -85,6 +93,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		}
 	}
 }
+$t_event_params['multiple_projects'] = $t_multiple_projects;
+
 if( $t_multiple_projects ) {
 	$t_project_id = ALL_PROJECTS;
 	$t_projects[ALL_PROJECTS] = ALL_PROJECTS;
@@ -122,6 +132,7 @@ $t_custom_fields_prefix = 'custom_field_';
 if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
 	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
 	$f_action = 'CUSTOM';
+	$t_event_params['action'] = $f_action;
 }
 
 # Form name
@@ -217,10 +228,13 @@ switch( $f_action ) {
 		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
 		$t_button_title = $t_question_title;
 		$t_form = 'custom_field_' . $t_custom_field_id;
+		$t_event_params['custom_field_id'] = $t_custom_field_id;
 		break;
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
 }
+$t_event_params['has_bugnote'] = $t_bugnote;
+
 bug_group_action_print_top();
 ?>
 
@@ -362,6 +376,9 @@ if( $t_multiple_projects ) {
 				</tr>
 <?php
 	}
+
+	# signal plugin event for additional fields
+	event_signal( 'EVENT_BUG_ACTIONGROUP_FORM', array( $t_event_params ) );
 
 	if( $t_bugnote ) {
 ?>

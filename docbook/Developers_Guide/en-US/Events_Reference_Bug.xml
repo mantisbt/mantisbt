@@ -242,6 +242,42 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.bugactiongroupform">
+			<title>EVENT_BUG_ACTIONGROUP_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do processing or display form elements in
+					the bug group action page form. It is triggered immediately after the standard fields,
+					and before bugnote fields (if applicable).
+				</para>
+
+				<para>
+					Any output here should be defining appropriate rows and columns for the
+					surrounding &lt;table&gt; elements.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: Array of event data elements</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Parameter array contents</title>
+					<para>The parameter array contains elements for these indexes:</para>
+					<listitem><para>'action' =&gt; &lt;String&gt;: Action title (see <filename>bug_actiongroup.php</filename>)</para></listitem>
+					<listitem><para>'bug_ids' =&gt; &lt;Array&gt;: Array of selected bug ids</para></listitem>
+					<listitem><para>'multiple_projects' =&gt; &lt;Boolean&gt;: Flag if selected bug ids span multiple projects</para></listitem>
+					<listitem><para>'has_bugnote' =&gt; &lt;Boolean&gt;: Flag if current group action form contains a bugnote input</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<para>Depending on the action, any of these indexes may appear:</para>
+					<listitem><para>'custom_field_id' =&gt; &lt;Integer&gt;: If action is 'CUSTOM', contains the custom field id selected for update</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.action.bugaction">
 			<title>EVENT_BUG_ACTION (Execute)</title>
 
