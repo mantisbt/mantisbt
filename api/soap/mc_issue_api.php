@@ -164,7 +164,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			$t_msg = 'Invalid Custom field specification';
 			$t_valid_cf = isset( $t_custom_field['field'] ) && isset( $t_custom_field['value'] );
 			if( $t_valid_cf ) {
-				$t_field = get_object_vars( $t_custom_field['field'] );
+				$t_field = get_object_vars( (object)$t_custom_field['field'] );
 				if( ( !isset( $t_field['id'] ) || $t_field['id'] == 0 ) && !isset( $t_field['name'] ) ) {
 					$t_valid_cf = false;
 					$t_msg .= ", either 'name' or 'id' != 0 or must be given.";
@@ -176,7 +176,7 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			}
 
 			# get custom field id from object ref
-			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
+			$t_custom_field_id = mci_get_custom_field_id_from_objectref( (object)$t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
 				return ApiObjectFactory::faultNotFound( "Custom field '" . $t_field['name'] . "' not found." );
