@@ -36,6 +36,9 @@ if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
+# This variable is defined in parent script
+global $t_event_params;
+
 require_api( 'authentication_api.php' );
 require_api( 'bug_group_action_api.php' );
 require_api( 'form_api.php' );
@@ -73,6 +76,9 @@ bug_group_action_print_top();
 <?php
 	bug_group_action_print_hidden_fields( $f_bug_arr );
 	bug_group_action_print_action_fields( $t_external_action );
+
+	# signal plugin event for additional fields
+	event_signal( 'EVENT_BUG_ACTIONGROUP_FORM', array( $t_event_params ) );
 ?>
 	<tr class="spacer"></tr>
 	<?php bug_group_action_print_bug_list( $f_bug_arr ); ?>
