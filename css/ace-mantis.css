@@ -187,6 +187,11 @@ pre {
     cursor: pointer !important;
 }
 
+/* Clickable hover arrows on collapsed sidebar #22245 */
+.nav-list li > .arrow {
+    pointer-events: none;
+}
+
 .fa-xlg {
     font-size: 1.6em;
     line-height: 0.73em;
