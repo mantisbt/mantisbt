@@ -92,7 +92,7 @@ print_manage_menu( 'manage_overview_page.php' );
 			<td><?php echo config_get( 'db_type' ) ?></td>
 		</tr>
 		<tr>
-			<th class="category"><?php echo lang_get( 'database_information' ) ?></th>
+			<th class="category"><?php echo lang_get( 'database_version_description' ) ?></th>
 			<td><?php
 					$t_database_server_info = $g_db->ServerInfo();
 					echo $t_database_server_info['version'] . ', ' . $t_database_server_info['description']
