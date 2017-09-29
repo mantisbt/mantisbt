@@ -96,3 +96,8 @@ td.print-overdue    { font-weight: bold; }
 .login-logo {
 	text-align: center;
 }
+
+/* strike-through resolved issues: #22492 */
+.resolved  {     
+    text-decoration: line-through;
+}
