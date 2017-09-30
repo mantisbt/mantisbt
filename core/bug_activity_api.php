@@ -187,6 +187,11 @@ function bug_activity_sort( &$p_entries ) {
 			return $t_order == 'DESC' ? -1 : 1;
 		}
 
+		# same timestamp and same type, probably came from cloning an issue
+		if( $a['timestamp'] == $b['timestamp'] && $a['type'] == $b['type'] ) {
+			return (int)$a['id'] - (int)$b['id'];
+		}
+
 		if( $a['user_id'] < $b['user_id'] ) {
 			return -1;
 		}
