@@ -402,15 +402,6 @@ if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking 
 # Add a duplicate relationship if requested.
 if( $t_updated_bug->duplicate_id != 0 ) {
 	relationship_upsert( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
-
-	if( user_exists( $t_existing_bug->reporter_id ) ) {
-		bug_monitor( $f_bug_id, $t_existing_bug->reporter_id );
-	}
-
-	if( user_exists( $t_existing_bug->handler_id ) ) {
-		bug_monitor( $f_bug_id, $t_existing_bug->handler_id );
-	}
-
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 
