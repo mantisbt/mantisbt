@@ -195,7 +195,7 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 }
 
 /**
- * Update an issue from a POST to the issues/update url.
+ * Update an issue from a PATCH to the issues url.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
@@ -203,10 +203,10 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue = $p_request->getParsedBody();
+	$t_issue = (object)$p_request->getParsedBody();
 
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-	if( !$t_issue_id ) {
+	if( is_blank( $t_issue_id ) ) {
 		$t_message = "Mandatory field 'id' is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
