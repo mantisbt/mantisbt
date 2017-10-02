@@ -420,7 +420,7 @@ function create_category_summary() {
 
 /**
  * Create cumulative graph by date
- * @return array
+ * @return array | null
  */
 function create_cumulative_bydate() {
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
@@ -497,6 +497,9 @@ function create_cumulative_bydate() {
 		$t_last_date = $t_date;
 	}
 
+	if ( $t_last_id == 0 ) {
+		return null;
+	}
 	ksort( $t_calc_metrics );
 
 	$t_last_opened = 0;

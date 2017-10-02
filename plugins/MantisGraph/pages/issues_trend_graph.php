@@ -54,8 +54,10 @@ print_summary_submenu();
                 </h4>
             </div>
 <?php
-            $t_metrics = create_cumulative_bydate();
-            graph_cumulative_bydate( $t_metrics );
+			$t_metrics = create_cumulative_bydate();
+			if ( $t_metrics != null ) {
+				graph_cumulative_bydate( $t_metrics );
+			}
 ?>
         </div>
     </div>
