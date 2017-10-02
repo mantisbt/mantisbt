@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Bengtsson96
  * @author Fader
  * @author Jopparn
  * @author Lokal Profil
@@ -1223,6 +1224,8 @@ $s_path_information = 'sökvägsinformation för MantisBT';
 $s_mantisbt_database_statistics = 'Statistik för MantisBT-databasen';
 $s_php_version = 'PHP-version';
 $s_adodb_version = 'ADOdb-version';
+$s_database_driver = 'Databasdrivrutin';
+$s_database_version_description = 'Databasversion, beskrivning';
 $s_month_january = 'januari';
 $s_month_february = 'februari';
 $s_month_march = 'mars';
