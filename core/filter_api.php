@@ -3765,6 +3765,11 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 		}
 	}
 	$t_filter = filter_deserialize( $t_filter_string );
+	# If the unserialez data is not an array, the some error happened, eg, invalid format
+	if( !is_array( $t_filter ) ) {
+		# Don't throw error, otherwise the user could not recover navigation easily
+		return filter_get_default();
+	}
 	$t_filter = filter_clean_runtime_properties( $t_filter );
 	$t_filter['_filter_id'] = $p_filter_id;
 
@@ -3791,9 +3796,14 @@ function filter_update_source_properties( array $p_filter ) {
 		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
 			# replace filter with the referenced one
 			$t_new_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
-			# update the referenced stored filter id for the new loaded filter
-			$t_new_filter['_source_query_id'] = $t_source_query_id;
-			$p_filter = filter_copy_runtime_properties( $p_filter, $t_new_filter );
+			if( is_array( $t_new_filter ) ) {
+				# update the referenced stored filter id for the new loaded filter
+				$t_new_filter['_source_query_id'] = $t_source_query_id;
+				$p_filter = filter_copy_runtime_properties( $p_filter, $t_new_filter );
+			} else {
+				# If the unserialez data is not an array, the some error happened, eg, invalid format
+				unset( $p_filter['_source_query_id'] );
+			}
 		} else {
 			# If the filter id is not valid, clean the referenced filter id
 			unset( $p_filter['_source_query_id'] );
