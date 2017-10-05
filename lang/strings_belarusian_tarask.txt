@@ -622,6 +622,7 @@ $s_desc_bug_closed_status_threshold = 'Статус, які азначае, шт
 $s_workflow_change_access_label = 'Хто можа зьмяняць працоўны цыкль:';
 $s_access_change_access_label = 'Хто можа зьмяняць узроўні доступу:';
 $s_default_not_in_flow = 'Статус па змоўчваньні %1$s не выбраны ў наступных статусах для %2$s. Ён будзе праігнараваны.';
+$s_allowed_access_levels = 'Дазволена для любога ўдзельніка з узроўнем доступу';
 $s_assign_issue = 'Прызначыць праблему';
 $s_allow_reporter_close = 'Дазволіць ініцыятару закрыцьцё праблемы';
 $s_allow_reporter_reopen = 'Дазволіць ініцыятару паўторнае адкрыцьцё праблемы';
