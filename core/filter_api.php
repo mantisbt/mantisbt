@@ -3778,13 +3778,22 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 	return $t_filter;
 }
 
+/**
+ * Updates a filter's properties with those from another filter that is referenced
+ * by it's source-id property.
+ * This is used when an anonymous filter was created from a named filter. As long
+ * as this anonymous filter is not modified, it must be keep in sync with the
+ * referenced filter (source_id), because the source filter may have been modified
+ * at a later time.
+ * This is a side effect of always using anonymous filters even when selecting a
+ * named filter to be applied as current.
+ *
+ * @param array $p_filter	Original filter array
+ * @return array	Updated filter array
+ */
 function filter_update_source_properties( array $p_filter ) {
 	# Check if the filter references a named filter
 	# This property only makes sense, and should be available on unnamed filters
-	# Note that an unnamed filter is used as a working copy for the user. This logic
-	# allows for automatic updating of a current filter when the user had selected
-	# a named filter and that filter has changed. Otherwise the updates in base filter
-	# wuould not reflect in the user's current filter
 	if( isset( $p_filter['_filter_id'] ) ) {
 		$t_filter_id = $p_filter['_filter_id'];
 	} else {
@@ -3799,7 +3808,7 @@ function filter_update_source_properties( array $p_filter ) {
 			if( is_array( $t_new_filter ) ) {
 				# update the referenced stored filter id for the new loaded filter
 				$t_new_filter['_source_query_id'] = $t_source_query_id;
-				$p_filter = filter_copy_runtime_properties( $p_filter, $t_new_filter );
+				$p_filter = filter_copy_runtime_properties( $t_new_filter, $p_filter );
 			} else {
 				# If the unserialez data is not an array, the some error happened, eg, invalid format
 				unset( $p_filter['_source_query_id'] );
@@ -3935,7 +3944,13 @@ function filter_clean_runtime_properties( array $p_filter ) {
 	return $p_filter;
 }
 
-function filter_copy_runtime_properties( array $p_filter_from, array $p_filter_to ) {
+/**
+ * Copy the runtime properties from one filter into another.
+ * @param array $p_filter_to	Destination filter array
+ * @param array $p_filter_from	Filter array from which properties are copied
+ * @return array	Updated filter array
+ */
+function filter_copy_runtime_properties( array $p_filter_to, array $p_filter_from ) {
 	if( isset( $p_filter_from['_temporary_key'] ) ) {
 		$p_filter_to['_temporary_key'] = $p_filter_from['_temporary_key'];
 	}
