@@ -1064,6 +1064,8 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 		$p_query_clauses['order'][] = '{bug}.sticky DESC';
 	}
 
+	$t_included_project_ids = $p_query_clauses['metadata']['included_projects'];
+	$t_user_id = $p_query_clauses['metadata']['user_id'];
 	$t_count = count( $t_sort_fields );
 	for( $i = 0; $i < $t_count; $i++ ) {
 		$c_sort = $t_sort_fields[$i];
@@ -1075,20 +1077,82 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 			$t_def = custom_field_get_definition( $t_custom_field_id );
 			$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
-			$c_cf_alias = 'custom_field_' . $t_custom_field_id;
 
-			# Distinguish filter table aliases from sort table aliases (see #19670)
-			$t_cf_table_alias = 'cf_sort_' . $t_custom_field_id;
-			$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
+			$t_table_name = '';
+			# if the custom field was filtered, there is already a calculated join, so reuse that table alias
+			# otherwise, a new join must be calculated
+			if( isset( $p_query_clauses['metadata']['cf_alias'][$t_custom_field_id] ) ) {
+				$t_table_name = $p_query_clauses['metadata']['cf_alias'][$t_custom_field_id];
+			} else {
+				# @TODO This code for CF visibility is the same as filter_get_bug_rows_query_clauses()
+				# It should be encapsulated and reused
 
-			# check to be sure this field wasn't already added to the query.
-			if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
-				$p_query_clauses['select'][] = $t_cf_select;
-				$p_query_clauses['join'][] = 'LEFT JOIN {custom_field_string} ' . $t_cf_table_alias . ' ON
-											{bug}.id = ' . $t_cf_table_alias . '.bug_id AND ' . $t_cf_table_alias . '.field_id = ' . $t_custom_field_id;
+				$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_custom_field_id ) );
+				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
+				if( empty( $t_projects_can_view_field ) ) {
+					continue;
+				}
+
+				$t_table_name = 'cf_sort_' . $t_custom_field_id;
+				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_custom_field_id;
+
+				# This diff will contain those included projects that can't view this custom field
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
+				# If not empty, it means there are some projects that can't view the field values,
+				# so a project filter must be used to not include values from those projects
+				if( !empty( $t_diff ) ) {
+					$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
+				}
+				$p_query_clauses['metadata']['cf_alias'][$t_custom_field_id] = $t_table_name;
+				$p_query_clauses['join'][] = $t_cf_join_clause;
 			}
 
-			$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
+			# if no join can be used (eg, no view access), skip this field from the order clause
+			if( empty( $t_table_name ) ) {
+				continue;
+			}
+
+			$t_field_alias = 'cf_sortfield_' . $t_custom_field_id;
+			$t_sort_col = $t_table_name . '.' . $t_value_field;
+
+			# which types need special type cast
+			switch( $t_def['type'] ) {
+					case CUSTOM_FIELD_TYPE_FLOAT:
+						# mysql can't cast to float, use alternative syntax
+						$t_sort_expr = db_is_mysql() ? $t_sort_col . '+0.0' : 'CAST(NULLIF(' . $t_sort_col . ',\'\') AS FLOAT)';
+						break;
+					case CUSTOM_FIELD_TYPE_DATE:
+					case CUSTOM_FIELD_TYPE_NUMERIC:
+						$t_sort_expr = 'CAST(NULLIF(' . $t_sort_col . ',\'\') AS DECIMAL)';
+						break;
+					default: # no cast needed
+						$t_sort_expr = $t_sort_col;
+			}
+
+			# which types need special treatment for null sorting
+			switch( $t_def['type'] ) {
+				case CUSTOM_FIELD_TYPE_DATE:
+				case CUSTOM_FIELD_TYPE_NUMERIC:
+				case CUSTOM_FIELD_TYPE_FLOAT:
+					$t_null_last = true;
+					break;
+				default:
+					$t_null_last = false;
+			}
+
+			if( $t_null_last ) {
+				$t_null_expr = 'CASE WHEN NULLIF(' . $t_sort_col . ', \'\') IS NULL THEN 1 ELSE 0 END';
+				$t_clause_for_select = $t_null_expr . ' AS ' . $t_field_alias . '_null';
+				$t_clause_for_select .= ', ' . $t_sort_expr . ' AS ' . $t_field_alias;
+				$t_clause_for_order = $t_field_alias . '_null ASC, ' . $t_field_alias . ' ' . $c_dir;
+			} else {
+				$t_clause_for_select = $t_sort_expr . ' AS ' . $t_field_alias;
+				$t_clause_for_order = $t_field_alias . ' ' . $c_dir;
+			}
+
+			# Note: pgsql needs the sort expression to appear as member of the "select distinct"
+			$p_query_clauses['select'][] = $t_clause_for_select;
+			$p_query_clauses['order'][] = $t_clause_for_order;
 
 		# if sorting by plugin columns
 		} else if( column_is_plugin_column( $c_sort ) ) {
@@ -1109,13 +1173,15 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 		} else {
 			$t_sort_col = '{bug}.' . $c_sort;
 
-			# when sorting by due_date, always display undefined dates last
+			# When sorting by due_date, always display undefined dates last.
+			# Undefined date is defaulted as "1" in database, so add a special
+			# sort clause to group and sort by this.
 			if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
-				$t_sort_due_date = $t_sort_col . ' = 1';
-				$p_query_clauses['select'][] = $t_sort_due_date;
-				$t_sort_col = $t_sort_due_date . ', ' . $t_sort_col;
+				$t_null_expr = 'CASE ' . $t_sort_col . ' WHEN 1 THEN 1 ELSE 0 END';
+				$p_query_clauses['select'][] = $t_null_expr . ' AS due_date_sort_null';
+				$p_query_clauses['order'][] = 'due_date_sort_null ASC';
 			}
-
+			# main sort clause for due date
 			$p_query_clauses['order'][] = $t_sort_col . ' ' .$c_dir;
 		}
 	}
@@ -1400,18 +1466,24 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 		' JOIN {project} ON {project}.id = {bug}.project_id',
 	);
 
-	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id );
-	$t_all_accesible_projects = user_get_all_accessible_projects( $t_user_id );
-	$t_project_diff = array_diff( $t_all_accesible_projects, $t_included_project_ids );
-	# If the projects selected by the filter are the same as all accesible projects,
-	# we can assume that ALL_PROJECTS was used
-	$t_all_projects_found = empty( $t_project_diff );
+	# Metadata array will store information needed at later points, for example,
+	# when calculating the sort clauses.
+	$t_metadata = array();
+	$t_metadata['user_id'] = $c_user_id;
 
 	$t_projects_query_required = true;
-	if( $t_all_projects_found && user_is_administrator( $t_user_id ) ) {
-		log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
-		$t_projects_query_required = false;
+	$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id, true /* return all projects */ );
+
+	if( ALL_PROJECTS == $t_included_project_ids ) {
+		# The list of expanded projects is needed later even if project_query is not required
+		$t_included_project_ids = filter_get_included_projects( $t_filter, $t_project_id, $t_user_id, false /* return all projects */ );
+		# this special case can skip the projects query clause:
+		if( user_is_administrator( $t_user_id ) ) {
+			log_event( LOG_FILTERING, 'all projects + administrator, hence no project filter.' );
+			$t_projects_query_required = false;
+		}
 	}
+	$t_metadata['included_projects'] = $t_included_project_ids;
 
 	if( $t_projects_query_required ) {
 
@@ -2134,11 +2206,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 
 	# custom field filters
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
-		# custom field filtering
-		# @@@ At the moment this gets the linked fields relating to the current project
-		#     It should get the ones relating to the project in the filter or all projects
-		#     if multiple projects.
-		$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
+		$t_custom_fields = custom_field_get_linked_ids( $t_included_project_ids );
 
 		foreach( $t_custom_fields as $t_cfid ) {
 			$t_field_info = custom_field_cache_row( $t_cfid, true );
@@ -2154,13 +2222,34 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 			# Ignore all custom filters that are not set, or that are set to '' or "any"
 			if( !filter_field_is_any( $t_field ) ) {
 				$t_def = custom_field_get_definition( $t_cfid );
-				$t_table_name = '{custom_field_string}_' . $t_cfid;
+
+				# skip date custom fields with value of "any"
+				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE && $t_field[0] == CUSTOM_FIELD_DATE_ANY ) {
+					break;
+				}
+
+				$t_table_name = 'cf_alias_' . $t_cfid;
 
 				# We need to filter each joined table or the result query will explode in dimensions
 				# Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
 				# and only after this process ends (if it is able to) the result query will be filtered
 				# by the WHERE clause and by the DISTINCT clause
-				$t_cf_join_clause = 'LEFT JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
+				$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
+
+				$t_searchable_projects = array_intersect( $t_included_project_ids, custom_field_get_project_ids( $t_cfid ) );
+				$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $t_user_id );
+				if( empty( $t_projects_can_view_field ) ) {
+					continue;
+				}
+				# This diff will contain those included projects that can't view this custom field
+				$t_diff = array_diff( $t_included_project_ids, $t_projects_can_view_field );
+				# If not empty, it means there are some projects that can't view the field values,
+				# so a project filter must be used to not include values from those projects
+				if( !empty( $t_diff ) ) {
+					$t_cf_join_clause .= ' AND {bug}.project_id IN (' . implode( ',', $t_projects_can_view_field ) . ')';
+				}
+
+				$t_metadata['cf_alias'][$t_cfid] = $t_table_name;
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
@@ -2197,7 +2286,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 							$t_filter_member = '';
 
 							# but also add those _not_ present in the custom field string table
-							array_push( $t_filter_array, '{bug}.id NOT IN (SELECT bug_id FROM {custom_field_string} WHERE field_id=' . $t_cfid . ')' );
+							array_push( $t_filter_array, $t_table_name . '.value IS NULL' );
 						}
 
 						switch( $t_def['type'] ) {
@@ -2304,6 +2393,7 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	$t_query_clauses['where_values'] = $t_where_params;
 	$t_query_clauses['project_where'] = $t_project_where_clauses;
 	$t_query_clauses['operator'] = $t_join_operator;
+	$t_query_clauses['metadata'] = $t_metadata;
 	$t_query_clauses = filter_get_query_sort_data( $t_filter, $p_show_sticky, $t_query_clauses );
 
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
@@ -3480,12 +3570,17 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 /**
  * Returns an array of project ids which are included in the filter.
  * This array includes all individual projects/subprojects that are in the search scope.
- * @param array $p_filter         Filter array
- * @param integer $p_project_id   Project id to use in filtering, if applicable by filter type
- * @param integer $p_user_id      User id to use as current user when filtering
- * @return array
+ * If ALL_PROJECTS were included directly, or indirectly, and the parameter $p_return_all_projects
+ * is set to true, the value ALL_PROJECTS will be returned. Otherwise the array will be expanded
+ * to all actual accesible projects
+ * @param array $p_filter                 Filter array
+ * @param integer $p_project_id           Project id to use in filtering, if applicable by filter type
+ * @param integer $p_user_id              User id to use as current user when filtering
+ * @param boolean $p_return_all_projects  If true, return ALL_PROJECTS directly if found, instead of
+ *                                         expanding to individual project ids
+ * @return array|integer	Array of project ids, or ALL_PROJECTS if applicable.
  */
-function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null ) {
+function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null, $p_return_all_projects = false ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -3535,6 +3630,11 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 		}
 
 		$t_new_project_ids[] = $t_pid;
+	}
+
+	# if not expanding ALL_PROJECTS, shortcut return directly
+	if( $t_all_projects_found && $p_return_all_projects ) {
+		return ALL_PROJECTS;
 	}
 
 	if( $t_all_projects_found ) {

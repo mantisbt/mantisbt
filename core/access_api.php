@@ -363,8 +363,11 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
 		$p_project_ids = user_get_all_accessible_projects( $p_user_id );
 	}
 
+	# Determine if parameter is a configuration string to be evaluated for each project
+	$t_is_config_string = ( is_string( $p_access_level ) && !is_numeric( $p_access_level ) );
+
 	# if config will be evaluated for each project, prepare a default value
-	if( is_string( $p_access_level ) ) {
+	if( $t_is_config_string ) {
 		$t_default = config_get( $p_access_level, null, $p_user_id, ALL_PROJECTS );
 		if( null === $t_default ) {
 			$t_default = config_get_global( $p_access_level );
@@ -375,7 +378,7 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
 	$t_filtered_projects = array();
 	foreach( $p_project_ids as $t_project_id ) {
 		# If a config string is provided, evaluate for each project
-		if( is_string( $p_access_level ) ) {
+		if( $t_is_config_string ) {
 			$t_check_level = config_get( $p_access_level, $t_default, $p_user_id, $t_project_id );
 		}
 		if( access_has_project_level( $t_check_level, $t_project_id, $p_user_id ) ) {

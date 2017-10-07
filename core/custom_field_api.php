@@ -82,9 +82,13 @@ function custom_field_allow_manage_display( $p_type, $p_display ) {
 	return false;
 }
 
+# cache of custom field definitions, indexed by field id: array( id => array of properties )
 $g_cache_custom_field = array();
+# cache of all custom fields, array of ids
 $g_cache_cf_list = null;
+# cache of field ids linked to a project, indexed by project id: array( pr_id => array(field ids) )
 $g_cache_cf_linked = array();
+# cache of mapping of custom field names to field id: array( 'name' => id )
 $g_cache_name_to_id_map = array();
 
 # Values are indexed by [ bug_id, field_id ]
@@ -124,43 +128,68 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 
 /**
  * Cache custom fields contained within an array of field id's
- * @param array $p_cf_id_array Array of custom field id's.
+ * If ids parameter is omitted, all fields will be cached
+ * @param array|null $p_cf_id_array Array of custom field ids.
  * @return void
  * @access public
  */
-function custom_field_cache_array_rows( array $p_cf_id_array ) {
+function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 	global $g_cache_custom_field, $g_cache_name_to_id_map;
+
 	$c_cf_id_array = array();
+	$t_cache_all = ( null === $p_cf_id_array );
 
-	foreach( $p_cf_id_array as $t_cf_id ) {
-		$c_id = (int)$t_cf_id;
-		if( !isset( $g_cache_custom_field[$c_id] ) ) {
-			$c_cf_id_array[$c_id] = $c_id;
+	# cache main data
+	if( $t_cache_all ) {
+		$t_query = 'SELECT * FROM {custom_field}';
+		$t_result = db_query( $t_query );
+	} else {
+		foreach( $p_cf_id_array as $t_cf_id ) {
+			$c_id = (int)$t_cf_id;
+			if( !isset( $g_cache_custom_field[$c_id] ) ) {
+				$c_cf_id_array[$c_id] = $c_id;
+			}
 		}
+		if( empty( $c_cf_id_array ) ) {
+			return;
+		}
+		db_param_push();
+		$t_params = array();
+		$t_in_caluse_dbparams = array();
+		foreach( $c_cf_id_array as $t_id) {
+			$t_in_caluse_dbparams[] = db_param();
+			$t_params[] = $t_id;
+		}
+		$t_where_id_in = ' IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
+		$t_query = 'SELECT * FROM {custom_field} WHERE id' . $t_where_id_in;
+		$t_result = db_query( $t_query, $t_params );
 	}
 
-	if( empty( $c_cf_id_array ) ) {
-		return;
-	}
-
-	db_param_push();
-	$t_params = array();
-	$t_in_caluse_dbparams = array();
-	foreach( $c_cf_id_array as $t_id) {
-		$t_in_caluse_dbparams[] = db_param();
-		$t_params[] = $t_id;
-	}
-	$t_query = 'SELECT * FROM {custom_field} WHERE id IN (' . implode( ',', $t_in_caluse_dbparams ) . ')';
-	$t_result = db_query( $t_query, $t_params );
-
+	$t_ids_not_found = $c_cf_id_array;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
 		$g_cache_custom_field[$c_id] = $t_row;
 		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
-		unset( $c_cf_id_array[$c_id] );
+		$g_cache_custom_field[$c_id]['linked_projects'] = array();
+		unset( $t_ids_not_found[$c_id] );
 	}
+
+	# cache linked projects
+	if( $t_cache_all ) {
+		$t_query = 'SELECT field_id, project_id FROM {custom_field_project}';
+		$t_result = db_query( $t_query );
+	} else {
+		db_param_push();
+		# reuse previous db_params and $t_params array, since the query is structurally the same
+		$t_query = 'SELECT field_id, project_id FROM {custom_field_project} WHERE field_id' . $t_where_id_in;
+		$t_result = db_query( $t_query, $t_params );
+	}
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$g_cache_custom_field[(int)$t_row['field_id']]['linked_projects'][] = (int)$t_row['project_id'];
+	}
+
 	# set the remaining ids as not found
-	foreach( $c_cf_id_array as $t_id) {
+	foreach( $t_ids_not_found as $t_id) {
 		$g_cache_custom_field[$t_id] = false;
 	}
 	return;
@@ -737,93 +766,79 @@ function custom_field_get_id_from_name( $p_field_name ) {
  * Return an array of ids of custom fields bound to the specified project
  *
  * The ids will be sorted based on the sequence number associated with the binding
- * @param integer $p_project_id A project identifier.
- * @return array
+ * @param integer|array $p_project_id A project identifier, or array of project ids
+ * @return array	Array of custom field ids
  * @access public
  */
 function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_cf_linked;
 
-	if( !isset( $g_cache_cf_linked[$p_project_id] ) ) {
-		db_param_push();
+	if( !is_array( $p_project_id ) && isset( $g_cache_cf_linked[$p_project_id] ) ) {
+		return $g_cache_cf_linked[$p_project_id];
+	}
 
-		if( ALL_PROJECTS == $p_project_id ) {
-			$t_user_id = auth_get_current_user_id();
+	if( ALL_PROJECTS == $p_project_id ) {
+		$t_user_id = auth_get_current_user_id();
+		# Select all projects accesible by the user
+		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
+	} elseif( !is_array( $p_project_id ) ) {
+		$t_project_ids = array( $p_project_id );
+	} else {
+		$t_project_ids = $p_project_id;
+	}
 
-			# Select only the ids of custom fields in projects the user has access to
-			#  - all custom fields in public projects,
-			#  - those in private projects where the user is listed
-			#  - in private projects where the user is implicitly listed
-			$t_query = 'SELECT DISTINCT cft.id
-				FROM {custom_field} cft
-					JOIN {custom_field_project} cfpt ON cfpt.field_id = cft.id
-					JOIN {project} pt
-						ON pt.id = cfpt.project_id AND pt.enabled = ' . db_prepare_bool( true ) . '
-					LEFT JOIN {project_user_list} pult
-						ON pult.project_id = cfpt.project_id AND pult.user_id = ' . db_param() . '
-					, {user} ut
-				WHERE ut.id = ' . db_param() . '
-					AND (  pt.view_state = ' . VS_PUBLIC . '
-						OR pult.user_id = ut.id
-						';
-			$t_params = array( $t_user_id, $t_user_id );
-
-			# Add private access clause and related parameter
-			$t_private_access = config_get( 'private_project_threshold' );
-			if( is_array( $t_private_access ) ) {
-				if( 1 == count( $t_private_access ) ) {
-					$t_access_clause = '= ' . db_param();
-					$t_params[] = array_shift( $t_private_access );
-				} else {
-					$t_access_clause = 'IN (';
-					foreach( $t_private_access as $t_elem ) {
-						$t_access_clause .= db_param() . ',';
-						$t_params[] = $t_elem;
-					}
-					$t_access_clause = rtrim( $t_access_clause, ',' ) . ')';
-				}
-			} else {
-				$t_access_clause = '>=' . db_param();
-				$t_params[] = $t_private_access;
-			}
-			$t_query .= 'OR ( pult.user_id IS NULL AND ut.access_level ' . $t_access_clause . ' ) )';
+	$t_field_ids = array();
+	$t_uncached_projects = array();
+	foreach( $t_project_ids as $t_pr_id ) {
+		$c_pr_id = (int)$t_pr_id;
+		if( isset( $g_cache_cf_linked[$c_pr_id] ) ) {
+			$t_field_ids = array_merge( $t_field_ids, $g_cache_cf_linked[$c_pr_id] );
 		} else {
-			if( is_array( $p_project_id ) ) {
-				if( 1 == count( $p_project_id ) ) {
-					$t_project_clause = '= ' . db_param();
-					$t_params[] = array_shift( $p_project_id );
-				} else {
-					$t_project_clause = 'IN (';
-					foreach( $p_project_id as $t_project ) {
-						$t_project_clause .= db_param() . ',';
-						$t_params[] = $t_project;
-					}
-					$t_project_clause = rtrim( $t_project_clause, ',' ) . ')';
-				}
-			} else {
-				$t_project_clause = '= ' . db_param();
-				$t_params[] = $p_project_id;
-			}
-			$t_query = 'SELECT cft.id
-				FROM {custom_field} cft
-					JOIN {custom_field_project} cfpt ON cfpt.field_id = cft.id
-				WHERE cfpt.project_id ' . $t_project_clause . '
-				ORDER BY sequence ASC, name ASC';
+			$t_uncached_projects[$c_pr_id] = $c_pr_id;
 		}
+	}
+
+	if( !empty( $t_uncached_projects) ) {
+		db_param_push();
+		$t_params = array();
+		$t_project_clause = 'IN (';
+		foreach( $t_uncached_projects as $t_project ) {
+			$t_project_clause .= db_param() . ',';
+			$t_params[] = $t_project;
+		}
+		$t_project_clause = rtrim( $t_project_clause, ',' ) . ')';
+		$t_query = 'SELECT CFP.project_id, CF.id FROM {custom_field} CF '
+				. ' JOIN {custom_field_project} CFP ON CFP.field_id = CF.id'
+				. ' WHERE CFP.project_id ' . $t_project_clause
+				. '	ORDER BY sequence ASC, name ASC';
 
 		$t_result = db_query( $t_query, $t_params );
-		$t_ids = array();
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			array_push( $t_ids, $t_row['id'] );
+			$t_project_id = (int)$t_row['project_id'];
+			if( !isset( $g_cache_cf_linked[$t_project_id] ) ) {
+				$g_cache_cf_linked[$t_project_id] = array();
+			}
+			$g_cache_cf_linked[$t_project_id][] = (int)$t_row['id'];
+			$t_field_ids[] = (int)$t_row['id'];
+			unset( $t_uncached_projects[$t_project_id] );
 		}
-		custom_field_cache_array_rows( $t_ids );
 
-		$g_cache_cf_linked[$p_project_id] = $t_ids;
-	} else {
-		$t_ids = $g_cache_cf_linked[$p_project_id];
+		# save empty array for those projects that dont appear in the results
+		if( !empty( $t_uncached_projects ) ) {
+			foreach( $t_uncached_projects as $t_pr_id ) {
+				$g_cache_cf_linked[$t_pr_id] = array();
+			}
+		}
 	}
-	return $t_ids;
+
+	$t_field_ids = array_unique( $t_field_ids );
+	# If original query was for ALL_PROJECTS, save as cached values too
+	if( ALL_PROJECTS == $p_project_id ) {
+		$g_cache_cf_linked[ALL_PROJECTS] = $t_field_ids;
+	}
+
+	return $t_field_ids;
 }
 
 /**
@@ -834,21 +849,11 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 function custom_field_get_ids() {
 	global $g_cache_cf_list, $g_cache_custom_field;
 
-	if( $g_cache_cf_list === null ) {
-		$t_query = 'SELECT * FROM {custom_field} ORDER BY name ASC';
-		$t_result = db_query( $t_query );
-		$t_ids = array();
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$g_cache_custom_field[(int)$t_row['id']] = $t_row;
-
-			array_push( $t_ids, $t_row['id'] );
-		}
-		$g_cache_cf_list = $t_ids;
-	} else {
-		$t_ids = $g_cache_cf_list;
+	if( !$g_cache_cf_list ) {
+		custom_field_cache_array_rows();
+		$g_cache_cf_list = array_keys( $g_cache_custom_field );
 	}
-	return $t_ids;
+	return $g_cache_cf_list;
 }
 
 /**
@@ -859,17 +864,8 @@ function custom_field_get_ids() {
  * @access public
  */
 function custom_field_get_project_ids( $p_field_id ) {
-	db_param_push();
-	$t_query = 'SELECT project_id FROM {custom_field_project} WHERE field_id = ' . db_param();
-	$t_result = db_query( $t_query, array( $p_field_id ) );
-
-	$t_ids = array();
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		array_push( $t_ids, $t_row['project_id'] );
-	}
-
-	return $t_ids;
+	$t_def = custom_field_get_definition( $p_field_id );
+	return $t_def['linked_projects'];
 }
 
 /**
@@ -1172,8 +1168,8 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
- * @param array   $p_field_def  Custom field definition.
- * @param integer $p_project_id Project identifier.
+ * @param array         $p_field_def   Custom field definition.
+ * @param integer|array $p_project_id  Project identifier, or array of project ids
  * @return boolean|array
  * @access public
  */
@@ -1185,34 +1181,81 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'], $p_field_def );
 	} else {
-		db_param_push();
+		# Get the existing values for the custom field.
+		# Only values that are viewable by the user should be retrieved, so we must account for:
+		# - View issue permissions: if the issue is private or public
+		# - Project level permissions: if a private project is accessible directly, or indirectly
+		# - Limit view issues for reporters: if the option is enabled.
+		# - Custom field definition for viewing threshold
+		# Viewable issues can be resolved by using a filter, which already accounts for those restrictions
+		# So here we only need to additionally check for custom field view threshold on each project.
 
-		$t_from = '{custom_field_string} cfst';
-		$t_where1 = 'cfst.field_id = ' . db_param();
-		$t_params[] = $p_field_def['id'];
-
-		if( ALL_PROJECTS != $p_project_id ) {
-			$t_from .= ' JOIN {bug} bt ON bt.id = cfst.bug_id';
-			$t_where2 = 'AND bt.project_id = ' . db_param();
-			$t_params[] = $p_project_id;
+		# Build a project list where custom fields are viewable by the user.
+		if( ALL_PROJECTS == $p_project_id ) {
+			$t_project_ids = user_get_all_accessible_projects();
+		} elseif( is_array( $p_project_id ) ) {
+			$t_project_ids = $p_project_id;
 		} else {
-			$t_where2 = '';
+			$t_project_ids = array( $p_project_id );
 		}
-		$t_query = 'SELECT DISTINCT cfst.value
-			FROM ' . $t_from . '
-			WHERE ' . $t_where1 . $t_where2 . '
-			ORDER BY cfst.value';
+		$t_projects_can_view = access_project_array_filter( (int)$p_field_def['access_level_r'], $t_project_ids );
+		if( empty( $t_projects_can_view ) ) {
+			return false;
+		}
+
+		# Build a subquery for issues based on a filter
+		$t_filter = array(
+			FILTER_PROPERTY_HIDE_STATUS => array( META_FILTER_NONE ),
+			FILTER_PROPERTY_PROJECT_ID => $t_projects_can_view,
+			'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
+		);
+		$t_filter = filter_ensure_valid_filter( $t_filter );
+		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
+		$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
+		# if the query can't be formed, there are no results
+		if( empty( $t_query_clauses ) ) {
+			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
+			db_param_pop();
+			return false;
+		}
+		$t_select_string = 'SELECT {bug}.id ';
+		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+		if( count( $t_query_clauses['where'] ) > 0 ) {
+			$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
+		}
+		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
+		$t_params = $t_query_clauses['where_values'];
+
+		# which types need special type cast
+		switch( $p_field_def['type'] ) {
+				case CUSTOM_FIELD_TYPE_FLOAT:
+					# mysql can't cast to float, use alternative syntax
+					$t_select_expr = db_is_mysql() ? 'cfst.value+0.0' : 'CAST(NULLIF(cfst.value,\'\') AS FLOAT)';
+					break;
+				case CUSTOM_FIELD_TYPE_DATE:
+				case CUSTOM_FIELD_TYPE_NUMERIC:
+					$t_select_expr = 'CAST(NULLIF(cfst.value,\'\') AS DECIMAL)';
+					break;
+				default: # no cast needed
+					$t_select_expr = 'cfst.value';
+		}
+
+		$t_query = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value FROM {custom_field_string} cfst'
+			. ' WHERE cfst.bug_id IN ' . $t_filter_in
+			. ' AND cfst.field_id = ' . db_param()
+			. ' ORDER BY cast_value';
+		$t_params[] = (int)$p_field_def['id'];
 		$t_result = db_query( $t_query, $t_params );
-		$t_row_count = 0;
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_row_count++;
-			if( !is_blank( trim( $t_row['value'] ) ) ) {
-				array_push( $t_return_arr, $t_row['value'] );
+			if( !is_blank( trim( $t_row['cast_value'] ) ) ) {
+				array_push( $t_return_arr, $t_row['cast_value'] );
 			}
 		}
 
-		if( 0 == $t_row_count ) {
+		if( empty( $t_return_arr ) ) {
 			return false;
 		}
 	}
