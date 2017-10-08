@@ -3866,9 +3866,8 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
  */
 function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
 	if( null === $p_filter_key ) {
-		if( isset( $p_filter['_temporary_key'] ) ) {
-			$t_filter_key = $p_filter['_temporary_key'];
-		} else {
+		$t_filter_key = filter_get_temporary_key( $p_filter );
+		if( !$t_filter_key ) {
 			$t_filter_key = uniqid();
 		}
 	} else {
@@ -3886,7 +3885,7 @@ function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
  * Get the temporary key of the filter, if was loaded from temporary session store
  * Return null otherwise
  * @param array $p_filter	Filter array
- * @return string	Key associated with this filter, null if none
+ * @return string|null	Key associated with this filter, null if none
  */
 function filter_get_temporary_key( array $p_filter ) {
 	if( isset( $p_filter['_temporary_key'] ) ) {
@@ -3913,7 +3912,7 @@ function filter_is_temporary( array $p_filter ) {
  * If a filter is provided that does not contain the key proeprty, an empty
  * string is returned.
  * @param array|string $p_key_or_filter	Either a string key, or a filter array
- * @return string	Formatted parameter string, or empty
+ * @return string|null	Formatted parameter string, or null
  */
 function filter_get_temporary_key_param( $p_key_or_filter ) {
 	if( is_array( $p_key_or_filter ) ) {
@@ -3924,7 +3923,7 @@ function filter_get_temporary_key_param( $p_key_or_filter ) {
 	if( $t_key ) {
 		return 'filter=' . $t_key;
 	} else {
-		return '';
+		return null;
 	}
 }
 

@@ -104,7 +104,7 @@ if( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) )
 
 # ensure that we're not making this filter public if we're not allowed
 if( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-	$f_is_public = false;
+	access_denied();
 }
 
 $t_filter_string = filter_serialize( $t_filter );
