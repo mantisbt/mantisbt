@@ -99,7 +99,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return void
 	 */
 	function csp_headers() {
-		if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		if( config_get_global( 'cdn_enabled' ) == ON ) {
 			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
 		}
 	}
@@ -122,14 +122,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return void
 	 */
 	function resources() {
-		if ( config_get_global( 'cdn_enabled' ) == ON ) {
-			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH );
-			html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH );
-		} else {
-			echo '<script src="' . plugin_file( 'chart-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
-			echo '<script src="' . plugin_file( 'chart.bundle-' . CHARTJS_VERSION . '.min.js' ) . '"></script>';
+		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
+			if( config_get_global( 'cdn_enabled' ) == ON ) {
+				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
+				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
+			} else {
+				echo '<script src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+			}
+			echo '<script src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
-		echo '<script src="' . plugin_file( "MantisGraph.js" ) . '"></script>';
 	}
 
 	/**
