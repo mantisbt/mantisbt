@@ -295,20 +295,6 @@ function layout_head_css() {
 
 
 /**
- * Print javascript directives for the head section of the page
- * @return void
- */
-function layout_head_javascript() {
-	# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
-	echo '<!--[if lte IE 8]>';
-	html_javascript_link( 'html5shiv.min.js' );
-	html_javascript_link( 'respond.min.js' );
-	echo '<![endif]-->';
-	echo "\n";
-}
-
-
-/**
  * Print javascript directives before the closing of the page body element
  * @return void
  */
