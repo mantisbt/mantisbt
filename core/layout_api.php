@@ -276,20 +276,12 @@ function layout_head_css() {
 	# theme styles
 	html_css_link( 'ace.min.css' );
 	html_css_link( 'ace-mantis.css' );
-
-	# handle IE separately
-	echo '<!--[if lte IE 9]>';
-	html_css_link( 'ace-part2.min.css' );
-	echo '<![endif]-->';
 	html_css_link( 'ace-skins.min.css' );
 
 	if( layout_is_rtl() ) {
 		html_css_link( 'ace-rtl.min.css' );
 	}
 
-	echo '<!--[if lte IE 9]>';
-	html_css_link( 'ace-ie.min.css' );
-	echo '<![endif]-->';
 	echo "\n";
 }
 
