@@ -606,7 +606,9 @@ function print_summary_submenu() {
 function print_manage_menu( $p_page = '' ) {
 	$t_pages = array();
 
-	$t_pages['manage_overview_page.php'] = array( 'url'   => 'manage_overview_page.php', 'label' => '' );
+	if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
+		$t_pages['manage_overview_page.php'] = array( 'url'   => 'manage_overview_page.php', 'label' => '' );
+	}
 	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
 		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
 	}
