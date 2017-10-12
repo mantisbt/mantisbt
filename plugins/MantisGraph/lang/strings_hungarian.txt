@@ -85,3 +85,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Folyó évben';
 $s_plugin_MantisGraph_period_select = 'Tetszőleges dátum szerint';
 $s_plugin_MantisGraph_period_last_year = 'Utolsó évben';
 $s_plugin_MantisGraph_graph_page = 'Ügytörténeti diagram';
+$s_plugin_MantisGraph_graph_topdev = 'Legjobb fejlesztők, javított problémák szerint';
+$s_plugin_MantisGraph_graph_opendev = 'Fejlesztők, nyitott problémák szerint';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Legjobb bejelentők, javított problémák szerint';

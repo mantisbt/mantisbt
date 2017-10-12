@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Fwolff
  * @author Naudefj
  */
 
@@ -265,7 +266,7 @@ $s_signup_link = 'Registreer nuwe gebruiker';
 $s_lost_password_link = 'Wagwoord verloor?';
 $s_select_project_button = 'Kies projek';
 $s_lost_password_title = 'Wagwoord herstel';
-$s_lost_password_confirm_hash_OK = 'U bevestiging is aanvaar. Wysig asseblief u wagwoord onmiddelik.';
+$s_lost_password_confirm_hash_OK = 'U bevestiging is aanvaar. Wysig asseblief u wagwoord onmiddellik.';
 $s_newer_news_link = 'Nuwer nuus';
 $s_older_news_link = 'Ouer nuus';
 $s_archives = 'Argiewe';
