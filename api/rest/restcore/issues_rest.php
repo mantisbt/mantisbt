@@ -33,6 +33,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->delete( '/', 'rest_issue_delete' );
 	$g_app->delete( '/{id}', 'rest_issue_delete' );
 	$g_app->delete( '/{id}/', 'rest_issue_delete' );
+	$g_app->patch( '', 'rest_issue_update' );
+	$g_app->patch( '/', 'rest_issue_update' );
+	$g_app->patch( '/{id}', 'rest_issue_update' );
+	$g_app->patch( '/{id}/', 'rest_issue_update' );
 
 	# Notes
 	$g_app->post( '/{id}/notes/', 'rest_issue_note_add' );
@@ -188,4 +192,32 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
 		withJson( array( 'issue' => $t_issue ) );
+}
+
+/**
+ * Update an issue from a PATCH to the issues url.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue = (object)$p_request->getParsedBody();
+
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_issue_id ) ) {
+		$t_message = "Mandatory field 'id' is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
+	if( ApiObjectFactory::isFault( $t_result ) ) {
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+	}
+
+	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )->
+		withJson( array( 'issue' => $t_updated_issue ) );
 }
