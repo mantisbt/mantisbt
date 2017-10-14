@@ -1088,7 +1088,9 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			if( $t_length == 0 ) {
 				break;
 			}
-			$t_valid &= is_numeric( $p_value );
+
+			# is_numeric() accepts floats, so also check that it is a whole integer
+			$t_valid &= is_numeric( $p_value ) && (int)$p_value == (float)$p_value;
 
 			# Check the length of the number
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
