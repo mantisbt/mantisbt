@@ -1133,7 +1133,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	# submit the issue
 	log_event( LOG_WEBSERVICE, 'updating issue \'' . $p_issue_id . '\'' );
-	return $t_bug_data->update( true, true );
+	return $t_bug_data->update( /* update extended */ true, /* bypass email */ false );
 
 }
 
