@@ -218,7 +218,7 @@ function cfdef_print_numeric( $p_value ) {
  * @param string $p_value The custom field value.
  */
 function cfdef_print_float( $p_value ) {
-	echo (float)$p_value;
+	echo is_numeric( $p_value ) ? (float)$p_value : '';
 }
 
 /**
