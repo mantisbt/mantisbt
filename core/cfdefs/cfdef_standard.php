@@ -210,7 +210,7 @@ function cfdef_print_textarea( $p_value ) {
  * @param string $p_value The custom field value.
  */
 function cfdef_print_numeric( $p_value ) {
-	echo (int)$p_value;
+	echo is_numeric( $p_value ) ? (int)$p_value : '';
 }
 
 /**
