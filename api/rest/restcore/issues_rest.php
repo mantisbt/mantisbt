@@ -141,6 +141,14 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
 
+/**
+ * Add issue note.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
 function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_note_info = $p_request->getParsedBody();
 
@@ -180,6 +188,14 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		withJson( array( 'note' => $t_note, 'issue' => $t_issue ) );
 }
 
+/**
+ * Delete issue note.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
 function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 	$t_issue_note_id = isset( $p_args['note_id'] ) ? $p_args['note_id'] : $p_request->getParam( 'note_id' );
