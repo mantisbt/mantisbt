@@ -1281,7 +1281,7 @@ function db_empty_result() {
  * @return string             Processed query string
  */
 function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
-	global $g_db;
+	global $g_db, $g_db_functional_type;
 
 	$t_lastoffset = 0;
 	$i = 0;
@@ -1299,12 +1299,20 @@ function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
 			# (e.g. from custom fields names)
 			$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
 			if( $i <= count( $p_arr_parms ) ) {
-				if( db_is_pgsql() ) {
-					# For pgsql, the bound value is indexed by the parameter name
-					$t_index = (int)$t_matches['index'][0];
-					$t_value = $p_arr_parms[$t_index-1];
-				} else {
-					$t_value = $p_arr_parms[$i];
+				switch( $g_db_functional_type ) {
+					case DB_TYPE_PGSQL:
+						# For pgsql, the bound value is indexed by the parameter name (1-based)
+						$t_index = (int)$t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index-1];
+						break;
+					case DB_TYPE_ORACLE:
+						# For oracle, the value is indexed by the label
+						$t_index = $t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index];
+						break;
+					default:
+						# otherwise, the value is positional
+						$t_value = $p_arr_parms[$i];
 				}
 				if( is_null( $t_value ) ) {
 					$t_replace = 'NULL';
