@@ -214,6 +214,10 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 
 	# Construct full issue from issue from db + patched info
 	$t_issue_patch = $p_request->getParsedBody();
+	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
+	}
+
 	$t_issue = (object)array_merge( $t_original_issue, $t_issue_patch );
 
 	# Trigger the issue update
