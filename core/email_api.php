@@ -1300,7 +1300,7 @@ function email_send( EmailData $p_email_data ) {
 			break;
 	}
 
-    #apply DKIM settings
+	#apply DKIM settings
 	if( config_get( 'dkim_enable' ) ) {
 		$t_mail->DKIM_domain = config_get( 'dkim_domain' );
 		$t_mail->DKIM_private = config_get( 'dkim_private_key' );
