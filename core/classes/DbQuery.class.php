@@ -390,9 +390,9 @@ class DbQuery {
 	 * to final ADOdb parameter syntax.
 	 * Will convert all labeled ":xxx", and anonymous "$n" parameters, and build
 	 * a values array suitable for ADOdb.
-	 * @return void
+	 * @return integer	Number of parameters created
 	 */
-	protected function process_bind_params() {
+	protected function process_bind_params( $p_counter_start = 0) {
 		global $g_db;
 
 		# shortcut, if no values are binded, skip parameter replacement
@@ -405,6 +405,7 @@ class DbQuery {
 
 		$t_new_query = '';
 		$t_new_binds = array();
+		$t_par_index = $p_counter_start;
 		$t_par_count = 0;
 		$t_parts = preg_split( '/(:[a-z0-9_]+)|(\$[0-9]+)/mi', $t_query_string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
 		foreach( $t_parts as $t_part ) {
@@ -426,13 +427,26 @@ class DbQuery {
 				if( is_array( $t_value ) ) {
 					$t_params_for_array = array();
 					foreach( $t_value as $t_array_item ) {
-						$t_params_for_array[] = $g_db->Param( $t_par_count++ );
-						$t_new_binds[] = $t_array_item;
+						$t_params_for_array[] = $g_db->Param( $t_par_index );
+						$t_new_binds[$t_par_index] = $t_array_item;
+						$t_par_count++;
+						$t_par_index++;
 					}
 					$t_new_query .= '(' . implode( ',', $t_params_for_array ) . ')';
+				} elseif( $t_value instanceof DbQuery ) {
+					# preprocess subquery object
+					$t_value->process_expand_params();
+					$t_sub_params = $t_value->process_bind_params( $t_par_index );
+					$t_par_index += $t_sub_params;
+					$t_par_count += $t_sub_params;
+					# append subquery
+					$t_new_binds = $t_new_binds + $t_value->db_param_array;
+					$t_new_query .= '(' . $t_value->db_query_string . ')';
 				} else {
-					$t_new_query .= $g_db->Param( $t_par_count++ );
-					$t_new_binds[] = $t_value;
+					$t_new_query .= $g_db->Param( $t_par_index );
+					$t_new_binds[$t_par_index] = $t_value;
+					$t_par_count++;
+					$t_par_index++;
 				}
 
 				continue;
@@ -444,6 +458,8 @@ class DbQuery {
 
 		$this->db_query_string = $t_new_query;
 		$this->db_param_array = $t_new_binds;
+
+		return $t_par_count;
 	}
 
 	/**
