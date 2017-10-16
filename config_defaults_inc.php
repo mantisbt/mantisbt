@@ -686,7 +686,10 @@ $g_smtp_port = 25;
  * - DKIM private key file location
  * - DKIM selector
  * - DKIM identity
- * @see $g_smtp_host
+ * @see $g_dkim_domain
+ * @see $g_dkim_private_key
+ * @see $g_dkim_selector
+ * @see $g_dkim_identity
  * @global integer $g_dkim_enable
  */
 $g_dkim_enable = OFF;
