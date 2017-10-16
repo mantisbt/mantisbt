@@ -1300,6 +1300,16 @@ function email_send( EmailData $p_email_data ) {
 			break;
 	}
 
+	#apply DKIM settings
+	if( config_get( 'dkim_enable' ) ) {
+		$t_mail->DKIM_domain = config_get( 'email_dkim_domain' );
+		$t_mail->DKIM_private = config_get( 'email_dkim_private_key_file_path' );
+		$t_mail->DKIM_private_string = config_get( 'email_dkim_private_key_string' );
+		$t_mail->DKIM_selector = config_get( 'email_dkim_selector' );
+		$t_mail->DKIM_passphrase = config_get( 'email_dkim_passphrase' );
+		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
+	}
+
 	$t_mail->IsHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
