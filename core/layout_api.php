@@ -1091,9 +1091,13 @@ function layout_footer() {
 	# We do this at the end of the page so that:
 	#  1) we can display the user's last visit time on a page before updating it
 	#  2) we don't invalidate the user cache immediately after fetching it
-	#  3) don't do this on the password verification or update page, as it causes the
+	#  3) don't do this on pages that auto-refresh
+	#  4) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	if( !gpc_get_bool( 'refresh' ) &&
+		auth_is_user_authenticated() &&
+		!current_user_is_anonymous() &&
+		!( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
