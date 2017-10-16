@@ -680,6 +680,63 @@ $g_smtp_connection_mode = '';
 $g_smtp_port = 25;
 
 /**
+ * Enable DomainKeys Identified Mail (DKIM) Signatures (rfc6376)
+ * If DKIM is enabled you need to provide at least:
+ * - DKIM domain
+ * - DKIM private key file location
+ * - DKIM selector
+ * - DKIM identity
+ * @see $g_smtp_host
+ * @global integer $g_dkim_enable
+ */
+$g_dkim_enable = OFF;
+
+/**
+ * DomainKeys Identified Mail (DKIM) Signatures domain
+ * This is usually the same as the domain of your from email
+ * @see $g_from_email
+ * @see $g_dkim_enable
+ * @global string $g_dkim_domain
+ */
+$g_dkim_domain = 'example.com';
+
+/**
+ * DomainKeys Identified Mail (DKIM) Signatures private key
+ * @see $g_dkim_enable
+ * @global string $g_dkim_private_key
+ */
+$g_dkim_private_key = '/path/to/readable/example.com/private_key.pem';
+
+/**
+ * DomainKeys Identified Mail (DKIM) Signatures selector
+ * DNS selector for the signature (rfc6376)
+ * DNS TXT field should have for instance:
+ *   host mail.example._domainkey
+ *   value v=DKIM1; t=s; n=core; k=rsa; p=[public key]
+ * @see $g_dkim_enable
+ * @global string $g_dkim_selector
+ */
+$g_dkim_selector = 'mail.example';
+
+/**
+ * DomainKeys Identified Mail (DKIM) Signatures private key password
+ * Leave empty string if your private key does not have password
+ * @see $g_dkim_enable
+ * @global string $g_dkim_selector
+ */
+$g_dkim_passphrase = '';
+ 
+/**
+ * DomainKeys Identified Mail (DKIM) Signatures identity
+ * Identity you are signing the mails with (rfc6376)
+ * This is usually the same as the domain of your from email
+ * @see $g_from_email
+ * @see $g_dkim_enable
+ * @global string $g_dkim_identity
+ */
+$g_dkim_identity = 'noreply@example.com';
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
