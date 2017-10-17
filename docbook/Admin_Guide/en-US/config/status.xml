@@ -113,7 +113,7 @@
 					been resolved without being successfully fixed by
 					developers. Resolutions above this threshold are
 					considered to be resolved in an unsuccessful way.
-					Default value is UNABLE_TO_DUPLICATE.
+					Default value is UNABLE_TO_REPRODUCE.
 				</para>
 			</listitem>
 		</varlistentry>

@@ -1548,7 +1548,7 @@ $g_severity_multipliers = array(
  * @global array $g_resolution_multipliers
  */
 $g_resolution_multipliers = array(
-	UNABLE_TO_DUPLICATE => 2,
+	UNABLE_TO_REPRODUCE => 2,
 	NOT_FIXABLE         => 1,
 	DUPLICATE           => 3,
 	NOT_A_BUG           => 5,
@@ -2067,7 +2067,7 @@ $g_bug_resolution_fixed_threshold = FIXED;
  * threshold are considered to be resolved in an unsuccessful way.
  * @global integer $g_bug_resolution_not_fixed_threshold
  */
-$g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
+$g_bug_resolution_not_fixed_threshold = UNABLE_TO_REPRODUCE;
 
 /**
  * Bug is closed.  In some custom installations a bug may be considered as
