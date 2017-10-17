@@ -505,7 +505,14 @@ class DbQuery {
 				$t_index = (int)substr( $t_part, 3 );
 				$t_label =  $this->late_binding_in_clause[$t_index]['label'];
 				$t_alias =  $this->late_binding_in_clause[$t_index]['alias'];
-				$t_new_query .= $this->helper_in_oracle_fix( $t_alias, $this->query_bind_array[$t_label] );
+				$t_values = $this->query_bind_array[$t_label];
+				if( count( $t_values ) > self::$oracle_in_limit ) {
+					$t_new_query .= $this->helper_in_oracle_fix( $t_alias, $t_values );
+				} elseif( count( $t_values ) == 1 ) {
+					$t_new_query .= $t_alias . ' = ' . $this->param( reset( $t_values ) );
+				} else {
+					$t_new_query .= $t_alias . ' IN ' . $this->param( $t_values );
+				}
 				continue;
 			}
 
@@ -534,18 +541,11 @@ class DbQuery {
 	 * @return string	Constructed string to be added to query
 	 */
 	public function sql_in( $p_alias, $p_label_or_values ) {
-		if( !db_is_oracle() ) {
-			if( is_array( $p_label_or_values ) ) {
-				$t_sql = $p_alias . ' IN ' . $this->param( $p_label_or_values );
-			} else {
-				$t_sql = $p_alias . ' IN :' . $p_label_or_values;
-			}
-			return $t_sql;
-		}
-
 		if( is_array( $p_label_or_values ) ) {
 			if( count( $p_label_or_values ) > self::$oracle_in_limit ) {
 				$t_sql = $this->helper_in_oracle_fix( $p_alias, $p_label_or_values );
+			} elseif( count( $p_label_or_values ) == 1 ) {
+				$t_sql = $p_alias . ' = ' . $this->param( reset( $p_label_or_values ) );
 			} else {
 				$t_sql = $p_alias . ' IN ' . $this->param( $p_label_or_values );
 			}
