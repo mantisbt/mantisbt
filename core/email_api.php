@@ -1302,11 +1302,12 @@ function email_send( EmailData $p_email_data ) {
 
 	#apply DKIM settings
 	if( config_get( 'dkim_enable' ) ) {
-		$t_mail->DKIM_domain = config_get( 'dkim_domain' );
-		$t_mail->DKIM_private = config_get( 'dkim_private_key' );
-		$t_mail->DKIM_selector = config_get( 'dkim_selector' );
-		$t_mail->DKIM_passphrase = config_get( 'dkim_passphrase' );
-		$t_mail->DKIM_identity = config_get( 'dkim_identity' );
+		$t_mail->DKIM_domain = config_get( 'email_dkim_domain' );
+		$t_mail->DKIM_private = config_get( 'email_dkim_private_key' );
+		$t_mail->DKIM_private_string = config_get( 'email_dkim_private_key_string' );
+		$t_mail->DKIM_selector = config_get( 'email_dkim_selector' );
+		$t_mail->DKIM_passphrase = config_get( 'email_dkim_passphrase' );
+		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
 	}
 
 	$t_mail->IsHTML( false );              # set email format to plain text
