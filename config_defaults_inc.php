@@ -690,7 +690,7 @@ $g_smtp_port = 25;
  * @see $g_email_dkim_private_key
  * @see $g_email_dkim_selector
  * @see $g_email_dkim_identity
- * @global integer $g_dkim_enable
+ * @global integer $g_email_dkim_enable
  */
 $g_email_dkim_enable = OFF;
 
@@ -699,7 +699,7 @@ $g_email_dkim_enable = OFF;
  * This is usually the same as the domain of your from email
  * @see $g_from_email
  * @see $g_email_dkim_enable
- * @global string $g_dkim_domain
+ * @global string $g_email_dkim_domain
  */
 $g_email_dkim_domain = 'example.com';
 
@@ -709,7 +709,7 @@ $g_email_dkim_domain = 'example.com';
  * this setting will not be used.
  * @see $g_email_dkim_private_key_string
  * @see $g_dkim_enable
- * @global string $g_dkim_private_key
+ * @global string $g_email_dkim_private_key
  */
 $g_email_dkim_private_key = '/path/to/readable/example.com/private_key.pem';
 
@@ -721,7 +721,7 @@ $g_email_dkim_private_key = '/path/to/readable/example.com/private_key.pem';
  * $g_email_dkim_private_key.
  * @see $g_dkim_enable
  * @see $g_email_dkim_private_key
- * @global string $g_dkim_private_key
+ * @global string $g_email_dkim_private_key_string
  */
 $g_email_dkim_private_key_string = '';
 
@@ -732,7 +732,7 @@ $g_email_dkim_private_key_string = '';
  *   host mail.example._domainkey
  *   value v=DKIM1; t=s; n=core; k=rsa; p=[public key]
  * @see $g_email_dkim_enable
- * @global string $g_dkim_selector
+ * @global string $g_email_dkim_selector
  */
 $g_email_dkim_selector = 'mail.example';
 
@@ -740,7 +740,7 @@ $g_email_dkim_selector = 'mail.example';
  * DomainKeys Identified Mail (DKIM) Signatures private key password
  * Leave empty string if your private key does not have password
  * @see $g_dkim_enable
- * @global string $g_dkim_selector
+ * @global string $g_email_dkim_passphrase
  */
 $g_email_dkim_passphrase = '';
  
@@ -750,7 +750,7 @@ $g_email_dkim_passphrase = '';
  * This is usually the same as the domain of your from email
  * @see $g_from_email
  * @see $g_email_dkim_enable
- * @global string $g_dkim_identity
+ * @global string $g_email_dkim_identity
  */
 $g_email_dkim_identity = 'noreply@example.com';
 
