@@ -373,6 +373,82 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_dkim_enable</term>
+			<listitem>
+				<para>Enables DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
+    				To successfully sign mails you need to enable DKIM and provide at least:
+					<emphasis>DKIM domain (see $g_email_dkim_domain)</emphasis>,
+					<emphasis>DKIM private key or key file path (see $g_email_dkim_private_key_file_path
+    					and $g_email_dkim_private_key_string)</emphasis>,
+					<emphasis>DKIM selector (see $g_email_dkim_selector)</emphasis>,
+					<emphasis>DKIM identity (see $g_email_dkim_identity)</emphasis>.
+				</para>
+				<para>The default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_domain</term>
+			<listitem>
+				<para>Defines domain for DomainKeys Identified Mail (DKIM) Signatures.
+				</para>
+				<para>Typically same as the host part of the $g_from_email. For example
+    				example.com.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_private_key_file_path</term>
+			<listitem>
+				<para>Path to the private domain key to be used for DomainKeys Identified Mail (DKIM) Signatures.
+				</para>
+				<para>If the key is specified in $g_email_dkim_private_key_string this setting will not be used.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_private_key_string</term>
+			<listitem>
+				<para>Private domain key to be used for DomainKeys Identified Mail (DKIM) Signatures.
+				</para>
+				<para>This string should contain private key for signing. Leave empty
+                    string if you wish to load the key from the file defined with
+                    $g_email_dkim_private_key_file_path.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_selector</term>
+			<listitem>
+				<para>Selector to be used for DomainKeys Identified Mail (DKIM) Signatures.
+				</para>
+				<para>If your domain is example.com, typically DNS TXT field should have:
+                    <emphasis>host: mail.example._domainkey</emphasis>,
+                    <emphasis>value: v=DKIM1; t=s; n=core; k=rsa; p=[public key]</emphasis>.
+                    In this case selector should be mail.example
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_passphrase</term>
+			<listitem>
+				<para>Private DKIM domain key password.
+				</para>
+				<para>Leave empty string if your private key does not have password
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_dkim_identity</term>
+			<listitem>
+				<para>Identity to be used for DomainKeys Identified Mail (DKIM) Signatures.
+				</para>
+				<para>This is usually the same as your g_from_email. For example
+    				noreply@example.com 
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_email_send_using_cronjob</term>
 			<listitem>
 				<para>Disables sending of emails as soon as an action is performed.
