@@ -748,7 +748,7 @@ $g_email_dkim_passphrase = '';
 /**
  * DomainKeys Identified Mail (DKIM) Signatures identity
  * Identity you are signing the mails with (rfc6376)
- * This is usually the same as the domain of your from email
+ * This is usually the same as your from email
  * @see $g_from_email
  * @see $g_email_dkim_enable
  * @global string $g_email_dkim_identity
