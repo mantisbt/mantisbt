@@ -687,7 +687,8 @@ $g_smtp_port = 25;
  * - DKIM selector
  * - DKIM identity
  * @see $g_email_dkim_domain
- * @see $g_email_dkim_private_key
+ * @see $g_email_dkim_private_key_file_path
+ * @see $g_email_dkim_private_key_string
  * @see $g_email_dkim_selector
  * @see $g_email_dkim_identity
  * @global integer $g_email_dkim_enable
@@ -709,18 +710,18 @@ $g_email_dkim_domain = 'example.com';
  * this setting will not be used.
  * @see $g_email_dkim_private_key_string
  * @see $g_dkim_enable
- * @global string $g_email_dkim_private_key
+ * @global string $g_email_dkim_private_key_file_path
  */
-$g_email_dkim_private_key = '/path/to/readable/example.com/private_key.pem';
+$g_email_dkim_private_key_file_path = '/path/to/readable/example.com/private_key.pem';
 
 
 /**
  * DomainKeys Identified Mail (DKIM) Signatures private key value
  * This string should contain private key for signing. Leave empty
  * string if you wish to load the key from the file defined with
- * $g_email_dkim_private_key.
+ * $g_email_dkim_private_key_file_path.
  * @see $g_dkim_enable
- * @see $g_email_dkim_private_key
+ * @see $g_email_dkim_private_key_file_path
  * @global string $g_email_dkim_private_key_string
  */
 $g_email_dkim_private_key_string = '';
