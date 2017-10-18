@@ -335,6 +335,44 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_smtp_connection_mode</term>
+			<listitem>
+				<para>Allow secure connection to the SMTP server. Valid values are:
+					<itemizedlist>
+						<listitem><para><emphasis>'' (empty string)</emphasis>:
+							No encryption. This is the default.
+						</para></listitem>
+						<listitem><para><emphasis>ssl</emphasis></para></listitem>
+						<listitem><para><emphasis>tls</emphasis></para></listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_username</term>
+			<listitem>
+				<para>SMTP Server Authentication user
+				</para>
+				<para>Allows the use of SMTP Authentication when using a remote SMTP host.
+				</para>
+				<note><para>must be set to '' (empty string) if the SMTP host
+					does not require authentication.
+				</para></note>
+				<para>Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_password</term>
+			<listitem>
+				<para>This is the password that is used in SMTP Authentication.
+					Not used when $g_smtp_username = ''
+				</para>
+				<para>Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_email_dkim_enable</term>
 			<listitem>
 				<para>Enables DomainKeys Identified Mail (DKIM) Signatures (rfc6376).
@@ -407,44 +445,6 @@ $g_notify_flags['new'] = array(
 				</para>
 				<para>This is usually the same as your g_from_email. For example
     				noreply@example.com 
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_smtp_connection_mode</term>
-			<listitem>
-				<para>Allow secure connection to the SMTP server. Valid values are:
-					<itemizedlist>
-						<listitem><para><emphasis>'' (empty string)</emphasis>:
-							No encryption. This is the default.
-						</para></listitem>
-						<listitem><para><emphasis>ssl</emphasis></para></listitem>
-						<listitem><para><emphasis>tls</emphasis></para></listitem>
-					</itemizedlist>
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_smtp_username</term>
-			<listitem>
-				<para>SMTP Server Authentication user
-				</para>
-				<para>Allows the use of SMTP Authentication when using a remote SMTP host.
-				</para>
-				<note><para>must be set to '' (empty string) if the SMTP host
-					does not require authentication.
-				</para></note>
-				<para>Default is ''.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_smtp_password</term>
-			<listitem>
-				<para>This is the password that is used in SMTP Authentication.
-					Not used when $g_smtp_username = ''
-				</para>
-				<para>Default is ''.
 				</para>
 			</listitem>
 		</varlistentry>
