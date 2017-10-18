@@ -1613,7 +1613,7 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-view-state">';
+	echo '<td class="column-tags">';
 
 	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
 		echo string_display_line( tag_bug_get_all( $p_bug->id ) );
