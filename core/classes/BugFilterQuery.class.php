@@ -682,12 +682,33 @@ class BugFilterQuery extends DbQuery {
 		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] );
 		$t_use_none = ( in_array( 0, $t_user_ids ) );
 
-		# @TODO can this user view private notes?
-		$this->add_join( 'LEFT JOIN {bugnote} ON {bug}.id = {bugnote}.bug_id' );
-		if( $t_use_none ) {
-			$t_alias = 'COALESCE( {bugnote}.reporter_id, 0 )';
+		# Build a condition for determining note visibility, the user can view:
+		# - public notes
+		# - his own private notes
+		# - private notes if meets access level for 'private_bugnote_threshold'
+		$t_projects_can_view_private = $this->helper_filter_projects_using_access( 'private_bugnote_threshold' );
+		$t_table_alias = 'visible_bugnote';
+		if( ALL_PROJECTS == $t_projects_can_view_private ) {
+			$t_view_condition = null;
 		} else {
-			$t_alias = '{bugnote}.reporter_id';
+			$t_view_condition = $t_table_alias . '.view_state = ' . $this->param( VS_PUBLIC )
+					. ' OR {bug}.reporter_id = ' . $t_table_alias . '.reporter_id';
+			if( !empty( $t_projects_can_view_private ) ) {
+				$t_view_condition .= ' OR ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_private );
+			}
+		}
+		if( $t_view_condition ) {
+			$t_view_condition = ' AND (' . $t_view_condition . ')';
+		}
+		$t_join = 'LEFT JOIN {bugnote} ' . $t_table_alias
+				. ' ON {bug}.id = ' . $t_table_alias . '.bug_id'
+				. $t_view_condition;
+
+		$this->add_join( $t_join );
+		if( $t_use_none ) {
+			$t_alias = 'COALESCE( ' . $t_table_alias . '.reporter_id, 0 )';
+		} else {
+			$t_alias = $t_table_alias . '.reporter_id';
 		}
 
 		$t_where = $this->sql_in( $t_alias, $t_user_ids );
