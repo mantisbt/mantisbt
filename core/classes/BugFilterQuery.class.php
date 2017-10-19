@@ -502,10 +502,27 @@ class BugFilterQuery extends DbQuery {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
 			return;
 		}
+
+		# the user can view handler if he meets access level for
+		# 'view_handler_threshold' or if he is the handler
+		$t_projects_can_view = $this->helper_filter_projects_using_access( 'view_handler_threshold' );
+		if( ALL_PROJECTS == $t_projects_can_view ) {
+			$t_view_condition = null;
+		} else {
+			$t_view_condition = '{bug}.handler_id = ' . $this->param( $this->user_id );
+			if( !empty( $t_projects_can_view ) ) {
+				$t_view_condition = '(' . $t_view_condition . ' OR '
+						. $this->sql_in( '{bug}.project_id', $t_projects_can_view ) . ')';
+			}
+		}
+		if( $t_view_condition ) {
+			$t_view_condition = ' AND ' . $t_view_condition;
+		}
+
 		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_HANDLER_ID] );
-		$t_users_query = $this->sql_in( '{bug}.handler_id', $t_user_ids );
-		log_event( LOG_FILTERING, 'handler query = ' . $t_users_query );
-		$this->add_where( $t_users_query );
+		$t_query = $this->sql_in( '{bug}.handler_id', $t_user_ids ) . $t_view_condition;
+		log_event( LOG_FILTERING, 'handler query = ' . $t_query );
+		$this->add_where( $t_query );
 	}
 
 	protected function build_prop_category() {
