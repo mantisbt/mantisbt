@@ -55,13 +55,10 @@ $t_sep = csv_get_separator();
 # Get current filter
 $t_filter = filter_get_bug_rows_filter();
 
-# Get the query clauses
-$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter );
+$t_filter_query = new BugFilterQuery( $t_filter );
+$t_filter_query->set_limit( EXPORT_BLOCK_SIZE );
 
-# Get the total number of bugs that meet the criteria.
-$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
-
-if( 0 == $p_bug_count ) {
+if( 0 == $t_filter_query->get_bug_count() ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
@@ -106,7 +103,8 @@ do {
 	bug_clear_cache_all();
 
 	# select a new block
-	$t_result = filter_get_bug_rows_result( $t_query_clauses, EXPORT_BLOCK_SIZE, $t_offset, /* pop params */ false );
+	$t_filter_query->set_offset( $t_offset );
+	$t_result = $t_filter_query->execute();
 	$t_offset += EXPORT_BLOCK_SIZE;
 
 	# Keep reading until reaching max block size or end of result set
