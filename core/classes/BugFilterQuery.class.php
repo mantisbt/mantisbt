@@ -763,16 +763,16 @@ class BugFilterQuery extends DbQuery {
 			}
 		}
 
-		$t_tags_all = array();
+		$t_tags_always = array();
 		$t_tags_any = array();
-		$t_tags_none = array();
+		$t_tags_never = array();
 
 		# @TODO, use constants for tag modifiers
 		foreach( $t_tags as $t_tag_row ) {
 			switch( $t_tag_row['filter'] ) {
 				case 1:
 					# A matched issue must always have this tag
-					$t_tags_all[] = $t_tag_row;
+					$t_tags_always[] = $t_tag_row;
 					break;
 				case 0:
 					# A matched issue may have this tag
@@ -780,9 +780,16 @@ class BugFilterQuery extends DbQuery {
 					break;
 				case -1:
 					# A matched must never have this tag
-					$t_tags_none[] = $t_tag_row;
+					$t_tags_never[] = $t_tag_row;
 					break;
 			}
+		}
+
+		# Consider those tags that must always match, to also be part of those that can be
+		# optionally matched. This solves the scenario for an issue that matches one tag
+		# from the "always" group, and none from the "any" group.
+		if( !empty( $t_tags_always ) && !empty( $t_tags_any ) ) {
+			$t_tags_any = array_merge( $t_tags_any, $t_tags_always );
 		}
 
 		# Add the tag id to the array, from filter field "tag_select"
@@ -792,35 +799,31 @@ class BugFilterQuery extends DbQuery {
 
 		$t_where = array();
 
-		# @TODO are these joins safe for OR filter operator?
-		if( count( $t_tags_all ) ) {
-			foreach( $t_tags_all as $t_tag_row ) {
-				$t_tag_alias = 'bug_tag_alias_inc_' . $t_tag_row['id'];
-				$t_join_inc = 'JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+		if( count( $t_tags_always ) ) {
+			foreach( $t_tags_always as $t_tag_row ) {
+				$t_tag_alias = 'bug_tag_alias_alw_' . $t_tag_row['id'];
+				$t_join_inc = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
 					. ' AND ' . $t_tag_alias . '.tag_id = ' . $this->param( (int)$t_tag_row['id'] )
 					. $t_tag_projects_clause;
 				$this->add_join( $t_join_inc );
+				$t_where[] = $t_tag_alias . '.tag_id IS NOT NULL';
 			}
 		}
 
 		if( count( $t_tags_any ) ) {
 			$t_tag_alias = 'bug_tag_alias_any';
 			$t_tag_ids = $this->helper_array_map_int( array_column( $t_tags_any, 'id' ) );
-			$t_join_any = 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+			$t_join_any = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
 				. ' AND ' . $this->sql_in( $t_tag_alias . '.tag_id', $t_tag_ids )
 				. $t_tag_projects_clause;
 			$this->add_join( $t_join_any );
-
-			# If the isn't a non-outer join, check that at least one of the tags has been matched by the outer join
-			if( !count( $t_tags_all ) ) {
-				$t_where[] = $t_tag_alias . '.tag_id IS NOT NULL';
-			}
+			$t_where[] = $t_tag_alias . '.tag_id IS NOT NULL';
 		}
 
-		if( count( $t_tags_none ) ) {
-			$t_tag_alias = 'bug_tag_alias_exc';
-			$t_tag_ids = $this->helper_array_map_int( array_column( $t_tags_none, 'id' ) );
-			$t_join_exc = 'LEFT OUTER JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
+		if( count( $t_tags_never ) ) {
+			$t_tag_alias = 'bug_tag_alias_nev';
+			$t_tag_ids = $this->helper_array_map_int( array_column( $t_tags_never, 'id' ) );
+			$t_join_exc = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
 				. ' AND ' . $this->sql_in(  $t_tag_alias . '.tag_id', $t_tag_ids )
 				. $t_tag_projects_clause;
 			$this->add_join( $t_join_exc );
