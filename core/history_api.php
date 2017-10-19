@@ -203,85 +203,59 @@ function history_query_result( array $p_query_options ) {
 		$t_history_order = config_get( 'history_order' );
 	}
 
+	$t_query = new DbQuery();
 	$t_where = array();
 
-	# if a filter is provided, prepare subselect
+	# With bug filter
 	if( isset( $p_query_options['filter'] ) ) {
-		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
-		$t_query_clauses = filter_get_bug_rows_query_clauses( $p_query_options['filter'], null, null, null );
-		# if the query can't be formed, there are no results
-		if( empty( $t_query_clauses ) ) {
-			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-			db_param_pop();
-			return db_empty_result();
-		}
-		$t_select_string = 'SELECT {bug}.id ';
-		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-		if( count( $t_query_clauses['where'] ) > 0 ) {
-			$t_where_string .= ' AND ( ';
-			$t_where_string .= implode( $t_query_clauses['operator'], $t_query_clauses['where'] );
-			$t_where_string .= ' ) ';
-		}
-		$t_where[] = '{bug_history}.bug_id IN'
-			. ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
-		$t_params = $t_query_clauses['where_values'];
-	} else {
-		db_param_push();
-		$t_params = array();
+		$t_subquery = new BugFilterQuery( $p_query_options['filter'], BugFilterQuery::QUERY_TYPE_IDS );
+		$t_where[] = '{bug_history}.bug_id IN ' . $t_query->param( $t_subquery );
 	}
 
 	# Start time
 	if( isset( $p_query_options['start_time'] ) ) {
-		$t_where[] = '{bug_history}.date_modified >= ' . db_param();
-		$t_params[] = $p_query_options['start_time'];
+		$t_where[] = '{bug_history}.date_modified >= ' . $t_query->param( (int)$p_query_options['start_time'] );
 	}
 
 	# End time
 	if( isset( $p_query_options['end_time'] ) ) {
-		$t_where[] = '{bug_history}.date_modified < ' . db_param();
-		$t_params[] = $p_query_options['end_time'];
+		$t_where[] = '{bug_history}.date_modified < ' . $t_query->param( (int)$p_query_options['end_time'] );
 	}
 
 	# Bug ids
 	if( isset( $p_query_options['bug_id'] ) ) {
+		$c_ids = array();
 		if( is_array( $p_query_options['bug_id'] ) ) {
-			$t_in_strparams = array();
-			foreach ( $p_query_options['bug_id'] as $t_id ) {
-				$t_in_strparams[] = db_param();
-				$t_params[] = $t_id;
+			foreach( $p_query_options['bug_id'] as $t_id ) {
+				$c_ids[] = (int)$t_id;
 			}
-			$t_in_str = '{bug_history}.bug_id IN (' . implode( ',', $t_in_strparams ) . ')';
 		} else {
-			$t_where[] = '{bug_history}.bug_id = ' . db_param();
-			$t_params[] = $p_query_options['bug_id'];
+			$c_ids[] = (int)$p_query_options['bug_id'];
 		}
+		$t_where[] = $t_query->sql_in( '{bug_history}.bug_id', $c_ids );
 	}
 
 	# User ids
 	if( isset( $p_query_options['user_id'] ) ) {
+		$c_ids = array();
 		if( is_array( $p_query_options['user_id'] ) ) {
-			$t_in_strparams = array();
-			foreach ( $p_query_options['user_id'] as $t_id ) {
-				$t_in_strparams[] = db_param();
-				$t_params[] = $t_id;
+			foreach( $p_query_options['user_id'] as $t_id ) {
+				$c_ids[] = (int)$t_id;
 			}
-			$t_in_str = '{bug_history}.user_id IN (' . implode( ',', $t_in_strparams ) . ')';
 		} else {
-			$t_where[] = '{bug_history}.user_id = ' . db_param();
-			$t_params[] = $p_query_options['user_id'];
+			$c_ids[] = (int)$p_query_options['user_id'];
 		}
+		$t_where[] = $t_query->sql_in( '{bug_history}.user_id', $c_ids );
 	}
 
-	$t_query = 'SELECT * FROM {bug_history}';
+	$t_query->append_sql( 'SELECT * FROM {bug_history}' );
 	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
+		$t_query->append_sql( ' WHERE ' . implode( ' AND ', $t_where ) );
 	}
 
 	# Order history lines by date. Use the storing sequence as 2nd order field for lines with the same date.
-	$t_query .= ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order;
-	$t_result = db_query( $t_query, $t_params );
+	$t_query->append_sql( ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order );
+	$t_result = $t_query->execute();
 	return $t_result;
 }
 
