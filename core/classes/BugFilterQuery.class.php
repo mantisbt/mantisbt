@@ -27,6 +27,7 @@ class BugFilterQuery extends DbQuery {
 	protected $rt_stop_build;
 	protected $rt_included_projects;
 	protected $rt_table_alias_cf;
+	protected $table_alias_bugnote = null;
 
 	/**
 	 * $p_config can be either:
@@ -675,13 +676,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_where );
 	}
 
-	protected function build_prop_note_by() {
-		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
-			return;
+	protected function helper_table_alias_for_bugnote() {
+		if( $this->table_alias_bugnote ) {
+			return $this->table_alias_bugnote;
 		}
-		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] );
-		$t_use_none = ( in_array( 0, $t_user_ids ) );
-
 		# Build a condition for determining note visibility, the user can view:
 		# - public notes
 		# - his own private notes
@@ -692,7 +690,7 @@ class BugFilterQuery extends DbQuery {
 			$t_view_condition = null;
 		} else {
 			$t_view_condition = $t_table_alias . '.view_state = ' . $this->param( VS_PUBLIC )
-					. ' OR {bug}.reporter_id = ' . $t_table_alias . '.reporter_id';
+					. ' OR ' . $t_table_alias . '.reporter_id = ' . $this->param( $this->user_id );
 			if( !empty( $t_projects_can_view_private ) ) {
 				$t_view_condition .= ' OR ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_private );
 			}
@@ -705,6 +703,19 @@ class BugFilterQuery extends DbQuery {
 				. $t_view_condition;
 
 		$this->add_join( $t_join );
+		$this->table_alias_bugnote = $t_table_alias;
+		return $this->table_alias_bugnote;
+	}
+
+	protected function build_prop_note_by() {
+		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
+			return;
+		}
+		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] );
+		$t_use_none = ( in_array( 0, $t_user_ids ) );
+
+		$t_table_alias = $this->helper_table_alias_for_bugnote();
+
 		if( $t_use_none ) {
 			$t_alias = 'COALESCE( ' . $t_table_alias . '.reporter_id, 0 )';
 		} else {
@@ -974,6 +985,8 @@ class BugFilterQuery extends DbQuery {
 			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 		}
 
+		$t_bugnote_table = $this->helper_table_alias_for_bugnote();
+
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
 		$t_textsearch_where_clause = '( ';
@@ -998,7 +1011,7 @@ class BugFilterQuery extends DbQuery {
 				if( $t_search_term <= DB_MAX_INT ) {
 					$c_search_int = (int)$t_search_term;
 					$t_textsearch_where_clause .= ' OR {bug}.id = ' . $this->param( $c_search_int );
-					$t_textsearch_where_clause .= ' OR {bugnote}.id = ' . $this->param( $c_search_int );
+					$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . $this->param( $c_search_int );
 				}
 			}
 
@@ -1009,10 +1022,10 @@ class BugFilterQuery extends DbQuery {
 
 		# add text query elements to arrays
 		if( !$t_first ) {
+			# join with bugnote table has already been created or reused
 			$this->add_join( 'JOIN {bug_text} ON {bug}.bug_text_id = {bug_text}.id' );
-			$this->add_join( 'LEFT JOIN {bugnote} ON {bug}.id = {bugnote}.bug_id' );
 			# Outer join required otherwise we don't retrieve issues without notes
-			$this->add_join( 'LEFT JOIN {bugnote_text} ON {bugnote}.bugnote_text_id = {bugnote_text}.id' );
+			$this->add_join( 'LEFT JOIN {bugnote_text} ON ' . $t_bugnote_table . '.bugnote_text_id = {bugnote_text}.id' );
 			$this->add_where( $t_textsearch_where_clause );
 		}
 
