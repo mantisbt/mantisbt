@@ -1,24 +1,25 @@
 <?php
-# MantisBT - A PHP based bugtracking system
+# Bugger - A PHP based bugtracking system
 
-# MantisBT is free software: you can redistribute it and/or modify
+# Bugger is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #
-# MantisBT is distributed in the hope that it will be useful,
+# Bugger is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+# along with Bugger.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package MantisBT
+ * @package Bugger
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
+ * @copyright Copyright (C) 2002 - 2017 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2017 Bugger Team - bugger-dev@lists.sourceforge.net
+ * @link http://www.bugger.org
  */
 
 # This sample file contains the essential files that you MUST
@@ -31,12 +32,12 @@
 # In general the value OFF means the feature is disabled and ON means the
 # feature is enabled.  Any other cases will have an explanation.
 
-# Look in http://www.mantisbt.org/docs/ or config_defaults_inc.php for more
+# Look in http://www.bugger.org/docs/ or config_defaults_inc.php for more
 # detailed comments.
 
 # --- Database Configuration ---
 $g_hostname      = 'localhost';
-$g_db_username   = 'mantisdbuser';
+$g_db_username   = 'buggerdbuser';
 $g_db_password   = '';
 $g_database_name = 'bugtracker';
 $g_db_type       = 'mysqli';
@@ -57,7 +58,7 @@ $g_smtp_password		= '';					# used with PHPMAILER_METHOD_SMTP
 $g_webmaster_email      = 'webmaster@example.com';
 $g_from_email           = 'noreply@example.com';	# the "From: " field in emails
 $g_return_path_email    = 'admin@example.com';	# the return address for bounced mail
-# $g_from_name			= 'Mantis Bug Tracker';
+# $g_from_name			= 'Bugger Bug Tracker';
 # $g_email_receive_own	= OFF;
 # $g_email_send_using_cronjob = OFF;
 
@@ -71,8 +72,8 @@ $g_return_path_email    = 'admin@example.com';	# the return address for bounced 
 # $g_disallowed_files		= '';		# extensions comma separated
 
 # --- Branding ---
-# $g_window_title			= 'MantisBT';
-# $g_logo_image			= 'images/mantis_logo.png';
+# $g_window_title			= 'Bugger';
+# $g_logo_image			= 'images/bugger_logo.png';
 # $g_favicon_image		= 'images/favicon.ico';
 
 # --- Real names ---
