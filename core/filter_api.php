@@ -1048,8 +1048,12 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  * @param boolean $p_show_sticky   Whether to show sticky items.
  * @param array   $p_query_clauses Array of query clauses.
  * @return array $p_query_clauses
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
 	$p_query_clauses['order'] = array();
 
@@ -1205,8 +1209,13 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
  * array_unique here could cause problems with the query.
  * @param array $p_query_clauses Array of query clauses.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_unique_query_clauses( array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$p_query_clauses['select'] = array_unique( $p_query_clauses['select'] );
 	$p_query_clauses['from'] = array_unique( $p_query_clauses['from'] );
 	$p_query_clauses['join'] = array_unique( $p_query_clauses['join'] );
@@ -1223,8 +1232,15 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
  * @param array $p_query_clauses Array of query clauses.
  * @param boolean $p_pop_param      Whether to pop DB params from the stack
  * @return integer
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	# If query caluses is an empty array, the query can't be created
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
@@ -1358,8 +1374,13 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  *                                 -1 or null indicates default query (no offset)
  * @param boolean $p_pop_param        Whether to pop DB params from the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null, $p_pop_param = true ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	# if the query can't be formed, there are no results
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
@@ -1414,8 +1435,13 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
  * @param integer $p_user_id      User id to use as current user when filtering.
  * @param boolean $p_show_sticky  True/false - get sticky issues only.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
