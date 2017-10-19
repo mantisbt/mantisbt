@@ -1278,15 +1278,18 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_filter = $p_custom_filter;
 	}
 
-	# Get the query clauses
-	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
-
-	# Get the total number of bugs that meet the criteria.
-	# Keep the db_params in stack for next query
-	$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
+	# build a filter query, here for counting results
+	$t_filter_query = new BugFilterQuery(
+			$t_filter,
+			array(
+				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
+				'project_id' => $p_project_id,
+				'user_id' => $p_user_id,
+				'use_sticky' => $p_show_sticky
+				)
+			);
+	$p_bug_count = $t_filter_query->get_bug_count();
 	if( 0 == $p_bug_count ) {
-		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-		db_param_pop();
 		return array();
 	}
 
@@ -1295,16 +1298,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$p_page_count = filter_page_count( $p_bug_count, $p_per_page );
 	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
 	$t_offset = filter_offset( $p_page_number, $p_per_page );
-	# Execute query
-	$t_result = filter_get_bug_rows_result( $t_query_clauses, $p_per_page, $t_offset );
 
-	# Read results into rows array
-	$t_bug_id_array = array();
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_bug_id_array[] = (int)$t_row['id'];
-		$t_rows[] = $t_row;
-	}
+	$t_filter_query->set_limit( $p_per_page );
+	$t_filter_query->set_offset( $t_offset );
+	# Execute query
+	$t_rows = $t_filter_query->fetch_all();
+	$t_bug_id_array = array_column( $t_rows, 'id' );
 
 	# Return the processed rows: cache data, convert to bug objects
 	return filter_cache_result( $t_rows, $t_bug_id_array );
