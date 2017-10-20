@@ -181,13 +181,16 @@ print_account_menu( 'account_page.php' );
 			if( $t_account_verification ) {
 				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
 			} else {
+				# If the current password is blank, do not require the field
+				# so the user can reset the password (#23507)
+				$t_required = auth_does_password_match( $u_id, '' ) ? '' : 'required';
 			?>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
 				</td>
 				<td>
-					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" required />
+					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
 			<?php
