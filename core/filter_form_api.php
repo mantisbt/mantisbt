@@ -370,6 +370,7 @@ function print_filter_values_show_category( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	$t_any_found = false;
+	$t_none_found = false;
 	if( count( $t_filter[FILTER_PROPERTY_CATEGORY_ID] ) == 0 ) {
 		echo lang_get( 'any' );
 	} else {
@@ -379,6 +380,8 @@ function print_filter_values_show_category( array $p_filter ) {
 			$t_this_string = '';
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
+			} elseif( filter_field_is_none( $t_current ) ) {
+				$t_none_found = true;
 			} else {
 				$t_this_string = $t_current;
 			}
@@ -391,6 +394,8 @@ function print_filter_values_show_category( array $p_filter ) {
 		}
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
+		} elseif( true == $t_none_found ) {
+			echo lang_get( 'none' );
 		} else {
 			echo $t_output;
 		}
@@ -412,6 +417,7 @@ function print_filter_show_category( array $p_filter = null ) {
 		<!-- Category -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_CATEGORY_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_category_filter_option_list( $p_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
 		<?php
