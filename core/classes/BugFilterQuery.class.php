@@ -681,8 +681,24 @@ class BugFilterQuery extends DbQuery {
 		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 		$t_use_none = ( in_array( 0, $t_user_ids ) );
 
-		# @TODO can this user view monitoring users?
-		$this->add_join( 'LEFT JOIN {bug_monitor} ON {bug}.id = {bug_monitor}.bug_id' );
+		# Build a condition for determining monitoring visibility, the user can view:
+		# - his own monitored issues
+		# - other users monitoring if he meets access level for 'show_monitor_list_threshold'
+		$t_projects_can_view = $this->helper_filter_projects_using_access( 'show_monitor_list_threshold' );
+		if( ALL_PROJECTS == $t_projects_can_view ) {
+			$t_view_condition = null;
+		} else {
+			$t_view_condition = '{bug_monitor}.user_id = ' . $this->param( $this->user_id );
+			if( !empty( $t_projects_can_view ) ) {
+				$t_view_condition = '(' . $t_view_condition . ' OR '
+						. $this->sql_in( '{bug}.project_id', $t_projects_can_view ) . ')';
+			}
+		}
+		if( $t_view_condition ) {
+			$t_view_condition = ' AND ' . $t_view_condition;
+		}
+
+		$this->add_join( 'LEFT JOIN {bug_monitor} ON {bug}.id = {bug_monitor}.bug_id' . $t_view_condition );
 		if( $t_use_none ) {
 			$t_expr = 'COALESCE( {bug_monitor}.user_id, 0 )';
 		} else {
