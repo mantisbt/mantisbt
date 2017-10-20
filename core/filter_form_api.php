@@ -223,6 +223,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	$t_any_found = false;
+	$t_none_found = false;
 	if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
 		echo lang_get( 'any' );
 	} else {
@@ -232,6 +233,8 @@ function print_filter_values_user_monitor( array $p_filter ) {
 			$t_this_name = '';
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
+			} else if( filter_field_is_none( $t_current ) ) {
+				$t_none_found = true;
 			} else if( filter_field_is_myself( $t_current ) ) {
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 					$t_this_name = '[' . lang_get( 'myself' ) . ']';
@@ -250,6 +253,8 @@ function print_filter_values_user_monitor( array $p_filter ) {
 		}
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
+		} else if( true == $t_none_found ) {
+			echo lang_get( 'none' );
 		} else {
 			echo string_display( $t_output );
 		}
@@ -271,6 +276,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
 	<!-- Monitored by -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 		echo '<option value="' . META_FILTER_MYSELF . '" ';
