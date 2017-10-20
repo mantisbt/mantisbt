@@ -1291,7 +1291,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( $p_custom_filter === null ) {
 		$t_filter = filter_get_bug_rows_filter( $p_project_id, $p_user_id );
 	} else {
-		$t_filter = $p_custom_filter;
+		$t_filter = filter_ensure_valid_filter( $p_custom_filter );
 	}
 
 	# build a filter query, here for counting results
