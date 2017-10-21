@@ -847,12 +847,15 @@ class DbQuery {
 		}
 		if( is_numeric( $p_index_or_name ) ) {
 			if( count( $this->current_row ) > $p_index_or_name ) {
-				$t_value = reset( array_slice( $this->current_row, $p_index_or_name, 1 ) );
+				# get the element at that numerical position
+				$t_keys = array_keys( $this->current_row );
+				$t_value = $this->current_row[$t_keys[$p_index_or_name]];
 			} else {
 				$t_value = false;
 			}
 		} else {
 			if( isset( $this->current_row[$p_index_or_name] ) ) {
+				# get the value by column name
 				$t_value = $this->current_row[$p_index_or_name];
 			} else {
 				$t_value = false;
