@@ -1387,18 +1387,19 @@ function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_current_user = auth_get_current_user_id();
 	# choose color based on status
-	$status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
+	$status_label = html_get_status_css_class( $p_bug->status, $t_current_user, $p_bug->project_id );
 	echo '<td class="column-status">';
 	echo '<div class="align-left">';
 	echo '<i class="fa fa-square fa-status-box ' . $status_label . '"></i> ';
 	printf( '<span title="%s">%s</span>',
-		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
-		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
+		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
+		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
 	);
 
-	# print username instead of status
-	if( ( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
+	# print handler user next to status
+	if( $p_bug->handler_id > 0 && ON == config_get( 'show_assigned_names' ) && access_can_see_handler_for_bug( $p_bug ) ) {
 		printf( ' (%s)', prepare_user_name( $p_bug->handler_id ) );
 	}
 	echo '</div></td>';
