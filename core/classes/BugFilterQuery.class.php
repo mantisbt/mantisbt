@@ -1,5 +1,92 @@
 <?php
+# MantisBT - A PHP based bugtracking system
 
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * BugFilterQuery class.
+ * @copyright Copyright 2017 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ * @subpackage classes
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses config_api.php
+ * @uses constant_inc.php
+ * @uses custom_field_api.php
+ * @uses database_api.php
+ * @uses filter_api.php
+ * @uses filter_constants_inc.php
+ * @uses gpc_api.php
+ * @uses helper_api.php
+ * @uses logging_api.php
+ * @uses project_api.php
+ * @uses tag_api.php
+ * @uses user_api.php
+ * @uses utility_api.php
+ */
+
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'database_api.php' );
+require_api( 'filter_api.php' );
+require_api( 'filter_constants_inc.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'logging_api.php' );
+require_api( 'project_api.php' );
+require_api( 'tag_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+
+/**
+ * Bug Filter Query class
+ *
+ * Allows building a database query based on a filter.
+ * Contains logic for translating the filter properties into corresponding sql
+ * clauses to retrieve bugs matched by the filter.
+ * By inheriting from DbQury class, it can be used transparently as a query object
+ * that can be executed and fetched in the same way.
+ *
+ * With the constructor options, several types of queries can be built, oriented
+ * to retrieving a sorted list of bug rows, a single total count, a subquery for
+ * only bug ids...
+ * See constructor and set_query_type() for details of query type settings.
+ * After construction, and after a query type change, the base DbQuery object is
+ * ready to be executed.
+ *
+ * The simplest usage is:
+ *   $fq = new BugFilterQuery( $filter );
+ *   $fq->execute();
+ *
+ * Optionally, create with a different type:
+ *   $fq = new BugFilterQuery( $filter, BugFilterData::QUERY_TYPE_COUNT );
+ *   $bugcount = $fq->value();
+ *
+ * Or change its type dynamically:
+ *   $fq->set_query_type( BugFilterData::QUERY_TYPE_IDS );
+ *
+ * The query object can be used within other queries:
+ *   $subquery = new BugFilterQuery( $some_filter, BugFilterData::QUERY_TYPE_IDS );
+ *   $main_query = new DbQuery( 'SELECT * FROM {bug} WHERE id IN :filter_ids' );
+ *   $main_query->bind( 'filter_ids', $subquery );
+ *   $main_query->execute();
+ */
 
 class BugFilterQuery extends DbQuery {
 
@@ -30,6 +117,9 @@ class BugFilterQuery extends DbQuery {
 	protected $table_alias_bugnote = null;
 
 	/**
+	 * Constructor.
+	 * Will build a query based on the provided filter.
+	 *
 	 * $p_config can be either:
 	 * - A single type constant, for easy object creation using default attributes
 	 * - An array of options, for more advanced configuration.
@@ -48,8 +138,9 @@ class BugFilterQuery extends DbQuery {
 	 * - 'use_sticky':	(boolean) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
 	 *
-	 * @param type $p_filter
-	 * @param type $p_config
+	 * @param array $p_filter			Filter array
+	 * @param array|integer $p_config	Options array, or single query type identifier
+	 * @return void
 	 */
 	public function __construct( $p_filter, $p_config = self::QUERY_TYPE_LIST ) {
 		# defaults
@@ -89,6 +180,16 @@ class BugFilterQuery extends DbQuery {
 		$this->set_query_type( $t_query_type );
 	}
 
+	/**
+	 * Changes the effective database query to be of one of the selected types
+	 * See constructor documentation for details about each query type.
+	 *
+	 * After calling this method, the actual query string is modified and ready to
+	 * be used as a DbQuery objet for execution, or subquery composition.
+	 *
+	 * @param integer $p_query_type	Query type identifier
+	 * @return void
+	 */
 	public function set_query_type( $p_query_type ) {
 		switch( $p_query_type ) {
 			case self::QUERY_TYPE_COUNT:
@@ -108,6 +209,14 @@ class BugFilterQuery extends DbQuery {
 		$this->db_result = null;
 	}
 
+	/**
+	 * Shorthand method to get the total number of issues matched by the filter
+	 * It creates a copy of current object, set its type to a count query,
+	 * executes it and returns the count value.
+	 * This call does not modify current object.
+	 *
+	 * @return integer	Number of issues matched by the filter
+	 */
 	public function get_bug_count() {
 		# create a copy from current query
 		$t_query_count = clone $this;
@@ -120,30 +229,67 @@ class BugFilterQuery extends DbQuery {
 		return $t_query_count->value();
 	}
 
+	/**
+	 * Adds a query part to the "select" elements
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_select( $p_string ) {
 		$this->parts_select[] = $p_string;
 	}
 
+	/**
+	 * Adds a query part to the "from" elements
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_from( $p_string ) {
 		$this->parts_from[] = $p_string;
 	}
 
+	/**
+	 * Adds a query part to the "join" elements
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_join( $p_string ) {
 		$this->parts_join[] = $p_string;
 	}
 
+	/**
+	 * Adds a query part to the "where" elements.
+	 * These elements will be combined with the operator (and/or) defined by the filter
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_where( $p_string ) {
 		$this->parts_where[] = $p_string;
 	}
 
+	/**
+	 * Adds a query part to the "fixed where" elements.
+	 * The elements will always be ANDed in the query.
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_fixed_where( $p_string ) {
 		$this->fixed_where[] = $p_string;
 	}
 
+	/**
+	 * Adds a query part to the "order by" elements
+	 * @param string $p_string
+	 * @return void
+	 */
 	public function add_order( $p_string ) {
 		$this->parts_order[] = $p_string;
 	}
 
+	/**
+	 * Builds the query string block which is common to other query constructions,
+	 * based on the from, join, and where parts
+	 * @return string	The constructed query string block
+	 */
 	protected function helper_string_query_inner() {
 		$t_from_string = ' FROM ' . implode( ', ', $this->parts_from );
 		$t_join_string = count( $this->parts_join ) > 0 ? ' ' . implode( ' ', $this->parts_join ) : '';
@@ -156,6 +302,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_from_string . $t_join_string . $t_where_string;
 	}
 
+	/**
+	 * Builds a query string destinated to listing the issues with all the selected fields
+	 * @return string	The constructed query string
+	 */
 	protected function string_query_list() {
 		if( empty( $this->parts_order ) ) {
 			$this->build_order_by();
@@ -165,21 +315,39 @@ class BugFilterQuery extends DbQuery {
 		return $t_select_string . $this->helper_string_query_inner() . $t_order_string;
 	}
 
+	/**
+	 * Builds a query string destinated to listing the matched issues count
+	 * @return string	The constructed query string
+	 */
 	protected function string_query_count() {
 		$t_select_string = 'SELECT COUNT( DISTINCT {bug}.id )';
 		return $t_select_string . $this->helper_string_query_inner();
 	}
 
+	/**
+	 * Builds a query string destinated to listing the matched issue ids.
+	 * The values returned by this query are not unique.
+	 * @return string	The constructed query string
+	 */
 	protected function string_query_ids() {
 		$t_select_string = 'SELECT {bug}.id';
 		return $t_select_string . $this->helper_string_query_inner();
 	}
 
+	/**
+	 * Builds a query string destinated to listing the matched issue ids
+	 * The values returned by this query are unique ids
+	 * @return string	The constructed query string
+	 */
 	protected function string_query_dinstinct_ids() {
 		$t_select_string = 'SELECT DISTINCT {bug}.id';
 		return $t_select_string . $this->helper_string_query_inner();
 	}
 
+	/**
+	 * Build all the query parts needed based on the filter
+	 * @return void
+	 */
 	protected function build_main() {
 		$this->rt_stop_build = false;
 		$this->add_from( '{bug}' );
@@ -287,6 +455,10 @@ class BugFilterQuery extends DbQuery {
 		$this->parts_order = array_unique( $this->parts_order );
 	}
 
+	/**
+	 * Build the query parts for the filter projects
+	 * @return void
+	 */
 	protected function build_projects() {
 		$this->add_join( 'JOIN {project} ON {project}.id = {bug}.project_id' );
 		$this->add_fixed_where( '{project}.enabled =' . $this->param( true ) );
@@ -375,6 +547,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter properties related to "status"
+	 * @return void
+	 */
 	protected function build_prop_status() {
 		# take a list of all available statuses then remove the ones that we want hidden, then make sure
 		# the ones we want shown are still available
@@ -411,6 +587,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter property "creation date"
+	 * @return void
+	 */
 	protected function build_prop_date_created() {
 		if( ( gpc_string_to_bool( $this->filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) )
 				&& is_numeric( $this->filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] )
@@ -436,6 +616,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter property "last updated date"
+	 * @return void
+	 */
 	protected function build_prop_date_updated() {
 		if( ( gpc_string_to_bool( $this->filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) )
 				&& is_numeric( $this->filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] )
@@ -461,6 +645,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter property "view state"
+	 * @return void
+	 */
 	protected function build_prop_view_state() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_VIEW_STATE] ) ) {
 			return;
@@ -471,6 +659,16 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_view_state_query );
 	}
 
+	/**
+	 * Utility function to process the values for a filter property that is related
+	 * to a database id number, used to represent users.
+	 * Manages special case meta-value-none, wich is translated to id "0", to be able
+	 * to match database values where "0" is the default for empty/none
+	 * Manages special case meta-value-myself, by replacing with the actual current user id.
+	 *
+	 * @param array $p_array	Input array with user ids
+	 * @return array	Converted array
+	 */
 	protected function helper_process_users_property( $p_users_array ) {
 		$t_new_array = array();
 		foreach( $p_users_array as $t_user ) {
@@ -488,6 +686,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_new_array;
 	}
 
+	/**
+	 * Build the query parts for the filter property "reporter"
+	 * @return void
+	 */
 	protected function build_prop_reporter() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_REPORTER_ID] ) ) {
 			return;
@@ -498,6 +700,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_users_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "handler"
+	 * @return void
+	 */
 	protected function build_prop_handler() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
 			return;
@@ -525,6 +731,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "category"
+	 * @return void
+	 */
 	protected function build_prop_category() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_CATEGORY_ID] ) ) {
 			return;
@@ -554,6 +764,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query_category );
 	}
 
+	/**
+	 * Build the query parts for the filter property "severity"
+	 * @return void
+	 */
 	protected function build_prop_severity() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_SEVERITY] ) ) {
 			return;
@@ -562,6 +776,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "resolution"
+	 * @return void
+	 */
 	protected function build_prop_resolution() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_RESOLUTION] ) ) {
 			return;
@@ -570,6 +788,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "priority"
+	 * @return void
+	 */
 	protected function build_prop_priority() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_PRIORITY] ) ) {
 			return;
@@ -578,6 +800,15 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Utility function to process the values for a filter property that is related
+	 * to a database string field.
+	 * Manages special case meta-value-none, wich is translated to "", to be able
+	 * to match database values where "" is the default for empty/null
+	 *
+	 * @param array $p_array	Input array with strings
+	 * @return array	Converted array
+	 */
 	protected function helper_process_string_property( $p_array ) {
 		$t_new_array = array();
 		foreach( $p_array as $t_elem ) {
@@ -590,6 +821,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_new_array;
 	}
 
+	/**
+	 * Build the query parts for the filter property "build"
+	 * @return void
+	 */
 	protected function build_prop_build() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_BUILD] ) ) {
 			return;
@@ -599,6 +834,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "version"
+	 * @return void
+	 */
 	protected function build_prop_version() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_VERSION] ) ) {
 			return;
@@ -608,6 +847,14 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Utility function to process the values for a filter property that is related
+	 * to a database id number.
+	 * Manages special cases like meta-value-none, wich is translated to id "0", to be able
+	 * to match database values where "0" is the default for empty/none
+	 * @param array $p_array	Input array with ids
+	 * @return array	Converted array
+	 */
 	protected function helper_process_id_property( $p_array ) {
 		$t_new_array = array();
 		foreach( $p_array as $t_elem ) {
@@ -620,6 +867,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_new_array;
 	}
 
+	/**
+	 * Build the query parts for the filter property "profile"
+	 * @return void
+	 */
 	protected function build_prop_profile() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_PROFILE_ID] ) ) {
 			return;
@@ -629,6 +880,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "platform"
+	 * @return void
+	 */
 	protected function build_prop_platform() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_PLATFORM] ) ) {
 			return;
@@ -638,6 +893,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "OS"
+	 * @return void
+	 */
 	protected function build_prop_os() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_OS] ) ) {
 			return;
@@ -647,6 +906,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "OS build"
+	 * @return void
+	 */
 	protected function build_prop_os_build() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_OS_BUILD] ) ) {
 			return;
@@ -656,6 +919,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "fixed in version"
+	 * @return void
+	 */
 	protected function build_prop_fixed_version() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_FIXED_IN_VERSION] ) ) {
 			return;
@@ -665,6 +932,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "taget version"
+	 * @return void
+	 */
 	protected function build_prop_target_version() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_TARGET_VERSION] ) ) {
 			return;
@@ -674,6 +945,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_query );
 	}
 
+	/**
+	 * Build the query parts for the filter property "monitor by"
+	 * @return void
+	 */
 	protected function build_prop_monitor_by() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
 			return;
@@ -709,6 +984,16 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_where );
 	}
 
+	/**
+	 * Creates a JOIN clause for the bugnote table and returns the table alias used
+	 * for this join, to be used in sql expressions.
+	 * This JOIN is built with restrictions to meet user permissions to view private notes.
+	 *
+	 * The JOIN is created only once for this class, If it's already created, this function
+	 * returns the alias to be reused.
+	 *
+	 * @return string	A table alias for this join clause
+	 */
 	protected function helper_table_alias_for_bugnote() {
 		if( $this->table_alias_bugnote ) {
 			return $this->table_alias_bugnote;
@@ -740,6 +1025,10 @@ class BugFilterQuery extends DbQuery {
 		return $this->table_alias_bugnote;
 	}
 
+	/**
+	 * Build the query parts for the filter property "note by"
+	 * @return void
+	 */
 	protected function build_prop_note_by() {
 		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
 			return;
@@ -759,6 +1048,10 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( $t_where );
 	}
 
+	/**
+	 * Build the query parts for the filter property "relationship"
+	 * @return void
+	 */
 	protected function build_prop_relationship() {
 		$t_any_found = false;
 		$c_rel_type = $this->filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
@@ -782,6 +1075,21 @@ class BugFilterQuery extends DbQuery {
 		$this->add_where( '(' . implode( ' OR ', $t_clauses ) . ')' );
 	}
 
+	/**
+	 * Utility function to return the projects, fro mthe current filter scope, that meets some
+	 * access level threshold. The specified access can be either a int/array threshold, or
+	 * a configuration option to be evaluated at each project
+	 * (see documentation for access_project_array_filter() )
+	 *
+	 * The returned value can be:
+	 * - All_PROJECTS constant: meaning that all projects reached by the current filter meets the requested access.
+	 * - Empty array: meaning that none of the filter projects meets the required access
+	 * - Array of project ids: containing those projects which meets the requested access
+	 *   Note that if all projects meet the access, then ALL_PROJECTS will be returned.
+	 *
+	 * @param integer|array|string $p_access	An access level threshold or configuration option
+	 * @return array|integer
+	 */
 	protected function helper_filter_projects_using_access( $p_access ) {
 		$t_filtered_projects = access_project_array_filter( $p_access, $this->rt_included_projects, $this->user_id );
 		$t_diff = array_diff( $this->rt_included_projects, $t_filtered_projects );
@@ -792,6 +1100,11 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Utility function to cast all array element to int type
+	 * @param array $p_array	Input array
+	 * @return array	Converted array
+	 */
 	protected function helper_array_map_int( $p_array ) {
 		$t_new_array = array();
 		foreach( $p_array as $t_elem ) {
@@ -800,6 +1113,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_new_array;
 	}
 
+	/**
+	 * Build the query parts for the filter property "tags"
+	 * @return void
+	 */
 	protected function build_prop_tags() {
 		$c_tag_string = trim( $this->filter[FILTER_PROPERTY_TAG_STRING] );
 		$c_tag_select = (int)$this->filter[FILTER_PROPERTY_TAG_SELECT];
@@ -900,6 +1217,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter propertie srelated to custom fields
+	 * @return void
+	 */
 	protected function build_prop_custom_fields() {
 		if( ON != config_get( 'filter_by_custom_fields' ) ) {
 			log_event( LOG_FILTERING, 'filter custom fields is globally disabled, skip' );
@@ -1004,6 +1325,10 @@ class BugFilterQuery extends DbQuery {
 		} # foreach cf
 	}
 
+	/**
+	 * Build the query parts for the filter property "text search"
+	 * @return void
+	 */
 	protected function build_prop_search() {
 		if( is_blank( $this->filter[FILTER_PROPERTY_SEARCH] ) ) {
 			return;
@@ -1064,8 +1389,16 @@ class BugFilterQuery extends DbQuery {
 
 	}
 
+	/**
+	 * Translates a sql string created with legacy db_param() syntax, into
+	 * a string with valid parameters and values binded to current query object.
+	 * @param string $p_string	Sql string
+	 * @param array $p_params	Array of parameter values
+	 * @return string
+	 */
 	protected function helper_convert_legacy_clause( $p_string, array $p_params ) {
 		if( empty( $p_params ) ) {
+			# shortcut, if there are no parameters, there's no need to translate
 			return $p_string;
 		}
 		$t_params = array_values( $p_params );
@@ -1078,6 +1411,10 @@ class BugFilterQuery extends DbQuery {
 		return $t_new_string;
 	}
 
+	/**
+	 * Build the query parts for the filter propertie srelated to plugin filter fields
+	 * @return void
+	 */
 	protected function build_prop_plugin_filters() {
 		$t_plugin_filters = filter_get_plugin_filters();
 		foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
@@ -1100,6 +1437,10 @@ class BugFilterQuery extends DbQuery {
 		}
 	}
 
+	/**
+	 * Build the query parts for the filter related to sorting
+	 * @return void
+	 */
 	protected function build_order_by() {
 
 		# Get only the visible, and sortable, column properties
