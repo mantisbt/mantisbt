@@ -836,3 +836,26 @@ function access_threshold_min_level( $p_threshold ) {
 	}
 
 }
+
+/**
+ * Checks if the user can view the handler for the bug.
+ * @param BugData      $p_bug     Bug to check access against.
+ * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
+ * @return boolean whether user can view the handler user.
+ */
+function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	# handler can be viewed if allowed by access level, OR the user himself is the handler
+	$t_can_view_handler =
+		( $p_bug->handler_id == $t_user_id )
+		|| access_has_bug_level(
+			config_get( 'view_handler_threshold', null, $t_user_id, $p_bug->project_id ),
+			$p_bug->id );
+
+	return $t_can_view_handler;
+}

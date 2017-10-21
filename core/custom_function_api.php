@@ -108,7 +108,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
 	echo string_get_bug_view_link( $p_issue_id );
 	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
-	if( $t_bug->handler_id != 0 ) {
+	if( $t_bug->handler_id > 0 && ON == config_get( 'show_assigned_names' ) && access_can_see_handler_for_bug( $t_bug ) ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 	echo '<div class="space-2"></div>';
@@ -164,7 +164,7 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
 	echo string_get_bug_view_link( $p_issue_id );
 	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
-	if( $t_bug->handler_id != 0 ) {
+	if( $t_bug->handler_id > 0 && ON == config_get( 'show_assigned_names' ) && access_can_see_handler_for_bug( $t_bug ) ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 	echo '<div class="space-2"></div>';
