@@ -169,7 +169,13 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 if( ( $t_resolve_issue || $t_close_issue ) &&
 	!relationship_can_resolve_bug( $f_bug_id )
 ) {
-	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+
+	# this may be overridden with configuration to allow parents to close regardless of
+	# the status of any children
+	if ( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
+		# retrieve all the relationships in which the bug is the source bug
+		trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+	}
 }
 
 # Validate any change to the status of the issue.
