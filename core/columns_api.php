@@ -1399,7 +1399,9 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	);
 
 	# print handler user next to status
-	if( $p_bug->handler_id > 0 && ON == config_get( 'show_assigned_names' ) && access_can_see_handler_for_bug( $p_bug ) ) {
+	if( $p_bug->handler_id > 0
+			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $p_bug->project_id )
+			&& access_can_see_handler_for_bug( $p_bug ) ) {
 		printf( ' (%s)', prepare_user_name( $p_bug->handler_id ) );
 	}
 	echo '</div></td>';
