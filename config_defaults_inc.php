@@ -2160,14 +2160,6 @@ $g_preview_max_height = 250;
 $g_view_attachments_threshold = VIEWER;
 
 /**
- * list of filetypes to view inline. This is a string of extensions separated
- * by commas. This is used when downloading an attachment. Rather than
- * downloading, the attachment is viewed in the browser.
- * @global string $g_inline_file_exts
- */
-$g_inline_file_exts = 'gif,png,jpg,jpeg,bmp';
-
-/**
  * access level needed to download bug attachments
  * @global integer $g_download_attachments_threshold
  */
@@ -4381,7 +4373,6 @@ $g_public_config_names = array(
 	'html_valid_tags_single_line',
 	'html_valid_tags',
 	'impersonate_user_threshold',
-	'inline_file_exts',
 	'issue_activity_note_attachments_seconds_threshold',
 	'language_auto_map',
 	'language_choices_arr',
