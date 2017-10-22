@@ -1300,7 +1300,8 @@ function email_send( EmailData $p_email_data ) {
 			break;
 	}
 
-	$t_mail->IsHTML( false );              # set email format to plain text
+	# default email format is plain text
+	$t_mail->IsHTML( event_signal( 'EVENT_EMAIL_HTML_CONTENT' ) );	# default email format is plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );

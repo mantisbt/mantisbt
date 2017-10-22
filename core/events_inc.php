@@ -149,4 +149,8 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+
+	# Email Events
+	# Enable HTML Content-Type in email notifications
+	'EVENT_EMAIL_HTML_CONTENT' => EVENT_TYPE_CHAIN,
 ) );
