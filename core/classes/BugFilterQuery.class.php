@@ -1053,26 +1053,70 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	protected function build_prop_relationship() {
-		$t_any_found = false;
-		$c_rel_type = $this->filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
-		$c_rel_bug = $this->filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
-		if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
+		$c_rel_type = (int)$this->filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
+		$c_rel_bug = (int)$this->filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
+		if( BUG_REL_ANY == $c_rel_type && META_FILTER_ANY == $c_rel_bug ) {
 			return;
 		}
 		# use the complementary type
-		$t_comp_type = relationship_get_complementary_type( $c_rel_type );
+		if( $c_rel_type >= 0 ) {
+			$t_comp_type = relationship_get_complementary_type( $c_rel_type );
+		}
 		$t_table_dst = 'rel_dst';
 		$t_table_src = 'rel_src';
+
+		# build conditions for relation type and bug match
+		if( BUG_REL_NONE == $c_rel_type ) {
+			if( META_FILTER_NONE == $c_rel_bug
+				|| META_FILTER_ANY == $c_rel_bug ) {
+				# rel NONE, bug ANY/NONE, those bugs that are not related in any way to another
+				$t_where = $t_table_dst . '.relationship_type IS NULL AND ' . $t_table_src . '.relationship_type IS NULL';
+			} else {
+				# rel NONE, bug ID, those bugs that are not related in any way to bug ID
+				# map to a non-existant relation type -1 to include nulls
+				# not including the self id
+				$t_where = 'NOT COALESCE(' . $t_table_dst . '.source_bug_id, -1) = ' . $this->param( $c_rel_bug )
+						. ' AND NOT COALESCE(' . $t_table_src . '.destination_bug_id, -1) = ' . $this->param( $c_rel_bug )
+						. ' AND NOT {bug}.id = ' . $this->param( $c_rel_bug );
+			}
+		} elseif( BUG_REL_ANY == $c_rel_type ) {
+			if( META_FILTER_NONE == $c_rel_bug ) {
+				# rel ANY, bug NONE, bugs that are not related in any way to another
+				$t_where = $t_table_dst . '.relationship_type IS NULL AND ' . $t_table_src . '.relationship_type IS NULL';
+			} elseif ( META_FILTER_ANY == $c_rel_bug ) {
+				# rel ANY, bug ANY, do nothing
+				return;
+			} else {
+				# rel ANY, bug ID, those bugs that have any relation to bug ID
+				$t_where = '(' . $t_table_dst . '.source_bug_id = ' . $this->param( $c_rel_bug )
+						. ' OR ' . $t_table_src . '.destination_bug_id = ' . $this->param( $c_rel_bug ) . ')';
+			}
+		} else {
+			# relation is specified
+			if( META_FILTER_NONE == $c_rel_bug ) {
+				# rel REL, bug NONE, those bugs that dont have any REL relation (may have other types)
+				# map to a non-existant relation type -1 to include nulls
+				$t_where = 'COALESCE(' . $t_table_dst . '.relationship_type, -1) <> ' . $this->param( $t_comp_type )
+						. ' AND COALESCE(' . $t_table_src . '.relationship_type, -1) <> ' . $this->param( $c_rel_type );
+			} elseif( META_FILTER_ANY == $c_rel_bug ) {
+				# rel REL, bug ANY, those bugs that are related by REL to any bug
+				$t_where = '(' . $t_table_dst . '.relationship_type=' . $this->param( $t_comp_type )
+						. ' OR ' . $t_table_src . '.relationship_type=' . $this->param( $c_rel_type ) . ')';
+			} else {
+				# rel REL, bug ID, those bugs that are related by REL to bug ID
+				$t_where = '('
+						. $t_table_dst . '.relationship_type=' . $this->param( $t_comp_type )
+						. ' AND ' . $t_table_dst . '.source_bug_id=' . $this->param( $c_rel_bug )
+						. ' OR '
+						. $t_table_src . '.relationship_type=' . $this->param( $c_rel_type )
+						. ' AND ' . $t_table_src . '.destination_bug_id=' . $this->param( $c_rel_bug )
+						. ')';
+			}
+		}
+
 		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
 		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
-
-		# get reverse relationships
-		$t_clauses = array();
-		$t_clauses[] = '(' . $t_table_dst . '.relationship_type=' . $this->param( $t_comp_type )
-				. ' AND ' . $t_table_dst . '.source_bug_id=' . $this->param( $c_rel_bug ) . ')';
-		$t_clauses[] = '(' . $t_table_src . '.relationship_type=' . $this->param( $c_rel_type )
-				. ' AND ' . $t_table_src . '.destination_bug_id=' . $this->param( $c_rel_bug ) . ')';
-		$this->add_where( '(' . implode( ' OR ', $t_clauses ) . ')' );
+		$this->add_where( $t_where );
 	}
 
 	/**
