@@ -4695,13 +4695,13 @@ $g_webservice_error_when_version_not_found = ON;
 $g_webservice_version_when_not_found = '';
 
 /**
- * Whether the REST API (experimental) is enabled or not.  Note that this flag only
+ * Whether the REST API is enabled or not.  Note that this flag only
  * impacts API Token based auth.  Hence, even if the API is disabled, it can still be
  * used from the Web UI using cookie based authentication.
  *
  * @global integer $g_webservice_rest_enabled
  */
-$g_webservice_rest_enabled = OFF;
+$g_webservice_rest_enabled = ON;
 
 ####################
 # Issue Activities #
