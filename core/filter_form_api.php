@@ -1542,10 +1542,37 @@ function print_filter_values_relationship_type( array $p_filter ) {
 	echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 	$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 	$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
-	if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
-		echo lang_get( 'any' );
+	if( BUG_REL_ANY == $c_rel_type ) {
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+				echo lang_get( 'none' );
+			case META_FILTER_ANY:
+				echo lang_get( 'any' );
+				break;
+			default;
+				echo lang_get( 'any' ),' ' , lang_get( 'with' ), ' ', $c_rel_bug;
+		}
+	} elseif( BUG_REL_NONE == $c_rel_type ) {
+		echo lang_get( 'none' );
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+			case META_FILTER_ANY:
+				break;
+			default;
+				echo ' ', lang_get( 'with' ), ' ', $c_rel_bug;
+		}
 	} else {
-		echo relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
+		echo relationship_get_description_for_history( $c_rel_type ) . ' ';
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+				echo lang_get( 'none' );
+				break;
+			case META_FILTER_ANY:
+				echo lang_get( 'any' );
+				break;
+			default;
+				echo $c_rel_bug;
+		}
 	}
 }
 
@@ -1564,7 +1591,7 @@ function print_filter_relationship_type( array $p_filter = null ) {
 	if( !$c_reltype_value ) {
 		$c_reltype_value = -1;
 	}
-	relationship_list_box( $c_reltype_value, 'relationship_type', true, false, "input-xs" );
+	relationship_list_box( $c_reltype_value, 'relationship_type', true, true, "input-xs" );
 	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
