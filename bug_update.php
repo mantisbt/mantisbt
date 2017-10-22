@@ -165,10 +165,11 @@ if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 	}
 }
 
-# If resolving or closing, ensure that all dependent issues have been resolved.
+# If resolving or closing, ensure that all dependent issues have been resolved
+# unless config option enables closing parents with open children.
 if( ( $t_resolve_issue || $t_close_issue ) &&
-	!relationship_can_resolve_bug( $f_bug_id )
-) {
+	!relationship_can_resolve_bug( $f_bug_id ) &&
+	OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
 	trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
 }
 

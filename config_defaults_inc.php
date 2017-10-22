@@ -1316,6 +1316,12 @@ $g_default_bug_eta = ETA_NONE;
 $g_default_bug_relationship_clone = BUG_REL_NONE;
 
 /**
+ * Allow parent bug to close regardless of child status.
+ * @global integer $g_allow_parent_of_unresolved_to_close
+ */
+$g_allow_parent_of_unresolved_to_close = OFF;
+
+/**
  * Default for new bug relationships
  * @global integer $g_default_bug_relationship
  */
@@ -4217,6 +4223,7 @@ $g_public_config_names = array(
 	'allow_file_upload',
 	'allow_freetext_in_profile_fields',
 	'allow_no_category',
+	'allow_parent_of_unresolved_to_close',
 	'allow_permanent_cookie',
 	'allow_reporter_close',
 	'allow_reporter_reopen',
