@@ -1262,6 +1262,42 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
+	 * Creates a JOIN clause for the custom field table and returns the table
+	 * alias used for this join.
+	 * May return false if the join was not created. This may happen, if no
+	 * values are viewable.
+	 * @param array $p_cfdef	Custom field definition array
+	 * @return string	A table alias for this join clause
+	 */
+	protected function helper_table_alias_for_cf( $p_cfdef ) {
+		$t_id = (int)$p_cfdef['id'];
+		if( isset( $this->rt_table_alias_cf[$t_id] ) ) {
+			return $this->rt_table_alias_cf[$t_id];
+		}
+		$t_table_name = 'cf_alias_' . $t_id;
+		$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $this->param( $t_id );
+
+		# get which projects are valid for this custom field
+		$t_searchable_projects = array_intersect( $this->rt_included_projects, custom_field_get_project_ids( $t_id ) );
+		# and for which of those projects the user have read access to this field
+		$t_projects_can_view_field = access_project_array_filter( (int)$p_cfdef['access_level_r'], $t_searchable_projects, $this->user_id );
+		if( empty( $t_projects_can_view_field ) ) {
+			$this->rt_table_alias_cf[$t_id] = false;
+		} else {
+			# This diff will contain those included projects that can't view this custom field
+			$t_diff = array_diff( $this->rt_included_projects, $t_projects_can_view_field );
+			# If not empty, it means there are some projects that can't view the field values,
+			# so a project filter must be used to not include values from those projects
+			if( !empty( $t_diff ) ) {
+				$t_cf_join_clause .= ' AND ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_field );
+			}
+			$this->rt_table_alias_cf[$t_id] = $t_table_name;
+			$this->add_join( $t_cf_join_clause );
+		}
+		return $this->rt_table_alias_cf[$t_id];
+	}
+
+	/**
 	 * Build the query parts for the filter propertie srelated to custom fields
 	 * @return void
 	 */
@@ -1295,28 +1331,10 @@ class BugFilterQuery extends DbQuery {
 				continue;
 			}
 
-			$t_table_name = 'cf_alias_' . $t_cfid;
-			$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $this->param( (int)$t_cfid );
-
-			# get which projects are valid for this custom field
-			$t_searchable_projects = array_intersect( $this->rt_included_projects, custom_field_get_project_ids( $t_cfid ) );
-			# and for which of those projects the user have read access to this field
-			$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $this->user_id );
-			if( empty( $t_projects_can_view_field ) ) {
-				# This field cant be viewed in any project, skip this field
-				# @TODO if the field cant be viewed in any project, should still the join be made to match for META_FILTER_NONE?
+			$t_table_name = $this->helper_table_alias_for_cf( $t_def );
+			if( !$t_table_name ) {
 				continue;
 			}
-			# This diff will contain those included projects that can't view this custom field
-			$t_diff = array_diff( $this->rt_included_projects, $t_projects_can_view_field );
-			# If not empty, it means there are some projects that can't view the field values,
-			# so a project filter must be used to not include values from those projects
-			if( !empty( $t_diff ) ) {
-				$t_cf_join_clause .= ' AND ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_field );
-			}
-
-			$this->rt_table_alias_cf[$t_cfid] = $t_table_name;
-			$this->add_join( $t_cf_join_clause );
 
 			if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 				# Define the value field with type cast to integer
@@ -1510,33 +1528,9 @@ class BugFilterQuery extends DbQuery {
 				$t_def = custom_field_get_definition( $t_custom_field_id );
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 
-				$t_table_name = '';
-				# if the custom field was filtered, there is already a calculated join, so reuse that table alias
-				# otherwise, a new join must be calculated
-				if( isset( $this->rt_table_alias_cf[$t_custom_field_id] ) ) {
-					$t_table_name = $this->rt_table_alias_cf[$t_custom_field_id];
-				} else {
-					# @TODO This code for CF visibility is the same as the custom field filter
-					# It should be encapsulated and reused
-
-					$t_searchable_projects = array_intersect( $this->rt_included_projects, custom_field_get_project_ids( $t_custom_field_id ) );
-					$t_projects_can_view_field = access_project_array_filter( (int)$t_def['access_level_r'], $t_searchable_projects, $this->user_id );
-					if( empty( $t_projects_can_view_field ) ) {
-						continue;
-					}
-
-					$t_table_name = 'cf_sort_' . $t_custom_field_id;
-					$t_cf_join_clause = 'LEFT OUTER JOIN {custom_field_string} ' . $t_table_name . ' ON {bug}.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $this->param( $t_custom_field_id );
-
-					# This diff will contain those included projects that can't view this custom field
-					$t_diff = array_diff( $this->rt_included_projects, $t_projects_can_view_field );
-					# If not empty, it means there are some projects that can't view the field values,
-					# so a project filter must be used to not include values from those projects
-					if( !empty( $t_diff ) ) {
-						$t_cf_join_clause .= ' AND ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_field );
-					}
-					$this->rt_table_alias_cf[$t_custom_field_id] = $t_table_name;
-					$this->add_join( $t_cf_join_clause );
+				$t_table_name = $this->helper_table_alias_for_cf( $t_def );
+				if( !$t_table_name ) {
+					continue;
 				}
 
 				# if no join can be used (eg, no view access), skip this field from the order clause
