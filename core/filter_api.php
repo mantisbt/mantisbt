@@ -682,6 +682,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# Validate properties that must not be arrays
 	$t_single_value_list = array(
 		FILTER_PROPERTY_VIEW_STATE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_TYPE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_BUG => 'int',
 	);
 	foreach( $t_single_value_list as $t_field_name => $t_field_type ) {
 		$t_value = $p_filter_arr[$t_field_name];
@@ -800,6 +802,15 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_STATUS] = $t_show_status_array;
 	}
 
+	# validate relationship fields
+	if( !(
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] > 0
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_ANY
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_NONE
+		) ) {
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] = filter_get_default_property( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_view_type );
+	}
+
 	# all of our filter values are now guaranteed to be there, and correct.
 	return $p_filter_arr;
 }
@@ -889,7 +900,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_TAG_STRING => '',
 		FILTER_PROPERTY_TAG_SELECT => 0,
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
-		FILTER_PROPERTY_RELATIONSHIP_BUG => 0,
+		FILTER_PROPERTY_RELATIONSHIP_BUG => META_FILTER_ANY,
 	);
 
 	# initialize plugin filters
@@ -3455,7 +3466,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	}
 
 	$f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
-	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
 
 	log_event( LOG_FILTERING, 'filter_gpc_get: Update filters' );
 	$t_filter_input['_version'] 								= FILTER_VERSION;
