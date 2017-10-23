@@ -309,6 +309,7 @@ class BugFilterQuery extends DbQuery {
 	protected function string_query_list() {
 		if( empty( $this->parts_order ) ) {
 			$this->build_order_by();
+			$this->unique_query_parts();
 		}
 		$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $this->parts_select );
 		$t_order_string = ' ORDER BY ' . implode( ', ', $this->parts_order );
@@ -449,6 +450,10 @@ class BugFilterQuery extends DbQuery {
 
 		$this->build_prop_plugin_filters();
 
+		$this->unique_query_parts();
+	}
+
+	protected function unique_query_parts() {
 		$this->parts_select = array_unique( $this->parts_select );
 		$this->parts_from = array_unique( $this->parts_from );
 		$this->parts_join = array_unique( $this->parts_join );
@@ -749,19 +754,18 @@ class BugFilterQuery extends DbQuery {
 			}
 		}
 
+		$t_join = 'LEFT JOIN {category} ON {bug}.category_id = {category}.id';
 		$t_query_or = array();
 		if( !empty( $t_names ) ) {
-			$t_subselect = 'SELECT id FROM {category} WHERE ' . $this->sql_in( 'name', $t_names );
-			$t_query_names = '{bug}.category_id IN ( '. $t_subselect . ')';
-			$t_query_or[] = $t_query_names;
+			$t_query_or[] = $this->sql_in( '{category}.name', $t_names );
 		}
 		if( $t_use_none ) {
-			$t_query_or[] = '{bug}.category_id = ' . $this->param( 0 );
+			$t_query_or[] = '{category}.name IS NULL';
 		}
-
-		$t_query_category = '(' . implode( ' OR ', $t_query_or ) . ')';
-		log_event( LOG_FILTERING, 'category query = ' . $t_query_category );
-		$this->add_where( $t_query_category );
+		$t_where = '(' . implode( ' OR ', $t_query_or ) . ')';
+		log_event( LOG_FILTERING, 'category query = ' . $t_where );
+		$this->add_join( $t_join );
+		$this->add_where( $t_where );
 	}
 
 	/**
@@ -1512,9 +1516,9 @@ class BugFilterQuery extends DbQuery {
 		switch( $p_prop ) {
 
 			case 'category_id':
-				# @TODO, share join with property search if it exists
-				$this->add_join( 'LEFT JOIN {category} category_sort_table ON {bug}.category_id = category_sort_table.id' );
-				return 'category_sort_table.name';
+				# This join will be reduced as unique, if category search is active
+				$this->add_join( 'LEFT JOIN {category} ON {bug}.category_id = {category}.id' );
+				return '{category}.name';
 				break;
 
 			case 'project_id':
