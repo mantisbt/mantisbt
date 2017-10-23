@@ -1500,6 +1500,58 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
+	 * Return a column name for the specified proeprty to sort on.
+	 * Valid only for standard bug table fields
+	 * Manages joining with other tables to allow sorting by display names instead
+	 * of its numerical ids.
+	 * @param string $p_prop	Filter property for sorting
+	 * @return string	A column alias to be used in the sql order part
+	 */
+	protected function helper_sort_column_alias( $p_prop ) {
+
+		switch( $p_prop ) {
+
+			case 'category_id':
+				# @TODO, share join with property search if it exists
+				$this->add_join( 'LEFT JOIN {category} category_sort_table ON {bug}.category_id = category_sort_table.id' );
+				return 'category_sort_table.name';
+				break;
+
+			case 'project_id':
+				# project table is already joined by default
+				return '{project}.name';
+				break;
+
+			case 'handler_id':
+			case 'reporter_id':
+				$t_table_alias = $p_prop . '_sort_table';
+				$t_join = 'LEFT JOIN {user} ' . $t_table_alias
+						. ' ON {bug}.' . $p_prop . ' = ' . $t_table_alias . '.id';
+				$this->add_join( $t_join );
+				$t_col_alias = $p_prop . '_sort_alias';
+
+				# sorting by username: coalesce( username, $prefix_for_deleted || id )
+				# sorting by realname: coalesce( nullif(realname,''), username, $prefix_for_deleted || id )
+				$t_select = 'COALESCE(';
+				# Note: show_realname should olny be set at global or all_projects
+				# Note: sort_by_last_name is not supported here
+				if( ON == config_get( 'show_realname' ) ) {
+					$t_select .= 'NULLIF(' . $t_table_alias . '.realname, \'\'), ';
+				}
+				$t_select .= $t_table_alias . '.username, ';
+				$t_select .= 'CONCAT(\'' . lang_get( 'prefix_for_deleted_users' ) . '\', {bug}.' . $p_prop . ')';
+				$t_select .= ') AS ' . $t_col_alias;
+
+				$this->add_select( $t_select );
+				return $t_col_alias;
+				break;
+
+			default:
+				return '{bug}.' . $p_prop;
+		}
+	}
+
+	/**
 	 * Build the query parts for the filter related to sorting
 	 * @return void
 	 */
@@ -1597,7 +1649,7 @@ class BugFilterQuery extends DbQuery {
 
 			# standard column
 			} else {
-				$t_sort_col = '{bug}.' . $c_sort;
+				$t_sort_col = $this->helper_sort_column_alias( $c_sort );
 
 				# When sorting by due_date, always display undefined dates last.
 				# Undefined date is defaulted as "1" in database, so add a special
