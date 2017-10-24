@@ -42,7 +42,15 @@ require_once( $t_restcore_dir . 'VersionMiddleware.php' );
 # For example, this will disable logic like encoding dates with XSD meta-data.
 ApiObjectFactory::$soap = false;
 
-$g_app = new \Slim\App();
+
+# Show SLIM detailed errors according to Mantis settings
+$t_config = array();
+if( ON == config_get_global( 'show_detailed_errors' ) ) {
+	$t_config['settings'] = array( 'displayErrorDetails' => true );
+}
+$t_container = new \Slim\Container( $t_config );
+
+$g_app = new \Slim\App( $t_container );
 
 # Add middleware - executed in reverse order of appearing here.
 $g_app->add( new ApiEnabledMiddleware() );
@@ -61,4 +69,3 @@ require_once( $t_restcore_dir . 'users_rest.php' );
 event_signal( 'EVENT_REST_API_ROUTES', array( array( 'app' => $g_app ) ) );
 
 $g_app->run();
-
