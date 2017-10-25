@@ -98,7 +98,7 @@ $t_db_type = config_get_global( 'db_type' );
 
 # install the tables
 if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
-	!file_exists( dirname( dirname( __FILE__ ) ) . '/library/adodb/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
+	!file_exists( dirname( dirname( __FILE__ ) ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $t_db_type ) . '.';
 	exit;
 }
