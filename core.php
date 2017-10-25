@@ -124,15 +124,8 @@ function require_lib( $p_library_name ) {
 		if( file_exists( $t_library_file_path ) ) {
 			require_once( $t_library_file_path );
 		} else {
-			global $g_vendor_path;
-			$t_library_file_path = $g_vendor_path . $p_library_name;
-
-			if( file_exists( $t_library_file_path ) ) {
-				require_once( $t_library_file_path );
-			} else {
-				echo 'External library \'' . $t_library_file_path . '\' not found.';
-				exit;
-			}
+			echo 'External library \'' . $t_library_file_path . '\' not found.';
+			exit;
 		}
 
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
