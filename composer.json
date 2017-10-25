@@ -27,5 +27,10 @@
             "email": "mantisbt-dev@lists.sourceforge.net",
             "homepage": "https://www.mantisbt.org"
         }
-    ]
+    ],
+    "config": {
+        "platform": {
+            "php": "5.5.0"
+        }
+    }
 }
