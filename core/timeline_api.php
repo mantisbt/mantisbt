@@ -60,21 +60,22 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 	$t_previous_history_event = null;
 	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
 		$t_event = null;
-		$t_user_id = $t_history_event['userid'];
+		$t_user_id = (int)$t_history_event['userid'];
 		$t_timestamp = $t_history_event['date'];
 		$t_issue_id = $t_history_event['bug_id'];
+		$t_type = $t_history_event['type'];
 
 		if ( $t_previous_history_event != null ) {  //check repeated event
-			if (    $t_previous_history_event['userid'] == $t_history_event['userid']
-				 && $t_previous_history_event['date'] == $t_history_event['date']
-				 && $t_previous_history_event['bug_id'] == $t_history_event['bug_id']
-				 && $t_previous_history_event['type'] == $t_history_event['type']	
+			if (    $t_previous_history_event['userid'] == $t_user_id
+				 && $t_previous_history_event['date'] == $t_timestamp
+				 && $t_previous_history_event['bug_id'] == $t_issue_id
+				 && $t_previous_history_event['type'] == $t_type
 			) {
 				continue;
 			}
 		}
 		
-		switch( $t_history_event['type'] ) {
+		switch( $t_type ) {
 			case NEW_BUG:
 				$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
 				break;
@@ -85,14 +86,14 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 			case BUG_MONITOR:
 				# Skip monitors added for others due to reminders, only add monitor events where added
 				# user is the same as the logged in user.
-				if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
+				if( (int)$t_history_event['old_value'] == $t_user_id ) {
 					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, true );
 				}
 				break;
 			case BUG_UNMONITOR:
 				# Skip removing other users from monitoring list, only add unmonitor events where removed
 				# user is the same as the logged in user.
-				if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
+				if( (int)$t_history_event['old_value'] == $t_user_id ) {
 					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
 				}
 				break;
