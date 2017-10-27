@@ -381,13 +381,17 @@ if( $t_multiple_projects ) {
 	event_signal( 'EVENT_BUG_ACTIONGROUP_FORM', array( $t_event_params ) );
 
 	if( $t_bugnote ) {
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
+		$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+
 ?>
 				<tr>
 					<th class="category">
 						<?php echo lang_get( 'add_bugnote_title' ); ?>
 					</th>
 					<td>
-						<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
+						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
 					</td>
 				</tr>
 <?php
@@ -399,7 +403,6 @@ if( $t_multiple_projects ) {
 					</th>
 					<td>
 <?php
-			$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
 						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />

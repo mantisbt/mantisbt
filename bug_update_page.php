@@ -701,9 +701,13 @@ if( $t_custom_fields_found ) {
 }
 
 # Bugnote Text Box
+$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
+$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+
 echo '<tr>';
 echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea class="form-control" ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
+echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
 
 # Bugnote Private Checkbox (if permitted)
 if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
@@ -711,7 +715,6 @@ if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id )
 	echo '<th class="category">' . lang_get( 'private' ) . '</th>';
 	echo '<td colspan="5">';
 
-	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_bug_id ) ) {
 		echo '<label>';
 		echo '<input ', helper_get_tab_index(), ' type="checkbox" class="ace" id="private" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
