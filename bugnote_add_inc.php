@@ -93,6 +93,9 @@ require_api( 'lang_api.php' );
 
 <?php
 	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
+	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+
 	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr>
@@ -113,10 +116,9 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'bugnote' ) ?>
 				</th>
 				<td width="85%">
-					<textarea name="bugnote_text" id="bugnote_text" class="form-control" rows="7"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
 				</td>
 			</tr>
-
 
 <?php
 	if( config_get( 'time_tracking_enabled' ) ) {

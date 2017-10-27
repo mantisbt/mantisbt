@@ -341,6 +341,9 @@ layout_page_begin();
 				<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
+		$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+
 		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
@@ -360,7 +363,7 @@ layout_page_begin();
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
 				<td>
-					<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
+					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
 				</td>
 			</tr>
 <?php
