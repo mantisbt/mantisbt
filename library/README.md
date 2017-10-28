@@ -9,7 +9,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
+rssbuilder      | RSSBuilder      | 2.2.1     | patched [1]
 utf8            | phputf8         | 0.5       | unpatched
 
 
@@ -31,9 +31,7 @@ list.js                           | 1.4.1     | unpatched
   
 **Notes**
 
-1. Library is tracked as a *GIT submodule*; refer to the corresponding
-   repository for details
-2. removed `__autoload` function
+1. removed `__autoload` function
 
 
 Upstream projects
