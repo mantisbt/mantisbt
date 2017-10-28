@@ -79,5 +79,9 @@ $g_return_path_email    = 'admin@example.com';	# the return address for bounced 
 # $g_show_realname = OFF;
 # $g_show_user_realname_threshold = NOBODY;	# Set to access level (e.g. VIEWER, REPORTER, DEVELOPER, MANAGER, etc)
 
+# --- Project Dropdown ---
+# $g_enable_ticketcounter_projectdropdown = ON; # Add Ticketcount behind project title in Project Dropdown
+# $g_ticketcounter_projectdropdown_status = 90;
+
 # --- Others ---
 # $g_default_home_page = 'my_view_page.php';	# Set to name of page to go to after login

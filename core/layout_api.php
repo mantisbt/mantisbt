@@ -592,6 +592,7 @@ function layout_navbar_button_bar() {
  * @return void
  */
 function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
+	global $g_enable_ticketcounter_projectdropdown, $g_ticketcounter_projectdropdown_status;
 	$t_user_id = auth_get_current_user_id();
 
 	# Cache all needed projects
@@ -628,7 +629,12 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
 		check_selected( $p_project_id, $t_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
+		if (isset($g_enable_ticketcounter_projectdropdown) && $g_enable_ticketcounter_projectdropdown) {
+			$count_open_tickets = ' ('.filter_get_bug_count(array('select' => array(), 'from' => array('mantis_bug_table'), 'join' => array(), 'operator' => ',', 'project_where' => array('`project_id` = \'' . $t_id . '\''), 'where' => array('`status` != ' . $g_ticketcounter_projectdropdown_status))) . ')';
+		} else {
+			$count_open_tickets = '';
+		}
+		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . $count_open_tickets . ' </a></li>' . "\n";
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
 	}
 
@@ -649,6 +655,7 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
  * @return void
  */
 function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+	global $g_enable_ticketcounter_projectdropdown, $g_ticketcounter_projectdropdown_status;
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
@@ -670,8 +677,13 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
 		check_selected( $p_project_id, $t_full_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+		if (isset($g_enable_ticketcounter_projectdropdown) && $g_enable_ticketcounter_projectdropdown) {
+			$count_open_tickets = ' ('.filter_get_bug_count(array('select' => array(), 'from' => array('mantis_bug_table'), 'join' => array(), 'operator' => ',', 'project_where' => array('`project_id` = \'' . $t_id . '\''), 'where' => array('`status` != ' . $g_ticketcounter_projectdropdown_status))) . ')';
+		} else {
+			$count_open_tickets = '';
+		}
 		echo ' class="project-link"> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
-		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
+		echo string_attribute( project_get_field( $t_id, 'name' ) ) . $count_open_tickets . '</a></li>' . "\n";
 
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
 	}
