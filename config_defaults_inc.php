@@ -380,7 +380,7 @@ $g_signup_use_captcha	= ON;
 /**
  * absolute path (with trailing slash!) to folder which contains your
  * TrueType-Font files used for the Relationship Graphs,
- * the Workflow Graphs and the MantisGraph plugin
+ * and the Workflow Graphs
  * @global string $g_system_font_folder
  */
 $g_system_font_folder	= '';
