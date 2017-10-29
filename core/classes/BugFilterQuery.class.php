@@ -164,7 +164,9 @@ class BugFilterQuery extends DbQuery {
 						$this->project_id = (int)$t_value;
 						break;
 					case 'user_id':
-						$this->user_id = (int)$t_value;
+						if( $t_value != NO_USER ) {
+							$this->user_id = (int)$t_value;
+						}
 						break;
 					case 'use_sticky':
 						$this->use_sticky = (boolean)$t_value;
