@@ -192,7 +192,7 @@ class FilterTest extends SoapBase {
 
 		$t_issues_count = $this->getIssuesForUser( 'monitored', $t_target_user );
 
-		$this->assertEquals( 0, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
+		$this->assertEquals( 1, count( $t_issues_count ) - count( $t_initial_issues_count ), 'count(issuesCount) - count(initialIssuesCount)' );
 	}
 
 	/**
