@@ -247,9 +247,6 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 	$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
 
-	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_user_access_level_is_reporter = ( config_get( 'report_bug_threshold', null, null, $t_project_id ) == access_get_project_level( $t_project_id ) );
-
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$t_version_rows = array_reverse( version_get_all_rows( $t_project_id ) );
@@ -258,6 +255,8 @@ foreach( $t_project_ids as $t_project_id ) {
 	category_get_all_rows( $t_project_id );
 
 	$t_project_header_printed = false;
+
+	$t_access_limit_reporters_applies = access_has_limited_view_for_reporter( $t_project_id );
 
 	foreach( $t_version_rows as $t_version_row ) {
 		if( $t_version_row['released'] == 1 ) {
@@ -302,8 +301,8 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			# check limit_Reporter (Issue #4770)
 			# reporters can view just issues they reported
-			if( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
-				 !bug_is_user_reporter( $t_row['id'], $t_user_id )) {
+			if( $t_access_limit_reporters_applies
+				&& !bug_is_user_reporter( $t_row['id'], $t_user_id ) ) {
 				continue;
 			}
 
