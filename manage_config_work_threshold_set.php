@@ -178,7 +178,10 @@ set_capability_row( 'monitor_add_others_bug_threshold' );
 set_capability_row( 'monitor_delete_others_bug_threshold' );
 set_capability_boolean( 'auto_set_status_to_assigned' );
 set_capability_enum( 'bug_assigned_status' );
-set_capability_boolean( 'limit_reporters' );
+if( gpc_isset( 'limit_reporters' ) ) {
+	set_capability_boolean( 'limit_reporters', true );
+}
+set_capability_row( 'limit_reporter_unless_threshold' );
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );

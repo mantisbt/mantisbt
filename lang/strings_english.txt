@@ -823,6 +823,8 @@ $s_resolved_status = 'Status where an issue is considered resolved';
 $s_readonly_status = 'Status where an issue becomes read only';
 $s_reopen_status = 'Status to which a reopened issue is set';
 $s_reopen_resolution = 'Resolution to which a reopened issue is set';
+$s_limit_reporter_unless_threshold_option = 'View other reporters\' issues. Otherwise, limit access to only own reported issues';
+$s_limit_handler_unless_threshold_option = 'View other handlers\' issues. Otherwise, limit access to only own assigned issues';
 
 # manage_config_revert_page
 $s_config_delete_sure = 'Are you sure you want to delete the settings for:';
