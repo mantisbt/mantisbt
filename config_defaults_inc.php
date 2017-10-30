@@ -3053,6 +3053,11 @@ $g_allow_no_category = OFF;
 $g_limit_reporters = OFF;
 
 /**
+ * @global integer $g_limit_reporter_unless_threshold
+ */
+$g_limit_reporter_unless_threshold = ANYBODY;
+
+/**
  * reporter can close. Allow reporters to close the bugs they reported, after
  * they are marked resolved.
  * @global integer $g_allow_reporter_close
@@ -4580,6 +4585,7 @@ $g_public_config_names = array(
 	'language_choices_arr',
 	'limit_email_domains',
 	'limit_reporters',
+	'limit_reporter_unless_threshold',
 	'logo_image',
 	'logo_url',
 	'logout_cookie',

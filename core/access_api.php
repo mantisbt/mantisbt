@@ -892,9 +892,12 @@ function access_parse_array( array $p_access ) {
  * @return mixed	A threshold definition
  */
 function access_threshold_reporter_unlimited_view( $p_project_id = null, $p_user_id = null ) {
-	$t_limit_reporters_option = config_get( 'limit_reporters', null, $p_user_id, $p_project_id );
-	if( ON != $t_limit_reporters_option ) {
-		return ANYBODY;
+	# 'limit_reporters' option were only supported for ALL_PROJECTS
+	# use this option if set, otherwise, check the new option for threshold
+	$t_limit_reporters = config_get( 'limit_reporters', null, $p_user_id, $p_project_id );
+	if( ON != $t_limit_reporters ) {
+		$t_threshold_can_view = config_get( 'limit_reporter_unless_threshold', null, $p_user_id, $p_project_id );
+		return $t_threshold_can_view;
 	}
 
 	$t_user = null === $p_user_id ? auth_get_current_user_id() : $p_user_id;
