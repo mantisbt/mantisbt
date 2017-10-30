@@ -394,7 +394,7 @@ get_capability_row( lang_get( 'add_users_monitoring_issue' ), 'monitor_add_other
 get_capability_row( lang_get( 'remove_users_monitoring_issue' ), 'monitor_delete_others_bug_threshold' );
 get_capability_boolean( lang_get( 'set_status_assigned' ), 'auto_set_status_to_assigned' );
 get_capability_enum( lang_get( 'assigned_status' ), 'bug_assigned_status', 'status' );
-get_capability_boolean( lang_get( 'limit_access' ), 'limit_reporters', true );
+get_capability_boolean( lang_get( 'limit_access' ), 'limit_reporters' );
 get_section_end();
 
 # Notes

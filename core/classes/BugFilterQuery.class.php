@@ -538,8 +538,6 @@ class BugFilterQuery extends DbQuery {
 				return;
 			}
 
-			$t_limit_reporters = config_get( 'limit_reporters' );
-
 			# this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
 			# access of the current user.
 			$t_public_only_project_ids = array();
@@ -554,8 +552,8 @@ class BugFilterQuery extends DbQuery {
 			project_cache_array_rows( $t_included_project_ids );
 
 			foreach( $t_included_project_ids as $t_pid ) {
-				if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold', null, $t_user_id, $t_pid ) ) + 1, $t_pid, $t_user_id ) ) ) {
-					# project is limited, only view own reported bugs
+				if( access_has_limited_view_for_reporter( $t_pid, $t_user_id ) ) {
+					# project is limited, only can view own reported bugs
 					$t_limit_reporter_project_ids[] = $t_pid;
 					# as we will check the user is reporter for each bug, and reporter can view his own private bugs, there's no need to check for private bug access
 					continue;

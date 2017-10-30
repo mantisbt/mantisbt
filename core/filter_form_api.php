@@ -190,11 +190,8 @@ function print_filter_reporter_id( array $p_filter = null ) {
 	?>
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
 		<?php
-	# if current user is a reporter, and limited reports set to ON, only display that name
-	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
-	#   this assumed that there aren't any holes above REPORTER where the limit would apply
-	#
-	if( ( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( access_threshold_min_level( config_get( 'report_bug_threshold' ) ) + 1 ) ) ) {
+	# if current user is a reporter, and limited_reporters is set to ON, only display that name
+	if( access_has_limited_view_for_reporter() ) {
 		$t_id = auth_get_current_user_id();
 		$t_username = user_get_name( $t_id );
 		$t_display_name = string_attribute( $t_username );
