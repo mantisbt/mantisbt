@@ -132,6 +132,11 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	$t_db_type = config_get_global( 'db_type' );
 	$g_db_functional_type = db_get_type( $t_db_type );
 
+	if( $g_db_functional_type == DB_TYPE_UNDEFINED ) {
+		error_parameters( 0, 'Database type is not supported by MantisBT, check $g_db_type in config_inc.php' );
+		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+	}
+
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
 		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
