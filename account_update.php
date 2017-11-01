@@ -96,7 +96,7 @@ if( $t_account_verification && is_blank( $f_password ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
 # Do not update email for a user verification

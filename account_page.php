@@ -95,7 +95,7 @@ $t_row = user_get_row( auth_get_current_user_id() );
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB

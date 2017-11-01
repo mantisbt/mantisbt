@@ -282,7 +282,7 @@ function custom_function_default_auth_can_change_password() {
 		MD5,
 	);
 
-	return in_array( config_get( 'login_method' ), $t_can_change );
+	return in_array( config_get_global( 'login_method' ), $t_can_change );
 }
 
 /**

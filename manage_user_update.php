@@ -104,7 +104,7 @@ if( 0 != strcasecmp( $t_old_username, $f_username )
 
 user_ensure_name_valid( $f_username );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 if( $t_ldap && config_get( 'use_ldap_realname' ) ) {
 	$t_realname = ldap_realname_from_username( $f_username );
