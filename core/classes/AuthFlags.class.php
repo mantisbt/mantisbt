@@ -267,7 +267,7 @@ class AuthFlags {
 	 */
 	function getLogoutRedirectPage() {
 		if( is_null( $this->logout_redirect_page ) ) {
-			return config_get( 'logout_redirect_page' );
+			return config_get_global( 'logout_redirect_page' );
 		}
 
 		return $this->logout_redirect_page;
