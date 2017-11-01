@@ -809,7 +809,7 @@ function print_account_menu( $p_page = '' ) {
  */
 function print_doc_menu( $p_page = '' ) {
 	# User Documentation
-	$t_doc_url = config_get( 'manual_url' );
+	$t_doc_url = config_get_global( 'manual_url' );
 	if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
 		# URL has no scheme, so it is relative to MantisBT root
 		if( is_blank( $t_doc_url ) ||
