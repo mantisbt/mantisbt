@@ -89,7 +89,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'database_driver' ) ?></th>
-			<td><?php echo config_get( 'db_type' ) ?></td>
+			<td><?php echo config_get_global( 'db_type' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'database_version_description' ) ?></th>
