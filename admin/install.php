@@ -186,7 +186,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_type                = config_get( 'db_type', '' );
 	$f_database_name          = config_get_global( 'database_name', '' );
 	$f_db_username            = config_get_global( 'db_username', '' );
-	$f_db_password            = config_get( 'db_password', '' );
+	$f_db_password            = config_get_global( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
@@ -201,9 +201,9 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
 	$f_database_name      = gpc_get( 'database_name', config_get_global( 'database_name', 'bugtracker' ) );
 	$f_db_username        = gpc_get( 'db_username', config_get_global( 'db_username', '' ) );
-	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	$f_db_password        = gpc_get( 'db_password', config_get_global( 'db_password', '' ) );
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
-		$f_db_password = config_get( 'db_password' );
+		$f_db_password = config_get_global( 'db_password' );
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
 
@@ -1153,7 +1153,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_type != config_get( 'db_type', '' ) ) ||
 			( $f_database_name != config_get_global( 'database_name', '' ) ) ||
 			( $f_db_username != config_get_global( 'db_username', '' ) ) ||
-			( $f_db_password != config_get( 'db_password', '' ) ) ) {
+			( $f_db_password != config_get_global( 'db_password', '' ) ) ) {
 			print_test_result( BAD, false, 'file ' . $t_config_filename . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
