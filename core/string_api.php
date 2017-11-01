@@ -251,7 +251,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
 
 	$t_path = rtrim( config_get_global( 'path' ), '/' );
-	$t_short_path = rtrim( config_get( 'short_path' ), '/' );
+	$t_short_path = rtrim( config_get_global( 'short_path' ), '/' );
 
 	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
 

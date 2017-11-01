@@ -537,7 +537,7 @@ function layout_navbar_projects_menu() {
 
 			# Force reload of current page, except if we got here after
 			# creating the first project
-			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
+			$t_redirect_url = str_replace( config_get_global( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
 			if( 'manage_proj_create.php' != $t_redirect_url ) {
 				html_meta_redirect( $t_redirect_url, 0, false );
 			}
