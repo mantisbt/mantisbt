@@ -211,7 +211,7 @@ function html_css() {
 	html_css_link( config_get_global( 'css_include_file' ) );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get( 'css_rtl_include_file' ) );
+		html_css_link( config_get_global( 'css_rtl_include_file' ) );
 	}
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		# status_config.php is a special css file, dynamically generated.
