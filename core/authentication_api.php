@@ -831,7 +831,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
  */
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
-	$t_cookie_name = config_get( 'string_cookie' );
+	$t_cookie_name = config_get_global( 'string_cookie' );
 	gpc_set_cookie( $t_cookie_name, $t_cookie_string, auth_session_expiry( $p_perm_login ) );
 }
 
@@ -848,7 +848,7 @@ function auth_clear_cookies() {
 
 	# clear cookie, if not logged in from script
 	if( $g_script_login_cookie == null ) {
-		$t_cookie_name = config_get( 'string_cookie' );
+		$t_cookie_name = config_get_global( 'string_cookie' );
 		$t_cookie_path = config_get_global( 'cookie_path' );
 
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
@@ -916,7 +916,7 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 	}
 
 	# fetch user cookie
-	$t_cookie_name = config_get( 'string_cookie' );
+	$t_cookie_name = config_get_global( 'string_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 	# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
