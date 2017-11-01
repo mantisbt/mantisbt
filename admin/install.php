@@ -182,7 +182,7 @@ foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
 	$f_dsn                    = config_get( 'dsn', '' );
-	$f_hostname               = config_get( 'hostname', '' );
+	$f_hostname               = config_get_global( 'hostname', '' );
 	$f_db_type                = config_get_global( 'db_type', '' );
 	$f_database_name          = config_get_global( 'database_name', '' );
 	$f_db_username            = config_get_global( 'db_username', '' );
@@ -197,7 +197,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 } else {
 	# read control variables with defaults
 	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
-	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_hostname           = gpc_get( 'hostname', config_get_global( 'hostname', 'localhost' ) );
 	$f_db_type            = gpc_get( 'db_type', config_get_global( 'db_type', '' ) );
 	$f_database_name      = gpc_get( 'database_name', config_get_global( 'database_name', 'bugtracker' ) );
 	$f_db_username        = gpc_get( 'db_username', config_get_global( 'db_username', '' ) );
@@ -1149,7 +1149,7 @@ if( 5 == $t_install_state ) {
 		}
 	} else {
 		# already exists, see if the information is the same
-		if( ( $f_hostname != config_get( 'hostname', '' ) ) ||
+		if( ( $f_hostname != config_get_global( 'hostname', '' ) ) ||
 			( $f_db_type != config_get_global( 'db_type', '' ) ) ||
 			( $f_database_name != config_get_global( 'database_name', '' ) ) ||
 			( $f_db_username != config_get_global( 'db_username', '' ) ) ||
