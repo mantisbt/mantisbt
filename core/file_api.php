@@ -973,7 +973,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$t_finfo_available = false;
 	if( class_exists( 'finfo' ) ) {
-		$t_info_file = config_get( 'fileinfo_magic_db_file' );
+		$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
 
 		if( is_blank( $t_info_file ) ) {
 			$t_finfo = new finfo( FILEINFO_MIME );
