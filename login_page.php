@@ -166,7 +166,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	}
 
 	$t_config = 'show_detailed_errors';
-	if( config_get( $t_config ) != OFF ) {
+	if( config_get_global( $t_config ) != OFF ) {
 		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
 	}
 	$t_config = 'display_errors';
