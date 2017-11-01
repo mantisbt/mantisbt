@@ -551,7 +551,7 @@ function mci_related_issue_as_array_by_id( $p_issue_id ) {
 function mci_get_user_lang( $p_user_id ) {
 	$t_lang = user_pref_get_pref( $p_user_id, 'language' );
 	if( $t_lang == 'auto' ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 	return $t_lang;
 }

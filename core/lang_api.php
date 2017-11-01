@@ -135,7 +135,7 @@ function lang_get_default() {
  * @return string
  */
 function lang_map_auto() {
-	$t_lang = config_get( 'fallback_language' );
+	$t_lang = config_get_global( 'fallback_language' );
 
 	if( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
 		$t_accept_langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
@@ -218,7 +218,7 @@ function lang_push( $p_lang = null ) {
 	#  The results from auto are always the local user, not what the
 	#  override wants, unless this is the first language setting
 	if( ( 'auto' == $t_lang ) && ( 0 < count( $g_lang_overrides ) ) ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 
 	$g_lang_overrides[] = $t_lang;

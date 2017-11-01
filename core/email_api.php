@@ -1261,7 +1261,7 @@ function email_send( EmailData $p_email_data ) {
 	# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
 	$t_lang = config_get_global( 'default_language' );
 	if( 'auto' == $t_lang ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 	$t_mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ) );
 
