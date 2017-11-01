@@ -104,7 +104,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
-			<td><?php echo config_get( 'absolute_path' ) ?></td>
+			<td><?php echo config_get_global( 'absolute_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
