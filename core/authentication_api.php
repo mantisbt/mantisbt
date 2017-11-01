@@ -1157,7 +1157,7 @@ function auth_http_prompt() {
  * @return void
  */
 function auth_http_set_logout_pending( $p_pending ) {
-	$t_cookie_name = config_get( 'logout_cookie' );
+	$t_cookie_name = config_get_global( 'logout_cookie' );
 
 	if( $p_pending ) {
 		gpc_set_cookie( $t_cookie_name, '1', false );
@@ -1174,7 +1174,7 @@ function auth_http_set_logout_pending( $p_pending ) {
  * @access public
  */
 function auth_http_is_logout_pending() {
-	$t_cookie_name = config_get( 'logout_cookie' );
+	$t_cookie_name = config_get_global( 'logout_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 	return( $t_cookie > '' );
