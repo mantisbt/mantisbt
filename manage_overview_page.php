@@ -108,7 +108,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
-			<td><?php echo config_get( 'core_path' ) ?></td>
+			<td><?php echo config_get_global( 'core_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
