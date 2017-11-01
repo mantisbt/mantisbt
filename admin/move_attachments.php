@@ -70,7 +70,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 		# Project upload path
 		$t_upload_path = project_get_field( $t_project, 'file_path' );
 		if( is_blank( $t_upload_path ) ) {
-			$t_upload_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, $t_project );
+			$t_upload_path = config_get_global( 'absolute_path_default_upload_folder', '', ALL_USERS, $t_project );
 		}
 
 		if( is_blank( $t_upload_path )

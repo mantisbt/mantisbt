@@ -304,7 +304,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 		}
 	}
 
-	$t_path = config_get( 'absolute_path_default_upload_folder' );
+	$t_path = config_get_global( 'absolute_path_default_upload_folder' );
 	if( !is_blank( $t_path ) ) {
 		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
@@ -741,11 +741,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
-		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 		}
 	}
 
@@ -1045,12 +1045,12 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 
 	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
 	if( is_blank( $t_path_from ) ) {
-		$t_path_from = config_get( 'absolute_path_default_upload_folder', null, null, $t_project_id_from );
+		$t_path_from = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_from );
 	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
 	if( is_blank( $t_path_to ) ) {
-		$t_path_to = config_get( 'absolute_path_default_upload_folder', null, null, $p_project_id_to );
+		$t_path_to = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_to );
 	if( $t_path_from == $t_path_to ) {

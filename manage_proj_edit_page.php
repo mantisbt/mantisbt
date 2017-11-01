@@ -168,7 +168,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
-					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 				}
 				?>
 				<tr>

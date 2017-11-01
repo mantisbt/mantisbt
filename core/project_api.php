@@ -310,7 +310,7 @@ function validate_project_file_path( $p_file_path ) {
 		# If the provided path is the same as the default, make the path blank.
 		# This means that if the default upload path is changed, you don't have
 		# to update the upload path for every single project.
-		if( !strcmp( $p_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+		if( !strcmp( $p_file_path, config_get_global( 'absolute_path_default_upload_folder' ) ) ) {
 			$p_file_path = '';
 		} else {
 			file_ensure_valid_upload_path( $p_file_path );
@@ -729,11 +729,11 @@ function project_get_upload_path( $p_project_id ) {
 	}
 
 	if( $p_project_id == ALL_PROJECTS ) {
-		$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, ALL_PROJECTS );
+		$t_path = config_get_global( 'absolute_path_default_upload_folder', '' );
 	} else {
 		$t_path = project_get_field( $p_project_id, 'file_path' );
 		if( is_blank( $t_path ) ) {
-			$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, $p_project_id );
+			$t_path = config_get_global( 'absolute_path_default_upload_folder', '' );
 		}
 	}
 
