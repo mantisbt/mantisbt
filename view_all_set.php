@@ -225,7 +225,7 @@ if( !$f_temp_filter ) {
 	$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 
 	# set cookie values
-	gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
+	gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 }
 
 # redirect to print_all or view_all page

@@ -372,7 +372,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	} else if( true === $p_expire ) {
-		$t_cookie_length = config_get( 'cookie_time_length' );
+		$t_cookie_length = config_get_global( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
 
