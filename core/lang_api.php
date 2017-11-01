@@ -139,7 +139,7 @@ function lang_map_auto() {
 
 	if( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
 		$t_accept_langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
-		$t_auto_map = config_get( 'language_auto_map' );
+		$t_auto_map = config_get_global( 'language_auto_map' );
 
 		# Expand language map
 		$t_auto_map_exp = array();
@@ -364,7 +364,7 @@ function lang_get_current_datetime_locale() {
 	$t_lang = lang_get_current();
 
 	# Lookup $g_language_auto_map by value and then return the first key
-	$t_auto_map = config_get( 'language_auto_map' );
+	$t_auto_map = config_get_global( 'language_auto_map' );
 	$t_entry = array_search( $t_lang, $t_auto_map );
 	$t_key_arr = explode( ',', $t_entry );
 
