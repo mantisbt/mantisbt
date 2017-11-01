@@ -82,7 +82,7 @@ for( $i=0; $i < $t_row_count; $i++ ) {
 	$t_project_id = $t_rows[$i]->project_id;
 	$t_unique_project_ids[$t_project_id] = $t_project_id;
 }
-gpc_set_cookie( config_get( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
+gpc_set_cookie( config_get_global( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
 
 compress_enable();
 

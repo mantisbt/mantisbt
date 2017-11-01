@@ -107,7 +107,7 @@ if( $t_show_page_header ) {
 
 $t_action_button_position = config_get( 'action_button_position' );
 
-$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
+$t_bugslist = gpc_get_cookie( config_get_global( 'bug_list_cookie' ), false );
 
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
