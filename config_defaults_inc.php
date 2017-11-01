@@ -3407,12 +3407,6 @@ $g_css_include_file = 'default.css';
 $g_css_rtl_include_file = 'rtl.css';
 
 /**
- * meta tags
- * @global string $g_meta_include_file
- */
-$g_meta_include_file = '';
-
-/**
  * A flag that indicates whether to use CDN (content delivery networks) for loading
  * javascript libraries and their associated CSS.  This improves performance for
  * loading MantisBT pages.  This can be disabled if it is desired that MantisBT
@@ -4279,7 +4273,7 @@ $g_global_settings = array(
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
 	'stop_on_errors', 'version_suffix', 'debug_email',
-	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
+	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file',
 	'file_type_icons', 'path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
@@ -4496,7 +4490,6 @@ $g_public_config_names = array(
 	'max_lost_password_in_progress_count',
 	'mentions_enabled',
 	'mentions_tag',
-	'meta_include_file',
 	'min_refresh_delay',
 	'minimum_sponsorship_amount',
 	'monitor_add_others_bug_threshold',

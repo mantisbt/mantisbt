@@ -103,14 +103,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_meta_include_file</term>
-			<listitem>
-				<para>Set this to point to the META tag file of your
-					choice.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_cdn_enabled</term>
 			<listitem>
 				<para>

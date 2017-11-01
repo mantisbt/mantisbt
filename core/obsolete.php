@@ -211,3 +211,6 @@ config_obsolete( 'calendar_date_format', 'normal_date_format' );
 
 # changes in 2.8.0
 config_obsolete( 'inline_file_exts' );
+
+# changes in 2.9.0
+config_obsolete( 'meta_include_file' );
