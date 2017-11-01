@@ -208,7 +208,7 @@ function require_css( $p_stylesheet_path ) {
  */
 function html_css() {
 	global $g_stylesheets_included;
-	html_css_link( config_get( 'css_include_file' ) );
+	html_css_link( config_get_global( 'css_include_file' ) );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
