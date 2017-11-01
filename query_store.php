@@ -89,7 +89,7 @@ if( $f_all_projects ) {
 	$t_project_id = 0;
 }
 
-$t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
+$t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
 # named filters must not reference source query id
 $t_filter = filter_deserialize( $t_filter_string );
 if( isset( $t_filter['_source_query_id'] ) ) {

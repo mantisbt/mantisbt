@@ -157,7 +157,7 @@ $t_project_id = ( $t_project_id * -1 );
 $t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 
 # set cookie values
-gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+gpc_set_cookie( config_get_global( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
 
 # redirect to print_all or view_all page
 if( $f_print ) {

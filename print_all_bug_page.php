@@ -71,7 +71,7 @@ $t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 $t_num_of_columns = count( $t_columns );
 
 # Initialize the filter from the cookie, use default if not set
-$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+$t_cookie_value_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
 $t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
 if( is_blank( $t_cookie_value ) ) {
 	$t_filter_cookie_arr = filter_get_default();

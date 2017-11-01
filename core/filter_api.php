@@ -985,7 +985,7 @@ function filter_serialize( $p_filter_array ) {
  * @return boolean
  */
 function filter_is_cookie_valid() {
-	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_view_all_cookie_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 
 	# check to see if the cookie does not exist
