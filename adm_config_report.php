@@ -183,7 +183,7 @@ if( $t_filter_default ) {
 }
 
 # Manage filter's persistency through cookie
-$t_cookie_name = config_get( 'manage_config_cookie' );
+$t_cookie_name = config_get_global( 'manage_config_cookie' );
 if( $t_filter_save ) {
 	# Save user's filter to the cookie
 	$t_cookie_string = implode(
