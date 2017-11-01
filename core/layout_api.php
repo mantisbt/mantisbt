@@ -1148,7 +1148,7 @@ function layout_footer() {
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get_global( 'show_queries_count' ) ) {
 		echo '<div class="col-xs-12 no-padding grey">' . "\n";
 		echo '<address class="no-margin pull-right">' . "\n";
 	}
@@ -1167,7 +1167,7 @@ function layout_footer() {
 	}
 
 	# Determine number of unique queries executed
-	if( config_get( 'show_queries_count' ) ) {
+	if( config_get_global( 'show_queries_count' ) ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
@@ -1193,7 +1193,7 @@ function layout_footer() {
 		echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get_global( 'show_queries_count' ) ) {
 		echo '</address>' . "\n";
 		echo '</div>' . "\n";
 	}

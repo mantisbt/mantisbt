@@ -604,7 +604,7 @@ function helper_log_to_page() {
  * @return boolean
  */
 function helper_show_query_count() {
-	return ON == config_get( 'show_queries_count' );
+	return ON == config_get_global( 'show_queries_count' );
 }
 
 /**
