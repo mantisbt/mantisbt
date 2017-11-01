@@ -95,7 +95,7 @@ if( $f_sort === 'update' ) {
 	$c_sort_field = 'date_submitted';
 }
 
-$t_path = config_get( 'path' );
+$t_path = config_get_global( 'path' );
 
 # construct rss file
 

@@ -662,7 +662,7 @@ function mci_sanitize_xml_string ( $p_input ) {
  * @return string MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-	return config_get( 'path' );
+	return config_get_global( 'path' );
 }
 
 /**

@@ -83,7 +83,7 @@ if( !is_blank( $c_ref ) ) {
 	$t_home_page = config_get( 'default_home_page' );
 
 	# Check that referrer matches our address after squashing case (case insensitive compare)
-	$t_path = rtrim( config_get( 'path' ), '/' );
+	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];

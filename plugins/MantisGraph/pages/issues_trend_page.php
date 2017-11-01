@@ -45,7 +45,7 @@ $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
-$t_path = config_get( 'path' );
+$t_path = config_get_global( 'path' );
 layout_page_header_end();
 
 layout_page_begin();

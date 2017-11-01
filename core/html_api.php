@@ -277,7 +277,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 		$p_time = current_user_get_pref( 'redirect_delay' );
 	}
 
-	$t_url = config_get( 'path' );
+	$t_url = config_get_global( 'path' );
 	if( $p_sanitize ) {
 		$t_url .= string_sanitize_url( $p_url );
 	} else {

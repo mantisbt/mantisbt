@@ -111,7 +111,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		if( $p_sanitize ) {
 			$t_url = string_sanitize_url( $p_url, true );
 		} else {
-			$t_url = config_get( 'path' ) . $p_url;
+			$t_url = config_get_global( 'path' ) . $p_url;
 		}
 	}
 
@@ -1787,7 +1787,7 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	$t_path = config_get( 'path' );
+	$t_path = config_get_global( 'path' );
 	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" alt="', $p_title, '"></i></a>';
 }
 
