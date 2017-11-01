@@ -294,7 +294,7 @@ function lang_get( $p_string, $p_lang = null ) {
 	} else {
 		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
-			lang_load( $t_lang, config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
+			lang_load( $t_lang, config_get_global( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
 			if( lang_exists( $p_string, $t_lang ) ) {
 				return $g_lang_strings[$t_lang][$p_string];
 			}

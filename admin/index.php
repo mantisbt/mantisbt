@@ -90,7 +90,7 @@ function print_info_row( $p_description, $p_value ) {
 <?php
 	print_info_row( lang_get( 'site_path' ), config_get_global( 'absolute_path' ) );
 	print_info_row( lang_get( 'core_path' ), config_get_global( 'core_path' ) );
-	print_info_row( lang_get( 'plugin_path' ), config_get( 'plugin_path' ) );
+	print_info_row( lang_get( 'plugin_path' ), config_get_global( 'plugin_path' ) );
 ?>
 	</table>
 </div>

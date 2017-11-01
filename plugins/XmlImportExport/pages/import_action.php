@@ -22,7 +22,7 @@
  * Process XML Import
  */
 
-$t_plugin_path = config_get( 'plugin_path' );
+$t_plugin_path = config_get_global( 'plugin_path' );
 require_once( $t_plugin_path . 'XmlImportExport/ImportXml.php' );
 
 form_security_validate( 'plugin_xml_import_action' );
