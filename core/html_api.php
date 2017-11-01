@@ -361,11 +361,11 @@ function html_print_logo( $p_logo = null ) {
 	}
 
 	if( !is_blank( $p_logo ) ) {
-		$t_logo_url = config_get( 'logo_url' );
+		$t_logo_url = config_get_global( 'logo_url' );
 		$t_show_url = !is_blank( $t_logo_url );
 
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
+			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
 		echo '<img id="logo-image" alt="', $t_alternate_text, '" style="max-height: 80px;" src="' . helper_mantis_url( $p_logo ) . '" />';

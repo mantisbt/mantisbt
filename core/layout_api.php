@@ -382,7 +382,7 @@ function layout_login_page_end() {
  * @return void
  */
 function layout_navbar() {
-	$t_logo_url = config_get('logo_url');
+	$t_logo_url = config_get_global('logo_url');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
