@@ -121,7 +121,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthen
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	} else {
-		print_header_redirect( config_get( 'default_home_page' ) );
+		print_header_redirect( config_get_global( 'default_home_page' ) );
 	}
 }
 

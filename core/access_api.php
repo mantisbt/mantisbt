@@ -92,7 +92,7 @@ function access_denied() {
 				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
 				print_link_button(
-					helper_mantis_url( config_get( 'default_home_page' ) ),
+					helper_mantis_url( config_get_global( 'default_home_page' ) ),
 					lang_get( 'proceed' )
 				);
 				echo '</p>';
@@ -102,7 +102,7 @@ function access_denied() {
 			layout_admin_page_begin();
 			echo '<div class="space-10"></div>';
 			html_operation_failure(
-				helper_mantis_url( config_get( 'default_home_page' ) ),
+				helper_mantis_url( config_get_global( 'default_home_page' ) ),
 				error_string( ERROR_ACCESS_DENIED )
 			);
 			layout_admin_page_end();

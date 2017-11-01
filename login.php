@@ -43,7 +43,7 @@ require_api( 'string_api.php' );
 
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
-$t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_get( 'default_home_page' ) ) ) );
+$t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_get_global( 'default_home_page' ) ) ) );
 $f_from			= gpc_get_string( 'from', '' );
 $f_secure_session = gpc_get_bool( 'secure_session', false );
 $f_reauthenticate = gpc_get_bool( 'reauthenticate', false );
