@@ -221,8 +221,6 @@ function db_get_type( $p_driver_type ) {
 	switch( $p_driver_type ) {
 		case 'mysqli':
 			return DB_TYPE_MYSQL;
-		case 'postgres':
-		case 'postgres7':
 		case 'pgsql':
 			return DB_TYPE_PGSQL;
 		case 'mssqlnative':
@@ -716,14 +714,10 @@ function db_prepare_string( $p_string ) {
 	switch( $t_db_type ) {
 		case 'mssqlnative':
 		case 'odbc_mssql':
-		case 'ado_mssql':
 			return addslashes( $p_string );
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
-		case 'postgres':
-		case 'postgres64':
-		case 'postgres7':
 		case 'pgsql':
 			return pg_escape_string( $p_string );
 		case 'oci8':
@@ -747,13 +741,9 @@ function db_prepare_binary_string( $p_string ) {
 
 	switch( $t_db_type ) {
 		case 'odbc_mssql':
-		case 'ado_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
 			return '0x' . $t_content['hex'];
 			break;
-		case 'postgres':
-		case 'postgres64':
-		case 'postgres7':
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
 			break;
