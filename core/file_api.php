@@ -243,7 +243,7 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
  * @return array
  */
 function file_get_icon_url( $p_display_filename ) {
-	$t_file_type_icons = config_get( 'file_type_icons' );
+	$t_file_type_icons = config_get_global( 'file_type_icons' );
 
 	$t_ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
 	if( is_blank( $t_ext ) || !isset( $t_file_type_icons[$t_ext] ) ) {
