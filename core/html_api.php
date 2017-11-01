@@ -382,7 +382,7 @@ function html_print_logo( $p_logo = null ) {
  * @return void
  */
 function html_top_banner() {
-	$t_page = config_get( 'top_include_page' );
+	$t_page = config_get_global( 'top_include_page' );
 	$t_logo_image = config_get( 'logo_image' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
