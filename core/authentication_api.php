@@ -849,7 +849,7 @@ function auth_clear_cookies() {
 	# clear cookie, if not logged in from script
 	if( $g_script_login_cookie == null ) {
 		$t_cookie_name = config_get( 'string_cookie' );
-		$t_cookie_path = config_get( 'cookie_path' );
+		$t_cookie_path = config_get_global( 'cookie_path' );
 
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 		$t_cookies_cleared = true;
@@ -1162,7 +1162,7 @@ function auth_http_set_logout_pending( $p_pending ) {
 	if( $p_pending ) {
 		gpc_set_cookie( $t_cookie_name, '1', false );
 	} else {
-		$t_cookie_path = config_get( 'cookie_path' );
+		$t_cookie_path = config_get_global( 'cookie_path' );
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 	}
 }

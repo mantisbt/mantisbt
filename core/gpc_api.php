@@ -377,7 +377,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	}
 
 	if( null === $p_path ) {
-		$p_path = config_get( 'cookie_path' );
+		$p_path = config_get_global( 'cookie_path' );
 	}
 
 	if( null === $p_domain ) {
@@ -396,7 +396,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
  */
 function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	if( null === $p_path ) {
-		$p_path = config_get( 'cookie_path' );
+		$p_path = config_get_global( 'cookie_path' );
 	}
 	if( null === $p_domain ) {
 		$p_domain = config_get( 'cookie_domain' );
