@@ -211,7 +211,7 @@ function lang_push( $p_lang = null ) {
 	$t_lang = $p_lang;
 
 	if( null === $t_lang ) {
-		$t_lang = config_get( 'default_language' );
+		$t_lang = config_get_global( 'default_language' );
 	}
 
 	# don't allow 'auto' as a language to be pushed onto the stack
