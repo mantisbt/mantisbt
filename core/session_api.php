@@ -110,7 +110,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		session_set_cookie_params( 0, config_get_global( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
+		session_set_cookie_params( 0, config_get_global( 'cookie_path' ), config_get_global( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
 
 		# Handle existent session ID
 		if( !is_null( $p_session_id ) ) {
