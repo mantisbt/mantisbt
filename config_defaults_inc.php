@@ -746,7 +746,7 @@ $g_email_dkim_selector = 'mail.example';
  * @global string $g_email_dkim_passphrase
  */
 $g_email_dkim_passphrase = '';
- 
+
 /**
  * DomainKeys Identified Mail (DKIM) Signatures identity
  * Identity you are signing the mails with (rfc6376)
@@ -1243,6 +1243,7 @@ $g_complete_date_format = 'Y-m-d H:i T';
 
 /**
  * Datetime picker widget format string.
+ * This format needs needs to match the one defined in {@see $g_normal_date_format}
  * For detailed instructions on date formatting
  * @see http://momentjs.com/docs/#/displaying/format/
  * @global string $g_datetime_picker_format

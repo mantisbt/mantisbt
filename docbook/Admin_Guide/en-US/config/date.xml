@@ -57,6 +57,15 @@
 					</ulink>
 					for details.
 				</para></note>
+				<warning><para>This format needs to match the one defined in
+					<emphasis>$g_normal_date_format</emphasis>.
+					Inconsistencies between these two settings, e.g. using
+					different date ordering (DMY, MDY or YMD) or displaying the
+					month as a number vs a word or abbreviation,
+					may result in unexpected behavior such as an invalid
+					interpretation of the date by the DateTime picker widget,
+					or errors trying to save a modified date.
+				</para></warning>
 			</listitem>
 		</varlistentry>
 	</variablelist>
