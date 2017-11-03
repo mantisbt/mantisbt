@@ -5,11 +5,14 @@
 <section id="admin.config.date">
 	<title>Date</title>
 
-	<para>These variables control how the date is displayed (default
-		is 'US' formatting). Go to the
-		<ulink url="http://www.php.net/manual/en/function.date.php">date()</ulink>
-		function in PHP online manual for detailed instructions on date
+	<para>These variables control how the date is displayed. The default is
+		<ulink url="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</ulink>
 		formatting.
+	</para>
+	<para>Please refer to the
+		<ulink url="http://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">
+			PHP manual
+		</ulink> for details on available formatting options.
 	</para>
 
 	<variablelist>
@@ -17,7 +20,8 @@
 			<term>$g_short_date_format</term>
 			<listitem>
 				<para>This format is used in the bug listing pages (eg: View
-					Bugs). Default is 'm-d-y'.
+					Bugs).
+					Default is <literal>Y-m-d</literal>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -25,7 +29,8 @@
 			<term>$g_normal_date_format</term>
 			<listitem>
 				<para>This format is used in the view/update bug pages, bug notes,
-					manage section, and news section. Default is 'm-d-y H:i'.
+					manage section, and news section.
+					Default is <literal>Y-m-d H:i</literal>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -33,7 +38,8 @@
 			<term>$g_complete_date_format</term>
 			<listitem>
 				<para>This format is used on the top of each page (current time)
-					and the emails that are sent out. Default is 'm-d-y H:i T'.
+					and the emails that are sent out.
+					Default is <literal>Y-m-d H:i T</literal>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -41,10 +47,16 @@
 			<term>$g_datetime_picker_format</term>
 			<listitem>
 				<para>This format is used with the datetime picker widget.
-					See <ulink url="http://momentjs.com/docs/#/displaying/format/">datetime formatting guide</ulink>
-					for details.
-					Default is 'Y-MM-DD H:m'.
+					Default is <literal>Y-MM-DD H:m</literal>.
 				</para>
+				<note><para>The formatting convention for the DateTime picker is
+					different from the one used for the other date settings
+					described above; see
+					<ulink url="http://momentjs.com/docs/#/displaying/format/">
+						Moment.js documention
+					</ulink>
+					for details.
+				</para></note>
 			</listitem>
 		</varlistentry>
 	</variablelist>
