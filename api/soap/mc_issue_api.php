@@ -727,13 +727,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
-		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::faultBadRequest( 'Category field must be supplied.' );
-		}
-
-		return ApiObjectFactory::faultBadRequest( 'Category \'' . $p_issue['category'] . '\' not found for project \'' .
-			$t_project_id . '\'.' );
+	if( ApiObjectFactory::isFault( $t_category_id ) ) {
+		return $t_category_id;
 	}
 
 	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id ) : 0;
@@ -938,14 +933,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
-		if( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
-			return ApiObjectFactory::faultBadRequest( 'Category field must be supplied.' );
-		}
-
-		$t_project_name = project_get_name( $t_project_id );
-		return ApiObjectFactory::faultBadRequest( 'Category \'' . $p_issue['category'] . '\' not found for project \'' .
-			$t_project_name . '\'.' );
+	if( ApiObjectFactory::isFault( $t_category_id ) ) {
+		return $t_category_id;
 	}
 
 	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id ) : 0;
