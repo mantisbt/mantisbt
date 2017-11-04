@@ -823,7 +823,7 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
-		if( $t_category_row['name'] == $t_category_name ) {
+		if( strcasecmp( $t_category_row['name'], $t_category_name ) == 0 ) {
 			return $t_category_row['id'];
 		}
 	}
