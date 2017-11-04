@@ -399,6 +399,7 @@ if( ON == config_get( 'limit_reporters', null, ALL_USERS, ALL_PROJECTS ) ) {
 } else {
 	get_capability_row( lang_get( 'limit_reporter_unless_threshold_option' ), 'limit_reporter_unless_threshold' );
 }
+get_capability_row( lang_get( 'limit_handler_unless_threshold_option' ), 'limit_handler_unless_threshold' );
 get_section_end();
 
 # Notes

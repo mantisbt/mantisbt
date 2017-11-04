@@ -182,6 +182,7 @@ if( gpc_isset( 'limit_reporters' ) ) {
 	set_capability_boolean( 'limit_reporters', true );
 }
 set_capability_row( 'limit_reporter_unless_threshold' );
+set_capability_row( 'limit_handler_unless_threshold' );
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );

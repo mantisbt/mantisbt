@@ -511,18 +511,24 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
-	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
+	$t_bug_is_user_handler = bug_is_user_handler( $p_bug_id, $p_user_id );
 
-	# check limit_Reporter (Issue #4769)
-	# reporters can view just issues they reported
-	if( access_has_limited_view_for_reporter( $t_project_id, $p_user_id )
-		&& !$t_bug_is_user_reporter ) {
-		# deny access if user is affected by this option, and he is not reporter
-		return false;
+	# check special limits
+	# limit reporters means users can view just issues they reported (Issue #4769))
+	# limit handlers means users can view just they are handlers
+	# when any or both limits apply, any of the two positives allows access.
+	$t_limit_reporter = access_has_limited_view_for_reporter( $t_project_id, $p_user_id );
+	$t_limit_handler = access_has_limited_view_for_handler( $t_project_id, $p_user_id );
+
+	if( $t_limit_reporter || $t_limit_handler ) {
+		if( !$t_bug_is_user_reporter && !$t_bug_is_user_handler ) {
+			return false;
+		}
 	}
 
 	# If the bug is private and the user is not the reporter, then
 	# they must also have higher access than private_bug_threshold
+	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
 	if( !$t_bug_is_user_reporter && bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE ) {
 		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
 		return access_compare_level( $t_access_level, $t_private_bug_threshold )
@@ -926,6 +932,19 @@ function access_threshold_reporter_unlimited_view( $p_project_id = null, $p_user
  */
 function access_has_limited_view_for_reporter( $p_project_id = null, $p_user_id = null ) {
 	$t_can_view = access_threshold_reporter_unlimited_view( $p_project_id, $p_user_id );
+	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
+	return !access_compare_level( $t_project_level, $t_can_view );
+}
+
+/**
+ * Returns true if the user is limited to view only the issues assigned to him,
+ * in the specified project.
+ * @param integer $p_project_id   Project id, or null for current project
+ * @param integer $p_user_id      User id, or null for current user
+ * @return boolean	Whether limited view applies
+ */
+function access_has_limited_view_for_handler( $p_project_id = null, $p_user_id = null ) {
+	$t_can_view = config_get( 'limit_handler_unless_threshold', null, $p_user_id, $p_project_id );
 	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
 	return !access_compare_level( $t_project_level, $t_can_view );
 }
