@@ -816,6 +816,11 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	log_event( LOG_WEBSERVICE, 'created new issue id \'' . $t_issue_id . '\'' );
 
+	$t_cf_result = mci_project_custom_fields_validate( $t_project_id, $p_issue['custom_fields'] );
+	if( ApiObjectFactory::isFault( $t_cf_result ) ) {
+		return $t_cf_result;
+	}
+
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 	if( $t_set_custom_field_error != null ) {
 		return $t_set_custom_field_error;
