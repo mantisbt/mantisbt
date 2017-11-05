@@ -347,6 +347,13 @@ function cfdef_prepare_email_value( $p_value ) {
  */
 function cfdef_prepare_date_value( $p_value ) {
 	if( $p_value != null ) {
+		# There is a bug where default dates were being saved as '{now}' rather
+		# than being evaluated at creation time, so replace them with empty string.
+		$t_value_length = strlen( $p_value );
+		if( $t_value_length >= 3 && $p_value[0] == '{' && $p_value[$t_value_length - 1] == '}' ) {
+			return '';
+		}
+
 		return date( config_get( 'short_date_format' ), $p_value );
 	}
 }
