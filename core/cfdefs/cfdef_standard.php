@@ -287,7 +287,11 @@ function cfdef_prepare_email_value_for_email( $p_value ) {
  */
 function cfdef_prepare_date_value_for_email( $p_value ) {
 	if( $p_value != null ) {
-		return date( config_get( 'short_date_format' ), $p_value ) ;
+		if( is_numeric( $p_value ) ) {
+			return date( config_get( 'short_date_format' ), $p_value );
+		}
+
+		return $p_value;
 	}
 }
 
