@@ -371,7 +371,6 @@ function html_css() {
 		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
 	}
 
-	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
