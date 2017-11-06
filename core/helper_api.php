@@ -594,10 +594,13 @@ function helper_show_query_count() {
  * @return string
  */
 function helper_mantis_url( $p_url ) {
-	if( is_blank( $p_url ) ) {
+	# Return URL as-is if it already starts with short path
+	$t_short_path = config_get_global( 'short_path' );
+	if( strpos( $p_url, $t_short_path ) === 0 ) {
 		return $p_url;
 	}
-	return config_get_global( 'short_path' ) . $p_url;
+
+	return $t_short_path . $p_url;
 }
 
 /**
