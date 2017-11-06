@@ -597,7 +597,12 @@ function helper_mantis_url( $p_url ) {
 	if( is_blank( $p_url ) ) {
 		return $p_url;
 	}
-	return config_get_global( 'short_path' ) . $p_url;
+	# Return URL as-is if it already starts with short path
+	$t_short_path = config_get_global( 'short_path' );
+	if( strpos( $p_url, $t_short_path ) === 0 ) {
+		return $p_url;
+	}
+	return $t_short_path . $p_url;
 }
 
 /**
@@ -661,4 +666,60 @@ function helper_duration_to_minutes( $p_hhmm ) {
  */
 function shutdown_functions_register() {
 	register_shutdown_function( 'email_shutdown_function' );
+}
+
+/**
+ * Combine a Mantis page with a query string.  This handles the case where the page is a native
+ * page or a plugin page.
+ * @param string $p_page The page (relative or full)
+ * @param string $p_query_string The query string
+ * @return string The combined url.
+ */
+function helper_url_combine( $p_page, $p_query_string ) {
+	$t_url = $p_page;
+
+	if( !is_blank( $p_query_string ) ) {
+		if( stripos( $p_page, '?' ) !== false ) {
+			$t_url .= '&' . $p_query_string;
+		} else {
+			$t_url .= '?' . $p_query_string;
+		}
+	}
+
+	return $t_url;
+}
+
+/**
+ * Generate a hash to be used with dynamically generated content that is expected
+ * to be cached by the browser. This hash can be used to differentiate the generated
+ * content when it may be different based on some runtime attributes like: current user,
+ * project or language.
+ * An optional custom string can be provided to be added to the hash, for additional
+ * differentiating criteria, but this string must be already prepared by the caller.
+ *
+ * @param array $p_runtime_attrs    Array of attributes to be calculated from current session.
+ *                                  possible values: 'user', 'project', 'lang'
+ * @param string $p_custom_string   Additional string provided by the caller
+ * @return string                   A hashed md5 string
+ */
+function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {
+	# always add core version, to force reload of resources after an upgrade.
+	$t_key = $p_custom_string . '+V' . MANTIS_VERSION;
+	$t_user_auth = auth_is_user_authenticated();
+	foreach( $p_runtime_attrs as $t_attr ) {
+		switch( $t_attr ) {
+			case 'user':
+				$t_key .= '+U' . ( $t_user_auth ? auth_get_current_user_id() : META_FILTER_NONE );
+				break;
+			case 'project':
+				$t_key .= '+P' . ( $t_user_auth ? helper_get_current_project() : META_FILTER_NONE );
+				break;
+			case 'lang':
+				$t_key .= '+L' . lang_get_current();
+				break;
+			default:
+				trigger_error( ERROR_GENERIC, ERROR );
+		}
+	}
+	return md5( $t_key );
 }
