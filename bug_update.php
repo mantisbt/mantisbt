@@ -110,7 +110,7 @@ $t_updated_bug->view_state = gpc_get_int( 'view_state', $t_existing_bug->view_st
 
 $t_bug_note = new BugNoteData();
 $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
-$t_bug_note->view_state = gpc_get_bool( 'private' );
+$t_bug_note->view_state = gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 
 if( $t_existing_bug->last_updated != $t_updated_bug->last_updated ) {
