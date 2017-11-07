@@ -146,7 +146,7 @@ print_summary_submenu();
 <!-- LEFT COLUMN -->
 <div class="col-md-6 col-xs-12">
 
-	<?php if( 1 < count( $t_project_ids ) ) { ?>
+	<?php if( 0 < count( $t_project_ids ) ) { ?>
 	<!-- BY PROJECT -->
 	<div class="space-10"></div>
 	<div class="widget-box table-responsive">
