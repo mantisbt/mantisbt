@@ -63,7 +63,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 		if( ApiObjectFactory::isFault( $t_issue ) ) {
-			return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
 		}
 
 		$t_result = array( 'issues' => array( $t_issue ) );
