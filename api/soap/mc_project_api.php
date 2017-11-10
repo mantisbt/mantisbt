@@ -649,6 +649,16 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		$t_custom_field_defs[$t_custom_field_id] = $t_def;
 	}
 
+	$fn_normalize_name = function( $p_name, $p_custom_field_defs ) {
+		foreach( $p_custom_field_defs as $t_custom_field_def ) {
+			if( strcasecmp( $t_custom_field_def['name'], $p_name ) == 0 ) {
+				return $t_custom_field_def['name'];
+			}
+		}
+
+		return $p_name;
+	};
+
 	$t_custom_field_values = array();
 	if( isset( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
@@ -669,7 +679,8 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 			}
 
 			if( isset( $t_custom_field['field']['name'] ) ) {
-				$t_custom_field_values[$t_custom_field['field']['name']] = $t_custom_field['value'];
+				$t_name = $fn_normalize_name( $t_custom_field['field']['name'], $t_custom_field_defs );
+				$t_custom_field_values[$t_name] = $t_custom_field['value'];
 				continue;
 			}
 
