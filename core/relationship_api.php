@@ -138,6 +138,7 @@ $g_relationships = array();
 $g_relationships[BUG_DEPENDANT] = array(
 	'#forward' => true,
 	'#complementary' => BUG_BLOCKS,
+	'#name' => 'parent-of',
 	'#description' => 'dependant_on',
 	'#notify_added' => 'email_notification_title_for_action_dependant_on_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_dependant_on_relationship_deleted',
@@ -149,6 +150,7 @@ $g_relationships[BUG_DEPENDANT] = array(
 $g_relationships[BUG_BLOCKS] = array(
 	'#forward' => false,
 	'#complementary' => BUG_DEPENDANT,
+	'#name' => 'child-of',
 	'#description' => 'blocks',
 	'#notify_added' => 'email_notification_title_for_action_blocks_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_blocks_relationship_deleted',
@@ -160,6 +162,7 @@ $g_relationships[BUG_BLOCKS] = array(
 $g_relationships[BUG_DUPLICATE] = array(
 	'#forward' => true,
 	'#complementary' => BUG_HAS_DUPLICATE,
+	'#name' => 'duplicate-of',
 	'#description' => 'duplicate_of',
 	'#notify_added' => 'email_notification_title_for_action_duplicate_of_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_duplicate_of_relationship_deleted',
@@ -171,12 +174,14 @@ $g_relationships[BUG_DUPLICATE] = array(
 $g_relationships[BUG_HAS_DUPLICATE] = array(
 	'#forward' => false,
 	'#complementary' => BUG_DUPLICATE,
+	'#name' => 'has-duplicate',
 	'#description' => 'has_duplicate',
 	'#notify_added' => 'email_notification_title_for_action_has_duplicate_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_has_duplicate_relationship_deleted',
 );
 $g_relationships[BUG_RELATED] = array(
 	'#forward' => true,
+	'#name' => 'related-to',
 	'#complementary' => BUG_RELATED,
 	'#description' => 'related_to',
 	'#notify_added' => 'email_notification_title_for_action_related_to_relationship_added',
@@ -617,6 +622,21 @@ function relationship_get_description_dest_side( $p_relationship_type ) {
  */
 function relationship_get_description_for_history( $p_relationship_code ) {
 	return relationship_get_description_src_side( $p_relationship_code );
+}
+
+/**
+ * Get class API name of a relationship as it's stored in the history.
+ * @param integer $p_relationship_type Relationship Type.
+ * @return string Relationship API name
+ */
+function relationship_get_name_for_api( $p_relationship_type ) {
+	global $g_relationships;
+
+	if( !isset( $g_relationships[$p_relationship_type] ) ) {
+		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+	}
+
+	return $g_relationships[$p_relationship_type]['#name'];
 }
 
 /**
