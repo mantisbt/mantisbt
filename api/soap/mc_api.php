@@ -802,47 +802,41 @@ function mci_get_category( $p_category_id ) {
  *
  * @param string|array $p_category Category name or array with id and/or name.
  * @param integer $p_project_id    Project id.
- * @return integer category id or 0 if not found
- */
-function mci_get_category_id_internal( $p_category, $p_project_id ) {
-	if( !isset( $p_category ) ) {
-		return 0;
-	}
-
-	if( is_array( $p_category ) ) {
-		if( isset( $p_category['id'] ) ) {
-			if( category_exists( $p_category['id'] ) ) {
-				return $p_category['id'];
-			}
-		} else if( isset( $p_category['name'] ) ) {
-			$t_category_name = $p_category['name'];
-		} else {
-			return 0;
-		}
-	} else {
-		$t_category_name = $p_category;
-	}
-
-	$t_cat_array = category_get_all_rows( $p_project_id );
-	foreach( $t_cat_array as $t_category_row ) {
-		if( strcasecmp( $t_category_row['name'], $t_category_name ) == 0 ) {
-			return $t_category_row['id'];
-		}
-	}
-
-	return 0;
-}
-
-/**
- * Convert a category name, or category object reference (array w/ id, name,
- * or id + name) to a category id for a given project.
- *
- * @param string|array $p_category Category name or array with id and/or name.
- * @param integer $p_project_id    Project id.
  * @return integer|SoapFault|RestFault category id or error.
  */
 function mci_get_category_id( $p_category, $p_project_id ) {
-	$t_category_id = mci_get_category_id_internal( $p_category, $p_project_id );
+	$fn_get_category_id_internal = function( $p_category, $p_project_id ) {
+		if( !isset( $p_category ) ) {
+			return 0;
+		}
+
+		$t_category_name = '';
+
+		if( is_array( $p_category ) ) {
+			if( isset( $p_category['id'] ) ) {
+				if( category_exists( $p_category['id'] ) ) {
+					return $p_category['id'];
+				}
+			} else if( isset( $p_category['name'] ) ) {
+				$t_category_name = $p_category['name'];
+			} else {
+				return 0;
+			}
+		} else {
+			$t_category_name = $p_category;
+		}
+
+		$t_cat_array = category_get_all_rows( $p_project_id );
+		foreach( $t_cat_array as $t_category_row ) {
+			if( strcasecmp( $t_category_row['name'], $t_category_name ) == 0 ) {
+				return $t_category_row['id'];
+			}
+		}
+
+		return 0;
+	};
+
+	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_category ) ) {
 			return ApiObjectFactory::faultBadRequest( 'Category field must be supplied.' );
