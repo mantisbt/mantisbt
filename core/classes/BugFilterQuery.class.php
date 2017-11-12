@@ -1324,16 +1324,16 @@ class BugFilterQuery extends DbQuery {
 			}
 
 			$t_field = $this->filter['custom_fields'][$t_cfid];
-			if( filter_field_is_any( $t_field ) ) {
-				# Ignore all custom filters that are not set, or that are set to '' or "any"
-				continue;
-			}
 
 			$t_custom_where_clause = '';
 			$t_def = custom_field_get_definition( $t_cfid );
 
-			# skip date custom fields with value of "any"
+			# Skip date custom fields with value of "any", these have a special array format
 			if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE && $t_field[0] == CUSTOM_FIELD_DATE_ANY ) {
+				continue;
+			}
+			# Ignore custom fields that are not set, or that are set to '' or "any"
+			if( filter_field_is_any( $t_field ) ) {
 				continue;
 			}
 
