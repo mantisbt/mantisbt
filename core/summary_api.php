@@ -60,8 +60,8 @@ require_api( 'utility_api.php' );
  * @param string $p_resolved Count of resolved issues - normally string with hyperlink to filter.
  * @param string $p_closed   Count of closed issues - normally string with hyperlink to filter.
  * @param string $p_total    Count of total issues - normally string with hyperlink to filter.
- * @param string $p_resolved_ratio  ratio of resolved
- * @param string $p_closed_ratio   ratio of closed
+ * @param string $p_resolved_ratio  Ratio of resolved
+ * @param string $p_ratio    Ratio of total bugs
  * @return void
  */
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total, $p_resolved_ratio, $p_ratio) {
@@ -99,7 +99,7 @@ function summary_helper_get_developer_label( $p_user_id ) {
  * Calculate bug status count according to  'open', 'resolved' and 'closed', 
  * then put the numbers into $p_cache array
  *
- * @param string &$p_cache    The cache array.
+ * @param array &$p_cache    The cache array.
  * @param string $p_key      The key of the array.
  * @param string $p_status   The status of issues.
  * @param string $p_bugcount The bug count of $p_status issues.
@@ -158,12 +158,12 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
 }
 
 /**
- * Calcute bug ratio 
- * @param string $p_bugs_open 		The open bugs count.
- * @param string $p_bugs_resolved 	The resovled bugs count.
- * @param string $p_bugs_closed   	The closed bugs count.
- * @param string $p_bugs_total_count   	The total bugs count.
- * @return array($t_bugs_resolved_ratio, $t_bugs_ratio)
+ * Calculate bug ratio 
+ * @param integer $p_bugs_open 		The open bugs count.
+ * @param integer $p_bugs_resolved 	The resovled bugs count.
+ * @param integer $p_bugs_closed   	The closed bugs count.
+ * @param integer $p_bugs_total_count   	The total bugs count.
+ * @return array	array of ($t_bugs_resolved_ratio, $t_bugs_ratio)
  */
 function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_closed, $p_bugs_total_count) {
 	$t_bugs_total = $p_bugs_open + $p_bugs_resolved + $p_bugs_closed;
