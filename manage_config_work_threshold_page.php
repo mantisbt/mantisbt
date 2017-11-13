@@ -287,7 +287,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 			$t_value = '&#160;';
 		}
 	}
-	echo "\t" . '<td class="' . $t_color . '">' . $t_value . '</td>' . "\n\t"
+	echo "\t" . '<td class="center ' . $t_color . '">' . $t_value . '</td>' . "\n\t"
 		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
