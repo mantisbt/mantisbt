@@ -124,7 +124,7 @@ function summary_print_by_enum( $p_enum ) {
 	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
-	$p_cache = array();
+	$t_cache = array();
 	$t_bugs_total_count = 0;
 	$t_bugs_open = 0;
 	$t_bugs_resolved = 0;
@@ -139,36 +139,36 @@ function summary_print_by_enum( $p_enum ) {
 		
 
 		if( $t_closed_val <= $t_status ) {
-			if( isset( $p_cache[$t_enum]['closed'] ) ) {
-				$p_cache[$t_enum]['closed'] += $t_bugcount;
+			if( isset( $t_cache[$t_enum]['closed'] ) ) {
+				$t_cache[$t_enum]['closed'] += $t_bugcount;
 			} else {
-				$p_cache[$t_enum]['closed'] = $t_bugcount;
+				$t_cache[$t_enum]['closed'] = $t_bugcount;
 			}
 		} else if( $t_resolved_val <= $t_status ) {
-			if( isset( $p_cache[$t_enum]['resolved'] ) ) {
-				$p_cache[$t_enum]['resolved'] += $t_bugcount;
+			if( isset( $t_cache[$t_enum]['resolved'] ) ) {
+				$t_cache[$t_enum]['resolved'] += $t_bugcount;
 			} else {
-				$p_cache[$t_enum]['resolved'] = $t_bugcount;
+				$t_cache[$t_enum]['resolved'] = $t_bugcount;
 			}
 		} else {
-			if( isset( $p_cache[$t_enum]['open'] ) ) {
-				$p_cache[$t_enum]['open'] += $t_bugcount;
+			if( isset( $t_cache[$t_enum]['open'] ) ) {
+				$t_cache[$t_enum]['open'] += $t_bugcount;
 			} else {
-				$p_cache[$t_enum]['open'] = $t_bugcount;
+				$t_cache[$t_enum]['open'] = $t_bugcount;
 			}
 		}
 	}
-	foreach( $p_cache as $t_enum=>$t_item) {
+	foreach( $t_cache as $t_enum => $t_item) {
 		# Build up the hyperlinks to bug views
 		$t_bug_link = '';
-		$t_bugs_open = isset($t_item['open']) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset($t_item['resolved']) ? $t_item['resolved'] : 0;
-		$t_bugs_closed = isset($t_item['closed']) ? $t_item['closed'] : 0;
+		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
+		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
+		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_resolved_ratio = ($t_bugs_resolved + $t_bugs_closed)/($t_bugs_total==0 ? 1 : $t_bugs_total);
-		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count);
-		$p_bugs_resolved_ratio = sprintf("%.1f%%", $t_bugs_resolved_ratio*100);
-		$p_bugs_ratio = sprintf("%.1f%%", $t_bugs_ratio*100);
+		$t_bugs_resolved_ratio = ( $t_bugs_resolved + $t_bugs_closed ) / ( $t_bugs_total == 0 ? 1 : $t_bugs_total );
+		$t_bugs_ratio = $t_bugs_total / ( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count );
+		$p_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
+		$p_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 
 		switch( $p_enum ) {
 			case 'status':
@@ -447,7 +447,7 @@ function summary_print_by_developer() {
 	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
 	$t_summaryusers = array();
-	$p_cache = array();
+	$t_cache = array();
 	$t_bugs_total_count = 0;
 	$t_bugs_open = 0;
 	$t_bugs_resolved = 0;
@@ -461,42 +461,42 @@ function summary_print_by_developer() {
 		$t_label = $t_row['handler_id'];
 
 		if( $t_closed_val <= $t_status ) {
-			if( isset( $p_cache[$t_label]['closed'] ) ) {
-				$p_cache[$t_label]['closed'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['closed'] ) ) {
+				$t_cache[$t_label]['closed'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['closed'] = $t_bugcount;
+				$t_cache[$t_label]['closed'] = $t_bugcount;
 			}
 		} else if( $t_resolved_val <= $t_status ) {
-			if( isset( $p_cache[$t_label]['resolved'] ) ) {
-				$p_cache[$t_label]['resolved'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['resolved'] ) ) {
+				$t_cache[$t_label]['resolved'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['resolved'] = $t_bugcount;
+				$t_cache[$t_label]['resolved'] = $t_bugcount;
 			}
 		} else {
-			if( isset( $p_cache[$t_label]['open'] ) ) {
-				$p_cache[$t_label]['open'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['open'] ) ) {
+				$t_cache[$t_label]['open'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['open'] = $t_bugcount;
+				$t_cache[$t_label]['open'] = $t_bugcount;
 			}
 		}
 	}
 	
 	user_cache_array_rows( array_unique( $t_summaryusers ) );
 
-	foreach( $p_cache as $t_label=>$t_item) {
+	foreach( $t_cache as $t_label => $t_item) {
 		# Build up the hyperlinks to bug views
 		$t_bug_link = '';
-		$t_bugs_open = isset($t_item['open']) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset($t_item['resolved']) ? $t_item['resolved'] : 0;
-		$t_bugs_closed = isset($t_item['closed']) ? $t_item['closed'] : 0;
+		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
+		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
+		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_resolved_ratio = ($t_bugs_resolved + $t_bugs_closed)/($t_bugs_total==0 ? 1 : $t_bugs_total);
-		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count);
-		$p_bugs_resolved_ratio = sprintf("%.1f%%", $t_bugs_resolved_ratio*100);
-		$p_bugs_ratio = sprintf("%.1f%%", $t_bugs_ratio*100);
+		$t_bugs_resolved_ratio = ( $t_bugs_resolved + $t_bugs_closed ) / ( $t_bugs_total==0 ? 1 : $t_bugs_total );
+		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count );
+		$p_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
+		$p_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_label;
-		$t_label = summary_helper_get_developer_label($t_label);
+		$t_label = summary_helper_get_developer_label( $t_label );
 
 		if( 0 < $t_bugs_open ) {
 			$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
@@ -575,10 +575,10 @@ function summary_print_by_reporter() {
 		}
 
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_resolved_ratio = ($t_bugs_resolved + $t_bugs_closed)/($t_bugs_total==0 ? 1 : $t_bugs_total);
-		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count);
-		$p_bugs_resolved_ratio = sprintf("%.1f%%", $t_bugs_resolved_ratio*100);
-		$p_bugs_ratio = sprintf("%.1f%%", $t_bugs_ratio*100);
+		$t_bugs_resolved_ratio = ( $t_bugs_resolved + $t_bugs_closed ) / ( $t_bugs_total==0 ? 1 : $t_bugs_total );
+		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count );
+		$p_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
+		$p_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 
 		if( 0 < $t_bugs_total ) {
 			$t_user = string_display_line( user_get_name( $v_reporter_id ) );
@@ -630,7 +630,7 @@ function summary_print_by_category() {
 	$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 	$t_closed_val = config_get( 'bug_closed_status_threshold' );
 
-	$p_cache = array();
+	$t_cache = array();
 	$t_category_name = "";
 	$t_project = "";
 	$t_bugs_total_count = 0;
@@ -648,37 +648,37 @@ function summary_print_by_category() {
 		} 
 
 		if( $t_closed_val <= $t_status ) {
-			if( isset( $p_cache[$t_label]['closed'] ) ) {
-				$p_cache[$t_label]['closed'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['closed'] ) ) {
+				$t_cache[$t_label]['closed'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['closed'] = $t_bugcount;
+				$t_cache[$t_label]['closed'] = $t_bugcount;
 			}
 		} else if( $t_resolved_val <= $t_status ) {
-			if( isset( $p_cache[$t_label]['resolved'] ) ) {
-				$p_cache[$t_label]['resolved'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['resolved'] ) ) {
+				$t_cache[$t_label]['resolved'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['resolved'] = $t_bugcount;
+				$t_cache[$t_label]['resolved'] = $t_bugcount;
 			}
 		} else {
-			if( isset( $p_cache[$t_label]['open'] ) ) {
-				$p_cache[$t_label]['open'] += $t_bugcount;
+			if( isset( $t_cache[$t_label]['open'] ) ) {
+				$t_cache[$t_label]['open'] += $t_bugcount;
 			} else {
-				$p_cache[$t_label]['open'] = $t_bugcount;
+				$t_cache[$t_label]['open'] = $t_bugcount;
 			}
 		}
 	}
 	
-	foreach( $p_cache as $t_label=>$t_item) {
+	foreach( $t_cache as $t_label => $t_item) {
 		# Build up the hyperlinks to bug views
 		$t_bug_link = '';
-		$t_bugs_open = isset($t_item['open']) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset($t_item['resolved']) ? $t_item['resolved'] :0;
-		$t_bugs_closed = isset($t_item['closed']) ? $t_item['closed'] : 0;
+		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
+		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] :0;
+		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		$t_bugs_resolved_ratio = ($t_bugs_resolved + $t_bugs_closed)/($t_bugs_total==0 ? 1 : $t_bugs_total);
-		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count);
-		$p_bugs_resolved_ratio = sprintf("%.1f%%", $t_bugs_resolved_ratio*100);
-		$p_bugs_ratio = sprintf("%.1f%%", $t_bugs_ratio*100);
+		$t_bugs_resolved_ratio = ( $t_bugs_resolved + $t_bugs_closed ) / ( $t_bugs_total==0 ? 1 : $t_bugs_total );
+		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count );
+		$p_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
+		$p_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . urlencode( $t_label );
 		if( 0 < $t_bugs_open ) {
@@ -770,10 +770,10 @@ function summary_print_by_project( array $p_projects = array(), $p_level = 0, ar
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		
-		$t_bugs_resolved_ratio = ($t_bugs_resolved + $t_bugs_closed)/($t_bugs_total==0 ? 1 : $t_bugs_total);
-		$t_bugs_ratio = $t_bugs_total /( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count);
-		$p_bugs_resolved_ratio = sprintf("%.1f%%", $t_bugs_resolved_ratio*100);
-		$p_bugs_ratio = sprintf("%.1f%%", $t_bugs_ratio*100);
+		$t_bugs_resolved_ratio = ( $t_bugs_resolved + $t_bugs_closed ) / ( $t_bugs_total == 0 ? 1 : $t_bugs_total );
+		$t_bugs_ratio = $t_bugs_total / ( $t_bugs_total_count == 0 ? 1 : $t_bugs_total_count );
+		$p_bugs_resolved_ratio = sprintf( "%.1f%%", $t_bugs_resolved_ratio * 100 );
+		$p_bugs_ratio = sprintf( "%.1f%%", $t_bugs_ratio * 100 );
 		
 		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $p_bugs_resolved_ratio, $p_bugs_ratio);
 
