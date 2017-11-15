@@ -301,18 +301,17 @@ function get_font_path() {
  * @return finfo
  */
 function finfo_get_if_available() {
-	if( class_exists( 'finfo' ) ) {
-		$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
 
-		if( is_blank( $t_info_file ) ) {
-			$t_finfo = new finfo( FILEINFO_MIME );
-		} else {
-			$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-		}
+	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
 
-		if( $t_finfo ) {
-			return $t_finfo;
-		}
+	if( is_blank( $t_info_file ) ) {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
+	}
+
+	if( $t_finfo ) {
+		return $t_finfo;
 	}
 
 	return null;
