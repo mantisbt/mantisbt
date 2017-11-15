@@ -87,42 +87,16 @@ esac
 # -----------------------------------------------------------------------------
 step "Web server setup"
 
-if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
-	# install Apache as PHP 5.3 does not come with an embedded web server
-	sudo apt-get update -qq
-	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
-
-	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
-		Listen $PORT
-		NameVirtualHost *:$PORT
-		<VirtualHost *:$PORT>
-		    DocumentRoot $PWD
-		    <Directory />
-		        Options FollowSymLinks
-		        AllowOverride All
-		    </Directory>
-		    <Directory $PWD>
-		        Options Indexes FollowSymLinks MultiViews
-		        AllowOverride All
-		        Order allow,deny
-		        allow from all
-		    </Directory>
-		</VirtualHost>
-		EOF
-
-	sudo service apache2 restart
+# use PHP's embedded server
+if [[ $PORT = 80 ]]
+then
+	# sudo required for port 80
+	# get path of PHP as the path is not in $PATH for sudo
+	myphp="sudo $(which php)"
 else
-	# use PHP's embedded server
-	if [[ $PORT = 80 ]]
-	then
-		# sudo required for port 80
-		# get path of PHP as the path is not in $PATH for sudo
-		myphp="sudo $(which php)"
-	else
-		myphp=php
-	fi
-	$myphp -S $HOSTNAME:$PORT >& /dev/null &
+	myphp=php
 fi
+$myphp -S $HOSTNAME:$PORT >& /dev/null &
 
 # needed to allow web server to create config_inc.php
 chmod 777 config
