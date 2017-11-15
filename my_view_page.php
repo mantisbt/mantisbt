@@ -115,7 +115,8 @@ $t_counter = 0;
 
 define( 'MY_VIEW_INC_ALLOW', true );
 
-while( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
+foreach( $t_boxes as $t_box_title => $t_box_display ) {
+# while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 	if( $t_box_display == 0 ) {
 		# don't display bugs that are set as 0
 		$t_number_of_boxes = $t_number_of_boxes - 1;

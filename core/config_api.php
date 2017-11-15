@@ -146,15 +146,13 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			if( isset( $g_cache_config[$p_option] ) ) {
 				$t_found = false;
-				reset( $t_users );
-				while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-					reset( $t_projects );
-					while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+				foreach( $t_users as $t_user ) {
+					foreach( $t_projects as $t_project ) {
 						if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 							$t_value = $g_cache_config[$p_option][$t_user][$t_project];
 							$t_found = true;
-
 							# @@ debug @@ echo "clu found u=$t_user, p=$t_project, v=$t_value ";
+							break 2;
 						}
 					}
 				}
@@ -250,13 +248,12 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 
 	$t_found = false;
 	if( isset( $g_cache_config[$p_option] ) ) {
-		reset( $t_users );
-		while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-			reset( $t_projects );
-			while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+		foreach( $t_users as $t_user ) {
+			foreach( $t_projects as $t_project ) {
 				if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
 					$t_found = true;
+					break 2;
 				}
 			}
 		}
@@ -302,12 +299,11 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	}
 
 	$t_found = false;
-	reset( $t_users );
-	while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-		reset( $t_projects );
-		while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+	foreach( $t_users as $t_user ) {
+		foreach( $t_projects as $t_project ) {
 			if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 				$t_found = true;
+				break 2;
 			}
 		}
 	}
