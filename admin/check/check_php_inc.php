@@ -190,7 +190,7 @@ $t_vars = array(
 	'date.timezone'
 );
 
-while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
+foreach( $t_vars as $t_var ) {
 	$t_value = ini_get( $t_var );
 	if( $t_value != '' ) {
 		check_print_info_row( 'php.ini directive: ' . $t_var, htmlentities( $t_value ) );
