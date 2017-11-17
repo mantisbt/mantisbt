@@ -1986,7 +1986,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
-	echo htmlspecialchars( $t_content );
+	echo htmlspecialchars( $t_content, ENT_SUBSTITUTE, 'UTF-8' );
 	echo '</pre>';
 }
 
