@@ -1206,12 +1206,16 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 
-	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
-	if( $t_access_check_result !== true ) {
-		return $t_access_check_result;
-	}
+	# Only check that user can handle the issue if it was modified by the update.
+	if( $t_bug_data->handler_id != $t_handler_id ) {
+		$t_access_check_result = mci_issue_handler_access_check(
+			$t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+		if( $t_access_check_result !== true ) {
+			return $t_access_check_result;
+		}
 
-	$t_bug_data->handler_id = $t_handler_id;
+		$t_bug_data->handler_id = $t_handler_id;
+	}
 
 	$t_bug_data->category_id = $t_category_id;
 	$t_bug_data->summary = $t_summary;
