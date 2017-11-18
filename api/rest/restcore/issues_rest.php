@@ -59,6 +59,17 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	if( !is_blank( $t_issue_id ) ) {
 		# Get Issue By Id
 
+		# Calculate etag for issue.  This will work even if issue doesn't exist.
+		$t_etag = bug_hash( $t_issue_id );
+		$p_response = $p_response->withAddedHeader( HEADER_ETAG, $t_etag );
+
+		if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
+			$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+			if( $t_etag == $t_match_etag ) {
+				return $p_response->withStatus( HTTP_STATUS_NOT_MODIFIED, 'Not Modified' );
+			}
+		}
+
 		# Username and password below are ignored, since middleware already done the auth.
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
