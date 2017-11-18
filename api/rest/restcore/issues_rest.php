@@ -142,6 +142,22 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
+	# Calculate etag for issue.  This will work even if issue doesn't exist.
+	$t_etag = bug_hash( $t_issue_id );
+
+	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
+		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+		if( $t_etag != $t_match_etag ) {
+			return $p_response->withStatus( HTTP_STATUS_PRECONDITION_FAILED, 'Precondition Failed' )
+				->withHeader( HEADER_ETAG, $t_etag );
+		}
+	}
+
+	if( !bug_exists( $t_issue_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' )
+			->withHeader( HEADER_ETAG, $t_etag );
+	}
+
 	# Username and password below are ignored, since middleware already done the auth.
 	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
 
@@ -149,7 +165,8 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
 	}
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
+		->withHeader( HEADER_ETAG, bug_hash( $t_issue_id ) );
 }
 
 /**
