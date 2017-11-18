@@ -253,6 +253,17 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
+	# Calculate etag for issue.  This will work even if issue doesn't exist.
+	$t_etag = bug_hash( $t_issue_id );
+
+	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
+		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+		if( $t_etag != $t_match_etag ) {
+			return $p_response->withStatus( HTTP_STATUS_PRECONDITION_FAILED, 'Precondition Failed' )
+				->withHeader( HEADER_ETAG, bug_hash( $t_issue_id ) );
+		}
+	}
+
 	# Load the latest issue state from the db to merge with the provided fields to patch
 	$t_original_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
@@ -272,6 +283,7 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 
 	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )->
-		withJson( array( 'issue' => $t_updated_issue ) );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
+		->withHeader( HEADER_ETAG, bug_hash( $t_issue_id ) )
+		->withJson( array( 'issue' => $t_updated_issue ) );
 }
