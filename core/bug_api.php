@@ -987,11 +987,14 @@ function bug_text_clear_cache( $p_bug_id = null ) {
  * @return string The hash.
  */
 function bug_hash( $p_bug_id, $p_user_id = null ) {
+	# This is needed for cases where a bug has been updated, and a new hash is to be calculated.
+	bug_clear_cache( $p_bug_id );
+
 	# Change this version when it is desired to force clients to refresh issues.
 	$t_version = 'v1';
 
 	if( auth_is_user_authenticated() ) {
-		$t_user_id = $p_user_id ?: auth_get_current_user_id();
+		$t_user_id = $p_user_id ? (int)$p_user_id : auth_get_current_user_id();
 	} else {
 		$t_user_id = $p_user_id ?: '';
 	}
@@ -1003,7 +1006,9 @@ function bug_hash( $p_bug_id, $p_user_id = null ) {
 		$t_last_updated = '';
 	}
 
-	$t_str_to_hash = $p_bug_id . '_' . $t_last_updated . '_' . $t_user_id . '_' . $t_version;
+	$t_bug_id = (int)$p_bug_id;
+
+	$t_str_to_hash = $t_bug_id . '_' . $t_last_updated . '_' . $t_user_id . '_' . $t_version;
 	return hash( 'sha256', $t_str_to_hash );
 }
 
