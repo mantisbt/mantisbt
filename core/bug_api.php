@@ -979,6 +979,35 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 }
 
 /**
+ * Get hash for the bug information.  Used in scenarios like ETag for REST API.
+ * A proper hash will be returned even if the issue doesn't exist.
+ *
+ * @param integer $p_bug_id The bug id.
+ * @param integer|null $p_user_id The user id or null for current logged in user.
+ * @return string The hash.
+ */
+function bug_hash( $p_bug_id, $p_user_id = null ) {
+	# Change this version when it is desired to force clients to refresh issues.
+	$t_version = 'v1';
+
+	if( auth_is_user_authenticated() ) {
+		$t_user_id = $p_user_id ?: auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id ?: '';
+	}
+
+	if( bug_exists( $p_bug_id ) ) {
+		$t_bug_data = bug_get( $p_bug_id, false );
+		$t_last_updated = $t_bug_data->last_updated;
+	} else {
+		$t_last_updated = '';
+	}
+
+	$t_str_to_hash = $p_bug_id . '_' . $t_last_updated . '_' . $t_user_id . '_' . $t_version;
+	return hash( 'sha256', $t_str_to_hash );
+}
+
+/**
  * Check if a bug exists
  * @param integer $p_bug_id Integer representing bug identifier.
  * @return boolean true if bug exists, false otherwise
