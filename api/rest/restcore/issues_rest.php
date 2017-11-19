@@ -269,8 +269,18 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	# Calculate etag for issue.  This will work even if issue doesn't exist.
-	$t_etag = bug_hash( $t_issue_id );
+	$t_found = bug_exists( $t_issue_id );
+	if( $t_found ) {
+		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+		if( ApiObjectFactory::isFault( $t_issue ) ) {
+			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
+		}
+
+		$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
+	} else {
+		$t_etag = mc_issue_hash( $t_issue_id, /* issue */ null );
+		$t_issue = null;
+	}
 
 	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
@@ -280,26 +290,30 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	# Load the latest issue state from the db to merge with the provided fields to patch
-	$t_original_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	if( $t_found ) {
+		# Construct full issue from issue from db + patched info
+		$t_issue_patch = $p_request->getParsedBody();
+		if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
+			return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
+		}
 
-	# Construct full issue from issue from db + patched info
-	$t_issue_patch = $p_request->getParsedBody();
-	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
+		$t_issue = (object)array_merge( $t_issue, $t_issue_patch );
+
+		# Trigger the issue update
+		$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
+		if( ApiObjectFactory::isFault( $t_result ) ) {
+			return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+		}
+
+		$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+		$t_result = array( 'issues' => array( $t_updated_issue ) );
+
+		$p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
+			->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, $t_result ) )
+			->withJson( $t_result );
+	} else {
+		$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' );
 	}
 
-	$t_issue = (object)array_merge( $t_original_issue, $t_issue_patch );
-
-	# Trigger the issue update
-	$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
-	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
-
-	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
-		->withHeader( HEADER_ETAG, bug_hash( $t_issue_id ) )
-		->withJson( array( 'issue' => $t_updated_issue ) );
+	return $p_response;
 }
