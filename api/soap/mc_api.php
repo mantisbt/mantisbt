@@ -1159,3 +1159,13 @@ function mci_remove_empty_arrays( &$p_array ) {
 		unset( $p_array[$t_key] );
 	}
 }
+
+/**
+ * Hash a string for etag.
+ *
+ * @param string $p_string The string to hash
+ * @return string The hash.
+ */
+function mci_etag_hash( $p_string ) {
+	return hash( 'sha256', $p_string );
+}
