@@ -2044,3 +2044,37 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
 
     return $t_result;
 }
+
+/**
+ * Calculate hash for an issue.
+ *
+ * @param integer $p_issue_id The issue id.
+ * @param null|string|array $p_issue The issue or null if issue doesn't exist.
+ * @param integer $p_user_id The user id.
+ * @return string The hash of the issue.
+ */
+function mc_issue_hash( $p_issue_id, $p_issue, $p_user_id = null ) {
+	if( $p_user_id === null ) {
+		if( auth_is_user_authenticated() ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = 0;
+		}
+	} else {
+		$t_user_id = (int)$p_user_id;
+	}
+
+	if( $p_issue === null ) {
+		$t_issue = '';
+	} else if( is_array( $p_issue ) ) {
+		$t_issue = json_encode( $p_issue );
+	} else {
+		$t_issue = $p_issue;
+	}
+
+	$t_issue_id = (int)$p_issue_id;
+
+	$t_str_to_hash = 'v1_' . $t_user_id . '_' . $t_issue_id . '_' . $t_issue;
+
+	return mci_etag_hash( $t_str_to_hash );
+}

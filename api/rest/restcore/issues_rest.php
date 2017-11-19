@@ -59,30 +59,15 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	if( !is_blank( $t_issue_id ) ) {
 		# Get Issue By Id
 
-		# Calculate etag for issue.  This will work even if issue doesn't exist.
-		$t_etag = bug_hash( $t_issue_id );
-		$p_response = $p_response->withAddedHeader( HEADER_ETAG, $t_etag );
-
-		if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
-			$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
-			if( $t_etag == $t_match_etag ) {
-				return $p_response->withStatus( HTTP_STATUS_NOT_MODIFIED, 'Not Modified' );
-			}
-		}
-
-		if( !bug_exists( $t_issue_id ) ) {
-			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' )
-				->withHeader( HEADER_ETAG, $t_etag );
-		}
-
 		# Username and password below are ignored, since middleware already done the auth.
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
 		if( ApiObjectFactory::isFault( $t_issue ) ) {
-			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
+			$t_result = null;
+			$p_response = $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
+		} else {
+			$t_result = array( 'issues' => array( $t_issue ) );
 		}
-
-		$t_result = array( 'issues' => array( $t_issue ) );
 	} else {
 		$t_page_number = $p_request->getParam( 'page', 1 );
 		$t_page_size = $p_request->getParam( 'page_size', 50 );
@@ -90,26 +75,41 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		# Get a set of issues
 		$t_project_id = (int)$p_request->getParam( 'project_id', ALL_PROJECTS );
 		if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
-			# TODO: What's best was to escape $t_project?
+			$t_result = null;
 			$t_message = "Project '$t_project_id' doesn't exist";
-			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
-		}
-
-		$t_filter_id = (int)$p_request->getParam( 'filter_id', 0 );
-		if( $t_filter_id !== 0 ) {
-			# TODO: we should have a better way to do this.
-			global $g_project_override;
-			$g_project_override = $t_project_id;
-
-			$t_issues = mc_filter_get_issues( '', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size );
+			$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 		} else {
-			$t_issues = mc_project_get_issues( '', '', $t_project_id, $t_page_number, $t_page_size );
-		}
+			$t_filter_id = (int)$p_request->getParam( 'filter_id', 0 );
+			if( $t_filter_id !== 0 ) {
+				# TODO: we should have a better way to do this.
+				global $g_project_override;
+				$g_project_override = $t_project_id;
 
-		$t_result = array( 'issues' => $t_issues );
+				$t_issues = mc_filter_get_issues(
+					'', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size );
+			} else {
+				$t_issues = mc_project_get_issues(
+					'', '', $t_project_id, $t_page_number, $t_page_size );
+			}
+
+			$t_result = array( 'issues' => $t_issues );
+		}
 	}
 
-	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+	$t_etag = mc_issue_hash( $t_issue_id, $t_result );
+	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
+		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+		if( $t_etag == $t_match_etag ) {
+			return $p_response->withStatus( HTTP_STATUS_NOT_MODIFIED, 'Not Modified' )
+				->withHeader( HEADER_ETAG, $t_etag );
+		}
+	}
+
+	if( $t_result !== null ) {
+		$p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+	}
+
+	return $p_response->withHeader( HEADER_ETAG, $t_etag );
 }
 
 /**
