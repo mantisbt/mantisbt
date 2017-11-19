@@ -147,8 +147,17 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
-	# Calculate etag for issue.  This will work even if issue doesn't exist.
-	$t_etag = bug_hash( $t_issue_id );
+	$t_found = bug_exists( $t_issue_id );
+	if( $t_found ) {
+		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+		if( ApiObjectFactory::isFault( $t_issue ) ) {
+			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
+		}
+
+		$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
+	} else {
+		$t_etag = mc_issue_hash( $t_issue_id, /* issue */ null );
+	}
 
 	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
@@ -158,20 +167,22 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	if( !bug_exists( $t_issue_id ) ) {
-		return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' )
-			->withHeader( HEADER_ETAG, $t_etag );
+	if( $t_found ) {
+		# Username and password below are ignored, since middleware already done the auth.
+		$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
+
+		if( ApiObjectFactory::isFault( $t_result ) ) {
+			return $p_response->withStatus( $t_result->status_code, $t_result->fault_string )
+				->withHeader( HEADER_ETAG, $t_etag );
+		}
+
+		$p_response = $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
+			->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, null ) );
+	} else {
+		$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' );
 	}
 
-	# Username and password below are ignored, since middleware already done the auth.
-	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
-
-	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
-
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
-		->withHeader( HEADER_ETAG, bug_hash( $t_issue_id ) );
+	return $p_response;
 }
 
 /**
