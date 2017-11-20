@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author BukhariSaeed
  * @author E THP
  * @author امین اکبر
  * @author عثمان خان شاہ
@@ -419,7 +420,7 @@ $s_created_user_part2 = '  استعمال کر نے کے لیول کے ساتھ'
 $s_create_new_account_title = 'نیا کھاتہ بناو';
 $s_verify_password = '  راذ وا لے لفظ کو چیک کر لیں';
 $s_enabled = 'قابل ھے';
-$s_protected = 'محفوظ ھے';
+$s_protected = 'محفوظ';
 $s_create_user_button = '  استعمال کر نے والے بناو';
 $s_hide_disabled = 'نا قابل کو چپھاو';
 $s_filter_button = 'فلٹر لگاو';
