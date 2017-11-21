@@ -111,13 +111,13 @@ $t_largest_diff 	= number_format( $t_largest_diff / SECONDS_PER_DAY, 2 );
 $t_total_time		= number_format( $t_total_time / SECONDS_PER_DAY, 2 );
 $t_average_time 	= number_format( $t_average_time / SECONDS_PER_DAY, 2 );
 
-$t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EMPTY );
+$t_summary_header_arr = preg_split( '/[\)\/\(]/', lang_get( 'summary_header' ), -1, PREG_SPLIT_NO_EMPTY );
 
-$t_orcttab = '';
-foreach ( $t_orct_arr as $t_orct_s ) {
-	$t_orcttab .= '<th class="align-right">';
-	$t_orcttab .= $t_orct_s;
-	$t_orcttab .= '</th>';
+$t_summary_header = '';
+foreach ( $t_summary_header_arr as $t_summary_header_name ) {
+	$t_summary_header .= '<th class="align-right">';
+	$t_summary_header .= $t_summary_header_name;
+	$t_summary_header .= '</th>';
 }
 
 layout_page_header( lang_get( 'summary_link' ) );
@@ -154,7 +154,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_project' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_project(); ?>
@@ -169,7 +169,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_status' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_enum( 'status' ) ?>
@@ -183,7 +183,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_severity' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_enum( 'severity' ) ?>
@@ -197,7 +197,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_category' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_category() ?>
@@ -243,7 +243,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th><?php echo lang_get( 'developer_stats' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_developer() ?>
@@ -305,7 +305,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_resolution' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_enum( 'resolution' ) ?>
@@ -319,7 +319,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'by_priority' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_enum( 'priority' ) ?>
@@ -333,7 +333,7 @@ print_summary_submenu();
 		<thead>
 			<tr>
 				<th class="width-35"><?php echo lang_get( 'reporter_stats' ) ?></th>
-				<?php echo $t_orcttab ?>
+				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
 		<?php summary_print_by_reporter() ?>
