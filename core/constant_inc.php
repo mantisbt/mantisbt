@@ -680,6 +680,7 @@ define( 'HEADER_AUTHORIZATION', 'Authorization' );
 define( 'HEADER_LOGIN_METHOD', 'X-Mantis-LoginMethod' );
 define( 'HEADER_USERNAME', 'X-Mantis-Username' );
 define( 'HEADER_VERSION', 'X-Mantis-Version' );
+define( 'HEADER_IF_MATCH', 'If-Match' );
 define( 'HEADER_IF_NONE_MATCH', 'If-None-Match' );
 define( 'HEADER_ETAG', 'ETag' );
 

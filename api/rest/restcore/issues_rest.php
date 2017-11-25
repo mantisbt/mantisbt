@@ -159,8 +159,8 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		$t_etag = mc_issue_hash( $t_issue_id, /* issue */ null );
 	}
 
-	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
-		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
+		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
 		if( $t_etag != $t_match_etag ) {
 			return $p_response->withStatus( HTTP_STATUS_PRECONDITION_FAILED, 'Precondition Failed' )
 				->withHeader( HEADER_ETAG, $t_etag );
@@ -282,8 +282,8 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		$t_issue = null;
 	}
 
-	if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
-		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
+		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
 		if( $t_etag != $t_match_etag ) {
 			return $p_response->withStatus( HTTP_STATUS_PRECONDITION_FAILED, 'Precondition Failed' )
 				->withHeader( HEADER_ETAG, $t_etag );
