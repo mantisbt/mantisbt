@@ -44,7 +44,6 @@ $g_cache_config_eval = array();
 $g_cache_config_access = array();
 $g_cache_bypass_lookup = array();
 $g_cache_filled = false;
-$g_cache_can_set_in_database = '';
 
 # cache environment to speed up lookups
 $g_cache_db_table_exists = false;
@@ -70,15 +69,10 @@ $g_cache_config_project = null;
  * @return mixed
  */
 function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
-	global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
+	global $g_cache_config, $g_cache_db_table_exists, $g_cache_filled;
 	global $g_cache_config_user, $g_cache_config_project, $g_project_override;
 
-	# @@ debug @@ echo "lu o=$p_option ";
-	# bypass table lookup for certain options
-	$t_bypass_lookup = !config_can_set_in_database( $p_option );
-
-	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-	if( !$t_bypass_lookup ) {
+	if( config_can_set_in_database( $p_option ) ) {
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
 		}
@@ -154,19 +148,15 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 					switch( $t_type ) {
 						case CONFIG_TYPE_FLOAT:
-							$t_value = (float)$t_raw_value;
-							break;
+							return (float)$t_raw_value;
 						case CONFIG_TYPE_INT:
-							$t_value = (int)$t_raw_value;
-							break;
+							return (int)$t_raw_value;
 						case CONFIG_TYPE_COMPLEX:
-							$t_value = json_decode( $t_raw_value, true );
-							break;
+							return json_decode( $t_raw_value, true );
 						case CONFIG_TYPE_STRING:
 						default:
-							$t_value = config_eval( $t_raw_value );
+							return config_eval( $t_raw_value );
 					}
-					return $t_value;
 				}
 			}
 		}
@@ -238,20 +228,17 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
 	if( isset( $g_cache_config[$p_option] ) ) {
 		foreach( $t_users as $t_user ) {
 			foreach( $t_projects as $t_project ) {
 				if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
-					$t_found = true;
-					break 2;
+					return $g_cache_config_access[$p_option][$t_user][$t_project];
 				}
 			}
 		}
 	}
 
-	return $t_found ? $t_access : config_get_global( 'admin_site_threshold' );
+	return config_get_global( 'admin_site_threshold' );
 }
 
 /**
@@ -290,18 +277,12 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
 	foreach( $t_users as $t_user ) {
 		foreach( $t_projects as $t_project ) {
 			if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-				$t_found = true;
-				break 2;
+				return true;
 			}
 		}
-	}
-
-	if( $t_found ) {
-		return true;
 	}
 
 	return isset( $GLOBALS['g_' . $p_option] );
@@ -353,7 +334,6 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
 
 		db_param_push();
-		$t_params = array();
 		if( 0 < db_result( $t_result ) ) {
 			$t_set_query = 'UPDATE {config}
 					SET value=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
@@ -445,17 +425,14 @@ function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_p
  * @return boolean
  */
 function config_can_set_in_database( $p_option ) {
-	global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
+	global $g_cache_bypass_lookup, $g_global_settings;
 
 	if( isset( $g_cache_bypass_lookup[$p_option] ) ) {
 		return !$g_cache_bypass_lookup[$p_option];
 	}
 
 	# bypass table lookup for certain options
-	if( $g_cache_can_set_in_database == '' ) {
-		$g_cache_can_set_in_database = config_get_global( 'global_settings' );
-	}
-	$t_bypass_lookup = in_array( $p_option, $g_cache_can_set_in_database, true );
+	$t_bypass_lookup = in_array( $p_option, $g_global_settings, true );
 
 	$g_cache_bypass_lookup[$p_option] = $t_bypass_lookup;
 
