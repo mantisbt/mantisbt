@@ -886,3 +886,28 @@ function project_format_id( $p_project_id ) {
 	$t_padding = config_get( 'display_project_padding' );
 	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 }
+
+/**
+ * Get the specified config option value for the specified project.
+ *
+ * @param integer $p_project_id  The project id.
+ * @param string  $p_config      The config option name.
+ * @param string  $p_default     The default value.
+ * @return mixed  The config value.
+ */
+function project_config( $p_project_id, $p_config, $p_default = null ) {
+	return config_get( $p_config, $p_default, /* user */ null, $p_project_id );
+}
+
+/**
+ * Checks if the logged in user has the access level specified by the
+ * config option for the specified project.
+ *
+ * @param integer $p_project_id  The project id.
+ * @param string  $p_config      The configuration option name.
+ * @return bool true: yes, false: otherwise.
+ */
+function project_has_access( $p_project_id, $p_config ) {
+	$t_access_level = project_config( $p_project_id, $p_config );
+	return access_has_project_level( $t_access_level, $p_project_id );
+}
