@@ -79,12 +79,9 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 			$t_message = "Project '$t_project_id' doesn't exist";
 			$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 		} else {
-			$t_filter_id = (int)$p_request->getParam( 'filter_id', 0 );
-			if( $t_filter_id !== 0 ) {
-				# TODO: we should have a better way to do this.
-				global $g_project_override;
-				$g_project_override = $t_project_id;
+			$t_filter_id = trim( $p_request->getParam( 'filter_id', '' ) );
 
+			if( !empty( $t_filter_id ) ) {
 				$t_issues = mc_filter_get_issues(
 					'', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size );
 			} else {
