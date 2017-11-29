@@ -103,7 +103,8 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
  * @param string  $p_username    The name of the user trying to access the filters.
  * @param string  $p_password    The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve filters for.
- * @param integer $p_filter_id   The id of the filter to apply.
+ * @param integer|string $p_filter_id The id of the filter to apply,
+ *                               or standard filter (see FILTER_STANDARD_* constants).
  * @param integer $p_page_number Start with the given page number (zero-based).
  * @param integer $p_per_page    Number of issues to display per page.
  * @return array that represents an IssueDataArray structure
@@ -113,31 +114,47 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
 	}
+
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
+	$t_filter = filter_load( $p_filter_id, $t_user_id );
+	if( $t_filter === null ) {
+		return ApiObjectFactory::faultNotFound( "Unknown filter '$p_filter_id'" );
+	}
+
+	if( $t_filter === false ) {
+		return ApiObjectFactory::faultServerError( "Invalid Filter '$p_filter_id'" );
+	}
+
+	# TODO: we should have a better way to do this.
+	global $g_project_override;
+	$g_project_override = $p_project_id;	
+
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
 	$t_bug_count = 0;
-	$t_filter = filter_db_get_filter( $p_filter_id );
-	$t_filter_detail = explode( '#', $t_filter, 2 );
-	if( !isset( $t_filter_detail[1] ) ) {
-		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
-	}
-	$t_filter = json_decode( $t_filter_detail[1], true );
-	$t_filter = filter_ensure_valid_filter( $t_filter );
+	$t_show_sticky = false;
 
-	$t_result = array();
-	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
+	$t_rows = filter_get_bug_rows(
+		$p_page_number,
+		$p_per_page,
+		$t_page_count,
+		$t_bug_count,
+		$t_filter,
+		$p_project_id,
+		$t_user_id,
+		$t_show_sticky );
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if( $t_orig_page_number > $p_page_number ) {
-		return $t_result;
+		return array();
 	}
 
+	$t_result = array();
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
 	}
