@@ -39,7 +39,7 @@
  * @param object  $p_target_user AccountData for target user, can include id, name, or both.
  * @param integer $p_page_number The page to return (1 based).
  * @param integer $p_per_page    Number of issues per page.
- * @return array a page of matching issues.
+ * @return array|RestFault|SoapFault a page of matching issues or error.
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -64,6 +64,14 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	$t_show_sticky = true;
 
 	if( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+		# If user is filtering on handlers, then they must have access to view handlers
+		if( $t_target_user_id != $t_user_id && $t_target_user_id != NO_USER ) {
+			$t_view_handler_access = config_get( 'view_handler_threshold', null, $t_user_id, $p_project_id );
+			if( !access_has_project_level( $t_view_handler_access, $p_project_id, $t_user_id ) ) {
+				return ApiObjectFactory::faultForbidden( 'Issue handlers are not visible to user.' );
+			}
+		}
+
 		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
 	} else if( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		# target id 0 for reporter doesn't make sense.
@@ -78,7 +86,9 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 		return ApiObjectFactory::faultBadRequest( 'Unknown filter type \'' . $p_filter_type . '\'.' );
 	}
 
-	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
+	$t_rows = filter_get_bug_rows(
+		$p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter,
+		$p_project_id, $t_user_id, $t_show_sticky );
 
 	$t_result = array();
 
