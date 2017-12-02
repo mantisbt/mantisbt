@@ -28,6 +28,7 @@ plugins/*
 .project
 .settings
 .idea/
+.vscode/
 *.kdev4
 nbproject/
 
