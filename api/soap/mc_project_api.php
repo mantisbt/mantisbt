@@ -1019,7 +1019,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
  */
 function mci_project_as_array_by_id( $p_project_id ) {
 	$t_result = array();
-	$t_result['id'] = $p_project_id;
+	$t_result['id'] = (int)$p_project_id;
 	$t_result['name'] = project_get_name( $p_project_id );
 	return $t_result;
 }
