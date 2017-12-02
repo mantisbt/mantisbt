@@ -60,6 +60,7 @@ $g_app->add( new OfflineMiddleware() );
 $g_app->add( new CacheMiddleware() );
 
 require_once( $t_restcore_dir . 'config_rest.php' );
+require_once( $t_restcore_dir . 'filters_rest.php' );
 require_once( $t_restcore_dir . 'internal_rest.php' );
 require_once( $t_restcore_dir . 'issues_rest.php' );
 require_once( $t_restcore_dir . 'lang_rest.php' );
