@@ -118,6 +118,36 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 }
 
 /**
+ * Delete the specified filter.
+ *
+ * @param integer $p_filter_id The filter id to delete.
+ * @return boolean|RestFault|SoapFault true or fault.
+ */
+function mci_filter_delete( $p_filter_id ) {
+	$t_user_id = auth_get_current_user_id();
+
+	$t_filter = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	if( !$t_filter ) {
+		return ApiObjectFactory::faultNotFound( 'Filter not found' );
+	}
+
+	# Treat unnamed filters as not found.  They are not exposed via the REST API
+	if( !filter_is_named_filter( $p_filter_id ) ) {
+		return ApiObjectFactory::faultNotFound( 'Filter not found' );
+	}
+
+	if( !mci_has_readwrite_access( $t_user_id, $t_filter['project_id'] ) ) {
+		return mci_fault_access_denied();
+	}
+
+	if( !filter_db_delete_filter( $p_filter_id ) ) {
+		return mci_fault_access_denied();
+	}
+
+	return true;
+}
+
+/**
  * Get all issues matching the specified filter.
  *
  * @param string  $p_username    The name of the user trying to access the filters.
