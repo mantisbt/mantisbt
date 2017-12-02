@@ -2651,6 +2651,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 $g_cache_filter = array();
 $g_cache_filter_db_filters = array();
 
+/**
+ * Cache the specified filters.
+ *
+ * @param array Filter ids.
+ * @return array Array of filter information arrays, filters that don't exist will be set to false.
+ */
 function filter_cache_rows( array $p_filter_ids ) {
 	global $g_cache_filter;
 
@@ -2685,7 +2691,7 @@ function filter_cache_rows( array $p_filter_ids ) {
  *  false, return false if the filter can't be found.
  * @param integer $p_filter_id      A filter identifier to retrieve.
  * @param boolean $p_trigger_errors Whether to trigger an error if the filter is not found.
- * @return array|boolean
+ * @return array|boolean Array if filter exists, false if it doesn't exist and trigger errors is not set.
  */
 function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	global $g_cache_filter;
@@ -2951,13 +2957,24 @@ function filter_db_get_name( $p_filter_id ) {
 }
 
 /**
+ * Check if the specified filter id exists.
+ *
+ * @return true: exists, false: otherwise.
+ */
+function filter_exists( $p_filter_id ) {
+	$t_filter = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	return is_array( $t_filter );
+}
+
+/**
  * Check if the current user has permissions to delete the stored query
  * @param integer $p_filter_id Filter id.
+ * @param integer|null User id or null for logged in user.
  * @return boolean
  */
-function filter_db_can_delete_filter( $p_filter_id ) {
+function filter_db_can_delete_filter( $p_filter_id, $p_user_id = null ) {
 	$c_filter_id = (int)$p_filter_id;
-	$t_user_id = auth_get_current_user_id();
+	$t_user_id = $p_user_id != null ? $p_user_id : auth_get_current_user_id();
 
 	# Administrators can delete any filter
 	if( user_is_administrator( $t_user_id ) ) {
