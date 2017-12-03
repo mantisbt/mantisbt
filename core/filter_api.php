@@ -3082,6 +3082,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 			$t_filter = json_decode( $t_filter_detail[1], true );
 			$t_filter = filter_ensure_valid_filter( $t_filter );
+			$t_row['criteria'] = $t_filter;
 			$t_row['url'] = filter_get_url( $t_filter );
 			$t_filters[$t_row['name']] = $t_row;
 		}
