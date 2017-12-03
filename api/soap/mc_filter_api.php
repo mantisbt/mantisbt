@@ -72,9 +72,10 @@ $g_soap_api_to_filter_names = array(
  * @param string  $p_username   The name of the user trying to access the filters.
  * @param string  $p_password   The password of the user.
  * @param integer $p_project_id The id of the project to retrieve filters for or null to get all filters.
+ * @param integer|null $p_filter_id null to get all, or integer to get specified filter id.
  * @return array that represents a FilterDataArray structure
  */
-function mc_filter_get( $p_username, $p_password, $p_project_id ) {
+function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = null ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
@@ -92,28 +93,28 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 		false );                  # Return names only?
 
 	foreach( $t_filter_rows as $t_filter_row ) {
-		$t_filter = array();
-		$t_filter['id'] = (int)$t_filter_row['id'];
-		$t_filter['name'] = $t_filter_row['name'];
+		if( $p_filter_id !== null && (int)$p_filter_id != (int)$t_filter_row['id'] ) {
+			continue;
+		}
 
 		if( ApiObjectFactory::$soap ) {	
+			$t_filter = array();
+			$t_filter['id'] = (int)$t_filter_row['id'];
+			$t_filter['name'] = $t_filter_row['name'];
 			$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
 			$t_filter['is_public'] = $t_filter_row['is_public'];
 			$t_filter['project_id'] = $t_filter_row['project_id'];
 			$t_filter['filter_string'] = $t_filter_row['filter_string'];
+			$t_filter['url'] = $t_filter_row['url'];
 		} else {
-			# Only include owner if it is different than user retrieving the filters list.
-			if( (int)$t_filter_row['user_id'] != auth_get_current_user_id() ) {
-				$t_filter['owner'] = mci_account_get_array_by_id( $t_filter_row['user_id'] );
-			}
-
-			$t_filter['public'] = $t_filter_row['is_public'] == '1' ? true : false;
-			$t_filter['project'] = mci_project_as_array_by_id( $t_filter_row['project_id'] );
+			$t_lang = mci_get_user_lang( $t_user_id );
+			$converter = new FilterConverter( $t_user_id, $t_lang );
+			$t_filter = $converter->filterToJson( $t_filter_row );
 		}
 
-		$t_filter['url'] = $t_filter_row['url'];
 		$t_result[] = $t_filter;
 	}
+
 	return $t_result;
 }
 

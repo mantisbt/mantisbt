@@ -633,7 +633,14 @@ function relationship_get_name_for_api( $p_relationship_type ) {
 	global $g_relationships;
 
 	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		switch( $p_relationship_type ) {
+			case BUG_REL_NONE:
+				return 'none';
+			case BUG_REL_ANY:
+				return 'any';
+			default:
+				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		}
 	}
 
 	return $g_relationships[$p_relationship_type]['#name'];
