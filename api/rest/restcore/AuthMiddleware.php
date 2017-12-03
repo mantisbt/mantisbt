@@ -59,7 +59,7 @@ class AuthMiddleware {
 			# use api token
 			$t_login_method = LOGIN_METHOD_API_TOKEN;
 			$t_password = $t_authorization_header;
-			$t_username = user_get_name( $t_user_id );
+			$t_username = user_get_username( $t_user_id );
 		}
 
 		if( mci_check_login( $t_username, $t_password ) === false ) {
