@@ -41,6 +41,7 @@ $f_project_id = gpc_get_int( 'project_id' );
 $f_cost = gpc_get_int( 'cost' );
 $f_from = gpc_get_string( 'from' );
 $f_to = gpc_get_string( 'to' );
+$f_subprojects = gpc_get_string( 'subprojects' );
 
 $t_new_line = csv_get_newline();
 $t_separator = csv_get_separator();
@@ -49,7 +50,7 @@ billing_ensure_reporting_access( $f_project_id );
 
 $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 
-$t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost );
+$t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost, $f_subprojects );
 $t_show_realname = config_get( 'show_realname' ) == ON;
 
 csv_start( csv_get_default_filename() );

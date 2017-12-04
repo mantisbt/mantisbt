@@ -3969,6 +3969,12 @@ $g_time_tracking_reporting_threshold = MANAGER;
  */
 $g_time_tracking_without_note = ON;
 
+/**
+ * default bugnote cost per hour
+ * @global integer $g_time_tracking_without_note
+ */
+$g_time_tracking_cost_per_hour = 0;
+
 ############################
 # Profile Related Settings #
 ############################

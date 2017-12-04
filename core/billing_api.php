@@ -53,10 +53,11 @@ function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = nul
  * @param string  $p_from          Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
  * @param string  $p_to            Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
  * @param integer $p_cost_per_hour Cost per hour.
+ * @param integer $p_subprojects   Get project and its subprojects.
  * @return array array of bugnotes
  * @access public
  */
-function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour ) {
+function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects = null ) {
 	$t_params = array();
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
@@ -69,10 +70,15 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	db_param_push();
 
 	if( ALL_PROJECTS != $p_project_id ) {
-		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
+		if( $p_subprojects ) {
+			$t_project_ids = user_get_all_accessible_projects(null, $p_project_id);
+			$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ). ')';
+		} else {
+			access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
 
-		$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
-		$t_params[] = $p_project_id;
+			$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
+			$t_params[] = $p_project_id;
+		}
 	} else {
 		$t_project_ids = user_get_all_accessible_projects();
 		$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ). ')';
@@ -133,8 +139,8 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
  * @return array The contains billing data grouped by issues, users, and total information.
  * @access public
  */
-function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour ) {
-	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour );
+function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects ) {
+	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects );
 
 	$t_issues = array();
 	$t_users = array();
