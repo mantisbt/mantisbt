@@ -3970,8 +3970,8 @@ $g_time_tracking_reporting_threshold = MANAGER;
 $g_time_tracking_without_note = ON;
 
 /**
- * default bugnote cost per hour
- * @global integer $g_time_tracking_without_note
+ * default billing rate per hour
+ * @global integer $g_time_tracking_cost_per_hour
  */
 $g_time_tracking_cost_per_hour = 0;
 
@@ -4621,6 +4621,7 @@ $g_public_config_names = array(
 	'time_tracking_view_threshold',
 	'time_tracking_with_billing',
 	'time_tracking_without_note',
+	'time_tracking_cost_per_hour',
 	'timeline_view_threshold',
 	'top_include_page',
 	'update_bug_assign_threshold',

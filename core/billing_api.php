@@ -49,15 +49,15 @@ function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = nul
 /**
  * Gets the billing information for the specified project during the specified date range.
  * 
- * @param integer $p_project_id    A project identifier or ALL_PROJECTS.
- * @param string  $p_from          Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param string  $p_to            Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param integer $p_cost_per_hour Cost per hour.
- * @param integer $p_subprojects   Get project and its subprojects.
+ * @param integer $p_project_id           A project identifier or ALL_PROJECTS.
+ * @param string  $p_from                 Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string  $p_to                   Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param integer $p_cost_per_hour        Cost per hour.
+ * @param bool    $p_include_subprojects  Include subprojects of selected project.
  * @return array array of bugnotes
  * @access public
  */
-function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects = null ) {
+function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects = false ) {
 	$t_params = array();
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
@@ -70,7 +70,7 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	db_param_push();
 
 	if( ALL_PROJECTS != $p_project_id ) {
-		if( $p_subprojects ) {
+		if( $p_include_subprojects ) {
 			$t_project_ids = user_get_all_accessible_projects(null, $p_project_id);
 			$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ). ')';
 		} else {
@@ -132,15 +132,16 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 /**
  * Gets the billing summary for the specified project and the date range.
  *
- * @param integer $p_project_id    A project identifier or ALL_PROJECTS.
- * @param string  $p_from          Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param string  $p_to            Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param integer $p_cost_per_hour Cost per hour.
- * @return array The contains billing data grouped by issues, users, and total information.
+ * @param integer $p_project_id           A project identifier or ALL_PROJECTS.
+ * @param string  $p_from                 Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string  $p_to                   Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param integer $p_cost_per_hour        Cost per hour.
+ * @param bool    $p_include_subprojects  Include subprojects of selected project.
+ * @return array  The contains billing data grouped by issues, users, and total information.
  * @access public
  */
-function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects ) {
-	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_subprojects );
+function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects = false ) {
+	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects );
 
 	$t_issues = array();
 	$t_users = array();

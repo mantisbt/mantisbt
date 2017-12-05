@@ -81,7 +81,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 # Retrieve the cost as a string and convert to floating point
 $f_bugnote_cost = floatval( gpc_get_string( 'bugnote_cost', config_get( 'time_tracking_cost_per_hour' ) ) );
 
-$f_subprojects = gpc_get_string( 'subprojects', '' );
+$f_include_subprojects = gpc_get_bool( 'include_subprojects', false );
 
 $f_project_id = helper_get_current_project();
 
@@ -151,7 +151,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 		<tr class="row-1">
 			<td>
-				<input type="checkbox" name="subprojects" <?php if($f_subprojects) echo 'checked'; ?>>
+				<input type="checkbox" name="include_subprojects" value="1" <?php check_checked( $f_include_subprojects, true ); ?> />
 				<?php echo lang_get( 'subprojects' ) ?>
 			</td>
 		</tr>
@@ -176,7 +176,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		# Retrieve time tracking information
 		$t_from = $t_bugnote_stats_from_y . '-' . $t_bugnote_stats_from_m . '-' . $t_bugnote_stats_from_d;
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
-		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost, $f_subprojects );
+		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost, $f_include_subprojects );
 
 		# Sort the array by bug_id, user/real name
 		if( ON == config_get( 'show_realname' ) ) {
@@ -195,13 +195,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			'csv_export' => 'billing_export_to_csv.php',
 			'excel_export' => 'billing_export_to_excel.php',
 		);
-		
+
 		foreach( $t_exports as $t_export_label => $t_export_page ) {
 			echo '[ <a href="' . $t_export_page . '?';
 			echo 'from=' . $t_from . '&amp;to=' . $t_to;
 			echo '&amp;cost=' . $f_bugnote_cost;
 			echo '&amp;project_id=' . $f_project_id;
-			echo '&amp;subprojects=' . $f_subprojects;
+			echo '&amp;include_subprojects=' . $f_include_subprojects;
 			echo '">' . lang_get( $t_export_label ) . '</a> ] ';
 		}
 
@@ -227,7 +227,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 <?php
 		foreach ( $t_bugnote_stats['issues'] as $t_issue_id => $t_issue ) {
-			$t_project_info = ( (!isset( $f_bug_id ) && $f_project_id == ALL_PROJECTS) || $f_subprojects ) ? '[' . project_get_name( $t_issue['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
+			$t_project_info = ( !isset( $f_bug_id ) && ( $f_project_id == ALL_PROJECTS || $f_include_subprojects ) ) ? '[' . project_get_name( $t_issue['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
 			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 

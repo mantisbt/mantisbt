@@ -38,7 +38,7 @@
 			<term>$g_time_tracking_cost_per_hour</term>
 			<listitem>
 				<para>
-					Default cost per hour - Default is 0
+					Default billing rate per hour - Default is 0
 				</para>
 			</listitem>
 		</varlistentry>
