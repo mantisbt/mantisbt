@@ -478,6 +478,12 @@ define( 'FILTER_TYPE_MULTI_INT', 4 );
 define( 'FILTER_MATCH_ALL', 0 );
 define( 'FILTER_MATCH_ANY', 1 );
 
+# Standard Filters
+define( 'FILTER_STANDARD_ASSIGNED', 'assigned' );
+define( 'FILTER_STANDARD_UNASSIGNED', 'unassigned' );
+define( 'FILTER_STANDARD_REPORTED', 'reported' );
+define( 'FILTER_STANDARD_MONITORED', 'monitored' );
+
 # Versions
 define( 'VERSION_ALL', null );
 define( 'VERSION_FUTURE', false );

@@ -2850,6 +2850,53 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 }
 
 /**
+ * Load a filter from db or a standard filter.
+ *
+ * @param string|integer $p_filter_id The filter id or standard filter.
+ * @param integer|null $p_user_id The user id or null for logged in user.
+ * @return null filter not found, false invalid filter, otherwise the filter.
+ */
+function filter_load( $p_filter_id, $p_user_id = null ) {
+	if( is_numeric( $p_filter_id ) ) {
+		$p_filter_id = (int)$p_filter_id;
+		$t_filter = filter_db_get_filter( $p_filter_id );
+		if( $t_filter === null ) {
+			return null;
+		}
+
+		$t_filter_detail = explode( '#', $t_filter, 2 );
+		if( !isset( $t_filter_detail[1] ) ) {
+			return false;
+		}
+
+		$t_filter = json_decode( $t_filter_detail[1], true );
+	} else {
+		$p_filter_id = strtolower( $p_filter_id );
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+
+		switch( $p_filter_id ) {
+			case FILTER_STANDARD_ASSIGNED:
+				$t_filter = filter_create_assigned_to_unresolved( $t_project_id, $t_user_id );
+				break;
+			case FILTER_STANDARD_UNASSIGNED:
+				$t_filter = filter_create_assigned_to_unresolved( $t_project_id, NO_USER );
+				break;
+			case FILTER_STANDARD_REPORTED:
+				$t_filter = filter_create_reported_by( $t_project_id, $t_user_id );
+				break;
+			case FILTER_STANDARD_MONITORED:
+				$t_filter = filter_create_monitored_by( $t_project_id, $t_user_id );
+				break;
+			default:
+				return null;
+		}
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
+}
+
+/**
  * get current filter for given project and user
  * @param integer $p_project_id A project identifier.
  * @param integer $p_user_id    A valid user identifier.
