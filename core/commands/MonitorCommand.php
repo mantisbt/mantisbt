@@ -13,10 +13,20 @@ class MonitorCommand extends Command {
 	private $loggedInUserId;
 	private $userIdsToAdd;
 
+	/**
+	 * Data is expected to contain:
+	 * - issue_id
+	 * - users (array of users) each user as
+	 *   - an array having a key value for id or name or real_name or name_or_realname.
+	 *     id takes first priority, name second, real_name third, name_or_realname fourth.
+	 */
 	function __construct( array $p_data ) {
 		parent::__construct( $p_data );
 	}
 
+	/**
+	 * Validate the data.
+	 */
 	function validate() {
 		# Validate issue id
 		if( !isset( $this->data['issue_id'] ) ) {
@@ -85,6 +95,11 @@ class MonitorCommand extends Command {
 		}
 	}
 
+	/**
+	 * Process the command.
+	 * 
+	 * @returns null No output from this command.
+	 */
 	protected function process() {
 		if( $this->projectId != helper_get_current_project() ) {
 			# in case the current project is not the same project of the bug we are
@@ -96,8 +111,16 @@ class MonitorCommand extends Command {
 		foreach( $this->userIdsToAdd as $t_user_id ) {
 			bug_monitor( $this->data['issue_id'], $t_user_id );
 		}
+
+		return null;
 	}
 
+	/**
+	 * A helper method that takes an array that describes a user and returns
+	 * the corresponding id or false if not found.
+	 * 
+	 * @return integer|boolean The user id or false if not found.
+	 */
 	private function getIdForUser( array $p_user ) {
 		# TODO: move to a common utility method that replaced this method
 		# and mci_get_user_id()
