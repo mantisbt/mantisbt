@@ -11,7 +11,6 @@
 abstract class Command
 {
 	protected $data;
-	protected $executionResults;
 
 	/**
 	 * Command constructor taking in all required data to execute the command.
@@ -47,7 +46,6 @@ abstract class Command
 	 */
 	public function execute() {
 		$this->validate();
-		$this->executionResults = $this->process();
-		return $this->executionResults;
+		return $this->process();
 	}
 }
