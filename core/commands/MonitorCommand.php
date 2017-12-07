@@ -27,17 +27,17 @@ class MonitorCommand extends Command {
 	function validate() {
 		# Validate issue id
 		if( !isset( $this->data['issue_id'] ) ) {
-			throw new CommandException( HTTP_STATUS_BAD_REQUEST, 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
+			throw new ClientException( 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
 		}
 
 		if( !is_numeric( $this->data['issue_id'] ) ) {
-			throw new CommandException( HTTP_STATUS_BAD_REQUEST, 'issue_id must be a valid issue id', ERROR_GPC_NOT_NUMBER );
+			throw new ClientException( 'issue_id must be numeric', ERROR_GPC_VAR_NOT_FOUND );
 		}
 		
 		$t_issue_id = (int)$this->data['issue_id'];
 
 		if( !bug_exists( $t_issue_id ) ) {
-			throw new CommandException( HTTP_STATUS_NOT_FOUND, "Issue id {$t_issue_id} not found", ERROR_BUG_NOT_FOUND );
+			throw new ClientException( "Issue id {$t_issue_id} not found", ERROR_BUG_NOT_FOUND, ERROR_GPC_VAR_NOT_FOUND );
 		}
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
@@ -46,7 +46,7 @@ class MonitorCommand extends Command {
 		# Validate user id (if specified), otherwise set from context
 		if( !isset( $this->data['users'] ) ) {
 			if( !auth_is_user_authenticated() ) {
-				throw new CommandException( HTTP_STATUS_BAD_REQUEST, 'user_id missing', ERROR_GPC_VAR_NOT_FOUND );
+				throw new ClientException( 'user_id missing', ERROR_GPC_VAR_NOT_FOUND );
 			}
 
 			$this->data['users'] = array( 'id' => auth_get_current_user_id() );
@@ -66,9 +66,7 @@ class MonitorCommand extends Command {
 		$this->userIdsToAdd = array();
 		foreach( $t_user_ids as $t_user_id ) {
 			if( user_is_anonymous( $t_user_id ) ) {
-				# TODO: trigger exception
-				# trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
-				continue;
+				throw new ClientException( "anonymous account can't monitor issues", ERROR_PROTECTED_ACCOUNT );
 			}
 		
 			if( $t_logged_in_user == $t_user_id ) {
@@ -84,8 +82,7 @@ class MonitorCommand extends Command {
 				$this->projectId );
 
 			if( !access_has_bug_level( $t_access_level, $t_issue_id ) ) {
-				# TODO: trigger error
-				continue;
+				throw new ClientException( 'access denied', ERROR_ACCESS_DENIED );
 			}
 
 			$this->userIdsToAdd[] = $t_user_id;
