@@ -111,6 +111,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		}
 	}
 
+	# Force E_USER_ERRORs to use HALT method.
+	if( $p_type == E_USER_ERROR ) {
+		$t_method = DISPLAY_ERROR_HALT;
+	}
+
 	# build an appropriate error string
 	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
@@ -134,10 +139,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		case E_USER_ERROR:
 			$t_error_type = 'APPLICATION ERROR #' . $p_error;
 			$t_error_description = error_string( $p_error );
-			if( $t_method == DISPLAY_ERROR_INLINE ) {
-				$t_error_description .= ' (' . $t_error_location . ")\n"
-					. error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
-			}
 			break;
 		case E_USER_WARNING:
 			$t_error_type = 'APPLICATION WARNING #' . $p_error;
