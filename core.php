@@ -160,10 +160,20 @@ function http_is_protocol_https() {
  * @return void
  */
 function __autoload( $p_class ) {
+	global $g_core_path;
+
 	# Commands
 	if( substr( $p_class, -7 ) === 'Command' ) {
-		global $g_core_path;
 		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}	
+	}
+
+	# Exceptions
+	if( substr( $p_class, -9 ) === 'Exception' ) {
+		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
 		if( file_exists( $t_require_path ) ) {
 			require_once( $t_require_path );
 			return;
