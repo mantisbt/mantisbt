@@ -69,11 +69,12 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::faultNotFound( "Issue '$p_issue_id' does not exist" );
+	try {
+		$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	} catch( Exception $e ) {
+		return ApiObjectFactory::faultFromException( $e );
 	}
 
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
