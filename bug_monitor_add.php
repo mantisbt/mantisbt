@@ -45,9 +45,6 @@ require_api( 'helper_api.php' );
 require_api( 'print_api.php' );
 require_api( 'utility_api.php' );
 
-# TODO: use autoloader
-require_once( dirname( __FILE__ ) . '/core/commands/MonitorCommand.php' );
-
 form_security_validate( 'bug_monitor_add' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
