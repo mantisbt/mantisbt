@@ -159,7 +159,17 @@ function http_is_protocol_https() {
  * @param string $p_class Class name being autoloaded.
  * @return void
  */
-function autoload_mantis( $p_class ) {
+function __autoload( $p_class ) {
+	# Commands
+	if( substr( $p_class, -7 ) === 'Command' ) {
+		global $g_core_path;
+		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}	
+	}
+
 	global $g_class_path;
 	global $g_library_path;
 
