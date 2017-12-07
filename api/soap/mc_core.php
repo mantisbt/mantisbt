@@ -23,6 +23,28 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * Unhandled exception handler
+ *
+ * @param Exception|Error $p_exception The exception to handle
+ * @return void
+ */
+function api_error_exception_handler( $p_exception ) {
+    echo $p_exception->getMessage(), "\n";
+    
+    # echo stack without parameters to protect sensitive data
+    $t_count = 0;
+    foreach( $p_exception->getTrace() as $t_frame ) {
+        $t_file = isset( $t_frame['file'] ) ? $t_frame['file'] : '-';
+        $t_line = isset( $t_frame['line'] ) ? $t_frame['line'] : '-';
+        $t_func = isset( $t_frame['function'] ) ? $t_frame['function'] : '-';
+        echo "#$t_count $t_file($t_line): $t_func()\n";
+        $t_count++;
+    }
+}
+
+set_exception_handler( 'api_error_exception_handler' );
+
 # constants and configurations
 $t_current_dir = dirname( __FILE__ ) . '/';
 

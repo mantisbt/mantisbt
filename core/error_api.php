@@ -96,9 +96,17 @@ function error_exception_handler( $p_exception ) {
 function error_stack_trace() {
 	global $g_exception;
 
-	return ($g_exception === null ) ?
-		debug_backtrace() :
-		$g_exception->getTrace();
+	if ( $g_exception === null ) {
+		$t_stack = debug_backtrace();
+
+		# remove this function and its caller from the stack trace.
+		array_shift( $t_stack );
+		array_shift( $t_stack );
+	} else {
+		$t_stack = $g_exception->getTrace();
+	}
+
+	return $t_stack;
 }
 
 /**
@@ -495,11 +503,6 @@ function error_print_stack_trace() {
 	echo '<div class="table-responsive">';
 	echo '<table class="table table-bordered table-striped table-condensed">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
-
-	array_shift( $t_stack );
-
-	# remove the call to this function from the stack trace
-	array_shift( $t_stack );
 
 	# remove the call to the error handler from the stack trace
 
