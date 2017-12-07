@@ -1379,3 +1379,6 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Вы дасягнулі ліміту да
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Поле «%1$s» мусіць мець даўжыню карацей за або роўную %2$d сымбалям.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Назва API-жэтону «%s» ужо выкарыстоўваецца. Калі ласка, вярніцеся і абярыце іншую.';
 $s_dropzone_default_message = 'Кідайце файлы сюды для загрузкі (або націсьніце)';
+$s_dropzone_fallback_message = 'Ваш браўзэр не падтрымлівае загрузку файлаў празь перацягваньне.';
+$s_dropzone_file_too_big = 'Файл мае завялікі памер ({{filesize}}MiB). Максымальны памер файлу: {{maxFilesize}}MiB.';
+$s_dropzone_invalid_file_type = 'Вы ня можаце загружаць файлы гэтага тыпу.';
