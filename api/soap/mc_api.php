@@ -219,7 +219,6 @@ class ApiObjectFactory {
 			case ERROR_API_TOKEN_NAME_NOT_UNIQUE:
 				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
 
-			case ERROR_USER_NOT_FOUND:
 			case ERROR_BUG_NOT_FOUND:
 			case ERROR_FILE_NOT_FOUND:
 			case ERROR_BUGNOTE_NOT_FOUND:
@@ -228,6 +227,8 @@ class ApiObjectFactory {
 			case ERROR_USER_PROFILE_NOT_FOUND:
 			case ERROR_USER_BY_NAME_NOT_FOUND:
 			case ERROR_USER_BY_ID_NOT_FOUND:
+			case ERROR_USER_BY_EMAIL_NOT_FOUND:
+			case ERROR_USER_BY_REALNAME_NOT_FOUND:
 			case ERROR_NEWS_NOT_FOUND:
 			case ERROR_BUG_REVISION_NOT_FOUND:
 			case ERROR_CUSTOM_FIELD_NOT_FOUND:
@@ -593,17 +594,7 @@ function mci_get_user_id( $p_user ) {
 		$p_user = ApiObjectFactory::objectToArray( $p_user );
 	}
 
-	$t_user_id = 0;
-
-	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
-		$t_user_id = (int)$p_user['id'];
-	} elseif( isset( $p_user['name'] ) ) {
-		$t_user_id = user_get_id_by_name( $p_user['name'] );
-	} elseif( isset( $p_user['email'] ) ) {
-		$t_user_id = user_get_id_by_email( $p_user['email'] );
-	}
-
-	return $t_user_id;
+	return user_get_id_by_user_info( $p_user );
 }
 
 /**

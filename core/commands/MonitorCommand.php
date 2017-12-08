@@ -43,17 +43,19 @@ class MonitorCommand extends Command {
 
 		# Validate user id (if specified), otherwise set from context
 		if( !isset( $this->data['users'] ) ) {
-			$this->data['users'] = array( 'id' => auth_get_current_user_id() );
+			$this->data['users'] = array( 'id' => $t_logged_in_user );
 		}
 
 		# Normalize user objects
 		$t_user_ids = array();
 		foreach( $this->data['users'] as $t_user ) {
-			$t_user_ids[] = user_get_id_by_array( $t_user );
+			$t_user_ids[] = user_get_id_by_user_info( $t_user );
 		}
 
 		$this->userIdsToAdd = array();
 		foreach( $t_user_ids as $t_user_id ) {
+			user_ensure_exists( $t_user_id );
+
 			if( user_is_anonymous( $t_user_id ) ) {
 				throw new ClientException( "anonymous account can't monitor issues", ERROR_PROTECTED_ACCOUNT );
 			}
@@ -80,7 +82,7 @@ class MonitorCommand extends Command {
 
 	/**
 	 * Process the command.
-	 * 
+	 *
 	 * @returns null No output from this command.
 	 */
 	protected function process() {
@@ -90,49 +92,12 @@ class MonitorCommand extends Command {
 			# categories and handlers lists etc.
 			$g_project_override = $this->projectId;
 		}
-		
+
 		foreach( $this->userIdsToAdd as $t_user_id ) {
 			bug_monitor( $this->data['issue_id'], $t_user_id );
 		}
 
 		return null;
-	}
-
-	/**
-	 * A helper method that takes an array that describes a user and returns
-	 * the corresponding id or false if not found.
-	 * 
-	 * @return integer|boolean The user id or false if not found.
-	 */
-	private function getIdForUser( array $p_user ) {
-		# TODO: move to a common utility method that replaced this method
-		# and mci_get_user_id()
-
-		$t_identifier = '';
-		if( isset( $p_user['id'] ) ) {
-			$t_user_id = $p_user['id'];
-		} else if( isset( $p_user['name'] ) ) {
-			$t_identifier = $p_user['name'];
-			$t_user_id = user_get_id_by_name( $t_identifier, /* throw */ true );
-		} else if( isset( $p_user['real_name'] ) ) {
-			$t_identifier = $p_user['real_name'];
-			$t_user_id = user_get_id_by_realname( $t_identifier, /* throw */ true );
-		} else if( isset( $p_user['name_or_realname' ] ) ) {
-			$t_identifier = $p_user['name_or_realname'];
-			$t_user_id = user_get_id_by_name( $t_identifier );
-
-			if( !$t_user_id ) {
-				$t_user_id = user_get_id_by_realname( $t_identifier );
-			}
-
-			if( !$t_user_id ) {
-				throw new ClientException( "User '$t_identifier' not found", ERROR_USER_BY_NAME_NOT_FOUND, array( $t_identifier ) );
-			}
-		}
-
-		user_ensure_exists( $t_user_id );
-
-		return $t_user_id;
 	}
 }
 
