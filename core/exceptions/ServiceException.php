@@ -1,4 +1,6 @@
 <?php
+namespace Mantis\Exceptions;
+
 /**
  * An exception that is triggered due to a Mantis error.
  */

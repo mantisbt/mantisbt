@@ -1,4 +1,6 @@
 <?php
+namespace Mantis\Exceptions;
+
 /**
  * An exception that is triggered where the error is caused by
  * client input.

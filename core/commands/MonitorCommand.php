@@ -5,6 +5,8 @@ require_api( 'constant_inc.php' );
 require_api( 'config_api.php' );
 require_api( 'user_api.php' );
 
+use Mantis\Exceptions;
+
 class MonitorCommand extends Command {
 	private $projectId;
 	private $loggedInUserId;
