@@ -38,8 +38,6 @@ require_api( 'database_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-require_once( dirname( __FILE__ ) . '/exceptions/MantisException.php' );
-
 $g_error_parameters = array();
 $g_errors_delayed = array();
 $g_error_handled = false;
