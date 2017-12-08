@@ -1,4 +1,6 @@
 <?php
+namespace Mantis\Exceptions;
+
 /**
  * An exception that is triggered due to an error in the state of Mantis.
  * For example, the data in the database is inconsistent or invalid

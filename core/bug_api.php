@@ -74,6 +74,8 @@ require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions;
+
 /**
  * Bug Data Structure Definition
  */

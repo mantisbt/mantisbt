@@ -1,6 +1,7 @@
 <?php
+namespace Mantis\Exceptions;
 
-class MantisException extends Exception {
+class MantisException extends \Exception {
 	protected $params;
 
 	function __construct( $p_message, $p_code, $p_params = array(), Throwable $p_previous = null ) {
