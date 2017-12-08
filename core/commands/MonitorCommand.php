@@ -5,7 +5,7 @@ require_api( 'constant_inc.php' );
 require_api( 'config_api.php' );
 require_api( 'user_api.php' );
 
-use Mantis\Exceptions;
+use Mantis\Exceptions\ClientException;
 
 class MonitorCommand extends Command {
 	private $projectId;
@@ -38,10 +38,6 @@ class MonitorCommand extends Command {
 		
 		$t_issue_id = (int)$this->data['issue_id'];
 
-		if( !bug_exists( $t_issue_id ) ) {
-			throw new ClientException( "Issue id {$t_issue_id} not found", ERROR_BUG_NOT_FOUND, ERROR_GPC_VAR_NOT_FOUND );
-		}
-
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();
 
@@ -57,12 +53,7 @@ class MonitorCommand extends Command {
 		# Normalize user objects
 		$t_user_ids = array();
 		foreach( $this->data['users'] as $t_user ) {
-			$t_user_id = $this->getIdForUser( $t_user );
-			
-			# TODO: If we throw exception above, then this check will not be necessary
-			if( $t_user_id ) {
-				$t_user_ids[] = $t_user_id;
-			}
+			$t_user_ids[] = user_get_id_by_array( $t_user );
 		}
 
 		$this->userIdsToAdd = array();
@@ -70,7 +61,7 @@ class MonitorCommand extends Command {
 			if( user_is_anonymous( $t_user_id ) ) {
 				throw new ClientException( "anonymous account can't monitor issues", ERROR_PROTECTED_ACCOUNT );
 			}
-		
+
 			if( $t_logged_in_user == $t_user_id ) {
 				$t_access_level_config = 'monitor_bug_threshold';
 			} else {
@@ -126,29 +117,24 @@ class MonitorCommand extends Command {
 			$t_user_id = $p_user['id'];
 		} else if( isset( $p_user['name'] ) ) {
 			$t_identifier = $p_user['name'];
-			$t_user_id = user_get_id_by_name( $p_user['name'] );
+			$t_user_id = user_get_id_by_name( $t_identifier, /* throw */ true );
 		} else if( isset( $p_user['real_name'] ) ) {
 			$t_identifier = $p_user['real_name'];
-			$t_user_id = user_get_id_by_realname( $p_user['real_name'] );
+			$t_user_id = user_get_id_by_realname( $t_identifier, /* throw */ true );
 		} else if( isset( $p_user['name_or_realname' ] ) ) {
 			$t_identifier = $p_user['name_or_realname'];
-			$t_user_id = user_get_id_by_name( $p_user['name_or_realname'] );
+			$t_user_id = user_get_id_by_name( $t_identifier );
+
 			if( !$t_user_id ) {
-				$t_user_id = user_get_id_by_realname( $p_user['name_or_realname'] );
-			}	
+				$t_user_id = user_get_id_by_realname( $t_identifier );
+			}
+
+			if( !$t_user_id ) {
+				throw new ClientException( "User '$t_identifier' not found", ERROR_USER_BY_NAME_NOT_FOUND, array( $t_identifier ) );
+			}
 		}
 
-		if( !$t_user_id ) {
-			# TODO: throw exception equivalent to below error
-			# error_parameters( $t_identifier );
-			# trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, E_USER_ERROR );
-			return false;
-		}
-
-		if( !user_exists( $t_user_id ) ) {
-			# TODO: trigger error
-			return false;
-		}
+		user_ensure_exists( $t_user_id );
 
 		return $t_user_id;
 	}
