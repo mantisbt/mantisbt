@@ -38,6 +38,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->patch( '/{id}', 'rest_issue_update' );
 	$g_app->patch( '/{id}/', 'rest_issue_update' );
 
+	# Monitor
+	$g_app->post( '/{id}/monitors/', 'rest_issue_monitor_add' );
+	$g_app->post( '/{id}/monitors', 'rest_issue_monitor_add' );
+
 	# Notes
 	$g_app->post( '/{id}/notes/', 'rest_issue_note_add' );
 	$g_app->post( '/{id}/notes', 'rest_issue_note_add' );
@@ -313,4 +317,31 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	}
 
 	return $p_response;
+}
+
+/**
+ * Add users to monitor an issue.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$t_data = $p_request->getParsedBody();
+	$t_data['issue_id'] = $t_issue_id;
+
+	try {
+		$command = new MonitorCommand( $t_data );
+		$command->execute();
+
+		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+	} catch ( Exception $e ) {
+		$t_result = ApiObjectFactory::faultFromException( $e );
+		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
+	}
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
+		withJson( array( 'issues' => array( $t_issue ) ) );
 }
