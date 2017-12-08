@@ -64,12 +64,8 @@ if( is_blank( $f_usernames ) ) {
 	$t_data['users'] = $t_users;
 }
 
-try {
-	$command = new MonitorCommand( $t_data );
-	$command->execute();
-} catch( CommandException $e ) {
-	# TODO: handle error
-}
+$command = new MonitorCommand( $t_data );
+$command->execute();
 
 form_security_purge( 'bug_monitor_add' );
 
