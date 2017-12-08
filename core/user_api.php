@@ -781,7 +781,10 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
 	}
 
 	if( $p_throw ) {
-		throw new ClientException( "Username '$p_username' not found", ERROR_USER_BY_NAME_NOT_FOUND, array( $p_username ) );
+		throw new ClientException(
+			"Username '$p_username' not found",
+			ERROR_USER_BY_NAME_NOT_FOUND,
+			array( $p_username ) );
 	}
 
 	return false;
@@ -791,9 +794,10 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
  * Get a user id from their email address
  *
  * @param string $p_email The email address to retrieve data for.
+ * @param boolean $p_throw true to throw exception when not found, false otherwise.
  * @return array
  */
-function user_get_id_by_email( $p_email ) {
+function user_get_id_by_email( $p_email, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
 		return $t_user['id'];
 	}
@@ -807,6 +811,14 @@ function user_get_id_by_email( $p_email ) {
 		user_cache_database_result( $t_row );
 		return $t_row['id'];
 	}
+
+	if( $p_throw ) {
+		throw new ClientException(
+			"User with email '$p_email' not found",
+			ERROR_USER_BY_EMAIL_NOT_FOUND,
+			array( $p_email ) );
+	}
+
 	return false;
 }
 
@@ -864,6 +876,50 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 
 	user_cache_database_result( $t_row );
 	return $t_row['id'];
+}
+
+/**
+ * Get a user id given an array that may have id, name, real_name, email, or name_or_realname.
+ * If user id is specified, it will returned with validating that it exists.
+ * This is to allow for calling APIs to decide whether existence is needed or not,
+ * for example when updating an issue that already had a deleted user as the reporter,
+ * it is OK to keep such reference as long as it doesn't change.
+ *
+ * @param array $p_user The user info.
+ * @return user id
+ * @throws ClientException
+ */
+function user_get_id_by_user_info( array $p_user ) {
+	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
+		$t_user_id = $p_user['id'];
+	} else if( isset( $p_user['name'] ) && !is_blank( $p_user['name'] ) ) {
+		$t_user_id = user_get_id_by_name( $p_user['name'], /* throw */ true );
+	} else if( isset( $p_user['email'] ) && !is_blank( $p_user['email'] ) ) {
+		$t_user_id = user_get_id_by_email( $p_user['email'], /* throw */ true );
+	} else if( isset( $p_user['real_name'] ) && !is_blank( $p_user['real_name'] ) ) {
+		$t_user_id = user_get_id_by_realname( $p_user['real_name'], /* throw */ true );
+	} else if( isset( $p_user['name_or_realname' ] ) && !is_blank( $p_user['name_or_realname' ] ) ) {
+		$t_identifier = $p_user['name_or_realname'];
+		$t_user_id = user_get_id_by_name( $t_identifier );
+
+		if( !$t_user_id ) {
+			$t_user_id = user_get_id_by_realname( $t_identifier );
+		}
+
+		if( !$t_user_id ) {
+			throw new ClientException(
+				"User '$t_identifier' not found",
+				ERROR_USER_BY_NAME_NOT_FOUND,
+				array( $t_identifier ) );
+		}
+	} else {
+		throw new ClientException(
+			"User id missing",
+			ERROR_GPC_VAR_NOT_FOUND,
+			array( 'user id' ) );
+	}
+
+	return $t_user_id;
 }
 
 /**
