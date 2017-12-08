@@ -45,6 +45,9 @@ abstract class Command
 	 * @return array Execution result
 	 */
 	public function execute() {
+		# For now, all commands require user to be authenticated
+		auth_ensure_user_authenticated();		
+
 		$this->validate();
 		return $this->process();
 	}

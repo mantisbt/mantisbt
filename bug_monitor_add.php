@@ -24,16 +24,10 @@
  *
  * @uses core.php
  * @uses access_api.php
- * @uses authentication_api.php
- * @uses bug_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
  * @uses print_api.php
- * @uses user_api.php
  * @uses utility_api.php
  */
 

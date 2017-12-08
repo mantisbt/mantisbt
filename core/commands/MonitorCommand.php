@@ -26,7 +26,7 @@ class MonitorCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {
+	function validate() {		
 		# Validate issue id
 		if( !isset( $this->data['issue_id'] ) ) {
 			throw new ClientException( 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
@@ -35,7 +35,7 @@ class MonitorCommand extends Command {
 		if( !is_numeric( $this->data['issue_id'] ) ) {
 			throw new ClientException( 'issue_id must be numeric', ERROR_GPC_VAR_NOT_FOUND );
 		}
-		
+
 		$t_issue_id = (int)$this->data['issue_id'];
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
@@ -43,10 +43,6 @@ class MonitorCommand extends Command {
 
 		# Validate user id (if specified), otherwise set from context
 		if( !isset( $this->data['users'] ) ) {
-			if( !auth_is_user_authenticated() ) {
-				throw new ClientException( 'user_id missing', ERROR_GPC_VAR_NOT_FOUND );
-			}
-
 			$this->data['users'] = array( 'id' => auth_get_current_user_id() );
 		}
 
