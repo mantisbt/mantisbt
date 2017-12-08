@@ -74,7 +74,7 @@ require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-use Mantis\Exceptions;
+use Mantis\Exceptions\ClientException;
 
 /**
  * Bug Data Structure Definition
@@ -1009,7 +1009,10 @@ function bug_exists( $p_bug_id ) {
  */
 function bug_ensure_exists( $p_bug_id ) {
 	if( !bug_exists( $p_bug_id ) ) {
-		throw new ClientException( "Issue #$p_bug_id not found", ERROR_BUG_NOT_FOUND, array( $p_bug_id ) );
+		throw new ClientException(
+			"Issue #$p_bug_id not found",
+			ERROR_BUG_NOT_FOUND,
+			array( $p_bug_id ) );
 	}
 }
 

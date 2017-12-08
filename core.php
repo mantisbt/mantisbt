@@ -162,6 +162,12 @@ function http_is_protocol_https() {
 function __autoload( $p_class ) {
 	global $g_core_path;
 
+	# Remove namespace from class name
+	$t_end_of_namespace = strrpos( $p_class, '\\' );
+	if( $t_end_of_namespace !== false ) {
+		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
+	}
+
 	# Commands
 	if( substr( $p_class, -7 ) === 'Command' ) {
 		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
