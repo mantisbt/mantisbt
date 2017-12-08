@@ -72,7 +72,7 @@ function error_exception_handler( $p_exception ) {
 
 	$g_exception = $p_exception;
 
-	if( is_subclass_of( $p_exception, 'MantisException' ) ) {
+	if( is_a( $p_exception, 'MantisException' ) ) {
 		$t_params = $p_exception->getParams();
 		if( !empty( $t_params ) ) {
 			call_user_func_array( 'error_parameters', $t_params );
@@ -86,7 +86,7 @@ function error_exception_handler( $p_exception ) {
 
 	# trigger a generic error
 	# TODO: we may want to log such errors
-	trigger_error( ERROR_GENERIC, E_ERROR );
+	trigger_error( ERROR_PHP, ERROR );
 }
 
 /**
@@ -196,8 +196,14 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
-			$t_error_type = 'APPLICATION ERROR #' . $p_error;
-			$t_error_description = error_string( $p_error );
+			if( $p_error == ERROR_PHP ) {
+				global $g_exception;
+				$t_error_type = 'APPLICATION ERROR';
+				$t_error_description = $g_exception->getMessage();
+			} else {
+				$t_error_type = 'APPLICATION ERROR #' . $p_error;
+				$t_error_description = error_string( $p_error );
+			}
 			break;
 		case E_USER_WARNING:
 			$t_error_type = 'APPLICATION WARNING #' . $p_error;

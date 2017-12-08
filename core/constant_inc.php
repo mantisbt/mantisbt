@@ -234,6 +234,7 @@ define( 'CONFIRMATION_TYPE_WARNING', 1 );
 define( 'CONFIRMATION_TYPE_FAILURE', 2 );
 
 # error messages
+define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );
 define( 'ERROR_SQL', 1 );
 define( 'ERROR_REPORT', 3 );
