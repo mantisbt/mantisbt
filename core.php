@@ -159,7 +159,7 @@ function http_is_protocol_https() {
  * @param string $p_class Class name being autoloaded.
  * @return void
  */
-function __autoload( $p_class ) {
+function autoload_mantis( $p_class ) {
 	global $g_core_path;
 
 	# Remove namespace from class name
