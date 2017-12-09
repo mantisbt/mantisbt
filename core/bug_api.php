@@ -949,11 +949,13 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		$g_cache_bug_text[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_bug_id );
-			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
-		} else {
-			return false;
+			throw new ClientException(
+				"Issue '$p_bug_id' not found",
+				ERROR_BUG_NOT_FOUND,
+				array( $p_bug_id ) );
 		}
+
+		return false;
 	}
 
 	$g_cache_bug_text[$c_bug_id] = $t_row;
