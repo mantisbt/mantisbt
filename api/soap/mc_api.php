@@ -587,14 +587,18 @@ function mci_get_project_view_state_id( $p_view_state ) {
 /**
  * Return user id
  * @param stdClass|array $p_user User.
- * @return integer user id
+ * @return integer user id or 0 if not found.
  */
 function mci_get_user_id( $p_user ) {
 	if( is_object( $p_user ) ) {
 		$p_user = ApiObjectFactory::objectToArray( $p_user );
 	}
 
-	return user_get_id_by_user_info( $p_user );
+	try {
+		return user_get_id_by_user_info( $p_user );
+	} catch( Exception $e ) {
+		return 0;
+	}
 }
 
 /**
