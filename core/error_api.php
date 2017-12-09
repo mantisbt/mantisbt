@@ -73,7 +73,7 @@ function error_exception_handler( $p_exception ) {
 
 	$g_exception = $p_exception;
 
-	if( is_a( $p_exception, 'MantisException' ) ) {
+	if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
 		$t_params = $p_exception->getParams();
 		if( !empty( $t_params ) ) {
 			call_user_func_array( 'error_parameters', $t_params );
