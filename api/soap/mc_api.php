@@ -24,7 +24,10 @@
  */
 
 # set up error_handler() as the new default error handling function
-set_error_handler( 'mc_error_handler' );
+global $g_bypass_error_handler;
+if( !$g_bypass_error_handler ) {
+	set_error_handler( 'mc_error_handler' );
+}
 
 /**
  * Webservice APIs
@@ -33,6 +36,8 @@ set_error_handler( 'mc_error_handler' );
  */
 
 require_api( 'api_token_api.php' );
+
+use Mantis\Exceptions\LegacyApiFaultException;
 
 /**
  * A class to capture a RestFault
@@ -316,7 +321,7 @@ class ApiObjectFactory {
 
 	/**
 	 * Checks if an object is a SoapFault
-	 * @param mixed $p_maybe_fault Object to check whether a SOAP fault.
+	 * @param mixed $p_maybe_fault Object to check whether it is a SOAP/REST fault.
 	 * @return boolean
 	 */
 	static function isFault( $p_maybe_fault ) {
@@ -333,6 +338,19 @@ class ApiObjectFactory {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Throw if the provided parameter is a SoapFault or RestFault/
+	 *
+	 * @param mixed $p_maybe_fault Object to check whether it is a SOAP/REST fault.
+	 * @return void
+	 * @throws LogacyApiFaultException
+	 */
+	static function throwIfFault( $p_maybe_fault ) {
+		if( ApiObjectFactory::isFault( $p_maybe_fault ) ) {
+			throw new LegacyApiFaultException( $p_maybe_fault->fault_string, $p_maybe_fault->status_code );
+		}
 	}
 }
 

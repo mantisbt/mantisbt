@@ -65,13 +65,9 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 
 		# Username and password below are ignored, since middleware already done the auth.
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+		ApiObjectFactory::throwIfFault( $t_issue );
 
-		if( ApiObjectFactory::isFault( $t_issue ) ) {
-			$t_result = null;
-			$p_response = $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
-		} else {
-			$t_result = array( 'issues' => array( $t_issue ) );
-		}
+		$t_result = array( 'issues' => array( $t_issue ) );
 	} else {
 		$t_page_number = $p_request->getParam( 'page', 1 );
 		$t_page_size = $p_request->getParam( 'page_size', 50 );
@@ -125,9 +121,7 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 	$t_issue = $p_request->getParsedBody();
 
 	$t_result = mc_issue_add( /* username */ '', /* password */ '', $t_issue );
-	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
+	ApiObjectFactory::throwIfFault( $t_result );
 
 	$t_issue_id = $t_result;
 
@@ -148,17 +142,10 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 
-	$t_found = bug_exists( $t_issue_id );
-	if( $t_found ) {
-		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-		if( ApiObjectFactory::isFault( $t_issue ) ) {
-			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
-		}
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	ApiObjectFactory::throwIfFault( $t_issue );
 
-		$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
-	} else {
-		$t_etag = mc_issue_hash( $t_issue_id, /* issue */ null );
-	}
+	$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -168,22 +155,12 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	if( $t_found ) {
-		# Username and password below are ignored, since middleware already done the auth.
-		$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
+	# Username and password below are ignored, since middleware already done the auth.
+	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
+	ApiObjectFactory::throwIfFault( $t_result );
 
-		if( ApiObjectFactory::isFault( $t_result ) ) {
-			return $p_response->withStatus( $t_result->status_code, $t_result->fault_string )
-				->withHeader( HEADER_ETAG, $t_etag );
-		}
-
-		$p_response = $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
-			->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, null ) );
-	} else {
-		$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' );
-	}
-
-	return $p_response;
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
+		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, null ) );
 }
 
 /**
@@ -215,9 +192,7 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 	# TODO: support note attachments
 
 	$t_result = mc_issue_note_add( /* username */ '', /* password */ '', $t_issue_id, $t_note );
-	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
+	ApiObjectFactory::throwIfFault( $t_result );
 
 	$t_note_id = $t_result;
 
@@ -246,9 +221,7 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue_note_id = isset( $p_args['note_id'] ) ? $p_args['note_id'] : $p_request->getParam( 'note_id' );
 
 	$t_result = mc_issue_note_delete( '', '', $t_issue_note_id );
-	if( ApiObjectFactory::isFault( $t_result ) ) {
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
+	ApiObjectFactory::throwIfFault( $t_result );
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
@@ -270,18 +243,10 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_found = bug_exists( $t_issue_id );
-	if( $t_found ) {
-		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-		if( ApiObjectFactory::isFault( $t_issue ) ) {
-			return $p_response->withStatus( $t_issue->status_code, $t_issue->fault_string );
-		}
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	ApiObjectFactory::throwIfFault( $t_issue );
 
-		$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
-	} else {
-		$t_etag = mc_issue_hash( $t_issue_id, /* issue */ null );
-		$t_issue = null;
-	}
+	$t_etag = mc_issue_hash( $t_issue_id, array( 'issues' => array( $t_issue ) ) );
 
 	if( $p_request->hasHeader( HEADER_IF_MATCH ) ) {
 		$t_match_etag = $p_request->getHeaderLine( HEADER_IF_MATCH );
@@ -291,32 +256,24 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	if( $t_found ) {
-		# Construct full issue from issue from db + patched info
-		$t_issue_patch = $p_request->getParsedBody();
-		if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
-			return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
-		}
-
-		$t_issue = (object)array_merge( $t_issue, $t_issue_patch );
-
-		# Trigger the issue update
-		$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
-		if( ApiObjectFactory::isFault( $t_result ) ) {
-			return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-		}
-
-		$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-		$t_result = array( 'issues' => array( $t_updated_issue ) );
-
-		$p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
-			->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, $t_result ) )
-			->withJson( $t_result );
-	} else {
-		$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, 'Issue not found' );
+	# Construct full issue from issue from db + patched info
+	$t_issue_patch = $p_request->getParsedBody();
+	if( isset( $t_issue_patch['id'] ) && $t_issue_patch['id'] != $t_issue_id ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Issue id mismatch' );
 	}
 
-	return $p_response;
+	$t_issue = (object)array_merge( $t_issue, $t_issue_patch );
+
+	# Trigger the issue update
+	$t_result = mc_issue_update( /* username */ '', /* password */ '', $t_issue_id, $t_issue );
+	ApiObjectFactory::throwIfFault( $t_result );
+
+	$t_updated_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	$t_result = array( 'issues' => array( $t_updated_issue ) );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Issue with id $t_issue_id Updated" )
+		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, $t_result ) )
+		->withJson( $t_result );
 }
 
 /**
@@ -332,15 +289,10 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_data = $p_request->getParsedBody();
 	$t_data['issue_id'] = $t_issue_id;
 
-	try {
-		$command = new MonitorAddCommand( $t_data );
-		$command->execute();
+	$command = new MonitorAddCommand( $t_data );
+	$command->execute();
 
-		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
-	} catch ( Exception $e ) {
-		$t_result = ApiObjectFactory::faultFromException( $e );
-		return $p_response->withStatus( $t_result->status_code, $t_result->fault_string );
-	}
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
