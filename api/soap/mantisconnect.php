@@ -30,8 +30,10 @@
 # configuration defined in MantisBT.
 $t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
-# include Mantis files
+# Overrides for behaviors for core.php and its dependencies
 $g_bypass_headers = true;
+$g_bypass_error_handler = false;
+
 require_once( $t_mantis_dir . 'core.php' );
 
 /**
