@@ -25,7 +25,7 @@ use Mantis\Exceptions\ClientException;
 /**
  * A command that adds user to monitor an issue.
  */
-class MonitorCommand extends Command {
+class MonitorAddCommand extends Command {
 	/**
 	 * @var integer
 	 */
