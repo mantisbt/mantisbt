@@ -263,8 +263,7 @@ class IssueAddTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertNull( $t_issue->due_date, 'due_date is not null' );
-		$this->assertEquals( 'true', $this->readDueDate(), 'xsi:nil not set to true' );
+		$this->assertFalse( isset( $t_issue->due_date ), 'due_date should not be set' );
 	}
 
 	/**
@@ -290,26 +289,6 @@ class IssueAddTest extends SoapBase {
 
 		$this->assertEquals( '', $t_issue->category, 'category' );
 
-	}
-
-	/**
-	 * Reads a due date out of the last soap response
-	 * @return string|null the xsi:null value
-	 */
-	private function readDueDate() {
-		$t_reader = new XMLReader();
-		$t_reader->XML( $this->client->__getLastResponse() );
-
-		while( $t_reader->read() ) {
-			switch( $t_reader->nodeType ) {
-				case XMLReader::ELEMENT:
-					if( $t_reader->name == 'due_date' ) {
-						return $t_reader->getAttribute( 'xsi:nil' );
-					}
-					break;
-			}
-		}
-		return null;
 	}
 
 	/**
