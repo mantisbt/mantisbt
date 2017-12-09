@@ -333,7 +333,7 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_data['issue_id'] = $t_issue_id;
 
 	try {
-		$command = new MonitorCommand( $t_data );
+		$command = new MonitorAddCommand( $t_data );
 		$command->execute();
 
 		$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			

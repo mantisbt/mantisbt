@@ -58,7 +58,7 @@ if( is_blank( $f_usernames ) ) {
 	$t_data['users'] = $t_users;
 }
 
-$command = new MonitorCommand( $t_data );
+$command = new MonitorAddCommand( $t_data );
 $command->execute();
 
 form_security_purge( 'bug_monitor_add' );
