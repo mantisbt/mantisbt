@@ -4160,30 +4160,26 @@ $g_show_queries_count = OFF;
  * Recommended config_inc.php settings for developers (these are automatically
  * set if the server is localhost):
  * $g_display_errors = array(
- *     E_USER_ERROR        => DISPLAY_ERROR_HALT,
  *     E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
  *     E_WARNING           => DISPLAY_ERROR_HALT,
  *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
- * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
- * another value will cause program execution to continue, which may lead to
- * data integrity issues and/or cause MantisBT to function incorrectly.
+ * NOTICE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be internally
+ * set DISPLAY_ERROR_HALT independent of value configured.
  *
  * @global array $g_display_errors
  */
-$g_display_errors = array(
-	E_USER_ERROR        => DISPLAY_ERROR_HALT,
-	E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
-);
+$g_display_errors = array();
 
 # Add developers defaults when server is localhost
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
-if( isset( $_SERVER['SERVER_NAME'] ) && ( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
- || $_SERVER['SERVER_NAME'] == '127.0.0.1'
-) ) {
+if( isset( $_SERVER['SERVER_NAME'] ) &&
+	( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0 ||
+	  $_SERVER['SERVER_NAME'] == '127.0.0.1' ) ) {
+	$g_display_errors[E_USER_WARNING] = DISPLAY_ERROR_HALT;
 	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
-	$g_display_errors[E_ALL]     = DISPLAY_ERROR_INLINE;
+	$g_display_errors[E_ALL] = DISPLAY_ERROR_INLINE;
 }
 
 /**

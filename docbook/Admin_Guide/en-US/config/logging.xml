@@ -91,20 +91,15 @@
 					</varlistentry>
 				</variablelist>
 
-				<para>The default settings, recommended for use in Production,
-					will only display MantisBT fatal errors and suppress
-					output of all other error types:
-<programlisting>
-$g_display_errors = array(
-	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
-);
-</programlisting>
+				<para>
+					The default settings, recommended for use in production will only
+					display and exit on errors and suppress warninga and notices.
 				</para>
 				<para>Recommended <filename>config_inc.php</filename>
 					settings for developers:
 <programlisting>
 $g_display_errors = array(
-	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
+	E_USER_WARNING =&gt; DISPLAY_ERROR_HALT,
 	E_WARNING      =&gt; DISPLAY_ERROR_HALT,
 	E_ALL          =&gt; DISPLAY_ERROR_INLINE,
 );
@@ -120,7 +115,6 @@ $g_display_errors = array(
 				<para>Less intrusive settings, recommended for testing purposes:
 <programlisting>
 $g_display_errors = array(
-	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
 	E_USER_WARNING =&gt; DISPLAY_ERROR_INLINE,
 	E_WARNING      =&gt; DISPLAY_ERROR_INLINE,
 );

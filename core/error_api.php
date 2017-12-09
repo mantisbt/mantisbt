@@ -168,8 +168,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		}
 	}
 
-	# Force E_USER_ERRORs to use HALT method.
-	if( $p_type == E_USER_ERROR ) {
+	# Force errors to use HALT method.
+	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
 		$t_method = DISPLAY_ERROR_HALT;
 	}
 
