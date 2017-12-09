@@ -23,12 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-# set up error_handler() as the new default error handling function
-global $g_bypass_error_handler;
-if( !$g_bypass_error_handler ) {
-	set_error_handler( 'mc_error_handler' );
-}
-
 /**
  * Webservice APIs
  *
@@ -1042,6 +1036,33 @@ function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 	}
 
 	return db_minutes_to_hhmm( $p_note['time_tracking'] );
+}
+
+/**
+ * Unhandled exception handler
+ *
+ * @param Exception|Error $p_exception The exception to handle
+ * @return void
+ */
+function mc_error_exception_handler( $p_exception ) {
+	if( is_a( $p_exception, 'Mantis\Exceptions\ClientException' ) ) {
+		$t_cause = 'Client';
+	} else {
+		$t_cause = 'Server';
+	}
+
+	$t_fault = htmlentities( $p_exception->getMessage() );
+
+	echo <<<EOL
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP-ENV:Body>
+	<SOAP-ENV:Fault>
+		<faultcode>SOAP-ENV:$t_cause</faultcode>
+		<faultstring>$t_fault</faultstring>
+	</SOAP-ENV:Fault>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+EOL;
 }
 
 /**

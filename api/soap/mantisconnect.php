@@ -32,7 +32,7 @@ $t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
 # Overrides for behaviors for core.php and its dependencies
 $g_bypass_headers = true;
-$g_bypass_error_handler = false;
+$g_bypass_error_handler = true;
 
 require_once( $t_mantis_dir . 'core.php' );
 
@@ -77,6 +77,9 @@ if( !mci_is_webservice_call() ) {
 }
 
 require_once( 'mc_core.php' );
+
+set_error_handler( 'mc_error_handler' );
+set_exception_handler( 'mc_error_exception_handler' );
 
 $t_server = new SoapServer( 'mantisconnect.wsdl',
 	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
