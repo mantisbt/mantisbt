@@ -542,7 +542,7 @@ function auth_impersonate( $p_user_id ) {
  * @return bool true: can impersonate, false: can't.
  */
 function auth_can_impersonate( $p_user_id ) {
-	if( !access_has_global_level( config_get( 'impersonate_user_threshold' ) ) ) {
+	if( !access_has_global_level( config_get_global( 'impersonate_user_threshold' ) ) ) {
 		return false;
 	}
 
