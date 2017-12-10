@@ -136,7 +136,7 @@ function require_lib( $p_library_name ) {
  * @param string $p_class Class name being autoloaded.
  * @return void
  */
-function __autoload( $p_class ) {
+function autoload_mantis( $p_class ) {
 	global $g_class_path;
 	global $g_library_path;
 
@@ -156,7 +156,7 @@ function __autoload( $p_class ) {
 }
 
 # Register the autoload function to make it effective immediately
-spl_autoload_register( '__autoload' );
+spl_autoload_register( 'autoload_mantis' );
 
 # Load UTF8-capable string functions
 define( 'UTF8', $g_library_path . 'utf8' );
