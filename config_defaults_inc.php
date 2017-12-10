@@ -4279,7 +4279,8 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique'
+	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
+	'impersonate_user_threshold'
 );
 
 /**
