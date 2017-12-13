@@ -3969,6 +3969,12 @@ $g_time_tracking_reporting_threshold = MANAGER;
  */
 $g_time_tracking_without_note = ON;
 
+/**
+ * default billing rate per hour
+ * @global integer $g_time_tracking_cost_per_hour
+ */
+$g_time_tracking_cost_per_hour = 0;
+
 ############################
 # Profile Related Settings #
 ############################
@@ -4609,6 +4615,7 @@ $g_public_config_names = array(
 	'tag_edit_threshold',
 	'tag_separator',
 	'tag_view_threshold',
+	'time_tracking_cost_per_hour',
 	'time_tracking_edit_threshold',
 	'time_tracking_enabled',
 	'time_tracking_reporting_threshold',
