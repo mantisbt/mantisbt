@@ -1217,7 +1217,7 @@ function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = AL
 			}
 		}
 	} else {
-		access_ensure_project_level( VIEWER, $p_project_id );
+		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
 		array_unshift( $t_project_ids, $p_project_id );
 	}
