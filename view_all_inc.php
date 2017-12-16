@@ -112,8 +112,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			<div class="btn-group pull-left">
 		<?php
 			# -- Print link --
-			print_small_button( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-			
+			if( access_has_project_level( config_get( 'print_reports_threshold' ) ) ) {
+				print_small_button( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+			}
 			# -- Export links --
 			if( access_has_project_level( config_get( 'export_issues_threshold' ) ) ) {
 				print_small_button( 'csv_export.php', lang_get( 'csv_export' ) );
