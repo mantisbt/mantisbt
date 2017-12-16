@@ -4370,6 +4370,7 @@ $g_public_config_names = array(
 	'enable_projection',
 	'enable_sponsorship',
 	'eta_enum_string',
+	'export_issues_threshold',
 	'fallback_language',
 	'favicon_image',
 	'file_upload_max_num',
