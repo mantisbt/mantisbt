@@ -4749,6 +4749,7 @@ $g_public_config_names = array(
 	'enable_sponsorship',
 	'eta_enum_string',
 	'excel_columns',
+	'export_issues_threshold',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
