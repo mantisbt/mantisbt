@@ -2780,6 +2780,12 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
+ * Access level required to print issues
+ * @global integer $g_print_reports_threshold
+ */
+$g_print_reports_threshold = VIEWER;
+
+/**
  * Access level required to export issues
  * @global integer $g_export_issues_threshold
  */
@@ -4826,6 +4832,7 @@ $g_public_config_names = array(
 	'preview_max_width',
 	'preview_text_extensions',
 	'print_issues_page_columns',
+	'print_reports_threshold',
 	'priority_enum_string',
 	'priority_significant_threshold',
 	'private_bug_threshold',
