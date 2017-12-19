@@ -383,6 +383,7 @@ function layout_login_page_end() {
  */
 function layout_navbar() {
 	$t_logo_url = config_get_global('logo_url');
+	$t_short_path = config_get_global('short_path');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
@@ -395,7 +396,7 @@ function layout_navbar() {
 	echo '</button>';
 
 	echo '<div class="navbar-header">';
-	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
+	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo string_display_line( config_get('window_title') );
 	echo ' </span>';
