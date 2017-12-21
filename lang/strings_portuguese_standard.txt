@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Bithunter
  * @author Crazymadlover
  * @author Giro720
@@ -143,6 +144,7 @@ $s_make_private = 'Tornar Privado';
 $s_make_public = 'Tornar Público';
 $s_create_new_project_link = 'Criar um novo projeto';
 $s_login_link = 'Entrar';
+$s_opensearch_text_short = '%s Texto';
 $s_select_option = '(selecionar)';
 $s_bug_actiongroup_access = 'Não tem as permissões apropriadas para executar essa ação.';
 $s_bug_actiongroup_status = 'O estado deste problema não pode ser alterado para o pretendido';
@@ -269,6 +271,7 @@ $s_email_summary = 'Sumário';
 $s_email_description = 'Descrição';
 $s_email_additional_information = 'Informações Adicionais';
 $s_email_steps_to_reproduce = 'Passos para Reproduzir';
+$s_email_tag = 'Etiquetas';
 $s_account_protected_msg = 'Conta protegida. Impossível alterar as configurações...';
 $s_account_removed_msg = 'A sua conta foi removida...';
 $s_confirm_delete_msg = 'Tem a certeza que quer remover a sua conta?';
@@ -278,13 +281,15 @@ $s_change_preferences_link = 'Preferências';
 $s_edit_account_title = 'Editar Conta';
 $s_username = 'Nome de utilizador';
 $s_realname = 'Nome Real';
+$s_realname_label = 'Nome verdadeiro';
 $s_email = 'Email';
+$s_email_label = 'Correio eletrónico';
 $s_password = 'Palavra-chave';
 $s_no_password_change = 'A palavra-chave é controlada por outro sistema, portanto não pode ser editada aqui.';
 $s_confirm_password = 'Confirmar a palavra-chave';
 $s_access_level = 'Nível de Acesso';
 $s_update_user_button = 'Atualizar usuário';
-$s_verify_warning = 'A informação da sua conta foi confirmada. A mensagem de confirmação de conta que recebeu é agora inválida.';
+$s_verify_warning = 'As informações da sua conta foram verificadas.';
 $s_verify_change_password = 'Tem que definir uma palavra-chave aqui para que possa entrar novamente.';
 $s_default_account_preferences_title = 'Preferências da Conta';
 $s_default_project = 'Projeto padrão';
