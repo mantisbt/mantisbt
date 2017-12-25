@@ -732,6 +732,7 @@ $s_title = 'Título';
 $s_project_file_deleted_msg = 'Arquivo do projeto apagado';
 $s_confirm_file_delete_msg = 'Tem certeza que deseja remover este ficheiro ?';
 $s_filename = 'Nome do Ficheiro';
+$s_filename_label = 'Nome do ficheiro:';
 $s_file_update_button = 'Atualizar ficheiro';
 $s_file_delete_button = 'Remover Ficheiro';
 $s_project_documentation_title = 'Documentação do projeto';
