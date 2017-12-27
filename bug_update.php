@@ -152,16 +152,34 @@ $t_reporter_reopening =
 	access_can_reopen_bug( $t_existing_bug, $t_current_user_id );
 
 if ( !$t_reporter_reopening && !$t_reporter_closing ) {
-	# Ensure that the user has permission to update bugs. This check also factors
-	# in whether the user has permission to view private bugs. The
-	# $g_limit_reporters option is also taken into consideration.
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	switch( $f_update_type ) {
+		case BUG_UPDATE_TYPE_ASSIGN:
+			access_ensure_bug_level( 'update_bug_assign_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+		case BUG_UPDATE_TYPE_CLOSE:
+		case BUG_UPDATE_TYPE_REOPEN:
+			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_check_readonly = false;
+			break;
+		case BUG_UPDATE_TYPE_CHANGE_STATUS:
+			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+		case BUG_UPDATE_TYPE_NORMAL:
+		default:
+			access_ensure_bug_level( 'update_bug_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+	}
 
-	# Check if the bug is in a read-only state and whether the current user has
-	# permission to update read-only bugs.
-	if( bug_is_readonly( $f_bug_id ) ) {
-		error_parameters( $f_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	if( $t_check_readonly ) {
+		# Check if the bug is in a read-only state and whether the current user has
+		# permission to update read-only bugs.
+		if( bug_is_readonly( $f_bug_id ) ) {
+			error_parameters( $f_bug_id );
+			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		}
 	}
 }
 
