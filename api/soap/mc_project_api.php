@@ -648,7 +648,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
  *
  * @param integer $p_project_id The project id.
  * @param array   $p_custom_fields The custom fields, may be not set.
- * return bool|SoapFault|RestFault true or error.
+ * @return bool|SoapFault|RestFault true or error.
  */
 function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) {
 	# Load custom field definitions

@@ -3066,7 +3066,7 @@ function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_publ
  * @param integer|null $p_project_id A valid project identifier or null for current project.
  * @param integer|null $p_user_id    A valid user identifier or null for logged in user.
  * @param boolean $p_filter_by_project Only return filters associated with specified project id or All Projects, otherwise return all filters for user.
- * @param boolean $p_return_name_only true: return names of filters, false: return structures with filter header information.
+ * @param boolean $p_return_names_only true: return names of filters, false: return structures with filter header information.
  * @return array Array of filters.
  */
 function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null, $p_filter_by_project = true, $p_return_names_only = true ) {
