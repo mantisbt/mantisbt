@@ -1434,26 +1434,6 @@ function print_bracket_link_prepared( $p_link ) {
 }
 
 /**
- * print the bracketed links used near the top
- * if the $p_link is blank then the text is printed but no link is created
- * if $p_new_window is true, link will open in a new window, default false.
- * @param string  $p_link       The URL to link to.
- * @param string  $p_url_text   The text to display.
- * @param boolean $p_new_window Whether to open in a new window.
- * @param string  $p_class      CSS class to use with the link.
- * @return void
- */
-function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	echo '<span class="bracket-link';
-	if( $p_class !== '' ) {
-		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
-	}
-	echo '">[&#160;';
-	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-	echo '&#160;]</span> ';
-}
-
-/**
  * print a HTML link
  * @param string  $p_link       The page URL.
  * @param string  $p_url_text   The displayed text for the link.
