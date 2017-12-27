@@ -507,7 +507,6 @@ class BugData {
 		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
 
 		# check to see if we want to assign this right off
-		$t_starting_status  = config_get( 'bug_submit_status' );
 		$t_original_status = $this->status;
 
 		# if not assigned, check if it should auto-assigned.

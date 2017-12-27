@@ -929,7 +929,6 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_field_id = (int)$p_field_id;
 
 	$t_row = custom_field_cache_row( $c_field_id );
-	$t_access_level_r = $t_row['access_level_r'];
 
 	# first check permissions
 	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
@@ -1058,13 +1057,10 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 function custom_field_validate( $p_field_id, $p_value ) {
 	$t_row = custom_field_get_definition( $p_field_id );
 
-	$t_name = $t_row['name'];
 	$t_type = $t_row['type'];
-	$t_possible_values = $t_row['possible_values'];
 	$t_valid_regexp = $t_row['valid_regexp'];
 	$t_length_min = $t_row['length_min'];
 	$t_length_max = $t_row['length_max'];
-	$t_default_value = $t_row['default_value'];
 
 	$t_valid = true;
 	$t_length = utf8_strlen( $p_value );

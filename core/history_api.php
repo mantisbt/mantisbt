@@ -719,7 +719,6 @@ function history_get_type_name( $p_type ) {
 function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
 	$t_note = '';
 	$t_change = '';
-	$t_field_localized = $p_field_name;
 	$t_raw = true;
 
 	if( PLUGIN_HISTORY == $p_type ) {

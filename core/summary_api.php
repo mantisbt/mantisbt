@@ -632,7 +632,6 @@ function summary_print_by_category() {
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$t_specific_where = trim( helper_project_specific_where( $t_project_id ) );
 	if( '1<>1' == $t_specific_where ) {

@@ -696,7 +696,7 @@ function db_error( $p_query = null ) {
 function db_close() {
 	global $g_db;
 
-	$t_result = $g_db->Close();
+	$g_db->Close();
 }
 
 /**

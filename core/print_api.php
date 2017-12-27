@@ -1767,7 +1767,6 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	$t_path = config_get_global( 'path' );
 	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" alt="', $p_title, '"></i></a>';
 }
 
