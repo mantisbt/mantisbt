@@ -644,9 +644,10 @@ function string_get_bug_page( $p_action ) {
  * @param integer $p_bug_id	     A bug identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
+ * @param boolean $p_long_link 	 When set to false, the returned link is displayed as bug ID. When set to true, the return string is displayed as ID: summary.
  * @return string
  */
-function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false, $p_long_link = false ) {
 	if( bug_exists( $p_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
@@ -666,7 +667,14 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 				$t_link .= ' class="resolved"';
 			}
 		}
-		$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
+		$t_link .= '>' . bug_format_id( $p_bug_id );
+		if ( $p_long_link ) {
+			$t_summary_length = config_get( 'timeline_issue_summary_length' );
+			$t_short_summary = mb_strimwidth( $t_summary, 0, $t_summary_length, '...' );
+			$t_link .= ': ' . $t_short_summary;
+		}
+		$t_link .= '</a>';
+		
 	} else {
 		$t_link = bug_format_id( $p_bug_id );
 	}

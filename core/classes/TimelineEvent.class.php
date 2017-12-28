@@ -30,14 +30,17 @@
 class TimelineEvent {
 	protected $timestamp;
 	protected $user_id;
+	protected $issue_id;
 
 	/**
 	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id     An user identifier.
+	 * @param integer $p_issue_id    An issue identifier.
 	 */
-	public function __construct( $p_timestamp, $p_user_id ) {
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id ) {
 		$this->timestamp = $p_timestamp;
 		$this->user_id = $p_user_id;
+		$this->issue_id = $p_issue_id;
 	}
 
 	/**
@@ -65,6 +68,16 @@ class TimelineEvent {
 	public function format_timestamp( $p_timestamp ) {
 		$t_normal_date_format = config_get( 'normal_date_format' );
 		return date( $t_normal_date_format, $p_timestamp );
+	}
+
+	/**
+	 * Returns html string for the link to the issue
+	 * @return string
+	 */
+	public function format_link_to_issue() {
+		$t_show_summary = config_get( 'timeline_show_issue_summary' );
+		$t_html = string_get_bug_view_link( $this->issue_id, true, false, $t_show_summary );
+		return $t_html;
 	}
 
 	/**

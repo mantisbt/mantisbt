@@ -41,5 +41,14 @@ $g_my_view_boxes = array( 'assigned' =&gt; '1',
 				</para>
 			</listitem>
 		</varlistentry>
+		<varlistentry>
+			<term>$g_timeline_show_issue_summary</term>
+			<listitem>
+				<para>Determine how the links in timeline is displayed. When set to 
+					OFF, it will display as issue id. When set to ON, it will display 
+					as issue id and summary. Default OFF.
+				</para>
+			</listitem>
+		</varlistentry>
 	</variablelist>
 </section>

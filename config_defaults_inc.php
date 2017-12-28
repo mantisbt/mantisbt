@@ -3688,6 +3688,15 @@ $g_my_view_boxes = array(
  */
 $g_my_view_boxes_fixed_position = ON;
 
+/**
+ * Toggle whether 'Timeline' boxes show summary of issue after issue ID
+ */
+$g_timeline_show_issue_summary = OFF;
+
+/**
+ * Control the maximum length of each summary shown in timeline when $g_timeline_show_issue_summary is ON.
+ */
+$g_timeline_issue_summary_length = 20;
 
 #############
 # RSS Feeds #
@@ -4623,6 +4632,7 @@ $g_public_config_names = array(
 	'time_tracking_view_threshold',
 	'time_tracking_with_billing',
 	'time_tracking_without_note',
+	'timeline_issue_summary_length',
 	'timeline_view_threshold',
 	'top_include_page',
 	'update_bug_assign_threshold',
