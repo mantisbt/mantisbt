@@ -942,6 +942,48 @@ $g_language_auto_map = array(
  */
 $g_fallback_language = 'english';
 
+##########################
+# MantisBT Font Settings #
+##########################
+
+/**
+ * Name of one of google fonts available at https://fonts.google.com/
+ * 'Open Sans' font files are part of MantisBT code. Selecting any other font will work if download from CDN
+ * option is enabled.
+ * @global string $g_font_family
+ */
+$g_font_family = 'Open Sans';
+
+/**
+ * List the google fonts that the users are allowed to choose from.
+ * Google offers over 800 fonts. The list below is limited to the ones tested on MantisBT UI
+ * @global array $g_font_choices_arr
+ */
+$g_font_choices_arr = array(
+	'Architects Daughter',
+	'Archivo Narrow',
+	'Arvo',
+	'Bitter',
+	'Cabin',
+	'Cinzel',
+	'Comfortaa',
+	'Courgette',
+	'Droid Sans',
+	'Gloria Hallelujah',
+	'Inconsolata',
+	'Josefin Sans',
+	'Karla',
+	'Kaushan Script',
+	'Lato',
+	'Montserrat',
+	'Open Sans',
+	'Orbitron',
+	'Poppins',
+	'Raleway',
+	'Ubuntu',
+	'Vollkorn'
+);
+
 #############################
 # MantisBT Display Settings #
 #############################

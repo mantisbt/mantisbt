@@ -131,6 +131,9 @@ function layout_page_header_end( $p_page_id = null) {
 		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
 	}
 
+	# Set user font preference
+	layout_user_font_preference();
+
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 
 	$g_error_send_page_header = false;
@@ -256,7 +259,7 @@ function layout_head_css() {
 		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css' );
 
 		# theme text fonts
-		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
+		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( config_get( 'font_family' ) ) . ':300,400' );
 
 		# datetimepicker
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
@@ -285,6 +288,16 @@ function layout_head_css() {
 	echo "\n";
 }
 
+/**
+ * Print user font preference
+ * @return void
+ */
+function layout_user_font_preference() {
+	echo '<style>', "\n";
+    echo  '* { font-family: "' , config_get( 'font_family' ) , '"; } ', "\n";
+	echo  'h1, h2, h3, h4, h5 { font-family: "' , config_get( 'font_family' ) , '"; } ', "\n";
+	echo '</style>', "\n";
+}
 
 /**
  * Print javascript directives before the closing of the page body element
@@ -359,6 +372,10 @@ function layout_login_page_begin() {
 	html_head_end();
 
 	echo '<body class="login-layout light-login">';
+
+	# Set font preference
+	layout_user_font_preference();
+
 	layout_main_container_begin();
 	layout_main_content_begin();
 	echo '<div class="row">';

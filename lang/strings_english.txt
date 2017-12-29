@@ -407,6 +407,7 @@ $s_email_on_priority_change = 'E-mail on Priority Change';
 $s_email_bugnote_limit = 'E-mail Notes Limit';
 $s_email_full_issue_details = 'E-mail Full Issue Details';
 $s_language = 'Language';
+$s_font_family = 'Font Family';
 $s_update_prefs_button = 'Update Prefs';
 $s_reset_prefs_button = 'Reset Prefs';
 $s_timezone = 'Time Zone';

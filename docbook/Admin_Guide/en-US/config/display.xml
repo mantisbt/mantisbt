@@ -7,6 +7,16 @@
 
 	<variablelist>
 		<varlistentry>
+			<term>$g_font_family</term>
+			<listitem>
+				<para>Name of the google font family for the browser to use. For all available fonts, see:
+					<ulink url="https://fonts.google.com/">
+						fonts.google.com
+					</ulink>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_window_title</term>
 			<listitem>
 				<para>This is the browser window title (&lt;TITLE&gt; tag).

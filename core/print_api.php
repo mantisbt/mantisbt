@@ -1108,6 +1108,22 @@ function print_language_option_list( $p_language ) {
 }
 
 /**
+ * Print option list of available font choices
+ * @param string $p_font The current font.
+ * @return void
+ */
+function print_font_option_list( $p_font ) {
+	$t_arr = config_get( 'font_choices_arr' );
+	$t_enum_count = count( $t_arr );
+	for( $i = 0;$i < $t_enum_count;$i++ ) {
+		$t_font = string_attribute( $t_arr[$i] );
+		echo '<option value="' . $t_font . '"';
+		check_selected( $t_font, $p_font );
+		echo '>' . $t_font . '</option>';
+	}
+}
+
+/**
  * Print a dropdown list of all bug actions available to a user for a specified
  * set of projects.
  * @param array $p_project_ids An array containing one or more project IDs.

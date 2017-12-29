@@ -84,6 +84,9 @@ if( lang_language_exists( $t_lang ) ) {
 	$t_prefs->language = $t_lang;
 }
 
+$t_font = gpc_get_string( 'font_family' );
+config_set ( 'font_family', $t_font, $f_user_id );
+
 $t_prefs->email_on_new		= gpc_get_bool( 'email_on_new' );
 $t_prefs->email_on_assigned	= gpc_get_bool( 'email_on_assigned' );
 $t_prefs->email_on_feedback	= gpc_get_bool( 'email_on_feedback' );
