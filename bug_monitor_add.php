@@ -47,7 +47,7 @@ $f_usernames = trim( gpc_get_string( 'username', '' ) );
 $t_data = array( 'issue_id' => $f_bug_id );
 
 if( is_blank( $f_usernames ) ) {
-	$t_data['users'] = array( array( 'id' => $t_logged_in_user_id ) );
+	$t_data['users'] = array( array( 'id' => auth_get_current_user_id() ) );
 } else {
 	$t_usernames = preg_split( '/[,|]/', $f_usernames, -1, PREG_SPLIT_NO_EMPTY );
 	$t_users = array();
