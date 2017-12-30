@@ -32,11 +32,6 @@ class MonitorAddCommand extends Command {
 	private $projectId;
 
 	/**
-	 * @var integer
-	 */
-	private $loggedInUserId;
-
-	/**
 	 * @var array array of user ids to add to monitor list of the issue
 	 */
 	private $userIdsToAdd;
