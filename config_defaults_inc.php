@@ -962,6 +962,7 @@ $g_font_family = 'Open Sans';
  * @global array $g_font_choices_arr
  */
 $g_font_choices_arr = array(
+	'Amiko',
 	'Architects Daughter',
 	'Archivo Narrow',
 	'Arvo',
@@ -974,14 +975,21 @@ $g_font_choices_arr = array(
 	'Gloria Hallelujah',
 	'Inconsolata',
 	'Josefin Sans',
+	'Kadwa',
 	'Karla',
 	'Kaushan Script',
 	'Lato',
 	'Montserrat',
 	'Open Sans',
 	'Orbitron',
+	'Oregano',
+	'Palanquin',
 	'Poppins',
 	'Raleway',
+	'Rhodium Libre',
+	'Sarala',
+	'Scope One',
+	'Secular One',
 	'Ubuntu',
 	'Vollkorn'
 );
