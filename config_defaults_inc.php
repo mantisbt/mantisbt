@@ -948,9 +948,9 @@ $g_fallback_language = 'english';
 
 /**
  * Name of one of google fonts available at https://fonts.google.com/
- * Chosen family must be one of safe fonts listed in $g_safe_fonts_arr such that it works
+ * Chosen family must be part of in $g_font_choices_arr_no_cdn such that it works
  * even if CDN option is disabled
- * @see $g_safe_fonts_arr
+ * @see $g_font_choices_arr_no_cdn
  * @see $g_cdn_enabled
  * @global string $g_font_family
  */
@@ -997,9 +997,9 @@ $g_font_choices_arr = array(
 /**
  * List of fonts that are installed as part of MantisBT
  * This list is used when using CDN option is disabled
- * @global array $g_font_choices_arr
+ * @global array $g_font_choices_arr_no_cdn
  */
-$g_safe_fonts_arr = array(
+$g_font_choices_arr_no_cdn = array(
 	'Montserrat',
 	'Open Sans',
 	'Poppins'
@@ -4521,8 +4521,9 @@ $g_public_config_names = array(
 	'filter_by_custom_fields',
 	'filter_custom_fields_per_row',
 	'filter_position',
-	'font_family',
 	'font_choices_arr',
+	'font_choices_arr_no_cdn',
+	'font_family',
 	'forward_year_count',
 	'from_email',
 	'from_name',
@@ -4658,7 +4659,6 @@ $g_public_config_names = array(
 	'sponsor_threshold',
 	'sponsorship_currency',
 	'sponsorship_enum_string',
-	'safe_fonts_arr',
 	'status_colors',
 	'status_enum_string',
 	'status_enum_workflow',
