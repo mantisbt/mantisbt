@@ -25,7 +25,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_safe_fonts_arr</term>
+			<term>$g_font_choices_arr_no_cdn</term>
 			<listitem>
 				<para>This is a small subset of <emphasis>$g_font_choices_arr</emphasis> in which font files are
 					part of MantisBT installation.
