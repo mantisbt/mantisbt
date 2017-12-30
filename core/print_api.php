@@ -1113,7 +1113,11 @@ function print_language_option_list( $p_language ) {
  * @return void
  */
 function print_font_option_list( $p_font ) {
-	$t_arr = config_get( 'font_choices_arr' );
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		$t_arr = config_get('font_choices_arr');
+	} else {
+		$t_arr = config_get('safe_fonts_arr');
+	}
 	$t_enum_count = count( $t_arr );
 	for( $i = 0;$i < $t_enum_count;$i++ ) {
 		$t_font = string_attribute( $t_arr[$i] );

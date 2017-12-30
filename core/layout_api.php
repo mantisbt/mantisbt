@@ -259,7 +259,8 @@ function layout_head_css() {
 		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css' );
 
 		# theme text fonts
-		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( config_get( 'font_family' ) ) . ':300,400' );
+		$t_font_family =  config_get( 'font_family', null, null, ALL_PROJECTS );
+		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( $t_font_family ) );
 
 		# datetimepicker
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
@@ -268,7 +269,7 @@ function layout_head_css() {
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
-		html_css_link( 'open-sans.css' );
+		html_css_link( 'fonts.css' );
 
 		# datetimepicker
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
@@ -293,9 +294,10 @@ function layout_head_css() {
  * @return void
  */
 function layout_user_font_preference() {
+	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
 	echo '<style>', "\n";
-    echo  '* { font-family: "' , config_get( 'font_family' ) , '"; } ', "\n";
-	echo  'h1, h2, h3, h4, h5 { font-family: "' , config_get( 'font_family' ) , '"; } ', "\n";
+	echo  '* { font-family: "' . $t_font_family . '"; } ', "\n";
+	echo  'h1, h2, h3, h4, h5 { font-family: "' . $t_font_family . '"; } ', "\n";
 	echo '</style>', "\n";
 }
 
