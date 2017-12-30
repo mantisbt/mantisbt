@@ -85,6 +85,10 @@ if( lang_language_exists( $t_lang ) ) {
 }
 
 $t_font = gpc_get_string( 'font_family' );
+if( config_get( 'font_family', null, $f_user_id, ALL_PROJECTS ) != $t_font ) {
+	config_set( 'font_family', $t_font, $f_user_id, ALL_PROJECTS );
+}
+
 config_set ( 'font_family', $t_font, $f_user_id );
 
 $t_prefs->email_on_new		= gpc_get_bool( 'email_on_new' );
