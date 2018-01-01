@@ -1058,13 +1058,10 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 function custom_field_validate( $p_field_id, $p_value ) {
 	$t_row = custom_field_get_definition( $p_field_id );
 
-	$t_name = $t_row['name'];
 	$t_type = $t_row['type'];
-	$t_possible_values = $t_row['possible_values'];
 	$t_valid_regexp = $t_row['valid_regexp'];
 	$t_length_min = $t_row['length_min'];
 	$t_length_max = $t_row['length_max'];
-	$t_default_value = $t_row['default_value'];
 
 	$t_valid = true;
 	$t_length = utf8_strlen( $p_value );
@@ -1111,6 +1108,10 @@ function custom_field_validate( $p_field_id, $p_value ) {
 
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
+			# Date field can be left blank (when field is not marked as required)
+			if( is_blank( $p_value ) ) {
+				break;
+			}
 			# gpc_get_cf for date returns the value from strtotime
 			# For 32 bit systems, supported range will be 13 Dec 1901 20:45:54 UTC to 19 Jan 2038 03:14:07 UTC
 			$t_valid &= $p_value !== false;
