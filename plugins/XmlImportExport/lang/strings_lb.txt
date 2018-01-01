@@ -42,7 +42,7 @@
  */
 
 $s_plugin_XmlImportExport_title = 'Import/Export Sujeten';
-$s_plugin_XmlImportExport_description = 'Setzt XML baséiert Import an Export-Méiglechkeeten a MantisBT derbäi.';
+$s_plugin_XmlImportExport_description = 'Setzt XML baséiert Import an Export-Méiglechkeeten a MantisBT dobäi.';
 $s_plugin_XmlImportExport_import = 'Problemer importéieren';
 $s_plugin_XmlImportExport_export = 'XML Export';
 $s_plugin_XmlImportExport_action_update = 'Aktualiséieren';

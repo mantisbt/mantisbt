@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Caçador de Palavras
  * @author Dianakc
  * @author Eduardo Addad de Oliveira
@@ -1289,6 +1290,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Um projeto com este nome já exi
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nome inválido de projeto especificado.  Nomes de projeto não pode ser em branco.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Usuário de nome "%1$s" não foi encontrado.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Usuário com id "%1$d" não foi encontrado.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'O usuário com o correio eletrônico "%1$s" não foi encontrado.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'O usuário com o nome real "%1$s" não foi encontrado.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A informação de login armazenada pelo seu navegador é inválida.  Talvez sua conta tenha sido apagada?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferências deste usuário não foram encontradas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Notícia não encontrada.';

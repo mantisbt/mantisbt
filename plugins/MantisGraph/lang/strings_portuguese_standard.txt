@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Hamilton Abreu
  * @author Luckas
  */
@@ -52,11 +53,15 @@ $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por importância';
 $s_plugin_MantisGraph_category_link = 'Por categoria';
 $s_plugin_MantisGraph_resolution_link = 'Por resolução';
-$s_plugin_MantisGraph_graph_imp_status_title = 'Gráficos de síntese por estado';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráficos de síntese por prioridade';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráficos de síntese por importância';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Gráficos de síntese por categoria';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráficos de síntese por resolução';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendências das incidências';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Por gráficos de estado';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Por gráficos de prioridade';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Por gráficos de importância';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Por gráficos de categoria';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Por gráficos de resolução';
+$s_plugin_MantisGraph_graph_developer_title = 'Por gráficos de programadores';
+$s_plugin_MantisGraph_graph_reporter_title = 'Por gráficos de relatores';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Incidências abertas, resolvidas e pendentes';
 $s_plugin_MantisGraph_by_status_pct = 'Por estado, em percentagem';
 $s_plugin_MantisGraph_by_priority_pct = 'Por prioridade, em percentagem';
 $s_plugin_MantisGraph_by_severity_pct = 'Por importância, em percentagem';
@@ -80,3 +85,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Ano Até à Data';
 $s_plugin_MantisGraph_period_select = 'Datas Arbitrárias';
 $s_plugin_MantisGraph_period_last_year = 'Ano Passado';
 $s_plugin_MantisGraph_graph_page = 'Gráfico do Histórico de Incidências';
+$s_plugin_MantisGraph_graph_topdev = 'Programadores mais ativos por problemas resolvidos';
+$s_plugin_MantisGraph_graph_opendev = 'Programadores por incidências abertas';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Relatores mais ativos por problemas corrigidos';
