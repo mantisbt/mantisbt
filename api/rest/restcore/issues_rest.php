@@ -286,11 +286,13 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
  */
 function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-	$t_data = $p_request->getParsedBody();
-	$t_data['issue_id'] = $t_issue_id;
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id ),
+		'payload' => $p_request->getParsedBody(),
+	);
 
-	$command = new MonitorAddCommand( $t_data );
-	$command->execute();
+	$t_command = new MonitorAddCommand( $t_data );
+	$t_command->execute();
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
 

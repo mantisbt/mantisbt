@@ -37,11 +37,13 @@ class MonitorAddCommand extends Command {
 	private $userIdsToAdd;
 
 	/**
-	 * Data is expected to contain:
+	 * $p_data['payload'] is expected to contain:
 	 * - issue_id
 	 * - users (array of users) each user as
 	 *   - an array having a key value for id or name or real_name or name_or_realname.
 	 *     id takes first priority, name second, real_name third, name_or_realname fourth.
+	 *
+	 * @param array $p_data The command data.
 	 */
 	function __construct( array $p_data ) {
 		parent::__construct( $p_data );
@@ -52,27 +54,29 @@ class MonitorAddCommand extends Command {
 	 */
 	function validate() {		
 		# Validate issue id
-		if( !isset( $this->data['issue_id'] ) ) {
+		if( !isset( $this->data['query']['issue_id'] ) ) {
 			throw new ClientException( 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
 		}
 
-		if( !is_numeric( $this->data['issue_id'] ) ) {
+		$t_issue_id = $this->data['query']['issue_id'];
+
+		if( !is_numeric( $t_issue_id ) ) {
 			throw new ClientException( 'issue_id must be numeric', ERROR_GPC_VAR_NOT_FOUND );
 		}
 
-		$t_issue_id = (int)$this->data['issue_id'];
+		$t_issue_id = (int)$t_issue_id;
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();
 
 		# Validate user id (if specified), otherwise set from context
-		if( !isset( $this->data['users'] ) ) {
-			$this->data['users'] = array( 'id' => $t_logged_in_user );
+		if( !isset( $this->data['payload']['users'] ) ) {
+			$this->data['payload']['users'] = array( 'id' => $t_logged_in_user );
 		}
 
 		# Normalize user objects
 		$t_user_ids = array();
-		foreach( $this->data['users'] as $t_user ) {
+		foreach( $this->data['payload']['users'] as $t_user ) {
 			$t_user_ids[] = user_get_id_by_user_info( $t_user );
 		}
 
@@ -114,11 +118,12 @@ class MonitorAddCommand extends Command {
 			# in case the current project is not the same project of the bug we are
 			# viewing, override the current project. This to avoid problems with
 			# categories and handlers lists etc.
+			global $g_project_override;
 			$g_project_override = $this->projectId;
 		}
 
 		foreach( $this->userIdsToAdd as $t_user_id ) {
-			bug_monitor( $this->data['issue_id'], $t_user_id );
+			bug_monitor( $this->data['query']['issue_id'], $t_user_id );
 		}
 
 		return null;
