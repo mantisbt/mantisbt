@@ -18,6 +18,7 @@ require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'config_api.php' );
+require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
 use Mantis\Exceptions\ClientException;
@@ -53,18 +54,7 @@ class MonitorAddCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {		
-		$t_issue_id = $this->query( 'issue_id' );
-
-		# Validate issue id
-		if( empty( $t_issue_id ) ) {
-			throw new ClientException( 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
-		}
-
-		if( !is_numeric( $t_issue_id ) ) {
-			throw new ClientException( 'issue_id must be numeric', ERROR_INVALID_FIELD_VALUE, array( 'issue_id' ) );
-		}
-
-		$t_issue_id = (int)$t_issue_id;
+		$t_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();

@@ -54,6 +54,8 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * alternate classes for table rows
  * If no index is given, continue alternating based on the last index given
@@ -759,4 +761,68 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 		}
 	}
 	return md5( $t_key );
+}
+
+/**
+ * Parse view state from provided array.
+ *
+ * @param array $p_view_state The view state array (typically would have an id, name or both).
+ * @return integer view state id
+ * @throws ClientException if view state is invalid or array is empty.
+ */
+function helper_parse_view_state( array $p_view_state ) {
+	$t_view_state_enum = config_get( 'view_state_enum_string' );
+
+	$t_view_state_id = VS_PUBLIC;
+	if( isset( $p_view_state['id'] ) ) {
+		$t_enum_by_ids = MantisEnum::getAssocArrayIndexedByValues( $t_view_state_enum );
+		$t_view_state_id = (int)$p_view_state['id'];
+		if( !isset( $t_enum_by_ids[$t_view_state_id] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+	} else if( isset( $p_view_state['name' ] ) ) {
+		$t_enum_by_labels = MantisEnum::getAssocArrayIndexedByLabels( $t_view_state_enum );
+		$t_name = $p_view_state['name'];
+		if( !isset( $t_enum_by_labels[$t_name] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+
+		$t_view_state_id = $t_enum_by_labels[$t_name];
+	} else {
+		throw new ClientException(
+			"Empty view state",
+			ERROR_EMPTY_FIELD );
+	}
+
+	return $t_view_state_id;
+}
+
+/**
+ * Parse issue id.
+ *
+ * @param string $p_issue_id The id to parse.
+ * @return integer The issue id.
+ * @throws ClientException Issue is not specified or invalid.
+ */
+function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
+	if( !is_numeric( $p_issue_id ) ) {
+		if( empty( $p_issue_id ) ) {
+			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
+		}
+
+		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	$t_issue_id = (int)$p_issue_id;
+	if( $t_issue_id < 1 ) {
+		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	return $t_issue_id;
 }
