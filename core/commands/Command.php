@@ -59,6 +59,54 @@ abstract class Command
 	abstract protected function process();
 
 	/**
+	 * Gets the value of the option or default.
+	 *
+	 * @param string $p_name The option name.
+	 * @param mixed  $p_default The default value.
+	 *
+	 * @return mixed The option value or its default.
+	 */
+	public function option( $p_name, $p_default = null ) {
+		if( isset( $this->data['options'][$p_name] ) ) {
+			return $this->data['options'][$p_name];
+		}
+
+		return $p_default;
+	}
+
+	/**
+	 * Gets the value of a payload field or its default.
+	 *
+	 * @param string $p_name The field name.
+	 * @param mixed  $p_default The default value.
+	 *
+	 * @return mixed The payload field value or its default.
+	 */
+	public function payload( $p_name, $p_default = null ) {
+		if( isset( $this->data['payload'][$p_name] ) ) {
+			return $this->data['payload'][$p_name];
+		}
+
+		return $p_default;
+	}
+
+	/**
+	 * Gets the value of a query field or its default.
+	 *
+	 * @param string $p_name The field name.
+	 * @param mixed $p_default The default value.
+	 *
+	 * @return mixed The field value or its default.
+	 */
+	public function query( $p_name, $p_default = null ) {
+		if( isset( $this->data['query'][$p_name] ) ) {
+			return $this->data['query'][$p_name];
+		}
+
+		return $p_default;
+	}
+
+	/**
 	 * Execute the command.  This may throw a CommandException is execution is interrupted.
 	 * The command is expected to trigger events that are handled by plugins as part of
 	 * exection.
