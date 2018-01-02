@@ -26,6 +26,9 @@
 abstract class Command
 {
 	/**
+	 * This is the payload data for the command.  Modelled after the REST
+	 * API, this should be the body of the request.
+	 *
 	 * @var array The input data for the command.
 	 */
 	protected $data;
@@ -35,7 +38,7 @@ abstract class Command
 	 *
 	 * @param array $p_data The command data.
 	 */
-	function __construct( array $p_data ) {
+	function __construct( array $p_data, array $p_query ) {
 		$this->data = $p_data;
 	}
 
@@ -65,6 +68,18 @@ abstract class Command
 	public function execute() {
 		# For now, all commands require user to be authenticated
 		auth_ensure_user_authenticated();		
+
+		if( !isset( $this->data['payload'] ) ) {
+			$this->data['payload'] = array();
+		}
+
+		if( !isset( $this->data['query'] ) ) {
+			$this->data['query'] = array();
+		}
+
+		if( !isset( $this->data['options'] ) ) {
+			$this->data['options'] = array();
+		}
 
 		$this->validate();
 		return $this->process();

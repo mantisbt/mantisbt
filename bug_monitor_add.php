@@ -44,22 +44,25 @@ form_security_validate( 'bug_monitor_add' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 $f_usernames = trim( gpc_get_string( 'username', '' ) );
 
-$t_data = array( 'issue_id' => $f_bug_id );
+$t_payload = array();
 
-if( is_blank( $f_usernames ) ) {
-	$t_data['users'] = array( array( 'id' => auth_get_current_user_id() ) );
-} else {
+if( !is_blank( $f_usernames ) ) {
 	$t_usernames = preg_split( '/[,|]/', $f_usernames, -1, PREG_SPLIT_NO_EMPTY );
 	$t_users = array();
 	foreach( $t_usernames as $t_username ) {
 		$t_users[] = array( 'name_or_realname' => trim( $t_username ) );
 	}
 
-	$t_data['users'] = $t_users;
+	$t_payload['users'] = $t_users;
 }
 
-$command = new MonitorAddCommand( $t_data );
-$command->execute();
+$t_data = array(
+	'query' => array( 'issue_id' => $f_bug_id ),
+	'payload' => $t_payload,
+);
+
+$t_command = new MonitorAddCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'bug_monitor_add' );
 
