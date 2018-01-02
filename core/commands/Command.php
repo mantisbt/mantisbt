@@ -38,7 +38,7 @@ abstract class Command
 	 *
 	 * @param array $p_data The command data.
 	 */
-	function __construct( array $p_data, array $p_query ) {
+	function __construct( array $p_data ) {
 		$this->data = $p_data;
 	}
 
