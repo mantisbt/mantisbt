@@ -53,12 +53,12 @@ class MonitorAddCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {		
+		$t_issue_id = $this->query( 'issue_id' );
+
 		# Validate issue id
-		if( !isset( $this->data['query']['issue_id'] ) ) {
+		if( empty( $t_issue_id ) ) {
 			throw new ClientException( 'issue_id missing', ERROR_GPC_VAR_NOT_FOUND );
 		}
-
-		$t_issue_id = $this->data['query']['issue_id'];
 
 		if( !is_numeric( $t_issue_id ) ) {
 			throw new ClientException( 'issue_id must be numeric', ERROR_GPC_VAR_NOT_FOUND );
@@ -69,14 +69,11 @@ class MonitorAddCommand extends Command {
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();
 
-		# Validate user id (if specified), otherwise set from context
-		if( !isset( $this->data['payload']['users'] ) ) {
-			$this->data['payload']['users'] = array( 'id' => $t_logged_in_user );
-		}
+		$t_users = $this->payload( 'users', array( 'id' => $t_logged_in_user ) );
 
 		# Normalize user objects
 		$t_user_ids = array();
-		foreach( $this->data['payload']['users'] as $t_user ) {
+		foreach( $t_users as $t_user ) {
 			$t_user_ids[] = user_get_id_by_user_info( $t_user );
 		}
 
@@ -123,7 +120,7 @@ class MonitorAddCommand extends Command {
 		}
 
 		foreach( $this->userIdsToAdd as $t_user_id ) {
-			bug_monitor( $this->data['query']['issue_id'], $t_user_id );
+			bug_monitor( $this->query( 'issue_id' ), $t_user_id );
 		}
 
 		return null;
