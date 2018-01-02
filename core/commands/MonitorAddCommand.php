@@ -61,7 +61,7 @@ class MonitorAddCommand extends Command {
 		}
 
 		if( !is_numeric( $t_issue_id ) ) {
-			throw new ClientException( 'issue_id must be numeric', ERROR_GPC_VAR_NOT_FOUND );
+			throw new ClientException( 'issue_id must be numeric', ERROR_INVALID_FIELD_VALUE, array( 'issue_id' ) );
 		}
 
 		$t_issue_id = (int)$t_issue_id;
@@ -70,6 +70,9 @@ class MonitorAddCommand extends Command {
 		$t_logged_in_user = auth_get_current_user_id();
 
 		$t_users = $this->payload( 'users', array( 'id' => $t_logged_in_user ) );
+		if( !is_array( $t_users ) ) {
+			throw new ClientException( 'Invalid users array', ERROR_INVALID_FIELD_VALUE, array( 'users' ) );
+		}
 
 		# Normalize user objects
 		$t_user_ids = array();
