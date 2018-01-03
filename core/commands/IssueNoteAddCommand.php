@@ -141,22 +141,19 @@ class IssueNoteAddCommand extends Command {
 			}
 		}
 
-		if( $this->option( 'allowLocalPathForFiles', false ) ) {
-			$this->files = $this->payload( 'files' );
-			if( !is_array( $this->files ) ) {
-				$this->files = array();
-			}
-	
+		$this->parseFiles();
+
+		if( count( $this->files ) > 0 ) {
 			# The UI hides the attach controls when the note is marked as private to avoid disclosure of
 			# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
 			# private attachments is implemented.
 			if( $this->private && count( $this->files ) > 0 ) {
-				# TODO: trigger exception, private attachments not supported.
-				$this->files = array();
+				throw new ClientException(
+					'Private notes with attachments not allowed',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'files' ) );
 			}
-		}
 
-		if( count( $this->files ) > 0 ) {
 			if( !file_allow_bug_upload( $this->issue->id ) ) {
 				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 			}
@@ -261,6 +258,7 @@ class IssueNoteAddCommand extends Command {
 
 	/**
 	 * Parse view state for note.
+	 * @return void
 	 */
 	private function parseViewState() {
 		$t_view_state = $this->payload( 'view_state' );
@@ -271,6 +269,32 @@ class IssueNoteAddCommand extends Command {
 		}
 
 		$this->private = $t_view_state == VS_PRIVATE;
+	}
+
+	/**
+	 * Parse files from payload.
+	 * @return void
+	 */
+	private function parseFiles() {
+		$this->files = $this->payload( 'files', array() );
+		if( !is_array( $this->files ) ) {
+			$this->files = array();
+		}
+
+		$t_files_invalid_fields = array();
+		$t_files_required_fields = array();
+
+		$t_files_required_fields = array( 'name', 'tmp_name' );
+		for( $i = 0; $i < count( $this->files ); $i++ ) {
+			foreach( $t_files_required_fields as $t_field ) {
+				if( !isset( $this->files[$i][$t_field] ) ) {
+					throw new ClientException(
+						sprintf( "File field '%s' is missing.", $t_field ),
+						ERROR_EMPTY_FIELD,
+						array( $t_field ) );
+				}
+			}
+		}
 	}
 }
 

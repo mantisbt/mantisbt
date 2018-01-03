@@ -216,6 +216,7 @@ class ApiObjectFactory {
 			case ERROR_COLUMNS_DUPLICATE:
 			case ERROR_COLUMNS_INVALID:
 			case ERROR_API_TOKEN_NAME_NOT_UNIQUE:
+			case ERROR_INVALID_FIELD_VALUE:
 				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
 
 			case ERROR_BUG_NOT_FOUND:

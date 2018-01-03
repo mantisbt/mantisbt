@@ -54,7 +54,6 @@ $t_payload = array(
 $t_data = array(
 	'query' => $t_query,
 	'payload' => $t_payload,
-	'options' => array( 'allowLocalPathForFiles' => true ),
 );
 
 $t_command = new IssueNoteAddCommand( $t_data );
