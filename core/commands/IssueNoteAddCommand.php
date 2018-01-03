@@ -149,9 +149,12 @@ class IssueNoteAddCommand extends Command {
 			$this->time_tracking = $t_time_tracking['duration'];
 		}
 
+		# Parse to duration to validate it.
+		$t_time_tracking_mins = helper_duration_to_minutes( $this->time_tracking, 'time tracking duration' );
+
 		$this->text = trim( $this->payload( 'text', '' ) );
 		if( empty( $this->text ) &&
-		    helper_duration_to_minutes( $this->time_tracking ) == 0 && 
+		    $t_time_tracking_mins == 0 && 
 		    count( $this->files ) == 0 ) {
 			throw new ClientException( 'Issue note not specified.', ERROR_EMPTY_FIELD, array( lang_get( 'bugnote' ) ) );
 		}
