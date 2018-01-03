@@ -631,9 +631,10 @@ function helper_mantis_url( $p_url ) {
 /**
  * convert a duration string in "[h]h:mm" to an integer (minutes)
  * @param string $p_hhmm A string in [h]h:mm format to convert.
+ * @param string $p_field The field name.
  * @return integer
  */
-function helper_duration_to_minutes( $p_hhmm ) {
+function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 	if( is_blank( $p_hhmm ) ) {
 		return 0;
 	}
@@ -643,22 +644,31 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	# time can be composed of max 3 parts (hh:mm:ss)
 	if( count( $t_a ) > 3 ) {
-		error_parameters( 'p_hhmm', $p_hhmm );
-		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+			ERROR_INVALID_FIELD_VALUE,
+			array( $p_field )
+		);
 	}
 
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		# all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 
 		# minutes and seconds are not allowed to exceed 59.
 		if( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 	}
 
