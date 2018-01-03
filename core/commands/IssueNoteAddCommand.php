@@ -101,6 +101,20 @@ class IssueNoteAddCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
+		# Validate issue note type
+		switch( $this->payload( 'type', 'note' ) ) {
+			case 'note':
+			case 'timelog':
+				break;
+			case 'reminder':  # isn't supported by this command.
+			default:
+				throw new ClientException(
+					sprintf( "Invalid value '%s' for 'type'.", $t_type ),
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'type' )
+				);
+		}
+
 		$t_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 
 		$this->issue = bug_get( $t_issue_id, true );
