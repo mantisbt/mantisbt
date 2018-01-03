@@ -671,6 +671,10 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
+ * If file was not uploaded by the browser standard POST method, set value
+ * for key `browser_upload` on $p_file to false.  Otherwise, the file_add()
+ * operation will fail.
+ *
  * @param integer $p_bug_id          The bug id (should be 0 when adding project doc).
  * @param array   $p_file            The uploaded file info, as retrieved from gpc_get_file().
  * @param string  $p_table           Either 'bug' or 'project' depending on attachment type.
@@ -684,9 +688,30 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 	$t_file_info = array();
 
+	if( !isset( $p_file['error'] ) ) {
+		$p_file['error'] = UPLOAD_ERR_OK;
+	}
+
+	if( !isset( $p_file['browser_upload'] ) ) {
+		$p_file['browser_upload'] = true;
+	}
+
+	$t_tmp_file = $p_file['tmp_name'];
+
+	# Override passed value with one detected by PHP (if available).
+	# If PHP can't detect it, then use supplied value.
+	# If no value supplied, then default to a reasonable value.
+	# The value will be overridden by PHP anyway if content type is
+	# known at rendering time.
+	$t_type = file_get_mime_type( $t_tmp_file );
+	if( $t_type !== false ) {
+		$p_file['type'] = $t_type;
+	} else if( !isset( $p_file['type'] ) ) {
+		$p_file['type'] = 'application/octet-stream';
+	}
+
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
-	$t_tmp_file = $p_file['tmp_name'];
 
 	if( !file_type_check( $t_file_name ) ) {
 		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
@@ -756,8 +781,14 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
-				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
-					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				if( $p_file['browser_upload'] ) {
+					if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
+						trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+					}
+				} else {
+					if( !copy( $t_tmp_file, $t_disk_file_name ) || !unlink( $t_tmp_file ) ) {
+						trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+					}
 				}
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
@@ -939,6 +970,46 @@ function file_ensure_uploaded( array $p_file ) {
 }
 
 /**
+ * Get mime type for the specified file.
+ *
+ * @param string $p_file_path The file path.
+ * @return boolean|string The mime type or false on failure.
+ */
+function file_get_mime_type( $p_file_path ) {
+	if( !file_exists( $p_file_path ) ) {
+		return false;
+	}
+
+	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
+
+	if( is_blank( $t_info_file ) ) {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
+	}
+
+	return $t_finfo->file( $p_file_path );
+}
+
+/**
+ * Get mime type for the specified content.
+ *
+ * @param string $p_file_path The file path.
+ * @return boolean|string The mime type or false on failure.
+ */
+function file_get_mime_type_for_content( $p_content ) {
+	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
+
+	if( is_blank( $t_info_file ) ) {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
+	}
+
+	return $t_finfo->buffer( $p_content );
+}
+
+/**
  * Get file content
  *
  * @param integer $p_file_id File identifier.
@@ -959,6 +1030,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		default:
 			return false;
 	}
+
 	$t_result = db_query( $t_query, array( $p_file_id ) );
 	$t_row = db_fetch_array( $t_result );
 
@@ -968,21 +1040,6 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		$t_project_id = $t_row['bug_id'];
 	}
 
-	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
-	$t_finfo_available = false;
-
-	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
-
-	if( is_blank( $t_info_file ) ) {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-	}
-
-	if( $t_finfo ) {
-		$t_finfo_available = true;
-	}
-
 	$t_content_type = $t_row['file_type'];
 
 	switch( config_get( 'file_upload_method' ) ) {
@@ -990,25 +1047,23 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			$t_local_disk_file = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
 
 			if( file_exists( $t_local_disk_file ) ) {
-				if( $t_finfo_available ) {
-					$t_file_info_type = $t_finfo->file( $t_local_disk_file );
+				$t_file_info_type = file_get_mime_type( $t_local_disk_file );
 
-					if( $t_file_info_type !== false ) {
-						$t_content_type = $t_file_info_type;
-					}
+				if( $t_file_info_type !== false ) {
+					$t_content_type = $t_file_info_type;
 				}
+
 				return array( 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) );
 			}
 			return false;
 			break;
 		case DATABASE:
-			if( $t_finfo_available ) {
-				$t_file_info_type = $t_finfo->buffer( $t_row['content'] );
+			$t_file_info_type = file_get_mime_type_for_content( $t_row['content'] );
 
-				if( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
+			if( $t_file_info_type !== false ) {
+				$t_content_type = $t_file_info_type;
 			}
+
 			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
 			break;
 		default:

@@ -22,6 +22,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_issue_get' );
 	$g_app->get( '/', 'rest_issue_get' );
@@ -178,6 +180,29 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		'query' => array( 'issue_id' => $t_issue_id ),
 		'payload' => $p_request->getParsedBody(),
 	);
+
+	if( isset( $t_data['payload']['files'] ) && is_array( $t_data['payload']['files'] ) ) {
+		foreach( $t_data['payload']['files'] as &$t_file ) {
+			if( !isset( $t_file['content'] ) ) {
+				throw new ClientException(
+					'File content not set',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'files' ) );
+			}
+
+			$t_raw_content = base64_decode( $t_file['content'] );
+
+			do {
+				$t_tmp_file = realpath( sys_get_temp_dir() ) . '/' . uniqid( 'mantisbt-file' );
+			} while( file_exists( $t_tmp_file ) );
+	
+			file_put_contents( $t_tmp_file, $t_raw_content );
+			$t_file['tmp_name'] = $t_tmp_file;
+			$t_file['size'] = filesize( $t_tmp_file );
+			$t_file['browser_upload'] = false;
+			unset( $t_file['content'] );
+		}
+	}
 
 	# TODO: support reminder notes
 	# TODO: support note attachments
