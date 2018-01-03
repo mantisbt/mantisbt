@@ -23,12 +23,14 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
+ * @uses file_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
  */
 
 require_once( 'core.php' );
+require_api( 'file_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
@@ -46,7 +48,7 @@ $t_payload = array(
 	'time_tracking' => array(
 		'duration' => gpc_get_string( 'time_tracking', '0:00' )
 	),
-	'files' => gpc_get_file( 'ufile', null )
+	'files' => helper_array_transpose( gpc_get_file( 'ufile', array() ) )
 );
 
 $t_data = array(

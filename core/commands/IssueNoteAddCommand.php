@@ -41,7 +41,11 @@ use Mantis\Exceptions\ClientException;
 	},
 	"files": [
 		{
-			...fileupload default format
+          "name": "filename.ext",
+          "type": "application/...",
+          "tmp_name": "/tmp/php/phpRELws8",
+          "error": 0,
+		  "size": 114
 		}
 	]
   }
@@ -209,7 +213,7 @@ class IssueNoteAddCommand extends Command {
 
 		# Handle the file upload
 		if( count( $this->files > 0 ) ) {
-			$t_file_infos = file_process_posted_files_for_bug( $this->issue->id, $this->files );
+			$t_file_infos = file_attach_files( $this->issue->id, $this->files );
 		} else {
 			$t_file_infos = array();
 		}
