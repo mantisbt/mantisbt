@@ -209,7 +209,8 @@ if( $f_files !== null ) {
 		access_denied();
 	}
 
-	file_process_posted_files_for_bug( $t_bug_id, $f_files );
+	$t_files = helper_array_transpose( $f_files );
+	file_attach_files( $t_bug_id, $t_files );
 }
 
 # Handle custom field submission

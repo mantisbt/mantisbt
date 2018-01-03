@@ -53,21 +53,19 @@ require_api( 'utility_api.php' );
 $g_cache_file_count = array();
 
 /**
- * Processes the post files from a form by adding them to the specified
- * issue.
+ * Attached specified files to issue.
  *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
  * @return array Array of file info arrays.
  */
-function file_process_posted_files_for_bug( $p_bug_id, $p_files ) {
-	if( $p_files === null ) {
+function file_attach_files( $p_bug_id, $p_files ) {
+	if( $p_files === null || count( $p_files ) == 0 ) {
 		return;
 	}
 
 	$t_file_infos = array();
-	$t_files = helper_array_transpose( $p_files );
-	foreach( $t_files as $t_file ) {
+	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
 			$t_file_infos[] = file_add( $p_bug_id, $t_file, 'bug' );
 		}
