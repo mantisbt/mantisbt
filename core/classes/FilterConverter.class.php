@@ -52,7 +52,7 @@ class FilterConverter {
 	 * @param integer $p_user_id The logged in user id.
 	 * @param string $p_lang The logged in user language.
 	 */
-	public function __construction( $p_user_id, $p_lang ) {
+	public function __construct( $p_user_id, $p_lang ) {
 		$this->user_id = (int)$p_user_id;
 		$this->lang = $p_lang;
 	}
