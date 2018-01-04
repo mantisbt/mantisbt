@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dishual
  * @author Fohanno
  * @author Fulup
  * @author Gwenn-Ael
@@ -1267,6 +1268,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ur raktres en anv-se zo anezhañ
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Direizh eo anv ar raktres. Anvioù ar raktresoù ne c\'hallont ket bezañ goullo.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'N\'eus ket bet kavet un implijer en anv "%1$s"';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'N\'eus bet kavet implijer ebet gant an anavezer « %1$d ».';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'N\'eus ket bet kavet un implijer gant an e-bost "%1$s"';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'N\'eus ket bet kavet un implijer gant an anv gwirion "%1$s" .';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Direizh eo an titouroù kevreañ enrollet gant ho merdeer. Marteze eo bet dilamet ho kont ?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Ar penndibaboù n\'int ket bet kavet evit an implijer-mañ.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Ar c\'heloù n\'eo ket bet kavet.';

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Bithunter
  * @author Elisardojm
  * @author Fitoschido
@@ -1271,6 +1272,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Xa existe un proxecto con ese no
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Especificou o nome dun proxecto inválido. Os nomes de proxectos non poden estar en branco.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Non se atopou ningún usuario chamado "%1$s".';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Non se atopou ningún usuario co identificador "%1$d".';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'Non se atopou ningún usuario con correo electrónico "%1$s".';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Non se atopou ningún usuario co nome real "%1$s".';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A información de rexistro almacenada polo seu navegador non é válida. Se cadra a súa conta foi borrada?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferencias deste usuario non puideron ser atopadas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Non se atopou o elemento das novas.';
