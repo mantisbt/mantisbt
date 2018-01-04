@@ -17,6 +17,8 @@
 require_api( 'access_api.php' );
 require_api( 'history_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Antispam API
  *
@@ -56,6 +58,9 @@ function antispam_check() {
 		return;
 	}
 
-	error_parameters( $t_antispam_max_event_count, $t_antispam_time_window_in_seconds );
-	trigger_error( ERROR_SPAM_SUSPECTED, ERROR );
+	throw new ClientException(
+		"Hit rate limit threshold",
+		ERROR_SPAM_SUSPECTED,
+		array( $t_antispam_max_event_count, $t_antispam_time_window_in_seconds )
+	);
 }

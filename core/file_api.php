@@ -50,6 +50,9 @@ require_api( 'history_api.php' );
 require_api( 'project_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ServiceException;
+
 $g_cache_file_count = array();
 
 /**
@@ -714,7 +717,10 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	$t_file_name = $p_file['name'];
 
 	if( !file_type_check( $t_file_name ) ) {
-		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' type not allowed", $t_file_name ),
+			ERROR_FILE_NOT_ALLOWED
+		);
 	}
 
 	$t_org_filename = $t_file_name;
@@ -737,14 +743,18 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' not uploaded", $t_file_name ),
+			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
 	$t_file_info['size'] = $t_file_size;
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' too big", $t_file_name ),
+			ERROR_FILE_TOO_BIG );
 	}
 
 	if( 'bug' == $p_table ) {
@@ -783,11 +793,17 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 			if( !file_exists( $t_disk_file_name ) ) {
 				if( $p_file['browser_upload'] ) {
 					if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
-						trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+						throw new ServiceException(
+							'Unable to move uploaded file',
+							ERROR_FILE_MOVE_FAILED
+						);
 					}
 				} else {
 					if( !copy( $t_tmp_file, $t_disk_file_name ) || !unlink( $t_tmp_file ) ) {
-						trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+						throw new ServiceException(
+							'Unable to move uploaded file',
+							ERROR_FILE_MOVE_FAILED
+						);
 					}
 				}
 
@@ -795,7 +811,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 				$c_content = '';
 			} else {
-				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+				throw new ClientException( 'Duplicate file', ERROR_FILE_DUPLICATE );
 			}
 			break;
 		case DATABASE:
@@ -803,7 +819,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 			$t_file_path = '';
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ServiceException( 'Unknown file upload method', ERROR_GENERIC );
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
@@ -951,21 +967,25 @@ function file_ensure_uploaded( array $p_file ) {
 	switch( $p_file['error'] ) {
 		case UPLOAD_ERR_INI_SIZE:
 		case UPLOAD_ERR_FORM_SIZE:
-			trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-			break;
+			throw new ClientException(
+				sprintf( "File '%s' too big", $p_file['name'] ),
+				ERROR_FILE_TOO_BIG );
+
 		case UPLOAD_ERR_PARTIAL:
 		case UPLOAD_ERR_NO_FILE:
-			trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-			break;
-		default:
-			break;
+			throw new ClientException(
+				sprintf( "File '%s' upload failure", $p_file['name'] ),
+				ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
 	if( ( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+		throw new ClientException(
+			'File name or path is empty',
+			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
+
 	if( !is_readable( $p_file['tmp_name'] ) ) {
-		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+		throw new ClientException( 'File is not readable', ERROR_UPLOAD_FAILURE );
 	}
 }
 
