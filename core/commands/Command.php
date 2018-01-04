@@ -26,8 +26,12 @@
 abstract class Command
 {
 	/**
-	 * This is the payload data for the command.  Modelled after the REST
-	 * API, this should be the body of the request.
+	 * This is the data for the command.  Modelled after the REST
+	 * it has the following sub-arrays:
+	 * 'query' - an array of url and query string parameters.
+	 * 'payload' - the payload
+	 * 'options' - options specified by the internal codebase and not
+	 *             as part of the request.
 	 *
 	 * @var array The input data for the command.
 	 */

@@ -204,9 +204,6 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		}
 	}
 
-	# TODO: support reminder notes
-	# TODO: support note attachments
-
 	$t_command = new IssueNoteAddCommand( $t_data );
 	$t_command_response = $t_command->execute();
 
