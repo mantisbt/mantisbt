@@ -109,6 +109,9 @@ class IssueNoteAddCommand extends Command {
 		switch( $this->payload( 'type', 'note' ) ) {
 			case 'note':
 			case 'timelog':
+				# nothing to do here, the command will always set the
+				# type to `note` and core API will set to `timelog`
+				# when appropriate.
 				break;
 			case 'reminder':  # isn't supported by this command.
 			default:
@@ -285,9 +288,9 @@ class IssueNoteAddCommand extends Command {
 		$t_files_required_fields = array();
 
 		$t_files_required_fields = array( 'name', 'tmp_name' );
-		for( $i = 0; $i < count( $this->files ); $i++ ) {
+		foreach( $this->files as $t_file ) {
 			foreach( $t_files_required_fields as $t_field ) {
-				if( !isset( $this->files[$i][$t_field] ) ) {
+				if( !isset( $t_file[$t_field] ) ) {
 					throw new ClientException(
 						sprintf( "File field '%s' is missing.", $t_field ),
 						ERROR_EMPTY_FIELD,
