@@ -123,6 +123,16 @@ class ApiObjectFactory {
 	}
 
 	/**
+	 * Fault generated when a client hits rate limits.
+	 *
+	 * @param string $p_fault_string The fault details.
+	 * @return RestFault|SoapFault The fault object.
+	 */
+	static function faultTooManyRequests( $p_fault_string ) {
+		return ApiObjectFactory::fault( 'Client', $p_fault_string, HTTP_STATUS_TOO_MANY_REQUESTS );
+	}
+
+	/**
 	 * Fault generated when the request is failed due to conflict with current state of the data.
 	 * This can happen either due to a race condition or lack of checking on client side before
 	 * issuing the request.
@@ -260,8 +270,7 @@ class ApiObjectFactory {
 				return ApiObjectFactory::faultForbidden( $p_exception->getMessage() );
 
 			case ERROR_SPAM_SUSPECTED:
-				# TODO: trigger a 429 equivalent fault here
-				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
+				return ApiObjectFactory::faultTooManyRequests( $p_exception->getMessage() );
 
 			case ERROR_CONFIG_OPT_INVALID:
 			case ERROR_FILE_INVALID_UPLOAD_PATH:
