@@ -93,6 +93,11 @@ class IssueNoteAddCommand extends Command {
 	private $text = '';
 
 	/**
+	 * The reporter id for the note.
+	 */
+	private $reporterId = 0;
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -130,10 +135,6 @@ class IssueNoteAddCommand extends Command {
 				sprintf( 'Issue %d is read-only.', $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
 				array( $t_issue_id ) );
-		}
-
-		if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $t_issue_id ) ) {
-			throw new ClientException( 'access denied', ERROR_ACCESS_DENIED );
 		}
 
 		$this->parseViewState();
@@ -182,18 +183,23 @@ class IssueNoteAddCommand extends Command {
 		# Parse reporter id or default it.
 		$t_reporter = $this->payload( 'reporter' );
 		if( $t_reporter !== null ) {
-			$t_reporter_id = user_get_id_by_user_info( $t_reporter );
+			$this->reporterId = user_get_id_by_user_info(
+				$t_reporter, /* throw_if_id_doesnt_exist */ true );
 		} else {
-			$t_reporter_id = $this->user_id;
+			$this->reporterId = $this->user_id;
 		}
 
-		if( $t_reporter_id != $this->user_id ) {
+		if( $this->reporterId != $this->user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			# This feature is only available in the API and not Web UI.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_bug_level( $t_specify_reporter_access_level, $t_issue_id ) ) {
 				throw new ClientException( 'Access denied to override reporter', ERROR_ACCESS_DENIED );
 			}
+		}
+
+		if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $t_issue_id, $this->reporterId ) ) {
+			throw new ClientException( "Reporter can't add notes", ERROR_ACCESS_DENIED );
 		}
 	}
 
@@ -227,7 +233,7 @@ class IssueNoteAddCommand extends Command {
 			$this->private,
 			BUGNOTE,
 			/* attr */ '',
-			/* user_id */ null,
+			/* user_id */ $this->reporterId,
 			/* send_email */ false );
 		if( !$t_note_id ) {
 			throw new ClientException( "Unable to add note", ERROR_GENERIC );
