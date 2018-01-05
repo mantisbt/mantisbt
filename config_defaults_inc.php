@@ -948,9 +948,9 @@ $g_fallback_language = 'english';
 
 /**
  * Name of one of google fonts available at https://fonts.google.com/
- * Chosen family must be part of in $g_font_family_choices_local_arr such that it works
+ * Chosen family must be part of in $g_font_family_choices_local such that it works
  * even if CDN option is disabled
- * @see $g_font_family_choices_local_arr
+ * @see $g_font_family_choices_local
  * @see $g_cdn_enabled
  * @global string $g_font_family
  */
@@ -959,9 +959,9 @@ $g_font_family = 'Open Sans';
 /**
  * List the google fonts that the users are allowed to choose from.
  * Google offers over 800 fonts. The list below is limited to the ones tested on MantisBT UI
- * @global array $g_font_family_choices_arr
+ * @global array $g_font_family_choices
  */
-$g_font_family_choices_arr = array(
+$g_font_family_choices = array(
 	'Amiko',
 	'Architects Daughter',
 	'Archivo Narrow',
@@ -997,9 +997,9 @@ $g_font_family_choices_arr = array(
 /**
  * List of fonts that are installed as part of MantisBT
  * This list is used when using CDN option is disabled
- * @global array $g_font_family_choices_local_arr
+ * @global array $g_font_family_choices_local
  */
-$g_font_family_choices_local_arr = array(
+$g_font_family_choices_local = array(
 	'Montserrat',
 	'Open Sans',
 	'Poppins'
@@ -4518,8 +4518,8 @@ $g_public_config_names = array(
 	'filter_custom_fields_per_row',
 	'filter_position',
 	'font_family',
-	'font_family_choices_arr',
-	'font_family_choices_local_arr',
+	'font_family_choices',
+	'font_family_choices_local',
 	'forward_year_count',
 	'from_email',
 	'from_name',
