@@ -23,31 +23,38 @@ require_api( 'user_api.php' );
 
 use Mantis\Exceptions\ClientException;
 
-/** SAMPLE
+/**
+ * Command data
+ * - In files, `error` and `size` are used only by web UI.
+ * - Reporter is optional, it is defaulted to logged in user.
+ * - View State defaults to default bugnote view status.
+ * - Time tracking is optional and defaults to 0.
+ *
+ * Sample:
 {
   "query": {
     "issue_id": 12345
   },
   "payload": {
-	"text": "This is a test issue note",
-	"view_state": {
-		"name": "private"
-	},
-	"reporter": {
-		"name": "vboctor"
-	},
-	"time_tracking": {
-		"duration": "00:45",
-	},
-	"files": [
-		{
-          "name": "filename.ext",
-          "type": "application/...",
-          "tmp_name": "/tmp/php/phpRELws8",
-          "error": 0,
-		  "size": 114
-		}
-	]
+    "text": "This is a test issue note",
+    "view_state": {
+      "name": "private"
+    },
+    "reporter": {
+      "name": "vboctor"
+    },
+    "time_tracking": {
+      "duration": "00:45",
+    },
+    "files": [
+      {
+        "name": "filename.ext",
+        "type": "application/...",
+        "tmp_name": "/tmp/php/phpRELws8",
+        "error": 0,
+        "size": 114
+      }
+    ]
   }
 }
 */
@@ -132,22 +139,17 @@ class IssueNoteAddCommand extends Command {
 		$this->issue = bug_get( $t_issue_id, true );
 		if( bug_is_readonly( $t_issue_id ) ) {
 			throw new ClientException(
-				sprintf( 'Issue %d is read-only.', $t_issue_id ),
+				sprintf( "Issue '%d' is read-only.", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
 				array( $t_issue_id ) );
 		}
 
 		$this->parseViewState();
-
-		if( $this->private ) {
-			if( !access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_issue_id ) ) {
-				throw new ClientException( 'access denied', ERROR_ACCESS_DENIED );
-			}
-		}
-
 		$this->parseFiles();
 
-		if( count( $this->files ) > 0 ) {
+		$t_files_included = !empty( $this->files );
+
+		if( $t_files_included ) {
 			# The UI hides the attach controls when the note is marked as private to avoid disclosure of
 			# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
 			# private attachments is implemented.
@@ -156,10 +158,6 @@ class IssueNoteAddCommand extends Command {
 					'Private notes with attachments not allowed',
 					ERROR_INVALID_FIELD_VALUE,
 					array( 'files' ) );
-			}
-
-			if( !file_allow_bug_upload( $this->issue->id ) ) {
-				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 			}
 		}
 
@@ -198,8 +196,34 @@ class IssueNoteAddCommand extends Command {
 			}
 		}
 
+		# Can reporter add notes?
 		if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $t_issue_id, $this->reporterId ) ) {
 			throw new ClientException( "Reporter can't add notes", ERROR_ACCESS_DENIED );
+		}
+
+		# Can reporter add private notes?
+		if( $this->private ) {
+			if( !access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_issue_id, $this->reporterId ) ) {
+				throw new ClientException( "Reporter can't add private notes", ERROR_ACCESS_DENIED );
+			}
+		}
+
+		# Can reporter attach files, if supplied?
+		if( $t_files_included ) {
+			if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
+				throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
+			}
+		}
+
+		# Can reporter add time tracking information?
+		if( $t_time_tracking_mins > 0 ) {
+			if( config_get( 'time_tracking_enabled' ) == OFF ) {
+				throw new ClientException( 'time tracking disabled', ERROR_ACCESS_DENIED );
+			}
+
+			if ( !access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_issue_id, $this->reporterId ) ) {
+				throw new ClientException( 'access denied for time tracking', ERROR_ACCESS_DENIED );
+			}
 		}
 	}
 

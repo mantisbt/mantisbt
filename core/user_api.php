@@ -883,7 +883,7 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
  *
  * @param array $p_user The user info.
  * @param boolean $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
- * @return user id
+ * @return integer user id
  * @throws ClientException
  */
 function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false ) {
