@@ -114,7 +114,8 @@ class BugnoteData {
 	public $note_type;
 
 	/**
-	 * ???
+	 * Used for storing list of recipients for a reminder truncated to
+	 * field length.
 	 */
 	public $note_attr;
 
