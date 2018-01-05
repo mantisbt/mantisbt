@@ -188,7 +188,10 @@ function bugnote_cache( BugnoteData $p_bugnote ) {
  */
 function bugnote_ensure_exists( $p_bugnote_id ) {
 	if( !bugnote_exists( $p_bugnote_id ) ) {
-		trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Issue note #$p_bugnote_id not found",
+			ERROR_BUGNOTE_NOT_FOUND,
+			array( $p_bugnote_id ) );
 	}
 }
 

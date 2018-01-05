@@ -236,8 +236,14 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
 	$t_issue_note_id = isset( $p_args['note_id'] ) ? $p_args['note_id'] : $p_request->getParam( 'note_id' );
 
-	$t_result = mc_issue_note_delete( '', '', $t_issue_note_id );
-	ApiObjectFactory::throwIfFault( $t_result );
+	$t_data = array(
+		'query' => array(
+			'id' => $t_issue_note_id,
+			'issue_id' => $t_issue_id )
+	);
+
+	$t_command = new IssueNoteDeleteCommand( $t_data );
+	$t_command->execute();
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
