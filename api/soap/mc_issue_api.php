@@ -1483,8 +1483,10 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 			$t_payload['reporter'] = array( 'id' => mci_get_user_id( $p_note['reporter'] ) );
 		}
 
-		if( isset( $p_note['time_tracking'] ) ) {
-			$t_payload['time_tracking'] = $p_note['time_tracking'];
+		if( isset( $p_note['time_tracking'] ) && is_numeric( $p_note['time_tracking'] ) ) {
+			$t_payload['time_tracking'] = array(
+				'duration' => db_minutes_to_hhmm( $p_note['time_tracking'] )
+			);
 		}
 
 		$t_data = array(
