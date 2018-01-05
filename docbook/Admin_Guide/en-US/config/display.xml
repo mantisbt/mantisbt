@@ -17,7 +17,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_font_family_choices_arr</term>
+			<term>$g_font_family_choices</term>
 			<listitem>
 				<para>Google font family list offered to the user to chose from. Font files are fetched from google
 					servers.
@@ -25,9 +25,9 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_font_family_choices_local_arr</term>
+			<term>$g_font_family_choices_local</term>
 			<listitem>
-				<para>This is a small subset of <emphasis>$g_font_family_choices_arr</emphasis> in which font
+				<para>This is a small subset of <emphasis>$g_font_family_choices</emphasis> in which font
 					files are part of MantisBT installation.
 				</para>
 			</listitem>
