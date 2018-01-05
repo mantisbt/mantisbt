@@ -1571,8 +1571,6 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
  * @return boolean true: success, false: failure
  */
 function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
@@ -1582,36 +1580,19 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 		return ApiObjectFactory::faultBadRequest( 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
 	}
 
-	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Issue note \'' . $p_issue_note_id . '\' does not exist.' );
-	}
-
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
-	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_reporter_id = bugnote_get_field( $p_issue_note_id, 'reporter_id' );
+	$t_data = array(
+		'query' => array( 'id' => $p_issue_note_id )
+	);
 
-	# mirrors check from bugnote_delete.php
-	if( $t_user_id == $t_reporter_id ) {
-		$t_threshold_config_name =  'bugnote_user_delete_threshold';
-	} else {
-		$t_threshold_config_name =  'delete_bugnote_threshold';
-	}
-
-	if( !access_has_bugnote_level( config_get( $t_threshold_config_name ), $p_issue_note_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	if( bug_is_readonly( $t_issue_id ) ) {
-		return mci_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
-	}
-
-	log_event( LOG_WEBSERVICE, 'deleting bugnote id \'' . $p_issue_note_id . '\'' );
-	return bugnote_delete( $p_issue_note_id );
+	$t_command = new IssueNoteDeleteCommand( $t_data );
+	$t_command->execute();
+	return true;
 }
 
 /**
