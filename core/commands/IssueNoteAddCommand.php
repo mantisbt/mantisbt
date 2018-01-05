@@ -60,7 +60,7 @@ use Mantis\Exceptions\ClientException;
 */
 
 /**
- * A command that adds user to monitor an issue.
+ * A command that adds an issue note.
  */
 class IssueNoteAddCommand extends Command {
 	/**
@@ -230,7 +230,7 @@ class IssueNoteAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns integer The id of the added note.
+	 * @returns array Command response
 	 */
 	protected function process() {
 		if( $this->issue->project_id != helper_get_current_project() ) {

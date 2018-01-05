@@ -101,7 +101,7 @@ class MonitorAddCommand extends Command {
 	/**
 	 * Process the command.
 	 *
-	 * @returns null No output from this command.
+	 * @returns array Command response
 	 */
 	protected function process() {
 		if( $this->projectId != helper_get_current_project() ) {
@@ -116,7 +116,7 @@ class MonitorAddCommand extends Command {
 			bug_monitor( $this->query( 'issue_id' ), $t_user_id );
 		}
 
-		return null;
+		return array();
 	}
 }
 
