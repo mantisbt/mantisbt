@@ -880,18 +880,21 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 
 /**
  * Get a user id given an array that may have id, name, real_name, email, or name_or_realname.
- * If user id is specified, it will returned with validating that it exists.
- * This is to allow for calling APIs to decide whether existence is needed or not,
- * for example when updating an issue that already had a deleted user as the reporter,
- * it is OK to keep such reference as long as it doesn't change.
  *
  * @param array $p_user The user info.
+ * @param boolean $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
  * @return user id
  * @throws ClientException
  */
-function user_get_id_by_user_info( array $p_user ) {
+function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false ) {
 	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
 		$t_user_id = $p_user['id'];
+		if( $p_throw_if_id_not_found && !user_exists( $t_user_id ) ) {
+			throw new ClientException(
+				sprintf( "User with id '%d' doesn't exist", $t_user_id ),
+				ERROR_USER_BY_ID_NOT_FOUND,
+				array( $t_user_id ) );
+		}
 	} else if( isset( $p_user['name'] ) && !is_blank( $p_user['name'] ) ) {
 		$t_user_id = user_get_id_by_name( $p_user['name'], /* throw */ true );
 	} else if( isset( $p_user['email'] ) && !is_blank( $p_user['email'] ) ) {
