@@ -85,11 +85,11 @@ $t_user = user_get_row( $f_user_id );
 $f_username	= trim( $f_username );
 
 $t_old_username = $t_user['username'];
+$t_old_access_level = $t_user['access_level'];
 
 if( $f_send_email_notification ) {
 	$t_old_realname = $t_user['realname'];
 	$t_old_email = $t_user['email'];
-	$t_old_access_level = $t_user['access_level'];
 }
 
 # Ensure that the account to be updated is of equal or lower access to the
@@ -148,8 +148,9 @@ if( user_is_administrator( $f_user_id ) &&
 
 # Project specific access rights override global levels, hence, for users who are changed
 # to be administrators, we have to remove project specific rights.
-if( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_user_id ) ) ) {
-	user_delete_project_specific_access_levels( $f_user_id );
+if( ( $f_access_level != $t_old_access_level ) && ( $f_access_level >= $t_admin_threshold ) &&
+    ( !user_is_administrator( $f_user_id ) ) ) {
+    user_delete_project_specific_access_levels( $f_user_id );
 }
 
 # if the user is already protected and the admin is not removing the
