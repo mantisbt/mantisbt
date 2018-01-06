@@ -990,6 +990,22 @@ function file_ensure_uploaded( array $p_file ) {
 }
 
 /**
+ * Return instance of fileinfo class if enabled in php
+ * @return finfo instance of finfo class.
+ */
+function file_create_finfo() {
+	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
+
+	if( is_blank( $t_info_file ) ) {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
+	}
+
+	return $t_finfo;
+}
+
+/**
  * Get mime type for the specified file.
  *
  * @param string $p_file_path The file path.
@@ -1000,14 +1016,7 @@ function file_get_mime_type( $p_file_path ) {
 		return false;
 	}
 
-	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
-
-	if( is_blank( $t_info_file ) ) {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-	}
-
+	$t_finfo = file_create_finfo();
 	return $t_finfo->file( $p_file_path );
 }
 
@@ -1018,14 +1027,7 @@ function file_get_mime_type( $p_file_path ) {
  * @return boolean|string The mime type or false on failure.
  */
 function file_get_mime_type_for_content( $p_content ) {
-	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
-
-	if( is_blank( $t_info_file ) ) {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-	}
-
+	$t_finfo = file_create_finfo();
 	return $t_finfo->buffer( $p_content );
 }
 
