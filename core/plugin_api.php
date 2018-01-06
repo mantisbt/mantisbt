@@ -32,6 +32,7 @@
  * @uses database_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
@@ -44,6 +45,7 @@ require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
@@ -214,13 +216,9 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	$t_content_type = '';
-	$t_finfo = finfo_get_if_available();
-
-	if( $t_finfo ) {
-		$t_file_info_type = $t_finfo->file( $t_file_path );
-		if( $t_file_info_type !== false ) {
-			$t_content_type = $t_file_info_type;
-		}
+	$t_file_info_type = file_get_mime_type( $t_file_path );
+	if( $t_file_info_type !== false ) {
+		$t_content_type = $t_file_info_type;
 	}
 
 	# allow overriding the content type for specific text and image extensions
