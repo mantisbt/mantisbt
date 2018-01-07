@@ -59,7 +59,7 @@ class MonitorAddCommand extends Command {
 		$this->projectId = bug_get_field( $t_issue_id, 'project_id' );
 		$t_logged_in_user = auth_get_current_user_id();
 
-		$t_users = $this->payload( 'users', array( 'id' => $t_logged_in_user ) );
+		$t_users = $this->payload( 'users', array( array( 'id' => $t_logged_in_user ) ) );
 		if( !is_array( $t_users ) ) {
 			throw new ClientException( 'Invalid users array', ERROR_INVALID_FIELD_VALUE, array( 'users' ) );
 		}
