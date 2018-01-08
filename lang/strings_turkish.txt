@@ -44,6 +44,7 @@
  * @author Erdemaslancan
  * @author Gorizon
  * @author HakanIST
+ * @author Hedda
  * @author Hedda Gabler
  * @author Incelemeelemani
  * @author Joseph
@@ -1184,6 +1185,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Bu isimde bir proje zaten var. L
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Geçersiz bir proje adı belirtildi. Proje adları boş olamaz.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = '"%1$s" adında bir kullanıcı bulunamadı.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '"%1$d" no\'lu kullanıcı bulunamadı.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = '"%1$s" adında bir e-posta bulunamadı.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = '"%1$s" adında gerçek bir kullanıcı bulunamadı.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Tarayıcınız tarafından saklanan giriş bilgileri geçersiz. Hesabınız silinmiş olabilir.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Bu kullanıcı için tercihler bulunamadı.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Haber öğesi bulunamadı.';
