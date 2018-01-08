@@ -389,7 +389,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		</td>
 		<td>
 			<select id="font_family" name="font_family" class="input-sm">
-				<?php print_font_option_list( config_get( 'font_family' ) ) ?>
+				<?php print_font_option_list( config_get( 'font_family',null, $p_user_id, ALL_PROJECTS ) ) ?>
 			</select>
 		</td>
 	</tr>
