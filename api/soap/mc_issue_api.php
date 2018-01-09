@@ -620,8 +620,12 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 			$t_bugnote['attr'] = $p_bugnote_row->note_attr;
 		}
 
-		if( isset( $t_bugnote['time_tracking'] ) && ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) ) {
-			unset( $t_bugnote['time_tracking'] );
+		if( isset( $t_bugnote['time_tracking'] ) ) {
+			if ( $t_bugnote['time_tracking'] == 0 || $t_type != 'timelog' ) {
+				unset( $t_bugnote['time_tracking'] );
+			} else {
+				$t_bugnote['time_tracking'] = array( 'duration' => db_minutes_to_hhmm( $t_bugnote['time_tracking'] ) );
+			}	
 		}
 
 		$t_bugnote['created_at'] = $t_created_at;
