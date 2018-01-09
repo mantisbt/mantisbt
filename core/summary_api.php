@@ -210,57 +210,73 @@ function summary_print_by_enum( $p_enum ) {
 		
 		summary_helper_build_bugcount( $t_cache, $t_enum, $t_status, $t_bugcount );
 	}
+
+	switch( $p_enum ) {
+		case 'status':
+			$t_filter_property = FILTER_PROPERTY_STATUS;
+			break;
+		case 'severity':
+			$t_filter_property = FILTER_PROPERTY_SEVERITY;
+			break;
+		case 'resolution':
+			$t_filter_property = FILTER_PROPERTY_RESOLUTION;
+			break;
+		case 'priority':
+			$t_filter_property = FILTER_PROPERTY_PRIORITY;
+			break;
+		default:
+			# Unknown Enum type
+			trigger_error( ERROR_GENERIC, ERROR );
+	}
+
 	foreach( $t_cache as $t_enum => $t_item) {
 		# Build up the hyperlinks to bug views
-		$t_bug_link = '';
 		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
 		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
 		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
-		switch( $p_enum ) {
-			case 'status':
-				$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_enum;
-				break;
-			case 'severity':
-				$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_SEVERITY . '=' . $t_enum;
-				break;
-			case 'resolution':
-				$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $t_enum;
-				break;
-			case 'priority':
-				$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_PRIORITY . '=' . $t_enum;
-				break;
-		}
+		$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;'
+			. $t_filter_property . '=' . $t_enum;
 
 		if( !is_blank( $t_bug_link ) ) {
 			$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 			$t_closed_val = config_get( 'bug_closed_status_threshold' );
 			
 			if( 0 < $t_bugs_open ) {
-				$t_bugs_open = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_val . '">' . $t_bugs_open . '</a>';
+				$t_bugs_open = $t_bug_link
+					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_resolved_val . '">'
+					. $t_bugs_open . '</a>';
 			} else {
 				if( ( 'status' == $p_enum ) && ( $t_enum >= $t_resolved_val ) ) {
 					$t_bugs_open = '-';
 				}
 			}
 			if( 0 < $t_bugs_resolved ) {
-				$t_bugs_resolved = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">' . $t_bugs_resolved . '</a>';
+				$t_bugs_resolved = $t_bug_link
+					. '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val
+					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">'
+					. $t_bugs_resolved . '</a>';
 			} else {
 				if( ( 'status' == $p_enum ) && (( $t_enum < $t_resolved_val ) || ( $t_enum >= $t_closed_val ) ) ) {
 					$t_bugs_resolved = '-';
 				}
 			}
 			if( 0 < $t_bugs_closed ) {
-				$t_bugs_closed = $t_bug_link . '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_closed . '</a>';
+				$t_bugs_closed = $t_bug_link
+					. '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val
+					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">'
+					. $t_bugs_closed . '</a>';
 			} else {
 				if( ( 'status' == $p_enum ) && ( $t_enum < $t_closed_val ) ) {
 					$t_bugs_closed = '-';
 				}
 			}
 			if( 0 < $t_bugs_total ) {
-				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
+				$t_bugs_total = $t_bug_link
+					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '='
+					. META_FILTER_NONE . '">' . $t_bugs_total . '</a>';
 			}	
 			if( 'status' == $p_enum )  $t_bugs_ratio[0] = '-';		
 		}
