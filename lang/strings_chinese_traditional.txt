@@ -1258,6 +1258,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '不允許此檔案類型。';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '該目錄不存在。 請檢查專案設定。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '此專案名稱已存在。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必填欄位 \'%1$s\' 是空值。 請重新檢查你輸入的資料。';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '用於「%1$s」的無效值';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '此帳號目前被保護。 您不被允許執行此作業直到帳號保護解除之前。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '拒絕存取。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '檔案上傳失敗，MantisBT 無法讀取檔案。 請檢查該專案設定。';

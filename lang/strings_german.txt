@@ -1269,6 +1269,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dieser Dateityp ist nicht erlaubt.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis existiert nicht. Überprüfen Sie die Einstellungen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ein Projekt mit diesem Namen ist bereits vorhanden.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ein notwendiges Feld „%1$s“ war leer. Überprüfen Sie Ihre Eingabe.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ungültiger Wert für „%1$s“';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dieses Konto ist geschützt. Sie können nicht darauf zugreifen, bevor der Schutz aufgehoben ist.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Zugriff verweigert.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dateiübertragung fehlgeschlagen. Datei konnte nicht von MantisBT gelesen werden. Bitte prüfe die Projekteinstellungen.';

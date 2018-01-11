@@ -1264,6 +1264,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = '此类型的文件不允许上传';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '目录不存在；请检查项目设置。';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '已经存在一个同名的项目。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '字段“%1$s”是必须填写的，不能为空白，请重新填写。';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '用于“%1$s”的值无效';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '该帐号设置为被保护状态，解除保护前你不能使用该账号。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '无权访问。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '文件上传失败，MantisBT 系统无法读取文件；请检查项目设置。';

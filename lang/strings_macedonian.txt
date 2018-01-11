@@ -1249,6 +1249,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Тој тип на податотеки 
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Директориумот не постои. Проверете ги проектните нагодувања.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Веќе постои проект со тоа име.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Неопходното поле „%1$s“ е празно. Проверете дали сè ви е пополнето како што треба.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Неважечка вредност за „%1$s“';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Сметката е заштитена. Немате дозвола за пристап сè додека заштитата не се отстрани.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Пристапот е одбиен.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Подигањето на податотеката не успеа. Податотеката не е читлива за MantisBT. Проверете ги проектните нагодувања.';

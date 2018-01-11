@@ -1258,6 +1258,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de ficheiro não é permitido.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A pasta não existe. Por favor verifique as definições do projeto.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'O campo necessário "%1$s" estava vazio. Por favor, verifique novamente as entradas.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor inválido de \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para aceder a isto até que a proteção seja removida.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Carregamento de ficheiro mal-sucedido. Ficheiro não é legível pelo MantisBT. Por favor verifique as definições do projeto.';
