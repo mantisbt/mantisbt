@@ -118,7 +118,8 @@ class IssueNoteAddCommand extends Command {
 	 */
 	function validate() {
 		# Validate issue note type
-		switch( $this->payload( 'type', 'note' ) ) {
+		$t_type = $this->payload( 'type', 'note' );
+		switch( $t_type ) {
 			case 'note':
 			case 'timelog':
 				# nothing to do here, the command will always set the
