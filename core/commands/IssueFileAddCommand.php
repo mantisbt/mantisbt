@@ -104,10 +104,10 @@ class IssueFileAddCommand extends Command {
 		$t_files_included = !empty( $this->files );
 
 		if( !$t_files_included ) {
-            throw new ClientException(
-                'Files not provided',
-                ERROR_INVALID_FIELD_VALUE,
-                array( 'files' ) );
+			throw new ClientException(
+				'Files not provided',
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'files' ) );
 		}
 
 		$this->user_id = auth_get_current_user_id();
@@ -131,9 +131,9 @@ class IssueFileAddCommand extends Command {
 		}
 
 		# Can reporter attach files
-        if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
-            throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
-        }
+		if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
+			throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
+		}
 	}
 
 	/**
@@ -151,7 +151,7 @@ class IssueFileAddCommand extends Command {
 		}
 
 		# Handle the file upload
-        file_attach_files( $this->issue->id, $this->files );
+		file_attach_files( $this->issue->id, $this->files );
 
 		return array();
 	}
