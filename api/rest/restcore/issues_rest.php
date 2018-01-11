@@ -49,6 +49,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->post( '/{id}/notes', 'rest_issue_note_add' );
 	$g_app->delete( '/{id}/notes/{note_id}/', 'rest_issue_note_delete' );
 	$g_app->delete( '/{id}/notes/{note_id}', 'rest_issue_note_delete' );
+
+	# Files
+	$g_app->post( '/{id}/files/', 'rest_issue_file_add' );
+	$g_app->post( '/{id}/files', 'rest_issue_file_add' );
 });
 
 /**
@@ -163,6 +167,51 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
 		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, null ) );
+}
+
+/**
+ * Add issue file.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id ),
+		'payload' => $p_request->getParsedBody(),
+	);
+
+	if( isset( $t_data['payload']['files'] ) && is_array( $t_data['payload']['files'] ) ) {
+		foreach( $t_data['payload']['files'] as &$t_file ) {
+			if( !isset( $t_file['content'] ) ) {
+				throw new ClientException(
+					'File content not set',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'files' ) );
+			}
+
+			$t_raw_content = base64_decode( $t_file['content'] );
+
+			do {
+				$t_tmp_file = realpath( sys_get_temp_dir() ) . '/' . uniqid( 'mantisbt-file' );
+			} while( file_exists( $t_tmp_file ) );
+	
+			file_put_contents( $t_tmp_file, $t_raw_content );
+			$t_file['tmp_name'] = $t_tmp_file;
+			$t_file['size'] = filesize( $t_tmp_file );
+			$t_file['browser_upload'] = false;
+			unset( $t_file['content'] );
+		}
+	}
+
+	$t_command = new IssueFileAddCommand( $t_data );
+	$t_command_response = $t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue File(s) Attached" );
 }
 
 /**
