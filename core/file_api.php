@@ -951,7 +951,9 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
  */
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
-		trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
+		throw new ServiceException(
+			'Upload folder not valid',
+			ERROR_FILE_INVALID_UPLOAD_PATH );
 	}
 }
 
