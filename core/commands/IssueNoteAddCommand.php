@@ -31,33 +31,33 @@ use Mantis\Exceptions\ClientException;
  * - Time tracking is optional and defaults to 0.
  *
  * Sample:
-{
-  "query": {
-    "issue_id": 12345
-  },
-  "payload": {
-    "text": "This is a test issue note",
-    "view_state": {
-      "name": "private"
-    },
-    "reporter": {
-      "name": "vboctor"
-    },
-    "time_tracking": {
-      "duration": "00:45",
-    },
-    "files": [
-      {
-        "name": "filename.ext",
-        "type": "application/...",
-        "tmp_name": "/tmp/php/phpRELws8",
-        "error": 0,
-        "size": 114
-      }
-    ]
-  }
-}
-*/
+ * {
+ *   "query": {
+ *     "issue_id": 12345
+ *   },
+ *   "payload": {
+ *     "text": "This is a test issue note",
+ *     "view_state": {
+ *       "name": "private"
+ *     },
+ *     "reporter": {
+ *       "name": "vboctor"
+ *     },
+ *     "time_tracking": {
+ *       "duration": "00:45",
+ *     },
+ *     "files": [
+ *       {
+ *         "name": "filename.ext",
+ *         "type": "application/...",
+ *         "tmp_name": "/tmp/php/phpRELws8",
+ *         "error": 0,
+ *         "size": 114
+ *       }
+ *     ]
+ *   }
+ * }
+ */
 
 /**
  * A command that adds an issue note.
