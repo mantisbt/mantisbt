@@ -29,26 +29,26 @@ use Mantis\Exceptions\ClientException;
  * - Reporter is optional, it is defaulted to logged in user.
  *
  * Sample:
-{
-  "query": {
-    "issue_id": 12345
-  },
-  "payload": {
-    "reporter": {
-      "name": "vboctor"
-    },
-    "files": [
-      {
-        "name": "filename.ext",
-        "type": "application/...",
-        "tmp_name": "/tmp/php/phpRELws8",
-        "error": 0,
-        "size": 114
-      }
-    ]
-  }
-}
-*/
+ * {
+ *   "query": {
+ *     "issue_id": 12345
+ *   },
+ *   "payload": {
+ *     "reporter": {
+ *       "name": "vboctor"
+ *     },
+ *     "files": [
+ *       {
+ *         "name": "filename.ext",
+ *         "type": "application/...",
+ *         "tmp_name": "/tmp/php/phpRELws8",
+ *         "error": 0,
+ *         "size": 114
+ *       }
+ *     ]
+ *   } 
+ * }
+ */
 
 /**
  * A command that adds an issue attachment.
