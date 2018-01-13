@@ -89,8 +89,11 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 
 	if( !$t_user_row ) {
 		if( $p_trigger_errors ) {
-			error_parameters( (integer)$p_user_id );
-			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+			throw new ClientException(
+				sprintf( "User id '%d' not found.", (integer)$p_user_id ),
+				ERROR_USER_BY_ID_NOT_FOUND,
+				array( (integer)$p_user_id )
+			);
 		}
 
 		return false;
@@ -488,7 +491,9 @@ function user_is_anonymous( $p_user_id ) {
  */
 function user_ensure_unprotected( $p_user_id ) {
 	if( user_is_protected( $p_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+		throw new ClientException(
+			'User protected.',
+			ERROR_PROTECTED_ACCOUNT );
 	}
 }
 
