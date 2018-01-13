@@ -256,7 +256,9 @@ function user_is_name_unique( $p_username ) {
  */
 function user_ensure_name_unique( $p_username ) {
 	if( !user_is_name_unique( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+		throw new ClientException(
+			sprintf( "Username '%s' already used.", $p_username ),
+			ERROR_USER_NAME_NOT_UNIQUE );
 	}
 }
 
@@ -304,17 +306,18 @@ function user_ensure_email_unique( $p_email, $p_user_id = null ) {
 	}
 
 	if( !user_is_email_unique( $p_email, $p_user_id ) ) {
-		trigger_error( ERROR_USER_EMAIL_NOT_UNIQUE, ERROR );
+		throw new ClientException(
+			sprintf( "Email '%s' already used.", $p_email ),
+			ERROR_USER_EMAIL_NOT_UNIQUE );
 	}
 }
 
 /**
- * Check if the realname is a valid username (does not account for uniqueness)
- * Return 0 if it is invalid, The number of matches + 1
+ * Check if realname is specified, a unique real name, and doesn't match a username of another user.
  *
  * @param string $p_username The username to check.
  * @param string $p_realname The realname to check.
- * @return integer
+ * @return integer 0 realname matches another user's username, 1 no conflicts, >1 realname not unique.
  */
 function user_is_realname_unique( $p_username, $p_realname ) {
 	if( is_blank( $p_realname ) ) {
@@ -369,8 +372,11 @@ function user_is_realname_unique( $p_username, $p_realname ) {
  * @return void
  */
 function user_ensure_realname_unique( $p_username, $p_realname ) {
-	if( 1 > user_is_realname_unique( $p_username, $p_realname ) ) {
-		trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
+	$t_result = user_is_realname_unique( $p_username, $p_realname );
+	if( $t_result == 0 || $t_result > 1 ) {
+		throw new ClientException(
+			sprintf( "Realname '%s' is not unique", $p_realname ),
+			ERROR_USER_REAL_MATCH_USER );
 	}
 }
 
@@ -407,7 +413,9 @@ function user_is_name_valid( $p_username ) {
  */
 function user_ensure_name_valid( $p_username ) {
 	if( !user_is_name_valid( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Invalid username '%s'", $p_username ),
+			ERROR_USER_NAME_INVALID );
 	}
 }
 
@@ -585,6 +593,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	user_ensure_email_unique( $p_email );
 	user_ensure_realname_unique( $p_username, $p_realname );
 	email_ensure_valid( $p_email );
+	email_ensure_not_disposable( $p_email );
 
 	$t_cookie_string = auth_generate_unique_cookie_string();
 
