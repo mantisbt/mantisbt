@@ -83,7 +83,9 @@ class UserCreateCommand extends Command {
 	 */
 	function validate() {
         # Ensure user has access level to create users
-        access_ensure_global_level( config_get_global( 'manage_user_threshold' ) );
+        if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+            throw new ClientException( 'Access denied to create users', ERROR_ACCESS_DENIED );
+        }
 
         # Access Level
         $this->access_level = access_parse_array(
@@ -93,17 +95,15 @@ class UserCreateCommand extends Command {
 
         # Don't allow the creation of accounts with access levels higher than that of
         # the user creating the account.
-        access_ensure_global_level( $this->access_level );
+        if( !access_has_global_level( $this->access_level ) ) {
+            throw new ClientException(
+                'Access denied to create users with higher access level',
+                ERROR_ACCESS_DENIED );
+        }
 
         # Username and Real Name
         $this->username = trim( $this->payload( 'username', '' ) );
-        if( is_blank( $this->username ) ) {
-            throw new ClientException( 'username must be specified', ERROR_EMPTY_FIELD );
-        }
-
         $this->realname = string_normalize( $this->payload( 'real_name', '' ) );
-        user_ensure_name_valid( $this->username );
-        user_ensure_realname_unique( $this->username, $this->realname );
 
         # Protected and Enabled Flags
         $this->protected = $this->payload( 'protected', false );
@@ -111,7 +111,6 @@ class UserCreateCommand extends Command {
 
         # Email
         $this->email = trim( $this->payload( 'email', '' ) );
-        email_ensure_not_disposable( $this->email );
 
         # Password
         $this->password = $this->payload( 'password', '' );
