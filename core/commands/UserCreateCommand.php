@@ -27,7 +27,7 @@ use Mantis\Exceptions\ClientException;
  *
  * Sample:
  * {
- *   "data": {
+ *   "payload": {
  *     "username": "vboctor",
  *     "password": "p@ssw0rd",
  *     "real_name": "Victor Boctor",
@@ -39,39 +39,39 @@ use Mantis\Exceptions\ClientException;
  * }
  */
 class UserCreateCommand extends Command {
-    /**
-     * @var string user name
-     */
-    private $username;
+	/**
+	 * @var string user name
+	 */
+	private $username;
 
-    /**
-     * @var string user real name
-     */
-    private $realname;
+	/**
+	 * @var string user real name
+	 */
+	private $realname;
 
-    /**
-     * @var string user email address
-     */
-    private $email;
+	/**
+	 * @var string user email address
+	 */
+	private $email;
 
-    /**
-     * @var string user password
-     */
-    private $password;
+	/**
+	 * @var string user password
+	 */
+	private $password;
 
-    /**
-     * @var boolean user can edit their information.  Usually, true for shared accounts.
-     */
-    private $protected;
+	/**
+	 * @var boolean user can edit their information.  Usually, true for shared accounts.
+	 */
+	private $protected;
 
-    /**
-     * @var boolean user account enabled for login.
-     */
-    private $enabled;
+	/**
+	 * @var boolean user account enabled for login.
+	 */
+	private $enabled;
 
 	/**
 	 * Constructor
-     *
+	 *
 	 * @param array $p_data The command data.
 	 */
 	function __construct( array $p_data ) {
@@ -82,46 +82,46 @@ class UserCreateCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-        # Ensure user has access level to create users
-        if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
-            throw new ClientException( 'Access denied to create users', ERROR_ACCESS_DENIED );
-        }
+		# Ensure user has access level to create users
+		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+			throw new ClientException( 'Access denied to create users', ERROR_ACCESS_DENIED );
+		}
 
-        # Access Level
-        $this->access_level = access_parse_array(
-            $this->payload(
-                'access_level',
-                array( 'id' => config_get_global( 'default_new_account_access_level' ) ) ) );
+		# Access Level
+		$this->access_level = access_parse_array(
+			$this->payload(
+				'access_level',
+				array( 'id' => config_get_global( 'default_new_account_access_level' ) ) ) );
 
-        # Don't allow the creation of accounts with access levels higher than that of
-        # the user creating the account.
-        if( !access_has_global_level( $this->access_level ) ) {
-            throw new ClientException(
-                'Access denied to create users with higher access level',
-                ERROR_ACCESS_DENIED );
-        }
+		# Don't allow the creation of accounts with access levels higher than that of
+		# the user creating the account.
+		if( !access_has_global_level( $this->access_level ) ) {
+			throw new ClientException(
+				'Access denied to create users with higher access level',
+				ERROR_ACCESS_DENIED );
+		}
 
-        # Username and Real Name
-        $this->username = trim( $this->payload( 'username', '' ) );
-        $this->realname = string_normalize( $this->payload( 'real_name', '' ) );
+		# Username and Real Name
+		$this->username = trim( $this->payload( 'username', '' ) );
+		$this->realname = string_normalize( $this->payload( 'real_name', '' ) );
 
-        # Protected and Enabled Flags
-        $this->protected = $this->payload( 'protected', false );
-        $this->enabled = $this->payload( 'enabled', true );
+		# Protected and Enabled Flags
+		$this->protected = $this->payload( 'protected', false );
+		$this->enabled = $this->payload( 'enabled', true );
 
-        # Email
-        $this->email = trim( $this->payload( 'email', '' ) );
+		# Email
+		$this->email = trim( $this->payload( 'email', '' ) );
 
-        # Password
-        $this->password = $this->payload( 'password', '' );
-        if( ( ON == config_get( 'send_reset_password' ) ) &&
-            ( ON == config_get( 'enable_email_notification' ) ) ) {
-            # Check code will be sent to the user directly via email. Dummy password set to random
-            # Create random password
-            $this->password = auth_generate_random_password();
-        } else {
-            $this->password = $this->payload( 'password', auth_generate_random_password() );
-        }
+		# Password
+		$this->password = $this->payload( 'password', '' );
+		if( ( ON == config_get( 'send_reset_password' ) ) &&
+		    ( ON == config_get( 'enable_email_notification' ) ) ) {
+			# Check code will be sent to the user directly via email. Dummy password set to random
+			# Create random password
+			$this->password = auth_generate_random_password();
+		} else {
+			$this->password = $this->payload( 'password', auth_generate_random_password() );
+		}
 	}
 
 	/**
@@ -130,28 +130,26 @@ class UserCreateCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
-        # Need to send the user creation mail in the tracker language, not in the creating admin's language
-        # Park the current language name until the user has been created
-        lang_push( config_get_global( 'default_language' ) );
+		# Need to send the user creation mail in the tracker language, not in the creating admin's language
+		# Park the current language name until the user has been created
+		lang_push( config_get_global( 'default_language' ) );
 
-        # create the user
-        $t_admin_name = user_get_name( auth_get_current_user_id() );
-        user_create(
-            $this->username,
-            $this->password,
-            $this->email,
-            $this->access_level,
-            $this->protected,
-            $this->enabled,
-            $this->realname,
-            $t_admin_name );
+		# create the user
+		$t_admin_name = user_get_name( auth_get_current_user_id() );
+		user_create(
+			$this->username,
+			$this->password,
+			$this->email,
+			$this->access_level,
+			$this->protected,
+			$this->enabled,
+			$this->realname,
+			$t_admin_name );
 
-        # set language back to user language
-        lang_pop();
+		# set language back to user language
+		lang_pop();
 
-        return array(
-            'id' => user_get_id_by_name( $this->username )
-        );
+		return array( 'id' => user_get_id_by_name( $this->username ) );
 	}
 }
 
