@@ -54,6 +54,8 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 # @global array $g_cache_access_matrix
 $g_cache_access_matrix = array();
 
@@ -858,4 +860,38 @@ function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
 			$p_bug->id );
 
 	return $t_can_view_handler;
+}
+
+/**
+ * Parse access level reference array parsed from json.
+ *
+ * @param array $p_access The access level
+ * @return integer The access level
+ * @throws ClientException Access level is invalid or not specified.
+ */
+function access_parse_array( array $p_access ) {
+	$t_access_levels_enum = config_get( 'access_levels_enum_string' );
+	$t_access_level = false;
+
+	if( isset( $p_access['id'] ) ) {
+		$t_access_level = (int)$p_access['id'];
+
+		# Make sure the provided id is valid
+		if( !MantisEnum::hasValue( $t_access_levels_enum, $t_access_level ) ) {
+			$t_access_level = false;
+		}
+	}
+
+	if( isset( $p_access['name'] ) ) {
+		$t_access_level = MantisEnum::getValue( $t_access_levels_enum, $p_access['name'] );
+	}
+
+	if( $t_access_level === false ) {
+		throw new ClientException(
+			'Invalid access level',
+			ERROR_INVALID_FIELD_VALUE,
+			array( 'access_level' ) );
+	}
+
+	return $t_access_level;
 }
