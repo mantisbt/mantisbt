@@ -153,7 +153,11 @@ print_summary_submenu();
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
+			<?php if( 1 == count( $t_project_ids ) ) { ?>
+				<th class="width-35"><?php echo lang_get( 'email_project' ) ?></th>
+			<?php } else { ?>
 				<th class="width-35"><?php echo lang_get( 'by_project' ) ?></th>
+			<?php } ?>
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
