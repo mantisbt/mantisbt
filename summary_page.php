@@ -111,7 +111,7 @@ $t_largest_diff 	= number_format( $t_largest_diff / SECONDS_PER_DAY, 2 );
 $t_total_time		= number_format( $t_total_time / SECONDS_PER_DAY, 2 );
 $t_average_time 	= number_format( $t_average_time / SECONDS_PER_DAY, 2 );
 
-$t_summary_header_arr = preg_split( '/[\)\/\(]/', lang_get( 'summary_header' ), -1, PREG_SPLIT_NO_EMPTY );
+$t_summary_header_arr = explode( '/', lang_get( 'summary_header' ) );
 
 $t_summary_header = '';
 foreach ( $t_summary_header_arr as $t_summary_header_name ) {

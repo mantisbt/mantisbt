@@ -1193,7 +1193,7 @@ $s_total_time = 'Total time';
 $s_developer_stats = 'Developer Stats';
 $s_reporter_stats = 'Reporter Stats';
 $s_orct = '(open/resolved/closed/total)';
-$s_summary_header = '(open/resolved/closed/total/resolved ratio/ratio)';
+$s_summary_header = 'open/resolved/closed/total/resolved ratio/ratio';
 
 # view_all_bug_page.php
 $s_any = 'any';
