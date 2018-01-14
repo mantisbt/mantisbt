@@ -56,7 +56,7 @@ class UserDeleteCommand extends Command {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
-		# Ensure user has access level to create users
+		# Ensure user has access level to delete users
 		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
 			throw new ClientException( 'Access denied to delete users', ERROR_ACCESS_DENIED );
 		}
