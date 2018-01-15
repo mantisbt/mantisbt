@@ -41,6 +41,7 @@
  * @author Christian List
  * @author Joedalton
  * @author Kaare
+ * @author Kenn.jensen
  * @author Peter Alberti
  * @author Qaqqalik
  * @author Tjernobyl
@@ -1251,6 +1252,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Denne filtype er ikke tilladt';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Der findes allerede et projekt med dette navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Et påkrævet felt "%1$s" er ikke udfyldt. Ret venligst dette.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ugyldig værdi for \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Denne konto er beskyttet. Du har ikke adgang før kontoens beskyttelse er ophævet.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Adgang nægtet.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Overførslen af filen mislykkedes. Filen kan ikke læses af MantisBT. Kontrollér indstillingerne for projektet.';

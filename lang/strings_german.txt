@@ -355,6 +355,7 @@ $s_email_on_priority_change = 'E-Mail bei Prioritätswechsel';
 $s_email_bugnote_limit = 'E-Mail Notiz Limit';
 $s_email_full_issue_details = 'Vollständige Eintragsdetails als E-Mail senden';
 $s_language = 'Sprache';
+$s_font_family = 'Schriftfamilie';
 $s_update_prefs_button = 'Einstellungen aktualisieren';
 $s_reset_prefs_button = 'Einstellungen zurücksetzen';
 $s_timezone = 'Zeitzone';

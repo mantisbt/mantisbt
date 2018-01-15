@@ -42,6 +42,7 @@
  * @author Alexey Chumakov
  * @author Amdei
  * @author DCamer
+ * @author Edible Melon
  * @author Eleferen
  * @author Eroha
  * @author EugeneZelenko
@@ -1268,6 +1269,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Этот тип файлов запре�
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Каталог не существует. Проверьте настройки проекта.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект с таким названием уже существует.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Обязательное поле \'%1$s\' не заполнено. Пожалуйста, проверьте правильность заполнения.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Неверное значение для \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Эта учетная запись защищена. Вы не сможете получить к ней доступ, пока защита не снята.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Доступ запрещён.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Загрузка файла не удалась. Файл недоступен для MantisBT. Проверьте настройки проекта.';

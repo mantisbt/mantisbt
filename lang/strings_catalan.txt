@@ -1153,6 +1153,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Aquest tipus d\'arxiu no està permès.'
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'El directori no existeix. Si us plau revisi la configuració del projecte.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ja existeix un projecte amb aquest nom.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'El camp requerit "%1$s" està buit. Si us plau, comprovi les dades.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor no vàlid per a «%1$s»';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Aquest compte està protegit. No hi té accés fins que la protecció del compte hagi estat retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accés denegat.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ha fallat la càrrega de l\'arxiu. MantisBT no el pot llegir. Si us plau comprovi els ajustaments del projecte.';

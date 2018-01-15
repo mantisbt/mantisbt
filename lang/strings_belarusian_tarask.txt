@@ -1249,6 +1249,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Тып файла забаронены.'
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Дырэкторыя не існуе. Калі ласка, праверце ўстаноўкі праекту.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Праект з гэтай назвай ужо існуе.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Абавязковае поле «%1$s» не запоўненае. Калі ласка, праверце ўведзеную інфармацыю.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Няслушнае значэньне для «%1$s»';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Гэты рахунак абаронены. Вы ня можаце атрымаць да яго доступ, пакуль абарона ня будзе зьнятая.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Доступ забаронены.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Памылка загрузкі файла. Файл не чытаецца MantisBT. Калі ласка, праверце ўстаноўкі праекту.';

@@ -347,6 +347,7 @@ $s_email_on_priority_change = 'Receber email quando houver mudança de prioridad
 $s_email_bugnote_limit = 'Limite de notas para e-mail';
 $s_email_full_issue_details = 'Enviar por correio eletrónico todos os detalhes da incidência';
 $s_language = 'Língua';
+$s_font_family = 'Família de fontes';
 $s_update_prefs_button = 'Atualizar preferências';
 $s_reset_prefs_button = 'Cancelar alterações das preferências';
 $s_timezone = 'Fuso horário';

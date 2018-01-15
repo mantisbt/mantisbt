@@ -347,6 +347,7 @@ $s_email_on_priority_change = '優先權更動時以電子郵件通知';
 $s_email_bugnote_limit = '說明超過數量限制時以電子郵件通知';
 $s_email_full_issue_details = '電子郵件傳送完整問題詳細資訊';
 $s_language = '語言';
+$s_font_family = '字體';
 $s_update_prefs_button = '更新偏好設定';
 $s_reset_prefs_button = '重設偏好設定';
 $s_timezone = '時區';
