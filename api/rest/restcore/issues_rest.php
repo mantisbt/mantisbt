@@ -49,6 +49,11 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->post( '/{id}/notes', 'rest_issue_note_add' );
 	$g_app->delete( '/{id}/notes/{note_id}/', 'rest_issue_note_delete' );
 	$g_app->delete( '/{id}/notes/{note_id}', 'rest_issue_note_delete' );
+
+	# Relationships
+	$g_app->post( '/{id}/relationships/', 'rest_issue_relationship_add' );
+	$g_app->post( '/{id}/relationships', 'rest_issue_relationship_add' );
+
 });
 
 /**
@@ -320,4 +325,41 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
+}
+
+/**
+ * Add issue relationship.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_relationship_info = $p_request->getParsedBody();
+
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+
+	$t_relationship = new stdClass();
+	$t_relationship->target_id = isset( $t_relationship_info['issue']['id'] ) ? $t_relationship_info['issue']['id'] : '';
+
+	$t_rel_type = array();
+	$t_rel_type['id'] = isset( $t_relationship_info['type']['id'] ) ? $t_relationship_info['type']['id'] : 1;
+	$t_relationship->type = $t_rel_type;
+
+	$t_result = mc_issue_relationship_add( /* username */ '', /* password */ '', $t_issue_id, $t_relationship );
+	ApiObjectFactory::throwIfFault( $t_result );
+
+	$t_relationship_id = $t_result;
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	foreach( $t_issue['relationships'] as $t_current_relationship ) {
+		if( $t_current_relationship['id'] == $t_relationship_id ) {
+			$t_relationship = $t_current_relationship;
+			break;
+		}
+	}
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Issue Relationship Created with id $t_issue_id" )->
+		withJson( array( 'relationship' => $t_relationship, 'issue' => $t_issue ) );
 }
