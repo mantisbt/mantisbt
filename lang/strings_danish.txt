@@ -340,6 +340,7 @@ $s_email_on_priority_change = 'E-mail ved ændring af prioritet';
 $s_email_bugnote_limit = 'E-mail grænse for noter';
 $s_email_full_issue_details = 'Send alle sagsdetaljer via e-post';
 $s_language = 'Sprog';
+$s_font_family = 'Skriftfamilie';
 $s_update_prefs_button = 'Opdater indstillinger';
 $s_reset_prefs_button = 'Nulstil indstillinger';
 $s_timezone = 'Tidszone';

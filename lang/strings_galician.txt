@@ -341,6 +341,7 @@ $s_email_on_priority_change = 'Enviar un correo en caso de cambio da prioridade'
 $s_email_bugnote_limit = 'Enviar un correo en caso de límite de notas';
 $s_email_full_issue_details = 'Enviar por correo todos os detalles do informe';
 $s_language = 'Lingua';
+$s_font_family = 'Familia de fontes';
 $s_update_prefs_button = 'Actualizar as preferencias';
 $s_reset_prefs_button = 'Restablecer as preferencias';
 $s_timezone = 'Fuso horario';

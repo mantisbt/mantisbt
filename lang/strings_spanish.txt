@@ -353,6 +353,7 @@ $s_email_on_priority_change = 'Enviar un correo electrónico sobre cambios de pr
 $s_email_bugnote_limit = 'Límite de notas por correo electrónico';
 $s_email_full_issue_details = 'Enviar los detalles completos de la incidencia';
 $s_language = 'Idioma';
+$s_font_family = 'Familia tipográfica';
 $s_update_prefs_button = 'Actualizar preferencias';
 $s_reset_prefs_button = 'Restablecer preferencias';
 $s_timezone = 'Huso horario';
