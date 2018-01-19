@@ -201,10 +201,6 @@ function summary_print_by_enum( $p_enum ) {
 
 	$t_cache = array();
 	$t_bugs_total_count = 0;
-	$t_bugs_open = 0;
-	$t_bugs_resolved = 0;
-	$t_bugs_closed = 0;
-	$t_bugs_total = 0;
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_enum = $t_row[$p_enum];
@@ -502,10 +498,7 @@ function summary_print_by_developer() {
 	$t_summaryusers = array();
 	$t_cache = array();
 	$t_bugs_total_count = 0;
-	$t_bugs_open = 0;
-	$t_bugs_resolved = 0;
-	$t_bugs_closed = 0;
-	
+
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_summaryusers[] = $t_row['handler_id'];
 		$t_status = $t_row['status'];
@@ -520,7 +513,6 @@ function summary_print_by_developer() {
 
 	foreach( $t_cache as $t_label => $t_item) {
 		# Build up the hyperlinks to bug views
-		$t_bug_link = '';
 		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
 		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
 		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
@@ -644,12 +636,7 @@ function summary_print_by_category() {
 	$t_result = db_query( $t_query );
 
 	$t_cache = array();
-	$t_category_name = "";
-	$t_project = "";
 	$t_bugs_total_count = 0;
-	$t_bugs_open = 0;
-	$t_bugs_resolved = 0;
-	$t_bugs_closed = 0;
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_status = $t_row['status'];
