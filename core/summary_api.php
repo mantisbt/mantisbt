@@ -65,15 +65,15 @@ require_api( 'utility_api.php' );
  * @return void
  */
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total, $p_resolved_ratio, $p_ratio) {
-        echo '<tr>';
-        printf( '<td class="width50">%s</td>', $p_label );
-        printf( '<td class="width12 align-right">%s</td>', $p_open );
-        printf( '<td class="width12 align-right">%s</td>', $p_resolved );
-        printf( '<td class="width12 align-right">%s</td>', $p_closed );
-        printf( '<td class="width12 align-right">%s</td>', $p_total );
-        printf( '<td class="width12 align-right">%s</td>', $p_resolved_ratio );
-        printf( '<td class="width12 align-right">%s</td>', $p_ratio );
-        echo '</tr>';
+	echo '<tr>';
+	printf( '<td class="width50">%s</td>', $p_label );
+	printf( '<td class="width12 align-right">%s</td>', $p_open );
+	printf( '<td class="width12 align-right">%s</td>', $p_resolved );
+	printf( '<td class="width12 align-right">%s</td>', $p_closed );
+	printf( '<td class="width12 align-right">%s</td>', $p_total );
+	printf( '<td class="width12 align-right">%s</td>', $p_resolved_ratio );
+	printf( '<td class="width12 align-right">%s</td>', $p_ratio );
+	echo '</tr>';
 }
 
 /**
