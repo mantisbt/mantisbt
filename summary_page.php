@@ -146,7 +146,6 @@ print_summary_submenu();
 <!-- LEFT COLUMN -->
 <div class="col-md-6 col-xs-12">
 
-	<?php if( 0 < count( $t_project_ids ) ) { ?>
 	<!-- BY PROJECT -->
 	<div class="space-10"></div>
 	<div class="widget-box table-responsive">
@@ -160,7 +159,6 @@ print_summary_submenu();
 		<?php summary_print_by_project(); ?>
 	</table>
 	</div>
-	<?php } ?>
 
 	<!-- BY STATUS -->
 	<div class="space-10"></div>
