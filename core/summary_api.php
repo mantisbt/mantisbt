@@ -96,13 +96,13 @@ function summary_helper_get_developer_label( $p_user_id ) {
 }
 
 /**
- * Calculate bug status count according to  'open', 'resolved' and 'closed', 
+ * Calculate bug status count according to 'open', 'resolved' and 'closed',
  * then put the numbers into $p_cache array
  *
  * @param array &$p_cache    The cache array.
  * @param string $p_key      The key of the array.
  * @param string $p_status   The status of issues.
- * @param string $p_bugcount The bug count of $p_status issues.
+ * @param integer $p_bugcount The bug count of $p_status issues.
  * @return void
  */
 function summary_helper_build_bugcount( &$p_cache, $p_key, $p_status, $p_bugcount ) {
