@@ -804,6 +804,8 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 		}
 	);
 
+	$t_threshold_fixed = config_get( 'bug_resolution_fixed_threshold' );
+	$t_threshold_notfixed = config_get( 'bug_resolution_not_fixed_threshold' );
 	$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 	$t_row_count = 0;
 
@@ -845,8 +847,8 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 				}
 				echo "</td>\n";
 
-				if( $c_res_s[$j] >= config_get( 'bug_resolution_fixed_threshold' ) ) {
-					if( $c_res_s[$j] < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
+				if( $c_res_s[$j] >= $t_threshold_fixed ) {
+					if( $c_res_s[$j] < $t_threshold_notfixed ) {
 						# Count bugs with a resolution between fixed and not fixed thresholds
 						$t_bugs_fixed += $t_res_bug_count;
 					} else {
@@ -927,6 +929,8 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	arsort( $t_reporter_bugcount_arr );
 
 	$t_threshold_fixed = config_get( 'bug_resolution_fixed_threshold' );
+	$t_threshold_notfixed = config_get( 'bug_resolution_not_fixed_threshold' );
+	$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 	$t_row_count = 0;
 
 	# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
@@ -972,8 +976,8 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 				}
 				echo "</td>\n";
 
-				if( $c_res_s[$j] >= config_get( 'bug_resolution_fixed_threshold' ) ) {
-					if( $c_res_s[$j] < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
+				if( $c_res_s[$j] >= $t_threshold_fixed ) {
+					if( $c_res_s[$j] < $t_threshold_notfixed ) {
 						# Count bugs with a resolution between fixed and not fixed thresholds
 						$t_bugs_fixed += $t_res_bug_count;
 					} else {
