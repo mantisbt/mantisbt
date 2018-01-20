@@ -809,12 +809,13 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 
 	# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
 	foreach( $t_handler_res_arr as $t_handler_id => $t_arr2 ) {
+		$t_total = $t_arr2['total'];
 
 		# Only print developers who have had at least one bug assigned to them. This helps
 		# prevent divide by zeroes, showing developers not on this project, and showing
 		# users that aren't actually developers...
 
-		if( $t_arr2['total'] > 0 ) {
+		if( $t_total > 0 ) {
 			echo '<tr>';
 			$t_row_count++;
 			echo '<td>';
@@ -856,8 +857,17 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 
 			}
 
+			# Display Total
+			echo '<td class="align-right">';
+			$t_bug_link =  $t_filter_prefix .
+				'&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id .
+				'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE;
+			echo '<a class="subtle" href="' . $t_bug_link . '">' . $t_total . '</a>';
+			echo "</td>\n";
+
+			# Percentage
 			$t_percent_fixed = 0;
-			if( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
+			if( ( $t_total - $t_bugs_notbugs ) > 0 ) {
 				$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 			}
 			echo '<td class="align-right">';
@@ -916,6 +926,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	# Sort our total bug count array so that the reporters with the highest number of bugs are listed first,
 	arsort( $t_reporter_bugcount_arr );
 
+	$t_threshold_fixed = config_get( 'bug_resolution_fixed_threshold' );
 	$t_row_count = 0;
 
 	# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
@@ -951,11 +962,11 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 
 				echo '<td class="align-right">';
 				if( 0 < $t_res_bug_count ) {
-					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) .
+					$t_bug_link = $t_filter_prefix .
 						'&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id .
 						'&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] .
-						'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
-					echo $t_bug_link . $t_res_bug_count . '</a>';
+						'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE;
+					echo '<a class="subtle" href="' . $t_bug_link . '">' . $t_res_bug_count . '</a>';
 				} else {
 					echo $t_res_bug_count;
 				}
@@ -973,6 +984,15 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 
 			}
 
+			# Display Total
+			echo '<td class="align-right">';
+			$t_bug_link =  $t_filter_prefix .
+				'&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id .
+				'&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE;
+			echo '<a class="subtle" href="' . $t_bug_link . '">' . $t_total_user_bugs . '</a>';
+			echo "</td>\n";
+
+			# Percentage
 			$t_percent_errors = 0;
 			if( $t_total_user_bugs > 0 ) {
 				$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );

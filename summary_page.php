@@ -322,6 +322,7 @@ print_summary_submenu();
 						echo '<th class="align-right">', get_enum_element( 'resolution', $t_resolution ), "</th>\n";
 					}
 
+					echo '<th class="align-right">', lang_get( 'total' ), "</th>\n";
 					echo '<th class="align-right">', lang_get( 'percentage_errors' ), "</th>\n";
 				?>
 			</tr>
@@ -344,6 +345,7 @@ print_summary_submenu();
 						echo '<th class="align-right">', get_enum_element( 'resolution', $t_resolution ), "</th>\n";
 					}
 
+					echo '<th class="align-right">', lang_get( 'total' ), "</th>\n";
 					echo '<th class="align-right">', lang_get( 'percentage_fixed' ), "</th>\n";
 				?>
 			</tr>
