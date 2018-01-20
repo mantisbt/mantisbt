@@ -58,58 +58,7 @@ $g_project_override = $f_project_id;
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$t_user_id = auth_get_current_user_id();
-
-$t_project_ids = user_get_all_accessible_projects( $t_user_id, $f_project_id );
-$t_specific_where = helper_project_specific_where( $f_project_id, $t_user_id );
-
-$t_resolved = config_get( 'bug_resolved_status_threshold' );
-# the issue may have passed through the status we consider resolved
-#  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
-#  will look up the most recent 'resolved' status change and return it as well
-$t_query = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
-	FROM {bug} b LEFT JOIN {bug_history} h
-		ON b.id = h.bug_id  AND h.type=0 AND h.field_name=\'status\' AND h.new_value=' . db_param() . '
-		WHERE b.status >=' . db_param() . ' AND ' . $t_specific_where . '
-		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
-		ORDER BY b.id ASC';
-$t_result = db_query( $t_query, array( $t_resolved, $t_resolved ) );
-$t_bug_count = 0;
-
-$t_bug_id       = 0;
-$t_largest_diff = 0;
-$t_total_time   = 0;
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_bug_count++;
-	$t_date_submitted = $t_row['date_submitted'];
-	$t_id = $t_row['id'];
-	$t_status = $t_row['status'];
-	if( $t_row['hist_update'] !== null ) {
-		$t_last_updated   = $t_row['hist_update'];
-	} else {
-		$t_last_updated   = $t_row['last_updated'];
-	}
-
-	if( $t_last_updated < $t_date_submitted ) {
-		$t_last_updated   = 0;
-		$t_date_submitted = 0;
-	}
-
-	$t_diff = $t_last_updated - $t_date_submitted;
-	$t_total_time = $t_total_time + $t_diff;
-	if( $t_diff > $t_largest_diff ) {
-		$t_largest_diff = $t_diff;
-		$t_bug_id = $t_row['id'];
-	}
-}
-if( $t_bug_count < 1 ) {
-	$t_bug_count = 1;
-}
-$t_average_time 	= $t_total_time / $t_bug_count;
-
-$t_largest_diff 	= number_format( $t_largest_diff / SECONDS_PER_DAY, 2 );
-$t_total_time		= number_format( $t_total_time / SECONDS_PER_DAY, 2 );
-$t_average_time 	= number_format( $t_average_time / SECONDS_PER_DAY, 2 );
+$t_time_stats = summary_helper_get_time_stats( $f_project_id );
 
 $t_summary_header_arr = explode( '/', lang_get( 'summary_header' ) );
 
@@ -214,22 +163,22 @@ print_summary_submenu();
 		<tr>
 			<td><?php echo lang_get( 'longest_open_bug' ) ?></td>
 			<td class="align-right"><?php
-				if( $t_bug_id > 0 ) {
-					print_bug_link( $t_bug_id );
+				if( $t_time_stats['bug_id'] > 0 )  {
+					print_bug_link( $t_time_stats['bug_id'] );
 				}
 			?></td>
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'longest_open' ) ?></td>
-			<td class="align-right"><?php echo $t_largest_diff ?></td>
+			<td class="align-right"><?php echo $t_time_stats['largest_diff'] ?></td>
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'average_time' ) ?></td>
-			<td class="align-right"><?php echo $t_average_time ?></td>
+			<td class="align-right"><?php echo $t_time_stats['average_time'] ?></td>
 		</tr>
 		<tr>
 			<td><?php echo lang_get( 'total_time' ) ?></td>
-			<td class="align-right"><?php echo $t_total_time ?></td>
+			<td class="align-right"><?php echo $t_time_stats['total_time'] ?></td>
 		</tr>
 	</table>
 	</div>

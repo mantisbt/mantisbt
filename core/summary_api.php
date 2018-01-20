@@ -1091,3 +1091,62 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 		}
 	}
 }
+
+/**
+ * Calculate time stats for resolved issues
+ * @param integer $p_project_id
+ * @return array
+ */
+function summary_helper_get_time_stats( $p_project_id ) {
+	$t_specific_where = helper_project_specific_where( $p_project_id );
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+	# The issue may have passed through the status we consider resolved
+	# (e.g. bug is CLOSED, not RESOLVED). The linkage to the history field
+	# will look up the most recent 'resolved' status change and return it as well
+	$t_query = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
+		FROM {bug} b 
+		LEFT JOIN {bug_history} h 
+			ON b.id = h.bug_id  AND h.type=0 AND h.field_name=\'status\' AND h.new_value=' . db_param() . '
+		WHERE b.status >=' . db_param() . ' AND ' . $t_specific_where . '
+		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
+		ORDER BY b.id ASC';
+	$t_result = db_query( $t_query, array( $t_resolved, $t_resolved ) );
+
+	$t_bug_count = 0;
+	$t_largest_diff = 0;
+	$t_total_time = 0;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_bug_count++;
+		$t_date_submitted = $t_row['date_submitted'];
+		$t_last_updated = $t_row['hist_update'] !== null ? $t_row['hist_update'] : $t_row['last_updated'];
+
+		if( $t_last_updated < $t_date_submitted ) {
+			$t_last_updated = 0;
+			$t_date_submitted = 0;
+		}
+
+		$t_diff = $t_last_updated - $t_date_submitted;
+		$t_total_time += $t_diff;
+		if( $t_diff > $t_largest_diff ) {
+			$t_largest_diff = $t_diff;
+			$t_bug_id = $t_row['id'];
+		}
+	}
+
+	if( $t_bug_count > 0 ) {
+		$t_average_time = $t_total_time / $t_bug_count;
+	} else {
+		$t_average_time = 0;
+		$t_bug_id = 0;
+	}
+
+	$t_stats = array(
+		'bug_id'       => $t_bug_id,
+		'largest_diff' => number_format( $t_largest_diff / SECONDS_PER_DAY, 2 ),
+		'total_time'   => number_format( $t_total_time / SECONDS_PER_DAY, 2 ),
+		'average_time' => number_format( $t_average_time / SECONDS_PER_DAY, 2 ),
+	);
+
+	return $t_stats;
+}
