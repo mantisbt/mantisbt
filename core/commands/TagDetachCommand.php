@@ -105,11 +105,17 @@ class TagDetachCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
+		$t_detached_tag_ids = array();
+
 		foreach( $this->tagsToDetach as $t_tag_id ) {
 			if( tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
 				tag_bug_detach( $t_tag_id, $this->issue_id );
-				event_signal( 'EVENT_TAG_DETACHED', array( $this->issue_id, array( $t_tag_id ) ) );
+				$t_detached_tag_ids[] = $t_tag_id;
 			}
+		}
+
+		if( !empty( $t_detached_tag_ids ) ) {
+			event_signal( 'EVENT_TAG_DETACHED', array( $this->issue_id, $t_detached_tag_ids ) );
 		}
 	}
 }

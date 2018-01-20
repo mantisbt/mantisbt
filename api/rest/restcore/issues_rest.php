@@ -40,6 +40,12 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->patch( '/{id}', 'rest_issue_update' );
 	$g_app->patch( '/{id}/', 'rest_issue_update' );
 
+	# Tags
+	$g_app->post( '/{id}/tags', 'rest_issue_tag_attach' );
+	$g_app->post( '/{id}/tags/', 'rest_issue_tag_attach' );
+	$g_app->delete( '/{id}/tags', 'rest_issue_tag_detach' );
+	$g_app->delete( '/{id}/tags/', 'rest_issue_tag_detach' );
+
 	# Monitor
 	$g_app->post( '/{id}/monitors/', 'rest_issue_monitor_add' );
 	$g_app->post( '/{id}/monitors', 'rest_issue_monitor_add' );
@@ -368,5 +374,53 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
 
 	return $p_response->withStatus( HTTP_STATUS_CREATED, "Users are now monitoring issue $t_issue_id" )->
+		withJson( array( 'issues' => array( $t_issue ) ) );
+}
+
+/**
+ * Attach a tag to an issue.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id ),
+		'payload' => $p_request->getParsedBody(),
+	);
+
+	$t_command = new TagAttachCommand( $t_data );
+	$t_command->execute();
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Tag attached to issue $t_issue_id" )->
+		withJson( array( 'issues' => array( $t_issue ) ) );
+}
+
+/**
+ * Detach a tag from the issue
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id ),
+		'payload' => $p_request->getParsedBody(),
+	);
+
+	$t_command = new TagDetachCommand( $t_data );
+	$t_command->execute();
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );			
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
 }

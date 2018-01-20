@@ -124,13 +124,13 @@ class TagAttachCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
-		$t_tags_attach = array();
+		$t_attached_tag_ids = array();
 
 		# Attach tags that already exist
 		foreach( $this->tagsToAttach as $t_tag_id ) {
 			if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
 				tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id );
-				$t_tags_attach[] = tag_get( $t_tag_id );
+				$t_attached_tag_ids[] = tag_get( $t_tag_id );
 			}
 		}
 
@@ -139,11 +139,13 @@ class TagAttachCommand extends Command {
 			$t_tag_id = tag_create( $t_tag_name, $this->user_id );
 			if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
 				tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id );
-				$t_tags_attach[] = tag_get( $t_tag_id );
+				$t_attached_tag_ids[] = tag_get( $t_tag_id );
 			}
 		}
 
-		event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_tags_attach ) );
+		if( !empty( $t_attached_tag_ids ) ) {
+			event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_attached_tag_ids ) );
+		}
 	}
 }
 
