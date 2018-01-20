@@ -55,6 +55,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 # cache the tag definitions, indexed by tag id
 # tag ids that don't exist are stored as 'false', to avoid repeated searches
 $g_cache_tags = array();
@@ -189,8 +191,10 @@ function tag_exists( $p_tag_id ) {
  */
 function tag_ensure_exists( $p_tag_id ) {
 	if( !tag_exists( $p_tag_id ) ) {
-		error_parameters( $p_tag_id );
-		trigger_error( ERROR_TAG_NOT_FOUND, ERROR );
+		throw new ClientException(
+			sprintf( "Tag '%d' does not exist", $p_tag_id ),
+			ERROR_TAG_NOT_FOUND,
+			array( $p_tag_id ) );
 	}
 }
 
