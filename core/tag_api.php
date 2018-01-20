@@ -835,7 +835,12 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 		$t_detach_level = config_get( 'tag_detach_threshold' );
 	}
 
-	access_ensure_bug_level( $t_detach_level, $p_bug_id, $t_user_id );
+	if( !access_has_bug_level( $t_detach_level, $p_bug_id, $t_user_id ) ) {
+		throw new ClientException(
+			sprintf( "Access denied to detach '%s'", $t_tag_row['name'] ),
+			ERROR_ACCESS_DENIED
+		);
+	}
 
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
