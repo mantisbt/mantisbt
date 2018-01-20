@@ -797,6 +797,13 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 		$t_arr = db_fetch_array( $t_result );
 	}
 
+	# Sort array so devs with highest number of bugs are listed first
+	uasort( $t_handler_res_arr,
+		function( $a, $b ) {
+			return $b['total'] - $a['total'];
+		}
+	);
+
 	$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 	$t_row_count = 0;
 
