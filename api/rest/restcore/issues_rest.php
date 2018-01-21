@@ -59,6 +59,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	# Relationships
 	$g_app->post( '/{id}/relationships/', 'rest_issue_relationship_add' );
 	$g_app->post( '/{id}/relationships', 'rest_issue_relationship_add' );
+	$g_app->delete( '/{id}/relationships/{relationship_id}/', 'rest_issue_relationship_delete' );
+	$g_app->delete( '/{id}/relationships/{relationship_id}', 'rest_issue_relationship_delete' );
 
 	# Files
 	$g_app->post( '/{id}/files/', 'rest_issue_file_add' );
@@ -336,6 +338,32 @@ function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\
 		HTTP_STATUS_CREATED,
 		"Issue relationship created with id $t_relationship_id" )->
 			withJson( array( 'issue' => $t_issue ) );
+}
+
+/**
+ * Delete issue relationship.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_relationship_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_relationship_id = $p_args['relationship_id'];
+
+	$t_data = array(
+		'query' => array(
+			'relationship_id' => $t_relationship_id,
+			'issue_id' => $t_issue_id )
+	);
+
+	$t_command = new IssueRelationshipDeleteCommand( $t_data );
+	$t_command->execute();
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue relationship deleted' )->
+		withJson( array( 'issue' => $t_issue ) );
 }
 
 /**
