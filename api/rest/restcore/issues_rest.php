@@ -65,6 +65,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	# Files
 	$g_app->post( '/{id}/files/', 'rest_issue_file_add' );
 	$g_app->post( '/{id}/files', 'rest_issue_file_add' );
+	$g_app->get( '/{id}/files/', 'rest_issue_files_get' );
+	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
+	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
+	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
 });
 
 /**
@@ -485,4 +489,51 @@ function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Tag detached from issue $t_issue_id" )->
 		withJson( array( 'issues' => array( $t_issue ) ) );
+}
+
+/**
+ * Get files associated with an issue.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_file_id = isset( $p_args['file_id'] ) ? $p_args['file_id'] : null;
+
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id, 'file_id' => $t_file_id )
+	);
+
+	$t_command = new IssueFileGetCommand( $t_data );
+	$t_internal_files = $t_command->execute();
+
+	$t_files = array();
+	foreach( $t_internal_files as $t_internal_file ) {
+		$t_file = array(
+			'id' => (int)$t_internal_file['id'],
+			'name' => $t_internal_file['display_name'],
+			'reporter' => mci_account_get_array_by_id( $t_internal_file['user_id'] ),
+			'size' => (int)$t_internal_file['size'],
+			'created_at' => ApiObjectFactory::datetimeString( $t_internal_file['date_added'] ),
+			'icon' => $t_internal_file['icon']['url'], # ??
+			'alt' => $t_internal_file['alt'], # ??
+			'access' => array(
+				'download' => $t_internal_file['can_download'],
+				'delete' => $t_internal_file['can_delete']
+			)
+		);
+
+		if( $t_internal_file['exists'] ) {
+			$t_file['content_type'] = $t_internal_file['content_type'];
+			$t_file['content'] = base64_encode( $t_internal_file['content'] );
+		}
+
+		$t_files[] = $t_file;
+	}
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
+		withJson( array( 'files' => $t_files ) );
 }
