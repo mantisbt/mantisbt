@@ -814,25 +814,38 @@ function helper_parse_view_state( array $p_view_state ) {
 }
 
 /**
- * Parse issue id.
+ * Parse numeric positive id.
  *
- * @param string $p_issue_id The id to parse.
- * @return integer The issue id.
- * @throws ClientException Issue is not specified or invalid.
+ * @param string $p_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The parsed id.
+ * @throws ClientException Id is not specified or invalid.
  */
-function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
-	if( !is_numeric( $p_issue_id ) ) {
-		if( empty( $p_issue_id ) ) {
+function helper_parse_id( $p_id, $p_field_name ) {
+	if( !is_numeric( $p_id ) ) {
+		if( empty( $p_id ) ) {
 			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
 		}
 
 		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
 	}
 
-	$t_issue_id = (int)$p_issue_id;
-	if( $t_issue_id < 1 ) {
+	$t_id = (int)$p_id;
+	if( $t_id < 1 ) {
 		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
 	}
 
-	return $t_issue_id;
+	return $t_id;
+}
+
+/**
+ * Parse issue id.
+ *
+ * @param string $p_issue_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The issue id.
+ * @throws ClientException Issue is not specified or invalid.
+ */
+function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
+	return helper_parse_id( $p_issue_id, $p_field_name );
 }
