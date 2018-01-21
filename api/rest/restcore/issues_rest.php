@@ -50,6 +50,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->delete( '/{id}/notes/{note_id}/', 'rest_issue_note_delete' );
 	$g_app->delete( '/{id}/notes/{note_id}', 'rest_issue_note_delete' );
 
+	# Relationships
+	$g_app->post( '/{id}/relationships/', 'rest_issue_relationship_add' );
+	$g_app->post( '/{id}/relationships', 'rest_issue_relationship_add' );
+
 	# Files
 	$g_app->post( '/{id}/files/', 'rest_issue_file_add' );
 	$g_app->post( '/{id}/files', 'rest_issue_file_add' );
@@ -297,6 +301,35 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue Note Deleted' )->
 		withJson( array( 'issue' => $t_issue ) );
+}
+
+/**
+ * Add relationship to issue.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+
+	$t_data = array(
+		'query' => array( 'issue_id' => $t_issue_id ),
+		'payload' => $p_request->getParsedBody(),
+	);
+
+	$t_command = new IssueRelationshipAddCommand( $t_data );
+	$t_command_response = $t_command->execute();
+
+	$t_relationship_id = $t_command_response['id'];
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+
+	return $p_response->withStatus(
+		HTTP_STATUS_CREATED,
+		"Issue relationship created with id $t_relationship_id" )->
+			withJson( array( 'issue' => $t_issue ) );
 }
 
 /**
