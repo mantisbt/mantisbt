@@ -255,7 +255,8 @@ function summary_print_by_enum( $p_enum ) {
 			}
 			if( 0 < $t_bugs_resolved ) {
 				$t_bugs_resolved = $t_bug_link
-					. '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val
+					# Only add status filter if not already part of the link
+					. ( 'status' != $p_enum ? '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_resolved_val : '' )
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_closed_val . '">'
 					. $t_bugs_resolved . '</a>';
 			} else {
@@ -265,7 +266,8 @@ function summary_print_by_enum( $p_enum ) {
 			}
 			if( 0 < $t_bugs_closed ) {
 				$t_bugs_closed = $t_bug_link
-					. '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val
+					# Only add status filter if not already part of the link
+					. ( 'status' != $p_enum ? '&amp;' . FILTER_PROPERTY_STATUS . '=' . $t_closed_val : '' )
 					. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">'
 					. $t_bugs_closed . '</a>';
 			} else {
