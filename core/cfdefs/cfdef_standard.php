@@ -520,7 +520,8 @@ function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 }
 
 /**
- * print_custom_field_input
+ * Prints input for a custom field of type enum
+ *
  * @param array $p_field_def          Custom field definition.
  * @param mixed $p_custom_field_value Custom field value.
  * @param string $p_required          The "required" attribute to add to the field
