@@ -43,8 +43,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	# Tags
 	$g_app->post( '/{id}/tags', 'rest_issue_tag_attach' );
 	$g_app->post( '/{id}/tags/', 'rest_issue_tag_attach' );
-	$g_app->delete( '/{id}/tags', 'rest_issue_tag_detach' );
-	$g_app->delete( '/{id}/tags/', 'rest_issue_tag_detach' );
+	$g_app->delete( '/{id}/tags/{tag_id}', 'rest_issue_tag_detach' );
+	$g_app->delete( '/{id}/tags/{tag_id}/', 'rest_issue_tag_detach' );
 
 	# Monitor
 	$g_app->post( '/{id}/monitors/', 'rest_issue_monitor_add' );
@@ -411,9 +411,10 @@ function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Respon
  */
 function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
+	$t_tag_id = $p_args['tag_id'];
+
 	$t_data = array(
-		'query' => array( 'issue_id' => $t_issue_id ),
-		'payload' => $p_request->getParsedBody(),
+		'query' => array( 'issue_id' => $t_issue_id, 'tag_id' => $t_tag_id )
 	);
 
 	$t_command = new TagDetachCommand( $t_data );

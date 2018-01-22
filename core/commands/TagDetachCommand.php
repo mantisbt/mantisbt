@@ -27,21 +27,7 @@ use Mantis\Exceptions\ClientException;
  * A command that detaches a tag from an issue.
  *
  * {
- *   "query": { "issue_id" => 1234 },
- *   "payload": {
- *     "tags": [
- *       {
- *          "id": 1
- *       },
- *       {
- *          "name": "tag2"
- *       },
- *       {
- *          "id": 3,
- *          "name": "tag3"
- *       }
- *     ]
- *   }
+ *   "query": { "issue_id" => 1234, "tag_id" => 1 }
  * }
  */
 class TagDetachCommand extends Command {
@@ -51,14 +37,14 @@ class TagDetachCommand extends Command {
 	private $issue_id;
 
 	/**
+	 * @var integer tag id
+	 */
+	private $tag_id;
+
+	/**
 	 * @var integer logged in user id
 	 */
 	private $user_id;
-
-	/**
-	 * @var array Array of tag ids to be detached.
-	 */
-	private $tagsToDetach = array();
 
 	/**
 	 * @param array $p_data The command data.
@@ -72,30 +58,14 @@ class TagDetachCommand extends Command {
 	 */
 	function validate() {		
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
+		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();
 
-		$t_tags = $this->payload( 'tags', array() );
-		if( !is_array( $t_tags ) || empty( $t_tags ) ) {
-			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, array( 'tags' ) );
-		}
-
-		foreach( $t_tags as $t_tag ) {
-			if( isset( $t_tag['id'] ) ) {
-				$this->tagsToDetach[] = (int)$t_tag['id'];
-			} else if( isset( $t_tag['name'] ) ) {
-				$t_tag_row = tag_get_by_name( $t_tag['name'] );
-				if( $t_tag_row === false ) {
-					throw new ClientException(
-						sprintf( "Tag '%s' not found", $t_tag['name'] ),
-						ERROR_INVALID_FIELD_VALUE,
-						array( 'tags' ) );
-				} else {
-					$this->tagsToDetach[] = (int)$t_tag_row['id'];
-				}
-			} else {
-				# invalid tag with no id or name.
-				throw new ClientException( "Invalid tag with no id or name", ERROR_INVALID_FIELD_VALUE, array( 'tags' ) );
-			}
+		if( !is_numeric( $this->tag_id ) ) {
+			throw new ClientException(
+				sprintf( "Invalid tag id '%s'", $this->tag_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'tag_id' ) );
 		}
 	}
 
@@ -105,17 +75,9 @@ class TagDetachCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
-		$t_detached_tag_ids = array();
-
-		foreach( $this->tagsToDetach as $t_tag_id ) {
-			if( tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
-				tag_bug_detach( $t_tag_id, $this->issue_id );
-				$t_detached_tag_ids[] = $t_tag_id;
-			}
-		}
-
-		if( !empty( $t_detached_tag_ids ) ) {
-			event_signal( 'EVENT_TAG_DETACHED', array( $this->issue_id, $t_detached_tag_ids ) );
+		if( tag_bug_is_attached( $this->tag_id, $this->issue_id ) ) {
+			tag_bug_detach( $this->tag_id, $this->issue_id );
+			event_signal( 'EVENT_TAG_DETACHED', array( $this->issue_id, array( $this->tag_id ) ) );
 		}
 	}
 }

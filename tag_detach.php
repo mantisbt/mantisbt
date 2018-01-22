@@ -40,14 +40,7 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 
 $t_data = array(
-	'query' => array( 'issue_id' => $f_bug_id ),
-	'payload' => array(
-		'tags' => array(
-			array(
-				'id' => $f_tag_id
-			)
-		)
-	)
+	'query' => array( 'issue_id' => $f_bug_id, 'tag_id' => $f_tag_id )
 );
 
 $t_command = new TagDetachCommand( $t_data );
