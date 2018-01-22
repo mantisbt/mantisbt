@@ -1134,7 +1134,8 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			}
 
 			# If list field value is not empty then we need to validate it
-			$t_possible_values = custom_field_prepare_possible_values( $t_row['possible_values'] );
+            # Dynamic Enum Implementatio Proposal
+			$t_possible_values = custom_field_prepare_possible_values( $t_row['possible_values'], __FUNCTION__ );
 			$t_values_arr = explode( '|', $t_possible_values );
 			$t_valid &= in_array( $p_value, $t_values_arr );
 			break;
@@ -1156,9 +1157,11 @@ function custom_field_validate( $p_field_id, $p_value ) {
  * @return string|array
  * @access public
  */
-function custom_field_prepare_possible_values( $p_possible_values ) {
+function custom_field_prepare_possible_values( $p_possible_values, $caller=null ) {
 	if( !is_blank( $p_possible_values ) && ( $p_possible_values[0] == '=' ) ) {
-		return helper_call_custom_function( 'enum_' . utf8_substr( $p_possible_values, 1 ), array() );
+        # Dynamic Enum Implementation Proposal
+		$t_args = array('caller' => $caller);
+		return helper_call_custom_function( 'enum_' . utf8_substr( $p_possible_values, 1 ), array($t_args) );
 	}
 
 	return $p_possible_values;
@@ -1493,14 +1496,24 @@ function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
  */
 function print_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
 	global $g_custom_field_type_definition;
-	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_print_value'] ) ) {
+    $t_is_enum_with_dynamic_domain = 
+    	($p_def['type'] == CUSTOM_FIELD_TYPE_ENUM) && ($p_def['possible_values'][0] == '=');
+
+	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_print_value'] ) || $t_is_enum_with_dynamic_domain ) {
 		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
 		if( $t_custom_field_value === null ) {
 			return;
 		}
 
-		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_print_value'], $t_custom_field_value );
-	}
+        $t_fn_print_value = $g_custom_field_type_definition[$p_def['type']]['#function_print_value'];
+
+        // Change for dynamic enum
+        if( $t_is_enum_with_dynamic_domain ) {
+        	$t_fn_print_value = 'custom_function_override_enum_print_value_' . 
+        	                     utf8_substr( $p_def['possible_values'], 1 );  
+	    }
+        return call_user_func( $t_fn_print_value, $t_custom_field_value );
+  	}
 
 	echo string_display_line_links( string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) );
 }
