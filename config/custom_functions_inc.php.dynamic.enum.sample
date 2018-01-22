@@ -1,0 +1,122 @@
+<?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+
+/**
+ * Construct an enumeration for all users, having user_id and realname.
+ * To use this in a custom field type "=users" in the possible values field.
+ *
+ * @param hash $p_attr
+ *             keys => caller: used to change return content
+ *
+ * @param integer $p_issue_level Issue level.
+ * @return array
+ */
+function custom_function_override_enum_users($p_attr=null) {
+    return override_enum_users($p_attr);
+}
+
+/**
+ * Construct an enumeration for all users, having user_id and realname.
+ * To use this in a custom field type "=developers" in the possible values field.
+ *
+ * @param hash $p_attr
+ *             keys => caller: used to change return content
+ *
+ * @param integer $p_issue_level Issue level.
+ * @return array
+ */
+function custom_function_override_enum_developers($p_attr=null) {
+    $t_my = array('attr' => array('filter' => DEVELOPER));
+    array_merge($t_my['attr'],(array)$p_attr);
+    return override_enum_users($t_my['attr']);
+}
+
+
+/**
+ * Given a user id returns the realname
+ *
+ * @param int $p_value: user id
+ * @return string user realname, or '' if user id is not valid -> intval(user id) <=0
+ */
+function custom_function_override_enum_print_value_users($p_value) {
+    echo(intval($p_value) > 0 ? get_user_realname($p_value) : '' );
+}
+
+/**
+ * Given a user id returns the realname
+ *
+ * @param int $p_value: user id
+ * @return string user realname, or '' if user id is not valid -> intval(user id) <=0
+ */
+function custom_function_override_enum_get_verbose_value_users($p_value) {
+    return (intval($p_value) > 0 ? get_user_realname($p_value) : '' );
+}
+
+
+
+
+
+/**
+ * Construct an enumeration for all users.
+ *
+ * @param hash $p_attr
+ *             keys => caller: null => element will be composed user_id:realname
+ *                     caller: 'custom_field_validate' => element will be user_id
+ *
+ *                     filter: null => all users
+ *                             constant identifing an ACCESS LEVEL, only users with this access level.
+ *                             
+ * @return array
+ */
+function override_enum_users($p_attr=null) {
+
+    $t_my = array('attr' => array('caller' => null, 'filter' => ANYBODY));
+    $t_my['attr'] = array_merge($t_my['attr'],(array)$p_attr);
+
+    $t_filter = $t_my['attr']['filter'];
+    $t_caller = $t_my['attr']['caller'];
+
+    $t_users = project_get_all_user_rows( helper_get_current_project(), $t_filter );
+
+    $t_enum = array();
+
+    switch ($t_caller) {
+        case 'custom_field_validate':
+            foreach ( $t_users as $t_user ) {
+                $t_enum[] = $t_user['id'] ;
+            }
+        break;
+
+        default:
+            foreach ( $t_users as $t_user ) {
+                $t_enum[] = $t_user['id'] . ':' . $t_user['realname'];
+            }
+            sort( $t_enum );
+        break;        
+    }
+    $t_possible_values = implode( '|', $t_enum );
+
+    return $t_possible_values;
+}
+
+/**
+ *
+ */
+function get_user_realname($p_user_id) {
+    $t_field = user_get_field($p_user_id,'realname');
+    return $t_field;
+}
