@@ -514,17 +514,25 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 	foreach( $t_internal_files as $t_internal_file ) {
 		$t_file = array(
 			'id' => (int)$t_internal_file['id'],
-			'name' => $t_internal_file['display_name'],
+			'filename' => $t_internal_file['display_name'],
 			'reporter' => mci_account_get_array_by_id( $t_internal_file['user_id'] ),
 			'size' => (int)$t_internal_file['size'],
 			'created_at' => ApiObjectFactory::datetimeString( $t_internal_file['date_added'] ),
-			'icon' => $t_internal_file['icon']['url'], # ??
-			'alt' => $t_internal_file['alt'], # ??
+			'icon' => $t_internal_file['icon']['url'],
+			'alt' => $t_internal_file['alt'],
 			'access' => array(
 				'download' => $t_internal_file['can_download'],
 				'delete' => $t_internal_file['can_delete']
 			)
 		);
+
+		if( $t_internal_file['can_download'] ) {
+			$t_file['download_url'] = $t_internal_file['download_url'];
+		}
+
+		if( $t_internal_file['can_delete'] ) {
+			$t_file['delete_url'] = $t_internal_file['delete_url'];
+		}
 
 		if( $t_internal_file['exists'] ) {
 			$t_file['content_type'] = $t_internal_file['content_type'];

@@ -486,21 +486,17 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  * @return array that represents an AttachmentData structure
  */
 function mci_issue_get_attachments( $p_issue_id ) {
-	$t_attachment_rows = bug_get_attachments( $p_issue_id );
-
+	$t_attachment_rows = file_get_visible_attachments( $p_issue_id );
 	if( $t_attachment_rows == null ) {
 		return array();
 	}
 
 	$t_result = array();
 	foreach( $t_attachment_rows as $t_attachment_row ) {
-		if( !file_can_view_bug_attachments( $p_issue_id, (int)$t_attachment_row['user_id'] ) ) {
-			continue;
-		}
 		$t_attachment = array();
 		$t_attachment['id'] = (int)$t_attachment_row['id'];
-		$t_attachment['filename'] = $t_attachment_row['filename'];
-		$t_attachment['size'] = (int)$t_attachment_row['filesize'];
+		$t_attachment['filename'] = $t_attachment_row['display_name'];
+		$t_attachment['size'] = (int)$t_attachment_row['size'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
 
 		$t_created_at = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
@@ -509,7 +505,21 @@ function mci_issue_get_attachments( $p_issue_id ) {
 			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
 			$t_attachment['date_submitted'] = $t_created_at;
 		} else {
-			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&type=bug';
+			$t_attachment['icon'] = $t_attachment_row['icon']['url'];
+			$t_attachment['alt'] = $t_attachment_row['alt'];
+			$t_attachment['access'] = array(
+				'download' => $t_attachment_row['can_download'],
+				'delete' => $t_attachment_row['can_delete']
+			);
+
+			if( $t_attachment_row['can_download'] ) {
+				$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&type=bug';
+			}
+
+			if( $t_attachment_row['can_delete'] ) {
+				$t_attachment['delete_url'] = mci_get_mantis_path() . 'bug_file_delete.php?file_id=' . $t_attachment_row['id'];
+			}
+
 			$t_attachment['created_at'] = $t_created_at;
 		}
 
