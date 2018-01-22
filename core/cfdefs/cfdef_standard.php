@@ -91,7 +91,7 @@ $g_custom_field_type_definition[CUSTOM_FIELD_TYPE_ENUM] = array (
 	'#function_return_distinct_values' => 'cfdef_prepare_list_distinct_values',
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
-	'#function_print_input' => 'cfdef_input_list',
+	'#function_print_input' => 'cfdef_input_enum',
 	'#function_print_value' => null,
 	'#function_string_value' => 'cfdef_prepare_list_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_list_value_for_email',
@@ -517,4 +517,44 @@ function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 		array_push( $t_return_arr, $t_option );
 	}
 	return $t_return_arr;
+}
+
+/**
+ * print_custom_field_input
+ * @param array $p_field_def          Custom field definition.
+ * @param mixed $p_custom_field_value Custom field value.
+ * @param string $p_required          The "required" attribute to add to the field
+ * @return void
+ */
+function cfdef_input_enum( array $p_field_def, $p_custom_field_value, $p_required = '' ) {
+
+	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
+
+	$t_possible_values_count = count( $t_values );
+	$t_list_size = 0;	# for enums the size is 0
+
+	echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '"' . $p_required .'>';
+
+
+	$t_selected_values = explode( '|', $p_custom_field_value );
+
+	$t_simple = ( strpos($t_values[0],':') === FALSE);
+	foreach( $t_values as $t_opcode ) {
+
+        if( $t_simple ) {
+	        $t_option = $t_human = $t_opcode;
+        }
+        else {
+			$t_opx = explode(':',$t_opcode);
+	        $t_option = $t_opx[0];
+	        $t_human = $t_opx[1];
+        }
+
+		if( in_array( $t_option, $t_selected_values, true ) ) {
+			echo '<option value="' . string_attribute( $t_option ) . '" selected="selected"> ' . string_display_line( $t_human ) . '</option>';
+		} else {
+			echo '<option value="' . string_attribute( $t_option ) . '">' .string_display_line( $t_human ) . '</option>';
+		}
+	}
+	echo '</select>';
 }
