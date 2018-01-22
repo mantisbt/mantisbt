@@ -918,6 +918,7 @@ $s_total_time = 'Temps total';
 $s_developer_stats = 'Statistiques par développeur';
 $s_reporter_stats = 'Statistiques par rapporteur';
 $s_orct = '(ouvert/résolu/fermé/total)';
+$s_summary_header = 'ouvert/résolu/fermé/total/résolu taux/taux';
 $s_any = 'Tous';
 $s_all = 'Tous';
 $s_show = 'Afficher';

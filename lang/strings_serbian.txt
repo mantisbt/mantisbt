@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Acamicamacaraca
  * @author Charmed94
  * @author Macofe
  * @author Milicevic01
@@ -678,7 +679,7 @@ $s_version_updated_msg = 'Верзија је ажурирана.';
 $s_account_delete_protected_msg = 'Налог је заштићен. Не могу да га обришем.';
 $s_account_deleted_msg = 'Налог је обрисан.';
 $s_delete_account_sure_msg = 'Желите ли да обришете овај налог?';
-$s_notify_user = 'Обавести корисника';
+$s_notify_user = 'Обавести корисника о овој измени';
 $s_accounts_pruned_msg = 'Сви налози којима се никада није приступило, а старији су од једне недеље, су уклоњени';
 $s_prune_accounts_button = 'Очисти';
 $s_confirm_account_pruning = 'Желите ли да обришете старе налоге којима се никада није приступило?';
@@ -864,7 +865,7 @@ $s_ok = 'У реду';
 $s_select_all = 'Изабери све';
 $s_use_query = 'Користи филтер';
 $s_delete_query = 'Обриши филтер';
-$s_query_deleted = 'Филтер је обрисан';
+$s_query_deleted = 'Филтер "%s" је обрисан';
 $s_save_query = 'Сачувај тренутни филтер';
 $s_reset_query = 'Поништи филтер';
 $s_query_name = 'Назив филтера';

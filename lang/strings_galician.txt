@@ -899,6 +899,7 @@ $s_total_time = 'Tempo total';
 $s_developer_stats = 'Estatísticas dos desenvolvedores';
 $s_reporter_stats = 'Estatísticas dos informadores';
 $s_orct = '(abertos/resoltos/pechados/total)';
+$s_summary_header = 'abertos/resoltos/pechados/total/proporción de resoltos/proporción';
 $s_any = 'calquera';
 $s_all = 'todos';
 $s_show = 'Mostrar';

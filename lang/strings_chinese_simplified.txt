@@ -910,6 +910,7 @@ $s_total_time = '合计时间';
 $s_developer_stats = '处理员(未解决/已解决/已关闭/合计)';
 $s_reporter_stats = '报告员(未解决/已解决/已关闭/合计)';
 $s_orct = '(未解决/已解决/已关闭/合计)';
+$s_summary_header = '开放/已解决/已关闭/总数/解决率/比率';
 $s_any = '任意';
 $s_all = '全部';
 $s_show = '显示';

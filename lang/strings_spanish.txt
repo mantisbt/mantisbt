@@ -911,6 +911,7 @@ $s_total_time = 'Tiempo Total';
 $s_developer_stats = 'Estadísticas por Desarrollador';
 $s_reporter_stats = 'Estadísticas por Informador';
 $s_orct = '(Abiertas/Resueltas/Cerradas/Total)';
+$s_summary_header = 'abiertas/resueltas/cerradas/total/proporción de resueltas/proporción';
 $s_any = 'Cualquiera';
 $s_all = 'todas';
 $s_show = 'Ver';

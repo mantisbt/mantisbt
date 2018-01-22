@@ -345,6 +345,7 @@ $s_email_on_priority_change = 'Изпращане на еmail при Смяна 
 $s_email_bugnote_limit = 'Лимит на брой еmail-и';
 $s_email_full_issue_details = 'Изпращане на подробностите за проблема по ел. поща';
 $s_language = 'Език';
+$s_font_family = 'Семейство шрифтове';
 $s_update_prefs_button = 'Запазване на зададените настройки';
 $s_reset_prefs_button = 'Връщане на първоначалните настройки';
 $s_timezone = 'Чаова зона';

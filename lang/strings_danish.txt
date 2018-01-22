@@ -898,6 +898,7 @@ $s_total_time = 'Tid i alt';
 $s_developer_stats = 'Udviklerstatistik';
 $s_reporter_stats = 'Rapportørstatistik';
 $s_orct = '(åben/løst/lukket/total)';
+$s_summary_header = 'åben/løst/lukket/i alt/løst forhold/forhold';
 $s_any = 'enhver';
 $s_all = 'alle';
 $s_show = 'Vis';
