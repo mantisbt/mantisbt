@@ -907,6 +907,7 @@ $s_total_time = 'Total tid';
 $s_developer_stats = 'Utvecklarstatistik';
 $s_reporter_stats = 'Rapporterarstatistik';
 $s_orct = '(öppna/lösta/stängda/totalt)';
+$s_summary_header = 'öppna/lösta/stängda/totala/förhållande för lösta/förhållande';
 $s_any = 'alla';
 $s_all = 'alla';
 $s_show = 'Visa';
