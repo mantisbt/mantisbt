@@ -168,30 +168,7 @@ class IssueRelationshipAddCommand extends Command {
 		if( isset( $p_relationship_type['id'] ) ) {
 			$t_type_id = (int)$p_relationship_type['id'];
 		} else if( isset( $p_relationship_type['name'] ) ) {
-			global $g_relationships;
-			switch( $p_relationship_type['name'] ) {
-				case 'related-to':
-					$t_type_id = BUG_RELATED;
-					break;
-				case 'duplicate-of':
-					$t_type_id = BUG_DUPLICATE;
-					break;
-				case 'parent-of':
-					$t_type_id = BUG_DEPENDANT;
-					break;
-				case 'child-of':
-					$t_type_id = BUG_BLOCKS;
-					break;
-				case 'has-duplicate':
-					$t_type_id = BUG_HAS_DUPLICATE;
-					break;
-				default:
-					throw new ClientException(
-						sprintf( "Unknown relationship type '%s'", $p_relationship_type['name'] ),
-						ERROR_INVALID_FIELD_VALUE,
-						array( 'relationship_type' )
-					);
-				}
+			$t_type_id = relationship_get_id_from_api_name( $p_relationship_type['name'] );
 		} else {
 			throw new ClientException(
 				'Invalid relationship type',

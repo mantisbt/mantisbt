@@ -99,6 +99,8 @@ require_api( 'utility_api.php' );
 
 require_css( 'status_config.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * RelationshipData Structure Definition
  */
@@ -190,6 +192,23 @@ $g_relationships[BUG_RELATED] = array(
 
 if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
 	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
+}
+
+/**
+ * Ensure that specified relationship type is valid.
+ *
+ * @param integer $p_retlationship_type The relationship type id.
+ * @return void
+ */
+function relationship_type_ensure_valid( $p_relationship_type ) {
+	global $g_relationships;
+
+	if( !is_numeric( $p_relationship_type ) || !isset( $g_relationships[$p_relationship_type] ) ) {
+		throw new ClientException(
+			sprintf( "Relation type '%s' not found.", $p_relationship_type ),
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
+	}
 }
 
 /**
@@ -596,9 +615,7 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
  */
 function relationship_get_description_src_side( $p_relationship_type ) {
 	global $g_relationships;
-	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-	}
+	relationship_type_ensure_valid( $p_relationship_type );
 	return lang_get( $g_relationships[$p_relationship_type]['#description'] );
 }
 
@@ -609,9 +626,10 @@ function relationship_get_description_src_side( $p_relationship_type ) {
  */
 function relationship_get_description_dest_side( $p_relationship_type ) {
 	global $g_relationships;
-	if( !isset( $g_relationships[$p_relationship_type] ) || !isset( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-	}
+
+	relationship_type_ensure_valid( $p_relationship_type );
+	relationship_type_ensure_valid( $g_relationships[$p_relationship_type]['#complementary'] );
+
 	return lang_get( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']]['#description'] );
 }
 
@@ -639,11 +657,36 @@ function relationship_get_name_for_api( $p_relationship_type ) {
 			case BUG_REL_ANY:
 				return 'any';
 			default:
-				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+				# This will trigger the invalid relationship type exception.
+				relationship_type_ensure_valid( $p_relationship_type );
 		}
 	}
 
 	return $g_relationships[$p_relationship_type]['#name'];
+}
+
+/**
+ * Get relationship type id given its API name.
+ *
+ * @param string $p_relationship_type_name relationship type name.
+ * @return integer relationship type id
+ * @throws ClientException unknown relationship type name.
+ */
+function relationship_get_id_from_api_name( $p_relationship_type_name ) {
+	global $g_relationships;
+
+	$t_relationship_type_name = strtolower( $p_relationship_type_name );
+	foreach( $g_relationships as $t_id => $t_relationship ) {
+		if( $t_relationship['#name'] == $t_relationship_type_name ) {
+			return $t_id;
+		}
+	}
+
+	throw new ClientException(
+		sprintf( "Unknown relationship type '%s'", $p_relationship_type_name ),
+		ERROR_INVALID_FIELD_VALUE,
+		array( 'relationship_type' )
+	);
 }
 
 /**
