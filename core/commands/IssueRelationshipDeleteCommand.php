@@ -90,7 +90,7 @@ class IssueRelationshipDeleteCommand extends Command {
 		$t_view_threshold = config_get( 'view_bug_threshold', null, null, $t_target_issue->project_id );
 		if( !access_has_bug_level( $t_view_threshold, $t_target_issue_id ) ) {
 			throw new ClientException(
-				sprintf( "Issue %d is read-only", $t_target_issue_id ),
+				sprintf( "Access denied to issue %d", $t_target_issue_id ),
 				ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW,
 				array( $t_target_issue_id )
 			);
