@@ -998,6 +998,7 @@ $s_manage_user_protected_msg = 'Account protected; the \'Access Level\' and \'En
 $s_manage_user_updated_msg = 'Account successfully updated...';
 $s_email_user_updated_subject = 'Account updated';
 $s_email_user_updated_msg = 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:';
+$s_user_search_hint = 'You can use username or email'; 
 
 # menu_inc.php
 $s_main_link = 'Main';

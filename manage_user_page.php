@@ -288,6 +288,13 @@ $t_user_count = count( $t_users );
 	</div>
 </div>
 
+<!-- Search Box + Page Navigatore on TOP -->
+<?php 
+$t_filter_string = $f_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir";
+
+draw_search_section($t_total_user_count,$p_per_page,$t_page_count, $f_page_number, $t_filter_string); 
+?>
+
 <div class="widget-main no-padding">
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
@@ -362,7 +369,7 @@ $t_user_count = count( $t_users );
 	<div id="manage-user-edit-div" class="form-inline pull-left">
 		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
 			<?php # CSRF protection not required here - form does not result in modifications ?>>
-			<label class="inline" for="username"><?php echo lang_get( 'search' ) ?></label>
+			<label class="inline" for="username"><?php echo lang_get( 'search' )?> <i class="fa fa-info-circle" title="<?php echo lang_get('user_search_hint')?>"></i> </label>
 			<input id="username" type="text" name="username" class="input-sm" value="" />
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
 		</form>
@@ -379,3 +386,33 @@ $t_user_count = count( $t_users );
 </div>
 <?php
 layout_page_end();
+
+
+/**
+ *
+ */
+function draw_search_section($p_user_count,$p_per_page,$p_page_count, $p_page_number, $p_filter_string) {
+
+	$t_lbl_search = lang_get( 'search' );
+	$t_lbl_user_search_hint = lang_get('user_search_hint');
+	$t_lbl_manage_user = lang_get( 'manage_user' );
+
+	if( $p_user_count < $p_per_page ) {
+		return;
+	}
+
+echo <<<END
+
+<div class="widget-toolbox padding-8 clearfix">
+	<div id="manage-user-edit-div-top" class="form-inline pull-left">
+		<form id="manage-user-edit-form-top" method="get" action="manage_user_edit_page.php" class="form-inline">
+			<label class="inline" for="username">$t_lbl_search <i class="fa fa-info-circle" title="$t_lbl_user_search_hint"></i> </label>
+			<input id="username-top" type="text" name="username" class="input-sm" value="" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="$t_lbl_manage_user" />
+		</form>
+	</div>
+	<div class="btn-toolbar pull-right">
+END;
+		print_page_links( 'manage_user_page.php', 1, $p_page_count, (int)$p_page_number, $p_filter_string);
+echo '</div> </div>';
+}
