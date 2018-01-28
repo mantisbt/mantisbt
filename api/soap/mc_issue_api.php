@@ -495,30 +495,23 @@ function mci_issue_get_attachments( $p_issue_id ) {
 	foreach( $t_attachment_rows as $t_attachment_row ) {
 		$t_attachment = array();
 		$t_attachment['id'] = (int)$t_attachment_row['id'];
-		$t_attachment['filename'] = $t_attachment_row['display_name'];
-		$t_attachment['size'] = (int)$t_attachment_row['size'];
-		$t_attachment['content_type'] = $t_attachment_row['file_type'];
 
 		$t_created_at = ApiObjectFactory::datetime( $t_attachment_row['date_added'] );
 
 		if( ApiObjectFactory::$soap ) {
-			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
+			$t_attachment['user_id'] = (int)$t_attachment_row['user_id'];
 			$t_attachment['date_submitted'] = $t_created_at;
 		} else {
-			$t_attachment['icon'] = $t_attachment_row['icon']['url'];
-			$t_attachment['alt'] = $t_attachment_row['alt'];
-			$t_attachment['access'] = array(
-				'download' => $t_attachment_row['can_download'],
-				'delete' => $t_attachment_row['can_delete']
-			);
-
+			$t_attachment['reporter'] = mci_account_get_array_by_id( $t_attachment_row['user_id'] );
 			$t_attachment['created_at'] = $t_created_at;
 		}
 
+		$t_attachment['filename'] = $t_attachment_row['display_name'];
+		$t_attachment['size'] = (int)$t_attachment_row['size'];
+		$t_attachment['content_type'] = $t_attachment_row['file_type'];
+
 		if( ApiObjectFactory::$soap ) {
-			$t_attachment['user_id'] = (int)$t_attachment_row['user_id'];
-		} else {
-			$t_attachment['reporter'] = mci_account_get_array_by_id( $t_attachment_row['user_id'] );
+			$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
 		}
 
 		$t_result[] = $t_attachment;
