@@ -526,14 +526,6 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 			)
 		);
 
-		if( $t_internal_file['can_download'] ) {
-			$t_file['download_url'] = $t_internal_file['download_url'];
-		}
-
-		if( $t_internal_file['can_delete'] ) {
-			$t_file['delete_url'] = $t_internal_file['delete_url'];
-		}
-
 		if( $t_internal_file['exists'] ) {
 			$t_file['content_type'] = $t_internal_file['content_type'];
 			$t_file['content'] = base64_encode( $t_internal_file['content'] );

@@ -77,9 +77,6 @@ class IssueFileGetCommand extends Command {
 			$t_result = file_get_content( $t_attachment['id'] );
 			$t_attachment['content_type'] = $t_result['type'];
 			$t_attachment['content'] = $t_result['content'];
-			$t_attachment['download_url'] = $t_mantis_path .
-				'file_download.php?file_id=' . $t_attachment['id'] . '&type=bug';
-			$t_attachment['delete_url'] = $t_mantis_path . 'bug_file_delete.php?file_id=' . $t_attachment_row['id'];
 	
 			$t_matching_attachments[] = $t_attachment;
 		}
