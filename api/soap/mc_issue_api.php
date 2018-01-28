@@ -512,14 +512,6 @@ function mci_issue_get_attachments( $p_issue_id ) {
 				'delete' => $t_attachment_row['can_delete']
 			);
 
-			if( $t_attachment_row['can_download'] ) {
-				$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&type=bug';
-			}
-
-			if( $t_attachment_row['can_delete'] ) {
-				$t_attachment['delete_url'] = mci_get_mantis_path() . 'bug_file_delete.php?file_id=' . $t_attachment_row['id'];
-			}
-
 			$t_attachment['created_at'] = $t_created_at;
 		}
 
