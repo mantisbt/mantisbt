@@ -292,7 +292,7 @@ $t_user_count = count( $t_users );
 <?php 
 $t_filter_string = $f_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir";
 
-draw_search_section($t_total_user_count,$p_per_page,$t_page_count, $f_page_number, $t_filter_string); 
+draw_search_section('top',$t_total_user_count,$p_per_page,$t_page_count, $f_page_number, $t_filter_string); 
 ?>
 
 <div class="widget-main no-padding">
@@ -365,22 +365,9 @@ draw_search_section($t_total_user_count,$p_per_page,$t_page_count, $f_page_numbe
 </div>
 </div>
 
-<div class="widget-toolbox padding-8 clearfix">
-	<div id="manage-user-edit-div" class="form-inline pull-left">
-		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
-			<?php # CSRF protection not required here - form does not result in modifications ?>>
-			<label class="inline" for="username"><?php echo lang_get( 'search' )?> <i class="fa fa-info-circle" title="<?php echo lang_get('user_search_hint')?>"></i> </label>
-			<input id="username" type="text" name="username" class="input-sm" value="" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
-		</form>
-	</div>
-	<div class="btn-toolbar pull-right">
-		<?php
-		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
-		?>
-	</div>
-</div>
+<?php 
+draw_search_section('bottom',$t_total_user_count,$p_per_page,$t_page_count, $f_page_number, $t_filter_string); 
+?>
 </div>
 </div>
 </div>
@@ -389,25 +376,35 @@ layout_page_end();
 
 
 /**
+ * draws the search input and the page navigator
  *
+ * @param string $p_where  just to create different HTML ID attributes.
+ * @param int    $p_user_count  how many users have been found.
+ * @param int    $p_per_page  how many records display per page.
+ * @param int    $p_page_count how many pages do we have.
+ * @param int    $p_page_number current page number.
+ * @param string $p_filter_string used by print_page_links() 
+ *
+ * @return void
  */
-function draw_search_section($p_user_count,$p_per_page,$p_page_count, $p_page_number, $p_filter_string) {
-
-	$t_lbl_search = lang_get( 'search' );
-	$t_lbl_user_search_hint = lang_get('user_search_hint');
-	$t_lbl_manage_user = lang_get( 'manage_user' );
+function draw_search_section($p_where,$p_user_count,$p_per_page,$p_page_count, $p_page_number, $p_filter_string) {
 
 	if( $p_user_count < $p_per_page ) {
 		return;
 	}
 
+	$t_lbl_search = lang_get( 'search' );
+	$t_lbl_user_search_hint = lang_get( 'user_search_hint' );
+	$t_lbl_manage_user = lang_get( 'manage_user' );
+
+
 echo <<<END
 
 <div class="widget-toolbox padding-8 clearfix">
-	<div id="manage-user-edit-div-top" class="form-inline pull-left">
-		<form id="manage-user-edit-form-top" method="get" action="manage_user_edit_page.php" class="form-inline">
-			<label class="inline" for="username">$t_lbl_search <i class="fa fa-info-circle" title="$t_lbl_user_search_hint"></i> </label>
-			<input id="username-top" type="text" name="username" class="input-sm" value="" />
+	<div id="manage-user-edit-div-{$p_where}" class="form-inline pull-left">
+		<form id="manage-user-edit-form-{$p_where}" method="get" action="manage_user_edit_page.php" class="form-inline">
+			<label class="inline" for="username">$t_lbl_search</label>
+			<input id="username-{$p_where}" type="text" name="username" class="input-sm" value="" placeholder="$t_lbl_user_search_hint"/>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="$t_lbl_manage_user" />
 		</form>
 	</div>
