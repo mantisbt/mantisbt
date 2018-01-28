@@ -172,7 +172,12 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_filter = filter_load( $p_filter_id, $t_user_id );
+	if( is_numeric( $p_filter_id ) ) {
+		$t_filter = filter_get( $p_filter_id );
+	} else {
+		$t_filter = filter_standard_get( $p_filter_id, $t_user_id );
+	}
+
 	if( $t_filter === null ) {
 		return ApiObjectFactory::faultNotFound( "Unknown filter '$p_filter_id'" );
 	}

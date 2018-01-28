@@ -2824,42 +2824,6 @@ function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
 }
 
 /**
- * Load a filter from db or a standard filter.
- *
- * @param string|integer $p_filter_id The filter id or standard filter.
- * @param integer|null $p_user_id The user id or null for logged in user.
- * @return null filter not found, false invalid filter, otherwise the filter.
- */
-function filter_load( $p_filter_id, $p_user_id = null ) {
-	if( is_numeric( $p_filter_id ) ) {
-		$t_filter = filter_get( $p_filter_id, null );
-	} else {
-		$p_filter_id = strtolower( $p_filter_id );
-		$t_project_id = helper_get_current_project();
-		$t_user_id = auth_get_current_user_id();
-
-		switch( $p_filter_id ) {
-			case FILTER_STANDARD_ASSIGNED:
-				$t_filter = filter_create_assigned_to_unresolved( $t_project_id, $t_user_id );
-				break;
-			case FILTER_STANDARD_UNASSIGNED:
-				$t_filter = filter_create_assigned_to_unresolved( $t_project_id, NO_USER );
-				break;
-			case FILTER_STANDARD_REPORTED:
-				$t_filter = filter_create_reported_by( $t_project_id, $t_user_id );
-				break;
-			case FILTER_STANDARD_MONITORED:
-				$t_filter = filter_create_monitored_by( $t_project_id, $t_user_id );
-				break;
-			default:
-				return null;
-		}
-	}
-
-	return filter_ensure_valid_filter( $t_filter );
-}
-
-/**
  * get current filter for given project and user
  * @param integer $p_project_id A project identifier.
  * @param integer $p_user_id    A valid user identifier.
@@ -3137,7 +3101,7 @@ function filter_create_recently_modified( $p_days, $p_filter = null ) {
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] = $t_date->format( 'j' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] = $t_date->format( 'n' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] = $t_date->format( 'Y' );
-	return $p_filter;
+	return filter_ensure_valid_filter( $p_filter );
 }
 
 /**
@@ -3774,6 +3738,41 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 	$t_filter['_filter_id'] = $p_filter_id;
 
 	$t_filter = filter_update_source_properties( $t_filter );
+
+	return $t_filter;
+}
+
+/**
+ * Return a standard filter
+ * @param string $p_filter_name     The name of the filter
+ * @param integer|null $p_user_id   A user id to build this filter. Null for current user
+ * @return null|boolean|array       null filter not found, false invalid filter, otherwise the filter.
+ */
+function filter_standard_get( $p_filter_name, $p_user_id = null ) {
+	$p_filter_name = strtolower( $p_filter_name );
+	$t_project_id = helper_get_current_project();
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	switch( $p_filter_name ) {
+		case FILTER_STANDARD_ASSIGNED:
+			$t_filter = filter_create_assigned_to_unresolved( $t_project_id, $t_user_id );
+			break;
+		case FILTER_STANDARD_UNASSIGNED:
+			$t_filter = filter_create_assigned_to_unresolved( $t_project_id, NO_USER );
+			break;
+		case FILTER_STANDARD_REPORTED:
+			$t_filter = filter_create_reported_by( $t_project_id, $t_user_id );
+			break;
+		case FILTER_STANDARD_MONITORED:
+			$t_filter = filter_create_monitored_by( $t_project_id, $t_user_id );
+			break;
+		default:
+			return null;
+	}
 
 	return $t_filter;
 }
