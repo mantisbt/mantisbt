@@ -47,6 +47,7 @@
  * @author Geraki
  * @author Glavkos
  * @author Kongr43gpen
+ * @author Nikosgranturismogt
  * @author Omnipaedista
  * @author Protnet
  * @author Thodoris
@@ -335,6 +336,7 @@ $s_email_bugnote_limit = 'Email Όριο Σημειώσεων';
 $s_language = 'Γλώσσα';
 $s_update_prefs_button = 'Ενημέρωση αλλαγών';
 $s_reset_prefs_button = 'Επαναφόρα αλλαγών';
+$s_timezone = 'Ζώνη ώρας';
 $s_prefs_reset_msg = 'Οι Επιλογές ακυρώθηκαν...';
 $s_prefs_updated_msg = 'Οι Επιλογές ανανεώθηκαν...';
 $s_profile_added_msg = 'Προφίλ προστέθηκε...';
@@ -353,9 +355,13 @@ $s_delete_profile = 'Διαγραφή Προφίλ';
 $s_select_profile = 'Επιλογή Προφίλ';
 $s_submit_button = 'Καταχώρηση';
 $s_profile_updated_msg = 'Προφίλ ενημερώθηκε...';
+$s_my_sponsorship = 'Οι χορηγίες μου';
+$s_update_sponsorship_button = 'Αλλαγή κατάστασης πληρωμής';
 $s_sponsor = 'Χορηγός';
 $s_sponsor_verb = 'Χορηγός';
 $s_amount = 'Ποσόν';
+$s_sponsor_show = 'Εμφάνιση όλων';
+$s_payment_updated = 'Οι πληροφορίες πληρωμής ενημερώθηκαν.';
 $s_account_updated_msg = 'Ο λογαριασμός σας ανανεώθηκε επιτυχώς...';
 $s_email_updated = 'Η αλλαγή email ήταν επιτυχής';
 $s_realname_duplicated = 'Το πραγματικό όνομα το έχει ήδη άλλος χρήστης';
@@ -381,8 +387,11 @@ $s_delete_bug_button = 'Διαγραφή';
 $s_monitor_bug_button = 'Παρακολούθηση';
 $s_unmonitor_bug_button = 'Τέλος Παρακ/σης';
 $s_upload_file = 'Φόρτωση Αρχείου';
+$s_upload_files = 'Ανέβασμα αρχείων';
 $s_select_file = 'Επιλογή Αρχείου';
+$s_select_files = 'Επιλογή αρχείων';
 $s_upload_file_button = 'Φόρτωση Αρχείου';
+$s_max_file_size_label = 'Μέγιστο μέγεθος:';
 $s_bug_reopened_msg = 'Το θέμα επανεξετάζεται...';
 $s_reopen_add_bugnote_title = 'Προσθήκη Αιτιολόγησης Επαναξέτασης';
 $s_bugnote_add_reopen_button = 'Πρόσθηκη Σημείωσης Και Επανέξεταση';

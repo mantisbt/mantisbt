@@ -38,11 +38,16 @@
  * @ingroup Language
  * @file
  *
+ * @author Nikosgranturismogt
  * @author Omnipaedista
  */
 
+$s_plugin_XmlImportExport_title = 'Εισαγωγή/εξαγωγή ζητημάτων';
+$s_plugin_XmlImportExport_import = 'εισαγωγή ζητημάτων';
 $s_plugin_XmlImportExport_export = 'Εξαγωγή XML';
+$s_plugin_XmlImportExport_action_update = 'Ενημέρωση';
 $s_plugin_XmlImportExport_import_options = 'Επιλογές εισαγωγής';
 $s_plugin_XmlImportExport_renumber = 'Επαναρίθμηση';
 $s_plugin_XmlImportExport_link = 'Σύνδεσμος';
 $s_plugin_XmlImportExport_disable = 'Απενεργοποίηση';
+$s_plugin_XmlImportExport_disable_desc = 'Απενεργοποίηση του συνδέσμου';

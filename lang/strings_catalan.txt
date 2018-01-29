@@ -317,6 +317,7 @@ $s_email_on_status_change = 'Envia correus dels Canvis d\'Estat';
 $s_email_on_priority_change = 'Envia correus dels Canvis de Prioritat';
 $s_email_bugnote_limit = 'Límit de notes per correu';
 $s_language = 'Idioma';
+$s_font_family = 'Família tipogràfica';
 $s_update_prefs_button = 'Actualitza les Preferències';
 $s_reset_prefs_button = 'Restableix les Preferències';
 $s_timezone = 'Fus horari';
