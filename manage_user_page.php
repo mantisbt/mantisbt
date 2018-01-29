@@ -389,7 +389,7 @@ layout_page_end();
  */
 function draw_search_section($p_where,$p_user_count,$p_per_page,$p_page_count, $p_page_number, $p_filter_string) {
 
-	if( $p_user_count < $p_per_page ) {
+	if( ($p_user_count < $p_per_page) && $p_where == 'top' ) {
 		return;
 	}
 
