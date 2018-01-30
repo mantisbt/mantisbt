@@ -130,7 +130,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 	if( $p_for_display ) {
 		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
 	} else {
-		echo $t_output;
+		echo string_attribute( $t_output );
 	}
 }
 
