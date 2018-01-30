@@ -1209,12 +1209,6 @@ $g_show_version_dates_threshold = NOBODY;
 $g_show_realname = OFF;
 
 /**
- * leave off for now
- * @global integer $g_differentiate_duplicates
- */
-$g_differentiate_duplicates = OFF;
-
-/**
  * sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted
  * with the "D"s
  * @global integer $g_sort_by_last_name
@@ -4479,7 +4473,6 @@ $g_public_config_names = array(
 	'delete_bugnote_threshold',
 	'delete_project_threshold',
 	'development_team_threshold',
-	'differentiate_duplicates',
 	'disallowed_files',
 	'display_bug_padding',
 	'display_bugnote_padding',
