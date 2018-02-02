@@ -1347,10 +1347,9 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_users[] = $t_row['id'];
-		$t_user_name = user_get_name_for_sorting_from_row( $t_row );
-		$t_user_name = string_attribute( $t_user_name );
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		$t_user_name = user_get_name_from_row( $t_row );
+		$t_display[] = string_attribute( $t_user_name );
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
 	}
 
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
