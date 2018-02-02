@@ -242,14 +242,8 @@ function billing_rows_to_array( $p_bugnotes ) {
 		$t_row['duration'] = db_minutes_to_hhmm( $t_note['minutes'] );
 		$t_row['note'] = $t_note['note'];
 		$t_row['reporter_id'] = $t_note['reporter_id'];
-		$t_row['reporter_username'] = user_get_name( $t_note['reporter_id'] );
-		$t_row['reporter_realname'] = user_get_realname( $t_note['reporter_id'] );
+		$t_row['reporter_name'] = user_get_name( $t_note['reporter_id'] );
 		$t_row['date_submitted'] = $t_note['date_submitted'];
-
-		if ( is_blank( $t_row['reporter_realname'] ) ) {
-			$t_row['reporter_realname'] = $t_row['reporter_username'];
-		}
-
 		$t_row['bug_id'] = $t_note['bug_id'];
 		$t_row['project_id'] = $t_note['project_id'];
 		$t_row['project_name'] = project_get_name( $t_note['project_id'] );

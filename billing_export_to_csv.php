@@ -51,7 +51,6 @@ billing_ensure_reporting_access( $f_project_id );
 $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost, $f_include_subprojects );
-$t_show_realname = config_get( 'show_realname' ) == ON;
 
 csv_start( csv_get_default_filename() );
 
@@ -59,13 +58,7 @@ echo csv_escape_string( lang_get( 'issue_id' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'project_name' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'category' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'summary' ) ) . $t_separator;
-
-if( $t_show_realname ) {
-	echo csv_escape_string( lang_get( 'realname' ) ) . $t_separator;
-} else {
-	echo csv_escape_string( lang_get( 'username' ) ) . $t_separator;
-}
-
+echo csv_escape_string( lang_get( 'username' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'timestamp' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'minutes' ) ) . $t_separator;
 echo csv_escape_string( lang_get( 'time_tracking_time_spent' ) ) . $t_separator;
@@ -82,13 +75,7 @@ foreach( $t_billing_rows as $t_billing ) {
 	echo csv_escape_string( $t_billing['project_name'] ) . $t_separator;
 	echo csv_escape_string( $t_billing['bug_category'] ) . $t_separator;
 	echo csv_escape_string( $t_billing['bug_summary'] ) . $t_separator;
-
-	if( $t_show_realname ) {
-		echo csv_escape_string( $t_billing['reporter_realname'] ) . $t_separator;
-	} else {
-		echo csv_escape_string( $t_billing['reporter_username'] ) . $t_separator;
-	}
-
+	echo csv_escape_string( $t_billing['reporter_name'] ) . $t_separator;
 	echo csv_escape_string( date( $t_date_format, $t_billing['date_submitted'] ) ) . $t_separator;
 	echo csv_escape_string( $t_billing['minutes'] ) . $t_separator;
 	echo csv_escape_string( $t_billing['duration'] ) . $t_separator;
