@@ -315,7 +315,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		}
 
 		$t_display[] = string_attribute( $t_user_name );
-		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );;
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
 
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
