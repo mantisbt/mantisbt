@@ -1308,10 +1308,9 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	$t_sort = array();
 
 	foreach( $t_users as $t_user ) {
-		$t_user_name = user_get_name_for_sorting_from_row( $t_user );
-		$t_user_name = string_attribute( $t_user_name );
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		$t_user_name = user_get_name_from_row( $t_user );
+		$t_display[] = string_attribute( $t_user_name );
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
 
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
