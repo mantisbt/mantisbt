@@ -178,13 +178,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
 		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost, $f_include_subprojects );
 
-		# Sort the array by bug_id, user/real name
-		if( ON == config_get( 'show_realname' ) ) {
-			$t_name_field = 'realname';
-		} else {
-			$t_name_field = 'username';
-		}
-
 		if( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
 		}
@@ -213,7 +206,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="small-caption">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
@@ -272,7 +265,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="small-caption">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
