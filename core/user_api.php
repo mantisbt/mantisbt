@@ -324,51 +324,6 @@ function user_ensure_email_unique( $p_email, $p_user_id = null ) {
 }
 
 /**
- * Check if realname is specified, a unique real name, and doesn't match a username of another user.
- *
- * @param string $p_realname The realname to check.
- * @param integer|null $p_user_id The user id that is allowed to conflict, otherwise, null.
- * @return bool true: unique, false otherwise.
- */
-function user_is_realname_unique( $p_realname, $p_user_id = null ) {
-	if( is_blank( $p_realname ) ) {
-		# don't bother checking if realname is blank
-		return true;
-	}
-
-	$p_realname = trim( $p_realname );
-
-	# check realname does not match an existing realname
-	$t_existing_user_id = user_get_id_by_name( $p_realname );
-	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
-		return false;
-	}
-
-	$t_existing_user_id = user_get_id_by_realname( $p_realname );
-	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
-		return false;
-	}
-
-	return true;
-}
-
-/**
- * Check if the realname is a unique
- * Trigger an error if the username is not valid
- *
- * @param string $p_realname The realname to check.
- * @param integer|null $p_user_id  The user id that is allowed to conflict, otherwise null.
- * @return void
- */
-function user_ensure_realname_unique( $p_realname, $p_user_id = null ) {
-	if( !user_is_realname_unique( $p_realname, $p_user_id ) ) {
-		throw new ClientException(
-			sprintf( "Realname '%s' is not unique", $p_realname ),
-			ERROR_USER_REAL_MATCH_USER );
-	}
-}
-
-/**
  * Check if the username is a valid username (does not account for uniqueness) realname can match
  * @param string $p_username The username to check.
  * @return boolean return true if user name is valid, false otherwise
@@ -581,7 +536,6 @@ function user_create( $p_username, $p_password, $p_email = '',
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
 	user_ensure_email_unique( $p_email );
-	user_ensure_realname_unique( $p_realname );
 	email_ensure_valid( $p_email );
 	email_ensure_not_disposable( $p_email );
 
