@@ -624,6 +624,7 @@ $g_show_user_email_threshold = NOBODY;
 /**
  * This specifies the access level that is needed to see realnames on user view
  * page
+ * @see $g_show_realname
  * @global integer $g_show_user_realname_threshold
  */
 $g_show_user_realname_threshold = NOBODY;
@@ -1205,6 +1206,7 @@ $g_show_version_dates_threshold = NOBODY;
 /**
  * show users with their real name or not
  * @see $g_sort_by_last_name
+ * @see $g_show_user_realname_threshold
  * @global integer $g_show_realname
  */
 $g_show_realname = OFF;

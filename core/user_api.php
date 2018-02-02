@@ -993,7 +993,8 @@ function user_get_name( $p_user_id ) {
  * @return string display name
  */
 function user_get_name_from_row( array $p_user_row ) {
-	if( ON == config_get( 'show_realname' ) ) {
+	if( ON == config_get( 'show_realname' ) &&
+	    access_has_project_level( config_get( 'show_user_realname_threshold', null, null, ALL_PROJECTS ) ) ) {
 		if( !is_blank( $p_user_row['realname'] ) ) {
 			return $p_user_row['realname'];
 		}

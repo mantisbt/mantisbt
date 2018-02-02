@@ -215,13 +215,16 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		return;
 	}
 
-	$t_username = user_get_name( $p_user_id );
+	$t_username = user_get_username( $p_user_id );
+	$t_name = user_get_name( $p_user_id );
+
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		$t_email = user_get_email( $p_user_id );
-		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
+		print_email_link_with_subject( $t_email, $t_username, $t_name, $p_bug_id );
 	} else {
+		$t_name = string_attribute( $t_name );
 		echo '<span class="user" style="text-decoration: line-through">';
-		echo $t_username;
+		echo '<a title="' . $t_name . '">' . $t_username . '</a>';
 		echo '</span>';
 	}
 }
@@ -307,6 +310,10 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 
 	foreach( $t_users as $t_key => $t_user ) {
 		$t_user_name = user_get_name_from_row( $t_user );
+		if( $t_user_name != $t_user['username'] ) {
+			$t_user_name = $t_user['username'] . ' (' . $t_user_name . ')';
+		}
+
 		$t_display[] = string_attribute( $t_user_name );
 		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );;
 	}
@@ -1636,39 +1643,35 @@ function get_email_link( $p_email, $p_text ) {
  *
  * @param string $p_email  Email Address.
  * @param string $p_text   Link text to display to user.
+ * @param string $p_tooltip The tooltip to show.
  * @param string $p_bug_id The bug identifier.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id ) {
+	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
+		$t_tooltip = ' title="' . $p_tooltip . '"';
+	} else {
+		$t_tooltip = '';
+	}
+
 	$t_bug = bug_get( $p_bug_id, true );
 	if( !access_has_project_level( config_get( 'show_user_email_threshold', null, null, $t_bug->project_id ), $t_bug->project_id ) ) {
-		echo $p_text;
+		echo $t_tooltip != '' ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
 		return;
 	}
-	$t_subject = email_build_subject( $p_bug_id );
-	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
-}
 
-/**
- * return the mailto: href string link instead of printing it
- * add subject line
- *
- * @param string $p_email   Email Address.
- * @param string $p_text    Link text to display to user.
- * @param string $p_subject Email subject line.
- * @return string
- */
-function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
+	$t_subject = email_build_subject( $p_bug_id );
+
 	# If we apply string_url() to the whole mailto: link then the @
 	# gets turned into a %40 and you can't right click in browsers to
 	# do Copy Email Address.  If we don't apply string_url() to the
 	# subject text then an ampersand (for example) will truncate the text
-	$t_subject = string_url( $p_subject );
+	$t_subject = string_url( $t_subject );
 	$t_email = string_url( $p_email );
 	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-	return '<a class="user" href="' . $t_mailto . '">' . $t_text . '</a>';
+	echo '<a class="user" href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
 }
 
 /**
