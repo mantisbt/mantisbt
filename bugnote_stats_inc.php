@@ -146,15 +146,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 
-		# Sort the array by user/real name
-		if( ON == config_get( 'show_realname' ) ) {
-			$t_name_field = 'realname';
-		} else {
-			$t_name_field = 'username';
-		}
+		# Sort the array by user name
 		$t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
-			$t_sort_name[$t_key] = $t_item[$t_name_field];
+			$t_sort_name[$t_key] = $t_item['name'];
 		}
 		array_multisort( $t_sort_name, $t_bugnote_stats );
 		unset( $t_sort_name );
@@ -165,7 +160,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						<table class="table table-bordered table-condensed table-striped">
 							<tr>
 								<td class="small-caption align-left">
-									<?php echo lang_get( $t_name_field ) ?>
+									<?php echo lang_get( 'username' ) ?>
 								</td>
 								<td class="small-caption align-left">
 									<?php echo lang_get( 'time_tracking' ) ?>
@@ -180,7 +175,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						?>
 							<tr>
 								<td class="small-caption">
-									<?php echo string_display_line( $t_item[$t_name_field] ) ?>
+									<?php echo string_display_line( $t_item['name'] ) ?>
 								</td>
 								<td class="small-caption">
 									<?php echo $t_item['sum_time_tracking'] ?>
