@@ -1057,14 +1057,14 @@ function user_get_name_from_row( array $p_user_row ) {
 function user_get_name_for_sorting_from_row( array $p_user_row ) {
 	if( !is_blank( $p_user_row['realname'] ) && config_get( 'show_realname' ) == ON ) {
 		if( config_get( 'sort_by_last_name' ) == ON ) {
-			$t_sort_name_bits = explode( ' ', strtolower( $p_user_row['realname'] ), 2 );
+			$t_sort_name_bits = explode( ' ', utf8_strtolower( $p_user_row['realname'] ), 2 );
 			return ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 		}
 		
-		return $t_sort_name = strtolower( $p_user_row['realname'] );
+		return $t_sort_name = utf8_strtolower( $p_user_row['realname'] );
 	}
 
-	return strtolower( $p_user_row['username'] );
+	return utf8_strtolower( $p_user_row['username'] );
 }
 
 /**
