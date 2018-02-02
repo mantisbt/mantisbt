@@ -987,14 +987,22 @@ function user_get_name( $p_user_id ) {
 }
 
 /**
+ * Show realnames be shown to logged in user?
+ *
+ * @return bool true to show, false otherwise.
+ */
+function user_show_realname() {
+	return access_has_project_level( config_get( 'show_user_realname_threshold', null, null, ALL_PROJECTS ) );
+}
+
+/**
  * Return the user's name for display.
  *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
  * @return string display name
  */
 function user_get_name_from_row( array $p_user_row ) {
-	if( ON == config_get( 'show_realname' ) &&
-	    access_has_project_level( config_get( 'show_user_realname_threshold', null, null, ALL_PROJECTS ) ) ) {
+	if( user_show_realname() ) {
 		if( !is_blank( $p_user_row['realname'] ) ) {
 			return $p_user_row['realname'];
 		}
@@ -1010,13 +1018,15 @@ function user_get_name_from_row( array $p_user_row ) {
  * @return string name for sorting
  */
 function user_get_name_for_sorting_from_row( array $p_user_row ) {
-	if( !is_blank( $p_user_row['realname'] ) && config_get( 'show_realname' ) == ON ) {
-		if( config_get( 'sort_by_last_name' ) == ON ) {
-			$t_sort_name_bits = explode( ' ', utf8_strtolower( $p_user_row['realname'] ), 2 );
-			return ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+	if( !is_blank( $p_user_row['realname'] ) ) {
+		if( user_show_realname() ) {
+			if( config_get( 'sort_by_last_name' ) == ON ) {
+				$t_sort_name_bits = explode( ' ', utf8_strtolower( $p_user_row['realname'] ), 2 );
+				return ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+			}
+
+			return utf8_strtolower( $p_user_row['realname'] );
 		}
-		
-		return $t_sort_name = utf8_strtolower( $p_user_row['realname'] );
 	}
 
 	return utf8_strtolower( $p_user_row['username'] );
