@@ -1204,6 +1204,7 @@ $g_show_version_dates_threshold = NOBODY;
 
 /**
  * show users with their real name or not
+ * @see $g_sort_by_last_name
  * @global integer $g_show_realname
  */
 $g_show_realname = OFF;
@@ -1211,6 +1212,7 @@ $g_show_realname = OFF;
 /**
  * sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted
  * with the "D"s
+ * @see $g_show_realname
  * @global integer $g_sort_by_last_name
  */
 $g_sort_by_last_name = OFF;

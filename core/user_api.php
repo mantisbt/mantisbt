@@ -1029,13 +1029,42 @@ function user_get_name( $p_user_id ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 	}
 
+	return user_get_name_from_row( $t_row );
+}
+
+/**
+ * Return the user's name for display.
+ *
+ * @param array $p_user_row The user row with 'realname' and 'username' fields
+ * @return string display name
+ */
+function user_get_name_from_row( array $p_user_row ) {
 	if( ON == config_get( 'show_realname' ) ) {
-		if( !is_blank( $t_row['realname'] ) ) {
-			return $t_row['realname'];
+		if( !is_blank( $p_user_row['realname'] ) ) {
+			return $p_user_row['realname'];
 		}
 	}
 
-	return $t_row['username'];
+	return $p_user_row['username'];
+}
+
+/**
+ * Get name used for sorting.
+ * 
+ * @param array $p_user_row The user row with 'realname' and 'username' fields
+ * @return string name for sorting
+ */
+function user_get_name_for_sorting_from_row( array $p_user_row ) {
+	if( !is_blank( $p_user_row['realname'] ) && config_get( 'show_realname' ) == ON ) {
+		if( config_get( 'sort_by_last_name' ) == ON ) {
+			$t_sort_name_bits = explode( ' ', strtolower( $p_user_row['realname'] ), 2 );
+			return ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+		}
+		
+		return $t_sort_name = strtolower( $p_user_row['realname'] );
+	}
+
+	return strtolower( $p_user_row['username'] );
 }
 
 /**
@@ -1315,26 +1344,17 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_display = array();
 	$t_sort = array();
 	$t_users = array();
-	$t_show_realname = ( ON == config_get( 'show_realname' ) );
-	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_users[] = $t_row['id'];
-		$t_user_name = string_attribute( $t_row['username'] );
-		$t_sort_name = $t_user_name;
-		if( ( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
-			$t_user_name = string_attribute( $t_row['realname'] );
-			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
-			}
-		}
+		$t_user_name = user_get_name_for_sorting_from_row( $t_row );
+		$t_user_name = string_attribute( $t_user_name );
 		$t_display[] = $t_user_name;
 		$t_sort[] = $t_sort_name;
 	}
+
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+
 	$t_count = count( $t_sort );
 	$t_user_list = array();
 	for( $i = 0;$i < $t_count; $i++ ) {
