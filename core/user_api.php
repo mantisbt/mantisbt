@@ -937,7 +937,12 @@ function user_get_email( $p_user_id ) {
  * @return string
  */
 function user_get_username( $p_user_id ) {
-	return user_get_field( $p_user_id, 'username' );
+	$t_row = user_cache_row( $p_user_id, false );
+	if( false == $t_row ) {
+		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
+	}
+
+	return $t_row['username'];
 }
 
 /**
