@@ -1027,21 +1027,15 @@ function user_get_name( $p_user_id ) {
 
 	if( false == $t_row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
-	} else {
-		if( ON == config_get( 'show_realname' ) ) {
-			if( is_blank( $t_row['realname'] ) ) {
-				return $t_row['username'];
-			} else {
-				if( isset( $t_row['duplicate_realname'] ) && ( ON == $t_row['duplicate_realname'] ) ) {
-					return $t_row['realname'] . ' (' . $t_row['username'] . ')';
-				} else {
-					return $t_row['realname'];
-				}
-			}
-		} else {
-			return $t_row['username'];
+	}
+
+	if( ON == config_get( 'show_realname' ) ) {
+		if( !is_blank( $t_row['realname'] ) ) {
+			return $t_row['realname'];
 		}
 	}
+
+	return $t_row['username'];
 }
 
 /**
