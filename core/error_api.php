@@ -247,11 +247,16 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 	$t_error_description = nl2br( $t_error_description );
 
+	# Make sure the file path is not disclosed via exception details
+	$t_error_description = str_replace( config_get_global( 'absolute_path' ), '.../', $t_error_description );
+
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
+
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ': ' . $t_error_description . "\n";
 
-			if( ON == config_get_global( 'show_detailed_errors' ) ) {
+			if( $t_show_detailed_errors ) {
 				echo "\n";
 				error_print_stack_trace();
 			}
@@ -334,7 +339,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				}
 				echo '</div>';
 
-				if( ON == config_get_global( 'show_detailed_errors' ) ) {
+				if( $t_show_detailed_errors ) {
 					echo '<p>';
 					error_print_details( $p_file, $p_line, $p_context );
 					echo '</p>';
