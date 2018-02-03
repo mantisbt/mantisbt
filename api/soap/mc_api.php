@@ -162,10 +162,6 @@ class ApiObjectFactory {
 	 */
 	static function faultFromException( Exception $p_exception ) {
 		$t_code = $p_exception->getCode();
-		$t_message = $p_exception->getMessage();
-
-		# Make sure the file path is not disclosed via exception details
-		$t_message = str_replace( config_get_global( 'absolute_path' ), '.../', $t_message );
 
 		switch( $t_code ) {
 			case ERROR_NO_FILE_SPECIFIED:
@@ -231,7 +227,7 @@ class ApiObjectFactory {
 			case ERROR_COLUMNS_INVALID:
 			case ERROR_API_TOKEN_NAME_NOT_UNIQUE:
 			case ERROR_INVALID_FIELD_VALUE:
-				return ApiObjectFactory::faultBadRequest( $t_message );
+				return ApiObjectFactory::faultBadRequest( $p_exception->getMessage() );
 
 			case ERROR_BUG_NOT_FOUND:
 			case ERROR_FILE_NOT_FOUND:
@@ -253,7 +249,7 @@ class ApiObjectFactory {
 			case ERROR_FILTER_NOT_FOUND:
 			case ERROR_TAG_NOT_FOUND:
 			case ERROR_TOKEN_NOT_FOUND:
-				return ApiObjectFactory::faultNotFound( $t_message );
+				return ApiObjectFactory::faultNotFound( $p_exception->getMessage() );
 				
 			case ERROR_ACCESS_DENIED:
 			case ERROR_PROTECTED_ACCOUNT:
@@ -271,18 +267,18 @@ class ApiObjectFactory {
 			case ERROR_LOST_PASSWORD_NOT_ENABLED:
 			case ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED:
 			case ERROR_FORM_TOKEN_INVALID:
-				return ApiObjectFactory::faultForbidden( $t_message );
+				return ApiObjectFactory::faultForbidden( $p_exception->getMessage() );
 
 			case ERROR_SPAM_SUSPECTED:
-				return ApiObjectFactory::faultTooManyRequests( $t_message );
+				return ApiObjectFactory::faultTooManyRequests( $p_exception->getMessage() );
 
 			case ERROR_CONFIG_OPT_INVALID:
 			case ERROR_FILE_INVALID_UPLOAD_PATH:
 				# TODO: These are configuration or db state errors.
-				return ApiObjectFactory::faultServerError( $t_message );
+				return ApiObjectFactory::faultServerError( $p_exception->getMessage() );
 
 			default:
-				return ApiObjectFactory::faultServerError( $t_message );
+				return ApiObjectFactory::faultServerError( $p_exception->getMessage() );
 		}
 	}
 
@@ -1138,9 +1134,6 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context
 
 	$t_error_stack = error_get_stack_trace();
 
-	# Make sure the file path is not disclosed via exception details
-	$t_error_description = str_replace( config_get_global( 'absolute_path' ), '.../', $t_error_description );
-	
 	error_log( '[mantisconnect.php] Error Type: ' . $t_error_type . ',' . "\n" . 'Error Description: ' . $t_error_description . "\n" . 'Stack Trace:' . "\n" . $t_error_stack );
 
 	throw new SoapFault( 'Server', 'Error Type: ' . $t_error_type . ',' . "\n" . 'Error Description: ' . $t_error_description );
