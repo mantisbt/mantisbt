@@ -309,12 +309,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_sort = array();
 
 	foreach( $t_users as $t_key => $t_user ) {
-		$t_user_name = user_get_name_from_row( $t_user );
-		if( $t_user_name != $t_user['username'] ) {
-			$t_user_name = $t_user['username'] . ' (' . $t_user_name . ')';
-		}
-
-		$t_display[] = string_attribute( $t_user_name );
+		$t_display[] = user_get_expanded_name_from_row( $t_user );
 		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
 
@@ -326,7 +321,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
 		check_selected( $p_user_id, (int)$t_row['id'] );
-		echo '>' . $t_display[$i] . '</option>';
+		echo '>' . string_attribute( $t_display[$i] ) . '</option>';
 	}
 }
 
