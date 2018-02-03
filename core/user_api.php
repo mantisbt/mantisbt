@@ -375,8 +375,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
  * @return void
  */
 function user_ensure_realname_unique( $p_username, $p_realname ) {
-	$t_result = user_is_realname_unique( $p_username, $p_realname );
-	if( $t_result == 0 || $t_result > 1 ) {
+	if( 1 > user_is_realname_unique( $p_username, $p_realname ) ) {
 		throw new ClientException(
 			sprintf( "Realname '%s' is not unique", $p_realname ),
 			ERROR_USER_REAL_MATCH_USER );
