@@ -224,11 +224,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 
-			foreach( $t_issue['users'] as $t_username => $t_user_info ) {
+			foreach( $t_issue['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
-			<?php echo $t_username ?>
+			<?php print_user( $t_user_id ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ) ?>
@@ -278,11 +278,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
-	foreach ( $t_bugnote_stats['users'] as $t_username => $t_user_info ) {
+	foreach ( $t_bugnote_stats['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
-			<?php echo $t_username; ?>
+			<?php print_user( $t_user_id ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ); ?>
