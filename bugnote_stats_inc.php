@@ -149,8 +149,9 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		# Sort the array by user name
 		$t_sort_name = array();
 		foreach ( $t_bugnote_stats as $t_key => $t_item ) {
-			$t_sort_name[$t_key] = $t_item['name'];
+			$t_sort_name[$t_key] = user_get_name_for_sorting_from_row( $t_item );
 		}
+
 		array_multisort( $t_sort_name, $t_bugnote_stats );
 		unset( $t_sort_name );
 ?>
@@ -175,7 +176,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 						?>
 							<tr>
 								<td class="small-caption">
-									<?php echo string_display_line( $t_item['name'] ) ?>
+									<?php print_user( $t_item['user_id'] ) ?>
 								</td>
 								<td class="small-caption">
 									<?php echo $t_item['sum_time_tracking'] ?>

@@ -782,7 +782,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$t_results = array();
 
 	db_param_push();
-	$t_query = 'SELECT username, realname, SUM(time_tracking) AS sum_time_tracking
+	$t_query = 'SELECT u.id AS user_id, username, realname, SUM(time_tracking) AS sum_time_tracking
 				FROM {user} u, {bugnote} bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = ' . db_param() . $t_from_where . $t_to_where .
@@ -791,7 +791,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_row['name'] = user_get_name_from_row( $t_row );
-		$t_results[] = $t_row;
+		$t_results[(int)$t_row['user_id']] = $t_row;
 	}
 
 	return $t_results;
