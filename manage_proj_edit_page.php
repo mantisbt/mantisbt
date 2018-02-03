@@ -726,16 +726,16 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		<tbody>
 <?php
 	$t_users = project_get_all_user_rows( $f_project_id, ANYBODY, $f_show_global_users );
-	$t_display = array();
+	$t_user_ids = array();
 	$t_sort = array();
 
 	foreach ( $t_users as $t_user ) {
 		$t_user_name = user_get_name_from_row( $t_user );
-		$t_display[] = string_attribute( $t_user_name );
+		$t_user_ids[] = $t_user['id'];
 		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
 
-	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_user_ids );
 
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
@@ -754,7 +754,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			<tr>
 				<td>
 					<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
-						<?php echo $t_display[$i] ?>
+						<?php print_user( $t_user_ids[$i] ) ?>
 					</a>
 				</td>
 				<td>
@@ -842,7 +842,7 @@ if( count( $t_users ) > 0 ) { ?>
 				<td>
 					<select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10" required><?php
 						foreach( $t_users AS $t_user_id=>$t_display_name ) {
-							echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
+							echo '<option value="', $t_user_id, '">', string_attribute( $t_display_name ), '</option>';
 						} ?>
 					</select>
 				</td>

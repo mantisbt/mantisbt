@@ -1148,7 +1148,7 @@ function print_all_bug_action_option_list( array $p_project_ids = null ) {
 function print_project_user_list_option_list( $p_project_id = null ) {
 	$t_users = user_get_unassigned_by_project_id( $p_project_id );
 	foreach( $t_users as $t_id=>$t_name ) {
-		echo '<option value="' . $t_id . '">' . $t_name . '</option>';
+		echo '<option value="' . $t_id . '">' . string_attribute( $t_name ) . '</option>';
 	}
 }
 
