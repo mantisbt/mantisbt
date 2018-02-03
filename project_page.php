@@ -119,9 +119,8 @@ if( count( $t_users ) > 0 ) {
 
 	# @todo sort users in DESC order by access level, then ASC by username/realname.
 	foreach ( $t_users as $t_user_data ) {
-		$t_user_id = $t_user_data['id'];
-		$t_user_name = user_get_name( $t_user_id );
-		echo $t_user_name, ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
+		print_user( $t_user_data['id'] );
+		echo ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
 	}
 }
 
