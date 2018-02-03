@@ -335,11 +335,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				}
 
 				echo '<div class="col-md-12 col-xs-12">';
-				echo '<div class="space-20"></div>';
-				echo '<div class="alert alert-danger">';
+				echo '<div class="space-20"></div>', "\n";
+				echo '<div class="alert alert-danger">', "\n";
 
-				echo '<p class="bold">' . $t_error_type . '</p>';
-				echo '<p>', $t_error_description, '</p>';
+				echo '<p class="bold">' . $t_error_type . '</p>', "\n";
+				echo '<p>', $t_error_description, '</p>', "\n";
 
 				echo '<div class="error-info">';
 				if( null === $g_error_proceed_url ) {
@@ -347,15 +347,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				} else {
 					echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 				}
-				echo '</div>';
+				echo '</div>', "\n";
 
 				if( $t_show_detailed_errors ) {
-					echo '<p>';
 					error_print_details( $p_file, $p_line, $p_context );
-					echo '</p>';
-					echo '<p>';
 					error_print_stack_trace();
-					echo '</p>';
 				}
 				echo '</div></div>';
 
@@ -539,7 +535,7 @@ function error_print_stack_trace( $p_exception = null ) {
 
 	echo '<div class="table-responsive">';
 	echo '<table class="table table-bordered table-striped table-condensed">';
-	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
+	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>', "\n";
 
 	$t_stack = error_stack_trace( $p_exception );
 
@@ -552,13 +548,12 @@ function error_print_stack_trace( $p_exception = null ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
-			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' ), ' )</td></tr>';
+			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' ), ' )</td></tr>', "\n";
 		} else {
-			echo '<td>-</td></tr>';
+			echo '<td>-</td></tr>', "\n";
 		}
 	}
-
-	echo '</table>';
+	echo '</table>', '</div>';
 }
 
 /**
