@@ -54,12 +54,15 @@ if( !$g_bypass_error_handler ) {
 	set_exception_handler( 'error_exception_handler' );
 }
 
+/**
+ * @global Exception $g_exception
+ */
 $g_exception = null;
 
 /**
  * Unhandled exception handler
  *
- * @param Exception|Error $p_exception The exception to handle
+ * @param \Mantis\Exceptions\MantisException|Exception|Error $p_exception The exception to handle
  * @return void
  */
 function error_exception_handler( $p_exception ) {
