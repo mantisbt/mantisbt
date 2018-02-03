@@ -263,9 +263,10 @@ function lang_get_current() {
  * This function will return one of (in order of preference):
  *  1. The string in the current user's preferred language (if defined)
  *  2. The string in English
+ * Note: when $p_string is 'MANTIS_ERROR', the return value is an array of error messages.
  * @param string $p_string The language string to retrieve.
  * @param string $p_lang   The language name.
- * @return string
+ * @return string|array
  */
 function lang_get( $p_string, $p_lang = null ) {
 	global $g_lang_strings;
