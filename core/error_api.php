@@ -105,11 +105,10 @@ function error_stack_trace( $p_exception = null ) {
 	}
 
 	if ( $p_exception === null ) {
-		$t_stack = debug_backtrace();
-
-		# remove this function and its caller from the stack trace.
-		array_shift( $t_stack );
-		array_shift( $t_stack );
+		# The reported stack trace should begin with the function call where the
+		# error was triggered, so we remove the internal error handler calls
+		# (this function, its parent and the error handler itself).
+		$t_stack = array_slice( debug_backtrace(), 3 );
 	} else {
 		$t_stack = $p_exception->getTrace();
 	}
