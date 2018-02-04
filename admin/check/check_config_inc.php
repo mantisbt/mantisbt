@@ -85,11 +85,6 @@ check_print_test_warn_row( 'Detailed errors should be OFF',
 	array( false => 'Setting show_detailed_errors = ON is a potential security hazard as it can expose sensitive information.' )
 );
 
-check_print_test_warn_row( 'MantisBT Application Errors should halt execution',
-	$g_display_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT,
-	array( false => 'Continuing after an error may lead to system and/or data integrity issues. Set $g_display_errors[E_USER_ERROR] = DISPLAY_ERROR_HALT;' )
-);
-
 check_print_test_warn_row( 'Email debugging should be OFF',
 	empty( $g_debug_email ),
 	array( false => 'All notification e-mails will be sent to: ' . $g_debug_email )
