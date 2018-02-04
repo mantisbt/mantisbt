@@ -70,7 +70,11 @@ $t_container['errorHandler'] = function( $p_container ) {
 			return $p_response->withStatus( $p_exception->getCode(), $p_exception->getMessage() )->withJson( $t_data );
 		}
 
-		return $p_response->withStatus( HTTP_STATUS_INTERNAL_SERVER_ERROR, $p_exception->getMessage() )->withJson( $t_data );
+		$t_stack_as_string = error_stack_track_as_string( $p_exception );
+		$t_error_to_log =  $p_exception->getMessage() . "\n" . $t_stack_as_string;
+		error_log( $t_error_to_log );
+
+		return $p_response->withStatus( HTTP_STATUS_INTERNAL_SERVER_ERROR )->withJson( $t_data );
 	};
 };
 

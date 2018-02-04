@@ -1057,11 +1057,25 @@ function mci_get_time_tracking_from_note( $p_issue_id, array $p_note ) {
 function mc_error_exception_handler( $p_exception ) {
 	if( is_a( $p_exception, 'Mantis\Exceptions\ClientException' ) ) {
 		$t_cause = 'Client';
+		$t_message = $p_exception->getMessage();
+		$t_log = false;
+	} else if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
+		$t_cause = 'Server';
+		$t_message = $p_exception->getMessage();
+		$t_log = true;
 	} else {
 		$t_cause = 'Server';
+		$t_message = 'Internal Service Error';		
+		$t_log = true;
 	}
 
-	$t_fault = htmlentities( $p_exception->getMessage() );
+	if( $t_log ) {
+		$t_stack_as_string = error_stack_track_as_string( $p_exception );
+		$t_error_to_log =  $p_exception->getMessage() . "\n" . $t_stack_as_string;
+		error_log( $t_error_to_log );
+	}
+
+	$t_fault = htmlentities( $t_message );
 
 	echo <<<EOL
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
