@@ -93,7 +93,7 @@ if( $t_use_xsendfile ) {
 }
 
 $t_finfo_exists = class_exists( 'finfo' );
-check_print_test_warn_row(
+check_print_test_row(
 	'Fileinfo extension is available for determining file MIME types',
 	$t_finfo_exists,
 	array( false => 'Web clients may struggle to download files without knowing the MIME type of each attachment.' )
