@@ -86,25 +86,29 @@ function error_exception_handler( $p_exception ) {
 	}
 
 	# trigger a generic error
-	# TODO: we may want to log such errors
 	trigger_error( ERROR_PHP, ERROR );
 }
 
 /**
  * Get error stack based on last exception
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
  * @return array The stack trace as an array
  */
-function error_stack_trace() {
-	global $g_exception;
+function error_stack_trace( $p_exception = null ) {
+	if( $p_exception === null ) {
+		global $g_exception;
+		$p_exception = $g_exception;
+	}
 
-	if ( $g_exception === null ) {
+	if ( $p_exception === null ) {
 		$t_stack = debug_backtrace();
 
 		# remove this function and its caller from the stack trace.
 		array_shift( $t_stack );
 		array_shift( $t_stack );
 	} else {
-		$t_stack = $g_exception->getTrace();
+		$t_stack = $p_exception->getTrace();
 	}
 
 	return $t_stack;
@@ -198,9 +202,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			break;
 		case E_USER_ERROR:
 			if( $p_error == ERROR_PHP ) {
+				$t_error_type = 'INTERNAL APPLICATION ERROR';
+				$t_error_description = '';
+
 				global $g_exception;
-				$t_error_type = 'APPLICATION ERROR';
-				$t_error_description = $g_exception->getMessage();
+				$t_stack_as_string = error_stack_track_as_string();
+				$t_error_to_log =  $g_exception->getMessage() . "\n" . $t_stack_as_string;
+				error_log( $t_error_to_log );
 			} else {
 				$t_error_type = 'APPLICATION ERROR #' . $p_error;
 				$t_error_description = error_string( $p_error );
@@ -480,30 +488,47 @@ function error_print_context( array $p_context ) {
 }
 
 /**
- * Print out a stack trace
+ * Get the stack trace as a string that can be logged or echoed to CLI output.
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @return string multi-line printout of stack trace.
  */
-function error_print_stack_trace() {
-	$t_stack = error_stack_trace();
+function error_stack_track_as_string( $p_exception = null ) {
+	$t_stack = error_stack_trace( $p_exception );
+	$t_output = '';
+
+	foreach( $t_stack as $t_frame ) {
+		$t_output .= ( isset( $t_frame['file'] ) ? $t_frame['file'] : '-' ) . ': ' .
+			( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ) . ': ' .
+			( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ) . ' - ' .
+			( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ) . ' - ' .
+			( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' );
+
+		$t_args = array();
+		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+			foreach( $t_frame['args'] as $t_value ) {
+				$t_args[] = error_build_parameter_string( $t_value );
+			}
+
+			$t_output .= '( ' . implode( $t_args, ', ' ) . " )\n";
+		} else {
+			$t_output .= "()\n";
+		}
+	}
+
+	return $t_output;
+}
+
+/**
+ * Print out a stack trace
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ */
+function error_print_stack_trace( $p_exception = null ) {
+	$t_stack = error_stack_trace( $p_exception );
 
 	if( php_sapi_name() == 'cli' ) {
-		foreach( $t_stack as $t_frame ) {
-			echo ( isset( $t_frame['file'] ) ? $t_frame['file'] : '-' ), ': ' ,
-				( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), ': ',
-				( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), ' - ',
-				( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), ' - ',
-				( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' );
-	
-			$t_args = array();
-			if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
-				foreach( $t_frame['args'] as $t_value ) {
-					$t_args[] = error_build_parameter_string( $t_value );
-				}
-				echo '(', implode( $t_args, ', ' ), ' )', "\n";
-			} else {
-				echo "()\n";
-			}
-		}
-	
+		echo error_stack_track_as_string( $p_exception );
 		return;
 	}
 
