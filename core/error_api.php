@@ -538,26 +538,43 @@ function error_print_stack_trace( $p_exception = null ) {
 		echo error_stack_trace_as_string( $p_exception );
 		return;
 	}
-
-	echo '<div class="table-responsive">';
-	echo '<table class="table table-bordered table-striped table-condensed">';
-	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>', "\n";
-
+?>
+	<h3>Stack trace</h3>
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-condensed">
+				<tr>
+					<th>#</th>
+					<th>Filename</th>
+					<th>Line</th>
+					<th>Class</th>
+					<th>Type</th>
+					<th>Function</th>
+					<th>Args</th>
+				</tr>
+<?php
 	$t_stack = error_stack_trace( $p_exception );
 
-	foreach( $t_stack as $t_frame ) {
-		echo '<tr>';
-		echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
-
-		$t_args = array();
+	foreach( $t_stack as $t_id => $t_frame ) {
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+			$t_args = array();
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
-			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' ), ' )</td></tr>', "\n";
 		} else {
-			echo '<td>-</td></tr>', "\n";
+			$t_args = array('-');
 		}
+
+		printf(
+			"<tr>\n" . str_repeat( "<td>%s</td>\n", 7 ) . "</tr>\n",
+			$t_id,
+			isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-',
+			isset( $t_frame['line'] ) ? $t_frame['line'] : '-',
+			isset( $t_frame['class'] ) ? $t_frame['class'] : '-',
+			isset( $t_frame['type'] ) ? $t_frame['type'] : '-',
+			isset( $t_frame['function'] ) ? $t_frame['function'] : '-',
+			htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' )
+		);
+
 	}
 	echo '</table>', '</div>';
 }
