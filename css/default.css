@@ -101,3 +101,7 @@ td.print-overdue    { font-weight: bold; }
 .resolved  {     
     text-decoration: line-through;
 }
+
+.error-details .code {
+	font-family: monospace;
+}

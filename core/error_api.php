@@ -433,20 +433,24 @@ function error_print_delayed() {
  * @return void
  */
 function error_print_details( $p_file, $p_line, array $p_context ) {
-	?>
-		<table class="width-100">
-			<tr>
-				<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
-			</tr>
-			<tr>
-				<td>Line: <?php echo $p_line?></td>
-			</tr>
-			<tr>
-				<td>
-					<?php error_print_context( $p_context )?>
-				</td>
-			</tr>
-		</table>
+?>
+	<div class="error-details">
+		<hr>
+		<h2>Detailed error information</h2>
+		<ul>
+			<li>Full path:
+				<span class="code">
+					<?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?>
+				</span>
+			</li>
+			<li>Line number:
+				<span class="code"><?php echo $p_line ?></span>
+			</li>
+		</ul>
+
+		<h3>Context</h3>
+		<?php error_print_context( $p_context )?>
+	</div>
 <?php
 }
 
