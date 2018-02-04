@@ -50,7 +50,8 @@ $t_extensions_required = array(
 	'pcre',
 	'Reflection',
 	'session',
-	'mbstring'
+	'mbstring',
+	'fileinfo'
 );
 
 foreach( $t_extensions_required as $t_extension ) {

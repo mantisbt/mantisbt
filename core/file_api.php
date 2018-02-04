@@ -993,7 +993,7 @@ function file_ensure_uploaded( array $p_file ) {
 }
 
 /**
- * Return instance of fileinfo class if enabled in php
+ * Return instance of fileinfo class
  * @return finfo instance of finfo class.
  */
 function file_create_finfo() {
