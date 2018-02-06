@@ -74,7 +74,7 @@ function mention_get_candidates( $p_text ) {
 			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
 			. ')'
 			# any word char or period, but must not end with period
-			. '([\w.]*[\w])'
+			. '([\w\-.]*[\w])'
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag
 			. '(?=[^\w@]|$)'
