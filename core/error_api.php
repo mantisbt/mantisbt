@@ -175,6 +175,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		}
 	}
 
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
+
 	# Force errors to use HALT method.
 	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
 		$t_method = DISPLAY_ERROR_HALT;
@@ -203,12 +205,17 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		case E_USER_ERROR:
 			if( $p_error == ERROR_PHP ) {
 				$t_error_type = 'INTERNAL APPLICATION ERROR';
-				$t_error_description = '';
 
 				global $g_exception;
-				$t_stack_as_string = error_stack_trace_as_string();
-				$t_error_to_log =  $g_exception->getMessage() . "\n" . $t_stack_as_string;
+				$t_error_description = $g_exception->getMessage();
+				$t_error_to_log = $t_error_description . "\n" . error_stack_trace_as_string();
 				error_log( $t_error_to_log );
+
+				# If show detailed errors is OFF hide PHP exceptions since they sometimes
+				# include file path.
+				if( !$t_show_detailed_errors ) {
+					$t_error_description = '';
+				}
 			} else {
 				$t_error_type = 'APPLICATION ERROR #' . $p_error;
 				$t_error_description = error_string( $p_error );
@@ -259,7 +266,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ': ' . $t_error_description . "\n";
 
-			if( ON == config_get_global( 'show_detailed_errors' ) ) {
+			if( $t_show_detailed_errors ) {
 				echo "\n";
 				error_print_stack_trace();
 			}
@@ -342,7 +349,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				}
 				echo '</div>';
 
-				if( ON == config_get_global( 'show_detailed_errors' ) ) {
+				if( $t_show_detailed_errors ) {
 					echo '<p>';
 					error_print_details( $p_file, $p_line, $p_context );
 					echo '</p>';
