@@ -130,7 +130,6 @@ function error_stack_trace( $p_exception = null ) {
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context To the active symbol table at the point the error occurred (optional).
  * @return void
  * @uses lang_api.php
  * @uses config_api.php
@@ -138,7 +137,7 @@ function error_stack_trace( $p_exception = null ) {
  * @uses database_api.php (optional)
  * @uses html_api.php (optional)
  */
-function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 	global $g_error_send_page_header;
 
@@ -352,7 +351,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				echo '</div>', "\n";
 
 				if( $t_show_detailed_errors ) {
-					error_print_details( $p_file, $p_line, $p_context );
+					error_print_details( $p_file, $p_line );
 					error_print_stack_trace();
 				}
 				echo '</div></div>';
@@ -426,13 +425,12 @@ function error_print_delayed() {
 }
 
 /**
- * Print out the error details including context
+ * Print out the error details
  * @param string  $p_file    File error occurred in.
  * @param integer $p_line    Line number error occurred on.
- * @param array   $p_context Error context.
  * @return void
  */
-function error_print_details( $p_file, $p_line, array $p_context ) {
+function error_print_details( $p_file, $p_line ) {
 ?>
 	<div class="error-details">
 		<hr>
@@ -447,54 +445,10 @@ function error_print_details( $p_file, $p_line, array $p_context ) {
 				<span class="code"><?php echo $p_line ?></span>
 			</li>
 		</ul>
-
-		<h3>Context</h3>
-		<?php error_print_context( $p_context )?>
 	</div>
 <?php
 }
 
-/**
- * Print out the variable context given
- * @param array $p_context Error context.
- * @return void
- */
-function error_print_context( array $p_context ) {
-	if( !is_array( $p_context ) ) {
-		return;
-	}
-
-	echo '<table class="width100" style="table-layout:fixed;"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
-
-	# print normal variables
-	foreach( $p_context as $t_var => $t_val ) {
-		if( !is_array( $t_val ) && !is_object( $t_val ) ) {
-			$t_type = gettype( $t_val );
-			$t_val = htmlentities( (string)$t_val, ENT_COMPAT, 'UTF-8' );
-
-			# Mask Passwords
-			if( strpos( $t_var, 'password' ) !== false ) {
-				$t_val = '**********';
-			}
-
-			echo '<tr><td style="width=20%; word-wrap:break-word; overflow:auto;">', $t_var,
-				'</td><td style="width=70%; word-wrap:break-word; overflow:auto;">', $t_val,
-				'</td><td style="width=10%;">', $t_type, '</td></tr>', "\n";
-		}
-	}
-
-	# print arrays
-	foreach( $p_context as $t_var => $t_val ) {
-		if( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			echo '<tr><td colspan="3" style="word-wrap:break-word"><br /><strong>', $t_var, '</strong></td></tr>';
-			echo '<tr><td colspan="3">';
-			error_print_context( $t_val );
-			echo '</td></tr>';
-		}
-	}
-
-	echo '</table>';
-}
 
 /**
  * Get the stack trace as a string that can be logged or echoed to CLI output.
