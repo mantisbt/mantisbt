@@ -927,7 +927,6 @@ function string_prepare_header( $p_string ) {
 	return $t_string[0];
 }
 
-
 /**
  * Replacement for str_pad. $padStr may contain multi-byte characters.
  *
@@ -974,4 +973,42 @@ function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
     }
 
     trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+}
+
+/**
+ * Return the number of UTF-8 characters in a string
+ * @param string $p_string
+ * @return integer number of UTF-8 characters in string
+ * @deprecated mb_strlen() should be used in preference to this function
+ */
+function utf8_strlen( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strlen( $p_string );
+}
+
+/**
+ * Get part of string
+ * @param string $p_string
+ * @param integer $p_offset
+ * @param integer $p_length
+ * @return mixed string or FALSE if failure
+ * @deprecated mb_substr() should be used in preference to this function
+ */
+function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_substr( $p_string, $p_offset, $p_length );
+}
+
+/**
+ * Make a string lowercase
+ * @param string $p_string
+ * @return string with all alphabetic characters converted to lowercase
+ * @deprecated mb_strtolower() should be used in preference to this function
+ */
+function utf8_strtolower( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strtolower( $p_string );
 }
