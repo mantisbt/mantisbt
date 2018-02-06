@@ -206,7 +206,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				$t_error_description = '';
 
 				global $g_exception;
-				$t_stack_as_string = error_stack_track_as_string();
+				$t_stack_as_string = error_stack_trace_as_string();
 				$t_error_to_log =  $g_exception->getMessage() . "\n" . $t_stack_as_string;
 				error_log( $t_error_to_log );
 			} else {
@@ -493,7 +493,7 @@ function error_print_context( array $p_context ) {
  * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
  * @return string multi-line printout of stack trace.
  */
-function error_stack_track_as_string( $p_exception = null ) {
+function error_stack_trace_as_string( $p_exception = null ) {
 	$t_stack = error_stack_trace( $p_exception );
 	$t_output = '';
 
@@ -528,7 +528,7 @@ function error_print_stack_trace( $p_exception = null ) {
 	$t_stack = error_stack_trace( $p_exception );
 
 	if( php_sapi_name() == 'cli' ) {
-		echo error_stack_track_as_string( $p_exception );
+		echo error_stack_trace_as_string( $p_exception );
 		return;
 	}
 
