@@ -532,8 +532,6 @@ function error_stack_trace_as_string( $p_exception = null ) {
  * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
  */
 function error_print_stack_trace( $p_exception = null ) {
-	$t_stack = error_stack_trace( $p_exception );
-
 	if( php_sapi_name() == 'cli' ) {
 		echo error_stack_trace_as_string( $p_exception );
 		return;
@@ -543,7 +541,7 @@ function error_print_stack_trace( $p_exception = null ) {
 	echo '<table class="table table-bordered table-striped table-condensed">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
-	# remove the call to the error handler from the stack trace
+	$t_stack = error_stack_trace( $p_exception );
 
 	foreach( $t_stack as $t_frame ) {
 		echo '<tr>';
@@ -559,6 +557,7 @@ function error_print_stack_trace( $p_exception = null ) {
 			echo '<td>-</td></tr>';
 		}
 	}
+
 	echo '</table>';
 }
 
