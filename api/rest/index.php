@@ -45,7 +45,9 @@ ApiObjectFactory::$soap = false;
 
 # Show SLIM detailed errors according to Mantis settings
 $t_config = array();
-if( ON == config_get_global( 'show_detailed_errors' ) ) {
+
+$t_show_detailed_errors = ON == config_get_global( 'show_detailed_errors' );
+if( $t_show_detailed_errors ) {
 	$t_config['settings'] = array( 'displayErrorDetails' => true );
 }
 
@@ -74,7 +76,11 @@ $t_container['errorHandler'] = function( $p_container ) {
 		$t_error_to_log =  $p_exception->getMessage() . "\n" . $t_stack_as_string;
 		error_log( $t_error_to_log );
 
-		return $p_response->withStatus( HTTP_STATUS_INTERNAL_SERVER_ERROR )->withJson( $t_data );
+		if( $t_show_detailed_errors ) {
+			$p_response = $p_response->withJson( $t_data );
+		}
+
+		return $p_response->withStatus( HTTP_STATUS_INTERNAL_SERVER_ERROR );
 	};
 };
 
