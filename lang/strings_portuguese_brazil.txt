@@ -916,6 +916,7 @@ $s_total_time = 'Tempo total';
 $s_developer_stats = 'Estatísticas de Desenvolvedores';
 $s_reporter_stats = 'Estatísticas de Relatores';
 $s_orct = '(aberto/resolvido/fechado/total)';
+$s_summary_header = 'aberta/resolvida/fechada/total/proporção resolvida/proporção';
 $s_any = 'qualquer';
 $s_all = 'todos';
 $s_show = 'Exibir';
