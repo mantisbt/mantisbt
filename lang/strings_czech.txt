@@ -43,6 +43,7 @@
  * @author Cvanca
  * @author Dvorapa
  * @author FikusModry
+ * @author Ilimanaq29
  * @author Jezevec
  * @author Kuvaly
  * @author Luk
@@ -906,6 +907,7 @@ $s_total_time = 'celkový čas';
 $s_developer_stats = 'vývojářské statistiky';
 $s_reporter_stats = 'reportérské statistiky';
 $s_orct = '(otevřené/vyřešené/uzavřené/celkem)';
+$s_summary_header = 'otevřený/vyřešený/zavřený/úplný/vyřešený poměr';
 $s_any = 'libovolné';
 $s_all = 'vše';
 $s_show = 'Ukázat';
