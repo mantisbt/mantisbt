@@ -1113,11 +1113,6 @@ function auth_get_current_user_id() {
  * @access public
  */
 function auth_user_id_from_cookie( $p_cookie_string ) {
-	# Save a db query if value provided doesn't look like a cookie
-	if( strlen( $p_cookie_string ) != AUTH_COOKIE_LENGTH ) {
-		return false;
-	}
-
 	if( $t_result = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
 		$t_user_id = (int)$t_result['id'];
 		return $t_user_id;
