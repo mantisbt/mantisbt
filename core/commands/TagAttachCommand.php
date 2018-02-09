@@ -94,7 +94,7 @@ class TagAttachCommand extends Command {
 		foreach( $t_tags as $t_tag ) {
 			if( isset( $t_tag['id'] ) ) {
 				tag_ensure_exists( $t_tag['id'] );
-				$this->tagsToAttach[] = (int)$t_tag['id'];
+                $this->tagsToAttach[] = $t_tag;
 			} else if( isset( $t_tag['name'] ) ) {
 				$t_tag_row = tag_get_by_name( $t_tag['name'] );
 				if( $t_tag_row === false ) {
@@ -109,7 +109,7 @@ class TagAttachCommand extends Command {
 							array( 'tags' ) );
 					}
 				} else {
-					$this->tagsToAttach[] = (int)$t_tag_row['id'];
+                    $this->tagsToAttach[] = $t_tag_row;
 				}
 			} else {
 				# invalid tag with no id or name.
@@ -127,21 +127,22 @@ class TagAttachCommand extends Command {
 		$t_attached_tags = array();
 
 		# Attach tags that already exist
-		foreach( $this->tagsToAttach as $t_tag_id ) {
-			if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
-				tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id );
-				$t_attached_tags[] = tag_get( $t_tag_id );
-			}
-		}
+        foreach( $this->tagsToAttach as $t_tag ) {
+            $t_tag_id = (int)$t_tag['id'];
+            if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
+                tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id, $t_tag['name'] );
+                $t_attached_tags[] = tag_get( $t_tag_id );
+            }
+        }
 
-		# Create new tags and then attach them
-		foreach( $this->tagsToCreate as $t_tag_name ) {
-			$t_tag_id = tag_create( $t_tag_name, $this->user_id );
-			if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
-				tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id );
-				$t_attached_tags[] = tag_get( $t_tag_id );
-			}
-		}
+        # Create new tags and then attach them
+        foreach( $this->tagsToCreate as $t_tag_name ) {
+            $t_tag_id = tag_create( $t_tag_name, $this->user_id );
+            if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
+                tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id, $t_tag_name );
+                $t_attached_tags[] = tag_get( $t_tag_id );
+            }
+        }
 
 		if( !empty( $t_attached_tags ) ) {
 			event_signal( 'EVENT_TAG_ATTACHED', array( $this->issue_id, $t_attached_tags ) );

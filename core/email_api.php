@@ -388,6 +388,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'resolved':
 		case 'closed':
 		case 'bugnote':
+        case 'tag_attached':
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			break;
 		case 'owner':
@@ -686,6 +687,15 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
 	$t_opt[] = user_get_name( $p_user_id );
 
 	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, array( $p_user_id ) );
+}
+
+/**
+ * Send notifications for bug update.
+ * @param int $p_bug_id  The bug id.
+ */
+function email_tag_attached( $p_bug_id ) {
+    log_event( LOG_EMAIL, sprintf( 'Issue #%d has tag attached.', $p_bug_id ) );
+    email_generic( $p_bug_id, 'tag_attached', '$s_email_notification_title_for_action_tag_attached' );
 }
 
 /**
@@ -2017,7 +2027,7 @@ function email_shutdown_function() {
  * @return array List of actions
  */
 function email_get_actions() {
-	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+    $t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation', 'tag_attached' );
 
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_actions[] = 'sponsor';

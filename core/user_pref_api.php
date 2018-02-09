@@ -111,7 +111,12 @@ class UserPreferences {
 	 */
 	protected $email_on_status = null;
 
-	/**
+    /**
+     * Receive email on bug status change
+     */
+    protected $email_on_tag_attached = null;
+
+    /**
 	 * Receive email on bug priority change
 	 */
 	protected $email_on_priority = null;
