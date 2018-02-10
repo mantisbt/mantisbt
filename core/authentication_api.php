@@ -100,7 +100,7 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 	}
 
 	if( $t_user_id ) {
-		$t_username = user_get_name( $t_user_id );
+		$t_username = user_get_username( $t_user_id );
 		$t_email = user_get_email( $t_user_id );
 	} else {
 		$t_username = $p_username;
