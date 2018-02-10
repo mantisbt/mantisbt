@@ -84,7 +84,8 @@ function layout_page_header_begin( $p_page_title = null ) {
 
 	$t_favicon_image = config_get( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
-		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
+		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '.ico" type="image/vnd.microsoft.icon" />', "\n";
+		echo "\t", '<link rel="icon" href="',          helper_mantis_url( $t_favicon_image ), '.png" type="image/png" />',                "\n";
 	}
 
 	# Advertise the availability of the browser search plug-ins.
@@ -361,7 +362,8 @@ function layout_login_page_begin() {
 
 	$t_favicon_image = config_get( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
-		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
+		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '.ico" type="image/vnd.microsoft.icon" />', "\n";
+		echo "\t", '<link rel="icon" href="',          helper_mantis_url( $t_favicon_image ), '.png" type="image/png" />',                "\n";
 	}
 
 	# Advertise the availability of the browser search plug-ins.
