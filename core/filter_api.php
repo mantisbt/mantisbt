@@ -1051,6 +1051,8 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  */
 function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
 
+	static $s_fk_map;
+	
 	$p_query_clauses['order'] = array();
 
 	# Get only the visible, and sortable, column properties
@@ -1062,6 +1064,17 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 
 	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( null !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = '{bug}.sticky DESC';
+	}
+	
+	# For user fields, the complete definition of the sort_field is deferred
+	# until for loop below
+	if( !isset( $s_fk_map ) ) {
+		$s_fk_map = array(
+				'category_id' => array( 'table' => '{category}', 'sort_field' => 'name' ),
+				'project_id'  => array( 'table' => '{project}' , 'sort_field' => 'name' ),
+				'handler_id'  => array( 'table' => '{user}' )  ,
+				'reporter_id' => array( 'table' => '{user}' )  ,
+		);
 	}
 
 	$t_included_project_ids = $p_query_clauses['metadata']['included_projects'];
@@ -1167,6 +1180,45 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				if( isset( $t_clauses['order'] ) ) {
 					$p_query_clauses['order'][] = $t_clauses['order'];
 				}
+			}
+
+		# if sorting by foreign key column
+		} else if ( array_key_exists( $c_sort, $s_fk_map ) ) {
+			$t_fk_table_alias = $s_fk_map[$c_sort]['table'] . '_' . $c_sort;
+			
+			# Defining sort field for user fields
+			# The if statement below is a hack required to have (at least semi-)
+			# proper sorting of username fields (see #10853); the code somewhat
+			# replicates the logic from function user_get_name()
+			# use of CASE, COALESCE should be fine for all db (SQL92 standard)
+			# however string concatenation operator '||' has a different meaning
+			# in MySQL, so we use CONCAT function which exists in all DBs
+			if( !array_key_exists( 'sort_field', $s_fk_map[$c_sort] ) ) {
+				$t_select = "CASE WHEN {bug}.$c_sort = 0 THEN NULL ";
+				if( ON == config_get( 'show_realname' ) ) {
+					$t_select .=
+							  "WHEN COALESCE( $t_fk_table_alias.realname, '' ) <> '' "
+							. "THEN $t_fk_table_alias.realname ";
+				}
+				$t_select .=
+						  "WHEN COALESCE( $t_fk_table_alias.username, '' ) <> '' "
+						. "THEN $t_fk_table_alias.username "
+						. "ELSE CONCAT( '". lang_get( 'prefix_for_deleted_users' ) . "', {bug}.$c_sort ) "
+						. "END";
+				$s_fk_map[$c_sort]['select']     = $t_select;
+				$s_fk_map[$c_sort]['sort_field'] = "sort_$c_sort";
+			}
+			
+			$p_query_clauses['join'][] =
+				"LEFT JOIN " . $s_fk_map[$c_sort]['table'] . " $t_fk_table_alias" .
+				" ON $t_fk_table_alias.id = {bug}.$c_sort";
+			
+			# If select field is defined, add it to the query and sort on it
+			if( array_key_exists( 'select', $s_fk_map[$c_sort] ) ) {
+				$p_query_clauses['select'][] = $s_fk_map[$c_sort]['select'] . " " . $s_fk_map[$c_sort]['sort_field'];
+				$p_query_clauses['order'][] = $s_fk_map[$c_sort]['sort_field'] . " $c_dir";
+			} else {
+				$p_query_clauses['order'][] = "$t_fk_table_alias." . $s_fk_map[$c_sort]['sort_field'] . " $c_dir";
 			}
 
 		# standard column
