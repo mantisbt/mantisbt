@@ -15,14 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Timeline event class for adding files to issues.
- * @copyright Copyright 2014 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Timeline event class for file attachment operations.
+ * @copyright Copyright 2018 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
  */
 
 /**
- * Timeline event class for creation of issues.
+ * Timeline event class for file attachment operations.
  *
  * @package MantisBT
  * @subpackage classes
@@ -30,18 +30,21 @@
 class IssueFileAddedTimelineEvent extends TimelineEvent {
 	private $issue_id;
 	private $filename;
+	private $add;
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id   An user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_filename  Attachment's file name.
+	 * @param boolean $p_add       True if adding, false if removing attachment.
 	 */
-	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename ) {
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename, $p_add ) {
 		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->filename = $p_filename;
+		$this->add = $p_add;
 	}
 
 	/**
@@ -49,11 +52,12 @@ class IssueFileAddedTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
+		$t_string = $this->add ? 'timeline_issue_file_added' : 'timeline_issue_file_deleted';
 		$t_bug_link = string_get_bug_view_link( $this->issue_id );
 
 		$t_html = $this->html_start( 'fa-file-o' );
 		$t_html .= '<div class="action">'
-			. sprintf( lang_get( 'timeline_issue_file_added' ),
+			. sprintf( lang_get( $t_string ),
 				user_get_name( $this->user_id ),
 				$t_bug_link,
 				$this->filename
