@@ -29,16 +29,19 @@
  */
 class IssueFileAddedTimelineEvent extends TimelineEvent {
 	private $issue_id;
+	private $filename;
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id   An user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
+	 * @param string  $p_filename  Attachment's file name.
 	 */
-	public function __construct( $p_timestamp, $p_user_id, $p_issue_id ) {
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename ) {
 		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
+		$this->filename = $p_filename;
 	}
 
 	/**
@@ -46,10 +49,16 @@ class IssueFileAddedTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
-		$t_link = string_get_bug_view_link( $this->issue_id );
-		
+		$t_bug_link = string_get_bug_view_link( $this->issue_id );
+
 		$t_html = $this->html_start( 'fa-file-o' );
-		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_file_added' ), user_get_name( $this->user_id ), $t_link ) . '</div>';
+		$t_html .= '<div class="action">'
+			. sprintf( lang_get( 'timeline_issue_file_added' ),
+				user_get_name( $this->user_id ),
+				$t_bug_link,
+				$this->filename
+			)
+			. '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;
