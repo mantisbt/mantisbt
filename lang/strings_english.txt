@@ -1599,6 +1599,7 @@ $s_month_december = 'December';
 
 # Timeline Feature Strings
 $s_timeline_issue_created = '<span class="username">%1$s</span> created issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> added attachment(s) to issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> commented on issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> is monitoring issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stopped monitoring issue <span class="issue_id">%2$s</span>';
