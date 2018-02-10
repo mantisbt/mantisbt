@@ -9,7 +9,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
+rssbuilder      | RSSBuilder      | 2.2.1     | patched [1]
 
 
 ## Javascript/CSS libraries
