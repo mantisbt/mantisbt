@@ -104,11 +104,13 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 				}
 				break;
 			case FILE_ADDED:
+			case FILE_DELETED:
 				$t_event = new IssueFileAddedTimelineEvent(
 					$t_timestamp,
 					$t_user_id,
 					$t_issue_id,
 					$t_history_event['old_value'],
+					$t_type == FILE_ADDED
 				);
  				break;
 		}
