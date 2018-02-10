@@ -27,7 +27,7 @@
  * @package MantisBT
  * @subpackage classes
  */
-class IssueFileAddedTimelineEvent extends TimelineEvent {
+class IssueAttachmentTimelineEvent extends TimelineEvent {
 	private $issue_id;
 	private $filename;
 	private $add;
