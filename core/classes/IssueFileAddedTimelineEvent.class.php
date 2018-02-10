@@ -48,7 +48,7 @@ class IssueFileAddedTimelineEvent extends TimelineEvent {
 	public function html() {
 		$t_link = string_get_bug_view_link( $this->issue_id );
 		
-		$t_html = $this->html_start( 'fa-plus' );
+		$t_html = $this->html_start( 'fa-file-o' );
 		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_file_added' ), user_get_name( $this->user_id ), $t_link ) . '</div>';
 		$t_html .= $this->html_end();
 
