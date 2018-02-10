@@ -221,7 +221,7 @@ layout_page_begin();
 				<td>
 					<select name="handler_id" class="input-sm">
 						<option value="0"></option>
-						<?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id ) ?>
+						<?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id, config_get( 'handle_bug_include_global_users' ) ) ?>
 					</select>
 				</td>
 			</tr>

@@ -255,12 +255,14 @@ function print_captcha_input( $p_field_name ) {
  * @param integer       $p_access     An access level.
  * @return void
  */
-function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
+function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY, $p_include_global_users = true ) {
 	$t_current_user = auth_get_current_user_id();
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
+
+	$t_user_proj_access_level = user_get_access_level( $t_current_user, $p_project_id );
 
 	if( $p_project_id === ALL_PROJECTS ) {
 		$t_projects = user_get_accessible_projects( $t_current_user );
@@ -268,7 +270,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		# Get list of users having access level for all accessible projects
 		$t_users = array();
 		foreach( $t_projects as $t_project_id ) {
-			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access, $p_include_global_users );
 			# Do a 'smart' merge of the project's user list, into an
 			# associative array (to remove duplicates)
 			foreach( $t_project_users_list as $t_id => $t_user ) {
@@ -279,7 +281,19 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		}
 		unset( $t_projects );
 	} else {
-		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+
+		$t_access_set = array();
+		if( is_array($p_access) ) {
+			foreach( $p_access as $t_al ) {
+				if($t_al <= $t_user_proj_access_level ) {
+					$t_access_set[] = $t_al;
+				}
+			}
+		} else {
+			$t_access_set = $p_access;
+		}
+
+		$t_users = project_get_all_user_rows( $p_project_id, $t_access_set, $p_include_global_users );
 	}
 
 	# Add the specified user ID to the list
@@ -575,7 +589,9 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 		$p_threshold = config_get( 'handle_bug_threshold' );
 	}
 
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+	$t_access_set = config_get( 'handle_bug_access_levels' );
+	$t_access_set = (null === $t_access_set) ? $p_threshold : $t_access_set;
+  print_user_option_list( $p_user_id, $p_project_id, $t_access_set );
 }
 
 /**

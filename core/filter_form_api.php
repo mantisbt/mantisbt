@@ -359,7 +359,7 @@ function print_filter_handler_id( array $p_filter = null ) {
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $p_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( $p_filter[FILTER_PROPERTY_HANDLER_ID], null, config_get( 'handle_bug_include_global_users' ) );
 	}?>
 		</select>
 		<?php
