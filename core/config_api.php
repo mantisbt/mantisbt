@@ -36,6 +36,7 @@ require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
+require_api( 'project_hierarchy_api.php' );
 require_api( 'utility_api.php' );
 
 # cache for config variables
@@ -58,8 +59,10 @@ $g_cache_config_project = null;
  *    1. value from cache
  *    2. value from database
  *     looks for specified config_id + current user + current project.
+ *     if not found, config_id + current user + parent, grandparent etc. of current project
  *     if not found, config_id + current user + all_project
  *     if not found, config_id + default user + current project
+ *     if not found, config_id + default user + parent, grandparent etc. of current project
  *     if not found, config_id + default user + all_project.
  *    3.use GLOBAL[config_id]
  *
@@ -116,6 +119,11 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 				if( !isset( $g_cache_config_project ) ) {
 					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
 					if( !in_array( ALL_PROJECTS, $t_projects ) ) {
+						$t_parent = project_hierarchy_get_parent( $t_projects[0] );
+						while( ( -1 != $t_parent ) && ( ! in_array( $t_parent, $t_projects ) ) ){
+							$t_projects[] = $t_parent;
+							$t_parent = project_hierarchy_get_parent( $t_parent );
+						}
 						$t_projects[] = ALL_PROJECTS;
 					}
 					$g_cache_config_project = $t_projects;
@@ -125,6 +133,12 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			} else {
 				$t_projects[] = $p_project;
 				if( !in_array( ALL_PROJECTS, $t_projects ) ) {
+					$t_parent = project_hierarchy_get_parent( $t_projects[0] );
+					while( ( -1 != $t_parent ) && ( ! in_array( $t_parent, $t_projects ) ) ){
+						$t_projects[] = $t_parent;
+						$t_parent = project_hierarchy_get_parent( $t_parent );
+					}
+
 					$t_projects[] = ALL_PROJECTS;
 				}
 			}
