@@ -250,19 +250,24 @@ function print_captcha_input( $p_field_name ) {
 /**
  * This populates an option list with the appropriate users by access level
  * @todo from print_reporter_option_list
- * @param integer|array $p_user_id    A user identifier or a list of them.
- * @param integer       $p_project_id A project identifier.
- * @param integer       $p_access     An access level.
+ * @param integer|array $p_user_id              A user identifier or a list of them.
+ * @param integer       $p_project_id           A project identifier.
+ * @param integer|array $p_access               An access level or a list of them.
+ * @param boolean       $p_include_global_users
+ * @param boolean       $p_prune_access         true, use access level of current user as maximum limit, then removing all access greater than this.
+ This option has effect ONLY when $p_project_id != ALL_PROJECTS
  * @return void
  */
-function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY, $p_include_global_users = true ) {
+function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY, $p_include_global_users = true, $p_prune_access = false ) {
 	$t_current_user = auth_get_current_user_id();
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
 
-	$t_user_proj_access_level = user_get_access_level( $t_current_user, $p_project_id );
+    if( $p_prune_access ) {
+		$t_user_proj_access_level = user_get_access_level( $t_current_user, $p_project_id );    	
+    }
 
 	if( $p_project_id === ALL_PROJECTS ) {
 		$t_projects = user_get_accessible_projects( $t_current_user );
@@ -281,17 +286,17 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		}
 		unset( $t_projects );
 	} else {
-
-		$t_access_set = array();
-		if( is_array($p_access) ) {
-			foreach( $p_access as $t_al ) {
-				if($t_al <= $t_user_proj_access_level ) {
-					$t_access_set[] = $t_al;
+		$t_access_set = $p_access;
+        if( $p_prune_access ) {
+			$t_access_set = array();
+			if( is_array($p_access) ) {
+				foreach( $p_access as $t_al ) {
+					if($t_al <= $t_user_proj_access_level ) {
+						$t_access_set[] = $t_al;
+					}
 				}
 			}
-		} else {
-			$t_access_set = $p_access;
-		}
+        }
 
 		$t_users = project_get_all_user_rows( $p_project_id, $t_access_set, $p_include_global_users );
 	}
@@ -582,16 +587,15 @@ function print_news_string_by_news_id( $p_news_id ) {
  * @param integer|string $p_user_id    A user identifier.
  * @param integer        $p_project_id A project identifier.
  * @param integer        $p_threshold  An access level.
+ * @param boolean        $p_include_global_users
  * @return void
  */
-function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
+function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null, $p_include_global_users = true ) {
 	if( null === $p_threshold ) {
 		$p_threshold = config_get( 'handle_bug_threshold' );
 	}
 
-	$t_access_set = config_get( 'handle_bug_access_levels' );
-	$t_access_set = (null === $t_access_set) ? $p_threshold : $t_access_set;
-  print_user_option_list( $p_user_id, $p_project_id, $t_access_set );
+  	print_user_option_list( $p_user_id, $p_project_id, $p_threshold, $p_include_global_users, config_get( 'handle_bug_set_limit_to_current_user_access_level' ) );
 }
 
 /**

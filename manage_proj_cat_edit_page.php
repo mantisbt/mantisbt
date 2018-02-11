@@ -102,7 +102,7 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 				<td>
 					<select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
 						<option value="0"></option>
-						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id, config_get( 'handle_bug_include_global_users' ) ) ?>
+						<?php print_assign_to_option_list( $t_assigned_to, $t_project_id, null, config_get( 'handle_bug_include_global_users' ) ) ?>
 					</select>
 				</td>
 			</tr>

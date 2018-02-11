@@ -2701,14 +2701,16 @@ $g_private_bug_threshold = DEVELOPER;
  */
 $g_handle_bug_threshold = DEVELOPER;
 
+
 /**
- * all access levels that will be considered when creating the ASSIGN TO option list.
- * null => only $g_handle_bug_threshold will be used as MINIMUM level, this is the
- *         standard MantisBT behavior.
- *
- * @global array $g_handle_bug_access_levels
+ * ON: has effect only when $g_handle_bug_threshold, is an array.
+ *     all access level present in array > access level of user trying to
+ *     to assign operation will be removed/pruned from the array.
+ * OFF: default, no further logic will be applied to $g_handle_bug_threshold contents. 
+ * @global integer $g_handle_bug_set_limit_to_current_user_access_levels
  */
-$g_handle_bug_access_levels = null;
+$g_handle_bug_set_limit_to_current_user_access_level = OFF;
+
 
 /**
  * controls if global users will be included when creating the ASSIGN TO option list.
@@ -2717,7 +2719,7 @@ $g_handle_bug_access_levels = null;
  *
  * @global integer $g_handle_bug_include_global_users
  */
-$g_handle_bug_include_global_users = OFF;
+$g_handle_bug_include_global_users = ON;
 
 
 /**
