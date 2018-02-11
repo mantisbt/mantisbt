@@ -2835,7 +2835,7 @@ $g_create_project_threshold = ADMINISTRATOR;
  *
  * @global integer $g_create_subproject_threshold
  */
-$g_create_subproject_threshold = MANAGER;
+$g_create_subproject_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to be automatically included in private projects

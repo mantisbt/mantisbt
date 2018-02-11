@@ -70,8 +70,9 @@ $f_parent_id	= gpc_get_int( 'parent_id', 0 );
 $t_threshold = 'create_project_threshold';
 if( 0 != $f_parent_id ) {
     $t_threshold = 'create_subproject_threshold';
-	  project_ensure_exists( $f_parent_id );
+    project_ensure_exists( $f_parent_id );
 }
+
 access_ensure_global_level( config_get( $t_threshold ) );
 
 $t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
