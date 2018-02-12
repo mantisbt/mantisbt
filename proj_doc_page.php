@@ -144,7 +144,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 <tr>
 	<td>
-		<span class="floatleft">
+		<span class="pull-left">
 <?php
 	$t_href = '<a href="file_download.php?file_id=' . $v_id . '&amp;type=doc">';
 	echo $t_href;
@@ -164,7 +164,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 			</span>
 		</span>
-		<span class="floatright">
+		<span class="pull-right">
 <?php
 	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 		print_link_button( 'proj_doc_edit_page.php?file_id=' . $v_id, lang_get( 'edit_link' ), 'btn-xs' );
