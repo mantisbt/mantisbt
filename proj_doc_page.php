@@ -167,10 +167,9 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 		<span class="floatright">
 <?php
 	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+		print_link_button( 'proj_doc_edit_page.php?file_id=' . $v_id, lang_get( 'edit_link' ), 'btn-xs' );
 		echo '&#160;';
-		print_form_button( 'proj_doc_edit_page.php?file_id=' . $v_id, lang_get( 'edit_link' ) );
-		echo '&#160;';
-		print_form_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
+		print_link_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ), 'btn-xs' );
 	}
 ?>
 		</span>
