@@ -1467,6 +1467,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
+$s_email_on_tag_attached = 'E-mail on Tag attached';
 $s_email_on_updated = 'E-mail on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)
