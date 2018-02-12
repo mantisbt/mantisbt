@@ -1462,7 +1462,7 @@ class BugFilterQuery extends DbQuery {
 	 * @param array $p_params	Array of parameter values
 	 * @return string
 	 */
-	protected function helper_convert_legacy_clause( $p_string, array $p_params ) {
+	protected function helper_convert_legacy_clause( $p_string, array $p_params = null ) {
 		if( empty( $p_params ) ) {
 			# shortcut, if there are no parameters, there's no need to translate
 			return $p_string;
