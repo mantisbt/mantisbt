@@ -754,7 +754,6 @@ function tag_bug_get_attached( $p_bug_id ) {
  * @param integer $p_tag_id The tag ID to check.
  * @return array Array of bug ID's.
  */
-
 function tag_get_bugs_attached( $p_tag_id ) {
 	db_param_push();
 	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param();
@@ -777,7 +776,7 @@ function tag_get_bugs_attached( $p_tag_id ) {
  * @return boolean
  */
 function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null,  $p_tag_name = null ) {
-\
+
 	antispam_check();
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
