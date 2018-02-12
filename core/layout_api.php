@@ -1019,6 +1019,7 @@ function layout_breadcrumbs() {
 	echo '<div id="breadcrumbs" class="breadcrumbs noprint">' , "\n";
 
 	# Login information
+	echo '<ul class="breadcrumb">' , "\n";
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) && !is_blank( $_SERVER['QUERY_STRING'] )) {
@@ -1027,7 +1028,7 @@ function layout_breadcrumbs() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo '<i class="fa fa-user home-icon active"></i> ' . lang_get( 'anonymous' ) . "\n";
+		echo ' <li><i class="fa fa-user home-icon active"></i> ' . lang_get( 'anonymous' ) . ' </li>' . "\n";
 
 		echo '<div class="btn-group btn-corner">' . "\n";
 		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
@@ -1051,8 +1052,9 @@ function layout_breadcrumbs() {
 			$t_display_username . $t_display_realname . '</a>' . "\n";
 
 		$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
-		echo '<span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span>' . "\n";
+		echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span></li>' . "\n";
 	}
+	echo '</ul>' , "\n";
 
 	# Recently visited
 	if( last_visited_enabled() ) {
