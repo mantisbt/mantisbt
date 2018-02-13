@@ -381,16 +381,20 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	# idea whether 'new' is indicating a new bug has been filed, or if the
 	# status of an existing bug has been changed to 'new'. Therefore it is best
 	# to just assume built-in actions have precedence over status changes.
+    $t_pref_field_has_severity=ON;
 	switch( $p_notify_type ) {
-		case 'new':
+        case 'new':
 		case 'feedback': # This isn't really a built-in action (delete me!)
 		case 'reopened':
 		case 'resolved':
 		case 'closed':
 		case 'bugnote':
-        case 'tag_attached':
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			break;
+        case 'tag_attached':
+            $t_pref_field = 'email_on_' . $p_notify_type;
+            $t_pref_field_has_severity=OFF;
+            break;
 		case 'owner':
 			# The email_on_assigned notification type is now effectively
 			# email_on_change_of_handler.
@@ -440,8 +444,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		if( $t_pref_field ) {
 			$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 			if( OFF == $t_notify ) {
-				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field );
-				continue;
+                log_event(LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field);
+                continue;
+            } else if($t_pref_field_has_severity==OFF) {
+                continue;
 			} else {
 				# Users can define the severity of an issue before they are emailed for
 				# each type of notification
