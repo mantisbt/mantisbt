@@ -446,9 +446,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 			if( OFF == $t_notify ) {
                 log_event(LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field);
                 continue;
-            } else if($t_pref_field_has_severity==OFF) {
-                continue;
-			} else {
+            } else if($t_pref_field_has_severity==ON) {
 				# Users can define the severity of an issue before they are emailed for
 				# each type of notification
 				$t_min_sev_pref_field = $t_pref_field . '_min_severity';
