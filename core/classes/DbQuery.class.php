@@ -764,6 +764,7 @@ class DbQuery {
 	 * @param array $p_arr_parms	Values array for parameters
 	 * @param integer $p_limit		Query limit
 	 * @param integer $p_offset		Query offset
+	 * @param boolean $p_pop_param  Set to false to leave the parameters on the stack
 	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed
 	 */
 	public static function compat_db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
@@ -798,7 +799,7 @@ class DbQuery {
 	 * Returns next row of values from current resultset, or false if empty or
 	 * the pointer has reached the end.
 	 * This method will execute current query if it hasn't been executed yet.
-	 * @return array|boolean
+	 * @return array|boolean	Next row from result
 	 */
 	public function fetch() {
 		if( null === $this->db_result ) {
@@ -813,7 +814,7 @@ class DbQuery {
 
 	/**
 	 * Returns all rows as an array
-	 * @return array	Array with all rows from the result
+	 * @return array|boolean	Array with all rows from the result, false if result is empty.
 	 */
 	public function fetch_all() {
 		if( null === $this->db_result ) {
@@ -839,7 +840,7 @@ class DbQuery {
 	 * automatic fetch() is performed for first row
 	 *
 	 * @param integer|string $p_index_or_name	Column name or numeric index
-	 * @return boolean
+	 * @return string|boolean	Value, or false if end of result or index is not valid
 	 */
 	public function value( $p_index_or_name = 0) {
 		if( !$this->current_row ) {
