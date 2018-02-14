@@ -217,3 +217,6 @@ config_obsolete( 'meta_include_file' );
 
 # changes in 2.11.0
 config_obsolete( 'differentiate_duplicates' );
+
+# changes in 2.12.0
+config_obsolete( 'session_handler' );

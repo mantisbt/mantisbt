@@ -422,6 +422,9 @@ define( 'ERROR_COLUMNS_INVALID', 2601 );
 
 # ERROR_SESSION_*
 define( 'ERROR_SESSION_HANDLER_INVALID', 2700 );
+# ERROR_SESSION_HANDLER_INVALID is no longer used in code
+# but can't be removed as long as it's used in one of the language files
+# for $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID]
 define( 'ERROR_SESSION_VAR_NOT_FOUND', 2701 );
 define( 'ERROR_SESSION_NOT_VALID', 2702 );
 

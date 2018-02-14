@@ -270,15 +270,6 @@ $g_manual_url = 'doc/en-US/Admin_Guide/html-desktop/';
 ##############
 
 /**
- * Session handler.  Possible values:
- *  'php' -> Default PHP filesystem sessions
- *  'adodb' -> Database storage sessions
- *  'memcached' -> Memcached storage sessions
- * @global string $g_session_handler
- */
-$g_session_handler = 'php';
-
-/**
  * Session save path.  If false, uses default value as set by session handler.
  * @global bool $g_session_save_path
  */
@@ -4334,7 +4325,7 @@ $g_global_settings = array(
 	'database_name', 'db_username', 'db_password', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
-	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
+	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
 	'stop_on_errors', 'version_suffix', 'debug_email',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file',
