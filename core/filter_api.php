@@ -562,6 +562,7 @@ function filter_ensure_fields( array $p_filter_arr ) {
  * @param string $p_version1    First version number
  * @param string $p_version2    Second version number
  * @param string $p_operator    Comparison test, if provided. As expected by version_compare()
+ * @return mixed	As returned by version_compare()
  */
 function filter_version_compare( $p_version1, $p_version2, $p_operator = null ) {
 	return version_compare( $p_version1, $p_version2, $p_operator );
@@ -571,6 +572,7 @@ function filter_version_compare( $p_version1, $p_version2, $p_operator = null ) 
  * Upgrade a filter array to the current filter structure, by converting properties
  * that have changed from previous filter versions
  * @param array $p_filter	Filter array to upgrade
+ * @return array	Updgraded filter array
  */
 function filter_version_upgrade( array $p_filter ) {
 	# This is a stub for future version upgrades
@@ -583,9 +585,8 @@ function filter_version_upgrade( array $p_filter ) {
 /**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.
- * @param array $p_filter_arr A Filter definition.
- * @return array
- * @todo function needs to be abstracted
+ * @param array $p_filter_arr	A filter array
+ * @return array	Validated filter array
  */
 function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr['_version'] ) ) {
@@ -3860,7 +3861,7 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
  * its key if it was loaded as a temporary filter.
  * If neither key is found, a new one will be created
  * @param array $p_filter     Filter array
- * @param type $p_filter_key  Key to update, or null
+ * @param string $p_filter_key  Key to update, or null
  * @return string	The key used for storing the filter.
  */
 function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
