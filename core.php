@@ -217,6 +217,15 @@ if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
 	die();
 }
 
+# Enforce PHP mbstring extension
+if( !extension_loaded( 'mbstring' ) ) {
+	@ob_end_clean();
+	echo '<strong>FATAL ERROR: PHP mbstring extension is not enabled.</strong><br />'
+		. 'MantisBT requires this extension for Unicode (UTF-8) support<br />'
+		. 'http://www.php.net/manual/en/mbstring.installation.php';
+	die();
+}
+
 # Ensure that output is blank so far (output at this stage generally denotes
 # that an error has occurred)
 if( ( $t_output = ob_get_contents() ) != '' ) {
