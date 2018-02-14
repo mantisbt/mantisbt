@@ -1989,10 +1989,13 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
  * @access public
  * @uses database_api.php
  */
-function bug_update_date( $p_bug_id ) {
+function bug_update_date( $p_bug_id, $p_last_modified = 0 ) {
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET last_updated=' . db_param() . ' WHERE id=' . db_param();
-	db_query( $t_query, array( db_now(), $p_bug_id ) );
+	if ($p_last_modified == 0) {
+		$p_last_modified = db_now()
+	}
+	db_query( $t_query, array( $p_last_modified, $p_bug_id ) );
 
 	bug_clear_cache( $p_bug_id );
 
