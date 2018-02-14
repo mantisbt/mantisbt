@@ -1546,6 +1546,7 @@ function print_filter_values_relationship_type( array $p_filter ) {
 		switch ( $c_rel_bug ) {
 			case META_FILTER_NONE:
 				echo lang_get( 'none' );
+				break;
 			case META_FILTER_ANY:
 				echo lang_get( 'any' );
 				break;

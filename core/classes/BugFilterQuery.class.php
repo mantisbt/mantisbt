@@ -671,10 +671,10 @@ class BugFilterQuery extends DbQuery {
 	 * to match database values where "0" is the default for empty/none
 	 * Manages special case meta-value-myself, by replacing with the actual current user id.
 	 *
-	 * @param array $p_array	Input array with user ids
+	 * @param array $p_users_array	Input array with user ids
 	 * @return array	Converted array
 	 */
-	protected function helper_process_users_property( $p_users_array ) {
+	protected function helper_process_users_property( array $p_users_array ) {
 		$t_new_array = array();
 		foreach( $p_users_array as $t_user ) {
 			if( filter_field_is_none( $t_user ) ) {
