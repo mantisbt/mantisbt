@@ -1993,7 +1993,7 @@ function bug_update_date( $p_bug_id, $p_last_modified = 0 ) {
 	db_param_push();
 	$t_query = 'UPDATE {bug} SET last_updated=' . db_param() . ' WHERE id=' . db_param();
 	if ($p_last_modified == 0) {
-		$p_last_modified = db_now()
+		$p_last_modified = db_now();
 	}
 	db_query( $t_query, array( $p_last_modified, $p_bug_id ) );
 
