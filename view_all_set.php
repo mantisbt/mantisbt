@@ -60,6 +60,10 @@ $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
 
+if( $f_make_temporary && $f_type < 0 ) {
+	$f_type = 1;
+}
+
 if( $f_type < 0 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
