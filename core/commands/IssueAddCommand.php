@@ -205,16 +205,9 @@ class IssueAddCommand extends Command {
 
 		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
 		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-		ApiObjectFactory::throwIfFault( $t_category_id );
-
-		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id ) : 0;
-		ApiObjectFactory::throwIfFault( $t_version_id );
-
-		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id ) : 0;
-		ApiObjectFactory::throwIfFault( $t_fixed_in_version_id );
-
-		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id ) : 0;
-		ApiObjectFactory::throwIfFault( $t_target_version_id );
+		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
+		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' ) : 0;
+		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id, 'target_version' ) : 0;
 
 		$this->issue = new BugData;
 		$this->issue->profile_id = 0;
@@ -297,11 +290,7 @@ class IssueAddCommand extends Command {
 			}
 		}
 
-		### NOTE: wasn't in mci_issue_add()
-		helper_call_custom_function( 'issue_create_validate', array( $this->issue ) );
-
-		$t_cf_result = mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
-		ApiObjectFactory::throwIfFault( $t_cf_result );
+		mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
 
 		if( isset( $t_issue['attachments'] ) && !empty( $t_issue['attachments'] ) ) {
 			if( !file_allow_bug_upload( $t_issue_id ) ) {
@@ -312,6 +301,9 @@ class IssueAddCommand extends Command {
 
 			$this->files = $t_issue['attachments'];
 		}
+
+		### NOTE: wasn't in mci_issue_add()
+		helper_call_custom_function( 'issue_create_validate', array( $this->issue ) );
 
 		### NOTE: wasn't in mci_issue_add()
 		# Allow plugins to pre-process bug data
