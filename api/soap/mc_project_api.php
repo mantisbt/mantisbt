@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Use a standard filter to get issues associated with the specified user.
  *
@@ -675,13 +677,19 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 
 			if( !isset( $t_custom_field['value'] ) ) {
-				$t_error = 'Custom field has no value specified.';
-				return ApiObjectFactory::faultBadRequest( $t_error );
+				throw new ClientException(
+					'Custom field has no value specified.',
+					ERROR_EMPTY_FIELD,
+					"custom_field['value']"
+				);
 			}
 
 			if( !isset( $t_custom_field['field'] ) ) {
-				$t_error = 'Custom field with no specified id or name.';
-				return ApiObjectFactory::faultBadRequest( $t_error );
+				throw new ClientException(
+					'Custom field with no specified id or name.',
+					ERROR_EMPTY_FIELD,
+					"custom_field['field']"
+				);
 			}
 
 			$t_custom_field['field'] = ApiObjectFactory::objectToArray( $t_custom_field['field'] );
@@ -698,8 +706,11 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				continue;
 			}
 
-			$t_error = 'Custom field with no specified id or name.';
-			return ApiObjectFactory::faultBadRequest( $t_error );
+			throw new ClientException(
+				'Custom field with no specified id or name.',
+				ERROR_EMPTY_FIELD,
+				"custom_field['field']['id']"
+			);
 		}
 	}
 
@@ -717,15 +728,21 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 		if( $t_def['require_report'] ) {
 			if( !isset( $t_custom_field_values[$t_name] ) ||
 			    is_blank( $t_custom_field_values[$t_name] ) ) {
-				$t_error = "Mandatory field '$t_name' is missing.";
-				return ApiObjectFactory::faultBadRequest( $t_error );
+				throw new ClientException(
+					"Mandatory field '$t_name' is missing.",
+					ERROR_EMPTY_FIELD,
+					array( $t_name )
+				);
 			}
 		}
 
 		if( isset( $t_custom_field_values[$t_name] ) &&
 		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
-			$t_error = "Invalid custom field '$t_name' value.";
-			return ApiObjectFactory::faultBadRequest( $t_error );
+			throw new ClientException(
+				"Invalid custom field '$t_name' value.",
+				ERROR_EMPTY_FIELD,
+				array( $t_name )
+			);
 		}
 	}
 

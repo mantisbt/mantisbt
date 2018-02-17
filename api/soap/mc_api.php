@@ -31,6 +31,7 @@
 
 require_api( 'api_token_api.php' );
 
+use Mantis\Exceptions\ClientException;
 use Mantis\Exceptions\LegacyApiFaultException;
 
 /**
@@ -287,12 +288,17 @@ class ApiObjectFactory {
 	 * @param stdClass|array $p_object Object.
 	 * @return array
 	 */
-	static function objectToArray($p_object ) {
-		if( is_object( $p_object ) ) {
-			return get_object_vars( $p_object );
+	static function objectToArray( $p_object, $p_recursive = false ) {
+		$t_object = is_object( $p_object ) ? get_object_vars( $p_object ) : $p_object;
+		if( $p_recursive && is_array( $t_object ) ) {
+			foreach( $t_object as $t_key => $t_value ) {
+				if( is_object( $t_object[$t_key] ) || is_array( $t_object[$t_key] ) ) {
+					$t_object[$t_key] = ApiObjectFactory::objectToArray( $t_object[$t_key], $p_recursive );
+				}
+			}
 		}
 
-		return $p_object;
+		return $t_object;
 	}
 
 	/**
@@ -353,7 +359,7 @@ class ApiObjectFactory {
 	 */
 	static function throwIfFault( $p_maybe_fault ) {
 		if( ApiObjectFactory::isFault( $p_maybe_fault ) ) {
-			throw new LegacyApiFaultException( $p_maybe_fault->fault_string, $p_maybe_fault->status_code );
+			throw new LegacyApiFaultException( $p_maybe_fault->getMessage(), $p_maybe_fault->getCode() );
 		}
 	}
 }
@@ -876,9 +882,10 @@ function mci_get_version( $p_version, $p_project_id ) {
  *
  * @param string|object $p_version The version string or object with name or id or both.
  * @param int $p_project_id The project id.
+ * @param string $p_field_name Version field name (e.g. version, target_version, fixed_in_version)
  * @return int|RestFault|SoapFault The version id, 0 if not supplied.
  */
-function mci_get_version_id( $p_version, $p_project_id ) {
+function mci_get_version_id( $p_version, $p_project_id, $p_field_name = 'version' ) {
 	$t_version_id = 0;
 	$t_version_for_error = '';
 
@@ -903,7 +910,11 @@ function mci_get_version_id( $p_version, $p_project_id ) {
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $p_project_id );
-			return ApiObjectFactory::faultBadRequest( "Version '$t_version_for_error' does not exist in project '$t_project_name'." );
+			throw new ClientException(
+				"Version '$t_version_for_error' does not exist in project '$t_project_name'.",
+				ERROR_INVALID_FIELD_VALUE,
+				array( 'version' )
+			);
 		}
 
 		$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
@@ -983,7 +994,11 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 	$t_category_id = $fn_get_category_id_internal( $p_category, $p_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_category ) ) {
-			return ApiObjectFactory::faultBadRequest( 'Category field must be supplied.' );
+			throw new ClientException(
+				'Category field must be supplied.',
+				ERROR_EMPTY_FIELD,
+				array( 'category' )
+			);
 		}
 
 		# category may be a string, array with id, array with name, or array
