@@ -26,7 +26,6 @@ require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'last_visited_api.php' );
 require_api( 'profile_api.php' );
@@ -322,24 +321,6 @@ class IssueAddCommand extends Command {
 		$t_issue = $this->payload( 'issue' );
 		$t_result = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
 		ApiObjectFactory::throwIfFault( $t_result );
-
-		# Log history events for values that are different than defaults
-
-		if( $this->issue->status != config_get( 'bug_submit_status' ) ) {
-			history_log_event( $t_issue_id, 'status', config_get( 'bug_submit_status' ) );
-		}
-
-		if( $this->issue->resolution != config_get( 'default_bug_resolution' ) ) {
-			history_log_event( $t_issue_id, 'resolution', config_get( 'default_bug_resolution' ) );
-		}
-
-		if( $this->issue->status != config_get( 'bug_submit_status' ) ) {
-			history_log_event( $t_issue_id, 'status', config_get( 'bug_submit_status' ) );
-		}
-
-		if( $this->issue->resolution != config_get( 'default_bug_resolution' ) ) {
-			history_log_event( $t_issue_id, 'resolution', config_get( 'default_bug_resolution' ) );
-		}
 
 		if( isset( $t_issue['monitors'] ) ) {
 			mci_issue_set_monitors( $t_issue_id, $t_user_id, $t_issue['monitors'] );
