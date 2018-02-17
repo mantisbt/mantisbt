@@ -205,14 +205,14 @@ class IssueAddCommand extends Command {
 
 		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
 		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
-		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' ) : 0;
-		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id, 'target_version' ) : 0;
 
 		$this->issue = new BugData;
-		$this->issue->profile_id = 0;
 		$this->issue->project_id = $t_project_id;
 		$this->issue->reporter_id = $t_reporter_id;
+		$this->issue->summary = $t_summary;
+		$this->issue->description = $t_description;
+		$this->issue->steps_to_reproduce = isset( $t_issue['steps_to_reproduce'] ) ? $t_issue['steps_to_reproduce'] : '';
+		$this->issue->additional_information = isset( $t_issue['additional_information'] ) ? $t_issue['additional_information'] : '';
 		$this->issue->handler_id = $t_handler_id;
 		$this->issue->priority = $t_priority_id;
 		$this->issue->severity = $t_severity_id;
@@ -226,27 +226,24 @@ class IssueAddCommand extends Command {
 		$this->issue->os = isset( $t_issue['os'] ) ? $t_issue['os'] : '';
 		$this->issue->os_build = isset( $t_issue['os_build'] ) ? $t_issue['os_build'] : '';
 		$this->issue->platform = isset( $t_issue['platform'] ) ? $t_issue['platform'] : '';
+		$this->issue->build = isset( $t_issue['build'] ) ? $t_issue['build'] : '';
+		$this->issue->view_state = $t_view_state_id;
+		$this->issue->sponsorship_total = isset( $t_issue['sponsorship_total'] ) ? $t_issue['sponsorship_total'] : 0;
 
-		### NOTE: TODO: date created and last updated should be auto-generated?
-		$this->issue->date_submitted = isset( $t_issue['date_submitted'] ) ? strtotime( $t_issue['date_submitted'] ) : '';
-		$this->issue->last_updated = isset( $t_issue['last_updated'] ) ? strtotime( $t_issue['last_updated'] ) : '';
-
+		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
 		if( $t_version_id != 0 ) {
 			$this->issue->version = version_get_field( $t_version_id, 'version' );
 		}
 
+		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' ) : 0;
 		if( $t_fixed_in_version_id != 0 ) {
 			$this->issue->fixed_in_version = version_get_field( $t_fixed_in_version_id, 'version' );
 		}
 
+		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id, 'target_version' ) : 0;
 		if( $t_target_version_id != 0 && access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_project_id, $this->user_id ) ) {
 			$this->issue->target_version = version_get_field( $t_target_version_id, 'version' );
 		}
-
-		$this->issue->build = isset( $t_issue['build'] ) ? $t_issue['build'] : '';
-		$this->issue->view_state = $t_view_state_id;
-		$this->issue->summary = $t_summary;
-		$this->issue->sponsorship_total = isset( $t_issue['sponsorship_total'] ) ? $t_issue['sponsorship_total'] : 0;
 
 		if( isset( $t_issue['sticky'] ) &&
 			 access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
@@ -259,14 +256,6 @@ class IssueAddCommand extends Command {
 		} else {
 			$this->issue->due_date = date_get_null();
 		}
-
-		# omitted:
-		# var $bug_text_id
-		# $this->issue->profile_id;
-		# extended info
-		$this->issue->description = $t_description;
-		$this->issue->steps_to_reproduce = isset( $t_issue['steps_to_reproduce'] ) ? $t_issue['steps_to_reproduce'] : '';
-		$this->issue->additional_information = isset( $t_issue['additional_information'] ) ? $t_issue['additional_information'] : '';
 
 		### NOTE: Wasn't in mci_issue_add()
 		# if a profile was selected then let's use that information
