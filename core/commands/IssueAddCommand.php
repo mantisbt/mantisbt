@@ -1,0 +1,473 @@
+<?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'date_api.php' );
+require_api( 'email_api.php' );
+require_api( 'error_api.php' );
+require_api( 'event_api.php' );
+require_api( 'file_api.php' );
+require_api( 'form_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'history_api.php' );
+require_api( 'html_api.php' );
+require_api( 'lang_api.php' );
+require_api( 'last_visited_api.php' );
+require_api( 'print_api.php' );
+require_api( 'profile_api.php' );
+require_api( 'relationship_api.php' );
+require_api( 'string_api.php' );
+require_api( 'user_api.php' );
+require_api( 'utility_api.php' );
+
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_issue_api.php' );
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_project_api.php' );
+
+use Mantis\Exceptions\ClientException;
+
+/**
+ * Sample:
+ * {
+ *   "query": {
+ *   },
+ *   "payload": {
+ *     ... see rest issue add documentation
+ *   }
+ * }
+ */
+
+/**
+ * A command that adds an issue.
+ */
+class IssueAddCommand extends Command {
+	/**
+	 * The issue to add.
+	 *
+	 * @var BugData
+	 */
+	private $issue = null;
+
+	/**
+	 * @var integer
+	 */
+	private $user_id;
+
+	/**
+	 * The files to attach with the note.
+	 */
+	private $files = array();
+
+	/**
+	 * Related custom field ids.
+	 */
+	private $related_custom_field_ids = array();
+
+	/**
+	 * Constructor
+	 *
+	 * @param array $p_data The command data.
+	 */
+	function __construct( array $p_data ) {
+		parent::__construct( $p_data );
+	}
+
+	/**
+	 * Validate the data.
+	 */
+	function validate() {
+		$this->user_id = auth_get_current_user_id();
+
+		$t_issue = $this->payload( 'issue' );
+
+		if( !isset( $t_issue['summary'] ) || is_blank( $t_issue['summary'] ) )  {
+			throw new ClientException(
+				'Summary not specified',
+				ERROR_EMPTY_FIELD,
+				array( 'summary' ) );
+		}
+
+		$t_summary = $t_issue['summary'];
+
+		if( !isset( $t_issue['description'] ) || is_blank( $t_issue['description'] ) )  {
+			throw new ClientException(
+				'Description not specified',
+				ERROR_EMPTY_FIELD,
+				array( 'description' ) );
+		}
+
+		$t_description = $t_issue['description'];
+
+		if( !isset( $t_issue['project'] ) )  {
+			throw new ClientException(
+				'Project not specified',
+				ERROR_EMPTY_FIELD,
+				array( 'project' ) );
+		}
+
+		$t_project = $t_issue['project'];
+		$t_project_id = mci_get_project_id( $t_project );
+
+		if( $t_project_id == ALL_PROJECTS ) {
+			throw new ClientException(
+				'Project not specified',
+				ERROR_EMPTY_FIELD,
+				array( 'project' ) );
+		}
+
+		if( !project_exists( $t_project_id ) ) {
+			throw new ClientException(
+				sprintf( "Project '%d' not found", $t_project_id ),
+				ERROR_PROJECT_NOT_FOUND,
+				array( $t_project_id ) );
+		}
+
+		# in case the current project is not the same project of the bug we are
+		# viewing, override the current project. This to avoid problems with
+		# categories and handlers lists etc.
+		global $g_project_override;
+		$g_project_override = $t_project_id;
+
+		if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $this->user_id ) ) {
+			throw new ClientException(
+				'User does not have access right to report issues',
+				ERROR_ACCESS_DENIED );
+		}
+
+		$t_handler_id = isset( $t_issue['handler'] ) ? mci_get_user_id( $t_issue['handler'] ) : NO_USER;
+		$t_priority_id = isset( $t_issue['priority'] ) ? mci_get_priority_id( $t_issue['priority'] ) : config_get( 'default_bug_priority' );
+		$t_severity_id = isset( $t_issue['severity'] ) ? mci_get_severity_id( $t_issue['severity'] ) : config_get( 'default_bug_severity' );
+		$t_status_id = isset( $t_issue['status'] ) ? mci_get_status_id( $t_issue['status'] ) : config_get( 'bug_submit_status' );
+		$t_reproducibility_id = isset( $t_issue['reproducibility'] ) ? mci_get_reproducibility_id( $t_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
+		$t_resolution_id =  isset( $t_issue['resolution'] ) ? mci_get_resolution_id( $t_issue['resolution'] ) : config_get( 'default_bug_resolution' );
+		$t_projection_id = isset( $t_issue['projection'] ) ? mci_get_projection_id( $t_issue['projection'] ) : config_get( 'default_bug_resolution' );
+		$t_eta_id = isset( $t_issue['eta'] ) ? mci_get_eta_id( $t_issue['eta'] ) : config_get( 'default_bug_eta' );
+		$t_view_state_id = isset( $t_issue['view_state'] ) ?  mci_get_view_state_id( $t_issue['view_state'] ) : config_get( 'default_bug_view_status' );
+		$t_notes = isset( $t_issue['notes'] ) ? $t_issue['notes'] : array();
+
+		# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
+		if( isset( $t_issue['reporter'] ) ) {
+			$t_reporter_id = mci_get_user_id( $t_issue['reporter'] );
+
+			if( $t_reporter_id != $this->user_id ) {
+				# Make sure that active user has access level required to specify a different reporter.
+				$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
+				if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
+					throw new ClientException(
+						'Active user does not have access level required to specify a different issue reporter',
+						ERROR_ACCESS_DENIED );
+				}
+			}
+		} else {
+			$t_reporter_id = $this->user_id;
+		}
+
+		### NOTE: wasn't in mci_issue_add()
+		# Prevent unauthorized users setting handler when reporting issue
+		if( $t_handler_id > 0 ) {
+			if ( !access_has_project_level( config_get( 'update_bug_assign_threshold' ) ) ) {
+				throw new ClientException(
+					'User not allowed to assign issues',
+					ERROR_ACCESS_DENIED );
+			}
+		} else {
+			### NOTE: wasn't in mci_issue_add()
+			# Ensure that resolved bugs have a handler
+			if( $t_handler_id == NO_USER && $t_status_id >= config_get( 'bug_resolved_status_threshold' ) ) {
+				$t_handler_id = $this->user_id;
+			}
+		}
+
+		if( $t_handler_id != NO_USER ) {
+			if( !user_exists( $t_handler_id ) ) {
+				throw new ClientException(
+					sprintf( "User '%d' not found.", $t_handler_id ),
+					ERROR_USER_BY_ID_NOT_FOUND,
+					array( $t_handler_id ) );
+			}
+	
+			if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_handler_id ) ) {
+				throw new ClientException(
+					sprintf( "User '%d' can't be assigned issues.", $t_handler_id ),
+					ERROR_ACCESS_DENIED );
+			}
+		}
+
+		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
+		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
+		if( ApiObjectFactory::isFault( $t_category_id ) ) {
+			return $t_category_id;
+		}
+
+		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id ) : 0;
+		if( ApiObjectFactory::isFault( $t_version_id ) ) {
+			return $t_version_id;
+		}
+
+		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id ) : 0;
+		if( ApiObjectFactory::isFault( $t_fixed_in_version_id ) ) {
+			return $t_fixed_in_version_id;
+		}
+
+		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id ) : 0;
+		if( ApiObjectFactory::isFault( $t_target_version_id ) ) {
+			return $t_target_version_id;
+		}
+
+		$this->issue = new BugData;
+		$this->issue->profile_id = 0;
+		$this->issue->project_id = $t_project_id;
+		$this->issue->reporter_id = $t_reporter_id;
+		$this->issue->handler_id = $t_handler_id;
+		$this->issue->priority = $t_priority_id;
+		$this->issue->severity = $t_severity_id;
+		$this->issue->reproducibility = $t_reproducibility_id;
+		$this->issue->status = $t_status_id;
+		$this->issue->resolution = $t_resolution_id;
+		$this->issue->projection = $t_projection_id;
+		$this->issue->category_id = $t_category_id;
+		$this->issue->eta = $t_eta_id;
+		$this->issue->profile_id = isset( $t_issue['profile_id'] ) ? $t_issue['profile_id'] : 0;
+		$this->issue->os = isset( $t_issue['os'] ) ? $t_issue['os'] : '';
+		$this->issue->os_build = isset( $t_issue['os_build'] ) ? $t_issue['os_build'] : '';
+		$this->issue->platform = isset( $t_issue['platform'] ) ? $t_issue['platform'] : '';
+
+		### NOTE: TODO: date created and last updated should be auto-generated?
+		$this->issue->date_submitted = isset( $t_issue['date_submitted'] ) ? strtotime( $t_issue['date_submitted'] ) : '';
+		$this->issue->last_updated = isset( $t_issue['last_updated'] ) ? strtotime( $t_issue['last_updated'] ) : '';
+
+		if( $t_version_id != 0 ) {
+			$this->issue->version = version_get_field( $t_version_id, 'version' );
+		}
+
+		if( $t_fixed_in_version_id != 0 ) {
+			$this->issue->fixed_in_version = version_get_field( $t_fixed_in_version_id, 'version' );
+		}
+
+		if( $t_target_version_id != 0 && access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_project_id, $this->user_id ) ) {
+			$this->issue->target_version = version_get_field( $t_target_version_id, 'version' );
+		}
+
+		$this->issue->build = isset( $t_issue['build'] ) ? $t_issue['build'] : '';
+		$this->issue->view_state = $t_view_state_id;
+		$this->issue->summary = $t_summary;
+		$this->issue->sponsorship_total = isset( $t_issue['sponsorship_total'] ) ? $t_issue['sponsorship_total'] : 0;
+
+		if( isset( $t_issue['sticky'] ) &&
+			 access_has_project_level( config_get( 'set_bug_sticky_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+			$this->issue->sticky = $t_issue['sticky'];
+		}
+
+		if( isset( $t_issue['due_date'] ) &&
+			access_has_project_level( config_get( 'due_date_update_threshold' ), $t_project_id ) ) {
+			$this->issue->due_date = strtotime( $t_issue['due_date'] );
+		} else {
+			$this->issue->due_date = date_get_null();
+		}
+
+		# omitted:
+		# var $bug_text_id
+		# $this->issue->profile_id;
+		# extended info
+		$this->issue->description = $t_description;
+		$this->issue->steps_to_reproduce = isset( $t_issue['steps_to_reproduce'] ) ? $t_issue['steps_to_reproduce'] : '';
+		$this->issue->additional_information = isset( $t_issue['additional_information'] ) ? $t_issue['additional_information'] : '';
+
+		### NOTE: Wasn't in mci_issue_add()
+		# if a profile was selected then let's use that information
+		if( $this->issue->profile_id != 0 ) {
+			if( profile_is_global( $this->issue->profile_id ) ) {
+				$t_row = user_get_profile_row( ALL_USERS, $this->issue->profile_id );
+			} else {
+				$t_row = user_get_profile_row( $this->issue->reporter_id, $this->issue->profile_id );
+			}
+
+			if( is_blank( $this->issue->platform ) ) {
+				$this->issue->platform = $t_row['platform'];
+			}
+
+			if( is_blank( $this->issue->os ) ) {
+				$this->issue->os = $t_row['os'];
+			}
+
+			if( is_blank( $this->issue->os_build ) ) {
+				$this->issue->os_build = $t_row['os_build'];
+			}
+		}
+
+		### NOTE: wasn't in mci_issue_add()
+		helper_call_custom_function( 'issue_create_validate', array( $this->issue ) );
+
+		### NOTE: wasn't in mci_issue_add()
+		# Validate the custom fields before adding the bug.
+		$this->related_custom_field_ids = custom_field_get_linked_ids( $this->issue->project_id );
+		foreach( $this->related_custom_field_ids as $t_id ) {
+			$t_def = custom_field_get_definition( $t_id );
+
+			# Produce an error if the field is required but wasn't posted
+			if( !gpc_isset_custom_field( $t_id, $t_def['type'] ) && $t_def['require_report'] ) {
+				throw new ClientException(
+					sprintf( "Required custom field '%s% not specified.", $t_def['name'] ),
+					ERROR_EMPTY_FIELD,
+					array( lang_get_defaulted( $t_def['name'] ) ) );
+			}
+
+			if( !custom_field_validate( $t_id, gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null ) ) ) {
+				throw new ClientException(
+					sprintf( "Invalid value for custom field '%s'.", $t_def['name'] ),
+					ERROR_CUSTOM_FIELD_INVALID_VALUE,
+					array( lang_get_defaulted( $t_def['name'] ) ) );
+			}
+		}
+
+		### TODO: is this redundant to the above code?
+		$t_cf_result = mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
+		if( ApiObjectFactory::isFault( $t_cf_result ) ) {
+			return $t_cf_result;
+		}
+
+		if( isset( $t_issue['attachments'] ) && !empty( $t_issue['attachments'] ) ) {
+			if( !file_allow_bug_upload( $t_issue_id ) ) {
+				throw new ClientException(
+					'User not allowed to attach files.',
+					ERROR_ACCESS_DENIED );
+			}
+
+			$this->files = $t_issue['attachments'];
+		}
+
+		### NOTE: wasn't in mci_issue_add()
+		# Allow plugins to pre-process bug data
+		$this->issue = event_signal( 'EVENT_REPORT_BUG_DATA', $this->issue );
+	}
+
+	/**
+	 * Process the command.
+	 *
+	 * @returns array Command response
+	 */
+	protected function process() {
+		# Create the bug
+		$t_issue_id = $this->issue->create();
+		log_event( LOG_WEBSERVICE, "created new issue id '$t_issue_id'" );
+
+		# Add Tags
+		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
+			$t_tags_result = mci_tag_set_for_issue( $t_issue_id, $t_issue['tags'], $t_user_id );
+			if( ApiObjectFactory::isFault( $t_tags_result ) ) {
+				return $t_tags_result;
+			}
+		}
+
+		# Handle the file upload
+		file_attach_files( $t_issue_id, $this->files );
+
+		# Handle custom field submission
+		foreach( $this->related_custom_field_ids as $t_id ) {
+			# Do not set custom field value if user has no write access
+			if( !custom_field_has_write_access( $t_id, $t_issue_id ) ) {
+				continue;
+			}
+
+			$t_def = custom_field_get_definition( $t_id );
+			$t_default_value = custom_field_default_to_value( $t_def['default_value'], $t_def['type'] );
+			$t_value = gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], $t_default_value );
+			if( !custom_field_set_value( $t_id, $t_issue_id, $t_value, /* log insert */ false ) ) {
+				throw new ClientException(
+					sprintf( "Invalid value for custom field '%s'.", $t_def['name'] ),
+					ERROR_CUSTOM_FIELD_INVALID_VALUE,
+					array( lang_get_defaulted( $t_def['name'] ) ) );
+			}
+		}
+
+		$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], false );
+		if( $t_set_custom_field_error != null ) {
+			return $t_set_custom_field_error;
+		}
+
+		# Log history events for values that are different than defaults
+
+		if( $this->issue->status != config_get( 'bug_submit_status' ) ) {
+			history_log_event( $t_issue_id, 'status', config_get( 'bug_submit_status' ) );
+		}
+
+		if( $this->issue->resolution != config_get( 'default_bug_resolution' ) ) {
+			history_log_event( $t_issue_id, 'resolution', config_get( 'default_bug_resolution' ) );
+		}
+
+		if( $this->issue->status != config_get( 'bug_submit_status' ) ) {
+			history_log_event( $t_issue_id, 'status', config_get( 'bug_submit_status' ) );
+		}
+
+		if( $this->issue->resolution != config_get( 'default_bug_resolution' ) ) {
+			history_log_event( $t_issue_id, 'resolution', config_get( 'default_bug_resolution' ) );
+		}
+
+		if( isset( $t_issue['monitors'] ) ) {
+			mci_issue_set_monitors( $t_issue_id, $t_user_id, $t_issue['monitors'] );
+		}
+
+		if( isset( $t_notes ) && is_array( $t_notes ) ) {
+			foreach( $t_notes as $t_note ) {
+				if( isset( $t_note['view_state'] ) ) {
+					$t_view_state = $t_note['view_state'];
+				} else {
+					$t_view_state = config_get( 'default_bugnote_view_status' );
+				}
+
+				$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
+				$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
+
+				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
+				$t_note_id = bugnote_add(
+					$t_issue_id,
+					$t_note['text'],
+					mci_get_time_tracking_from_note( $t_issue_id, $t_note ),
+					$t_view_state_id == VS_PRIVATE,
+					$t_note_type,
+					$t_note_attr,
+					$t_user_id,
+					false ); # don't send mail
+
+				bugnote_process_mentions( $t_issue_id, $t_note_id, $t_note['text'] );
+
+				log_event( LOG_WEBSERVICE, 'bugnote id \'' . $t_note_id . '\' added to issue \'' . $t_issue_id . '\'' );
+			}
+		}
+
+		### NOTE: was this done in the APIs?
+		# Mark the added issue as visited so that it appears on the last visited list.
+		last_visited_issue( $t_issue_id );
+
+		# Trigger Email Notifications
+		$this->issue->process_mentions();
+		email_bug_added( $t_issue_id );
+
+		# Trigger extensibility events
+		helper_call_custom_function( 'issue_create_notify', array( $t_issue_id ) );
+		event_signal( 'EVENT_REPORT_BUG', array( $this->issue, $t_issue_id ) );
+
+		return array( 'issue_id' => $t_issue_id );
+	}
+}
+
