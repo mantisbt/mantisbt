@@ -142,10 +142,10 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 
-	$t_result = mc_issue_add( /* username */ '', /* password */ '', $t_issue );
-	ApiObjectFactory::throwIfFault( $t_result );
-
-	$t_issue_id = $t_result;
+	$t_data = array( 'payload' => array( 'issue' => $t_issue ) );
+	$t_command = new IssueAddCommand( $t_data );
+	$t_result = $t_command->execute();
+	$t_issue_id = (int)$t_result['issue_id'];
 
 	$t_created_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 
