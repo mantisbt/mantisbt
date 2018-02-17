@@ -25,19 +25,14 @@ require_api( 'email_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
 require_api( 'file_api.php' );
-require_api( 'form_api.php' );
-require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
-require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'last_visited_api.php' );
-require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
-require_api( 'utility_api.php' );
 
 require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
 require_once( dirname( __FILE__ ) . '/../../api/soap/mc_enum_api.php' );
@@ -77,11 +72,6 @@ class IssueAddCommand extends Command {
 	 * The files to attach with the note.
 	 */
 	private $files = array();
-
-	/**
-	 * Related custom field ids.
-	 */
-	private $related_custom_field_ids = array();
 
 	/**
 	 * Constructor
@@ -215,24 +205,16 @@ class IssueAddCommand extends Command {
 
 		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
 		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-		if( ApiObjectFactory::isFault( $t_category_id ) ) {
-			return $t_category_id;
-		}
+		ApiObjectFactory::throwIfFault( $t_category_id );
 
 		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id ) : 0;
-		if( ApiObjectFactory::isFault( $t_version_id ) ) {
-			return $t_version_id;
-		}
+		ApiObjectFactory::throwIfFault( $t_version_id );
 
 		$t_fixed_in_version_id = isset( $t_issue['fixed_in_version'] ) ? mci_get_version_id( $t_issue['fixed_in_version'], $t_project_id ) : 0;
-		if( ApiObjectFactory::isFault( $t_fixed_in_version_id ) ) {
-			return $t_fixed_in_version_id;
-		}
+		ApiObjectFactory::throwIfFault( $t_fixed_in_version_id );
 
 		$t_target_version_id = isset( $t_issue['target_version'] ) ? mci_get_version_id( $t_issue['target_version'], $t_project_id ) : 0;
-		if( ApiObjectFactory::isFault( $t_target_version_id ) ) {
-			return $t_target_version_id;
-		}
+		ApiObjectFactory::throwIfFault( $t_target_version_id );
 
 		$this->issue = new BugData;
 		$this->issue->profile_id = 0;
@@ -318,33 +300,8 @@ class IssueAddCommand extends Command {
 		### NOTE: wasn't in mci_issue_add()
 		helper_call_custom_function( 'issue_create_validate', array( $this->issue ) );
 
-		### NOTE: wasn't in mci_issue_add()
-		# Validate the custom fields before adding the bug.
-		$this->related_custom_field_ids = custom_field_get_linked_ids( $this->issue->project_id );
-		foreach( $this->related_custom_field_ids as $t_id ) {
-			$t_def = custom_field_get_definition( $t_id );
-
-			# Produce an error if the field is required but wasn't posted
-			if( !gpc_isset_custom_field( $t_id, $t_def['type'] ) && $t_def['require_report'] ) {
-				throw new ClientException(
-					sprintf( "Required custom field '%s% not specified.", $t_def['name'] ),
-					ERROR_EMPTY_FIELD,
-					array( lang_get_defaulted( $t_def['name'] ) ) );
-			}
-
-			if( !custom_field_validate( $t_id, gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null ) ) ) {
-				throw new ClientException(
-					sprintf( "Invalid value for custom field '%s'.", $t_def['name'] ),
-					ERROR_CUSTOM_FIELD_INVALID_VALUE,
-					array( lang_get_defaulted( $t_def['name'] ) ) );
-			}
-		}
-
-		### TODO: is this redundant to the above code?
 		$t_cf_result = mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
-		if( ApiObjectFactory::isFault( $t_cf_result ) ) {
-			return $t_cf_result;
-		}
+		ApiObjectFactory::throwIfFault( $t_cf_result );
 
 		if( isset( $t_issue['attachments'] ) && !empty( $t_issue['attachments'] ) ) {
 			if( !file_allow_bug_upload( $t_issue_id ) ) {
@@ -374,36 +331,16 @@ class IssueAddCommand extends Command {
 		# Add Tags
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			$t_tags_result = mci_tag_set_for_issue( $t_issue_id, $t_issue['tags'], $t_user_id );
-			if( ApiObjectFactory::isFault( $t_tags_result ) ) {
-				return $t_tags_result;
-			}
+			ApiObjectFactory::throwIfFault( $t_tag_results );
 		}
 
 		# Handle the file upload
 		file_attach_files( $t_issue_id, $this->files );
 
 		# Handle custom field submission
-		foreach( $this->related_custom_field_ids as $t_id ) {
-			# Do not set custom field value if user has no write access
-			if( !custom_field_has_write_access( $t_id, $t_issue_id ) ) {
-				continue;
-			}
-
-			$t_def = custom_field_get_definition( $t_id );
-			$t_default_value = custom_field_default_to_value( $t_def['default_value'], $t_def['type'] );
-			$t_value = gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], $t_default_value );
-			if( !custom_field_set_value( $t_id, $t_issue_id, $t_value, /* log insert */ false ) ) {
-				throw new ClientException(
-					sprintf( "Invalid value for custom field '%s'.", $t_def['name'] ),
-					ERROR_CUSTOM_FIELD_INVALID_VALUE,
-					array( lang_get_defaulted( $t_def['name'] ) ) );
-			}
-		}
-
-		$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], false );
-		if( $t_set_custom_field_error != null ) {
-			return $t_set_custom_field_error;
-		}
+		$t_issue = $this->payload( 'issue' );
+		$t_result = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
+		ApiObjectFactory::throwIfFault( $t_result );
 
 		# Log history events for values that are different than defaults
 

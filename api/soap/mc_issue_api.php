@@ -384,22 +384,19 @@ function mci_issue_get_due_date( BugData $p_bug ) {
  * @param integer $p_issue_id       Issue id to apply custom field values to.
  * @param array   &$p_custom_fields The array of custom field values as described in the webservice complex types.
  * @param boolean $p_log_insert     Create history logs for new values.
- * @return mixed
+ * @return booleamn|SoapFault|RestFault true for sucess, otherwise fault.
  */
 function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert ) {
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
-
-			if( is_object( $t_custom_field ) ) {
-				$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
-			}
+			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 
 			# Verify validity of custom field specification
 			$t_msg = 'Invalid Custom field specification';
 			$t_valid_cf = isset( $t_custom_field['field'] ) && isset( $t_custom_field['value'] );
 			if( $t_valid_cf ) {
-				$t_field = get_object_vars( (object)$t_custom_field['field'] );
+				$t_field = ApiObjectFactory::objectToArray( $t_custom_field['field'] );
 				if( ( !isset( $t_field['id'] ) || $t_field['id'] == 0 ) && !isset( $t_field['name'] ) ) {
 					$t_valid_cf = false;
 					$t_msg .= ", either 'name' or 'id' != 0 or must be given.";
@@ -435,6 +432,8 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 			}
 		}
 	}
+
+	return true;
 }
 
 /**
