@@ -480,6 +480,19 @@ function tag_get( $p_tag_id ) {
 }
 
 /**
+ * Get tag name by id.
+ * @return string tag name or empty string if not found.
+ */
+function tag_get_name( $p_tag_id ) {
+	$t_tag_row = tag_get( $p_tag_id );
+	if( $t_tag_row === false ) {
+		return '';
+	}
+
+	return $t_tag_row['name'];
+}
+
+/**
  * Return a tag row for the given name.
  * @param string $p_name The tag name to retrieve from the database.
  * @return array|boolean Tag row
