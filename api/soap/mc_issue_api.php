@@ -899,14 +899,18 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
  * @return integer|RestFault|SoapFault The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
 	}
 
 	$t_issue = ApiObjectFactory::objectToArray( $p_issue, /* recursive */ true );
+
+	$t_project_id = isset( $t_issue['project'] ) ? mci_get_project_id( $t_issue['project'] ) : ALL_PROJECTS;
+	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+		return mci_fault_access_denied( $t_user_id );
+	}
+
 	$t_data = array(
 		'payload' => array( 'issue' => $t_issue )
 	);
