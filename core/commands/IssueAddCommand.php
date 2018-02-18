@@ -304,21 +304,21 @@ class IssueAddCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
+		$t_issue = $this->payload( 'issue' );
+
 		# Create the bug
 		$t_issue_id = $this->issue->create();
 		log_event( LOG_WEBSERVICE, "created new issue id '$t_issue_id'" );
 
 		# Add Tags
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
-			$t_tags_result = mci_tag_set_for_issue( $t_issue_id, $t_issue['tags'], $t_user_id );
-			ApiObjectFactory::throwIfFault( $t_tag_results );
+			mci_tag_set_for_issue( $t_issue_id, $t_issue['tags'], $this->user_id );
 		}
 
 		# Handle the file upload
 		file_attach_files( $t_issue_id, $this->files );
 
 		# Handle custom field submission
-		$t_issue = $this->payload( 'issue' );
 		$t_result = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
 		ApiObjectFactory::throwIfFault( $t_result );
 
