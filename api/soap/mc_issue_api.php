@@ -978,26 +978,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
-
 	$t_category_id = mci_get_category_id( $t_category, $t_project_id );
-	if( ApiObjectFactory::isFault( $t_category_id ) ) {
-		return $t_category_id;
-	}
 
-	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id ) : 0;
-	if( ApiObjectFactory::isFault( $t_version_id ) ) {
-		return $t_version_id;
-	}
-
-	$t_fixed_in_version_id = isset( $p_issue['fixed_in_version'] ) ? mci_get_version_id( $p_issue['fixed_in_version'], $t_project_id ) : 0;
-	if( ApiObjectFactory::isFault( $t_fixed_in_version_id ) ) {
-		return $t_fixed_in_version_id;
-	}
-
-	$t_target_version_id = isset( $p_issue['target_version'] ) ? mci_get_version_id( $p_issue['target_version'], $t_project_id ) : 0;
-	if( ApiObjectFactory::isFault( $t_target_version_id ) ) {
-		return $t_target_version_id;
-	}
+	$t_version_id = isset( $p_issue['version'] ) ? mci_get_version_id( $p_issue['version'], $t_project_id, 'version' ) : 0;
+	$t_fixed_in_version_id = isset( $p_issue['fixed_in_version'] ) ? mci_get_version_id( $p_issue['fixed_in_version'], $t_project_id, 'fixed_in_version' ) : 0;
+	$t_target_version_id = isset( $p_issue['target_version'] ) ? mci_get_version_id( $p_issue['target_version'], $t_project_id, 'target_version' ) : 0;
 
 	if( is_blank( $t_summary ) ) {
 		return ApiObjectFactory::faultBadRequest( 'Mandatory field \'summary\' is missing.' );
