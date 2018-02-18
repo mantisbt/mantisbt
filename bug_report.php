@@ -58,6 +58,7 @@ $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 $f_rel_type = gpc_get_int( 'rel_type', BUG_REL_NONE );
 $f_copy_notes_from_parent = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent = gpc_get_bool( 'copy_attachments_from_parent', false );
+$f_report_stay = gpc_get_bool( 'report_stay', false );
 
 $t_clone_info = array(
 	'master_issue_id' => $f_master_bug_id,
@@ -245,7 +246,28 @@ form_security_purge( 'bug_report' );
 
 layout_page_header_begin();
 
-html_meta_redirect( 'view_all_bug_page.php' );
+if( $f_report_stay ) {
+	$t_fields = array(
+		'category_id', 'severity', 'reproducibility', 'profile_id', 'platform',
+		'os', 'os_build', 'target_version', 'build', 'view_state', 'due_date'
+	);
+
+	$t_issue = bug_get( $t_issue_id );
+
+	$t_data = array();
+	foreach( $t_fields as $t_field ) {
+		$t_data[$t_field] = $t_issue->$t_field;
+	}
+
+	$t_data['product_version'] = $t_issue->version;
+	$t_data['report_stay'] = 1;
+
+	$t_report_more_bugs_url = string_get_bug_report_url() . '?' . http_build_query( $t_data );
+
+	html_meta_redirect( $t_report_more_bugs_url );
+} else {
+	html_meta_redirect( 'view_all_bug_page.php' );
+}
 
 layout_page_header_end();
 
@@ -255,6 +277,10 @@ $t_buttons = array(
 	array( string_get_bug_view_url( $t_issue_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_issue_id ) ),
 	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
 );
+
+if( $f_report_stay ) {
+	$t_buttons[] = array( $t_report_more_bugs_url, lang_get( 'report_more_bugs' ) );
+}
 
 html_operation_confirmation( $t_buttons, '', CONFIRMATION_TYPE_SUCCESS );
 
