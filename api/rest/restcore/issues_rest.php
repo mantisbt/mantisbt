@@ -142,6 +142,10 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 
+	if( isset( $t_issue['files'] ) ) {
+		$t_issue['files'] = files_base64_to_temp( $t_issue['files'] );
+	}
+
 	$t_data = array( 'payload' => array( 'issue' => $t_issue ) );
 	$t_command = new IssueAddCommand( $t_data );
 	$t_result = $t_command->execute();
@@ -201,27 +205,8 @@ function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		'payload' => $p_request->getParsedBody(),
 	);
 
-	if( isset( $t_data['payload']['files'] ) && is_array( $t_data['payload']['files'] ) ) {
-		foreach( $t_data['payload']['files'] as &$t_file ) {
-			if( !isset( $t_file['content'] ) ) {
-				throw new ClientException(
-					'File content not set',
-					ERROR_INVALID_FIELD_VALUE,
-					array( 'files' ) );
-			}
-
-			$t_raw_content = base64_decode( $t_file['content'] );
-
-			do {
-				$t_tmp_file = realpath( sys_get_temp_dir() ) . '/' . uniqid( 'mantisbt-file' );
-			} while( file_exists( $t_tmp_file ) );
-	
-			file_put_contents( $t_tmp_file, $t_raw_content );
-			$t_file['tmp_name'] = $t_tmp_file;
-			$t_file['size'] = filesize( $t_tmp_file );
-			$t_file['browser_upload'] = false;
-			unset( $t_file['content'] );
-		}
+	if( isset( $t_data['payload']['files'] ) ) {
+		$t_data['payload']['files'] = files_base64_to_temp( $t_data['payload']['files'] );
 	}
 
 	$t_command = new IssueFileAddCommand( $t_data );
@@ -246,27 +231,8 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 		'payload' => $p_request->getParsedBody(),
 	);
 
-	if( isset( $t_data['payload']['files'] ) && is_array( $t_data['payload']['files'] ) ) {
-		foreach( $t_data['payload']['files'] as &$t_file ) {
-			if( !isset( $t_file['content'] ) ) {
-				throw new ClientException(
-					'File content not set',
-					ERROR_INVALID_FIELD_VALUE,
-					array( 'files' ) );
-			}
-
-			$t_raw_content = base64_decode( $t_file['content'] );
-
-			do {
-				$t_tmp_file = realpath( sys_get_temp_dir() ) . '/' . uniqid( 'mantisbt-file' );
-			} while( file_exists( $t_tmp_file ) );
-	
-			file_put_contents( $t_tmp_file, $t_raw_content );
-			$t_file['tmp_name'] = $t_tmp_file;
-			$t_file['size'] = filesize( $t_tmp_file );
-			$t_file['browser_upload'] = false;
-			unset( $t_file['content'] );
-		}
+	if( isset( $t_data['payload']['files'] ) ) {
+		$t_data['payload']['files'] = files_base64_to_temp( $t_data['payload']['files'] );
 	}
 
 	$t_command = new IssueNoteAddCommand( $t_data );
@@ -530,4 +496,41 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
 		withJson( array( 'files' => $t_files ) );
+}
+
+/**
+ * Convert REST API base 64 files into expected format for browser file uploads.
+ * 
+ * @param array $p_files The files in REST API format.
+ * @return array The files in browser upload format.
+ */
+function files_base64_to_temp( $p_files ) {
+	$t_files = array();
+
+	if( isset( $p_files ) && is_array( $p_files ) ) {
+		foreach( $p_files as $t_file ) {
+			if( !isset( $t_file['content'] ) ) {
+				throw new ClientException(
+					'File content not set',
+					ERROR_INVALID_FIELD_VALUE,
+					array( 'files' ) );
+			}
+
+			$t_raw_content = base64_decode( $t_file['content'] );
+
+			do {
+				$t_tmp_file = realpath( sys_get_temp_dir() ) . '/' . uniqid( 'mantisbt-file' );
+			} while( file_exists( $t_tmp_file ) );
+
+			file_put_contents( $t_tmp_file, $t_raw_content );
+			$t_file['tmp_name'] = $t_tmp_file;
+			$t_file['size'] = filesize( $t_tmp_file );
+			$t_file['browser_upload'] = false;
+			unset( $t_file['content'] );
+
+			$t_files[] = $t_file;
+		}
+	}
+
+	return $t_files;
 }
