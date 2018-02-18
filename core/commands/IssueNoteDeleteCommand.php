@@ -24,7 +24,7 @@ require_api( 'user_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
- * A command that adds user to monitor an issue.
+ * A command that deletes an issue note.
  */
 class IssueNoteDeleteCommand extends Command {
     /**
