@@ -911,9 +911,10 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
  * upload a file to a new bug in the current project
  * @param integer $p_bug_id  A bug identifier.
  * @param integer $p_user_id A user identifier.
+ * @param integer $p_project_id The project id to check for or null for bug project or current project.
  * @return boolean
  */
-function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
+function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null, $p_project_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
@@ -925,7 +926,7 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 
 	if( null === $p_bug_id ) {
 		# new bug
-		$t_project_id = helper_get_current_project();
+		$t_project_id = $p_project_id === null ? helper_get_current_project() : $p_project_id;
 
 		# the user must be the reporter if they're reporting a new bug
 		$t_reporter = true;
