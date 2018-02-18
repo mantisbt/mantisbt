@@ -102,6 +102,11 @@ if( !is_blank( $t_os ) ) {
 	$t_issue['os'] = $t_os;
 }
 
+$t_os_build = gpc_get_string( 'os_build', '' );
+if( !is_blank( $t_os_build ) ) {
+	$t_issue['os_build'] = $t_os_build;
+}
+
 $t_version = gpc_get_string( 'product_version', '' );
 if( !is_blank( $t_version ) ) {
 	$t_issue['version'] = array( 'name' => $t_version );
