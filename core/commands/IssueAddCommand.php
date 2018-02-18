@@ -170,7 +170,6 @@ class IssueAddCommand extends Command {
 		$t_projection_id = isset( $t_issue['projection'] ) ? mci_get_projection_id( $t_issue['projection'] ) : config_get( 'default_bug_resolution' );
 		$t_eta_id = isset( $t_issue['eta'] ) ? mci_get_eta_id( $t_issue['eta'] ) : config_get( 'default_bug_eta' );
 		$t_view_state_id = isset( $t_issue['view_state'] ) ?  mci_get_view_state_id( $t_issue['view_state'] ) : config_get( 'default_bug_view_status' );
-		$t_notes = isset( $t_issue['notes'] ) ? $t_issue['notes'] : array();
 
 		# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
 		if( isset( $t_issue['reporter'] ) ) {
@@ -393,6 +392,7 @@ class IssueAddCommand extends Command {
 			}
 		}
 
+		$t_notes = isset( $t_issue['notes'] ) ? $t_issue['notes'] : array();
 		if( isset( $t_notes ) && is_array( $t_notes ) ) {
 			foreach( $t_notes as $t_note ) {
 				if( isset( $t_note['view_state'] ) ) {

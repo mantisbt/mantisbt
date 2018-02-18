@@ -1095,10 +1095,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_bug_data->due_date = date_get_null();
 	}
 
-	$t_set_custom_field_error = mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
-	if( $t_set_custom_field_error != null ) {
-		return $t_set_custom_field_error;
-	}
+	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 
 	if( isset( $p_issue['monitors'] ) ) {
 		mci_issue_set_monitors( $p_issue_id, $t_user_id, $p_issue['monitors'] );

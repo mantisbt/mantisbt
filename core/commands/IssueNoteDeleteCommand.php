@@ -64,6 +64,11 @@ class IssueNoteDeleteCommand extends Command {
 	 * @returns array Command response
 	 */
 	protected function process() {
+        bugnote_delete( $this->id );
+        return array(
+            'id' => $this->id,
+            'issue_id' => $this->issueId
+        );
 	}
 }
 
