@@ -340,8 +340,7 @@ class IssueAddCommand extends Command {
 		file_attach_files( $t_issue_id, $this->files );
 
 		# Handle custom field submission
-		$t_result = mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
-		ApiObjectFactory::throwIfFault( $t_result );
+		mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
 
 		if( isset( $t_issue['monitors'] ) ) {
 			mci_issue_set_monitors( $t_issue_id, $this->user_id, $t_issue['monitors'] );
