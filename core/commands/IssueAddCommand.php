@@ -170,7 +170,6 @@ class IssueAddCommand extends Command {
 			$t_reporter_id = $this->user_id;
 		}
 
-		### NOTE: wasn't in mci_issue_add()
 		# Prevent unauthorized users setting handler when reporting issue
 		if( $t_handler_id > 0 ) {
 			if ( !access_has_project_level( config_get( 'update_bug_assign_threshold' ) ) ) {
@@ -179,7 +178,6 @@ class IssueAddCommand extends Command {
 					ERROR_ACCESS_DENIED );
 			}
 		} else {
-			### NOTE: wasn't in mci_issue_add()
 			# Ensure that resolved bugs have a handler
 			if( $t_handler_id == NO_USER && $t_status_id >= config_get( 'bug_resolved_status_threshold' ) ) {
 				$t_handler_id = $this->user_id;
@@ -264,7 +262,6 @@ class IssueAddCommand extends Command {
 			$this->issue->due_date = date_get_null();
 		}
 
-		### NOTE: Wasn't in mci_issue_add()
 		# if a profile was selected then let's use that information
 		if( $this->issue->profile_id != 0 ) {
 			if( profile_is_global( $this->issue->profile_id ) ) {
@@ -298,11 +295,8 @@ class IssueAddCommand extends Command {
 			$this->files = $t_issue['files'];
 		}
 
-		### NOTE: wasn't in mci_issue_add()
+		# Trigger extensibility events to pre-process data before creating issue
 		helper_call_custom_function( 'issue_create_validate', array( $this->issue ) );
-
-		### NOTE: wasn't in mci_issue_add()
-		# Allow plugins to pre-process bug data
 		$this->issue = event_signal( 'EVENT_REPORT_BUG_DATA', $this->issue );
 	}
 
@@ -362,7 +356,6 @@ class IssueAddCommand extends Command {
 			}
 		}
 
-		### NOTE: was this done in the APIs?
 		# Mark the added issue as visited so that it appears on the last visited list.
 		last_visited_issue( $t_issue_id );
 
