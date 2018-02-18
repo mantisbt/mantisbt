@@ -156,9 +156,6 @@ class IssueAddTest extends SoapBase {
 		# $t_issue_to_add['fixed_in_version'] = 'fixed version';
 		# $t_issue_to_add['target_version'] = 'target version';
 
-		$t_dt = DateTime::createFromFormat( 'U', time() );
-		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
-
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -181,10 +178,6 @@ class IssueAddTest extends SoapBase {
 		# Since versions are not defined, they are not going to be set
 		$this->assertFalse( isset( $t_issue->fixed_in_version ) );
 		$this->assertFalse( isset( $t_issue->target_version ) );
-
-		$t_read_dt = DateTime::createFromFormat( DateTime::ISO8601, $t_issue->last_updated );
-
-		$this->assertEquals( $t_dt, $t_read_dt );
 	}
 
 	/**
