@@ -221,13 +221,22 @@ class IssueAddCommand extends Command {
 		$this->issue->projection = $t_projection_id;
 		$this->issue->category_id = $t_category_id;
 		$this->issue->eta = $t_eta_id;
-		$this->issue->profile_id = isset( $t_issue['profile_id'] ) ? $t_issue['profile_id'] : 0;
 		$this->issue->os = isset( $t_issue['os'] ) ? $t_issue['os'] : '';
 		$this->issue->os_build = isset( $t_issue['os_build'] ) ? $t_issue['os_build'] : '';
 		$this->issue->platform = isset( $t_issue['platform'] ) ? $t_issue['platform'] : '';
 		$this->issue->build = isset( $t_issue['build'] ) ? $t_issue['build'] : '';
 		$this->issue->view_state = $t_view_state_id;
 		$this->issue->sponsorship_total = isset( $t_issue['sponsorship_total'] ) ? $t_issue['sponsorship_total'] : 0;
+
+		if( isset( $t_issue['profile_id'] ) ) {
+			$t_profile_id = (int)$t_issue['profile_id'];
+		} else if( isset( $t_issue['profile'] ) && isset( $t_issue['profile']['id'] ) ) {
+			$t_profile_id = (int)$t_issue['profile']['id'];
+		} else {
+			$t_profile_id = 0;
+		}
+
+		$this->issue->profile_id = $t_profile_id;
 
 		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
 		if( $t_version_id != 0 ) {
