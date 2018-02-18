@@ -181,9 +181,9 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 		}
 	}
 
-	# Username and password below are ignored, since middleware already done the auth.
-	$t_result = mc_issue_delete( /* username */ '', /* password */ '', $t_issue_id );
-	ApiObjectFactory::throwIfFault( $t_result );
+	$t_data = array( 'query' => array( 'id' => $t_issue_id ) );
+	$t_command = new IssueDeleteCommand( $t_data );
+	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )
 		->withHeader( HEADER_ETAG, mc_issue_hash( $t_issue_id, null ) );

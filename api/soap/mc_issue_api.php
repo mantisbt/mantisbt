@@ -1207,30 +1207,23 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, array $p_tag
  * @return boolean True if the issue has been deleted successfully, false otherwise.
  */
 function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Issue \'' . $p_issue_id . '\' does not exist.' );
+		return ApiObjectFactory::faultNotFound( "Issue '$p_issue_id' does not exist." );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-	$g_project_override = $t_project_id;
-
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	if( !access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
-	log_event( LOG_WEBSERVICE, 'deleting issue \'' . $p_issue_id . '\'' );
-	return bug_delete( $p_issue_id );
+	$t_data = array( 'query' => array( 'id' => $p_issue_id ) );
+	$t_command = new IssueDeleteCommand( $t_data );
+	$t_command->execute();
 }
 
 /**
