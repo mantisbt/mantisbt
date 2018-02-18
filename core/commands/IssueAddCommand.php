@@ -280,14 +280,14 @@ class IssueAddCommand extends Command {
 
 		mci_project_custom_fields_validate( $t_project_id, $t_issue['custom_fields'] );
 
-		if( isset( $t_issue['attachments'] ) && !empty( $t_issue['attachments'] ) ) {
+		if( isset( $t_issue['files'] ) && !empty( $t_issue['files'] ) ) {
 			if( !file_allow_bug_upload( $t_issue_id ) ) {
 				throw new ClientException(
 					'User not allowed to attach files.',
 					ERROR_ACCESS_DENIED );
 			}
 
-			$this->files = $t_issue['attachments'];
+			$this->files = $t_issue['files'];
 		}
 
 		### NOTE: wasn't in mci_issue_add()
