@@ -84,7 +84,7 @@ if( !empty( $t_tags ) ) {
 
 $f_files = gpc_get_file( 'ufile', null );
 if( $f_files !== null && !empty( $f_files ) ) {
-	$t_issue['attachments'] = helper_array_transpose( $f_files );
+	$t_issue['files'] = helper_array_transpose( $f_files );
 }
 
 $t_build = gpc_get_string( 'build', '' );
