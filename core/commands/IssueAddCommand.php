@@ -47,6 +47,14 @@ use Mantis\Exceptions\ClientException;
  *   },
  *   "payload": {
  *     ... see rest issue add documentation
+ *   },
+ *   "options: {
+ *     "clone_info": {                # Used only in case issue is cloned
+ *       "master_issue_id": 1234,
+ *       "relationship_type": 1,      # BUG_RELATED
+ *       "copy_files": true,
+ *       "copy_notes": true,
+ *     }
  *   }
  * }
  */
@@ -86,8 +94,19 @@ class IssueAddCommand extends Command {
 	 */
 	function validate() {
 		$this->user_id = auth_get_current_user_id();
+		$t_clone_info = $this->option( 'clone_info', array() );
 
 		$t_issue = $this->payload( 'issue' );
+
+		if( isset( $t_clone_info['master_issue_id'] ) ) {
+			if( bug_is_readonly( $t_clone_info['master_issue_id'] ) ) {
+				throw new ClientException(
+					sprintf( "Master issue '%d' is read-only", $t_clone_info['master_issue_id'] ),
+					ERROR_BUG_READ_ONLY_ACTION_DENIED,
+					array( $t_clone_info['master_issue_id'] )
+				);
+			}
+		}
 
 		if( !isset( $t_issue['summary'] ) || is_blank( $t_issue['summary'] ) )  {
 			throw new ClientException(
@@ -191,7 +210,7 @@ class IssueAddCommand extends Command {
 					ERROR_USER_BY_ID_NOT_FOUND,
 					array( $t_handler_id ) );
 			}
-	
+
 			if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_handler_id ) ) {
 				throw new ClientException(
 					sprintf( "User '%d' can't be assigned issues.", $t_handler_id ),
@@ -326,6 +345,53 @@ class IssueAddCommand extends Command {
 
 		if( isset( $t_issue['monitors'] ) ) {
 			mci_issue_set_monitors( $t_issue_id, $this->user_id, $t_issue['monitors'] );
+		}
+
+		$t_clone_info = $this->option( 'clone_info', array() );
+		if( isset( $t_clone_info['master_issue_id'] ) ) {
+			$t_master_issue_id = (int)$t_clone_info['master_issue_id'];
+
+			# it's a child generation... let's create the relationship and add some lines in the history
+
+			# update master bug last updated
+			bug_update_date( $t_master_issue_id );
+
+			# Add log line to record the cloning action
+			history_log_event_special( $t_issue_id, BUG_CREATED_FROM, '', $t_master_issue_id );
+			history_log_event_special( $t_master_issue_id, BUG_CLONED_TO, '', $t_issue_id );
+
+			# copy notes from parent
+			if( isset( $t_clone_info['copy_notes'] ) &&  $t_clone_info['copy_notes'] ) {
+				$t_parent_bugnotes = bugnote_get_all_bugnotes( $t_master_issue_id );
+
+				foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+					$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
+
+					bugnote_add(
+						$t_issue_id,
+						$t_parent_bugnote->note,
+						$t_parent_bugnote->time_tracking,
+						$t_private,
+						$t_parent_bugnote->note_type,
+						$t_parent_bugnote->note_attr,
+						$t_parent_bugnote->reporter_id,
+						false,
+						0,
+						0,
+						false );
+
+					# Note: we won't trigger mentions in the clone scenario.
+				}
+			}
+
+			# copy attachments from parent
+			if( isset( $t_clone_info['copy_files'] ) &&  $t_clone_info['copy_files'] ) {
+				file_copy_attachments( $t_master_issue_id, $t_issue_id );
+			}
+
+			if( isset( $t_clone_info['relationship_type'] ) &&  $t_clone_info['relationship_type'] > BUG_REL_ANY ) {
+				relationship_add( $t_issue_id, $t_master_issue_id, $t_clone_info['relationship_type'], /* email for source */ false );
+			}
 		}
 
 		if( isset( $t_notes ) && is_array( $t_notes ) ) {
