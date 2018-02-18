@@ -114,8 +114,7 @@ class IssueAddCommand extends Command {
 				array( 'project' ) );
 		}
 
-		$t_project = $t_issue['project'];
-		$t_project_id = mci_get_project_id( $t_project );
+		$t_project_id = mci_get_project_id( $t_issue['project'] );
 
 		if( $t_project_id == ALL_PROJECTS ) {
 			throw new ClientException(
