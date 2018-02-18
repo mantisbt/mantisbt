@@ -54,7 +54,30 @@ require_api( 'utility_api.php' );
 
 form_security_validate( 'bug_report' );
 
-$t_project_id = gpc_get_int( 'project_id' );
+$f_master_bug_id = gpc_get_int( 'm_id', 0 );
+$f_rel_type = gpc_get_int( 'rel_type', BUG_REL_NONE );
+$f_copy_notes_from_parent = gpc_get_bool( 'copy_notes_from_parent', false );
+$f_copy_attachments_from_parent = gpc_get_bool( 'copy_attachments_from_parent', false );
+
+$t_clone_info = array(
+	'master_issue_id' => $f_master_bug_id,
+	'relationship_type' => $f_rel_type,
+	'copy_notes' => $f_copy_notes_from_parent,
+	'copy_files' => $f_copy_attachments_from_parent
+);
+
+if( $f_master_bug_id > 0 ) {
+	bug_ensure_exists( $f_master_bug_id );
+	if( bug_is_readonly( $f_master_bug_id ) ) {
+		error_parameters( $f_master_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
+	$t_master_bug = bug_get( $f_master_bug_id, true );
+	$t_project_id = $t_master_bug->project_id;
+} else {
+	$f_project_id = gpc_get_int( 'project_id' );
+	$t_project_id = $f_project_id;
+}
 
 $t_issue = array(
 	'project' => array( 'id' => $t_project_id ),
@@ -207,8 +230,12 @@ if( !empty( $t_custom_fields ) ) {
 }
 
 $t_data = array(
-	'payload' => array( 'issue' => $t_issue )
+	'payload' => array( 'issue' => $t_issue ),
 );
+
+if( $f_master_bug_id > 0 ) {
+	$t_data['options'] = array( 'clone_info' => $t_clone_info );
+}
 
 $t_command = new IssueAddCommand( $t_data );
 $t_result = $t_command->execute();
