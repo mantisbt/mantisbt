@@ -161,7 +161,7 @@ class IssueAddCommand extends Command {
 			if( $t_reporter_id != $this->user_id ) {
 				# Make sure that active user has access level required to specify a different reporter.
 				$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
-				if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
+				if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $this->user_id ) ) {
 					throw new ClientException(
 						'Active user does not have access level required to specify a different issue reporter',
 						ERROR_ACCESS_DENIED );
@@ -323,7 +323,7 @@ class IssueAddCommand extends Command {
 		ApiObjectFactory::throwIfFault( $t_result );
 
 		if( isset( $t_issue['monitors'] ) ) {
-			mci_issue_set_monitors( $t_issue_id, $t_user_id, $t_issue['monitors'] );
+			mci_issue_set_monitors( $t_issue_id, $this->user_id, $t_issue['monitors'] );
 		}
 
 		if( isset( $t_notes ) && is_array( $t_notes ) ) {
@@ -345,7 +345,7 @@ class IssueAddCommand extends Command {
 					$t_view_state_id == VS_PRIVATE,
 					$t_note_type,
 					$t_note_attr,
-					$t_user_id,
+					$this->user_id,
 					false ); # don't send mail
 
 				bugnote_process_mentions( $t_issue_id, $t_note_id, $t_note['text'] );
