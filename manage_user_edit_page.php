@@ -91,8 +91,6 @@ if( !$t_user ) {
 # current user.
 access_ensure_global_level( $t_user['access_level'] );
 
-$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
-
 # User action buttons: RESET/UNLOCK, IMPERSONATE and DELETE
 $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& auth_can_set_password( $t_user['id'] )
@@ -155,7 +153,7 @@ print_manage_menu( 'manage_user_page.php' );
 					<!-- Realname -->
 					<tr>
 <?php
-	if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
+	if( ON == config_get_global( 'use_ldap_realname' ) ) {
 		# With LDAP
 ?>
 						<td class="category">
@@ -188,7 +186,7 @@ print_manage_menu( 'manage_user_page.php' );
 					<!-- Email -->
 					<tr>
 <?php
-	if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
+	if( ON == config_get_global( 'use_ldap_email' ) ) {
 		# With LDAP
 ?>
 						<td class="category">
