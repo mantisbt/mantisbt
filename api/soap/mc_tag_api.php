@@ -200,8 +200,9 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
         $t_tag = ApiObjectFactory::objectToArray( $t_tag_obj );
         if( access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_issue_id, $p_user_id ) ) {
             $t_tag_id = $t_tag['id'];
+            $t_tag_name = $t_tag['name'];
             log_event( LOG_WEBSERVICE, 'attaching tag id \'' . $t_tag_id . '\' to issue \'' . $p_issue_id . '\'' );
-            tag_bug_attach( $t_tag_id, $p_issue_id, $p_user_id, $t_tag['name'] );
+            tag_bug_attach( $t_tag_id, $p_issue_id, $p_user_id, $t_tag_name);
         }
     }
 }
