@@ -844,6 +844,7 @@ $g_language_choices_arr = array(
 	'finnish',
 	'french',
 	'galician',
+	'georgian',
 	'german',
 	'greek',
 	'hebrew',
@@ -855,10 +856,12 @@ $g_language_choices_arr = array(
 	'korean',
 	'latvian',
 	'lithuanian',
+	'luxembourgish',
 	'macedonian',
 	'norwegian_bokmal',
 	'norwegian_nynorsk',
 	'occitan',
+	'persian',
 	'polish',
 	'portuguese_brazil',
 	'portuguese_standard',
@@ -877,6 +880,7 @@ $g_language_choices_arr = array(
 	'urdu',
 	'vietnamese',
 	'volapuk',
+	'zazaki',
 );
 
 /**
@@ -900,6 +904,7 @@ $g_language_auto_map = array(
 	'nl-be, nl' => 'dutch',
 	'en-us, en-gb, en-au, en' => 'english',
 	'et' => 'estonian',
+	'fa' => 'persian',
 	'fi' => 'finnish',
 	'fr-ca, fr-be, fr-ch, fr' => 'french',
 	'gl' => 'galician',
@@ -912,8 +917,10 @@ $g_language_auto_map = array(
 	'ia' => 'interlingua',
 	'it-ch, it' => 'italian',
 	'ja' => 'japanese',
+	'ka' => 'georgian',
 	'ko' => 'korean',
 	'ksh' => 'ripoarisch',
+	'lb' => 'luxembourgish',
 	'lt' => 'lithuanian',
 	'lv' => 'latvian',
 	'mk' => 'macedonian',
@@ -935,6 +942,7 @@ $g_language_auto_map = array(
 	'uk' => 'ukrainian',
 	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
+	'zza' => 'zazaki',
 );
 
 /**
