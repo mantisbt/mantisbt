@@ -73,8 +73,8 @@ function mention_get_candidates( $p_text ) {
 			# Negative lookbehind  to ensure we don't match multiple tags
 			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
 			. ')'
-			# any word char or period, but must not end with period
-			. '([\w.]*[\w])'
+			# any word char, dash or period, must end with word char
+			. '([\w\-.]*[\w])'
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag
 			. '(?=[^\w@]|$)'
