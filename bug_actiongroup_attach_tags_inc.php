@@ -125,7 +125,7 @@ function action_attach_tags_process( $p_bug_id ) {
 
 	foreach( $g_action_attach_tags_attach as $t_tag_row ) {
 		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
-            tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id,  $t_tag_row['name'] );
+            tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id );
         }
 	}
 

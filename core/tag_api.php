@@ -363,7 +363,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 
 	foreach( $t_tags_attach as $t_tag_row ) {
 		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
-            tag_bug_attach( $t_tag_row['id'], $p_bug_id, null, $t_tag_row['name'] );
+            tag_bug_attach( $t_tag_row['id'], $p_bug_id, null );
 		}
 	}
 
@@ -775,7 +775,7 @@ function tag_get_bugs_attached( $p_tag_id ) {
  * @param string $p_tag_name
  * @return boolean
  */
-function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null,  $p_tag_name = null ) {
+function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null) {
 
 	antispam_check();
 
@@ -808,7 +808,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null,  $p_tag_name =
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );
 
-    if($p_tag_name != null) email_tag_attached( $p_bug_id, $p_tag_name);
+    email_tag_attached( $p_bug_id);
 
     return true;
 }
