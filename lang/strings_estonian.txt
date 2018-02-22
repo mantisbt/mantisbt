@@ -1201,7 +1201,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Laienduse skeemi uuendamine ebaõn
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Tekkis tundmatu viga "%1$s" laienduse "%2$s" täitmisel.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Andmeväli "%1$s" sisaldab korduvat veergu "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Andmeväli "%1$s" sisaldab vigast välja "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Vigane sessiooni järgija.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessiooni muutujat "%1$s" ei leitud.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sinu sessioon on loetud vigaseks.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Vigane vormi turvalisuse märk. Kas saatsid vormi ekslikult korduvalt?';

@@ -1365,7 +1365,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Форматот на укажана
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'За време на извршувањето на приклучокот „%2$s“ се појави непозната грешка „%1$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Полето „%1$s“ го содржи дуплираниот столб „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Полето „%1$s“ содржи неважечко поле „%2$s“.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Неважечки обработувач на седницата.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Седничката променлива „%1$s“ не е пронајдена.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашата седница стана неважечка.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Неважечки сигурносна шифра. Можеби е истечена седницата, или пак случајно сте го поднеле образецот двапати?';

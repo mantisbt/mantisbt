@@ -1353,7 +1353,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'W celu otwarcia strony, musisz zak
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Wystąpił nieznany błąd „%1$s” w trakcie wykonywania kodu wtyczki „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole „%1$s” zawiera dwa razy kolumnę „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole „%1$s” zawiera nieprawidłowe pole „%2$s”.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Nieprawidłowy handler sesji.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Zmienna sesyjna „%1$s” nie została znaleziona.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Twoja sesja została unieważniona.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Niewłaściwy token bezpieczeństwa. Może być to spowodowane wygaśnięciem sesji lub przypadkowo wysłanym dwukrotnie formularzem.';

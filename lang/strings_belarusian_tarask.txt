@@ -1365,7 +1365,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Фармат файла дапаўн
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Узьнікла невядомая памылка «%1$s» падчас выкананьня дапаўненьня «%2$s».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле «%1$s» утрымлівае дублікат слупка «%2$s».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле «%1$s» зьмяшчае няслушнае поле «%2$s».';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Няслушны апрацоўшчык сэсіі.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Зьменная сэсіі «%1$s» ня знойдзеная.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашая сэсія стала нядзейнай.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Няслушны ключ бясьпекі. Верагодна, выпадкова, Вы двойчы даслалі форму?';

@@ -1332,7 +1332,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Le formato del file de modulo specif
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Il habeva un error incognite "%1$s" durante le execution del plug-in "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Le campo "%1$s" contine un columna duplicate "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Le campo "%1$s" contine un campo invalide "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de session invalide.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabile de session "%1$s" non trovate.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Tu session ha devenite invalide.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Le indicio de securitate del formulario es invalide. Isto pote esser causate per un expiration del session, o per submitter le formulario duo vices per accidente.';

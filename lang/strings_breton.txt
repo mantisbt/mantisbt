@@ -1362,7 +1362,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Diwiriek eo furmad ar restr spisaet 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ur fazi dianav « %1$s » zo c\'hoarvezet e-pad ma oa al lugant « %2$s » o vont en-dro.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Ar vaezienn « %1$s » he deus meur a vann « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Er vaezienn « %1$s » ez eus ur vaezienn direizh « %2$s ».';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Merour dalc\'h direizh.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'An argemmenn dalc\'h « %1$s » n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Nullet eo bet ho talc\'h.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Direizh eo jedouer surentez ar furmskrid. Marteze hoc\'h aet en tu all d\'an termen resissaet evit an dalc\'h pe hoc\'h eus kaset ar furmskrid div wezh dre fazi.';

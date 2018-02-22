@@ -1299,7 +1299,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '" %1$s " Eklentisi bu sayfaya eri�
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '"%2$s" çalıştırılması sonucu bilinmeyen bir %1$s hatası oluştu.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '"%1$s" alanı birden fazla "%2$s" sütunu içeriyor.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '"%1$s" alanı geçersiz geçersiz "%2$s" alanı içeriyor.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Geçersiz oturum işleyicisi.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '"%1$s" oturum değişkeni bulunamadı.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uzun süredir sayfaya bakılmadığı için oturumunuz sonlandırılmıştır.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geçersiz form güvenlik anahtarı. Bu durum oturumda zaman aşımı veya formun yanlışlıkla iki defa gönderilmesinden kaynaklanıyor olabilir.';

@@ -1279,7 +1279,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Lo modul « %1$s » deu èsser
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Una error desconeguda « %1$s » s\'es produsida durant l\'execucion del logicial « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Lo camp « %1$s » possedís pas mai d\'una colomna « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Lo camp « %1$s » possedís una colomna invalida « %2$s »';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestionari de session invalid.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'La variabla de session « %1$s » es pas estada trobada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Vòstra session es estada invalidada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geton de seguretat del formulari invalid. Aquò pòt èsser degut a un depassament de relambi de la session, o un mandadís en doble accidental del formulari.';

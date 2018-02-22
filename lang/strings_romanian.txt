@@ -1241,7 +1241,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Actualizarea schemei plugin-ului a
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'O eroare necunoscută "%1$s" a apărut în timpul execuției plugin-ului "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Câmpul „%1$s” conține coloana duplicată „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Câmpul "%1$s" conține câmpul invalid "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Handler de sesiune invalid.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabila de sesiune „%1$s” nu a fost găsită.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sesiunea dvs. a devenit invalidă.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Jetonul de securitate a formularului este invalid. Cauza acestei erori poate fi o sesiune expirată sau trimiterea accidentală a aceluiași formular de două ori.';

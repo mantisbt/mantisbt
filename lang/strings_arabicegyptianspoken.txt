@@ -1191,7 +1191,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقيه سكيما الإضاف
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافه "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوى على العامود المكرر "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوى على الحقل غير الصحيح "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسه غير صحيح.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسه "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحه.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استماره سريه مش صحيح . يمكن السبب  وقت الجلسه  خلص أو انك  أرسلت الاستماره مرتين بطريق الخطأ';

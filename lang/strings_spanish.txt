@@ -1383,7 +1383,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'El formato de archivo especificado p
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ocurrió un error desconocido "%1$s" durante la ejecución del plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo \'%1$s\' contiene duplicados en la columna \'%2$s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo \'%1$s\' contiene un campo no válido: \'%2$s\'';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sesión no válido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Un parámetro de sesión esperado (%1$s) no se encontró.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Su sesión ya no es válida.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguridad del formulario no válido. Esto podría ser causado por haberse agotado el tiempo de espera de la sesión, o por enviar el formulario dos veces por accidente.';

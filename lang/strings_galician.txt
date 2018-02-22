@@ -1369,7 +1369,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'O formato de ficheiro especificado p
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Houbo un erro descoñecido "%1$s" durante a execución do complemento "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'O campo "%1$s" contén a columna duplicada "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'O campo "%1$s" contén o campo inválido "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Xestor de sesión inválido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A variable "%1$s" da sesión non foi atopada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A súa sesión foi invalidada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Pase de seguridade do formulario inválido. Isto púidoo causar un tempo de espera excesivo ou que enviase o formulario dúas veces por accidente.';

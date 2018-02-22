@@ -1262,7 +1262,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Aby ste sa mohli dostať na "%1$s"
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Pri prevádzke pluginu "%2$s" sa vyskytla neznáma chyba "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitný stĺpec \'%2$s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole "%1$s" obsahuje neplatné pole "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neplatný radič sedení.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Premenná sedenia "%1$s" nebola nájdená.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sedenie je neplatné.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný bezpečnostný kód formulára. Príčinou môže byť uplynutie časového limitu alebo náhodné odosielanie formulára dvakrát.';

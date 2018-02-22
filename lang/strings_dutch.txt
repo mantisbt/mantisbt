@@ -1363,7 +1363,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'De opmaak van het opgegeven pluginbe
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Er is een onbekende fout opgetreden ("%1$s") bij het uitvoeren van de uitbreiding "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Het veld "%1$s" bevat een dubbele kolom "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Het veld "%1$s" bevat een ongeldig veld "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ongeldige session-handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'De sessievariabele "%1$s" is niet aangetroffen.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uw sessie is niet langer geldig.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Het beveiligingstoken heeft een ongeldige opmaak. Dit kan veroorzaakt zijn door een timeout van de sessie of het per ongeluk twee keer opsturen van het formulier.';

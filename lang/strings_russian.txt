@@ -1386,7 +1386,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Формат файла плагин
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Во время выполнения плагина "%2$s" возникла неизвестная ошибка "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле "%1$s" содержит дублирующийся столбец "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле «%1$s» содержит недопустимое поле «%2$s».';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Неправильный обработчик сессии.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Сессионный атрибут "%1$s" не найден.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Ваша сессия стала недействительной.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Некорректный маркер безопасности. Возможно, Вы случайно послали форму дважды?';

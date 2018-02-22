@@ -1206,7 +1206,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Ne mogu da dogradim šemu dodatka 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Za vreme izvršavanja dodatka „%2$s“, došlo je do nepoznate greške „%1$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Polje „%1$s“ sadrži dupliranu kolonu „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Polje „%1$s“ sadrži neispravno polje „%2$s“.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neispravan obrađivač sesije.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Ne mogu da pronađem promenljivu „%1$s“.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Vaša sesija je postala neispravna.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neispravan sigurnosni žeton. Možda je istekla sesija ili ste slučajno podneli obrazac dvaput.';

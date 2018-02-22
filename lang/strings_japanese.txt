@@ -1360,7 +1360,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = '指定されたプラグインファ
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '「%2$s」プラグインの実行中に不明なエラー「%1$s」が発生しました。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '項目「%1$s」の列「%2$s」が重複しています。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '項目「%1$s」が、無効な項目「%2$s」を含んでいます。';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'セッション ハンドラーが無効です。';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'セッション変数「%1$s」が見つかりません。';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'あなたのセッションは無効になりました。';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'セキュリティ トークンが無効です。セッションがタイムアウトした、または実行を二度押してしまった可能性があります。';

@@ -1223,7 +1223,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Laajennuksen scheman päivitys ep�
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Laajennuksen "%2$s" ajossa tapahtui tuntematon virhe "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Kentässä "%1$s" on duplikaattisarake "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Kentässä "%1$s" on virheellinen kenttä "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Virheellinen istunnon käsittelijä.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Istuntomuuttujaa "%1$s" ei löytynyt.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Istuntosi on vanhentunut.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Virheellinen lomaketurvallisuuselementti. Lähetitkö lomakkeen vahingossa useamman kerran?';

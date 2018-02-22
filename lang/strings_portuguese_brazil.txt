@@ -1385,7 +1385,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'O formato do arquivo de plugin espec
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ocorreu um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo "%1$s" contém uma duplicação da coluna "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo "%1$s" contém o campo "%2$s" inválido.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Manipulador de sessão inválido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A variável de sessão "%1$s" não foi encontrada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sua sessão foi invalidada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de segurança do formulário inválido. Isso pode ter sido provocado por esgotamento do tempo da seção, ou acidentamente, por enviar o formulário duas vezes.';

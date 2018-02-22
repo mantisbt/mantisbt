@@ -1363,7 +1363,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'A megadott „%1$s” bővítmény f
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ismeretlen hiba („%1$s”) történt a(z) „%2$s” bővítmény futtatásakor.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'A(z) „%1$s” mező duplikált oszlopot tartalmaz: „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'A(z) „%1$s” mező érvénytelen mezőt tartalmaz: „%2$s”.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Érvénytelen munkamenet-kezelő.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A(z) „%1$s” munkamenet változó nem található.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A munkameneted érvénytelenítetté vált.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Érvénytelen biztonsági token. Ezt a munkamenet időtúllépése, vagy az űrlap véletlen kétszer történő elküldése okozhatja.';

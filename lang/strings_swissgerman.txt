@@ -1236,7 +1236,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualisierig vum Plugin-Schema is
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'E nit bekannte Fähler „%1$s“ isch ufträte, derwylscht s „%2$s“-Plugin uusgfiert woren sich.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Im Fäld „%1$s“ het s e doppleti Spalte „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Im Fäld „%1$s“ het s e nit giltig Fäld „%2$s“.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Nit giltige Session-Handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session-Variable „%1$s“ isch nit gfunde wore.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Dyy Sitzig isch uugiltig wore.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Nit giltig Formular Sicherheits-Token. Villt het d Sitzig e Momänt uusgsetzt. Oder Du hesch s Formular us Versäh zweimol abgeschickt.';

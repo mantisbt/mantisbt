@@ -1342,7 +1342,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Formatet for angitt tilleggsfil "%1$
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ukjent feil "%1$s" ved kjøring av tilleggsprogrammet "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Felt "%1$s" inneholder en duplikert kolonne "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Feltet "%1$s" inneholder et ugyldig felt "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ugyldig sesjonshåndterings-kode';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Finner ikke sesjons-variabelen "%1$s"';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din brukersesjon er ikke lenger gyldig';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ugyldig sikkerhetselement i skjema. Dette kan skyldes at sesjonen gikk ut på dato, eller at du sendte inn skjemaet to ganger ved en tilfeldighet.';

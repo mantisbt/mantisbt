@@ -1371,7 +1371,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Пътя до файла на при
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Неизвестна грешка "%1$s" при изпълнението на плъгин "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Полето "%1$s" съдържа дупликат на колона "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Полето "% 1 $ S" съдържа невалидна област "% 2 $ S".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Невалиден указател на сесия.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Променлива  "% 1 $ S" на сесията не е намерна.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашата сесия е невалидна.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Невалиден маркер за защита. Това може да се дължи на изтекла сесия, или случайно подаване на формуляра два пъти.';

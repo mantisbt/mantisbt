@@ -1375,7 +1375,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = '指定的套件檔案 "%1$s" 格式�
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在執行 "%2$s" 套件時發生了未知的錯誤 "%1$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '欄位 "%1$s" 內包含重複的欄位 "%2$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '欄位 "%1$s" 中含有無效的欄位值 "%2$s"。';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = '無效的工作階段參數。';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '查無工作階段變數 "%1$s"  。';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = '您的工作階段已經失效。';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '表單安全性資訊無效，可能因工作階段逾時或重複送出表單所造成。';

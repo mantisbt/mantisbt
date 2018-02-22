@@ -1376,7 +1376,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Il formato del file specificato del 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Si è verificato un errore sconosciuto "%1$s" durante l\'esecuzione del plugin "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Il campo "%1$s" contiene colonne duplicate "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Il campo "%1$s" contiene un campo invalido "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestore di sessione invalido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabile di sessione "%1$s" non trovato.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'La sessione è scaduta.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Chiave di sicurezza del modulo (token) invalido. Questo potrebbe essere causato da un timeout di sessione, o da un invio del modulo più volte per errore.';

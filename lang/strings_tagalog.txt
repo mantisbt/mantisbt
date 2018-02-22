@@ -1201,7 +1201,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Nabigo ang pagtataas ng uri/kalida
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Mayroon isang hindi napag-aalamang kamaliang "%1$s" habang isinasakatuparan ang pampasak na "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Naglalaman ang kahanayang "%1$s" ng katulad na pahalang na hanay na "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Naglalaman ang kahanayang "%1$s" ng hindi tanggap na kahanayang "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Hindi tanggap na tagahawak ng inilaang panahon.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Hindi natagpuan ang pabagu-bagong halagang "%1$s" ng pinaglaanang panahon.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Naging hindi katanggap-tanggap ang inilaang panahon para sa iyo.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hindi katanggap-tanggap na pormularyo ng panandang pangseguridad.  Maaaring ito ay dulot ng isang gatol sa sesyon, hindi sinasadyang nagkadalawang ulit na pagpapadala ng pormularyo.';

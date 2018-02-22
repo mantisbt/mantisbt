@@ -1378,7 +1378,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Формат файлу модуля
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Під час виконання модуля "%2$s" виникла невідома помилка "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле "%1$s" містить дубльований стовпець "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле "%1$s" містить невірне поле "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Неправильний обробник сесії.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Змінну сесії "%1$s" не знайдено.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Ваша сесія стала недійсна.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Неприпустима форма маркеру безпеки. Це може бути викликано завершенням сеансу або випадковим надсиланням форми два рази.';

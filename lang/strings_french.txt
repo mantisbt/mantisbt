@@ -1390,7 +1390,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Le format du fichier du greffon spé
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Une erreur inconnue « %1$s » s\'est produite durant l\'exécution du plugiciel « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Le champ « %1$s » possède plus d\'une colonne « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Le champ « %1$s » possède une colonne invalide « %2$s »';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestionnaire de session invalide.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'La variable de session « %1$s » n\'a pas été trouvée.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Votre session a été invalidée.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Jeton de sécurité du formulaire invalide. Cela peut être dû à un dépassement de délai de la session, ou un envoi en double accidentel du formulaire.';

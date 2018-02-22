@@ -1216,7 +1216,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Các " %1$s " plugin cần phải 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Có một lỗi không rõ "%1$s" trong quá trình thực hiện của các "%2$s" plugin';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Trường "%1$s" có chứa bản sao cột "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Trường "%1$s" có chứa không hợp lệ trường "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Phiên xử lý không hợp lệ';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Biến phiên "%1$s" không tìm thấy.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Phiên của bạn đã trở thành vô hiệu.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hình thức bảo mật không phù hợp. Việc này có thể là do phiên làm việc hết hạn, hay do việc vô ý gửi một biểu mẫu 2 lần.';

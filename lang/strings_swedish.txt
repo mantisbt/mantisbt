@@ -1379,7 +1379,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Formatet för den angivna insticksmo
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Okänt fel "%1$s" vid exekvering av insticksprogrammet "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Fält "%1$s" innehåller duplicerade kolumner "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fält "%1$s" innehåller ogiltigt fält "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ogiltig sessionshanterare.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessionsvariabel "%1$s" hittades inte.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din session är inte längre giltig.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ogiltigt säkerhetsnyckel för formuläret. Detta kan bero på en utgången session, eller att formuläret av misstag skickats två gånger.';

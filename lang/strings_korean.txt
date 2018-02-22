@@ -1345,7 +1345,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '이 문서에 접근하기 전에 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '"%2$s" 플러그인 실행 중에 알 수 없는 "%1$s" 오류가 있습니다.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '"%1$s" 필드에 중복된 "%2$s" 열이 있습니다.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '"%1$s" 필드에 잘못된 "%2$s" 필드가 있습니다.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = '잘못된 세션 핸들러.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '"%1$s" 세션 변수가 없습니다.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = '세션이 무효화되었습니다.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '폼의 보안 토큰이 잘못되었습니다. 세션 시간 초과 또는 폼을 실수로 두 번 제출할 경우 발생합니다';

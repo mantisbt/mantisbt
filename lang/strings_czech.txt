@@ -1374,7 +1374,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Formát zadaného Plugin souboru "%1
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Při běhu pluginu "%2$s" se vyskytla neznámá chyba "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitní sloupec \'%2$s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole \'%1$s\' obsahuje neplatné pole \'%2$s\'';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neplatný řadič sezení.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Proměnná spojení "%1$s" nebyla nalezena.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Spojení je neplatné.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token formuláře. Buď byl nechtě formulář odeslán dvakrát nebo došlo k vypršení časového limitu relace.';

@@ -1253,7 +1253,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'S\'ha d\'actualitzar el plugin "%1
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Hi ha hagut un error desconegut "%1$s" en l\'execució del plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'El camp "%1$s" conté duplicats a la columna "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'El camp "%1$s" conté un camp "%2$s" invàlid.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestor de sessió invàlid.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'No s\'ha trobat la variable de sessió "%1$s".';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'La vostra sessió ha esdevingut invàlida.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de seguretat del formulari invàlid. Pot ser degut a un excés del temps d\'espera de la sessió o per enviar accidentalment el formulari dues vegades.';

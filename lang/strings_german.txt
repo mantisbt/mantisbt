@@ -1385,7 +1385,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Das Format der angegebenen Plugin-Da
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Es ist ein unbekannter Fehler „%1$s“ während der Ausführung des „%2$s“-Plugins aufgetreten.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Das Feld „%1$s“ enthält doppelte Spalte „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Das Feld „%1$s“ enthält ungültiges Feld „%2$s“.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ungültiger Session-Handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session-Variable „%1$s“ wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Ihre Sitzung ist ungültig geworden.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ungültiges Sicherheitstoken zum Formular. Dies kann durch einen Sitzungsablauf oder durch versehentliches doppeltes Speichern des Formulars verursacht worden sein.';

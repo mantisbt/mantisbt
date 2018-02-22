@@ -1233,7 +1233,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Įskiepio schemos atnaujinimas nep
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Įvyko nežinoma klaida "%1$s" vykdant "%2$s" įskiepį.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Laukas "%1$s" turi dubliuotą stulpelį "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Laukas "%1$s" turi neleidžiamą lauką "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neteisinga sesija.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sesijos kintamasis "%1$s" nerastas.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Jūsų sesija tapo negaliojančiais.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neteisingas formą saugumo raktas. Ar jūs turėjote pateikti formą du kartus dėl nelaimingo atsitikimo?';
