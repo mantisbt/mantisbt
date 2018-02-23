@@ -74,6 +74,7 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use PHPMailer\PHPMailer\PHPMailer;
 use Mantis\Exceptions\ClientException;
 
 # reusable object of class SMTP
