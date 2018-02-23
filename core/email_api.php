@@ -1263,6 +1263,11 @@ function email_send( EmailData $p_email_data ) {
 			register_shutdown_function( 'email_smtp_close' );
 		}
 		$t_mail = new PHPMailer( true );
+
+		// Set e-mail addresses validation pattern. The 'html5' setting is
+		// consistent with the regex defined in email_regex_simple().
+		PHPMailer::$validator  = 'html5';
+
 	} else {
 		$t_mail = $g_phpMailer;
 	}
