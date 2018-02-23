@@ -1333,8 +1333,6 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->AddCustomHeader( 'Auto-Submitted:auto-generated' );
 	$t_mail->AddCustomHeader( 'X-Auto-Response-Suppress: All' );
 
-	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
-	$t_mail->LE         = "\r\n";
 	$t_mail->Encoding   = 'quoted-printable';
 
 	if( isset( $t_email_data->metadata['priority'] ) ) {
