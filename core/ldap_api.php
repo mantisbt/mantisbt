@@ -218,6 +218,7 @@ function ldap_escape_string( $p_string ) {
  * @return string The field value or null if not found.
  */
 function ldap_get_field_from_username( $p_username, $p_field ) {
+	$p_field = strtolower( $p_field );
 	$t_ldap_organization    = config_get( 'ldap_organization' );
 	$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
 	$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
