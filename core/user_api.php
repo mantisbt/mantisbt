@@ -971,7 +971,7 @@ function user_get_realname( $p_user_id ) {
  * The name is determined based on the following sequence:
  * - if the user does not exist, returns the user ID prefixed by a localized
  *   string (prefix_for_deleted_users, "user" by default);
- * - if show_realname is ON and it is not empty, return the user's Real Name;
+ * - if user_show_realname() is true and realname is not empty, return the user's Real Name;
  * - Otherwise, return the username
  *
  * NOTE: do not use this function to retrieve the user's username
@@ -997,11 +997,13 @@ function user_get_name( $p_user_id ) {
  * @return bool true to show, false otherwise.
  */
 function user_show_realname() {
-	return access_has_project_level( config_get( 'show_user_realname_threshold', null, null, ALL_PROJECTS ) );
+	return config_get( 'show_realname' ) == ON &&
+		access_has_project_level( config_get( 'show_user_realname_threshold' ) );
 }
 
 /**
- * Return the user's name for display.
+ * Return the user's name for display.  If user_show_realname() is true and realname is not empty
+ * return realname otherwise return username.
  *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
  * @return string display name
