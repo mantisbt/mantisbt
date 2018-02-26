@@ -342,6 +342,13 @@ function auth_prepare_username( $p_username ) {
 			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$t_username = $_SERVER['PHP_AUTH_USER'];
+				} else if( isset( $_SERVER['REMOTE_USER'] ) ) {
+					if ( preg_match( '/^(.*)\\\\(.*)$/i', $_SERVER['REMOTE_USER'], $user_match ) ) {
+						# Convert 'domain\user' to 'user'
+						$t_username = $user_match[ 2 ];
+					} else {
+						$t_username = $_SERVER['REMOTE_USER'];
+					}
 				}
 			} else {
 				auth_http_set_logout_pending( false );
@@ -408,6 +415,8 @@ function auth_auto_create_user( $p_username, $p_password ) {
 	$t_login_method = config_get_global( 'login_method' );
 
 	if( $t_login_method == BASIC_AUTH ) {
+		$t_auto_create = true;
+    } else if ( $t_login_method == HTTP_AUTH && isset( $_SERVER['REMOTE_USER'] ) ) {
 		$t_auto_create = true;
 	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 		$t_auto_create = true;
@@ -712,6 +721,8 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 	if( LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
+	} else if( HTTP_AUTH == $t_configured_login_method && isset( $_SERVER['REMOTE_USER'] ) ) {
+		return true;
 	}
 
 	if( !auth_can_use_standard_login( $p_user_id ) ) {
@@ -1113,11 +1124,6 @@ function auth_get_current_user_id() {
  * @access public
  */
 function auth_user_id_from_cookie( $p_cookie_string ) {
-	# Save a db query if value provided doesn't look like a cookie
-	if( strlen( $p_cookie_string ) != AUTH_COOKIE_LENGTH ) {
-		return false;
-	}
-
 	if( $t_result = user_search_cache( 'cookie_string', $p_cookie_string ) ) {
 		$t_user_id = (int)$t_result['id'];
 		return $t_user_id;

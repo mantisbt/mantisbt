@@ -110,9 +110,6 @@ if( !( ON == config_get( 'use_ldap_realname' ) ) ) {
 	# strip extra spaces from real name
 	$t_realname = string_normalize( $f_realname );
 	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
-		# checks for problems with realnames
-		$t_username = user_get_username( $t_user_id );
-		user_ensure_realname_unique( $t_username, $t_realname );
 		$t_update_realname = true;
 	}
 }

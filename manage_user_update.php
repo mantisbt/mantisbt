@@ -109,7 +109,6 @@ if( ON == config_get( 'use_ldap_realname' ) ) {
 } else {
 	# strip extra space from real name
 	$t_realname = string_normalize( $f_realname );
-	user_ensure_realname_unique( $t_old_username, $t_realname );
 }
 
 if( ON == config_get( 'use_ldap_email' ) ) {

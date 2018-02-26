@@ -169,18 +169,6 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	if( config_get_global( $t_config ) != OFF ) {
 		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
 	}
-	$t_config = 'display_errors';
-	$t_errors = config_get_global( $t_config );
-	if( !(
-			isset( $t_errors[E_ALL] ) && $t_errors[E_ALL] == DISPLAY_ERROR_HALT
-		 ||	isset( $t_errors[E_USER_ERROR] ) && $t_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT
-		 )
-	) {
-		$t_warnings[] = debug_setting_message(
-			'integrity',
-			$t_config . '[E_USER_ERROR]',
-			DISPLAY_ERROR_HALT );
-	}
 
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.

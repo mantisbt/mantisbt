@@ -178,13 +178,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		$t_to = $t_bugnote_stats_to_y . '-' . $t_bugnote_stats_to_m . '-' . $t_bugnote_stats_to_d;
 		$t_bugnote_stats = billing_get_summaries( $f_project_id, $t_from, $t_to, $f_bugnote_cost, $f_include_subprojects );
 
-		# Sort the array by bug_id, user/real name
-		if( ON == config_get( 'show_realname' ) ) {
-			$t_name_field = 'realname';
-		} else {
-			$t_name_field = 'username';
-		}
-
 		if( is_blank( $f_bugnote_cost ) || ( (double)$f_bugnote_cost == 0 ) ) {
 			$t_cost_col = false;
 		}
@@ -213,7 +206,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="small-caption">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
@@ -231,11 +224,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 
-			foreach( $t_issue['users'] as $t_username => $t_user_info ) {
+			foreach( $t_issue['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
-			<?php echo $t_username ?>
+			<?php print_user( $t_user_id ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ) ?>
@@ -272,7 +265,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="small-caption">
-			<?php echo lang_get( $t_name_field ) ?>
+			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
@@ -285,11 +278,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
-	foreach ( $t_bugnote_stats['users'] as $t_username => $t_user_info ) {
+	foreach ( $t_bugnote_stats['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
 		<td class="small-caption">
-			<?php echo $t_username; ?>
+			<?php print_user( $t_user_id ) ?>
 		</td>
 		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_user_info['minutes'] ); ?>

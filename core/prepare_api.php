@@ -71,13 +71,21 @@ function prepare_user_name( $p_user_id ) {
 		return '';
 	}
 
-	$t_username = user_get_name( $p_user_id );
-	$t_username = string_display_line( $t_username );
-	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+	$t_username = user_get_username( $p_user_id );
+	$t_name = user_get_name( $p_user_id );
+	if( $t_username != $t_name ) {
+		$t_tooltip = ' title="' . string_attribute( $t_name ) . '"';
 	} else {
-		return '<del class="user">' . $t_username . '</del>';
+		$t_tooltip = '';
 	}
+
+	$t_username = string_display_line( $t_username );
+
+	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
+		return '<a class="user"' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+	}
+
+	return '<del class="user"' . $t_tooltip . '>' . $t_username . '</del>';
 }
 
 /**
