@@ -95,11 +95,10 @@ $t_row = user_get_row( auth_get_current_user_id() );
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
-$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
-
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB
 $u_email = user_get_email( $u_id );
+$u_realname = user_get_realname( $u_id );
 
 # If the password is the default password, then prompt user to change it.
 $t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );
@@ -219,7 +218,7 @@ print_account_menu( 'account_page.php' );
 				</td>
 				<td>
 				<?php
-				if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+				if( ON == config_get( 'use_ldap_email' ) ) {
 					# With LDAP
 					echo string_display_line( $u_email );
 				} else {
@@ -230,11 +229,11 @@ print_account_menu( 'account_page.php' );
 				</td>
 			</tr>
 			<tr><?php
-				if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+				if( ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
 					echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
 					echo '<td>';
-					echo string_display_line( ldap_realname_from_username( $u_username ) );
+					echo string_display_line( $u_realname );
 					echo '</td>';
 				} else {
 					# Without LDAP
