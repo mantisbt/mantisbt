@@ -98,7 +98,7 @@ if( $t_project_id != helper_get_current_project() ) {
 	$g_project_override = $t_project_id;
 }
 
-access_ensure_project_level( config_get( 'report_bug_threshold' ) );
+access_ensure_project_level( project_config( $t_project_id, 'report_bug_threshold' ) );
 
 if( isset( $_GET['posted'] ) && empty( $_FILE ) && empty( $_POST ) ) {
 	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
@@ -114,20 +114,20 @@ $t_bug_data->os_build               = gpc_get_string( 'os_build', '' );
 $t_bug_data->version                = gpc_get_string( 'product_version', '' );
 $t_bug_data->profile_id             = gpc_get_int( 'profile_id', 0 );
 $t_bug_data->handler_id             = gpc_get_int( 'handler_id', 0 );
-$t_bug_data->view_state             = gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+$t_bug_data->view_state             = gpc_get_int( 'view_state', project_config( $t_project_id, 'default_bug_view_status' ) );
 $t_bug_data->category_id            = gpc_get_int( 'category_id', 0 );
-$t_bug_data->reproducibility        = gpc_get_int( 'reproducibility', config_get( 'default_bug_reproducibility' ) );
-$t_bug_data->severity               = gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
-$t_bug_data->priority               = gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
-$t_bug_data->projection             = gpc_get_int( 'projection', config_get( 'default_bug_projection' ) );
-$t_bug_data->eta                    = gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
-$t_bug_data->resolution             = gpc_get_string( 'resolution', config_get( 'default_bug_resolution' ) );
-$t_bug_data->status                 = gpc_get_string( 'status', config_get( 'bug_submit_status' ) );
+$t_bug_data->reproducibility        = gpc_get_int( 'reproducibility', project_config( $t_project_id, 'default_bug_reproducibility' ) );
+$t_bug_data->severity               = gpc_get_int( 'severity', project_config( $t_project_id, 'default_bug_severity' ) );
+$t_bug_data->priority               = gpc_get_int( 'priority', project_config( $t_project_id, 'default_bug_priority' ) );
+$t_bug_data->projection             = gpc_get_int( 'projection', project_config( $t_project_id, 'default_bug_projection' ) );
+$t_bug_data->eta                    = gpc_get_int( 'eta', project_config( $t_project_id, 'default_bug_eta' ) );
+$t_bug_data->resolution             = gpc_get_string( 'resolution', project_config( $t_project_id, 'default_bug_resolution' ) );
+$t_bug_data->status                 = gpc_get_string( 'status', project_config( $t_project_id, 'bug_submit_status' ) );
 $t_bug_data->summary                = gpc_get_string( 'summary' );
 $t_bug_data->description            = gpc_get_string( 'description' );
-$t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
-$t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
-$t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( config_get( 'due_date_default' ) ) );
+$t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', project_config( $t_project_id, 'default_bug_steps_to_reproduce' ) );
+$t_bug_data->additional_information = gpc_get_string( 'additional_info', project_config( $t_project_id, 'default_bug_additional_info' ) );
+$t_bug_data->due_date               = gpc_get_string( 'due_date', date_strtotime( project_config( $t_project_id, 'due_date_default' ) ) );
 if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
@@ -140,13 +140,13 @@ $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_paren
 $f_tag_select                       = gpc_get_int( 'tag_select', 0 );
 $f_tag_string                       = gpc_get_string( 'tag_string', '' );
 
-if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
+if( project_has_access( $t_bug_data->project_id, 'roadmap_update_threshold' ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
 }
 
 # Prevent unauthorized users setting handler when reporting issue
 if( $t_bug_data->handler_id > 0 ) {
-	access_ensure_project_level( config_get( 'update_bug_assign_threshold' ) );
+	access_ensure_project_level( project_config( $t_project_id, 'update_bug_assign_threshold' ) );
 }
 
 # if a profile was selected then let's use that information
@@ -192,7 +192,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 $t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
 
 # Ensure that resolved bugs have a handler
-if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
+if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= project_config( $t_project_id, 'bug_resolved_status_threshold' ) ) {
 	$t_bug_data->handler_id = auth_get_current_user_id();
 }
 
@@ -271,12 +271,14 @@ if( $f_master_bug_id > 0 ) {
 }
 
 # log status and resolution changes if they differ from the default
-if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
-	history_log_event( $t_bug_id, 'status', config_get( 'bug_submit_status' ) );
+$t_submit_status = project_config( $t_project_id, 'bug_submit_status' );
+if( $t_bug_data->status != $t_submit_status ) {
+	history_log_event( $t_bug_id, 'status', $t_submit_status );
 }
 
-if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
-	history_log_event( $t_bug_id, 'resolution', config_get( 'default_bug_resolution' ) );
+$t_default_resolution = project_config( $t_project_id, 'default_bug_resolution' );
+if( $t_bug_data->resolution != $t_default_resolution ) {
+	history_log_event( $t_bug_id, 'resolution', $t_default_resolution );
 }
 
 helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );

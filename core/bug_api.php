@@ -2262,3 +2262,30 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 		custom_field_cache_values( $t_bug_ids, $t_custom_field_ids );
 	}
 }
+
+/**
+ * Get the specified config option value for the project that owns
+ * the specified bug id.
+ *
+ * @param integer $p_bug_id  The bug id.
+ * @param string  $p_config  The config option name.
+ * @param string  $p_default The default value.
+ * @return mixed  The config value.
+ */
+function bug_config( $p_bug_id, $p_config, $p_default = null ) {
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	return config_get( $p_config, $p_default, /* user */ null, $t_project_id );
+}
+
+/**
+ * Checks if the logged in user has the access level specified by the
+ * config option for the specified bug.
+ *
+ * @param integer $p_bug_id  The bug id
+ * @param string  $p_config  The configuration option name.
+ * @return bool true: yes, false: otherwise.
+ */
+function bug_has_access( $p_bug_id, $p_config ) {
+	$t_access_level = bug_config( $p_bug_id, $p_config );
+	return access_has_bug_level( $t_access_level, $p_bug_id );
+}
