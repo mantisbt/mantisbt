@@ -343,9 +343,9 @@ function auth_prepare_username( $p_username ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$t_username = $_SERVER['PHP_AUTH_USER'];
 				} else if( isset( $_SERVER['REMOTE_USER'] ) ) {
-					if ( preg_match( '/^(.*)\\\\(.*)$/i', $_SERVER['REMOTE_USER'], $user_match ) ) {
+					if ( preg_match( '/^(.*)\\\\(.*)$/i', $_SERVER['REMOTE_USER'], $t_user_match ) ) {
 						# Convert 'domain\user' to 'user'
-						$t_username = $user_match[ 2 ];
+						$t_username = $t_user_match[ 2 ];
 					} else {
 						$t_username = $_SERVER['REMOTE_USER'];
 					}
