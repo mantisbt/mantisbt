@@ -267,8 +267,9 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	}
 
 	# Make sure the requested field exists
-	if( is_array( $t_info[0] ) && array_key_exists( $p_field, $t_info[0] ) ) {
-		$t_value = $t_info[0][$p_field][0];
+	$t_field_lowercase = strtolower( $p_field );
+	if( is_array( $t_info[0] ) && array_key_exists( $t_field_lowercase, $t_info[0] ) ) {
+		$t_value = $t_info[0][$t_field_lowercase][0];
 		log_event( LOG_LDAP, 'Found value \'' . $t_value . '\' for field \'' . $p_field . '\'.' );
 	} else {
 		log_event( LOG_LDAP, 'WARNING: field \'' . $p_field . '\' does not exist' );
