@@ -82,7 +82,11 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 
 		$c_field_name = $p_field_name;
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
-		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
+		if( is_null( $p_new_value ) ) {
+			$c_new_value = '';
+		} else {
+			$c_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+		}
 
 		db_param_push();
 		$t_query = 'INSERT INTO {bug_history}
@@ -123,6 +127,8 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 	}
 	if( is_null( $p_new_value ) ) {
 		$p_new_value = '';
+	} else {
+		$p_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
 	}
 
 	db_param_push();
