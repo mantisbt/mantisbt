@@ -209,7 +209,7 @@ $s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköp
 $s_new_account_do_not_reply = 'Älä vastaa tähän sähköpostiviestiin';
 $s_new_account_email = 'Sähköpostiosoite:';
 $s_new_account_IP = 'IP-osoite:';
-$s_new_account_signup_msg = 'Käyttäjätili on luotu:';
+$s_new_account_signup_msg = 'Seuraava käyttäjätili on luotu:';
 $s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.
 
 Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
