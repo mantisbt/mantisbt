@@ -163,8 +163,8 @@ class MantisEnum {
 	 * @param string $p_enum_string The enumerated string.
 	 * @return array array of unique values.
 	 */
-	public static function getValues( $p_enum_string ) {
-		return array_unique( array_keys( MantisEnum::getAssocArrayIndexedByValues( $p_enum_string ) ) );
+	public static function getValues( $p_enum_string, $attr=null  ) {
+		return array_unique( array_keys( MantisEnum::getAssocArrayIndexedByValues( $p_enum_string, $attr ) ) );
 	}
 
 	/**

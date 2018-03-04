@@ -1797,10 +1797,28 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, array $p_fi
  * @return void
  */
 function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
-	if( CUSTOM_FIELD_TYPE_DATE == custom_field_type( $p_field_id ) ) {
+	$t_cftype = custom_field_type( $p_field_id );
+    $t_dyn = false;
+  
+	switch( $t_cftype ){
+		case CUSTOM_FIELD_TYPE_DATE:
 		print_filter_values_custom_field_date( $p_filter, $p_field_id );
 		return;
+		break;
+
+		case CUSTOM_FIELD_TYPE_ENUM:
+			$t_cfdef = custom_field_get_definition( $p_field_id );
+
+			// Dynamic Domain ?
+			$t_dyn = ($t_cfdef['possible_values'][0] == '=');
+			if( $t_dyn ) {
+				$t_fn = 'custom_function_override_enum_get_verbose_value_' . 
+				         utf8_substr( $t_cfdef['possible_values'], 1 );
+	        }
+		break;
+
 	}
+
 
 	if( isset( $p_filter['custom_fields'][$p_field_id] ) ) {
 		$t_values = $p_filter['custom_fields'][$p_field_id];
@@ -1818,7 +1836,12 @@ function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 			if( filter_field_is_none( $t_val ) ) {
 				$t_strings[] = lang_get( 'none' );
 			} else {
+				if( $t_dyn ) {
+					$t_strings[] = call_user_func($t_fn,$t_val);
+				}	
+				else {
 				$t_strings[] = $t_val;
+			    }
 			}
 			$t_inputs[] = '<input type="hidden" name="custom_field_' . $p_field_id . '[]" value="' . string_attribute( $t_val ) . '" />';
 		}
@@ -1928,13 +1951,21 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
 			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
-				foreach( $t_values as $t_val ) {
-					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {
+                # Dynamic Domain ENUM CUSTOM FIELD
+				$t_extract = (strpos($t_values[0],':') !== FALSE);
+				foreach( $t_values as $t_item ) {
+					$t_opt = $t_val = $t_item;
+					if( $t_extract ) {
+						$t_opt_val = explode(':',$t_item);
+						$t_opt = $t_opt_val[0];
+						$t_val = $t_opt_val[1];
+					}
+					if( filter_field_is_any($t_opt) || filter_field_is_none( $t_opt ) ) {
 						continue;
 					}
-					echo '<option value="' . string_attribute( $t_val ) . '"';
+					echo '<option value="' . string_attribute( $t_opt ) . '"';
 					if( isset( $p_filter['custom_fields'][$p_field_id] ) ) {
-						check_selected( $p_filter['custom_fields'][$p_field_id], $t_val, false );
+						check_selected( $p_filter['custom_fields'][$p_field_id], $t_opt, false );
 					}
 					echo '>' . string_attribute( string_shorten( $t_val, $t_max_length ) ) . '</option>';
 				}
