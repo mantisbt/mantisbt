@@ -449,6 +449,12 @@ $g_notify_flags['new'] = array(
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_email_retry_in_days</term>
+			<listitem>
+				<para>Duration (in days) to retry failed emails before deleting them from queue.  Default 7 days.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_email_send_using_cronjob</term>
 			<listitem>
 				<para>Disables sending of emails as soon as an action is performed.

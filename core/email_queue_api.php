@@ -177,14 +177,19 @@ function email_queue_get( $p_email_id ) {
 /**
  * Delete entry from email queue
  * @param integer $p_email_id Email queue identifier.
+ * @param string $p_reason The reason for deletion.
  * @return void
  */
-function email_queue_delete( $p_email_id ) {
+function email_queue_delete( $p_email_id, $p_reason = '' ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {email} WHERE email_id=' . db_param();
 	db_query( $t_query, array( $p_email_id ) );
 
-	log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue', $p_email_id ) );
+	if( is_blank( $p_reason ) ) {
+		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue', $p_email_id ) );
+	} else {
+		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue. reason: %s', $p_email_id, $p_reason ) ); 
+	}
 }
 
 /**

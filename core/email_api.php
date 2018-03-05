@@ -1216,8 +1216,13 @@ function email_send_all( $p_delete_on_failure = false ) {
 		}
 
 		if( !$t_email_sent ) {
-			if( $p_delete_on_failure ) {
-				email_queue_delete( $t_email_data->email_id );
+			# Delete emails that were submitted more than N days ago
+			$t_submitted = (int)$t_email_data->submitted;
+			$t_delete_after_in_days = (int)config_get_global( 'email_retry_in_days' );
+			$t_retry_cutoff = time() - ( $t_delete_after_in_days * 24 * 60 * 60 );
+			if( $p_delete_on_failure || $t_submitted < $t_retry_cutoff ) {
+				$t_reason = $p_delete_on_failure ? 'delete on failure' : 'retry expired';
+				email_queue_delete( $t_email_data->email_id, $t_reason );
 			}
 
 			# If unable to place the email in the email server queue and more
