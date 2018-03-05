@@ -1459,6 +1459,13 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 
 	# Currently we use the filters saved in db as "current" special filters,
 	# to track the active settings for filters in use.
+
+	# for anonymous user, we don't allow using persistent filter
+	# if this function is reached, we return a default filter for it.
+	if( user_is_anonymous( $p_user_id ) ) {
+		return filter_get_default();
+	}
+
 	$t_filter_id = filter_db_get_project_current( $t_project_id, $p_user_id );
 	if( $t_filter_id ) {
 		return filter_get( $t_filter_id );
