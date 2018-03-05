@@ -918,7 +918,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Το εγχείρημα "%1$d" δεν βρέθηκε.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%1$s\' not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Το φίλτρο %1$s δεν βρέθηκε.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Το φίλτρο που προσπαθείτε να χρησιμοποιήσετε είναι πολύ παλιό για να αναβαθμιστεί. Παρακαλώ δημιουργήστε το ξανά.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Το προφίλ δε βρέθηκε.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Προσαρμοσμένο πεδίο δεν βρέθηκε.';

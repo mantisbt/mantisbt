@@ -1260,7 +1260,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men mottok
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Et nummer var forventet for %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Sak %1$d ikke funnet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Finner ikke filteret %1$s.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filteret du forsøker å bruke er for gammelt til at det kan oppgraderes. Vennligst lag filteret på nytt.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ugyldig epost.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Det er ikke tillatt å bruke midlertidige epost-adresser.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Brukerprofil ble ikke funnet.';

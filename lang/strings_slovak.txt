@@ -1190,7 +1190,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Očakával sa reťazec, ale bolo pr
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Pre %1$s bolo očakávané číslo.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problém %1$d nebol nájdený.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s nebol nájdený.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filter, ktorý chcete použiť, je pre aktualizáciu príliš starý. Prosím vytvorte ho znovu.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neplatná e-mailová adresa.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Použitie jednorázových e-mailových adries nie je povolené.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil sa nenašiel.';

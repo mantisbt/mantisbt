@@ -1281,7 +1281,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Verwachtte een string, maar ontving
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Verwachtte een getal voor %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Melding %1$d niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s niet gevonden.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'De filter die u probeert te gebruiken is te oud om bijgewerkt te worden. Maak hem opnieuw aan.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ongeldig e-mailadres.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Het is niet toegestaan om wegwerp-e-mailadressen te gebruiken.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';

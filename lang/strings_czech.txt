@@ -1292,7 +1292,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Očekával se řetězec, ale bylo p
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Pro %1$s bylo očekáváno číslo.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problém %1$d nebyl nalezen.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtr %1$s nebyl nalezen.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filter, který chcete použít, je pro aktualizaci příliš starý. Prosím vytvořte jej znovu.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neplatný e-mail.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Jednorázové e-maily nejsou povoleny.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nebyl nalezen.';

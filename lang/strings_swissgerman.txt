@@ -1165,7 +1165,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'E Zeichechette isch fir %1$s erwart
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'E Zahl isch fir %1$s erwartet wore.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Probläm %1$d nit gfunde.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s nit gfunde.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Dr Filter, wu Du witt verwände, isch z alt fir Iberarbeitig. Bitte nej aalege.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Nit giltigi E-Mail-Adräss.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'S isch nit erlaubt, Eiwäg-E-Mail-Adrässe z bruche.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nit gfunde.';

@@ -1297,7 +1297,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades men en arr
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Ett siffra förväntades för %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Ärende %1$d kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s kan inte hittas.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtret du försöker använda är för gammalt för att uppgraderas, skapa ett nytt.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ogiltig e-postadress.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Det är inte tillåtet att använda kasserbara e-postadresser.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';

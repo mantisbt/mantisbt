@@ -1281,7 +1281,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Sztringet vártunk, de tömböt kap
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Számot vártunk a következőhöz: %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'A(z) %1$d ügy nem található.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'A(z) %1$s szűrő nem található.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'A használni kívánt szűrő túl régi a frissítéshez, hozza létre újra.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Hibás e-mail cím.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Egyszer használatos email-címek nem engedélyezettek.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nincs ilyen profil.';

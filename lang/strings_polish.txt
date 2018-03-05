@@ -1275,7 +1275,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Tablica zamiast ciągu w %1$s.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Oczekiwano liczby w %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Nie znaleziono zgłoszenia %1$d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Nie znaleziono filtru %1$s.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtr, którego próbujesz użyć jest zbyt stary, aby można go było uaktualnić. Proszę stworzyć ten filtr od nowa.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Nieprawidłowy email.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Nie można używać jednorazowego adresu email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nie znaleziono profilu.';

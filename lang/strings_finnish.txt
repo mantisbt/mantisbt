@@ -1155,7 +1155,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Taulukkodataa merkkijonodatan %1$s 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Odotettiin numeroa: %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Tapahtumaa %1$d ei löydy.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Suodinta %1$s ei löytynyt.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Käyttämäsi suodin on liian vanha päivitettäväksi. Ole hyvä ja luo se uudestaan.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Virheellinen sähköpostiosoite.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Kertakäyttöisten sähköpostiosoitteiden käyttö ei ole sallittua.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Käyttäjäprofiilia ei löytynyt.';

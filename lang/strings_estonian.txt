@@ -1133,7 +1133,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu võeti m
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Peab olema number: %1$s';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Kannet %1$d ei leitud.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtrit %1$s ei leitud.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtrit, mida sa soovid kasutada, on liiga vana uuendamiseks, palun loo see uuesti';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Vigane e-posti aadress.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Pole lubatud kasutada äratuntavaid e-posti aadresse.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';

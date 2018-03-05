@@ -1250,7 +1250,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Un catena esseva expectate ma un ar
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Un numero esseva expectate pro %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problema %1$d non trovate.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %1$s non trovate.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Le filtro que tu tenta usar es troppo vetere pro esser actualisate. Per favor recrea lo.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Adresse de e-mail invalide.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Non es permittite usar un adresse de e-mail jectabile.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilo non trovate.';

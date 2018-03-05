@@ -1301,7 +1301,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Se esperaba una cadena de caractere
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Se esperaba un número para %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'No se encuentra la incidencia %1$d.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %1$s no encontrado.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'El filtro que Ud. está tratando de usar es obsoleto y no puede ser actualizado, por favor vuelva a crearlo';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Dirección de correo electrónico no válida.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'No está permitido el uso de direcciones de correo electrónico "descartables".';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no encontrado.';

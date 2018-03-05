@@ -1234,7 +1234,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'עבור %1$s הייתה אמורה
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'עבור %1$s היה אמור להתקבל מספר.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'באג %1$d לא נמצא.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'מסנן %1$s לא נמצא.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'המסנן שבחרת ישן ולא ניתן לשדרג אותו לגרסה תואמת - עליך להגדיר אותו מחדש.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'כתובת דוא”ל בלתי־תקינה.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'לא ניתן להשתמש בכתובת דוא”ל חד־פעמית.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'פרופיל לא נמצא.';

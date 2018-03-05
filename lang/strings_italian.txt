@@ -1294,7 +1294,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '%1$s accetta una stringa, invece è
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s accetta un numero.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Anomalia %1$d non trovata.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %1$s non trovato.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Il filtro che stai cercando di usare è troppo vecchio per poterlo aggiornare, ricrealo.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Indirizzo email non valido.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Non è consentito l\'utilizzo di indirizzi email usa&getta.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilo non trovato.';

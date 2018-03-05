@@ -1207,7 +1207,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Cadena inesperada mas tablèu receb
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s deu èsser un nombre.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bòg %1$d introbable.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtre %1$s introbable.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Lo filtre utilizat es tròp ancian per èsser mes a jorn. Creatz un filtre novèl.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Adreça de corrièr electronic invalida.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Utilizar una adreça de corrièr electronic getabla es interdich.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil introbable.';

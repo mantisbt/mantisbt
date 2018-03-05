@@ -1280,7 +1280,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Un neudenn a oa gortozet met un dao
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'En gortoz eus un niver e oad evit %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'An draen %1$d n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ar sil %1$s n\'eo ket bet kavet.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Re gozh eo ar sil emaoc\'h o klask implijout evit bezañ lakaet a-live. Adkrouit-eñ, mar plij.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Chomlec\'h postel direizh.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'N\'eo ket aotreet implijout chomlec\'hioù postel dibad.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Ar profil n\'eo ket bet kavet.';

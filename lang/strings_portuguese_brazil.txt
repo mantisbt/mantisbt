@@ -1303,7 +1303,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Um número era esperado para %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'A tarefa %1$d não encontrada.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %1$s não encontrado.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'O filtro que você está tentando usar é muito velho e precisa ser atualizado, por favor, recrie-o';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Não é permitida a utilização de endereços de e-mail descartáveis.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';

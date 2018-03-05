@@ -1144,7 +1144,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Một chuỗi được mong đợi 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Một số được mong đợi cho %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d không tìm thấy';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Bộ lọc %1$s không tìm thấy';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Các bộ lọc bạn đang cố gắng sử dụng quá cũ để được nâng cấp. Xin vui lòng tái tạo nó';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Địa chỉ thư điện tử không hợp lệ';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Nó không được phép sử dụng e-mail dùng một lần địa chỉ';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Hồ sơ không tìm thấy';

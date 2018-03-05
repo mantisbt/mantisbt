@@ -1303,7 +1303,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eine Zeichenkette wurde erwartet, a
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Eine Zahl wurde für %1$s erwartet.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Eintrag %1$d nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s nicht gefunden.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Der Filter, den Sie verwenden wollen, ist zu alt für eine Überarbeitung. Bitte neu erstellen.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ungültige E-Mail-Adresse.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Es ist nicht erlaubt, Einweg-E-Mail-Adressen zu verwenden.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nicht gefunden.';

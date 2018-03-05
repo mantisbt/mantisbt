@@ -855,7 +855,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'E Täxshtöcksche sullt för %1$s a
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'En Zahl sullt för %1$s aanjejovve sin.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Aanjelääjeheit %1$d nit jefonge.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ene Felter %1$s ham_mer nit jefonge.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Dä Felter, dä De bruche wells, es täschnesch övverhollt un kann nit mih op ene neue Shtand jebraat wääde. Bes esu johd, un donn dä eijfaach neu aanlääje.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Kapodde Addräß för de <i lang="en">e-mail</i>.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Adräße för <i lang="en">e-mail</i>, di mer jlish widder fottshmiiß, udder su udder esu nur eijmohl bruche kann, sin nit johjelohße';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profihl nit jefonge.';

@@ -1170,7 +1170,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A fost așteptat un şir de caracte
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A fost așteptat un număr pentru %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problema %1$d nu este găsită.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtrul %1$s nu este găsit.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtrul pe care încercați să-l utilizați este prea vechi pentru a fi actualizat, trebuie să-l recreați';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Adresă de e-mail invalidă.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Nu este permisă utilizarea de adrese de poștă electronică de unică folosință.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilul nu este găsit.';
