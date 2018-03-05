@@ -223,6 +223,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	$t_any_found = false;
+	$t_none_found = false;
 	if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
 		echo lang_get( 'any' );
 	} else {
@@ -232,6 +233,8 @@ function print_filter_values_user_monitor( array $p_filter ) {
 			$t_this_name = '';
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
+			} else if( filter_field_is_none( $t_current ) ) {
+				$t_none_found = true;
 			} else if( filter_field_is_myself( $t_current ) ) {
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 					$t_this_name = '[' . lang_get( 'myself' ) . ']';
@@ -250,6 +253,8 @@ function print_filter_values_user_monitor( array $p_filter ) {
 		}
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
+		} else if( true == $t_none_found ) {
+			echo lang_get( 'none' );
 		} else {
 			echo string_display( $t_output );
 		}
@@ -271,6 +276,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
 	<!-- Monitored by -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 		echo '<option value="' . META_FILTER_MYSELF . '" ';
@@ -370,6 +376,7 @@ function print_filter_values_show_category( array $p_filter ) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	$t_any_found = false;
+	$t_none_found = false;
 	if( count( $t_filter[FILTER_PROPERTY_CATEGORY_ID] ) == 0 ) {
 		echo lang_get( 'any' );
 	} else {
@@ -379,6 +386,8 @@ function print_filter_values_show_category( array $p_filter ) {
 			$t_this_string = '';
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
+			} elseif( filter_field_is_none( $t_current ) ) {
+				$t_none_found = true;
 			} else {
 				$t_this_string = $t_current;
 			}
@@ -391,6 +400,8 @@ function print_filter_values_show_category( array $p_filter ) {
 		}
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
+		} elseif( true == $t_none_found ) {
+			echo lang_get( 'none' );
 		} else {
 			echo $t_output;
 		}
@@ -412,6 +423,7 @@ function print_filter_show_category( array $p_filter = null ) {
 		<!-- Category -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php print_category_filter_option_list( $p_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
 		<?php
@@ -1530,10 +1542,38 @@ function print_filter_values_relationship_type( array $p_filter ) {
 	echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 	$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 	$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
-	if( -1 == $c_rel_type || 0 == $c_rel_bug ) {
-		echo lang_get( 'any' );
+	if( BUG_REL_ANY == $c_rel_type ) {
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+				echo lang_get( 'none' );
+				break;
+			case META_FILTER_ANY:
+				echo lang_get( 'any' );
+				break;
+			default;
+				echo lang_get( 'any' ),' ' , lang_get( 'with' ), ' ', $c_rel_bug;
+		}
+	} elseif( BUG_REL_NONE == $c_rel_type ) {
+		echo lang_get( 'none' );
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+			case META_FILTER_ANY:
+				break;
+			default;
+				echo ' ', lang_get( 'with' ), ' ', $c_rel_bug;
+		}
 	} else {
-		echo relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
+		echo relationship_get_description_for_history( $c_rel_type ) . ' ';
+		switch ( $c_rel_bug ) {
+			case META_FILTER_NONE:
+				echo lang_get( 'none' );
+				break;
+			case META_FILTER_ANY:
+				echo lang_get( 'any' );
+				break;
+			default;
+				echo $c_rel_bug;
+		}
 	}
 }
 
@@ -1549,10 +1589,7 @@ function print_filter_relationship_type( array $p_filter = null ) {
 		$p_filter = $g_filter;
 	}
 	$c_reltype_value = $p_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
-	if( !$c_reltype_value ) {
-		$c_reltype_value = -1;
-	}
-	relationship_list_box( $c_reltype_value, 'relationship_type', true, false, "input-xs" );
+	relationship_list_box( $c_reltype_value, 'relationship_type', true, true, "input-xs" );
 	echo '<input class="input-xs" type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" size="5" maxlength="10" value="', $p_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 

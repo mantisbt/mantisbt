@@ -682,6 +682,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# Validate properties that must not be arrays
 	$t_single_value_list = array(
 		FILTER_PROPERTY_VIEW_STATE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_TYPE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_BUG => 'int',
 	);
 	foreach( $t_single_value_list as $t_field_name => $t_field_type ) {
 		$t_value = $p_filter_arr[$t_field_name];
@@ -800,6 +802,15 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_STATUS] = $t_show_status_array;
 	}
 
+	# validate relationship fields
+	if( !(
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] > 0
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_ANY
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_NONE
+		) ) {
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] = filter_get_default_property( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_view_type );
+	}
+
 	# all of our filter values are now guaranteed to be there, and correct.
 	return $p_filter_arr;
 }
@@ -889,7 +900,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_TAG_STRING => '',
 		FILTER_PROPERTY_TAG_SELECT => 0,
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
-		FILTER_PROPERTY_RELATIONSHIP_BUG => 0,
+		FILTER_PROPERTY_RELATIONSHIP_BUG => META_FILTER_ANY,
 	);
 
 	# initialize plugin filters
@@ -1074,8 +1085,12 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  * @param boolean $p_show_sticky   Whether to show sticky items.
  * @param array   $p_query_clauses Array of query clauses.
  * @return array $p_query_clauses
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
 	$p_query_clauses['order'] = array();
 
@@ -1231,8 +1246,13 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
  * array_unique here could cause problems with the query.
  * @param array $p_query_clauses Array of query clauses.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_unique_query_clauses( array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$p_query_clauses['select'] = array_unique( $p_query_clauses['select'] );
 	$p_query_clauses['from'] = array_unique( $p_query_clauses['from'] );
 	$p_query_clauses['join'] = array_unique( $p_query_clauses['join'] );
@@ -1249,8 +1269,15 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
  * @param array $p_query_clauses Array of query clauses.
  * @param boolean $p_pop_param      Whether to pop DB params from the stack
  * @return integer
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	# If query caluses is an empty array, the query can't be created
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
@@ -1301,18 +1328,21 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( $p_custom_filter === null ) {
 		$t_filter = filter_get_bug_rows_filter( $p_project_id, $p_user_id );
 	} else {
-		$t_filter = $p_custom_filter;
+		$t_filter = filter_ensure_valid_filter( $p_custom_filter );
 	}
 
-	# Get the query clauses
-	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
-
-	# Get the total number of bugs that meet the criteria.
-	# Keep the db_params in stack for next query
-	$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
+	# build a filter query, here for counting results
+	$t_filter_query = new BugFilterQuery(
+			$t_filter,
+			array(
+				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
+				'project_id' => $p_project_id,
+				'user_id' => $p_user_id,
+				'use_sticky' => $p_show_sticky
+				)
+			);
+	$p_bug_count = $t_filter_query->get_bug_count();
 	if( 0 == $p_bug_count ) {
-		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-		db_param_pop();
 		return array();
 	}
 
@@ -1321,16 +1351,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$p_page_count = filter_page_count( $p_bug_count, $p_per_page );
 	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
 	$t_offset = filter_offset( $p_page_number, $p_per_page );
-	# Execute query
-	$t_result = filter_get_bug_rows_result( $t_query_clauses, $p_per_page, $t_offset );
 
-	# Read results into rows array
-	$t_bug_id_array = array();
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_bug_id_array[] = (int)$t_row['id'];
-		$t_rows[] = $t_row;
-	}
+	$t_filter_query->set_limit( $p_per_page );
+	$t_filter_query->set_offset( $t_offset );
+	# Execute query
+	$t_rows = $t_filter_query->fetch_all();
+	$t_bug_id_array = array_column( $t_rows, 'id' );
 
 	# Return the processed rows: cache data, convert to bug objects
 	return filter_cache_result( $t_rows, $t_bug_id_array );
@@ -1385,8 +1411,13 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  *                                 -1 or null indicates default query (no offset)
  * @param boolean $p_pop_param        Whether to pop DB params from the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null, $p_pop_param = true ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	# if the query can't be formed, there are no results
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
@@ -1441,8 +1472,13 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
  * @param integer $p_user_id      User id to use as current user when filtering.
  * @param boolean $p_show_sticky  True/false - get sticky issues only.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
@@ -3430,7 +3466,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	}
 
 	$f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
-	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
 
 	log_event( LOG_FILTERING, 'filter_gpc_get: Update filters' );
 	$t_filter_input['_version'] 								= FILTER_VERSION;

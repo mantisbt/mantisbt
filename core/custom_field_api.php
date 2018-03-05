@@ -1166,6 +1166,9 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
+ * Optionally, a subset of projects can be specified to get values only appearing in those.
+ * The values are always those visible to the user, based on view permissions.
+ *
  * @param array         $p_field_def   Custom field definition.
  * @param integer|array $p_project_id  Project identifier, or array of project ids
  * @return boolean|array
@@ -1208,23 +1211,8 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 			'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
 		);
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
-		$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
-		# if the query can't be formed, there are no results
-		if( empty( $t_query_clauses ) ) {
-			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-			db_param_pop();
-			return false;
-		}
-		$t_select_string = 'SELECT {bug}.id ';
-		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-		if( count( $t_query_clauses['where'] ) > 0 ) {
-			$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
-		}
-		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
-		$t_params = $t_query_clauses['where_values'];
+
+		$t_filter_subquery = new BugFilterQuery( $t_filter, BugFilterQuery::QUERY_TYPE_IDS );
 
 		# which types need special type cast
 		switch( $p_field_def['type'] ) {
@@ -1240,16 +1228,17 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 					$t_select_expr = 'cfst.value';
 		}
 
-		$t_query = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value FROM {custom_field_string} cfst'
-			. ' WHERE cfst.bug_id IN ' . $t_filter_in
-			. ' AND cfst.field_id = ' . db_param()
+		$t_sql = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value'
+			. ' FROM {custom_field_string} cfst'
+			. ' WHERE cfst.field_id = :cfid AND cfst.bug_id IN :filter'
 			. ' ORDER BY cast_value';
-		$t_params[] = (int)$p_field_def['id'];
-		$t_result = db_query( $t_query, $t_params );
+		$t_query = new DbQuery( $t_sql );
+		$t_query->bind( array( 'filter' => $t_filter_subquery, 'cfid' => (int)$p_field_def['id'] ) );
 
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			if( !is_blank( trim( $t_row['cast_value'] ) ) ) {
-				array_push( $t_return_arr, $t_row['cast_value'] );
+		while( $t_query->fetch() ) {
+			$t_val = $t_query->field( 'cast_value' );
+			if( !is_blank( trim( $t_val ) ) ) {
+				$t_return_arr[] = $t_val;
 			}
 		}
 
