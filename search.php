@@ -148,16 +148,9 @@ $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 
-$t_settings_serialized = json_encode( $t_setting_arr );
-$t_settings_string = FILTER_VERSION . '#' . $t_settings_serialized;
-
-# Store the filter string in the database: its the current filter, so some values won't change
-$t_project_id = helper_get_current_project();
-$t_project_id = ( $t_project_id * -1 );
-$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
-
-# set cookie values
-gpc_set_cookie( config_get_global( 'view_all_cookie' ), $t_row_id, time()+config_get_global( 'cookie_time_length' ), config_get_global( 'cookie_path' ) );
+# set the filter for use, for current user
+# Note: This will overwrite the filter in use/default for current project and user.
+$t_temporary_key = filter_temporary_set( $t_setting_arr );
 
 # redirect to print_all or view_all page
 if( $f_print ) {
@@ -165,5 +158,6 @@ if( $f_print ) {
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
+$t_redirect_url .= '?' . filter_get_temporary_key_param( $t_temporary_key );
 
 print_header_redirect( $t_redirect_url );

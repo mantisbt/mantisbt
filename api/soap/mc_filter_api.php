@@ -127,7 +127,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id, $p_filter_id = 
 function mci_filter_delete( $p_filter_id ) {
 	$t_user_id = auth_get_current_user_id();
 
-	$t_filter = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter = filter_get_row( $p_filter_id );
 	if( !$t_filter ) {
 		return ApiObjectFactory::faultNotFound( 'Filter not found' );
 	}
@@ -172,7 +172,12 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	$t_filter = filter_load( $p_filter_id, $t_user_id );
+	if( is_numeric( $p_filter_id ) ) {
+		$t_filter = filter_get( $p_filter_id );
+	} else {
+		$t_filter = filter_standard_get( $p_filter_id, $t_user_id );
+	}
+
 	if( $t_filter === null ) {
 		return ApiObjectFactory::faultNotFound( "Unknown filter '$p_filter_id'" );
 	}
@@ -236,14 +241,10 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
 	$t_bug_count = 0;
-	$t_filter = filter_db_get_filter( $p_filter_id );
-	$t_filter_detail = explode( '#', $t_filter, 2 );
-	if( !isset( $t_filter_detail[1] ) ) {
+	$t_filter = filter_get( $p_filter_id, null );
+	if( null === $t_filter ) {
 		return ApiObjectFactory::faultServerError( 'Invalid Filter' );
 	}
-	$t_filter = json_decode( $t_filter_detail[1], true );
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-
 	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 

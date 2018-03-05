@@ -1317,6 +1317,12 @@ function print_formatted_severity_string( BugData $p_bug ) {
  * @return void
  */
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	# @TODO cproensa, $g_filter is needed to get the temporary id, since the
+	# actual filter is not providede as parameter. Ideally, we should not
+	# rely in this global variable, but at the moment is not possible without
+	# a rewrite of these print functions.
+	global $g_filter;
+
 	switch( $p_columns_target ) {
 		case COLUMNS_TARGET_PRINT_PAGE:
 		case COLUMNS_TARGET_VIEW_PAGE:
@@ -1333,7 +1339,8 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			}
 			$t_sort_field = rawurlencode( $p_sort_field );
 			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
-			print_link( 'view_all_set.php?sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=2' . $t_print_parameter, $p_string );
+			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
+			print_link( 'view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=2' . $t_print_parameter, $p_string );
 			break;
 		default:
 			echo $p_string;
@@ -1513,10 +1520,10 @@ function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
  * @param string  $p_text           The displayed text for the link.
  * @param integer $p_page_no        The page number to link to.
  * @param integer $p_page_cur       The current page number.
- * @param integer $p_temp_filter_id Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
-function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_id = 0 ) {
+function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_key = null ) {
 	if( is_blank( $p_text ) ) {
 		$p_text = $p_page_no;
 	}
@@ -1524,8 +1531,8 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
-		if( $p_temp_filter_id !== 0 ) {
-			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_id . '&page_number=' . $p_page_no, $p_text );
+		if( $p_temp_filter_key ) {
+			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no, $p_text );
 		} else {
 			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
 		}
@@ -1541,11 +1548,16 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @param integer $p_start          The first page number.
  * @param integer $p_end            The last page number.
  * @param integer $p_current        The current page number.
- * @param integer $p_temp_filter_id Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
-function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_id = 0 ) {
+function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_key = null ) {
 	$t_items = array();
+
+	# @TODO cproensa
+	# passing the temporary filter id to build ad-hoc url parameter is weak
+	# ideally, we should pass a parameters array which is appended to all generated links
+	# those parameters are provided as needed by the main page calling this functions
 
 	# Check if we have more than one page,
 	#  otherwise return without doing anything.
@@ -1565,11 +1577,11 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	print( '<ul class="pagination small no-margin"> ' );
 
 	# Next and Last links
-	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
+	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_key );
 	if( $p_current < $p_end ) {
-		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
+		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_key );
 	} else {
-		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
+		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_key );
 	}
 
 	# Page numbers ...
@@ -1590,11 +1602,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
 		} else {
 			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
-			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
-			} else {
-				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
-			}
+			$t_filter_param = filter_get_temporary_key_param( $p_temp_filter_key );
+			$t_filter_param .= $t_filter_param === null ? : '&amp;';
+			array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . $t_filter_param . 'page_number=' . $i . '">' . $i . '</a></li>' );
 		}
 	}
 	echo implode( '&#160;', $t_items );
@@ -1605,8 +1615,8 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 
 	# First and previous links
-	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
-	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
+	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
+	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_key );
 
 	print( ' </ul>' );
 }

@@ -111,10 +111,12 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		<div class="btn-toolbar">
 			<div class="btn-group pull-left">
 		<?php
+			$t_filter_param = filter_get_temporary_key_param( $t_filter );
+			$t_filter_param = ( empty( $t_filter_param ) ? '' : '?' ) . $t_filter_param;
 			# -- Print and Export links --
-			print_small_button( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-			print_small_button( 'csv_export.php', lang_get( 'csv_export' ) );
-			print_small_button( 'excel_xml_export.php', lang_get( 'excel_export' ) );
+			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
+			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
+			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
 
 			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
 
@@ -135,8 +137,8 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 		</div>
 		<div class="btn-group pull-right"><?php
 			# -- Page number links --
-			$f_filter	= gpc_get_int( 'filter', 0);
-			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
+			$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
+			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
 			?>
 		</div>
 	</div>
@@ -235,8 +237,8 @@ write_bug_rows( $t_rows );
 			</div>
 			<div class="btn-group pull-right">
 				<?php
-					$f_filter = gpc_get_int('filter', 0);
-					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter);
+					$t_tmp_filter_key = filter_get_temporary_key( $t_filter );
+					print_page_links('view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $t_tmp_filter_key );
 				?>
 			</div>
 <?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>

@@ -2387,8 +2387,10 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		if( $p_static) {
 			return $p_label;
 		} else {
-			if( $t_source_query_id > 0 ) {
-				$t_data_filter_id = ' data-filter_id="' . $t_source_query_id . '"';
+			if( filter_is_temporary( $t_filter ) ) {
+				$t_data_filter_id = ' data-filter="' . filter_get_temporary_key( $t_filter ) . '"';
+			} elseif ( isset( $t_filter['_filter_id'] ) ) {
+				$t_data_filter_id = ' data-filter_id="' . $t_filter['_filter_id'] . '"';
 			} else {
 				$t_data_filter_id = '';
 			}

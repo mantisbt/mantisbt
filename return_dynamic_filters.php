@@ -61,22 +61,18 @@ if( !auth_is_user_authenticated() ) {
 compress_enable();
 
 $f_filter_id = gpc_get( 'filter_id', null );
-if( null === $f_filter_id ) {
-	$t_filter = current_user_get_bug_filter();
-} else {
-	$c_filter_id = (int)$f_filter_id;
-	$t_filter_string = filter_db_get_filter( $c_filter_id );
-	if( !$t_filter_string ) {
+if( null !== $f_filter_id ) {
+	$t_filter = filter_get( $f_filter_id, null );
+	if( null === $t_filter ) {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
-	} else {
-		$t_filter = filter_deserialize( $t_filter_string );
-		$t_filter['_source_query_id'] = $f_filter_id;
-		filter_cache_row( $c_filter_id );
 	}
+} else {
+	$t_filter = current_user_get_bug_filter();
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 $t_filter['_view_type'] = $f_view_type;
+# call to filter_ensure_valid_filter to clean up after adding unsafe values from gpc vars
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
 /**

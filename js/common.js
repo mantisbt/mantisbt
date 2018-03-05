@@ -122,12 +122,16 @@ $(document).ready( function() {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
 		var filter_id = $(this).data('filter_id');
+		var filter_tmp_id = $(this).data('filter');
 		var targetID = fieldID + '_target';
 		var viewType = $('#filters_form_open input[name=view_type]').val();
 		$('#' + targetID).html('<span class="dynamic-filter-loading">' + translations['loading'] + "</span>");
 		var params = 'view_type=' + viewType + '&filter_target=' + fieldID;
 		if( undefined !== filter_id ) {
 			params += '&filter_id=' + filter_id;
+		}
+		if( undefined !== filter_tmp_id ) {
+			params += '&filter=' + filter_tmp_id;
 		}
 		$.ajax({
 			url: 'return_dynamic_filters.php',
