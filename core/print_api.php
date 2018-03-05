@@ -1603,7 +1603,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 		} else {
 			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
 			$t_filter_param = filter_get_temporary_key_param( $p_temp_filter_key );
-			$t_filter_param .= $t_filter_param === null ? : '&amp;';
+			$t_filter_param .= $t_filter_param === null ? '' : '&amp;';
 			array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . $t_filter_param . 'page_number=' . $i . '">' . $i . '</a></li>' );
 		}
 	}
