@@ -1077,6 +1077,7 @@ $s_bug_created_from = 'Problém generován z';
 $s_copy_from_parent = 'Kopírovat další data z nadřazeného záznamu';
 $s_copy_notes_from_parent = 'Kopírovat poznámky k záznamu';
 $s_copy_attachments_from_parent = 'Kopírovat přílohy';
+$s_with = 'S';
 $s_viewing_bug_relationship_graph_title = 'Graf vztahů';
 $s_viewing_bug_dependency_graph_title = 'Graf závyslostí';
 $s_relation_graph = 'Relační graf';

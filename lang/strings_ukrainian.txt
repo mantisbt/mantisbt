@@ -1078,6 +1078,7 @@ $s_bug_created_from = 'Проблему згенеровано з';
 $s_copy_from_parent = 'Копіювати розширені дані з батьківської проблеми';
 $s_copy_notes_from_parent = 'Проблема з копіюванням Примітки';
 $s_copy_attachments_from_parent = 'Копіювати вкладення';
+$s_with = 'з';
 $s_viewing_bug_relationship_graph_title = 'Діаграма зв\'язків';
 $s_viewing_bug_dependency_graph_title = 'Діаграма залежностей';
 $s_relation_graph = 'Діаграма зв\'язків';

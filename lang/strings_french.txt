@@ -1089,6 +1089,7 @@ $s_bug_created_from = 'Bogue généré depuis';
 $s_copy_from_parent = 'Copier les données étendues du père';
 $s_copy_notes_from_parent = 'Copier les notes de problème';
 $s_copy_attachments_from_parent = 'Copier les pièces jointes';
+$s_with = 'avec';
 $s_viewing_bug_relationship_graph_title = 'Graphique relationnel';
 $s_viewing_bug_dependency_graph_title = 'Graphique des dépendances';
 $s_relation_graph = 'Graphique des relations';

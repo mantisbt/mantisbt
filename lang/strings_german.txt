@@ -1084,6 +1084,7 @@ $s_bug_created_from = 'Eintrag angelegt von';
 $s_copy_from_parent = 'Kopiere weitere Daten vom Original-Eintrag';
 $s_copy_notes_from_parent = 'Kopiere Notizen';
 $s_copy_attachments_from_parent = 'Kopiere Dateianhänge';
+$s_with = 'mit';
 $s_viewing_bug_relationship_graph_title = 'Beziehungs-Grafik';
 $s_viewing_bug_dependency_graph_title = 'Abhängigkeits-Grafik';
 $s_relation_graph = 'Grafik der Beziehungen';

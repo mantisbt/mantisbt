@@ -1065,6 +1065,7 @@ $s_bug_created_from = 'Проблемот создаден од';
 $s_copy_from_parent = 'Ископирај ги дополнителните податоци од матичниот проблем';
 $s_copy_notes_from_parent = 'Ископирај забелешки за проблемот';
 $s_copy_attachments_from_parent = 'Ископирај прилози';
+$s_with = 'со';
 $s_viewing_bug_relationship_graph_title = 'Графикон на односи';
 $s_viewing_bug_dependency_graph_title = 'Графикон на зависност';
 $s_relation_graph = 'Графикон на односи';

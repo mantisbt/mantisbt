@@ -1074,6 +1074,7 @@ $s_bug_created_from = '問題產生來自';
 $s_copy_from_parent = '從來源問題複製額外的資訊';
 $s_copy_notes_from_parent = '複製問題說明';
 $s_copy_attachments_from_parent = '複製附加檔案';
+$s_with = '帶';
 $s_viewing_bug_relationship_graph_title = '相關問題圖';
 $s_viewing_bug_dependency_graph_title = '相依圖';
 $s_relation_graph = '相關問題圖';

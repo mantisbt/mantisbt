@@ -431,6 +431,7 @@ https://en.wikipedia.org/wiki/Mantis_Bug_Tracker
 
 To find the idea of " issue" & " note " , refer:
 https://translatewiki.net/w/i.php?title=Special%3ASearch&profile=advanced&search=Issue+note+%2Fen&fulltext=Search&ns0=1&ns6=1&ns7=1&ns4=1&ns5=1&ns1210=1&profile=advanced';
+$s_with = '{{Identical|With}}';
 $s_vertical = '{{Identical|Vertical}}';
 $s_view = '{{Identical|View}}';
 $s_issues = '{{Identical|Issue}}';

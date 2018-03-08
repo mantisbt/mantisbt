@@ -471,6 +471,7 @@ $s_choose_project = 'Valitse projekti';
 $s_login_button = 'Kirjaudu sisään';
 $s_signup_link = 'Rekisteröi uusi käyttäjätunnus';
 $s_lost_password_link = 'Unohditko salasanasi?';
+$s_username_or_email = 'Käyttäjänimi tai sähköpostiosoite';
 $s_select_project_button = 'Valitse projekti';
 $s_lost_password_title = 'Uusi unohtunut salasana';
 $s_lost_password_done_title = 'Salasanaviesti lähetetty';

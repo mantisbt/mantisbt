@@ -1065,6 +1065,7 @@ $s_bug_created_from = 'Праблема створаная з';
 $s_copy_from_parent = 'Капіяваць пашыраныя зьвесткі з бацькоўскай праблемы';
 $s_copy_notes_from_parent = 'Капіяваць камэнтары да праблемы';
 $s_copy_attachments_from_parent = 'Капіяваць далучэньні';
+$s_with = 'з';
 $s_viewing_bug_relationship_graph_title = 'Дыяграма сувязяў';
 $s_viewing_bug_dependency_graph_title = 'Дыяграма залежнасьцяў';
 $s_relation_graph = 'Дыяграма сувязяў';

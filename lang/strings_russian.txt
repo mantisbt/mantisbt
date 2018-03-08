@@ -1085,6 +1085,7 @@ $s_bug_created_from = 'Задача создана из';
 $s_copy_from_parent = 'Скопировать расширенные данные из родительской задачи';
 $s_copy_notes_from_parent = 'Скопировать заметки к задаче';
 $s_copy_attachments_from_parent = 'Скопировать вложения';
+$s_with = 'с';
 $s_viewing_bug_relationship_graph_title = 'Граф связей';
 $s_viewing_bug_dependency_graph_title = 'Граф Зависимостей';
 $s_relation_graph = 'Граф связей';

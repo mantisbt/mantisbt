@@ -1079,6 +1079,7 @@ $s_bug_created_from = 'Ärende skapat från';
 $s_copy_from_parent = 'Kopiera utökad data från föräldrabuggen';
 $s_copy_notes_from_parent = 'Kopiera anteckningar över frågor';
 $s_copy_attachments_from_parent = 'Kopiera bilagor';
+$s_with = 'med';
 $s_viewing_bug_relationship_graph_title = 'Graf över relationer';
 $s_viewing_bug_dependency_graph_title = 'Beroendegraf';
 $s_relation_graph = 'Graf över relationer';

@@ -1077,6 +1077,7 @@ $s_bug_created_from = 'Anomalia generata da';
 $s_copy_from_parent = 'Copia i dati estesi dalla questione superiore';
 $s_copy_notes_from_parent = 'Copia le note del problema';
 $s_copy_attachments_from_parent = 'Copia gli allegati';
+$s_with = 'con';
 $s_viewing_bug_relationship_graph_title = 'Grafico delle relazioni';
 $s_viewing_bug_dependency_graph_title = 'Grafico delle dipendenze';
 $s_relation_graph = 'Grafico relazioni';
