@@ -111,8 +111,9 @@ function email_queue_add( EmailData $p_email_data ) {
 	}
 
 	$c_email = $t_email_data->email;
-	$c_subject = $t_email_data->subject;
-	$c_body = $t_email_data->body;
+	# MySQL 4-bytes UTF-8 chars workaround #21101
+	$c_subject = db_mysql_fix_utf8( $t_email_data->subject );
+	$c_body = db_mysql_fix_utf8( $t_email_data->body );
 	$c_metadata = serialize( $t_email_data->metadata );
 
 	db_param_push();
