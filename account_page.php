@@ -74,14 +74,10 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-$t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
-
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
-if( !$t_account_verification ) {
-	auth_reauthenticate();
-}
+auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
@@ -177,13 +173,9 @@ print_account_menu( 'account_page.php' );
 					<?php echo string_display_line( $u_username ) ?>
 				</td>
 			</tr><?php
-			# When verifying account, set a token and don't display current password
-			if( $t_account_verification ) {
-				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
-			} else {
-				# If the current password is blank, do not require the field
-				# so the user can reset the password (#23507)
-				$t_required = auth_does_password_match( $u_id, '' ) ? '' : 'required';
+			# If the current password is blank, do not require the field
+			# so the user can reset the password (#23507)
+			$t_required = auth_does_password_match( $u_id, '' ) ? '' : 'required';
 			?>
 			<tr>
 				<td class="category">
@@ -193,8 +185,6 @@ print_account_menu( 'account_page.php' );
 					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
-			<?php
-			} ?>
 			<tr>
 				<td class="category">
 					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
