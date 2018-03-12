@@ -52,6 +52,7 @@
  * @author Locos epraix
  * @author Luisangelrg
  * @author Macofe
+ * @author MarcoAurelio
  * @author McDutchie
  * @author Pertile
  * @author Peter17
@@ -1082,6 +1083,7 @@ $s_bug_created_from = 'Incidencia generada desde';
 $s_copy_from_parent = 'Copiar información adicional de la incidencia padre';
 $s_copy_notes_from_parent = 'Copiar notas de la incidencia';
 $s_copy_attachments_from_parent = 'Copiar los archivos adjuntos';
+$s_with = 'con';
 $s_viewing_bug_relationship_graph_title = 'Gráfico de Relaciones';
 $s_viewing_bug_dependency_graph_title = 'Gráfico de Dependencias';
 $s_relation_graph = 'Gráfico de Relaciones';
