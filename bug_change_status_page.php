@@ -288,7 +288,7 @@ layout_page_begin();
 			$t_require = in_array( $f_new_status, $t_req_vector );
 		}
 		
-		if( ( 'update' == $t_custom_status_label ) && ( !( $t_require || $t_override_display ) ) ) {
+		if( ( 'update' == $t_custom_status_label ) && ( !( $t_require || ( $t_override_display && $t_display ) ) ) ) {
 			continue;
 		}
 		if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && !( $t_display || $t_require ) ) {
