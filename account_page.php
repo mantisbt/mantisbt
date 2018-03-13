@@ -175,10 +175,11 @@ print_account_menu( 'account_page.php' );
 			</tr>
 			<?php
 			    $t_required = $t_force_pw_reset ? 'required' : '';
+			    $t_class = $t_force_pw_reset ? 'class="required"' : '';
 			?>
 			<tr>
 				<td class="category">
-					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
@@ -186,7 +187,7 @@ print_account_menu( 'account_page.php' );
 			</tr>
 			<tr>
 				<td class="category">
-					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
@@ -194,7 +195,7 @@ print_account_menu( 'account_page.php' );
 			</tr>
 			<tr>
 				<td class="category">
-					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
