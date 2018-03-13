@@ -52,7 +52,7 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
 
 		$t_html = $this->html_start( 'fa-eye' );
-		$t_html .= '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= '<div class="action">' . sprintf( $t_string, prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;

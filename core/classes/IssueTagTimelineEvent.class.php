@@ -59,7 +59,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 		$t_html .= '<div class="action">'
 			. sprintf(
 				$t_string,
-				user_get_name( $this->user_id ),
+				prepare_user_name( $this->user_id ),
 				string_get_bug_view_link( $this->issue_id ),
 				$t_tag_row ? tag_get_link( $t_tag_row ) : $this->tag_name
 			)
