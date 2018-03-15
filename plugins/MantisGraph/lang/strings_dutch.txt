@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Rienkwind
  * @author Siebrand
  */
 
@@ -83,3 +84,5 @@ $s_plugin_MantisGraph_period_year_to_date = 'Dit jaar';
 $s_plugin_MantisGraph_period_select = 'Op te geven datums';
 $s_plugin_MantisGraph_period_last_year = 'Afgelopen jaar';
 $s_plugin_MantisGraph_graph_page = 'Meldingsgeschiedenis als grafiek';
+$s_plugin_MantisGraph_graph_topdev = 'Top ontwikkelaars van opgeloste meldingen';
+$s_plugin_MantisGraph_graph_opendev = 'Ontwikkelaars van open meldingen';

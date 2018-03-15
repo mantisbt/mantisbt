@@ -43,6 +43,7 @@
  * @author Hansmuller
  * @author McDutchie
  * @author MedShot
+ * @author Rienkwind
  * @author Robin van der Vliet
  * @author Robin0van0der0vliet
  * @author Siebrand
@@ -84,6 +85,8 @@ $s_excel_export = 'Naar Excel exporteren';
 $s_login_anonymously = 'Anoniem aanmelden';
 $s_anonymous = 'Anoniem';
 $s_jump_to_bugnotes = 'Naar opmerkingen';
+$s_jump_to_history = 'Geschiedenis melding';
+$s_display_history = 'Toon geschiedenis';
 $s_public_project_msg = 'Dit project is publiek. Alle gebruikers hebben toegang.';
 $s_private_project_msg = 'Dit project is intern. Alleen beheerders en handmatig toegevoegde gebruikers hebben toegang.';
 $s_access_level_project = 'Toegangsniveau project';
@@ -341,6 +344,7 @@ $s_email_on_priority_change = 'E-mail bij prioriteitswijziging';
 $s_email_bugnote_limit = 'E-maillimiet opmerkingen';
 $s_email_full_issue_details = 'Alle details van melding e-mailen';
 $s_language = 'Taal';
+$s_font_family = 'fontfamilie';
 $s_update_prefs_button = 'Instellingen bijwerken';
 $s_reset_prefs_button = 'Begininstellingen';
 $s_timezone = 'Tijdzone';
@@ -1067,6 +1071,7 @@ $s_bug_created_from = 'Melding gemaakt van';
 $s_copy_from_parent = 'Uitgebreide gegevens van bovenliggende melding kopiëren';
 $s_copy_notes_from_parent = 'Opmerkingen kopiëren';
 $s_copy_attachments_from_parent = 'Bijlagen kopiëren';
+$s_with = 'met';
 $s_viewing_bug_relationship_graph_title = 'Relatiediagram';
 $s_viewing_bug_dependency_graph_title = 'Afhankelijkheidsgrafiek';
 $s_relation_graph = 'Relatiediagram';
@@ -1216,6 +1221,8 @@ $s_path_information = 'Padgegevens MantisBT';
 $s_mantisbt_database_statistics = 'MantisBT databasestatistieken';
 $s_php_version = 'PHP-versie';
 $s_adodb_version = 'ADOdb-versie';
+$s_database_driver = 'Database Driver';
+$s_database_version_description = 'Database Versie, Beschrijving';
 $s_month_january = 'januari';
 $s_month_february = 'februari';
 $s_month_march = 'maart';
@@ -1252,6 +1259,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Het bestandstype is niet toegestaan.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'De map bestaat niet. Controleer de projectinstellingen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Een verplicht veld ("%1$s") is niet ingevuld. Controleer uw invoer.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ongeldige waarde voor \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Deze gebruiker is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Toegang geweigerd.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Toevoegen bestand mislukt omdat het niet door MantisBT gelezen kon worden. Controleer de projectinstellingen.';
@@ -1271,6 +1279,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Er bestaat al een project met di
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ongeldige projectnaam. De naam kan niet leeg zijn.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'De gebruikers met nummer "%1$d" is niet gevonden.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'De gebruiker met email "%1$s" is niet gevonden.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'De aanmeldinformatie in uw browser is ongeldig. Wellicht is uw gebruiker verwijderd?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'De instellingen voor deze gebruiker kunnen niet gevonden worden.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nieuwsbericht niet gevonden.';
