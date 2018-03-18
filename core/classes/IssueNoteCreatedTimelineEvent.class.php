@@ -50,7 +50,7 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	 */
 	public function html() {
 		$t_html = $this->html_start( 'fa-comment-o' );
-		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;
