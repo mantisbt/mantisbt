@@ -44,14 +44,15 @@ check_print_test_row(
 	'PHP version ' . phpversion() . ' is currently installed on this server.'
 );
 
+# $t_extensions_required lists the extensions required to run Mantis in general
+# The fileinfo extension which is needed for attachments is checked in check_attachments_inc.php
 $t_extensions_required = array(
 	'date',
 	'hash',
 	'pcre',
 	'Reflection',
 	'session',
-	'mbstring',
-	'fileinfo'
+	'mbstring'
 );
 
 foreach( $t_extensions_required as $t_extension ) {
