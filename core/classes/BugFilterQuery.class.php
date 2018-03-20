@@ -1518,11 +1518,13 @@ class BugFilterQuery extends DbQuery {
 			case 'category_id':
 				# This join will be reduced as unique, if category search is active
 				$this->add_join( 'LEFT JOIN {category} ON {bug}.category_id = {category}.id' );
+				$this->add_select( '{category}.name' );
 				return '{category}.name';
 				break;
 
 			case 'project_id':
 				# project table is already joined by default
+				$this->add_select( '{project}.name' );
 				return '{project}.name';
 				break;
 
