@@ -181,19 +181,6 @@
 								<listitem><para><emphasis>mbstring</emphasis> -
 									Required for Unicode (UTF-8) support.
 								</para></listitem>
-								<listitem>
-									<para><emphasis>Fileinfo</emphasis> -
-										Guesses the MIME type of attachments
-									</para>
-									<para>Without this extension, file attachment
-										previews and downloads do not work
-										as MantisBT won't be able to send
-										the Content-Type header to a browser
-										requesting an attachment.
-									</para>
-									<para>This extension is included by default from
-										PHP version 5.3.x and above.
-									</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
 
@@ -207,8 +194,16 @@
 								<listitem><para><emphasis>GD</emphasis> -
 									required for the captcha feature
 								</para></listitem>
-
-
+								<listitem>
+									<para><emphasis>Fileinfo</emphasis> -
+										Required for file attachments
+									</para>
+									<para>Without this extension, file attachment
+										previews and downloads do not work
+										as MantisBT won't be able to send
+										the Content-Type header to a browser
+										requesting an attachment.
+									</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
 
