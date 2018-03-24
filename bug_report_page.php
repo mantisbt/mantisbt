@@ -174,7 +174,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_severity				= gpc_get_int( 'severity', (int)config_get( 'default_bug_severity' ) );
 	$f_priority				= gpc_get_int( 'priority', (int)config_get( 'default_bug_priority' ) );
 	$f_summary				= gpc_get_string( 'summary', '' );
-	$f_description			= gpc_get_string( 'description', '' );
+	$f_description			= gpc_get_string( 'description', config_get( 'default_bug_description' ) );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );

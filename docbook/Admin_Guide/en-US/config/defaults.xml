@@ -24,6 +24,15 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_default_bug_description</term>
+			<listitem>
+				<para>
+				Default value for bug description field used on bug report page.
+				Default is empty description.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_bug_view_status</term>
 			<listitem>
 				<para>The default viewing status for the new bug (VS_PUBLIC or
