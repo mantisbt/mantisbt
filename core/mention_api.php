@@ -156,7 +156,7 @@ function mention_format_text( $p_text, $p_html = true ) {
 		if( $p_html ) {
 			$t_mention_formatted = string_display_line( $t_mention_formatted );
 
-			$t_mention_formatted = '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
+			$t_mention_formatted = '<a href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
 
 			if( !user_is_enabled( $t_user_id ) ) {
 				$t_mention_formatted = '<s>' . $t_mention_formatted . '</s>';

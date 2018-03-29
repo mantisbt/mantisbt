@@ -223,7 +223,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		print_email_link_with_subject( $t_email, $t_username, $t_name, $p_bug_id );
 	} else {
 		$t_name = string_attribute( $t_name );
-		echo '<span class="user" style="text-decoration: line-through">';
+		echo '<span style="text-decoration: line-through">';
 		echo '<a title="' . $t_name . '">' . $t_username . '</a>';
 		echo '</span>';
 	}
@@ -1676,7 +1676,7 @@ function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id
 	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-	echo '<a class="user" href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
+	echo '<a href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
 }
 
 /**
