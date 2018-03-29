@@ -21,6 +21,8 @@
  * @package MantisBT
  */
 
+use Mantis\Exceptions\ServiceException;
+
 /**
  * Timeline event class for file attachment operations.
  *
@@ -30,21 +32,21 @@
 class IssueAttachmentTimelineEvent extends TimelineEvent {
 	private $issue_id;
 	private $filename;
-	private $add;
+	private $type;
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id   An user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_filename  Attachment's file name.
-	 * @param boolean $p_add       True if adding, false if removing attachment.
+	 * @param boolean $p_type      Event type (FILE_ADDED, FILE_DELETED)
 	 */
-	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename, $p_add ) {
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename, $p_type ) {
 		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->filename = $p_filename;
-		$this->add = $p_add;
+		$this->type = $p_type;
 	}
 
 	/**
@@ -52,7 +54,17 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
-		$t_string = $this->add ? 'timeline_issue_file_added' : 'timeline_issue_file_deleted';
+		switch( $this->type ) {
+			case FILE_ADDED:
+				$t_string = 'timeline_issue_file_added';
+				break;
+			case FILE_DELETED:
+				$t_string = 'timeline_issue_file_deleted';
+				break;
+			default:
+				throw new ServiceException( 'Unknown Event Type', ERROR_GENERIC );
+		}
+
 		$t_bug_link = string_get_bug_view_link( $this->issue_id );
 
 		$t_html = $this->html_start( 'fa-file-o' );
