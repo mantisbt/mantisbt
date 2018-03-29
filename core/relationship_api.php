@@ -798,7 +798,7 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	if( $p_html == true ) {
 		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" alt="(%s)" title="%s" />', lang_get( 'private' ), lang_get( 'private' ) );
+			$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" title="%s" ></i>', lang_get( 'private' ) );
 		}
 	} else {
 		if( mb_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {

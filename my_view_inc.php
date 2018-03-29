@@ -351,7 +351,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status . '"></i> ';
 
 			if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><i class="fa fa-pencil bigger-130 padding-2 grey" alt="' . lang_get( 'update_bug_button' ) . '" title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
+				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><i class="fa fa-pencil bigger-130 padding-2 grey" title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
 			}
 
 			if( ON == config_get( 'show_priority_text' ) ) {
@@ -365,11 +365,11 @@ for( $i = 0;$i < $t_count; $i++ ) {
 				$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
 				$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
 				echo '<a class="attachments" href="' . $t_href . '" title="' . $t_href_title . '">';
-				echo ' <i class="fa fa-paperclip fa-lg grey" alt="' . $t_alt_text . '" title="' . $t_alt_text . '"></i></a>';
+				echo ' <i class="fa fa-paperclip fa-lg grey" title="' . $t_alt_text . '"></i></a>';
 			}
 
 			if( VS_PRIVATE == $t_bug->view_state ) {
-				echo ' <i class="fa fa-lock fa-lg light-grey" alt="' . lang_get( 'private' ) . '"></i>';
+				echo ' <i class="fa fa-lock fa-lg light-grey" title="' . lang_get( 'private' ) . '"></i>';
 			}
 			?>
 	</td>

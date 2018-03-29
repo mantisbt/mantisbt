@@ -160,7 +160,7 @@ $f_export = implode( ',', $f_bug_arr );
 		}
 
 		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>'
-			. '<i class="fa ' . $t_icon[3] . '" alt="' . $t_icon[4] . '"></i></a> ';
+			. '<i class="fa ' . $t_icon[3] . '" title="' . $t_icon[4] . '"></i></a> ';
 	}
 ?>
 
