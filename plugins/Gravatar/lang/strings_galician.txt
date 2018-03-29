@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Dutch (Nederlands)
+/** Galician (galego)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,9 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Mraedis
- * @author Rienkwind
+ * @author Elisardojm
  */
 
-$s_plugin_Gravatar_title = 'Avatars via Gravatar';
-$s_plugin_Gravatar_description = 'Een plugin die gebruikers hun avatars toont gebaseerd op hun e-mail adres bij de avatar dienst.';
+$s_plugin_Gravatar_title = 'Avatares vía Gravatar';
+$s_plugin_Gravatar_description = 'Un módulo que amosa avatares de usuario baseados nos seus enderezos de correo electrónico usando o servizo avatar.';

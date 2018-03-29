@@ -43,6 +43,7 @@
  * @author Hansmuller
  * @author McDutchie
  * @author MedShot
+ * @author Mraedis
  * @author Rienkwind
  * @author Robin van der Vliet
  * @author Robin0van0der0vliet
@@ -902,6 +903,7 @@ $s_total_time = 'Totale tijd';
 $s_developer_stats = 'Status per ontwikkelaar';
 $s_reporter_stats = 'Status per aanmelder';
 $s_orct = '(open/opgelost/gesloten/totaal)';
+$s_summary_header = 'open/opgelost/afgesloten/totaal/opgelost ratio/ratio';
 $s_any = 'alle';
 $s_all = 'alle';
 $s_show = 'Bekijken';

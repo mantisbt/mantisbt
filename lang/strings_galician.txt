@@ -1069,6 +1069,7 @@ $s_bug_created_from = 'Problema xerado desde';
 $s_copy_from_parent = 'Copiar os datos adicionais do problema principal';
 $s_copy_notes_from_parent = 'Copiar as notas da incidencia';
 $s_copy_attachments_from_parent = 'Copiar os datos adxuntos';
+$s_with = 'con';
 $s_viewing_bug_relationship_graph_title = 'Gráfica de relacións';
 $s_viewing_bug_dependency_graph_title = 'Gráfica de dependencias';
 $s_relation_graph = 'Gráfica de relación';
