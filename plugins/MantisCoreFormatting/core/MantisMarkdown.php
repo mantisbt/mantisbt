@@ -60,7 +60,7 @@ class MantisMarkdown extends Parsedown
 	 * MantisMarkdown constructor.
 	 */
 	public function __construct() {
-		
+
 		# enable line break by default
 		$this->breaksEnabled = true;
 
@@ -80,7 +80,7 @@ class MantisMarkdown extends Parsedown
 		self::init();
 
 		# Enabled quote conversion
-		# Text processing converts special character to entity name 
+		# Text processing converts special character to entity name
 		# Make sure to restore "&gt;" entity name to its characted result ">"
 		$p_text = str_replace( "&gt;", ">", $p_text );
 
@@ -208,7 +208,7 @@ class MantisMarkdown extends Parsedown
 	protected function inlineCode( $block ) {
 
 		$block = parent::inlineCode( $block );
-		
+
 		if( isset( $block['element']['text'] )) {
 			$this->processAmpersand( $block['element']['text'] );
 		}
@@ -233,7 +233,7 @@ class MantisMarkdown extends Parsedown
 
 		return $block;
 	}
-	
+
 	/**
 	 * Customize the blockCodeComplete method
 	 *
