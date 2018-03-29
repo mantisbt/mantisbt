@@ -70,7 +70,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 		$t_html = $this->html_start( 'fa-file-o' );
 		$t_html .= '<div class="action">'
 			. sprintf( lang_get( $t_string ),
-				user_get_name( $this->user_id ),
+				prepare_user_name( $this->user_id ),
 				$t_bug_link,
 				$this->filename
 			)
