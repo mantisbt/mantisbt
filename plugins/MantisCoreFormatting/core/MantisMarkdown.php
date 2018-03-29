@@ -66,6 +66,9 @@ class MantisMarkdown extends Parsedown
 
 		# set the table class
 		$this->table_class = 'table table-nonfluid';
+
+		# XSS protection
+		$this->setSafeMode( true );
 	}
 
 	/**
