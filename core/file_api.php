@@ -103,7 +103,7 @@ function file_get_display_name( $p_filename ) {
 }
 
 /**
- * Fills the cache with the attachement count from a list of bugs
+ * Fills the cache with the attachment count from a list of bugs
  * If the bug doesn't have attachments, cache its value as 0.
  * @global array $g_cache_file_count
  * @param array $p_bug_ids Array of bug ids

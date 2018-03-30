@@ -667,7 +667,7 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Utility function to process the values for a filter property that is related
 	 * to a database id number, used to represent users.
-	 * Manages special case meta-value-none, wich is translated to id "0", to be able
+	 * Manages special case meta-value-none, which is translated to id "0", to be able
 	 * to match database values where "0" is the default for empty/none
 	 * Manages special case meta-value-myself, by replacing with the actual current user id.
 	 *
@@ -807,7 +807,7 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Utility function to process the values for a filter property that is related
 	 * to a database string field.
-	 * Manages special case meta-value-none, wich is translated to "", to be able
+	 * Manages special case meta-value-none, which is translated to "", to be able
 	 * to match database values where "" is the default for empty/null
 	 *
 	 * @param array $p_array	Input array with strings
@@ -854,7 +854,7 @@ class BugFilterQuery extends DbQuery {
 	/**
 	 * Utility function to process the values for a filter property that is related
 	 * to a database id number.
-	 * Manages special cases like meta-value-none, wich is translated to id "0", to be able
+	 * Manages special cases like meta-value-none, which is translated to id "0", to be able
 	 * to match database values where "0" is the default for empty/none
 	 * @param array $p_array	Input array with ids
 	 * @return array	Converted array
@@ -1098,7 +1098,7 @@ class BugFilterQuery extends DbQuery {
 		} else {
 			# relation is specified
 			if( META_FILTER_NONE == $c_rel_bug ) {
-				# rel REL, bug NONE, those bugs that dont have any REL relation (may have other types)
+				# rel REL, bug NONE, those bugs that don't have any REL relation (may have other types)
 				# map to a non-existant relation type -1 to include nulls
 				$t_where = 'COALESCE(' . $t_table_dst . '.relationship_type, -1) <> ' . $this->param( $t_comp_type )
 						. ' AND COALESCE(' . $t_table_src . '.relationship_type, -1) <> ' . $this->param( $c_rel_type );
@@ -1124,7 +1124,7 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Utility function to return the projects, fro mthe current filter scope, that meets some
+	 * Utility function to return the projects, from the current filter scope, that meets some
 	 * access level threshold. The specified access can be either a int/array threshold, or
 	 * a configuration option to be evaluated at each project
 	 * (see documentation for access_project_array_filter() )
@@ -1184,7 +1184,7 @@ class BugFilterQuery extends DbQuery {
 			$t_tag_projects_clause = '';
 		} else {
 			if( empty( $t_projects_can_view_tags ) ) {
-				# if cant view tags in any project, exit
+				# if can't view tags in any project, exit
 				log_event( LOG_FILTERING, 'tags query, no accesible projects ' );
 				return;
 			} else {
@@ -1302,7 +1302,7 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Build the query parts for the filter propertie srelated to custom fields
+	 * Build the query parts for the filter properties related to custom fields
 	 * @return void
 	 */
 	protected function build_prop_custom_fields() {
@@ -1478,7 +1478,7 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Build the query parts for the filter propertie srelated to plugin filter fields
+	 * Build the query parts for the filter properties related to plugin filter fields
 	 * @return void
 	 */
 	protected function build_prop_plugin_filters() {
@@ -1504,7 +1504,7 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Return a column name for the specified proeprty to sort on.
+	 * Return a column name for the specified property to sort on.
 	 * Valid only for standard bug table fields
 	 * Manages joining with other tables to allow sorting by display names instead
 	 * of its numerical ids.
@@ -1539,7 +1539,7 @@ class BugFilterQuery extends DbQuery {
 				# sorting by username: coalesce( username, $prefix_for_deleted || id )
 				# sorting by realname: coalesce( nullif(realname,''), username, $prefix_for_deleted || id )
 				$t_select = 'COALESCE(';
-				# Note: show_realname should olny be set at global or all_projects
+				# Note: show_realname should only be set at global or all_projects
 				# Note: sort_by_last_name is not supported here
 				if( ON == config_get( 'show_realname' ) ) {
 					$t_select .= 'NULLIF(' . $t_table_alias . '.realname, \'\'), ';

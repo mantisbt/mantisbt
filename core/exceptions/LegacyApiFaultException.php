@@ -19,7 +19,7 @@ namespace Mantis\Exceptions;
 /**
  * An exception that is triggered from a RestFault or SoapFault which is the legacy
  * way to trigger API errors.  This exception class should be removed once all APIs
- * dependend on exceptions rather than return codes being faults.
+ * dependent on exceptions rather than return codes being faults.
  *
  * Don't inherit from MantisException since we don't follow the conventions of having
  * code correspond to Mantis error code, but code here is the http error code.

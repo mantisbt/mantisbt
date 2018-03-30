@@ -183,7 +183,7 @@ function print_successful_redirect( $p_redirect_to ) {
  * Print avatar image for the given user ID
  *
  * @param integer $p_user_id 		A user identifier.
- * @param string $p_class_prefix	CSS classs prefix.
+ * @param string $p_class_prefix	CSS class prefix.
  * @param integer $p_size    		Image pixel size.
  * @return void
  */
