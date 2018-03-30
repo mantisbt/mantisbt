@@ -39,7 +39,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 	 * @param integer $p_user_id   An user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_filename  Attachment's file name.
-	 * @param boolean $p_type      Event type (FILE_ADDED, FILE_DELETED)
+	 * @param integer $p_type      Event type (FILE_ADDED, FILE_DELETED)
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_filename, $p_type ) {
 		parent::__construct( $p_timestamp, $p_user_id );
@@ -52,6 +52,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 	/**
 	 * Returns html string to display
 	 * @return string
+	 * @throws Mantis\Exceptions\ServiceException
 	 */
 	public function html() {
 		switch( $this->type ) {
