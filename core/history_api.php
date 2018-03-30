@@ -435,10 +435,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		$t_event['bug_id'] = $v_bug_id;
 		$t_event['date'] = $v_date_modified;
 		$t_event['userid'] = $v_user_id;
-
-		# user_get_name handles deleted users, and username vs realname
-		$t_event['username'] = user_get_name( $v_user_id );
-
+		$t_event['username'] = user_get_username( $v_user_id );
 		$t_event['field'] = $v_field_name;
 		$t_event['type'] = $v_type;
 		$t_event['old_value'] = $v_old_value;
@@ -766,13 +763,13 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			if( 0 == $p_old_value ) {
 				$p_old_value = '';
 			} else {
-				$p_old_value = user_get_name( $p_old_value );
+				$p_old_value = user_get_username( $p_old_value );
 			}
 
 			if( 0 == $p_new_value ) {
 				$p_new_value = '';
 			} else {
-				$p_new_value = user_get_name( $p_new_value );
+				$p_new_value = user_get_username( $p_new_value );
 			}
 			break;
 		case 'date_submitted':
@@ -868,12 +865,12 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_new_value . ': ' . $p_old_value;
 					break;
 				case BUG_MONITOR:
-					$p_old_value = user_get_name( $p_old_value );
+					$p_old_value = user_get_username( $p_old_value );
 					$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
 					break;
 				case BUG_UNMONITOR:
 					if( $p_old_value !== '' ) {
-						$p_old_value = user_get_name( $p_old_value );
+						$p_old_value = user_get_username( $p_old_value );
 					}
 					$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;
 					break;
@@ -882,19 +879,19 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					break;
 				case BUG_ADD_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_added' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					$t_change = user_get_username( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_UPDATE_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_updated' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					$t_change = user_get_username( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_DELETE_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_deleted' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					$t_change = user_get_username( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_PAID_SPONSORSHIP:
 					$t_note = lang_get( 'sponsorship_paid' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
+					$t_change = user_get_username( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
 					break;
 				case BUG_ADD_RELATIONSHIP:
 					$t_note = lang_get( 'relationship_added' );
