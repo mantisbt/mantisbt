@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 ob_start();
 include_once 'class.RSSBuilder.inc.php';
 
-/* create the object - remember, not all attributes are supported by every rss version. just hand over an empty string if you don't need a specific attribute */
+/* create the object - remember, not all attibutes are supported by every rss version. just hand over an empty string if you don't need a specific attribute */
 $encoding =(string) 'UTF-8';
 $about = (string) 'http://flaimo.com/';
 $title = (string) 'flaimo.com fake news';
