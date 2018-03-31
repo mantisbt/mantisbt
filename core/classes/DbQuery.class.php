@@ -51,7 +51,7 @@ require_api( 'logging_api.php' );
  *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN caluses
  * 2) $expanded_query_string: stores the query string after expansion of special constructs
  *   into standard "${int}" parameters
- * 3) $db_query_string: stores queue query string after all parameters have been renamed,
+ * 3) $db_query_string: stores the query string after all parameters have been renamed,
  *   reordered and converted to the specific database parameter syntax expected by ADOdb.
  *   Binded values are stored in $db_param_array
  *
@@ -196,10 +196,10 @@ class DbQuery {
 	}
 
 	/**
-	 * Creates a string containing a parameter that can be appended to queue query string
+	 * Creates a string containing a parameter that can be appended to the query string
 	 * The provided value is binded to the parameter and stored for use at execution time
 	 * The parameters created by this method are anonymous parameters, so they can't be
-	 * accesed later to have values modified or rebinded.
+	 * accessed later to have values modified or rebinded.
 	 * The format of the token created is: "$n", where "n" is an incremental integer
 	 * @param mixed $p_value	Value to bind for this parameter
 	 * @return string			Token string
