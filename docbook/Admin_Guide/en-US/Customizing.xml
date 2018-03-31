@@ -23,45 +23,18 @@
 			unexpected issues.
 		</para></note>
 
-		<para>Two formats are supported within this file:
-		</para>
-
-		<variablelist>
-			<varlistentry>
-				<term>New Format</term>
-				<listitem>
-					<para>Define a
-						<emphasis>$s_custom_messages</emphasis>
-						array as follows:
-<programlisting>
-$s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
-</programlisting>
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>Legacy Format</term>
-				<listitem>
-					<para>One variable per string
+		<para>Format
 <programlisting>
 $s_CODE = STRING;
 </programlisting>
-					</para>
-				</listitem>
-			</varlistentry>
-		</variablelist>
+		</para>
 
 		<para>Where
 			<itemizedlist>
 				<listitem>
-					<para>LANG = language code, as defined in
-						<emphasis>$g_language_choices_arr</emphasis>
-						(see <xref linkend="admin.config.language" />)
-					</para>
-				</listitem>
-				<listitem>
 					<para>CODE = string code, as called by
 						lang_get() function.
+						Search in lang/strings_english.txt for existing codes.
 					</para>
 				</listitem>
 				<listitem>
@@ -70,8 +43,6 @@ $s_CODE = STRING;
 				</listitem>
 			</itemizedlist>
 		</para>
-		<note><para>Mixing old and new formats within the file is not supported.
-		</para></note>
 		<warning><para>NEVER call <emphasis>lang_get_current()</emphasis>
 			from the <emphasis>Custom Strings File</emphasis>, as doing so
 			will reset the active_language, causing the code to return
