@@ -237,7 +237,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			if( isset( $t_stack[2] ) ) {
 				$t_caller = $t_stack[2];
 			} else {
-				# If called from main page body, there is no stack block for the funcion, use the page block instead
+				# If called from main page body, there is no stack block for the function, use the page block instead
 				$t_caller = $t_stack[1];
 			}
 

@@ -1081,7 +1081,7 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 $g_user_accessible_projects_cache = null;
 
 /**
- * retun an array of project IDs to which the user has access
+ * return an array of project IDs to which the user has access
  *
  * @param integer $p_user_id       A valid user identifier.
  * @param boolean $p_show_disabled Whether to include disabled projects in the result array.
@@ -1217,7 +1217,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 }
 
 /**
- * retun an array of sub-project IDs of all sub-projects project to which the user has access
+ * return an array of sub-project IDs of all sub-projects project to which the user has access
  * @param integer $p_user_id    A valid user identifier.
  * @param integer $p_project_id A valid project identifier.
  * @return array

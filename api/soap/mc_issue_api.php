@@ -384,7 +384,7 @@ function mci_issue_get_due_date( BugData $p_bug ) {
  * @param integer $p_issue_id       Issue id to apply custom field values to.
  * @param array   &$p_custom_fields The array of custom field values as described in the webservice complex types.
  * @param boolean $p_log_insert     Create history logs for new values.
- * @return booleamn|SoapFault|RestFault true for sucess, otherwise fault.
+ * @return boolean|SoapFault|RestFault true for success, otherwise fault.
  */
 function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert ) {
 	# set custom field values on the submitted issue

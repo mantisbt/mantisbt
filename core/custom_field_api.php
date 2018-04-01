@@ -824,7 +824,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			unset( $t_uncached_projects[$t_project_id] );
 		}
 
-		# save empty array for those projects that dont appear in the results
+		# save empty array for those projects that don't appear in the results
 		if( !empty( $t_uncached_projects ) ) {
 			foreach( $t_uncached_projects as $t_pr_id ) {
 				$g_cache_cf_linked[$t_pr_id] = array();

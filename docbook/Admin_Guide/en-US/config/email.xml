@@ -247,7 +247,7 @@ $g_notify_flags['new'] = array(
 			<term>$g_email_ensure_unique</term>
 			<listitem>
 				<para>
-					When enabled, the uniqueness of email addresses will be inforced for new
+					When enabled, the uniqueness of email addresses will be enforced for new
 					users as well as updates to existing ones.  Note that there can be duplicate
 					emails before this option was turned ON.  Default is ON.
 				</para>

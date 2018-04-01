@@ -1004,7 +1004,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	# in this case, the filter version field inside the array is to be used
 	# and if not present, set the current filter version
 
-	# check fitler version mark
+	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
 	$t_version_string = $t_setting_arr[0];
 	if( in_array( $t_version_string, array( 'v1', 'v2', 'v3', 'v4' ) ) ) {
@@ -2774,7 +2774,7 @@ function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id 
 
 /**
  * Add a filter to the database.
- * This fucntion does not perform any validation on access or inserted data
+ * This function does not perform any validation on access or inserted data
  *
  * @param string $p_filter_string  Filter string in filter-serialized format
  * @param integer $p_user_id      User id owner of the filter
@@ -3945,7 +3945,7 @@ function filter_is_temporary( array $p_filter ) {
  * temporary filter by its session key.
  * The parameter can be ither an existing key, so its used directly,
  * or a filter array, which can contain a property with the key
- * If a filter is provided that does not contain the key proeprty, an empty
+ * If a filter is provided that does not contain the key property, an empty
  * string is returned.
  * @param array|string $p_key_or_filter	Either a string key, or a filter array
  * @return string|null	Formatted parameter string, or null

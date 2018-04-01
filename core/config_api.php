@@ -702,7 +702,7 @@ function config_cache_all() {
 
 	$t_config_rows = array();
 
-	# With oracle databse, ADOdb maps column type "L" to clob.
+	# With oracle database, ADOdb maps column type "L" to clob.
 	# Because reading clobs is significantly slower, cast them to varchar for faster query execution
 	# Standard max size for varchar is 4000 bytes, so a safe limit is used as 1000 charancters
 	# for multibyte strings (up to 4 bytes per char)

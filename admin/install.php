@@ -896,7 +896,7 @@ if( 3 == $t_install_state ) {
 						false,
 						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN' );
 				} else {
-					# We did not get an array => error occured
+					# We did not get an array => error occurred
 					print_test( $t_msg, false, true, $t_bool_columns );
 				}
 

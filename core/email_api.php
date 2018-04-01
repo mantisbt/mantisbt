@@ -145,7 +145,7 @@ function email_is_valid( $p_email ) {
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
 				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
-					return true; # no need to check mx record details (below) if we've explicity allowed the domain
+					return true; # no need to check mx record details (below) if we've explicitly allowed the domain
 				}
 			}
 			log_event( LOG_EMAIL, "failed - not in limited domains list '$t_limit_email_domains'" );

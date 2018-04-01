@@ -2360,15 +2360,15 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
  * This method only prints the cells, not the table definition, or any other form element
  * outside of that.
  * A filter array is provided, to populate the fields.
- * The form will use javascript to show dinamic completion of fields (unless the
+ * The form will use javascript to show dynamic completion of fields (unless the
  * parameter $p_static is provided).
  * A page name can be provided to be used as a fallback script when javascript is
- * not available on the cliuent, and the form was rendered with dynamic fields.
+ * not available on the client, and the form was rendered with dynamic fields.
  * By default, the fallback is the current page.
  *
  * @param array $p_filter	Filter array to show.
  * @param boolean $p_for_screen	Type of output
- * @param boolean $p_static	Wheter to print a static form (no dynamic fields)
+ * @param boolean $p_static	Whether to print a static form (no dynamic fields)
  * @param string $p_static_fallback_page	Page name to use as javascript fallback
  * @return void
  */
@@ -2378,7 +2378,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_view_type = $t_filter['_view_type'];
 	$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 
-	# If it's a stored filter, linked to a secific project, use that project_id to render available fields
+	# If it's a stored filter, linked to a specific project, use that project_id to render available fields
 	if( $t_source_query_id > 0 ) {
 		$t_project_id = (int)filter_get_field( $t_source_query_id, 'project_id' );
 		if( ALL_PROJECTS == $t_project_id ) {

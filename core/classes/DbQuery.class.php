@@ -39,7 +39,7 @@ require_api( 'logging_api.php' );
  * Allows building a query and fetching data, providing compatible functionality
  * for all supported databases. Hides the underlaying details from the ADOdb layer.
  *
- * Suports inline parameters with ":label" syntax, and anonymous parameters
+ * Supports inline parameters with ":label" syntax, and anonymous parameters
  * through the param() method.
  * Supports binding arrays which will be later expanded to individual parameters.
  *
@@ -51,7 +51,7 @@ require_api( 'logging_api.php' );
  *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN caluses
  * 2) $expanded_query_string: stores the query string after expansion of special constructs
  *   into standard "${int}" parameters
- * 3) $db_query_string: stores que query string after all paramaters have been renamed,
+ * 3) $db_query_string: stores the query string after all parameters have been renamed,
  *   reordered and converted to the specific database parameter syntax expected by ADOdb.
  *   Binded values are stored in $db_param_array
  *
@@ -107,7 +107,7 @@ class DbQuery {
 
 	/**
 	 * Array of values for parameters included in the final query string for ADOdb,
-	 * indexed as neede for the ADOdb driver
+	 * indexed as needed for the ADOdb driver
 	 * @var array
 	 */
 	protected $db_param_array;
@@ -196,10 +196,10 @@ class DbQuery {
 	}
 
 	/**
-	 * Creates a string containing a parameter that can be appended to que query string
+	 * Creates a string containing a parameter that can be appended to the query string
 	 * The provided value is binded to the parameter and stored for use at execution time
 	 * The parameters created by this method are anonymous parameters, so they can't be
-	 * accesed later to have values modified or rebinded.
+	 * accessed later to have values modified or rebinded.
 	 * The format of the token created is: "$n", where "n" is an incremental integer
 	 * @param mixed $p_value	Value to bind for this parameter
 	 * @return string			Token string
@@ -493,7 +493,7 @@ class DbQuery {
 	}
 
 	/**
-	 * Process query string to expand late binding contructs for IN clauses
+	 * Process query string to expand late binding constructs for IN clauses
 	 * @return void
 	 */
 	protected function process_expand_params_in() {
@@ -571,7 +571,7 @@ class DbQuery {
 
 		$t_query = $this->db_query_string;
 
-		# split the string by the relevant delimiters. The delimiters will be part of the splitted array
+		# split the string by the relevant delimiters. The delimiters will be part of the split array
 		$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $t_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 		$t_is_literal = false;
 		$t_cast = 0;
@@ -890,14 +890,14 @@ class DbQuery {
 	 * - alias: is the name of the column as a valid identifier in the final sql query
 	 * - value: is the string used as pattern for the like expression.
 	 * - escape: optionally, a character used as escape character in the pattern string
-	 * Optionally, the expresion can be forced to be case insensitive, otherwise the default
+	 * Optionally, the expression can be forced to be case insensitive, otherwise the default
 	 * behaviour from the database is used.
 	 *
 	 * The returned string would replace the sql part for: "alias LIKE 'xxx'"
 	 *
 	 * For portability reasons, the supported wildcards are '%' and '_'. Other special tokens
 	 * are automatically escaped:
-	 * - [] syntax in mssql are treated as literal charachters.
+	 * - [] syntax in mssql are treated as literal characters.
 	 * - \ as default escape char in mysql is treated as a literal character.
 	 * Note that the pattern string uses c-style escaping, so a "\" character must be written as "\\"
 	 *

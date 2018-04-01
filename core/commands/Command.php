@@ -113,7 +113,7 @@ abstract class Command
 	/**
 	 * Execute the command.  This may throw a CommandException is execution is interrupted.
 	 * The command is expected to trigger events that are handled by plugins as part of
-	 * exection.
+	 * execution.
 	 *
 	 * @return array Execution result
 	 */

@@ -1438,7 +1438,7 @@ class TableGridLayout {
 
 		# Arrange the items in rows accounting for their actual cell space
 		foreach( $this->items as $t_item ) {
-			# Get the actual table colums needed to render the item
+			# Get the actual table columns needed to render the item
 			$t_item_cols = ( $this->item_orientation == self::ORIENTATION_VERTICAL ) ? $t_item->colspan : $t_item->colspan + 1;
 			# Search for a row with enough space to fit the item
 			$t_found = false;

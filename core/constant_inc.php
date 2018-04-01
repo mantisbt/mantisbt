@@ -718,7 +718,7 @@ define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
 
-# Databse functional type identifiers.
+# Database functional type identifiers.
 define( 'DB_TYPE_UNDEFINED', 0 );
 define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );
