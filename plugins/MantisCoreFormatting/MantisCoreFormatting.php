@@ -178,8 +178,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$t_string = $this->processBugAndNoteLinks( $t_string );
 		}
 
-		$t_string = mention_format_text( $t_string, /* html */ true );
-
 		# Process Markdown
 		if( ON == $s_markdown ) {
 			if( $p_multiline ) {
@@ -188,6 +186,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 				$t_string = MantisMarkdown::convert_line( $t_string );
 			}
 		}
+
+		$t_string = mention_format_text( $t_string, /* html */ true );
 
 		return $t_string;
 	}
