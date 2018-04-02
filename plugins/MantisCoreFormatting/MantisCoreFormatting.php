@@ -170,6 +170,15 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			}
 		}
 
+		# Process Markdown
+		if( ON == $s_markdown ) {
+			if( $p_multiline ) {
+				$t_string = MantisMarkdown::convert_text( $t_string );
+			} else {
+				$t_string = MantisMarkdown::convert_line( $t_string );
+			}
+		}
+
 		if( ON == $s_urls && OFF == $s_markdown ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
@@ -179,15 +188,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		}
 
 		$t_string = mention_format_text( $t_string, /* html */ true );
-
-		# Process Markdown
-		if( ON == $s_markdown ) {
-			if( $p_multiline ) {
-				$t_string = MantisMarkdown::convert_text( $t_string );
-			} else {
-				$t_string = MantisMarkdown::convert_line( $t_string );
-			}
-		}
 
 		return $t_string;
 	}
