@@ -1244,6 +1244,8 @@ $s_month_october = '10月';
 $s_month_november = '11月';
 $s_month_december = '12月';
 $s_timeline_issue_created = '<span class="username">%1$s</span>创建了问题<span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span>为问题<span class="issue_id">%2$s</span>附加了文件<em>%3$s</em>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span>从问题<span class="issue_id">%2$s</span>中移除了文件<em>%3$s</em>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span>在问题<span class="issue_id">%2$s</span>做出评论';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span>监视问题<span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span>停止监视问题<span class="issue_id">%2$s</span>';

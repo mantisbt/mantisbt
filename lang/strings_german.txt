@@ -1249,6 +1249,8 @@ $s_month_october = 'Oktober';
 $s_month_november = 'November';
 $s_month_december = 'Dezember';
 $s_timeline_issue_created = '<span class="username">%1$s</span> erstellte den Eintrag <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> hat die Datei <em>%3$s</em> dem Eintrag <span class="issue_id">%2$s</span> angehängt';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> hat die Datei <em>%3$s</em> vom Eintrag <span class="issue_id">%2$s</span> entfernt';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> kommentierte den Eintrag <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> beobachtet den Eintrag <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> beobachtet nicht mehr den Eintrag <span class="issue_id">%2$s</span>';

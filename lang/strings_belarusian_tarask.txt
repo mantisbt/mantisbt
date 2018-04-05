@@ -1229,6 +1229,8 @@ $s_month_october = 'кастрычніка';
 $s_month_november = 'лістапада';
 $s_month_december = 'сьнежня';
 $s_timeline_issue_created = '<span class="username">%1$s</span> адкрыў праблему <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> далучыў файл <em>%3$s</em> да праблемы <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> выдаліў файл <em>%3$s</em> з праблемы <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> пракамэнтаваў праблему <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> сочыць за праблемай <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> больш не назірае за праблемай <span class="issue_id">%2$s</span>';

@@ -1229,6 +1229,8 @@ $s_month_october = 'октомври';
 $s_month_november = 'ноември';
 $s_month_december = 'декември';
 $s_timeline_issue_created = '<span class="username">%1$s</span> го создаде проблемот <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> ја приложи податотеката <em>%3$s</em> кон проблемот <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> ја отстрани податотеката <em>%3$s</em> од проблемот <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> коментираше на проблемот <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> го надгледува проблемот <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> прекина да го недгледува проблемот <span class="issue_id">%2$s</span>';

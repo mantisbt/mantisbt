@@ -38,7 +38,9 @@
  * @ingroup Language
  * @file
  *
+ * @author Hong3e
  * @author Ykhwong
  */
 
+$s_plugin_Gravatar_title = 'Gravatar 이미지';
 $s_plugin_Gravatar_description = '아바타 서비스를 사용하는 이메일 주소에 기반한 사용자 아바타를 표시하는 플러그인입니다.';

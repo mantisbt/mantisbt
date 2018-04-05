@@ -1238,6 +1238,8 @@ $s_month_october = 'Outubro';
 $s_month_november = 'Novembro';
 $s_month_december = 'Dezembro';
 $s_timeline_issue_created = '<span class="username">%1$s</span> criou a incidência <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> anexou o ficheiro <em>%3$s</em> na incidência <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> removeu o ficheiro <em>%3$s</em> da incidência <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> comentou na incidência <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> está a monitorizar a incidência <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> deixou de monitorizar a incidência <span class="issue_id">%2$s</span>';
