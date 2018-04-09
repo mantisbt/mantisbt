@@ -38,7 +38,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Nikosgranturismogt
  * @author Omnipaedista
  */
 
 $s_plugin_format_title = 'Μορφοποίηση MantisBT';
+$s_plugin_format_enabled = 'Στις';
+$s_plugin_format_disabled = 'Εκτός';

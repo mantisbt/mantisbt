@@ -394,6 +394,7 @@ $s_email_on_updated = 'E-Mail bäi Aktualiséierung';
 $s_loading = 'Lueden...';
 $s_between_date = 'Tëscht';
 $s_after_date = 'Nom';
+$s_from_date = 'Vum';
 $s_wiki = 'Wiki';
 $s_tags = 'Markéierungen';
 $s_tag_name = 'Numm';

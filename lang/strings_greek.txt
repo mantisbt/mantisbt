@@ -719,6 +719,7 @@ $s_back_link = 'Πίσω';
 $s_file_uploaded_msg = 'Η Φόρτωση Αρχείου ήταν επιτυχής';
 $s_upload_file_title = 'Φόρτωση Αρχείου';
 $s_title = 'Τίτλος';
+$s_confirm_file_delete_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε αυτό το αρχείο;';
 $s_filename = 'Όνομα αρχείου';
 $s_filename_label = 'Όνομα αρχείου:';
 $s_file_update_button = 'Ενημέρωση αρχείου';
