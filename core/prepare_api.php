@@ -65,9 +65,10 @@ function prepare_email_link( $p_email, $p_text ) {
  * Also can make it a link to user info page.
  * @param integer $p_user_id  A valid user identifier.
  * @param boolean $p_link     Whether to include an html link
+ * @param string $p_prefix Optional string prepended to the username before display
  * @return string
  */
-function prepare_user_name( $p_user_id, $p_link = true ) {
+function prepare_user_name( $p_user_id, $p_link = true, $p_prefix = '' ) {
 	# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
 	if( NO_USER == $p_user_id ) {
 		return '';
@@ -83,15 +84,16 @@ function prepare_user_name( $p_user_id, $p_link = true ) {
 
 	$t_name = string_display_line( $t_name );
 
+	$t_display = $p_prefix . $t_name;
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		if( $p_link ) {
-			return '<a ' . $t_tooltip . ' href="' . user_get_page_url( $p_user_id ) . '">' . $t_name . '</a>';
+			return '<a ' . $t_tooltip . ' href="' . user_get_page_url( $p_user_id ) . '">' . $t_display . '</a>';
 		} else {
-			return '<span ' . $t_tooltip . '>' . $t_name . '</span>';
+			return '<span ' . $t_tooltip . '>' . $t_display . '</span>';
 		}
 	}
 
-	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';
+	return '<del ' . $t_tooltip . '>' . $t_display . '</del>';
 }
 
 /**
