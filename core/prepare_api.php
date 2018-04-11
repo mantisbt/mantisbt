@@ -87,13 +87,17 @@ function prepare_user_name( $p_user_id, $p_link = true, $p_prefix = '' ) {
 	$t_display = $p_prefix . $t_name;
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		if( $p_link ) {
-			return '<a ' . $t_tooltip . ' href="' . user_get_page_url( $p_user_id ) . '">' . $t_display . '</a>';
+			$t_display = '<a ' . $t_tooltip . ' href="' . user_get_page_url( $p_user_id ) . '">' . $t_display . '</a>';
 		} else {
-			return '<span ' . $t_tooltip . '>' . $t_display . '</span>';
+			$t_display = '<span ' . $t_tooltip . '>' . $t_display . '</span>';
 		}
+		if( !user_is_enabled( $p_user_id ) ) {
+			$t_display = '<del>' . $t_display . '</del>';
+		}
+		
 	}
 
-	return '<del ' . $t_tooltip . '>' . $t_display . '</del>';
+	return $t_display;
 }
 
 /**

@@ -151,18 +151,11 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
 		$t_mention = $t_mentions_tag . $t_username;
-		$t_mention_formatted = $t_mention;
 
 		if( $p_html ) {
-			$t_mention_formatted = string_display_line( $t_mention_formatted );
-
-			$t_mention_formatted = '<a href="' . user_get_page_url( $t_user_id ) . '">' . $t_mention_formatted . '</a>';
-
-			if( !user_is_enabled( $t_user_id ) ) {
-				$t_mention_formatted = '<s>' . $t_mention_formatted . '</s>';
-			}
-
-			$t_mention_formatted = '<span class="mention">' . $t_mention_formatted . '</span>';
+			$t_mention_formatted = '<span class="mention">' . prepare_user_name( $t_user_id, $t_mentions_tag ) . '</span>';
+		} else {
+			$t_mention_formatted = $t_mention;
 		}
 
 		$t_formatted_mentions[$t_mention] = $t_mention_formatted;
