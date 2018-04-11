@@ -1791,3 +1791,14 @@ function user_has_more_than_one_project( $p_user_id ) {
 	}
 	return true;
 }
+
+/**
+ * Return the URL for the user's page.
+ *
+ * @param integer $p_user_id A valid user identifier.
+ *
+ * @return string Sanitized user page URL
+ */
+function user_get_page_url( $p_user_id ) {
+	return string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true );
+}
