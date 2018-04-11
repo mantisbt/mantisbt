@@ -73,7 +73,10 @@ function mention_get_candidates( $p_text ) {
 			# Negative lookbehind  to ensure we don't match multiple tags
 			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
 			. ')'
+			# This is the main username matching pattern:
 			# any word char, dash or period, must end with word char
+			# It must be consistent and kept in sync with the one defined in
+			# MantisMarkdown class
 			. '([\w\-.]*[\w])'
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag

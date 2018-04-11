@@ -57,6 +57,14 @@ class MantisMarkdown extends Parsedown
 	private $inline_style = null;
 
 	/**
+	 * Configured user mention matching pattern.
+	 * It must be consistent and kept in sync with the one defined in
+	 * mention_get_candidates()
+	 * @var string $mentions_pattern
+	 */
+	private $mentions_pattern = '([\w\-.]*[\w])';
+
+	/**
 	 * MantisMarkdown constructor.
 	 */
 	public function __construct() {
@@ -69,6 +77,12 @@ class MantisMarkdown extends Parsedown
 
 		# XSS protection
 		$this->setSafeMode( true );
+
+		# @username mentions
+		$t_mentions_tag = mentions_tag();
+		$this->InlineTypes[$t_mentions_tag][] = 'UserMention';
+		$this->inlineMarkerList .= $t_mentions_tag;
+		$this->mentions_pattern = '/' . preg_quote( $t_mentions_tag ) . $this->mentions_pattern . '/';
 	}
 
 	/**
@@ -214,6 +228,105 @@ class MantisMarkdown extends Parsedown
 		}
 
 		return $block;
+	}
+
+	/**
+	 * Lookup the
+	 *
+	 * @param array $block
+	 * @return array
+	 */
+	protected function inlineUserMention( $block ) {
+		if( preg_match( $this->mentions_pattern, $block['text'], $t_matches ) ) {
+			try {
+				$t_user_id = user_get_id_by_name( $t_matches[1], true );
+			}
+			catch( \Mantis\Exceptions\ClientException $e) {
+				# User does not exist - nothing to do
+				return;
+			}
+
+			$t_class = 'mention';
+			if( !user_is_enabled( $t_user_id ) ) {
+				$t_class .= ' disabled';
+			}
+
+			if( $t_user_id !== false ) {
+/*
+# Basic version for Parsedown <= 1.7.1
+# NOTE: Does not generate the same HTML as mention_format_text()
+				return array(
+					'extent' => strlen( $t_matches[0] ),
+					'element' => array(
+						'name' => 'a',
+						'text' => $t_matches[0],
+						'attributes' => array(
+							'href' => user_get_page_url( $t_user_id ),
+							'class' => $t_class,
+						),
+					),
+				);
+*/
+/*
+# Nested elements for Parsedown 1.8
+# Use HTML tags for DOM equal to mention_format_text()
+				$t_class = 'mention';
+				return array(
+					'extent' => strlen( $t_matches[0] ),
+					'element' => array(
+						'name' => 'span',
+						'attributes' => array(
+							'class' => $t_class,
+						),
+						'element' => array(
+							'name' => 'del',
+							'element' => array(
+								'name' => 'a',
+								'text' => $t_matches[0],
+								'attributes' => array(
+									'href' => user_get_page_url( $t_user_id ),
+								),
+							),
+						),
+					),
+				);
+*/
+/*
+# Nested elements for Parsedown 1.8
+# Use of CSS for strike-through of disabled users
+				return array(
+					'extent' => strlen( $t_matches[0] ),
+					'element' => array(
+						'name' => 'span',
+						'attributes' => array(
+							'class' => $t_class,
+						),
+						'element' => array(
+							'name' => 'a',
+							'text' => $t_matches[0],
+							'attributes' => array(
+								'href' => user_get_page_url( $t_user_id ),
+							),
+						),
+					),
+				);
+*/
+# Raw HTML for Parsedown 1.8
+# Make use of MantisBT API
+				$t_class = 'mention';
+				return array(
+					'extent' => strlen( $t_matches[0] ),
+					'element' => array(
+						'name' => 'span',
+						'attributes' => array(
+							'class' => $t_class,
+						),
+						'rawHtml' => prepare_user_name( $t_user_id, mentions_tag() ),
+						'allowRawHtmlInSafeMode' => true,
+					),
+				);
+			}
+		}
 	}
 
 	/**

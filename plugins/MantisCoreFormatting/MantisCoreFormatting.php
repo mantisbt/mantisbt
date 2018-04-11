@@ -177,8 +177,11 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			} else {
 				$t_string = MantisMarkdown::convert_line( $t_string );
 			}
+		} else {
+			$t_string = mention_format_text( $t_string, /* html */ true );
 		}
 
+/*
 		if( ON == $s_urls && OFF == $s_markdown ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
@@ -186,8 +189,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		if ( ON == $s_buglinks ) {
 			$t_string = $this->processBugAndNoteLinks( $t_string );
 		}
-
-		$t_string = mention_format_text( $t_string, /* html */ true );
+*/
 
 		return $t_string;
 	}
