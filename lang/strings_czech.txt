@@ -51,6 +51,7 @@
  * @author Marek Pavlica
  * @author Matěj Grabovský
  * @author Mormegil
+ * @author Patriccck
  * @author Quinn
  * @author Rattkin
  * @author Tchoř
@@ -350,6 +351,7 @@ $s_email_on_priority_change = 'Email při změně priority';
 $s_email_bugnote_limit = 'Limit poštovních zpráv s poznámkami';
 $s_email_full_issue_details = 'Poslat detail celého záznamu e-mailem';
 $s_language = 'Jazyk';
+$s_font_family = 'Rodina písem';
 $s_update_prefs_button = 'Upravit nastavení';
 $s_reset_prefs_button = 'Resetovat nastavení';
 $s_timezone = 'Časové pásmo';
@@ -1241,6 +1243,8 @@ $s_month_october = 'říjen';
 $s_month_november = 'listopad';
 $s_month_december = 'prosinec';
 $s_timeline_issue_created = '<span class="username">%1$s</span> vytvořil záznam <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> přiložený soubor <em>%3$s</em> vydal <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> smazal soubor <em>%3$s</em> od vydání <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> okomentoval záznam <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> sleduje záznam <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> ukončil sledování záznamu <span class="issue_id">%2$s</span>';
@@ -1264,6 +1268,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Nepovolený typ souboru';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresář neexistuje, zkontrolujte nastavení projektu.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tímto jménem už existuje.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Povinné pole "%1$s" je prázdné. Prosím, zkontrolujte zadané údaje.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Neplatná hodnota pro „%1$s“';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tento účet je chráněn. Nesmíte sem přistupovat dokud nebude ochrana účtu odstraněna.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Přístup odepřen.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Chyba uploadu souboru, MantisBT jej nemůže přečíst. Zkontrolujte prosím nastavení projektu.';
@@ -1283,6 +1288,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt tohoto jména již exist
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadáno neplatné jméno projektu. Jméno projektu nesmí být prázdné.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Uživatel se jménem "%1$s" nebyl nalezen.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Uživatel s id "%1$s" nebyl nalezen.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'Uživatel s e-mailovou adresou „%1$s“ nebyl nalezen.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Uživatel se jménem „%1$s“ nebyl nalezen.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Přihlašovací informace uložené vaším prohlížečem nejsou platné. Nebyl váš účet smazán?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Pro tohoto uživatele nelze najít nastavení.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Novinka nenalezena.';
