@@ -161,31 +161,40 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_markdown = plugin_config_get( 'process_markdown' );
 		}
 
-		if( ON == $s_text ) {
-			$t_string = $this->processText( $t_string );
-
-			if( $p_multiline && OFF == $s_markdown ) {
-				$t_string = string_preserve_spaces_at_bol( $t_string );
-				$t_string = string_nl2br( $t_string );
-			}
-		}
-
 		# Process Markdown
 		if( ON == $s_markdown ) {
+			$t_string = string_strip_hrefs( $t_string, true );
+
+			# URLs preprocessing; the Markdown parser will generate the actual links
+			if( ON == $s_urls ) {
+				$t_string = string_insert_hrefs( $t_string, true );
+			}
+
 			if( $p_multiline ) {
 				$t_string = MantisMarkdown::convert_text( $t_string );
 			} else {
 				$t_string = MantisMarkdown::convert_line( $t_string );
 			}
+
+			# Mentions processing is handled by the Markdown parser
 		} else {
+			if( ON == $s_text ) {
+				$t_string = $this->processText( $t_string );
+
+				if( $p_multiline ) {
+					$t_string = string_preserve_spaces_at_bol( $t_string );
+					$t_string = string_nl2br( $t_string );
+				}
+			}
+
+			if( ON == $s_urls ) {
+				$t_string = string_insert_hrefs( $t_string );
+			}
+
 			$t_string = mention_format_text( $t_string, /* html */ true );
 		}
 
 /*
-		if( ON == $s_urls && OFF == $s_markdown ) {
-			$t_string = string_insert_hrefs( $t_string );
-		}
-
 		if ( ON == $s_buglinks ) {
 			$t_string = $this->processBugAndNoteLinks( $t_string );
 		}
