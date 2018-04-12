@@ -595,7 +595,23 @@ function string_strip_hrefs( $p_string, $p_markdown = false ) {
 	$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\>]*>[^\<]*<\/a>/si', $t_replacement, $p_string );
 
 	# Then grab any other href
-	$p_string = preg_replace( '/<a\s[^\>]*href="([^\"]+)"[^\>]*>[^\<]*<\/a>/si', $t_replacement, $p_string );
+	$t_regex = '/<a\s[^\>]*href="([^\"]+)"[^\>]*>([^\<]*)<\/a>/si';
+	if( $p_markdown ) {
+		$p_string = preg_replace_callback(
+			$t_regex,
+			function( $p_match ) {
+				# Generate a Markdown link if the href is different from the text
+				if( $p_match[2] && $p_match[1] != $p_match[2] ) {
+					return "[{$p_match[2]}]({$p_match[1]})";
+				}
+				return "<{$p_match[1]}>";
+			},
+			$p_string
+		);
+	} else {
+		$p_string = preg_replace( $t_regex, $t_replacement, $p_string );
+	}
+
 	return $p_string;
 }
 
