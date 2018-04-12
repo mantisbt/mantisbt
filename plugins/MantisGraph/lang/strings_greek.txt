@@ -45,6 +45,7 @@
  */
 
 $s_plugin_graph_title = 'Γράφημα Mantis';
+$s_plugin_graph_description = 'Επίσημο πρόσθετο γραφήματος.';
 $s_plugin_MantisGraph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_config = 'Διαμόρφωση';
 $s_plugin_MantisGraph_synthesis_link = 'Σύνθεση';
@@ -83,3 +84,5 @@ $s_plugin_MantisGraph_period_this_quarter = 'Αυτό το τέταρτο';
 $s_plugin_MantisGraph_period_last_quarter = 'Τελευταίο τέταρτο';
 $s_plugin_MantisGraph_period_year_to_date = 'Έτος σε ημερομηνία';
 $s_plugin_MantisGraph_period_last_year = 'Πέρυσι';
+$s_plugin_MantisGraph_graph_topdev = 'Κορυφαίοι προγραμματιστές ανά επιλυμένα ζητήματα.';
+$s_plugin_MantisGraph_graph_opendev = 'Προγραμματιστές ανά επιλυμένα ζητήματα.';
