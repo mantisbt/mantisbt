@@ -512,23 +512,21 @@ function string_insert_hrefs( $p_string, $p_markdown = false  ) {
 	}
 
 	# Find any URL in a string and replace it with a clickable link
-	$p_string = preg_replace_callback(
-		$s_url_regex,
-		function ( $p_match ) use ( $p_markdown ) {
-			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
-				$t_url_target = ' target="_blank"';
-			} else {
-				$t_url_target = '';
-			}
-			if( $p_markdown ) {
-				return "<${t_url_href}>";
-			} else {
+	# Not necessary for Markdown, as the parser automatically creates URL links
+	if( !$p_markdown ) {
+		$p_string = preg_replace_callback(
+			$s_url_regex,
+			function ( $p_match ) use ( $p_markdown ) {
+				$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
+				if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
+					$t_url_target = ' target="_blank"';
+				} else {
+					$t_url_target = '';
+				}
 				return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
-			}
-		},
-		$p_string
-	);
+			},
+			$p_string
+		);
 
 	# Find any email addresses in the string and replace them with a clickable
 	# mailto: link, making sure that we skip processing of any existing anchor
