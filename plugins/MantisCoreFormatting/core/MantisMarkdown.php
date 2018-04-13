@@ -65,6 +65,20 @@ class MantisMarkdown extends Parsedown
 	private $mentions_pattern = '([\w\-.]*[\w])';
 
 	/**
+	 * Bug link tag
+	 * @see $g_bug_link_tag
+	 * @var string $bug_link_tag
+	 */
+	private $bug_link_tag;
+
+	/**
+	 * Bugnote link tag
+	 * @see $g_bugnote_link_tag
+	 * @var string $bugnote_link_tag
+	 */
+	private $bugnote_link_tag;
+
+	/**
 	 * MantisMarkdown constructor.
 	 */
 	public function __construct() {
@@ -82,7 +96,19 @@ class MantisMarkdown extends Parsedown
 		$t_mentions_tag = mentions_tag();
 		$this->InlineTypes[$t_mentions_tag][] = 'UserMention';
 		$this->inlineMarkerList .= $t_mentions_tag;
-		$this->mentions_pattern = '/' . preg_quote( $t_mentions_tag ) . $this->mentions_pattern . '/';
+		$this->mentions_pattern = '/^' . preg_quote( $t_mentions_tag ) . $this->mentions_pattern . '/';
+
+		# Bug and Bugnote links
+		$this->bug_link_tag = config_get( 'bug_link_tag' );
+		if( $this->bug_link_tag ) {
+			$this->InlineTypes[$this->bug_link_tag][] = 'BugLink';
+			$this->inlineMarkerList .= $this->bug_link_tag;
+		}
+		$this->bugnote_link_tag = config_get( 'bugnote_link_tag' );
+		if( $this->bugnote_link_tag ) {
+			$this->InlineTypes[$this->bugnote_link_tag][] = 'BugnoteLink';
+			$this->inlineMarkerList .= $this->bugnote_link_tag;
+		}
 	}
 
 	/**
@@ -330,6 +356,63 @@ class MantisMarkdown extends Parsedown
 	}
 
 	/**
+	 * Returns the regex to match a bug or bugnote.
+	 * The tag + one or more digits, followed by whitespace or end of string
+	 *
+	 * @param string $p_tag
+	 * @return string
+	 */
+	protected function getBugAndBugnotePattern( $p_tag ) {
+		return'/^' . preg_quote( $p_tag ) . '([\d]+)(?:\s|$)/';
+
+	}
+
+	/**
+	 * Process MantisBT bug links.
+	 * @param array $block
+	 * @return array
+	 */
+	protected function inlineBugLink( $block ) {
+		$t_pattern = $this->getBugAndBugnotePattern( $this->bug_link_tag );
+		if( preg_match( $t_pattern, $block['text'], $t_matches ) ) {
+			$t_bug_id = (int)$t_matches[1];
+			if( bug_exists( $t_bug_id ) ) {
+				return array(
+					'extent' => strlen( $t_matches[0] ) - strlen( $this->bug_link_tag ),
+					'element' => array(
+						'rawHtml' => string_get_bug_view_link( $t_bug_id ),
+						'allowRawHtmlInSafeMode' => true,
+					),
+				);
+			}
+		}
+	}
+
+	/**
+	 * Process MantisBT bugnote links.
+	 * @param array $block
+	 * @return array
+	 */
+	protected function inlineBugnoteLink( $block ) {
+		$t_pattern = $this->getBugAndBugnotePattern( $this->bugnote_link_tag );
+		if( preg_match( $t_pattern, $block['text'], $t_matches ) ) {
+			$t_bugnote_id = (int)$t_matches[1];
+			# TODO check access as in string_process_bugnote_link()
+			if( bugnote_exists( $t_bugnote_id ) ) {
+				$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
+				return array(
+					'extent' => strlen( $t_matches[0] ) - strlen( $this->bugnote_link_tag ),
+					'element' => array(
+						'rawHtml' => string_get_bugnote_view_link( $t_bug_id, $t_bugnote_id ),
+						'allowRawHtmlInSafeMode' => true,
+					),
+				);
+
+			}
+		}
+	}
+
+		/**
 	 * Customize the blockFencedCodeComplete method
 	 *
 	 * @param array $block A block-level element
