@@ -1357,7 +1357,14 @@ if( 7 == $t_install_state ) {
 <?php } else { ?>
 		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
 		</span>
-<?php } ?>
+<?php } 
+
+	if ( ! touch('./install.done') ) {
+?>
+	<p class="red bolder">Please create a file named '/admin/install.done' or delete the admin folder!</p>
+<?php
+	}
+?>
 	</td>
 	<?php print_test_result( GOOD ); ?>
 </tr>
