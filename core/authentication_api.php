@@ -241,9 +241,9 @@ function auth_credential_page( $p_query_string, $p_user_id = null, $p_username =
  * @param string $p_username The username
  * @return string The authenticator page with query string.
  */
-function auth_authenticator_page( $p_query_string, $p_user_id = null, $p_username = '' ) {
+function auth_authenticator_page( $p_user_id = null, $p_username = '' ) {
 	$t_auth_flags = auth_flags( $p_user_id, $p_username );
-	return $t_auth_flags->getAuthenticatorPage( $p_query_string );
+	return $t_auth_flags->getAuthenticatorPage();
 }
 
 /**
