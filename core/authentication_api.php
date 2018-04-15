@@ -1194,7 +1194,7 @@ function auth_http_is_logout_pending() {
  * @return boolean
  * @access public
  */
-function authentiator_autoprov_capable() {
+function authenticator_autoprov_capable() {
 	$t_auth_flags = auth_flags();
 	return $t_auth_flags->getAutoprovisionCapability();
 }
