@@ -811,8 +811,8 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
  * @return string 16 character random password
  * @access public
  */
-function auth_generate_random_password() {
-	return crypto_generate_uri_safe_nonce( 16 );
+function auth_generate_random_password($length=16) {
+	return crypto_generate_uri_safe_nonce( $length );
 }
 
 /**
