@@ -206,7 +206,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
-	<form id="login-form" method="post" action="<?php echo auth_authenticator_page(); ?>">
+	<form id="login-form" method="post" action="<?php echo auth_authenticator_page($t_user_id, $t_username); ?>">
 		<fieldset>
 
 			<?php
