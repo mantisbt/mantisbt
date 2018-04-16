@@ -1,3 +1,0 @@
-<If "-f %{DOCUMENT_ROOT}.'/admin/install.done'">
-    Require all denied
-</If>
