@@ -87,7 +87,7 @@ if( is_blank( $t_username ) ) {
 # if the plugin provides autoprovisioning, than we can also redirect to the plugin page
 #
 $t_user_id = auth_get_user_id_from_login_name( $t_username );
-if( ( $t_user_id !== false || authenticator_autoprov_capable() ) && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_CREDENTIAL ) {
+if( ( $t_user_id !== false || auth_can_auto_provision() ) && auth_credential_page( '', $t_user_id ) != AUTH_PAGE_CREDENTIAL ) {
 	$t_query_args = array(
 		'username' => $t_username,
         'cookie_error' => $f_cookie_error,

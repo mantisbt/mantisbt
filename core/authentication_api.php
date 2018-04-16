@@ -806,13 +806,14 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 }
 
 /**
- * Generate a random 16 character password.
+ * Generate a random password. If no lenth is supplied, than the default value of 16 will be used.
  * @todo create memorable passwords?
- * @return string 16 character random password
+ * @param int $p_length	Requested password length
+ * @return string random password
  * @access public
  */
-function auth_generate_random_password($length=16) {
-	return crypto_generate_uri_safe_nonce( $length );
+function auth_generate_random_password($p_length=16) {
+	return crypto_generate_uri_safe_nonce( $p_length );
 }
 
 /**
@@ -1194,7 +1195,7 @@ function auth_http_is_logout_pending() {
  * @return boolean
  * @access public
  */
-function authenticator_autoprov_capable() {
+function auth_can_auto_provision() {
 	$t_auth_flags = auth_flags();
 	return $t_auth_flags->getAutoprovisionCapability();
 }
