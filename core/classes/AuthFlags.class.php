@@ -138,7 +138,7 @@ class AuthFlags {
 
 	/**
 	 * Indicates the autoprovisioning capability of the plugin
-	 * @var bool|false
+	 * @var bool
 	 */
 	private $autoprovision_capable = false;
 
