@@ -683,7 +683,7 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
 
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_bug_id );
-	$t_opt[] = user_get_name( $p_user_id );
+	$t_opt[] = user_get_username( $p_user_id );
 
 	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, array( $p_user_id ) );
 }
@@ -1485,7 +1485,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_sender_id = auth_get_current_user_id();
-	$t_sender = user_get_name( $t_sender_id );
+	$t_sender = user_get_username( $t_sender_id );
 
 	$t_subject = email_build_subject( $p_bug_id );
 	$t_date = date( config_get( 'normal_date_format' ) );
@@ -1534,7 +1534,7 @@ function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_remo
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_sender_id = auth_get_current_user_id();
-	$t_sender = user_get_name( $t_sender_id );
+	$t_sender = user_get_username( $t_sender_id );
 
 	$t_subject = email_build_subject( $p_bug_id );
 	$t_date = date( config_get( 'normal_date_format' ) );
@@ -1677,7 +1677,7 @@ function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking,
 
 	$t_private = ( $p_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
 
-	$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $p_bugnote->reporter_id ) .
+	$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_username( $p_bugnote->reporter_id ) .
 		$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
 		$t_time_tracking . ' ' . $t_bugnote_link;
 
@@ -1805,7 +1805,7 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 				$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
 
 				$t_message .= $t_date_added . ': ';
-				$t_message .= user_get_name( $t_sponsorship->user_id );
+				$t_message .= user_get_username( $t_sponsorship->user_id );
 				$t_message .= ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')' . " \n";
 			}
 		}
@@ -1885,13 +1885,13 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	if( access_compare_level( $t_user_access_level, config_get( 'view_handler_threshold' ) ) ) {
 		if( 0 != $t_row['handler_id'] ) {
-			$t_bug_data['email_handler'] = user_get_name( $t_row['handler_id'] );
+			$t_bug_data['email_handler'] = user_get_username( $t_row['handler_id'] );
 		} else {
 			$t_bug_data['email_handler'] = '';
 		}
 	}
 
-	$t_bug_data['email_reporter'] = user_get_name( $t_row['reporter_id'] );
+	$t_bug_data['email_reporter'] = user_get_username( $t_row['reporter_id'] );
 	$t_bug_data['email_project_id'] = $t_row['project_id'];
 	$t_bug_data['email_project'] = project_get_field( $t_row['project_id'], 'name' );
 
