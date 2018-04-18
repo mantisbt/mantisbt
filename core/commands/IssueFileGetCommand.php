@@ -68,7 +68,6 @@ class IssueFileGetCommand extends Command {
 		$t_file_id = $this->query( 'file_id' );
 		$t_attachments = file_get_visible_attachments( $this->issue_id );
 		$t_matching_attachments = array();
-		$t_mantis_path = config_get_global( 'path' );
 		foreach( $t_attachments as $t_attachment ) {
 			if( $t_file_id != null && $t_file_id != $t_attachment['id'] ) {
 				continue;

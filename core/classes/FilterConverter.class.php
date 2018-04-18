@@ -90,7 +90,6 @@ class FilterConverter {
 	 */
 	private function filterCriteriaToJson( $p_criteria, $p_project_id ) {
 		$t_criteria = $p_criteria;
-		$p_lang = $this->lang;
 	
 		$this->renameField( $t_criteria, FILTER_PROPERTY_HANDLER_ID, 'handler' );
 		$this->renameField( $t_criteria, FILTER_PROPERTY_REPORTER_ID, 'reporter' );

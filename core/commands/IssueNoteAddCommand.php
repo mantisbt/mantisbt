@@ -315,9 +315,6 @@ class IssueNoteAddCommand extends Command {
 			$this->files = array();
 		}
 
-		$t_files_invalid_fields = array();
-		$t_files_required_fields = array();
-
 		$t_files_required_fields = array( 'name', 'tmp_name' );
 		foreach( $this->files as $t_file ) {
 			foreach( $t_files_required_fields as $t_field ) {

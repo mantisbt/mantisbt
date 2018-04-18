@@ -2226,7 +2226,7 @@ function print_filter_values_project_id( array $p_filter ) {
 		$t_first_flag = true;
 		foreach( $t_filter[FILTER_PROPERTY_PROJECT_ID] as $t_current ) {
 			echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECT_ID, '[]" value="', string_attribute( $t_current ), '" />';
-			$t_this_name = '';
+
 			if( META_FILTER_CURRENT == $t_current ) {
 				$t_this_name = '[' . lang_get( 'current' ) . ']';
 			} else {
