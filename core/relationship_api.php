@@ -197,7 +197,7 @@ if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.
 /**
  * Ensure that specified relationship type is valid.
  *
- * @param integer $p_retlationship_type The relationship type id.
+ * @param integer $p_relationship_type The relationship type id.
  * @return void
  */
 function relationship_type_ensure_valid( $p_relationship_type ) {

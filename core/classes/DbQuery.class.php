@@ -390,6 +390,7 @@ class DbQuery {
 	 * to final ADOdb parameter syntax.
 	 * Will convert all labeled ":xxx", and anonymous "$n" parameters, and build
 	 * a values array suitable for ADOdb.
+	 * @param integer $p_counter_start
 	 * @return integer	Number of parameters created
 	 */
 	protected function process_bind_params( $p_counter_start = 0) {
@@ -877,7 +878,6 @@ class DbQuery {
 	 * Creates a string construction for a case-insensitive LIKE expression
 	 * This is an alias for sql_like() with the force_ci parameter set to true.
 	 * @param string $p_alias		A valid sql column identifier
-	 * @param string $p_pattern		Pattern string
 	 * @param string $p_escape		Escape character
 	 * @return string	Constructed string to be added to query
 	 */

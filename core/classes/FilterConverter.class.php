@@ -363,6 +363,7 @@ class FilterConverter {
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
 	 * @param string $p_field     The field name in the criteria array.
+	 * @param integer $p_project_id Integer representing project id.
 	 * @return void
 	 */
 	private function convertVersionArrayToJson( &$p_criteria, $p_field, $p_project_id ) {
@@ -391,7 +392,6 @@ class FilterConverter {
 	 * Convert sort order from internal to API format.
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
-	 * @param string $p_field     The field name in the criteria array.
 	 * @return void
 	 */
 	private function convertSortOrder( &$p_criteria ) {
@@ -573,7 +573,6 @@ class FilterConverter {
 	 * Convert hide status from internal to API format.
 	 *
 	 * @param array  $p_criteria  The criteria to be updated.
-	 * @param string $p_field     The field name in the criteria array.
 	 * @return void
 	 */
 	private function convertHideStatusToJson( &$p_criteria ) {
