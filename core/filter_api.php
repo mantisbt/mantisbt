@@ -2913,16 +2913,6 @@ function filter_db_get_name( $p_filter_id ) {
 }
 
 /**
- * Check if the specified filter id exists.
- *
- * @return true: exists, false: otherwise.
- */
-function filter_exists( $p_filter_id ) {
-	$t_filter = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
-	return is_array( $t_filter );
-}
-
-/**
  * Check if the current user has permissions to delete the stored query
  * @param integer $p_filter_id Filter id.
  * @param integer|null User id or null for logged in user.
