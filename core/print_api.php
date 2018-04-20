@@ -1248,7 +1248,7 @@ function print_custom_field_projects_list( $p_field_id ) {
  * @return void
  */
 function print_plugin_priority_list( $p_priority ) {
-	if( $p_priority < 1 && $p_priority > 5 ) {
+	if( $p_priority < 1 || $p_priority > 5 ) {
 		echo '<option value="', $p_priority, '" selected="selected">', $p_priority, '</option>';
 	}
 
