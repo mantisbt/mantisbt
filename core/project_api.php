@@ -60,6 +60,8 @@ $g_cache_project = array();
 $g_cache_project_missing = array();
 $g_cache_project_all = false;
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Checks if there are no projects defined.
  * @return boolean true if there are no projects defined, false otherwise.
@@ -110,11 +112,10 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[(int)$p_project_id] = true;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_project_id );
-			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
-		} else {
-			return false;
+			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, array( $p_project_id ) );
 		}
+
+		return false;
 	}
 
 	$t_row = db_fetch_array( $t_result );

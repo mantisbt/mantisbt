@@ -25,6 +25,8 @@
 $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_projects_get' );
 	$g_app->get( '/', 'rest_projects_get' );
+	$g_app->get( '/{id}', 'rest_projects_get' );
+	$g_app->get( '/{id}/', 'rest_projects_get' );
 });
 
 /**
@@ -36,10 +38,17 @@ $g_app->group('/projects', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_project_id = ALL_PROJECTS;
+	} else {
+		$t_project_id = (int)$t_project_id;
+	}
+
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 
-	$t_project_ids = user_get_all_accessible_projects( $t_user_id, /* disabled */ false );
+	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $t_project_id );
 	$t_projects = array();
 
 	foreach( $t_project_ids as $t_project_id ) {
