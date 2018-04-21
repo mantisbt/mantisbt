@@ -3096,6 +3096,8 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 		if( !$t_filter_obj ) {
 			continue;
 		}
+
+		$t_row = filter_get_row( $t_filter_id );
 		$t_row['criteria'] = $t_filter_obj;
 		$t_row['url'] = filter_get_url( $t_filter_obj );
 		$t_filter_data[$t_filter_name] = $t_row;
