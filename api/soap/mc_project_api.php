@@ -900,7 +900,7 @@ function mci_project_categories( $p_project_id ) {
 
 		$t_default_handler_id = (int)$t_category['user_id'];
 		if( $t_default_handler_id != 0 ) {
-			$t_result['default_handler'] = mci_user_get( $t_default_handler_id );
+			$t_result['default_handler'] = mci_account_get_array_by_id( $t_default_handler_id );
 		}
 
 		$t_results[] = $t_result;
