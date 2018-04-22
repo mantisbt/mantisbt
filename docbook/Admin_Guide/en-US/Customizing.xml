@@ -1087,6 +1087,16 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 							<entry>Prints one entry in the Roadmap</entry>
 							<entry>None</entry>
 						</row>
+						<row>
+							<entry>custom_function_default_changelog_include_issue( $p_issue_id )</entry>
+							<entry>Determines whether the specified issue should be included in the Change Log or not.</entry>
+							<entry>True to include, False to exclude</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 )</entry>
+							<entry>Prints one entry in the Change Log</entry>
+							<entry>None</entry>
+						</row>
 					</tbody>
 				</tgroup>
 			</informaltable>
