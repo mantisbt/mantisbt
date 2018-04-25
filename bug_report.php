@@ -69,6 +69,10 @@ $t_clone_info = array(
 
 if( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
+
+	# User can view the master bug
+	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_master_bug_id );
+
 	if( bug_is_readonly( $f_master_bug_id ) ) {
 		error_parameters( $f_master_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );

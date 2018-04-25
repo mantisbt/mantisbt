@@ -89,6 +89,9 @@ if( $f_master_bug_id > 0 ) {
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 
+	# User can view the master bug
+	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_master_bug_id );
+
 	$t_bug = bug_get( $f_master_bug_id, true );
 
 	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
