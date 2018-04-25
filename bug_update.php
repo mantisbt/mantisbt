@@ -379,7 +379,7 @@ if( $t_bug_note->note ||
 if( $t_bug_note->note &&
 	config_get( 'reassign_on_feedback' ) &&
 	$t_existing_bug->status == config_get( 'bug_feedback_status' ) &&
-	$t_updated_bug->status != $t_existing_bug->status &&
+	$t_updated_bug->status == $t_existing_bug->status &&
 	$t_updated_bug->handler_id != $t_current_user_id &&
 	$t_updated_bug->reporter_id == $t_current_user_id
 ) {
