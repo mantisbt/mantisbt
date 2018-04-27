@@ -64,7 +64,7 @@ $g_cache_file_count = array();
  */
 function file_attach_files( $p_bug_id, $p_files ) {
 	if( $p_files === null || count( $p_files ) == 0 ) {
-		return;
+		return array();
 	}
 
 	$t_file_infos = array();
