@@ -612,6 +612,7 @@ class FilterConverter {
 		unset( $p_criteria['_version'] );
 		unset( $p_criteria['_source_query_id'] );
 		unset( $p_criteria['_view_type'] );
+		unset( $p_criteria['_filter_id'] );
 	}
 
 	/**
