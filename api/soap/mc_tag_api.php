@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Retrieves all tags, unless the users
  *
