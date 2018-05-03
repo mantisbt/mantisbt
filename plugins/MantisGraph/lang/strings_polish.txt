@@ -39,6 +39,7 @@
  * @file
  *
  * @author BeginaFelicysym
+ * @author Stojex
  * @author Woytecr
  */
 
@@ -80,3 +81,6 @@ $s_plugin_MantisGraph_period_year_to_date = 'Rok do daty';
 $s_plugin_MantisGraph_period_select = 'Wybrane daty';
 $s_plugin_MantisGraph_period_last_year = 'Poprzedni rok';
 $s_plugin_MantisGraph_graph_page = 'Wykres historii błędów';
+$s_plugin_MantisGraph_graph_topdev = 'Najlepsi Wykonawcy według Rozwiązanych zgłoszeń';
+$s_plugin_MantisGraph_graph_opendev = 'Wykonawcy według Otwartych zgłoszeń';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Najlepsi Zgłaszający według Rozwiązanych zgłoszeń';
