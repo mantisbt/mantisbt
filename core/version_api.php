@@ -42,6 +42,8 @@ require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Version Data Structure Definition
  */
@@ -101,20 +103,26 @@ class VersionData {
 	 * @private
 	 */
 	public function __set( $p_name, $p_value ) {
+		$t_value = $p_value;
+
 		switch( $p_name ) {
 			case 'date_order':
 				if( !is_numeric( $p_value ) ) {
 					if( $p_value == '' ) {
-						$p_value = date_get_null();
+						$t_value = date_get_null();
 					} else {
-						$p_value = strtotime( $p_value );
-						if( $p_value === false ) {
-							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
+						$t_value = strtotime( $p_value );
+						if( $t_value === false ) {
+							throw new ClientException(
+								"Invalid date format '$p_value'",
+								ERROR_INVALID_DATE_FORMAT,
+								array( $p_value ) );
 						}
 					}
 				}
 		}
-		$this->$p_name = $p_value;
+
+		$this->$p_name = $t_value;
 	}
 
 	/**
@@ -180,11 +188,13 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 		$g_cache_versions[$c_version_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_version_id );
-			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
-		} else {
-			return false;
+			throw new ClientException(
+				"Version with id $p_version_id not found",
+				ERROR_VERSION_NOT_FOUND,
+				array( $p_version_id ) );
 		}
+
+		return false;
 	}
 
 	$g_cache_versions[$c_version_id] = $t_row;
@@ -222,8 +232,10 @@ function version_is_unique( $p_version, $p_project_id = null ) {
  */
 function version_ensure_exists( $p_version_id ) {
 	if( !version_exists( $p_version_id ) ) {
-		error_parameters( $p_version_id );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Version with id '$p_version_id' not found",
+			ERROR_VERSION_NOT_FOUND,
+			array( $p_version_id ) );
 	}
 }
 
@@ -236,7 +248,10 @@ function version_ensure_exists( $p_version_id ) {
  */
 function version_ensure_unique( $p_version, $p_project_id = null ) {
 	if( !version_is_unique( $p_version, $p_project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		throw new ClientException(
+			"Version '$p_version' already exists",
+			ERROR_VERSION_DUPLICATE,
+			array( $p_version ) );
 	}
 }
 
@@ -289,7 +304,11 @@ function version_update( VersionData $p_version_info ) {
 
 	# check for duplicates
 	if( ( mb_strtolower( $t_old_version_name ) != mb_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		$t_version = $p_version_info->version;
+		throw new ClientException(
+			"Version '$t_version' already exists",
+			ERROR_VERSION_DUPLICATE,
+			array( $t_version ) );
 	}
 
 	$c_version_id = (int)$p_version_info->id;
@@ -626,9 +645,10 @@ function version_get_field( $p_version_id, $p_field_name ) {
 				return $t_row[$p_field_name];
 		}
 	} else {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-		return '';
+		throw new ClientException(
+			"Field '$p_field_name' not found",
+			ERROR_DB_FIELD_NOT_FOUND,
+			array( $p_field_name ) );
 	}
 }
 
