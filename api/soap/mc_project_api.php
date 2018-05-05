@@ -443,8 +443,6 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  * @return integer  The id of the created version.
  */
 function mc_project_version_add( $p_username, $p_password, stdClass $p_version ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -454,54 +452,28 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	$p_version = ApiObjectFactory::objectToArray( $p_version );
 
 	$t_project_id = $p_version['project_id'];
-	$g_project_override = $t_project_id;
-	$t_name = $p_version['name'];
-	$t_released = $p_version['released'];
-	$t_description = $p_version['description'];
-	$t_date_order =  $p_version['date_order'];
-	if( is_blank( $t_date_order ) ) {
-		$t_date_order = null;
-	} else {
-		$t_date_order = strtotime( $t_date_order );
-	}
-
-	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
-
-	if( is_blank( $t_project_id ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
-	}
-
-	if( !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
-	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+		),
+		'payload' => array(
+			'name' => $p_version['name'],
+			'description' => $p_version['description'],
+			'released' => $p_version['released'],
+			'obsolete' => isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false,
+			'timestamp' => $p_version['date_order'],
+		)
+	);
 
-	if( is_blank( $t_name ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Mandatory field "name" was missing' );
-	}
+	$t_command = new VersionAddCommand( $t_data );
+	$t_result = $t_command->execute();
 
-	if( !version_is_unique( $t_name, $t_project_id ) ) {
-		return ApiObjectFactory::faultConflict( 'Version exists for project' );
-	}
-
-	if( $t_released === false ) {
-		$t_released = VERSION_FUTURE;
-	} else {
-		$t_released = VERSION_RELEASED;
-	}
-
-	if( version_add( $t_project_id, $t_name, $t_released, $t_description, $t_date_order, $t_obsolete ) ) {
-		return version_get_id( $t_name, $t_project_id );
-	}
-
-	return null;
+	return $t_result['id'];
 }
 
 /**
