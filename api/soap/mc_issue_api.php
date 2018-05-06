@@ -25,6 +25,8 @@
 
 require_once( dirname( __FILE__ ) . '/mc_core.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Check if an issue with the given id exists.
  *
