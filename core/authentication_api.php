@@ -82,7 +82,7 @@ $g_cache_current_user_id = NO_USER;
  * @return AuthFlags The auth flags object to use.
  */
 function auth_flags( $p_user_id = null, $p_username = '' ) {
-	if( is_null( $p_user_id ) ) {
+	if( !$p_user_id ) {
 		# If user id is not provided and user is not authenticated return default flags.
 		# Otherwise, we can get into a loop as in #22740
 		if( !auth_is_user_authenticated() ) {
