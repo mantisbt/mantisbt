@@ -176,7 +176,7 @@ function auth_signup_access_level() {
  * @return bool true: enabled; false: otherwise.
  */
 function auth_anonymous_enabled() {
-	return config_get_global( 'allow_anonymous_login' );
+	return config_get_global( 'allow_anonymous_login' ) && auth_anonymous_account();
 }
 
 /**
