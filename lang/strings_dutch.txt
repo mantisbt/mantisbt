@@ -1238,6 +1238,8 @@ $s_month_october = 'oktober';
 $s_month_november = 'november';
 $s_month_december = 'december';
 $s_timeline_issue_created = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> aangemaakt';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> heeft bestand <em>%3$s</em> toegevoegd aan melding <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> heeft het bestand <em>%3$s</em> verwijderd van de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> heeft gereageerd op de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> volgt de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> volgt de melding <span class="issue_id">%2$s</span> niet meer';
