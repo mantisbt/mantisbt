@@ -498,15 +498,11 @@ function install_stored_filter_migrate() {
 		# details about the error and abort the upgrade.
 		# Let the user investigate and fix the problem before trying again.
 		if( $t_filter_arr === null ) {
-			printf('<p><br>Filter id %d %s'
-				. 'could not be converted because its data is not valid. '
-				. 'Fix the problem by manually repairing or deleting the '
-				. 'offending %s row as appropriate, then try again.'
-				. '<br>Error: <em>%s</em> in the string below</p>'
-				. '<pre>%s</pre>',
-				$t_row['id'],
-				$t_row['name'] ? "('${t_row['name']}') " : '',
-				db_get_table( 'filters' ),
+			$t_id = $t_row['id'];
+			$t_name = $t_row['name'];
+			install_print_unserialize_error(
+				sprintf( "Filter id $t_id %s", $t_name ? "('$t_name') " : '' ),
+				'filters',
 				$t_error,
 				$t_setting_arr[1]
 			);
@@ -680,18 +676,11 @@ function install_check_config_serialization() {
 			$t_config = safe_unserialize( $value );
 		}
 		catch( ErrorException $e ) {
-			printf('<p><br>Config "%s" for project id %d, user id %d '
-				. 'could not be converted because its data is not valid. '
-				. 'Fix the problem by manually repairing or deleting the '
-				. 'offending %s row as appropriate, then try again.'
-				. '<br>Error: <em>%s</em> in the string below</p>'
-				. '<pre>%s</pre>',
-				$t_row['config_id'],
-				$t_row['project_id'],
-				$t_row['user_id'],
-				db_get_table( 'config' ),
+			install_print_unserialize_error(
+				"Config '$config_id' for project id $project_id, user id $user_id",
+				'config',
 				$e->getMessage(),
-				$t_row['value']
+				$value
 			);
 
 			return 1; # Fatal: invalid data found in config table
@@ -737,14 +726,9 @@ function install_check_token_serialization() {
 					continue;
 				}
 
-				printf('<p><br>Token id %d '
-					. 'could not be converted because its data is not valid. '
-					. 'Fix the problem by manually repairing or deleting the '
-					. 'offending %s row as appropriate, then try again.'
-					. '<br>Error: <em>%s</em> in the string below</p>'
-					. '<pre>%s</pre>',
-					$t_id,
-					db_get_table( 'tokens' ),
+				install_print_unserialize_error(
+					"Token id $t_id",
+					'tokens',
 					$e->getMessage(),
 					$t_value
 				);
@@ -798,4 +782,26 @@ function install_gravatar_plugin() {
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
+}
+
+/**
+ * Print a friendly error message following an unserialize() error.
+ *
+ * @param string $p_description Description to identify the offending row
+ * @param string $p_table Mantis table name
+ * @param string $p_error Error message
+ * @param string $p_value The data that could not be unserialized
+ * @return void
+ */
+function install_print_unserialize_error( $p_description, $p_table, $p_error, $p_value ) {
+	printf('<p><br>%s could not be converted because its data is not valid. '
+		. 'Fix the problem by manually repairing or deleting the '
+		. 'offending %s row as appropriate, then try again.'
+		. '<br>Error: <em>%s</em> occured because of the string below</p>'
+		. '<pre>%s</pre>',
+		$p_description,
+		db_get_table( $p_table ),
+		$p_error,
+		$p_value
+	);
 }
