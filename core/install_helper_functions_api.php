@@ -474,10 +474,18 @@ function install_stored_filter_migrate() {
 				case 'v6':
 				case 'v7':
 				case 'v8':
-					$t_filter_arr = unserialize( $t_setting_arr[1] );
+					try {
+						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
+					}
+					catch( ErrorException $e ) {
+						# Set to null to have a consistent error value
+						$t_filter_arr = null;
+						$t_error = $e->getMessage();
+					}
 					break;
 				default:
 					$t_filter_arr = json_decode( $t_setting_arr[1], /* assoc array */ true );
+					$t_error = 'invalid JSON';
 			}
 		} else {
 			db_param_push();
@@ -486,9 +494,23 @@ function install_stored_filter_migrate() {
 			continue;
 		}
 
-		# serialized or json encoded data in filter table is invalid - abort upgrade as this should not be possible
-		# so we should investigate and fix underlying data issue first if necessary
-		if( $t_filter_arr === false ) {
+		# Serialized or json encoded data in filter table is invalid. Provide
+		# details about the error and abort the upgrade.
+		# Let the user investigate and fix the problem before trying again.
+		if( $t_filter_arr === null ) {
+			printf('<p><br>Filter id %d %s'
+				. 'could not be converted because its data is not valid. '
+				. 'Fix the problem by manually repairing or deleting the '
+				. 'offending %s row as appropriate, then try again.'
+				. '<br>Error: <em>%s</em> in the string below</p>'
+				. '<pre>%s</pre>',
+				$t_row['id'],
+				$t_row['name'] ? "('${t_row['name']}') " : '',
+				db_get_table( 'filters' ),
+				$t_error,
+				$t_setting_arr[1]
+			);
+
 			return 1; # Fatal: invalid data found in filters table
 		}
 
