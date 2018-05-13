@@ -726,13 +726,28 @@ function install_check_token_serialization() {
 		if ( $t_value === null ) {
 			$t_token = null;
 		} else {
-			$t_token = @unserialize( $t_value );
-			if( $t_token === false ) {
-				# If user hits a page other than install, tokens may be created using new code.
+			try {
+				$t_token = safe_unserialize( $t_value );
+			}
+			catch( ErrorException $e ) {
+				# If user hits a page other than install, JSON-encoded tokens
+				# may have been created using new code; just skip them.
 				$t_token = json_decode( $t_value );
 				if( $t_token !== null ) {
 					continue;
 				}
+
+				printf('<p><br>Token id %d '
+					. 'could not be converted because its data is not valid. '
+					. 'Fix the problem by manually repairing or deleting the '
+					. 'offending %s row as appropriate, then try again.'
+					. '<br>Error: <em>%s</em> in the string below</p>'
+					. '<pre>%s</pre>',
+					$t_id,
+					db_get_table( 'tokens' ),
+					$e->getMessage(),
+					$t_value
+				);
 
 				return 1; # Fatal: invalid data found in tokens table
 			}
