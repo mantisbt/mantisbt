@@ -676,8 +676,24 @@ function install_check_config_serialization() {
 		$user_id = (int)$t_row['user_id'];
 		$value = $t_row['value'];
 
-		$t_config = unserialize( $value );
-		if( $t_config === false ) {
+		try {
+			$t_config = safe_unserialize( $value );
+		}
+		catch( ErrorException $e ) {
+			printf('<p><br>Config "%s" for project id %d, user id %d '
+				. 'could not be converted because its data is not valid. '
+				. 'Fix the problem by manually repairing or deleting the '
+				. 'offending %s row as appropriate, then try again.'
+				. '<br>Error: <em>%s</em> in the string below</p>'
+				. '<pre>%s</pre>',
+				$t_row['config_id'],
+				$t_row['project_id'],
+				$t_row['user_id'],
+				db_get_table( 'config' ),
+				$e->getMessage(),
+				$t_row['value']
+			);
+
 			return 1; # Fatal: invalid data found in config table
 		}
 
