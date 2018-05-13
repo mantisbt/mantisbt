@@ -667,20 +667,20 @@ function install_check_config_serialization() {
 
 	$t_result = db_query( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$config_id = $t_row['config_id'];
-		$project_id = (int)$t_row['project_id'];
-		$user_id = (int)$t_row['user_id'];
-		$value = $t_row['value'];
+		$t_config_id = $t_row['config_id'];
+		$t_project_id = (int)$t_row['project_id'];
+		$t_user_id = (int)$t_row['user_id'];
+		$t_value = $t_row['value'];
 
 		try {
-			$t_config = safe_unserialize( $value );
+			$t_config = safe_unserialize( $t_value );
 		}
 		catch( ErrorException $e ) {
 			install_print_unserialize_error(
-				"Config '$config_id' for project id $project_id, user id $user_id",
+				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
 				'config',
 				$e->getMessage(),
-				$value
+				$t_value
 			);
 
 			return 1; # Fatal: invalid data found in config table
@@ -690,7 +690,7 @@ function install_check_config_serialization() {
 
 		db_param_push();
 		$t_query = 'UPDATE {config} SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
-		db_query( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
+		db_query( $t_query, array( $t_json_config, $t_config_id, $t_project_id, $t_user_id ) );
 	}
 
 	# flush config here as we've changed the format of the configuration table
