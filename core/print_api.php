@@ -220,7 +220,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		$t_email = user_get_email( $p_user_id );
-		print_email_link_with_subject( $t_email, $t_username, $t_name, $p_bug_id );
+		print_email_link_with_subject( $t_email, $t_name, $t_username, $p_bug_id );
 	} else {
 		$t_name = string_attribute( $t_name );
 		echo '<span style="text-decoration: line-through">';
