@@ -42,6 +42,7 @@
  * @author Charmed94
  * @author Macofe
  * @author Milicevic01
+ * @author Nikola Smolenski
  * @author Obsuser
  * @author Rancher
  * @author Srdjan m
@@ -56,7 +57,7 @@ $s_actiongroup_menu_copy = 'Копирај';
 $s_actiongroup_menu_assign = 'Додели';
 $s_actiongroup_menu_close = 'Затвори';
 $s_actiongroup_menu_delete = 'Обриши';
-$s_actiongroup_menu_resolve = 'Реши';
+$s_actiongroup_menu_resolve = 'Разреши';
 $s_actiongroup_menu_update_priority = 'Ажурирај важност';
 $s_actiongroup_menu_update_status = 'Ажурирај стање';
 $s_actiongroup_menu_update_severity = 'Ажурирај озбиљност';
@@ -169,7 +170,7 @@ $s_delete_group_bugs_button = 'Обриши проблеме';
 $s_move_group_bugs_button = 'Премести проблеме';
 $s_copy_group_bugs_button = 'Копирај проблеме';
 $s_assign_group_bugs_button = 'Додели проблеме';
-$s_resolve_group_bugs_button = 'Реши проблеме';
+$s_resolve_group_bugs_button = 'Разреши проблеме';
 $s_priority_group_bugs_button = 'Ажурирај важност';
 $s_status_group_bugs_button = 'Ажурирај стање';
 $s_category_group_bugs_button = 'Ажурирај категорију';
@@ -384,7 +385,7 @@ $s_bug_reopened_msg = 'Проблем је поново отворен.';
 $s_reopen_add_bugnote_title = 'Додавање белешке с разлогом за поновно отварање проблема';
 $s_bugnote_add_reopen_button = 'Додај белешку и поново отвори проблем';
 $s_resolved_bug_title = 'Решавање проблема';
-$s_resolved_bug_button = 'Реши проблем';
+$s_resolved_bug_button = 'Разреши проблем';
 $s_bug_resolved_msg = 'Проблем је решен. Испод напишите белешку.';
 $s_resolve_add_bugnote_title = 'Додавање белешке с разлогом за решавање проблема';
 $s_bugnote_add_resolve_button = 'Додај белешку';
