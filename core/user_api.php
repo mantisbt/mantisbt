@@ -997,8 +997,7 @@ function user_get_name( $p_user_id ) {
  * @return bool true to show, false otherwise.
  */
 function user_show_realname() {
-	return config_get( 'show_realname' ) == ON &&
-		access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+	return config_get( 'show_realname' ) == ON;
 }
 
 /**

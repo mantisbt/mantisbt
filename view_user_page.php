@@ -63,8 +63,10 @@ extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 	access_has_global_level( $u_access_level );
-$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
-$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
+
+$t_can_see_realname = $t_can_manage || user_show_realname() ||
+    access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+$t_can_see_email = $t_can_manage || access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB
@@ -99,7 +101,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 		</td>
 	</tr>
 	<?php
-		if( $t_can_manage || $t_can_see_email ) { ?>
+		if( $t_can_see_email ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'email' ) ?>
@@ -114,7 +116,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 			</tr>
 	<?php } ?>
 	<?php
-		if( $t_can_manage || $t_can_see_realname ) { ?>
+		if( $t_can_see_realname ) { ?>
 			<tr>
 			<th class="category">
 				<?php echo lang_get( 'realname' ) ?>
