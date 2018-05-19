@@ -1541,7 +1541,7 @@ class BugFilterQuery extends DbQuery {
 				$t_select = 'COALESCE(';
 				# Note: show_realname should only be set at global or all_projects
 				# Note: sort_by_last_name is not supported here
-				if( ON == config_get( 'show_realname' ) ) {
+				if( user_show_realname() ) {
 					$t_select .= 'NULLIF(' . $t_table_alias . '.realname, \'\'), ';
 				}
 				$t_select .= $t_table_alias . '.username, ';
