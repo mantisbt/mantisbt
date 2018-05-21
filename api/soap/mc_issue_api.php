@@ -488,7 +488,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 		}
 	}
 
-	return count( $t_custom_fields ) == 0 ? null : $t_custom_fields;
+	return $t_custom_fields;
 }
 
 /**
@@ -600,7 +600,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 		}
 	}
 
-	return (count( $t_relationships ) == 0 ? null : $t_relationships );
+	return $t_relationships;
 }
 
 /**
@@ -679,7 +679,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_result[] = $t_bugnote;
 	}
 
-	return count( $t_result ) == 0 ? null : $t_result;
+	return $t_result;
 }
 
 /**
@@ -1687,7 +1687,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	# Get notes - access checked as part of returning notes.
 	$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
 
-	# Get attachments - access checked as part of returning relationships
+	# Get relationships - access checked as part of returning relationships
 	$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
 
 	# Get custom fields - access checked as part of returning custom fields
