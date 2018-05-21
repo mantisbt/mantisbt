@@ -156,7 +156,7 @@ function log_print_to_page() {
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
 		$t_total_queries_count = 0;
-		$t_total_event_count = count( $g_log_events );
+		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
 
 
 		echo "<div class=\"space-10\"></div>";
