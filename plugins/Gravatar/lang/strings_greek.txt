@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Laki (لەکی)
+/** Greek (Ελληνικά)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,9 +38,8 @@
  * @ingroup Language
  * @file
  *
- * @author Hosseinblue
+ * @author Nikosgranturismogt
  */
 
-$s_plugin_format_config = 'تنظیمةل';
-$s_plugin_format_enabled = 'روشن/روشتا';
-$s_plugin_format_disabled = 'خاموش/کوور';
+$s_plugin_Gravatar_title = 'Άβαταρ μέσω του Gravatar';
+$s_plugin_Gravatar_description = 'Ένα πρόσθετο που δείχνει άβαταρ χρηστών βασισμένα στις διευθύνσεις ηλεκτρονικού ταχυδρομείων τους χρησιμοποιώνταν την υπηρεσία άβαταρ.';
