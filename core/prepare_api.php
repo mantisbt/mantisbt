@@ -74,18 +74,18 @@ function prepare_user_name( $p_user_id ) {
 	$t_username = user_get_username( $p_user_id );
 	$t_name = user_get_name( $p_user_id );
 	if( $t_username != $t_name ) {
-		$t_tooltip = ' title="' . string_attribute( $t_name ) . '"';
+		$t_tooltip = ' title="' . string_attribute( $t_username ) . '"';
 	} else {
 		$t_tooltip = '';
 	}
 
-	$t_username = string_display_line( $t_username );
+	$t_name = string_display_line( $t_name );
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+		return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
 	}
 
-	return '<del ' . $t_tooltip . '>' . $t_username . '</del>';
+	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';
 }
 
 /**
