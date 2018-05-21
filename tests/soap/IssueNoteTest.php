@@ -175,7 +175,7 @@ class IssueNoteTest extends SoapBase {
 
 		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertFalse( isset( $t_issue_with_note->notes ) );
+		$this->assertEquals( 0, count( $t_issue_with_note->notes ) );
 	}
 
 	/**
