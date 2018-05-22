@@ -1766,8 +1766,11 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 		}
 		$t_issue['resolution'] = $p_issue_data->resolution;
 
-		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $p_issue_data->id ) );
-		$t_issue['notes_count'] = count( mci_issue_get_notes( $p_issue_data->id ) );
+		$t_attachments = mci_issue_get_attachments( $p_issue_data->id );
+		$t_issue['attachments_count'] = $t_attachments === null ? 0 : count( $t_attachments );
+
+		$t_notes = mci_issue_get_notes( $p_issue_data->id );
+		$t_issue['notes_count'] = $t_notes === null ? 0 : count( $t_notes );
 
 		return $t_issue;
 }
