@@ -242,9 +242,6 @@ function layout_is_rtl() {
  * @return void
  */
 function layout_head_meta() {
-	# use the following meta to force IE use its most up to date rendering engine
-	echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />' . "\n";
-
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />' . "\n";
 }
 
