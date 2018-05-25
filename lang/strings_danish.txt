@@ -1232,6 +1232,8 @@ $s_month_october = 'oktober';
 $s_month_november = 'november';
 $s_month_december = 'december';
 $s_timeline_issue_created = '<span class="username">%1$s</span> oprettet fejlrapport <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> vedhæftede filen <em>%3$s</em> til fejlrapport <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> fjernede filen <em>%3$s</em> fra fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> kommenteret på fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> overvåger fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stoppede overvågning af fejlrapport <span class="issue_id">%2$s</span>';
