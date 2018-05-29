@@ -691,7 +691,7 @@ function relationship_get_id_from_api_name( $p_relationship_type_name ) {
 
 /**
  * return false if there are child bugs not resolved/closed
- * N.B. we don't check if the parent bug is read-only. This is because the answer of this function is indepedent from
+ * N.B. we don't check if the parent bug is read-only. This is because the answer of this function is independent from
  * the state of the parent bug itself.
  * @param integer $p_bug_id A bug identifier.
  * @return boolean

@@ -779,7 +779,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_user_id = auth_get_current_user_id();
-		# Select all projects accesible by the user
+		# Select all projects accessible by the user
 		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
 	} elseif( !is_array( $p_project_id ) ) {
 		$t_project_ids = array( $p_project_id );

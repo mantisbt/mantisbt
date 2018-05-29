@@ -288,7 +288,7 @@ function lang_get( $p_string, $p_lang = null ) {
 	#  language files actually *contain* English strings if none has been
 	#  defined in the correct language
 	# @todo thraxisp - not sure if this is still true. Strings from last language loaded
-	#      may still be in memeory if a new language is loaded.
+	#      may still be in memory if a new language is loaded.
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];

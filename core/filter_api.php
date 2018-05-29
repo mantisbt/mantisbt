@@ -558,7 +558,7 @@ function filter_ensure_fields( array $p_filter_arr ) {
 
 /**
  * A wrapper to compare filter version syntax
- * Note: Currently, filter versions hve this syntax: "vN",  * where N is a integer number.
+ * Note: Currently, filter versions have this syntax: "vN",  * where N is an integer number.
  * @param string $p_version1    First version number
  * @param string $p_version2    Second version number
  * @param string $p_operator    Comparison test, if provided. As expected by version_compare()
@@ -3567,11 +3567,11 @@ function filter_is_named_filter( $p_filter_id ) {
 }
 
 /**
- * Returns true if the filter is accesible by the user, which happens when the user
+ * Returns true if the filter is accessible by the user, which happens when the user
  * is the owner of the filter, or the filter is public.
  * @param integer $p_filter_id	Filter id
  * @param integer $p_user_id	User id
- * @return boolean	true if the filter is accesible by the user
+ * @return boolean	true if the filter is accessible by the user
  */
 function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
@@ -3630,7 +3630,7 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
  * This array includes all individual projects/subprojects that are in the search scope.
  * If ALL_PROJECTS were included directly, or indirectly, and the parameter $p_return_all_projects
  * is set to true, the value ALL_PROJECTS will be returned. Otherwise the array will be expanded
- * to all actual accesible projects
+ * to all actual accessible projects
  * @param array $p_filter                 Filter array
  * @param integer $p_project_id           Project id to use in filtering, if applicable by filter type
  * @param integer $p_user_id              User id to use as current user when filtering
@@ -3729,7 +3729,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 /**
  * Returns a filter array structure for the given filter_id
  * A default value can be provided to be used when the filter_id doesn't exists
- * or is not accesible
+ * or is not accessible
  *
  *  You may pass in any array as a default (including null) but if
  *  you pass in *no* default then an error will be triggered if the filter
@@ -3745,7 +3745,7 @@ function filter_get( $p_filter_id, array $p_default = null ) {
 
 	# This function checks for user access
 	$t_filter_string = filter_db_get_filter_string( $p_filter_id );
-	# If value is false, it either doesn't exists or is not accesible
+	# If value is false, it either doesn't exists or is not accessible
 	if( !$t_filter_string ) {
 		if( $t_trigger_error ) {
 			error_parameters( $p_filter_id );
@@ -3826,7 +3826,7 @@ function filter_update_source_properties( array $p_filter ) {
 	}
 	if( isset( $p_filter['_source_query_id'] ) && $t_filter_id != $p_filter['_source_query_id'] ) {
 		$t_source_query_id = $p_filter['_source_query_id'];
-		# check if filter id is a proper named filter, and is accesible
+		# check if filter id is a proper named filter, and is accessible
 		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
 			# replace filter with the referenced one
 			$t_new_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );

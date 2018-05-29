@@ -347,7 +347,7 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  *                                              - string: for a threshold option which will be evaluated
  *                                                 for each project context
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accesible projects
+ *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @param integer               $p_limit        Maximum number of results, default is 0 for all results
  * @return array                The filtered array of project ids
@@ -404,7 +404,7 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
  *                                              - string: for a threshold option which will be evaluated
  *                                                 for each project context
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accesible projects
+ *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @return boolean              True if user has the specified access level for any of the projects
  * @access public
