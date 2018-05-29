@@ -937,7 +937,7 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Build the query parts for the filter property "taget version"
+	 * Build the query parts for the filter property "target version"
 	 * @return void
 	 */
 	protected function build_prop_target_version() {
@@ -1185,11 +1185,11 @@ class BugFilterQuery extends DbQuery {
 		} else {
 			if( empty( $t_projects_can_view_tags ) ) {
 				# if can't view tags in any project, exit
-				log_event( LOG_FILTERING, 'tags query, no accesible projects ' );
+				log_event( LOG_FILTERING, 'tags query, no accessible projects ' );
 				return;
 			} else {
 				$t_tag_projects_clause = ' AND ' . $this->sql_in( '{bug}.project_id', $t_projects_can_view_tags );
-				log_event( LOG_FILTERING, 'tags query, accesible projects =  @P' . implode( ', @P', $t_projects_can_view_tags ) );
+				log_event( LOG_FILTERING, 'tags query, accessible projects =  @P' . implode( ', @P', $t_projects_can_view_tags ) );
 			}
 		}
 

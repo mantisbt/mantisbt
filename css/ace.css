@@ -8730,7 +8730,7 @@ input[type=radio].ace.disabled + .lbl::before {
 input[type=radio].ace @{lbl}::before {
 	border-radius:100%;
 	font-size: 34px;
-	font-family: Helvetica, Arial, "Sans-Serif";//looks better but incosistent
+	font-family: Helvetica, Arial, "Sans-Serif";//looks better but inconsistent
 	line-height: 13px;
 }
 */

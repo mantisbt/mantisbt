@@ -664,7 +664,7 @@ define( 'DROPZONE_HASH', 'sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=' )
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
-# Maximum number of bugs that are treated simutaneously in export procedures,
+# Maximum number of bugs that are treated simultaneously in export procedures,
 # to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
 define( 'EXPORT_BLOCK_SIZE', 500 );
 
