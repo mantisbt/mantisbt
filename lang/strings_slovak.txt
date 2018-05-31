@@ -43,6 +43,7 @@
  * @author Kusavica
  * @author Llucenic
  * @author Mikulas1
+ * @author Nathaniel.skywalker.888
  * @author Rattkin
  * @author Rudko
  * @author Teslaton
@@ -290,7 +291,7 @@ $s_current_password = 'Súčasné heslo';
 $s_access_level = 'Úroveň prístupu';
 $s_access_level_label = 'Úroveň prístupu';
 $s_update_user_button = 'Aktualizovať používateľa';
-$s_verify_warning = 'Informácie o Vašom účte boli overené. Vami obdržaná potvrdzujúca správa je odteraz neplatná.';
+$s_verify_warning = 'Informácie o vašom účte boli overené.';
 $s_verify_change_password = 'Musíte sem zadať svoje heslo pre obnovenie prihlásenia.';
 $s_api_token_name = 'Názov tokenu';
 $s_api_token_disclose_message = 'Token pre prístup k API';
@@ -692,7 +693,7 @@ $s_version_updated_msg = 'Verzia bola úspešne upravená...';
 $s_account_delete_protected_msg = 'Účet je chránený. Nie je možné zmazať tento účet.';
 $s_account_deleted_msg = 'Účet zmazaný...';
 $s_delete_account_sure_msg = 'Naozaj si prajete zmazať tento účet?';
-$s_notify_user = 'Upozorniť Užívateľa';
+$s_notify_user = 'Notifikovať používateľa o tejto zmene';
 $s_accounts_pruned_msg = 'Všetky účty, na ktoré sa nikto neprihlásil a sú staršie ako 1 týždeň boli odstránené';
 $s_prune_accounts_button = 'Vyčistiť';
 $s_confirm_account_pruning = 'Naozaj chcete odstrániť všetky staré účty, na ktoré sa doposial nikdo neprihlásil?';
@@ -852,10 +853,10 @@ $s_changed = 'Zmenené(h)';
 $s_viewing_bugs_title = 'Zobrazujú sa problémy';
 $s_updated = 'Aktualizácia';
 $s_sticky = 'Ukázať Fixované Problémy';
-$s_sort = 'Triediť podľa';
+$s_sort = 'Zoradiť podľa';
 $s_issue_id = 'Problém č.';
 $s_recently_visited = 'Naposledy Navštívené';
-$s_note_user_id = 'Poznámka Od';
+$s_note_user_id = 'Poznámka od';
 $s_filter_match_type = 'Typ zhody';
 $s_filter_match_all = 'Všetky podmienky';
 $s_filter_match_any = 'Akékoľvek podmienky';
@@ -870,7 +871,7 @@ $s_first = 'Prvý';
 $s_last = 'Posledný';
 $s_start_date_label = 'Dátum začatia:';
 $s_end_date_label = 'Dátum ukončenia:';
-$s_use_date_filters = 'Filter podľa užívateľa';
+$s_use_date_filters = 'Filtrovať podľa dátumu odoslania';
 $s_yes = 'ano';
 $s_no = 'nie';
 $s_open_filters = 'Zmena filtru';
@@ -879,10 +880,11 @@ $s_ok = 'OK';
 $s_select_all = 'Vybrať všetko';
 $s_use_query = 'Použiť filter';
 $s_delete_query = 'zrušiť filter';
-$s_query_deleted = 'Fiter zrušený';
+$s_query_deleted = 'Filter "%s" bol zrušený';
 $s_save_query = 'Uchovať terajší filter';
 $s_reset_query = 'Vynulovať filter';
 $s_query_name = 'Meno filtru';
+$s_query_name_label = 'Názov filtra';
 $s_query_exists = 'Zdá sa, že tento príslušný filter už existuje.';
 $s_query_dupe_name = 'Už existuje filter s takýmto názvom. Zvoľte prosím iný názov.';
 $s_query_blank_name = 'Nemôžete uložit filter bez mena. Prosím pomenujte ped uložením tento filter.';
@@ -890,6 +892,9 @@ $s_query_name_too_long = 'Nie je možné uložiť názov filtra s dĺžkou väč
 $s_query_store_error = 'Pri ukladaní tohto filtra došlo k chybe.';
 $s_open_queries = 'Správa filtrov';
 $s_query_delete_msg = 'Ste si istý, že si prajete zmazať tento filter?';
+$s_edit_filter = 'Upraviť filter';
+$s_owner = 'Vlastník';
+$s_update_filter = 'Aktualizovať filtes';
 $s_view_simple_link = 'Zobraziť Jednoducho';
 $s_product_build = 'Build produktu';
 $s_system_profile = 'Popis systému';

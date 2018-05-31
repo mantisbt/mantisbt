@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Atrol
  * @author Snævar
  * @author Sveinn í Felli
  */
@@ -658,7 +659,7 @@ $s_plugin_install = 'Setja upp';
 $s_plugin_upgrade = 'Uppfæra';
 $s_plugin_uninstall = 'Taka út';
 $s_plugin_uninstall_message = 'Ert þú viss um að þú viljir fjarlægja "%1$s" viðbótina?';
-$s_plugin_key_label = 'Lykill: \';
+$s_plugin_key_label = 'Lykill:';
 $s_plugin_key_met = 'forritsviðbótin er tilbúin';
 $s_plugin_key_unmet = 'óuppfylltar kerfiskröfur';
 $s_plugin_key_dated = 'úreltar kerfiskröfur';
