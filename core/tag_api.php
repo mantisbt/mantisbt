@@ -808,7 +808,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null) {
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );
 
-    email_tag_attached( $p_bug_id);
+    email_tag_attached( $t_tag_name, $p_bug_id);
 
     return true;
 }

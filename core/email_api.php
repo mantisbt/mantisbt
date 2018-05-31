@@ -635,6 +635,27 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params );
 }
 
+// 1A Specific
+function email_generic_tag( $tag_name, $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
+    # @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+    # @todo yarick123:sort recipients list by language to reduce switches between different languages
+
+    $t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
+    # Check whether user is inContact-Deliverer and q tag name that should be emailed.
+    $t_user_ids = array_keys( $t_recipients );
+
+    # Eliminate the inContact_Deliverer user when fiiltered for non tag names not to be sent to inContact.
+    $t_recipients_filtered = array();
+    foreach ( $t_user_ids as $t_user_id ) {
+        if( user_get_username($t_user_id) != 'inContact_Deliverer' || ($tag_name == '1A CS Action Required' || $tag_name == 'AM CS Action Required'
+                || $tag_name == '1A More Info Needed' || $tag_name == 'AM CS Action Required')) {
+            $t_recipients_filtered[$t_user_id] = $t_recipients[$t_user_id];
+        }
+    }
+
+    email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients_filtered, $p_message_id, $p_header_optional_params );
+}
+
 /**
  * Sends a generic email to the specific set of recipients.
  *
@@ -697,9 +718,9 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
  * Send notifications for bug update.
  * @param int $p_bug_id  The bug id.
  */
-function email_tag_attached( $p_bug_id ) {
+function email_tag_attached( $t_tag_name, $p_bug_id ) {
     log_event( LOG_EMAIL, sprintf( 'Issue #%d has tag attached.', $p_bug_id ) );
-    email_generic( $p_bug_id, 'tag_attached', '$s_email_notification_title_for_action_tag_attached' );
+    email_generic_tag( $t_tag_name, $p_bug_id, 'tag_attached', '$s_email_notification_title_for_action_tag_attached' );
 }
 
 /**
