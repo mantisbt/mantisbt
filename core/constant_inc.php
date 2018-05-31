@@ -307,7 +307,6 @@ define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH', 803 );
 define( 'ERROR_USER_PROFILE_NOT_FOUND', 804 );
 define( 'ERROR_USER_NAME_INVALID', 805 );
 define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS', 806 );
-define( 'ERROR_USER_REAL_MATCH_USER', 807 );
 define( 'ERROR_USER_CHANGE_LAST_ADMIN', 808 );
 define( 'ERROR_USER_REAL_NAME_INVALID', 809 );
 define( 'ERROR_USER_BY_NAME_NOT_FOUND', 810 );
@@ -627,6 +626,7 @@ define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
 define( 'ERROR_USER_NOT_FOUND', 801 );
+define( 'ERROR_USER_REAL_MATCH_USER', 807 );
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
