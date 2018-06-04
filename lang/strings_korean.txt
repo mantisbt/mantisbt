@@ -41,6 +41,7 @@
  * @author Asdfqwer51
  * @author Changwoo
  * @author Clever98
+ * @author Dry8r3ad
  * @author Ellif
  * @author Hong3e
  * @author Jerrykim306
@@ -438,7 +439,7 @@ $s_unstick_bug_button = '고정 해제';
 $s_bug_updated_msg = '이슈정보가 갱신되었습니다....';
 $s_back_to_bug_link = '이슈정보로 돌아가기';
 $s_update_simple_link = '간략정보 갱신화면';
-$s_updating_bug_advanced_title = '벌레 정보 갱신';
+$s_updating_bug_advanced_title = '이슈 정보 갱신';
 $s_id = 'ID';
 $s_category = '분류';
 $s_severity = '심각도';
@@ -466,7 +467,7 @@ $s_steps_to_reproduce = '재발생 단계';
 $s_update_information_button = '정보 업데이트';
 $s_sticky_issue = '상단고정 이슈';
 $s_profile = '프로필';
-$s_updating_bug_simple_title = '벌레 정보 갱신';
+$s_updating_bug_simple_title = '이슈 정보 갱신';
 $s_view_revisions = '판 보기';
 $s_view_num_revisions = '%1$d 판 보기';
 $s_revision = '판';
