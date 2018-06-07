@@ -1233,6 +1233,8 @@ $s_month_october = 'outubro';
 $s_month_november = 'novembro';
 $s_month_december = 'decembro';
 $s_timeline_issue_created = '<span class="username">%1$s</span> creou a incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> anexou o ficheiro <em>%3$s</em> na incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> eliminou o ficheiro <em>%3$s</em> da incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> fixo un comentario sobre a incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> está monitorizando a incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> deixou de monitorizar a incidencia <span class="issue_id">%2$s</span>';
