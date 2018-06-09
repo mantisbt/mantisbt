@@ -45,7 +45,6 @@ check_print_test_row(
 );
 
 # $t_extensions_required lists the extensions required to run Mantis in general
-# The fileinfo extension which is needed for attachments is checked in check_attachments_inc.php
 $t_extensions_required = array(
 	'date',
 	'hash',
@@ -60,6 +59,43 @@ foreach( $t_extensions_required as $t_extension ) {
 		$t_extension . ' PHP extension is available',
 		extension_loaded( $t_extension ),
 		array( false => 'MantisBT requires the ' . $t_extension . ' extension to either be compiled into PHP or loaded as an extension.' )
+	);
+}
+
+$t_fileinfo_loaded = extension_loaded( 'fileinfo' );
+
+if( config_get_global( 'allow_file_upload' ) ) {
+	check_print_test_row(
+		'Fileinfo PHP extension is available to support file uploads',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+} else {
+	# most of the plugins need this extensions as they use functions plugin_file /  plugin_file_include
+	check_print_test_warn_row(
+		'Fileinfo PHP extension is available to support plugins',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+}
+
+if ( $t_fileinfo_loaded ) {
+	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
+	if( $t_fileinfo_magic_db_file ) {
+		check_print_info_row(
+			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
+			config_get_global( 'fileinfo_magic_db_file' ) );
+		check_print_test_row(
+			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
+			file_exists( $t_fileinfo_magic_db_file ) );
+		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	}
+	check_print_test_row(
+		'Fileinfo extension can find and load a valid magic.db file',
+		$t_finfo !== false,
+		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
 	);
 }
 

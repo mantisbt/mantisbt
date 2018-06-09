@@ -91,30 +91,3 @@ if( $t_use_xsendfile ) {
 			$t_xsendfile_header_name );
 	}
 }
-
-$t_fileinfo_loaded = extension_loaded( 'fileinfo' );
-check_print_test_row(
-	'Fileinfo extension loaded',
-	$t_fileinfo_loaded,
-	array( false => 'Ensure that the fileinfo extension is installed and enabled' )
-);
-
-if ( $t_fileinfo_loaded ) {
-	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
-	if( $t_fileinfo_magic_db_file ) {
-		check_print_info_row(
-			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
-			config_get_global( 'fileinfo_magic_db_file' ) );
-		check_print_test_row(
-			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
-			file_exists( $t_fileinfo_magic_db_file ) );
-		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	}
-	check_print_test_row(
-		'Fileinfo extension can find and load a valid magic.db file',
-		$t_finfo !== false,
-		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
-	);
-}

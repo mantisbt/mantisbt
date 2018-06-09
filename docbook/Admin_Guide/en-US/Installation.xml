@@ -196,7 +196,7 @@
 								</para></listitem>
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
-										Required for file attachments
+										Required for file attachments and most of the plugins
 									</para>
 									<para>Without this extension, file attachment
 										previews and downloads do not work
