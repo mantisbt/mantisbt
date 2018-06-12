@@ -72,7 +72,7 @@ class AuthFlags {
 	/**
 	 * The page to use for validating credentials.  This can be the default validator page
 	 * provided by MantisBT, an auth plugin provided page that validates the credentials 
-	 * the credentials againts an external source (and creates user if autoprovision is set)
+	 * against an external source (and creates user if autoprovision is set)
 	 *
 	 * @see $login_page
 	 * @see $logout_page
@@ -444,8 +444,8 @@ class AuthFlags {
 	 * @return void
 	 * @see getAutoprovisionCapability()
 	 */
-	function setAutoprovisionCapability( $autoprov ) {
-		$this->autoprovision_capable = $autoprov;
+	function setAutoprovisionCapability( $p_autoprov ) {
+		$this->autoprovision_capable = $p_autoprov;
 	}
 
 	/**
@@ -455,11 +455,11 @@ class AuthFlags {
 	 * @see setAutoprovisionCapability()
 	 */
 	function getAutoprovisionCapability() {
-		if( is_null( $this->autoprovision_capability ) ) {
+		if( is_null( $this->autoprovision_capable ) ) {
 			return false;
 		}
 
-		return $this->autoprovision_capability;
+		return $this->autoprovision_capable;
 	}
 	
 }

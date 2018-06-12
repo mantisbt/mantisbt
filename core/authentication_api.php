@@ -806,13 +806,13 @@ function auth_process_plain_password( $p_password, $p_salt = null, $p_method = n
 }
 
 /**
- * Generate a random password. If no lenth is supplied, than the default value of 16 will be used.
+ * Generate a random password. If no length is supplied, than the default value of 16 will be used.
  * @todo create memorable passwords?
  * @param int $p_length	Requested password length
  * @return string random password
  * @access public
  */
-function auth_generate_random_password($p_length=16) {
+function auth_generate_random_password( $p_length = 16 ) {
 	return crypto_generate_uri_safe_nonce( $p_length );
 }
 
