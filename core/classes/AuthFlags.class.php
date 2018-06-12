@@ -440,7 +440,7 @@ class AuthFlags {
 	/**
 	 * Sets if the auth pugin is capable of provision users
 	 *
-	 * @param bool capability
+	 * @param bool $p_autoprov True, if the plugin can create users
 	 * @return void
 	 * @see getAutoprovisionCapability()
 	 */
