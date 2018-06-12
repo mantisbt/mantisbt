@@ -236,10 +236,9 @@ function auth_credential_page( $p_query_string, $p_user_id = null, $p_username =
 /**
  * Gets the page that validates the user credentials based on the standard flow.
  *
- * @param string $p_query_string The query string, can be empty.
  * @param int|null $p_user_id The user id or null for current logged in user.
  * @param string $p_username The username
- * @return string The authenticator page with query string.
+ * @return string The authenticator page.
  */
 function auth_authenticator_page( $p_user_id = null, $p_username = '' ) {
 	$t_auth_flags = auth_flags( $p_user_id, $p_username );
