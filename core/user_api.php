@@ -535,17 +535,9 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
-<<<<<<< HEAD
-	if( !is_blank( $p_email ) ) {
-	    user_ensure_email_unique( $p_email );
-	    email_ensure_valid( $p_email );
-	    email_ensure_not_disposable( $p_email );
-	}
-=======
 	user_ensure_email_unique( $p_email );
 	email_ensure_valid( $p_email );
 	email_ensure_not_disposable( $p_email );
->>>>>>> parent of fea867a... allow user creation without e-mail
 
 	$t_cookie_string = auth_generate_unique_cookie_string();
 
