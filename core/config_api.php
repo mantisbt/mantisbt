@@ -173,12 +173,14 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
  */
 function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
-	if( isset( $GLOBALS['g_' . $p_option] ) ) {
-		if( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
-			$t_value = config_eval( $GLOBALS['g_' . $p_option], true );
-			$g_cache_config_eval['g_' . $p_option] = $t_value;
+
+	$t_var_name = 'g_' . $p_option;
+	if( isset( $GLOBALS[$t_var_name] ) ) {
+		if( !isset( $g_cache_config_eval[$t_var_name] ) ) {
+			$t_value = config_eval( $GLOBALS[$t_var_name], true );
+			$g_cache_config_eval[$t_var_name] = $t_value;
 		} else {
-			$t_value = $g_cache_config_eval['g_' . $p_option];
+			$t_value = $g_cache_config_eval[$t_var_name];
 		}
 		return $t_value;
 	} else {
