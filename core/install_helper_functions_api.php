@@ -474,10 +474,18 @@ function install_stored_filter_migrate() {
 				case 'v6':
 				case 'v7':
 				case 'v8':
-					$t_filter_arr = unserialize( $t_setting_arr[1] );
+					try {
+						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
+					}
+					catch( ErrorException $e ) {
+						# Set to null to have a consistent error value
+						$t_filter_arr = null;
+						$t_error = $e->getMessage();
+					}
 					break;
 				default:
 					$t_filter_arr = json_decode( $t_setting_arr[1], /* assoc array */ true );
+					$t_error = 'invalid JSON';
 			}
 		} else {
 			db_param_push();
@@ -486,9 +494,19 @@ function install_stored_filter_migrate() {
 			continue;
 		}
 
-		# serialized or json encoded data in filter table is invalid - abort upgrade as this should not be possible
-		# so we should investigate and fix underlying data issue first if necessary
-		if( $t_filter_arr === false ) {
+		# Serialized or json encoded data in filter table is invalid. Provide
+		# details about the error and abort the upgrade.
+		# Let the user investigate and fix the problem before trying again.
+		if( $t_filter_arr === null ) {
+			$t_id = $t_row['id'];
+			$t_name = $t_row['name'];
+			install_print_unserialize_error(
+				sprintf( "Filter id $t_id %s", $t_name ? "('$t_name') " : '' ),
+				'filters',
+				$t_error,
+				$t_setting_arr[1]
+			);
+
 			return 1; # Fatal: invalid data found in filters table
 		}
 
@@ -649,13 +667,22 @@ function install_check_config_serialization() {
 
 	$t_result = db_query( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$config_id = $t_row['config_id'];
-		$project_id = (int)$t_row['project_id'];
-		$user_id = (int)$t_row['user_id'];
-		$value = $t_row['value'];
+		$t_config_id = $t_row['config_id'];
+		$t_project_id = (int)$t_row['project_id'];
+		$t_user_id = (int)$t_row['user_id'];
+		$t_value = $t_row['value'];
 
-		$t_config = unserialize( $value );
-		if( $t_config === false ) {
+		try {
+			$t_config = safe_unserialize( $t_value );
+		}
+		catch( ErrorException $e ) {
+			install_print_unserialize_error(
+				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
+				'config',
+				$e->getMessage(),
+				$t_value
+			);
+
 			return 1; # Fatal: invalid data found in config table
 		}
 
@@ -663,7 +690,7 @@ function install_check_config_serialization() {
 
 		db_param_push();
 		$t_query = 'UPDATE {config} SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
-		db_query( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
+		db_query( $t_query, array( $t_json_config, $t_config_id, $t_project_id, $t_user_id ) );
 	}
 
 	# flush config here as we've changed the format of the configuration table
@@ -688,13 +715,23 @@ function install_check_token_serialization() {
 		if ( $t_value === null ) {
 			$t_token = null;
 		} else {
-			$t_token = @unserialize( $t_value );
-			if( $t_token === false ) {
-				# If user hits a page other than install, tokens may be created using new code.
+			try {
+				$t_token = safe_unserialize( $t_value );
+			}
+			catch( ErrorException $e ) {
+				# If user hits a page other than install, JSON-encoded tokens
+				# may have been created using new code; just skip them.
 				$t_token = json_decode( $t_value );
 				if( $t_token !== null ) {
 					continue;
 				}
+
+				install_print_unserialize_error(
+					"Token id $t_id",
+					'tokens',
+					$e->getMessage(),
+					$t_value
+				);
 
 				return 1; # Fatal: invalid data found in tokens table
 			}
@@ -745,4 +782,26 @@ function install_gravatar_plugin() {
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
+}
+
+/**
+ * Print a friendly error message following an unserialize() error.
+ *
+ * @param string $p_description Description to identify the offending row
+ * @param string $p_table Mantis table name
+ * @param string $p_error Error message
+ * @param string $p_value The data that could not be unserialized
+ * @return void
+ */
+function install_print_unserialize_error( $p_description, $p_table, $p_error, $p_value ) {
+	printf('<p><br>%s could not be converted because its data is not valid. '
+		. 'Fix the problem by manually repairing or deleting the '
+		. 'offending %s row as appropriate, then try again.'
+		. '<br>Error: <em>%s</em> occured because of the string below</p>'
+		. '<pre>%s</pre>',
+		$p_description,
+		db_get_table( $p_table ),
+		$p_error,
+		$p_value
+	);
 }

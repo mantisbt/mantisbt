@@ -295,3 +295,27 @@ function get_font_path() {
 		}
 		return $t_font_path;
 }
+
+/**
+ * unserialize() with Exception instead of PHP notice.
+ *
+ * When given invalid data, unserialize() throws a PHP notice; this function
+ * relies on a custom error handler to throw an Exception instead.
+ *
+ * @param string $p_string The serialized string.
+ * @return mixed The converted value
+ *
+ * @throws ErrorException
+ */
+function safe_unserialize( $p_string ) {
+	set_error_handler( 'error_convert_to_exception' );
+	try {
+		$t_data = unserialize( $p_string );
+	}
+	catch( ErrorException $e ) {
+		restore_error_handler();
+		throw $e;
+	}
+	restore_error_handler();
+	return $t_data;
+}

@@ -404,6 +404,22 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	$g_error_proceed_url = null;
 }
 
+
+/**
+ * Error handler to convert PHP errors to Exceptions.
+ * This is used to temporarily override the default error handler, when it is
+ * required to catch a PHP error (e.g. when unserializing data in install
+ * helper functions).
+ * @param integer $p_type    Level of the error raised.
+ * @param string  $p_error   Error message.
+ * @param string  $p_file    Filename that the error was raised in.
+ * @param integer $p_line    Line number the error was raised at.
+ * @throws ErrorException
+ */
+function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
+	throw new ErrorException( $p_error, 0, $p_type, $p_file, $p_line );
+}
+
 /**
  * Prints messages from the delayed errors queue
  * The error handler enqueues deprecation warnings that would be printed inline,
