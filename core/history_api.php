@@ -353,6 +353,8 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 			}
 		}
 
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
 		if( $v_type == NORMAL_TYPE ) {
 			if( !in_array( $v_field_name, columns_get_standard() ) ) {
 				# check that the item should be visible to the user
@@ -362,15 +364,18 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 				}
 			}
 
-			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( config_get( 'roadmap_view_threshold' ), $v_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'target_version' ) &&
+				!access_has_bug_level( config_get( 'roadmap_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( config_get( 'due_date_view_threshold' ), $v_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'due_date' ) &&
+				!access_has_bug_level( config_get( 'due_date_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( config_get( 'view_handler_threshold' ), $v_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'handler_id' ) &&
+				!access_has_bug_level( config_get( 'view_handler_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -383,7 +388,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 					continue;
 				}
 
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
@@ -393,7 +398,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 					continue;
 				}
 
-				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
@@ -401,14 +406,14 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 
 		# tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
-			if( !access_has_bug_level( config_get( 'tag_view_threshold' ), $v_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'tag_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# attachments
 		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
-			if( !access_has_bug_level( config_get( 'view_attachments_threshold' ), $v_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'view_attachments_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
