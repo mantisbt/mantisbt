@@ -40,6 +40,7 @@
  *
  * @author Aftabuzzaman
  * @author Nasir8891
+ * @author আফতাবুজ্জামান
  */
 
 $s_plugin_format_title = 'ম্যান্টিসবিটি বিন্যাসন';

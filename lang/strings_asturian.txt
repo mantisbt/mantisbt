@@ -373,7 +373,6 @@ $s_sponsor_show = 'Ver too';
 $s_payment_updated = 'Información de pagu anovada.';
 $s_account_updated_msg = 'La to cuenta anovóse correutamente...';
 $s_email_updated = 'La direición de corréu anovóse correutamente';
-$s_realname_duplicated = 'El nome real ta utilizándolu otru usuariu';
 $s_realname_updated = 'Nome real anováu correutamente';
 $s_password_updated = 'Contraseña anovada correutamente';
 $s_multiple_projects = 'Les incidencies que seleicionasti son de proyeutos diferentes. Los siguientes parámetros espeyen les preferencies pa tolos proyeutos. Si esto ye incorreuto, intenta\'l cambiu con una esbilla d\'incidencies menor.';

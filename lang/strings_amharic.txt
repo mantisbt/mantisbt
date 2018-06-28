@@ -221,7 +221,6 @@ $s_sponsor_show = 'ሁሉንም አሳይ';
 $s_payment_updated = 'የክፍያው መረጃ የዘመነ';
 $s_account_updated_msg = 'መለያህ በስኬት ዘምኖዋአል ...';
 $s_email_updated = 'ኢሜይል አድራሻ በስኬት ዘምኖዋአል';
-$s_realname_duplicated = 'እውነተኛው ስም በሌላ ተጠቃሚ ተጠቅሞዋል';
 $s_realname_updated = 'እውነተኛው ስም በስኬት ዘምኖዋአል';
 $s_password_updated = 'የይለፍ ቃል በስኬት ዘምኖዋአል';
 $s_feedback_bug_button = 'አስተያየት ጠይቅ';

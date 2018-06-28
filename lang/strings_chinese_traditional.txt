@@ -386,7 +386,6 @@ $s_sponsor_show = '顯示全部';
 $s_payment_updated = '已更新付款資訊。';
 $s_account_updated_msg = '你的帳號已經成功更新...';
 $s_email_updated = '已成功更新電子郵件信箱';
-$s_realname_duplicated = '已有其他使用者使用這個真實姓名';
 $s_realname_updated = '真實姓名已成功更新';
 $s_password_updated = '密碼已成功更新';
 $s_multiple_projects = '你所選擇的問題分屬不同的專案，以下僅顯示所有專案共同的參數，或者您可以指定相同類型的專案以設定詳細參數。';
@@ -1334,8 +1333,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '查無 "%1$s" 版本。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '使用者名稱無效。使用者名稱僅能包含英文、數字、空格、 "-"  或  "_"  。';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = '該使用者的真實名稱是無效的。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '使用者沒有足夠的存取權限。';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '您填寫的 "真實姓名" 與其他使用者的登入名稱相同，
-請選擇其他的名稱。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '未開啟贊助者功能。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '查無贊助者 %1$d。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '贊助金額 (%1$s) 底於最低金額限制 (%2$s)。';

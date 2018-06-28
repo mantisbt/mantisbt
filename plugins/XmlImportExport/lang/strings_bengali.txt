@@ -40,6 +40,7 @@
  *
  * @author Aftabuzzaman
  * @author Rasal Lia
+ * @author আফতাবুজ্জামান
  */
 
 $s_plugin_XmlImportExport_title = 'অামদানি/রপ্তানি ইস্যু';

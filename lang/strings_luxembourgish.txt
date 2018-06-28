@@ -185,7 +185,6 @@ $s_sponsor = 'Sponsor';
 $s_sponsor_verb = 'sponsoren';
 $s_sponsor_show = 'All weisen';
 $s_account_updated_msg = 'Äre Kont gouf aktualiséiert ...';
-$s_realname_duplicated = 'Dëse "richtegen Numm" gëtt vun engem anere Benotzer benotzt';
 $s_realname_updated = 'Richtegen Numm aktualiséiert';
 $s_password_updated = 'Passwuert aktualiséiert';
 $s_new_bug_button = 'Neie Bug';

@@ -204,7 +204,6 @@ $s_sponsor_show = 'Wys alles';
 $s_payment_updated = 'Betalingsinligting is opgedateer.';
 $s_account_updated_msg = 'U rekening is suksesvol opgedateer...';
 $s_email_updated = 'E-posadres is suksesvol opgedateer';
-$s_realname_duplicated = 'Die volledige naam word reeds deur \'n ander gebruiker gebruik.';
 $s_realname_updated = 'Volledige naam is suksesvol opgedateer';
 $s_password_updated = 'Wagwoord suksesvol opgedateer';
 $s_feedback_bug_button = 'Versoek terugvoer';

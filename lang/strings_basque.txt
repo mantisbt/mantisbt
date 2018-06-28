@@ -349,7 +349,6 @@ $s_sponsor_show = 'Dena erakutsi';
 $s_payment_updated = 'Ordainketa informazioa eguneratua.';
 $s_account_updated_msg = 'Zure kontua arazorik gabe eguneratu da...';
 $s_email_updated = 'E-posta helbidea arazorik gabe eguneratu da';
-$s_realname_duplicated = 'Benetako izena beste erabiltzaile batek erabilia';
 $s_realname_updated = 'Benetako izena arazorik gabe eguneratu da';
 $s_password_updated = 'Pasahitza arazorik gabe eguneratu da';
 $s_multiple_projects = 'Aukeratu dituzun Arazoak proiektu ezberdinetakoak dira. Beheko parametroek proiektu guztietako hobespenak isladatzen ditutzte. Hauek gaizki badaude, mesedez aukeratu Arazo gutxiago eta saiatu berriz.';

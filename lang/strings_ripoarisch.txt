@@ -332,7 +332,6 @@ $s_sponsor_show = 'Alle aanzeije';
 $s_payment_updated = 'Date för et Bezahle jeändert.';
 $s_account_updated_msg = 'Ding Aanmelde-Daate sin jeändert&nbsp;…';
 $s_email_updated = 'De Addräß för de <i lang="en">e-mail</i> es jeändert';
-$s_realname_duplicated = 'Dä reschtejje Name hät ald ene andere Metmaacher';
 $s_realname_updated = 'Dä reschtejje Nahme es jeändert';
 $s_password_updated = 'Paßwoot jeändert';
 $s_new_bug_title = 'En neu Aanjelääjeheit';
@@ -887,7 +886,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'De Version „%1$s“ ham_mer nit jefo
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Dä Metmaacher-Name es nit jöltesch. Zohjelohße sen bloß lateinesche Bochstabe, de Zeffere, Zweschreräum, dä Bendeshtresh, der Pungk, et „plus“-Zeijsche, un dä Ungershtresh.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Dä „reschtejje Name“ es onjöltesch udder Kappes.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Dä Metmaacher hät nit et nüüdeje Zohjangsrääsch.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Dä „reschtejje Nahme“ es dersellve, wi enem andere Metmaacher singe Metmaacher_Nahme för et Enlogge. Söhk Der ene andere uß.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'De Öngershtözung för Schponsore es nit ennjeschalldt.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Schponsorschaff %1$d nit jefonge.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Schponsorschaff (%1$s) es onger dämm kleinste müjjelesche Bedraach (%2$s).';
