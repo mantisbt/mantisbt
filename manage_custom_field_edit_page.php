@@ -348,10 +348,14 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </div>
 
 <?php
-section_begin( lang_get( 'custom_field_fine_tuning' ) );
-capability_row( lang_get( 'custom_field_fine_display' ), 'disp', $t_definition['status_vector_disp'] );
-capability_row( lang_get( 'custom_field_fine_require' ), 'req', $t_definition['status_vector_req'] );
-section_end();
+$t_current_project_id = helper_get_current_project();
+if( in_array( $t_current_project_id, $t_definition['linked_projects'] ) ) {
+	$t_index = array_search( $t_current_project_id, $t_definition['linked_projects'] );
+	section_begin( lang_get( 'custom_field_fine_tuning' ) );
+	capability_row( lang_get( 'custom_field_fine_display' ), 'disp', $t_definition['status_vector_disp'][$t_index] );
+	capability_row( lang_get( 'custom_field_fine_require' ), 'req', $t_definition['status_vector_req'][$t_index] );
+	section_end();
+}
 ?>
 
 <div class="widget-toolbox padding-8 clearfix">

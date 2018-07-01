@@ -302,7 +302,8 @@ $t_custom_fields_to_set = array();
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
-	$t_vector = unserialize( $t_cf_def['status_vector_req'] );
+	$t_index = array_search( $t_existing_bug->project_id, $t_cf_def['linked_projects'] );
+	$t_vector = unserialize( $t_cf_def['status_vector_req'][$t_index] );
 	$t_override_require = false;
 	$t_also_require = false;
 	if( is_array( $t_vector ) ) {
