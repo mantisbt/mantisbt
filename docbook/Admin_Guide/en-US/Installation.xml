@@ -136,7 +136,7 @@
 				<listitem>
 					<para>Web Server</para>
 					<para>MantisBT is mainly tested with
-						<ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
+						<ulink url="https://docs.microsoft.com/en-us/iis">Microsoft IIS</ulink> and
 						<ulink url="http://www.apache.org/">Apache</ulink>.
 						However, it is expected to work with any recent web
 						server software.
@@ -148,7 +148,7 @@
 						administrator to add support for .PHP files. This should
 						be a trivial modification. Further details can be found
 						in the
-						<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
+						<ulink url="http://www.php.net/manual/en/install.php">PHP documentation</ulink>
 					</para>
 				</listitem>
 
