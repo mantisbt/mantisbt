@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author A2093064
  * @author Anakmalaysia
  * @author Cwlin0416
  * @author Firesueprtom
@@ -778,7 +779,7 @@ $s_changelog_link = '版本更動紀錄';
 $s_roadmap_link = '版本規劃';
 $s_summary_link = '統計資訊';
 $s_account_link = '我的帳號';
-$s_users_link = '用戶';
+$s_users_link = '使用者';
 $s_manage_link = '管理';
 $s_edit_news_link = '編輯最新消息';
 $s_docs_link = '說明文件';
