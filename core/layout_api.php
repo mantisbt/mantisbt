@@ -697,8 +697,9 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		$t_event_menu_main_front = event_signal( 'EVENT_MENU_MAIN_FRONT' );
 		$t_plugin_menu_items_front = layout_plugin_menu_options_for_sidebar( $t_event_menu_main_front );
 
-		if( is_array( $t_plugin_menu_items_front ) )
+		if( is_array( $t_plugin_menu_items_front ) ) {
 			$t_sidebar_items = $t_plugin_menu_items_front;
+		}
 
 		# Main Page
 		if( config_get( 'news_enabled' ) == ON ) {
@@ -793,22 +794,24 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		$t_event_menu_main = event_signal( 'EVENT_MENU_MAIN' );
 		$t_plugin_menu_items_back = layout_plugin_menu_options_for_sidebar( $t_event_menu_main );
 
-		if( is_array( $t_plugin_menu_items_back ) )
+		if( is_array( $t_plugin_menu_items_back ) ) {
 			$t_sidebar_items = array_merge( $t_sidebar_items, $t_plugin_menu_items_back );
+		}
 
 		# Config based custom options
-		$t_config_menu_items = layout_config_menu_options_for_sidebar( );
+		$t_config_menu_items = layout_config_menu_options_for_sidebar();
 
-		if( is_array( $t_config_menu_items ) )
+		if( is_array( $t_config_menu_items ) ) {
 			$t_sidebar_items = array_merge( $t_sidebar_items, $t_config_menu_items );
+		}
 
 		# Allow plugins to alter the sidebar items array
 		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', array( $t_sidebar_items ) );
-		if( is_array( $t_modified_sidebar_items ) )
+		if( is_array( $t_modified_sidebar_items ) ) {
 			$t_sidebar_items = $t_modified_sidebar_items;
+		}
 
-		if( count( $t_sidebar_items ) > 0 )
-		{
+		if( count( $t_sidebar_items ) > 0 ) {
 			# Starting sidebar markup
 			layout_sidebar_begin();
 
@@ -846,8 +849,7 @@ function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
 
 /**
  * Process main menu options from config.
- * @param string $p_active_sidebar_page The active page on the sidebar.
- * @return void
+ * @return array containing sidebar items
  */
 function layout_config_menu_options_for_sidebar( ) {
 	$t_menu_options = array();
