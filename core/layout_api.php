@@ -759,7 +759,11 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
 		# Project Documentation Page
 		if( ON == config_get( 'enable_project_documentation' ) ) {
-			layout_sidebar_menu( 'proj_doc_page.php', 'docs_link', 'fa-book', $p_active_sidebar_page );
+			$t_sidebar_items[] = array(
+				'url' => 'proj_doc_page.php',
+				'title' => 'docs_link',
+				'icon' => 'fa-book'
+			);
 		}
 
 		# Project Wiki
