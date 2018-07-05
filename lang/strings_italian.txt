@@ -52,6 +52,7 @@
  * @author Massimo1403
  * @author McDutchie
  * @author Nemo bis
+ * @author Ontsed
  * @author PeppeAeco
  * @author Purodha
  * @author Selven
@@ -353,6 +354,7 @@ $s_email_on_priority_change = 'Email su "Cambio priorità"';
 $s_email_bugnote_limit = 'Email su "Nota aggiunta" fino al limite di note';
 $s_email_full_issue_details = 'Tutti i dettagli dell\'anomalia per email';
 $s_language = 'Lingua';
+$s_font_family = 'Famiglia dei font';
 $s_update_prefs_button = 'Aggiorna le preferenze';
 $s_reset_prefs_button = 'Resetta le preferenze';
 $s_timezone = 'Fuso orario';
@@ -908,6 +910,7 @@ $s_total_time = 'tempo totale';
 $s_developer_stats = 'Statistiche per sviluppatore';
 $s_reporter_stats = 'Statistiche per segnalatore';
 $s_orct = '(aperte/risolte/chiuse/totale)';
+$s_summary_header = 'aperto/risolto/chiuso/totale/tasso di soluzione/rapporto';
 $s_any = 'qualsiasi';
 $s_all = 'tutte';
 $s_show = 'Mostra';
@@ -1039,6 +1042,7 @@ $s_kb = 'KB';
 $s_attachment_missing = 'Allegato mancante';
 $s_attachment_count = 'Numero allegati';
 $s_view_attachments_for_issue = 'Visualizza %1$d allegato(i) per l\'anomalia #%2$d';
+$s_warning_update_custom_field_type = '<strong>Attenzione:</strong> Il campo personalizzato "%1$s" contiene già dei valori. Se si cambia il tipo del campo, ciò potrebbe causare degli errori e un comportamento imprevedibile nel caso che i valori esistenti non siano consistenti con il nuovo tipo del campo. Per procedere, clicca il pulsante qua sotto';
 $s_phpmailer_language = 'it';
 $s_sponsors = '%1$d sponsor';
 $s_sponsorship_added = 'Aggiunta sponsorizzazione';
@@ -1225,6 +1229,7 @@ $s_path_information = 'MantisBT Informazioni percorso';
 $s_mantisbt_database_statistics = 'Statistiche del Database MantisBT';
 $s_php_version = 'Versione PHP';
 $s_adodb_version = 'Versione ADOdb';
+$s_database_driver = 'Driver del database';
 $s_database_version_description = 'Versione database, descrizione';
 $s_month_january = 'Gennaio';
 $s_month_february = 'Febbraio';
@@ -1239,6 +1244,8 @@ $s_month_october = 'Ottobre';
 $s_month_november = 'Novembre';
 $s_month_december = 'Dicembre';
 $s_timeline_issue_created = '<span class="username">%1$s</span> ha creato l\'anomalia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> file allegato <em>%3$s</em> all’anomalia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> file rimosso <em>%3$s</em> dall’anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> ha commentato l\'anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> sta monitorando l\'anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> ha smesso di monitorare l\'anomalia <span class="issue_id">%2$s</span>';
