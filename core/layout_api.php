@@ -811,8 +811,8 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 
 		# Allow plugins to alter the sidebar items array
 		$t_modified_sidebar_items = event_signal( 'EVENT_MENU_MAIN_FILTER', array( $t_sidebar_items ) );
-		if( is_array( $t_modified_sidebar_items ) ) {
-			$t_sidebar_items = $t_modified_sidebar_items;
+		if( is_array( $t_modified_sidebar_items ) && count( $t_modified_sidebar_items ) > 0 ) {
+			$t_sidebar_items = $t_modified_sidebar_items[0];
 		}
 
 		if( count( $t_sidebar_items ) > 0 ) {
