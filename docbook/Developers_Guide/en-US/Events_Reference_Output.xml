@@ -298,6 +298,36 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.menu.mainfilter">
+			<title>EVENT_MENU_MAIN_FILTER (Chained)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to modify the complete main menu
+					before it is output (for example re-order items, add items in the middle,
+					remove built-in items, change icons of built-in items).
+
+					A single parameter is passed as an array of associate arrays containing
+					the items in the main sidebar menu. The format of this array is the same as
+					EVENT_MENU_MAIN and EVENT_MENU_MAIN_FRONT, and will also contain any entries
+					added as a result of these events.
+
+					Plugins should do any modifications needed and return the array back.
+					Returning an empty array will hide the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: menu items</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: modified menu items</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+
 		<blockquote id="dev.eventref.output.menu.manage">
 			<title>EVENT_MENU_MANAGE (Default)</title>
 			<blockquote>
