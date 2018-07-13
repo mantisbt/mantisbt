@@ -124,7 +124,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						<div class="form-inline">
 							<label>
 								<?php echo lang_get( 'query_name' ) ?>&nbsp;
-								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo filter_get_field( $f_filter_id, 'name' ) ?>">
+								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo string_display_line( filter_get_field( $f_filter_id, 'name' ) ) ?>">
 							</label>
 						</div>
 					</div>
