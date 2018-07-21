@@ -1,0 +1,90 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Zazaki (Zazaki)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Asmen
+ * @author Erdemaslancan
+ * @author Gambollar
+ * @author Gırd
+ * @author Kumkumuk
+ * @author Mirzali
+ */
+
+$s_plugin_graph_title = 'Grafikê Mantisi';
+$s_plugin_graph_description = 'Olena grafik de resimi';
+$s_plugin_MantisGraph_title = 'Grafikê Mantisi';
+$s_plugin_MantisGraph_config = 'Vıraştış';
+$s_plugin_MantisGraph_synthesis_link = 'Sentez';
+$s_plugin_MantisGraph_status_link = 'Weziyeti heta';
+$s_plugin_MantisGraph_priority_link = 'Veroren heta';
+$s_plugin_MantisGraph_severity_link = 'Ciddiyeti heta';
+$s_plugin_MantisGraph_category_link = 'Kategori heta';
+$s_plugin_MantisGraph_resolution_link = 'Agozni heta';
+$s_plugin_MantisGraph_issue_trends_link = 'Namıyayışê problemi';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Weziyetê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Verorenê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Ciddiyetê Grafiki heta';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Grafikê kategori heta';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Grafikê Agozni heta';
+$s_plugin_MantisGraph_graph_developer_title = 'Hetê vıtaştoğê grafiki ra';
+$s_plugin_MantisGraph_graph_reporter_title = 'Hetê Reporter Graphsi ra';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Problemi a biy, hal biy u ê mendey';
+$s_plugin_MantisGraph_by_status_pct = 'Seyin weziyeti heta';
+$s_plugin_MantisGraph_by_priority_pct = 'Seyin verori heta';
+$s_plugin_MantisGraph_by_severity_pct = 'Verorin da seyin heta';
+$s_plugin_MantisGraph_by_category_pct = 'Seyin kategori heta';
+$s_plugin_MantisGraph_by_resolution_pct = 'Seyina agozgi heta';
+$s_plugin_MantisGraph_by_severity_mix = 'Verori u weziyeti heta';
+$s_plugin_MantisGraph_by_priority_mix = 'Veroroi u weziyeti heta';
+$s_plugin_MantisGraph_by_resolution_mix = 'Agozi u weziyeti heta';
+$s_plugin_MantisGraph_legend_still_open = 'Hewna Akerdeyo';
+$s_plugin_MantisGraph_legend_resolved = 'Agoziya';
+$s_plugin_MantisGraph_legend_reported = 'Xeberkerd';
+$s_plugin_MantisGraph_period_none = 'Çıniyo';
+$s_plugin_MantisGraph_period_this_week = 'En Hefte';
+$s_plugin_MantisGraph_period_last_week = 'Hefteyo Verên';
+$s_plugin_MantisGraph_period_two_weeks = 'Nê Dı Hewfteyê Peyêni';
+$s_plugin_MantisGraph_period_this_month = 'Na aşmi';
+$s_plugin_MantisGraph_period_last_month = 'Aşma Verên';
+$s_plugin_MantisGraph_period_this_quarter = 'No Mewsim';
+$s_plugin_MantisGraph_period_last_quarter = 'Çeyrego verên';
+$s_plugin_MantisGraph_period_year_to_date = 'Serra Tarix';
+$s_plugin_MantisGraph_period_select = 'Xoseri Demey';
+$s_plugin_MantisGraph_period_last_year = 'Par';
+$s_plugin_MantisGraph_graph_page = 'Grafiga Meselan de Ravêrdan';

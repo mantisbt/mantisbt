@@ -16,14 +16,16 @@
 				<para>
 					This event allows a plugin to register custom filter objects (based
 					on the <classname>MantisFilter</classname> class) that will allow the user
-					to search for issues based on custom criteria or datasets.  The plugin
-					must ensure that the filter class has been defined before returning
+					to search for issues based on custom criteria or datasets. The plugin
+					can return either a class name (which will be instantiated at runtime)
+					or an already instantiated object.
+					The plugin must ensure that the filter class has been defined before returning
 					the class name for this event.
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: Array of class names for custom filters</para></listitem>
+					<listitem><para>&lt;Array&gt;: Array of class names or objects for custom filters</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -35,14 +37,16 @@
 				<para>
 					This event allows a plugin to register custom column objects (based
 					on the <classname>MantisColumn</classname> class) that will allow the
-					user to view data for issues based on custom datasets.  The plugin
-					must ensure that the column class has been defined before returning
+					user to view data for issues based on custom datasets. The plugin
+					can return either a class name (which will be instantiated at runtime)
+					or an already instantiated object.
+					The plugin must ensure that the column class has been defined before returning
 					the class name for this event.
 				</para>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: Array of class names for custom columns</para></listitem>
+					<listitem><para>&lt;Array&gt;: Array of class names or objects for custom columns</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>

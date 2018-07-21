@@ -51,7 +51,7 @@ function trans_bool( $p_num ) {
 	if( 0 == $p_num ) {
 		return '&#160;';
 	} else {
-		return 'X';
+		return '<i class="fa fa-check fa-lg"></i>';
 	}
 }
 
@@ -169,8 +169,12 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 
 	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
 	if( array_key_exists( $p_key, current( $p_array ) ) ) {
-		$t_function = create_function( '$a, $b', 'return ' . $t_factor . ' * strnatcasecmp( $a[\'' . $p_key . '\'], $b[\'' . $p_key . '\'] );' );
-		uasort( $p_array, $t_function );
+		uasort(
+			$p_array,
+			function( $a, $b ) use( $t_factor, $p_key ) {
+				return $t_factor * strnatcasecmp( $a[$p_key], $b[$p_key] );
+			}
+		);
 	} else {
 		trigger_error( ERROR_INVALID_SORT_FIELD, ERROR );
 	}
@@ -293,23 +297,25 @@ function get_font_path() {
 }
 
 /**
- * Return instance of fileinfo class if enabled in php
- * @return finfo
+ * unserialize() with Exception instead of PHP notice.
+ *
+ * When given invalid data, unserialize() throws a PHP notice; this function
+ * relies on a custom error handler to throw an Exception instead.
+ *
+ * @param string $p_string The serialized string.
+ * @return mixed The converted value
+ *
+ * @throws ErrorException
  */
-function finfo_get_if_available() {
-	if( class_exists( 'finfo' ) ) {
-		$t_info_file = config_get( 'fileinfo_magic_db_file' );
-
-		if( is_blank( $t_info_file ) ) {
-			$t_finfo = new finfo( FILEINFO_MIME );
-		} else {
-			$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-		}
-
-		if( $t_finfo ) {
-			return $t_finfo;
-		}
+function safe_unserialize( $p_string ) {
+	set_error_handler( 'error_convert_to_exception' );
+	try {
+		$t_data = unserialize( $p_string );
 	}
-
-	return null;
+	catch( ErrorException $e ) {
+		restore_error_handler();
+		throw $e;
+	}
+	restore_error_handler();
+	return $t_data;
 }

@@ -30,7 +30,6 @@
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
-require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
@@ -59,9 +58,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	if( BAD == $p_result ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
-			echo ' - ERROR: ';
+			echo '- ERROR: ';
 		} else {
-			echo ' - WARNING: ';
+			echo '- WARNING: ';
 		}
 		if( '' != $p_message ) {
 			echo $p_message;
@@ -69,7 +68,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	}
 
 	if( GOOD == $p_result ) {
-		echo ' - GOOD';
+		echo '- GOOD';
 	}
 	echo "\n";
 }
@@ -99,7 +98,7 @@ $t_db_type = config_get_global( 'db_type' );
 
 # install the tables
 if( !preg_match( '/^[a-zA-Z0-9_]+$/', $t_db_type ) ||
-	!file_exists( dirname( dirname( __FILE__ ) ) . '/library/adodb/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
+	!file_exists( dirname( dirname( __FILE__ ) ) . '/vendor/adodb/adodb-php/drivers/adodb-' . $t_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $t_db_type ) . '.';
 	exit;
 }
@@ -126,6 +125,12 @@ $i = $t_last_update + 1;
 $t_count_done = 0;
 
 while( ( $i <= $t_last_id ) && !$g_failed ) {
+	if ( $g_upgrade[$i] === null ) {
+		$i++;
+		$t_count_done++;
+		continue;
+	}
+
 	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];
@@ -162,7 +167,7 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		}
 	}
 
-	echo 'Schema ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
+	echo 'Schema step ' . $i . ': ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
 	if( $t_sql ) {
 		$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 	} else {
@@ -177,7 +182,11 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {
-		print_test_result( BAD, true, $t_sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+		$t_msg = $t_sqlarray[0];
+		if( !is_blank( $g_db->ErrorMsg() ) ) {
+			$t_msg .= "\n" . $g_db->ErrorMsg();
+		}
+		print_test_result( BAD, true, $t_msg );
 	}
 
 	$i++;

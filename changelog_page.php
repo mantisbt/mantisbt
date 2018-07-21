@@ -77,25 +77,80 @@ function print_version_header( $p_version_id ) {
 	$t_version_name = version_get_field( $p_version_id, 'version' );
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_changelog_dates' ) ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
 		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
 
 		if( (bool)$t_version_released ) {
-			$t_release_date = ' (' . lang_get( 'released' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
+			$t_release_date = lang_get( 'released' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) );
 		} else {
-			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
+			$t_release_date = lang_get( 'not_released' );
 		}
 	} else {
 		$t_release_date = '';
 	}
 
-	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
+	$t_block_id = 'changelog_' . $p_version_id;
+	$t_collapse_block = is_collapsed( $t_block_id );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-	$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_release_date;
-	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
+	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '<h4 class="widget-title lighter">';
+	echo '<i class="ace-icon fa fa-retweet"></i>';
+	echo $t_release_title, lang_get( 'word_separator' );
+	echo '</h4>';
+	echo '<div class="widget-toolbar">';
+	echo '<a data-action="collapse" href="#">';
+	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	echo '</a>';
+	echo '</div>';
+	echo '</div>';
+
+	echo '<div class="widget-body">';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_release_date . '</div>';
+	echo '<div class="btn-toolbar pull-right">';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
+		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	echo '</a>';
+	echo '</div>';
+
+	echo '</div>';
+	echo '<div class="widget-main">';
+}
+
+/**
+ * Print footer for the specified project version.
+ * @param int $p_version_id a valid version id
+ * @param int $p_issues_resolved number of issues in resolved state
+ * @return void
+ */
+function print_version_footer( $p_version_id, $p_issues_resolved ) {
+	$t_project_id   = version_get_field( $p_version_id, 'project_id' );
+	$t_bug_string = $p_issues_resolved == 1 ? 'bug' : 'bugs';
+	$t_version_name = version_get_field( $p_version_id, 'version' );
+
+	echo '</div>';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo ' ' . $p_issues_resolved . ' ' . lang_get( $t_bug_string ) . ' ';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) .
+		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '</a>';
+	echo '</div></div></div>';
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -103,9 +158,10 @@ function print_version_header( $p_version_id ) {
  * @param string $p_project_name Project name to display.
  * @return void
  */
-function print_project_header_changelog ( $p_project_name ) {
-	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
-	echo '<tt>';
+function print_project_header_changelog( $p_project_name ) {
+	echo '<div class="page-header">';
+	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
+	echo '</div>';
 }
 
 $t_issues_found = false;
@@ -171,7 +227,13 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 $t_project_id_for_access_check = $t_project_id;
 
-html_page_top( lang_get( 'changelog' ) );
+layout_page_header( lang_get( 'changelog' ) );
+
+layout_page_begin( __FILE__ );
+
+echo '<div class="col-md-12 col-xs-12">';
+
+$t_project_index = 0;
 
 version_cache_array_rows( $t_project_ids );
 category_cache_array_rows_by_project( $t_project_ids );
@@ -180,18 +242,19 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 	$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id );
 
-	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_user_access_level_is_reporter = ( config_get( 'report_bug_threshold', null, null, $t_project_id ) == access_get_project_level( $t_project_id ) );
-
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	# grab version info for later use
+	# grab released versions info for later use, excluding obsolete ones
 	$t_version_rows = version_get_all_rows( $t_project_id, null, false );
 
 	# cache category info, but ignore the results for now
 	category_get_all_rows( $t_project_id );
 
 	$t_project_header_printed = false;
+
+	$t_limit_reporters = config_get( 'limit_reporters' );
+	$t_report_bug_threshold = config_get( 'report_bug_threshold', null, null, $t_project_id );
+	$t_access_limit_reporters_applies = !access_has_project_level( access_threshold_min_level( $t_report_bug_threshold ) + 1, $t_project_id );
 
 	foreach( $t_version_rows as $t_version_row ) {
 		$t_version_header_printed = false;
@@ -232,8 +295,9 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			# check limit_Reporter (Issue #4770)
 			# reporters can view just issues they reported
-			if( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
-							!bug_is_user_reporter( $t_row['id'], $t_user_id )) {
+			if( ON == $t_limit_reporters
+					&& $t_access_limit_reporters_applies
+					&& !bug_is_user_reporter( $t_row['id'], $t_user_id ) ) {
 				continue;
 			}
 
@@ -272,7 +336,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo string_display( '<br />' . $t_description . '<br /><br />' );
+				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
 			}
 		} else {
 			continue;
@@ -333,13 +397,12 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issues_found = true;
 		}
 
-		$t_bug_string = $t_issues_resolved == 1 ? 'bug' : 'bugs';
-		echo '<br />[' . $t_issues_resolved . ' ' . lang_get( $t_bug_string ) . ']<br />';
+	if( $t_version_header_printed ) {
+		print_version_footer( $t_version_id,  $t_issues_resolved);
+	}
+}
 
-	}
-	if( $t_project_header_printed ) {
-		echo '</tt>';
-	}
+	$t_project_index++;
 }
 
 if( !$t_issues_found ) {
@@ -349,7 +412,8 @@ if( !$t_issues_found ) {
 		$t_string = 'changelog_empty';
 	}
 
-	echo '<p>' . lang_get( $t_string ) . '</p>';
+	echo '<br />';
+	echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

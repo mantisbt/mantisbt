@@ -10,7 +10,7 @@
 			<term>$g_show_version</term>
 			<listitem>
 				<para>Whether to show the MantisBT version at the bottom of each
-					page or not. Default is ON.
+					page or not. Default is OFF.
 				</para>
 			</listitem>
 		</varlistentry>

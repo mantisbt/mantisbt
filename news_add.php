@@ -64,10 +64,13 @@ form_security_purge( 'news_add' );
 
 $t_news_row = news_get_row( $t_news_id );
 
-html_page_top();
+layout_page_header();
 
-html_operation_successful( 'news_menu_page.php' );
+layout_page_begin( 'main_page.php' );
+
+echo '<div class="space-10"></div>';
+html_operation_successful( 'main_page.php' );
 
 print_news_entry_from_row( $t_news_row );
 
-html_page_bottom();
+layout_page_end();

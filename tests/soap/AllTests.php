@@ -44,6 +44,7 @@ require_once 'VersionTest.php';
 require_once 'RelationshipTest.php';
 require_once 'UserTest.php';
 require_once 'TagTest.php';
+require_once 'MentionTest.php';
 
 /**
  * Soap Test Suite
@@ -52,7 +53,7 @@ require_once 'TagTest.php';
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class Soap_AllTests extends PHPUnit_Framework_TestSuite
+class SoapAllTests extends PHPUnit_Framework_TestSuite
 {
 	/**
 	 * setUp
@@ -66,10 +67,10 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 
 	/**
 	 * Initialises Soap Test Suite
-	 * @return Soap_AllTests
+	 * @return SoapAllTests
 	 */
 	public static function suite() {
-		$t_suite = new Soap_AllTests( 'SOAP Interface' );
+		$t_suite = new SoapAllTests( 'SOAP Interface' );
 
 		$t_suite->addTestSuite( 'EnumTest' );
 		$t_suite->addTestSuite( 'IssueAddTest' );
@@ -86,6 +87,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 		$t_suite->addTestSuite( 'RelationshipTest' );
 		$t_suite->addTestSuite( 'UserTest' );
 		$t_suite->addTestSuite( 'TagTest' );
+		$t_suite->addTestSuite( 'MentionTest' );
 
 		return $t_suite;
 	}

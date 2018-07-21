@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Macofe
  * @author Solomon
  */
 
@@ -88,7 +89,6 @@ $s_announcement = 'ማስታወቂያ';
 $s_stays_on_top = 'ከላይ ቆይ';
 $s_delete_bugnote_button = 'ማስታወሻ ሰርዝ';
 $s_bug_relationships = 'ትስስር';
-$s_bug_relationships_label = 'ትስስር:';
 $s_empty_password_button = 'ባዶ የይለፍ ቃል ተጠቀም';
 $s_reauthenticate_title = 'ኣረጋግጥ';
 $s_no_category = '(ፈርጅ የለም)';
@@ -156,7 +156,6 @@ $s_new_account_signup_msg = 'ከዚህ የሚቀጥለው መለያ ተፈጥሮ
 $s_email_reporter = 'ሪፖርት የተደረገው';
 $s_email_handler = ' የተመደው';
 $s_email_project = 'ፕሮጀክት';
-$s_email_project_label = 'ፕሮጀክት:';
 $s_email_bug = 'የጉዳዩ መለያ';
 $s_email_category = 'ፈርጅ';
 $s_email_reproducibility = 'የሚራባ';
@@ -200,7 +199,6 @@ $s_profile_added_msg = 'መገለጫው የተጨመረ ...';
 $s_profile_deleted_msg = 'የተሰረዘ መገለጫ ...';
 $s_edit_profile_title = 'መገለጫውን ለውጥ';
 $s_platform = 'የመሳሪያ ሥርዓት';
-$s_platform_label = 'የመሳሪያ ሥርዓት:';
 $s_additional_description = 'ተጨማሪ ገለፃ';
 $s_update_profile_button = 'መገለጫውን አዘምን';
 $s_profile_defaulted_msg = 'ነባሪ መገለጫው የዘመነ ...';
@@ -223,7 +221,6 @@ $s_sponsor_show = 'ሁሉንም አሳይ';
 $s_payment_updated = 'የክፍያው መረጃ የዘመነ';
 $s_account_updated_msg = 'መለያህ በስኬት ዘምኖዋአል ...';
 $s_email_updated = 'ኢሜይል አድራሻ በስኬት ዘምኖዋአል';
-$s_realname_duplicated = 'እውነተኛው ስም በሌላ ተጠቃሚ ተጠቅሞዋል';
 $s_realname_updated = 'እውነተኛው ስም በስኬት ዘምኖዋአል';
 $s_password_updated = 'የይለፍ ቃል በስኬት ዘምኖዋአል';
 $s_feedback_bug_button = 'አስተያየት ጠይቅ';
@@ -231,7 +228,6 @@ $s_close_immediately = 'ወዲያው ዝጋ:';
 $s_delete_bug_button = 'ሰርዝ';
 $s_monitor_bug_button = 'መቆጣጠር';
 $s_unmonitor_bug_button = 'ቁጥጥሩን ጨርስ';
-$s_file_upload_msg = 'ፋይል መስቀሉ የተሳካ';
 $s_upload_file = 'ፋይሉን ስቀል';
 $s_select_file = 'ፋይል ምረጥ';
 $s_upload_file_button = 'ፋይሉን ስቀል';
@@ -247,36 +243,26 @@ $s_stick_bug_button = 'ማጣበቅ';
 $s_unstick_bug_button = 'ያልተጣበቀ';
 $s_id = 'መታወቂያ';
 $s_category = 'ፈርጅ';
-$s_category_label = 'ፈርጅ:';
 $s_severity = 'መጥፎነት';
-$s_severity_label = 'መጥፎነት:';
 $s_date_submitted = 'የገባበት ቀን';
 $s_last_update = 'መጨረሻ ላይ የዘመነ';
 $s_reporter = 'ሪፖርት አድራጊ';
-$s_reporter_label = 'ሪፖርት አድራጊ:';
 $s_assigned_to = 'ለ... የተመደበ';
-$s_assigned_to_label = ' ለ... የተመደበ';
 $s_priority = 'ቅድሚያ';
-$s_priority_label = 'ቅድሚያ:';
 $s_resolution = 'ጥራት';
-$s_resolution_label = 'ጥራት:';
 $s_status = 'ሁኔታ';
-$s_status_label = 'ሁኔታ:';
 $s_duplicate_id = 'መታወቂያውን አብዛ';
 $s_projection = 'ምስል ማሳየት';
 $s_product_version = 'የምርት ስሪት';
-$s_product_version_label = 'የምርት ስሪት:';
 $s_build = 'ገንባ';
 $s_summary = 'ማጠቃለያ';
 $s_description = 'ገለፃ';
 $s_update_information_button = 'መረጃውን አዘምን';
 $s_profile = 'መገለጫ';
-$s_profile_label = 'መገለጫ:';
 $s_view_revisions = 'ክለሳዎቹን ተመልከት';
 $s_revision = 'ክለሳ';
 $s_revision_drop = 'ተወው';
 $s_all_revisions = 'ሁሉም ክለሳዎች';
-$s_bugnote_added_msg = 'ማስታወሻ የተጨመረ ...';
 $s_bugnote_deleted_msg = 'ማስታወሻው በስኬት ተሰርዞዋል';
 $s_bug_notes_title = 'ማስታወሻዎች';
 $s_edit_bugnote_title = 'ማስታወሻውን ለውጥ';
@@ -340,15 +326,11 @@ $s_total_time = 'ጠቅላላ ጊዜ';
 $s_any = 'ማንኛውም';
 $s_all = 'ሁሉም';
 $s_show = 'አሳይ';
-$s_show_label = 'አሳይ :';
 $s_changed = 'የተቀየረ(ሰዓት) :';
-$s_changed_label = 'የተቀየረ(ሰዓት) :';
 $s_viewing_bugs_title = 'ጉዳዩን በመመልከት ላይ';
 $s_updated = 'የዘመነ';
-$s_sort_label = 'የተደረደረው በ :';
 $s_issue_id = 'ጉዳይ #';
 $s_recently_visited = 'በቅርብ የተጎበኘ';
-$s_note_user_id_label = 'ማስታወሻ በ :';
 $s_none = 'ማንም';
 $s_current = 'የአሁን';
 $s_search = 'ፈልግ';
@@ -407,20 +389,18 @@ $s_custom_field_require_resolved = 'ሲበየን  የሚያስፈልግ';
 $s_custom_field_require_closed = 'ሲዘጋ የሚያስፈልግ';
 $s_link_custom_field_to_project_title = ' ብጁ መስኩን ከፕሮጄክቱ ጋር አገናኝ';
 $s_link_custom_field_to_project_button = 'ብጁ መስኩን አገናኝ';
-$s_linked_projects_label = ' የተገናኘ ፕሮጄክት :';
+$s_linked_projects_label = 'የተገናኘ ፕሮጄክት';
 $s_custom_field_sequence = 'ቅደም ተከተል';
 $s_custom_field_sequence_label = 'ቅደም ተከተል';
 $s_field_delete_button = 'መስኩን ሰርዝ';
 $s_field_remove_button = 'መስኩን አስወግድ';
 $s_hide_status = 'ሁኔታውን ደብቅ';
-$s_hide_status_label = 'ሁኔታውን ደብቅ:';
 $s_filter_closed = 'የተዘጋ';
 $s_filter_resolved = 'የተበየነ';
 $s_hide_closed = 'የተዘጋውን  ደብቅ';
 $s_hide_resolved = 'የተበየነውን ደብቅ';
 $s_and_above = 'እና ከላይ';
 $s_monitored_by = 'የተቆጣጠረው:';
-$s_monitored_by_label = 'የተቆጣጠረው :';
 $s_attachments = 'አባሪ';
 $s_bytes = 'ባይትስ';
 $s_changelog = 'ምዝግብ ማስታወሻ ቀይር';
@@ -484,7 +464,6 @@ $s_on = 'የበራ';
 $s_off = 'የጠፋ';
 $s_wiki = 'ዊኪ';
 $s_tags = 'የመለያ ስሞች';
-$s_tags_label = 'የመለያ ስሞች:';
 $s_tag_id = 'የመለያ ስም ቁጥር';
 $s_tag_name = ' ስም';
 $s_tag_creator = 'ፈጣሪው';

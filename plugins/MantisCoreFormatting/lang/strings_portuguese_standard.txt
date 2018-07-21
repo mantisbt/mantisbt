@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Hamilton Abreu
  */
 
@@ -47,6 +48,9 @@ $s_plugin_format_config = 'Configuração';
 $s_plugin_format_process_text = 'Processamento de Texto';
 $s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que estejo certo do que faz. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
 $s_plugin_format_process_urls = 'Processamento de URL';
-$s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
+$s_plugin_format_process_buglinks = 'Ligações internas do MantisBT (incidências e notas de incidências)';
+$s_plugin_format_process_buglinks_info = 'A sua configuração define as etiquetas da seguinte forma: <em>Incidência</em> como "<literal>%s</literal>" e <em>Notas de incidência</em> como "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Processamento de Markdown';
+$s_plugin_format_process_markdown_info = 'Estilo com suporte ao Markdown, a sintaxe de formatação de texto projetada para que possa ser convertida em HTML.';
 $s_plugin_format_enabled = 'Ligado';
 $s_plugin_format_disabled = 'Desligado';

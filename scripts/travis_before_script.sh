@@ -3,8 +3,18 @@
 # MantisBT Travis-CI before script
 # -----------------------------------------------------------------------------
 
+# Nothing to do here for documentation builds
+# Note: Publican is installed via .travis.yml (apt add-on)
+if [[ -n $DOCBOOK ]]
+then
+	exit
+fi
+
+# -----------------------------------------------------------------------------
 # Global variables initialization
+#
 HOSTNAME=localhost
+
 # Port 80 requires use of 'sudo' to run the PHP built-in web server, which
 # causes builds to fail due to a bug in Travis [1]so we use port 8080 instead.
 # [1] https://github.com/travis-ci/travis-ci/issues/2235
@@ -27,6 +37,22 @@ function step () {
 	echo $1
 	echo
 }
+
+# -----------------------------------------------------------------------------
+# Fix deprecated warning in PHP 5.6 builds:
+# "Automatically populating $HTTP_RAW_POST_DATA is deprecated [...]"
+# https://www.bram.us/2014/10/26/php-5-6-automatically-populating-http_raw_post_data-is-deprecated-and-will-be-removed-in-a-future-version/
+# https://bugs.php.net/bug.php?id=66763
+
+if [[ $TRAVIS_PHP_VERSION = '5.6' ]]
+then
+	# Generate custom php.ini settings
+	cat <<-EOF >mantis_config.ini
+		always_populate_raw_post_data=-1
+		EOF
+	phpenv config-add mantis_config.ini
+fi
+
 
 # -----------------------------------------------------------------------------
 step "Create database $MANTIS_DB_NAME"
@@ -61,42 +87,16 @@ esac
 # -----------------------------------------------------------------------------
 step "Web server setup"
 
-if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
-	# install Apache as PHP 5.3 does not come with an embedded web server
-	sudo apt-get update -qq
-	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
-
-	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
-		Listen $PORT
-		NameVirtualHost *:$PORT
-		<VirtualHost *:$PORT>
-		    DocumentRoot $PWD
-		    <Directory />
-		        Options FollowSymLinks
-		        AllowOverride All
-		    </Directory>
-		    <Directory $PWD>
-		        Options Indexes FollowSymLinks MultiViews
-		        AllowOverride All
-		        Order allow,deny
-		        allow from all
-		    </Directory>
-		</VirtualHost>
-		EOF
-
-	sudo service apache2 restart
+# use PHP's embedded server
+if [[ $PORT = 80 ]]
+then
+	# sudo required for port 80
+	# get path of PHP as the path is not in $PATH for sudo
+	myphp="sudo $(which php)"
 else
-	# use PHP's embedded server
-	if [[ $PORT = 80 ]]
-	then
-		# sudo required for port 80
-		# get path of PHP as the path is not in $PATH for sudo
-		myphp="sudo $(which php)"
-	else
-		myphp=php
-	fi
-	$myphp -S $HOSTNAME:$PORT &
+	myphp=php
 fi
+$myphp -S $HOSTNAME:$PORT >& /dev/null &
 
 # needed to allow web server to create config_inc.php
 chmod 777 config
@@ -104,6 +104,9 @@ chmod 777 config
 #  wait until server is up
 sleep 10
 
+# -----------------------------------------------------------------------------
+step "Install Composer Components"
+composer install
 
 # -----------------------------------------------------------------------------
 step "MantisBT Installation"

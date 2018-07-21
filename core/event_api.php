@@ -230,26 +230,27 @@ function event_type_execute( $p_event, array $p_callbacks, $p_params = null ) {
  * If there are no callbacks, then nothing will be sent as output.
  * @param string $p_event     Event name.
  * @param array  $p_callbacks Array of callback function/plugin base name key/value pairs.
- * @param mixed  $p_params    Output separator (if single string) or indexed array of pre, mid, and post strings.
+ * @param mixed  $p_params    Parameters to event callback (array, or single object)
+ * @param mixed  $p_format    Output separator (if single string) or indexed array of pre, mid, and post strings.
  * @access public
  * @return void
  */
-function event_type_output( $p_event, array $p_callbacks, $p_params = null ) {
+function event_type_output( $p_event, array $p_callbacks, $p_params = null, $p_format = null ) {
 	$t_prefix = '';
 	$t_separator = '';
 	$t_postfix = '';
 
-	if( is_array( $p_params ) ) {
-		switch( count( $p_params ) ) {
+	if( is_array( $p_format ) ) {
+		switch( count( $p_format ) ) {
 			case 3:
-				$t_postfix = $p_params[2];
+				$t_postfix = $p_format[2];
 			case 2:
-				$t_separator = $p_params[1];
+				$t_separator = $p_format[1];
 			case 1:
-				$t_prefix = $p_params[0];
+				$t_prefix = $p_format[0];
 		}
 	} else {
-		$t_separator = $p_params;
+		$t_separator = $p_format;
 	}
 
 	$t_output = array();
@@ -270,9 +271,9 @@ function event_type_output( $p_event, array $p_callbacks, $p_params = null ) {
  * final callback's return value will be returned to the event origin.
  * @param string $p_event     Event name.
  * @param array  $p_callbacks Array of callback function/plugin basename key/value pairs.
- * @param string $p_input     Input string.
+ * @param mixed  $p_input     Input data.
  * @param array  $p_params    Parameters.
- * @return string Output string
+ * @return mixed Output data
  * @access public
  */
 function event_type_chain( $p_event, array $p_callbacks, $p_input, $p_params = null ) {

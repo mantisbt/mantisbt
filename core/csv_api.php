@@ -28,6 +28,7 @@
  * @uses category_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses project_api.php
  * @uses user_api.php
@@ -38,9 +39,29 @@ require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'user_api.php' );
+
+/**
+ * Emits the headers and byte order marker.  This must be called at the beginning
+ * of scripts that export CSV file before any other content is called.
+ *
+ * @param  string  $p_filename The csv filename and extension.
+ * @return void
+ */
+function csv_start( $p_filename ) {
+	$t_filename = urlencode( file_clean_name( $p_filename ) );
+
+	header( 'Pragma: public' );
+	header( 'Content-Encoding: UTF-8' );
+	header( 'Content-Type: text/csv; name=' . $t_filename . ';charset=UTF-8' );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename="' . $t_filename . '"' );
+
+	echo UTF8_BOM;
+}
 
 /**
  * get the csv file new line, can be moved to config in the future
@@ -110,6 +131,48 @@ function csv_escape_string( $p_string ) {
 function csv_get_columns() {
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
 	return $t_columns;
+}
+
+/**
+ * Gets the formatted value for the specified issue id, project and custom field.
+ * @param integer $p_issue_id     The issue id.
+ * @param integer $p_project_id   The project id.
+ * @param string  $p_custom_field The custom field name (without 'custom_' prefix).
+ * @return string The custom field value.
+ */
+function csv_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field ) {
+	$t_field_id = custom_field_get_id_from_name( $p_custom_field );
+
+	if( $t_field_id === false ) {
+		$t_value = '@' . $p_custom_field . '@';
+	} else if( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
+		$t_def = custom_field_get_definition( $t_field_id );
+		$t_value = string_custom_field_value( $t_def, $t_field_id, $p_issue_id );
+	} else {
+		# field is not linked to project
+		$t_value = '';
+	}
+
+	return csv_escape_string( $t_value );
+}
+
+/**
+ * Gets the formatted value for the specified plugin column value.
+ * @param string  $p_column The plugin column name.
+ * @param BugData $p_bug    A bug object to print the column for - needed for the display function of the plugin column.
+ * @return string The plugin column value.
+ */
+function csv_format_plugin_column_value( $p_column, BugData $p_bug ) {
+	$t_plugin_columns = columns_get_plugin_columns();
+
+	if( !isset( $t_plugin_columns[$p_column] ) ) {
+		$t_value = '';
+	} else {
+		$t_column_object = $t_plugin_columns[$p_column];
+		$t_value = $t_column_object->value( $p_bug );
+	}
+
+	return csv_escape_string( $t_value );
 }
 
 /**
@@ -213,6 +276,22 @@ function csv_format_fixed_in_version( BugData $p_bug ) {
  */
 function csv_format_target_version( BugData $p_bug ) {
 	return csv_escape_string( $p_bug->target_version );
+}
+
+/**
+ * return the tags
+ * @param BugData $p_bug A BugData object.
+ * @return string formatted tags string
+ * @access public
+ */
+function csv_format_tags( BugData $p_bug ) {
+	$t_value = '';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		$t_value = tag_bug_get_all( $p_bug->id );
+	}
+
+	return csv_escape_string( $t_value );
 }
 
 /**
@@ -344,6 +423,18 @@ function csv_format_description( BugData $p_bug ) {
 }
 
 /**
+ * Return the notes associated with the specified bug as a string.
+ *
+ * @param BugData $p_bug A BugData object.
+ * @return string The notes formatted as a string.
+ * @access public
+ */
+function csv_format_notes( BugData $p_bug ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+	return csv_escape_string( $t_notes );
+}
+
+/**
  * return the steps to reproduce
  * @param BugData $p_bug A BugData object.
  * @return string formatted steps to reproduce
@@ -414,7 +505,12 @@ function csv_format_due_date( BugData $p_bug ) {
 	if( $s_date_format === null ) {
 		$s_date_format = config_get( 'short_date_format' );
 	}
-	return csv_escape_string( date( $s_date_format, $p_bug->due_date ) );
+	
+	$t_value = '';
+	if ( !date_is_null( $p_bug->due_date ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ) {
+		$t_value = date( $s_date_format, $p_bug->due_date );
+	}
+	return csv_escape_string( $t_value );
 }
 
 /**
@@ -425,4 +521,36 @@ function csv_format_due_date( BugData $p_bug ) {
  */
 function csv_format_sponsorship_total( BugData $p_bug ) {
 	return csv_escape_string( $p_bug->sponsorship_total );
+}
+
+/**
+ * return the attachment count for an issue
+ * @param BugData $p_bug A BugData object.
+ * @return string
+ * @access public
+ */
+function csv_format_attachment_count( BugData $p_bug ) {
+	# Check for attachments
+	$t_attachment_count = 0;
+	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
+		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
+	}
+	return csv_escape_string( $t_attachment_count );
+}
+
+/**
+ * return the bug note count for an issue
+ * @param BugData $p_bug A BugData object.
+ * @return string
+ * @access public
+ */
+function csv_format_bugnotes_count( BugData $p_bug ) {
+	# grab the bugnote count
+	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
+	if( $t_bugnote_stats ) {
+		$t_bugnote_count = $t_bugnote_stats['count'];
+	} else {
+		$t_bugnote_count = 0;
+	}
+	return csv_escape_string( $t_bugnote_count );
 }

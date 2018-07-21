@@ -54,27 +54,7 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-/**
- * alternate color function
- * If no index is given, continue alternating based on the last index given
- * @param integer $p_index      Current index position.
- * @param string  $p_odd_color  Color to use for odd rows.
- * @param string  $p_even_color Color to use for even rows.
- * @return string
- */
-function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
-	static $s_index = 1;
-
-	if( null !== $p_index ) {
-		$s_index = $p_index;
-	}
-
-	if( 1 == $s_index++ % 2 ) {
-		return $p_odd_color;
-	} else {
-		return $p_even_color;
-	}
-}
+use Mantis\Exceptions\ClientException;
 
 /**
  * alternate classes for table rows
@@ -111,13 +91,11 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
  */
 function helper_array_transpose( array $p_array ) {
-	if( !is_array( $p_array ) ) {
-		return $p_array;
-	}
 	$t_out = array();
 	foreach( $p_array as $t_key => $t_sub ) {
 		if( !is_array( $t_sub ) ) {
-			return $p_array;
+			# This function can only handle bidimensional arrays
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
 		foreach( $t_sub as $t_subkey => $t_value ) {
@@ -343,7 +321,7 @@ function helper_get_current_project() {
 	}
 
 	if( $g_cache_current_project === null ) {
-		$t_cookie_name = config_get( 'project_cookie' );
+		$t_cookie_name = config_get_global( 'project_cookie' );
 
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -371,7 +349,7 @@ function helper_get_current_project() {
  * @return array
  */
 function helper_get_current_project_trace() {
-	$t_cookie_name = config_get( 'project_cookie' );
+	$t_cookie_name = config_get_global( 'project_cookie' );
 
 	$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -412,7 +390,7 @@ function helper_get_current_project_trace() {
 function helper_set_current_project( $p_project_id ) {
 	global $g_cache_current_project;
 
-	$t_project_cookie_name = config_get( 'project_cookie' );
+	$t_project_cookie_name = config_get_global( 'project_cookie' );
 
 	$g_cache_current_project = $p_project_id;
 	gpc_set_cookie( $t_project_cookie_name, $p_project_id, true );
@@ -425,9 +403,9 @@ function helper_set_current_project( $p_project_id ) {
  * @return void
  */
 function helper_clear_pref_cookies() {
-	gpc_clear_cookie( config_get( 'project_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'project_cookie' ) );
 	gpc_clear_cookie( config_get( 'manage_users_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_config_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'manage_config_cookie' ) );
 }
 
 /**
@@ -445,23 +423,31 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 		return true;
 	}
 
-	html_page_top();
+	layout_page_header();
+	layout_page_begin();
 
-	echo '<div class="confirm-msg center">';
+	echo '<div class="col-md-12 col-xs-12">';
+	echo '<div class="space-10"></div>';
+	echo '<div class="alert alert-warning center">';
+	echo '<p class="bigger-110">';
 	echo "\n" . $p_message . "\n";
+	echo '</p>';
+	echo '<div class="space-10"></div>';
 
-	echo '<form method="post" action="">' . "\n";
+	echo '<form method="post" class="center" action="">' . "\n";
 	# CSRF protection not required here - user needs to confirm action
 	# before the form is accepted.
 	print_hidden_inputs( $_POST );
 	print_hidden_inputs( $_GET );
 
-	echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
+	echo '<input type="hidden" name="_confirmed" value="1" />' , "\n";
+	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . $p_button_label . '" />';
 	echo "\n</form>\n";
 
-	echo '</div>' . "\n";
-	html_page_bottom();
+	echo '<div class="space-10"></div>';
+	echo '</div></div>';
+
+	layout_page_end();
 	exit;
 }
 
@@ -519,6 +505,17 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
 	$t_columns = helper_call_custom_function( 'get_columns_to_view', array( $p_columns_target, $p_user_id ) );
 
+	# Fix column names for custom field columns that may be stored as lowercase in configuration. See issue #17367
+	# If the system was working fine with lowercase names, then database is case-insensitive, eg: mysql
+	# Fix by forcing a search with current name to get the id, then get the actual name by looking up this id
+	foreach( $t_columns as &$t_column_name ) {
+		$t_cf_name = column_get_custom_field_name( $t_column_name );
+		if( $t_cf_name ) {
+			$t_cf_id = custom_field_get_id_from_name( $t_cf_name );
+			$t_column_name = column_get_custom_field_column_name( $t_cf_id );
+		}
+	}
+
 	if( !$p_viewable_only ) {
 		return $t_columns;
 	}
@@ -528,13 +525,7 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
 		$t_keys_to_remove[] = 'selection';
 		$t_keys_to_remove[] = 'edit';
-		$t_keys_to_remove[] = 'bugnotes_count';
-		$t_keys_to_remove[] = 'attachment_count';
 		$t_keys_to_remove[] = 'overdue';
-	}
-
-	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE || $p_columns_target == COLUMNS_TARGET_EXCEL_PAGE ) {
-		$t_keys_to_remove[] = 'attachment_count';
 	}
 
 	$t_current_project_id = helper_get_current_project();
@@ -615,7 +606,7 @@ function helper_log_to_page() {
  * @return boolean
  */
 function helper_show_query_count() {
-	return ON == config_get( 'show_queries_count' );
+	return ON == config_get_global( 'show_queries_count' );
 }
 
 /**
@@ -627,15 +618,23 @@ function helper_mantis_url( $p_url ) {
 	if( is_blank( $p_url ) ) {
 		return $p_url;
 	}
-	return config_get_global( 'short_path' ) . $p_url;
+
+	# Return URL as-is if it already starts with short path
+	$t_short_path = config_get_global( 'short_path' );
+	if( strpos( $p_url, $t_short_path ) === 0 ) {
+		return $p_url;
+	}
+
+	return $t_short_path . $p_url;
 }
 
 /**
  * convert a duration string in "[h]h:mm" to an integer (minutes)
  * @param string $p_hhmm A string in [h]h:mm format to convert.
+ * @param string $p_field The field name.
  * @return integer
  */
-function helper_duration_to_minutes( $p_hhmm ) {
+function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 	if( is_blank( $p_hhmm ) ) {
 		return 0;
 	}
@@ -645,22 +644,31 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	# time can be composed of max 3 parts (hh:mm:ss)
 	if( count( $t_a ) > 3 ) {
-		error_parameters( 'p_hhmm', $p_hhmm );
-		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+			ERROR_INVALID_FIELD_VALUE,
+			array( $p_field )
+		);
 	}
 
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		# all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 
 		# minutes and seconds are not allowed to exceed 59.
 		if( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 	}
 
@@ -682,4 +690,162 @@ function helper_duration_to_minutes( $p_hhmm ) {
 	}
 
 	return (int)$t_min;
+}
+
+/**
+ * Global shutdown functions registration
+ * Registers shutdown functions
+ * @return void
+ */
+function shutdown_functions_register() {
+	register_shutdown_function( 'email_shutdown_function' );
+}
+
+/**
+ * Filter a set of strings by finding strings that start with a case-insensitive prefix.
+ * @param array  $p_set    An array of strings to search through.
+ * @param string $p_prefix The prefix to filter by.
+ * @return array An array of strings which match the supplied prefix.
+ */
+function helper_filter_by_prefix( array $p_set, $p_prefix ) {
+	$t_matches = array();
+	foreach ( $p_set as $p_item ) {
+		if( mb_strtolower( mb_substr( $p_item, 0, mb_strlen( $p_prefix ) ) ) === mb_strtolower( $p_prefix ) ) {
+			$t_matches[] = $p_item;
+		}
+	}
+	return $t_matches;
+}
+
+/**
+ * Combine a Mantis page with a query string.  This handles the case where the page is a native
+ * page or a plugin page.
+ * @param string $p_page The page (relative or full)
+ * @param string $p_query_string The query string
+ * @return string The combined url.
+ */
+function helper_url_combine( $p_page, $p_query_string ) {
+	$t_url = $p_page;
+
+	if( !is_blank( $p_query_string ) ) {
+		if( stripos( $p_page, '?' ) !== false ) {
+			$t_url .= '&' . $p_query_string;
+		} else {
+			$t_url .= '?' . $p_query_string;
+		}
+	}
+
+	return $t_url;
+}
+
+/**
+ * Generate a hash to be used with dynamically generated content that is expected
+ * to be cached by the browser. This hash can be used to differentiate the generated
+ * content when it may be different based on some runtime attributes like: current user,
+ * project or language.
+ * An optional custom string can be provided to be added to the hash, for additional
+ * differentiating criteria, but this string must be already prepared by the caller.
+ *
+ * @param array $p_runtime_attrs    Array of attributes to be calculated from current session.
+ *                                  possible values: 'user', 'project', 'lang'
+ * @param string $p_custom_string   Additional string provided by the caller
+ * @return string                   A hashed md5 string
+ */
+function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {
+	# always add core version, to force reload of resources after an upgrade.
+	$t_key = $p_custom_string . '+V' . MANTIS_VERSION;
+	$t_user_auth = auth_is_user_authenticated();
+	foreach( $p_runtime_attrs as $t_attr ) {
+		switch( $t_attr ) {
+			case 'user':
+				$t_key .= '+U' . ( $t_user_auth ? auth_get_current_user_id() : META_FILTER_NONE );
+				break;
+			case 'project':
+				$t_key .= '+P' . ( $t_user_auth ? helper_get_current_project() : META_FILTER_NONE );
+				break;
+			case 'lang':
+				$t_key .= '+L' . lang_get_current();
+				break;
+			default:
+				trigger_error( ERROR_GENERIC, ERROR );
+		}
+	}
+	return md5( $t_key );
+}
+
+/**
+ * Parse view state from provided array.
+ *
+ * @param array $p_view_state The view state array (typically would have an id, name or both).
+ * @return integer view state id
+ * @throws ClientException if view state is invalid or array is empty.
+ */
+function helper_parse_view_state( array $p_view_state ) {
+	$t_view_state_enum = config_get( 'view_state_enum_string' );
+
+	$t_view_state_id = VS_PUBLIC;
+	if( isset( $p_view_state['id'] ) ) {
+		$t_enum_by_ids = MantisEnum::getAssocArrayIndexedByValues( $t_view_state_enum );
+		$t_view_state_id = (int)$p_view_state['id'];
+		if( !isset( $t_enum_by_ids[$t_view_state_id] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+	} else if( isset( $p_view_state['name' ] ) ) {
+		$t_enum_by_labels = MantisEnum::getAssocArrayIndexedByLabels( $t_view_state_enum );
+		$t_name = $p_view_state['name'];
+		if( !isset( $t_enum_by_labels[$t_name] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+
+		$t_view_state_id = $t_enum_by_labels[$t_name];
+	} else {
+		throw new ClientException(
+			"Empty view state",
+			ERROR_EMPTY_FIELD );
+	}
+
+	return $t_view_state_id;
+}
+
+/**
+ * Parse numeric positive id.
+ *
+ * @param string $p_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The parsed id.
+ * @throws ClientException Id is not specified or invalid.
+ */
+function helper_parse_id( $p_id, $p_field_name ) {
+	if( !is_numeric( $p_id ) ) {
+		if( empty( $p_id ) ) {
+			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
+		}
+
+		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	$t_id = (int)$p_id;
+	if( $t_id < 1 ) {
+		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	return $t_id;
+}
+
+/**
+ * Parse issue id.
+ *
+ * @param string $p_issue_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The issue id.
+ * @throws ClientException Issue is not specified or invalid.
+ */
+function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
+	return helper_parse_id( $p_issue_id, $p_field_name );
 }

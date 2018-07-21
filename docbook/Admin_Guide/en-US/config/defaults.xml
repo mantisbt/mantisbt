@@ -16,6 +16,41 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_default_project_view_status</term>
+			<listitem>
+				<para>The default viewing status for new projects (VS_PUBLIC or
+					VS_PRIVATE). The default is VS_PUBLIC.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_description</term>
+			<listitem>
+				<para>
+				Default value for bug description field used on bug report page.
+				Default is empty description.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_additional_info</term>
+			<listitem>
+				<para>
+				Default value for bug additional info field used on bug report page.
+				Default is empty.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_steps_to_reproduce</term>
+			<listitem>
+				<para>
+				Default value for bug steps to reproduce field used on bug report page.
+				Default is empty.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_bug_view_status</term>
 			<listitem>
 				<para>The default viewing status for the new bug (VS_PUBLIC or
@@ -30,6 +65,15 @@
 					VS_PRIVATE). The default is VS_PUBLIC.
 				</para>
 			</listitem>
+		</varlistentry>
+        <varlistentry>
+            <term>$g_timeline_view_threshold</term>
+            <listitem>
+                <para>Threshold for viewing timeline information. Use NOBODY to turn it off.
+                    If the timeline is turned off, the other widgets are displayed in a two column view.
+                    The default is VIEWER.
+                </para>
+            </listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_default_reminder_view_status</term>

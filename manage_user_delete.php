@@ -52,22 +52,13 @@ require_api( 'user_api.php' );
 form_security_validate( 'manage_user_delete' );
 
 auth_reauthenticate();
-access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $f_user_id	= gpc_get_int( 'user_id' );
 
 $t_user = user_get_row( $f_user_id );
-
-# Ensure that the account to be deleted is of equal or lower access to the
-# current user.
-access_ensure_global_level( $t_user['access_level'] );
-
-# check that we are not deleting the last administrator account
-$t_admin_threshold = config_get_global( 'admin_site_threshold' );
-if( user_is_administrator( $f_user_id ) &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
-	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
-}
+helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
+	'<br />' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
+	lang_get( 'delete_account_button' ) );
 
 # If an administrator is trying to delete their own account, use
 # account_delete.php instead as it is handles logging out and redirection
@@ -77,16 +68,19 @@ if( auth_get_current_user_id() == $f_user_id ) {
 	print_header_redirect( 'account_delete.php?account_delete_token=' . form_security_token( 'account_delete' ), true, false );
 }
 
-helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
-	'<br/>' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
-	lang_get( 'delete_account_button' ) );
+$t_data = array(
+	'query' => array( 'id' => $f_user_id )
+);
 
-user_delete( $f_user_id );
+$t_command = new UserDeleteCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'manage_user_delete' );
 
-html_page_top( null, 'manage_user_page.php' );
+layout_page_header( null, 'manage_user_page.php' );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( 'manage_user_page.php' );
 
-html_page_bottom();
+layout_page_end();

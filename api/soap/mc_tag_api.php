@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Retrieves all tags, unless the users
  *
@@ -35,11 +37,11 @@
 function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, 'No rights to view tags' );
+		return mci_fault_access_denied( $t_user_id, 'No rights to view tags' );
 	}
 
 	if( $p_per_page == 0 ) {
@@ -52,8 +54,8 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 
 	while( $t_tag = db_fetch_array( $t_tags ) ) {
 		$t_tag['user_id'] = mci_account_get_array_by_id( $t_tag['user_id'] );
-		$t_tag['date_created'] = SoapObjectsFactory::newDateTimeVar( $t_tag['date_created'] );
-		$t_tag['date_updated'] = SoapObjectsFactory::newDateTimeVar( $t_tag['date_updated'] );
+		$t_tag['date_created'] = ApiObjectFactory::datetime( $t_tag['date_created'] );
+		$t_tag['date_updated'] = ApiObjectFactory::datetime( $t_tag['date_updated'] );
 		$t_results[] = $t_tag;
 	}
 
@@ -80,27 +82,27 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_create_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	$t_valid_matches = array();
 
-	$p_tag = SoapObjectsFactory::unwrapObject( $p_tag );
+	$p_tag = ApiObjectFactory::objectToArray( $p_tag );
 
 	$t_tag_name = $p_tag['name'];
 	$t_tag_description = array_key_exists( 'description', $p_tag ) ? $p_tag['description'] : '';
 
 	if( !tag_name_is_valid( $t_tag_name, $t_valid_matches ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'Invalid tag name : "' . $t_tag_name . '"' );
+		return ApiObjectFactory::faultBadRequest( 'Invalid tag name : "' . $t_tag_name . '"' );
 	}
 
 	$t_matching_by_name = tag_get_by_name( $t_tag_name );
 	if( $t_matching_by_name != false ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
+		return ApiObjectFactory::faultConflict( 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
 	}
 
 	log_event( LOG_WEBSERVICE, 'creating tag \'' . $t_tag_name . '\' for user \'' . $t_user_id . '\'' );
@@ -120,15 +122,15 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	if( !access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-		return mci_soap_fault_access_denied( $t_user_id );
+		return mci_fault_access_denied( $t_user_id );
 	}
 
 	if( !tag_exists( $p_tag_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'No tag with id ' . $p_tag_id );
+		return ApiObjectFactory::faultNotFound( 'No tag with id ' . $p_tag_id );
 	}
 
 	log_event( LOG_WEBSERVICE, 'deleting tag id \'' . $p_tag_id . '\'' );
@@ -140,7 +142,7 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
  * @param integer $p_issue_id Issue id.
  * @param array   $p_tags     Array of tags.
  * @param integer $p_user_id  User id.
- * @return void
+ * @return void|RestFault|SoapFault
  */
 function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	$t_tag_ids_to_attach = array();
@@ -154,23 +156,48 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 	}
 
 	foreach( $p_tags as $t_tag ) {
-		$t_tag = SoapObjectsFactory::unwrapObject( $t_tag );
+		$t_tag = ApiObjectFactory::objectToArray( $t_tag );
 
-		$t_submitted_tag_ids[] = $t_tag['id'];
+		if( isset( $t_tag['id'] ) ) {
+			$t_tag_id = $t_tag['id'];
+			if( !tag_exists( $t_tag_id ) ) {
+				throw new ClientException(
+					"Tag with id $t_tag_id not found.",
+					ERROR_TAG_NOT_FOUND
+				);
+			}
+		} else if( isset( $t_tag['name'] ) ) {
+			$t_tag = tag_get_by_name( $t_tag['name'] );
+			if( $t_tag === false ) {
+				throw new ClientException(
+					"Tag {$t_tag['name']} not found.",
+					ERROR_TAG_NOT_FOUND
+				);
+			}
 
-		if( in_array( $t_tag['id'], $t_attached_tag_ids ) ) {
-			continue;
+			$t_tag_id = $t_tag['id'];
 		} else {
-			$t_tag_ids_to_attach[] = $t_tag['id'];
+			throw new ClientException(
+				'Tag without id or name.',
+				ERROR_TAG_NAME_INVALID
+			);
 		}
+
+		$t_submitted_tag_ids[] = $t_tag_id;
+
+		if( in_array( $t_tag_id, $t_attached_tag_ids ) ) {
+			continue;
+		}
+
+		$t_tag_ids_to_attach[] = $t_tag_id;
 	}
 
 	foreach( $t_attached_tag_ids as $t_attached_tag_id ) {
 		if( in_array( $t_attached_tag_id, $t_submitted_tag_ids ) ) {
 			continue;
-		} else {
-			$t_tag_ids_to_detach[] = $t_attached_tag_id;
 		}
+
+		$t_tag_ids_to_detach[] = $t_attached_tag_id;
 	}
 
 	foreach( $t_tag_ids_to_detach as $t_tag_id ) {

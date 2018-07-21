@@ -69,7 +69,7 @@ $t_old_name = $t_row['name'];
 $t_project_id = $t_row['project_id'];
 
 # check for duplicate
-if( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
+if( mb_strtolower( $f_name ) != mb_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 
@@ -83,8 +83,10 @@ if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 }
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

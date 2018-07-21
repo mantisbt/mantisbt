@@ -22,7 +22,7 @@
  * Process XML Import
  */
 
-$t_plugin_path = config_get( 'plugin_path' );
+$t_plugin_path = config_get_global( 'plugin_path' );
 require_once( $t_plugin_path . 'XmlImportExport/ImportXml.php' );
 
 form_security_validate( 'plugin_xml_import_action' );
@@ -42,14 +42,16 @@ $t_importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory,
 
 form_security_purge( 'plugin_xml_import_action' );
 
-html_page_top( plugin_lang_get( 'import' ) );
+layout_page_header( plugin_lang_get( 'import' ) );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_import_issues_page.php' );
 
 ?>
 
-<br />
-
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 <pre>
 
 <?php
@@ -57,6 +59,7 @@ $t_importer->import( );
 ?>
 
 </pre>
+</div>
 
 <?php
-html_page_bottom();
+layout_page_end();

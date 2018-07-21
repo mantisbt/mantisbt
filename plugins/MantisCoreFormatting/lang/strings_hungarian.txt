@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -41,6 +41,7 @@
  * @author Csega
  * @author Dani
  * @author Glanthor Reviol
+ * @author MeskoBalazs
  */
 
 $s_plugin_format_title = 'MantisBT formázás';
@@ -50,5 +51,8 @@ $s_plugin_format_process_text = 'Szövegfeldolgozás';
 $s_plugin_format_process_text_warning_notice = 'Ne kapcsold ki, hacsak tényleg nem tudod, mit is csinálsz. Kikapcsolt állapotban lehetségesek webhelyközi (cross site scripting, XSS) támadások.';
 $s_plugin_format_process_urls = 'URL-feldolgozás';
 $s_plugin_format_process_buglinks = 'MantisBT belső hivatkozások (probléma/probléma feljegyzés)';
+$s_plugin_format_process_buglinks_info = 'A konfiguráció az <em>Issue</em> címkét „<literal>%s</literal>” értékként, az <em>Issue Note</em> címkét pedig „<literal>%s</literal>” értékként határozza meg.';
+$s_plugin_format_process_markdown = 'Markdown feldolgozás';
+$s_plugin_format_process_markdown_info = 'Formázás Markdown támogatással, amely egy olyan szövegformázási szintaxis, amely HTML-re alakítható';
 $s_plugin_format_enabled = 'Be';
 $s_plugin_format_disabled = 'Ki';

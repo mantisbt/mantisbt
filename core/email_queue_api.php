@@ -111,10 +111,12 @@ function email_queue_add( EmailData $p_email_data ) {
 	}
 
 	$c_email = $t_email_data->email;
-	$c_subject = $t_email_data->subject;
-	$c_body = $t_email_data->body;
+	# MySQL 4-bytes UTF-8 chars workaround #21101
+	$c_subject = db_mysql_fix_utf8( $t_email_data->subject );
+	$c_body = db_mysql_fix_utf8( $t_email_data->body );
 	$c_metadata = serialize( $t_email_data->metadata );
 
+	db_param_push();
 	$t_query = 'INSERT INTO {email}
 				    ( email, subject, body, submitted, metadata)
 				  VALUES
@@ -122,7 +124,7 @@ function email_queue_add( EmailData $p_email_data ) {
 	db_query( $t_query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 	$t_id = db_insert_id( db_get_table( 'email' ), 'email_id' );
 
-	log_event( LOG_EMAIL, 'message #' . $t_id . ' queued' );
+	log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d queued', $t_id ) );
 
 	return $t_id;
 }
@@ -164,6 +166,7 @@ function email_queue_row_to_object( $p_row ) {
  * @return boolean|EmailData
  */
 function email_queue_get( $p_email_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {email} WHERE email_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_email_id ) );
 
@@ -175,13 +178,19 @@ function email_queue_get( $p_email_id ) {
 /**
  * Delete entry from email queue
  * @param integer $p_email_id Email queue identifier.
+ * @param string $p_reason The reason for deletion.
  * @return void
  */
-function email_queue_delete( $p_email_id ) {
+function email_queue_delete( $p_email_id, $p_reason = '' ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {email} WHERE email_id=' . db_param();
 	db_query( $t_query, array( $p_email_id ) );
 
-	log_event( LOG_EMAIL, 'message #' . $p_email_id . ' deleted from queue' );
+	if( is_blank( $p_reason ) ) {
+		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue', $p_email_id ) );
+	} else {
+		log_event( LOG_EMAIL_VERBOSE, sprintf( 'message %d deleted from queue. reason: %s', $p_email_id, $p_reason ) ); 
+	}
 }
 
 /**

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -40,15 +40,22 @@
  *
  * @author Crt
  * @author Macofe
+ * @author Nike
  */
 
 $s_plugin_MantisGraph_config = 'Asetukset';
-$s_plugin_MantisGraph_font = 'Kirjasin';
+$s_plugin_MantisGraph_status_link = 'Tilan mukaan';
+$s_plugin_MantisGraph_priority_link = 'Prioriteetin mukaan';
+$s_plugin_MantisGraph_severity_link = 'Vakavuusasteen mukaan';
+$s_plugin_MantisGraph_category_link = 'Luokan mukaan';
+$s_plugin_MantisGraph_resolution_link = 'Ratkaisun mukaan';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
-$s_plugin_MantisGraph_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';
-$s_plugin_MantisGraph_graph_imp_severity_title = 'Synteesitaulukot vakavuusasteen mukaan';
-$s_plugin_MantisGraph_graph_imp_category_title = 'Synteesitaulukot kategorian mukaan';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Synteesitaulukot ratkaisuasteen mukaan';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Prioriteettikuvaajien mukaan';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Vakavuusasteen mukaan';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Luokkakuvaajien mukaan';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Ratkaisukuvaajien mukaan';
+$s_plugin_MantisGraph_graph_developer_title = 'Kehittäjäkuvaajien mukaan';
+$s_plugin_MantisGraph_graph_reporter_title = 'Ilmoittajakuvaajien mukaan';
 $s_plugin_MantisGraph_by_status_pct = 'Tilaprosentin mukaan';
 $s_plugin_MantisGraph_by_priority_pct = 'Prioriteettiprosentin mukaan';
 $s_plugin_MantisGraph_by_severity_pct = 'Vakavuusasteen mukaan';
@@ -59,13 +66,7 @@ $s_plugin_MantisGraph_by_priority_mix = 'Prioriteetin ja tilann mukaan';
 $s_plugin_MantisGraph_by_resolution_mix = 'Ratkaisuasteen ja tilan mukaan';
 $s_plugin_MantisGraph_legend_still_open = 'Yhä avoin';
 $s_plugin_MantisGraph_legend_resolved = 'Ratkaistu';
-$s_plugin_MantisGraph_legend_assigned = 'Osoitettu';
-$s_plugin_MantisGraph_legend_total = 'Yhteensä';
-$s_plugin_MantisGraph_legend_opened = 'Avoin';
-$s_plugin_MantisGraph_legend_closed = 'Suljettu';
 $s_plugin_MantisGraph_legend_reported = 'Raportoitu';
-$s_plugin_MantisGraph_cumulative = 'Kumulatiivinen';
-$s_plugin_MantisGraph_not_enough_data = 'Ei tarpeeksi tietoa graafin luomiseksi';
 $s_plugin_MantisGraph_period_none = 'Ei mitään';
 $s_plugin_MantisGraph_period_this_week = 'Tämä viikko';
 $s_plugin_MantisGraph_period_last_week = 'Edellinen viikko';
@@ -77,12 +78,4 @@ $s_plugin_MantisGraph_period_last_quarter = 'Edellinen kvartaali';
 $s_plugin_MantisGraph_period_year_to_date = 'Vuosi päiväksi';
 $s_plugin_MantisGraph_period_select = 'Sattumanvaraiset päiväykset';
 $s_plugin_MantisGraph_period_last_year = 'Edellinen vuosi';
-$s_plugin_MantisGraph_select = 'Valitse';
-$s_plugin_MantisGraph_select_bystatus = 'tilan mukaan';
-$s_plugin_MantisGraph_select_summbystatus = 'Yhteenveto tilan mukaan';
-$s_plugin_MantisGraph_select_bycat = 'Yhteenveto kategorian mukaan';
-$s_plugin_MantisGraph_select_both = 'Yhteenveto tilan ja kategorian mukaan';
-$s_plugin_MantisGraph_show_as_graph = 'Näytä graafina';
-$s_plugin_MantisGraph_show_as_table = 'Näytä taulukkona';
-$s_plugin_MantisGraph_show_graph = 'Näytä graafi';
 $s_plugin_MantisGraph_graph_page = 'Tapahtumahistoriagraafi';

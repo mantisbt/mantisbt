@@ -47,12 +47,12 @@
 					When a note is added to a bug currently in $g_bug_feedback_status, and the note
 					author is the bug's reporter, this option will automatically set the bug status
 					to $g_bug_submit_status or $g_bug_assigned_status if the bug is assigned to a
-					developer.  Defaults to enabled.
+					developer.  Default value is ON.
 				</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_reopen_resolution</term>
+			<term>$g_bug_duplicate_resolution</term>
 			<listitem>
 				<para>Default resolution to assign to a bug when it is
 					resolved as being a duplicate of another issue.
@@ -61,7 +61,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_bug_duplicate_resolution</term>
+			<term>$g_bug_reopen_resolution</term>
 			<listitem>
 				<para>Resolution to assign to the bug when reopened. Default value
 					is REOPENED.
@@ -75,6 +75,14 @@
 					a bug is assigned to a person. Installations where assigned status
 					is to be used when the defect is in progress, rather than just put
 					in a person's queue should set it to OFF. Default is ON.
+					For the status change to be effective, these conditions must be met:
+					<itemizedlist>
+						<listitem><para>Bug has no handler, and a new handler is selected</para></listitem>
+						<listitem><para>The assignment is not part of a explicit status change</para></listitem>
+						<listitem><para>Current bug status is lower than defined "assigned" status</para></listitem>
+						<listitem><para>"Assigned" status is reachable by workflow configuration</para></listitem>
+					</itemizedlist>
+					If the conditions are not met, the assignment is still made, but status will not be modified.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -92,7 +100,7 @@
 			<listitem>
 				<para>Threshold resolution which denotes that a bug has
 					been resolved and successfully fixed by developers.
-					Resolutions above this threshold and below
+					Resolutions above and including this threshold and below
 					$g_bug_resolution_not_fixed_threshold are considered
 					to be resolved successfully. Default value is FIXED.
 				</para>
@@ -105,7 +113,7 @@
 					been resolved without being successfully fixed by
 					developers. Resolutions above this threshold are
 					considered to be resolved in an unsuccessful way.
-					Default value is UNABLE_TO_DUPLICATE.
+					Default value is UNABLE_TO_REPRODUCE.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -217,6 +225,15 @@
 					once resolved, regardless of their access level. This allows the
 					reporter to disagree with the resolution. The default is
 					ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_parent_of_unresolved_to_close</term>
+			<listitem>
+				<para>If set, no check is performed on the status of a bug's children,
+					which allows the parent to be closed whether or not the children
+					have been resolved. The default is OFF.
 				</para>
 			</listitem>
 		</varlistentry>

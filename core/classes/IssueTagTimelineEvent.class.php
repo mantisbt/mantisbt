@@ -40,7 +40,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	 * @param boolean $p_tag       Whether tag was being linked or unlinked from the issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_tag_name, $p_tag ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->tag_name = $p_tag_name;
@@ -53,9 +53,17 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	 */
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_untagged' );
+		$t_tag_row = tag_get_by_name( $this->tag_name );
 
-		$t_html = $this->html_start();
-		$t_html .= '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), $this->tag_name ) . '</div>';
+		$t_html = $this->html_start( 'fa-tag' );
+		$t_html .= '<div class="action">'
+			. sprintf(
+				$t_string,
+				prepare_user_name( $this->user_id ),
+				string_get_bug_view_link( $this->issue_id ),
+				$t_tag_row ? tag_get_link( $t_tag_row ) : $this->tag_name
+			)
+			. '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;

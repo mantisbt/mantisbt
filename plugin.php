@@ -27,13 +27,23 @@
  * @uses plugin_api.php
  */
 
+$t_allow_caching = isset( $_GET['cache_key'] );
+if( $t_allow_caching ) {
+	# Suppress default headers. This allows caching as defined in server configuration
+	$g_bypass_headers = true;
+}
+
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'plugin_api.php' );
 
-$t_plugin_path = config_get( 'plugin_path' );
+if( $t_allow_caching ) {
+	http_security_headers();
+}
+
+$t_plugin_path = config_get_global( 'plugin_path' );
 
 $f_page = gpc_get_string( 'page' );
 

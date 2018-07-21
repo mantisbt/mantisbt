@@ -1,11 +1,11 @@
 <section id="dev.eventref.account">
 	<title>User Account Events</title>
 
-	<section id="dev.eventref.account.prefs">
+	<section id="dev.eventref.account.pref">
 		<title>Account Preferences</title>
 	
-		<blockquote id="dev.eventref.account.prefs.updateform">
-			<title>EVENT_ACCOUNT_PREFS_UPDATE_FORM (Execute)</title>
+		<blockquote id="dev.eventref.account.pref.updateform">
+			<title>EVENT_ACCOUNT_PREF_UPDATE_FORM (Execute)</title>
 
 			<blockquote>
 				<para>
@@ -26,8 +26,8 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.account.prefs.update">
-			<title>EVENT_ACCOUNT_PREFS_UPDATE (Execute)</title>
+		<blockquote id="dev.eventref.account.pref.update">
+			<title>EVENT_ACCOUNT_PREF_UPDATE (Execute)</title>
 
 			<blockquote>
 				<para>
@@ -39,6 +39,25 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: User ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.user.avatar">
+			<title>EVENT_USER_AVATAR (First)</title>
+
+			<blockquote>
+				<para>
+					This event gets the user's avatar as an instance of the
+					Avatar class.  The first plugin to respond with an avatar
+					wins.  Hence, in case of multiple avatar plugins, make sure
+					to tweak the priorities.  Avatars should return null if they
+					don't have an avatar for the specified user id.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Avatar&gt;: Avatar instance or null.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>

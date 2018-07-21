@@ -82,7 +82,6 @@ function columns_filter_disabled( array $p_columns ) {
 				if( ! $t_enable_profiles ) {
 					continue 2;
 				}
-				# don't filter
 				break;
 
 			case 'eta':
@@ -103,7 +102,13 @@ function columns_filter_disabled( array $p_columns ) {
 				}
 				break;
 
-			default:
+			case 'sponsorship_total':
+				if( config_get( 'enable_sponsorship' ) == OFF ) {
+					continue 2;
+				}
+				break;
+
+				default:
 				# don't filter
 				break;
 		}
@@ -124,31 +129,11 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 
 	$t_columns['selection'] = null;
 	$t_columns['edit'] = null;
+	$t_columns['notes'] = null;
+	$t_columns['tags'] = null;
 
 	# Overdue icon column (icons appears if an issue is beyond due_date)
 	$t_columns['overdue'] = null;
-
-	if( $p_enabled_columns_only && OFF == config_get( 'enable_profiles' ) ) {
-		unset( $t_columns['os'] );
-		unset( $t_columns['os_build'] );
-		unset( $t_columns['platform'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_eta' ) == OFF ) {
-		unset( $t_columns['eta'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_projection' ) == OFF ) {
-		unset( $t_columns['projection'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_product_build' ) == OFF ) {
-		unset( $t_columns['build'] );
-	}
-
-	if( $p_enabled_columns_only && config_get( 'enable_sponsorship' ) == OFF ) {
-		unset( $t_columns['sponsorship_total'] );
-	}
 
 	# The following fields are used internally and don't make sense as columns
 	unset( $t_columns['_stats'] );
@@ -159,7 +144,13 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
 
-	return array_keys( $t_columns );
+	$t_column_names = array_keys( $t_columns );
+
+	if( $p_enabled_columns_only ) {
+		$t_column_names = columns_filter_disabled( $t_column_names );
+	}
+
+	return $t_column_names;
 }
 
 /**
@@ -177,12 +168,16 @@ function columns_get_plugin_columns() {
 		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
 			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
 				if( is_array( $t_plugin_column_array ) ) {
-					foreach( $t_plugin_column_array as $t_column_class ) {
-						if( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
-							$t_column_object = new $t_column_class();
-							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
-							$s_column_array[$t_column_name] = $t_column_object;
+					foreach( $t_plugin_column_array as $t_column_item ) {
+						if( is_object( $t_column_item ) && $t_column_item instanceof MantisColumn ) {
+							$t_column_object = $t_column_item;
+						} elseif( class_exists( $t_column_item ) && is_subclass_of( $t_column_item, 'MantisColumn' ) ) {
+							$t_column_object = new $t_column_item();
+						} else {
+							continue;
 						}
+						$t_column_name = mb_strtolower( $t_plugin . '_' . $t_column_object->column );
+						$s_column_array[$t_column_name] = $t_column_object;
 					}
 				}
 			}
@@ -193,6 +188,43 @@ function columns_get_plugin_columns() {
 }
 
 /**
+ * Get all columns for existing custom_fields
+ * @return string Array of column names
+ */
+function columns_get_custom_fields() {
+	static $t_col_names = null;
+	if( isset( $t_col_names ) ) {
+		return $t_col_names;
+	}
+
+	$t_all_cfids = custom_field_get_ids();
+	$t_col_names = array();
+	foreach( $t_all_cfids as $t_id ) {
+		$t_col_names[] = column_get_custom_field_column_name( $t_id );
+	}
+	return $t_col_names;
+}
+
+/**
+ * Get all columns active for the current system.
+ * This includes standard, custom fields, and plugin columns.
+ * Columns for disabled modules are removed from this list, according to system
+ * configuration.
+ *
+ * This function cannot check on current user/project, so it can be used by core
+ * in potential unlogged-in scenarios.
+ * @return array Array of column names
+ */
+function columns_get_all_active_columns() {
+	$t_columns = array_merge(
+			columns_get_standard(),
+			array_keys( columns_get_plugin_columns() ),
+			columns_get_custom_fields()
+			);
+	return columns_filter_disabled( $t_columns );
+}
+
+/**
  * Returns true if the specified $p_column is a plugin column.
  * @param string $p_column A column name.
  * @return boolean
@@ -200,20 +232,6 @@ function columns_get_plugin_columns() {
 function column_is_plugin_column( $p_column ) {
 	$t_plugin_columns = columns_get_plugin_columns();
 	return isset( $t_plugin_columns[$p_column] );
-}
-
-/**
- * Allow plugin columns to pre-cache data for a set of issues
- * rather than requiring repeated queries for each issue.
- * @param array $p_bugs Array of BugData objects.
- * @return void
- */
-function columns_plugin_cache_issue_data( array $p_bugs ) {
-	$t_columns = columns_get_plugin_columns();
-
-	foreach( $t_columns as $t_column_object ) {
-		$t_column_object->cache( $p_bugs );
-	}
 }
 
 /**
@@ -234,15 +252,15 @@ function columns_get_all( $p_project_id = null ) {
 	} else {
 		$t_project_id = $p_project_id;
 	}
-
-	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+	# Get custom fields from this project and sub-projects
+	$t_projects = user_get_all_accessible_projects( null, $t_project_id );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_projects );
 	foreach( $t_related_custom_field_ids as $t_id ) {
-		if( !custom_field_has_read_access_by_project_id( $t_id, $t_project_id ) ) {
-			continue;
+		$t_cfdef = custom_field_get_definition( $t_id );
+		$t_projects_to_check = array_intersect( $t_projects, custom_field_get_project_ids( $t_id ) );
+		if( access_has_any_project_level( (int)$t_cfdef['access_level_r'], $t_projects_to_check ) ) {
+			$t_columns[] = column_get_custom_field_column_name( $t_id );
 		}
-
-		$t_def = custom_field_get_definition( $t_id );
-		$t_columns[] = 'custom_' . $t_def['name'];
 	}
 
 	return $t_columns;
@@ -267,6 +285,54 @@ function column_is_extended( $p_column ) {
 }
 
 /**
+ * Checks if the specified column is a custom field column.
+ * @param string $p_column The column name.
+ * @return boolean True if its a custom field column
+ */
+function column_is_custom_field( $p_column ) {
+	$t_cf_columns = columns_get_custom_fields();
+	return in_array( $p_column, $t_cf_columns );
+}
+
+/**
+ * Checks if the specified column can be sorted
+ * @param string $p_column The column name.
+ * @return boolean True if the column can be sorted
+ */
+function column_is_sortable( $p_column ) {
+
+	# custom fields are always sortable
+	if( column_is_custom_field( $p_column ) ) {
+		return true;
+	}
+
+	# plugin fields contains a 'sortable' property
+	if( column_is_plugin_column( $p_column ) ) {
+		$t_plugin_columns = columns_get_plugin_columns();
+		$t_plugin_obj = $t_plugin_columns[$p_column];
+		return $t_plugin_obj->sortable;
+	}
+
+	#standard fields: define exceptions here
+	switch( $p_column ) {
+		case 'selection':
+		case 'edit':
+		case 'bugnotes_count':
+		case 'attachment_count':
+		case 'tags':
+		case 'overdue':
+		case 'additional_information':
+		case 'description':
+		case 'notes':
+		case 'steps_to_reproduce':
+			return false;
+	}
+
+	# after all exceptions, return true as default
+	return true;
+}
+
+/**
  * Given a column name from the array of columns to be included in a view, this method checks if
  * the column is a custom column and if so returns its name.  Note that for custom fields, then
  * provided names will have the "custom_" prefix, where the returned ones won't have the prefix.
@@ -277,10 +343,25 @@ function column_is_extended( $p_column ) {
  */
 function column_get_custom_field_name( $p_column ) {
 	if( strncmp( $p_column, 'custom_', 7 ) === 0 ) {
-		return utf8_substr( $p_column, 7 );
+		return mb_substr( $p_column, 7 );
 	}
 
 	return null;
+}
+
+/**
+ * Returns the name of a column corresponding to a custom field, providing the id as parameter.
+ *
+ * @param integer $p_cf_id	Custom field id
+ * @return string	The column name
+ */
+function column_get_custom_field_column_name( $p_cf_id ) {
+	$t_def = custom_field_get_definition( $p_cf_id );
+	if( $t_def ) {
+		return 'custom_' . $t_def['name'];
+	} else {
+		return null;
+	}
 }
 
 /**
@@ -291,9 +372,7 @@ function column_get_custom_field_name( $p_column ) {
  * @access public
  */
 function columns_string_to_array( $p_string ) {
-	$t_string = utf8_strtolower( $p_string );
-
-	$t_columns = explode( ',', $t_string );
+	$t_columns = explode( ',', $p_string );
 	$t_count = count( $t_columns );
 
 	for( $i = 0; $i < $t_count; $i++ ) {
@@ -374,11 +453,11 @@ function column_get_title( $p_column ) {
  * @access public
  */
 function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, array $p_columns_all ) {
-	$t_columns_all_lower = array_map( 'utf8_strtolower', $p_columns_all );
+	$t_columns_all_lower = array_map( 'mb_strtolower', $p_columns_all );
 
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
-		if( !in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( !in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
 			return false;
@@ -388,7 +467,7 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	# Check for duplicate fields
 	$t_columns_no_duplicates = array();
 	foreach( $p_columns_to_validate as $t_column ) {
-		$t_column_lower = utf8_strtolower( $t_column );
+		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
 			error_parameters( $p_field_name, $t_column );
 			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
@@ -410,11 +489,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
  * @access public
  */
 function columns_remove_invalid( array $p_columns, array $p_columns_all ) {
-	$t_columns_all_lower = array_values( array_map( 'utf8_strtolower', $p_columns_all ) );
+	$t_columns_all_lower = array_values( array_map( 'mb_strtolower', $p_columns_all ) );
 	$t_columns = array();
 
 	foreach( $p_columns as $t_column ) {
-		if( in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {
+		if( in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
 			$t_columns[] = $t_column;
 		}
 	}
@@ -610,6 +689,19 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
 }
 
 /**
+ * Print table header for column tags
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_tags( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-tags">' . lang_get('tags') . '</th>';
+}
+
+/**
  * Print table header for column target version
  *
  * @param string  $p_sort           Sort.
@@ -635,10 +727,9 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
  * @access public
  */
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
-	$t_view_state_icon = '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	$t_view_state_icon = ' <i class="fa fa-lock" title="' . $t_view_state_text . '"></i>';
 	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</th>';
@@ -754,9 +845,8 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
  * @access public
  */
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
-	$t_attachment_count_icon = '<img src="' . $t_icon_path . 'attachment.png" alt="' . $t_attachment_count_text . '" title="' . $t_attachment_count_text . '" />';
+	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" title=\"$t_attachment_count_text\" ></i>";
 	echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
 }
 
@@ -881,7 +971,7 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-bugnotes-count"> # </th>';
+	echo '<th class="column-bugnotes-count"> <i class="fa fa-comments blue"></i> </th>';
 }
 
 /**
@@ -896,6 +986,21 @@ function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target =
 function print_column_title_description( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-description">';
 	echo lang_get( 'description' );
+	echo '</th>';
+}
+
+/**
+ * Print table header for notes column.
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_notes( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-notes">';
+	echo lang_get( 'bug_notes_title' );
 	echo '</th>';
 }
 
@@ -954,10 +1059,9 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
  * @access public
  */
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 	echo '<th class="column-overdue">';
 	$t_overdue_text = lang_get( 'overdue' );
-	$t_overdue_icon = '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . $t_overdue_text . '" />';
+	$t_overdue_icon = ' <i class="fa fa-times-circle-o" title="' . $t_overdue_text . '"></i>';
 	print_view_bug_sort_link( $t_overdue_icon, 'due_date', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'due_date' );
 	echo '</th>';
@@ -975,7 +1079,8 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 	global $g_checkboxes_exist;
 
 	echo '<td class="column-selection">';
-	if( access_has_any_project( config_get( 'report_bug_threshold', null, null, $p_bug->project_id ) ) ||
+	if( # check report_bug_threshold for the actions "copy" or "move" into any other project
+		access_has_any_project_level( 'report_bug_threshold' ) ||
 		# !TODO: check if any other projects actually exist for the bug to be moved to
 		access_has_project_level( config_get( 'move_bug_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		# !TODO: factor in $g_auto_set_status_to_assigned == ON
@@ -990,7 +1095,10 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
 		$g_checkboxes_exist = true;
-		printf( '<input type="checkbox" name="bug_arr[]" value="%d" />', $p_bug->id );
+		echo '<div class="checkbox no-padding no-margin"><label>';
+		printf( '<input type="checkbox" name="bug_arr[]" value="%d" class="ace" />', $p_bug->id );
+		echo '<span class="lbl"></span>';
+		echo '</label></div>';
 	} else {
 		echo '&#160;';
 	}
@@ -1046,15 +1154,13 @@ function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_targe
  * @access public
  */
 function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-edit">';
 
 	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
 		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<img width="16" height="16" src="' . $t_icon_path . 'update.png';
-		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
-		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
+		echo '<i class="fa fa-pencil bigger-130 padding-2 grey"';
+		echo ' title="' . lang_get( 'update_bug_button' ) . '"></i></a>';
 	} else {
 		echo '&#160;';
 	}
@@ -1159,7 +1265,6 @@ function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_attachment_count( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	# Check for attachments
 	$t_attachment_count = 0;
@@ -1195,16 +1300,17 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 	$t_project_name = project_get_field( $p_bug->project_id, 'name' );
 
 	echo '<td class="column-category">';
+	echo '<div class="align-left">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
-		echo '<small class="project">[';
+		echo '<span class="small project">[';
 		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
-		echo ']</small><br />';
+		echo ']</span>&#160;&#160;';
 	}
 
 	echo string_display_line( category_full_name( $p_bug->category_id, false ) );
-
+	echo '</div>';
 	echo '</td>';
 }
 
@@ -1281,17 +1387,24 @@ function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_current_user = auth_get_current_user_id();
+	# choose color based on status
+	$status_label = html_get_status_css_class( $p_bug->status, $t_current_user, $p_bug->project_id );
 	echo '<td class="column-status">';
-	printf( '<span class="issue-status" title="%s">%s</span>',
-		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
-		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
+	echo '<div class="align-left">';
+	echo '<i class="fa fa-square fa-status-box ' . $status_label . '"></i> ';
+	printf( '<span title="%s">%s</span>',
+		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
+		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
 	);
 
-	# print username instead of status
-	if( ( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
+	# print handler user next to status
+	if( $p_bug->handler_id > 0
+			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $p_bug->project_id )
+			&& access_can_see_handler_for_bug( $p_bug ) ) {
 		printf( ' (%s)', prepare_user_name( $p_bug->handler_id ) );
 	}
-	echo '</td>';
+	echo '</div></td>';
 }
 
 /**
@@ -1411,6 +1524,20 @@ function print_column_description( BugData $p_bug, $p_columns_target = COLUMNS_T
 }
 
 /**
+ * Print column content for notes column
+ *
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_notes( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+
+	echo '<td class="column-notes">', string_display_links( $t_notes ), '</td>';
+}
+
+/**
  * Print column content for column steps to reproduce
  *
  * @param BugData $p_bug            BugData object.
@@ -1467,15 +1594,32 @@ function print_column_target_version( BugData $p_bug, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-view-state">';
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
-		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+		echo ' <i class="fa fa-lock" title="' . $t_view_state_text . '"></i>';
 	} else {
 		echo '&#160;';
+	}
+
+	echo '</td>';
+}
+
+/**
+ * Print column content for column tags
+ *
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<td class="column-tags">';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		echo string_display_line( tag_bug_get_all( $p_bug->id ) );
 	}
 
 	echo '</td>';
@@ -1515,7 +1659,6 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
  * @access public
  */
 function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
 
 	echo '<td class="column-overdue">';
 
@@ -1524,7 +1667,7 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 		bug_is_overdue( $p_bug->id ) ) {
 		$t_overdue_text = lang_get( 'overdue' );
 		$t_overdue_text_hover = sprintf( lang_get( 'overdue_since' ), date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-		echo '<img src="' . $t_icon_path . 'overdue.png" alt="' . $t_overdue_text . '" title="' . string_display_line( $t_overdue_text_hover ) . '" />';
+		echo '<i class="fa fa-times-circle-o" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
 	} else {
 		echo '&#160;';
 	}

@@ -46,9 +46,11 @@ news_ensure_enabled();
 
 $f_news_id = gpc_get_int( 'news_id', null );
 
-html_page_top();
-?>
+layout_page_header();
 
+layout_page_begin( 'main_page.php' );
+?>
+<div class="col-md-12 col-xs-12">
 <?php
 if( $f_news_id !== null ) {
 	$t_project_id = news_get_field( $f_news_id, 'project_id' );
@@ -63,9 +65,9 @@ if( $f_news_id !== null ) {
 }
 ?>
 
-<div id="news-menu">
-	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
+<div class="space-10"></div>
+	<?php print_link_button( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 </div>
 
 <?php
-html_page_bottom();
+layout_page_end();

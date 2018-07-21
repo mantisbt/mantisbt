@@ -137,7 +137,7 @@
 	    <para>Note that the scope of the applied change is
 	    dependent on the selected project.  If "All Projects" is selected,
 	    then the configuration is to be used as the default for all
-			projects, unless overidden by a specific project.  To configure for
+			projects, unless overridden by a specific project.  To configure for
 			a specific project, switch to it via the combobox at the
 			top right corner of the screen.
 		</para>

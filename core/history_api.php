@@ -82,8 +82,13 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 
 		$c_field_name = $p_field_name;
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
-		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
+		if( is_null( $p_new_value ) ) {
+			$c_new_value = '';
+		} else {
+			$c_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
+		}
 
+		db_param_push();
 		$t_query = 'INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
@@ -122,8 +127,11 @@ function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_ne
 	}
 	if( is_null( $p_new_value ) ) {
 		$p_new_value = '';
+	} else {
+		$p_new_value = mb_strimwidth( $p_new_value, 0, DB_FIELD_SIZE_HISTORY_VALUE, '...' );
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
@@ -157,83 +165,217 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 }
 
 /**
- * Retrieves the raw history events for the specified bug id and returns it in an array
- * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
- * 'field','type','old_value','new_value'
- * @param integer $p_bug_id  A valid bug identifier.
- * @param integer $p_user_id A valid user identifier.
- * @param integer $p_start_time The start time to filter by, or null for all.
- * @param integer $p_end_time   The end time to filter by, or null for all.
- * @return array
+ * Counts the number of changes done by the specified user within specified time window.
+ * @param  integer $p_duration_in_seconds The time window in seconds.
+ * @param  [type]  $p_user_id             The user id or null for logged in user.
+ * @return integer The number of changes done by user in the specified time window.
  */
-function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
-	$t_history_order = config_get( 'history_order' );
+function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = null ) {
+	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
-	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+	$t_params = array( db_now() - $p_duration_in_seconds, $t_user_id );
 
-	$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
-	$t_due_date_view_threshold = config_get( 'due_date_view_threshold' );
-
-	# grab history and display by date_modified then field_name
-	# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
-	# date, it's better to respect the storing order otherwise we should risk to mix different information
-	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
-	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
-	# for the new bug with the same timestamp...)
-
-	$t_params = array( $p_bug_id );
-
-	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param();
-
-	$t_where = array();
-	if ( $p_start_time !== null ) {
-		$t_where[] = 'date_modified >= ' . db_param();
-		$t_params[] = $p_start_time;
-	}
-
-	if ( $p_end_time !== null ) {
-		$t_where[] = 'date_modified < ' . db_param();
-		$t_params[] = $p_end_time;
-	}
-
-	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' AND ' . implode( ' AND ', $t_where );
-	}
-
-	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
-
+	db_param_push();
+	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
+				' AND user_id = ' . db_param();
 	$t_result = db_query( $t_query, $t_params );
-	$t_raw_history = array();
 
-	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
-	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
-	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
-	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
-	$t_show_handler_threshold = config_get( 'view_handler_threshold' );
+	$t_row = db_fetch_array( $t_result );
+	return $t_row['event_count'];
+}
 
-	$t_standard_fields = columns_get_standard();
-	$j = 0;
-	while( $t_row = db_fetch_array( $t_result ) ) {
+/**
+ * Creates and executes a query for the history rows, returning a database result object.
+ * Query options is an array with parameters to build the query.
+ *
+ * Supported options are:
+ * - "bug_id" => integer | array    Limit search to these bug ids.
+ * - "start_time" => integer        Timestamp for start time to filter by (inclusive)
+ * - "end_time" => integer          Timestamp for end time to filter by (exclusive)
+ * - "user_id" => integer | array   Limit search to actions by these user ids.
+ * - "filter" => filter array       A filter array to limit history to bugs matched by this filter.
+ * - "order" => Sort order          'ASC' or 'DESC' for result order.
+ *
+ * Any option can be omitted.
+ *
+ * @param array $p_query_options	Array of query options
+ * @return database result to pass into history_get_event_from_row().
+ */
+function history_query_result( array $p_query_options ) {
+	# check query order by
+	if( isset( $p_query_options['order'] ) ) {
+		$t_history_order = $p_query_options['order'];
+	} else {
+		$t_history_order = config_get( 'history_order' );
+	}
+
+	$t_query = new DbQuery();
+	$t_where = array();
+
+	# With bug filter
+	if( isset( $p_query_options['filter'] ) ) {
+		$t_subquery = new BugFilterQuery( $p_query_options['filter'], BugFilterQuery::QUERY_TYPE_IDS );
+		$t_where[] = '{bug_history}.bug_id IN ' . $t_query->param( $t_subquery );
+	}
+
+	# Start time
+	if( isset( $p_query_options['start_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified >= ' . $t_query->param( (int)$p_query_options['start_time'] );
+	}
+
+	# End time
+	if( isset( $p_query_options['end_time'] ) ) {
+		$t_where[] = '{bug_history}.date_modified < ' . $t_query->param( (int)$p_query_options['end_time'] );
+	}
+
+	# Bug ids
+	if( isset( $p_query_options['bug_id'] ) ) {
+		$c_ids = array();
+		if( is_array( $p_query_options['bug_id'] ) ) {
+			foreach( $p_query_options['bug_id'] as $t_id ) {
+				$c_ids[] = (int)$t_id;
+			}
+		} else {
+			$c_ids[] = (int)$p_query_options['bug_id'];
+		}
+		$t_where[] = $t_query->sql_in( '{bug_history}.bug_id', $c_ids );
+	}
+
+	# User ids
+	if( isset( $p_query_options['user_id'] ) ) {
+		$c_ids = array();
+		if( is_array( $p_query_options['user_id'] ) ) {
+			foreach( $p_query_options['user_id'] as $t_id ) {
+				$c_ids[] = (int)$t_id;
+			}
+		} else {
+			$c_ids[] = (int)$p_query_options['user_id'];
+		}
+		$t_where[] = $t_query->sql_in( '{bug_history}.user_id', $c_ids );
+	}
+
+	$t_query->append_sql( 'SELECT * FROM {bug_history}' );
+	if ( count( $t_where ) > 0 ) {
+		$t_query->append_sql( ' WHERE ' . implode( ' AND ', $t_where ) );
+	}
+
+	# Order history lines by date. Use the storing sequence as 2nd order field for lines with the same date.
+	$t_query->append_sql( ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order );
+	$t_result = $t_query->execute();
+	return $t_result;
+}
+
+/**
+ * Creates and executes a query for the history rows related to bugs matched by the provided filter
+ * @param  array $p_filter           Filter array
+ * @param  integer $p_start_time     The start time to filter by, or null for all.
+ * @param  integer $p_end_time       The end time to filter by, or null for all.
+ * @param  string  $p_history_order  The sort order.
+ * @return database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
+ */
+function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
+	}
+	if ( $p_start_time !== null ) {
+		$t_query_options['start_time'] = $p_start_time;
+	}
+	if ( $p_end_time !== null ) {
+		$t_query_options['end_time'] = $p_end_time;
+	}
+	if ( $p_filter !== null ) {
+		$t_query_options['filter'] = $p_filter;
+	}
+	return history_query_result( $t_query_options );
+}
+
+/**
+ * Creates and executes a query for the history rows matching the specified criteria.
+ * @param  integer $p_bug_id         The bug id or null for matching any bug.
+ * @param  integer $p_start_time     The start time to filter by, or null for all.
+ * @param  integer $p_end_time       The end time to filter by, or null for all.
+ * @param  string  $p_history_order  The sort order.
+ * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
+ * @deprecated		Use history_query_result() instead
+ */
+function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	$t_query_options = array();
+	if ( $p_history_order !== null ) {
+		$t_query_options['order'] = $p_history_order;
+	}
+	if ( $p_start_time !== null ) {
+		$t_query_options['start_time'] = $p_start_time;
+	}
+	if ( $p_end_time !== null ) {
+		$t_query_options['end_time'] = $p_end_time;
+	}
+	if ( $p_bug_id !== null ) {
+		$t_query_options['bug_id'] = $p_bug_id;
+	}
+	return history_query_result( $t_query_options );
+}
+
+/**
+ * Gets the next accessible history event for current user and specified db result.
+ * @param  object  $p_result      The database result.
+ * @param  integer $p_user_id     The user id or null for logged in user.
+ * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
+ *                                          false otherwise.
+ * @return array containing the history event or false if no more matches.
+ */
+function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
+	static $s_bug_visible = array();
+	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+
+	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
+		# Ignore entries related to non-existing bugs (see #20727)
+		if( !bug_exists( $v_bug_id ) ) {
+			continue;
+		}
+
+		if( $p_check_access_to_issue ) {
+			if( !isset( $s_bug_visible[$v_bug_id] ) ) {
+				$s_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
+			}
+
+			if( !$s_bug_visible[$v_bug_id] ) {
+				continue;
+			}
+		}
+
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
 		if( $v_type == NORMAL_TYPE ) {
-			if( !in_array( $v_field_name, $t_standard_fields ) ) {
+			if( !in_array( $v_field_name, columns_get_standard() ) ) {
 				# check that the item should be visible to the user
 				$t_field_id = custom_field_get_id_from_name( $v_field_name );
-				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
+				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $v_bug_id, $t_user_id ) ) {
 					continue;
 				}
 			}
 
-			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'target_version' ) &&
+				!access_has_bug_level( config_get( 'roadmap_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'due_date' ) &&
+				!access_has_bug_level( config_get( 'due_date_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'handler_id' ) &&
+				!access_has_bug_level( config_get( 'view_handler_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -242,13 +384,21 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
 			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !bugnote_exists( $v_old_value ) ) {
+					continue;
+				}
+
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
 
 			if( $v_type == BUGNOTE_STATE_CHANGED ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !bugnote_exists( $v_new_value ) ) {
+					continue;
+				}
+
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
@@ -256,21 +406,21 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 
 		# tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
-			if( !access_has_bug_level( $t_tag_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'tag_view_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# attachments
 		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
-			if( !access_has_bug_level( $t_view_attachments_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'view_attachments_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# monitoring
 		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
-			if( !access_has_bug_level( $t_show_monitor_list_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -286,17 +436,53 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 			}
 		}
 
-		$t_raw_history[$j]['date'] = $v_date_modified;
-		$t_raw_history[$j]['userid'] = $v_user_id;
+		$t_event = array();
+		$t_event['bug_id'] = $v_bug_id;
+		$t_event['date'] = $v_date_modified;
+		$t_event['userid'] = $v_user_id;
+		$t_event['username'] = user_get_name( $v_user_id );
+		$t_event['field'] = $v_field_name;
+		$t_event['type'] = $v_type;
+		$t_event['old_value'] = $v_old_value;
+		$t_event['new_value'] = $v_new_value;
 
-		# user_get_name handles deleted users, and username vs realname
-		$t_raw_history[$j]['username'] = user_get_name( $v_user_id );
+		return $t_event;
+	}
 
-		$t_raw_history[$j]['field'] = $v_field_name;
-		$t_raw_history[$j]['type'] = $v_type;
-		$t_raw_history[$j]['old_value'] = $v_old_value;
-		$t_raw_history[$j]['new_value'] = $v_new_value;
+	return false;
+}
 
+/**
+ * Retrieves the raw history events for the specified bug id and returns it in an array
+ * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
+ * 'field','type','old_value','new_value'
+ * @param integer $p_bug_id  A valid bug identifier or null to not filter by bug.  If no bug id is specified,
+ *                           then returned array will have a field for bug_id, otherwise it won't.
+ * @param integer $p_user_id A valid user identifier.
+ * @param integer $p_start_time The start time to filter by, or null for all.
+ * @param integer $p_end_time   The end time to filter by, or null for all.
+ * @return array
+ */
+function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
+	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+
+	$t_query_options = array(
+		'bug_id' => $p_bug_id,
+		'start_time' => $p_start_time,
+		'end_time' => $p_end_time
+		);
+	$t_result = history_query_result( $t_query_options );
+
+	$t_raw_history = array();
+
+	$j = 0;
+	while( true ) {
+		$t_event = history_get_event_from_row( $t_result, $t_user_id, /* check access */ true );
+		if ( $t_event === false ) {
+			break;
+		}
+
+		$t_raw_history[$j] = $t_event;
 		$j++;
 	}
 
@@ -306,110 +492,51 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 }
 
 /**
- * Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
- * Returns array with two elements indexed as 'note' and 'change'
- * @param string  $p_field_name The field name of the field being localized.
- * @param integer $p_type       The type of the history entry.
- * @param string  $p_old_value  The old value of the field.
- * @param string  $p_new_value  The new value of the field.
- * @param boolean $p_linkify    Whether to return a string containing hyperlinks.
- * @return array
+ * Localize the specified field name for native or custom fields.
+ *
+ * @param string $p_field_name The field name.
+ * @return string The localized field name.
  */
-function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
-	$t_note = '';
-	$t_change = '';
-	$t_field_localized = $p_field_name;
-	$t_raw = true;
-
-	if( PLUGIN_HISTORY == $p_type ) {
-		$t_note = lang_get_defaulted( 'plugin_' . $p_field_name, $p_field_name );
-		$t_change = ( isset( $p_new_value ) ? $p_old_value . ' => ' . $p_new_value : $p_old_value );
-
-		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
-	}
-
+function history_localize_field_name( $p_field_name ) {
 	switch( $p_field_name ) {
 		case 'category':
 			$t_field_localized = lang_get( 'category' );
 			break;
 		case 'status':
-			$p_old_value = get_enum_element( 'status', $p_old_value );
-			$p_new_value = get_enum_element( 'status', $p_new_value );
 			$t_field_localized = lang_get( 'status' );
 			break;
 		case 'severity':
-			$p_old_value = get_enum_element( 'severity', $p_old_value );
-			$p_new_value = get_enum_element( 'severity', $p_new_value );
 			$t_field_localized = lang_get( 'severity' );
 			break;
 		case 'reproducibility':
-			$p_old_value = get_enum_element( 'reproducibility', $p_old_value );
-			$p_new_value = get_enum_element( 'reproducibility', $p_new_value );
 			$t_field_localized = lang_get( 'reproducibility' );
 			break;
 		case 'resolution':
-			$p_old_value = get_enum_element( 'resolution', $p_old_value );
-			$p_new_value = get_enum_element( 'resolution', $p_new_value );
 			$t_field_localized = lang_get( 'resolution' );
 			break;
 		case 'priority':
-			$p_old_value = get_enum_element( 'priority', $p_old_value );
-			$p_new_value = get_enum_element( 'priority', $p_new_value );
 			$t_field_localized = lang_get( 'priority' );
 			break;
 		case 'eta':
-			$p_old_value = get_enum_element( 'eta', $p_old_value );
-			$p_new_value = get_enum_element( 'eta', $p_new_value );
 			$t_field_localized = lang_get( 'eta' );
 			break;
 		case 'view_state':
-			$p_old_value = get_enum_element( 'view_state', $p_old_value );
-			$p_new_value = get_enum_element( 'view_state', $p_new_value );
 			$t_field_localized = lang_get( 'view_status' );
 			break;
 		case 'projection':
-			$p_old_value = get_enum_element( 'projection', $p_old_value );
-			$p_new_value = get_enum_element( 'projection', $p_new_value );
 			$t_field_localized = lang_get( 'projection' );
 			break;
 		case 'sticky':
-			$p_old_value = gpc_string_to_bool( $p_old_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
-			$p_new_value = gpc_string_to_bool( $p_new_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
 			$t_field_localized = lang_get( 'sticky_issue' );
 			break;
 		case 'project_id':
-			if( project_exists( $p_old_value ) ) {
-				$p_old_value = project_get_field( $p_old_value, 'name' );
-			} else {
-				$p_old_value = '@' . $p_old_value . '@';
-			}
-
-			# Note that the new value maybe an intermediately project and not the
-			# current one.
-			if( project_exists( $p_new_value ) ) {
-				$p_new_value = project_get_field( $p_new_value, 'name' );
-			} else {
-				$p_new_value = '@' . $p_new_value . '@';
-			}
 			$t_field_localized = lang_get( 'email_project' );
 			break;
 		case 'handler_id':
 			$t_field_localized = lang_get( 'assigned_to' );
+			break;
 		case 'reporter_id':
-			if( 'reporter_id' == $p_field_name ) {
-				$t_field_localized = lang_get( 'reporter' );
-			}
-			if( 0 == $p_old_value ) {
-				$p_old_value = '';
-			} else {
-				$p_old_value = user_get_name( $p_old_value );
-			}
-
-			if( 0 == $p_new_value ) {
-				$p_new_value = '';
-			} else {
-				$p_new_value = user_get_name( $p_new_value );
-			}
+			$t_field_localized = lang_get( 'reporter' );
 			break;
 		case 'version':
 			$t_field_localized = lang_get( 'product_version' );
@@ -421,13 +548,9 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			$t_field_localized = lang_get( 'target_version' );
 			break;
 		case 'date_submitted':
-			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
-			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
 			$t_field_localized = lang_get( 'date_submitted' );
 			break;
 		case 'last_updated':
-			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
-			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
 			$t_field_localized = lang_get( 'last_update' );
 			break;
 		case 'os':
@@ -452,16 +575,225 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			$t_field_localized = lang_get( 'sponsorship_total' );
 			break;
 		case 'due_date':
+			$t_field_localized = lang_get( 'due_date' );
+			break;
+		default:
+			# assume it's a custom field name
+			$t_field_localized = lang_get_defaulted( $p_field_name );
+			break;
+	}
+
+	return $t_field_localized;
+}
+
+/**
+ * Get name of the change type.
+ *
+ * @param integer $p_type The type code.
+ * @return string The type name.
+ */
+function history_get_type_name( $p_type ) {
+	$t_type = (int)$p_type;
+
+	switch( $t_type ) {
+		case NORMAL_TYPE:
+			$t_type_name = 'field-updated';
+			break;
+		case NEW_BUG:
+			$t_type_name = 'issue-new';
+			break;
+		case BUGNOTE_ADDED:
+			$t_type_name = 'note-added';
+			break;
+		case BUGNOTE_UPDATED:
+			$t_type_name = 'note-updated';
+			break;
+		case BUGNOTE_DELETED:
+			$t_type_name = 'note-deleted';
+			break;
+		case DESCRIPTION_UPDATED:
+			$t_type_name = 'issue-description-updated';
+			break;
+		case ADDITIONAL_INFO_UPDATED:
+			$t_type_name = 'issue-additional-info-updated';
+			break;
+		case STEP_TO_REPRODUCE_UPDATED:
+			$t_type_name = 'issue-steps-to-reproduce-updated';
+			break;
+		case FILE_ADDED:
+			$t_type_name = 'file-added';
+			break;
+		case FILE_DELETED:
+			$t_type_name = 'file-deleted';
+			break;
+		case BUGNOTE_STATE_CHANGED:
+			$t_type_name = 'note-view-state-updated';
+			break;
+		case BUG_MONITOR:
+			$t_type_name = 'monitor-added';
+			break;
+		case BUG_UNMONITOR:
+			$t_type_name = 'monitor-deleted';
+			break;
+		case BUG_DELETED:
+			$t_type_name = 'issue-deleted';
+			break;
+		case BUG_ADD_SPONSORSHIP:
+			$t_type_name = 'sponsorship-added';
+			break;
+		case BUG_UPDATE_SPONSORSHIP:
+			$t_type_name = 'sponsorship-updated';
+			break;
+		case BUG_DELETE_SPONSORSHIP:
+			$t_type_name = 'sponsorship-deleted';
+			break;
+		case BUG_PAID_SPONSORSHIP:
+			$t_type_name = 'sponsorship-paid';
+			break;
+		case BUG_ADD_RELATIONSHIP:
+			$t_type_name = 'relationship-added';
+			break;
+		case BUG_REPLACE_RELATIONSHIP:
+			$t_type_name = 'relationship-updated';
+			break;
+		case BUG_DEL_RELATIONSHIP:
+			$t_type_name = 'relationship-deleted';
+			break;
+		case BUG_CLONED_TO:
+			$t_type_name = 'issue-cloned-to';
+			break;
+		case BUG_CREATED_FROM:
+			$t_type_name = 'issue-cloned-from';
+			break;
+		case TAG_ATTACHED:
+			$t_type_name = 'tag-added';
+			break;
+		case TAG_DETACHED:
+			$t_type_name = 'tag-deleted';
+			break;
+		case TAG_RENAMED:
+			$t_type_name = 'tag-updated';
+			break;
+		case BUG_REVISION_DROPPED:
+			$t_type_name = 'revision-deleted';
+			break;
+		case BUGNOTE_REVISION_DROPPED:
+			$t_type_name = 'note-revision-deleted';
+			break;
+		default:
+			$t_type_name = '';
+			break;
+	}
+
+	return $t_type_name;
+}
+
+/**
+ * Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
+ * Returns array with two elements indexed as 'note' and 'change'
+ * @param string  $p_field_name The field name of the field being localized.
+ * @param integer $p_type       The type of the history entry.
+ * @param string  $p_old_value  The old value of the field.
+ * @param string  $p_new_value  The new value of the field.
+ * @param boolean $p_linkify    Whether to return a string containing hyperlinks.
+ * @return array
+ */
+function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
+	$t_note = '';
+	$t_change = '';
+	$t_raw = true;
+
+	if( PLUGIN_HISTORY == $p_type ) {
+		$t_note = lang_get_defaulted( 'plugin_' . $p_field_name, $p_field_name );
+		$t_change = ( isset( $p_new_value ) ? $p_old_value . ' => ' . $p_new_value : $p_old_value );
+
+		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
+	}
+
+	$t_field_localized = history_localize_field_name( $p_field_name );
+	switch( $p_field_name ) {
+		case 'status':
+			$p_old_value = get_enum_element( 'status', $p_old_value );
+			$p_new_value = get_enum_element( 'status', $p_new_value );
+			break;
+		case 'severity':
+			$p_old_value = get_enum_element( 'severity', $p_old_value );
+			$p_new_value = get_enum_element( 'severity', $p_new_value );
+			break;
+		case 'reproducibility':
+			$p_old_value = get_enum_element( 'reproducibility', $p_old_value );
+			$p_new_value = get_enum_element( 'reproducibility', $p_new_value );
+			break;
+		case 'resolution':
+			$p_old_value = get_enum_element( 'resolution', $p_old_value );
+			$p_new_value = get_enum_element( 'resolution', $p_new_value );
+			break;
+		case 'priority':
+			$p_old_value = get_enum_element( 'priority', $p_old_value );
+			$p_new_value = get_enum_element( 'priority', $p_new_value );
+			break;
+		case 'eta':
+			$p_old_value = get_enum_element( 'eta', $p_old_value );
+			$p_new_value = get_enum_element( 'eta', $p_new_value );
+			break;
+		case 'view_state':
+			$p_old_value = get_enum_element( 'view_state', $p_old_value );
+			$p_new_value = get_enum_element( 'view_state', $p_new_value );
+			break;
+		case 'projection':
+			$p_old_value = get_enum_element( 'projection', $p_old_value );
+			$p_new_value = get_enum_element( 'projection', $p_new_value );
+			break;
+		case 'sticky':
+			$p_old_value = gpc_string_to_bool( $p_old_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
+			$p_new_value = gpc_string_to_bool( $p_new_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
+			break;
+		case 'project_id':
+			if( project_exists( $p_old_value ) ) {
+				$p_old_value = project_get_field( $p_old_value, 'name' );
+			} else {
+				$p_old_value = '@' . $p_old_value . '@';
+			}
+
+			# Note that the new value maybe an intermediately project and not the
+			# current one.
+			if( project_exists( $p_new_value ) ) {
+				$p_new_value = project_get_field( $p_new_value, 'name' );
+			} else {
+				$p_new_value = '@' . $p_new_value . '@';
+			}
+			break;
+		case 'handler_id':
+		case 'reporter_id':
+			if( 0 == $p_old_value ) {
+				$p_old_value = '';
+			} else {
+				$p_old_value = user_get_name( $p_old_value );
+			}
+
+			if( 0 == $p_new_value ) {
+				$p_new_value = '';
+			} else {
+				$p_new_value = user_get_name( $p_new_value );
+			}
+			break;
+		case 'date_submitted':
+			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
+			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
+			break;
+		case 'last_updated':
+			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
+			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
+			break;
+		case 'due_date':
 			if( $p_old_value !== '' ) {
 				$p_old_value = date( config_get( 'normal_date_format' ), (int)$p_old_value );
 			}
 			if( $p_new_value !== '' ) {
 				$p_new_value = date( config_get( 'normal_date_format' ), (int)$p_new_value );
 			}
-			$t_field_localized = lang_get( 'due_date' );
 			break;
 		default:
-
 			# assume it's a custom field name
 			$t_field_id = custom_field_get_id_from_name( $p_field_name );
 			if( false !== $t_field_id ) {
@@ -469,8 +801,8 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 				if( '' != $p_old_value ) {
 					$p_old_value = string_custom_field_value_for_email( $p_old_value, $t_cf_type );
 				}
+
 				$p_new_value = string_custom_field_value_for_email( $p_new_value, $t_cf_type );
-				$t_field_localized = lang_get_defaulted( $p_field_name );
 			}
 		}
 
@@ -625,6 +957,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @return void
  */
 function history_delete( $p_bug_id ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( $p_bug_id ) );
 }

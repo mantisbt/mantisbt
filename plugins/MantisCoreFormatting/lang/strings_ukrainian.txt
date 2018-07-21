@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -40,6 +40,7 @@
  *
  * @author Andriykopanytsia
  * @author Base
+ * @author Piramidion
  */
 
 $s_plugin_format_title = 'Форматування MantisBT';
@@ -50,5 +51,7 @@ $s_plugin_format_process_text_warning_notice = 'Не вимикайте, якщ�
 $s_plugin_format_process_urls = 'Обробка URL';
 $s_plugin_format_process_buglinks = 'Внутрішні посилання MantisBT (завдання/коментарі)';
 $s_plugin_format_process_buglinks_info = 'Ваша конфігурація визначає теґ <em>Issue</em> «<literal>%s</literal>», а теґ <em>Issue Note</em> - як «<literal>%s</literal>»';
+$s_plugin_format_process_markdown = 'Опрацювання через Markdown';
+$s_plugin_format_process_markdown_info = 'Налаштування стилю з підтримкою Markdown, синтаксис форматування тексту, розроблений так, щоб його можна було конвертувати в HTML.';
 $s_plugin_format_enabled = 'вкл';
 $s_plugin_format_disabled = 'викл';

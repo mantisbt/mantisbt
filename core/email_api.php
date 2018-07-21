@@ -47,7 +47,7 @@
  * @uses user_pref_api.php
  * @uses utility_api.php
  *
- * @uses class.phpmailer.php PHPMailer library
+ * @uses PHPMailerAutoload.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -74,34 +74,38 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+use Mantis\Exceptions\ClientException;
 
 # reusable object of class SMTP
 $g_phpMailer = null;
 
-# Indicates whether any emails are currently stored for process during this request.
-# Note: This is only used if not sending emails via cron job
-$g_email_stored = false;
+/**
+ * Indicates how generated emails will be processed by the shutdown function
+ * at the end of the current request's execution; this is a binary flag:
+ * - EMAIL_SHUTDOWN_SKIP       Initial state: do nothing (no generated emails)
+ * - EMAIL_SHUTDOWN_GENERATED  Emails will be sent, unless $g_email_send_using_cronjob is ON
+ * - EMAIL_SHUTDOWN_FORCE      All queued emails will be sent regardless of cronjob settings
+ * @see email_shutdown_function()
+ * @global $g_email_shutdown_processing
+ */
+$g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Regex for valid email addresses
+ * @see string_insert_hrefs()
+ * This pattern is consistent with email addresses validation logic
+ * @see $g_validate_email
+ * Uses the standard HTML5 pattern defined in
+ * {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * Note: the original regex from the spec has been modified to
+ * - escape the '/' in the first character class definition
+ * - remove the '^' and '$' anchors to allow matching anywhere in a string
+ * - add a limit of 64 chars on local part to avoid timeouts on very long texts with false matches.
+ *
  * @return string
  */
 function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
-
-		# a domain is one or more subdomains
-		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
-
-		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
-	}
-	return $s_email_regex;
+	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
 }
 
 /**
@@ -110,27 +114,41 @@ function email_regex_simple() {
  * @return boolean
  */
 function email_is_valid( $p_email ) {
+	$t_validate_email = config_get( 'validate_email' );
+
 	# if we don't validate then just accept
-	if( OFF == config_get( 'validate_email' ) ||
+	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
+	# accounts that should never receive email notifications (e.g. anonymous account)
+	if( OFF == $t_validate_email ||
 		ON == config_get( 'use_ldap_email' ) ||
-		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
+		( is_blank( $p_email ) && ( ON == config_get( 'allow_blank_email' ) || current_user_is_administrator() ) )
 	) {
 		return true;
 	}
 
+	# E-mail validation method
+	# Note: PHPMailer offers alternative validation methods.
+	# It was decided in PR 172 (https://github.com/mantisbt/mantisbt/pull/172)
+	# to just default to HTML5 without over-complicating things for end users
+	# by offering a potentially confusing choice between the different methods.
+	# Refer to PHPMailer documentation for ValidateAddress method for details.
+	# @link https://github.com/PHPMailer/PHPMailer/blob/v5.2.9/class.phpmailer.php#L863
+	$t_method = 'html5';
+
 	# check email address is a valid format
-	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email ) ) {
-		$t_domain = substr( $t_email, strpos( $t_email, '@' ) + 1 );
+	log_event( LOG_EMAIL_VERBOSE, "Validating address '$p_email' with method '$t_method'" );
+	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
 				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
-					return true; # no need to check mx record details (below) if we've explicity allowed the domain
+					return true; # no need to check mx record details (below) if we've explicitly allowed the domain
 				}
 			}
+			log_event( LOG_EMAIL, "failed - not in limited domains list '$t_limit_email_domains'" );
 			return false;
 		}
 
@@ -147,11 +165,14 @@ function email_is_valid( $p_email ) {
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
+				log_event( LOG_EMAIL, "failed - mx/dns record check" );
 			}
 		} else {
-			# Email format was valid but did't check for valid mx records
+			# Email format was valid but didn't check for valid mx records
 			return true;
 		}
+	} else {
+		log_event( LOG_EMAIL, "failed - invalid address" );
 	}
 
 	# Everything failed.  The email is invalid
@@ -165,7 +186,9 @@ function email_is_valid( $p_email ) {
  */
 function email_ensure_valid( $p_email ) {
 	if( !email_is_valid( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Email '%s' is invalid.", $p_email ),
+			ERROR_EMAIL_INVALID );
 	}
 }
 
@@ -175,11 +198,7 @@ function email_ensure_valid( $p_email ) {
  * @return boolean
  */
 function email_is_disposable( $p_email ) {
-	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable/disposable.php' );
-	}
-
-	return DisposableEmailChecker::is_disposable_email( $p_email );
+	return \VBoctor\Email\DisposableEmailChecker::is_disposable_email( $p_email );
 }
 
 /**
@@ -190,27 +209,42 @@ function email_is_disposable( $p_email ) {
  */
 function email_ensure_not_disposable( $p_email ) {
 	if( email_is_disposable( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_DISPOSABLE, ERROR );
+		throw new ClientException(
+			sprintf( "Email '%s' is disposable.", $p_email ),
+			ERROR_EMAIL_DISPOSABLE
+		);
 	}
 }
 
 /**
- * email_notify_flag
  * Get the value associated with the specific action and flag.
  * For example, you can get the value associated with notifying "admin"
  * on action "new", i.e. notify administrators on new bugs which can be
  * ON or OFF.
  * @param string $p_action Action.
  * @param string $p_flag   Flag.
- * @return integer
+ * @return integer 1 - enabled, 0 - disabled.
  */
 function email_notify_flag( $p_action, $p_flag ) {
+	# If flag is specified for the specific event, use that.
 	$t_notify_flags = config_get( 'notify_flags' );
-	$t_default_notify_flags = config_get( 'default_notify_flags' );
 	if( isset( $t_notify_flags[$p_action][$p_flag] ) ) {
 		return $t_notify_flags[$p_action][$p_flag];
-	} else if( isset( $t_default_notify_flags[$p_flag] ) ) {
+	}
+
+	# If not, then use the default if specified in database or global.
+	# Note that web UI may not support or specify all flags (e.g. explicit),
+	# hence, if config is retrieved from database it may not have the flag.
+	$t_default_notify_flags = config_get( 'default_notify_flags' );
+	if( isset( $t_default_notify_flags[$p_flag] ) ) {
 		return $t_default_notify_flags[$p_flag];
+	}
+
+	# If the flag is not specified so far, then force using global config which
+	# should have all flags specified.
+	$t_global_default_notify_flags = config_get_global( 'default_notify_flags' );
+	if( isset( $t_global_default_notify_flags[$p_flag] ) ) {
+		return $t_global_default_notify_flags[$p_flag];
 	}
 
 	return OFF;
@@ -223,64 +257,94 @@ function email_notify_flag( $p_action, $p_flag ) {
  * @param integer $p_bug_id                  A bug identifier.
  * @param string  $p_notify_type             Notification type.
  * @param array   $p_extra_user_ids_to_email Array of additional email addresses to notify.
+ * @param integer $p_bugnote_id The bugnote id in case of bugnote, otherwise null.
  * @return array
  */
-function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array() ) {
+function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_user_ids_to_email = array(), $p_bugnote_id = null ) {
 	$t_recipients = array();
 
 	# add explicitly specified users
-	if( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
-		foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
+	$t_explicit_enabled = ( ON == email_notify_flag( $p_notify_type, 'explicit' ) );
+	foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
+		if ( $t_explicit_enabled ) {
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (explicitly specified)', $p_bug_id, $t_user_id );
+		} else {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, skip @U%d (explicit disabled)', $p_bug_id, $t_user_id );
 		}
 	}
 
 	# add Reporter
+	$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 	if( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
-		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 		$t_recipients[$t_reporter_id] = true;
-		log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Reporter = @U%d', $p_bug_id, $t_reporter_id );
+		log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (reporter)', $p_bug_id, $t_reporter_id );
+	} else {
+		log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, skip @U%d (reporter disabled)', $p_bug_id, $t_reporter_id );
 	}
 
 	# add Handler
-	if( ON == email_notify_flag( $p_notify_type, 'handler' ) ) {
-		$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-
-		if( $t_handler_id > 0 ) {
+	$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+	if( $t_handler_id > 0 ) {
+		if( ON == email_notify_flag( $p_notify_type, 'handler' ) ) {
 			$t_recipients[$t_handler_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Handler = @U%d', $p_bug_id, $t_handler_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (handler)', $p_bug_id, $t_handler_id );
+		} else {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, skip @U%d (handler disabled)', $p_bug_id, $t_handler_id );
 		}
 	}
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 	# add users monitoring the bug
-	if( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
-		$t_query = 'SELECT DISTINCT user_id FROM {bug_monitor} WHERE bug_id=' . db_param();
-		$t_result = db_query( $t_query, array( $p_bug_id ) );
+	$t_monitoring_enabled = ON == email_notify_flag( $p_notify_type, 'monitor' );
+	db_param_push();
+	$t_query = 'SELECT DISTINCT user_id FROM {bug_monitor} WHERE bug_id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_user_id = $t_row['user_id'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_user_id = $t_row['user_id'];
+		if ( $t_monitoring_enabled ) {
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Monitor = @U%d', $p_bug_id, $t_user_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (monitoring)', $p_bug_id, $t_user_id );
+		} else {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, skip @U%d (monitoring disabled)', $p_bug_id, $t_user_id );
+		}
+	}
+
+	# add Category Owner
+	if( ON == email_notify_flag( $p_notify_type, 'category' ) ) {
+		$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
+
+		if( $t_category_id > 0 ) {
+			$t_category_assigned_to = category_get_field( $t_category_id, 'user_id' );
+
+			if( $t_category_assigned_to > 0 ) {
+				$t_recipients[$t_category_assigned_to] = true;
+				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Category Owner = @U%d', $p_bug_id, $t_category_assigned_to ) );
+			}
 		}
 	}
 
 	# add users who contributed bugnotes
-	$t_bugnote_id = bugnote_get_latest_id( $p_bug_id );
-	$t_bugnote_view = bugnote_get_field( $t_bugnote_id, 'view_state' );
-	$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	$t_bugnote_id = ( $p_bugnote_id === null ) ? bugnote_get_latest_id( $p_bug_id ) : $p_bugnote_id;
+	if( $t_bugnote_id !== 0 ) {
+		$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
+	}
 	$t_bug = bug_get( $p_bug_id );
 	$t_bug_date = $t_bug->last_updated;
 
-	if( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
-		$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
-		$t_result = db_query( $t_query, array( $p_bug_id ) );
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_user_id = $t_row['reporter_id'];
+	$t_notes_enabled = ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) );
+	db_param_push();
+	$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_user_id = $t_row['reporter_id'];
+		if ( $t_notes_enabled ) {
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Note Author = @U%d', $p_bug_id, $t_user_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (note author)', $p_bug_id, $t_user_id );
+		} else {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, skip @U%d (note author disabled)', $p_bug_id, $t_user_id );
 		}
 	}
 
@@ -293,7 +357,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		if( $t_user['access_level'] <= $t_threshold_max ) {
 			if( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
 				$t_recipients[$t_user['id']] = true;
-				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Project User = @U%d', $p_bug_id, $t_user['id'] );
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (based on access level)', $p_bug_id, $t_user['id'] );
 			}
 		}
 	}
@@ -306,7 +370,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 			if( is_array( $t_recipients_included ) ) {
 				foreach( $t_recipients_included as $t_user_id ) {
 					$t_recipients[$t_user_id] = true;
-					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id );
+					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (by %s plugin)', $p_bug_id, $t_user_id, $t_plugin );
 				}
 			}
 		}
@@ -337,12 +401,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'relation':
 		case 'monitor':
 		case 'priority': # This is never used, but exists in the database!
-			# FIXME: these notification actions are not actually implemented
+			# Issue #19459 these notification actions are not actually implemented
 			# in the database and therefore aren't adjustable on a per-user
 			# basis! The exception is 'monitor' that makes no sense being a
 			# customisable per-user preference.
-			$t_pref_field = false;
-			break;
 		default:
 			# Anything not built-in is probably going to be a status
 			$t_pref_field = 'email_on_status';
@@ -363,13 +425,13 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	foreach( $t_recipients as $t_id => $t_ignore ) {
 		# Possibly eliminate the current user
 		if( ( auth_get_current_user_id() == $t_id ) && ( OFF == config_get( 'email_receive_own' ) ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (own)', $p_bug_id, $t_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (own action)', $p_bug_id, $t_id );
 			continue;
 		}
 
 		# Eliminate users who don't exist anymore or who are disabled
 		if( !user_exists( $t_id ) || !user_is_enabled( $t_id ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (disabled)', $p_bug_id, $t_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (user disabled)', $p_bug_id, $t_id );
 			continue;
 		}
 
@@ -396,7 +458,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
 		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $p_bug_id, $t_id )
-		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id )
+		 || ( $t_bugnote_id !== 0 &&
+				$t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id ) )
 		) {
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;
@@ -410,7 +473,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 				# exclude if any plugin returns true (excludes the user)
 				if( $t_recipient_excluded ) {
 					$t_exclude = true;
-					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin dropped user @U%d', $p_bug_id, $t_plugin, $t_id );
+					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (by %s plugin)', $p_bug_id, $t_id, $t_plugin );
 				}
 			}
 		}
@@ -423,7 +486,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		# Finally, let's get their emails, if they've set one
 		$t_email = user_get_email( $t_id );
 		if( is_blank( $t_email ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (no email)', $p_bug_id, $t_id );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (no email address)', $p_bug_id, $t_id );
 		} else {
 			# @@@ we could check the emails for validity again but I think
 			#   it would be too slow
@@ -437,12 +500,11 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 /**
  * Send password to user
  * @param integer $p_user_id      A valid user identifier.
- * @param string  $p_password     A valid password.
  * @param string  $p_confirm_hash Confirmation hash.
  * @param string  $p_admin_name   Administrator name.
  * @return void
  */
-function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name = '' ) {
+function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	if( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 		return;
 	}
@@ -451,7 +513,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	#  use same language as display for the email
 	#  lang_push( user_pref_get_language( $p_user_id ) );
 	# retrieve the username and email
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = user_get_email( $p_user_id );
 
 	# Build Welcome Message
@@ -468,7 +530,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
 	}
 
@@ -482,15 +544,22 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
  * @return void
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	if( OFF == config_get( 'send_reset_password' ) ||
-		OFF == config_get( 'enable_email_notification' ) ) {
+	if( OFF == config_get( 'send_reset_password' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'Password reset email notifications disabled.' );
 		return;
 	}
-
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+	if( !user_is_enabled( $p_user_id ) ) {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, user is disabled', $p_user_id );
+		return;
+	}
 	lang_push( user_pref_get_language( $p_user_id ) );
 
 	# retrieve the username and email
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = user_get_email( $p_user_id );
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
@@ -500,8 +569,10 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
+	} else {
+		log_event( LOG_EMAIL, 'Password reset for user @U%d not sent, email is empty', $p_user_id );
 	}
 
 	lang_pop();
@@ -514,8 +585,13 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
  * @return void
  */
 function email_notify_new_account( $p_username, $p_email ) {
+	log_event( LOG_EMAIL, 'New account for user %s', $p_username );
+
 	$t_threshold_min = config_get( 'notify_new_user_created_threshold_min' );
 	$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
+	$t_user_ids = array_keys( $t_threshold_users );
+	user_cache_array_rows( $t_user_ids );
+	user_pref_cache_array_rows( $t_user_ids );
 
 	foreach( $t_threshold_users as $t_user ) {
 		lang_push( user_pref_get_language( $t_user['id'] ) );
@@ -551,7 +627,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
 	# @todo yarick123:sort recipients list by language to reduce switches between different languages
 	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
-	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params, $p_extra_user_ids_to_email );
+	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params );
 }
 
 /**
@@ -565,6 +641,10 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
  * @return void
  */
 function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
+	if( empty( $p_recipients ) ) {
+		return;
+	}
+
 	if( OFF == config_get( 'enable_email_notification' ) ) {
 		return;
 	}
@@ -578,13 +658,13 @@ function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipi
 	if( is_array( $p_recipients ) ) {
 		# send email to every recipient
 		foreach( $p_recipients as $t_user_id => $t_user_email ) {
-			log_event( LOG_EMAIL, 'Issue = #%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.', $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
+			log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.', $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
 
 			# load (push) user language here as build_visible_bug_data assumes current language
 			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
 			$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params );
+			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_user_id, $p_header_optional_params );
 
 			lang_pop();
 		}
@@ -613,25 +693,54 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
  * @param integer $p_bug_id         A bug identifier.
  * @param integer $p_related_bug_id Related bug identifier.
  * @param integer $p_rel_type       Relationship type.
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
  * @return void
  */
-function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event( LOG_EMAIL, 'Relationship added: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type );
-
-	$t_opt = array();
-	$t_opt[] = bug_format_id( $p_related_bug_id );
+function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p_email_for_source ) {
 	global $g_relationships;
+
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
 
-	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+	$t_rev_rel_type = relationship_get_complementary_type( $p_rel_type );
+	if( !isset( $g_relationships[$t_rev_rel_type] ) ) {
+		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+	}
+
+	log_event(
+		LOG_EMAIL,
+		'Issue #%d relationship added to issue #%d (relationship type %s)',
+		$p_bug_id,
+		$p_related_bug_id,
+		$g_relationships[$p_rel_type]['#description'] );
+
+	# Source issue email notification
+	if( $p_email_for_source ) {
+		$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+
+		# Recipient has to have access to both bugs to get the notification.
+		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_related_bug_id );
+
+		email_generic_to_recipients(
+			$p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
+	}
+
+	# Destination issue email notification
+	$t_recipients = email_collect_recipients( $p_related_bug_id, 'relation' );
 
 	# Recipient has to have access to both bugs to get the notification.
-    $t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-    $t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
 
-    email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
+	$t_opt = array();
+	$t_opt[] = bug_format_id( $p_bug_id );
+	email_generic_to_recipients(
+		$p_related_bug_id, 'relation', $t_recipients, $g_relationships[$t_rev_rel_type]['#notify_added'], $t_opt );
 }
 
 /**
@@ -661,25 +770,85 @@ function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
  * @param integer $p_bug_id         A bug identifier.
  * @param integer $p_related_bug_id Related bug identifier.
  * @param integer $p_rel_type       Relationship type.
+ * @param integer $p_skip_email_for_issue_id Skip email for specified issue, otherwise 0.
  * @return void
  */
-function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event( LOG_EMAIL, 'Relationship deleted: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type );
-
-	$t_opt = array();
-	$t_opt[] = bug_format_id( $p_related_bug_id );
+function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, $p_skip_email_for_issue_id = 0 ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
 
-    $t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+	$t_rev_rel_type = relationship_get_complementary_type( $p_rel_type );
+	if( !isset( $g_relationships[$t_rev_rel_type] ) ) {
+		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+	}
 
-    # Recipient has to have access to both bugs to get the notification.
-    $t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
-    $t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+	log_event(
+		LOG_EMAIL,
+		'Issue #%d relationship to issue #%d (relationship type %s) deleted.',
+		$p_bug_id,
+		$p_related_bug_id,
+		$g_relationships[$p_rel_type]['#description'] );
 
-    email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_deleted'], $t_opt );
+	if( $p_bug_id != $p_skip_email_for_issue_id ) {
+		$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+
+		# Recipient has to have access to both bugs to get the notification.
+		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_related_bug_id );
+		email_generic_to_recipients(
+			$p_bug_id,
+			'relation',
+			$t_recipients,
+			$g_relationships[$p_rel_type]['#notify_deleted'],
+			$t_opt );
+	}
+
+	if( $p_bug_id != $p_related_bug_id && bug_exists( $p_related_bug_id) ) {
+		$t_recipients = email_collect_recipients( $p_related_bug_id, 'relation' );
+
+		# Recipient has to have access to both bugs to get the notification.
+		$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+		$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_bug_id );
+		email_generic_to_recipients(
+			$p_related_bug_id,
+			'relation',
+			$t_recipients,
+			$g_relationships[$t_rev_rel_type]['#notify_deleted'],
+			$t_opt );
+	}
+}	
+
+/**
+ * Email related issues when a bug is deleted.  This should be deleted before the bug is deleted.
+ *
+ * @param integer $p_bug_id The id of the bug to be deleted.
+ * @return void
+ */
+function email_relationship_bug_deleted( $p_bug_id ) {
+	$t_ignore = false;
+	$t_relationships = relationship_get_all( $p_bug_id, $t_ignore );
+	if( empty( $t_relationships ) ) {
+		return;
+	}
+
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d has been deleted, sending notifications to related issues', $p_bug_id ) );
+
+	foreach( $t_relationships as $t_relationship ) {
+		$t_related_bug_id = $p_bug_id == $t_relationship->src_bug_id ?
+			$t_relationship->dest_bug_id : $t_relationship->src_bug_id;
+
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_bug_id );
+		email_generic( $t_related_bug_id, 'handler', 'email_notification_title_for_action_related_issue_deleted', $t_opt );
+	}
 }
 
 /**
@@ -716,6 +885,12 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 		return;
 	}
 
+	if( $p_message_id == 'email_notification_title_for_action_relationship_child_closed' ) {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue closed', $p_bug_id ) );
+	} else {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d child issue resolved', $p_bug_id ) );
+	}
+
 	for( $i = 0;$i < $t_relationship_count;$i++ ) {
 		if( $t_relationship[$i]->type == BUG_DEPENDANT ) {
 			$t_src_bug_id = $t_relationship[$i]->src_bug_id;
@@ -732,16 +907,242 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 }
 
 /**
+ * send notices when a bug is sponsored
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_added( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship added', $p_bug_id ) );
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_added' );
+}
+
+/**
+ * send notices when a sponsorship is modified
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_updated( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship updated', $p_bug_id ) );
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_updated' );
+}
+
+/**
+ * send notices when a sponsorship is deleted
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_deleted( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship removed', $p_bug_id ) );
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_deleted' );
+}
+
+/**
+ * send notices when a new bug is added
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_added( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d reported', $p_bug_id ) );
+	email_generic( $p_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
+}
+
+/**
+ * Send notifications for bug update.
+ * @param int $p_bug_id  The bug id.
+ */
+function email_bug_updated( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d updated', $p_bug_id ) );
+	email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+}
+
+/**
+ * send notices when a new bugnote
+ * @param int $p_bugnote_id  The bugnote id.
+ * @param array $p_files The array of file information (keys: name, size)
+ * @param array $p_exclude_user_ids The id of users to exclude.
+ * @return void
+ */
+function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_ids = array() ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return;
+	}
+
+	ignore_user_abort( true );
+
+	$t_bugnote = bugnote_get( $p_bugnote_id );
+
+	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
+
+	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
+	$t_separator = config_get( 'email_separator2' );
+	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
+	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
+	$t_message_id = 'email_notification_title_for_action_bugnote_submitted';
+
+	$t_subject = email_build_subject( $t_bugnote->bug_id );
+
+	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
+	$t_recipients_verbose = array();
+
+	# send email to every recipient
+	foreach( $t_recipients as $t_user_id => $t_user_email ) {
+		if( in_array( $t_user_id, $p_exclude_user_ids ) ) {
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d excluded, Email = \'%s\'.',
+				$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted', $t_user_id, $t_user_email );
+			continue;
+		}
+
+		# Load this here per user to allow overriding this per user, or even per user per project
+		if( config_get( 'email_notifications_verbose', /* default */ null, $t_user_id, $t_project_id ) == ON ) {
+			$t_recipients_verbose[$t_user_id] = $t_user_email;
+			continue;
+		}
+
+		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.',
+			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', $t_message_id, $t_user_id, $t_user_email );
+
+		# load (push) user language
+		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+
+		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
+
+		$t_show_time_tracking = access_has_bug_level( $t_time_tracking_access_threshold, $t_bugnote->bug_id, $t_user_id );
+		$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
+		$t_message .= trim( $t_formatted_note ) . "\n";
+		$t_message .= $t_separator . "\n";
+
+		# Files attached
+		if( count( $p_files ) > 0 &&
+			access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
+			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
+
+			foreach( $p_files as $t_file ) {
+				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
+					' ' . lang_get( 'bytes' ) . ")\n";
+			}
+
+			$t_message .= $t_separator . "\n";
+		}
+
+		$t_contents = $t_message . "\n";
+
+		email_store( $t_user_email, $t_subject, $t_contents );
+
+		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
+			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
+
+		lang_pop();
+	}
+
+	# Send emails out for users that select verbose notifications
+	email_generic_to_recipients(
+		$t_bugnote->bug_id,
+		'bugnote',
+		$t_recipients_verbose,
+		$t_message_id );
+}
+
+/**
+ * send notices when a bug is RESOLVED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_resolved( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d resolved', $p_bug_id ) );
+	email_generic( $p_bug_id, 'resolved', 'email_notification_title_for_status_bug_resolved' );
+}
+
+/**
+ * send notices when a bug is CLOSED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_close( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d closed', $p_bug_id ) );
+	email_generic( $p_bug_id, 'closed', 'email_notification_title_for_status_bug_closed' );
+}
+
+/**
+ * send notices when a bug is REOPENED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_reopened( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d reopened', $p_bug_id ) );
+	email_generic( $p_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
+}
+
+/**
+ * Send notices when a bug handler is changed.
+ * @param int $p_bug_id
+ * @param int $p_prev_handler_id
+ * @param int $p_new_handler_id
+ * @return null
+ */
+function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
+	if ( $p_prev_handler_id == 0 && $p_new_handler_id != 0 ) {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d assigned to user @U%d.', $p_bug_id, $p_new_handler_id ) );
+	} else if ( $p_prev_handler_id != 0 && $p_new_handler_id == 0 ) {
+		log_event( LOG_EMAIL, sprintf( 'Issue #%d is no longer assigned to @U%d.', $p_bug_id, $p_prev_handler_id ) );
+	} else {
+		log_event(
+			LOG_EMAIL,
+			sprintf(
+				'Issue #%d is assigned to @U%d instead of @U%d.',
+				$p_bug_id,
+				$p_new_handler_id,
+				$p_prev_handler_id )
+		);
+	}
+
+	$t_message_id = $p_new_handler_id == NO_USER ?
+			'email_notification_title_for_action_bug_unassigned' :
+			'email_notification_title_for_action_bug_assigned';
+
+	$t_extra_user_ids_to_email = array();
+	if ( $p_prev_handler_id !== NO_USER && $p_prev_handler_id != $p_new_handler_id ) {
+		if ( email_notify_flag( 'owner', 'handler' ) == ON ) {
+			$t_extra_user_ids_to_email[] = $p_prev_handler_id;
+		}
+	}
+
+	email_generic( $p_bug_id, 'owner', $t_message_id, /* headers */ null, $t_extra_user_ids_to_email );
+}
+
+/**
+ * Send notifications when bug status is changed.
+ * @param int $p_bug_id The bug id
+ * @param string $p_new_status_label The new status label.
+ */
+function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d status changed', $p_bug_id ) );
+	email_generic( $p_bug_id, $p_new_status_label, 'email_notification_title_for_status_bug_' . $p_new_status_label );
+}
+
+/**
+ * send notices when a bug is DELETED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_deleted( $p_bug_id ) {
+	log_event( LOG_EMAIL, sprintf( 'Issue #%d deleted', $p_bug_id ) );
+	email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
+}
+
+/**
  * Store email in queue for sending
  *
- * @param string $p_recipient Email recipient address.
- * @param string $p_subject   Subject of email message.
- * @param string $p_message   Body text of email message.
- * @param array  $p_headers   Array of additional headers to send with the email.
+ * @param string  $p_recipient Email recipient address.
+ * @param string  $p_subject   Subject of email message.
+ * @param string  $p_message   Body text of email message.
+ * @param array   $p_headers   Array of additional headers to send with the email.
+ * @param boolean $p_force     True to force sending of emails in shutdown function,
+ *                             even when using cronjob
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null ) {
-	global $g_email_stored;
+function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false ) {
+	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
 	$t_subject = string_email( trim( $p_subject ) );
@@ -760,7 +1161,6 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->body = $t_message;
 	$t_email_data->metadata = array();
 	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
-	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_email_data->metadata['charset'] = 'utf-8';
@@ -778,7 +1178,11 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 
 	$t_email_id = email_queue_add( $t_email_data );
 
-	$g_email_stored = true;
+	# Set the email processing flag for the shutdown function
+	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
+	if( $p_force ) {
+		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
+	}
 
 	return $t_email_id;
 }
@@ -796,7 +1200,7 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 function email_send_all( $p_delete_on_failure = false ) {
 	$t_ids = email_queue_get_ids();
 
-	log_event( LOG_EMAIL, 'Processing e-mail queue (' . count( $t_ids ) . ' messages)' );
+	log_event( LOG_EMAIL_VERBOSE, 'Processing e-mail queue (' . count( $t_ids ) . ' messages)' );
 
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
@@ -805,15 +1209,20 @@ function email_send_all( $p_delete_on_failure = false ) {
 		# check if email was not found.  This can happen if another request picks up the email first and sends it.
 		if( $t_email_data === false ) {
 			$t_email_sent = true;
-			log_event( LOG_EMAIL, 'Message #$t_id has already been sent' );
+			log_event( LOG_EMAIL_VERBOSE, 'Message $t_id has already been sent' );
 		} else {
-			log_event( LOG_EMAIL, 'Sending message #' . $t_id );
+			log_event( LOG_EMAIL_VERBOSE, 'Sending message ' . $t_id );
 			$t_email_sent = email_send( $t_email_data );
 		}
 
 		if( !$t_email_sent ) {
-			if( $p_delete_on_failure ) {
-				email_queue_delete( $t_email_data->email_id );
+			# Delete emails that were submitted more than N days ago
+			$t_submitted = (int)$t_email_data->submitted;
+			$t_delete_after_in_days = (int)config_get_global( 'email_retry_in_days' );
+			$t_retry_cutoff = time() - ( $t_delete_after_in_days * 24 * 60 * 60 );
+			if( $p_delete_on_failure || $t_submitted < $t_retry_cutoff ) {
+				$t_reason = $p_delete_on_failure ? 'delete on failure' : 'retry expired';
+				email_queue_delete( $t_email_data->email_id, $t_reason );
 			}
 
 			# If unable to place the email in the email server queue and more
@@ -862,9 +1271,9 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
-	$t_lang = config_get( 'default_language' );
+	$t_lang = config_get_global( 'default_language' );
 	if( 'auto' == $t_lang ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 	$t_mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ) );
 
@@ -891,7 +1300,10 @@ function email_send( EmailData $p_email_data ) {
 				$t_mail->Password = config_get( 'smtp_password' );
 			}
 
-			if( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+			if( is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+				$t_mail->SMTPAutoTLS = false;
+			}
+			else {
 				$t_mail->SMTPSecure = config_get( 'smtp_connection_mode' );
 			}
 
@@ -900,9 +1312,18 @@ function email_send( EmailData $p_email_data ) {
 			break;
 	}
 
+	#apply DKIM settings
+	if( config_get( 'email_dkim_enable' ) ) {
+		$t_mail->DKIM_domain = config_get( 'email_dkim_domain' );
+		$t_mail->DKIM_private = config_get( 'email_dkim_private_key_file_path' );
+		$t_mail->DKIM_private_string = config_get( 'email_dkim_private_key_string' );
+		$t_mail->DKIM_selector = config_get( 'email_dkim_selector' );
+		$t_mail->DKIM_passphrase = config_get( 'email_dkim_passphrase' );
+		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
+	}
+
 	$t_mail->IsHTML( false );              # set email format to plain text
-	$t_mail->WordWrap = 80;              # set word wrap to 50 characters
-	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
+	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
 	$t_mail->From = config_get( 'from_email' );
@@ -915,9 +1336,14 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->LE         = "\r\n";
 	$t_mail->Encoding   = 'quoted-printable';
 
+	if( isset( $t_email_data->metadata['priority'] ) ) {
+		$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
+	}
+
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
+		log_event(LOG_EMAIL_VERBOSE, "Using debug email '$t_debug_email'");
 	}
 
 	try {
@@ -934,7 +1360,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->Subject = $t_subject;
-	$t_mail->Body = make_lf_crlf( "\n" . $t_message );
+	$t_mail->Body = make_lf_crlf( $t_message );
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
@@ -1076,13 +1502,89 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 			$t_sender_email = '';
 		}
 		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'sent_you_this_reminder_about' ) . ': ' . "\n\n";
-		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n" . $p_message;
+		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message;
 
 		$t_id = email_store( $t_email, $t_subject, $t_contents );
 		if( $t_id !== null ) {
 			$t_result[] = $t_recipient;
 		}
-		log_event( LOG_EMAIL, 'queued reminder email #' . $t_id . ' for U' . $t_recipient );
+		log_event( LOG_EMAIL_VERBOSE, 'queued reminder email ' . $t_id . ' for U' . $t_recipient );
+
+		lang_pop();
+	}
+
+	return $t_result;
+}
+
+/**
+ * Send a notification to user or set of users that were mentioned in an issue
+ * or an issue note.
+ *
+ * @param integer       $p_bug_id     Issue for which the reminder is sent.
+ * @param array         $p_mention_user_ids User id or list of user ids array.
+ * @param string        $p_message    Optional message to add to the e-mail.
+ * @param array         $p_removed_mention_user_ids  The users that were removed due to lack of access.
+ * @return array        List of users ids to whom the mentioned e-mail were actually sent
+ */
+function email_user_mention( $p_bug_id, $p_mention_user_ids, $p_message, $p_removed_mention_user_ids = array() ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		log_event( LOG_EMAIL_VERBOSE, 'email notifications disabled.' );
+		return array();
+	}
+
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_sender_id = auth_get_current_user_id();
+	$t_sender = user_get_name( $t_sender_id );
+
+	$t_subject = email_build_subject( $p_bug_id );
+	$t_date = date( config_get( 'normal_date_format' ) );
+	$t_user_id = auth_get_current_user_id();
+	$t_users_processed = array();
+
+	foreach( $p_removed_mention_user_ids as $t_removed_mention_user_id ) {
+		log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_removed_mention_user_id . ' (no access to issue or note).' );
+	}
+
+	$t_result = array();
+	foreach( $p_mention_user_ids as $t_mention_user_id ) {
+		# Don't trigger mention emails for self mentions
+		if( $t_mention_user_id == $t_user_id ) {
+			log_event( LOG_EMAIL_VERBOSE, 'skipped mention email for U' . $t_mention_user_id . ' (self-mention).' );
+			continue;
+		}
+
+		# Don't process a user more than once
+		if( isset( $t_users_processed[$t_mention_user_id] ) ) {
+			continue;
+		}
+
+		$t_users_processed[$t_mention_user_id] = true;
+
+		# Don't email mention notifications to disabled users.
+		if( !user_is_enabled( $t_mention_user_id ) ) {
+			continue;
+		}
+
+		lang_push( user_pref_get_language( $t_mention_user_id, $t_project_id ) );
+
+		$t_email = user_get_email( $t_mention_user_id );
+
+		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_mention_user_id ) ) {
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '> ';
+		} else {
+			$t_sender_email = '';
+		}
+
+		$t_complete_subject = sprintf( lang_get( 'mentioned_in' ), $t_subject );
+		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'mentioned_you' ) . "\n\n";
+		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id ) . " \n\n" . $p_message;
+
+		$t_id = email_store( $t_email, $t_complete_subject, $t_contents );
+		if( $t_id !== null ) {
+			$t_result[] = $t_mention_user_id;
+		}
+
+		log_event( LOG_EMAIL_VERBOSE, 'queued mention email ' . $t_id . ' for U' . $t_mention_user_id );
 
 		lang_pop();
 	}
@@ -1095,12 +1597,11 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * return true on success
  * @param array   $p_visible_bug_data       Array of bug data information.
  * @param string  $p_message_id             A message identifier.
- * @param integer $p_project_id             A project identifier.
  * @param integer $p_user_id                A valid user identifier.
  * @param array   $p_header_optional_params Array of additional email headers.
  * @return void
  */
-function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id, array $p_header_optional_params = null ) {
+function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_user_id, array $p_header_optional_params = null ) {
 	$t_user_email = user_get_email( $p_user_id );
 
 	# check whether email should be sent
@@ -1113,7 +1614,6 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 	$t_subject = email_build_subject( $p_visible_bug_data['email_bug'] );
 
 	# build message
-
 	$t_message = lang_get_defaulted( $p_message_id, null );
 
 	if( is_array( $p_header_optional_params ) ) {
@@ -1145,6 +1645,51 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 }
 
 /**
+ * Generates a formatted note to be used in email notifications.
+ *
+ * @param BugnoteData $p_bugnote The bugnote object.
+ * @param integer $p_project_id  The project id
+ * @param boolean $p_show_time_tracking true: show time tracking, false otherwise.
+ * @param string $p_horizontal_separator The horizontal line separator to use.
+ * @param string $p_date_format The date format to use.
+ * @return string The formatted note.
+ */
+function email_format_bugnote( $p_bugnote, $p_project_id, $p_show_time_tracking, $p_horizontal_separator, $p_date_format = null ) {
+	$t_date_format = ( $p_date_format === null ) ? config_get( 'normal_date_format' ) : $p_date_format;
+
+	$t_last_modified = date( $t_date_format, $p_bugnote->last_modified );
+
+	$t_formatted_bugnote_id = bugnote_format_id( $p_bugnote->id );
+	$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $p_bugnote->id, false, false, true );
+
+	if( $p_show_time_tracking && $p_bugnote->time_tracking > 0 ) {
+		$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $p_bugnote->time_tracking ) . "\n";
+	} else {
+		$t_time_tracking = '';
+	}
+
+	if( user_exists( $p_bugnote->reporter_id ) ) {
+		$t_access_level = access_get_project_level( $p_project_id, $p_bugnote->reporter_id );
+		$t_access_level_string = ' (' . access_level_get_string( $t_access_level ) . ')';
+	} else {
+		$t_access_level_string = '';
+	}
+
+	$t_private = ( $p_bugnote->view_state == VS_PUBLIC ) ? '' : ' (' . lang_get( 'private' ) . ')';
+
+	$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $p_bugnote->reporter_id ) .
+		$t_access_level_string . ' - ' . $t_last_modified . $t_private . "\n" .
+		$t_time_tracking . ' ' . $t_bugnote_link;
+
+	$t_message  = $p_horizontal_separator . " \n";
+	$t_message .= $t_string . " \n";
+	$t_message .= $p_horizontal_separator . " \n";
+	$t_message .= $p_bugnote->note . " \n";
+
+	return $t_message;
+}
+
+/**
  * Build the bug info part of the message
  * @param array $p_visible_bug_data Bug data array to format.
  * @return string
@@ -1157,15 +1702,8 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	$t_email_separator2 = config_get( 'email_separator2' );
 	$t_email_padding_length = config_get( 'email_padding_length' );
 
-	$t_status = $p_visible_bug_data['email_status'];
-
 	$p_visible_bug_data['email_date_submitted'] = date( $t_complete_date_format, $p_visible_bug_data['email_date_submitted'] );
 	$p_visible_bug_data['email_last_modified'] = date( $t_complete_date_format, $p_visible_bug_data['email_last_modified'] );
-
-	$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );
-	$p_visible_bug_data['email_severity'] = get_enum_element( 'severity', $p_visible_bug_data['email_severity'] );
-	$p_visible_bug_data['email_priority'] = get_enum_element( 'priority', $p_visible_bug_data['email_priority'] );
-	$p_visible_bug_data['email_reproducibility'] = get_enum_element( 'reproducibility', $p_visible_bug_data['email_reproducibility'] );
 
 	$t_message = $t_email_separator1 . " \n";
 
@@ -1180,11 +1718,35 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
+
+	if( isset( $p_visible_bug_data['email_tag'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_tag' );
+	}
+
+	if ( isset( $p_visible_bug_data[ 'email_reproducibility' ] ) ) {
+		$p_visible_bug_data['email_reproducibility'] = get_enum_element( 'reproducibility', $p_visible_bug_data['email_reproducibility'] );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
+	}
+		
+	if ( isset( $p_visible_bug_data[ 'email_severity' ] ) ) {
+		$p_visible_bug_data['email_severity'] = get_enum_element( 'severity', $p_visible_bug_data['email_severity'] );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
+	}
+
+	if ( isset( $p_visible_bug_data[ 'email_priority' ] ) ) {
+		$p_visible_bug_data['email_priority'] = get_enum_element( 'priority', $p_visible_bug_data['email_priority'] );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
+	}
+
+	if ( isset( $p_visible_bug_data[ 'email_status' ] ) ) {
+		$t_status = $p_visible_bug_data['email_status'];
+		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
+	}
+
+	if ( isset( $p_visible_bug_data[ 'email_target_version' ] ) ) {	
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
+	}
 
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
@@ -1195,32 +1757,41 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# end foreach custom field
 
-	if( config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
-		$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
-		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
+	if( isset( $t_status ) && config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
+		
+		if ( isset( $p_visible_bug_data[ 'email_resolution' ] ) ) {
+			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
+			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
+		}
+			
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 	}
 	$t_message .= $t_email_separator1 . " \n";
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
+
+	if( isset( $p_visible_bug_data['email_due_date'] ) ) {
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_due_date' );
+	}
+
 	$t_message .= $t_email_separator1 . " \n";
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . $p_visible_bug_data['email_description'] . "\n";
 
-	if( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
+	if( isset( $p_visible_bug_data[ 'email_steps_to_reproduce' ] ) && !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . $p_visible_bug_data['email_steps_to_reproduce'] . "\n";
 	}
 
-	if( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
+	if( isset( $p_visible_bug_data[ 'email_additional_information' ] ) && !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . $p_visible_bug_data['email_additional_information'] . "\n";
 	}
 
 	if( isset( $p_visible_bug_data['relations'] ) ) {
 		if( $p_visible_bug_data['relations'] != '' ) {
-			$t_message .= $t_email_separator1 . "\n" . str_pad( lang_get( 'bug_relationships' ), 20 ) . str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
+			$t_message .= $t_email_separator1 . "\n" . utf8_str_pad( lang_get( 'bug_relationships' ), 20 ) . utf8_str_pad( lang_get( 'id' ), 8 ) . lang_get( 'summary' ) . "\n" . $t_email_separator2 . "\n" . $p_visible_bug_data['relations'];
 		}
 	}
 
@@ -1244,30 +1815,9 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	# format bugnotes
 	foreach( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
-		$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
-
-		$t_formatted_bugnote_id = bugnote_format_id( $t_bugnote->id );
-		$t_bugnote_link = string_process_bugnote_link( config_get( 'bugnote_link_tag' ) . $t_bugnote->id, false, false, true );
-
-		if( $t_bugnote->time_tracking > 0 ) {
-			$t_time_tracking = ' ' . lang_get( 'time_tracking' ) . ' ' . db_minutes_to_hhmm( $t_bugnote->time_tracking ) . "\n";
-		} else {
-			$t_time_tracking = '';
-		}
-
-		if( user_exists( $t_bugnote->reporter_id ) ) {
-			$t_access_level = access_get_project_level( $p_visible_bug_data['email_project_id'], $t_bugnote->reporter_id );
-			$t_access_level_string = ' (' . get_enum_element( 'access_levels', $t_access_level ) . ') - ';
-		} else {
-			$t_access_level_string = '';
-		}
-
-		$t_string = ' (' . $t_formatted_bugnote_id . ') ' . user_get_name( $t_bugnote->reporter_id ) . $t_access_level_string . $t_last_modified . "\n" . $t_time_tracking . ' ' . $t_bugnote_link;
-
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_string . " \n";
-		$t_message .= $t_email_separator2 . " \n";
-		$t_message .= $t_bugnote->note . " \n\n";
+		# Show time tracking is always true, since data has already been filtered out when creating the bug visible data.
+		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'],
+				/* show_time_tracking */ true,  $t_email_separator2, $t_normal_date_format ) . "\n";
 	}
 
 	# format history
@@ -1325,6 +1875,8 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	$t_row = bug_get_extended_row( $p_bug_id );
 	$t_bug_data = array();
 
+	$t_bug_view_fields = config_get( 'bug_view_page_fields', null, $p_user_id, $t_row['project_id'] );
+
 	$t_bug_data['email_bug'] = $p_bug_id;
 
 	if( $p_message_id !== 'email_notification_title_for_action_bug_deleted' ) {
@@ -1346,25 +1898,60 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	$t_category_name = category_full_name( $t_row['category_id'], false );
 	$t_bug_data['email_category'] = $t_category_name;
 
+	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
+	if( in_array( 'tags', $t_bug_view_fields ) && !empty( $t_tag_rows ) && access_compare_level( $t_user_access_level, config_get( 'tag_view_threshold' ) ) ) {
+		$t_bug_data['email_tag'] = '';
+
+		foreach( $t_tag_rows as $t_tag ) {
+			$t_bug_data['email_tag'] .= $t_tag['name'] . ', ';
+		}
+
+		$t_bug_data['email_tag'] = trim( $t_bug_data['email_tag'], ', ' );
+	}
+
 	$t_bug_data['email_date_submitted'] = $t_row['date_submitted'];
 	$t_bug_data['email_last_modified'] = $t_row['last_updated'];
 
-	$t_bug_data['email_status'] = $t_row['status'];
-	$t_bug_data['email_severity'] = $t_row['severity'];
-	$t_bug_data['email_priority'] = $t_row['priority'];
-	$t_bug_data['email_reproducibility'] = $t_row['reproducibility'];
+	if( !date_is_null( $t_row['due_date'] ) && access_compare_level( $t_user_access_level, config_get( 'due_date_view_threshold' ) ) ) {
+		$t_bug_data['email_due_date'] = date( config_get( 'short_date_format' ), $t_row['due_date'] );
+	}
 
-	$t_bug_data['email_resolution'] = $t_row['resolution'];
+	if ( in_array( 'status', $t_bug_view_fields ) ) {	
+		$t_bug_data['email_status'] = $t_row['status'];
+	}
+	
+	if ( in_array( 'severity', $t_bug_view_fields ) ) {	
+		$t_bug_data['email_severity'] = $t_row['severity'];
+	}
+	
+	if ( in_array( 'priority', $t_bug_view_fields ) ) {	
+		$t_bug_data['email_priority'] = $t_row['priority'];
+	}
+
+	if ( in_array( 'reproducibility', $t_bug_view_fields ) ) {
+		$t_bug_data['email_reproducibility'] = $t_row['reproducibility'];
+	}
+	
+	if ( in_array( 'resolution', $t_bug_view_fields ) ) {	
+		$t_bug_data['email_resolution'] = $t_row['resolution'];
+	}
+		
 	$t_bug_data['email_fixed_in_version'] = $t_row['fixed_in_version'];
 
-	if( !is_blank( $t_row['target_version'] ) && access_compare_level( $t_user_access_level, config_get( 'roadmap_view_threshold' ) ) ) {
+	if( in_array( 'target_version', $t_bug_view_fields ) && !is_blank( $t_row['target_version'] ) && access_compare_level( $t_user_access_level, config_get( 'roadmap_view_threshold' ) ) ) {
 		$t_bug_data['email_target_version'] = $t_row['target_version'];
 	}
 
 	$t_bug_data['email_summary'] = $t_row['summary'];
 	$t_bug_data['email_description'] = $t_row['description'];
-	$t_bug_data['email_additional_information'] = $t_row['additional_information'];
-	$t_bug_data['email_steps_to_reproduce'] = $t_row['steps_to_reproduce'];
+
+	if( in_array( 'additional_info', $t_bug_view_fields ) ) {
+		$t_bug_data['email_additional_information'] = $t_row['additional_information'];
+	}
+	
+	if ( in_array( 'steps_to_reproduce', $t_bug_view_fields ) ) {
+		$t_bug_data['email_steps_to_reproduce'] = $t_row['steps_to_reproduce'];
+	}
 
 	$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $t_category_name;
 
@@ -1395,3 +1982,60 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	return $t_bug_data;
 }
+
+/**
+ * The email sending shutdown function
+ * Will send any queued emails, except when $g_email_send_using_cronjob = ON.
+ * If $g_email_shutdown_processing EMAIL_SHUTDOWN_FORCE flag is set, emails
+ * will be sent regardless of cronjob setting.
+ * @return void
+ */
+function email_shutdown_function() {
+	global $g_email_shutdown_processing;
+
+	# Nothing to do if
+	# - no emails have been generated in the current request
+	# - system is configured to use cron job (unless processing is forced)
+	if(    $g_email_shutdown_processing == EMAIL_SHUTDOWN_SKIP
+		|| (   !( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE )
+			&& config_get( 'email_send_using_cronjob' )
+		   )
+	) {
+		return;
+	}
+
+	$t_msg ='Shutdown function called for ' . $_SERVER['SCRIPT_NAME'];
+	if( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE ) {
+		$t_msg .= ' (email processing forced)';
+	}
+
+	log_event( LOG_EMAIL_VERBOSE, $t_msg );
+
+	if( $g_email_shutdown_processing ) {
+		email_send_all();
+	}
+}
+
+/**
+ * Get the list of supported email actions.
+ *
+ * @return array List of actions
+ */
+function email_get_actions() {
+	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+
+	if( config_get( 'enable_sponsorship' ) == ON ) {
+		$t_actions[] = 'sponsor';
+	}
+
+	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	ksort( $t_statuses );
+	reset( $t_statuses );
+
+	foreach( $t_statuses as $t_label ) {
+		$t_actions[] = $t_label;
+	}
+
+	return $t_actions;
+}
+

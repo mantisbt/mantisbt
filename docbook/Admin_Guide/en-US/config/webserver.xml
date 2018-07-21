@@ -7,20 +7,6 @@
 
 	<variablelist>
 		<varlistentry>
-			<term>$g_session_handler</term>
-			<listitem>
-				<para>Session handler. Possible values are as per the
-				list below; the default is <emphasis>php</emphasis>.
-					<itemizedlist>
-						<listitem><para><emphasis>php</emphasis>: PHP filesystem sessions</para></listitem>
-						<listitem><para><emphasis>adodb</emphasis>: Database storage sessions</para></listitem>
-						<listitem><para><emphasis>memcached</emphasis>: Memcached storage sessions</para></listitem>
-					</itemizedlist>
-				</para>
-			</listitem>
-		</varlistentry>
-
-		<varlistentry>
 			<term>$g_session_save_path</term>
 			<listitem>
 				<para>Location where session files are stored.
@@ -35,7 +21,10 @@
 			<listitem>
 				<para>Use Session validation (defaults to <emphasis>ON</emphasis>)
 				</para>
-				<para><emphasis>WARNING: Disabling this could be a potential security risk</emphasis></para>
+				<warning>
+					<para>Disabling this could be a potential security risk !
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 
@@ -48,8 +37,44 @@
 				Some proxy servers may not correctly work with this option enabled
 				because they cache pages incorrectly.
 				</para>
-				<para><emphasis>WARNING: Disabling this option is a security risk,
-				it is strongly recommended to leave it ON</emphasis></para>
+				<warning>
+					<para>Disabling this option is a security risk,
+						it is strongly recommended to leave it ON
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_custom_headers</term>
+			<listitem>
+				<para>An array of custom headers to be sent with each page.
+				</para>
+				<para>For example, to allow your MantisBT installation to be
+					viewed in a frame in IE6 when the frameset is not at the
+					same hostname as the MantisBT install, you need to add a
+					P3P header. You could try something like
+<programlisting>
+$g_custom_headers = array( 'P3P: CP="CUR ADM"' );
+</programlisting>
+					in your config file, but make sure to check that your policy
+					actually matches with what you are promising. See
+					<ulink url="http://msdn.microsoft.com/en-us/library/ms537343.aspx">
+						MSDN</ulink> for more information.
+				</para>
+				<para>Even though it is not recommended, you could also use
+					this setting to disable previously sent headers. For example,
+					assuming you didn't want to benefit from Content Security
+					Policy (CSP), you could set:
+<programlisting>
+$g_custom_headers = array( 'Content-Security-Policy:' );
+</programlisting>
+				</para>
+				<warning>
+					<para>Disabling CSP is a security risk, it is strongly
+						recommended that you leave it as Mantis defines it.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 

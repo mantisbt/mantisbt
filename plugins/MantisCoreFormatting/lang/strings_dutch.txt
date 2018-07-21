@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -45,9 +45,11 @@ $s_plugin_format_title = 'MantisBT-opmaak';
 $s_plugin_format_description = 'Officiële tekstverwerkings- en opmaakplugin.';
 $s_plugin_format_config = 'Instellingen';
 $s_plugin_format_process_text = 'Tekstverwerking';
-$s_plugin_format_process_text_warning_notice = 'Niet uitschakelen tenzij u precies weet wat u doet. Als deze plugin is uitgeschakeld, zijn "cross site scriping"-aanvallen (XSS) mogelijk.';
+$s_plugin_format_process_text_warning_notice = 'Niet uitschakelen tenzij u precies weet wat u doet. Als deze plugin is uitgeschakeld, zijn "cross site scripting"-aanvallen (XSS) mogelijk.';
 $s_plugin_format_process_urls = 'URL-verwerking';
 $s_plugin_format_process_buglinks = 'MantisBT-koppelingen (meldingen/opmerkingen)';
 $s_plugin_format_process_buglinks_info = 'In uw instellingen wordt het label <em>Melding</em> gedefinieerd als "<literal>%s</literal>" en het label <em>Meldingnotitie</em> als "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdownverwerking';
+$s_plugin_format_process_markdown_info = 'Opmaak met ondersteuning voor Markdown, opmaaksyntaxis zodanig ontworpen dat het kan worden omgezet naar HTML.';
 $s_plugin_format_enabled = 'Aan';
 $s_plugin_format_disabled = 'Uit';

@@ -64,8 +64,17 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
-		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
+		$t_network_timeout = config_get( 'ldap_network_timeout' );
+		if( $t_network_timeout > 0 ) {
+			log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
+			if( !$t_result ) {
+				ldap_log_error( $t_ds );
+			}
+		}
+
+		$t_protocol_version = config_get( 'ldap_protocol_version' );
 		if( $t_protocol_version > 0 ) {
 			log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
 			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
@@ -126,7 +135,7 @@ function ldap_email( $p_user_id ) {
 		return $g_cache_ldap_email[(int)$p_user_id];
 	}
 
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	$t_email = ldap_email_from_username( $t_username );
 
 	$g_cache_ldap_email[(int)$p_user_id] = $t_email;
@@ -158,7 +167,7 @@ function ldap_email_from_username( $p_username ) {
  * @return string real name.
  */
 function ldap_realname( $p_user_id ) {
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 	return ldap_realname_from_username( $t_username );
 }
 
@@ -258,8 +267,9 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	}
 
 	# Make sure the requested field exists
-	if( is_array( $t_info[0] ) && array_key_exists( $p_field, $t_info[0] ) ) {
-		$t_value = $t_info[0][$p_field][0];
+	$t_field_lowercase = strtolower( $p_field );
+	if( is_array( $t_info[0] ) && array_key_exists( $t_field_lowercase, $t_info[0] ) ) {
+		$t_value = $t_info[0][$t_field_lowercase][0];
 		log_event( LOG_LDAP, 'Found value \'' . $t_value . '\' for field \'' . $p_field . '\'.' );
 	} else {
 		log_event( LOG_LDAP, 'WARNING: field \'' . $p_field . '\' does not exist' );
@@ -284,7 +294,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 		return false;
 	}
 
-	$t_username = user_get_field( $p_user_id, 'username' );
+	$t_username = user_get_username( $p_user_id );
 
 	return ldap_authenticate_by_username( $t_username, $p_password );
 }
@@ -396,7 +406,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
  * @return boolean true if enabled, false otherwise.
  */
 function ldap_simulation_is_enabled() {
-	$t_filename = config_get( 'ldap_simulation_file_path' );
+	$t_filename = config_get_global( 'ldap_simulation_file_path' );
 	return !is_blank( $t_filename );
 }
 
@@ -407,7 +417,7 @@ function ldap_simulation_is_enabled() {
  * @return array|null An associate array with user information or null if not found.
  */
 function ldap_simulation_get_user( $p_username ) {
-	$t_filename = config_get( 'ldap_simulation_file_path' );
+	$t_filename = config_get_global( 'ldap_simulation_file_path' );
 	$t_lines = file( $t_filename );
 	if( $t_lines === false ) {
 		log_event( LOG_LDAP, 'ldap_simulation_get_user: could not read simulation data from ' . $t_filename );
@@ -440,7 +450,7 @@ function ldap_simulation_get_user( $p_username ) {
  * Given a username, gets the email address or empty address if user is not found.
  *
  * @param string $p_username The user name.
- * @return The email address or blank if user is not found.
+ * @return string The email address or blank if user is not found.
  */
 function ldap_simulation_email_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );

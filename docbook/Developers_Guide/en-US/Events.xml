@@ -155,10 +155,31 @@ event_hook( $events, [$plugin] );
 			<para>
 				These events only use the first parameter array, and return values from
 				hooked functions are immediately sent to the output buffer via 'echo'.
+				Another parameter <parameter>$format</parameter> can be used to model
+				how the results are printed. This parameter can be either:
+				<itemizedlist>
+					<listitem>
+						<para>
+							null, or omitted: The returned values are printed without further processing
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							&lt;String&gt;: A string to be used as separator for printed values
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							&lt;Array&gt;: An array of (prefix, separator, postfix) to be used for the printed values
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+			<para>
 				Example usage:
 			</para>
 
-			<programlisting>event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
+			<programlisting>event_signal( $event_name, [ array( $param, ... ) ], [ $format ] );</programlisting>
 		</blockquote>
 
 		<blockquote id="dev.events.types.chain">

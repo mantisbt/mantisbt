@@ -27,7 +27,9 @@ require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
-html_page_top();
+layout_page_header();
+
+layout_admin_page_begin();
 
 /**
  * Output HTML Table Row
@@ -37,10 +39,10 @@ html_page_top();
  * @return void
  */
 function print_info_row( $p_description, $p_value ) {
-	echo "\t\t" . '<tr>' . "\n";
-	echo "\t\t\t" . '<td>' . $p_description . '</td>' . "\n";
-	echo "\t\t\t" .'<td>' . $p_value . '</td>' . "\n";
-	echo "\t\t" . '</tr>' . "\n";
+	echo '<tr>';
+	echo '<td class="category">' . $p_description . '</td>';
+	echo '<td>' . $p_value . '</td>';
+	echo '</tr>';
 }
 
 /**
@@ -58,16 +60,27 @@ function helper_table_row_count( $p_table ) {
 	return $t_count;
 }
 ?>
-<div class="table-container">
-	<h2><?php echo lang_get( 'mantisbt_database_statistics' ) ?></h2>
-	<table cellspacing="1">
-		<thead>
-			<tr class="row-category">
-				<th>Table Name</th>
-				<th>Record Count</th>
-			</tr>
-		<thead>
-		<tbody>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+	<i class="ace-icon fa fa-database"></i>
+	<?php echo lang_get( 'mantisbt_database_statistics' ) ?>
+</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-condensed table-hover">
+	<thead>
+	<tr class="row-category">
+		<th>Table Name</th>
+		<th>Record Count</th>
+	</tr>
+	<thead>
+	<tbody>
 <?php
 foreach( db_get_table_list() as $t_table ) {
 	if( db_table_exists( $t_table ) ) {
@@ -75,9 +88,13 @@ foreach( db_get_table_list() as $t_table ) {
 	}
 }
 ?>
-		</tbody>
-	</table>
+	</tbody>
+</table>
 </div>
-<?php
+</div>
+</div>
+</div>
+</div>
 
-html_page_bottom();
+<?php
+layout_admin_page_end();

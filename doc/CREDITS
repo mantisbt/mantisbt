@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 MantisBT - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
-Copyright (C) 2002-2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+Copyright (C) 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact project administrators by sending a message to the
@@ -20,10 +20,10 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Daryn Warriner (daryn, dwarrine)
-Paul Richards (grangeway, paulr, minimoo, prichards)
-Robert Munteaunu (rombert)
+Robert Munteanu (rombert)
 Roland Becker (atrol)
+Carlos Proensa (cproensa)
+Rafik Robeal (syncguru)
 
 
 Ex-Administrators
@@ -38,9 +38,11 @@ Ex-Developers
 -------------
 
 David Hicks (dhx)
+Daryn Warriner (daryn, dwarrine)
 Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
 John Reese (jreese, nuclear_eclipse)
+Paul Richards (grangeway, paulr, minimoo, prichards)
 Siebrand Mazeland (siebrand)
 
 
@@ -50,121 +52,166 @@ People who contributed code to MantisBT, listed in reverse order of the
 number of commits authored.
 
 Victor Boctor
-Paul Richards
 Damien Regad
+Paul Richards
 Kenzaburo Ito
 Glenn Henshaw
 Julian Fitzell
 David Hicks
 John Reese
+Carlos Proensa
+Roland Becker
+Rafik Robeal
 Jeroen Latour
 Siebrand Mazeland
 Robert Munteanu
 Gianluca Sforna
 André Eisenbach
+translatewiki.net
 Daryn Warriner
-Roland Becker
 bigbadger
 Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
 Bastian Pfenningschmidt
+Vladimir Shulev
 Kornel Lesinski
+Joel C. Llano
 Adrian Spinei
-Martin Fuchs
 zakman
+Martin Fuchs
 jbrugger
 jctrosset
-ryandesign
-rufinus
 Kirill Krasnov
-David Newcomb
-Rafik Robeal
-Rasmus Lerdorf
+ryandesign
+Bob Le Bricodeur
+rufinus
 jhuggins
+Rasmus Lerdorf
+David Newcomb
+atrol
 yarick123
-jotel
 robertjf
+jotel
+Luke Lee
 Frank Rodgers
-Chris Fitch
-Johan Guilbaud
 davidu
+Tamás Gulácsi
+Chris Fitch
 planser
-Franck Villaume
-Véronique Maginot
-myplacedk
+Johan Guilbaud
 smhanson
+Franck Villaume
 vwegert
-Daniel Tschinder
-Stefan Pettersson
+Matej Habrnal
+myplacedk
+Véronique Maginot
 Vincent Sels
-Dominik Blunk
+Stefan Pettersson
+Daniel Tschinder
+Martin Schleußer
 Giovanni Giacobbi
 Jim Hanley
-Stéphane Veyret
-Tamás Gulácsi
-cyclespersecond
+Dominik Blunk
 scoates
+Val Kulkov
+Stéphane Veyret
+Betsy Gamrat
 torija
-Alexander Menk
-Carlos Proensa
-Christian Weiske
+cyclespersecond
 Dan Moore
+Alexander Ishmuradov
+Alexander Menk
+Christian Weiske
+EthraZa
+Justin Theberge
+Manilal
 Markus Schneider
 Matt McCutchen
+Romain CABASSOT
+Sebastian Limbach
 Tarik Sedlarevic
-badfiles
+Zipher
+elmarculino
+jeckyhl
+libregeek
+luz.paz
+luzpaz
+mfoXen
 puklos
-Alexander Maringer
-Andreas Schopper
-Andreas Stieger
-Benjamin Renard
-Bill Stidham
-Bob Clough
-Brian Wrightson
-DKuranov
-Daniel N
-David W. Juntgen
-Dawit Ayalew
-Edward Rudd
-Florent Daigniere
-Gulacsi Tamas
-Heiko Schneider-Lange
-Henning Eiben
-Jacky Alcine
-Jacob Hoover
-Jonas Nockert
-Karl Wiggisser
-Laszlo Kovacs
-Marcin Kłeczek
-Marco Dings
-MatthieuR
-Michael Lorer
-Michael Weibel
-Murray Crane
-Olivier Mengué
-Pier-Luc Duchaine
 Raul Baldner junior
-Raymond van Asperen
+Marco Ribeiro
+Marco Dings
+Bob Clough
 Ross Nelson
+Ryan Rafe Lee
 SL-Gundam
+Saga Musix
 Sebastian Kayser
+Bill Stidham
+Sergei Kuznetcov
 Sergio Del Franco
+Marcin Kłeczek
+MS-Astra
+LeoZandvliet
+Laszlo Kovacs
+spidgorny
 The Gitter Badger
 Todd Whitesel
+Larry Lewis
+Karl Wiggisser
+José D. Grieco
+Jonas Nockert
+Jeremy Vriens
+tfromm
+Zipher04
+Jadran Josimovic
+Jacob Hoover
+Jacky Alcine
 cheesecracker
 cybd
+cybernet
+Ian MacKenzie
 davethegr8
+Henning Eiben
 dwethell
+elen-ayanyan
+Benjamin Renard
+epenet
 gcompagnon
 greenius
-jeckyhl
-jeckyll
-mbaranski
-petertc
-tfromm
+Heiko Schneider-Lange
+Gulacsi Tamas
+Andreas Stieger
+Florent Daigniere
+Edward Rudd
+Andreas Schopper
+wapznw
 watergad
+mbaranski
+Allan Brazute
+Dmitriy V Kuranov
+naveenbali
+petertc
+Dawit Ayalew
+Alexander Maringer
+rainflood
+rk4n3
+David W. Juntgen
+Daniel N
+Brian Wrightson
+Michael Weibel
+Murray Crane
+Nikolay Raspopov
+Olivier Mengué
+Patrick Massot
+Michael Lorer
+Peter Dave Hello
+Pier-Luc Duchaine
+MatthieuR
+Martin Dennhardt
+Raymond van Asperen
 Adrian Spinei
 
 Other Contributors

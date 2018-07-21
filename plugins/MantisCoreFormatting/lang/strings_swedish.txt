@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -42,6 +42,7 @@
  * @author Lokal Profil
  * @author Tobulos1
  * @author Warrakkk
+ * @author WikiPhoenix
  */
 
 $s_plugin_format_title = 'MantisBT-formatering';
@@ -52,5 +53,7 @@ $s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte v
 $s_plugin_format_process_urls = 'URL-bearbetning';
 $s_plugin_format_process_buglinks = 'MantisBT-interna länkar (Buggar och buggkommentarer)';
 $s_plugin_format_process_buglinks_info = 'Din konfiguration definierar <em>Fråge</em>-taggen som "<literal>%s</literal>" och <em>Frågeanteckning</em>-taggen som"<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdown-behandling';
+$s_plugin_format_process_markdown_info = 'Stilar med Markdown stöds, syntaxen för textformatering är designad så att det kan konverteras till HTML.';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';

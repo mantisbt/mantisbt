@@ -1,0 +1,81 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Chinese (China) (中文（中国大陆）‎)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Yanmiao liu
+ */
+
+$s_plugin_graph_title = 'Mantis 图表';
+$s_plugin_graph_description = '官方图表插件。';
+$s_plugin_MantisGraph_title = 'Mantis 图表';
+$s_plugin_MantisGraph_config = '配置';
+$s_plugin_MantisGraph_synthesis_link = '合成';
+$s_plugin_MantisGraph_status_link = '按状态';
+$s_plugin_MantisGraph_priority_link = '按优先级';
+$s_plugin_MantisGraph_severity_link = '按严重性';
+$s_plugin_MantisGraph_category_link = '按类别';
+$s_plugin_MantisGraph_resolution_link = '按决议';
+$s_plugin_MantisGraph_graph_imp_status_title = '按状态的合成图';
+$s_plugin_MantisGraph_graph_imp_priority_title = '按优先级的合成图';
+$s_plugin_MantisGraph_graph_imp_severity_title = '按严重程度的合成图';
+$s_plugin_MantisGraph_graph_imp_category_title = '按类别划分的合成图';
+$s_plugin_MantisGraph_graph_imp_resolution_title = '按决议的合成图';
+$s_plugin_MantisGraph_by_status_pct = '按状态的百分比';
+$s_plugin_MantisGraph_by_priority_pct = '按优先级的百分比';
+$s_plugin_MantisGraph_by_severity_pct = '按严重程度的百分比';
+$s_plugin_MantisGraph_by_category_pct = '按类别比例百分比';
+$s_plugin_MantisGraph_by_resolution_pct = '按决议的百分比';
+$s_plugin_MantisGraph_by_severity_mix = '按严重程度和状态';
+$s_plugin_MantisGraph_by_priority_mix = '按优先级和状态';
+$s_plugin_MantisGraph_by_resolution_mix = '按决议和状态';
+$s_plugin_MantisGraph_legend_still_open = '仍打开';
+$s_plugin_MantisGraph_legend_resolved = '已解决';
+$s_plugin_MantisGraph_legend_reported = '已报告';
+$s_plugin_MantisGraph_period_none = '无';
+$s_plugin_MantisGraph_period_this_week = '本周';
+$s_plugin_MantisGraph_period_last_week = '上周';
+$s_plugin_MantisGraph_period_two_weeks = '前两周';
+$s_plugin_MantisGraph_period_this_month = '本月';
+$s_plugin_MantisGraph_period_last_month = '上月';
+$s_plugin_MantisGraph_period_this_quarter = '本季度';
+$s_plugin_MantisGraph_period_last_quarter = '上季度';
+$s_plugin_MantisGraph_period_year_to_date = '年初至今';
+$s_plugin_MantisGraph_period_select = '任意日期';
+$s_plugin_MantisGraph_period_last_year = '去年';
+$s_plugin_MantisGraph_graph_page = '图形问题历史记录';

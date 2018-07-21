@@ -80,8 +80,10 @@ foreach( $t_bug_list as $t_bug ) {
 form_security_purge( 'account_sponsor_update' );
 
 $t_redirect_url = 'account_sponsor_page.php';
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $t_redirect_url, lang_get( 'payment_updated' ) );
 
-html_page_bottom();
+layout_page_end();

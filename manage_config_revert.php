@@ -86,8 +86,10 @@ form_security_purge( 'manage_config_revert' );
 
 $t_redirect_url = $f_return;
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

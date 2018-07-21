@@ -49,74 +49,124 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_user_create_page.php' );
 ?>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 <div id="manage-user-create-div" class="form-container">
 	<form id="manage-user-create-form" method="post" action="manage_user_create.php">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-user"></i>
+				<?php echo lang_get( 'create_new_account_title' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<legend>
-				<span><?php echo lang_get( 'create_new_account_title' ) ?></span>
-			</legend>
 			<?php echo form_security_field( 'manage_user_create' ) ?>
-			<div class="field-container">
-				<label for="user-username"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="input"><input type="text" id="user-username" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" /></span>
-				<span class="label-style"></span>
-			</div><?php
+
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'username' ) ?>
+				</td>
+				<td>
+					<input type="text" id="user-username" name="username" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
+				</td>
+			</tr><?php
 			if( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
-			<div class="field-container">
-				<label for="user-realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
-				<span class="input"><input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" /></span>
-				<span class="label-style"></span>
-			</div><?php
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'realname' ) ?>
+				</td>
+				<td>
+					<input type="text" id="user-realname" name="realname" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" />
+				</td>
+			</tr><?php
 			}
 			if( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) { ?>
-			<div class="field-container">
-				<label for="email-field"><span><?php echo lang_get( 'email' ) ?></span></label>
-				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
-				<span class="label-style"></span>
-			</div><?php
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'email' ) ?>
+				</td>
+				<td>
+					<?php print_email_input( 'email', '' ) ?>
+				</td>
+			</tr><?php
 			}
-
-			if( OFF == config_get( 'send_reset_password' ) ) { ?>
-			<div class="field-container">
-				<label for="user-password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="user-verify-password"><span><?php echo lang_get( 'verify_password' ) ?></span></label>
-				<span class="input"><input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
-				<span class="label-style"></span>
-			</div><?php
+			if( OFF == config_get( 'send_reset_password' ) )  { ?>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'password' ) ?>
+				</td>
+				<td>
+					<input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+				</td>
+			</tr>
+				<td class="category">
+					<?php echo lang_get( 'verify_password' ) ?>
+				</td>
+				<td>
+					<input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+				</td>
+			</tr><?php
 			} ?>
-			<div class="field-container">
-				<label for="user-access-level"><span><?php echo lang_get( 'access_level' ) ?></span></label>
-				<span class="select">
-					<select id="user-access-level" name="access_level">
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'access_level' ) ?>
+				</td>
+				<td>
+					<select id="user-access-level" name="access_level" class="input-sm">
 						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
 					</select>
-				</span>
-				<span class="label-style"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'enabled' ) ?>
+				</td>
+				<td>
+					<label>
+						<input type="checkbox" class="ace" id="user-enabled" name="enabled" checked="checked">
+						<span class="lbl"></span>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'protected' ) ?>
+				</td>
+				<td>
+					<label>
+						<input type="checkbox" class="ace" id="user-protected" name="protected">
+						<span class="lbl"></span>
+					</label>
+				</td>
+			</tr>
+			</fieldset>
+			</table>
 			</div>
-			<div class="field-container">
-				<label for="user-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="user-enabled" name="enabled" checked="checked" /></span>
-				<span class="label-style"></span>
 			</div>
-			<div class="field-container">
-				<label for="user-protected"><span><?php echo lang_get( 'protected' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="user-protected" name="protected" /></span>
-				<span class="label-style"></span>
 			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_user_button' ) ?>" /></span>
-		</fieldset>
+
+			<?php event_signal( 'EVENT_MANAGE_USER_CREATE_FORM' ) ?>
+
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'create_user_button' ) ?>" />
+			</div>
+		</div>
+		</div>
 	</form>
 </div>
 
 <?php
-html_page_bottom();
+layout_page_end();

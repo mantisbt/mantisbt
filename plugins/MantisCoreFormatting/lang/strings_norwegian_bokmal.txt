@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -38,6 +38,8 @@
  * @ingroup Language
  * @file
  *
+ * @author Jon Harald Søby
+ * @author Kingu
  * @author Nghtwlkr
  */
 
@@ -47,6 +49,9 @@ $s_plugin_format_config = 'Konfigurasjon';
 $s_plugin_format_process_text = 'Tekstbehandling';
 $s_plugin_format_process_text_warning_notice = 'Ikke slå av med mindre du virkelig vet hva du gjør. I avslått tilstand er det mulighet for angrep gjennom «cross site scripting» (XSS).';
 $s_plugin_format_process_urls = 'URL-behandling';
-$s_plugin_format_process_buglinks = 'MantisBT-lenker (Utgave/utgavenotat)';
+$s_plugin_format_process_buglinks = 'Interne MantisBT-lenker (Utgave/utgavenotat)';
+$s_plugin_format_process_buglinks_info = 'Ditt oppsett definerer <em>sakes</em>-merkelappen som "<literal>%s</literal>" og <em>saksnotatets</em> merkelapp som"<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'Markdown-prosessering';
+$s_plugin_format_process_markdown_info = 'Styling med Markdown støttes, tekstformateringssyntaksen er designet så den kan konverteres til HTML.';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';

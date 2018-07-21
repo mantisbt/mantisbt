@@ -147,10 +147,10 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 <input type="hidden" name="redirect_url" value="<?php echo string_attribute( $p_redirect_url ) ?>" />
 <table class="width75" cellspacing="1">
 <tr>
-	<td class="form-title">
+	<td class="bold">
 		<?php echo lang_get( 'printing_preferences_title' ) ?>
 	</td>
-	<td class="right">
+	<td class="pull-right">
 	</td>
 </tr>
 

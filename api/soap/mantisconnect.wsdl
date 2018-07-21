@@ -5,6 +5,13 @@
 <xsd:schema targetNamespace="http://futureware.biz/mantisconnect">
  <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
  <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+ <xsd:complexType name="IntegerArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:integer[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
  <xsd:complexType name="StringArray">
   <xsd:complexContent>
    <xsd:restriction base="SOAP-ENC:Array">
@@ -259,6 +266,41 @@
    <xsd:element name="url" type="xsd:string" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
+ <xsd:complexType name="FilterSearchData">
+  <xsd:all>
+   <xsd:element name="project_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="search" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="category" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="severity_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="status_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="priority_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="reporter_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="handler_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="note_user_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="resolution_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="product_version" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="user_monitor_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="hide_status_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="sort" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="sort_direction" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="sticky" type="xsd:boolean" minOccurs="0"/>
+   <xsd:element name="view_state_id" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="fixed_in_version" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="target_version" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="platform" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="os" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="os_build" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="start_day" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="start_month" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="start_year" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="end_day" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="end_month" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="end_year" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="tag_string" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="tag_select" type="tns:IntegerArray" minOccurs="0"/>
+   <xsd:element name="custom_fields" type="tns:FilterCustomFieldArray" minOccurs="0"/>
+  </xsd:all>
+ </xsd:complexType>
  <xsd:complexType name="FilterDataArray">
   <xsd:complexContent>
    <xsd:restriction base="SOAP-ENC:Array">
@@ -287,6 +329,19 @@
    <xsd:element name="require_resolved" type="xsd:boolean" minOccurs="0"/>
    <xsd:element name="require_closed" type="xsd:boolean" minOccurs="0"/>
   </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="FilterCustomField">
+  <xsd:all>
+   <xsd:element name="field" type="tns:ObjectRef" minOccurs="1"/>
+   <xsd:element name="value" type="tns:StringArray" minOccurs="1"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="FilterCustomFieldArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:FilterCustomField[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
  </xsd:complexType>
  <xsd:complexType name="CustomFieldDefinitionDataArray">
   <xsd:complexContent>
@@ -455,6 +510,18 @@
   <part name="issue_id" type="xsd:integer" /></message>
 <message name="mc_issue_getResponse">
   <part name="return" type="tns:IssueData" /></message>
+<message name="mc_issues_getRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="issue_ids" type="tns:IntegerArray" /></message>
+<message name="mc_issues_getResponse">
+  <part name="return" type="tns:IssueDataArray" /></message>
+<message name="mc_issues_get_headerRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="issue_ids" type="tns:IntegerArray" /></message>
+<message name="mc_issues_get_headerResponse">
+  <part name="return" type="tns:IssueHeaderDataArray" /></message>
 <message name="mc_issue_get_historyRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -747,6 +814,30 @@
   <part name="per_page" type="xsd:integer" /></message>
 <message name="mc_filter_get_issue_headersResponse">
   <part name="return" type="tns:IssueHeaderDataArray" /></message>
+<message name="mc_filter_search_issue_headersRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="filter" type="tns:FilterSearchData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
+<message name="mc_filter_search_issue_headersResponse">
+  <part name="return" type="tns:IssueHeaderDataArray" /></message>
+<message name="mc_filter_search_issuesRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="filter" type="tns:FilterSearchData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
+<message name="mc_filter_search_issuesResponse">
+  <part name="return" type="tns:IssueDataArray" /></message>
+<message name="mc_filter_search_issue_idsRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="filter" type="tns:FilterSearchData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
+<message name="mc_filter_search_issue_idsResponse">
+  <part name="return" type="tns:IntegerArray" /></message>
 <message name="mc_config_get_stringRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -879,6 +970,16 @@
     <input message="tns:mc_issue_getRequest"/>
     <output message="tns:mc_issue_getResponse"/>
   </operation>
+  <operation name="mc_issues_get">
+    <documentation>Get all issues matching the ids.</documentation>
+    <input message="tns:mc_issues_getRequest"/>
+    <output message="tns:mc_issues_getResponse"/>
+  </operation>
+  <operation name="mc_issues_get_header">
+    <documentation>Get all issues header matching the ids.</documentation>
+    <input message="tns:mc_issues_get_headerRequest"/>
+    <output message="tns:mc_issues_get_headerResponse"/>
+  </operation>
   <operation name="mc_issue_get_history">
     <documentation>Get the history of the issue with the specified id.</documentation>
     <input message="tns:mc_issue_get_historyRequest"/>
@@ -960,7 +1061,7 @@
     <output message="tns:mc_project_addResponse"/>
   </operation>
   <operation name="mc_project_delete">
-    <documentation>Add a new project to the tracker (must have admin privileges)</documentation>
+    <documentation>Delete a project from the tracker (must have admin privileges)</documentation>
     <input message="tns:mc_project_deleteRequest"/>
     <output message="tns:mc_project_deleteResponse"/>
   </operation>
@@ -1094,6 +1195,21 @@
     <input message="tns:mc_filter_get_issue_headersRequest"/>
     <output message="tns:mc_filter_get_issue_headersResponse"/>
   </operation>
+  <operation name="mc_filter_search_issue_headers">
+    <documentation>Get the issue headers that match the custom filter and paging details.</documentation>
+    <input message="tns:mc_filter_search_issue_headersRequest"/>
+    <output message="tns:mc_filter_search_issue_headersResponse"/>
+  </operation>
+  <operation name="mc_filter_search_issues">
+    <documentation>Get the issues that match the custom filter and paging details.</documentation>
+    <input message="tns:mc_filter_search_issuesRequest"/>
+    <output message="tns:mc_filter_search_issuesResponse"/>
+  </operation>
+  <operation name="mc_filter_search_issue_ids">
+    <documentation>Get the issue ids that match the custom filter and paging details.</documentation>
+    <input message="tns:mc_filter_search_issue_idsRequest"/>
+    <output message="tns:mc_filter_search_issue_idsResponse"/>
+  </operation>
   <operation name="mc_config_get_string">
     <documentation>Get the value for the specified configuration variable.</documentation>
     <input message="tns:mc_config_get_stringRequest"/>
@@ -1214,6 +1330,16 @@
   </operation>
   <operation name="mc_issue_get">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_get" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_issues_get">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issues_get" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_issues_get_header">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issues_get_header" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
@@ -1429,6 +1555,21 @@
   </operation>
   <operation name="mc_filter_get_issue_headers">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_filter_get_issue_headers" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_filter_search_issue_headers">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_filter_search_issue_headers" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_filter_search_issues">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_filter_search_issues" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_filter_search_issue_ids">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_filter_search_issue_ids" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>

@@ -35,7 +35,7 @@ class CategoryTest extends SoapBase {
 	/**
 	 * @var array Category names to delete at end of test run
 	 */
-	private $t_category_namesToDelete = array();
+	private $categoryNamesToDelete = array();
 
 	/**
 	 * A test case that tests the following:

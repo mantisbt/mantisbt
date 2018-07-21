@@ -42,7 +42,7 @@
 			<term>$g_view_summary_threshold</term>
 			<listitem>
 				<para>Specifies the access level required to view the summary
-					page. Default is VIEWER.
+					page. Default is MANAGER.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -83,7 +83,7 @@ $g_severity_multipliers = array ( FEATURE =&gt; 1,
 					$g_bug_resolution_not_fixed_threshold. The default
 					multipliers are:
 					<programlisting>
-$g_resolution_multipliers = array( UNABLE_TO_DUPLICATE =&gt; 2,
+$g_resolution_multipliers = array( UNABLE_TO_REPRODUCE =&gt; 2,
                                    NOT_FIXABLE =&gt; 1,
                                    DUPLICATE =&gt; 3,
                                    NOT_A_BUG =&gt; 5,

@@ -23,7 +23,7 @@
  *    the child bug has to be resolved before resolving the parent bug (the child bug "blocks" the parent bug)
  *    example: bug A is child bug of bug B. It means: A blocks B and B is blocked by A
  * * General relationship:
- *    two bugs related each other without any hierarchy dependance
+ *    two bugs related each other without any hierarchy dependence
  *    bugs A and B are related
  * * Duplicates:
  *    it's used to mark a bug as duplicate of an other bug already stored in the database
@@ -99,6 +99,8 @@ require_api( 'utility_api.php' );
 
 require_css( 'status_config.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * RelationshipData Structure Definition
  */
@@ -138,6 +140,7 @@ $g_relationships = array();
 $g_relationships[BUG_DEPENDANT] = array(
 	'#forward' => true,
 	'#complementary' => BUG_BLOCKS,
+	'#name' => 'parent-of',
 	'#description' => 'dependant_on',
 	'#notify_added' => 'email_notification_title_for_action_dependant_on_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_dependant_on_relationship_deleted',
@@ -149,6 +152,7 @@ $g_relationships[BUG_DEPENDANT] = array(
 $g_relationships[BUG_BLOCKS] = array(
 	'#forward' => false,
 	'#complementary' => BUG_DEPENDANT,
+	'#name' => 'child-of',
 	'#description' => 'blocks',
 	'#notify_added' => 'email_notification_title_for_action_blocks_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_blocks_relationship_deleted',
@@ -160,6 +164,7 @@ $g_relationships[BUG_BLOCKS] = array(
 $g_relationships[BUG_DUPLICATE] = array(
 	'#forward' => true,
 	'#complementary' => BUG_HAS_DUPLICATE,
+	'#name' => 'duplicate-of',
 	'#description' => 'duplicate_of',
 	'#notify_added' => 'email_notification_title_for_action_duplicate_of_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_duplicate_of_relationship_deleted',
@@ -171,12 +176,14 @@ $g_relationships[BUG_DUPLICATE] = array(
 $g_relationships[BUG_HAS_DUPLICATE] = array(
 	'#forward' => false,
 	'#complementary' => BUG_DUPLICATE,
+	'#name' => 'has-duplicate',
 	'#description' => 'has_duplicate',
 	'#notify_added' => 'email_notification_title_for_action_has_duplicate_relationship_added',
 	'#notify_deleted' => 'email_notification_title_for_action_has_duplicate_relationship_deleted',
 );
 $g_relationships[BUG_RELATED] = array(
 	'#forward' => true,
+	'#name' => 'related-to',
 	'#complementary' => BUG_RELATED,
 	'#description' => 'related_to',
 	'#notify_added' => 'email_notification_title_for_action_related_to_relationship_added',
@@ -185,6 +192,23 @@ $g_relationships[BUG_RELATED] = array(
 
 if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
 	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
+}
+
+/**
+ * Ensure that specified relationship type is valid.
+ *
+ * @param integer $p_relationship_type The relationship type id.
+ * @return void
+ */
+function relationship_type_ensure_valid( $p_relationship_type ) {
+	global $g_relationships;
+
+	if( !is_numeric( $p_relationship_type ) || !isset( $g_relationships[$p_relationship_type] ) ) {
+		throw new ClientException(
+			sprintf( "Relation type '%s' not found.", $p_relationship_type ),
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
+	}
 }
 
 /**
@@ -205,9 +229,10 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
- * @return BugRelationshipData Bug Relationship
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
+ * @return integer The new bug relationship id.
  */
-function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
 		$c_src_bug_id = (int)$p_dest_bug_id;
@@ -219,20 +244,24 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 		$c_relationship_type = (int)$p_relationship_type;
 	}
 
+	db_param_push();
 	$t_query = 'INSERT INTO {bug_relationship}
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	$t_result = db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
-	$t_relationship = db_fetch_array( $t_result );
+	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 
-	$t_bug_relationship_data = new BugRelationshipData;
-	$t_bug_relationship_data->id = $t_relationship['id'];
-	$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
-	$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
-	$t_bug_relationship_data->type = $t_relationship['relationship_type'];
+	$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
 
-	return $t_bug_relationship_data;
+	history_log_event_special( $p_src_bug_id, BUG_ADD_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
+	history_log_event_special( $p_dest_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
+
+	bug_update_date( $p_src_bug_id );
+	bug_update_date( $p_dest_bug_id );
+
+	email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
+
+	return $t_relationship_id;
 }
 
 /**
@@ -241,9 +270,10 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
  * @param integer $p_src_bug_id        Source Bug Id.
  * @param integer $p_dest_bug_id       Destination Bug Id.
  * @param integer $p_relationship_type Relationship type.
- * @return BugRelationshipData Bug Relationship
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
+ * @return void
  */
-function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	global $g_relationships;
 	if( $g_relationships[$p_relationship_type]['#forward'] === false ) {
 		$c_src_bug_id = (int)$p_dest_bug_id;
@@ -255,31 +285,82 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 		$c_relationship_type = (int)$p_relationship_type;
 	}
 
+	db_param_push();
 	$t_query = 'UPDATE {bug_relationship}
 				SET source_bug_id=' . db_param() . ',
 					destination_bug_id=' . db_param() . ',
 					relationship_type=' . db_param() . '
 				WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
-	$t_relationship = db_fetch_array( $t_result );
+	db_query( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
 
-	$t_bug_relationship_data = new BugRelationshipData;
-	$t_bug_relationship_data->id = $t_relationship['id'];
-	$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
-	$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
-	$t_bug_relationship_data->type = $t_relationship['relationship_type'];
+	history_log_event_special( $p_src_bug_id, BUG_REPLACE_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
+	history_log_event_special( $p_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
 
-	return $t_bug_relationship_data;
+	bug_update_date( $p_src_bug_id );
+	bug_update_date( $p_dest_bug_id );
+
+	email_relationship_added( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
+}
+
+/**
+ * Add/Update relationship based on whether the relationship already exists or not.
+ *
+ * @param integer $p_src_bug_id        Source Bug Id.
+ * @param integer $p_dest_bug_id       Destination Bug Id.
+ * @param integer $p_relationship_type Relationship type.
+ * @param bool $p_email_for_source     Should an email be triggered for source issue?
+ * @return integer The new bug relationship id.
+ */
+function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
+	# Check if there is other relationship between the bugs.
+	$t_id_relationship = relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
+
+	if( $t_id_relationship > 0 ) {
+		relationship_update( $t_id_relationship, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
+		$t_relationship_id = $t_id_relationship;
+	} else if( $t_id_relationship != -1 ) {
+		$t_relationship_id = relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source );
+	} else {
+		# else relationship is -1 - same type exists
+		$t_relationship_id = relationship_exists( $p_src_bug_id, $p_dest_bug_id );
+	}
+
+	return $t_relationship_id;
 }
 
 /**
  * Delete a relationship
  * @param integer $p_relationship_id Relationship Id to update.
+ * @param bool $p_send_email Send email?
  * @return void
  */
-function relationship_delete( $p_relationship_id ) {
+function relationship_delete( $p_relationship_id, $p_send_email = true ) {
+	$t_relationship = relationship_get( $p_relationship_id );
+
+	db_param_push();
 	$t_query = 'DELETE FROM {bug_relationship} WHERE id=' . db_param();
 	db_query( $t_query, array( (int)$p_relationship_id ) );
+
+	$t_src_bug_id = $t_relationship->src_bug_id;
+	$t_dest_bug_id = $t_relationship->dest_bug_id;
+	$t_rel_type = $t_relationship->type;
+
+	bug_update_date( $t_src_bug_id );
+	bug_update_date( $t_dest_bug_id );
+
+	history_log_event_special( $t_src_bug_id, BUG_DEL_RELATIONSHIP, $t_rel_type, $t_dest_bug_id );
+
+	if( bug_exists( $t_dest_bug_id ) ) {
+		history_log_event_special(
+			$t_dest_bug_id,
+			BUG_DEL_RELATIONSHIP,
+			relationship_get_complementary_type( $t_rel_type ),
+			$t_src_bug_id );
+	}
+
+	if( $p_send_email ) {
+		email_relationship_deleted( $t_src_bug_id, $t_dest_bug_id, $t_rel_type );
+	}
 }
 
 /**
@@ -288,10 +369,11 @@ function relationship_delete( $p_relationship_id ) {
  * @return void
  */
 function relationship_delete_all( $p_bug_id ) {
-	$t_query = 'DELETE FROM {bug_relationship}
-				WHERE source_bug_id=' . db_param() . ' OR
-				destination_bug_id=' . db_param();
-	db_query( $t_query, array( (int)$p_bug_id, (int)$p_bug_id ) );
+	$t_is_different_projects = false;
+	$t_relationships = relationship_get_all( $p_bug_id, $t_is_different_projects );
+	foreach( $t_relationships as $t_relationship ) {
+		relationship_delete( $t_relationship->id, /* send_email */ false );
+	}
 }
 
 /**
@@ -301,16 +383,22 @@ function relationship_delete_all( $p_bug_id ) {
  * @return void
  */
 function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
-	$t_relationship = relationship_get_all_src( $p_bug_id );
-	$t_relationship_count = count( $t_relationship );
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		relationship_add( $p_new_bug_id, $t_relationship[$i]->dest_bug_id, $t_relationship[$i]->type );
+	$t_relationships = relationship_get_all_src( $p_bug_id );
+	foreach( $t_relationships as $t_relationship ) {
+		relationship_add(
+			$p_new_bug_id,
+			$t_relationship->dest_bug_id,
+			$t_relationship->type,
+			/* email_for_source */ false );
 	}
 
-	$t_relationship = relationship_get_all_dest( $p_bug_id );
-	$t_relationship_count = count( $t_relationship );
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		relationship_add( $t_relationship[$i]->src_bug_id, $p_new_bug_id, $t_relationship[$i]->type );
+	$t_relationships = relationship_get_all_dest( $p_bug_id );
+	foreach( $t_relationships as $t_relationship ) {
+		relationship_add(
+			$p_new_bug_id,
+			$t_relationship->src_bug_id,
+			relationship_get_complementary_type( $t_relationship->type ),
+			/* email_for_source */ false );
 	}
 }
 
@@ -320,6 +408,7 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
  * @return null|BugRelationshipData BugRelationshipData object
  */
 function relationship_get( $p_relationship_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {bug_relationship} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( (int)$p_relationship_id ) );
 
@@ -344,6 +433,7 @@ function relationship_get( $p_relationship_id ) {
  * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all_src( $p_src_bug_id ) {
+	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
 				{bug}.project_id
@@ -384,6 +474,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
  * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
+	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
 				{bug}.project_id
@@ -447,6 +538,7 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 	$c_src_bug_id = (int)$p_src_bug_id;
 	$c_dest_bug_id = (int)$p_dest_bug_id;
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {bug_relationship}
 				WHERE (source_bug_id=' . db_param() . ' AND destination_bug_id=' . db_param() . ')
 				OR
@@ -523,9 +615,7 @@ function relationship_get_linked_bug_id( $p_relationship_id, $p_bug_id ) {
  */
 function relationship_get_description_src_side( $p_relationship_type ) {
 	global $g_relationships;
-	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-	}
+	relationship_type_ensure_valid( $p_relationship_type );
 	return lang_get( $g_relationships[$p_relationship_type]['#description'] );
 }
 
@@ -536,9 +626,10 @@ function relationship_get_description_src_side( $p_relationship_type ) {
  */
 function relationship_get_description_dest_side( $p_relationship_type ) {
 	global $g_relationships;
-	if( !isset( $g_relationships[$p_relationship_type] ) || !isset( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
-	}
+
+	relationship_type_ensure_valid( $p_relationship_type );
+	relationship_type_ensure_valid( $g_relationships[$p_relationship_type]['#complementary'] );
+
 	return lang_get( $g_relationships[$g_relationships[$p_relationship_type]['#complementary']]['#description'] );
 }
 
@@ -552,8 +643,55 @@ function relationship_get_description_for_history( $p_relationship_code ) {
 }
 
 /**
+ * Get class API name of a relationship as it's stored in the history.
+ * @param integer $p_relationship_type Relationship Type.
+ * @return string Relationship API name
+ */
+function relationship_get_name_for_api( $p_relationship_type ) {
+	global $g_relationships;
+
+	if( !isset( $g_relationships[$p_relationship_type] ) ) {
+		switch( $p_relationship_type ) {
+			case BUG_REL_NONE:
+				return 'none';
+			case BUG_REL_ANY:
+				return 'any';
+			default:
+				# This will trigger the invalid relationship type exception.
+				relationship_type_ensure_valid( $p_relationship_type );
+		}
+	}
+
+	return $g_relationships[$p_relationship_type]['#name'];
+}
+
+/**
+ * Get relationship type id given its API name.
+ *
+ * @param string $p_relationship_type_name relationship type name.
+ * @return integer relationship type id
+ * @throws ClientException unknown relationship type name.
+ */
+function relationship_get_id_from_api_name( $p_relationship_type_name ) {
+	global $g_relationships;
+
+	$t_relationship_type_name = strtolower( $p_relationship_type_name );
+	foreach( $g_relationships as $t_id => $t_relationship ) {
+		if( $t_relationship['#name'] == $t_relationship_type_name ) {
+			return $t_id;
+		}
+	}
+
+	throw new ClientException(
+		sprintf( "Unknown relationship type '%s'", $p_relationship_type_name ),
+		ERROR_INVALID_FIELD_VALUE,
+		array( 'relationship_type' )
+	);
+}
+
+/**
  * return false if there are child bugs not resolved/closed
- * N.B. we don't check if the parent bug is read-only. This is because the answer of this function is indepedent from
+ * N.B. we don't check if the parent bug is read-only. This is because the answer of this function is independent from
  * the state of the parent bug itself.
  * @param integer $p_bug_id A bug identifier.
  * @return boolean
@@ -592,8 +730,7 @@ function relationship_can_resolve_bug( $p_bug_id ) {
  * @return string
  */
 function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
-	$t_summary_wrap_at = utf8_strlen( config_get( 'email_separator2' ) ) - 28;
-	$t_icon_path = config_get( 'icon_path' );
+	$t_summary_wrap_at = mb_strlen( config_get( 'email_separator2' ) ) - 28;
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
 		# root bug is in the source side, related bug in the destination side
@@ -632,8 +769,11 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 
 	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
 	if( $p_html_preview == false ) {
+		# choose color based on status
+		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
-		$t_relationship_info_html .= '<td><span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
+		$t_relationship_info_html .= '<td><i class="fa fa-square fa-status-box ' . $status_label . '"></i> ';
+		$t_relationship_info_html .= '<span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
 		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&#160;</td>';
@@ -658,34 +798,27 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	if( $p_html == true ) {
 		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
-			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+			$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" title="%s" ></i>', lang_get( 'private' ) );
 		}
 	} else {
-		if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+		if( mb_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 			$t_relationship_info_text .= string_email_links( $t_bug->summary );
 		} else {
-			$t_relationship_info_text .= utf8_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
+			$t_relationship_info_text .= mb_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
 		}
 	}
 
 	# add delete link if bug not read only and user has access level
 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' . lang_get( 'delete_link' ) . '</a>]';
+			$t_relationship_info_html .= ' <a class="noprint"
+			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '"><i class="ace-icon fa fa-trash-o"></i></a>';
 		}
 	}
 
 	$t_relationship_info_html .= '&#160;</td>';
 	$t_relationship_info_text .= "\n";
-
-	if( $p_html_preview == false ) {
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-
-		$t_relationship_info_html = '<tr class="' . $t_status_label . '">' . $t_relationship_info_html . '</tr>' . "\n";
-	} else {
-		$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
-	}
+	$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
 
 	if( $p_html == true ) {
 		return $t_relationship_info_html;
@@ -713,9 +846,10 @@ function relationship_get_summary_html( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
+			$t_summary .= '<tr><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
+				lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}
-		$t_summary = '<table width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
+		$t_summary = '<table class="table table-bordered table-condensed table-hover">' . $t_summary . '</table>';
 	}
 
 	return $t_summary;
@@ -774,12 +908,13 @@ function relationship_get_summary_text( $p_bug_id ) {
  * @param string  $p_select_name      List box name (default "rel_type").
  * @param boolean $p_include_any      Include an ANY option in list box (default false).
  * @param boolean $p_include_none     Include a NONE option in list box (default false).
+ * @param string  $p_input_css        CSS classes to use with input fields
  * @return void
  */
-function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false ) {
+function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false, $p_input_css = "input-sm" ) {
 	global $g_relationships;
 	?>
-<select name="<?php echo $p_select_name?>">
+<select class="<?php echo $p_input_css ?>" name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
 <option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
@@ -805,63 +940,73 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
  * @return void
  */
 function relationship_view_box( $p_bug_id ) {
-	?>
-<br/>
+	$t_relationships_html = relationship_get_summary_html( $p_bug_id );
+	$t_can_update = !bug_is_readonly( $p_bug_id ) &&
+		access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id );
 
-<?php collapse_open( 'relationships' );?>
-<table class="width100" cellspacing="1">
-<tr class="row-2">
-	<td width="15%" class="form-title" colspan="2">
+	if( !$t_can_update && empty( $t_relationships_html ) ) {
+		return;
+	}
+
+	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
+	$t_show_top_div = $t_can_update || $t_relationship_graph;
+	?>
+	<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+
+	<?php
+	$t_collapse_block = is_collapsed( 'relationships' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	?>
+	<div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-sitemap"></i>
+			<?php echo lang_get( 'bug_relationships' ) ?>
+		</h4>
+		<div class="widget-toolbar">
+			<a data-action="collapse" href="#">
+				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+			</a>
+		</div>
+	</div>
+	<div class="widget-body">
+		<?php if( $t_show_top_div ) { ?>
+		<div class="widget-toolbox padding-8 clearfix">
 		<?php
-			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
-	if( ON == config_get( 'relationship_graph_enable' ) ) {
+			if( $t_relationship_graph ) {
 		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
+		<div class="btn-group pull-right noprint">
+		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
+		<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
+		</div>
 		<?php
-	}
-	?>
-	</td>
-</tr>
-<?php
-	# bug not read-only and user authenticated
-	if( !bug_is_readonly( $p_bug_id ) ) {
-		# user access level at least updater
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			} # $t_relationship_graph
+
+			if( $t_can_update ) {
 			?>
-<tr class="row-1">
-	<th class="category" width="15%"><?php echo lang_get( 'add_new_relationship' )?></th>
-	<td><?php echo lang_get( 'this_bug' )?>
-		<form method="post" action="bug_relationship_add.php">
+		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
-		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
+		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
+		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
 		<?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
-		<input type="text" name="dest_bug_id" value="" />
-		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+		<input type="text" class="input-sm" name="dest_bug_id" value="" />
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
-	</td></tr>
-<?php
-		}
-	}
-	?>
-<tr>
-	<td colspan="2"><?php echo relationship_get_summary_html( $p_bug_id )?></td>
-</tr>
-</table>
+			<?php
+			} # can update
+			?>
+		</div>
+		<?php } # show top div ?>
 
-<?php collapse_closed( 'relationships' );?>
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title">
-		<?php
-			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
-	?>
-	</td>
-</tr>
-</table>
-
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				<?php echo $t_relationships_html; ?>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
 <?php
-	collapse_end( 'relationships' );
 }

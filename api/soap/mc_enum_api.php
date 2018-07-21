@@ -32,7 +32,7 @@
  */
 function mc_enum_status( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'status' );
@@ -47,7 +47,7 @@ function mc_enum_status( $p_username, $p_password ) {
  */
 function mc_enum_priorities( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'priority' );
@@ -62,7 +62,7 @@ function mc_enum_priorities( $p_username, $p_password ) {
  */
 function mc_enum_severities( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'severity' );
@@ -77,7 +77,7 @@ function mc_enum_severities( $p_username, $p_password ) {
  */
 function mc_enum_reproducibilities( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'reproducibility' );
@@ -92,7 +92,7 @@ function mc_enum_reproducibilities( $p_username, $p_password ) {
  */
 function mc_enum_projections( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'projection' );
@@ -107,7 +107,7 @@ function mc_enum_projections( $p_username, $p_password ) {
  */
 function mc_enum_etas( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'eta' );
@@ -122,7 +122,7 @@ function mc_enum_etas( $p_username, $p_password ) {
  */
 function mc_enum_resolutions( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'resolution' );
@@ -137,7 +137,7 @@ function mc_enum_resolutions( $p_username, $p_password ) {
  */
 function mc_enum_access_levels( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'access_levels' );
@@ -152,7 +152,7 @@ function mc_enum_access_levels( $p_username, $p_password ) {
  */
 function mc_enum_project_status( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'project_status' );
@@ -167,7 +167,7 @@ function mc_enum_project_status( $p_username, $p_password ) {
  */
 function mc_enum_project_view_states( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'project_view_state' );
@@ -182,7 +182,7 @@ function mc_enum_project_view_states( $p_username, $p_password ) {
  */
 function mc_enum_view_states( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'view_state' );
@@ -197,7 +197,7 @@ function mc_enum_view_states( $p_username, $p_password ) {
  */
 function mc_enum_custom_field_types( $p_username, $p_password ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'custom_field_type' );
@@ -213,7 +213,7 @@ function mc_enum_custom_field_types( $p_username, $p_password ) {
  */
 function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 	if( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return mci_soap_fault_login_failed();
+		return mci_fault_login_failed();
 	}
 
 	# safe to call directly after login checks
@@ -279,8 +279,31 @@ function mci_validate_enum_access( $p_username, $p_password ) {
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 	$t_result = array();
-	$t_result['id'] = $p_enum_id;
-	$t_result['name'] = mci_get_enum_element( $p_enum_type, $p_enum_id, $p_lang );
+	$t_result['id'] = (int)$p_enum_id;
+
+	$t_enum_name = $p_enum_type . '_enum_string';
+	$t_enum_string_value = config_get( $t_enum_name );
+	$t_enum_localized_value = lang_get( $t_enum_name, $p_lang );
+
+	if( ApiObjectFactory::$soap ) {
+		# Soap API returns the localized label as the name
+		$t_result['name'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
+	} else {
+		$t_result['name'] = MantisEnum::getLabel( $t_enum_string_value, $p_enum_id );
+		$t_result['label'] = MantisEnum::getLocalizedLabel( $t_enum_string_value, $t_enum_localized_value, $p_enum_id );
+
+		if( $p_enum_type == 'status' ) {
+			$t_status_colors = config_get( 'status_colors' );
+
+			if( !array_key_exists( $t_result['name'], $t_status_colors ) ) {
+				$t_result['color'] = 'currentcolor';
+				return $t_result;
+			}
+
+			$t_result['color'] = $t_status_colors[$t_result['name']];
+		}
+	}
+
 	return $t_result;
 }
 
@@ -313,7 +336,7 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * @return integer enum id
  */
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
-	$p_object_ref = SoapObjectsFactory::unwrapObject( $p_object_ref );
+	$p_object_ref = ApiObjectFactory::objectToArray( $p_object_ref );
 
 	if( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int)$p_object_ref['id'] != 0 ) {
 		$t_id = (int)$p_object_ref['id'];

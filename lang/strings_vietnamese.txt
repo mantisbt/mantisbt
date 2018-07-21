@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -41,10 +41,12 @@
  * @author 9pagod
  * @author Baonguyen21022003
  * @author Duongnvm
+ * @author KhangND
  * @author Max20091
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
+ * @author Yue Ling
  */
 
 $s_actiongroup_menu_move = 'Di chuyển';
@@ -60,6 +62,7 @@ $s_actiongroup_menu_update_view_status = 'Cập nhật trạng thái thể hiệ
 $s_actiongroup_menu_update_category = 'Cập nhật chuyên mục';
 $s_actiongroup_menu_set_sticky = 'Đặt/Bỏ đặt Sticky';
 $s_actiongroup_menu_update_field = 'Cập nhật %1$s';
+$s_actiongroup_menu_update_product_version = 'Cập nhật phiên bản sản phẩm';
 $s_actiongroup_menu_update_target_version = 'Cập nhật phiên bản Target';
 $s_actiongroup_menu_update_fixed_in_version = 'Cập nhật phiên bản hiệu chỉnh';
 $s_actiongroup_menu_update_product_build = 'Cập nhật phiên bản sản phẩm';
@@ -77,11 +80,15 @@ $s_excel_export = 'Xuất Excel';
 $s_login_anonymously = 'Đăng nhập vô danh';
 $s_anonymous = 'Vô danh';
 $s_jump_to_bugnotes = 'Nhảy đến ghi chú';
+$s_jump_to_history = 'Nhảy đến vùng lịch sử';
+$s_display_history = 'Trình diễn lịch sử';
 $s_public_project_msg = 'Dự án này là công khai. Tất cả người dùng có quyền truy cập';
 $s_private_project_msg = 'Dự án này được riêng tư. Chỉ có quản trị viên và người dùng được thêm vào dự án mới có quyền truy cập';
 $s_access_level_project = 'Mức độ truy cập dự án';
 $s_view_submitted_bug_link = 'Xem thời điểm gửi Issue %1$s';
 $s_assigned_projects = 'Các dự án được phân công';
+$s_assigned_projects_label = 'Các dự án đã được gán';
+$s_unassigned_projects_label = 'Các dự án chưa được gán';
 $s_print = 'In';
 $s_jump = 'Nhảy';
 $s_copy_users = 'Sao chép người dùng';
@@ -191,6 +198,7 @@ $s_myself = 'Bản thân mình';
 $s_default_access_level = 'Mức độ truy cập mặc định';
 $s_issue_status_percentage = 'Tỷ lệ trạng thái issue';
 $s_access_levels_enum_string = '10:người xem, 25:người báo cáo, 40:người cập nhật, 55:người phát triển, 70:người quản lý, 90:người quản trị';
+$s_no_access = 'không truy cập';
 $s_project_status_enum_string = '10: phát triển, 30: phát hành, 50: ổn định, 70: lỗi thời';
 $s_project_view_state_enum_string = '10: công cộng, 50: riêng tư';
 $s_view_state_enum_string = '10: công cộng, 50: riêng tư';
@@ -338,7 +346,6 @@ $s_sponsor_show = 'Hiển thị tất cả';
 $s_payment_updated = 'Cập nhật thông tin thanh toán';
 $s_account_updated_msg = 'Tài khoản của bạn được cập nhật thành công...';
 $s_email_updated = 'Địa chỉ thư điện tử cập nhật thành công';
-$s_realname_duplicated = 'Tên thật được sử dụng bởi người dùng khác';
 $s_realname_updated = 'Tên thật cập nhật thành công';
 $s_password_updated = 'Cập nhật thành công mật khẩu';
 $s_multiple_projects = 'Những vấn đề bạn đã chọn được từ các dự án khác nhau. Các thông số dưới đây phản ánh các cài đặt cho tất cả các dự án. Nếu điều này không đúng, hãy thử thay đổi của bạn với một số lượng nhỏ hơn các vấn đề lựa chọn.';
@@ -360,7 +367,6 @@ $s_delete_bug_sure_msg = 'Bạn có chắc chắn xóa issue này?';
 $s_delete_bug_button = 'Xóa';
 $s_monitor_bug_button = 'Theo dõi';
 $s_unmonitor_bug_button = 'Kết thúc theo dõi';
-$s_file_upload_msg = 'Tập tin tải lên thành công';
 $s_upload_file = 'Tải tập tin lên';
 $s_upload_files = 'Tải tập tin lên';
 $s_select_file = 'Chọn tập tin';
@@ -384,8 +390,8 @@ $s_reminder_sent_none = 'Không có lời nhắc nào có thể gửi';
 $s_reminder_list_truncated = 'danh sách người nhận cắt ngắn';
 $s_bug_send_button = 'Gửi';
 $s_reminder = 'Nhắc nhở';
-$s_reminder_explain = 'Đây là ghi chú sẽ được gửi đến các người nhận được liệt kê yêu cầu phản hồi về issue này';
-$s_reminder_monitor = 'Những người nhận cũng sẽ bắt đầu theo dõi vấn đề này. Họ có thể bỏ đăng ký sử dụng nút Unmonitor';
+$s_reminder_explain = 'Ghi chú này sẽ được gửi đến những người nhận đã chọn, yêu cầu phản hồi về vấn đề này.';
+$s_reminder_monitor = 'Những người nhận cũng sẽ bắt đầu giám sát vấn đề này, họ có thể bỏ đăng ký bằng cách dùng nút "Kết thúc giám sát".';
 $s_reminder_store = 'Đây là ghi chú sẽ được lưu trữ với issue';
 $s_confirm_sponsorship = 'Xin vui lòng xác nhận bạn muốn tài trợ cho issue %1$d for %2$s.';
 $s_stick_bug_button = 'Stick';
@@ -432,7 +438,7 @@ $s_all_revisions = 'Tất cả các Revision';
 $s_back_to_issue = 'Trở về issue';
 $s_confirm_revision_drop = 'Bạn có chắc bạn muốn bỏ revision issue này?';
 $s_vote_added_msg = 'Bình chọn đã được thêm...';
-$s_bugnote_added_msg = 'Ghi chú đã thêm...';
+$s_bugnote_attached_files = 'Tệp đính kèm';
 $s_bugnote_deleted_msg = 'Ghi chú được xóa thành công...';
 $s_bug_notes_title = 'Các ghi chú';
 $s_edit_bugnote_title = 'Sửa ghi chú';
@@ -762,7 +768,7 @@ $s_selected_project = 'Chọn dự án';
 $s_valid_project_msg = 'Bạn phải chọn một dự án hợp lệ.';
 $s_signup_done_title = 'Đăng ký tài khoản xử lý.';
 $s_password_emailed_msg = 'Xin chúc mừng. Bạn đã đăng ký thành công. Bạn đã được gửi một xác nhận e-mail để xác minh e-mail của bạn địa chỉ. Truy cập vào liên kết gửi đến cho bạn trong thư điện tử sẽ kích hoạt tài khoản của bạn.';
-$s_no_reponse_msg = 'Bạn sẽ có bảy ngày để hoàn tất quá trình xác nhận tài khoản, nếu bạn không hoàn thành xác nhận tài khoản trong thời hạn bảy ngày, tài khoản này đăng ký mới có thể được thanh lọc.';
+$s_no_reponse_msg = 'Bạn có 7 ngày để hoàn tất quá trình xác nhận tài khoản; nếu bạn không hoàn tất trong thời hạn này, tài khoản vừa đăng kí có thể bị thanh lọc.';
 $s_signup_info = 'Sau khi hoàn thành mẫu đơn này và xác minh các câu trả lời của bạn, bạn sẽ nhận được một xác nhận e-mail tới địa chỉ e-mail mà bạn chỉ định. <br /> Sử dụng xác nhận các e-mail, bạn sẽ có thể kích hoạt tài khoản của bạn. Nếu bạn không kích hoạt tài khoản của bạn trong thời hạn bảy ngày, nó sẽ được thanh lọc. <br /> Bạn phải chỉ định một địa chỉ e-mail hợp lệ để nhận được xác nhận tài khoản e-mail.';
 $s_signup_title = 'Đăng ký';
 $s_signup_button = 'Đăng ký';
@@ -812,8 +818,10 @@ $s_changed = 'Thay đổi (giờ)';
 $s_viewing_bugs_title = 'Xem các issue';
 $s_updated = 'Đã cập nhật';
 $s_sticky = 'Hiển thị các Issue dính';
+$s_sort = 'Sắp xếp theo';
 $s_issue_id = 'ID issue';
 $s_recently_visited = 'Gần đây đã viếng thăm';
+$s_note_user_id = 'Chú ý:';
 $s_filter_match_type = 'Loại đối sánh';
 $s_filter_match_all = 'Tất cả Điều kiện';
 $s_filter_match_any = 'Bất kỳ Điều kiện';
@@ -938,7 +946,6 @@ $s_relationship_deleted = 'Mối quan hệ đã bị xóa';
 $s_no_relationship = 'không có mối quan hệ';
 $s_relationship_replaced = 'Mối quan hệ đã được thay thế';
 $s_replace_relationship_button = 'Thay thế';
-$s_replace_relationship_sure_msg = 'Đã có một mối quan hệ giữa hai vấn đề. Bạn có chắc chắn muốn thay thế nó?';
 $s_relationship_with_parent = 'Mối quan hệ với các vấn đề cấp cha';
 $s_delete_relationship_button = 'Xóa';
 $s_delete_relationship_sure_msg = 'Bạn có chắc chắn muốn xóa các mối quan hệ này?';
@@ -1136,7 +1143,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Một chuỗi được mong đợi 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Một số được mong đợi cho %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d không tìm thấy';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Bộ lọc %1$s không tìm thấy';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Các bộ lọc bạn đang cố gắng sử dụng quá cũ để được nâng cấp. Xin vui lòng tái tạo nó';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Địa chỉ thư điện tử không hợp lệ';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Nó không được phép sử dụng e-mail dùng một lần địa chỉ';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Hồ sơ không tìm thấy';
@@ -1171,7 +1177,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Phiên bản "%1$s" không tìm thấy
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Tên người dùng không hợp lệ. Tên người dùng chỉ có thể chứa chữ cái Latin, số, dấu cách, dấu gạch ngang, dấu chấm, cộng với dấu hiệu và gạch dưới.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Tên thật của người dùng không hợp lệ.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Người dùng không có mức độ truy cập yêu cầu.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '"Tên thật" chọn phù hợp với tên đăng nhập của người dùng khác. Hãy chọn khác.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Tài trợ hỗ trợ không được kích hoạt.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Tài trợ %1$d không tìm thấy.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Tài trợ (%1$s) là dưới số tiền tối thiểu (%2$s)';
@@ -1180,7 +1185,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Truy cập b�
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Nhà tài trợ đã không được cung cấp một địa chỉ e-mail. Xin vui lòng cập nhật hồ sơ của bạn.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Cấu hình tùy chọn "%1$s" có giá trị không hợp lệ "%2$s"';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Hành động không thể thực hiện vì issue "%1$d" là chỉ đọc.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Đã có một mối quan hệ giữa hai issue này';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Mối quan hệ không tìm thấy.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Truy cập bị từ chối: Issue %1$d đòi hỏi cấp độ truy cập cao hơn.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Một issue không thể quan hệ đến chính nó.';
@@ -1209,7 +1213,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Các " %1$s " plugin cần phải 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Có một lỗi không rõ "%1$s" trong quá trình thực hiện của các "%2$s" plugin';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Trường "%1$s" có chứa bản sao cột "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Trường "%1$s" có chứa không hợp lệ trường "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Phiên xử lý không hợp lệ';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Biến phiên "%1$s" không tìm thấy.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Phiên của bạn đã trở thành vô hiệu.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hình thức bảo mật không phù hợp. Việc này có thể là do phiên làm việc hết hạn, hay do việc vô ý gửi một biểu mẫu 2 lần.';

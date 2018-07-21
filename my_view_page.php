@@ -52,6 +52,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
+require_api( 'layout_api.php' );
 require_css( 'status_config.php' );
 
 auth_ensure_user_authenticated();
@@ -66,15 +67,16 @@ compress_enable();
 # don't index my view page
 html_robots_noindex();
 
-html_page_top1( lang_get( 'my_view_link' ) );
+layout_page_header_begin( lang_get( 'my_view_link' ) );
 
-if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-	html_meta_redirect( 'my_view_page.php?refresh=true', current_user_get_pref( 'refresh_delay' ) * 60 );
+$t_refresh_delay = current_user_get_pref( 'refresh_delay' );
+if( $t_refresh_delay > 0 ) {
+	html_meta_redirect( 'my_view_page.php?refresh=true', $t_refresh_delay * 60 );
 }
 
-html_page_top2();
+layout_page_header_end();
 
-print_recently_visited();
+layout_page_begin( __FILE__ );
 
 $f_page_number		= gpc_get_int( 'page_number', 1 );
 
@@ -88,104 +90,77 @@ reset( $t_boxes );
 #print_r ($t_boxes);
 
 $t_project_id = helper_get_current_project();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
 ?>
+<div class="col-xs-12 <?php echo $t_timeline_view_class ?>">
 
-<div>
 <?php
-$t_status_legend_position = config_get( 'status_legend_position' );
-
-if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
-	echo '<br />';
-}
-?>
-
-<div>
-<?php include( $g_core_path . 'timeline_inc.php' ); ?>
-
-<div class="myview_boxes_area">
-
-<table class="hide" cellspacing="3" cellpadding="0">
-<?php
-$t_number_of_boxes = count( $t_boxes );
+$t_number_of_boxes = count ( $t_boxes );
 $t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 $t_counter = 0;
+$t_two_columns_applied = false;
 
 define( 'MY_VIEW_INC_ALLOW', true );
 
-while( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
-	if( $t_box_display == 0 ) {
+foreach( $t_boxes as $t_box_title => $t_box_display ) {
+# while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 		# don't display bugs that are set as 0
+	if ($t_box_display == 0) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-	} else if( $t_box_title == 'assigned' && ( current_user_is_anonymous()
-		|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	}
 		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
+	else if(
+		$t_box_title == 'assigned'
+		&&  ( current_user_is_anonymous()
+			|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id )
+		)
+	) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-	} else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() or !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	}
 		# don't display "Monitored by Me" bugs to users that can't monitor bugs
+	else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-	} else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
-		( current_user_is_anonymous() or !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	}
 		# don't display "Reported by Me" bugs to users that can't report bugs
+	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
+		( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-	} else {
-		# display the box
-		$t_counter++;
+			}
 
-		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
-		if( ON == $t_boxes_position ) {
-			if( 1 == $t_counter%2 ) {
-				# for even box number start new row and column
-				echo '<tr><td class="myview-left-col">';
+			# display the box
+	else {
+		if( !$t_timeline_view_threshold_access ) {
+			if ($t_counter >= $t_number_of_boxes / 2 && !$t_two_columns_applied) {
+				echo '</div>';
+				echo '<div class="col-xs-12 col-md-6">';
+				$t_two_columns_applied = true;
+			} elseif ($t_counter >= $t_number_of_boxes && $t_two_columns_applied) {
+				echo '</div>';
+			} else {
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '</td></tr>';
-			} else if( 0 == $t_counter%2 ) {
-				# for odd box number only start new column
-				echo '<tr><td class="myview-right-col">';
-				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '</td></tr>';
+				echo '<div class="space-10"></div>';
 			}
-		} else if( OFF == $t_boxes_position ) {
-			# start new table row and column for first box
-			if( 1 == $t_counter ) {
-				echo '<tr><td class="myview-left-col">';
-			}
-
-			# start new table column for the second half of boxes
-			if( $t_counter == ceil( $t_number_of_boxes / 2 ) + 1 ) {
-				echo '<td class="myview-right-col">';
-			}
-
-			# display the required box
+			$t_counter++;
+		} else {
 			include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-			echo '<br />';
-
-			# close the first column for first half of boxes
-			if( $t_counter == ceil( $t_number_of_boxes / 2 ) ) {
-				echo '</td>';
-			}
+			echo '<div class="space-10"></div>';
 		}
 	}
 }
-
-# Close the box groups depending on the layout mode and whether an empty cell
-# is required to pad the number of cells in the last row to the full width of
-# the table.
-if( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
-	echo '<td class="myview-right-col"></td></tr>';
-} else if( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
-	echo '</td></tr>';
-}
 ?>
-
-</table>
 </div>
 
-<?php
-if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
-}
-?>
-
-<?php
-html_page_bottom();
+<?php if( $t_timeline_view_threshold_access ) { ?>
+<div class="col-md-5 col-xs-12">
+	<?php
+		# Build a simple filter that gets all bugs for current project
+		$g_timeline_filter = array();
+		$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+		$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
+		include( $g_core_path . 'timeline_inc.php' );
+	?>
+	<div class="space-10"></div>
+</div>
+<?php }
+layout_page_end();

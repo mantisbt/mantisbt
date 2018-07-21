@@ -39,11 +39,13 @@ require_api( 'utility_api.php' );
 $g_log_levels = array(
 	LOG_EMAIL => 'MAIL',
 	LOG_EMAIL_RECIPIENT => 'RECIPIENT',
+	LOG_EMAIL_VERBOSE => 'MAIL_VERBOSE',
 	LOG_FILTERING => 'FILTER',
 	LOG_AJAX => 'AJAX',
 	LOG_LDAP => 'LDAP',
 	LOG_DATABASE => 'DB',
-	LOG_WEBSERVICE => 'WEBSERVICE'
+	LOG_WEBSERVICE => 'WEBSERVICE',
+	LOG_PLUGIN => 'PLUGIN',
 );
 
 /**
@@ -66,42 +68,17 @@ function log_event( $p_level, $p_msg ) {
 		$t_event = $p_msg;
 		$t_msg = var_export( $p_msg, true );
 	} else {
-		$t_args = func_get_args();
-		array_shift( $t_args ); # skip level
-		array_shift( $t_args ); # skip message
-		$p_msg = vsprintf( $p_msg, $t_args );
-
+		if( func_num_args() > 2 ) {
+			$t_args = func_get_args();
+			array_shift( $t_args ); # skip level
+			array_shift( $t_args ); # skip message
+			$p_msg = vsprintf( $p_msg, $t_args );
+		}
 		$t_event = array( $p_msg, 0 );
 		$t_msg = $p_msg;
 	}
 
-	$t_backtrace = debug_backtrace();
-	$t_caller = basename( $t_backtrace[0]['file'] );
-	$t_caller .= ':' . $t_backtrace[0]['line'];
-
-	# Is this called from another function?
-	if( isset( $t_backtrace[1] ) ) {
-		if( $p_level == LOG_DATABASE ) {
-			if( isset( $t_backtrace[2] ) && $t_backtrace[2]['function'] == 'call_user_func_array' ) {
-				$t_caller = basename( $t_backtrace[3]['file'] );
-				$t_caller .= ':' . $t_backtrace[3]['line'];
-				$t_caller .= ' ' . $t_backtrace[3]['function'] . '()';
-			} else if( $t_backtrace[1]['function'] == 'db_query' ) {
-				$t_caller = basename( $t_backtrace[1]['file'] );
-				$t_caller .= ':' . $t_backtrace[1]['line'];
-				if( isset( $t_backtrace[2] ) ) {
-					$t_caller .= ' ' . $t_backtrace[2]['function'] . '()';
-				} else {
-					$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-				}
-			}
-		} else {
-			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-		}
-	} else {
-		# or from a script directly?
-		$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
-	}
+	$t_caller = log_get_caller( $p_level );
 
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
@@ -123,7 +100,7 @@ function log_event( $p_level, $p_msg ) {
 		}
 	}
 
-	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_caller . ' ' . $t_msg;
 
 	switch( $t_destination ) {
 		case 'none':
@@ -169,9 +146,9 @@ function log_event( $p_level, $p_msg ) {
  */
 function log_print_to_page() {
 	if( config_get_global( 'log_destination' ) === 'page' && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_log_threshold' ) ) ) {
-		global $g_log_events, $g_log_levels, $g_email_stored;
+		global $g_log_events, $g_log_levels, $g_email_shutdown_processing;
 
-		if( $g_email_stored ) {
+		if( $g_email_shutdown_processing ) {
 			email_send_all();
 		}
 
@@ -179,23 +156,38 @@ function log_print_to_page() {
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
 		$t_total_queries_count = 0;
-		$t_total_event_count = count( $g_log_events );
+		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
 
-		echo "\t<hr />\n";
+
+		echo "<div class=\"space-10\"></div>";
+		echo "\t<div class=\"row\">\n";
+		echo "\t<div class=\"col-xs-12\">\n";
+
+		echo "\t<div class=\"widget-box widget-color-red\">\n";
+		echo "\t<div class=\"widget-header widget-header-small\">\n";
+		echo "\t<h4 class=\"widget-title lighter\">\n";
+		echo "\t<i class=\"ace-icon fa fa-flag-o\"></i>\n";
+		echo "Debug Log";
+		echo "</h4>\n";
+		echo "</div>\n";
+
+		echo "\t<div class=\"widget-body\">\n";
+
 		echo "\n\n<!--Mantis Debug Log Output-->";
 		if( $t_total_event_count == 0 ) {
 			echo "<!--END Mantis Debug Log Output-->\n\n";
 			return;
 		}
 
-		echo "<hr />\n";
-		echo "<table id=\"log-event-list\">\n";
+		echo "<div class=\"widget-main no-padding\">";
+		echo "<div class=\"table-responsive\">\n";
+		echo "<table class=\"table table-bordered table-condensed table-striped\" id=\"log-event-list\">\n";
 		echo "\t<thead>\n";
 		echo "\t\t<tr>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_number' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_time' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_caller' ) . "</th>\n";
-		echo "\t\t\t<th>" . lang_get( 'log_page_event' ) . "</th>\n";
+		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_number' ) . "</th>\n";
+		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_time' ) . "</th>\n";
+		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_caller' ) . "</th>\n";
+		echo "\t\t\t<th class=\"small-caption\">" . lang_get( 'log_page_event' ) . "</th>\n";
 		echo "\t\t</tr>\n";
 		echo "\t</thead>\n";
 		echo "\t<tbody>\n";
@@ -228,28 +220,133 @@ function log_print_to_page() {
 					if( $t_log_event[2][2] ) {
 						$t_query_duplicate_class = ' class="duplicate-query"';
 					}
-					echo "\t\t<tr " . $t_query_duplicate_class . '><td>' . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr " . $t_query_duplicate_class . '><td class="small">' . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td class="small">' . $t_log_event[2][1] . '</td><td class="small">' . string_html_specialchars( $t_log_event[3] ) . '</td><td class="small">' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 					break;
 				default:
-					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr><td class=\"small\">" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td class="small">' . $t_log_event[2][1] . '</td><td class="small">' . string_html_specialchars( $t_log_event[3] ) . '</td><td class="small">' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 			}
 		}
 
 		# output any summary data
 		if( $t_unique_queries_count != 0 ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_unique_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_unique_queries_executed . "</td></tr>\n";
 		}
 		if( $t_total_queries_count != 0 ) {
 			$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_queries_executed . "</td></tr>\n";
+			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_total_queries_executed . "</td></tr>\n";
 		}
 		if( $t_total_query_execution_time != 0 ) {
 			$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_query_time . "</td></tr>\n";
+			echo "\t\t<tr><td class=\"small\">" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3" class="small">' . $t_total_query_time . "</td></tr>\n";
 		}
 		echo "\t</tbody>\n\t</table>\n";
+		echo "</div></div></div></div></div></div>\n";
 
 		echo "<!--END Mantis Debug Log Output-->\n\n";
 	}
+}
+
+/**
+ * Builds a string with information from the call backtrace of current logging action
+ * The output format is, where available:
+ *    {plugin} {file}:{line} {class}[::|->]{function}
+ *
+ * Some of the actual backtrace is removed to get more informative line to the user.
+ * The log type is used to selectively remove some internal call traces.
+ *
+ * @param integer $p_level	Log level type constant
+ * @return string	Output string with caller information
+ */
+function log_get_caller( $p_level = null ) {
+	$t_full_backtrace = debug_backtrace();
+	$t_backtrace = $t_full_backtrace;
+	$t_root_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+
+	# Remove top trace, as it's this function
+	unset( $t_backtrace[0] );
+
+	# Remove trace step from the include in plugin.php
+	# if any log is triggered from the body of a plugin page, we don't want
+	# to show the caller function "include()" from plugin.php
+	$t_last = end( $t_backtrace );
+	$t_last_key = key( $t_backtrace );
+	if( isset( $t_last['function'] )
+		&& $t_last['function'] == 'include'
+		&& $t_last['file'] == $t_root_path . 'plugin.php'
+		) {
+		unset( $t_backtrace[$t_last_key] );
+		unset( $t_full_backtrace[$t_last_key] );
+	}
+
+	# Iterate over the backtrace and clean up some steps to show a cleaner info
+	foreach( $t_backtrace as $t_index => $t_step ) {
+
+		# Remove special cases of steps for each log type
+		switch( $p_level ) {
+			# For plugin logs, we want to hide the plugin api calls
+			case LOG_PLUGIN:
+				if( isset( $t_step['function'] ) ) {
+					# Remove trace step executed for plugin_log_event()
+					if( $t_step['function'] == 'plugin_log_event'
+						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/plugin_api.php'
+						) {
+						unset( $t_backtrace[$t_index-1] );
+						continue 2; # next foreach
+					}
+				}
+				break;
+
+			# For database logs, we want to hide all the intermediate db api calls
+			case LOG_DATABASE:
+				# Remove trace steps that are executed inside DbQuery class, or inherited classes
+				if( isset( $t_step['class'] ) && (
+					$t_step['class'] == 'DbQuery'
+					|| is_subclass_of( $t_step['class'], 'DbQuery', true )
+					) ) {
+					unset( $t_backtrace[$t_index-1] );
+					continue 2; # next foreach
+				}
+				if( isset( $t_step['function'] ) ) {
+					# Remove trace step executed for db_query() or db_query_bound()
+					if( ( $t_step['function'] == 'db_query' || $t_step['function'] == 'db_query_bound' )
+						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/database_api.php'
+						) {
+						unset( $t_backtrace[$t_index-1] );
+						continue 2; # next foreach
+					}
+				}
+				break;
+		}
+
+		# shortcut break the loop as soon as there is a step that has not been deleted.
+		reset( $t_backtrace );
+		$t_first_key = key( $t_backtrace );
+		# note, we are deleting steps at <current index> - 1
+		# this section is only reached when no deletion has been performed
+		if( $t_index > $t_first_key ) {
+			break;
+		}
+	}
+
+	# At this point, first step in the cleaned backtrace is the one we want to show
+	$t_step = reset( $t_backtrace);
+	$t_step_key = key( $t_backtrace );
+	$t_caller_file = basename( $t_step['file'] );
+	$t_caller_line = $t_step['line'];
+	$t_caller_function = '';
+	$t_caller_class = '';
+	$t_caller_plugin = ( LOG_PLUGIN == $p_level ) ? plugin_get_current() . ' ' : '';
+	# Get the function that called this, from the next backtrace step, if it exists
+	if( isset( $t_full_backtrace[$t_step_key+1] ) ) {
+		$t_caller_function = $t_full_backtrace[$t_step_key+1]['function'] . '()';
+		if( isset( $t_full_backtrace[$t_step_key+1]['class'] ) ) {
+			$t_caller_class = $t_full_backtrace[$t_step_key+1]['class'];
+			$t_caller_class .= $t_full_backtrace[$t_step_key+1]['type'];
+		}
+	}
+
+	$t_caller = $t_caller_plugin . $t_caller_file . ':' . $t_caller_line . ' '
+			. $t_caller_class . $t_caller_function;
+	return $t_caller;
 }

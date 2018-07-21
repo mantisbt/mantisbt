@@ -18,13 +18,6 @@
  * Language File - English (English)
  *
  * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
  * ** Detailed instructions on how to create or update translations at **
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
@@ -93,6 +86,7 @@ $s_actiongroup_menu_update_product_version = 'Update Product Version';
 $s_actiongroup_menu_update_target_version = 'Update Target Version';
 $s_actiongroup_menu_update_fixed_in_version = 'Update Fixed in Version';
 $s_actiongroup_menu_update_product_build = 'Update Product Build';
+$s_actiongroup_menu_update_due_date = 'Update Due Date';
 $s_actiongroup_menu_add_note = 'Add Note';
 $s_actiongroup_menu_attach_tags = 'Attach Tags';
 $s_actiongroup_bugs = 'Selected Issues';
@@ -102,6 +96,8 @@ $s_actiongroup_error_issue_is_readonly = 'Issue is readonly.';
 $s_all_projects = 'All Projects';
 $s_move_bugs = 'Move Issues';
 $s_operation_successful = 'Operation successful.';
+$s_operation_warnings = 'Operation completed with warnings.';
+$s_operation_failed = 'Operation did not complete successfully.';
 $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
@@ -109,6 +105,8 @@ $s_excel_export = 'Excel Export';
 $s_login_anonymously = 'Login Anonymously';
 $s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Jump to Notes';
+$s_jump_to_history = 'Jump to History';
+$s_display_history = 'Display History';
 $s_public_project_msg = 'This project is public. All users have access.';
 $s_private_project_msg = 'This project is private. Only administrators and manually added users have access.';
 $s_access_level_project = 'Project Access Level';
@@ -141,7 +139,6 @@ $s_bugnote_link_title = 'Direct link to note';
 $s_delete_bugnote_button = 'Delete Note';
 $s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
-$s_bug_relationships_label = 'Relationships:';
 $s_empty_password_sure_msg = 'The user has an empty password. Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 $s_reauthenticate_title = 'Authenticate';
@@ -179,6 +176,12 @@ $s_create_new_project_link = 'Create New Project';
 
 $s_login_link = 'Login';
 
+# Browser Search - %s is the Search Engine title (@see $g_search_title)
+$s_opensearch_id_short = '%s Id';
+$s_opensearch_id_description = '%s: search by Issue Id';
+$s_opensearch_text_short = '%s Text';
+$s_opensearch_text_description = '%s: full-text search';
+
 # comboboxes default to this to instruct user to explicitly select an entry.
 $s_select_option = '(select)';
 
@@ -202,6 +205,7 @@ $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues s
 $s_product_version_bugs_conf_msg = 'Update Product Version to';
 $s_fixed_in_version_bugs_conf_msg = 'Update Fixed in Version to';
 $s_target_version_bugs_conf_msg = 'Update Target Version to';
+$s_due_date_bugs_conf_msg = 'Update Due Date to';
 $s_close_group_bugs_button = 'Close Issues';
 $s_delete_group_bugs_button = 'Delete Issues';
 $s_move_group_bugs_button = 'Move Issues';
@@ -216,6 +220,7 @@ $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 $s_product_version_group_bugs_button = 'Update Product Version';
 $s_fixed_in_version_group_bugs_button = 'Update Fixed in Version';
 $s_target_version_group_bugs_button = 'Update Target Version';
+$s_due_date_group_bugs_button = 'Update Due Date';
 $s_update_severity_title = 'Update Severity';
 $s_update_severity_msg = 'Choose issue severity';
 $s_update_severity_button = 'Update Severity';
@@ -253,6 +258,7 @@ $s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+$s_no_access = 'no access';
 $s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
 $s_project_view_state_enum_string = '10:public,50:private';
 $s_view_state_enum_string = '10:public,50:private';
@@ -291,6 +297,7 @@ $s_email_notification_title_for_status_bug_resolved = 'The following issue has b
 $s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_unassigned = 'The following issue has been UNASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
@@ -310,12 +317,12 @@ $s_email_notification_title_for_action_dependant_on_relationship_deleted = 'The 
 $s_email_notification_title_for_action_blocks_relationship_deleted = 'The following issue has been removed as the CHILD OF issue %1$s.';
 $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATED issue %1$s has been RESOLVED.';
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %1$s has been CLOSED.';
+$s_email_notification_title_for_action_related_issue_deleted = 'The RELATED issue %1$s has been DELETED.';
 $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by user %2$s.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
 $s_email_project = 'Project';
-$s_email_project_label = 'Project:';
 $s_email_bug = 'Issue ID';
 $s_email_category = 'Category';
 $s_email_reproducibility = 'Reproducibility';
@@ -332,6 +339,8 @@ $s_email_summary = 'Summary';
 $s_email_description = 'Description';
 $s_email_additional_information = 'Additional Information';
 $s_email_steps_to_reproduce = 'Steps to Reproduce';
+$s_email_tag = 'Tags';
+$s_email_due_date = 'Due Date';
 
 # account_delete.php
 $s_account_protected_msg = 'Account protected. Cannot change settings...';
@@ -352,14 +361,28 @@ $s_realname_label = 'Real Name';
 $s_email = 'E-mail';
 $s_email_label = 'E-mail';
 $s_password = 'Password';
+$s_new_password = 'New password';
 $s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
 $s_current_password = 'Current Password';
 $s_access_level = 'Access Level';
 $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
-$s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
+$s_verify_warning = 'Your account information has been verified.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
+
+# API tokens page
+$s_api_tokens_link = 'API Tokens';
+$s_api_token_create_form_title = 'Create API Token';
+$s_api_token_create_button = 'Create API Token';
+$s_api_token_name = 'Token Name';
+$s_api_token_disclose_message = 'Token to use for accessing API.';
+$s_api_token_displayed_once = 'Note that this token will only be displayed once.';
+$s_api_tokens_title = 'API Tokens';
+$s_api_token_revoke_button = 'Revoke';
+$s_api_token_never_used = 'Never used';
+$s_api_token_revoked = 'API token "%s" revoked.';
+$s_last_used = 'Last Used';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
@@ -369,7 +392,7 @@ $s_minutes = 'minutes';
 $s_redirect_delay = 'Redirect Delay';
 $s_seconds = 'seconds';
 $s_with_minimum_severity = 'With Minimum Severity of';
-$s_bugnote_order = 'Notes Sort Order';
+$s_bugnote_order = 'Activities Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'E-mail on New';
@@ -382,7 +405,9 @@ $s_email_on_bugnote_added = 'E-mail on Note Added';
 $s_email_on_status_change = 'E-mail on Status Change';
 $s_email_on_priority_change = 'E-mail on Priority Change';
 $s_email_bugnote_limit = 'E-mail Notes Limit';
+$s_email_full_issue_details = 'E-mail Full Issue Details';
 $s_language = 'Language';
+$s_font_family = 'Font Family';
 $s_update_prefs_button = 'Update Prefs';
 $s_reset_prefs_button = 'Reset Prefs';
 $s_timezone = 'Time Zone';
@@ -402,7 +427,6 @@ $s_profile_deleted_msg = 'Deleted profile...';
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Edit Profile';
 $s_platform = 'Platform';
-$s_platform_label = 'Platform:';
 $s_additional_description = 'Additional Description';
 $s_update_profile_button = 'Update Profile';
 
@@ -443,7 +467,6 @@ $s_payment_updated = 'Payment information updated.';
 # account_update.php
 $s_account_updated_msg = 'Your account has been successfully updated...';
 $s_email_updated = 'E-mail address successfully updated';
-$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
@@ -482,10 +505,7 @@ $s_monitor_bug_button = 'Monitor';
 # bug_monitor_delete.php
 $s_unmonitor_bug_button = 'End Monitoring';
 
-# bug_file_add.php
-$s_file_upload_msg = 'File upload successful.';
-
-# bug_file_upload_inc.php
+# bugnote_add_inc.php
 $s_upload_file = 'Upload File';
 $s_upload_files = 'Upload Files';
 $s_select_file = 'Select File';
@@ -513,15 +533,20 @@ $s_bugnote_add_resolve_button = 'Add Note';
 $s_from = 'From';
 $s_to = 'To';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
+$s_bug_reminder = 'Send a Reminder';
 $s_reminder_sent_to = 'Reminder sent to';
 $s_reminder_sent_none = 'No reminders could be sent';
 $s_reminder_list_truncated = 'recipients list truncated';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_mentions = 'You can now mention users to trigger notifications for them instead of using reminders feature.  For example, others can mention you by writing %1s in issues and notes and you will get an email notification.';
+$s_reminder_explain = 'This note will be sent to the selected recipients, requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue; they can unsubscribe using the "End Monitoring" button.';
+$s_reminder_store = 'The note will be stored with the issue.';
+
+# mentions
+$s_mentioned_you = 'mentioned you on:';
+$s_mentioned_in = 'Mentioned in %1$s';
 
 # bug_set_sponsorship.php
 $s_confirm_sponsorship = 'Please confirm you want to sponsor issue %1$d for %2$s.';
@@ -539,36 +564,24 @@ $s_update_simple_link = 'Update Simple';
 $s_updating_bug_advanced_title = 'Updating Issue Information';
 $s_id = 'ID';
 $s_category = 'Category';
-$s_category_label = 'Category:';
 $s_severity = 'Severity';
-$s_severity_label = 'Severity:';
 $s_reproducibility = 'Reproducibility';
 $s_date_submitted = 'Date Submitted';
 $s_last_update = 'Last Update';
 $s_reporter = 'Reporter';
-$s_reporter_label = 'Reporter:';
 $s_assigned_to = 'Assigned To';
-$s_assigned_to_label = 'Assigned To:';
 $s_priority = 'Priority';
-$s_priority_label = 'Priority:';
 $s_resolution = 'Resolution';
-$s_resolution_label = 'Resolution:';
 $s_status = 'Status';
-$s_status_label = 'Status:';
 $s_duplicate_id = 'Duplicate ID';
 $s_os = 'OS';
-$s_os_label = 'OS:';
 $s_projection = 'Projection';
 $s_os_version = 'OS Version';
-$s_os_version_label = 'OS Version:';
 $s_eta = 'ETA';
 $s_product_version = 'Product Version';
-$s_product_version_label = 'Product Version:';
 $s_build = 'Build';
 $s_fixed_in_version = 'Fixed in Version';
-$s_fixed_in_version_label = 'Fixed in Version:';
 $s_target_version = 'Target Version';
-$s_target_version_label = 'Target Version:';
 $s_votes = 'Votes';
 $s_summary = 'Summary';
 $s_description = 'Description';
@@ -576,7 +589,6 @@ $s_steps_to_reproduce = 'Steps To Reproduce';
 $s_update_information_button = 'Update Information';
 $s_sticky_issue = 'Sticky Issue';
 $s_profile = 'Profile';
-$s_profile_label = 'Profile:';
 
 # bug_update_page.php
 $s_updating_bug_simple_title = 'Updating Issue Information';
@@ -592,12 +604,13 @@ $s_bugnote_revision_dropped_history = 'Note Revision Dropped';
 $s_all_revisions = 'All Revisions';
 $s_back_to_issue = 'Back to Issue';
 $s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
+$s_activities_title = 'Activities';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Note added...';
+$s_bugnote_attached_files = 'Attached Files:';
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = 'Note has been successfully deleted...';
@@ -645,25 +658,27 @@ $s_click_to_login = 'Login';
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
-$s_warning_admin_directory_present = '<strong>Warning:</strong> Admin directory should be removed.';
+$s_warning_admin_directory_present = '<strong>Warning:</strong> "admin" directory should be removed, or access to it restricted.';
 $s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its default value (%2$s).';
 $s_warning_security_hazard = 'This is a potential security hazard as it can expose sensitive information.';
 $s_warning_integrity_hazard = 'This will cause MantisBT to continue when errors occurs and may lead to system/data integrity issues.';
 $s_warning_debug_email = '<strong>Warning:</strong> "<code>debug_email</code>" is not set to <code>OFF</code>, all notification e-mails will be sent to "%1$s".';
-$s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0) or corrupt. Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
+$s_error_database_no_schema_version = '<strong>Error:</strong> Your Database schema version is 0. This can happen either because the database is corrupt or the value of "database_version" could not be retrieved from the config table or the database structure is from an outdated version of MantisBT (pre 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.';
-$s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more up-to-date than the code installed. Please upgrade the code.';
+$s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more recent than the installed code. Please upgrade the code.';
 
 # login_page.php
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Remember my login in this browser';
+$s_save_login = 'Keep me logged in';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
 $s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';
 $s_lost_password_link = 'Lost your password?';
+$s_username_or_email = 'Username or email address';
+$s_enter_password = 'Enter password for \'%s\'';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Select Project';
@@ -751,6 +766,8 @@ $s_colour_global = 'All Project settings override default configuration.';
 $s_issue_reporter = 'User who reported the issue';
 $s_issue_handler = 'User who is handling the issue';
 $s_users_added_bugnote = 'Users who added Issue Notes';
+$s_category_assigned_to = 'Category Owner';
+$s_email_notify_users = 'Any user with access level';
 $s_change_configuration = 'Update Configuration';
 $s_message = 'Message';
 $s_default_notify = 'Setting default notification flags to';
@@ -787,6 +804,7 @@ $s_access_change_access_label = 'Who can change access levels:';
 $s_default_not_in_flow = 'The default status of %1$s is not selected in the next statuses for %2$s. It will be ignored.';
 
 # manage_config_work_threshold_page
+$s_allowed_access_levels = 'Allowed for any user with access level';
 $s_assign_issue = 'Assign an issue';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
@@ -819,6 +837,9 @@ $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 $s_configuration_corrupted = 'The configuration in the database is corrupted.';
+$s_set_configuration_option_action_create = 'Create Configuration Option';
+$s_set_configuration_option_action_edit = 'Edit Configuration Option';
+$s_set_configuration_option_action_clone = 'Clone Configuration Option';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
@@ -854,6 +875,7 @@ $s_category_deleted_msg = 'Category has been successfully deleted...';
 
 # manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'Are you sure you want to delete this category?<br />Category "%1$s" contains %2$d issues.';
+$s_category_delete_confirm_msg = 'Are you sure you want to delete "%1$s" category?';
 $s_delete_category_button = 'Delete Category';
 
 # manage_proj_category_edit_page.php
@@ -879,7 +901,6 @@ $s_edit_project_title = 'Edit Project';
 $s_project_name = 'Project Name';
 $s_project_name_label = 'Project Name:';
 $s_view_status = 'View Status';
-$s_view_status_label = 'View Status:';
 $s_public = 'public';
 $s_private = 'private';
 $s_update_project_button = 'Update Project';
@@ -946,7 +967,7 @@ $s_account_deleted_msg = 'Account deleted...';
 $s_delete_account_sure_msg = 'Are you sure you wish to delete this account?';
 
 # manage_user_edit_page.php
-$s_notify_user = 'Notify User';
+$s_notify_user = 'Notify user of this change';
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
@@ -958,6 +979,7 @@ $s_edit_user_title = 'Edit User';
 $s_account_unlock_button = 'Unlock Account';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
+$s_impersonate_user_button = 'Impersonate User';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via e-mail.';
 $s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'All';
@@ -990,6 +1012,7 @@ $s_edit_news_link = 'Edit News';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Logout';
 $s_my_view_link = 'My View';
+$s_invite_users = 'Invite Users';
 
 # my_view_page.php
 $s_my_view_title_unassigned = 'Unassigned';
@@ -1094,7 +1117,7 @@ $s_submission_thanks_msg = 'Thank you for your submission.';
 
 # report_bug_advanced_page.php
 $s_simple_report_link = 'Simple Report';
-$s_enter_report_details_title = 'Enter Report Details';
+$s_enter_report_details_title = 'Enter Issue Details';
 $s_required = 'required';
 $s_select_category = 'Select Category';
 $s_select_reproducibility = 'Select Reproducibility';
@@ -1102,7 +1125,7 @@ $s_select_severity = 'Select Severity';
 $s_or_fill_in = 'Or Fill In';
 $s_assign_to = 'Assign To';
 $s_additional_information = 'Additional Information';
-$s_submit_report_button = 'Submit Report';
+$s_submit_report_button = 'Submit Issue';
 $s_check_report_more_bugs = 'check to report more issues';
 
 # report_bug_page.php
@@ -1114,13 +1137,13 @@ $s_valid_project_msg = 'You must choose a valid project.';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed.';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_password_emailed_msg = 'Congratulations, you have registered successfully ! You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
+$s_no_reponse_msg = 'You have seven days to complete the account confirmation process; if you fail to do so within this period, the newly-registered account may be purged.';
 
 # signup_page.php
 $s_signup_captcha_request_label = 'Enter the code as it is shown in the box on the right:';
 $s_signup_captcha_refresh = 'Generate a new code';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br />Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation message to the e-mail address you specified.<br />Using the link provided in the e-mail, you will be able to activate your account. If you fail to do so within seven days, it may be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
@@ -1170,23 +1193,21 @@ $s_total_time = 'Total time';
 $s_developer_stats = 'Developer Stats';
 $s_reporter_stats = 'Reporter Stats';
 $s_orct = '(open/resolved/closed/total)';
+$s_summary_header = 'open/resolved/closed/total/resolved ratio/ratio';
 
 # view_all_bug_page.php
 $s_any = 'any';
 $s_all = 'all';
 $s_show = 'Show';
-$s_show_label = 'Show:';
 $s_changed = 'Highlight changed (hours)';
-$s_changed_label = 'Highlight changed (hours):';
 $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
-$s_sticky_label = 'Show Sticky Issues:';
-$s_sort_label = 'Sort by:';
+$s_sort = 'Sort by';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
-$s_note_user_id_label = 'Note By:';
+$s_note_user_id = 'Note By';
 $s_filter_match_type = 'Match Type';
 $s_filter_match_all = 'All Conditions';
 $s_filter_match_any = 'Any Condition';
@@ -1203,8 +1224,8 @@ $s_first = 'First';
 $s_last = 'Last';
 $s_start_date_label = 'Start Date:';
 $s_end_date_label = 'End Date:';
-$s_use_date_filters = 'Use Date Filters';
-$s_use_date_filters_label = 'Use Date Filters:';
+$s_use_date_filters = 'Filter by Date Submitted';
+$s_use_last_updated_date_filters = 'Filter by Last Updated Date';
 $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';
@@ -1215,7 +1236,7 @@ $s_select_all = 'Select All';
 # stored query strings
 $s_use_query = 'Use Filter';
 $s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
+$s_query_deleted = 'Filter "%s" Deleted';
 $s_save_query = 'Save Current Filter';
 $s_reset_query = 'Reset Filter';
 $s_query_name = 'Filter Name';
@@ -1227,11 +1248,20 @@ $s_query_name_too_long = 'You cannot store a filter name with more than 64 chara
 $s_query_store_error = 'There was an error saving this filter.';
 $s_open_queries = 'Manage Filters';
 $s_query_delete_msg = 'Are you sure you wish to delete this filter?';
+$s_edit_filter = 'Edit Filter';
+$s_owner = 'Owner';
+$s_update_filter = 'Update filter';
+$s_current_project = 'Current project';
+$s_stored_project = 'Stored project';
+$s_available_filter_for_project = 'Available filters for project';
+$s_manage_filter_page_title = 'Manage Filters';
+$s_manage_filter_edit_page_title = 'Edit filter';
+$s_delete_filter_button = 'Delete';
+$s_apply_filter_button = 'Apply';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
 $s_product_build = 'Product Build';
-$s_product_build_label = 'Product Build:';
 $s_system_profile = 'System Description';
 $s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
@@ -1286,9 +1316,9 @@ $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
 $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
-$s_link_custom_field_to_project_title = 'Link custom field to project';
+$s_link_custom_field_to_project_title = 'Link custom field to projects';
 $s_link_custom_field_to_project_button = 'Link Custom Field';
-$s_linked_projects_label = 'Linked Projects:';
+$s_linked_projects_label = 'Linked Projects';
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_sequence_label = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio,10:Textarea';
@@ -1298,7 +1328,6 @@ $s_field_delete_button = 'Delete Field';
 $s_confirm_custom_field_unlinking = 'Are you sure you want to unlink this custom field from the project? The values will not be deleted as long as the custom field itself is not deleted.';
 $s_field_remove_button = 'Remove Field';
 $s_hide_status = 'Hide Status';
-$s_hide_status_label = 'Hide Status:';
 $s_filter_closed = 'Closed';
 $s_filter_resolved = 'Resolved';
 $s_hide_closed = 'Hide Closed';
@@ -1307,13 +1336,13 @@ $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
-$s_monitored_by_label = 'Monitored By:';
 $s_attachments = 'attachment(s)';
 $s_bytes = 'bytes';
 $s_kb = 'KB';
 $s_attachment_missing = 'Attachment missing';
 $s_attachment_count = 'Attachment count';
 $s_view_attachments_for_issue = 'View %1$d attachment(s) for issue #%2$d';
+$s_warning_update_custom_field_type = '<strong>Warning:</strong> Custom field "%1$s" already has stored values. Changing field type may cause errors and unexpected behaviour if existing values are not consistent with the field\'s new type. To proceed, click the button below';
 
 # PHPMailer
 $s_phpmailer_language = 'en';
@@ -1356,7 +1385,6 @@ $s_relationship_deleted = 'Relationship deleted';
 $s_no_relationship = 'no relationship';
 $s_relationship_replaced = 'Relationship replaced';
 $s_replace_relationship_button = 'Replace';
-$s_replace_relationship_sure_msg = 'There is already a relationship between the two issues. Are you sure you want to replace it?';
 $s_relationship_with_parent = 'Relationship with the parent issue';
 $s_delete_relationship_button = 'Delete';
 $s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
@@ -1368,6 +1396,7 @@ $s_bug_created_from = 'Issue generated from';
 $s_copy_from_parent = 'Copy extended data from parent issue';
 $s_copy_notes_from_parent = 'Copy issue notes';
 $s_copy_attachments_from_parent = 'Copy attachments';
+$s_with = 'with';
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = 'Relationship Graph';
@@ -1378,7 +1407,7 @@ $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'View Issue';
 
-# Pemissions report
+# Permissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
 $s_issues = 'Issues';
@@ -1437,6 +1466,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
+$s_email_on_updated = 'E-mail on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';
@@ -1462,7 +1492,6 @@ $s_wiki = 'Wiki';
 
 # Tagging
 $s_tags = 'Tags';
-$s_tags_label = 'Tags:';
 $s_tag_details = 'Tag Details: %1$s';
 $s_tag_id = 'Tag ID';
 $s_tag_name = 'Name';
@@ -1551,6 +1580,8 @@ $s_path_information = 'MantisBT Path Information';
 $s_mantisbt_database_statistics = 'MantisBT Database Statistics';
 $s_php_version = 'PHP Version';
 $s_adodb_version = 'ADOdb Version';
+$s_database_driver = 'Database Driver';
+$s_database_version_description = 'Database Version, Description';
 
 # months
 $s_month_january = 'January';
@@ -1568,6 +1599,8 @@ $s_month_december = 'December';
 
 # Timeline Feature Strings
 $s_timeline_issue_created = '<span class="username">%1$s</span> created issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> attached file <em>%3$s</em> to issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> removed file <em>%3$s</em> from issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> commented on issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> is monitoring issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stopped monitoring issue <span class="issue_id">%2$s</span>';
@@ -1596,14 +1629,17 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field "%1$s" was empty. Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Invalid value for \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to access this until the account protection is lifted.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%1$s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used. Please go back and select another one.';
+$MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'That email is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option "%1$s" not found.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option "%1$s" can not be set in the database. It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Cannot set configuration option "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" not found.';
@@ -1613,6 +1649,8 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified. Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%1$s" not found.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%1$d" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'User with email "%1$s" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'User with real name "%1$s" not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid. Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
@@ -1623,7 +1661,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded. Please re-create it.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid e-mail address.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -1632,6 +1669,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file. Please delete t
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Attachment with id "%1$d" not found.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
@@ -1655,12 +1693,12 @@ $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" not found for project "%2$s".';
 $MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'This Category cannot be deleted, because it is defined as "Default Category For Moves".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES] = 'Category "%1$s" cannot be deleted, because it is associated with one or more issues.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'The user real name is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %1$d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%1$s) is below minimum amount (%2$s).';
@@ -1670,7 +1708,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option "%1$s" has invalid value "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue "%1$d" is read-only.';
 $MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %1$d requires higher access level.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
@@ -1693,6 +1730,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event "%1$s" has not yet been declared.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin "%1$s" is not registered.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = 'Plugin "%1$s" is not loaded, make sure its dependencies are met.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin "%1$s" is already installed.';
+$MANTIS_ERROR[ERROR_PLUGIN_CLASS_NOT_FOUND] = 'The "%2$s" Class is not defined in Plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Page "%2$s" does not exist in Plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = 'File "%2$s" does not exist in Plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin installation failed: %1$s.';
@@ -1703,7 +1741,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'The format of the specified plugin f
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
@@ -1718,3 +1755,20 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", 
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
+
+# dropzone.js - placeholders format is defined by the library
+$s_dropzone_default_message = 'Drop files here to upload (or click)';
+$s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
+$s_dropzone_fallback_text = '';
+$s_dropzone_file_too_big = 'File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.';
+$s_dropzone_invalid_file_type = 'You cannot upload files of this type.';
+$s_dropzone_response_error = 'Server responded with {{statusCode}} code.';
+$s_dropzone_cancel_upload = 'Cancel upload';
+$s_dropzone_cancel_upload_confirmation = 'Are you sure you want to cancel this upload?';
+$s_dropzone_remove_file = 'Remove file';
+$s_dropzone_remove_file_confirmation = '';
+$s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
+$s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';

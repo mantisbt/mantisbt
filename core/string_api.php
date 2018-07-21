@@ -66,7 +66,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 		$t_count = 0;
 		$t_prefix = '';
 
-		$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+		$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		$t_spaces = 0;
 		while( ( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
@@ -78,14 +78,14 @@ function string_preserve_spaces_at_bol( $p_string ) {
 			# 1 tab = 4 spaces, can be configurable.
 
 			$t_count++;
-			$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+			$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		}
 
 		for( $j = 0;$j < $t_spaces;$j++ ) {
 			$t_prefix .= '&#160;';
 		}
 
-		$t_lines[$i] = $t_prefix . utf8_substr( $t_lines[$i], $t_count );
+		$t_lines[$i] = $t_prefix . mb_substr( $t_lines[$i], $t_count );
 	}
 	return implode( "\n", $t_lines );
 }
@@ -123,7 +123,8 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 				#     if other encoded characters are a problem
 				$t_piece = preg_replace( '/&#160;/', ' ', $t_piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $t_piece );
+					# Use PCRE_UTF8 modifier to ensure a correct char count
+					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/u', "$1", $t_piece );
 				} else {
 					$t_output .= $t_piece;
 				}
@@ -249,8 +250,8 @@ function string_url( $p_string ) {
 function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
 
-	$t_path = rtrim( config_get( 'path' ), '/' );
-	$t_short_path = rtrim( config_get( 'short_path' ), '/' );
+	$t_path = rtrim( config_get_global( 'path' ), '/' );
+	$t_short_path = rtrim( config_get_global( 'short_path' ), '/' );
 
 	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
 
@@ -274,7 +275,9 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 
 	# Start extracting regex matches
-	$t_script = $t_matches['script'];
+	# Encode backslashes to prevent unwanted escaping of a leading '/' allowing
+	# redirection to external sites
+	$t_script = strtr( $t_matches['script'], array( '\\' => '%5C' ) );
 	$t_script_path = $t_matches['path'];
 
 	# Clean/encode query params
@@ -313,8 +316,6 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 }
 
-$g_string_process_bug_link_callback = array();
-
 /**
  * Process $p_string, looking for bug ID references and creating bug view
  * links for them.
@@ -325,7 +326,7 @@ $g_string_process_bug_link_callback = array();
  * the URL
  *
  * The bug tag ('#' by default) must be at the beginning of the string or
- * preceeded by a character that is not a letter, a number or an underscore
+ * preceded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
  * @param string  $p_string         String to be processed.
@@ -335,7 +336,7 @@ $g_string_process_bug_link_callback = array();
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bug_link_callback;
+	static $s_bug_link_callback = array();
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -344,34 +345,46 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if( bug_exists( (int)$p_array[2] ) ) {
-											$t_project_id = bug_get_field( (int)$p_array[2], \'project_id\' );
-											if( access_has_bug_level( config_get( \'view_bug_threshold\', null, null, $t_project_id ), (int)$p_array[2] ) ) {
-												return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
-											}
-										}
-										return $p_array[0];
-										' );
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
+						$t_project_id = bug_get_field( $c_bug_id, 'project_id' );
+						$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+						if( access_has_bug_level( $t_view_bug_threshold, $c_bug_id ) ) {
+							return $p_array[1] .
+								string_get_bug_view_link(
+									$c_bug_id,
+									(boolean)$p_detail_info,
+									(boolean)$p_fqdn
+								);
+						}
+					}
+					return $p_array[0];
+				}; # end of bug link callback closure
 		} else {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										# We might as well create the link here even if the bug
-										#  doesnt exist.  In the case above we dont want to do
-										#  the summary lookup on a non-existant bug.  But here, we
-										#  can create the link and by the time it is clicked on, the
-										#  bug may exist.
-										return $p_array[1] . string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
-										' );
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) {
+					$c_bug_id = (int)$p_array[2];
+					if( bug_exists( $c_bug_id ) ) {
+						# Create link regardless of user's access to the bug
+						return $p_array[1] .
+							string_get_bug_view_url_with_fqdn( $c_bug_id );
+					}
+					return $p_array[0];
+				}; # end of bug link callback closure
 		}
 	}
 
-	$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
-
-$g_string_process_bugnote_link_callback = array();
 
 /**
  * Process $p_string, looking for bugnote ID references and creating bug view
@@ -383,7 +396,7 @@ $g_string_process_bugnote_link_callback = array();
  * the URL
  *
  * The bugnote tag ('~' by default) must be at the beginning of the string or
- * preceeded by a character that is not a letter, a number or an underscore
+ * preceded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
  * @param string  $p_string         String to be processed.
@@ -393,7 +406,8 @@ $g_string_process_bugnote_link_callback = array();
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bugnote_link_callback;
+	static $s_bugnote_link_callback = array();
+
 	$t_tag = config_get( 'bugnote_link_tag' );
 
 	# bail if the link tag is blank
@@ -401,70 +415,70 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
-				create_function( '$p_array',
-					'
-					if( bugnote_exists( (int)$p_array[2] ) ) {
-						$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
+					global $g_project_override;
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
-							$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
+							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
 							if(   access_compare_level(
 										user_get_access_level( auth_get_current_user_id(),
-										bug_get_field( $t_bug_id, \'project_id\' ) ),
-										config_get( \'private_bugnote_threshold\' )
+										bug_get_field( $t_bug_id, 'project_id' ) ),
+										config_get( 'private_bugnote_threshold' )
 								   )
-								|| bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id()
-								|| bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC
+								|| bugnote_get_field( $c_bugnote_id, 'reporter_id' ) == auth_get_current_user_id()
+								|| bugnote_get_field( $c_bugnote_id, 'view_state' ) == VS_PUBLIC
 							) {
 								$g_project_override = null;
 								return $p_array[1] .
 									string_get_bugnote_view_link(
 										$t_bug_id,
-										(int)$p_array[2],
-										null,
-										' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . '
+										$c_bugnote_id,
+										(boolean)$p_detail_info,
+										(boolean)$p_fqdn
 									);
 							}
 							$g_project_override = null;
 						}
 					}
 					return $p_array[0];
-					' );
+				}; # end of bugnote link callback closure
 		} else {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
-				create_function(
-					'$p_array',
-					'
-					# We might as well create the link here even if the bug
-					#  doesnt exist.  In the case above we dont want to do
-					#  the summary lookup on a non-existant bug.  But here, we
-					#  can create the link and by the time it is clicked on, the
-					#  bug may exist.
-					$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-					if( bug_exists( $t_bug_id ) ) {
-						return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
-					} else {
-						return $p_array[0];
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) {
+					$c_bugnote_id = (int)$p_array[2];
+					if( bugnote_exists( $c_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $c_bugnote_id, 'bug_id' );
+						if( $t_bug_id && bug_exists( $t_bug_id ) ) {
+							return $p_array[1] .
+								string_get_bugnote_view_url_with_fqdn( $t_bug_id, $c_bugnote_id );
+						}
 					}
-					' );
+					return $p_array[0];
+				}; # end of bugnote link callback closure
 		}
 	}
-	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
 
 /**
  * Search email addresses and URLs for a few common protocols in the given
- * string, and replace occurences with href anchors.
+ * string, and replace occurrences with href anchors.
  * @param string $p_string String to be processed.
  * @return string
  */
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
 	static $s_email_regex = null;
-	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -496,12 +510,17 @@ function string_insert_hrefs( $p_string ) {
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	# Find any URL in a string and replace it by a clickable link
+	# Find any URL in a string and replace it with a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
 		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			return "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
+			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
+				$t_url_target = ' target="_blank"';
+			} else {
+				$t_url_target = '';
+			}
+			return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
 		},
 		$p_string
 	);
@@ -510,17 +529,39 @@ function string_insert_hrefs( $p_string ) {
 	# mailto: link, making sure that we skip processing of any existing anchor
 	# tags, to avoid parts of URLs such as https://user@example.com/ or
 	# http://user:password@example.com/ to be not treated as an email.
+	$p_string = string_process_exclude_anchors(
+		$p_string,
+		function( $p_string ) use ( $s_email_regex ) {
+			return preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $p_string );
+		}
+	);
+
+	return $p_string;
+}
+
+/**
+ * Processes a string, ignoring anchor tags.
+ * Applies the specified callback function to the text between anchor tags;
+ * the anchors themselves will be left as-is.
+ * @param string   $p_string   String to process
+ * @param callable $p_callback Function to apply
+ * @return string
+ */
+function string_process_exclude_anchors( $p_string, $p_callback ) {
+	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
+
 	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
-	$p_string = '';
+
+	$t_string = '';
 	foreach( $t_pieces as $t_piece ) {
 		if( preg_match( $s_anchor_regex, $t_piece ) ) {
-			$p_string .= $t_piece;
+			$t_string .= $t_piece;
 		} else {
-			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $t_piece );
+			$t_string .= $p_callback( $t_piece );
 		}
 	}
 
-	return $p_string;
+	return $t_string;
 }
 
 /**
@@ -550,7 +591,7 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 	global $g_cache_html_valid_tags_single_line, $g_cache_html_valid_tags;
 
 	if( is_blank( ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line ) ) ) {
-		$t_html_valid_tags = config_get( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
+		$t_html_valid_tags = config_get_global( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
 
 		if( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
 			return $p_string;
@@ -580,15 +621,12 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 }
 
 /**
- * return the name of a bug page for the user
- * account for the user preference and site override
+ * return the name of a bug page
  * $p_action should be something like 'view', 'update', or 'report'
- * If $p_user_id is null or not specified, use the current user
  * @param string  $p_action  A valid action being performed - currently one of view, update or report.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_page( $p_action, $p_user_id = null ) {
+function string_get_bug_page( $p_action ) {
 	switch( $p_action ) {
 		case 'view':
 			return 'bug_view_page.php';
@@ -603,14 +641,12 @@ function string_get_bug_page( $p_action, $p_user_id = null ) {
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id	     A bug identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
 	if( bug_exists( $p_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
@@ -618,7 +654,7 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 		} else {
 			$t_link .= config_get_global( 'short_path' );
 		}
-		$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
+		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
 		if( $p_detail_info ) {
 			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -640,15 +676,13 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id      A bug identifier.
  * @param integer $p_bugnote_id  A bugnote identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
 
 	if( bug_exists( $t_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
@@ -659,7 +693,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 			$t_link .= config_get_global( 'short_path' );
 		}
 
-		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
+		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) . '"';
 		if( $p_detail_info ) {
 			$t_reporter = string_attribute( user_get_name( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
 			$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) );
@@ -700,11 +734,10 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * in emails.
  * @param integer $p_bug_id     A bug identifier.
  * @param integer $p_bugnote_id A bug note identifier.
- * @param integer $p_user_id    A valid user identifier.
  * @return string
  */
-function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '#c' . $p_bugnote_id;
+function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id ) {
+	return config_get_global( 'path' ) . string_get_bug_view_url( $p_bug_id ) . '#c' . $p_bugnote_id;
 }
 
 /**
@@ -712,84 +745,53 @@ function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_use
  * account for the user preference and site override
  * The returned url includes the fully qualified domain, hence it is suitable to be included in emails.
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
-}
-
-/**
- * return the name of a bug VIEW page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function string_get_bug_view_page( $p_user_id = null ) {
-	return string_get_bug_page( 'view', $p_user_id );
+function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
+	return config_get_global( 'path' ) . string_get_bug_view_url( $p_bug_id );
 }
 
 /**
  * return an href anchor that links to a bug UPDATE page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
+function string_get_bug_update_link( $p_bug_id ) {
 	$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id, $p_user_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug UPDATE page for the given bug
- * account for the user preference and site override
+ * return the name and GET parameters of a bug UPDATE page
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
-	return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . $p_bug_id;
+function string_get_bug_update_url( $p_bug_id ) {
+	return string_get_bug_update_page() . '?bug_id=' . $p_bug_id;
 }
 
 /**
- * return the name of a bug UPDATE page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug UPDATE page
  * @return string
  */
-function string_get_bug_update_page( $p_user_id = null ) {
-	return string_get_bug_page( 'update', $p_user_id );
+function string_get_bug_update_page() {
+	return string_get_bug_page( 'update' );
 }
 
 /**
- * return an href anchor that links to a bug REPORT page for the given bug
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return an href anchor that links to a bug REPORT page
  * @return string
  */
-function string_get_bug_report_link( $p_user_id = null ) {
-	return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+function string_get_bug_report_link() {
+	return '<a href="' . helper_mantis_url( string_get_bug_report_url() ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug REPORT page for the given bug
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug REPORT page
  * @return string
  */
-function string_get_bug_report_url( $p_user_id = null ) {
-	return string_get_bug_report_page( $p_user_id );
-}
-
-/**
- * return the name of a bug REPORT page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function string_get_bug_report_page( $p_user_id = null ) {
-	return string_get_bug_page( 'report', $p_user_id );
+function string_get_bug_report_url() {
+	return string_get_bug_page( 'report' );
 }
 
 /**
@@ -799,7 +801,7 @@ function string_get_bug_report_page( $p_user_id = null ) {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	$t_path = config_get( 'path' );
+	$t_path = config_get_global( 'path' );
 	return $t_path . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
 }
 
@@ -827,7 +829,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int)$p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( mb_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -836,11 +838,11 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_last_len = strlen( $t_last );
 
 		if( count( $t_bits ) == 1 ) {
-			$t_string .= utf8_substr( $t_last, 0, $t_max - 3 );
+			$t_string .= mb_substr( $t_last, 0, $t_max - 3 );
 			$t_string .= '...';
 		} else {
 			foreach( $t_bits as $t_bit ) {
-				if( ( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+				if( ( mb_strlen( $t_string ) + mb_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 					$t_string .= $t_bit;
 				} else {
 					break;
@@ -923,4 +925,90 @@ function string_prepare_header( $p_string ) {
 	$t_string= explode( "\n", $p_string, 2 );
 	$t_string= explode( "\r", $t_string[0], 2 );
 	return $t_string[0];
+}
+
+/**
+ * Replacement for str_pad. $padStr may contain multi-byte characters.
+ *
+ * @author Oliver Saunders <oliver (a) osinternetservices.com>
+ * @param string $input
+ * @param int $length
+ * @param string $padStr
+ * @param int $type ( same constants as str_pad )
+ * @return string
+ * @see http://www.php.net/str_pad
+ * @see utf8_substr
+ */
+function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
+
+    $inputLen = mb_strlen($input);
+    if ($length <= $inputLen) {
+        return $input;
+    }
+
+    $padStrLen = mb_strlen($padStr);
+    $padLen = $length - $inputLen;
+
+    if ($type == STR_PAD_RIGHT) {
+        $repeatTimes = ceil($padLen / $padStrLen);
+        return mb_substr($input . str_repeat($padStr, $repeatTimes), 0, $length);
+    }
+
+    if ($type == STR_PAD_LEFT) {
+        $repeatTimes = ceil($padLen / $padStrLen);
+        return mb_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)) . $input;
+    }
+
+    if ($type == STR_PAD_BOTH) {
+
+        $padLen/= 2;
+        $padAmountLeft = floor($padLen);
+        $padAmountRight = ceil($padLen);
+        $repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
+        $repeatTimesRight = ceil($padAmountRight / $padStrLen);
+
+        $paddingLeft = mb_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
+        $paddingRight = mb_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
+        return $paddingLeft . $input . $paddingRight;
+    }
+
+    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+}
+
+/**
+ * Return the number of UTF-8 characters in a string
+ * @param string $p_string
+ * @return integer number of UTF-8 characters in string
+ * @deprecated mb_strlen() should be used in preference to this function
+ */
+function utf8_strlen( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strlen()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strlen( $p_string );
+}
+
+/**
+ * Get part of string
+ * @param string $p_string
+ * @param integer $p_offset
+ * @param integer $p_length
+ * @return mixed string or FALSE if failure
+ * @deprecated mb_substr() should be used in preference to this function
+ */
+function utf8_substr( $p_string, $p_offset, $p_length = NULL ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_substr()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_substr( $p_string, $p_offset, $p_length );
+}
+
+/**
+ * Make a string lowercase
+ * @param string $p_string
+ * @return string with all alphabetic characters converted to lowercase
+ * @deprecated mb_strtolower() should be used in preference to this function
+ */
+function utf8_strtolower( $p_string ) {
+    error_parameters( __FUNCTION__ . '()', 'mb_strtolower()' );
+    trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+    return mb_strtolower( $p_string );
 }

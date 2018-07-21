@@ -71,13 +71,21 @@ function prepare_user_name( $p_user_id ) {
 		return '';
 	}
 
-	$t_username = user_get_name( $p_user_id );
-	$t_username = string_display_line( $t_username );
-	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+	$t_username = user_get_username( $p_user_id );
+	$t_name = user_get_name( $p_user_id );
+	if( $t_username != $t_name ) {
+		$t_tooltip = ' title="' . string_attribute( $t_username ) . '"';
 	} else {
-		return '<del class="user">' . $t_username . '</del>';
+		$t_tooltip = '';
 	}
+
+	$t_name = string_display_line( $t_name );
+
+	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
+		return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+	}
+
+	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';
 }
 
 /**
@@ -104,3 +112,51 @@ function prepare_version_string( $p_project_id, $p_version_id ) {
 
 	return $t_version_text;
 }
+
+/**
+ * Prepares avatar for raw outputting (only avatar image).
+ *
+ * @param Avatar $p_avatar          An instance of class Avatar.
+ * @param string $p_class_prefix    CSS class prefix to add to the avatar's surrounding div and to the img.
+ *   The CSS classes to implement will be named [$p_class_prefix]-avatar_container-[$p_size] and 
+ *   [$p_class_prefix]-avatar-[$p_size].
+ * @param integer $p_size           Image maximum size.
+ * @return string the HTML string of the avatar.
+ */
+function prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size) {
+	if( $p_avatar === null ) {
+		return '';
+	}
+
+	$t_image = htmlspecialchars( $p_avatar->image );
+	$t_text = htmlspecialchars( $p_avatar->text );
+
+	$t_avatar_class = $p_class_prefix . '-avatar' . '-' . $p_size;
+	return '<img class="' . $t_avatar_class . '" src="' . $t_image . '" alt="' .
+			$t_text . '" />';
+}
+
+/**
+ * Prepares avatar for outputting.
+ *
+ * @param Avatar $p_avatar          An instance of class Avatar.
+ * @param string $p_class_prefix    CSS class prefix to add to the avatar's surrounding div and to the img.
+ *   The CSS classes to implement will be named [$p_class_prefix]-avatar-container-[$p_size] and
+ *   [$p_class_prefix]-avatar-[$p_size].
+ * @param integer $p_size           Image maximum size.
+ * @return string the HTML string of the avatar.
+ */
+function prepare_avatar( $p_avatar, $p_class_prefix, $p_size ) {
+	if( $p_avatar === null ) {
+		return '';
+	}
+
+	$t_link = htmlspecialchars( $p_avatar->link );
+
+	$t_container_class = $p_class_prefix . '-avatar-container' . '-' . $p_size;
+	return '<div class="' . $t_container_class . '">' . 
+			'<a rel="nofollow" href="' . $t_link . '">' .
+			prepare_raw_avatar( $p_avatar, $p_class_prefix, $p_size ) . 
+			'</a></div>';
+}
+

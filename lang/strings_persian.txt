@@ -1,0 +1,443 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Persian (فارسی)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Abedini
+ * @author Alifakoor
+ * @author Alirezaaa
+ * @author Atefe
+ * @author Dalba
+ * @author Dejavu
+ * @author Ebraminio
+ * @author Hosseinblue
+ * @author Mjbmr
+ * @author Omidh
+ * @author Razavi
+ * @author Reza1615
+ * @author جواد
+ */
+
+$s_directionality = 'rtl';
+$s_actiongroup_menu_move = 'انتقال';
+$s_actiongroup_menu_copy = 'نسخه برداری';
+$s_actiongroup_menu_assign = 'اختصاص دادن';
+$s_actiongroup_menu_close = 'بستن';
+$s_actiongroup_menu_delete = 'حذف';
+$s_actiongroup_menu_resolve = 'حل و فصل';
+$s_actiongroup_menu_update_priority = 'به‌روزرسانی اولویت';
+$s_actiongroup_menu_update_status = 'به روز رسانی وضعیت';
+$s_actiongroup_menu_update_severity = 'به روز رسانی شدت';
+$s_actiongroup_menu_update_view_status = 'به روز رسانی وضعیت مشاهده';
+$s_actiongroup_menu_update_category = 'به‌روزرسانی دسته';
+$s_actiongroup_menu_set_sticky = 'گذاشتن/برداشتن متن چسپیده';
+$s_actiongroup_menu_update_field = 'به روز رسانی %1$s';
+$s_actiongroup_menu_update_product_version = 'به روز رسانی نسخه محصولات';
+$s_actiongroup_menu_update_target_version = 'به روز رسانی نسخه هدف';
+$s_actiongroup_menu_update_fixed_in_version = 'به روز تصحیح شد در نسخهٔ';
+$s_actiongroup_menu_update_product_build = 'به روز رسانی Build محصول';
+$s_actiongroup_menu_add_note = 'افزودن یادداشت';
+$s_actiongroup_menu_attach_tags = 'پیوست برچسب‌ها';
+$s_actiongroup_bugs = 'مسائل منتخب';
+$s_actiongroup_error_issue_is_readonly = 'مسئله فقط خواندنی است.';
+$s_all_projects = 'همهٔ پروژه‌ها';
+$s_move_bugs = 'انتقال مسائل';
+$s_operation_successful = 'عملیات موفق انجام شد.';
+$s_date_order = 'تاریخ سفارش';
+$s_print_all_bug_page_link = 'چاپ گزارش‌ها';
+$s_csv_export = 'استخراج سی‌اس‌وی';
+$s_excel_export = 'خروجی اکسل';
+$s_login_anonymously = 'ورود به صورت ناشناس';
+$s_anonymous = 'ناشناس';
+$s_jump_to_bugnotes = 'پرش به یادداشت‌ها';
+$s_public_project_msg = 'این پروژه عمومی است. همهٔ کاربران دسترسی دارند.';
+$s_private_project_msg = 'این پروژه خصوصی است. فقط مدیران و کاربران به‌صورت دستی اضافه دسترسی خواهند داشت.';
+$s_access_level_project = 'سطح دسترسی به پروژه';
+$s_view_submitted_bug_link = 'نمایش مسائل ارسال‌شده %1$s';
+$s_assigned_projects = 'پروژه‌های اختصاص داده شده';
+$s_assigned_projects_label = 'پروژه‌های اختصاص داده شده';
+$s_unassigned_projects_label = 'پروژه‌های اختصاص داده نشده';
+$s_print = 'چاپ';
+$s_jump = 'پرش';
+$s_copy_users = 'رونوشت کاربران';
+$s_copy_categories_from = 'رونوشت رده‌ها از';
+$s_copy_categories_to = 'رونوشت رده‌ها به';
+$s_copy_versions_from = 'رونوشت نسخه از';
+$s_copy_versions_to = 'رونوشت نسخه‌ها به';
+$s_copy_users_from = 'رونوشت کاربران از';
+$s_copy_users_to = 'رونوشت کاربران به';
+$s_bug_history = 'تاریخچهٔ مسأله';
+$s_field = 'زمینه';
+$s_old_value = 'مقدار قدیمی';
+$s_new_value = 'مقدار تازه';
+$s_date_modified = 'تاریخ ویرایش';
+$s_bugnote = 'یادداشت';
+$s_change = 'تغییر';
+$s_bugnote_view_state = 'وضعیت حالت یادداشت';
+$s_bug_monitor = 'یادداشت نظارت‌شده';
+$s_bug_end_monitor = 'پایان مانیتور مسئله';
+$s_announcement = 'اطلاعیه';
+$s_stays_on_top = 'در بالا باقی می‌ماند';
+$s_bugnote_link_title = 'پیوند مستقیم به یادداشت';
+$s_delete_bugnote_button = 'حذف یادداشت';
+$s_delete_bugnote_sure_msg = 'مطمئنید می‌خواهید این یادداشت را حذف کنید؟';
+$s_bug_relationships = 'روابط';
+$s_empty_password_sure_msg = 'کاربر دارای کلمه عبور خالی است. آيا مطمئن هستید که خواسته شما همین است؟';
+$s_empty_password_button = 'استفاده از کلمه عبور خالی';
+$s_reauthenticate_title = 'تأیید اعتبار';
+$s_reauthenticate_message = 'شما در حال دیدن صفحه امن و جلسه امن شما منقضی شده است. لطفا اعتبار خودتان را برای ادامه کار بروز کنید.';
+$s_no_category = '(بدون رده)';
+$s_global_categories = 'دسته‌بندی‌های کلی';
+$s_inherit = 'ارث بری از دسته‌ها';
+$s_inherit_global = 'ارث بری از دسته‌های کلی';
+$s_inherit_parent = 'ارث بری از دسته‌های والد';
+$s_update_subproject_inheritance = 'بروزرسانی ارث بری زیر پروژه‌ها';
+$s_duplicate_of = 'تکرار از';
+$s_has_duplicate = 'دارای تکرار';
+$s_related_to = 'مربوط به';
+$s_dependant_on = 'والد از';
+$s_blocks = 'فرزند';
+$s_new_bug = 'موضوع تازه';
+$s_bugnote_added = 'یادداشت اضافه شد';
+$s_bugnote_edited = 'یادداشت ویرایش شد';
+$s_bugnote_deleted = 'نوشته خذف شده است';
+$s_summary_updated = 'خلاصه بروزرسانی شد';
+$s_description_updated = 'توضیحات بروزرسانی شد';
+$s_additional_information_updated = 'اطلاعات اضافی بروزرسانی شد';
+$s_steps_to_reproduce_updated = 'مراحل برای تولید مجدد بروزرسانی شد';
+$s_file_added = 'پرونده افزوده شد';
+$s_file_deleted = 'پرونده حذف شد';
+$s_bug_deleted = 'موضوع حذف شد';
+$s_make_private = 'خصوصی کردن';
+$s_make_public = 'عمومی کردن';
+$s_create_new_project_link = 'ایجاد پروژه جدید';
+$s_login_link = 'ورود';
+$s_select_option = '(انتخاب)';
+$s_bug_actiongroup_access = 'شما دارای مجوز درست برای انجام آن عمل را ندارید';
+$s_bug_actiongroup_status = 'این موضوع را نمی توان به وضعیت درخواست شده تغییر داد';
+$s_bug_actiongroup_category = 'این موضوع را نمی توان به دسته درخواست شده تغییر داد';
+$s_bug_actiongroup_handler = 'کاربر درخواست شده مجاز به رسیدگی به این موضوع نیست';
+$s_bug_actiongroup_version = 'نسخه مورد درخواست در موضوع این پروژه وجود ندارد';
+$s_close_bugs_conf_msg = 'مطمئنید می‌خواهید این مسئله را حذف کنید؟';
+$s_delete_bugs_conf_msg = 'مطمئنید می‌خواهید این مسئله را حذف کنید؟';
+$s_move_bugs_conf_msg = 'انتقال مسئله به';
+$s_copy_bugs_conf_msg = 'نسخه برداری از مسئله در';
+$s_assign_bugs_conf_msg = 'واگذاری مسئله به';
+$s_resolve_bugs_conf_msg = 'حل مسائل را انتخاب کنید';
+$s_priority_bugs_conf_msg = 'انتخاب اولویت مسائل';
+$s_status_bugs_conf_msg = 'وضعیت مسئله را انتخاب کنید';
+$s_view_status_bugs_conf_msg = 'مشاهده وضعیت مسائل را انتخاب کنید';
+$s_category_bugs_conf_msg = 'دسته مسئله را انتخاب کنید';
+$s_set_sticky_bugs_conf_msg = 'آیا مطمئن هستید که می خواهید تنظیم کنید/تنظیم نکردن این اتصال مهم است؟';
+$s_product_version_bugs_conf_msg = 'محصول نسخه به روز رسانی';
+$s_fixed_in_version_bugs_conf_msg = 'بروزرسانی نسخه اصلاح شده به';
+$s_target_version_bugs_conf_msg = 'بروزرسانی نسخه هدف به';
+$s_close_group_bugs_button = 'بستن مسائل';
+$s_delete_group_bugs_button = 'حذف مسائل';
+$s_move_group_bugs_button = 'انتقال مسائل';
+$s_copy_group_bugs_button = 'نسخه برداری مسائل';
+$s_assign_group_bugs_button = 'واگذاری مسائل';
+$s_resolve_group_bugs_button = 'حل و فصل مسائل';
+$s_priority_group_bugs_button = 'به‌روزرسانی اولویت';
+$s_status_group_bugs_button = 'به روز رسانی وضعیت';
+$s_category_group_bugs_button = 'به روز رسانی رده';
+$s_view_status_group_bugs_button = 'به روز رسانی وضعیت مشاهده';
+$s_set_sticky_group_bugs_button = 'مجموعه/تعیین نکردن این اتصال مهم';
+$s_product_version_group_bugs_button = 'نسخه به روز رسانی محصول';
+$s_fixed_in_version_group_bugs_button = 'به روز تصحیح شد در نسخهٔ';
+$s_target_version_group_bugs_button = 'به روز رسانی نسخه مقصد';
+$s_update_severity_title = 'به روز رسانی شدت';
+$s_update_severity_msg = 'انتخاب اولویت مسائل';
+$s_update_severity_button = 'به روز رسانی شدت';
+$s_hide_button = 'فقط انتخاب شده‌ها را نمایش بده';
+$s_printing_preferences_title = 'انتخاب فیلدها برای چاپ';
+$s_printing_options_link = 'گزینه های چاپ';
+$s_bugnote_title = 'دسترسی به یادداشت';
+$s_bugnote_date = 'تاریخ نوشته';
+$s_bugnote_description = 'توضیحات نوشته';
+$s_login_error = 'حساب شما ممکن است غیرفعال یا بسته شده باشد و یا نام کاربری/رمز عبور واردشده نادرست است.';
+$s_login_cookies_disabled = 'مرورگر نمی تواند دسترسی به کوکی ها یا رفیوز ها داشته باشد.';
+$s_go_back = 'بازگشت';
+$s_proceed = 'ادامه';
+$s_switch = 'سوئیچ';
+$s_logged_in_as = 'وارد شدید با عنوان';
+$s_prefix_for_deleted_users = 'کاربر';
+$s_administrator = 'مدیریت';
+$s_myself = 'خودم';
+$s_default_access_level = 'سطح دسترسی پیش فرض';
+$s_issue_status_percentage = 'درصد وضعیت مسئله';
+$s_access_levels_enum_string = '10:مشاهده‌گر,25:گزارش دهنده,40:بروزرسان,55:توسعه دهنده,70:مدیر,90:مدیریت';
+$s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
+$s_project_view_state_enum_string = '10:عمومی,50:خصوصی';
+$s_view_state_enum_string = '10:عمومی,50:خصوصی';
+$s_priority_enum_string = '10:هیچکدام,20:کم,30:معمولی,40:بالا,50:فوری,60:ضروری';
+$s_status_enum_string = '10:جدید,20:بازخورد,30:مشاهده شده,40:تائید شده,50:اختصاص داده شده,80:حل شده,90:بسته شده';
+$s_resolution_enum_string = '10:باز,20:حل شده,30:دوباره باز شده,40:غیر قابل بررسی مجدد,50:not قابل اصلاح,60:تکراری,70:بدون نیاز به تغییر,80:معلق,90:غیر قابل اصلاح';
+$s_eta_enum_string = '10:هیچ,20:< یک روز,30:2-3 روز,40:< 1 هفته,50:< یکماه,60:> یکماه';
+$s_sponsorship_enum_string = '0:پرداخت نشده,1:درخواست شده,2:پرداخت شده';
+$s_new_account_subject = 'ثبت حساب کاربری';
+$s_new_account_username = 'نام کاربری:';
+$s_new_account_do_not_reply = 'لطفا به این پیام پاسخ ندهید';
+$s_new_account_email = 'ایمیل:';
+$s_new_account_IP = 'آدرس آی پی از راه دور:';
+$s_new_account_signup_msg = 'حساب زیر ایجاد شده است:';
+$s_email_notification_title_for_status_bug_new = 'مشکل زیر در حال حاضر در وضعیت تازه (دوباره) است';
+$s_email_notification_title_for_status_bug_feedback = 'مسئله زیر بازخورد شما را نیاز دارد.';
+$s_email_notification_title_for_status_bug_acknowledged = 'مسئله زیر تائید اولیه شده است.';
+$s_email_notification_title_for_status_bug_confirmed = 'مسئله زیر تایید شده است.';
+$s_email_notification_title_for_status_bug_assigned = 'مسئله زیر اختصاص داده شده است.';
+$s_email_notification_title_for_status_bug_resolved = 'مسئله زیر حل شده است.';
+$s_email_notification_title_for_status_bug_closed = 'مسئله زیر بسته شده است.';
+$s_email_notification_title_for_action_bug_submitted = 'مسئله زیر ارسال شده است.';
+$s_email_notification_title_for_action_bug_assigned = 'مسئله زیر اختصاص داده شده است.';
+$s_email_notification_title_for_action_bug_reopened = 'مسئله زیر بازگشایی شده است.';
+$s_email_notification_title_for_action_bug_deleted = 'مسئله زیر حذف شده است.';
+$s_email_notification_title_for_action_bug_updated = 'مسئله زیر به روز شده است.';
+$s_email_notification_title_for_action_sponsorship_added = 'مسئله زیر تحت حمایت میباشد';
+$s_email_notification_title_for_action_sponsorship_updated = 'یکی از حامیان مسئله زیر تغییر کرده است';
+$s_email_notification_title_for_action_sponsorship_deleted = 'یکی از حامیان مسئله زید برداشته شده است';
+$s_email_notification_title_for_action_bugnote_submitted = 'یک نوشته به این مسئله اضافه شده ست';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'مسئله زیر به عنوان تکراری تعیین شده  %1$s .';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'موضوع  %1$s  به عنوان تکراری از مسئله زیر تنظیم شده است.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'مسئله زیر بهنوان مرنبط به موضوع  %1$s تعیین شده';
+$s_email_project = 'پروژه';
+$s_email_category = 'رده';
+$s_email_reproducibility = 'قابلیت تکثیر';
+$s_email_severity = 'شدت';
+$s_email_priority = 'اولویت';
+$s_email_status = 'وضعیت';
+$s_email_resolution = 'قطعنامه';
+$s_email_duplicate = 'تکراری';
+$s_email_last_modified = 'آخرین ویرایش';
+$s_email_summary = 'خلاصه';
+$s_email_description = 'توضیحات';
+$s_email_additional_information = 'اطلاعات بیشتر';
+$s_delete_account_button = 'حذف حساب کاربری';
+$s_change_preferences_link = 'ترجیحات';
+$s_username = 'نام کاربری';
+$s_username_label = 'نام کاربری';
+$s_realname = 'نام واقعی';
+$s_email = 'ایمیل';
+$s_email_label = 'ایمیل';
+$s_password = 'گذرواژه';
+$s_confirm_password = 'تأیید گذرواژه';
+$s_access_level = 'سطح دسترسی';
+$s_default_project = 'پروژه پیش فرض';
+$s_bugnote_order_asc = 'صعودی';
+$s_bugnote_order_desc = 'نزولی';
+$s_language = 'زبان';
+$s_font_family = 'خانوادهٔ قلم';
+$s_platform = 'پلت‌فرم';
+$s_submit_button = 'ثبت';
+$s_amount = 'مبلغ';
+$s_sponsor_show = 'نمایش همه';
+$s_new_bug_title = 'موضوع تازه';
+$s_new_bug_button = 'موضوع تازه';
+$s_delete_bug_button = 'حذف';
+$s_bugnote_add_resolve_button = 'افزودن یادداشت';
+$s_from = 'از';
+$s_to = 'به';
+$s_bug_send_button = 'ارسال';
+$s_id = 'شناسه';
+$s_category = 'رده';
+$s_severity = 'شدت';
+$s_reproducibility = 'قابلیت تکثیر';
+$s_priority = 'اولویت';
+$s_resolution = 'قطعنامه';
+$s_status = 'وضعیت';
+$s_votes = 'آرا';
+$s_summary = 'خلاصه';
+$s_description = 'توضیحات';
+$s_profile = 'نمایه';
+$s_revision = 'نسخه';
+$s_bug_notes_title = 'یادداشت';
+$s_delete_link = 'حذف';
+$s_add_bugnote_title = 'افزودن یادداشت';
+$s_add_bugnote_button = 'افزودن یادداشت';
+$s_bugnote_edit_link = 'ویرایش';
+$s_log_page_number = 'شماره';
+$s_log_page_event = 'رویداد';
+$s_click_to_login = 'ورود';
+$s_login_title = 'ورود';
+$s_login_button = 'ورود';
+$s_lost_password_link = 'گذرواژه‌تان را فراموش کردید؟';
+$s_rss = 'آراس‌اس';
+$s_enabled = 'فعال';
+$s_enabled_label = 'فعال';
+$s_projects_link = 'پروژه‌ها';
+$s_documentation_link = 'مستندات';
+$s_hide_inactive = 'مخفی غیر فعال';
+$s_show_disabled = 'نمایش غیر فعال';
+$s_manage_accounts_title = 'مدیریت حساب';
+$s_p = 'p';
+$s_message = 'پیام';
+$s_status_level = 'وضعیت';
+$s_configuration_option_type = 'نوع';
+$s_configuration_option_value = 'مقدار';
+$s_plugin_description = 'توضیحات';
+$s_plugin_url = 'تارنما:';
+$s_plugin_priority = 'اولویت';
+$s_plugin_update = 'به روز رسانی';
+$s_plugin_actions = 'اقدامات';
+$s_plugin_install = 'نصب';
+$s_plugin_upgrade = 'ارتقاء';
+$s_update_category_button = 'به روز رسانی رده';
+$s_private = 'خصوصی';
+$s_categories = 'رده‌ها';
+$s_versions = 'نسخه‌ها';
+$s_edit_link = 'ویرایش';
+$s_actions = 'اقدامات';
+$s_version = 'نسخه';
+$s_version_label = 'نسخه:';
+$s_timestamp = 'برچسب زمان';
+$s_update = 'به روز رسانی';
+$s_projects_title = 'پروژه‌ها';
+$s_projects_title_label = 'پروژه‌ها';
+$s_name = 'نام';
+$s_reset_password_button = 'بازنشانی گذرواژه';
+$s_show_all_users = 'همه';
+$s_users_new = 'تازه';
+$s_main_link = 'اصلی';
+$s_changelog_link = 'تغییر سیاهه';
+$s_summary_link = 'خلاصه';
+$s_account_link = 'حساب کاربری من';
+$s_users_link = 'کاربران';
+$s_logout_link = 'خروج';
+$s_my_view_link = 'نمای من';
+$s_my_view_title_resolved = 'حل شده';
+$s_headline = 'عنوان';
+$s_body = 'بدنه';
+$s_back_link = 'عقب';
+$s_title = 'عنوان';
+$s_filename = 'نام فايل';
+$s_filename_label = 'نام پرونده:';
+$s_remove_link = 'حذف';
+$s_remove_all_link = 'حذف همه';
+$s_additional_information = 'اطلاعات بیشتر';
+$s_signup_title = 'ثبت‌نام';
+$s_signup_button = 'ثبت‌نام';
+$s_save_settings_button = 'ذخیرهٔ تنظیمات';
+$s_summary_title = 'خلاصه';
+$s_errors = 'غلط';
+$s_resolved = 'حل شده';
+$s_total = 'مجموع';
+$s_balance = 'مانده';
+$s_score = 'امتیاز';
+$s_days = 'روز';
+$s_any = 'هر';
+$s_all = 'همه';
+$s_show = 'نمایش';
+$s_updated = 'به روز شده';
+$s_sort = 'مرتب‌سازی بر اساس';
+$s_priority_abbreviation = 'P';
+$s_none = 'هیچ‌کدام';
+$s_current = 'نسخهٔ کنونی';
+$s_search = 'جستجو';
+$s_prev = 'قبلی';
+$s_next = 'بعدی';
+$s_first = 'نخستین';
+$s_last = 'واپسین';
+$s_yes = 'بله';
+$s_no = 'خیر';
+$s_ok = 'تأیید';
+$s_select_all = 'انتخاب همه';
+$s_query_name = 'نام فیلتر';
+$s_open_queries = 'مدیریت فیلترها';
+$s_update_bug_button = 'ویرایش';
+$s_reopen_bug_button = 'بازگشایی';
+$s_close_bug_button = 'بسته';
+$s_move_bug_button = 'انتقال';
+$s_add_user_to_monitor = 'افزودن';
+$s_monitoring_user_list = 'فهرست کاربران';
+$s_custom_field = 'زمینه';
+$s_custom_field_label = 'ورودی:';
+$s_custom_field_name = 'نام';
+$s_custom_field_type = 'نوع';
+$s_custom_field_sequence = 'دنباله';
+$s_custom_field_sequence_label = 'دنباله';
+$s_filter_closed = 'بسته‌شده';
+$s_filter_resolved = 'حل شده';
+$s_bytes = 'بايت';
+$s_phpmailer_language = 'fa';
+$s_changelog = 'تغییر سیاهه';
+$s_add_new_relationship_button = 'افزودن';
+$s_replace_relationship_button = 'جایگزینی';
+$s_delete_relationship_button = 'حذف';
+$s_create_child_bug_button = 'کلون';
+$s_view = 'دیدن';
+$s_issues = 'موضوع‌ها';
+$s_notes = 'یادداشت';
+$s_news = 'اخبار';
+$s_delete_attachment_button = 'حذف';
+$s_filters = 'پالایه‌ها';
+$s_loading = 'در حال بارگذاری...';
+$s_before_date = 'قبل از';
+$s_after_date = 'پس از';
+$s_from_date = 'از';
+$s_to_date = 'به';
+$s_on_date = 'روشن';
+$s_on = 'روشن';
+$s_off = 'خاموش';
+$s_wiki = 'ویکی';
+$s_tags = 'برچسب‌ها';
+$s_tag_name = 'نام';
+$s_tag_creator = 'خالق';
+$s_tag_attach = 'ضميمه کن';
+$s_tag_attach_long = 'پیوست برچسب‌ها';
+$s_show_all_tags = 'همه';
+$s_time_tracking_stopwatch_start = 'شروع';
+$s_time_tracking_stopwatch_stop = 'توقف';
+$s_time_tracking_stopwatch_reset = 'از نو';
+$s_access_denied = 'دسترسی ممنوع است.';
+$s_development_team = 'تیم توسعه';
+$s_month_january = 'ژانویه';
+$s_month_february = 'فوریه';
+$s_month_march = 'مارس';
+$s_month_april = 'آوریل';
+$s_month_may = 'مه';
+$s_month_june = 'ژوئن';
+$s_month_july = 'ژوئیه';
+$s_month_august = 'اوت';
+$s_month_september = 'سپتامبر';
+$s_month_october = 'اکتبر';
+$s_month_november = 'نوامبر';
+$s_month_december = 'دسامبر';
+$s_timeline_title = 'خط زمان';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'دسترسی ممنوع است.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'آدرس ایمیل غیر معتبر.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'رده یافت نشد.';

@@ -36,7 +36,7 @@ class IssueCreatedTimelineEvent extends TimelineEvent {
 	 * @param integer $p_issue_id  A issue identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 	}
@@ -46,8 +46,8 @@ class IssueCreatedTimelineEvent extends TimelineEvent {
 	 * @return string
 	 */
 	public function html() {
-		$t_html = $this->html_start();
-		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html = $this->html_start( 'fa-plus' );
+		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;

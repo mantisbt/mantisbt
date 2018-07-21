@@ -45,8 +45,6 @@
  * @uses php_api.php
  * @uses user_pref_api.php
  * @uses wiki_api.php
- * @uses utf8/utf8.php
- * @uses utf8/str_pad.php
  */
 
 /**
@@ -65,10 +63,32 @@ if( file_exists( 'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
 
 $g_request_time = microtime( true );
 
-ob_start();
-
 # Load supplied constants
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
+
+# Enforce our minimum PHP requirements
+if( version_compare( PHP_VERSION, PHP_MIN_VERSION, '<' ) ) {
+	echo '<strong>FATAL ERROR: Your version of PHP is too old. '
+		. 'MantisBT requires ' . PHP_MIN_VERSION . ' or newer</strong><br />'
+		. 'Your are running PHP version <em>' . PHP_VERSION . '</em>';
+	die();
+}
+
+# Enforce PHP mbstring extension
+if( !extension_loaded( 'mbstring' ) ) {
+	echo '<strong>FATAL ERROR: PHP mbstring extension is not enabled.</strong><br />'
+		. 'MantisBT requires this extension for Unicode (UTF-8) support<br />'
+		. 'http://www.php.net/manual/en/mbstring.installation.php';
+	die();
+}
+
+# Ensure that encoding is always UTF-8 independent from any PHP default or ini setting
+mb_internal_encoding('UTF-8');
+
+ob_start();
+
+# Load Composer autoloader
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
 
 # Include default configuration settings
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
@@ -113,21 +133,41 @@ function require_api( $p_api_name ) {
  */
 function require_lib( $p_library_name ) {
 	static $s_libraries_included;
-	global $g_library_path;
+
 	if( !isset( $s_libraries_included[$p_library_name] ) ) {
+		global $g_library_path;
 		$t_library_file_path = $g_library_path . $p_library_name;
-		if( !file_exists( $t_library_file_path ) ) {
+
+		if( file_exists( $t_library_file_path ) ) {
+			require_once( $t_library_file_path );
+		} else {
 			echo 'External library \'' . $t_library_file_path . '\' not found.';
 			exit;
 		}
 
-		require_once( $t_library_file_path );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			$GLOBALS[$t_global_name] = $t_global_value;
 		}
+
 		$s_libraries_included[$p_library_name] = 1;
 	}
+}
+
+/**
+ * Checks to see if script was queried through the HTTPS protocol
+ * @return boolean True if protocol is HTTPS
+ */
+function http_is_protocol_https() {
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+		return strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) == 'https';
+	}
+
+	if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+		return true;
+	}
+
+	return false;
 }
 
 /**
@@ -136,7 +176,33 @@ function require_lib( $p_library_name ) {
  * @param string $p_class Class name being autoloaded.
  * @return void
  */
-function __autoload( $p_class ) {
+function autoload_mantis( $p_class ) {
+	global $g_core_path;
+
+	# Remove namespace from class name
+	$t_end_of_namespace = strrpos( $p_class, '\\' );
+	if( $t_end_of_namespace !== false ) {
+		$p_class = substr( $p_class, $t_end_of_namespace + 1 );
+	}
+
+	# Commands
+	if( substr( $p_class, -7 ) === 'Command' ) {
+		$t_require_path = $g_core_path . 'commands/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}	
+	}
+
+	# Exceptions
+	if( substr( $p_class, -9 ) === 'Exception' ) {
+		$t_require_path = $g_core_path . 'exceptions/' . $p_class . '.php';
+		if( file_exists( $t_require_path ) ) {
+			require_once( $t_require_path );
+			return;
+		}	
+	}
+
 	global $g_class_path;
 	global $g_library_path;
 
@@ -156,28 +222,16 @@ function __autoload( $p_class ) {
 }
 
 # Register the autoload function to make it effective immediately
-spl_autoload_register( '__autoload' );
-
-# Load UTF8-capable string functions
-define( 'UTF8', $g_library_path . 'utf8' );
-require_lib( 'utf8/utf8.php' );
-require_lib( 'utf8/str_pad.php' );
+spl_autoload_register( 'autoload_mantis' );
 
 # Include PHP compatibility file
 require_api( 'php_api.php' );
-
-# Enforce our minimum PHP requirements
-if( !php_version_at_least( PHP_MIN_VERSION ) ) {
-	@ob_end_clean();
-	echo '<strong>FATAL ERROR: Your version of PHP is too old. MantisBT requires PHP version ' . PHP_MIN_VERSION . ' or newer</strong><br />Your version of PHP is version ' . phpversion();
-	die();
-}
 
 # Ensure that output is blank so far (output at this stage generally denotes
 # that an error has occurred)
 if( ( $t_output = ob_get_contents() ) != '' ) {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
-	echo var_dump( $t_output );
+	var_dump( $t_output );
 	die;
 }
 unset( $t_output );
@@ -212,17 +266,28 @@ crypto_init();
 require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
+# Set the default timezone
+# To reduce overhead, we assume that the timezone configuration is valid,
+# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
+# be raised. Use admin checks to validate configuration.
+@date_default_timezone_set( config_get_global( 'default_timezone' ) );
+$t_tz = @date_default_timezone_get();
+config_set_global( 'default_timezone', $t_tz, true );
+
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	if( OFF == $g_use_persistent_connections ) {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	} else {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
+		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, true );
 	}
 }
 
+# Register global shutdown function
+shutdown_functions_register();
+
 # Initialise plugins
+require_api( 'plugin_api.php' );  // necessary for some upgrade steps
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	require_api( 'plugin_api.php' );
 	plugin_init_installed();
 }
 
@@ -236,25 +301,17 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-# Set the current timezone
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'authentication_api.php' );
 
-	# To reduce overhead, we assume that the timezone configuration is valid,
-	# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-	# be raised. Use admin checks to validate configuration.
-	@date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	$t_tz = @date_default_timezone_get();
-	config_set_global( 'default_timezone', $t_tz, true );
-
+	# Override the default timezone according to user's preferences
 	if( auth_is_user_authenticated() ) {
-		# Determine the current timezone according to user's preferences
 		require_api( 'user_pref_api.php' );
 		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
 		@date_default_timezone_set( $t_tz );
 	}
-	unset( $t_tz );
 }
+unset( $t_tz );
 
 # Cache current user's collapse API data
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
@@ -271,6 +328,7 @@ if( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
 
 # Set HTTP response headers
 require_api( 'http_api.php' );
+event_signal( 'EVENT_CORE_HEADERS' );
 http_all_headers();
 
 # Push default language to speed calls to lang_get

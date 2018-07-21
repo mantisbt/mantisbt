@@ -38,6 +38,10 @@ if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
+# This variable is defined in parent script
+global $t_event_params;
+$t_event_params['has_bugnote'] = true;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -54,10 +58,7 @@ require_api( 'utility_api.php' );
  * @return void
  */
 function action_add_note_print_title() {
-	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
 	echo lang_get( 'add_bugnote_title' );
-	echo '</td></tr>';
 }
 
 /**
@@ -69,26 +70,25 @@ function action_add_note_print_title() {
  */
 function action_add_note_print_fields() {
 ?>
-	<tbody>
-		<tr>
-			<th class="category">
-				<?php lang_get( 'add_bugnote_title' ); ?>
-			</th>
-			<td>
-				<textarea name="bugnote_text" cols="80" rows="10"></textarea>
-			</td>
-		</tr>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'add_bugnote_title' ); ?>
+		</th>
+		<td>
+			<textarea class="form-control" name="bugnote_text" id="bugnote_text" cols="80" rows="10"></textarea>
+		</td>
+	</tr>
 
-		<!-- View Status -->
-		<tr class="row-2">
-			<th class="category">
-				<?php echo lang_get( 'view_status' ) ?>
-			</th>
-			<td>
+	<!-- View Status -->
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'view_status' ) ?>
+		</th>
+		<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
 	if( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
-				<select name="view_state">
+				<select name="view_state" class="input-sm">
 					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 				</select>
 <?php
@@ -99,17 +99,8 @@ function action_add_note_print_fields() {
 <?php
 	}
 ?>
-			</td>
-		</tr>
-	</tbody>
-
-	<tfoot>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ); ?>" />
-			</td>
-		</tr>
-	</tfoot>
+		</td>
+	</tr>
 <?php
 }
 
@@ -150,6 +141,7 @@ function action_add_note_validate( $p_bug_id ) {
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 	$f_view_state = gpc_get_int( 'view_state' );
-	bugnote_add( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC );
+	bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $f_bugnote_text );
 	return null;
 }

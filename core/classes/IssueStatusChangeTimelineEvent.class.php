@@ -50,7 +50,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 * @param integer $p_new_status New status value of issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->old_status = $p_old_status;
@@ -93,23 +93,26 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	public function html() {
 		switch( $this->type ) {
 			case IssueStatusChangeTimelineEvent::RESOLVED:
+                $t_html = $this->html_start( 'fa-thumbs-o-up' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_resolved' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::CLOSED:
+                $t_html = $this->html_start( 'fa-power-off' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_closed' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;
 			case IssueStatusChangeTimelineEvent::REOPENED:
+                $t_html = $this->html_start( 'fa-refresh' );
 				$t_string = sprintf(
 					lang_get( 'timeline_issue_reopened' ),
-					user_get_name( $this->user_id ),
+					prepare_user_name( $this->user_id ),
 					string_get_bug_view_link( $this->issue_id )
 				);
 				break;
@@ -120,8 +123,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				trigger_error( ERROR_GENERIC, ERROR );
 				return '';
 		}
-
-		$t_html = $this->html_start();
+        
 		$t_html .= '<div class="action">' . $t_string . '</div>';
 		$t_html .= $this->html_end();
 

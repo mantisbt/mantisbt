@@ -54,6 +54,8 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 # @global array $g_cache_access_matrix
 $g_cache_access_matrix = array();
 
@@ -72,33 +74,40 @@ $g_cache_access_matrix_user_ids = array();
  */
 function access_denied() {
 	if( !auth_is_user_authenticated() ) {
-		if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
+		if( basename( $_SERVER['SCRIPT_NAME'] ) != auth_login_page() ) {
 			$t_return_page = $_SERVER['SCRIPT_NAME'];
 			if( isset( $_SERVER['QUERY_STRING'] ) ) {
 				$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 			}
 			$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
-			print_header_redirect( 'login_page.php?return=' . $t_return_page );
+			print_header_redirect( auth_login_page( 'return=' . $t_return_page ) );
 		}
 	} else {
 		if( current_user_is_anonymous() ) {
-			if( basename( $_SERVER['SCRIPT_NAME'] ) != 'login_page.php' ) {
+			if( basename( $_SERVER['SCRIPT_NAME'] ) != auth_login_page() ) {
 				$t_return_page = $_SERVER['SCRIPT_NAME'];
 				if( isset( $_SERVER['QUERY_STRING'] ) ) {
 					$t_return_page .= '?' . $_SERVER['QUERY_STRING'];
 				}
 				$t_return_page = string_url( string_sanitize_url( $t_return_page ) );
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
-				print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
+				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
-				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+				print_link_button(
+					helper_mantis_url( config_get_global( 'default_home_page' ) ),
+					lang_get( 'proceed' )
+				);
 				echo '</p>';
 			}
 		} else {
-			echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
-			echo '<p class="center">';
-			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
-			echo '</p>';
+			layout_page_header();
+			layout_admin_page_begin();
+			echo '<div class="space-10"></div>';
+			html_operation_failure(
+				helper_mantis_url( config_get_global( 'default_home_page' ) ),
+				error_string( ERROR_ACCESS_DENIED )
+			);
+			layout_admin_page_end();
 		}
 	}
 	exit;
@@ -118,6 +127,7 @@ function access_cache_matrix_project( $p_project_id ) {
 	}
 
 	if( !in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
+		db_param_push();
 		$t_query = 'SELECT user_id, access_level FROM {project_user_list} WHERE project_id=' . db_param();
 		$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 		while( $t_row = db_fetch_array( $t_result ) ) {
@@ -148,6 +158,7 @@ function access_cache_matrix_user( $p_user_id ) {
 	global $g_cache_access_matrix, $g_cache_access_matrix_user_ids;
 
 	if( !in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
+		db_param_push();
 		$t_query = 'SELECT project_id, access_level FROM {project_user_list} WHERE user_id=' . db_param();
 		$t_result = db_query( $t_query, array( (int)$p_user_id ) );
 
@@ -301,9 +312,9 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 /**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
- * @param integer      $p_access_level Integer representing access level.
- * @param integer      $p_project_id   Integer representing project id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
+ * @param integer|array $p_access_level Threshold representing an access level.
+ * @param integer       $p_project_id   Integer representing project id to check access against.
+ * @param integer|null  $p_user_id      Integer representing user id, defaults to null to use current user.
  * @return boolean whether user has access level specified
  * @access public
  */
@@ -326,6 +337,98 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 }
 
 /**
+ * Filters an array of project ids, based on an access level, returning an array
+ * containing only those projects which meet said access level.
+ * An optional limit for the number of results is provided as a shortcut for access checks.
+ *
+ * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
+ *                                              - integer: for a simple threshold
+ *                                              - array: for an array threshold
+ *                                              - string: for a threshold option which will be evaluated
+ *                                                 for each project context
+ * @param array                 $p_project_ids  Array of project ids to check access against, default to null
+ *                                               to use all user accessible projects
+ * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
+ * @param integer               $p_limit        Maximum number of results, default is 0 for all results
+ * @return array                The filtered array of project ids
+ */
+function access_project_array_filter( $p_access_level, array $p_project_ids = null, $p_user_id = null, $p_limit = 0 ) {
+	# Short circuit the check in this case
+	if( NOBODY == $p_access_level ) {
+		return array();
+	}
+
+	if( null === $p_user_id ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+	if( null === $p_project_ids ) {
+		$p_project_ids = user_get_all_accessible_projects( $p_user_id );
+	}
+
+	# Determine if parameter is a configuration string to be evaluated for each project
+	$t_is_config_string = ( is_string( $p_access_level ) && !is_numeric( $p_access_level ) );
+
+	# if config will be evaluated for each project, prepare a default value
+	if( $t_is_config_string ) {
+		$t_default = config_get( $p_access_level, null, $p_user_id, ALL_PROJECTS );
+		if( null === $t_default ) {
+			$t_default = config_get_global( $p_access_level );
+		}
+	}
+
+	$t_check_level = $p_access_level;
+	$t_filtered_projects = array();
+	foreach( $p_project_ids as $t_project_id ) {
+		# If a config string is provided, evaluate for each project
+		if( $t_is_config_string ) {
+			$t_check_level = config_get( $p_access_level, $t_default, $p_user_id, $t_project_id );
+		}
+		if( access_has_project_level( $t_check_level, $t_project_id, $p_user_id ) ) {
+			$t_filtered_projects[] = $t_project_id;
+			# Shortcut if the result limit has been reached
+			if( --$p_limit == 0 ) {
+				break;
+			}
+		}
+	}
+
+	return $t_filtered_projects;
+}
+
+/**
+ * Check the current user's access against the given value, in each of the provided projects,
+ * and return true if the user's access is equal to or higher in any of the projects, false otherwise.
+ * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
+ *                                              - integer: for a simple threshold
+ *                                              - array: for an array threshold
+ *                                              - string: for a threshold option which will be evaluated
+ *                                                 for each project context
+ * @param array                 $p_project_ids  Array of project ids to check access against, default to null
+ *                                               to use all user accessible projects
+ * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
+ * @return boolean              True if user has the specified access level for any of the projects
+ * @access public
+ */
+function access_has_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+	# We only need 1 matching project to return positive
+	$t_matches = access_project_array_filter( $p_access_level, $p_project_ids, $p_user_id, 1 );
+	return !empty( $t_matches );
+}
+
+/**
+ * Check if the user has the specified access level in any of the given projects
+ * Refer to access_has_any_project_level() for detailed parameter information
+ * @param integer|array|string $p_access_level  Parameter representing access level threshold
+ * @param array $p_project_ids                  Array of project ids to check access against
+ * @param integer|null $p_user_id
+ */
+function access_ensure_any_project_level( $p_access_level, array $p_project_ids = null, $p_user_id = null ) {
+	if( !access_has_any_project_level( $p_access_level, $p_project_ids, $p_user_id ) ) {
+		access_denied();
+	}
+}
+
+/**
  * Check if the user has the specified access level for the given project
  * and deny access to the page if not
  * @see access_has_project_level
@@ -343,12 +446,27 @@ function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_
 
 /**
  * Check whether the user has the specified access level for any project project
+ *
+ * Warning: this function may mislead into incorrect validations. Usually you want to
+ * check that a user meets a threshold for any project, but that threshold may be configured
+ * differently for each project, and the user may also have different access levels in each
+ * project due to private projects assignment.
+ * In that scenario, $p_access_level can't be a static threshold, but a "threshold identifier"
+ * instead, that must be evaluated for each project.
+ * Function "access_has_any_project_level()" provides that functionality, also covers the basic
+ * usage of this function.
+ * For such reasons, this function has been deprecated.
+ *
  * @param integer      $p_access_level Integer representing access level.
  * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
  * @return boolean whether user has access level specified
  * @access public
+ * @deprecated	access_has_any_project_level() should be used in preference to this function (since verrsion 2.6)
  */
 function access_has_any_project( $p_access_level, $p_user_id = null ) {
+	error_parameters( __FUNCTION__ . '()', 'access_has_any_project_level()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	# Short circuit the check in this case
 	if( NOBODY == $p_access_level ) {
 		return false;
@@ -406,13 +524,10 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		static $s_thresholds = array();
 		if( !isset( $s_thresholds[$t_project_id] ) ) {
 			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $p_user_id, $t_project_id );
-			if( !is_array( $t_report_bug_threshold ) ) {
-				$s_thresholds[$t_project_id] = $t_report_bug_threshold + 1;
-			} else if( empty( $t_report_bug_threshold ) ) {
+			if( empty( $t_report_bug_threshold ) ) {
 				$s_thresholds[$t_project_id] = NOBODY;
 			} else {
-				sort( $t_report_bug_threshold );
-				$s_thresholds[$t_project_id] = $t_report_bug_threshold[0] + 1;
+				$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
 			}
 		}
 		if( !access_compare_level( $t_access_level, $s_thresholds[$t_project_id] ) ) {
@@ -429,6 +544,25 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	}
 
 	return access_compare_level( $t_access_level, $p_access_level );
+}
+
+/**
+ * Filter the provided array of user ids to those who has the specified access level for the
+ * specified bug.
+ * @param  int $p_access_level   The access level.
+ * @param  int $p_bug_id         The bug id.
+ * @param  array $p_user_ids     The array of user ids.
+ * @return array filtered array of user ids.
+ */
+function access_has_bug_level_filter( $p_access_level, $p_bug_id, $p_user_ids ) {
+	$t_users_ids_with_access = array();
+	foreach( $p_user_ids as $t_user_id ) {
+		if( access_has_bug_level( $p_access_level, $p_bug_id, $t_user_id ) ) {
+			$t_users_ids_with_access[] = $t_user_id;
+		}
+	}
+
+	return $t_users_ids_with_access;
 }
 
 /**
@@ -474,6 +608,25 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 	}
 
 	return access_has_bug_level( $p_access_level, $t_bug_id, $p_user_id );
+}
+
+/**
+ * Filter the provided array of user ids to those who has the specified access level for the
+ * specified bugnote.
+ * @param  int $p_access_level   The access level.
+ * @param  int $p_bugnote_id     The bugnote id.
+ * @param  array $p_user_ids     The array of user ids.
+ * @return array filtered array of user ids.
+ */
+function access_has_bugnote_level_filter( $p_access_level, $p_bugnote_id, $p_user_ids ) {
+	$t_users_ids_with_access = array();
+	foreach( $p_user_ids as $t_user_id ) {
+		if( access_has_bugnote_level( $p_access_level, $p_bugnote_id, $t_user_id ) ) {
+			$t_users_ids_with_access[] = $t_user_id;
+		}
+	}
+
+	return $t_users_ids_with_access;
 }
 
 /**
@@ -554,6 +707,13 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
+	$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
+
+	# Reopen status must be reachable by workflow
+	if( !bug_check_workflow( $p_bug->status, $t_reopen_status ) ) {
+		return false;
+	}
+
 	# If allow_reporter_reopen is enabled, then reporters can always reopen
 	# their own bugs as long as their access level is reporter or above
 	if( ON == config_get( 'allow_reporter_reopen', null, null, $p_bug->project_id )
@@ -566,7 +726,6 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 	# Other users's access level must allow them to reopen bugs
 	$t_reopen_bug_threshold = config_get( 'reopen_bug_threshold', null, null, $p_bug->project_id );
 	if( access_has_bug_level( $t_reopen_bug_threshold, $p_bug->id, $p_user_id ) ) {
-		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
 
 		# User must be allowed to change status to reopen status
 		$t_reopen_status_threshold = access_get_status_threshold( $t_reopen_status, $p_bug->project_id );
@@ -642,4 +801,97 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 			return config_get( 'update_bug_status_threshold', null, null, $p_project_id );
 		}
 	}
+}
+
+/**
+ * Given a access level, return the appropriate string for it
+ * @param integer $p_access_level
+ * @return string
+ */
+function access_level_get_string( $p_access_level ) {
+	if( $p_access_level > ANYBODY ) {
+		$t_access_level_string = get_enum_element( 'access_levels', $p_access_level );
+	} else {
+		$t_access_level_string = lang_get( 'no_access' );
+	}
+	return $t_access_level_string;
+}
+
+/**
+ * Return the minimum access level, as integer, that matches the threshold.
+ * $p_threshold may be a single value, or an array. If it is a single
+ * value, returns that number. If it is an array, return the value of the
+ * smallest element
+ * @param integer|array $p_threshold         Access threshold
+ * @return integer		Integer value for an access level.
+ */
+function access_threshold_min_level( $p_threshold ) {
+	if( is_array( $p_threshold ) ) {
+		if( empty( $p_threshold ) ) {
+			return NOBODY;
+		} else {
+			sort( $p_threshold );
+			return( reset( $p_threshold ) );
+		}
+	} else {
+		return $p_threshold;
+	}
+
+}
+
+/**
+ * Checks if the user can view the handler for the bug.
+ * @param BugData      $p_bug     Bug to check access against.
+ * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
+ * @return boolean whether user can view the handler user.
+ */
+function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	# handler can be viewed if allowed by access level, OR the user himself is the handler
+	$t_can_view_handler =
+		( $p_bug->handler_id == $t_user_id )
+		|| access_has_bug_level(
+			config_get( 'view_handler_threshold', null, $t_user_id, $p_bug->project_id ),
+			$p_bug->id );
+
+	return $t_can_view_handler;
+}
+
+/**
+ * Parse access level reference array parsed from json.
+ *
+ * @param array $p_access The access level
+ * @return integer The access level
+ * @throws ClientException Access level is invalid or not specified.
+ */
+function access_parse_array( array $p_access ) {
+	$t_access_levels_enum = config_get( 'access_levels_enum_string' );
+	$t_access_level = false;
+
+	if( isset( $p_access['id'] ) ) {
+		$t_access_level = (int)$p_access['id'];
+
+		# Make sure the provided id is valid
+		if( !MantisEnum::hasValue( $t_access_levels_enum, $t_access_level ) ) {
+			$t_access_level = false;
+		}
+	}
+
+	if( isset( $p_access['name'] ) ) {
+		$t_access_level = MantisEnum::getValue( $t_access_levels_enum, $p_access['name'] );
+	}
+
+	if( $t_access_level === false ) {
+		throw new ClientException(
+			'Invalid access level',
+			ERROR_INVALID_FIELD_VALUE,
+			array( 'access_level' ) );
+	}
+
+	return $t_access_level;
 }

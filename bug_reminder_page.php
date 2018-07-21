@@ -65,27 +65,33 @@ if( bug_is_readonly( $f_bug_id ) ) {
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
-html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+layout_page_begin();
 ?>
 
 <?php # Send reminder Form BEGIN ?>
-<br />
+
+<div id="send-reminder-div" class="col-md-12 col-xs-12">
 <form method="post" action="bug_reminder.php">
 <?php echo form_security_field( 'bug_reminder' ) ?>
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-<div class="width75 form-container">
-<table cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-envelope"></i>
 		<?php echo lang_get( 'bug_reminder' ) ?>
-	</td>
-</tr>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
 <tr>
 	<th class="category">
 		<?php echo lang_get( 'to' ) ?>
 	</th>
 	<td>
-		<select name="to[]" multiple="multiple" size="12" class="width20">
+		<select id="recipient" name="to[]" multiple="multiple" size="9" class="width-100">
 			<?php
 			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 			$t_access_level = config_get( 'reminder_receive_threshold' );
@@ -100,25 +106,21 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 			?>
 		</select>
 	</td>
-</tr>
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'reminder' ) ?>
-	</th>
-	<td>
-		<textarea name="body" cols="85" rows="10" class="width100"></textarea>
+	<td class="center">
+		<textarea class="form-control" name="body" cols="65" rows="10"></textarea>
 	</td>
 </tr>
 </table>
-<div class="center">
-	<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
-</div>
-</div>
-</form>
-<br/>
-<table class="width75" cellspacing="1">
-<tr>
-	<td>
+	</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+		</div>
+	</div>
+	</div>
+	</form>
+	<div class="alert alert-info">
+		<p><i class="fa fa-info-circle fa-lg"> </i>
 		<?php
 			echo lang_get( 'reminder_explain' ) . ' ';
 			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
@@ -127,12 +129,15 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 			if( ON == config_get( 'store_reminders' ) ) {
 				echo lang_get( 'reminder_store' );
 			}
-		?>
-	</td>
-</tr>
-</table>
 
-<br />
+			if( mention_enabled() ) {
+				echo '<br /><br />', sprintf( lang_get( 'reminder_mentions' ), '<strong>' . mentions_tag() . user_get_username( auth_get_current_user_id() ) . '</strong>' );
+			}
+		?>
+		</p>
+	</div>
+</div>
+
 <?php
 $_GET['id'] = $f_bug_id;
 $t_fields_config_option = 'bug_view_page_fields';
@@ -142,4 +147,4 @@ $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
+include( $t_mantis_dir . 'bug_view_inc.php' );

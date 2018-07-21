@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -161,10 +161,8 @@ $s_sponsor_show = 'Jonön Valikis';
 $s_payment_updated = 'Pelanüns pebevobons.';
 $s_account_updated_msg = 'Kal olik pebevobon benosekiko...';
 $s_email_updated = 'Ladet leäktronik pevotükon benosekiko';
-$s_realname_duplicated = 'Nem jenöfik pagebon fa geban votik';
 $s_realname_updated = 'Nem jenöfik pevotükon benosekiko';
 $s_password_updated = 'Letavöd pevotükon benosekiko';
-$s_file_upload_msg = 'Ragivilöpükam eplöpon.';
 $s_upload_file = 'Löpükön Ragivi';
 $s_select_file = 'Välön Ragivi';
 $s_upload_file_button = 'Löpükön Ragivi';
@@ -186,7 +184,6 @@ $s_summary = 'Naböfodönuam';
 $s_description = 'Bepenam';
 $s_profile = 'Profül';
 $s_vote_added_msg = 'Vögod peläükon...';
-$s_bugnote_added_msg = 'Noet peläükon...';
 $s_bugnote_deleted_msg = 'Noet pemoükon benosekiko...';
 $s_bug_notes_title = 'Noets';
 $s_edit_bugnote_title = 'Redakön Noeti';
@@ -485,7 +482,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Fomam: „%1$s“ no petuvon.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Gebananem no lonöfon. Gebananems dalons binädon teiko me tonats latinik, numats, spads, e malats: „-“ e „_“.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Nem jenöfik gebana no lonöfon.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Geban no labon dälanivodi zesüdik.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '„Nem jenöfik“ pevälöl leigon ko nunädamanem gebana votik. Valolös votiki.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Fümedasaedot no leigon. Steifülolös dönu.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Dun: „letavöd peperon“ no gebidon.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Mutol gevön ladeti leäktronik ad vagükön letavödi.';

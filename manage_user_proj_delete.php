@@ -65,7 +65,7 @@ $t_project_name = project_get_name( $f_project_id );
 
 # Confirm with the user
 helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
-	'<br/>' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
+	'<br />' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
 	lang_get( 'remove_user_button' ) );
 
 project_remove_user( $f_project_id, $f_user_id );
@@ -74,8 +74,10 @@ form_security_purge( 'manage_user_proj_delete' );
 
 $t_redirect_url = 'manage_user_edit_page.php?user_id=' .$f_user_id;
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

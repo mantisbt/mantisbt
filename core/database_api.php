@@ -37,15 +37,12 @@ require_api( 'error_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'utility_api.php' );
 
-define( 'ADODB_DIR', config_get( 'library_path' ) . 'adodb' );
-require_lib( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
-
 # An array in which all executed queries are stored.  This is used for profiling
 # @global array $g_queries_array
 $g_queries_array = array();
 
 
-# Stores whether a database connection was succesfully opened.
+# Stores whether a database connection was successfully opened.
 # @global bool $g_db_connected
 $g_db_connected = false;
 
@@ -53,9 +50,14 @@ $g_db_connected = false;
 # @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-# set adodb fetch mode
+# set adodb to associative fetch mode with lowercase column names
 # @global bool $ADODB_FETCH_MODE
+global $ADODB_FETCH_MODE;
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
+
+# Stores the functional database type based on db driver
+$g_db_functional_type = db_get_type( config_get_global( 'db_type' ) );
 
 /**
  * Mantis Database Parameters Count class
@@ -120,13 +122,18 @@ $g_db_param = new MantisDbParam();
  * @param string  $p_username      Database server username.
  * @param string  $p_password      Database server password.
  * @param string  $p_database_name Database name.
- * @param string  $p_db_schema     Schema name (only used if database type is DB2).
  * @param boolean $p_pconnect      Use a Persistent connection to database.
  * @return boolean indicating if the connection was successful
  */
-function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
-	global $g_db_connected, $g_db;
+function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_pconnect = false ) {
+	global $g_db_connected, $g_db, $g_db_functional_type;
 	$t_db_type = config_get_global( 'db_type' );
+	$g_db_functional_type = db_get_type( $t_db_type );
+
+	if( $g_db_functional_type == DB_TYPE_UNDEFINED ) {
+		error_parameters( 0, 'Database type is not supported by MantisBT, check $g_db_type in config_inc.php' );
+		trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+	}
 
 	if( !db_check_database_support( $t_db_type ) ) {
 		error_parameters( 0, 'PHP Support for database is not enabled' );
@@ -152,13 +159,6 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 			# @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 			# @todo Is this needed for other databases?
 			db_query( 'SET NAMES UTF8' );
-		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-			$t_result2 = db_query( 'set schema ' . $p_db_schema );
-			if( $t_result2 === false ) {
-				db_error();
-				trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
-				return false;
-			}
 		}
 	} else {
 		db_error();
@@ -189,26 +189,17 @@ function db_is_connected() {
  */
 function db_check_database_support( $p_db_type ) {
 	switch( $p_db_type ) {
-		case 'mysql':
-			$t_support = function_exists( 'mysql_connect' );
-			break;
 		case 'mysqli':
 			$t_support = function_exists( 'mysqli_connect' );
 			break;
 		case 'pgsql':
 			$t_support = function_exists( 'pg_connect' );
 			break;
-		case 'mssql':
-			$t_support = function_exists( 'mssql_connect' );
-			break;
 		case 'mssqlnative':
 			$t_support = function_exists( 'sqlsrv_connect' );
 			break;
 		case 'oci8':
 			$t_support = function_exists( 'OCILogon' );
-			break;
-		case 'db2':
-			$t_support = function_exists( 'db2_connect' );
 			break;
 		case 'odbc_mssql':
 			$t_support = function_exists( 'odbc_connect' );
@@ -220,19 +211,33 @@ function db_check_database_support( $p_db_type ) {
 }
 
 /**
+ * Maps a db driver type to the functional database type
+ * @param string	$p_driver_type Database driver name
+ * @return int		Database type
+ */
+function db_get_type( $p_driver_type ) {
+	switch( $p_driver_type ) {
+		case 'mysqli':
+			return DB_TYPE_MYSQL;
+		case 'pgsql':
+			return DB_TYPE_PGSQL;
+		case 'mssqlnative':
+		case 'odbc_mssql':
+			return DB_TYPE_MSSQL;
+		case 'oci8':
+			return DB_TYPE_ORACLE;
+		default:
+			return DB_TYPE_UNDEFINED;
+	}
+}
+
+/**
  * Checks if the database driver is MySQL
  * @return boolean true if mysql
  */
 function db_is_mysql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mysql':
-		case 'mysqli':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MYSQL == $g_db_functional_type );
 }
 
 /**
@@ -240,16 +245,8 @@ function db_is_mysql() {
  * @return boolean true if postgres
  */
 function db_is_pgsql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'postgres':
-		case 'postgres7':
-		case 'pgsql':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_PGSQL == $g_db_functional_type );
 }
 
 /**
@@ -257,31 +254,8 @@ function db_is_pgsql() {
  * @return boolean true if mssql
  */
 function db_is_mssql() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'mssql':
-		case 'mssqlnative':
-		case 'odbc_mssql':
-			return true;
-	}
-
-	return false;
-}
-
-/**
- * Checks if the database driver is DB2
- * @return boolean true if db2
- */
-function db_is_db2() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	switch( $t_db_type ) {
-		case 'db2':
-			return true;
-	}
-
-	return false;
+	global $g_db_functional_type;
+	return( DB_TYPE_MSSQL == $g_db_functional_type );
 }
 
 /**
@@ -289,9 +263,8 @@ function db_is_db2() {
  * @return boolean true if oracle
  */
 function db_is_oracle() {
-	$t_db_type = config_get_global( 'db_type' );
-
-	return ( $t_db_type == 'oci8' );
+	global $g_db_functional_type;
+	return( DB_TYPE_ORACLE == $g_db_functional_type );
 }
 
 /**
@@ -313,13 +286,18 @@ function db_check_identifier_size( $p_identifier ) {
  * @deprecated db_query should be used in preference to this function. This function may be removed in 2.0
  */
 function db_query_bound() {
-  return call_user_func_array( 'db_query', func_get_args() );
+	error_parameters( __FUNCTION__ . '()', 'db_query()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	return call_user_func_array( 'db_query', func_get_args() );
 }
 
 /**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
- * This will pop the database parameter stack {@see MantisDbParam} after a successful execution
+ * This will pop the database parameter stack {@see MantisDbParam} after a
+ * successful execution, unless specified otherwise
+ *
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
@@ -327,127 +305,12 @@ function db_query_bound() {
  * @param array   $p_arr_parms Array of parameters matching $p_query.
  * @param integer $p_limit     Number of results to return.
  * @param integer $p_offset    Offset query results for paging.
+ * @param boolean $p_pop_param Set to false to leave the parameters on the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
-	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
-
-	$t_db_type = config_get_global( 'db_type' );
-
-	static $s_check_params;
-	if( $s_check_params === null ) {
-		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative' );
-	}
-
-	$t_start = microtime( true );
-
-	# This ensures that we don't get an error from ADOdb if $p_arr_parms == null,
-	# as Execute() expects either an array or false if there are no parameters -
-	# null actually gets treated as array( 0 => null )
-	if( is_null( $p_arr_parms ) ) {
-		$p_arr_parms = array();
-	}
-
-	if( !empty( $p_arr_parms ) && $s_check_params ) {
-		$t_params = count( $p_arr_parms );
-		for( $i = 0;$i < $t_params;$i++ ) {
-			if( $p_arr_parms[$i] === false ) {
-				$p_arr_parms[$i] = 0;
-			} elseif( $p_arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
-				$p_arr_parms[$i] = 1;
-			}
-		}
-	}
-
-	static $s_prefix;
-	static $s_suffix;
-	if( $s_prefix === null ) {
-		# Determine table prefix and suffixes including trailing and leading '_'
-		$s_prefix = trim( config_get_global( 'db_table_prefix' ) );
-		$s_suffix = trim( config_get_global( 'db_table_suffix' ) );
-
-		if( !empty( $s_prefix ) && '_' != substr( $s_prefix, -1 ) ) {
-			$s_prefix .= '_';
-		}
-		if( !empty( $s_suffix ) && '_' != substr( $s_suffix, 0, 1 ) ) {
-			$s_suffix = '_' . $s_suffix;
-		}
-	}
-
-	$p_query = strtr($p_query, array(
-							'{' => $s_prefix,
-							'}' => $s_suffix,
-							'%s' => db_param(),
-							'%d' => db_param(),
-							'%b' => db_param(),
-							'%l' => db_param(),
-							) );
-
-	if( db_is_oracle() ) {
-		$p_query = db_oracle_adapt_query_syntax( $p_query, $p_arr_parms );
-	}
-
-	if( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
-		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $p_arr_parms );
-	} else {
-		$t_result = $g_db->Execute( $p_query, $p_arr_parms );
-	}
-
-	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
-
-	if( ON == $g_db_log_queries ) {
-		$t_lastoffset = 0;
-		$i = 0;
-		if( !empty( $p_arr_parms ) ) {
-			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
-				$t_matches = $t_matches[0];
-				# Realign the offset returned by preg_match as it is byte-based,
-				# which causes issues with UTF-8 characters in the query string
-				# (e.g. from custom fields names)
-				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_matches[1] ), mb_internal_encoding() );
-				if( $i <= count( $p_arr_parms ) ) {
-					if( is_null( $p_arr_parms[$i] ) ) {
-						$t_replace = 'NULL';
-					} else if( is_string( $p_arr_parms[$i] ) ) {
-						$t_replace = "'" . $p_arr_parms[$i] . "'";
-					} else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
-						$t_replace = (float)$p_arr_parms[$i];
-					} else if( is_bool( $p_arr_parms[$i] ) ) {
-						switch( $t_db_type ) {
-							case 'pgsql':
-								$t_replace = '\'' . $p_arr_parms[$i] . '\'';
-							break;
-						default:
-							$t_replace = $p_arr_parms[$i];
-							break;
-						}
-					} else {
-						echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
-						exit( 1 );
-					}
-					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );
-					$t_lastoffset = $t_matches[1] + strlen( $t_replace ) + 1;
-				} else {
-					$t_lastoffset = $t_matches[1] + 1;
-				}
-				$i++;
-			}
-		}
-		$t_log_msg = array( $p_query, $t_elapsed );
-		log_event( LOG_DATABASE, $t_log_msg );
-		array_push( $g_queries_array, $t_log_msg );
-	} else {
-		array_push( $g_queries_array, array( '', $t_elapsed ) );
-	}
-
-	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
-	} else {
-		$g_db_param->pop();
-		return $t_result;
-	}
+function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1, $p_pop_param = true ) {
+	# Use DbQuery class to execute the query
+	return DbQuery::compat_db_query( $p_query, $p_arr_parms, $p_limit, $p_offset, $p_pop_param );
 }
 
 /**
@@ -468,6 +331,19 @@ function db_param() {
 function db_param_push() {
 	global $g_db_param;
 	$g_db_param->push();
+}
+
+/**
+ * Pops the previous parameter count from the stack
+ * It is generally not necessary to call this, because the param count is popped
+ * automatically whenever a query is executed via db_query(). There are some
+ * corner cases when doing it manually makes sense, e.g. when a query is built
+ * but not executed.
+ * @return void
+ */
+function db_param_pop() {
+	global $g_db_param;
+	$g_db_param->pop();
 }
 
 /**
@@ -495,96 +371,80 @@ function db_affected_rows() {
  * @return array Database result
  */
 function db_fetch_array( IteratorAggregate &$p_result ) {
-	global $g_db, $g_db_type;
+	global $g_db_functional_type;
 
 	if( $p_result->EOF ) {
 		return false;
 	}
 
-	# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql'  || $g_db_type == 'mssqlnative' ) {
-		$t_array = $p_result->fields;
-		$p_result->MoveNext();
-		return $t_array;
-	} else {
-		$t_row = $p_result->GetRowAssoc( ADODB_ASSOC_CASE_LOWER );
-		static $s_array_result;
-		static $s_array_fields;
+	# Retrieve the fields from the recordset
+	$t_row = $p_result->fields;
 
-		# Oci8 returns null values for empty strings
-		if( db_is_oracle() ) {
+	# Additional handling for specific RDBMS
+	switch( $g_db_functional_type ) {
+
+		case DB_TYPE_PGSQL:
+			# pgsql's boolean fields are stored as 't' or 'f' and must be converted
+			static $s_current_result = null, $s_convert_needed;
+
+			if( $s_current_result != $p_result ) {
+				# Processing a new query
+				$s_current_result = $p_result;
+				$s_convert_needed = false;
+			} elseif( !$s_convert_needed ) {
+				# No conversion needed, return the row as-is
+				$p_result->MoveNext();
+				return $t_row;
+			}
+
+			foreach( $p_result->FieldTypesArray() as $t_field ) {
+				switch( $t_field->type ) {
+					case 'bool':
+						switch( $t_row[$t_field->name] ) {
+							case 'f':
+								$t_row[$t_field->name] = false;
+								break;
+							case 't':
+								$t_row[$t_field->name] = true;
+								break;
+						}
+						$s_convert_needed = true;
+						break;
+				}
+			}
+			break;
+
+		case DB_TYPE_ORACLE:
+			# oci8 returns null values for empty strings, convert them back
 			foreach( $t_row as &$t_value ) {
 				if( !isset( $t_value ) ) {
 					$t_value = '';
 				}
 			}
-		}
-
-		if( $s_array_result != $p_result ) {
-			# new query
-			$s_array_result = $p_result;
-			$s_array_fields = null;
-		} else {
-			if( $s_array_fields === null ) {
-				$p_result->MoveNext();
-				return $t_row;
-			}
-		}
-
-		$t_convert = false;
-		$t_fieldcount = $p_result->FieldCount();
-		for( $i = 0; $i < $t_fieldcount; $i++ ) {
-			if( isset( $s_array_fields[$i] ) ) {
-				$t_field = $s_array_fields[$i];
-			} else {
-				$t_field = $p_result->FetchField( $i );
-				$s_array_fields[$i] = $t_field;
-			}
-			switch( $t_field->type ) {
-				case 'bool':
-					switch( $t_row[$t_field->name] ) {
-						case 'f':
-							$t_row[$t_field->name] = false;
-							break;
-						case 't':
-							$t_row[$t_field->name] = true;
-							break;
-					}
-					$t_convert= true;
-					break;
-				default :
-					break;
-			}
-		}
-
-		if( $t_convert == false ) {
-			$s_array_fields = null;
-		}
-		$p_result->MoveNext();
-		return $t_row;
+			break;
 	}
+
+	$p_result->MoveNext();
+	return $t_row;
 }
 
 /**
- * Retrieve a result returned from a specific database query
- * @param boolean|IteratorAggregate $p_result Database Query Record Set to retrieve next result for.
- * @param integer                   $p_index1 Row to retrieve (optional).
- * @param integer                   $p_index2 Column to retrieve (optional).
+ * Retrieve a specific field from a database query result
+ * @param boolean|IteratorAggregate $p_result		Database Query Record Set to retrieve the field from.
+ * @param integer                   $p_row_index	Row to retrieve, zero-based (optional).
+ * @param integer                   $p_col_index	Column to retrieve, zero-based (optional).
  * @return mixed Database result
  */
-function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
+function db_result( $p_result, $p_row_index = 0, $p_col_index = 0 ) {
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-		$p_result->Move( $p_index1 );
-		$t_result = $p_result->GetArray();
+		$p_result->Move( $p_row_index );
+		$t_row = db_fetch_array( $p_result );
 
-		if( isset( $t_result[0][$p_index2] ) ) {
-			return $t_result[0][$p_index2];
-		}
+		# Make the array numerically indexed. This is required to retrieve the
+		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
+		$t_result = array_values( $t_row );
 
-		# The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
-		# Get 2nd dimension and make it numerically indexed
-		$t_result = array_values( $t_result[0] );
-		return $t_result[$p_index2];
+		return $t_result[$p_col_index];
 	}
 
 	return false;
@@ -597,23 +457,24 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
  * @return integer last successful insert id
  */
 function db_insert_id( $p_table = null, $p_field = 'id' ) {
-	global $g_db;
+	global $g_db, $g_db_functional_type;
 
 	if( isset( $p_table ) ) {
-		if( db_is_oracle() ) {
-			$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
-		} elseif( db_is_pgsql() ) {
-			$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+		switch( $g_db_functional_type ) {
+			case DB_TYPE_ORACLE:
+				$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
+				break;
+			case DB_TYPE_PGSQL:
+				$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
+				break;
+			case DB_TYPE_MSSQL:
+				$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
+				break;
 		}
 		if( isset( $t_query ) ) {
 			$t_result = db_query( $t_query );
-			return db_result( $t_result );
+			return (int)db_result( $t_result );
 		}
-	}
-	if( db_is_mssql() ) {
-		$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
-		$t_result = db_query( $t_query );
-		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
 }
@@ -634,9 +495,9 @@ function db_table_exists( $p_table_name ) {
 	}
 
 	# Can't use in_array() since it is case sensitive
-	$t_table_name = utf8_strtolower( $p_table_name );
+	$t_table_name = mb_strtolower( $p_table_name );
 	foreach( $t_tables as $t_current_table ) {
-		if( utf8_strtolower( $t_current_table ) == $t_table_name ) {
+		if( mb_strtolower( $t_current_table ) == $t_table_name ) {
 			return true;
 		}
 	}
@@ -665,9 +526,9 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 	if( !empty( $t_indexes ) ) {
 		# Can't use in_array() since it is case sensitive
-		$t_index_name = utf8_strtolower( $p_index_name );
+		$t_index_name = mb_strtolower( $p_index_name );
 		foreach( $t_indexes as $t_current_index_name => $t_current_index_obj ) {
-			if( utf8_strtolower( $t_current_index_name ) == $t_index_name ) {
+			if( mb_strtolower( $t_current_index_name ) == $t_index_name ) {
 				return true;
 			}
 		}
@@ -683,6 +544,13 @@ function db_index_exists( $p_table_name, $p_index_name ) {
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
 	$t_columns = db_field_names( $p_table_name );
+
+	# ADOdb oci8 driver works with uppercase column names, and as of 5.19 does
+	# not provide a way to force them to lowercase
+	if( db_is_oracle() ) {
+		$p_field_name = strtoupper( $p_field_name );
+	}
+
 	return in_array( $p_field_name, $t_columns );
 }
 
@@ -721,7 +589,7 @@ function db_error_msg() {
 }
 
 /**
- * send both the error number and error message and query (optional) as paramaters for a triggered error
+ * send both the error number and error message and query (optional) as parameters for a triggered error
  * @param string $p_query Query that generated the error.
  * @return void
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
@@ -742,7 +610,7 @@ function db_error( $p_query = null ) {
 function db_close() {
 	global $g_db;
 
-	$t_result = $g_db->Close();
+	$g_db->Close();
 }
 
 /**
@@ -756,21 +624,12 @@ function db_prepare_string( $p_string ) {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
-		case 'mssql':
 		case 'mssqlnative':
 		case 'odbc_mssql':
-		case 'ado_mssql':
 			return addslashes( $p_string );
-		case 'db2':
-			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
-		case 'mysql':
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );
-			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
-		case 'postgres':
-		case 'postgres64':
-		case 'postgres7':
+			return mb_substr( $t_escaped, 1, mb_strlen( $t_escaped ) - 2 );
 		case 'pgsql':
 			return pg_escape_string( $p_string );
 		case 'oci8':
@@ -793,21 +652,16 @@ function db_prepare_binary_string( $p_string ) {
 	$t_db_type = config_get_global( 'db_type' );
 
 	switch( $t_db_type ) {
-		case 'mssql':
-		case 'mssqlnative':
 		case 'odbc_mssql':
-		case 'ado_mssql':
 			$t_content = unpack( 'H*hex', $p_string );
 			return '0x' . $t_content['hex'];
 			break;
-		case 'postgres':
-		case 'postgres64':
-		case 'postgres7':
 		case 'pgsql':
 			return $g_db->BlobEncode( $p_string );
 			break;
+		case 'mssqlnative':
 		case 'oci8':
-			# Fall through, oci8 stores raw data in BLOB
+			# Fall through, mssqlnative, oci8 store raw data in BLOB
 		default:
 			return $p_string;
 			break;
@@ -853,9 +707,8 @@ function db_prepare_bool( $p_bool ) {
 }
 
 /**
- * return current timestamp for DB
- * @todo add param bool $p_gmt whether to use GMT or current timezone (default false)
- * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
+ * return current time as Unix timestamp
+ * @return integer Unix timestamp of the current date and time
  */
 function db_now() {
 	return time();
@@ -890,26 +743,26 @@ function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 }
 
 /**
- * A helper function to compare two dates against a certain number of days
- * @param string|integer $p_date1_id_or_column Column or value to compare.
- * @param string|integer $p_date2_id_or_column Column or value to compare.
- * @param string         $p_limitstring        Limit String.
- * @return string returns database query component to compare dates
+ * Compare two dates against a certain number of days
+ * 'val_or_col' parameters will be used "as is" in the query component,
+ * allowing use of a column name. To compare against a specific date,
+ * it is recommended to pass db_param() instead of a date constant.
+ * @param string  $p_val_or_col_1 Value or Column to compare.
+ * @param string  $p_operator     SQL comparison operator.
+ * @param string  $p_val_or_col_2 Value or Column to compare.
+ * @param integer $p_num_secs     Number of seconds to compare against
+ * @return string Database query component to compare dates
  * @todo Check if there is a way to do that using ADODB rather than implementing it here.
  */
-function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $p_limitstring ) {
-	$t_db_type = config_get_global( 'db_type' );
-
-	$p_date1 = $p_date1_id_or_column;
-	$p_date2 = $p_date2_id_or_column;
-	if( is_int( $p_date1_id_or_column ) ) {
-		$p_date1 = db_param();
+function db_helper_compare_time( $p_val_or_col_1, $p_operator, $p_val_or_col_2, $p_num_secs ) {
+	if( $p_num_secs == 0 ) {
+		return "($p_val_or_col_1 $p_operator $p_val_or_col_2)";
+	} elseif( $p_num_secs > 0 ) {
+		return "($p_val_or_col_1 $p_operator $p_val_or_col_2 + $p_num_secs)";
+	} else {
+		# Invert comparison to avoid issues with unsigned integers on MySQL
+		return "($p_val_or_col_1 - $p_num_secs $p_operator $p_val_or_col_2)";
 	}
-	if( is_int( $p_date2_id_or_column ) ) {
-		$p_date2 = db_param();
-	}
-
-	return '((' . $p_date1 . ' - ' . $p_date2 .')' . $p_limitstring . ')';
 }
 
 /**
@@ -963,8 +816,8 @@ function db_time_queries() {
  * @return string containing full database table name (with prefix and suffix)
  */
 function db_get_table( $p_name ) {
-	if( strpos( $p_name, 'mantis_' ) === 0 ) {
-		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
+	if( preg_match( '/^mantis_(.*)_table$/', $p_name, $t_matches ) ) {
+		$t_table = $t_matches[1];
 		error_parameters(
 			__FUNCTION__ . "( '$p_name' )",
 			__FUNCTION__ . "( '$t_table' )"
@@ -996,14 +849,9 @@ function db_get_table( $p_name ) {
  * @return array containing table names
  */
 function db_get_table_list() {
-	global $g_db, $g_db_schema;
+	global $g_db;
 
-	if( db_is_db2() ) {
-		# must pass schema
-		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
-	} else {
-		$t_tables = $g_db->MetaTables( 'TABLE' );
-	}
+	$t_tables = $g_db->MetaTables( 'TABLE' );
 	return $t_tables;
 }
 
@@ -1129,19 +977,48 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  */
 function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	# Remove "AS" keyword, because not supported with table aliasing
-	$t_is_odd = true;
+	# - Do not remove text literal within "'" quotes
+	# - Will remove all "AS", except when it's part of a "CAST(x AS y)" expression
+	#   To do so, we will assume that the "AS" following a "CAST", is safe to be kept.
+	#   Using a counter for "CAST" appearances to allow nesting: CAST(CAST(x AS y) AS z)
+
+	# split the string by the relevant delimiters. The delimiters will be part of the split array
+	$t_parts = preg_split("/(')|( AS )|(CAST\s*\()/mi", $p_query, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	$t_is_literal = false;
+	$t_cast = 0;
 	$t_query = '';
-	# Divide statement to skip processing string literals
-	$t_p_query_arr = explode( '\'', $p_query );
-	foreach( $t_p_query_arr as $t_p_query_part ) {
-		if( $t_query != '' ) {
-			$t_query .= '\'';
+	foreach( $t_parts as $t_part ) {
+		# if quotes, switch literal flag
+		if( $t_part == '\'' ) {
+			$t_is_literal = !$t_is_literal;
+			$t_query .= $t_part;
+			continue;
 		}
-		if( $t_is_odd ) {
-			$t_query .= preg_replace( '/ AS /im', ' ', $t_p_query_part );
+		# if this part is litereal, do not change
+		if( $t_is_literal ) {
+			$t_query .= $t_part;
+			continue;
 		} else {
-			$t_query .= $t_p_query_part;
-			$t_is_odd = true;
+			# if there is "CAST" delimiter, flag the counter
+			if( preg_match( '/^CAST\s*\($/i', $t_part ) ) {
+				$t_cast++;
+				$t_query .= $t_part;
+				continue;
+			}
+			# if there is "AS"
+			if( strcasecmp( $t_part, ' AS ' ) == 0 ) {
+				# if there's a previous CAST, keep the AS
+				if( $t_cast > 0 ) {
+					$t_cast--;
+					$t_query .= $t_part;
+				} else {
+					# otherwise, remove the " AS ", replace by a space
+					$t_query .= ' ';
+				}
+				continue;
+			}
+			$t_query .= $t_part;
+			continue;
 		}
 	}
 	$p_query = $t_query;
@@ -1277,5 +1154,103 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 		}
 	}
 	$p_query = db_oracle_order_binds_sequentially( $p_query );
+	return $p_query;
+}
+
+/**
+ * Replace 4-byte UTF-8 chars
+ * This is a workaround to avoid data getting truncated on MySQL databases
+ * using native utf8 encoding, which only supports 3 bytes chars (see #20431)
+ * @param string $p_string
+ * @return string
+ */
+function db_mysql_fix_utf8( $p_string ) {
+	if( !db_is_mysql() ) {
+		return $p_string;
+	}
+	return preg_replace(
+		# 4-byte UTF8 chars always start with bytes 0xF0-0xF7 (0b11110xxx)
+		'/[\xF0-\xF7].../s',
+		# replace with U+FFFD to avoid potential Unicode XSS attacks,
+		# see http://unicode.org/reports/tr36/#Deletion_of_Noncharacters
+		"\xEF\xBF\xBD",
+		$p_string
+	);
+}
+
+/**
+ * Creates an empty record set, compatible with db_query() result
+ * This object can be used when a query can't be performed, or is not needed,
+ * and still want to return an empty result as a transparent return value.
+ * @return \ADORecordSet_empty
+ */
+function db_empty_result() {
+	return new ADORecordSet_empty();
+}
+
+/**
+ * Process a query string by replacing token parameters by their bound values
+ * @param string $p_query     Query string
+ * @param array $p_arr_parms  Parameter array
+ * @return string             Processed query string
+ */
+function db_format_query_log_msg( $p_query, array $p_arr_parms ) {
+	global $g_db, $g_db_functional_type;
+
+	$t_lastoffset = 0;
+	$i = 0;
+	if( !empty( $p_arr_parms ) ) {
+		# For mysql, tokens are '?', and parameters are bound sequentially
+		# For pgsql, tokens are '$number', and parameters are bound by the denoted
+		# index (1-based) in the parameter array
+		# For oracle, tokens are ':string', but mantis rewrites them as sequentially
+		# ordered, so they behave like mysql. See db_oracle_order_binds_sequentially()
+		$t_regex = '/(?<token>\?|\$|:)(?<index>[0-9]*)/';
+		while( preg_match( $t_regex , $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
+			$t_match_param = $t_matches[0];
+			# Realign the offset returned by preg_match as it is byte-based,
+			# which causes issues with UTF-8 characters in the query string
+			# (e.g. from custom fields names)
+			$t_utf8_offset = mb_strlen( substr( $p_query, 0, $t_match_param[1] ), mb_internal_encoding() );
+			if( $i <= count( $p_arr_parms ) ) {
+				switch( $g_db_functional_type ) {
+					case DB_TYPE_PGSQL:
+						# For pgsql, the bound value is indexed by the parameter name (1-based)
+						$t_index = (int)$t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index-1];
+						break;
+					case DB_TYPE_ORACLE:
+						# For oracle, the value is indexed by the label
+						$t_index = $t_matches['index'][0];
+						$t_value = $p_arr_parms[$t_index];
+						break;
+					default:
+						# otherwise, the value is positional
+						$t_value = $p_arr_parms[$i];
+				}
+				if( is_null( $t_value ) ) {
+					$t_replace = 'NULL';
+				} else if( is_string( $t_value ) ) {
+					$t_replace = "'" . $t_value . "'";
+				} else if( is_integer( $t_value ) || is_float( $t_value ) ) {
+					$t_replace = (float)$t_value;
+				} else if( is_bool( $t_value ) ) {
+					# use the actual literal from db driver
+					$t_replace = $t_value ? $g_db->true : $g_db->false;
+				} else {
+					# Could not find a supported type for this parameter value.
+					# Skip this token, so replacing it with itself.
+					$t_replace = $t_match_param[0];
+				}
+				$p_query = mb_substr( $p_query, 0, $t_utf8_offset )
+					. $t_replace
+					. mb_substr( $p_query, $t_utf8_offset + mb_strlen( $t_match_param[0] ) );
+				$t_lastoffset = $t_match_param[1] + strlen( $t_replace ) + 1;
+			} else {
+				$t_lastoffset = $t_match_param[1] + 1;
+			}
+			$i++;
+		}
+	}
 	return $p_query;
 }

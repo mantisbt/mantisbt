@@ -30,6 +30,7 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses user_pref_api.php
+ * @uses utility_api.php
  */
 
 require_api( 'authentication_api.php' );
@@ -39,12 +40,7 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'user_pref_api.php' );
-
-# Keeps track of whether the external files required for jscalendar to work
-# have already been included in the output sent to the client. jscalendar
-# will not work correctly if it is included multiple times on the same page.
-# @global bool $g_jscalendar_included_already
-$g_calendar_already_imported = false;
+require_api( 'utility_api.php' );
 
 $g_cache_timezone = array();
 
@@ -65,6 +61,19 @@ function date_is_null( $p_date ) {
  */
 function date_get_null() {
 	return 1;
+}
+
+/**
+ * gets Unix timestamp from date string
+ * @param string $p_date A valid date/time string (see http://php.net/manual/en/datetime.formats.php)
+ * @return false|int a timestamp on success, null date when $p_date is blank or false on failure.
+ * @access public
+ */
+function date_strtotime( $p_date ) {
+	if( is_blank( $p_date ) ) {
+		return date_get_null();
+	}
+	return strtotime( $p_date );
 }
 
 /**
@@ -221,10 +230,12 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @param boolean $p_allow_blank     Whether blank/null date is allowed.
  * @param integer $p_year_start      First year to display in drop down.
  * @param integer $p_year_end        Last year to display in drop down.
+ * @param string  $p_input_css       CSS classes to use with input fields
+ * @param string  $p_required        The "required" attribute to add to the field
  * @return void
  * @access public
  */
-function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0 ) {
+function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0, $p_input_css = 'input-sm', $p_required = '' ) {
 	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
 	if( $p_date != 0 ) {
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
@@ -243,28 +254,29 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 
 	foreach( $t_chars as $t_char ) {
 		if( strcmp( $t_char, 'M' ) == 0 ) {
-			echo '<select ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . $p_required . '>';
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
-			echo "</select>\n";
+			echo '</select>' . "\n";
 		}
 		if( strcmp( $t_char, 'm' ) == 0 ) {
-			echo '<select ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . $p_required . '>';
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
 			echo '</select>' . "\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select ' . helper_get_tab_index() . ' name="' . $p_name . '_day"' . $t_disable . '>';
+			echo '<select class="' . $p_input_css . '" ' . helper_get_tab_index() . ' name="' . $p_name . '_day"' . $t_disable . $p_required . '>';
 			echo $t_blank_line;
 			print_day_option_list( $t_date[2] );
 			echo '</select>' . "\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select ' .  helper_get_tab_index() . ' name="' . $p_name . '_year"' . $t_disable . '>';
+			echo '<select class="' . $p_input_css . '" ' .  helper_get_tab_index() . ' name="' . $p_name . '_year"' . $t_disable . $p_required . '>';
 			echo $t_blank_line;
 			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
 			echo '</select>' . "\n";
 		}
 	}
 }
+

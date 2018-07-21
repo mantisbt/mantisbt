@@ -160,16 +160,21 @@ function excel_get_default_filename() {
 }
 
 /**
- * Escapes the specified column value and includes it in a Cell Xml.
+ * Escapes the specified column value and includes it in a Cell Xml as a string.
  * @param string $p_value The value.
  * @return string The Cell Xml.
  */
 function excel_prepare_string( $p_value ) {
-	$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
+	return excel_get_cell( $p_value, 'String' );
+}
 
-	$t_value = str_replace( array ( '&', "\n", '<', '>'), array ( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
-
-	return excel_get_cell( $t_value, $t_type );
+/**
+ * Escapes the specified column value and includes it in a Cell Xml as a number.
+ * @param integer $p_value The value.
+ * @return string The Cell Xml.
+ */
+function excel_prepare_number( $p_value ) {
+	return excel_get_cell( $p_value, 'Number' );
 }
 
 /**
@@ -185,6 +190,12 @@ function excel_prepare_string( $p_value ) {
  * @return string
  */
 function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
+	if ( !is_int( $p_value ) ) {
+		$t_value = str_replace( array( '&', "\n", '<', '>' ), array( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
+	} else {
+		$t_value = $p_value;
+	}
+
 	$t_ret = '<Cell ';
 
 	foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
@@ -193,7 +204,7 @@ function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
 
 	$t_ret .= '>';
 
-	$t_ret .= '<Data ss:Type="' . $p_type . '">' . $p_value . "</Data></Cell>\n";
+	$t_ret .= '<Data ss:Type="' . $p_type . '">' . $t_value . "</Data></Cell>\n";
 
 	return $t_ret;
 }
@@ -219,7 +230,7 @@ function excel_get_columns() {
  * @return string The bug id prefixed with 0s.
  */
 function excel_format_id( BugData $p_bug ) {
-	return excel_prepare_string( bug_format_id( $p_bug->id ) );
+	return excel_prepare_number( bug_format_id( $p_bug->id ) );
 }
 
 /**
@@ -238,15 +249,6 @@ function excel_format_project_id( BugData $p_bug ) {
  */
 function excel_format_reporter_id( BugData $p_bug ) {
 	return excel_prepare_string( user_get_name( $p_bug->reporter_id ) );
-}
-
-/**
- * Gets the formatted number of bug notes.
- * @param BugData $p_bug A bug object.
- * @return string The number of bug notes.
- */
-function excel_format_bugnotes_count( BugData $p_bug ) {
-	return excel_prepare_string( $p_bug->bugnotes_count );
 }
 
 /**
@@ -353,6 +355,21 @@ function excel_format_fixed_in_version( BugData $p_bug ) {
 }
 
 /**
+ * Gets the formatted tags.
+ * @param BugData $p_bug A bug object.
+ * @return string the tags.
+ */
+function excel_format_tags( BugData $p_bug ) {
+	$t_value = '';
+
+	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
+		$t_value = tag_bug_get_all( $p_bug->id );
+	}
+
+	return excel_prepare_string( $t_value );
+}
+
+/**
  * Gets the formatted target version.
  * @param BugData $p_bug A bug object.
  * @return string the target version.
@@ -452,6 +469,16 @@ function excel_format_description( BugData $p_bug ) {
 }
 
 /**
+ * Gets the formatted notes field.
+ * @param BugData $p_bug A bug object.
+ * @return string The formatted notes (multi-line).
+ */
+function excel_format_notes( BugData $p_bug ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+	return excel_prepare_string( $t_notes );
+}
+
+/**
  * Gets the formatted 'steps to reproduce' field.
  * @param BugData $p_bug A bug object.
  * @return string The formatted steps to reproduce (multi-line).
@@ -485,7 +512,13 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 
 	if( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
 		$t_def = custom_field_get_definition( $t_field_id );
-		return excel_prepare_string( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
+		$t_value = string_custom_field_value( $t_def, $t_field_id, $p_issue_id );
+
+		if ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC && is_numeric( $t_value ) ) {
+			return excel_prepare_number( $t_value );
+		}
+
+		return excel_prepare_string( $t_value );
 	}
 
 	# field is not linked to project
@@ -502,14 +535,13 @@ function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
 
 	if( !isset( $t_plugin_columns[$p_column] ) ) {
-		return excel_prepare_string( '' );
+		$t_value = '';
 	} else {
 		$t_column_object = $t_plugin_columns[$p_column];
-		ob_start();
-		$t_column_object->display( $p_bug, COLUMNS_TARGET_EXCEL_PAGE );
-		$t_value = ob_get_clean();
-		return excel_prepare_string( $t_value );
+		$t_value = $t_column_object->value( $p_bug );
 	}
+
+	return excel_prepare_string( $t_value );
 }
 
 /**
@@ -518,7 +550,11 @@ function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {
  * @return string The formatted due date.
  */
 function excel_format_due_date( BugData $p_bug ) {
-	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
+	$t_value = '';
+	if ( !date_is_null( $p_bug->due_date ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ) {
+		$t_value = date( config_get( 'short_date_format' ), $p_bug->due_date );
+	}
+	return excel_prepare_string( $t_value );
 }
 
 /**
@@ -529,6 +565,38 @@ function excel_format_due_date( BugData $p_bug ) {
  */
 function excel_format_sponsorship_total( BugData $p_bug ) {
 	return excel_prepare_string( $p_bug->sponsorship_total );
+}
+
+/**
+ * Gets the attachment count for an issue
+ * @param BugData $p_bug A bug object.
+ * @return string
+ * @access public
+ */
+function excel_format_attachment_count( BugData $p_bug ) {
+	# Check for attachments
+	$t_attachment_count = 0;
+	if( file_can_view_bug_attachments( $p_bug->id, null ) ) {
+		$t_attachment_count = file_bug_attachment_count( $p_bug->id );
+	}
+	return excel_prepare_number( $t_attachment_count );
+}
+
+/**
+ * Gets the bug note count for an issue
+ * @param BugData $p_bug A bug object.
+ * @return string
+ * @access public
+ */
+function excel_format_bugnotes_count( BugData $p_bug ) {
+	# grab the bugnote count
+	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
+	if( null !== $t_bugnote_stats ) {
+		$t_bugnote_count = $t_bugnote_stats['count'];
+	} else {
+		$t_bugnote_count = 0;
+	}
+	return excel_prepare_number( $t_bugnote_count );
 }
 
 /**

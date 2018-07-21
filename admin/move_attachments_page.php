@@ -28,11 +28,14 @@ require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 # Page header, menu
-html_page_top( 'MantisBT Administration - Moving Attachments' );
-echo '<div align="center"><p>';
-print_bracket_link( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' );
-echo '</p></div>';
+layout_page_header( 'MantisBT Administration - Moving Attachments' );
 
+layout_admin_page_begin();
+?>
+
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<?php
 
 # File type should be 'bug' (default) or 'project'
 $f_file_type = gpc_get( 'type', 'bug' );
@@ -95,29 +98,40 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 # Display table of projects for user selection
 ?>
+<div>
+<p>
+	<?php print_link_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
+</p>
+</div>
 
-<div align="center">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-paperclip"></i>
+		<?php echo "$t_type to move"; ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
 
-<form id="move_attachments_project_select" method="post" action="move_attachments.php">
-<table class="width50">
-	<tr>
-		<td class="form-title" colspan="2">
-			<?php echo $t_type . ' to move'; ?>
-		</td>
-	</tr>
-
-	<tr class="row-category">
-		<th>Project name</th>
-		<th width="18%">File Path</th>
-		<th width="18%">Disk</th>
-		<th width="18%">Database</th>
-		<th width="18%">Attachments</th>
-		<th width="18%">Storage</th>
-		<th width="7%">To Disk</th>
-		<th width="7%">To Database</th>
-	</tr>
-
+<form name="move_attachments_project_select" method="post" action="move_attachments.php">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Project name</th>
+			<th width="28%">File Path</th>
+			<th width="5%">Disk</th>
+			<th width="5%">Database</th>
+			<th width="5%">Attachments</th>
+			<th width="5%">Storage</th>
+			<th width="7%">To Disk</th>
+			<th width="7%">To Database</th>
+		</tr>
+	</thead>
+	
 <?php
+	echo '<tbody>';
 	# Printing rows of projects with attachments to move
 	foreach( $t_projects as $t_id => $t_project ) {
 		$t_db_count = 0;
@@ -140,12 +154,12 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		$t_file_path = $t_project['file_path'];
 		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 		}
 
 		echo '<tr>';
 		echo '<td>' . $t_project['name'] . '</td>';
-		echo '<td class="center">' . $t_file_path . '</td>';
+		echo '<td class="left">' . $t_file_path . '</td>';
 		echo '<td class="center">' . $t_disk_count . '</td>';
 		echo '<td class="center">' . $t_db_count . '</td>';
 		echo '<td class="center">' . ( $t_db_count + $t_disk_count ) . '</td>';
@@ -153,7 +167,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 		if( $t_upload_method == DISK ) {
 			if ( !is_blank( $t_file_path ) && $t_db_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="disk:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="disk:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
@@ -161,27 +175,28 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		} else {
 			echo '<td class="center">-</td>';
 			if ( $t_disk_count > 0 ) {
-				echo '<td class="center"><input type="radio" name="to_move" value="db:' . $t_id . '" /></td>';
+				echo '<td class="center"><input type="checkbox" name="to_move[]" value="db:' . $t_id . '" /></td>';
 			} else {
 				echo '<td class="center">-</td>';
 			}
 		}
 		echo "</tr>\n";
 	}
-
+	echo '</tbody>';
 	echo form_security_field( 'move_attachments_project_select' );
 ?>
-
+	
 </table>
-<span class="center">
-	<br />
-	<input name="type" type="hidden" value="<?php echo $f_file_type ?>" />
-	<input type="submit" class="button" value="Move Attachments" />
-</span>
-
+<div class="widget-toolbox padding-8 clearfix">
+	<input name="type" type="hidden" value="<?php echo string_attribute( $f_file_type); ?>" />
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="Move Attachments" />
+</div>
+</div>
 </form>
+</div>
+</div>
+</div>
 </div>
 
 <?php
-
-html_page_bottom();
+layout_admin_page_end();

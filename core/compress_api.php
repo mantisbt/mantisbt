@@ -51,30 +51,32 @@ function compress_handler_is_enabled() {
 		return false;
 	}
 
-	# Do not use config_get here so only dependency is on consant.inc.php in this module
+	# Do not use config_get() here so only dependency is on constant_inc.php in this module
 	# We only actively compress html if global configuration compress_html is set.
-	if( ON == $g_compress_html ) {
-		# both compression handlers require zlib module to be loaded
-		if( !extension_loaded( 'zlib' ) ) {
-			return false;
-		}
-
-		if( ini_get( 'zlib.output_compression' ) ) {
-			# zlib output compression is already enabled - we can't load the gzip output handler
-			return false;
-		}
-
-		# It's possible to set zlib.output_compression via ini_set.
-		# This method is preferred over ob_gzhandler
-		if( ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
-			ini_set( 'zlib.output_compression', true );
-			# do it transparently
-			return false;
-		}
-
-		# if php.ini does not already use ob_gzhandler by default, return true.
-		return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
+	if( OFF == $g_compress_html ) {
+		return false;
 	}
+
+	# both compression handlers require zlib module to be loaded
+	if( !extension_loaded( 'zlib' ) ) {
+		return false;
+	}
+
+	if( ini_get( 'zlib.output_compression' ) ) {
+		# zlib output compression is already enabled - we can't load the gzip output handler
+		return false;
+	}
+
+	# It's possible to set zlib.output_compression via ini_set.
+	# This method is preferred over ob_gzhandler
+	if( ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) ) {
+		ini_set( 'zlib.output_compression', true );
+		# do it transparently
+		return false;
+	}
+
+	# if php.ini does not already use ob_gzhandler by default, return true.
+	return ( 'ob_gzhandler' != ini_get( 'output_handler' ) );
 }
 
 /**
@@ -83,6 +85,13 @@ function compress_handler_is_enabled() {
  * @access public
  */
 function compress_start_handler() {
+	# Do not start compress handler if we got any output so far, as this
+	# denotes that an error has occurred. Enabling compression in this case
+	# will likely cause a Content Encoding Error when displaying the page.
+	if( ob_get_length() ) {
+		return;
+	}
+
 	if( compress_handler_is_enabled() ) {
 		# Before doing anything else, start output buffering so we don't prevent
 		# headers from being sent if there's a blank line in an included file

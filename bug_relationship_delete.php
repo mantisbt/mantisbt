@@ -15,12 +15,6 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * To delete a relationship we need to ensure that:
- * - User not anomymous
- * - Source bug exists and is not in read-only state (peer bug could not exist...)
- * - User that update the source bug and at least view the destination bug
- * - Relationship must exist
- *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -29,98 +23,37 @@
  *
  * @uses core.php
  * @uses access_api.php
- * @uses bug_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses email_api.php
- * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses helper_api.php
- * @uses history_api.php
  * @uses lang_api.php
  * @uses print_api.php
- * @uses relationship_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'email_api.php' );
-require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
-require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
-require_api( 'relationship_api.php' );
 
 form_security_validate( 'bug_relationship_delete' );
 
 $f_rel_id = gpc_get_int( 'rel_id' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 
-$t_bug = bug_get( $f_bug_id, true );
-if( $t_bug->project_id != helper_get_current_project() ) {
-	# in case the current project is not the same project of the bug we are viewing...
-	# ... override the current project. This to avoid problems with categories and handlers lists etc.
-	$g_project_override = $t_bug->project_id;
-}
-
-# user has access to update the bug...
-access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-
-# bug is not read-only...
-if( bug_is_readonly( $f_bug_id ) ) {
-	error_parameters( $f_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
-}
-
-# retrieve the destination bug of the relationship
-$t_dest_bug_id = relationship_get_linked_bug_id( $f_rel_id, $f_bug_id );
-
-$t_dest_bug = bug_get( $t_dest_bug_id, true );
-
-# user can access to the related bug at least as viewer, if it's exist...
-if( bug_exists( $t_dest_bug_id ) ) {
-	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_dest_bug->project_id ), $t_dest_bug_id ) ) {
-		error_parameters( $t_dest_bug_id );
-		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
-	}
-}
+$t_data = array(
+	'query' => array(
+		'issue_id' => $f_bug_id,
+		'relationship_id' => $f_rel_id
+	)
+);
 
 helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete_relationship_button' ) );
 
-$t_bug_relationship_data = relationship_get( $f_rel_id );
-$t_rel_type = $t_bug_relationship_data->type;
-
-# delete relationship from the DB
-relationship_delete( $f_rel_id );
-
-# update bug last updated (just for the src bug)
-bug_update_date( $f_bug_id );
-
-# set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
-if( $f_bug_id == $t_bug_relationship_data->src_bug_id ) {
-	$t_bug_rel_type = $t_rel_type;
-	$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-} else {
-	$t_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
-	$t_dest_bug_rel_type = $t_rel_type;
-}
-
-# send email and update the history for the src issue
-history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, $t_bug_rel_type, $t_dest_bug_id );
-email_relationship_deleted( $f_bug_id, $t_dest_bug_id, $t_bug_rel_type );
-
-if( bug_exists( $t_dest_bug_id ) ) {
-	# send email and update the history for the dest issue
-	history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, $t_dest_bug_rel_type, $f_bug_id );
-	email_relationship_deleted( $t_dest_bug_id, $f_bug_id, $t_dest_bug_rel_type );
-}
+$t_command = new IssueRelationshipDeleteCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'bug_relationship_delete' );
 

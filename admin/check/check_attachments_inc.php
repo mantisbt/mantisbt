@@ -58,13 +58,17 @@ check_print_test_row(
 
 check_print_info_row(
 	'Maximum file upload size (per file)',
-	config_get_global( 'max_file_size' ) . ' bytes'
+	check_format_number( config_get_global( 'max_file_size' ) )
 );
 
 check_print_test_row(
 	'max_file_size MantisBT option is less than or equal to the upload_max_filesize directive in php.ini',
 	config_get_global( 'max_file_size' ) <= ini_get_number( 'upload_max_filesize' ),
-	array( false => 'max_file_size is currently ' . htmlentities( config_get_global( 'max_file_size' ) ) . ' bytes which is greater than the limit of ' . htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes imposed by the php.ini directive upload_max_filesize.' )
+	array( false => 'max_file_size is currently '
+		. check_format_number( config_get_global( 'max_file_size' ) )
+		. ' which is greater than the limit of '
+		. check_format_number( ini_get_number( 'upload_max_filesize' ) )
+		. ' imposed by the php.ini directive upload_max_filesize.' )
 );
 
 $t_use_xsendfile = config_get_global( 'file_download_xsendfile_enabled' );
@@ -86,38 +90,4 @@ if( $t_use_xsendfile ) {
 			'Alternative header name to use for X-Sendfile-like functionality',
 			$t_xsendfile_header_name );
 	}
-}
-
-$t_finfo_exists = class_exists( 'finfo' );
-check_print_test_warn_row(
-	'Fileinfo extension is available for determining file MIME types',
-	$t_finfo_exists,
-	array( false => 'Web clients may struggle to download files without knowing the MIME type of each attachment.' )
-);
-
-if( $t_finfo_exists ) {
-	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
-	if( $t_fileinfo_magic_db_file ) {
-		check_print_info_row(
-			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
-			config_get_global( 'fileinfo_magic_db_file' ) );
-		check_print_test_row(
-			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
-			file_exists( $t_fileinfo_magic_db_file ) );
-		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	}
-	check_print_test_row(
-		'Fileinfo extension can find and load a valid magic.db file',
-		$t_finfo !== false,
-		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
-	);
-}
-
-$t_file_type_icons = config_get( 'file_type_icons' );
-foreach( $t_file_type_icons as $t_ext => $t_filename ) {
-	$t_file_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
-
-	check_print_test_row( "Testing icon for extension '$t_ext'...", file_exists( $t_file_path ), array( false => 'File not found: ' . $t_file_path ) );
 }

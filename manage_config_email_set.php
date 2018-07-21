@@ -63,28 +63,17 @@ $f_flags			= gpc_get( 'flag', array() );
 $f_thresholds		= gpc_get( 'flag_threshold', array() );
 $f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
-html_page_top( lang_get( 'manage_email_config' ), $t_redirect_url );
+layout_page_header( lang_get( 'manage_email_config' ), $t_redirect_url );
+
+layout_page_begin();
 
 $t_access = current_user_get_access_level();
 $t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
 # build a list of the possible actions and flags
-$t_valid_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
-if( config_get( 'enable_sponsorship' ) == ON ) {
-	$t_valid_actions[] = 'sponsor';
-}
-
-$t_valid_actions[] = 'relation';
-
-$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-ksort( $t_statuses );
-reset( $t_statuses );
-
-foreach( $t_statuses as $t_status => $t_label ) {
-	$t_valid_actions[] = $t_label;
-}
-$t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes' );
+$t_valid_actions = email_get_actions();
+$t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes', 'category' );
 
 # initialize the thresholds
 foreach( $t_valid_actions as $t_action ) {
@@ -132,6 +121,12 @@ if( $t_can_change_defaults ) {
 			$t_default_min = $t_thresholds_min[$t_action];
 		}
 	}
+
+	# We may end up with min = 100, max = 0 - make it 100, 100.
+	if( $t_default_max < $t_default_min ) {
+		$t_default_max = $t_default_min;
+	}
+
 	$t_default_flags['threshold_min'] = $t_default_min;
 	$t_default_flags['threshold_max'] = $t_default_max;
 
@@ -178,4 +173,4 @@ form_security_purge( 'manage_config_email_set' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

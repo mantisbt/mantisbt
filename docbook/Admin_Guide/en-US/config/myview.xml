@@ -13,13 +13,17 @@
 					to be shown. A box that is not to be shown can have its value set
 					to 0. The default is:
 					<programlisting>
-$g_my_view_boxes = array( 'assigned' =&gt; '1',
-                          'unassigned' =&gt; '2',
-                          'reported' =&gt; '3',
-                          'resolved' =&gt; '4',
-                          'recent_mod' =&gt; '5',
-                          'monitored' =&gt; '6'
-                   );
+$g_my_view_boxes = array(
+	'assigned'      => '1',
+	'unassigned'    => '2',
+	'reported'      => '3',
+	'resolved'      => '4',
+	'recent_mod'    => '5',
+	'monitored'     => '6',
+	'feedback'      => '0',
+	'verify'        => '0',
+	'my_comments'   => '0'
+);
 </programlisting>
 					If you want to change the definition, copy the default value and
 					apply the changes.

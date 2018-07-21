@@ -37,9 +37,10 @@ class ExamplePlugin extends MantisPlugin {
         $this->page = '';           # Default plugin page
 
         $this->version = '1.0';     # Plugin version string
-        $this->requires = array(    # Plugin dependencies, array of basename => version pairs
-            'MantisCore' => '1.2.0, &lt;= 1.2.0',  #   Should always depend on an appropriate version of MantisBT
-            );
+        $this->requires = array(    # Plugin dependencies
+            'MantisCore' => '2.0',  # Should always depend on an appropriate
+                                    # version of MantisBT
+        );
 
         $this->author = '';         # Author/team name
         $this->contact = '';        # Author/team e-mail address
@@ -106,7 +107,8 @@ $s_plugin_Example_reset = "Reset Value";
 		<programlisting><filename>Example/pages/config_page.php</filename>
 &lt;?php
 
-html_page_top( plugin_lang_get( 'configuration' ) );
+layout_page_header( plugin_lang_get( 'configuration' ) );
+layout_page_begin();
 $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 ?&gt;
@@ -140,7 +142,7 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 &lt;?php
 
-html_page_bottom();
+layout_page_end();
 		</programlisting>
 	</section>
 

@@ -58,7 +58,8 @@ access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 $t_days_old = (int)7 * SECONDS_PER_DAY;
 
 $t_query = 'SELECT id, access_level FROM {user}
-		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' . db_helper_compare_days( 0, 'date_created', '> ' . $t_days_old );
+		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' .
+		'( protected = 0 ) AND ' . db_helper_compare_time( db_param(), '>', 'date_created', $t_days_old );
 $t_result = db_query( $t_query, array( db_now() ) );
 
 if( !$t_result ) {

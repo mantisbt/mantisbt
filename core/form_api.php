@@ -119,21 +119,22 @@ function form_security_field( $p_form_name, $p_security_token = null ) {
 /**
  * Get a URL parameter containing a generated form security token.
  * @param string $p_form_name Form name.
- * @return string Hidden form element to output
+ * @param string $p_security_token Optional security token, previously generated for the same form.
+ * @return string URL parameter containing security token
  */
-function form_security_param( $p_form_name ) {
+function form_security_param( $p_form_name, $p_security_token = null ) {
 	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return '';
 	}
 
-	$t_string = form_security_token( $p_form_name );
+	$t_string = $p_security_token === null ? form_security_token( $p_form_name ) : $p_security_token;
 
 	# Create the GET parameter to be used in a URL for a secure link
-	$t_form_token = $p_form_name . '_token';
-	$t_param = '&%s=%s';
-	$t_param = sprintf( $t_param, $t_form_token, $t_string );
-
-	return $t_param;
+	return sprintf(
+		'&%s=%s',
+		$p_form_name . '_token',
+		$t_string
+	);
 }
 
 /**
@@ -168,7 +169,7 @@ function form_security_validate( $p_form_name ) {
 	}
 
 	# Get the date claimed by the token
-	$t_date = utf8_substr( $t_input, 0, 8 );
+	$t_date = mb_substr( $t_input, 0, 8 );
 
 	# Check if the token exists
 	if( isset( $t_tokens[$p_form_name][$t_date][$t_input] ) ) {
@@ -203,7 +204,7 @@ function form_security_purge( $p_form_name ) {
 	$t_input = gpc_get_string( $t_form_token, '' );
 
 	# Get the date claimed by the token
-	$t_date = utf8_substr( $t_input, 0, 8 );
+	$t_date = mb_substr( $t_input, 0, 8 );
 
 	# Generate a date string of three days ago
 	$t_purge_date = date( 'Ymd', time() - ( 3 * 24 * 60 * 60 ) );

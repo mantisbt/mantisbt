@@ -38,7 +38,7 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	 * @param boolean $p_monitor   Whether issue was being monitored or unmonitored.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_monitor ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->monitor = $p_monitor;
@@ -51,8 +51,8 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	public function html() {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
 
-		$t_html = $this->html_start();
-		$t_html .= '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html = $this->html_start( 'fa-eye' );
+		$t_html .= '<div class="action">' . sprintf( $t_string, prepare_user_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		$t_html .= $this->html_end();
 
 		return $t_html;

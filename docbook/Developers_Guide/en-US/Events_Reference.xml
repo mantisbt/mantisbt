@@ -83,6 +83,19 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.system.coreheaders">
+			<title>EVENT_CORE_HEADERS (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by the MantisBT bootstrap process just before emitting the
+					headers.  This enables plugins to emit their own headers or use API that enables
+					tweaking values of headers emitted by core.  An example, of headers that can be
+					tweaked is Content-Security-Policy header which can be tweaked using http_csp_*() APIs.
+				</para>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.system.coreready">
 			<title>EVENT_CORE_READY (Execute)</title>
 
@@ -101,6 +114,29 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.system.rest_api_routes">
+			<title>EVENT_REST_API_ROUTES (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event is triggered by MantisBT to enable plugins to register their own routes
+					to be accessible via the REST API.  All APIs belonging to a plugin named 'Example',
+					MUST live under 'https://.../api/rest/plugins/Example/'.  The route registration is done
+					using the Slim Framework app instance that is passed as a parameter.  A route group
+					should be used to include all routes for the plugin.  The name of the route group should
+					be retrieved via calling plugin_route_group().  See MantisGraph core plugin for an example
+					and <ulink url="https://www.slimframework.com/docs/objects/router.html">Slim Framework
+					router documentation</ulink>.
+				</para>
+
+				<para>
+					Before calling into the plugin routes, the user would be already authenticated and
+					authorized for API access in general.  However, it is the responsibility of the
+					plugin to do its own plugin specific authorization.
+				</para>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.system.log">
 			<title>EVENT_LOG (Execute)</title>
 
@@ -113,9 +149,33 @@
 					This event receives the logging string as a parameter.
 				</para>
 
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: the logging string</para></listitem>
+				</itemizedlist>
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.auth.flags">
+			<title>EVENT_AUTH_USER_FLAGS (First)</title>
+
+			<blockquote>
+				<para>
+					An event that enables plugins to return a set of flags that control the authentication
+					behaviors for the user who is logging in or logged in.  In some cases, the user will be
+					in the system, but there will be cases where the username provided by the user doesn't
+					exist.  In case the user doesn't exist, it is up to the authentication plugin whether
+					to fail the login, validate credentials then fail, or validate credentials then auto-provision
+					the user based on information the plugin is aware of (e.g. IDP or some db of accounts).
+					If no plugin is registered for events, then defaults are used.  If plugin sets a subset
+					of the options, then the default will be used for the rest.
+				</para>
+				<para>
+					Checkout <ulink url="https://github.com/mantisbt-plugins/SampleAuth">SampleAuth plugin</ulink>
+					for more details.
+				</para>
+			</blockquote>
+		</blockquote>
 	</section>
 
 	<xi:include href="Events_Reference_Output.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

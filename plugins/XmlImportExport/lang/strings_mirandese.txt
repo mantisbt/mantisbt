@@ -1,0 +1,66 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Mirandese (Mirandés)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Athena in Wonderland
+ * @author MokaAkashiyaPT
+ */
+
+$s_plugin_XmlImportExport_title = 'Amportar/sportar ancargos';
+$s_plugin_XmlImportExport_description = 'Acrecenta al MantisBT funcionalidades de amportaçon i sportaçon baseadas an XML.';
+$s_plugin_XmlImportExport_import = 'Amportar ancargos';
+$s_plugin_XmlImportExport_export = 'Sportar an XML';
+$s_plugin_XmlImportExport_config_title = 'Cunfiguraçon de nibles de cunsulta de amportaçon/sportaçon an XML';
+$s_plugin_XmlImportExport_import_threshold = 'Amportar ancargos';
+$s_plugin_XmlImportExport_export_threshold = 'Sportar ancargos';
+$s_plugin_XmlImportExport_action_update = 'Atualizar';
+$s_plugin_XmlImportExport_importing_in_project = 'A amportar ancargos pa l porjeto: \'%s\'';
+$s_plugin_XmlImportExport_import_options = 'Oupçones de amportaçon';
+$s_plugin_XmlImportExport_cross_references = 'Refréncias cruzadas';
+$s_plugin_XmlImportExport_default_strategy = 'Stratégia de cumberson por oumisson:';
+$s_plugin_XmlImportExport_renumber = 'Renumarar';
+$s_plugin_XmlImportExport_renumber_desc = 'Tentar cumberter refréncias pa la nuoba numaraçon';
+$s_plugin_XmlImportExport_link = 'Lhigaçon';
+$s_plugin_XmlImportExport_link_desc = 'Cumberter nua lhigaçon al eilemiento oureginal';
+$s_plugin_XmlImportExport_disable = 'Zatibar';
+$s_plugin_XmlImportExport_disable_desc = 'Zatibar la lhigaçon';
+$s_plugin_XmlImportExport_fallback = 'Stratégia de recurso (quando "Renumarar" nó ye aplicable):';
+$s_plugin_XmlImportExport_fallback_category = 'Catadorie de recurso:';
+$s_plugin_XmlImportExport_keep_same_category = 'Tentar mantener la catadorie';
+$s_plugin_XmlImportExport_error_no_xml = 'nó fui possible ancuontrar las stensones xmlreader i xmlwriter';

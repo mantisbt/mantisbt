@@ -44,6 +44,7 @@ check_print_test_row(
 	'PHP version ' . phpversion() . ' is currently installed on this server.'
 );
 
+# $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'date',
 	'hash',
@@ -58,6 +59,43 @@ foreach( $t_extensions_required as $t_extension ) {
 		$t_extension . ' PHP extension is available',
 		extension_loaded( $t_extension ),
 		array( false => 'MantisBT requires the ' . $t_extension . ' extension to either be compiled into PHP or loaded as an extension.' )
+	);
+}
+
+$t_fileinfo_loaded = extension_loaded( 'fileinfo' );
+
+if( config_get_global( 'allow_file_upload' ) ) {
+	check_print_test_row(
+		'Fileinfo PHP extension is available to support file uploads',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+} else {
+	# most of the plugins need this extensions as they use functions plugin_file /  plugin_file_include
+	check_print_test_warn_row(
+		'Fileinfo PHP extension is available to support plugins',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+}
+
+if ( $t_fileinfo_loaded ) {
+	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
+	if( $t_fileinfo_magic_db_file ) {
+		check_print_info_row(
+			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
+			config_get_global( 'fileinfo_magic_db_file' ) );
+		check_print_test_row(
+			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
+			file_exists( $t_fileinfo_magic_db_file ) );
+		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	}
+	check_print_test_row(
+		'Fileinfo extension can find and load a valid magic.db file',
+		$t_finfo !== false,
+		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
 	);
 }
 
@@ -87,12 +125,6 @@ check_print_test_row(
 	'magic_quotes_runtime php.ini directive is disabled',
 	!( function_exists( 'get_magic_quotes_runtime' ) && @get_magic_quotes_runtime() ),
 	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
-);
-
-check_print_test_row(
-	'register_globals php.ini directive is disabled',
-	!ini_get_bool( 'register_globals' ),
-	array( false => 'PHP\'s register globals feature is <a href="http://php.net/manual/en/security.globals.php">deprecated in PHP 5.3.0</a> and should not be used.' )
 );
 
 check_print_test_warn_row(
@@ -133,12 +165,12 @@ check_print_test_warn_row(
 
 check_print_info_row(
 	'php.ini directive: memory_limit',
-	htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'memory_limit' ) )
 );
 
 check_print_info_row(
 	'php.ini directive: post_max_size',
-	htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
 check_print_test_row(
@@ -154,7 +186,7 @@ check_print_info_row(
 
 check_print_info_row(
 	'php.ini directive: upload_max_filesize',
-	htmlentities( ini_get_number( 'upload_max_filesize' ) ) . ' bytes'
+	check_format_number( ini_get_number( 'upload_max_filesize' ) )
 );
 
 check_print_test_row(
@@ -196,26 +228,12 @@ $t_vars = array(
 	'date.timezone'
 );
 
-while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
+foreach( $t_vars as $t_var ) {
 	$t_value = ini_get( $t_var );
 	if( $t_value != '' ) {
 		check_print_info_row( 'php.ini directive: ' . $t_var, htmlentities( $t_value ) );
 	}
 }
-
-if( is_windows_server() ) {
-	check_print_test_warn_row(
-		'There is a performance issue on windows for PHP versions &lt; 5.4 in openssl_random_pseudo_bytes',
-		version_compare( phpversion(), '5.4.0', '>=' ),
-		array( false => 'For best performance upgrade to PHP > 5.4.0.' )
-	);
-}
-
-check_print_test_warn_row(
-	'Check for php bug 61443 - php 5.4.0-5.4.3, trying to use compression with no output handler set',
-	!(ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) &&
-	version_compare( PHP_VERSION, '5.4.0', '>=' ) && version_compare( PHP_VERSION, '5.4.4', '<' ) ),
-	array( false=> 'you should consider setting a php output handler, ensuring compression is disabled or upgrading to at least php 5.4.4' ) );
 
 check_print_test_warn_row(
 	'webserver: check SCRIPT_NAME is returned to PHP by web server',

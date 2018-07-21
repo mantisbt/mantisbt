@@ -25,8 +25,22 @@
  * @uses config_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
+$t_allow_caching = isset( $_GET['cache_key'] );
+if( $t_allow_caching ) {
+	# Suppress default headers. This allows caching as defined in server configuration
+	$g_bypass_headers = true;
+}
+
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
+
+if( $t_allow_caching ) {
+	# if standard headers were bypassed, add security headers, at least
+	http_security_headers();
+}
 
 /**
  * Send correct MIME Content-Type header for css content.
@@ -58,8 +72,15 @@ header( 'X-Content-Type-Options: nosniff' );
 $t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
 	? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
 	: basename( __FILE__ );
+
+if( $t_referer_page == auth_login_page() ) {
+	# custom status colors not needed.
+	exit;
+}
+
 switch( $t_referer_page ) {
-	case 'login_page.php':
+	case AUTH_PAGE_USERNAME:
+	case AUTH_PAGE_CREDENTIAL:
 	case 'signup_page.php':
 	case 'lost_pwd_page.php':
 	case 'account_update.php':
@@ -71,15 +92,13 @@ switch( $t_referer_page ) {
 $t_status_string = config_get( 'status_enum_string' );
 $t_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_status_string );
 $t_colors = config_get( 'status_colors' );
-$t_color_count = count( $t_colors );
-$t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
-$t_status_percents = auth_is_user_authenticated() ? get_percentage_by_status() : array();
 
-foreach( $t_statuses AS $t_id=>$t_label ) {
+foreach( $t_statuses as $t_id => $t_label ) {
+	$t_css_class = html_get_status_css_class( $t_id );
+
+	# Status color class
 	if( array_key_exists( $t_label, $t_colors ) ) {
-		echo ".$t_label-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
-	}
-	if( array_key_exists( $t_id, $t_status_percents ) ) {
-		echo ".$t_label-percentage { width: {$t_status_percents[$t_id]}%; }\n";
+		echo '.' . $t_css_class
+			. " { color: {$t_colors[$t_label]}; background-color: {$t_colors[$t_label]}; }\n";
 	}
 }

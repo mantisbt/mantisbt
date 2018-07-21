@@ -78,23 +78,83 @@ function print_version_header( array $p_version_row ) {
 	$t_version_name = $p_version_row['version'];
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title = '<a href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
-	if( config_get( 'show_roadmap_dates' ) ) {
-		$t_version_timestamp = $p_version_row['date_order'];
-
-		$t_scheduled_release_date = ' (' . lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) ) . ')';
+	$t_version_timestamp = $p_version_row['date_order'];
+	if( config_get( 'show_roadmap_dates' ) && !date_is_null( $t_version_timestamp ) ) {
+		$t_scheduled_release_date = lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) );
 	} else {
-		$t_scheduled_release_date = '';
+		$t_scheduled_release_date = null;
 	}
 
-	echo '<tt>';
-	echo '<br />', $t_release_title, $t_scheduled_release_date, lang_get( 'word_separator' );
-	print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) );
-	echo '<br />';
+	$t_block_id = 'roadmap_' . $t_version_id;
+	$t_collapse_block = is_collapsed( $t_block_id );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-	$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_scheduled_release_date;
-	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
+	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '<h4 class="widget-title lighter">';
+	echo '<i class="ace-icon fa fa-road"></i>';
+	echo $t_release_title, lang_get( 'word_separator' );
+	echo '</h4>';
+	echo '<div class="widget-toolbar">';
+	echo '<a data-action="collapse" href="#">';
+	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	echo '</a>';
+	echo '</div>';
+	echo '</div>';
+
+	echo '<div class="widget-body">';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	if( $t_scheduled_release_date ) {
+		echo '<div class="pull-left"><i class="fa fa-calendar-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+	}
+	echo '<div class="btn-toolbar pull-right">';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
+		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	echo '</a>';
+	echo '</div>';
+
+	echo '</div>';
+	echo '<div class="widget-main">';
+}
+
+/**
+ * Print footer for the specified project version.
+ * @param array $p_version_row array contain project version data
+ * @param int $p_issues_resolved number of issues in resolved state
+ * @param int $p_issues_planned number of issues planned for this version
+ * @param int $p_progress percentage progress
+ * @return void
+ */
+function print_version_footer( $p_version_row, $p_issues_resolved, $p_issues_planned, $p_progress ) {
+	$t_project_id   = $p_version_row['project_id'];
+	$t_version_id   = $p_version_row['id'];
+	$t_version_name = version_get_field( $t_version_id, 'version' );
+
+	echo '</div>';
+
+	if( $p_issues_planned > 0 ) {
+		echo '<div class="widget-toolbox padding-8 clearfix">';
+		echo sprintf( lang_get( 'resolved_progress' ), $p_issues_resolved, $p_issues_planned, $p_progress );
+		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
+		echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+			 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
+			 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+		echo lang_get( 'view_bugs_link' );
+		echo '</a>';
+		echo '</div>';
+	}
+
+	echo '</div></div>';
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -103,7 +163,9 @@ function print_version_header( array $p_version_row ) {
  * @return void
  */
 function print_project_header_roadmap( $p_project_name ) {
-	echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
+	echo '<div class="page-header">';
+	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
+	echo '</div>';
 }
 
 $t_issues_found = false;
@@ -170,7 +232,13 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 $t_project_id_for_access_check = $t_project_id;
 
-html_page_top( lang_get( 'roadmap' ) );
+layout_page_header( lang_get( 'roadmap' ) );
+
+layout_page_begin( __FILE__ );
+
+echo '<div class="col-md-12 col-xs-12">';
+
+$t_project_index = 0;
 
 version_cache_array_rows( $t_project_ids );
 category_cache_array_rows_by_project( $t_project_ids );
@@ -286,13 +354,15 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo string_display( '<br />' .$t_description . '<br />' );
+				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
 			}
 
-			# show progress bar
-			echo '<div class="progress400">';
-			echo '  <span class="bar" style="width: ' . $t_progress . '%;">' . $t_progress . '%</span>';
-			echo '</div>';
+			echo '<div class="space-4"></div>';
+			echo '<div class="col-md-7 col-xs-12 no-padding">';
+			echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
+			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
+			echo '</div></div>';
+			echo '<div class="clearfix"></div>';
 		}
 
 		$t_issue_set_ids = array();
@@ -351,10 +421,8 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issues_found = true;
 		}
 
-		if( $t_issues_planned > 0 ) {
-			echo '<br />';
-			echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_progress );
-			echo '<br /></tt>';
+		if( $t_version_header_printed ) {
+			print_version_footer( $t_version_row,  $t_issues_resolved, $t_issues_planned, $t_progress);
 		}
 	}
 }
@@ -366,7 +434,8 @@ if( !$t_issues_found ) {
 		$t_string = 'roadmap_empty';
 	}
 
-	echo '<p>' . lang_get( $t_string ) . '</p>';
+	echo '<br />';
+	echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

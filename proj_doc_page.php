@@ -104,27 +104,32 @@ $t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title
 			ORDER BY pt.name ASC, pft.title ASC';
 $t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
-html_page_top( lang_get( 'docs_link' ) );
+layout_page_header( lang_get( 'docs_link' ) );
+
+layout_page_begin( 'proj_doc_page.php' );
+
+print_doc_menu( 'proj_doc_page.php' );
 ?>
-<br />
-<div class="table-container">
-<table>
-<thead>
 
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-file"></i>
+		<?php echo lang_get('project_documentation_title') ?>
+	</h4>
+</div>
+
+<div class="widget-body">
+<div class="widget-main">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
 <tr>
-	<td class="form-title">
-		<?php echo lang_get( 'project_documentation_title' ) ?>
-	</td>
-	<td class="right">
-		<?php print_doc_menu( 'proj_doc_page.php' ) ?>
-	</td>
-</tr>
-
-<tr class="row-category2">
 	<th><?php echo lang_get( 'filename' ); ?></th>
 	<th><?php echo lang_get( 'description' ); ?></th>
 </tr>
-</thead>
 
 <?php
 $i = 0;
@@ -139,9 +144,9 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 <tr>
 	<td>
-		<span class="floatleft">
+		<span class="pull-left">
 <?php
-	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+	$t_href = '<a href="file_download.php?file_id=' . $v_id . '&amp;type=doc">';
 	echo $t_href;
 	print_file_icon( $v_filename );
 	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
@@ -150,22 +155,21 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			<span class="small">
 <?php
 	if( $v_project_id == ALL_PROJECTS ) {
-		echo lang_get( 'all_projects' ) . '<br/>';
+		echo lang_get( 'all_projects' ) . '<br />';
 	} else if( $v_project_id != $f_project_id ) {
 		$t_project_name = project_get_name( $v_project_id );
-		echo $t_project_name . '<br/>';
+		echo $t_project_name . '<br />';
 	}
 	echo '(' . $v_date_added . ')';
 ?>
 			</span>
 		</span>
-		<span class="floatright">
+		<span class="pull-right">
 <?php
 	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+		print_link_button( 'proj_doc_edit_page.php?file_id=' . $v_id, lang_get( 'edit_link' ), 'btn-xs' );
 		echo '&#160;';
-		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
-		echo '&#160;';
-		print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
+		print_link_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ), 'btn-xs' );
 	}
 ?>
 		</span>
@@ -179,6 +183,10 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 ?>
 </table>
 </div>
+</div>
+</div>
+</div>
+</div>
 
 <?php
-html_page_bottom();
+layout_page_end();

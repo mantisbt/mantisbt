@@ -53,7 +53,9 @@ auth_reauthenticate();
 
 $t_redirect_url = 'manage_config_work_threshold_page.php';
 
-html_page_top( lang_get( 'manage_threshold_config' ), $t_redirect_url );
+layout_page_header( lang_get( 'manage_threshold_config' ), $t_redirect_url );
+
+layout_page_begin();
 
 $g_access = current_user_get_access_level();
 $g_project = helper_get_current_project();
@@ -196,4 +198,4 @@ form_security_purge( 'manage_config_work_threshold_set' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

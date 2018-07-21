@@ -63,56 +63,109 @@ extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 	access_has_global_level( $u_access_level );
-$t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
-$t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
+
+$t_can_see_realname = $t_can_manage || user_show_realname() ||
+    access_has_project_level( config_get( 'show_user_realname_threshold' ) );
+$t_can_see_email = $t_can_manage || access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB
 $u_email = user_get_email( $u_id );
 $u_realname = user_get_realname( $u_id );
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin();
+$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-12";
 ?>
-
-<div class="section-container">
-	<h2><?php echo lang_get( 'view_account_title' ) ?></h2>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
-		<span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
-		<span class="display-value"><span>
-			<?php
-				if( ! ( $t_can_manage || $t_can_see_email ) ) {
-					print error_string( ERROR_ACCESS_DENIED );
-				} else {
-					if( !is_blank( $u_email ) ) {
-						print_email_link( $u_email, $u_email );
-					} else {
-						echo ' - ';
-					}
-				} ?>
-		</span></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
-		<span class="display-value"><span><?php
-			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-				print error_string( ERROR_ACCESS_DENIED );
-			} else {
-				echo string_display_line( $u_realname );
-			} ?>
-		</span></span>
-		<span class="label-style"></span>
-	</div>
-	<span class="section-links">
-	<?php if( $t_can_manage ) { ?>
-			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
+<div class="<?php echo $t_timeline_view_class ?> col-xs-12">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-user"></i>
+		<?php echo lang_get('view_account_title') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<fieldset>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'username' ) ?>
+		</th>
+		<td>
+			<?php echo string_display_line( $u_username ) ?>
+		</td>
+	</tr>
+	<?php
+		if( $t_can_see_email ) { ?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'email' ) ?>
+				</th>
+				<td>
+				    <?php
+						if( !is_blank( $u_email ) ) {
+							print_email_link( $u_email, $u_email );
+						}
+					?>
+				</td>
+			</tr>
 	<?php } ?>
-	</span>
-</div><?php
+	<?php
+		if( $t_can_see_realname ) { ?>
+			<tr>
+			<th class="category">
+				<?php echo lang_get( 'realname' ) ?>
+			</th>
+			<td>
+				<?php echo string_display_line( $u_realname ); ?>
+			</td>
+			</tr>
+	<?php } ?>
+	</fieldset>
+</table>
+	</div>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+	<?php if( $t_can_manage ) { ?>
+		<form id="manage-user-form" method="get" action="manage_user_edit_page.php" class="pull-left">
+			<fieldset>
+				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+			</fieldset>
+		</form>
+	<?php } ?>
+	<?php if( auth_can_impersonate( $f_user_id ) ) { ?>
+		<form id="manage-user-impersonate-form" method="post" action="manage_user_impersonate.php" class="pull-right">
+			<fieldset>
+				<?php echo form_security_field( 'manage_user_impersonate' ) ?>
+				<input type="hidden" name="user_id" value="<?php echo $f_user_id ?>" />
+				<span><input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'impersonate_user_button' ) ?>" /></span>
+			</fieldset>
+		</form>
+	<?php } ?>
+	</div>
+</div>
+</div>
+</div>
 
-html_page_bottom();
+<?php
+if( $t_timeline_view_threshold_access ) {
+	# Build a filter to show all bugs in current projects
+	$g_timeline_filter = array();
+	$g_timeline_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	$g_timeline_filter = filter_ensure_valid_filter( $g_timeline_filter );
+	$g_timeline_user = $f_user_id;
+	?>
+	<div class="col-md-5 col-xs-12">
+		<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+		<div class="space-10"></div>
+	</div>
+<?php } ?>
+
+<?php
+layout_page_end();

@@ -1,0 +1,490 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Zazaki (Zazaki)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author 1917 Ekim Devrimi
+ * @author Asmen
+ * @author Erdemaslancan
+ * @author Gambollar
+ * @author Gorizon
+ * @author Gırd
+ * @author Kumkumuk
+ * @author Mirzali
+ */
+
+$s_directionality = 'ltr';
+$s_actiongroup_menu_move = 'Bıkırışe';
+$s_actiongroup_menu_copy = 'Kopya ke';
+$s_actiongroup_menu_assign = 'Çeke';
+$s_actiongroup_menu_close = 'Racnê';
+$s_actiongroup_menu_delete = 'Bestere';
+$s_actiongroup_menu_resolve = 'Agoznê';
+$s_actiongroup_menu_update_priority = 'Verorey anewen ke';
+$s_actiongroup_menu_update_status = 'Weziyetê rocaniye';
+$s_actiongroup_menu_update_severity = 'Ver sewiyeyê cı anewen ke';
+$s_actiongroup_menu_update_view_status = 'Asayışê weziyeti anewen ke';
+$s_actiongroup_menu_update_category = 'Kategori Anewen ke';
+$s_actiongroup_menu_set_sticky = 'Daimi saz ke/Sazi Wedarne';
+$s_actiongroup_menu_update_field = '%1$s rocneya';
+$s_actiongroup_menu_update_product_version = 'Versiona mali rocane ke';
+$s_actiongroup_menu_update_target_version = 'Menzilê Versiyoni Anewen ke';
+$s_actiongroup_menu_update_fixed_in_version = 'Timar kerdışanê Versiyoni Anewen ke';
+$s_actiongroup_menu_update_product_build = 'Versiyonê Mali Anewen ke';
+$s_actiongroup_menu_add_note = 'Note cı ke';
+$s_actiongroup_menu_attach_tags = 'Etiket cı ke';
+$s_actiongroup_bugs = 'Meselayê ke weçineyayê';
+$s_actiongroup_error_issue_is_readonly = 'Problem salt wanêno';
+$s_all_projects = 'Heme proceyi';
+$s_move_bugs = 'Mesela ahulnê';
+$s_operation_successful = 'Gurwe bı hal.';
+$s_date_order = 'Nısbetê Demi';
+$s_print_all_bug_page_link = 'Rapora çap ke';
+$s_csv_export = 'CSV Teberdayış';
+$s_excel_export = 'Vıctey Ekseli';
+$s_login_anonymously = 'Cıkewtışo Anonim';
+$s_anonymous = 'Bêname';
+$s_jump_to_bugnotes = 'Nota çek';
+$s_public_project_msg = 'Na proce resayışê karbera pêron rê akerdiya.';
+$s_private_project_msg = 'Nê proci re idarekari u karberê xısusi senê acıresê.';
+$s_access_level_project = 'Resayış sewiyeyê proci';
+$s_view_submitted_bug_link = 'Meseleyê ke rışiyayê ena bımocnê %1$s';
+$s_assigned_projects = 'Proceyê ke erziyayê';
+$s_assigned_projects_label = 'Proceyê ke erziyayê';
+$s_unassigned_projects_label = 'Proceyê ke nêerziyayê';
+$s_print = 'Nusten ke';
+$s_jump = 'Tılo ke';
+$s_copy_users = 'Karbera kopya ke';
+$s_copy_categories_from = 'Kategoriya tiyara kopya ke';
+$s_copy_categories_to = 'Kategoriya kopyay tiyay ke';
+$s_copy_versions_from = 'Versiyonê tiya ra kopya ke';
+$s_copy_versions_to = 'Versiyonê tiya ra kopya ke';
+$s_copy_users_from = 'Karberan ra kopya ke';
+$s_copy_users_to = 'Karberan kopyay tiyay ke';
+$s_bug_history = 'Tarixê problemi';
+$s_field = 'Ca';
+$s_old_value = 'Erco Verên';
+$s_new_value = 'Erco Newe';
+$s_date_modified = 'Tarixê vuryayışi';
+$s_bugnote = 'Not';
+$s_change = 'Bıvırne';
+$s_bug_monitor = 'Problemo ke temaşa beno';
+$s_bug_end_monitor = 'Problem Temaşekerdış Qediya';
+$s_announcement = 'İlan';
+$s_stays_on_top = 'Hewad cor';
+$s_bugnote_link_title = 'Note rê gıreyo direkt';
+$s_delete_bugnote_button = 'Note Bestere';
+$s_delete_bugnote_sure_msg = 'Şıma qayılê ke ena note besterê?';
+$s_bug_relationships = 'Nezdiyey';
+$s_empty_password_button = 'Parolaya Veng Bıkarn';
+$s_reauthenticate_title = 'Raştkerdışê kamiye';
+$s_no_category = '(Kategori Çınyo)';
+$s_global_categories = 'Kategoriyê Globali';
+$s_blocks = 'Bınênê cı';
+$s_new_bug = 'Mesela newiye';
+$s_bugnote_added = 'Not Debyê de';
+$s_bugnote_edited = 'Not  Vuriya';
+$s_bugnote_deleted = 'Not besterneyê';
+$s_summary_updated = 'Xısisiyet newenya';
+$s_file_added = 'Dosya Debyê de';
+$s_file_deleted = 'Dosya Besterneyê';
+$s_bug_deleted = 'Mesele Esteriya';
+$s_make_private = 'Xısusi ke';
+$s_make_public = 'Şar ke';
+$s_create_new_project_link = 'Proceyo newe vıraze';
+$s_login_link = 'Cıkewtış';
+$s_opensearch_id_short = '%s ID';
+$s_opensearch_id_description = '%s: mesela Id heta bıvin';
+$s_opensearch_text_short = '%s Metin';
+$s_opensearch_text_description = '%s: full-metin bıvin';
+$s_select_option = '(Weçine)';
+$s_resolve_bugs_conf_msg = 'Agoznayışanê meselan nışan ke';
+$s_priority_bugs_conf_msg = 'Veroriya meselan nışan kerê';
+$s_status_bugs_conf_msg = 'Weziyetê mesela nışan kerê';
+$s_view_status_bugs_conf_msg = 'Weziyetê meselan de nışan biyaya bımocne';
+$s_category_bugs_conf_msg = 'Kategoriya mesela weçnê';
+$s_set_sticky_bugs_conf_msg = 'Nê meseley saz biyê/saz nêbiyê deye şıma qayıle jew kerê?';
+$s_fixed_in_version_bugs_conf_msg = 'Timar kerdışanê Versiyoni Anewen ke';
+$s_target_version_bugs_conf_msg = 'Menzil versiyoni anewen ke';
+$s_close_group_bugs_button = 'Meselan Racne';
+$s_delete_group_bugs_button = 'Meselan Bestere';
+$s_move_group_bugs_button = 'Mesela ahulnê';
+$s_copy_group_bugs_button = 'Meselan kopya ke';
+$s_assign_group_bugs_button = 'Meselan çek cı';
+$s_resolve_group_bugs_button = 'Mesela Agoznê';
+$s_priority_group_bugs_button = 'Verorey anewen ke';
+$s_status_group_bugs_button = 'Weziyeti anewen ke';
+$s_category_group_bugs_button = 'Kategori Anewen ke';
+$s_view_status_group_bugs_button = 'Asayışê weziyeti anewen ke';
+$s_fixed_in_version_group_bugs_button = 'Timar kerdışanê Versiyoni Anewen ke';
+$s_target_version_group_bugs_button = 'Menzilê Versiyoni Anewen ke';
+$s_update_severity_title = 'Ver sewiyeyê cı anewen ke';
+$s_hide_button = 'Teyna weçinayı bıasne';
+$s_printing_options_link = 'Weçenegê çap kerdışi';
+$s_bugnote_title = 'Not karıtoğ';
+$s_bugnote_date = 'Dema noter';
+$s_go_back = 'Peyser Şo';
+$s_proceed = 'Dewam ke';
+$s_switch = 'Bıvurnê';
+$s_prefix_for_deleted_users = 'karber';
+$s_administrator = 'İdarekar';
+$s_myself = 'Xo';
+$s_default_access_level = 'Hesıbyaye sewiyey reştışi';
+$s_new_account_username = 'Namey karberi:';
+$s_new_account_email = 'E-posta:';
+$s_email_reporter = 'Vacayoğ';
+$s_email_handler = 'Eleqeyın';
+$s_email_project = 'Proce';
+$s_email_bug = 'Id mesela';
+$s_email_category = 'Kategoriye';
+$s_email_reproducibility = 'Fına bıyayış';
+$s_email_severity = 'Muhimey';
+$s_email_priority = 'Sıfteyıney';
+$s_email_status = 'Weziyet';
+$s_email_resolution = 'Agoz';
+$s_email_duplicate = 'Fına';
+$s_email_fixed_in_version = 'Versiyon dı timarya';
+$s_email_target_version = 'Hedef versiyon';
+$s_email_date_submitted = 'Demê rışayışi';
+$s_email_last_modified = 'Timar kerdışo Peyên';
+$s_email_summary = 'Xulasa';
+$s_email_description = 'Şınasnayış';
+$s_email_tag = 'Etiketi';
+$s_delete_account_button = 'Hesabi bestere';
+$s_manage_profiles_link = 'Profili';
+$s_change_preferences_link = 'Tercihi';
+$s_edit_account_title = 'Hesabi bıvurne';
+$s_username = 'Namey karberi';
+$s_username_label = 'Namey karberi';
+$s_realname = 'Nameyo Raştay';
+$s_realname_label = 'Nameyo Raştay';
+$s_email = 'E-posta';
+$s_email_label = 'E-posta';
+$s_password = 'Parola';
+$s_new_password = 'Parolaya newiye';
+$s_confirm_password = 'Parola tesdiq ke';
+$s_current_password = 'Parolaya newkên';
+$s_access_level = 'Sewiyay resayışi';
+$s_access_level_label = 'Sewiyay resayış';
+$s_update_user_button = 'Karberi bırocne';
+$s_api_token_revoke_button = 'Terkne!';
+$s_api_token_never_used = 'Qet mekarne';
+$s_default_account_preferences_title = 'Hesıbyayê tercihê hesabi';
+$s_default_project = 'Hesıbyayê proce';
+$s_minutes = 'deqiqey';
+$s_seconds = 'saniyey';
+$s_bugnote_order_asc = 'zeydıyen';
+$s_bugnote_order_desc = 'Kemeyen';
+$s_email_on_new = 'Newan e-posta ya';
+$s_email_on_assigned = 'Çebenana e-posta ya';
+$s_email_on_feedback = 'Peyd rıştışi e-posta ya';
+$s_email_on_resolved = 'Agozan e-posta ya';
+$s_email_on_closed = 'Racneyeyan e-posta ya';
+$s_email_on_reopened = 'Fına abıyeyan e-posta ya';
+$s_email_on_bugnote_added = 'Not debyayan e-posta ya';
+$s_email_on_status_change = 'Vurnayışanê weziyeta e-posta ya';
+$s_language = 'Zıwan';
+$s_timezone = 'Warey saete';
+$s_edit_profile_title = 'Profili bıvurne';
+$s_platform = 'Platform';
+$s_additional_description = 'Şınasnayış dekerdış';
+$s_update_profile_button = 'Profili bırocne';
+$s_profile_defaulted_msg = 'Profilo hesabiyaye bi rocane...';
+$s_add_profile_title = 'Profil cı ke';
+$s_add_profile_button = 'Profil cı ke';
+$s_edit_or_delete_profiles_title = 'Profili bıvurne ya zi besterne';
+$s_edit_profile = 'Profili bıvurne';
+$s_make_default = 'Hesıbyayê ke';
+$s_delete_profile = 'Profili besterne';
+$s_select_profile = 'Profili bıweçine';
+$s_submit_button = 'Bırışe';
+$s_profile_updated_msg = 'Profilo rocaneyêno...';
+$s_my_sponsorship = 'Sponsorê mı';
+$s_update_sponsorship_button = 'Şeklê Dayışi Bıvurnê';
+$s_sponsor = 'Sponsor';
+$s_sponsor_verb = 'Sponsor';
+$s_amount = 'Miktara bêcer';
+$s_total_owing = 'Arêdayê deyn';
+$s_total_paid = 'Arêdaye deyn dayen';
+$s_sponsor_show = 'Pêron bımosne';
+$s_new_bug_title = 'Mesela newiye';
+$s_new_bug_button = 'Mesela newiye';
+$s_delete_bug_button = 'Bestere';
+$s_upload_file = 'Dosya bar ke';
+$s_upload_files = 'Dosyey Bıselagne';
+$s_select_file = 'Dosye Bıweçinê';
+$s_select_files = 'Dosyey Bıweçinê';
+$s_upload_file_button = 'Dosya bıselagne';
+$s_upload_files_button = 'Dosyey Bıselagne';
+$s_max_file_size_label = 'Tewr ebado gırd:';
+$s_bugnote_add_resolve_button = 'Note cı ke';
+$s_from = 'Ra';
+$s_to = 'Kêrê';
+$s_bug_send_button = 'Bırışe';
+$s_reminder = 'Vir ardış';
+$s_id = 'Kamiye';
+$s_category = 'Kategoriye';
+$s_severity = 'Gıraniye';
+$s_reproducibility = 'Fına bıyayış';
+$s_last_update = 'Resnayışo Peyên';
+$s_reporter = 'Raporter';
+$s_assigned_to = 'Çebyayen';
+$s_priority = 'Sıfteyıniye';
+$s_resolution = 'Agoz';
+$s_status = 'Weziyet';
+$s_os = 'OS';
+$s_projection = 'Texmin';
+$s_os_version = 'SO versiyon';
+$s_eta = 'ETA';
+$s_product_version = 'Versiyonê mali';
+$s_build = 'Versiyono bınên';
+$s_summary = 'Xulasa';
+$s_description = 'Şınasnayış';
+$s_profile = 'Profile';
+$s_revision = 'Revizyon';
+$s_delete_link = 'Bestere';
+$s_bugnote_edit_link = 'Bıvurne';
+$s_hide_content = 'Tedeesteyi binımne';
+$s_show_content = 'Tedeesteyi bimocne';
+$s_log_page_number = 'Numre';
+$s_click_to_login = 'Cıkewtış';
+$s_login_page_info = 'Sistem de mesela taqibi re xeyr ameyê';
+$s_login_title = 'Cıkewtış';
+$s_save_login = 'Parola mı nê cıgeyraoği de bia xo viri';
+$s_secure_session = 'Ronıştışo Emelın';
+$s_choose_project = 'Proce weçinê';
+$s_login_button = 'Cıkewtış';
+$s_select_project_button = 'Proce weçinê';
+$s_lost_password_title = 'Parolay reset ke';
+$s_archives = 'Arşivi';
+$s_rss = 'RSS';
+$s_mantis_version = 'MantisBT Versiyon';
+$s_site_path = 'Raya Sita';
+$s_core_path = 'Ser Ray';
+$s_plugin_path = 'Raya Olekeni';
+$s_create_new_account_title = 'Hesabo newe vırazê';
+$s_enabled = 'Kefılneyayo';
+$s_create_user_button = 'Karber vırazê';
+$s_filter_button = 'Parzûn ro ke';
+$s_create_filter_link = 'Daimi adres vıraştış';
+$s_manage_users_link = 'Karbera İdare ke';
+$s_create_new_account_link = 'Hesabo newe vırazê';
+$s_projects_link = 'Proceyi';
+$s_documentation_link = 'Dokumentasyon';
+$s_1_week_title = '1 Hefte';
+$s_message = 'Mesac';
+$s_current_status = 'Weziyetê Newki';
+$s_status_level = 'Weziyet';
+$s_configuration_option_value = 'Erc';
+$s_plugin = 'Oleken';
+$s_plugin_description = 'Şınasnayış';
+$s_plugin_actions = 'Kerdışi';
+$s_plugin_key_label = 'Kılit:';
+$s_delete_category_button = 'Kategoriye bestere';
+$s_categories = 'Kategoriyi';
+$s_add_category_button = 'Kategoriye cı ke';
+$s_edit_link = 'Bıvırne';
+$s_actions = 'Kerdışi';
+$s_version = 'Versiyon';
+$s_update = 'Rocane ke';
+$s_unlink_link = 'Linki Wedarne';
+$s_add_project_title = 'Proce cı ke';
+$s_projects_title = 'Proceyi';
+$s_projects_title_label = 'Proceyi';
+$s_name = 'Name';
+$s_update_version_button = 'Versiyoni Anewen ke';
+$s_released = 'Vıradeya';
+$s_show_all_users = 'Pêro';
+$s_users_unused = 'Nêkaryayo';
+$s_users_new = 'Newe';
+$s_main_link = 'Perra Seri';
+$s_summary_link = 'Xulasa';
+$s_users_link = 'Karberi';
+$s_logout_link = 'Veciyayış';
+$s_my_view_title_resolved = 'Agoziya';
+$s_back_link = 'Peyser';
+$s_title = 'Sername';
+$s_filename = 'Namey dosya';
+$s_filename_label = 'Namey dosya:';
+$s_add_user_button = 'Karber cı ke';
+$s_remove_link = 'Bere';
+$s_required = 'lazım';
+$s_signup_title = 'Qeydbiyayış';
+$s_signup_button = 'Qeydbiyayış';
+$s_summary_title = 'Xulasa';
+$s_percentage_errors = '% Raşt niyo';
+$s_errors = 'Raşt niyo';
+$s_opened = 'Abiya';
+$s_resolved = 'Agoziya';
+$s_total = 'Pêro piya';
+$s_balance = 'Balans';
+$s_most_active = 'Tewr Aktivi';
+$s_score = 'Skor';
+$s_days = 'Roci';
+$s_all = 'pêro';
+$s_show = 'Bımocne';
+$s_updated = 'Rozeneya';
+$s_sort = 'raten';
+$s_priority_abbreviation = 'P';
+$s_none = 'çıniyo';
+$s_current = 'nıkayên';
+$s_search = 'Cı geyre';
+$s_prev = 'pey';
+$s_next = 'Bahdoyên';
+$s_first = 'Sıfteyên';
+$s_last = 'peyên';
+$s_yes = 'Eya';
+$s_no = 'Nê';
+$s_ok = 'TEMAM';
+$s_delete_filter_button = 'Bestere';
+$s_update_bug_button = 'Bıvırne';
+$s_bug_assign_to_button = 'Çekenen:';
+$s_reopen_bug_button = 'Fına Ake';
+$s_close_bug_button = 'Racnê';
+$s_move_bug_button = 'Bıkırışê';
+$s_publish = 'Vıla ke';
+$s_add_user_to_monitor = 'Cı ke';
+$s_monitoring_user_list = 'Listeyê Karberan';
+$s_custom_field = 'Ca';
+$s_custom_field_name = 'Name';
+$s_custom_field_type = 'Babet';
+$s_custom_field_default_value = 'Vayeyo hesabiyaye';
+$s_custom_field_length_min = 'Minimum Dergey';
+$s_custom_field_length_max = 'Maksimum Dergey';
+$s_custom_field_filter_by = 'Filtre cı ke';
+$s_custom_field_sequence = 'Rate';
+$s_field_delete_button = 'Ca Bestere';
+$s_field_remove_button = 'Cay Wedarne';
+$s_hide_status = 'Weziyeti Bınımne';
+$s_filter_closed = 'Racneya';
+$s_filter_resolved = 'Agoziya';
+$s_bytes = 'bayti';
+$s_phpmailer_language = 'diq';
+$s_roadmap = 'Xeritey Rayer';
+$s_http_auth_realm = 'MantisBT Cıkewtış';
+$s_bug = 'mesele';
+$s_bugs = 'Meseley';
+$s_add_new_relationship_button = 'Cı ke';
+$s_this_bug = 'Mewcud mesela';
+$s_replace_relationship_button = 'Bıvurnê';
+$s_delete_relationship_button = 'Bestere';
+$s_create_child_bug_button = 'Klon ke';
+$s_bug_cloned_to = 'Mesela kloneyaya';
+$s_vertical = 'Wersaney';
+$s_horizontal = 'Warkerey';
+$s_view_issue = 'Meseler bımocnê';
+$s_perm_rpt_capability = 'Kapasite';
+$s_view = 'Bıvêne';
+$s_handle_issue = 'Mesela xo dest ke';
+$s_move_issue = 'Meseler ahûlnê';
+$s_delete_issue = 'Yew mesele bestere';
+$s_reopen_issue = 'Meseli fına ake';
+$s_view_private_issues = 'Meselanê xısusiya anewen ke';
+$s_update_readonly_issues = 'Tenya meseleyê wanêyênê ena anewen ke';
+$s_update_issue_status = 'Weziyetê mersela anewen ke';
+$s_notes = 'Noti';
+$s_add_notes = 'Notan cı ke';
+$s_view_private_notes = 'Xısusi nota binan bıvin';
+$s_news = 'Newey';
+$s_view_private_news = 'Xeberanê xısusiya bıvin';
+$s_manage_news = 'Xebera idare ke';
+$s_delete_attachment_button = 'Bestere';
+$s_filters = 'Avrêci';
+$s_save_filters = 'Parzuman qeyd ke';
+$s_create_project = 'Proci vırazê';
+$s_delete_project = 'Proce bestere';
+$s_manage_project = 'İdariya proci';
+$s_others = 'Sewbi';
+$s_email_notification = 'E-posta rıştiye';
+$s_status_changed_to = 'Weziyeti bıvurne';
+$s_email_on_deleted = 'E-postayê ke besterneyayê';
+$s_email_on_sponsorship_changed = 'Sponsori sero e-mail vıriyo.';
+$s_email_on_relationship_changed = 'E-postaya elekeya  vurnayışan';
+$s_loading = 'Bar beno...';
+$s_between_date = 'Ared';
+$s_on_or_before_date = 'Cı ser dı yana Veror dê cı';
+$s_before_date = 'Veri';
+$s_after_date = 'Bahdo';
+$s_on_or_after_date = 'Cı ser dı yana Peyên dê cı';
+$s_from_date = 'Kam ra';
+$s_to_date = 'Kêrê';
+$s_on_date = 'Ake';
+$s_on = 'Ake';
+$s_off = 'Racne';
+$s_wiki = 'Wiki';
+$s_tags = 'Etiketi';
+$s_tag_details = 'Teferruatê Etiketi: %1$s';
+$s_tag_id = 'Etiket ID';
+$s_tag_name = 'Name';
+$s_tag_creator = 'Vıraştoğ';
+$s_tag_created = 'Demê Vıraziyayışi';
+$s_tag_updated = 'Resnayışo Peyên';
+$s_tag_description = 'Şınasiya etiketi';
+$s_tag_statistics = 'İstatistikê Karkerdışi';
+$s_tag_update = 'Etiketi Anewen ke: %1$s';
+$s_tag_update_return = 'Peyser şo Etiket';
+$s_tag_update_button = 'Etiketi anewen ke';
+$s_tag_delete_button = 'Etiket Bestere';
+$s_tag_invalid_name = 'Namey etiketi ravêrde niyo';
+$s_tag_create_denied = 'Vıraştışi re icazet nêdeya.';
+$s_tag_create = 'Etiket vıraze';
+$s_show_all_tags = 'Pêro';
+$s_time_tracking_stopwatch_start = 'Serokne';
+$s_time_tracking_stopwatch_stop = 'Qedyayış';
+$s_time_tracking_stopwatch_reset = 'Reset kerê';
+$s_due_date = 'Demê Qediyayışi';
+$s_overdue = 'Tarixa cı ravêrda';
+$s_view_account_title = 'Zanışiya Karberi';
+$s_word_separator = '&#32;';
+$s_month_january = 'Çele';
+$s_month_february = 'Zemherı';
+$s_month_march = 'Mert';
+$s_month_april = 'Nisane';
+$s_month_may = 'Gulane';
+$s_month_june = 'Heziran';
+$s_month_july = 'Temuz';
+$s_month_august = 'Tebaxe';
+$s_month_september = 'Keşkelun';
+$s_month_october = 'Tışrino Verên';
+$s_month_november = 'Tışrino Peyên';
+$s_month_december = 'Kanun';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nê vineya.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategori nêvineya.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '"%$1s" ya oleken qeyd nêbiyo';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Oleken de "%$1s" xo ra bar kerde yo.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Pela „%2$s“ Plugin „%1$s“ de nêvêniye.';

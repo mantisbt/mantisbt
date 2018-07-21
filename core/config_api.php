@@ -44,7 +44,6 @@ $g_cache_config_eval = array();
 $g_cache_config_access = array();
 $g_cache_bypass_lookup = array();
 $g_cache_filled = false;
-$g_cache_can_set_in_database = '';
 
 # cache environment to speed up lookups
 $g_cache_db_table_exists = false;
@@ -70,16 +69,10 @@ $g_cache_config_project = null;
  * @return mixed
  */
 function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
-	global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
+	global $g_cache_config, $g_cache_db_table_exists, $g_cache_filled;
 	global $g_cache_config_user, $g_cache_config_project, $g_project_override;
 
-	# @@ debug @@ echo "lu o=$p_option ";
-	# bypass table lookup for certain options
-	$t_bypass_lookup = !config_can_set_in_database( $p_option );
-
-	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
-
-	if( !$t_bypass_lookup ) {
+	if( config_can_set_in_database( $p_option ) ) {
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
 		}
@@ -132,31 +125,20 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			# @@ debug @@ echo 'pr= '; var_dump($t_projects);
 			# @@ debug @@ echo 'u= '; var_dump($t_users);
-
 			if( !$g_cache_filled ) {
-				$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}';
-				$t_result = db_query( $t_query );
-				while( false <> ( $t_row = db_fetch_array( $t_result ) ) ) {
-					$t_config = $t_row['config_id'];
-					$t_user = $t_row['user_id'];
-					$t_project = $t_row['project_id'];
-					$g_cache_config[$t_config][$t_user][$t_project] = $t_row['type'] . ';' . $t_row['value'];
-					$g_cache_config_access[$t_config][$t_user][$t_project] = $t_row['access_reqd'];
-				}
+				config_cache_all();
 				$g_cache_filled = true;
 			}
 
 			if( isset( $g_cache_config[$p_option] ) ) {
 				$t_found = false;
-				reset( $t_users );
-				while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-					reset( $t_projects );
-					while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+				foreach( $t_users as $t_user ) {
+					foreach( $t_projects as $t_project ) {
 						if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 							$t_value = $g_cache_config[$p_option][$t_user][$t_project];
 							$t_found = true;
-
 							# @@ debug @@ echo "clu found u=$t_user, p=$t_project, v=$t_value ";
+							break 2;
 						}
 					}
 				}
@@ -166,19 +148,15 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 					switch( $t_type ) {
 						case CONFIG_TYPE_FLOAT:
-							$t_value = (float)$t_raw_value;
-							break;
+							return (float)$t_raw_value;
 						case CONFIG_TYPE_INT:
-							$t_value = (int)$t_raw_value;
-							break;
+							return (int)$t_raw_value;
 						case CONFIG_TYPE_COMPLEX:
-							$t_value = json_decode( $t_raw_value, true );
-							break;
+							return json_decode( $t_raw_value, true );
 						case CONFIG_TYPE_STRING:
 						default:
-							$t_value = config_eval( $t_raw_value );
+							return config_eval( $t_raw_value );
 					}
-					return $t_value;
 				}
 			}
 		}
@@ -195,12 +173,14 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
  */
 function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
-	if( isset( $GLOBALS['g_' . $p_option] ) ) {
-		if( !isset( $g_cache_config_eval['g_' . $p_option] ) ) {
-			$t_value = config_eval( $GLOBALS['g_' . $p_option], true );
-			$g_cache_config_eval['g_' . $p_option] = $t_value;
+
+	$t_var_name = 'g_' . $p_option;
+	if( isset( $GLOBALS[$t_var_name] ) ) {
+		if( !isset( $g_cache_config_eval[$t_var_name] ) ) {
+			$t_value = config_eval( $GLOBALS[$t_var_name], true );
+			$g_cache_config_eval[$t_var_name] = $t_value;
 		} else {
-			$t_value = $g_cache_config_eval['g_' . $p_option];
+			$t_value = $g_cache_config_eval[$t_var_name];
 		}
 		return $t_value;
 	} else {
@@ -250,21 +230,17 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
 	if( isset( $g_cache_config[$p_option] ) ) {
-		reset( $t_users );
-		while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-			reset( $t_projects );
-			while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+		foreach( $t_users as $t_user ) {
+			foreach( $t_projects as $t_project ) {
 				if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
-					$t_found = true;
+					return $g_cache_config_access[$p_option][$t_user][$t_project];
 				}
 			}
 		}
 	}
 
-	return $t_found ? $t_access : config_get_global( 'admin_site_threshold' );
+	return config_get_global( 'admin_site_threshold' );
 }
 
 /**
@@ -303,19 +279,12 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 		$t_projects[] = $p_project;
 	}
 
-	$t_found = false;
-	reset( $t_users );
-	while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
-		reset( $t_projects );
-		while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+	foreach( $t_users as $t_user ) {
+		foreach( $t_projects as $t_project ) {
 			if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
-				$t_found = true;
+				return true;
 			}
 		}
-	}
-
-	if( $t_found ) {
-		return true;
 	}
 
 	return isset( $GLOBALS['g_' . $p_option] );
@@ -359,13 +328,14 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			user_ensure_exists( $p_user );
 		}
 
+		db_param_push();
 		$t_query = 'SELECT COUNT(*) from {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
 		$t_result = db_query( $t_query, array( $p_option, (int)$p_project, (int)$p_user ) );
 
-		$t_params = array();
+		db_param_push();
 		if( 0 < db_result( $t_result ) ) {
 			$t_set_query = 'UPDATE {config}
 					SET value=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
@@ -457,17 +427,14 @@ function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_p
  * @return boolean
  */
 function config_can_set_in_database( $p_option ) {
-	global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
+	global $g_cache_bypass_lookup, $g_global_settings;
 
 	if( isset( $g_cache_bypass_lookup[$p_option] ) ) {
 		return !$g_cache_bypass_lookup[$p_option];
 	}
 
 	# bypass table lookup for certain options
-	if( $g_cache_can_set_in_database == '' ) {
-		$g_cache_can_set_in_database = config_get_global( 'global_settings' );
-	}
-	$t_bypass_lookup = in_array( $p_option, $g_cache_can_set_in_database, true );
+	$t_bypass_lookup = in_array( $p_option, $g_global_settings, true );
 
 	$g_cache_bypass_lookup[$p_option] = $t_bypass_lookup;
 
@@ -501,6 +468,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 			return;
 		}
 
+		db_param_push();
 		$t_query = 'DELETE FROM {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
@@ -524,6 +492,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	}
 
 	# Delete the corresponding bugnote texts
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
 	db_query( $t_query, array( $p_option, $p_user_id ) );
 }
@@ -535,6 +504,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  * @return void
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
+	db_param_push();
 	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project ) );
 
@@ -557,9 +527,11 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
 	if( '' !== $p_option ) {
 		unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );
 		unset( $GLOBALS['g_cache_config_access'][$p_option][$p_user][$p_project] );
+		unset( $GLOBALS['g_cache_config_eval'][$p_option] );
 	} else {
 		unset( $GLOBALS['g_cache_config'] );
 		unset( $GLOBALS['g_cache_config_access'] );
+		unset( $GLOBALS['g_cache_config_eval'] );
 		$g_cache_filled = false;
 	}
 }
@@ -675,71 +647,95 @@ function config_eval( $p_value, $p_global = false ) {
 }
 
 /**
- * list of configuration variable which may expose web server details and should not be exposed to users or web services
+ * Check if a configuration is private.
+ * Private options must not be exposed to users or web services.
  *
  * @param string $p_config_var Configuration option.
- * @return boolean
+ * @return boolean True if private
  */
 function config_is_private( $p_config_var ) {
-	switch( $p_config_var ) {
-		case 'hostname':
-		case 'db_username':
-		case 'db_password':
-		case 'database_name':
-		case 'db_schema':
-		case 'db_type':
-		case 'master_crypto_salt':
-		case 'smtp_host':
-		case 'smtp_username':
-		case 'smtp_password':
-		case 'smtp_connection_mode':
-		case 'smtp_port':
-		case 'email_send_using_cronjob':
-		case 'absolute_path':
-		case 'core_path':
-		case 'class_path':
-		case 'library_path':
-		case 'language_path':
-		case 'session_save_path':
-		case 'session_handler':
-		case 'session_validation':
-		case 'global_settings':
-		case 'system_font_folder':
-		case 'phpMailer_method':
-		case 'attachments_file_permissions':
-		case 'file_upload_method':
-		case 'absolute_path_default_upload_folder':
-		case 'ldap_server':
-		case 'plugin_path':
-		case 'ldap_root_dn':
-		case 'ldap_organization':
-		case 'ldap_uid_field':
-		case 'ldap_bind_dn':
-		case 'ldap_bind_passwd':
-		case 'use_ldap_email':
-		case 'ldap_protocol_version':
-		case 'login_method':
-		case 'cookie_path':
-		case 'cookie_domain':
-		case 'bottom_include_page':
-		case 'top_include_page':
-		case 'css_include_file':
-		case 'css_rtl_include_file':
-		case 'meta_include_file':
-		case 'log_level':
-		case 'log_destination':
-		case 'dot_tool':
-		case 'neato_tool':
-			return true;
+	global $g_public_config_names;
 
-		# Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
-		# These can be removed once complete removal from config and db is enforced by upgrade process.
-		case 'file_upload_ftp_server':
-		case 'file_upload_ftp_user':
-		case 'file_upload_ftp_pass':
-			return true;
+	return !in_array( $p_config_var, $g_public_config_names, true );
+}
+
+/**
+ * Check if a configuration is defined in the database with the given value.
+ *
+ * @param string  $p_option  The configuration option to retrieve.
+ * @param string  $p_value   Value to check for (defaults to null = any value).
+ * @return boolean True if option is defined
+ */
+function config_is_defined( $p_option, $p_value = null ) {
+	global $g_cache_filled, $g_cache_config;
+
+	if( !$g_cache_filled ) {
+		config_get( $p_option, -1 );
 	}
 
+	if( !isset( $g_cache_config[$p_option] ) ) {
+		# Option is not in cache
+		return false;
+	} elseif( $p_value === null ) {
+		# We're not checking any specific value
+		return true;
+	}
+
+	# Check the cache for specified value
+	foreach( $g_cache_config[$p_option] as $t_project ) {
+		foreach( $t_project as $t_opt ) {
+			list( , $t_value ) = explode( ';', $t_opt );
+			if( $t_value == $p_value ) {
+				return true;
+			}
+		}
+	}
+
+	# Value not found in cache
 	return false;
 }
 
+/**
+ * Loads the contents of config table into cache
+ * @return void
+ */
+function config_cache_all() {
+	global $g_cache_config, $g_cache_config_access;
+
+	$t_config_rows = array();
+
+	# With oracle database, ADOdb maps column type "L" to clob.
+	# Because reading clobs is significantly slower, cast them to varchar for faster query execution
+	# Standard max size for varchar is 4000 bytes, so a safe limit is used as 1000 charancters
+	# for multibyte strings (up to 4 bytes per char)
+	if( db_is_oracle() ) {
+		$t_query = 'SELECT config_id, user_id, project_id, type, CAST(value AS VARCHAR(4000)) AS value, access_reqd'
+				. ' FROM {config}'
+				. ' WHERE dbms_lob.getlength(value)<=1000';
+		$t_result = db_query( $t_query );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_config_rows[] = $t_row;
+		}
+		$t_query = 'SELECT config_id, user_id, project_id, type,  value, access_reqd'
+				. ' FROM {config}'
+				. ' WHERE dbms_lob.getlength(value)>1000';
+		$t_result = db_query( $t_query );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_config_rows[] = $t_row;
+		}
+	} else {
+		$t_query = 'SELECT config_id, user_id, project_id, type,  value, access_reqd FROM {config}';
+		$t_result = db_query( $t_query );
+		while( false <> ( $t_row = db_fetch_array( $t_result ) ) ) {
+			$t_config_rows[] = $t_row;
+		}
+	}
+
+	foreach( $t_config_rows as $t_row ) {
+		$t_config = $t_row['config_id'];
+		$t_user = $t_row['user_id'];
+		$t_project = $t_row['project_id'];
+		$g_cache_config[$t_config][$t_user][$t_project] = $t_row['type'] . ';' . $t_row['value'];
+		$g_cache_config_access[$t_config][$t_user][$t_project] = $t_row['access_reqd'];
+	}
+}

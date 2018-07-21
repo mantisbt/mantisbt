@@ -100,7 +100,7 @@ class MantisPHPSession extends MantisSession {
 	function __construct( $p_session_id = null ) {
 		global $g_cookie_secure_flag_enabled;
 
-		$this->key = hash( 'whirlpool', 'session_key' . config_get_global( 'crypto_master_salt' ), false );
+		$this->key = hash( 'whirlpool', 'session_key_v_2' . config_get_global( 'crypto_master_salt' ), false );
 
 		# Save session information where specified or with PHP's default
 		$t_session_save_path = config_get_global( 'session_save_path' );
@@ -110,7 +110,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
+		session_set_cookie_params( 0, config_get_global( 'cookie_path' ), config_get_global( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
 
 		# Handle existent session ID
 		if( !is_null( $p_session_id ) ) {
@@ -135,7 +135,7 @@ class MantisPHPSession extends MantisSession {
 	 */
 	function get( $p_name, $p_default = null ) {
 		if( isset( $_SESSION[$this->key][$p_name] ) ) {
-			return unserialize( $_SESSION[$this->key][$p_name] );
+			return $_SESSION[$this->key][$p_name];
 		}
 
 		if( func_num_args() > 1 ) {
@@ -153,7 +153,7 @@ class MantisPHPSession extends MantisSession {
 	 * @return void
 	 */
 	function set( $p_name, $p_value ) {
-		$_SESSION[$this->key][$p_name] = serialize( $p_value );
+		$_SESSION[$this->key][$p_name] = $p_value;
 	}
 
 	/**
@@ -184,18 +184,9 @@ class MantisPHPSession extends MantisSession {
  * @return void
  */
 function session_init( $p_session_id = null ) {
-	global $g_session, $g_session_handler;
+	global $g_session;
 
-	switch( utf8_strtolower( $g_session_handler ) ) {
-		case 'php':
-			$g_session = new MantisPHPSession( $p_session_id );
-			break;
-		case 'memcached':
-			# Not yet implemented
-		default:
-			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
-			break;
-	}
+	$g_session = new MantisPHPSession( $p_session_id );
 
 	if( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
 		session_validate( $g_session );
@@ -227,7 +218,7 @@ function session_validate( $p_session ) {
 			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
 
 			$t_url = config_get_global( 'path' ) . config_get_global( 'default_home_page' );
-			echo "\t<meta http-equiv=\"Refresh\" content=\"4;URL=" . $t_url . "\" />\n";
+			echo "\t<meta http-equiv=\"Refresh\" content=\"4; URL=" . $t_url . "\" />\n";
 
 			die();
 		}

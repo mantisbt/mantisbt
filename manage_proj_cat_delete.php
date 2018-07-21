@@ -66,19 +66,13 @@ $t_project_id = $t_row['project_id'];
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
 
 # Protect the 'default category for moves' from deletion
-$t_default_cat = 'default_category_for_moves';
-$t_query = 'SELECT count(config_id) FROM {config} WHERE config_id = ' . db_param() . ' AND value = ' . db_param();
-$t_default_cat_count = db_result( db_query( $t_query, array( $t_default_cat, $f_category_id ) ) );
-if( $t_default_cat_count > 0 || $f_category_id == config_get_global( $t_default_cat ) ) {
-	trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
-}
+category_ensure_can_remove( $f_category_id );
 
-# Get a bug count
-$t_query = 'SELECT COUNT(id) FROM {bug} WHERE category_id=' . db_param();
-$t_bug_count = db_result( db_query( $t_query, array( $f_category_id ) ) );
+# Protect the category from deletion which is associted with an issue.
+category_ensure_can_delete( $f_category_id );
 
 # Confirm with the user
-helper_ensure_confirmed( sprintf( lang_get( 'category_delete_sure_msg' ), string_display_line( $t_name ), $t_bug_count ),
+helper_ensure_confirmed( sprintf( lang_get( 'category_delete_confirm_msg' ), string_display_line( $t_name ) ),
 	lang_get( 'delete_category_button' ) );
 
 category_remove( $f_category_id );
@@ -91,8 +85,10 @@ if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 }
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

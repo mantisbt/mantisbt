@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Egyptian Spoken Arabic (مصرى)
+/** Egyptian Arabic (مصرى)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -57,6 +57,7 @@ $s_actiongroup_menu_update_view_status = 'حدّت حالة العرض';
 $s_actiongroup_menu_update_category = 'حدّث التصنيف';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'تحديث %1$s';
+$s_actiongroup_menu_update_product_version = 'تحديث إصدار المنتج';
 $s_actiongroup_menu_update_target_version = 'حدّث النسخه الهدف';
 $s_actiongroup_menu_update_fixed_in_version = 'حدّث النسخه المتصلحه فى';
 $s_actiongroup_menu_update_product_build = 'حدّث منتَج البُنا';
@@ -104,7 +105,6 @@ $s_bugnote_link_title = 'وصله مباشره إلى الملاحظة';
 $s_delete_bugnote_button = 'حذف الملاحظة';
 $s_delete_bugnote_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه الملاحظة؟';
 $s_bug_relationships = 'علاقات';
-$s_bug_relationships_label = 'العلاقات:';
 $s_empty_password_sure_msg = 'المستخدم لديه كلمه سر فارغه. هل أنت متأكد من أن هذا هو ما تريده؟';
 $s_empty_password_button = 'استخدام كلمه سر فارغة';
 $s_reauthenticate_title = 'تحقق';
@@ -163,9 +163,12 @@ $s_status_group_bugs_button = 'تحديث الحالة';
 $s_category_group_bugs_button = 'تحديث التصنيف';
 $s_view_status_group_bugs_button = 'تحديث حاله العرض';
 $s_set_sticky_group_bugs_button = 'ضبط/عدم ضبط كملصوقة';
+$s_product_version_group_bugs_button = 'تحديث إصدار المنتج';
 $s_fixed_in_version_group_bugs_button = 'تحديث أصلحت فى النسخة';
 $s_target_version_group_bugs_button = 'تحديث النسخه الهدف';
 $s_update_severity_title = 'تحديث الشدة';
+$s_update_severity_msg = 'اختار أولويه المشاكل';
+$s_update_severity_button = 'حدّث التشديد';
 $s_hide_button = 'عرض المختار فقط';
 $s_printing_preferences_title = 'اختر الحقول للطبع';
 $s_printing_options_link = 'خيارات الطبع';
@@ -240,7 +243,6 @@ $s_email_notification_title_for_action_monitor = 'القضيه %1$s متابعه
 $s_email_reporter = 'تم الإبلاغ بواسطة';
 $s_email_handler = 'تم إيكالها إلى';
 $s_email_project = 'مشروع';
-$s_email_project_label = 'المشروع:';
 $s_email_bug = 'رقم القضية';
 $s_email_category = 'التصنيف';
 $s_email_reproducibility = 'القابليه لإعاده الإنتاج';
@@ -307,7 +309,6 @@ $s_profile_added_msg = 'الملف تمت إضافته...';
 $s_profile_deleted_msg = 'الملف تم حذفه...';
 $s_edit_profile_title = 'عدل الملف';
 $s_platform = 'نظام';
-$s_platform_label = 'المنصة:';
 $s_additional_description = 'وصف إضافي';
 $s_update_profile_button = 'تحديث الملف';
 $s_profile_defaulted_msg = 'الملف الافتراضى تم تحديثه...';
@@ -336,7 +337,6 @@ $s_sponsor_show = 'عرض الكل';
 $s_payment_updated = 'معلومات الدفع تم تحديثها.';
 $s_account_updated_msg = 'حسابك تم تحديثه بنجاح...';
 $s_email_updated = 'عنوان البريد الإلكترونى تم تحديثه بنجاح';
-$s_realname_duplicated = 'الاسم الحقيقى مستعمل بواسطه مستخدم آخر';
 $s_realname_updated = 'الاسم الحقيقى تم تحديثه بنجاح';
 $s_password_updated = 'كلمه السر تم تحديثها بنجاح';
 $s_multiple_projects = 'القضايا التى اخترتها من مشاريع مختلفه. المحددات بالأسفل تعكس الإعدادات لكل المشاريع. لو أن هذا غير صحيح، من فضلك أعد محاوله القيام بتغييرك باختيار عدد أصغر من القضايا.';
@@ -358,7 +358,6 @@ $s_delete_bug_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه �
 $s_delete_bug_button = 'حذف القضية';
 $s_monitor_bug_button = 'تابع';
 $s_unmonitor_bug_button = 'إنهاء المراقبة';
-$s_file_upload_msg = 'رفع الملف نجح';
 $s_upload_file = 'رفع ملف';
 $s_select_file = 'اختر ملفا';
 $s_upload_file_button = 'رفع ملف';
@@ -390,36 +389,24 @@ $s_update_simple_link = 'تحديث بسيط';
 $s_updating_bug_advanced_title = 'تحديث معلومات القضية';
 $s_id = 'رقم';
 $s_category = 'تصنيف';
-$s_category_label = 'التصنيف:';
 $s_severity = 'شدة';
-$s_severity_label = 'الشدة:';
 $s_reproducibility = 'القابليه لإعاده الإنتاج';
 $s_date_submitted = 'تاريخ الإرسال';
 $s_last_update = 'آخر تحديث';
 $s_reporter = 'المبلغ';
-$s_reporter_label = 'المُبلّغ:';
 $s_assigned_to = 'أوكلت إلى';
-$s_assigned_to_label = 'مُسنده إلى:';
 $s_priority = 'أولوية';
-$s_priority_label = 'الأهمية:';
 $s_resolution = 'الحل';
-$s_resolution_label = 'الحل:';
 $s_status = 'حالة';
-$s_status_label = 'الحالة:';
 $s_duplicate_id = 'رقم التكرار';
 $s_os = 'نظام التشغيل';
-$s_os_label = 'نظام التشغيل:';
 $s_projection = 'مسقط';
 $s_os_version = 'نسخه نظام التشغيل';
-$s_os_version_label = 'إصدار نظام التشغيل:';
 $s_eta = 'زمن الوصول المتوقع';
 $s_product_version = 'نسخه المنتج';
-$s_product_version_label = 'نسخه المنتج:';
 $s_build = 'نسخة';
 $s_fixed_in_version = 'أصلحت فى النسخة';
-$s_fixed_in_version_label = 'أصلحت فى الإصدار:';
 $s_target_version = 'النسخه الهدف';
-$s_target_version_label = 'النسخه المستهدفة:';
 $s_votes = 'أصوات';
 $s_summary = 'ملخص';
 $s_description = 'وصف';
@@ -427,7 +414,6 @@ $s_steps_to_reproduce = 'الخطوات لإعاده الإنتاج';
 $s_update_information_button = 'تحديث المعلومات';
 $s_sticky_issue = 'قضيه لاصقة';
 $s_profile = 'ملف';
-$s_profile_label = 'الملف:';
 $s_updating_bug_simple_title = 'تحديث معلومات القضية';
 $s_view_revisions = 'رؤيه المراجعات';
 $s_revision = 'المراجعة';
@@ -437,7 +423,6 @@ $s_all_revisions = 'كل المراجعات';
 $s_back_to_issue = 'رجوع إلى القضية';
 $s_confirm_revision_drop = 'هل أنت متأكد أنك تريد إسقاط مراجعه العله هذه؟';
 $s_vote_added_msg = 'التصويت تمت إضافته...';
-$s_bugnote_added_msg = 'الملاحظه تمت إضافتها...';
 $s_bugnote_deleted_msg = 'الملاحظه تم حذفها بنجاح...';
 $s_bug_notes_title = 'ملاحظات';
 $s_edit_bugnote_title = 'عدل الملاحظة';
@@ -619,7 +604,6 @@ $s_edit_project_title = 'عدل المشروع';
 $s_project_name = 'اسم المشروع';
 $s_project_name_label = 'اسم المشروع:';
 $s_view_status = 'عرض الحالة';
-$s_view_status_label = 'عرض الحالة';
 $s_public = 'علني';
 $s_private = 'خاص';
 $s_update_project_button = 'تحديث المشروع';
@@ -817,15 +801,15 @@ $s_orct = '(مفتوحة/محلولة/مغلقة/إجمالي)';
 $s_any = 'أي';
 $s_all = 'كل';
 $s_show = 'عرض';
-$s_show_label = 'اعرض:';
 $s_changed = 'تغيرت(ساعات)';
 $s_viewing_bugs_title = 'عرض القضايا';
 $s_updated = 'تم التحديث';
 $s_sticky = 'عرض القضايا اللاصقة';
-$s_sort_label = 'رتب بواسطة:';
+$s_sort = 'رتب حسب';
 $s_issue_id = 'القضيه #';
 $s_recently_visited = 'المزاره حديثا';
 $s_priority_abbreviation = 'P';
+$s_note_user_id = 'الملاحظة بواسطة';
 $s_none = 'لا شيء';
 $s_current = 'حالي';
 $s_search = 'بحث';
@@ -915,7 +899,6 @@ $s_field_delete_button = 'حذف الحقل';
 $s_confirm_custom_field_unlinking = 'هل أنت متأكد من أنك تريد إزاله (وصلات) الحقل المخصص هذا من المشروع وحذف كل القيم المرتبطة؟';
 $s_field_remove_button = 'إزاله الحقل';
 $s_hide_status = 'إخفاء الحالة';
-$s_hide_status_label = 'خبّى الحاله:';
 $s_filter_closed = 'مغلق';
 $s_filter_resolved = 'محلول';
 $s_hide_closed = 'إخفاء المغلق';
@@ -924,7 +907,6 @@ $s_and_above = 'و الأعلى';
 $s_advanced_filters = 'فلاتر متقدمة';
 $s_simple_filters = 'فلاتر بسيطة';
 $s_monitored_by = 'مراقبه بواسطة';
-$s_monitored_by_label = 'متراقبه من:';
 $s_attachments = 'الملحق(ات)';
 $s_bytes = 'بايت';
 $s_phpmailer_language = 'en';
@@ -950,7 +932,6 @@ $s_relationship_deleted = 'العلاقه تم حذفها';
 $s_no_relationship = 'لا علاقة';
 $s_relationship_replaced = 'العلاقه تم استبدالها';
 $s_replace_relationship_button = 'استبدال';
-$s_replace_relationship_sure_msg = 'توجد علاقه بالفعل بين هاتين القضيتين. هل أنت متأكد أنك تريد استبدالها؟';
 $s_relationship_with_parent = 'العلاقه مع القضيه الأصلية';
 $s_delete_relationship_button = 'حذف';
 $s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
@@ -1036,7 +1017,6 @@ $s_on = 'مفعل';
 $s_off = 'معطل';
 $s_wiki = 'ويكي';
 $s_tags = 'وسوم';
-$s_tags_label = 'وسوم:';
 $s_tag_details = 'تفاصيل الوسم: %1$s';
 $s_tag_id = 'رقم الوسم';
 $s_tag_name = 'اسم';
@@ -1142,7 +1122,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'تم توقع سلسله لكن ت�
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'تم توقع رقم ل%1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'القضيه %1$d لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'الفلتر %1$s لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'الفلتر الذى تحاول استخدامه أقدم من أن تتم ترقيته.  من فضلك أعد إنشاءه.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'عنوان بريد إلكترونى غير صحيح.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'من غير المسموح به استخدام عناوين بريد إلكترونى معروضه.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'الملف لم يتم العثور عليه.';
@@ -1175,7 +1154,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'النسخه "%1$s" لم يتم الع
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'اسم المستخدم غير صحيح. أسماء المستخدمين يمكن أن تحتوى فقط على الحروف اللاتينيه، الأرقام، فراغات، شرط، نقط، علامات زائد وكشيدات.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'اسم المستخدم الحقيقى غير صحيح.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'المستخدم لا يمتلك مستوى الصلاحيات المطلوب.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '"الاسم الحقيقي" المختار يطابق اسم الدخول لمستخدم آخر. من فضلك اختر آخر.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'دعم الرعايه ليس مفعلا.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'الرعايه %1$d لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'الرعايه (%1$s) تحت الكميه الدنيا (%2$s).';
@@ -1184,7 +1162,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'السماح �
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'الراعى لم يوفر عنوان بريد إلكترونى. من فضلك حدث ملفك.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'خيار الضبط "%1$s" له قيمه غير صحيحه "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'الفعل لا يمكن تنفيذه لأن القضيه "%1$d" للقراءه فقط.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'توجد علاقه بالفعل بين هاتين القضيتين.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'العلاقه لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'السماح مرفوض: القضيه %1$d تحتاج إلى مستو أعلى من الصلاحيات.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'القضيه لا يمكن أن تكون مرتبطه بنفسها.';
@@ -1211,7 +1188,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقيه سكيما الإضاف
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافه "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوى على العامود المكرر "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوى على الحقل غير الصحيح "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسه غير صحيح.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسه "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحه.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استماره سريه مش صحيح . يمكن السبب  وقت الجلسه  خلص أو انك  أرسلت الاستماره مرتين بطريق الخطأ';

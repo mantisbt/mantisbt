@@ -72,43 +72,57 @@ if( 'ASC' == $f_dir ) {
 	$t_direction = DESCENDING;
 }
 
-html_page_top( lang_get( 'manage_projects_link' ) );
+layout_page_header( lang_get( 'manage_projects_link' ) );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_proj_page.php' );
 
 # Project Menu Form BEGIN
 ?>
-<div class="form-container">
-	<h2><?php echo lang_get( 'projects_title' ); ?></h2><?php
 
-	# Check the user's global access level before allowing project creation
-	if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
-		print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
-	} ?>
-
-	<table>
+<div class="col-md-12 col-xs-12">
+    <div class="space-10"></div>
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-puzzle-piece"></i>
+			<?php echo lang_get( 'projects_title' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="widget-toolbox padding-8 clearfix">
+		<?php
+		# Check the user's global access level before allowing project creation
+		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+			print_form_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
+		} ?>
+	</div>
+	<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
-			<tr class="row-category">
-				<td><?php
+			<tr>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
-				</td>
-				<td><?php
+				</th>
+				<th><?php
 					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
 					print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
-				</td>
+				</th>
 			</tr>
 		</thead>
 
@@ -138,10 +152,10 @@ print_manage_menu( 'manage_proj_page.php' );
 			if( access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
 			<tr>
 				<td>
-					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( '&raquo; ', $t_level ) . string_display( $t_project['name'] ) ?></a>
+					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display( $t_project['name'] ) ?></a>
 				</td>
 				<td><?php echo get_enum_element( 'project_status', $t_project['status'] ) ?></td>
-				<td><?php echo trans_bool( $t_project['enabled'] ) ?></td>
+				<td class="center"><?php echo trans_bool( $t_project['enabled'] ) ?></td>
 				<td><?php echo get_enum_element( 'project_view_state', $t_project['view_state'] ) ?></td>
 				<td><?php echo string_display_links( $t_project['description'] ) ?></td>
 			</tr><?php
@@ -164,11 +178,25 @@ print_manage_menu( 'manage_proj_page.php' );
 		</tbody>
 	</table>
 </div>
+	</div>
+	</div>
+	</div>
 
-<div id="categories" class="form-container">
-	<h2><?php echo lang_get( 'global_categories' ) ?></h2>
+	<div class="space-10"></div>
 
-	<table>
+	<div id="categories" class="form-container">
+
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-sitemap"></i>
+			<?php echo lang_get( 'global_categories' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-striped table-bordered table-condensed table-hover">
 <?php
 		$t_categories = category_get_all_rows( ALL_PROJECTS );
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
@@ -176,7 +204,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		if( count( $t_categories ) > 0 ) {
 ?>
 		<thead>
-			<tr class="row-category">
+			<tr>
 				<td><?php echo lang_get( 'category' ) ?></td>
 				<td><?php echo lang_get( 'assign_to' ) ?></td>
 				<?php if( $t_can_update_global_cat ) { ?>
@@ -198,10 +226,13 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 					$t_id = urlencode( $t_id );
 					$t_project_id = urlencode( ALL_PROJECTS );
-
-					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
-					echo '&#160;';
-					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
+					echo '<div class="btn-group inline">';
+					echo '<div class="pull-left">';
+					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+					echo '</div>';
+					echo '<div class="pull-left">';
+					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					echo '</div>';
 ?>
 				</td>
 			<?php } ?>
@@ -214,19 +245,23 @@ print_manage_menu( 'manage_proj_page.php' );
 		} # end if
 ?>
 	</table>
+	</div>
+	</div>
 
 <?php if( $t_can_update_global_cat ) { ?>
-	<form method="post" action="manage_proj_cat_add.php">
-		<fieldset>
+	<form method="post" action="manage_proj_cat_add.php" class="form-inline">
+		<div class="widget-toolbox padding-8 clearfix">
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
-			<input type="text" name="name" size="32" maxlength="128" />
-			<input type="submit" name="add_category" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
-			<input type="submit" name="add_and_edit_category" class="button" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
-		</fieldset>
+			<input type="text" name="name" class="input-sm" size="32" maxlength="128" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" name="add_and_edit_category" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
+		</div>
 	</form>
 <?php } ?>
 </div>
-
+</div>
+</div>
 <?php
-html_page_bottom();
+echo '</div>';
+layout_page_end();

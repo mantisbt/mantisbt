@@ -1,0 +1,36 @@
+{
+    "name": "mantisbt/mantisbt",
+    "description": "Mantis Bug Tracker",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "vboctor/disposable_email_checker": "^3.0",
+        "adodb/adodb-php": "^5.20",
+        "phpmailer/phpmailer": "^5.2.22",
+        "erusev/parsedown": "^1.7.0",
+        "dapphp/securimage": "dev-mantis"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mantisbt/securimage"
+        }
+    ],
+    "license": "GPL v2",
+    "authors": [
+        {
+            "name": "MantisBT Team",
+            "email": "mantisbt-dev@lists.sourceforge.net",
+            "homepage": "https://www.mantisbt.org"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "5.5.0"
+        }
+    }
+}

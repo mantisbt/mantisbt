@@ -88,30 +88,29 @@ $t_show_errors_mode_link = sprintf( $t_link,
 	'verbose error messages'
 );
 
-http_content_headers();
 
-html_begin();
+layout_page_header( 'MantisBT Administration - Check Installation' );
 
-html_head_begin();
-html_css_link( 'admin.css' );
-html_content_type();
-html_title( 'MantisBT Administration - Check Installation' );
-html_head_end();
+layout_admin_page_begin();
 ?>
 
-<body>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-<?php html_top_banner(); ?>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Checking your MantisBT installation...
+	</h4>
+</div>
 
-<p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
-<table id="check-results">
-	<thead>
-		<tr>
-			<th colspan="2" class="thead1">
-				<strong>Checking your MantisBT installation...</strong>
-			</th>
-		</tr>
-	</thead>
+<div class="widget-body">
+	<div class="widget-toolbox padding-8 clearfix">
+		Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?>
+	</div>
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed">
 
 <?php
 
@@ -138,10 +137,15 @@ if( !$g_failed_test ) {
 	include( 'check_webservice_inc.php' );
 }
 
+/*
+ * Disable integrity since the required blobs are no longer available
+ * See https://sourceforge.net/p/mantisbt/mailman/message/24608409/
+ *
 if( !$g_failed_test ) {
 	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
 	include( 'check_integrity_inc.php' );
 }
+*/
 
 if( !$g_failed_test ) {
 	define( 'CHECK_CRYPTO_INC_ALLOW', true );
@@ -179,12 +183,35 @@ if( !$g_failed_test ) {
 }
 ?>
 </table>
+</div>
+</div>
+</div>
+</div>
+
+<div class="space-10"></div>
+
 <?php if( $g_failed_test ) { ?>
-<p class="notice fail2" id="check-notice-failed">Some tests failed. Please review and correct these failed tests before using MantisBT.</p>
+	<div class="alert alert-danger" id="check-notice-failed">
+		Some tests failed. Please review and correct these failed tests before using MantisBT.
+	</div>
 <?php } else if( $g_passed_test_with_warnings ) { ?>
-<p class="notice warn2" id="check-notice-warnings">Some warnings were encountered. Please review and consider correcting these warnings before using MantisBT.</p>
+	<div class="alert alert-warning" id="check-notice-warnings">
+		Some warnings were encountered. Please review and consider correcting these warnings before using MantisBT.
+	</div>
 <?php } else { ?>
-<p class="notice pass2" id="check-notice-passed">All tests passed.</p>
+<div class="alert alert-success"  id="check-notice-passed">
+	All tests passed.
+</div>
 <?php } ?>
-</body>
-</html>
+
+<div class="alert alert-danger" id="notice-delete-admin">
+	For security reasons, you should delete (or at least restrict access to) the
+	<em>admin</em> directory.
+	Refer to the <a href="http://mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/#admin.install.postcommon">
+		MantisBT Admin Guide</a>
+	for further details.
+</div>
+
+</div>
+<?php
+layout_admin_page_end();

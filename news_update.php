@@ -63,20 +63,20 @@ news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headl
 
 form_security_purge( 'news_update' );
 
-html_page_top();
+layout_page_header();
 
-echo '<div class="success-msg">';
-echo lang_get( 'operation_successful' );
+layout_page_begin( 'main_page.php' );
+
+echo '<div class="space-20"></div>';
+
+$t_buttons = array(
+	array( 'news_menu_page.php' ),
+	array( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) ),
+);
+html_operation_confirmation( $t_buttons, CONFIRMATION_TYPE_SUCCESS );
 
 echo '<br />';
 
-print_bracket_link( 'news_edit_page.php?news_id=' . $f_news_id . '&action=edit', lang_get( 'edit_link' ) );
-print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
-
-echo '<br /><br />';
-
 print_news_entry( $f_headline, $f_body, $t_row['poster_id'], $f_view_state, $f_announcement, $t_row['date_posted'] );
 
-echo '</div>';
-
-html_page_bottom();
+layout_page_end();

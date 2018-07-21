@@ -63,7 +63,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_allow_bug_delete_access_level</term>
+			<term>$g_delete_bug_threshold</term>
 			<listitem>
 				<para>Allow the specified access level and above to delete
 					bugs.
@@ -153,14 +153,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_register_globals</term>
-			<listitem>
-				<para>If your register_globals is Off then set this to OFF. Check
-					your register_globals setting in php.ini or phpinfo().
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_enable_project_documentation</term>
 			<listitem>
 				<para>Specifies whether to enable support for project documents or
@@ -218,19 +210,18 @@
 		<varlistentry>
 			<term>$g_set_configuration_threshold</term>
 			<listitem>
-				<para>Threshold for users to set the system configurations generically via MantisBT web interface.
-					WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
-					to the fact that such users can set configurations to PHP code and hence there can be a security
-					risk if such users are not trusted. The default value is ADMINISTRATOR.
+				<para>Threshold for users to set the system configurations
+					generically via MantisBT web interface.
+					The default value is ADMINISTRATOR.
 				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_csv_add_bom</term>
-			<listitem>
-				<para>Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8.
-				The default value is OFF;
-				</para>
+				<warning>
+					<para>Users who have access to set configuration via the
+						interface MUST be trusted. This is due to the fact that
+						these users can leverage the interface to
+						<emphasis>inject PHP code</emphasis> into the system,
+						which is a potential security risk.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 	</variablelist>

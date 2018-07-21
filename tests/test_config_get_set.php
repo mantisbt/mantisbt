@@ -39,12 +39,12 @@ $t_test = config_get( $t_config );
 print_r( $t_test );
 
 $t_config = 'default_home_page';
-$t_test = config_get( $t_config );
+$t_test = config_get_global( $t_config );
 print_r( $t_config );
 print_r( $t_test );
 $t_test .= '?test';
-config_set( $t_config, $t_test );
-$t_test = config_get( $t_config );
+config_set_global( $t_config, $t_test );
+$t_test = config_get_global( $t_config );
 print_r( $t_test );
 
 $g_test_config = array();

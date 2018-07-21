@@ -56,7 +56,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Dokuwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 	}
 
@@ -71,7 +71,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
 		if( !is_blank( $t_namespace ) ) {
-			$t_base .= urlencode( $t_namespace ) . ':';
+			$t_base .= $t_namespace . ':';
 		}
 
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
@@ -115,7 +115,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT MediaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 	}
 
@@ -130,7 +130,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . ':';
 		} else {
-			$t_base .= urlencode( plugin_config_get( 'root_namespace' ) );
+			$t_base .= plugin_config_get( 'root_namespace' );
 		}
 		return $t_base;
 	}
@@ -170,7 +170,7 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Twiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 	}
 
@@ -185,7 +185,7 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
 		if( !is_blank( $t_namespace ) ) {
-			$t_base .= urlencode( $t_namespace ) . '/';
+			$t_base .= $t_namespace . '/';
 		}
 
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
@@ -229,7 +229,7 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT WikkaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 	}
 
@@ -244,7 +244,7 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
 		$t_namespace = ucfirst( plugin_config_get( 'root_namespace' ) );
 		if( !is_blank( $t_namespace ) ) {
-			$t_base .= urlencode( $t_namespace );
+			$t_base .= $t_namespace;
 		}
 
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
@@ -288,7 +288,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Xwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.3.0',
+			'MantisCore' => '2.0.0',
 		);
 	}
 
@@ -303,7 +303,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . '/';
 		} else {
-			$t_base .= urlencode( plugin_config_get( 'root_namespace' ) );
+			$t_base .= plugin_config_get( 'root_namespace' );
 		}
 		return $t_base;
 	}

@@ -30,43 +30,14 @@
 class TimelineEvent {
 	protected $timestamp;
 	protected $user_id;
-	protected $tie_breaker;
 
 	/**
 	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id     An user identifier.
-	 * @param boolean $p_tie_breaker A value to sort events by if timestamp matches (generally issue identifier).
 	 */
-	public function __construct( $p_timestamp, $p_user_id, $p_tie_breaker ) {
+	public function __construct( $p_timestamp, $p_user_id ) {
 		$this->timestamp = $p_timestamp;
 		$this->user_id = $p_user_id;
-		$this->tie_breaker = $p_tie_breaker;
-	}
-
-	/**
-	 * Comparision function for ordering of timeline events.
-	 * We compare first by timestamp, then by the tie_breaker field.
-	 * @param TimelineEvent $p_other An instance of TimelineEvent to compare against.
-	 * @return integer
-	 */
-	public function compare( TimelineEvent $p_other ) {
-		if( $this->timestamp < $p_other->timestamp ) {
-			return -1;
-		}
-
-		if( $this->timestamp > $p_other->timestamp ) {
-			return 1;
-		}
-
-		if( $this->tie_breaker < $p_other->tie_breaker ) {
-			return -1;
-		}
-
-		if( $this->tie_breaker > $p_other->tie_breaker ) {
-			return 1;
-		}
-
-		return 0;
 	}
 
 	/**
@@ -98,28 +69,19 @@ class TimelineEvent {
 
 	/**
 	 * Returns html string representing the beginning block of a timeline entry
+	 * @param string $p_action_icon Icon name for Font Awesome
 	 * @return string
 	 */
-	public function html_start() {
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
+	public function html_start( $p_action_icon = 'fa-check' ) {
+		$t_avatar = Avatar::get( $this->user_id, 40 );
+		$t_html = '<div class="profile-activity clearfix">';
 
-		# Avatar div
 		if( !empty( $t_avatar ) ) {
-			$t_class = 'avatar';
-			$t_src = $t_avatar[0];
+			$t_html .= prepare_avatar( $t_avatar, 'profile-activity', 40 );
+		} else {
+			$t_html .= '<i class="pull-left thumbicon fa ' . $p_action_icon . ' btn-primary no-hover"></i>';
 		}
-		else {
-			$t_class = 'no-avatar';
-			$t_src = 'images/notice.gif';
-		}
-
-		return sprintf(
-			'<div class="entry"><div class="%s"><img class="%s" src="%s" /></div><div class="timestamp">%s</div>',
-			$t_class,
-			$t_class,
-			$t_src,
-			$this->format_timestamp( $this->timestamp )
-		);
+		return $t_html;
 	}
 
 	/**
@@ -127,6 +89,8 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_end() {
-		return '</div>';
+		$t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+		$t_html .= '</div>';
+		return $t_html;
 	}
 }

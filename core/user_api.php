@@ -58,7 +58,12 @@ require_api( 'string_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
+# Cache of user rows from {user} table, indexed by user_id
+# If id does not exists, a value of 'false' is stored
 $g_cache_user = array();
+
 $g_user_accessible_subprojects_cache = null;
 
 /**
@@ -74,34 +79,32 @@ $g_user_accessible_subprojects_cache = null;
 function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	global $g_cache_user;
 
-	if( isset( $g_cache_user[$p_user_id] ) ) {
-		return $g_cache_user[$p_user_id];
+	$c_user_id = (int)$p_user_id;
+
+	if( !isset( $g_cache_user[$c_user_id] ) ) {
+		user_cache_array_rows( array( $c_user_id ) );
 	}
 
-	$t_query = 'SELECT * FROM {user} WHERE id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id ) );
+	$t_user_row = $g_cache_user[$c_user_id];
 
-	if( 0 == db_num_rows( $t_result ) ) {
-		$g_cache_user[$p_user_id] = false;
-
+	if( !$t_user_row ) {
 		if( $p_trigger_errors ) {
-			error_parameters( (integer)$p_user_id );
-			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+			throw new ClientException(
+				sprintf( "User id '%d' not found.", (integer)$p_user_id ),
+				ERROR_USER_BY_ID_NOT_FOUND,
+				array( (integer)$p_user_id )
+			);
 		}
 
 		return false;
 	}
 
-	$t_row = db_fetch_array( $t_result );
-
-	$g_cache_user[$p_user_id] = $t_row;
-
-	return $t_row;
+	return $t_user_row;
 }
 
 /**
- * Generate an array of User objects from given User ID's
- *
+ * Loads user rows in cache for a set of User ID's
+ * Store false if the user does not exists
  * @param array $p_user_id_array An array of user identifiers.
  * @return void
  */
@@ -111,34 +114,41 @@ function user_cache_array_rows( array $p_user_id_array ) {
 
 	foreach( $p_user_id_array as $t_user_id ) {
 		if( !isset( $g_cache_user[(int)$t_user_id] ) ) {
-			$c_user_id_array[] = (int)$t_user_id;
+			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
 		}
 	}
-
 	if( empty( $c_user_id_array ) ) {
 		return;
 	}
 
-	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $c_user_id_array ) . ')';
-	$t_result = db_query( $t_query );
+	db_param_push();
+	$t_params = array();
+	$t_sql_in_params = array();
+	foreach( $c_user_id_array as $t_id ) {
+		$t_params[] = $t_id;
+		$t_sql_in_params[] = db_param();
+	}
+	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $t_sql_in_params ) . ')';
+	$t_result = db_query( $t_query, $t_params );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_user[(int)$t_row['id']] = $t_row;
+		$c_user_id = (int)$t_row['id'];
+		$g_cache_user[$c_user_id] = $t_row;
+		unset( $c_user_id_array[$c_user_id] );
 	}
-	return;
+	# set the remaining ids to false as not-found
+	foreach( $c_user_id_array as $t_id ) {
+		$g_cache_user[$t_id] = false;
+	}
 }
 
 /**
- * Cache an object as a bug.
+ * Cache a user row
  * @param array $p_user_database_result A user row to cache.
- * @return array|null
+ * @return void
  */
 function user_cache_database_result( array $p_user_database_result ) {
 	global $g_cache_user;
-
-	if( isset( $g_cache_user[$p_user_database_result['id']] ) ) {
-		return $g_cache_user[$p_user_database_result['id']];
-	}
 
 	$g_cache_user[$p_user_database_result['id']] = $p_user_database_result;
 }
@@ -189,7 +199,7 @@ function user_search_cache( $p_field, $p_value ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
 		foreach( $g_cache_user as $t_user ) {
-			if( $t_user[$p_field] == $p_value ) {
+			if( $t_user && $t_user[$p_field] == $p_value ) {
 				return $t_user;
 			}
 		}
@@ -225,96 +235,91 @@ function user_ensure_exists( $p_user_id ) {
 	$c_user_id = (integer)$p_user_id;
 
 	if( !user_exists( $c_user_id ) ) {
-		error_parameters( $c_user_id );
-		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+		throw new ClientException( "User $c_user_id not found", ERROR_USER_BY_ID_NOT_FOUND, array( $c_user_id ) );
 	}
 }
 
 /**
  * return true if the username is unique, false if there is already a user with that username
  * @param string $p_username The username to check.
+ * @param integer|null The user id allowed to conflict, otherwise null.
  * @return boolean
  */
-function user_is_name_unique( $p_username ) {
-	$t_query = 'SELECT username FROM {user} WHERE username=' . db_param();
-	$t_result = db_query( $t_query, array( $p_username ), 1 );
+function user_is_name_unique( $p_username, $p_user_id = null ) {
+	$t_existing_user_id = user_get_id_by_name( $p_username );
+	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
+		return false;
+	}
 
-	return !db_result( $t_result );
+	$t_existing_user_id = user_get_id_by_realname( $p_username );
+	if( $t_existing_user_id !== false && ( $p_user_id === null || (int)$t_existing_user_id !== $p_user_id ) ) {
+		return false;
+	}
+
+	return true;
 }
 
 /**
  * Check if the username is unique and trigger an ERROR if it isn't
  * @param string $p_username The username to check.
+ * @param integer|null $p_user_id The user id allowed to conflict, otherwise null.
  * @return void
  */
-function user_ensure_name_unique( $p_username ) {
-	if( !user_is_name_unique( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+function user_ensure_name_unique( $p_username, $p_user_id = null ) {
+	if( !user_is_name_unique( $p_username, $p_user_id ) ) {
+		throw new ClientException(
+			sprintf( "Username '%s' already used.", $p_username ),
+			ERROR_USER_NAME_NOT_UNIQUE );
 	}
 }
 
 /**
- * Check if the realname is a valid username (does not account for uniqueness)
- * Return 0 if it is invalid, The number of matches + 1
+ * Checks if the email address is unique.
  *
- * @param string $p_username The username to check.
- * @param string $p_realname The realname to check.
- * @return integer
+ * @param string $p_email The email to check.
+ * @param integer $p_user_id The user id that we are validating for or null for
+ *                           the case of a new user.
+ *
+ * @return boolean true: unique or blank, false: otherwise
  */
-function user_is_realname_unique( $p_username, $p_realname ) {
-	if( is_blank( $p_realname ) ) {
-		# don't bother checking if realname is blank
-		return 1;
+function user_is_email_unique( $p_email, $p_user_id = null ) {
+	if( is_blank( $p_email ) ) {
+		return true;
 	}
 
-	$p_username = trim( $p_username );
-	$p_realname = trim( $p_realname );
+	$p_email = trim( $p_email );
 
-	# allow realname to match username
-	$t_duplicate_count = 0;
-	if( $p_realname !== $p_username ) {
-		# check realname does not match an existing username
-		#  but allow it to match the current user
-		$t_target_user = user_get_id_by_name( $p_username );
-		$t_other_user = user_get_id_by_name( $p_realname );
-		if( ( false !== $t_other_user ) && ( $t_target_user !== $t_other_user ) ) {
-			return 0;
-		}
-
-		# check to see if the realname is unique
-		$t_query = 'SELECT id FROM {user} WHERE realname=' . db_param();
-		$t_result = db_query( $t_query, array( $p_realname ) );
-
-		$t_users = array();
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_users[] = $t_row;
-		}
-		$t_duplicate_count = count( $t_users );
-
-		if( $t_duplicate_count > 0 ) {
-			# set flags for non-unique realnames
-			if( config_get( 'differentiate_duplicates' ) ) {
-				for( $i = 0;$i < $t_duplicate_count;$i++ ) {
-					$t_user_id = $t_users[$i]['id'];
-					user_set_field( $t_user_id, 'duplicate_realname', ON );
-				}
-			}
-		}
+	db_param_push();
+	if ( $p_user_id === null ) {
+		$t_query = 'SELECT email FROM {user} WHERE email=' . db_param();
+		$t_result = db_query( $t_query, array( $p_email ), 1 );
+	} else {
+		$t_query = 'SELECT email FROM {user} WHERE id<>' . db_param() .
+			' AND email=' . db_param();
+		$t_result = db_query( $t_query, array( $p_user_id, $p_email ), 1 );
 	}
-	return $t_duplicate_count + 1;
+
+	return !db_result( $t_result );
 }
 
 /**
- * Check if the realname is a unique
- * Trigger an error if the username is not valid
+ * Check if the email is unique and trigger an ERROR if it isn't
  *
- * @param string $p_username The username to check.
- * @param string $p_realname The realname to check.
+ * @param string $p_email The email address to check.
+ * @param integer $p_user_id The user id that we are validating for or null for
+ *                           the case of a new user.
+ *
  * @return void
  */
-function user_ensure_realname_unique( $p_username, $p_realname ) {
-	if( 1 > user_is_realname_unique( $p_username, $p_realname ) ) {
-		trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
+function user_ensure_email_unique( $p_email, $p_user_id = null ) {
+	if( !config_get_global( 'email_ensure_unique' ) ) {
+		return;
+	}
+
+	if( !user_is_email_unique( $p_email, $p_user_id ) ) {
+		throw new ClientException(
+			sprintf( "Email '%s' already used.", $p_email ),
+			ERROR_USER_EMAIL_NOT_UNIQUE );
 	}
 }
 
@@ -325,7 +330,7 @@ function user_ensure_realname_unique( $p_username, $p_realname ) {
  */
 function user_is_name_valid( $p_username ) {
 	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
-	if( utf8_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
+	if( mb_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
 		return false;
 	}
 
@@ -351,7 +356,9 @@ function user_is_name_valid( $p_username ) {
  */
 function user_ensure_name_valid( $p_username ) {
 	if( !user_is_name_valid( $p_username ) ) {
-		trigger_error( ERROR_USER_NAME_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Invalid username '%s'", $p_username ),
+			ERROR_USER_NAME_INVALID );
 	}
 }
 
@@ -362,6 +369,7 @@ function user_ensure_name_valid( $p_username ) {
  * @return boolean
  */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {bug_monitor}
 				  WHERE user_id=' . db_param() . ' AND bug_id=' . db_param();
 
@@ -375,18 +383,17 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 }
 
 /**
- * return true if the user has access of ADMINISTRATOR or higher, false otherwise
+ * Check if the specified user is an enabled user with admin access level or above.
  * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @return boolean true: admin, false: otherwise.
  */
 function user_is_administrator( $p_user_id ) {
-	$t_access_level = user_get_field( $p_user_id, 'access_level' );
-
-	if( $t_access_level >= config_get_global( 'admin_site_threshold' ) ) {
-		return true;
-	} else {
+	if( !user_is_enabled( $p_user_id ) ) {
 		return false;
 	}
+
+	$t_access_level = user_get_field( $p_user_id, 'access_level' );
+	return $t_access_level >= config_get_global( 'admin_site_threshold' );
 }
 
 /**
@@ -401,10 +408,7 @@ function user_is_administrator( $p_user_id ) {
  * @access public
  */
 function user_is_protected( $p_user_id ) {
-	if( user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' ) ) {
-		return true;
-	}
-	return false;
+	return user_is_anonymous( $p_user_id ) || ON == user_get_field( $p_user_id, 'protected' );
 }
 
 /**
@@ -416,10 +420,7 @@ function user_is_protected( $p_user_id ) {
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
-	if( ON == config_get( 'allow_anonymous_login' ) && user_get_field( $p_user_id, 'username' ) == config_get( 'anonymous_account' ) ) {
-		return true;
-	}
-	return false;
+	return auth_anonymous_enabled() && strcasecmp( user_get_username( $p_user_id ), auth_anonymous_account() ) == 0;
 }
 
 /**
@@ -430,7 +431,9 @@ function user_is_anonymous( $p_user_id ) {
  */
 function user_ensure_unprotected( $p_user_id ) {
 	if( user_is_protected( $p_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+		throw new ClientException(
+			'User protected.',
+			ERROR_PROTECTED_ACCOUNT );
 	}
 }
 
@@ -449,19 +452,27 @@ function user_is_enabled( $p_user_id ) {
 }
 
 /**
- * count the number of users at or greater than a specific level
+ * Count the number of users at or greater than a specific level
  *
- * @param integer $p_level Access Level to count users. The default is to include ANYBODY.
- * @return integer
+ * @param integer $p_level   Access Level to count users. The default is to include ANYBODY.
+ * @param bool    $p_enabled true: must be enabled, false: must be disabled, null: don't care.
+ * @return integer The number of users.
  */
-function user_count_level( $p_level = ANYBODY ) {
-	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level>=' . db_param();
-	$t_result = db_query( $t_query, array( $p_level ) );
+function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
+	db_param_push();
+	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level >= ' . db_param();
+	$t_param = array( $p_level );
 
-	# Get the list of connected users
-	$t_users = db_result( $t_result );
+	if( $p_enabled !== null ) {
+		$t_query .= ' AND enabled = ' . db_param();
+		$t_param[] = (bool)$p_enabled;
+	}
 
-	return $t_users;
+	# Get the number of users
+	$t_result = db_query( $t_query, $t_param );
+	$t_count = db_result( $t_result );
+
+	return $t_count;
 }
 
 /**
@@ -484,6 +495,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
 
 	# Execute query
+	db_param_push();
 	$t_query = 'SELECT id FROM {user} WHERE last_visit > ' . db_param();
 	$t_result = db_query( $t_query, array( $t_last_timestamp_threshold ), 1 );
 
@@ -523,11 +535,13 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
-	user_ensure_realname_unique( $p_username, $p_realname );
+	user_ensure_email_unique( $p_email );
 	email_ensure_valid( $p_email );
+	email_ensure_not_disposable( $p_email );
 
 	$t_cookie_string = auth_generate_unique_cookie_string();
 
+	db_param_push();
 	$t_query = 'INSERT INTO {user}
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
@@ -548,8 +562,11 @@ function user_create( $p_username, $p_password, $p_email = '',
 	# Send notification email
 	if( !is_blank( $p_email ) ) {
 		$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
-		email_signup( $t_user_id, $p_password, $t_confirm_hash, $p_admin_name );
+		token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $t_user_id );
+		email_signup( $t_user_id, $t_confirm_hash, $p_admin_name );
 	}
+
+	event_signal( 'EVENT_MANAGE_USER_CREATE', array( $t_user_id ) );
 
 	return $t_cookie_string;
 }
@@ -557,7 +574,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 /**
  * Signup a user.
  * If the use_ldap_email config option is on then tries to find email using
- * ldap. $p_email may be empty, but the user wont get any emails.
+ * ldap. $p_email may be empty, but the user won't get any emails.
  * returns false if error, the generated cookie string if ok
  * @param string $p_username The username to sign up.
  * @param string $p_email    The email address of the user signing up.
@@ -589,10 +606,14 @@ function user_signup( $p_username, $p_email = null ) {
 
 	$p_email = trim( $p_email );
 
+	email_ensure_not_disposable( $p_email );
+	email_ensure_valid( $p_email );
+	user_ensure_email_unique( $p_email );
+
 	# Create random password
 	$t_password = auth_generate_random_password();
 
-	return user_create( $p_username, $t_password, $p_email );
+	return user_create( $p_username, $t_password, $p_email, auth_signup_access_level() );
 }
 
 /**
@@ -605,6 +626,7 @@ function user_signup( $p_username, $p_email = null ) {
 function user_delete_project_specific_access_levels( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
+	db_param_push();
 	$t_query = 'DELETE FROM {project_user_list} WHERE user_id=' . db_param();
 	db_query( $t_query, array( (int)$p_user_id ) );
 
@@ -623,6 +645,7 @@ function user_delete_profiles( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
 	# Remove associated profiles
+	db_param_push();
 	$t_query = 'DELETE FROM {user_profile} WHERE user_id=' . db_param();
 	db_query( $t_query, array( (int)$p_user_id ) );
 
@@ -643,6 +666,8 @@ function user_delete( $p_user_id ) {
 
 	user_ensure_unprotected( $p_user_id );
 
+	event_signal( 'EVENT_MANAGE_USER_DELETE', array( $p_user_id ) );
+
 	# Remove associated profiles
 	user_delete_profiles( $p_user_id );
 
@@ -651,32 +676,10 @@ function user_delete( $p_user_id ) {
 
 	# Remove project specific access levels
 	user_delete_project_specific_access_levels( $p_user_id );
-
-	# unset non-unique realname flags if necessary
-	if( config_get( 'differentiate_duplicates' ) ) {
-		$c_realname = user_get_field( $p_user_id, 'realname' );
-		$t_query = 'SELECT id FROM {user} WHERE realname=' . db_param();
-		$t_result = db_query( $t_query, array( $c_realname ) );
-
-		$t_users = array();
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_users[] = $t_row;
-		}
-
-		$t_user_count = count( $t_users );
-
-		if( $t_user_count == 2 ) {
-			# unset flags if there are now only 2 unique names
-			for( $i = 0;$i < $t_user_count;$i++ ) {
-				$t_user_id = $t_users[$i]['id'];
-				user_set_field( $t_user_id, 'duplicate_realname', OFF );
-			}
-		}
-	}
-
 	user_clear_cache( $p_user_id );
 
 	# Remove account
+	db_param_push();
 	$t_query = 'DELETE FROM {user} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_user_id ) );
 
@@ -688,13 +691,15 @@ function user_delete( $p_user_id ) {
  * return false if the username does not exist
  *
  * @param string $p_username The username to retrieve data for.
+ * @param boolean $p_throw true to throw if not found, false otherwise.
  * @return integer|boolean
  */
-function user_get_id_by_name( $p_username ) {
+function user_get_id_by_name( $p_username, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'username', $p_username ) ) {
 		return $t_user['id'];
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {user} WHERE username=' . db_param();
 	$t_result = db_query( $t_query, array( $p_username ) );
 
@@ -703,6 +708,14 @@ function user_get_id_by_name( $p_username ) {
 		user_cache_database_result( $t_row );
 		return $t_row['id'];
 	}
+
+	if( $p_throw ) {
+		throw new ClientException(
+			"Username '$p_username' not found",
+			ERROR_USER_BY_NAME_NOT_FOUND,
+			array( $p_username ) );
+	}
+
 	return false;
 }
 
@@ -710,14 +723,15 @@ function user_get_id_by_name( $p_username ) {
  * Get a user id from their email address
  *
  * @param string $p_email The email address to retrieve data for.
+ * @param boolean $p_throw true to throw exception when not found, false otherwise.
  * @return array
  */
-function user_get_id_by_email( $p_email ) {
-	global $g_cache_user;
+function user_get_id_by_email( $p_email, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
 		return $t_user['id'];
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param();
 	$t_result = db_query( $t_query, array( $p_email ) );
 
@@ -726,33 +740,118 @@ function user_get_id_by_email( $p_email ) {
 		user_cache_database_result( $t_row );
 		return $t_row['id'];
 	}
+
+	if( $p_throw ) {
+		throw new ClientException(
+			"User with email '$p_email' not found",
+			ERROR_USER_BY_EMAIL_NOT_FOUND,
+			array( $p_email ) );
+	}
+
 	return false;
 }
 
+/**
+ * Given an email address, this method returns the ids of the enabled users with
+ * that address.
+ *
+ * The returned list will be sorted by higher access level first.
+ *
+ * @param string $p_email The email address, can be an empty string to get users
+ *                        without an email address.
+ *
+ * @return array The user ids or an empty array.
+ */
+function user_get_enabled_ids_by_email( $p_email ) {
+	db_param_push();
+	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param() .
+		' AND enabled=' . db_param() . ' ORDER BY access_level DESC';
+	$t_result = db_query( $t_query, array( $p_email, 1 ) );
+
+	$t_user_ids = array();
+	while ( $t_row = db_fetch_array( $t_result ) ) {
+		user_cache_database_result( $t_row );
+		$t_user_ids[] = (int)$t_row['id'];
+	}
+
+	return $t_user_ids;
+}
 
 /**
  * Get a user id from their real name
  *
  * @param string $p_realname The realname to retrieve data for.
+ * @param boolean $p_throw true to throw if not found, false otherwise.
  * @return array
  */
-function user_get_id_by_realname( $p_realname ) {
-	global $g_cache_user;
+function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
 		return $t_user['id'];
 	}
 
+	db_param_push();
 	$t_query = 'SELECT * FROM {user} WHERE realname=' . db_param();
 	$t_result = db_query( $t_query, array( $p_realname ) );
 
 	$t_row = db_fetch_array( $t_result );
 
 	if( !$t_row ) {
+		if( $p_throw ) {
+			throw new ClientException( "User realname '$p_realname' not found", ERROR_USER_BY_NAME_NOT_FOUND, array( $p_realname ) );
+		}
+
 		return false;
-	} else {
-		user_cache_database_result( $t_row );
-		return $t_row['id'];
 	}
+
+	user_cache_database_result( $t_row );
+	return $t_row['id'];
+}
+
+/**
+ * Get a user id given an array that may have id, name, real_name, email, or name_or_realname.
+ *
+ * @param array $p_user The user info.
+ * @param boolean $p_throw_if_id_not_found If id specified and doesn't exist, then throw.
+ * @return integer user id
+ * @throws ClientException
+ */
+function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false ) {
+	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
+		$t_user_id = $p_user['id'];
+		if( $p_throw_if_id_not_found && !user_exists( $t_user_id ) ) {
+			throw new ClientException(
+				sprintf( "User with id '%d' doesn't exist", $t_user_id ),
+				ERROR_USER_BY_ID_NOT_FOUND,
+				array( $t_user_id ) );
+		}
+	} else if( isset( $p_user['name'] ) && !is_blank( $p_user['name'] ) ) {
+		$t_user_id = user_get_id_by_name( $p_user['name'], /* throw */ true );
+	} else if( isset( $p_user['email'] ) && !is_blank( $p_user['email'] ) ) {
+		$t_user_id = user_get_id_by_email( $p_user['email'], /* throw */ true );
+	} else if( isset( $p_user['real_name'] ) && !is_blank( $p_user['real_name'] ) ) {
+		$t_user_id = user_get_id_by_realname( $p_user['real_name'], /* throw */ true );
+	} else if( isset( $p_user['name_or_realname' ] ) && !is_blank( $p_user['name_or_realname' ] ) ) {
+		$t_identifier = $p_user['name_or_realname'];
+		$t_user_id = user_get_id_by_name( $t_identifier );
+
+		if( !$t_user_id ) {
+			$t_user_id = user_get_id_by_realname( $t_identifier );
+		}
+
+		if( !$t_user_id ) {
+			throw new ClientException(
+				"User '$t_identifier' not found",
+				ERROR_USER_BY_NAME_NOT_FOUND,
+				array( $t_identifier ) );
+		}
+	} else {
+		throw new ClientException(
+			"User id missing",
+			ERROR_GPC_VAR_NOT_FOUND,
+			array( 'user id' ) );
+	}
+
+	return $t_user_id;
 }
 
 /**
@@ -822,13 +921,28 @@ function user_get_field( $p_user_id, $p_field_name ) {
  */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
-	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
+	if( LDAP == config_get_global( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 	}
 	return $t_email;
+}
+
+/**
+ * Lookup the user's login name (username)
+ *
+ * @param integer $p_user_id A valid user identifier.
+ * @return string
+ */
+function user_get_username( $p_user_id ) {
+	$t_row = user_cache_row( $p_user_id, false );
+	if( false == $t_row ) {
+		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
+	}
+
+	return $t_row['username'];
 }
 
 /**
@@ -840,7 +954,7 @@ function user_get_email( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
+	if( LDAP == config_get_global( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
@@ -852,10 +966,19 @@ function user_get_realname( $p_user_id ) {
 }
 
 /**
- * return the username or a string "user<id>" if the user does not exist
- * if show_user_realname_threshold is set and real name is not empty, return it instead
+ * Return the user's name for display.
+ *
+ * The name is determined based on the following sequence:
+ * - if the user does not exist, returns the user ID prefixed by a localized
+ *   string (prefix_for_deleted_users, "user" by default);
+ * - if user_show_realname() is true and realname is not empty, return the user's Real Name;
+ * - Otherwise, return the username
+ *
+ * NOTE: do not use this function to retrieve the user's username
+ * @see user_get_username()
  *
  * @param integer $p_user_id A valid user identifier.
+ *
  * @return string
  */
 function user_get_name( $p_user_id ) {
@@ -863,61 +986,72 @@ function user_get_name( $p_user_id ) {
 
 	if( false == $t_row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
-	} else {
-		if( ON == config_get( 'show_realname' ) ) {
-			if( is_blank( $t_row['realname'] ) ) {
-				return $t_row['username'];
-			} else {
-				if( isset( $t_row['duplicate_realname'] ) && ( ON == $t_row['duplicate_realname'] ) ) {
-					return $t_row['realname'] . ' (' . $t_row['username'] . ')';
-				} else {
-					return $t_row['realname'];
-				}
-			}
-		} else {
-			return $t_row['username'];
-		}
 	}
+
+	return user_get_name_from_row( $t_row );
 }
 
 /**
-* Return the user avatar image URL
-* in this first implementation, only gravatar.com avatars are supported
-*
-* This function returns an array( URL, width, height ) or an empty array when the given user has no avatar.
-*
-* @param integer $p_user_id A valid user identifier.
-* @param integer $p_size    The required number of pixel in the image to retrieve the link for.
-* @return array
-*/
-function user_get_avatar( $p_user_id, $p_size = 80 ) {
-	$t_default_avatar = config_get( 'show_avatar' );
+ * Should realnames be shown to logged in user?
+ *
+ * @return bool true to show, false otherwise.
+ */
+function user_show_realname() {
+	return config_get( 'show_realname' ) == ON;
+}
 
-	if( OFF === $t_default_avatar ) {
-		# Avatars are not used
-		return array();
+/**
+ * Return the user's name for display.  If user_show_realname() is true and realname is not empty
+ * return realname otherwise return username.
+ *
+ * @param array $p_user_row The user row with 'realname' and 'username' fields
+ * @return string display name
+ */
+function user_get_name_from_row( array $p_user_row ) {
+	if( user_show_realname() ) {
+		if( !is_blank( $p_user_row['realname'] ) ) {
+			return $p_user_row['realname'];
+		}
 	}
-	# Set default avatar for legacy configuration
-	if( ON === $t_default_avatar ) {
-		$t_default_avatar = 'identicon';
+
+	return $p_user_row['username'];
+}
+
+/**
+ * Return display name in format "realname (username)" if user_show_realname() is true and
+ * realname is not empty otherwise return username
+ *
+ * @param array $p_user_row The user row with 'realname' and 'username' fields
+ * @return string display name
+ */
+function user_get_expanded_name_from_row( array $p_user_row ) {
+	$t_name = user_get_name_from_row( $p_user_row );
+	if( $t_name != $p_user_row['username'] ) {
+		return $t_name . ' (' . $p_user_row['username'] . ')';
 	}
 
-	# Default avatar is either one of Gravatar's options, or
-	# assumed to be an URL to a default avatar image
-	$t_default_avatar = urlencode( $t_default_avatar );
-	$t_rating = 'G';
+	return $p_user_row['username'];
+}
 
-	$t_email_hash = md5( strtolower( trim( user_get_email( $p_user_id ) ) ) );
+/**
+ * Get name used for sorting.
+ * 
+ * @param array $p_user_row The user row with 'realname' and 'username' fields
+ * @return string name for sorting
+ */
+function user_get_name_for_sorting_from_row( array $p_user_row ) {
+	if( !is_blank( $p_user_row['realname'] ) ) {
+		if( user_show_realname() ) {
+			if( config_get( 'sort_by_last_name' ) == ON ) {
+				$t_sort_name_bits = explode( ' ', mb_strtolower( trim( $p_user_row['realname'] ) ), 2 );
+				return ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+			}
 
-	# Build Gravatar URL
-	if( http_is_protocol_https() ) {
-		$t_avatar_url = 'https://secure.gravatar.com/';
-	} else {
-		$t_avatar_url = 'http://www.gravatar.com/';
+			return mb_strtolower( trim( $p_user_row['realname'] ) );
+		}
 	}
-	$t_avatar_url .= 'avatar/' . $t_email_hash . '?d=' . $t_default_avatar . '&r=' . $t_rating . '&s=' . $p_size;
 
-	return array( $t_avatar_url, $p_size, $p_size );
+	return mb_strtolower( $p_user_row['username'] );
 }
 
 /**
@@ -935,7 +1069,7 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		return $t_access_level;
 	}
 
-	$t_project_access_level = project_get_local_user_access_level( $p_project_id, $p_user_id );
+	$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );
 
 	if( false === $t_project_access_level ) {
 		return $t_access_level;
@@ -947,7 +1081,7 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 $g_user_accessible_projects_cache = null;
 
 /**
- * retun an array of project IDs to which the user has access
+ * return an array of project IDs to which the user has access
  *
  * @param integer $p_user_id       A valid user identifier.
  * @param boolean $p_show_disabled Whether to include disabled projects in the result array.
@@ -966,6 +1100,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		$t_public = VS_PUBLIC;
 		$t_private = VS_PRIVATE;
 
+		db_param_push();
 		$t_query = 'SELECT p.id, p.name, ph.parent_id
 						  FROM {project} p
 						  LEFT JOIN {project_user_list} u
@@ -1082,7 +1217,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 }
 
 /**
- * retun an array of sub-project IDs of all sub-projects project to which the user has access
+ * return an array of sub-project IDs of all sub-projects project to which the user has access
  * @param integer $p_user_id    A valid user identifier.
  * @param integer $p_project_id A valid project identifier.
  * @return array
@@ -1105,33 +1240,40 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 }
 
 /**
- * retun an array of sub-project IDs of all project to which the user has access
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_project_id A valid project identifier.
+ * Returns an array of project and sub-project IDs of all projects to which the
+ * user has access and that are children of the specified project.
+ *
+ * @param integer $p_user_id    A valid user identifier or null for logged in user.
+ * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
+ *                              all top level projects and sub-projects.
  * @return array
  */
-function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
+function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( $p_user_id === null ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+
 	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = user_get_accessible_projects( $p_user_id );
+		$t_top_projects = user_get_accessible_projects( $p_user_id );
 
 		# Cover the case for PHP < 5.4 where array_combine() returns
 		# false and triggers warning if arrays are empty (see #16187)
-		if( empty( $t_topprojects ) ) {
+		if( empty( $t_top_projects ) ) {
 			return array();
 		}
 
 		# Create a combined array where key = value
-		$t_project_ids = array_combine( $t_topprojects, $t_topprojects );
+		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );
 
 		# Add all subprojects user has access to
-		foreach( $t_topprojects as $t_project ) {
+		foreach( $t_top_projects as $t_project ) {
 			$t_subprojects_ids = user_get_all_accessible_subprojects( $p_user_id, $t_project );
 			foreach( $t_subprojects_ids as $t_id ) {
 				$t_project_ids[$t_id] = $t_id;
 			}
 		}
 	} else {
-		access_ensure_project_level( VIEWER, $p_project_id );
+		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
 		array_unshift( $t_project_ids, $p_project_id );
 	}
@@ -1146,6 +1288,7 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
  *		The array contains the id, name, view state, and project access level for the user.
  */
 function user_get_assigned_projects( $p_user_id ) {
+	db_param_push();
 	$t_query = 'SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM {project} p
 				LEFT JOIN {project_user_list} u
@@ -1175,6 +1318,7 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	}
 
 	$t_adm = config_get_global( 'admin_site_threshold' );
+	db_param_push();
 	$t_query = 'SELECT DISTINCT u.id, u.username, u.realname
 				FROM {user} u
 				LEFT JOIN {project_user_list} p
@@ -1187,26 +1331,15 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_display = array();
 	$t_sort = array();
 	$t_users = array();
-	$t_show_realname = ( ON == config_get( 'show_realname' ) );
-	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_users[] = $t_row['id'];
-		$t_user_name = string_attribute( $t_row['username'] );
-		$t_sort_name = $t_user_name;
-		if( ( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
-			$t_user_name = string_attribute( $t_row['realname'] );
-			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
-			}
-		}
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		$t_display[] = user_get_expanded_name_from_row( $t_row );
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
 	}
+
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+
 	$t_count = count( $t_sort );
 	$t_user_list = array();
 	for( $i = 0;$i < $t_count; $i++ ) {
@@ -1227,6 +1360,7 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(*)
 				  FROM {bug}
 				  WHERE ' . $t_where_prj . '
@@ -1249,6 +1383,7 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
+	db_param_push();
 	$t_query = 'SELECT COUNT(*) FROM {bug}
 				  WHERE ' . $t_where_prj . '
 						  status<' . db_param() . ' AND
@@ -1266,6 +1401,7 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @return array
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
+	db_param_push();
 	$t_query = 'SELECT * FROM {user_profile}
 				  WHERE id=' . db_param() . ' AND
 						user_id=' . db_param();
@@ -1321,19 +1457,21 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 		$t_project_id = $p_project_id;
 	}
 
-	$t_view_all_cookie_id = filter_db_get_project_current( $t_project_id, $p_user_id );
-	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id, $p_user_id );
-	$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
+	# Currently we use the filters saved in db as "current" special filters,
+	# to track the active settings for filters in use.
 
-	if( !isset( $t_cookie_detail[1] ) ) {
+	# for anonymous user, we don't allow using persistent filter
+	# if this function is reached, we return a default filter for it.
+	if( user_is_anonymous( $p_user_id ) ) {
 		return filter_get_default();
 	}
 
-	$t_filter = json_decode( $t_cookie_detail[1], true );
-
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-
-	return $t_filter;
+	$t_filter_id = filter_db_get_project_current( $t_project_id, $p_user_id );
+	if( $t_filter_id ) {
+		return filter_get( $t_filter_id );
+	} else {
+		return filter_get_default();
+	}
 }
 
 /**
@@ -1346,8 +1484,8 @@ function user_update_last_visit( $p_user_id ) {
 	$c_user_id = (int)$p_user_id;
 	$c_value = db_now();
 
+	db_param_push();
 	$t_query = 'UPDATE {user} SET last_visit=' . db_param() . ' WHERE id=' . db_param();
-
 	db_query( $t_query, array( $c_value, $c_user_id ) );
 
 	user_update_cache( $c_user_id, 'last_visit', $c_value );
@@ -1363,8 +1501,8 @@ function user_update_last_visit( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_login_count( $p_user_id ) {
+	db_param_push();
 	$t_query = 'UPDATE {user} SET login_count=login_count+1 WHERE id=' . db_param();
-
 	db_query( $t_query, array( (int)$p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1379,6 +1517,7 @@ function user_increment_login_count( $p_user_id ) {
  * @return boolean always true
  */
 function user_reset_failed_login_count_to_zero( $p_user_id ) {
+	db_param_push();
 	$t_query = 'UPDATE {user} SET failed_login_count=0 WHERE id=' . db_param();
 	db_query( $t_query, array( (int)$p_user_id ) );
 
@@ -1394,6 +1533,7 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_failed_login_count( $p_user_id ) {
+	db_param_push();
 	$t_query = 'UPDATE {user} SET failed_login_count=failed_login_count+1 WHERE id=' . db_param();
 	db_query( $t_query, array( $p_user_id ) );
 
@@ -1409,6 +1549,7 @@ function user_increment_failed_login_count( $p_user_id ) {
  * @return boolean always true
  */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
+	db_param_push();
 	$t_query = 'UPDATE {user} SET lost_password_request_count=0 WHERE id=' . db_param();
 	db_query( $t_query, array( $p_user_id ) );
 
@@ -1424,6 +1565,7 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
+	db_param_push();
 	$t_query = 'UPDATE {user}
 				SET lost_password_request_count=lost_password_request_count+1
 				WHERE id=' . db_param();
@@ -1442,10 +1584,15 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
  * @return void
  */
 function user_set_fields( $p_user_id, array $p_fields ) {
+	if( empty( $p_fields ) ) {
+		return;
+	}
+
 	if( !array_key_exists( 'protected', $p_fields ) ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
+	db_param_push();
 	$t_query = 'UPDATE {user}';
 	$t_parameters = array();
 
@@ -1509,9 +1656,12 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
 	$c_cookie_string = auth_generate_unique_cookie_string();
+	# Delete token for password activation if there is any
+	token_delete( TOKEN_ACCOUNT_ACTIVATION, $p_user_id );
 
 	$c_password = auth_process_plain_password( $p_password );
 
+	db_param_push();
 	$t_query = 'UPDATE {user}
 				  SET password=' . db_param() . ', cookie_string=' . db_param() . '
 				  WHERE id=' . db_param();
@@ -1527,7 +1677,15 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
  * @return boolean
  */
 function user_set_email( $p_user_id, $p_email ) {
+	$p_email = trim( $p_email );
+
 	email_ensure_valid( $p_email );
+	email_ensure_not_disposable( $p_email );
+
+	$t_old_email = user_get_email( $p_user_id );
+	if( strcasecmp( $t_old_email, $p_email ) != 0 ) {
+		user_ensure_email_unique( $p_email );
+	}
 
 	return user_set_field( $p_user_id, 'email', $p_email );
 }
@@ -1550,7 +1708,7 @@ function user_set_realname( $p_user_id, $p_realname ) {
  */
 function user_set_name( $p_user_id, $p_username ) {
 	user_ensure_name_valid( $p_username );
-	user_ensure_name_unique( $p_username );
+	user_ensure_name_unique( $p_username, $p_user_id );
 
 	return user_set_field( $p_user_id, 'username', $p_username );
 }
@@ -1596,6 +1754,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		# Send notification email
 		if( $p_send_email ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
+			token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $p_user_id );
 			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 		}
 	} else {

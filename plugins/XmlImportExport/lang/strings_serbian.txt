@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -38,13 +38,19 @@
  * @ingroup Language
  * @file
  *
+ * @author Obsuser
  * @author Rancher
+ * @author Srdjan m
  */
 
 $s_plugin_XmlImportExport_title = 'Проблеми у увозу/извозу';
 $s_plugin_XmlImportExport_description = 'Додаје могућности увоза и извоза у XML.';
 $s_plugin_XmlImportExport_import = 'Увези проблеме';
 $s_plugin_XmlImportExport_export = 'XML извоз';
+$s_plugin_XmlImportExport_config_title = 'XML увозни/извозни приступни нивои конфигурације';
+$s_plugin_XmlImportExport_import_threshold = 'Увези проблеме';
+$s_plugin_XmlImportExport_export_threshold = 'Извези проблеме';
+$s_plugin_XmlImportExport_action_update = 'Ажурирај';
 $s_plugin_XmlImportExport_importing_in_project = 'Увожење проблема у пројекат:';
 $s_plugin_XmlImportExport_import_options = 'Поставке увоза';
 $s_plugin_XmlImportExport_cross_references = 'Упућивања';

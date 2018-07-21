@@ -42,8 +42,8 @@ class AllTests
 	public static function suite() {
 		$t_suite = new PHPUnit_Framework_TestSuite( 'Mantis Bug Tracker' );
 
-		$t_suite->addTest( Mantis_AllTests::suite() );
-		$t_suite->addTest( Soap_AllTests::suite() );
+		$t_suite->addTest( MantisAllTests::suite() );
+		$t_suite->addTest( SoapAllTests::suite() );
 
 		return $t_suite;
 	}

@@ -1,0 +1,88 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Asturian (asturianu)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Xuacu
+ */
+
+$s_plugin_graph_title = 'Gráfiques Mantis';
+$s_plugin_graph_description = 'Complementu oficial de gráfiques.';
+$s_plugin_MantisGraph_title = 'Gráfiques Mantis';
+$s_plugin_MantisGraph_config = 'Configuración';
+$s_plugin_MantisGraph_synthesis_link = 'Síntesis';
+$s_plugin_MantisGraph_status_link = 'Per estáu';
+$s_plugin_MantisGraph_priority_link = 'Per prioridá';
+$s_plugin_MantisGraph_severity_link = 'Per severidá';
+$s_plugin_MantisGraph_category_link = 'Per categoría';
+$s_plugin_MantisGraph_resolution_link = 'Per resolución';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendencies d\'incidencia';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Gráfiques per estáu';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Gráfiques per prioridá';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Gráfiques per severidá';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Gráfiques per categoría';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráfiques per resolvimientu';
+$s_plugin_MantisGraph_graph_developer_title = 'Gráfiques per desendolcador';
+$s_plugin_MantisGraph_graph_reporter_title = 'Gráfiques per informante';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Incidencies abiertes, resueltes y pendientes';
+$s_plugin_MantisGraph_by_status_pct = 'Por porcentaxe d\'estáu';
+$s_plugin_MantisGraph_by_priority_pct = 'Por porcentaxe de prioridá';
+$s_plugin_MantisGraph_by_severity_pct = 'Por porcentaxe de severidá';
+$s_plugin_MantisGraph_by_category_pct = 'Por porcentaxe de categoría';
+$s_plugin_MantisGraph_by_resolution_pct = 'Por porcentaxe de resolución';
+$s_plugin_MantisGraph_by_severity_mix = 'Por severidá y estáu';
+$s_plugin_MantisGraph_by_priority_mix = 'Por prioridá y estáu';
+$s_plugin_MantisGraph_by_resolution_mix = 'Por resolución y estáu';
+$s_plugin_MantisGraph_legend_still_open = 'Inda abiertu';
+$s_plugin_MantisGraph_legend_resolved = 'Resueltu';
+$s_plugin_MantisGraph_legend_reported = 'Informáu';
+$s_plugin_MantisGraph_period_none = 'Dengún';
+$s_plugin_MantisGraph_period_this_week = 'Esta selmana';
+$s_plugin_MantisGraph_period_last_week = 'Cabera selmana';
+$s_plugin_MantisGraph_period_two_weeks = 'Caberes dos selmanes';
+$s_plugin_MantisGraph_period_this_month = 'Esti mes';
+$s_plugin_MantisGraph_period_last_month = 'Caberu mes';
+$s_plugin_MantisGraph_period_this_quarter = 'Esti trimestre';
+$s_plugin_MantisGraph_period_last_quarter = 'Caberu trimestre';
+$s_plugin_MantisGraph_period_year_to_date = 'Lo que va d\'añu';
+$s_plugin_MantisGraph_period_select = 'Dates arbitraries';
+$s_plugin_MantisGraph_period_last_year = 'Caberu añu';
+$s_plugin_MantisGraph_graph_page = 'Historial gráficu de la incidencia';
+$s_plugin_MantisGraph_graph_topdev = 'Principales desendolcadores por incidencies resueltes';
+$s_plugin_MantisGraph_graph_opendev = 'Desendolcadores por incidencies abiertes';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales informantes por incidencies resueltes';

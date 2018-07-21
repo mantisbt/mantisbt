@@ -1,0 +1,65 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Asturian (asturianu)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Xuacu
+ */
+
+$s_plugin_XmlImportExport_title = 'Importar/Esportar incidencies';
+$s_plugin_XmlImportExport_description = 'Amiesta a MantisBT capacidaes d\'importación y esportación basaes en XML.';
+$s_plugin_XmlImportExport_import = 'Importar incidencies';
+$s_plugin_XmlImportExport_export = 'Esportar XML';
+$s_plugin_XmlImportExport_config_title = 'Configuración de niveles d\'accesu d\'importación/esportación de XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidencies';
+$s_plugin_XmlImportExport_export_threshold = 'Esportar incidencies';
+$s_plugin_XmlImportExport_action_update = 'Anovar';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando les incidencies nel proyeutu:';
+$s_plugin_XmlImportExport_import_options = 'Opciones d\'importación';
+$s_plugin_XmlImportExport_cross_references = 'Referencies cruciaes';
+$s_plugin_XmlImportExport_default_strategy = 'Estratexa de conversión predeterminada:';
+$s_plugin_XmlImportExport_renumber = 'Renumberar';
+$s_plugin_XmlImportExport_renumber_desc = 'Intentar convertir les referencies a la nueva numberación';
+$s_plugin_XmlImportExport_link = 'Enllaz';
+$s_plugin_XmlImportExport_link_desc = 'Convertir nun enllaz al elementu orixinal';
+$s_plugin_XmlImportExport_disable = 'Desactivar';
+$s_plugin_XmlImportExport_disable_desc = 'Desactivar l\'enllaz';
+$s_plugin_XmlImportExport_fallback = 'Estratexa alternativa (cuando nun s\'aplique "Renumberar"):';
+$s_plugin_XmlImportExport_fallback_category = 'Categoría alternativa:';
+$s_plugin_XmlImportExport_keep_same_category = 'Intentar caltener la mesma categoría';
+$s_plugin_XmlImportExport_error_no_xml = 'nun se pudieron alcontrar les estensiones xmlreader y xmlwriter';

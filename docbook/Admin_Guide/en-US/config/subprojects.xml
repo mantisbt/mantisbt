@@ -7,6 +7,16 @@
 
 	<variablelist>
 		<varlistentry>
+			<term>$g_subprojects_enabled</term>
+			<listitem>
+				<para>
+					Whether sub-projects feature should be enabled.  Before turning this flag OFF,
+					make sure all sub-projects are moved to top level projects, otherwise
+					they won't be accessible.  The default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_subprojects_inherit_versions</term>
 			<listitem>
 				<para>

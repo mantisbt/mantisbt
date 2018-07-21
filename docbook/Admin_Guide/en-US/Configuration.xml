@@ -5,41 +5,101 @@
 <chapter id="admin.config">
 	<title>Configuration</title>
 
-	<xi:include href="config/database.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/path.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/webserver.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/security.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/signup.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/email.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/version.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/language.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/display.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/time.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/date.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/timezone.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/news.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/defaults.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/summary.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/bugnote.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/uploads.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/html.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/auth.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/status.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/filters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/misc.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/cookies.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/tables.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/speed.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/reminders.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/bughistory.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/sponsorship.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/customfields.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/myview.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/relationship.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/subprojects.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/logging.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/timetracking.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="config/soap.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<section id="admin.config.intro">
+		<title>Introduction</title>
+
+		<para>MantisBT is highly customizable through the web interface and
+			configuration files. Configuration options can be set globally
+			as well as customized for a specific project or user (except for
+			options listed in <emphasis>$g_global_settings</emphasis>, see
+			<xref linkend="admin.config.settings" />).
+		</para>
+
+		<para>Configuration options can be set in
+			<emphasis>config_inc.php</emphasis> and in the
+			<emphasis>database</emphasis> (using the various manage pages).
+			Values stored in the database take precedence over values defined
+			in <emphasis>config_inc.php</emphasis>. The former can also be
+			viewed and updated on the <emphasis>Configuration Report</emphasis>
+			page (Manage > Manage Configuration > Configuration Report).
+		</para>
+
+		<para>To determine which value to use, MantisBT follows the list below,
+			sequentially searching for the specified configuration option
+			until a match is found.
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para><emphasis>database</emphasis>:
+					current user, current project
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>database</emphasis>:
+					current user, all projects
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>database</emphasis>:
+					all users, current project
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>database</emphasis>:
+					all users, all projects
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>config_inc.php</emphasis>
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>config_defaults_inc.php</emphasis>
+				</para>
+			</listitem>
+		</orderedlist>
+	</section>
+
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/database.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/path.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/webserver.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/settings.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/security.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/signup.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/email.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/version.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/language.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/display.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/time.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/date.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/timezone.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/news.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/defaults.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/summary.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/bugnote.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/uploads.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/html.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/auth.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/status.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/filters.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/misc.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/cookies.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/speed.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/reminders.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/bughistory.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/sponsorship.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/customfields.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/myview.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/relationship.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/wiki.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/subprojects.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/fields.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/logging.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/timetracking.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/api.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/antispam.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/duedate.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/user.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="config/view.xml" />
 </chapter>

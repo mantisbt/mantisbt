@@ -81,6 +81,18 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 }
 
 /**
+ * Legacy date function for installer backwards compatibility
+ * @return string
+ */
+function installer_db_now() {
+	global $g_db;
+
+	# Timezone must not be set to UTC prior to calling BindTimestamp(), as
+	# ADOdb assumes a local timestamp and does the UTC conversion itself.
+	return $g_db->BindTimeStamp( time() );
+}
+
+/**
  * Check PostgreSQL boolean columns' type in the DB
  * Verifies that columns defined as type "L" (logical) in the Mantis schema
  * have the correct type in the underlying database.
@@ -88,7 +100,7 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
  * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
  * versions created them as BOOLEAN.
  * @return mixed true if columns check OK
- *               error message string if errors occured
+ *               error message string if errors occurred
  *               array of invalid columns otherwise (empty if all columns check OK)
  */
 function check_pgsql_bool_columns() {
@@ -197,8 +209,9 @@ function install_category_migrate() {
 	foreach( $t_data as $t_project_id => $t_categories ) {
 		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_user_id ) {
-			$t_lower_name = utf8_strtolower( trim( $t_name ) );
+			$t_lower_name = mb_strtolower( trim( $t_name ) );
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
+				db_param_push();
 				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( ' .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
@@ -208,6 +221,7 @@ function install_category_migrate() {
 				$t_category_id = $t_inserted[$t_lower_name];
 			}
 
+			db_param_push();
 			$t_query = 'UPDATE {bug} SET category_id=' . db_param() . '
 						WHERE project_id=' . db_param() . ' AND category=' . db_param();
 			db_query( $t_query, array( $t_category_id, $t_project_id, $t_name ) );
@@ -244,7 +258,7 @@ function install_date_migrate( array $p_data ) {
 		$t_first_column = true;
 
 		# In order to handle large databases where we may timeout during the upgrade, we don't
-		# start from the beginning everytime.  Here we will only pickup rows where at least one
+		# start from the beginning every time.  Here we will only pickup rows where at least one
 		# of the datetime fields wasn't upgraded yet and upgrade them all.
 		foreach ( $p_data[3] as $t_new_column_name ) {
 			if( $t_first_column ) {
@@ -268,6 +282,7 @@ function install_date_migrate( array $p_data ) {
 	$t_result = db_query( $t_query );
 
 	if( db_num_rows( $t_result ) > 0 ) {
+		db_param_push();
 		# Build the update query
 		if( $t_date_array ) {
 			$t_pairs = array();
@@ -312,8 +327,11 @@ function install_date_migrate( array $p_data ) {
 				$t_values = array( $t_new_value, $t_id );
 			}
 
-			db_query( $t_query, $t_values );
+			# Don't pop params since we're in a loop
+			db_query( $t_query, $t_values, -1, -1, false );
 		}
+		db_param_pop();
+		
 	}
 
 	# Re-enable query logging if we disabled it
@@ -443,6 +461,7 @@ function install_stored_filter_migrate() {
 			case 'v2':
 			case 'v3':
 			case 'v4':
+				db_param_push();
 				$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 				$t_delete_result = db_query( $t_delete_query, array( $t_row['id'] ) );
 				continue;
@@ -455,20 +474,39 @@ function install_stored_filter_migrate() {
 				case 'v6':
 				case 'v7':
 				case 'v8':
-					$t_filter_arr = unserialize( $t_setting_arr[1] );
+					try {
+						$t_filter_arr = safe_unserialize( $t_setting_arr[1] );
+					}
+					catch( ErrorException $e ) {
+						# Set to null to have a consistent error value
+						$t_filter_arr = null;
+						$t_error = $e->getMessage();
+					}
 					break;
 				default:
 					$t_filter_arr = json_decode( $t_setting_arr[1], /* assoc array */ true );
+					$t_error = 'invalid JSON';
 			}
 		} else {
+			db_param_push();
 			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 			$t_delete_result = db_query( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
 
-		# serialized or json encoded data in filter table is invalid - abort upgrade as this should not be possible
-		# so we should investigate and fix underlying data issue first if necessary
-		if( $t_filter_arr === false ) {
+		# Serialized or json encoded data in filter table is invalid. Provide
+		# details about the error and abort the upgrade.
+		# Let the user investigate and fix the problem before trying again.
+		if( $t_filter_arr === null ) {
+			$t_id = $t_row['id'];
+			$t_name = $t_row['name'];
+			install_print_unserialize_error(
+				sprintf( "Filter id $t_id %s", $t_name ? "('$t_name') " : '' ),
+				'filters',
+				$t_error,
+				$t_setting_arr[1]
+			);
+
 			return 1; # Fatal: invalid data found in filters table
 		}
 
@@ -500,6 +538,7 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = json_encode( $t_filter_arr );
 		$t_filter_string = FILTER_VERSION . '#' . $t_filter_serialized;
 
+		db_param_push();
 		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
@@ -508,18 +547,6 @@ function install_stored_filter_migrate() {
 	install_set_log_queries( $t_log_queries );
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
-}
-
-/**
- * Schema update to do nothing - this allows a schema update to be removed from the install file
- * if added by mistake or no longer required for new installs/upgrades.
- * e.g. if a schema update inserted data directly into the database, and now the data will be
- * generated by a php function/configuration from the end user
- * @return integer
- */
-function install_do_nothing() {
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
 
@@ -540,8 +567,8 @@ function install_update_history_long_custom_fields() {
 	$t_query = 'SELECT name FROM {custom_field}';
 	$t_result = db_query( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
-		if( utf8_strlen( $t_field['name'] ) > 32 ) {
-			$t_custom_fields[utf8_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
+		if( mb_strlen( $t_field['name'] ) > 32 ) {
+			$t_custom_fields[mb_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
 		}
 	}
 	if( !isset( $t_custom_fields ) ) {
@@ -578,8 +605,9 @@ function install_update_history_long_custom_fields() {
 	# if a matching custom field exists
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		# If field name's length is 32, then likely it was truncated so we try to match
-		if( utf8_strlen( $t_field['field_name'] ) == 32 && array_key_exists( $t_field['field_name'], $t_custom_fields ) ) {
+		if( mb_strlen( $t_field['field_name'] ) == 32 && array_key_exists( $t_field['field_name'], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
+			db_param_push();
 			$t_update_query = 'UPDATE {bug_history}
 				SET field_name = ' . db_param() . '
 				WHERE field_name = ' . db_param();
@@ -607,6 +635,7 @@ function install_check_project_hierarchy() {
 		$t_parent_id = (int)$t_row['parent_id'];
 
 		if( $t_count > 1 ) {
+			db_param_push();
 			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			$t_result2 = db_query( $t_query, array( $t_child_id, $t_parent_id ) );
 
@@ -615,9 +644,11 @@ function install_check_project_hierarchy() {
 
 			$t_inherit = $t_row2['inherit_parent'];
 
+			db_param_push();
 			$t_query_delete = 'DELETE FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			db_query( $t_query_delete, array( $t_child_id, $t_parent_id ) );
 
+			db_param_push();
 			$t_query_insert = 'INSERT INTO {project_hierarchy} (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 			db_query( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
 		}
@@ -636,20 +667,30 @@ function install_check_config_serialization() {
 
 	$t_result = db_query( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$config_id = $t_row['config_id'];
-		$project_id = (int)$t_row['project_id'];
-		$user_id = (int)$t_row['user_id'];
-		$value = $t_row['value'];
+		$t_config_id = $t_row['config_id'];
+		$t_project_id = (int)$t_row['project_id'];
+		$t_user_id = (int)$t_row['user_id'];
+		$t_value = $t_row['value'];
 
-		$t_config = unserialize( $value );
-		if( $t_config === false ) {
+		try {
+			$t_config = safe_unserialize( $t_value );
+		}
+		catch( ErrorException $e ) {
+			install_print_unserialize_error(
+				"Config '$t_config_id' for project id $t_project_id, user id $t_user_id",
+				'config',
+				$e->getMessage(),
+				$t_value
+			);
+
 			return 1; # Fatal: invalid data found in config table
 		}
 
 		$t_json_config = json_encode( $t_config );
 
+		db_param_push();
 		$t_query = 'UPDATE {config} SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
-		db_query( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
+		db_query( $t_query, array( $t_json_config, $t_config_id, $t_project_id, $t_user_id ) );
 	}
 
 	# flush config here as we've changed the format of the configuration table
@@ -671,21 +712,60 @@ function install_check_token_serialization() {
 		$t_id = $t_row['id'];
 		$t_value = $t_row['value'];
 
-		$t_token = unserialize( $t_value );
-		if( $t_token === false ) {
-			# If user hits a page other than install, tokens may be created using new code.
-			$t_token = json_decode( $t_value );
-			if( $t_token !== null ) {
-				continue;
+		if ( $t_value === null ) {
+			$t_token = null;
+		} else {
+			try {
+				$t_token = safe_unserialize( $t_value );
 			}
+			catch( ErrorException $e ) {
+				# If user hits a page other than install, JSON-encoded tokens
+				# may have been created using new code; just skip them.
+				$t_token = json_decode( $t_value );
+				if( $t_token !== null ) {
+					continue;
+				}
 
-			return 1; # Fatal: invalid data found in tokens table
+				install_print_unserialize_error(
+					"Token id $t_id",
+					'tokens',
+					$e->getMessage(),
+					$t_value
+				);
+
+				return 1; # Fatal: invalid data found in tokens table
+			}
 		}
 
 		$t_json_token = json_encode( $t_token );
 
+		db_param_push();
 		$t_query = 'UPDATE {tokens} SET value=' .db_param() . ' WHERE id=' .db_param();
 		db_query( $t_query, array( $t_json_token, $t_id ) );
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+/**
+ * Schema update to install and configure new Gravatar plugin.
+ * If the instance has enabled use of avatars, then we register the plugin
+ * @return int 2 if successful
+ */
+function install_gravatar_plugin() {
+	if( config_get_global( 'show_avatar' ) ) {
+		$t_avatar_plugin = 'Gravatar';
+
+		# Register and install the plugin
+		$t_plugin = plugin_register( $t_avatar_plugin, true );
+		if( !is_null( $t_plugin ) ) {
+			plugin_install( $t_plugin );
+		} else {
+			error_parameters( $t_avatar_plugin );
+			echo '<br>' . error_string( ERROR_PLUGIN_INSTALL_FAILED );
+			return 1;
+		}
 	}
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
@@ -702,4 +782,26 @@ function install_check_token_serialization() {
 function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
+}
+
+/**
+ * Print a friendly error message following an unserialize() error.
+ *
+ * @param string $p_description Description to identify the offending row
+ * @param string $p_table Mantis table name
+ * @param string $p_error Error message
+ * @param string $p_value The data that could not be unserialized
+ * @return void
+ */
+function install_print_unserialize_error( $p_description, $p_table, $p_error, $p_value ) {
+	printf('<p><br>%s could not be converted because its data is not valid. '
+		. 'Fix the problem by manually repairing or deleting the '
+		. 'offending %s row as appropriate, then try again.'
+		. '<br>Error: <em>%s</em> occured because of the string below</p>'
+		. '<pre>%s</pre>',
+		$p_description,
+		db_get_table( $p_table ),
+		$p_error,
+		$p_value
+	);
 }
