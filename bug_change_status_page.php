@@ -153,6 +153,9 @@ layout_page_begin();
 			<?php
 				if( $f_new_status >= $t_resolved ) {
 					if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
+							trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+						}
 						echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
 					}
 				}
