@@ -123,7 +123,10 @@ function rest_projects_add( \Slim\Http\Request $p_request, \Slim\Http\Response $
 	}
 
 	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
-	ApiObjectFactory::throwIfFault( $t_project_id );
+	if (is_object($t_project_id))
+	{
+		return $p_response->withStatus( $t_project_id->status_code, $t_project_id->fault_string );
+	}
 
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
