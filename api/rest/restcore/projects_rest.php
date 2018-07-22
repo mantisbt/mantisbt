@@ -25,8 +25,6 @@
 $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->get( '', 'rest_projects_get' );
 	$g_app->get( '/', 'rest_projects_get' );
-	$g_app->post( '', 'rest_projects_add' );
-	$g_app->post( '/', 'rest_projects_add' );
 	$g_app->get( '/{id}', 'rest_projects_get' );
 	$g_app->get( '/{id}/', 'rest_projects_get' );
 
@@ -106,32 +104,4 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
-}
-
-/**
- * A method to add a new project.
- *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
- * @return \Slim\Http\Response The augmented response.
- */
-function rest_projects_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_payload = $p_request->getParsedBody();
-	if( $t_payload === null ) {
-		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Unable to parse body, specify content type" );
-	}
-
-	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
-	if (is_object($t_project_id))
-	{
-		return $p_response->withStatus( $t_project_id->status_code, $t_project_id->fault_string );
-	}
-
-	$t_user_id = auth_get_current_user_id();
-	$t_lang = mci_get_user_lang( $t_user_id );
-	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
-
-	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
-		withJson( array( 'project' => $t_project ) );
 }
