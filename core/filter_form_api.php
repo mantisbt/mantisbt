@@ -2394,6 +2394,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 
 	if( null === $p_static_fallback_page ) {
 		$p_static_fallback_page = $_SERVER['PHP_SELF'];
+		$p_static_fallback_page = string_sanitize_url( $_SERVER['PHP_SELF'] );
 	}
 	$t_filters_url = $p_static_fallback_page;
 	$t_get_params = $_GET;
