@@ -355,7 +355,8 @@ $(document).ready( function() {
 		var currentTagString = $('#tag_string').val();
 		var newTagOptionID = $(this).val();
 		var newTag = $('#tag_select option[value=' + newTagOptionID + ']').text();
-		if (currentTagString.indexOf(newTag) == -1) {
+		var tagArray = currentTagString.split(tagSeparator);
+		if (tagArray.indexOf(newTag) == -1) {
 			if (currentTagString.length > 0) {
 				$('#tag_string').val(currentTagString + tagSeparator + newTag);
 			} else {
