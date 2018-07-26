@@ -1347,7 +1347,10 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	try {
-		$t_mail->AddAddress( $t_recipient, '' );
+		$t_recipient_array = preg_split( '/[\s,]+/', $t_recipient, NULL, PREG_SPLIT_NO_EMPTY );
+		foreach ( $t_recipient_array as $t_to_email)  {
+			$mail->AddAddress( $t_to_email, '' );
+		}
 	}
 	catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
@@ -1375,6 +1378,18 @@ function email_send( EmailData $p_email_data ) {
 					break;
 				case 'In-Reply-To':
 					$t_mail->AddCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
+					break;
+				case 'Cc':
+					$t_cc_array = preg_split( '/[\s,]+/', $t_value, NULL, PREG_SPLIT_NO_EMPTY );
+					foreach ( $t_cc_array as $t_cc_email ) {
+									$mail->AddCC( $t_cc_email, '' );
+					}
+					break;
+				case 'Bcc':
+					$t_bcc_array = preg_split( '/[\s,]+/', $t_value, NULL, PREG_SPLIT_NO_EMPTY );
+					foreach ( $t_bcc_array as $t_bcc_email ) {
+									$mail->AddBCC( $t_bcc_email, '' );
+					}
 					break;
 				default:
 					$t_mail->AddCustomHeader( $t_key . ': ' . $t_value );
