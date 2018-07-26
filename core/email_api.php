@@ -1349,7 +1349,7 @@ function email_send( EmailData $p_email_data ) {
 	try {
 		$t_recipient_array = preg_split( '/[\s,]+/', $t_recipient, NULL, PREG_SPLIT_NO_EMPTY );
 		foreach ( $t_recipient_array as $t_to_email)  {
-			$mail->AddAddress( $t_to_email, '' );
+			$t_mail->AddAddress( $t_to_email, '' );
 		}
 	}
 	catch ( phpmailerException $e ) {
@@ -1382,13 +1382,13 @@ function email_send( EmailData $p_email_data ) {
 				case 'Cc':
 					$t_cc_array = preg_split( '/[\s,]+/', $t_value, NULL, PREG_SPLIT_NO_EMPTY );
 					foreach ( $t_cc_array as $t_cc_email ) {
-									$mail->AddCC( $t_cc_email, '' );
+									$t_mail->AddCC( $t_cc_email, '' );
 					}
 					break;
 				case 'Bcc':
 					$t_bcc_array = preg_split( '/[\s,]+/', $t_value, NULL, PREG_SPLIT_NO_EMPTY );
 					foreach ( $t_bcc_array as $t_bcc_email ) {
-									$mail->AddBCC( $t_bcc_email, '' );
+									$t_mail->AddBCC( $t_bcc_email, '' );
 					}
 					break;
 				default:
