@@ -27,6 +27,8 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->get( '/', 'rest_projects_get' );
 	$g_app->get( '/{id}', 'rest_projects_get' );
 	$g_app->get( '/{id}/', 'rest_projects_get' );
+	$g_app->patch( '/{id}', 'rest_projects_update' );
+	$g_app->patch( '/{id}/', 'rest_projects_update' );
 
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
@@ -104,4 +106,43 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+/**
+ * Update a project from a PATCH to the projects url.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_projects_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
+	}
+
+	/* Get project */
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+	$t_project_ids = user_get_all_accessible_projects( $t_user_id, $t_project_id );
+	if( count($t_project_ids) != 1 ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "No accessible project found with id $t_project_id" );
+	}
+	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
+
+	$t_project_patch = $p_request->getParsedBody();
+	/* Check that id in body match the parameter */
+	if( isset( $t_project_patch['id'] ) && $t_project_patch['id'] != $t_project_id ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Project id mismatch" );
+	}
+
+	/* Replace and add fields in project with those in project_patch */
+	$t_project = array_merge( $t_project, $t_project_patch );
+
+	$success = mc_project_update( /* username */ '', /* password */ '', $t_project_id, (object)$t_project );
+	ApiObjectFactory::throwIfFault( $success );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
+		->withJson( array( 'project' => $t_project ) );
 }
