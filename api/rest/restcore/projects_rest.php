@@ -33,6 +33,9 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->patch( '/{id}', 'rest_project_update' );
 	$g_app->patch( '/{id}/', 'rest_project_update' );
 
+	$g_app->delete( '/{id}', 'rest_project_delete' );
+	$g_app->delete( '/{id}/', 'rest_project_delete' );
+
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
@@ -172,4 +175,33 @@ function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
 		->withJson( array( 'project' => $t_project ) );
+}
+
+/**
+ * A method to delete a project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
+	}
+
+	$t_project_id = (int)$t_project_id;
+	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
+	}
+
+	$t_user_id = auth_get_current_user_id();
+	if( !project_exists( $t_project_id ) || !access_has_project_level( config_get( 'delete_project_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, "Access denied for deleting project." );
+	}
+
+	project_delete( $t_project_id );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id deleted." );
 }
