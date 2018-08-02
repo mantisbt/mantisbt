@@ -105,6 +105,38 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 }
 
 /**
+ * Print a table listing the failed results following a group action.
+ *
+ * @param array $p_failed_ids List of failed results [bug_id => reason for failure]
+ *
+ * @return void
+ */
+function bug_group_action_print_results( array $p_failed_ids ) {
+	$t_format = "<tr>"
+		. "\n\t" . '<td width="50%%">%s' . lang_get( 'word_separator' ) . '%s</td>'
+		. "\n\t" . '<td>%s</td>'
+		. "\n</tr>\n";
+	$t_label = lang_get( 'label' );
+
+	echo '<div><br />', PHP_EOL;
+	echo '<div class="table-responsive">', PHP_EOL;
+	echo '<table class="table table-bordered table-condensed table-striped">', PHP_EOL;
+
+	foreach( $p_failed_ids as $t_id => $t_reason ) {
+		printf( $t_format,
+			sprintf( $t_label, string_get_bug_view_link( $t_id ) ),
+			string_display_line( bug_get_field( $t_id, 'summary' ) ),
+			$t_reason
+		);
+	}
+	echo '</table>', PHP_EOL;
+	echo '</div>', PHP_EOL;
+
+	print_link_button( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	echo '</div>', PHP_EOL;
+}
+
+/**
  * Print the array of issue ids via hidden fields in the form to be passed on to
  * the bug action group action page.
  *
