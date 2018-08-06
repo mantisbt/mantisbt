@@ -54,6 +54,7 @@
  * @author Solde
  * @author Ssola
  * @author Toniher
+ * @author Townie
  */
 
 $s_actiongroup_menu_move = 'Mou';
@@ -86,7 +87,7 @@ $s_excel_export = 'Exporta a Excel';
 $s_login_anonymously = 'Connectar-se anònimament';
 $s_anonymous = 'Anònim';
 $s_jump_to_bugnotes = 'Salta a Notes';
-$s_display_history = 'Mostra l’historial';
+$s_display_history = 'Mostra l\'historial';
 $s_public_project_msg = 'Aquest projecte es PÚBLIC.  Tots els usuaris tenen accés a aquest projecte.';
 $s_private_project_msg = 'Aquest projecte es PRIVAT. Només els administradors i usuaris agregats manualment hi tenen accés.';
 $s_access_level_project = 'Nivell d\'Accés del Projecte';
