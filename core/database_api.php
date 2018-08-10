@@ -743,25 +743,6 @@ function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 }
 
 /**
- * A helper function that generates a case-sensitive or case-insensitive unlike phrase based on the current db type.
- * The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
- * @param string  $p_field_name     The name of the field to filter on.
- * @param boolean $p_case_sensitive True: case sensitive, false: case insensitive.
- * @return string returns (field NOT LIKE 'value') OR (field NOT ILIKE 'value')
- */
-function db_helper_not_like( $p_field_name, $p_case_sensitive = false ) {
-	$t_like_keyword = ' NOT LIKE ';
-
-	if( $p_case_sensitive === false ) {
-		if( db_is_pgsql() ) {
-			$t_like_keyword = 'NOT ILIKE ';
-		}
-	}
-
-	return '(' . $p_field_name . $t_like_keyword . db_param() . ')';
-}
-
-/**
  * Compare two dates against a certain number of days
  * 'val_or_col' parameters will be used "as is" in the query component,
  * allowing use of a column name. To compare against a specific date,
