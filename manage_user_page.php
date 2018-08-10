@@ -198,9 +198,9 @@ if( $f_filter === 'ALL' ) {
 		$c_prefix= trim(substr($c_prefix, 0,$t_pos-1));
 		$t_where_params[] ='%'.$c_prefix . '%';
 		$t_where = db_helper_like( 'UPPER(realname)' );
-		$t_where .= " and ";
+		$t_where .= " and not ";
 		$t_where_params[] ='%'.$t_exclude . '%';
-		$t_where .= db_helper_not_like( 'UPPER(realname)' );
+		$t_where .= db_helper_like( 'UPPER(realname)' );
 	} else{
 		$t_where_params[] ='%'.$c_prefix . '%';
 		$t_where = db_helper_like( 'UPPER(realname)' );
