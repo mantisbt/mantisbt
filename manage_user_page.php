@@ -64,6 +64,11 @@ $f_save          = gpc_get_bool( 'save' );
 $f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
+$f_findname = gpc_get_string( 'findname', '' ); 
+if($f_findname<>""){
+	$f_filter=$f_findname;
+}
+
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 	$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
 
@@ -185,6 +190,21 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
+} else if( $f_findname<>"" ) {
+	$c_prefix = strtoupper($f_filter);
+	$t_pos = strpos($c_prefix, '-');
+	if($t_pos){
+		$t_exclude = trim(substr($c_prefix,$t_pos+1));
+		$c_prefix= trim(substr($c_prefix, 0,$t_pos-1));
+		$t_where_params[] ='%'.$c_prefix . '%';
+		$t_where = db_helper_like( 'UPPER(realname)' );
+		$t_where .= " and ";
+		$t_where_params[] ='%'.$t_exclude . '%';
+		$t_where .= db_helper_not_like( 'UPPER(realname)' );
+	} else{
+		$t_where_params[] ='%'.$c_prefix . '%';
+		$t_where = db_helper_like( 'UPPER(realname)' );
+	}
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
@@ -363,10 +383,16 @@ $t_user_count = count( $t_users );
 		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
 			<?php # CSRF protection not required here - form does not result in modifications ?>>
 			<label class="inline" for="username"><?php echo lang_get( 'search' ) ?></label>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp			
 			<input id="username" type="text" name="username" class="input-sm" value="" />
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
 		</form>
-	</div>
+		<form method="get" action="manage_user_page.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<label class="inline" for="findname"><?php echo lang_get( 'realname' ) ?></label>
+			<input id="findname" type="text" name="findname" class="input-sm" value="" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'search' ) ?>" />
+		</form>	</div>
 	<div class="btn-toolbar pull-right">
 		<?php
 		# @todo hack - pass in the hide inactive filter via cheating the actual filter value

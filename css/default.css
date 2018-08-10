@@ -75,6 +75,14 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 	padding: 1em;
 }
 
+.bug-attachment-preview-image img {
+	max-width: 100%;
+}
+
+.bug-attachment-preview-text {
+	white-space: pre-wrap;
+}
+
 #dates label[for=start_date], #dates > label[for=end_date] {
 	float: left;
 	width: 3em;
