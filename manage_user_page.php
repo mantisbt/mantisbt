@@ -64,10 +64,7 @@ $f_save          = gpc_get_bool( 'save' );
 $f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
-$f_findname = gpc_get_string( 'findname', '' ); 
-if($f_findname<>""){
-	$f_filter=$f_findname;
-}
+$f_findname	 = mb_strtoupper( gpc_get_string( 'findname', '' ) ); 
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 	$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
@@ -190,20 +187,18 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
-} else if( $f_findname<>"" ) {
-	$c_prefix = strtoupper($f_filter);
-	$t_pos = strpos($c_prefix, '-');
-	if($t_pos){
-		$t_exclude = trim(substr($c_prefix,$t_pos+1));
-		$c_prefix= trim(substr($c_prefix, 0,$t_pos-1));
-		$t_where_params[] ='%'.$c_prefix . '%';
-		$t_where = db_helper_like( 'UPPER(realname)' );
-		$t_where .= " AND NOT ";
-		$t_where_params[] ='%'.$t_exclude . '%';
-		$t_where .= db_helper_like( 'UPPER(realname)' );
-	} else{
-		$t_where_params[] ='%'.$c_prefix . '%';
-		$t_where = db_helper_like( 'UPPER(realname)' );
+} else if( $f_findname <> "" ) {
+	if( $t_pos ){
+		$t_exclude		= trim( substr( $f_findname,$t_pos+1 ) );
+		$f_findname		= trim( substr( $f_findname, 0,$t_pos-1 ) );
+		$t_where_params[]	= '%'.$f_findname . '%';
+		$t_where		= db_helper_like( 'UPPER(realname)' );
+		$t_where		.= " AND NOT ";
+		$t_where_params[] 	= '%'.$t_exclude . '%';
+		$t_where 		.= db_helper_like( 'UPPER(realname)' );
+	} else {
+		$t_where_params[] 	= '%'.$f_findname . '%';
+		$t_where 		= db_helper_like( 'UPPER(realname)' );
 	}
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
