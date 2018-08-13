@@ -48,6 +48,7 @@
  * @author Dtamajon
  * @author Fitoschido
  * @author Guidored
+ * @author Jelou
  * @author Lemondoge
  * @author Leshurex
  * @author Locos epraix
@@ -727,7 +728,7 @@ $s_edit_link = 'Editar';
 $s_actions = 'Acciones';
 $s_version = 'Versión';
 $s_version_label = 'Versión:';
-$s_timestamp = 'Fecha y hora';
+$s_timestamp = 'Marca de tiempo';
 $s_update = 'Actualizar';
 $s_subprojects = 'Subproyectos';
 $s_add_subproject = 'Agregar como subproyecto';

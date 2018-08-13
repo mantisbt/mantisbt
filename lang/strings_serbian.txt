@@ -39,6 +39,7 @@
  * @file
  *
  * @author Acamicamacaraca
+ * @author BadDog
  * @author Charmed94
  * @author Macofe
  * @author Milicevic01
@@ -105,7 +106,7 @@ $s_old_value = 'Стара вредност';
 $s_new_value = 'Нова вредност';
 $s_date_modified = 'Датум измене';
 $s_bugnote = 'Белешка';
-$s_change = 'Измени';
+$s_change = 'Промени';
 $s_bugnote_view_state = 'Видљивост белешке';
 $s_bug_monitor = 'Проблем се надгледа';
 $s_bug_end_monitor = 'Заустави надгледање проблема';
