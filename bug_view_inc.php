@@ -725,15 +725,6 @@ if( $t_custom_fields_found ) {
 	echo '<tr class="hidden"></tr>';
 }
 
-# Attachments
-if ( ON == config_get( 'show_attachments' ) ) {
-	echo '<tr class="bug-attachments">';
-	echo '<td class="category"><a name="attachments" id="attachments">', lang_get( 'attached_files' ), '</td>';
- 	echo '<td class="bug-attachments" colspan="7">';
-	print_bug_attachments_list( $t_bug_id, null);
-	echo '</td></tr>';
-}
-
 echo '</tbody></table>';
 echo '</div></div></div></div></div>';
 
