@@ -4882,9 +4882,3 @@ $g_issue_activity_note_attachments_seconds_threshold = 3;
  * the attachment is linked to the note.  Or 0 for disabling this feature.
  */
 $g_issue_activity_note_attachments_seconds_threshold = 3;
-
-/**
- * If switched to ON, the Attachment section will be come visible again.
- * Deafult value = OFFa user submits a note with an attachments (with the specified # of seconds)
- */
-$g_show_attachments = OFF;
