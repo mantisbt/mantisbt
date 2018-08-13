@@ -40,12 +40,13 @@
  *
  * @author Aotake
  * @author Fryed-peach
+ * @author Gulpin
  * @author Mirinano
  * @author Omotecho
  * @author Shirayuki
  */
 
-$s_plugin_format_title = 'MantisBT フォーマティング';
+$s_plugin_format_title = 'MantisBT フォーマッティング';
 $s_plugin_format_description = '公式のテキストの処理および整形のプラグイン。';
 $s_plugin_format_config = '設定';
 $s_plugin_format_process_text = 'テキスト処理';
@@ -53,5 +54,7 @@ $s_plugin_format_process_text_warning_notice = '何をしているかを完全�
 $s_plugin_format_process_urls = 'URL 処理';
 $s_plugin_format_process_buglinks = 'MantisBT 内部リンク (課題と課題コメント)';
 $s_plugin_format_process_buglinks_info = 'あなたの設定により<em>Issue</em>タグは「<literal>%s</literal>」と、<em>Issue Note</em>タグは「<literal>%s</literal>」と定義されました。';
+$s_plugin_format_process_markdown = 'Markdown処理';
+$s_plugin_format_process_markdown_info = 'Markdownをサポートし、スタイル付けすることができます。MarkdownはHTMLに変換できるように設計されたテキスト形式です。';
 $s_plugin_format_enabled = 'ON';
 $s_plugin_format_disabled = 'OFF';
