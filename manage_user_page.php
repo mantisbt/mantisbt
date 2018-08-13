@@ -64,8 +64,8 @@ $f_save          = gpc_get_bool( 'save' );
 $f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
-$f_findname		 = gpc_get_string( 'findname', '' ); 
-if( $f_findname <> "") {
+$f_findname      = gpc_get_string( 'findname', '' ); 
+if( $f_findname <> "" ) {
 	$f_filter = 'SEARCH';
 }
 
@@ -190,19 +190,19 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
-	} else if( $f_filter === 'SEARCH' ) {
+} else if( $f_filter === 'SEARCH' ) {
 	$t_pos = strpos($f_findname, '-');
 	if( $t_pos ) {
-		$t_exclude			= trim( substr( $f_findname,$t_pos+1 ) );
-		$f_findname			= trim( substr( $f_findname, 0,$t_pos-1 ) );
-		$t_where_params[]	= '%'.$f_findname . '%';
-		$t_where			= db_helper_like( 'realname' );
-		$t_where			.= " AND NOT ";
-		$t_where_params[] 	= '%'.$t_exclude . '%';
-		$t_where 			.= db_helper_like( 'realname' );
+		$t_exclude = trim( substr( $f_findname, $t_pos+1 ) );
+		$f_findname = trim( substr( $f_findname, 0,$t_pos-1 ) );
+		$t_where_params[] = '%' . $f_findname . '%';
+		$t_where = db_helper_like( 'realname' );
+		$t_where .= " AND NOT ";
+		$t_where_params[] = '%' . $t_exclude . '%';
+		$t_where .= db_helper_like( 'realname' );
 	} else {
-		$t_where_params[] 	= '%'.$f_findname . '%';
-		$t_where 			= db_helper_like( 'realname' );
+		$t_where_params[] = '%' . $f_findname . '%';
+		$t_where = db_helper_like( 'realname' );
 	}
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
