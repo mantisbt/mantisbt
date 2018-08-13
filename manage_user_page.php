@@ -64,9 +64,14 @@ $f_save          = gpc_get_bool( 'save' );
 $f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
-$f_findname      = gpc_get_string( 'findname', '' ); 
-if( $f_findname <> "" ) {
-	$f_filter = 'SEARCH';
+if( substr( $f_filter,0,6 ) === "SEARCH" ) {
+	$f_findname = trim( substr( $f_filter,6 ) );
+} else {
+	$f_findname = gpc_get_string( 'findname', '' ); 
+	if( $f_findname <> "" ) {
+		$f_filter = 'SEARCH';
+		$f_filter .= trim( $f_findname );
+	} 
 }
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
@@ -190,20 +195,41 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
-} else if( $f_filter === 'SEARCH' ) {
+} else if( substr( $f_filter,0,6 ) === 'SEARCH' ) {
 	$t_pos = strpos($f_findname, '-');
 	if( $t_pos ) {
-		$t_exclude = trim( substr( $f_findname, $t_pos+1 ) );
+		$t_exclude = trim( substr( $f_findname,$t_pos+1 ) );
 		$f_findname = trim( substr( $f_findname, 0,$t_pos-1 ) );
 		$t_where_params[] = '%' . $f_findname . '%';
-		$t_where = db_helper_like( 'realname' );
-		$t_where .= " AND NOT ";
+		$t_where = " ( ";
+		$t_where .= db_helper_like( 'realname' );
+		$t_where .= " OR ";
+		$t_where_params[] .= '%' . $f_findname . '%';
+		$t_where .= db_helper_like( 'username' );
+		$t_where .= " OR ";
+		$t_where_params[] .= '%' . $f_findname . '%';
+		$t_where .= db_helper_like( 'email' );
+		$t_where .= " ) AND NOT (";
 		$t_where_params[] = '%' . $t_exclude . '%';
 		$t_where .= db_helper_like( 'realname' );
+		$t_where .= " OR ";
+		$t_where_params[] .= '%' . $t_exclude . '%';
+		$t_where .= db_helper_like( 'username' );
+		$t_where .= " OR ";
+		$t_where_params[] .= '%' . $t_exclude . '%';
+		$t_where .= db_helper_like( 'email' );
+		$t_where .= " ) ";
 	} else {
-		$t_where_params[] = '%' . $f_findname . '%';
+		$t_where_params[] 	= '%' . $f_findname . '%';
 		$t_where = db_helper_like( 'realname' );
+		$t_where .= " OR ";
+		$t_where_params[] 	= '%' . $f_findname . '%';
+		$t_where .= db_helper_like( 'username' );
+		$t_where .= " OR ";
+		$t_where_params[] 	= '%' . $f_findname . '%';
+		$t_where .= db_helper_like( 'email' );
 	}
+
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
@@ -379,13 +405,6 @@ $t_user_count = count( $t_users );
 
 <div class="widget-toolbox padding-8 clearfix">
 	<div id="manage-user-edit-div" class="form-inline pull-left">
-		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
-			<?php # CSRF protection not required here - form does not result in modifications ?>>
-			<label class="inline" for="username"><?php echo lang_get( 'search' ) ?></label>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			
-			<input id="username" type="text" name="username" class="input-sm" value="" />
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
-		</form>
 		<form method="get" action="manage_user_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<label class="inline" for="findname"><?php echo lang_get( 'realname' ) ?></label>
