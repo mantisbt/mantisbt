@@ -61,7 +61,7 @@ $t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<i class="fa fa-lock fa-lg" title="' . lang_get( 'protected' ) . '" />';
 
 $f_save          = gpc_get_bool( 'save' );
-$f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+$f_filter        = gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 if( mb_substr( $f_filter, 0, 6 ) === "SEARCH" ) {
@@ -195,40 +195,40 @@ $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( mb_substr( $f_filter, 0, 6 ) === 'SEARCH' ) {
-	$t_pos = mb_strpos( $f_findname, '-' );
-	if( $t_pos ) {
-		$t_exclude = trim( mb_substr( $f_findname, $t_pos+1 ) );
-		$f_findname = trim( mb_substr( $f_findname, 0, $t_pos-1 ) );
-		$t_where_params[] = '%' . $f_findname . '%';
-		$t_where = " ( ";
-		$t_where .= db_helper_like( 'realname' );
-		$t_where .= " OR ";
-		$t_where_params[] .= '%' . $f_findname . '%';
-		$t_where .= db_helper_like( 'username' );
-		$t_where .= " OR ";
-		$t_where_params[] .= '%' . $f_findname . '%';
-		$t_where .= db_helper_like( 'email' );
-		$t_where .= " ) AND NOT (";
-		$t_where_params[] = '%' . $t_exclude . '%';
-		$t_where .= db_helper_like( 'realname' );
-		$t_where .= " OR ";
-		$t_where_params[] .= '%' . $t_exclude . '%';
-		$t_where .= db_helper_like( 'username' );
-		$t_where .= " OR ";
-		$t_where_params[] .= '%' . $t_exclude . '%';
-		$t_where .= db_helper_like( 'email' );
-		$t_where .= " ) ";
-	} else {
-		$t_where_params[] 	= '%' . $f_findname . '%';
-		$t_where = db_helper_like( 'realname' );
-		$t_where .= " OR ";
-		$t_where_params[] 	= '%' . $f_findname . '%';
-		$t_where .= db_helper_like( 'username' );
-		$t_where .= " OR ";
-		$t_where_params[] 	= '%' . $f_findname . '%';
-		$t_where .= db_helper_like( 'email' );
-	}
+    # break up search terms by spacing or quoting
+    preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_findname, $t_matches, PREG_SET_ORDER );
 
+    # organize terms without quoting, paying attention to negation
+    $t_search_terms = array();
+    foreach( $t_matches as $t_match ) {
+        $t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
+    }
+
+    # build a big where-clause and param list for all search terms, including negations
+    $t_first = true;
+    $t_where = '( ';
+    foreach( $t_search_terms as $t_search_term => $t_negate ) {
+        if( !$t_first ) {
+            $t_where .= ' AND ';
+        }
+
+        if( $t_negate ) {
+            $t_where .= 'NOT ';
+        }
+
+        $c_search = '%' . $t_search_term . '%';
+        $t_where .= '( ' . db_helper_like( 'realname' ) .
+            ' OR ' . db_helper_like( 'username' ) .
+            ' OR ' . db_helper_like( 'email' );
+
+        $t_where_params[] = $c_search;
+        $t_where_params[] = $c_search;
+        $t_where_params[] = $c_search;
+
+        $t_where .= ' )';
+        $t_first = false;
+    }
+    $t_where .= ' )';
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
@@ -406,7 +406,9 @@ $t_user_count = count( $t_users );
 	<div id="manage-user-edit-div" class="form-inline pull-left">
 		<form method="get" action="manage_user_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input id="findname" type="text" size="30" name="findname" class="input-sm" value="" placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"/>
+			<input id="findname" type="text" size="45" name="findname" class="input-sm"
+				value="<?php echo string_attribute ( $f_findname );?>" placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
+			/>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'search' ) ?>" />
 		</form>	</div>
 	<div class="btn-toolbar pull-right">
