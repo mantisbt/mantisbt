@@ -341,6 +341,16 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 		}
 	}
 
+	// date fields
+	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
+		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+	}
+
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
 	$t_page_number = $p_page_number < 1 ? 1 : $p_page_number;
