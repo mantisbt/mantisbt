@@ -60,18 +60,10 @@ access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 $t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<i class="fa fa-lock fa-lg" title="' . lang_get( 'protected' ) . '" />';
 
-$f_save          = gpc_get_bool( 'save' );
-$f_filter        = gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) );
+$f_save = gpc_get_bool( 'save' );
+$f_filter = gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) );
+$f_search = gpc_get_string( 'search', '');
 $f_page_number   = gpc_get_int( 'page_number', 1 );
-
-if( mb_substr( $f_filter, 0, 6 ) === "SEARCH" ) {
-	$f_findname = mb_substr( $f_filter, 6 );
-} else {
-	$f_findname = gpc_get_string( 'findname', '' ); 
-	if( $f_findname <> "" ) {
-		$f_filter = 'SEARCH' . $f_findname;
-	}
-}
 
 if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 	$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
@@ -183,7 +175,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
-			$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled,
+			$c_dir, null, $c_hide_inactive, $t_prefix, $f_search, $c_show_disabled,
 			'btn btn-xs btn-white btn-primary ' . $t_active );
 }
 echo '</div>';
@@ -194,9 +186,19 @@ echo '<div class="space-10"></div >';
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
-} else if( mb_substr( $f_filter, 0, 6 ) === 'SEARCH' ) {
+} else if( $f_filter === 'UNUSED' ) {
+    $t_where = '(login_count = 0) AND ( date_created = last_visit )';
+} else if( $f_filter === 'NEW' ) {
+    $t_where = db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
+    $t_where_params[] = db_now();
+} else {
+    $t_where_params[] = $f_filter . '%';
+    $t_where = db_helper_like( 'username' );
+}
+
+if( $f_search !== '' ) {
     # break up search terms by spacing or quoting
-    preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_findname, $t_matches, PREG_SET_ORDER );
+    preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
 
     # organize terms without quoting, paying attention to negation
     $t_search_terms = array();
@@ -206,7 +208,7 @@ if( $f_filter === 'ALL' ) {
 
     # build a big where-clause and param list for all search terms, including negations
     $t_first = true;
-    $t_where = '( ';
+    $t_where .= ' AND ( ';
     foreach( $t_search_terms as $t_search_term => $t_negate ) {
         if( !$t_first ) {
             $t_where .= ' AND ';
@@ -229,14 +231,6 @@ if( $f_filter === 'ALL' ) {
         $t_first = false;
     }
     $t_where .= ' )';
-} else if( $f_filter === 'UNUSED' ) {
-	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
-} else if( $f_filter === 'NEW' ) {
-	$t_where = db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
-	$t_where_params[] = db_now();
-} else {
-	$t_where_params[] = $f_filter . '%';
-	$t_where = db_helper_like( 'username' );
 }
 
 $p_per_page = 50;
@@ -302,11 +296,11 @@ $t_user_count = count( $t_users );
 <div class="widget-toolbox padding-8 clearfix">
 	<div id="manage-user-div" class="form-container">
 		<div class="pull-left">
-			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
+			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-sm btn-white btn-round' ) ?>
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
-			<?php print_form_button('manage_user_prune.php', lang_get('prune_accounts'), null, null, 'btn btn-primary btn-white btn-round') ?>
+			<?php print_form_button('manage_user_prune.php', lang_get('prune_accounts'), null, null, 'btn btn-primary btn-sm btn-white btn-round') ?>
 		</div>
 		<?php } ?>
 	<div class="pull-right">
@@ -317,6 +311,7 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 			<input type="hidden" name="save" value="1" />
 			<input type="hidden" name="filter" value="<?php echo string_attribute( $f_filter ); ?>" />
+			<input type="hidden" name="search" value="<?php echo string_attribute( $f_search ); ?>" />
 			<label class="inline">
 			<input type="checkbox" class="ace" name="hideinactive" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_inactive, ON ); ?> />
 			<span class="lbl padding-6"><?php echo lang_get( 'hide_inactive' ) ?></span>
@@ -325,6 +320,9 @@ $t_user_count = count( $t_users );
 			<input type="checkbox" class="ace" name="showdisabled" value="<?php echo ON ?>" <?php check_checked( (int)$c_show_disabled, ON ); ?> />
 			<span class="lbl padding-6"><?php echo lang_get( 'show_disabled' ) ?></span>
 			</label>
+			<input id="search" type="text" size="45" name="search" class="input-sm"
+				   value="<?php echo string_attribute ( $f_search );?>" placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
+			/>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>
 	</form>
@@ -349,7 +347,7 @@ $t_user_count = count( $t_users );
 		print_manage_user_sort_link( 'manage_user_page.php',
 			lang_get( $t_col ),
 			$t_col,
-			$c_dir, $c_sort, $c_hide_inactive, $f_filter, $c_show_disabled );
+			$c_dir, $c_sort, $c_hide_inactive, $f_filter, $f_search, $c_show_disabled );
 		print_sort_icon( $c_dir, $c_sort, $t_col );
 		echo "</th>\n";
 	}
@@ -403,18 +401,11 @@ $t_user_count = count( $t_users );
 </div>
 
 <div class="widget-toolbox padding-8 clearfix">
-	<div id="manage-user-edit-div" class="form-inline pull-left">
-		<form method="get" action="manage_user_page.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input id="findname" type="text" size="45" name="findname" class="input-sm"
-				value="<?php echo string_attribute ( $f_findname );?>" placeholder="<?php echo lang_get( 'search_user_hint' ) ?>"
-			/>
-			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'search' ) ?>" />
-		</form>	</div>
 	<div class="btn-toolbar pull-right">
 		<?php
 		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
+		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number,
+			$f_filter . "&amp;search=$f_search" . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
 		?>
 	</div>
 </div>
