@@ -61,7 +61,7 @@ $t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<i class="fa fa-lock fa-lg" title="' . lang_get( 'protected' ) . '" />';
 
 $f_save = gpc_get_bool( 'save' );
-$f_filter = gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) );
+$f_filter = gpc_get_string( 'filter', 'ALL' );
 $f_search = gpc_get_string( 'search', '');
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
@@ -165,17 +165,20 @@ echo '  <div class="btn-toolbar inline" >';
 echo '    <div class="btn-group" >';
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	if( $t_prefix === 'UNUSED' ) {
+		$t_search = '';
 		$t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
 	} else if( $t_prefix === 'NEW' ) {
+		$t_search = '';
 		$t_title = ' title="[' . $t_new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
 	} else {
+		$t_search = $f_search;
 		$t_title = '';
 	}
 	$t_active = (string)$t_prefix === $f_filter ? 'active' : '';
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
-			$c_dir, null, $c_hide_inactive, $t_prefix, $f_search, $c_show_disabled,
+			$c_dir, null, $c_hide_inactive, $t_prefix, $t_search, $c_show_disabled,
 			'btn btn-xs btn-white btn-primary ' . $t_active );
 }
 echo '</div>';
@@ -187,13 +190,13 @@ $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {
-    $t_where = '(login_count = 0) AND ( date_created = last_visit )';
+	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
-    $t_where = db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
-    $t_where_params[] = db_now();
+	$t_where = db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
+	$t_where_params[] = db_now();
 } else {
-    $t_where_params[] = $f_filter . '%';
-    $t_where = db_helper_like( 'username' );
+	$t_where_params[] = $f_filter . '%';
+	$t_where = db_helper_like( 'username' );
 }
 
 if( $f_search !== '' ) {
