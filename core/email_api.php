@@ -648,7 +648,7 @@ function email_generic_tag( $tag_name, $p_bug_id, $p_notify_type, $p_message_id 
     $t_recipients_filtered = array();
     foreach ( $t_user_ids as $t_user_id ) {
         if( user_get_username($t_user_id) != 'inContact_Deliverer' || ($tag_name == '1A CS Action Required' || $tag_name == 'AM CS Action Required'
-                || $tag_name == '1A More Info Needed' || $tag_name == 'AM CS Action Required')) {
+                || $tag_name == '1A More Info Needed' || $tag_name == 'AM More Info Needed')) {
             $t_recipients_filtered[$t_user_id] = $t_recipients[$t_user_id];
         }
     }
