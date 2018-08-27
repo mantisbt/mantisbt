@@ -319,13 +319,13 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 
 		$t_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		foreach( $t_custom_field_ids as $t_custom_field_id ) {
-			if( !custom_field_has_write_access_to_project( $t_custom_field_id, $t_project_id ) ) {
-				continue;
+			if( custom_field_has_write_access_to_project( $t_custom_field_id, $t_project_id ) &&
+				access_has_project_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+				$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
+				$t_command_id = 'custom_field_' . $t_custom_field_id;
+				$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+				$t_commands[$t_command_id] = string_display( $t_command_caption );
 			}
-			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-			$t_command_id = 'custom_field_' . $t_custom_field_id;
-			$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
-			$t_commands[$t_command_id] = string_display( $t_command_caption );
 		}
 	}
 
