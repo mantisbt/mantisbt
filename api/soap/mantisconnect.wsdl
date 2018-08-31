@@ -296,6 +296,12 @@
    <xsd:element name="end_day" type="xsd:integer" minOccurs="0"/>
    <xsd:element name="end_month" type="xsd:integer" minOccurs="0"/>
    <xsd:element name="end_year" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_start_day" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_start_month" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_start_year" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_end_day" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_end_month" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="last_update_end_year" type="xsd:integer" minOccurs="0"/>
    <xsd:element name="tag_string" type="tns:StringArray" minOccurs="0"/>
    <xsd:element name="tag_select" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="custom_fields" type="tns:FilterCustomFieldArray" minOccurs="0"/>
