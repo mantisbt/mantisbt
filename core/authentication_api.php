@@ -551,6 +551,10 @@ function auth_can_impersonate( $p_user_id ) {
 		return false;
 	}
 
+	if( !user_is_enabled( $p_user_id ) ) {
+		return false;
+	}
+
 	return true;
 }
 
