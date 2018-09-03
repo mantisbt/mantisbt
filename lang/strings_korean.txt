@@ -583,6 +583,7 @@ $s_date_created = '만든 날짜';
 $s_last_visit = '마지막 로그인';
 $s_last_visit_label = '최근 방문:';
 $s_edit_user_link = '사용자 편집';
+$s_search_user_hint = '사용자 이름, 실명, 이메일';
 $s_config_all_projects = '노트: 이 설정사항은 모든 프로젝트에 영향을 끼칩니다.';
 $s_config_project = '노트: 이 설정사항은 오직 %1$s 프로젝트에만 영향을 끼칩니다.';
 $s_colour_coding = '아래의 테이블에서 다음 색상 코드를 적용합니다:';

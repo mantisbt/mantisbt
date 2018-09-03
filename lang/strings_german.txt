@@ -599,6 +599,7 @@ $s_date_created = 'Erstellungsdatum';
 $s_last_visit = 'Letzter Besuch';
 $s_last_visit_label = 'Letzter Besuch:';
 $s_edit_user_link = 'Benutzer bearbeiten';
+$s_search_user_hint = 'Benutzername, bürgerlicher Name oder E-Mail';
 $s_separate_list_items_by = '(Listeneinträge mit „%1$s“ trennen)';
 $s_config_all_projects = 'Hinweis: Diese Einstellungen betreffen alle Projekte, sofern sie nicht durch Einstellungen für ein bestimmtes Projekt überschrieben werden.';
 $s_config_project = 'Hinweis: Diese Einstellungen betreffen nur Projekt %1$s.';
