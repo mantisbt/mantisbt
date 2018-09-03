@@ -602,6 +602,7 @@ $s_date_created = 'Data de Criação';
 $s_last_visit = 'Última Visita';
 $s_last_visit_label = 'Última Visita:';
 $s_edit_user_link = 'Alterar Usuário';
+$s_search_user_hint = 'Nome de usuário, nome real ou e-mail';
 $s_separate_list_items_by = '(itens de lista separadas por "%1$s")';
 $s_config_all_projects = 'Nota: Estas configurações afetam TODOS OS PROJETOS.';
 $s_config_project = 'Nota: Estas configurações afetam apenas o projeto %1$s.';

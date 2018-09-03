@@ -47,6 +47,7 @@
  * @author Macofe
  * @author Mansoft
  * @author Mazab IZW
+ * @author MojaEdukacja
  * @author Py64
  * @author Rambro
  * @author Rezonansowy
@@ -928,6 +929,7 @@ $s_last = 'Ostatnie';
 $s_start_date_label = 'Data rozpoczęcia:';
 $s_end_date_label = 'Data końcowa:';
 $s_use_date_filters = 'Używaj filtrów daty';
+$s_use_last_updated_date_filters = 'Filtruj według daty ostatniej aktualizacji';
 $s_yes = 'Tak';
 $s_no = 'Nie';
 $s_open_filters = 'Zmień filtr';
@@ -952,6 +954,8 @@ $s_edit_filter = 'Edytuj Filtr';
 $s_owner = 'Właściciel';
 $s_update_filter = 'Uaktualnij filtr';
 $s_current_project = 'Bieżący projekt';
+$s_stored_project = 'Przechowywane projekty';
+$s_available_filter_for_project = 'Dostępne filtry dla projektu';
 $s_manage_filter_page_title = 'Zarządzaj filtrami';
 $s_manage_filter_edit_page_title = 'Edytuj filtr';
 $s_delete_filter_button = 'Usuń';
@@ -1040,8 +1044,10 @@ $s_sponsorship_more_info = 'Więcej informacji o sponsorowaniu';
 $s_sponsorship_total = 'Sponsorowanie – łączna liczba';
 $s_changelog = 'Lista zmian';
 $s_changelog_empty = 'Lista zmian niedostępna';
+$s_changelog_empty_manager = 'Brak dostępnych informacji o Liście Zmian. Problemy są uwzględniane, gdy projekty posiadają wersje, oraz są rozwiązywane przy pomocy "naprawiono w wersji".';
 $s_roadmap = 'Plan pracy';
 $s_resolved_progress = '%1$d z %2$d zgłoszeń zrealizowano. Postęp (%3$d%%).';
+$s_roadmap_empty_manager = 'Brak dostępnych informacji o Planie Pracy. Problemy pojawią się, gdy projekty mają przypisane wersje a problemy posiadają ustawioną "Wersję docelową".';
 $s_http_auth_realm = 'Logowanie do MantisBT';
 $s_bug = 'zgłoszenie';
 $s_bugs = 'kwestie';
@@ -1064,6 +1070,7 @@ $s_bug_created_from = 'Zgłoszenie wygenerowane z';
 $s_copy_from_parent = 'Skopiuj rozszerzone dane z nadrzędnego problemu';
 $s_copy_notes_from_parent = 'Skopiuj notatki błędu';
 $s_copy_attachments_from_parent = 'Skopiuj załączniki';
+$s_with = 'z';
 $s_viewing_bug_relationship_graph_title = 'Graf powiązań';
 $s_viewing_bug_dependency_graph_title = 'Wykres zależności';
 $s_relation_graph = 'Graf powiązań';
@@ -1249,6 +1256,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Typ przesyłanego pliku nie jest dozwolo
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Podany katalog nie istnieje. Sprawdź ustawienia projektu.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Istnieje już projekt o takiej nazwie.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Wymagane pole „%1$s” nie zostało wypełnione. Sprawdź wprowadzone dane.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Nieprawidłowa wartość dla \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Konto jest zabezpieczone. Nie masz uprawnień dostępu do tego konta dopóki zabezpieczenie jest aktywne.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Brak dostępu.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Przesyłanie nie powiodło się. Plik nie mógł zostać odczytany przez MantisBT. Sprawdź konfigurację serwera.';
