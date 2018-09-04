@@ -2393,10 +2393,9 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	}
 
 	if( null === $p_static_fallback_page ) {
-		$p_static_fallback_page = $_SERVER['PHP_SELF'];
-		$p_static_fallback_page = string_sanitize_url( $_SERVER['PHP_SELF'] );
+		$p_static_fallback_page = $_SERVER['SCRIPT_NAME'];
 	}
-	$t_filters_url = $p_static_fallback_page;
+	$t_filters_url = helper_mantis_url( $p_static_fallback_page );
 	$t_get_params = $_GET;
 	$t_get_params['for_screen'] = $p_for_screen;
 	$t_get_params['static'] = ON;
