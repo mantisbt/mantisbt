@@ -62,6 +62,7 @@
  * @author Redredsonia
  * @author Sabbah
  * @author Semen
+ * @author Vlad5250
  * @author Volkov
  * @author Александр Сигачёв
  */
@@ -600,6 +601,7 @@ $s_date_created = 'Создана';
 $s_last_visit = 'Посл. вход';
 $s_last_visit_label = 'Последний вход:';
 $s_edit_user_link = 'Изменить учетную запись';
+$s_search_user_hint = 'Имя пользователя, настоящее имя или эл. почта';
 $s_separate_list_items_by = '(отделяйте пункты списка с помощью «%1$s»)';
 $s_config_all_projects = 'Примечание: эти значения влияют на ВСЕ ПРОЕКТЫ.';
 $s_config_project = 'Примечание: эти значения влияют только на проект %1$s.';
