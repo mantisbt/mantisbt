@@ -91,9 +91,9 @@ abstract class MantisColumn {
 	 * @param integer $p_columns_target Column display target.
 	 * @return string The column value.
 	 */
-	public function value( BugData $p_bug, $p_columns_target ) {
+	public function value( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_CSV_PAGE ) {
 		ob_start();
-		$this->display( $p_bug, COLUMNS_TARGET_CSV_PAGE );
+		$this->display( $p_bug, $p_columns_target );
 		return ob_get_clean();
 	}
 }
