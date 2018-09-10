@@ -49,6 +49,7 @@
  * @author Fitoschido
  * @author Guidored
  * @author Jelou
+ * @author Ktranz
  * @author Lemondoge
  * @author Leshurex
  * @author Locos epraix
@@ -599,6 +600,7 @@ $s_date_created = 'Fecha de Creación';
 $s_last_visit = 'Última Visita';
 $s_last_visit_label = 'Última Visita:';
 $s_edit_user_link = 'Editar Usuario';
+$s_search_user_hint = 'Nombre de Usuario, Nombre Real o Dirección de correo electrónico';
 $s_separate_list_items_by = '(separar los elementos de la lista por "%1$s")';
 $s_config_all_projects = 'Nota: Esta configuración afecta a todos los proyectos, a menos que se redefina específicamente a nivel de proyecto individual.';
 $s_config_project = 'Nota: Esta configuración afecta sólo al proyecto %1$s';
