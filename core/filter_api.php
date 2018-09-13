@@ -2590,7 +2590,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 							}
 							if( $t_is_temporary ) {
 								echo '<li>';
-								echo '<a href="view_all_set.php?temporary=n&filter=' . filter_get_temporary_key( $t_filter ) . '">';
+								echo '<a href="view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project() . '">';
 								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
 								echo '</a>';
 								echo '</li>';

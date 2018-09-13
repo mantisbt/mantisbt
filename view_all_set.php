@@ -60,6 +60,7 @@ $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
 $f_isset_temporary		= gpc_isset( 'temporary' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
+$f_project_id			= gpc_get_int( 'set_project_id', -1 );
 
 
 # Get the filter in use
@@ -181,8 +182,14 @@ $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 # If only using a temporary filter, don't store it in the database
 if( !$t_temp_filter ) {
-	# Store the filter string in the database: its the current filter, so some values won't change
-	filter_set_project_filter( $t_setting_arr );
+	# get project if it was specified
+	if( -1 == $f_project_id ) {
+		$t_project_id = null;
+	} else {
+		$t_project_id = $f_project_id;
+	}
+	# Store the filter in the database as the current filter for the project
+	filter_set_project_filter( $t_setting_arr, $t_project_id );
 }
 
 # redirect to print_all or view_all page
