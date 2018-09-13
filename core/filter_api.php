@@ -2526,18 +2526,28 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
 	<?php
 	$t_stored_queries_arr = filter_db_get_available_queries();
+	$t_is_temporary = filter_is_temporary( $t_filter );
 	if( $p_expanded ) {
 		$t_collapse_block = is_collapsed( 'filter' );
 		$t_block_css = $t_collapse_block ? 'collapsed' : '';
 		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
+		# further use of this icon must be inlined to avoid spaces in rendered html
+		if( $t_is_temporary ) {
+			$t_temporary_icon_html = '<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>';
+		} else {
+			$t_temporary_icon_html = '';
+		}
 		?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<i class="ace-icon fa fa-filter"><?php echo $t_temporary_icon_html ?>
+				</i>
 				<?php echo lang_get( 'filters' ) ?>
 			</h4>
+
 			<div class="widget-toolbar">
 				<?php
 					$t_view_filters = config_get('view_filters');
@@ -2572,7 +2582,15 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 								echo '<i class="ace-icon fa fa-wrench"></i>&#160;&#160;' . lang_get( 'open_queries' );
 								echo '</a>';
 								echo '</li>';
-							} ?>
+							}
+							if( $t_is_temporary ) {
+								echo '<li>';
+								echo '<a href="view_all_set.php?temporary=n&filter=' . filter_get_temporary_key( $t_filter ) . '">';
+								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
+								echo '</a>';
+								echo '</li>';
+							}
+							?>
 						</ul>
 					</div>
 				<?php } ?>

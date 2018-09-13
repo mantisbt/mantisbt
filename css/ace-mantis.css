@@ -512,6 +512,10 @@ input.typeahead.scrollable ~ .tt-menu {
 	margin: 0 1px 0 0;
 }
 
+.fa-xs-top {
+	font-size: 60%;
+	vertical-align: top;
+}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
