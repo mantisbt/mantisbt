@@ -58,10 +58,26 @@ auth_ensure_user_authenticated();
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
+$f_isset_temporary		= gpc_isset( 'temporary' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
 
-if( $f_make_temporary && $f_type < 0 ) {
-	$f_type = 1;
+
+# Get the filter in use
+$t_setting_arr = current_user_get_bug_filter();
+
+# If there is an explicit "temporary" parameter true/false, will force the new filter
+# to be termporary (true) or persistent (false), according to its value.
+# If the parameter is not present, the filter will be kept the same as original.
+if( $f_isset_temporary ) {
+	# when only changing the temporary status of a filter and no action is specified
+	# we assume not to reset current filter
+	if( $f_type < 0 ) {
+		# use type 2 wich keeps current filter values
+		$f_type = 2;
+	}
+	$t_temp_filter = $f_make_temporary;
+} else {
+	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
 if( $f_type < 0 ) {
@@ -73,9 +89,6 @@ if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = 0;
 }
 
-# Get the filter in use
-$t_setting_arr = current_user_get_bug_filter();
-$t_temp_filter = $f_make_temporary || filter_is_temporary( $t_setting_arr );
 $t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
 
 # If user is anonymous, force the creation of a temporary filter
