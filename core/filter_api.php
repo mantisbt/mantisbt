@@ -2552,6 +2552,11 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 				<?php
 					$t_view_filters = config_get('view_filters');
 
+					if( $t_is_temporary ) {
+						$t_tmp_filter_param = '&filter=' . filter_get_temporary_key( $t_filter );
+					} else {
+						$t_tmp_filter_param = '';
+					}
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
 						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ||
 						count( $t_stored_queries_arr ) > 0 ) { ?>
@@ -2562,7 +2567,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
 							$t_url = config_get( 'use_dynamic_filters' )
-								? 'view_all_set.php?type=6&amp;view_type='
+								? 'view_all_set.php?type=6' . $t_tmp_filter_param . '&view_type='
 								: 'view_filters_page.php?view_type=';
 							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 
