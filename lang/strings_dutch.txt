@@ -44,6 +44,7 @@
  * @author McDutchie
  * @author MedShot
  * @author Mraedis
+ * @author Optilete
  * @author Rienkwind
  * @author Robin van der Vliet
  * @author Robin0van0der0vliet
@@ -588,6 +589,7 @@ $s_date_created = 'Aangemaakt op';
 $s_last_visit = 'Laatste bezoek';
 $s_last_visit_label = 'Laatste bezoek:';
 $s_edit_user_link = 'Gebruiker bewerken';
+$s_search_user_hint = 'Gebruikersnaam, Echte Naam of E-mail';
 $s_separate_list_items_by = '(scheid items in de lijst met "%1$s")';
 $s_config_all_projects = 'Let op: deze instelling is van toepassing op alle projecten, tenzij die op projectniveau is aangepast.';
 $s_config_project = 'Let op: deze instelling heeft alleen invloed op het project %1$s.';
@@ -1035,6 +1037,7 @@ $s_kb = 'KB';
 $s_attachment_missing = 'De bijlage ontbreekt';
 $s_attachment_count = 'Aantal toegevoegde bestanden';
 $s_view_attachments_for_issue = '%1$d bestand(en) bekijken voor melding #%2$d';
+$s_warning_update_custom_field_type = '<strong>Waarschuwing:</strong> Aangepast veld "%1$s" heeft al opgeslagen waarden. Het wijzigen van het veldtype kan fouten en onverwacht gedrag veroorzaken als bestaande waarden niet consistent zijn met het nieuwe type van het veld. Klik op de onderstaande knop om door te gaan';
 $s_phpmailer_language = 'nl';
 $s_sponsors = '%1$d sponsor(s)';
 $s_sponsorship_added = 'Sponsoring toegevoegd';
@@ -1340,7 +1343,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Toegang geweig
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'De sponsor heeft geen e-mailadres opgegeven. Wijzig uw instellingen om dit te corrigeren.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'De instelling "%1$s" heeft een foutieve waarde "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'De handeling kan niet worden uitgevoerd omdat melding "%1$d" alleen-lezen is.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Deze melding kan niet opgelost worden totdat all afhankelijke meldingen zijn opgelost.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Deze melding kan niet opgelost worden totdat alle afhankelijke meldingen zijn opgelost. Vraag je systeembeheerder voor toegang tot het project als je geen enkele afhankelijke issue ziet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'De relatie is niet gevonden.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Toegang geweigerd: voor melding %1$d is een hoger toegangsniveau nodig.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Een melding kan geen relatie met zichzelf hebben.';

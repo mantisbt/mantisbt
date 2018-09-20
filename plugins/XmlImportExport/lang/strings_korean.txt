@@ -40,6 +40,7 @@
  *
  * @author Changwoo
  * @author Wisewolf
+ * @author Ykhwong
  */
 
 $s_plugin_XmlImportExport_title = '이슈 가져오기/내보내기';
@@ -58,7 +59,7 @@ $s_plugin_XmlImportExport_renumber = '번호 재구성';
 $s_plugin_XmlImportExport_renumber_desc = '상호 참조를 새로운 이슈 번호에 맞게 변환';
 $s_plugin_XmlImportExport_link = '링크';
 $s_plugin_XmlImportExport_link_desc = '링크를 원래 항목으로 변환';
-$s_plugin_XmlImportExport_disable = '사용 않기';
+$s_plugin_XmlImportExport_disable = '사용 안 함';
 $s_plugin_XmlImportExport_disable_desc = '링크 사용하지 않기';
 $s_plugin_XmlImportExport_fallback = '대체 방식("번호 재구성"이 동작하지 않을 때)';
 $s_plugin_XmlImportExport_fallback_category = '대체 방식';
