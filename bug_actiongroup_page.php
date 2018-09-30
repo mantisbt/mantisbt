@@ -409,7 +409,7 @@ if( $t_multiple_projects ) {
 						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
-				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+				echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 			}
 ?>
 					</td>
