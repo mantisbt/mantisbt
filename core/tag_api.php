@@ -327,7 +327,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 
 	$t_tags = tag_parse_string( $p_tag_string );
-	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
+	$t_can_create = tag_can_create();
 
 	$t_tags_create = array();
 	$t_tags_attach = array();
@@ -530,6 +530,26 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
 }
 
 /**
+ * Can the specified user create a tag?
+ *
+ * @param integer $p_user_id The id of the user to check access rights for.
+ * @return bool true: can create, false: otherwise.
+ */
+function tag_can_create( $p_user_id = null ) {
+	return access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+}
+
+/**
+ * Ensure specified user can create tags.
+ *
+ * @param integer $p_user_id The id of the user to check access rights for.
+ * @return void
+ */
+function tag_ensure_can_create( $p_user_id = null ) {
+	access_ensure_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+}
+
+/**
  * Create a tag with the given name, creator, and description.
  * Defaults to the currently logged in user, and a blank description.
  * @param string  $p_name        The tag name to create.
@@ -538,7 +558,7 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
  * @return int Tag ID
  */
 function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
-	access_ensure_global_level( config_get( 'tag_create_threshold' ) );
+	tag_ensure_can_create( $p_user_id );
 
 	tag_ensure_name_is_valid( $p_name );
 	tag_ensure_unique( $p_name );
