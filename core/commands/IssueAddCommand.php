@@ -217,6 +217,16 @@ class IssueAddCommand extends Command {
 			}
 		}
 
+		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) && !tag_can_create( $this->user_id ) ) {
+			foreach( $t_issue['tags'] as $t_tag ) {
+				if( $t_tag['id'] === -1 ) {
+					throw new ClientException(
+						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_new_tag ),
+						ERROR_TAG_NOT_FOUND );
+					}
+			}
+		}
+
 		$t_category = isset( $t_issue['category'] ) ? $t_issue['category'] : null;
 		$t_category_id = mci_get_category_id( $t_category, $t_project_id );
 
@@ -332,7 +342,16 @@ class IssueAddCommand extends Command {
 
 		# Add Tags
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
-			mci_tag_set_for_issue( $t_issue_id, $t_issue['tags'], $this->user_id );
+			$t_tags = array();
+			foreach( $t_issue['tags'] as $t_tag ) {
+				if( $t_tag['id'] === -1 ) {
+					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id );
+				}
+
+				$t_tags[] = $t_tag;
+			}
+
+			mci_tag_set_for_issue( $t_issue_id, $t_tags, $this->user_id );
 		}
 
 		# Handle the file upload
