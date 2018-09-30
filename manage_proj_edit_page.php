@@ -158,7 +158,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
+						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state']) ?>
 					</select>
 				</td>
 			</tr>
