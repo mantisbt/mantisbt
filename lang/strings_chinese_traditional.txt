@@ -1253,7 +1253,7 @@ $s_timeline_issue_reopened = '<span class="username">%1$s</span> 已重新開啟
 $s_timeline_issue_assigned = '<span class="username">%1$s</span> 指派問題 <span class="issue_id">%2$s</span> 給 <span class="username">%3$s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> 已處理問題 <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unassigned = '<span class="username">%1$s</span> 取消指派問題 <span class="issue_id">%2$s</span>';
-$s_timeline_no_activity = '在時間範圍內沒有任合使用動作。';
+$s_timeline_no_activity = '在時間範圍內沒有任何使用動作。';
 $s_timeline_title = '時間軸';
 $s_timeline_more = '更多事件...';
 $s_missing_error_string = '缺少錯誤字串：%1$s';
