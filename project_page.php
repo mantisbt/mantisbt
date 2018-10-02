@@ -65,7 +65,7 @@ layout_page_header( project_get_field( $f_project_id, 'name' ) );
 
 layout_page_begin();
 
-echo '<h1>', string_display( project_get_field( $f_project_id, 'name' ) ), '</h1>';
+echo '<h1>', string_display_line( project_get_field( $f_project_id, 'name' ) ), '</h1>';
 
 echo '<p>';
 

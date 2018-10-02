@@ -221,7 +221,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <?php
 		foreach ( $t_bugnote_stats['issues'] as $t_issue_id => $t_issue ) {
 			$t_project_info = ( !isset( $f_bug_id ) && ( $f_project_id == ALL_PROJECTS || $f_include_subprojects ) ) ? '[' . project_get_name( $t_issue['project_id'] ) . ']' . lang_get( 'word_separator' ) : '';
-			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display( $t_issue['summary'] );
+			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display_line( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 
 			foreach( $t_issue['users'] as $t_user_id => $t_user_info ) {
