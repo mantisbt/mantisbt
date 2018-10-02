@@ -256,7 +256,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 		} else if( true == $t_none_found ) {
 			echo lang_get( 'none' );
 		} else {
-			echo string_display( $t_output );
+			echo string_display_line( $t_output );
 		}
 	}
 }
@@ -332,7 +332,7 @@ function print_filter_values_handler_id( array $p_filter ) {
 		if( true == $t_any_found ) {
 			echo lang_get( 'any' );
 		} else {
-			echo string_display( $t_output );
+			echo string_display_line( $t_output );
 		}
 	}
 }
@@ -2003,7 +2003,7 @@ function print_filter_values_show_sort( array $p_filter ) {
 			}
 			$t_sort = $t_sort_fields[$i];
 			if(column_is_custom_field( $t_sort ) ) {
-				$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
+				$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
 			}
@@ -2035,7 +2035,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 	$t_shown_fields[''] = '';
 	foreach( $t_visible_columns as $t_column ) {
 		if(column_is_custom_field( $t_column ) ) {
-			$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
+			$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
 		} else {
 			$t_field_name = string_get_field_name( $t_column );
 		}

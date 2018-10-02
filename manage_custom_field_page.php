@@ -93,7 +93,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 				# workaround to enforce line break displaying custom field values
 				# @todo replace by CSS after we don't support any longer browsers without CSS3 support
 				?>
-				<td><?php echo str_replace( '|', ' | ', string_display( $t_desc['possible_values'] ) ) ?></td>
+				<td><?php echo str_replace( '|', ' | ', string_display_line( $t_desc['possible_values'] ) ) ?></td>
 				<td><?php echo string_display( $t_desc['default_value'] ) ?></td>
 			</tr><?php
 		} # Create Form END ?>

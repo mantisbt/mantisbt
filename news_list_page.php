@@ -80,7 +80,7 @@ if( $t_count > 0 ) { ?>
 			continue;
 		}
 
-		$v_headline 	= string_display( $v_headline );
+		$v_headline 	= string_display_line( $v_headline );
 		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted ); ?>
 		<p>
 			<i class="fa fa-clock-o"></i> <span class="small"> <?php echo $v_date_posted; ?> </span>

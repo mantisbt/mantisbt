@@ -446,7 +446,7 @@ function print_news_item_option_list() {
 	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_headline = string_display( $t_row['headline'] );
+		$t_headline = string_display_line( $t_row['headline'] );
 		$t_announcement = $t_row['announcement'];
 		$t_view_state = $t_row['view_state'];
 		$t_id = $t_row['id'];
