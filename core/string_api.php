@@ -899,10 +899,6 @@ function string_html_entities( $p_string ) {
  * @return string
  */
 function string_html_specialchars( $p_string ) {
-	# Remove any invalid character from the string per XML 1.0 specification
-	# http://www.w3.org/TR/2008/REC-xml-20081126/#NT-Char
-	$p_string = preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_string );
-
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
