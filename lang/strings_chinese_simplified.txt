@@ -58,6 +58,7 @@
  * @author Yanmiao liu
  * @author Yfdyh000
  * @author 乌拉跨氪
+ * @author 夢蝶葬花
  */
 
 $s_actiongroup_menu_move = '移动';
@@ -595,6 +596,7 @@ $s_date_created = '创建日期';
 $s_last_visit = '最近一次登录';
 $s_last_visit_label = '上次访问：';
 $s_edit_user_link = '编辑用户';
+$s_search_user_hint = '用户名、真实姓名或电子邮件';
 $s_separate_list_items_by = '（由“%1$s”指定的列表项）';
 $s_config_all_projects = '注意：这些配置影响所有项目，除非在项目级别覆盖。';
 $s_config_project = '注意：这些设置只对"%1$s"项目有效。';

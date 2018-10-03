@@ -591,6 +591,7 @@ $s_date_created = '作成日時';
 $s_last_visit = '最終訪問日時';
 $s_last_visit_label = '最終訪問日時:';
 $s_edit_user_link = 'ユーザーを編集';
+$s_search_user_hint = '利用者名、実名あるいはメールアドレス';
 $s_separate_list_items_by = '(「%1$s」によってリストのアイテムが分割された)';
 $s_config_all_projects = '注意: これらの設定は、すべてのプロジェクトに適用されます。';
 $s_config_project = '注意: これらの設定は、%1$s プロジェクトにのみ適用されます。';
