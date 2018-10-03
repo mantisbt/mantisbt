@@ -44,6 +44,7 @@
  * @author Kenn.jensen
  * @author Peter Alberti
  * @author Qaqqalik
+ * @author Saederup92
  * @author Tjernobyl
  */
 
@@ -164,7 +165,7 @@ $s_resolve_bugs_conf_msg = 'Vælg rapporternes løsning';
 $s_priority_bugs_conf_msg = 'Vælg rapporternes prioritet';
 $s_status_bugs_conf_msg = 'Vælg rapporternes status';
 $s_view_status_bugs_conf_msg = 'Vælg rapporternes visningsstatus';
-$s_category_bugs_conf_msg = 'Væld kategori for rapporterne';
+$s_category_bugs_conf_msg = 'Vælg kategori for rapporterne';
 $s_set_sticky_bugs_conf_msg = 'Er du sikker på du vil sætte klæbrig til/fra for disse emner?';
 $s_product_version_bugs_conf_msg = 'Opdater produktversion til';
 $s_fixed_in_version_bugs_conf_msg = 'Opdater Rettet i version til';
@@ -583,6 +584,7 @@ $s_date_created = 'Oprettet dato';
 $s_last_visit = 'Sidste besøg';
 $s_last_visit_label = 'Sidste besøg:';
 $s_edit_user_link = 'Rediger bruger';
+$s_search_user_hint = 'Brugernavn, rigtige navn eller e-mail';
 $s_separate_list_items_by = '(adskil listens elementer med »%1$s«)';
 $s_config_all_projects = 'Note: Disse indstillinger gælder for alle projekter, undtagen hvis de er overskrevet på projekt niveau.';
 $s_config_project = 'Note: Disse indstillinger har kun indflydelse på projekterne %1$s.';
@@ -1334,7 +1336,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Adgang nægtet
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angivet en e-mailadresse. Opdater din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden "%1$s" har en ugyldig værdi "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi rapporten "%1$d" er skrivebeskyttet';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Denne fejlrapport kan ikke løse før alle afhængige fejlrapporter er blevet løst.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Denne fejlrapport kan ikke løse før alle afhængige fejlrapporter er blevet løst. Spørg din systemadministrator om projektadgang hvis du ikke kan se nogen afhængig fejlrapport.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Afhængighed ikke fundet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Adgang nægtet: Rapporten %1$d kræver et højere adgangsniveau.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En rapport kan ikke gøres afhængig af sig selv.';
