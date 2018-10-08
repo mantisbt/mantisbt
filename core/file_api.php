@@ -855,6 +855,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );
 
+	$t_file_id = db_insert_id( $t_file_table );
+	
 	if( db_is_oracle() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
 	}
@@ -867,6 +869,9 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
+		
+		# Event integration
+		event_signal( 'EVENT_BUG_FILE_ATTACH', array( $p_bug_id, $t_file_id ) );
 	}
 
 	return $t_file_info;
