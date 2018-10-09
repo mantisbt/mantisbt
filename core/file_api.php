@@ -528,6 +528,8 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
  * @return boolean
  */
 function file_delete( $p_file_id, $p_table = 'bug' ) {
+	event_signal( 'EVENT_FILE_DELETE', array( array( 'file_id' => $p_file_id, 'type' => $p_table ) ) );
+	
 	$t_upload_method = config_get( 'file_upload_method' );
 
 	$c_file_id = (int)$p_file_id;
@@ -869,11 +871,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
-		
-		# Event integration
-		event_signal( 'EVENT_BUG_FILE_ATTACH', array( $p_bug_id, $t_file_id ) );
 	}
 
+	# Event integration
+	event_signal( 'EVENT_FILE_ADDED', array( array( 'file_id' => $t_file_id, 'type' => $p_table ) ) );
+	
 	return $t_file_info;
 }
 
