@@ -516,6 +516,38 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+                
+                <blockquote id="dev.eventref.bug.action.fileadded">
+			<title>EVENT_FILE_ADDED (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do post-processing of uploaded file.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array of Array&gt;: File ID, name db table</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+		<blockquote id="dev.eventref.bug.action.filedelete">
+			<title>EVENT_FILE_DELETE (Execute)</title>
+
+			<blockquote>
+				<para>
+                                        This event allows plugins to do pre-processing of file 
+                                        deletion. This event is triggered prior to the file 
+                                        removal from the database.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+                                        <listitem><para>&lt;Array of Array&gt;: File ID, name db table</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
 
 	</section>
 
