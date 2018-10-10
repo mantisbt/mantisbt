@@ -142,6 +142,12 @@ foreach( $_GET as $t_var_name => $t_var_value ) {
 
 $t_my_filter['custom_fields'] = $t_custom_fields;
 
+# Handle class-based filters defined as plugins
+$t_plugin_filters = filter_get_plugin_filters();
+foreach( array_keys( $t_plugin_filters ) as $s_filter_name ) {
+    $t_my_filter[$s_filter_name] = gpc_get_string( $s_filter_name, $t_meta_filter_any_array );
+}
+
 # Must use advanced filter so that the project_id is applied and multiple
 # selections are handled.
 $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
