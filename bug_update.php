@@ -74,7 +74,7 @@ $t_issue = array(
                           'last_updated' => gpc_get_string( 'last_updated' ),
 );
 
-$t_additional_info = gpc_get_string( 'additional_info', null );
+$t_additional_info = gpc_get_string( 'additional_information', '' );
 if( !is_blank( $t_additional_info ) ) {
     $t_issue['additional_information'] = $t_additional_info;
 }
@@ -218,12 +218,11 @@ foreach( $t_related_custom_field_ids as $t_id ) {
     $t_def = custom_field_get_definition( $t_id );
 
     # Produce an error if the field is required but wasn't posted
-    if( gpc_isset_custom_field( $t_id, $t_def['type'] ) ) {
-        $t_custom_fields[] = array(
-                                  'field' => array( 'id' => $t_id ),
-                                  'value' => gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null )
-        );
-    }
+
+    $t_custom_fields[] = array(
+                              'field' => array( 'id' => $t_id ),
+                              'value' => gpc_get_custom_field( 'custom_field_' . $t_id, $t_def['type'], null )
+    );
 }
 
 if( !empty( $t_custom_fields ) ) {
