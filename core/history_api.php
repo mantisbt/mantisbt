@@ -944,7 +944,12 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 	# output special cases
 	if( NORMAL_TYPE == $p_type ) {
 		$t_note = $t_field_localized;
-		$t_change = $p_old_value . ' => ' . $p_new_value;
+		if( $p_field_name == 'Update_Summary' ) {
+			# hide update summary in history
+			$t_change = '';
+		} else {
+			$t_change = $p_old_value . ' => ' . $p_new_value;
+		}
 	}
 
 	# end if DEFAULT
