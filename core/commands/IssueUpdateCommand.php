@@ -139,6 +139,8 @@ class IssueUpdateCommand extends Command {
             'Last updated not specified', ERROR_EMPTY_FIELD, array( 'last updated' ) );
         }
 
+        $this->custom_fields_to_set = isset( $t_update_data['custom_fields'] ) ? $t_update_data['custom_fields'] : array();
+
         $this->existing_issue = bug_get( $f_bug_id, true );
         $this->updated_issue  = clone $this->existing_issue;
 
