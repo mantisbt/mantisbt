@@ -626,6 +626,19 @@ function email_notify_new_account( $p_username, $p_email ) {
 function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
 	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
 	# @todo yarick123:sort recipients list by language to reduce switches between different languages
+
+	# Check if update is for custom field Update_Summary, then don't set email notification
+	db_param_push();
+	$t_query = 'SELECT  field_name,date_modified  FROM mantis_bug_history_table WHERE bug_id=' . db_param()
+	          	. ' ORDER BY date_modified DESC LIMIT 1';
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_field_name = $t_row['field_name'];
+	}
+	if( $t_field_name == 'Update_Summary') {
+		return;
+	}
 	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
 	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params );
 }
@@ -1719,6 +1732,32 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	$p_visible_bug_data['email_date_submitted'] = date( $t_complete_date_format, $p_visible_bug_data['email_date_submitted'] );
 	$p_visible_bug_data['email_last_modified'] = date( $t_complete_date_format, $p_visible_bug_data['email_last_modified'] );
+
+	$t_messsage = '';
+	if( array_key_exists( 'history', $p_visible_bug_data ) ) {
+		$t_raw_history_item = $p_visible_bug_data['history'][0];
+		foreach($p_visible_bug_data['history'] as $t_history) {
+			if (strcmp($t_history['date'], $t_raw_history_item['date']) > 0) {
+				$t_raw_history_item = $t_history;
+			}
+		}
+		$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
+
+		$t_message .= utf8_str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . utf8_str_pad( $t_raw_history_item['username'], 15 ) . utf8_str_pad( $t_localized_item['note'], 25 ) . utf8_str_pad( $t_localized_item['change'], 20 ) . "\n";
+	}
+
+	# format bugnotes
+	if( array_key_exists( 'bugnotes', $p_visible_bug_data ) ) {
+		$t_bugnote = $p_visible_bug_data['bugnotes'][0];
+		foreach($p_visible_bug_data['bugnotes'] as $t_bugnote_row) {
+			if ($t_bugnote_row->last_modified > $t_bugnote->last_modified) {
+				$t_bugnote = $t_bugnote_row;
+			}
+		}
+		# Show time tracking is always true, since data has already been filtered out when creating the bug visible data.
+		$t_message .= email_format_bugnote( $t_bugnote, $p_visible_bug_data['email_project_id'],
+			/* show_time_tracking */ true,  $t_email_separator2, $t_normal_date_format ) . "\n";
+	}
 
 	$t_message = $t_email_separator1 . " \n";
 
