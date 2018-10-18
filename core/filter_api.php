@@ -2533,11 +2533,9 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 		# further use of this icon must be inlined to avoid spaces in rendered html
-		if( $t_is_temporary ) {
-			$t_temporary_icon_html = '<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>';
-		} else {
-			$t_temporary_icon_html = '';
-		}
+		$t_temporary_icon_html = $t_is_temporary ?
+			'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
+			: '';
 		?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -2551,12 +2549,8 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 			<div class="widget-toolbar">
 				<?php
 					$t_view_filters = config_get('view_filters');
+					$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
 
-					if( $t_is_temporary ) {
-						$t_tmp_filter_param = '&filter=' . filter_get_temporary_key( $t_filter );
-					} else {
-						$t_tmp_filter_param = '';
-					}
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
 						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ||
 						count( $t_stored_queries_arr ) > 0 ) { ?>

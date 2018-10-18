@@ -183,11 +183,7 @@ $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 # If only using a temporary filter, don't store it in the database
 if( !$t_temp_filter ) {
 	# get project if it was specified
-	if( -1 == $f_project_id ) {
-		$t_project_id = null;
-	} else {
-		$t_project_id = $f_project_id;
-	}
+	$t_project_id = ( $f_project_id >= 0 ) ? $f_project_id : null;
 	# Store the filter in the database as the current filter for the project
 	filter_set_project_filter( $t_setting_arr, $t_project_id );
 }
