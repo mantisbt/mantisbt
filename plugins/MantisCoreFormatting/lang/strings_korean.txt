@@ -40,6 +40,7 @@
  *
  * @author Changwoo
  * @author Hong3e
+ * @author Ykhwong
  * @author 아라
  */
 
@@ -49,7 +50,7 @@ $s_plugin_format_config = '설정';
 $s_plugin_format_process_text = '텍스트 처리';
 $s_plugin_format_process_text_warning_notice = '잘 모르면 사용 중지하지 마십시오. 사용 중지 상태에서는 크로스 사이트 스크립팅(XSS) 공격을 받을 수 있습니다.';
 $s_plugin_format_process_urls = 'URL 처리';
-$s_plugin_format_process_buglinks = '맨티스 내부링크(이슈&이슈노트)';
+$s_plugin_format_process_buglinks = '맨티스BT 내부 링크 (이슈 및 이슈 노트)';
 $s_plugin_format_process_buglinks_info = '자동링크 처리 <em>이슈</em> 앞에"<literal>%s</literal>", <em>이슈노트 </em> 앞에 "<literal>%s</literal>';
 $s_plugin_format_process_markdown = '마크다운';
 $s_plugin_format_process_markdown_info = '마크다운 포맷을 지원합니다. 마크다운 문법으로 작성된 텍스트를 HTML로 변환하여 표시합니다.';
