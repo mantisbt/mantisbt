@@ -1,7 +1,7 @@
 <?php
 # MantisBT - A PHP based bugtracking system
 
-# MantisBT is free software: you can redistribute it and/or modify
+# # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
@@ -65,9 +65,10 @@ form_security_validate( 'bug_update' );
 
 $f_bug_id      = gpc_get_int( 'bug_id' );
 $f_update_type = gpc_get_string( 'action_type', BUG_UPDATE_TYPE_NORMAL );
+$t_project_id  = (int) bug_get_field( $f_bug_id, 'project_id' );
 
-if( helper_get_current_project() != bug_get_field( $f_bug_id, 'project_id' ) ) {
-    $g_project_override = bug_get_field( $f_bug_id, 'project_id' );
+if( helper_get_current_project() != $t_project_id ) {
+    $g_project_override = $t_project_id;
 }
 
 $t_issue = array(
