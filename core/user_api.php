@@ -502,7 +502,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	# Get the list of connected users
 	$t_users_connected = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_users_connected[] = $t_row['id'];
+		$t_users_connected[] = (int)$t_row['id'];
 	}
 
 	return $t_users_connected;
@@ -696,7 +696,7 @@ function user_delete( $p_user_id ) {
  */
 function user_get_id_by_name( $p_username, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'username', $p_username ) ) {
-		return $t_user['id'];
+		return (int)$t_user['id'];
 	}
 
 	db_param_push();
@@ -706,7 +706,7 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
-		return $t_row['id'];
+		return (int)$t_row['id'];
 	}
 
 	if( $p_throw ) {
@@ -728,7 +728,7 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
  */
 function user_get_id_by_email( $p_email, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
-		return $t_user['id'];
+		return (int)$t_user['id'];
 	}
 
 	db_param_push();
@@ -738,7 +738,7 @@ function user_get_id_by_email( $p_email, $p_throw = false ) {
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
-		return $t_row['id'];
+		return (int)$t_row['id'];
 	}
 
 	if( $p_throw ) {
@@ -786,7 +786,7 @@ function user_get_enabled_ids_by_email( $p_email ) {
  */
 function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
-		return $t_user['id'];
+		return (int)$t_user['id'];
 	}
 
 	db_param_push();
@@ -804,7 +804,7 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	}
 
 	user_cache_database_result( $t_row );
-	return $t_row['id'];
+	return (int)$t_row['id'];
 }
 
 /**
@@ -817,7 +817,7 @@ function user_get_id_by_realname( $p_realname, $p_throw = false ) {
  */
 function user_get_id_by_user_info( array $p_user, $p_throw_if_id_not_found = false ) {
 	if( isset( $p_user['id'] ) && (int)$p_user['id'] != 0 ) {
-		$t_user_id = $p_user['id'];
+		$t_user_id = (int)$p_user['id'];
 		if( $p_throw_if_id_not_found && !user_exists( $t_user_id ) ) {
 			throw new ClientException(
 				sprintf( "User with id '%d' doesn't exist", $t_user_id ),
@@ -1333,7 +1333,7 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_users = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_users[] = $t_row['id'];
+		$t_users[] = (int)$t_row['id'];
 		$t_display[] = user_get_expanded_name_from_row( $t_row );
 		$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
 	}

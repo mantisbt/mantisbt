@@ -1078,7 +1078,7 @@ function auth_get_current_user_id() {
 	global $g_cache_current_user_id;
 
 	if( null !== $g_cache_current_user_id ) {
-		return $g_cache_current_user_id;
+		return (int)$g_cache_current_user_id;
 	}
 
 	$t_cookie_string = auth_get_current_user_cookie();

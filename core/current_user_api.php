@@ -53,12 +53,14 @@ function current_user_set( $p_user_id ) {
 	global $g_cache_current_user_id;
 	global $g_cache_current_user_pref;
 
-	if( $p_user_id == $g_cache_current_user_id ) {
-		return $p_user_id;
+	$t_user_id = (int)$p_user_id;
+
+	if( $t_user_id == $g_cache_current_user_id ) {
+		return $t_user_id;
 	}
 
 	$t_old_current = $g_cache_current_user_id;
-	$g_cache_current_user_id = $p_user_id;
+	$g_cache_current_user_id = $t_user_id;
 
 	# Clear current user preferences cache
 	$g_cache_current_user_pref = array();
