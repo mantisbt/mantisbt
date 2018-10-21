@@ -1,6 +1,6 @@
 <?php
-# MantisBT - A PHP based bugtracking system
 
+# MantisBT - A PHP based bugtracking system
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -174,6 +174,7 @@ class IssueUpdateCommand extends Command {
         $this->updated_issue->target_version         = isset( $t_update_data['target_version'] ) ? mci_get_version_id( $t_update_data['target_version'], $this->existing_issue->project_id, 'target_version' ) : $this->existing_issue->target_version;
         $this->updated_issue->version                = isset( $t_update_data['version'] ) ? mci_get_version_id( $t_update_data['version'], $this->existing_issue->project_id, 'version' ) : $this->existing_issue->version;
         $this->updated_issue->view_state             = isset( $t_update_data['view_state'] ) ? mci_get_view_state_id( $t_update_data['view_state'] ) : $this->existing_issue->view_state;
+        $this->updated_issue->sticky                 = isset( $t_update_data['sticky'] ) ? (bool) $t_update_data['sticky'] : $this->existing_issue->sticky;
 
         $this->bug_note = new BugNoteData();
 
@@ -352,6 +353,13 @@ class IssueUpdateCommand extends Command {
         # Ensure that the user has permission to change the view status of the issue.
         if( $this->existing_issue->view_state != $this->updated_issue->view_state ) {
             if( !access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id, null ) ) {
+                throw new ClientException( 'Access Denied.', ERROR_ACCESS_DENIED );
+            }
+        }
+
+        # Ensure that the user has permission to change the sticky of the issue.
+        if( $this->existing_issue->sticky != $this->updated_issue->sticky ) {
+            if( !access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $f_bug_id, null ) ) {
                 throw new ClientException( 'Access Denied.', ERROR_ACCESS_DENIED );
             }
         }
