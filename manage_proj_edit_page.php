@@ -158,7 +158,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
+						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state']) ?>
 					</select>
 				</td>
 			</tr>
@@ -312,7 +312,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 					<tr>
 						<td>
 							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
-								<?php echo string_display( $t_subproject['name'] ) ?>
+								<?php echo string_display_line( $t_subproject['name'] ) ?>
 							</a>
 						</td>
 						<td class="center">
@@ -417,7 +417,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 			<tr>
-				<td><?php echo string_display( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_display_line( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
 					<div class="inline">
@@ -515,7 +515,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			} ?>
 
 			<tr>
-				<td><?php echo string_display( $t_name ) ?></td>
+				<td><?php echo string_display_line( $t_name ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_released ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_obsolete ) ?></td>
 				<td class="center"><?php echo $t_date_formatted ?></td>

@@ -40,6 +40,7 @@
  *
  * @author DRIHEM
  * @author Meno25
+ * @author ديفيد
  */
 
 $s_plugin_format_title = 'فرمتت MantisBT';
@@ -50,5 +51,7 @@ $s_plugin_format_process_text_warning_notice = 'لا تقم بإطفائه إل�
 $s_plugin_format_process_urls = 'معالجة المسار';
 $s_plugin_format_process_buglinks = 'روابط MantisBT ( المشكلة/ملاحظة المشكلة )';
 $s_plugin_format_process_buglinks_info = 'يحدد التكوين الخاص بك وسم <em>المشكلة</em> على أنها "<literal>%s</literal>" و وسم <em>ملاحظة المشكلة</em> على أنها "<literal>%s</literal>"';
+$s_plugin_format_process_markdown = 'معالجة ماركداون';
+$s_plugin_format_process_markdown_info = 'التصميم مع دعم ماركداون، صيغة نص تنسيق تصميم بحيث يمكن تحويلها إلى HTML.';
 $s_plugin_format_enabled = 'مفعل';
 $s_plugin_format_disabled = 'معطل';

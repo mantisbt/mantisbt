@@ -341,26 +341,10 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 form_security_purge( $t_form_name );
 
-$t_redirect_url = 'view_all_bug_page.php';
-
 if( count( $t_failed_ids ) > 0 ) {
-	layout_page_header();
-	layout_page_begin();
-
-	echo '<div><br />';
-	echo '<div class="table-responsive">';
-	echo '<table class="table table-bordered table-condensed table-striped">';
-	$separator = lang_get( 'word_separator' );
-	foreach( $t_failed_ids as $t_id => $t_reason ) {
-		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
-		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
-	}
-	echo '</div>';
-	echo '</table><br />';
-	print_link_button( $t_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
-
-	layout_page_end();
+	bug_group_action_print_top();
+	bug_group_action_print_results( $t_failed_ids );
+	bug_group_action_print_bottom();
 } else {
-	print_header_redirect( $t_redirect_url );
+	print_header_redirect( 'view_all_bug_page.php' );
 }

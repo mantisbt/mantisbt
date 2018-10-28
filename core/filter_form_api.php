@@ -2003,7 +2003,7 @@ function print_filter_values_show_sort( array $p_filter ) {
 			}
 			$t_sort = $t_sort_fields[$i];
 			if(column_is_custom_field( $t_sort ) ) {
-				$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
+				$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_sort ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_sort );
 			}
@@ -2035,7 +2035,7 @@ function print_filter_show_sort( array $p_filter = null ) {
 	$t_shown_fields[''] = '';
 	foreach( $t_visible_columns as $t_column ) {
 		if(column_is_custom_field( $t_column ) ) {
-			$t_field_name = string_display( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
+			$t_field_name = string_display_line( lang_get_defaulted( column_get_custom_field_name( $t_column ) ) );
 		} else {
 			$t_field_name = string_get_field_name( $t_column );
 		}
@@ -2393,10 +2393,9 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	}
 
 	if( null === $p_static_fallback_page ) {
-		$p_static_fallback_page = $_SERVER['PHP_SELF'];
-		$p_static_fallback_page = string_sanitize_url( $_SERVER['PHP_SELF'] );
+		$p_static_fallback_page = $_SERVER['SCRIPT_NAME'];
 	}
-	$t_filters_url = $p_static_fallback_page;
+	$t_filters_url = helper_mantis_url( $p_static_fallback_page );
 	$t_get_params = $_GET;
 	$t_get_params['for_screen'] = $p_for_screen;
 	$t_get_params['static'] = ON;

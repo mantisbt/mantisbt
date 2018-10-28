@@ -28,6 +28,14 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	$g_app->get( '/{id}', 'rest_projects_get' );
 	$g_app->get( '/{id}/', 'rest_projects_get' );
 
+	$g_app->post( '', 'rest_project_add' );
+	$g_app->post( '/', 'rest_project_add' );
+	$g_app->patch( '/{id}', 'rest_project_update' );
+	$g_app->patch( '/{id}/', 'rest_project_update' );
+
+	$g_app->delete( '/{id}', 'rest_project_delete' );
+	$g_app->delete( '/{id}/', 'rest_project_delete' );
+
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
@@ -104,4 +112,96 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+/**
+ * A method to add a new project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_payload = $p_request->getParsedBody();
+	if( $t_payload === null ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Unable to parse body, specify content type" );
+	}
+
+	$t_project_id = mc_project_add( /* username */ '', /* password */ '', (object) $t_payload );
+	ApiObjectFactory::throwIfFault( $t_project_id );
+
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
+
+	return $p_response->withStatus( HTTP_STATUS_CREATED, "Project created with id $t_project_id" )->
+		withJson( array( 'project' => $t_project ) );
+}
+
+/**
+ * A method to update a project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
+	}
+
+	$t_project_id = (int)$t_project_id;
+	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
+	}
+
+	$t_project_patch = $p_request->getParsedBody();
+
+	if( isset( $t_project_patch['id'] ) && $t_project_patch['id'] != $t_project_id ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Project id mismatch" );
+	}
+
+	$t_user_id = auth_get_current_user_id();
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_project = mci_project_get( $t_project_id, $t_lang, /* detail */ true );
+	$t_project = array_merge( $t_project, $t_project_patch );
+
+	$success = mc_project_update( /* username */ '', /* password */ '', $t_project_id, (object)$t_project );
+	ApiObjectFactory::throwIfFault( $success );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id Updated" )
+		->withJson( array( 'project' => $t_project ) );
+}
+
+/**
+ * A method to delete a project.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Mandatory field 'id' is missing." );
+	}
+
+	$t_project_id = (int)$t_project_id;
+	if( $t_project_id == ALL_PROJECTS || $t_project_id < 1 ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid project id." );
+	}
+
+	$t_user_id = auth_get_current_user_id();
+	if( !project_exists( $t_project_id ) || !access_has_project_level( config_get( 'delete_project_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
+		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, "Access denied for deleting project." );
+	}
+
+	project_delete( $t_project_id );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, "Project with id $t_project_id deleted." );
 }

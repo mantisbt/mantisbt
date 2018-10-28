@@ -61,6 +61,12 @@ $g_soap_api_to_filter_names = array(
 	'end_day' => FILTER_PROPERTY_DATE_SUBMITTED_END_DAY,
 	'end_month' => FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH,
 	'end_year' => FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR,
+	'last_update_start_day' => FILTER_PROPERTY_LAST_UPDATED_START_DAY,
+	'last_update_start_month' => FILTER_PROPERTY_LAST_UPDATED_START_MONTH,
+	'last_update_start_year' => FILTER_PROPERTY_LAST_UPDATED_START_YEAR,
+	'last_update_end_day' => FILTER_PROPERTY_LAST_UPDATED_END_DAY,
+	'last_update_end_month' => FILTER_PROPERTY_LAST_UPDATED_END_MONTH,
+	'last_update_end_year' => FILTER_PROPERTY_LAST_UPDATED_END_YEAR,
 	'tag_string' => FILTER_PROPERTY_TAG_STRING,
 	'tag_select' => FILTER_PROPERTY_TAG_SELECT,
 );
@@ -340,6 +346,24 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 			$t_filter['custom_fields'][$t_custom_field_id] = $t_value;
 		}
 	}
+
+	// date fields
+	if( isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) ) {
+		$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
+	}
+	if( isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] ) 
+		|| isset ( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) ) {
+		$t_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] = 'on';
+}
 
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 

@@ -39,6 +39,7 @@
  * @file
  *
  * @author Athena in Wonderland
+ * @author Banjo
  * @author Bithunter
  * @author Elisardojm
  * @author Fitoschido
@@ -583,6 +584,7 @@ $s_date_created = 'Data de creación';
 $s_last_visit = 'Última visita';
 $s_last_visit_label = 'Última visita:';
 $s_edit_user_link = 'Editar o usuario';
+$s_search_user_hint = 'Nome de usuario, nome real ou enderezo de correo electrónico';
 $s_separate_list_items_by = '(separar os elementos da lista por "%1$s")';
 $s_config_all_projects = 'Nota: Estes axustes afectan a todos os proxectos, a menos que superen o nivel do proxecto.';
 $s_config_project = 'Nota: Estes axustes só afectan ao proxecto %1$s.';
@@ -1335,7 +1337,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acceso rexeita
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'O patrocinador non facilitou un enderezo de correo electrónico. Por favor, actualice o seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opción da configuración "%1$s" ten o valor inválido "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A acción non pode ser levada a cabo porque o problema "%1$d" é de só lectura.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Esta incidencia non pode resolverse ata que se resolvan todas as incidencias dependentes dela.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Esta incidencia non pode resolverse ata que se resolvan todas as incidencias dependentes dela. Solicite ó seu administrador de sistema o acceso ó proxecto se non ve ningunha incidencia dependente.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Non se atopou a relación.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Acceso rexeitado: O problema %1$d require un nivel de acceso maior.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Un problema non pode estar relacionado consigo mesmo.';
