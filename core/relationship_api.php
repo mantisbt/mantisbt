@@ -698,17 +698,12 @@ function relationship_get_id_from_api_name( $p_relationship_type_name ) {
  */
 function relationship_can_resolve_bug( $p_bug_id ) {
 	# retrieve all the relationships in which the bug is the source bug
-	$t_relationship = relationship_get_all_src( $p_bug_id );
-	$t_relationship_count = count( $t_relationship );
-	if( $t_relationship_count == 0 ) {
-		return true;
-	}
+	$t_relationships = relationship_get_all_src( $p_bug_id );
 
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
+	foreach( $t_relationships as $t_relationship ) {
 		# verify if each bug in relation BUG_DEPENDANT is already marked as resolved
-		if( $t_relationship[$i]->type == BUG_DEPENDANT ) {
-			$t_dest_bug_id = $t_relationship[$i]->dest_bug_id;
-			$t_status = bug_get_field( $t_dest_bug_id, 'status' );
+		if( $t_relationship->type == BUG_DEPENDANT ) {
+			$t_status = bug_get_field( $t_relationship->dest_bug_id, 'status' );
 
 			if( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
 				# the bug is NOT marked as resolved/closed
