@@ -705,7 +705,7 @@ function relationship_can_resolve_bug( $p_bug_id ) {
 		if( $t_relationship->type == BUG_DEPENDANT ) {
 			$t_status = bug_get_field( $t_relationship->dest_bug_id, 'status' );
 
-			if( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
+			if( $t_status < config_get( 'bug_resolved_status_threshold', null, null, $t_relationship->dest_project_id ) ) {
 				# the bug is NOT marked as resolved/closed
 				return false;
 			}
