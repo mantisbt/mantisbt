@@ -244,6 +244,9 @@ class IssueNoteAddCommand extends Command {
 
 		# Handle the file upload
 		$t_file_infos = file_attach_files( $this->issue->id, $this->files );
+		
+		# Event integration
+		event_signal( 'EVENT_FILE_ADDED', array( array( 'issue_id' => $this->issue->id, 'files' => $t_file_infos ) ) );
 
 		# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 		# if time tracking is not 0 and the time tracking feature is enabled.
