@@ -522,12 +522,13 @@
 
 			<blockquote>
 				<para>
-					This event allows plugins to do post-processing of uploaded file.
+					This event allows plugins to do post-processing of uploaded files.
 				</para>
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Array of Array&gt;: File ID, name db table</para></listitem>
+                                        <listitem><para>issue_id: &lt;Integer&gt; Bug ID</para></listitem>
+					<listitem><para>files: &lt;Array of Arrays&gt; Files info</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -544,7 +545,7 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-                                        <listitem><para>&lt;Array of Array&gt;: File ID, name db table</para></listitem>
+                                        <listitem><para>table: &lt;String&gt; 'bug' or 'project'</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
