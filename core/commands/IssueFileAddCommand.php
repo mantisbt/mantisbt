@@ -151,7 +151,10 @@ class IssueFileAddCommand extends Command {
 		}
 
 		# Handle the file upload
-		file_attach_files( $this->issue->id, $this->files );
+		$t_file_infos = file_attach_files( $this->issue->id, $this->files );
+		
+		# Event integration
+		event_signal( 'EVENT_FILE_ADDED', array( array( 'issue_id' => $this->issue->id, 'files' => $t_file_infos ) ) );
 
 		return array();
 	}
