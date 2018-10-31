@@ -528,7 +528,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
  * @return boolean
  */
 function file_delete( $p_file_id, $p_table = 'bug' ) {
-	event_signal( 'EVENT_FILE_DELETE', array( array( 'file_id' => $p_file_id, 'type' => $p_table ) ) );
+	event_signal( 'EVENT_FILE_DELETE', array( array( 'file_id' => $p_file_id, 'table' => $p_table ) ) );
 	
 	$t_upload_method = config_get( 'file_upload_method' );
 
@@ -693,6 +693,7 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
  */
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 	$t_file_info = array();
+	$t_file_info['table'] = $p_table;
 
 	if( !isset( $p_file['error'] ) ) {
 		$p_file['error'] = UPLOAD_ERR_OK;
@@ -857,7 +858,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );
 
-        $t_file_id = db_insert_id( $t_file_table );
+        $t_file_info['file_id'] = db_insert_id( $t_file_table );
         
 	if( db_is_oracle() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
@@ -872,9 +873,6 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
-
-	# Event integration
-	event_signal( 'EVENT_FILE_ADDED', array( array( 'file_id' => $t_file_id, 'type' => $p_table ) ) );
 	
 	return $t_file_info;
 }
