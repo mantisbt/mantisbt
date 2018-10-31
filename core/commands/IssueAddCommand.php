@@ -355,7 +355,10 @@ class IssueAddCommand extends Command {
 		}
 
 		# Handle the file upload
-		file_attach_files( $t_issue_id, $this->files );
+		$t_file_infos = file_attach_files( $t_issue_id, $this->files );
+		
+		# Event integration
+		event_signal( 'EVENT_FILE_ADDED', array( array( 'issue_id' => $t_issue_id, 'files' => $t_file_infos ) ) );
 
 		# Handle custom field submission
 		mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
