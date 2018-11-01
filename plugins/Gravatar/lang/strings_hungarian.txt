@@ -42,4 +42,4 @@
  */
 
 $s_plugin_Gravatar_title = 'Avatárok a Gravatarral';
-$s_plugin_Gravatar_description = 'Bővítmény, amely a felhasználók avatárját jeleníti meg az e-mail címük alapján.';
+$s_plugin_Gravatar_description = 'Bővítmény, amely megjeleníti a felhasználók avatárját az e-mail címük alapján.';
