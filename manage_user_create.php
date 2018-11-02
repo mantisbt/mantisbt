@@ -66,11 +66,12 @@ if( $f_password != $f_password_verify ) {
 	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 }
 
-# Password won't to be sent by email. It entered by the admin
+# Password won't be sent by email. It is entered by the admin
 # Now, if the password is empty, confirm that that is what we wanted
-if( is_blank( $f_password ) &&
-	( ON != config_get( 'send_reset_password' ) ) ||
-	( ON != config_get( 'enable_email_notification' ) ) ) {
+if( is_blank( $f_password ) && (
+	ON != config_get( 'send_reset_password' ) ||
+	ON != config_get( 'enable_email_notification' ) )
+) {
 	helper_ensure_confirmed(
 		lang_get( 'empty_password_sure_msg' ),
 		lang_get( 'empty_password_button' ) );
