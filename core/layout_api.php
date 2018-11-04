@@ -780,21 +780,25 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
 			layout_sidebar_menu( 'manage_overview_page.php', 'manage_link', 'fa-gears', $p_active_sidebar_page );
 		} else {
-			$t_show_manage_user = access_has_global_level( config_get( 'manage_user_threshold' ) );
-			$t_show_manage_custom_fields = access_has_global_level( config_get( 'manage_custom_fields_threshold' ) );
-			$t_show_manage_project = access_has_any_project_level( 'manage_project_threshold' );
-			if( $t_show_manage_user || $t_show_manage_custom_fields || $t_show_manage_project ) {
-				if( $t_show_manage_user ) {
-					$t_link = 'manage_user_page.php';
-				} else {
-					if( $t_show_manage_project && ( $t_current_project <> ALL_PROJECTS ) ) {
-						$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
-					} else {
+			if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+				$t_link = 'manage_user_page.php';
+			} else {
+				$t_link = '';
+				if( access_has_any_project_level( 'manage_project_threshold' ) ) {
+					if( $t_current_project == ALL_PROJECTS ) {
 						$t_link = 'manage_proj_page.php';
+					} else {
+						if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) ) {
+							$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
+						} else {
+							if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+								$t_link = 'manage_custom_field_page.php';
+							}
+						}
 					}
 				}
-				layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears' );
 			}
+			if( $t_link != '' ) layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears' );
 		}
 
 		# Time Tracking / Billing
