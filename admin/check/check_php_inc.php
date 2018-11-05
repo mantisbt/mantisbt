@@ -173,9 +173,10 @@ check_print_info_row(
 	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
+$t_memory_limit = ini_get_number( 'memory_limit' );
 check_print_test_row(
 	'memory_limit php.ini directive is at least equal to the post_max_size directive',
-	ini_get_number( 'memory_limit' ) >= ini_get_number( 'post_max_size' ),
+	$t_memory_limit >= ini_get_number( 'post_max_size' ) || $t_memory_limit == -1,
 	array( false => 'The current value of the memory_limit directive is ' . htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes. This value needs to be at least equal to the post_max_size directive value of ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes.' )
 );
 
