@@ -46,6 +46,7 @@
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
+ * @author Vinhtantran
  * @author Yue Ling
  */
 
@@ -219,7 +220,7 @@ $s_new_account_do_not_reply = 'Không trả lời thư này';
 $s_new_account_email = 'Thư điện tử:';
 $s_new_account_IP = 'Địa chỉ IP từ xa:';
 $s_new_account_signup_msg = 'Các tài khoản sau đây đã được tạo ra:';
-$s_reset_request_msg = 'Ai đó (có lẽ là bạn) đã yêu cầu thay đổi mật khẩu thông qua e-mail xác minh. Nếu đây không phải là bạn, bỏ qua thư này và không có gì sẽ xảy ra. 
+$s_reset_request_msg = 'Ai đó (có lẽ là bạn) đã yêu cầu thay đổi mật khẩu bằng cách xác minh e-mail. Nếu đây không phải là bạn, xin bỏ qua thư này và sẽ không có gì thay đổi. 
 
 Nếu bạn yêu cầu xác minh này, hãy truy cập vào URL sau để thay đổi mật khẩu của bạn:';
 $s_reset_request_in_progress_msg = 'Nếu bạn cung cấp đúng tên và địa chỉ e-mail cho tài khoản của bạn, chúng tôi sẽ phải gửi một tin nhắn xác nhận đến địa chỉ e-mail. Một khi tin nhắn đã được nhận, làm theo hướng dẫn cung cấp để thay đổi mật khẩu tài khoản của bạn.';
