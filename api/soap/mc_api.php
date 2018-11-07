@@ -285,6 +285,7 @@ class ApiObjectFactory {
 	/**
 	 * Convert a soap object to an array
 	 * @param stdClass|array $p_object Object.
+	 * @param boolean $p_recursive
 	 * @return array
 	 */
 	static function objectToArray( $p_object, $p_recursive = false ) {
@@ -354,7 +355,7 @@ class ApiObjectFactory {
 	 *
 	 * @param mixed $p_maybe_fault Object to check whether it is a SOAP/REST fault.
 	 * @return void
-	 * @throws LogacyApiFaultException
+	 * @throws LegacyApiFaultException
 	 */
 	static function throwIfFault( $p_maybe_fault ) {
 		if( ApiObjectFactory::isFault( $p_maybe_fault ) ) {
