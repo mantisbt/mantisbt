@@ -482,6 +482,7 @@ function tag_get( $p_tag_id ) {
 
 /**
  * Get tag name by id.
+ * @param integer $p_tag_id The tag ID to retrieve from the database.
  * @return string tag name or empty string if not found.
  */
 function tag_get_name( $p_tag_id ) {

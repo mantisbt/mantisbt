@@ -1027,7 +1027,7 @@ function file_get_mime_type( $p_file_path ) {
 /**
  * Get mime type for the specified content.
  *
- * @param string $p_file_path The file path.
+ * @param string $p_content The content.
  * @return boolean|string The mime type or false on failure.
  */
 function file_get_mime_type_for_content( $p_content ) {

@@ -207,7 +207,7 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * Any option can be omitted.
  *
  * @param array $p_query_options	Array of query options
- * @return database result to pass into history_get_event_from_row().
+ * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
  */
 function history_query_result( array $p_query_options ) {
 	# check query order by
