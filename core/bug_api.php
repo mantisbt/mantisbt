@@ -1162,7 +1162,6 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
  * @access public
  */
 function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields = false, $p_copy_relationships = false, $p_copy_history = false, $p_copy_attachments = false, $p_copy_bugnotes = false, $p_copy_monitoring_users = false ) {
-	global $g_db;
 
 	$t_bug_id = (int)$p_bug_id;
 	$t_target_project_id = (int)$p_target_project_id;
