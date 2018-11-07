@@ -594,7 +594,7 @@ function bugnote_row_to_object( array $p_row ) {
  * @access public
  */
 function bugnote_get_all_bugnotes( $p_bug_id ) {
-	global $g_cache_bugnotes_by_bug_id, $g_cache_bugnotes_by_id;
+	global $g_cache_bugnotes_by_bug_id;
 
 	# the cache should be aware of the sorting order
 	if( !isset( $g_cache_bugnotes_by_bug_id[(int)$p_bug_id] ) ) {
