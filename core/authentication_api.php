@@ -72,7 +72,7 @@ $g_cache_anonymous_user_cookie_string = null;
 $g_cache_cookie_valid = null;
 
 # @global int $g_cache_current_user_id
-$g_cache_current_user_id = null;
+$g_cache_current_user_id = NO_USER;
 
 /**
  * Gets set of flags for authentication for the specified user.
@@ -1047,7 +1047,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 
 	# succeeed if user has already been authenticated
-	if( null !== $g_cache_current_user_id ) {
+	if( NO_USER != $g_cache_current_user_id ) {
 		return true;
 	}
 
@@ -1077,7 +1077,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 function auth_get_current_user_id() {
 	global $g_cache_current_user_id;
 
-	if( null !== $g_cache_current_user_id ) {
+	if( NO_USER != $g_cache_current_user_id ) {
 		return (int)$g_cache_current_user_id;
 	}
 
