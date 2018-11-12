@@ -797,7 +797,7 @@ function install_print_unserialize_error( $p_description, $p_table, $p_error, $p
 	printf('<p><br>%s could not be converted because its data is not valid. '
 		. 'Fix the problem by manually repairing or deleting the '
 		. 'offending %s row as appropriate, then try again.'
-		. '<br>Error: <em>%s</em> occured because of the string below</p>'
+		. '<br>Error: <em>%s</em> occurred because of the string below</p>'
 		. '<pre>%s</pre>',
 		$p_description,
 		db_get_table( $p_table ),

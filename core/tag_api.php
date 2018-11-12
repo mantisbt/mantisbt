@@ -75,20 +75,20 @@ $g_cache_bug_tags = array();
 function tag_cache_rows( array $p_tag_ids ) {
 	global $g_cache_tags;
 
-	$t_ids_to_seach = array();
+	$t_ids_to_search = array();
 	foreach( $p_tag_ids as $t_id ) {
 		if( !isset( $g_cache_tags[(int)$t_id]) ) {
-			$t_ids_to_seach[(int)$t_id] = (int)$t_id;
+			$t_ids_to_search[(int)$t_id] = (int)$t_id;
 		}
 	}
-	if( empty( $t_ids_to_seach ) ) {
+	if( empty( $t_ids_to_search ) ) {
 		return;
 	}
 
 	db_param_push();
 	$t_sql_in_params = array();
 	$t_params = array();
-	foreach( $t_ids_to_seach as $t_id ) {
+	foreach( $t_ids_to_search as $t_id ) {
 		$t_sql_in_params[] = db_param();
 		$t_params[] = $t_id;
 	}
@@ -98,10 +98,10 @@ function tag_cache_rows( array $p_tag_ids ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_id = (int)$t_row['id'];
 		$g_cache_tags[$c_id] = $t_row;
-		unset( $t_ids_to_seach[$c_id] );
+		unset( $t_ids_to_search[$c_id] );
 	}
 	# mark the non existent ids
-	foreach( $t_ids_to_seach as $t_id ) {
+	foreach( $t_ids_to_search as $t_id ) {
 		$g_cache_tags[$t_id] = false;
 	}
 }
@@ -116,20 +116,21 @@ function tag_cache_rows( array $p_tag_ids ) {
 function tag_cache_bug_tag_rows( array $p_bug_ids ) {
 	global $g_cache_bug_tags;
 
-	$t_ids_to_seach = array();
+	$t_ids_to_search = array();
 	foreach( $p_bug_ids as $t_id ) {
 		if( !isset( $g_cache_bug_tags[(int)$t_id]) ) {
-			$t_ids_to_seach[] = (int)$t_id;
+			$t_ids_to_search[] = (int)$t_id;
 		}
 	}
-	if( empty( $t_ids_to_seach ) ) {
+
+	if( empty( $t_ids_to_search ) ) {
 		return;
 	}
 
 	db_param_push();
 	$t_sql_in_params = array();
 	$t_params = array();
-	foreach( $t_ids_to_seach as $t_id ) {
+	foreach( $t_ids_to_search as $t_id ) {
 		$t_sql_in_params[] = db_param();
 		$t_params[] = $t_id;
 	}

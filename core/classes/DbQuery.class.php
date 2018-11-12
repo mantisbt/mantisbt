@@ -48,7 +48,7 @@ require_api( 'logging_api.php' );
  *   supported formats:
  *     - ":{string}" For labeled parameters. Binded values are stored in $query_bind_array
  *     - "${int}" For anonymous parameters. Binded values are stored in $query_autobind_array
- *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN caluses
+ *     - "${string}{int}" For special constructs, eg: $in0 for late binding IN clauses
  * 2) $expanded_query_string: stores the query string after expansion of special constructs
  *   into standard "${int}" parameters
  * 3) $db_query_string: stores the query string after all parameters have been renamed,
