@@ -78,11 +78,12 @@ function csv_get_newline() {
  * @access public
  */
 function csv_get_separator() {
-	static $s_seperator = null;
-	if( $s_seperator === null ) {
-		$s_seperator = config_get( 'csv_separator' );
+	static $s_separator = null;
+	if( $s_separator === null ) {
+		$s_separator = config_get( 'csv_separator' );
 	}
-	return $s_seperator;
+
+	return $s_separator;
 }
 
 /**
