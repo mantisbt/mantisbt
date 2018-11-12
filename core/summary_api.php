@@ -134,7 +134,7 @@ function summary_helper_build_bugcount( &$p_cache, $p_key, $p_status, $p_bugcoun
  * 
  * @param string $p_bug_link            The base bug link.
  * @param string &$p_bugs_open          The open bugs count, return open bugs link.
- * @param string &$p_bugs_resolved      The resovled bugs count, return resolved bugs link.
+ * @param string &$p_bugs_resolved      The resolved bugs count, return resolved bugs link.
  * @param string &$p_bugs_closed        The closed bugs count, return closed bugs link.
  * @param string &$p_bugs_total         The total bugs count, return total bugs link.
  * @return void 
@@ -160,7 +160,7 @@ function summary_helper_build_buglinks( $p_bug_link, &$p_bugs_open, &$p_bugs_res
 /**
  * Calculate bug ratio 
  * @param integer $p_bugs_open            The open bugs count.
- * @param integer $p_bugs_resolved        The resovled bugs count.
+ * @param integer $p_bugs_resolved        The resolved bugs count.
  * @param integer $p_bugs_closed          The closed bugs count.
  * @param integer $p_bugs_total_count     The total bugs count.
  * @return array  array of ($t_bugs_resolved_ratio, $t_bugs_ratio)

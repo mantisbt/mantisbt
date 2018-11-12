@@ -1046,7 +1046,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 		return false;
 	}
 
-	# succeeed if user has already been authenticated
+	# succeed if user has already been authenticated
 	if( NO_USER != $g_cache_current_user_id ) {
 		return true;
 	}

@@ -1278,7 +1278,7 @@ function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
 
 	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
-	# If query caluses is an empty array, the query can't be created
+	# If query clauses is an empty array, the query can't be created
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
 			# reset the db_param stack, this woould have been done by db_query if executed

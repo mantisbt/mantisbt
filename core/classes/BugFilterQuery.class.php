@@ -1077,7 +1077,7 @@ class BugFilterQuery extends DbQuery {
 				$t_where = $t_table_dst . '.relationship_type IS NULL AND ' . $t_table_src . '.relationship_type IS NULL';
 			} else {
 				# rel NONE, bug ID, those bugs that are not related in any way to bug ID
-				# map to a non-existant relation type -1 to include nulls
+				# map to a non-existent relation type -1 to include nulls
 				# not including the self id
 				$t_where = 'NOT COALESCE(' . $t_table_dst . '.source_bug_id, -1) = ' . $this->param( $c_rel_bug )
 						. ' AND NOT COALESCE(' . $t_table_src . '.destination_bug_id, -1) = ' . $this->param( $c_rel_bug )
@@ -1099,7 +1099,7 @@ class BugFilterQuery extends DbQuery {
 			# relation is specified
 			if( META_FILTER_NONE == $c_rel_bug ) {
 				# rel REL, bug NONE, those bugs that don't have any REL relation (may have other types)
-				# map to a non-existant relation type -1 to include nulls
+				# map to a non-existent relation type -1 to include nulls
 				$t_where = 'COALESCE(' . $t_table_dst . '.relationship_type, -1) <> ' . $this->param( $t_comp_type )
 						. ' AND COALESCE(' . $t_table_src . '.relationship_type, -1) <> ' . $this->param( $c_rel_type );
 			} elseif( META_FILTER_ANY == $c_rel_bug ) {
