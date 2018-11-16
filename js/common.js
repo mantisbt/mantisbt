@@ -81,20 +81,24 @@ $(document).ready( function() {
     });
 
     $('#sidebar-btn.sidebar-toggle').on('click', function (event) {
-        var t_id = $(this).closest('.sidebar').attr('id');
-        var t_cookie = GetCookie("collapse_settings");
-        if (1 == g_collapse_clear) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        if( $(this).parent().hasClass( "menu-min" ) ) {
-            t_cookie = t_cookie.replace("|" + t_id + ":1", '');
-            t_cookie = t_cookie + "|" + t_id + ":0";
-        } else {
-            t_cookie = t_cookie.replace("|" + t_id + ":0", '');
-            t_cookie = t_cookie + "|" + t_id + ":1";
-        }
-        SetCookie("collapse_settings", t_cookie);
+		var t_cookie;
+		var t_sidebar = $(this).closest('.sidebar');
+		var t_id = t_sidebar.attr('id');
+
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		} else {
+			// Get collapse state and remove the old value
+			t_cookie = GetCookie("collapse_settings");
+			t_cookie = t_cookie.replace(new RegExp('\\|' + t_id + ':.'), '');
+		}
+
+		// Save the new collapse state
+		var t_value = !t_sidebar.hasClass("menu-min") | 0;
+		t_cookie += '|' + t_id + ':' + t_value;
+
+		SetCookie("collapse_settings", t_cookie);
     });
 
     $('input[type=text].typeahead').each(function() {
