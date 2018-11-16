@@ -946,7 +946,7 @@ function layout_sidebar_end() {
 
 	$t_collapse_block = is_collapsed( 'sidebar' );
 
-	echo '<div id="sidebar" class="sidebar-toggle sidebar-collapse">';
+	echo '<div id="sidebar-btn" class="sidebar-toggle sidebar-collapse">';
 	if( layout_is_rtl() ) {
 		$t_block_icon = $t_collapse_block ? 'fa-angle-double-left' : 'fa-angle-double-right';
 		echo '<i data-icon2="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-right"

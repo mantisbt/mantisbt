@@ -80,8 +80,8 @@ $(document).ready( function() {
         SetCookie( "collapse_settings", t_cookie );
     });
 
-    $('#sidebar.sidebar-toggle').on('click', function (event) {
-        var t_id = $(this).attr('id');
+    $('#sidebar-btn.sidebar-toggle').on('click', function (event) {
+        var t_id = $(this).closest('.sidebar').attr('id');
         var t_cookie = GetCookie("collapse_settings");
         if (1 == g_collapse_clear) {
             t_cookie = "";
