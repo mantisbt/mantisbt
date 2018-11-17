@@ -7,7 +7,7 @@
         "guzzlehttp/guzzle": "^6.2",
         "vboctor/disposable_email_checker": "^3.0",
         "adodb/adodb-php": "^5.20",
-        "phpmailer/phpmailer": "^5.2.22",
+        "phpmailer/phpmailer": "~6.0",
         "erusev/parsedown": "^1.7.0",
         "dapphp/securimage": "dev-mantis"
     },
