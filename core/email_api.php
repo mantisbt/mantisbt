@@ -74,6 +74,7 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use PHPMailer\PHPMailer\PHPMailer;
 use Mantis\Exceptions\ClientException;
 
 # reusable object of class SMTP
@@ -1262,6 +1263,11 @@ function email_send( EmailData $p_email_data ) {
 			register_shutdown_function( 'email_smtp_close' );
 		}
 		$t_mail = new PHPMailer( true );
+
+		// Set e-mail addresses validation pattern. The 'html5' setting is
+		// consistent with the regex defined in email_regex_simple().
+		PHPMailer::$validator  = 'html5';
+
 	} else {
 		$t_mail = $g_phpMailer;
 	}
@@ -1332,8 +1338,6 @@ function email_send( EmailData $p_email_data ) {
 	$t_mail->AddCustomHeader( 'Auto-Submitted:auto-generated' );
 	$t_mail->AddCustomHeader( 'X-Auto-Response-Suppress: All' );
 
-	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
-	$t_mail->LE         = "\r\n";
 	$t_mail->Encoding   = 'quoted-printable';
 
 	if( isset( $t_email_data->metadata['priority'] ) ) {
