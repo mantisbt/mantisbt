@@ -725,6 +725,15 @@ if( $t_custom_fields_found ) {
 	echo '<tr class="hidden"></tr>';
 }
 
+# hack to fix issue https://www.mantisbt.org/bugs/view.php?id=22323
+if ( ON == config_get('show_attachments') ) {
+	echo '<tr ', helper_alternate_class(), ' bug-attachments>';
+	echo '<th class="bug-attachments category">', lang_get( 'attached_files' ), '</th>';
+	echo '<td class="bug-attachments" colspan="5">';
+	print_bug_attachments_list( $t_bug_id, null);
+	echo '</td></tr>';
+}
+
 echo '</tbody></table>';
 echo '</div></div></div></div></div>';
 
