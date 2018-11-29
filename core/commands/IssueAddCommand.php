@@ -167,7 +167,7 @@ class IssueAddCommand extends Command {
 		$t_status_id = isset( $t_issue['status'] ) ? mci_get_status_id( $t_issue['status'] ) : config_get( 'bug_submit_status' );
 		$t_reproducibility_id = isset( $t_issue['reproducibility'] ) ? mci_get_reproducibility_id( $t_issue['reproducibility'] ) : config_get( 'default_bug_reproducibility' );
 		$t_resolution_id =  isset( $t_issue['resolution'] ) ? mci_get_resolution_id( $t_issue['resolution'] ) : config_get( 'default_bug_resolution' );
-		$t_projection_id = isset( $t_issue['projection'] ) ? mci_get_projection_id( $t_issue['projection'] ) : config_get( 'default_bug_resolution' );
+		$t_projection_id = isset( $t_issue['projection'] ) ? mci_get_projection_id( $t_issue['projection'] ) : config_get( 'default_bug_projection' );
 		$t_eta_id = isset( $t_issue['eta'] ) ? mci_get_eta_id( $t_issue['eta'] ) : config_get( 'default_bug_eta' );
 		$t_view_state_id = isset( $t_issue['view_state'] ) ?  mci_get_view_state_id( $t_issue['view_state'] ) : config_get( 'default_bug_view_status' );
 
