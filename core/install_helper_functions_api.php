@@ -464,7 +464,7 @@ function install_stored_filter_migrate() {
 				db_param_push();
 				$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 				$t_delete_result = db_query( $t_delete_query, array( $t_row['id'] ) );
-				continue;
+				continue 2;
 		}
 
 		if( isset( $t_setting_arr[1] ) ) {
