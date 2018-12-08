@@ -70,6 +70,7 @@ $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_show_page_header = false;
 $t_force_readonly = true;
 $t_fields_config_option = 'bug_change_status_page_fields';
+$t_fields = config_get( $t_fields_config_option, null, null, $t_bug->project_id );
 
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
@@ -166,7 +167,8 @@ layout_page_begin();
 	$t_current_resolution = $t_bug->resolution;
 	$t_bug_resolution_is_fixed = $t_current_resolution >= $t_resolution_fixed;
 
-	if( $f_new_status >= $t_resolved && ( $f_new_status < $t_closed || !$t_bug_resolution_is_fixed ) ) {
+	if( in_array( 'resolution', $t_fields ) &&
+	    ( $f_new_status >= $t_resolved ) && ( $f_new_status < $t_closed || !$t_bug_resolution_is_fixed ) ) {
 ?>
 <!-- Resolution -->
 			<tr>
@@ -208,7 +210,8 @@ layout_page_begin();
 		}
 	}
 
-	if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
+	if( in_array( 'handler', $t_fields ) &&
+	    access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
 		$t_suggested_handler_id = $t_bug->handler_id;
 
 		if( $t_suggested_handler_id == NO_USER && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
@@ -231,7 +234,7 @@ layout_page_begin();
 <?php } ?>
 
 <?php
-	if( $t_can_update_due_date ) {
+	if( in_array( 'due_date', $t_fields ) && $t_can_update_due_date ) {
 		$t_date_to_display = '';
 
 		if( !date_is_null( $t_bug->due_date ) ) {
@@ -306,7 +309,7 @@ layout_page_begin();
 <?php
 	} # foreach( $t_related_custom_field_ids as $t_id )
 
-	if( ( $f_new_status >= $t_resolved ) ) {
+	if( in_array( 'fixed_in_version', $t_fields ) && ( $f_new_status >= $t_resolved ) ) {
 		if( version_should_show_product_version( $t_bug->project_id )
 			&& !bug_is_readonly( $f_bug_id )
 			&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
@@ -341,7 +344,8 @@ layout_page_begin();
 	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
 	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
 
-	if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+	if( in_array( 'view_state', $t_fields ) &&
+	    access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'view_status' ) ?>
