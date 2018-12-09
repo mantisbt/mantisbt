@@ -73,6 +73,8 @@ $t_can_see_email = $t_can_manage || access_has_project_level( config_get( 'show_
 $u_email = user_get_email( $u_id );
 $u_realname = user_get_realname( $u_id );
 
+$t_date_format = config_get( 'normal_date_format' );
+
 layout_page_header();
 
 layout_page_begin();
@@ -101,6 +103,17 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 		</td>
 	</tr>
 	<?php
+		if( $t_can_see_realname ) { ?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'realname' ) ?>
+				</th>
+				<td>
+					<?php echo string_display_line( $u_realname ); ?>
+				</td>
+			</tr>
+	<?php } ?>
+	<?php
 		if( $t_can_see_email ) { ?>
 			<tr>
 				<th class="category">
@@ -116,14 +129,46 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 			</tr>
 	<?php } ?>
 	<?php
-		if( $t_can_see_realname ) { ?>
+		if( $t_can_manage ) { ?>
 			<tr>
-			<th class="category">
-				<?php echo lang_get( 'realname' ) ?>
-			</th>
-			<td>
-				<?php echo string_display_line( $u_realname ); ?>
-			</td>
+				<th class="category">
+					<?php echo lang_get( 'access_level' ) ?>
+				</th>
+				<td>
+					<?php echo string_display_line( get_enum_element( 'access_levels', $u_access_level ) ); ?>
+				</td>
+			</tr>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'enabled' ) ?>
+				</th>
+				<td>
+					<?php echo $u_enabled ? lang_get( 'yes' ) : lang_get( 'no' ); ?>
+				</td>
+			</tr>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'protected' ) ?>
+				</th>
+				<td>
+					<?php echo $u_protected ? lang_get( 'yes' ) : lang_get( 'no' ); ?>
+				</td>
+			</tr>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'date_created' ) ?>
+				</th>
+				<td>
+					<?php echo date( $t_date_format, $u_date_created ); ?>
+				</td>
+			</tr>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'last_visit' ) ?>
+				</th>
+				<td>
+					<?php echo date( $t_date_format, $u_last_visit ); ?>
+				</td>
 			</tr>
 	<?php } ?>
 	</fieldset>
