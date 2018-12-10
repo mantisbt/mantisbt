@@ -50,6 +50,7 @@
  * @author M42
  * @author Malafaya
  * @author McDutchie
+ * @author Mmgseabra
  * @author Vitorvicentevalente
  * @author Waldir
  */
@@ -285,7 +286,7 @@ $s_email_fixed_in_version = 'Corrigido na Versão';
 $s_email_target_version = 'Versão de Destino';
 $s_email_date_submitted = 'Data de Abertura';
 $s_email_last_modified = 'Última modificação';
-$s_email_summary = 'Sumário';
+$s_email_summary = 'Resumo';
 $s_email_description = 'Descrição';
 $s_email_additional_information = 'Informações Adicionais';
 $s_email_steps_to_reproduce = 'Passos para Reproduzir';
@@ -464,7 +465,7 @@ $s_build = 'Compilação';
 $s_fixed_in_version = 'Corrigido na versão';
 $s_target_version = 'Versão de destino';
 $s_votes = 'Votos';
-$s_summary = 'Sumário';
+$s_summary = 'Resumo';
 $s_description = 'Descrição';
 $s_steps_to_reproduce = 'Passos Para Reprodução';
 $s_update_information_button = 'Atualizar informação';
@@ -775,7 +776,7 @@ $s_view_bugs_link = 'ver problemas';
 $s_report_bug_link = 'Relatar Problema';
 $s_changelog_link = 'Registo de alterações';
 $s_roadmap_link = 'Roadmap';
-$s_summary_link = 'Sumário';
+$s_summary_link = 'Resumo';
 $s_account_link = 'Conta Pessoal';
 $s_users_link = 'Utilizadores';
 $s_manage_link = 'Gerir';
@@ -839,7 +840,7 @@ $s_updated_user_msg = 'Utilizador atualizado com sucesso.';
 $s_must_enter_category = 'Você deve selecionar uma categoria.';
 $s_must_enter_severity = 'Deve seleccionar uma Gravidade';
 $s_must_enter_reproducibility = 'Deve seleccionar uma Frequência';
-$s_must_enter_summary = 'Deve escrever um Sumário';
+$s_must_enter_summary = 'Deve introduzir um resumo';
 $s_must_enter_description = 'Deve escrever uma Descrição';
 $s_report_more_bugs = 'Relatar mais problemas';
 $s_submission_thanks_msg = 'Obrigado pelo seu relatório';
@@ -872,8 +873,8 @@ $s_site_settings_title = 'Configurações do Site';
 $s_system_info_link = 'Informações do Sistema';
 $s_site_settings_link = 'Configurações do Site';
 $s_site_settings_updated_msg = 'As configurações do site foram atualizadas';
-$s_summary_title = 'Sumário';
-$s_summary_advanced_link = 'Sumário Avançado';
+$s_summary_title = 'Resumo';
+$s_summary_advanced_link = 'Resumo Avançado';
 $s_by_project = 'por projeto';
 $s_by_status = 'por Estado';
 $s_by_date = 'por Data de Entrada (nº de dias)';
