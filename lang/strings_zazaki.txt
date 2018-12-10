@@ -277,6 +277,7 @@ $s_summary = 'Xulasa';
 $s_description = 'Şınasnayış';
 $s_profile = 'Profile';
 $s_revision = 'Revizyon';
+$s_activities_title = 'Fealiyeti';
 $s_delete_link = 'Bestere';
 $s_bugnote_edit_link = 'Bıvurne';
 $s_hide_content = 'Tedeesteyi binımne';
