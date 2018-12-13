@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author --szabi--
  * @author Csega
  * @author Dj
  * @author Glanthor Reviol
@@ -119,7 +120,7 @@ $s_bug_relationships = 'Kapcsolatok';
 $s_empty_password_sure_msg = 'A felhasználó jelszava üres. Valóban ezt akarja?';
 $s_empty_password_button = 'Üres jelszó használata';
 $s_reauthenticate_title = 'Hitelesítés';
-$s_reauthenticate_message = 'Egy biztonságos oldalra ért, és a biztonságos munkamenete lejárt. Hitelesítse magát a folytatáshoz.';
+$s_reauthenticate_message = 'Ön egy biztonságos oldalon van, és a biztonságos munkamenete lejárt. Hitelesítse magát a folytatáshoz.';
 $s_no_category = '(nincs kategória)';
 $s_global_categories = 'Globális kategóriák';
 $s_inherit = 'Kategóriák öröklése';
