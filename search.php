@@ -142,6 +142,28 @@ foreach( $_GET as $t_var_name => $t_var_value ) {
 
 $t_my_filter['custom_fields'] = $t_custom_fields;
 
+# Handle class-based filters defined as plugins
+$t_plugin_filters = filter_get_plugin_filters();
+foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
+    switch( $t_filter_object->type ) {
+        case FILTER_TYPE_STRING:
+            $t_my_filter[$t_field_name] = gpc_get_string( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_INT:
+            $t_my_filter[$t_field_name] = gpc_get_int( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_BOOLEAN:
+            $t_my_filter[$t_field_name] = gpc_get_bool( $t_field_name, $t_meta_filter_any_array[$t_field_name]);
+            break;
+        case FILTER_TYPE_MULTI_STRING:
+            $t_my_filter[$t_field_name] = gpc_get_string_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+        case FILTER_TYPE_MULTI_INT:
+            $t_my_filter[$t_field_name] = gpc_get_int_array( $t_field_name, $t_meta_filter_any_array[$t_field_name] );
+            break;
+    }
+}
+
 # Must use advanced filter so that the project_id is applied and multiple
 # selections are handled.
 $t_my_filter['_view_type'] = FILTER_VIEW_TYPE_ADVANCED;
