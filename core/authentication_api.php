@@ -189,11 +189,12 @@ function auth_anonymous_account() {
 
 /**
  * Get the auth cookie expiry time.
+ * @param integer $p_user_id The user id to get session expiry for.
  * @param boolean $p_perm_login Use permanent login.
  * @return integer cookie lifetime or 0 for browser session.
  */
-function auth_session_expiry( $p_perm_login ) {
-	$t_auth_flags = auth_flags();
+function auth_session_expiry( $p_user_id, $p_perm_login ) {
+	$t_auth_flags = auth_flags( $p_user_id );
 	$t_perm_login = $p_perm_login;
 	if( !$t_auth_flags->getPermSessionEnabled() ) {
 		$t_perm_login = false;
@@ -836,7 +837,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
 	$t_cookie_name = config_get_global( 'string_cookie' );
-	gpc_set_cookie( $t_cookie_name, $t_cookie_string, auth_session_expiry( $p_perm_login ) );
+	gpc_set_cookie( $t_cookie_name, $t_cookie_string, auth_session_expiry( $p_user_id, $p_perm_login ) );
 }
 
 /**
