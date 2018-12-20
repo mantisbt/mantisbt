@@ -1017,6 +1017,10 @@ function layout_page_content_end() {
  * @return void
  */
 function layout_breadcrumbs() {
+	if( !auth_is_user_authenticated() ) {
+		return;
+	}
+
 	echo '<div id="breadcrumbs" class="breadcrumbs noprint">' , "\n";
 
 	# Login information
