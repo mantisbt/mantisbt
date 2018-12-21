@@ -2705,7 +2705,6 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 			<input type="hidden" name="type" value="3" />
 			<select name="source_query_id">
 				<option value="-1"></option>
-				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 				<?php
 				$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 				foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
@@ -2717,17 +2716,8 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 			</select>
 		</form>
 	<?php
-	} else { ?>
-		<form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="hidden" name="type" value="3" />
-			<input type="hidden" name="source_query_id" value="-1" />
-			<input type="submit" name="reset_query_button" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'reset_query' )?>" />
-		</form>
-	<?php
 	}
 	?>
-
 
 	</div>
 	</div>
