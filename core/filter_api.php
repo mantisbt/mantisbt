@@ -2527,6 +2527,7 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 	<?php
 	$t_stored_queries_arr = filter_db_get_available_queries();
 	$t_is_temporary = filter_is_temporary( $t_filter );
+	$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
 	if( $p_expanded ) {
 		$t_collapse_block = is_collapsed( 'filter' );
 		$t_block_css = $t_collapse_block ? 'collapsed' : '';
@@ -2549,7 +2550,6 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 			<div class="widget-toolbar">
 				<?php
 					$t_view_filters = config_get('view_filters');
-					$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
 
 					if( ( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) ||
 						access_has_project_level( config_get( 'create_permalink_threshold' ) ) ||
@@ -2583,8 +2583,9 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 								echo '</li>';
 							}
 							if( $t_is_temporary ) {
+								$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
 								echo '<li>';
-								echo '<a href="view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project() . '">';
+								echo '<a href="' . $t_url_persist_filter . '">';
 								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
 								echo '</a>';
 								echo '</li>';
@@ -2653,24 +2654,51 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter_submit" value="<?php echo lang_get( 'filter_button' )?>" />
 	</div>
+
+	</form></div>
+	<div class="btn-toolbar pull-right">
+	<div class="btn-group">
+
 	<?php
+	if( $t_is_temporary ) {
+	?>
+	<form id="filter-form-action-persist" class="form-inline pull-left padding-left-4" name="persist_filter_<?php echo $t_form_name_suffix;?>" method="get" action="view_all_set.php">
+		<input type="hidden" name="temporary" value="n" />
+		<input type="hidden" name="filter" value="<?php echo filter_get_temporary_key( $t_filter ) ?>" />
+		<input type="hidden" name="set_project_id" value="<?php echo helper_get_current_project() ?>" />
+		<button id="filter-form-action-persist-btn" type="submit" name="persist_filter_button" class="btn btn-primary btn-white btn-round btn-sm" title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>">
+			<i class="ace-icon fa fa-thumb-tack"></i>
+		</button>
+	</form>
+	<?php
+	}
+	?>
 
-	echo '</form></div>';
-	echo '<div class="btn-toolbar pull-right">';
-	echo '<div class="btn-group">';
+	<form id="filter-form-action-reset" class="form-inline pull-left padding-left-4"  method="get" name="reset_filter_<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+		<input type="hidden" name="type" value="3" />
+		<input type="hidden" name="source_query_id" value="-1" />
+		<button id="filter-form-action-reset-btn" type="submit" name="reset_filter_button" class="btn btn-primary btn-white btn-round btn-sm" title="<?php echo lang_get( 'reset_query' ) ?>">
+			<i class="ace-icon fa fa-times"></i>
+		</button>
+	</form>
 
-	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
-		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
+	<?php
+	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
+	?>
+		<form class="form-inline pull-left padding-left-4" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications
 			if( filter_is_temporary( $t_filter ) ) {
 				echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
 			}
 			?>
-			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-				value="<?php echo lang_get( 'save_query' )?>" />
+			<button id="filter-form-save-btn" type="submit" name="save_query_button" class="btn btn-primary btn-white btn-round btn-sm" title="<?php echo lang_get( 'save_query' ) ?>">
+				<i class="ace-icon fa fa-floppy-o"></i>
+			</button>
 		</form>
 	<?php
 	}
+	?>
+	<?php
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 		<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications?>
