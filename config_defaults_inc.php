@@ -3111,7 +3111,7 @@ $g_bugnote_link_tag = '~';
  * permanently change the filter - 'view_all_set.php?type=1';
  * @global string $g_bug_count_hyperlink_prefix
  */
-$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
+$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&amp;temporary=y';
 
 /**
  * The regular expression to use when validating new user login names

@@ -2493,7 +2493,7 @@ function filter_draw_selection_area() {
 	$t_view_type = $t_filter['_view_type'];
 
 	$t_action = 'view_all_set.php';
-	$t_view_all_set_type = 1;
+	$t_view_all_set_type = FILTER_ACTION_PARSE_NEW;
 	?>
 	<div class="col-md-12 col-xs-12">
 	<div class="filter-box">
@@ -2543,7 +2543,7 @@ function filter_draw_selection_area() {
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
 							$t_url = config_get( 'use_dynamic_filters' )
-								? 'view_all_set.php?type=6' . $t_tmp_filter_param . '&view_type='
+								? 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . $t_tmp_filter_param . '&view_type='
 								: 'view_filters_page.php?view_type=';
 							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 
@@ -2656,8 +2656,7 @@ function filter_draw_selection_area() {
 	?>
 
 	<form id="filter-form-action-reset" class="form-inline pull-left padding-left-4"  method="get" name="reset_filter_<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
-		<input type="hidden" name="type" value="3" />
-		<input type="hidden" name="source_query_id" value="-1" />
+		<input type="hidden" name="type" value="<?php echo FILTER_ACTION_RESET ?>" />
 		<button id="filter-form-action-reset-btn" type="submit" name="reset_filter_button" class="btn btn-primary btn-white btn-round btn-sm" title="<?php echo lang_get( 'reset_query' ) ?>">
 			<i class="ace-icon fa fa-times"></i>
 		</button>
@@ -2683,7 +2682,7 @@ function filter_draw_selection_area() {
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 		<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications?>
-			<input type="hidden" name="type" value="3" />
+			<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 			<select name="source_query_id">
 				<option value="-1"></option>
 				<?php

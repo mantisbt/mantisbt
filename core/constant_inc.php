@@ -724,3 +724,10 @@ define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );
 define( 'DB_TYPE_MSSQL', 3 );
 define( 'DB_TYPE_ORACLE', 4 );
+
+# Filter actions, refactored from view_all_set.php
+define( 'FILTER_ACTION_RESET', 0 );
+define( 'FILTER_ACTION_PARSE_NEW', 1 );
+define( 'FILTER_ACTION_PARSE_ADD', 2 );
+define( 'FILTER_ACTION_LOAD', 3 );
+define( 'FILTER_ACTION_GENERALISE', 4 );

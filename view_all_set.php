@@ -86,8 +86,8 @@ if( $f_type < 0 ) {
 }
 
 # -1 is a special case stored query: it means we want to reset our filter
-if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
-	$f_type = 0;
+if( ( $f_type == FILTER_ACTION_LOAD ) && ( $f_source_query_id == -1 ) ) {
+	$f_type = FILTER_ACTION_RESET;
 }
 
 $t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
@@ -104,38 +104,44 @@ if( isset( $t_setting_arr['_source_query_id'] ) ) {
 }
 
 switch( $f_type ) {
-	# New cookie
-	case '0':
-		log_event( LOG_FILTERING, 'view_all_set.php: New cookie' );
+	# Apply a new empty filter
+	case FILTER_ACTION_RESET:
+		log_event( LOG_FILTERING, 'view_all_set.php: New filter' );
 		$t_setting_arr = array();
 		break;
-	# Update filters. (filter_gpc_get reads a new set of parameters)
-	case '1':
+
+	# Read new filter parameters. (filter_gpc_get reads a new set of parameters)
+	# Parameter that are not submitted, will be reset to defaults.
+	case FILTER_ACTION_PARSE_NEW:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse a new filter' );
 		$t_setting_arr = filter_gpc_get();
 		break;
-	# Set the sort order and direction (filter_gpc_get is called over current filter)
-	case '2':
-		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
+
+	# Read and update filter parameters (filter_gpc_get is called over current filter)
+	# Parameter that are not submitted, will not be modified
+	case FILTER_ACTION_PARSE_ADD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse incremental filter values' );
 		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 
 		break;
-	# This is when we want to copy another query from the
-	# database over the top of our current one
-	case '3':
-		log_event( LOG_FILTERING, 'view_all_set.php: Copy another query from database' );
+
+	# Fetch a stored filter from database
+	case FILTER_ACTION_LOAD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Load stored filter' );
 
 		$t_setting_arr = filter_get( $f_source_query_id, null );
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
-			error_proceed_url( 'view_all_set.php?type=0' );
+			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 			exit;
 		} else {
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		}
 		break;
-	case '4':
-		# Generalise the filter
+
+	# Generalise the filter
+	case FILTER_ACTION_GENERALISE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
 		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
@@ -159,19 +165,8 @@ switch( $f_type ) {
 			}
 		}
 		$t_setting_arr['custom_fields'] = $t_custom_fields_data;
+		break;
 
-		break;
-	case '5':
-		# Just set the search string value (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-		break;
-	case '6':
-		# Just set the view_state (simple / advanced) value. (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: View state (simple/advanced)' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-
-		break;
 	default:
 		# does nothing. catch all case
 		log_event( LOG_FILTERING, 'view_all_set.php: default - do nothing' );
