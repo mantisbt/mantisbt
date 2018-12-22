@@ -2420,8 +2420,8 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		$t_dynamic_filter_expander_class = '';
 	}
 
-	$get_field_header = function ( $p_id, $p_label ) use ( $t_filters_url, $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
-		if( $p_static) {
+	$get_field_header = function ( $p_id, $p_label, $p_dynamic = true ) use ( $t_filters_url, $p_static, $t_filter, $t_source_query_id, $t_dynamic_filter_expander_class ) {
+		if( $p_static || !$p_dynamic ) {
 			return $p_label;
 		} else {
 			if( filter_is_temporary( $t_filter ) ) {
@@ -2733,6 +2733,16 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			'highlight_changed_filter_target' /* content id */
 			));
 
+	$t_section_search = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_HORIZONTAL );
+
+	$t_section_search->add_item( new TableFieldsItem(
+			$get_field_header( 'search_filter', lang_get( 'search' ), false /* don't expand this field */ ),
+			filter_form_get_input( $t_filter, 'search', $t_show_inputs ),
+			$t_filter_cols /* colspan */,
+			'bigger-120' /* class */,
+			'search_filter_target' /* content id */
+			));
+
 	?>
 	<table class="table table-bordered table-condensed2">
 		<?php $t_row1->render() ?>
@@ -2741,6 +2751,8 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		<?php $t_row_extra->render() ?>
 		<tr class="spacer"></tr>
 		<?php $t_section_last->render() ?>
+		<tr class="spacer"></tr>
+		<?php $t_section_search->render() ?>
 	</table>
 	<?php
 }
@@ -2801,4 +2813,30 @@ class FilterBoxGridLayout extends TableGridLayout {
 		echo '&nbsp;';
 		echo '</td>';
 	}
+}
+
+
+/**
+ * Print the current value of this filter field, as visible string, and as a hidden form input.
+ * @param array $p_filter	Filter array
+ * @return void
+ */
+function print_filter_values_search( array $p_filter ) {
+	# always show the search text input
+	print_filter_search( $p_filter );
+}
+
+/**
+ * print search field
+ * @global array $g_filter
+ * @param array $p_filter Filter array
+ * @return void
+ */
+function print_filter_search( array $p_filter = null ) {
+	global $g_filter;
+	if( null === $p_filter ) {
+		$p_filter = $g_filter;
+	}
+	echo '<input type="text" id="filter-search-txt" class="input-sm" size="48" name="', FILTER_PROPERTY_SEARCH, '"
+		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $p_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 }

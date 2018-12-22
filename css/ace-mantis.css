@@ -147,11 +147,19 @@
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .input-xs {
+.widget-toolbar > .widget-menu a.btn-xs {
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.widget-toolbar > .widget-menu form {
+    display: inline-block;
+}
+.widget-toolbar > .widget-menu .input-xs {
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .btn-xs {
+.widget-toolbar > .widget-menu .btn-xs {
     padding: 2px 5px;
 }
 

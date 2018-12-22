@@ -147,15 +147,6 @@ $t_filter = filter_ensure_valid_filter( $t_filter );
 					<div class="widget-toolbox padding-8 clearfix">
 						<div class="btn-toolbar pull-left">
 							<div class="form-inline">
-								<label><?php echo lang_get( 'search' ) ?>&nbsp;
-									<input type="text" id="filter-search-txt" class="input-sm" size="16"
-										   name="<?php echo FILTER_PROPERTY_SEARCH ?>"
-										   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ) ?>">
-								</label>
-							</div>
-						</div>
-						<div class="btn-toolbar pull-right">
-							<div class="form-inline">
 								<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'use_query' )?>" />
 							</div>
 						</div>
