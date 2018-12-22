@@ -2482,31 +2482,18 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
  * Prints the filter selection area for both the bug list view screen and
  * the bug list print screen. This function was an attempt to make it easier to
  * add new filters and rearrange them on screen for both pages.
- * @param integer $p_page_number Page number.
- * @param boolean $p_for_screen  Whether output is for screen view.
- * @param boolean $p_expanded    Whether to display expanded.
  * @return void
  */
-function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
-	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
+function filter_draw_selection_area() {
+	$t_form_name_suffix = '_open';
 
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter === false ? array() : $t_filter );
-	$t_page_number = (int)$p_page_number;
 
 	$t_view_type = $t_filter['_view_type'];
 
-	$t_action = 'view_all_set.php?f=3';
-	if( $p_for_screen == false ) {
-		$t_action = 'view_all_set.php';
-	}
-	if( $p_expanded ) {
-		# in expanded form, all field are sent
-		$t_view_all_set_type = 1;
-	} else {
-		# in condensed form, only the search field is sent, to be added over current filter values.
-		$t_view_all_set_type = 5;
-	}
+	$t_action = 'view_all_set.php';
+	$t_view_all_set_type = 1;
 	?>
 	<div class="col-md-12 col-xs-12">
 	<div class="filter-box">
@@ -2517,27 +2504,22 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 		if( filter_is_temporary( $t_filter ) ) {
 			echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
 		}
-		if( $p_for_screen == false ) {
-			echo '<input type="hidden" name="print" value="1" />';
-			echo '<input type="hidden" name="offset" value="0" />';
-		}
 		?>
-		<input type="hidden" name="page_number" value="<?php echo $t_page_number?>" />
 		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
 	<?php
 	$t_stored_queries_arr = filter_db_get_available_queries();
 	$t_is_temporary = filter_is_temporary( $t_filter );
 	$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
-	if( $p_expanded ) {
-		$t_collapse_block = is_collapsed( 'filter' );
-		$t_block_css = $t_collapse_block ? 'collapsed' : '';
-		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-		# further use of this icon must be inlined to avoid spaces in rendered html
-		$t_temporary_icon_html = $t_is_temporary ?
-			'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
-			: '';
-		?>
+	$t_collapse_block = is_collapsed( 'filter' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
+	# further use of this icon must be inlined to avoid spaces in rendered html
+	$t_temporary_icon_html = $t_is_temporary ?
+		'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
+		: '';
+	?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
@@ -2635,14 +2617,13 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true, $p_ex
 		<div class="table-responsive">
 
 		<?php
-		filter_form_draw_inputs( $t_filter, $p_for_screen, false, 'view_filters_page.php' );
+		filter_form_draw_inputs( $t_filter, true, false, 'view_filters_page.php' );
 		?>
 
 		</div>
 		</div>
 		</div>
 		<?php
-	}
 
 	echo '<div class="widget-toolbox padding-8 clearfix">';
 	echo '<div class="btn-toolbar pull-left">';
