@@ -285,7 +285,7 @@ $(document).ready( function() {
 		}
 	});
 	$('[name=source_query_id]').change( function() {
-		$(this).parent().submit();
+		$(this.form).submit();
 	});
 
 	/* Project selector: auto-switch on select */
