@@ -2744,7 +2744,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			));
 
 	?>
-	<table class="table table-bordered table-condensed2">
+	<table class="table table-bordered table-condensed2 filters">
 		<?php $t_row1->render() ?>
 		<?php $t_row2->render() ?>
 		<?php $t_row3->render() ?>
