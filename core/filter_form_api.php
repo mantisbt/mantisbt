@@ -2366,13 +2366,15 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
  * not available on the client, and the form was rendered with dynamic fields.
  * By default, the fallback is the current page.
  *
- * @param array $p_filter	Filter array to show.
- * @param boolean $p_for_screen	Type of output
- * @param boolean $p_static	Whether to print a static form (no dynamic fields)
+ * @param array $p_filter			Filter array to show.
+ * @param boolean $p_for_screen		Type of output
+ * @param boolean $p_static			Whether to print a static form (no dynamic fields)
  * @param string $p_static_fallback_page	Page name to use as javascript fallback
+ * @param boolean $p_show_search	Whether to render the search field inside the general fields area.
+ *									If false, the text search should be managed externally.
  * @return void
  */
-function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null ) {
+function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null, $p_show_search = true ) {
 
 	$t_filter = filter_ensure_valid_filter( $p_filter );
 	$t_view_type = $t_filter['_view_type'];
@@ -2733,26 +2735,32 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			'highlight_changed_filter_target' /* content id */
 			));
 
-	$t_section_search = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_HORIZONTAL );
+	if( $p_show_search ) {
+		$t_section_search = new FilterBoxGridLayout( $t_filter_cols , FilterBoxGridLayout::ORIENTATION_HORIZONTAL );
 
-	$t_section_search->add_item( new TableFieldsItem(
-			$get_field_header( 'search_filter', lang_get( 'search' ), false /* don't expand this field */ ),
-			filter_form_get_input( $t_filter, 'search', $t_show_inputs ),
-			$t_filter_cols /* colspan */,
-			'bigger-120' /* class */,
-			'search_filter_target' /* content id */
-			));
+		$t_section_search->add_item( new TableFieldsItem(
+				$get_field_header( 'search_filter', lang_get( 'search' ), false /* don't expand this field */ ),
+				filter_form_get_input( $t_filter, 'search', $t_show_inputs ),
+				$t_filter_cols /* colspan */,
+				'bigger-120' /* class */,
+				'search_filter_target' /* content id */
+				));
+	}
 
 	?>
 	<table class="table table-bordered table-condensed2 filters">
-		<?php $t_row1->render() ?>
-		<?php $t_row2->render() ?>
-		<?php $t_row3->render() ?>
-		<?php $t_row_extra->render() ?>
-		<tr class="spacer"></tr>
-		<?php $t_section_last->render() ?>
-		<tr class="spacer"></tr>
-		<?php $t_section_search->render() ?>
+		<?php
+		$t_row1->render();
+		$t_row2->render();
+		$t_row3->render();
+		$t_row_extra->render();
+		echo '<tr class="spacer"></tr>';
+		$t_section_last->render();
+		if( $p_show_search ) {
+			echo '<tr class="spacer"></tr>';
+			$t_section_search->render();
+		}
+		?>
 	</table>
 	<?php
 }
