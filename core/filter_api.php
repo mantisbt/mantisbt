@@ -2701,7 +2701,7 @@ function filter_draw_selection_area() {
 			<div class="widget-main no-padding">
 				<div class="table-responsive">
 					<?php
-					filter_form_draw_inputs( $t_filter, true, false, 'view_filters_page.php' );
+					filter_form_draw_inputs( $t_filter, true, false, 'view_filters_page.php', false /* don't show search */ );
 					?>
 				</div>
 			</div>
@@ -2709,6 +2709,9 @@ function filter_draw_selection_area() {
 			<div class="widget-toolbox padding-8 clearfix">
 				<div class="btn-toolbar pull-left">
 					<div class="form-inline">
+						<?php echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '"'
+							, ' placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+						?>
 						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter_submit" value="<?php echo lang_get( 'filter_button' )?>" />
 					</div>
 				</div>
