@@ -72,16 +72,16 @@ $t_setting_arr = current_user_get_bug_filter();
 if( $f_isset_temporary ) {
 	# when only changing the temporary status of a filter and no action is specified
 	# we assume not to reset current filter
-	if( $f_type < 0 ) {
+	if( $f_type == -1 ) {
 		# use type 2 wich keeps current filter values
-		$f_type = 2;
+		$f_type = FILTER_ACTION_PARSE_ADD;
 	}
 	$t_temp_filter = $f_make_temporary;
 } else {
 	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
-if( $f_type < 0 ) {
+if( $f_type == -1 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
@@ -141,7 +141,7 @@ switch( $f_type ) {
 		break;
 
 	# Generalise the filter
-	case FILTER_ACTION_GENERALISE:
+	case FILTER_ACTION_GENERALIZE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
 		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
