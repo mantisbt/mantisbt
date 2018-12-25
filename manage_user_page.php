@@ -299,7 +299,7 @@ $t_user_count = count( $t_users );
 <div class="widget-toolbox padding-8 clearfix">
 	<div id="manage-user-div" class="form-container">
 		<div class="pull-left">
-			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-sm btn-white btn-round' ) ?>
+			<?php print_link_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ),'btn-sm' ) ?>
 		</div>
 		<?php if( $f_filter === 'UNUSED' ) { ?>
 		<div class="pull-left">
