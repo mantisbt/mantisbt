@@ -3048,16 +3048,28 @@ $g_allow_no_category = OFF;
 /**
  * limit reporters. Set to ON if you wish to limit reporters to only viewing
  * bugs that they report.
+ * This feature is deprecated and is replaced with the option 'limit_reporter_unless_threshold'.
+ * Set this option as OFF to be able to use the new one.
+ * @see $g_limit_reporter_unless_threshold
  * @global integer $g_limit_reporters
  */
 $g_limit_reporters = OFF;
 
 /**
+ * Threshold at wich a user can view all issues in the project (as allowed by other permissions)
+ * Not meeting this threshold means the user can only see its own reported issues.
+ * A value of ANYBODY means that all user have full visibility (as default)
+ *
+ * This is a replacement for old option 'limit_reporters'.
+ *
  * @global integer $g_limit_reporter_unless_threshold
  */
 $g_limit_reporter_unless_threshold = ANYBODY;
 
 /**
+ * Threshold at wich a user can view all issues in the project (as allowed by other permissions)
+ * Not meeting this threshold means the user can only see issues where he is handler.
+ * A value of ANYBODY means that all user have full visibility (as default)
  * @global integer $g_limit_handler_unless_threshold
  */
 $g_limit_handler_unless_threshold = ANYBODY;

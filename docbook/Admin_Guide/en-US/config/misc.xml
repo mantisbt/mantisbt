@@ -73,6 +73,20 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_limit_reporter_unless_threshold</term>
+			<listitem>
+				<para>Threshold that, if not met, hides issues reported by other users.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_limit_handler_unless_threshold</term>
+			<listitem>
+				<para>Threshold that, if not met, hides issues assigned to other users.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_allow_reporter_close</term>
 			<listitem>
 				<para>Allow reporters to close the bugs they reported.</para>
