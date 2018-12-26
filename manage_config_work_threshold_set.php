@@ -189,6 +189,7 @@ set_capability_row( 'bugnote_user_change_view_state_threshold' );
 
 # Others
 set_capability_row( 'view_changelog_threshold' );
+set_capability_row( 'roadmap_view_threshold' );
 set_capability_row( 'view_handler_threshold' );
 set_capability_row( 'view_history_threshold' );
 set_capability_row( 'bug_reminder_threshold' );
