@@ -111,13 +111,14 @@ class VersionData {
 					if( $p_value == '' ) {
 						$t_value = date_get_null();
 					} else {
-						$t_value = strtotime( $p_value );
+						$t_value = DateTime::createFromFormat( config_get('normal_date_format'), $p_value );
 						if( $t_value === false ) {
 							throw new ClientException(
 								"Invalid date format '$p_value'",
 								ERROR_INVALID_DATE_FORMAT,
 								array( $p_value ) );
 						}
+						$t_value = $t_value->getTimestamp();
 					}
 				}
 		}
