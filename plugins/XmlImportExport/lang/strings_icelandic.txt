@@ -42,18 +42,24 @@
  */
 
 $s_plugin_XmlImportExport_title = 'Flytja verkbeiðnir inn/út';
+$s_plugin_XmlImportExport_description = 'Bætir inn- og útflutningsvalkostum með XML við MantisBT.';
 $s_plugin_XmlImportExport_import = 'Flytja inn verkbeiðnir';
 $s_plugin_XmlImportExport_export = 'XML útflutningur';
+$s_plugin_XmlImportExport_config_title = 'Uppsetning aðgangsstiga XML-innflutnings/útflutnings';
 $s_plugin_XmlImportExport_import_threshold = 'Flytja inn verkbeiðnir';
 $s_plugin_XmlImportExport_export_threshold = 'Flytja út verkbeiðnir';
 $s_plugin_XmlImportExport_action_update = 'Uppfæra';
 $s_plugin_XmlImportExport_importing_in_project = 'Flytja verkbeiðnir inn í verkefni: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Valkostir innflutnings';
 $s_plugin_XmlImportExport_cross_references = 'Tilvísanir';
+$s_plugin_XmlImportExport_default_strategy = 'Sjálfgefin stefna við umbreytingu:';
 $s_plugin_XmlImportExport_renumber = 'Endurnúmera';
+$s_plugin_XmlImportExport_renumber_desc = 'Reyna að umbreyta tilvísunum í nýja tölusetningu';
 $s_plugin_XmlImportExport_link = 'Tengja';
+$s_plugin_XmlImportExport_link_desc = 'Umbreyta í tengil í upprunalegt atriði';
 $s_plugin_XmlImportExport_disable = 'Gera óvirkan';
 $s_plugin_XmlImportExport_disable_desc = 'Gera tengilinn óvirkan';
+$s_plugin_XmlImportExport_fallback = 'Stefna til vara (þegar "Endurnúmera" á ekki við):';
 $s_plugin_XmlImportExport_fallback_category = 'Verkþáttur til vara:';
 $s_plugin_XmlImportExport_keep_same_category = 'Prófa að halda sama verkþætti';
 $s_plugin_XmlImportExport_error_no_xml = 'finn ekki xmlreader og xmlwriter forritsviðaukana';
