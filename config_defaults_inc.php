@@ -1411,8 +1411,8 @@ $g_default_bug_view_status = VS_PUBLIC;
  *
  * @global string $g_default_bug_description
  */
- $g_default_bug_description = '';
- 
+$g_default_bug_description = '';
+
 /**
  * Default value for steps to reproduce field.
  * @global string $g_default_bug_steps_to_reproduce
