@@ -907,13 +907,23 @@ function print_admin_menu_bar( $p_page ) {
 	# Build array with admin menu items, add Upgrade tab if necessary
 	$t_menu_items['index.php'] = '<i class="blue ace-icon fa fa-info-circle"></i>';
 
-	global $g_upgrade;
-	include_once( 'schema.php' );
-	if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) {
-		$t_menu_items['install.php'] = 'Upgrade your installation';
+	# At the beginning of admin checks, the DB is not yet loaded so we can't
+	# check the schema to inform user that an upgrade is needed
+	if( $p_page == 'check/index.php' ) {
+		# Relative URL up one level to ensure valid links on Admin Checks page
+		$t_path = '../';
+	} else {
+		global $g_upgrade;
+		include_once( 'schema.php' );
+		if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) {
+			$t_menu_items['install.php'] = 'Upgrade your installation';
+		}
+
+		$t_path = '';
 	}
 
 	$t_menu_items += array(
+		'check/index.php' => 'Check Installation',
 		'system_utils.php' => 'System Utilities',
 		'test_langs.php' => 'Test Lang',
 		'email_queue.php' => 'Email Queue',
@@ -928,7 +938,7 @@ function print_admin_menu_bar( $p_page ) {
 
 		echo "\t<li$t_class_active>";
 		echo "<a " . $t_class_green
-			. 'href="' . $t_menu_page . '">'
+			. 'href="' . $t_path . $t_menu_page . '">'
 			. $t_description . "</a>";
 		echo '</li>' . "\n";
 	}
