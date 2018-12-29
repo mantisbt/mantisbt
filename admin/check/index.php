@@ -92,6 +92,8 @@ $t_show_errors_mode_link = sprintf( $t_link,
 layout_page_header( 'MantisBT Administration - Check Installation' );
 
 layout_admin_page_begin();
+print_admin_menu_bar( 'check/index.php' );
+
 ?>
 
 <div class="col-md-12 col-xs-12">
