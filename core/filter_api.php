@@ -2500,13 +2500,14 @@ function filter_draw_selection_area() {
 	$t_stored_queries_arr = filter_db_get_available_queries();
 	$t_is_temporary = filter_is_temporary( $t_filter );
 	$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
+	$t_can_persist = filter_user_can_use_persistent( auth_get_current_user_id() );
 
 	$t_collapse_block = is_collapsed( 'filter' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 	# further use of this icon must be inlined to avoid spaces in rendered html
-	$t_temporary_icon_html = $t_is_temporary ?
+	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
 		'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
 		: '';
 	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
@@ -2556,7 +2557,7 @@ function filter_draw_selection_area() {
 								echo '</a>';
 								echo '</li>';
 							}
-							if( $t_is_temporary ) {
+							if( $t_is_temporary && $t_can_persist ) {
 								echo '<li>';
 								echo '<a href="' . $t_url_persist_filter . '">';
 								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
@@ -2595,7 +2596,7 @@ function filter_draw_selection_area() {
 			<div id="filter-bar-actions" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
 				<div class="widget-menu margin-left-8 margin-right-8">
 	<?php
-	if( $t_is_temporary ) {
+	if( $t_is_temporary && $t_can_persist ) {
 	?>
 					<a class="btn btn-primary btn-white btn-round btn-xs" href="<?php echo $t_url_persist_filter ?>">
 						<i class="ace-icon fa fa-thumb-tack"></i>
@@ -2632,7 +2633,7 @@ function filter_draw_selection_area() {
 	# Top left toolbar for buttons
 
 	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
-	if( $t_is_temporary ) {
+	if( $t_is_temporary && $t_can_persist ) {
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_persist_filter ?>">
 								<i class="ace-icon fa fa-thumb-tack"></i>
@@ -4014,4 +4015,15 @@ function filter_copy_runtime_properties( array $p_filter_to, array $p_filter_fro
 		$p_filter_to['_filter_id'] = $p_filter_from['_filter_id'];
 	}
 	return $p_filter_to;
+}
+
+/**
+ * Returns true if the user can use peristent filters, in contexts such as view_all_bug_page.
+ * Persistent filters are remembered across sessions, and are not desirable when the user is
+ * a shared user, eg: anonymous user
+ * @param integer $p_user_id	A valid user identifier.
+ * @return boolean true if the user can use persistent filters, false otherwise
+ */
+function filter_user_can_use_persistent( $p_user_id = null ) {
+	return !user_is_anonymous( $p_user_id );
 }

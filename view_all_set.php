@@ -92,11 +92,10 @@ if( ( $f_type == FILTER_ACTION_LOAD ) && ( $f_source_query_id == -1 ) ) {
 
 $t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
 
-# If user is anonymous, force the creation of a temporary filter
-if( current_user_is_anonymous() ) {
+# If user can't use persistent filters, force the creation of a temporary filter
+if( !filter_user_can_use_persistent( auth_get_current_user_id() ) ) {
 	$t_temp_filter = true;
 }
-
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
