@@ -2579,7 +2579,6 @@ function filter_draw_selection_area() {
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 						<select id="filter-bar-query-id" class="input-xs">
 							<option value="-1"></option>
-							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 							<?php
 							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
