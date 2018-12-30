@@ -634,8 +634,8 @@ define( 'JQUERY_VERSION', '2.2.4' );
 define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 
 # Bootstrap & FontAwesome
-define( 'BOOTSTRAP_VERSION', '3.3.6' );
-define( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=' );
+define( 'BOOTSTRAP_VERSION', '3.4.0' );
+define( 'BOOTSTRAP_HASH', 'sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw' );
 define( 'FONT_AWESOME_VERSION', '4.6.3' );
 
 # Moment & DateTimePicker
