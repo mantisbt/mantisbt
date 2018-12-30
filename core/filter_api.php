@@ -2597,13 +2597,17 @@ function filter_draw_selection_area() {
 	<?php
 	if( $t_is_temporary && $t_can_persist ) {
 	?>
-					<a class="btn btn-primary btn-white btn-round btn-xs" href="<?php echo $t_url_persist_filter ?>">
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>"
+					   href="<?php echo $t_url_persist_filter ?>">
 						<i class="ace-icon fa fa-thumb-tack"></i>
 					</a>
 	<?php
 	}
 	?>
-					<a class="btn btn-primary btn-white btn-round btn-xs" href="<?php echo $t_url_reset_filter ?>">
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'reset_query' ) ?>"
+					   href="<?php echo $t_url_reset_filter ?>">
 						<i class="ace-icon fa fa-times"></i>
 					</a>
 
