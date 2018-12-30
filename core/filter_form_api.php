@@ -1172,7 +1172,7 @@ function print_filter_values_sticky_issues( array $p_filter ) {
 	?>
 	<input type="hidden" name="<?php
 		echo FILTER_PROPERTY_STICKY; ?>" value="<?php
-		echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
+		echo $t_sticky_filter_state ? ON : OFF; ?>" />
 	<?php
 }
 
