@@ -489,6 +489,13 @@ define( 'FILTER_STANDARD_UNASSIGNED', 'unassigned' );
 define( 'FILTER_STANDARD_REPORTED', 'reported' );
 define( 'FILTER_STANDARD_MONITORED', 'monitored' );
 
+# Filter actions, refactored from view_all_set.php
+define( 'FILTER_ACTION_RESET', 0 );
+define( 'FILTER_ACTION_PARSE_NEW', 1 );
+define( 'FILTER_ACTION_PARSE_ADD', 2 );
+define( 'FILTER_ACTION_LOAD', 3 );
+define( 'FILTER_ACTION_GENERALIZE', 4 );
+
 # Versions
 define( 'VERSION_ALL', null );
 define( 'VERSION_FUTURE', false );
@@ -724,10 +731,3 @@ define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );
 define( 'DB_TYPE_MSSQL', 3 );
 define( 'DB_TYPE_ORACLE', 4 );
-
-# Filter actions, refactored from view_all_set.php
-define( 'FILTER_ACTION_RESET', 0 );
-define( 'FILTER_ACTION_PARSE_NEW', 1 );
-define( 'FILTER_ACTION_PARSE_ADD', 2 );
-define( 'FILTER_ACTION_LOAD', 3 );
-define( 'FILTER_ACTION_GENERALIZE', 4 );
