@@ -2366,12 +2366,13 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
  * not available on the client, and the form was rendered with dynamic fields.
  * By default, the fallback is the current page.
  *
- * @param array $p_filter			Filter array to show.
- * @param boolean $p_for_screen		Type of output
- * @param boolean $p_static			Whether to print a static form (no dynamic fields)
- * @param string $p_static_fallback_page	Page name to use as javascript fallback
- * @param boolean $p_show_search	Whether to render the search field inside the general fields area.
- *									If false, the text search should be managed externally.
+ * @param array   $p_filter               Filter array to show.
+ * @param boolean $p_for_screen           Type of output
+ * @param boolean $p_static               Whether to print a static form (no dynamic fields)
+ * @param string  $p_static_fallback_page Page name to use as javascript fallback
+ * @param boolean $p_show_search          Whether to render the search field inside
+ *                                        the general fields area. If false, the text
+ *                                        search should be managed externally.
  * @return void
  */
 function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null, $p_show_search = true ) {
