@@ -2672,7 +2672,7 @@ function filter_draw_selection_area() {
 							<?php # CSRF protection not required here - form does not result in modifications?>
 							<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 							<label><?php echo lang_get( 'load_filter' ) ?>
-								<select class="input-xs" name="source_query_id">
+								<select class="input-s" name="source_query_id">
 									<option value="-1"></option>
 									<?php
 									$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
