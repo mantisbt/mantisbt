@@ -148,6 +148,7 @@ function layout_page_begin( $p_active_sidebar_page = null ) {
 	if( !db_is_connected() ) {
 		return;
 	}
+	current_user_modify_single_project_default();
 
 	layout_navbar();
 
@@ -515,15 +516,8 @@ function layout_navbar_projects_menu() {
 		return;
 	}
 
-	# Project Selector (hidden if only one project visible to user)
-	$t_show_project_selector = true;
-	$t_project_ids = current_user_get_accessible_projects();
-	if( count( $t_project_ids ) == 1 ) {
-		$t_project_id = (int) $t_project_ids[0];
-		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
-			$t_show_project_selector = false;
-		}
-	}
+	# Project selector is only shown if there are more than one project, or is special user
+	$t_show_project_selector = current_user_has_more_than_one_project() || access_has_global_level( config_get( 'create_project_threshold' ) );
 
 	if( $t_show_project_selector ) {
 		echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
@@ -543,22 +537,6 @@ function layout_navbar_projects_menu() {
 		layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
 		echo '</ul>' . "\n";
 		echo '</li>' . "\n";
-	} else {
-		# User has only one project, set it as both current and default
-		if( ALL_PROJECTS == helper_get_current_project() ) {
-			helper_set_current_project( $t_project_id );
-
-			if( !current_user_is_protected() ) {
-				current_user_set_default_project( $t_project_id );
-			}
-
-			# Force reload of current page, except if we got here after
-			# creating the first project
-			$t_redirect_url = str_replace( config_get_global( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
-			if( 'manage_proj_create.php' != $t_redirect_url ) {
-				html_meta_redirect( $t_redirect_url, 0, false );
-			}
-		}
 	}
 }
 
