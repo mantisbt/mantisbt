@@ -40,6 +40,7 @@
  *
  * @author BukhariSaeed
  * @author E THP
+ * @author Muhammad Shuaib
  * @author امین اکبر
  * @author عثمان خان شاہ
  * @author محبوب عالم
@@ -496,7 +497,7 @@ $s_config_delete_sure = ' کیا آپ واقعی سيٹنگز کو خارج کر
 $s_in_project = '  منصو بہ میں';
 $s_delete_config_button = 'سيٹنگز کو خارج کرو';
 $s_configuration_report = 'ڈیزاہن کی رپورٹ';
-$s_database_configuration = 'ڈیٹا بیس کا ڈیزاہن';
+$s_database_configuration = 'ڈیٹابیس کی کانفیگریشن';
 $s_configuration_option = 'ڈیزاہن کی آپشن';
 $s_configuration_option_type = 'قسم';
 $s_configuration_option_value = 'قیمت';
