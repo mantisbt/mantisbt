@@ -2572,9 +2572,27 @@ function filter_draw_selection_area() {
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
-				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-					<div class="widget-menu margin-left-8 margin-right-8">
+			<div id="filter-bar-queries" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+				<div class="widget-menu margin-left-8">
+				<?php
+				if( $t_is_temporary && $t_can_persist ) {
+				?>
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>"
+					   href="<?php echo $t_url_persist_filter ?>">
+						<i class="ace-icon fa fa-thumb-tack"></i>
+					</a>
+				<?php
+				}
+				?>
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'reset_query' ) ?>"
+					   href="<?php echo $t_url_reset_filter ?>">
+						<i class="ace-icon fa fa-times"></i>
+					</a>
+				</div>
+				<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
+				<div class="widget-menu hidden-xs">
 					<form method="post" action="view_all_set.php">
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 						<select id="filter-bar-query-id" class="input-xs">
@@ -2589,27 +2607,9 @@ function filter_draw_selection_area() {
 							?>
 						</select>
 					</form>
-					</div>
 				</div>
-			<?php } ?>
-			<div id="filter-bar-actions" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-				<div class="widget-menu margin-left-8 margin-right-8">
-	<?php
-	if( $t_is_temporary && $t_can_persist ) {
-	?>
-					<a class="btn btn-primary btn-white btn-round btn-xs"
-					   title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>"
-					   href="<?php echo $t_url_persist_filter ?>">
-						<i class="ace-icon fa fa-thumb-tack"></i>
-					</a>
-	<?php
-	}
-	?>
-					<a class="btn btn-primary btn-white btn-round btn-xs"
-					   title="<?php echo lang_get( 'reset_query' ) ?>"
-					   href="<?php echo $t_url_reset_filter ?>">
-						<i class="ace-icon fa fa-times"></i>
-					</a>
+				<?php } ?>
+				<div class="widget-menu margin-right-8">
 
 					<form method="post" action="view_all_set.php">
 						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_PARSE_ADD ?>" />
