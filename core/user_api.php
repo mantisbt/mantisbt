@@ -1768,3 +1768,26 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 
 	return true;
 }
+
+/**
+ * Helper function to check if the user has access to more than one project
+ * (any kind of project or subproject). This can be used to simplify logic when
+ * the user only has one project to choose from.
+ *
+ * @param integer $p_user_id	A valid user identifier.
+ * @return boolean	True if the user has access to more than one project.
+ */
+function user_has_more_than_one_project( $p_user_id ) {
+	$t_project_ids = user_get_accessible_projects( $p_user_id );
+	$t_count = count( $t_project_ids );
+	if( 0 == $t_count ) {
+		return false;
+	}
+	if( 1 == $t_count ) {
+		$t_project_id = (int) $t_project_ids[0];
+		if( count( user_get_accessible_subprojects( $p_user_id, $t_project_id ) ) == 0 ) {
+			return false;
+		}
+	}
+	return true;
+}
