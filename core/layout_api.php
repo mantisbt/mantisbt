@@ -145,11 +145,11 @@ function layout_page_header_end( $p_page_id = null) {
  * @return void
  */
 function layout_page_begin( $p_active_sidebar_page = null ) {
-	layout_navbar();
-
 	if( !db_is_connected() ) {
 		return;
 	}
+
+	layout_navbar();
 
 	layout_main_container_begin();
 
