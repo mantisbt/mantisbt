@@ -327,15 +327,14 @@ function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL
 		return;
 	}
 
-	db_param_push();
-	$t_query = 'SELECT * FROM {user_pref} WHERE user_id IN (' . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
-	$t_result = db_query( $t_query, array( (int)$p_project_id ) );
+	$t_query = new DbQuery( 'SELECT * FROM {user_pref} WHERE user_id IN :user_array AND project_id = :project_id' );
+	$t_query->bind( 'user_array', $c_user_id_array );
+	$t_query->bind( 'project_id', (int)$p_project_id );
 
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	foreach( $t_query->fetch_all() as $t_row ) {
 		if( !isset( $g_cache_user_pref[(int)$t_row['user_id']] ) ) {
 			$g_cache_user_pref[(int)$t_row['user_id']] = array();
 		}
-
 		$g_cache_user_pref[(int)$t_row['user_id']][(int)$p_project_id] = $t_row;
 
 		# remove found users from required set.
@@ -409,24 +408,16 @@ function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_pref
 	}
 
 	$t_values = array();
-
-	db_param_push();
-
-	$t_params[] = db_param(); # user_id
 	$t_values[] = $c_user_id;
-	$t_params[] = db_param(); # project_id
 	$t_values[] = $c_project_id;
 	foreach( $s_vars as $t_var => $t_val ) {
-		array_push( $t_params, db_param() );
 		array_push( $t_values, $p_prefs->Get( $t_var ) );
 	}
 
-	$t_vars_string = implode( ', ', array_keys( $s_vars ) );
-	$t_params_string = implode( ',', $t_params );
-
-	$t_query = 'INSERT INTO {user_pref}
-			  (user_id, project_id, ' . $t_vars_string . ') VALUES ( ' . $t_params_string . ')';
-	db_query( $t_query, $t_values );
+	$t_columns = 'user_id, project_id, ' . implode( ', ', array_keys( $s_vars ) );
+	$t_query = new DBQuery( 'INSERT INTO {user_pref} (' . $t_columns . ') VALUES :values' );
+	$t_query->bind( 'values', $t_values );
+	$t_query->execute();
 
 	return true;
 }
