@@ -384,18 +384,25 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 }
 
 /**
+ * Backwards compatibility wrapper for user_pref_db_insert()
+ * @deprecated	Use user_pref_db_insert()
+ */
+function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+	user_ensure_unprotected( $p_user_id );
+	user_pref_db_insert( $p_user_id, $p_project_id, $p_prefs );
+}
+
+/**
  * perform an insert of a preference object into the DB
  * @param integer         $p_user_id    A valid user identifier.
  * @param integer         $p_project_id A valid project identifier.
  * @param UserPreferences $p_prefs      An UserPrefences Object.
  * @return boolean
  */
-function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	static $s_vars;
 	$c_user_id = (int)$p_user_id;
 	$c_project_id = (int)$p_project_id;
-
-	user_ensure_unprotected( $p_user_id );
 
 	if( $s_vars == null ) {
 		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
@@ -425,16 +432,24 @@ function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 }
 
 /**
+ * Backwards compatibility wrapper for user_pref_db_update()
+ * @deprecated	Use user_pref_db_update()
+ */
+function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+	user_ensure_unprotected( $p_user_id );
+	user_pref_db_update($p_user_id, $p_project_id, $p_prefs );
+	user_pref_clear_cache( $p_user_id, $p_project_id );
+}
+
+/**
  * perform an update of a preference object into the DB
  * @param integer         $p_user_id    A valid user identifier.
  * @param integer         $p_project_id A valid project identifier.
  * @param UserPreferences $p_prefs      An UserPrefences Object.
  * @return void
  */
-function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
 	static $s_vars;
-
-	user_ensure_unprotected( $p_user_id );
 
 	if( $s_vars == null ) {
 		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
@@ -457,7 +472,15 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 	$t_query = 'UPDATE {user_pref} SET ' . $t_pairs_string . '
 				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
 	db_query( $t_query, $t_values );
+}
 
+/**
+ * Backwards compatibility wrapper for user_pref_db_delete()
+ * @deprecated	Use user_pref_db_delete()
+ */
+function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
+	user_ensure_unprotected( $p_user_id );
+	user_pref_db_delete( $p_user_id, $p_project_id );
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 }
 
@@ -468,16 +491,22 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
  * @param integer $p_project_id A valid project identifier.
  * @return void
  */
-function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	user_ensure_unprotected( $p_user_id );
-
+function user_pref_db_delete( $p_user_id, $p_project_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {user_pref}
 				  WHERE user_id=' . db_param() . ' AND
 				  		project_id=' . db_param();
-	db_query( $t_query, array( $p_user_id, $p_project_id ) );
+	db_query( $t_query, array( (int)$p_user_id, (int)$p_project_id ) );
+}
 
-	user_pref_clear_cache( $p_user_id, $p_project_id );
+/**
+ * Backwards compatibility wrapper for user_pref_db_delete_user()
+ * @deprecated	Use user_pref_db_delete_user()
+ */
+function user_pref_delete_all( $p_user_id ) {
+	user_ensure_unprotected( $p_user_id );
+	user_pref_db_delete_user( $p_user_id );
+	user_pref_clear_cache( $p_user_id );
 }
 
 /**
@@ -490,14 +519,10 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @param integer $p_user_id A valid user identifier.
  * @return void
  */
-function user_pref_delete_all( $p_user_id ) {
-	user_ensure_unprotected( $p_user_id );
-
+function user_pref_db_delete_user( $p_user_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {user_pref} WHERE user_id=' . db_param();
 	db_query( $t_query, array( $p_user_id ) );
-
-	user_pref_clear_cache( $p_user_id );
 }
 
 /**
@@ -509,7 +534,7 @@ function user_pref_delete_all( $p_user_id ) {
  * @param integer $p_project_id A valid project identifier.
  * @return void
  */
-function user_pref_delete_project( $p_project_id ) {
+function user_pref_db_delete_project( $p_project_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {user_pref} WHERE project_id=' . db_param();
 	db_query( $t_query, array( $p_project_id ) );
@@ -625,32 +650,54 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @param string  $p_pref_name  The name of the preference value to set.
  * @param string  $p_pref_value A preference value to set.
  * @param integer $p_project_id A valid project identifier.
+ * @param boolean $p_check_protected	Whether to perform a check to not allow modify protected users
  * @return boolean
  */
-function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
+function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
 	if( $t_prefs->$p_pref_name != $p_pref_value ) {
 		$t_prefs->$p_pref_name = $p_pref_value;
-		user_pref_set( $p_user_id, $t_prefs, $p_project_id );
+		user_pref_set( $p_user_id, $t_prefs, $p_project_id, $p_check_protected );
 	}
 
 	return true;
 }
 
 /**
- * set the user's preferences for the project from the given preferences object
- * Do the work by calling user_pref_update() or user_pref_insert() as appropriate
+ * Set the user's preferences for the project from the given preferences object
+ * Do the work by calling update or insert as appropriate
  * @param integer         $p_user_id    A valid user identifier.
  * @param UserPreferences $p_prefs      A UserPreferences object containing settings to set.
  * @param integer         $p_project_id A valid project identifier.
- * @return null
+ * @param boolean         $p_check_protected	Whether to perform a check to not allow modify protected users
+ * @return void
  */
-function user_pref_set( $p_user_id, UserPreferences $p_prefs, $p_project_id = ALL_PROJECTS ) {
-	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
-		return user_pref_update( $p_user_id, $p_project_id, $p_prefs );
-	} else {
-		return user_pref_insert( $p_user_id, $p_project_id, $p_prefs );
+function user_pref_set( $p_user_id, UserPreferences $p_prefs, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
+	if( $p_check_protected ) {
+		user_ensure_unprotected( $p_user_id );
 	}
+	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
+		user_pref_db_update( $p_user_id, $p_project_id, $p_prefs );
+	} else {
+		user_pref_db_insert( $p_user_id, $p_project_id, $p_prefs );
+	}
+	user_pref_clear_cache( $p_user_id, $p_project_id );
 }
 
+/**
+ * Delete the user's preferences row for the given project
+ * @param integer         $p_user_id    A valid user identifier.
+ * @param integer         $p_project_id A valid project identifier.
+ * @param boolean         $p_check_protected	Whether to perform a check to not allow modify protected users
+ * @return void
+ */
+function user_pref_reset( $p_user_id, $p_project_id = ALL_PROJECTS, $p_check_protected = true ) {
+	if( $p_check_protected ) {
+		user_ensure_unprotected( $p_user_id );
+	}
+	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
+		user_pref_db_delete( $p_user_id, $p_project_id );
+	}
+	user_pref_clear_cache( $p_user_id, $p_project_id );
+}

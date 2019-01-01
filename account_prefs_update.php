@@ -135,7 +135,7 @@ if( in_array( $t_timezone, timezone_identifiers_list() ) ) {
 
 event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
 
-user_pref_set( $f_user_id, $t_prefs );
+user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_update' );
 

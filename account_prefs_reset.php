@@ -84,7 +84,7 @@ if( auth_get_current_user_id() != $f_user_id ) {
 	user_ensure_unprotected( $f_user_id );
 }
 
-user_pref_delete( $f_user_id );
+user_pref_reset( $f_user_id, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_reset' );
 

@@ -672,7 +672,7 @@ function user_delete( $p_user_id ) {
 	user_delete_profiles( $p_user_id );
 
 	# Remove associated preferences
-	user_pref_delete_all( $p_user_id );
+	user_pref_db_delete_user( $p_user_id );
 
 	# Remove project specific access levels
 	user_delete_project_specific_access_levels( $p_user_id );
