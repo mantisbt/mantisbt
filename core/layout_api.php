@@ -512,32 +512,26 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
  * @return void
  */
 function layout_navbar_projects_menu() {
-	if( !auth_is_user_authenticated() ) {
+	if( !layout_navbar_can_show_projects_menu() ) {
 		return;
 	}
+	echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
+	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
-	# Project selector is only shown if there are more than one project, or is special user
-	$t_show_project_selector = current_user_has_more_than_one_project() || access_has_global_level( config_get( 'create_project_threshold' ) );
-
-	if( $t_show_project_selector ) {
-		echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
-		echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
-
-		$t_current_project_id = helper_get_current_project();
-		if( ALL_PROJECTS == $t_current_project_id) {
-			echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
-		} else {
-			echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
-		}
-
-		echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
-		echo '</a>' . "\n";
-
-		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
-		layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-		echo '</ul>' . "\n";
-		echo '</li>' . "\n";
+	$t_current_project_id = helper_get_current_project();
+	if( ALL_PROJECTS == $t_current_project_id) {
+		echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
+	} else {
+		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
 	}
+
+	echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
+	echo '</a>' . "\n";
+
+	echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
+	layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+	echo '</ul>' . "\n";
+	echo '</li>' . "\n";
 }
 
 /**
@@ -757,28 +751,9 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
-		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
-			layout_sidebar_menu( 'manage_overview_page.php', 'manage_link', 'fa-gears', $p_active_sidebar_page );
-		} else {
-			if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-				$t_link = 'manage_user_page.php';
-			} else {
-				$t_link = '';
-				if( access_has_any_project_level( 'manage_project_threshold' ) ) {
-					if( $t_current_project == ALL_PROJECTS ) {
-						$t_link = 'manage_proj_page.php';
-					} else {
-						if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) ) {
-							$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
-						} else {
-							if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-								$t_link = 'manage_custom_field_page.php';
-							}
-						}
-					}
-				}
-			}
-			if( $t_link != '' ) layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears' );
+		$t_link = layout_manage_menu_link();
+		if( !is_blank( $t_link ) ) {
+			layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears', $p_active_sidebar_page );
 		}
 
 		# Time Tracking / Billing
@@ -1245,4 +1220,56 @@ function layout_login_page_logo() {
 		<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
 	</div>
 	<?php
+}
+
+/**
+ * Returns a single link for the "manage" menu item in sidebar, based on current
+ * user permissions, and priority if several subpages are available.
+ * If there is not any accesible manage page, returns null.
+ * @return string|null	Page name for the manage menu link, or null if unavailable.
+ */
+function layout_manage_menu_link() {
+	static $t_link = null;
+	if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
+		$t_link = 'manage_overview_page.php';
+	} else {
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			$t_link = 'manage_user_page.php';
+		} else {
+			if( access_has_any_project_level( 'manage_project_threshold' ) ) {
+				$t_current_project = helper_get_current_project();
+				if( $t_current_project == ALL_PROJECTS ) {
+					$t_link = 'manage_proj_page.php';
+				} else {
+					if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) ) {
+						$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
+					} else {
+						if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+							$t_link = 'manage_custom_field_page.php';
+						}
+					}
+				}
+			}
+		}
+	}
+	return $t_link;
+}
+
+/**
+ * Returns true if the projects menu can be shown for current user.
+ * In some circumstances, we won't show the menu to simplify the UI.
+ * @return boolean	True if the projects menu can be shown.
+ */
+function layout_navbar_can_show_projects_menu() {
+	if( !auth_is_user_authenticated() ) {
+		return false;
+	}
+
+	# Project selector is only shown if there are more than one project, or
+	# if the user hass access to manage pages, where having ALL_PROJECTS is
+	# needed (#20054)
+	$t_show_project_selector =
+		!is_blank( layout_manage_menu_link() )
+		|| current_user_has_more_than_one_project();
+	return $t_show_project_selector;
 }

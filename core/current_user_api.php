@@ -272,14 +272,20 @@ function current_user_has_more_than_one_project() {
  * - If default project is not the visible one, modify it to be that project,
  *   or ALL_PROJECTS if the user has no accesible projects.
  *
+ * These changes only apply to user who can't use the project selection.
+ *
  * @return void
  */
 function current_user_modify_single_project_default() {
+	# The user must not be able to use the project selector
+	if( layout_navbar_can_show_projects_menu() ) {
+		return;
+	}
+	# The user must have one, or none, projects
 	$t_user_id = auth_get_current_user_id();
 	if( user_has_more_than_one_project( $t_user_id ) ) {
 		return;
 	}
-	# the user has one, or none, projects
 	$t_default = user_pref_get_pref( $t_user_id, 'default_project' );
 	$t_current = helper_get_current_project();
 	$t_projects = user_get_all_accessible_projects( $t_user_id );
