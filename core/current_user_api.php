@@ -301,6 +301,6 @@ function current_user_modify_single_project_default() {
 		helper_set_current_project( $t_project_id );
 	}
 	if( $t_project_id != $t_default ) {
-		user_set_default_project( $t_user_id, $t_project_id );
+		user_pref_set_pref( $t_user_id, 'default_project', (int)$t_project_id, ALL_PROJECTS, false /* skip protected check */ );
 	}
 }
