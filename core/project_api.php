@@ -401,7 +401,7 @@ function project_delete( $p_project_id ) {
 	config_delete_project( $p_project_id );
 
 	# Delete any user prefs that are project specific
-	user_pref_delete_project( $p_project_id );
+	user_pref_db_delete_project( $p_project_id );
 
 	# Delete the project entry
 	db_param_push();
