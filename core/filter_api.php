@@ -101,6 +101,10 @@ $g_filter = null;
 # indexed by filter_id, contains the filter rows as read from db table
 $g_cache_filter_db_rows = array();
 
+# @global array $g_cache_filter_subquery
+# indexed by a hash of the filter array, contains a prebuilt BugFilterQuery object
+$g_cache_filter_subquery = array();
+
 /**
  * Initialize the filter API with the current filter.
  * @param array $p_filter The filter to set as the current filter.
@@ -3550,6 +3554,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	if( isset( $t_filter['_filter_id'] ) ) {
 		$t_filter_input['_filter_id'] = $t_filter['_filter_id'];
 	}
+	# Don't copy cached subquery '_subquery' property
 
 	return filter_ensure_valid_filter( $t_filter_input );
 }
@@ -4001,6 +4006,9 @@ function filter_clean_runtime_properties( array $p_filter ) {
 	if( isset( $p_filter['_filter_id'] ) ) {
 		unset( $p_filter['_filter_id'] );
 	}
+	if( isset( $p_filter['_subquery'] ) ) {
+		unset( $p_filter['_subquery'] );
+	}
 	return $p_filter;
 }
 
@@ -4017,9 +4025,38 @@ function filter_copy_runtime_properties( array $p_filter_to, array $p_filter_fro
 	if( isset( $p_filter_from['_filter_id'] ) ) {
 		$p_filter_to['_filter_id'] = $p_filter_from['_filter_id'];
 	}
+	# we don't copy '_subquery' property, which is a cached subquery object,
+	# and can be regenerated at demand
+
 	return $p_filter_to;
 }
 
+/**
+ * Return a cached BugFilterQuery object for the provided filter, configured and
+ * ready to be used as a subquery for building other queries.
+ * If the query is not in the cache, creates a new one and store it for later reuse.
+ * Note: Query objects are indexed by a hash value over the serialized contents of the
+ * filter array.
+ *
+ * Warning: Since the returned query is an object, it should not be modified in any way
+ * that changes the expected behavior from the original filter array, as any further
+ * reuse of this chached query will share the same instanced object.
+ * If such a modification is needed over the query object, a clone should be used
+ * instead, to avoid said side effects.
+ *
+ * @param array $p_filter	Filter array
+ * @return BugFilterQuery	A query object for the filter
+ */
+function filter_cache_subquery( array $p_filter ) {
+	global $g_cache_filter_subquery;
+
+	$t_hash = md5( json_encode( $p_filter ) );
+	if( !isset( $g_cache_filter_subquery[$t_hash] ) ) {
+		$g_cache_filter_subquery[$t_hash] = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+	}
+
+	return $g_cache_filter_subquery[$t_hash];
+}
 /**
  * Returns true if the user can use peristent filters, in contexts such as view_all_bug_page.
  * Persistent filters are remembered across sessions, and are not desirable when the user is
