@@ -57,11 +57,16 @@ auth_ensure_user_authenticated();
 
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
-$f_print				= gpc_get_bool( 'print' );
 $f_isset_temporary		= gpc_isset( 'temporary' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
 $f_project_id			= gpc_get_int( 'set_project_id', -1 );
 
+# flags to redirect after changing the filter
+# 'print' will redirect to print_all_bug_page.php
+# 'summary' will redirect to summary_page.php
+# otherwise, the default redirect is to view_all_bug_page.php
+$f_print				= gpc_get_bool( 'print' );
+$f_summary				= gpc_get_bool( 'summary' );
 
 # Get the filter in use
 $t_setting_arr = current_user_get_bug_filter();
@@ -182,9 +187,11 @@ if( !$t_temp_filter ) {
 	filter_set_project_filter( $t_setting_arr, $t_project_id );
 }
 
-# redirect to print_all or view_all page
+# evaluate redirect
 if( $f_print ) {
 	$t_redirect_url = 'print_all_bug_page.php';
+} elseif( $f_summary ) {
+	$t_redirect_url = 'summary_page.php';
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }

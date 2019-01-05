@@ -112,12 +112,16 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			<div class="btn-group pull-left">
 		<?php
 			$t_filter_param = filter_get_temporary_key_param( $t_filter );
-			$t_filter_param = ( empty( $t_filter_param ) ? '' : '?' ) . $t_filter_param;
+			if( empty( $t_filter_param ) ) {
+				$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
+			} else {
+				$t_summary_link = 'summary_page.php?' . $t_filter_param;
+			}
 			# -- Print and Export links --
 			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
 			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
 			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
-			print_small_button( 'summary_page.php' . $t_filter_param, lang_get( 'summary_link' ) );
+			print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
 
 			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
 
