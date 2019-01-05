@@ -198,7 +198,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 	$t_sql = 'SELECT COUNT(id) as bugcount, ' . $p_enum . ' ' . $t_status_query
 		. ' FROM {bug} WHERE ' . $t_project_filter;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -317,7 +317,7 @@ function summary_new_bug_count_by_date( $p_num_days = 1, array $p_filter = null 
 		. ' AND ' . $t_specific_where;
 	$t_query->bind( 'now', db_now() );
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -361,7 +361,7 @@ function summary_resolved_bug_count_by_date( $p_num_days = 1, array $p_filter = 
 		'now' => db_now()
 		) );
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -441,7 +441,7 @@ function summary_print_by_activity( array $p_filter = null ) {
 		. ' WHERE b.status < ' . $t_query->param( (int)$t_resolved )
 		. ' AND ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -503,7 +503,7 @@ function summary_print_by_age( array $p_filter = null ) {
 	$t_sql = 'SELECT * FROM {bug} WHERE status < ' . $t_query->param( (int)$t_resolved )
 		. ' AND ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -555,7 +555,7 @@ function summary_print_by_developer( array $p_filter = null ) {
 	$t_sql = 'SELECT COUNT(id) as bugcount, handler_id, status'
 		. ' FROM {bug} WHERE handler_id>0 AND ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -613,7 +613,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 	$t_query = new DBQuery();
 	$t_sql = 'SELECT reporter_id, COUNT(*) as num FROM {bug} WHERE ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -641,7 +641,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 			. ' WHERE reporter_id= :reporter AND ' . $t_specific_where;
 		$t_query->bind( 'reporter', (int)$v_reporter_id );
 		if( !empty( $p_filter ) ) {
-			$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+			$t_subquery = filter_cache_subquery( $p_filter );
 			$t_sql .= ' AND {bug}.id IN :filter';
 			$t_query->bind( 'filter', $t_subquery );
 		}
@@ -715,7 +715,7 @@ function summary_print_by_category( array $p_filter = null ) {
 		. ' FROM {bug} b JOIN {category} c ON b.category_id=c.id'
 		. ' WHERE b.' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -781,7 +781,7 @@ function summary_print_by_project( array $p_projects = array(), $p_level = 0, ar
 		$t_query = new DBQuery();
 		$t_sql = 'SELECT project_id, status, COUNT( status ) AS bugcount FROM {bug}';
 		if( !empty( $p_filter ) ) {
-			$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+			$t_subquery = filter_cache_subquery( $p_filter );
 			$t_sql .= ' WHERE {bug}.id IN :filter';
 			$t_query->bind( 'filter', $t_subquery );
 		}
@@ -857,7 +857,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string, array $p
 	$t_sql = 'SELECT COUNT(id) as bugcount, handler_id, resolution'
 		. ' FROM {bug} WHERE ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -993,7 +993,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 	$t_sql = 'SELECT COUNT(id) as bugcount, reporter_id, resolution'
 		. ' FROM {bug} WHERE ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -1136,7 +1136,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	$t_sql = 'SELECT COUNT(id) as bugcount, reporter_id, resolution, severity'
 		. ' FROM {bug} WHERE ' . $t_specific_where;
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND {bug}.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
@@ -1249,7 +1249,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 		'status_resolved' => (int)$t_resolved
 		) );
 	if( !empty( $p_filter ) ) {
-		$t_subquery = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+		$t_subquery = filter_cache_subquery( $p_filter );
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
