@@ -856,11 +856,12 @@ function print_doc_menu( $p_page = '' ) {
 }
 
 /**
- * Print the menu for the summary section
+ * Print the menu for the summary section.
  * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @param array $p_filter Filter array, the one in use for summary pages.
  * @return void
  */
-function print_summary_menu( $p_page = '' ) {
+function print_summary_menu( $p_page = '', array $p_filter = null ) {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
 	$t_menu_options = array();
@@ -880,10 +881,12 @@ function print_summary_menu( $p_page = '' ) {
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
+	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : null;
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
+		$t_link = $t_filter_param ? helper_url_combine( $t_page['url'], $t_filter_param ) : $t_page['url'];
 		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo '<a href="'. helper_mantis_url( $t_link ) .'">' . "\n";
 		echo lang_get( $t_page['label'] );
 		echo '</a>' . "\n";
 		echo '</li>' . "\n";
