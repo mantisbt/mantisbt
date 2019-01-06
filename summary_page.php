@@ -75,7 +75,7 @@ layout_page_header( lang_get( 'summary_link' ) );
 
 layout_page_begin( __FILE__ );
 
-print_summary_menu( 'summary_page.php' );
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 ?>
 
