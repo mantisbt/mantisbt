@@ -59,6 +59,8 @@ $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_isset_temporary		= gpc_isset( 'temporary' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
+$f_isset_new_key		= gpc_isset( 'new' );
+$f_force_new_key		= gpc_get_bool( 'new' );
 $f_project_id			= gpc_get_int( 'set_project_id', -1 );
 
 # flags to redirect after changing the filter
@@ -86,6 +88,11 @@ if( $f_isset_temporary ) {
 	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
+if( $f_isset_new_key ) {
+	# use type 2 wich keeps current filter values
+	$f_type = FILTER_ACTION_PARSE_ADD;
+}
+
 if( $f_type == -1 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
@@ -95,12 +102,13 @@ if( ( $f_type == FILTER_ACTION_LOAD ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = FILTER_ACTION_RESET;
 }
 
-$t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
-
 # If user can't use persistent filters, force the creation of a temporary filter
 if( !filter_user_can_use_persistent( auth_get_current_user_id() ) ) {
 	$t_temp_filter = true;
 }
+
+$t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
+$t_force_new_key = $t_temp_filter && $f_force_new_key;
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
@@ -126,7 +134,6 @@ switch( $f_type ) {
 	case FILTER_ACTION_PARSE_ADD:
 		log_event( LOG_FILTERING, 'view_all_set.php: Parse incremental filter values' );
 		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-
 		break;
 
 	# Fetch a stored filter from database
@@ -199,9 +206,13 @@ if( $f_print ) {
 if( $t_temp_filter ) {
 	# keeping the $t_previous_temporary_key, and using it to save back the filter
 	# The key inside the filter array may have been deleted as part of some actions
-	# Note, if we reset the key here, a new filter will be created after each action.
+	# Note, if we reset the key here, a new filter will be created after each filter change.
 	# This adds a lot of orphaned filters to session store, but would allow consistency
 	# through browser back button, for example.
+	if( $t_force_new_key ) {
+		$t_previous_temporary_key = null;
+		unset( $t_setting_arr['_temporary_key'] );
+	}
 	$t_temporary_key = filter_temporary_set( $t_setting_arr, $t_previous_temporary_key );
 	$t_redirect_url = $t_redirect_url . '?' . filter_get_temporary_key_param( $t_temporary_key );
 }
