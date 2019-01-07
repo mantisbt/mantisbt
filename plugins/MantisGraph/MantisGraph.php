@@ -147,16 +147,18 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function summary_submenu() {
+		$t_filter = summary_get_filter();
+		$t_filter_param = filter_get_temporary_key_param( $t_filter );
 		return array(
-            '<a class="btn btn-sm btn-primary btn-white" href="' . helper_mantis_url( 'summary_page.php' ) . '"> <i class="fa fa-table"></i> ' . plugin_lang_get( 'synthesis_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'developer_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_developer' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'reporter_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_reporter' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'status_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'status_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'resolution_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'resolution_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'priority_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'priority_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'severity_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'severity_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'category_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'category_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'issues_trend_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'issue_trends_link' ) . '</a>',
+            '<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ) . '"> <i class="fa fa-table"></i> ' . plugin_lang_get( 'synthesis_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'developer_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_developer' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'reporter_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_reporter' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'status_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'status_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'resolution_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'resolution_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'priority_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'priority_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'severity_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'severity_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'category_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'category_link' ) . '</a>',
+			'<a class="btn btn-sm btn-primary btn-white" href="' . helper_url_combine( plugin_page( 'issues_trend_graph.php' ), $t_filter_param ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'issue_trends_link' ) . '</a>',
 		);
 	}
 }

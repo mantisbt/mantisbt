@@ -226,17 +226,18 @@ function graph_cumulative_bydate( array $p_metrics ) {
 }
 
 /**
- * summarize metrics by a single ENUM field in the bug table
+ * Summarize metrics by a single ENUM field in the bug table.
  *
  * @param string $p_enum_string Enumeration string.
  * @param string $p_enum        Enumeration field.
  * @param array  $p_exclude_codes Array of codes to exclude from the enum.
+ * @param array  $p_filter      Filter array.
  * @return array
  */
-function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array() ) {
+function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
-	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_metrics = array();
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
@@ -245,12 +246,20 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
 	}
 
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT COUNT(*) FROM {bug} WHERE ' . $p_enum . ' = :enum_value AND ' . $t_specific_where;
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_query->sql( $t_sql );
 	foreach ( $t_assoc_array as $t_value => $t_label ) {
-		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE ' . $p_enum . '=' . db_param() . ' ' . $t_specific_where;
-		$t_result = db_query( $t_query, array( $t_value ) );
-
 		if ( !in_array( $t_value, $p_exclude_codes ) ) {
-			$t_metrics[$t_label] = db_result( $t_result, 0 );
+			$t_query->bind( 'enum_value', $t_value );
+			$t_query->execute();
+			$t_result = $t_query->value();
+			$t_metrics[$t_label] = $t_result;
 		}
 	}
 
@@ -259,10 +268,10 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 
 /**
  * Calculate distribution of issues by statuses excluding closed status.
- *
+ * @param array $p_filter Filter array.
  * @return array An array with keys being status names and values being number of issues with such status.
  */
-function create_bug_status_summary() {
+function create_bug_status_summary( array $p_filter = null ) {
 	$t_status_enum = config_get( 'status_enum_string' );
 	$t_statuses = MantisEnum::getValues( $t_status_enum );
 	$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
@@ -274,27 +283,39 @@ function create_bug_status_summary() {
 		}
 	}
 
-	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses );
+	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses, $p_filter );
 }
 
 /**
  * Create summary for issues resolved by a developer
+ * @param array $p_filter Filter array.
  * @return array with key being username and value being # of issues fixed.
  */
-function create_developer_resolved_summary() {
+function create_developer_resolved_summary( array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND handler_id <> ' .
-		db_param() . ' AND status >= ' . db_param() . ' AND resolution = ' . db_param() .
-		' GROUP BY handler_id ORDER BY count DESC';
-	$t_result = db_query( $t_query, array( NO_USER, $t_resolved_status_threshold, FIXED ), 20 );
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+		. ' AND handler_id <> :nouser AND status >= :status_resolved AND resolution = :resolution_fixed';
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+	$t_query->sql( $t_sql );
+	$t_query->bind( array(
+		'nouser' => NO_USER,
+		'status_resolved' => (int)$t_resolved_status_threshold,
+		'resolution_fixed' => FIXED
+		) );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	while( $t_row = $t_query->fetch() ) {
 		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
@@ -316,21 +337,33 @@ function create_developer_resolved_summary() {
 
 /**
  * Create summary for issues opened by a developer
+ * @param array $p_filter Filter array.
  * @return array with key being username and value being # of issues fixed.
  */
-function create_developer_open_summary() {
+function create_developer_open_summary( array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND handler_id <> ' .
-		db_param() . ' AND status < ' . db_param() . ' GROUP BY handler_id ORDER BY count DESC';
-	$t_result = db_query( $t_query, array( NO_USER, $t_resolved_status_threshold ) );
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+		. ' AND handler_id <> :nouser AND status < :status_resolved';
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
+	$t_query->sql( $t_sql );
+	$t_query->bind( array(
+		'nouser' => NO_USER,
+		'status_resolved' => (int)$t_resolved_status_threshold
+		) );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	while( $t_row = $t_query->fetch() ) {
 		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
@@ -352,20 +385,29 @@ function create_developer_open_summary() {
 
 /**
  * Create summary table of reporters
+ * @param array $p_filter Filter array.
  * @return array
  */
-function create_reporter_summary() {
+function create_reporter_summary( array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where . ' AND resolution = ' .
-		db_param() . ' GROUP BY reporter_id ORDER BY count DESC';
-	$t_result = db_query( $t_query, array( FIXED ), 20 );
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT reporter_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
+		. ' AND resolution = :resolution_fixed';
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' GROUP BY reporter_id ORDER BY count DESC';
+	$t_query->sql( $t_sql );
+	$t_query->bind( 'resolution_fixed', FIXED );
 
 	$t_reporter_arr = array();
 	$t_reporters = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	while( $t_row = $t_query->fetch() ) {
 		$t_reporter_arr[$t_row['reporter_id']] = $t_row['count'];
 		$t_reporters[] = $t_row['reporter_id'];
 	}
@@ -387,30 +429,41 @@ function create_reporter_summary() {
 
 /**
  * Create summary table of categories
+ * @param array $p_filter Filter array.
  * @return array
  */
-function create_category_summary() {
+function create_category_summary( array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = 'SELECT id, name FROM {category}
-				WHERE ' . $t_specific_where . ' OR project_id=' . ALL_PROJECTS . '
-				ORDER BY name';
-	$t_result = db_query( $t_query );
-	$t_category_count = db_num_rows( $t_result );
+	$t_query_cat = new DBQuery();
+	$t_sql = 'SELECT id, name FROM {category} WHERE ' . $t_specific_where
+			. ' OR project_id = :all_projects';
+	$t_query_cat->sql( $t_sql );
+	$t_query_cat->bind( 'all_projects', ALL_PROJECTS );
 
 	$t_metrics = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	$t_query_cnt = new DBQuery();
+	$t_query_cnt->sql( 'SELECT COUNT(*) FROM {bug} WHERE category_id = :cat_id AND ' . $t_specific_where );
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_query_cnt->append_sql( ' AND {bug}.id IN :filter' );
+		$t_query_cnt->bind( 'filter', $t_subquery );
+	}
+
+	while( $t_row = $t_query_cat->fetch() ) {
 		$t_cat_name = $t_row['name'];
 		$t_cat_id = $t_row['id'];
-		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE category_id=' . db_param() . ' AND ' . $t_specific_where;
-		$t_result2 = db_query( $t_query, array( $t_cat_id ) );
+		$t_query_cnt->bind( 'cat_id', (int)$t_cat_id );
+		$t_query_cnt->execute();
+		$t_bugcount = $t_query_cnt->value();
+
 		if( isset($t_metrics[$t_cat_name]) ) {
-			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $t_result2, 0, 0 );
+			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + $t_bugcount;
 		} else {
-			if( db_result( $t_result2, 0, 0 ) > 0 ) {
-			    $t_metrics[$t_cat_name] = db_result( $t_result2, 0, 0 );
+			if( $t_bugcount > 0 ) {
+			    $t_metrics[$t_cat_name] = $t_bugcount;
 			}
 		}
 	}
@@ -420,9 +473,10 @@ function create_category_summary() {
 
 /**
  * Create cumulative graph by date
+ * @param array $p_filter Filter array.
  * @return array | null
  */
-function create_cumulative_bydate() {
+function create_cumulative_bydate( array $p_filter = null ) {
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 
@@ -430,11 +484,25 @@ function create_cumulative_bydate() {
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	# Get all the submitted dates
-	$t_query = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
-	$t_result = db_query( $t_query );
+	# For this metric to make sense, we need to remove the filter properties related to status
+	if( $p_filter ) {
+		$p_filter[FILTER_PROPERTY_STATUS] = array( META_FILTER_ANY );
+		$p_filter[FILTER_PROPERTY_HIDE_STATUS] = array( META_FILTER_NONE );
+	}
 
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	# Get all the submitted dates
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where;
+	if( $p_filter ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' ORDER BY date_submitted';
+	$t_query->sql( $t_sql );
+
+	$t_calc_metrics = array();
+	while( $t_row = $t_query->fetch() ) {
 		# rationalise the timestamp to a day to reduce the amount of data
 		$t_date = $t_row['date_submitted'];
 		$t_date = (int)( $t_date / SECONDS_PER_DAY );
@@ -448,23 +516,30 @@ function create_cumulative_bydate() {
 
 	# ## Get all the dates where a transition from not resolved to resolved may have happened
 	#    also, get the last updated date for the bug as this may be all the information we have
-	$t_query = 'SELECT {bug}.id, last_updated, date_modified, new_value, old_value
-			FROM {bug} LEFT JOIN {bug_history}
-			ON {bug}.id = {bug_history}.bug_id
-			WHERE ' . $t_specific_where . '
-						AND {bug}.status >= ' . db_param() . '
-						AND ( ( {bug_history}.new_value >= ' . db_param() . '
-								AND {bug_history}.old_value < ' . db_param() . '
-								AND {bug_history}.field_name = \'status\' )
-						OR {bug_history}.id is NULL )
-			ORDER BY {bug}.id, date_modified ASC';
-	$t_result = db_query( $t_query, array( $t_res_val, (string)$t_res_val, (string)$t_res_val ) );
-	$t_bug_count = db_num_rows( $t_result );
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT {bug}.id, last_updated, date_modified, new_value, old_value'
+		. ' FROM {bug} LEFT JOIN {bug_history} ON {bug}.id = {bug_history}.bug_id'
+		. ' WHERE ' . $t_specific_where
+		. ' AND {bug}.status >= :int_resolved'
+		. ' AND ( ( {bug_history}.new_value >= :str_resolved AND {bug_history}.old_value < :str_resolved AND {bug_history}.field_name = :field_name )'
+		. ' OR {bug_history}.id is NULL )';
+	if( $p_filter ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' ORDER BY {bug}.id, date_modified ASC';
+	$t_query->sql( $t_sql );
+	$t_query->bind( array(
+		'int_resolved' => (int)$t_res_val,
+		'str_resolved' => (string)$t_res_val,
+		'field_name' => 'status'
+		) );
 
 	$t_last_id = 0;
 	$t_last_date = 0;
 
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	while( $t_row = $t_query->fetch() ) {
 		$t_id = $t_row['id'];
 
 		# if h_last_updated is NULL, there were no appropriate history records

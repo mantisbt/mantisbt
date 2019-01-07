@@ -29,7 +29,8 @@ layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
+$t_filter = summary_get_filter();
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 ?>
 
@@ -50,7 +51,7 @@ print_summary_submenu();
                 </h4>
             </div>
 <?php
-			$t_metrics = create_cumulative_bydate();
+			$t_metrics = create_cumulative_bydate( $t_filter );
 			if ( $t_metrics != null ) {
 				graph_cumulative_bydate( $t_metrics );
 			}
