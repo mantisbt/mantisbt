@@ -899,6 +899,8 @@ function print_summary_menu( $p_page = '', array $p_filter = null ) {
 	}
 
 	echo '</ul>' . "\n";
+
+	summary_print_filter_info( $p_filter );
 }
 
 /**
