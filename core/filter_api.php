@@ -2671,7 +2671,7 @@ function filter_draw_selection_area() {
 						<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 							<?php # CSRF protection not required here - form does not result in modifications?>
 							<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
-							<label><?php echo lang_get( 'load_filter' ) ?>
+							<label><?php echo lang_get( 'load' ) ?>
 								<select class="input-s" name="source_query_id">
 									<option value="-1"></option>
 									<?php
