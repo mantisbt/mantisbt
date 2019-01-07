@@ -515,8 +515,8 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 
 	# check special limits
 	# limit reporters means users can view just issues they reported (Issue #4769))
-	# limit handlers means users can view just they are handlers
-	# when any or both limits apply, any of the two positives allows access.
+	# limit handlers means users can only view issues assigned to them
+	# Access is allowed if any of the two criteria is met.
 	$t_limit_reporter = access_has_limited_view_for_reporter( $t_project_id, $p_user_id );
 	$t_limit_handler = access_has_limited_view_for_handler( $t_project_id, $p_user_id );
 
