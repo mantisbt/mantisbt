@@ -738,6 +738,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_user_ids );
 
 	$t_users_count = count( $t_sort );
+	user_cache_array_rows( $t_user_ids );
 	$t_removable_users_exist = false;
 
 	# If including global users, fetch here all local user to later distinguish them
