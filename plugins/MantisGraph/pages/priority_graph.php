@@ -29,11 +29,12 @@ layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
+$t_filter = summary_get_filter();
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
 $t_series_name = lang_get( 'bugs' );
-$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority' );
+$t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority', array(), $t_filter );
 ?>
 
 <div class="col-md-12 col-xs-12">

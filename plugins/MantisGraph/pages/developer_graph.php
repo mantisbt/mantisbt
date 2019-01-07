@@ -29,7 +29,8 @@ layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
+$t_filter = summary_get_filter();
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
 $t_series_name = lang_get( 'bugs' );
@@ -54,7 +55,7 @@ $t_series_name = lang_get( 'bugs' );
             </div>
 
 <?php
-            $t_metrics = create_developer_resolved_summary();
+            $t_metrics = create_developer_resolved_summary( $t_filter );
             graph_bar( $t_metrics, lang_get( 'by_developer' ), $t_series_name );
 ?>
         </div>
@@ -68,7 +69,7 @@ $t_series_name = lang_get( 'bugs' );
             </div>
 
 <?php
-            $t_metrics = create_developer_open_summary();
+            $t_metrics = create_developer_open_summary( $t_filter );
             graph_bar( $t_metrics, lang_get( 'by_developer' ), $t_series_name );
 ?>
         </div>
