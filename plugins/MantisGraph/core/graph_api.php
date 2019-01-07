@@ -269,15 +269,24 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
  * @return array An array with keys being status names and values being number of issues with such status.
  */
 function create_bug_status_summary( array $p_filter = null ) {
-	$t_status_enum = config_get( 'status_enum_string' );
-	$t_statuses = MantisEnum::getValues( $t_status_enum );
-	$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
+	# When the provided filter is temporary, it's a filter that was explicitly applied to summary pages.
+	# Otherwise, it's a filter created by default by summary api.
+	# In that case, or if no filter has been provided, keep legacy behaviour where we exclude
+	# closed status in this graph
+	if( null === $p_filter || !filter_is_temporary( $p_filter ) ) {
+		$t_status_enum = config_get( 'status_enum_string' );
+		$t_statuses = MantisEnum::getValues( $t_status_enum );
+		$t_closed_threshold = config_get( 'bug_closed_status_threshold' );
 
-	$t_closed_statuses = array();
-	foreach( $t_statuses as $t_status_code ) {
-		if ( $t_status_code >= $t_closed_threshold ) {
-			$t_closed_statuses[] = $t_status_code;
+		$t_closed_statuses = array();
+		foreach( $t_statuses as $t_status_code ) {
+			if ( $t_status_code >= $t_closed_threshold ) {
+				$t_closed_statuses[] = $t_status_code;
+			}
 		}
+	} else {
+	# when explicitly using a filter, do not exclude any status, to match the expected filter results
+		$t_closed_statuses = array();
 	}
 
 	return create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status', $t_closed_statuses, $p_filter );
