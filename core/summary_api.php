@@ -1343,3 +1343,38 @@ function summary_get_filter() {
 	}
 	return $t_filter;
 }
+
+/**
+ * Print filter related information for summary page.
+ * If a filter has been applied, display a notice, bug count, link to view issues.
+ * @param array $p_filter Filter array.
+ * @return void
+ */
+function summary_print_filter_info( array $p_filter = null ) {
+	if( null === $p_filter ) {
+		return;
+	}
+	# If filter is temporary, then it has been provided explicitly.
+	# When no filter is specified for summary page, we receive a defaulted filter
+	# which don't have any specific id.
+	if( !filter_is_temporary( $p_filter ) ) {
+		return;
+	}
+	$t_filter_query = filter_cache_subquery( $p_filter );
+	$t_bug_count = $t_filter_query->get_bug_count();
+	$t_view_issues_link = helper_url_combine( 'view_all_bug_page.php', filter_get_temporary_key_param( $p_filter ) );
+	?>
+	<div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
+		<p>
+			<span class="alert-warning">
+			<?php
+			echo '<a href="' , $t_view_issues_link , '" title="' , lang_get( 'view_bugs_link' ) , '">';
+			echo lang_get( 'summary_notice_filter_is_applied' ) , '&nbsp;' , '( ' , $t_bug_count , ' ' , lang_get( 'bugs' ) , ' )';
+			echo '</a>';
+			?>
+			</span>
+		</p>
+	</div>
+	<?php
+}
