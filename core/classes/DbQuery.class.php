@@ -293,6 +293,7 @@ class DbQuery {
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			$this->db_result = false;
 		}
+		$this->current_row = null;
 		return $this->db_result;
 	}
 
