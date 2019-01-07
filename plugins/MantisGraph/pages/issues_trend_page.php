@@ -29,14 +29,6 @@
  * @uses plugin_api.php
  */
 
-require_once( 'core.php' );
-plugin_require_api( 'core/Period.php' );
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'html_api.php' );
-require_api( 'plugin_api.php' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );

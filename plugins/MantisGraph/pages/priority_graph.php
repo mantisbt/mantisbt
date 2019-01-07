@@ -23,10 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( 'core.php' );
-
-plugin_require_api( 'core/graph_api.php' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
