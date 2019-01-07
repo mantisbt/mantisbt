@@ -18,8 +18,6 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
-require_once( __DIR__ . '/core/graph_api.php' );
-
 /**
  * Mantis Graph plugin
  */
@@ -42,6 +40,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
 		$this->url = 'http://www.mantisbt.org';
+	}
+
+	/**
+	 * Plugin initialization
+	 * @return void
+	 */
+	function init() {
+		plugin_require_api( 'core/graph_api.php' );
+		plugin_require_api( 'core/Period.php' );
+		require_api( 'summary_api.php' );
 	}
 
 	/**
@@ -127,10 +135,10 @@ class MantisGraphPlugin extends MantisPlugin  {
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
 			} else {
-				echo '<script src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
 			}
-			echo '<script src="' . plugin_file("MantisGraph.js") . '"></script>';
+			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
 	}
 
