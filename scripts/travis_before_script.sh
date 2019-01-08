@@ -96,7 +96,7 @@ then
 else
 	myphp=php
 fi
-$myphp -S $HOSTNAME:$PORT &
+$myphp -S $HOSTNAME:$PORT >& /dev/null &
 
 # needed to allow web server to create config_inc.php
 chmod 777 config
