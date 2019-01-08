@@ -55,7 +55,7 @@ $t_series_name = lang_get( 'bugs' );
             </div>
 <?php
             $t_metrics = create_reporter_summary( $t_filter );
-            graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name );
+            graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name, null, 2 /*wfactor*/ );
 ?>
         </div>
     </div>
