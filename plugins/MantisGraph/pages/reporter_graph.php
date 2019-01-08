@@ -46,7 +46,7 @@ $t_series_name = lang_get( 'bugs' );
 			</h4>
 		</div>
 
-        <div class="col-md-6 col-xs-12" style="padding: 20px;">
+        <div class="col-md-12 col-xs-12" style="padding: 20px;">
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart"></i>
