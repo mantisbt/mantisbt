@@ -87,8 +87,7 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
 function summary_helper_get_developer_label( $p_user_id, array $p_filter = null ) {
 	$t_user = string_display_line( user_get_name( $p_user_id ) );
 
-	$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 	return '<a class="subtle" href="' . $t_link_prefix
 		. '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $p_user_id
@@ -195,8 +194,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 	if( ' 1<>1' == $t_project_filter ) {
 		return;
 	}
-	$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 	$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';
 	$t_query = new DBQuery();
@@ -464,8 +462,7 @@ function summary_print_by_developer( array $p_filter = null ) {
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
-		$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-		$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_label;
 		$t_label = summary_helper_get_developer_label( $t_label, $p_filter );
@@ -553,8 +550,7 @@ function summary_print_by_reporter( array $p_filter = null ) {
 		if( 0 < $t_bugs_total ) {
 			$t_user = string_display_line( user_get_name( $v_reporter_id ) );
 
-			$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-			$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+			$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 			$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $v_reporter_id;
 			if( 0 < $t_bugs_open ) {
@@ -629,8 +625,7 @@ function summary_print_by_category( array $p_filter = null ) {
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
-		$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-		$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . urlencode( $t_label );
 		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
@@ -777,8 +772,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string, array $p
 	$t_threshold_fixed = config_get( 'bug_resolution_fixed_threshold' );
 	$t_threshold_notfixed = config_get( 'bug_resolution_not_fixed_threshold' );
 
-	$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 	$t_row_count = 0;
 
@@ -912,8 +906,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 	$t_threshold_fixed = config_get( 'bug_resolution_fixed_threshold' );
 	$t_threshold_notfixed = config_get( 'bug_resolution_not_fixed_threshold' );
 
-	$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 	$t_row_count = 0;
 
@@ -1411,10 +1404,10 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 	foreach( $t_date_array as $t_ix => $t_days ) {
 		$t_new_count = $t_open_count_array[$t_ix];
 		$t_resolved_count = $t_resolved_count_array[$t_ix];
-
 		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
-		$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-		$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+
+		$t_link_prefix = summary_get_link_prefix( $p_filter );
+
 		$t_new_bugs_link = $t_link_prefix
 				. '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED . '=' . ON
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
@@ -1448,4 +1441,11 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 		echo '    <td class="align-right' . $t_style . '">' . $t_balance . "</td>\n";
 		echo '</tr>' . "\n";
 	}
+}
+
+function summary_get_link_prefix( array $p_filter = null ) {
+	$t_filter_action = filter_is_temporary( $p_filter ) ? FILTER_ACTION_PARSE_ADD : FILTER_ACTION_PARSE_NEW;
+	$t_link_prefix = 'view_all_set.php?type=' . $t_filter_action . '&temporary=y&new=1';
+	$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+	return $t_link_prefix;
 }
