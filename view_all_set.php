@@ -88,8 +88,8 @@ if( $f_isset_temporary ) {
 	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
-if( $f_isset_new_key ) {
-	# use type 2 wich keeps current filter values
+if( $f_type == -1 && $f_isset_new_key ) {
+	# use an action that keeps current filter values
 	$f_type = FILTER_ACTION_PARSE_ADD;
 }
 
