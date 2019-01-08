@@ -131,10 +131,19 @@ function graph_status_colors_to_colors() {
  * @param string  $p_title        Title.
  * @param string  $p_series_name  The name of the data series.
  * @param string  $p_color        The bar color.
+ * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
  * @return void
  */
-function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = '#fcbdbd' ) {
+function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = null, $p_wfactor = null ) {
 	static $s_id = 0;
+
+	# set defaults
+	if( !$p_color ) {
+		$p_color = '#fcbdbd';
+	}
+	if( !$p_wfactor ) {
+		$p_wfactor = 1;
+	}
 
 	$s_id++;
 	$t_labels = array_keys( $p_metrics );
@@ -143,8 +152,11 @@ function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = 
 	$t_values = array_values( $p_metrics );
 	$t_js_values = graph_numeric_array( $t_values );
 
+	$t_width = 500 * $p_wfactor;
+	$t_height = 400;
+
 ?>
-	<canvas id="barchart<?php echo $s_id ?>" width="500" height="400"
+	<canvas id="barchart<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
 		data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
 		data-values="[<?php echo $t_js_values ?>]" />
 <?php
@@ -184,10 +196,16 @@ function graph_pie( array $p_metrics, $p_title = '' ) {
  * Cumulative line graph
  *
  * @param array   $p_metrics      Graph Data.
+ * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
  * @return void
  */
-function graph_cumulative_bydate( array $p_metrics ) {
+function graph_cumulative_bydate( array $p_metrics, $p_wfactor = null ) {
 	static $s_id = 0;
+
+	# set defaults
+	if( !$p_wfactor ) {
+		$p_wfactor = 1;
+	}
 
 	$s_id++;
 
@@ -212,8 +230,10 @@ function graph_cumulative_bydate( array $p_metrics ) {
 	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
 	$t_legend_still_open = plugin_lang_get( 'legend_still_open' );
 
+	$t_width = 500 * $p_wfactor;
+	$t_height = 400;
 ?>
-	<canvas id="linebydate<?php echo $s_id ?>" width="500" height="400"
+	<canvas id="linebydate<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
 			data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
 			data-opened-label="<?php echo $t_legend_opened ?>"
 			data-opened-values="[<?php echo $t_opened_values ?>]"
