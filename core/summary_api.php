@@ -298,137 +298,6 @@ function summary_print_by_enum( $p_enum, array $p_filter = null ) {
 }
 
 /**
- * prints the bugs submitted in the last X days (default is 1 day) for the current project.
- * A filter can be used to limit the visibility.
- *
- * @param integer $p_num_days A number of days.
- * @param array $p_filter Filter array.
- * @return integer
- */
-function summary_new_bug_count_by_date( $p_num_days = 1, array $p_filter = null ) {
-	$c_time_length = (int)$p_num_days * SECONDS_PER_DAY;
-
-	$t_project_id = helper_get_current_project();
-
-	$t_specific_where = helper_project_specific_where( $t_project_id );
-	if( ' 1<>1' == $t_specific_where ) {
-		return 0;
-	}
-
-	$t_query = new DBQuery();
-	$t_sql = 'SELECT COUNT(*) FROM {bug}'
-		. ' WHERE ' . db_helper_compare_time( ':now', '<=', 'date_submitted', $c_time_length )
-		. ' AND ' . $t_specific_where;
-	$t_query->bind( 'now', db_now() );
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND {bug}.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
-	}
-	$t_query->sql( $t_sql );
-
-	return $t_query->value();
-}
-
-/**
- * Returns the number of bugs resolved in the last X days (default is 1 day) for the current project.
- * A filter can be used to limit the visibility.
- *
- * @param integer $p_num_days Anumber of days.
- * @param array $p_filter Filter array.
- * @return integer
- */
-function summary_resolved_bug_count_by_date( $p_num_days = 1, array $p_filter = null ) {
-	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-
-	$c_time_length = (int)$p_num_days * SECONDS_PER_DAY;
-
-	$t_project_id = helper_get_current_project();
-
-	$t_specific_where = helper_project_specific_where( $t_project_id );
-	if( ' 1<>1' == $t_specific_where ) {
-		return 0;
-	}
-	$t_query = new DBQuery();
-	$t_sql = 'SELECT COUNT( DISTINCT b.id )'
-		. '	FROM {bug} b LEFT JOIN {bug_history} h'
-		. ' ON b.id = h.bug_id AND h.type = :hist_type AND h.field_name = :hist_field'
-		. ' WHERE b.status >= :status_resolved'
-		. ' AND h.old_value < :status_resolved'
-		. ' AND h.new_value >= :status_resolved'
-		. ' AND ' . db_helper_compare_time( ':now', '<=', 'date_modified', $c_time_length )
-		. ' AND ' . $t_specific_where;
-	$t_query->bind( array (
-		'hist_type' => NORMAL_TYPE,
-		'hist_field' => 'status',
-		'status_resolved' => (int)$t_resolved,
-		'now' => db_now()
-		) );
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND b.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
-	}
-	$t_query->sql( $t_sql );
-
-	return $t_query->value();
-}
-
-/**
- * This function shows the number of bugs submitted in the last X days.
- * A filter can be used to limit the visibility.
- *
- * @param array $p_date_array An array of integers representing days is passed in.
- * @param array $p_filter Filter array.
- * @return void
- */
-function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
-	foreach( $p_date_array as $t_days ) {
-		$t_new_count = summary_new_bug_count_by_date( $t_days, $p_filter );
-		$t_resolved_count = summary_resolved_bug_count_by_date( $t_days, $p_filter );
-
-		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
-
-		$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
-		$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
-
-		$t_new_bugs_link = $t_link_prefix
-				. '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED . '=' . ON
-				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
-				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH . '=' . date( 'm', $t_start_date )
-				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_DAY . '=' . date( 'd', $t_start_date )
-				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
-
-		echo '<tr>' . "\n";
-		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
-
-		if( $t_new_count > 0 ) {
-			echo '    <td class="align-right"><a class="subtle" href="' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
-		} else {
-			echo '    <td class="align-right">' . $t_new_count . '</td>' . "\n";
-		}
-		echo '    <td class="align-right">' . $t_resolved_count . '</td>' . "\n";
-
-		$t_balance = $t_new_count - $t_resolved_count;
-		$t_style = '';
-		if( $t_balance > 0 ) {
-
-			# we are talking about bugs: a balance > 0 is "negative" for the project...
-			$t_style = ' red';
-			$t_balance = sprintf( '%+d', $t_balance );
-
-			# "+" modifier added in PHP >= 4.3.0
-		} else if( $t_balance < 0 ) {
-			$t_style = ' green';
-			$t_balance = sprintf( '%+d', $t_balance );
-		}
-
-		echo '    <td class="align-right' . $t_style . '">' . $t_balance . "</td>\n";
-		echo '</tr>' . "\n";
-	}
-}
-
-/**
  * Print list of open bugs with the highest activity score the score is calculated assigning
  * one "point" for each history event associated with the bug.
  * A filter can be used to limit the visibility.
@@ -1377,4 +1246,206 @@ function summary_print_filter_info( array $p_filter = null ) {
 		</p>
 	</div>
 	<?php
+}
+
+/**
+ * Calculate the number the number of "resolve" issues actions in the last X days.
+ * This includes each and succesive resolution transitions.
+ * A filter can be used to limit the visibility.
+ *
+ * @param array $p_date_array An array of integers representing days is passed in.
+ * @param array $p_filter Filter array.
+ * @return array	Accumulated count for each day range
+ */
+function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filter = null ) {
+	$t_project_id = helper_get_current_project();
+	$t_specific_where = helper_project_specific_where( $t_project_id );
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+	$t_date_array = array_values( $p_date_array );
+	sort( $t_date_array );
+	$t_query = new DBQuery();
+
+	$t_prev_days = 0;
+	$t_now = db_now();
+	$t_sql_ranges = 'CASE';
+	foreach( $t_date_array as $t_ix => $t_days ) {
+		$c_days = (int)$t_days;
+		$t_range_start = $t_now - $c_days * SECONDS_PER_DAY + 1;
+		$t_range_end = $t_now - $t_prev_days * SECONDS_PER_DAY;
+		$t_sql_ranges .= ' WHEN h.date_modified'
+				. ' BETWEEN ' . $t_query->param( $t_range_start )
+				. ' AND ' . $t_query->param( $t_range_end )
+				. ' THEN ' . $t_ix;
+		$t_prev_days = $c_days;
+	}
+	$t_sql_ranges .= ' ELSE -1 END';
+
+	$t_sql = 'SELECT ' . $t_sql_ranges . ' AS date_range, COUNT( b.id ) AS range_count'
+		. '	FROM {bug} b LEFT JOIN {bug_history} h'
+		. ' ON b.id = h.bug_id AND h.type = :hist_type AND h.field_name = :hist_field'
+		. ' WHERE b.status >= :int_st_resolved'
+		. ' AND h.old_value < :int_st_resolved'
+		. ' AND h.new_value >= :int_st_resolved'
+		. ' AND h.date_modified > :mint_ime'
+		. ' AND ' . $t_specific_where;
+	$t_query->bind( array (
+		'hist_type' => NORMAL_TYPE,
+		'hist_field' => 'status',
+		'int_st_resolved' => (int)$t_resolved,
+		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
+		) );
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND b.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' GROUP BY date_range';
+	$t_query->sql( $t_sql );
+
+	$t_count_array = array();
+	foreach( $t_date_array as $t_ix => $t_value ) {
+		$t_count_array[$t_ix] = 0;
+	}
+	# count is accumulated
+	$t_count = 0;
+	while( $t_row = $t_query->fetch() ) {
+		$t_index = $t_row['date_range'];
+		if( $t_index >= 0 ) {
+			$t_count += $t_row['range_count'];
+			$t_count_array[$t_index] = $t_count;
+		}
+	}
+	return $t_count_array;
+}
+
+/**
+ * Calculate the number the number of "open" issues actions in the last X days.
+ * This includes each issue submission, and it's succesive reopen transitions.
+ * A filter can be used to limit the visibility.
+ *
+ * @param array $p_date_array An array of integers representing days is passed in.
+ * @param array $p_filter Filter array.
+ * @return array	Accumulated count for each day range
+ */
+function summary_by_dates_open_bug_count( array $p_date_array, array $p_filter = null ) {
+	$t_project_id = helper_get_current_project();
+	$t_specific_where = helper_project_specific_where( $t_project_id );
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+	$t_date_array = array_values( $p_date_array );
+	sort( $t_date_array );
+	$t_query = new DBQuery();
+
+	$t_prev_days = 0;
+	$t_now = db_now();
+	$t_sql_ranges = 'CASE';
+	foreach( $t_date_array as $t_ix => $t_days ) {
+		$c_days = (int)$t_days;
+		$t_range_start = $t_now - $c_days * SECONDS_PER_DAY + 1;
+		$t_range_end = $t_now - $t_prev_days * SECONDS_PER_DAY;
+		$t_sql_ranges .= ' WHEN h.date_modified'
+				. ' BETWEEN ' . $t_query->param( $t_range_start )
+				. ' AND ' . $t_query->param( $t_range_end )
+				. ' THEN ' . $t_ix;
+		$t_prev_days = $c_days;
+	}
+	$t_sql_ranges .= ' ELSE -1 END';
+
+	$t_sql = 'SELECT ' . $t_sql_ranges . ' AS date_range, COUNT( b.id ) AS range_count'
+		. '	FROM {bug} b LEFT JOIN {bug_history} h ON b.id = h.bug_id '
+		. ' WHERE ( h.type = :type_new'
+		. ' OR h.type = :type_st AND h.field_name = :field_st'
+		. ' AND h.old_value >= :int_st_resolved AND h.new_value < :int_st_resolved'
+		. ' ) AND h.date_modified > :mint_ime'
+		. ' AND ' . $t_specific_where;
+	$t_query->bind( array (
+		'type_new' => NEW_BUG,
+		'type_st' => NORMAL_TYPE,
+		'field_st' => 'status',
+		'int_st_resolved' => (int)$t_resolved,
+		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
+		) );
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' AND b.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
+	}
+	$t_sql .= ' GROUP BY date_range';
+	$t_query->sql( $t_sql );
+
+	$t_count_array = array();
+	foreach( $t_date_array as $t_ix => $t_value ) {
+		$t_count_array[$t_ix] = 0;
+	}
+	# count is accumulated
+	$t_count = 0;
+	while( $t_row = $t_query->fetch() ) {
+		$t_index = $t_row['date_range'];
+		if( $t_index >= 0 ) {
+			$t_count += $t_row['range_count'];
+			$t_count_array[$t_index] = $t_count;
+		}
+	}
+	return $t_count_array;
+}
+
+/**
+ * This function shows the number of "open" and "resolve" issues actions in the
+ * last X days. This includes each issue submission, and it's succesive resolve
+ * and reopen transitions.
+ * A filter can be used to limit the visibility.
+ *
+ * @param array $p_date_array An array of integers representing days is passed in.
+ * @param array $p_filter Filter array.
+ * @return void
+ */
+function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
+	# clean and sort dates array
+	$t_date_array = array_values( $p_date_array );
+	sort( $t_date_array );
+
+	$t_open_count_array = summary_by_dates_open_bug_count( $t_date_array, $p_filter );
+	$t_resolved_count_array = summary_by_dates_resolved_bug_count( $t_date_array, $p_filter );
+
+	foreach( $t_date_array as $t_ix => $t_days ) {
+		$t_new_count = $t_open_count_array[$t_ix];
+		$t_resolved_count = $t_resolved_count_array[$t_ix];
+
+		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
+		$t_link_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . '&temporary=y&new=1';
+		$t_link_prefix = helper_url_combine( $t_link_prefix, filter_get_temporary_key_param( $p_filter ) );
+		$t_new_bugs_link = $t_link_prefix
+				. '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED . '=' . ON
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH . '=' . date( 'm', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_DAY . '=' . date( 'd', $t_start_date )
+				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+		echo '<tr>' . "\n";
+		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
+
+		if( $t_new_count > 0 ) {
+			echo '    <td class="align-right"><a class="subtle" href="' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
+		} else {
+			echo '    <td class="align-right">' . $t_new_count . '</td>' . "\n";
+		}
+		echo '    <td class="align-right">' . $t_resolved_count . '</td>' . "\n";
+
+		$t_balance = $t_new_count - $t_resolved_count;
+		$t_style = '';
+		if( $t_balance > 0 ) {
+
+			# we are talking about bugs: a balance > 0 is "negative" for the project...
+			$t_style = ' red';
+			$t_balance = sprintf( '%+d', $t_balance );
+
+			# "+" modifier added in PHP >= 4.3.0
+		} else if( $t_balance < 0 ) {
+			$t_style = ' green';
+			$t_balance = sprintf( '%+d', $t_balance );
+		}
+
+		echo '    <td class="align-right' . $t_style . '">' . $t_balance . "</td>\n";
+		echo '</tr>' . "\n";
+	}
 }
