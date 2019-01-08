@@ -94,7 +94,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 		echo "\t",
 			'<link rel="search" type="application/opensearchdescription+xml" ',
 				'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
-				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
+				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, false ) .
 				'"/>',
 			"\n";
 	}

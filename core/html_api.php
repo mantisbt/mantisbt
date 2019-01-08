@@ -245,7 +245,7 @@ function html_css_link( $p_filename ) {
 	if( $p_filename == basename( $p_filename ) ) {
 		$p_filename = 'css/' . $p_filename;
 	}
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), true ), '" />', "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), false ), '" />', "\n";
 }
 
 /**
