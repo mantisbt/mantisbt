@@ -514,7 +514,10 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 		$t_def = custom_field_get_definition( $t_field_id );
 		$t_value = string_custom_field_value( $t_def, $t_field_id, $p_issue_id );
 
-		if ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC && is_numeric( $t_value ) ) {
+		if( ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC ||
+			  $t_def['type'] == CUSTOM_FIELD_TYPE_FLOAT
+			) && is_numeric( $t_value )
+		) {
 			return excel_prepare_number( $t_value );
 		}
 
