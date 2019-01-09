@@ -1297,7 +1297,8 @@ function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filt
 	}
 	$t_sql_ranges .= ' ELSE -1 END';
 
-	$t_sql = 'SELECT ' . $t_sql_ranges . ' AS date_range, COUNT( b.id ) AS range_count'
+	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
+		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
 		. '	FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id AND h.type = :hist_type AND h.field_name = :hist_field'
 		. ' WHERE b.status >= :int_st_resolved'
@@ -1316,7 +1317,7 @@ function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filt
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY date_range';
+	$t_sql .= ' ) subquery GROUP BY date_range';
 	$t_query->sql( $t_sql );
 
 	$t_count_array = array();
@@ -1368,7 +1369,8 @@ function summary_by_dates_open_bug_count( array $p_date_array, array $p_filter =
 	}
 	$t_sql_ranges .= ' ELSE -1 END';
 
-	$t_sql = 'SELECT ' . $t_sql_ranges . ' AS date_range, COUNT( b.id ) AS range_count'
+	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
+		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
 		. '	FROM {bug} b LEFT JOIN {bug_history} h ON b.id = h.bug_id '
 		. ' WHERE ( h.type = :type_new'
 		. ' OR h.type = :type_st AND h.field_name = :field_st'
@@ -1387,7 +1389,7 @@ function summary_by_dates_open_bug_count( array $p_date_array, array $p_filter =
 		$t_sql .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' GROUP BY date_range';
+	$t_sql .= ' ) subquery GROUP BY date_range';
 	$t_query->sql( $t_sql );
 
 	$t_count_array = array();
