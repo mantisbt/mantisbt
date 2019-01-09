@@ -533,7 +533,8 @@ function summary_print_by_reporter( array $p_filter = null ) {
 				'open' => 0,
 				'resolved' => 0,
 				'closed' => 0,
-				'total' => 0
+				'total' => 0,
+				'reporter_id' => $t_reporter_id
 				);
 		}
 		$t_bugcount = (int)$t_row['bugcount'];
@@ -558,11 +559,17 @@ function summary_print_by_reporter( array $p_filter = null ) {
 				);
 	}
 
+	# sort based on total issue count
+	# note that after array_multisort, we lose the numeric indexes, but we stored
+	# the reporter id inside each sub-array
+	array_multisort ( array_column( $t_reporter_stats, 'total' ), SORT_DESC, $t_reporter_stats );
+
 	# print results
-	foreach( $t_reporter_stats as $t_reporter_id => $t_stats ) {
+	foreach( $t_reporter_stats as $t_stats ) {
 		if( $t_stats['total'] == 0 ) {
 			continue;
 		}
+		$t_reporter_id = $t_stats['reporter_id'];
 		$t_user = string_display_line( user_get_name( $t_reporter_id ) );
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
