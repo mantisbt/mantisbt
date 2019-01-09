@@ -1299,7 +1299,7 @@ function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filt
 
 	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
 		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
-		. '	FROM {bug} b LEFT JOIN {bug_history} h'
+		. ' FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id AND h.type = :hist_type AND h.field_name = :hist_field'
 		. ' WHERE b.status >= :int_st_resolved'
 		. ' AND h.old_value < :int_st_resolved'
@@ -1371,7 +1371,7 @@ function summary_by_dates_open_bug_count( array $p_date_array, array $p_filter =
 
 	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
 		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
-		. '	FROM {bug} b LEFT JOIN {bug_history} h ON b.id = h.bug_id '
+		. ' FROM {bug} b LEFT JOIN {bug_history} h ON b.id = h.bug_id '
 		. ' WHERE ( h.type = :type_new'
 		. ' OR h.type = :type_st AND h.field_name = :field_st'
 		. ' AND h.old_value >= :int_st_resolved AND h.new_value < :int_st_resolved'
