@@ -464,9 +464,16 @@ function gpc_make_array( $p_var_name ) {
  * @return boolean
  */
 function gpc_string_to_bool( $p_string ) {
-	if( 0 == strcasecmp( 'off', $p_string ) || 0 == strcasecmp( 'no', $p_string ) || 0 == strcasecmp( 'false', $p_string ) || 0 == strcasecmp( '', $p_string ) || 0 == strcasecmp( '0', $p_string ) ) {
-		return false;
-	} else {
-		return true;
+	$t_value = trim( strtolower( $p_string ) );
+	switch ( $t_value ) {
+		case 'off':
+		case 'no':
+		case 'n':
+		case 'false':
+		case '0':
+		case '':
+			return false;
+		default:
+			return true;
 	}
 }

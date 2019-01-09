@@ -147,11 +147,19 @@
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .input-xs {
+.widget-toolbar > .widget-menu a.btn-xs {
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.widget-toolbar > .widget-menu form {
+    display: inline-block;
+}
+.widget-toolbar > .widget-menu .input-xs {
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .btn-xs {
+.widget-toolbar > .widget-menu .btn-xs {
     padding: 2px 5px;
 }
 
@@ -512,6 +520,10 @@ input.typeahead.scrollable ~ .tt-menu {
 	margin: 0 1px 0 0;
 }
 
+.fa-xs-top {
+	font-size: 60%;
+	vertical-align: top;
+}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

@@ -58,31 +58,44 @@ auth_ensure_user_authenticated();
 $f_type					= gpc_get_int( 'type', -1 );
 $f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 $f_print				= gpc_get_bool( 'print' );
+$f_isset_temporary		= gpc_isset( 'temporary' );
 $f_make_temporary		= gpc_get_bool( 'temporary' );
+$f_project_id			= gpc_get_int( 'set_project_id', -1 );
 
-if( $f_make_temporary && $f_type < 0 ) {
-	$f_type = 1;
+
+# Get the filter in use
+$t_setting_arr = current_user_get_bug_filter();
+
+# If there is an explicit "temporary" parameter true/false, will force the new filter
+# to be termporary (true) or persistent (false), according to its value.
+# If the parameter is not present, the filter will be kept the same as original.
+if( $f_isset_temporary ) {
+	# when only changing the temporary status of a filter and no action is specified
+	# we assume not to reset current filter
+	if( $f_type == -1 ) {
+		# use type 2 wich keeps current filter values
+		$f_type = FILTER_ACTION_PARSE_ADD;
+	}
+	$t_temp_filter = $f_make_temporary;
+} else {
+	$t_temp_filter = filter_is_temporary( $t_setting_arr );
 }
 
-if( $f_type < 0 ) {
+if( $f_type == -1 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
 # -1 is a special case stored query: it means we want to reset our filter
-if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
-	$f_type = 0;
+if( ( $f_type == FILTER_ACTION_LOAD ) && ( $f_source_query_id == -1 ) ) {
+	$f_type = FILTER_ACTION_RESET;
 }
 
-# Get the filter in use
-$t_setting_arr = current_user_get_bug_filter();
-$t_temp_filter = $f_make_temporary || filter_is_temporary( $t_setting_arr );
 $t_previous_temporary_key = filter_get_temporary_key( $t_setting_arr );
 
-# If user is anonymous, force the creation of a temporary filter
-if( current_user_is_anonymous() ) {
+# If user can't use persistent filters, force the creation of a temporary filter
+if( !filter_user_can_use_persistent( auth_get_current_user_id() ) ) {
 	$t_temp_filter = true;
 }
-
 
 # Clear the source query id.  Since we have entered new filter criteria.
 if( isset( $t_setting_arr['_source_query_id'] ) ) {
@@ -90,38 +103,44 @@ if( isset( $t_setting_arr['_source_query_id'] ) ) {
 }
 
 switch( $f_type ) {
-	# New cookie
-	case '0':
-		log_event( LOG_FILTERING, 'view_all_set.php: New cookie' );
+	# Apply a new empty filter
+	case FILTER_ACTION_RESET:
+		log_event( LOG_FILTERING, 'view_all_set.php: New filter' );
 		$t_setting_arr = array();
 		break;
-	# Update filters. (filter_gpc_get reads a new set of parameters)
-	case '1':
+
+	# Read new filter parameters. (filter_gpc_get reads a new set of parameters)
+	# Parameter that are not submitted, will be reset to defaults.
+	case FILTER_ACTION_PARSE_NEW:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse a new filter' );
 		$t_setting_arr = filter_gpc_get();
 		break;
-	# Set the sort order and direction (filter_gpc_get is called over current filter)
-	case '2':
-		log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
+
+	# Read and update filter parameters (filter_gpc_get is called over current filter)
+	# Parameter that are not submitted, will not be modified
+	case FILTER_ACTION_PARSE_ADD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Parse incremental filter values' );
 		$t_setting_arr = filter_gpc_get( $t_setting_arr );
 
 		break;
-	# This is when we want to copy another query from the
-	# database over the top of our current one
-	case '3':
-		log_event( LOG_FILTERING, 'view_all_set.php: Copy another query from database' );
+
+	# Fetch a stored filter from database
+	case FILTER_ACTION_LOAD:
+		log_event( LOG_FILTERING, 'view_all_set.php: Load stored filter' );
 
 		$t_setting_arr = filter_get( $f_source_query_id, null );
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
-			error_proceed_url( 'view_all_set.php?type=0' );
+			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
 			exit;
 		} else {
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		}
 		break;
-	case '4':
-		# Generalise the filter
+
+	# Generalise the filter
+	case FILTER_ACTION_GENERALIZE:
 		log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
 		$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
@@ -145,19 +164,8 @@ switch( $f_type ) {
 			}
 		}
 		$t_setting_arr['custom_fields'] = $t_custom_fields_data;
+		break;
 
-		break;
-	case '5':
-		# Just set the search string value (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-		break;
-	case '6':
-		# Just set the view_state (simple / advanced) value. (filter_gpc_get is called over current filter)
-		log_event( LOG_FILTERING, 'view_all_set.php: View state (simple/advanced)' );
-		$t_setting_arr = filter_gpc_get( $t_setting_arr );
-
-		break;
 	default:
 		# does nothing. catch all case
 		log_event( LOG_FILTERING, 'view_all_set.php: default - do nothing' );
@@ -168,8 +176,10 @@ $t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 # If only using a temporary filter, don't store it in the database
 if( !$t_temp_filter ) {
-	# Store the filter string in the database: its the current filter, so some values won't change
-	filter_set_project_filter( $t_setting_arr );
+	# get project if it was specified
+	$t_project_id = ( $f_project_id >= 0 ) ? $f_project_id : null;
+	# Store the filter in the database as the current filter for the project
+	filter_set_project_filter( $t_setting_arr, $t_project_id );
 }
 
 # redirect to print_all or view_all page

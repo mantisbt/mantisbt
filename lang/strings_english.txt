@@ -1259,6 +1259,8 @@ $s_manage_filter_page_title = 'Manage Filters';
 $s_manage_filter_edit_page_title = 'Edit filter';
 $s_delete_filter_button = 'Delete';
 $s_apply_filter_button = 'Apply';
+$s_temporary_filter = 'Temporary filter';
+$s_set_as_persistent_filter = 'Set as persistent filter';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
@@ -1773,3 +1775,9 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
+
+# Generic actions, short names
+$s_save = 'Save';
+$s_reset = 'Reset';
+$s_persist = 'Persist';
+$s_load = 'Load';

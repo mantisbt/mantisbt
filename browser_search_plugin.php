@@ -48,7 +48,7 @@ $t_description = sprintf( lang_get( "opensearch_{$f_type}_description" ), $t_tit
 if( $f_type == 'id' ) {
 	$t_url = $t_path . 'view.php?id={searchTerms}';
 } else {
-	$t_url = $t_path . 'view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
+	$t_url = $t_path . 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&amp;temporary=y&amp;handler_id=[all]&amp;search={searchTerms}';
 }
 
 header( 'Content-Type: application/opensearchdescription+xml' );

@@ -113,7 +113,7 @@ function print_version_header( array $p_version_row ) {
 	}
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+	echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
 		 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
 		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 	echo lang_get( 'view_bugs_link' );
@@ -145,7 +145,7 @@ function print_version_footer( $p_version_row, $p_issues_resolved, $p_issues_pla
 		echo '<div class="widget-toolbox padding-8 clearfix">';
 		echo sprintf( lang_get( 'resolved_progress' ), $p_issues_resolved, $p_issues_planned, $p_progress );
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
-		echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
+		echo 'href="view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id .
 			 '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) .
 			 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 		echo lang_get( 'view_bugs_link' );
