@@ -7,7 +7,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-adodb           | adodb           | 5.20.9    | unpatched [1]
+adodb           | adodb           | 5.20.14   | unpatched [1]
 disposable      | disposable      | 2.1.1     | unpatched [1]
 ezc             | Zeta Components |           |
 ezc/Base        | Zeta Base       | 1.9       | unpatched [1]
