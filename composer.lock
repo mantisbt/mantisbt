@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.13",
+            "version": "v5.20.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "1141326db4b5092cee95841a1c056f876b9b4c83"
+                "reference": "a32113c6b3e4e2cb8ae6b49752527d5668a9d7a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/1141326db4b5092cee95841a1c056f876b9b4c83",
-                "reference": "1141326db4b5092cee95841a1c056f876b9b4c83",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/a32113c6b3e4e2cb8ae6b49752527d5668a9d7a6",
+                "reference": "a32113c6b3e4e2cb8ae6b49752527d5668a9d7a6",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "library",
                 "php"
             ],
-            "time": "2018-08-06T16:04:33+00:00"
+            "time": "2019-01-05T23:16:44+00:00"
         },
         {
             "name": "container-interop/container-interop",
