@@ -410,6 +410,7 @@ get_section_end();
 get_section_begin_mcwt( lang_get( 'others' ) );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), 'view_changelog_threshold' );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'roadmap_link' ), 'roadmap_view_threshold' );
+get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'summary_link' ), 'view_summary_threshold' );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'assigned_to' ), 'view_handler_threshold' );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'bug_history' ), 'view_history_threshold' );
 get_capability_row( lang_get( 'send_reminders' ), 'bug_reminder_threshold' );
