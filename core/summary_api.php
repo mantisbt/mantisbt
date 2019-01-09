@@ -1405,15 +1405,25 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 		$t_new_count = $t_open_count_array[$t_ix];
 		$t_resolved_count = $t_resolved_count_array[$t_ix];
 		$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $t_days ), date( 'Y' ) );
+		$t_end_date = mktime( 0, 0, 0 ) + SECONDS_PER_DAY;
 
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
+		# if we come from a filter, don't clear status properties
+		if( !filter_is_temporary( $p_filter ) ) {
+			$t_status_prop = '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE;
+		} else {
+			$t_status_prop = '';
+		}
 		$t_new_bugs_link = $t_link_prefix
 				. '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED . '=' . ON
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR . '=' . date( 'Y', $t_start_date )
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH . '=' . date( 'm', $t_start_date )
 				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_START_DAY . '=' . date( 'd', $t_start_date )
-				. '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR . '=' . date( 'Y', $t_end_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH . '=' . date( 'm', $t_end_date )
+				. '&amp;' . FILTER_PROPERTY_DATE_SUBMITTED_END_DAY . '=' . date( 'd', $t_end_date )
+				. $t_status_prop . '">';
 		echo '<tr>' . "\n";
 		echo '    <td class="width50">' . $t_days . '</td>' . "\n";
 
