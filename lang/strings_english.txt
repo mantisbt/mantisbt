@@ -1259,6 +1259,7 @@ $s_manage_filter_page_title = 'Manage Filters';
 $s_manage_filter_edit_page_title = 'Edit filter';
 $s_delete_filter_button = 'Delete';
 $s_apply_filter_button = 'Apply';
+$s_reset_current_filter_for_project = 'Reset current filter for project view';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
