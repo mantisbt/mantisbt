@@ -1126,8 +1126,10 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	$t_query = new DBQuery();
 	$t_sql = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status'
 		. ' FROM {bug} b LEFT JOIN {bug_history} h'
-		. ' ON b.id = h.bug_id  AND h.type = :hist_type AND h.field_name = :hist_field AND h.new_value = :status_resolved'
-		. ' WHERE b.status >= :status_resolved AND ' . $t_specific_where;
+		. ' ON b.id = h.bug_id  AND h.type = :hist_type AND h.field_name = :hist_field'
+		. ' WHERE b.status >= :status_resolved'
+		. ' AND h.new_value >= :status_resolved AND h.old_value < :status_resolved'
+		. ' AND ' . $t_specific_where;
 	$t_query->bind( array(
 		'hist_type' => 0,
 		'hist_field' => 'status',
