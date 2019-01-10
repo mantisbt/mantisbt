@@ -509,6 +509,9 @@ function summary_print_by_reporter( array $p_filter = null ) {
 		}
 	}
 
+	if( empty( $t_reporters ) ) {
+		return;
+	}
 	user_cache_array_rows( $t_reporters );
 
 	$t_query = new DBQuery();
