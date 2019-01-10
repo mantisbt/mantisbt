@@ -264,20 +264,22 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 	}
 
 	$t_query = new DBQuery();
-	$t_sql = 'SELECT COUNT(*) FROM {bug} WHERE ' . $p_enum . ' = :enum_value AND ' . $t_specific_where;
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND {bug}.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
+	$t_sql = 'SELECT ' . $p_enum . ' AS enum, COUNT(*) AS bugcount FROM {bug}'
+			. ' WHERE ' . $p_enum . ' IN :enum_values'
+			. ' AND ' . $t_specific_where
+			. ( $p_filter ? ' AND {bug}.id IN :filter' : '' )
+			. ' GROUP BY ' . $p_enum . ' ORDER BY ' . $p_enum;
+	$t_query->bind( 'enum_values', array_keys( $t_assoc_array ) );
+	if( $p_filter ) {
+		$t_query->bind( 'filter', filter_cache_subquery( $p_filter ) );
 	}
 	$t_query->sql( $t_sql );
-	foreach ( $t_assoc_array as $t_value => $t_label ) {
-		if ( !in_array( $t_value, $p_exclude_codes ) ) {
-			$t_query->bind( 'enum_value', $t_value );
-			$t_query->execute();
-			$t_result = $t_query->value();
-			$t_metrics[$t_label] = $t_result;
-		}
+
+	while( $t_row = $t_query->fetch() ) {
+		$t_enum_key = (int)$t_row['enum'];
+		$t_bugcount = (int)$t_row['bugcount'];
+		$t_label = $t_assoc_array[$t_enum_key];
+		$t_metrics[$t_label] = $t_bugcount;
 	}
 
 	return $t_metrics;
