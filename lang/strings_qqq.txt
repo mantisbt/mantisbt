@@ -504,3 +504,6 @@ $s_timeline_issue_assigned_to_self = 'Parameters:
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Access denied}}';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Should "in MantisBT" be appended?';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
+$s_save = '{{Identical|Save}}';
+$s_reset = '{{Identical|Reset}}';
+$s_load = '{{Identical|Load}}';
