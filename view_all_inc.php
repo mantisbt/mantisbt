@@ -152,7 +152,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 </div>
 
 <div class="widget-main no-padding">
-	<div class="table-responsive">
+	<div class="table-responsive checkbox-range-selection">
 	<table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
 	<thead>
 <?php # -- Bug list column header row -- ?>

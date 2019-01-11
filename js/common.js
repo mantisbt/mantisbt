@@ -175,6 +175,43 @@ $(document).ready( function() {
 		});
 	}
 
+	/**
+	 * Enable range selection for checkboxes, inside a container having class "checkbox-range-selection"
+	 * Assumes the bootstrap/ace styled checkboxes:
+	 *	<div class="checkbox">
+	 *		<label>
+	 *			<input type="checkbox" class="ace">
+	 *			<span class="lbl"></span>
+	 *		</label>
+	 *	</div>
+	 */
+	$('.checkbox-range-selection').on('click', 'div.checkbox label', function (e) {
+		var jcontainer = $(this).closest('.checkbox-range-selection');
+		var last_clicked = jcontainer.data('checkbox-range-last-clicked');
+		if (!last_clicked) {
+			last_clicked = this;
+		}
+		if (e.shiftKey) {
+			// Because shift-click is triggered in a label/span, some browsers
+			// will activate a text selection. Remove text selection.
+			window.getSelection().removeAllRanges();
+			var cb_label_list = jcontainer.find("div.checkbox label");
+			var start = cb_label_list.index(this);
+			var end = cb_label_list.index(last_clicked);
+			var index_start = Math.min(start, end);
+			var index_end = Math.max(start, end);
+			// The actual input hasn't been changed yet, so we want to set the
+			// opposite value for all the checkboxes
+			var clicked_current_st = $(this).find('input:checkbox').first().prop('checked');
+			// The currently clicked one is also modified, becasue shift-click is not
+			// recognised correctly by the framework. See #25215
+			for (i = index_start ; i <= index_end ; i++) {
+				$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+			}
+		}
+		jcontainer.data('checkbox-range-last-clicked', this);
+	});
+
 	var stopwatch = {
 		timerID: 0,
 		startTime: null,
