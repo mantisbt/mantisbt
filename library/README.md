@@ -9,7 +9,7 @@ The version and status of each is summarized below:
 
 directory       | project         | version   | status
 ----------------|-----------------|-----------|---------------
-rssbuilder      | RSSBuilder      | 2.2.1     | patched [1]
+rssbuilder      | RSSBuilder      | 2.2.1     | patched [1][2]
 
 
 ## Javascript/CSS libraries
@@ -31,7 +31,7 @@ list.js                           | 1.4.1     | unpatched
 **Notes**
 
 1. removed `__autoload` function
-
+2. fixed SYSTEM NOTICE 'Only variables should be passed by reference'
 
 Upstream projects
 -----------------
