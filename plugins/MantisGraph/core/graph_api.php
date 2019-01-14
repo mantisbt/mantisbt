@@ -125,22 +125,12 @@ function graph_status_colors_to_colors() {
  * Generate Bar Graph
  *
  * @param array   $p_metrics      Graph Data.
- * @param string  $p_title        Title.
  * @param string  $p_series_name  The name of the data series.
- * @param string  $p_color        The bar color.
  * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
  * @return void
  */
-function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = null, $p_wfactor = null ) {
+function graph_bar( array $p_metrics, $p_series_name, $p_wfactor = 1 ) {
 	static $s_id = 0;
-
-	# set defaults
-	if( !$p_color ) {
-		$p_color = '#fcbdbd';
-	}
-	if( !$p_wfactor ) {
-		$p_wfactor = 1;
-	}
 
 	$s_id++;
 	$t_labels = array_keys( $p_metrics );
@@ -163,10 +153,9 @@ function graph_bar( array $p_metrics, $p_title = '', $p_series_name, $p_color = 
  * Function that displays pie charts
  *
  * @param array         $p_metrics       Graph Data.
- * @param string        $p_title         Title.
  * @return void
  */
-function graph_pie( array $p_metrics, $p_title = '' ) {
+function graph_pie( array $p_metrics ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -196,13 +185,8 @@ function graph_pie( array $p_metrics, $p_title = '' ) {
  * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
  * @return void
  */
-function graph_cumulative_bydate( array $p_metrics, $p_wfactor = null ) {
+function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	static $s_id = 0;
-
-	# set defaults
-	if( !$p_wfactor ) {
-		$p_wfactor = 1;
-	}
 
 	$s_id++;
 
