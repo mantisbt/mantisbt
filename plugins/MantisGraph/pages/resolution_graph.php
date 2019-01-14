@@ -49,11 +49,11 @@ $t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'res
 </div>
 
 <div class="col-md-6 col-xs-12">
-	<?php graph_bar( $t_metrics, lang_get( 'by_resolution' ), $t_series_name ); ?>
+	<?php graph_bar( $t_metrics, $t_series_name ); ?>
 </div>
 
 <div class="col-md-6 col-xs-12">
-	<?php graph_pie( $t_metrics, plugin_lang_get( 'by_resolution_pct' ) ); ?>
+	<?php graph_pie( $t_metrics ); ?>
 </div>
 </div>
 </div>

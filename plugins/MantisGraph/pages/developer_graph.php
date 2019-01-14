@@ -56,7 +56,7 @@ $t_series_name = lang_get( 'bugs' );
 
 <?php
             $t_metrics = create_developer_resolved_summary( $t_filter );
-            graph_bar( $t_metrics, lang_get( 'by_developer' ), $t_series_name );
+            graph_bar( $t_metrics, $t_series_name );
 ?>
         </div>
 
@@ -70,7 +70,7 @@ $t_series_name = lang_get( 'bugs' );
 
 <?php
             $t_metrics = create_developer_open_summary( $t_filter );
-            graph_bar( $t_metrics, lang_get( 'by_developer' ), $t_series_name );
+            graph_bar( $t_metrics, $t_series_name );
 ?>
         </div>
     </div>
