@@ -382,3 +382,5 @@ $s_month_september = 'ستمبر';
 $s_month_october = 'اکتوبر';
 $s_month_november = 'نومبر';
 $s_month_december = 'دسمبر';
+$s_save = 'بچاؤ';
+$s_reset = 'ولدا ٹھیک کرو';
