@@ -1397,3 +1397,6 @@ $s_dropzone_cancel_upload_confirmation = 'Er du sikker på, at du ønsker at ann
 $s_dropzone_remove_file = 'Fjern fil';
 $s_dropzone_max_files_exceeded = 'Du kan ikke overføre flere filer.';
 $s_dropzone_not_supported = 'Dropzone.js understøtter ikke ældre browsere!';
+$s_save = 'Gem';
+$s_reset = 'Nulstil';
+$s_load = 'Indlæs';

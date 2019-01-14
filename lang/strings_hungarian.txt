@@ -44,6 +44,7 @@
  * @author Glanthor Reviol
  * @author Leiric
  * @author MeskoBalazs
+ * @author Misibacsi
  * @author R-Joe
  * @author Sucy
  * @author Tacsipacsi
@@ -223,7 +224,7 @@ $s_eta_enum_string = '10:semmi,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,6
 $s_sponsorship_enum_string = '0:Nem fizetett,1:Felkért,2:Fizetett';
 $s_new_account_subject = 'Regisztráció';
 $s_new_account_greeting = 'Köszönjük regisztrációját. Felhasználóneve: „%1$s”. A regisztráció befejezéséhez látogassa meg a következő címet (győződjön meg róla, hogy egy sorban írta be), és állítsa be saját jelszavát:';
-$s_new_account_greeting_admincreated = '%1$s felhasználó létrehozta a felhasználói fiókját, „%2$s” felhasználónévvel. A regisztráció befejezéséhez látogassa meg a következő címet (győződjön meg róla, hogy egy sorban írta be), és állítsa be saját jelszavát:';
+$s_new_account_greeting_admincreated = '%1$s felhasználó létrehozta a felhasználói fiókodat „%2$s” felhasználónévvel. A regisztráció befejezéséhez látogasd meg a következő címet (győződj meg róla, hogy egy sorban van írva), és állítsd be a saját jelszavadat:';
 $s_new_account_username = 'Felhasználónév:';
 $s_new_account_message = 'Ha nem kért regisztrációt, hagyja figyelmen kívül ezt az üzenetet, és semmi sem történik.';
 $s_new_account_do_not_reply = 'Ne válaszoljon erre a levélre';
