@@ -32,8 +32,6 @@ layout_page_begin( 'summary_page.php' );
 $t_filter = summary_get_filter();
 print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
-
-$t_series_name = lang_get( 'bugs' );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -55,7 +53,7 @@ $t_series_name = lang_get( 'bugs' );
             </div>
 <?php
             $t_metrics = create_reporter_summary( $t_filter );
-            graph_bar( $t_metrics, $t_series_name, 2 /*wfactor*/ );
+            graph_bar( $t_metrics, 2 /*wfactor*/ );
 ?>
         </div>
     </div>

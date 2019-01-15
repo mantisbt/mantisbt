@@ -125,11 +125,10 @@ function graph_status_colors_to_colors() {
  * Generate Bar Graph
  *
  * @param array   $p_metrics      Graph Data.
- * @param string  $p_series_name  The name of the data series.
  * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
  * @return void
  */
-function graph_bar( array $p_metrics, $p_series_name, $p_wfactor = 1 ) {
+function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
 	static $s_id = 0;
 
 	$s_id++;
