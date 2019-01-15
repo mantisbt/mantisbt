@@ -31,7 +31,6 @@ $t_filter = summary_get_filter();
 print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
-$t_series_name = lang_get( 'bugs' );
 $t_metrics = create_bug_status_summary( $t_filter );
 ?>
 
@@ -47,7 +46,7 @@ $t_metrics = create_bug_status_summary( $t_filter );
             </div>
 
             <div class="col-md-6 col-xs-12">
-            <?php graph_bar( $t_metrics, $t_series_name ); ?>
+            <?php graph_bar( $t_metrics ); ?>
             </div>
 
             <div class="col-md-6 col-xs-12">
