@@ -25,44 +25,6 @@
  */
 
 /**
- * Converts an array of php strings into an array of javascript strings without [].
- * @param array $p_strings The array of strings
- * @return string The js code for the array without [], e.g. "a", "b", "c"
- */
-function graph_strings_array( array $p_strings ) {
-	$t_js_labels = '';
-
-	foreach ( $p_strings as $t_label ) {
-		if ( $t_js_labels !== '' ) {
-			$t_js_labels .= ', ';
-		}
-
-		$t_js_labels .= '"' . $t_label . '"';
-	}
-
-	return $t_js_labels;
-}
-
-/**
- * Converts an array of php numbers into an array of javascript numbers without [].
- * @param  array $p_values The array of values.
- * @return string The js code for the array without [], e.g. 1, 2, 3.
- */
-function graph_numeric_array( array $p_values ) {
-	$t_js_values = '';
-
-	foreach( $p_values as $t_value ) {
-		if ( $t_js_values !== '' ) {
-			$t_js_values .= ', ';
-		}
-
-		$t_js_values .= $t_value;
-	}
-
-	return $t_js_values;
-}
-
-/**
  * Converts an html color (e.g. #fcbdbd) to rgba.
  * @param string  $p_color The html color
  * @param float   $p_alpha    The value (e.g. 0.2)
@@ -132,19 +94,16 @@ function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
 	static $s_id = 0;
 
 	$s_id++;
-	$t_labels = array_keys( $p_metrics );
-	$t_js_labels = graph_strings_array( $t_labels );
-
-	$t_values = array_values( $p_metrics );
-	$t_js_values = graph_numeric_array( $t_values );
+	$t_json_labels = json_encode( array_keys( $p_metrics ) );
+	$t_json_values = json_encode( array_values( $p_metrics ) );
 
 	$t_width = 500 * $p_wfactor;
 	$t_height = 400;
 
 ?>
 	<canvas id="barchart<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
-		data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
-		data-values="[<?php echo $t_js_values ?>]" />
+		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
+		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>" />
 <?php
 }
 
@@ -159,19 +118,16 @@ function graph_pie( array $p_metrics ) {
 
 	$s_id++;
 
-	$t_labels = array_keys( $p_metrics );
-	$t_js_labels = graph_strings_array( $t_labels );
-
-	$t_values = array_values( $p_metrics );
-	$t_js_values = graph_numeric_array( $t_values );
+	$t_json_labels = json_encode( array_keys( $p_metrics ) );
+	$t_json_values = json_encode( array_values( $p_metrics ) );
 
 	$t_colors = graph_status_colors_to_colors();
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 1.0 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 ?>
 	<canvas id="piechart<?php echo $s_id ?>" width="500" height="400"
-		data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
-		data-values="[<?php echo $t_js_values ?>]"
+		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
+		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>"
 		data-background-colors="[<?php echo htmlspecialchars( $t_background_colors, ENT_QUOTES ) ?>]"
 		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]" />
 <?php
@@ -191,16 +147,16 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 
 	$t_labels = array_keys( $p_metrics[0] );
 	$t_formatted_labels = array_map( function($label) { return date( 'Ymd', $label ); }, $t_labels );
-	$t_js_labels = graph_strings_array( $t_formatted_labels );
+	$t_json_labels = json_encode( $t_formatted_labels );
 
 	$t_values = array_values( $p_metrics[0] );
-	$t_opened_values = graph_numeric_array( $t_values );
+	$t_opened_values = json_encode( $t_values );
 
 	$t_values = array_values( $p_metrics[1] );
-	$t_resolved_values = graph_numeric_array( $t_values );
+	$t_resolved_values = json_encode( $t_values );
 
 	$t_values = array_values( $p_metrics[2] );
-	$t_still_open_values = graph_numeric_array( $t_values );
+	$t_still_open_values = json_encode( $t_values );
 
 	$t_colors = graph_status_colors_to_colors();
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
@@ -214,13 +170,13 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_height = 400;
 ?>
 	<canvas id="linebydate<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
-			data-labels="[<?php echo htmlspecialchars( $t_js_labels, ENT_QUOTES ) ?>]"
+			data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
 			data-opened-label="<?php echo $t_legend_opened ?>"
-			data-opened-values="[<?php echo $t_opened_values ?>]"
+			data-opened-values="<?php echo htmlspecialchars( $t_opened_values, ENT_QUOTES ) ?>"
 			data-resolved-label="<?php echo $t_legend_resolved ?>"
-			data-resolved-values="[<?php echo $t_resolved_values ?>]"
+			data-resolved-values="<?php echo htmlspecialchars( $t_resolved_values, ENT_QUOTES ) ?>"
 			data-still-open-label="<?php echo $t_legend_still_open ?>"
-			data-still-open-values="[<?php echo $t_still_open_values ?>]" />
+			data-still-open-values="<?php echo htmlspecialchars( $t_still_open_values, ENT_QUOTES ) ?>" />
 <?php
 
 }
