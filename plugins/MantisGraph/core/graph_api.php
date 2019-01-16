@@ -283,7 +283,7 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 	$t_handler_array = array();
 	$t_handler_ids = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
+		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
@@ -331,7 +331,7 @@ function create_developer_open_summary( array $p_filter = null ) {
 	$t_handler_array = array();
 	$t_handler_ids = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_handler_array[$t_row['handler_id']] = $t_row['count'];
+		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
 		$t_handler_ids[] = $t_row['handler_id'];
 	}
 
@@ -384,7 +384,7 @@ function create_reporter_summary( array $p_filter = null, $p_limit = null ) {
 	$t_reporter_arr = array();
 	$t_reporters = array();
 	while( $t_row = $t_query->fetch() ) {
-		$t_reporter_arr[$t_row['reporter_id']] = $t_row['count'];
+		$t_reporter_arr[$t_row['reporter_id']] = (int)$t_row['count'];
 		$t_reporters[] = $t_row['reporter_id'];
 	}
 
@@ -433,7 +433,7 @@ function create_category_summary( array $p_filter = null ) {
 		$t_cat_id = $t_row['id'];
 		$t_query_cnt->bind( 'cat_id', (int)$t_cat_id );
 		$t_query_cnt->execute();
-		$t_bugcount = $t_query_cnt->value();
+		$t_bugcount = (int)$t_query_cnt->value();
 
 		if( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + $t_bugcount;
