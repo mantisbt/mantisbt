@@ -382,8 +382,9 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	# idea whether 'new' is indicating a new bug has been filed, or if the
 	# status of an existing bug has been changed to 'new'. Therefore it is best
 	# to just assume built-in actions have precedence over status changes.
+    $t_pref_field_has_severity=ON;
 	switch( $p_notify_type ) {
-		case 'new':
+        case 'new':
 		case 'feedback': # This isn't really a built-in action (delete me!)
 		case 'reopened':
 		case 'resolved':
@@ -391,6 +392,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'bugnote':
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			break;
+        case 'tag_attached':
+            $t_pref_field = 'email_on_' . $p_notify_type;
+            $t_pref_field_has_severity=OFF;
+            break;
 		case 'owner':
 			# The email_on_assigned notification type is now effectively
 			# email_on_change_of_handler.
@@ -440,9 +445,9 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		if( $t_pref_field ) {
 			$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 			if( OFF == $t_notify ) {
-				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field );
-				continue;
-			} else {
+                log_event(LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field);
+                continue;
+            } else if($t_pref_field_has_severity==ON) {
 				# Users can define the severity of an issue before they are emailed for
 				# each type of notification
 				$t_min_sev_pref_field = $t_pref_field . '_min_severity';
@@ -631,6 +636,27 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params );
 }
 
+// 1A Specific
+function email_generic_tag( $tag_name, $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
+    # @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+    # @todo yarick123:sort recipients list by language to reduce switches between different languages
+
+    $t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
+    # Check whether user is inContact-Deliverer and q tag name that should be emailed.
+    $t_user_ids = array_keys( $t_recipients );
+
+    # Eliminate the inContact_Deliverer user when fiiltered for non tag names not to be sent to inContact.
+    $t_recipients_filtered = array();
+    foreach ( $t_user_ids as $t_user_id ) {
+        if( user_get_username($t_user_id) != 'inContact_Deliverer' || ($tag_name == '1A CS Action Required' || $tag_name == 'AM CS Action Required'
+                || $tag_name == '1A More Info Needed' || $tag_name == 'AM More Info Needed')) {
+            $t_recipients_filtered[$t_user_id] = $t_recipients[$t_user_id];
+        }
+    }
+
+    email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients_filtered, $p_message_id, $p_header_optional_params );
+}
+
 /**
  * Sends a generic email to the specific set of recipients.
  *
@@ -687,6 +713,15 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
 	$t_opt[] = user_get_name( $p_user_id );
 
 	email_generic( $p_bug_id, 'monitor', 'email_notification_title_for_action_monitor', $t_opt, array( $p_user_id ) );
+}
+
+/**
+ * Send notifications for bug update.
+ * @param int $p_bug_id  The bug id.
+ */
+function email_tag_attached( $t_tag_name, $p_bug_id ) {
+    log_event( LOG_EMAIL, sprintf( 'Issue #%d has tag attached.', $p_bug_id ) );
+    email_generic_tag( $t_tag_name, $p_bug_id, 'tag_attached', '$s_email_notification_title_for_action_tag_attached' );
 }
 
 /**
@@ -2026,7 +2061,7 @@ function email_shutdown_function() {
  * @return array List of actions
  */
 function email_get_actions() {
-	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+    $t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation', 'tag_attached' );
 
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_actions[] = 'sponsor';

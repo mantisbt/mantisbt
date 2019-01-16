@@ -97,6 +97,7 @@ $t_prefs->email_on_closed	= gpc_get_bool( 'email_on_closed' );
 $t_prefs->email_on_reopened	= gpc_get_bool( 'email_on_reopened' );
 $t_prefs->email_on_bugnote	= gpc_get_bool( 'email_on_bugnote' );
 $t_prefs->email_on_status	= gpc_get_bool( 'email_on_status' );
+$t_prefs->email_on_tag_attached	= gpc_get_bool( 'email_on_tag_attached' );
 $t_prefs->email_on_priority	= gpc_get_bool( 'email_on_priority' );
 $t_prefs->email_on_new_min_severity			= gpc_get_int( 'email_on_new_min_severity' );
 $t_prefs->email_on_assigned_min_severity	= gpc_get_int( 'email_on_assigned_min_severity' );

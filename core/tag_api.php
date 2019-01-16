@@ -364,7 +364,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 
 	foreach( $t_tags_attach as $t_tag_row ) {
 		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
-			tag_bug_attach( $t_tag_row['id'], $p_bug_id );
+            tag_bug_attach( $t_tag_row['id'], $p_bug_id, null );
 		}
 	}
 
@@ -807,9 +807,11 @@ function tag_get_bugs_attached( $p_tag_id ) {
  * @param integer $p_tag_id  The tag ID to attach.
  * @param integer $p_bug_id  The bug ID to attach.
  * @param integer $p_user_id The user ID to attach.
+ * @param string $p_tag_name
  * @return boolean
  */
-function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
+function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null) {
+
 	antispam_check();
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
@@ -841,7 +843,9 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );
 
-	return true;
+    email_tag_attached( $t_tag_name, $p_bug_id);
+
+    return true;
 }
 
 /**

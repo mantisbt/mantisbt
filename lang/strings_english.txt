@@ -319,6 +319,7 @@ $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATE
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %1$s has been CLOSED.';
 $s_email_notification_title_for_action_related_issue_deleted = 'The RELATED issue %1$s has been DELETED.';
 $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by user %2$s.';
+$s_email_notification_title_for_action_tag_attached = 'The issue %1$s has had a tag attached.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
@@ -1469,6 +1470,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
+$s_email_on_tag_attached = 'E-mail on Tag Attached';
 $s_email_on_updated = 'E-mail on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)

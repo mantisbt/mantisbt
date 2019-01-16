@@ -303,7 +303,18 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 					</select>
 			</td>
 		</tr>
-		<tr>
+        <tr>
+            <td class="category">
+                <?php echo lang_get( 'email_on_tag_attached' ) ?>
+            </td>
+            <td>
+                <label class="inline">
+                    <input type="checkbox" class="ace input-sm" id="email_on_tag_attached" name="email_on_tag_attached" <?php check_checked( (int)$t_pref->email_on_tag_attached, ON ); ?> />
+                    <span class="lbl"></span>
+                </label>
+            </td>
+        </tr>
+        <tr>
 			<td class="category">
 				<?php echo lang_get( 'email_on_priority_change' ) ?>
 			</td>
@@ -350,7 +361,8 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			<input type="hidden" name="email_on_reopened" value="<?php echo $t_pref->email_on_reopened ?>" />
 			<input type="hidden" name="email_on_bugnote"  value="<?php echo $t_pref->email_on_bugnote ?>" />
 			<input type="hidden" name="email_on_status"   value="<?php echo $t_pref->email_on_status ?>" />
-			<input type="hidden" name="email_on_priority" value="<?php echo $t_pref->email_on_priority ?>" />
+            <input type="hidden" name="email_on_tag_attached"   value="<?php echo $t_pref->email_on_tag_attached ?>" />
+            <input type="hidden" name="email_on_priority" value="<?php echo $t_pref->email_on_priority ?>" />
 			<input type="hidden" name="email_on_new_min_severity"      value="<?php echo $t_pref->email_on_new_min_severity ?>" />
 			<input type="hidden" name="email_on_assigned_min_severity" value="<?php echo $t_pref->email_on_assigned_min_severity ?>" />
 			<input type="hidden" name="email_on_feedback_min_severity" value="<?php echo $t_pref->email_on_feedback_min_severity ?>" />

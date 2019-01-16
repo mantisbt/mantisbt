@@ -488,6 +488,7 @@ $g_email_notifications_verbose = OFF;
  *         'bugnote': a bugnote has been added to a bug
  *         'sponsor': sponsorship has changed on this bug
  *        'relation': a relationship has changed on this bug
+ *        'tag_attached' : a tag attached to issue
  *         'monitor': an issue is monitored.
  *        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', etc.
  *                     this list corresponds to $g_status_enum_string
@@ -541,6 +542,16 @@ $g_notify_flags['monitor'] = array(
 	'explicit'      => ON,
 	'threshold_min' => NOBODY,
 	'threshold_max' => NOBODY
+);
+
+$g_notify_flags['tag_attached'] = array(
+    'reporter'      => OFF,
+    'handler'       => OFF,
+    'monitor'       => OFF,
+    'bugnotes'      => OFF,
+    'explicit'      => ON,
+    'threshold_min' => ANYBODY,
+    'threshold_max' => NOBODY
 );
 
 /**
@@ -1588,6 +1599,12 @@ $g_default_email_on_bugnote = ON;
  * @global integer $g_default_email_on_status
  */
 $g_default_email_on_status = 0;
+
+/**
+ * @todo Unused
+ * @global integer $g_default_email_on_tag_attached
+ */
+$g_default_email_on_tag_attached = ON;
 
 /**
  * @todo Unused

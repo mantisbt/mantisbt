@@ -111,7 +111,12 @@ class UserPreferences {
 	 */
 	protected $email_on_status = null;
 
-	/**
+    /**
+     * Receive email on tag attached
+     */
+    protected $email_on_tag_attached = null;
+
+    /**
 	 * Receive email on bug priority change
 	 */
 	protected $email_on_priority = null;
@@ -203,7 +208,8 @@ class UserPreferences {
 	'email_on_reopened' => array(  'default_email_on_reopened', 'int' ),
 	'email_on_bugnote' => array(  'default_email_on_bugnote', 'int' ),
 	'email_on_status' => array(  'default_email_on_status', 'int' ),
-	'email_on_priority' => array(  'default_email_on_priority', 'int' ),
+    'email_on_tag_attached' => array(  'default_email_on_tag_attached', 'int' ),
+    'email_on_priority' => array(  'default_email_on_priority', 'int' ),
 	'email_on_new_min_severity' => array(  'default_email_on_new_minimum_severity', 'int' ),
 	'email_on_assigned_min_severity' => array(  'default_email_on_assigned_minimum_severity', 'int' ),
 	'email_on_feedback_min_severity' => array(  'default_email_on_feedback_minimum_severity', 'int' ),

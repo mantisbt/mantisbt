@@ -267,6 +267,15 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_default_email_on_tag_attached</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when
+					tag is attached. Default is ON. Note that this option
+					is not implemented.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_default_email_on_bugnote_minimum_severity</term>
 			<listitem>
 				<para>Default user preference to enable filtering based on issue

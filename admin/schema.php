@@ -363,6 +363,7 @@ $g_upgrade[43] = array( 'CreateTableSQL', array( db_get_table( 'user_pref' ), "
 	email_on_reopened				L		NOTNULL DEFAULT \" '0' \",
 	email_on_bugnote				L		NOTNULL DEFAULT \" '0' \",
 	email_on_status					L		$t_notnull DEFAULT \" '0' \",
+    email_on_tag_attached			L		NOTNULL DEFAULT \" '0' \",		
 	email_on_priority				L		$t_notnull DEFAULT \" '0' \",
 	email_on_priority_min_severity	I2		NOTNULL DEFAULT '10',
 	email_on_status_min_severity	I2		NOTNULL DEFAULT '10',
