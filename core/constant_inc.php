@@ -665,8 +665,8 @@ define( 'TYPEAHEAD_VERSION', '1.1.1' );
 define( 'TYPEAHEAD_HASH', 'sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=' );
 
 # List JS
-define( 'LISTJS_VERSION', '1.4.1' );
-define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
+define( 'LISTJS_VERSION', '1.5.0' );
+define( 'LISTJS_HASH', 'sha384-JDmRxRiXkNkskRM5AD4qHRGk9ItwZ9flbqOpsRYs8SOrIRwcMtTGKP2Scnjptzgm' );
 
 # Dropzone JS
 define( 'DROPZONE_VERSION', '5.5.0' );

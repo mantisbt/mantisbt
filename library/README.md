@@ -26,7 +26,7 @@ dropzone.js                       | 5.5.0     | unpatched
 chart.js                          | 2.7.3     | unpatched
 chartjs-plugin-colorschemes       | 0.3.0     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
-list.js                           | 1.4.1     | unpatched
+list.js                           | 1.5.0     | unpatched
 
   
 **Notes**
