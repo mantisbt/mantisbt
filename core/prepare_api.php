@@ -61,11 +61,13 @@ function prepare_email_link( $p_email, $p_text ) {
 }
 
 /**
- * prepares the name of the user given the id.  also makes it an email link.
- * @param integer $p_user_id A valid user identifier.
+ * Prepares the name of the user given the id.
+ * Also can make it a link to user info page.
+ * @param integer $p_user_id  A valid user identifier.
+ * @param boolean $p_link     Whether to include an html link
  * @return string
  */
-function prepare_user_name( $p_user_id ) {
+function prepare_user_name( $p_user_id, $p_link = true ) {
 	# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
 	if( NO_USER == $p_user_id ) {
 		return '';
@@ -82,7 +84,11 @@ function prepare_user_name( $p_user_id ) {
 	$t_name = string_display_line( $t_name );
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+		if( $p_link ) {
+			return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+		} else {
+			return '<span ' . $t_tooltip . '>' . $t_name . '</span>';
+		}
 	}
 
 	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';

@@ -117,3 +117,44 @@ td.print-overdue    { font-weight: bold; }
 table.filters td.category {
 	color: #337ab7;
 }
+
+.listjs-table .sort:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  content: "";
+  position: relative;
+  top: -10px;
+  right: -5px;
+}
+
+.listjs-table .sort.desc:after {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #707070;
+  content: "";
+  position: relative;
+  top: 4px;
+  right: -5px;
+}
+
+.listjs-table .sort.asc:after {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #707070;
+  content: "";
+  position: relative;
+  top: -4px;
+  right: -5px;
+}
+
+.listjs-table .sort:hover {
+	text-decoration: underline;
+}
