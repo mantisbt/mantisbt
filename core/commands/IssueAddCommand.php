@@ -135,7 +135,8 @@ class IssueAddCommand extends Command {
 
 		$t_project_id = mci_get_project_id( $t_issue['project'] );
 
-		if( $t_project_id == ALL_PROJECTS ) {
+		if( $t_project_id == ALL_PROJECTS &&
+			!isset( $t_issue['project']['id'] ) && !isset( $t_issue['project']['name'] ) ) {
 			throw new ClientException(
 				'Project not specified',
 				ERROR_EMPTY_FIELD,
@@ -143,8 +144,18 @@ class IssueAddCommand extends Command {
 		}
 
 		if( !project_exists( $t_project_id ) ) {
+			if( $t_project_id == ALL_PROJECTS ) {
+				if( isset( $t_issue['project']['id'] ) && !is_blank( isset( $t_issue['project']['id'] ) ) ) {
+					$t_project_id = isset( $t_issue['project']['id'] );
+				} else if( isset( $t_issue['project']['name'] ) && !is_blank( isset( $t_issue['project']['name'] ) ) ) {
+					$t_project_id = $t_issue['project']['name'];
+				} else {
+					$t_project_id = ALL_PROJECTS;
+				}
+			}
+
 			throw new ClientException(
-				sprintf( "Project '%d' not found", $t_project_id ),
+				sprintf( "Project '%s' not found", $t_project_id ),
 				ERROR_PROJECT_NOT_FOUND,
 				array( $t_project_id ) );
 		}
