@@ -52,6 +52,9 @@ api/rest/swagger
 /vendor/
 composer.phar
 
+#Hosting folders
+/webstat
+
 # Settings below are for convenience when switching branches on Dev machines
 
 # v1.2.x config files
