@@ -390,7 +390,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
@@ -479,7 +480,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
 			<input type="hidden" class="form-control input-sm" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
@@ -585,7 +587,8 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_custom_field_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_from' ) ?>" />
@@ -705,7 +708,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 						<fieldset>
 							<?php echo form_security_field( 'manage_proj_user_copy' ) ?>
 							<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-							<select name="other_project_id" class="input-sm">
+							<select name="other_project_id" class="input-sm" required>
+								<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 								<?php print_project_option_list( null, false, $f_project_id ); ?>
 							</select>
 							<span class=form-inline">
@@ -743,9 +747,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 							<label><?php echo lang_get( 'show' ) ?>
 							<input id="input-per-page" type="text" min="5" size="2" class="input-sm" value="<?php echo config_get( 'default_limit_view' ) ?>"/>
 							</label>
-							<span>
+							<label>
 								&nbsp;(<?php echo lang_get( 'total' ), ': ', $t_users_count, ' ', lang_get( 'users_link' ) ?>)
-							</span>
+							</label>
 						</div>
 						<div class="btn-group pull-right">
 							<ul class="pagination small no-margin"></ul>
