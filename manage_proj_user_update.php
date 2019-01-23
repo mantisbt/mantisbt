@@ -204,7 +204,7 @@ if( !$f_confirmed ) {
 			</div>
 			<div class="widget-body">
 				<div class="widget-main no-padding">
-					<div class="table-responsive">
+					<div class="table-responsive sortable">
 						<table class="table table-striped table-bordered table-condensed">
 							<thead>
 								<tr>
@@ -255,7 +255,7 @@ if( !$f_confirmed ) {
 			</div>
 			<div class="widget-body">
 				<div class="widget-main no-padding">
-					<div class="table-responsive">
+					<div class="table-responsive sortable">
 						<table class="table table-striped table-bordered table-condensed">
 							<thead>
 								<tr>

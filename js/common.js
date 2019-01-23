@@ -402,6 +402,46 @@ $(document).ready( function() {
 		);
 		$('.visible-on-hover').addClass('invisible');
 	}
+
+	/**
+	 * Enhance tables with sortable columns using list.js
+	 */
+	$('.table-responsive.sortable').each(function(){
+		var jtable = $(this).find('table').first();
+		var ths = jtable.find('thead th');
+		if( !ths.length ) {
+			// exit if there is no headers
+			return;
+		}
+		var th_count = ths.length
+		var options_valuenames = [];
+		ths.each(function(index){
+			// wrap the contents into a crafted div
+			var new_div = $('<div />').addClass('sort')
+					.attr('data-sort','sortkey_'+index)
+					.attr('role','button')
+					.html($(this).html());
+			$(this).html(new_div);
+
+			options_valuenames.push( { name:'sortkey_'+index, attr:'data-sortval' } );
+		});
+		var trs = jtable.find('tbody tr');
+		trs.each(function(){
+			var tds = $(this).find('td');
+			if( tds.length != th_count ) {
+				// exit if different number of cells than headers, possibly colspan, etc
+				return;
+			}
+			tds.each(function(index){
+				$(this).addClass( 'sortkey_'+index ).attr( 'data-sortval', $(this).text() );
+			});
+		});
+		jtable.find('tbody').addClass('list');
+
+		var listoptions = { valueNames: options_valuenames };
+		var listobject =  new List( this, listoptions );
+		$(this).data('listobject',listobject).data('listoptions',listoptions).addClass('listjs-table');
+	});
 });
 
 function setBugLabel() {
