@@ -1262,15 +1262,14 @@ function summary_print_filter_info( array $p_filter = null ) {
 	?>
 	<div class="space-10"></div>
 	<div class="col-md-12 col-xs-12">
-		<p>
-			<span class="alert-warning">
-			<?php
-			echo '<a href="' , $t_view_issues_link , '" title="' , lang_get( 'view_bugs_link' ) , '">';
-			echo lang_get( 'summary_notice_filter_is_applied' ) , '&nbsp;' , '( ' , $t_bug_count , ' ' , lang_get( 'bugs' ) , ' )';
-			echo '</a>';
-			?>
-			</span>
-		</p>
+		<div class="alert alert-warning center">
+		<?php
+		echo '<a href="', $t_view_issues_link, '" title="', lang_get( 'view_bugs_link' ), '">';
+		echo lang_get( 'summary_notice_filter_is_applied' ), '&nbsp;',
+			'(', $t_bug_count, ' ', lang_get( 'bugs' ) , ')';
+		echo '</a>';
+		?>
+		</div>
 	</div>
 	<?php
 }
