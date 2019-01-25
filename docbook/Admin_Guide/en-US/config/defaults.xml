@@ -249,11 +249,10 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_default_email_on_status$g_default_email_on_priority</term>
+			<term>$g_default_email_on_status, $g_default_email_on_priority</term>
 			<listitem>
 				<para>Default user preferences to enable receiving emails when
-					status or priority is changed. Default is ON. Note that this option
-					is not implemented.
+					status or priority is changed. Default is OFF.
 				</para>
 			</listitem>
 		</varlistentry>
