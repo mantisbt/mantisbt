@@ -1584,16 +1584,14 @@ $g_default_email_on_reopened = ON;
 $g_default_email_on_bugnote = ON;
 
 /**
- * @todo Unused
  * @global integer $g_default_email_on_status
  */
-$g_default_email_on_status = 0;
+$g_default_email_on_status = OFF;
 
 /**
- * @todo Unused
  * @global integer $g_default_email_on_priority
  */
-$g_default_email_on_priority = 0;
+$g_default_email_on_priority = OFF;
 
 /**
  * 'any'
