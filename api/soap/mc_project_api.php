@@ -834,7 +834,9 @@ function mci_custom_field_type_name( $p_type_id ) {
  * @return array The project versions.
  */
 function mci_project_versions( $p_project_id ) {
-	$t_versions = version_get_all_rows( $p_project_id, /* inherit */ null );
+	# use null, null as the fastest way (no additional where clause in query)
+	# to get all released / non-released and obsolete / non-obsolete versions
+	$t_versions = version_get_all_rows( $p_project_id, null, null );
 	$t_results = array();
 
 	foreach( $t_versions as $t_version ) {
