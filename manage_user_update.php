@@ -68,6 +68,7 @@ $f_protected	= gpc_get_bool( 'protected' );
 $f_enabled		= gpc_get_bool( 'enabled' );
 $f_email		= gpc_get_string( 'email', '' );
 $f_username		= gpc_get_string( 'username', '' );
+$f_password		= gpc_get_string( 'password', '' );
 $f_realname		= gpc_get_string( 'realname', '' );
 $f_access_level	= gpc_get_int( 'access_level' );
 $f_user_id		= gpc_get_int( 'user_id' );
@@ -85,6 +86,7 @@ $t_user = user_get_row( $f_user_id );
 $f_username	= trim( $f_username );
 
 $t_old_username = $t_user['username'];
+$t_old_password = $t_user['password'];
 $t_old_access_level = $t_user['access_level'];
 
 if( $f_send_email_notification ) {
@@ -100,6 +102,13 @@ access_ensure_global_level( $t_user['access_level'] );
 if( 0 != strcasecmp( $t_old_username, $f_username )
 	&& false == user_is_name_unique( $f_username ) ) {
 	trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
+}
+
+# password has been changed, we should hash it
+$t_password_changed = false;
+if( 0 != strcasecmp( $t_old_password, $f_password ) ) {
+	$t_password_changed = true;
+	$f_password = md5($f_password);
 }
 
 user_ensure_name_valid( $f_username );
@@ -124,6 +133,7 @@ if( $t_ldap && config_get( 'use_ldap_email' ) ) {
 
 $c_email = $t_email;
 $c_username = $f_username;
+$c_password = $f_password;
 $c_realname = $t_realname;
 $c_protected = (bool)$f_protected;
 $c_enabled = (bool)$f_enabled;
@@ -160,18 +170,21 @@ $t_query_params = array();
 if( $f_protected && $t_old_protected ) {
 	$t_query = 'UPDATE {user}
 			SET username=' . db_param() . ', email=' . db_param() . ',
+				password=' . db_param() . ',
 				protected=' . db_param() . ', realname=' . db_param() . '
 			WHERE id=' . db_param();
-	$t_query_params = array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
+	$t_query_params = array( $c_username, $c_email, $c_password, $c_protected, $c_realname, $c_user_id );
 	# Prevent e-mail notification for a change that did not happen
 	$f_access_level = $t_old_access_level;
 } else {
 	$t_query = 'UPDATE {user}
 			SET username=' . db_param() . ', email=' . db_param() . ',
+				password=' . db_param() . ',
 				access_level=' . db_param() . ', enabled=' . db_param() . ',
 				protected=' . db_param() . ', realname=' . db_param() . '
 			WHERE id=' . db_param();
-	$t_query_params = array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
+	$t_query_params = array( $c_username, $c_email, $c_password, $c_access_level,
+		$c_enabled, $c_protected, $c_realname, $c_user_id );
 }
 
 $t_result = db_query( $t_query, $t_query_params );
@@ -184,6 +197,10 @@ if( $f_send_email_notification ) {
 
 	if( strcmp( $f_username, $t_old_username ) ) {
 		$t_changes .= lang_get( 'username_label' ) . ' ' . $t_old_username . ' => ' . $f_username . "\n";
+	}
+
+	if( $t_password_changed ) {
+		$t_changes .= lang_get( 'password' ) . ' ' . $t_old_password . ' => ' . "[REDACTED]" . "\n";
 	}
 
 	if( strcmp( $t_realname, $t_old_realname ) ) {
