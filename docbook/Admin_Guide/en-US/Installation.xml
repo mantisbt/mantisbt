@@ -127,7 +127,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>Operating System</para>
-					<para>MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris,
+					<para>MantisBT runs on Windows, macOS, Linux, Solaris,
 						the BSDs, and just about anything that supports the
 						required server software.
 					</para>

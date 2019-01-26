@@ -23,7 +23,7 @@
             MantisBT, as a PHP script, can run on any operating system that
             is supported by PHP and has support for one of the DBMSes that
             are supported.  MantisBT is known to run fine on Windows, Linux,
-            OS/2, Mac OS X, System i and a variety of Unix operating systems.
+            macOS and a variety of Unix operating systems.
         </para>
     </section>
 
@@ -63,7 +63,7 @@
         </para>
 
         <para>
-            For Windows, Mac OS X and other operating systems, use the link provided
+            For Windows, macOS and other operating systems, use the link provided
             above to download MantisBT.  The download is compressed in tar.gz
             or zip format.  Both formats can be unpacked using tools like
             <ulink url="http://www.7-zip.org/">7-Zip</ulink> (in case of Windows).
