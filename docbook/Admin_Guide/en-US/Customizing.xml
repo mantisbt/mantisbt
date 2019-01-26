@@ -229,11 +229,6 @@ $s_CODE = STRING;
             </itemizedlist>
         </para>
 
-        <para>All custom fields are currently saved to a field of type
-        VARCHAR(255) in the database. However, in future releases, it is
-        possible to support custom fields of different types (eg: memo,
-        file).</para>
-
         <para>
             If the value of a custom field for a certain defect is not found,
             the default value is assumed.
