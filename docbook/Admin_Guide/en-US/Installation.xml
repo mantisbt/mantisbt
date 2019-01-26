@@ -361,8 +361,9 @@
 			</para>
 
 			<itemizedlist>
-				<listitem><para>Firefox 45 and above</para></listitem>
-				<listitem><para>Internet Explorer 10 and above</para></listitem>
+				<listitem><para>Firefox</para></listitem>
+				<listitem><para>Internet Explorer 11</para></listitem>
+				<listitem><para>Edge</para></listitem>
 				<listitem><para>Chrome</para></listitem>
 				<listitem><para>Safari</para></listitem>
 				<listitem><para>Opera</para></listitem>
