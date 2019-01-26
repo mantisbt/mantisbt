@@ -24,6 +24,13 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_from_name</term>
+			<listitem>
+				<para>The sender name of all emails sent by MantisBT. Mantis Bug Tracker
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_return_path_email</term>
 			<listitem>
 				<para>Email address to receive bounced emails.</para>
