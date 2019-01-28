@@ -39,19 +39,22 @@ function step () {
 }
 
 # -----------------------------------------------------------------------------
-# Fix deprecated warning in PHP 5.6 builds:
-# "Automatically populating $HTTP_RAW_POST_DATA is deprecated [...]"
-# https://www.bram.us/2014/10/26/php-5-6-automatically-populating-http_raw_post_data-is-deprecated-and-will-be-removed-in-a-future-version/
-# https://bugs.php.net/bug.php?id=66763
+step "Travis Before Script initialization"
 
-if [[ $TRAVIS_PHP_VERSION = '5.6' ]]
-then
-	# Generate custom php.ini settings
-	cat <<-EOF >mantis_config.ini
-		always_populate_raw_post_data=-1
-		EOF
-	phpenv config-add mantis_config.ini
-fi
+# PHP version specific setup
+case $TRAVIS_PHP_VERSION in
+	5.6)
+		# Fix deprecated warning in PHP 5.6 builds:
+		# "Automatically populating $HTTP_RAW_POST_DATA is deprecated [...]"
+		# https://www.bram.us/2014/10/26/php-5-6-automatically-populating-http_raw_post_data-is-deprecated-and-will-be-removed-in-a-future-version/
+		# https://bugs.php.net/bug.php?id=66763
+		# Generate custom php.ini settings
+		cat <<-EOF >mantis_config.ini
+			always_populate_raw_post_data=-1
+			EOF
+		phpenv config-add mantis_config.ini
+		;;
+esac
 
 
 # -----------------------------------------------------------------------------
