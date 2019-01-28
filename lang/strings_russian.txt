@@ -311,7 +311,6 @@ $s_change_preferences_link = 'Настройки';
 $s_edit_account_title = 'Изменение учетной записи';
 $s_username = 'Пользователь';
 $s_username_label = 'Имя пользователя';
-$s_password_hash_notice = 'Отображается хэш пароля. Для изменения введите новый пароль в открытом виде.';
 $s_realname = 'Имя';
 $s_realname_label = 'Имя';
 $s_email = 'E-mail';
