@@ -356,6 +356,7 @@ $s_change_preferences_link = 'Preferences';
 $s_edit_account_title = 'Edit Account';
 $s_username = 'Username';
 $s_username_label = 'Username';
+$s_password_hash_notice = 'Password hash is being displayed. Enter plaintext to change the password.';
 $s_realname = 'Real Name';
 $s_realname_label = 'Real Name';
 $s_email = 'E-mail';
