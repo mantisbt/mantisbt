@@ -128,6 +128,9 @@ print_manage_menu( 'manage_user_page.php' );
 			</tr>
 
 			<!-- Password -->
+			<?php
+				if ( MD5 == $g_login_method ) {
+			?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'password' ) ?>
@@ -140,6 +143,7 @@ print_manage_menu( 'manage_user_page.php' );
 					</div>
 				</td>
 			</tr>
+			<?php } ?>
 
 			<!-- Realname -->
 			<tr><?php
