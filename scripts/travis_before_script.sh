@@ -54,6 +54,12 @@ case $TRAVIS_PHP_VERSION in
 			EOF
 		phpenv config-add mantis_config.ini
 		;;
+
+	7.3)
+		# Disable xdebug as it is causing the builds to fail (see #25390)
+		# reference https://github.com/travis-ci/travis-ci/issues/1697#issuecomment-29542251
+		phpenv config-rm xdebug.ini
+		;;
 esac
 
 
