@@ -136,7 +136,7 @@ print_manage_menu( 'manage_user_page.php' );
 					<?php echo lang_get( 'password' ) ?>
 				</td>
 				<td>
-					<input id="edit-password" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_PASSWORD;?>" name="password" value="<?php echo string_attribute( $t_user['password'] ) ?>" />
+					<input id="edit-password" type="password" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_PASSWORD;?>" name="password" value="<?php echo string_attribute( $t_user['password'] ) ?>" />
 					<div class="alert alert-info">
 						<i class="fa fa-info-circle"></i>
 						<?php echo lang_get( 'password_hash_notice' ) ?>
