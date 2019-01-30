@@ -953,6 +953,7 @@ $s_manage_filter_edit_page_title = '필터 수정';
 $s_delete_filter_button = '삭제';
 $s_apply_filter_button = '적용';
 $s_temporary_filter = '임시 필터';
+$s_set_as_persistent_filter = '영구적인 필터로 설정';
 $s_view_simple_link = '간략히 보기';
 $s_product_build = '제품 빌드 번호';
 $s_system_profile = '시스템 설명';
