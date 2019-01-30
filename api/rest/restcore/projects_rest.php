@@ -39,6 +39,10 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
+
+	# Project subprojects
+	$g_app->post( '/{id}/subprojects', 'rest_project_subproject_add' );
+	$g_app->post( '/{id}/subprojects/', 'rest_project_subproject_add' );
 });
 
 /**
@@ -112,6 +116,38 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+/**
+ * A method to add a project subproject.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_subproject_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_subproject_to_add = $p_request->getParsedBody();
+
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id
+		),
+		'payload' => $t_subproject_to_add
+	);
+
+	$t_command = new SubprojectAddCommand( $t_data );
+	$t_result = $t_command->execute();
+	
+	$t_subproject_id = (int)$t_result['id'];
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject ($t_subproject_id) added to project ($t_project_id)" );
 }
 
 /**
