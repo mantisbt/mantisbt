@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Elroy
  * @author Gerardwijngaarden
  * @author HanV
  * @author Hansmuller
@@ -1404,3 +1405,7 @@ $s_dropzone_cancel_upload_confirmation = 'Weet u zeker dat u het uploaden wilt a
 $s_dropzone_remove_file = 'Bestand verwijderen';
 $s_dropzone_max_files_exceeded = 'U kunt geen bestanden meer uploaden.';
 $s_dropzone_not_supported = 'Dropzone.js ondersteunt oudere browsers niet.';
+$s_save = 'Opslaan';
+$s_reset = 'Opnieuw instellen';
+$s_persist = 'Aanhouden';
+$s_load = 'Laden';
