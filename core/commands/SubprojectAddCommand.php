@@ -100,6 +100,12 @@ class SubprojectAddCommand extends Command {
 				ERROR_PROJECT_RECURSIVE_HIERARCHY );
 		}
 		
+		if( in_array( $this->subproject_id, project_hierarchy_get_subprojects( $this->project_id, true ) ) ) {
+			throw new ClientException(
+				"Subproject already exists in project",
+				ERROR_PROJECT_SUBPROJECT_DUPLICATE );
+		}		
+
 		if( in_array( $this->project_id, project_hierarchy_get_all_subprojects( $this->subproject_id, true ) ) ) {
 			throw new ClientException(
 				"Project can't be a descendant subproject of itself",
