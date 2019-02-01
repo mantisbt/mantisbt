@@ -81,23 +81,24 @@ class SubprojectUpdateCommand extends Command {
 
 		if( !project_exists( $this->project_id )) {
 			throw new ClientException(
-			'Project not found',
-			ERROR_PROJECT_NOT_FOUND,
-			array( $this->project_id ) );
+				"Project \"$this->project_id\"not found",
+				ERROR_PROJECT_NOT_FOUND,
+				array( $this->project_id ) );
 		}
 
 		$this->subproject_id = helper_parse_id( $this->query( 'subproject_id' ), 'subproject_id' );
 		if( !project_exists( $this->subproject_id )) {
 			throw new ClientException(
-				'Subproject not found',
+				"Project \"$this->subproject_id\" not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->subproject_id ) );
 		}
 		
 		if( !in_array( $this->subproject_id, project_hierarchy_get_subprojects( $this->project_id, true ) ) ) {
 			throw new ClientException(
-				"Subproject not found in project",
-				ERROR_PROJECT_SUBPROJECT_NOT_FOUND );
+				"Project \"$this->subproject_id\" is not a subproject of \"$this->project_id\"",
+				ERROR_PROJECT_SUBPROJECT_NOT_FOUND,
+				array( $this->subproject_id, $this->project_id ) );
 		}
 		
 		$this->inherit_parent = $this->payload( 'inherit_parent' );

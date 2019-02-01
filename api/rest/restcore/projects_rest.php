@@ -151,7 +151,8 @@ function rest_project_subproject_add( \Slim\Http\Request $p_request, \Slim\Http\
 	
 	$t_subproject_id = (int)$t_result['id'];
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject ($t_subproject_id) added to project ($t_project_id)" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
+		"Subproject ($t_subproject_id) added to project ($t_project_id)" );
 }
 
 /**
@@ -169,7 +170,9 @@ function rest_project_subproject_update( \Slim\Http\Request $p_request, \Slim\Ht
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_id = isset( $p_args['subproject_id'] ) ? $p_args['subproject_id'] : $p_request->getParam( 'subproject_id' );
+	$t_subproject_id = isset( $p_args['subproject_id'] )
+		? $p_args['subproject_id']
+		: $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
 		$t_message = "Subproject id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -195,7 +198,6 @@ function rest_project_subproject_update( \Slim\Http\Request $p_request, \Slim\Ht
 }
 
 /**
-/**
  * A method to delete a project subproject.
  *
  * @param \Slim\Http\Request $p_request   The request.
@@ -210,7 +212,9 @@ function rest_project_subproject_delete( \Slim\Http\Request $p_request, \Slim\Ht
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_id = isset( $p_args['subproject_id'] ) ? $p_args['subproject_id'] : $p_request->getParam( 'subproject_id' );
+	$t_subproject_id = isset( $p_args['subproject_id'] )
+		? $p_args['subproject_id']
+		: $p_request->getParam( 'subproject_id' );
 	if( is_blank( $t_subproject_id ) ) {
 		$t_message = "Subproject id is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -228,7 +232,8 @@ function rest_project_subproject_delete( \Slim\Http\Request $p_request, \Slim\Ht
 
 	$t_subproject_id = (int)$t_result['id'];
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject ($t_subproject_id) deleted from project ($t_project_id)" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
+		"Subproject ($t_subproject_id) deleted from project ($t_project_id)" );
 }
 
 /**
