@@ -138,6 +138,8 @@ function rest_project_subproject_add( \Slim\Http\Request $p_request, \Slim\Http\
 	}
 
 	$t_subproject_to_add = $p_request->getParsedBody();
+	$t_subproject_id_to_add = $t_subproject_to_add['subproject_id'];
+
 
 	$t_data = array(
 		'query' => array(
@@ -147,12 +149,11 @@ function rest_project_subproject_add( \Slim\Http\Request $p_request, \Slim\Http\
 	);
 
 	$t_command = new SubprojectAddCommand( $t_data );
-	$t_result = $t_command->execute();
-	
-	$t_subproject_id = (int)$t_result['id'];
+	$t_subproject_added = $t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
-		"Subproject ($t_subproject_id) added to project ($t_project_id)" );
+	return $p_response->withStatus( HTTP_STATUS_CREATED,
+		"Subproject ($t_subproject_id_to_add) added to project ($t_project_id)" )->
+		withJson( array( 'subproject' => $t_subproject_added ) );
 }
 
 /**

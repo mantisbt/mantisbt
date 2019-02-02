@@ -132,7 +132,8 @@ class SubprojectAddCommand extends Command {
 
 		project_hierarchy_add( $this->subproject_id, $this->project_id , $this->inherit_parent );
 
-		return array( 'id' => $this->subproject_id );
+		return array( 'parent_id' => $this->project_id,
+			'inherit_parent' => $this->inherit_parent );
 	}
 }
 
