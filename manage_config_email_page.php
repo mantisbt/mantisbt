@@ -221,7 +221,7 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '   <div class="widget-body">';
 	echo '   <div class="widget-main no-padding">';
 	echo '       <div class="table-responsive">';
-	echo '<table class="table table-striped table-bordered table-condensed">' . "\n";
+	echo '<table class="table table-striped table-bordered table-condensed checkbox-range-selection">' . "\n";
 	echo '<thead>' . "\n";
 	echo '<tr>' . "\n";
 	echo '<th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
