@@ -178,14 +178,15 @@ $(document).ready( function() {
 	/**
 	 * Enable range selection for checkboxes, inside a container having class "checkbox-range-selection"
 	 * Assumes the bootstrap/ace styled checkboxes:
-	 *	<div class="checkbox">
 	 *		<label>
 	 *			<input type="checkbox" class="ace">
 	 *			<span class="lbl"></span>
 	 *		</label>
-	 *	</div>
 	 */
-	$('.checkbox-range-selection').on('click', 'div.checkbox label', function (e) {
+	$('.checkbox-range-selection').on('click', 'label', function (e) {
+		if( $(this).children('input:checkbox').length == 0 ) {
+			return;
+		}
 		var jcontainer = $(this).closest('.checkbox-range-selection');
 		var last_clicked = jcontainer.data('checkbox-range-last-clicked');
 		if (!last_clicked) {
@@ -195,7 +196,7 @@ $(document).ready( function() {
 			// Because shift-click is triggered in a label/span, some browsers
 			// will activate a text selection. Remove text selection.
 			window.getSelection().removeAllRanges();
-			var cb_label_list = jcontainer.find("div.checkbox label");
+			var cb_label_list = jcontainer.find('label').has('input:checkbox');
 			var start = cb_label_list.index(this);
 			var end = cb_label_list.index(last_clicked);
 			var index_start = Math.min(start, end);
