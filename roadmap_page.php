@@ -254,7 +254,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 	$t_project_header_printed = false;
 
-	$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+	$t_view_bug_threshold = config_get( 'view_bug_threshold', null, $t_user_id, $t_project_id );
 
 	foreach( $t_version_rows as $t_version_row ) {
 		if( $t_version_row['released'] == 1 ) {
