@@ -581,7 +581,7 @@ function layout_navbar_button_bar() {
 	echo '<li class="hidden-sm hidden-xs">';
 	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
-	if( $t_can_report_bug ) {
+	if( $t_can_report_bug && !is_page_name( string_get_bug_page( "report" ) ) )  {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
 		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
