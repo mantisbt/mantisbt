@@ -279,7 +279,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = config_get_global( 'path' );
 	if( $p_sanitize ) {
-		$t_url .= string_sanitize_url( $p_url, false );
+		$t_url = string_sanitize_url( $p_url, false );
 	} else {
 		$t_url .= $p_url;
 	}
