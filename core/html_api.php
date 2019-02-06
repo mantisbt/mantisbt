@@ -245,7 +245,7 @@ function html_css_link( $p_filename ) {
 	if( $p_filename == basename( $p_filename ) ) {
 		$p_filename = 'css/' . $p_filename;
 	}
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), true ), '" />', "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( $p_filename ), false ), '" />', "\n";
 }
 
 /**
@@ -279,7 +279,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = config_get_global( 'path' );
 	if( $p_sanitize ) {
-		$t_url .= string_sanitize_url( $p_url );
+		$t_url .= string_sanitize_url( $p_url, false );
 	} else {
 		$t_url .= $p_url;
 	}

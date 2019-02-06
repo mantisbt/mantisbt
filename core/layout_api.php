@@ -94,7 +94,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 		echo "\t",
 			'<link rel="search" type="application/opensearchdescription+xml" ',
 				'title="' . sprintf( lang_get( "opensearch_{$t_type}_description" ), $t_title ) . '" ',
-				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, true ) .
+				'href="' . string_sanitize_url( 'browser_search_plugin.php?type=' . $t_type, false ) .
 				'"/>',
 			"\n";
 	}
@@ -362,8 +362,8 @@ function layout_login_page_begin() {
 	}
 
 	# Advertise the availability of the browser search plug-ins.
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
-	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', false) . '" />' . "\n";
+	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', false) . '" />' . "\n";
 	
 	html_head_javascript();
 	
