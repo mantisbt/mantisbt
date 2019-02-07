@@ -4341,7 +4341,7 @@ $g_global_settings = array(
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled',
-	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
+	'session_save_path', 'session_validation', 'show_detailed_errors',
 	'stop_on_errors', 'version_suffix', 'debug_email',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file',
 	'file_type_icons', 'path', 'short_path', 'absolute_path', 'core_path',
