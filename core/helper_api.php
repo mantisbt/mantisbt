@@ -602,14 +602,6 @@ function helper_log_to_page() {
 }
 
 /**
- * returns a boolean indicating whether SQL queries executed should be shown or not.
- * @return boolean
- */
-function helper_show_query_count() {
-	return ON == config_get( 'show_queries_count' );
-}
-
-/**
  * Return a URL relative to the web root, compatible with other applications
  * @param string $p_url A relative URL to a page within Mantis.
  * @return string
