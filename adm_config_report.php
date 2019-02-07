@@ -233,19 +233,21 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 # Apply filters
 
 # Get users in db having specific configs
-$t_query = 'SELECT DISTINCT user_id FROM {config} WHERE user_id <> ' . db_param() ;
-$t_result = db_query( $t_query, array( ALL_USERS ) );
+$t_query = new DbQuery( 'SELECT DISTINCT user_id FROM {config} WHERE user_id <> :all_users',
+		array( 'all_users' => ALL_USERS ) );
+# build result as: array( [id]=>id, ... )
+$t_user_ids = array_column( $t_query->fetch_all(), 'user_id', 'user_id' );
+
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
-	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
-} else {
-	$t_users_list = array();
+	$t_user_ids[$t_filter_user_value] = $t_filter_user_value;
 }
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_user_id = $t_row['user_id'];
-	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
-}
-asort( $t_users_list );
+user_cache_array_rows( $t_user_ids );
+
+# build array for user names
+$t_users_list = array_map( 'user_get_name', $t_user_ids );
+asort( $t_users_list, SORT_NATURAL | SORT_FLAG_CASE );
+
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = array(
 		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
