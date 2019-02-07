@@ -282,28 +282,25 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
 
-# Build filter's where clause
-$t_where = '';
-$t_param = array();
+# Build config query
+$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd'
+		. ' FROM {config} WHERE 1=1';
 if( $t_filter_user_value != META_FILTER_NONE ) {
-	$t_where .= ' AND user_id = ' . db_param();
-	$t_param[] = $t_filter_user_value;
+	$t_sql .= ' AND user_id = :user_id';
 }
 if( $t_filter_project_value != META_FILTER_NONE ) {
-	$t_where .= ' AND project_id = ' . db_param();
-	$t_param[] = $t_filter_project_value;
+	$t_sql .= ' AND project_id = :project_id';
 }
 if( $t_filter_config_value != META_FILTER_NONE ) {
-	$t_where .= ' AND config_id = ' . db_param();
-	$t_param[] = $t_filter_config_value;
+	$t_sql .= ' AND config_id = :config_id';
 }
-if( $t_where != '' ) {
-	$t_where = ' WHERE 1=1 ' . $t_where;
-}
-
-$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM {config} ' . $t_where . ' ORDER BY user_id, project_id, config_id ';
-$t_result = db_query( $t_query, $t_param );
+$t_sql .= ' ORDER BY user_id, project_id, config_id ';
+$t_params = array(
+	'user_id' => $t_filter_user_value,
+	'project_id' => $t_filter_project_value,
+	'config_id' => $t_filter_config_value
+	);
+$t_config_query = new DbQuery( $t_sql, $t_params );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -423,7 +420,7 @@ $t_result = db_query( $t_query, $t_param );
 # db contains a large number of configurations
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
-while( $t_row = db_fetch_array( $t_result ) ) {
+while( $t_row = $t_config_query->fetch() ) {
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 ?>
