@@ -233,20 +233,27 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 # Apply filters
 
 # Get users in db having specific configs
-$t_query = new DbQuery( 'SELECT DISTINCT user_id FROM {config} WHERE user_id <> :all_users',
-		array( 'all_users' => ALL_USERS ) );
-# build result as: array( [id]=>id, ... )
-$t_user_ids = array_column( $t_query->fetch_all(), 'user_id', 'user_id' );
-
+$t_sql = 'SELECT id, username, realname FROM {user} WHERE {user}.id IN ('
+		. ' SELECT user_id FROM {config} WHERE user_id <> :all_users )';
+$t_query = new DbQuery( $t_sql, array( 'all_users' => ALL_USERS ) );
+$t_users_list = array();
+$t_users_ids = array();
+$t_sort = array();
+while( $t_row = $t_query->fetch() ) {
+	$t_users_ids[] = (int)$t_row['id'];
+	$t_users_list[] = user_get_name_from_row( $t_row );
+	$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
+}
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
-	$t_user_ids[$t_filter_user_value] = $t_filter_user_value;
+	$t_row = user_get_row( $t_filter_user_value );
+	$t_users_ids[] = $t_filter_user_value;
+	$t_users_list[] = user_get_name_from_row( $t_row );
+	$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
 }
-user_cache_array_rows( $t_user_ids );
-
-# build array for user names
-$t_users_list = array_map( 'user_get_name', $t_user_ids );
-asort( $t_users_list, SORT_NATURAL | SORT_FLAG_CASE );
+user_cache_array_rows( $t_users_ids );
+array_multisort( $t_sort, SORT_ASC, SORT_NATURAL | SORT_FLAG_CASE, $t_users_list, $t_users_ids );
+$t_users_list = array_combine( $t_users_ids, $t_users_list );
 
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = array(
