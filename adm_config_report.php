@@ -233,16 +233,32 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 # Apply filters
 
 # Get users in db having specific configs
-$t_sql = 'SELECT id, username, realname FROM {user} WHERE {user}.id IN ('
-		. ' SELECT user_id FROM {config} WHERE user_id <> :all_users )';
+$t_sql = 'SELECT DISTINCT c.user_id AS config_uid, u.id, u.username, u.realname'
+		. ' FROM {config} c LEFT JOIN {user} u ON c.user_id=u.id'
+		. ' WHERE c.user_id <> :all_users ORDER BY c.user_id';
 $t_query = new DbQuery( $t_sql, array( 'all_users' => ALL_USERS ) );
 $t_users_list = array();
 $t_users_ids = array();
 $t_sort = array();
+$t_deleted_users = array();
 while( $t_row = $t_query->fetch() ) {
+	if( empty( $t_row['id'] ) ) {
+		# the user doesn't exist, deleted
+		$t_deleted_users[] = (int)$t_row['config_uid'];
+		continue;
+	}
 	$t_users_ids[] = (int)$t_row['id'];
 	$t_users_list[] = user_get_name_from_row( $t_row );
 	$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
+}
+if( !empty( $t_deleted_users ) ) {
+	user_cache_array_rows( $t_deleted_users );
+	foreach( $t_deleted_users as $t_id ) {
+		$t_users_ids[] = $t_id;
+		$t_name = user_get_name( $t_id );
+		$t_users_list[] = $t_name;
+		$t_sort[] = $t_name;
+	}
 }
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
