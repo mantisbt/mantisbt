@@ -665,8 +665,8 @@ define( 'LISTJS_VERSION', '1.4.1' );
 define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
 
 # Dropzone JS
-define( 'DROPZONE_VERSION', '4.3.0' );
-define( 'DROPZONE_HASH', 'sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=' );
+define( 'DROPZONE_VERSION', '5.5.0' );
+define( 'DROPZONE_HASH', 'sha384-TBYvJK9bRa7Ii3OZh+eaXb5r98Ad36+kotsxTD3tIEa9vgJOQ0lRMfZtWAJxPq4P' );
 
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
