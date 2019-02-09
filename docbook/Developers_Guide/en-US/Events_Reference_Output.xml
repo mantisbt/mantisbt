@@ -347,6 +347,48 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.menu.shortcutfilter">
+			<title>EVENT_MENU_SHORTCUT_FILTER (Chained)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to modify, add to or hide the
+					shortcut menu before it is output.
+
+					A single parameter is passed as an array of associate arrays containing
+					the items in the shortcut menu. By default this may contain "Report Issue"
+					and "Invite Users" items, depending on the access level of the current
+					user.
+					Each associate array contains "url", "title", and "icon" keys.
+					Plugins should do any modifications needed and return the array back.
+					Returning an empty array will hide the shortcut menu.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: menu items</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem>
+						<para>&lt;Array&gt;: modified menu items</para>
+						<programlisting>
+							function event_callback( $p_event, $p_menu_items ) {
+								$p_menu_items[] = array(
+									'url' => '/',
+									'title' => 'Main Website',
+									'icon' => 'fa-home'
+								);
+
+								# Chained events must return parameters in an array
+								return array( $p_menu_items );
+							}
+						</programlisting>
+					</listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</section>
 
 	<section id="dev.eventref.output.layout">

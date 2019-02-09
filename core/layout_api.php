@@ -563,7 +563,7 @@ function layout_navbar_projects_menu() {
 }
 
 /**
- * Print navbar buttons
+ * Print shortcut buttons
  * @return void
  */
 function layout_navbar_button_bar() {
@@ -571,31 +571,50 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
-	$t_can_report_bug = access_has_any_project_level( 'report_bug_threshold' );
-	$t_can_invite_user = current_user_is_administrator();
+	# Store menu items in array before outputting
+	$t_shortcut_items = array();
 
-	if( !$t_can_report_bug && !$t_can_invite_user ) {
-		return;
+	if( access_has_any_project_level( 'report_bug_threshold' ) ) {
+		$t_shortcut_items[] = array(
+			'url' => string_get_bug_report_url(),
+			'title' => 'report_bug_link',
+			'icon' => 'fa-edit'
+		);
 	}
 
-	echo '<li class="hidden-sm hidden-xs">';
-	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
-
-	if( $t_can_report_bug ) {
-		$t_bug_url = string_get_bug_report_url();
-		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
-		echo '</a>';
+	if( current_user_is_administrator() ) {
+		$t_shortcut_items[] = array(
+			'url' => 'manage_user_create_page.php',
+			'title' => 'invite_users',
+			'icon' => 'fa-user-plus'
+		);
 	}
 
-	if( $t_can_invite_user ) {
-		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		echo '<i class="fa fa-user-plus"></i> ' . lang_get( 'invite_users' );
-		echo '</a>';
+	# Allow plugins to modify the shortcut menu or add their own items
+	$t_modified_shortcut_items = event_signal( 'EVENT_MENU_SHORTCUT_FILTER', array( $t_shortcut_items ) );
+	if( is_array( $t_modified_shortcut_items ) &&
+			count( $t_modified_shortcut_items ) > 0 &&
+			is_array( $t_modified_shortcut_items[0] ) ) {
+		$t_shortcut_items = $t_modified_shortcut_items[0];
 	}
 
-	echo '</div>';
-	echo '</li>';
+	if( count( $t_shortcut_items ) > 0 ) {
+		echo '<li class="hidden-sm hidden-xs">';
+		echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
+
+		foreach( $t_shortcut_items as $t_item ) {
+			if( !isset( $t_item['icon'] ) ) {
+				$t_item['icon'] = 'fa-plug';
+			}
+
+			echo '<a class="btn btn-primary btn-sm" href="' . $t_item['url'] . '">';
+			echo '<i class="fa ' . $t_item['icon'] . '"></i> ' . lang_get_defaulted( $t_item['title'] );
+			echo '</a>';
+		}
+
+		echo '</div>';
+		echo '</li>';
+	}
 }
 
 /**
