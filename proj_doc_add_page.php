@@ -50,7 +50,7 @@ if( OFF == config_get( 'enable_project_documentation' ) ||
 
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
-$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = file_get_max_file_size();
 
 layout_page_header();
 
