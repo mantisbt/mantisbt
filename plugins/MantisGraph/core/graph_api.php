@@ -111,14 +111,11 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
  */
 function graph_status_colors_to_colors() {
 	$t_status_enum = config_get( 'status_enum_string' );
-	$t_status_colors = config_get( 'status_colors' );
 	$t_statuses = MantisEnum::getValues( $t_status_enum );
 	$t_colors = array();
 
 	foreach( $t_statuses as $t_status ) {
-		$t_status_name = MantisEnum::getLabel( $t_status_enum, $t_status );
-		$t_status_color = $t_status_colors[$t_status_name];
-		$t_colors[] = $t_status_color;
+		$t_colors[] = get_status_color( $t_status );
 	}
 
 	return $t_colors;
