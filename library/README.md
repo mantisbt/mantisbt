@@ -22,7 +22,7 @@ fontawesome                       | 4.6.3     | unpatched
 ace-admin theme                   | 1.4.0     | customized
 moment.js                         | 2.15.2    | unpatched
 bootstrap-datetimepicker          | 4.17.47   | unpatched
-dropzone.js                       | 4.3.0     | unpatched
+dropzone.js                       | 5.5.0     | unpatched
 chart.js                          | 2.1.6     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
 list.js                           | 1.4.1     | unpatched
