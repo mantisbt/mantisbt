@@ -209,6 +209,7 @@ function http_security_headers() {
 		http_csp_add( 'style-src', "'unsafe-inline'" );
 		http_csp_add( 'script-src', "'self'" );
 		http_csp_add( 'img-src', "'self'" );
+		http_csp_add( 'img-src', "'self' data:" );
 
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
