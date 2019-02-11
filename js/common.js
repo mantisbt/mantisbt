@@ -527,67 +527,73 @@ function enableDropzone( classPrefix, autoUpload ) {
 	var form = zone.closest('form');
 	var max_filesize_bytes = zone.data('max-filesize-bytes');
 	var max_filseize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
-	try {
-		var zone_object = new Dropzone( form[0], {
-			forceFallback: zone.data('force-fallback'),
-			paramName: "ufile",
-			autoProcessQueue: autoUpload,
-			clickable: zone_class,
-			previewsContainer: '#' + classPrefix + '-previews-box',
-			uploadMultiple: true,
-			parallelUploads: 100,
-			maxFilesize: max_filseize_mb,
-			addRemoveLinks: !autoUpload,
-			acceptedFiles: zone.data('accepted-files'),
-			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: zone.data('default-message'),
-			dictFallbackMessage: zone.data('fallback-message'),
-			dictFallbackText: zone.data('fallback-text'),
-			dictFileTooBig: zone.data('file-too-big'),
-			dictInvalidFileType: zone.data('invalid-file-type'),
-			dictResponseError: zone.data('response-error'),
-			dictCancelUpload: zone.data('cancel-upload'),
-			dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
-			dictRemoveFile: zone.data('remove-file'),
-			dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
-			dictMaxFilesExceeded: zone.data('max-files-exceeded'),
+	var options = {
+		forceFallback: zone.data('force-fallback'),
+		paramName: "ufile",
+		autoProcessQueue: autoUpload,
+		clickable: zone_class,
+		previewsContainer: '#' + classPrefix + '-previews-box',
+		uploadMultiple: true,
+		parallelUploads: 100,
+		maxFilesize: max_filseize_mb,
+		addRemoveLinks: !autoUpload,
+		acceptedFiles: zone.data('accepted-files'),
+		thumbnailWidth: 150,
+		thumbnailMethod: 'contain',
+		dictDefaultMessage: zone.data('default-message'),
+		dictFallbackMessage: zone.data('fallback-message'),
+		dictFallbackText: zone.data('fallback-text'),
+		dictFileTooBig: zone.data('file-too-big'),
+		dictInvalidFileType: zone.data('invalid-file-type'),
+		dictResponseError: zone.data('response-error'),
+		dictCancelUpload: zone.data('cancel-upload'),
+		dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
+		dictRemoveFile: zone.data('remove-file'),
+		dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
+		dictMaxFilesExceeded: zone.data('max-files-exceeded'),
 
-			init: function () {
-				var dropzone = this;
-				var form = $( this.options.clickable ).closest('form');
-				form.on('submit', function (e) {
-					if( dropzone.getQueuedFiles().length ) {
-						e.preventDefault();
-						e.stopPropagation();
-						dropzone.processQueue();
-					}
-				});
-				this.on( "successmultiple", function( files, response ) {
-					document.open();
-					document.write( response );
-					document.close();
-				});
-				this.on("addedfile", function (file) {
-					if( file.size > max_filesize_bytes ) {
-						var size_mb = file.size / ( 1024*1024 );
-						var max_mb = max_filesize_bytes / ( 1024*1024 );
-						var dec1 = size_mb < 0.01 ? 3 : 2;
-						var dec2 = max_mb < 0.01 ? 3 : 2;
-						var text = zone.data( 'file-too-big' );
-						text = text.replace( '{{filesize}}', size_mb.toFixed(dec1) );
-						text = text.replace( '{{maxFilesize}}', max_mb.toFixed(dec2) );
-						alert( text );
-						this.removeFile( file );
-						return false;
-					}
-				});
-			},
-			fallback: function() {
-				if( $( "." + classPrefix ).length ) {
-					$( "." + classPrefix ).hide();
+		init: function () {
+			var dropzone = this;
+			var form = $( this.options.clickable ).closest('form');
+			form.on('submit', function (e) {
+				if( dropzone.getQueuedFiles().length ) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropzone.processQueue();
 				}
+			});
+			this.on( "successmultiple", function( files, response ) {
+				document.open();
+				document.write( response );
+				document.close();
+			});
+			this.on("addedfile", function (file) {
+				if( file.size > max_filesize_bytes ) {
+					var size_mb = file.size / ( 1024*1024 );
+					var max_mb = max_filesize_bytes / ( 1024*1024 );
+					var dec1 = size_mb < 0.01 ? 3 : 2;
+					var dec2 = max_mb < 0.01 ? 3 : 2;
+					var text = zone.data( 'file-too-big' );
+					text = text.replace( '{{filesize}}', size_mb.toFixed(dec1) );
+					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(dec2) );
+					alert( text );
+					this.removeFile( file );
+					return false;
+				}
+			});
+		},
+		fallback: function() {
+			if( $( "." + classPrefix ).length ) {
+				$( "." + classPrefix ).hide();
 			}
-		});
+		}
+	};
+	var preview_template = document.getElementById('dropzone-preview-template');
+	if( preview_template ) {
+		options.previewTemplate = preview_template.innerHTML;
+	}
+	try {
+		var zone_object = new Dropzone( form[0], options );
 	} catch (e) {
 		alert( zone.data('dropzone-not-supported') );
 	}
