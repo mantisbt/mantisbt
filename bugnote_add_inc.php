@@ -155,6 +155,7 @@ require_api( 'lang_api.php' );
 					<?php print_max_filesize( $t_max_file_size ); ?>
 				</th>
 				<td>
+					<?php print_dropzone_template() ?>
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
 						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
