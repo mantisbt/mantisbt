@@ -137,23 +137,19 @@ function rest_project_subproject_add( \Slim\Http\Request $p_request, \Slim\Http\
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_subproject_to_add = $p_request->getParsedBody();
-	$t_subproject_id_to_add = $t_subproject_to_add['subproject_id'];
-
-
 	$t_data = array(
 		'query' => array(
 			'project_id' => $t_project_id
 		),
-		'payload' => $t_subproject_to_add
+		'payload' => $p_request->getParsedBody()
 	);
 
 	$t_command = new SubprojectAddCommand( $t_data );
-	$t_subproject_added = $t_command->execute();
-
-	return $p_response->withStatus( HTTP_STATUS_CREATED,
-		"Subproject ($t_subproject_id_to_add) added to project ($t_project_id)" )->
-		withJson( array( 'subproject' => $t_subproject_added ) );
+	$t_result = $t_command->execute();
+	$t_subproject_id = $t_command->get_subproject_id();
+	
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
+		"Subproject '$t_subproject_id' added to project '$t_project_id'" );
 }
 
 /**
@@ -193,9 +189,7 @@ function rest_project_subproject_update( \Slim\Http\Request $p_request, \Slim\Ht
 	$t_command = new SubprojectUpdateCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	$t_subproject_id = (int)$t_result['id'];
-
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject ($t_subproject_id) updated" );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject '$t_subproject_id' updated" );
 }
 
 /**
@@ -231,10 +225,8 @@ function rest_project_subproject_delete( \Slim\Http\Request $p_request, \Slim\Ht
 	$t_command = new SubprojectDeleteCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	$t_subproject_id = (int)$t_result['id'];
-
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
-		"Subproject ($t_subproject_id) deleted from project ($t_project_id)" );
+		"Subproject '$t_subproject_id' deleted from project '$t_project_id'" );
 }
 
 /**

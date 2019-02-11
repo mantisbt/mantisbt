@@ -26,16 +26,6 @@ use Mantis\Exceptions\ClientException;
  * A command that adds a project subproject.
  */
 class SubprojectAddCommand extends Command {
-	/**
-	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 *
-	 * $p_data['payload'] is expected to contain:
-	 * - subproject_id (integer)
-	 * - inherit_parent (bool)
-	 *
-	 * @param array $p_data The command data.
-	 */
 
 	/**
 	 * @var integer
@@ -47,13 +37,19 @@ class SubprojectAddCommand extends Command {
 	 */
 	private $subproject_id;
 
-	/**
-	 * @var boolean
-	 */
-	private $inherit_parent;
+	public function get_subproject_id() {
+		return $this->subproject_id;
+	}
 
 	/**
 	 * Constructor
+	 *
+	 * $p_data['query'] is expected to contain:
+	 * - project_id (integer)
+	 *
+	 * $p_data['payload'] is expected to contain:
+	 * - project (array)
+	 * - inherit_parent (bool)
 	 *
 	 * @param array $p_data The command data.
 	 */
@@ -61,17 +57,22 @@ class SubprojectAddCommand extends Command {
 		parent::__construct( $p_data );
 	}
 
+	private function get_subproject_project_id( $p_project ) {
+		if( isset( $p_project ) ){
+			if( isset( $p_project['id'] ) ) {
+				return $p_project['id'];
+			} elseif( isset( $p_project['name'] ) ) {
+				$t_id = project_get_id_by_name( $p_project['name'] );
+				return $t_id == 0 ? $p_project['name'] : $t_id;
+			}							
+		}
+		return null;
+	}
+	
 	/**
 	 * Validate the data.
 	 */
 	function validate() {		
-		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-
-		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ) {
-			throw new ClientException(
-				'Access denied to add subprojects',
-				ERROR_ACCESS_DENIED );
-		}
 
 		if ( config_get( 'subprojects_enabled' ) == OFF ) {
 			throw new ClientException(
@@ -79,17 +80,18 @@ class SubprojectAddCommand extends Command {
 				ERROR_ACCESS_DENIED );
 		}
 
+		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 		if( !project_exists( $this->project_id )) {
 			throw new ClientException(
-				"Project \"$this->project_id\"not found",
+				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
 
-		$this->subproject_id = helper_parse_id( $this->payload( 'subproject_id' ), 'subproject_id' );
+		$this->subproject_id = $this->get_subproject_project_id( $this->payload( 'project' ) );
 		if( !project_exists( $this->subproject_id )) {
 			throw new ClientException(
-				"Project \"$this->subproject_id\" not found",
+				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->subproject_id ) );
 		}
@@ -100,9 +102,16 @@ class SubprojectAddCommand extends Command {
 				ERROR_PROJECT_RECURSIVE_HIERARCHY );
 		}
 		
+		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ||
+			!access_has_project_level( config_get( 'manage_project_threshold' ), $this->subproject_id ) ) {
+			throw new ClientException(
+				'Access denied to add subprojects',
+				ERROR_ACCESS_DENIED );
+		}
+
 		if( in_array( $this->subproject_id, project_hierarchy_get_subprojects( $this->project_id, true ) ) ) {
 			throw new ClientException(
-				"Project \"$this->subproject_id\" is already a subproject of \"$this->project_id\"",
+				"Project '$this->subproject_id' is already a subproject of '$this->project_id'",
 				ERROR_PROJECT_SUBPROJECT_DUPLICATE,
 				array( $this->subproject_id, $this->project_id ) );
 		}		
@@ -112,8 +121,6 @@ class SubprojectAddCommand extends Command {
 				"Project can't be a descendant subproject of itself",
 				ERROR_PROJECT_RECURSIVE_HIERARCHY );
 		}		
-
-		$this->inherit_parent = $this->payload( 'inherit_parent', true );
 	}
 
 	/**
@@ -130,10 +137,10 @@ class SubprojectAddCommand extends Command {
 			$g_project_override = $this->project_id;
 		}
 
-		project_hierarchy_add( $this->subproject_id, $this->project_id , $this->inherit_parent );
+		project_hierarchy_add( $this->subproject_id, $this->project_id,
+			$this->payload( 'inherit_parent', true ) );
 
-		return array( 'parent_id' => $this->project_id,
-			'inherit_parent' => $this->inherit_parent );
+		return array();
 	}
 }
 

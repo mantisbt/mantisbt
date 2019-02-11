@@ -26,16 +26,6 @@ use Mantis\Exceptions\ClientException;
  * A command that updates a project subproject.
  */
 class SubprojectUpdateCommand extends Command {
-	/**
-	 * $p_data['query'] is expected to contain:
-	 * - project_id (integer)
-	 * - subproject_id (integer)
-	 *
-	 * $p_data['payload'] is expected to contain:
-	 * - inherit_parent (bool)
-	 *
-	 * @param array $p_data The command data.
-	 */
 
 	/**
 	 * @var integer
@@ -55,6 +45,13 @@ class SubprojectUpdateCommand extends Command {
 	/**
 	 * Constructor
 	 *
+	 * $p_data['query'] is expected to contain:
+	 * - project_id (integer)
+	 * - subproject_id (integer)
+	 *
+	 * $p_data['payload'] is expected to contain:
+	 * - inherit_parent (bool)
+	 *
 	 * @param array $p_data The command data.
 	 */
 	function __construct( array $p_data ) {
@@ -65,23 +62,16 @@ class SubprojectUpdateCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {		
-		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-
-		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ) {
-			throw new ClientException(
-				'Access denied to delete subprojects',
-				ERROR_ACCESS_DENIED );
-		}
-
 		if ( config_get( 'subprojects_enabled' ) == OFF ) {
 			throw new ClientException(
 				'Access denied to delete subprojects',
 				ERROR_ACCESS_DENIED );
 		}
 
+		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 		if( !project_exists( $this->project_id )) {
 			throw new ClientException(
-				"Project \"$this->project_id\"not found",
+				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
@@ -89,14 +79,21 @@ class SubprojectUpdateCommand extends Command {
 		$this->subproject_id = helper_parse_id( $this->query( 'subproject_id' ), 'subproject_id' );
 		if( !project_exists( $this->subproject_id )) {
 			throw new ClientException(
-				"Project \"$this->subproject_id\" not found",
+				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->subproject_id ) );
 		}
-		
+
+		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $this->project_id ) ||
+			!access_has_project_level( config_get( 'manage_project_threshold' ), $this->subproject_id ) ) {
+			throw new ClientException(
+				'Access denied to delete subprojects',
+				ERROR_ACCESS_DENIED );
+		}
+
 		if( !in_array( $this->subproject_id, project_hierarchy_get_subprojects( $this->project_id, true ) ) ) {
 			throw new ClientException(
-				"Project \"$this->subproject_id\" is not a subproject of \"$this->project_id\"",
+				"Project \"$this->subproject_id\" is not a subproject of '$this->project_id'",
 				ERROR_PROJECT_SUBPROJECT_NOT_FOUND,
 				array( $this->subproject_id, $this->project_id ) );
 		}
@@ -125,7 +122,7 @@ class SubprojectUpdateCommand extends Command {
 
 		project_hierarchy_update( $this->subproject_id, $this->project_id, $this->inherit_parent );
 
-		return array( 'id' => $this->subproject_id );
+		return array();
 	}
 }
 
