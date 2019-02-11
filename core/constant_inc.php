@@ -484,6 +484,7 @@ define( 'FILTER_MATCH_ALL', 0 );
 define( 'FILTER_MATCH_ANY', 1 );
 
 # Standard Filters
+define( 'FILTER_STANDARD_ANY', 'any' );
 define( 'FILTER_STANDARD_ASSIGNED', 'assigned' );
 define( 'FILTER_STANDARD_UNASSIGNED', 'unassigned' );
 define( 'FILTER_STANDARD_REPORTED', 'reported' );

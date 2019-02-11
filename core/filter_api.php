@@ -3171,6 +3171,23 @@ function filter_create_recently_modified( $p_days, $p_filter = null ) {
 }
 
 /**
+ * Create a filter for getting issues assigned to the specified project.
+ * @param integer $p_project_id The project id or ALL_PROJECTS.
+ * @return mixed A valid filter.
+ */
+function filter_create_any( $p_project_id ) {
+	$t_filter = filter_get_default();
+
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
+
+	if( $p_project_id != ALL_PROJECTS ) {
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
+}
+
+/**
  * Create a filter for getting issues assigned to the specified project and user that
  * are not yet resolved.
  *
@@ -3813,11 +3830,18 @@ function filter_get( $p_filter_id, array $p_default = null ) {
  * Return a standard filter
  * @param string $p_filter_name     The name of the filter
  * @param integer|null $p_user_id   A user id to build this filter. Null for current user
+ * @param integer|null $p_project_id	 A project id to build this filter.  Null for current project
  * @return null|boolean|array       null filter not found, false invalid filter, otherwise the filter.
  */
-function filter_standard_get( $p_filter_name, $p_user_id = null ) {
+function filter_standard_get( $p_filter_name, $p_user_id = null, $p_project_id = null ) {
 	$p_filter_name = strtolower( $p_filter_name );
-	$t_project_id = helper_get_current_project();
+
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
+	} else {
+		$t_project_id = $p_project_id;
+	}
+
 	if( null === $p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
 	} else {
@@ -3825,6 +3849,9 @@ function filter_standard_get( $p_filter_name, $p_user_id = null ) {
 	}
 
 	switch( $p_filter_name ) {
+		case FILTER_STANDARD_ANY:
+			$t_filter = filter_create_any( $t_project_id );
+			break;
 		case FILTER_STANDARD_ASSIGNED:
 			$t_filter = filter_create_assigned_to_unresolved( $t_project_id, $t_user_id );
 			break;
