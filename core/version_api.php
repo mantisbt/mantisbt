@@ -158,7 +158,18 @@ class VersionData {
 	}
 }
 
+/**
+ * Array indexed by version id.
+ * Each item is a version row, as retrieved from project_version table.
+ */
 $g_cache_versions = array();
+
+/**
+ * Array indexed by project_id.
+ * Each item is an array of version ids that are linked to that project.
+ * Note that this does not include versions inherited from parent projects.
+ */
+$g_cache_versions_project  = array();
 
 /**
  * Cache a version row if necessary and return the cached copy
@@ -200,6 +211,47 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 	$g_cache_versions[$c_version_id] = $t_row;
 
 	return $t_row;
+}
+
+/**
+ * Cache version information for an array of project id's
+ * @param array $p_project_id_array An array of project identifiers.
+ * @return void
+ */
+function version_cache_array_rows( array $p_project_ids ) {
+	global $g_cache_versions_project, $g_cache_versions;
+
+	$t_ids_to_fetch = array();
+	foreach( $p_project_ids as $t_id ) {
+		$c_id = (int)$t_id;
+		if( !isset( $g_cache_versions_project[$c_id] ) ) {
+			$t_ids_to_fetch[$c_id] = $c_id;
+		}
+	}
+	if( empty( $t_ids_to_fetch ) ) {
+		return;
+	}
+
+	$t_query = new DbQuery();
+	$t_sql = 'SELECT * FROM {project_version} WHERE ' . $t_query->sql_in( 'project_id', $t_ids_to_fetch );
+	$t_query->sql( $t_sql );
+	while( $t_row = $t_query->fetch() ) {
+		$c_project_id = (int)$t_row['project_id'];
+		$c_version_id = (int)$t_row['id'];
+		if( !isset( $g_cache_versions[$c_version_id] ) ) {
+			$g_cache_versions[$c_version_id] = $t_row;
+		}
+		if( !isset( $g_cache_versions_project[$c_project_id] ) ) {
+			$g_cache_versions_project[$c_project_id] = array();
+		}
+		$g_cache_versions_project[$c_project_id][] = $c_version_id;
+		if( isset( $t_ids_to_fetch[$c_project_id] ) ) {
+			unset( $t_ids_to_fetch[$c_project_id] );
+		}
+	}
+	foreach( $t_ids_to_fetch as $t_id_not_found ) {
+		$g_cache_versions_project[$t_id_not_found] = false;
+	}
 }
 
 /**
@@ -438,48 +490,9 @@ function version_remove_all( $p_project_id ) {
 	return true;
 }
 
-$g_cache_versions_project = null;
-
 /**
- * Cache version information for an array of project id's
- * @param array $p_project_id_array An array of project identifiers.
- * @return void
- */
-function version_cache_array_rows( array $p_project_id_array ) {
-	global $g_cache_versions, $g_cache_versions_project;
-
-	$c_project_id_array = array();
-
-	foreach( $p_project_id_array as $t_project_id ) {
-		if( !isset( $g_cache_versions_project[(int)$t_project_id] ) ) {
-			$c_project_id_array[] = (int)$t_project_id;
-			$g_cache_versions_project[(int)$t_project_id] = array();
-		}
-	}
-
-	if( empty( $c_project_id_array ) ) {
-		return;
-	}
-
-	$t_query = 'SELECT * FROM {project_version}
-				  WHERE project_id IN (' . implode( ',', $c_project_id_array ) . ')
-				  ORDER BY date_order DESC';
-	$t_result = db_query( $t_query );
-
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_versions[(int)$t_row['id']] = $t_row;
-
-		$t_rows[(int)$t_row['project_id']][] = $t_row['id'];
-	}
-
-	foreach( $t_rows as $t_project_id => $t_row ) {
-		$g_cache_versions_project[(int)$t_project_id] = $t_row;
-	}
-}
-
-/**
- * Return all versions for the specified project
+ * Return all versions for the specified project.
+ * Returned versions are ordered by reverse 'date_order'
  * @param integer $p_project_id A valid project id.
  * @param boolean $p_released   Whether to include released versions.
  * @param boolean $p_obsolete   Whether to include obsolete versions.
@@ -499,56 +512,28 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 		$t_project_ids[] = $p_project_id;
 	}
 
-	$t_is_cached = true;
-	foreach( $t_project_ids as $t_project_id ) {
-		if( !isset( $g_cache_versions_project[$t_project_id] ) ) {
-			$t_is_cached = false;
-			break;
-		}
-	}
-	if( $t_is_cached ) {
-		$t_versions = array();
-		foreach( $t_project_ids as $t_project_id ) {
-			if( !empty( $g_cache_versions_project[$t_project_id]) ) {
-				foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
-					$t_version_row = version_cache_row( $t_id );
-					if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
-						continue;
-					}
+	version_cache_array_rows( $t_project_ids );
 
-					$t_versions[] = $t_version_row;
+	$t_versions = array();
+	foreach( $t_project_ids as $t_project_id ) {
+		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
+			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
+				$t_version_row = version_cache_row( $t_id );
+				if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
+					continue;
 				}
+
+				$t_versions[] = $t_version_row;
+				$t_order[] = (int)$t_version_row['date_order'];
 			}
 		}
-		return $t_versions;
 	}
-
-	db_param_push();
-	$t_project_where = version_get_project_where_clause( $p_project_id, $p_inherit );
-	$t_query = 'SELECT * FROM {project_version} WHERE ' . $t_project_where;
-
-	$t_query_params = array();
-
-	if( $p_released !== null ) {
-		$t_query .= ' AND released = ' . db_param();
-		$t_query_params[] = (bool)$p_released;
+	if( !empty( $t_versions ) ) {
+		# @TODO this function should not be responsible for sorting, let the
+		# caller sort as needed
+		array_multisort( $t_order, SORT_DESC, SORT_REGULAR, $t_versions );
 	}
-
-	if( $p_obsolete !== null ) {
-		$t_query .= ' AND obsolete = ' . db_param();
-		$t_query_params[] = (bool)$p_obsolete;
-	}
-
-	$t_query .= ' ORDER BY date_order DESC';
-
-	$t_result = db_query( $t_query, $t_query_params );
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_versions[(int)$t_row['id']] = $t_row;
-
-		$t_rows[] = $t_row;
-	}
-	return $t_rows;
+	return $t_versions;
 }
 
 /**
