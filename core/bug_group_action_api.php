@@ -215,6 +215,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 	$t_user_id = auth_get_current_user_id();
 
 	$t_commands = array();
+	version_cache_array_rows( $p_project_ids );
 	foreach( $p_project_ids as $t_project_id ) {
 
 		$t_update_bug_allowed = access_has_project_level( config_get( 'update_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id );
