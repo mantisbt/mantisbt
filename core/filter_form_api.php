@@ -851,11 +851,12 @@ function print_filter_show_version( array $p_filter = null ) {
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
+	$t_projects = filter_get_included_projects( $p_filter );
 	?><!-- Version -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_VERSION], null, VERSION_ALL, false, true )?>
+			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_VERSION], $t_projects, VERSION_ALL, false )?>
 		</select>
 		<?php
 }
@@ -909,11 +910,12 @@ function print_filter_show_fixed_in_version( array $p_filter = null ) {
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
+	$t_projects = filter_get_included_projects( $p_filter );
 	?><!-- Fixed in Version -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
+			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_FIXED_IN_VERSION], $t_projects, VERSION_ALL, false )?>
 		</select>
 		<?php
 }
@@ -968,11 +970,12 @@ function print_filter_show_target_version( array $p_filter = null ) {
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
+	$t_projects = filter_get_included_projects( $p_filter );
 	?><!-- Fixed in Version -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
+			<?php print_version_option_list( $p_filter[FILTER_PROPERTY_TARGET_VERSION], $t_projects, VERSION_ALL, false )?>
 		</select>
 		<?php
 }
@@ -2395,6 +2398,8 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		$t_project_id = helper_get_current_project();
 	}
 
+	$t_filter_projects = filter_get_included_projects( $t_filter, $t_project_id );
+
 	if( null === $p_static_fallback_page ) {
 		$p_static_fallback_page = $_SERVER['SCRIPT_NAME'];
 	}
@@ -2407,7 +2412,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 		: FILTER_VIEW_TYPE_SIMPLE;
 	$t_filters_url .= '?' . http_build_query( $t_get_params );
 
-	$t_show_product_version =  version_should_show_product_version( $t_project_id );
+	$t_show_product_version =  version_should_show_product_version( $t_filter_projects );
 	$t_show_build = $t_show_product_version && ( config_get( 'enable_product_build' ) == ON );
 
 	# overload handler_id setting if user isn't supposed to see them (ref #6189)

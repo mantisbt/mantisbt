@@ -846,34 +846,34 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 }
 
 /**
- * Print the option list for versions
+ * Print the option list for versions.
+ * All versions related for each project will be printed. Those include, for each
+ * project, the directly linked versions and the inherited versions if applicable.
+ *
  * @param string  $p_version       The currently selected version.
- * @param integer $p_project_id    Project id, otherwise current project will be used.
+ * @param integer $p_project_ids   Array of project ids, of null to use current project.
  * @param integer $p_released      Null to get all, 1: only released, 0: only future versions.
  * @param boolean $p_leading_blank Allow selection of no version.
- * @param boolean $p_with_subs     Whether to include sub-projects.
  * @return void
  */
-function print_version_option_list( $p_version = '', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs = false ) {
-	if( null === $p_project_id ) {
-		$c_project_id = helper_get_current_project();
-	} else {
-		$c_project_id = (int)$p_project_id;
+function print_version_option_list( $p_version = '', $p_project_ids = null, $p_released = null, $p_leading_blank = true ) {
+	if( null === $p_project_ids ) {
+		$p_project_ids = helper_get_current_project();
 	}
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
 
-	if( $p_with_subs ) {
-		$t_versions = version_get_all_rows_with_subs( $c_project_id, $p_released, null );
-	} else {
-		$t_versions = version_get_all_rows( $c_project_id, $p_released, null );
-	}
+	$t_versions = version_get_all_rows( $t_project_ids, $p_released, null );
 
 	# Ensure the selected version (if specified) is included in the list
 	# Note: Filter API specifies selected versions as an array
 	if( !is_array( $p_version ) ) {
 		if( !empty( $p_version ) ) {
-			$t_version_id = version_get_id( $p_version, $c_project_id );
-			if( $t_version_id !== false ) {
-				$t_versions[] = version_cache_row( $t_version_id );
+			foreach( $t_project_ids as $t_project_id ) {
+				$t_version_id = version_get_id( $p_version, $t_project_id );
+				if( $t_version_id !== false ) {
+					$t_versions[] = version_cache_row( $t_version_id );
+					break;
+				}
 			}
 		}
 	}
@@ -900,7 +900,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 			$t_listed[] = $t_version_version;
 			echo '<option value="' . $t_version_version . '"';
 			check_selected( $p_version, $t_version['version'] );
-
+			$c_project_id = $t_version['project_id'];
 			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $t_version['id'] ) );
 
 			echo '>', string_shorten( $t_version_string, $t_max_length ), '</option>';
