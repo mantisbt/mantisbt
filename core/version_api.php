@@ -491,9 +491,9 @@ function version_remove_all( $p_project_id ) {
 }
 
 /**
- * Return all versions for the specified project.
+ * Return all versions for the specified project or projects list
  * Returned versions are ordered by reverse 'date_order'
- * @param integer $p_project_id A valid project id.
+ * @param integer|array $p_project_ids  A valid project id, or array of ids
  * @param boolean $p_released   Whether to include released versions.
  * @param boolean $p_obsolete   Whether to include obsolete versions.
  * @param boolean $p_inherit    True to include versions from parent projects,
@@ -501,21 +501,34 @@ function version_remove_all( $p_project_id ) {
  *                              setting ($g_subprojects_inherit_versions).
  * @return array Array of version rows (in array format)
  */
-function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
+function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
-
-	if(    $p_inherit
-		|| $p_inherit === null && ON == config_get( 'subprojects_inherit_versions' )
-	) {
-		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
+	if( $p_inherit === null && ON == config_get( 'subprojects_inherit_versions') ) {
+		$t_inherit = true;
 	} else {
-		$t_project_ids[] = $p_project_id;
+		$t_inherit = (bool)$p_inherit;
+	}
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+
+	if( $t_inherit ) {
+		# add all parents for the requested projects
+		$t_project_list = array();
+		foreach( $t_project_ids as $t_id ) {
+			if( in_array( $t_id, $t_project_list ) ) {
+				# if it's already in the list, it appeared as parent of other project,
+				# thus its own parents were added too.
+				continue;
+			}
+			$t_project_list = array_merge( $t_project_list, project_hierarchy_inheritance( $t_id ) );
+		}
+		$t_project_list = array_unique( $t_project_list );
+	} else {
+		$t_project_list = $t_project_ids;
 	}
 
-	version_cache_array_rows( $t_project_ids );
-
+	version_cache_array_rows( $t_project_list );
 	$t_versions = array();
-	foreach( $t_project_ids as $t_project_id ) {
+	foreach( $t_project_list as $t_project_id ) {
 		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
 			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
 				$t_version_row = version_cache_row( $t_id );
@@ -537,6 +550,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 	if( !empty( $t_versions ) ) {
 		# @TODO this function should not be responsible for sorting, let the
 		# caller sort as needed
+		# Included for backward compatibilty with calls that expect this.
 		array_multisort( $t_order, SORT_DESC, SORT_REGULAR, $t_versions );
 	}
 	return $t_versions;
@@ -689,13 +703,33 @@ function version_get( $p_version_id ) {
 /**
  * Checks whether the product version should be shown
  * (i.e. report, update, view, print).
- * @param integer $p_project_id The project id.
+ * @param integer|array $p_project_ids  A valid project id or array of ids
  * @return boolean true: show, false: otherwise.
  */
-function version_should_show_product_version( $p_project_id ) {
-	return ( ON == config_get( 'show_product_version', null, null, $p_project_id ) )
-		|| ( ( AUTO == config_get( 'show_product_version', null, null, $p_project_id ) )
-				&& ( count( version_get_all_rows( $p_project_id ) ) > 0 ) );
+function version_should_show_product_version( $p_project_ids ) {
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+
+	$t_check_projects = array();
+	foreach( $t_project_ids as $t_id ) {
+		$t_option = config_get( 'show_product_version', null, null, $t_id );
+		if( ON == $t_option ) {
+			# if at least one of the projects have the option enabled is enough
+			# condition to return true
+			return true;
+		}
+		if( AUTO == $t_option ) {
+			# if option is AUTO, save this project for later check it there are
+			# any actual versions.
+			$t_check_projects[] = $t_id;
+		}
+		# if option is not ON or AUTO, ignore this project
+	}
+
+	if( !empty( $t_check_projects ) ) {
+		return count( version_get_all_rows( $t_check_projects ) ) > 0;
+	}
+
+	return false;
 }
 
 /**
