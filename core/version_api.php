@@ -522,6 +522,12 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 				if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
 					continue;
 				}
+				if( $p_released !== null ) {
+					$c_ver_released = (int)$t_version_row['released'] == 1;
+					if( $p_released && !$c_ver_released || !$p_released && $c_ver_released ) {
+						continue;
+					}
+				}
 
 				$t_versions[] = $t_version_row;
 				$t_order[] = (int)$t_version_row['date_order'];
