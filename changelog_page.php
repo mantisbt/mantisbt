@@ -244,7 +244,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	# grab released versions info for later use, excluding obsolete ones
+	# grab versions info for later use, excluding obsolete ones
 	$t_version_rows = version_get_all_rows( $t_project_id, null, false );
 
 	# cache category info, but ignore the results for now
