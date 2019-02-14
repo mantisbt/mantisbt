@@ -613,7 +613,8 @@ function version_get_field( $p_version_id, $p_field_name ) {
  * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 2.0.0')
  *
  * @param integer $p_version_id         The version id.
- * @param boolean $p_show_project       Whether to include the project or not, null means include the project if different from current.
+ * @param boolean $p_show_project       Whether to include the project name or not,
+ *                                      null means include the project if different from current.
  * @param integer $p_current_project_id The current project id or null to use the cookie.
  * @return string The full name of the version.
  */
