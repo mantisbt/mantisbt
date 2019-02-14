@@ -2841,6 +2841,15 @@ $g_delete_project_threshold = ADMINISTRATOR;
 $g_create_project_threshold = ADMINISTRATOR;
 
 /**
+ * Threshold needed to create a subproject
+ *
+ * Edit is controlled by $g_manage_project_threshold
+ *
+ * @global integer $g_create_subproject_threshold
+ */
+$g_create_subproject_threshold = ADMINISTRATOR;
+
+/**
  * Threshold needed to be automatically included in private projects
  * @global integer $g_private_project_threshold
  */

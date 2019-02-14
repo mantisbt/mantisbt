@@ -238,7 +238,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			<div class="widget-toolbox padding-8 clearfix">
 		<?php
 		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+		if( access_has_global_level ( config_get( 'create_subproject_threshold' ) ) ) {
 			print_form_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ),
 				null, null, 'btn btn-sm btn-primary btn-white btn-round' );
 		} ?>

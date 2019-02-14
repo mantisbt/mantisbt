@@ -49,16 +49,13 @@ require_api( 'print_api.php' );
 
 auth_reauthenticate();
 
-access_ensure_global_level( config_get( 'create_project_threshold' ) );
+$f_parent_id = gpc_get( 'parent_id', null );
+$t_threshold = is_null( $f_parent_id ) ? 'create_project_threshold' : 'create_subproject_threshold';
+access_ensure_global_level( config_get( $t_threshold ) );
 
 layout_page_header();
-
 layout_page_begin( 'manage_overview_page.php' );
-
 print_manage_menu( 'manage_proj_page.php' );
-
-$f_parent_id = gpc_get( 'parent_id', null );
-
 ?>
 
 	<div class="col-md-12 col-xs-12">
