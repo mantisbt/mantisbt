@@ -1138,7 +1138,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	}
 
 	# 0 means currently selected
-	print_assign_to_option_list( 0, $p_bug->project_id );
+	print_assign_to_option_list( 0, $p_bug->project_id, null, config_get( 'handle_bug_include_global_users' ) );
 	echo '</select>';
 
 	$t_bug_id = string_attribute( $p_bug->id );
@@ -1622,4 +1622,3 @@ class TableFieldsItem {
 		$this->header_attr_id = $p_header_id;
 	}
 }
-

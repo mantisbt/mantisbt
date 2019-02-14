@@ -312,7 +312,7 @@ if( $t_multiple_projects ) {
 							null /* $p_filter_project_id */, false /* $p_trace */, true /* $p_can_report_only */ );
 					break;
 				case 'ASSIGN':
-					print_assign_to_option_list( 0, $t_project_id );
+					print_assign_to_option_list( 0, $t_project_id, null, config_get( 'handle_bug_include_global_users' ) );
 					break;
 				case 'RESOLVE':
 					print_enum_string_option_list( 'resolution', config_get( 'bug_resolution_fixed_threshold' ) );

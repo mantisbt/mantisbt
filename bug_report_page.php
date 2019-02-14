@@ -478,7 +478,7 @@ if( $t_show_attachments ) {
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id" class="input-sm">
 				<option value="0" selected="selected"></option>
-				<?php print_assign_to_option_list( $f_handler_id ) ?>
+				<?php print_assign_to_option_list( $f_handler_id, null, null, config_get( 'handle_bug_include_global_users' ) ) ?>
 			</select>
 		</td>
 	</tr>
