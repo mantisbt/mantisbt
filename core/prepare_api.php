@@ -92,9 +92,10 @@ function prepare_user_name( $p_user_id ) {
  * A function that prepares the version string for outputting to the user on view / print issue pages.
  * This function would add the version date, if appropriate.
  *
- * @param integer $p_project_id The project id.
- * @param integer $p_version_id The version id.  If false then this method will return an empty string.
- * @param boolean $p_show_project Force prepending project name to version
+ * @param integer $p_project_id         The project id to use as context.
+ * @param integer $p_version_id         The version id. If false then this method will return an empty string.
+ * @param boolean|null $p_show_project  Whether to include the project name or not,
+ *                                      null means include the project if different from current context.
  * @return string The formatted version string.
  */
 function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
