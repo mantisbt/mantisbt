@@ -18,8 +18,6 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
-require_once( __DIR__ . '/core/graph_api.php' );
-
 /**
  * Mantis Graph plugin
  */
@@ -42,6 +40,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$this->author = 'MantisBT Team';
 		$this->contact = 'mantisbt-dev@lists.sourceforge.net';
 		$this->url = 'http://www.mantisbt.org';
+	}
+
+	/**
+	 * Plugin initialization
+	 * @return void
+	 */
+	function init() {
+		plugin_require_api( 'core/graph_api.php' );
+		plugin_require_api( 'core/Period.php' );
+		require_api( 'summary_api.php' );
 	}
 
 	/**
@@ -127,10 +135,10 @@ class MantisGraphPlugin extends MantisPlugin  {
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
 			} else {
-				echo '<script src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
 			}
-			echo '<script src="' . plugin_file("MantisGraph.js") . '"></script>';
+			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
 	}
 
@@ -139,16 +147,67 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function summary_submenu() {
-		return array(
-            '<a class="btn btn-sm btn-primary btn-white" href="' . helper_mantis_url( 'summary_page.php' ) . '"> <i class="fa fa-table"></i> ' . plugin_lang_get( 'synthesis_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'developer_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_developer' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'reporter_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . lang_get( 'by_reporter' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'status_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'status_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'resolution_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'resolution_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'priority_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'priority_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'severity_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'severity_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'category_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'category_link' ) . '</a>',
-			'<a class="btn btn-sm btn-primary btn-white" href="' . plugin_page( 'issues_trend_graph.php' ) . '"> <i class="fa fa-bar-chart"></i> ' . plugin_lang_get( 'issue_trends_link' ) . '</a>',
-		);
+		$t_filter = summary_get_filter();
+		$t_filter_param = filter_get_temporary_key_param( $t_filter );
+		$t_param_page = explode( '/', gpc_get_string( 'page', '' ) );
+		$t_plugin_page_current = end( $t_param_page );
+
+		# Core should implement the automatic highlighting of active links, but that requires
+		# changing the format of the menu and submenu events.
+		# For now, it's responsability of the plugin to detect and render each link properly.
+		$t_menu_items = array();
+		$t_menu_items[] = array( 'icon' => 'fa-table', 'title' => plugin_lang_get( 'synthesis_link' ),
+			'url' => helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ) );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => lang_get( 'by_developer' ),
+			'url' => helper_url_combine( plugin_page( 'developer_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'developer_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => lang_get( 'by_reporter' ),
+			'url' => helper_url_combine( plugin_page( 'reporter_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'reporter_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'status_link' ),
+			'url' => helper_url_combine( plugin_page( 'status_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'status_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'resolution_link' ),
+			'url' => helper_url_combine( plugin_page( 'resolution_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'resolution_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'priority_link' ),
+			'url' => helper_url_combine( plugin_page( 'priority_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'priority_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'severity_link' ),
+			'url' => helper_url_combine( plugin_page( 'severity_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'severity_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'category_link' ),
+			'url' => helper_url_combine( plugin_page( 'category_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'category_graph.php' );
+
+		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => plugin_lang_get( 'issue_trends_link' ),
+			'url' => helper_url_combine( plugin_page( 'issues_trend_graph.php' ), $t_filter_param ),
+			'plugin_page' => 'issues_trend_graph.php' );
+
+		$t_html_links = array();
+		foreach( $t_menu_items as $t_item ) {
+			$t_class_active = '';
+			if( isset( $t_item['plugin_page'] ) )  {
+				if( $t_item['plugin_page'] == $t_plugin_page_current ) {
+					$t_class_active = ' active';
+				}
+			} else {
+				if( 'summary_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+					$t_class_active = ' active';
+				}
+			}
+			$t_html = '<a class="btn btn-sm btn-primary btn-white' . $t_class_active . '" href="' . $t_item['url'] . '">';
+			$t_html .= ' <i class="fa ' . $t_item['icon'] . '"></i> ';
+			$t_html .= $t_item['title'] . '</a>';
+			$t_html_links[] = $t_html;
+		}
+		return $t_html_links;
 	}
 }

@@ -23,21 +23,17 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( 'core.php' );
-
-plugin_require_api( 'core/graph_api.php' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
+$t_filter = summary_get_filter();
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
-$t_series_name = lang_get( 'bugs' );
-$t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'resolution' );
+$t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'resolution', array(), $t_filter );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -52,11 +48,11 @@ $t_metrics = create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'res
 </div>
 
 <div class="col-md-6 col-xs-12">
-	<?php graph_bar( $t_metrics, lang_get( 'by_resolution' ), $t_series_name ); ?>
+	<?php graph_bar( $t_metrics ); ?>
 </div>
 
 <div class="col-md-6 col-xs-12">
-	<?php graph_pie( $t_metrics, plugin_lang_get( 'by_resolution_pct' ) ); ?>
+	<?php graph_pie( $t_metrics ); ?>
 </div>
 </div>
 </div>

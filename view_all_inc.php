@@ -61,10 +61,10 @@ list( $t_dir, ) = explode( ',', $g_filter['dir'] );
 
 $g_checkboxes_exist = false;
 
-
+$t_current_project = helper_get_current_project();
 # Improve performance by caching category data in one pass
-if( helper_get_current_project() > 0 ) {
-	category_get_all_rows( helper_get_current_project() );
+if( $t_current_project > 0 ) {
+	category_get_all_rows( $t_current_project );
 }
 
 $g_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
@@ -112,11 +112,18 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			<div class="btn-group pull-left">
 		<?php
 			$t_filter_param = filter_get_temporary_key_param( $t_filter );
-			$t_filter_param = ( empty( $t_filter_param ) ? '' : '?' ) . $t_filter_param;
+			if( empty( $t_filter_param ) ) {
+				$t_summary_link = 'view_all_set.php?summary=1&temporary=y';
+			} else {
+				$t_summary_link = 'summary_page.php?' . $t_filter_param;
+			}
 			# -- Print and Export links --
 			print_small_button( 'print_all_bug_page.php' . $t_filter_param, lang_get( 'print_all_bug_page_link' ) );
 			print_small_button( 'csv_export.php' . $t_filter_param, lang_get( 'csv_export' ) );
 			print_small_button( 'excel_xml_export.php' . $t_filter_param, lang_get( 'excel_export' ) );
+			if( access_has_project_level( config_get( 'view_summary_threshold' ), $t_current_project ) ) {
+				print_small_button( $t_summary_link, lang_get( 'summary_link' ) );
+			}
 
 			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
 

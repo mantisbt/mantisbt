@@ -58,7 +58,9 @@ $g_project_override = $f_project_id;
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-$t_time_stats = summary_helper_get_time_stats( $f_project_id );
+$t_filter = summary_get_filter();
+
+$t_time_stats = summary_helper_get_time_stats( $f_project_id, $t_filter );
 
 $t_summary_header_arr = explode( '/', lang_get( 'summary_header' ) );
 
@@ -73,7 +75,7 @@ layout_page_header( lang_get( 'summary_link' ) );
 
 layout_page_begin( __FILE__ );
 
-print_summary_menu( 'summary_page.php' );
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 ?>
 
@@ -105,7 +107,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_project(); ?>
+		<?php summary_print_by_project( array(), null, null, $t_filter ); ?>
 	</table>
 	</div>
 
@@ -119,7 +121,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_enum( 'status' ) ?>
+		<?php summary_print_by_enum( 'status', $t_filter ) ?>
 	</table>
 	</div>
 
@@ -133,7 +135,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_enum( 'severity' ) ?>
+		<?php summary_print_by_enum( 'severity', $t_filter ) ?>
 	</table>
 	</div>
 
@@ -147,7 +149,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_category() ?>
+		<?php summary_print_by_category( $t_filter ) ?>
 	</table>
 	</div>
 
@@ -193,7 +195,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_developer() ?>
+		<?php summary_print_by_developer( $t_filter ) ?>
 	</table>
 </div>
 </div>
@@ -213,7 +215,7 @@ print_summary_submenu();
 				<th class="align-right"><?php echo lang_get( 'balance' ); ?></th>
 			</tr>
 		</thead>
-		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
+		<?php summary_print_by_date( config_get( 'date_partitions' ), $t_filter ) ?>
 	</table>
 	</div>
 
@@ -227,7 +229,7 @@ print_summary_submenu();
 				<th class="align-right"><?php echo lang_get( 'score' ); ?></th>
 			</tr>
 		</thead>
-		<?php summary_print_by_activity() ?>
+		<?php summary_print_by_activity( $t_filter ) ?>
 	</table>
 	</div>
 
@@ -241,7 +243,7 @@ print_summary_submenu();
 				<th class="align-right"><?php echo lang_get( 'days' ); ?></th>
 			</tr>
 		</thead>
-		<?php summary_print_by_age() ?>
+		<?php summary_print_by_age( $t_filter ) ?>
 	</table>
 	</div>
 
@@ -255,7 +257,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_enum( 'resolution' ) ?>
+		<?php summary_print_by_enum( 'resolution', $t_filter ) ?>
 	</table>
 	</div>
 
@@ -269,7 +271,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_enum( 'priority' ) ?>
+		<?php summary_print_by_enum( 'priority', $t_filter ) ?>
 	</table>
 	</div>
 
@@ -283,7 +285,7 @@ print_summary_submenu();
 				<?php echo $t_summary_header ?>
 			</tr>
 		</thead>
-		<?php summary_print_by_reporter() ?>
+		<?php summary_print_by_reporter( $t_filter ) ?>
 	</table>
 	</div>
 
@@ -299,7 +301,7 @@ print_summary_submenu();
 				<th class="align-right"><?php echo lang_get( 'total' ); ?></th>
 			</tr>
 		</thead>
-		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
+		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ), $t_filter ) ?>
 	</table>
 	</div>
 
@@ -327,7 +329,7 @@ print_summary_submenu();
 				?>
 			</tr>
 		</thead>
-		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
+		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ), $t_filter ) ?>
 	</table>
 	</div>
 
@@ -350,7 +352,7 @@ print_summary_submenu();
 				?>
 			</tr>
 		</thead>
-		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>
+		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ), $t_filter ) ?>
 	</table>
 	</div>
 
