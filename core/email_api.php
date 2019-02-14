@@ -971,18 +971,18 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 
 	ignore_user_abort( true );
 
+	$t_notification_data = array(
+		'issue_note_id' => $p_bugnote_id,
+		'files' => $p_files
+	);
+
+	$t_notification = new IssueNoteAddedNotification( $t_data );
+
 	$t_bugnote = bugnote_get( $p_bugnote_id );
 
 	log_event( LOG_EMAIL, sprintf( 'Note ~%d added to issue #%d', $p_bugnote_id, $t_bugnote->bug_id ) );
 
 	$t_project_id = bug_get_field( $t_bugnote->bug_id, 'project_id' );
-	$t_separator = config_get( 'email_separator2' );
-	$t_time_tracking_access_threshold = config_get( 'time_tracking_view_threshold' );
-	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
-	$t_message_id = 'email_notification_title_for_action_bugnote_submitted';
-
-	$t_subject = email_build_subject( $t_bugnote->bug_id );
-
 	$t_recipients = email_collect_recipients( $t_bugnote->bug_id, 'bugnote', /* extra_user_ids */ array(), $p_bugnote_id );
 	$t_recipients_verbose = array();
 
@@ -1000,40 +1000,9 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 			continue;
 		}
 
-		log_event( LOG_EMAIL_VERBOSE, 'Issue = #%d, Note = ~%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.',
-			$t_bugnote->bug_id, $p_bugnote_id, 'bugnote', $t_message_id, $t_user_id, $t_user_email );
-
-		# load (push) user language
-		lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
-
-		$t_message = lang_get( 'email_notification_title_for_action_bugnote_submitted' ) . "\n\n";
-
-		$t_show_time_tracking = access_has_bug_level( $t_time_tracking_access_threshold, $t_bugnote->bug_id, $t_user_id );
-		$t_formatted_note = email_format_bugnote( $t_bugnote, $t_project_id, $t_show_time_tracking, $t_separator );
-		$t_message .= trim( $t_formatted_note ) . "\n";
-		$t_message .= $t_separator . "\n";
-
-		# Files attached
-		if( count( $p_files ) > 0 &&
-			access_has_bug_level( $t_view_attachments_threshold, $t_bugnote->bug_id, $t_user_id ) ) {
-			$t_message .= lang_get( 'bugnote_attached_files' ) . "\n";
-
-			foreach( $p_files as $t_file ) {
-				$t_message .= '- ' . $t_file['name'] . ' (' . number_format( $t_file['size'] ) .
-					' ' . lang_get( 'bytes' ) . ")\n";
-			}
-
-			$t_message .= $t_separator . "\n";
-		}
-
-		$t_contents = $t_message . "\n";
-
-		email_store( $t_user_email, $t_subject, $t_contents );
-
-		log_event( LOG_EMAIL_VERBOSE, 'queued bugnote email for note ~' . $p_bugnote_id .
-			' issue #' . $t_bugnote->bug_id . ' by U' . $t_user_id );
-
-		lang_pop();
+		$t_email = new IssueNoteAddedEmail( $t_notification, $t_user_id );
+		$t_email_data = $t_email->getEmailData();
+		email_store_email_data( $t_email_data );
 	}
 
 	# Send emails out for users that select verbose notifications
@@ -1132,6 +1101,46 @@ function email_bug_deleted( $p_bug_id ) {
 }
 
 /**
+ * Get hostname sending out the emails.
+ * @return string host name.
+ */
+function email_get_hostname() {
+	$t_hostname = '';
+	if( isset( $_SERVER['SERVER_NAME'] ) ) {
+		$t_hostname = $_SERVER['SERVER_NAME'];
+	} else {
+		$t_address = explode( '@', config_get( 'from_email' ) );
+		if( isset( $t_address[1] ) ) {
+			$t_hostname = $t_address[1];
+		}
+	}
+
+	return $t_hostname;
+}
+
+/**
+ * Store email in queue for sending
+ *
+ * @param array $p_email_data The email data
+ * @return integer|null Email id or null if no email to be sent.
+ */
+function email_store_email_data( $p_email_data ) {
+	if( $p_email_data === null ) {
+		return null;
+	}
+
+	$t_email_id = email_queue_add( $p_email_data );
+
+	# Set the email processing flag for the shutdown function
+	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
+	if( $p_force ) {
+		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
+	}
+
+	return $t_email_id;
+}
+
+/**
  * Store email in queue for sending
  *
  * @param string  $p_recipient Email recipient address.
@@ -1140,7 +1149,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param array   $p_headers   Array of additional headers to send with the email.
  * @param boolean $p_force     True to force sending of emails in shutdown function,
  *                             even when using cronjob
- * @return integer|null
+ * @return integer|null Email id or null if no email to be sent.
  */
 function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false ) {
 	global $g_email_shutdown_processing;
@@ -1160,32 +1169,13 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_data->email = $t_recipient;
 	$t_email_data->subject = $t_subject;
 	$t_email_data->body = $t_message;
-	$t_email_data->metadata = array();
-	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
 
-	# Urgent = 1, Not Urgent = 5, Disable = 0
-	$t_email_data->metadata['charset'] = 'utf-8';
+	$t_email_data->metadata = array(
+		'headers' => $p_headers === null ? array() : $p_headers,
+		'charset' => 'utf-8'
+	);
 
-	$t_hostname = '';
-	if( isset( $_SERVER['SERVER_NAME'] ) ) {
-		$t_hostname = $_SERVER['SERVER_NAME'];
-	} else {
-		$t_address = explode( '@', config_get( 'from_email' ) );
-		if( isset( $t_address[1] ) ) {
-			$t_hostname = $t_address[1];
-		}
-	}
-	$t_email_data->metadata['hostname'] = $t_hostname;
-
-	$t_email_id = email_queue_add( $t_email_data );
-
-	# Set the email processing flag for the shutdown function
-	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
-	if( $p_force ) {
-		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
-	}
-
-	return $t_email_id;
+	return email_store_email_data( $t_email_data );
 }
 
 /**
@@ -1272,9 +1262,7 @@ function email_send( EmailData $p_email_data ) {
 		$t_mail = $g_phpMailer;
 	}
 
-	if( isset( $t_email_data->metadata['hostname'] ) ) {
-		$t_mail->Hostname = $t_email_data->metadata['hostname'];
-	}
+	$t_mail->Hostname = email_get_hostname();
 
 	# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
 	$t_lang = config_get_global( 'default_language' );
@@ -1328,6 +1316,7 @@ function email_send( EmailData $p_email_data ) {
 		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
 	}
 
+	# TODO: handle notifications can generate HTML emails
 	$t_mail->IsHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
