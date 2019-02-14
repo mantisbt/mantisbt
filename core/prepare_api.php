@@ -107,8 +107,10 @@ function prepare_version_string( $p_project_id, $p_version_id, $p_show_project =
 	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
 		$t_short_date_format = config_get( 'short_date_format' );
 
-		$t_version = version_get( $p_version_id );
-		$t_version_text .= ' (' . date( $t_short_date_format, $t_version->date_order ) . ')';
+		$t_version = version_cache_row( $p_version_id );
+		if( 1 == $t_version['released'] ) {
+			$t_version_text .= ' (' . date( $t_short_date_format, $t_version['date_order'] ) . ')';
+		}
 	}
 
 	return $t_version_text;
