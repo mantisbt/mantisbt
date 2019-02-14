@@ -575,22 +575,13 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 		$c_project_id = (int)$p_project_id;
 	}
 
-	foreach( $g_cache_versions as $t_version ) {
-		if( ( $t_version['version'] === $p_version ) && ( $t_version['project_id'] == $c_project_id ) ) {
+	$t_versions = version_get_all_rows( $c_project_id, null /* released: any */, true /* incl. obsolete */ ,  $p_inherit );
+	foreach( $t_versions as $t_version ) {
+		if( $t_version['version'] === $p_version ) {
 			return $t_version['id'];
 		}
 	}
-
-	db_param_push();
-	$t_project_where = version_get_project_where_clause( $c_project_id, $p_inherit );
-	$t_query = 'SELECT id FROM {project_version} WHERE ' . $t_project_where . ' AND version=' . db_param();
-	$t_result = db_query( $t_query, array( $p_version ) );
-
-	if( $t_row = db_result( $t_result ) ) {
-		return $t_row;
-	} else {
-		return false;
-	}
+	return false;
 }
 
 /**
