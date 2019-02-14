@@ -850,10 +850,10 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
  * All versions related for each project will be printed. Those include, for each
  * project, the directly linked versions and the inherited versions if applicable.
  *
- * @param string  $p_version       The currently selected version.
- * @param integer $p_project_ids   Array of project ids, of null to use current project.
- * @param integer $p_released      Null to get all, 1: only released, 0: only future versions.
- * @param boolean $p_leading_blank Allow selection of no version.
+ * @param string              $p_version       The currently selected version.
+ * @param integer|array|null  $p_project_ids   A project id, or array of ids, or null to use current project.
+ * @param integer             $p_released      Null to get all, 1: only released, 0: only future versions.
+ * @param boolean             $p_leading_blank Allow selection of no version.
  * @return void
  */
 function print_version_option_list( $p_version = '', $p_project_ids = null, $p_released = null, $p_leading_blank = true ) {
