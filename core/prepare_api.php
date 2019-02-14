@@ -94,14 +94,15 @@ function prepare_user_name( $p_user_id ) {
  *
  * @param integer $p_project_id The project id.
  * @param integer $p_version_id The version id.  If false then this method will return an empty string.
+ * @param boolean $p_show_project Force prepending project name to version
  * @return string The formatted version string.
  */
-function prepare_version_string( $p_project_id, $p_version_id ) {
+function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
 	if( $p_version_id === false ) {
 		return '';
 	}
 
-	$t_version_text = version_full_name( $p_version_id, null, $p_project_id );
+	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
 	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
 		$t_short_date_format = config_get( 'short_date_format' );
