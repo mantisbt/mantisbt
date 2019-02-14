@@ -557,45 +557,6 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
 }
 
 /**
- * Return all versions for the specified project, including sub-projects
- * @param integer $p_project_id A valid project identifier.
- * @param boolean $p_released   Released status.
- * @param boolean $p_obsolete   Obsolete status.
- * @return array
- */
-function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
-	db_param_push();
-	$t_project_where = helper_project_specific_where( $p_project_id );
-
-	$t_query_params = array();
-
-	if( $p_released === null ) {
-		$t_released_where = '';
-	} else {
-		$c_released = (bool)$p_released;
-		$t_released_where = 'AND ( released = ' . db_param() . ' )';
-		$t_query_params[] = $c_released;
-	}
-
-	if( $p_obsolete === null ) {
-		$t_obsolete_where = '';
-	} else {
-		$t_obsolete_where = 'AND ( obsolete = ' . db_param() . ' )';
-		$t_query_params[] = (bool)$p_obsolete;
-	}
-
-	$t_query = 'SELECT * FROM {project_version}
-				  WHERE ' . $t_project_where . ' ' . $t_released_where . ' ' . $t_obsolete_where . '
-				  ORDER BY date_order DESC';
-	$t_result = db_query( $t_query, $t_query_params );
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_rows[] = $t_row;
-	}
-	return $t_rows;
-}
-
-/**
  * Get the version_id, given the project_id and $p_version_id
  * returns false if not found, otherwise returns the id.
  * @param string  $p_version    A version string to look up.
