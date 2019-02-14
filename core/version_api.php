@@ -683,36 +683,3 @@ function version_should_show_product_version( $p_project_ids ) {
 
 	return false;
 }
-
-/**
- * Gets the where clause to use for retrieving versions.
- *
- * @param integer $p_project_id The project id to use.
- * @param boolean $p_inherit    True to include versions from parent projects,
- *                              false not to, or null to use configuration
- *                              setting ($g_subprojects_inherit_versions).
- * @return string The where clause not including WHERE.
- */
-function version_get_project_where_clause( $p_project_id, $p_inherit ) {
-	if( $p_project_id == ALL_PROJECTS ) {
-		$t_inherit = false;
-	} else {
-		if( $p_inherit === null ) {
-			$t_inherit = ( ON == config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) );
-		} else {
-			$t_inherit = $p_inherit;
-		}
-	}
-
-	$c_project_id = (int)$p_project_id;
-
-	if( $t_inherit ) {
-		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
-
-		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
-	} else {
-		$t_project_where = ' project_id=' . $c_project_id . ' ';
-	}
-
-	return $t_project_where;
-}
