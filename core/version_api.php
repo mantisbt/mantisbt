@@ -384,7 +384,7 @@ function version_update( VersionData $p_version_info ) {
 
 	if( $c_version_name != $c_old_version_name ) {
 		$t_project_list = array( $c_project_id );
-		if( config_get( 'subprojects_inherit_versions' ) ) {
+		if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $c_project_id, true ) );
 		}
 		$t_project_list = implode( ',', $t_project_list );
@@ -446,7 +446,7 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	db_query( $t_query, array( (int)$p_version_id ) );
 
 	$t_project_list = array( $t_project_id );
-	if( config_get( 'subprojects_inherit_versions' ) ) {
+	if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 		$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $t_project_id, true ) );
 	}
 	$t_project_list = implode( ',', $t_project_list );
@@ -503,7 +503,7 @@ function version_remove_all( $p_project_id ) {
  */
 function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
-	if( $p_inherit === null && ON == config_get( 'subprojects_inherit_versions') ) {
+	if( $p_inherit === null && ON == config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 		$t_inherit = true;
 	} else {
 		$t_inherit = (bool)$p_inherit;
@@ -707,7 +707,7 @@ function version_get_project_where_clause( $p_project_id, $p_inherit ) {
 		$t_inherit = false;
 	} else {
 		if( $p_inherit === null ) {
-			$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
+			$t_inherit = ( ON == config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) );
 		} else {
 			$t_inherit = $p_inherit;
 		}
