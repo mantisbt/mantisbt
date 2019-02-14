@@ -885,6 +885,8 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
 
+	$t_show_project_name = count( $t_project_ids ) > 1;
+
 	foreach( $t_versions as $t_version ) {
 		# If the current version is obsolete, and current version not equal to $p_version,
 		# then skip it.
@@ -901,7 +903,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 			echo '<option value="' . $t_version_version . '"';
 			check_selected( $p_version, $t_version['version'] );
 			$c_project_id = $t_version['project_id'];
-			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $t_version['id'] ) );
+			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $t_version['id'], $t_show_project_name ) );
 
 			echo '>', string_shorten( $t_version_string, $t_max_length ), '</option>';
 		}

@@ -681,7 +681,7 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
 			$t_show_project = $p_show_project;
 		}
 
-		if( $t_show_project && $t_project_id != $t_current_project_id ) {
+		if( $t_show_project ) {
 			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['version'];
 		}
 
