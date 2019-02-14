@@ -46,6 +46,7 @@
  * @author Gırd
  * @author Kumkumuk
  * @author Mirzali
+ * @author Orbot707
  */
 
 $s_directionality = 'ltr';
@@ -323,7 +324,7 @@ $s_plugin_key_label = 'Kılit:';
 $s_delete_category_button = 'Kategoriye bestere';
 $s_categories = 'Kategoriyi';
 $s_add_category_button = 'Kategoriye cı ke';
-$s_edit_link = 'Bıvırne';
+$s_edit_link = 'Bıvurne';
 $s_actions = 'Kerdışi';
 $s_version = 'Versiyon';
 $s_update = 'Rocane ke';
@@ -380,7 +381,7 @@ $s_no = 'Nê';
 $s_ok = 'TEMAM';
 $s_delete_filter_button = 'Bestere';
 $s_temporary_filter = 'Parzûno demki';
-$s_update_bug_button = 'Bıvırne';
+$s_update_bug_button = 'Bıvurne';
 $s_bug_assign_to_button = 'Çekenen:';
 $s_reopen_bug_button = 'Fına Ake';
 $s_close_bug_button = 'Racnê';
@@ -481,8 +482,8 @@ $s_overdue = 'Tarixa cı ravêrda';
 $s_view_account_title = 'Zanışiya Karberi';
 $s_word_separator = '&#32;';
 $s_month_january = 'Çele';
-$s_month_february = 'Zemherı';
-$s_month_march = 'Mert';
+$s_month_february = 'Gucige';
+$s_month_march = 'Adar';
 $s_month_april = 'Nisane';
 $s_month_may = 'Gulane';
 $s_month_june = 'Heziran';
