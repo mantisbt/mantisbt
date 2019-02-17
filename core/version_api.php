@@ -238,9 +238,7 @@ function version_cache_array_rows( array $p_project_ids ) {
 	while( $t_row = $t_query->fetch() ) {
 		$c_project_id = (int)$t_row['project_id'];
 		$c_version_id = (int)$t_row['id'];
-		if( !isset( $g_cache_versions[$c_version_id] ) ) {
-			$g_cache_versions[$c_version_id] = $t_row;
-		}
+		$g_cache_versions[$c_version_id] = $t_row;
 		if( !isset( $g_cache_versions_project[$c_project_id] ) ) {
 			$g_cache_versions_project[$c_project_id] = array();
 		}

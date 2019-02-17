@@ -902,8 +902,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 			$t_listed[] = $t_version_version;
 			echo '<option value="' . $t_version_version . '"';
 			check_selected( $p_version, $t_version['version'] );
-			$c_project_id = $t_version['project_id'];
-			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $t_version['id'], $t_show_project_name ) );
+			$t_version_string = string_attribute( prepare_version_string( $t_version['project_id'], $t_version['id'], $t_show_project_name ) );
 
 			echo '>', string_shorten( $t_version_string, $t_max_length ), '</option>';
 		}
