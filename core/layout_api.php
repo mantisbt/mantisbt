@@ -1168,26 +1168,30 @@ function layout_footer() {
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get_global( 'show_queries_count' ) ) {
+	$t_show_timer = config_get_global( 'show_timer' );
+	$t_show_memory_usage = config_get_global( 'show_memory_usage' );
+	$t_show_queries_count = config_get_global( 'show_queries_count' );
+	$t_display_debug_info = $t_show_timer || $t_show_memory_usage || $t_show_queries_count;
+
+	if( $t_display_debug_info ) {
 		echo '<div class="col-xs-12 no-padding grey">' . "\n";
 		echo '<address class="no-margin pull-right">' . "\n";
 	}
 
-
 	# Print the page execution time
-	if( config_get( 'show_timer' ) ) {
+	if( $t_show_timer ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
 		echo '<small><i class="fa fa-clock-o"></i> ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Print the page memory usage
-	if( config_get( 'show_memory_usage' ) ) {
+	if( $t_show_memory_usage ) {
 		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
 		echo '<small><i class="fa fa-bolt"></i> ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Determine number of unique queries executed
-	if( config_get_global( 'show_queries_count' ) ) {
+	if( $t_show_queries_count ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
@@ -1213,7 +1217,7 @@ function layout_footer() {
 		echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get_global( 'show_queries_count' ) ) {
+	if( $t_display_debug_info ) {
 		echo '</address>' . "\n";
 		echo '</div>' . "\n";
 	}
