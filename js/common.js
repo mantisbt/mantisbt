@@ -567,18 +567,30 @@ function enableDropzone( classPrefix, autoUpload ) {
 				document.write( response );
 				document.close();
 			});
-			this.on("addedfile", function (file) {
-				if( file.size > max_filesize_bytes ) {
-					var size_mb = file.size / ( 1024*1024 );
+			/**
+			 * 'addedfiles' is undocumented but works similar to 'addedfile'
+			 * It's triggered once after a multiple file addition, and receives
+			 * an array with the added files.
+			 */
+			this.on("addedfiles", function (files) {
+				var error_found = false;
+				var text_files = '';
+				for (var i = 0; i < files.length; i++) {
+					if( files[i].size > max_filesize_bytes ) {
+						error_found = true;
+						var size_mb = files[i].size / ( 1024*1024 );
+						var dec = size_mb < 0.01 ? 3 : 2;
+						text_files = text_files + '"' + files[i].name + '" (' + size_mb.toFixed(dec) + ' MiB)\n';
+						this.removeFile( files[i] );
+					}
+				}
+				if( error_found ) {
 					var max_mb = max_filesize_bytes / ( 1024*1024 );
-					var dec1 = size_mb < 0.01 ? 3 : 2;
-					var dec2 = max_mb < 0.01 ? 3 : 2;
-					var text = zone.data( 'file-too-big' );
-					text = text.replace( '{{filesize}}', size_mb.toFixed(dec1) );
-					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(dec2) );
+					var max_mb_dec = max_mb < 0.01 ? 3 : 2;
+					var text = zone.data( 'dropzone_multiple_files_too_big' );
+					text = text.replace( '{{files}}', '\n' + text_files + '\n' );
+					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(max_mb_dec) );
 					alert( text );
-					this.removeFile( file );
-					return false;
 				}
 			});
 		},
