@@ -1775,6 +1775,7 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
+$s_dropzone_multiple_files_too_big = 'The following files:{{files}}Exceed the maximum allowed file size ({{maxFilesize}} MiB)';
 
 # Generic actions, short names
 $s_save = 'Save';
