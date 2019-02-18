@@ -20,6 +20,8 @@ require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 
+require_once( dirname( __FILE__ ) . '/../../api/soap/mc_api.php' );
+
 use Mantis\Exceptions\ClientException;
 
 /**
@@ -37,10 +39,6 @@ class ProjectHierarchyAddCommand extends Command {
 	 */
 	private $subproject_id;
 
-	public function get_subproject_id() {
-		return $this->subproject_id;
-	}
-
 	/**
 	 * Constructor
 	 *
@@ -57,18 +55,6 @@ class ProjectHierarchyAddCommand extends Command {
 		parent::__construct( $p_data );
 	}
 
-	private function get_subproject_project_id( $p_project ) {
-		if( isset( $p_project ) ){
-			if( isset( $p_project['id'] ) ) {
-				return $p_project['id'];
-			} elseif( isset( $p_project['name'] ) ) {
-				$t_id = project_get_id_by_name( $p_project['name'] );
-				return $t_id == 0 ? $p_project['name'] : $t_id;
-			}							
-		}
-		return null;
-	}
-	
 	/**
 	 * Validate the data.
 	 */
@@ -81,15 +67,22 @@ class ProjectHierarchyAddCommand extends Command {
 		}
 
 		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-		if( !project_exists( $this->project_id )) {
+		if( !project_exists( $this->project_id ) ) {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
 				array( $this->project_id ) );
 		}
 
-		$this->subproject_id = $this->get_subproject_project_id( $this->payload( 'project' ) );
-		if( !project_exists( $this->subproject_id )) {
+		$this->subproject_id = mci_get_project_id( $this->payload( 'project' ), false );
+		if ( !isset($this->subproject_id) ) {
+			$t_subproject = $this->payload( 'project' );
+			$t_subproject_name = isset( $t_subproject['name'] )	? $t_subproject['name'] : '';
+			throw new ClientException(
+				"Project '$t_subproject_name' not found",
+				ERROR_PROJECT_NOT_FOUND,
+				array( $t_subproject_name ) );
+		} else if ( !project_exists( $this->subproject_id ) ) {
 			throw new ClientException(
 				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
