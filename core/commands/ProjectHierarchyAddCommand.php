@@ -23,9 +23,9 @@ require_api( 'project_hierarchy_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
- * A command that adds a project subproject.
+ * A command that adds a project to the project hierarchy (subproject).
  */
-class SubprojectAddCommand extends Command {
+class ProjectHierarchyAddCommand extends Command {
 
 	/**
 	 * @var integer

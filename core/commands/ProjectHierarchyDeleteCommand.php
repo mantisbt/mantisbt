@@ -23,9 +23,9 @@ require_api( 'project_hierarchy_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
- * A command that deletes a project subproject.
+ * A command that deletes a project from the project hierarchy (subproject).
  */
-class SubprojectDeleteCommand extends Command {
+class ProjectHierarchyDeleteCommand extends Command {
 
 	/**
 	 * @var integer
