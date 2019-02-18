@@ -76,8 +76,8 @@ class ProjectHierarchyAddCommand extends Command {
 
 		if ( config_get( 'subprojects_enabled' ) == OFF ) {
 			throw new ClientException(
-				'Access denied to add subprojects',
-				ERROR_ACCESS_DENIED );
+				'Project hierarchy (subprojects) is disabled',
+				ERROR_PROJECT_HIERARCHY_DISABLED );
 		}
 
 		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
