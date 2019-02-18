@@ -905,6 +905,7 @@ $s_developer_stats = 'إحصاءات المطور';
 $s_reporter_stats = 'إحصاءات المبلغ';
 $s_orct = '(مفتوحة/محلولة/مغلقة/إجمالي)';
 $s_summary_header = 'مفتوحة/محلوحة/مغلقة/مجموع/نسبة حل/نسبة';
+$s_summary_notice_filter_is_applied = 'هناك فلتر تم تطبيقه';
 $s_any = 'أي';
 $s_all = 'كل';
 $s_show = 'عرض';

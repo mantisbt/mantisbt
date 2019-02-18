@@ -908,6 +908,7 @@ $s_developer_stats = '開發者狀態';
 $s_reporter_stats = '回報人狀態';
 $s_orct = '(未解決/已解決/已結束/總數)';
 $s_summary_header = '開啟/已解決/已結束/總計/已解決比例/比例';
+$s_summary_notice_filter_is_applied = '查詢條件已套用';
 $s_any = '任意';
 $s_all = '全部';
 $s_show = '每頁顯示筆數';

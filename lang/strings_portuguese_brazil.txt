@@ -918,6 +918,7 @@ $s_developer_stats = 'Estatísticas de Desenvolvedores';
 $s_reporter_stats = 'Estatísticas de Relatores';
 $s_orct = '(aberto/resolvido/fechado/total)';
 $s_summary_header = 'aberta/resolvida/fechada/total/proporção resolvida/proporção';
+$s_summary_notice_filter_is_applied = 'Um filtro foi aplicado';
 $s_any = 'qualquer';
 $s_all = 'todos';
 $s_show = 'Exibir';

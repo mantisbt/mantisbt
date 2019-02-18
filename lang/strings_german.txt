@@ -915,6 +915,7 @@ $s_developer_stats = 'Entwickler-Statistik';
 $s_reporter_stats = 'Reporter-Statistik';
 $s_orct = '(offen/erledigt/geschlossen/gesamt)';
 $s_summary_header = 'offen/erledigt/geschlossen/gesamt/Verhältnis erledigt/Verhältnis';
+$s_summary_notice_filter_is_applied = 'Ein Filter wurde angewandt';
 $s_any = 'alle';
 $s_all = 'alle';
 $s_show = 'Zeige';
