@@ -895,6 +895,7 @@ $s_developer_stats = '개발자 통계';
 $s_reporter_stats = '보고자 통계';
 $s_orct = '(신규/해결/종료/전체)';
 $s_summary_header = '개설/해결/종료/합계/해결률/비율';
+$s_summary_notice_filter_is_applied = '필터가 적용되었습니다';
 $s_any = '모두';
 $s_all = '모두';
 $s_show = '표시';

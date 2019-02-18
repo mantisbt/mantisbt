@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Albe Albe 460
  * @author Alexmar983
  * @author Beta16
  * @author Darth Kule
@@ -912,6 +913,7 @@ $s_developer_stats = 'Statistiche per sviluppatore';
 $s_reporter_stats = 'Statistiche per segnalatore';
 $s_orct = '(aperte/risolte/chiuse/totale)';
 $s_summary_header = 'aperto/risolto/chiuso/totale/tasso di soluzione/rapporto';
+$s_summary_notice_filter_is_applied = 'Un filtro è stato applicato';
 $s_any = 'qualsiasi';
 $s_all = 'tutte';
 $s_show = 'Mostra';
@@ -1413,4 +1415,5 @@ $s_dropzone_max_files_exceeded = 'Non puoi più caricare altri file.';
 $s_dropzone_not_supported = 'Dropzone.js non supporta vecchie versioni di browser!';
 $s_save = 'Salva';
 $s_reset = 'Reimposta';
+$s_persist = 'Persistono';
 $s_load = 'Carica';
