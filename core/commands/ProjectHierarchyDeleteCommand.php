@@ -61,7 +61,7 @@ class ProjectHierarchyDeleteCommand extends Command {
 		}
 
 		$this->project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
-		if( !project_exists( $this->project_id )) {
+		if( !project_exists( $this->project_id ) ) {
 			throw new ClientException(
 				"Project '$this->project_id' not found",
 				ERROR_PROJECT_NOT_FOUND,
@@ -70,7 +70,7 @@ class ProjectHierarchyDeleteCommand extends Command {
 
 
 		$this->subproject_id = helper_parse_id( $this->query( 'subproject_id' ), 'subproject_id' );
-		if( !project_exists( $this->subproject_id )) {
+		if( !project_exists( $this->subproject_id ) ) {
 			throw new ClientException(
 				"Project '$this->subproject_id' not found",
 				ERROR_PROJECT_NOT_FOUND,

@@ -47,7 +47,7 @@ class ProjectHierarchyAddCommand extends Command {
 	 *
 	 * $p_data['payload'] is expected to contain:
 	 * - project (array)
-	 * - inherit_parent (bool)
+	 * - inherit_parent (boolean)
 	 *
 	 * @param array $p_data The command data.
 	 */
@@ -75,7 +75,7 @@ class ProjectHierarchyAddCommand extends Command {
 		}
 
 		$this->subproject_id = mci_get_project_id( $this->payload( 'project' ), false );
-		if ( !isset($this->subproject_id) ) {
+		if ( !isset( $this->subproject_id ) ) {
 			$t_subproject = $this->payload( 'project' );
 			$t_subproject_name = isset( $t_subproject['name'] )	? $t_subproject['name'] : '';
 			throw new ClientException(

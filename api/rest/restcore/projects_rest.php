@@ -145,8 +145,8 @@ function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\R
 	);
 
 	$t_command = new ProjectHierarchyAddCommand( $t_data );
-	$t_result = $t_command->execute();
-	$t_subproject_id = $t_command->get_subproject_id();
+	$t_command->execute();
+	$t_subproject_id = mci_get_project_id( $t_data['payload'][ 'project'], false );
 	
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
 		"Subproject '$t_subproject_id' added to project '$t_project_id'" );
@@ -187,7 +187,7 @@ function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Htt
 	);
 
 	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
-	$t_result = $t_command->execute();
+	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject '$t_subproject_id' updated" );
 }
@@ -223,7 +223,7 @@ function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Htt
 	);
 
 	$t_command = new ProjectHierarchyDeleteCommand( $t_data );
-	$t_result = $t_command->execute();
+	$t_command->execute();
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
 		"Subproject '$t_subproject_id' deleted from project '$t_project_id'" );
