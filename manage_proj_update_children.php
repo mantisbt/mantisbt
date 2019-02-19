@@ -30,7 +30,6 @@
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
- * @uses project_hierarchy_api.php
  */
 
 require_once( 'core.php' );
@@ -41,7 +40,6 @@ require_api( 'current_user_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
-require_api( 'project_hierarchy_api.php' );
 
 form_security_validate( 'manage_proj_update_children' );
 
@@ -49,16 +47,22 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-
-if ( config_get( 'subprojects_enabled' ) == OFF ) {
-	access_denied();
-}
-
 $t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 foreach ( $t_subproject_ids as $t_subproject_id ) {
 	$f_inherit_child = gpc_get_bool( 'inherit_child_' . $t_subproject_id, false );
-	project_hierarchy_update( $t_subproject_id, $f_project_id, $f_inherit_child );
+
+	$t_data = array(
+		'query' => array(
+			'project_id' => (int)$f_project_id,
+			'subproject_id' => (int)$t_subproject_id
+		),
+		'payload' => array(
+			'inherit_parent' => (bool)$f_inherit_child
+		)
+	);
+	
+	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
+	$t_command->execute();
 }
 
 form_security_purge( 'manage_proj_update_children' );
