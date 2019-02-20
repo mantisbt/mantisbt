@@ -100,99 +100,36 @@ function project_hierarchy_remove_all( $p_project_id ) {
 
 /**
  * Returns true if project is at top of hierarchy
+ * @deprecated This function is no longer used, but refactored in case it's called by external code.
+ *
  * @param integer $p_project_id    Project identifier.
  * @param boolean $p_show_disabled Whether or not to consider projects which are disabled.
  * @return boolean
  */
 function project_hierarchy_is_toplevel( $p_project_id, $p_show_disabled = false ) {
-	global $g_cache_project_hierarchy;
-
-	project_hierarchy_cache( $p_show_disabled );
-
-	if( isset( $g_cache_project_hierarchy[ALL_PROJECTS] ) ) {
-		return in_array( $p_project_id, $g_cache_project_hierarchy[ALL_PROJECTS] );
-	} else {
-		return false;
-	}
+	$t_graph = project_hierarchy_graph( $p_show_disabled );
+	$t_reachable = $t_graph->get_reachable_projects( $p_project_id, ProjectGraph::PARENTS );
+	# reachable projects include the project itself. In order to not have parents,
+	# this array must contain more than one project.
+	return ( count( $t_reachable ) <= 1 );
 }
 
 /**
- * Returns the id of the project's parent (0 if top-level or not found)
+ * Returns the id of the project's parent (ALL_PROJECTS if top-level or not found).
+ * If there are more than one parent, the first one found is returned.
+ * @deprecated This function is no longer used, but refactored in case it's called by external code.
+ *
  * @param integer $p_project_id    Project Identifier.
  * @param boolean $p_show_disabled Whether or not to consider projects which are disabled.
  * @return integer
  */
 function project_hierarchy_get_parent( $p_project_id, $p_show_disabled = false ) {
-	global $g_cache_project_hierarchy;
-
-	project_hierarchy_cache( $p_show_disabled );
-
-	if( ALL_PROJECTS == $p_project_id ) {
-		return 0;
-	}
-
-	foreach( $g_cache_project_hierarchy as $t_key => $t_value ) {
-		if( in_array( $p_project_id, $g_cache_project_hierarchy[$t_key] ) ) {
-			return $t_key;
-		}
-	}
-
-	return 0;
-}
-
-/**
- * Cache project hierarchy
- * @param boolean $p_show_disabled Whether or not to cache projects which are disabled.
- * @return void
- */
-function project_hierarchy_cache( $p_show_disabled = false ) {
-	global $g_cache_project_hierarchy, $g_cache_project_inheritance;
-	global $g_cache_show_disabled;
-
-	if( !is_null( $g_cache_project_hierarchy ) && ( $g_cache_show_disabled == $p_show_disabled ) ) {
-		return;
-	}
-	$g_cache_show_disabled = $p_show_disabled;
-
-	db_param_push();
-	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
-
-	$t_query = 'SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
-				  FROM {project} p
-				  LEFT JOIN {project_hierarchy} ph
-				    ON ph.child_id = p.id
-				  WHERE ' . $t_enabled_clause . '
-				  ORDER BY p.name';
-
-	$t_result = db_query( $t_query, ( $p_show_disabled ? array() : array( true ) ) );
-
-	$g_cache_project_hierarchy = array();
-	$g_cache_project_inheritance = array();
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( null === $t_row['parent_id'] ) {
-			$t_row['parent_id'] = ALL_PROJECTS;
-		}
-
-		if( isset( $g_cache_project_hierarchy[(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']][] = (int)$t_row['id'];
-		} else {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']] = array(
-				(int)$t_row['id'],
-			);
-		}
-
-		if( !isset( $g_cache_project_inheritance[(int)$t_row['id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']] = array();
-		}
-
-		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][ALL_PROJECTS] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = ALL_PROJECTS;
-		}
-
-		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = (int)$t_row['parent_id'];
-		}
+	$t_graph = project_hierarchy_graph( $p_show_disabled );
+	$t_node = $t_graph->get_node( $p_project_id );
+	if( $t_node && !empty( $t_node['parents'] ) ) {
+		return reset( $t_node['parents'] );
+	} else {
+		return ALL_PROJECTS;
 	}
 }
 
@@ -204,11 +141,12 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
  * @return boolean
  */
 function project_hierarchy_inherit_parent( $p_child_id, $p_parent_id, $p_show_disabled = false ) {
-	global $g_cache_project_inheritance;
-
-	project_hierarchy_cache( $p_show_disabled );
-
-	return in_array( $p_parent_id, $g_cache_project_inheritance[$p_child_id] );
+	$t_graph = project_hierarchy_graph( $p_show_disabled );
+	$t_node = $t_graph->get_node( (int)$p_child_id );
+	if( $t_node ) {
+		return isset( $t_node['inherit_categories'][(int)$p_parent_id] );
+	}
+	return false;
 }
 
 /**
@@ -219,69 +157,128 @@ function project_hierarchy_inherit_parent( $p_child_id, $p_parent_id, $p_show_di
  * @return array
  */
 function project_hierarchy_inheritance( $p_project_id, $p_show_disabled = false ) {
-	global $g_cache_project_inheritance;
+	static $cache = array();
 
-	project_hierarchy_cache( $p_show_disabled );
+	if( !isset( $cache[$p_project_id][$p_show_disabled] ) ) {
+		$t_graph = project_hierarchy_graph( $p_show_disabled );
+		$t_reachable = $t_graph->get_reachable_projects( (int)$p_project_id, ProjectGraph::INHERIT_CATEGORIES );
 
-	$t_project_ids = array( (int)$p_project_id, );
-	$t_lookup_ids = array( (int)$p_project_id, );
-
-	while( count( $t_lookup_ids ) > 0 ) {
-		$t_project_id = array_shift( $t_lookup_ids );
-
-		if( !isset( $g_cache_project_inheritance[$t_project_id] ) ) {
-			continue;
+		# special case: if list is empty, it's becasue current project is disabled and
+		# $p_show_disabled is false. Add current project to not break existing code
+		if( empty( $t_reachable ) ) {
+			$t_reachable[] = (int)$p_project_id;
 		}
-
-		foreach( $g_cache_project_inheritance[$t_project_id] as $t_parent_id ) {
-			if( !in_array( $t_parent_id, $t_project_ids ) ) {
-				$t_project_ids[] = $t_parent_id;
-
-				if( !in_array( $t_lookup_ids, $t_project_ids ) ) {
-					$t_lookup_ids[] = $t_parent_id;
-				}
-			}
-		}
+		$cache[$p_project_id][$p_show_disabled] = $t_reachable;
 	}
 
-	return $t_project_ids;
+	return $cache[$p_project_id][$p_show_disabled];
 }
 
 /**
- * Get subprojects for a project
- * @param integer $p_project_id    Project identifier.
- * @param boolean $p_show_disabled Whether or not to consider projects which are disabled.
- * @return array
+ * Returns all projects that are immediate subprojects, this is, only one depth level
+ * below the specified project id.
+ * The project id provided as parameter won't appear in the result.
+ *
+ * This function uses the actual project hierarchy and does not account for user visibility.
+ *
+ * @param integer $p_project_id    Project id to start the search of subprojects.
+ * @param boolean $p_show_disabled Whether or not to return disabled.
+ * @return array    Array of project ids, or empty array if none found.
  */
 function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = false ) {
-	global $g_cache_project_hierarchy;
+	$t_graph = project_hierarchy_graph( $p_show_disabled );
+	$t_traverse_options = array(
+		'max_depth' => 1,
+		'start_node' => $p_project_id
+		);
+	$t_graph->traverse( $t_traverse_options );
+	$t_children = $t_graph->traverse_visited_ids;
 
-	project_hierarchy_cache( $p_show_disabled );
-
-	if( isset( $g_cache_project_hierarchy[$p_project_id] ) ) {
-		return $g_cache_project_hierarchy[$p_project_id];
-	} else {
-		return array();
-	}
+	# the current root project is not expected in the result, remove it
+	return array_diff( $t_children, array( $p_project_id ) );
 }
 
 /**
- * Get complete subproject hierarchy for a project
- * @param integer $p_project_id    Project identifier.
- * @param boolean $p_show_disabled Whether or not to consider projects which are disabled.
- * @return array
+ * Returns all projects that are subprojects, reachable at any depth, from the
+ * specified project id.
+ * The project id provided as parameter won't appear in the result.
+ *
+ * This function uses the actual project hierarchy and does not account for user visibility.
+ *
+ * @param integer $p_project_id    Project id to start the search of subprojects.
+ * @param boolean $p_show_disabled Whether or not to return disabled.
+ * @return array    Array of project ids, or empty array if none found.
  */
 function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled = false ) {
-	$t_todo = project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled );
-	$t_subprojects = array();
+	$t_graph = project_hierarchy_graph( $p_show_disabled );
+	$t_reachable = $t_graph->get_reachable_projects( $p_project_id );
 
-	while( $t_todo ) {
-		$t_elem = array_shift( $t_todo );
-		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
-			$t_todo = array_merge( $t_todo, project_hierarchy_get_subprojects( $t_elem, $p_show_disabled ) );
-		}
+	# the current root project is not expected in the result, remove it
+	return array_diff( $t_reachable, array( $p_project_id ) );
+}
+
+/**
+ * Creates a projects graph object with the accesible projects for a user.
+ *
+ * @param null|integer $p_user_id   A user id to evaluate project access, or null to use current
+ * @param boolean $p_show_disabled  Whether to include disabled projects
+ * @return \ProjectGraph	ProjectGraph object for the visible projects hierarchy
+ */
+function project_hierarchy_graph_visible_projects( $p_user_id = null, $p_show_disabled = false ) {
+	static $s_cache_visible_projects = array();
+
+	if( null === $p_user_id ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+	if( !isset( $s_cache_visible_projects[$p_user_id][$p_show_disabled] ) ) {
+		$t_project_graph = new ProjectGraph( array(
+			'for_user' => $p_user_id,
+			'show_disabled' => $p_show_disabled,
+			'sort' => ProjectGraph::SORT_NAME_ASC,
+			'sort_target' => ProjectGraph::CHILDREN
+			) );
+		$s_cache_visible_projects[$p_user_id][$p_show_disabled] = $t_project_graph;
+	}
+	return $s_cache_visible_projects[$p_user_id][$p_show_disabled];
+}
+
+/**
+ * Creates a projects graph object with all existing projects
+ *
+ * This function uses the actual project hierarchy and does not account for user visibility.
+ *
+ * @param boolean $p_show_disabled    Whether to include disabled projects
+ * @return \ProjectGraph   ProjectGraph object for the projects hierarchy
+ */
+function project_hierarchy_graph( $p_show_disabled = true ) {
+	static $s_cache_graph = array();
+
+	if( !isset( $s_cache_graph[$p_show_disabled] ) ) {
+		$s_cache_graph[$p_show_disabled] =
+			new ProjectGraph( array(
+				'for_user' => ALL_USERS,
+				'show_disabled' => $p_show_disabled,
+				'sort' => null,
+				) );
 	}
 
-	return $t_subprojects;
+	return $s_cache_graph[$p_show_disabled];
+}
+
+/**
+ * Returns a list representation of the hierarchical tree of projects accessible to a user.
+ * Each item is an array with useful info, in the order of a tree traversal.
+ * The root node is by default ALL_PROJECTS, but a specific project id can be used as
+ * root node to retrieve a partial tree.
+ *
+ * @param null|integer $p_user_id   A user id to evaluate project access, or null to use current
+ * @param integer $p_project_id     A project_id to be used as root of the tree.
+ * @param boolean $p_show_disabled  Whether to include disabled projects
+ * @see \ProjectGraph         Refer to ProjectGraph::travese() for a detailed description of
+ *                            the list representation.
+ * @return array	Array of items, each item is an array with associative info about the projects.
+ */
+function project_hierarchy_list_visible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS, $p_show_disabled = false ) {
+	$t_graph = project_hierarchy_graph_visible_projects( $p_user_id, $p_show_disabled );
+	return $t_graph->traverse( ['start_node' => $p_project_id] );
 }
