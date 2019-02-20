@@ -515,23 +515,20 @@ function layout_navbar_projects_menu() {
 	if( !layout_navbar_can_show_projects_menu() ) {
 		return;
 	}
-	echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
-	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
-
 	$t_current_project_id = helper_get_current_project();
-	if( ALL_PROJECTS == $t_current_project_id) {
-		echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
-	} else {
-		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
-	}
-
-	echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
-	echo '</a>' . "\n";
-
-	echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
-	layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-	echo '</ul>' . "\n";
-	echo '</li>' . "\n";
+	?>
+	<li class="grey" id="dropdown_projects_menu">
+		<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+			&#160;<?php echo project_get_name( $t_current_project_id ) ?>&#160;
+			<i class="ace-icon fa fa-angle-down bigger-110"></i>
+		</a>
+		<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">
+		<?php
+		layout_navbar_projects_list();
+		?>
+		</ul>
+	</li>
+	<?php
 }
 
 /**
@@ -573,94 +570,51 @@ function layout_navbar_button_bar() {
 }
 
 /**
- * Print projects that the current user has access to.
+ * Prints the content listitems for the navbar project selector
  *
- * @param int $p_project_id 	The current project id or null to use cookie.
- * @param bool $p_include_all_projects  true: include "All Projects", otherwise false.
- * @param int|null $p_filter_project_id  The id of a project to exclude or null.
- * @param string|bool $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
- * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
  * @return void
  */
-function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
+function layout_navbar_projects_list() {
 	$t_user_id = auth_get_current_user_id();
+	$t_project_path = helper_build_project_trace_string( helper_get_current_project_trace() );
+	$t_project_list = project_hierarchy_list_visible_projects();
 
-	# Cache all needed projects
-	project_cache_array_rows( user_get_all_accessible_projects( $t_user_id ) );
+	# helper function to print a list item
+	$t_href_url = helper_mantis_url( 'set_project.php' );
+	$fn_print_listitem = function( $p_project_info ) use ( $t_project_path, $t_href_url ) {
+		$t_full_id = helper_build_project_trace_string( $p_project_info['path'] );
+		echo ( $t_full_id == $t_project_path ) ? '<li class="active">' : '<li>';
+		echo '<a href="',  $t_href_url, '?project_id=', $t_full_id, '" class="project-link">';
+		echo str_repeat( '&#160;&#160;&#160;&#160;', max( 0, $p_project_info['level'] - 1 ) );
+		echo string_attribute( project_get_name( $p_project_info['id'] ) ), '</a></li>';
+	};
 
-	# Get top level projects
-	$t_project_ids = user_get_accessible_projects( $t_user_id );
-	$t_can_report = true;
+	# List layout is:
+	# - "All projects", if applicable
+	# - Search box
+	# - List of each specific project and subproject
 
-	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '">';
-		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
-		echo '<li class="divider"></li>' . "\n";
+	$t_first_node = reset( $t_project_list );
+	if( $t_first_node['id'] == ALL_PROJECTS ) {
+		$fn_print_listitem( $t_first_node );
+		array_shift( $t_project_list );
 	}
-
-	echo '<li>';
-	echo '<div id="projects-list">';
-	echo '<div class="projects-searchbox">';
-	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
-	echo '</div>';
-	echo '<ul class="list dropdown-yellow no-margin">';
-
-	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
-		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
-		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
-	}
-
-	echo '</ul>';
-	echo '</div>';
-	echo '</li>';
+	?>
+	<li>
+		<div id="projects-list">
+			<div class="projects-searchbox">
+				<input class="search form-control input-md" placeholder="<?php echo lang_get( 'search' ) ?>" />
+			</div>
+			<ul class="list dropdown-yellow no-margin">
+				<?php
+				foreach( $t_project_list as $t_project_info ) {
+					$fn_print_listitem( $t_project_info );
+				} ?>
+			</ul>
+		</div>
+	</li>
+	<?php
 }
-
-/**
- * List projects that the current user has access to
- *
- * @param integer $p_parent_id         A parent project identifier.
- * @param integer $p_project_id        A project identifier.
- * @param integer $p_filter_project_id A filter project identifier.
- * @param boolean $p_trace             Whether to trace parent projects.
- * @param boolean $p_can_report_only   If true, disables projects in which user can't report issues; defaults to false (all projects enabled).
- * @param array   $p_parents           Array of parent projects.
- * @return void
- */
-function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
-	array_push( $p_parents, $p_parent_id );
-	$t_user_id = auth_get_current_user_id();
-	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
-	$t_can_report = true;
-
-	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
-		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
-		} else {
-			$t_full_id = $t_id;
-		}
-
-		echo 0 == strcmp( $p_project_id, $t_full_id ) ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
-		echo ' class="project-link"> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
-		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
-
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
-	}
-}
-
 
 /**
  * Print user avatar in the navbar
