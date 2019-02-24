@@ -128,53 +128,54 @@ print_manage_menu( 'manage_proj_page.php' );
 
 		<tbody>
 <?php
-		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
-		$t_projects = user_get_accessible_projects( auth_get_current_user_id(), true );
-		$t_full_projects = array();
-		foreach ( $t_projects as $t_project_id ) {
-			$t_full_projects[] = project_get_row( $t_project_id );
+		# sorting by name is done inside the graph to mantain the hierarchy visualization
+		# otherwise, a plain sort of the result will be made afterwards
+		$t_sorted_hierarchy = $f_sort == 'name';
+		if( $t_sorted_hierarchy ) {
+			$t_graph_sort = ( $t_direction == DESCENDING ) ? ProjectGraph::SORT_NAME_DESC : ProjectGraph::SORT_NAME_ASC;
+		} else {
+			$t_graph_sort = null;
 		}
-		$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
-		$t_stack = array( $t_projects );
 
-		while( 0 < count( $t_stack ) ) {
-			$t_projects = array_shift( $t_stack );
+		$t_graph = new ProjectGraph( array(
+			'for_user' => auth_get_current_user_id(),
+			'show_disabled' => true,
+			'filter_threshold' => 'manage_project_threshold',
+			'sort' => $t_graph_sort,
+		) );
+		# If the graph is sorted by name, the hierarchy can present duplicates for projects
+		# that have multiple parents. When sorting by other fields, the hierarchy is not
+		# explicitly displayed, so we don't want duplicated projects.
+		$t_traverse_options = array(
+			'duplicates' => $t_sorted_hierarchy,
+			'include_all_projects' => false
+			);
+		$t_project_list = $t_graph->traverse( $t_traverse_options );
 
-			if( 0 == count( $t_projects ) ) {
-				continue;
-			}
+		foreach( $t_project_list as &$t_item ) {
+			$t_item += project_get_row( $t_item['id'] );
+		}
+		unset( $t_item );
 
-			$t_project = array_shift( $t_projects );
-			$t_project_id = $t_project['id'];
-			$t_level      = count( $t_stack );
+		if( !$t_sorted_hierarchy ) {
+			$t_project_list = multi_sort( $t_project_list, $f_sort, $t_direction);
+		}
 
-			# only print row if user has project management privileges
-			if( access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
+		foreach( $t_project_list as $t_project ) {
+			$t_padding = $t_sorted_hierarchy ? str_repeat( "&raquo; ", $t_project['level'] - 1 ) : '';
+			?>
 			<tr>
 				<td>
-					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display_line( $t_project['name'] ) ?></a>
+					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo $t_padding, string_display_line( $t_project['name'] ) ?></a>
 				</td>
 				<td><?php echo get_enum_element( 'project_status', $t_project['status'] ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_project['enabled'] ) ?></td>
 				<td><?php echo get_enum_element( 'project_view_state', $t_project['view_state'] ) ?></td>
 				<td><?php echo string_display_links( $t_project['description'] ) ?></td>
-			</tr><?php
-			}
-			$t_subprojects = project_hierarchy_get_subprojects( $t_project_id, true );
-
-			if( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
-				array_unshift( $t_stack, $t_projects );
-			}
-
-			if( 0 < count( $t_subprojects ) ) {
-				$t_full_projects = array();
-				foreach ( $t_subprojects as $t_project_id ) {
-					$t_full_projects[] = project_get_row( $t_project_id );
-				}
-				$t_subprojects = multi_sort( $t_full_projects, $f_sort, $t_direction );
-				array_unshift( $t_stack, $t_subprojects );
-			}
-		} ?>
+			</tr>
+			<?php
+		}
+		?>
 		</tbody>
 	</table>
 </div>
