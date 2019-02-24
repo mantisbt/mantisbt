@@ -32,8 +32,6 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
- * @uses project_api.php
- * @uses project_hierarchy_api.php
  */
 
 require_once( 'core.php' );
@@ -46,8 +44,6 @@ require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'project_hierarchy_api.php' );
 
 form_security_validate( 'manage_proj_subproj_add' );
 
@@ -55,20 +51,22 @@ auth_reauthenticate();
 
 $f_project_id    = gpc_get_int( 'project_id' );
 $f_subproject_id = gpc_get_int( 'subproject_id' );
+$f_inherit_parent = gpc_get_bool( 'inherit_parent', true );
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+$t_data = array(
+	'query' => array(
+		'project_id' => (int)$f_project_id
+	),
+	'payload' => array(
+		'project' => array(
+			'id' => (int)$f_subproject_id
+		 ),
+		'inherit_parent' => (bool)$f_inherit_parent
+	)
+);
 
-if ( config_get( 'subprojects_enabled' ) == OFF ) {
-	access_denied();
-}
-
-project_ensure_exists( $f_project_id );
-project_ensure_exists( $f_subproject_id );
-
-if( $f_project_id == $f_subproject_id ) {
-	trigger_error( ERROR_GENERIC, ERROR );
-}
-project_hierarchy_add( $f_subproject_id, $f_project_id );
+$t_command = new ProjectHierarchyAddCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_subproj_add' );
 

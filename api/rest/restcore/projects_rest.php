@@ -39,6 +39,14 @@ $g_app->group('/projects', function() use ( $g_app ) {
 	# Project versions
 	$g_app->post( '/{id}/versions', 'rest_project_version_add' );
 	$g_app->post( '/{id}/versions/', 'rest_project_version_add' );
+
+	# Project hierarchy (subprojects)
+	$g_app->post( '/{id}/subprojects', 'rest_project_hierarchy_add' );
+	$g_app->post( '/{id}/subprojects/', 'rest_project_hierarchy_add' );
+	$g_app->patch( '/{id}/subprojects/{subproject_id}', 'rest_project_hierarchy_update' );
+	$g_app->patch( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_update' );
+	$g_app->delete( '/{id}/subprojects/{subproject_id}', 'rest_project_hierarchy_delete' );
+	$g_app->delete( '/{id}/subprojects/{subproject_id}/', 'rest_project_hierarchy_delete' );
 });
 
 /**
@@ -112,6 +120,113 @@ function rest_project_version_add( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_version_id = (int)$t_result['id'];
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Version created with id $t_version_id" );
+}
+
+/**
+ * A method to add a project to the project hierarchy (subproject).
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_hierarchy_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id
+		),
+		'payload' => $p_request->getParsedBody()
+	);
+
+	$t_command = new ProjectHierarchyAddCommand( $t_data );
+	$t_command->execute();
+	$t_subproject_id = mci_get_project_id( $t_data['payload'][ 'project'], false );
+	
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
+		"Subproject '$t_subproject_id' added to project '$t_project_id'" );
+}
+
+/**
+ * A method to update a project in the project hierarchy (subproject).
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_hierarchy_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_subproject_id = isset( $p_args['subproject_id'] )
+		? $p_args['subproject_id']
+		: $p_request->getParam( 'subproject_id' );
+	if( is_blank( $t_subproject_id ) ) {
+		$t_message = "Subproject id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_subproject_update = $p_request->getParsedBody();	
+
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'subproject_id' => $t_subproject_id
+		),
+		'payload' => $t_subproject_update
+
+	);
+
+	$t_command = new ProjectHierarchyUpdateCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT, "Subproject '$t_subproject_id' updated" );
+}
+
+/**
+ * A method to delete a project from the project hierarchy (subproject).
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_project_hierarchy_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_project_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	if( is_blank( $t_project_id ) ) {
+		$t_message = "Project id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_subproject_id = isset( $p_args['subproject_id'] )
+		? $p_args['subproject_id']
+		: $p_request->getParam( 'subproject_id' );
+	if( is_blank( $t_subproject_id ) ) {
+		$t_message = "Subproject id is missing.";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+			'subproject_id' => $t_subproject_id
+		)
+	);
+
+	$t_command = new ProjectHierarchyDeleteCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT,
+		"Subproject '$t_subproject_id' deleted from project '$t_project_id'" );
 }
 
 /**

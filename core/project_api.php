@@ -496,9 +496,10 @@ function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
 /**
  * Get the id of the project with the specified name
  * @param string $p_project_name Project name to retrieve.
- * @return integer
+ * @param integer|boolean $p_default The default value or false if the default should not be applied.
+ * @return null|integer
  */
-function project_get_id_by_name( $p_project_name ) {
+function project_get_id_by_name( $p_project_name, $p_default = ALL_PROJECTS ) {
 	db_param_push();
 	$t_query = 'SELECT id FROM {project} WHERE name = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_project_name ), 1 );
@@ -506,8 +507,10 @@ function project_get_id_by_name( $p_project_name ) {
 	$t_id = db_result( $t_result );
 	if( $t_id ) {
 		return $t_id;
+	} else if ( $p_default === false ) {
+		return null;
 	} else {
-		return 0;
+		return $p_default;
 	}
 }
 
