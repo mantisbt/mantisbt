@@ -35,7 +35,6 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses project_api.php
- * @uses project_hierarchy_api.php
  */
 
 require_once( 'core.php' );
@@ -51,7 +50,6 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
-require_api( 'project_hierarchy_api.php' );
 
 form_security_validate( 'manage_proj_create' );
 
@@ -68,10 +66,6 @@ $f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 
 $f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
-if( 0 != $f_parent_id ) {
-	project_ensure_exists( $f_parent_id );
-}
-
 $t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
 if( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
@@ -81,7 +75,20 @@ if( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator
 }
 
 if( 0 != $f_parent_id ) {
-	project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
+	$t_data = array(
+		'query' => array(
+			'project_id' => (int)$f_parent_id
+		),
+		'payload' => array(
+			'project' => array(
+				'id' => (int)$t_project_id
+			 ),
+			'inherit_parent' => (bool)$f_inherit_parent
+		)
+	);
+	
+	$t_command = new ProjectHierarchyAddCommand( $t_data );
+	$t_command->execute();
 }
 
 event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
