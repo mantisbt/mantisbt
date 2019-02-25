@@ -14,6 +14,11 @@ $(document).ready( function() {
             },
             options: {
                 scales: {
+                    xAxes: [{
+                        ticks: {
+                            maxRotation: 90
+                        }
+                    }],
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
