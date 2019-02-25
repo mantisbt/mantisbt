@@ -1,7 +1,8 @@
 $(document).ready( function() {
-    $("canvas[id^='barchart']").each( function() {
+    $("canvas[id*='barchart']").each( function() {
+        var type = this.id.substr(0,8) === 'barchart' ? 'bar' : 'horizontalBar';
         new Chart( $(this), {
-            type: 'bar',
+            type: type,
             data: {
                 labels: $(this).data('labels'),
                 datasets: [{

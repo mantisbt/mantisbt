@@ -88,12 +88,14 @@ function graph_status_colors_to_colors() {
  *
  * @param array   $p_metrics      Graph Data.
  * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
+ * @param bool    $p_horiz        True for horizontal bars, defaults to false (vertical)
  * @return void
  */
-function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
+function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
 	static $s_id = 0;
 
 	$s_id++;
+	$t_id = $p_horiz ? 'horizbarchart' : 'barchart';
 	$t_json_labels = json_encode( array_keys( $p_metrics ) );
 	$t_json_values = json_encode( array_values( $p_metrics ) );
 
@@ -101,7 +103,7 @@ function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
 	$t_height = 400;
 
 ?>
-	<canvas id="barchart<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
+	<canvas id="<?php echo $t_id, $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
 		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>" />
 <?php
