@@ -34,6 +34,9 @@ print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
 $t_metrics = create_category_summary( $t_filter );
+
+# Dynamically set width ratio between 1 and 0.25 based on number of categories
+$t_wfactor = 1 - min( max( count( $t_metrics ), 25 ) - 25, 75 ) / 100;
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -48,7 +51,7 @@ $t_metrics = create_category_summary( $t_filter );
 		</div>
 
 		<div class="col-md-6 col-xs-12">
-			<?php graph_bar( $t_metrics, 1, true ); ?>
+			<?php graph_bar( $t_metrics, $t_wfactor, true ); ?>
 		</div>
 
 		<div class="col-md-6 col-xs-12">
