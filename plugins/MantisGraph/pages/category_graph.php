@@ -35,7 +35,7 @@ print_summary_submenu();
 
 $t_metrics = create_category_summary( $t_filter );
 ?>
-    
+
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 
@@ -48,7 +48,7 @@ $t_metrics = create_category_summary( $t_filter );
 		</div>
 
 		<div class="col-md-6 col-xs-12">
-			<?php graph_bar( $t_metrics ); ?>
+			<?php graph_bar( $t_metrics, 1, true ); ?>
 		</div>
 
 		<div class="col-md-6 col-xs-12">
