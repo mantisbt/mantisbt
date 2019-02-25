@@ -838,11 +838,12 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'De Ennshtällung „%1$s“ wohdt n
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'De Ennshtällung „%1$s“ kam_mer nit en de Daatebangk säze. Dat moß en dä Dattei <code>config_inc.php</code> dren jemaat wääde.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'De Zeijshereih „%1$s“ woodt nit jefonge.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz nit jefonge';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dat Projäk „%1$d“ kunnte mer nit fenge.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'E Feld „%1$s“ en de Daatebangk ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Wä et maache mööt es ävver nit berääschtesh, öm di Aanjelääjeheit met däm Shtattus ze beärbeide.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dat Projäk „%1$d“ kunnte mer nit fenge.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'E Projäk met däm Name jit et ald. Jangk retuur un jif ene andere Name aan.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Dat es ene onjöltijje Name för e Projäk. Dä Name kann nit fottjelohße wääde.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '!FUZZY!!Dat wööd ene Krengel en dä subprojecte ier hierarchy erenn bränge.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Ene Metmaacher met däm Name „%1$s“ kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Ene Metmaacher met dä Kännong „%1$d“ kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'De Login-Daate, di Dinge Brauser faßjehallde hät, sin verkeeht. Müjjelesch, dat Dinge Zohjang un Dinge Name als ene Metmaacher fott sin?';
@@ -905,7 +906,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Do moß en Adräß för
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Di Aanjahbe paße op keine Metmaacher!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Dä <i lang="en">URL</i> för zom Beschtäätejje es verkeht udder wohd ald jebruch. Donn widder enlogge.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'De jrühßte zohjelohße Aanzahl unjedonne Aanfroore es jez ungerwähß. Bes esu joht un donn med enem Administrator Kuntak opnämme.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '!FUZZY!!Dat wööd ene Krengel en dä subprojecte ier hierarchy erenn bränge.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Ene Fähler mem Ömleide es opjetrodde. Donn drop aachte, dat kein Zwescheräum ußerhallef vun däm <i lang="en">PHP</i>-Projramm_Block (<span class="plainlinks">&lt;?php ?&gt;</span>) en dä Datteije <code lang="en">config_inc.php</code> udder <code lang="en">custom_*.php</code> es.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Dat Zohsazprojramm „%1$d“ es ald enshhtalleht.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'En däm Feld "%1$s" es en Shpallde dubbelt dren: "%2$s"';
