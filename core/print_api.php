@@ -266,7 +266,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	}
 
 	if( $p_project_id === ALL_PROJECTS ) {
-		$t_projects = user_get_accessible_projects( $t_current_user );
+		$t_projects = user_get_all_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
 		$t_users = array();
@@ -598,74 +598,24 @@ function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_thres
  */
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
 	$t_user_id = auth_get_current_user_id();
-	$t_project_ids = user_get_accessible_projects( $t_user_id );
+	$t_project_list = project_hierarchy_list_visible_projects( $t_user_id );
 	$t_can_report = true;
-	project_cache_array_rows( $t_project_ids );
 
-	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-		echo '<option value="' . ALL_PROJECTS . '"';
-		if( $p_project_id !== null ) {
-			check_selected( $p_project_id, ALL_PROJECTS, false );
-		}
-		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
-	}
-
-	foreach( $t_project_ids as $t_id ) {
+	foreach( $t_project_list as $t_project_info ) {
+		$t_id = $t_project_info['id'];
 		if( $p_can_report_only ) {
 			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
 			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
 		}
-
-		echo '<option value="' . $t_id . '"';
+		if( !$p_include_all_projects && ALL_PROJECTS == $t_id && ALL_PROJECTS !== $p_filter_project_id ) {
+			continue;
+		}
+		$t_padding = str_repeat( '&#160;', $t_project_info['level'] - 1 )
+			. str_repeat( '&raquo;', $t_project_info['level'] - 1 ) . ' ';
+		echo '<option value="', $t_id, '"';
 		check_selected( $p_project_id, $t_id, false );
-		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
-	}
-}
-
-/**
- * List projects that the current user has access to
- * @param integer $p_parent_id         A parent project identifier.
- * @param integer $p_project_id        A project identifier.
- * @param integer $p_filter_project_id A filter project identifier.
- * @param boolean $p_trace             Whether to trace parent projects.
- * @param boolean $p_can_report_only   If true, disables projects in which user can't report issues; defaults to false (all projects enabled).
- * @param array   $p_parents           Array of parent projects.
- * @return void
- */
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
-	if ( config_get( 'subprojects_enabled' ) == OFF ) {
-		return;
-	}
-
-	array_push( $p_parents, $p_parent_id );
-	$t_user_id = auth_get_current_user_id();
-	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
-	project_cache_array_rows( $t_project_ids );
-	$t_can_report = true;
-
-	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
-		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ';' ) . ';' . $t_id;
-		} else {
-			$t_full_id = $t_id;
-		}
-
-		echo '<option value="' . $t_full_id . '"';
-		check_selected( $p_project_id, $t_full_id, false );
-		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-		echo '>'
-			. str_repeat( '&#160;', count( $p_parents ) )
-			. str_repeat( '&raquo;', count( $p_parents ) ) . ' '
-			. string_attribute( project_get_field( $t_id, 'name' ) )
-			. '</option>' . "\n";
-		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
+		check_disabled( ALL_PROJECTS != $t_id && ( $t_id == $p_filter_project_id || !$t_can_report ) );
+		echo '>', $t_padding, string_attribute( project_get_name( $t_id ) ), '</option>';
 	}
 }
 
