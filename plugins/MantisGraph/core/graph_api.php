@@ -279,6 +279,7 @@ function create_developer_resolved_summary( array $p_filter = null ) {
 		'status_resolved' => (int)$t_resolved_status_threshold,
 		'resolution_fixed' => FIXED
 		) );
+	$t_query->set_limit( 20 );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
@@ -356,14 +357,7 @@ function create_developer_open_summary( array $p_filter = null ) {
  * @param integer $p_limit   Number of records to return.
  * @return array
  */
-function create_reporter_summary( array $p_filter = null, $p_limit = null ) {
-	# set deafult
-	if( !$p_limit ) {
-		$t_limit = 25;
-	} else {
-		$t_limit = $p_limit < 1 ? -1 : $p_limit;
-	}
-
+function create_reporter_summary( array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -379,7 +373,7 @@ function create_reporter_summary( array $p_filter = null, $p_limit = null ) {
 	$t_sql .= ' GROUP BY reporter_id ORDER BY count DESC';
 	$t_query->sql( $t_sql );
 	$t_query->bind( 'resolution_fixed', FIXED );
-	$t_query->set_limit( $t_limit );
+	$t_query->set_limit( 25 );
 
 	$t_reporter_arr = array();
 	$t_reporters = array();
