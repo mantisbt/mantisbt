@@ -24,6 +24,13 @@
 class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
+	 * ChartJS colorschemes plugin
+	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/
+	 */
+	const CHARTJS_COLORSCHEMES_VERSION = '0.3.0';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-x/VBrVFabQZyhV1G+oKCy98gkqf/pW5aVAhaBRxJ/x4=';
+
+	/**
 	 * A method that populates the plugin information and minimum requirements.
 	 * @return void
 	 */
@@ -134,9 +141,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 			if( config_get_global( 'cdn_enabled' ) == ON ) {
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
+				html_javascript_cdn_link('https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@' . self::CHARTJS_COLORSCHEMES_VERSION . '/dist/chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
 				echo '<script type="text/javascript" src="' . plugin_file('Chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
 				echo '<script type="text/javascript" src="' . plugin_file('Chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes.min.js' ) . '"></script>';
 			}
 			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
