@@ -57,19 +57,17 @@ $(document).ready( function() {
                 datasets: [
                     {
                         label: $(this).data('opened-label'),
-                        backgroundColor: 'rgba(255, 158, 158, 0.5)',
                         data: $(this).data('opened-values')
                     },
                     {
                         label: $(this).data('resolved-label'),
-                        backgroundColor: 'rgba(49, 196, 110, 0.5)',
                         data: $(this).data('resolved-values')
                     },
                     {
                         label: $(this).data('still-open-label'),
-                        backgroundColor: 'rgba(255, 0, 0, 1)',
                         data: $(this).data('still-open-values')
-                    },]
+                    }
+                ]
             },
             options: {
                 scales: {
@@ -78,6 +76,13 @@ $(document).ready( function() {
                             beginAtZero: true
                         }
                     }]
+                },
+                plugins: {
+                    colorschemes: {
+                        scheme: 'brewer.Set1-3',
+                        reverse: true,
+                        fillAlpha: 0.15
+                    }
                 }
             }
         });
