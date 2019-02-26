@@ -103,9 +103,11 @@ function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
 	$t_height = 400;
 
 ?>
-	<canvas id="<?php echo $t_id, $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
+	<canvas id="<?php echo $t_id, $s_id ?>"
+		width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
-		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>" />
+		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>">
+	</canvas>
 <?php
 }
 
@@ -127,11 +129,13 @@ function graph_pie( array $p_metrics ) {
 	$t_background_colors = graph_colors_to_rgbas( $t_colors, 1.0 );
 	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 ?>
-	<canvas id="piechart<?php echo $s_id ?>" width="500" height="400"
+	<canvas id="piechart<?php echo $s_id ?>"
+		width="500" height="400"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
 		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>"
 		data-background-colors="[<?php echo htmlspecialchars( $t_background_colors, ENT_QUOTES ) ?>]"
-		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]" />
+		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]">
+	</canvas>
 <?php
 }
 
@@ -171,14 +175,16 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_width = 500 * $p_wfactor;
 	$t_height = 400;
 ?>
-	<canvas id="linebydate<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
-			data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
-			data-opened-label="<?php echo $t_legend_opened ?>"
-			data-opened-values="<?php echo htmlspecialchars( $t_opened_values, ENT_QUOTES ) ?>"
-			data-resolved-label="<?php echo $t_legend_resolved ?>"
-			data-resolved-values="<?php echo htmlspecialchars( $t_resolved_values, ENT_QUOTES ) ?>"
-			data-still-open-label="<?php echo $t_legend_still_open ?>"
-			data-still-open-values="<?php echo htmlspecialchars( $t_still_open_values, ENT_QUOTES ) ?>" />
+	<canvas id="linebydate<?php echo $s_id ?>"
+		width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
+		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
+		data-opened-label="<?php echo $t_legend_opened ?>"
+		data-opened-values="<?php echo htmlspecialchars( $t_opened_values, ENT_QUOTES ) ?>"
+		data-resolved-label="<?php echo $t_legend_resolved ?>"
+		data-resolved-values="<?php echo htmlspecialchars( $t_resolved_values, ENT_QUOTES ) ?>"
+		data-still-open-label="<?php echo $t_legend_still_open ?>"
+		data-still-open-values="<?php echo htmlspecialchars( $t_still_open_values, ENT_QUOTES ) ?>">
+	</canvas>
 <?php
 
 }
