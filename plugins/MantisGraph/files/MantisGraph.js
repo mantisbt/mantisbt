@@ -40,8 +40,8 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data:  $(this).data('values'),
-                    backgroundColor: $(this).data('background-colors'),
-                    borderColor: $(this).data('border-colors'),
+                    backgroundColor: $(this).data('colors'),
+                    borderColor: $(this).data('colors'),
                     borderWidth: 1
                 }]
             }

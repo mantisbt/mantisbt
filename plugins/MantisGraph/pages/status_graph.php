@@ -50,7 +50,7 @@ $t_metrics = create_bug_status_summary( $t_filter );
             </div>
 
             <div class="col-md-6 col-xs-12">
-            <?php graph_pie( $t_metrics ); ?>
+            <?php graph_pie( $t_metrics, true ); ?>
             </div>
         </div>
     </div>
