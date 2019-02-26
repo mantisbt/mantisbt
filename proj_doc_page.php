@@ -72,7 +72,7 @@ $t_admin = config_get_global( 'admin_site_threshold' );
 
 if( $f_project_id == ALL_PROJECTS ) {
 	# Select all the projects that the user has access to
-	$t_projects = user_get_accessible_projects( $t_user_id );
+	$t_projects = user_get_all_accessible_projects( $t_user_id );
 } else {
 	# Select the specific project
 	$t_projects = array( $f_project_id );
