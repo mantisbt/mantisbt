@@ -114,10 +114,14 @@ function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
 /**
  * Function that displays pie charts
  *
- * @param array         $p_metrics       Graph Data.
+ * @param array $p_metrics       Graph Data.
+ * @param bool $p_mantis_colors  True to use colors defined in Mantis config
+ *                               {@see $g_status_colors}. By default use
+ *                               standard color scheme
+ *
  * @return void
  */
-function graph_pie( array $p_metrics ) {
+function graph_pie( array $p_metrics, $p_mantis_colors = false ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -125,16 +129,18 @@ function graph_pie( array $p_metrics ) {
 	$t_json_labels = json_encode( array_keys( $p_metrics ) );
 	$t_json_values = json_encode( array_values( $p_metrics ) );
 
-	$t_colors = graph_status_colors_to_colors();
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 1.0 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 ?>
 	<canvas id="piechart<?php echo $s_id ?>"
 		width="500" height="400"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
 		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>"
-		data-background-colors="[<?php echo htmlspecialchars( $t_background_colors, ENT_QUOTES ) ?>]"
-		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]">
+<?php
+	if( $p_mantis_colors ) {
+		$t_colors = graph_colors_to_rgbas( graph_status_colors_to_colors(), 1.0 );
+?>
+		data-colors="[<?php echo htmlspecialchars( $t_colors, ENT_QUOTES ) ?>]"
+<?php } ?>
+	>
 	</canvas>
 <?php
 }
