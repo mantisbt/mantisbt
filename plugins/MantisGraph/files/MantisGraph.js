@@ -1,4 +1,7 @@
 $(document).ready( function() {
+    // Default color scheme
+    Chart.defaults.global.plugins.colorschemes.scheme = 'tableau.Classic20';
+
     $("canvas[id*='barchart']").each( function() {
         var type = this.id.substr(0,8) === 'barchart' ? 'bar' : 'horizontalBar';
         new Chart( $(this), {
@@ -8,8 +11,6 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data: $(this).data('values'),
-                    backgroundColor: 'rgba(252, 189, 189, 0.7)',
-                    borderColor: 'rgba(252, 189, 189, 1)',
                     borderWidth: 1
                 }]
             },
