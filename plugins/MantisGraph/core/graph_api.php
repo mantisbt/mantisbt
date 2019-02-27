@@ -75,7 +75,7 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
 function graph_status_colors_to_colors( $p_metrics = array() ) {
 	$t_colors = array();
 	foreach( array_keys( $p_metrics ) as $t_label ) {
-		$t_colors[] = get_status_color_by_label( $t_label );
+		$t_colors[] = get_status_color_by_label( $t_label , null, null, '#e5e5e5' );
 	}
 
 	return $t_colors;
