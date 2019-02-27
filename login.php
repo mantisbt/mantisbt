@@ -40,6 +40,7 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'session_api.php' );
 require_api( 'string_api.php' );
+require_api( 'logging_api.php' );
 
 $f_username		= gpc_get_string( 'username', '' );
 $f_password		= gpc_get_string( 'password', '' );
@@ -63,6 +64,27 @@ $f_perm_login	= $t_allow_perm_login && gpc_get_bool( 'perm_login' );
 
 gpc_set_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', $f_secure_session ? '1' : '0' );
 
+// Function to get the client ip address
+function get_client_ip_server() {
+	$ipaddress = '';
+	if ($_SERVER['HTTP_CLIENT_IP'])
+	    $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+	else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+	    $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	else if($_SERVER['HTTP_X_FORWARDED'])
+	    $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+	else if($_SERVER['HTTP_FORWARDED_FOR'])
+	    $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+	else if($_SERVER['HTTP_FORWARDED'])
+	    $ipaddress = $_SERVER['HTTP_FORWARDED'];
+	else if($_SERVER['REMOTE_ADDR'])
+	    $ipaddress = $_SERVER['REMOTE_ADDR'];
+	else
+	    $ipaddress = 'UNKNOWN';
+
+	return $ipaddress;
+}
+
 if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 	session_set( 'secure_session', $f_secure_session );
 
@@ -72,6 +94,7 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 
 	$t_redirect_url = 'login_cookie_test.php?return=' . $t_return;
 } else {
+	log_event(LOG_LDAP, "LOGIN FAILED from ".get_client_ip_server()." as $f_username");
 	$t_query_args = array(
 		'error' => 1,
 		'username' => $f_username,
