@@ -161,14 +161,9 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_formatted_labels = array_map( function($label) { return date( 'Ymd', $label ); }, $t_labels );
 	$t_json_labels = json_encode( $t_formatted_labels );
 
-	$t_values = array_values( $p_metrics[0] );
-	$t_opened_values = json_encode( $t_values );
-
-	$t_values = array_values( $p_metrics[1] );
-	$t_resolved_values = json_encode( $t_values );
-
-	$t_values = array_values( $p_metrics[2] );
-	$t_still_open_values = json_encode( $t_values );
+	$t_opened_values = json_encode( array_values( $p_metrics[0] ) );
+	$t_resolved_values = json_encode( array_values( $p_metrics[1] ) );
+	$t_still_open_values = json_encode( array_values( $p_metrics[2] ) );
 
 	$t_legend_opened = plugin_lang_get( 'legend_reported' );
 	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
