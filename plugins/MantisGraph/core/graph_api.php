@@ -69,15 +69,13 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
 
 /**
  * Gets an array of html colors that corresponds to statuses.
+ * @param array $p_metrics Data set to return colors for (with status labels as keys)
  * @return array An array similar to the status_colors config ordered by status enum codes.
  */
-function graph_status_colors_to_colors() {
-	$t_status_enum = config_get( 'status_enum_string' );
-	$t_statuses = MantisEnum::getValues( $t_status_enum );
+function graph_status_colors_to_colors( $p_metrics = array() ) {
 	$t_colors = array();
-
-	foreach( $t_statuses as $t_status ) {
-		$t_colors[] = get_status_color( $t_status );
+	foreach( array_keys( $p_metrics ) as $t_label ) {
+		$t_colors[] = get_status_color_by_label( $t_label );
 	}
 
 	return $t_colors;
@@ -136,7 +134,7 @@ function graph_pie( array $p_metrics, $p_mantis_colors = false ) {
 		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>"
 <?php
 	if( $p_mantis_colors ) {
-		$t_colors = graph_colors_to_rgbas( graph_status_colors_to_colors(), 1.0 );
+		$t_colors = graph_colors_to_rgbas( graph_status_colors_to_colors( $p_metrics ), 1.0 );
 ?>
 		data-colors="[<?php echo htmlspecialchars( $t_colors, ENT_QUOTES ) ?>]"
 <?php } ?>
