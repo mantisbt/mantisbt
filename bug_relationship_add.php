@@ -50,6 +50,13 @@ $t_dest_bug_id_string = str_replace( ',', '|', $f_dest_bug_id_string );
 $t_dest_bug_id_array = explode( '|', $t_dest_bug_id_string );
 
 foreach( $t_dest_bug_id_array as $t_dest_bug_id ) {
+	# Skip empty bug ids and ignore source bug when processing multiple targets
+	if( count( $t_dest_bug_id_array ) > 1
+	&& ( is_blank( $t_dest_bug_id ) || $f_src_bug_id == $t_dest_bug_id )
+	) {
+		continue;
+	}
+
 	$t_data = array(
 		'query' => array( 'issue_id' => $f_src_bug_id ),
 		'payload' => array(
