@@ -54,7 +54,7 @@ foreach( $t_dest_bug_id_array as $t_dest_bug_id ) {
 		'query' => array( 'issue_id' => $f_src_bug_id ),
 		'payload' => array(
 			'type' => array( 'id' => $f_rel_type ),
-			'issue' => array( 'id' => $t_dest_bug_id )
+			'issue' => array( 'id' => trim( $t_dest_bug_id ) )
 		)
 	);
 
