@@ -170,10 +170,6 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_values = array_values( $p_metrics[2] );
 	$t_still_open_values = json_encode( $t_values );
 
-	$t_colors = graph_status_colors_to_colors();
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
-
 	$t_legend_opened = plugin_lang_get( 'legend_reported' );
 	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
 	$t_legend_still_open = plugin_lang_get( 'legend_still_open' );
