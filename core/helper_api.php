@@ -110,29 +110,29 @@ function helper_array_transpose( array $p_array ) {
  * @param string       $p_status_label  Status label.
  * @param integer|null $p_user          User id, defaults to null (all users).
  * @param integer|null $p_project       Project id, defaults to null (all projects).
+ * @param string       $p_default_color Fallback color in case status is not found (defaults to white).
  * @return string
  */
-function get_status_color_by_label( $p_status_label, $p_user = null, $p_project = null ) {
+function get_status_color_by_label( $p_status_label, $p_user = null, $p_project = null, $p_default_color = '#ffffff' ) {
 	$t_status_colors = config_get( 'status_colors', null, $p_user, $p_project );
-	$t_color = '#ffffff';
 
 	if( isset( $t_status_colors[$p_status_label] ) ) {
-		$t_color = $t_status_colors[$p_status_label];
+		return $t_status_colors[$p_status_label];
 	}
-
-	return $t_color;
+	return $p_default_color;
 }
 
 /**
  * get the color string for the given status, user and project
- * @param integer      $p_status  Status value.
- * @param integer|null $p_user    User id, defaults to null (all users).
- * @param integer|null $p_project Project id, defaults to null (all projects).
+ * @param integer      $p_status        Status value.
+ * @param integer|null $p_user          User id, defaults to null (all users).
+ * @param integer|null $p_project       Project id, defaults to null (all projects).
+ * @param string       $p_default_color Fallback color in case status is not found (defaults to white).
  * @return string
  */
-function get_status_color( $p_status, $p_user = null, $p_project = null ) {
+function get_status_color( $p_status, $p_user = null, $p_project = null, $p_default_color = '#ffffff' ) {
 	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status );
-	return get_status_color_by_label( $t_status_label, $p_user, $p_project );
+	return get_status_color_by_label( $t_status_label, $p_user, $p_project, $p_default_color );
 }
 
 /**
