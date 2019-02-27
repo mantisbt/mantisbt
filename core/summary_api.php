@@ -667,78 +667,62 @@ function summary_print_by_category( array $p_filter = null ) {
 /**
  * Print bug counts by project.
  * A filter can be used to limit the visibility.
- * @todo check p_cache - static?
  *
- * @param array   $p_projects Array of project id's.
- * @param integer $p_level    Indicates the depth of the project within the sub-project hierarchy.
- * @param array   $p_cache    Summary cache.
  * @param array   $p_filter   Filter array.
  * @return void
  */
-function summary_print_by_project( array $p_projects = array(), $p_level = 0, array $p_cache = null, array $p_filter = null ) {
-	$t_project_id = helper_get_current_project();
-
-	if( empty( $p_projects ) ) {
-		if( ALL_PROJECTS == $t_project_id ) {
-			$p_projects = current_user_get_accessible_projects();
-		} else {
-			$p_projects = array(
-				$t_project_id,
-			);
-		}
+function summary_print_by_project( array $p_filter = null ) {
+	$t_current_project = helper_get_current_project();
+	if( !empty( $p_filter ) ) {
+		$t_projects = filter_get_included_projects( $p_filter );
+	} else {
+		$t_projects = current_user_get_all_accessible_projects( $t_current_project, true /* include self */ );
 	}
 
-	# Retrieve statistics one time to improve performance.
-	if( null === $p_cache ) {
-		$t_query = new DBQuery();
-		$t_sql = 'SELECT project_id, status, COUNT( status ) AS bugcount FROM {bug}';
-		if( !empty( $p_filter ) ) {
-			$t_subquery = filter_cache_subquery( $p_filter );
-			$t_sql .= ' WHERE {bug}.id IN :filter';
-			$t_query->bind( 'filter', $t_subquery );
-		}
-		$t_sql .= ' GROUP BY project_id, status';
-		$t_query->sql( $t_sql );
+	$t_projects_graph = new ProjectGraph( array(
+			'for_user' => auth_get_current_user_id(),
+			'show_disabled' => false,
+			'sort' => ProjectGraph::SORT_NAME_ASC,
+			'sort_target' => ProjectGraph::CHILDREN,
+			'limit_projects' => $t_projects
+			) );
+	$t_projects_list = $t_projects_graph->traverse();
 
-		$p_cache = array();
-		$t_bugs_total_count = 0;
-		while( $t_row = $t_query->fetch() ) {
-			$t_project_id = $t_row['project_id'];
-			$t_status = $t_row['status'];
-			$t_bugcount = $t_row['bugcount'];
-			$t_bugs_total_count += $t_bugcount;
-
-			summary_helper_build_bugcount( $p_cache, $t_project_id, $t_status, $t_bugcount );
-		}
-		$p_cache["_bugs_total_count_"] = $t_bugs_total_count;
+	$t_query = new DBQuery();
+	$t_sql = 'SELECT project_id, status, COUNT( status ) AS bugcount FROM {bug}';
+	if( !empty( $p_filter ) ) {
+		$t_subquery = filter_cache_subquery( $p_filter );
+		$t_sql .= ' WHERE {bug}.id IN :filter';
+		$t_query->bind( 'filter', $t_subquery );
 	}
+	$t_sql .= ' GROUP BY project_id, status';
+	$t_query->sql( $t_sql );
 
-	$t_bugs_total_count = $p_cache["_bugs_total_count_"];
-	foreach( $p_projects as $t_project ) {
-		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
+	$p_cache = array();
+	$t_bugs_total_count = 0;
+	while( $t_row = $t_query->fetch() ) {
+		$t_project_id = $t_row['project_id'];
+		$t_status = $t_row['status'];
+		$t_bugcount = $t_row['bugcount'];
+		$t_bugs_total_count += $t_bugcount;
 
-		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
+		summary_helper_build_bugcount( $p_cache, $t_project_id, $t_status, $t_bugcount );
+	}
+	$p_cache["_bugs_total_count_"] = $t_bugs_total_count;
 
+	foreach( $t_projects_list as $t_item ) {
+		if( $t_item['id'] == ALL_PROJECTS ) {
+			continue;
+		}
+		$t_name = str_repeat( '&raquo; ', $t_item['level'] - 1 ) . project_get_name( $t_item['id'] );
+		$t_pdata = isset( $p_cache[$t_item['id']] ) ? $p_cache[$t_item['id']] : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
 		$t_bugs_open = isset( $t_pdata['open'] ) ? $t_pdata['open'] : 0;
 		$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
-		
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
-# FILTER_PROPERTY_PROJECT_ID filter by project does not work ??
-#		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . urlencode( $t_project );
-#		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
-
 		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
-
-		if( count( project_hierarchy_get_subprojects( $t_project ) ) > 0 ) {
-			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
-
-			if( count( $t_subprojects ) > 0 ) {
-				summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
-			}
-		}
 	}
 }
 
