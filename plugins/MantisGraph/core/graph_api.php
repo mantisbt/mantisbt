@@ -74,8 +74,11 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
  */
 function graph_status_colors_to_colors( $p_metrics = array() ) {
 	$t_colors = array();
+	# The metrics contain localized status, so we need an extra lookup
+    # to retrieve the id before we can get the color code
+	$t_status_lookup =  MantisEnum::getAssocArrayIndexedByLabels( lang_get( 'status_enum_string' ) );
 	foreach( array_keys( $p_metrics ) as $t_label ) {
-		$t_colors[] = get_status_color_by_label( $t_label , null, null, '#e5e5e5' );
+		$t_colors[] = get_status_color( $t_status_lookup[$t_label] , null, null, '#e5e5e5' );
 	}
 
 	return $t_colors;
