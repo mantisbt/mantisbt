@@ -814,15 +814,16 @@ function helper_parse_view_state( array $p_view_state ) {
  * @throws ClientException Id is not specified or invalid.
  */
 function helper_parse_id( $p_id, $p_field_name ) {
-	if( !is_numeric( $p_id ) ) {
-		if( empty( $p_id ) ) {
+	$t_id = trim( $p_id );
+	if( !is_numeric( $t_id ) ) {
+		if( empty( $t_id ) ) {
 			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
 		}
 
 		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
 	}
 
-	$t_id = (int)$p_id;
+	$t_id = (int)$t_id;
 	if( $t_id < 1 ) {
 		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
 	}
