@@ -135,8 +135,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
 				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
 			} else {
-				echo '<script type="text/javascript" src="' . plugin_file('chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file('chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('Chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file('Chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
 			}
 			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
