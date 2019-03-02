@@ -1,3 +1,7 @@
+/* jshint -W097, -W031 */
+/* globals Chart */
+"use strict";
+
 $(document).ready( function() {
     // Default color scheme
     Chart.defaults.global.plugins.colorschemes.scheme = 'tableau.Classic20';
