@@ -16,6 +16,7 @@ $(document).ready( function() {
                 scales: {
                     xAxes: [{
                         ticks: {
+                            autoSkip: false,
                             maxRotation: 90
                         }
                     }],
