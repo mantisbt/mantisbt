@@ -21,6 +21,7 @@ $(document).ready( function() {
             options: {
                 scales: {
                     xAxes: [{
+                        position: type === 'bar' ? 'bottom' : 'top',
                         ticks: {
                             autoSkip: false,
                             maxRotation: 90
