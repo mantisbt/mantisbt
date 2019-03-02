@@ -69,15 +69,16 @@ function graph_colors_to_rgbas( array $p_colors, $p_alpha ) {
 
 /**
  * Gets an array of html colors that corresponds to statuses.
+ * @param array $p_metrics Data set to return colors for (with status labels as keys)
  * @return array An array similar to the status_colors config ordered by status enum codes.
  */
-function graph_status_colors_to_colors() {
-	$t_status_enum = config_get( 'status_enum_string' );
-	$t_statuses = MantisEnum::getValues( $t_status_enum );
+function graph_status_colors_to_colors( $p_metrics = array() ) {
 	$t_colors = array();
-
-	foreach( $t_statuses as $t_status ) {
-		$t_colors[] = get_status_color( $t_status );
+	# The metrics contain localized status, so we need an extra lookup
+    # to retrieve the id before we can get the color code
+	$t_status_lookup =  MantisEnum::getAssocArrayIndexedByLabels( lang_get( 'status_enum_string' ) );
+	foreach( array_keys( $p_metrics ) as $t_label ) {
+		$t_colors[] = get_status_color( $t_status_lookup[$t_label] , null, null, '#e5e5e5' );
 	}
 
 	return $t_colors;
@@ -88,12 +89,14 @@ function graph_status_colors_to_colors() {
  *
  * @param array   $p_metrics      Graph Data.
  * @param integer $p_wfactor      Width factor for graph chart. Eg: 2 to make it double wide
+ * @param bool    $p_horiz        True for horizontal bars, defaults to false (vertical)
  * @return void
  */
-function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
+function graph_bar( array $p_metrics, $p_wfactor = 1, $p_horiz = false ) {
 	static $s_id = 0;
 
 	$s_id++;
+	$t_id = $p_horiz ? 'horizbarchart' : 'barchart';
 	$t_json_labels = json_encode( array_keys( $p_metrics ) );
 	$t_json_values = json_encode( array_values( $p_metrics ) );
 
@@ -101,19 +104,25 @@ function graph_bar( array $p_metrics, $p_wfactor = 1 ) {
 	$t_height = 400;
 
 ?>
-	<canvas id="barchart<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
+	<canvas id="<?php echo $t_id, $s_id ?>"
+		width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
-		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>" />
+		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>">
+	</canvas>
 <?php
 }
 
 /**
  * Function that displays pie charts
  *
- * @param array         $p_metrics       Graph Data.
+ * @param array $p_metrics       Graph Data.
+ * @param bool $p_mantis_colors  True to use colors defined in Mantis config
+ *                               {@see $g_status_colors}. By default use
+ *                               standard color scheme
+ *
  * @return void
  */
-function graph_pie( array $p_metrics ) {
+function graph_pie( array $p_metrics, $p_mantis_colors = false ) {
 	static $s_id = 0;
 
 	$s_id++;
@@ -121,15 +130,19 @@ function graph_pie( array $p_metrics ) {
 	$t_json_labels = json_encode( array_keys( $p_metrics ) );
 	$t_json_values = json_encode( array_values( $p_metrics ) );
 
-	$t_colors = graph_status_colors_to_colors();
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 1.0 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
 ?>
-	<canvas id="piechart<?php echo $s_id ?>" width="500" height="400"
+	<canvas id="piechart<?php echo $s_id ?>"
+		width="500" height="400"
 		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
 		data-values="<?php echo htmlspecialchars( $t_json_values, ENT_QUOTES ) ?>"
-		data-background-colors="[<?php echo htmlspecialchars( $t_background_colors, ENT_QUOTES ) ?>]"
-		data-border-colors="[<?php echo htmlspecialchars( $t_border_colors, ENT_QUOTES ) ?>]" />
+<?php
+	if( $p_mantis_colors ) {
+		$t_colors = graph_colors_to_rgbas( graph_status_colors_to_colors( $p_metrics ), 1.0 );
+?>
+		data-colors="[<?php echo htmlspecialchars( $t_colors, ENT_QUOTES ) ?>]"
+<?php } ?>
+	>
+	</canvas>
 <?php
 }
 
@@ -149,18 +162,9 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_formatted_labels = array_map( function($label) { return date( 'Ymd', $label ); }, $t_labels );
 	$t_json_labels = json_encode( $t_formatted_labels );
 
-	$t_values = array_values( $p_metrics[0] );
-	$t_opened_values = json_encode( $t_values );
-
-	$t_values = array_values( $p_metrics[1] );
-	$t_resolved_values = json_encode( $t_values );
-
-	$t_values = array_values( $p_metrics[2] );
-	$t_still_open_values = json_encode( $t_values );
-
-	$t_colors = graph_status_colors_to_colors();
-	$t_background_colors = graph_colors_to_rgbas( $t_colors, 0.2 );
-	$t_border_colors = graph_colors_to_rgbas( $t_colors, 1 );
+	$t_opened_values = json_encode( array_values( $p_metrics[0] ) );
+	$t_resolved_values = json_encode( array_values( $p_metrics[1] ) );
+	$t_still_open_values = json_encode( array_values( $p_metrics[2] ) );
 
 	$t_legend_opened = plugin_lang_get( 'legend_reported' );
 	$t_legend_resolved = plugin_lang_get( 'legend_resolved' );
@@ -169,14 +173,16 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
 	$t_width = 500 * $p_wfactor;
 	$t_height = 400;
 ?>
-	<canvas id="linebydate<?php echo $s_id ?>" width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
-			data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
-			data-opened-label="<?php echo $t_legend_opened ?>"
-			data-opened-values="<?php echo htmlspecialchars( $t_opened_values, ENT_QUOTES ) ?>"
-			data-resolved-label="<?php echo $t_legend_resolved ?>"
-			data-resolved-values="<?php echo htmlspecialchars( $t_resolved_values, ENT_QUOTES ) ?>"
-			data-still-open-label="<?php echo $t_legend_still_open ?>"
-			data-still-open-values="<?php echo htmlspecialchars( $t_still_open_values, ENT_QUOTES ) ?>" />
+	<canvas id="linebydate<?php echo $s_id ?>"
+		width="<?php echo $t_width ?>" height="<?php echo $t_height ?>"
+		data-labels="<?php echo htmlspecialchars( $t_json_labels, ENT_QUOTES ) ?>"
+		data-opened-label="<?php echo $t_legend_opened ?>"
+		data-opened-values="<?php echo htmlspecialchars( $t_opened_values, ENT_QUOTES ) ?>"
+		data-resolved-label="<?php echo $t_legend_resolved ?>"
+		data-resolved-values="<?php echo htmlspecialchars( $t_resolved_values, ENT_QUOTES ) ?>"
+		data-still-open-label="<?php echo $t_legend_still_open ?>"
+		data-still-open-values="<?php echo htmlspecialchars( $t_still_open_values, ENT_QUOTES ) ?>">
+	</canvas>
 <?php
 
 }

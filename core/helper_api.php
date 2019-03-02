@@ -107,21 +107,21 @@ function helper_array_transpose( array $p_array ) {
 
 /**
  * get the color string for the given status, user and project
- * @param integer      $p_status  Status value.
- * @param integer|null $p_user    User id, defaults to null (all users).
- * @param integer|null $p_project Project id, defaults to null (all projects).
+ * @param integer      $p_status        Status value.
+ * @param integer|null $p_user          User id, defaults to null (all users).
+ * @param integer|null $p_project       Project id, defaults to null (all projects).
+ * @param string       $p_default_color Fallback color in case status is not found (defaults to white).
  * @return string
  */
-function get_status_color( $p_status, $p_user = null, $p_project = null ) {
-	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status );
+function get_status_color( $p_status, $p_user = null, $p_project = null, $p_default_color = '#ffffff' ) {
+	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
 	$t_status_colors = config_get( 'status_colors', null, $p_user, $p_project );
-	$t_color = '#ffffff';
+	$t_status_label = MantisEnum::getLabel( $t_status_enum, $p_status );
 
 	if( isset( $t_status_colors[$t_status_label] ) ) {
-		$t_color = $t_status_colors[$t_status_label];
+		return $t_status_colors[$t_status_label];
 	}
-
-	return $t_color;
+	return $p_default_color;
 }
 
 /**

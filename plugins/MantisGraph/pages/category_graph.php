@@ -34,8 +34,34 @@ print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
 
 $t_metrics = create_category_summary( $t_filter );
+array_multisort( $t_metrics, SORT_DESC, SORT_NUMERIC);
+
+# Dynamically set width ratio between 1 and 0.25 based on number of categories
+$t_wfactor = 1 - min( max( count( $t_metrics ), 25 ) - 25, 75 ) / 100;
+
+# Set the maximum number of pie slices displayed and aggregate the rest into
+# an "others" category if needed. The number of slices should not be higher
+# than the number of available colors in the palette.
+$t_num_slices = 20;
+$t_pie_metrics = array_slice( $t_metrics, 0, $t_num_slices );
+if( count( $t_metrics ) > $t_num_slices ) {
+	$t_num_slices--;
+
+    # Remove last element and replace it with "others"
+    array_pop( $t_pie_metrics );
+	$t_others = sprintf(
+		plugin_lang_get( 'other_categories' ),
+		count( $t_metrics ) - $t_num_slices
+	);
+	$t_pie_metrics[$t_others] = 0;
+
+	# Sum remaining categories into "others" slice
+	foreach( array_slice( $t_metrics, $t_num_slices ) as $t_value ) {
+		$t_pie_metrics[$t_others] += $t_value;
+	}
+}
 ?>
-    
+
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 
@@ -48,11 +74,11 @@ $t_metrics = create_category_summary( $t_filter );
 		</div>
 
 		<div class="col-md-6 col-xs-12">
-			<?php graph_bar( $t_metrics ); ?>
+			<?php graph_bar( $t_metrics, $t_wfactor, true ); ?>
 		</div>
 
 		<div class="col-md-6 col-xs-12">
-			<?php graph_pie( $t_metrics ); ?>
+			<?php graph_pie( $t_pie_metrics ); ?>
 		</div>
 	</div>
 </div>
