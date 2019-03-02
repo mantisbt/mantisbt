@@ -807,7 +807,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					echo $t_current_level_string . '<span class="hidden unchanged">';
 					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit_link' ) . ']</a>';
 					echo '</span>';
-					echo '<span class="changed_to"> =&gt; ';
+					echo '<span class="changed_to"> <i class="fa fa-lg fa-long-arrow-right"></i> ';
 					echo '</span>';
 					echo '<select name="user_access_level[' . $t_user['id'] . ']" class="input-xs user_access_level"'
 							. ' data-original_val="' . $t_user['access_level'] . '" data-user_id="' . $t_user['id'] . '">';
