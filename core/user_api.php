@@ -672,7 +672,7 @@ function user_delete( $p_user_id ) {
 	user_delete_profiles( $p_user_id );
 
 	# Remove associated preferences
-	user_pref_delete_all( $p_user_id );
+	user_pref_db_delete_user( $p_user_id );
 
 	# Remove project specific access levels
 	user_delete_project_specific_access_levels( $p_user_id );
@@ -1766,5 +1766,28 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		user_reset_failed_login_count_to_zero( $p_user_id );
 	}
 
+	return true;
+}
+
+/**
+ * Helper function to check if the user has access to more than one project
+ * (any kind of project or subproject). This can be used to simplify logic when
+ * the user only has one project to choose from.
+ *
+ * @param integer $p_user_id	A valid user identifier.
+ * @return boolean	True if the user has access to more than one project.
+ */
+function user_has_more_than_one_project( $p_user_id ) {
+	$t_project_ids = user_get_accessible_projects( $p_user_id );
+	$t_count = count( $t_project_ids );
+	if( 0 == $t_count ) {
+		return false;
+	}
+	if( 1 == $t_count ) {
+		$t_project_id = (int) $t_project_ids[0];
+		if( count( user_get_accessible_subprojects( $p_user_id, $t_project_id ) ) == 0 ) {
+			return false;
+		}
+	}
 	return true;
 }

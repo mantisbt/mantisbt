@@ -253,3 +253,54 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 
 	return $t_filter;
 }
+
+/**
+ * Returns true if the user has access to more that one project
+ *
+ * @return boolean
+ */
+function current_user_has_more_than_one_project() {
+	return user_has_more_than_one_project( auth_get_current_user_id() );
+}
+
+/**
+ * Checks if the user has only one, or none, visible project and modify his
+ * current and default project to be coherent.
+ * - If current project is ALL_PROJECTS, sets the the visible project as current.
+ * - If default project is ALL_PROJECTS, sets the visible project as his default
+ *   project for future sessions.
+ * - If default project is not the visible one, modify it to be that project,
+ *   or ALL_PROJECTS if the user has no accesible projects.
+ *
+ * These changes only apply to user who can't use the project selection.
+ *
+ * @return void
+ */
+function current_user_modify_single_project_default() {
+	# The user must not be able to use the project selector
+	if( layout_navbar_can_show_projects_menu() ) {
+		return;
+	}
+	# The user must have one, or none, projects
+	$t_user_id = auth_get_current_user_id();
+	if( user_has_more_than_one_project( $t_user_id ) ) {
+		return;
+	}
+	$t_default = user_pref_get_pref( $t_user_id, 'default_project' );
+	$t_current = helper_get_current_project();
+	$t_projects = user_get_all_accessible_projects( $t_user_id );
+	$t_count = count( $t_projects );
+
+	if( 0 == $t_count ) {
+		$t_project_id = ALL_PROJECTS;
+	} else {
+		$t_project_id = reset( $t_projects );
+	}
+
+	if( $t_project_id != $t_current ) {
+		helper_set_current_project( $t_project_id );
+	}
+	if( $t_project_id != $t_default ) {
+		user_pref_set_pref( $t_user_id, 'default_project', (int)$t_project_id, ALL_PROJECTS, false /* skip protected check */ );
+	}
+}
