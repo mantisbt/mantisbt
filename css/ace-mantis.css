@@ -274,14 +274,14 @@ pre {
 
 .input-sm {
     width: 90px !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 4px 6px !important;
 }
 
 .input-xs {
     width: auto !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 1px 2px !important;
 }

@@ -927,6 +927,9 @@ $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 $s_show_global_users = 'Show Users with Global Access';
 $s_hide_global_users = 'Hide Users with Global Access';
+$s_review_changes = 'Review Changes';
+$s_review_changes_confirmation = 'Are you sure you want to apply the following changes?';
+$s_review_changes_empty = 'There are no changes selected';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Add Project';
@@ -1103,6 +1106,8 @@ $s_add_user_button = 'Add User';
 $s_project_selection_title = 'Project Selection';
 $s_remove_link = 'Remove';
 $s_remove_all_link = 'Remove all';
+$s_remove_project_user_title = 'Remove user access from project';
+$s_modify_project_user_title = 'Modify user access in project';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Successfully updated user.';
@@ -1786,3 +1791,5 @@ $s_save = 'Save';
 $s_reset = 'Reset';
 $s_persist = 'Persist';
 $s_load = 'Load';
+$s_apply_changes = 'Apply changes';
+$s_undo = 'Undo';
