@@ -859,10 +859,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 						</div>
 					</form>
 				</div>
-			</div>
 	<?php
 	} // end if user count > 0
 	?>
+			</div>
 			<div class="widget-toolbox padding-8 clearfix">
 	<?php
 	# You need global or project-specific permissions to remove users
