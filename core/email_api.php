@@ -78,7 +78,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
 use Mantis\Exceptions\ClientException;
 
-# reusable object of class SMTP
+/** @global PHPMailer $g_phpMailer reusable PHPMailer object */
 $g_phpMailer = null;
 
 /**
@@ -155,7 +155,7 @@ function email_is_valid( $p_email ) {
 		}
 
 		if( ON == config_get( 'check_mx_record' ) ) {
-			$t_mx = '';
+			$t_mx = array();
 
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $t_mx ) ) {
@@ -184,6 +184,7 @@ function email_is_valid( $p_email ) {
 /**
  * Check if the email address is valid trigger an ERROR if it isn't
  * @param string $p_email An email address.
+ * @throws ClientException
  * @return void
  */
 function email_ensure_valid( $p_email ) {
@@ -207,6 +208,7 @@ function email_is_disposable( $p_email ) {
  * Check if the email address is disposable
  * trigger an ERROR if it isn't
  * @param string $p_email An email address.
+ * @throws ClientException
  * @return void
  */
 function email_ensure_not_disposable( $p_email ) {
@@ -911,7 +913,7 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 /**
  * send notices when a bug is sponsored
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship added', $p_bug_id ) );
@@ -921,7 +923,7 @@ function email_sponsorship_added( $p_bug_id ) {
 /**
  * send notices when a sponsorship is modified
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship updated', $p_bug_id ) );
@@ -931,7 +933,7 @@ function email_sponsorship_updated( $p_bug_id ) {
 /**
  * send notices when a sponsorship is deleted
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship removed', $p_bug_id ) );
@@ -941,7 +943,7 @@ function email_sponsorship_deleted( $p_bug_id ) {
 /**
  * send notices when a new bug is added
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reported', $p_bug_id ) );
@@ -951,6 +953,7 @@ function email_bug_added( $p_bug_id ) {
 /**
  * Send notifications for bug update.
  * @param int $p_bug_id  The bug id.
+ * @return void
  */
 function email_bug_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d updated', $p_bug_id ) );
@@ -1048,7 +1051,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 /**
  * send notices when a bug is RESOLVED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_resolved( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d resolved', $p_bug_id ) );
@@ -1058,7 +1061,7 @@ function email_resolved( $p_bug_id ) {
 /**
  * send notices when a bug is CLOSED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_close( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d closed', $p_bug_id ) );
@@ -1068,7 +1071,7 @@ function email_close( $p_bug_id ) {
 /**
  * send notices when a bug is REOPENED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_reopened( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reopened', $p_bug_id ) );
@@ -1080,7 +1083,7 @@ function email_bug_reopened( $p_bug_id ) {
  * @param int $p_bug_id
  * @param int $p_prev_handler_id
  * @param int $p_new_handler_id
- * @return null
+ * @return void
  */
 function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
 	if ( $p_prev_handler_id == 0 && $p_new_handler_id != 0 ) {
@@ -1116,6 +1119,7 @@ function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) 
  * Send notifications when bug status is changed.
  * @param int $p_bug_id The bug id
  * @param string $p_new_status_label The new status label.
+ * @return void
  */
 function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d status changed', $p_bug_id ) );
@@ -1125,7 +1129,7 @@ function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 /**
  * send notices when a bug is DELETED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d deleted', $p_bug_id ) );
