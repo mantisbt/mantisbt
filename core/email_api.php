@@ -1424,9 +1424,10 @@ function email_smtp_close() {
 	global $g_phpMailer;
 
 	if( !is_null( $g_phpMailer ) ) {
-		if( $g_phpMailer->smtp->Connected() ) {
-			$g_phpMailer->smtp->Quit();
-			$g_phpMailer->smtp->Close();
+		$t_smtp = $g_phpMailer->getSMTPInstance();
+		if( $t_smtp->connected() ) {
+			$t_smtp->quit();
+			$t_smtp->close();
 		}
 		$g_phpMailer = null;
 	}
