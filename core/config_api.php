@@ -169,7 +169,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
  *
  * @param string $p_option  Configuration option to retrieve.
  * @param string $p_default Default value if not set.
- * @return string
+ * @return mixed
  */
 function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
