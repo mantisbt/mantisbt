@@ -139,7 +139,7 @@ function email_is_valid( $p_email ) {
 
 	# check email address is a valid format
 	log_event( LOG_EMAIL_VERBOSE, "Validating address '$p_email' with method '$t_method'" );
-	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+	if( PHPMailer::validateAddress( $p_email, $t_method ) ) {
 		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
@@ -1282,20 +1282,20 @@ function email_send( EmailData $p_email_data ) {
 	if( 'auto' == $t_lang ) {
 		$t_lang = config_get_global( 'fallback_language' );
 	}
-	$t_mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ) );
+	$t_mail->setLanguage( lang_get( 'phpmailer_language', $t_lang ) );
 
 	# Select the method to send mail
 	switch( config_get( 'phpMailer_method' ) ) {
 		case PHPMAILER_METHOD_MAIL:
-			$t_mail->IsMail();
+			$t_mail->isMail();
 			break;
 
 		case PHPMAILER_METHOD_SENDMAIL:
-			$t_mail->IsSendmail();
+			$t_mail->isSendmail();
 			break;
 
 		case PHPMAILER_METHOD_SMTP:
-			$t_mail->IsSMTP();
+			$t_mail->isSMTP();
 
 			# SMTP collection is always kept alive
 			$t_mail->SMTPKeepAlive = true;
@@ -1329,7 +1329,7 @@ function email_send( EmailData $p_email_data ) {
 		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
 	}
 
-	$t_mail->IsHTML( false );              # set email format to plain text
+	$t_mail->isHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
@@ -1352,15 +1352,15 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	try {
-		$t_mail->AddAddress( $t_recipient, '' );
+		$t_mail->addAddress( $t_recipient, '' );
 	}
 	catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 		$t_success = false;
-		$t_mail->ClearAllRecipients();
-		$t_mail->ClearAttachments();
-		$t_mail->ClearReplyTos();
-		$t_mail->ClearCustomHeaders();
+		$t_mail->clearAllRecipients();
+		$t_mail->clearAttachments();
+		$t_mail->clearReplyTos();
+		$t_mail->clearCustomHeaders();
 		return $t_success;
 	}
 
@@ -1379,17 +1379,17 @@ function email_send( EmailData $p_email_data ) {
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
 				case 'In-Reply-To':
-					$t_mail->AddCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
+					$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
 					break;
 				default:
-					$t_mail->AddCustomHeader( $t_key . ': ' . $t_value );
+					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
 					break;
 			}
 		}
 	}
 
 	try {
-		$t_success = $t_mail->Send();
+		$t_success = $t_mail->send();
 		if( $t_success ) {
 			$t_success = true;
 
@@ -1407,10 +1407,10 @@ function email_send( EmailData $p_email_data ) {
 		$t_success = false;
 	}
 
-	$t_mail->ClearAllRecipients();
-	$t_mail->ClearAttachments();
-	$t_mail->ClearReplyTos();
-	$t_mail->ClearCustomHeaders();
+	$t_mail->clearAllRecipients();
+	$t_mail->clearAttachments();
+	$t_mail->clearReplyTos();
+	$t_mail->clearCustomHeaders();
 
 	return $t_success;
 }
@@ -2043,4 +2043,3 @@ function email_get_actions() {
 
 	return $t_actions;
 }
-
