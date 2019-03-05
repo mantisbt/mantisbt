@@ -83,6 +83,9 @@ function try_hide_input( div ) {
 
 
 $(document).ready( function() {
+	if( !$('#manage-project-users-list .listjs-table').length ) {
+		return;
+	}
 
 	$('#manage-project-users-form-toolbox').removeClass('hidden');
 
