@@ -386,7 +386,9 @@ $(document).ready( function() {
 
 	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
 		$(this).find(".dropdown-menu li.active a").focus();
-	 });
+		/* Add autofocus support for IE */
+		$('[autofocus]:not(:focus)').eq(0).focus();
+	});
 
 	/**
 	 * Manage visiblity on hover trigger objects

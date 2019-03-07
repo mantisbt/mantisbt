@@ -602,7 +602,7 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	echo '<li>';
 	echo '<div id="projects-list">';
 	echo '<div class="projects-searchbox">';
-	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
+	echo '<input class="search form-control input-md" autofocus="autofocus" placeholder="' . lang_get( 'search' ) . '" />';
 	echo '</div>';
 	echo '<ul class="list dropdown-yellow no-margin">';
 
