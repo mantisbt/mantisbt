@@ -1154,63 +1154,83 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	# (e.g. bug is CLOSED, not RESOLVED). The linkage to the history field
 	# will look up the most recent 'resolved' status change and return it as well
 
-	$t_query = new DBQuery();
-	$t_sql = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status'
-		. ' FROM {bug} b LEFT JOIN {bug_history} h'
-		. ' ON b.id = h.bug_id  AND h.type = :hist_type AND h.field_name = :hist_field'
+	$t_stats = array();
+
+	$t_sql_inner = ' FROM {bug} b LEFT JOIN {bug_history} h'
+		. ' ON b.id = h.bug_id  AND h.type = :hist_type'
+		. ' AND h.field_name = :hist_field AND b.date_submitted <= h.date_modified'
 		. ' WHERE b.status >= :int_resolved'
 		. ' AND h.new_value >= :str_resolved AND h.old_value < :str_resolved'
 		. ' AND ' . $t_specific_where;
-	$t_query->bind( array(
+	$t_params = array(
 		'hist_type' => 0,
 		'hist_field' => 'status',
 		'int_resolved' => (int)$t_resolved,
 		'str_resolved' => (string)$t_resolved
-		) );
+		);
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND b.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
-	}
-	$t_sql .= ' GROUP BY b.id, b.status, b.date_submitted, b.last_updated'
-		. ' ORDER BY b.id ASC';
-	$t_query->sql( $t_sql );
-
-	$t_bug_count = 0;
-	$t_largest_diff = 0;
-	$t_total_time = 0;
-	while( $t_row = $t_query->fetch() ) {
-		$t_bug_count++;
-		$t_date_submitted = $t_row['date_submitted'];
-		$t_last_updated = $t_row['hist_update'] !== null ? $t_row['hist_update'] : $t_row['last_updated'];
-
-		if( $t_last_updated < $t_date_submitted ) {
-			$t_last_updated = 0;
-			$t_date_submitted = 0;
-		}
-
-		$t_diff = $t_last_updated - $t_date_submitted;
-		$t_total_time += $t_diff;
-		if( $t_diff > $t_largest_diff ) {
-			$t_largest_diff = $t_diff;
-			$t_bug_id = $t_row['id'];
-		}
+		$t_sql_inner .= ' AND b.id IN :filter';
+		$t_params['filter'] = $t_subquery;
 	}
 
-	if( $t_bug_count > 0 ) {
-		$t_average_time = $t_total_time / $t_bug_count;
+	if( db_has_capability( DB_CAPABILITY_WINDOW_FUNCTIONS ) ) {
+		$t_sql = 'SELECT id, diff, SUM(diff) OVER () AS total_time, AVG(diff) OVER () AS avg_time'
+			. ' FROM ( SELECT b.id, MAX(h.date_modified) - b.date_submitted AS diff'
+			. $t_sql_inner
+			. ' GROUP BY b.id,b.date_submitted ) subquery'
+			. ' ORDER BY diff DESC';
+		$t_query = new DbQuery( $t_sql, $t_params );
+		$t_query->set_limit(1);
+		if( $t_row = $t_query->fetch() ) {
+			$t_stats = array(
+				'bug_id'       => $t_row['id'],
+				'largest_diff' => number_format( (int)$t_row['diff'] / SECONDS_PER_DAY, 2 ),
+				'total_time'   => number_format( (int)$t_row['total_time'] / SECONDS_PER_DAY, 2 ),
+				'average_time' => number_format( (int)$t_row['avg_time'] / SECONDS_PER_DAY, 2 ),
+				);
+		}
 	} else {
-		$t_average_time = 0;
-		$t_bug_id = 0;
+		$t_sql = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) AS hist_update, b.status'
+			. $t_sql_inner
+			. ' GROUP BY b.id, b.status, b.date_submitted, b.last_updated ORDER BY b.id ASC';
+		$t_query = new DbQuery( $t_sql, $t_params );
+
+		$t_bug_count = 0;
+		$t_largest_diff = 0;
+		$t_total_time = 0;
+		while( $t_row = $t_query->fetch() ) {
+			$t_bug_count++;
+			$t_date_submitted = $t_row['date_submitted'];
+			$t_last_updated = $t_row['hist_update'] !== null ? $t_row['hist_update'] : $t_row['last_updated'];
+
+			if( $t_last_updated < $t_date_submitted ) {
+				$t_last_updated = 0;
+				$t_date_submitted = 0;
+			}
+
+			$t_diff = $t_last_updated - $t_date_submitted;
+			$t_total_time += $t_diff;
+			if( $t_diff > $t_largest_diff ) {
+				$t_largest_diff = $t_diff;
+				$t_bug_id = $t_row['id'];
+			}
+		}
+
+		if( $t_bug_count > 0 ) {
+			$t_average_time = $t_total_time / $t_bug_count;
+		} else {
+			$t_average_time = 0;
+			$t_bug_id = 0;
+		}
+
+		$t_stats = array(
+			'bug_id'       => $t_bug_id,
+			'largest_diff' => number_format( $t_largest_diff / SECONDS_PER_DAY, 2 ),
+			'total_time'   => number_format( $t_total_time / SECONDS_PER_DAY, 2 ),
+			'average_time' => number_format( $t_average_time / SECONDS_PER_DAY, 2 ),
+		);
 	}
-
-	$t_stats = array(
-		'bug_id'       => $t_bug_id,
-		'largest_diff' => number_format( $t_largest_diff / SECONDS_PER_DAY, 2 ),
-		'total_time'   => number_format( $t_total_time / SECONDS_PER_DAY, 2 ),
-		'average_time' => number_format( $t_average_time / SECONDS_PER_DAY, 2 ),
-	);
-
 	return $t_stats;
 }
 
