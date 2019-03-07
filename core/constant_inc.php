@@ -736,3 +736,6 @@ define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );
 define( 'DB_TYPE_MSSQL', 3 );
 define( 'DB_TYPE_ORACLE', 4 );
+
+# Database special capabilities identifiers
+define( 'DB_CAPABILITY_WINDOW_FUNCTIONS', 1 );
