@@ -89,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Grafische Eintrags-Historie';
 $s_plugin_MantisGraph_graph_topdev = 'Top-Entwickler nach erledigten Einträgen';
 $s_plugin_MantisGraph_graph_opendev = 'Entwickler nach offenen Einträgen';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Top-Reporter nach erledigten Einträgen';
+$s_plugin_MantisGraph_other_categories = 'andere Kategorien (%d)';

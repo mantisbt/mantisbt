@@ -93,3 +93,4 @@ $s_plugin_MantisGraph_graph_page = 'Historial gráfico de la incidencia';
 $s_plugin_MantisGraph_graph_topdev = 'Principales desarrolladores por incidencias resueltas';
 $s_plugin_MantisGraph_graph_opendev = 'Desarrolladores por incidencias abiertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales creadores por incidencias resueltas';
+$s_plugin_MantisGraph_other_categories = 'otras categorías (%d)';

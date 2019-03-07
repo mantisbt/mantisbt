@@ -87,3 +87,4 @@ $s_plugin_MantisGraph_graph_page = 'Историја на проблеми со 
 $s_plugin_MantisGraph_graph_topdev = 'Најдобри разработувачи по поправени проблеми';
 $s_plugin_MantisGraph_graph_opendev = 'Разработувачи по отворени проблеми';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Најдобри пријавувачи по поправени проблеми';
+$s_plugin_MantisGraph_other_categories = 'други категории (%d)';

@@ -91,3 +91,4 @@ $s_plugin_MantisGraph_graph_page = 'Grafikê Mewzuyanê Ravêrdan';
 $s_plugin_MantisGraph_graph_topdev = 'Goreyê mewzuyanê sabitan raverberdoği';
 $s_plugin_MantisGraph_graph_opendev = 'Goreyê mewzuyanê akerdeyan raverberdoği';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Goreyê mewzuyanê sabitan raportori';
+$s_plugin_MantisGraph_other_categories = 'kategoriyê bini (%d)';

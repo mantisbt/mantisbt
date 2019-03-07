@@ -83,3 +83,4 @@ $s_plugin_MantisGraph_period_year_to_date = 'Aquest any';
 $s_plugin_MantisGraph_period_select = 'Dates arbitràries';
 $s_plugin_MantisGraph_period_last_year = 'L\'últim any';
 $s_plugin_MantisGraph_graph_page = 'Historial gràfic de la comanda';
+$s_plugin_MantisGraph_other_categories = 'altres categories (%d)';

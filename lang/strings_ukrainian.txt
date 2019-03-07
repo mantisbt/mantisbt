@@ -52,6 +52,7 @@
  * @author SteveR
  * @author Translatemyname
  * @author Visem
+ * @author Vlad5250
  * @author Ypryima
  * @author Ата
  * @author Тест
@@ -70,7 +71,7 @@ $s_actiongroup_menu_update_view_status = 'Змінити рівень досту
 $s_actiongroup_menu_update_category = 'Оновити категорію';
 $s_actiongroup_menu_set_sticky = 'Прикріпити/Відкріпити';
 $s_actiongroup_menu_update_field = 'Оновити %1$s';
-$s_actiongroup_menu_update_product_version = 'Оновлення Версії Продукту';
+$s_actiongroup_menu_update_product_version = 'Оновити версію продукту';
 $s_actiongroup_menu_update_target_version = 'Оновити цільову версію';
 $s_actiongroup_menu_update_fixed_in_version = 'Оновити „виправлено у версії“';
 $s_actiongroup_menu_update_product_build = 'Оновити збірку продукту';
