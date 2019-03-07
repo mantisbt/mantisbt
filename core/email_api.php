@@ -75,9 +75,10 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as phpmailerException;
 use Mantis\Exceptions\ClientException;
 
-# reusable object of class SMTP
+/** @global PHPMailer $g_phpMailer reusable PHPMailer object */
 $g_phpMailer = null;
 
 /**
@@ -138,7 +139,7 @@ function email_is_valid( $p_email ) {
 
 	# check email address is a valid format
 	log_event( LOG_EMAIL_VERBOSE, "Validating address '$p_email' with method '$t_method'" );
-	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+	if( PHPMailer::validateAddress( $p_email, $t_method ) ) {
 		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
@@ -154,7 +155,7 @@ function email_is_valid( $p_email ) {
 		}
 
 		if( ON == config_get( 'check_mx_record' ) ) {
-			$t_mx = '';
+			$t_mx = array();
 
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $t_mx ) ) {
@@ -183,6 +184,7 @@ function email_is_valid( $p_email ) {
 /**
  * Check if the email address is valid trigger an ERROR if it isn't
  * @param string $p_email An email address.
+ * @throws ClientException
  * @return void
  */
 function email_ensure_valid( $p_email ) {
@@ -206,6 +208,7 @@ function email_is_disposable( $p_email ) {
  * Check if the email address is disposable
  * trigger an ERROR if it isn't
  * @param string $p_email An email address.
+ * @throws ClientException
  * @return void
  */
 function email_ensure_not_disposable( $p_email ) {
@@ -910,7 +913,7 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 /**
  * send notices when a bug is sponsored
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship added', $p_bug_id ) );
@@ -920,7 +923,7 @@ function email_sponsorship_added( $p_bug_id ) {
 /**
  * send notices when a sponsorship is modified
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship updated', $p_bug_id ) );
@@ -930,7 +933,7 @@ function email_sponsorship_updated( $p_bug_id ) {
 /**
  * send notices when a sponsorship is deleted
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_sponsorship_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d sponsorship removed', $p_bug_id ) );
@@ -940,7 +943,7 @@ function email_sponsorship_deleted( $p_bug_id ) {
 /**
  * send notices when a new bug is added
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_added( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reported', $p_bug_id ) );
@@ -950,6 +953,7 @@ function email_bug_added( $p_bug_id ) {
 /**
  * Send notifications for bug update.
  * @param int $p_bug_id  The bug id.
+ * @return void
  */
 function email_bug_updated( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d updated', $p_bug_id ) );
@@ -1047,7 +1051,7 @@ function email_bugnote_add( $p_bugnote_id, $p_files = array(), $p_exclude_user_i
 /**
  * send notices when a bug is RESOLVED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_resolved( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d resolved', $p_bug_id ) );
@@ -1057,7 +1061,7 @@ function email_resolved( $p_bug_id ) {
 /**
  * send notices when a bug is CLOSED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_close( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d closed', $p_bug_id ) );
@@ -1067,7 +1071,7 @@ function email_close( $p_bug_id ) {
 /**
  * send notices when a bug is REOPENED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_reopened( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d reopened', $p_bug_id ) );
@@ -1079,7 +1083,7 @@ function email_bug_reopened( $p_bug_id ) {
  * @param int $p_bug_id
  * @param int $p_prev_handler_id
  * @param int $p_new_handler_id
- * @return null
+ * @return void
  */
 function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
 	if ( $p_prev_handler_id == 0 && $p_new_handler_id != 0 ) {
@@ -1115,6 +1119,7 @@ function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) 
  * Send notifications when bug status is changed.
  * @param int $p_bug_id The bug id
  * @param string $p_new_status_label The new status label.
+ * @return void
  */
 function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d status changed', $p_bug_id ) );
@@ -1124,7 +1129,7 @@ function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 /**
  * send notices when a bug is DELETED
  * @param int $p_bug_id
- * @return null
+ * @return void
  */
 function email_bug_deleted( $p_bug_id ) {
 	log_event( LOG_EMAIL, sprintf( 'Issue #%d deleted', $p_bug_id ) );
@@ -1281,20 +1286,20 @@ function email_send( EmailData $p_email_data ) {
 	if( 'auto' == $t_lang ) {
 		$t_lang = config_get_global( 'fallback_language' );
 	}
-	$t_mail->SetLanguage( lang_get( 'phpmailer_language', $t_lang ) );
+	$t_mail->setLanguage( lang_get( 'phpmailer_language', $t_lang ) );
 
 	# Select the method to send mail
 	switch( config_get( 'phpMailer_method' ) ) {
 		case PHPMAILER_METHOD_MAIL:
-			$t_mail->IsMail();
+			$t_mail->isMail();
 			break;
 
 		case PHPMAILER_METHOD_SENDMAIL:
-			$t_mail->IsSendmail();
+			$t_mail->isSendmail();
 			break;
 
 		case PHPMAILER_METHOD_SMTP:
-			$t_mail->IsSMTP();
+			$t_mail->isSMTP();
 
 			# SMTP collection is always kept alive
 			$t_mail->SMTPKeepAlive = true;
@@ -1328,7 +1333,7 @@ function email_send( EmailData $p_email_data ) {
 		$t_mail->DKIM_identity = config_get( 'email_dkim_identity' );
 	}
 
-	$t_mail->IsHTML( false );              # set email format to plain text
+	$t_mail->isHTML( false );              # set email format to plain text
 	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
@@ -1351,15 +1356,15 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	try {
-		$t_mail->AddAddress( $t_recipient, '' );
+		$t_mail->addAddress( $t_recipient, '' );
 	}
 	catch ( phpmailerException $e ) {
 		log_event( LOG_EMAIL, $t_log_msg . $t_mail->ErrorInfo );
 		$t_success = false;
-		$t_mail->ClearAllRecipients();
-		$t_mail->ClearAttachments();
-		$t_mail->ClearReplyTos();
-		$t_mail->ClearCustomHeaders();
+		$t_mail->clearAllRecipients();
+		$t_mail->clearAttachments();
+		$t_mail->clearReplyTos();
+		$t_mail->clearCustomHeaders();
 		return $t_success;
 	}
 
@@ -1378,17 +1383,17 @@ function email_send( EmailData $p_email_data ) {
 					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
 				case 'In-Reply-To':
-					$t_mail->AddCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
+					$t_mail->addCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
 					break;
 				default:
-					$t_mail->AddCustomHeader( $t_key . ': ' . $t_value );
+					$t_mail->addCustomHeader( $t_key . ': ' . $t_value );
 					break;
 			}
 		}
 	}
 
 	try {
-		$t_success = $t_mail->Send();
+		$t_success = $t_mail->send();
 		if( $t_success ) {
 			$t_success = true;
 
@@ -1406,10 +1411,10 @@ function email_send( EmailData $p_email_data ) {
 		$t_success = false;
 	}
 
-	$t_mail->ClearAllRecipients();
-	$t_mail->ClearAttachments();
-	$t_mail->ClearReplyTos();
-	$t_mail->ClearCustomHeaders();
+	$t_mail->clearAllRecipients();
+	$t_mail->clearAttachments();
+	$t_mail->clearReplyTos();
+	$t_mail->clearCustomHeaders();
 
 	return $t_success;
 }
@@ -1423,9 +1428,10 @@ function email_smtp_close() {
 	global $g_phpMailer;
 
 	if( !is_null( $g_phpMailer ) ) {
-		if( $g_phpMailer->smtp->Connected() ) {
-			$g_phpMailer->smtp->Quit();
-			$g_phpMailer->smtp->Close();
+		$t_smtp = $g_phpMailer->getSMTPInstance();
+		if( $t_smtp->connected() ) {
+			$t_smtp->quit();
+			$t_smtp->close();
 		}
 		$g_phpMailer = null;
 	}
@@ -2042,4 +2048,3 @@ function email_get_actions() {
 
 	return $t_actions;
 }
-
