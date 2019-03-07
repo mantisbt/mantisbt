@@ -41,6 +41,7 @@
  * @author 9pagod
  * @author Baonguyen21022003
  * @author Duongnvm
+ * @author Ioe2015
  * @author KhangND
  * @author Max20091
  * @author Minh Nguyen
@@ -642,6 +643,7 @@ $s_create_new_subproject_link = 'Tạo mới tiểu dự án';
 $s_unlink_link = 'Bỏ liên kết';
 $s_show_global_users = 'Hiện người dùng có truy cập toàn cầu';
 $s_hide_global_users = 'Ẩn người dùng có truy cập toàn cầu';
+$s_review_changes = 'Xem lại thay đổi';
 $s_add_project_title = 'Thêm dự án';
 $s_upload_file_path = 'Tải lên File Path';
 $s_add_project_button = 'Thêm dự án';
@@ -1221,3 +1223,5 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Trang này không thể được 
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Trường sắp xếp không hợp lệ';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Định dạng ngày không hợp lệ.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Không thể cập nhật múi giờ';
+$s_apply_changes = 'Áp dụng các thay đổi';
+$s_undo = 'Hoàn tác';

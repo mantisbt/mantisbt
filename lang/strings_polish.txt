@@ -54,6 +54,7 @@
  * @author Sp5uhe
  * @author Stojex
  * @author Szmyk
+ * @author Tszypowski
  * @author Ty221
  * @author Woytecr
  */
@@ -93,7 +94,7 @@ $s_excel_export = 'Eksport do Excela';
 $s_login_anonymously = 'Logowanie anonimowe';
 $s_anonymous = 'Anonimowy';
 $s_jump_to_bugnotes = 'Przejdź do komentarzy';
-$s_jump_to_history = 'Przejdź do histori';
+$s_jump_to_history = 'Przejdź do historii';
 $s_display_history = 'Wyświetl historię';
 $s_public_project_msg = 'Ten projekt jest publiczny. Wszyscy użytkownicy mają do niego dostęp.';
 $s_private_project_msg = 'Ten projekt jest prywatny. Jedynie administratorzy i ręcznie dodani użytkownicy mają do niego dostęp.';

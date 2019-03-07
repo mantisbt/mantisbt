@@ -92,3 +92,4 @@ $s_plugin_MantisGraph_graph_page = '이슈 기록을 그래프로 그리기';
 $s_plugin_MantisGraph_graph_topdev = '이슈를 제일 많이 수정한 사람';
 $s_plugin_MantisGraph_graph_opendev = '이슈를 가장 많이 올린 사람';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '수정된 이슈가 많은 사람';
+$s_plugin_MantisGraph_other_categories = '다른 분류 (%d)';

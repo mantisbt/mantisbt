@@ -92,3 +92,4 @@ $s_plugin_MantisGraph_graph_page = 'Gráfico do histórico da tarefa';
 $s_plugin_MantisGraph_graph_topdev = 'Principais desenvolvedores por problemas corrigidos';
 $s_plugin_MantisGraph_graph_opendev = 'Desenvolvedores por questões abertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Principais Repórteres por Problemas Corrigidos';
+$s_plugin_MantisGraph_other_categories = 'outras categorias (%d)';

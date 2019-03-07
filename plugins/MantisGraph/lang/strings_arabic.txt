@@ -89,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'تاريخ رسومات المشكلة';
 $s_plugin_MantisGraph_graph_topdev = 'كبار المطورين حسب القضايا المحلولة';
 $s_plugin_MantisGraph_graph_opendev = 'المطورون حسب القضايا المفتوحة';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'كبار المبلغين حسب القضايا المحلولة';
+$s_plugin_MantisGraph_other_categories = 'تصنيفات أخرى (%d)';

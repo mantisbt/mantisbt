@@ -815,3 +815,5 @@ $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Nederīgs kārtošanas lauks';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Nederīgs datuma formāts.';
 $s_dropzone_cancel_upload = 'Atcelt augšupielādi';
 $s_dropzone_remove_file = 'Noņemt failu';
+$s_apply_changes = 'Lietot izmaiņas';
+$s_undo = 'Atsaukt';

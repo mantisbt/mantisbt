@@ -42,6 +42,7 @@
  * @author Hzy980512
  * @author Liuxinyu970226
  * @author Paopao
+ * @author 佛壁灯
  */
 
 $s_plugin_graph_title = 'Mantis图表';
@@ -89,3 +90,4 @@ $s_plugin_MantisGraph_graph_page = '图问题历史记录';
 $s_plugin_MantisGraph_graph_topdev = '最活跃的开发者（按已修复问题排序）';
 $s_plugin_MantisGraph_graph_opendev = '按开放问题排序开发者';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '最活跃的报告者（按已修复问题排序）';
+$s_plugin_MantisGraph_other_categories = '其他分类 (%d)';

@@ -58,6 +58,7 @@
  * @author Yanmiao liu
  * @author Yfdyh000
  * @author 乌拉跨氪
+ * @author 佛壁灯
  * @author 夢蝶葬花
  */
 
@@ -734,6 +735,9 @@ $s_create_new_subproject_link = '新建子项目';
 $s_unlink_link = '取消连接';
 $s_show_global_users = '显示有全域权限的用户';
 $s_hide_global_users = '隐藏有全域权限的用户';
+$s_review_changes = '查看更改';
+$s_review_changes_confirmation = '您是否想要应用下列更改？';
+$s_review_changes_empty = '未选择更改';
 $s_add_project_title = '添加项目';
 $s_upload_file_path = '上传文件存放路径';
 $s_add_project_button = '添加项目';
@@ -842,6 +846,8 @@ $s_add_user_button = '添加用户';
 $s_project_selection_title = '项目选择';
 $s_remove_link = '移除';
 $s_remove_all_link = '全部删除';
+$s_remove_project_user_title = '从项目中移除用户访问';
+$s_modify_project_user_title = '编辑项目中的用户访问';
 $s_updated_user_msg = '用户更新成功';
 $s_must_enter_category = '必须选择分类';
 $s_must_enter_severity = '必须选择严重性';
@@ -912,6 +918,7 @@ $s_developer_stats = '处理员(未解决/已解决/已关闭/合计)';
 $s_reporter_stats = '报告员(未解决/已解决/已关闭/合计)';
 $s_orct = '(未解决/已解决/已关闭/合计)';
 $s_summary_header = '开放/已解决/已关闭/总数/解决率/比率';
+$s_summary_notice_filter_is_applied = '已应用过滤器';
 $s_any = '任意';
 $s_all = '全部';
 $s_show = '显示';
@@ -969,6 +976,8 @@ $s_manage_filter_page_title = '管理过滤器';
 $s_manage_filter_edit_page_title = '编辑过滤器';
 $s_delete_filter_button = '删除';
 $s_apply_filter_button = '应用';
+$s_temporary_filter = '临时过滤器';
+$s_set_as_persistent_filter = '设置为持久过滤器';
 $s_view_simple_link = '简易查看';
 $s_product_build = '产品Build';
 $s_system_profile = '系统说明';
@@ -1285,10 +1294,13 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '没有找到字符串“%1$s”。
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '没有找到问题注释。';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '没有找到数据库字段 “%1$s”。';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '主持人对处于当前状态的问题没有足够存取权进行处理。';
+$MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = '已禁用项目层级（子项目）。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '没有找到项目“%1$s”。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '已经存在同名项目，请返回前一页重新输入项目名称。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '项目名称无效，项目名称不能为空。';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '此操作将造成项目从属结构发生错误的循环结构。';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = '项目 "%1$s" 已是 "%2$s" 的子项目。';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_NOT_FOUND] = '项目 "%1$s" 不是 "%2$s" 的子项目。';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = '用户名 "%1$s" 无法找到。';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '用户ID "%1$d" 无法找到。';
 $MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = '找不到电子邮件为“%1$s”的用户。';
@@ -1409,3 +1421,10 @@ $s_dropzone_cancel_upload_confirmation = '您确定要取消此次上传么？';
 $s_dropzone_remove_file = '移除文件';
 $s_dropzone_max_files_exceeded = '您不能上传更多文件。';
 $s_dropzone_not_supported = 'Dropzone.js不支持旧浏览器！';
+$s_dropzone_multiple_files_too_big = '下列文件:{{files}}超出了最大文件限制 ({{maxFilesize}} MiB)';
+$s_save = '保存';
+$s_reset = '重置';
+$s_persist = '持久';
+$s_load = '载入';
+$s_apply_changes = '应用更改';
+$s_undo = '撤销';

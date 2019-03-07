@@ -81,3 +81,4 @@ $s_plugin_MantisGraph_period_year_to_date = 'За тачно једну годи
 $s_plugin_MantisGraph_period_select = 'Произвољни датуми';
 $s_plugin_MantisGraph_period_last_year = 'Претходна година';
 $s_plugin_MantisGraph_graph_page = 'Историја проблема с графиконом';
+$s_plugin_MantisGraph_other_categories = 'друге категорије (%d)';

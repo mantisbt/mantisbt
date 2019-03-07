@@ -40,6 +40,7 @@
  *
  * @author Christian List
  * @author Joedalton
+ * @author Saederup92
  * @author Tjernobyl
  */
 
@@ -88,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Vis rapporthistorik som graf';
 $s_plugin_MantisGraph_graph_topdev = 'Topudviklere efter løste fejlrapporter';
 $s_plugin_MantisGraph_graph_opendev = 'Udviklere efter åbne fejlrapporter';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Toprapportører efter løste fejlrapporter';
+$s_plugin_MantisGraph_other_categories = 'andre kategorier (%d)';

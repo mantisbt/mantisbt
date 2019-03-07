@@ -49,6 +49,7 @@
  * @author Rienkwind
  * @author Robin van der Vliet
  * @author Robin0van0der0vliet
+ * @author Romaine
  * @author Siebrand
  * @author Sjoerddebruin
  * @author Tvdm
@@ -1409,3 +1410,5 @@ $s_save = 'Opslaan';
 $s_reset = 'Opnieuw instellen';
 $s_persist = 'Aanhouden';
 $s_load = 'Laden';
+$s_apply_changes = 'Wijzigingen toepassen';
+$s_undo = 'Ongedaan maken';
