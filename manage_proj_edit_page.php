@@ -767,7 +767,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 									<tr>
 										<th><div class="sort" role="button" data-sort="key-name"><?php echo lang_get( 'username' ) ?></div></th>
 										<th><div class="sort" role="button" data-sort="key-email"><?php echo lang_get( 'email' ) ?></div></th>
-										<th><div class="sort" role="button" data-sort="key-access"><?php echo lang_get( 'access_level' ) ?></div></th>
+										<th class="col-md-4"><div class="sort" role="button" data-sort="key-access"><?php echo lang_get( 'access_level' ) ?></div></th>
 										<th><?php echo lang_get( 'remove_link' ) ?></th>
 									</tr>
 								</thead>
@@ -859,10 +859,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 						</div>
 					</form>
 				</div>
-			</div>
 	<?php
 	} // end if user count > 0
 	?>
+			</div>
 			<div class="widget-toolbox padding-8 clearfix">
 	<?php
 	# You need global or project-specific permissions to remove users
