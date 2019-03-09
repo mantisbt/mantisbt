@@ -321,7 +321,7 @@ textarea.input-xs, select.input-xs[multiple] {
 
 .scrollable-menu {
     height: auto;
-    max-height: 500px;
+    max-height: 435px;
     overflow-x: hidden;
 }
 
