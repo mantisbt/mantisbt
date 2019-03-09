@@ -48,13 +48,78 @@ $(document).ready( function() {
         ToggleDiv( t_div );
     });
 
-    var options = {
-    	valueNames: [ 'project-link' ]
-    };
-    var list = new List('projects-list', options);
-    if(list.items.length <= 10) {
-    	$('#projects-list .searchbox').hide();
-    }
+	/**
+	 * Manage the navbar project menu initializacion and events
+	 * for focus and key presses.
+	 */
+
+	/* initialize the list */
+	var projects_list_options = {
+		valueNames: [ 'project-link' ]
+	};
+	var listprojects = new List('projects-list', projects_list_options);
+	if( listprojects.items.length <= 10 ) {
+		$('#projects-list .projects-searchbox').hide();
+	}
+
+	/**
+	 * Events to manage focus when displaying the dropdown.
+	 * - Focus on the active item to position the scrollable list on that item.
+	 * - If there is no items to show, focus on the search box.
+	 */
+	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
+		var li_active = $(this).find('.dropdown-menu li.active a');
+		if( li_active.length ) {
+			li_active.focus();
+		} else {
+			$('#projects-list .search').focus();
+		}
+	});
+
+	/**
+	 * When pressing a key in the search box, targeted at navigating the list,
+	 * switch focus to the list.
+	 * When pressing Escape, close the dropdown.
+	 */
+	$('#projects-list .search').keydown( function(event){
+		switch (event.key) {
+			case 'ArrowDown':
+			case 'ArrowUp':
+			case 'Down':
+			case 'Up':
+			case 'PageDown':
+			case 'PageUp':
+				var list = $('#projects-list .list');
+				if( list.find('li.active').length ) {
+					list.find('li.active a').focus();
+				} else {
+					list.find('li a').first().focus();
+				}
+				break;
+			case 'Escape':
+				$('#dropdown_projects_menu').removeClass('open');
+		}
+	});
+
+	/**
+	 * When pressing a key in the list, which is not targeted at navigating the list,
+	 * for example, typing a string, toggle focus to the search box.
+	 */
+	$('#projects-list .list').keydown( function(event){
+		switch (event.key) {
+			case 'Enter':
+			case 'ArrowDown':
+			case 'ArrowUp':
+			case 'Down':
+			case 'Up':
+			case 'PageDown':
+			case 'PageUp':
+			case 'Home':
+			case 'End':
+				return;
+		}
+		$('#projects-list .search').focus();
+	});
 
     $('.widget-box').on('shown.ace.widget' , function(event) {
        var t_id = $(this).attr('id');
@@ -460,10 +525,6 @@ $(document).ready( function() {
 			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
-
-	$(document).on('shown.bs.dropdown', '#dropdown_projects_menu', function() {
-		$(this).find(".dropdown-menu li.active a").focus();
-	 });
 
 	/**
 	 * Manage visiblity on hover trigger objects
