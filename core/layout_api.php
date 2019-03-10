@@ -592,13 +592,6 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	$t_project_ids = user_get_accessible_projects( $t_user_id );
 	$t_can_report = true;
 
-	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '">';
-		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
-		echo '<li class="divider"></li>' . "\n";
-	}
-
 	echo '<li>';
 	echo '<div class="projects-searchbox">';
 	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
@@ -608,6 +601,13 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	echo '<li>';
 	echo '<div class="scrollable-menu">';
 	echo '<ul class="list dropdown-yellow no-margin">';
+
+	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
+		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
+		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '">';
+		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
+		echo '<li class="divider"></li>' . "\n";
+	}
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_can_report_only ) {
