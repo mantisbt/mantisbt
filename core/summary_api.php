@@ -1295,31 +1295,30 @@ function summary_print_filter_info( array $p_filter = null ) {
 }
 
 /**
- * Calculate the number of "resolve" issues actions in the last X days.
- * This includes each and succesive resolution transitions.
+ * Calculate the number of "open" and "resolve" issues actions in the last X days.
+ * This includes each and successive resolution transitions.
  * A filter can be used to limit the visibility.
  *
- * @param array $p_date_array An array of integers representing days is passed in.
- * @param array $p_filter Filter array.
- * @return array	Accumulated count for each day range
+ * @param array $p_date_array   An array of integers representing days is passed in.
+ * @param array $p_filter       Filter array.
+ * @return array	Accumulated count for each day range.
  */
-function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filter = null ) {
+function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null ) {
 	$t_project_id = helper_get_current_project();
 	$t_specific_where = helper_project_specific_where( $t_project_id );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-
 	$t_date_array = array_values( $p_date_array );
 	sort( $t_date_array );
-	$t_query = new DBQuery();
 
-	$t_prev_days = 0;
+	$t_query = new DBQuery();
 	$t_now = db_now();
+	$t_prev_days = 0;
 	$t_sql_ranges = 'CASE';
 	foreach( $t_date_array as $t_ix => $t_days ) {
 		$c_days = (int)$t_days;
 		$t_range_start = $t_now - $c_days * SECONDS_PER_DAY + 1;
 		$t_range_end = $t_now - $t_prev_days * SECONDS_PER_DAY;
-		$t_sql_ranges .= ' WHEN h.date_modified'
+		$t_sql_ranges .= ' WHEN date_modified'
 				. ' BETWEEN ' . $t_query->param( $t_range_start )
 				. ' AND ' . $t_query->param( $t_range_end )
 				. ' THEN ' . $t_ix;
@@ -1327,112 +1326,58 @@ function summary_by_dates_resolved_bug_count( array $p_date_array, array $p_filt
 	}
 	$t_sql_ranges .= ' ELSE -1 END';
 
-	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
-		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
-		. ' FROM {bug} b LEFT JOIN {bug_history} h'
-		. ' ON b.id = h.bug_id AND h.type = :hist_type AND h.field_name = :hist_field'
-		. ' WHERE b.status >= :int_st_resolved'
-		. ' AND h.old_value < :int_st_resolved'
-		. ' AND h.new_value >= :int_st_resolved'
-		. ' AND h.date_modified > :mint_ime'
+	$t_sql_inner = 'SELECT CASE WHEN h.type = :hist_type_new THEN :action_open'
+		. ' WHEN h.type = :hist_type_upd AND h.old_value >= :status AND h.new_value  < :status THEN :action_open'
+		. ' WHEN h.type = :hist_type_upd AND h.old_value < :status AND h.new_value  >= :status THEN :action_close'
+		. ' ELSE null END AS action, date_modified'
+        . ' FROM {bug_history} h JOIN {bug} b ON b.id = h.bug_id'
+		. ' WHERE h.date_modified > :mint_ime'
+		. ' AND ( h.type = :hist_type_new OR h.type = :hist_type_upd AND h.field_name = :hist_field )'
 		. ' AND ' . $t_specific_where;
 	$t_query->bind( array (
-		'hist_type' => NORMAL_TYPE,
+		'hist_type_upd' => NORMAL_TYPE,
+		'hist_type_new' => NEW_BUG,
 		'hist_field' => 'status',
-		'int_st_resolved' => (int)$t_resolved,
+		'status' => (string)$t_resolved,
+		'action_open' => 'O',
+		'action_close' => 'C',
 		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
 		) );
+
 	if( !empty( $p_filter ) ) {
 		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND b.id IN :filter';
+		$t_sql_inner .= ' AND b.id IN :filter';
 		$t_query->bind( 'filter', $t_subquery );
 	}
-	$t_sql .= ' ) subquery GROUP BY date_range';
+
+	$t_sql = 'SELECT action, date_range, COUNT(*) AS range_count FROM'
+		. ' ( SELECT action, ' . $t_sql_ranges . ' AS date_range'
+		. ' FROM (' . $t_sql_inner . ') sub_actions'
+		. ' WHERE action IS NOT NULL ) sub_count'
+		. ' GROUP BY action, date_range ORDER BY date_range, action';
 	$t_query->sql( $t_sql );
 
+	# initialize the result array to 0
 	$t_count_array = array();
 	foreach( $t_date_array as $t_ix => $t_value ) {
-		$t_count_array[$t_ix] = 0;
+		$t_count_array['open'][$t_ix] = 0;
+		$t_count_array['close'][$t_ix] = 0;
 	}
-	# count is accumulated
-	$t_count = 0;
+	# count is accumulated, and date ranges are ordered in the result
+	$t_count_open = 0;
+	$t_count_closed = 0;
 	while( $t_row = $t_query->fetch() ) {
-		$t_index = $t_row['date_range'];
+		$t_index = (int)$t_row['date_range'];
 		if( $t_index >= 0 ) {
-			$t_count += $t_row['range_count'];
-			$t_count_array[$t_index] = $t_count;
-		}
-	}
-	return $t_count_array;
-}
-
-/**
- * Calculate the number of "open" issues actions in the last X days.
- * This includes each issue submission, and it's succesive reopen transitions.
- * A filter can be used to limit the visibility.
- *
- * @param array $p_date_array An array of integers representing days is passed in.
- * @param array $p_filter Filter array.
- * @return array	Accumulated count for each day range
- */
-function summary_by_dates_open_bug_count( array $p_date_array, array $p_filter = null ) {
-	$t_project_id = helper_get_current_project();
-	$t_specific_where = helper_project_specific_where( $t_project_id );
-	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-
-	$t_date_array = array_values( $p_date_array );
-	sort( $t_date_array );
-	$t_query = new DBQuery();
-
-	$t_prev_days = 0;
-	$t_now = db_now();
-	$t_sql_ranges = 'CASE';
-	foreach( $t_date_array as $t_ix => $t_days ) {
-		$c_days = (int)$t_days;
-		$t_range_start = $t_now - $c_days * SECONDS_PER_DAY + 1;
-		$t_range_end = $t_now - $t_prev_days * SECONDS_PER_DAY;
-		$t_sql_ranges .= ' WHEN h.date_modified'
-				. ' BETWEEN ' . $t_query->param( $t_range_start )
-				. ' AND ' . $t_query->param( $t_range_end )
-				. ' THEN ' . $t_ix;
-		$t_prev_days = $c_days;
-	}
-	$t_sql_ranges .= ' ELSE -1 END';
-
-	$t_sql = 'SELECT date_range, COUNT( id ) AS range_count	FROM ('
-		. ' SELECT b.id, ' . $t_sql_ranges . ' AS date_range'
-		. ' FROM {bug} b LEFT JOIN {bug_history} h ON b.id = h.bug_id '
-		. ' WHERE ( h.type = :type_new'
-		. ' OR h.type = :type_st AND h.field_name = :field_st'
-		. ' AND h.old_value >= :int_st_resolved AND h.new_value < :int_st_resolved'
-		. ' ) AND h.date_modified > :mint_ime'
-		. ' AND ' . $t_specific_where;
-	$t_query->bind( array (
-		'type_new' => NEW_BUG,
-		'type_st' => NORMAL_TYPE,
-		'field_st' => 'status',
-		'int_st_resolved' => (int)$t_resolved,
-		'mint_ime' => $t_now - $t_prev_days * SECONDS_PER_DAY
-		) );
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND b.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
-	}
-	$t_sql .= ' ) subquery GROUP BY date_range';
-	$t_query->sql( $t_sql );
-
-	$t_count_array = array();
-	foreach( $t_date_array as $t_ix => $t_value ) {
-		$t_count_array[$t_ix] = 0;
-	}
-	# count is accumulated
-	$t_count = 0;
-	while( $t_row = $t_query->fetch() ) {
-		$t_index = $t_row['date_range'];
-		if( $t_index >= 0 ) {
-			$t_count += $t_row['range_count'];
-			$t_count_array[$t_index] = $t_count;
+			switch( $t_row['action'] ) {
+				case 'O':
+					$t_count_open += $t_row['range_count'];
+					$t_count_array['open'][$t_index] = $t_count_open;
+					break;
+				case 'C':
+					$t_count_closed += $t_row['range_count'];
+					$t_count_array['close'][$t_index] = $t_count_closed;
+			}
 		}
 	}
 	return $t_count_array;
@@ -1453,8 +1398,9 @@ function summary_print_by_date( array $p_date_array, array $p_filter = null ) {
 	$t_date_array = array_values( $p_date_array );
 	sort( $t_date_array );
 
-	$t_open_count_array = summary_by_dates_open_bug_count( $t_date_array, $p_filter );
-	$t_resolved_count_array = summary_by_dates_resolved_bug_count( $t_date_array, $p_filter );
+	$t_by_dates_count = summary_by_dates_bug_count( $t_date_array, $p_filter );
+	$t_open_count_array = $t_by_dates_count['open'];
+	$t_resolved_count_array = $t_by_dates_count['close'];
 
 	foreach( $t_date_array as $t_ix => $t_days ) {
 		$t_new_count = $t_open_count_array[$t_ix];
