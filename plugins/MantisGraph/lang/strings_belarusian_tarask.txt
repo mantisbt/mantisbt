@@ -89,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Графік гісторыі праблем
 $s_plugin_MantisGraph_graph_topdev = 'Найлепшыя распрацоўнікі паводле вырашаных праблемаў';
 $s_plugin_MantisGraph_graph_opendev = 'Распрацоўнікі паводле адкрытых праблемаў';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найлепшыя дакладчыкі паводле выпраўленых праблемаў';
+$s_plugin_MantisGraph_other_categories = 'іншыя катэгорыі (%d)';
