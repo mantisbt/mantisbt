@@ -175,6 +175,83 @@ $(document).ready( function() {
 		});
 	}
 
+	/**
+	 * Prepare a table where the checkboxes range selection has been applied
+	 * Save row and column index in each cell for easier iteration.
+	 * This assumes no rowspan or colspan is used in the area where the ckecboxes are rendered.
+	 */
+	$('table.checkbox-range-selection').each(function(){
+		$(this).find('tr').each( function(row_index){
+			$(this).children('th, td').each(function(col_index){
+				$(this).data('col_index', col_index);
+				$(this).data('row_index', row_index);
+			});
+		});
+	});
+
+	/**
+	 * Enable range selection for checkboxes, inside a container having class "checkbox-range-selection"
+	 * Assumes the bootstrap/ace styled checkboxes:
+	 *		<label>
+	 *			<input type="checkbox" class="ace">
+	 *			<span class="lbl"></span>
+	 *		</label>
+	 */
+	$('.checkbox-range-selection').on('click', 'label', function (e) {
+		if( $(this).children('input:checkbox').length == 0 ) {
+			return;
+		}
+		var jcontainer = $(this).closest('.checkbox-range-selection');
+		var last_clicked = jcontainer.data('checkbox-range-last-clicked');
+		if (!last_clicked) {
+			last_clicked = this;
+		}
+		if (e.shiftKey) {
+			// Because shift-click is triggered in a label/span, some browsers
+			// will activate a text selection. Remove text selection.
+			window.getSelection().removeAllRanges();
+			var cb_label_list = jcontainer.find('label').has('input:checkbox');
+			// The actual input hasn't been changed yet, so we want to set the
+			// opposite value for all the checkboxes
+			var clicked_current_st = $(this).find('input:checkbox').first().prop('checked');
+			// The currently clicked one is also modified, becasue shift-click is not
+			// recognised correctly by the framework. See #25215
+			if( jcontainer.is('table') ) {
+				// Special case for a table container:
+				// we traverse the table cells for a rectangular area
+				var cell_1 = $(this).closest('th, td');
+				var row_1 = cell_1.data('row_index');
+				var col_1 = cell_1.data('col_index');
+				var cell_2 = $(last_clicked).closest('th, td');
+				var row_2 = cell_2.data('row_index');
+				var col_2 = cell_2.data('col_index');
+				var row_start = Math.min(row_1, row_2);
+				var row_end = Math.max(row_1, row_2);
+				var col_start = Math.min(col_1, col_2);
+				var col_end = Math.max(col_1, col_2);
+				for (i = 0 ; i <= cb_label_list.length ; i++) {
+					var it_td = $(cb_label_list[i]).closest('th, td');
+					var it_row = it_td.data('row_index');
+					var it_col = it_td.data('col_index');
+					if(    row_start <= it_row && it_row <= row_end
+						&& col_start <= it_col && it_col <= col_end ) {
+						$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+					}
+				}
+			} else {
+				// General case: we traverse the items by their relative index
+				var start = cb_label_list.index(this);
+				var end = cb_label_list.index(last_clicked);
+				var index_start = Math.min(start, end);
+				var index_end = Math.max(start, end);
+				for (i = index_start ; i <= index_end ; i++) {
+					$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+				}
+			}
+		}
+		jcontainer.data('checkbox-range-last-clicked', this);
+	});
+
 	var stopwatch = {
 		timerID: 0,
 		startTime: null,
