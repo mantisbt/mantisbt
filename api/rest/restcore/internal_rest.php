@@ -29,6 +29,7 @@ require_api( 'helper_api.php' );
  */
 $g_app->group('/internal', function() use ( $g_app ) {
 	$g_app->any( '/autocomplete', 'rest_internal_autocomplete' );
+	$g_app->any( '/config_display', 'rest_internal_config_display' );
 });
 
 /**
@@ -61,4 +62,37 @@ function rest_internal_autocomplete( \Slim\Http\Request $p_request, \Slim\Http\R
 	}
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_matches );
+}
+
+function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_config_id = $p_request->getParam( 'config_id' );
+	$t_user_id = $p_request->getParam( 'user_id' );
+	$t_project_id = $p_request->getParam( 'project_id' );
+
+	if( !access_has_global_level( config_get( 'view_configuration_threshold' ), auth_get_current_user_id() ) ) {
+		return $p_response->withStatus( HTTP_STATUS_FORBIDDEN );
+	}
+	if( null === $t_user_id || null === $t_project_id || null === $t_config_id ) {
+		$t_message = "Missing parameters";
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
+	}
+
+	$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}'
+			. ' WHERE user_id = :user_id AND project_id = :project_id AND config_id = :config_id';
+	$t_params = array(
+		'user_id' => $t_user_id,
+		'project_id' => $t_project_id,
+		'config_id' => $t_config_id
+		);
+	$t_query = new DbQuery( $t_sql, $t_params );
+	$t_row = $t_query->fetch();
+
+	if( !$t_row ) {
+		$t_message = "Requested option/project/user doesn't exist";
+		return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
+	}
+
+	$t_output = config_get_value_as_string( $t_row['type'], $t_row['value'], true );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->write( $t_output );
 }
