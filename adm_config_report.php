@@ -56,6 +56,7 @@ access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
 $t_read_write_access = access_has_global_level( config_get( 'set_configuration_threshold' ) );
 
+require_js( 'adm_config_report.js' );
 layout_page_header( lang_get( 'configuration_report' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
@@ -82,56 +83,6 @@ function get_config_type( $p_type ) {
 		return $t_config_types[$p_type];
 	} else {
 		return $t_config_types[CONFIG_TYPE_DEFAULT];
-	}
-}
-
-/**
- * Display a given config value appropriately
- * @param integer $p_type        Configuration type id.
- * @param mixed   $p_value       Configuration value.
- * @param boolean $p_for_display Whether to pass the value via string attribute for web browser display.
- * @return void
- */
-function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
-	$t_corrupted = false;
-
-	switch( $p_type ) {
-		case CONFIG_TYPE_DEFAULT:
-			return;
-		case CONFIG_TYPE_FLOAT:
-			echo (float)$p_value;
-			return;
-		case CONFIG_TYPE_INT:
-			echo (integer)$p_value;
-			return;
-		case CONFIG_TYPE_STRING:
-			$t_value = string_html_specialchars( config_eval( $p_value ) );
-			if( $p_for_display ) {
-				$t_value = '<p id="adm-config-value">\'' . string_nl2br( $t_value ) . '\'</p>';
-			}
-			echo $t_value;
-			return;
-		case CONFIG_TYPE_COMPLEX:
-			$t_value = @json_decode( $p_value, true );
-			if( $t_value === false ) {
-				$t_corrupted = true;
-			}
-			break;
-		default:
-			$t_value = config_eval( $p_value );
-			break;
-	}
-
-	if( $t_corrupted ) {
-		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
-	} else {
-		$t_output = var_export( $t_value, true );
-	}
-
-	if( $p_for_display ) {
-		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
-	} else {
-		echo string_attribute( $t_output );
 	}
 }
 
@@ -446,6 +397,17 @@ $t_form_security_token = form_security_token( 'adm_config_delete' );
 while( $t_row = $t_config_query->fetch() ) {
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
+	if( CONFIG_TYPE_COMPLEX == $v_type ) {
+		$t_html_value = '<div class="adm_config_expand" data-config_id="' . $v_config_id . '"'
+				. ' data-project_id="' . $v_project_id . '" data-user_id="' . $v_user_id . '">'
+				. '<span class ="expand_show"><a href="#" class="toggle small">[' . lang_get( 'show_content' ) . ']</a></span>'
+				. '<span class ="expand_hide hidden"><a href="#" class="toggle small">[' . lang_get( 'hide_content' ) . ']</a></span>'
+				. '<div class="expand_content"></div>'
+				. '</div>';
+	} else {
+		$t_html_value = config_get_value_as_string( $v_type, $v_value );
+	}
+
 ?>
 <!-- Repeated Info Rows -->
 			<tr class="visible-on-hover-toggle">
@@ -455,7 +417,7 @@ while( $t_row = $t_config_query->fetch() ) {
 				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 				<td><?php echo string_display_line( $v_config_id ) ?></td>
 				<td><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
-				<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
+				<td style="overflow-x:auto;"><?php echo $t_html_value ?></td>
 				<td><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
 <?php
 	if( $t_read_write_access ) {
@@ -629,7 +591,7 @@ if( $t_read_write_access ) {
 				</td>
 				<td>
 					<textarea class="form-control" name="value" cols="80" rows="10"><?php
-						print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+						echo config_get_value_as_string( $t_edit_type, $t_edit_value, false );
 						?></textarea>
 				</td>
 			</tr>
