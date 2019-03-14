@@ -185,6 +185,27 @@ function current_user_get_all_accessible_subprojects( $p_project_id ) {
 }
 
 /**
+ * Returns an array of all project ids that are accesible to the user.
+ * An optional parameter for root project can be provided, which will delimit the
+ * output to root's children. This root project can be included or omitted from
+ * the result with the $p_include_self parameter.
+ *
+ * The special id for ALL_PROJECTS can be used as root, but it will never appear
+ * in the result array because it's not an actual project.
+ *
+ * @param integer $p_root_project_id   A valid project identifier, to delimit the search,
+ *                                     or ALL_PROJECTS to return all accesible projects.
+ * @param boolean $p_include_self      Whether to include the project specified as $p_root_project_id
+ *                                     in the result array. Note that ALL_PROJECTS as root will never
+ *                                     be included.
+ * @return array       Array of accesible project ids.
+ */
+
+function current_user_get_all_accessible_projects( $p_root_project_id = ALL_PROJECTS, $p_include_self = true ) {
+	return user_get_all_accessible_projects( auth_get_current_user_id(), $p_root_project_id, $p_include_self );
+}
+
+/**
  * Returns true if the currently logged in user is has a role of administrator
  * or higher, false otherwise
  *

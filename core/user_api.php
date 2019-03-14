@@ -1081,69 +1081,21 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 $g_user_accessible_projects_cache = null;
 
 /**
- * return an array of project IDs to which the user has access
+ * Returns the top level project ids based on user visibility.
+ * No subprojects or any further children are returned.
  *
  * @param integer $p_user_id       A valid user identifier.
  * @param boolean $p_show_disabled Whether to include disabled projects in the result array.
  * @return array
  */
 function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
-	global $g_user_accessible_projects_cache;
-
-	if( null !== $g_user_accessible_projects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
-		return $g_user_accessible_projects_cache;
-	}
-
-	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-		$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
-	} else {
-		$t_public = VS_PUBLIC;
-		$t_private = VS_PRIVATE;
-
-		db_param_push();
-		$t_query = 'SELECT p.id, p.name, ph.parent_id
-						  FROM {project} p
-						  LEFT JOIN {project_user_list} u
-						    ON p.id=u.project_id AND u.user_id=' . db_param() . '
-						  LEFT JOIN {project_hierarchy} ph
-						    ON ph.child_id = p.id
-						  WHERE ' . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
-							( p.view_state=' . db_param() . '
-							    OR (p.view_state=' . db_param() . '
-								    AND
-							        u.user_id=' . db_param() . ' )
-							) ORDER BY p.name';
-		$t_result = db_query( $t_query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
-
-		$t_projects = array();
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_projects[(int)$t_row['id']] = ( $t_row['parent_id'] === null ) ? 0 : (int)$t_row['parent_id'];
-		}
-
-		# prune out children where the parents are already listed. Make the list
-		#  first, then prune to avoid pruning a parent before the child is found.
-		$t_prune = array();
-		foreach( $t_projects as $t_id => $t_parent ) {
-			if( ( $t_parent !== 0 ) && isset( $t_projects[$t_parent] ) ) {
-				$t_prune[] = $t_id;
-			}
-		}
-		foreach( $t_prune as $t_id ) {
-			unset( $t_projects[$t_id] );
-		}
-		$t_projects = array_keys( $t_projects );
-	}
-
-	if( auth_get_current_user_id() == $p_user_id ) {
-		$g_user_accessible_projects_cache = $t_projects;
-	}
-
-	return $t_projects;
+	return user_get_accessible_subprojects( $p_user_id, ALL_PROJECTS, $p_show_disabled );
 }
 
 /**
- * return an array of sub-project IDs of a certain project to which the user has access
+ * Returns the immediate subprojects, accessible by the user, for a given project.
+ * Only first level of subprojects are returned.
+ *
  * @param integer $p_user_id       A valid user identifier.
  * @param integer $p_project_id    A valid project identifier.
  * @param boolean $p_show_disabled Include disabled projects in the resulting array.
@@ -1152,133 +1104,65 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
 
-	if( null !== $g_user_accessible_subprojects_cache && auth_get_current_user_id() == $p_user_id && false == $p_show_disabled ) {
-		if( isset( $g_user_accessible_subprojects_cache[$p_project_id] ) ) {
-			return $g_user_accessible_subprojects_cache[$p_project_id];
-		} else {
-			return array();
-		}
-	}
+	$t_graph = project_hierarchy_graph_visible_projects( $p_user_id, $p_show_disabled );
+	# returns only 1 level of projects (relative to current)
+	$traverse_options = array(
+		'max_depth' => 1,
+		'start_node' => $p_project_id,
+		'duplicates' => false,
+		'include_all_projects' => false
+		);
+	$t_graph->traverse( $traverse_options );
+	# remove current project from the result
+	$t_projects = array_diff( $t_graph->traverse_visited_ids, [$p_project_id] );
 
-	db_param_push();
-
-	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
-		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
-					  FROM {project} p
-					  LEFT JOIN {project_hierarchy} ph
-					    ON ph.child_id = p.id
-					  WHERE ' . $t_enabled_clause . '
-					  	 ph.parent_id IS NOT NULL
-					  ORDER BY p.name';
-		$t_result = db_query( $t_query, ( $p_show_disabled ? array() : array( true ) ) );
-	} else {
-		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
-					  FROM {project} p
-					  LEFT JOIN {project_user_list} u
-					    ON p.id = u.project_id AND u.user_id=' . db_param() . '
-					  LEFT JOIN {project_hierarchy} ph
-					    ON ph.child_id = p.id
-					  WHERE ' . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
-					  	ph.parent_id IS NOT NULL AND
-						( p.view_state=' . db_param() . '
-						    OR (p.view_state=' . db_param() . '
-							    AND
-						        u.user_id=' . db_param() . ' )
-						)
-					  ORDER BY p.name';
-		$t_param = array( $p_user_id, VS_PUBLIC, VS_PRIVATE, $p_user_id );
-		if( !$p_show_disabled ) {
-			# Insert enabled flag value in 2nd position of parameter array
-			array_splice( $t_param, 1, 0, true );
-		}
-		$t_result = db_query( $t_query, $t_param );
-	}
-
-	$t_projects = array();
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( !isset( $t_projects[(int)$t_row['parent_id']] ) ) {
-			$t_projects[(int)$t_row['parent_id']] = array();
-		}
-
-		array_push( $t_projects[(int)$t_row['parent_id']], (int)$t_row['id'] );
-	}
-
-	if( auth_get_current_user_id() == $p_user_id ) {
-		$g_user_accessible_subprojects_cache = $t_projects;
-	}
-
-	if( !isset( $t_projects[(int)$p_project_id] ) ) {
-		$t_projects[(int)$p_project_id] = array();
-	}
-
-	return $t_projects[(int)$p_project_id];
+	return array_values( $t_projects );
 }
 
 /**
- * return an array of sub-project IDs of all sub-projects project to which the user has access
+ * Returns an array of all accessible project ids that are in any level descendants
+ * of the specified project.
+ * This function is a wrapper for `user_get_all_accessible_projects()`
+ *
  * @param integer $p_user_id    A valid user identifier.
  * @param integer $p_project_id A valid project identifier.
  * @return array
  */
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
-	# @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
-	# affects how news and some summaries are generated
-	$t_todo = user_get_accessible_subprojects( $p_user_id, $p_project_id );
-	$t_subprojects = array();
-
-	while( $t_todo ) {
-		$t_elem = (int)array_shift( $t_todo );
-		if( !in_array( $t_elem, $t_subprojects ) ) {
-			array_push( $t_subprojects, $t_elem );
-			$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
-		}
-	}
-
-	return $t_subprojects;
+	return user_get_all_accessible_projects( $p_user_id, $p_project_id, false );
 }
 
 /**
- * Returns an array of project and sub-project IDs of all projects to which the
- * user has access and that are children of the specified project.
+ * Returns an array of all project ids that are accesible to the user.
+ * An optional parameter for root project can be provided, which will delimit the
+ * output to root's children. This root project can be included or omitted from
+ * the result with the $p_include_self parameter.
  *
- * @param integer $p_user_id    A valid user identifier or null for logged in user.
- * @param integer $p_project_id A valid project identifier.  ALL_PROJECTS returns
- *                              all top level projects and sub-projects.
- * @return array
+ * The special id for ALL_PROJECTS can be used as root, but it will never appear
+ * in the result array because it's not an actual project.
+ *
+ * @param integer $p_user_id           A valid user identifier or null for logged in user.
+ * @param integer $p_root_project_id   A valid project identifier, to delimit the search,
+ *                                     or ALL_PROJECTS to return all accesible projects.
+ * @param boolean $p_include_self      Whether to include the project specified as $p_root_project_id
+ *                                     in the result array. Note that ALL_PROJECTS as root will never
+ *                                     be included.
+ * @return array       Array of accesible project ids.
  */
-function user_get_all_accessible_projects( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
-	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id();
-	}
+function user_get_all_accessible_projects( $p_user_id = null, $p_root_project_id = ALL_PROJECTS, $p_include_self = true ) {
+	static $cache = array();
 
-	if( ALL_PROJECTS == $p_project_id ) {
-		$t_top_projects = user_get_accessible_projects( $p_user_id );
-
-		# Cover the case for PHP < 5.4 where array_combine() returns
-		# false and triggers warning if arrays are empty (see #16187)
-		if( empty( $t_top_projects ) ) {
-			return array();
-		}
-
-		# Create a combined array where key = value
-		$t_project_ids = array_combine( $t_top_projects, $t_top_projects );
-
-		# Add all subprojects user has access to
-		foreach( $t_top_projects as $t_project ) {
-			$t_subprojects_ids = user_get_all_accessible_subprojects( $p_user_id, $t_project );
-			foreach( $t_subprojects_ids as $t_id ) {
-				$t_project_ids[$t_id] = $t_id;
-			}
-		}
+	if( !isset( $cache[$p_user_id][$p_root_project_id] ) ) {
+		$t_graph = project_hierarchy_graph_visible_projects( $p_user_id, false /* show disabled */ );
+		$t_projects = array_values( $t_graph->get_reachable_projects( $p_root_project_id ) );
+		$cache[$p_user_id][$p_root_project_id] = $t_projects;
 	} else {
-		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
-		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
-		array_unshift( $t_project_ids, $p_project_id );
+		$t_projects = $cache[$p_user_id][$p_root_project_id];
 	}
-
-	return $t_project_ids;
+	if( !$p_include_self || ALL_PROJECTS == $p_root_project_id ) {
+		$t_projects = array_diff( $t_projects, [$p_root_project_id] );
+	}
+	return $t_projects;
 }
 
 /**
@@ -1778,16 +1662,6 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
  * @return boolean	True if the user has access to more than one project.
  */
 function user_has_more_than_one_project( $p_user_id ) {
-	$t_project_ids = user_get_accessible_projects( $p_user_id );
-	$t_count = count( $t_project_ids );
-	if( 0 == $t_count ) {
-		return false;
-	}
-	if( 1 == $t_count ) {
-		$t_project_id = (int) $t_project_ids[0];
-		if( count( user_get_accessible_subprojects( $p_user_id, $t_project_id ) ) == 0 ) {
-			return false;
-		}
-	}
-	return true;
+	$t_project_ids = user_get_all_accessible_projects( $p_user_id );
+	return ( count( $t_project_ids ) > 1 );
 }

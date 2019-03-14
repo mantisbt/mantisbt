@@ -342,44 +342,58 @@ function helper_get_current_project() {
 }
 
 /**
- * Return the current project id as stored in a cookie, in an Array
- * If no cookie exists, the user's default project is returned
- * If the current project is a subproject, the return value will include
- * any parent projects
- * @return array
+ * Return the projects path as an array of project ids ordered from top to bottom
+ * up to the current project.
+ * This is used to position the current project in the hierarchy, becasue if a
+ * project has more than one parent, we need to know which branch is the one selected
+ * by the user, for example in the project selector.
+ * This path is stored as a ';' separated string in a cookie.
+ * If no cookie exists, the path for user's default project is returned.
+ *
+ * @return array	Project path from top to bottom project ids.
  */
 function helper_get_current_project_trace() {
 	$t_cookie_name = config_get_global( 'project_cookie' );
+	$t_project_string = gpc_get_cookie( $t_cookie_name, null );
+	$t_user_id = auth_get_current_user_id();
+	$t_graph = project_hierarchy_graph_visible_projects( $t_user_id, false /* show disabled */ );
 
-	$t_project_id = gpc_get_cookie( $t_cookie_name, null );
-
-	if( null === $t_project_id ) {
-		$t_bottom = current_user_get_pref( 'default_project' );
-		$t_parent = $t_bottom;
-		$t_project_id = array(
-			$t_bottom,
-		);
-
-		while( true ) {
-			$t_parent = project_hierarchy_get_parent( $t_parent );
-			if( 0 == $t_parent ) {
-				break;
-			}
-			array_unshift( $t_project_id, $t_parent );
+	if( null === $t_project_string ) {
+		# if there is no saved project path, calculate one from user's default project
+		$t_project_id = current_user_get_pref( 'default_project' );
+		$t_project_path = $t_graph->get_project_trace( $t_project_id );
+		if( !$t_project_path ) {
+			# if can't be found, because requested project is not accesible or valid, set a default
+			$t_project_path = array( ALL_PROJECTS );
 		}
-
 	} else {
-		$t_project_id = explode( ';', $t_project_id );
-		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
+		# get the path from the string
+		$t_project_path = explode( ';', $t_project_string );
 	}
 
-	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_bottom ), $t_bottom ) ) {
-		$t_project_id = array(
-			ALL_PROJECTS,
-		);
+	# check if the current selected project is valid, otherwise reset it to ALL_PROJECTS
+	$t_current = end( $t_project_path );
+	if( !in_array( $t_current, $t_graph->get_reachable_projects( ALL_PROJECTS ) ) ) {
+		$t_project_path = array( ALL_PROJECTS );
 	}
 
-	return $t_project_id;
+	return $t_project_path;
+}
+
+/**
+ * Build a string representing the project trace as used in some project related items.
+ * The project trace is a concatenation of the projects ids from top parent to the
+ * target project, separated by ";". Special project ALL_PROJECTS (0) is not included,
+ * unless the target is ALL_PROJECTS itself, which is a trace string = "0"
+ *
+ * @param array $p_project_ids	Array of project ids, ordered as the hierarchy path from
+ *                              top to target project.
+ */
+function helper_build_project_trace_string( array $p_project_path ) {
+	if( count( $p_project_path ) == 1 && reset( $p_project_path ) == ALL_PROJECTS ) {
+		return (string)ALL_PROJECTS;
+	}
+	return implode( ';', array_diff( $p_project_path, [ALL_PROJECTS] ) );
 }
 
 /**

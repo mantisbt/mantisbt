@@ -48,7 +48,7 @@ require_css( 'status_config.php' );
  * @return void
  */
 function bug_group_action_init( $p_action ) {
-	$t_valid_actions = bug_group_action_get_commands( current_user_get_accessible_projects() );
+	$t_valid_actions = bug_group_action_get_commands( current_user_get_all_accessible_projects() );
 	$t_action = strtoupper( $p_action );
 
 	if( !isset( $t_valid_actions[$t_action] ) &&

@@ -408,18 +408,7 @@ function category_get_filter_list( $p_project_id = null ) {
 		$t_project_id = $p_project_id;
 	}
 
-	if( $t_project_id == ALL_PROJECTS ) {
-		$t_project_ids = current_user_get_accessible_projects();
-	} else {
-		$t_project_ids = array( $t_project_id );
-	}
-
-	$t_subproject_ids = array();
-	foreach( $t_project_ids as $t_project_id ) {
-		$t_subproject_ids = array_merge( $t_subproject_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
-	}
-
-	$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
+	$t_project_ids = current_user_get_all_accessible_projects( $t_project_id, true /* include self */ );
 
 	$t_categories = array();
 	foreach( $t_project_ids as $t_id ) {

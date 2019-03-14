@@ -3693,9 +3693,9 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
  */
 function filter_get_included_projects( array $p_filter, $p_project_id = null, $p_user_id = null, $p_return_all_projects = false ) {
 	if( null === $p_project_id ) {
-		$t_project_id = helper_get_current_project();
+		$t_current_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = $p_project_id;
+		$t_current_project_id = $p_project_id;
 	}
 	if( !$p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
@@ -3707,7 +3707,7 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	# normalize the project filtering into an array $t_project_ids
 	if( FILTER_VIEW_TYPE_SIMPLE == $t_view_type ) {
 		log_event( LOG_FILTERING, 'Simple Filter' );
-		$t_project_ids = array( $t_project_id );
+		$t_project_ids = array( $t_current_project_id );
 		$t_include_sub_projects = true;
 	} else {
 		log_event( LOG_FILTERING, 'Advanced Filter' );
@@ -3718,65 +3718,46 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	log_event( LOG_FILTERING, 'project_ids = @P' . implode( ', @P', $t_project_ids ) );
 	log_event( LOG_FILTERING, 'include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
 
-	# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
-	# replace META_FILTER_CURRENT with the actual current project id.
+	$t_accesible_projects = user_get_all_accessible_projects( $p_user_id, ALL_PROJECTS, true /* include ALL_PROJECTS */ );
 
-	$t_all_projects_found = false;
-	$t_new_project_ids = array();
-	foreach( $t_project_ids as $t_pid ) {
-		if( $t_pid == META_FILTER_CURRENT ) {
-			$t_pid = $t_project_id;
-		}
-
-		if( $t_pid == ALL_PROJECTS ) {
-			$t_all_projects_found = true;
-			log_event( LOG_FILTERING, 'all projects selected' );
-			break;
-		}
-
-		# filter out inaccessible projects.
-		if( !project_exists( $t_pid ) || !access_has_project_level( config_get( 'view_bug_threshold', null, $t_user_id, $t_pid ), $t_pid, $t_user_id ) ) {
-			log_event( LOG_FILTERING, 'Invalid or inaccessible project: ' . $t_pid );
-			continue;
-		}
-
-		$t_new_project_ids[] = $t_pid;
-	}
-
-	# if not expanding ALL_PROJECTS, shortcut return directly
-	if( $t_all_projects_found && $p_return_all_projects ) {
-		return ALL_PROJECTS;
-	}
+	$t_all_projects_found = !empty( array_keys( $t_project_ids, ALL_PROJECTS ) );
 
 	if( $t_all_projects_found ) {
-		$t_project_ids = user_get_accessible_projects( $t_user_id );
+		# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
+		log_event( LOG_FILTERING, 'all projects selected' );
+		$t_project_ids = array( ALL_PROJECTS );
+		if( $p_return_all_projects ) {
+			return ALL_PROJECTS;
+		}
+		# expand to specific project ids
+		return $t_accesible_projects;
+
 	} else {
-		$t_project_ids = $t_new_project_ids;
-	}
-
-	# expand project ids to include sub-projects
-	if( $t_include_sub_projects ) {
-		$t_top_project_ids = $t_project_ids;
-
-		foreach( $t_top_project_ids as $t_pid ) {
-			log_event( LOG_FILTERING, 'Getting sub-projects for project id @P' . $t_pid );
-			$t_subproject_ids = user_get_all_accessible_subprojects( $t_user_id, $t_pid );
-			if( !$t_subproject_ids ) {
-				continue;
+		# replace META_FILTER_CURRENT with the actual current project id.
+		$t_keys_meta = array_keys( $t_project_ids, META_FILTER_CURRENT );
+		if( !empty( $t_keys_meta ) ) {
+			foreach( $t_keys_meta as $t_key ) {
+				unset( $t_project_ids[$t_key] );
 			}
-			$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
+			$t_project_ids[] = $t_current_project_id;
 		}
 
-		$t_project_ids = array_unique( $t_project_ids );
-	}
+		# expand subprojects
+		if( $t_include_sub_projects ) {
+			$t_project_ids = user_get_all_accessible_projects( $t_user_id, $t_current_project_id );
+		}
 
-	if( count( $t_project_ids ) ) {
-		log_event( LOG_FILTERING, 'project_ids after including sub-projects = @P' . implode( ', @P', $t_project_ids ) );
-	} else {
-		log_event( LOG_FILTERING, 'no accessible projects' );
-	}
+		# remove inaccesible projects
+		$t_project_ids = array_intersect( $t_project_ids, $t_accesible_projects );
 
-	return $t_project_ids;
+		if( count( $t_project_ids ) ) {
+			log_event( LOG_FILTERING, 'project_ids after including sub-projects = @P' . implode( ', @P', $t_project_ids ) );
+		} else {
+			log_event( LOG_FILTERING, 'no accessible projects' );
+		}
+
+		return array_unique( $t_project_ids );
+	}
 }
 
 /**

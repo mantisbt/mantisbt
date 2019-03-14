@@ -124,13 +124,9 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			<select id="default-project-id" name="default_project" class="input-sm">
 <?php
 	# Count number of available projects
-	$t_projects = current_user_get_accessible_projects();
-	$t_num_proj = count( $t_projects );
-	if( $t_num_proj == 1 ) {
-		$t_num_proj += count( current_user_get_accessible_subprojects( $t_projects[0] ) );
-	}
+	$t_hide = !current_user_has_more_than_one_project();
 	# Don't display "All projects" in selection list if there is only 1
-	print_project_option_list( (int)$t_pref->default_project, $t_num_proj != 1 );
+	print_project_option_list( (int)$t_pref->default_project, $t_hide );
 ?>
 					</select>
 		</td>
