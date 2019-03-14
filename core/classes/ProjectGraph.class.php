@@ -378,6 +378,11 @@ class ProjectGraph {
 	 * Internal helper function to perform removal of a node from the graph,
 	 * and manage relinking of relations in adjacent nodes
 	 *
+	 * When deleting a node P, all its children will be relinked to P's parents,
+	 * unless that parent is ALL_PROJECTS. This is made so a subproject may still
+	 * appear under its indirect parents, but not at 1st level. 1st level projects
+	 * should be only those without any parent.
+	 *
 	 * @param integer $p_project_id  Project id of the target node
 	 */
 	protected function graph_drop_node_and_relink( $p_project_id ) {
@@ -388,7 +393,8 @@ class ProjectGraph {
 			# remove this node reference as parent in its children
 			unset( $this->graph_data[$t_child_id]['parents'][$p_project_id] );
 			# merge this node's parents into each child's parents
-			$this->graph_data[$t_child_id]['parents'] += $t_node['parents'];
+			# (excluding ALL_PROJECTS as parent)
+			$this->graph_data[$t_child_id]['parents'] += array_diff( $t_node['parents'], [ALL_PROJECTS] );
 			# merge category inheritance
 			$this->graph_data[$t_child_id]['inherit_categories'] += $t_node['inherit_categories'];
 		}
@@ -397,7 +403,10 @@ class ProjectGraph {
 			# remove this node reference as child in its parents
 			unset( $this->graph_data[$t_parent_id]['children'][$p_project_id] );
 			# merge this node's children into each parent's children
-			$this->graph_data[$t_parent_id]['children'] += $t_node['children'];
+			# (excluding if the current parent is ALL_PROJECTS)
+			if( $t_parent_id != ALL_PROJECTS ) {
+				$this->graph_data[$t_parent_id]['children'] += $t_node['children'];
+			}
 		}
 
 		# remove this node
