@@ -739,3 +739,50 @@ function config_cache_all() {
 		$g_cache_config_access[$t_config][$t_user][$t_project] = $t_row['access_reqd'];
 	}
 }
+
+/**
+ * Display a given config value appropriately
+ * @param integer $p_type        Configuration type id.
+ * @param mixed   $p_value       Configuration value.
+ * @param boolean $p_for_display Whether to pass the value via string attribute for web browser display.
+ * @return void
+ */
+function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) {
+	$t_corrupted = false;
+
+	switch( $p_type ) {
+		case CONFIG_TYPE_DEFAULT:
+			return '';
+		case CONFIG_TYPE_FLOAT:
+			return (string)(float)$p_value;
+		case CONFIG_TYPE_INT:
+			return (string)(integer)$p_value;
+		case CONFIG_TYPE_STRING:
+			$t_value = string_html_specialchars( config_eval( $p_value ) );
+			if( $p_for_display ) {
+				$t_value = '<p id="adm-config-value">\'' . string_nl2br( $t_value ) . '\'</p>';
+			}
+			return $t_value;
+		case CONFIG_TYPE_COMPLEX:
+			$t_value = @json_decode( $p_value, true );
+			if( $t_value === false ) {
+				$t_corrupted = true;
+			}
+			break;
+		default:
+			$t_value = config_eval( $p_value );
+			break;
+	}
+
+	if( $t_corrupted ) {
+		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
+	} else {
+		$t_output = var_export( $t_value, true );
+	}
+
+	if( $p_for_display ) {
+		return '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
+	} else {
+		return string_attribute( $t_output );
+	}
+}
