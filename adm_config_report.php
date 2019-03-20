@@ -317,6 +317,13 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 
 <div class="widget-body">
 <div class="widget-main no-padding">
+	<div class="widget-toolbox padding-8 clearfix">
+		<?php
+		$t_url_new = 'adm_config_page.php?action=' . MANAGE_CONFIG_ACTION_CREATE;
+		$t_label = lang_get( 'set_configuration_option_action_' . MANAGE_CONFIG_ACTION_CREATE );
+		print_link_button( $t_url_new, $t_label );
+		?>
+	</div>
 <div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
