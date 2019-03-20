@@ -326,7 +326,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		print_link_button( $t_url_new, $t_label );
 		?>
 	</div>
-<div class="table-responsive">
+<div class="table-responsive sortable">
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
@@ -337,7 +337,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 				<th><?php echo lang_get( 'configuration_option_value' ) ?></th>
 				<th><?php echo lang_get( 'access_level' ) ?></th>
 				<?php if( $t_read_write_access ) { ?>
-				<th><?php echo lang_get( 'actions' ) ?></th>
+				<th class="no-sort"><?php echo lang_get( 'actions' ) ?></th>
 				<?php } ?>
 			</tr>
 		</thead>
