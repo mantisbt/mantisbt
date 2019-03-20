@@ -841,6 +841,7 @@ $s_configuration_corrupted = 'The configuration in the database is corrupted.';
 $s_set_configuration_option_action_create = 'Create Configuration Option';
 $s_set_configuration_option_action_edit = 'Edit Configuration Option';
 $s_set_configuration_option_action_clone = 'Clone Configuration Option';
+$s_set_configuration_option_action_view = 'View Configuration Option';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';

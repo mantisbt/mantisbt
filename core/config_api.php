@@ -786,3 +786,27 @@ function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) 
 		return string_attribute( $t_output );
 	}
 }
+
+function config_get_types() {
+	return array(
+		CONFIG_TYPE_DEFAULT => 'default',
+		CONFIG_TYPE_INT     => 'integer',
+		CONFIG_TYPE_FLOAT   => 'float',
+		CONFIG_TYPE_COMPLEX => 'complex',
+		CONFIG_TYPE_STRING  => 'string',
+		);
+}
+
+/**
+ * returns the configuration type for a given configuration type id
+ * @param integer $p_type Configuration type identifier to check.
+ * @return string configuration type
+ */
+function config_get_type_string( $p_type ) {
+	$t_config_types = config_get_types();
+	if( array_key_exists( $p_type, $t_config_types ) ) {
+		return $t_config_types[$p_type];
+	} else {
+		return $t_config_types[CONFIG_TYPE_DEFAULT];
+	}
+}
