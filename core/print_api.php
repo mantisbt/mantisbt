@@ -2141,3 +2141,17 @@ function print_button( $p_action_page, $p_label, array $p_args_to_post = null, $
 	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	print_form_button( $p_action_page, $p_label, $p_args_to_post, $p_security_token );
 }
+
+/**
+ * Generate an html option list for the given array
+ * @param array  $p_array        Array.
+ * @param string $p_filter_value The selected value.
+ * @return void
+ */
+function print_option_list_from_array( array $p_array, $p_filter_value ) {
+	foreach( $p_array as $t_key => $t_value ) {
+		echo '<option value="' . $t_key . '"';
+		check_selected( (string)$p_filter_value, (string)$t_key );
+		echo '>' . string_attribute( $t_value ) . '</option>' . "\n";
+	}
+}
