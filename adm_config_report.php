@@ -63,43 +63,6 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( PAGE_CONFIG_DEFAULT );
 print_manage_config_menu( 'adm_config_report.php' );
 
-$t_config_types = array(
-	CONFIG_TYPE_DEFAULT => 'default',
-	CONFIG_TYPE_INT     => 'integer',
-	CONFIG_TYPE_FLOAT   => 'float',
-	CONFIG_TYPE_COMPLEX => 'complex',
-	CONFIG_TYPE_STRING  => 'string',
-);
-
-/**
- * returns the configuration type for a given configuration type id
- * @param integer $p_type Configuration type identifier to check.
- * @return string configuration type
- */
-function get_config_type( $p_type ) {
-	global $t_config_types;
-
-	if( array_key_exists( $p_type, $t_config_types ) ) {
-		return $t_config_types[$p_type];
-	} else {
-		return $t_config_types[CONFIG_TYPE_DEFAULT];
-	}
-}
-
-/**
- * Generate an html option list for the given array
- * @param array  $p_array        Array.
- * @param string $p_filter_value The selected value.
- * @return void
- */
-function print_option_list_from_array( array $p_array, $p_filter_value ) {
-	foreach( $p_array as $t_key => $t_value ) {
-		echo '<option value="' . $t_key . '"';
-		check_selected( (string)$p_filter_value, (string)$t_key );
-		echo '>' . string_attribute( $t_value ) . '</option>' . "\n";
-	}
-}
-
 /**
  * Ensures the given config is valid
  * @param string $p_config Configuration name
@@ -162,24 +125,6 @@ if( $t_filter_save ) {
 		}
 	}
 }
-
-# Get config edit values
-$t_edit_user_id         = gpc_get_int( 'user_id', $t_filter_user_value == META_FILTER_NONE ? ALL_USERS : $t_filter_user_value );
-$t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == META_FILTER_NONE ? ALL_PROJECTS : $t_filter_project_value );
-$t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
-$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
-$t_edit_value           = gpc_get_string( 'value', '' );
-
-$f_edit_action          = gpc_get_string( 'action', MANAGE_CONFIG_ACTION_CREATE );
-# Ensure we exclusively use one of the defined, valid actions (XSS protection)
-$t_valid_actions = array(
-	MANAGE_CONFIG_ACTION_CREATE,
-	MANAGE_CONFIG_ACTION_CLONE,
-	MANAGE_CONFIG_ACTION_EDIT
-);
-$t_edit_action = in_array( $f_edit_action, $t_valid_actions )
-	? $f_edit_action
-	: MANAGE_CONFIG_ACTION_CREATE;
 
 # Apply filters
 
@@ -397,10 +342,18 @@ $t_form_security_token = form_security_token( 'adm_config_delete' );
 while( $t_row = $t_config_query->fetch() ) {
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
+	# For complex values, the content is not rendered
 	if( CONFIG_TYPE_COMPLEX == $v_type ) {
+		$t_url_params = array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+					'action'        => MANAGE_CONFIG_ACTION_VIEW
+				);
+		$t_url_view = helper_url_combine( 'adm_config_page.php', http_build_query( $t_url_params ) );
 		$t_html_value = '<div class="adm_config_expand" data-config_id="' . $v_config_id . '"'
 				. ' data-project_id="' . $v_project_id . '" data-user_id="' . $v_user_id . '">'
-				. '<span class ="expand_show"><a href="#" class="toggle small">[' . lang_get( 'show_content' ) . ']</a></span>'
+				. '<span class ="expand_show"><a href="' . $t_url_view . '" class="toggle small">[' . lang_get( 'show_content' ) . ']</a></span>'
 				. '<span class ="expand_hide hidden"><a href="#" class="toggle small">[' . lang_get( 'hide_content' ) . ']</a></span>'
 				. '<div class="expand_content"></div>'
 				. '</div>';
@@ -416,7 +369,7 @@ while( $t_row = $t_config_query->fetch() ) {
 				</td>
 				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 				<td><?php echo string_display_line( $v_config_id ) ?></td>
-				<td><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
+				<td><?php echo string_display_line( config_get_type_string( $v_type ) ) ?></td>
 				<td style="overflow-x:auto;"><?php echo $t_html_value ?></td>
 				<td><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
 <?php
@@ -426,36 +379,24 @@ while( $t_row = $t_config_query->fetch() ) {
 	<div class="btn-group inline visible-on-hover">
 <?php
 		if( config_can_delete( $v_config_id ) ) {
-			# Update button (will populate edit form at page bottom)
-			echo '<div class="pull-left">';
-			print_form_button(
-				'#config_set_form',
-				lang_get( 'edit_link' ),
-				array(
+			$t_action_params = array(
 					'user_id'       => $v_user_id,
 					'project_id'    => $v_project_id,
 					'config_option' => $v_config_id,
-					'type'          => $v_type,
-					'value'         => $v_value,
-					'action'        => MANAGE_CONFIG_ACTION_EDIT,
-				),
-				OFF );
+				);
+
+			# Update button
+			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;
+			$t_url_edit = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
+			echo '<div class="pull-left">';
+			print_link_button( $t_url_edit, lang_get( 'edit_link' ), 'btn-xs' );
 			echo '</div>';
 
 			# Clone button
 			echo '<div class="pull-left">';
-			print_form_button(
-				'#config_set_form',
-				lang_get( 'create_child_bug_button' ),
-				array(
-					'user_id'       => $v_user_id,
-					'project_id'    => $v_project_id,
-					'config_option' => $v_config_id,
-					'type'          => $v_type,
-					'value'         => $v_value,
-					'action'        => MANAGE_CONFIG_ACTION_CLONE,
-				),
-				OFF );
+			$t_action_params['action'] = MANAGE_CONFIG_ACTION_CLONE;
+			$t_url_clone = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
+			print_link_button( $t_url_clone, lang_get( 'create_child_bug_button' ), 'btn-xs' );
 			echo '</div>';
 
 			# Delete button
@@ -490,131 +431,6 @@ while( $t_row = $t_config_query->fetch() ) {
 </div>
 </div>
 </div>
-
-<?php
-# Only display the edit form if user is authorized to change configuration
-if( $t_read_write_access ) {
-?>
-
-<!-- Config Set Form -->
-<div class="space-10"></div>
-
-<?php
-	if( config_can_delete( $t_edit_option ) ) {
-		$t_action_label = lang_get( 'set_configuration_option_action_' . $t_edit_action );
-?>
-
-<div id="config-edit-div">
-<form id="config_set_form" method="post" action="adm_config_set.php">
-
-		<!-- Title -->
-		<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-sliders"></i>
-			<?php echo $t_action_label; ?>
-			</h4>
-		</div>
-
-	<div class="widget-body">
-		<div class="widget-main no-padding">
-
-		<div id="config-edit-div" class="form-container">
-		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
-		<?php echo form_security_field( 'adm_config_set' ) ?>
-
-		<!-- Username -->
-		<tr>
-			<td class="category">
-				<?php echo lang_get( 'username' ) ?>
-			</td>
-			<td>
-				<select id="config-user-id" name="user_id" class="input-sm">
-					<option value="<?php echo ALL_USERS; ?>"
-						<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
-						<?php echo lang_get( 'all_users' ); ?>
-					</option>
-					<?php print_user_option_list( $t_edit_user_id ) ?>
-				</select>
-				<input type="hidden" name="original_user_id" value="<?php echo $t_edit_user_id; ?>" />
-			</td>
-		</tr>
-
-			<!-- Project -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'project_name' ) ?>
-				</td>
-				<td>
-					<select id="config-project-id" name="project_id" class="input-sm">
-						<option value="<?php echo ALL_PROJECTS; ?>"
-							<?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
-							<?php echo lang_get( 'all_projects' ); ?>
-						</option>
-						<?php print_project_option_list( $t_edit_project_id, false ) ?>
-					</select>
-					<input type="hidden" name="original_project_id" value="<?php echo $t_edit_project_id; ?>" />
-				</td>
-			</tr>
-
-			<!-- Config option name -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'configuration_option' ) ?>
-				</td>
-				<td>
-					<input type="text" name="config_option" class="input-sm"
-						   value="<?php echo string_display_line( $t_edit_option ); ?>"
-						   size="64" maxlength="64" />
-					<input type="hidden" name="original_config_option" value="<?php echo string_display_line( $t_edit_option ); ?>" />
-				</td>
-			</tr>
-
-			<!-- Option type -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'configuration_option_type' ) ?>
-				</td>
-				<td>
-					<select id="config-type" name="type" class="input-sm">
-						<?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
-					</select>
-				</td>
-			</tr>
-
-			<!-- Option Value -->
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'configuration_option_value' ) ?>
-				</td>
-				<td>
-					<textarea class="form-control" name="value" cols="80" rows="10"><?php
-						echo config_get_value_as_string( $t_edit_type, $t_edit_value, false );
-						?></textarea>
-				</td>
-			</tr>
-		</fieldset>
-	</table>
-	</div>
-
-	</div>
-		<div class="widget-toolbox padding-4 clearfix">
-			<input type="hidden" name="action" value="<?php echo $t_edit_action; ?>" />
-			<input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
-				value="<?php echo $t_action_label; ?>"/>
-		</div>
-	</div>
-	</div>
-	</div>
-</form>
-</div>
-
-<?php
-	} # end if config_can_delete
-} # end if user can change config (read-write access)
-?>
 
 </div>
 
