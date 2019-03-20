@@ -202,7 +202,8 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 # Build config query
-$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd'
+$t_sql = 'SELECT config_id, user_id, project_id, type, access_reqd,'
+		. ' CASE type WHEN :complex THEN null ELSE value END AS value'
 		. ' FROM {config} WHERE 1=1';
 if( $t_filter_user_value != META_FILTER_NONE ) {
 	$t_sql .= ' AND user_id = :user_id';
@@ -217,7 +218,8 @@ $t_sql .= ' ORDER BY user_id, project_id, config_id ';
 $t_params = array(
 	'user_id' => $t_filter_user_value,
 	'project_id' => $t_filter_project_value,
-	'config_id' => $t_filter_config_value
+	'config_id' => $t_filter_config_value,
+	'complex' => CONFIG_TYPE_COMPLEX
 	);
 $t_config_query = new DbQuery( $t_sql, $t_params );
 ?>
