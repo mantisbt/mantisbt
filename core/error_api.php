@@ -241,10 +241,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 				. ' (in ' . $t_caller['file']
 				. ' line ' . $t_caller['line'] . ')';
 
-			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli') {
-				# Enqueue messages for later display with error_print_delayed()
-				global $g_errors_delayed;
-				$g_errors_delayed[] = $t_error_description;
+			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli' ) {
+				error_log_delayed( $t_error_description );
 				$g_error_handled = true;
 				return;
 			}
@@ -416,7 +414,20 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
 }
 
 /**
- * Prints messages from the delayed errors queue
+ * Enqueues an error message for later display.
+ * @see error_print_delayed()
+ *
+ * @param string $p_message Error message
+ *
+ * @return void
+ */
+function error_log_delayed( $p_message ) {
+	global $g_errors_delayed;
+	$g_errors_delayed[] = $p_message;
+}
+
+/**
+ * Prints messages from the delayed errors queue.
  * The error handler enqueues deprecation warnings that would be printed inline,
  * to avoid display issues when they are triggered within html tags. Only unique
  * messages are printed.
