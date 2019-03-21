@@ -425,7 +425,8 @@ function error_print_delayed() {
 	global $g_errors_delayed;
 
 	if( !empty( $g_errors_delayed ) ) {
-		echo '<div id="delayed-errors">';
+		echo '<div class="space-10 clearfix"></div>', "\n";
+		echo '<div id="delayed-errors" class="alert alert-warning">';
 		foreach( $g_errors_delayed as $t_error ) {
 			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
 		}
