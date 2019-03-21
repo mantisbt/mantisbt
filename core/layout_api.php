@@ -960,6 +960,8 @@ function layout_page_content_begin() {
  * @return void
  */
 function layout_page_content_end() {
+	error_print_delayed();
+
 	# Print table of log events
 	log_print_to_page();
 
