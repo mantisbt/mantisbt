@@ -473,10 +473,10 @@ if( $t_show_status || $t_show_resolution ) {
 		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
 
 		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status );
+		$t_status_css = html_get_status_css_fg( $t_bug->status );
 
 		echo '<td class="bug-status">';
-		echo '<i class="fa fa-square fa-status-box ' . $t_status_label . '"></i> ';
+		echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
 		echo $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
