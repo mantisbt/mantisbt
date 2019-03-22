@@ -331,7 +331,7 @@ function install_date_migrate( array $p_data ) {
 			db_query( $t_query, $t_values, -1, -1, false );
 		}
 		db_param_pop();
-		
+
 	}
 
 	# Re-enable query logging if we disabled it

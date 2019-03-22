@@ -1035,7 +1035,7 @@ function user_get_expanded_name_from_row( array $p_user_row ) {
 
 /**
  * Get name used for sorting.
- * 
+ *
  * @param array $p_user_row The user row with 'realname' and 'username' fields
  * @return string name for sorting
  */

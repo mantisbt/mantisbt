@@ -46,7 +46,7 @@ use Mantis\Exceptions\ClientException;
  *         "size": 114
  *       }
  *     ]
- *   } 
+ *   }
  * }
  */
 

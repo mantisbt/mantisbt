@@ -231,7 +231,7 @@ function current_user_ensure_unprotected() {
  * Returns the issue filter for the current user, which is retrieved by
  * evaluating these steps:
  * 1) Reads gpc vars for a token id, which means to load a temporary filter
- * 2) Otherwise, get the filter saved as current, for the user, project 
+ * 2) Otherwise, get the filter saved as current, for the user, project
  *
  * @param integer $p_project_id Project id to get the user's filter from, if needed.
  * @return array	A filter array

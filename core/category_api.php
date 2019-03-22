@@ -618,7 +618,7 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
 }
 
 /**
- * Check category can be deleted 
+ * Check category can be deleted
  * @param string $p_category_id Category identifier.
  * @return boolean Return true if the category valid for delete, otherwise false
  * @access public

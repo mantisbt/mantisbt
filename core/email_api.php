@@ -828,7 +828,7 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, 
 			$g_relationships[$t_rev_rel_type]['#notify_deleted'],
 			$t_opt );
 	}
-}	
+}
 
 /**
  * Email related issues when a bug is deleted.  This should be deleted before the bug is deleted.
@@ -1737,7 +1737,7 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 		$p_visible_bug_data['email_reproducibility'] = get_enum_element( 'reproducibility', $p_visible_bug_data['email_reproducibility'] );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
 	}
-		
+
 	if ( isset( $p_visible_bug_data[ 'email_severity' ] ) ) {
 		$p_visible_bug_data['email_severity'] = get_enum_element( 'severity', $p_visible_bug_data['email_severity'] );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
@@ -1750,11 +1750,11 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 
 	if ( isset( $p_visible_bug_data[ 'email_status' ] ) ) {
 		$t_status = $p_visible_bug_data['email_status'];
-		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );	
+		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
 	}
 
-	if ( isset( $p_visible_bug_data[ 'email_target_version' ] ) ) {	
+	if ( isset( $p_visible_bug_data[ 'email_target_version' ] ) ) {
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
 	}
 
@@ -1768,12 +1768,12 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 	# end foreach custom field
 
 	if( isset( $t_status ) && config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
-		
+
 		if ( isset( $p_visible_bug_data[ 'email_resolution' ] ) ) {
 			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
 		}
-			
+
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 	}
 	$t_message .= $t_email_separator1 . " \n";
@@ -1926,26 +1926,26 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 		$t_bug_data['email_due_date'] = date( config_get( 'short_date_format' ), $t_row['due_date'] );
 	}
 
-	if ( in_array( 'status', $t_bug_view_fields ) ) {	
+	if ( in_array( 'status', $t_bug_view_fields ) ) {
 		$t_bug_data['email_status'] = $t_row['status'];
 	}
-	
-	if ( in_array( 'severity', $t_bug_view_fields ) ) {	
+
+	if ( in_array( 'severity', $t_bug_view_fields ) ) {
 		$t_bug_data['email_severity'] = $t_row['severity'];
 	}
-	
-	if ( in_array( 'priority', $t_bug_view_fields ) ) {	
+
+	if ( in_array( 'priority', $t_bug_view_fields ) ) {
 		$t_bug_data['email_priority'] = $t_row['priority'];
 	}
 
 	if ( in_array( 'reproducibility', $t_bug_view_fields ) ) {
 		$t_bug_data['email_reproducibility'] = $t_row['reproducibility'];
 	}
-	
-	if ( in_array( 'resolution', $t_bug_view_fields ) ) {	
+
+	if ( in_array( 'resolution', $t_bug_view_fields ) ) {
 		$t_bug_data['email_resolution'] = $t_row['resolution'];
 	}
-		
+
 	$t_bug_data['email_fixed_in_version'] = $t_row['fixed_in_version'];
 
 	if( in_array( 'target_version', $t_bug_view_fields ) && !is_blank( $t_row['target_version'] ) && access_compare_level( $t_user_access_level, config_get( 'roadmap_view_threshold' ) ) ) {
@@ -1958,7 +1958,7 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	if( in_array( 'additional_info', $t_bug_view_fields ) ) {
 		$t_bug_data['email_additional_information'] = $t_row['additional_information'];
 	}
-	
+
 	if ( in_array( 'steps_to_reproduce', $t_bug_view_fields ) ) {
 		$t_bug_data['email_steps_to_reproduce'] = $t_row['steps_to_reproduce'];
 	}

@@ -119,7 +119,7 @@ abstract class Command
 	 */
 	public function execute() {
 		# For now, all commands require user to be authenticated
-		auth_ensure_user_authenticated();		
+		auth_ensure_user_authenticated();
 
 		if( !isset( $this->data['payload'] ) ) {
 			$this->data['payload'] = array();

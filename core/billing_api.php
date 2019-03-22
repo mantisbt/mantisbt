@@ -48,7 +48,7 @@ function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = nul
 
 /**
  * Gets the billing information for the specified project during the specified date range.
- * 
+ *
  * @param integer $p_project_id           A project identifier or ALL_PROJECTS.
  * @param string  $p_from                 Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
  * @param string  $p_to                   Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.

@@ -44,7 +44,7 @@ class VersionAddCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {		
+	function validate() {
 		$t_project_id = helper_parse_id( $this->query( 'project_id' ), 'project_id' );
 
 		if( !access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id ) ) {

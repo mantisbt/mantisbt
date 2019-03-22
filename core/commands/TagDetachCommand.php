@@ -56,7 +56,7 @@ class TagDetachCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {		
+	function validate() {
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
 		$this->tag_id = $this->query( 'tag_id' );
 		$this->user_id = auth_get_current_user_id();

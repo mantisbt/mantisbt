@@ -123,7 +123,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 				trigger_error( ERROR_GENERIC, ERROR );
 				return '';
 		}
-        
+
 		$t_html .= '<div class="action">' . $t_string . '</div>';
 		$t_html .= $this->html_end();
 
