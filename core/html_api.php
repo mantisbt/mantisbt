@@ -1401,8 +1401,16 @@ function html_get_status_css_bg( $p_status, $p_user = null, $p_project = null ) 
  * @param integer $p_user    A valid user identifier.
  * @param integer $p_project A valid project identifier.
  * @return string
+ *
+ * @deprecated 2.21.0 Use html_get_status_css_fg() or html_get_status_css_bg() instead
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
+	error_parameters(
+		__FUNCTION__ . '()',
+		'html_get_status_css_fg() or html_get_status_css_bg()'
+	);
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$t_class = html_get_status_css_fg( $p_status, $p_user, $p_project )
 		. ' '
 		. html_get_status_css_bg( $p_status, $p_user, $p_project );
