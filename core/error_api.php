@@ -418,7 +418,8 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
 /**
  * Prints messages from the delayed errors queue
  * The error handler enqueues deprecation warnings that would be printed inline,
- * to avoid display issues when they are triggered within html tags.
+ * to avoid display issues when they are triggered within html tags. Only unique
+ * messages are printed.
  * @return void
  */
 function error_print_delayed() {
@@ -427,7 +428,7 @@ function error_print_delayed() {
 	if( !empty( $g_errors_delayed ) ) {
 		echo '<div class="space-10 clearfix"></div>', "\n";
 		echo '<div id="delayed-errors" class="alert alert-warning">';
-		foreach( $g_errors_delayed as $t_error ) {
+		foreach( array_unique( $g_errors_delayed ) as $t_error ) {
 			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
 		}
 		echo "\n" . '</div>';
