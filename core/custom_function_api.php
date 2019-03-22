@@ -102,11 +102,11 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	}
 
 	# choose color based on status
-	$status_label = html_get_status_css_class( $t_bug->status, $t_current_user, $t_bug->project_id );
+	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
 	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
+	echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '" title="' . $t_status_title . '"></i> ';
 	echo string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
 	if( $t_bug->handler_id > 0
@@ -161,11 +161,11 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 	}
 
 	# choose color based on status
-	$status_label = html_get_status_css_class( $t_bug->status, $t_current_user, $t_bug->project_id );
+	$t_status_css = html_get_status_css_fg( $t_bug->status, $t_current_user, $t_bug->project_id );
 	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
+	echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '" title="' . $t_status_title . '"></i> ';
 	echo string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
 	if( $t_bug->handler_id > 0
