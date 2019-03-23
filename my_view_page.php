@@ -89,7 +89,20 @@ $t_boxes = config_get( 'my_view_boxes' );
 asort( $t_boxes );
 reset( $t_boxes );
 
-$t_project_ids_to_check = $t_current_project_id == ALL_PROJECTS ? null : array( $t_current_project_id );
+# The projects that need to be evaluated are those that will be included in the filters
+# used for each box. At this point, those filter are created for "current" project, and
+# may include subprojects, or not, based on the default "_view_type" property
+# Unless these following checks are redesigned to account for the actual filters used,
+# we will assume if subprojects are included by inspecting a default filter for current project.
+if( $t_current_project_id == ALL_PROJECTS ) {
+	$t_project_ids_to_check = null;
+} else {
+	# this creates a filter with the specific project informes, in the same way that
+	# those that will be used later for the boxes
+	$t_test_filter = filter_ensure_valid_filter( array( FILTER_PROPERTY_PROJECT_ID => [$t_current_project_id]) );
+	$t_project_ids_to_check = filter_get_included_projects( $t_test_filter );
+}
+
 $t_timeline_view_threshold_access = access_has_any_project_level( config_get( 'timeline_view_threshold' ), $t_project_ids_to_check, $t_current_user_id );
 $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
 ?>
@@ -111,19 +124,19 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
 	else if( $t_box_title == 'assigned'
 		&&  ( current_user_is_anonymous()
-			|| !access_has_any_project_level( config_get( 'handle_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
+			|| !access_has_any_project_level( 'handle_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# don't display "Monitored by Me" bugs to users that can't monitor bugs
 	else if( $t_box_title == 'monitored'
 		&& ( current_user_is_anonymous()
-			|| !access_has_any_project_level( config_get( 'monitor_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
+			|| !access_has_any_project_level( 'monitor_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# don't display "Reported by Me" bugs to users that can't report bugs
 	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) )
 		&& ( current_user_is_anonymous()
-			|| !access_has_any_project_level( config_get( 'report_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
+			|| !access_has_any_project_level( 'report_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# display the box
