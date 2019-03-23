@@ -71,3 +71,45 @@ function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_
 		'results' => $t_paged_results
 	);
 }
+
+/**
+ * Sets the password for the user if possible
+ *
+ * @param string   $p_username    The user's username
+ * @param string   $p_password    The user's password
+ * @param string   $p_newpassword    The user's new password
+ *
+ */
+function mc_change_password( $p_username, $p_password , $p_newpassword  ){
+        $t_user_id = mci_check_login( $p_username, $p_password );
+        if( $t_user_id === false ) {
+                return mci_soap_fault_login_failed();
+        }
+        if( !helper_call_custom_function( 'auth_can_change_password', array() ) ){
+                return false;
+        }
+        return user_set_password( $t_user_id, $p_newpassword );
+}
+
+/**
+ * Sets the password for the given user id if possible.  Must be called by admin
+ *
+ * @param string   $p_username    The user's username
+ * @param string   $p_password    The user's password
+ * @param integer  $p_user_id     The user id to change password for
+ * @param string   $p_newpassword The new password for given user id
+ *
+ */
+function mc_change_users_password( $p_username, $p_password , $p_user_id ,$p_newpassword  ){
+        $t_user_id = mci_check_login( $p_username, $p_password );
+        if( $t_user_id === false ) {
+                return mci_soap_fault_login_failed();
+        }
+        if( user_is_administrator( $t_user_id )  === false ) {
+                return mci_soap_fault_login_failed();
+        }
+        if( !helper_call_custom_function( 'auth_can_change_password', array() ) ){
+                return false;
+        }
+        return user_set_password( $p_user_id, $p_newpassword );
+}
