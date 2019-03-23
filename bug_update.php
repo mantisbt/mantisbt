@@ -110,7 +110,7 @@ $t_updated_bug->view_state = gpc_get_int( 'view_state', $t_existing_bug->view_st
 
 $t_bug_note = new BugNoteData();
 $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
-$t_bug_note->view_state = gpc_get_bool( 'private' );
+$t_bug_note->view_state = gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 
 if( $t_existing_bug->last_updated != $t_updated_bug->last_updated ) {
@@ -152,16 +152,34 @@ $t_reporter_reopening =
 	access_can_reopen_bug( $t_existing_bug, $t_current_user_id );
 
 if ( !$t_reporter_reopening && !$t_reporter_closing ) {
-	# Ensure that the user has permission to update bugs. This check also factors
-	# in whether the user has permission to view private bugs. The
-	# $g_limit_reporters option is also taken into consideration.
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	switch( $f_update_type ) {
+		case BUG_UPDATE_TYPE_ASSIGN:
+			access_ensure_bug_level( 'update_bug_assign_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+		case BUG_UPDATE_TYPE_CLOSE:
+		case BUG_UPDATE_TYPE_REOPEN:
+			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_check_readonly = false;
+			break;
+		case BUG_UPDATE_TYPE_CHANGE_STATUS:
+			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+		case BUG_UPDATE_TYPE_NORMAL:
+		default:
+			access_ensure_bug_level( 'update_bug_threshold', $f_bug_id );
+			$t_check_readonly = true;
+			break;
+	}
 
-	# Check if the bug is in a read-only state and whether the current user has
-	# permission to update read-only bugs.
-	if( bug_is_readonly( $f_bug_id ) ) {
-		error_parameters( $f_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	if( $t_check_readonly ) {
+		# Check if the bug is in a read-only state and whether the current user has
+		# permission to update read-only bugs.
+		if( bug_is_readonly( $f_bug_id ) ) {
+			error_parameters( $f_bug_id );
+			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		}
 	}
 }
 
@@ -361,7 +379,7 @@ if( $t_bug_note->note ||
 if( $t_bug_note->note &&
 	config_get( 'reassign_on_feedback' ) &&
 	$t_existing_bug->status == config_get( 'bug_feedback_status' ) &&
-	$t_updated_bug->status != $t_existing_bug->status &&
+	$t_updated_bug->status == $t_existing_bug->status &&
 	$t_updated_bug->handler_id != $t_current_user_id &&
 	$t_updated_bug->reporter_id == $t_current_user_id
 ) {
@@ -403,6 +421,14 @@ if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking 
 # Add a duplicate relationship if requested.
 if( $t_updated_bug->duplicate_id != 0 ) {
 	relationship_upsert( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE, /* email_for_source */ false );
+
+	if( user_exists( $t_existing_bug->reporter_id ) ) {
+		bug_monitor( $t_updated_bug->duplicate_id, $t_existing_bug->reporter_id );
+	}
+	if( user_exists( $t_existing_bug->handler_id ) ) {
+		bug_monitor( $t_updated_bug->duplicate_id, $t_existing_bug->handler_id );
+	}
+
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );
 }
 

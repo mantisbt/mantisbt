@@ -65,7 +65,7 @@ layout_page_header( project_get_field( $f_project_id, 'name' ) );
 
 layout_page_begin();
 
-echo '<h1>', string_display( project_get_field( $f_project_id, 'name' ) ), '</h1>';
+echo '<h1>', string_display_line( project_get_field( $f_project_id, 'name' ) ), '</h1>';
 
 echo '<p>';
 
@@ -113,22 +113,14 @@ if( !is_blank( $t_description ) ) {
 $t_access_level_for_dev_team = config_get( 'development_team_threshold' );
 
 $t_users = project_get_all_user_rows( $f_project_id, $t_access_level_for_dev_team );
-$t_show_real_names = config_get( 'show_realname' ) == ON;
 
 if( count( $t_users ) > 0 ) {
 	echo '<h2>', lang_get( 'development_team' ), '</h2>';
 
 	# @todo sort users in DESC order by access level, then ASC by username/realname.
 	foreach ( $t_users as $t_user_data ) {
-		$t_user_id = $t_user_data['id'];
-
-		if( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
-			$t_user_name = $t_user_data['realname'];
-		} else {
-			$t_user_name = $t_user_data['username'];
-		}
-
-		echo $t_user_name, ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
+		print_user( $t_user_data['id'] );
+		echo ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
 	}
 }
 

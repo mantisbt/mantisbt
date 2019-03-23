@@ -131,6 +131,9 @@ function layout_page_header_end( $p_page_id = null) {
 		echo '<body ' . $t_body_id . 'class="skin-3">', "\n";
 	}
 
+	# Set user font preference
+	layout_user_font_preference();
+
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 
 	$g_error_send_page_header = false;
@@ -142,11 +145,12 @@ function layout_page_header_end( $p_page_id = null) {
  * @return void
  */
 function layout_page_begin( $p_active_sidebar_page = null ) {
-	layout_navbar();
-
 	if( !db_is_connected() ) {
 		return;
 	}
+	current_user_modify_single_project_default();
+
+	layout_navbar();
 
 	layout_main_container_begin();
 
@@ -239,9 +243,6 @@ function layout_is_rtl() {
  * @return void
  */
 function layout_head_meta() {
-	# use the following meta to force IE use its most up to date rendering engine
-	echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />' . "\n";
-
 	echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />' . "\n";
 }
 
@@ -256,7 +257,8 @@ function layout_head_css() {
 		html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/' . FONT_AWESOME_VERSION . '/css/font-awesome.min.css' );
 
 		# theme text fonts
-		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=Open+Sans:300,400' );
+		$t_font_family =  config_get( 'font_family', null, null, ALL_PROJECTS );
+		html_css_cdn_link( 'https://fonts.googleapis.com/css?family=' . urlencode( $t_font_family ) );
 
 		# datetimepicker
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/' . DATETIME_PICKER_VERSION . '/css/bootstrap-datetimepicker.min.css' );
@@ -265,7 +267,7 @@ function layout_head_css() {
 		html_css_link( 'font-awesome-' . FONT_AWESOME_VERSION . '.min.css' );
 
 		# theme text fonts
-		html_css_link( 'open-sans.css' );
+		html_css_link( 'fonts.css' );
 
 		# datetimepicker
 		html_css_link( 'bootstrap-datetimepicker-' . DATETIME_PICKER_VERSION . '.min.css' );
@@ -285,6 +287,17 @@ function layout_head_css() {
 	echo "\n";
 }
 
+/**
+ * Print user font preference
+ * @return void
+ */
+function layout_user_font_preference() {
+	$t_font_family = config_get( 'font_family', null, null, ALL_PROJECTS );
+	echo '<style>', "\n";
+	echo  '* { font-family: "' . $t_font_family . '"; } ', "\n";
+	echo  'h1, h2, h3, h4, h5 { font-family: "' . $t_font_family . '"; } ', "\n";
+	echo '</style>', "\n";
+}
 
 /**
  * Print javascript directives before the closing of the page body element
@@ -359,6 +372,10 @@ function layout_login_page_begin() {
 	html_head_end();
 
 	echo '<body class="login-layout light-login">';
+
+	# Set font preference
+	layout_user_font_preference();
+
 	layout_main_container_begin();
 	layout_main_content_begin();
 	echo '<div class="row">';
@@ -382,7 +399,8 @@ function layout_login_page_end() {
  * @return void
  */
 function layout_navbar() {
-	$t_logo_url = config_get('logo_url');
+	$t_logo_url = config_get_global('logo_url');
+	$t_short_path = config_get_global('short_path');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">';
 	echo '<div id="navbar-container" class="navbar-container">';
@@ -395,7 +413,7 @@ function layout_navbar() {
 	echo '</button>';
 
 	echo '<div class="navbar-header">';
-	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
+	echo '<a href="' . $t_short_path . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
 	echo string_display_line( config_get('window_title') );
 	echo ' </span>';
@@ -494,59 +512,30 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
  * @return void
  */
 function layout_navbar_projects_menu() {
-	if( !auth_is_user_authenticated() ) {
+	if( !layout_navbar_can_show_projects_menu() ) {
 		return;
 	}
+	echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
+	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
-	# Project Selector (hidden if only one project visible to user)
-	$t_show_project_selector = true;
-	$t_project_ids = current_user_get_accessible_projects();
-	if( count( $t_project_ids ) == 1 ) {
-		$t_project_id = (int) $t_project_ids[0];
-		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
-			$t_show_project_selector = false;
-		}
-	}
-
-	if( $t_show_project_selector ) {
-		echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
-		echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
-
-		$t_current_project_id = helper_get_current_project();
-		if( ALL_PROJECTS == $t_current_project_id) {
-			echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
-		} else {
-			echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
-		}
-
-		echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
-		echo '</a>' . "\n";
-
-		echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
-		layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
-		echo '</ul>' . "\n";
-		echo '</li>' . "\n";
+	$t_current_project_id = helper_get_current_project();
+	if( ALL_PROJECTS == $t_current_project_id) {
+		echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
 	} else {
-		# User has only one project, set it as both current and default
-		if( ALL_PROJECTS == helper_get_current_project() ) {
-			helper_set_current_project( $t_project_id );
-
-			if( !current_user_is_protected() ) {
-				current_user_set_default_project( $t_project_id );
-			}
-
-			# Force reload of current page, except if we got here after
-			# creating the first project
-			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
-			if( 'manage_proj_create.php' != $t_redirect_url ) {
-				html_meta_redirect( $t_redirect_url, 0, false );
-			}
-		}
+		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
 	}
+
+	echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
+	echo '</a>' . "\n";
+
+	echo '<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu">' . "\n";
+	layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+	echo '</ul>' . "\n";
+	echo '</li>' . "\n";
 }
 
 /**
- * Print navbar bottons
+ * Print navbar buttons
  * @return void
  */
 function layout_navbar_button_bar() {
@@ -554,31 +543,33 @@ function layout_navbar_button_bar() {
 		return;
 	}
 
-	$t_can_report_bug = access_has_any_project_level( 'report_bug_threshold' );
-	$t_can_invite_user = current_user_is_administrator();
+	$t_show_report_bug_button = access_has_any_project_level( 'report_bug_threshold' ) &&
+		!is_page_name( string_get_bug_page( "report" ) ) &&
+		!is_page_name( string_get_bug_page( "update" ) );
+	$t_show_invite_user_button = current_user_is_administrator();
 
-	if( !$t_can_report_bug && !$t_can_invite_user ) {
+	if( !$t_show_report_bug_button && !$t_show_invite_user_button ) {
 		return;
 	}
 
 	echo '<li class="hidden-sm hidden-xs">';
-  	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
+	echo '<div class="btn-group btn-corner padding-right-8 padding-left-8">';
 
-  	if( $t_can_report_bug ) {
+	if( $t_show_report_bug_button )  {
 		$t_bug_url = string_get_bug_report_url();
-	  	echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
+		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
 		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
 		echo '</a>';
-  	}
+	}
 
-	if( $t_can_invite_user ) {
+	if( $t_show_invite_user_button ) {
 		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
 		echo '<i class="fa fa-user-plus"></i> ' . lang_get( 'invite_users' );
 		echo '</a>';
 	}
 
 	echo '</div>';
-  	echo '</li>';
+	echo '</li>';
 }
 
 /**
@@ -603,11 +594,8 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo ALL_PROJECTS == $p_project_id ? '<li class="active">' : '<li>';
-		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '"';
-		if( $p_project_id !== null ) {
-			check_selected( $p_project_id, ALL_PROJECTS, false );
-		}
-		echo '> ' . lang_get( 'all_projects' ) . ' </a></li>' . " \n";
+		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . ALL_PROJECTS . '">';
+		echo lang_get( 'all_projects' ) . ' </a></li>' . "\n";
 		echo '<li class="divider"></li>' . "\n";
 	}
 
@@ -626,8 +614,6 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
-		check_selected( $p_project_id, $t_id, false );
-		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
 	}
@@ -668,8 +654,6 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 
 		echo 0 == strcmp( $p_project_id, $t_full_id ) ? '<li class="active">' : '<li>';
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
-		check_selected( $p_project_id, $t_full_id, false );
-		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo ' class="project-link"> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
 		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
 
@@ -767,24 +751,9 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
 		}
 
 		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
-		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
-			layout_sidebar_menu( 'manage_overview_page.php', 'manage_link', 'fa-gears', $p_active_sidebar_page );
-		} else {
-			$t_show_manage_user = access_has_global_level( config_get( 'manage_user_threshold' ) );
-			$t_show_manage_custom_fields = access_has_global_level( config_get( 'manage_custom_fields_threshold' ) );
-			$t_show_manage_project = access_has_any_project_level( 'manage_project_threshold' );
-			if( $t_show_manage_user || $t_show_manage_custom_fields || $t_show_manage_project ) {
-				if( $t_show_manage_user ) {
-					$t_link = 'manage_user_page.php';
-				} else {
-					if( $t_show_manage_project && ( $t_current_project <> ALL_PROJECTS ) ) {
-						$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
-					} else {
-						$t_link = 'manage_proj_page.php';
-					}
-				}
-				layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears' );
-			}
+		$t_link = layout_manage_menu_link();
+		if( !is_blank( $t_link ) ) {
+			layout_sidebar_menu( $t_link , 'manage_link', 'fa-gears', $p_active_sidebar_page );
 		}
 
 		# Time Tracking / Billing
@@ -932,7 +901,7 @@ function layout_sidebar_end() {
 
 	$t_collapse_block = is_collapsed( 'sidebar' );
 
-	echo '<div id="sidebar" class="sidebar-toggle sidebar-collapse">';
+	echo '<div id="sidebar-btn" class="sidebar-toggle sidebar-collapse">';
 	if( layout_is_rtl() ) {
 		$t_block_icon = $t_collapse_block ? 'fa-angle-double-left' : 'fa-angle-double-right';
 		echo '<i data-icon2="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-right"
@@ -1003,6 +972,10 @@ function layout_page_content_end() {
  * @return void
  */
 function layout_breadcrumbs() {
+	if( !auth_is_user_authenticated() ) {
+		return;
+	}
+
 	echo '<div id="breadcrumbs" class="breadcrumbs noprint">' , "\n";
 
 	# Login information
@@ -1148,26 +1121,30 @@ function layout_footer() {
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	$t_show_timer = config_get_global( 'show_timer' );
+	$t_show_memory_usage = config_get_global( 'show_memory_usage' );
+	$t_show_queries_count = config_get_global( 'show_queries_count' );
+	$t_display_debug_info = $t_show_timer || $t_show_memory_usage || $t_show_queries_count;
+
+	if( $t_display_debug_info ) {
 		echo '<div class="col-xs-12 no-padding grey">' . "\n";
 		echo '<address class="no-margin pull-right">' . "\n";
 	}
 
-
 	# Print the page execution time
-	if( config_get( 'show_timer' ) ) {
+	if( $t_show_timer ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
 		echo '<small><i class="fa fa-clock-o"></i> ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Print the page memory usage
-	if( config_get( 'show_memory_usage' ) ) {
+	if( $t_show_memory_usage ) {
 		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
 		echo '<small><i class="fa fa-bolt"></i> ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Determine number of unique queries executed
-	if( config_get( 'show_queries_count' ) ) {
+	if( $t_show_queries_count ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
@@ -1193,7 +1170,7 @@ function layout_footer() {
 		echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	if( $t_display_debug_info ) {
 		echo '</address>' . "\n";
 		echo '</div>' . "\n";
 	}
@@ -1243,4 +1220,56 @@ function layout_login_page_logo() {
 		<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
 	</div>
 	<?php
+}
+
+/**
+ * Returns a single link for the "manage" menu item in sidebar, based on current
+ * user permissions, and priority if several subpages are available.
+ * If there is not any accesible manage page, returns null.
+ * @return string|null	Page name for the manage menu link, or null if unavailable.
+ */
+function layout_manage_menu_link() {
+	static $t_link = null;
+	if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
+		$t_link = 'manage_overview_page.php';
+	} else {
+		if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+			$t_link = 'manage_user_page.php';
+		} else {
+			if( access_has_any_project_level( 'manage_project_threshold' ) ) {
+				$t_current_project = helper_get_current_project();
+				if( $t_current_project == ALL_PROJECTS ) {
+					$t_link = 'manage_proj_page.php';
+				} else {
+					if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) ) {
+						$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
+					} else {
+						if ( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+							$t_link = 'manage_custom_field_page.php';
+						}
+					}
+				}
+			}
+		}
+	}
+	return $t_link;
+}
+
+/**
+ * Returns true if the projects menu can be shown for current user.
+ * In some circumstances, we won't show the menu to simplify the UI.
+ * @return boolean	True if the projects menu can be shown.
+ */
+function layout_navbar_can_show_projects_menu() {
+	if( !auth_is_user_authenticated() ) {
+		return false;
+	}
+
+	# Project selector is only shown if there are more than one project, or
+	# if the user hass access to manage pages, where having ALL_PROJECTS is
+	# needed (#20054)
+	$t_show_project_selector =
+		!is_blank( layout_manage_menu_link() )
+		|| current_user_has_more_than_one_project();
+	return $t_show_project_selector;
 }

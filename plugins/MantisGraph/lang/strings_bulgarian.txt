@@ -42,6 +42,7 @@
  * @author Emostoyanov
  * @author StanProg
  * @author Svetoslav.dragoev
+ * @author Vlad5250
  * @author Vodnokon4e
  * @author АдмиралАнимЕ
  */
@@ -91,3 +92,4 @@ $s_plugin_MantisGraph_graph_page = 'Хронология на графиките
 $s_plugin_MantisGraph_graph_topdev = 'Най-добри разработчици по решени проблеми';
 $s_plugin_MantisGraph_graph_opendev = 'Разработчици по отворени проблеми';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Най-добри докладчици по решени проблеми';
+$s_plugin_MantisGraph_other_categories = 'други категории (%d)';

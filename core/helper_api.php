@@ -54,6 +54,8 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * alternate classes for table rows
  * If no index is given, continue alternating based on the last index given
@@ -105,21 +107,21 @@ function helper_array_transpose( array $p_array ) {
 
 /**
  * get the color string for the given status, user and project
- * @param integer      $p_status  Status value.
- * @param integer|null $p_user    User id, defaults to null (all users).
- * @param integer|null $p_project Project id, defaults to null (all projects).
+ * @param integer      $p_status        Status value.
+ * @param integer|null $p_user          User id, defaults to null (all users).
+ * @param integer|null $p_project       Project id, defaults to null (all projects).
+ * @param string       $p_default_color Fallback color in case status is not found (defaults to white).
  * @return string
  */
-function get_status_color( $p_status, $p_user = null, $p_project = null ) {
-	$t_status_label = MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status );
+function get_status_color( $p_status, $p_user = null, $p_project = null, $p_default_color = '#ffffff' ) {
+	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
 	$t_status_colors = config_get( 'status_colors', null, $p_user, $p_project );
-	$t_color = '#ffffff';
+	$t_status_label = MantisEnum::getLabel( $t_status_enum, $p_status );
 
 	if( isset( $t_status_colors[$t_status_label] ) ) {
-		$t_color = $t_status_colors[$t_status_label];
+		return $t_status_colors[$t_status_label];
 	}
-
-	return $t_color;
+	return $p_default_color;
 }
 
 /**
@@ -319,7 +321,7 @@ function helper_get_current_project() {
 	}
 
 	if( $g_cache_current_project === null ) {
-		$t_cookie_name = config_get( 'project_cookie' );
+		$t_cookie_name = config_get_global( 'project_cookie' );
 
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -347,7 +349,7 @@ function helper_get_current_project() {
  * @return array
  */
 function helper_get_current_project_trace() {
-	$t_cookie_name = config_get( 'project_cookie' );
+	$t_cookie_name = config_get_global( 'project_cookie' );
 
 	$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -388,7 +390,7 @@ function helper_get_current_project_trace() {
 function helper_set_current_project( $p_project_id ) {
 	global $g_cache_current_project;
 
-	$t_project_cookie_name = config_get( 'project_cookie' );
+	$t_project_cookie_name = config_get_global( 'project_cookie' );
 
 	$g_cache_current_project = $p_project_id;
 	gpc_set_cookie( $t_project_cookie_name, $p_project_id, true );
@@ -401,9 +403,9 @@ function helper_set_current_project( $p_project_id ) {
  * @return void
  */
 function helper_clear_pref_cookies() {
-	gpc_clear_cookie( config_get( 'project_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'project_cookie' ) );
 	gpc_clear_cookie( config_get( 'manage_users_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_config_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'manage_config_cookie' ) );
 }
 
 /**
@@ -600,14 +602,6 @@ function helper_log_to_page() {
 }
 
 /**
- * returns a boolean indicating whether SQL queries executed should be shown or not.
- * @return boolean
- */
-function helper_show_query_count() {
-	return ON == config_get( 'show_queries_count' );
-}
-
-/**
  * Return a URL relative to the web root, compatible with other applications
  * @param string $p_url A relative URL to a page within Mantis.
  * @return string
@@ -629,9 +623,10 @@ function helper_mantis_url( $p_url ) {
 /**
  * convert a duration string in "[h]h:mm" to an integer (minutes)
  * @param string $p_hhmm A string in [h]h:mm format to convert.
+ * @param string $p_field The field name.
  * @return integer
  */
-function helper_duration_to_minutes( $p_hhmm ) {
+function helper_duration_to_minutes( $p_hhmm, $p_field = 'hhmm' ) {
 	if( is_blank( $p_hhmm ) ) {
 		return 0;
 	}
@@ -641,22 +636,31 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	# time can be composed of max 3 parts (hh:mm:ss)
 	if( count( $t_a ) > 3 ) {
-		error_parameters( 'p_hhmm', $p_hhmm );
-		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+		throw new ClientException(
+			sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+			ERROR_INVALID_FIELD_VALUE,
+			array( $p_field )
+		);
 	}
 
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		# all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 
 		# minutes and seconds are not allowed to exceed 59.
 		if( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
-			error_parameters( 'p_hhmm', $p_hhmm );
-			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
+			throw new ClientException(
+				sprintf( "Invalid value '%s' for field '%s'.", $p_hhmm, $p_field ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( $p_field )
+			);
 		}
 	}
 
@@ -698,7 +702,7 @@ function shutdown_functions_register() {
 function helper_filter_by_prefix( array $p_set, $p_prefix ) {
 	$t_matches = array();
 	foreach ( $p_set as $p_item ) {
-		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+		if( mb_strtolower( mb_substr( $p_item, 0, mb_strlen( $p_prefix ) ) ) === mb_strtolower( $p_prefix ) ) {
 			$t_matches[] = $p_item;
 		}
 	}
@@ -759,4 +763,82 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 		}
 	}
 	return md5( $t_key );
+}
+
+/**
+ * Parse view state from provided array.
+ *
+ * @param array $p_view_state The view state array (typically would have an id, name or both).
+ * @return integer view state id
+ * @throws ClientException if view state is invalid or array is empty.
+ */
+function helper_parse_view_state( array $p_view_state ) {
+	$t_view_state_enum = config_get( 'view_state_enum_string' );
+
+	$t_view_state_id = VS_PUBLIC;
+	if( isset( $p_view_state['id'] ) ) {
+		$t_enum_by_ids = MantisEnum::getAssocArrayIndexedByValues( $t_view_state_enum );
+		$t_view_state_id = (int)$p_view_state['id'];
+		if( !isset( $t_enum_by_ids[$t_view_state_id] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+	} else if( isset( $p_view_state['name' ] ) ) {
+		$t_enum_by_labels = MantisEnum::getAssocArrayIndexedByLabels( $t_view_state_enum );
+		$t_name = $p_view_state['name'];
+		if( !isset( $t_enum_by_labels[$t_name] ) ) {
+			throw new ClientException(
+				sprintf( "Invalid view state id '%d'.", $t_view_state_id ),
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'view_state' ) ) );
+		}
+
+		$t_view_state_id = $t_enum_by_labels[$t_name];
+	} else {
+		throw new ClientException(
+			"Empty view state",
+			ERROR_EMPTY_FIELD );
+	}
+
+	return $t_view_state_id;
+}
+
+/**
+ * Parse numeric positive id.
+ *
+ * @param string $p_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The parsed id.
+ * @throws ClientException Id is not specified or invalid.
+ */
+function helper_parse_id( $p_id, $p_field_name ) {
+	$t_id = trim( $p_id );
+	if( !is_numeric( $t_id ) ) {
+		if( empty( $t_id ) ) {
+			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
+		}
+
+		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	$t_id = (int)$t_id;
+	if( $t_id < 1 ) {
+		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	}
+
+	return $t_id;
+}
+
+/**
+ * Parse issue id.
+ *
+ * @param string $p_issue_id The id to parse.
+ * @param string $p_field_name The field name.
+ * @return integer The issue id.
+ * @throws ClientException Issue is not specified or invalid.
+ */
+function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {
+	return helper_parse_id( $p_issue_id, $p_field_name );
 }

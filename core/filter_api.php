@@ -45,6 +45,7 @@
  * @uses profile_api.php
  * @uses project_api.php
  * @uses relationship_api.php
+ * @uses session_api.php
  * @uses string_api.php
  * @uses tag_api.php
  * @uses user_api.php
@@ -75,6 +76,7 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'project_api.php' );
 require_api( 'relationship_api.php' );
+require_api( 'session_api.php' );
 require_api( 'string_api.php' );
 require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
@@ -82,7 +84,26 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 require_api( 'filter_form_api.php' );
 
+# @global array $g_filter	Filter array for the filter in use through view_all_bug_page
+# This gets initialized on filter load
+# @TODO cproensa	We should move towards not relying on this variable, as we reuse filter logic
+# to allow operating on other filter different that the one in use for view_all_bug_page.
+# For example: manage and edit stored filters.
 $g_filter = null;
+
+
+# ==========================================================================
+# CACHING
+# ==========================================================================
+# We cache filter requests to reduce the number of SQL queries
+
+# @global array $g_cache_filter_db_rows
+# indexed by filter_id, contains the filter rows as read from db table
+$g_cache_filter_db_rows = array();
+
+# @global array $g_cache_filter_subquery
+# indexed by a hash of the filter array, contains a prebuilt BugFilterQuery object
+$g_cache_filter_subquery = array();
 
 /**
  * Initialize the filter API with the current filter.
@@ -116,7 +137,7 @@ function filter_get_plugin_filters() {
 						} else {
 							continue;
 						}
-						$t_filter_name = utf8_strtolower( $t_plugin . '_' . $t_filter_object->field );
+						$t_filter_name = mb_strtolower( $t_plugin . '_' . $t_filter_object->field );
 						$s_field_array[$t_filter_name] = $t_filter_object;
 					}
 				}
@@ -351,7 +372,7 @@ function filter_get_url( array $p_custom_filter ) {
 
 	if( count( $t_query ) > 0 ) {
 		$t_query_str = implode( $t_query, '&' );
-		$t_url = config_get( 'path' ) . 'search.php?' . $t_query_str;
+		$t_url = config_get_global( 'path' ) . 'search.php?' . $t_query_str;
 	} else {
 		$t_url = '';
 	}
@@ -540,21 +561,44 @@ function filter_ensure_fields( array $p_filter_arr ) {
 }
 
 /**
+ * A wrapper to compare filter version syntax
+ * Note: Currently, filter versions have this syntax: "vN",  * where N is an integer number.
+ * @param string $p_version1    First version number
+ * @param string $p_version2    Second version number
+ * @param string $p_operator    Comparison test, if provided. As expected by version_compare()
+ * @return mixed	As returned by version_compare()
+ */
+function filter_version_compare( $p_version1, $p_version2, $p_operator = null ) {
+	return version_compare( $p_version1, $p_version2, $p_operator );
+}
+
+/**
+ * Upgrade a filter array to the current filter structure, by converting properties
+ * that have changed from previous filter versions
+ * @param array $p_filter	Filter array to upgrade
+ * @return array	Updgraded filter array
+ */
+function filter_version_upgrade( array $p_filter ) {
+	# This is a stub for future version upgrades
+
+	# After conversions are made, update filter value to current version
+	$p_filter['_version'] = FILTER_VERSION;
+	return $p_filter;
+}
+
+/**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.
- * @param array $p_filter_arr A Filter definition.
- * @return array
- * @todo function needs to be abstracted
+ * @param array $p_filter_arr	A filter array
+ * @return array	Validated filter array
  */
 function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr['_version'] ) ) {
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
-	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
-	$t_current_version = (int)substr( FILTER_VERSION, 1 );
-	if( $t_current_version > $t_cookie_vers ) {
-		# if the version is old, update it
-		$p_filter_arr['_version'] = FILTER_VERSION;
+
+	if( filter_version_compare( $p_filter_arr['_version'], FILTER_VERSION, '<' ) ) {
+		$p_filter_arr = filter_version_upgrade( $p_filter_arr );
 	}
 
 	$p_filter_arr = filter_ensure_fields( $p_filter_arr );
@@ -642,6 +686,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# Validate properties that must not be arrays
 	$t_single_value_list = array(
 		FILTER_PROPERTY_VIEW_STATE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_TYPE => 'int',
+		FILTER_PROPERTY_RELATIONSHIP_BUG => 'int',
 	);
 	foreach( $t_single_value_list as $t_field_name => $t_field_type ) {
 		$t_value = $p_filter_arr[$t_field_name];
@@ -760,6 +806,15 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_STATUS] = $t_show_status_array;
 	}
 
+	# validate relationship fields
+	if( !(
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] > 0
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_ANY
+		|| $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] == META_FILTER_NONE
+		) ) {
+		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] = filter_get_default_property( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_view_type );
+	}
+
 	# all of our filter values are now guaranteed to be there, and correct.
 	return $p_filter_arr;
 }
@@ -849,7 +904,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		FILTER_PROPERTY_TAG_STRING => '',
 		FILTER_PROPERTY_TAG_SELECT => 0,
 		FILTER_PROPERTY_RELATIONSHIP_TYPE => BUG_REL_ANY,
-		FILTER_PROPERTY_RELATIONSHIP_BUG => 0,
+		FILTER_PROPERTY_RELATIONSHIP_BUG => META_FILTER_ANY,
 	);
 
 	# initialize plugin filters
@@ -936,6 +991,10 @@ function filter_get_default() {
 
 /**
  * Deserialize filter string
+ * Expected strings have this format: "<version>#<json string>" where:
+ * - <version> is the versio number of the filter structure used. See constant FILTER_VERSION
+ * - # is a separator
+ * - <json string> is the json encoded filter array.
  * @param string $p_serialized_filter Serialized filter string.
  * @return mixed $t_filter array
  * @see filter_ensure_valid_filter
@@ -945,27 +1004,34 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 
-	# check to see if new cookie is needed
+	#@TODO cproensa, we could accept a pure json array, without version prefix
+	# in this case, the filter version field inside the array is to be used
+	# and if not present, set the current filter version
+
+	# check filter version mark
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
-	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
+	$t_version_string = $t_setting_arr[0];
+	if( in_array( $t_version_string, array( 'v1', 'v2', 'v3', 'v4' ) ) ) {
 		# these versions can't be salvaged, they are too old to update
 		return false;
+	} elseif( in_array( $t_version_string, array( 'v5', 'v6', 'v7', 'v8' ) ) ) {
+		# filters from v5 onwards should cope with changing filter indices dynamically
+		$t_filter_array = unserialize( $t_setting_arr[1] );
+	} else {
+		# filters from v9 onwards are stored as json
+		$t_filter_array = json_decode( $t_setting_arr[1], /* assoc array */ true );
 	}
 
-	# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-	# filter indices dynamically
-	$t_filter_array = array();
-	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_array = json_decode( $t_setting_arr[1], true );
-	} else {
+	# If the unserialez data is not an array, the some error happened, eg, invalid format
+	if( !is_array( $t_filter_array ) ) {
 		return false;
 	}
-	if( $t_filter_array['_version'] != FILTER_VERSION ) {
-		# if the version is not new enough, update it using defaults
-		return filter_ensure_valid_filter( $t_filter_array );
-	}
 
-	return $t_filter_array;
+	# Set the filter version that was loaded in the array
+	$t_filter_array['_version'] = $t_setting_arr[0];
+
+	# If upgrade in filter content is needed, it will be done in filter_ensure_valid_filter()
+	return filter_ensure_valid_filter( $t_filter_array );
 }
 
 /**
@@ -975,53 +1041,28 @@ function filter_deserialize( $p_serialized_filter ) {
  */
 function filter_serialize( $p_filter_array ) {
 	$t_cookie_version = FILTER_VERSION;
+	$p_filter_array = filter_clean_runtime_properties( $p_filter_array );
 	$t_settings_serialized = json_encode( $p_filter_array );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 	return $t_settings_string;
 }
 
 /**
- * Check if the filter cookie exists and is of the correct version.
- * @return boolean
- */
-function filter_is_cookie_valid() {
-	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-
-	# check to see if the cookie does not exist
-	if( is_blank( $t_view_all_cookie ) ) {
-		return false;
-	}
-
-	# check to see if new cookie is needed
-	$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
-	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-		return false;
-	}
-
-	# We shouldn't need to do this anymore, as filters from v5 onwards should cope with changing
-	# filter indices dynamically
-	$t_filter_cookie_arr = array();
-	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
-	} else {
-		return false;
-	}
-	if( $t_filter_cookie_arr['_version'] != FILTER_VERSION ) {
-		return false;
-	}
-
-	return true;
-}
-
-/**
- * Get the array fields specified by $p_filter_id
+ * Get the filter db row $p_filter_id
  * using the cached row if it's available
- * @param integer $p_filter_id A filter identifier to look up in the database.
- * @return array a filter row
+ * @global array $g_cache_filter_db_rows
+ * @param integer $p_filter_id      A filter identifier to look up in the database.
+ * @return array|boolean	The row of filter data as stored in db table, or false if does not exist
  */
 function filter_get_row( $p_filter_id ) {
-	return filter_cache_row( $p_filter_id );
+	global $g_cache_filter_db_rows;
+
+	if( !isset( $g_cache_filter_db_rows[$p_filter_id] ) ) {
+		filter_cache_rows( array($p_filter_id) );
+	}
+
+	$t_row = $g_cache_filter_db_rows[$p_filter_id];
+	return $t_row;
 }
 
 /**
@@ -1048,8 +1089,12 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
  * @param boolean $p_show_sticky   Whether to show sticky items.
  * @param array   $p_query_clauses Array of query clauses.
  * @return array $p_query_clauses
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 
 	$p_query_clauses['order'] = array();
 
@@ -1205,8 +1250,13 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
  * array_unique here could cause problems with the query.
  * @param array $p_query_clauses Array of query clauses.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_unique_query_clauses( array $p_query_clauses ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	$p_query_clauses['select'] = array_unique( $p_query_clauses['select'] );
 	$p_query_clauses['from'] = array_unique( $p_query_clauses['from'] );
 	$p_query_clauses['join'] = array_unique( $p_query_clauses['join'] );
@@ -1223,9 +1273,16 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
  * @param array $p_query_clauses Array of query clauses.
  * @param boolean $p_pop_param      Whether to pop DB params from the stack
  * @return integer
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_count( array $p_query_clauses, $p_pop_param = true ) {
-	# If query caluses is an empty array, the query can't be created
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	# If query clauses is an empty array, the query can't be created
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
 			# reset the db_param stack, this woould have been done by db_query if executed
@@ -1275,18 +1332,21 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( $p_custom_filter === null ) {
 		$t_filter = filter_get_bug_rows_filter( $p_project_id, $p_user_id );
 	} else {
-		$t_filter = $p_custom_filter;
+		$t_filter = filter_ensure_valid_filter( $p_custom_filter );
 	}
 
-	# Get the query clauses
-	$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, $p_project_id, $p_user_id, $p_show_sticky );
-
-	# Get the total number of bugs that meet the criteria.
-	# Keep the db_params in stack for next query
-	$p_bug_count = filter_get_bug_count( $t_query_clauses, /* pop_params */ false );
+	# build a filter query, here for counting results
+	$t_filter_query = new BugFilterQuery(
+			$t_filter,
+			array(
+				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
+				'project_id' => $p_project_id,
+				'user_id' => $p_user_id,
+				'use_sticky' => $p_show_sticky
+				)
+			);
+	$p_bug_count = $t_filter_query->get_bug_count();
 	if( 0 == $p_bug_count ) {
-		# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-		db_param_pop();
 		return array();
 	}
 
@@ -1295,16 +1355,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$p_page_count = filter_page_count( $p_bug_count, $p_per_page );
 	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
 	$t_offset = filter_offset( $p_page_number, $p_per_page );
-	# Execute query
-	$t_result = filter_get_bug_rows_result( $t_query_clauses, $p_per_page, $t_offset );
 
-	# Read results into rows array
-	$t_bug_id_array = array();
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_bug_id_array[] = (int)$t_row['id'];
-		$t_rows[] = $t_row;
-	}
+	$t_filter_query->set_limit( $p_per_page );
+	$t_filter_query->set_offset( $t_offset );
+	# Execute query
+	$t_rows = $t_filter_query->fetch_all();
+	$t_bug_id_array = array_column( $t_rows, 'id' );
 
 	# Return the processed rows: cache data, convert to bug objects
 	return filter_cache_result( $t_rows, $t_bug_id_array );
@@ -1359,8 +1415,13 @@ function filter_get_bug_rows_filter( $p_project_id = null, $p_user_id = null ) {
  *                                 -1 or null indicates default query (no offset)
  * @param boolean $p_pop_param        Whether to pop DB params from the stack
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p_offset = null, $p_pop_param = true ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	# if the query can't be formed, there are no results
 	if( empty( $p_query_clauses ) ) {
 		if( $p_pop_param ) {
@@ -1415,13 +1476,17 @@ function filter_get_bug_rows_result( array $p_query_clauses, $p_count = null, $p
  * @param integer $p_user_id      User id to use as current user when filtering.
  * @param boolean $p_show_sticky  True/false - get sticky issues only.
  * @return array
+ *
+ * @deprecated	Use BugFilterQuery class
  */
 function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+	error_parameters( __FUNCTION__ . '()', 'BugFilterQuery class' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
 	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
-	$t_where_param_count = 0;
 
 	$t_current_user_id = auth_get_current_user_id();
 
@@ -1441,8 +1506,6 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	}
 
 	$t_filter = filter_ensure_valid_filter( $p_filter );
-
-	$t_view_type = $t_filter['_view_type'];
 
 	db_param_push();
 
@@ -2420,76 +2483,49 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 }
 
 /**
- * Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
- * filter display.
- * @param integer $p_page_number Page number.
- * @param boolean $p_for_screen  Whether output is for screen view.
- * @return void
- * @see filter_draw_selection_area2
- */
-function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
-	echo '<div class="col-md-12 col-xs-12">';
-	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
-	echo '</div>';
-}
-
-/**
  * Prints the filter selection area for both the bug list view screen and
  * the bug list print screen. This function was an attempt to make it easier to
  * add new filters and rearrange them on screen for both pages.
- * @param integer $p_page_number Page number.
- * @param boolean $p_for_screen  Whether output is for screen view.
- * @param boolean $p_expanded    Whether to display expanded.
  * @return void
  */
-function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
-	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
+function filter_draw_selection_area() {
+	$t_form_name_suffix = '_open';
 
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter === false ? array() : $t_filter );
-	$t_page_number = (int)$p_page_number;
 
 	$t_view_type = $t_filter['_view_type'];
 
-	$t_action = 'view_all_set.php?f=3';
-	if( $p_for_screen == false ) {
-		$t_action = 'view_all_set.php';
-	}
-	if( $p_expanded ) {
-		# in expanded form, all field are sent
-		$t_view_all_set_type = 1;
-	} else {
-		# in condensed form, only the search field is sent, to be added over current filter values.
-		$t_view_all_set_type = 5;
-	}
 	?>
-
+	<div class="col-md-12 col-xs-12">
 	<div class="filter-box">
-		<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="<?php echo $t_action;?>">
-		<?php # CSRF protection not required here - form does not result in modifications ?>
-		<input type="hidden" name="type" value="<?php echo $t_view_all_set_type ?>" />
-		<?php
-			if( $p_for_screen == false ) {
-		echo '<input type="hidden" name="print" value="1" />';
-		echo '<input type="hidden" name="offset" value="0" />';
-	}
-	?>
-		<input type="hidden" name="page_number" value="<?php echo $t_page_number?>" />
-		<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
+
 	<?php
 	$t_stored_queries_arr = filter_db_get_available_queries();
-	if( $p_expanded ) {
-		$t_collapse_block = is_collapsed( 'filter' );
-		$t_block_css = $t_collapse_block ? 'collapsed' : '';
-		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-		?>
+	$t_is_temporary = filter_is_temporary( $t_filter );
+	$t_tmp_filter_param = $t_is_temporary ? '&filter=' . filter_get_temporary_key( $t_filter ) : '';
+	$t_can_persist = filter_user_can_use_persistent( auth_get_current_user_id() );
+
+	$t_collapse_block = is_collapsed( 'filter' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
+	# further use of this icon must be inlined to avoid spaces in rendered html
+	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
+		'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
+		: '';
+	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
+	$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
+	?>
 
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<i class="ace-icon fa fa-filter"><?php echo $t_temporary_icon_html ?>
+				</i>
 				<?php echo lang_get( 'filters' ) ?>
 			</h4>
+
 			<div class="widget-toolbar">
 				<?php
 					$t_view_filters = config_get('view_filters');
@@ -2504,7 +2540,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
 							$t_url = config_get( 'use_dynamic_filters' )
-								? 'view_all_set.php?type=6&amp;view_type='
+								? 'view_all_set.php?type=' . FILTER_ACTION_PARSE_ADD . $t_tmp_filter_param . '&view_type='
 								: 'view_filters_page.php?view_type=';
 							filter_print_view_type_toggle( $t_url, $t_filter['_view_type'] );
 
@@ -2524,7 +2560,15 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 								echo '<i class="ace-icon fa fa-wrench"></i>&#160;&#160;' . lang_get( 'open_queries' );
 								echo '</a>';
 								echo '</li>';
-							} ?>
+							}
+							if( $t_is_temporary && $t_can_persist ) {
+								echo '<li>';
+								echo '<a href="' . $t_url_persist_filter . '">';
+								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
+								echo '</a>';
+								echo '</li>';
+							}
+							?>
 						</ul>
 					</div>
 				<?php } ?>
@@ -2532,12 +2576,31 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
 				</a>
 			</div>
-			<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
-				<div id="filter-bar-queries" class="widget-toolbar hidden-xs" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-					<div class="widget-menu margin-left-8 margin-right-8">
+			<div id="filter-bar-queries" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
+				<div class="widget-menu margin-left-8">
+				<?php
+				if( $t_is_temporary && $t_can_persist ) {
+				?>
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>"
+					   href="<?php echo $t_url_persist_filter ?>">
+						<i class="ace-icon fa fa-thumb-tack"></i>
+					</a>
+				<?php
+				}
+				?>
+					<a class="btn btn-primary btn-white btn-round btn-xs"
+					   title="<?php echo lang_get( 'reset_query' ) ?>"
+					   href="<?php echo $t_url_reset_filter ?>">
+						<i class="ace-icon fa fa-times"></i>
+					</a>
+				</div>
+				<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
+				<div class="widget-menu hidden-xs">
+					<form method="post" action="view_all_set.php">
+						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
 						<select id="filter-bar-query-id" class="input-xs">
 							<option value="-1"></option>
-							<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
 							<?php
 							$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
 							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
@@ -2547,112 +2610,131 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 							}
 							?>
 						</select>
-					</div>
+					</form>
 				</div>
-			<?php } ?>
-			<div id="filter-bar-search" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">
-				<div class="widget-menu margin-left-8 margin-right-8">
-					<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
-						   placeholder="<?php echo lang_get( 'search' ) ?>"
-						   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
-					<button id="filter-bar-search-btn" type="submit" name="filter" class="btn btn-primary btn-white btn-round btn-xs"
-							title="<?php echo lang_get( 'filter_button' ) ?>">
-						<i class="ace-icon fa fa-search"></i>
-					</button>
+				<?php } ?>
+				<div class="widget-menu margin-right-8">
+
+					<form method="post" action="view_all_set.php">
+						<input type="hidden" name="type" value="<?php echo FILTER_ACTION_PARSE_ADD ?>" />
+						<input id="filter-bar-search-txt" type="text" size="16" class="input-xs"
+							   placeholder="<?php echo lang_get( 'search' ) ?>"
+							   name="<?php echo FILTER_PROPERTY_SEARCH ?>"
+							   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
+						<button id="filter-bar-search-btn" type="submit" name="filter_submit" class="btn btn-primary btn-white btn-round btn-xs"
+								title="<?php echo lang_get( 'filter_button' ) ?>">
+							<i class="ace-icon fa fa-search"></i>
+						</button>
+					</form>
+
 				</div>
 			</div>
 		</div>
 
 		<div class="widget-body">
-		<div class="widget-main no-padding">
+			<div class="widget-toolbox padding-4 clearfix">
+				<div class="btn-toolbar">
+					<div class="form-inline">
+						<div class="btn-group pull-left">
+	<?php
+	# Top left toolbar for buttons
 
-		<div class="table-responsive">
-
-		<?php
-		filter_form_draw_inputs( $t_filter, $p_for_screen, false, 'view_filters_page.php' );
-		?>
-
-		</div>
-		</div>
-		<?php
-	}
-
-	echo '<div class="widget-toolbox padding-8 clearfix">';
-	echo '<div class="btn-toolbar pull-left">';
-
-	# expanded
-	echo '<div class="form-inline">';
-	echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '"
-		placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
+	if( $t_is_temporary && $t_can_persist ) {
 	?>
-	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
-	</div>
-	<?php
-
-	echo '</form></div>';
-	echo '<div class="btn-toolbar pull-right">';
-	echo '<div class="btn-group">';
-
-	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
-		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-				value="<?php echo lang_get( 'save_query' )?>" />
-		</form>
+							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_persist_filter ?>">
+								<i class="ace-icon fa fa-thumb-tack"></i>
+								<?php echo lang_get( 'persist' ) ?>
+							</a>
 	<?php
 	}
+	?>
+							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_reset_filter ?>">
+								<i class="ace-icon fa fa-times"></i>
+								<?php echo lang_get( 'reset' ) ?>
+							</a>
+
+	<?php
+	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
+		$t_url_save_filter = 'query_store_page.php';
+		if( filter_is_temporary( $t_filter ) ) {
+			$t_url_save_filter .= '?filter=' . filter_get_temporary_key( $t_filter );
+		}
+	?>
+							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_save_filter ?>">
+								<i class="ace-icon fa fa-floppy-o"></i>
+								<?php echo lang_get( 'save' ) ?>
+							</a>
+	<?php
+	}
+	?>
+						</div>
+
+	<?php
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
-		<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="hidden" name="type" value="3" />
-			<select name="source_query_id">
-				<option value="-1"></option>
-				<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']'?></option>
+						<form id="filter-queries-form" class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+							<?php # CSRF protection not required here - form does not result in modifications?>
+							<input type="hidden" name="type" value="<?php echo FILTER_ACTION_LOAD ?>" />
+							<label><?php echo lang_get( 'load' ) ?>
+								<select class="input-s" name="source_query_id">
+									<option value="-1"></option>
+									<?php
+									$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
+									foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
+										echo '<option value="' . $t_query_id . '" ';
+										check_selected( $t_query_id, $t_source_query_id );
+										echo '>' . string_display_line( $t_query_name ) . '</option>';
+									}
+									?>
+								</select>
+							</label>
+						</form>
+	<?php
+	}
+	?>
+					</div>
+				</div>
+			</div>
+
+			<form method="post" name="filters<?php echo $t_form_name_suffix?>" id="filters_form<?php echo $t_form_name_suffix?>" action="view_all_set.php">
+				<?php # CSRF protection not required here - form does not result in modifications ?>
+				<input type="hidden" name="type" value="<?php echo FILTER_ACTION_PARSE_NEW ?>" />
 				<?php
-				$t_source_query_id = isset( $t_filter['_source_query_id'] ) ? (int)$t_filter['_source_query_id'] : -1;
-				foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-					echo '<option value="' . $t_query_id . '" ';
-					check_selected( $t_query_id, $t_source_query_id );
-					echo '>' . string_display_line( $t_query_name ) . '</option>';
+				if( filter_is_temporary( $t_filter ) ) {
+					echo '<input type="hidden" name="filter" value="' . filter_get_temporary_key( $t_filter ) . '" />';
 				}
 				?>
-			</select>
-		</form>
-	<?php
-	} else { ?>
-		<form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="hidden" name="type" value="3" />
-			<input type="hidden" name="source_query_id" value="-1" />
-			<input type="submit" name="reset_query_button" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'reset_query' )?>" />
-		</form>
-	<?php
-	}
-	?>
+				<input type="hidden" name="view_type" value="<?php echo $t_view_type?>" />
 
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<?php
+					filter_form_draw_inputs( $t_filter, true, false, 'view_filters_page.php', false /* don't show search */ );
+					?>
+				</div>
+			</div>
 
-	</div>
-	</div>
-	</div>
-	</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<div class="btn-toolbar pull-left">
+					<div class="form-inline">
+						<?php echo '<input type="text" id="filter-search-txt" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '"'
+							, ' placeholder="' . lang_get( 'search' ) . '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+						?>
+						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter_submit" value="<?php echo lang_get( 'filter_button' )?>" />
+					</div>
+				</div>
+			</div>
+
+			</form>
+		</div>
+		</div>
 	</div>
 	</div>
 <?php
 }
 
-
-# ==========================================================================
-# CACHING
-# ==========================================================================
-
-# We cache filter requests to reduce the number of SQL queries
-# @global array $g_cache_filter
-# @global array $g_cache_filter_db_filters
-$g_cache_filter = array();
-$g_cache_filter_db_filters = array();
-
 function filter_cache_rows( array $p_filter_ids ) {
-	global $g_cache_filter;
+	global $g_cache_filter_db_rows;
 
 	if( empty( $p_filter_ids ) ) {
 		return;
@@ -2670,37 +2752,12 @@ function filter_cache_rows( array $p_filter_ids ) {
 			. implode( ',', $t_sql_params ) . ')';
 	$t_result = db_query( $t_query, $t_params );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_filter[$t_row['id']] = $t_row;
+		$g_cache_filter_db_rows[$t_row['id']] = $t_row;
 		unset( $t_ids_not_found[$t_row['id']] );
 	}
 	foreach( $t_ids_not_found as $t_id ) {
-		$g_cache_filter[$t_id] = false;
+		$g_cache_filter_db_rows[$t_id] = false;
 	}
-}
-
-/**
- *  Cache a filter row if necessary and return the cached copy
- *  If the second parameter is true (default), trigger an error
- *  if the filter can't be found.  If the second parameter is
- *  false, return false if the filter can't be found.
- * @param integer $p_filter_id      A filter identifier to retrieve.
- * @param boolean $p_trigger_errors Whether to trigger an error if the filter is not found.
- * @return array|boolean
- */
-function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
-	global $g_cache_filter;
-
-	if( !isset( $g_cache_filter[$p_filter_id] ) ) {
-		filter_cache_rows( array($p_filter_id) );
-	}
-
-	$t_row = $g_cache_filter[$p_filter_id];
-	if( $p_trigger_errors && !$t_row ) {
-		error_parameters( $p_filter_id );
-		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-	}
-
-	return $t_row;
 }
 
 /**
@@ -2709,12 +2766,12 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
  * @return boolean
  */
 function filter_clear_cache( $p_filter_id = null ) {
-	global $g_cache_filter;
+	global $g_cache_filter_db_rows;
 
 	if( null === $p_filter_id ) {
-		$g_cache_filter = array();
+		$g_cache_filter_db_rows = array();
 	} else {
-		unset( $g_cache_filter[(int)$p_filter_id] );
+		unset( $g_cache_filter_db_rows[(int)$p_filter_id] );
 	}
 
 	return true;
@@ -2753,68 +2810,73 @@ function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id 
 }
 
 /**
- * Add a filter to the database for the current user
- * @param integer $p_project_id    Project id.
- * @param boolean $p_is_public     Whether filter is public or private.
- * @param string  $p_name          Filter name.
- * @param string  $p_filter_string Filter string.
- * @return integer
+ * Add a filter to the database.
+ * This function does not perform any validation on access or inserted data
+ *
+ * @param string $p_filter_string  Filter string in filter-serialized format
+ * @param integer $p_user_id      User id owner of the filter
+ * @param integer $p_project_id   Project id associated to the filter
+ * @param string $p_name          Name of the filter
+ * @param boolean $p_is_public    Boolean flag to set the filter public
+ * @return integer	The id of the created row
  */
-function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
-	$t_user_id = auth_get_current_user_id();
+function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $p_name, $p_is_public ) {
 	$c_project_id = (int)$p_project_id;
+	$c_user_id = $p_user_id;
+	$c_is_public = (bool)$p_is_public;
 
-	# check that the user can save non current filters (if required)
-	if( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
-		return -1;
-	}
-
-	# ensure that we're not making this filter public if we're not allowed
-	if( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-		$p_is_public = false;
-	}
-
-	# Do I need to update or insert this value?
 	db_param_push();
-	$t_query = 'SELECT id FROM {filters}
-					WHERE user_id=' . db_param() . '
-					AND project_id=' . db_param() . '
-					AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
+	$t_query = 'INSERT INTO {filters} ( user_id, project_id, is_public, name, filter_string )'
+			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	$t_params = array( $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string );
+	db_query( $t_query, $t_params );
 
-	$t_row = db_fetch_array( $t_result );
-	if( $t_row ) {
-		db_param_push();
-		$t_query = 'UPDATE {filters}
-					  SET is_public=' . db_param() . ',
-						filter_string=' . db_param() . '
-					  WHERE id=' . db_param();
-		db_query( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
+	return db_insert_id( db_get_table( 'filters' ) );
+}
 
-		return $t_row['id'];
+/**
+ * Updates the default filter for a project and user.
+ * We only can have one filter of this kind, per project and user.
+ * These special filters are saved in database with a negative project id
+ * to differentiate from standard named filters.
+ *
+ * Note: currently this filter is how the current filter in use is persisted
+ * This means: the last used filter settings, for each project, are saved here.
+ * @TODO cproensa, theres some suggestions to clean this up:
+ * - working filters should not be tracked in database, at least not as unique per user
+ * - include a UI functionality to allow setting/clearing these default filters
+ * - ideally, the storage should be cleaner: either separated from standard filters
+ *     or use a proper field in the table, instead of relying on the negative project id
+ *
+ * @param array $p_filter        Filter array
+ * @param integer $p_project_id  Project id
+ * @param integer $p_user_id     User id
+ * @return integer	The filter id that was updated or created
+ */
+function filter_set_project_filter( array $p_filter, $p_project_id = null, $p_user_id = null ) {
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
 	} else {
-		db_param_push();
-		$t_query = 'INSERT INTO {filters}
-						( user_id, project_id, is_public, name, filter_string )
-					  VALUES
-						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
-
-		# Recall the query, we want the filter ID
-		db_param_push();
-		$t_query = 'SELECT id
-						FROM {filters}
-						WHERE user_id=' . db_param() . '
-						AND project_id=' . db_param() . '
-						AND name=' . db_param();
-		$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
-
-		if( $t_row = db_fetch_array( $t_result ) ) {
-			return $t_row['id'];
-		}
-
-		return -1;
+		$t_project_id = (int)$p_project_id;
 	}
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = (int)$p_user_id;
+	}
+
+	$p_filter_string = filter_serialize( $p_filter );
+	# Check if a row already exists
+	$t_id = filter_db_get_project_current( $t_project_id, $p_user_id );
+	if( $t_id ) {
+		# A row already esxists
+		filter_db_update_filter( $t_id, $p_filter_string );
+	} else {
+		# Must create a row
+		$t_db_project_id = -1 * $t_project_id;
+		$t_id = filter_db_create_filter( $p_filter_string, $t_user_id, $t_db_project_id, '', false );
+	}
+	return $t_id;
 }
 
 /**
@@ -2824,29 +2886,15 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
  * @param integer $p_user_id   A valid user identifier.
  * @return mixed
  */
-function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
-	global $g_cache_filter_db_filters;
+function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
 	$c_filter_id = (int)$p_filter_id;
 
 	if( !filter_is_accessible( $c_filter_id, $p_user_id ) ) {
 		return null;
 	}
 
-	if( isset( $g_cache_filter_db_filters[$c_filter_id] ) ) {
-		if( $g_cache_filter_db_filters[$c_filter_id] === false ) {
-			return null;
-		}
-		return $g_cache_filter_db_filters[$c_filter_id];
-	}
-
-	$t_filter_row = filter_cache_row( $c_filter_id, /* trigger_errors */ false );
-	if( $t_filter_row ) {
-		$g_cache_filter_db_filters[$c_filter_id] = $t_filter_row['filter_string'];
-	} else {
-		$g_cache_filter_db_filters[$c_filter_id] = false;
-	}
-
-	return $g_cache_filter_db_filters[$c_filter_id];
+	$t_filter_row = filter_get_row( $c_filter_id );
+	return $t_filter_row['filter_string'];
 }
 
 /**
@@ -2855,10 +2903,12 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
  * @param integer $p_user_id    A valid user identifier.
  * @return integer
  */
-function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
-	$c_project_id = (int)$p_project_id;
-	$c_project_id = $c_project_id * -1;
-
+function filter_db_get_project_current( $p_project_id = null, $p_user_id = null ) {
+	if( null === $p_project_id ) {
+		$c_project_id = helper_get_current_project();
+	} else {
+		$c_project_id = (int)$p_project_id;
+	}
 	if( null === $p_user_id ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
@@ -2866,13 +2916,12 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 	}
 
 	# we store current filters for each project with a special project index
+	$t_filter_project_id = $c_project_id * -1;
+
 	db_param_push();
-	$t_query = 'SELECT *
-				  FROM {filters}
-				  WHERE user_id=' . db_param() . '
-					AND project_id=' . db_param() . '
-					AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $c_user_id, $c_project_id, '' ) );
+	$t_query = 'SELECT id FROM {filters} WHERE user_id = ' . db_param()
+			. ' AND project_id = ' . db_param() . ' AND name = ' . db_param();
+	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
 		return $t_row['id'];
@@ -2906,11 +2955,12 @@ function filter_db_get_name( $p_filter_id ) {
 /**
  * Check if the current user has permissions to delete the stored query
  * @param integer $p_filter_id Filter id.
+ * @param integer|null User id or null for logged in user.
  * @return boolean
  */
-function filter_db_can_delete_filter( $p_filter_id ) {
+function filter_db_can_delete_filter( $p_filter_id, $p_user_id = null ) {
 	$c_filter_id = (int)$p_filter_id;
-	$t_user_id = auth_get_current_user_id();
+	$t_user_id = $p_user_id != null ? $p_user_id : auth_get_current_user_id();
 
 	# Administrators can delete any filter
 	if( user_is_administrator( $t_user_id ) ) {
@@ -2966,7 +3016,7 @@ function filter_db_delete_current_filters() {
  * @param boolean $p_public			Public flag for filter
  * @return array	Array of filter ids and names
  */
-function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_public = null ) {
+function filter_db_get_named_filters( $p_project_id = null, $p_user_id = null, $p_public = null ) {
 	db_param_push();
 	$t_params = array();
 	$t_query = 'SELECT id, name FROM {filters} WHERE project_id >= ' . db_param();
@@ -2997,15 +3047,15 @@ function filter_db_get_queries( $p_project_id = null, $p_user_id = null, $p_publ
 }
 
 /**
- * Note: any changes made in this function should be reflected in
- * mci_filter_db_get_available_queries())
- * @param integer $p_project_id A valid project identifier.
- * @param integer $p_user_id    A valid user identifier.
- * @return mixed
+ * Get the list of available filters.
+ *
+ * @param integer|null $p_project_id A valid project identifier or null for current project.
+ * @param integer|null $p_user_id    A valid user identifier or null for logged in user.
+ * @param boolean $p_filter_by_project Only return filters associated with specified project id or All Projects, otherwise return all filters for user.
+ * @param boolean $p_return_names_only true: return names of filters, false: return structures with filter header information.
+ * @return array Array of filters.
  */
-function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-	$t_overall_query_arr = array();
-
+function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null, $p_filter_by_project = true, $p_return_names_only = true ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -3020,30 +3070,66 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 	# If the user doesn't have access rights to stored queries, just return
 	if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
-		return $t_overall_query_arr;
+		return array();
 	}
 
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
 	db_param_push();
-	$t_query = 'SELECT * FROM {filters}
-					WHERE (project_id=' . db_param() . '
-						OR project_id=0)
-					AND name!=\'\'
-					AND (is_public = ' . db_param() . '
-						OR user_id = ' . db_param() . ')
-					ORDER BY is_public DESC, name ASC';
-	$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
 
+	if( $p_filter_by_project ) {
+		$t_query = 'SELECT * FROM {filters}
+			WHERE (project_id = ' . db_param() . '
+				OR project_id = 0)
+			AND name != \'\'
+			AND (is_public = ' . db_param() . '
+				OR user_id = ' . db_param() . ')
+			ORDER BY is_public DESC, name ASC';
+
+		$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
+	} else {
+		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
+		$t_project_ids[] = ALL_PROJECTS;
+
+		$t_query = 'SELECT * FROM {filters}
+			WHERE project_id in (' . implode( ',', $t_project_ids ) . ')
+			AND name != \'\'
+			AND (is_public = ' . db_param() . '
+				OR user_id = ' . db_param() . ')
+			ORDER BY is_public DESC, name ASC';
+
+		$t_result = db_query( $t_query, array( true, $t_user_id ) );
+	}
+	
+	$t_filters = array();
+
+	# first build the id=>name array
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_overall_query_arr[$t_row['id']] = $t_row['name'];
+		$t_filters[$t_row['id']] = $t_row['name'];
+	}
+	filter_cache_rows( array_keys( $t_filters ) );
+
+	if( $p_return_names_only ) {
+		asort( $t_filters );
+		return $t_filters;
 	}
 
-	$t_overall_query_arr = array_unique( $t_overall_query_arr );
-	asort( $t_overall_query_arr );
+	# build an extended array of name=>{filter data}
+	$t_filter_data = array();
+	foreach( $t_filters as $t_filter_id => $t_filter_name ) {
+		$t_row = array();
+		$t_filter_obj = filter_get( $t_filter_id );
+		if( !$t_filter_obj ) {
+			continue;
+		}
 
-	return $t_overall_query_arr;
+		$t_row = filter_get_row( $t_filter_id );
+		$t_row['criteria'] = $t_filter_obj;
+		$t_row['url'] = filter_get_url( $t_filter_obj );
+		$t_filter_data[$t_filter_name] = $t_row;
+	}
+	return $t_filter_data;
 }
 
 /**
@@ -3052,7 +3138,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
  * @return boolean true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {
-	if( utf8_strlen( $p_name ) > 64 ) {
+	if( mb_strlen( $p_name ) > 64 ) {
 		return false;
 	} else {
 		return true;
@@ -3081,7 +3167,19 @@ function filter_create_recently_modified( $p_days, $p_filter = null ) {
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] = $t_date->format( 'j' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] = $t_date->format( 'n' );
 	$p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] = $t_date->format( 'Y' );
-	return $p_filter;
+	return filter_ensure_valid_filter( $p_filter );
+}
+
+/**
+ * Create a filter for getting any issues without restrictions
+ * @return mixed A valid filter.
+ */
+function filter_create_any() {
+	$t_filter = filter_get_default();
+
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
+
+	return filter_ensure_valid_filter( $t_filter );
 }
 
 /**
@@ -3409,7 +3507,7 @@ function filter_gpc_get( array $p_filter = null ) {
 	}
 
 	$f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
-	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] );
+	$f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] );
 
 	log_event( LOG_FILTERING, 'filter_gpc_get: Update filters' );
 	$t_filter_input['_version'] 								= FILTER_VERSION;
@@ -3461,6 +3559,15 @@ function filter_gpc_get( array $p_filter = null ) {
 	$t_filter_input[FILTER_PROPERTY_NOTE_USER_ID] 			= $f_note_user_id;
 	$t_filter_input[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
 
+	# copy runtime properties, if present
+	if( isset( $t_filter['_temporary_key'] ) ) {
+		$t_filter_input['_temporary_key'] = $t_filter['_temporary_key'];
+	}
+	if( isset( $t_filter['_filter_id'] ) ) {
+		$t_filter_input['_filter_id'] = $t_filter['_filter_id'];
+	}
+	# Don't copy cached subquery '_subquery' property
+
 	return filter_ensure_valid_filter( $t_filter_input );
 }
 
@@ -3505,7 +3612,7 @@ function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_t
  * @return boolean
  */
 function filter_is_named_filter( $p_filter_id ) {
-	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter_row = filter_get_row( $p_filter_id );
 	if( $t_filter_row ) {
 		return !empty( $t_filter_row['name'] ) && $t_filter_row['project_id'] >= 0;
 	}
@@ -3513,11 +3620,11 @@ function filter_is_named_filter( $p_filter_id ) {
 }
 
 /**
- * Returns true if the filter is accesible by the user, which happens when the user
+ * Returns true if the filter is accessible by the user, which happens when the user
  * is the owner of the filter, or the filter is public.
  * @param integer $p_filter_id	Filter id
  * @param integer $p_user_id	User id
- * @return boolean	true if the filter is accesible by the user
+ * @return boolean	true if the filter is accessible by the user
  */
 function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
 	if( null === $p_user_id ) {
@@ -3525,7 +3632,7 @@ function filter_is_accessible( $p_filter_id, $p_user_id = null ) {
 	} else {
 		$t_user_id = $p_user_id;
 	}
-	$t_filter_row = filter_cache_row( $p_filter_id, /* trigger_errors */ false );
+	$t_filter_row = filter_get_row( $p_filter_id );
 	if( $t_filter_row ) {
 		if( $t_filter_row['user_id'] == $t_user_id || $t_filter_row['is_public'] ) {
 			# If the filter is a named filter, check the config options
@@ -3576,7 +3683,7 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
  * This array includes all individual projects/subprojects that are in the search scope.
  * If ALL_PROJECTS were included directly, or indirectly, and the parameter $p_return_all_projects
  * is set to true, the value ALL_PROJECTS will be returned. Otherwise the array will be expanded
- * to all actual accesible projects
+ * to all actual accessible projects
  * @param array $p_filter                 Filter array
  * @param integer $p_project_id           Project id to use in filtering, if applicable by filter type
  * @param integer $p_user_id              User id to use as current user when filtering
@@ -3670,4 +3777,315 @@ function filter_get_included_projects( array $p_filter, $p_project_id = null, $p
 	}
 
 	return $t_project_ids;
+}
+
+/**
+ * Returns a filter array structure for the given filter_id
+ * A default value can be provided to be used when the filter_id doesn't exists
+ * or is not accessible
+ *
+ *  You may pass in any array as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the filter
+ *  cannot be found
+ *
+ * @param integer $p_filter_id Filter id
+ * @param array $p_default     A filter array to return when id is not found
+ * @return array	A filter array
+ */
+function filter_get( $p_filter_id, array $p_default = null ) {
+	# if no default was provided, we will trigger an error if not found
+	$t_trigger_error = func_num_args() == 1;
+
+	# This function checks for user access
+	$t_filter_string = filter_db_get_filter_string( $p_filter_id );
+	# If value is false, it either doesn't exists or is not accessible
+	if( !$t_filter_string ) {
+		if( $t_trigger_error ) {
+			error_parameters( $p_filter_id );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		} else {
+			return $p_default;
+		}
+	}
+	$t_filter = filter_deserialize( $t_filter_string );
+	# If the unserialez data is not an array, the some error happened, eg, invalid format
+	if( !is_array( $t_filter ) ) {
+		# Don't throw error, otherwise the user could not recover navigation easily
+		return filter_get_default();
+	}
+	$t_filter = filter_clean_runtime_properties( $t_filter );
+	$t_filter['_filter_id'] = $p_filter_id;
+
+	$t_filter = filter_update_source_properties( $t_filter );
+
+	return $t_filter;
+}
+
+/**
+ * Return a standard filter
+ * @param string $p_filter_name     The name of the filter
+ * @param integer|null $p_user_id   A user id to build this filter. Null for current user
+ * @param integer|null $p_project_id	 A project id to build this filter.  Null for current project
+ * @return null|boolean|array       null filter not found, false invalid filter, otherwise the filter.
+ */
+function filter_standard_get( $p_filter_name, $p_user_id = null, $p_project_id = null ) {
+	$p_filter_name = strtolower( $p_filter_name );
+
+	if( null === $p_project_id ) {
+		$t_project_id = helper_get_current_project();
+	} else {
+		$t_project_id = $p_project_id;
+	}
+
+	if( null === $p_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = $p_user_id;
+	}
+
+	switch( $p_filter_name ) {
+		case FILTER_STANDARD_ANY:
+			$t_filter = filter_create_any();
+			break;
+		case FILTER_STANDARD_ASSIGNED:
+			$t_filter = filter_create_assigned_to_unresolved( $t_project_id, $t_user_id );
+			break;
+		case FILTER_STANDARD_UNASSIGNED:
+			$t_filter = filter_create_assigned_to_unresolved( $t_project_id, NO_USER );
+			break;
+		case FILTER_STANDARD_REPORTED:
+			$t_filter = filter_create_reported_by( $t_project_id, $t_user_id );
+			break;
+		case FILTER_STANDARD_MONITORED:
+			$t_filter = filter_create_monitored_by( $t_project_id, $t_user_id );
+			break;
+		default:
+			return null;
+	}
+
+	return $t_filter;
+}
+
+/**
+ * Updates a filter's properties with those from another filter that is referenced
+ * by it's source-id property.
+ * This is used when an anonymous filter was created from a named filter. As long
+ * as this anonymous filter is not modified, it must be keep in sync with the
+ * referenced filter (source_id), because the source filter may have been modified
+ * at a later time.
+ * This is a side effect of always using anonymous filters even when selecting a
+ * named filter to be applied as current.
+ *
+ * @param array $p_filter	Original filter array
+ * @return array	Updated filter array
+ */
+function filter_update_source_properties( array $p_filter ) {
+	# Check if the filter references a named filter
+	# This property only makes sense, and should be available on unnamed filters
+	if( isset( $p_filter['_filter_id'] ) ) {
+		$t_filter_id = $p_filter['_filter_id'];
+	} else {
+		$t_filter_id = null;
+	}
+	if( isset( $p_filter['_source_query_id'] ) && $t_filter_id != $p_filter['_source_query_id'] ) {
+		$t_source_query_id = $p_filter['_source_query_id'];
+		# check if filter id is a proper named filter, and is accessible
+		if( filter_is_named_filter( $t_source_query_id ) && filter_is_accessible( $t_source_query_id ) ){
+			# replace filter with the referenced one
+			$t_new_filter = filter_deserialize( filter_db_get_filter_string( $t_source_query_id ) );
+			if( is_array( $t_new_filter ) ) {
+				# update the referenced stored filter id for the new loaded filter
+				$t_new_filter['_source_query_id'] = $t_source_query_id;
+				$p_filter = filter_copy_runtime_properties( $t_new_filter, $p_filter );
+			} else {
+				# If the unserialez data is not an array, the some error happened, eg, invalid format
+				unset( $p_filter['_source_query_id'] );
+			}
+		} else {
+			# If the filter id is not valid, clean the referenced filter id
+			unset( $p_filter['_source_query_id'] );
+		}
+	}
+	return $p_filter;
+}
+
+/**
+ * Returns a filter which is stored in session data, indexed by the provided key.
+ * A default value can be provided to be used when the key doesn't exists
+ *
+ *  You may pass in any array as a default (including null) but if
+ *  you pass in *no* default then an error will be triggered if the key
+ *  cannot be found
+ *
+ * @param string $p_filter_key  Key to look up for in session data
+ * @param mixed $p_default		A default value to return if key not found
+ * @return array	A filter array.
+ */
+function filter_temporary_get( $p_filter_key, $p_default = null ) {
+	# if no default was provided, we will trigger an error if not found
+	$t_trigger_error = func_num_args() == 1;
+
+	$t_session_filters = session_get( 'temporary_filters', array() );
+	if( isset( $t_session_filters[$p_filter_key] ) ) {
+		# setting here the key in the filter array only if the key exists
+		# this validates against receiving garbage input as XSS attacks
+		$t_filter = $t_session_filters[$p_filter_key];
+		$t_filter['_temporary_key'] = $p_filter_key;
+		return filter_ensure_valid_filter( $t_filter );
+	} else {
+		if( $t_trigger_error ) {
+			error_parameters( $p_filter_key );
+			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+		} else {
+			return $p_default;
+		}
+	}
+}
+
+/**
+ * Saves a filter as a temporary filter in session data.
+ * The filter will be updated or created, indexed by provided $p_filter_key,
+ * If no key is provided, it will search in the filter property that holds
+ * its key if it was loaded as a temporary filter.
+ * If neither key is found, a new one will be created
+ * @param array $p_filter     Filter array
+ * @param string $p_filter_key  Key to update, or null
+ * @return string	The key used for storing the filter.
+ */
+function filter_temporary_set( array $p_filter, $p_filter_key = null ) {
+	if( null === $p_filter_key ) {
+		$t_filter_key = filter_get_temporary_key( $p_filter );
+		if( !$t_filter_key ) {
+			$t_filter_key = uniqid();
+		}
+	} else {
+		$t_filter_key = $p_filter_key;
+	}
+
+	$p_filter = filter_clean_runtime_properties( $p_filter );
+	$t_session_filters = session_get( 'temporary_filters', array() );
+	$t_session_filters[$t_filter_key] = $p_filter;
+	session_set( 'temporary_filters', $t_session_filters );
+	return $t_filter_key;
+}
+
+/**
+ * Get the temporary key of the filter, if was loaded from temporary session store
+ * Return null otherwise
+ * @param array $p_filter	Filter array
+ * @return string|null	Key associated with this filter, null if none
+ */
+function filter_get_temporary_key( array $p_filter ) {
+	if( isset( $p_filter['_temporary_key'] ) ) {
+		return $p_filter['_temporary_key'];
+	} else {
+		return null;
+	}
+}
+
+/**
+ * Returns true if the filter was loaded as temporary filter
+ * @param array $p_filter	Filter array
+ * @return boolean	Whether this filter is temporary
+ */
+function filter_is_temporary( array $p_filter ) {
+	return isset( $p_filter['_temporary_key'] );
+}
+
+/**
+ * Returns a string formatted as GET parameter, suitable for tracking a
+ * temporary filter by its session key.
+ * The parameter can be ither an existing key, so its used directly,
+ * or a filter array, which can contain a property with the key
+ * If a filter is provided that does not contain the key property, an empty
+ * string is returned.
+ * @param array|string $p_key_or_filter	Either a string key, or a filter array
+ * @return string|null	Formatted parameter string, or null
+ */
+function filter_get_temporary_key_param( $p_key_or_filter ) {
+	if( is_array( $p_key_or_filter ) ) {
+		$t_key = filter_get_temporary_key( $p_key_or_filter );
+	} else {
+		$t_key = $p_key_or_filter;
+	}
+	if( $t_key ) {
+		return 'filter=' . $t_key;
+	} else {
+		return null;
+	}
+}
+
+/**
+ * Removes runtime properties that are should not be saved as part of the filter
+ * Use this function before saving the filter.
+ * @param array $p_filter	Filter array (passed as reference, it gets modified)
+ * @return array	Modified filter array
+ */
+function filter_clean_runtime_properties( array $p_filter ) {
+	if( isset( $p_filter['_temporary_key'] ) ) {
+		unset( $p_filter['_temporary_key'] );
+	}
+	if( isset( $p_filter['_filter_id'] ) ) {
+		unset( $p_filter['_filter_id'] );
+	}
+	if( isset( $p_filter['_subquery'] ) ) {
+		unset( $p_filter['_subquery'] );
+	}
+	return $p_filter;
+}
+
+/**
+ * Copy the runtime properties from one filter into another.
+ * @param array $p_filter_to	Destination filter array
+ * @param array $p_filter_from	Filter array from which properties are copied
+ * @return array	Updated filter array
+ */
+function filter_copy_runtime_properties( array $p_filter_to, array $p_filter_from ) {
+	if( isset( $p_filter_from['_temporary_key'] ) ) {
+		$p_filter_to['_temporary_key'] = $p_filter_from['_temporary_key'];
+	}
+	if( isset( $p_filter_from['_filter_id'] ) ) {
+		$p_filter_to['_filter_id'] = $p_filter_from['_filter_id'];
+	}
+	# we don't copy '_subquery' property, which is a cached subquery object,
+	# and can be regenerated at demand
+
+	return $p_filter_to;
+}
+
+/**
+ * Return a cached BugFilterQuery object for the provided filter, configured and
+ * ready to be used as a subquery for building other queries.
+ * If the query is not in the cache, creates a new one and store it for later reuse.
+ * Note: Query objects are indexed by a hash value over the serialized contents of the
+ * filter array.
+ *
+ * Warning: Since the returned query is an object, it should not be modified in any way
+ * that changes the expected behavior from the original filter array, as any further
+ * reuse of this chached query will share the same instanced object.
+ * If such a modification is needed over the query object, a clone should be used
+ * instead, to avoid said side effects.
+ *
+ * @param array $p_filter	Filter array
+ * @return BugFilterQuery	A query object for the filter
+ */
+function filter_cache_subquery( array $p_filter ) {
+	global $g_cache_filter_subquery;
+
+	$t_hash = md5( json_encode( $p_filter ) );
+	if( !isset( $g_cache_filter_subquery[$t_hash] ) ) {
+		$g_cache_filter_subquery[$t_hash] = new BugFilterQuery( $p_filter, BugFilterQuery::QUERY_TYPE_IDS );
+	}
+
+	return $g_cache_filter_subquery[$t_hash];
+}
+/**
+ * Returns true if the user can use peristent filters, in contexts such as view_all_bug_page.
+ * Persistent filters are remembered across sessions, and are not desirable when the user is
+ * a shared user, eg: anonymous user
+ * @param integer $p_user_id	A valid user identifier.
+ * @return boolean true if the user can use persistent filters, false otherwise
+ */
+function filter_user_can_use_persistent( $p_user_id = null ) {
+	return !user_is_anonymous( $p_user_id );
 }

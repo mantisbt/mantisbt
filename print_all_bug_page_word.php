@@ -487,7 +487,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
 				echo $c_filename . ' (' . $c_filesize . ' ' . lang_get( 'bytes' )
 					. ') <span class="italic-small">' . $c_date_added . '</span><br />'
-					. string_display_links( $t_path . $c_download_url );
+					. string_display_line_links( $t_path . $c_download_url );
 
 				if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
 					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
@@ -548,7 +548,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 					switch ( $t_bugnote->note_type ) {
 						case REMINDER:
 							echo lang_get( 'reminder_sent_to' ) . ': ';
-							$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );
+							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 								$t_to[] = prepare_user_name( $t_recipient );

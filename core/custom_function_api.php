@@ -107,7 +107,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
 	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id );
+	echo string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ' , string_display_line_links( $t_bug->summary );
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
@@ -166,7 +166,7 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 
 	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
 	echo '<i class="fa fa-square fa-status-box ' . $status_label . '" title="' . $t_status_title . '"></i> ';
-	echo string_get_bug_view_link( $p_issue_id );
+	echo string_get_bug_view_link( $p_issue_id, false );
 	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
 	if( $t_bug->handler_id > 0
 			&& ON == config_get( 'show_assigned_names', null, $t_current_user, $t_bug->project_id )
@@ -282,7 +282,7 @@ function custom_function_default_auth_can_change_password() {
 		MD5,
 	);
 
-	return in_array( config_get( 'login_method' ), $t_can_change );
+	return in_array( config_get_global( 'login_method' ), $t_can_change );
 }
 
 /**

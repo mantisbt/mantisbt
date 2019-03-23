@@ -1,19 +1,32 @@
+/* jshint -W097, -W031 */
+/* globals Chart */
+"use strict";
+
 $(document).ready( function() {
-    $("canvas[id^='barchart']").each( function() {
+    // Default color scheme
+    Chart.defaults.global.plugins.colorschemes.scheme = 'tableau.Classic20';
+
+    $("canvas[id*='barchart']").each( function() {
+        var type = this.id.substr(0,8) === 'barchart' ? 'bar' : 'horizontalBar';
         new Chart( $(this), {
-            type: 'bar',
+            type: type,
             data: {
                 labels: $(this).data('labels'),
                 datasets: [{
                     label: '# of issues',
                     data: $(this).data('values'),
-                    backgroundColor: 'rgba(252, 189, 189, 0.7)',
-                    borderColor: 'rgba(252, 189, 189, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
+                    xAxes: [{
+                        position: type === 'bar' ? 'bottom' : 'top',
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 90
+                        }
+                    }],
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
@@ -32,8 +45,8 @@ $(document).ready( function() {
                 datasets: [{
                     label: '# of issues',
                     data:  $(this).data('values'),
-                    backgroundColor: $(this).data('background-colors'),
-                    borderColor: $(this).data('border-colors'),
+                    backgroundColor: $(this).data('colors'),
+                    borderColor: $(this).data('colors'),
                     borderWidth: 1
                 }]
             }
@@ -49,19 +62,17 @@ $(document).ready( function() {
                 datasets: [
                     {
                         label: $(this).data('opened-label'),
-                        backgroundColor: 'rgba(255, 158, 158, 0.5)',
                         data: $(this).data('opened-values')
                     },
                     {
                         label: $(this).data('resolved-label'),
-                        backgroundColor: 'rgba(49, 196, 110, 0.5)',
                         data: $(this).data('resolved-values')
                     },
                     {
                         label: $(this).data('still-open-label'),
-                        backgroundColor: 'rgba(255, 0, 0, 1)',
                         data: $(this).data('still-open-values')
-                    },]
+                    }
+                ]
             },
             options: {
                 scales: {
@@ -70,6 +81,13 @@ $(document).ready( function() {
                             beginAtZero: true
                         }
                     }]
+                },
+                plugins: {
+                    colorschemes: {
+                        scheme: 'brewer.Set1-3',
+                        reverse: true,
+                        fillAlpha: 0.15
+                    }
                 }
             }
         });

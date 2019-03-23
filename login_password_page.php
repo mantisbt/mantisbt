@@ -121,7 +121,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() && !$f_reauthen
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	} else {
-		print_header_redirect( config_get( 'default_home_page' ) );
+		print_header_redirect( config_get_global( 'default_home_page' ) );
 	}
 }
 
@@ -170,7 +170,7 @@ if( $f_error || $f_cookie_error || $f_reauthenticate ) {
 }
 
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin' ) ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin/.' ) ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
 	$t_db_version = config_get( 'database_version', 0 );
@@ -213,13 +213,12 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 				echo '<input type="hidden" name="install" value="true" />';
 			}
 
-			echo '<input type="hidden" name="username" value="', string_html_specialchars( $t_username ), '" />';
 
 			echo sprintf( lang_get( 'enter_password' ), string_html_specialchars( $t_username ) );
 
 			# CSRF protection not required here - form does not result in modifications
 			?>
-
+			<input hidden readonly type="text" name="username" class="hidden" tabindex="-1" value="<?php echo string_html_specialchars( $t_username ) ?>" id="hidden_username" />
 			<label for="password" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="password" name="password" type="password" placeholder="<?php echo lang_get( 'password' ) ?>"

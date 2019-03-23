@@ -74,14 +74,10 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-$t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
-
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
-if( !$t_account_verification ) {
-	auth_reauthenticate();
-}
+auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
@@ -95,7 +91,7 @@ $t_row = user_get_row( auth_get_current_user_id() );
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB
@@ -176,39 +172,33 @@ print_account_menu( 'account_page.php' );
 				<td>
 					<?php echo string_display_line( $u_username ) ?>
 				</td>
-			</tr><?php
-			# When verifying account, set a token and don't display current password
-			if( $t_account_verification ) {
-				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
-			} else {
-				# If the current password is blank, do not require the field
-				# so the user can reset the password (#23507)
-				$t_required = auth_does_password_match( $u_id, '' ) ? '' : 'required';
+			</tr>
+			<?php
+			    $t_required = $t_force_pw_reset ? 'required' : '';
+			    $t_class = $t_force_pw_reset ? 'class="required"' : '';
 			?>
 			<tr>
 				<td class="category">
-					<span class="<?php echo $t_required ?>"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
 				</td>
 				<td>
 					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
-			<?php
-			} ?>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'new_password' ) ?>
 				</td>
 				<td>
-					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" required />
+					<input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
 			<tr>
 				<td class="category">
-					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
+					<span <?php echo $t_class . $t_required ?>><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
 				</td>
 				<td>
-					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" required />
+					<input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" <?php echo $t_required ?> />
 				</td>
 			</tr>
 			<?php

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Albe Albe 460
  * @author Alexmar983
  * @author Beta16
  * @author Darth Kule
@@ -52,6 +53,7 @@
  * @author Massimo1403
  * @author McDutchie
  * @author Nemo bis
+ * @author Ontsed
  * @author PeppeAeco
  * @author Purodha
  * @author Selven
@@ -353,6 +355,7 @@ $s_email_on_priority_change = 'Email su "Cambio priorità"';
 $s_email_bugnote_limit = 'Email su "Nota aggiunta" fino al limite di note';
 $s_email_full_issue_details = 'Tutti i dettagli dell\'anomalia per email';
 $s_language = 'Lingua';
+$s_font_family = 'Famiglia dei font';
 $s_update_prefs_button = 'Aggiorna le preferenze';
 $s_reset_prefs_button = 'Resetta le preferenze';
 $s_timezone = 'Fuso orario';
@@ -390,7 +393,6 @@ $s_sponsor_show = 'Mostra tutte';
 $s_payment_updated = 'Informazioni sul pagamento aggiornate.';
 $s_account_updated_msg = 'Il tuo Account è stato aggiornato con successo...';
 $s_email_updated = 'L\'indirizzo email è stato aggiornato con successo';
-$s_realname_duplicated = 'Nominativo già in uso da un altro utente';
 $s_realname_updated = 'Nominativo aggiornato con successo';
 $s_password_updated = 'La password è stata aggiornata correttamente';
 $s_multiple_projects = 'Le anomalie che hai selezionato sono relative a progetti differenti.  I seguenti parametri rispecchiano le impostazioni di tutti i progetti.  Se questo non è corretto, riproponi la modifica selezionando un minor numero di anomalie.';
@@ -534,7 +536,7 @@ $s_choose_project = 'Seleziona progetto';
 $s_login_button = 'Accedi';
 $s_signup_link = 'Registrati come nuovo utente';
 $s_lost_password_link = 'Hai dimenticato la password?';
-$s_username_or_email = 'Nome utente o indirizzo e-mail';
+$s_username_or_email = 'Nome utente o indirizzo email';
 $s_enter_password = 'Inserisci la password per \'%s\'';
 $s_select_project_button = 'Seleziona progetto';
 $s_lost_password_title = 'Reimposta password';
@@ -595,6 +597,7 @@ $s_date_created = 'Data inserimento';
 $s_last_visit = 'Ultima visita';
 $s_last_visit_label = 'Ultima visita:';
 $s_edit_user_link = 'Modifica utente';
+$s_search_user_hint = 'Nome utente, nome reale o indirizzo di posta elettronica';
 $s_separate_list_items_by = '(gli elementi nelle liste sono separati da "%1$s")';
 $s_config_all_projects = 'Nota: Queste configurazioni impattano TUTTI I PROGETTI, a meno che non siano specializzate dal singolo progetto.';
 $s_config_project = 'Nota: Queste configurazioni impattano SOLO il progetto %1$s.';
@@ -732,6 +735,8 @@ $s_create_new_subproject_link = 'Crea nuovo sottoprogetto';
 $s_unlink_link = 'Rimuovi';
 $s_show_global_users = 'Visualizza gli utenti con Accesso Globale';
 $s_hide_global_users = 'Nascondi gli utenti con Accesso Globale';
+$s_review_changes_confirmation = 'Sei sicuro di voler applicare le seguenti modifiche?';
+$s_review_changes_empty = 'Non ci sono modifiche selezionate';
 $s_add_project_title = 'Inserisci progetto';
 $s_upload_file_path = 'Percorso di upload dei file';
 $s_add_project_button = 'Inserisci progetto';
@@ -909,6 +914,8 @@ $s_total_time = 'tempo totale';
 $s_developer_stats = 'Statistiche per sviluppatore';
 $s_reporter_stats = 'Statistiche per segnalatore';
 $s_orct = '(aperte/risolte/chiuse/totale)';
+$s_summary_header = 'aperto/risolto/chiuso/totale/tasso di soluzione/rapporto';
+$s_summary_notice_filter_is_applied = 'Un filtro è stato applicato';
 $s_any = 'qualsiasi';
 $s_all = 'tutte';
 $s_show = 'Mostra';
@@ -966,6 +973,8 @@ $s_manage_filter_page_title = 'Gestione filtri';
 $s_manage_filter_edit_page_title = 'Modifica filtro';
 $s_delete_filter_button = 'Cancella';
 $s_apply_filter_button = 'Applica';
+$s_temporary_filter = 'Filtro temporaneo';
+$s_set_as_persistent_filter = 'Imposta come filtro persistente';
 $s_view_simple_link = 'Scheda normale';
 $s_product_build = 'Release del prodotto';
 $s_system_profile = 'Descrizione del Sistema';
@@ -1040,6 +1049,7 @@ $s_kb = 'KB';
 $s_attachment_missing = 'Allegato mancante';
 $s_attachment_count = 'Numero allegati';
 $s_view_attachments_for_issue = 'Visualizza %1$d allegato(i) per l\'anomalia #%2$d';
+$s_warning_update_custom_field_type = '<strong>Attenzione:</strong> Il campo personalizzato "%1$s" contiene già dei valori. Se si cambia il tipo del campo, ciò potrebbe causare degli errori e un comportamento imprevedibile nel caso che i valori esistenti non siano consistenti con il nuovo tipo del campo. Per procedere, clicca il pulsante qua sotto';
 $s_phpmailer_language = 'it';
 $s_sponsors = '%1$d sponsor';
 $s_sponsorship_added = 'Aggiunta sponsorizzazione';
@@ -1077,6 +1087,7 @@ $s_bug_created_from = 'Anomalia generata da';
 $s_copy_from_parent = 'Copia i dati estesi dalla questione superiore';
 $s_copy_notes_from_parent = 'Copia le note del problema';
 $s_copy_attachments_from_parent = 'Copia gli allegati';
+$s_with = 'con';
 $s_viewing_bug_relationship_graph_title = 'Grafico delle relazioni';
 $s_viewing_bug_dependency_graph_title = 'Grafico delle dipendenze';
 $s_relation_graph = 'Grafico relazioni';
@@ -1225,6 +1236,7 @@ $s_path_information = 'MantisBT Informazioni percorso';
 $s_mantisbt_database_statistics = 'Statistiche del Database MantisBT';
 $s_php_version = 'Versione PHP';
 $s_adodb_version = 'Versione ADOdb';
+$s_database_driver = 'Driver del database';
 $s_database_version_description = 'Versione database, descrizione';
 $s_month_january = 'Gennaio';
 $s_month_february = 'Febbraio';
@@ -1239,6 +1251,8 @@ $s_month_october = 'Ottobre';
 $s_month_november = 'Novembre';
 $s_month_december = 'Dicembre';
 $s_timeline_issue_created = '<span class="username">%1$s</span> ha creato l\'anomalia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> file allegato <em>%3$s</em> all’anomalia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> file rimosso <em>%3$s</em> dall’anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> ha commentato l\'anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> sta monitorando l\'anomalia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> ha smesso di monitorare l\'anomalia <span class="issue_id">%2$s</span>';
@@ -1262,6 +1276,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tipo di file non consentito';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'La directory non esiste.  Controlla le impostazioni del progetto.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un progetto con quel nome esiste già.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Il campo obbligatorio "%1$s" era vuoto.  Ricontrolla le informazioni che hai inserito.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valore non valido per \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Questo account è protetto.  Non ti è consentito accedere finché non verrà tolta la protezione.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accesso negato.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Il caricamento del file è fallito.  Il file non risulta leggibile da MantisBT.  Controlla le impostazioni del progetto';
@@ -1274,13 +1289,16 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L\'opzione di configurazion
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Non è possibile impostare l\'opzione di configurazione "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'La stringa "%1$s" non è stata trovata.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Annotazione non trovata.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Il progetto "%1$s" non è stato trovato.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo del database "%1$s" non trovato.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'L\'assegnatario dell\'anomalia non ha permessi sufficienti per intervenire sull\'anomalia nel suo stato corrente.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Il progetto "%1$s" non è stato trovato.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Un progetto con quel nome esiste già. Torna indietro e scegli un nome diverso.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Il nome di progetto specificato non è valido.  Il nome non può essere in bianco.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Questa operazione creerebbe una circolarità nella gerarchia dei sottoprogetti.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Utente con nome "%1$s" non trovato.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Utente con id "%1$d" non trovato.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'Utente con email "%1$s" non trovato.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Utente con nome reale "%1$s" non trovato.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Le informazioni di autenticazione presentate dal tuo browser non sono valide.  Forse il tuo account è stato cancellato?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Non sono state trovate le preferenze per questo utente.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Notizia non trovata.';
@@ -1291,7 +1309,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '%1$s accetta una stringa, invece è
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '%1$s accetta un numero.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Anomalia %1$d non trovata.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtro %1$s non trovato.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Il filtro che stai cercando di usare è troppo vecchio per poterlo aggiornare, ricrealo.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Indirizzo email non valido.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Non è consentito l\'utilizzo di indirizzi email usa&getta.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilo non trovato.';
@@ -1330,7 +1347,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versione "%1$s" non trovata.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Il nome dell\'utente non è valido.  I nomi utente possono contenere solo lettere non accentate, numeri, spazi, trattini, punti e underscore ("_").';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Il nome proprio dell\'utente non è valido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'L\'utente non ha il livello di accesso necessario.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Il nominativo specificato corrisponde a quello di un altro utente.  Specificane uno diverso.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Il supporto alle sponsorizzazioni non è abilitato.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorizzazione %1$d non trovata.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorizzazione (%1$s) inferiore all\'importo minimo consentito (%2$s).';
@@ -1339,7 +1355,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Accesso negato
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Lo sponsor non ha fornito un indirizzo email.  Aggiorna il tuo profilo.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'L\'opzione di configurazione "%1$s" è impostata a un valore "%2$s" non valido.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'L\'azione non può essere effettuata perché l\'anomalia %1$d è a sola lettura.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Questa anomalia non può essere risolta fino a quando non saranno risolte tutte le anomalie dipendenti.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Questa anomalia non può essere risolta fino a quando non saranno risolte tutte le anomalie dipendenti. Chiedi all\'amministratore di sistema l\'accesso al progetto se non vedi alcuna anomalia dipendente.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relazione non trovata.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Accesso negato: l\'anomalia %1$d richiede un livello di accesso più alto.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Un\'anomalia non può essere relazionata con sè stessa.';
@@ -1349,7 +1365,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'È possibile eseguire l
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'I dati inseriti e/o inviati non corrispondono ad alcun utente registrato.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Codice di convalida (hash code) non valido.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Raggiunto il numero massimo di richieste di reset pendenti.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Questa operazione creerebbe una circolarità nella gerarchia dei sottoprogetti.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Non puoi cancellare o ridurre il livello di accesso nell\'unico amministratore rimasto a del sistema. Per effettuare questa azione, prima, devi creare un altra utenza di amministrazione.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Non esiste un\'etichetta con quel nome.';
@@ -1373,7 +1388,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Il formato del file specificato del 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Si è verificato un errore sconosciuto "%1$s" durante l\'esecuzione del plugin "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Il campo "%1$s" contiene colonne duplicate "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Il campo "%1$s" contiene un campo invalido "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestore di sessione invalido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabile di sessione "%1$s" non trovato.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'La sessione è scaduta.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Chiave di sicurezza del modulo (token) invalido. Questo potrebbe essere causato da un timeout di sessione, o da un invio del modulo più volte per errore.';
@@ -1401,3 +1415,9 @@ $s_dropzone_cancel_upload_confirmation = 'Sei sicuro di voler annullare questo c
 $s_dropzone_remove_file = 'Rimuovi file';
 $s_dropzone_max_files_exceeded = 'Non puoi più caricare altri file.';
 $s_dropzone_not_supported = 'Dropzone.js non supporta vecchie versioni di browser!';
+$s_save = 'Salva';
+$s_reset = 'Reimposta';
+$s_persist = 'Persistono';
+$s_load = 'Carica';
+$s_apply_changes = 'Applica modifiche';
+$s_undo = 'Annulla';

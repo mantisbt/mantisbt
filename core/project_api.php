@@ -60,6 +60,8 @@ $g_cache_project = array();
 $g_cache_project_missing = array();
 $g_cache_project_all = false;
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Checks if there are no projects defined.
  * @return boolean true if there are no projects defined, false otherwise.
@@ -110,11 +112,10 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		$g_cache_project_missing[(int)$p_project_id] = true;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_project_id );
-			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
-		} else {
-			return false;
+			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, array( $p_project_id ) );
 		}
+
+		return false;
 	}
 
 	$t_row = db_fetch_array( $t_result );
@@ -310,7 +311,7 @@ function validate_project_file_path( $p_file_path ) {
 		# If the provided path is the same as the default, make the path blank.
 		# This means that if the default upload path is changed, you don't have
 		# to update the upload path for every single project.
-		if( !strcmp( $p_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+		if( !strcmp( $p_file_path, config_get_global( 'absolute_path_default_upload_folder' ) ) ) {
 			$p_file_path = '';
 		} else {
 			file_ensure_valid_upload_path( $p_file_path );
@@ -400,7 +401,7 @@ function project_delete( $p_project_id ) {
 	config_delete_project( $p_project_id );
 
 	# Delete any user prefs that are project specific
-	user_pref_delete_project( $p_project_id );
+	user_pref_db_delete_project( $p_project_id );
 
 	# Delete the project entry
 	db_param_push();
@@ -495,9 +496,10 @@ function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
 /**
  * Get the id of the project with the specified name
  * @param string $p_project_name Project name to retrieve.
- * @return integer
+ * @param integer|boolean $p_default The default value or false if the default should not be applied.
+ * @return null|integer
  */
-function project_get_id_by_name( $p_project_name ) {
+function project_get_id_by_name( $p_project_name, $p_default = ALL_PROJECTS ) {
 	db_param_push();
 	$t_query = 'SELECT id FROM {project} WHERE name = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_project_name ), 1 );
@@ -505,8 +507,10 @@ function project_get_id_by_name( $p_project_name ) {
 	$t_id = db_result( $t_result );
 	if( $t_id ) {
 		return $t_id;
+	} else if ( $p_default === false ) {
+		return null;
 	} else {
-		return 0;
+		return $p_default;
 	}
 }
 
@@ -729,11 +733,11 @@ function project_get_upload_path( $p_project_id ) {
 	}
 
 	if( $p_project_id == ALL_PROJECTS ) {
-		$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, ALL_PROJECTS );
+		$t_path = config_get_global( 'absolute_path_default_upload_folder', '' );
 	} else {
 		$t_path = project_get_field( $p_project_id, 'file_path' );
 		if( is_blank( $t_path ) ) {
-			$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, $p_project_id );
+			$t_path = config_get_global( 'absolute_path_default_upload_folder', '' );
 		}
 	}
 
@@ -741,74 +745,121 @@ function project_get_upload_path( $p_project_id ) {
 }
 
 /**
- * add user with the specified access level to a project
+ * Add user with the specified access level to a project.
  * @param integer $p_project_id   A project identifier.
  * @param integer $p_user_id      A valid user id identifier.
  * @param integer $p_access_level The access level to add the user with.
  * @return void
  */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
-	$t_access_level = (int)$p_access_level;
-	if( DEFAULT_ACCESS_LEVEL == $t_access_level ) {
-		# Default access level for this user
-		$t_access_level = user_get_access_level( $p_user_id );
-	}
-
-	db_param_push();
-	$t_query = 'INSERT INTO {project_user_list}
-				    ( project_id, user_id, access_level )
-				  VALUES
-				    ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
-
-	db_query( $t_query, array( (int)$p_project_id, (int)$p_user_id, $t_access_level ) );
+	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
 }
 
 /**
- * update entry
- * must make sure entry exists beforehand
+ * Update user with the specified access level to a project.
  * @param integer $p_project_id   A project identifier.
  * @param integer $p_user_id      A user identifier.
  * @param integer $p_access_level Access level to set.
  * @return void
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	db_param_push();
-	$t_query = 'UPDATE {project_user_list}
-				  SET access_level=' . db_param() . '
-				  WHERE	project_id=' . db_param() . ' AND
-						user_id=' . db_param();
-
-	db_query( $t_query, array( (int)$p_access_level, (int)$p_project_id, (int)$p_user_id ) );
+	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
 }
 
 /**
- * update or add the entry as appropriate
- * This function involves one more database query than project_update_user_acces() or project_add_user()
+ * Update or add user with the specified access level to a project.
+ * This function involves one more database query than project_update_user_acces() or project_add_user().
  * @param integer $p_project_id   A project identifier.
  * @param integer $p_user_id      A user identifier.
  * @param integer $p_access_level Project Access level to grant the user.
  * @return boolean
  */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	if( project_includes_user( $p_project_id, $p_user_id ) ) {
-		return project_update_user_access( $p_project_id, $p_user_id, $p_access_level );
-	} else {
-		return project_add_user( $p_project_id, $p_user_id, $p_access_level );
+	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
+}
+
+/**
+ * Add or modify multiple users associated to a project with a specific access level.
+ * $p_changes is an array of access levels indexed by user_id, such as:
+ *   array ( user1 => access_level, user2 => access_level, ... )
+ * This function will manage inserts and updates as needed.
+ *
+ * @param integer $p_project_id   A project identifier.
+ * @param array $p_changes        An array of modifications.
+ * @return void
+ */
+function project_add_users( $p_project_id, array $p_changes ) {
+	# normalize input
+	$t_changes = array();
+	foreach( $p_changes as $t_id => $t_value ) {
+		if( DEFAULT_ACCESS_LEVEL == $t_value ) {
+			$t_changes[(int)$t_id] = user_get_access_level( $t_id );
+		} else {
+			$t_changes[(int)$t_id] = (int)$t_value;
+		}
+	}
+
+	$t_user_ids = array_keys( $t_changes );
+	if( empty( $t_user_ids ) ) {
+		return;
+	}
+
+	$t_project_id = (int)$p_project_id;
+	$t_query = new DbQuery();
+	$t_sql = 'SELECT user_id FROM {project_user_list} WHERE project_id = ' . $t_query->param( $t_project_id )
+			. ' AND ' . $t_query->sql_in( 'user_id', $t_user_ids );
+	$t_query->sql( $t_sql );
+	$t_updating = array_column( $t_query->fetch_all(), 'user_id' );
+
+	if( !empty( $t_updating ) ) {
+		$t_update = new DbQuery( 'UPDATE {project_user_list} SET access_level = :new_value WHERE user_id = :user_id' );
+		foreach( $t_updating as $t_id ) {
+			$t_params = array( 'user_id' => (int)$t_id, 'new_value' => $t_changes[$t_id] );
+			$t_update->execute( $t_params );
+			unset( $t_changes[$t_id] );
+		}
+	}
+	# remaining items are for insert
+	if( !empty( $t_changes ) ) {
+		$t_insert = new DbQuery( 'INSERT INTO {project_user_list} ( project_id, user_id, access_level ) VALUES :params' );
+		foreach( $t_changes as $t_id => $t_value ) {
+			$t_insert->bind( 'params', array( $t_project_id, $t_id, $t_value ) );
+			$t_insert->execute();
+		}
 	}
 }
 
 /**
- * remove user from project
+ * Remove user from project.
  * @param integer $p_project_id A project identifier.
  * @param integer $p_user_id    A user identifier.
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
-	db_param_push();
-	$t_query = 'DELETE FROM {project_user_list}
-				  WHERE project_id=' . db_param() . ' AND user_id=' . db_param();
+	project_remove_users( $p_project_id, array( $p_user_id ) );
+}
 
-	db_query( $t_query, array( (int)$p_project_id, (int)$p_user_id ) );
+/**
+ * Remove multiple users from project.
+ * @param integer $p_project_id  A project identifier.
+ * @param array $p_user_ids      Array of user identifiers.
+ * @return type
+ */
+function project_remove_users( $p_project_id, array $p_user_ids ) {
+	# normalize input
+	$t_user_ids = array();
+	foreach( $p_user_ids as $t_id ) {
+		$t_user_ids[] = (int)$t_id;
+	}
+	if( empty( $t_user_ids ) ) {
+		return;
+	}
+
+	$t_query = new DbQuery();
+	$t_sql = 'DELETE FROM {project_user_list} WHERE project_id = ' . $t_query->param( (int)$p_project_id )
+			. ' AND ' . $t_query->sql_in( 'user_id', $t_user_ids );
+	$t_query->sql( $t_sql );
+	$t_query->execute();
 }
 
 /**

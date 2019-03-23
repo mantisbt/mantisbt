@@ -38,13 +38,18 @@
  * @ingroup Language
  * @file
  *
+ * @author Elroy
  * @author Gerardwijngaarden
  * @author HanV
  * @author Hansmuller
  * @author McDutchie
  * @author MedShot
+ * @author Mraedis
+ * @author Optilete
+ * @author Rienkwind
  * @author Robin van der Vliet
  * @author Robin0van0der0vliet
+ * @author Romaine
  * @author Siebrand
  * @author Sjoerddebruin
  * @author Tvdm
@@ -84,6 +89,8 @@ $s_excel_export = 'Naar Excel exporteren';
 $s_login_anonymously = 'Anoniem aanmelden';
 $s_anonymous = 'Anoniem';
 $s_jump_to_bugnotes = 'Naar opmerkingen';
+$s_jump_to_history = 'Geschiedenis melding';
+$s_display_history = 'Toon geschiedenis';
 $s_public_project_msg = 'Dit project is publiek. Alle gebruikers hebben toegang.';
 $s_private_project_msg = 'Dit project is intern. Alleen beheerders en handmatig toegevoegde gebruikers hebben toegang.';
 $s_access_level_project = 'Toegangsniveau project';
@@ -341,6 +348,7 @@ $s_email_on_priority_change = 'E-mail bij prioriteitswijziging';
 $s_email_bugnote_limit = 'E-maillimiet opmerkingen';
 $s_email_full_issue_details = 'Alle details van melding e-mailen';
 $s_language = 'Taal';
+$s_font_family = 'fontfamilie';
 $s_update_prefs_button = 'Instellingen bijwerken';
 $s_reset_prefs_button = 'Begininstellingen';
 $s_timezone = 'Tijdzone';
@@ -378,7 +386,6 @@ $s_sponsor_show = 'Allemaal weergeven';
 $s_payment_updated = 'De betalingsgegevens bijgewerkt.';
 $s_account_updated_msg = 'Uw account is aangepast.';
 $s_email_updated = 'Het e-mailadres is aangepast.';
-$s_realname_duplicated = 'De volledige naam wordt al gebruikt.';
 $s_realname_updated = 'De volledige naam is aangepast.';
 $s_password_updated = 'Het wachtwoord is aangepast.';
 $s_multiple_projects = 'De door u geselecteerde meldingen komen uit verschillende projecten. De parameters hieronder hebben betrekking op alle projecten. Als dit onjuist is, probeer het dan opnieuw met een kleinere selectie.';
@@ -584,6 +591,7 @@ $s_date_created = 'Aangemaakt op';
 $s_last_visit = 'Laatste bezoek';
 $s_last_visit_label = 'Laatste bezoek:';
 $s_edit_user_link = 'Gebruiker bewerken';
+$s_search_user_hint = 'Gebruikersnaam, Echte Naam of E-mail';
 $s_separate_list_items_by = '(scheid items in de lijst met "%1$s")';
 $s_config_all_projects = 'Let op: deze instelling is van toepassing op alle projecten, tenzij die op projectniveau is aangepast.';
 $s_config_project = 'Let op: deze instelling heeft alleen invloed op het project %1$s.';
@@ -898,6 +906,7 @@ $s_total_time = 'Totale tijd';
 $s_developer_stats = 'Status per ontwikkelaar';
 $s_reporter_stats = 'Status per aanmelder';
 $s_orct = '(open/opgelost/gesloten/totaal)';
+$s_summary_header = 'open/opgelost/afgesloten/totaal/opgelost ratio/ratio';
 $s_any = 'alle';
 $s_all = 'alle';
 $s_show = 'Bekijken';
@@ -1030,6 +1039,7 @@ $s_kb = 'KB';
 $s_attachment_missing = 'De bijlage ontbreekt';
 $s_attachment_count = 'Aantal toegevoegde bestanden';
 $s_view_attachments_for_issue = '%1$d bestand(en) bekijken voor melding #%2$d';
+$s_warning_update_custom_field_type = '<strong>Waarschuwing:</strong> Aangepast veld "%1$s" heeft al opgeslagen waarden. Het wijzigen van het veldtype kan fouten en onverwacht gedrag veroorzaken als bestaande waarden niet consistent zijn met het nieuwe type van het veld. Klik op de onderstaande knop om door te gaan';
 $s_phpmailer_language = 'nl';
 $s_sponsors = '%1$d sponsor(s)';
 $s_sponsorship_added = 'Sponsoring toegevoegd';
@@ -1067,6 +1077,7 @@ $s_bug_created_from = 'Melding gemaakt van';
 $s_copy_from_parent = 'Uitgebreide gegevens van bovenliggende melding kopiëren';
 $s_copy_notes_from_parent = 'Opmerkingen kopiëren';
 $s_copy_attachments_from_parent = 'Bijlagen kopiëren';
+$s_with = 'met';
 $s_viewing_bug_relationship_graph_title = 'Relatiediagram';
 $s_viewing_bug_dependency_graph_title = 'Afhankelijkheidsgrafiek';
 $s_relation_graph = 'Relatiediagram';
@@ -1216,6 +1227,8 @@ $s_path_information = 'Padgegevens MantisBT';
 $s_mantisbt_database_statistics = 'MantisBT databasestatistieken';
 $s_php_version = 'PHP-versie';
 $s_adodb_version = 'ADOdb-versie';
+$s_database_driver = 'Database Driver';
+$s_database_version_description = 'Database Versie, Beschrijving';
 $s_month_january = 'januari';
 $s_month_february = 'februari';
 $s_month_march = 'maart';
@@ -1229,6 +1242,8 @@ $s_month_october = 'oktober';
 $s_month_november = 'november';
 $s_month_december = 'december';
 $s_timeline_issue_created = '<span class="username">%1$s</span> heeft de melding <span class="issue_id">%2$s</span> aangemaakt';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> heeft bestand <em>%3$s</em> toegevoegd aan melding <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> heeft het bestand <em>%3$s</em> verwijderd van de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> heeft gereageerd op de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> volgt de melding <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> volgt de melding <span class="issue_id">%2$s</span> niet meer';
@@ -1252,6 +1267,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Het bestandstype is niet toegestaan.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'De map bestaat niet. Controleer de projectinstellingen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Een verplicht veld ("%1$s") is niet ingevuld. Controleer uw invoer.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ongeldige waarde voor \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Deze gebruiker is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Toegang geweigerd.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Toevoegen bestand mislukt omdat het niet door MantisBT gelezen kon worden. Controleer de projectinstellingen.';
@@ -1264,13 +1280,16 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Instelling "%1$s" kan niet 
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'De configuratie-optie "%1$s" kan niet ingesteld worden: %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" niet gevonden.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Reactie niet gevonden.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" niet gevonden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databaseveld "%1$s" niet gevonden.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'De behandelaar heeft onvoldoende rechten om de melding af te handelen in de huidige status.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" niet gevonden.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Er bestaat al een project met die naam. Ga terug en kies een andere naam.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ongeldige projectnaam. De naam kan niet leeg zijn.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze wijziging zou een lus maken in de subprojecthiërarchie.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'De gebruikers met nummer "%1$d" is niet gevonden.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'De gebruiker met email "%1$s" is niet gevonden.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'De gebruiker met naam "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'De aanmeldinformatie in uw browser is ongeldig. Wellicht is uw gebruiker verwijderd?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'De instellingen voor deze gebruiker kunnen niet gevonden worden.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nieuwsbericht niet gevonden.';
@@ -1281,7 +1300,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Verwachtte een string, maar ontving
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Verwachtte een getal voor %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Melding %1$d niet gevonden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s niet gevonden.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'De filter die u probeert te gebruiken is te oud om bijgewerkt te worden. Maak hem opnieuw aan.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ongeldig e-mailadres.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Het is niet toegestaan om wegwerp-e-mailadressen te gebruiken.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
@@ -1320,7 +1338,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'De versie "%1$s" is niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'De gebruikersnaam is ongeldig. Gebruikersnamen mogen alleen Latijnse letters, cijfers, spaties, koppeltekens, punten, plus-tekens, apostrofs en liggende streepjes bevatten.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'De volledige naam van de gebruiker is ongeldig.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'De gebruiker heeft niet het juiste toegangsniveau.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'De gekozen "Volledige naam" is gelijk aan een andere gebruikersnaam. Kies een andere naam.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Ondersteuning voor sponsoring is niet ingeschakeld.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsoring %1$d niet gevonden.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsoring (%1$s) ligt beneden minimum bedrag (%2$s).';
@@ -1329,7 +1346,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Toegang geweig
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'De sponsor heeft geen e-mailadres opgegeven. Wijzig uw instellingen om dit te corrigeren.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'De instelling "%1$s" heeft een foutieve waarde "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'De handeling kan niet worden uitgevoerd omdat melding "%1$d" alleen-lezen is.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Deze melding kan niet opgelost worden totdat all afhankelijke meldingen zijn opgelost.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Deze melding kan niet opgelost worden totdat alle afhankelijke meldingen zijn opgelost. Vraag je systeembeheerder voor toegang tot het project als je geen enkele afhankelijke issue ziet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'De relatie is niet gevonden.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Toegang geweigerd: voor melding %1$d is een hoger toegangsniveau nodig.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Een melding kan geen relatie met zichzelf hebben.';
@@ -1339,7 +1356,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'U moet een e-mailadres 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De opgegeven informatie komt niet overeen met een bekende gebruiker!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'De bevestigings-URL is ongeldig of is al gebruikt. Meld u nogmaals aan.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Het maximale aantal openstaande verzoeken is bereikt. Neem contact op met de beheerder.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Deze wijziging zou een lus maken in de subprojecthiërarchie.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'U kunt de enige beheerder van het systeem niet verwijderen of andere rechten geven. Om de gewenste handeling uit te voeren, moet u eerst een andere beheerder aanmaken.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Er is een fout in de paginadoorverwijzing. Zorg ervoor dat er geen spaties buiten het PHP-blok staan (&lt;?php ?&gt;) in config_inc.php of custom_*.php-bestanden.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Er is geen label met die naam.';
@@ -1363,7 +1379,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'De opmaak van het opgegeven pluginbe
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Er is een onbekende fout opgetreden ("%1$s") bij het uitvoeren van de uitbreiding "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Het veld "%1$s" bevat een dubbele kolom "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Het veld "%1$s" bevat een ongeldig veld "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ongeldige session-handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'De sessievariabele "%1$s" is niet aangetroffen.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Uw sessie is niet langer geldig.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Het beveiligingstoken heeft een ongeldige opmaak. Dit kan veroorzaakt zijn door een timeout van de sessie of het per ongeluk twee keer opsturen van het formulier.';
@@ -1391,3 +1406,9 @@ $s_dropzone_cancel_upload_confirmation = 'Weet u zeker dat u het uploaden wilt a
 $s_dropzone_remove_file = 'Bestand verwijderen';
 $s_dropzone_max_files_exceeded = 'U kunt geen bestanden meer uploaden.';
 $s_dropzone_not_supported = 'Dropzone.js ondersteunt oudere browsers niet.';
+$s_save = 'Opslaan';
+$s_reset = 'Opnieuw instellen';
+$s_persist = 'Aanhouden';
+$s_load = 'Laden';
+$s_apply_changes = 'Wijzigingen toepassen';
+$s_undo = 'Ongedaan maken';

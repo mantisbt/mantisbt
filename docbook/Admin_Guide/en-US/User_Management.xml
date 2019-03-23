@@ -51,12 +51,11 @@
 	    </listitem>
 	    <listitem>
 	        <para>If email notifications ($g_enable_email_notification) is
-		set to ON, users with access level about
-		$g_notify_new_user_created_threshold_min will get a
+		set to ON, users with access level of
+		$g_notify_new_user_created_threshold_min and above will get a
 		notification that a user account has been created.  Information
-		about the user like user name and email address are provided.
-		The IP of the user that created the account is also
-		included.</para>
+		about the user like user name, email address, IP address are included in
+		the email notification.</para>
 	    </listitem>
 	</itemizedlist></para>
 
@@ -148,8 +147,8 @@
 	(see <xref linkend="admin.config.email" />).
 	</para>
 	<para>If email notifications ($g_enable_email_notification) is
-	set to ON, users with access level about
-	$g_notify_new_user_created_threshold_min will get a
+	set to ON, users with access level of
+	$g_notify_new_user_created_threshold_min and above will get a
 	notification that a user account has been created.  Information
 	about the user like user name, email address, IP address are included in
 	the email notification.</para>

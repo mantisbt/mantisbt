@@ -153,6 +153,9 @@ layout_page_begin();
 			<?php
 				if( $f_new_status >= $t_resolved ) {
 					if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+						if( OFF == config_get( 'allow_parent_of_unresolved_to_close' ) ) {
+							trigger_error( ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING, ERROR );
+						}
 						echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
 					}
 				}
@@ -333,17 +336,18 @@ layout_page_begin();
 		printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
 	}
 ?>
-<?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<?php
+	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
+	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+
+	if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'view_status' ) ?>
 				</th>
 				<td>
 <?php
-		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-		$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
-
 		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
@@ -351,7 +355,7 @@ layout_page_begin();
 			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
 <?php
 		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+			echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 		}
 ?>
 				</td>

@@ -182,11 +182,11 @@ foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
 	$f_dsn                    = config_get( 'dsn', '' );
-	$f_hostname               = config_get( 'hostname', '' );
-	$f_db_type                = config_get( 'db_type', '' );
-	$f_database_name          = config_get( 'database_name', '' );
-	$f_db_username            = config_get( 'db_username', '' );
-	$f_db_password            = config_get( 'db_password', '' );
+	$f_hostname               = config_get_global( 'hostname', '' );
+	$f_db_type                = config_get_global( 'db_type', '' );
+	$f_database_name          = config_get_global( 'database_name', '' );
+	$f_db_username            = config_get_global( 'db_username', '' );
+	$f_db_password            = config_get_global( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
@@ -197,13 +197,13 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 } else {
 	# read control variables with defaults
 	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
-	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
-	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	$f_hostname           = gpc_get( 'hostname', config_get_global( 'hostname', 'localhost' ) );
+	$f_db_type            = gpc_get( 'db_type', config_get_global( 'db_type', '' ) );
+	$f_database_name      = gpc_get( 'database_name', config_get_global( 'database_name', 'bugtracker' ) );
+	$f_db_username        = gpc_get( 'db_username', config_get_global( 'db_username', '' ) );
+	$f_db_password        = gpc_get( 'db_password', config_get_global( 'db_password', '' ) );
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
-		$f_db_password = config_get( 'db_password' );
+		$f_db_password = config_get_global( 'db_password' );
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
 
@@ -288,12 +288,10 @@ if( 0 == $t_install_state ) {
 	);
 
 	# UTF-8 support check
-	# We need either the 'mbstring' extension, or the utf8_encode() function
-	# (part of the 'XML parser' extension) as a fallback for Unicode support
-	# by the utf8 library.
+	# We need the 'mbstring' extension
 	print_test(
 		'Checking UTF-8 support',
-		extension_loaded( 'mbstring' ) || function_exists( 'utf8_encode' ),
+		extension_loaded( 'mbstring' ),
 		true,
 		'Please install or enable the PHP mbstring extension'
 	);
@@ -898,7 +896,7 @@ if( 3 == $t_install_state ) {
 						false,
 						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN' );
 				} else {
-					# We did not get an array => error occured
+					# We did not get an array => error occurred
 					print_test( $t_msg, false, true, $t_bool_columns );
 				}
 
@@ -1149,11 +1147,11 @@ if( 5 == $t_install_state ) {
 		}
 	} else {
 		# already exists, see if the information is the same
-		if( ( $f_hostname != config_get( 'hostname', '' ) ) ||
-			( $f_db_type != config_get( 'db_type', '' ) ) ||
-			( $f_database_name != config_get( 'database_name', '' ) ) ||
-			( $f_db_username != config_get( 'db_username', '' ) ) ||
-			( $f_db_password != config_get( 'db_password', '' ) ) ) {
+		if( ( $f_hostname != config_get_global( 'hostname', '' ) ) ||
+			( $f_db_type != config_get_global( 'db_type', '' ) ) ||
+			( $f_database_name != config_get_global( 'database_name', '' ) ) ||
+			( $f_db_username != config_get_global( 'db_username', '' ) ) ||
+			( $f_db_password != config_get_global( 'db_password', '' ) ) ) {
 			print_test_result( BAD, false, 'file ' . $t_config_filename . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );

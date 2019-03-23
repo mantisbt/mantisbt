@@ -1,0 +1,66 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Georgian (ქართული)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Lkakauridze
+ * @author MIKHEIL
+ */
+
+$s_plugin_MantisGraph_config = 'კონფიგურაცია';
+$s_plugin_MantisGraph_status_link = 'სტატუსის მიხედვით';
+$s_plugin_MantisGraph_priority_link = 'პრიორიტეტის მიხედვით';
+$s_plugin_MantisGraph_severity_link = 'სიზუსტის მიხედვით';
+$s_plugin_MantisGraph_category_link = 'კატეგორიის მიხედვით';
+$s_plugin_MantisGraph_resolution_link = 'რეზოლუციის მიხედვით';
+$s_plugin_MantisGraph_issue_trends_link = 'მოთხოვის ტრენდები';
+$s_plugin_MantisGraph_by_status_pct = 'სტატუსის პროცენტის მიხედვით';
+$s_plugin_MantisGraph_by_priority_pct = 'პრიორიტეტის პროცენტის მიხედვით';
+$s_plugin_MantisGraph_by_category_pct = 'კატეგორიის პროცენტის მიხედვით';
+$s_plugin_MantisGraph_by_priority_mix = 'პრიორიტეტის და სტატუსის მიხედვით';
+$s_plugin_MantisGraph_by_resolution_mix = 'გადაწყვეტის და სტატუსის მიხედვით';
+$s_plugin_MantisGraph_legend_still_open = 'კვლავ გახსნილი';
+$s_plugin_MantisGraph_legend_resolved = 'მოგვარებული';
+$s_plugin_MantisGraph_legend_reported = 'ხელახლა გახსნილი';
+$s_plugin_MantisGraph_period_this_week = 'ამ კვირის';
+$s_plugin_MantisGraph_period_last_week = 'ბოლო კვირის';
+$s_plugin_MantisGraph_period_two_weeks = 'ბოლო ორი კვირის';
+$s_plugin_MantisGraph_period_this_month = 'ამ თვის';
+$s_plugin_MantisGraph_period_last_month = 'ბოლო თვის';
+$s_plugin_MantisGraph_period_year_to_date = 'წელის გადაყვანა თარიღში';
+$s_plugin_MantisGraph_period_last_year = 'ბოლო წელი';

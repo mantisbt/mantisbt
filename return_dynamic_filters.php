@@ -61,22 +61,18 @@ if( !auth_is_user_authenticated() ) {
 compress_enable();
 
 $f_filter_id = gpc_get( 'filter_id', null );
-if( null === $f_filter_id ) {
-	$t_filter = current_user_get_bug_filter();
-} else {
-	$c_filter_id = (int)$f_filter_id;
-	$t_filter_string = filter_db_get_filter( $c_filter_id );
-	if( !$t_filter_string ) {
+if( null !== $f_filter_id ) {
+	$t_filter = filter_get( $f_filter_id, null );
+	if( null === $t_filter ) {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
-	} else {
-		$t_filter = filter_deserialize( $t_filter_string );
-		$t_filter['_source_query_id'] = $f_filter_id;
-		filter_cache_row( $c_filter_id );
 	}
+} else {
+	$t_filter = current_user_get_bug_filter();
 }
 
 $f_view_type = gpc_get_string( 'view_type', $t_filter['_view_type'] );
 $t_filter['_view_type'] = $f_view_type;
+# call to filter_ensure_valid_filter to clean up after adding unsafe values from gpc vars
 $t_filter = filter_ensure_valid_filter( $t_filter );
 
 /**
@@ -90,16 +86,16 @@ function return_dynamic_filters_prepend_headers() {
 }
 
 $f_filter_target = gpc_get_string( 'filter_target' );
-$filter_target = utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
+$filter_target = mb_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
 $t_found = false;
 $t_content = @call_user_func_array( 'filter_form_get_input', array( $t_filter, $filter_target, true ) );
 if( false !== $t_content ) {
 	return_dynamic_filters_prepend_headers();
 	$t_found = true;
 	echo $t_content;
-} else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
+} else if( 'custom_field' == mb_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
-	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
+	$t_custom_id = mb_substr( $f_filter_target, 13, -7 );
 	$t_cfdef = @custom_field_get_definition( $t_custom_id );
 	# Check existence of custom field id, and if the user have access to read and filter by
 	if( $t_cfdef && access_has_any_project_level( $t_cfdef['access_level_r'] ) && $t_cfdef['filter_by'] ) {

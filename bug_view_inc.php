@@ -107,7 +107,7 @@ if( $t_show_page_header ) {
 
 $t_action_button_position = config_get( 'action_button_position' );
 
-$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
+$t_bugslist = gpc_get_cookie( config_get_global( 'bug_list_cookie' ), false );
 
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
@@ -713,7 +713,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
 	echo '<tr>';
-	echo '<th class="bug-custom-field category">', string_display( lang_get_defaulted( $t_def['name'] ) ), '</th>';
+	echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
 	echo '<td class="bug-custom-field" colspan="5">';
 	print_custom_field_value( $t_def, $t_id, $f_bug_id );
 	echo '</td></tr>';

@@ -84,6 +84,8 @@ $t_row = project_get_row( $f_project_id );
 
 $t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
+require_js( 'manage_proj_edit_page.js' );
+
 layout_page_header( project_get_field( $f_project_id, 'name' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
@@ -158,7 +160,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
+						<?php print_enum_string_option_list( 'project_view_state', (int)$t_row['view_state']) ?>
 					</select>
 				</td>
 			</tr>
@@ -168,7 +170,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
-					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 				}
 				?>
 				<tr>
@@ -312,7 +314,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 					<tr>
 						<td>
 							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
-								<?php echo string_display( $t_subproject['name'] ) ?>
+								<?php echo string_display_line( $t_subproject['name'] ) ?>
 							</a>
 						</td>
 						<td class="center">
@@ -388,7 +390,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
@@ -417,7 +420,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 			<tr>
-				<td><?php echo string_display( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_display_line( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
 					<div class="inline">
@@ -477,7 +480,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
 			<input type="hidden" class="form-control input-sm" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
@@ -515,7 +519,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			} ?>
 
 			<tr>
-				<td><?php echo string_display( $t_name ) ?></td>
+				<td><?php echo string_display_line( $t_name ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_released ) ?></td>
 				<td class="center"><?php echo trans_bool( $t_obsolete ) ?></td>
 				<td class="center"><?php echo $t_date_formatted ?></td>
@@ -583,7 +587,8 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_custom_field_copy' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
 				<?php print_project_option_list( null, false, $f_project_id ); ?>
 			</select>
 			<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_from' ) ?>" />
@@ -687,116 +692,179 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 </div>
 
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
-<div id="manage-project-users-div" class="form-container">
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-users"></i>
-		<?php echo lang_get( 'manage_accounts_title' ); ?>
-	</h4>
-</div>
-<div class="widget-toolbox padding-8 clearfix">
-	<form id="manage-project-users-copy-form" method="post" action="manage_proj_user_copy.php" class="form-inline">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_user_copy' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<select name="other_project_id" class="input-sm">
-				<?php print_project_option_list( null, false, $f_project_id ); ?>
-			</select>
-			<span class=form-inline">
-				<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
-				<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
-			</span>
-		</fieldset>
-	</form>
-</div>
-<div class="widget-body">
-	<div class="widget-main no-padding">
-	<div class="table-responsive">
-	<table class="table table-striped table-bordered table-condensed">
-		<thead>
-			<tr>
-				<th><?php echo lang_get( 'username' ) ?></th>
-				<th><?php echo lang_get( 'email' ) ?></th>
-				<th><?php echo lang_get( 'access_level' ) ?></th>
-				<th><?php echo lang_get( 'actions' ) ?></th>
-			</tr>
-		</thead>
-		<tbody>
-<?php
+	<div class="space-10"></div>
+	<div id="manage-project-users-div" class="form-container">
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-users"></i>
+					<?php echo lang_get( 'manage_accounts_title' ); ?>
+				</h4>
+			</div>
+			<div class="widget-body" id="manage-project-users-list">
+
+				<div class="widget-toolbox padding-8 clearfix">
+					<form id="manage-project-users-copy-form" method="post" action="manage_proj_user_copy.php" class="form-inline">
+						<fieldset>
+							<?php echo form_security_field( 'manage_proj_user_copy' ) ?>
+							<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+							<select name="other_project_id" class="input-sm" required>
+								<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
+								<?php print_project_option_list( null, false, $f_project_id ); ?>
+							</select>
+							<span class=form-inline">
+								<input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
+								<input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
+							</span>
+						</fieldset>
+					</form>
+				</div>
+	<?php
 	$t_users = project_get_all_user_rows( $f_project_id, ANYBODY, $f_show_global_users );
-	$t_display = array();
-	$t_sort = array();
-	foreach ( $t_users as $t_user ) {
-		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
-		if( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
-			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
-			if( ON == config_get( 'sort_by_last_name') ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-				$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
-			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
-			}
+	$t_users_count = count( $t_users );
+
+	if( $t_users_count > 0 ) {
+
+		$t_user_ids = array();
+		$t_sort = array();
+		foreach ( $t_users as $t_ix => $t_user ) {
+			$t_user_display_name = user_get_name_from_row( $t_user );
+			$t_users[$t_ix]['display_name'] = $t_user_display_name;
+			$t_user_ids[] = $t_user['id'];
+			$t_sort[] = $t_user_display_name;
 		}
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
-	}
 
-	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+		user_cache_array_rows( $t_user_ids );
+		array_multisort( $t_sort, SORT_ASC, SORT_NATURAL | SORT_FLAG_CASE, $t_users );
 
-	$t_users_count = count( $t_sort );
-	$t_removable_users_exist = false;
+		?>
+				<div id="manage-project-users-form-toolbox" class="hidden widget-toolbox padding-8 clearfix">
+					<div class="btn-toolbar">
+						<div class="widget-toolbar no-border pull-left">
+							<input type="text" class="search input-sm" placeholder="<?php echo lang_get( 'filter_button' ) ?>" />
+						</div>
+						<div class="widget-toolbar pull-left">
+							<label><?php echo lang_get( 'show' ) ?>
+							<input id="input-per-page" type="text" min="5" size="2" class="input-sm" value="<?php echo config_get( 'default_limit_view' ) ?>"/>
+							</label>
+							<label>
+								&nbsp;(<?php echo lang_get( 'total' ), ': ', $t_users_count, ' ', lang_get( 'users_link' ) ?>)
+							</label>
+						</div>
+						<div class="btn-group pull-right">
+							<ul class="pagination small no-margin"></ul>
+						</div>
+					</div>
+				</div>
 
-	# If including global users, fetch here all local user to later distinguish them
-	$t_local_users = array();
-	if( $f_show_global_users ) {
-		$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
-	}
+				<div class="widget-main no-padding" >
+					<form id="manage-project-users-form" method="post" action="manage_proj_user_update.php">
+						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+						<?php echo form_security_field( 'manage_proj_user_update' ) ?>
+						<div class="table-responsive listjs-table">
+							<table class="table table-striped table-bordered table-condensed">
+								<thead>
+									<tr>
+										<th><div class="sort" role="button" data-sort="key-name"><?php echo lang_get( 'username' ) ?></div></th>
+										<th><div class="sort" role="button" data-sort="key-email"><?php echo lang_get( 'email' ) ?></div></th>
+										<th class="col-md-4"><div class="sort" role="button" data-sort="key-access"><?php echo lang_get( 'access_level' ) ?></div></th>
+										<th><?php echo lang_get( 'remove_link' ) ?></th>
+									</tr>
+								</thead>
+								<tbody class="list">
+		<?php
+		# If including global users, fetch here all local user to later distinguish them
+		$t_local_users = array();
+		if( $f_show_global_users ) {
+			$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
+		}
 
-	$t_token_remove_user = form_security_token('manage_proj_user_remove');
-
-	for( $i = 0; $i < $t_users_count; $i++ ) {
-		$t_user = $t_users[$i];
-?>
-			<tr>
-				<td>
-					<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
-						<?php echo $t_display[$i] ?>
-					</a>
-				</td>
-				<td>
+		foreach( $t_users as $t_user ) {
+			$t_username =  $t_user['display_name'];
+			$t_can_manage_this_user = $t_can_manage_users
+					&& access_has_project_level( $t_user['access_level'], $f_project_id )
+					&& ( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) );
+		?>
+		<tr>
+			<td class="key-name" data-sortvalue="<?php echo $t_username ?>">
+				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
+				<?php echo prepare_user_name( $t_user['id'], false ); ?>
+				</a>
+			</td>
+			<td class="key-email">
+			<?php
+				$t_email = user_get_email( $t_user['id'] );
+				print_email_link( $t_email, $t_email );
+			?>
+			</td>
+			<?php
+			$t_current_level_string = get_enum_element( 'access_levels', $t_user['access_level'] );
+			?>
+			<td class="key-access" data-sortvalue="<?php echo $t_current_level_string ?>">
 				<?php
-					$t_email = user_get_email( $t_user['id'] );
-					print_email_link( $t_email, $t_email );
+				if( $t_can_manage_this_user ) {
+					echo '<div class="editable_access_level">';
+					echo $t_current_level_string . '<span class="hidden unchanged">';
+					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit_link' ) . ']</a>';
+					echo '</span>';
+					$t_arrow = layout_is_rtl() ? 'fa-long-arrow-left' : 'fa-long-arrow-right';
+					echo '<span class="changed_to"> <i class="fa fa-lg ' . $t_arrow . '"></i> ';
+					echo '</span>';
+					echo '<select name="user_access_level[' . $t_user['id'] . ']" class="input-xs user_access_level"'
+							. ' data-original_val="' . $t_user['access_level'] . '" data-user_id="' . $t_user['id'] . '">';
+					# only access levels that are less than or equal current user access level for current project
+					print_project_access_levels_option_list( (int)$t_user['access_level'], $f_project_id );
+					echo '</select>';
+					echo '</div>';
+				} else {
+					echo $t_current_level_string;
+				}
 				?>
-				</td>
-				<td><?php echo get_enum_element( 'access_levels', $t_user['access_level'] ) ?></td>
-				<td class="center"><?php
-					# You need global or project-specific permissions to remove users
-					#  from this project
-					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
-						if( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) ) {
-							print_form_button( 'manage_proj_user_remove.php',
-									lang_get( 'remove_link' ),
-									array ( 'project_id' => $f_project_id, 'user_id' => $t_user['id'] ),
-									$t_token_remove_user );
-							$t_removable_users_exist = true;
-						}
-					} ?>
-				</td>
-			</tr>
-<?php
-	}  # end for
-?>
-		</tbody>
-	</table>
-	</div>
-	</div>
-</div>
-<div class="widget-toolbox padding-8 clearfix">
-<?php
+			</td>
+			<td class="center">
+				<?php
+				# You need global or project-specific permissions to remove users
+				#  from this project
+				if( $t_can_manage_this_user ) {
+					?>
+					<div class="checkbox no-padding no-margin editable_user_delete">
+						<label>
+							<input type="checkbox" name="user_access_delete[]" value="<?php echo $t_user['id'] ?>" class="ace user_access_delete" />
+							<span class="lbl"></span>
+						</label>
+					</div>
+					<?php
+				}
+				?>
+			</td>
+		</tr>
+		<?php
+		}  # end for
+		?>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="widget-toolbox padding-8 clearfix">
+							<div class="form-inline pull-left">
+								<input type="submit" name="submit-apply" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'apply_changes' ) ?>" />
+							</div>
+							<div class="form-inline pull-right">
+								<?php echo form_security_field( 'manage_proj_user_remove' ) ?>
+								<input type="submit" name="btn-remove-all" class="btn btn-primary btn-white btn-round btn-xs"
+									formaction="manage_proj_user_remove.php" value="<?php echo lang_get( 'remove_all_link' ) ?>">
+								<button name="btn-undo-remove-all" class="hidden btn btn-primary btn-white btn-round btn-xs">
+									<?php echo lang_get( 'undo' ). ': ', lang_get( 'remove_all_link' ) ?></button>
+							</div>
+						</div>
+					</form>
+				</div>
+	<?php
+	} // end if user count > 0
+	?>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+	<?php
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
@@ -806,18 +874,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ),
 			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	}
-
-	if( $t_removable_users_exist ) {
-		echo '&#160;';
-		print_form_button( 'manage_proj_user_remove.php',
-				lang_get( 'remove_all_link' ),
-				array( 'project_id' => $f_project_id ),
-				$t_token_remove_user );
-	}
 	?>
-</div>
-</div>
-</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php
@@ -851,7 +911,7 @@ if( count( $t_users ) > 0 ) { ?>
 				<td>
 					<select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10" required><?php
 						foreach( $t_users AS $t_user_id=>$t_display_name ) {
-							echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
+							echo '<option value="', $t_user_id, '">', string_attribute( $t_display_name ), '</option>';
 						} ?>
 					</select>
 				</td>

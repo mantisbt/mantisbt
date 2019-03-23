@@ -26,7 +26,6 @@
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
- * @uses tag_api.php
  */
 
 require_once( 'core.php' );
@@ -34,16 +33,18 @@ require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
-require_api( 'tag_api.php' );
 
 form_security_validate( 'tag_detach' );
 
 $f_tag_id = gpc_get_int( 'tag_id' );
 $f_bug_id = gpc_get_int( 'bug_id' );
 
-tag_bug_detach( $f_tag_id, $f_bug_id );
+$t_data = array(
+	'query' => array( 'issue_id' => $f_bug_id, 'tag_id' => $f_tag_id )
+);
 
-event_signal( 'EVENT_TAG_DETACHED', array( $f_bug_id, array( $f_tag_id ) ) );
+$t_command = new TagDetachCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'tag_detach' );
 

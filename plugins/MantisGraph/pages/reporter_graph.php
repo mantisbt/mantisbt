@@ -23,23 +23,19 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( 'core.php' );
-
-plugin_require_api( 'core/graph_api.php' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
+$t_filter = summary_get_filter();
+print_summary_menu( 'summary_page.php', $t_filter );
 print_summary_submenu();
-
-$t_series_name = lang_get( 'bugs' );
 ?>
 
 <div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -48,7 +44,7 @@ $t_series_name = lang_get( 'bugs' );
 			</h4>
 		</div>
 
-        <div class="col-md-6 col-xs-12" style="padding: 20px;">
+        <div class="col-md-12 col-xs-12" style="padding: 20px;">
             <div class="widget-header widget-header-small">
                 <h4 class="widget-title lighter">
                     <i class="ace-icon fa fa-bar-chart"></i>
@@ -56,8 +52,8 @@ $t_series_name = lang_get( 'bugs' );
                 </h4>
             </div>
 <?php
-            $t_metrics = create_reporter_summary();
-            graph_bar( $t_metrics, lang_get( 'by_reporter' ), $t_series_name );
+            $t_metrics = create_reporter_summary( $t_filter );
+            graph_bar( $t_metrics, 2 /*wfactor*/ );
 ?>
         </div>
     </div>

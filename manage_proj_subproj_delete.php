@@ -31,7 +31,6 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses print_api.php
- * @uses project_hierarchy_api.php
  */
 
 require_once( 'core.php' );
@@ -43,7 +42,6 @@ require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
-require_api( 'project_hierarchy_api.php' );
 
 form_security_validate( 'manage_proj_subproj_delete' );
 
@@ -52,13 +50,16 @@ auth_reauthenticate();
 $f_project_id    = gpc_get_int( 'project_id' );
 $f_subproject_id = gpc_get_int( 'subproject_id' );
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-if ( config_get( 'subprojects_enabled' ) == OFF ) {
-	access_denied();
-}
+$t_data = array(
+	'query' => array(
+		'project_id' => (int)$f_project_id,
+		'subproject_id' => (int)$f_subproject_id
+	)
+);
 
-project_hierarchy_remove( $f_subproject_id, $f_project_id );
+$t_command = new ProjectHierarchyDeleteCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_subproj_delete' );
 

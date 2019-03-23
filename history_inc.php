@@ -107,7 +107,7 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 				<?php print_user( $t_item['userid'] ) ?>
 			</td>
 			<td class="small-caption">
-				<?php echo string_display( $t_item['note'] ) ?>
+				<?php echo string_display_line( $t_item['note'] ) ?>
 			</td>
 			<td class="small-caption">
 				<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>

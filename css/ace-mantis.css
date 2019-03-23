@@ -147,11 +147,19 @@
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .input-xs {
+.widget-toolbar > .widget-menu a.btn-xs {
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.widget-toolbar > .widget-menu form {
+    display: inline-block;
+}
+.widget-toolbar > .widget-menu .input-xs {
     line-height: 20px;
 }
 
-.widget-toolbar > .widget-menu > .btn-xs {
+.widget-toolbar > .widget-menu .btn-xs {
     padding: 2px 5px;
 }
 
@@ -266,14 +274,14 @@ pre {
 
 .input-sm {
     width: 90px !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 4px 6px !important;
 }
 
 .input-xs {
     width: auto !important;
-    display: inline-block !important;
+    /*display: inline-block !important;*/ /* removed because it messes with js hide/show capabilities */
     vertical-align: middle !important;
     padding: 1px 2px !important;
 }
@@ -512,6 +520,10 @@ input.typeahead.scrollable ~ .tt-menu {
 	margin: 0 1px 0 0;
 }
 
+.fa-xs-top {
+	font-size: 60%;
+	vertical-align: top;
+}
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

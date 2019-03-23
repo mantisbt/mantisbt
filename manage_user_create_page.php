@@ -49,7 +49,7 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 layout_page_header();
 

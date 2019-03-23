@@ -130,7 +130,7 @@ foreach( $t_custom_group_actions as $t_custom_group_action ) {
 # Check if user selected to update a custom field.
 $t_custom_fields_prefix = 'custom_field_';
 if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
-	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
+	$t_custom_field_id = (int)substr( $f_action, mb_strlen( $t_custom_fields_prefix ) );
 	$f_action = 'CUSTOM';
 	$t_event_params['action'] = $f_action;
 }
@@ -330,11 +330,11 @@ if( $t_multiple_projects ) {
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
 				case 'UP_TARGET_VERSION':
-					print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
+					print_version_option_list( '', $t_projects, VERSION_FUTURE, true );
 					break;
 				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
-					print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
+					print_version_option_list( '', $t_projects, VERSION_ALL, true );
 					break;
 			}
 
@@ -409,7 +409,7 @@ if( $t_multiple_projects ) {
 						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
-				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+				echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
 			}
 ?>
 					</td>

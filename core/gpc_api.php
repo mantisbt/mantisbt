@@ -372,16 +372,16 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	if( false === $p_expire ) {
 		$p_expire = 0;
 	} else if( true === $p_expire ) {
-		$t_cookie_length = config_get( 'cookie_time_length' );
+		$t_cookie_length = config_get_global( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}
 
 	if( null === $p_path ) {
-		$p_path = config_get( 'cookie_path' );
+		$p_path = config_get_global( 'cookie_path' );
 	}
 
 	if( null === $p_domain ) {
-		$p_domain = config_get( 'cookie_domain' );
+		$p_domain = config_get_global( 'cookie_domain' );
 	}
 
 	return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain, $g_cookie_secure_flag_enabled, true );
@@ -396,10 +396,10 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
  */
 function gpc_clear_cookie( $p_name, $p_path = null, $p_domain = null ) {
 	if( null === $p_path ) {
-		$p_path = config_get( 'cookie_path' );
+		$p_path = config_get_global( 'cookie_path' );
 	}
 	if( null === $p_domain ) {
-		$p_domain = config_get( 'cookie_domain' );
+		$p_domain = config_get_global( 'cookie_domain' );
 	}
 
 	if( isset( $_COOKIE[$p_name] ) ) {
@@ -464,9 +464,16 @@ function gpc_make_array( $p_var_name ) {
  * @return boolean
  */
 function gpc_string_to_bool( $p_string ) {
-	if( 0 == strcasecmp( 'off', $p_string ) || 0 == strcasecmp( 'no', $p_string ) || 0 == strcasecmp( 'false', $p_string ) || 0 == strcasecmp( '', $p_string ) || 0 == strcasecmp( '0', $p_string ) ) {
-		return false;
-	} else {
-		return true;
+	$t_value = trim( strtolower( $p_string ) );
+	switch ( $t_value ) {
+		case 'off':
+		case 'no':
+		case 'n':
+		case 'false':
+		case '0':
+		case '':
+			return false;
+		default:
+			return true;
 	}
 }

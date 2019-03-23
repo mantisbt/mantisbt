@@ -84,6 +84,11 @@ if( lang_language_exists( $t_lang ) ) {
 	$t_prefs->language = $t_lang;
 }
 
+$t_font = gpc_get_string( 'font_family' );
+if( config_get( 'font_family', null, $f_user_id, ALL_PROJECTS ) != $t_font ) {
+	config_set( 'font_family', $t_font, $f_user_id, ALL_PROJECTS );
+}
+
 $t_prefs->email_on_new		= gpc_get_bool( 'email_on_new' );
 $t_prefs->email_on_assigned	= gpc_get_bool( 'email_on_assigned' );
 $t_prefs->email_on_feedback	= gpc_get_bool( 'email_on_feedback' );
@@ -130,7 +135,7 @@ if( in_array( $t_timezone, timezone_identifiers_list() ) ) {
 
 event_signal( 'EVENT_ACCOUNT_PREF_UPDATE', array( $f_user_id ) );
 
-user_pref_set( $f_user_id, $t_prefs );
+user_pref_set( $f_user_id, $t_prefs, ALL_PROJECTS );
 
 form_security_purge( 'account_prefs_update' );
 

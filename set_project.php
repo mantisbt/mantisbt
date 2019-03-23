@@ -78,12 +78,12 @@ helper_set_current_project( $f_project_id );
 if( !is_blank( $c_ref ) ) {
 	$t_redirect_url = $c_ref;
 } else if( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
-	$t_redirect_url = config_get( 'default_home_page' );
+	$t_redirect_url = config_get_global( 'default_home_page' );
 } else {
-	$t_home_page = config_get( 'default_home_page' );
+	$t_home_page = config_get_global( 'default_home_page' );
 
 	# Check that referrer matches our address after squashing case (case insensitive compare)
-	$t_path = rtrim( config_get( 'path' ), '/' );
+	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];
@@ -91,10 +91,10 @@ if( !is_blank( $c_ref ) ) {
 		# if view_all_bug_page, pass on filter
 		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
 			$t_source_filter_id = filter_db_get_project_current( $f_project_id );
-			$t_redirect_url = 'view_all_set.php?type=4';
+			$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_GENERALIZE;
 
 			if( $t_source_filter_id !== null ) {
-				$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
+				$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_LOAD . '&source_query_id=' . $t_source_filter_id;
 			}
 		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
 			switch( $t_referrer_page ) {

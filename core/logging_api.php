@@ -78,64 +78,7 @@ function log_event( $p_level, $p_msg ) {
 		$t_msg = $p_msg;
 	}
 
-	$t_backtrace = debug_backtrace();
-	$t_caller = '';
-	if( $p_level == LOG_PLUGIN ) {
-		$t_caller .= plugin_get_current() . ' ';
-		# remove the trace step for plugin.php::include()
-		# so we will consider the included plugin page as the base script
-		$t_trace_last = end( $t_backtrace );
-		if( isset( $t_trace_last['function'] ) && $t_trace_last['function'] == 'include' ) {
-			array_pop( $t_backtrace );
-		}
-		# If plugin_log_event() was used, remove that trace step, so that we can
-		# later retrieve the actual function that started the logging
-		# Set here the file and line depending on how this was called
-		if( isset( $t_backtrace[1]['function'] ) && $t_backtrace[1]['function'] == 'plugin_log_event' ) {
-			$t_caller .= basename( $t_backtrace[1]['file'] );
-			$t_caller .= ':' . $t_backtrace[1]['line'];
-			unset( $t_backtrace[1] );
-			$t_backtrace = array_values( $t_backtrace );
-		} else {
-			$t_caller .= basename( $t_backtrace[0]['file'] );
-			$t_caller .= ':' . $t_backtrace[0]['line'];
-		}
-	} else {
-		$t_caller .= basename( $t_backtrace[0]['file'] );
-		$t_caller .= ':' . $t_backtrace[0]['line'];
-	}
-
-	# Is this called from another function?
-	if( isset( $t_backtrace[1] ) ) {
-		if( $p_level == LOG_DATABASE ) {
-			if( isset( $t_backtrace[2] ) && $t_backtrace[2]['function'] == 'call_user_func_array' ) {
-				$t_caller = basename( $t_backtrace[3]['file'] );
-				$t_caller .= ':' . $t_backtrace[3]['line'];
-				$t_caller .= ' ' . $t_backtrace[3]['function'] . '()';
-			} else if( $t_backtrace[1]['function'] == 'db_query' ) {
-				$t_caller = basename( $t_backtrace[1]['file'] );
-				$t_caller .= ':' . $t_backtrace[1]['line'];
-				if( isset( $t_backtrace[2] ) ) {
-					$t_caller .= ' ' . $t_backtrace[2]['function'] . '()';
-				} else {
-					$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-				}
-			}
-		} else {
-			if( isset(  $t_backtrace[1]['class'] ) ) {
-				$t_caller .= ' ' . $t_backtrace[1]['class'] . '::' . $t_backtrace[1]['function'] . '()';
-			} else {
-				$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
-			}
-		}
-	} else {
-		# or from a script directly?
-		# ignore plugin logs, since its page is included via plugin.php, the script name
-		# will always be plugin.php, which is not very useful
-		if( $p_level != LOG_PLUGIN ) {
-			$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
-		}
-	}
+	$t_caller = log_get_caller( $p_level );
 
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
@@ -213,7 +156,7 @@ function log_print_to_page() {
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
 		$t_total_queries_count = 0;
-		$t_total_event_count = count( $g_log_events );
+		$t_total_event_count = $g_log_events === null ? 0 : count( $g_log_events );
 
 
 		echo "<div class=\"space-10\"></div>";
@@ -302,4 +245,108 @@ function log_print_to_page() {
 
 		echo "<!--END Mantis Debug Log Output-->\n\n";
 	}
+}
+
+/**
+ * Builds a string with information from the call backtrace of current logging action
+ * The output format is, where available:
+ *    {plugin} {file}:{line} {class}[::|->]{function}
+ *
+ * Some of the actual backtrace is removed to get more informative line to the user.
+ * The log type is used to selectively remove some internal call traces.
+ *
+ * @param integer $p_level	Log level type constant
+ * @return string	Output string with caller information
+ */
+function log_get_caller( $p_level = null ) {
+	$t_full_backtrace = debug_backtrace();
+	$t_backtrace = $t_full_backtrace;
+	$t_root_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+
+	# Remove top trace, as it's this function
+	unset( $t_backtrace[0] );
+
+	# Remove trace step from the include in plugin.php
+	# if any log is triggered from the body of a plugin page, we don't want
+	# to show the caller function "include()" from plugin.php
+	$t_last = end( $t_backtrace );
+	$t_last_key = key( $t_backtrace );
+	if( isset( $t_last['function'] )
+		&& $t_last['function'] == 'include'
+		&& $t_last['file'] == $t_root_path . 'plugin.php'
+		) {
+		unset( $t_backtrace[$t_last_key] );
+		unset( $t_full_backtrace[$t_last_key] );
+	}
+
+	# Iterate over the backtrace and clean up some steps to show a cleaner info
+	foreach( $t_backtrace as $t_index => $t_step ) {
+
+		# Remove special cases of steps for each log type
+		switch( $p_level ) {
+			# For plugin logs, we want to hide the plugin api calls
+			case LOG_PLUGIN:
+				if( isset( $t_step['function'] ) ) {
+					# Remove trace step executed for plugin_log_event()
+					if( $t_step['function'] == 'plugin_log_event'
+						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/plugin_api.php'
+						) {
+						unset( $t_backtrace[$t_index-1] );
+						continue 2; # next foreach
+					}
+				}
+				break;
+
+			# For database logs, we want to hide all the intermediate db api calls
+			case LOG_DATABASE:
+				# Remove trace steps that are executed inside DbQuery class, or inherited classes
+				if( isset( $t_step['class'] ) && (
+					$t_step['class'] == 'DbQuery'
+					|| is_subclass_of( $t_step['class'], 'DbQuery', true )
+					) ) {
+					unset( $t_backtrace[$t_index-1] );
+					continue 2; # next foreach
+				}
+				if( isset( $t_step['function'] ) ) {
+					# Remove trace step executed for db_query() or db_query_bound()
+					if( ( $t_step['function'] == 'db_query' || $t_step['function'] == 'db_query_bound' )
+						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/database_api.php'
+						) {
+						unset( $t_backtrace[$t_index-1] );
+						continue 2; # next foreach
+					}
+				}
+				break;
+		}
+
+		# shortcut break the loop as soon as there is a step that has not been deleted.
+		reset( $t_backtrace );
+		$t_first_key = key( $t_backtrace );
+		# note, we are deleting steps at <current index> - 1
+		# this section is only reached when no deletion has been performed
+		if( $t_index > $t_first_key ) {
+			break;
+		}
+	}
+
+	# At this point, first step in the cleaned backtrace is the one we want to show
+	$t_step = reset( $t_backtrace);
+	$t_step_key = key( $t_backtrace );
+	$t_caller_file = basename( $t_step['file'] );
+	$t_caller_line = $t_step['line'];
+	$t_caller_function = '';
+	$t_caller_class = '';
+	$t_caller_plugin = ( LOG_PLUGIN == $p_level ) ? plugin_get_current() . ' ' : '';
+	# Get the function that called this, from the next backtrace step, if it exists
+	if( isset( $t_full_backtrace[$t_step_key+1] ) ) {
+		$t_caller_function = $t_full_backtrace[$t_step_key+1]['function'] . '()';
+		if( isset( $t_full_backtrace[$t_step_key+1]['class'] ) ) {
+			$t_caller_class = $t_full_backtrace[$t_step_key+1]['class'];
+			$t_caller_class .= $t_full_backtrace[$t_step_key+1]['type'];
+		}
+	}
+
+	$t_caller = $t_caller_plugin . $t_caller_file . ':' . $t_caller_line . ' '
+			. $t_caller_class . $t_caller_function;
+	return $t_caller;
 }

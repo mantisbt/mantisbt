@@ -91,3 +91,4 @@ $s_plugin_MantisGraph_graph_page = 'Visa ärendehistorik som graf';
 $s_plugin_MantisGraph_graph_topdev = 'Populära utvecklare efter åtgärdade ärenden';
 $s_plugin_MantisGraph_graph_opendev = 'Utvecklare efter öppna ärenden';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Populära rapportörer efter åtgärdade ärenden';
+$s_plugin_MantisGraph_other_categories = 'andra kategorier (%d)';

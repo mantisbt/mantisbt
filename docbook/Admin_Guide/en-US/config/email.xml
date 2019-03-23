@@ -24,6 +24,13 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_from_name</term>
+			<listitem>
+				<para>The sender name of all emails sent by MantisBT. Mantis Bug Tracker
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_return_path_email</term>
 			<listitem>
 				<para>Email address to receive bounced emails.</para>
@@ -247,7 +254,7 @@ $g_notify_flags['new'] = array(
 			<term>$g_email_ensure_unique</term>
 			<listitem>
 				<para>
-					When enabled, the uniqueness of email addresses will be inforced for new
+					When enabled, the uniqueness of email addresses will be enforced for new
 					users as well as updates to existing ones.  Note that there can be duplicate
 					emails before this option was turned ON.  Default is ON.
 				</para>
@@ -446,6 +453,12 @@ $g_notify_flags['new'] = array(
 				<para>This is usually the same as your g_from_email. For example
     				noreply@example.com 
 				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_retry_in_days</term>
+			<listitem>
+				<para>Duration (in days) to retry failed emails before deleting them from queue.  Default 7 days.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

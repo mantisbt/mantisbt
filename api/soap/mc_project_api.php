@@ -23,6 +23,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Use a standard filter to get issues associated with the specified user.
  *
@@ -39,7 +41,7 @@
  * @param object  $p_target_user AccountData for target user, can include id, name, or both.
  * @param integer $p_page_number The page to return (1 based).
  * @param integer $p_per_page    Number of issues per page.
- * @return array a page of matching issues.
+ * @return array|RestFault|SoapFault a page of matching issues or error.
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -64,6 +66,14 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	$t_show_sticky = true;
 
 	if( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+		# If user is filtering on handlers, then they must have access to view handlers
+		if( $t_target_user_id != $t_user_id && $t_target_user_id != NO_USER ) {
+			$t_view_handler_access = config_get( 'view_handler_threshold', null, $t_user_id, $p_project_id );
+			if( !access_has_project_level( $t_view_handler_access, $p_project_id, $t_user_id ) ) {
+				return ApiObjectFactory::faultForbidden( 'Issue handlers are not visible to user.' );
+			}
+		}
+
 		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
 	} else if( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		# target id 0 for reporter doesn't make sense.
@@ -78,7 +88,9 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 		return ApiObjectFactory::faultBadRequest( 'Unknown filter type \'' . $p_filter_type . '\'.' );
 	}
 
-	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
+	$t_rows = filter_get_bug_rows(
+		$p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter,
+		$p_project_id, $t_user_id, $t_show_sticky );
 
 	$t_result = array();
 
@@ -431,8 +443,6 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  * @return integer  The id of the created version.
  */
 function mc_project_version_add( $p_username, $p_password, stdClass $p_version ) {
-	global $g_project_override;
-
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -442,54 +452,28 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	$p_version = ApiObjectFactory::objectToArray( $p_version );
 
 	$t_project_id = $p_version['project_id'];
-	$g_project_override = $t_project_id;
-	$t_name = $p_version['name'];
-	$t_released = $p_version['released'];
-	$t_description = $p_version['description'];
-	$t_date_order =  $p_version['date_order'];
-	if( is_blank( $t_date_order ) ) {
-		$t_date_order = null;
-	} else {
-		$t_date_order = strtotime( $t_date_order );
-	}
-
-	$t_obsolete = isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
-
-	if( is_blank( $t_project_id ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Mandatory field "project_id" was missing' );
-	}
-
-	if( !project_exists( $t_project_id ) ) {
-		return ApiObjectFactory::faultNotFound( 'Project \'' . $t_project_id . '\' does not exist.' );
-	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
+	$t_data = array(
+		'query' => array(
+			'project_id' => $t_project_id,
+		),
+		'payload' => array(
+			'name' => $p_version['name'],
+			'description' => $p_version['description'],
+			'released' => $p_version['released'],
+			'obsolete' => isset( $p_version['obsolete'] ) ? $p_version['obsolete'] : false,
+			'timestamp' => $p_version['date_order'],
+		)
+	);
 
-	if( is_blank( $t_name ) ) {
-		return ApiObjectFactory::faultBadRequest( 'Mandatory field "name" was missing' );
-	}
+	$t_command = new VersionAddCommand( $t_data );
+	$t_result = $t_command->execute();
 
-	if( !version_is_unique( $t_name, $t_project_id ) ) {
-		return ApiObjectFactory::faultConflict( 'Version exists for project' );
-	}
-
-	if( $t_released === false ) {
-		$t_released = VERSION_FUTURE;
-	} else {
-		$t_released = VERSION_RELEASED;
-	}
-
-	if( version_add( $t_project_id, $t_name, $t_released, $t_description, $t_date_order, $t_obsolete ) ) {
-		return version_get_id( $t_name, $t_project_id );
-	}
-
-	return null;
+	return $t_result['id'];
 }
 
 /**
@@ -634,6 +618,110 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 }
 
 /**
+ * Validate custom fields before creating/updating issues.
+ *
+ * @param integer $p_project_id The project id.
+ * @param array   $p_custom_fields The custom fields, may be not set.
+ * @return bool|SoapFault|RestFault true or error.
+ */
+function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) {
+	# Load custom field definitions
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
+	$t_custom_field_defs = array();
+	foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
+		$t_def = custom_field_get_definition( $t_custom_field_id );
+		$t_custom_field_defs[$t_custom_field_id] = $t_def;
+	}
+
+	$fn_normalize_name = function( $p_name, $p_custom_field_defs ) {
+		foreach( $p_custom_field_defs as $t_custom_field_def ) {
+			if( strcasecmp( $t_custom_field_def['name'], $p_name ) == 0 ) {
+				return $t_custom_field_def['name'];
+			}
+		}
+
+		return $p_name;
+	};
+
+	$t_custom_field_values = array();
+	if( isset( $p_custom_fields ) ) {
+		foreach( $p_custom_fields as $t_custom_field ) {
+			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
+
+			if( !isset( $t_custom_field['value'] ) ) {
+				throw new ClientException(
+					'Custom field has no value specified.',
+					ERROR_EMPTY_FIELD,
+					"custom_field['value']"
+				);
+			}
+
+			if( !isset( $t_custom_field['field'] ) ) {
+				throw new ClientException(
+					'Custom field with no specified id or name.',
+					ERROR_EMPTY_FIELD,
+					"custom_field['field']"
+				);
+			}
+
+			$t_custom_field['field'] = ApiObjectFactory::objectToArray( $t_custom_field['field'] );
+
+			if( isset( $t_custom_field['field']['id'] ) ) {
+				$t_def = $t_custom_field_defs[(int)$t_custom_field['field']['id']];
+				$t_custom_field_values[$t_def['name']] = $t_custom_field['value'];
+				continue;
+			}
+
+			if( isset( $t_custom_field['field']['name'] ) ) {
+				$t_name = $fn_normalize_name( $t_custom_field['field']['name'], $t_custom_field_defs );
+				$t_custom_field_values[$t_name] = $t_custom_field['value'];
+				continue;
+			}
+
+			throw new ClientException(
+				'Custom field with no specified id or name.',
+				ERROR_EMPTY_FIELD,
+				"custom_field['field']['id']"
+			);
+		}
+	}
+
+	# Validate the custom fields before adding the bug.
+	foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
+		# Skip custom fields that user doesn't have access to write.
+		if( !custom_field_has_write_access_to_project( $t_custom_field_id, $p_project_id ) ) {
+			continue;
+		}
+
+		$t_def = $t_custom_field_defs[$t_custom_field_id];
+		$t_name = custom_field_get_field( $t_custom_field_id, 'name' );
+
+		# Produce an error if the field is required but wasn't posted
+		if( $t_def['require_report'] ) {
+			if( !isset( $t_custom_field_values[$t_name] ) ||
+			    is_blank( $t_custom_field_values[$t_name] ) ) {
+				throw new ClientException(
+					"Mandatory field '$t_name' is missing.",
+					ERROR_EMPTY_FIELD,
+					array( $t_name )
+				);
+			}
+		}
+
+		if( isset( $t_custom_field_values[$t_name] ) &&
+		    !custom_field_validate( $t_custom_field_id, $t_custom_field_values[$t_name] ) ) {
+			throw new ClientException(
+				"Invalid custom field '$t_name' value.",
+				ERROR_EMPTY_FIELD,
+				array( $t_name )
+			);
+		}
+	}
+
+	return true;
+}
+
+/**
  * Get the custom fields that belong to the specified project.
  *
  * @param integer $p_project_id The id of the project to retrieve the custom fields for.
@@ -746,7 +834,9 @@ function mci_custom_field_type_name( $p_type_id ) {
  * @return array The project versions.
  */
 function mci_project_versions( $p_project_id ) {
-	$t_versions = version_get_all_rows( $p_project_id, /* inherit */ null );
+	# use null, null as the fastest way (no additional where clause in query)
+	# to get all released / non-released and obsolete / non-obsolete versions
+	$t_versions = version_get_all_rows( $p_project_id, null, null );
 	$t_results = array();
 
 	foreach( $t_versions as $t_version ) {
@@ -776,15 +866,19 @@ function mci_project_categories( $p_project_id ) {
 	$t_results = array();
 
 	foreach( $t_categories as $t_category ) {
+		$t_project_id = (int)$t_category['project_id'];
 		$t_result = array(
 			'id' => (int)$t_category['id'],
 			'name' => $t_category['name'],
-			'project' => array( 'id' => (int)$t_category['project_id'], 'name' => $t_category['project_name'] ),
+			'project' => array( 'id' => $t_project_id, 'name' => $t_category['project_name'] ),
 		);
 
+		# Do access check here to take into consider the project id that the category is associated with
+		# in case of inherited categories.
 		$t_default_handler_id = (int)$t_category['user_id'];
-		if( $t_default_handler_id != 0 ) {
-			$t_result['default_handler'] = mci_user_get( $t_default_handler_id );
+		if( $t_default_handler_id != 0 &&
+		    access_has_project_level( config_get( 'manage_project_threshold', null, null, $t_project_id ), $t_project_id ) ) {
+			$t_result['default_handler'] = mci_account_get_array_by_id( $t_default_handler_id );
 		}
 
 		$t_results[] = $t_result;
@@ -924,7 +1018,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
  */
 function mci_project_as_array_by_id( $p_project_id ) {
 	$t_result = array();
-	$t_result['id'] = $p_project_id;
+	$t_result['id'] = (int)$p_project_id;
 	$t_result['name'] = project_get_name( $p_project_id );
 	return $t_result;
 }
@@ -1207,23 +1301,13 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 
 	$t_display = array();
 	$t_sort = array();
-	$t_show_realname = ( ON == config_get( 'show_realname' ) );
-	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+
 	foreach( $t_users as $t_user ) {
-		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = strtolower( $t_user_name );
-		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
-			$t_user_name = string_attribute( $t_user['realname'] );
-			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );
-				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			} else {
-				$t_sort_name = strtolower( $t_user_name );
-			}
-		}
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		$t_user_name = user_get_name_from_row( $t_user );
+		$t_display[] = string_attribute( $t_user_name );
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
+
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
 	$t_result = array();

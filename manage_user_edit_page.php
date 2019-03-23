@@ -85,7 +85,7 @@ $t_user = user_get_row( $t_user_id );
 # current user.
 access_ensure_global_level( $t_user['access_level'] );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 layout_page_header();
 

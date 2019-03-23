@@ -78,9 +78,7 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 	# Attempt to use mcrypt_create_iv - this is built into newer versions of php on windows
 	# if the mcrypt extension is enabled on Linux, it takes random data from /dev/urandom
 	if( !isset( $t_random_string ) ) {
-		if( function_exists( 'mcrypt_create_iv' )
-			&& ( version_compare( PHP_VERSION, '5.3.7' ) >= 0 || !is_windows_server() )
-		) {
+		if( function_exists( 'mcrypt_create_iv' ) ) {
 			$t_random_bytes = mcrypt_create_iv( $p_bytes, MCRYPT_DEV_URANDOM );
 			if( $t_random_bytes !== false && strlen( $t_random_bytes ) === $p_bytes ) {
 				$t_random_string = $t_random_bytes;

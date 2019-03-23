@@ -38,6 +38,8 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
+ * @author Banjo
  * @author Bithunter
  * @author Elisardojm
  * @author Fitoschido
@@ -340,6 +342,7 @@ $s_email_on_priority_change = 'Enviar un correo en caso de cambio da prioridade'
 $s_email_bugnote_limit = 'Enviar un correo en caso de límite de notas';
 $s_email_full_issue_details = 'Enviar por correo todos os detalles do informe';
 $s_language = 'Lingua';
+$s_font_family = 'Familia de fontes';
 $s_update_prefs_button = 'Actualizar as preferencias';
 $s_reset_prefs_button = 'Restablecer as preferencias';
 $s_timezone = 'Fuso horario';
@@ -377,7 +380,6 @@ $s_sponsor_show = 'Mostrar todos';
 $s_payment_updated = 'A información de pago foi actualizada.';
 $s_account_updated_msg = 'A súa conta foi actualizada con éxito...';
 $s_email_updated = 'O enderezo de correo electrónico foi actualizado con éxito';
-$s_realname_duplicated = 'O nome real é usado por outro usuario';
 $s_realname_updated = 'O nome real foi actualizado con éxito';
 $s_password_updated = 'O contrasinal foi actualizado con éxito';
 $s_multiple_projects = 'Os problemas que seleccionou son de diferentes proxectos. Os parámetros de embaixo reflicten as configuracións de todos os proxectos. Se isto é incorrecto, por favor, repita o seu cambio cun número menor de problemas seleccionados.';
@@ -582,6 +584,7 @@ $s_date_created = 'Data de creación';
 $s_last_visit = 'Última visita';
 $s_last_visit_label = 'Última visita:';
 $s_edit_user_link = 'Editar o usuario';
+$s_search_user_hint = 'Nome de usuario, nome real ou enderezo de correo electrónico';
 $s_separate_list_items_by = '(separar os elementos da lista por "%1$s")';
 $s_config_all_projects = 'Nota: Estes axustes afectan a todos os proxectos, a menos que superen o nivel do proxecto.';
 $s_config_project = 'Nota: Estes axustes só afectan ao proxecto %1$s.';
@@ -897,6 +900,7 @@ $s_total_time = 'Tempo total';
 $s_developer_stats = 'Estatísticas dos desenvolvedores';
 $s_reporter_stats = 'Estatísticas dos informadores';
 $s_orct = '(abertos/resoltos/pechados/total)';
+$s_summary_header = 'abertos/resoltos/pechados/total/proporción de resoltos/proporción';
 $s_any = 'calquera';
 $s_all = 'todos';
 $s_show = 'Mostrar';
@@ -1066,6 +1070,7 @@ $s_bug_created_from = 'Problema xerado desde';
 $s_copy_from_parent = 'Copiar os datos adicionais do problema principal';
 $s_copy_notes_from_parent = 'Copiar as notas da incidencia';
 $s_copy_attachments_from_parent = 'Copiar os datos adxuntos';
+$s_with = 'con';
 $s_viewing_bug_relationship_graph_title = 'Gráfica de relacións';
 $s_viewing_bug_dependency_graph_title = 'Gráfica de dependencias';
 $s_relation_graph = 'Gráfica de relación';
@@ -1229,6 +1234,8 @@ $s_month_october = 'outubro';
 $s_month_november = 'novembro';
 $s_month_december = 'decembro';
 $s_timeline_issue_created = '<span class="username">%1$s</span> creou a incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> anexou o ficheiro <em>%3$s</em> na incidencia <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> eliminou o ficheiro <em>%3$s</em> da incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> fixo un comentario sobre a incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> está monitorizando a incidencia <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> deixou de monitorizar a incidencia <span class="issue_id">%2$s</span>';
@@ -1252,6 +1259,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de ficheiro non está permitido.'
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O directorio non existe. Por favor, comprobe as características do proxecto.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Xa existe un proxecto con ese nome.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'O campo necesario "%1$s" estaba baleiro. Por favor, comprobe o texto de entrada.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor non válido de \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protexida. Non ten permiso para acceder a ela ata que a protección da conta sexa retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acceso rexeitado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Fallou a carga do ficheiro. O ficheiro non pode ser lido por MantisBT. Por favor, comprobe as características do proxecto.';
@@ -1264,14 +1272,17 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'A opción "%1$s" da configu
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Non se pode establecer a opción de configuración "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'A corda "%1$s" non foi atopada.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Non se atopou a nota.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'O proxecto "%1$s" non foi atopado.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'O campo "%1$s" da base de datos non foi atopado.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'O autor do problema non ten o acceso suficiente para cambiar o problema a este estado.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'O proxecto "%1$s" non foi atopado.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Xa existe un proxecto con ese nome. Por favor, volva atrás e insira un nome diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Especificou o nome dun proxecto inválido. Os nomes de proxectos non poden estar en branco.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación vai crear un bucle na xerarquía do subproxecto.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Non se atopou ningún usuario chamado "%1$s".';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Non se atopou ningún usuario co identificador "%1$d".';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A información de rexistro almacenada polo seu navegador é inválida. Se cadra a súa conta foi borrada?';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'Non se atopou ningún usuario con correo electrónico "%1$s".';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Non se atopou ningún usuario co nome real "%1$s".';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A información de rexistro almacenada polo seu navegador non é válida. Se cadra a súa conta foi borrada?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferencias deste usuario non puideron ser atopadas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Non se atopou o elemento das novas.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'O contrasinal non coincide coa verificación.';
@@ -1281,7 +1292,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Agardábase unha corda pero recibiu
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Agardábase un número para %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Non se atopou o problema "%1$d".';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Non se atopou o filtro "%1$s".';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'O filtro que está intentando usar é vello de máis para ser actualizado. Por favor, vólvao crear.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'O enderezo de correo electrónico non é válido.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Non se permite o uso de enderezos de correo electrónico "descartables".';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Non se atopou o perfil.';
@@ -1297,8 +1307,8 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Non se atopou o campo personaliza
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Este é un nome duplicado.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Polo menos un proxecto aínda emprega este campo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor inválido para o campo "%1$s".';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definición inválida para o campo personalizado.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propiedade inválida para o campo personalizado (%1$s).';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definición non válida para o campo personalizado.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propiedade non válida para o campo personalizado (%1$s).';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = 'O campo personalizado "%1$s" (identificador %2$s) non está vinculado ó proxecto activo.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Fallou a autenticación LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Fallou a conexión ao servidor LDAP.';
@@ -1320,7 +1330,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Non se atopou a versión "%1$s".';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuario é inválido. Os nomes de usuario só poden conter letras latinas, números, espazos, guións, puntos, signos máis e guións baixos.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'O nome real do usuario é inválido.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuario non ten o nivel de acceso requirido.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Nome real" elixido coincide co nome de rexistro doutro usuario. Por favor, escolla outro.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'O soporte do patrocinio non esta activado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'O patrocinio %1$d non foi atopado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'O patrocinio (%1$s) é inferior á cantidade mínima (%2$s).';
@@ -1329,7 +1338,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acceso rexeita
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'O patrocinador non facilitou un enderezo de correo electrónico. Por favor, actualice o seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opción da configuración "%1$s" ten o valor inválido "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A acción non pode ser levada a cabo porque o problema "%1$d" é de só lectura.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Esta incidencia non pode resolverse ata que se resolvan todas as incidencias dependentes dela.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Esta incidencia non pode resolverse ata que se resolvan todas as incidencias dependentes dela. Solicite ó seu administrador de sistema o acceso ó proxecto se non ve ningunha incidencia dependente.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Non se atopou a relación.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Acceso rexeitado: O problema %1$d require un nivel de acceso maior.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Un problema non pode estar relacionado consigo mesmo.';
@@ -1339,7 +1348,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Debe proporcionar un en
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A información proporcionada non coincide con ningunha conta rexistrada!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O enderezo URL de confirmación non é válido ou xa foi usado. Por favor, rexístrese de novo.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Alcanzouse o número máximo de solicitudes en curso. Por favor, póñase en contato co administrador do sistema.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación vai crear un bucle na xerarquía do subproxecto.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Non pode alterar o nivel de acceso da única conta de administrador do sistema. Para levar a cabo a acción que solicitou, antes necesita crear outra conta de administrador.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Erro na páxina de redirección; asegúrese de que non haxa espazos fóra do bloque PHP (&lt;?php ?&gt;) nos ficheiros config_inc.php ou custom_*.php.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Non se pode atopar unha etiqueta con ese nome.';
@@ -1363,7 +1371,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'O formato de ficheiro especificado p
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Houbo un erro descoñecido "%1$s" durante a execución do complemento "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'O campo "%1$s" contén a columna duplicada "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'O campo "%1$s" contén o campo inválido "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Xestor de sesión inválido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A variable "%1$s" da sesión non foi atopada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A súa sesión foi invalidada.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Pase de seguridade do formulario inválido. Isto púidoo causar un tempo de espera excesivo ou que enviase o formulario dúas veces por accidente.';

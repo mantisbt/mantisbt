@@ -55,7 +55,7 @@ header( 'Content-Transfer-Encoding: BASE64;' );
 header( 'Content-Disposition: attachment; filename="' . $t_filename . '"' );
 
 $t_version = MANTIS_VERSION;
-$t_url = config_get( 'path' );
+$t_url = config_get_global( 'path' );
 $t_bug_link = config_get( 'bug_link_tag' );
 $t_bugnote_link = config_get( 'bugnote_link_tag' );
 

@@ -89,6 +89,9 @@ if( $f_master_bug_id > 0 ) {
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 
+	# User can view the master bug
+	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_master_bug_id );
+
 	$t_bug = bug_get( $f_master_bug_id, true );
 
 	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
@@ -174,7 +177,7 @@ if( $f_master_bug_id > 0 ) {
 	$f_severity				= gpc_get_int( 'severity', (int)config_get( 'default_bug_severity' ) );
 	$f_priority				= gpc_get_int( 'priority', (int)config_get( 'default_bug_priority' ) );
 	$f_summary				= gpc_get_string( 'summary', '' );
-	$f_description			= gpc_get_string( 'description', '' );
+	$f_description			= gpc_get_string( 'description', config_get( 'default_bug_description' ) );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
@@ -604,9 +607,9 @@ if( $t_show_attachments ) {
 			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
 				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>">
-					<?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+					<?php echo string_display_line( lang_get_defaulted( $t_def['name'] ) ) ?>
 				</label>
-			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
+			<?php } else { echo string_display_line( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id, $t_def['require_report'] ) ?>
@@ -619,7 +622,7 @@ if( $t_show_attachments ) {
 <?php
 	# File Upload (if enabled)
 	if( $t_show_attachments ) {
-		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+		$t_max_file_size = file_get_max_file_size();
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
 	<tr>
@@ -629,6 +632,7 @@ if( $t_show_attachments ) {
 			<?php print_max_filesize( $t_max_file_size ); ?>
 		</th>
 		<td>
+			<?php print_dropzone_template() ?>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 			<div class="dropzone center" <?php print_dropzone_form_data() ?>>
 				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
@@ -637,7 +641,7 @@ if( $t_show_attachments ) {
 			</div>
 			<div class="fallback">
 				<div class="dz-message" data-dz-message></div>
-			<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
+				<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
 			</div>
 		</td>
 	</tr>

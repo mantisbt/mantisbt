@@ -44,6 +44,7 @@ check_print_test_row(
 	'PHP version ' . phpversion() . ' is currently installed on this server.'
 );
 
+# $t_extensions_required lists the extensions required to run Mantis in general
 $t_extensions_required = array(
 	'date',
 	'hash',
@@ -58,6 +59,43 @@ foreach( $t_extensions_required as $t_extension ) {
 		$t_extension . ' PHP extension is available',
 		extension_loaded( $t_extension ),
 		array( false => 'MantisBT requires the ' . $t_extension . ' extension to either be compiled into PHP or loaded as an extension.' )
+	);
+}
+
+$t_fileinfo_loaded = extension_loaded( 'fileinfo' );
+
+if( config_get_global( 'allow_file_upload' ) ) {
+	check_print_test_row(
+		'Fileinfo PHP extension is available to support file uploads',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+} else {
+	# most of the plugins need this extensions as they use functions plugin_file /  plugin_file_include
+	check_print_test_warn_row(
+		'Fileinfo PHP extension is available to support plugins',
+		$t_fileinfo_loaded,
+		array( false => 'Ensure that the fileinfo extension is installed and enabled' )
+	);
+}
+
+if ( $t_fileinfo_loaded ) {
+	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
+	if( $t_fileinfo_magic_db_file ) {
+		check_print_info_row(
+			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
+			config_get_global( 'fileinfo_magic_db_file' ) );
+		check_print_test_row(
+			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
+			file_exists( $t_fileinfo_magic_db_file ) );
+		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	}
+	check_print_test_row(
+		'Fileinfo extension can find and load a valid magic.db file',
+		$t_finfo !== false,
+		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
 	);
 }
 
@@ -135,9 +173,10 @@ check_print_info_row(
 	check_format_number( ini_get_number( 'post_max_size' ) )
 );
 
+$t_memory_limit = ini_get_number( 'memory_limit' );
 check_print_test_row(
 	'memory_limit php.ini directive is at least equal to the post_max_size directive',
-	ini_get_number( 'memory_limit' ) >= ini_get_number( 'post_max_size' ),
+	$t_memory_limit >= ini_get_number( 'post_max_size' ) || $t_memory_limit == -1,
 	array( false => 'The current value of the memory_limit directive is ' . htmlentities( ini_get_number( 'memory_limit' ) ) . ' bytes. This value needs to be at least equal to the post_max_size directive value of ' . htmlentities( ini_get_number( 'post_max_size' ) ) . ' bytes.' )
 );
 
@@ -190,7 +229,7 @@ $t_vars = array(
 	'date.timezone'
 );
 
-while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
+foreach( $t_vars as $t_var ) {
 	$t_value = ini_get( $t_var );
 	if( $t_value != '' ) {
 		check_print_info_row( 'php.ini directive: ' . $t_var, htmlentities( $t_value ) );

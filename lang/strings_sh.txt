@@ -1,0 +1,419 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Serbo-Croatian (srpskohrvatski / српскохрватски)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Conquistador
+ * @author Vlad5250
+ */
+
+$s_actiongroup_menu_move = 'Premjesti';
+$s_actiongroup_menu_copy = 'Kopiraj';
+$s_actiongroup_menu_assign = 'Dodijeli';
+$s_actiongroup_menu_close = 'Zatvori';
+$s_actiongroup_menu_delete = 'Izbriši';
+$s_actiongroup_menu_resolve = 'Riješi';
+$s_actiongroup_menu_update_priority = 'Ažuriraj prioritet';
+$s_actiongroup_menu_update_status = 'Ažuriraj status';
+$s_actiongroup_menu_update_severity = 'Ažuriraj ozbiljnost';
+$s_actiongroup_menu_update_view_status = 'Ažuriraj vidljivost';
+$s_actiongroup_menu_update_category = 'Ažuriraj kategoriju';
+$s_actiongroup_menu_set_sticky = 'zalijepi/odlijepi';
+$s_actiongroup_menu_update_field = 'Ažuriraj %1$s';
+$s_actiongroup_menu_update_product_version = 'Osvježi verziju proizvoda';
+$s_actiongroup_menu_update_target_version = 'Ažuriraj krajnju verziju';
+$s_actiongroup_menu_update_fixed_in_version = 'Ažuriraj „ispravljen u verziji“';
+$s_actiongroup_menu_update_product_build = 'Ažuriraj sastav proizvoda';
+$s_actiongroup_menu_update_due_date = 'Ažuriraj rok';
+$s_actiongroup_menu_add_note = 'Dodaj bilješku';
+$s_actiongroup_menu_attach_tags = 'Zakači oznake';
+$s_actiongroup_bugs = 'Odabrani problemi';
+$s_actiongroup_error_issue_is_readonly = 'Problem je zatvoren za uređivanje.';
+$s_all_projects = 'Svi projekti';
+$s_move_bugs = 'Premjesti probleme';
+$s_operation_successful = 'Postupak uspješan.';
+$s_operation_warnings = 'Zadatak je završen s upozorenjima.';
+$s_operation_failed = 'Zadatak nije uspješno dovršen.';
+$s_date_order = 'Datumski redoslijed';
+$s_print_all_bug_page_link = 'Ispiši izvještaje';
+$s_csv_export = 'izvoz u CSV';
+$s_excel_export = 'izvoz u Excel';
+$s_login_anonymously = 'Anonimna prijava';
+$s_anonymous = 'Anoniman';
+$s_jump_to_bugnotes = 'Idi na beleške';
+$s_jump_to_history = 'Idi na historiju';
+$s_display_history = 'Prikaži historiju';
+$s_public_project_msg = 'Ovaj projekat je javan. Dostupan je svim korisnicima.';
+$s_private_project_msg = 'Ovaj projekat je ličan. Dostupan je samo administratorima i ručno dodatim korisnicima.';
+$s_access_level_project = 'Stepen pristupa projektu';
+$s_view_submitted_bug_link = 'Pogledaj poslani problem %1$s';
+$s_assigned_projects = 'Dodijeljeni projekti';
+$s_assigned_projects_label = 'Dodijeljeni projekti';
+$s_unassigned_projects_label = 'Nedodijeljeni projekti';
+$s_print = 'Štampaj';
+$s_jump = 'Idi';
+$s_copy_users = 'Kopiraj korisnike';
+$s_copy_categories_from = 'Kopiraj kategorije iz';
+$s_copy_categories_to = 'Kopiraj kategorije u';
+$s_copy_versions_from = 'Kopiraj verzije iz';
+$s_copy_versions_to = 'Kopiraj verzije u';
+$s_copy_users_from = 'Kopiraj korisnike iz';
+$s_copy_users_to = 'Kopiraj korisnike u';
+$s_bug_history = 'Istorija problema';
+$s_field = 'Polje';
+$s_old_value = 'Stara vrijednost';
+$s_new_value = 'Nova vrijednost';
+$s_date_modified = 'Datum mijenjanja';
+$s_bugnote = 'Bilješka';
+$s_change = 'Promijeni';
+$s_bugnote_view_state = 'Vidljivost bilješke';
+$s_bug_monitor = 'Problem se nadgleda';
+$s_bug_end_monitor = 'Zaustavi nadgledanje problema';
+$s_announcement = 'Saopštenje';
+$s_stays_on_top = 'Ostani na vrhu';
+$s_bugnote_link_title = 'Neposredna veza do bijeleške';
+$s_delete_bugnote_button = 'Obriši bijelešku';
+$s_delete_bugnote_sure_msg = 'Želite li da obrišete ovu bijelešku?';
+$s_bug_relationships = 'Odnosi';
+$s_empty_password_sure_msg = 'Korisnik ima praznu lozinku. Jeste li sigurni da tako želite da ostavite?';
+$s_empty_password_button = 'Koristi praznu lozinku';
+$s_reauthenticate_title = 'Provjera';
+$s_reauthenticate_message = 'Posjećujete zaštićenu stranicu, a vaše je dopušteno vrijeme isteklo. Molim potvrdite vašu vjerodostojnost da biste nastavili.';
+$s_no_category = '(nema kategorija)';
+$s_global_categories = 'Globalne kategorije';
+$s_inherit = 'Nasledi kategorije';
+$s_inherit_global = 'Nasledi globalne kategorije';
+$s_inherit_parent = 'Nasledi srodne kategorije';
+$s_update_subproject_inheritance = 'Ažuriraj nasleđe za potprojekti';
+$s_duplicate_of = 'duplikat od';
+$s_has_duplicate = 'ima duplikat';
+$s_related_to = 'povezan sa';
+$s_dependant_on = 'nadređeni od';
+$s_blocks = 'podređeni od';
+$s_new_bug = 'Novi problem';
+$s_bugnote_added = 'Beleška je dodata';
+$s_bugnote_edited = 'Beleška je izmenjena';
+$s_bugnote_deleted = 'Beleška je obrisana';
+$s_summary_updated = 'Kratak opis je ažuriran';
+$s_description_updated = 'Opis je ažuriran';
+$s_additional_information_updated = 'Dodatne informacije su ažurirane';
+$s_steps_to_reproduce_updated = 'Koraci za pozivanje su ažurirani';
+$s_file_added = 'Datoteka je dodata';
+$s_file_deleted = 'Datoteka je obrisana';
+$s_bug_deleted = 'Problem je obrisan';
+$s_make_private = 'Načini ga privatnim';
+$s_make_public = 'Načini ga javnim';
+$s_create_new_project_link = 'Napravi novi projekat';
+$s_login_link = 'Prijava';
+$s_opensearch_id_short = 'Naznaka %s';
+$s_opensearch_id_description = '%s: pretraživanje po naznaci problema';
+$s_opensearch_text_short = 'Tekst %s';
+$s_opensearch_text_description = '%s: pretraživanje cijelog teksta';
+$s_select_option = '(odaberi)';
+$s_bug_actiongroup_access = 'Nemate odgovarajuće dozvole za izvođenje ove radnje.';
+$s_bug_actiongroup_status = 'Ovaj problem ne može da se promijeni u željeno stanje';
+$s_bug_actiongroup_category = 'Ovaj problem ne može da se promijeni u željenu kategoriju';
+$s_bug_actiongroup_handler = 'Traženom korisniku nije dozvoljeno da radi s ovim problemom';
+$s_bug_actiongroup_version = 'Tražena verzija ne postoji u projektu ovog izdanja';
+$s_close_bugs_conf_msg = 'Želite li da zatvorite ove probleme?';
+$s_delete_bugs_conf_msg = 'Želite li da obrišete ove probleme?';
+$s_move_bugs_conf_msg = 'Premjesti probleme u';
+$s_copy_bugs_conf_msg = 'Kopiraj probleme u';
+$s_assign_bugs_conf_msg = 'Dodijeli probleme na';
+$s_resolve_bugs_conf_msg = 'Odaberite riješenje problema';
+$s_priority_bugs_conf_msg = 'Odaberi važnost problema';
+$s_status_bugs_conf_msg = 'Odaberite stanje problema';
+$s_view_status_bugs_conf_msg = 'Odaberite stanje vidljivosti problema';
+$s_category_bugs_conf_msg = 'Odaberite kategoriju problema';
+$s_set_sticky_bugs_conf_msg = 'Želite li da zalepite/odlepite ove probleme?';
+$s_product_version_bugs_conf_msg = 'Ažuriraj verziju proizvoda na';
+$s_fixed_in_version_bugs_conf_msg = 'Ažuriraj „ispravljen u verziji“ na';
+$s_target_version_bugs_conf_msg = 'Ažuriraj krajnju verziju na';
+$s_due_date_bugs_conf_msg = 'Ažuriraj rok na';
+$s_close_group_bugs_button = 'Zatvori probleme';
+$s_delete_group_bugs_button = 'Obriši probleme';
+$s_move_group_bugs_button = 'Premjesti probleme';
+$s_copy_group_bugs_button = 'Kopiraj probleme';
+$s_assign_group_bugs_button = 'Dodijeli probleme';
+$s_resolve_group_bugs_button = 'Riješi probleme';
+$s_priority_group_bugs_button = 'Ažuriraj prioritet';
+$s_status_group_bugs_button = 'Ažuriraj status';
+$s_category_group_bugs_button = 'Ažuriraj kategoriju';
+$s_view_status_group_bugs_button = 'Ažuriraj vidljivost';
+$s_set_sticky_group_bugs_button = 'Zalijepi/odlijepi';
+$s_product_version_group_bugs_button = 'Ažuriraj verziju proizvoda';
+$s_fixed_in_version_group_bugs_button = 'Ažuriraj „ispravljen u verziji“';
+$s_target_version_group_bugs_button = 'Ažuriraj krajnju verziju';
+$s_due_date_group_bugs_button = 'Ažuriraj rok';
+$s_update_severity_title = 'Ažuriraj ozbiljnost';
+$s_update_severity_msg = 'Odaberite ozbiljnost problema';
+$s_update_severity_button = 'Ažuriraj ozbiljnost';
+$s_hide_button = 'Prikaži samo izabrano';
+$s_printing_preferences_title = 'Izaberite polja za štampanje';
+$s_printing_options_link = 'Podešavanja štampanja';
+$s_bugnote_title = 'Zabeležio';
+$s_bugnote_date = 'Datum beleške';
+$s_bugnote_description = 'Opis beleške';
+$s_error_no_proceed = 'Upotrebite dugme „Nazad“ u vašem pregledaču da biste se vratili na prethodnu stranicu. Tamo možete da ispravite nađene probleme, ili pak da izaberete drugu radnju. Možete i da kliknete na neku mogućnost s menija da odmah pređete u novi odeljak.';
+$s_login_error = 'Vaš račun je možda onemogućen ili blokiran, ili ste možda unijeli pogrešno korisničko ime/lozinka .';
+$s_login_cookies_disabled = 'Vaš preglednik ili ne zna kako raditi s kolačićima ili ih jednostavno odbija.';
+$s_go_back = 'Nazad';
+$s_proceed = 'Nastavi';
+$s_switch = 'Prebaci';
+$s_logged_in_as = 'Prijavljen kao';
+$s_prefix_for_deleted_users = 'korisnik';
+$s_administrator = 'administrator';
+$s_myself = 'Ja';
+$s_default_access_level = 'Podrazumevani stepen pristupa';
+$s_issue_status_percentage = 'Stanje problema (%)';
+$s_access_levels_enum_string = '10:posmatrač,25:izvjestilac,40:dograđivač,55:programer,70:rukovodilac,90:administrator';
+$s_no_access = 'nema pristupa';
+$s_project_status_enum_string = '10:u razvoju,30:izdan,50:stabilan,70:zastario';
+$s_project_view_state_enum_string = '10:javna,50:lična';
+$s_view_state_enum_string = '10:javna,50:lična';
+$s_priority_enum_string = '10:nema,20:nizak,30:normalan,40:visok,50:hitan,60:neodložan';
+$s_severity_enum_string = '10:novouspostavene,20:narodno,30:tekst,40:doterivanje,50:malo,60:veliko,70:padanje,80:blokada';
+$s_reproducibility_enum_string = '10:uvijek,30:ponekad,50:slučajno,70:neoprobano,90:neodgovoran,100:neodredljivo';
+$s_status_enum_string = '10:novi,20:treba odziv,30:primljen,40:potvrđen,50:dodijeljen,80:rešen,90:zatvoren';
+$s_resolution_enum_string = '10:otvoren,20:ispravljen,30:ponovo otvoren,40:neodgovoran,50:neispravljiv,60:duplikat,70:nije potrebna promjena,80:odložen,90:ne može da se ispravi';
+$s_projection_enum_string = '10:nema,30:doterivanje,50:mala ispravka,70:velika prerada,90:redizajn';
+$s_eta_enum_string = '10:nema,20:< 1 dan,30:2-3 dana,40:< 1 nedelja,50:< 1 mjesec,60:> 1 mjesec';
+$s_sponsorship_enum_string = '0:Neplaćen,1:Zahtevano plaćenje,2:Plaćen';
+$s_new_account_subject = 'Otvaranje računa';
+$s_new_account_greeting = 'Hvala vam što ste registritali. Imate račun s korisničkim imenom „%1$s“. Da biste završili upis, posetite sledeću URL adresu (mora biti uneta u jednom redu) i postavite svoju lozinku:';
+$s_new_account_greeting_admincreated = 'Korisnik %1$s je otvorio nalog za vas, s korisničkim imenom „%2$s“. Da biste završili upis, posetite sledeću URL adresu (mora biti uneta u jednom redu) i postavite svoju lozinku:';
+$s_new_account_username = 'Korisničko ime:';
+$s_new_account_message = 'Ako niste zatražili registraciju, zanemarite poruku i ništa se neće dogoditi.';
+$s_new_account_do_not_reply = 'Ne odgovarajte na ovu poruku';
+$s_new_account_email = 'E-adresa:';
+$s_new_account_IP = 'IP adresa klijenta:';
+$s_new_account_signup_msg = 'Otvoren je sledeći nalog:';
+$s_reset_request_msg = 'Neko (verovatno vi) je zatražio promjenu lozinke preko e-potvrde. Ako to niste Vi, zanemarite poruku i ništa se neće dogoditi.
+
+Ako promjenu zatražili Vi, posjetite sljedeću URL adresu da biste smijenili lozinku:';
+$s_reset_request_in_progress_msg = 'Ako ste naveli ispravno korisničko ime i e-poštu za vaš račun, to znači da na navedenu adresu već poslana je potvrdna poruka. Nakon primitka poruke slijedite ove upute da biste smijenili lozinku.';
+$s_email_notification_title_for_status_bug_new = 'Sledeći problem sada ima stanje NOVOG (ponovo)';
+$s_email_notification_title_for_status_bug_feedback = 'Sledeći problem zahteva vaš ODZIV.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Sledeći problem je PRIMLJEN.';
+$s_email_notification_title_for_status_bug_confirmed = 'Sledeći problem je POTVRĐEN.';
+$s_email_notification_title_for_status_bug_assigned = 'Sledeći problem je DODELJEN.';
+$s_email_notification_title_for_status_bug_resolved = 'Sledeći problem je REŠEN.';
+$s_email_notification_title_for_status_bug_closed = 'Sledeći problem je ZATVOREN.';
+$s_email_notification_title_for_action_bug_submitted = 'Sledeći problem je POSLAT.';
+$s_email_notification_title_for_action_bug_assigned = 'Sledeći problem je DODELJEN.';
+$s_email_notification_title_for_action_bug_unassigned = 'Sledeći problem je NEDODELJEN.';
+$s_email_notification_title_for_action_bug_reopened = 'Sledeći problem je PONOVO OTVOREN.';
+$s_email_notification_title_for_action_bug_deleted = 'Sledeći problem je OBRISAN.';
+$s_email_notification_title_for_action_bug_updated = 'Sledeći problem je AŽURIRAN.';
+$s_email_notification_title_for_action_sponsorship_added = 'Sledeći problem je SPONZORISAN.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Izmenjeno je pokroviteljstvo sledećeg problema.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Povučeno je pokroviteljstvo sledećeg problema.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Na ovaj problem je dodata BELEŠKA.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Sledeći problem je označen kao DUPLIKAT problema %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Problem %1$s je označen kao DUPLIKAT sledećeg problema.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Sledeći problem je označen kao POVEZAN s problemom %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Sledeći problem je označen kao NADREĐENI problema %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Sledeći problem je označen kao PODREĐENI problema %1$s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Sledeći problem je označen da se više NE DUPLIRA s problemom %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Problem %1$s je uklonjen kao DUPLIKAT sledećeg problema.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Sledeći problem je označen kao NEPOVEZAN s problemom %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Sledeći problem je uklonjen kao NADREĐENI problema %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Sledeći problem je uklonjen kao PODREĐENI problema %1$s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'POVEZANI problem %1$s je REŠEN.';
+$s_email_notification_title_for_action_relationship_child_closed = 'POVEZANI problem %1$s je ZATVOREN.';
+$s_email_notification_title_for_action_related_issue_deleted = 'POVEZANI problem %1$s je OBRISAN.';
+$s_email_notification_title_for_action_monitor = 'Problem %1$s sada nadgleda korisnik %2$s.';
+$s_email_reporter = 'Izvestilac';
+$s_email_handler = 'Dodeljeno';
+$s_email_project = 'Projekat';
+$s_email_bug = 'Naznaka problema';
+$s_email_category = 'Kategorija';
+$s_email_reproducibility = 'Pozivljivost';
+$s_email_severity = 'Ozbiljnost';
+$s_email_priority = 'Prioritet';
+$s_email_status = 'Status';
+$s_email_resolution = 'Rješenje';
+$s_email_duplicate = 'Duplikat';
+$s_email_fixed_in_version = 'Ispravljeno u verziji';
+$s_email_target_version = 'Krajnja verzija';
+$s_email_date_submitted = 'Poslato na';
+$s_email_last_modified = 'Poslednja promjena';
+$s_email_summary = 'Sažetak';
+$s_email_description = 'Opis';
+$s_email_additional_information = 'Dodatne informacije';
+$s_email_steps_to_reproduce = 'Koraci za pozivanje';
+$s_email_tag = 'Oznake';
+$s_email_due_date = 'Krajnji rok';
+$s_account_protected_msg = 'Račun zaštićen. Postavke se ne mogu mijenjati...';
+$s_account_removed_msg = 'Vaš račun je uklonjen...';
+$s_confirm_delete_msg = 'Želite li da obrišete Vaš nalog?';
+$s_delete_account_button = 'Obriši račun';
+$s_manage_profiles_link = 'Profili';
+$s_change_preferences_link = 'Postavke';
+$s_edit_account_title = 'Uredi račun';
+$s_username = 'Korisničko ime';
+$s_username_label = 'Korisničko ime';
+$s_realname = 'Pravo ime';
+$s_realname_label = 'Pravo ime';
+$s_email = 'E-pošta';
+$s_email_label = 'E-pošta';
+$s_password = 'Lozinka';
+$s_new_password = 'Nova lozinka';
+$s_no_password_change = 'Lozinkom upravlja drugi sistem, pa zato ne može da se menja ovde.';
+$s_confirm_password = 'Potvrdite lozinku';
+$s_current_password = 'Trenutna lozinka';
+$s_access_level = 'Stepen pristupa';
+$s_access_level_label = 'Stepen pristupa';
+$s_update_user_button = 'Ažuriraj korisnika';
+$s_verify_warning = 'Podaci vašeg naloga su potvrđeni.';
+$s_verify_change_password = 'Morate ovde da postavite lozinku da biste mogli da se ponovo prijavite.';
+$s_api_tokens_link = 'Izvršnički tokeni';
+$s_api_token_create_form_title = 'Napravi izvršnički token';
+$s_api_token_create_button = 'Napravi izvršnički token';
+$s_api_token_name = 'Naziv tokena';
+$s_api_token_disclose_message = 'Token za pristup izvršniku.';
+$s_api_token_displayed_once = 'Imajte na umu da će se token prikazati samo jednom.';
+$s_api_tokens_title = 'Izvršnički tokeni';
+$s_api_token_revoke_button = 'Oduzmi';
+$s_api_token_never_used = 'Nikad neupotrebljen';
+$s_api_token_revoked = 'Izvršnički token "%s" je oduzet.';
+$s_last_used = 'Zadnje korištene';
+$s_default_account_preferences_title = 'Postavke naloga';
+$s_default_project = 'Podrazumevani projekat';
+$s_refresh_delay = 'Odlaganje osvežavanja';
+$s_minutes = 'minuta';
+$s_redirect_delay = 'Kašnjenje pre preusmeravanja';
+$s_seconds = 'sekundi';
+$s_with_minimum_severity = 'S najmanjom težinom od';
+$s_bugnote_order = 'Smjer sortiranja aktivnosti';
+$s_bugnote_order_asc = 'Rastući';
+$s_bugnote_order_desc = 'Opadajući';
+$s_email_on_new = 'Obaveštavaj o Novim problemu';
+$s_email_on_assigned = 'Obaveštavaj o Promjenu korektora problema';
+$s_email_on_feedback = 'Obaveštavaj me prilikom odziva';
+$s_email_on_resolved = 'Obaveštavaj o Rešenim problemu';
+$s_email_on_closed = 'Obaveštavaj o Zatvorenim problemu';
+$s_email_on_reopened = 'Obaveštavaj o Ponovo otvorenim problemu';
+$s_email_on_bugnote_added = 'Obaveštavaj o Dodavanju beleške';
+$s_email_on_status_change = 'Obaveštavaj o Promenu stanja';
+$s_email_on_priority_change = 'Obaveštavaj o Promenu prioriteta';
+$s_email_bugnote_limit = 'Ograničenje e-mail obaveštenja';
+$s_email_full_issue_details = 'Pošalji sve pojedinosti problema putem e-pošte';
+$s_language = 'Jezik';
+$s_update_prefs_button = 'Ažuriraj preference';
+$s_reset_prefs_button = 'Resetiraj preference';
+$s_timezone = 'Vremenska zona';
+$s_prefs_reset_msg = 'Preference su resetirane...';
+$s_prefs_updated_msg = 'Preference su ažurirane...';
+$s_profile_added_msg = 'Profil dodan...';
+$s_profile_deleted_msg = 'Profil obrisan...';
+$s_edit_profile_title = 'Uredi profil';
+$s_platform = 'Platforma';
+$s_additional_description = 'Dodatni opis';
+$s_update_profile_button = 'Ažuriraj profil';
+$s_profile_defaulted_msg = 'Polazni profil ažuriran...';
+$s_add_profile_title = 'Dodaj profil';
+$s_add_profile_button = 'Dodaj profil';
+$s_edit_or_delete_profiles_title = 'Uređivanje ili brisanje profila';
+$s_edit_profile = 'Uredi profil';
+$s_make_default = 'Načini podrazumevanim';
+$s_delete_profile = 'Obriši profil';
+$s_select_profile = 'Odaberi profil';
+$s_submit_button = 'Pošalji';
+$s_profile_updated_msg = 'Profil ažuriran...';
+$s_my_sponsorship = 'Pokroviteljstva';
+$s_update_sponsorship_button = 'Smijeni stanje isplate';
+$s_no_sponsored = 'Nema pronađenih sponzorisanih problema koji su dodeljeni vama.';
+$s_own_sponsored = 'Sponzorisani problemi:';
+$s_issues_handled = 'Sponzorisani problemi koje ste vi dodelili:';
+$s_no_own_sponsored = 'Nemate sponzorisanih problema.';
+$s_sponsor = 'Pokrovitelj';
+$s_sponsor_verb = 'Sponzoriši';
+$s_amount = 'Iznos';
+$s_total_owing = 'Ukupno za naplatu';
+$s_total_paid = 'Ukupno plaćeno';
+$s_sponsor_hide = 'Sakrij rešeno i plaćeno';
+$s_sponsor_show = 'Prikaži sve';
+$s_payment_updated = 'Podaci za plaćanje su ažurirani.';
+$s_account_updated_msg = 'Vaš račun je uspješno ažuriran...';
+$s_email_updated = 'E-adresa je uspješno ažurirana';
+$s_realname_updated = 'Pravo ime je uspješno ažurirano';
+$s_password_updated = 'Lozinka je uspješno ažurirana';
+$s_multiple_projects = 'Problemi koje ste izabrali dolaze s različitih projekata. Parametri ispod oslikavaju postavke za sve projekte. Ako je ovo netačno, izaberite manji broj problema.';
+$s_new_bug_title = 'Novi problem';
+$s_feedback_bug_title = 'Zahtevaj odziv o problemu';
+$s_acknowledged_bug_title = 'Primi problem';
+$s_confirmed_bug_title = 'Potvrdi problem';
+$s_assigned_bug_title = 'Dodijeli problem';
+$s_new_bug_button = 'Novi problem';
+$s_feedback_bug_button = 'Zatraži povratnu informaciju';
+$s_acknowledged_bug_button = 'Primi problem';
+$s_confirmed_bug_button = 'Potvrdi problem';
+$s_assigned_bug_button = 'Dodijeli problem';
+$s_bug_close_msg = 'Problem je zatvoren.';
+$s_close_immediately = 'Zatvori odmah:';
+$s_closed_bug_title = 'Zatvori problem';
+$s_bug_deleted_msg = 'Problem je obrisan...';
+$s_delete_bug_sure_msg = 'Želite li da obrišete ovaj problem?';
+$s_delete_bug_button = 'Izbriši';
+$s_monitor_bug_button = 'Nadgledaj';
+$s_unmonitor_bug_button = 'Prekini nadgledanje';
+$s_upload_file = 'Postavljanje';
+$s_upload_files = 'Postavite datoteke';
+$s_select_file = 'Odaberi datoteku';
+$s_select_files = 'Odaberite datoteke';
+$s_upload_file_button = 'Postavi';
+$s_upload_files_button = 'Postavi';
+$s_max_file_size_label = 'Dopuštena veličina:';
+$s_bug_reopened_msg = 'Problem je ponovo otvoren...';
+$s_reopen_add_bugnote_title = 'Dodaj bijelešku s razlogom za ponovno otvaranje problema';
+$s_bugnote_add_reopen_button = 'Dodaj bilješku i ponovo otvori problem';
+$s_create_new_account_title = 'Izradi novi račun';
+$s_create_new_account_link = 'Izradi novi račun';
+$s_month_january = 'januar';
+$s_month_february = 'februar';
+$s_month_march = 'mart';
+$s_month_april = 'april';
+$s_month_may = 'maj';
+$s_month_june = 'juni';
+$s_month_july = 'juli';
+$s_month_august = 'august';
+$s_month_september = 'septembar';
+$s_month_october = 'oktobar';
+$s_month_november = 'novembar';
+$s_month_december = 'decembar';

@@ -39,6 +39,7 @@
  * @file
  *
  * @author Fryed-peach
+ * @author Gulpin
  * @author Omotecho
  * @author Otokoume
  * @author Ryoon
@@ -87,3 +88,6 @@ $s_plugin_MantisGraph_period_year_to_date = '1年前から今日まで';
 $s_plugin_MantisGraph_period_select = '日付選択';
 $s_plugin_MantisGraph_period_last_year = '去年';
 $s_plugin_MantisGraph_graph_page = '課題履歴グラフ';
+$s_plugin_MantisGraph_graph_topdev = 'トップ開発者(解決済み課題順)';
+$s_plugin_MantisGraph_graph_opendev = '開発者(課題登録順)';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'トップ報告者(解決済み課題順)';

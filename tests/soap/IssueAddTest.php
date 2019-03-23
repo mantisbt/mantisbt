@@ -156,9 +156,6 @@ class IssueAddTest extends SoapBase {
 		# $t_issue_to_add['fixed_in_version'] = 'fixed version';
 		# $t_issue_to_add['target_version'] = 'target version';
 
-		$t_dt = DateTime::createFromFormat( 'U', time() );
-		$t_issue_to_add['last_updated'] = $t_dt->format( DateTime::ISO8601 );
-
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$this->deleteAfterRun( $t_issue_id );
@@ -181,10 +178,6 @@ class IssueAddTest extends SoapBase {
 		# Since versions are not defined, they are not going to be set
 		$this->assertFalse( isset( $t_issue->fixed_in_version ) );
 		$this->assertFalse( isset( $t_issue->target_version ) );
-
-		$t_read_dt = DateTime::createFromFormat( DateTime::ISO8601, $t_issue->last_updated );
-
-		$this->assertEquals( $t_dt, $t_read_dt );
 	}
 
 	/**
@@ -263,8 +256,7 @@ class IssueAddTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertNull( $t_issue->due_date, 'due_date is not null' );
-		$this->assertEquals( 'true', $this->readDueDate(), 'xsi:nil not set to true' );
+		$this->assertFalse( isset( $t_issue->due_date ), 'due_date should not be set' );
 	}
 
 	/**
@@ -290,26 +282,6 @@ class IssueAddTest extends SoapBase {
 
 		$this->assertEquals( '', $t_issue->category, 'category' );
 
-	}
-
-	/**
-	 * Reads a due date out of the last soap response
-	 * @return string|null the xsi:null value
-	 */
-	private function readDueDate() {
-		$t_reader = new XMLReader();
-		$t_reader->XML( $this->client->__getLastResponse() );
-
-		while( $t_reader->read() ) {
-			switch( $t_reader->nodeType ) {
-				case XMLReader::ELEMENT:
-					if( $t_reader->name == 'due_date' ) {
-						return $t_reader->getAttribute( 'xsi:nil' );
-					}
-					break;
-			}
-		}
-		return null;
 	}
 
 	/**

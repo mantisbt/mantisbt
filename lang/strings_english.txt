@@ -407,6 +407,7 @@ $s_email_on_priority_change = 'E-mail on Priority Change';
 $s_email_bugnote_limit = 'E-mail Notes Limit';
 $s_email_full_issue_details = 'E-mail Full Issue Details';
 $s_language = 'Language';
+$s_font_family = 'Font Family';
 $s_update_prefs_button = 'Update Prefs';
 $s_reset_prefs_button = 'Reset Prefs';
 $s_timezone = 'Time Zone';
@@ -466,7 +467,6 @@ $s_payment_updated = 'Payment information updated.';
 # account_update.php
 $s_account_updated_msg = 'Your account has been successfully updated...';
 $s_email_updated = 'E-mail address successfully updated';
-$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
@@ -753,6 +753,7 @@ $s_date_created = 'Date Created';
 $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
 $s_edit_user_link = 'Edit User';
+$s_search_user_hint = 'Username, Real Name or E-mail';
 
 # manage_custom_field_edit_page.php
 $s_separate_list_items_by = '(separate list items by "%1$s")';
@@ -926,6 +927,9 @@ $s_create_new_subproject_link = 'Create New Subproject';
 $s_unlink_link = 'Unlink';
 $s_show_global_users = 'Show Users with Global Access';
 $s_hide_global_users = 'Hide Users with Global Access';
+$s_review_changes = 'Review Changes';
+$s_review_changes_confirmation = 'Are you sure you want to apply the following changes?';
+$s_review_changes_empty = 'There are no changes selected';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Add Project';
@@ -1102,6 +1106,8 @@ $s_add_user_button = 'Add User';
 $s_project_selection_title = 'Project Selection';
 $s_remove_link = 'Remove';
 $s_remove_all_link = 'Remove all';
+$s_remove_project_user_title = 'Remove user access from project';
+$s_modify_project_user_title = 'Modify user access in project';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Successfully updated user.';
@@ -1193,6 +1199,8 @@ $s_total_time = 'Total time';
 $s_developer_stats = 'Developer Stats';
 $s_reporter_stats = 'Reporter Stats';
 $s_orct = '(open/resolved/closed/total)';
+$s_summary_header = 'open/resolved/closed/total/resolved ratio/ratio';
+$s_summary_notice_filter_is_applied = 'A filter has been applied';
 
 # view_all_bug_page.php
 $s_any = 'any';
@@ -1257,6 +1265,8 @@ $s_manage_filter_page_title = 'Manage Filters';
 $s_manage_filter_edit_page_title = 'Edit filter';
 $s_delete_filter_button = 'Delete';
 $s_apply_filter_button = 'Apply';
+$s_temporary_filter = 'Temporary filter';
+$s_set_as_persistent_filter = 'Set as persistent filter';
 
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
@@ -1395,6 +1405,7 @@ $s_bug_created_from = 'Issue generated from';
 $s_copy_from_parent = 'Copy extended data from parent issue';
 $s_copy_notes_from_parent = 'Copy issue notes';
 $s_copy_attachments_from_parent = 'Copy attachments';
+$s_with = 'with';
 
 # Relationship Graphs
 $s_viewing_bug_relationship_graph_title = 'Relationship Graph';
@@ -1597,6 +1608,8 @@ $s_month_december = 'December';
 
 # Timeline Feature Strings
 $s_timeline_issue_created = '<span class="username">%1$s</span> created issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> attached file <em>%3$s</em> to issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> removed file <em>%3$s</em> from issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> commented on issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> is monitoring issue <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stopped monitoring issue <span class="issue_id">%2$s</span>';
@@ -1625,6 +1638,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field "%1$s" was empty. Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Invalid value for \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to access this until the account protection is lifted.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
@@ -1637,13 +1651,19 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option "%1$s"
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Cannot set configuration option "%1$s": %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field "%1$s" not found.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'Project hierarchy (subprojects) is disabled.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$s" not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists. Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified. Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_DUPLICATE] = 'Project "%1$s" is already a subproject of "%2$s".';
+$MANTIS_ERROR[ERROR_PROJECT_SUBPROJECT_NOT_FOUND] = 'Project "%1$s" is not a subproject of "%2$s".';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%1$s" not found.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%1$d" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'User with email "%1$s" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'User with real name "%1$s" not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid. Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
@@ -1654,7 +1674,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d not found.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded. Please re-create it.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid e-mail address.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -1693,7 +1712,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'The user real name is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %1$d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%1$s) is below minimum amount (%2$s).';
@@ -1702,7 +1720,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an e-mail address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option "%1$s" has invalid value "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue "%1$d" is read-only.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved. Ask your system administrator for project access if you do not see any dependant issue.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %1$d requires higher access level.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
@@ -1712,7 +1730,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-m
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximum number of in-progress requests reached. Please contact the system administrator.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot remove or demote the last administrator account. To perform the action you requested, you first need to create another administrator account.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Could not find a tag with that name.';
@@ -1736,7 +1753,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'The format of the specified plugin f
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
@@ -1768,3 +1784,12 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
+$s_dropzone_multiple_files_too_big = 'The following files:{{files}}Exceed the maximum allowed file size ({{maxFilesize}} MiB)';
+
+# Generic actions, short names
+$s_save = 'Save';
+$s_reset = 'Reset';
+$s_persist = 'Persist';
+$s_load = 'Load';
+$s_apply_changes = 'Apply changes';
+$s_undo = 'Undo';

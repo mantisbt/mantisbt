@@ -12,7 +12,7 @@
 		<literal>/api/soap/mantisconnect.php?wsdl</literal> below the MantisBT root.
 	</para>
 	<para>
-		The REST API is experimental and is disabled by default.
+		The REST API is enabled by default.
 		A Swagger sandbox and documentation for REST API is available at <literal>/api/rest/swagger/</literal> below
 		the MantisBT root.
 	</para>

@@ -214,3 +214,12 @@ config_obsolete( 'inline_file_exts' );
 
 # changes in 2.9.0
 config_obsolete( 'meta_include_file' );
+
+# changes in 2.11.0
+config_obsolete( 'differentiate_duplicates' );
+
+# changes in 2.12.0
+config_obsolete( 'session_handler' );
+
+# changes in 2.17.0
+config_obsolete( 'default_manage_user_prefix' );

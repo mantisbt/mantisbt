@@ -1,0 +1,463 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Luxembourgish (Lëtzebuergesch)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Les Meloures
+ * @author Robby
+ * @author Soued031
+ */
+
+$s_actiongroup_menu_move = 'Réckelen';
+$s_actiongroup_menu_copy = 'Kopéieren';
+$s_actiongroup_menu_assign = 'Zouuerdnen';
+$s_actiongroup_menu_close = 'Zoumaachen';
+$s_actiongroup_menu_delete = 'Läschen';
+$s_actiongroup_menu_resolve = 'Léisen';
+$s_actiongroup_menu_update_priority = 'Prioritéit aktualiséieren';
+$s_actiongroup_menu_update_status = 'Status aktualiséieren';
+$s_actiongroup_menu_update_category = 'Kategorie aktualiséieren';
+$s_actiongroup_menu_update_field = '% aktualiséieren';
+$s_actiongroup_menu_update_target_version = 'Zilversioun änneren';
+$s_actiongroup_menu_add_note = 'Notiz derbäisetzen';
+$s_actiongroup_bugs = 'Gewielt Sujeten';
+$s_all_projects = 'All Projeten';
+$s_date_order = 'Nom Datum zortéieren';
+$s_print_all_bug_page_link = 'Rapporten drécken';
+$s_csv_export = 'CSV-Export';
+$s_excel_export = 'Excel-Export';
+$s_login_anonymously = 'Anonym aloggen';
+$s_anonymous = 'Anonym';
+$s_display_history = 'Historique weisen';
+$s_public_project_msg = 'Dëse Projet ass ËFFENTLECH. All Benotzer hunn Zougang';
+$s_print = 'Drécken';
+$s_copy_users = 'Benotzer kopéieren';
+$s_copy_categories_from = 'Kategorie kopéiere vun';
+$s_copy_categories_to = 'Kategorie kopéieren op';
+$s_copy_versions_from = 'Versioune kopéiere vun';
+$s_copy_versions_to = 'Versioune kopéieren op';
+$s_copy_users_from = 'Benotzer kopéiere vun';
+$s_copy_users_to = 'Benotzer kopéieren op';
+$s_field = 'Feld';
+$s_old_value = 'Ale Wäert';
+$s_new_value = 'Neie Wäert';
+$s_date_modified = 'Datum vun der Ännerung';
+$s_bugnote = 'Notiz';
+$s_change = 'Änneren';
+$s_announcement = 'Ukënnegung';
+$s_bugnote_link_title = 'Direkte Link op d\'Notiz';
+$s_delete_bugnote_button = 'Notiz läschen';
+$s_delete_bugnote_sure_msg = 'Sidd Dir sécher datt Dir dës Notiz läsche wëllt?';
+$s_bug_relationships = 'Relatiounen';
+$s_empty_password_sure_msg = 'De Benotzer huet en eidelt Passwuert. Sidd Dir sécher datt Dir dat wëllt?';
+$s_empty_password_button = 'Eidelt passwuert benotzen';
+$s_reauthenticate_title = 'Authentifizéieren';
+$s_no_category = '(Keng Kategorie)';
+$s_global_categories = 'Global Kategorien';
+$s_duplicate_of = 'Doublon vu(n)';
+$s_has_duplicate = 'huet en Doublon';
+$s_new_bug = 'Neie Bug';
+$s_bugnote_added = 'Notiz derbäigesat';
+$s_bugnote_edited = 'Notiz geännert';
+$s_bugnote_deleted = 'Notiz geläscht';
+$s_summary_updated = 'Resumé aktualiséiert';
+$s_description_updated = 'Beschreiwung aktualiséiert';
+$s_additional_information_updated = 'Zousatzinformatioun aktuliséiert';
+$s_file_added = 'Fichier derbäigesat';
+$s_file_deleted = 'Fichier geläscht';
+$s_bug_deleted = 'Problem geläscht';
+$s_make_private = 'Privat maachen';
+$s_make_public = 'Ëffentlech maachen';
+$s_create_new_project_link = 'Neie Projet uleeën';
+$s_login_link = 'Aloggen';
+$s_opensearch_id_short = '%s ID';
+$s_opensearch_text_short = '%s Text';
+$s_opensearch_text_description = '%s: am kompletten Text sichen';
+$s_select_option = '(eraussichen)';
+$s_target_version_bugs_conf_msg = 'Zilversioun aktualiséieren op';
+$s_delete_group_bugs_button = 'Problemer läschen';
+$s_move_group_bugs_button = 'Problemer réckelen';
+$s_priority_group_bugs_button = 'Prioritéit aktualiséieren';
+$s_status_group_bugs_button = 'Zoustand aktualiséieren';
+$s_category_group_bugs_button = 'Kategorie aktualiséieren';
+$s_printing_options_link = 'Dréckoptiounen';
+$s_bugnote_date = 'DAtum vun der Notiz';
+$s_bugnote_description = 'Beschreiwung vun der Notiz';
+$s_go_back = 'Gitt zréck';
+$s_logged_in_as = 'Ageloggt als';
+$s_prefix_for_deleted_users = 'Benotzer';
+$s_administrator = 'Administrateur';
+$s_myself = 'Ech selwer';
+$s_no_access = 'keen Accès';
+$s_project_view_state_enum_string = '10:ëffentlech,50:privat';
+$s_view_state_enum_string = '10:ëffentlech,50:privat';
+$s_new_account_username = 'Benotzernumm:';
+$s_new_account_do_not_reply = 'Äntwert net op dëse Message';
+$s_new_account_email = 'E-Mail:';
+$s_new_account_signup_msg = 'Dëse Benotzerkont gouf ugeluecht:';
+$s_email_project = 'Projet';
+$s_email_category = 'Kategorie';
+$s_email_priority = 'Prioritéit';
+$s_email_status = 'Status';
+$s_email_resolution = 'Léisung';
+$s_email_fixed_in_version = 'Geléist an der Versioun';
+$s_email_last_modified = 'Lescht Ännerung';
+$s_email_summary = 'Resumé';
+$s_email_description = 'Beschreiwung';
+$s_email_additional_information = 'Zousätzlech Informatioun';
+$s_confirm_delete_msg = 'Sidd Dir sécher datt Dir Äre Benotzerkont läsche wëllt?';
+$s_delete_account_button = 'Benotzerkont läschen';
+$s_manage_profiles_link = 'Profiler';
+$s_change_preferences_link = 'Astellungen';
+$s_edit_account_title = 'Kont änneren';
+$s_username = 'Benotzernumm';
+$s_username_label = 'Benotzernumm';
+$s_realname = 'Richtegen Numm';
+$s_realname_label = 'Richtegen Numm';
+$s_email = 'E-Mail';
+$s_email_label = 'E-Mail';
+$s_password = 'Passwuert';
+$s_new_password = 'Neit Passwuert';
+$s_confirm_password = 'Passwuert confirméieren';
+$s_current_password = 'Aktuellt Passwuert';
+$s_update_user_button = 'Benotzer aktualiséieren';
+$s_verify_warning = 'D\'Informatioune vun Ärem Kont goufen iwwerpréift.';
+$s_api_token_revoke_button = 'Zréckruffen';
+$s_api_token_never_used = 'Ni benotzt';
+$s_last_used = 'Fir d\'lescht benotzt';
+$s_default_account_preferences_title = 'Astellunge vum Kont';
+$s_minutes = 'Minutten';
+$s_seconds = 'Sekonnen';
+$s_language = 'Sprooch';
+$s_update_prefs_button = 'Astellungen aktualiséieren';
+$s_reset_prefs_button = 'Astellungen zrécksetzen';
+$s_timezone = 'Zäitzon';
+$s_prefs_reset_msg = 'D\'Astellunge goufen zeréckgesat...';
+$s_profile_added_msg = 'Profil derbäigesat...';
+$s_profile_deleted_msg = 'Profil geläscht...';
+$s_edit_profile_title = 'Profil änneren';
+$s_additional_description = 'Zousätzlech Beschreiwung';
+$s_update_profile_button = 'Profil aktualiséieren';
+$s_add_profile_title = 'Profil derbäisetzen';
+$s_add_profile_button = 'Profil derbäisetzen';
+$s_edit_or_delete_profiles_title = 'Profiler änneren oder läschen';
+$s_edit_profile = 'Profil änneren';
+$s_delete_profile = 'Profil läschen';
+$s_select_profile = 'Profil eraussichen';
+$s_submit_button = 'Schécken';
+$s_profile_updated_msg = 'Profil aktualiséiert...';
+$s_sponsor = 'Sponsor';
+$s_sponsor_verb = 'sponsoren';
+$s_sponsor_show = 'All weisen';
+$s_account_updated_msg = 'Äre Kont gouf aktualiséiert ...';
+$s_realname_updated = 'Richtegen Numm aktualiséiert';
+$s_password_updated = 'Passwuert aktualiséiert';
+$s_new_bug_button = 'Neie Bug';
+$s_close_immediately = 'Direkt zoumaachen:';
+$s_delete_bug_button = 'Läschen';
+$s_upload_file = 'Fichier eroplueden';
+$s_upload_files = 'Fichieren eroplueden';
+$s_select_file = 'Fichier eraussichen';
+$s_select_files = 'Fichieren eraussichen';
+$s_upload_file_button = 'Fichier eroplueden';
+$s_upload_files_button = 'Fichieren eroplueden';
+$s_bugnote_add_resolve_button = 'Notiz derbäisetzen';
+$s_from = 'Vum';
+$s_bug_reminder = 'Eng Erënnerung schécken';
+$s_bug_send_button = 'Schécken';
+$s_reminder = 'Erënnerung';
+$s_mentioned_you = 'huet Iech ernimmt op:';
+$s_category = 'Kategorie';
+$s_last_update = 'Lescht Aktualiséierung';
+$s_priority = 'Prioritéit';
+$s_status = 'Status';
+$s_product_version = 'Produktversioun';
+$s_votes = 'Stëmmen';
+$s_summary = 'Resumé';
+$s_description = 'Beschreiwung';
+$s_update_information_button = 'Informatioun aktualiséieren';
+$s_profile = 'Profil';
+$s_view_revisions = 'Versioune weisen';
+$s_revision = 'Versioun';
+$s_all_revisions = 'All Versiounen';
+$s_activities_title = 'Aktivitéiten';
+$s_bug_notes_title = 'Notizen';
+$s_edit_bugnote_title = 'Notiz änneren';
+$s_delete_link = 'Läschen';
+$s_add_bugnote_title = 'Notiz derbäisetzen';
+$s_add_bugnote_button = 'Notiz derbäisetzen';
+$s_bugnote_edit_link = 'Änneren';
+$s_hide_content = 'Inhalt verstoppen';
+$s_show_content = 'Inhalt weisen';
+$s_log_page_number = 'Zuel';
+$s_click_to_login = 'Aloggen';
+$s_login_title = 'Aloggen';
+$s_save_login = 'Mech ageloggt halen';
+$s_login_button = 'Aloggen';
+$s_lost_password_link = 'Hutt Dir Äert Passwuert vergiess?';
+$s_username_or_email = 'Benotzernumm oder E-Mail-Adress';
+$s_enter_password = 'Passwuert fir \'%s\' aginn';
+$s_select_project_button = 'Projet eraussichen';
+$s_lost_password_title = 'Passwuert zrécksetzen';
+$s_lost_password_subject = 'Passwuert zrécksetzen';
+$s_newer_news_link = 'Méi nei Neiegkeeten';
+$s_older_news_link = 'Méi al Neiegkeeten';
+$s_archives = 'Archiven';
+$s_rss = 'RSS';
+$s_mantis_version = 'MantisBT Versioun';
+$s_verify_password = 'Passwuert iwwerpréifen';
+$s_create_user_button = 'Benotzer uleeën';
+$s_projects_link = 'Projeten';
+$s_documentation_link = 'Dokumentatioun';
+$s_1_week_title = '1 Woch';
+$s_edit_user_link = 'Benotzer änneren';
+$s_email_notify_users = 'All Benotzer mat Zougangsrecht';
+$s_message = 'Message';
+$s_status_level = 'Status';
+$s_allowed_access_levels = 'Erlaabt fir all Benotzer mat Zougangsrechter';
+$s_in_project = 'am Projet';
+$s_delete_config_button = 'Astellungen läschen';
+$s_configuration_option_type = 'Typ';
+$s_configuration_option_value = 'Wäert';
+$s_all_users = 'All Benotzer';
+$s_set_configuration_option_action_edit = 'Optioun vun der Konfiguratioun änneren';
+$s_plugin = 'Plugin';
+$s_plugin_description = 'Beschreiwung';
+$s_plugin_author = 'Auteur: %1$s';
+$s_plugin_url = 'Internetsite:';
+$s_plugin_priority = 'Prioritéit';
+$s_plugin_update = 'Aktualiséierung';
+$s_plugin_actions = 'Aktiounen';
+$s_plugin_install = 'Installéieren';
+$s_plugin_upgrade = 'Aktualiséieren';
+$s_category_delete_confirm_msg = 'Sidd Dir sécher datt Dir d\'Kategorie "%1$s" läsche wëllt?';
+$s_delete_category_button = 'Kategorie läschen';
+$s_update_category_button = 'Kategorie aktualiséieren';
+$s_project_delete_button = 'Projet läschen';
+$s_edit_project_title = 'Projet änneren';
+$s_project_name = 'Numm vum Projet';
+$s_public = 'ëffentlech';
+$s_private = 'privat';
+$s_update_project_button = 'Projet aktualiséieren';
+$s_delete_project_button = 'Projet läschen';
+$s_categories_and_version_title = 'Kategorien a Versiounen';
+$s_categories = 'Kategorien';
+$s_add_category_button = 'Kategorie derbäisetzen';
+$s_versions = 'Versiounen';
+$s_add_version_button = 'Versioun derbäisetzen';
+$s_edit_link = 'Änneren';
+$s_actions = 'Aktiounen';
+$s_version = 'Versioun';
+$s_timestamp = 'Zäitstempel';
+$s_update = 'Aktualiséieren';
+$s_add_project_title = 'Projet derbäisetzen';
+$s_add_project_button = 'Projet derbäisetzen';
+$s_projects_title = 'Projeten';
+$s_projects_title_label = 'Projeten';
+$s_name = 'Numm';
+$s_delete_version_button = 'Versioun läschen';
+$s_edit_project_version_title = 'Versioun vum Projet änneren';
+$s_update_version_button = 'Versioun aktualiséieren';
+$s_obsolete = 'Vereelst';
+$s_notify_user = 'Benotzer vun dëser Ännerung informéieren';
+$s_edit_user_title = 'Benotzer änneren';
+$s_reset_password_button = 'Passwuert zrécksetzen';
+$s_delete_user_button = 'Benotzer läschen';
+$s_show_all_users = 'All';
+$s_users_unused = 'Net benotzt';
+$s_users_new = 'Nei';
+$s_summary_link = 'Resumé';
+$s_users_link = 'Benotzer';
+$s_manage_link = 'Geréieren';
+$s_invite_users = 'Benotzer invitéieren';
+$s_my_view_title_recent_mod = 'Rezent geännert';
+$s_my_view_title_resolved = 'Geléist';
+$s_update_news_button = 'Neiegkeeten aktualiséieren';
+$s_back_link = 'Zréck';
+$s_upload_file_title = 'Fichier eroplueden';
+$s_title = 'Titel';
+$s_filename = 'Numm vum Fichier';
+$s_file_update_button = 'Fichier aktualiséieren';
+$s_file_delete_button = 'Fichier läschen';
+$s_project_documentation_title = 'Dokumentatioun vum Projet';
+$s_user_documentation = 'Dokumentatioun fir de Benotzer';
+$s_add_file = 'Fichier derbäisetzen';
+$s_remove_all_users_button = 'All Benotzer ewechhuelen';
+$s_add_user_button = 'Benotzer derbäisetzen';
+$s_remove_link = 'Ewechhuelen';
+$s_simple_report_link = 'Einfache Rapport';
+$s_required = 'obligatoresch';
+$s_select_category = 'Kategorie eraussichen';
+$s_additional_information = 'Zousätzlech Informatioun';
+$s_save_settings_button = 'Astellunge späicheren';
+$s_summary_title = 'Resumé';
+$s_by_category = 'Pro Kategorie';
+$s_percentage_errors = '% Falsch';
+$s_errors = 'Falsch';
+$s_total = 'Total';
+$s_days = 'Deeg';
+$s_all = 'all';
+$s_show = 'Weisen';
+$s_updated = 'Aktualiséiert';
+$s_none = 'keen';
+$s_current = 'aktuell';
+$s_search = 'Sichen';
+$s_prev = 'Vireg';
+$s_next = 'Nächst';
+$s_first = 'Éischt';
+$s_last = 'Lescht';
+$s_use_last_updated_date_filters = 'Filter nom Datum vun der leschter Aktualiséierung';
+$s_yes = 'Jo';
+$s_no = 'Neen';
+$s_open_filters = 'Filter änneren';
+$s_ok = 'OK';
+$s_select_all = 'Alles uwielen';
+$s_use_query = 'Filter benotzen';
+$s_delete_query = 'Fichier läschen';
+$s_query_deleted = 'Filter "%s" Geläscht';
+$s_reset_query = 'Filteren zrécksetzen';
+$s_query_name = 'Numm vum Filter';
+$s_edit_filter = 'Filter änneren';
+$s_update_filter = 'Filter aktualiséieren';
+$s_current_project = 'Aktuelle Projet';
+$s_available_filter_for_project = 'Disponibel Filtere fir de Projet';
+$s_manage_filter_page_title = 'Filtere geréieren';
+$s_manage_filter_edit_page_title = 'Filter änneren';
+$s_delete_filter_button = 'Läschen';
+$s_apply_filter_button = 'Uwenden';
+$s_temporary_filter = 'Temporäre Filter';
+$s_update_bug_button = 'Änneren';
+$s_close_bug_button = 'Zoumaachen';
+$s_move_bug_button = 'Réckelen';
+$s_publish = 'Verëffemntl3echen';
+$s_add_user_to_monitor = 'Derbäisetzen';
+$s_monitoring_user_list = 'Benotzerlëscht';
+$s_custom_field = 'Feld';
+$s_custom_field_name = 'Numm';
+$s_custom_field_type = 'Typ';
+$s_linked_projects_label = 'Verbonne Projeten';
+$s_custom_field_sequence = 'Sequenz';
+$s_custom_field_sequence_label = 'Sequenz';
+$s_filter_resolved = 'Geléist';
+$s_bytes = 'Byten';
+$s_kb = 'KB';
+$s_phpmailer_language = 'lb';
+$s_roadmap_empty = 'Keng Informatioun iwwer en Zäitplang disponibel';
+$s_add_new_relationship_button = 'Derbäisetzen';
+$s_replace_relationship_button = 'Ersetzen';
+$s_delete_relationship_button = 'Läschen';
+$s_create_child_bug_button = 'Clonen';
+$s_with = 'mat';
+$s_vertical = 'Vertikal';
+$s_horizontal = 'Horizontal';
+$s_notes = 'Notizen';
+$s_add_notes = 'Notizen derbäisetzen';
+$s_news = 'Neiegkeeten';
+$s_delete_attachment_button = 'Läschen';
+$s_filters = 'Filteren';
+$s_save_filters = 'Filtere späicheren';
+$s_email_on_updated = 'E-Mail bäi Aktualiséierung';
+$s_loading = 'Lueden...';
+$s_between_date = 'Tëscht';
+$s_after_date = 'Nom';
+$s_from_date = 'Vum';
+$s_wiki = 'Wiki';
+$s_tags = 'Markéierungen';
+$s_tag_name = 'Numm';
+$s_tag_updated = 'Lescht Aktualiséierung';
+$s_show_all_tags = 'All';
+$s_time_tracking_cost_per_hour_label = 'Käschte pro Stonn:';
+$s_time_tracking_stopwatch_start = 'Ufänken';
+$s_time_tracking_stopwatch_stop = 'Ophalen';
+$s_time_tracking_stopwatch_reset = 'Zrécksetzen';
+$s_view_account_title = 'Benotzerinformatioun';
+$s_database_information = 'Informatioun vun der MantisBT Datebank';
+$s_php_version = 'PHP Versioun';
+$s_adodb_version = 'ADOdb-Versioun';
+$s_database_version_description = 'Versioun vun der Datebank, Beschreiwung';
+$s_month_january = 'Januar';
+$s_month_february = 'Februar';
+$s_month_march = 'Mäerz';
+$s_month_april = 'Abrëll';
+$s_month_may = 'Mee';
+$s_month_june = 'Juni';
+$s_month_july = 'Juli';
+$s_month_august = 'August';
+$s_month_september = 'September';
+$s_month_october = 'Oktober';
+$s_month_november = 'November';
+$s_month_december = 'Dezember';
+$s_timeline_more = 'Méi Evenementer...';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL-Feeler entdeckt.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Et gëtt schonn e ¨Projet mat deem Numm.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Net valabele Wäert fir \'%1$s\'';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz net fonnt';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projet "%1$s" net fonnt.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Benotzer mam Numm "%1$s" net fonnt.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'De Benotzer mat der ID "%1$d" gouf net fonnt.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'De Benotzer mat der E-Mail-Adress "%1$s" gouf net fonnt.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Benotzer mam richtegen Numm "%1$s" gouf net fonnt.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'D\'Astellunge vun dësem Benotzer konnten net fonnt ginn.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Passwuert huet d\'Kontroll net gepackt.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'De Filter %1$s gouf net fonnt.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Net valabel E-Mailadress.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil net fonnt.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Typ vu Fichier net erlaabt fir Eropzelueden.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Et gouf kee Fichier eropgelueden. Gitt w.e.g. zréck a Sicht e Fichier eraus ier Dir Eroplueden dréckt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ee Projet benotzt dëst Feld nach.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Et gëtt schonn eng Kategorie mat deem Numm.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie net fonnt';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategorie "%1$s" am Projet "%2$s" net fonnt.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Et gëtt schonn eng Versioun mat deem Numm.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versioun "%1$s" net fonnt.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'De richtege Numm vum Benotzer ass net valabel.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'De Benotzer huet net déi erfuerderlech Benotzerrechter.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relatioun net fonnt.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin "%1$s" ass schonn installéiert.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Är Sessioun gouf ass net méi validéiert.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Net valabelen Datumsformat';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'D\'Zäitzon konnt net aktualiséiert ginn-';
+$s_dropzone_invalid_file_type = 'Dir kënnt keng Fichiere vun dësem Typ eroplueden.';
+$s_dropzone_cancel_upload = 'Eroplueden ofbriechen';
+$s_dropzone_cancel_upload_confirmation = 'Sidd Dir sécher datt Dir d\'Eroplueden ofbrieche wëllt?';
+$s_dropzone_remove_file = 'Fichier ewechhuelen';
+$s_dropzone_max_files_exceeded = 'Dir kënnt net méi Fichieren eroplueden.';
+$s_dropzone_not_supported = 'Dropzone.js ënnertstëtzt keng al Browseren!';
+$s_save = 'Späicheren';
+$s_reset = 'Zrécksetzen';
+$s_load = 'Lueden';

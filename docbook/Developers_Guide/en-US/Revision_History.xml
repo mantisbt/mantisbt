@@ -8,6 +8,202 @@
 	<simpara>
 		<revhistory>
 			<revision>
+				<revnumber>2.20-0</revnumber>
+				<date>Sat Mar 16 2019</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.20.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.19-0</revnumber>
+				<date>Wed Jan 2 2019</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.19.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.18-0</revnumber>
+				<date>Tue Oct 16 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.18.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.17-1</revnumber>
+				<date>Mon Sep 24 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.17.1</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.17-0</revnumber>
+				<date>Mon Sep 3 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.17.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.16-0</revnumber>
+				<date>Sun Jul 29 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.16.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.15-0</revnumber>
+				<date>Tue Jun 5 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.15.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.14-0</revnumber>
+				<date>Sun Apr 29 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.14.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.13-1</revnumber>
+				<date>Wed Apr 4 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.13.1</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.13-0</revnumber>
+				<date>Sun Apr 1 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.13.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.12-0</revnumber>
+				<date>Sat Mar 3 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.12.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.11-0</revnumber>
+				<date>Tue Feb 6 2018</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.11.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.10-0</revnumber>
+				<date>Sat Dec 30 2017</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.10.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>2.9-0</revnumber>
+				<date>Sun Dec 3 2017</date>
+				<author>
+					<firstname>Victor</firstname>
+					<surname>Boctor</surname>
+					<email>vboctor@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Release 2.9.0</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>2.8-0</revnumber>
 				<date>Sat Oct 28 2017</date>
 				<author>

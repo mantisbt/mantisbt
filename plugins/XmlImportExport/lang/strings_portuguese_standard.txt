@@ -38,8 +38,10 @@
  * @ingroup Language
  * @file
  *
+ * @author Athena in Wonderland
  * @author Hamilton Abreu
  * @author Luckas
+ * @author MokaAkashiyaPT
  * @author Vitorvicentevalente
  * @author Waldir
  */
@@ -48,6 +50,9 @@ $s_plugin_XmlImportExport_title = 'Importar/Exportar incidências';
 $s_plugin_XmlImportExport_description = 'Acrescenta ao MantisBT funcionalidades de importação e exportação baseadas em XML.';
 $s_plugin_XmlImportExport_import = 'Importar incidências';
 $s_plugin_XmlImportExport_export = 'Exportação XML';
+$s_plugin_XmlImportExport_config_title = 'Configuração de níveis de acesso de importação/exportação em XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidências';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar incidências';
 $s_plugin_XmlImportExport_action_update = 'Atualizar';
 $s_plugin_XmlImportExport_importing_in_project = 'A importar incidências para o projeto:';
 $s_plugin_XmlImportExport_import_options = 'Opções de importação';

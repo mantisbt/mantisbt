@@ -131,7 +131,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 	if( $p_for_display ) {
 		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
 	} else {
-		echo $t_output;
+		echo string_attribute( $t_output );
 	}
 }
 
@@ -183,7 +183,7 @@ if( $t_filter_default ) {
 }
 
 # Manage filter's persistency through cookie
-$t_cookie_name = config_get( 'manage_config_cookie' );
+$t_cookie_name = config_get_global( 'manage_config_cookie' );
 if( $t_filter_save ) {
 	# Save user's filter to the cookie
 	$t_cookie_string = implode(
@@ -233,19 +233,44 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 # Apply filters
 
 # Get users in db having specific configs
-$t_query = 'SELECT DISTINCT user_id FROM {config} WHERE user_id <> ' . db_param() ;
-$t_result = db_query( $t_query, array( ALL_USERS ) );
+$t_sql = 'SELECT DISTINCT c.user_id AS config_uid, u.id, u.username, u.realname'
+		. ' FROM {config} c LEFT JOIN {user} u ON c.user_id=u.id'
+		. ' WHERE c.user_id <> :all_users ORDER BY c.user_id';
+$t_query = new DbQuery( $t_sql, array( 'all_users' => ALL_USERS ) );
+$t_users_list = array();
+$t_users_ids = array();
+$t_sort = array();
+$t_deleted_users = array();
+while( $t_row = $t_query->fetch() ) {
+	if( empty( $t_row['id'] ) ) {
+		# the user doesn't exist, deleted
+		$t_deleted_users[] = (int)$t_row['config_uid'];
+		continue;
+	}
+	$t_users_ids[] = (int)$t_row['id'];
+	$t_users_list[] = user_get_name_from_row( $t_row );
+	$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
+}
+if( !empty( $t_deleted_users ) ) {
+	user_cache_array_rows( $t_deleted_users );
+	foreach( $t_deleted_users as $t_id ) {
+		$t_users_ids[] = $t_id;
+		$t_name = user_get_name( $t_id );
+		$t_users_list[] = $t_name;
+		$t_sort[] = $t_name;
+	}
+}
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
-	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
-} else {
-	$t_users_list = array();
+	$t_row = user_get_row( $t_filter_user_value );
+	$t_users_ids[] = $t_filter_user_value;
+	$t_users_list[] = user_get_name_from_row( $t_row );
+	$t_sort[] = user_get_name_for_sorting_from_row( $t_row );
 }
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_user_id = $t_row['user_id'];
-	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
-}
-asort( $t_users_list );
+user_cache_array_rows( $t_users_ids );
+array_multisort( $t_sort, SORT_ASC, SORT_NATURAL | SORT_FLAG_CASE, $t_users_list, $t_users_ids );
+$t_users_list = array_combine( $t_users_ids, $t_users_list );
+
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = array(
 		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
@@ -280,28 +305,25 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
 
-# Build filter's where clause
-$t_where = '';
-$t_param = array();
+# Build config query
+$t_sql = 'SELECT config_id, user_id, project_id, type, value, access_reqd'
+		. ' FROM {config} WHERE 1=1';
 if( $t_filter_user_value != META_FILTER_NONE ) {
-	$t_where .= ' AND user_id = ' . db_param();
-	$t_param[] = $t_filter_user_value;
+	$t_sql .= ' AND user_id = :user_id';
 }
 if( $t_filter_project_value != META_FILTER_NONE ) {
-	$t_where .= ' AND project_id = ' . db_param();
-	$t_param[] = $t_filter_project_value;
+	$t_sql .= ' AND project_id = :project_id';
 }
 if( $t_filter_config_value != META_FILTER_NONE ) {
-	$t_where .= ' AND config_id = ' . db_param();
-	$t_param[] = $t_filter_config_value;
+	$t_sql .= ' AND config_id = :config_id';
 }
-if( $t_where != '' ) {
-	$t_where = ' WHERE 1=1 ' . $t_where;
-}
-
-$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM {config} ' . $t_where . ' ORDER BY user_id, project_id, config_id ';
-$t_result = db_query( $t_query, $t_param );
+$t_sql .= ' ORDER BY user_id, project_id, config_id ';
+$t_params = array(
+	'user_id' => $t_filter_user_value,
+	'project_id' => $t_filter_project_value,
+	'config_id' => $t_filter_config_value
+	);
+$t_config_query = new DbQuery( $t_sql, $t_params );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -421,7 +443,7 @@ $t_result = db_query( $t_query, $t_param );
 # db contains a large number of configurations
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
-while( $t_row = db_fetch_array( $t_result ) ) {
+while( $t_row = $t_config_query->fetch() ) {
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 ?>

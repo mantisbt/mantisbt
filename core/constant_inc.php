@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '2.9.0-dev' );
+define( 'MANTIS_VERSION', '2.21.0-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -234,6 +234,7 @@ define( 'CONFIRMATION_TYPE_WARNING', 1 );
 define( 'CONFIRMATION_TYPE_FAILURE', 2 );
 
 # error messages
+define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );
 define( 'ERROR_SQL', 1 );
 define( 'ERROR_REPORT', 3 );
@@ -257,6 +258,7 @@ define( 'ERROR_DISPLAY_USER_ERROR_INLINE', 25 );
 define( 'ERROR_TYPE_MISMATCH', 26 );
 define( 'ERROR_SPAM_SUSPECTED', 27 );
 define( 'ERROR_FIELD_TOO_LONG', 28 );
+define( 'ERROR_INVALID_FIELD_VALUE', 29 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -297,22 +299,25 @@ define( 'ERROR_PROJECT_NOT_FOUND', 700 );
 define( 'ERROR_PROJECT_NAME_NOT_UNIQUE', 701 );
 define( 'ERROR_PROJECT_NAME_INVALID', 702 );
 define( 'ERROR_PROJECT_RECURSIVE_HIERARCHY', 703 );
+define( 'ERROR_PROJECT_SUBPROJECT_DUPLICATE', 704 );
+define( 'ERROR_PROJECT_SUBPROJECT_NOT_FOUND', 705 );
+define( 'ERROR_PROJECT_HIERARCHY_DISABLED', 706 );
 
 # ERROR_USER_*
 define( 'ERROR_USER_NAME_NOT_UNIQUE', 800 );
-define( 'ERROR_USER_NOT_FOUND', 801 );
 define( 'ERROR_USER_PREFS_NOT_FOUND', 802 );
 define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH', 803 );
 define( 'ERROR_USER_PROFILE_NOT_FOUND', 804 );
 define( 'ERROR_USER_NAME_INVALID', 805 );
 define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS', 806 );
-define( 'ERROR_USER_REAL_MATCH_USER', 807 );
 define( 'ERROR_USER_CHANGE_LAST_ADMIN', 808 );
 define( 'ERROR_USER_REAL_NAME_INVALID', 809 );
 define( 'ERROR_USER_BY_NAME_NOT_FOUND', 810 );
 define( 'ERROR_USER_BY_ID_NOT_FOUND', 811 );
 define( 'ERROR_USER_CURRENT_PASSWORD_MISMATCH', 812 );
 define( 'ERROR_USER_EMAIL_NOT_UNIQUE', 813 );
+define( 'ERROR_USER_BY_EMAIL_NOT_FOUND', 814 );
+define( 'ERROR_USER_BY_REALNAME_NOT_FOUND', 815 );
 
 # ERROR_AUTH_*
 define( 'ERROR_AUTH_INVALID_COOKIE', 900 );
@@ -419,6 +424,9 @@ define( 'ERROR_COLUMNS_INVALID', 2601 );
 
 # ERROR_SESSION_*
 define( 'ERROR_SESSION_HANDLER_INVALID', 2700 );
+# ERROR_SESSION_HANDLER_INVALID is no longer used in code
+# but can't be removed as long as it's used in one of the language files
+# for $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID]
 define( 'ERROR_SESSION_VAR_NOT_FOUND', 2701 );
 define( 'ERROR_SESSION_NOT_VALID', 2702 );
 
@@ -477,6 +485,20 @@ define( 'FILTER_TYPE_MULTI_INT', 4 );
 # Filter match types
 define( 'FILTER_MATCH_ALL', 0 );
 define( 'FILTER_MATCH_ANY', 1 );
+
+# Standard Filters
+define( 'FILTER_STANDARD_ANY', 'any' );
+define( 'FILTER_STANDARD_ASSIGNED', 'assigned' );
+define( 'FILTER_STANDARD_UNASSIGNED', 'unassigned' );
+define( 'FILTER_STANDARD_REPORTED', 'reported' );
+define( 'FILTER_STANDARD_MONITORED', 'monitored' );
+
+# Filter actions, refactored from view_all_set.php
+define( 'FILTER_ACTION_RESET', 0 );
+define( 'FILTER_ACTION_PARSE_NEW', 1 );
+define( 'FILTER_ACTION_PARSE_ADD', 2 );
+define( 'FILTER_ACTION_LOAD', 3 );
+define( 'FILTER_ACTION_GENERALIZE', 4 );
 
 # Versions
 define( 'VERSION_ALL', null );
@@ -592,6 +614,7 @@ define( 'DB_FIELD_SIZE_USERNAME', 191 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
+define( 'DB_FIELD_SIZE_HISTORY_VALUE', 255 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
@@ -603,7 +626,6 @@ define( 'LINKS_SAME_WINDOW', 1 );
 define( 'LINKS_NEW_WINDOW', 2 );
 
 # Auth Related Constants
-define( 'AUTH_COOKIE_LENGTH', 64 );
 define( 'API_TOKEN_LENGTH', 32 );
 
 # Obsolete / deprecated constants
@@ -614,6 +636,8 @@ define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
 define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+define( 'ERROR_USER_NOT_FOUND', 801 );
+define( 'ERROR_USER_REAL_MATCH_USER', 807 );
 
 # JQuery
 # hashes acquired with command 'cat file.js | openssl dgst -sha256 -binary | openssl enc -base64 -A'
@@ -621,8 +645,8 @@ define( 'JQUERY_VERSION', '2.2.4' );
 define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 
 # Bootstrap & FontAwesome
-define( 'BOOTSTRAP_VERSION', '3.3.6' );
-define( 'BOOTSTRAP_HASH', 'sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=' );
+define( 'BOOTSTRAP_VERSION', '3.4.0' );
+define( 'BOOTSTRAP_HASH', 'sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw' );
 define( 'FONT_AWESOME_VERSION', '4.6.3' );
 
 # Moment & DateTimePicker
@@ -632,26 +656,26 @@ define( 'DATETIME_PICKER_VERSION', '4.17.47' );
 define( 'DATETIME_PICKER_HASH', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
 
 # Chart JS
-define( 'CHARTJS_VERSION', '2.1.6' );
-define( 'CHARTJS_HASH', 'sha256-Emd9qupGNNjtRpaQjhpA4hn+PWAETkO2GB3gzBL3thM=' );
-define( 'CHARTJSBUNDLE_HASH', 'sha256-OBi9RJU9sFk/2JEV23eSQSqe/eUK4km5NxGgo/XMiqY=' );
+define( 'CHARTJS_VERSION', '2.7.3' );
+define( 'CHARTJS_HASH', 'sha384-WJu6cbQvbPRsw+66L1nOomDAZzhTALnUlpchFlWHimhJ9o95CMue7xEZXXDRKV2S' );
+define( 'CHARTJSBUNDLE_HASH', 'sha384-e4YKd0O/y4TmH7qskMQzKnOrqN83RJ7TmJ4RsBLHodJ6jHOE30I7J1uZfLdvybhc' );
 
 # Tyeahead JS
 define( 'TYPEAHEAD_VERSION', '1.1.1' );
 define( 'TYPEAHEAD_HASH', 'sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=' );
 
 # List JS
-define( 'LISTJS_VERSION', '1.4.1' );
-define( 'LISTJS_HASH', 'sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=' );
+define( 'LISTJS_VERSION', '1.5.0' );
+define( 'LISTJS_HASH', 'sha384-JDmRxRiXkNkskRM5AD4qHRGk9ItwZ9flbqOpsRYs8SOrIRwcMtTGKP2Scnjptzgm' );
 
 # Dropzone JS
-define( 'DROPZONE_VERSION', '4.3.0' );
-define( 'DROPZONE_HASH', 'sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=' );
+define( 'DROPZONE_VERSION', '5.5.0' );
+define( 'DROPZONE_HASH', 'sha384-TBYvJK9bRa7Ii3OZh+eaXb5r98Ad36+kotsxTD3tIEa9vgJOQ0lRMfZtWAJxPq4P' );
 
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
-# Maximum number of bugs that are treated simutaneously in export procedures,
+# Maximum number of bugs that are treated simultaneously in export procedures,
 # to keep memory usage under control. Do not exceed 1000 if using Oracle DB.
 define( 'EXPORT_BLOCK_SIZE', 500 );
 
@@ -665,11 +689,14 @@ define( 'DB_MAX_INT', 2147483647 );
 define( 'HTTP_STATUS_SUCCESS', 200 );
 define( 'HTTP_STATUS_CREATED', 201 );
 define( 'HTTP_STATUS_NO_CONTENT', 204 );
+define( 'HTTP_STATUS_NOT_MODIFIED', 304 );
 define( 'HTTP_STATUS_BAD_REQUEST', 400 );
 define( 'HTTP_STATUS_UNAUTHORIZED', 401 );
 define( 'HTTP_STATUS_FORBIDDEN', 403 );
 define( 'HTTP_STATUS_NOT_FOUND', 404 );
 define( 'HTTP_STATUS_CONFLICT', 409 );
+define( 'HTTP_STATUS_PRECONDITION_FAILED', 412 );
+define( 'HTTP_STATUS_TOO_MANY_REQUESTS', 429 );
 define( 'HTTP_STATUS_INTERNAL_SERVER_ERROR', 500 );
 define( 'HTTP_STATUS_UNAVAILABLE', 503 );
 
@@ -678,6 +705,9 @@ define( 'HEADER_AUTHORIZATION', 'Authorization' );
 define( 'HEADER_LOGIN_METHOD', 'X-Mantis-LoginMethod' );
 define( 'HEADER_USERNAME', 'X-Mantis-Username' );
 define( 'HEADER_VERSION', 'X-Mantis-Version' );
+define( 'HEADER_IF_MATCH', 'If-Match' );
+define( 'HEADER_IF_NONE_MATCH', 'If-None-Match' );
+define( 'HEADER_ETAG', 'ETag' );
 
 # LOGIN METHODS
 define( 'LOGIN_METHOD_COOKIE', 'cookie' );
@@ -699,7 +729,7 @@ define( 'MANAGE_CONFIG_ACTION_CREATE', 'create' );
 define( 'MANAGE_CONFIG_ACTION_CLONE', 'clone' );
 define( 'MANAGE_CONFIG_ACTION_EDIT', 'edit' );
 
-# Databse functional type identifiers.
+# Database functional type identifiers.
 define( 'DB_TYPE_UNDEFINED', 0 );
 define( 'DB_TYPE_MYSQL', 1 );
 define( 'DB_TYPE_PGSQL', 2 );

@@ -41,11 +41,13 @@
  * @author 9pagod
  * @author Baonguyen21022003
  * @author Duongnvm
+ * @author Ioe2015
  * @author KhangND
  * @author Max20091
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
+ * @author Vinhtantran
  * @author Yue Ling
  */
 
@@ -219,7 +221,7 @@ $s_new_account_do_not_reply = 'Không trả lời thư này';
 $s_new_account_email = 'Thư điện tử:';
 $s_new_account_IP = 'Địa chỉ IP từ xa:';
 $s_new_account_signup_msg = 'Các tài khoản sau đây đã được tạo ra:';
-$s_reset_request_msg = 'Ai đó (có lẽ là bạn) đã yêu cầu thay đổi mật khẩu thông qua e-mail xác minh. Nếu đây không phải là bạn, bỏ qua thư này và không có gì sẽ xảy ra. 
+$s_reset_request_msg = 'Ai đó (có lẽ là bạn) đã yêu cầu thay đổi mật khẩu bằng cách xác minh e-mail. Nếu đây không phải là bạn, xin bỏ qua thư này và sẽ không có gì thay đổi. 
 
 Nếu bạn yêu cầu xác minh này, hãy truy cập vào URL sau để thay đổi mật khẩu của bạn:';
 $s_reset_request_in_progress_msg = 'Nếu bạn cung cấp đúng tên và địa chỉ e-mail cho tài khoản của bạn, chúng tôi sẽ phải gửi một tin nhắn xác nhận đến địa chỉ e-mail. Một khi tin nhắn đã được nhận, làm theo hướng dẫn cung cấp để thay đổi mật khẩu tài khoản của bạn.';
@@ -346,7 +348,6 @@ $s_sponsor_show = 'Hiển thị tất cả';
 $s_payment_updated = 'Cập nhật thông tin thanh toán';
 $s_account_updated_msg = 'Tài khoản của bạn được cập nhật thành công...';
 $s_email_updated = 'Địa chỉ thư điện tử cập nhật thành công';
-$s_realname_duplicated = 'Tên thật được sử dụng bởi người dùng khác';
 $s_realname_updated = 'Tên thật cập nhật thành công';
 $s_password_updated = 'Cập nhật thành công mật khẩu';
 $s_multiple_projects = 'Những vấn đề bạn đã chọn được từ các dự án khác nhau. Các thông số dưới đây phản ánh các cài đặt cho tất cả các dự án. Nếu điều này không đúng, hãy thử thay đổi của bạn với một số lượng nhỏ hơn các vấn đề lựa chọn.';
@@ -642,6 +643,7 @@ $s_create_new_subproject_link = 'Tạo mới tiểu dự án';
 $s_unlink_link = 'Bỏ liên kết';
 $s_show_global_users = 'Hiện người dùng có truy cập toàn cầu';
 $s_hide_global_users = 'Ẩn người dùng có truy cập toàn cầu';
+$s_review_changes = 'Xem lại thay đổi';
 $s_add_project_title = 'Thêm dự án';
 $s_upload_file_path = 'Tải lên File Path';
 $s_add_project_button = 'Thêm dự án';
@@ -1128,11 +1130,12 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Cấu hình tùy chọn "%1$s" khô
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Cấu hình tùy chọn "%1$s" không thể được đặt trong cơ sở dữ liệu. Nó phải được đặt trong tệp config_inc.php';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chuỗi "%1$s" không tìm thấy';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Ghi chú không tìm thấy';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dự án "%1$d" không tìm thấy';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Trường cơ sở dữ liệu "%1$s" không tìm thấy';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler không có quyền truy cập đầy đủ để xử lý vấn đề ở tình trạng này';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dự án "%1$d" không tìm thấy';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Một dự án với tên đó đã tồn tại. Xin vui lòng quay lại và nhập một tên khác nhau';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Tên dự án không hợp lệ được chỉ ra. Tên dự án không thể trống được.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Đó là hoạt động sẽ tạo ra một vòng lặp trong phân cấp tiểu dự án.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Người sử dụng với tên "%1$s" không tìm thấy.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Người sử dụng với id "%1$d" không tìm thấy';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Thông tin đăng nhập được lưu trữ bởi trình duyệt của bạn không hợp lệ. Có thể tài khoản của bạn đã được xóa?';
@@ -1144,7 +1147,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Một chuỗi được mong đợi 
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Một số được mong đợi cho %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d không tìm thấy';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Bộ lọc %1$s không tìm thấy';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Các bộ lọc bạn đang cố gắng sử dụng quá cũ để được nâng cấp. Xin vui lòng tái tạo nó';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Địa chỉ thư điện tử không hợp lệ';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Nó không được phép sử dụng e-mail dùng một lần địa chỉ';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Hồ sơ không tìm thấy';
@@ -1179,7 +1181,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Phiên bản "%1$s" không tìm thấy
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Tên người dùng không hợp lệ. Tên người dùng chỉ có thể chứa chữ cái Latin, số, dấu cách, dấu gạch ngang, dấu chấm, cộng với dấu hiệu và gạch dưới.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Tên thật của người dùng không hợp lệ.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Người dùng không có mức độ truy cập yêu cầu.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '"Tên thật" chọn phù hợp với tên đăng nhập của người dùng khác. Hãy chọn khác.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Tài trợ hỗ trợ không được kích hoạt.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Tài trợ %1$d không tìm thấy.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Tài trợ (%1$s) là dưới số tiền tối thiểu (%2$s)';
@@ -1197,7 +1198,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Bạn phải cung cấp
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Thông tin cung cấp không phù hợp bất kỳ tài khoản đăng ký!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Xác nhận các URL không hợp lệ hoặc đã được sử dụng. Xin vui lòng đăng ký một lần nữa.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Số lượng tối đa các yêu cầu trong tiến trình đạt được. Xin vui lòng liên hệ với các quản trị hệ thống.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Đó là hoạt động sẽ tạo ra một vòng lặp trong phân cấp tiểu dự án.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Bạn không thể loại bỏ hoặc giảm cấp tài khoản quản trị cuối cùng. Để thực hiện các hành động mà bạn yêu cầu, trước tiên bạn cần tạo một tài khoản quản trị.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Trang chuyển hướng sai sót, đảm bảo rằng không có không gian bên ngoài khối PHP (<? Php?>) trong tệp config_inc.php hoặc custom_ *. php.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Không thể tìm thấy một tag có tên đó.';
@@ -1216,7 +1216,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Các " %1$s " plugin cần phải 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Có một lỗi không rõ "%1$s" trong quá trình thực hiện của các "%2$s" plugin';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Trường "%1$s" có chứa bản sao cột "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Trường "%1$s" có chứa không hợp lệ trường "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Phiên xử lý không hợp lệ';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Biến phiên "%1$s" không tìm thấy.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Phiên của bạn đã trở thành vô hiệu.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hình thức bảo mật không phù hợp. Việc này có thể là do phiên làm việc hết hạn, hay do việc vô ý gửi một biểu mẫu 2 lần.';
@@ -1224,3 +1223,5 @@ $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Trang này không thể được 
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Trường sắp xếp không hợp lệ';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Định dạng ngày không hợp lệ.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Không thể cập nhật múi giờ';
+$s_apply_changes = 'Áp dụng các thay đổi';
+$s_undo = 'Hoàn tác';

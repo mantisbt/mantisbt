@@ -656,7 +656,7 @@ git am --signoff feature_branch.patch
 					</listitem>
 					<listitem>
 						<para>
-							<ulink url="http://gitorious.com">Gitorious</ulink>
+							<ulink url="https://gitlab.com">GitLab</ulink>
 						</para>
 					</listitem>
 				</itemizedlist>

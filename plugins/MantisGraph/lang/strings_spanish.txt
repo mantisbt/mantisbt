@@ -42,6 +42,7 @@
  * @author Bithunter
  * @author Crazymadlover
  * @author Fitoschido
+ * @author Jelou
  * @author Koavf
  * @author Locos epraix
  * @author Macofe
@@ -74,21 +75,22 @@ $s_plugin_MantisGraph_by_resolution_pct = 'Por porcentaje según resolución';
 $s_plugin_MantisGraph_by_severity_mix = 'Por severidad y estado';
 $s_plugin_MantisGraph_by_priority_mix = 'Por prioridad y estado';
 $s_plugin_MantisGraph_by_resolution_mix = 'Por resolución y estado';
-$s_plugin_MantisGraph_legend_still_open = 'Aún Abierta';
+$s_plugin_MantisGraph_legend_still_open = 'Aún abierta';
 $s_plugin_MantisGraph_legend_resolved = 'Resuelta';
 $s_plugin_MantisGraph_legend_reported = 'Reportada';
 $s_plugin_MantisGraph_period_none = 'Ninguna';
 $s_plugin_MantisGraph_period_this_week = 'Esta semana';
-$s_plugin_MantisGraph_period_last_week = 'Última Semana';
-$s_plugin_MantisGraph_period_two_weeks = 'Últimas dos Semanas';
-$s_plugin_MantisGraph_period_this_month = 'Este Mes';
-$s_plugin_MantisGraph_period_last_month = 'Último Mes';
-$s_plugin_MantisGraph_period_this_quarter = 'Este Trimestre';
-$s_plugin_MantisGraph_period_last_quarter = 'Último Trimestre';
-$s_plugin_MantisGraph_period_year_to_date = 'Lo que va del Año';
-$s_plugin_MantisGraph_period_select = 'Fechas Arbitrarias';
-$s_plugin_MantisGraph_period_last_year = 'Último Año';
-$s_plugin_MantisGraph_graph_page = 'Historial Gráfico de la Incidencia';
+$s_plugin_MantisGraph_period_last_week = 'Última semana';
+$s_plugin_MantisGraph_period_two_weeks = 'Últimas dos semanas';
+$s_plugin_MantisGraph_period_this_month = 'Este mes';
+$s_plugin_MantisGraph_period_last_month = 'Último mes';
+$s_plugin_MantisGraph_period_this_quarter = 'Este trimestre';
+$s_plugin_MantisGraph_period_last_quarter = 'Último trimestre';
+$s_plugin_MantisGraph_period_year_to_date = 'Lo que va del año';
+$s_plugin_MantisGraph_period_select = 'Fechas arbitrarias';
+$s_plugin_MantisGraph_period_last_year = 'Último año';
+$s_plugin_MantisGraph_graph_page = 'Historial gráfico de la incidencia';
 $s_plugin_MantisGraph_graph_topdev = 'Principales desarrolladores por incidencias resueltas';
 $s_plugin_MantisGraph_graph_opendev = 'Desarrolladores por incidencias abiertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Principales creadores por incidencias resueltas';
+$s_plugin_MantisGraph_other_categories = 'otras categorías (%d)';

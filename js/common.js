@@ -80,21 +80,25 @@ $(document).ready( function() {
         SetCookie( "collapse_settings", t_cookie );
     });
 
-    $('#sidebar.sidebar-toggle').on('click', function (event) {
-        var t_id = $(this).attr('id');
-        var t_cookie = GetCookie("collapse_settings");
-        if (1 == g_collapse_clear) {
-            t_cookie = "";
-            g_collapse_clear = 0;
-        }
-        if( $(this).parent().hasClass( "menu-min" ) ) {
-            t_cookie = t_cookie.replace("|" + t_id + ":1", '');
-            t_cookie = t_cookie + "|" + t_id + ":0";
-        } else {
-            t_cookie = t_cookie.replace("|" + t_id + ":0", '');
-            t_cookie = t_cookie + "|" + t_id + ":1";
-        }
-        SetCookie("collapse_settings", t_cookie);
+    $('#sidebar-btn.sidebar-toggle').on('click', function (event) {
+		var t_cookie;
+		var t_sidebar = $(this).closest('.sidebar');
+		var t_id = t_sidebar.attr('id');
+
+		if (1 == g_collapse_clear) {
+			t_cookie = "";
+			g_collapse_clear = 0;
+		} else {
+			// Get collapse state and remove the old value
+			t_cookie = GetCookie("collapse_settings");
+			t_cookie = t_cookie.replace(new RegExp('\\|' + t_id + ':.'), '');
+		}
+
+		// Save the new collapse state
+		var t_value = !t_sidebar.hasClass("menu-min") | 0;
+		t_cookie += '|' + t_id + ':' + t_value;
+
+		SetCookie("collapse_settings", t_cookie);
     });
 
     $('input[type=text].typeahead').each(function() {
@@ -122,12 +126,16 @@ $(document).ready( function() {
 		event.preventDefault();
 		var fieldID = $(this).attr('id');
 		var filter_id = $(this).data('filter_id');
+		var filter_tmp_id = $(this).data('filter');
 		var targetID = fieldID + '_target';
 		var viewType = $('#filters_form_open input[name=view_type]').val();
 		$('#' + targetID).html('<span class="dynamic-filter-loading">' + translations['loading'] + "</span>");
 		var params = 'view_type=' + viewType + '&filter_target=' + fieldID;
 		if( undefined !== filter_id ) {
 			params += '&filter_id=' + filter_id;
+		}
+		if( undefined !== filter_tmp_id ) {
+			params += '&filter=' + filter_tmp_id;
 		}
 		$.ajax({
 			url: 'return_dynamic_filters.php',
@@ -166,6 +174,83 @@ $(document).ready( function() {
 			$(this).closest('form').find(':checkbox[name="' + baseFieldName + '[]"]').prop('checked', $(this).is(':checked'));
 		});
 	}
+
+	/**
+	 * Prepare a table where the checkboxes range selection has been applied
+	 * Save row and column index in each cell for easier iteration.
+	 * This assumes no rowspan or colspan is used in the area where the ckecboxes are rendered.
+	 */
+	$('table.checkbox-range-selection').each(function(){
+		$(this).find('tr').each( function(row_index){
+			$(this).children('th, td').each(function(col_index){
+				$(this).data('col_index', col_index);
+				$(this).data('row_index', row_index);
+			});
+		});
+	});
+
+	/**
+	 * Enable range selection for checkboxes, inside a container having class "checkbox-range-selection"
+	 * Assumes the bootstrap/ace styled checkboxes:
+	 *		<label>
+	 *			<input type="checkbox" class="ace">
+	 *			<span class="lbl"></span>
+	 *		</label>
+	 */
+	$('.checkbox-range-selection').on('click', 'label', function (e) {
+		if( $(this).children('input:checkbox').length == 0 ) {
+			return;
+		}
+		var jcontainer = $(this).closest('.checkbox-range-selection');
+		var last_clicked = jcontainer.data('checkbox-range-last-clicked');
+		if (!last_clicked) {
+			last_clicked = this;
+		}
+		if (e.shiftKey) {
+			// Because shift-click is triggered in a label/span, some browsers
+			// will activate a text selection. Remove text selection.
+			window.getSelection().removeAllRanges();
+			var cb_label_list = jcontainer.find('label').has('input:checkbox');
+			// The actual input hasn't been changed yet, so we want to set the
+			// opposite value for all the checkboxes
+			var clicked_current_st = $(this).find('input:checkbox').first().prop('checked');
+			// The currently clicked one is also modified, becasue shift-click is not
+			// recognised correctly by the framework. See #25215
+			if( jcontainer.is('table') ) {
+				// Special case for a table container:
+				// we traverse the table cells for a rectangular area
+				var cell_1 = $(this).closest('th, td');
+				var row_1 = cell_1.data('row_index');
+				var col_1 = cell_1.data('col_index');
+				var cell_2 = $(last_clicked).closest('th, td');
+				var row_2 = cell_2.data('row_index');
+				var col_2 = cell_2.data('col_index');
+				var row_start = Math.min(row_1, row_2);
+				var row_end = Math.max(row_1, row_2);
+				var col_start = Math.min(col_1, col_2);
+				var col_end = Math.max(col_1, col_2);
+				for (i = 0 ; i <= cb_label_list.length ; i++) {
+					var it_td = $(cb_label_list[i]).closest('th, td');
+					var it_row = it_td.data('row_index');
+					var it_col = it_td.data('col_index');
+					if(    row_start <= it_row && it_row <= row_end
+						&& col_start <= it_col && it_col <= col_end ) {
+						$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+					}
+				}
+			} else {
+				// General case: we traverse the items by their relative index
+				var start = cb_label_list.index(this);
+				var end = cb_label_list.index(last_clicked);
+				var index_start = Math.min(start, end);
+				var index_end = Math.max(start, end);
+				for (i = index_start ; i <= index_end ; i++) {
+					$(cb_label_list[i]).find('input:checkbox').prop('checked', !clicked_current_st);
+				}
+			}
+		}
+		jcontainer.data('checkbox-range-last-clicked', this);
+	});
 
 	var stopwatch = {
 		timerID: 0,
@@ -277,7 +362,7 @@ $(document).ready( function() {
 		}
 	});
 	$('[name=source_query_id]').change( function() {
-		$(this).parent().submit();
+		$(this.form).submit();
 	});
 
 	/* Project selector: auto-switch on select */
@@ -351,7 +436,8 @@ $(document).ready( function() {
 		var currentTagString = $('#tag_string').val();
 		var newTagOptionID = $(this).val();
 		var newTag = $('#tag_select option[value=' + newTagOptionID + ']').text();
-		if (currentTagString.indexOf(newTag) == -1) {
+		var tagArray = currentTagString.split(tagSeparator);
+		if (tagArray.indexOf(newTag) == -1) {
 			if (currentTagString.length > 0) {
 				$('#tag_string').val(currentTagString + tagSeparator + newTag);
 			} else {
@@ -393,6 +479,46 @@ $(document).ready( function() {
 		);
 		$('.visible-on-hover').addClass('invisible');
 	}
+
+	/**
+	 * Enhance tables with sortable columns using list.js
+	 */
+	$('.table-responsive.sortable').each(function(){
+		var jtable = $(this).find('table').first();
+		var ths = jtable.find('thead th');
+		if( !ths.length ) {
+			// exit if there is no headers
+			return;
+		}
+		var th_count = ths.length
+		var options_valuenames = [];
+		ths.each(function(index){
+			// wrap the contents into a crafted div
+			var new_div = $('<div />').addClass('sort')
+					.attr('data-sort','sortkey_'+index)
+					.attr('role','button')
+					.html($(this).html());
+			$(this).html(new_div);
+
+			options_valuenames.push( { name:'sortkey_'+index, attr:'data-sortval' } );
+		});
+		var trs = jtable.find('tbody tr');
+		trs.each(function(){
+			var tds = $(this).find('td');
+			if( tds.length != th_count ) {
+				// exit if different number of cells than headers, possibly colspan, etc
+				return;
+			}
+			tds.each(function(index){
+				$(this).addClass( 'sortkey_'+index ).attr( 'data-sortval', $(this).text() );
+			});
+		});
+		jtable.find('tbody').addClass('list');
+
+		var listoptions = { valueNames: options_valuenames };
+		var listobject =  new List( this, listoptions );
+		$(this).data('listobject',listobject).data('listoptions',listoptions).addClass('listjs-table');
+	});
 });
 
 function setBugLabel() {
@@ -516,53 +642,87 @@ function enableDropzone( classPrefix, autoUpload ) {
 	var zone_class =  '.' + classPrefix;
 	var zone = $( zone_class );
 	var form = zone.closest('form');
-	try {
-		var zone_object = new Dropzone( form[0], {
-			forceFallback: zone.data('force-fallback'),
-			paramName: "ufile",
-			autoProcessQueue: autoUpload,
-			clickable: zone_class,
-			previewsContainer: '#' + classPrefix + '-previews-box',
-			uploadMultiple: true,
-			parallelUploads: 100,
-			maxFilesize: zone.data('max-filesize'),
-			addRemoveLinks: !autoUpload,
-			acceptedFiles: zone.data('accepted-files'),
-			previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
-			dictDefaultMessage: zone.data('default-message'),
-			dictFallbackMessage: zone.data('fallback-message'),
-			dictFallbackText: zone.data('fallback-text'),
-			dictFileTooBig: zone.data('file-too-big'),
-			dictInvalidFileType: zone.data('invalid-file-type'),
-			dictResponseError: zone.data('response-error'),
-			dictCancelUpload: zone.data('cancel-upload'),
-			dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
-			dictRemoveFile: zone.data('remove-file'),
-			dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
-			dictMaxFilesExceeded: zone.data('max-files-exceeded'),
+	var max_filesize_bytes = zone.data('max-filesize-bytes');
+	var max_filseize_mb = Math.ceil( max_filesize_bytes / ( 1024*1024) );
+	var options = {
+		forceFallback: zone.data('force-fallback'),
+		paramName: "ufile",
+		autoProcessQueue: autoUpload,
+		clickable: zone_class,
+		previewsContainer: '#' + classPrefix + '-previews-box',
+		uploadMultiple: true,
+		parallelUploads: 100,
+		maxFilesize: max_filseize_mb,
+		addRemoveLinks: !autoUpload,
+		acceptedFiles: zone.data('accepted-files'),
+		thumbnailWidth: 150,
+		thumbnailMethod: 'contain',
+		dictDefaultMessage: zone.data('default-message'),
+		dictFallbackMessage: zone.data('fallback-message'),
+		dictFallbackText: zone.data('fallback-text'),
+		dictFileTooBig: zone.data('file-too-big'),
+		dictInvalidFileType: zone.data('invalid-file-type'),
+		dictResponseError: zone.data('response-error'),
+		dictCancelUpload: zone.data('cancel-upload'),
+		dictCancelUploadConfirmation: zone.data('cancel-upload-confirmation'),
+		dictRemoveFile: zone.data('remove-file'),
+		dictRemoveFileConfirmation: zone.data('remove-file-confirmation'),
+		dictMaxFilesExceeded: zone.data('max-files-exceeded'),
 
-			init: function () {
-				var dropzone = this;
-				var form = $( this.options.clickable ).closest('form');
-				form.on('submit', function (e) {
-					if( dropzone.getQueuedFiles().length ) {
-						e.preventDefault();
-						e.stopPropagation();
-						dropzone.processQueue();
-					}
-				});
-				this.on( "successmultiple", function( files, response ) {
-					document.open();
-					document.write( response );
-					document.close();
-				});
-			},
-			fallback: function() {
-				if( $( "." + classPrefix ).length ) {
-					$( "." + classPrefix ).hide();
+		init: function () {
+			var dropzone = this;
+			var form = $( this.options.clickable ).closest('form');
+			form.on('submit', function (e) {
+				if( dropzone.getQueuedFiles().length ) {
+					e.preventDefault();
+					e.stopPropagation();
+					dropzone.processQueue();
 				}
+			});
+			this.on( "successmultiple", function( files, response ) {
+				document.open();
+				document.write( response );
+				document.close();
+			});
+			/**
+			 * 'addedfiles' is undocumented but works similar to 'addedfile'
+			 * It's triggered once after a multiple file addition, and receives
+			 * an array with the added files.
+			 */
+			this.on("addedfiles", function (files) {
+				var error_found = false;
+				var text_files = '';
+				for (var i = 0; i < files.length; i++) {
+					if( files[i].size > max_filesize_bytes ) {
+						error_found = true;
+						var size_mb = files[i].size / ( 1024*1024 );
+						var dec = size_mb < 0.01 ? 3 : 2;
+						text_files = text_files + '"' + files[i].name + '" (' + size_mb.toFixed(dec) + ' MiB)\n';
+						this.removeFile( files[i] );
+					}
+				}
+				if( error_found ) {
+					var max_mb = max_filesize_bytes / ( 1024*1024 );
+					var max_mb_dec = max_mb < 0.01 ? 3 : 2;
+					var text = zone.data( 'dropzone_multiple_files_too_big' );
+					text = text.replace( '{{files}}', '\n' + text_files + '\n' );
+					text = text.replace( '{{maxFilesize}}', max_mb.toFixed(max_mb_dec) );
+					alert( text );
+				}
+			});
+		},
+		fallback: function() {
+			if( $( "." + classPrefix ).length ) {
+				$( "." + classPrefix ).hide();
 			}
-		});
+		}
+	};
+	var preview_template = document.getElementById('dropzone-preview-template');
+	if( preview_template ) {
+		options.previewTemplate = preview_template.innerHTML;
+	}
+	try {
+		var zone_object = new Dropzone( form[0], options );
 	} catch (e) {
 		alert( zone.data('dropzone-not-supported') );
 	}

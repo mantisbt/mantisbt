@@ -110,7 +110,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
+		session_set_cookie_params( 0, config_get_global( 'cookie_path' ), config_get_global( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
 
 		# Handle existent session ID
 		if( !is_null( $p_session_id ) ) {
@@ -184,18 +184,9 @@ class MantisPHPSession extends MantisSession {
  * @return void
  */
 function session_init( $p_session_id = null ) {
-	global $g_session, $g_session_handler;
+	global $g_session;
 
-	switch( utf8_strtolower( $g_session_handler ) ) {
-		case 'php':
-			$g_session = new MantisPHPSession( $p_session_id );
-			break;
-		case 'memcached':
-			# Not yet implemented
-		default:
-			trigger_error( ERROR_SESSION_HANDLER_INVALID, ERROR );
-			break;
-	}
+	$g_session = new MantisPHPSession( $p_session_id );
 
 	if( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
 		session_validate( $g_session );

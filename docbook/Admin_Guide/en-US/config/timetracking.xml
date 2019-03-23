@@ -35,6 +35,15 @@
 		</varlistentry>
 
 		<varlistentry>
+			<term>$g_time_tracking_billing_rate</term>
+			<listitem>
+				<para>
+					Default billing rate per hour - Default is 0
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
 			<term>$g_time_tracking_stopwatch</term>
 			<listitem>
 				<para>

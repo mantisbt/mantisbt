@@ -360,9 +360,9 @@ class Graph {
 			);
 
 		$t_pipes = array();
-		$t_proccess = proc_open( $t_command, $t_descriptors, $t_pipes );
+		$t_process = proc_open( $t_command, $t_descriptors, $t_pipes );
 
-		if( is_resource( $t_proccess ) ) {
+		if( is_resource( $t_process ) ) {
 			# Filter generated output through dot
 			fwrite( $t_pipes[0], $t_dot_source );
 			fclose( $t_pipes[0] );
@@ -384,7 +384,7 @@ class Graph {
 			}
 
 			fclose( $t_pipes[1] );
-			proc_close( $t_proccess );
+			proc_close( $t_process );
 		}
 	}
 

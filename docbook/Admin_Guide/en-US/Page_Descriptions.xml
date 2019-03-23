@@ -880,6 +880,16 @@
                                 <entry>threshold to view the changelog</entry>
                             </row>
                             <row>
+                                <entry>View Roadmap</entry>
+                                <entry>$g_roadmap_view_threshold</entry>
+                                <entry>threshold to view the roadmap</entry>
+                            </row>
+                            <row>
+                                <entry>View Summary</entry>
+                                <entry>$g_view_summary_threshold</entry>
+                                <entry>threshold to view the summary</entry>
+                            </row>
+                            <row>
                                 <entry>View Assigned To</entry>
                                 <entry>$g_view_handler_threshold</entry>
                                 <entry>threshold to see who is handling an issue</entry>

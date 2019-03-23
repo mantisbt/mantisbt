@@ -38,11 +38,13 @@
  * @ingroup Language
  * @file
  *
+ * @author --szabi--
  * @author Csega
  * @author Dj
  * @author Glanthor Reviol
  * @author Leiric
  * @author MeskoBalazs
+ * @author Misibacsi
  * @author R-Joe
  * @author Sucy
  * @author Tacsipacsi
@@ -84,10 +86,10 @@ $s_anonymous = 'Névtelen';
 $s_jump_to_bugnotes = 'Ugrás a megjegyzésekhez';
 $s_jump_to_history = 'Ugrás az előzményekhez';
 $s_display_history = 'Előzmények megjelenítése';
-$s_public_project_msg = 'Ez egy PUBLIKUS projekt, minden felhasználó hozzáférhet.';
-$s_private_project_msg = 'Ez egy PRIVÁT projekt, csak az adminisztrátorok és a kézzel hozzáadott felhasználók férhetnek hozzá.';
+$s_public_project_msg = 'Ez egy nyilvános projekt, minden felhasználó hozzáférhet.';
+$s_private_project_msg = 'Ez egy privát projekt, csak az adminisztrátorok és a kézzel hozzáadott felhasználók férhetnek hozzá.';
 $s_access_level_project = 'Projekt hozzáférési szint';
-$s_view_submitted_bug_link = 'Beküldött ügy megtekintése %1$s';
+$s_view_submitted_bug_link = 'Beküldött %1$s ügy megtekintése';
 $s_assigned_projects = 'Hozzárendelt projektek';
 $s_assigned_projects_label = 'Hozzárendelt projektek';
 $s_unassigned_projects_label = 'Nem hozzárendelt projektek';
@@ -119,7 +121,7 @@ $s_bug_relationships = 'Kapcsolatok';
 $s_empty_password_sure_msg = 'A felhasználó jelszava üres. Valóban ezt akarja?';
 $s_empty_password_button = 'Üres jelszó használata';
 $s_reauthenticate_title = 'Hitelesítés';
-$s_reauthenticate_message = 'Egy biztonságos oldalra ért, és a biztonságos munkamenete lejárt. Hitelesítse magát a folytatáshoz.';
+$s_reauthenticate_message = 'Ön egy biztonságos oldalon van, és a biztonságos munkamenete lejárt. Hitelesítse magát a folytatáshoz.';
 $s_no_category = '(nincs kategória)';
 $s_global_categories = 'Globális kategóriák';
 $s_inherit = 'Kategóriák öröklése';
@@ -143,7 +145,7 @@ $s_file_added = 'Fájl hozzáadva';
 $s_file_deleted = 'Fájl törölve';
 $s_bug_deleted = 'Ügy törölve';
 $s_make_private = 'Priváttá tétel';
-$s_make_public = 'Publikussá tétel';
+$s_make_public = 'Nyilvánossá tétel';
 $s_create_new_project_link = 'Új projekt létrehozása';
 $s_login_link = 'Bejelentkezés';
 $s_opensearch_id_short = '%s ID';
@@ -210,8 +212,8 @@ $s_issue_status_percentage = 'Ügyek státusza százalékban';
 $s_access_levels_enum_string = '10:néző,25:bejelentő,40:frissítő,55:fejlesztő,70:menedzser,90:adminisztrátor';
 $s_no_access = 'nincs hozzáférés';
 $s_project_status_enum_string = '10:fejlesztői,30:kiadás,50:stabil,70:elavult';
-$s_project_view_state_enum_string = '10:publikus,50:privát';
-$s_view_state_enum_string = '10:publikus,50:privát';
+$s_project_view_state_enum_string = '10:nyilvános,50:privát';
+$s_view_state_enum_string = '10:nyilvános,50:privát';
 $s_priority_enum_string = '10:ráér,20:alacsony,30:normál,40:magas,50:sürgős,60:azonnali';
 $s_severity_enum_string = '10:kérés,20:triviális,30:szöveghiba,40:zavar,50:apró hiba,60:nagyobb hiba,70:összeomlás,80:akadály';
 $s_reproducibility_enum_string = '10:mindig,30:néha,50:véletlenszerűen,70:nem próbáltam,90:reprodukálhatatlan,100:N/A';
@@ -222,10 +224,10 @@ $s_eta_enum_string = '10:semmi,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,6
 $s_sponsorship_enum_string = '0:Nem fizetett,1:Felkért,2:Fizetett';
 $s_new_account_subject = 'Regisztráció';
 $s_new_account_greeting = 'Köszönjük regisztrációját. Felhasználóneve: „%1$s”. A regisztráció befejezéséhez látogassa meg a következő címet (győződjön meg róla, hogy egy sorban írta be), és állítsa be saját jelszavát:';
-$s_new_account_greeting_admincreated = '%1$s felhasználó létrehozta a felhasználói fiókját, „%2$s” felhasználónévvel. Hogy befejezze a regisztrációját, látogasson el a következő címre (győződjön meg róla, hogy egyetlen sorba írja be) és állítsa be a jelszavát:';
+$s_new_account_greeting_admincreated = '%1$s felhasználó létrehozta a felhasználói fiókodat „%2$s” felhasználónévvel. A regisztráció befejezéséhez látogasd meg a következő címet (győződj meg róla, hogy egy sorban van írva), és állítsd be a saját jelszavadat:';
 $s_new_account_username = 'Felhasználónév:';
 $s_new_account_message = 'Ha nem kért regisztrációt, hagyja figyelmen kívül ezt az üzenetet, és semmi sem történik.';
-$s_new_account_do_not_reply = 'NE VÁLASZOLJON ERRE A LEVÉLRE';
+$s_new_account_do_not_reply = 'Ne válaszoljon erre a levélre';
 $s_new_account_email = 'E-mail cím:';
 $s_new_account_IP = 'Távoli IP-cím:';
 $s_new_account_signup_msg = 'A következő felhasználót hoztuk létre:';
@@ -264,7 +266,7 @@ $s_email_notification_title_for_action_relationship_child_resolved = 'A KAPCSOL�
 $s_email_notification_title_for_action_relationship_child_closed = 'A KAPCSOLÓDÓ %1$s ügyet LEZÁRTÁK.';
 $s_email_notification_title_for_action_related_issue_deleted = 'A KAPCSOLÓDÓ %1$s ügyet TÖRÖLTÉK.';
 $s_email_notification_title_for_action_monitor = 'A(z) %1$s ügyet mostantól %2$s felhasználó figyeli.';
-$s_email_reporter = 'Bejelentette';
+$s_email_reporter = 'Bejelentette:';
 $s_email_handler = 'Hozzárendelve a következőhöz:';
 $s_email_project = 'Projekt';
 $s_email_bug = 'Ügy száma';
@@ -341,6 +343,7 @@ $s_email_on_priority_change = 'E-mail prioritásváltozáskor';
 $s_email_bugnote_limit = 'E-mail megjegyzések limitje';
 $s_email_full_issue_details = 'Az ügy összes részleteinek elküldése e-mailben';
 $s_language = 'Nyelv';
+$s_font_family = 'Betűkészlet';
 $s_update_prefs_button = 'Beállítások frissítése';
 $s_reset_prefs_button = 'Beállítások visszaállítása';
 $s_timezone = 'Időzóna';
@@ -362,7 +365,7 @@ $s_delete_profile = 'Profil törlése';
 $s_select_profile = 'Profil kiválasztása';
 $s_submit_button = 'Elküld';
 $s_profile_updated_msg = 'Profil frissítve…';
-$s_my_sponsorship = 'Az Ön támogatásai';
+$s_my_sponsorship = 'Támogatásaim';
 $s_update_sponsorship_button = 'Fizetés állapotának megváltoztatása';
 $s_no_sponsored = 'Nincs Önhöz rendelt támogatott ügy.';
 $s_own_sponsored = 'Az Ön által támogatott ügyek:';
@@ -378,7 +381,6 @@ $s_sponsor_show = 'Minden megjelenítése';
 $s_payment_updated = 'Fizetési információ frissítve.';
 $s_account_updated_msg = 'Felhasználói adatai sikeresen frissítve…';
 $s_email_updated = 'E-mail cím sikeresen frissítve';
-$s_realname_duplicated = 'Ez egy másik felhasználó teljes neve';
 $s_realname_updated = 'Teljes név sikeresen frissítve';
 $s_password_updated = 'Jelszó sikeresen frissítve';
 $s_multiple_projects = 'A kiválasztott ügyek különböző projektekből valók. Az alábbi paraméterek minden projektre vonatkoznak. Ha ez nem megfelelő, próbálja meg újra kevesebb ügyet választva.';
@@ -583,6 +585,7 @@ $s_date_created = 'Létrehozás dátuma';
 $s_last_visit = 'Utolsó látogatás';
 $s_last_visit_label = 'Utolsó látogatás:';
 $s_edit_user_link = 'Felhasználó szerkesztése';
+$s_search_user_hint = 'Felhasználónév, valódi név vagy e-mail cím';
 $s_separate_list_items_by = '(listaelemek elválasztása ezzel: „%1$s”)';
 $s_config_all_projects = 'Megjegyzés: Ezek a beállítások MINDEN PROJEKTRE kihatnak, hacsak projektszinten nincsenek felülbírálva.';
 $s_config_project = 'Megjegyzés: Ezek a beállítások csak a(z) %1$s projektre vonatkoznak.';
@@ -897,6 +900,7 @@ $s_total_time = 'Összes idő';
 $s_developer_stats = 'Fejlesztők statisztikája';
 $s_reporter_stats = 'Bejelentők statisztikája';
 $s_orct = '(nyitott/megoldott/lezárt/összesen)';
+$s_summary_header = 'nyitva/megoldva/lezárva/összes/megoldási arány/arány';
 $s_any = 'bármelyik';
 $s_all = 'mindegyik';
 $s_show = 'Megjelenítés';
@@ -1066,6 +1070,7 @@ $s_bug_created_from = 'Ügy generálva a következőből:';
 $s_copy_from_parent = 'Kiterjesztett adatok másolása a szülő ügyből';
 $s_copy_notes_from_parent = 'Ügy megjegyzés másolása';
 $s_copy_attachments_from_parent = 'Mellékletek másolása';
+$s_with = 'ezzel:';
 $s_viewing_bug_relationship_graph_title = 'Kapcsolati háló';
 $s_viewing_bug_dependency_graph_title = 'Függőségi háló';
 $s_relation_graph = 'Kapcsolati grafikon';
@@ -1229,6 +1234,8 @@ $s_month_october = 'október';
 $s_month_november = 'november';
 $s_month_december = 'december';
 $s_timeline_issue_created = '<span class="username">%1$s</span> létrehozta a(z) <span class="issue_id">%2$s</span> ügyet';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> mellékelte a(z) <em>%3$s</em> fájlt a(z) <span class="issue_id">%2$s</span> ügyhöz';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> eltávolította a(z) <em>%3$s</em> fájlt a(z) <span class="issue_id">%2$s</span> ügytől';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> megjegyzést fűzött a(z) <span class="issue_id">%2$s</span> ügyhöz';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> követi a(z) <span class="issue_id">%2$s</span> ügyet';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> már nem követi a(z) <span class="issue_id">%2$s</span> ügyet';
@@ -1252,6 +1259,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'A fájltípus nem megengedett';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A könyvtár nem létezik. Ellenőrizze a projekt beállításait.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Már létezik ilyen nevű projekt.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Egy kötelező \'%1$s\' mező üres. Ellenőrizze a megadott adatokat.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Érvénytelen érték ehhez: „%1$s”';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett felhasználó. Hozzáférés a felhasználó-védelem megszüntetetéséig megtagadva.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Hozzáférés megtagadva.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Sikertelen fájlfeltöltés: a MantisBT nem tudja olvasni a fájlt. Ellenőrizze a projekt beállításait';
@@ -1264,13 +1272,16 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'A(z) „%1$s” konfigurác
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Nem állítható be a(z) „%1$s" konfigurációs beállítás: %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'A(z) „%1$s” szöveg hiányzik.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nincs ilyen megjegyzés.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'A(z) „%1$s” projekt nem található.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'A(z) „%1$s” adatbázismező hiányzik.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Az ügy kezelőjének az ügy jelen állapotában nincs elég joga az ügy kezeléséhez.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'A(z) „%1$s” projekt nem található.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Már létezik ilyen nevű projekt. Lépjen vissza, és adjon meg egy másik nevet.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Hibásan megadott projektnév: a projektnév nem lehet üres.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ez a művelet hurkot eredményezne az alprojekt-hierarchiában.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = '„%1$s” nevű felhasználó nem található.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '„%1$s” azonosítójú felhasználó nem található.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = '„%1$s” e-mail című felhasználó nem található.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = '„%1$s” valódi nevű felhasználó nem található.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A böngészője által tárolt belépési információk hibásak. Talán törölték a felhasználóját?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Ezen felhasználó beállításai nem találhatóak.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nincs ilyen hír.';
@@ -1281,7 +1292,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Sztringet vártunk, de tömböt kap
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Számot vártunk a következőhöz: %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'A(z) %1$d ügy nem található.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'A(z) %1$s szűrő nem található.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'A használni kívánt szűrő túl régi a frissítéshez, hozza létre újra.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Hibás e-mail cím.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Egyszer használatos email-címek nem engedélyezettek.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Nincs ilyen profil.';
@@ -1320,7 +1330,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'A(z) \'%1$s\' verzió nem található.
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Hibás felhasználónév. A felhasználónevek csak latin betűket, számokat, szóközöket, kötőjeleket, pontokat, pluszjeleket és aláhúzásokat tartalmazhatnak.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Hibás valódi név.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'A felhasználónak nincs elegendő jogosultsága';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'A megadott "Teljes név" már egy másik felhasználóhoz tartozik. Válasszon másikat.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Támogatás kikapcsolva.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'A(z) %1$d támogatás nem található.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'A támogatás (%1$s) a minimumösszeg (%2$s) alatt van.';
@@ -1329,7 +1338,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Hozzáférés 
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'A támogató nem adott meg email-címet. Frissítse a profilját.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A(z) \'%1$s\' konfigurációs beállítás hibás értéket tartalmaz: \'%2$s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A művelet nem végrehajtható, mert a(z) \'%1$d\' ügy csak olvasható';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Az ügy nem lehet megoldott, amely valamenniy függő ügye nem lett megoldva.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Az ügy nem lehet megoldott, amíg valamennyi függő ügye nem lett megoldva. Kérjen hozzáférést a projekthez a rendszergazdától, ha nem lát függő ügyet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Kapcsolat nem található.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Hozzáférés megtagadva: a(z) %1$d ügy nagyobb jogosultsági szintet igényel.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Egy ügy nem kapcsolódhat önmagához.';
@@ -1339,7 +1348,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'A jelszó visszaállít
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A megadott információ nem tartozik egyetlen regisztrált felhasználóhoz sem!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'A jóváhagyó URL hibás, vagy már felhasználták. Kérjük, lépjen be újra.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Elértük a folyamatban levő kérések maximális számát. Lépjen kapcsolatba a rendszergazdával';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ez a művelet hurkot eredményezne az alprojekt-hierarchiában.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Nem távolíthatod el és nem veheted el a jogosultságát az utolsó adminisztrátori fióknak. A kért művelet végrehajtásához először készítened kell egy másik adminisztrátori fiókot.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Átirányítási hiba, győződjön meg róla, hogy a PHP blokkon kívül (&lt;?php ?&gt;) nincs egyetlen szóköz sem a config_inc.php vagy a custom_*.php fájlokban.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Ilyen nevű címke nem található.';
@@ -1363,7 +1371,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'A megadott „%1$s” bővítmény f
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ismeretlen hiba („%1$s”) történt a(z) „%2$s” bővítmény futtatásakor.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'A(z) „%1$s” mező duplikált oszlopot tartalmaz: „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'A(z) „%1$s” mező érvénytelen mezőt tartalmaz: „%2$s”.';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Érvénytelen munkamenet-kezelő.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A(z) „%1$s” munkamenet változó nem található.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A munkameneted érvénytelenítetté vált.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Érvénytelen biztonsági token. Ezt a munkamenet időtúllépése, vagy az űrlap véletlen kétszer történő elküldése okozhatja.';

@@ -1,0 +1,386 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Saraiki (Arabic script) (سرائیکی)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Saraiki
+ */
+
+$s_actiongroup_menu_move = 'ٹورو';
+$s_actiongroup_menu_copy = 'نقل کرو';
+$s_actiongroup_menu_assign = 'سپرد کرو';
+$s_actiongroup_menu_close = 'بند کرو';
+$s_actiongroup_menu_delete = 'مٹاؤ';
+$s_actiongroup_menu_update_priority = 'ترجییح کوں تازہ کرو';
+$s_actiongroup_menu_update_status = 'نویں حیثیت لکھو';
+$s_actiongroup_menu_add_note = 'نوٹ شامل کرو';
+$s_actiongroup_menu_attach_tags = 'ٹیگ لاؤ';
+$s_actiongroup_bugs = 'چݨے ہوئے مسئلے';
+$s_all_projects = 'سارے منصوبے';
+$s_move_bugs = ' مسلۂ ہٹاو';
+$s_operation_successful = 'عمل کامیاب.';
+$s_csv_export = 'سی ایس وی برآمد';
+$s_excel_export = 'ایکسل برآمد';
+$s_anonymous = 'گمنام';
+$s_print = 'چھاپو';
+$s_jump = 'ٹپ';
+$s_field = ' فیلڈ';
+$s_old_value = 'پرانی قیمت';
+$s_new_value = 'نویݨ قدر';
+$s_date_modified = ' تبدیلی دی تریخ';
+$s_bugnote = 'نوٹ';
+$s_change = 'تبدیل کرو';
+$s_delete_bugnote_button = 'نوٹ مٹاؤ';
+$s_empty_password_button = 'خالی پاسپورڈ ورتو';
+$s_reauthenticate_title = 'تصدیق کرو';
+$s_no_category = '(کوئی ونکی کائنی)';
+$s_global_categories = 'عالمی قسماں';
+$s_duplicate_of = 'دی ڈپلیکیٹ';
+$s_has_duplicate = 'ڈپلیکیٹ ہے پیا';
+$s_related_to = 'ایندے متعلقہ';
+$s_new_bug = 'نواں مسئلہ';
+$s_bugnote_added = 'نوٹ شامل تھی ڳئے';
+$s_bugnote_edited = 'نوٹ تبدیل تھی ڳئے';
+$s_bugnote_deleted = 'نوٹ مٹ ڳئے';
+$s_summary_updated = 'خلاصہ تازہ تھی ڳئے';
+$s_description_updated = 'وضاحت تازہ تھی ڳئی';
+$s_additional_information_updated = 'اضافی معلومات تازہ تھی ڳیاں';
+$s_file_added = 'فائل جمع تھی ڳئی';
+$s_file_deleted = 'فائل مٹ ڳئی';
+$s_bug_deleted = 'مسئلہ مُک ڳئے';
+$s_make_private = 'ذاتی بݨاؤ';
+$s_make_public = 'عوامی بݨاؤ';
+$s_create_new_project_link = 'نواں منصوبہ بݨاؤ';
+$s_login_link = 'لاگ ان تھیوو';
+$s_select_option = '(چݨو)';
+$s_close_group_bugs_button = 'ایشو بند کرو';
+$s_delete_group_bugs_button = 'مسئلے مٹاؤ';
+$s_move_group_bugs_button = 'مسئلے ہٹاؤ';
+$s_copy_group_bugs_button = 'مسئلے دی نقل کرو';
+$s_bugnote_date = 'نوٹ دی تریخ';
+$s_bugnote_description = 'نوٹ دی تفصیل';
+$s_go_back = 'واپس ڄُلو';
+$s_proceed = 'اڳوں تے تھیوو';
+$s_switch = 'تبدیل';
+$s_prefix_for_deleted_users = 'ورتݨ آلا';
+$s_administrator = 'ایڈمن';
+$s_myself = 'میں آپ';
+$s_new_account_username = 'ورتݨ آلا ناں:';
+$s_new_account_email = 'ای میل:';
+$s_new_account_IP = 'ریموٹ آی پی دا پتہ:';
+$s_email_project = 'منصوبہ';
+$s_email_bug = 'مسئلے دی آئی ڈی';
+$s_email_category = 'ونکی';
+$s_email_severity = 'سختی';
+$s_email_priority = 'ترجیح';
+$s_email_status = 'حالت';
+$s_email_duplicate = 'ڈپلیکیٹ';
+$s_email_summary = 'خلاصہ';
+$s_email_description = 'تفصیل';
+$s_email_tag = 'ٹیگ';
+$s_delete_account_button = 'کھاتہ مٹاؤ';
+$s_manage_profiles_link = 'پروفائل';
+$s_change_preferences_link = 'ترجیحاں';
+$s_edit_account_title = 'کھاتے وچ تبدیلی کرو';
+$s_username = 'ورتݨ آلا ناں';
+$s_username_label = 'ورتݨ آلا ناں';
+$s_realname = 'اصلی ناں';
+$s_realname_label = 'اصلی ناں';
+$s_email = 'ای میل';
+$s_email_label = 'ای میل';
+$s_password = 'پاس ورڈ';
+$s_new_password = 'نواں پاس ورڈ';
+$s_confirm_password = 'پاس ورڈ دی تصدیق کرو';
+$s_current_password = 'موجودہ پاس ورڈ';
+$s_access_level = 'رسائی دی سطح';
+$s_access_level_label = 'رسائی دی سطح';
+$s_api_tokens_link = 'اے پی آئی ٹوکن';
+$s_api_token_create_form_title = 'اے پی آئی ٹوکن بݨاؤ';
+$s_api_token_create_button = 'اے پی آئی ٹوکن ٻݨاؤ';
+$s_api_token_name = 'ٹوکن دا ناں';
+$s_api_tokens_title = 'اے پی آئی ٹوکن';
+$s_api_token_never_used = 'کݙان٘ہ کائنی ورتیا';
+$s_last_used = 'چھیکڑی ورتیا';
+$s_default_account_preferences_title = 'کھاتے دیاں ترجیحاں';
+$s_minutes = 'منٹ';
+$s_seconds = 'سیکنڈ';
+$s_bugnote_order_asc = 'چڑھدا ہویا';
+$s_bugnote_order_desc = 'لہندا ہویا';
+$s_email_on_new = 'نویں تے ای میل';
+$s_email_on_feedback = 'رائے تے ای میل';
+$s_email_on_closed = 'بند کرݨ تے ای میل';
+$s_email_on_reopened = 'ولدا کھولݨ تے ای میل';
+$s_language = 'زبان';
+$s_timezone = 'ویلے دا علاقہ:';
+$s_edit_profile_title = 'پروفائل وچ تبدیلی کرو';
+$s_platform = 'پلیٹ فارم';
+$s_additional_description = 'اضافی وضاحت';
+$s_update_profile_button = 'پروفائل تازہ کرو';
+$s_add_profile_title = 'پروفائل رلاؤ';
+$s_add_profile_button = 'پروفائل رلاؤ';
+$s_edit_or_delete_profiles_title = 'پروفائل وچ تبدیلی کرو یا مٹاؤ';
+$s_edit_profile = 'پروفائل وچ تبدیلی کرو';
+$s_delete_profile = 'پروفائل مٹاؤ';
+$s_select_profile = 'پروفائل چݨو';
+$s_submit_button = 'جمع کرواؤ';
+$s_sponsor = 'ساپنسر';
+$s_sponsor_verb = 'ساپنسر';
+$s_amount = 'رقم';
+$s_total_owing = 'جِتی ادا کرݨی ہے';
+$s_total_paid = 'کل جتی ادا کر ݙتی ہے';
+$s_sponsor_show = 'سب ݙکھاؤ';
+$s_new_bug_title = 'نواں مسئلہ';
+$s_new_bug_button = 'نواں مسئلہ';
+$s_closed_bug_title = 'ایشو بند کرو';
+$s_delete_bug_button = 'مٹاؤ';
+$s_upload_file = 'فائل چڑھاؤ';
+$s_upload_files = 'فائلاں چڑھاؤ';
+$s_select_file = 'فائل چݨو';
+$s_select_files = 'فائلاں چݨو';
+$s_upload_file_button = 'فائل چڑھاؤ';
+$s_upload_files_button = 'فائلاں چڑھاؤ';
+$s_bugnote_add_resolve_button = 'نوٹ شامل کرو';
+$s_from = 'کنوں';
+$s_to = 'تائیں';
+$s_bug_send_button = 'بھیڄو';
+$s_reminder = 'یاد دہانی';
+$s_id = 'آئی ڈی';
+$s_category = 'ونْکی';
+$s_severity = 'سختی';
+$s_reporter = 'رپورٹ کرݨ آلا';
+$s_priority = 'ترجیح';
+$s_status = 'حالت';
+$s_os = 'او/ايس';
+$s_eta = 'ای ٹی اے';
+$s_votes = 'ووٹ';
+$s_summary = 'خلاصہ';
+$s_description = 'تفصیل';
+$s_profile = 'پروفائل';
+$s_revision = 'نظر ثانی';
+$s_activities_title = 'سرگرمیاں';
+$s_vote_added_msg = 'ووٹ جمع تھی ڳئے۔۔۔';
+$s_bugnote_attached_files = 'نتھی فائلاں:';
+$s_bug_notes_title = 'نوٹس';
+$s_edit_bugnote_title = 'نوٹ تبدیل کرو';
+$s_delete_link = 'مٹاؤ';
+$s_add_bugnote_title = 'نوٹ شامل کرو';
+$s_add_bugnote_button = 'نوٹ شامل کرو';
+$s_bugnote_edit_link = 'لکھو';
+$s_closed_bug_button = 'ایشو بند کرو';
+$s_log_page_number = 'عدد';
+$s_click_to_login = 'لاگ ان';
+$s_login_title = 'لاگ ان';
+$s_save_login = 'میکوں لاگ ان رکھو';
+$s_login_button = 'لاگ ان';
+$s_lost_password_link = 'پاسورڈ بھل ڳئے ہو؟';
+$s_select_project_button = 'منصوبہ چݨو';
+$s_lost_password_title = 'پاسورڈ ولدا ٹھیک کرو';
+$s_newer_news_link = 'نویں خبر';
+$s_older_news_link = 'پراݨی خبر';
+$s_archives = 'ریکارڈ';
+$s_rss = 'آر ایس ایس';
+$s_enabled = 'فعال تھی ڳیا';
+$s_enabled_label = 'فعال تھی ڳیا';
+$s_protected = 'محفوظ ہے';
+$s_protected_label = 'مخفوظ ہے';
+$s_projects_link = 'منصوبے';
+$s_new_accounts_title = 'نویں کھاتے';
+$s_1_week_title = 'ہک ہفتہ';
+$s_last_visit = 'چھیکڑی وزٹ';
+$s_last_visit_label = 'چھیکڑی وزٹ:';
+$s_message = 'سنیہا';
+$s_next_status = 'اڳلی حیثیت';
+$s_workflow = 'کم دی چال';
+$s_status_level = 'حالت';
+$s_in_project = 'منصوبے وچ';
+$s_delete_config_button = 'ترتیباں مٹاؤ';
+$s_configuration_option_type = 'قسم';
+$s_configuration_option_value = 'قدر';
+$s_all_users = 'سارے صارف';
+$s_plugin_url = 'ویب سائٹ';
+$s_plugin_priority = 'ترجیح';
+$s_plugin_protected = 'محفوظ';
+$s_plugin_update = 'اپ ݙیٹ';
+$s_plugin_actions = 'کم';
+$s_plugin_install = 'انسٹال';
+$s_plugin_key_label = 'بٹݨ:';
+$s_project_delete_button = 'منصوبہ مٹاؤ';
+$s_edit_project_title = 'منصوبہ تبدیل کرو';
+$s_project_name = 'منصوبے دا ناں';
+$s_project_name_label = 'منصوبے دا ناں:';
+$s_view_status = 'حیثیت ݙکھاؤ';
+$s_public = 'عوام/ پبلک';
+$s_private = 'ذاتی';
+$s_edit_link = 'لکھو';
+$s_actions = 'کم';
+$s_version = 'ورژن';
+$s_version_label = 'ورژن:';
+$s_update = 'اپ ݙیٹ';
+$s_add_project_title = 'منصوبہ شامل کرو';
+$s_add_project_button = 'منصوبہ شامل کرو';
+$s_projects_title = 'منصوبے';
+$s_projects_title_label = 'منصوبے';
+$s_name = 'ناں';
+$s_delete_user_button = 'صارف مٹاؤ';
+$s_show_all_users = 'یکے';
+$s_users_new = 'نواں';
+$s_main_link = 'مین';
+$s_view_bugs_link = 'مسئلے ݙیکھو';
+$s_report_bug_link = 'مسئلہ رپورٹ کرو';
+$s_changelog_link = 'تبدیلی دا لاگ';
+$s_summary_link = 'خلاصہ';
+$s_account_link = 'میݙا کھاتہ';
+$s_users_link = 'ورتݨ آلے';
+$s_logout_link = 'لاگ آؤٹ';
+$s_headline = 'سرخی';
+$s_body = 'باڈی';
+$s_back_link = 'پچھوں';
+$s_upload_file_title = 'فائل چڑھاؤ';
+$s_title = 'عنوان';
+$s_filename = 'فائل دا ناں';
+$s_filename_label = 'فائل دا ناں:';
+$s_file_delete_button = 'فائل مٹاؤ';
+$s_remove_user_button = 'صارف کوں ہٹاؤ';
+$s_remove_link = 'ہٹاؤ';
+$s_remove_all_link = 'سب ہٹاؤ';
+$s_signup_title = 'کھاتہ بݨاؤ';
+$s_signup_button = 'کھاتہ بݨاؤ';
+$s_site_settings_title = 'سائٹ دیاں ترتیباں';
+$s_site_settings_link = 'سائٹ دی ترتیباں';
+$s_summary_title = 'خلاصہ';
+$s_percentage_errors = '% غلط';
+$s_errors = 'غلط';
+$s_opened = 'کھُل ڳیا';
+$s_resolved = 'حل تھی ڳیا';
+$s_total = 'مجموعہ';
+$s_balance = 'میزان';
+$s_days = 'ݙیہاڑے';
+$s_any = 'کوئی وی';
+$s_all = 'یکے';
+$s_show = 'ݙِکھاؤ';
+$s_updated = 'اپ ڈیٹ تھی ڳیا';
+$s_issue_id = 'مسئلہ #';
+$s_none = 'کوئی وی کائنی';
+$s_current = 'موجودہ';
+$s_search = 'ڳولو';
+$s_view_prev_link = 'پچھلا ݙیکھو';
+$s_view_next_link = 'اڳلا ݙیکھو';
+$s_prev = 'پچھلا';
+$s_next = 'اڳلا';
+$s_first = 'پہلا';
+$s_last = 'چھیکڑی';
+$s_start_date_label = 'شروع کرݨ دی تریخ:';
+$s_end_date_label = 'ختم کرݨ دی تریخ:';
+$s_yes = 'جیا';
+$s_no = 'کو';
+$s_open_filters = 'فلٹر تبدیل کرو';
+$s_ok = 'ٹھیک ہے';
+$s_select_all = 'سبھ چݨو';
+$s_use_query = 'فلٹر استعمال کرو';
+$s_delete_query = 'چھاݨاں مٹاؤ';
+$s_query_name = 'چھاݨے دا ناں';
+$s_query_name_label = 'چھاݨے دا ناں:';
+$s_edit_filter = 'چھاݨاں تبدیل کرو';
+$s_owner = 'مالک';
+$s_delete_filter_button = 'مٹاؤ';
+$s_apply_filter_button = 'اطلاق';
+$s_update_bug_button = 'لکھو';
+$s_reopen_bug_button = 'ولدا کھولو';
+$s_close_bug_button = 'بند کرو';
+$s_move_bug_button = 'ٹورو';
+$s_publish = 'شائع کرو';
+$s_add_user_to_monitor = 'شامل کرو';
+$s_custom_field = ' فیلڈ';
+$s_custom_field_label = 'فیلڈ:';
+$s_custom_fields_setup = 'کسٹم فیلڈ';
+$s_custom_field_name = 'ناں';
+$s_custom_field_type = 'قسم';
+$s_custom_field_sequence = 'ترتیب';
+$s_custom_field_sequence_label = 'ترتیب';
+$s_hide_status = 'حالت لکاؤ';
+$s_filter_closed = 'بند تھیا';
+$s_bytes = 'بائٹ';
+$s_kb = 'کے بی';
+$s_bug = 'ایشو';
+$s_bugs = 'ایشو';
+$s_add_new_relationship = 'نواں تعلق';
+$s_add_new_relationship_button = 'شامل کرو';
+$s_this_bug = 'موجودہ ایشو';
+$s_delete_relationship_button = 'مٹاؤ';
+$s_with = 'نال';
+$s_vertical = 'عمودی';
+$s_horizontal = 'افقی';
+$s_view_issue = 'نواں مسئلہ';
+$s_perm_rpt_capability = 'صلاحیت';
+$s_view = 'ݙکھالا';
+$s_issues = 'مسئلے';
+$s_notes = 'نوٹس';
+$s_add_notes = 'نوٹس شامل کرو';
+$s_news = 'خبراں';
+$s_delete_attachment_button = 'مٹاؤ';
+$s_filters = 'چھاݨے';
+$s_others = 'ٻئے';
+$s_loading = 'لوڈ تھیندا پئے۔۔۔';
+$s_before_date = 'پہلے';
+$s_after_date = 'بعد';
+$s_from_date = 'کنوں';
+$s_to_date = 'تائیں';
+$s_on_date = 'تے';
+$s_on = 'تے';
+$s_off = 'بند';
+$s_wiki = 'وکی';
+$s_tags = 'ٹیگ';
+$s_tag_name = 'ناں';
+$s_show_all_tags = 'یکے';
+$s_time_tracking_cost = ' قیمت';
+$s_time_tracking_cost_label = 'قیمت:';
+$s_time_tracking_stopwatch_start = 'شروع';
+$s_month_january = 'جنوری';
+$s_month_february = 'فروری';
+$s_month_march = 'مارچ';
+$s_month_april = 'اپريل';
+$s_month_may = 'مئی';
+$s_month_june = 'جون';
+$s_month_july = 'جولائی';
+$s_month_august = 'اگست';
+$s_month_september = 'ستمبر';
+$s_month_october = 'اکتوبر';
+$s_month_november = 'نومبر';
+$s_month_december = 'دسمبر';
+$s_save = 'بچاؤ';
+$s_reset = 'ولدا ٹھیک کرو';

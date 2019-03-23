@@ -85,7 +85,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_file_size = strlen( $p_content );
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	$t_max_file_size = file_get_max_file_size();
 	if( $t_file_size > $t_max_file_size ) {
 		return ApiObjectFactory::faultBadRequest( 'File is too big. Max size is "' . $t_max_file_size . '" bytes.' );
 	}
@@ -105,11 +105,11 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
-		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 		}
 	}
 

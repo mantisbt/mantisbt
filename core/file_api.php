@@ -50,24 +50,25 @@ require_api( 'history_api.php' );
 require_api( 'project_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ServiceException;
+
 $g_cache_file_count = array();
 
 /**
- * Processes the post files from a form by adding them to the specified
- * issue.
+ * Attached specified files to issue.
  *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
  * @return array Array of file info arrays.
  */
-function file_process_posted_files_for_bug( $p_bug_id, $p_files ) {
-	if( $p_files === null ) {
-		return;
+function file_attach_files( $p_bug_id, $p_files ) {
+	if( $p_files === null || count( $p_files ) == 0 ) {
+		return array();
 	}
 
 	$t_file_infos = array();
-	$t_files = helper_array_transpose( $p_files );
-	foreach( $t_files as $t_file ) {
+	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
 			$t_file_infos[] = file_add( $p_bug_id, $t_file, 'bug' );
 		}
@@ -102,7 +103,7 @@ function file_get_display_name( $p_filename ) {
 }
 
 /**
- * Fills the cache with the attachement count from a list of bugs
+ * Fills the cache with the attachment count from a list of bugs
  * If the bug doesn't have attachments, cache its value as 0.
  * @global array $g_cache_file_count
  * @param array $p_bug_ids Array of bug ids
@@ -243,9 +244,9 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
  * @return array
  */
 function file_get_icon_url( $p_display_filename ) {
-	$t_file_type_icons = config_get( 'file_type_icons' );
+	$t_file_type_icons = config_get_global( 'file_type_icons' );
 
-	$t_ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
+	$t_ext = mb_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
 	if( is_blank( $t_ext ) || !isset( $t_file_type_icons[$t_ext] ) ) {
 		$t_ext = '?';
 	}
@@ -304,7 +305,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 		}
 	}
 
-	$t_path = config_get( 'absolute_path_default_upload_folder' );
+	$t_path = config_get_global( 'absolute_path_default_upload_folder' );
 	if( !is_blank( $t_path ) ) {
 		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
@@ -383,6 +384,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['size'] = $t_filesize;
 		$t_attachment['date_added'] = $t_date_added;
 		$t_attachment['diskfile'] = $t_diskfile;
+		$t_attachment['file_type'] = $t_row['file_type'];
 
 		$t_attachment['can_download'] = file_can_download_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
 		$t_attachment['can_delete'] = file_can_delete_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
@@ -673,6 +675,10 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
+ * If file was not uploaded by the browser standard POST method, set value
+ * for key `browser_upload` on $p_file to false.  Otherwise, the file_add()
+ * operation will fail.
+ *
  * @param integer $p_bug_id          The bug id (should be 0 when adding project doc).
  * @param array   $p_file            The uploaded file info, as retrieved from gpc_get_file().
  * @param string  $p_table           Either 'bug' or 'project' depending on attachment type.
@@ -686,12 +692,36 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 	$t_file_info = array();
 
-	file_ensure_uploaded( $p_file );
-	$t_file_name = $p_file['name'];
+	if( !isset( $p_file['error'] ) ) {
+		$p_file['error'] = UPLOAD_ERR_OK;
+	}
+
+	if( !isset( $p_file['browser_upload'] ) ) {
+		$p_file['browser_upload'] = true;
+	}
+
 	$t_tmp_file = $p_file['tmp_name'];
 
+	# Override passed value with one detected by PHP (if available).
+	# If PHP can't detect it, then use supplied value.
+	# If no value supplied, then default to a reasonable value.
+	# The value will be overridden by PHP anyway if content type is
+	# known at rendering time.
+	$t_type = file_get_mime_type( $t_tmp_file );
+	if( $t_type !== false ) {
+		$p_file['type'] = $t_type;
+	} else if( !isset( $p_file['type'] ) ) {
+		$p_file['type'] = 'application/octet-stream';
+	}
+
+	file_ensure_uploaded( $p_file );
+	$t_file_name = $p_file['name'];
+
 	if( !file_type_check( $t_file_name ) ) {
-		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' type not allowed", $t_file_name ),
+			ERROR_FILE_NOT_ALLOWED
+		);
 	}
 
 	$t_org_filename = $t_file_name;
@@ -714,14 +744,18 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' not uploaded", $t_file_name ),
+			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
 	$t_file_info['size'] = $t_file_size;
 
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		throw new ClientException(
+			sprintf( "File '%s' too big", $t_file_name ),
+			ERROR_FILE_TOO_BIG );
 	}
 
 	if( 'bug' == $p_table ) {
@@ -741,11 +775,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
-		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 		}
 	}
 
@@ -758,15 +792,27 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 
 			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
-				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
-					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+				if( $p_file['browser_upload'] ) {
+					if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
+						throw new ServiceException(
+							'Unable to move uploaded file',
+							ERROR_FILE_MOVE_FAILED
+						);
+					}
+				} else {
+					if( !copy( $t_tmp_file, $t_disk_file_name ) || !unlink( $t_tmp_file ) ) {
+						throw new ServiceException(
+							'Unable to move uploaded file',
+							ERROR_FILE_MOVE_FAILED
+						);
+					}
 				}
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
 				$c_content = '';
 			} else {
-				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+				throw new ClientException( 'Duplicate file', ERROR_FILE_DUPLICATE );
 			}
 			break;
 		case DATABASE:
@@ -774,7 +820,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 			$t_file_path = '';
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new ServiceException( 'Unknown file upload method', ERROR_GENERIC );
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
@@ -865,21 +911,22 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
  * upload a file to a new bug in the current project
  * @param integer $p_bug_id  A bug identifier.
  * @param integer $p_user_id A user identifier.
+ * @param integer $p_project_id The project id to check for or null for bug project or current project.
  * @return boolean
  */
-function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
+function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null, $p_project_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
-	# If uploads are disbled just return false
+	# If uploads are disabled just return false
 	if( !file_is_uploading_enabled() ) {
 		return false;
 	}
 
 	if( null === $p_bug_id ) {
 		# new bug
-		$t_project_id = helper_get_current_project();
+		$t_project_id = $p_project_id === null ? helper_get_current_project() : $p_project_id;
 
 		# the user must be the reporter if they're reporting a new bug
 		$t_reporter = true;
@@ -906,7 +953,9 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
  */
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
-		trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
+		throw new ServiceException(
+			'Upload folder not valid',
+			ERROR_FILE_INVALID_UPLOAD_PATH );
 	}
 }
 
@@ -922,22 +971,68 @@ function file_ensure_uploaded( array $p_file ) {
 	switch( $p_file['error'] ) {
 		case UPLOAD_ERR_INI_SIZE:
 		case UPLOAD_ERR_FORM_SIZE:
-			trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-			break;
+			throw new ClientException(
+				sprintf( "File '%s' too big", $p_file['name'] ),
+				ERROR_FILE_TOO_BIG );
+
 		case UPLOAD_ERR_PARTIAL:
 		case UPLOAD_ERR_NO_FILE:
-			trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-			break;
-		default:
-			break;
+			throw new ClientException(
+				sprintf( "File '%s' upload failure", $p_file['name'] ),
+				ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
 
 	if( ( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+		throw new ClientException(
+			'File name or path is empty',
+			ERROR_FILE_NO_UPLOAD_FAILURE );
 	}
+
 	if( !is_readable( $p_file['tmp_name'] ) ) {
-		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+		throw new ClientException( 'File is not readable', ERROR_UPLOAD_FAILURE );
 	}
+}
+
+/**
+ * Return instance of fileinfo class
+ * @return finfo instance of finfo class.
+ */
+function file_create_finfo() {
+	$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
+
+	if( is_blank( $t_info_file ) ) {
+		$t_finfo = new finfo( FILEINFO_MIME );
+	} else {
+		$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
+	}
+
+	return $t_finfo;
+}
+
+/**
+ * Get mime type for the specified file.
+ *
+ * @param string $p_file_path The file path.
+ * @return boolean|string The mime type or false on failure.
+ */
+function file_get_mime_type( $p_file_path ) {
+	if( !file_exists( $p_file_path ) ) {
+		return false;
+	}
+
+	$t_finfo = file_create_finfo();
+	return $t_finfo->file( $p_file_path );
+}
+
+/**
+ * Get mime type for the specified content.
+ *
+ * @param string $p_content The content.
+ * @return boolean|string The mime type or false on failure.
+ */
+function file_get_mime_type_for_content( $p_content ) {
+	$t_finfo = file_create_finfo();
+	return $t_finfo->buffer( $p_content );
 }
 
 /**
@@ -961,6 +1056,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		default:
 			return false;
 	}
+
 	$t_result = db_query( $t_query, array( $p_file_id ) );
 	$t_row = db_fetch_array( $t_result );
 
@@ -970,22 +1066,6 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		$t_project_id = $t_row['bug_id'];
 	}
 
-	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
-	$t_finfo_available = false;
-	if( class_exists( 'finfo' ) ) {
-		$t_info_file = config_get( 'fileinfo_magic_db_file' );
-
-		if( is_blank( $t_info_file ) ) {
-			$t_finfo = new finfo( FILEINFO_MIME );
-		} else {
-			$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
-		}
-
-		if( $t_finfo ) {
-			$t_finfo_available = true;
-		}
-	}
-
 	$t_content_type = $t_row['file_type'];
 
 	switch( config_get( 'file_upload_method' ) ) {
@@ -993,25 +1073,23 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			$t_local_disk_file = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
 
 			if( file_exists( $t_local_disk_file ) ) {
-				if( $t_finfo_available ) {
-					$t_file_info_type = $t_finfo->file( $t_local_disk_file );
+				$t_file_info_type = file_get_mime_type( $t_local_disk_file );
 
-					if( $t_file_info_type !== false ) {
-						$t_content_type = $t_file_info_type;
-					}
+				if( $t_file_info_type !== false ) {
+					$t_content_type = $t_file_info_type;
 				}
+
 				return array( 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) );
 			}
 			return false;
 			break;
 		case DATABASE:
-			if( $t_finfo_available ) {
-				$t_file_info_type = $t_finfo->buffer( $t_row['content'] );
+			$t_file_info_type = file_get_mime_type_for_content( $t_row['content'] );
 
-				if( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
+			if( $t_file_info_type !== false ) {
+				$t_content_type = $t_file_info_type;
 			}
+
 			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
 			break;
 		default:
@@ -1045,12 +1123,12 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 
 	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
 	if( is_blank( $t_path_from ) ) {
-		$t_path_from = config_get( 'absolute_path_default_upload_folder', null, null, $t_project_id_from );
+		$t_path_from = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_from );
 	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
 	if( is_blank( $t_path_to ) ) {
-		$t_path_to = config_get( 'absolute_path_default_upload_folder', null, null, $p_project_id_to );
+		$t_path_to = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_to );
 	if( $t_path_from == $t_path_to ) {
@@ -1168,4 +1246,13 @@ function file_get_content_type_override( $p_filename ) {
 	}
 
 	return null;
+}
+
+/**
+ * Return the maximum file size that can be uploaded, based on mantis and php
+ * configured setting.
+ * @return integer	File size in bytes
+ */
+function file_get_max_file_size() {
+	return (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 }

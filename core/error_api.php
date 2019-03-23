@@ -48,7 +48,73 @@ $g_error_send_page_header = true;
 # These can be disabled in config_inc.php, see $g_display_errors
 error_reporting( error_reporting() | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_USER_DEPRECATED );
 
-set_error_handler( 'error_handler' );
+global $g_bypass_error_handler;
+if( !$g_bypass_error_handler ) {
+	set_error_handler( 'error_handler' );
+	set_exception_handler( 'error_exception_handler' );
+}
+
+/**
+ * @global Exception $g_exception
+ */
+$g_exception = null;
+
+/**
+ * Unhandled exception handler
+ *
+ * @param \Mantis\Exceptions\MantisException|Exception|Error $p_exception The exception to handle
+ * @return void
+ */
+function error_exception_handler( $p_exception ) {
+	global $g_exception;
+
+	# As per PHP documentation, null may be received to reset handler to default state.
+	if( $p_exception === null ) {
+		$g_exception = null;
+		return;
+	}
+
+	$g_exception = $p_exception;
+
+	if( is_a( $p_exception, 'Mantis\Exceptions\MantisException' ) ) {
+		$t_params = $p_exception->getParams();
+		if( !empty( $t_params ) ) {
+			call_user_func_array( 'error_parameters', $t_params );
+		}
+
+		trigger_error( $p_exception->getCode(), ERROR );
+
+		# It is not expected to get here, but just in case!
+		return;
+	}
+
+	# trigger a generic error
+	trigger_error( ERROR_PHP, ERROR );
+}
+
+/**
+ * Get error stack based on last exception
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @return array The stack trace as an array
+ */
+function error_stack_trace( $p_exception = null ) {
+	if( $p_exception === null ) {
+		global $g_exception;
+		$p_exception = $g_exception;
+	}
+
+	if ( $p_exception === null ) {
+		# The reported stack trace should begin with the function call where the
+		# error was triggered, so we remove the internal error handler calls
+		# (this function, its parent and the error handler itself).
+		$t_stack = array_slice( debug_backtrace(), 3 );
+	} else {
+		$t_stack = $p_exception->getTrace();
+	}
+
+	return $t_stack;
+}
 
 /**
  * Default error handler
@@ -64,7 +130,6 @@ set_error_handler( 'error_handler' );
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context To the active symbol table at the point the error occurred (optional).
  * @return void
  * @uses lang_api.php
  * @uses config_api.php
@@ -72,7 +137,7 @@ set_error_handler( 'error_handler' );
  * @uses database_api.php (optional)
  * @uses html_api.php (optional)
  */
-function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 	global $g_error_send_page_header;
 
@@ -111,6 +176,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		}
 	}
 
+	$t_show_detailed_errors = config_get_global( 'show_detailed_errors' ) == ON;
+
+	# Force errors to use HALT method.
+	if( $p_type == E_USER_ERROR || $p_type == E_ERROR || $p_type == E_RECOVERABLE_ERROR ) {
+		$t_method = DISPLAY_ERROR_HALT;
+	}
+
 	# build an appropriate error string
 	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
@@ -132,11 +204,22 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
-			$t_error_type = 'APPLICATION ERROR #' . $p_error;
-			$t_error_description = error_string( $p_error );
-			if( $t_method == DISPLAY_ERROR_INLINE ) {
-				$t_error_description .= ' (' . $t_error_location . ")\n"
-					. error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
+			if( $p_error == ERROR_PHP ) {
+				$t_error_type = 'INTERNAL APPLICATION ERROR';
+
+				global $g_exception;
+				$t_error_description = $g_exception->getMessage();
+				$t_error_to_log = $t_error_description . "\n" . error_stack_trace_as_string();
+				error_log( $t_error_to_log );
+
+				# If show detailed errors is OFF hide PHP exceptions since they sometimes
+				# include file path.
+				if( !$t_show_detailed_errors ) {
+					$t_error_description = '';
+				}
+			} else {
+				$t_error_type = 'APPLICATION ERROR #' . $p_error;
+				$t_error_description = error_string( $p_error );
 			}
 			break;
 		case E_USER_WARNING:
@@ -150,11 +233,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		case E_USER_DEPRECATED:
 			# Get the parent of the call that triggered the error to facilitate
 			# debugging with a more useful filename and line number
-			$t_stack = debug_backtrace();
+			$t_stack = error_stack_trace();
 			if( isset( $t_stack[2] ) ) {
 				$t_caller = $t_stack[2];
 			} else {
-				# If called from main page body, there is no stack block for the funcion, use the page block instead
+				# If called from main page body, there is no stack block for the function, use the page block instead
 				$t_caller = $t_stack[1];
 			}
 
@@ -184,9 +267,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ': ' . $t_error_description . "\n";
 
-			if( ON == config_get_global( 'show_detailed_errors' ) ) {
+			if( $t_show_detailed_errors ) {
 				echo "\n";
-				debug_print_backtrace();
+				error_print_stack_trace();
 			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
@@ -241,23 +324,23 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 							}
 						}
 					} else {
-                        layout_page_header( $t_error_type );
-                    }
+						layout_page_header( $t_error_type );
+					}
 				} else {
 					# Output the previously sent headers, if defined
 					if( isset( $t_old_headers ) ) {
 						echo $t_old_headers, "\n";
-                        layout_page_header_end();
-                        layout_page_begin();
+						layout_page_header_end();
+						layout_page_begin();
 					}
 				}
 
 				echo '<div class="col-md-12 col-xs-12">';
-				echo '<div class="space-20"></div>';
-				echo '<div class="alert alert-danger">';
+				echo '<div class="space-20"></div>', "\n";
+				echo '<div class="alert alert-danger">', "\n";
 
-				echo '<p class="bold">' . $t_error_type . '</p>';
-				echo '<p>', $t_error_description, '</p>';
+				echo '<p class="bold">' . $t_error_type . '</p>', "\n";
+				echo '<p>', $t_error_description, '</p>', "\n";
 
 				echo '<div class="error-info">';
 				if( null === $g_error_proceed_url ) {
@@ -265,15 +348,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				} else {
 					echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
 				}
-				echo '</div>';
+				echo '</div>', "\n";
 
-				if( ON == config_get_global( 'show_detailed_errors' ) ) {
-					echo '<p>';
-					error_print_details( $p_file, $p_line, $p_context );
-					echo '</p>';
-					echo '<p>';
+				if( $t_show_detailed_errors ) {
+					error_print_details( $p_file, $p_line );
 					error_print_stack_trace();
-					echo '</p>';
 				}
 				echo '</div></div>';
 
@@ -325,6 +404,22 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 	$g_error_proceed_url = null;
 }
 
+
+/**
+ * Error handler to convert PHP errors to Exceptions.
+ * This is used to temporarily override the default error handler, when it is
+ * required to catch a PHP error (e.g. when unserializing data in install
+ * helper functions).
+ * @param integer $p_type    Level of the error raised.
+ * @param string  $p_error   Error message.
+ * @param string  $p_file    Filename that the error was raised in.
+ * @param integer $p_line    Line number the error was raised at.
+ * @throws ErrorException
+ */
+function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
+	throw new ErrorException( $p_error, 0, $p_type, $p_file, $p_line );
+}
+
 /**
  * Prints messages from the delayed errors queue
  * The error handler enqueues deprecation warnings that would be printed inline,
@@ -346,104 +441,112 @@ function error_print_delayed() {
 }
 
 /**
- * Print out the error details including context
+ * Print out the error details
  * @param string  $p_file    File error occurred in.
  * @param integer $p_line    Line number error occurred on.
- * @param array   $p_context Error context.
  * @return void
  */
-function error_print_details( $p_file, $p_line, array $p_context ) {
-	?>
-		<table class="width-100">
-			<tr>
-				<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
-			</tr>
-			<tr>
-				<td>Line: <?php echo $p_line?></td>
-			</tr>
-			<tr>
-				<td>
-					<?php error_print_context( $p_context )?>
-				</td>
-			</tr>
-		</table>
+function error_print_details( $p_file, $p_line ) {
+?>
+	<div class="error-details">
+		<hr>
+		<h2>Detailed error information</h2>
+		<ul>
+			<li>Full path:
+				<span class="code">
+					<?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?>
+				</span>
+			</li>
+			<li>Line number:
+				<span class="code"><?php echo $p_line ?></span>
+			</li>
+		</ul>
+	</div>
 <?php
 }
 
-/**
- * Print out the variable context given
- * @param array $p_context Error context.
- * @return void
- */
-function error_print_context( array $p_context ) {
-	if( !is_array( $p_context ) ) {
-		return;
-	}
-
-	echo '<table class="width100" style="table-layout:fixed;"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
-
-	# print normal variables
-	foreach( $p_context as $t_var => $t_val ) {
-		if( !is_array( $t_val ) && !is_object( $t_val ) ) {
-			$t_type = gettype( $t_val );
-			$t_val = htmlentities( (string)$t_val, ENT_COMPAT, 'UTF-8' );
-
-			# Mask Passwords
-			if( strpos( $t_var, 'password' ) !== false ) {
-				$t_val = '**********';
-			}
-
-			echo '<tr><td style="width=20%; word-wrap:break-word; overflow:auto;">', $t_var,
-				'</td><td style="width=70%; word-wrap:break-word; overflow:auto;">', $t_val,
-				'</td><td style="width=10%;">', $t_type, '</td></tr>', "\n";
-		}
-	}
-
-	# print arrays
-	foreach( $p_context as $t_var => $t_val ) {
-		if( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			echo '<tr><td colspan="3" style="word-wrap:break-word"><br /><strong>', $t_var, '</strong></td></tr>';
-			echo '<tr><td colspan="3">';
-			error_print_context( $t_val );
-			echo '</td></tr>';
-		}
-	}
-
-	echo '</table>';
-}
 
 /**
- * Print out a stack trace
+ * Get the stack trace as a string that can be logged or echoed to CLI output.
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ * @return string multi-line printout of stack trace.
  */
-function error_print_stack_trace() {
-	echo '<div class="table-responsive">';
-	echo '<table class="table table-bordered table-striped table-condensed">';
-	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
-
-	$t_stack = debug_backtrace();
-
-	array_shift( $t_stack );
-
-	# remove the call to this function from the stack trace
-	array_shift( $t_stack );
-
-	# remove the call to the error handler from the stack trace
+function error_stack_trace_as_string( $p_exception = null ) {
+	$t_stack = error_stack_trace( $p_exception );
+	$t_output = '';
 
 	foreach( $t_stack as $t_frame ) {
-		echo '<tr>';
-		echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
+		$t_output .= ( isset( $t_frame['file'] ) ? $t_frame['file'] : '-' ) . ': ' .
+			( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ) . ': ' .
+			( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ) . ' - ' .
+			( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ) . ' - ' .
+			( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' );
 
 		$t_args = array();
 		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
 			foreach( $t_frame['args'] as $t_value ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
-			echo '<td>( ', htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' ), ' )</td></tr>';
+
+			$t_output .= '( ' . implode( $t_args, ', ' ) . " )\n";
 		} else {
-			echo '<td>-</td></tr>';
+			$t_output .= "()\n";
 		}
 	}
-	echo '</table>';
+
+	return $t_output;
+}
+
+/**
+ * Print out a stack trace
+ *
+ * @param Exception|null $p_exception The exception to print stack trace for.  Null will check last seen exception.
+ */
+function error_print_stack_trace( $p_exception = null ) {
+	if( php_sapi_name() == 'cli' ) {
+		echo error_stack_trace_as_string( $p_exception );
+		return;
+	}
+?>
+	<h3>Stack trace</h3>
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-condensed">
+				<tr>
+					<th>#</th>
+					<th>Filename</th>
+					<th>Line</th>
+					<th>Class</th>
+					<th>Type</th>
+					<th>Function</th>
+					<th>Args</th>
+				</tr>
+<?php
+	$t_stack = error_stack_trace( $p_exception );
+
+	foreach( $t_stack as $t_id => $t_frame ) {
+		if( isset( $t_frame['args'] ) && !empty( $t_frame['args'] ) ) {
+			$t_args = array();
+			foreach( $t_frame['args'] as $t_value ) {
+				$t_args[] = error_build_parameter_string( $t_value );
+			}
+		} else {
+			$t_args = array('-');
+		}
+
+		printf(
+			"<tr>\n" . str_repeat( "<td>%s</td>\n", 7 ) . "</tr>\n",
+			$t_id,
+			isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-',
+			isset( $t_frame['line'] ) ? $t_frame['line'] : '-',
+			isset( $t_frame['class'] ) ? $t_frame['class'] : '-',
+			isset( $t_frame['type'] ) ? $t_frame['type'] : '-',
+			isset( $t_frame['function'] ) ? $t_frame['function'] : '-',
+			htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' )
+		);
+
+	}
+	echo '</table>', '</div>';
 }
 
 /**

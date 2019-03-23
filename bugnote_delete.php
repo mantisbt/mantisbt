@@ -24,33 +24,15 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses access_api.php
- * @uses authentication_api.php
- * @uses bug_api.php
- * @uses bugnote_api.php
- * @uses config_api.php
- * @uses constant_inc.php
- * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
- * @uses helper_api.php
- * @uses lang_api.php
  * @uses print_api.php
  * @uses string_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'bug_api.php' );
-require_api( 'bugnote_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'event_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
@@ -58,30 +40,14 @@ form_security_validate( 'bugnote_delete' );
 
 $f_bugnote_id = gpc_get_int( 'bugnote_id' );
 
-$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-
-$t_bug = bug_get( $t_bug_id, true );
-if( $t_bug->project_id != helper_get_current_project() ) {
-	# in case the current project is not the same project of the bug we are viewing...
-	# ... override the current project. This to avoid problems with categories and handlers lists etc.
-	$g_project_override = $t_bug->project_id;
-}
-
-# Check if the current user is allowed to delete the bugnote
-$t_user_id = auth_get_current_user_id();
-$t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
-
-if( $t_user_id == $t_reporter_id ) {
-	access_ensure_bugnote_level( config_get( 'bugnote_user_delete_threshold' ), $f_bugnote_id );
-} else {
-	access_ensure_bugnote_level( config_get( 'delete_bugnote_threshold' ), $f_bugnote_id );
-}
-
 helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
 						 lang_get( 'delete_bugnote_button' ) );
 
-bugnote_delete( $f_bugnote_id );
+$t_data = array( 'query' => array( 'id' => $f_bugnote_id  ) );
+
+$t_command = new IssueNoteDeleteCommand( $t_data );
+$t_result = $t_command->execute();
 
 form_security_purge( 'bugnote_delete' );
 
-print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+print_successful_redirect( string_get_bug_view_url( $t_result['issue_id'] ) . '#bugnotes' );

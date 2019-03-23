@@ -93,3 +93,4 @@ $s_plugin_MantisGraph_graph_page = 'Afficher le graphique de l’historique';
 $s_plugin_MantisGraph_graph_topdev = 'Développeurs les plus actifs par sujet Corrigé';
 $s_plugin_MantisGraph_graph_opendev = 'Développeurs par sujet Ouvert';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Rapporteurs les plus actifs par sujet Corrigé';
+$s_plugin_MantisGraph_other_categories = 'autres catégories (%d)';

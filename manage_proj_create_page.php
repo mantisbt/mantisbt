@@ -146,7 +146,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				</td>
 				<td>
 					<select id="project-view-state" name="view_state" class="input-sm">
-						<?php print_enum_string_option_list( 'view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
+						<?php print_enum_string_option_list( 'project_view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
 					</select>
 				</td>
 			</tr>
@@ -158,7 +158,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				$t_file_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( current_user_is_administrator() ) {
-					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 				}
 				?>
 				<tr>

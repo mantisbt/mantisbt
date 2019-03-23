@@ -32,6 +32,7 @@
  * @uses database_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
@@ -44,6 +45,7 @@ require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
@@ -165,7 +167,7 @@ function plugin_route_group( $p_base_name = null ) {
  * @return mixed File path or false if FNF
  */
 function plugin_file_path( $p_filename, $p_base_name ) {
-	$t_file_path = config_get( 'plugin_path' );
+	$t_file_path = config_get_global( 'plugin_path' );
 	$t_file_path .= $p_base_name . DIRECTORY_SEPARATOR;
 	$t_file_path .= 'files' . DIRECTORY_SEPARATOR . $p_filename;
 
@@ -214,13 +216,9 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	$t_content_type = '';
-	$t_finfo = finfo_get_if_available();
-
-	if( $t_finfo ) {
-		$t_file_info_type = $t_finfo->file( $t_file_path );
-		if( $t_file_info_type !== false ) {
-			$t_content_type = $t_file_info_type;
-		}
+	$t_file_info_type = file_get_mime_type( $t_file_path );
+	if( $t_file_info_type !== false ) {
+		$t_content_type = $t_file_info_type;
 	}
 
 	# allow overriding the content type for specific text and image extensions
@@ -513,7 +511,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 		# their code, adapt it if necessary, and release a new version of the
 		# plugin with updated dependencies.
 		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
-			$t_version_core = utf8_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
+			$t_version_core = mb_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
 				$t_is_current_core_supported = $t_is_current_core_supported
@@ -532,12 +530,12 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			# check for a less-than-or-equal version requirement
 			$t_ltpos = strpos( $t_required, '<=' );
 			if( $t_ltpos !== false ) {
-				$t_required = trim( utf8_substr( $t_required, $t_ltpos + 2 ) );
+				$t_required = trim( mb_substr( $t_required, $t_ltpos + 2 ) );
 				$t_maximum = true;
 			} else {
 				$t_ltpos = strpos( $t_required, '<' );
 				if( $t_ltpos !== false ) {
-					$t_required = trim( utf8_substr( $t_required, $t_ltpos + 1 ) );
+					$t_required = trim( mb_substr( $t_required, $t_ltpos + 1 ) );
 					$t_maximum = true;
 				}
 			}

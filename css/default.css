@@ -75,6 +75,14 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 	padding: 1em;
 }
 
+.bug-attachment-preview-image img {
+	max-width: 100%;
+}
+
+.bug-attachment-preview-text {
+	white-space: pre-wrap;
+}
+
 #dates label[for=start_date], #dates > label[for=end_date] {
 	float: left;
 	width: 3em;
@@ -100,4 +108,53 @@ td.print-overdue    { font-weight: bold; }
 /* strike-through resolved issues: #22492 */
 .resolved  {     
     text-decoration: line-through;
+}
+
+.error-details .code {
+	font-family: monospace;
+}
+
+table.filters td.category {
+	color: #337ab7;
+}
+
+.listjs-table .sort:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  content: "";
+  position: relative;
+  top: -10px;
+  right: -5px;
+}
+
+.listjs-table .sort.desc:after {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #707070;
+  content: "";
+  position: relative;
+  top: 4px;
+  right: -5px;
+}
+
+.listjs-table .sort.asc:after {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #707070;
+  content: "";
+  position: relative;
+  top: -4px;
+  right: -5px;
+}
+
+.listjs-table .sort:hover {
+	text-decoration: underline;
 }

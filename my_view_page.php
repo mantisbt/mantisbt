@@ -58,9 +58,10 @@ require_css( 'status_config.php' );
 auth_ensure_user_authenticated();
 
 $t_current_user_id = auth_get_current_user_id();
+$t_current_project_id = helper_get_current_project();
 
 # Improve performance by caching category data in one pass
-category_get_all_rows( helper_get_current_project() );
+category_get_all_rows( $t_current_project_id );
 
 compress_enable();
 
@@ -78,7 +79,7 @@ layout_page_header_end();
 
 layout_page_begin( __FILE__ );
 
-$f_page_number		= gpc_get_int( 'page_number', 1 );
+$f_page_number = gpc_get_int( 'page_number', 1 );
 
 $t_per_page = config_get( 'my_view_bug_count' );
 $t_bug_count = null;
@@ -87,10 +88,9 @@ $t_page_count = null;
 $t_boxes = config_get( 'my_view_boxes' );
 asort( $t_boxes );
 reset( $t_boxes );
-#print_r ($t_boxes);
 
-$t_project_id = helper_get_current_project();
-$t_timeline_view_threshold_access = access_has_project_level( config_get( 'timeline_view_threshold' ) );
+$t_project_ids_to_check = $t_current_project_id == ALL_PROJECTS ? null : array( $t_current_project_id );
+$t_timeline_view_threshold_access = access_has_any_project_level( config_get( 'timeline_view_threshold' ), $t_project_ids_to_check, $t_current_user_id );
 $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
 ?>
 <div class="col-xs-12 <?php echo $t_timeline_view_class ?>">
@@ -103,31 +103,30 @@ $t_two_columns_applied = false;
 
 define( 'MY_VIEW_INC_ALLOW', true );
 
-while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
-		# don't display bugs that are set as 0
-	if ($t_box_display == 0) {
+foreach( $t_boxes as $t_box_title => $t_box_display ) {
+		# don't display boxes that are set as 0
+	if ( $t_box_display == 0 ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
-	else if(
-		$t_box_title == 'assigned'
+	else if( $t_box_title == 'assigned'
 		&&  ( current_user_is_anonymous()
-			|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id )
-		)
-	) {
+			|| !access_has_any_project_level( config_get( 'handle_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# don't display "Monitored by Me" bugs to users that can't monitor bugs
-	else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	else if( $t_box_title == 'monitored'
+		&& ( current_user_is_anonymous()
+			|| !access_has_any_project_level( config_get( 'monitor_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 		# don't display "Reported by Me" bugs to users that can't report bugs
-	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
-		( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) )
+		&& ( current_user_is_anonymous()
+			|| !access_has_any_project_level( config_get( 'report_bug_threshold' ), $t_project_ids_to_check, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-			}
-
-			# display the box
+	}
+		# display the box
 	else {
 		if( !$t_timeline_view_threshold_access ) {
 			if ($t_counter >= $t_number_of_boxes / 2 && !$t_two_columns_applied) {

@@ -267,8 +267,9 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	}
 
 	# Make sure the requested field exists
-	if( is_array( $t_info[0] ) && array_key_exists( $p_field, $t_info[0] ) ) {
-		$t_value = $t_info[0][$p_field][0];
+	$t_field_lowercase = strtolower( $p_field );
+	if( is_array( $t_info[0] ) && array_key_exists( $t_field_lowercase, $t_info[0] ) ) {
+		$t_value = $t_info[0][$t_field_lowercase][0];
 		log_event( LOG_LDAP, 'Found value \'' . $t_value . '\' for field \'' . $p_field . '\'.' );
 	} else {
 		log_event( LOG_LDAP, 'WARNING: field \'' . $p_field . '\' does not exist' );
@@ -405,7 +406,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
  * @return boolean true if enabled, false otherwise.
  */
 function ldap_simulation_is_enabled() {
-	$t_filename = config_get( 'ldap_simulation_file_path' );
+	$t_filename = config_get_global( 'ldap_simulation_file_path' );
 	return !is_blank( $t_filename );
 }
 
@@ -416,7 +417,7 @@ function ldap_simulation_is_enabled() {
  * @return array|null An associate array with user information or null if not found.
  */
 function ldap_simulation_get_user( $p_username ) {
-	$t_filename = config_get( 'ldap_simulation_file_path' );
+	$t_filename = config_get_global( 'ldap_simulation_file_path' );
 	$t_lines = file( $t_filename );
 	if( $t_lines === false ) {
 		log_event( LOG_LDAP, 'ldap_simulation_get_user: could not read simulation data from ' . $t_filename );

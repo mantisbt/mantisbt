@@ -1,0 +1,67 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Bangla (বাংলা)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Aftabuzzaman
+ * @author Rasal Lia
+ * @author আফতাবুজ্জামান
+ */
+
+$s_plugin_XmlImportExport_title = 'অামদানি/রপ্তানি ইস্যু';
+$s_plugin_XmlImportExport_description = 'XML ভিত্তিক অামদানি ও রপ্তানি সামর্থ MantisBT তে যুক্ত করে।';
+$s_plugin_XmlImportExport_import = 'অামদানি ইস্যু';
+$s_plugin_XmlImportExport_export = 'XML রপ্তানি';
+$s_plugin_XmlImportExport_config_title = 'XML অামদানি/রপ্তানি প্রবেশ স্তর মাপকাঠি নির্ধারণ';
+$s_plugin_XmlImportExport_import_threshold = 'অামদানি ইস্যু';
+$s_plugin_XmlImportExport_export_threshold = 'রপ্তানি ইস্যু';
+$s_plugin_XmlImportExport_action_update = 'হালনাগাদ';
+$s_plugin_XmlImportExport_importing_in_project = 'প্রকল্প %s তে ইস্যু অামদানি করছে';
+$s_plugin_XmlImportExport_import_options = 'অামদানির বিকল্প';
+$s_plugin_XmlImportExport_cross_references = 'অভ্যন্তরীণ পরিচিতি';
+$s_plugin_XmlImportExport_default_strategy = 'পূর্বনির্ধারিত বদল করার কৌশল:';
+$s_plugin_XmlImportExport_renumber = 'পুনরায় নম্বর';
+$s_plugin_XmlImportExport_renumber_desc = 'তথ্যসূত্রগুলি নতুন সংখ্যায় রূপান্তর করার চেষ্টা করুন';
+$s_plugin_XmlImportExport_link = 'সংযোগ';
+$s_plugin_XmlImportExport_link_desc = 'মূল বিষয়ের সাথে সংযোগে রূপান্তর করুন';
+$s_plugin_XmlImportExport_disable = 'নিস্ক্রিয়';
+$s_plugin_XmlImportExport_disable_desc = 'সংযোগ নিস্ক্রিয় করুন';
+$s_plugin_XmlImportExport_fallback = 'অাপদকালিন কৌশল (যখন "নতুন নম্বর" অকার্যকর):';
+$s_plugin_XmlImportExport_fallback_category = 'পতনরক্ষণ কৌশলের প্রকারভেদ:';
+$s_plugin_XmlImportExport_keep_same_category = 'একই বিষয়শ্রেণী রাখতে চেষ্টা করুন';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader এবং xmlwriter এক্সটেনশন পাওয়া যাচ্ছে না';

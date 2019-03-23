@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Nathaniel.skywalker.888
  * @author Rudko
  * @author Wizzard
  */
@@ -49,7 +50,7 @@ $s_plugin_MantisGraph_config = 'Nastavenie';
 $s_plugin_MantisGraph_synthesis_link = 'Tvorba';
 $s_plugin_MantisGraph_status_link = 'Podľa stavu';
 $s_plugin_MantisGraph_priority_link = 'Podľa priority';
-$s_plugin_MantisGraph_severity_link = 'Podľa náročnosti';
+$s_plugin_MantisGraph_severity_link = 'Podľa závažnosti';
 $s_plugin_MantisGraph_category_link = 'Podľa kategórie';
 $s_plugin_MantisGraph_resolution_link = 'Podľa riešenia';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Graf podľa stavu';

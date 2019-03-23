@@ -264,13 +264,15 @@ function custom_field_cache_values( array $p_bug_id_array, array $p_field_id_arr
 		if( !isset( $g_cache_cf_bug_values[$c_bug_id] ) ) {
 			$g_cache_cf_bug_values[$c_bug_id] = array();
 		}
+
 		$c_field_id = (int)$t_row['field_id'];
 		$t_value_column = ( $f_cf_defs[$c_field_id]['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 		$t_value = $t_row[$t_value_column];
 		if( null !== $t_value ) {
 			$t_value = custom_field_database_to_value( $t_value, $f_cf_defs[$c_field_id]['type'] );
 		}
-		# non-existant will be stored as null
+
+		# non-existent will be stored as null
 		$g_cache_cf_bug_values[$c_bug_id][$c_field_id] = $t_value;
 	}
 }
@@ -779,7 +781,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_user_id = auth_get_current_user_id();
-		# Select all projects accesible by the user
+		# Select all projects accessible by the user
 		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
 	} elseif( !is_array( $p_project_id ) ) {
 		$t_project_ids = array( $p_project_id );
@@ -824,7 +826,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			unset( $t_uncached_projects[$t_project_id] );
 		}
 
-		# save empty array for those projects that dont appear in the results
+		# save empty array for those projects that don't appear in the results
 		if( !empty( $t_uncached_projects ) ) {
 			foreach( $t_uncached_projects as $t_pr_id ) {
 				$g_cache_cf_linked[$t_pr_id] = array();
@@ -911,7 +913,7 @@ function custom_field_get_display_name( $p_name ) {
 		$p_name .= ' (' . $t_local_name . ')';
 	}
 
-	return string_display( $p_name );
+	return string_display_line( $p_name );
 }
 
 /**
@@ -929,7 +931,6 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 	$c_field_id = (int)$p_field_id;
 
 	$t_row = custom_field_cache_row( $c_field_id );
-	$t_access_level_r = $t_row['access_level_r'];
 
 	# first check permissions
 	if( !custom_field_has_read_access( $c_field_id, $c_bug_id, auth_get_current_user_id() ) ) {
@@ -1058,16 +1059,13 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 function custom_field_validate( $p_field_id, $p_value ) {
 	$t_row = custom_field_get_definition( $p_field_id );
 
-	$t_name = $t_row['name'];
 	$t_type = $t_row['type'];
-	$t_possible_values = $t_row['possible_values'];
 	$t_valid_regexp = $t_row['valid_regexp'];
 	$t_length_min = $t_row['length_min'];
 	$t_length_max = $t_row['length_max'];
-	$t_default_value = $t_row['default_value'];
 
 	$t_valid = true;
-	$t_length = utf8_strlen( $p_value );
+	$t_length = mb_strlen( $p_value );
 	switch( $t_type ) {
 		case CUSTOM_FIELD_TYPE_STRING:
 		case CUSTOM_FIELD_TYPE_TEXTAREA:
@@ -1162,7 +1160,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
  */
 function custom_field_prepare_possible_values( $p_possible_values ) {
 	if( !is_blank( $p_possible_values ) && ( $p_possible_values[0] == '=' ) ) {
-		return helper_call_custom_function( 'enum_' . utf8_substr( $p_possible_values, 1 ), array() );
+		return helper_call_custom_function( 'enum_' . mb_substr( $p_possible_values, 1 ), array() );
 	}
 
 	return $p_possible_values;
@@ -1170,6 +1168,9 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
 
 /**
  * Get All Possible Values for a Field.
+ * Optionally, a subset of projects can be specified to get values only appearing in those.
+ * The values are always those visible to the user, based on view permissions.
+ *
  * @param array         $p_field_def   Custom field definition.
  * @param integer|array $p_project_id  Project identifier, or array of project ids
  * @return boolean|array
@@ -1212,23 +1213,8 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 			'_view_type' => FILTER_VIEW_TYPE_ADVANCED,
 		);
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-		# Note: filter_get_bug_rows_query_clauses() calls db_param_push();
-		$t_query_clauses = filter_get_bug_rows_query_clauses( $t_filter, null, null, null );
-		# if the query can't be formed, there are no results
-		if( empty( $t_query_clauses ) ) {
-			# reset the db_param stack that was initialized by "filter_get_bug_rows_query_clauses()"
-			db_param_pop();
-			return false;
-		}
-		$t_select_string = 'SELECT {bug}.id ';
-		$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
-		$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
-		$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
-		if( count( $t_query_clauses['where'] ) > 0 ) {
-			$t_where_string .= ' AND ( ' . implode( $t_query_clauses['operator'], $t_query_clauses['where'] ) . ' ) ';
-		}
-		$t_filter_in = ' ( ' . $t_select_string . $t_from_string . $t_join_string . $t_where_string . ' )';
-		$t_params = $t_query_clauses['where_values'];
+
+		$t_filter_subquery = new BugFilterQuery( $t_filter, BugFilterQuery::QUERY_TYPE_IDS );
 
 		# which types need special type cast
 		switch( $p_field_def['type'] ) {
@@ -1244,16 +1230,17 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 					$t_select_expr = 'cfst.value';
 		}
 
-		$t_query = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value FROM {custom_field_string} cfst'
-			. ' WHERE cfst.bug_id IN ' . $t_filter_in
-			. ' AND cfst.field_id = ' . db_param()
+		$t_sql = 'SELECT DISTINCT ' . $t_select_expr . ' AS cast_value'
+			. ' FROM {custom_field_string} cfst'
+			. ' WHERE cfst.field_id = :cfid AND cfst.bug_id IN :filter'
 			. ' ORDER BY cast_value';
-		$t_params[] = (int)$p_field_def['id'];
-		$t_result = db_query( $t_query, $t_params );
+		$t_query = new DbQuery( $t_sql );
+		$t_query->bind( array( 'filter' => $t_filter_subquery, 'cfid' => (int)$p_field_def['id'] ) );
 
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			if( !is_blank( trim( $t_row['cast_value'] ) ) ) {
-				array_push( $t_return_arr, $t_row['cast_value'] );
+		while( $t_query->fetch() ) {
+			$t_val = $t_query->field( 'cast_value' );
+			if( !is_blank( trim( $t_val ) ) ) {
+				$t_return_arr[] = $t_val;
 			}
 		}
 
@@ -1413,7 +1400,7 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
  * Print an input field
  * $p_field_def contains the definition of the custom field (including it's field id
  * $p_bug_id    contains the bug where this field belongs to. If it's left
- * away, it'll default to 0 and thus belongs to a new (i.e. non-existant) bug
+ * away, it'll default to 0 and thus belongs to a new (i.e. non-existent) bug
  * NOTE: This probably belongs in the print_api.php
  * @param array   $p_field_def Custom field definition.
  * @param integer $p_bug_id    A bug identifier.

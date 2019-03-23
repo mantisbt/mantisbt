@@ -270,15 +270,6 @@ $g_manual_url = 'doc/en-US/Admin_Guide/html-desktop/';
 ##############
 
 /**
- * Session handler.  Possible values:
- *  'php' -> Default PHP filesystem sessions
- *  'adodb' -> Database storage sessions
- *  'memcached' -> Memcached storage sessions
- * @global string $g_session_handler
- */
-$g_session_handler = 'php';
-
-/**
  * Session save path.  If false, uses default value as set by session handler.
  * @global bool $g_session_save_path
  */
@@ -624,6 +615,7 @@ $g_show_user_email_threshold = NOBODY;
 /**
  * This specifies the access level that is needed to see realnames on user view
  * page
+ * @see $g_show_realname
  * @global integer $g_show_user_realname_threshold
  */
 $g_show_user_realname_threshold = NOBODY;
@@ -782,6 +774,12 @@ $g_email_separator2 = str_pad('', 70, '-');
  */
 $g_email_padding_length	= 28;
 
+/**
+ * Duration (in days) to retry failed emails before deleting them from queue.
+ * @global integer $g_email_retry_in_days
+ */
+$g_email_retry_in_days = 7;
+
 ###########################
 # MantisBT Version String #
 ###########################
@@ -828,6 +826,7 @@ $g_language_choices_arr = array(
 	'arabic',
 	'arabicegyptianspoken',
 	'asturian',
+	'basque',
 	'belarusian_tarask',
 	'breton',
 	'bulgarian',
@@ -843,6 +842,7 @@ $g_language_choices_arr = array(
 	'finnish',
 	'french',
 	'galician',
+	'georgian',
 	'german',
 	'greek',
 	'hebrew',
@@ -854,10 +854,12 @@ $g_language_choices_arr = array(
 	'korean',
 	'latvian',
 	'lithuanian',
+	'luxembourgish',
 	'macedonian',
 	'norwegian_bokmal',
 	'norwegian_nynorsk',
 	'occitan',
+	'persian',
 	'polish',
 	'portuguese_brazil',
 	'portuguese_standard',
@@ -865,17 +867,19 @@ $g_language_choices_arr = array(
 	'romanian',
 	'russian',
 	'serbian',
+	'serbian_latin',
 	'slovak',
 	'slovene',
 	'spanish',
-	'swissgerman',
 	'swedish',
+	'swissgerman',
 	'tagalog',
 	'turkish',
 	'ukrainian',
 	'urdu',
 	'vietnamese',
 	'volapuk',
+	'zazaki',
 );
 
 /**
@@ -888,12 +892,14 @@ $g_language_auto_map = array(
 	'ar' => 'arabic',
 	'arz' => 'arabicegyptianspoken',
 	'ast' => 'asturian',
+	'eu' => 'basque',
 	'be-tarask' => 'belarusian_tarask',
 	'bg' => 'bulgarian',
 	'br' => 'breton',
 	'ca' => 'catalan',
 	'zh-cn, zh-sg, zh' => 'chinese_simplified',
 	'zh-hk, zh-tw' => 'chinese_traditional',
+	'hr' => 'croatian',
 	'cs' => 'czech',
 	'da' => 'danish',
 	'nl-be, nl' => 'dutch',
@@ -902,38 +908,42 @@ $g_language_auto_map = array(
 	'fi' => 'finnish',
 	'fr-ca, fr-be, fr-ch, fr' => 'french',
 	'gl' => 'galician',
-	'gsw' => 'swissgerman',
 	'de-de, de-at, de-ch, de' => 'german',
 	'he' => 'hebrew',
 	'hu' => 'hungarian',
-	'hr' => 'croatian',
 	'is' => 'icelandic',
 	'ia' => 'interlingua',
 	'it-ch, it' => 'italian',
 	'ja' => 'japanese',
+	'ka' => 'georgian',
 	'ko' => 'korean',
-	'ksh' => 'ripoarisch',
-	'lt' => 'lithuanian',
 	'lv' => 'latvian',
+	'lt' => 'lithuanian',
+	'lb' => 'luxembourgish',
 	'mk' => 'macedonian',
 	'no' => 'norwegian_bokmal',
 	'nn' => 'norwegian_nynorsk',
 	'oc' => 'occitan',
+	'fa' => 'persian',
 	'pl' => 'polish',
 	'pt-br' => 'portuguese_brazil',
 	'pt' => 'portuguese_standard',
+	'ksh' => 'ripoarisch',
 	'ro-mo, ro' => 'romanian',
 	'ru-mo, ru-ru, ru-ua, ru' => 'russian',
 	'sr' => 'serbian',
+	'sr-latn' => 'serbian_latin',
 	'sk' => 'slovak',
 	'sl' => 'slovene',
 	'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 	'sv-fi, sv' => 'swedish',
+	'gsw' => 'swissgerman',
 	'tl' => 'tagalog',
 	'tr' => 'turkish',
 	'uk' => 'ukrainian',
 	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
+	'diq' => 'zazaki',
 );
 
 /**
@@ -941,6 +951,69 @@ $g_language_auto_map = array(
  * @global string $g_fallback_language
  */
 $g_fallback_language = 'english';
+
+##########################
+# MantisBT Font Settings #
+##########################
+
+/**
+ * Name of one of google fonts available at https://fonts.google.com/
+ * Chosen family must be part of in $g_font_family_choices_local such that it works
+ * even if CDN option is disabled
+ * @see $g_font_family_choices_local
+ * @see $g_cdn_enabled
+ * @global string $g_font_family
+ */
+$g_font_family = 'Open Sans';
+
+/**
+ * List the google fonts that the users are allowed to choose from.
+ * Google offers over 800 fonts. The list below is limited to the ones tested on MantisBT UI
+ * @global array $g_font_family_choices
+ */
+$g_font_family_choices = array(
+	'Amiko',
+	'Architects Daughter',
+	'Archivo Narrow',
+	'Arvo',
+	'Bitter',
+	'Cabin',
+	'Cinzel',
+	'Comfortaa',
+	'Courgette',
+	'Droid Sans',
+	'Gloria Hallelujah',
+	'Inconsolata',
+	'Josefin Sans',
+	'Kadwa',
+	'Karla',
+	'Kaushan Script',
+	'Lato',
+	'Montserrat',
+	'Open Sans',
+	'Orbitron',
+	'Oregano',
+	'Palanquin',
+	'Poppins',
+	'Raleway',
+	'Rhodium Libre',
+	'Sarala',
+	'Scope One',
+	'Secular One',
+	'Ubuntu',
+	'Vollkorn'
+);
+
+/**
+ * List of fonts that are installed as part of MantisBT
+ * This list is used when using CDN option is disabled
+ * @global array $g_font_family_choices_local
+ */
+$g_font_family_choices_local = array(
+	'Montserrat',
+	'Open Sans',
+	'Poppins'
+);
 
 #############################
 # MantisBT Display Settings #
@@ -1141,19 +1214,16 @@ $g_show_version_dates_threshold = NOBODY;
 
 /**
  * show users with their real name or not
+ * @see $g_sort_by_last_name
+ * @see $g_show_user_realname_threshold
  * @global integer $g_show_realname
  */
 $g_show_realname = OFF;
 
 /**
- * leave off for now
- * @global integer $g_differentiate_duplicates
- */
-$g_differentiate_duplicates = OFF;
-
-/**
  * sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted
  * with the "D"s
+ * @see $g_show_realname
  * @global integer $g_sort_by_last_name
  */
 $g_sort_by_last_name = OFF;
@@ -1337,6 +1407,13 @@ $g_default_project_view_status = VS_PUBLIC;
 $g_default_bug_view_status = VS_PUBLIC;
 
 /**
+ * Default value for bug description field used on bug report page.
+ *
+ * @global string $g_default_bug_description
+ */
+$g_default_bug_description = '';
+
+/**
  * Default value for steps to reproduce field.
  * @global string $g_default_bug_steps_to_reproduce
  */
@@ -1507,16 +1584,14 @@ $g_default_email_on_reopened = ON;
 $g_default_email_on_bugnote = ON;
 
 /**
- * @todo Unused
  * @global integer $g_default_email_on_status
  */
-$g_default_email_on_status = 0;
+$g_default_email_on_status = OFF;
 
 /**
- * @todo Unused
  * @global integer $g_default_email_on_priority
  */
-$g_default_email_on_priority = 0;
+$g_default_email_on_priority = OFF;
 
 /**
  * 'any'
@@ -1816,7 +1891,7 @@ $g_dropzone_enabled = ON;
 $g_attachments_file_permissions = 0400;
 
 /**
- * Maximum file size that can be uploaded
+ * Maximum file size (bytes) that can be uploaded.
  * Also check your PHP settings (default is usually 2MBs)
  * @global integer $g_max_file_size
  */
@@ -3030,11 +3105,12 @@ $g_bugnote_link_tag = '~';
  * this is the prefix to use when creating links to bug views from bug counts
  * (eg. on the main page and the summary page).
  * Default is a temporary filter
- * only change the filter this time - 'view_all_set.php?type=1&amp;temporary=y'
- * permanently change the filter - 'view_all_set.php?type=1';
+ * only change the filter this time - 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&amp;temporary=y'
+ * permanently change the filter - 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW;
+ * (FILTER_ACTION_xxx constants are defined in core/constant_inc.php)
  * @global string $g_bug_count_hyperlink_prefix
  */
-$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
+$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_NEW . '&amp;temporary=y';
 
 /**
  * The regular expression to use when validating new user login names
@@ -3048,15 +3124,6 @@ $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
  * @global string $g_user_login_valid_regex
  */
 $g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
-
-/**
- * Default user name prefix used to filter the list of users in
- * manage_user_page.php.  Change this to 'A' (or any other
- * letter) if you have a lot of users in the system and loading
- * the manage users page takes a long time.
- * @global string $g_default_manage_user_prefix
- */
-$g_default_manage_user_prefix = 'ALL';
 
 /**
  * Default tag prefix used to filter the list of tags in
@@ -3969,6 +4036,12 @@ $g_time_tracking_reporting_threshold = MANAGER;
  */
 $g_time_tracking_without_note = ON;
 
+/**
+ * default billing rate per hour
+ * @global integer $g_time_tracking_billing_rate
+ */
+$g_time_tracking_billing_rate = 0;
+
 ############################
 # Profile Related Settings #
 ############################
@@ -4154,30 +4227,26 @@ $g_show_queries_count = OFF;
  * Recommended config_inc.php settings for developers (these are automatically
  * set if the server is localhost):
  * $g_display_errors = array(
- *     E_USER_ERROR        => DISPLAY_ERROR_HALT,
  *     E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
  *     E_WARNING           => DISPLAY_ERROR_HALT,
  *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
- * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
- * another value will cause program execution to continue, which may lead to
- * data integrity issues and/or cause MantisBT to function incorrectly.
+ * NOTICE: E_USER_ERROR, E_RECOVERABLE_ERROR and E_ERROR will always be internally
+ * set DISPLAY_ERROR_HALT independent of value configured.
  *
  * @global array $g_display_errors
  */
-$g_display_errors = array(
-	E_USER_ERROR        => DISPLAY_ERROR_HALT,
-	E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
-);
+$g_display_errors = array();
 
 # Add developers defaults when server is localhost
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
-if( isset( $_SERVER['SERVER_NAME'] ) && ( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
- || $_SERVER['SERVER_NAME'] == '127.0.0.1'
-) ) {
+if( isset( $_SERVER['SERVER_NAME'] ) &&
+	( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0 ||
+	  $_SERVER['SERVER_NAME'] == '127.0.0.1' ) ) {
+	$g_display_errors[E_USER_WARNING] = DISPLAY_ERROR_HALT;
 	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
-	$g_display_errors[E_ALL]     = DISPLAY_ERROR_INLINE;
+	$g_display_errors[E_ALL] = DISPLAY_ERROR_INLINE;
 }
 
 /**
@@ -4271,15 +4340,16 @@ $g_global_settings = array(
 	'database_name', 'db_username', 'db_password', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
-	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
+	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
-	'stop_on_errors', 'version_suffix', 'debug_email',
+	'show_timer', 'show_memory_usage', 'stop_on_errors', 'version_suffix', 'debug_email',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file',
 	'file_type_icons', 'path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
-	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique'
+	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
+	'impersonate_user_threshold', 'email_retry_in_days'
 );
 
 /**
@@ -4364,6 +4434,7 @@ $g_public_config_names = array(
 	'date_partitions',
 	'datetime_picker_format',
 	'default_bug_additional_info',
+	'default_bug_description',
 	'default_bug_eta',
 	'default_bug_priority',
 	'default_bug_projection',
@@ -4400,7 +4471,6 @@ $g_public_config_names = array(
 	'default_language',
 	'default_limit_view',
 	'default_manage_tag_prefix',
-	'default_manage_user_prefix',
 	'default_new_account_access_level',
 	'default_notify_flags',
 	'default_project_view_status',
@@ -4413,7 +4483,6 @@ $g_public_config_names = array(
 	'delete_bugnote_threshold',
 	'delete_project_threshold',
 	'development_team_threshold',
-	'differentiate_duplicates',
 	'disallowed_files',
 	'display_bug_padding',
 	'display_bugnote_padding',
@@ -4451,6 +4520,9 @@ $g_public_config_names = array(
 	'filter_by_custom_fields',
 	'filter_custom_fields_per_row',
 	'filter_position',
+	'font_family',
+	'font_family_choices',
+	'font_family_choices_local',
 	'forward_year_count',
 	'from_email',
 	'from_name',
@@ -4608,6 +4680,7 @@ $g_public_config_names = array(
 	'tag_edit_threshold',
 	'tag_separator',
 	'tag_view_threshold',
+	'time_tracking_billing_rate',
 	'time_tracking_edit_threshold',
 	'time_tracking_enabled',
 	'time_tracking_reporting_threshold',

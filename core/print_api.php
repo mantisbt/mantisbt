@@ -111,7 +111,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		if( $p_sanitize ) {
 			$t_url = string_sanitize_url( $p_url, true );
 		} else {
-			$t_url = config_get( 'path' ) . $p_url;
+			$t_url = config_get_global( 'path' ) . $p_url;
 		}
 	}
 
@@ -183,7 +183,7 @@ function print_successful_redirect( $p_redirect_to ) {
  * Print avatar image for the given user ID
  *
  * @param integer $p_user_id 		A user identifier.
- * @param string $p_class_prefix	CSS classs prefix.
+ * @param string $p_class_prefix	CSS class prefix.
  * @param integer $p_size    		Image pixel size.
  * @return void
  */
@@ -215,13 +215,16 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		return;
 	}
 
-	$t_username = user_get_name( $p_user_id );
+	$t_username = user_get_username( $p_user_id );
+	$t_name = user_get_name( $p_user_id );
+
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		$t_email = user_get_email( $p_user_id );
-		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
+		print_email_link_with_subject( $t_email, $t_name, $t_username, $p_bug_id );
 	} else {
-		echo '<span class="user" style="text-decoration: line-through">';
-		echo $t_username;
+		$t_name = string_attribute( $t_name );
+		echo '<span style="text-decoration: line-through">';
+		echo '<a title="' . $t_name . '">' . $t_username . '</a>';
 		echo '</span>';
 	}
 }
@@ -304,31 +307,21 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 
 	$t_display = array();
 	$t_sort = array();
-	$t_show_realname = ( ON == config_get( 'show_realname' ) );
-	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+
 	foreach( $t_users as $t_key => $t_user ) {
-		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
-		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
-			$t_user_name = string_attribute( $t_user['realname'] );
-			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
-			}
-		}
-		$t_display[] = $t_user_name;
-		$t_sort[] = $t_sort_name;
+		$t_display[] = user_get_expanded_name_from_row( $t_user );
+		$t_sort[] = user_get_name_for_sorting_from_row( $t_user );
 	}
+
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 	unset( $t_sort );
+
 	$t_count = count( $t_users );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
 		check_selected( $p_user_id, (int)$t_row['id'] );
-		echo '>' . $t_display[$i] . '</option>';
+		echo '>' . string_attribute( $t_display[$i] ) . '</option>';
 	}
 }
 
@@ -453,7 +446,7 @@ function print_news_item_option_list() {
 	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_headline = string_display( $t_row['headline'] );
+		$t_headline = string_display_line( $t_row['headline'] );
 		$t_announcement = $t_row['announcement'];
 		$t_view_state = $t_row['view_state'];
 		$t_id = $t_row['id'];
@@ -853,34 +846,34 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
 }
 
 /**
- * Print the option list for versions
- * @param string  $p_version       The currently selected version.
- * @param integer $p_project_id    Project id, otherwise current project will be used.
- * @param integer $p_released      Null to get all, 1: only released, 0: only future versions.
- * @param boolean $p_leading_blank Allow selection of no version.
- * @param boolean $p_with_subs     Whether to include sub-projects.
+ * Print the option list for versions.
+ * All versions related for each project will be printed. Those include, for each
+ * project, the directly linked versions and the inherited versions if applicable.
+ *
+ * @param string              $p_version       The currently selected version.
+ * @param integer|array|null  $p_project_ids   A project id, or array of ids, or null to use current project.
+ * @param integer             $p_released      Null to get all, 1: only released, 0: only future versions.
+ * @param boolean             $p_leading_blank Allow selection of no version.
  * @return void
  */
-function print_version_option_list( $p_version = '', $p_project_id = null, $p_released = null, $p_leading_blank = true, $p_with_subs = false ) {
-	if( null === $p_project_id ) {
-		$c_project_id = helper_get_current_project();
-	} else {
-		$c_project_id = (int)$p_project_id;
+function print_version_option_list( $p_version = '', $p_project_ids = null, $p_released = null, $p_leading_blank = true ) {
+	if( null === $p_project_ids ) {
+		$p_project_ids = helper_get_current_project();
 	}
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
 
-	if( $p_with_subs ) {
-		$t_versions = version_get_all_rows_with_subs( $c_project_id, $p_released, null );
-	} else {
-		$t_versions = version_get_all_rows( $c_project_id, $p_released, null );
-	}
+	$t_versions = version_get_all_rows( $t_project_ids, $p_released, null );
 
 	# Ensure the selected version (if specified) is included in the list
 	# Note: Filter API specifies selected versions as an array
 	if( !is_array( $p_version ) ) {
 		if( !empty( $p_version ) ) {
-			$t_version_id = version_get_id( $p_version, $c_project_id );
-			if( $t_version_id !== false ) {
-				$t_versions[] = version_cache_row( $t_version_id );
+			foreach( $t_project_ids as $t_project_id ) {
+				$t_version_id = version_get_id( $p_version, $t_project_id );
+				if( $t_version_id !== false ) {
+					$t_versions[] = version_cache_row( $t_version_id );
+					break;
+				}
 			}
 		}
 	}
@@ -891,6 +884,8 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
+
+	$t_show_project_name = count( $t_project_ids ) > 1;
 
 	foreach( $t_versions as $t_version ) {
 		# If the current version is obsolete, and current version not equal to $p_version,
@@ -907,8 +902,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 			$t_listed[] = $t_version_version;
 			echo '<option value="' . $t_version_version . '"';
 			check_selected( $p_version, $t_version['version'] );
-
-			$t_version_string = string_attribute( prepare_version_string( $c_project_id, $t_version['id'] ) );
+			$t_version_string = string_attribute( prepare_version_string( $t_version['project_id'], $t_version['id'], $t_show_project_name ) );
 
 			echo '>', string_shorten( $t_version_string, $t_max_length ), '</option>';
 		}
@@ -1108,6 +1102,26 @@ function print_language_option_list( $p_language ) {
 }
 
 /**
+ * Print option list of available font choices
+ * @param string $p_font The current font.
+ * @return void
+ */
+function print_font_option_list( $p_font ) {
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		$t_arr = config_get( 'font_family_choices' );
+	} else {
+		$t_arr = config_get( 'font_family_choices_local' );
+	}
+	$t_enum_count = count( $t_arr );
+	for( $i = 0;$i < $t_enum_count;$i++ ) {
+		$t_font = string_attribute( $t_arr[$i] );
+		echo '<option value="' . $t_font . '"';
+		check_selected( $t_font, $p_font );
+		echo '>' . $t_font . '</option>';
+	}
+}
+
+/**
  * Print a dropdown list of all bug actions available to a user for a specified
  * set of projects.
  * @param array $p_project_ids An array containing one or more project IDs.
@@ -1115,7 +1129,7 @@ function print_language_option_list( $p_language ) {
  */
 function print_all_bug_action_option_list( array $p_project_ids = null ) {
 	$t_commands = bug_group_action_get_commands( $p_project_ids );
-	while( list( $t_action_id, $t_action_label ) = each( $t_commands ) ) {
+	foreach ( $t_commands as $t_action_id => $t_action_label) {
 		echo '<option value="' . $t_action_id . '">' . $t_action_label . '</option>';
 	}
 }
@@ -1130,7 +1144,7 @@ function print_all_bug_action_option_list( array $p_project_ids = null ) {
 function print_project_user_list_option_list( $p_project_id = null ) {
 	$t_users = user_get_unassigned_by_project_id( $p_project_id );
 	foreach( $t_users as $t_id=>$t_name ) {
-		echo '<option value="' . $t_id . '">' . $t_name . '</option>';
+		echo '<option value="' . $t_id . '">' . string_attribute( $t_name ) . '</option>';
 	}
 }
 
@@ -1235,7 +1249,7 @@ function print_custom_field_projects_list( $p_field_id ) {
  * @return void
  */
 function print_plugin_priority_list( $p_priority ) {
-	if( $p_priority < 1 && $p_priority > 5 ) {
+	if( $p_priority < 1 || $p_priority > 5 ) {
 		echo '<option value="', $p_priority, '" selected="selected">', $p_priority, '</option>';
 	}
 
@@ -1304,6 +1318,12 @@ function print_formatted_severity_string( BugData $p_bug ) {
  * @return void
  */
 function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	# @TODO cproensa, $g_filter is needed to get the temporary id, since the
+	# actual filter is not providede as parameter. Ideally, we should not
+	# rely in this global variable, but at the moment is not possible without
+	# a rewrite of these print functions.
+	global $g_filter;
+
 	switch( $p_columns_target ) {
 		case COLUMNS_TARGET_PRINT_PAGE:
 		case COLUMNS_TARGET_VIEW_PAGE:
@@ -1320,7 +1340,8 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			}
 			$t_sort_field = rawurlencode( $p_sort_field );
 			$t_print_parameter = ( $p_columns_target == COLUMNS_TARGET_PRINT_PAGE ) ? '&print=1' : '';
-			print_link( 'view_all_set.php?sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=2' . $t_print_parameter, $p_string );
+			$t_filter_parameter = filter_is_temporary( $g_filter ) ? filter_get_temporary_key_param( $g_filter ) . '&' : '';
+			print_link( 'view_all_set.php?' . $t_filter_parameter . 'sort_add=' . $t_sort_field . '&dir_add=' . $p_dir . '&type=' . FILTER_ACTION_PARSE_ADD . $t_print_parameter, $p_string );
 			break;
 		default:
 			echo $p_string;
@@ -1336,11 +1357,12 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
  * @param string  $p_sort_by       The field to sort by.
  * @param integer $p_hide_inactive Whether to hide inactive users.
  * @param integer $p_filter        The filter to use.
+ * @param string  $p_search        The search term to use.
  * @param integer $p_show_disabled Whether to show disabled users.
  * @param string  $p_class         The CSS class of the link.
  * @return void
  */
-function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_show_disabled = 0, $p_class = '' ) {
+function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_search, $p_show_disabled = 0, $p_class = '' ) {
 	if( $p_sort_by == $p_field ) {
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
@@ -1354,7 +1376,7 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter,
+	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter . '&search=' . $p_search,
         $p_string, false, $p_class );
 }
 
@@ -1434,26 +1456,6 @@ function print_bracket_link_prepared( $p_link ) {
 }
 
 /**
- * print the bracketed links used near the top
- * if the $p_link is blank then the text is printed but no link is created
- * if $p_new_window is true, link will open in a new window, default false.
- * @param string  $p_link       The URL to link to.
- * @param string  $p_url_text   The text to display.
- * @param boolean $p_new_window Whether to open in a new window.
- * @param string  $p_class      CSS class to use with the link.
- * @return void
- */
-function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-	echo '<span class="bracket-link';
-	if( $p_class !== '' ) {
-		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
-	}
-	echo '">[&#160;';
-	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-	echo '&#160;]</span> ';
-}
-
-/**
  * print a HTML link
  * @param string  $p_link       The page URL.
  * @param string  $p_url_text   The displayed text for the link.
@@ -1520,10 +1522,10 @@ function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
  * @param string  $p_text           The displayed text for the link.
  * @param integer $p_page_no        The page number to link to.
  * @param integer $p_page_cur       The current page number.
- * @param integer $p_temp_filter_id Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
-function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_id = 0 ) {
+function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur = 0, $p_temp_filter_key = null ) {
 	if( is_blank( $p_text ) ) {
 		$p_text = $p_page_no;
 	}
@@ -1531,8 +1533,8 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
-		if( $p_temp_filter_id !== 0 ) {
-			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_id . '&page_number=' . $p_page_no, $p_text );
+		if( $p_temp_filter_key ) {
+			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_key . '&page_number=' . $p_page_no, $p_text );
 		} else {
 			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
 		}
@@ -1548,11 +1550,16 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @param integer $p_start          The first page number.
  * @param integer $p_end            The last page number.
  * @param integer $p_current        The current page number.
- * @param integer $p_temp_filter_id Temporary filter id.
+ * @param integer $p_temp_filter_key Temporary filter key.
  * @return void
  */
-function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_id = 0 ) {
+function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_key = null ) {
 	$t_items = array();
+
+	# @TODO cproensa
+	# passing the temporary filter id to build ad-hoc url parameter is weak
+	# ideally, we should pass a parameters array which is appended to all generated links
+	# those parameters are provided as needed by the main page calling this functions
 
 	# Check if we have more than one page,
 	#  otherwise return without doing anything.
@@ -1572,11 +1579,11 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	print( '<ul class="pagination small no-margin"> ' );
 
 	# Next and Last links
-	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
+	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_key );
 	if( $p_current < $p_end ) {
-		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
+		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_key );
 	} else {
-		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
+		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_key );
 	}
 
 	# Page numbers ...
@@ -1597,11 +1604,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 			array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
 		} else {
 			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
-			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
-			} else {
-				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
-			}
+			$t_filter_param = filter_get_temporary_key_param( $p_temp_filter_key );
+			$t_filter_param .= $t_filter_param === null ? '' : '&amp;';
+			array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . $t_filter_param . 'page_number=' . $i . '">' . $i . '</a></li>' );
 		}
 	}
 	echo implode( '&#160;', $t_items );
@@ -1612,8 +1617,8 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 
 	# First and previous links
-	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
-	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
+	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_key );
+	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_key );
 
 	print( ' </ul>' );
 }
@@ -1645,39 +1650,35 @@ function get_email_link( $p_email, $p_text ) {
  *
  * @param string $p_email  Email Address.
  * @param string $p_text   Link text to display to user.
+ * @param string $p_tooltip The tooltip to show.
  * @param string $p_bug_id The bug identifier.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id ) {
+	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
+		$t_tooltip = ' title="' . $p_tooltip . '"';
+	} else {
+		$t_tooltip = '';
+	}
+
 	$t_bug = bug_get( $p_bug_id, true );
 	if( !access_has_project_level( config_get( 'show_user_email_threshold', null, null, $t_bug->project_id ), $t_bug->project_id ) ) {
-		echo $p_text;
+		echo $t_tooltip != '' ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
 		return;
 	}
-	$t_subject = email_build_subject( $p_bug_id );
-	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
-}
 
-/**
- * return the mailto: href string link instead of printing it
- * add subject line
- *
- * @param string $p_email   Email Address.
- * @param string $p_text    Link text to display to user.
- * @param string $p_subject Email subject line.
- * @return string
- */
-function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
+	$t_subject = email_build_subject( $p_bug_id );
+
 	# If we apply string_url() to the whole mailto: link then the @
 	# gets turned into a %40 and you can't right click in browsers to
 	# do Copy Email Address.  If we don't apply string_url() to the
 	# subject text then an ampersand (for example) will truncate the text
-	$t_subject = string_url( $p_subject );
+	$t_subject = string_url( $t_subject );
 	$t_email = string_url( $p_email );
 	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-	return '<a class="user" href="' . $t_mailto . '">' . $t_text . '</a>';
+	echo '<a href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
 }
 
 /**
@@ -1776,7 +1777,7 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16"></i>';
+	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" title="' . string_attribute( $t_icon['alt'] ) . ' file icon" ></i>';
 }
 
 /**
@@ -1787,8 +1788,7 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	$t_path = config_get( 'path' );
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" alt="', $p_title, '"></i></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" title="', $p_title, '"></i></a>';
 }
 
 /**
@@ -1838,7 +1838,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 	if( $p_add_any ) {
 		array_unshift_assoc( $p_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
 	}
-	while( list( $t_name, $t_desc ) = each( $p_control_array ) ) {
+	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
@@ -1986,7 +1986,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
-	echo htmlspecialchars( $t_content );
+	echo htmlspecialchars( $t_content, ENT_SUBSTITUTE, 'UTF-8' );
 	echo '</pre>';
 }
 
@@ -2078,8 +2078,9 @@ function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
  * @return void
  */
 function print_dropzone_form_data() {
+	//$t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
 	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
-	echo "\t" . 'data-max-filesize="'. ceil( config_get( 'max_file_size' ) / (1000 * 1024) ) . '"' . "\n";
+	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
 	$t_allowed_files = config_get( 'allowed_files' );
 	if ( !empty ( $t_allowed_files ) ) {
 		$t_allowed_files = '.' . implode ( ',.', explode ( ',', config_get( 'allowed_files' ) ) );
@@ -2097,7 +2098,30 @@ function print_dropzone_form_data() {
 	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
 	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
 	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
+	echo "\t" . 'data-dropzone_multiple_files_too_big="' . htmlspecialchars( lang_get( 'dropzone_multiple_files_too_big' ) ) . '"';
+}
 
+/**
+ * Populate a hidden div where its inner html will be used as preview template
+ * for dropzone attached files
+ * @return void
+ */
+function print_dropzone_template(){
+	?>
+	<div id="dropzone-preview-template" class="hidden">
+		<div class="dz-preview dz-file-preview">
+			<div class="dz-filename"><span data-dz-name></span></div>
+			<div><img data-dz-thumbnail /></div>
+			<div class="dz-size" data-dz-size></div>
+			<div class="progress progress-small progress-striped active">
+				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
+			</div>
+			<div class="dz-success-mark"><span></span></div>
+			<div class="dz-error-mark"><span></span></div>
+			<div class="dz-error-message"><span data-dz-errormessage></span></div>
+		</div>
+	</div>
+	<?php
 }
 
 /**

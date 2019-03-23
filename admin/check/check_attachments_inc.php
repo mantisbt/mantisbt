@@ -91,30 +91,3 @@ if( $t_use_xsendfile ) {
 			$t_xsendfile_header_name );
 	}
 }
-
-$t_finfo_exists = class_exists( 'finfo' );
-check_print_test_warn_row(
-	'Fileinfo extension is available for determining file MIME types',
-	$t_finfo_exists,
-	array( false => 'Web clients may struggle to download files without knowing the MIME type of each attachment.' )
-);
-
-if( $t_finfo_exists ) {
-	$t_fileinfo_magic_db_file = config_get_global( 'fileinfo_magic_db_file' );
-	if( $t_fileinfo_magic_db_file ) {
-		check_print_info_row(
-			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
-			config_get_global( 'fileinfo_magic_db_file' ) );
-		check_print_test_row(
-			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
-			file_exists( $t_fileinfo_magic_db_file ) );
-		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
-	} else {
-		$t_finfo = new finfo( FILEINFO_MIME );
-	}
-	check_print_test_row(
-		'Fileinfo extension can find and load a valid magic.db file',
-		$t_finfo !== false,
-		array( false => 'Ensure that the fileinfo_magic_db_file configuration value points to a valid magic.db file.' )
-	);
-}

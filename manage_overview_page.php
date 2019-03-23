@@ -89,7 +89,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'database_driver' ) ?></th>
-			<td><?php echo config_get( 'db_type' ) ?></td>
+			<td><?php echo config_get_global( 'db_type' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'database_version_description' ) ?></th>
@@ -104,15 +104,15 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
-			<td><?php echo config_get( 'absolute_path' ) ?></td>
+			<td><?php echo config_get_global( 'absolute_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
-			<td><?php echo config_get( 'core_path' ) ?></td>
+			<td><?php echo config_get_global( 'core_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
-			<td><?php echo config_get( 'plugin_path' ) ?></td>
+			<td><?php echo config_get_global( 'plugin_path' ) ?></td>
 		</tr>
 		<tr class="spacer">
 			<td colspan="2"></td>

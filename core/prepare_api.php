@@ -61,45 +61,63 @@ function prepare_email_link( $p_email, $p_text ) {
 }
 
 /**
- * prepares the name of the user given the id.  also makes it an email link.
- * @param integer $p_user_id A valid user identifier.
+ * Prepares the name of the user given the id.
+ * Also can make it a link to user info page.
+ * @param integer $p_user_id  A valid user identifier.
+ * @param boolean $p_link     Whether to include an html link
  * @return string
  */
-function prepare_user_name( $p_user_id ) {
+function prepare_user_name( $p_user_id, $p_link = true ) {
 	# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
 	if( NO_USER == $p_user_id ) {
 		return '';
 	}
 
-	$t_username = user_get_name( $p_user_id );
-	$t_username = string_display_line( $t_username );
-	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-		return '<a class="user" href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_username . '</a>';
+	$t_username = user_get_username( $p_user_id );
+	$t_name = user_get_name( $p_user_id );
+	if( $t_username != $t_name ) {
+		$t_tooltip = ' title="' . string_attribute( $t_username ) . '"';
 	} else {
-		return '<del class="user">' . $t_username . '</del>';
+		$t_tooltip = '';
 	}
+
+	$t_name = string_display_line( $t_name );
+
+	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
+		if( $p_link ) {
+			return '<a ' . $t_tooltip . ' href="' . string_sanitize_url( 'view_user_page.php?id=' . $p_user_id, true ) . '">' . $t_name . '</a>';
+		} else {
+			return '<span ' . $t_tooltip . '>' . $t_name . '</span>';
+		}
+	}
+
+	return '<del ' . $t_tooltip . '>' . $t_name . '</del>';
 }
 
 /**
  * A function that prepares the version string for outputting to the user on view / print issue pages.
  * This function would add the version date, if appropriate.
  *
- * @param integer $p_project_id The project id.
- * @param integer $p_version_id The version id.  If false then this method will return an empty string.
+ * @param integer $p_project_id         The project id to use as context.
+ * @param integer $p_version_id         The version id. If false then this method will return an empty string.
+ * @param boolean|null $p_show_project  Whether to include the project name or not,
+ *                                      null means include the project if different from current context.
  * @return string The formatted version string.
  */
-function prepare_version_string( $p_project_id, $p_version_id ) {
+function prepare_version_string( $p_project_id, $p_version_id, $p_show_project = null ) {
 	if( $p_version_id === false ) {
 		return '';
 	}
 
-	$t_version_text = version_full_name( $p_version_id, null, $p_project_id );
+	$t_version_text = version_full_name( $p_version_id, $p_show_project, $p_project_id );
 
 	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
 		$t_short_date_format = config_get( 'short_date_format' );
 
-		$t_version = version_get( $p_version_id );
-		$t_version_text .= ' (' . date( $t_short_date_format, $t_version->date_order ) . ')';
+		$t_version = version_cache_row( $p_version_id );
+		if( 1 == $t_version['released'] ) {
+			$t_version_text .= ' (' . date( $t_short_date_format, $t_version['date_order'] ) . ')';
+		}
 	}
 
 	return $t_version_text;

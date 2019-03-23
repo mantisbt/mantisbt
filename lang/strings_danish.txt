@@ -41,8 +41,10 @@
  * @author Christian List
  * @author Joedalton
  * @author Kaare
+ * @author Kenn.jensen
  * @author Peter Alberti
  * @author Qaqqalik
+ * @author Saederup92
  * @author Tjernobyl
  */
 
@@ -54,7 +56,7 @@ $s_actiongroup_menu_delete = 'Slet';
 $s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdatere prioritet';
 $s_actiongroup_menu_update_status = 'Opdater status';
-$s_actiongroup_menu_update_severity = 'Opdatere alvorlighed';
+$s_actiongroup_menu_update_severity = 'Opdater alvorlighed';
 $s_actiongroup_menu_update_view_status = 'Opdater visningsstatus';
 $s_actiongroup_menu_update_category = 'Opdater kategori';
 $s_actiongroup_menu_set_sticky = 'Sæt klæbrig til/fra';
@@ -163,7 +165,7 @@ $s_resolve_bugs_conf_msg = 'Vælg rapporternes løsning';
 $s_priority_bugs_conf_msg = 'Vælg rapporternes prioritet';
 $s_status_bugs_conf_msg = 'Vælg rapporternes status';
 $s_view_status_bugs_conf_msg = 'Vælg rapporternes visningsstatus';
-$s_category_bugs_conf_msg = 'Væld kategori for rapporterne';
+$s_category_bugs_conf_msg = 'Vælg kategori for rapporterne';
 $s_set_sticky_bugs_conf_msg = 'Er du sikker på du vil sætte klæbrig til/fra for disse emner?';
 $s_product_version_bugs_conf_msg = 'Opdater produktversion til';
 $s_fixed_in_version_bugs_conf_msg = 'Opdater Rettet i version til';
@@ -339,6 +341,7 @@ $s_email_on_priority_change = 'E-mail ved ændring af prioritet';
 $s_email_bugnote_limit = 'E-mail grænse for noter';
 $s_email_full_issue_details = 'Send alle sagsdetaljer via e-post';
 $s_language = 'Sprog';
+$s_font_family = 'Skriftfamilie';
 $s_update_prefs_button = 'Opdater indstillinger';
 $s_reset_prefs_button = 'Nulstil indstillinger';
 $s_timezone = 'Tidszone';
@@ -376,7 +379,6 @@ $s_sponsor_show = 'Vis alle';
 $s_payment_updated = 'Betalingsoplysninger opdateret.';
 $s_account_updated_msg = 'Din konto er blevet opdateret...';
 $s_email_updated = 'Vellykket opdatering af e-mailadresse';
-$s_realname_duplicated = 'Det rigtige navn bruges af en anden bruger';
 $s_realname_updated = 'Vellykket opdatering af rigtigt navn';
 $s_password_updated = 'Vellykket opdatering af adgangskode';
 $s_multiple_projects = 'De rapporter, du har valgt, er fra forskellige projekter. Parametrene nedenfor afspejler indstillingerne for alle projekter. Hvis det er forkert, prøv din ændring igen med et mindre antal rapporter valgt.';
@@ -582,6 +584,7 @@ $s_date_created = 'Oprettet dato';
 $s_last_visit = 'Sidste besøg';
 $s_last_visit_label = 'Sidste besøg:';
 $s_edit_user_link = 'Rediger bruger';
+$s_search_user_hint = 'Brugernavn, rigtige navn eller e-mail';
 $s_separate_list_items_by = '(adskil listens elementer med »%1$s«)';
 $s_config_all_projects = 'Note: Disse indstillinger gælder for alle projekter, undtagen hvis de er overskrevet på projekt niveau.';
 $s_config_project = 'Note: Disse indstillinger har kun indflydelse på projekterne %1$s.';
@@ -896,6 +899,7 @@ $s_total_time = 'Tid i alt';
 $s_developer_stats = 'Udviklerstatistik';
 $s_reporter_stats = 'Rapportørstatistik';
 $s_orct = '(åben/løst/lukket/total)';
+$s_summary_header = 'åben/løst/lukket/i alt/løst forhold/forhold';
 $s_any = 'enhver';
 $s_all = 'alle';
 $s_show = 'Vis';
@@ -1065,6 +1069,7 @@ $s_bug_created_from = 'Rapport klonet fra';
 $s_copy_from_parent = 'Kopier udvidede data fra overordnet rapport';
 $s_copy_notes_from_parent = 'Kopier bemærkninger for fejlrapport';
 $s_copy_attachments_from_parent = 'Kopier vedhæftede filer';
+$s_with = 'med';
 $s_viewing_bug_relationship_graph_title = 'Relationsgraf';
 $s_viewing_bug_dependency_graph_title = 'Afhængighedsgraf';
 $s_relation_graph = 'Relationsgraf';
@@ -1228,6 +1233,8 @@ $s_month_october = 'oktober';
 $s_month_november = 'november';
 $s_month_december = 'december';
 $s_timeline_issue_created = '<span class="username">%1$s</span> oprettet fejlrapport <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_added = '<span class="username">%1$s</span> vedhæftede filen <em>%3$s</em> til fejlrapport <span class="issue_id">%2$s</span>';
+$s_timeline_issue_file_deleted = '<span class="username">%1$s</span> fjernede filen <em>%3$s</em> fra fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> kommenteret på fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> overvåger fejlrapport <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stoppede overvågning af fejlrapport <span class="issue_id">%2$s</span>';
@@ -1251,6 +1258,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Denne filtype er ikke tilladt';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Der findes allerede et projekt med dette navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Et påkrævet felt "%1$s" er ikke udfyldt. Ret venligst dette.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ugyldig værdi for \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Denne konto er beskyttet. Du har ikke adgang før kontoens beskyttelse er ophævet.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Adgang nægtet.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Overførslen af filen mislykkedes. Filen kan ikke læses af MantisBT. Kontrollér indstillingerne for projektet.';
@@ -1263,13 +1271,16 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfigurationsindstillingen
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Kan ikke angive konfigurationsindstilling: »%1$s«: %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengen "%1$s" blev ikke fundet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Bemærkning ikke fundet.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektet »%1$s« blev ikke fundet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database-felt "%1$s" ikke fundet.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Sagsbehandleren har utilstrækkelige adgangsrettigheder til at håndtere problemet for denne status.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektet »%1$s« blev ikke fundet.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den handling vil skabe en løkke i hierarkiet af underprojekter.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Bruger med navnet "%1$s" ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Brugeren med navnet "%1$d" blev ikke fundet.';
+$MANTIS_ERROR[ERROR_USER_BY_EMAIL_NOT_FOUND] = 'Bruger med e-post »%1$s« blev ikke fundet.';
+$MANTIS_ERROR[ERROR_USER_BY_REALNAME_NOT_FOUND] = 'Bruger med navnet »%1$s« blev ikke fundet.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Log ind informationer gemt i din browser er ugyldige. Måske er din konto blevet slettet?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Indstillinger for denne bruger kunne ikke findes.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Kan ikke finde nyheden.';
@@ -1280,7 +1291,6 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En streng var forventet, men en tab
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Et tal blev forventet for %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Rapport %1$d ikke fundet.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s blev ikke fundet.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Det filter, du forsøger at bruge er for gammelt til at blive opgraderet. Venligst lav et nyt.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ugyldig e-mail.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Det er ikke tilladt at bruge engangs e-mailadresser.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil ikke fundet.';
@@ -1319,7 +1329,6 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" blev ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Brugernavnet er ugyldigt. Brugernavne må kun indeholde latinske bogstaver, tal, mellemrum, bindestreger, prikker, plus tegn og understregningstegn.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Brugerens rigtige navn er ugyldigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brugeren har ikke det krævede adgangsniveau';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Det "Rigtige navn" du valgte findes allerede som brugernavn. Vælg et andet.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorunderstøttelse ikke slået til.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorering til fordel for %1$d blev ikke fundet.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorering (%1$s) er lavere end minimumsbeløbet (%2$s).';
@@ -1328,7 +1337,7 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Adgang nægtet
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsoren har ikke angivet en e-mailadresse. Opdater din profil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden "%1$s" har en ugyldig værdi "%2$s".';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi rapporten "%1$d" er skrivebeskyttet';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Denne fejlrapport kan ikke løse før alle afhængige fejlrapporter er blevet løst.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'Denne fejlrapport kan ikke løse før alle afhængige fejlrapporter er blevet løst. Spørg din systemadministrator om projektadgang hvis du ikke kan se nogen afhængig fejlrapport.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Afhængighed ikke fundet.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Adgang nægtet: Rapporten %1$d kræver et højere adgangsniveau.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En rapport kan ikke gøres afhængig af sig selv.';
@@ -1338,7 +1347,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du skal angive en e-mai
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De angivne oplysninger svarer ikke til nogen eksisterende konto!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen er ugyldig eller har allerede været brugt. Registrer dig igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maksimalt antal samtidige handlinger nået. Kontakt systemadministratoren';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den handling vil skabe en løkke i hierarkiet af underprojekter.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan ikke fjerne eller degradere den sidste administratorkonto. For at udføre den ønskede handling, skal du først oprette en anden administratorkonto.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Side omdirigeringsfejl, vær sikker på, at der ingen mellemrum er uden for PHP blokken (&lt;?php ?&gt;) i config_inc.php eller custom_*.php filer.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunne ikke finde et tag med det navn.';
@@ -1362,7 +1370,6 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Formatet for den angivne udvidelsesm
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Der opstod en ukendt fejl "%1$s" under udførelsen af "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Feltet "%1$s" indeholder dublet kolonner "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Feltet "%1$s" indeholder ugyldigt felt "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ugyldig sessionshandler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessionsvariabel "%1$s" blev ikke fundet.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din session er blevet ugyldiggjort.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ugyldigt sikkerhedselement i formularen. Dette kan skyldes en timeout for sessionen, eller utilsigtet at sende formularen to gange.';
@@ -1390,3 +1397,6 @@ $s_dropzone_cancel_upload_confirmation = 'Er du sikker på, at du ønsker at ann
 $s_dropzone_remove_file = 'Fjern fil';
 $s_dropzone_max_files_exceeded = 'Du kan ikke overføre flere filer.';
 $s_dropzone_not_supported = 'Dropzone.js understøtter ikke ældre browsere!';
+$s_save = 'Gem';
+$s_reset = 'Nulstil';
+$s_load = 'Indlæs';

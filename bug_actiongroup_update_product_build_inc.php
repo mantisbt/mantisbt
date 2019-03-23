@@ -44,10 +44,7 @@ require_api( 'lang_api.php' );
  * @return void
  */
 function action_update_product_build_print_title() {
-	echo '<tr>';
-	echo '<td class="bold" colspan="2">';
-	echo lang_get( 'product_build' );
-	echo '</td></tr>';
+	echo lang_get( 'actiongroup_menu_update_product_build' );
 }
 
 /**
@@ -59,23 +56,14 @@ function action_update_product_build_print_title() {
  */
 function action_update_product_build_print_fields() {
 ?>
-	<tbody>
-		<tr>
-			<th class="category">
-				<?php echo lang_get( 'product_build' ); ?>
-			</th>
-			<td>
-				<input type="text" name="build" class="input-sm" size="32" maxlength="32" />
-			</td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" class="button" value="<?php echo lang_get( 'actiongroup_menu_update_product_build' ); ?>" />
-			</td>
-		</tr>
-	</tfoot>
+    <tr>
+        <th class="category">
+            <?php echo lang_get( 'product_build' ); ?>
+        </th>
+        <td>
+            <input type="text" name="build" class="input-sm" size="32" maxlength="32" />
+        </td>
+    </tr>
 <?php
 }
 

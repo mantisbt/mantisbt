@@ -29,14 +29,6 @@
  * @uses plugin_api.php
  */
 
-require_once( 'core.php' );
-plugin_require_api( 'core/Period.php' );
-require_api( 'access_api.php' );
-require_api( 'config_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'html_api.php' );
-require_api( 'plugin_api.php' );
-
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 $f_interval = gpc_get_int( 'interval', 0 );
@@ -45,7 +37,7 @@ $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 layout_page_header_begin( plugin_lang_get( 'graph_page' ) );
-$t_path = config_get( 'path' );
+$t_path = config_get_global( 'path' );
 layout_page_header_end();
 
 layout_page_begin();

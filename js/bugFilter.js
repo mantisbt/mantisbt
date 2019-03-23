@@ -4,7 +4,6 @@ var serialized_form_fields = new Array();
 $(document).ready(function(){
 	$('#filter-toggle').on('click', function (event) {
 		$('#filter-bar-queries').toggle();
-		$('#filter-bar-search').toggle();
 	});
 
 	$('#filter-bar-search-txt').on('change', function (event) {

@@ -49,14 +49,15 @@ function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = nul
 /**
  * Gets the billing information for the specified project during the specified date range.
  * 
- * @param integer $p_project_id    A project identifier or ALL_PROJECTS.
- * @param string  $p_from          Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param string  $p_to            Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param integer $p_cost_per_hour Cost per hour.
+ * @param integer $p_project_id           A project identifier or ALL_PROJECTS.
+ * @param string  $p_from                 Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string  $p_to                   Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param integer $p_cost_per_hour        Cost per hour.
+ * @param bool    $p_include_subprojects  Include subprojects of selected project.
  * @return array array of bugnotes
  * @access public
  */
-function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour ) {
+function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects = false ) {
 	$t_params = array();
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
@@ -69,10 +70,15 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	db_param_push();
 
 	if( ALL_PROJECTS != $p_project_id ) {
-		access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
+		if( $p_include_subprojects ) {
+			$t_project_ids = user_get_all_accessible_projects( null, $p_project_id );
+			$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ) . ')';
+		} else {
+			access_ensure_project_level( config_get( 'view_bug_threshold' ), $p_project_id );
 
-		$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
-		$t_params[] = $p_project_id;
+			$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
+			$t_params[] = $p_project_id;
+		}
 	} else {
 		$t_project_ids = user_get_all_accessible_projects();
 		$t_project_where = ' AND b.project_id in (' . implode( ', ', $t_project_ids ). ')';
@@ -126,15 +132,16 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 /**
  * Gets the billing summary for the specified project and the date range.
  *
- * @param integer $p_project_id    A project identifier or ALL_PROJECTS.
- * @param string  $p_from          Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param string  $p_to            Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
- * @param integer $p_cost_per_hour Cost per hour.
- * @return array The contains billing data grouped by issues, users, and total information.
+ * @param integer $p_project_id           A project identifier or ALL_PROJECTS.
+ * @param string  $p_from                 Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param string  $p_to                   Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
+ * @param integer $p_cost_per_hour        Cost per hour.
+ * @param bool    $p_include_subprojects  Include subprojects of selected project.
+ * @return array  The contains billing data grouped by issues, users, and total information.
  * @access public
  */
-function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour ) {
-	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour );
+function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects = false ) {
+	$t_billing_notes = billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects );
 
 	$t_issues = array();
 	$t_users = array();
@@ -142,17 +149,17 @@ function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour 
 	foreach ( $t_billing_notes as $t_note ) {
 		extract( $t_note, EXTR_PREFIX_ALL, 'v' );
 
-		$t_username = user_get_name( $v_reporter_id );
+		$t_user_id = $v_reporter_id;
 
 		# Create users in collection of users if not already exists
-		if( !isset( $t_users[$t_username] ) ) {
-			$t_users[$t_username] = array();
-			$t_users[$t_username]['minutes'] = 0;
-			$t_users[$t_username]['cost'] = 0;
+		if( !isset( $t_users[$t_user_id] ) ) {
+			$t_users[$t_user_id] = array();
+			$t_users[$t_user_id]['minutes'] = 0;
+			$t_users[$t_user_id]['cost'] = 0;
 		}
 
 		# Update user total minutes
-		$t_users[$t_username]['minutes'] += $v_minutes;
+		$t_users[$t_user_id]['minutes'] += $v_minutes;
 
 		# Create issue if it doesn't exist yet.
 		if( !isset( $t_issues[$v_bug_id] ) ) {
@@ -166,14 +173,14 @@ function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour 
 		}
 
 		# Create user within issue if they don't exist yet
-		if( !isset( $t_issues[$v_bug_id]['users'][$t_username] ) ) {
-			$t_issues[$v_bug_id]['users'][$t_username] = array();
-			$t_issues[$v_bug_id]['users'][$t_username]['minutes'] = 0;
-			$t_issues[$v_bug_id]['users'][$t_username]['cost'] = 0;
+		if( !isset( $t_issues[$v_bug_id]['users'][$t_user_id] ) ) {
+			$t_issues[$v_bug_id]['users'][$t_user_id] = array();
+			$t_issues[$v_bug_id]['users'][$t_user_id]['minutes'] = 0;
+			$t_issues[$v_bug_id]['users'][$t_user_id]['cost'] = 0;
 		}
 
 		# Update total minutes for user within the issue
-		$t_issues[$v_bug_id]['users'][$t_username]['minutes'] += $v_minutes;
+		$t_issues[$v_bug_id]['users'][$t_user_id]['minutes'] += $v_minutes;
 
 		# Update total minutes for issue
 		$t_issues[$v_bug_id]['minutes'] += $v_minutes;
@@ -196,8 +203,8 @@ function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour 
 		$t_total['minutes'] += $t_issue_info['minutes'];
 
 		# Calculate cost per user per issue
-		foreach( $t_issue_info['users'] as $t_username => $t_user_info ) {
-			$t_issues[$t_issue_id]['users'][$t_username]['cost'] =
+		foreach( $t_issue_info['users'] as $t_user_id => $t_user_info ) {
+			$t_issues[$t_issue_id]['users'][$t_user_id]['cost'] =
 				$t_user_info['minutes'] * $p_cost_per_hour / 60;
 		}
 
@@ -205,8 +212,8 @@ function billing_get_summaries( $p_project_id, $p_from, $p_to, $p_cost_per_hour 
 	}
 
 	# Calculate total cost per user across all issues
-	foreach( $t_users as $t_username => $t_info ) {
-		$t_users[$t_username]['cost'] = $t_info['minutes'] * $p_cost_per_hour / 60;
+	foreach( $t_users as $t_user_id => $t_info ) {
+		$t_users[$t_user_id]['cost'] = $t_info['minutes'] * $p_cost_per_hour / 60;
 	}
 
 	ksort( $t_users );
@@ -235,14 +242,8 @@ function billing_rows_to_array( $p_bugnotes ) {
 		$t_row['duration'] = db_minutes_to_hhmm( $t_note['minutes'] );
 		$t_row['note'] = $t_note['note'];
 		$t_row['reporter_id'] = $t_note['reporter_id'];
-		$t_row['reporter_username'] = user_get_name( $t_note['reporter_id'] );
-		$t_row['reporter_realname'] = user_get_realname( $t_note['reporter_id'] );
+		$t_row['reporter_name'] = user_get_name( $t_note['reporter_id'] );
 		$t_row['date_submitted'] = $t_note['date_submitted'];
-
-		if ( is_blank( $t_row['reporter_realname'] ) ) {
-			$t_row['reporter_realname'] = $t_row['reporter_username'];
-		}
-
 		$t_row['bug_id'] = $t_note['bug_id'];
 		$t_row['project_id'] = $t_note['project_id'];
 		$t_row['project_name'] = project_get_name( $t_note['project_id'] );

@@ -127,7 +127,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>Operating System</para>
-					<para>MantisBT runs on Windows, MacOS, OS/2, Linux, Solaris,
+					<para>MantisBT runs on Windows, macOS, Linux, Solaris,
 						the BSDs, and just about anything that supports the
 						required server software.
 					</para>
@@ -136,7 +136,7 @@
 				<listitem>
 					<para>Web Server</para>
 					<para>MantisBT is mainly tested with
-						<ulink url="http://www.microsoft.com/iis">Microsoft IIS</ulink> and
+						<ulink url="https://docs.microsoft.com/en-us/iis">Microsoft IIS</ulink> and
 						<ulink url="http://www.apache.org/">Apache</ulink>.
 						However, it is expected to work with any recent web
 						server software.
@@ -148,7 +148,7 @@
 						administrator to add support for .PHP files. This should
 						be a trivial modification. Further details can be found
 						in the
-						<ulink url="http://www.php.net/manual/en/installation.php">PHP documentation</ulink>
+						<ulink url="http://www.php.net/manual/en/install.php">PHP documentation</ulink>
 					</para>
 				</listitem>
 
@@ -194,20 +194,16 @@
 								<listitem><para><emphasis>GD</emphasis> -
 									required for the captcha feature
 								</para></listitem>
-
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
-										Guesses the MIME type of attachments
+										Required for file attachments and most of the plugins
 									</para>
 									<para>Without this extension, file attachment
-										previews and downloads may not work
-										correctly as MantisBT won't be able to send
+										previews and downloads do not work
+										as MantisBT won't be able to send
 										the Content-Type header to a browser
 										requesting an attachment.
-									</para>
-									<para>This extension is included by default from
-										PHP version 5.3.x and above.
-								</para></listitem>
+									</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
 
@@ -365,8 +361,9 @@
 			</para>
 
 			<itemizedlist>
-				<listitem><para>Firefox 45 and above</para></listitem>
-				<listitem><para>Internet Explorer 10 and above</para></listitem>
+				<listitem><para>Firefox</para></listitem>
+				<listitem><para>Internet Explorer 11</para></listitem>
+				<listitem><para>Edge</para></listitem>
 				<listitem><para>Chrome</para></listitem>
 				<listitem><para>Safari</para></listitem>
 				<listitem><para>Opera</para></listitem>

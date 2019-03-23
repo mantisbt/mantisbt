@@ -87,3 +87,4 @@ $s_plugin_MantisGraph_graph_page = '問題記錄圖表';
 $s_plugin_MantisGraph_graph_topdev = '依修正問題的熱門開發者';
 $s_plugin_MantisGraph_graph_opendev = '依開放問題的開發者';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '依修正問題的熱門回報人';
+$s_plugin_MantisGraph_other_categories = '其它分類（%d）';

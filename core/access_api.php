@@ -54,6 +54,8 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 # @global array $g_cache_access_matrix
 $g_cache_access_matrix = array();
 
@@ -92,7 +94,7 @@ function access_denied() {
 				print_link_button( auth_login_page( 'return=' . $t_return_page ), lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
 				print_link_button(
-					helper_mantis_url( config_get( 'default_home_page' ) ),
+					helper_mantis_url( config_get_global( 'default_home_page' ) ),
 					lang_get( 'proceed' )
 				);
 				echo '</p>';
@@ -102,7 +104,7 @@ function access_denied() {
 			layout_admin_page_begin();
 			echo '<div class="space-10"></div>';
 			html_operation_failure(
-				helper_mantis_url( config_get( 'default_home_page' ) ),
+				helper_mantis_url( config_get_global( 'default_home_page' ) ),
 				error_string( ERROR_ACCESS_DENIED )
 			);
 			layout_admin_page_end();
@@ -345,7 +347,7 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
  *                                              - string: for a threshold option which will be evaluated
  *                                                 for each project context
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accesible projects
+ *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @param integer               $p_limit        Maximum number of results, default is 0 for all results
  * @return array                The filtered array of project ids
@@ -402,7 +404,7 @@ function access_project_array_filter( $p_access_level, array $p_project_ids = nu
  *                                              - string: for a threshold option which will be evaluated
  *                                                 for each project context
  * @param array                 $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accesible projects
+ *                                               to use all user accessible projects
  * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
  * @return boolean              True if user has the specified access level for any of the projects
  * @access public
@@ -858,4 +860,38 @@ function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
 			$p_bug->id );
 
 	return $t_can_view_handler;
+}
+
+/**
+ * Parse access level reference array parsed from json.
+ *
+ * @param array $p_access The access level
+ * @return integer The access level
+ * @throws ClientException Access level is invalid or not specified.
+ */
+function access_parse_array( array $p_access ) {
+	$t_access_levels_enum = config_get( 'access_levels_enum_string' );
+	$t_access_level = false;
+
+	if( isset( $p_access['id'] ) ) {
+		$t_access_level = (int)$p_access['id'];
+
+		# Make sure the provided id is valid
+		if( !MantisEnum::hasValue( $t_access_levels_enum, $t_access_level ) ) {
+			$t_access_level = false;
+		}
+	}
+
+	if( isset( $p_access['name'] ) ) {
+		$t_access_level = MantisEnum::getValue( $t_access_levels_enum, $p_access['name'] );
+	}
+
+	if( $t_access_level === false ) {
+		throw new ClientException(
+			'Invalid access level',
+			ERROR_INVALID_FIELD_VALUE,
+			array( 'access_level' ) );
+	}
+
+	return $t_access_level;
 }

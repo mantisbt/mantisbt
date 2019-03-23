@@ -42,6 +42,8 @@ require_api( 'helper_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Version Data Structure Definition
  */
@@ -101,20 +103,26 @@ class VersionData {
 	 * @private
 	 */
 	public function __set( $p_name, $p_value ) {
+		$t_value = $p_value;
+
 		switch( $p_name ) {
 			case 'date_order':
 				if( !is_numeric( $p_value ) ) {
 					if( $p_value == '' ) {
-						$p_value = date_get_null();
+						$t_value = date_get_null();
 					} else {
-						$p_value = strtotime( $p_value );
-						if( $p_value === false ) {
-							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
+						$t_value = strtotime( $p_value );
+						if( $t_value === false ) {
+							throw new ClientException(
+								"Invalid date format '$p_value'",
+								ERROR_INVALID_DATE_FORMAT,
+								array( $p_value ) );
 						}
 					}
 				}
 		}
-		$this->$p_name = $p_value;
+
+		$this->$p_name = $t_value;
 	}
 
 	/**
@@ -150,7 +158,18 @@ class VersionData {
 	}
 }
 
+/**
+ * Array indexed by version id.
+ * Each item is a version row, as retrieved from project_version table.
+ */
 $g_cache_versions = array();
+
+/**
+ * Array indexed by project_id.
+ * Each item is an array of version ids that are linked to that project.
+ * Note that this does not include versions inherited from parent projects.
+ */
+$g_cache_versions_project  = array();
 
 /**
  * Cache a version row if necessary and return the cached copy
@@ -180,16 +199,57 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 		$g_cache_versions[$c_version_id] = false;
 
 		if( $p_trigger_errors ) {
-			error_parameters( $p_version_id );
-			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
-		} else {
-			return false;
+			throw new ClientException(
+				"Version with id $p_version_id not found",
+				ERROR_VERSION_NOT_FOUND,
+				array( $p_version_id ) );
 		}
+
+		return false;
 	}
 
 	$g_cache_versions[$c_version_id] = $t_row;
 
 	return $t_row;
+}
+
+/**
+ * Cache version information for an array of project id's
+ * @param array $p_project_id_array An array of project identifiers.
+ * @return void
+ */
+function version_cache_array_rows( array $p_project_ids ) {
+	global $g_cache_versions_project, $g_cache_versions;
+
+	$t_ids_to_fetch = array();
+	foreach( $p_project_ids as $t_id ) {
+		$c_id = (int)$t_id;
+		if( !isset( $g_cache_versions_project[$c_id] ) ) {
+			$t_ids_to_fetch[$c_id] = $c_id;
+		}
+	}
+	if( empty( $t_ids_to_fetch ) ) {
+		return;
+	}
+
+	$t_query = new DbQuery();
+	$t_sql = 'SELECT * FROM {project_version} WHERE ' . $t_query->sql_in( 'project_id', $t_ids_to_fetch );
+	$t_query->sql( $t_sql );
+	while( $t_row = $t_query->fetch() ) {
+		$c_project_id = (int)$t_row['project_id'];
+		$c_version_id = (int)$t_row['id'];
+		$g_cache_versions[$c_version_id] = $t_row;
+		if( !isset( $g_cache_versions_project[$c_project_id] ) ) {
+			$g_cache_versions_project[$c_project_id] = array();
+		}
+		$g_cache_versions_project[$c_project_id][] = $c_version_id;
+		if( isset( $t_ids_to_fetch[$c_project_id] ) ) {
+			unset( $t_ids_to_fetch[$c_project_id] );
+		}
+	}
+	foreach( $t_ids_to_fetch as $t_id_not_found ) {
+		$g_cache_versions_project[$t_id_not_found] = false;
+	}
 }
 
 /**
@@ -222,8 +282,10 @@ function version_is_unique( $p_version, $p_project_id = null ) {
  */
 function version_ensure_exists( $p_version_id ) {
 	if( !version_exists( $p_version_id ) ) {
-		error_parameters( $p_version_id );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Version with id '$p_version_id' not found",
+			ERROR_VERSION_NOT_FOUND,
+			array( $p_version_id ) );
 	}
 }
 
@@ -236,7 +298,10 @@ function version_ensure_exists( $p_version_id ) {
  */
 function version_ensure_unique( $p_version, $p_project_id = null ) {
 	if( !version_is_unique( $p_version, $p_project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+		throw new ClientException(
+			"Version '$p_version' already exists",
+			ERROR_VERSION_DUPLICATE,
+			array( $p_version ) );
 	}
 }
 
@@ -288,8 +353,12 @@ function version_update( VersionData $p_version_info ) {
 	$t_old_version_name = version_get_field( $p_version_info->id, 'version' );
 
 	# check for duplicates
-	if( ( utf8_strtolower( $t_old_version_name ) != utf8_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
-		trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
+	if( ( mb_strtolower( $t_old_version_name ) != mb_strtolower( $p_version_info->version ) ) && !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
+		$t_version = $p_version_info->version;
+		throw new ClientException(
+			"Version '$t_version' already exists",
+			ERROR_VERSION_DUPLICATE,
+			array( $t_version ) );
 	}
 
 	$c_version_id = (int)$p_version_info->id;
@@ -313,7 +382,7 @@ function version_update( VersionData $p_version_info ) {
 
 	if( $c_version_name != $c_old_version_name ) {
 		$t_project_list = array( $c_project_id );
-		if( config_get( 'subprojects_inherit_versions' ) ) {
+		if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 			$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $c_project_id, true ) );
 		}
 		$t_project_list = implode( ',', $t_project_list );
@@ -375,7 +444,7 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	db_query( $t_query, array( (int)$p_version_id ) );
 
 	$t_project_list = array( $t_project_id );
-	if( config_get( 'subprojects_inherit_versions' ) ) {
+	if( config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
 		$t_project_list = array_merge( $t_project_list, project_hierarchy_get_all_subprojects( $t_project_id, true ) );
 	}
 	$t_project_list = implode( ',', $t_project_list );
@@ -419,49 +488,10 @@ function version_remove_all( $p_project_id ) {
 	return true;
 }
 
-$g_cache_versions_project = null;
-
 /**
- * Cache version information for an array of project id's
- * @param array $p_project_id_array An array of project identifiers.
- * @return void
- */
-function version_cache_array_rows( array $p_project_id_array ) {
-	global $g_cache_versions, $g_cache_versions_project;
-
-	$c_project_id_array = array();
-
-	foreach( $p_project_id_array as $t_project_id ) {
-		if( !isset( $g_cache_versions_project[(int)$t_project_id] ) ) {
-			$c_project_id_array[] = (int)$t_project_id;
-			$g_cache_versions_project[(int)$t_project_id] = array();
-		}
-	}
-
-	if( empty( $c_project_id_array ) ) {
-		return;
-	}
-
-	$t_query = 'SELECT * FROM {project_version}
-				  WHERE project_id IN (' . implode( ',', $c_project_id_array ) . ')
-				  ORDER BY date_order DESC';
-	$t_result = db_query( $t_query );
-
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_versions[(int)$t_row['id']] = $t_row;
-
-		$t_rows[(int)$t_row['project_id']][] = $t_row['id'];
-	}
-
-	foreach( $t_rows as $t_project_id => $t_row ) {
-		$g_cache_versions_project[(int)$t_project_id] = $t_row;
-	}
-}
-
-/**
- * Return all versions for the specified project
- * @param integer $p_project_id A valid project id.
+ * Return all versions for the specified project or projects list
+ * Returned versions are ordered by reverse 'date_order'
+ * @param integer|array $p_project_ids  A valid project id, or array of ids
  * @param boolean $p_released   Whether to include released versions.
  * @param boolean $p_obsolete   Whether to include obsolete versions.
  * @param boolean $p_inherit    True to include versions from parent projects,
@@ -469,106 +499,59 @@ function version_cache_array_rows( array $p_project_id_array ) {
  *                              setting ($g_subprojects_inherit_versions).
  * @return array Array of version rows (in array format)
  */
-function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
+function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
-
-	if(    $p_inherit
-		|| $p_inherit === null && ON == config_get( 'subprojects_inherit_versions' )
-	) {
-		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
+	if( $p_inherit === null && ON == config_get( 'subprojects_inherit_versions', null, ALL_USERS, ALL_PROJECTS ) ) {
+		$t_inherit = true;
 	} else {
-		$t_project_ids[] = $p_project_id;
+		$t_inherit = (bool)$p_inherit;
+	}
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
+
+	if( $t_inherit ) {
+		# add all parents for the requested projects
+		$t_project_list = array();
+		foreach( $t_project_ids as $t_id ) {
+			if( in_array( $t_id, $t_project_list ) ) {
+				# if it's already in the list, it appeared as parent of other project,
+				# thus its own parents were added too.
+				continue;
+			}
+			$t_project_list = array_merge( $t_project_list, project_hierarchy_inheritance( $t_id ) );
+		}
+		$t_project_list = array_unique( $t_project_list );
+	} else {
+		$t_project_list = $t_project_ids;
 	}
 
-	$t_is_cached = true;
-	foreach( $t_project_ids as $t_project_id ) {
-		if( !isset( $g_cache_versions_project[$t_project_id] ) ) {
-			$t_is_cached = false;
-			break;
-		}
-	}
-	if( $t_is_cached ) {
-		$t_versions = array();
-		foreach( $t_project_ids as $t_project_id ) {
-			if( !empty( $g_cache_versions_project[$t_project_id]) ) {
-				foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
-					$t_version_row = version_cache_row( $t_id );
-					if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
+	version_cache_array_rows( $t_project_list );
+	$t_versions = array();
+	foreach( $t_project_list as $t_project_id ) {
+		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
+			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
+				$t_version_row = version_cache_row( $t_id );
+				if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
+					continue;
+				}
+				if( $p_released !== null ) {
+					$c_ver_released = (int)$t_version_row['released'] == 1;
+					if( $p_released && !$c_ver_released || !$p_released && $c_ver_released ) {
 						continue;
 					}
-
-					$t_versions[] = $t_version_row;
 				}
+
+				$t_versions[] = $t_version_row;
+				$t_order[] = (int)$t_version_row['date_order'];
 			}
 		}
-		return $t_versions;
 	}
-
-	db_param_push();
-	$t_project_where = version_get_project_where_clause( $p_project_id, $p_inherit );
-	$t_query = 'SELECT * FROM {project_version} WHERE ' . $t_project_where;
-
-	$t_query_params = array();
-
-	if( $p_released !== null ) {
-		$t_query .= ' AND released = ' . db_param();
-		$t_query_params[] = (bool)$p_released;
+	if( !empty( $t_versions ) ) {
+		# @TODO this function should not be responsible for sorting, let the
+		# caller sort as needed
+		# Included for backward compatibilty with calls that expect this.
+		array_multisort( $t_order, SORT_DESC, SORT_REGULAR, $t_versions );
 	}
-
-	if( $p_obsolete !== null ) {
-		$t_query .= ' AND obsolete = ' . db_param();
-		$t_query_params[] = (bool)$p_obsolete;
-	}
-
-	$t_query .= ' ORDER BY date_order DESC';
-
-	$t_result = db_query( $t_query, $t_query_params );
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_versions[(int)$t_row['id']] = $t_row;
-
-		$t_rows[] = $t_row;
-	}
-	return $t_rows;
-}
-
-/**
- * Return all versions for the specified project, including sub-projects
- * @param integer $p_project_id A valid project identifier.
- * @param boolean $p_released   Released status.
- * @param boolean $p_obsolete   Obsolete status.
- * @return array
- */
-function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_obsolete = false ) {
-	db_param_push();
-	$t_project_where = helper_project_specific_where( $p_project_id );
-
-	$t_query_params = array();
-
-	if( $p_released === null ) {
-		$t_released_where = '';
-	} else {
-		$c_released = (bool)$p_released;
-		$t_released_where = 'AND ( released = ' . db_param() . ' )';
-		$t_query_params[] = $c_released;
-	}
-
-	if( $p_obsolete === null ) {
-		$t_obsolete_where = '';
-	} else {
-		$t_obsolete_where = 'AND ( obsolete = ' . db_param() . ' )';
-		$t_query_params[] = (bool)$p_obsolete;
-	}
-
-	$t_query = 'SELECT * FROM {project_version}
-				  WHERE ' . $t_project_where . ' ' . $t_released_where . ' ' . $t_obsolete_where . '
-				  ORDER BY date_order DESC';
-	$t_result = db_query( $t_query, $t_query_params );
-	$t_rows = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_rows[] = $t_row;
-	}
-	return $t_rows;
+	return $t_versions;
 }
 
 /**
@@ -590,22 +573,13 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 		$c_project_id = (int)$p_project_id;
 	}
 
-	foreach( $g_cache_versions as $t_version ) {
-		if( ( $t_version['version'] === $p_version ) && ( $t_version['project_id'] == $c_project_id ) ) {
+	$t_versions = version_get_all_rows( $c_project_id, null /* released: any */, true /* incl. obsolete */ ,  $p_inherit );
+	foreach( $t_versions as $t_version ) {
+		if( $t_version['version'] === $p_version ) {
 			return $t_version['id'];
 		}
 	}
-
-	db_param_push();
-	$t_project_where = version_get_project_where_clause( $c_project_id, $p_inherit );
-	$t_query = 'SELECT id FROM {project_version} WHERE ' . $t_project_where . ' AND version=' . db_param();
-	$t_result = db_query( $t_query, array( $p_version ) );
-
-	if( $t_row = db_result( $t_result ) ) {
-		return $t_row;
-	} else {
-		return false;
-	}
+	return false;
 }
 
 /**
@@ -626,9 +600,10 @@ function version_get_field( $p_version_id, $p_field_name ) {
 				return $t_row[$p_field_name];
 		}
 	} else {
-		error_parameters( $p_field_name );
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-		return '';
+		throw new ClientException(
+			"Field '$p_field_name' not found",
+			ERROR_DB_FIELD_NOT_FOUND,
+			array( $p_field_name ) );
 	}
 }
 
@@ -636,7 +611,8 @@ function version_get_field( $p_version_id, $p_field_name ) {
  * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 2.0.0')
  *
  * @param integer $p_version_id         The version id.
- * @param boolean $p_show_project       Whether to include the project or not, null means include the project if different from current.
+ * @param boolean $p_show_project       Whether to include the project name or not,
+ *                                      null means include the project if different from current.
  * @param integer $p_current_project_id The current project id or null to use the cookie.
  * @return string The full name of the version.
  */
@@ -656,7 +632,7 @@ function version_full_name( $p_version_id, $p_show_project = null, $p_current_pr
 			$t_show_project = $p_show_project;
 		}
 
-		if( $t_show_project && $t_project_id != $t_current_project_id ) {
+		if( $t_show_project ) {
 			return '[' . project_get_name( $t_project_id ) . '] ' . $t_row['version'];
 		}
 
@@ -678,44 +654,31 @@ function version_get( $p_version_id ) {
 /**
  * Checks whether the product version should be shown
  * (i.e. report, update, view, print).
- * @param integer $p_project_id The project id.
+ * @param integer|array $p_project_ids  A valid project id or array of ids
  * @return boolean true: show, false: otherwise.
  */
-function version_should_show_product_version( $p_project_id ) {
-	return ( ON == config_get( 'show_product_version', null, null, $p_project_id ) )
-		|| ( ( AUTO == config_get( 'show_product_version', null, null, $p_project_id ) )
-				&& ( count( version_get_all_rows( $p_project_id ) ) > 0 ) );
-}
+function version_should_show_product_version( $p_project_ids ) {
+	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
 
-/**
- * Gets the where clause to use for retrieving versions.
- *
- * @param integer $p_project_id The project id to use.
- * @param boolean $p_inherit    True to include versions from parent projects,
- *                              false not to, or null to use configuration
- *                              setting ($g_subprojects_inherit_versions).
- * @return string The where clause not including WHERE.
- */
-function version_get_project_where_clause( $p_project_id, $p_inherit ) {
-	if( $p_project_id == ALL_PROJECTS ) {
-		$t_inherit = false;
-	} else {
-		if( $p_inherit === null ) {
-			$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
-		} else {
-			$t_inherit = $p_inherit;
+	$t_check_projects = array();
+	foreach( $t_project_ids as $t_id ) {
+		$t_option = config_get( 'show_product_version', null, null, $t_id );
+		if( ON == $t_option ) {
+			# if at least one of the projects have the option enabled is enough
+			# condition to return true
+			return true;
 		}
+		if( AUTO == $t_option ) {
+			# if option is AUTO, save this project for later check it there are
+			# any actual versions.
+			$t_check_projects[] = $t_id;
+		}
+		# if option is not ON or AUTO, ignore this project
 	}
 
-	$c_project_id = (int)$p_project_id;
-
-	if( $t_inherit ) {
-		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
-
-		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
-	} else {
-		$t_project_where = ' project_id=' . $c_project_id . ' ';
+	if( !empty( $t_check_projects ) ) {
+		return count( version_get_all_rows( $t_check_projects ) ) > 0;
 	}
 
-	return $t_project_where;
+	return false;
 }

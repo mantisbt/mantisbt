@@ -70,7 +70,7 @@ extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 $v_title = string_attribute( $v_title );
 $v_description = string_textarea( $v_description );
 
-$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+$t_max_file_size = file_get_max_file_size();
 
 layout_page_header();
 
