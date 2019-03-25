@@ -77,18 +77,24 @@ function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_
  *
  * @param string   $p_username    The user's username
  * @param string   $p_password    The user's password
- * @param string   $p_newpassword    The user's new password
+ * @param string   $p_new_password    The user's new password
  *
  */
-function mc_change_password( $p_username, $p_password , $p_newpassword  ){
+function mc_change_password( $p_username, $p_password, $p_new_password ) {
         $t_user_id = mci_check_login( $p_username, $p_password );
         if( $t_user_id === false ) {
                 return mci_soap_fault_login_failed();
         }
-        if( !helper_call_custom_function( 'auth_can_change_password', array() ) ){
+        
+        if( !auth_can_set_password() ) { 
                 return false;
         }
-        return user_set_password( $t_user_id, $p_newpassword );
+        
+        if( user_is_protected( $t_user_id ) ) { 
+                return false;
+        }
+        
+        return user_set_password( $t_user_id, $p_new_password );
 }
 
 /**
@@ -97,10 +103,10 @@ function mc_change_password( $p_username, $p_password , $p_newpassword  ){
  * @param string   $p_username    The user's username
  * @param string   $p_password    The user's password
  * @param integer  $p_user_id     The user id to change password for
- * @param string   $p_newpassword The new password for given user id
+ * @param string   $p_new_password The new password for given user id
  *
  */
-function mc_change_users_password( $p_username, $p_password , $p_user_id ,$p_newpassword  ){
+function mc_change_user_password( $p_username, $p_password, $p_user_id ,$p_new_password ) {
         $t_user_id = mci_check_login( $p_username, $p_password );
         if( $t_user_id === false ) {
                 return mci_soap_fault_login_failed();
@@ -108,8 +114,13 @@ function mc_change_users_password( $p_username, $p_password , $p_user_id ,$p_new
         if( user_is_administrator( $t_user_id )  === false ) {
                 return mci_soap_fault_login_failed();
         }
-        if( !helper_call_custom_function( 'auth_can_change_password', array() ) ){
+        
+        if( user_is_protected( $p_user_id ) ) { 
                 return false;
         }
-        return user_set_password( $p_user_id, $p_newpassword );
+        
+        if( !auth_can_set_password() ) {
+                return false;
+        }
+        return user_set_password( $p_user_id, $p_new_password );
 }
