@@ -519,6 +519,26 @@ $(document).ready( function() {
 		var listobject =  new List( this, listoptions );
 		$(this).data('listobject',listobject).data('listoptions',listoptions).addClass('listjs-table');
 	});
+
+	/**
+	 * Change status color box's color when a different status is selected.
+	 * To achieve that we need to store the current value in a data attribute,
+	 * to compute the class name to remove in the change event.
+	 */
+	var statusColor = $('#status');
+	// Store current value
+	statusColor.data('prev', statusColor.val());
+	statusColor.change(function () {
+		function getColorClassName (statusCode) {
+			return  'status-' + statusCode + '-fg';
+		}
+
+		var me = $(this);
+		me.siblings('i')
+			.removeClass(getColorClassName(me.data('prev')))
+			.addClass(getColorClassName(me.val()));
+		me.data('prev', me.val());
+	});
 });
 
 function setBugLabel() {
