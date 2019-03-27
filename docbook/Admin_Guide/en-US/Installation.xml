@@ -495,7 +495,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 
 			<listitem>
 				<para>The script attempts to write a basic
-					<emphasis>config_inc.php</emphasis>
+					<filename>config_inc.php</filename>
 					file to define the database connection parameters.
 				</para>
 				<para>This operation may fail if the web server's user account
@@ -680,7 +680,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 		<para>There are many settings that you can adjust to configure
 			and customize MantisBT.
 			Refer to <xref linkend="admin.config" />, as well as the
-			<emphasis>config_defaults_inc.php</emphasis> file
+			<filename>config_defaults_inc.php</filename> file
 			for in depth explanations of the available options.
 			Check out also
 			<xref linkend="admin.customize" />
@@ -692,22 +692,22 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			new configuration options.
 		</para>
 
-		<para>Open or create the file <emphasis>config_inc.php</emphasis> in
+		<para>Open or create the file <filename>config_inc.php</filename> in
 			subfolder config in an editor and add or modify any values as
 			required. These will override the default values.
 		</para>
 
 		<para>You may want to use the provided
-			<emphasis>config_inc.php.sample</emphasis> file
+			<filename>config_inc.php.sample</filename> file
 			as a starting point.
 		</para>
 
 		<warning>
 			<para>you should never edit the
-				<emphasis>config_defaults_inc.php</emphasis> file
+				<filename>config_defaults_inc.php</filename> file
 				directly, as it could cause issues with future upgrades.
 				Always store your custom configuration in your own
-				<emphasis>config_inc.php</emphasis> file.
+				<filename>config_inc.php</filename> file.
 			</para>
 		</warning>
 
