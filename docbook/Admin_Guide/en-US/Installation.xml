@@ -582,6 +582,45 @@ tar -xf <emphasis>filename.tar</emphasis>
 			</listitem>
 
 			<listitem>
+				<para>Copy third party plugins
+				</para>
+				<para>To maintain system functionality, you should copy any
+					additional plugins in the <filename>plugins</filename>
+					subdirectory.
+				</para>
+				<para>For example on Unix, you could use the following command;
+					it will copy all installed plugins (in local subdirectories
+					or symlinked), excluding bundled ones.
+				</para>
+				<programlisting>
+cd /path/to/mantisbt-OLD/plugins
+find -maxdepth 1 ! -path . -type d -o -type l |
+    grep -Pv "(Gravatar|MantisCoreFormatting|MantisGraph|XmlImportExport)" |
+    xargs -Idirs cp -r dirs /path/to/mantisbt-NEW/plugins
+</programlisting>
+				<warning>
+					<para>Make sure that you
+						<emphasis>do not overwrite any of the bundled plugins</emphasis>
+						as per the list below, with an older version.
+					</para>
+					<itemizedlist>
+						<listitem>
+							<para>Avatars via Gravatar (<filename>Gravatar</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>MantisBT Formatting (<filename>MantisCoreFormatting</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>Mantis Graphs (<filename>MantisGraph</filename>)</para>
+						</listitem>
+						<listitem>
+							<para>Import/Export issues (<filename>XmlImportExport</filename>)</para>
+						</listitem>
+					</itemizedlist>
+				</warning>
+			</listitem>
+
+			<listitem>
 				<para>Execute the upgrade script.
 					From your web browser, access
 					<programlisting>http://yoursite/mantisbt-NEW/admin/install.php</programlisting>
