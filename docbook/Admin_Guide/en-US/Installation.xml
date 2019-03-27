@@ -711,6 +711,18 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 			</para>
 		</warning>
 
+		<warning>
+			<para>The MantisBT configuration files
+				(<filename>config_inc.php</filename> as well as
+				<filename>custom_strings_inc.php</filename>,
+				<filename>custom_constants_inc.php</filename>,
+				<filename>custom_functions_inc.php</filename>, etc.)
+				should always be saved as
+				<emphasis>UTF-8 without BOM</emphasis>.
+				Failure to do so may lead to unexpected display issues.
+			</para>
+		</warning>
+
 	</section>
 
 	<section id="admin.install.postcommon">
