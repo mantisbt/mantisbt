@@ -553,17 +553,32 @@ tar -xf <emphasis>filename.tar</emphasis>
 				<para>Copy the configuration files
 				</para>
 				<para>To preserve your system settings, you should copy the
-					files listed below to subdirectory config of the new directory.
-					You might have to copy as well other custom files such as logo, favicon, css, etc.
+					files listed below to subdirectory <filename>config</filename>
+					of the new installation.
 				</para>
-				<para>
-					<filename>config_inc.php</filename>,
-					the <emphasis>Custom Strings File</emphasis>
-					(<filename>custom_strings_inc.php</filename> by default,
-					see <xref linkend="admin.customize.strings"/>),
-					<filename>custom_constants_inc.php</filename> and
-					<filename>custom_functions_inc.php</filename>
-				</para>
+				<itemizedlist>
+					<listitem>
+						<para><filename>config_inc.php</filename>,</para>
+					</listitem>
+					<listitem>
+						<para>the <emphasis>Custom Strings File</emphasis>
+							(<filename>custom_strings_inc.php</filename> by
+							default, see <xref linkend="admin.customize.strings"/>),
+						</para>
+					</listitem>
+					<listitem>
+						<para><filename>custom_constants_inc.php</filename> and</para>
+					</listitem>
+					<listitem>
+						<para><filename>custom_functions_inc.php</filename>.</para>
+					</listitem>
+				</itemizedlist>
+				<note>
+					<para>The above list is not exhaustive. You might also
+						have to copy other custom files specific to your
+						installation such as logo, favicon, css, etc.
+					</para>
+				</note>
 			</listitem>
 
 			<listitem>
