@@ -7,7 +7,8 @@
 		<para>All strings used in MantisBT, including those defined in
 			plugins, can be customized or translated differently.
 			This is achieved by overriding them in the
-			<filename>Custom Strings File</filename> (in config/custom_strings_inc.php),
+			<emphasis>Custom Strings File</emphasis>
+			(<filename>config/custom_strings_inc.php</filename>),
 			which is automatically detected and included by MantisBT code.
 		</para>
 
@@ -44,7 +45,7 @@ $s_CODE = STRING;
 			</itemizedlist>
 		</para>
 		<warning><para>NEVER call <emphasis>lang_get_current()</emphasis>
-			from the <emphasis>Custom Strings File</emphasis>, as doing so
+			from the <filename>custom_strings_inc.php</filename>, as doing so
 			will reset the active_language, causing the code to return
 			incorrect translations if the default language is different
 			from English.
@@ -131,9 +132,8 @@ $s_CODE = STRING;
 						(see <xref linkend="admin.customize.customfields.localize" />).
 					</para>
 					<note><para>If the specified variable is not found in the
-						language files or in the
-						<emphasis>Custom Strings File</emphasis>
-						(see <xref linkend="admin.customize.strings"/>),
+						language files or in
+						<filename>custom_strings_inc.php</filename>,
 						then it will be displayed as-is.
 					</para></note>
                 </listitem>
@@ -354,9 +354,9 @@ $s_CODE = STRING;
 				<listitem>
 					<para>Set the localization strings
 						<itemizedlist>
-							<listitem><para>In the main MantisBT directory,
-								locate and edit the
-								<emphasis>Custom Strings File</emphasis>
+							<listitem><para>In the MantisBT <filename>config</filename>
+								directory, locate and edit
+								<filename>custom_strings_inc.php</filename>
 								(see <xref linkend="admin.customize.strings"/>),
 								create it if it does not exist.
 							</para></listitem>
@@ -386,7 +386,7 @@ switch( $g_active_language ) {
 
 		<note><para>Had we decided to use <emphasis>start_date</emphasis>
 			as the custom field's name, then it would not have been necessary
-			to modify the <emphasis>Custom Strings File</emphasis>
+			to modify <filename>custom_strings_inc.php</filename>
 			(see <xref linkend="admin.customize.strings"/>),
 			since MantisBT would have used the
 			existing, already localized string from the standard language files.
@@ -644,7 +644,7 @@ $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
         </para>
 
         <para>
-			Update the <emphasis>Custom Strings File</emphasis>
+			Update <filename>custom_strings_inc.php</filename>
 			(see <xref linkend="admin.customize.strings"/>)
 <programlisting>
 $s_access_levels_enum_string =
@@ -852,8 +852,8 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 						underscores in the language strings names (e.g.
 						for '35:pending user', use '$s_pending_user_bug_button')
 					</para>
-					<para>In subfolder config, locate and edit
-						the <emphasis>Custom Strings File</emphasis>
+					<para>In the <filename>config</filename> subfolder, locate and edit
+						<filename>custom_strings_inc.php</filename>
 						(see <xref linkend="admin.customize.strings"/>),
 						create it if it does not exist
 <programlisting>
@@ -1134,7 +1134,7 @@ define( 'ERROR_VALIDATE_FAILURE', 2000 );
 				</listitem>
 
 				<listitem>
-					<para><emphasis>Custom Strings File</emphasis>
+					<para><filename>custom_strings_inc.php</filename>
 						(see <xref linkend="admin.customize.strings"/>)
 					</para>
 
