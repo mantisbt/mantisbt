@@ -135,9 +135,9 @@ $g_main_menu_custom_options = array(
     )
 );
 </programlisting>
-					Note that if the caption is found in the
-					<emphasis>Custom Strings File</emphasis>
-					(see <xref linkend="admin.customize.strings"/>)
+					Note that if the caption is found in
+					<filename>custom_strings_inc.php</filename>
+					(see <xref linkend="admin.customize.strings"/>),
 					it will be replaced by the corresponding translated
 					string. Options will only be added to the menu if
 					the current logged in user has the appropriate

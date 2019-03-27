@@ -561,10 +561,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 						<para><filename>config_inc.php</filename>,</para>
 					</listitem>
 					<listitem>
-						<para>the <emphasis>Custom Strings File</emphasis>
-							(<filename>custom_strings_inc.php</filename> by
-							default, see <xref linkend="admin.customize.strings"/>),
-						</para>
+						<para><filename>custom_strings_inc.php</filename>,</para>
 					</listitem>
 					<listitem>
 						<para><filename>custom_constants_inc.php</filename> and</para>
