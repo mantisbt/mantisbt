@@ -601,8 +601,9 @@ if( $t_show_attachments ) {
 			} else {
 				$t_label_for = '';
 			}
+	$t_row_id = str_replace(" ", '_' , string_display_line( lang_get_defaulted( $t_def['name'] ) ) );
 ?>
-	<tr>
+	<tr id="custom_row_<?php echo $t_row_id; ?>">
 		<th class="category">
 			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
