@@ -683,7 +683,8 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 			$t_label_for = '';
 		}
 
-		echo '<tr>';
+		$t_row_id = str_replace(" ", '_' , string_display_line( lang_get_defaulted( $t_def['name'] ) ) );
+		echo '<tr id="custom_row_' . $t_row_id . '">';
 		echo '<td class="category">';
 		echo '<label', $t_required_class, $t_label_for, '>';
 		echo '<span>', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</span>';
