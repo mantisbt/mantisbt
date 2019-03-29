@@ -2027,18 +2027,18 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
 
 /**
- * Specifies the LDAP or Active Directory server to connect to, and must be
- * provided as an URI
- * - Protocol is optional, can be one of ldap or ldaps, defaults to ldap
+ * Specifies the LDAP or Active Directory server to connect to.
+ *
+ * This must be a full LDAP URI (ldap[s]://hostname:port)
+ * - Protocol can be either ldap or ldaps (for SSL encryption). If omitted,
+ *   then an unencrypted connection will be established on port 389.
  * - Port number is optional, and defaults to 389. If this doesn't work, try
  *   using one of the following standard port numbers: 636 (ldaps); for Active
  *   Directory Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
  *
  * Examples of valid URI:
- *
  *   ldap.example.com
- *   ldap.example.com:3268
- *   ldap://ldap.example.com/
+ *   ldap://ldap.example.com
  *   ldaps://ldap.example.com:3269/
  *
  * @global string $g_ldap_server
