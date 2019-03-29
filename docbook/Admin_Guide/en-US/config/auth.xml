@@ -82,30 +82,37 @@
 				<term>$g_ldap_server</term>
 
 				<listitem>
-					<para>Specifies the LDAP or Active Directory server to
-					connect to, and must be provided as an URI</para>
+					<para>Specifies the LDAP or Active Directory server to connect to.
+					</para>
 
-					<para>The protocol is optional, can be one of
-					<emphasis>ldap</emphasis> or
-					<emphasis>ldaps</emphasis>, and defaults to
-					<emphasis>ldap</emphasis>.</para>
+					<para>This must be a full LDAP URI
+						(<filename>ldap[s]://hostname:port</filename>)
+					</para>
 
-					<para>The port number is optional, and defaults to
-					<emphasis>389</emphasis>. If this doesn't work, try
-					using one of the following standard port numbers: 636
-					(ldaps); for Active Directory Global Catalog
-					forest-wide search, use 3268 (ldap) or 3269
-					(ldaps)</para>
+					<itemizedlist>
+						<listitem>
+							<para>Protocol can be either
+								<filename>ldap</filename> or
+								<filename>ldaps</filename> (for SSL encryption).
+								If omitted, then an unencrypted connection will be established on port 389.
+							</para>
+						</listitem>
+						<listitem>
+							<para>Port number is optional, and defaults to <emphasis>389</emphasis>.
+								If this doesn't work, try using one of the following
+								standard port numbers: 636 (ldaps);
+								for Active Directory Global Catalog forest-wide search,
+								use 3268 (ldap) or 3269 (ldaps).
+							</para>
+						</listitem>
+					</itemizedlist>
 
-					<para>Examples of valid URI:
-<programlisting>
+					<para>Examples of valid URI:</para>
+					<programlisting>
 ldap.example.com
-ldap.example.com:3268
 ldap://ldap.example.com/
 ldaps://ldap.example.com:3269/
 </programlisting>
-
-					</para>
 				</listitem>
 			</varlistentry>
 
