@@ -231,15 +231,10 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 			$t_error_type = 'DEBUG';
 			break;
 		case E_USER_DEPRECATED:
-			# Get the parent of the call that triggered the error to facilitate
-			# debugging with a more useful filename and line number
+			# Get details about the error, to facilitate debugging with a more
+			# useful message including filename and line number.
 			$t_stack = error_stack_trace();
-			if( isset( $t_stack[2] ) ) {
-				$t_caller = $t_stack[2];
-			} else {
-				# If called from main page body, there is no stack block for the function, use the page block instead
-				$t_caller = $t_stack[1];
-			}
+			$t_caller = $t_stack[0];
 
 			$t_error_type = 'WARNING';
 			$t_error_description =  error_string( $p_error )
@@ -423,15 +418,17 @@ function error_convert_to_exception( $p_type, $p_error, $p_file, $p_line ) {
 /**
  * Prints messages from the delayed errors queue
  * The error handler enqueues deprecation warnings that would be printed inline,
- * to avoid display issues when they are triggered within html tags.
+ * to avoid display issues when they are triggered within html tags. Only unique
+ * messages are printed.
  * @return void
  */
 function error_print_delayed() {
 	global $g_errors_delayed;
 
 	if( !empty( $g_errors_delayed ) ) {
-		echo '<div id="delayed-errors">';
-		foreach( $g_errors_delayed as $t_error ) {
+		echo '<div class="space-10 clearfix"></div>', "\n";
+		echo '<div id="delayed-errors" class="alert alert-warning">';
+		foreach( array_unique( $g_errors_delayed ) as $t_error ) {
 			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
 		}
 		echo "\n" . '</div>';
