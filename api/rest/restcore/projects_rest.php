@@ -78,10 +78,8 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 
 		$t_data = array(
 			'query' => array(
-				'project_id' => $t_project_id
-			),
-			'payload' => array(
-				'all_descendents' => true,
+				'project_id' => $t_project_id,
+				'recursive' => true,
 				'include_disabled' => false
 			)
 		);
@@ -142,11 +140,11 @@ function rest_project_hierarchy_get( \Slim\Http\Request $p_request, \Slim\Http\R
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 
-	$t_all_descendents = null !== $p_request->getParam( 'all_descendents' )
-		? filter_var( trim( $p_request->getParam( 'all_descendents' ) ), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE )
+	$t_recursive = null !== $p_request->getParam( 'recursive' )
+		? filter_var( trim( $p_request->getParam( 'recursive' ) ), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE )
 		: true;
-	if( !isset( $t_all_descendents ) ) {
-		$t_message = "Invalid value for 'all_descendents'.";
+	if( !isset( $t_recursive ) ) {
+		$t_message = "Invalid value for 'recursive'.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
 	}
 	
@@ -160,10 +158,8 @@ function rest_project_hierarchy_get( \Slim\Http\Request $p_request, \Slim\Http\R
 	
 	$t_data = array(
 		'query' => array(
-			'project_id' => $t_project_id
-		),
-		'payload' => array(
-			'all_descendents' => $t_all_descendents,
+			'project_id' => $t_project_id,
+			'recursive' => $t_recursive,
 			'include_disabled' => $t_include_disabled
 		)
 	);

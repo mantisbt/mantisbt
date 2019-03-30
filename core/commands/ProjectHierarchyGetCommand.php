@@ -37,7 +37,7 @@ class ProjectHierarchyGetCommand extends Command {
 	/**
 	 * @var boolean
 	 */
-	private $all_descendents;
+	private $recursive;
 
 	/**
 	 * @var boolean
@@ -47,27 +47,31 @@ class ProjectHierarchyGetCommand extends Command {
 	/**
 	 * return an array of user accessible subprojects of a project (recurse if requested)
 	 * @param integer $p_project_id	A valid project identifier.
-	 * @param boolean $p_all_descendents Include only childs or all descendents.
+	 * @param boolean $p_recursive Include only childs or all descendents.
 	 * @param boolean $p_include_disabled Include disabled projects in the resulting array.
 	 * @param array $p_subprojects The current array of subprojects.
 	 * @return array
 	 */
-	private function get_subprojects( $p_project_id, $p_all_descendents, $p_include_disabled, $p_subprojects  = array() ) {
+	private function get_subprojects( $p_user_id, $p_project_id, $p_recursive, $p_include_disabled, $p_subprojects  = array() ) {
 		$t_subprojects = $p_subprojects;
 		$t_subproject_ids = user_get_accessible_subprojects(
-			auth_get_current_user_id(), $p_project_id, $p_include_disabled );
+			$p_user_id, $p_project_id, $p_include_disabled );
 		foreach( $t_subproject_ids as $t_subproject_id ) {
 			$t_subprojects[] = array(
 				'id' => $t_subproject_id,
 				'name' => project_get_name( $t_subproject_id ),
-				'parent_id' => $p_project_id,
+				'enabled' => project_enabled( $t_subproject_id ),
+				'parent' => array( 
+					'id' => $p_project_id,
+					'name' => project_get_name( $p_project_id )
+				),
 				'inherit_parent' => project_hierarchy_inherit_parent(
 					 $t_subproject_id, $p_project_id, $p_include_disabled )
 			);
 
-			if( true === $p_all_descendents ) {
+			if( true === $p_recursive ) {
 				$t_subprojects += $this->get_subprojects(
-					$t_subproject_id, $p_all_descendents, $p_include_disabled, $t_subprojects );
+					$p_user_id, $t_subproject_id, $p_recursive, $p_include_disabled, $t_subprojects );
 			}
 		}
 
@@ -79,9 +83,7 @@ class ProjectHierarchyGetCommand extends Command {
 	 *
 	 * $p_data['query'] is expected to contain:
 	 * - project_id (integer)
-	 *
-	 * $p_data['payload'] is expected to contain:
-	 * - all_descendents (boolean)
+	 * - recursive (boolean)
 	 * - include_disabled (boolean)
 	 *
 	 * @param array $p_data The command data.
@@ -108,20 +110,20 @@ class ProjectHierarchyGetCommand extends Command {
 				array( $this->project_id ) );
 		}
 
-		$this->all_descendents = $this->payload( 'all_descendents' );
-		if( !isset( $this->all_descendents ) ) {
+		$this->recursive = $this->query( 'recursive' );
+		if( !isset( $this->recursive ) ) {
 			throw new ClientException(
-				"'all_descendents' not provided",
+				"'recursive' not provided",
 				ERROR_EMPTY_FIELD,
-				array( 'all_descendents' ) );
-		} else if( !is_bool( $this->all_descendents ) ) {
+				array( 'recursive' ) );
+		} else if( !is_bool( $this->recursive ) ) {
 			throw new ClientException(
-				"Invalid value for 'all_descendents', not bool",
+				"Invalid value for 'recursive', not bool",
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'all_descendents' ) );
+				array( 'recursive' ) );
 		}
 
-		$this->include_disabled = $this->payload( 'include_disabled' );
+		$this->include_disabled = $this->query( 'include_disabled' );
 		if( !isset( $this->include_disabled ) ) {
 			throw new ClientException(
 				"'include_disabled' not provided",
@@ -150,7 +152,7 @@ class ProjectHierarchyGetCommand extends Command {
 		}
 
 		return $this->get_subprojects(
-			 $this->project_id, $this->all_descendents, $this->include_disabled );
+			auth_get_current_user_id(), $this->project_id, $this->recursive, $this->include_disabled );
 	}
 }
 
