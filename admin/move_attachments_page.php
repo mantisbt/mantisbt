@@ -165,7 +165,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 		echo '<td class="center">' . ( $t_db_count + $t_disk_count ) . '</td>';
 		echo '<td class="center">' . $t_method . '</td>';
 
-		if( $t_upload_method == DISK ) {
+		if( $t_upload_method != DISK ) {
 			if ( !is_blank( $t_file_path ) && $t_db_count > 0 ) {
 				echo '<td class="center"><input type="checkbox" name="to_move[]" value="disk:' . $t_id . '" /></td>';
 			} else {
