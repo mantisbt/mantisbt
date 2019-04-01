@@ -41,6 +41,7 @@
  * @author Dj
  * @author Glanthor Reviol
  * @author MeskoBalazs
+ * @author R-Joe
  */
 
 $s_plugin_graph_title = 'Mantis diagramok';
@@ -88,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Ügytörténeti diagram';
 $s_plugin_MantisGraph_graph_topdev = 'Legjobb fejlesztők, javított problémák szerint';
 $s_plugin_MantisGraph_graph_opendev = 'Fejlesztők, nyitott problémák szerint';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Legjobb bejelentők, javított problémák szerint';
+$s_plugin_MantisGraph_other_categories = 'egyéb kategóriák (%d)';
