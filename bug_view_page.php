@@ -33,3 +33,4 @@ require_api( 'gpc_api.php' );
 $_GET['id'] = gpc_get_int( 'bug_id' );
 
 include 'view.php';
+echo 'abc';
