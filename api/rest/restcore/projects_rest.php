@@ -150,7 +150,7 @@ function rest_project_hierarchy_get( \Slim\Http\Request $p_request, \Slim\Http\R
 	
 	$t_include_disabled = null !== $p_request->getParam( 'include_disabled' )
 		? filter_var( trim( $p_request->getParam( 'include_disabled' ) ), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE )
-		: false;
+		: true;
 	if( !isset( $t_include_disabled ) ) {
 		$t_message = "Invalid value for 'include_disabled'.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
