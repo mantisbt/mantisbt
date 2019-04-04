@@ -541,7 +541,9 @@ function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {
 		$t_value = '';
 	} else {
 		$t_column_object = $t_plugin_columns[$p_column];
+                plugin_push_current($t_column_object->plugin_name);
 		$t_value = $t_column_object->value( $p_bug );
+                plugin_pop_current();
 	}
 
 	return excel_prepare_string( $t_value );

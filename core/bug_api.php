@@ -2220,7 +2220,9 @@ function bug_clear_cache_all( $p_bug_id = null ) {
 
 	$t_plugin_objects = columns_get_plugin_columns();
 	foreach( $t_plugin_objects as $t_plugin_column ) {
+                plugin_push_current($t_plugin_column->plugin_name);
 		$t_plugin_column->clear_cache();
+                plugin_pop_current();
 	}
 	return true;
 }
@@ -2252,7 +2254,9 @@ function bug_cache_columns_data( array $p_bugs, array $p_selected_columns ) {
 
 		if( column_is_plugin_column( $t_column ) ) {
 			$plugin_objects = columns_get_plugin_columns();
+                        plugin_push_current($plugin_objects[$t_column]->plugin_name);
 			$plugin_objects[$t_column]->cache( $p_bugs );
+                        plugin_pop_current();
 			continue;
 		}
 

@@ -1204,7 +1204,10 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 			$t_plugin_columns = columns_get_plugin_columns();
 			$t_column_object = $t_plugin_columns[$c_sort];
 
+                        plugin_push_current( $t_column_object->plugin_name );
 			$t_clauses = $t_column_object->sortquery( $c_dir );
+                        plugin_pop_current();
+                        
 			if( is_array( $t_clauses ) ) {
 				if( isset( $t_clauses['join'] ) ) {
 					$p_query_clauses['join'][] = $t_clauses['join'];

@@ -43,6 +43,14 @@ abstract class MantisColumn {
 	 * the column will properly implement the sortquery() method.
 	 */
 	public $sortable = false;
+        
+        /**
+         * Plugin name.
+         * Provides correct operation plugin_push_current()
+         * Initialized by the MantisBT kernel during the execution of 
+         * function columns_get_plugin_columns()
+         */
+        public $plugin_name = '';
 
 	/**
 	 * Build the SQL query elements 'join' and 'order' as used by

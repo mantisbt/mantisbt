@@ -176,6 +176,7 @@ function columns_get_plugin_columns() {
 						} else {
 							continue;
 						}
+                                                $t_column_object->plugin_name = $t_plugin;
 						$t_column_name = mb_strtolower( $t_plugin . '_' . $t_column_object->column );
 						$s_column_array[$t_column_name] = $t_column_object;
 					}
@@ -1136,13 +1137,15 @@ function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir
  * @access public
  */
 function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+	plugin_push_current($p_column_object->plugin_name);
+        if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 		echo '<td class="column-plugin">';
 		$p_column_object->display( $p_bug, $p_columns_target );
 		echo '</td>';
 	} else {
 		$p_column_object->display( $p_bug, $p_columns_target );
 	}
+        plugin_pop_current();
 }
 
 /**
