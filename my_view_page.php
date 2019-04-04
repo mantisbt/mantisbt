@@ -129,7 +129,6 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 	}
 }
 asort( $t_boxes );
-$t_number_of_boxes = count( $t_boxes );
 
 $t_timeline_view_threshold_access = access_has_any_project_level( config_get( 'timeline_view_threshold' ), $t_project_ids_to_check, $t_current_user_id );
 $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
@@ -139,12 +138,14 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 <?php
 define( 'MY_VIEW_INC_ALLOW', true );
 
+# Determine the box number where column 2 should start
+# Use shift-right bitwise operator to divide by 2 as integer
+$t_column2_start = ( count( $t_boxes ) + 1 ) >> 1;
+
 $t_counter = 0;
 foreach( $t_boxes as $t_box_title => $t_box_display ) {
     # If timeline is OFF, display boxes on 2 columns
-    if( !$t_timeline_view_threshold_access
-        && $t_counter++ >= $t_number_of_boxes / 2
-    ) {
+    if( !$t_timeline_view_threshold_access && $t_counter++ == $t_column2_start ) {
         # End of 1st column
         echo '</div>';
         echo '<div class="col-xs-12 col-md-6">';
