@@ -1414,6 +1414,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Dieses Problem wurde von einem ande
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Sie haben die erlaubte Aktivitätsgrenze von %d Ereignissen innerhalb der letzten %d Sekunden erreicht. Ihre Aktion wurde blockiert, um Spam zu verhindern. Bitte versuchen Sie es später erneut.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Das Feld „%1$s“ muss kürzer oder gleich als %2$d Zeichen lang sein.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Der Name des API-Tokens „%s“ ist bereits in Verwendung.';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Die in $g_log_destination angegebene Datei „%s“ ist nicht beschreibbar.';
 $s_dropzone_default_message = 'Dateien hier zum Hochladen ablegen (oder klicken)';
 $s_dropzone_fallback_message = 'Ihr Browser unterstützt keine Dateiuploads durch Ziehen und Ablegen.';
 $s_dropzone_file_too_big = 'Die Datei ist zu groß ({{filesize}} MiB). Maximale Dateigröße: {{maxFilesize}} MiB.';
