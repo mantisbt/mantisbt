@@ -85,10 +85,6 @@ $t_per_page = config_get( 'my_view_bug_count' );
 $t_bug_count = null;
 $t_page_count = null;
 
-$t_boxes = config_get( 'my_view_boxes' );
-asort( $t_boxes );
-reset( $t_boxes );
-
 # The projects that need to be evaluated are those that will be included in the filters
 # used for each box. At this point, those filter are created for "current" project, and
 # may include subprojects, or not, based on the default "_view_type" property
@@ -103,53 +99,58 @@ if( $t_current_project_id == ALL_PROJECTS ) {
 	$t_project_ids_to_check = filter_get_included_projects( $t_test_filter );
 }
 
+# Retrieve the boxes to display
+# - exclude hidden boxes per configuration (order == 0)
+# - remove boxes that do not make sense in the user's context (access level)
+$t_boxes = array_filter( config_get( 'my_view_boxes' ) );
+$t_anonymous_user = current_user_is_anonymous();
+foreach( $t_boxes as $t_box_title => $t_box_display ) {
+	if( # Remove "Assigned to Me" box for users that can't handle issues
+		(  $t_box_title == 'assigned'
+		&& (  $t_anonymous_user
+		   || !access_has_any_project_level('handle_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
+		   )
+		) ||
+		# Remove "Monitored by Me" box for users that can't monitor issues
+		(  $t_box_title == 'monitored'
+		&& (  $t_anonymous_user
+		   || !access_has_any_project_level( 'monitor_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
+		   )
+		) ||
+		# Remove display of "Reported by Me", "Awaiting Feedback" and
+		# "Awating confirmation of resolution" boxes for users that can't report bugs
+		(  in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) )
+		&& (  $t_anonymous_user
+		   || !access_has_any_project_level( 'report_bug_threshold', $t_project_ids_to_check, $t_current_user_id )
+		   )
+		)
+	) {
+		unset( $t_boxes[$t_box_title] );
+	}
+}
+asort( $t_boxes );
+$t_number_of_boxes = count( $t_boxes );
+
 $t_timeline_view_threshold_access = access_has_any_project_level( config_get( 'timeline_view_threshold' ), $t_project_ids_to_check, $t_current_user_id );
 $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "col-md-6";
 ?>
 <div class="col-xs-12 <?php echo $t_timeline_view_class ?>">
 
 <?php
-$t_number_of_boxes = count ( $t_boxes );
-$t_counter = 0;
-
 define( 'MY_VIEW_INC_ALLOW', true );
 
+$t_counter = 0;
 foreach( $t_boxes as $t_box_title => $t_box_display ) {
-		# don't display boxes that are set as 0
-	if ( $t_box_display == 0 ) {
-		$t_number_of_boxes = $t_number_of_boxes - 1;
-	}
-		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
-	else if( $t_box_title == 'assigned'
-		&&  ( current_user_is_anonymous()
-			|| !access_has_any_project_level( 'handle_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
-		$t_number_of_boxes = $t_number_of_boxes - 1;
-	}
-		# don't display "Monitored by Me" bugs to users that can't monitor bugs
-	else if( $t_box_title == 'monitored'
-		&& ( current_user_is_anonymous()
-			|| !access_has_any_project_level( 'monitor_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
-		$t_number_of_boxes = $t_number_of_boxes - 1;
-	}
-		# don't display "Reported by Me" bugs to users that can't report bugs
-	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) )
-		&& ( current_user_is_anonymous()
-			|| !access_has_any_project_level( 'report_bug_threshold', $t_project_ids_to_check, $t_current_user_id ) ) ) {
-		$t_number_of_boxes = $t_number_of_boxes - 1;
-	}
-		# display the box
-	else {
-		# If timeline is OFF, display boxes on 2 columns
-		if( !$t_timeline_view_threshold_access
-			&& $t_counter++ >= $t_number_of_boxes / 2
-		) {
-			# End of 1st column
-			echo '</div>';
-			echo '<div class="col-xs-12 col-md-6">';
-		}
-		include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-		echo '<div class="space-10"></div>';
-	}
+    # If timeline is OFF, display boxes on 2 columns
+    if( !$t_timeline_view_threshold_access
+        && $t_counter++ >= $t_number_of_boxes / 2
+    ) {
+        # End of 1st column
+        echo '</div>';
+        echo '<div class="col-xs-12 col-md-6">';
+    }
+    include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+    echo '<div class="space-10"></div>';
 }
 ?>
 </div>
