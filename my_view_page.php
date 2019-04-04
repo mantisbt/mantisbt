@@ -110,7 +110,6 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 
 <?php
 $t_number_of_boxes = count ( $t_boxes );
-$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
 $t_counter = 0;
 
 define( 'MY_VIEW_INC_ALLOW', true );
