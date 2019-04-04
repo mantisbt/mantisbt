@@ -157,7 +157,7 @@ foreach( $t_boxes as $t_box_title => $t_box_display ) {
 </div>
 
 <?php if( $t_timeline_view_threshold_access ) { ?>
-<div class="col-md-5 col-xs-12">
+<div class="col-xs-12 col-md-5">
 	<?php
 		# Build a simple filter that gets all bugs for current project
 		$g_timeline_filter = array();
