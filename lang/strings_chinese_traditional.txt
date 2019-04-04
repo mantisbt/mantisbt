@@ -1405,6 +1405,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此問題已經由其他使用者�
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已達到在 %d 秒内允許 %d 次事件的使用限制；為避免垃圾訊息產生已阻擋您的行為，請稍後再重試。';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '欄位 "%1$s" 必須小於或等於 %2$d 字元長度。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API 密鑰名稱 "%s" 已被使用。請返回重新選擇。';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '在 $g_log_destination「%s」指定的檔案不可寫入。';
 $s_dropzone_default_message = '將檔案放至這裡上傳 (或點選)';
 $s_dropzone_fallback_message = '您的瀏覽器不支援托放檔案上傳功能。';
 $s_dropzone_file_too_big = '檔案太大（{{filesize}}MiB）。檔案大小上限：{{maxFilesize}}MiB。';

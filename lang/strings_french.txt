@@ -1419,6 +1419,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Ce problème a été mis à jour pa
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Vous avez atteint la limite d’activité autorisée de %d événements durant les %d dernières secondes ; votre action a été bloquée pour éviter le pourriel, veuillez réessayer ultérieurement.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le champ « %1$s » doit faire moins de %2$d caractères de long.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nom de jeton de l’API « %s » est déjà utilisé. Veuillez revenir en arrière et en sélectionner un autre.';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le fichier spécifié dans $g_log_destination «  %s  » ne peut pas être écrit.';
 $s_dropzone_default_message = 'Déposer les fichiers ici pour les téléverser (ou cliquer)';
 $s_dropzone_fallback_message = 'Votre navigateur ne prend pas en charge le téléversement de fichiers par glisser-déposer.';
 $s_dropzone_file_too_big = 'Le fichier est trop gros ({{filesize}}MiB). Taille maximale du fichier : {{maxFilesize}}MiB.';
