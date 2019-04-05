@@ -270,7 +270,7 @@ if( $f_report_stay ) {
 
 	html_meta_redirect( $t_report_more_bugs_url );
 } else {
-	html_meta_redirect( 'view_all_bug_page.php' );
+	html_meta_redirect( config_get_global( 'default_home_page') );
 }
 
 layout_page_header_end();
@@ -279,7 +279,7 @@ layout_page_begin( 'bug_report_page.php' );
 
 $t_buttons = array(
 	array( string_get_bug_view_url( $t_issue_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_issue_id ) ),
-	array( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ),
+	array( config_get_global( 'default_home_page'), lang_get( 'view_bugs_link' ) ),
 );
 
 if( $f_report_stay ) {
