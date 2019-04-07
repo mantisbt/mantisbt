@@ -41,8 +41,8 @@
  * @author Duongnvm
  */
 
-$s_plugin_MantisGraph_description = 'Plugin đồ thị chính thức';
 $s_plugin_MantisGraph_title = 'Đồ thị Mantis';
+$s_plugin_MantisGraph_description = 'Plugin đồ thị chính thức';
 $s_plugin_MantisGraph_config = 'Cấu hình';
 $s_plugin_MantisGraph_synthesis_link = 'Tổng hợp';
 $s_plugin_MantisGraph_status_link = 'Theo trạng thái';

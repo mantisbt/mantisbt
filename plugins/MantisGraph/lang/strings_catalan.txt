@@ -45,8 +45,8 @@
  * @author Paucabot
  */
 
-$s_plugin_MantisGraph_description = 'Plugin de gràfics oficial.';
 $s_plugin_MantisGraph_title = 'Gràfics de Mantis';
+$s_plugin_MantisGraph_description = 'Plugin de gràfics oficial.';
 $s_plugin_MantisGraph_config = 'Configuració';
 $s_plugin_MantisGraph_synthesis_link = 'Síntesi';
 $s_plugin_MantisGraph_status_link = 'Per Estat';
