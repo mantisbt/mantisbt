@@ -41,7 +41,7 @@
  * @author Korayal
  */
 
-$s_plugin_graph_description = 'Resmi grafik eklentisi.';
+$s_plugin_MantisGraph_description = 'Resmi grafik eklentisi.';
 $s_plugin_MantisGraph_title = 'Mantis grafikleri';
 $s_plugin_MantisGraph_config = 'Yapılandırma';
 $s_plugin_MantisGraph_synthesis_link = 'Sentez';

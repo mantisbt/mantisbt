@@ -46,7 +46,7 @@
  * @author WikiPhoenix
  */
 
-$s_plugin_graph_description = 'Officiell insticksmodul för grafer.';
+$s_plugin_MantisGraph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_title = 'Mantis-grafer';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntes';

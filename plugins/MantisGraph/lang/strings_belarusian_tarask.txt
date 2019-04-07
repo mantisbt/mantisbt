@@ -44,7 +44,7 @@
  * @author Renessaince
  */
 
-$s_plugin_graph_description = 'Афіцыйнае дапаўненьне для графікаў.';
+$s_plugin_MantisGraph_description = 'Афіцыйнае дапаўненьне для графікаў.';
 $s_plugin_MantisGraph_title = 'Графікі MantisBT';
 $s_plugin_MantisGraph_config = 'Канфігурацыя';
 $s_plugin_MantisGraph_synthesis_link = 'Сынтэз';
