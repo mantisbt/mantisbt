@@ -44,7 +44,6 @@
  * @author ديفيد
  */
 
-$s_plugin_graph_title = 'رسومات مانتيس';
 $s_plugin_graph_description = 'الملحق الرسومي الرسمي.';
 $s_plugin_MantisGraph_title = 'رسومات مانتيس';
 $s_plugin_MantisGraph_config = 'ضبط';

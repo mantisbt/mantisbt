@@ -41,7 +41,6 @@
  * @author Xuacu
  */
 
-$s_plugin_graph_title = 'Gráfiques Mantis';
 $s_plugin_graph_description = 'Complementu oficial de gráfiques.';
 $s_plugin_MantisGraph_title = 'Gráfiques Mantis';
 $s_plugin_MantisGraph_config = 'Configuración';

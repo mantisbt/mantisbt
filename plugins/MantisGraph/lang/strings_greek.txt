@@ -44,7 +44,6 @@
  * @author Ανώνυμος Βικιπαιδιστής
  */
 
-$s_plugin_graph_title = 'Γράφημα Mantis';
 $s_plugin_graph_description = 'Επίσημο πρόσθετο γραφήματος.';
 $s_plugin_MantisGraph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_config = 'Διαμόρφωση';

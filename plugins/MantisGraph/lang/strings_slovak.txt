@@ -43,7 +43,6 @@
  * @author Wizzard
  */
 
-$s_plugin_graph_title = 'Grafiky Mantis';
 $s_plugin_graph_description = 'Oficiálny grafický plugin.';
 $s_plugin_MantisGraph_title = 'Grafiky Mantis';
 $s_plugin_MantisGraph_config = 'Nastavenie';

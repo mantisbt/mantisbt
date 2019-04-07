@@ -41,7 +41,6 @@
  * @author Saturnian
  */
 
-$s_plugin_graph_title = 'Grafice Mantis';
 $s_plugin_graph_description = 'Plugin-ul grafic oficial.';
 $s_plugin_MantisGraph_title = 'Grafice Mantis';
 $s_plugin_MantisGraph_config = 'Configurație';

@@ -41,7 +41,6 @@
  * @author Rancher
  */
 
-$s_plugin_graph_title = 'Grafikoni za MantisBT';
 $s_plugin_graph_description = 'Zvanični dodatak za iscrtavanje grafikona.';
 $s_plugin_MantisGraph_title = 'Grafikoni za MantisBT';
 $s_plugin_MantisGraph_config = 'Podešavanje';

@@ -41,7 +41,6 @@
  * @author Cedric31
  */
 
-$s_plugin_graph_title = 'Grafics Mantis';
 $s_plugin_graph_description = 'Plugin de grafics oficial.';
 $s_plugin_MantisGraph_title = 'Grafics de Mantis';
 $s_plugin_MantisGraph_config = 'Configuracion';

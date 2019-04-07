@@ -44,7 +44,6 @@
  * @author SteveR
  */
 
-$s_plugin_graph_title = 'Mantis графіки';
 $s_plugin_graph_description = 'Офіційний модуль для графіків.';
 $s_plugin_MantisGraph_title = 'Mantis графіки';
 $s_plugin_MantisGraph_config = 'Налаштування';

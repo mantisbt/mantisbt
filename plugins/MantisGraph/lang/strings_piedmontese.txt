@@ -42,7 +42,6 @@
  * @author Dragonòt
  */
 
-$s_plugin_graph_title = 'Gràfich Mantis';
 $s_plugin_graph_description = 'Prèisa ëd gràfich ofissiaj.';
 $s_plugin_MantisGraph_title = 'Gràfich ëd Mantis';
 $s_plugin_MantisGraph_config = 'Configurassion';

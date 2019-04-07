@@ -47,7 +47,6 @@
  * @author Maxan
  */
 
-$s_plugin_graph_title = 'Gráficos Mantis';
 $s_plugin_graph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
 $s_plugin_MantisGraph_config = 'Configuração';

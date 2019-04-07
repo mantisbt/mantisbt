@@ -41,7 +41,6 @@
  * @author AnakngAraw
  */
 
-$s_plugin_graph_title = 'Mga Talangguhit ng Mantis';
 $s_plugin_graph_description = 'Opisyal na pampasak ng talangguhit.';
 $s_plugin_MantisGraph_title = 'Mga Talangguhit ng Mantis';
 $s_plugin_MantisGraph_config = 'Pagkakaayos';

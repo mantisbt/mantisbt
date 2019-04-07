@@ -46,7 +46,6 @@
  * @author Mirzali
  */
 
-$s_plugin_graph_title = 'Grafikê Mantisi';
 $s_plugin_graph_description = 'Olena grafik de resimi';
 $s_plugin_MantisGraph_title = 'Grafikê Mantisi';
 $s_plugin_MantisGraph_config = 'Vıraştış';

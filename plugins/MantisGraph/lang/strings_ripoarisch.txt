@@ -41,7 +41,6 @@
  * @author Purodha
  */
 
-$s_plugin_graph_title = 'Manits Dijajramme';
 $s_plugin_graph_description = 'Dat offizjäjje Zohsazprojramm zom erinshtöpselle, för Dijajramme ze maache.';
 $s_plugin_MantisGraph_title = 'Manits Dijajramme';
 $s_plugin_MantisGraph_config = 'Enschtällonge';

@@ -42,7 +42,6 @@
  * @author Guycn2
  */
 
-$s_plugin_graph_title = 'מנטיס תרשימים';
 $s_plugin_graph_description = 'תוסף תרשימים רשמי.';
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
 $s_plugin_MantisGraph_config = 'הגדרות';
