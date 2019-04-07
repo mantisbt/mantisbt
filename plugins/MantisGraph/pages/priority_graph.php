@@ -26,11 +26,10 @@
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 layout_page_header();
-
 layout_page_begin( 'summary_page.php' );
 
 $t_filter = summary_get_filter();
-print_summary_menu( 'summary_page.php', $t_filter );
+print_summary_menu( 'developer_graph.php', $t_filter );
 print_summary_submenu();
 
 $t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority', array(), $t_filter );
