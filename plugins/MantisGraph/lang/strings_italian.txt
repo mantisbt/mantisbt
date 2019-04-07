@@ -45,8 +45,8 @@
  * @author Selven
  */
 
-$s_plugin_MantisGraph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_title = 'Grafici Mantis';
+$s_plugin_MantisGraph_description = 'Plugin ufficiale Grafico';
 $s_plugin_MantisGraph_config = 'Configurazione';
 $s_plugin_MantisGraph_synthesis_link = 'Sintesi';
 $s_plugin_MantisGraph_status_link = 'Per stato';

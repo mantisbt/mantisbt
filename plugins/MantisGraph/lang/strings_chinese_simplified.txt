@@ -45,8 +45,8 @@
  * @author 佛壁灯
  */
 
-$s_plugin_MantisGraph_description = '官方图表插件。';
 $s_plugin_MantisGraph_title = 'Mantis图表';
+$s_plugin_MantisGraph_description = '官方图表插件。';
 $s_plugin_MantisGraph_config = '配置';
 $s_plugin_MantisGraph_synthesis_link = '合成';
 $s_plugin_MantisGraph_status_link = '按状态';

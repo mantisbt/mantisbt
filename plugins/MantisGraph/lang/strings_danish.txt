@@ -44,8 +44,8 @@
  * @author Tjernobyl
  */
 
-$s_plugin_MantisGraph_description = 'Officiel graf plugin.';
 $s_plugin_MantisGraph_title = 'Mantis grafer';
+$s_plugin_MantisGraph_description = 'Officiel graf plugin.';
 $s_plugin_MantisGraph_config = 'Konfiguration';
 $s_plugin_MantisGraph_synthesis_link = 'Syntese';
 $s_plugin_MantisGraph_status_link = 'Efter tilstand';
