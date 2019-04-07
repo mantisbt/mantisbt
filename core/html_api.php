@@ -593,6 +593,16 @@ function print_summary_submenu() {
 		echo '<div class="col-md-12 col-xs-12 center">';
 		echo '<div class="btn-group">';
 
+		# If there is at least one plugin-defined link, add a submenu item
+		# for the summary page itself
+		# @TODO active page check
+		$t_filter_param = filter_get_temporary_key_param( summary_get_filter() );
+		echo '<a class="btn btn-sm btn-primary btn-white active" href="'
+			. helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param )
+			. '"><i class="fa fa-table"></i> '
+			. lang_get( 'synthesis' )
+			. '</a>';
+
 		# Plugins menu items - these are cooked links
 		foreach ($t_menu_options as $t_menu_item) {
 			echo $t_menu_item;
