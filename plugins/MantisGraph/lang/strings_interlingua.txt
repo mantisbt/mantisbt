@@ -41,7 +41,6 @@
  * @author McDutchie
  */
 
-$s_plugin_graph_title = 'Graphicos de Mantis';
 $s_plugin_graph_description = 'Plug-in official de graphicos.';
 $s_plugin_MantisGraph_title = 'Graphicos de Mantis';
 $s_plugin_MantisGraph_config = 'Configuration';

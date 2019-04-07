@@ -42,7 +42,6 @@
  * @author Kly
  */
 
-$s_plugin_graph_title = 'Mantis 圖表';
 $s_plugin_graph_description = '官方圖表元件';
 $s_plugin_MantisGraph_title = 'Mantis 圖表';
 $s_plugin_MantisGraph_config = '設置';

@@ -41,7 +41,6 @@
  * @author Duongnvm
  */
 
-$s_plugin_graph_title = 'Đồ thị Mantis';
 $s_plugin_graph_description = 'Plugin đồ thị chính thức';
 $s_plugin_MantisGraph_title = 'Đồ thị Mantis';
 $s_plugin_MantisGraph_config = 'Cấu hình';

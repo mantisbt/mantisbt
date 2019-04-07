@@ -43,7 +43,6 @@
  * @author Woytecr
  */
 
-$s_plugin_graph_title = 'Wykresy Mantis';
 $s_plugin_graph_description = 'Oficjalna wtyczka wykresów.';
 $s_plugin_MantisGraph_title = 'Wykresy Mantis';
 $s_plugin_MantisGraph_config = 'Konfiguracja';

@@ -42,7 +42,6 @@
  * @author Gwenn-Ael
  */
 
-$s_plugin_graph_title = 'Grafikoù Mantis';
 $s_plugin_graph_description = 'Lugant ofisiel evit ar grafikoù.';
 $s_plugin_MantisGraph_title = 'Grafikoù Mantis';
 $s_plugin_MantisGraph_config = 'Kefluniadur';

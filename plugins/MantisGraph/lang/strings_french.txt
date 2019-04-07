@@ -48,7 +48,6 @@
  * @author Wladek92
  */
 
-$s_plugin_graph_title = 'Graphiques Mantis';
 $s_plugin_graph_description = 'Greffon graphique officiel.';
 $s_plugin_MantisGraph_title = 'Graphiques de Mantis';
 $s_plugin_MantisGraph_config = 'Configuration';

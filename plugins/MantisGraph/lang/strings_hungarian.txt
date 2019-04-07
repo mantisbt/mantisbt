@@ -44,7 +44,6 @@
  * @author R-Joe
  */
 
-$s_plugin_graph_title = 'Mantis diagramok';
 $s_plugin_graph_description = 'Hivatalos diagram bővítmény.';
 $s_plugin_MantisGraph_title = 'Mantis diagramok';
 $s_plugin_MantisGraph_config = 'Beállítás';

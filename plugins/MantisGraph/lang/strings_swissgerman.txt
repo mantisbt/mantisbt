@@ -41,7 +41,6 @@
  * @author Als-Holder
  */
 
-$s_plugin_graph_title = 'Mantis Graphs';
 $s_plugin_graph_description = 'Offiziäll Diagramm-Plugin.';
 $s_plugin_MantisGraph_title = 'Mantis Graphs';
 $s_plugin_MantisGraph_config = 'Konfigurierig';

@@ -41,7 +41,6 @@
  * @author Yanmiao liu
  */
 
-$s_plugin_graph_title = 'Mantis 图表';
 $s_plugin_graph_description = '官方图表插件。';
 $s_plugin_MantisGraph_title = 'Mantis 图表';
 $s_plugin_MantisGraph_config = '配置';

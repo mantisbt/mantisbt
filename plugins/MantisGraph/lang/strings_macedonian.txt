@@ -42,7 +42,6 @@
  * @author Rancher
  */
 
-$s_plugin_graph_title = 'Графикони за MantisBT';
 $s_plugin_graph_description = 'Официјален приклучок за исцртување на графикони.';
 $s_plugin_MantisGraph_title = 'Mantis графикони';
 $s_plugin_MantisGraph_config = 'Местења';

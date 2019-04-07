@@ -44,7 +44,6 @@
  * @author Umherirrender
  */
 
-$s_plugin_graph_title = 'MantisBT-Grafiken';
 $s_plugin_graph_description = 'Offizielles Grafik-Plugin.';
 $s_plugin_MantisGraph_title = 'MantisBT-Grafiken';
 $s_plugin_MantisGraph_config = 'Konfiguration';

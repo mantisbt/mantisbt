@@ -43,7 +43,6 @@
  * @author Siebrand
  */
 
-$s_plugin_graph_title = 'Mantis grafieken';
 $s_plugin_graph_description = 'Officiële plugin voor grafieken.';
 $s_plugin_MantisGraph_title = 'Mantis grafieken';
 $s_plugin_MantisGraph_config = 'Instellingen';
