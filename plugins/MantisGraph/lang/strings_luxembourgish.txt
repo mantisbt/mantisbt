@@ -42,7 +42,6 @@
  */
 
 $s_plugin_MantisGraph_config = 'Astellung';
-$s_plugin_MantisGraph_synthesis_link = 'Synthees';
 $s_plugin_MantisGraph_status_link = 'Nom Status';
 $s_plugin_MantisGraph_priority_link = 'No Prioritéit';
 $s_plugin_MantisGraph_severity_link = 'No der Schwieregkeet';
