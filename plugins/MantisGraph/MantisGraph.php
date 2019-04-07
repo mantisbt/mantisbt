@@ -50,8 +50,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return void
 	 */
 	function register() {
-		$this->name = lang_get( 'plugin_graph_title' );
-		$this->description = lang_get( 'plugin_graph_description' );
+		$this->name = plugin_lang_get( 'title' );
+		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
