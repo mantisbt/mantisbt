@@ -47,7 +47,6 @@
 $s_plugin_MantisGraph_title = 'Mantis графіки';
 $s_plugin_MantisGraph_description = 'Офіційний модуль для графіків.';
 $s_plugin_MantisGraph_config = 'Налаштування';
-$s_plugin_MantisGraph_synthesis_link = 'Синтез';
 $s_plugin_MantisGraph_status_link = 'За статусом';
 $s_plugin_MantisGraph_priority_link = 'За пріоритетом';
 $s_plugin_MantisGraph_severity_link = 'За серйозністю';

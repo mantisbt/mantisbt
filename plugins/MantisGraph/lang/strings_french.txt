@@ -51,7 +51,6 @@
 $s_plugin_MantisGraph_title = 'Graphiques de Mantis';
 $s_plugin_MantisGraph_description = 'Greffon graphique officiel.';
 $s_plugin_MantisGraph_config = 'Configuration';
-$s_plugin_MantisGraph_synthesis_link = 'Synthèse';
 $s_plugin_MantisGraph_status_link = 'Par état';
 $s_plugin_MantisGraph_priority_link = 'Par priorité';
 $s_plugin_MantisGraph_severity_link = 'Par gravité';

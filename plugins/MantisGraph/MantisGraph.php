@@ -205,9 +205,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 		# changing the format of the menu and submenu events.
 		# For now, it's responsability of the plugin to detect and render each link properly.
 		$t_menu_items = array();
-		$t_menu_items[] = array( 'icon' => 'fa-table', 'title' => plugin_lang_get( 'synthesis_link' ),
-			'url' => helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ) );
-
 		$t_menu_items[] = array( 'icon' => 'fa-bar-chart', 'title' => lang_get( 'by_developer' ),
 			'url' => helper_url_combine( plugin_page( 'developer_graph.php' ), $t_filter_param ),
 			'plugin_page' => 'developer_graph.php' );
