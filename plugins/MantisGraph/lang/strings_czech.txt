@@ -46,7 +46,7 @@
  * @author Walter Klosse
  */
 
-$s_plugin_graph_description = 'Oficiální grafový plugin.';
+$s_plugin_MantisGraph_description = 'Oficiální grafový plugin.';
 $s_plugin_MantisGraph_title = 'Grafy Mantis';
 $s_plugin_MantisGraph_config = 'Konfigurace';
 $s_plugin_MantisGraph_synthesis_link = 'Syntéza';
