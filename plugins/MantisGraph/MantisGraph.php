@@ -91,6 +91,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			'EVENT_REST_API_ROUTES' => 'routes',
 			'EVENT_LAYOUT_RESOURCES' => 'resources',
 			'EVENT_CORE_HEADERS' => 'csp_headers',
+			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
@@ -177,6 +178,17 @@ class MantisGraphPlugin extends MantisPlugin  {
 				echo "\t", '<script src="' . $t_script . '"></script>', "\n";
 			}
 		}
+	}
+
+	/**
+	 * Event hook to add the plugin's tab to the Summary page menu.
+	 * @return array
+	 */
+	function summary_menu() {
+		$t_menu_items[] = '<a href="' . plugin_page( 'developer_graph.php' ) . '">'
+			. plugin_lang_get( 'tab_label' )
+			. '</a>';
+		return $t_menu_items;
 	}
 
 	/**
