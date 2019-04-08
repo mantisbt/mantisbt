@@ -86,3 +86,4 @@ $s_plugin_MantisGraph_graph_page = 'Graf yfir feril verkbeiðna';
 $s_plugin_MantisGraph_graph_topdev = 'Hönnuðir með flestar leystar verkbeiðnir';
 $s_plugin_MantisGraph_graph_opendev = 'Hönnuðir eftir opnum verkbeiðnum';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Tilkynnendur með flestar leystar verkbeiðnir';
+$s_plugin_MantisGraph_other_categories = 'aðrir flokkar (%d)';

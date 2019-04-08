@@ -1416,6 +1416,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Essa tarefa foi atualizada por outr
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Você atingiu o limite permitido de atividade de %d nos últimos %d segundos, suas ações foram bloqueados para evitar spam\'s, por favor, tente novamente mais tarde.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'O campo "%1$s" deve ser menor ou igual á %2$d caracteres.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'O nome do Token API "%s" já esta em uso. Por favor, volte e selecione outro.';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'O arquivo especificado em  $g_log_destination "%s" não é gravável.';
 $s_dropzone_default_message = 'Arraste os arquivos até aqui para carregá-los (ou clique)';
 $s_dropzone_fallback_message = 'Seu navegador não permite carregamento de arquivos arrastando';
 $s_dropzone_file_too_big = 'O arquivo é muito pesado ({{filesize}}MiB). Tamanho máximo de arquivo: {{maxFilesize}}MiB.';
