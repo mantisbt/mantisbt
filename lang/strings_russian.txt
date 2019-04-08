@@ -740,6 +740,7 @@ $s_create_new_subproject_link = 'Создать новый подпроект';
 $s_unlink_link = 'Разорвать связь';
 $s_show_global_users = 'Показывать участников с глобальным доступом';
 $s_hide_global_users = 'Скрывать участников с глобальным доступом';
+$s_review_changes_confirmation = 'Точно применяем эти изменения?';
 $s_add_project_title = 'Добавление проекта';
 $s_upload_file_path = 'Путь для загружаемых файлов';
 $s_add_project_button = 'Добавить проект';
