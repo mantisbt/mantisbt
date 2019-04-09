@@ -546,7 +546,7 @@ function layout_navbar_button_bar() {
 	$t_show_report_bug_button = access_has_any_project_level( 'report_bug_threshold' ) &&
 		!is_page_name( string_get_bug_page( "report" ) ) &&
 		!is_page_name( string_get_bug_page( "update" ) );
-	$t_show_invite_user_button = current_user_is_administrator();
+	$t_show_invite_user_button = access_has_global_level( config_get( 'manage_user_threshold' ) );
 
 	if( !$t_show_report_bug_button && !$t_show_invite_user_button ) {
 		return;
