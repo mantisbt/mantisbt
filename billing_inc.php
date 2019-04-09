@@ -54,7 +54,10 @@ require_api( 'utility_api.php' );
 <?php
 
 $t_today = date( 'd:m:Y' );
-$t_date_submitted = isset( $t_bug ) ? date( 'd:m:Y', $t_bug->date_submitted ) : $t_today;
+$t_date_submitted = !empty( $_POST ) && gpc_isset( 'filter_by_start_date' ) ? date( 'd:m:Y', strtotime( gpc_get_string( 'filter_by_start_date' ) ) ) : $t_today;
+$t_date_end_submitted = !empty( $_POST ) && gpc_isset( 'filter_by_end_date' ) ? date( 'd:m:Y', strtotime( gpc_get_string( 'filter_by_end_date' ) ) ) : $t_today;
+$t_date_submitted_form = !empty( $_POST ) && gpc_isset( 'filter_by_start_date' ) ? date( 'Y-m-d', strtotime( gpc_get_string( 'filter_by_start_date' ) ) ) : date('Y-m-d');
+$t_date_end_submitted_form = !empty( $_POST ) && gpc_isset( 'filter_by_end_date' ) ? date( 'Y-m-d', strtotime( gpc_get_string( 'filter_by_end_date' ) ) ) : date('Y-m-d');
 
 $t_bugnote_stats_from_def = $t_date_submitted;
 $t_bugnote_stats_from_def_ar = explode( ':', $t_bugnote_stats_from_def );
@@ -66,7 +69,7 @@ $t_bugnote_stats_from_d = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_DAY,
 $t_bugnote_stats_from_m = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, $t_bugnote_stats_from_def_m );
 $t_bugnote_stats_from_y = gpc_get_int( FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, $t_bugnote_stats_from_def_y );
 
-$t_bugnote_stats_to_def = $t_today;
+$t_bugnote_stats_to_def = $t_date_end_submitted;
 $t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
 $t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 $t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
@@ -123,12 +126,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				<?php
 					$t_filter = array();
 					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] = 'on';
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] = $t_bugnote_stats_to_y;
+                                        $t_filter[FILTER_PROPERTY_START_DATE_SUBMITTED] = $t_date_submitted_form;
+                                        $t_filter[FILTER_PROPERTY_END_DATE_SUBMITTED] = $t_date_end_submitted_form;
 					filter_init( $t_filter );
 					print_filter_do_filter_by_date( true );
 				?>
