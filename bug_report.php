@@ -60,6 +60,8 @@ $f_copy_notes_from_parent = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent = gpc_get_bool( 'copy_attachments_from_parent', false );
 $f_report_stay = gpc_get_bool( 'report_stay', false );
 
+$f_referer_page = gpc_get_cookie( 'ref_base', config_get_global( 'default_home_page') );
+
 $t_clone_info = array(
 	'master_issue_id' => $f_master_bug_id,
 	'relationship_type' => $f_rel_type,
@@ -270,7 +272,8 @@ if( $f_report_stay ) {
 
 	html_meta_redirect( $t_report_more_bugs_url );
 } else {
-	html_meta_redirect( config_get_global( 'default_home_page') );
+	html_meta_redirect( $f_referer_page );
+        gpc_clear_cookie( 'ref_base' );
 }
 
 layout_page_header_end();
@@ -279,7 +282,7 @@ layout_page_begin( 'bug_report_page.php' );
 
 $t_buttons = array(
 	array( string_get_bug_view_url( $t_issue_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_issue_id ) ),
-	array( config_get_global( 'default_home_page'), lang_get( 'view_bugs_link' ) ),
+	array( $f_referer_page, lang_get( 'view_bugs_link' ) ),
 );
 
 if( $f_report_stay ) {

@@ -3494,6 +3494,12 @@ $g_cdn_enabled = OFF;
 $g_default_home_page = 'my_view_page.php';
 
 /**
+ * List of pages to which redirection is allowed after registration of issues.
+ * @global array $g_bug_report_redirect_pages_allowed
+ */
+$g_bug_report_redirect_pages_allowed = array( 'my_view_page.php', 'view_all_bug_page.php' );
+
+/**
  * Specify where the user should be sent after logging out.
  * @global string $g_logout_redirect_page
  */

@@ -102,7 +102,12 @@ compress_enable();
 
 if( $t_show_page_header ) {
 	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ), null, 'view-issue-page' );
-	layout_page_begin( 'view_all_bug_page.php' );
+        
+        $t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
+	? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
+	: config_get_global( 'default_home_page');
+        
+	layout_page_begin( $t_referer_page );
 }
 
 $t_action_button_position = config_get( 'action_button_position' );

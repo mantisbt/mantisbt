@@ -79,6 +79,18 @@ require_api( 'version_api.php' );
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
+$f_referer_base = gpc_get_cookie( 'ref_base', null );
+
+if( $f_referer_base == null ) {
+        $f_referer_base = array_key_exists( 'HTTP_REFERER', $_SERVER ) 
+                ? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
+                : config_get_global( 'default_home_page');
+        
+        if( in_array( $f_referer_base, config_get_global( 'bug_report_redirect_pages_allowed' ) ) || $f_referer_base == config_get_global( 'default_home_page') ) {
+                gpc_set_cookie( 'ref_base', $f_referer_base );
+        }
+}
+
 if( $f_master_bug_id > 0 ) {
 	# master bug exists...
 	bug_ensure_exists( $f_master_bug_id );
