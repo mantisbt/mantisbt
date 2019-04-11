@@ -353,6 +353,7 @@ $s_filename = 'Namey dosya';
 $s_filename_label = 'Namey dosya:';
 $s_add_user_button = 'Karber cı ke';
 $s_remove_link = 'Wedare';
+$s_remove_all_link = 'Pêrune bıkırışe';
 $s_required = 'lazım';
 $s_signup_title = 'Qeydbiyayış';
 $s_signup_button = 'Qeydbiyayış';
