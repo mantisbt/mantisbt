@@ -223,3 +223,6 @@ config_obsolete( 'session_handler' );
 
 # changes in 2.17.0
 config_obsolete( 'default_manage_user_prefix' );
+
+# changes in 2.21.0
+config_obsolete( 'my_view_boxes_fixed_position' );

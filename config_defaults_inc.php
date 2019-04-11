@@ -3748,13 +3748,6 @@ $g_my_view_boxes = array(
 	'my_comments'   => '0'
 );
 
-/**
- * Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent
- * boxes start at the same vertical position)
- * @global integer $g_my_view_boxes_fixed_position
- */
-$g_my_view_boxes_fixed_position = ON;
-
 
 #############
 # RSS Feeds #
@@ -4570,7 +4563,6 @@ $g_public_config_names = array(
 	'monitor_delete_others_bug_threshold',
 	'move_bug_threshold',
 	'my_view_boxes',
-	'my_view_boxes_fixed_position',
 	'my_view_bug_count',
 	'news_enabled',
 	'news_limit_method',
