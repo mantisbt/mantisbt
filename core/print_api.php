@@ -1450,8 +1450,15 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
  * print brackets around a pre-prepared link (i.e. '<a href' html tag).
  * @param string $p_link The URL to link to.
  * @return void
+ * @deprecated 2.21.0
  */
 function print_bracket_link_prepared( $p_link ) {
+	error_parameters(
+		__FUNCTION__,
+		'print button functions or, in the context of an EVENT_MENU_ITEM hook, return link as associative array'
+	);
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
 }
 

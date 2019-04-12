@@ -221,7 +221,21 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>&lt;Array&gt;: List of HTML links for the documents menu.</para></listitem>
+					<listitem>
+						<para>&lt;Array&gt;: List of HTML links for the issue page menu.</para>
+						<para>This is an associative array, with the link's label as key
+							and the link target as value, e.g. <programlisting>
+array( plugin_lang_get( 'mypage_label' ) => plugin_page( 'mypage' );
+</programlisting>
+						</para>
+						<para>For compatibility with MantisBT versions before 2.21.0,
+							it is also possible to return an array of cooked links :
+							<programlisting>
+array( '&lt;a href="' . plugin_page( 'mypage' ) . '">' . plugin_lang_get( 'mypage_label' ) . '&lt;/a>' );
+</programlisting>
+							However, this usage is deprecated.
+						</para>
+					</listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
