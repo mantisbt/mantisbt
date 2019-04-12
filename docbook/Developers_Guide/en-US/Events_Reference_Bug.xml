@@ -22,7 +22,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding <programlisting>&lt;table&gt;</programlisting> elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -44,7 +44,7 @@
 
 				<para>
 					Any output here should be contained within its own
-					<programlisting>&lt;table&gt;</programlisting> element.
+					<filename>&lt;table&gt;</filename> element.
 				</para>
 
 				<itemizedlist>
@@ -71,7 +71,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -93,7 +93,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -191,7 +191,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -254,7 +254,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -330,7 +330,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -353,7 +353,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -376,7 +376,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -403,7 +403,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
@@ -442,7 +442,7 @@
 
 				<para>
 					Any output here should be defining appropriate rows and columns for the
-					surrounding &lt;table&gt; elements.
+					surrounding <filename>&lt;table&gt;</filename> elements.
 				</para>
 
 				<itemizedlist>
