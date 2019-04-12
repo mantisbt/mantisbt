@@ -1452,7 +1452,7 @@ function print_form_button( $p_action_page, $p_label, array $p_args_to_post = nu
  * @return void
  */
 function print_bracket_link_prepared( $p_link ) {
-	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
+	echo '<span class="bracket-link">&#160;' . $p_link . '&#160;</span> ';
 }
 
 /**
