@@ -27,8 +27,8 @@ chart.js                          | 2.7.3     | unpatched
 chartjs-plugin-colorschemes       | 0.3.0     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
 list.js                           | 1.5.0     | unpatched
+clipboard.js                      | 2.0.4     | unpatched
 
-  
 **Notes**
 
 1. removed `__autoload` function
@@ -50,3 +50,4 @@ chart.js        | http://www.chartjs.org/ - https://github.com/chartjs/Chart.js
 chartjs-plugin-colorschemes | https://github.com/nagix/chartjs-plugin-colorschemes/
 typeahead.js    | https://github.com/twitter/typeahead.js
 list.js         | http://listjs.com/ - https://github.com/javve/list.js
+clipboard.js    | http://clipboardjs.com/ - https://github.com/zenorocha/clipboard.js

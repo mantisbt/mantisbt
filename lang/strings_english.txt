@@ -631,6 +631,11 @@ $s_closed_bug_button = 'Close Issue';
 $s_bugnote_updated_msg = 'Note has been successfully updated...';
 $s_last_edited = 'Last edited:';
 
+# changelog_page.php
+$s_copy_as_text = 'Copy as text';
+$s_copy_as_text_successful = 'Copied';
+$s_copy_as_text_failed = 'Failed to copy';
+
 # file_api.php
 $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';

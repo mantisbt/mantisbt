@@ -149,6 +149,9 @@ function print_version_footer( $p_version_id, $p_issues_resolved ) {
 		 '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . META_FILTER_NONE . '">';
 	echo lang_get( 'view_bugs_link' );
 	echo '</a>';
+	echo '<div class="btn-toolbar pull-right">';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round clp" data-tooltip-success="' . lang_get('copy_as_text_successful') . '" data-tooltip-failed="' . lang_get('copy_as_text_failed') . '">' . lang_get( 'copy_as_text' ) . '</a>';
+	echo '</div>';
 	echo '</div></div></div>';
 	echo '<div class="space-10"></div>';
 }

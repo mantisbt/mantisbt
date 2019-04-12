@@ -327,12 +327,18 @@ function html_head_javascript() {
 
 		# Dropzone
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH );
+
+		# Clipboard
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/' . CLIPBOARD_VERSION . '/clipboard.min.js', CLIPBOARD_HASH );
 	} else {
 		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 
 		# Dropzone
 		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
+
+		# Clipboard
+		html_javascript_link( 'clipboard-' . CLIPBOARD_VERSION . '.min.js' );
 	}
 
 	html_javascript_link( 'common.js' );

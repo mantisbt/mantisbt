@@ -1432,3 +1432,6 @@ $s_persist = 'Merken';
 $s_load = 'Laden';
 $s_apply_changes = 'Änderungen anwenden';
 $s_undo = 'Rückgängig';
+$s_copy_as_text = 'Als Text kopieren';
+$s_copy_as_text_successful = 'Kopiert';
+$s_copy_as_text_failed = 'Fehler beim Kopieren';
