@@ -256,21 +256,21 @@ array( '&lt;a href="' . plugin_page( 'mypage' ) . '">' . plugin_lang_get( 'mypag
 					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 						</para>
 						<programlisting>
-							return array(
-							    array( 
-									'title' =&gt; 'My Link',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link.php',
-									'icon' =&gt; 'fa-random'
-								),
-								array(
-									'title' =&gt; 'My Link2',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link2.php',
-									'icon' =&gt; 'fa-shield'
-								)
-							);
-						</programlisting>
+return array(
+	array(
+		'title' =&gt; 'My Link',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link.php',
+		'icon' =&gt; 'fa-random'
+	),
+	array(
+		'title' =&gt; 'My Link2',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link2.php',
+		'icon' =&gt; 'fa-shield'
+	)
+);
+</programlisting>
 					</listitem>
 				</itemizedlist>
 			</blockquote>
@@ -292,21 +292,21 @@ array( '&lt;a href="' . plugin_page( 'mypage' ) . '">' . plugin_lang_get( 'mypag
 					'access_level', and 'icon' (e.g. fa-pencil from <ulink url="http://fontawesome.io/icons/">Font Awesome</ulink>).
 						</para>
 						<programlisting>
-							return array(
-							    array( 
-									'title' =&gt; 'My Link',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link.php',
-									'icon' =&gt; 'fa-random'
-								),
-								array(
-									'title' =&gt; 'My Link2',
-									'access_level' =&gt; DEVELOPER,
-									'url' =&gt; 'my_link2.php',
-									'icon' =&gt; 'fa-shield'
-								)
-							);
-						</programlisting>
+return array(
+	array(
+		'title' =&gt; 'My Link',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link.php',
+		'icon' =&gt; 'fa-random'
+	),
+	array(
+		'title' =&gt; 'My Link2',
+		'access_level' =&gt; DEVELOPER,
+		'url' =&gt; 'my_link2.php',
+		'icon' =&gt; 'fa-shield'
+	)
+);
+</programlisting>
 					</listitem>
 				</itemizedlist>
 			</blockquote>
