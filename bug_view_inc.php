@@ -382,7 +382,9 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	if( $t_show_reporter ) {
 		echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
 		echo '<td class="bug-reporter">';
-		print_user_with_subject( $t_bug->reporter_id, $t_bug_id );
+                echo prepare_user_name( $t_bug->reporter_id, true);
+                echo ' ';
+                print_email_icon_with_subject( $t_bug->reporter_id, $t_bug_id );
 		echo '</td>';
 	} else {
 		$t_spacer += 2;
@@ -392,7 +394,9 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 	if( $t_show_handler ) {
 		echo '<th class="bug-assigned-to category">', lang_get( 'assigned_to' ), '</th>';
 		echo '<td class="bug-assigned-to">';
-		print_user_with_subject( $t_bug->handler_id, $t_bug_id );
+                echo prepare_user_name( $t_bug->handler_id, true);
+                echo ' ';
+                print_email_icon_with_subject(  $t_bug->handler_id, $t_bug_id );
 		echo '</td>';
 	} else {
 		$t_spacer += 2;

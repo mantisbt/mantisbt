@@ -230,6 +230,26 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 }
 
 /**
+ * Print email icon with fills in the subject with the bug summary
+ *
+ * @param integer $p_user_id A user identifier.
+ * @param integer $p_bug_id  A bug identifier.
+ * @return void
+ */
+function print_email_icon_with_subject( $p_user_id, $p_bug_id ) {
+	if( NO_USER == $p_user_id ) {
+		return;
+	}
+
+	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
+		$t_email = user_get_email( $p_user_id );
+		print_email_link_with_subject( $t_email, '', '', $p_bug_id, true );
+	} else {
+                return;
+	}
+}
+
+/**
  * print out an email editing input
  *
  * @param string $p_field_name Name of input tag.
@@ -1654,7 +1674,7 @@ function get_email_link( $p_email, $p_text ) {
  * @param string $p_bug_id The bug identifier.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id ) {
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_icon_only = false ) {
 	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
 		$t_tooltip = ' title="' . $p_tooltip . '"';
 	} else {
@@ -1663,8 +1683,12 @@ function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id
 
 	$t_bug = bug_get( $p_bug_id, true );
 	if( !access_has_project_level( config_get( 'show_user_email_threshold', null, null, $t_bug->project_id ), $t_bug->project_id ) ) {
-		echo $t_tooltip != '' ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
-		return;
+		if( $p_icon_only == true ) {
+                        return;
+                } else {
+                        echo $t_tooltip != '' ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
+                        return;
+                }
 	}
 
 	$t_subject = email_build_subject( $p_bug_id );
@@ -1678,7 +1702,11 @@ function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id
 	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-	echo '<a href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
+        if( $p_icon_only == true ) {
+                echo '<a href="' . $t_mailto . '"' . $t_tooltip . ' class="fa fa-envelope-o" style="text-decoration: none;"></a>';
+        } else {
+                echo '<a href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
+        }
 }
 
 /**
