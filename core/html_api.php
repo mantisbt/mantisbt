@@ -894,7 +894,10 @@ function print_summary_menu( $p_page = '', array $p_filter = null ) {
 
 	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>' . $t_menu_item . '</li>';
+		$t_active = $p_page && strpos( $t_menu_item, $p_page ) !== false
+			? ' class="active"'
+			: '';
+		echo "<li{$t_active}>{$t_menu_item}</li>";
 	}
 
 	echo '</ul>' . "\n";
