@@ -270,7 +270,7 @@ if( $f_report_stay ) {
 
 	html_meta_redirect( $t_report_more_bugs_url );
 } else {
-	html_meta_redirect( 'view_all_bug_page.php' );
+	html_meta_redirect( string_get_bug_view_url( $t_issue_id ) );
 }
 
 layout_page_header_end();
