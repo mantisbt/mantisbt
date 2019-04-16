@@ -194,13 +194,18 @@ function print_avatar( $p_user_id, $p_class_prefix, $p_size = 80 ) {
 }
 
 /**
- * prints the name of the user given the id.  also makes it an email link.
+ * prints the name of the user given the id.
+ *
+ * By default, the username will become a hyperlink to View User page,
+ * but caller can decide to just print the username.
  *
  * @param integer $p_user_id A user identifier.
+ * @param boolean $p_link    Whether to add an html link (defaults to true)
+ *
  * @return void
  */
-function print_user( $p_user_id ) {
-	echo prepare_user_name( $p_user_id );
+function print_user( $p_user_id, $p_link = true ) {
+	echo prepare_user_name( $p_user_id, $p_link );
 }
 
 /**
