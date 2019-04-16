@@ -28,7 +28,7 @@ use Mantis\Exceptions\ClientException;
  * Sample:
  * {
  *   "payload": {
- *     "username": "vboctor",
+ *     "name": "vboctor",
  *     "password": "p@ssw0rd",
  *     "real_name": "Victor Boctor",
  *     "email": "vboctor@example.com",
@@ -102,7 +102,7 @@ class UserCreateCommand extends Command {
 		}
 
 		# Username and Real Name
-		$this->username = trim( $this->payload( 'username', '' ) );
+		$this->username = trim( $this->payload( 'name', $this->payload( 'username', '' ) ) );
 		$this->realname = string_normalize( $this->payload( 'real_name', '' ) );
 
 		# Protected and Enabled Flags
