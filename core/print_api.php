@@ -243,7 +243,7 @@ function print_email_icon_with_subject( $p_user_id, $p_bug_id ) {
 
 	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 		$t_email = user_get_email( $p_user_id );
-		print_email_link_with_subject( $t_email, '', '', $p_bug_id, true );
+		print_email_link_with_subject( $t_email, '', '', $p_bug_id, false );
 	} else {
                 return;
 	}
@@ -1668,13 +1668,14 @@ function get_email_link( $p_email, $p_text ) {
 /**
  * print a mailto: href link with subject
  *
- * @param string $p_email  Email Address.
- * @param string $p_text   Link text to display to user.
- * @param string $p_tooltip The tooltip to show.
- * @param string $p_bug_id The bug identifier.
+ * @param string  $p_email  Email Address.
+ * @param string  $p_text   Link text to display to user.
+ * @param string  $p_tooltip The tooltip to show.
+ * @param string  $p_bug_id The bug identifier.
+ * @param boolean $p_show_tooltip Tooltip show. 
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_icon_only = false ) {
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_tooltip = true ) {
 	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
 		$t_tooltip = ' title="' . $p_tooltip . '"';
 	} else {
@@ -1683,12 +1684,10 @@ function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id
 
 	$t_bug = bug_get( $p_bug_id, true );
 	if( !access_has_project_level( config_get( 'show_user_email_threshold', null, null, $t_bug->project_id ), $t_bug->project_id ) ) {
-		if( $p_icon_only == true ) {
-                        return;
-                } else {
+		if( $p_show_tooltip == true ) {
                         echo $t_tooltip != '' ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
-                        return;
                 }
+                return;
 	}
 
 	$t_subject = email_build_subject( $p_bug_id );
@@ -1702,10 +1701,10 @@ function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id
 	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-        if( $p_icon_only == true ) {
-                echo '<a href="' . $t_mailto . '"' . $t_tooltip . ' class="fa fa-envelope-o" style="text-decoration: none;"></a>';
-        } else {
+        if( $p_show_tooltip == true ) {
                 echo '<a href="' . $t_mailto . '"' . $t_tooltip . '>' . $t_text . '</a>';
+        } else {
+                echo '<a href="' . $t_mailto . '"' . $t_tooltip . ' class="fa fa-envelope-o" style="text-decoration: none;"></a>';
         }
 }
 
