@@ -3995,11 +3995,14 @@ function filter_is_temporary( array $p_filter ) {
 /**
  * Returns a string formatted as GET parameter, suitable for tracking a
  * temporary filter by its session key.
- * The parameter can be ither an existing key, so its used directly,
- * or a filter array, which can contain a property with the key
- * If a filter is provided that does not contain the key property, an empty
- * string is returned.
+ * The parameter can be either:
+ * - an existing key to be used directly, or
+ * - a filter array, which can contain a property with the key.
+ * If the provided filter does not contain the key property, the function
+ * returns null.
+ *
  * @param array|string $p_key_or_filter	Either a string key, or a filter array
+ *
  * @return string|null	Formatted parameter string, or null
  */
 function filter_get_temporary_key_param( $p_key_or_filter ) {
