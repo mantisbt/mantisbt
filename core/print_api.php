@@ -862,7 +862,7 @@ function print_version_option_list( $p_version = '', $p_project_ids = null, $p_r
 	}
 	$t_project_ids = is_array( $p_project_ids ) ? $p_project_ids : array( $p_project_ids );
 
-	$t_versions = version_get_all_rows( $t_project_ids, $p_released, null );
+	$t_versions = version_get_all_rows( $t_project_ids, $p_released, true );
 
 	# Ensure the selected version (if specified) is included in the list
 	# Note: Filter API specifies selected versions as an array
