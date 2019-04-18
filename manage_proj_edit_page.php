@@ -492,7 +492,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
-	$t_versions = version_get_all_rows( $f_project_id, null, true );
+	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, true );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
 		<table id="versions" class="table table-striped table-bordered table-condensed">

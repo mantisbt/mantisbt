@@ -852,11 +852,13 @@ function print_os_build_option_list( $p_os_build, $p_user_id = null ) {
  *
  * @param string              $p_version       The currently selected version.
  * @param integer|array|null  $p_project_ids   A project id, or array of ids, or null to use current project.
- * @param integer             $p_released      Null to get all, 1: only released, 0: only future versions.
- * @param boolean             $p_leading_blank Allow selection of no version.
+ * @param integer             $p_released      One of VERSION_ALL, VERSION_FUTURE or VERSION_RELEASED
+ *                                             to define which versions to include in the list (defaults to ALL).
+ * @param boolean $p_leading_blank Allow selection of no version.
+ *
  * @return void
  */
-function print_version_option_list( $p_version = '', $p_project_ids = null, $p_released = null, $p_leading_blank = true ) {
+function print_version_option_list( $p_version = '', $p_project_ids = null, $p_released = VERSION_ALL, $p_leading_blank = true ) {
 	if( null === $p_project_ids ) {
 		$p_project_ids = helper_get_current_project();
 	}
