@@ -577,7 +577,7 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 		$c_project_id = (int)$p_project_id;
 	}
 
-	$t_versions = version_get_all_rows( $c_project_id, null /* released: any */, true /* incl. obsolete */ ,  $p_inherit );
+	$t_versions = version_get_all_rows( $c_project_id, VERSION_ALL, true /* incl. obsolete */ ,  $p_inherit );
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['version'] === $p_version ) {
 			return $t_version['id'];
