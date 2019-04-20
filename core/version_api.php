@@ -492,7 +492,11 @@ function version_remove_all( $p_project_id ) {
  * Return all versions for the specified project or projects list
  * Returned versions are ordered by reverse 'date_order'
  * @param integer|array $p_project_ids  A valid project id, or array of ids
- * @param boolean $p_released   Whether to include released versions.
+ * @param boolean $p_released   Whether to show only released, unreleased, or both.
+ *                  For this parameter, use constants defined as:
+ *                  VERSION_ALL (null): returns any
+ *                  VERSION_FUTURE (false): returns only unreleased versions
+ *                  VERSION_RELEASED (true): returns only released versions
  * @param boolean $p_obsolete   Whether to include obsolete versions.
  * @param boolean $p_inherit    True to include versions from parent projects,
  *                              false not to, or null to use configuration
@@ -530,7 +534,7 @@ function version_get_all_rows( $p_project_ids, $p_released = null, $p_obsolete =
 		if( !empty( $g_cache_versions_project[$t_project_id]) ) {
 			foreach( $g_cache_versions_project[$t_project_id] as $t_id ) {
 				$t_version_row = version_cache_row( $t_id );
-				if( $p_obsolete == false && (int)$t_version_row['obsolete'] == 1 ) {
+				if( $p_obsolete === false && (int)$t_version_row['obsolete'] == 1 ) {
 					continue;
 				}
 				if( $p_released !== null ) {
@@ -573,7 +577,7 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 		$c_project_id = (int)$p_project_id;
 	}
 
-	$t_versions = version_get_all_rows( $c_project_id, null /* released: any */, true /* incl. obsolete */ ,  $p_inherit );
+	$t_versions = version_get_all_rows( $c_project_id, VERSION_ALL, true /* incl. obsolete */ ,  $p_inherit );
 	foreach( $t_versions as $t_version ) {
 		if( $t_version['version'] === $p_version ) {
 			return $t_version['id'];
