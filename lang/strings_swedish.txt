@@ -1412,6 +1412,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Denna fråga har uppdaterats av en 
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Du har nått gränsen för tillåten aktivitet på %d händelser inom de senaste %d sekunderna; din åtgärd har blockerats för att undvika spam. Försök igen senare.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Fältet "%1$s" måste vara kortare eller lika med %2$d tecken.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API-tokennamnet "%s" används redan. Vänligen gå tillbaka och välj ett annat.';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Filen som specificerades i $g_log_destination "%s" är skrivskyddad.';
 $s_dropzone_default_message = 'Släpp filer här för att ladda upp (eller klicka)';
 $s_dropzone_fallback_message = 'Din webbläsare stödjer inte filuppladdning med dra-och-släpp.';
 $s_dropzone_file_too_big = 'Filen är för stor ({{filesize}}MiB). Maximal filstorlek: {{maxFilesize}}MiB.';
