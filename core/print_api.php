@@ -1641,18 +1641,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
  * @return void
  */
 function print_email_link( $p_email, $p_text ) {
-	echo get_email_link( $p_email, $p_text );
-}
-
-/**
- * return the mailto: href string link instead of printing it
- *
- * @param string $p_email Email Address.
- * @param string $p_text  Link text to display to user.
- * @return string
- */
-function get_email_link( $p_email, $p_text ) {
-	return prepare_email_link( $p_email, $p_text );
+	echo prepare_email_link( $p_email, $p_text );
 }
 
 /**
