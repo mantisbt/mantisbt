@@ -185,16 +185,16 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		echo '<td>&#160;</td><td>&#160;</td>';
 	} else {
 		echo '<td class="center">',
-			'<select name="priority_' . $t_basename . '"',
-				' class="input-sm">',
-				print_plugin_priority_list( $t_priority ),
-			'</select>','</td>';
+			'<select name="priority_' . $t_basename . '" class="input-sm">';
+		print_plugin_priority_list( $t_priority );
+		echo '</select>', '</td>';
 		echo '<td class="center">',
-		'<label>',
-			'<input type="checkbox" class="ace" name="protected_' . $t_basename . '"',
-				check_checked( $t_protected ), ' />',
-		'<span class="lbl"></span>',
-		'</label>',
+			'<label>',
+			'<input type="checkbox" class="ace" name="protected_' . $t_basename . '"';
+		check_checked( $t_protected );
+		echo ' />',
+			'<span class="lbl"></span>',
+			'</label>',
 			'</select>','</td>';
 	}
 	echo '<td class="center">';
