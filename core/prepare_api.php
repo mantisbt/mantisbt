@@ -41,20 +41,45 @@ require_api( 'user_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * return the mailto: href string link
- * @param string $p_email Email address to prepare.
- * @param string $p_text  Display text for the hyperlink.
+ * Return a ready-to-use mailto: URL.
+ *
+ * No validation is performed on the e-mail address, it is the caller's
+ * responsibility to ensure it is valid and not empty.
+ *
+ * @param string $p_email   Target e-mail address
+ * @param string $p_subject Optional e-mail subject
+ *
  * @return string
  */
-function prepare_email_link( $p_email, $p_text ) {
+function prepare_mailto_url ( $p_email, $p_subject = '' ) {
+	# If we apply string_url() to the whole mailto: link then the @ gets
+	# turned into a %40 and you can't right click in browsers to use the
+	# Copy Email Address functionality.
+	if( $p_subject ) {
+		# URL-encoding the subject is required otherwise special characters
+		# (ampersand for example) will truncate the text
+		$p_subject = '?subject=' . string_url( $p_subject );
+	}
+	$t_mailto = 'mailto:' . $p_email . $p_subject;
+
+	return string_attribute( $t_mailto );
+}
+
+/**
+ * return an HTML link with mailto: href.
+ *
+ * @param string $p_email   Email address to prepare.
+ * @param string $p_text    Display text for the hyperlink.
+ * @param string $p_subject Optional e-mail subject
+ *
+ * @return string
+ */
+function prepare_email_link( $p_email, $p_text, $p_subject = '' ) {
 	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 		return string_display_line( $p_text );
 	}
 
-	# If we apply string_url() to the whole mailto: link then the @
-	#  gets turned into a %40 and you can't right click in browsers to
-	#  do Copy Email Address.
-	$t_mailto = string_attribute( 'mailto:' . $p_email );
+	$t_mailto = prepare_mailto_url( $p_email, $p_subject );
 	$p_text = string_display_line( $p_text );
 
 	return '<a href="' . $t_mailto . '">' . $p_text . '</a>';
