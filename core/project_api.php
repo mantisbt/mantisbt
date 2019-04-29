@@ -812,9 +812,9 @@ function project_add_users( $p_project_id, array $p_changes ) {
 	$t_updating = array_column( $t_query->fetch_all(), 'user_id' );
 
 	if( !empty( $t_updating ) ) {
-		$t_update = new DbQuery( 'UPDATE {project_user_list} SET access_level = :new_value WHERE user_id = :user_id' );
+		$t_update = new DbQuery( 'UPDATE {project_user_list} SET access_level = :new_value WHERE user_id = :user_id AND project_id = :project_id' );
 		foreach( $t_updating as $t_id ) {
-			$t_params = array( 'user_id' => (int)$t_id, 'new_value' => $t_changes[$t_id] );
+			$t_params = array( 'project_id' => $t_project_id, 'user_id' => (int)$t_id, 'new_value' => $t_changes[$t_id] );
 			$t_update->execute( $t_params );
 			unset( $t_changes[$t_id] );
 		}
