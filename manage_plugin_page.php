@@ -141,7 +141,8 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		}
 		if( !is_blank( $t_contact ) ) {
 			$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
-				'<a href="mailto:' . string_attribute( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
+					prepare_email_link( $t_contact, $t_author )
+				);
 		} else {
 			$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 		}
@@ -273,7 +274,8 @@ if( 0 < count( $t_plugins_available ) ) {
 			}
 			if( !is_blank( $t_contact ) ) {
 				$t_author = '<br />' . sprintf( lang_get( 'plugin_author' ),
-					'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
+						prepare_email_link( $t_contact, $t_author )
+					);
 			} else {
 				$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 			}
