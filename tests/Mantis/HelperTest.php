@@ -73,19 +73,10 @@ class MantisHelperTest extends MantisCoreBase {
 	 * @dataProvider providerArrayTransposeInvalid
 	 */
 	public function testArrayTransposeInvalid( $p_in ) {
-		try {
-			helper_array_transpose( $p_in );
-		}
-		catch( PHPUnit\Framework\Error $e ) {
-			$this->assertMantisError( $e );
-			# This is the "normal" exit path as we expect all transpositions
-			# to fail with an error
-			return;
-		}
-
-		# Since the provider only contains invalid values, the transposition
-		# should always fail and we should never get here
-		$this->fail('The transposition was successful but should have failed.');
+		$this->expectException(PHPUnit\Framework\Error\Error::class);
+		$this->expectExceptionCode(E_USER_ERROR);
+		$this->expectExceptionMessage((string)ERROR_GENERIC);
+		helper_array_transpose( $p_in );
 	}
 
 	/**
