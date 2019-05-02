@@ -34,24 +34,6 @@ require_once 'MantisCoreBase.php';
 class MantisHelperTest extends MantisCoreBase {
 
 	/**
-	 * Custom assertion to evaluate whether the given exception was a
-	 * Mantis error of the specific type(s)
-	 *
-	 * @param Exception $e
-	 * @param array     $p_expected_errors List of expected Mantis error codes.
-	 */
-	public function assertMantisError( Exception $e, array $p_expected_errors = array( ERROR_GENERIC ) ) {
-		$this->assertEquals( E_USER_ERROR, $e->getCode(),
-			'Unexpected error occurred: ' . $e->getMessage()
-		);
-
-		$t_code = $e->getMessage();
-		$this->assertContains( $t_code, $p_expected_errors,
-			"Unexpected Mantis error #$t_code occurred: " . error_string( $t_code )
-		);
-	}
-
-	/**
 	 * Tests helper_array_transpose() with good values.
 	 *
 	 * @param mixed $p_in  Input array.
