@@ -53,7 +53,7 @@ require_once 'MentionTest.php';
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-class SoapAllTests extends PHPUnit_Framework_TestSuite
+class SoapAllTests extends PHPUnit\Framework\TestSuite
 {
 	/**
 	 * setUp

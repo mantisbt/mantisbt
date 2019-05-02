@@ -38,10 +38,10 @@ class AllTests
 {
 	/**
 	 * Test suite
-	 * @return PHPUnit_Framework_TestSuite
+	 * @return PHPUnit\Framework\TestSuite
 	 */
 	public static function suite() {
-		$t_suite = new PHPUnit_Framework_TestSuite( 'Mantis Bug Tracker' );
+		$t_suite = new PHPUnit\Framework\TestSuite( 'Mantis Bug Tracker' );
 
 		$t_suite->addTest( MantisAllTests::suite() );
 		$t_suite->addTest( SoapAllTests::suite() );

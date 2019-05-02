@@ -76,7 +76,7 @@ class MantisHelperTest extends MantisCoreBase {
 		try {
 			helper_array_transpose( $p_in );
 		}
-		catch( PHPUnit_Framework_Error $e ) {
+		catch( PHPUnit\Framework\Error $e ) {
 			$this->assertMantisError( $e );
 			# This is the "normal" exit path as we expect all transpositions
 			# to fail with an error

@@ -29,7 +29,7 @@ require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
 # MantisBT Core API
 require_mantis_core();
 
-abstract class MantisCoreBase extends PHPUnit_Framework_TestCase {
+abstract class MantisCoreBase extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var string Username
