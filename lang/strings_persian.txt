@@ -153,8 +153,12 @@ $s_make_private = 'خصوصی کردن';
 $s_make_public = 'عمومی کردن';
 $s_create_new_project_link = 'ایجاد پروژه جدید';
 $s_login_link = 'ورود';
+$s_opensearch_id_short = '%s شناسه';
+$s_opensearch_id_description = '%s: جستجو با شناسه مسأله';
+$s_opensearch_text_short = '%s متن';
+$s_opensearch_text_description = '%s: جستجو کامل متن';
 $s_select_option = '(انتخاب)';
-$s_bug_actiongroup_access = 'شما دارای مجوز درست برای انجام آن عمل را ندارید';
+$s_bug_actiongroup_access = 'شما مجوز انجام آن عمل را ندارید.';
 $s_bug_actiongroup_status = 'این موضوع را نمی توان به وضعیت درخواست شده تغییر داد';
 $s_bug_actiongroup_category = 'این موضوع را نمی توان به دسته درخواست شده تغییر داد';
 $s_bug_actiongroup_handler = 'کاربر درخواست شده مجاز به رسیدگی به این موضوع نیست';
@@ -173,6 +177,7 @@ $s_set_sticky_bugs_conf_msg = 'آیا مطمئن هستید که می خواهی
 $s_product_version_bugs_conf_msg = 'محصول نسخه به روز رسانی';
 $s_fixed_in_version_bugs_conf_msg = 'بروزرسانی نسخه اصلاح شده به';
 $s_target_version_bugs_conf_msg = 'بروزرسانی نسخه هدف به';
+$s_due_date_bugs_conf_msg = 'بروزرسانی تاریخ سررسید به';
 $s_close_group_bugs_button = 'بستن مسائل';
 $s_delete_group_bugs_button = 'حذف مسائل';
 $s_move_group_bugs_button = 'انتقال مسائل';
@@ -187,6 +192,7 @@ $s_set_sticky_group_bugs_button = 'مجموعه/تعیین نکردن این ا�
 $s_product_version_group_bugs_button = 'نسخه به روز رسانی محصول';
 $s_fixed_in_version_group_bugs_button = 'به روز تصحیح شد در نسخهٔ';
 $s_target_version_group_bugs_button = 'به روز رسانی نسخه مقصد';
+$s_due_date_group_bugs_button = 'بروزرسانی تاریخ سررسید';
 $s_update_severity_title = 'به روز رسانی شدت';
 $s_update_severity_msg = 'انتخاب اولویت مسائل';
 $s_update_severity_button = 'به روز رسانی شدت';
@@ -196,6 +202,7 @@ $s_printing_options_link = 'گزینه های چاپ';
 $s_bugnote_title = 'دسترسی به یادداشت';
 $s_bugnote_date = 'تاریخ نوشته';
 $s_bugnote_description = 'توضیحات نوشته';
+$s_error_no_proceed = 'لطفا از کلید "Back" مرورگر خود برای بازگشت به صفحه ی قبل استفاده کنید. مشکلاتی که در این اخطار شناسایی شده را می توانید اصلاح کنید یا فعالیت دیگری انجام دهید. همچنین می توانید یک گزینه را از نوار منو انتخاب کنید تا مستقیماً به بخش دیگری بروید.';
 $s_login_error = 'حساب شما ممکن است غیرفعال یا بسته شده باشد و یا نام کاربری/رمز عبور واردشده نادرست است.';
 $s_login_cookies_disabled = 'مرورگر نمی تواند دسترسی به کوکی ها یا رفیوز ها داشته باشد.';
 $s_go_back = 'بازگشت';
@@ -208,12 +215,16 @@ $s_myself = 'خودم';
 $s_default_access_level = 'سطح دسترسی پیش فرض';
 $s_issue_status_percentage = 'درصد وضعیت مسئله';
 $s_access_levels_enum_string = '10:مشاهده‌گر,25:گزارش دهنده,40:بروزرسان,55:توسعه دهنده,70:مدیر,90:مدیریت';
+$s_no_access = 'دسترسی نیست';
 $s_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
 $s_project_view_state_enum_string = '10:عمومی,50:خصوصی';
 $s_view_state_enum_string = '10:عمومی,50:خصوصی';
 $s_priority_enum_string = '10:هیچکدام,20:کم,30:معمولی,40:بالا,50:فوری,60:ضروری';
+$s_severity_enum_string = '10:ویژگی,20:خیلی جزئی,30:نوشتاری,40:متوسط,50:جزئی,60:عمده,70:حاد,80:گرفتاری';
+$s_reproducibility_enum_string = '10:همیشه,30:گاهی,50:تصادفی,70:امتحان نکردم,90:دیگر اتفاق نمی افتد,100:نا مشخص';
 $s_status_enum_string = '10:جدید,20:بازخورد,30:مشاهده شده,40:تائید شده,50:اختصاص داده شده,80:حل شده,90:بسته شده';
 $s_resolution_enum_string = '10:باز,20:حل شده,30:دوباره باز شده,40:غیر قابل بررسی مجدد,50:not قابل اصلاح,60:تکراری,70:بدون نیاز به تغییر,80:معلق,90:غیر قابل اصلاح';
+$s_projection_enum_string = '10:,30:,50:,70:,90:';
 $s_eta_enum_string = '10:هیچ,20:< یک روز,30:2-3 روز,40:< 1 هفته,50:< یکماه,60:> یکماه';
 $s_sponsorship_enum_string = '0:پرداخت نشده,1:درخواست شده,2:پرداخت شده';
 $s_new_account_subject = 'ثبت حساب کاربری';
@@ -241,110 +252,343 @@ $s_email_notification_title_for_action_bugnote_submitted = 'یک نوشته به
 $s_email_notification_title_for_action_duplicate_of_relationship_added = 'مسئله زیر به عنوان تکراری تعیین شده  %1$s .';
 $s_email_notification_title_for_action_has_duplicate_relationship_added = 'موضوع  %1$s  به عنوان تکراری از مسئله زیر تنظیم شده است.';
 $s_email_notification_title_for_action_related_to_relationship_added = 'مسئله زیر بهنوان مرنبط به موضوع  %1$s تعیین شده';
+$s_email_reporter = 'گزارش شده توسط';
+$s_email_handler = 'اختصاص یافته به';
 $s_email_project = 'پروژه';
+$s_email_bug = 'شناسه مسأله';
 $s_email_category = 'رده';
-$s_email_reproducibility = 'قابلیت تکثیر';
+$s_email_reproducibility = 'قابلیت اجرا دوباره';
 $s_email_severity = 'شدت';
 $s_email_priority = 'اولویت';
 $s_email_status = 'وضعیت';
 $s_email_resolution = 'قطعنامه';
 $s_email_duplicate = 'تکراری';
+$s_email_fixed_in_version = 'حل شده در نسخه';
+$s_email_target_version = 'قصد بررسی در نسخه';
+$s_email_date_submitted = 'تاریخ ثبت';
 $s_email_last_modified = 'آخرین ویرایش';
 $s_email_summary = 'خلاصه';
 $s_email_description = 'توضیحات';
 $s_email_additional_information = 'اطلاعات بیشتر';
+$s_email_steps_to_reproduce = 'مراحل اجرای دوباره';
+$s_email_tag = 'برچسب‌ها';
+$s_email_due_date = 'تاریخ سررسید';
+$s_account_protected_msg = 'حساب کاربری حفاظت شده است. امکان تغییر تنظیمات نیست...';
+$s_account_removed_msg = 'حساب کاربری شما حذف شد...';
+$s_confirm_delete_msg = 'آیا از حذف حساب کاربری خود اطمینان دارید؟';
 $s_delete_account_button = 'حذف حساب کاربری';
+$s_manage_profiles_link = 'نمایه ها';
 $s_change_preferences_link = 'ترجیحات';
+$s_edit_account_title = 'ویرایش حساب کاربری';
 $s_username = 'نام کاربری';
 $s_username_label = 'نام کاربری';
 $s_realname = 'نام حقیقی';
+$s_realname_label = 'نام حقیقی';
 $s_email = 'ایمیل';
 $s_email_label = 'ایمیل';
 $s_password = 'گذرواژه';
+$s_new_password = 'گذرواژهٔ جدید';
 $s_confirm_password = 'تأیید گذرواژه';
+$s_current_password = 'گذرواژه فعلی';
 $s_access_level = 'سطح دسترسی';
+$s_access_level_label = 'سطح دسترسی';
+$s_update_user_button = 'بروزرسانی کاربر';
+$s_verify_warning = 'اطلاعات حساب کاربری شما تأیید شد.';
+$s_api_token_revoke_button = 'باطل کردن';
+$s_api_token_never_used = 'هیچگاه استفاده نشده';
+$s_last_used = 'آخرین استفاده';
+$s_default_account_preferences_title = 'ترجیحات حساب کاربری';
 $s_default_project = 'پروژه پیش فرض';
+$s_refresh_delay = 'زمان بروز کردن صفحه';
+$s_minutes = 'دقیقه';
+$s_redirect_delay = 'زمان ریدایرکت';
+$s_seconds = 'ثانیه';
+$s_with_minimum_severity = 'با حداقل شدتِ';
+$s_bugnote_order = 'نوع مرتب کردن فعالیت ها';
 $s_bugnote_order_asc = 'صعودی';
 $s_bugnote_order_desc = 'نزولی';
+$s_email_on_new = 'دریافت ایمیل برای مسأله جدید';
+$s_email_on_assigned = 'دریافت ایمیل برای تغییر مسئول مسأله';
+$s_email_on_feedback = 'دریافت ایمیل برای بازخورد مسأله';
+$s_email_on_resolved = 'دریافت ایمیل برای حل شدن مسأله';
+$s_email_on_closed = 'دریافت ایمیل برای بسته شدن مسأله';
+$s_email_on_reopened = 'دریافت ایمیل برای دوباره باز شدن مسأله';
+$s_email_on_bugnote_added = 'دریافت ایمیل برای اضافه شدن یادداشت به مسأله';
+$s_email_on_status_change = 'دریافت ایمیل برای تغییر وضعیت مسأله';
+$s_email_on_priority_change = 'دریافت ایمیل برای تغییر اولویت مسأله';
+$s_email_bugnote_limit = 'محدودیت تعداد یادداشت در ایمیل دریافتی';
+$s_email_full_issue_details = 'دریافت ایمیل با تمام جزئیات مسأله';
 $s_language = 'زبان';
 $s_font_family = 'خانوادهٔ قلم';
+$s_update_prefs_button = 'بروزرسانی ترجیحات';
+$s_reset_prefs_button = 'بازنشاندن ترجیحات';
+$s_timezone = 'منطقهٔ زمانی';
+$s_prefs_reset_msg = 'ترجیحات بازنشانی شد...';
+$s_prefs_updated_msg = 'ترجیحات ذخیره شد...';
+$s_profile_added_msg = 'نمایه اضافه شد...';
+$s_profile_deleted_msg = 'نمایۀ حذف شده...';
+$s_edit_profile_title = 'ویرایش نمایه';
 $s_platform = 'پلت‌فرم';
+$s_additional_description = 'توضیحات بیشتر';
+$s_update_profile_button = 'به​روزرسانی نمایه';
+$s_profile_defaulted_msg = 'نمایه پیش​فرض ذخیره شد...';
+$s_add_profile_title = 'افزودن نمایه';
+$s_add_profile_button = 'افزودن نمایه';
+$s_edit_or_delete_profiles_title = 'ویرایش یا حذف نمایه​ها';
+$s_edit_profile = 'ویرایش نمایه';
+$s_make_default = 'تنظیم به عنوان پیش​فرض';
+$s_delete_profile = 'حذف نمایه';
+$s_select_profile = 'انتخاب نمایه';
 $s_submit_button = 'ثبت';
+$s_profile_updated_msg = 'نمایه به​روزرسانی شد...';
 $s_amount = 'میزان';
 $s_sponsor_show = 'نمایش همه';
+$s_account_updated_msg = 'حساب کاربری شما با موفقیت بروز شد...';
+$s_email_updated = 'آدرس ایمیل با موفقیت به​روزرسانی شد';
+$s_realname_updated = 'نام حقیقی با موفقیت به​روزرسانی شد';
+$s_password_updated = 'گذرواژه با موفقیت به​روزرسانی شد';
 $s_new_bug_title = 'مسأله جدید';
+$s_feedback_bug_title = 'درخواست بازخورد برای مسأله';
+$s_acknowledged_bug_title = 'تصدیق كردن مسأله';
+$s_confirmed_bug_title = 'تأیید کردن مسأله';
+$s_assigned_bug_title = 'اختصاص دادن مسأله';
 $s_new_bug_button = 'مسأله جدید';
+$s_feedback_bug_button = 'درخواست بازخورد';
+$s_acknowledged_bug_button = 'تصدیق كردن مسأله';
+$s_confirmed_bug_button = 'تأیید کردن مسأله';
+$s_assigned_bug_button = 'اختصاص دادن مسأله';
+$s_bug_close_msg = 'مسأله بسته شده است...';
+$s_close_immediately = 'بستن سریع:';
+$s_closed_bug_title = 'بستن مسأله';
+$s_bug_deleted_msg = 'مسأله حذف شده است...';
+$s_delete_bug_sure_msg = 'مطمئنید می‌خواهید این مسئله را حذف کنید؟';
 $s_delete_bug_button = 'حذف';
+$s_monitor_bug_button = 'پیگیری کردن';
+$s_unmonitor_bug_button = 'لغو پیگیری کردن';
+$s_upload_file = 'بارگذاری پرونده';
+$s_upload_files = 'بارگذاری پرونده‌ها';
+$s_select_file = 'انتخاب کردن پرونده';
+$s_select_files = 'انتخاب کردن پرونده​ها';
+$s_upload_file_button = 'بارگذاری پرونده';
+$s_upload_files_button = 'بارگذاری پرونده‌ها';
+$s_max_file_size_label = 'حداکثر حجم پرونده:';
+$s_bug_reopened_msg = 'مسأله بازگشایی شده است...';
+$s_reopen_add_bugnote_title = 'نوشتن دلیل برای بازگشایی مسأله';
+$s_bugnote_add_reopen_button = 'نوشتن یادداشت و بازگشایی کردن مسأله';
+$s_resolved_bug_title = 'حل کردن مسأله';
+$s_resolved_bug_button = 'حل کردن مسأله';
+$s_bug_resolved_msg = 'مسأله حل شده است. در زیر یادداشتی بنویسید...';
+$s_resolve_add_bugnote_title = 'نوشتن دلیل برای حل شدن مسأله';
 $s_bugnote_add_resolve_button = 'افزودن یادداشت';
 $s_from = 'از';
 $s_to = 'به';
+$s_bug_reminder = 'ارسال یادآور';
+$s_reminder_sent_to = 'یادآور ارسال شد به';
+$s_reminder_sent_none = 'امکان ارسال یادآوری نیست';
 $s_bug_send_button = 'ارسال';
+$s_reminder = 'یادآور';
+$s_reminder_store = 'یادداشت همراه مسأله ذخیره می​شود.';
+$s_stick_bug_button = 'چسبیدن';
+$s_unstick_bug_button = 'لغو چسبیدن';
+$s_bug_updated_msg = 'مسأله با موفقیت به​روز شد...';
+$s_back_to_bug_link = 'بازگشت به مسأله';
+$s_updating_bug_advanced_title = 'به​روز کردن اطلاعات مسأله';
 $s_id = 'شناسه';
 $s_category = 'دسته';
 $s_severity = 'شدت';
 $s_reproducibility = 'قابلیت اجرا دوباره';
+$s_date_submitted = 'تاریخ ثبت';
+$s_last_update = 'آخرین به‌روزرسانی';
+$s_reporter = 'گزارش دهنده';
+$s_assigned_to = 'اختصاص یافته به';
 $s_priority = 'اولویت';
 $s_resolution = 'راه حل';
 $s_status = 'وضعیت';
+$s_duplicate_id = 'تکرارِ شناسه';
+$s_os = 'سیستم عامل';
+$s_os_version = 'نسخۀ سیستم عامل';
+$s_product_version = 'نسخۀ نرم​افزار';
+$s_fixed_in_version = 'حل شده در نسخۀ';
+$s_target_version = 'قصد بررسی در نسخۀ';
 $s_votes = 'آرا';
 $s_summary = 'خلاصه';
 $s_description = 'توضیحات';
+$s_steps_to_reproduce = 'مراحل اجرای دوباره';
+$s_update_information_button = 'به‌روزرسانی اطلاعات';
+$s_sticky_issue = 'مسأله چسبیده شده';
 $s_profile = 'نمایه';
+$s_updating_bug_simple_title = 'به​روز کردن اطلاعات مسأله';
+$s_view_revisions = 'نمایشِ بازبینی​ها';
+$s_view_num_revisions = 'نمایش %1$d بازبینی​';
 $s_revision = 'بازبینی';
+$s_revision_by = '%1$s همراه %2$s';
+$s_back_to_issue = 'بازگشت به مسأله';
+$s_activities_title = 'فعالیت​ها';
+$s_vote_added_msg = 'رأی اضافه شد...';
+$s_bugnote_attached_files = 'پرونده​های ضمیمه​شده:';
+$s_bugnote_deleted_msg = 'یادداشت با موفقیت حذف شد...';
 $s_bug_notes_title = 'یادداشت ها';
+$s_edit_bugnote_title = 'ویرایش یادداشت';
+$s_no_bugnotes_msg = 'هیچ یادداشتی به این مسأله ضمیمه نشده است.';
 $s_delete_link = 'حذف';
 $s_add_bugnote_title = 'افزودن یادداشت';
 $s_add_bugnote_button = 'افزودن یادداشت';
 $s_bugnote_edit_link = 'ویرایش';
+$s_closed_bug_button = 'بستن مسأله';
+$s_bugnote_updated_msg = 'یادداشت با موفقیت به​روز شد...';
+$s_last_edited = 'آخرین ویرایش:';
+$s_hide_content = 'مخفی کردن محتوا';
+$s_show_content = 'نمایش محتوا';
+$s_page_execution_time = 'زمان اجرای صفحه: %1$s ثانیه';
+$s_memory_usage_in_kb = 'استفادۀ حافظه: %1$s کیلوبایت';
 $s_log_page_number = 'شماره';
+$s_log_page_time = 'مدت زمان اجرا';
 $s_log_page_event = 'رویداد';
+$s_please_report = 'لطفا این مورد را به %1$s گزارش دهید.';
 $s_click_to_login = 'ورود';
+$s_login_page_info = 'به برنامه پیگیری مسائل خوش آمدید.';
 $s_login_title = 'ورود';
+$s_save_login = 'ورود مرا به سیستم حفظ کن';
+$s_secure_session = 'جلسۀ امن';
+$s_secure_session_long = 'فقط ورود شما(این جلسه) از این IP اجازه داده شود.';
+$s_choose_project = 'انتخاب کردن پروژه';
 $s_login_button = 'ورود';
+$s_signup_link = 'ثبت نام حساب کاربری جدید';
 $s_lost_password_link = 'گذرواژه‌تان را فراموش کردید؟';
+$s_username_or_email = 'نام کاربری یا آدرس ایمیل';
+$s_enter_password = 'ورود گذرواژه برای \'%s\'';
+$s_select_project_button = 'انتخاب پروژه';
+$s_lost_password_title = 'بازنشانی گذرواژه';
+$s_lost_password_done_title = 'پیام بازنشانی گذرواژه ارسال شد';
+$s_lost_password_subject = 'بازنشانی گذرواژه';
+$s_lost_password_confirm_hash_OK = 'تأییدیه شما قبول شد. لطفا گذرواژه خود را به​روز کنید.';
+$s_open_and_assigned_to_me_label = 'مسائل باز و اختصاص داده شده به من:';
+$s_open_and_reported_to_me_label = 'مسائل باز و گزارش شده توسط من:';
+$s_newer_news_link = 'اخبار جدیدتر';
+$s_older_news_link = 'اخبار قدیمی تر';
+$s_archives = 'بایگانی ها';
 $s_rss = 'خبرخوان';
+$s_site_information = 'اطلاعات سایت';
+$s_mantis_version = 'نسخه MantisBT';
+$s_schema_version = 'نسخه Schema';
+$s_site_path = 'Site Path';
+$s_created_user_part1 = 'کاربر ایجاد شده';
+$s_created_user_part2 = 'با سطح دسترسیِ';
+$s_create_new_account_title = 'ایجاد حساب کاربری جدید';
+$s_verify_password = 'تایید کردن گذرواژه';
 $s_enabled = 'فعال';
 $s_enabled_label = 'فعال';
+$s_protected = 'محافظت‌شده';
+$s_protected_label = 'محافظت‌شده';
+$s_create_user_button = 'ایجاد کردن کاربر';
+$s_hide_disabled = 'مخفی کردنِ غیر فعال ها';
+$s_filter_button = 'اجرا کردن فیلتر';
+$s_default_filter = 'فیلتر پیش فرض';
+$s_create_filter_link = 'ایجاد لینک دائمی';
+$s_create_short_link = 'ایجاد لینک کوتاه';
+$s_manage_users_link = 'مدیریت کاربران';
+$s_manage_projects_link = 'مدیریت پروژه​ها';
+$s_manage_custom_field_link = 'مدیریت فیلدهای سفارشی';
+$s_manage_global_profiles_link = 'مدیریت نمایه​های سراسری';
+$s_manage_plugin_link = 'مدیریت افزونه​ها';
+$s_permissions_summary_report = 'گزارش مجوزها';
+$s_manage_config_link = 'مدیریت پیکربندی';
+$s_manage_threshold_config = 'تعیین جریان کار';
+$s_manage_email_config = 'اعلان​های ایمیل';
+$s_manage_workflow_graph = 'نمودار جریان کاری';
+$s_manage_tags_link = 'مدیریت برچسب‌ها';
+$s_create_new_account_link = 'ایجاد حساب کاربری جدید';
 $s_projects_link = 'پروژه‌ها';
 $s_documentation_link = 'مستندات';
+$s_new_accounts_title = 'حساب​های کاربری جدید';
+$s_1_week_title = '1 هفته';
+$s_never_logged_in_title = 'هیچگاه وارد نشده';
 $s_hide_inactive = 'مخفی کردن غیر فعال ها';
 $s_show_disabled = 'نمایش غیر فعال ها';
 $s_manage_accounts_title = 'مدیریت حساب ها';
 $s_p = 'p';
+$s_date_created = 'تاریخ ایجاد';
+$s_last_visit = 'آخرین بازدید';
+$s_last_visit_label = 'آخرین بازدید:';
+$s_edit_user_link = 'ویرایش کاربر';
+$s_search_user_hint = 'نام کاربری، نام حقیقی یا ایمیل';
+$s_issue_reporter = 'کاربر گزارش دهنده مسأله';
+$s_issue_handler = 'کاربرانی که این مسأله را مدیریت می​کنند';
+$s_users_added_bugnote = 'کاربرانی که یادداشت برای این مسأله اضافه کرده​اند';
+$s_change_configuration = 'به​روز کردن پیکربندی';
 $s_message = 'پیام';
+$s_notify_actions_change_access = 'کسی که می​تواند اعلان​ها را تغییر دهد:';
+$s_revert_to_system = 'حذف همۀ تنظیمات پروژه​ها';
+$s_revert_to_all_project = 'حذف تنظیمات مخصوص پروژه';
+$s_current_status = 'وضعیت فعلی';
+$s_next_status = 'وضعیت بعدی';
+$s_workflow = 'جریان کار';
+$s_threshold = 'آستانه';
 $s_status_level = 'وضعیت';
+$s_alter_level = 'کسی که می​تواند این مقدار را تغییر دهد';
 $s_configuration_option_type = 'نوع';
 $s_configuration_option_value = 'مقدار';
+$s_all_users = 'همهٔ کاربران';
+$s_plugin = 'افزونه';
 $s_plugin_description = 'توضیحات';
 $s_plugin_url = 'تارنما:';
 $s_plugin_priority = 'اولویت';
+$s_plugin_protected = 'محافظت‌شده';
 $s_plugin_update = 'به روز رسانی';
 $s_plugin_actions = 'اقدامات';
 $s_plugin_install = 'نصب';
 $s_plugin_upgrade = 'ارتقاء';
 $s_update_category_button = 'به روز رسانی دسته';
+$s_public = 'عمومی';
 $s_private = 'خصوصی';
+$s_delete_project_button = 'حذف پروژه';
 $s_categories = 'دسته ها';
+$s_add_category_button = 'افزودن دسته';
+$s_add_and_edit_category_button = 'افزودن و ویرایش دسته';
 $s_versions = 'نسخه‌ها';
+$s_add_version_button = 'افزودن نسخه';
+$s_add_and_edit_version_button = 'افزودن و ویرایش نسخه';
 $s_edit_link = 'ویرایش';
 $s_actions = 'اقدامات';
 $s_version = 'نسخه';
 $s_version_label = 'نسخه:';
 $s_timestamp = 'برچسب زمان';
 $s_update = 'به روز رسانی';
+$s_subprojects = 'پروژه فرعی';
+$s_add_subproject = 'افزودن به عنوان پروژه فرعی';
+$s_create_new_subproject_link = 'ایجاد پروژه فرعی جدید';
+$s_show_global_users = 'نمایش کاربران با دسترسی سراسری';
+$s_review_changes = 'بررسی تغییرات';
+$s_review_changes_confirmation = 'آیا مطمئنید این تغییرات را اعمال کنید؟';
+$s_add_project_title = 'افزودن پروژه';
+$s_add_project_button = 'افزودن پروژه';
 $s_projects_title = 'پروژه‌ها';
 $s_projects_title_label = 'پروژه‌ها';
 $s_name = 'نام';
+$s_project_updated_msg = 'پروژه با موفقیت به​روز شد...';
+$s_version_added_msg = 'نسخه با موفقیت اضافه شد...';
+$s_version_deleted_msg = 'نسخه با موفقیت حذف شد...';
+$s_version_delete_sure = 'آیا مطمئنید می‌خواهید این نسخه را حذف کنید؟';
+$s_delete_version_button = 'حذف کردن نسخه';
+$s_edit_project_version_title = 'ویرایش نسخه پروژه';
+$s_update_version_button = 'به​روز کردن نسخه';
+$s_released = 'منتشر شده';
+$s_not_released = 'منتشر نشده';
+$s_scheduled_release = 'برنامه ریزی شده برای انتشار';
+$s_obsolete = 'قدیمی';
+$s_version_updated_msg = 'نسخه با موفقیت به​روز شد...';
+$s_account_delete_protected_msg = 'حساب کاربری حفاظت شده است. حذف امکان پذیر نیست.';
 $s_reset_password_button = 'بازنشانی گذرواژه';
 $s_show_all_users = 'همه';
 $s_users_new = 'جدید';
 $s_main_link = 'اصلی';
-$s_changelog_link = 'گزارش تغییرات';
+$s_changelog_link = 'سیاهه تغییرات';
 $s_summary_link = 'خلاصه';
 $s_account_link = 'حساب کاربری من';
 $s_users_link = 'کاربران';
 $s_logout_link = 'خروج';
 $s_my_view_link = 'نمای من';
+$s_my_view_title_reported = 'گزارش شده توسط خودم';
 $s_my_view_title_resolved = 'حل شده';
 $s_headline = 'عنوان';
 $s_body = 'بدنه';
@@ -400,7 +644,8 @@ $s_filter_closed = 'بسته‌شده';
 $s_filter_resolved = 'حل شده';
 $s_bytes = 'بايت';
 $s_phpmailer_language = 'fa';
-$s_changelog = 'تغییر سیاهه';
+$s_changelog = 'سیاهه تغییرات';
+$s_changelog_empty_manager = 'اطلاعاتی برای سیاهه تغییرات موجود نیست. زمانی مسائل نمایش داده می شوند که پروژه ها دارای چند نسخه و همچنین مسائل با قسمت "حل شده در نسخه" به وضعیت حل شده در آمده باشند.';
 $s_add_new_relationship_button = 'افزودن';
 $s_replace_relationship_button = 'جایگزینی';
 $s_delete_relationship_button = 'حذف';
