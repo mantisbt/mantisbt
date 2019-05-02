@@ -38,7 +38,7 @@ require_mantis_core();
  * @link http://www.mantisbt.org
  */
 
-class MantisMarkdownTest extends PHPUnit_Framework_TestCase {
+class MantisMarkdownTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * Test If string starts with hash character followed by letters

@@ -28,7 +28,7 @@
  */
 require_once 'MantisCoreBase.php';
 
-use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
+use PHPUnit\Framework\Constraint_IsType as PHPUnit_Type;
 
 
 /**
