@@ -63,8 +63,6 @@ helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), string
 
 if( !is_null( $t_plugin ) ) {
 	plugin_uninstall( $t_plugin );
-} else {
-	plugin_force_uninstall( $f_basename );
 }
 
 form_security_purge( 'manage_plugin_uninstall' );
