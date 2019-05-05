@@ -802,8 +802,15 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 }
 
 /**
- * Search the plugins directory for plugins.
- * @return array Plugin basename/info key/value pairs.
+ * Search the system for plugins.
+ *
+ * Goes through all directories under plugin_path and builds a list of all
+ * plugins found. Those that do not register successfully, (e.g. because of
+ * missing source code) or that are registered in the database but their
+ * code is no longer available, will have a special `MantisInvalid` class
+ * (or one of its child classes) allowing special handling by the caller.
+ *
+ * @return MantisPlugin[] List of found plugins, with basename as key.
  */
 function plugin_find_all() {
 	$t_plugin_path = config_get_global( 'plugin_path' );
@@ -811,6 +818,14 @@ function plugin_find_all() {
 		'MantisCore' => new MantisCorePlugin( 'MantisCore' ),
 	);
 
+	# Get list of installed plugins
+	$t_query = new DbQuery( 'SELECT basename FROM {plugin}' );
+	$t_installed_plugins = array();
+	while( $t_query->fetch() ) {
+		$t_installed_plugins[] = $t_query->value();
+	}
+
+	# Register all plugins found in directory
 	if( $t_dir = opendir( $t_plugin_path ) ) {
 		while( ( $t_file = readdir( $t_dir ) ) !== false ) {
 			if( '.' == $t_file || '..' == $t_file ) {
@@ -826,6 +841,13 @@ function plugin_find_all() {
 		}
 		closedir( $t_dir );
 	}
+
+	# Process missing plugins (i.e. installed without code in plugins directory)
+	$t_missing_plugins = array_diff( $t_installed_plugins, array_keys( $t_plugins ) );
+	foreach( $t_missing_plugins as $t_missing_plugin ) {
+		$t_plugins[$t_missing_plugin] = new MissingPlugin( $t_missing_plugin );
+	}
+
 	return $t_plugins;
 }
 
