@@ -20,7 +20,7 @@
             "url": "https://github.com/mantisbt/securimage"
         }
     ],
-    "license": "GPL v2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "MantisBT Team",
