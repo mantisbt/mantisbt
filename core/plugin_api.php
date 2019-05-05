@@ -907,11 +907,18 @@ function plugin_is_registered( $p_basename ) {
 
 /**
  * Register a plugin with MantisBT.
+ *
  * The plugin class must already be loaded before calling.
+ * If the plugin could not be registered, the returned object will be a special
+ * MantisPlugin child class:
+ * - InvalidPlugin: if the plugin's name or version is not defined
+ * - MissingClassPlugin: if the plugin's source code can't be found or loaded
+ *
  * @param string  $p_basename Plugin classname without 'Plugin' postfix.
  * @param boolean $p_return   Return.
  * @param string  $p_child    Child filename.
- * @return mixed
+ *
+ * @return MantisPlugin
  */
 function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 	global $g_plugin_cache;
@@ -923,21 +930,27 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		# Include the plugin script if the class is not already declared.
 		if( !class_exists( $t_classname ) ) {
 			if( !plugin_include( $p_basename, $p_child ) ) {
-				return null;
+				log_event( LOG_PLUGIN, "Source code for Plugin '$t_basename' not found");
+				return new MissingClassPlugin( $t_basename );
 			}
 		}
 
 		# Make sure the class exists and that it's of the right type.
 		if( class_exists( $t_classname ) && is_subclass_of( $t_classname, 'MantisPlugin' ) ) {
-			plugin_push_current( is_null( $p_child ) ? $p_basename : $p_child );
-
-			$t_plugin = new $t_classname( is_null( $p_child ) ? $p_basename : $p_child );
-
+			plugin_push_current( $t_basename );
+			$t_plugin = new $t_classname( $t_basename );
 			plugin_pop_current();
 
 			# Final check on the class
 			if( is_null( $t_plugin->name ) || is_null( $t_plugin->version ) ) {
-				return null;
+				$t_invalid = new InvalidPlugin( $t_basename);
+				$t_invalid->set( $t_plugin );
+
+				log_event(
+					LOG_PLUGIN,
+					"Plugin '$t_basename' is invalid (undefined Name or Version)"
+				);
+				return $t_invalid;
 			}
 
 			if( $p_return ) {
