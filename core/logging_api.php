@@ -107,12 +107,16 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'file':
 			if( isset( $t_modifiers ) ) {
-				# Detect if the log file is writable; if not, issue a one-time warning
 				static $s_log_writable = null;
-				if( $s_log_writable === null ) {
-					$s_log_writable = is_writable( $t_modifiers );
+
+				if( $s_log_writable ) {
+					error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+				} elseif( $s_log_writable === null ) {
+					# Try to log the event, suppress errors in case the file is not writable
+					$s_log_writable = @error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+
 					if( !$s_log_writable ) {
-						# Display warning message and write it in PHP system log as well.
+						# Display a one-time warning message and write it to PHP system log as well.
 						# Note: to ensure the error is shown regardless of $g_display_error settings,
 						# we manually set the message and log it with error_log_delayed(), which will
 						# cause it to be displayed at page bottom.
@@ -121,9 +125,6 @@ function log_event( $p_level, $p_msg ) {
 						error_log_delayed( $t_message );
 						error_log( 'MantisBT - ' . htmlspecialchars_decode( $t_message ) );
 					}
-				}
-				if( $s_log_writable ) {
-					error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 				}
 			}
 			break;
