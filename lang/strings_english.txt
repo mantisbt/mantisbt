@@ -831,6 +831,10 @@ $s_plugin_key_met = 'plugin ready';
 $s_plugin_key_unmet = 'unmet dependencies';
 $s_plugin_key_dated = 'outdated dependencies';
 $s_plugin_key_upgrade = 'upgrade needed';
+$s_plugin_invalid_description = 'Invalid Plugin';
+$s_plugin_invalid_description_details = 'The following required properties are not defined in the Plugin Base Class: %s.';
+$s_plugin_missing_description = 'Missing Plugin';
+$s_plugin_missing_class_description = 'Missing Plugin Base Class<br>A directory for this Plugin was found, but there was no corresponding Plugin code inside of it. Make sure that the directory\'s name matches the Plugin\'s base name (case sensitive)';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
