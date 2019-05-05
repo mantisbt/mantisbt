@@ -51,14 +51,31 @@ require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'logging_api.php' );
 
-# Cache variables #####
-
+/**
+ * Plugins cache
+ * @global MantisPlugin[] $g_plugin_cache
+ */
 $g_plugin_cache = array();
+
+/**
+ * Plugins priority cache
+ * @global int[] $g_plugin_cache_priority
+ */
 $g_plugin_cache_priority = array();
+
+/**
+ * Plugins protected status cache
+ * @global int[] $g_plugin_cache_protected
+ */
 $g_plugin_cache_protected = array();
+
+/**
+ * Current plugin stack
+ * @global MantisPlugin[] $g_plugin_current
+ */
 $g_plugin_current = array();
 
-# Public API #####
+
 /**
  * Get the currently executing plugin's basename.
  * @return string Plugin basename, or null if no current plugin
