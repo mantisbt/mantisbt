@@ -3,6 +3,7 @@
     "description": "Mantis Bug Tracker",
     "type": "project",
     "require": {
+        "ext-mbstring": "*",
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
         "vboctor/disposable_email_checker": "^3.0",
