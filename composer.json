@@ -3,6 +3,7 @@
     "description": "Mantis Bug Tracker",
     "type": "project",
     "require": {
+        "php": ">=5.5.0",
         "ext-mbstring": "*",
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
