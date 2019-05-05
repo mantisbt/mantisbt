@@ -780,13 +780,19 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 
 /**
  * Uninstall a plugin from the database.
+ * Return without action if given plugin is protected or not installed, unless
+ * it is a missing plugin, in which case we delete it regardless of protected
+ * status.
  * @param MantisPlugin $p_plugin Plugin basename.
+ *
  * @return void
  */
 function plugin_uninstall( MantisPlugin $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
-	if( !plugin_is_installed( $p_plugin->basename ) || plugin_protected( $p_plugin->basename ) ) {
+	if( !$p_plugin instanceof MissingClassPlugin &&
+		( !plugin_is_installed( $p_plugin->basename ) || plugin_protected( $p_plugin->basename ) )
+	) {
 		return;
 	}
 
