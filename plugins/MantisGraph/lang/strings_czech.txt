@@ -43,6 +43,7 @@
  * @author Kuvaly
  * @author Luk
  * @author Marek Kriz
+ * @author Walter Klosse
  */
 
 $s_plugin_graph_title = 'Grafy Mantis';
@@ -90,3 +91,4 @@ $s_plugin_MantisGraph_graph_page = 'Graf historie problémů';
 $s_plugin_MantisGraph_graph_topdev = 'Vývojáři podle vyřešených problémů';
 $s_plugin_MantisGraph_graph_opendev = 'Vývojáři podle otevřených problémů';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Reportéři podle vyřešených problémů';
+$s_plugin_MantisGraph_other_categories = 'ostatní kategorie (%d)';

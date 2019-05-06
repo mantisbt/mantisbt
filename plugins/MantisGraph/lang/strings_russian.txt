@@ -44,6 +44,7 @@
  * @author Kirill
  * @author Lega4
  * @author Lockal
+ * @author Movses
  * @author Nitch
  * @author Okras
  * @author Александр Сигачёв
@@ -95,3 +96,4 @@ $s_plugin_MantisGraph_graph_page = 'График истории инцидент
 $s_plugin_MantisGraph_graph_topdev = 'Лучшие разработчики по исправленным инцидентам';
 $s_plugin_MantisGraph_graph_opendev = 'Разработчики по открытым инцидентам';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Лучшие докладчики исправленных инцидентов';
+$s_plugin_MantisGraph_other_categories = 'другие категории (%d)';
