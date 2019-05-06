@@ -56,6 +56,7 @@
  * @author Rattkin
  * @author Tchoř
  * @author Utar
+ * @author Walter Klosse
  */
 
 $s_actiongroup_menu_move = 'Přesunout';
@@ -732,6 +733,9 @@ $s_create_new_subproject_link = 'Vytvořit nový podprojekt';
 $s_unlink_link = 'Odpojit';
 $s_show_global_users = 'Zobrazit uživatele s globálním přístupem';
 $s_hide_global_users = 'Skrýt uživatele s globálním přístupem';
+$s_review_changes = 'ukázat změny';
+$s_review_changes_confirmation = 'Jste si jist že chcete aplikovat tyto změny?';
+$s_review_changes_empty = 'Nejsou vybrány žádné změny';
 $s_add_project_title = 'Přidat projekt';
 $s_upload_file_path = 'Cesta pro ukládání souborů';
 $s_add_project_button = 'Přidat projekt';
@@ -967,6 +971,8 @@ $s_manage_filter_page_title = 'Správa filtrů';
 $s_manage_filter_edit_page_title = 'Upravit filtr';
 $s_delete_filter_button = 'Smazat';
 $s_apply_filter_button = 'Použít';
+$s_temporary_filter = 'Dočasný filter';
+$s_set_as_persistent_filter = 'Nastavit jako trvalý filter';
 $s_view_simple_link = 'Jednoduchý pohled';
 $s_product_build = 'Sestavení produktu';
 $s_system_profile = 'Popis systému';
@@ -1407,3 +1413,9 @@ $s_dropzone_cancel_upload_confirmation = 'Opravdu chcete stornovat toto nahráv�
 $s_dropzone_remove_file = 'Odstranit soubor';
 $s_dropzone_max_files_exceeded = 'Již nemůžete nahrát žádné další soubory.';
 $s_dropzone_not_supported = 'Dropzone.js nepodporuje starší prohlížeče!';
+$s_save = 'Uložit';
+$s_reset = 'Resetovat';
+$s_persist = 'Trvalé';
+$s_load = 'Načíst';
+$s_apply_changes = 'Použít změny';
+$s_undo = 'Vrátit';

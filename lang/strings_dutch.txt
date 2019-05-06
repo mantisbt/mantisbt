@@ -837,6 +837,7 @@ $s_add_user_button = 'Gebruiker toevoegen';
 $s_project_selection_title = 'Projectselectie';
 $s_remove_link = 'Verwijderen';
 $s_remove_all_link = 'Alle verwijderen';
+$s_remove_project_user_title = 'Verwijder toegang gebruiker van het project';
 $s_updated_user_msg = 'De gebruiker is bijgewerkt.';
 $s_must_enter_category = 'U moet een categorie selecteren.';
 $s_must_enter_severity = 'U moet een impact selecteren.';

@@ -88,3 +88,4 @@ $s_plugin_MantisGraph_graph_page = 'Gráfico do Histórico de Incidências';
 $s_plugin_MantisGraph_graph_topdev = 'Programadores mais ativos por problemas resolvidos';
 $s_plugin_MantisGraph_graph_opendev = 'Programadores por incidências abertas';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Relatores mais ativos por problemas corrigidos';
+$s_plugin_MantisGraph_other_categories = 'outras categorias (%d)';
