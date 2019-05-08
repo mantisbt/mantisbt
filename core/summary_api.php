@@ -1375,22 +1375,32 @@ function summary_by_dates_bug_count( array $p_date_array, array $p_filter = null
 		$t_count_array['open'][$t_ix] = 0;
 		$t_count_array['close'][$t_ix] = 0;
 	}
-	# count is accumulated, and date ranges are ordered in the result
-	$t_count_open = 0;
-	$t_count_closed = 0;
+
+	# The query returns the count specific to each date range (some ranges may
+	# not exist in the query result if the count is 0).
+	# Fill the array with those values first.
 	while( $t_row = $t_query->fetch() ) {
 		$t_index = (int)$t_row['date_range'];
 		if( $t_index >= 0 ) {
 			switch( $t_row['action'] ) {
 				case 'O':
-					$t_count_open += $t_row['range_count'];
-					$t_count_array['open'][$t_index] = $t_count_open;
+					$t_count_array['open'][$t_index] = $t_row['range_count'];
 					break;
 				case 'C':
-					$t_count_closed += $t_row['range_count'];
-					$t_count_array['close'][$t_index] = $t_count_closed;
+					$t_count_array['close'][$t_index] = $t_row['range_count'];
 			}
 		}
+	}
+
+	# This function returns the accumulated count. Process the array to add
+	# each successive date range
+	$t_count_open = 0;
+	$t_count_closed = 0;
+	foreach( $t_date_array as $t_ix => $t_value ) {
+		$t_count_open += $t_count_array['open'][$t_ix];
+		$t_count_array['open'][$t_ix] = $t_count_open;
+		$t_count_closed += $t_count_array['close'][$t_ix];
+		$t_count_array['close'][$t_ix] = $t_count_closed;
 	}
 	return $t_count_array;
 }
