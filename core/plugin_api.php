@@ -720,7 +720,11 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 		if( 2 == $t_status ) {
 			plugin_config_set( 'schema', $i );
 		} else {
-			error_parameters( $i );
+			error_parameters( 
+				$i, 
+				$g_db->ErrorMsg(), 
+				implode( '<br>', $t_sqlarray ) 
+			);
 			trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
 			return null;
 		}
