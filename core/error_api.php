@@ -624,13 +624,24 @@ function error_string( $p_error ) {
 		}
 	}
 
-	# We pad the parameter array to make sure that we don't get errors if
-	#  the caller didn't give enough parameters for the error string
-	$t_padding = array_pad( array(), 10, '' );
+	# Prepare error parameters for display
+	$t_parameters = $g_error_parameters;
+	foreach( $t_parameters as &$t_value ) {
+		# Logic copied from string_html_specialchars(), to enable output of
+		# error messages even if core is not fully initialized.
+		# Modified to allow <br> tags
+		$t_value = preg_replace(
+			[ '/&amp;(#[0-9]+|[a-z]+);/i', '|&lt;(br)\s*/?&gt;|i' ],
+			[ '&$1;', '<&$1>' ],
+			@htmlspecialchars( $t_value, ENT_COMPAT, 'UTF-8' )
+		);
+	}
 
-	# ripped from string_api
-	$t_string = vsprintf( $t_error, array_merge( $g_error_parameters, $t_padding ) );
-	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
+	# We pad the parameter array to make sure that we don't get errors in
+	# case the caller didn't provide enough for the error string.
+	$t_parameters = array_pad( $t_parameters, 10, '' );
+
+	return vsprintf( $t_error, $t_parameters );
 }
 
 /**
