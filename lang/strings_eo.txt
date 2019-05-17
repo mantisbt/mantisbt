@@ -1,0 +1,455 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Esperanto (Esperanto)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Lucas
+ * @author Luckas
+ * @author Michawiki
+ * @author Mihxil
+ * @author Mirin
+ * @author Robin van der Vliet
+ * @author Yekrats
+ */
+
+$s_actiongroup_menu_move = 'Movi';
+$s_actiongroup_menu_copy = 'Kopii';
+$s_actiongroup_menu_assign = 'Asigni';
+$s_actiongroup_menu_close = 'Fermi';
+$s_actiongroup_menu_delete = 'Forigi';
+$s_actiongroup_menu_resolve = 'Solvi';
+$s_actiongroup_menu_update_priority = 'Ŝanĝi prioritaton';
+$s_actiongroup_menu_update_status = 'Ŝanĝi staton';
+$s_actiongroup_menu_update_severity = 'Ŝanĝi severon';
+$s_actiongroup_menu_update_view_status = 'Ŝanĝi videblecon.';
+$s_actiongroup_menu_update_category = 'Ĝisdatigi Kategorion';
+$s_actiongroup_menu_set_sticky = 'Agordi gluiĝemecon.';
+$s_actiongroup_menu_update_field = 'Ĝisdatigi %1$sn';
+$s_actiongroup_menu_update_target_version = 'Ŝanĝi celversion.';
+$s_actiongroup_menu_update_fixed_in_version = 'Ŝanĝi riparversion.';
+$s_actiongroup_menu_update_product_build = 'ŝanĝi produktfaron.';
+$s_actiongroup_menu_add_note = 'Afiŝi Noton';
+$s_actiongroup_menu_attach_tags = 'Afiŝi Etikedojn';
+$s_actiongroup_bugs = 'Elektitaj problemoj.';
+$s_actiongroup_error_issue_is_readonly = 'Problemo estas nurlega.';
+$s_all_projects = 'Ĉiuj Projektoj';
+$s_move_bugs = 'Movi problemojn.';
+$s_operation_successful = 'Ago sukcesis.';
+$s_date_order = 'Ordo de Datoj';
+$s_print_all_bug_page_link = 'Presi Raportojn';
+$s_csv_export = 'Elporti kiel komo-apartigitajn valorojn';
+$s_excel_export = 'Elporti kiel Excel-Dosieron';
+$s_login_anonymously = 'Ensaluti Anonime';
+$s_anonymous = 'Anonimulo';
+$s_jump_to_bugnotes = 'Salti al Notoj';
+$s_jump_to_history = 'Salti al Historio';
+$s_display_history = 'Montri Historion';
+$s_public_project_msg = 'Ĉi tiu projekto estas PUBLIKA. Ĉiuj uzantoj povas atingi ĝin.';
+$s_private_project_msg = 'Ĉi tiu projekto estas PRIVATA. Nur administrantoj kaj permane aldonitaj uzantoj povas atingi ĝin.';
+$s_access_level_project = 'Nivelo de Projekta Aliro';
+$s_print = 'Presi';
+$s_jump = 'Salti';
+$s_copy_users = 'Kopii Uzantojn';
+$s_copy_categories_from = 'Kopii Kategoriojn El';
+$s_copy_categories_to = 'Kopii Kategoriojn Al';
+$s_copy_versions_from = 'Kopii Versiojn El';
+$s_copy_versions_to = 'Kopii Versiojn Al';
+$s_copy_users_from = 'Kopii Uzantojn El';
+$s_copy_users_to = 'Kopii Uzantojn Al';
+$s_bug_history = 'Historio de Problemo';
+$s_field = 'Kampo';
+$s_old_value = 'Malnova Valoro';
+$s_new_value = 'Nova Valoro';
+$s_date_modified = 'Dato de Modifo';
+$s_bugnote = 'Noto';
+$s_change = 'Ŝanĝi';
+$s_bugnote_view_state = 'Viditeco de Noto';
+$s_delete_bugnote_button = 'Forigi noton';
+$s_bug_relationships = 'Rilatoj';
+$s_empty_password_button = 'Uzi nulan pasvorton';
+$s_reauthenticate_title = 'Konfirmi aŭtenton';
+$s_no_category = '(Neniu Kategorio)';
+$s_global_categories = 'Ĝeneralaj kategorioj';
+$s_inherit = 'Heredi Kategoriojn';
+$s_inherit_global = 'Heredi Mallokajn Kategoriojn';
+$s_inherit_parent = 'Heredi Patrajn Kategoriojn';
+$s_update_subproject_inheritance = 'Ĝisdatigi Subprojektan Heredon';
+$s_duplicate_of = 'duplikato de';
+$s_has_duplicate = 'havas duplikaton';
+$s_related_to = 'rilata al';
+$s_dependant_on = 'patro de';
+$s_blocks = 'ido de';
+$s_new_bug = 'Nova Afero';
+$s_bugnote_added = 'Aldonis noton';
+$s_bugnote_edited = 'Noto Redaktiĝis';
+$s_bugnote_deleted = 'Forigis noton';
+$s_summary_updated = 'Ĝisdatigis Resumon';
+$s_description_updated = 'Ĝisdatigis Priskribon';
+$s_file_added = 'Aldonis Dosieron';
+$s_file_deleted = 'Forigis Dosieron';
+$s_bug_deleted = 'Forigis Problemon';
+$s_make_private = 'Malpublikigi';
+$s_make_public = 'Publikigi';
+$s_login_link = 'Ensaluti';
+$s_select_option = '(selekti)';
+$s_move_bugs_conf_msg = 'Movi problemojn al';
+$s_copy_bugs_conf_msg = 'Kopii problemojn al';
+$s_status_bugs_conf_msg = 'Elekti staton de problemo';
+$s_category_bugs_conf_msg = 'Elekti kategorion de problemo';
+$s_close_group_bugs_button = 'Fermi Problemojn';
+$s_delete_group_bugs_button = 'Forigi Problemojn';
+$s_move_group_bugs_button = 'Movi Problemojn';
+$s_copy_group_bugs_button = 'Kopii Problemojn';
+$s_resolve_group_bugs_button = 'Solvi Problemojn';
+$s_status_group_bugs_button = 'Ĝisdatigi Staton';
+$s_category_group_bugs_button = 'Ĝisdatigi Kategorion';
+$s_printing_options_link = 'Opcioj pri Presado';
+$s_bugnote_date = 'Dato de noto';
+$s_bugnote_description = 'Priskribo de noto';
+$s_go_back = 'Reen';
+$s_proceed = 'Daŭrigi';
+$s_logged_in_as = 'Elsalutinta kiel';
+$s_prefix_for_deleted_users = 'uzanto';
+$s_administrator = 'administranto';
+$s_myself = 'Mi mem';
+$s_no_access = 'neniu aliro';
+$s_project_view_state_enum_string = '10:publika,50:privata';
+$s_view_state_enum_string = '10:publika,50:privata';
+$s_sponsorship_enum_string = '0:Ne Pagita,1:Petita,2:Pagita';
+$s_new_account_subject = 'Registrado de konto';
+$s_new_account_username = 'Uzantnomo:';
+$s_new_account_email = 'Retpoŝta adreso:';
+$s_new_account_IP = 'Fora IP-adreso:';
+$s_email_notification_title_for_status_bug_acknowledged = 'La jena problemo estas AGNOSKITA.';
+$s_email_notification_title_for_status_bug_confirmed = 'La jena problemo estas KONFIRMITA.';
+$s_email_notification_title_for_status_bug_resolved = 'La jena problemo estas SOLVITA.';
+$s_email_notification_title_for_status_bug_closed = 'La jena problemo estas FERMITA';
+$s_email_notification_title_for_action_bug_submitted = 'La jena problemo estas SENDITA.';
+$s_email_notification_title_for_action_bug_reopened = 'La jena problemo estas REMALFERMITA.';
+$s_email_notification_title_for_action_bug_deleted = 'La jena problemo estas FORIGITA.';
+$s_email_notification_title_for_action_bug_updated = 'La jena problemo estas ĜISDATIGITA.';
+$s_email_notification_title_for_action_sponsorship_added = 'La jena problemo estas SPONSORATA.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Sponsoreco de la jena problemo ŝanĝiĝis.';
+$s_email_notification_title_for_action_bugnote_submitted = 'NOTO aldoniĝis al ĉi tiu problemo.';
+$s_email_reporter = 'Raportita De';
+$s_email_project = 'Projekto';
+$s_email_bug = 'Identigilo de Problemo';
+$s_email_category = 'Kategorio';
+$s_email_priority = 'Prioritato';
+$s_email_status = 'Stato';
+$s_email_resolution = 'Solvo';
+$s_email_fixed_in_version = 'Riparita en Versio';
+$s_email_target_version = 'Cela Versio';
+$s_email_last_modified = 'Laste Ŝanĝita';
+$s_email_summary = 'Resumo';
+$s_email_description = 'Priskribo';
+$s_email_additional_information = 'Plia Informo';
+$s_email_tag = 'Etikedoj';
+$s_confirm_delete_msg = 'Ĉu vi certas ke vi volas forigi vian konton?';
+$s_delete_account_button = 'Forigi Konton';
+$s_manage_profiles_link = 'Profiloj';
+$s_change_preferences_link = 'Agordoj';
+$s_edit_account_title = 'Redakti Konton';
+$s_username = 'Uzantnomo';
+$s_username_label = 'Uzantnomo';
+$s_realname = 'Vera Nomo';
+$s_realname_label = 'Vera Nomo';
+$s_email = 'Retpoŝta adreso';
+$s_email_label = 'Retpoŝta adreso';
+$s_password = 'Pasvorto';
+$s_new_password = 'Nova pasvorto';
+$s_confirm_password = 'Konfirmi Pasvorton';
+$s_current_password = 'Aktuala Pasvorto';
+$s_access_level = 'Nivelo de Aliro';
+$s_access_level_label = 'Nivelo de Aliro';
+$s_update_user_button = 'Ĝisdatigi Uzanton';
+$s_api_tokens_link = 'API-Ĵetonoj';
+$s_api_token_create_form_title = 'Krei API-Ĵetonon';
+$s_api_token_create_button = 'Krei API-Ĵetonon';
+$s_api_token_name = 'Nomo de Ĵetono';
+$s_api_token_disclose_message = 'Ĵetono uzenda por atingi API-on.';
+$s_api_token_displayed_once = 'Notu ke ĉi tiu ĵetono montriĝos nur unufoje.';
+$s_api_tokens_title = 'API-Ĵetonoj';
+$s_api_token_revoke_button = 'Revoki';
+$s_api_token_never_used = 'Neniam uzita';
+$s_api_token_revoked = 'Revokis API-ĵetonon "%s".';
+$s_last_used = 'Laste Uzita';
+$s_default_account_preferences_title = 'Preferoj pri Konto';
+$s_minutes = 'minutoj';
+$s_seconds = 'sekundoj';
+$s_email_full_issue_details = 'Retpoŝti Plenajn Detalojn pri Problemo';
+$s_language = 'Lingvo';
+$s_font_family = 'Tiparo';
+$s_timezone = 'Horzono';
+$s_edit_profile_title = 'Redakti Profilon';
+$s_platform = 'Platformo';
+$s_additional_description = 'Aldona Priskribo';
+$s_update_profile_button = 'Ĝisdatigi Profilon';
+$s_add_profile_title = 'Aldoni Profilon';
+$s_add_profile_button = 'Aldoni Profilon';
+$s_edit_or_delete_profiles_title = 'Redakti aŭ Forigi Profilojn';
+$s_edit_profile = 'Redakti Profilon';
+$s_delete_profile = 'Forigi Profilon';
+$s_select_profile = 'Elekti Profilon';
+$s_submit_button = 'Sendi';
+$s_profile_updated_msg = 'Ĝisdatigis profilon...';
+$s_my_sponsorship = 'Miaj Sponsoratoj';
+$s_own_sponsored = 'Problemoj Sponsorataj de Vi:';
+$s_no_own_sponsored = 'Vi ne sponsoras ajnan problemon.';
+$s_sponsor = 'Sponsoro';
+$s_sponsor_verb = 'Sponsoro';
+$s_amount = 'Kvanto';
+$s_total_paid = 'Totalo Pagita';
+$s_sponsor_show = 'Montri Ĉion';
+$s_new_bug_title = 'Nova Problemo';
+$s_confirmed_bug_title = 'Konfirmi Problemon';
+$s_new_bug_button = 'Nova Problemo';
+$s_acknowledged_bug_button = 'Agnoski Problemon';
+$s_close_immediately = 'Tuj fermi:';
+$s_closed_bug_title = 'Fermi Problemon';
+$s_delete_bug_sure_msg = 'Ĉu vi certas ke vi volas forigi ĉi tiun problemon?';
+$s_delete_bug_button = 'Forigi';
+$s_select_file = 'Elekti Dosieron';
+$s_select_files = 'Elekti Dosierojn';
+$s_upload_file_button = 'Alŝuti Dosieron';
+$s_upload_files_button = 'Alŝuti Dosierojn';
+$s_bug_reopened_msg = 'Remalfermis problemon...';
+$s_reopen_add_bugnote_title = 'Aldoni Noton pri Kialo de Remalfermiĝo de Problemo';
+$s_resolved_bug_title = 'Solvi Problemon';
+$s_resolved_bug_button = 'Solvi Problemon';
+$s_bugnote_add_resolve_button = 'Aldoni Noton';
+$s_from = 'De';
+$s_to = 'Al';
+$s_bug_send_button = 'Sendi';
+$s_back_to_bug_link = 'Reen Al Problemo';
+$s_id = 'Identigilo';
+$s_category = 'Kategorio';
+$s_reporter = 'Raportinto';
+$s_os = 'Mastrumilo';
+$s_os_version = 'Versio de Mastrumilo';
+$s_product_version = 'Versio de Produkto';
+$s_fixed_in_version = 'Riparita en Versio';
+$s_target_version = 'Cela Versio';
+$s_votes = 'Voĉdonoj';
+$s_summary = 'Resumo';
+$s_description = 'Priskribo';
+$s_profile = 'Profilo';
+$s_view_revisions = 'Vidi Reviziojn';
+$s_revision = 'Revizio';
+$s_all_revisions = 'Ĉiuj Revizioj';
+$s_back_to_issue = 'Reen al Problemo';
+$s_activities_title = 'Aktivecoj';
+$s_bug_notes_title = 'Notoj';
+$s_edit_bugnote_title = 'Redakti Noton';
+$s_delete_link = 'Forigi';
+$s_add_bugnote_title = 'Aldoni Noton';
+$s_add_bugnote_button = 'Aldoni Noton';
+$s_bugnote_edit_link = 'Redakti';
+$s_closed_bug_button = 'Fermi Problemon';
+$s_hide_content = 'Kaŝi Enhavon';
+$s_show_content = 'Montri Enhavon';
+$s_log_page_number = 'Numero';
+$s_log_page_event = 'Evento';
+$s_click_to_login = 'Ensaluti';
+$s_login_title = 'Ensaluti';
+$s_choose_project = 'Elekti Projekton';
+$s_login_button = 'Ensaluti';
+$s_select_project_button = 'Elekti Projekton';
+$s_archives = 'Arkivoj';
+$s_created_user_part1 = 'Kreis uzanton';
+$s_create_new_account_title = 'Krei novan konton';
+$s_verify_password = 'Konfirmi Pasvorton';
+$s_enabled = 'Ŝaltita';
+$s_enabled_label = 'Ŝaltita';
+$s_protected = 'Protektata';
+$s_protected_label = 'Protektata';
+$s_create_user_button = 'Krei Uzanton';
+$s_manage_tags_link = 'Mastrumi Etikedojn';
+$s_create_new_account_link = 'Krei novan konton';
+$s_projects_link = 'Projektoj';
+$s_documentation_link = 'Dokumentaro';
+$s_new_accounts_title = 'Novaj Kontoj';
+$s_1_week_title = '1 Semajno';
+$s_last_visit = 'Lasta Vizito';
+$s_last_visit_label = 'Lasta Vizito:';
+$s_edit_user_link = 'Redakti Uzanton';
+$s_message = 'Mesaĝo';
+$s_current_status = 'Aktuala Stato';
+$s_next_status = 'Sekva Stato';
+$s_workflow = 'Laborfluo';
+$s_threshold = 'Sojlo';
+$s_status_level = 'Stato';
+$s_access_levels = 'Niveloj de Aliro';
+$s_edit_own_bugnotes = 'Redakti proprajn notojn';
+$s_delete_others_bugnotes = 'Forigi aliulajn notojn';
+$s_delete_own_bugnotes = 'Forigi proprajn notojn';
+$s_in_project = 'en projekto';
+$s_delete_config_button = 'Forigi Agordojn';
+$s_configuration_option_type = 'Tipo';
+$s_configuration_option_value = 'Valoro';
+$s_plugin_description = 'Priskribo';
+$s_plugin_url = 'Retejo:';
+$s_plugin_priority = 'Prioritato';
+$s_plugin_protected = 'Protektata';
+$s_plugin_install = 'Instali';
+$s_delete_category_button = 'Forigi Kategorion';
+$s_edit_project_category_title = 'Redakti Projektan Kategorion';
+$s_add_subproject_title = 'Aldoni Subprojekton';
+$s_project_deleted_msg = 'Sukcese forigis projekton...';
+$s_project_delete_button = 'Forigi Projekton';
+$s_edit_project_title = 'Redakti Projekton';
+$s_project_name = 'Nomo de Projekto';
+$s_project_name_label = 'Nomo de Projekto:';
+$s_view_status = 'Vidi Staton';
+$s_public = 'publika';
+$s_private = 'privata';
+$s_update_project_button = 'Ĝisdatigi Projekton';
+$s_delete_project_button = 'Forigi Projekton';
+$s_categories = 'Kategorioj';
+$s_update = 'Ĝisdatigi';
+$s_subprojects = 'Subprojektoj';
+$s_add_subproject = 'Aldoni kiel Subprojekton';
+$s_create_new_subproject_link = 'Krei Novan Subprojekton';
+$s_unlink_link = 'Malligi';
+$s_add_project_title = 'Aldoni Projekton';
+$s_add_project_button = 'Aldoni Projekton';
+$s_projects_title = 'Projektoj';
+$s_projects_title_label = 'Projektoj';
+$s_name = 'Nomo';
+$s_delete_version_button = 'Forigi Version';
+$s_update_version_button = 'Ĝisdatigi Version';
+$s_released = 'Eldonita';
+$s_not_released = 'Ne Jam Eldonita';
+$s_account_deleted_msg = 'Forigis konton...';
+$s_edit_user_title = 'Redakti Uzanton';
+$s_show_all_users = 'Ĉiuj';
+$s_users_unused = 'Ne uzataj';
+$s_users_new = 'Novaj';
+$s_email_user_updated_subject = 'Ĝisdatigis konton';
+$s_view_bugs_link = 'Vidi Problemojn';
+$s_report_bug_link = 'Raporti Problemon';
+$s_changelog_link = 'Protokolo de Ŝanĝoj';
+$s_summary_link = 'Resumo';
+$s_account_link = 'Mia Konto';
+$s_users_link = 'Uzantoj';
+$s_manage_link = 'Mastrumi';
+$s_docs_link = 'Dokumentoj';
+$s_logout_link = 'Elsaluti';
+$s_my_view_link = 'Mia Vido';
+$s_invite_users = 'Inviti Uzantojn';
+$s_my_view_title_resolved = 'Solvitaj';
+$s_add_news_title = 'Aldoni Novaĵojn';
+$s_post_to = 'Afiŝi al';
+$s_post_news_button = 'Afiŝi Novaĵojn';
+$s_edit_or_delete_news_title = 'Redakti aŭ Forigi Novaĵojn';
+$s_edit_post = 'Redakti Afiŝon';
+$s_delete_post = 'Forigi Afiŝon';
+$s_select_post = 'Elekti Afiŝon';
+$s_back_link = 'Reen';
+$s_file_uploaded_msg = 'Sukcese alŝutis dosieron.';
+$s_upload_file_title = 'Alŝuti Dosieron';
+$s_title = 'Titolo';
+$s_project_file_deleted_msg = 'Forigis projektan dosieron.';
+$s_filename = 'Dosiernomo';
+$s_filename_label = 'Dosiernomo:';
+$s_file_update_button = 'Ĝisdatigi Dosieron';
+$s_file_delete_button = 'Forigi Dosieron';
+$s_project_documentation_title = 'Dokumentaro pri Projekto';
+$s_user_documentation = 'Dokumentaro pri Uzanto';
+$s_project_documentation = 'Dokumentaro pri Projekto';
+$s_add_file = 'Aldoni Dosieron';
+$s_remove_user_button = 'Forigi Uzanton';
+$s_report_more_bugs = 'Raporti Pliajn Problemojn';
+$s_submit_report_button = 'Sendi Problemon';
+$s_by_project = 'Laŭ Projekto';
+$s_by_status = 'Laŭ Stato';
+$s_by_priority = 'Laŭ Prioritato';
+$s_by_developer = 'Laŭ Evoluiganto';
+$s_by_reporter = 'Laŭ Raportinto';
+$s_opened = 'Malfermitaj';
+$s_resolved = 'Solvitaj';
+$s_total = 'Sumo';
+$s_most_active = 'Plej Aktivaj';
+$s_score = 'Poentaro';
+$s_days = 'Tagoj';
+$s_average_time = 'Mezuma daŭro';
+$s_total_time = 'Totala daŭro';
+$s_show = 'Montri';
+$s_viewing_bugs_title = 'Vidante Problemojn';
+$s_issue_id = 'Problemo N-ro';
+$s_note_user_id = 'Noto Far';
+$s_current = 'aktuala';
+$s_search = 'Serĉi';
+$s_next = 'Sekva';
+$s_first = 'Unuen';
+$s_last = 'Lasten';
+$s_yes = 'Jes';
+$s_no = 'Ne';
+$s_ok = 'Ek!';
+$s_query_name = 'Nomo de Filtrilo';
+$s_query_name_label = 'Nomo de Filtrilo:';
+$s_publish = 'Publikigi';
+$s_add_user_to_monitor = 'Aldoni';
+$s_bug_view_title = 'Vidi Detalojn de Problemo';
+$s_bug = 'Problemo';
+$s_add_new_relationship_button = 'Aldoni';
+$s_this_bug = 'Aktuala problemo';
+$s_issues = 'Problemoj';
+$s_report_issue = 'Raporti problemon';
+$s_move_issue = 'Movi problemon';
+$s_reopen_issue = 'Remalfermi problemon';
+$s_sponsor_issue = 'Sponsori problemon';
+$s_total_time_for_issue = 'Totala tempo por problemo = %1$s';
+$s_month_january = 'januaro';
+$s_month_february = 'februaro';
+$s_month_march = 'marto';
+$s_month_april = 'aprilo';
+$s_month_may = 'majo';
+$s_month_june = 'junio';
+$s_month_july = 'julio';
+$s_month_august = 'aŭgusto';
+$s_month_september = 'septembro';
+$s_month_october = 'oktobro';
+$s_month_november = 'novembro';
+$s_month_december = 'decembro';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Atingo estas malpermesita.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Noto ne troviĝis.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problemo %1$d ne estas trovebla.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nevalida valoro por kampo "%1$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorio ne troviĝis.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versio "%1$s" ne troviĝis.';
