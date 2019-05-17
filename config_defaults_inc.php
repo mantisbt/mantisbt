@@ -750,6 +750,34 @@ $g_email_dkim_passphrase = '';
 $g_email_dkim_identity = 'noreply@example.com';
 
 /**
+* Path to mail certification file
+*
+* @global string $g_cert_filename
+*/
+$g_cert_filename = '';
+
+/**
+* Path to mail private key file
+*
+* @global string $g_key_filename
+*/
+$g_key_filename = '';
+
+/**
+* mail private key pass
+*
+* @global string $g_key_pass
+*/
+$g_key_pass = '';
+
+/**
+* Path to mail extra certification file
+*
+* @global string $g_sign_extracerts_file
+*/
+$g_sign_extracerts_file = '';
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action

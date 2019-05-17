@@ -1320,6 +1320,8 @@ function email_send( EmailData $p_email_data ) {
 
 			$t_mail->Port = config_get( 'smtp_port' );
 
+			$t_mail->sign(config_get_global('cert_filename'), config_get_global('key_filename'), config_get_global('key_pass'), config_get_global('extracerts_filename '));
+
 			break;
 	}
 
