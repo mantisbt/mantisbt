@@ -43,6 +43,7 @@
 					category_id,
 					due_date,
 					handler,
+					monitors,
 					os,
 					os_version,
 					platform,
@@ -64,6 +65,17 @@
 					not listed above cannot be shown on the bug report
 					page. Visibility of custom fields is handled via the
 					Manage =&gt; Manage Custom Fields administrator page.
+				</para>
+				<para>Note that <emphasis>monitors</emphasis> is not an actual
+					field; adding it to the list will let authorized reporters
+					(see <emphasis>monitor_add_others_bug_threshold</emphasis>
+					in <xref linkend="admin.config.misc" />)
+					select users to add to the issue's monitoring list.
+					Monitors will only be notified of the submission if both
+					their e-mail preferencess and the <emphasis>notify_flags</emphasis>
+					configuration (see <xref linkend="admin.config.email" />)
+					allows it, i.e.
+					<programlisting>$g_notify_flags['new']['monitor'] = ON;</programlisting>
 				</para>
 				<para>
 					This setting can be set on a per-project basis by

@@ -155,6 +155,16 @@ if( $t_handler_id != NO_USER ) {
 	$t_issue['handler'] = array( 'id' => $t_handler_id );
 }
 
+$t_monitors = gpc_get_int_array( 'monitors', array() );
+if( $t_monitors ) {
+	# The API expects a list of arrays with 'id' as key
+	$t_list = array();
+	foreach( $t_monitors as $t_monitor_id ) {
+		$t_list[] = array( 'id' => $t_monitor_id );
+	}
+	$t_issue['monitors'] = $t_list;
+}
+
 $t_view_state = gpc_get_int( 'view_state', 0 );
 if( $t_view_state != 0 ) {
 	$t_issue['view_state'] = array( 'id' => $t_view_state );
