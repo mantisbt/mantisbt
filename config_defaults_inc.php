@@ -461,10 +461,12 @@ $g_enable_email_notification	= ON;
 $g_email_notifications_verbose = OFF;
 
 /**
- * The following two config options allow you to control who should get email
- * notifications on different actions/statuses.  The first option
- * (default_notify_flags) sets the default values for different user
- * categories.  The user categories are:
+ * Sets the default email notifications values for different user categories.
+ *
+ * In combination with *notify_flags* (see below), this config option controls
+ * who should get email notifications on different actions/statuses.
+ *
+ * The user categories are:
  *
  *      'reporter': the reporter of the bug
  *       'handler': the handler of the bug
@@ -492,18 +494,21 @@ $g_email_notifications_verbose = OFF;
  *        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', etc.
  *                     this list corresponds to $g_status_enum_string
  *
- * If you wanted to have all developers get notified of new bugs you might add
- * the following lines to your config file:
+ * Examples:
+ * - If you wanted to have all developers get notified of new bugs you might
+ *   add the following lines to your config file:
  *
- * $g_notify_flags['new']['threshold_min'] = DEVELOPER;
- * $g_notify_flags['new']['threshold_max'] = DEVELOPER;
+ *   $g_notify_flags['new']['threshold_min'] = DEVELOPER;
+ *   $g_notify_flags['new']['threshold_max'] = DEVELOPER;
  *
- * You might want to do something similar so all managers are notified when a
- * bug is closed.  If you did not want reporters to be notified when a bug is
- * closed (only when it is resolved) you would use:
+ * - You might want to do something similar so all managers are notified when a
+ *   bug is closed.
+ * - If you did not want reporters to be notified when a bug is closed
+ *   (only when it is resolved) you would use:
  *
- * $g_notify_flags['closed']['reporter'] = OFF;
+ *   $g_notify_flags['closed']['reporter'] = OFF;
  *
+ * @see $g_notify_flags
  * @global array $g_default_notify_flags
  */
 
@@ -519,27 +524,30 @@ $g_default_notify_flags = array(
 );
 
 /**
- * We don't need to send these notifications on new bugs
- * (see above for info on this config option)
- * @todo (though I'm not sure they need to be turned off anymore
- *      - there just won't be anyone in those categories)
- *      I guess it serves as an example and a placeholder for this
- *      config option
+ * Sets notifications overrides for specific actions/statuses.
+ *
+ * See above for detailed information. As an example of how to use this config
+ * option, the default setting
+ * - disables bugnotes notifications on new bugs (not needed in this case)
+ * - disables all notifications for monitoring event, except explicit
+ * example of how to use this config option.
+
  * @see $g_default_notify_flags
  * @global array $g_notify_flags
  */
-$g_notify_flags['new'] = array(
-	'bugnotes' => OFF,
-);
-
-$g_notify_flags['monitor'] = array(
-	'reporter'      => OFF,
-	'handler'       => OFF,
-	'monitor'       => OFF,
-	'bugnotes'      => OFF,
-	'explicit'      => ON,
-	'threshold_min' => NOBODY,
-	'threshold_max' => NOBODY
+$g_notify_flags = array(
+	'new' => array(
+		'bugnotes'      => OFF,
+	),
+	'monitor' => array(
+		'reporter'      => OFF,
+		'handler'       => OFF,
+		'monitor'       => OFF,
+		'bugnotes'      => OFF,
+		'explicit'      => ON,
+		'threshold_min' => NOBODY,
+		'threshold_max' => NOBODY,
+	),
 );
 
 /**
