@@ -210,7 +210,10 @@ $t_show_eta = in_array( 'eta', $t_fields );
 $t_show_severity = in_array( 'severity', $t_fields );
 $t_show_priority = in_array( 'priority', $t_fields );
 $t_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields ) && access_has_project_level( config_get( 'update_bug_assign_threshold' ) );
+$t_show_handler = in_array( 'handler', $t_fields )
+	&& access_has_project_level( config_get( 'update_bug_assign_threshold' ) );
+$t_show_monitors = in_array( 'monitors', $t_fields )
+	&& access_has_project_level( config_get( 'monitor_add_others_bug_threshold' ) );
 $t_show_profiles = config_get( 'enable_profiles' );
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
 $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
@@ -486,6 +489,19 @@ if( $t_show_attachments ) {
 			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id" class="input-sm">
 				<option value="0" selected="selected"></option>
 				<?php print_assign_to_option_list( $f_handler_id ) ?>
+			</select>
+		</td>
+	</tr>
+<?php } ?>
+
+<?php if( $t_show_monitors ) { ?>
+	<tr>
+		<th class="category">
+			<label for="monitors"><?php echo lang_get( 'monitored_by' ) ?></label>
+		</th>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> id="monitors" name="monitors[]" class="input-sm" multiple>
+				<?php print_user_option_list( NO_USER, $t_project_id, config_get( 'monitor_bug_threshold' ) ) ?>
 			</select>
 		</td>
 	</tr>

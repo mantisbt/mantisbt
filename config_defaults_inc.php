@@ -530,7 +530,6 @@ $g_default_notify_flags = array(
  */
 $g_notify_flags['new'] = array(
 	'bugnotes' => OFF,
-	'monitor'  => OFF
 );
 
 $g_notify_flags['monitor'] = array(
@@ -2385,6 +2384,7 @@ $g_enable_product_build = OFF;
  *   - category_id
  *   - due_date
  *   - handler
+ *   - monitors
  *   - os
  *   - os_version
  *   - platform
@@ -2403,6 +2403,13 @@ $g_enable_product_build = OFF;
  * listed in this option. Fields not listed above cannot be shown on the bug
  * report page. Visibility of custom fields is handled via the Manage =>
  * Manage Custom Fields administrator page.
+ *
+ * Note that 'monitors' is not an actual field; adding it to the list will let
+ * authorized reporters select users to add to the issue's monitoring list.
+ * Monitors will only be notified of the submission if both their e-mail prefs
+ * and the flags allow it (i.e. `$g_notify_flags['new']['monitor'] = ON`).
+ * @see $g_monitor_add_others_bug_threshold
+ * @see $g_notify_flags
  *
  * This setting can be set on a per-project basis by using the
  * Manage => Manage Configuration administrator page.
