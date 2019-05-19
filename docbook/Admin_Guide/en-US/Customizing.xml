@@ -773,21 +773,20 @@ $g_notify_flags['new'] = array(
 	'threshold_max' => MANAGER,
 );
 </programlisting>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>How do I replace the $g_to_email configuration variable
-                        to log all messages to an email logger.
-                    </para>
-                    <para>You will need to create a
-                        dummy user with the appropriate access level for the notices you
-                        want to log. Once this user is added to projects, they will receive
-                        mail using the appropriate rules.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
-    </section>
+					</para>
+				</listitem>
+				<listitem>
+					<para>How do I send all messages to an email logger.
+					</para>
+					<para>You will need to create a dummy user with the
+						appropriate access level for the notices you want to log.
+						Once this user is added to projects, they will receive
+						mail using the appropriate rules.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
 
 	<section id="admin.customize.status">
 		<title>Customizing Status Values</title>
