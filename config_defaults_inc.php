@@ -752,30 +752,30 @@ $g_email_dkim_identity = 'noreply@example.com';
 /**
 * Path to mail certification file
 *
-* @global string $g_cert_filename
+* @global string $g_email_signing_cert_filename
 */
-$g_cert_filename = '';
+$g_email_signing_cert_filename = '';
 
 /**
 * Path to mail private key file
 *
-* @global string $g_key_filename
+* @global string $g_email_signing_key_filename
 */
-$g_key_filename = '';
+$g_email_signing_key_filename = '';
 
 /**
 * mail private key pass
 *
-* @global string $g_key_pass
+* @global string $g_email_signing_key_password
 */
-$g_key_pass = '';
+$g_email_signing_key_password = '';
 
 /**
 * Path to mail extra certification file
 *
-* @global string $g_sign_extracerts_file
+* @global string $g_email_signing_sign_extracerts_file
 */
-$g_sign_extracerts_file = '';
+$g_email_signing_sign_extracerts_file = '';
 
 /**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
@@ -4370,7 +4370,8 @@ $g_global_settings = array(
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
-	'impersonate_user_threshold', 'email_retry_in_days'
+	'impersonate_user_threshold', 'email_retry_in_days', 'email_signing_cert_filename',
+	'email_signing_key_filename', 'email_signing_key_password', 'email_signing_extracerts_filename',
 );
 
 /**
