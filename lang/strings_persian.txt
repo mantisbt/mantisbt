@@ -503,6 +503,10 @@ $s_warning_default_administrator_account_present = '<strong>هشدار:</strong>
 $s_warning_admin_directory_present = '<strong>هشدار:</strong> پوشه "admin" باید حذف شود، یا دسترسی به آن محدود شود.';
 $s_warning_change_setting = '<strong>هشدار:</strong> "%1$s" برای مقدار پیش‌فرض خودش تنظیم نشده (%2$s).';
 $s_warning_integrity_hazard = 'این عملیات باعث می‌شود که MantisBT بدون اینکه به خطاها اهمیتی دهد به کار خود ادامه دهد و ممکن است به بعضی مشکلات سیستمی/اطلاعاتی منجر شود.';
+$s_warning_debug_email = '<strong>هشدار:</strong> "<code>debug_email</code>" به مقدار <code>OFF</code> تنظیم نشده است، همه‌ی اعلان‌های ایمیل به "%1$s" ارسال خواهد شد.';
+$s_error_database_no_schema_version = '<strong>خطا:</strong> شمای پایگاه داده 0 است. این خطا موقعی رخ می‌دهد که یا پایگاه داده خراب شده یا مقدار "database_version" را نمی‌تواند از جدول پیکربندی بخواند یا ساختار پایگاه داده برای نسخه‌ی قدیمی MantisBT (قبل از 1.0.0) است.';
+$s_error_database_version_out_of_date_2 = '<strong>هشدار:</strong> احتمال دارد ساختار پایگاه داده قدیمی باشد. لطفا قبل از اینکه وارد شوید پایگاه داده را <a href="admin/install.php">ارتقا</a> دهید.';
+$s_error_code_version_out_of_date = '<strong>هشدار:</strong> ساختار پایگاه داده جدیدتر از برنامه نصب شده است. لطفا برنامه را ارتقا دهید.';
 $s_login_page_info = 'به برنامه پیگیری مسائل خوش آمدید.';
 $s_login_title = 'ورود';
 $s_save_login = 'ورود مرا به سیستم حفظ کن';
