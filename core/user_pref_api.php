@@ -193,17 +193,17 @@ class UserPreferences {
 	'default_profile' => array( 'default_profile', 'int' ),
 	'default_project' => array( 'default_project', 'int' ),
 	'refresh_delay' => array( 'default_refresh_delay', 'int' ),
-	'redirect_delay' => array( 'default_redirect_delay', 'int' ),
+	'redirect_delay' => array( 'default_redirect_delay', 'bool' ),
 	'bugnote_order' => array( 'default_bugnote_order', 'string' ),
-	'email_on_new' => array( 'default_email_on_new', 'int' ),
-	'email_on_assigned' => array(  'default_email_on_assigned', 'int' ),
-	'email_on_feedback' => array(  'default_email_on_feedback', 'int' ),
-	'email_on_resolved' => array(  'default_email_on_resolved', 'int' ),
-	'email_on_closed' => array(  'default_email_on_closed', 'int' ),
-	'email_on_reopened' => array(  'default_email_on_reopened', 'int' ),
-	'email_on_bugnote' => array(  'default_email_on_bugnote', 'int' ),
-	'email_on_status' => array(  'default_email_on_status', 'int' ),
-	'email_on_priority' => array(  'default_email_on_priority', 'int' ),
+	'email_on_new' => array( 'default_email_on_new', 'bool' ),
+	'email_on_assigned' => array(  'default_email_on_assigned', 'bool' ),
+	'email_on_feedback' => array(  'default_email_on_feedback', 'bool' ),
+	'email_on_resolved' => array(  'default_email_on_resolved', 'bool' ),
+	'email_on_closed' => array(  'default_email_on_closed', 'bool' ),
+	'email_on_reopened' => array(  'default_email_on_reopened', 'bool' ),
+	'email_on_bugnote' => array(  'default_email_on_bugnote', 'bool' ),
+	'email_on_status' => array(  'default_email_on_status', 'bool' ),
+	'email_on_priority' => array(  'default_email_on_priority', 'bool' ),
 	'email_on_new_min_severity' => array(  'default_email_on_new_minimum_severity', 'int' ),
 	'email_on_assigned_min_severity' => array(  'default_email_on_assigned_minimum_severity', 'int' ),
 	'email_on_feedback_min_severity' => array(  'default_email_on_feedback_minimum_severity', 'int' ),
@@ -259,6 +259,8 @@ class UserPreferences {
 			$this->$p_string = config_get( self::$_default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
 		}
 		switch( self::$_default_mapping[$p_string][1] ) {
+			case 'bool':
+				return (bool)(int)($this->$p_string);
 			case 'int':
 				return (int)($this->$p_string);
 			default:
@@ -272,11 +274,26 @@ class UserPreferences {
 	 * @return mixed
 	 */
 	function Get( $p_string ) {
+	/*	if( is_null( $this->$p_string ) ) {
+			$this->$p_string = config_get( self::$_default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
+		}
+		return $this->$p_string;*/
+		
 		if( is_null( $this->$p_string ) ) {
 			$this->$p_string = config_get( self::$_default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		return $this->$p_string;
+		switch( self::$_default_mapping[$p_string][1] ) {
+			case 'bool':
+				return (bool)(int)($this->$p_string);
+			case 'int':
+				return (int)($this->$p_string);
+			default:
+				return $this->$p_string;
+		}
+		
 	}
+
+	
 }
 
 $g_cache_user_pref = array();
