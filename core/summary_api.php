@@ -1154,7 +1154,12 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	# (e.g. bug is CLOSED, not RESOLVED). The linkage to the history field
 	# will look up the most recent 'resolved' status change and return it as well
 
-	$t_stats = array();
+	$t_stats = array(
+		'bug_id'       => 0,
+		'largest_diff' => 0,
+		'total_time'   => 0,
+		'average_time' => 0,
+		);
 
 	$t_sql_inner = ' FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id  AND h.type = :hist_type'
