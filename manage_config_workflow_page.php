@@ -553,33 +553,36 @@ echo "\n\n";
 access_begin( lang_get( 'access_levels' ) );
 access_row();
 access_end();
+echo '</div>';
 
 if( $g_can_change_flags ) {
+	echo '<div class="col-md-12">';
 	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
-	echo '</form>' . "\n";
 
+	# Deported submit button for separate form defined below
+	# included here to simplify page layout
 	if( 0 < count( $g_overrides ) ) {
-		echo '<div class="pull-right">';
-		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
-		echo '<fieldset>' . "\n";
-		echo form_security_field( 'manage_config_revert' );
-		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
-		echo '<input name="project" type="hidden" value="' . $t_project . '" />';
-		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'" />';
-		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="';
-		if( ALL_PROJECTS == $t_project ) {
-			echo lang_get( 'revert_to_system' );
-		} else {
-			echo lang_get( 'revert_to_all_project' );
-		}
-		echo '" />' . "\n";
-		echo '</fieldset>' . "\n";
-		echo '</form></div>' . "\n";
+		echo '<button form="mail_config_action" class="btn btn-primary btn-white btn-round">'
+			. lang_get( ALL_PROJECTS == $t_project ? 'revert_to_system' : 'revert_to_all_project' )
+			. "</button>\n";
 	}
-
-
-} else {
-	echo '</form>' . "\n";
+	echo '</div>';
 }
-echo '</div>';
+echo '</form>' . "\n";
+
+# Secondary form to revert config - submit button is defined above
+if( $g_can_change_flags && 0 < count( $g_overrides ) ) {
+?>
+<form id="mail_config_action" method="post" action="manage_config_revert.php">
+	<fieldset>
+		<?php echo form_security_field( 'manage_config_revert' ); ?>
+		<input name="revert" type="hidden" value="<?php echo implode( ',', $g_overrides ) ?>" />
+		<input name="project" type="hidden" value="<?php echo $t_project ?>" />
+		<input name="return" type="hidden" value="<?php echo string_attribute( form_action_self() ) ?>" />
+	</fieldset>
+</form>
+
+<?php
+}
+
 layout_page_end();
