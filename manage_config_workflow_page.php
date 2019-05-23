@@ -557,7 +557,9 @@ echo '</div>';
 
 if( $g_can_change_flags ) {
 	echo '<div class="col-md-12">';
-	echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
+	echo '<button class="btn btn-primary btn-white btn-round">'
+		. lang_get( 'change_configuration' )
+		. "</button>\n";
 
 	# Deported submit button for separate form defined below
 	# included here to simplify page layout
