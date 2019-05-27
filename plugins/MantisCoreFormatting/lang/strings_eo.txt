@@ -41,6 +41,11 @@
  * @author Mirin
  */
 
+$s_plugin_format_title = 'MantisBT-Aranĝado';
 $s_plugin_format_config = 'Agordo';
+$s_plugin_format_process_text = 'Traktado de Teksto';
+$s_plugin_format_process_urls = 'Traktado de Retadreso';
+$s_plugin_format_process_buglinks = 'Internaj ligiloj de MantisBT (Problemoj kaj Notoj pri Problemoj)';
+$s_plugin_format_process_markdown = 'Traktado de Markdown';
 $s_plugin_format_enabled = 'Ŝaltita';
 $s_plugin_format_disabled = 'Malŝaltita';
