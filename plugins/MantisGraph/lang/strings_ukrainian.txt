@@ -39,6 +39,7 @@
  * @file
  *
  * @author Andriykopanytsia
+ * @author Movses
  * @author Piramidion
  * @author SteveR
  */
@@ -88,3 +89,4 @@ $s_plugin_MantisGraph_graph_page = 'Графік історії проблем';
 $s_plugin_MantisGraph_graph_topdev = 'Найкращі розробники за кількістю виправлених проблем';
 $s_plugin_MantisGraph_graph_opendev = 'Розробники за відкритими проблемами';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найкращі доповідачі за виправленими проблемами';
+$s_plugin_MantisGraph_other_categories = 'інші категорії (%d)';

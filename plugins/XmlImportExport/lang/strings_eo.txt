@@ -42,6 +42,7 @@
  */
 
 $s_plugin_XmlImportExport_title = 'Problemoj pri Enportado/Elportado';
+$s_plugin_XmlImportExport_description = 'Aldoni XML-bazan enportadan kaj elportadan kapablojn al MantisBT.';
 $s_plugin_XmlImportExport_import = 'Problemoj pri enportado';
 $s_plugin_XmlImportExport_export = 'XML-Elporto';
 $s_plugin_XmlImportExport_import_threshold = 'Problemoj pri enportado';
@@ -49,6 +50,7 @@ $s_plugin_XmlImportExport_export_threshold = 'Problemoj pri elportado';
 $s_plugin_XmlImportExport_action_update = 'Ĝisdatigi';
 $s_plugin_XmlImportExport_importing_in_project = 'Enportante problemojn en projekton: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Opcioj pri enportado';
+$s_plugin_XmlImportExport_default_strategy = 'Implicita strategio por konvertado:';
 $s_plugin_XmlImportExport_renumber = 'Renombri';
 $s_plugin_XmlImportExport_link = 'Ligilo';
 $s_plugin_XmlImportExport_link_desc = 'Konverti en ligilon al la originala ero';
@@ -56,3 +58,4 @@ $s_plugin_XmlImportExport_disable = 'Malŝalti';
 $s_plugin_XmlImportExport_disable_desc = 'Malŝalti la ligilon';
 $s_plugin_XmlImportExport_fallback_category = 'Implicita kategorio:';
 $s_plugin_XmlImportExport_keep_same_category = 'Provi uzadon de la sama kategorio';
+$s_plugin_XmlImportExport_error_no_xml = 'ne troviĝis etendaĵoj xmlreader kaj xmlwriter';
