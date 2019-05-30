@@ -1154,7 +1154,12 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	# (e.g. bug is CLOSED, not RESOLVED). The linkage to the history field
 	# will look up the most recent 'resolved' status change and return it as well
 
-	$t_stats = array();
+	$t_stats = array(
+		'bug_id'       => 0,
+		'largest_diff' => 0,
+		'total_time'   => 0,
+		'average_time' => 0,
+		);
 
 	$t_sql_inner = ' FROM {bug} b LEFT JOIN {bug_history} h'
 		. ' ON b.id = h.bug_id  AND h.type = :hist_type'
@@ -1175,7 +1180,14 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = null ) 
 	}
 
 	if( db_has_capability( DB_CAPABILITY_WINDOW_FUNCTIONS ) ) {
-		$t_sql = 'SELECT id, diff, SUM(diff) OVER () AS total_time, AVG(diff) OVER () AS avg_time'
+		if(db_is_mssql() ) {
+			# sqlserver by default uses the column datatype, which is INT. This datatype can be overflowed
+			# when a big number of issues are included, since we are adding the total number of seconds.
+			$t_diff_expr = 'CAST(diff AS BIGINT)';
+		} else {
+			$t_diff_expr = 'diff';
+		}
+		$t_sql = 'SELECT id, diff, SUM(' . $t_diff_expr . ') OVER () AS total_time, AVG(' . $t_diff_expr . ') OVER () AS avg_time'
 			. ' FROM ( SELECT b.id, MAX(h.date_modified) - b.date_submitted AS diff'
 			. $t_sql_inner
 			. ' GROUP BY b.id,b.date_submitted ) subquery'
