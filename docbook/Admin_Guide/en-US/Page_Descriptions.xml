@@ -788,6 +788,16 @@
                                 <entry>threshold to see who is monitoring an issue</entry>
                             </row>
                             <row>
+                                <entry>Add monitors to an issue</entry>
+                                <entry>$g_monitor_add_others_bug_threshold</entry>
+                                <entry>threshold to add users to the list of users monitoring an issue</entry>
+                            </row>
+                            <row>
+                                <entry>Remove monitors from an issue</entry>
+                                <entry>$g_monitor_delete_others_bug_threshold</entry>
+                                <entry>threshold to remove users from the list of users monitoring an issue</entry>
+                            </row>
+                            <row>
                                 <entry>Set status on assignment of handler</entry>
                                 <entry>$g_auto_set_status_to_assigned</entry>
                                 <entry>change status when an issue is assigned</entry>
