@@ -2700,6 +2700,12 @@ $g_view_bug_threshold = VIEWER;
 $g_monitor_bug_threshold = REPORTER;
 
 /**
+ * Threshold needed to show the list of users monitoring a bug on the bug view pages.
+ * @global integer $g_show_monitor_list_threshold
+ */
+$g_show_monitor_list_threshold = DEVELOPER;
+
+/**
  * Access level needed to add other users to the list of users monitoring
  * a bug.
  * Look in the constant_inc.php file if you want to set a different value.
@@ -2911,12 +2917,6 @@ $g_set_view_status_threshold = REPORTER;
  * @global integer $g_change_view_status_threshold
  */
 $g_change_view_status_threshold = UPDATER;
-
-/**
- * Threshold needed to show the list of users monitoring a bug on the bug view pages.
- * @global integer $g_show_monitor_list_threshold
- */
-$g_show_monitor_list_threshold = DEVELOPER;
 
 /**
  * Threshold needed to be able to use stored queries
