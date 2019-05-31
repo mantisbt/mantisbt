@@ -2709,6 +2709,8 @@ $g_show_monitor_list_threshold = DEVELOPER;
  * Access level needed to add other users to the list of users monitoring
  * a bug.
  * Look in the constant_inc.php file if you want to set a different value.
+ * This setting should not be lower than $g_show_monitor_list_threshold.
+ * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_add_others_bug_threshold
  */
 $g_monitor_add_others_bug_threshold = DEVELOPER;
@@ -2717,6 +2719,8 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
  * Look in the constant_inc.php file if you want to set a different value.
+ * This setting should not be lower than $g_show_monitor_list_threshold.
+ * @see $g_show_monitor_list_threshold
  * @global integer $g_monitor_delete_others_bug_threshold
  */
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
