@@ -26,8 +26,17 @@
 		<varlistentry>
 			<term>$g_monitor_bug_threshold</term>
 			<listitem>
-				<para>Access level needed to monitor bugs. The default
-					value is REPORTER.
+				<para>Access level needed to monitor issues.
+					The default value is REPORTER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_monitor_list_threshold</term>
+			<listitem>
+				<para>Access level needed to show the list of users monitoring
+					an issue.
+					The default value is DEVELOPER.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -35,7 +44,11 @@
 			<term>$g_monitor_add_others_bug_threshold</term>
 			<listitem>
 				<para>Access level needed to add other users to the list of
-					users monitoring a bug. The default value is DEVELOPER.
+					users monitoring an issue.
+					The default value is DEVELOPER.
+				</para>
+				<para>This setting should not be lower than
+					<emphasis>$g_show_monitor_list_threshold</emphasis>.
 				</para>
 			</listitem>
 		</varlistentry>
@@ -43,8 +56,11 @@
 			<term>$g_monitor_delete_others_bug_threshold</term>
 			<listitem>
 				<para>Access level needed to delete other users from the
-					list of users monitoring a bug. The default value is
-					DEVELOPER.
+					list of users monitoring an issue.
+					The default value is DEVELOPER.
+				</para>
+				<para>This setting should not be lower than
+					<emphasis>$g_show_monitor_list_threshold</emphasis>.
 				</para>
 			</listitem>
 		</varlistentry>
