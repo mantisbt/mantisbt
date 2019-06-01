@@ -467,14 +467,18 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 }
 
 /**
+ * Replace URLs and email addresses by links.
  * Search email addresses and URLs for a few common protocols in the given
- * string, and replace occurrences with href anchors.
+ * string, and replace occurrences with href anchors; when target is Markdown,
+ * the URLs/e-mail will be wrapped in < > instead.
  * @param string $p_string String to be processed.
+ * @param bool $p_markdown Optional, set to True if target is Markdown
  * @return string
  */
-function string_insert_hrefs( $p_string ) {
+function string_insert_hrefs( $p_string, $p_markdown = false  ) {
 	static $s_url_regex = null;
 	static $s_email_regex = null;
+	static $s_email_regex_markdown;
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -502,33 +506,45 @@ function string_insert_hrefs( $p_string ) {
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
 
-		# e-mail regex
+		# e-mail regex; the Markdown one adds optional < > wrapping tags
 		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
+		$s_email_regex_markdown = preg_replace( '|/(.*)/|', '/<?(\1)>?/', $s_email_regex );
 	}
 
 	# Find any URL in a string and replace it with a clickable link
-	$p_string = preg_replace_callback(
-		$s_url_regex,
-		function ( $p_match ) {
-			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
-			if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
-				$t_url_target = ' target="_blank"';
-			} else {
-				$t_url_target = '';
-			}
-			return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
-		},
-		$p_string
-	);
+	# Not necessary for Markdown, as the parser automatically creates URL links
+	if( !$p_markdown ) {
+		if( config_get( 'html_make_links' ) == LINKS_NEW_WINDOW ) {
+			$t_url_target = ' target="_blank"';
+		} else {
+			$t_url_target = '';
+		}
+		$p_string = preg_replace_callback(
+			$s_url_regex,
+			function( $p_match ) use ( $t_url_target ) {
+				$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
+				return "<a ${t_url_href}${t_url_target}>${p_match[1]}</a>";
+			},
+			$p_string
+		);
+	}
 
 	# Find any email addresses in the string and replace them with a clickable
 	# mailto: link, making sure that we skip processing of any existing anchor
 	# tags, to avoid parts of URLs such as https://user@example.com/ or
 	# http://user:password@example.com/ to be not treated as an email.
+	if( $p_markdown ) {
+		$t_regex = $s_email_regex_markdown;
+		$t_replacement = '<\1>';
+	} else {
+		$t_regex = $s_email_regex;
+		$t_replacement = '<a href="mailto:\0">\0</a>';
+	}
+
 	$p_string = string_process_exclude_anchors(
 		$p_string,
-		function( $p_string ) use ( $s_email_regex ) {
-			return preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $p_string );
+		function( $p_string ) use ( $t_regex, $t_replacement ) {
+			return preg_replace( $t_regex, $t_replacement, $p_string );
 		}
 	);
 
@@ -561,17 +577,41 @@ function string_process_exclude_anchors( $p_string, $p_callback ) {
 }
 
 /**
- * Detect href anchors in the string and replace them with URLs and email addresses
+ * Detect href anchors in the string and replace them with URLs and email addresses.
+ * For Markdown target, the URLs/e-mail will be wrapped in < > so they are processed as links
  * @param string $p_string String to be processed.
+ * @param bool $p_markdown Optional, set to True if target is Markdown
  * @return string
  */
-function string_strip_hrefs( $p_string ) {
+function string_strip_hrefs( $p_string, $p_markdown = false ) {
+	if( $p_markdown ) {
+		$t_replacement = '<\1>';
+	} else {
+		$t_replacement = '\1';
+	}
+
 	# First grab mailto: hrefs.  We don't care whether the URL is actually
 	# correct - just that it's inside an href attribute.
-	$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\>]*>[^\<]*<\/a>/si', '\1', $p_string );
+	$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\>]*>[^\<]*<\/a>/si', $t_replacement, $p_string );
 
 	# Then grab any other href
-	$p_string = preg_replace( '/<a\s[^\>]*href="([^\"]+)"[^\>]*>[^\<]*<\/a>/si', '\1', $p_string );
+	$t_regex = '/<a\s[^\>]*href="([^\"]+)"[^\>]*>([^\<]*)<\/a>/si';
+	if( $p_markdown ) {
+		$p_string = preg_replace_callback(
+			$t_regex,
+			function( $p_match ) {
+				# Generate a Markdown link if the href is different from the text
+				if( $p_match[2] && $p_match[1] != $p_match[2] ) {
+					return "[{$p_match[2]}]({$p_match[1]})";
+				}
+				return "<{$p_match[1]}>";
+			},
+			$p_string
+		);
+	} else {
+		$p_string = preg_replace( $t_regex, $t_replacement, $p_string );
+	}
+
 	return $p_string;
 }
 

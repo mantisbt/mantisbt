@@ -73,7 +73,10 @@ function mention_get_candidates( $p_text ) {
 			# Negative lookbehind  to ensure we don't match multiple tags
 			. '(?<!' . $t_quoted_tag . ')' . $t_quoted_tag
 			. ')'
+			# This is the main username matching pattern:
 			# any word char, dash or period, must end with word char
+			# It must be consistent and kept in sync with the one defined in
+			# MantisMarkdown class
 			. '([\w\-.]*[\w])'
 			# Lookforward to ensure next char is not a valid mention char or
 			# the end of the string, or the mention tag
@@ -151,18 +154,11 @@ function mention_format_text( $p_text, $p_html = true ) {
 
 	foreach( $t_mentioned_users as $t_username => $t_user_id  ) {
 		$t_mention = $t_mentions_tag . $t_username;
-		$t_mention_formatted = $t_mention;
 
 		if( $p_html ) {
-			$t_mention_formatted = string_display_line( $t_mention_formatted );
-
-			$t_mention_formatted = '<a href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
-
-			if( !user_is_enabled( $t_user_id ) ) {
-				$t_mention_formatted = '<s>' . $t_mention_formatted . '</s>';
-			}
-
-			$t_mention_formatted = '<span class="mention">' . $t_mention_formatted . '</span>';
+			$t_mention_formatted = '<span class="mention">' . prepare_user_name( $t_user_id, $t_mentions_tag ) . '</span>';
+		} else {
+			$t_mention_formatted = $t_mention;
 		}
 
 		$t_formatted_mentions[$t_mention] = $t_mention_formatted;

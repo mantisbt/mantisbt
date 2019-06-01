@@ -47,9 +47,25 @@ $t_plugin_path = config_get_global( 'plugin_path' );
 
 $f_page = gpc_get_string( 'page' );
 
+/**
+ * Return the error code to use depending on user's access level.
+ * If user does not have sufficient privileges to view the detailed error
+ * message, returns ERROR_GENERIC.
+ * @param integer $p_code Specific error code
+ * @return integer Error code
+ */
+function error_code($p_code) {
+	$t_can_view_detailed_error = access_compare_level(
+		current_user_get_access_level(),
+		config_get( 'manage_plugin_threshold' )
+	);
+
+	return $t_can_view_detailed_error ? $p_code : ERROR_GENERIC;
+}
+
 if( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
 	error_parameters( $f_page );
-	trigger_error( ERROR_PLUGIN_INVALID_PAGE, ERROR );
+	trigger_error( error_code( ERROR_PLUGIN_INVALID_PAGE ), ERROR );
 }
 
 $t_basename = $t_matches[1];

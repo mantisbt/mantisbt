@@ -10,7 +10,7 @@
         "vboctor/disposable_email_checker": "^3.0",
         "adodb/adodb-php": "^5.20",
         "phpmailer/phpmailer": "~6.0",
-        "erusev/parsedown": "^1.7.0",
+        "erusev/parsedown": "^1.8.0@beta",
         "dapphp/securimage": "dev-mantis"
     },
     "require-dev": {
