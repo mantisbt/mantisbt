@@ -42,10 +42,14 @@
  */
 
 $s_plugin_format_title = 'MantisBT-Aranĝado';
+$s_plugin_format_description = 'Oficiala teksto-traktanta kaj aranĝanta kromprogramo.';
 $s_plugin_format_config = 'Agordo';
 $s_plugin_format_process_text = 'Traktado de Teksto';
+$s_plugin_format_process_text_warning_notice = 'Ne malŝaltu, krom se vi vere konas tion kion vi faras. Malŝaltado ebligas interretejan programetan atakon (XSS).';
 $s_plugin_format_process_urls = 'Traktado de Retadreso';
 $s_plugin_format_process_buglinks = 'Internaj ligiloj de MantisBT (Problemoj kaj Notoj pri Problemoj)';
+$s_plugin_format_process_buglinks_info = 'Via agordo difinas la etikedon <em>Problemo</em> kiel "<literal>%s</literal>" kaj la etikedo <em>Noto pri Problemo</em> kiel "<literal>%s</literal>"';
 $s_plugin_format_process_markdown = 'Traktado de Markdown';
+$s_plugin_format_process_markdown_info = 'Stiligo per Markdown — teksto-aranĝanta sintakso por konvertado al HTML.';
 $s_plugin_format_enabled = 'Ŝaltita';
 $s_plugin_format_disabled = 'Malŝaltita';
