@@ -553,7 +553,8 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	$t_version_data->date_order = $t_date_order;
 	$t_version_data->obsolete = $t_obsolete;
 
-	return version_update( $t_version_data );
+	version_update( $t_version_data );
+	return true;
 }
 
 /**
