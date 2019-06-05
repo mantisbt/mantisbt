@@ -187,7 +187,10 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php echo lang_get( 'description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5">
+<?php echo string_textarea( $t_row['description'] ) ?>
+</textarea>
 				</td>
 			</tr>
 

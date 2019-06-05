@@ -140,7 +140,10 @@ layout_page_begin();
 					<?php echo lang_get( 'tag_description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6">
+<?php echo string_textarea( $t_description ) ?>
+</textarea>
 				</td>
 			</tr>
 		</fieldset>

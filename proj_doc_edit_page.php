@@ -110,7 +110,10 @@ print_doc_menu();
 		<?php echo lang_get( 'description' ) ?>
 	</th>
 	<td>
-		<textarea class="form-control" name="description" cols="60" rows="7"><?php echo $v_description ?></textarea>
+		<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+		<textarea class="form-control" name="description" cols="60" rows="7">
+<?php echo $v_description ?>
+</textarea>
 	</td>
 </tr>
 <tr>

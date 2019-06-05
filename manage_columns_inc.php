@@ -109,7 +109,10 @@ if( $t_account_page ) {
 					<?php echo lang_get( 'all_columns_title' )?>
 				</td>
 				<td>
-					<textarea class="form-control"  id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control"  id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5">
+<?php echo $t_all ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -117,7 +120,10 @@ if( $t_account_page ) {
 					<?php echo lang_get( 'view_issues_columns_title' )?>
 				</td>
 				<td>
-					<textarea class="form-control" id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5">
+<?php echo $t_view_issues ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -125,7 +131,10 @@ if( $t_account_page ) {
 					<?php echo lang_get( 'print_issues_columns_title' )?>
 				</td>
 				<td>
-					<textarea class="form-control" id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5">
+<?php echo $t_print_issues ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -133,7 +142,10 @@ if( $t_account_page ) {
 					<?php echo lang_get( 'csv_columns_title' )?>
 				</td>
 				<td>
-					<textarea class="form-control" id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea>
+					<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+					<textarea class="form-control" id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5">
+<?php echo $t_csv ?>
+</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -141,7 +153,9 @@ if( $t_account_page ) {
 					<?php echo lang_get( 'excel_columns_title' )?>
 				</td>
 				<td>
-					<textarea class="form-control" id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea>
+					<textarea class="form-control" id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5">
+						<?php echo $t_excel ?>
+					</textarea>
 				</td>
 			</tr>
 		</fieldset>

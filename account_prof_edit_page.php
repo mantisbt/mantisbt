@@ -126,7 +126,10 @@ if( profile_is_global( $f_profile_id ) ) {
 		<?php echo lang_get( 'additional_description' ) ?>
 	</th>
 	<td>
-		<textarea class="form-control" name="description" cols="60" rows="8"><?php echo string_textarea( $v_description ) ?></textarea>
+		<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+		<textarea class="form-control" name="description" cols="60" rows="8">
+<?php echo string_textarea( $v_description ) ?>
+</textarea>
 	</td>
 </tr>
 </table>
