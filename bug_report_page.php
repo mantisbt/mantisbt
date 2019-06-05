@@ -567,7 +567,10 @@ if( $t_show_attachments ) {
 			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
 		</th>
 		<td>
-			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10" required><?php echo string_textarea( $f_description ) ?></textarea>
+			<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10" required>
+<?php echo string_textarea( $f_description ) ?>
+</textarea>
 		</td>
 	</tr>
 
@@ -577,7 +580,10 @@ if( $t_show_attachments ) {
 				<label for="steps_to_reproduce"><?php print_documentation_link( 'steps_to_reproduce' ) ?></label>
 			</th>
 			<td>
-				<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="steps_to_reproduce" name="steps_to_reproduce" cols="80" rows="10"><?php echo string_textarea( $f_steps_to_reproduce ) ?></textarea>
+				<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+				<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="steps_to_reproduce" name="steps_to_reproduce" cols="80" rows="10">
+<?php echo string_textarea( $f_steps_to_reproduce ) ?>
+</textarea>
 			</td>
 		</tr>
 <?php } ?>
@@ -588,7 +594,10 @@ if( $t_show_attachments ) {
 			<label for="additional_info"><?php print_documentation_link( 'additional_information' ) ?></label>
 		</th>
 		<td>
-			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
+			<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+			<textarea class="form-control" <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10">
+<?php echo string_textarea( $f_additional_info ) ?>
+</textarea>
 		</td>
 	</tr>
 <?php } ?>
