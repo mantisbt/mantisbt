@@ -593,7 +593,8 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
 
-	return version_remove( $p_version_id );
+	version_remove( $p_version_id );
+	return true;
 }
 
 /**
