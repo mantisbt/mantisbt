@@ -41,16 +41,33 @@
  * @author Mirin
  */
 
+$s_plugin_graph_title = 'Mantis-Grafoj';
 $s_plugin_graph_description = 'Oficiala grafa kromprogramo.';
+$s_plugin_MantisGraph_title = 'Mantis-Grafoj';
 $s_plugin_MantisGraph_config = 'Agordo';
 $s_plugin_MantisGraph_synthesis_link = 'Sintezo';
 $s_plugin_MantisGraph_status_link = 'Laŭ Stato';
 $s_plugin_MantisGraph_priority_link = 'Laŭ Prioritato';
 $s_plugin_MantisGraph_severity_link = 'Laŭ Severeco';
 $s_plugin_MantisGraph_category_link = 'Laŭ Kategorio';
+$s_plugin_MantisGraph_resolution_link = 'Laŭ Solvo';
+$s_plugin_MantisGraph_issue_trends_link = 'Tendencoj pri Problemoj';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Laŭ Stato-Grafoj';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Laŭ Prioritato-Grafoj';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Laŭ Severecaj Grafoj';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Laŭ Kategorio-Grafoj';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Laŭ Solvo-Grafoj';
+$s_plugin_MantisGraph_graph_developer_title = 'Laŭ Evoluiganto-Grafoj';
+$s_plugin_MantisGraph_graph_reporter_title = 'Laŭ Raportanto-Grafoj';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Problemoj Malfermitaj, Solvitaj, kaj Restantaj';
+$s_plugin_MantisGraph_by_status_pct = 'Laŭ procento de stato';
+$s_plugin_MantisGraph_by_priority_pct = 'Laŭ procento de prioritato';
 $s_plugin_MantisGraph_by_severity_pct = 'Laŭ procento de severeco';
+$s_plugin_MantisGraph_by_category_pct = 'Laŭ procento de kategorio';
+$s_plugin_MantisGraph_by_resolution_pct = 'La procento de solvo';
 $s_plugin_MantisGraph_by_severity_mix = 'Laŭ severeco kaj stato';
+$s_plugin_MantisGraph_by_priority_mix = 'Laŭ prioritato kaj stato';
+$s_plugin_MantisGraph_by_resolution_mix = 'Laŭ solvo kaj stato';
 $s_plugin_MantisGraph_legend_still_open = 'Jam Malfermita';
 $s_plugin_MantisGraph_legend_resolved = 'Solvita';
 $s_plugin_MantisGraph_legend_reported = 'Raportita';
@@ -65,4 +82,8 @@ $s_plugin_MantisGraph_period_last_quarter = 'Lasta Jarkvarono';
 $s_plugin_MantisGraph_period_year_to_date = 'Jaro ĝis Hodiaŭ';
 $s_plugin_MantisGraph_period_select = 'Ajnaj Datoj';
 $s_plugin_MantisGraph_period_last_year = 'Lasta Jaro';
+$s_plugin_MantisGraph_graph_page = 'Grafo de Historio de Problemo';
+$s_plugin_MantisGraph_graph_topdev = 'Plejevoluigintoj laŭ Solvitaj Problemoj';
+$s_plugin_MantisGraph_graph_opendev = 'Evoluigantoj laŭ Malfermitaj Problemoj';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Plejraportintoj laŭ Solvitaj Problemoj';
 $s_plugin_MantisGraph_other_categories = 'aliaj kategorioj (%d)';
