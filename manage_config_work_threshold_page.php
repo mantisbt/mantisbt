@@ -226,7 +226,9 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 	echo "<tr>\n";
 
 	# Access levels
-	echo '  <td>' . string_display( $p_caption ) . "</td>\n";
+	echo '  <td>', string_display( $p_caption ),
+			'<input type="hidden" name="flag_exists_' . $p_threshold . '[]" value="1" />',
+			"</td>\n";
 	foreach( $g_access_levels as $t_access_level => $t_access_label ) {
 		$t_file = in_array( $t_access_level, $t_file_exp );
 		$t_global = in_array( $t_access_level, $t_global_exp );
@@ -271,7 +273,9 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
 			  && ( ( ALL_PROJECTS == $g_project_id ) || !$p_all_projects_only );
 
-	echo "<tr>\n\t<td>" . string_display_line( $p_caption ) . "</td>\n";
+	echo "<tr>\n\t<td>", string_display_line( $p_caption ),
+			'<input type="hidden" name="flag_exists_' . $p_threshold . '[]" value="1" />',
+			"</td>\n";
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
