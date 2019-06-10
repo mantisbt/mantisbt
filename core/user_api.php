@@ -83,23 +83,21 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 
 	if( !isset( $g_cache_user[$c_user_id] ) ) {
 		user_cache_array_rows( array( $c_user_id ) );
-	}
 
-	$t_user_row = $g_cache_user[$c_user_id];
+		if( !isset( $g_cache_user[$c_user_id] ) ) {
+			if( $p_trigger_errors ) {
+				throw new ClientException(
+					sprintf( "User id '%d' not found.", (integer)$p_user_id ),
+					ERROR_USER_BY_ID_NOT_FOUND,
+					array( (integer)$p_user_id )
+				);
+			}
 
-	if( !$t_user_row ) {
-		if( $p_trigger_errors ) {
-			throw new ClientException(
-				sprintf( "User id '%d' not found.", (integer)$p_user_id ),
-				ERROR_USER_BY_ID_NOT_FOUND,
-				array( (integer)$p_user_id )
-			);
+			return false;
 		}
-
-		return false;
 	}
 
-	return $t_user_row;
+	return $g_cache_user[$c_user_id];
 }
 
 /**
@@ -131,14 +129,16 @@ function user_cache_array_rows( array $p_user_id_array ) {
 	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $t_sql_in_params ) . ')';
 	$t_result = db_query( $t_query, $t_params );
 
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$c_user_id = (int)$t_row['id'];
-		$g_cache_user[$c_user_id] = $t_row;
-		unset( $c_user_id_array[$c_user_id] );
-	}
-	# set the remaining ids to false as not-found
-	foreach( $c_user_id_array as $t_id ) {
-		$g_cache_user[$t_id] = false;
+	if( $t_result !== false ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$c_user_id = (int)$t_row['id'];
+			$g_cache_user[$c_user_id] = $t_row;
+			unset( $c_user_id_array[$c_user_id] );
+		}
+		# set the remaining ids to false as not-found
+		foreach( $c_user_id_array as $t_id ) {
+			$g_cache_user[$t_id] = false;
+		}
 	}
 }
 
