@@ -60,4 +60,104 @@ class MantisPrepareTest extends MantisCoreBase {
 		return $t_test_data;
 	}
 
+	/**
+	 * Tests prepare_email_link()
+	 *
+	 * @dataProvider providerEmailLink
+	 * @param array $p_in  Input.
+	 * @param string $p_out Expected output.
+	 * @return void
+	 */
+	public function testEmailLink( $p_param, $p_access_level, $p_out ) {
+		# Make sure we have a DB connection
+		$this->dbConnect();
+
+		# Set threshold
+		$t_config = 'show_user_email_threshold';
+		config_set_cache( $t_config, $p_access_level, CONFIG_TYPE_INT );
+
+		$t_result = call_user_func_array( 'prepare_email_link', $p_param );
+		$this->assertEquals( $p_out, $t_result );
+	}
+
+	/**
+	 * Data provider for prepare_email_link() test.
+	 * No need to test 'subject' param, logic is already covered by testMailTo.
+	 * @see testEmailLink
+	 * @return array
+	 */
+	public function providerEmailLink() {
+		$t_email = self::EMAIL;
+		$t_text = 'Link Text';
+		$t_tooltip = 'Tooltip';
+		$t_button_classes = 'class="btn btn-primary btn-white btn-round btn-xs"';
+		$t_button_text = sprintf( '<i class="fa fa-envelope-o"></i>&nbsp;%s', $t_text );
+
+		$t_test_data = array(
+			'Basic' => array(
+				array( $t_email, $t_text, '', '', false ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\">$t_text</a>"
+			),
+			'Basic, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', '', false ),
+				NOBODY,
+				$t_text
+			),
+			'With tooltip' => array(
+				array( $t_email, $t_text, '', $t_tooltip, false ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\">$t_text</a>"
+			),
+			'With tooltip, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', $t_tooltip, false ),
+				NOBODY,
+				"<a title=\"$t_tooltip\">$t_text</a>"
+			),
+			'With tooltip identical to text' => array(
+				array( $t_email, $t_text, '', $t_text, false ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\">$t_text</a>"
+			),
+			'With tooltip identical to text, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', $t_text, false ),
+				NOBODY,
+				$t_text
+			),
+
+			'Button' => array(
+				array( $t_email, $t_text, '', '', true ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
+			),
+			'Button, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', '', true ),
+				NOBODY,
+				$t_text
+			),
+			'Button with tooltip' => array(
+				array( $t_email, $t_text, '', $t_tooltip, true ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\" title=\"$t_tooltip\" $t_button_classes>$t_button_text</a>"
+			),
+			'Button with tooltip, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', $t_tooltip, true ),
+				NOBODY,
+				"<a title=\"$t_tooltip\">$t_text</a>"
+			),
+			'Button with tooltip identical to text' => array(
+				array( $t_email, $t_text, '', $t_text, true ),
+				ANYBODY,
+				"<a href=\"mailto:$t_email\" $t_button_classes>$t_button_text</a>"
+			),
+			'Button with tooltip identical to text, cannot see e-mails' => array(
+				array( $t_email, $t_text, '', $t_text, true ),
+				NOBODY,
+				$t_text
+			),
+		);
+
+		return $t_test_data;
+	}
+
 }
