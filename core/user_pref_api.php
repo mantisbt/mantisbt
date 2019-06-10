@@ -331,14 +331,18 @@ function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL
 	$t_query->bind( 'user_array', $c_user_id_array );
 	$t_query->bind( 'project_id', (int)$p_project_id );
 
-	foreach( $t_query->fetch_all() as $t_row ) {
-		if( !isset( $g_cache_user_pref[(int)$t_row['user_id']] ) ) {
-			$g_cache_user_pref[(int)$t_row['user_id']] = array();
-		}
-		$g_cache_user_pref[(int)$t_row['user_id']][(int)$p_project_id] = $t_row;
+	$t_result = $t_query->fetch_all();
+	if( $t_result ) {
+		foreach( $t_result as $t_row ) {
+			$t_user_id = (int)$t_row['user_id'];
+			if( !isset( $g_cache_user_pref[$t_user_id] ) ) {
+				$g_cache_user_pref[$t_user_id] = array();
+			}
+			$g_cache_user_pref[$t_user_id][(int)$p_project_id] = $t_row;
 
-		# remove found users from required set.
-		unset( $c_user_id_array[(int)$t_row['user_id']] );
+			# remove found users from required set.
+			unset( $c_user_id_array[$t_user_id] );
+		}
 	}
 
 	# cache users that are not found as false (i.e. negative cache)
