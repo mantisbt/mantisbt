@@ -69,8 +69,9 @@ class MantisPrepareTest extends MantisCoreBase {
 	 * @return void
 	 */
 	public function testEmailLink( $p_param, $p_access_level, $p_out ) {
-		# Make sure we have a DB connection
+		# Make sure we have a DB connection and a logged-in user
 		$this->dbConnect();
+		$this->login();
 
 		# Set threshold
 		$t_config = 'show_user_email_threshold';
