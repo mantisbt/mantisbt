@@ -1651,48 +1651,24 @@ function print_email_link( $p_email, $p_text ) {
  * @param string  $p_text   Link text to display to user.
  * @param string  $p_tooltip The tooltip to show.
  * @param string  $p_bug_id The bug identifier.
- * @param boolean $p_show_as_text By default, show link as button with envelope icon.
+ * @param boolean $p_show_as_button If true, show link as button with envelope
+ *                                  icon, otherwise display a plain-text link.
  * @return void
  */
-function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_text = false )
+function print_email_link_with_subject( $p_email, $p_text, $p_tooltip, $p_bug_id, $p_show_as_button = true )
 {
-	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
-		$t_tooltip = ' title="' . $p_tooltip . '"';
-	} else {
-		$t_tooltip = '';
-	}
-
+	global $g_project_override;
 	$t_bug = bug_get( $p_bug_id, true );
-	$t_show_user_email_threshold = config_get( 'show_user_email_threshold', null, null, $t_bug->project_id );
-	if( !access_has_project_level( $t_show_user_email_threshold, $t_bug->project_id ) ) {
-		if( $p_show_as_text && $p_text ) {
-			echo $t_tooltip ? '<a' . $t_tooltip . '>' . $p_text . '</a>' : $p_text;
-		}
-		return;
-	}
 
-	# If we apply string_url() to the whole mailto: link then the @
-	# gets turned into a %40 and you can't right click in browsers to
-	# do Copy Email Address.  If we don't apply string_url() to the
-	# subject text then an ampersand (for example) will truncate the text
-	$t_subject = string_url( email_build_subject( $p_bug_id ) );
-	$t_email = string_url( $p_email );
-	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
-	$t_text = string_display( $p_text );
+	$g_project_override = $t_bug->project_id;
 
-	if( $p_show_as_text ) {
-		$t_class = '';
-	} else {
-		$t_class = ' class="btn btn-primary btn-white btn-round btn-xs"';
-		$t_text = '<i class="fa fa-envelope-o"></i>' . ( $t_text ? "&nbsp;$t_text" : '' );
-	}
-
-	printf( '<a href="%s"%s%s>%s</a>',
-		$t_mailto,
-		$t_tooltip,
-		$t_class,
-		$t_text
-	);
+	echo prepare_email_link(
+			$p_email,
+			$p_text,
+			email_build_subject( $p_bug_id ),
+			$p_tooltip,
+			$p_show_as_button
+		);
 }
 
 /**
