@@ -24,15 +24,12 @@
  */
 
 # Includes
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-# MantisBT Core API
-require_mantis_core();
+require_once 'MantisCoreBase.php';
 
 /**
  * MantisBT Prepare API test cases
  */
-class MantisPrepareTest extends PHPUnit_Framework_TestCase {
+class MantisPrepareTest extends MantisCoreBase {
 	const EMAIL = 'test@example.com';
 
 	/**
