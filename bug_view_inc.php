@@ -98,6 +98,9 @@ $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 $t_fields = config_get( $t_fields_config_option );
 $t_fields = columns_filter_disabled( $t_fields );
 
+$t_fields_status = config_get( $t_fields_status_config_option );
+$t_fields_status = isset($t_fields_status[ $t_bug->status ] ) ? columns_filter_disabled( $t_fields_status[ $t_bug->status ] ) : null;
+
 compress_enable();
 
 if( $t_show_page_header ) {
@@ -110,13 +113,17 @@ $t_action_button_position = config_get( 'action_button_position' );
 $t_bugslist = gpc_get_cookie( config_get_global( 'bug_list_cookie' ), false );
 
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
-$t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
-$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
+$t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields )
+    && ( !is_array($t_fields_status) || in_array( 'product_version' , $t_fields_status ));
+$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields )
+    && ( !is_array($t_fields_status) || in_array( 'fixed_in_version' , $t_fields_status ));
 $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields )
-	&& ( config_get( 'enable_product_build' ) == ON );
+    && ( config_get( 'enable_product_build' ) == ON 
+    && ( !is_array($t_fields_status) || in_array( 'product_build' , $t_fields_status )));
 $t_product_build = $t_show_product_build ? string_display_line( $t_bug->build ) : '';
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields )
-	&& access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
+    && ( !is_array($t_fields_status) || in_array( 'target_version' , $t_fields_status ))
+    && access_has_bug_level( config_get( 'roadmap_view_threshold' ), $f_bug_id );
 
 $t_product_version_string  = '';
 $t_target_version_string   = '';
@@ -165,25 +172,27 @@ $t_bug_reminder_link = 'bug_reminder_page.php?bug_id=' . $f_bug_id;
 $t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 $t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
 
-$t_show_project = in_array( 'project', $t_fields );
+$t_show_project = in_array( 'project', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'project' , $t_fields_status ));
 $t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ): '';
-$t_show_id = in_array( 'id', $t_fields );
+$t_show_id = in_array( 'id', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'id' , $t_fields_status ));
 $t_formatted_bug_id = $t_show_id ? string_display_line( bug_format_id( $f_bug_id ) ) : '';
 
-$t_show_date_submitted = in_array( 'date_submitted', $t_fields );
+$t_show_date_submitted = in_array( 'date_submitted', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'date_submitted' , $t_fields_status ));
 $t_date_submitted = $t_show_date_submitted ? date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) : '';
 
-$t_show_last_updated = in_array( 'last_updated', $t_fields );
+$t_show_last_updated = in_array( 'last_updated', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'last_updated' , $t_fields_status ));
 $t_last_updated = $t_show_last_updated ? date( config_get( 'normal_date_format' ), $t_bug->last_updated ) : '';
 
-$t_show_tags = in_array( 'tags', $t_fields ) && access_has_bug_level( config_get( 'tag_view_threshold' ), $t_bug_id );
+$t_show_tags = in_array( 'tags', $t_fields ) && access_has_bug_level( config_get( 'tag_view_threshold' ), $t_bug_id )
+    && ( !is_array($t_fields_status) || in_array( 'tags' , $t_fields_status ));
 
 $t_bug_overdue = bug_is_overdue( $f_bug_id );
 
-$t_show_view_state = in_array( 'view_state', $t_fields );
+$t_show_view_state = in_array( 'view_state', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'view_state' , $t_fields_status ));
 $t_bug_view_state_enum = $t_show_view_state ? string_display_line( get_enum_element( 'view_state', $t_bug->view_state ) ) : '';
 
-$t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
+$t_show_due_date = in_array( 'due_date', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'due_date' , $t_fields_status ))
+    && access_has_bug_level( config_get( 'due_date_view_threshold' ), $f_bug_id );
 
 if( $t_show_due_date ) {
 	if( !date_is_null( $t_bug->due_date ) ) {
@@ -193,8 +202,9 @@ if( $t_show_due_date ) {
 	}
 }
 
-$t_show_reporter = in_array( 'reporter', $t_fields );
-$t_show_handler = in_array( 'handler', $t_fields ) && access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id );
+$t_show_reporter = in_array( 'reporter', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'reporter' , $t_fields_status ));
+$t_show_handler = in_array( 'handler', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'handler' , $t_fields_status ))
+    && access_has_bug_level( config_get( 'view_handler_threshold' ), $f_bug_id );
 $t_show_additional_information = !is_blank( $t_bug->additional_information ) && in_array( 'additional_info', $t_fields );
 $t_show_steps_to_reproduce = !is_blank( $t_bug->steps_to_reproduce ) && in_array( 'steps_to_reproduce', $t_fields );
 $t_show_monitor_box = !$t_force_readonly;
@@ -202,31 +212,34 @@ $t_show_relationships_box = !$t_force_readonly;
 $t_show_sponsorships_box = config_get( 'enable_sponsorship' ) && access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id );
 $t_show_history = $f_history;
 $t_show_profiles = config_get( 'enable_profiles' );
-$t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
+$t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields )
+    && ( !is_array($t_fields_status) || in_array( 'platform' , $t_fields_status ));
 $t_platform = $t_show_platform ? string_display_line( $t_bug->platform ) : '';
-$t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
+$t_show_os = $t_show_profiles && in_array( 'os', $t_fields )
+    && ( !is_array($t_fields_status) || in_array( 'os' , $t_fields_status ));
 $t_os = $t_show_os ? string_display_line( $t_bug->os ) : '';
-$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
+$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields )
+    && ( !is_array($t_fields_status) || in_array( 'os_version' , $t_fields_status ));
 $t_os_version = $t_show_os_version ? string_display_line( $t_bug->os_build ) : '';
-$t_show_projection = in_array( 'projection', $t_fields );
+$t_show_projection = in_array( 'projection', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'projection' , $t_fields_status ));
 $t_projection = $t_show_projection ? string_display_line( get_enum_element( 'projection', $t_bug->projection ) ) : '';
-$t_show_eta = in_array( 'eta', $t_fields );
+$t_show_eta = in_array( 'eta', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'eta' , $t_fields_status ));
 $t_eta = $t_show_eta ? string_display_line( get_enum_element( 'eta', $t_bug->eta ) ) : '';
 $t_can_attach_tag = $t_show_tags && !$t_force_readonly && access_has_bug_level( config_get( 'tag_attach_threshold' ), $f_bug_id );
-$t_show_category = in_array( 'category_id', $t_fields );
+$t_show_category = in_array( 'category_id', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'category_id' , $t_fields_status ));
 $t_category = $t_show_category ? string_display_line( category_full_name( $t_bug->category_id ) ) : '';
-$t_show_priority = in_array( 'priority', $t_fields );
+$t_show_priority = in_array( 'priority', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'priority' , $t_fields_status ));
 $t_priority = $t_show_priority ? string_display_line( get_enum_element( 'priority', $t_bug->priority ) ) : '';
-$t_show_severity = in_array( 'severity', $t_fields );
+$t_show_severity = in_array( 'severity', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'severity' , $t_fields_status ));
 $t_severity = $t_show_severity ? string_display_line( get_enum_element( 'severity', $t_bug->severity ) ) : '';
-$t_show_reproducibility = in_array( 'reproducibility', $t_fields );
+$t_show_reproducibility = in_array( 'reproducibility', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'reproducibility' , $t_fields_status ));
 $t_reproducibility = $t_show_reproducibility ? string_display_line( get_enum_element( 'reproducibility', $t_bug->reproducibility ) ): '';
-$t_show_status = in_array( 'status', $t_fields );
+$t_show_status = in_array( 'status', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'status' , $t_fields_status ));
 $t_status = $t_show_status ? string_display_line( get_enum_element( 'status', $t_bug->status ) ) : '';
-$t_show_resolution = in_array( 'resolution', $t_fields );
+$t_show_resolution = in_array( 'resolution', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'resolution' , $t_fields_status ));
 $t_resolution = $t_show_resolution ? string_display_line( get_enum_element( 'resolution', $t_bug->resolution ) ) : '';
-$t_show_summary = in_array( 'summary', $t_fields );
-$t_show_description = in_array( 'description', $t_fields );
+$t_show_summary = in_array( 'summary', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'summary' , $t_fields_status ));
+$t_show_description = in_array( 'description', $t_fields ) && ( !is_array($t_fields_status) || in_array( 'description' , $t_fields_status ));
 
 $t_summary = $t_show_summary ? bug_format_summary( $f_bug_id, SUMMARY_FIELD ) : '';
 $t_description = $t_show_description ? string_display_links( $t_bug->description ) : '';
