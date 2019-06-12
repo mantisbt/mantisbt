@@ -2520,7 +2520,7 @@ $g_bug_view_page_fields = array(
 );
 
 /**
- * A 2-dimensional array of optional fields to show on the bug view page depending of the current status.
+ * A 2-dimensional array of optional fields to show on the bug view page depending on the current status.
  *
  * The following optional fields are allowed:
  *   - additional_info
@@ -2641,7 +2641,7 @@ $g_bug_update_page_fields = array(
 );
 
 /**
- * A 2-dimensional array of optional fields to show on the bug update page depending of the current status.
+ * A 2-dimensional array of optional fields to show on the bug update page depending on the current status.
  *
  * The following optional fields are allowed:
  *   - additional_info
@@ -2769,7 +2769,7 @@ $g_bug_change_status_page_fields = array(
 );
 
 /**
- * A 2-dimensional array of optional fields to show on the bug change status page depending of the current status. This
+ * A 2-dimensional array of optional fields to show on the bug change status page depending on the current status. This
  * only changes the visibility of fields shown below the form used for
  * updating the status of an issue.
  *
