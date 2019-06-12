@@ -118,8 +118,8 @@ $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fi
 $t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields )
     && ( !is_array($t_fields_status) || in_array( 'fixed_in_version' , $t_fields_status ));
 $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields )
-    && ( config_get( 'enable_product_build' ) == ON 
-    && ( !is_array($t_fields_status) || in_array( 'product_build' , $t_fields_status )));
+    && ( config_get( 'enable_product_build' ) == ON )
+    && ( !is_array($t_fields_status) || in_array( 'product_build' , $t_fields_status ));
 $t_product_build = $t_show_product_build ? string_display_line( $t_bug->build ) : '';
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields )
     && ( !is_array($t_fields_status) || in_array( 'target_version' , $t_fields_status ))

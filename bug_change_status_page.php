@@ -70,7 +70,7 @@ $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_show_page_header = false;
 $t_force_readonly = true;
 $t_fields_config_option = 'bug_change_status_page_fields';
-$t_fields_status_config_option = 'bug_view_page_status_fields';
+$t_fields_status_config_option = 'bug_change_status_page_fields_by_status';
 
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
