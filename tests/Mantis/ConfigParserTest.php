@@ -26,10 +26,7 @@
 /**
  * Includes
  */
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-# Mantis Core required for class autoloader and constants
-require_mantis_core();
+require_once 'MantisCoreBase.php';
 
 use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
 
@@ -44,7 +41,7 @@ use PHPUnit_Framework_Constraint_IsType as PHPUnit_Type;
  * @package    Tests
  * @subpackage ConfigParser
  */
-class MantisConfigParserTest extends PHPUnit_Framework_TestCase {
+class MantisConfigParserTest extends MantisCoreBase {
 
 	/**
 	 * Test with empty string or null

@@ -267,7 +267,7 @@ function cfdef_prepare_list_value_for_email( $p_value ) {
  */
 function cfdef_print_email_value( $p_value ) {
 	if( !is_blank( $p_value ) ) {
-		echo '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
+		print_email_link( $p_value, $p_value );
 	}
 }
 

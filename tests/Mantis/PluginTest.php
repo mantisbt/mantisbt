@@ -24,17 +24,14 @@
  */
 
 # Includes
-require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
-
-# MantisBT Core API
-require_mantis_core();
+require_once 'MantisCoreBase.php';
 
 /**
  * Helper API tests
  * @package Tests
  * @subpackage String
  */
-class MantisPluginTest extends PHPUnit_Framework_TestCase {
+class MantisPluginTest extends MantisCoreBase {
 
 	const MANTISCORE = 'MantisCore';
 

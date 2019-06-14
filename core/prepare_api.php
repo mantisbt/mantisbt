@@ -41,23 +41,72 @@ require_api( 'user_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * return the mailto: href string link
- * @param string $p_email Email address to prepare.
- * @param string $p_text  Display text for the hyperlink.
+ * Return a ready-to-use mailto: URL.
+ *
+ * No validation is performed on the e-mail address, it is the caller's
+ * responsibility to ensure it is valid and not empty.
+ *
+ * @param string $p_email   Target e-mail address
+ * @param string $p_subject Optional e-mail subject
+ *
  * @return string
  */
-function prepare_email_link( $p_email, $p_text ) {
-	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-		return string_display_line( $p_text );
+function prepare_mailto_url ( $p_email, $p_subject = '' ) {
+	# If we apply string_url() to the whole mailto: link then the @ gets
+	# turned into a %40 and you can't right click in browsers to use the
+	# Copy Email Address functionality.
+	if( $p_subject ) {
+		# URL-encoding the subject is required otherwise special characters
+		# (ampersand for example) will truncate the text
+		$p_subject = '?subject=' . string_url( $p_subject );
+	}
+	$t_mailto = 'mailto:' . $p_email . $p_subject;
+
+	return string_attribute( $t_mailto );
+}
+
+/**
+ * return an HTML link with mailto: href.
+ *
+ * If user does not have access level required to see email addresses, the
+ * function will only return the display text (with tooltip if provided).
+ *
+ * @param string $p_email           Email address to prepare.
+ * @param string $p_text            Display text for the hyperlink.
+ * @param string $p_subject         Optional e-mail subject
+ * @param string  $p_tooltip        Optional tooltip to show.
+ * @param boolean $p_show_as_button If true, show link as button with envelope
+ *                                  icon, otherwise display a plain-text link.
+ *
+ * @return string
+ */
+function prepare_email_link( $p_email, $p_text, $p_subject = '', $p_tooltip ='', $p_show_as_button = false ) {
+	$t_text = string_display_line( $p_text );
+	if( !is_blank( $p_tooltip ) && $p_tooltip != $p_text ) {
+		$t_tooltip = ' title="' . string_display_line( $p_tooltip ) . '"';
+	} else {
+		$t_tooltip = '';
 	}
 
-	# If we apply string_url() to the whole mailto: link then the @
-	#  gets turned into a %40 and you can't right click in browsers to
-	#  do Copy Email Address.
-	$t_mailto = string_attribute( 'mailto:' . $p_email );
-	$p_text = string_display_line( $p_text );
+	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
+		return $t_tooltip ? '<a' . $t_tooltip . '>' . $t_text . '</a>' : $t_text;
+	}
 
-	return '<a href="' . $t_mailto . '">' . $p_text . '</a>';
+	$t_mailto = prepare_mailto_url( $p_email, $p_subject );
+
+	if( $p_show_as_button ) {
+		$t_class = ' class="btn btn-primary btn-white btn-round btn-xs"';
+		$t_text = '<i class="fa fa-envelope-o"></i>' . ( $t_text ? "&nbsp;$t_text" : '' );
+	} else {
+		$t_class = '';
+	}
+
+	return sprintf( '<a href="%s"%s%s>%s</a>',
+		$t_mailto,
+		$t_tooltip,
+		$t_class,
+		$t_text
+	);
 }
 
 /**
