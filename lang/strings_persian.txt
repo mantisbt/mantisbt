@@ -65,14 +65,14 @@ $s_actiongroup_menu_resolve = 'حل‌کردن';
 $s_actiongroup_menu_update_priority = 'روزامدسازی اولویت';
 $s_actiongroup_menu_update_status = 'روزامدسازی وضعیت';
 $s_actiongroup_menu_update_severity = 'روزامدسازی شدت';
-$s_actiongroup_menu_update_view_status = 'به‌روزرسانی وضعیت مشاهده';
+$s_actiongroup_menu_update_view_status = 'روزامدسازی وضعیت مشاهده';
 $s_actiongroup_menu_update_category = 'روزامدسازی رده';
 $s_actiongroup_menu_set_sticky = 'گذاشتن/برداشتن حالت چسبیدن';
 $s_actiongroup_menu_update_field = 'روزامدسازی %1$s';
-$s_actiongroup_menu_update_product_version = 'به‌روزرسانی نسخه محصول';
-$s_actiongroup_menu_update_target_version = 'به‌روزرسانی نسخه هدف';
+$s_actiongroup_menu_update_product_version = 'روزامدسازی نسخهٔ محصول';
+$s_actiongroup_menu_update_target_version = 'روزامدسازی نسخهٔ هدف';
 $s_actiongroup_menu_update_fixed_in_version = 'به‌روزرسانی حل‌شده در نسخه‌';
-$s_actiongroup_menu_update_product_build = 'به‌روزرسانی Build محصول';
+$s_actiongroup_menu_update_product_build = 'روزامدسازی Build محصول';
 $s_actiongroup_menu_update_due_date = 'روزامدسازی تاریخ سررسید';
 $s_actiongroup_menu_add_note = 'افزودن یادداشت';
 $s_actiongroup_menu_attach_tags = 'وصل‌کردن برچسب‌ها';
@@ -177,7 +177,7 @@ $s_category_bugs_conf_msg = 'دسته مسئله را انتخاب کنید';
 $s_set_sticky_bugs_conf_msg = 'آیا مطمئنید که می‌خواهید این مسائل را به حالت چسبیدن تنظیم کنید/تنظیم نکنید؟';
 $s_product_version_bugs_conf_msg = 'روزامدسازی نسخهٔ محصول به';
 $s_fixed_in_version_bugs_conf_msg = 'به‌روزرسانی حل‌شده در نسخه به';
-$s_target_version_bugs_conf_msg = 'به‌روزرسانی نسخه‌‌ی هدف به';
+$s_target_version_bugs_conf_msg = 'روزامدسازی نسخه‌ٔ هدف به';
 $s_due_date_bugs_conf_msg = 'روزامدسازی تاریخ سررسید به';
 $s_close_group_bugs_button = 'بستن مسائل';
 $s_delete_group_bugs_button = 'حذف مسائل';
@@ -187,12 +187,12 @@ $s_assign_group_bugs_button = 'اختصاص‌دادن مسائل';
 $s_resolve_group_bugs_button = 'حل و فصل مسائل';
 $s_priority_group_bugs_button = 'روزامدسازی اولویت';
 $s_status_group_bugs_button = 'روزامدسازی وضعیت';
-$s_category_group_bugs_button = 'روزامدسازی رده';
-$s_view_status_group_bugs_button = 'به‌روزرسانی وضعیت مشاهده';
+$s_category_group_bugs_button = 'روزامدسازی دسته';
+$s_view_status_group_bugs_button = 'روزامدسازی وضعیت مشاهده';
 $s_set_sticky_group_bugs_button = 'گذاشتن/برداشتن حالت چسبیدن';
-$s_product_version_group_bugs_button = 'به‌روزرسانی نسخه محصول';
+$s_product_version_group_bugs_button = 'روزامدسازی نسخهٔ محصول';
 $s_fixed_in_version_group_bugs_button = 'به‌روزرسانی حل‌شده در نسخه‌ی';
-$s_target_version_group_bugs_button = 'به‌روزرسانی نسخه‌ی هدف';
+$s_target_version_group_bugs_button = 'روزامدسازی نسخهٔ هدف';
 $s_due_date_group_bugs_button = 'روزامدسازی تاریخ سررسید';
 $s_update_severity_title = 'روزامدسازی شدت';
 $s_update_severity_msg = 'انتخاب اولویت مسائل';
@@ -329,7 +329,7 @@ $s_api_token_revoked = 'توکن "%s" باطل شد.';
 $s_last_used = 'آخرین استفاده';
 $s_default_account_preferences_title = 'ترجیحات حساب کاربری';
 $s_default_project = 'پروژه پیش فرض';
-$s_refresh_delay = 'تأخیر تازه‌سازی';
+$s_refresh_delay = 'تأخیر تازه‌سازی صفحۀ اصلی';
 $s_minutes = 'دقیقه';
 $s_redirect_delay = 'زمان ریدایرکت';
 $s_seconds = 'ثانیه';
@@ -360,7 +360,7 @@ $s_profile_deleted_msg = 'نمایۀ حذف شده...';
 $s_edit_profile_title = 'ویرایش نمایه';
 $s_platform = 'پلت‌فرم';
 $s_additional_description = 'توضیحات بیشتر';
-$s_update_profile_button = 'به​روزرسانی نمایه';
+$s_update_profile_button = 'روزامدسازی نمایه';
 $s_profile_defaulted_msg = 'نمایه پیش​فرض ذخیره شد...';
 $s_add_profile_title = 'افزودن نمایه';
 $s_add_profile_button = 'افزودن نمایه';
@@ -370,7 +370,7 @@ $s_make_default = 'تنظیم به عنوان پیش​فرض';
 $s_delete_profile = 'حذف نمایه';
 $s_select_profile = 'انتخاب نمایه';
 $s_submit_button = 'ثبت';
-$s_profile_updated_msg = 'نمایه به​روزرسانی شد...';
+$s_profile_updated_msg = 'نمایه روزامد شد...';
 $s_my_sponsorship = 'حامیان من';
 $s_update_sponsorship_button = 'تغییر وضعیت پرداخت';
 $s_no_sponsored = 'هیچ مسأله‌ی حمایت‌شده‌ای که به شما اختصاص داده شده باشد، یافت نشد.';
@@ -387,8 +387,8 @@ $s_sponsor_show = 'نمایش همه';
 $s_payment_updated = 'اطلاعات پرداخت به‌روز شد.';
 $s_account_updated_msg = 'حساب کاربری شما با موفقیت به‌روز شد...';
 $s_email_updated = 'آدرس ایمیل با موفقیت به​روزرسانی شد';
-$s_realname_updated = 'نام حقیقی با موفقیت به​روزرسانی شد';
-$s_password_updated = 'گذرواژه با موفقیت به​روزرسانی شد';
+$s_realname_updated = 'نام حقیقی با موفقیت روزامد شد';
+$s_password_updated = 'گذرواژه با موفقیت روزامد شد';
 $s_multiple_projects = 'مسائلی که انتخاب کرده‌اید از پروژه‌های مختلفی است. مقادیر زیر بازتاب تنظیمات همه‌ی پروژه‌ها است. اگر این مقادیر اشتباه است، لطفا انتخاب خود را با انتخاب تعداد مسائل کمتر دوباره امتحان کنید.';
 $s_new_bug_title = 'مسأله جدید';
 $s_feedback_bug_title = 'درخواست بازخورد برای مسأله';
@@ -444,7 +444,7 @@ $s_unstick_bug_button = 'لغو چسبیدن';
 $s_bug_updated_msg = 'مسأله با موفقیت به​روز شد...';
 $s_back_to_bug_link = 'بازگشت به مسأله';
 $s_update_simple_link = 'روزامدسازی پیوند ساده';
-$s_updating_bug_advanced_title = 'روزامدسازی اطلاعات مسئله';
+$s_updating_bug_advanced_title = 'روزامدسازی اطلاعات مسأله';
 $s_id = 'شناسه';
 $s_category = 'دسته';
 $s_severity = 'شدت';
@@ -469,7 +469,7 @@ $s_steps_to_reproduce = 'مراحل اجرای دوباره';
 $s_update_information_button = 'روزامدسازی اطلاعات';
 $s_sticky_issue = 'مسألۀ چسبیده شده';
 $s_profile = 'نمایه';
-$s_updating_bug_simple_title = 'روزامدسازی اطلاعات مسئله';
+$s_updating_bug_simple_title = 'روزامدسازی اطلاعات مسأله';
 $s_view_revisions = 'نمایشِ بازبینی​ها';
 $s_view_num_revisions = 'نمایش %1$d بازبینی​';
 $s_revision = 'بازبینی';
@@ -674,7 +674,7 @@ $s_category_delete_sure_msg = 'آیا مطمئنید که این دسته را �
 $s_category_delete_confirm_msg = 'آیا مطمئنید می‌خواهید دستۀ "%1$s" را حذف کنید؟';
 $s_delete_category_button = 'حذف دسته';
 $s_edit_project_category_title = 'ویرایش دسته‌های پروژه';
-$s_update_category_button = 'روزامدسازی رده';
+$s_update_category_button = 'روزامدسازی دسته';
 $s_category_updated_msg = 'دسته با موفقیت به‌روز شد...';
 $s_create_first_project = 'برای اینکه بتوانید گزارش مسائل را ثبت کنید، یک پروژه ایجاد کنید.';
 $s_add_subproject_title = 'اضافه کردن پروژه فرعی';
@@ -919,7 +919,7 @@ $s_last = 'واپسین';
 $s_start_date_label = 'تاریخ شروع:';
 $s_end_date_label = 'تاریخ پایان:';
 $s_use_date_filters = 'پالایش براساس تاریخ ثبت';
-$s_use_last_updated_date_filters = 'پالایش براساس آخرین تاریخ به‌روزرسانی';
+$s_use_last_updated_date_filters = 'پالایش بر اساس آخرین تاریخ روزامدسازی';
 $s_yes = 'بله';
 $s_no = 'خیر';
 $s_open_filters = 'تغییر پالایه';
@@ -975,7 +975,7 @@ $s_total_sponsorship_amount = 'مجموع حمایت = %1$s';
 $s_add_custom_field_button = 'ایجاد فیلد سفارشی';
 $s_delete_custom_field_button = 'حذف فیلد سفارشی';
 $s_delete_custom_field_everywhere = 'حذف فیلد سفارشی همه‌جا';
-$s_update_custom_field_button = 'به‌روزرسانی فیلد سفارشی';
+$s_update_custom_field_button = 'روزامدسازی فیلد سفارشی';
 $s_add_existing_custom_field = 'افزودن این فیلد سفارشیِ موجود';
 $s_edit_custom_field_title = 'ویرایش فیلد سفارشی';
 $s_custom_field = 'زمینه';
@@ -993,11 +993,11 @@ $s_custom_field_length_min = 'حداقل طول';
 $s_custom_field_length_max = 'حداکثر طول';
 $s_custom_field_filter_by = 'افزودن به پالایه';
 $s_custom_field_display_report = 'نمایش زمان گزارش مسائل';
-$s_custom_field_display_update = 'موقع به‌روزرسانی مسائل نمایش داده شود';
+$s_custom_field_display_update = 'موقع روزامدسازی مسائل، نمایش داده شود';
 $s_custom_field_display_resolved = 'موقع حل‌کردن مسائل نمایش داده شود';
 $s_custom_field_display_closed = 'موقع بستن مسائل نمایش داده شود';
 $s_custom_field_require_report = 'موردنیاز در گزارش دادن';
-$s_custom_field_require_update = 'موردنیاز در به‌روزرسانی';
+$s_custom_field_require_update = 'مورد نیاز در روزامدسازی';
 $s_custom_field_require_resolved = 'موردنیاز در حل‌کردن';
 $s_custom_field_require_closed = 'موردنیاز در بستن';
 $s_link_custom_field_to_project_title = 'متصل‌کردن فیلد سفارشی به پروژه‌ها';
@@ -1076,7 +1076,7 @@ $s_perm_rpt_capability = 'قابلیت';
 $s_view = 'دیدن';
 $s_issues = 'موضوع‌ها';
 $s_report_issue = 'گزارش یک مسأله';
-$s_update_issue = 'روزامدسازی یک مسئله';
+$s_update_issue = 'روزامدسازی مسأله';
 $s_monitor_issue = 'پیگیری مسأله';
 $s_handle_issue = 'رسیدگی به مسأله';
 $s_move_issue = 'انتقال مسأله';
@@ -1084,7 +1084,7 @@ $s_delete_issue = 'حذف مسأله';
 $s_reopen_issue = 'بازگشایی مسأله';
 $s_view_private_issues = 'مشاهده‌ی مسائل خصوصی';
 $s_update_readonly_issues = 'روزامدسازی مسائل فقط خواندنی';
-$s_update_issue_status = 'روزامدسازی وضعیت مسئله';
+$s_update_issue_status = 'روزامدسازی وضعیت مسأله';
 $s_set_view_status = 'تنظیم حالت نمایش زمانی که یک مسأله یا یادداشت جدیدی گزارش می‌دهید';
 $s_update_view_status = 'تغییر حالت نمایشِ مسأله یا یادداشت موجود';
 $s_show_list_of_users_monitoring_issue = 'نمایشِ کاربرانِ پیگیری کنندۀ این مسأله';
@@ -1130,9 +1130,13 @@ $s_status_changed_to = 'وضعیت تغییر کرد به';
 $s_email_on_deleted = 'دریافت ایمیل برای حذف شدن مسأله';
 $s_email_on_sponsorship_changed = 'دریافت ایمیل برای تغییر کردن حمایت';
 $s_email_on_relationship_changed = 'دریافت ایمیل برای تغییر کردن نسبت';
+$s_email_on_updated = 'دریافت ایمیل برای روزامد شدن مسئله';
 $s_loading = 'در حال بارگذاری...';
+$s_between_date = 'بین';
+$s_on_or_before_date = 'در تاریخ یا قبل';
 $s_before_date = 'قبل از';
 $s_after_date = 'پس از';
+$s_on_or_after_date = 'در تاریخ یا بعد';
 $s_from_date = 'از';
 $s_to_date = 'به';
 $s_on_date = 'روشن';
@@ -1140,13 +1144,16 @@ $s_on = 'روشن';
 $s_off = 'خاموش';
 $s_wiki = 'ویکی';
 $s_tags = 'برچسب‌ها';
+$s_tag_details = 'جزئیات برچسب: %1$s';
 $s_tag_id = 'شناسه برچسب';
 $s_tag_name = 'نام';
 $s_tag_creator = 'ایجادکننده';
 $s_tag_created = 'تاریخ ایجاد';
 $s_tag_updated = 'آخرین روزامدسازی';
 $s_tag_description = 'توضیحات برچسب';
+$s_tag_statistics = 'آمار استفاده';
 $s_tag_update = 'روزامدسازی برچسب: %1$s';
+$s_tag_update_return = 'بازگشت به برچسب';
 $s_tag_update_button = 'روزامدسازی برچسب';
 $s_tag_delete_button = 'حذف برچسب';
 $s_tag_delete_message = 'آیا مطمئنید می‌خواهید این برچسب را حذف کنید؟';
@@ -1173,8 +1180,8 @@ $s_time_tracking_billing_link = 'پیگیری زمان';
 $s_time_tracking = 'پیگری زمان';
 $s_time_tracking_time_spent = 'زمان صرف‌شده:';
 $s_time_tracking_get_info_button = 'نمایش اطلاعات پیگیری زمان';
-$s_time_tracking_cost_per_hour = 'هزینه / ساعت';
-$s_time_tracking_cost_per_hour_label = 'هزینه / ساعت:';
+$s_time_tracking_cost_per_hour = 'هزینه بر ساعت';
+$s_time_tracking_cost_per_hour_label = 'هزینه بر ساعت:';
 $s_time_tracking_cost = 'هزینه';
 $s_time_tracking_cost_label = 'هزینه:';
 $s_total_time_for_issue = 'مجموع زمان برای مسأله = %1$s';
@@ -1189,11 +1196,23 @@ $s_csv_columns_title = 'ستون‌های CSV';
 $s_view_issues_columns_title = 'نمایش ستون‌های مسائل';
 $s_print_issues_columns_title = 'چاپ ستون‌های مسائل';
 $s_excel_columns_title = 'ستون‌های اکسل';
-$s_update_columns_as_global_default = 'به‌روزرسانی ستون‌ها به‌جهت پیش فرض کردن برای همه‌ی پروژه‌ها';
+$s_update_columns_as_global_default = 'روزامدسازی ستون‌ها به‌عنوان پیش‌فرض سراسری برای همهٔ پروژه‌ها';
+$s_update_columns_for_current_project = 'روزامدسازی ستون‌ها برای پروژۀ فعلی';
+$s_update_columns_as_my_default = 'روزامدسازی ستون‌ها به‌عنوان پیش‌فرض برای همهٔ پروژه‌ها';
 $s_reset_columns_configuration = 'بازنشانی پیکربندی ستون‌ها';
 $s_copy_columns_from = 'رونوشت ستون‌ها از';
+$s_copy_columns_to = 'رونوشت ستون‌ها به';
 $s_due_date = 'تاریخ سررسید';
+$s_view_account_title = 'اطلاعات کاربر';
 $s_manage_user = 'مدیریت کاربر';
+$s_install_information = 'اطلاعات نصب MantisBT';
+$s_database_information = 'اطلاعات پایگاه داده MantisBT';
+$s_path_information = 'اطلاعات مسیر MantisBT';
+$s_mantisbt_database_statistics = 'آمار پایگاه داده MantisBT';
+$s_php_version = 'نسخۀ PHP';
+$s_adodb_version = 'نسخۀ ADOdb';
+$s_database_driver = 'درایور پایگاه داده';
+$s_database_version_description = 'نسخۀ پایگاه داده، توضیحات';
 $s_month_january = 'ژانویه';
 $s_month_february = 'فوریه';
 $s_month_march = 'مارس';
@@ -1220,9 +1239,22 @@ $s_timeline_issue_reopened = '<span class="username">%1$s</span> مسأله <spa
 $s_timeline_issue_assigned = '<span class="username">%1$s</span> مسأله <span class="issue_id">%2$s</span> را به <span class="username">%3$s</span> اختصاص داد';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> مسأله <span class="issue_id">%2$s</span> را به خودش اختصاص داد';
 $s_timeline_issue_unassigned = '<span class="username">%1$s</span> مسأله <span class="issue_id">%2$s</span> را بدون اختصاص کرد';
+$s_timeline_no_activity = 'در این بازۀ زمانی فعالیتی نیست.';
 $s_timeline_title = 'خط زمان';
+$s_timeline_more = 'رویدادهای بیشتر...';
+$s_missing_error_string = 'متن خطای ناشناخته: %1$s';
+$MANTIS_ERROR[ERROR_GENERIC] = 'خطایی در زمان این فعالیت رخ داده است. شما می‌توانید این خطا را به مدیر محل خود گزارش دهید.';
+$MANTIS_ERROR[ERROR_SQL] = 'خطای SQL شناسایی شده.';
 $MANTIS_ERROR[ERROR_REPORT] = 'خطایی در گزارش شما وجود دارد.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'هیچ پرونده‌ای مشخص نشده‌است.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'نوع پرونده مجاز نیست.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'مسیر انتخاب شده موجود نیست. لطفا تنظیمات پروژه بررسی شود.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'پروژه‌ای با این نام وجود دارد.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'فیلد مورد نیاز "%1$s" خالی بود. لطفا ورودی‌های خود را بازبینی کنید.';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'مقدار نامعتبر برای \'%1$s\'';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'این حساب کاربری حفاظت‌شده است. تا زمانی که حفاظت از روی حساب کاربری برداشته نشود مجاز به دسترسی نیستید.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'دسترسی ممنوع است.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'بارگذاری پرونده موفق نبود. پرونده توسط MantisBT قابل خواندن نیست. لطفا تنظیمات پروژه را بررسی کنید.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'این نام کاربری در حال استفاده است. لطفا کلید Back را زده و یکی دیگر را انتخاب کنید.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'رسیدگی‌کننده‌ی مسأله دسترسی‌های لازم برای رسیدگی به مسأله را در این وضعیت ندارد.';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = 'گذرواژه‌ی فعلی اشتباه است.';
