@@ -69,6 +69,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
+
+	# View
+	$g_app->get( '/{id}/view/', 'rest_issue_view' );
+	$g_app->get( '/{id}/view', 'rest_issue_view' );
 });
 
 /**
@@ -496,6 +500,24 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
 		withJson( array( 'files' => $t_files ) );
+}
+
+/**
+ * Get information necessary about an issue to render an issue view page.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_view( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+
+	$t_data = array( 'query' => array( 'id' => $t_issue_id ) );
+	$t_command = new IssueViewCommand( $t_data );
+	$t_result = $t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 }
 
 /**
