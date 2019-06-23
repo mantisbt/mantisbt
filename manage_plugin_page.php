@@ -73,8 +73,8 @@ $t_plugins_installed = prepare_for_display( true );
 if( 0 < count( $t_plugins_installed ) ) {
 ?>
 
-<div class="space-10"></div>
 
+<a id="installed"></a>
 <div class="form-container">
 	<form action="manage_plugin_update.php" method="post">
 		<div class="widget-box widget-color-blue2">
@@ -179,6 +179,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 if( 0 < count( $t_plugins_invalid ) ) {
 ?>
 	<div class="space-10"></div>
+	<a id="invalid"></a>
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -257,6 +258,7 @@ $t_plugins_available = prepare_for_display( false );
 if( 0 < count( $t_plugins_available ) ) {
 ?>
 
+<a id="available"></a>
 <div class="space-10"></div>
 
 <div class="widget-box widget-color-blue2">
