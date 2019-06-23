@@ -73,6 +73,7 @@ $t_plugins_installed = prepare_for_display( true );
 if( 0 < count( $t_plugins_installed ) ) {
 ?>
 
+<div class="space-10"></div>
 
 <a id="installed"></a>
 <div class="form-container">
