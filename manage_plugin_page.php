@@ -172,6 +172,86 @@ if( 0 < count( $t_plugins_installed ) ) {
 <?php
 } # End Installed plugins section
 
+# Invalid plugins section
+# @TODO adapt prepare_for_display() to handle invalid plugins
+# if( $t_plugin instanceof InvalidPlugin ) {
+#		$t_plugins_invalid[$t_basename] = $t_plugin;
+if( 0 < count( $t_plugins_invalid ) ) {
+?>
+	<div class="space-10"></div>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-exclamation-triangle', 'ace-icon' ); ?>
+				<?php echo lang_get( 'plugins_missing' ) ?>
+			</h4>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<?php
+			printf(
+				lang_get( 'plugins_missing_description' ),
+				string_attribute( config_get_global( 'plugin_path' ) )
+			);
+			?>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						<colgroup>
+							<col>
+							<col>
+							<col style="width:10%">
+						</colgroup>
+						<thead>
+						<tr>
+							<th><?php echo lang_get( 'plugin' ) ?></th>
+							<th><?php echo lang_get( 'plugin_problem_description' ) ?></th>
+							<th><?php echo lang_get( 'plugin_actions' ) ?></th>
+						</tr>
+						</thead>
+						<tbody>
+<?php
+						foreach( $t_plugins_invalid as $t_basename => $t_plugin ) {
+?>
+							<tr>
+								<td class="small">
+									<?php echo string_display_line( $t_plugin->name ); ?>
+								</td>
+
+								<td class="small">
+									<?php echo string_display( $t_plugin->description ); ?>
+								</td>
+
+								<td class="center">
+<?php
+							#
+							if( true || !$t_plugin instanceof MissingClassPlugin ) {
+								print_link_button(
+									'manage_plugin_uninstall.php?name=' . $t_basename
+									. form_security_param( 'manage_plugin_uninstall'
+									),
+									lang_get( 'remove_link' ),
+									'btn-xs'
+								);
+							} else {
+								echo lang_get( 'plugin_manual_fix' );
+							}
+?>
+								</td>
+							</tr>
+<?php
+						}
+?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+} # End Invalid plugins section
+
 # Available plugins section
 $t_plugins_available = prepare_for_display( false );
 if( 0 < count( $t_plugins_available ) ) {
