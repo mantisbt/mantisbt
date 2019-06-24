@@ -828,6 +828,7 @@ $s_plugin_actions = 'Actions';
 $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
+$s_plugin_manual_fix = 'Manual intervention required';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the "%1$s" plugin?';
 $s_plugin_key_label = 'Key:';
 $s_plugin_key_met = 'plugin ready';

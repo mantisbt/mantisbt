@@ -69,7 +69,8 @@ uasort( $t_plugins,
 
 <?php
 # Installed plugins section
-$t_plugins_installed = prepare_for_display( true );
+# @TODO use constants or a class
+$t_plugins_installed = prepare_for_display( 1 );
 if( 0 < count( $t_plugins_installed ) ) {
 ?>
 
@@ -174,9 +175,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 } # End Installed plugins section
 
 # Invalid plugins section
-# @TODO adapt prepare_for_display() to handle invalid plugins
-# if( $t_plugin instanceof InvalidPlugin ) {
-#		$t_plugins_invalid[$t_basename] = $t_plugin;
+$t_plugins_invalid = prepare_for_display( 2 );
 if( 0 < count( $t_plugins_invalid ) ) {
 ?>
 	<div class="space-10"></div>
@@ -214,36 +213,27 @@ if( 0 < count( $t_plugins_invalid ) ) {
 						</thead>
 						<tbody>
 <?php
-						foreach( $t_plugins_invalid as $t_basename => $t_plugin ) {
-?>
-							<tr>
-								<td class="small">
-									<?php echo string_display_line( $t_plugin->name ); ?>
-								</td>
+	foreach( $t_plugins_invalid as $t_basename => $t_data ) {
+		echo '<tr>';
+		echo '<td>', $t_data['plugin'], '</td>';
+		echo '<td>', $t_data['description'], '</td>';
 
-								<td class="small">
-									<?php echo string_display( $t_plugin->description ); ?>
-								</td>
-
-								<td class="center">
-<?php
-							#
-							if( true || !$t_plugin instanceof MissingClassPlugin ) {
-								print_link_button(
-									'manage_plugin_uninstall.php?name=' . $t_basename
-									. form_security_param( 'manage_plugin_uninstall'
-									),
-									lang_get( 'remove_link' ),
-									'btn-xs'
-								);
-							} else {
-								echo lang_get( 'plugin_manual_fix' );
-							}
-?>
-								</td>
-							</tr>
-<?php
-						}
+		# Actions
+		echo '<td class="center">';
+		if( $t_data['remove'] ) {
+			print_link_button(
+				'manage_plugin_uninstall.php?name=' . $t_basename
+				. form_security_param( 'manage_plugin_uninstall'
+				),
+				lang_get( 'remove_link' ),
+				'btn-xs'
+			);
+		} else {
+			echo lang_get( 'plugin_manual_fix' );
+		}
+		echo '</td>';
+		echo "</tr>\n";
+	}
 ?>
 						</tbody>
 					</table>
@@ -255,7 +245,7 @@ if( 0 < count( $t_plugins_invalid ) ) {
 } # End Invalid plugins section
 
 # Available plugins section
-$t_plugins_available = prepare_for_display( false );
+$t_plugins_available = prepare_for_display( 0 );
 if( 0 < count( $t_plugins_available ) ) {
 ?>
 
@@ -343,17 +333,23 @@ layout_page_end();
 /**
  * Prepare plugin information for display.
  *
- * @param bool $p_installed True for installed, False for available plugins
+ * @param bool $p_install_status 0=available, 1=installed, 2=invalid
  *
  * @return array Data to display
  */
-function prepare_for_display( $p_installed ) {
+function prepare_for_display( $p_install_status ) {
 	global $t_plugins;
 
 	$t_display_data = array();
 
 	foreach( $t_plugins as $t_basename => $t_plugin) {
-		if( $p_installed xor plugin_is_registered( $t_basename ) ) {
+		# Skip plugins not matching the desired install status
+		$t_registered = plugin_is_registered( $t_basename );
+		$t_invalid = $t_plugin instanceof InvalidPlugin;
+		if(    $p_install_status != 2 && $t_invalid
+			|| $p_install_status != 1 && $t_registered
+			|| $p_install_status != 0 && !$t_registered && !$t_invalid
+		) {
 			continue;
 		}
 
@@ -379,7 +375,7 @@ function prepare_for_display( $p_installed ) {
 
 		# Plugin name / page
 		# If plugin is installed and has a config page, we create a link to it
-		if( $p_installed && !is_blank( $t_plugin->page ) ) {
+		if( $p_install_status && !is_blank( $t_plugin->page ) ) {
 			$t_name = '<a href="'
 				. string_attribute( plugin_page( $t_plugin->page, false, $t_basename ) )
 				. '">'
@@ -394,6 +390,15 @@ function prepare_for_display( $p_installed ) {
 				. lang_get( 'plugin_url' )
 				. lang_get( 'word_separator' )
 				. '<a href="' . $t_url . '">' . $t_url . '</a>';
+		}
+
+		# Description
+		if( $p_install_status != 2 ) {
+			$t_description = string_display_line_links( $t_plugin->description )
+				. '<span class="small">' . $t_author . $t_url . '</span>';
+		} else {
+			# Description from InvalidPlugin classes are trusted input
+			$t_description = $t_plugin->description;
 		}
 
 		# Dependencies
@@ -444,13 +449,13 @@ function prepare_for_display( $p_installed ) {
 
 		$t_display_data[$t_basename] = array(
 			'plugin' => $t_name,
-			'description' => string_display_line_links( $t_plugin->description )
-				. '<span class="small">' . $t_author . $t_url . '</span>',
+			'description' => $t_description,
 			'dependencies' => $t_depends,
 			'upgrade' => $t_upgrade_needed,
 			'install' => $t_can_install,
+			'remove' => $t_invalid && ! $t_plugin instanceof MissingClassPlugin,
 		);
-		if( $p_installed ) {
+		if( $p_install_status == 1 ) {
 			$t_display_data[$t_basename] += array(
 				'priority' => plugin_priority( $t_basename ),
 				'protected' =>  plugin_protected( $t_basename ),
