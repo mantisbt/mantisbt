@@ -746,8 +746,17 @@ function helper_url_combine( $p_page, $p_query_string ) {
 function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {
 	# always add core version, to force reload of resources after an upgrade.
 	$t_key = $p_custom_string . '+V' . MANTIS_VERSION;
-	$t_user_auth = auth_is_user_authenticated();
-	foreach( $p_runtime_attrs as $t_attr ) {
+        
+        $t_current_page = array_key_exists( 'REQUEST_URI', $_SERVER )
+                ? basename( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) )
+                : basename( __FILE__ );
+
+        # Required for correct key generation when re-authenticating.
+	$t_user_auth = $t_current_page == AUTH_PAGE_CREDENTIAL
+                ? false
+                : auth_is_user_authenticated();
+	
+        foreach( $p_runtime_attrs as $t_attr ) {
 		switch( $t_attr ) {
 			case 'user':
 				$t_key .= '+U' . ( $t_user_auth ? auth_get_current_user_id() : META_FILTER_NONE );
