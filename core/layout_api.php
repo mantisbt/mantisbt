@@ -579,10 +579,9 @@ function layout_navbar_button_bar() {
  * @param bool $p_include_all_projects  true: include "All Projects", otherwise false.
  * @param int|null $p_filter_project_id  The id of a project to exclude or null.
  * @param string|bool $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
- * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
  * @return void
  */
-function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
+function layout_navbar_projects_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
 	$t_user_id = auth_get_current_user_id();
 
 	# Cache all needed projects
@@ -590,7 +589,6 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	# Get top level projects
 	$t_project_ids = user_get_accessible_projects( $t_user_id );
-	$t_can_report = true;
 
 	echo '<li>';
 	echo '<div class="projects-searchbox">';
@@ -610,15 +608,10 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	}
 
 	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
 		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
 		echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_id . '"';
 		echo ' class="project-link"> ' . string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 	}
 
 	echo '</ul>';
@@ -633,22 +626,15 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
  * @param integer $p_project_id        A project identifier.
  * @param integer $p_filter_project_id A filter project identifier.
  * @param boolean $p_trace             Whether to trace parent projects.
- * @param boolean $p_can_report_only   If true, disables projects in which user can't report issues; defaults to false (all projects enabled).
  * @param array   $p_parents           Array of parent projects.
  * @return void
  */
-function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, array $p_parents = array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
-	$t_can_report = true;
 
 	foreach( $t_project_ids as $t_id ) {
-		if( $p_can_report_only ) {
-			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-		}
-
 		if( $p_trace ) {
 			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
 		} else {
@@ -660,7 +646,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 		echo ' class="project-link"> ' . str_repeat( '&#160;', count( $p_parents ) * 4 );
 		echo string_attribute( project_get_field( $t_id, 'name' ) ) . '</a></li>' . "\n";
 
-		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
+		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
 	}
 }
 
