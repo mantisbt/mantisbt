@@ -290,6 +290,7 @@ $s_realname_label = 'Nom Real:';
 $s_email = 'E-mail';
 $s_email_label = 'Correu Electrònic:';
 $s_password = 'Contrasenya';
+$s_new_password = 'Contrasenya nova';
 $s_no_password_change = 'La contrasenya està controlada per un altre sistema, per tant no es pot editar aquí.';
 $s_confirm_password = 'Confirma contrasenya';
 $s_access_level = 'Nivell d\'accés';

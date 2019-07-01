@@ -1256,7 +1256,13 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'این حساب کاربری حفاظ�
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'دسترسی ممنوع است.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'بارگذاری پرونده موفق نبود. پرونده توسط MantisBT قابل خواندن نیست. لطفا تنظیمات پروژه را بررسی کنید.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'این نام کاربری در حال استفاده است. لطفا کلید Back را زده و یکی دیگر را انتخاب کنید.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'رشته‌ی "%1$s" یافت نشد.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'یادداشت یافت نشد.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'فیلدِ "%1$s" مربوط به پایگاه داده یافت نشد.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'رسیدگی‌کننده‌ی مسئله دسترسی‌های لازم برای رسیدگی به مسئله را در این وضعیت ندارد.';
+$MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'سلسله مراتب پروژه (پروژه‌های فرعی) غیرفعال شد.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'پروژه‌ی "%1$s" یافت نشد.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'پروژه‌ای با این نام موجود است. لطفا بازگردید و نام دیگری وارد کنید.';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = 'گذرواژه‌ی فعلی اشتباه است.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'مسئله %1$d یافت نشد.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'آدرس ایمیل غیر معتبر.';
