@@ -80,9 +80,13 @@
 						</para>
 					</listitem>
 				</itemizedlist>
-			Users may also install local tools to avoid loss of form data, e.g.
-			<ulink url="http://lazarus.interclue.com/">Lazarus Form Recovery</ulink>
-			add-on for Firefox.
+				Users may also install local tools to avoid loss of form data, such as
+				<ulink url="https://chrome.google.com/webstore/detail/typio-form-recovery/djkbihbnjhkjahbhjaadbepppbpoedaa">
+					Typio Form Recovery
+				</ulink> Chrome extension, or
+				<ulink url="https://stephanmahieu.github.io/fhc-home/">
+					Form History Control
+				</ulink> add-on for Firefox and Chrome.
 			</para>
 
 			<para>Further references and reading:
