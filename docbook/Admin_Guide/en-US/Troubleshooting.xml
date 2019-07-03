@@ -19,7 +19,7 @@
 	<section id="admin.troubleshooting.errors">
 		<title>Application Errors</title>
 
-		<para>Additional information about MantisBT common errors.
+		<para>Additional information about common MantisBT errors.
 		</para>
 
 		<section id="admin.troubleshooting.errors.2800">
@@ -97,6 +97,11 @@
 						<ulink url="http://www.mantisbt.org/bugs/view.php?id=12492">12492</ulink>,
 						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13106">13106</ulink>,
 						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13246">13246</ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="https://www.mantisbt.org/forums/search.php?keywords=2800">MantisBT forums</ulink>
 						</para>
 					</listitem>
 				</itemizedlist>
