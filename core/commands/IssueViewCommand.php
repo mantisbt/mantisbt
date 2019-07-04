@@ -87,11 +87,11 @@ class IssueViewCommand extends Command {
 
 		$t_user_id = auth_get_current_user_id();
 		$t_issue_id = $this->query( 'id' );
-		# $t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
-		$t_issue_data = bug_get( $t_issue_id, true );
-		$t_lang = mci_get_user_lang( $t_user_id );
 
 		ApiObjectFactory::$soap = false;
+
+		$t_issue_data = bug_get( $t_issue_id, true );
+		$t_lang = mci_get_user_lang( $t_user_id );
 		$t_issue = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
 
 		$t_issue_id = (int)$t_issue['id'];
@@ -109,31 +109,32 @@ class IssueViewCommand extends Command {
 		# Fields to show on the issue view page
 		$t_fields = config_get( 'bug_view_page_fields' );
 		$t_fields = columns_filter_disabled( $t_fields );
-		$t_output_configs['fields'] = $t_fields;
+
+		$t_output_configs['summary_show'] = in_array( 'summary', $t_fields );
+		$t_output_configs['description_show'] = in_array( 'description', $t_fields );
 
 		# Versions
 		$t_show_versions = version_should_show_product_version( $t_project_id );
-		$t_output_configs['show_versions'] = $t_show_versions;
+		$t_output_configs['versions_show'] = $t_show_versions;
 
 		$t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
-		$t_output_configs['show_product_version'] = $t_show_product_version;
+		$t_output_configs['versions_product_version_show'] = $t_show_product_version;
 
 		$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
-		$t_output_configs['show_fixed_in_version'] = $t_show_fixed_in_version;
+		$t_output_configs['versions_fixed_in_version_show'] = $t_show_fixed_in_version;
 
 		$t_show_product_build =
 			$t_show_versions &&
 			in_array( 'product_build', $t_fields ) &&
 			config_get( 'enable_product_build' ) == ON;
 
-		$t_output_configs['show_product_build'] = $t_show_product_build;
-
-		$t_product_build = $t_show_product_build ? string_display_line( $t_issue->build ) : '';
+		$t_output_configs['versions_product_build_show'] = $t_show_product_build;
 
 		$t_show_target_version =
 			$t_show_versions &&
 			in_array( 'target_version', $t_fields ) &&
 			access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_issue_id );
+		$t_output_configs['versions_target_version_show'] = $t_show_target_version;
 
 		$t_form_title = lang_get( 'bug_view_title' );
 		$t_output_issue['form_title'] = $t_form_title;
@@ -163,6 +164,9 @@ class IssueViewCommand extends Command {
 			$t_output_issue['updated_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['updated_at'] ) );
 		}
 
+		$t_output_configs['additional_information_show'] = isset( $t_issue['additional_information'] ) && !is_blank( $t_issue['additional_information'] ) && in_array( 'additional_info', $t_fields );
+		$t_output_configs['steps_to_reproduce_show'] = isset( $t_issue['steps_to_reproduce'] ) && !is_blank( $t_issue['steps_to_reproduce'] ) && in_array( 'steps_to_reproduce', $t_fields );
+
 		$t_output_configs['tags_show'] =
 			in_array( 'tags', $t_fields ) &&
 			access_has_bug_level( config_get( 'tag_view_threshold' ), $t_issue_id );
@@ -184,14 +188,16 @@ class IssueViewCommand extends Command {
 			}
 		}
 
-		$t_output_configs['relationship_show'] = !$t_force_readonly;
+		$t_output_configs['relationships_show'] = !$t_force_readonly;
 
-		$t_output_configs['sponsorship_show'] =
+		$t_output_configs['sponsorships_show'] =
 			config_get( 'enable_sponsorship' ) &&
 			access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $t_issue_id );
 
-		$t_show_profiles = config_get( 'enable_profiles' );
-		$t_output_configs['show_profiles'] = $t_show_profiles;
+		$t_output_configs['profiles_show'] = config_get( 'enable_profiles' ) != OFF;
+		$t_output_configs['profiles_platform_show'] = $t_output_configs['profiles_show'] && in_array( 'platform', $t_fields );
+		$t_output_configs['profiles_os_show'] = $t_output_configs['profiles_show'] && in_array( 'os', $t_fields );
+		$t_output_configs['profiles_os_version_show'] = $t_output_configs['profiles_show'] && in_array( 'os_version', $t_fields );
 
 		$t_output_configs['monitor_show'] =
 			!$t_force_readonly &&
