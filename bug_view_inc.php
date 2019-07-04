@@ -418,15 +418,15 @@ if( isset( $t_issue['projection'] ) || isset( $t_issue['eta'] ) ) {
 # Platform, OS, OS Version
 #
 
-if( ( isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
-	( isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) ||
-    ( isset( $t_issue['os_version'] ) && !is_blank( $t_issue['os_version'] ) ) ) {
+if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
+	( $t_flags['profiles_os_show'] && isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) ||
+    ( $t_flags['profiles_os_version_show'] && isset( $t_issue['os_version'] ) && !is_blank( $t_issue['os_version'] ) ) ) {
 	$t_spacer = 0;
 
 	echo '<tr>';
 
 	# Platform
-	if( isset( $t_issue['platform'] ) ) {
+	if( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) {
 		echo '<th class="bug-platform category">', lang_get( 'platform' ), '</th>';
 		echo '<td class="bug-platform">', string_display_line( $t_issue['platform'] ), '</td>';
 	} else {
@@ -434,7 +434,7 @@ if( ( isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
 	}
 
 	# Operating System
-	if( isset( $t_issue['os'] ) ) {
+	if( $t_flags['profiles_os_show'] && isset( $t_issue['os'] ) && !is_blank( $t_issue['os'] ) ) {
 		echo '<th class="bug-os category">', lang_get( 'os' ), '</th>';
 		echo '<td class="bug-os">', string_display_line( $t_issue['os'] ), '</td>';
 	} else {
@@ -442,7 +442,7 @@ if( ( isset( $t_issue['platform'] ) && !is_blank( $t_issue['platform'] ) ) ||
 	}
 
 	# OS Version
-	if( isset( $t_issue['os_version'] ) ) {
+	if( $t_flags['profiles_os_version_show'] && isset( $t_issue['os_version'] ) && !is_blank( $t_issue['os_version'] ) ) {
 		echo '<th class="bug-os-version category">', lang_get( 'os_version' ), '</th>';
 		echo '<td class="bug-os-version">', string_display_line( $t_issue['os_version'] ), '</td>';
 	} else {
@@ -466,7 +466,7 @@ if( isset( $t_issue['version'] ) || isset( $t_issue['product_build'] ) ) {
 	echo '<tr>';
 
 	# Product Version
-	if( isset( $t_issue['version'] ) ) {
+	if( $t_flags['versions_product_version_show'] && isset( $t_issue['version'] ) ) {
 		echo '<th class="bug-product-version category">', lang_get( 'product_version' ), '</th>';
 		echo '<td class="bug-product-version">', string_display_line( $t_issue['version']['name'] ), '</td>';
 	} else {
@@ -474,7 +474,7 @@ if( isset( $t_issue['version'] ) || isset( $t_issue['product_build'] ) ) {
 	}
 
 	# Product Build
-	if( isset( $t_issue['product_build'] ) ) {
+	if( $t_flags['versions_product_build_show'] && isset( $t_issue['product_build'] ) ) {
 		echo '<th class="bug-product-build category">', lang_get( 'product_build' ), '</th>';
 		echo '<td class="bug-product-build">', string_display_line( $t_issue['product_build'] ), '</td>';
 	} else {
@@ -491,13 +491,13 @@ if( isset( $t_issue['version'] ) || isset( $t_issue['product_build'] ) ) {
 # Target Version, Fixed In Version
 #
 
-if( isset( $t_issue['target_version'] ) || isset( $t_issue['fixed_in_version'] ) ) {
+if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) || ( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) ) {
 	$t_spacer = 2;
 
 	echo '<tr>';
 
 	# target version
-	if( isset( $t_issue['target_version'] ) ) {
+	if( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) {
 		# Target Version
 		echo '<th class="bug-target-version category">', lang_get( 'target_version' ), '</th>';
 		echo '<td class="bug-target-version">', string_display_line( $t_issue['target_version'] ), '</td>';
@@ -506,7 +506,7 @@ if( isset( $t_issue['target_version'] ) || isset( $t_issue['fixed_in_version'] )
 	}
 
 	# fixed in version
-	if( isset( $t_issue['fixed_in_version'] ) ) {
+	if( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) {
 		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
 		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue['fixed_in_version'] ), '</td>';
 	} else {
@@ -534,7 +534,7 @@ echo '<tr class="hidden"></tr>';
 #
 
 # Summary
-if( isset( $t_issue['summary'] ) ) {
+if( $t_flags['summary_show'] && isset( $t_issue['summary'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-summary category">', lang_get( 'summary' ), '</th>';
 	echo '<td class="bug-summary" colspan="5">', string_display_line( $t_issue['summary'] ), '</td>';
@@ -542,7 +542,7 @@ if( isset( $t_issue['summary'] ) ) {
 }
 
 # Description
-if( isset( $t_issue['description'] ) ) {
+if( $t_flags['description_show'] && isset( $t_issue['description'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-description category">', lang_get( 'description' ), '</th>';
 	echo '<td class="bug-description" colspan="5">', string_display_links( $t_issue['description'] ), '</td>';
@@ -550,7 +550,7 @@ if( isset( $t_issue['description'] ) ) {
 }
 
 # Steps to Reproduce
-if( isset( $t_issue['steps_to_reproduce'] ) ) {
+if( $t_flags['steps_to_reproduce_show'] && isset( $t_issue['steps_to_reproduce'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-steps-to-reproduce category">', lang_get( 'steps_to_reproduce' ), '</th>';
 	echo '<td class="bug-steps-to-reproduce" colspan="5">', string_display_links( $t_issue['steps_to_reproduce'] ), '</td>';
@@ -558,7 +558,7 @@ if( isset( $t_issue['steps_to_reproduce'] ) ) {
 }
 
 # Additional Information
-if( isset( $t_issue['additional_information'] ) ) {
+if( $t_flags['additional_information_show'] && isset( $t_issue['additional_information'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-additional-information category">', lang_get( 'additional_information' ), '</th>';
 	echo '<td class="bug-additional-information" colspan="5">', string_display_links( $t_issue['additional_information'] ), '</td>';
@@ -615,13 +615,13 @@ echo '</tbody></table>';
 echo '</div></div></div></div></div>';
 
 # User list sponsoring the bug
-if( $t_flags['sponsorship_show'] ) {
+if( $t_flags['sponsorships_show'] ) {
 	define( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW', true );
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 }
 
 # Bug Relationships
-if( $t_flags['relationship_show'] ) {
+if( $t_flags['relationships_show'] ) {
 	relationship_view_box( $f_issue_id );
 }
 
