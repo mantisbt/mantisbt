@@ -588,12 +588,14 @@ echo '<tr class="spacer"><td colspan="6"></td></tr>';
 echo '<tr class="hidden"></tr>';
 
 # Custom Fields
-if( isset( $t_issue_view['custom_fields'] ) ) {
-	foreach( $t_issue_view['custom_fields'] as $t_custom_field ) {
+if( isset( $t_issue['custom_fields'] ) ) {
+	foreach( $t_issue['custom_fields'] as $t_custom_field ) {
+		$t_def = custom_field_get_definition( $t_custom_field['field']['id'] );
+
 		echo '<tr>';
-		echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_custom_field['definition']['name'] ) ), '</th>';
+		echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
 		echo '<td class="bug-custom-field" colspan="5">';
-		print_custom_field_value( $t_custom_field['definition'], $t_custom_field['id'], $f_issue_id );
+		print_custom_field_value( $t_def, $t_custom_field['field']['id'], $f_issue_id );
 		echo '</td></tr>';
 	}
 
