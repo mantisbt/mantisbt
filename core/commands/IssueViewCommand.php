@@ -211,20 +211,6 @@ class IssueViewCommand extends Command {
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		custom_field_cache_values( array( $t_issue_id ), $t_related_custom_field_ids );
 
-		$t_custom_fields = array();
-		foreach( $t_related_custom_field_ids as $t_id ) {
-			if( !custom_field_has_read_access( $t_id, $t_issue_id ) ) {
-				continue;
-			} # has read access
-
-			$t_def = custom_field_get_definition( $t_id );
-			$t_custom_fields[] = array( 'id' => $t_id, 'definition' => $t_def );
-		}
-
-		if( !empty( $t_custom_fields ) ) {
-			$t_output_issue['custom_fields'] = $t_custom_fields;
-		}
-
 		$t_links = event_signal( 'EVENT_MENU_ISSUE', $t_issue_id );
 		$t_output_issue['links'] = $t_links;
 
