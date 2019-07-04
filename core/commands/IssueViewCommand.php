@@ -116,28 +116,20 @@ class IssueViewCommand extends Command {
 		# Versions
 		$t_show_versions = version_should_show_product_version( $t_project_id );
 		$t_output_configs['versions_show'] = $t_show_versions;
+		$t_output_configs['versions_product_version_show'] = $t_show_versions && in_array( 'product_version', $t_fields );
+		$t_output_configs['versions_fixed_in_version_show'] = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
 
-		$t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
-		$t_output_configs['versions_product_version_show'] = $t_show_product_version;
-
-		$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
-		$t_output_configs['versions_fixed_in_version_show'] = $t_show_fixed_in_version;
-
-		$t_show_product_build =
+		$t_output_configs['versions_product_build_show'] =
 			$t_show_versions &&
 			in_array( 'product_build', $t_fields ) &&
 			config_get( 'enable_product_build' ) == ON;
 
-		$t_output_configs['versions_product_build_show'] = $t_show_product_build;
-
-		$t_show_target_version =
+		$t_output_configs['versions_target_version_show'] =
 			$t_show_versions &&
 			in_array( 'target_version', $t_fields ) &&
 			access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_issue_id );
-		$t_output_configs['versions_target_version_show'] = $t_show_target_version;
 
-		$t_form_title = lang_get( 'bug_view_title' );
-		$t_output_issue['form_title'] = $t_form_title;
+		$t_output_issue['form_title'] = lang_get( 'bug_view_title' );
 
 		if( config_get_global( 'wiki_enable' ) == ON ) {
 			$t_output_issue['wiki_link'] = 'wiki.php?id=' . $t_issue_id;
@@ -164,8 +156,15 @@ class IssueViewCommand extends Command {
 			$t_output_issue['updated_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['updated_at'] ) );
 		}
 
-		$t_output_configs['additional_information_show'] = isset( $t_issue['additional_information'] ) && !is_blank( $t_issue['additional_information'] ) && in_array( 'additional_info', $t_fields );
-		$t_output_configs['steps_to_reproduce_show'] = isset( $t_issue['steps_to_reproduce'] ) && !is_blank( $t_issue['steps_to_reproduce'] ) && in_array( 'steps_to_reproduce', $t_fields );
+		$t_output_configs['additional_information_show'] =
+			isset( $t_issue['additional_information'] ) &&
+			!is_blank( $t_issue['additional_information'] ) &&
+			in_array( 'additional_info', $t_fields );
+
+		$t_output_configs['steps_to_reproduce_show'] =
+			isset( $t_issue['steps_to_reproduce'] ) &&
+			!is_blank( $t_issue['steps_to_reproduce'] ) &&
+			in_array( 'steps_to_reproduce', $t_fields );
 
 		$t_output_configs['tags_show'] =
 			in_array( 'tags', $t_fields ) &&
@@ -189,7 +188,10 @@ class IssueViewCommand extends Command {
 		}
 
 		$t_output_configs['relationships_show'] = true;
-		$t_output_configs['relationships_can_update'] = !$t_force_readonly && !bug_is_readonly( $t_issue_id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
+		$t_output_configs['relationships_can_update'] =
+			!$t_force_readonly &&
+			!bug_is_readonly( $t_issue_id ) &&
+			access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
 
 		$t_output_configs['sponsorships_show'] =
 			config_get( 'enable_sponsorship' ) &&
