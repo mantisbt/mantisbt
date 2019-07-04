@@ -45,17 +45,12 @@ use Mantis\Exceptions\ClientException;
  * Sample:
  * {
  *   "query": {
+ *     "id": 1234
  *   },
  *   "payload": {
- *     ... see rest issue add documentation
  *   },
  *   "options: {
- *     "clone_info": {                # Used only in case issue is cloned
- *       "master_issue_id": 1234,
- *       "relationship_type": 1,      # BUG_RELATED
- *       "copy_files": true,
- *       "copy_notes": true,
- *     }
+ *     "force_readonly": false
  *   }
  * }
  */
