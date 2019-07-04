@@ -157,7 +157,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			#  that current user has rights to assign the issue
 			$t_threshold = access_get_status_threshold( $t_assign_status, $t_bug->project_id );
 			if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) ) {
-				if( access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id, $f_assign ) ) {
+				# The new handler is checked at project level
+				if(access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_assign ) ) {
 					if( bug_check_workflow( $t_status, $t_assign_status ) ) {
 						# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 						bug_assign( $t_bug_id, $f_assign, $f_bug_notetext, $f_bug_noteprivate );
