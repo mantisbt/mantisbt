@@ -562,16 +562,16 @@ class BugFilterQuery extends DbQuery {
 			foreach( $t_included_project_ids as $t_pid ) {
 				$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
 				$t_can_see_private = access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id );
-				$t_limited_for_handler = access_has_limited_view_for_handler( $t_pid, $t_user_id );
-				$t_limited_for_reporter = access_has_limited_view_for_reporter( $t_pid, $t_user_id );
-				$t_limited_for_any = $t_limited_for_handler || $t_limited_for_reporter;
+				//$t_limited_for_handler = access_has_limited_view_for_handler( $t_pid, $t_user_id );
+				//$t_limited_for_reporter = access_has_limited_view_for_reporter( $t_pid, $t_user_id );
+				//$t_limited_for_any = $t_limited_for_handler || $t_limited_for_reporter;
 
-				if( $t_limited_for_any ) {
+				if( access_has_limited_view( $t_pid, $t_user_id ) ) {
 					# if we have a reduced access to show only own reported or handled issues, we want to show both
-					# cases: at least thow reported by the user, and also those handled by the suer
+					# cases: at least those reported by the user, and also those handled by the suer
 
 					# for handled issues, check if the user can access private issues
-					if( $t_limited_for_handler && $t_can_see_private ) {
+					if( $t_can_see_private ) {
 						$t_limit_handler_public_and_private_project_ids[] = $t_pid;
 					} else {
 						$t_limit_handler_public_only_project_ids[] = $t_pid;

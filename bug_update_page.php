@@ -277,7 +277,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
-		if( access_has_limited_view_for_reporter( $t_bug->project_id ) ) {
+		if( access_has_limited_view( $t_bug->project_id ) ) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
 			if ( $f_reporter_edit ) {
