@@ -188,7 +188,8 @@ class IssueViewCommand extends Command {
 			}
 		}
 
-		$t_output_configs['relationships_show'] = !$t_force_readonly;
+		$t_output_configs['relationships_show'] = true;
+		$t_output_configs['relationships_can_update'] = !$t_force_readonly && !bug_is_readonly( $t_issue_id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
 
 		$t_output_configs['sponsorships_show'] =
 			config_get( 'enable_sponsorship' ) &&
