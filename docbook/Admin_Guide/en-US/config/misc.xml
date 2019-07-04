@@ -73,16 +73,9 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_limit_reporter_unless_threshold</term>
+			<term>$g_limit_view_unless_threshold</term>
 			<listitem>
-				<para>Threshold that, if not met, hides issues reported by other users.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_limit_handler_unless_threshold</term>
-			<listitem>
-				<para>Threshold that, if not met, hides issues assigned to other users.
+				<para>Threshold that, if not met, hides hides other users's issues.
 				</para>
 			</listitem>
 		</varlistentry>

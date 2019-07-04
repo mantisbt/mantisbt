@@ -815,15 +815,9 @@
                                 </entry>
                             </row>
                             <row>
-                                <entry>Limit reporter's access to their own reported issues</entry>
-                                <entry>$g_limit_reporter_unless_threshold</entry>
-                                <entry>threshold that, if not met, hides issues reported by other users.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Limit reporter's access to their own assigned issues</entry>
-                                <entry>$g_limit_handler_unless_threshold</entry>
-                                <entry>threshold that, if not met, hides issues assigned to other users.
+                                <entry>Limit reporter's access to issues which the user is reporter or handler</entry>
+                                <entry>$g_limit_view_unless_threshold</entry>
+                                <entry>threshold that, if not met, hides other users's issues.
                                 </entry>
                             </row>
                         </tbody>

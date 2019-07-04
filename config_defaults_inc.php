@@ -3048,9 +3048,9 @@ $g_allow_no_category = OFF;
 /**
  * limit reporters. Set to ON if you wish to limit reporters to only viewing
  * bugs that they report.
- * This feature is deprecated and is replaced with the option 'limit_reporter_unless_threshold'.
+ * This feature is deprecated and is replaced with the option 'limit_view_unless_threshold'.
  * Set this option as OFF to be able to use the new one.
- * @see $g_limit_reporter_unless_threshold
+ * @see $g_limit_view_unless_threshold
  * @global integer $g_limit_reporters
  */
 $g_limit_reporters = OFF;
@@ -3062,17 +3062,9 @@ $g_limit_reporters = OFF;
  *
  * This is a replacement for old option 'limit_reporters'.
  *
- * @global integer $g_limit_reporter_unless_threshold
+ * @global integer $g_limit_view_unless_threshold
  */
-$g_limit_reporter_unless_threshold = ANYBODY;
-
-/**
- * Threshold at wich a user can view all issues in the project (as allowed by other permissions)
- * Not meeting this threshold means the user can only see issues where he is handler.
- * A value of ANYBODY means that all user have full visibility (as default)
- * @global integer $g_limit_handler_unless_threshold
- */
-$g_limit_handler_unless_threshold = ANYBODY;
+$g_limit_view_unless_threshold = ANYBODY;
 
 /**
  * reporter can close. Allow reporters to close the bugs they reported, after
@@ -4601,9 +4593,8 @@ $g_public_config_names = array(
 	'language_auto_map',
 	'language_choices_arr',
 	'limit_email_domains',
-	'limit_handler_unless_threshold',
-	'limit_reporter_unless_threshold',
 	'limit_reporters',
+	'limit_view_unless_threshold',
 	'logo_image',
 	'logo_url',
 	'logout_cookie',

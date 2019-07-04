@@ -198,10 +198,9 @@ set_capability_enum( 'bug_assigned_status' );
 if( capability_exists( 'limit_reporters' ) ) {
 	set_capability_boolean( 'limit_reporters', true );
 }
-if( capability_exists( 'limit_reporter_unless_threshold' ) ) {
-	set_capability_row( 'limit_reporter_unless_threshold' );
+if( capability_exists( 'limit_view_unless_threshold' ) ) {
+	set_capability_row( 'limit_view_unless_threshold' );
 }
-set_capability_row( 'limit_handler_unless_threshold' );
 
 # Notes
 set_capability_row( 'add_bugnote_threshold' );
