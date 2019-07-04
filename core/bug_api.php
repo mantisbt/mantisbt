@@ -1878,8 +1878,17 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
  * @uses database_api.php
  */
 function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_private = false ) {
-	if( ( $p_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
-		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
+	if( $p_user_id != NO_USER ) {
+		$t_bug_sponsored = config_get( 'enable_sponsorship' )
+			&& sponsorship_get_amount( sponsorship_get_all_ids( $p_bug_id ) ) > 0;
+		# The new handler is checked at project level
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $p_user_id ) ) {
+			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+		}
+		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_project_id, $p_user_id ) ) {
+			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+		}
 	}
 
 	# extract current information into history variables

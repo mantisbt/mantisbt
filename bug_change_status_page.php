@@ -107,11 +107,11 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	}
 
 	if( $f_handler_id != NO_USER ) {
-		if( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+		# The new handler is checked at project level
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
-
-		if( $t_bug_sponsored && !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_bug->project_id, $f_handler_id ) ) {
 			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 		}
 	}
