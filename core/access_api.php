@@ -903,7 +903,7 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 
 	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, $t_project_id );
 	if( ON != $t_old_limit_reporters ) {
-		$t_threshold_can_view = config_get( 'limit_reporter_unless_threshold', null, $t_user_id, $t_project_id );
+		$t_threshold_can_view = config_get( 'limit_view_unless_threshold', null, $t_user_id, $t_project_id );
 		//return $t_threshold_can_view;
 	} else {
 		# If old 'limit_reporters'  option is enabled, use that setting
