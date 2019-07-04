@@ -624,7 +624,7 @@ if( $t_flags['sponsorships_show'] ) {
 
 # Bug Relationships
 if( $t_flags['relationships_show'] ) {
-	relationship_view_box( $f_issue_id );
+	relationship_view_box( $f_issue_id, /* can_update */ $t_flags['relationships_can_update'] );
 }
 
 # User list monitoring the bug

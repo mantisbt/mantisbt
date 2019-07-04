@@ -932,19 +932,18 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
 /**
  * print HTML relationship form
  * @param integer $p_bug_id A bug identifier.
+ * @param bool $p_can_update Can update relationships?
  * @return void
  */
-function relationship_view_box( $p_bug_id ) {
+function relationship_view_box( $p_bug_id, $p_can_update ) {
 	$t_relationships_html = relationship_get_summary_html( $p_bug_id );
-	$t_can_update = !bug_is_readonly( $p_bug_id ) &&
-		access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id );
 
-	if( !$t_can_update && empty( $t_relationships_html ) ) {
+	if( !$p_can_update && empty( $t_relationships_html ) ) {
 		return;
 	}
 
 	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
-	$t_show_top_div = $t_can_update || $t_relationship_graph;
+	$t_show_top_div = $p_can_update || $t_relationship_graph;
 	?>
 	<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -979,7 +978,7 @@ function relationship_view_box( $p_bug_id ) {
 		<?php
 			} # $t_relationship_graph
 
-			if( $t_can_update ) {
+			if( $p_can_update ) {
 			?>
 		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
