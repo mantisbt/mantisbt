@@ -511,16 +511,13 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
-	$t_bug_is_user_handler = bug_is_user_handler( $p_bug_id, $p_user_id );
 
-	# check special limits
-	# limit reporters means users can view just issues they reported (Issue #4769))
-	# limit handlers means users can only view issues assigned to them
-	# Access is allowed if any of the two criteria is met.
-	$t_limit_reporter = access_has_limited_view_for_reporter( $t_project_id, $p_user_id );
-	$t_limit_handler = access_has_limited_view_for_handler( $t_project_id, $p_user_id );
+	# Check special limits
+	# Limited view means this user can only view the issues they reported and/or is handling
+	$t_limited_view = access_has_limited_view( $t_project_id, $p_user_id );
 
-	if( $t_limit_reporter || $t_limit_handler ) {
+	if( $t_limited_view ) {
+		$t_bug_is_user_handler = bug_is_user_handler( $p_bug_id, $p_user_id );
 		if( !$t_bug_is_user_reporter && !$t_bug_is_user_handler ) {
 			return false;
 		}
@@ -889,63 +886,42 @@ function access_parse_array( array $p_access ) {
 }
 
 /**
- * Return an access threshold for which a user is not affected by the 'limit_reporters'
- * option. Also, if the option is disabled globally, or for the specific user/project,
- * a threshold of ANYBODY will be returned, meaning that any user can bypass this limitation.
- *
+ * Returns true if the user is limited for viewing issues, in the specified project,
+ * accordint to 'limit_reporters' options
  * @param integer $p_project_id   Project id, or null for current project
  * @param integer $p_user_id      User id, or null for current user
- * @return mixed	A threshold definition
+ * @return boolean	Whether limited view applies
  */
-function access_threshold_reporter_unlimited_view( $p_project_id = null, $p_user_id = null ) {
+function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 	$t_project_id = ( null === $p_project_id ) ? helper_get_current_project() : $p_project_id;
 
 	# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
 	# but can also appear at project level (and it will work with current code)
-	# Use this option if set, otherwise, check the new option for threshold
-	$t_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, $t_project_id );
-	if( ON != $t_limit_reporters ) {
+	# Use this option if set, otherwise, check the new option for "unlimited view" threshold
+	$t_threshold_can_view = NOBODY;
+
+	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, $t_project_id );
+	if( ON != $t_old_limit_reporters ) {
 		$t_threshold_can_view = config_get( 'limit_reporter_unless_threshold', null, $t_user_id, $t_project_id );
-		return $t_threshold_can_view;
-	}
-
-	# To improve performance, esp. when processing for several projects, we
-	# build a static array holding that threshold for each project
-	static $s_thresholds = array();
-	if( !isset( $s_thresholds[$t_project_id] ) ) {
-		$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_project_id );
-		if( empty( $t_report_bug_threshold ) ) {
-			$s_thresholds[$t_project_id] = NOBODY;
-		} else {
-			$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
+		//return $t_threshold_can_view;
+	} else {
+		# If old 'limit_reporters'  option is enabled, use that setting
+		# Note that the effective threshold can vary for each project, based on the reporting threshold configuration.
+		# To improve performance, esp. when processing for several projects, we
+		# build a static array holding that threshold for each project
+		static $s_thresholds = array();
+		if( !isset( $s_thresholds[$t_project_id] ) ) {
+			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_project_id );
+			if( empty( $t_report_bug_threshold ) ) {
+				$s_thresholds[$t_project_id] = NOBODY;
+			} else {
+				$s_thresholds[$t_project_id] = access_threshold_min_level( $t_report_bug_threshold ) + 1;
+			}
 		}
+		$t_threshold_can_view = $s_thresholds[$t_project_id];
 	}
-	return $s_thresholds[$t_project_id];
-}
 
-/**
- * Returns true if the user is limited to view only the issues reported by him,
- * in the specified project.
- * @param integer $p_project_id   Project id, or null for current project
- * @param integer $p_user_id      User id, or null for current user
- * @return boolean	Whether limited view applies
- */
-function access_has_limited_view_for_reporter( $p_project_id = null, $p_user_id = null ) {
-	$t_can_view = access_threshold_reporter_unlimited_view( $p_project_id, $p_user_id );
 	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
-	return !access_compare_level( $t_project_level, $t_can_view );
-}
-
-/**
- * Returns true if the user is limited to view only the issues assigned to him,
- * in the specified project.
- * @param integer $p_project_id   Project id, or null for current project
- * @param integer $p_user_id      User id, or null for current user
- * @return boolean	Whether limited view applies
- */
-function access_has_limited_view_for_handler( $p_project_id = null, $p_user_id = null ) {
-	$t_can_view = config_get( 'limit_handler_unless_threshold', null, $p_user_id, $p_project_id );
-	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
-	return !access_compare_level( $t_project_level, $t_can_view );
+	return !access_compare_level( $t_project_level, $t_threshold_can_view );
 }
