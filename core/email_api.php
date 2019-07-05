@@ -1985,11 +1985,78 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 		}
 	}
 
-	$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
+	$t_bug_data['relations'] = email_relationship_get_summary_text( $p_bug_id );
 
 	current_user_set( $t_current_user_id );
 
 	return $t_bug_data;
+}
+
+/**
+ * return formatted string with all the details on the requested relationship
+ * @param integer             $p_bug_id       A bug identifier.
+ * @param BugRelationshipData $p_relationship A bug relationship object.
+ * @return string
+ */
+function email_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship ) {
+	$t_summary_wrap_at = mb_strlen( config_get( 'email_separator2' ) ) - 28;
+
+	if( $p_bug_id == $p_relationship->src_bug_id ) {
+		# root bug is in the source side, related bug in the destination side
+		$t_related_project_id = $p_relationship->dest_bug_id;
+		$t_related_bug_id = $p_relationship->dest_bug_id;
+		$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
+	} else {
+		# root bug is in the dest side, related bug in the source side
+		$t_related_project_id = $p_relationship->src_bug_id;
+		$t_related_bug_id = $p_relationship->src_bug_id;
+		$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
+	}
+
+	# related bug not existing...
+	if( !bug_exists( $t_related_bug_id ) ) {
+		return '';
+	}
+
+	# user can access to the related bug at least as a viewer
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_related_project_id ), $t_related_bug_id ) ) {
+		return '';
+	}
+
+	# get the information from the related bug and prepare the link
+	$t_bug = bug_get( $t_related_bug_id, false );
+
+	$t_relationship_info_text = utf8_str_pad( $t_relationship_descr, 20 );
+	$t_relationship_info_text .= utf8_str_pad( bug_format_id( $t_related_bug_id ), 8 );
+
+	# add summary
+	if( mb_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+		$t_relationship_info_text .= string_email_links( $t_bug->summary );
+	} else {
+		$t_relationship_info_text .= mb_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
+	}
+
+	$t_relationship_info_text .= "\n";
+
+	return $t_relationship_info_text;
+}
+
+/**
+ * Get ALL the RELATIONSHIPS OF A SPECIFIC BUG in text format (used by email_api.php
+ * @param integer $p_bug_id A bug identifier.
+ * @return string
+ */
+function email_relationship_get_summary_text( $p_bug_id ) {
+	$t_relationship_all = relationship_get_all( $p_bug_id, /* show_project */ false );
+	$t_relationship_all_count = count( $t_relationship_all );
+
+	# prepare the relationships table
+	$t_summary = '';
+	for( $i = 0; $i < $t_relationship_all_count; $i++ ) {
+		$t_summary .= email_relationship_get_details( $p_bug_id, $t_relationship_all[$i] );
+	}
+
+	return $t_summary;
 }
 
 /**
