@@ -851,33 +851,6 @@ function relationship_get_summary_html( $p_bug_id ) {
 }
 
 /**
- * print ALL the RELATIONSHIPS OF A SPECIFIC BUG
- * @param integer $p_bug_id A bug identifier.
- * @return string
- */
-function relationship_get_summary_html_preview( $p_bug_id ) {
-	$t_summary = '';
-	$t_show_project = false;
-
-	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
-	$t_relationship_all_count = count( $t_relationship_all );
-
-	# prepare the relationships table
-	for( $i = 0;$i < $t_relationship_all_count;$i++ ) {
-		$t_summary .= relationship_get_details( $p_bug_id, $t_relationship_all[$i], true, true, $t_show_project );
-	}
-
-	if( !is_blank( $t_summary ) ) {
-		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td class="print" colspan=' . ( 5 + $t_show_project ) . '><strong>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
-		}
-		$t_summary = '<table width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
-	}
-
-	return $t_summary;
-}
-
-/**
  * print ALL the RELATIONSHIPS OF A SPECIFIC BUG in text format (used by email_api.php
  * @param integer $p_bug_id A bug identifier.
  * @return string
