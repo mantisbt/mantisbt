@@ -65,6 +65,7 @@
  * @author Vincent
  * @author Vuh
  * @author Waldir
+ * @author Waldyrious
  */
 
 $s_directionality = '{{Optional}}

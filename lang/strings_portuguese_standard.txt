@@ -53,6 +53,7 @@
  * @author Mmgseabra
  * @author Vitorvicentevalente
  * @author Waldir
+ * @author Waldyrious
  */
 
 $s_actiongroup_menu_move = 'Mover';
