@@ -217,7 +217,7 @@ if( $t_bottom_buttons_enabled ) {
 
 echo '<tbody>';
 
-if( isset( $t_issue['id'] ) || isset( $t_issue['project'] ) || isset( $t_issue['category'] ) ||
+if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
     isset( $t_issue['view_state'] ) || isset( $t_issue_view['created_at'] ) || isset( $t_issue_view['updated_at'] ) ) {
 	# Labels
 	echo '<tr class="bug-header">';
@@ -232,22 +232,22 @@ if( isset( $t_issue['id'] ) || isset( $t_issue['project'] ) || isset( $t_issue['
 	echo '<tr class="bug-header-data">';
 
 	# Bug ID
-	echo '<td class="bug-id">', isset( $t_issue_view['id'] ) ? $t_issue_view['id_formatted'] : '', '</td>';
+	echo '<td class="bug-id">', $t_flags['id_show'] ? $t_issue_view['id_formatted'] : '', '</td>';
 
 	# Project
-	echo '<td class="bug-project">', isset( $t_issue['project'] ) && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
+	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
 
 	# Category
-	echo '<td class="bug-category">', isset( $t_issue['category'] ) ? string_display_line( $t_issue['category'] ) : '', '</td>';
+	echo '<td class="bug-category">', $t_flags['category_show'] ? string_display_line( $t_issue['category'] ) : '', '</td>';
 
 	# View Status
-	echo '<td class="bug-view-status">', isset( $t_issue['view_state'] ) && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
+	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
 
 	# Date Submitted
-	echo '<td class="bug-date-submitted">', isset( $t_issue_view['created_at'] ) ? $t_issue_view['created_at'] : '', '</td>';
+	echo '<td class="bug-date-submitted">', $t_flags['created_at_show'] ? $t_issue_view['created_at'] : '', '</td>';
 
 	# Date Updated
-	echo '<td class="bug-last-modified">',  isset( $t_issue_view['updated_at'] ) ? $t_issue_view['updated_at'] : '', '</td>';
+	echo '<td class="bug-last-modified">',  $t_flags['updated_at_show'] ? $t_issue_view['updated_at'] : '', '</td>';
 
 	echo '</tr>';
 
@@ -260,13 +260,13 @@ if( isset( $t_issue['id'] ) || isset( $t_issue['project'] ) || isset( $t_issue['
 # Reporter, Handler, Due Date
 #
 
-if( isset( $t_issue['reporter'] ) || isset( $t_issue['handler'] ) || isset( $t_issue_view['due_date'] ) ) {
+if( $t_flags['reporter_show'] || $t_flags['handler_show'] || $t_flags['due_date_show'] ) {
 	echo '<tr>';
 
 	$t_spacer = 0;
 
 	# Reporter
-	if( isset( $t_issue['reporter'] ) ) {
+	if( $t_flags['reporter_show'] ) {
 		echo '<th class="bug-reporter category">', lang_get( 'reporter' ), '</th>';
 		echo '<td class="bug-reporter">';
 		print_user_with_subject( $t_issue['reporter']['id'], $f_issue_id );
@@ -276,7 +276,7 @@ if( isset( $t_issue['reporter'] ) || isset( $t_issue['handler'] ) || isset( $t_i
 	}
 
 	# Handler
-	if( isset( $t_issue['handler'] ) ) {
+	if( $t_flags['handler_show'] ) {
 		echo '<th class="bug-assigned-to category">', lang_get( 'assigned_to' ), '</th>';
 		echo '<td class="bug-assigned-to">';
 		print_user_with_subject( $t_issue['handler']['id'], $f_issue_id );
@@ -286,7 +286,7 @@ if( isset( $t_issue['reporter'] ) || isset( $t_issue['handler'] ) || isset( $t_i
 	}
 
 	# Due Date
-	if( isset( $t_issue_view['due_date'] ) ) {
+	if( $t_flags['due_date_show'] ) {
 		echo '<th class="bug-due-date category">', lang_get( 'due_date' ), '</th>';
 
 		if( $t_issue_view['overdue'] ) {
@@ -309,13 +309,13 @@ if( isset( $t_issue['reporter'] ) || isset( $t_issue['handler'] ) || isset( $t_i
 # Priority, Severity, Reproducibility
 #
 
-if( isset( $t_issue['priority'] ) || isset( $t_issue['severity'] ) || isset( $t_issue['reproducibility'] ) ) {
+if( $t_flags['priority_show'] || $t_flags['severity_show'] || $t_flags['reproducibility_show'] ) {
 	echo '<tr>';
 
 	$t_spacer = 0;
 
 	# Priority
-	if( isset( $t_issue['priority'] ) ) {
+	if( $t_flags['priority_show'] ) {
 		echo '<th class="bug-priority category">', lang_get( 'priority' ), '</th>';
 		echo '<td class="bug-priority">', string_display_line( $t_issue['priority']['label'] ), '</td>';
 	} else {
@@ -323,7 +323,7 @@ if( isset( $t_issue['priority'] ) || isset( $t_issue['severity'] ) || isset( $t_
 	}
 
 	# Severity
-	if( isset( $t_issue['severity'] ) ) {
+	if( $t_flags['severity_show'] ) {
 		echo '<th class="bug-severity category">', lang_get( 'severity' ), '</th>';
 		echo '<td class="bug-severity">', string_display_line( $t_issue['severity']['label'] ), '</td>';
 	} else {
@@ -331,7 +331,7 @@ if( isset( $t_issue['priority'] ) || isset( $t_issue['severity'] ) || isset( $t_
 	}
 
 	# Reproducibility
-	if( isset( $t_issue['reproducibility'] ) ) {
+	if( $t_flags['reproducibility_show'] ) {
 		echo '<th class="bug-reproducibility category">', lang_get( 'reproducibility' ), '</th>';
 		echo '<td class="bug-reproducibility">', string_display_line( $t_issue['reproducibility']['label'] ), '</td>';
 	} else {
@@ -350,13 +350,13 @@ if( isset( $t_issue['priority'] ) || isset( $t_issue['severity'] ) || isset( $t_
 # Status, Resolution
 #
 
-if( isset( $t_issue['status'] ) || isset( $t_issue['resolution'] ) ) {
+if( $t_flags['status_show'] || $t_flags['resolution_show'] ) {
 	echo '<tr>';
 
 	$t_spacer = 2;
 
 	# Status
-	if( isset( $t_issue['status'] ) ) {
+	if( $t_flags['status_show'] ) {
 		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
 
 		# choose color based on status
@@ -370,7 +370,7 @@ if( isset( $t_issue['status'] ) || isset( $t_issue['resolution'] ) ) {
 	}
 
 	# Resolution
-	if( isset( $t_issue['resolution'] ) ) {
+	if( $t_flags['resolution_show'] ) {
 		echo '<th class="bug-resolution category">', lang_get( 'resolution' ), '</th>';
 		echo '<td class="bug-resolution">', string_display_line( $t_issue['resolution']['label'] ), '</td>';
 	} else {
@@ -389,12 +389,12 @@ if( isset( $t_issue['status'] ) || isset( $t_issue['resolution'] ) ) {
 # Projection, ETA
 #
 
-if( isset( $t_issue['projection'] ) || isset( $t_issue['eta'] ) ) {
+if( $t_flags['projection_show'] || $t_flags['eta_show'] ) {
 	echo '<tr>';
 
 	$t_spacer = 2;
 
-	if( isset( $t_issue['projection'] ) ) {
+	if( $t_flags['projection_show'] ) {
 		# Projection
 		echo '<th class="bug-projection category">', lang_get( 'projection' ), '</th>';
 		echo '<td class="bug-projection">', string_display_line( $t_issue['projection']['label'] ), '</td>';
@@ -403,7 +403,7 @@ if( isset( $t_issue['projection'] ) || isset( $t_issue['eta'] ) ) {
 	}
 
 	# ETA
-	if( isset( $t_issue['eta'] ) ) {
+	if( $t_flags['eta_show'] ) {
 		echo '<th class="bug-eta category">', lang_get( 'eta' ), '</th>';
 		echo '<td class="bug-eta">', string_display_line( $t_issue['eta']['label'] ), '</td>';
 	} else {

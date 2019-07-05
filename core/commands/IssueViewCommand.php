@@ -144,15 +144,18 @@ class IssueViewCommand extends Command {
 			!bug_is_readonly( $t_issue_id ) &&
 			access_has_bug_level( config_get( 'bug_reminder_threshold' ), $t_issue_id );
 
-		if( in_array( 'id', $t_fields ) ) {
+		$t_flags['id_show'] = in_array( 'id', $t_fields );
+		if( $t_flags['id_show'] ) {
 			$t_issue_view['id_formatted'] = bug_format_id( $t_issue_id );
 		}
 
-		if( in_array( 'date_submitted', $t_fields ) ) {
+		$t_flags['created_at_show'] = in_array( 'date_submitted', $t_fields );
+		if( $t_flags['created_at_show'] ) {
 			$t_issue_view['created_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['created_at'] ) );
 		}
 
-		if( in_array( 'last_updated', $t_fields ) ) {
+		$t_flags['updated_at_show'] = in_array( 'last_updated', $t_fields );
+		if( $t_flags['updated_at_show'] ) {
 			$t_issue_view['updated_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['updated_at'] ) );
 		}
 
@@ -176,8 +179,8 @@ class IssueViewCommand extends Command {
 			access_has_bug_level( config_get( 'tag_attach_threshold' ), $t_issue_id );
 
 		# Due date
-		$t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_issue_id );
-		if( $t_show_due_date ) {
+		$t_flags['due_date_show'] = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_issue_id );
+		if( $t_flags['due_date_show'] ) {
 			$t_issue_view['overdue'] = bug_is_overdue( $t_issue_id );
 
 			if( isset( $t_issue['due_date'] ) ) {
@@ -210,6 +213,20 @@ class IssueViewCommand extends Command {
 			$t_flags['monitor_can_delete'] = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $t_issue_id ) ? true : false;
 			$t_flags['monitor_can_add'] = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $t_issue_id ) ? true : false;
 		}
+
+		$t_flags['attachments_show'] = in_array( 'attachments', $t_fields );
+		$t_flags['category_show'] = in_array( 'category_id', $t_fields );
+		$t_flags['eta_show'] = in_array( 'eta', $t_fields );
+		$t_flags['handler_show'] = in_array( 'handler', $t_fields ) && isset( $t_issue['handler'] );
+		$t_flags['priority_show'] = in_array( 'priority', $t_fields ) && isset( $t_issue['priority'] );
+		$t_flags['project_show'] = in_array( 'project', $t_fields ) && isset( $t_issue['project'] );
+		$t_flags['projection_show'] = in_array( 'projection', $t_fields ) && isset( $t_issue['projection'] );
+		$t_flags['reporter_show'] = in_array( 'reporter', $t_fields ) && isset( $t_issue['reporter'] );
+		$t_flags['reproducibility_show'] = in_array( 'reproducibility', $t_fields ) && isset( $t_issue['reproducibility'] );
+		$t_flags['resolution_show'] = in_array( 'resolution', $t_fields ) && isset( $t_issue['resolution'] );
+		$t_flags['severity_show'] = in_array( 'severity', $t_fields ) && isset( $t_issue['severity'] );
+		$t_flags['status_show'] = in_array( 'status', $t_fields ) && isset( $t_issue['status'] );
+		$t_flags['view_state_show'] = in_array( 'view_state', $t_fields ) && isset( $t_issue['view_state'] );
 
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		custom_field_cache_values( array( $t_issue_id ), $t_related_custom_field_ids );
