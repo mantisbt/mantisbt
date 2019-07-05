@@ -238,7 +238,7 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
 
 	# Category
-	echo '<td class="bug-category">', $t_flags['category_show'] ? string_display_line( $t_issue['category'] ) : '', '</td>';
+	echo '<td class="bug-category">', $t_flags['category_show'] ? string_display_line( $t_issue['category']['name'] ) : '', '</td>';
 
 	# View Status
 	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
@@ -279,7 +279,9 @@ if( $t_flags['reporter_show'] || $t_flags['handler_show'] || $t_flags['due_date_
 	if( $t_flags['handler_show'] ) {
 		echo '<th class="bug-assigned-to category">', lang_get( 'assigned_to' ), '</th>';
 		echo '<td class="bug-assigned-to">';
-		print_user_with_subject( $t_issue['handler']['id'], $f_issue_id );
+		if( isset( $t_issue['handler'] ) ) {
+			print_user_with_subject( $t_issue['handler']['id'], $f_issue_id );
+		}
 		echo '</td>';
 	} else {
 		$t_spacer += 2;
@@ -360,7 +362,7 @@ if( $t_flags['status_show'] || $t_flags['resolution_show'] ) {
 		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
 
 		# choose color based on status
-		$t_status_css = html_get_status_css_fg( $t_issue['status']['name'] );
+		$t_status_css = html_get_status_css_fg( $t_issue['status']['id'] );
 
 		echo '<td class="bug-status">';
 		echo '<i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
@@ -502,7 +504,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	if( $t_flags['versions_target_version_show'] && isset( $t_issue['target_version'] ) ) {
 		# Target Version
 		echo '<th class="bug-target-version category">', lang_get( 'target_version' ), '</th>';
-		echo '<td class="bug-target-version">', string_display_line( $t_issue['target_version'] ), '</td>';
+		echo '<td class="bug-target-version">', string_display_line( $t_issue['target_version']['name'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -510,7 +512,7 @@ if( ( $t_flags['versions_target_version_show'] && isset( $t_issue['target_versio
 	# fixed in version
 	if( $t_flags['versions_fixed_in_version_show'] && isset( $t_issue['fixed_in_version'] ) ) {
 		echo '<th class="bug-fixed-in-version category">', lang_get( 'fixed_in_version' ), '</th>';
-		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue['fixed_in_version'] ), '</td>';
+		echo '<td class="bug-fixed-in-version">', string_display_line( $t_issue['fixed_in_version']['name'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -539,7 +541,7 @@ echo '<tr class="hidden"></tr>';
 if( $t_flags['summary_show'] && isset( $t_issue['summary'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-summary category">', lang_get( 'summary' ), '</th>';
-	echo '<td class="bug-summary" colspan="5">', string_display_line( $t_issue['summary'] ), '</td>';
+	echo '<td class="bug-summary" colspan="5">', string_display_line( $t_issue_view['id_formatted'] . ': ' . $t_issue['summary'] ), '</td>';
 	echo '</tr>';
 }
 

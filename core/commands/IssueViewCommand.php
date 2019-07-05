@@ -217,7 +217,7 @@ class IssueViewCommand extends Command {
 		$t_flags['attachments_show'] = in_array( 'attachments', $t_fields );
 		$t_flags['category_show'] = in_array( 'category_id', $t_fields );
 		$t_flags['eta_show'] = in_array( 'eta', $t_fields );
-		$t_flags['handler_show'] = in_array( 'handler', $t_fields ) && isset( $t_issue['handler'] );
+		$t_flags['handler_show'] = in_array( 'handler', $t_fields );
 		$t_flags['priority_show'] = in_array( 'priority', $t_fields ) && isset( $t_issue['priority'] );
 		$t_flags['project_show'] = in_array( 'project', $t_fields ) && isset( $t_issue['project'] );
 		$t_flags['projection_show'] = in_array( 'projection', $t_fields ) && isset( $t_issue['projection'] );
