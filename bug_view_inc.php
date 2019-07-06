@@ -144,7 +144,7 @@ if( $t_flags['reminder_can_add'] ) {
 	print_small_button( 'bug_reminder_page.php?bug_id=' . $f_issue_id, lang_get( 'bug_reminder' ) );
 }
 
-if( !isset( $t_issue_view['wiki_link'] ) ) {
+if( isset( $t_issue_view['wiki_link'] ) ) {
 	print_small_button( $t_issue_view['wiki_link'], lang_get( 'wiki' ) );
 }
 
