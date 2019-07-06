@@ -201,7 +201,7 @@ if( $t_top_buttons_enabled ) {
 	echo '<thead><tr class="bug-nav">';
 	echo '<tr class="top-buttons noprint">';
 	echo '<td colspan="6">';
-	html_buttons_view_bug_page( $f_issue_id );
+	bug_view_action_buttons( $f_issue_id );
 	echo '</td>';
 	echo '</tr>';
 	echo '</thead>';
@@ -210,7 +210,7 @@ if( $t_top_buttons_enabled ) {
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
 	echo '<tr class="noprint"><td colspan="6">';
-	html_buttons_view_bug_page( $f_issue_id );
+	bug_view_action_buttons( $f_issue_id );
 	echo '</td></tr>';
 	echo '</tfoot>';
 }
@@ -996,17 +996,6 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 }
 
 /**
- * Print a button to update the given bug
- * @param integer $p_bug_id A Bug identifier.
- * @return void
- */
-function html_button_bug_update( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-	}
-}
-
-/**
  * Print Change Status to: button
  * This code is similar to print_status_option_list except
  * there is no masking, except for the current state
@@ -1014,13 +1003,8 @@ function html_button_bug_update( $p_bug_id ) {
  * @param BugData $p_bug A valid bug object.
  * @return void
  */
-function html_button_bug_change_status( BugData $p_bug ) {
+function bug_view_button_bug_change_status( BugData $p_bug ) {
 	$t_current_access = access_get_project_level( $p_bug->project_id );
-
-	# User must have rights to change status to use this button
-	if( !access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug->id ) ) {
-		return;
-	}
 
 	$t_enum_list = get_status_option_list(
 		$t_current_access,
@@ -1069,14 +1053,7 @@ function html_button_bug_change_status( BugData $p_bug ) {
  * @param BugData $p_bug Bug object.
  * @return void
  */
-function html_button_bug_assign_to( BugData $p_bug ) {
-	# make sure status is allowed of assign would cause auto-set-status
-
-	# make sure current user has access to modify bugs.
-	if( !access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug->id ) ) {
-		return;
-	}
-
+function bug_view_button_bug_assign_to( BugData $p_bug ) {
 	$t_current_user_id = auth_get_current_user_id();
 	$t_options = array();
 	$t_default_assign_to = null;
@@ -1155,191 +1132,104 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 }
 
 /**
- * Print a button to move the given bug to a different project
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_move( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
-	}
-}
-
-/**
- * Print a button to clone the given bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_create_child( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
-		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
-	}
-}
-
-/**
- * Print a button to reopen the given bug
- * @param BugData $p_bug A valid bug object.
- * @return void
- */
-function html_button_bug_reopen( BugData $p_bug ) {
-	if( access_can_reopen_bug( $p_bug ) ) {
-		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
-		html_button(
-			'bug_change_status_page.php',
-			lang_get( 'reopen_bug_button' ),
-			array( 'id' => $p_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN ) );
-	}
-}
-
-/**
- * Print a button to close the given bug
- * Only if user can close bugs and workflow allows moving them to that status
- * @param BugData $p_bug A valid bug object.
- * @return void
- */
-function html_button_bug_close( BugData $p_bug ) {
-	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
-	if( access_can_close_bug( $p_bug )
-		&& bug_check_workflow( $p_bug->status, $t_closed_status )
-	) {
-		html_button(
-			'bug_change_status_page.php',
-			lang_get( 'close_bug_button' ),
-			array( 'id' => $p_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
-	}
-}
-
-/**
- * Print a button to monitor the given bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_monitor( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-	}
-}
-
-/**
- * Print a button to unmonitor the given bug
- * no reason to ever disallow someone from unmonitoring a bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_unmonitor( $p_bug_id ) {
-	html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-}
-
-/**
- * Print a button to stick the given bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_stick( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
-	}
-}
-
-/**
- * Print a button to unstick the given bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_unstick( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
-	}
-}
-
-/**
- * Print a button to delete the given bug
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_bug_delete( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
-		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
-	}
-}
-
-/**
  * Print all buttons for view bug pages
  * @param integer $p_bug_id A valid bug identifier.
  * @return void
  */
-function html_buttons_view_bug_page( $p_bug_id ) {
+function bug_view_action_buttons( $p_bug_id ) {
 	$t_readonly = bug_is_readonly( $p_bug_id );
-	$t_sticky = config_get( 'set_bug_sticky_threshold' );
-
 	$t_bug = bug_get( $p_bug_id );
 
 	echo '<div class="btn-group">';
 	if( !$t_readonly ) {
 		# UPDATE button
-		echo '<div class="pull-left padding-right-8">';
-		html_button_bug_update( $p_bug_id );
-		echo '</div>';
+		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			echo '<div class="pull-left padding-right-8">';
+			html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+			echo '</div>';
+		}
 
 		# ASSIGN button
-		echo '<div class="pull-left padding-right-8">';
-		html_button_bug_assign_to( $t_bug );
-		echo '</div>';
+		if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug_id ) ) {
+			echo '<div class="pull-left padding-right-8">';
+			bug_view_button_bug_assign_to( $t_bug );
+			echo '</div>';
+		}
 
 		# Change status button/dropdown
-		echo '<div class="pull-left padding-right-8">';
-		html_button_bug_change_status( $t_bug );
-		echo '</div>';
+		if( access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug_id ) ) {
+			echo '<div class="pull-left padding-right-8">';
+			bug_view_button_bug_change_status( $t_bug );
+			echo '</div>';
+		}
 	}
 
 	# MONITOR/UNMONITOR button
 	if( !current_user_is_anonymous() ) {
 		echo '<div class="pull-left padding-right-2">';
 		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
-			html_button_bug_unmonitor( $p_bug_id );
+			html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 		} else {
-			html_button_bug_monitor( $p_bug_id );
+			if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
+				html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+			}
 		}
 		echo '</div>';
 	}
 
 	# STICK/UNSTICK button
-	if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
 		echo '<div class="pull-left padding-right-2">';
 		if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
-			html_button_bug_stick( $p_bug_id );
+			html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
 		} else {
-			html_button_bug_unstick( $p_bug_id );
+			html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
 		}
 		echo '</div>';
 	}
 
 	# CLONE button
-	if( !$t_readonly ) {
+	if( !$t_readonly && access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button_bug_create_child( $p_bug_id );
+		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 		echo '</div>';
 	}
 
 	# REOPEN button
-	echo '<div class="pull-left padding-right-2">';
-	html_button_bug_reopen( $t_bug );
-	echo '</div>';
+	if( access_can_reopen_bug( $t_bug ) ) {
+		echo '<div class="pull-left padding-right-2">';
+		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'reopen_bug_button' ),
+			array( 'id' => $t_bug->id, 'new_status' => $t_reopen_status, 'change_type' => BUG_UPDATE_TYPE_REOPEN ) );
+		echo '</div>';
+	}
 
 	# CLOSE button
-	echo '<div class="pull-left padding-right-2">';
-	html_button_bug_close( $t_bug );
-	echo '</div>';
+	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
+	if( access_can_close_bug( $t_bug ) && bug_check_workflow( $t_bug->status, $t_closed_status ) ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'close_bug_button' ),
+			array( 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
+		echo '</div>';
+	}
 
 	# MOVE button
-	echo '<div class="pull-left padding-right-2">';
-	html_button_bug_move( $p_bug_id );
-	echo '</div>';
+	if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		echo '</div>';
+	}
 
 	# DELETE button
-	echo '<div class="pull-left padding-right-2">';
-	html_button_bug_delete( $p_bug_id );
-	echo '</div>';
+	if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+		echo '</div>';
+	}
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
