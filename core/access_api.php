@@ -509,13 +509,27 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		return false;
 	}
 
+	# Check the requested access level, shotcut to fail if not satisfied
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
+	if( !access_compare_level( $t_access_level, $p_access_level ) ){
+		return false;
+	}
+
+	# If the level is met, we need to still verify access to the issue
+
+	# Check if the bug is private
 	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
+	if( !$t_bug_is_user_reporter && bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE ) {
+		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
+		if( !access_compare_level( $t_access_level, $t_private_bug_threshold ) ) {
+			return false;
+		}
+	}
 
 	# Check special limits
 	# Limited view means this user can only view the issues they reported, is handling, or monitoring
-	$t_limited_view = access_has_limited_view( $t_project_id, $p_user_id );
-	if( $t_limited_view ) {
+	if( access_has_limited_view( $t_project_id, $p_user_id ) ) {
 		$t_allowed = $t_bug_is_user_reporter;
 		if( !$t_allowed ) {
 			$t_allowed = bug_is_user_handler( $p_bug_id, $p_user_id );
@@ -528,16 +542,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		}
 	}
 
-	# If the bug is private and the user is not the reporter, then
-	# they must also have higher access than private_bug_threshold
-	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
-	if( !$t_bug_is_user_reporter && bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE ) {
-		$t_private_bug_threshold = config_get( 'private_bug_threshold', null, $p_user_id, $t_project_id );
-		return access_compare_level( $t_access_level, $t_private_bug_threshold )
-			&& access_compare_level( $t_access_level, $p_access_level );
-	}
-
-	return access_compare_level( $t_access_level, $p_access_level );
+	return true;
 }
 
 /**
