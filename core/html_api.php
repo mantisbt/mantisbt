@@ -992,19 +992,6 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 }
 
 /**
- * Print a button to create a wiki page
- * @param integer $p_bug_id A valid bug identifier.
- * @return void
- */
-function html_button_wiki( $p_bug_id ) {
-	if( config_get_global( 'wiki_enable' ) == ON ) {
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			html_button( 'wiki.php', lang_get_defaulted( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
-		}
-	}
-}
-
-/**
  * Get the foreground color CSS class for the given status, user and project.
  * @see html_get_status_css_bg() for background color
  *
