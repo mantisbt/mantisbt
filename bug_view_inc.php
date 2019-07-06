@@ -201,7 +201,7 @@ if( $t_top_buttons_enabled ) {
 	echo '<thead><tr class="bug-nav">';
 	echo '<tr class="top-buttons noprint">';
 	echo '<td colspan="6">';
-	bug_view_action_buttons( $f_issue_id );
+	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td>';
 	echo '</tr>';
 	echo '</thead>';
@@ -210,7 +210,7 @@ if( $t_top_buttons_enabled ) {
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
 	echo '<tr class="noprint"><td colspan="6">';
-	bug_view_action_buttons( $f_issue_id );
+	bug_view_action_buttons( $f_issue_id, $t_flags );
 	echo '</td></tr>';
 	echo '</tfoot>';
 }
@@ -1132,69 +1132,72 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
 /**
  * Print all buttons for view bug pages
  * @param integer $p_bug_id A valid bug identifier.
+ * @param array $p_flags Flags from issue view command
  * @return void
  */
-function bug_view_action_buttons( $p_bug_id ) {
+function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	$t_readonly = bug_is_readonly( $p_bug_id );
 	$t_bug = bug_get( $p_bug_id );
 
 	echo '<div class="btn-group">';
-	if( !$t_readonly ) {
-		# UPDATE button
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			echo '<div class="pull-left padding-right-8">';
-			html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-			echo '</div>';
-		}
-
-		# ASSIGN button
-		if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug_id ) ) {
-			echo '<div class="pull-left padding-right-8">';
-			bug_view_button_bug_assign_to( $t_bug );
-			echo '</div>';
-		}
-
-		# Change status button/dropdown
-		if( access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug_id ) ) {
-			echo '<div class="pull-left padding-right-8">';
-			bug_view_button_bug_change_status( $t_bug );
-			echo '</div>';
-		}
-	}
-
-	# MONITOR/UNMONITOR button
-	if( !current_user_is_anonymous() ) {
-		echo '<div class="pull-left padding-right-2">';
-		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
-			html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-		} else {
-			if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
-				html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-			}
-		}
+	# UPDATE button
+	if( $p_flags['can_update'] ) {
+		echo '<div class="pull-left padding-right-8">';
+		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 		echo '</div>';
 	}
 
-	# STICK/UNSTICK button
-	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+	# ASSIGN button
+	if( $p_flags['can_assign'] ) {
+		echo '<div class="pull-left padding-right-8">';
+		bug_view_button_bug_assign_to( $t_bug );
+		echo '</div>';
+	}
+
+	# Change status button/dropdown
+	if( $p_flags['can_change_status'] ) {
+		echo '<div class="pull-left padding-right-8">';
+		bug_view_button_bug_change_status( $t_bug );
+		echo '</div>';
+	}
+
+	# Unmonitor
+	if( $p_flags['can_unmonitor'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
-			html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
-		} else {
-			html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
-		}
+		html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		echo '</div>';
+	}
+
+	# Monitor
+	if( $p_flags['can_monitor'] ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		echo '</div>';
+	}
+
+	# Stick
+	if( $p_flags['can_sticky'] ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
+		echo '</div>';
+	}
+
+	# Unstick
+	if( $p_flags['can_unsticky'] ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
 		echo '</div>';
 	}
 
 	# CLONE button
-	if( !$t_readonly && access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
+	if( $p_flags['can_close'] ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 		echo '</div>';
 	}
 
 	# REOPEN button
-	if( access_can_reopen_bug( $t_bug ) ) {
+	if( $p_flags['can_reopen'] ) {
 		echo '<div class="pull-left padding-right-2">';
 		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 		html_button(
@@ -1205,8 +1208,8 @@ function bug_view_action_buttons( $p_bug_id ) {
 	}
 
 	# CLOSE button
-	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
-	if( access_can_close_bug( $t_bug ) && bug_check_workflow( $t_bug->status, $t_closed_status ) ) {
+	if( $p_flags['can_close'] ) {
+		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 		echo '<div class="pull-left padding-right-2">';
 		html_button(
 			'bug_change_status_page.php',
@@ -1216,14 +1219,14 @@ function bug_view_action_buttons( $p_bug_id ) {
 	}
 
 	# MOVE button
-	if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
+	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
 		echo '</div>';
 	}
 
 	# DELETE button
-	if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
+	if( $p_flags['can_delete'] ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
 		echo '</div>';

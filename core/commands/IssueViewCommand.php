@@ -84,9 +84,11 @@ class IssueViewCommand extends Command {
 	 */
 	protected function process() {
 		$t_force_readonly = $this->option( 'force_readonly', false );
+		$t_anonymous_user = current_user_is_anonymous();
 
 		$t_user_id = auth_get_current_user_id();
 		$t_issue_id = $this->query( 'id' );
+		$t_issue_readonly = $t_force_readonly || bug_is_readonly( $t_issue_id );
 
 		ApiObjectFactory::$soap = false;
 
@@ -141,7 +143,7 @@ class IssueViewCommand extends Command {
 
 		$t_flags['reminder_can_add'] =
 			!current_user_is_anonymous() &&
-			!bug_is_readonly( $t_issue_id ) &&
+			!$t_issue_readonly &&
 			access_has_bug_level( config_get( 'bug_reminder_threshold' ), $t_issue_id );
 
 		$t_flags['id_show'] = in_array( 'id', $t_fields );
@@ -227,6 +229,36 @@ class IssueViewCommand extends Command {
 		$t_flags['severity_show'] = in_array( 'severity', $t_fields ) && isset( $t_issue['severity'] );
 		$t_flags['status_show'] = in_array( 'status', $t_fields ) && isset( $t_issue['status'] );
 		$t_flags['view_state_show'] = in_array( 'view_state', $t_fields ) && isset( $t_issue['view_state'] );
+
+		$t_flags['can_update'] = !$t_issue_readonly && access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
+		$t_flags['can_assign'] = !$t_issue_readonly &&
+			access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_issue_id );
+		$t_flags['can_change_status'] = !$t_issue_readonly && access_has_bug_level( config_get( 'update_bug_status_threshold' ), $t_issue_id );
+
+		$t_flags['can_monitor'] = !$t_force_readonly && !$t_anonymous_user &&
+			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $t_issue_id );
+		$t_flags['can_unmonitor'] = !$t_force_readonly && !$t_anonymous_user &&
+			user_is_monitoring_bug( auth_get_current_user_id(), $t_issue_id );
+
+		$t_flags['can_clone'] = !$t_issue_readonly && access_has_bug_level( config_get( 'report_bug_threshold' ), $t_issue_id );
+		$t_flags['can_reopen'] = !$t_force_readonly && access_can_reopen_bug( $t_issue_data );
+
+		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_issue_data->project_id );
+		$t_flags['can_close'] = !$t_issue_readonly &&
+			access_can_close_bug( $t_issue_data ) && bug_check_workflow( $t_issue_data->status, $t_closed_status );
+
+		$t_flags['can_move'] = !$t_issue_readonly && access_has_bug_level( config_get( 'move_bug_threshold' ), $t_issue_id );
+		$t_flags['can_delete'] = !$t_issue_readonly && access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_issue_id );
+
+		if( $t_force_readonly ) {
+			$t_flags['can_sticky'] = false;
+			$t_flags['can_unsticky'] = false;
+		} else {
+			$t_sticky = bug_get_field( $t_issue_id, 'sticky' );
+			$t_sticky_change = access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_issue_id );
+			$t_flags['can_sticky'] = !$t_sticky && $t_sticky_change;
+			$t_flags['can_unsticky'] = $t_sticky && $t_sticky_change;
+		}
 
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		custom_field_cache_values( array( $t_issue_id ), $t_related_custom_field_ids );
