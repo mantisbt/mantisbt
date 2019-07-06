@@ -549,12 +549,19 @@ class BugFilterQuery extends DbQuery {
 			# wont differentiate for public or private issues, becasue the reporter of a private issue can always see it.
 			$t_limit_reporter_project_ids = array();
 
-			# this array is populated with projects where the user can view only public issues for which he is the handler user
+			# this array is populated with projects where the user can view public issues for which he is the handler user
 			$t_limit_handler_public_only_project_ids = array();
 
-			# this array is populated with projects where the user can view only issues for which he is the handler user
+			# this array is populated with projects where the user can view issues for which he is the handler user
 			# but also has acces to those that are private.
 			$t_limit_handler_public_and_private_project_ids = array();
+
+			# this array is populated with projects where the user can view public issues he is monitoring
+			$t_limit_monitoring_public_project_ids = array();
+
+			# this array is populated with projects where the user can view issues he is monitoring
+			# but also has acces to those that are private.
+			$t_limit_monitoring_public_and_private_project_ids = array();
 
 			# make sure the project rows are cached, as they will be used to check access levels.
 			project_cache_array_rows( $t_included_project_ids );
@@ -567,11 +574,13 @@ class BugFilterQuery extends DbQuery {
 					# if we have a reduced access to show only own reported or handled issues, we want to show both
 					# cases: at least those reported by the user, and also those handled by the suer
 
-					# for handled issues, check if the user can access private issues
+					# for handled or monitored issues, check if the user can access private issues
 					if( $t_can_see_private ) {
 						$t_limit_handler_public_and_private_project_ids[] = $t_pid;
+						$t_limit_monitoring_public_and_private_project_ids[] = $t_pid;
 					} else {
 						$t_limit_handler_public_only_project_ids[] = $t_pid;
+						$t_limit_monitoring_public_project_ids[] = $t_pid;
 					}
 
 					# for own reported issues, they will always be accesible whether private or public.
@@ -611,18 +620,35 @@ class BugFilterQuery extends DbQuery {
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_projects_for_reporter_visibility ) . ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
 			}
 
-			# for projects where access is limited to assigned issues (public or private issues)
+			# for projects where access is limited, search for assigned issues (public or private issues)
 			if( !empty( $t_limit_handler_public_and_private_project_ids ) ) {
 				log_event( LOG_FILTERING, 'project_ids (with access limited to own handled issues, public/private) = @P' . implode( ', @P', $t_limit_handler_public_and_private_project_ids ) );
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limit_handler_public_and_private_project_ids ) . ' AND {bug}.handler_id = ' . $this->param( $t_user_id );
 			}
 
-			# for projects where access is limited to assigned issues (only public issues)
+			# for projects where access is limited, search for assigned issues (only public issues)
 			if( !empty( $t_limit_handler_public_only_project_ids ) ) {
 				log_event( LOG_FILTERING, 'project_ids (with access limited to own handled issues, only public) = @P' . implode( ', @P', $t_limit_handler_public_only_project_ids ) );
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limit_handler_public_only_project_ids )
 						. ' AND {bug}.handler_id = ' . $this->param( $t_user_id )
 						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC );
+			}
+
+			# for projects where access is limited, search monitored issues (public or private issues)
+			if( !empty( $t_limit_monitoring_public_and_private_project_ids ) ) {
+				log_event( LOG_FILTERING, 'project_ids (with access limited to monitored issues, public/private) = @P' . implode( ', @P', $t_limit_monitoring_public_and_private_project_ids ) );
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limit_monitoring_public_and_private_project_ids )
+						. ' AND EXISTS ( SELECT 1 FROM {bug_monitor} bm WHERE bm.user_id = ' . $this->param( $t_user_id )
+						. ' AND bm.bug_id = {bug}.id )';
+			}
+
+			# for projects where access is limited, search monitored issues (only public issues)
+			if( !empty( $t_limit_monitoring_public_project_ids ) ) {
+				log_event( LOG_FILTERING, 'project_ids (with access limited to monitored issues, only public) = @P' . implode( ', @P', $t_limit_monitoring_public_project_ids ) );
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_limit_monitoring_public_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC )
+						. ' AND EXISTS ( SELECT 1 FROM {bug_monitor} bm WHERE bm.user_id = ' . $this->param( $t_user_id )
+						. ' AND bm.bug_id = {bug}.id )';
 			}
 
 			$t_project_query = '(' . implode( ' OR ', $t_query_projects_or ) . ')';

@@ -513,12 +513,17 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
 
 	# Check special limits
-	# Limited view means this user can only view the issues they reported and/or is handling
+	# Limited view means this user can only view the issues they reported, is handling, or monitoring
 	$t_limited_view = access_has_limited_view( $t_project_id, $p_user_id );
-
 	if( $t_limited_view ) {
-		$t_bug_is_user_handler = bug_is_user_handler( $p_bug_id, $p_user_id );
-		if( !$t_bug_is_user_reporter && !$t_bug_is_user_handler ) {
+		$t_allowed = $t_bug_is_user_reporter;
+		if( !$t_allowed ) {
+			$t_allowed = bug_is_user_handler( $p_bug_id, $p_user_id );
+		}
+		if( !$t_allowed ) {
+			$t_allowed = user_is_monitoring_bug( $p_user_id, $p_bug_id );
+		}
+		if( !$t_allowed ) {
 			return false;
 		}
 	}
