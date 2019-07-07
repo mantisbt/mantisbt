@@ -907,11 +907,9 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	$t_project_id = ( null === $p_project_id ) ? helper_get_current_project() : $p_project_id;
 
 	# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
-	# but can also appear at project level (and it will work with current code)
 	# Use this option if set, otherwise, check the new option for "unlimited view" threshold
+	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, ALL_PROJECTS );
 	$t_threshold_can_view = NOBODY;
-
-	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, $t_project_id );
 	if( ON != $t_old_limit_reporters ) {
 		$t_threshold_can_view = config_get( 'limit_view_unless_threshold', null, $t_user_id, $t_project_id );
 	} else {
