@@ -3057,8 +3057,9 @@ $g_limit_reporters = OFF;
 
 /**
  * Threshold at wich a user can view all issues in the project (as allowed by other permissions)
- * Not meeting this threshold means the user can only see its own reported issues.
- * A value of ANYBODY means that all user have full visibility (as default)
+ * Not meeting this threshold means the user can only see the issues reported, handled, or
+ * monitored by him.
+ * A value of ANYBODY means that all users have full visibility (as default)
  *
  * This is a replacement for old option 'limit_reporters'.
  *
