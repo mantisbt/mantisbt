@@ -547,28 +547,46 @@ class BugFilterQuery extends DbQuery {
 			$t_public_only_project_ids = array();
 			# this array is populated with projects to search only accesible private issues by being the reporter of those.
 			$t_private_is_reporter_project_ids = array();
-			# this array is populated with projects where the user has limited view, and can see any private issue
+
+			# these arrays are populated with projects where the user has limited view, with 'limit_view_unless_threshold' configuration
+			# projects where the user has limited view, but can see any private issue
 			$t_limited_public_and_private_project_ids = array();
-			# this array is populated with projects where the user has limited view, and can't see private issues, only public ones
+			# projects where the user has limited view, and can't see private issues, only public ones
 			$t_limited_public_only_project_ids = array();
+
+			# these arrays are populated with projects where the user has limited view with the old 'limit_reporters' configuration
+			# projects where the user has limited view, but can see any private issue
+			$t_old_limit_public_and_private_project_ids = array();
+			# projects where the user has limited view, and can't see private issues, only public ones
+			$t_old_limit_public_only_project_ids = array();
 
 			# make sure the project rows are cached, as they will be used to check access levels.
 			project_cache_array_rows( $t_included_project_ids );
+
+			# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
+			$t_old_limit_reporters = ( ON == config_get( 'limit_reporters', null, $t_user_id, ALL_PROJECTS ) );
 
 			foreach( $t_included_project_ids as $t_pid ) {
 				$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
 				$t_can_see_private = access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id );
 
 				if( access_has_limited_view( $t_pid, $t_user_id ) ) {
-					# we have a reduced access (show only own reported, handled, monitored issues)
-					if( $t_can_see_private ) {
-						$t_limited_public_and_private_project_ids[] = $t_pid;
-					} else {
-						$t_limited_public_only_project_ids[] = $t_pid;
-						# private issues can be seen by the reporter, which is also a valid case for the limited view configuration
-						$t_private_is_reporter_project_ids[] = $t_pid;
+					if( $t_old_limit_reporters ) {
+						# we have a reduced access (show only own reported issues)
+						$t_old_limit_public_and_private_project_ids[] = $t_pid;
+						if( !$t_can_see_private ) {
+							$t_old_limit_public_only_project_ids[] = $t_pid;
+						}
+					} else{
+						# we have a reduced access (show only own reported, handled, monitored issues)
+						if( $t_can_see_private ) {
+							$t_limited_public_and_private_project_ids[] = $t_pid;
+						} else {
+							$t_limited_public_only_project_ids[] = $t_pid;
+							# private issues can be seen by the reporter, which is also a valid case for the limited view configuration
+							$t_private_is_reporter_project_ids[] = $t_pid;
+						}
 					}
-
 				} else {
 					# if there is no special limit, use the general project clauses
 					if( $t_can_see_private ) {
@@ -588,13 +606,27 @@ class BugFilterQuery extends DbQuery {
 
 			# for these projects, search public issues
 			if( !empty( $t_public_only_project_ids ) ) {
-				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_public_only_project_ids ) . ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC );
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_public_only_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC );
 			}
 
 			# for these projects, search private issues where the user is reporter
 			if( !empty( $t_private_is_reporter_project_ids ) ) {
 				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_private_is_reporter_project_ids )
 						. ' AND {bug}.view_state <> ' . $this->param( VS_PUBLIC )
+						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+			}
+
+			# for these projects, search any issue (public or private) valid for the old 'limit_reporters' configuration
+			if( !empty( $t_old_limit_public_and_private_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_old_limit_public_and_private_project_ids )
+						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
+			}
+
+			# for these projects, search public issues valid for the old 'limit_reporters' configuration
+			if( !empty( $t_old_limit_public_only_project_ids ) ) {
+				$t_query_projects_or[] = $this->sql_in( '{bug}.project_id', $t_old_limit_public_only_project_ids )
+						. ' AND {bug}.view_state = ' . $this->param( VS_PUBLIC )
 						. ' AND {bug}.reporter_id = ' . $this->param( $t_user_id );
 			}
 
