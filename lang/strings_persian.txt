@@ -53,6 +53,7 @@
  * @author Razavi
  * @author Reza1615
  * @author Sjazz
+ * @author Sultanselim baloch
  * @author جواد
  */
 
@@ -854,7 +855,7 @@ $s_signup_title = 'ثبت‌نام';
 $s_signup_button = 'ثبت‌نام';
 $s_no_password_request = 'گذرواژۀ شما با سیستم دیگری مدیریت می‌شود. لطفا با مدیریت تماس بگیرید.';
 $s_edit_site_settings_title = 'ویرایش تنظیمات سایت';
-$s_save_settings_button = 'ذخیرهٔ تنظیمات';
+$s_save_settings_button = 'ردبندی‌ئانء سپت کنگ';
 $s_site_settings_title = 'تنظیمات سایت';
 $s_system_info_link = 'اطلاعات سیستم';
 $s_site_settings_link = 'تنظیمات سایت';
@@ -1263,7 +1264,7 @@ $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'فیلدِ "%1$s" مربوط به پ�
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'رسیدگی‌کننده‌ی مسئله دسترسی‌های لازم برای رسیدگی به مسئله را در این وضعیت ندارد.';
 $MANTIS_ERROR[ERROR_PROJECT_HIERARCHY_DISABLED] = 'سلسله مراتب پروژه (پروژه‌های فرعی) غیرفعال شد.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'پروژهٔ "%1$s" پیدا نشد.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'پروژه‌ای با این نام، از قبل موجود است. لطفا بازگردید و نام دیگری وارد کنید.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'پروژه‌ای با این نام، از قبل موجود است. لطفاً بازگردید و نام دیگری وارد کنید.';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = 'گذرواژه‌ی فعلی اشتباه است.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'مسئله %1$d یافت نشد.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'آدرس ایمیل غیر معتبر.';
