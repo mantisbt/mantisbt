@@ -32,6 +32,7 @@ $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_show_page_header = true;
 $t_force_readonly = false;
 $t_fields_config_option = 'bug_view_page_fields';
+$t_fields_status_config_option = 'bug_view_page_fields_by_status';
 
 define( 'BUG_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/bug_view_inc.php' );
