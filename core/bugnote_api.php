@@ -237,6 +237,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$c_last_modified = $p_last_modified <= 0 ? db_now() : (int)$p_last_modified;
 
 	antispam_check();
+	antispam_note_check($p_bugnote_text, $p_private);
 
 	if( REMINDER !== $p_type ) {
 		# Check if this is a time-tracking note

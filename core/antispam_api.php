@@ -64,3 +64,52 @@ function antispam_check() {
 		array( $t_antispam_max_event_count, $t_antispam_time_window_in_seconds )
 	);
 }
+
+/**
+ * Checks a note for html/bbcode hyperlinks and raw URLs.
+ * This should be run before adding public issue notes from anonymous uses.
+ * If the note is determined to contain spammy text, this method will trigger
+ * an error and exit the script.
+ */
+function antispam_note_check( $p_bugnote_text, $p_private ) {
+	global $g_allow_anonymous_login, $g_anonymous_account;
+	if ( OFF == $g_allow_anonymous_login ) {
+		return;
+	}
+	if ( $p_private ) {
+		return;
+	}
+	$e_user_id = auth_get_current_user_id();
+	$e_username = user_get_username( $e_user_id );
+	if ( $e_username != $g_anonymous_account ) {
+		return;
+	}
+	$t_limit = false;
+	if ( strpos($p_bugnote_text, '<a href=') !== false ) {
+		$t_limit = true;
+	} else if ( strpos($p_bugnote_text, '[url=') !== false ) {
+		$t_limit = true;
+	} else if ( substr($p_bugnote_text, 0, 4) === 'http' ) {
+		$t_limit = true;
+	} else if ( strpos($p_bugnote_text, ' ') !== false ) {
+		$t_count = 0;
+		$t_msg_arr = explode(' ', $p_bugnote_text);
+		foreach ( $t_msg_arr as $t_word ) {
+			if ( substr(trim($t_word), 0, 4) === 'http' ) {
+				$t_count++;
+			}
+		}
+		if ( $t_count > 3 || $t_count >= count($t_msg_arr) - 1 ) {
+			$t_limit = true;
+		}
+	}
+	if ( !$t_limit ) {
+		return;
+	}
+
+	throw new ClientException(
+	"Anonymous note blocked",
+		ERROR_SPAM_ANONURL,
+		array()
+	);
+}
