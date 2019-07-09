@@ -75,6 +75,7 @@ $t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
 
 if( $t_referer_page == auth_login_page() ) {
 	# custom status colors not needed.
+	http_caching_headers( false );
 	exit;
 }
 
@@ -86,6 +87,7 @@ switch( $t_referer_page ) {
 	case 'account_update.php':
 		# We don't need custom status colors on login page, and this is
 		# actually causing an error since we're not authenticated yet.
+		http_caching_headers( false );
 		exit;
 }
 
