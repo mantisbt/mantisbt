@@ -409,7 +409,19 @@ $(document).ready( function() {
 	$( 'form .dropzone' ).each(function(){
 		var classPrefix = 'dropzone';
 		var autoUpload = $(this).hasClass('auto-dropzone');
-		enableDropzone( classPrefix, autoUpload );
+		var zoneObj = enableDropzone( classPrefix, autoUpload );
+		if( zoneObj ) {
+			/* Attach image paste handler to add-note form */
+			$( '#bugnoteadd' ).bind( 'paste', function( event ) {
+				var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
+				for( index in items ) {
+					var item = items[index];
+					if( item.kind === 'file' ) {
+						zoneObj.addFile( item.getAsFile() )
+					}
+				}
+			});
+		}
 	});
 
 	$('.bug-jump').find('[name=bug_id]').focus( function() {
@@ -803,9 +815,13 @@ function enableDropzone( classPrefix, autoUpload ) {
 	if( preview_template ) {
 		options.previewTemplate = preview_template.innerHTML;
 	}
+
+	var zone_object = null;
 	try {
-		var zone_object = new Dropzone( form[0], options );
+		zone_object = new Dropzone( form[0], options );
 	} catch (e) {
 		alert( zone.data('dropzone-not-supported') );
 	}
+
+	return zone_object;
 }
