@@ -411,8 +411,8 @@ $(document).ready( function() {
 		var autoUpload = $(this).hasClass('auto-dropzone');
 		var zoneObj = enableDropzone( classPrefix, autoUpload );
 		if( zoneObj ) {
-			/* Attach image paste handler to add-note form */
-			$( '#bugnoteadd' ).bind( 'paste', function( event ) {
+			/* Attach image paste handler to report-bug & add-note forms */
+			$( '#bugnoteadd, #report_bug_form' ).bind( 'paste', function( event ) {
 				var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
 				for( index in items ) {
 					var item = items[index];
