@@ -88,7 +88,7 @@ $t_data = array(
 	'options' => array( 'force_readonly' => $t_force_readonly )
 );
 
-$t_cmd = new IssueViewCommand( $t_data );
+$t_cmd = new IssueViewPageCommand( $t_data );
 $t_result = $t_cmd->execute();
 
 $t_issue = $t_result['issue'];

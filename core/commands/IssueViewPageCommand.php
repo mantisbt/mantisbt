@@ -58,7 +58,7 @@ use Mantis\Exceptions\ClientException;
 /**
  * A command that returns issue information to view.
  */
-class IssueViewCommand extends Command {
+class IssueViewPageCommand extends Command {
 	/**
 	 * Constructor
 	 *
