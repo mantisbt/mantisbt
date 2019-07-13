@@ -28,19 +28,8 @@
 # Prevent output of HTML in the content if errors occur
 define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
-$t_allow_caching = isset( $_GET['cache_key'] );
-if( $t_allow_caching ) {
-	# Suppress default headers. This allows caching as defined in server configuration
-	$g_bypass_headers = true;
-}
-
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
-
-if( $t_allow_caching ) {
-	# if standard headers were bypassed, add security headers, at least
-	http_security_headers();
-}
 
 /**
  * Send correct MIME Content-Type header for css content.
@@ -89,6 +78,11 @@ switch( $t_referer_page ) {
 		# actually causing an error since we're not authenticated yet.
 		http_caching_headers( false );
 		exit;
+}
+
+# rewrite headers to allow caching
+if( gpc_isset( 'cache_key' ) ) {
+	http_caching_headers( true );
 }
 
 $t_status_string = config_get( 'status_enum_string' );
