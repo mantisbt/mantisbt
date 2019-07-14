@@ -813,18 +813,21 @@ layout_page_end();
  * @param integer             $p_bug_id       A bug identifier.
  * @param BugRelationshipData $p_relationship A bug relationship object.
  * @param boolean             $p_html_preview Whether to include style/hyperlinks - if preview is false, we prettify the output.
+ * @param boolean             $p_show_project Show Project details.
  * @return string
  */
-function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html_preview = false ) {
+function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html_preview = false, $p_show_project = false ) {
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
 		# root bug is in the source side, related bug in the destination side
 		$t_related_project_id = $p_relationship->dest_bug_id;
+		$t_related_project_name = project_get_name( $p_relationship->dest_project_id );
 		$t_related_bug_id = $p_relationship->dest_bug_id;
 		$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
 	} else {
 		# root bug is in the dest side, related bug in the source side
 		$t_related_project_id = $p_relationship->src_bug_id;
 		$t_related_bug_id = $p_relationship->src_bug_id;
+		$t_related_project_name = project_get_name( $p_relationship->src_project_id );
 		$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
 	}
 
@@ -869,6 +872,11 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
 
 	$t_relationship_info_html .= '&#160;</td>';
 
+	# add project name
+	if( $p_show_project ) {
+		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&#160;</td>';
+	}
+
 	# add summary
 	$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
 	if( VS_PRIVATE == $t_bug->view_state ) {
@@ -896,6 +904,9 @@ function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_re
  */
 function bug_view_relationship_get_summary_html( $p_bug_id ) {
 	$t_summary = '';
+
+	# A variable that will be set by the following call to indicate if relationships belong
+	# to multiple projects.
 	$t_show_project = false;
 
 	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
@@ -903,7 +914,7 @@ function bug_view_relationship_get_summary_html( $p_bug_id ) {
 
 	# prepare the relationships table
 	for( $i = 0; $i < $t_relationship_all_count; $i++ ) {
-		$t_summary .= bug_view_relationship_get_details( $p_bug_id, $t_relationship_all[$i], /* html_preview */ false );
+		$t_summary .= bug_view_relationship_get_details( $p_bug_id, $t_relationship_all[$i], /* html_preview */ false, $t_show_project );
 	}
 
 	if( !is_blank( $t_summary ) ) {

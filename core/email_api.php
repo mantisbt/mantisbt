@@ -2047,7 +2047,11 @@ function email_relationship_get_details( $p_bug_id, BugRelationshipData $p_relat
  * @return string
  */
 function email_relationship_get_summary_text( $p_bug_id ) {
-	$t_relationship_all = relationship_get_all( $p_bug_id, /* show_project */ false );
+	# A variable that will be set by the following call to indicate if relationships belong
+	# to multiple projects.
+	$t_show_project = false;
+
+	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
 	$t_relationship_all_count = count( $t_relationship_all );
 
 	# prepare the relationships table
