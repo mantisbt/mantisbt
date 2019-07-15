@@ -312,6 +312,51 @@ return array(
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.menu.mainfilter">
+			<title>EVENT_MENU_MAIN_FILTER (Chained)</title>
+			<blockquote>
+				<para>
+					This event gives plugins the opportunity to modify the complete main menu
+					before it is output (for example re-order items, add items in the middle,
+					remove built-in items, change icons of built-in items).
+				</para>
+				<para>
+					A single parameter is passed as an array of associate arrays containing
+					the items in the main sidebar menu. The format of this array is the same as
+					EVENT_MENU_MAIN and EVENT_MENU_MAIN_FRONT, and will also contain any entries
+					added as a result of these events.
+				</para>
+				<para>
+					Plugins should do any modifications needed and return the array back.
+					Returning an empty array will hide the main menu.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: menu items</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem>
+						<para>&lt;Array&gt;: modified menu items</para>
+						<note>
+							<para>
+								When returning the updated menu, the plugin's hook
+								function needs to wrap it in an array, i.e.
+								<literal>return array( $p_menu_data );</literal> and not
+								<literal>return $p_menu_data;</literal>.
+								The reason for this is that the Event API relies on
+								call_user_func_array() to execute callback functions.
+							</para>
+						</note>
+
+					</listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
+
 		<blockquote id="dev.eventref.output.menu.manage">
 			<title>EVENT_MENU_MANAGE (Default)</title>
 			<blockquote>
