@@ -546,14 +546,27 @@ $(document).ready( function() {
 	 */
 	$('.table-responsive.sortable').each(function(){
 		var jtable = $(this).find('table').first();
-		var ths = jtable.find('thead th');
+		var ths = jtable.find('thead > tr > th');
 		if( !ths.length ) {
 			// exit if there is no headers
 			return;
 		}
 		var th_count = ths.length
+
+		var trs = jtable.find('tbody > tr');
+		if( trs.length > 1000 ) {
+			// don't run on big tables to avoid perfomance issues in client side
+			return;
+		}
+
 		var options_valuenames = [];
+		var exclude_index = [];
 		ths.each(function(index){
+			if( $(this).hasClass('no-sort') ) {
+				// if the column says no sorting, save this index for later checks and skip
+				exclude_index.push(index);
+				return;
+			}
 			// wrap the contents into a crafted div
 			var new_div = $('<div />').addClass('sort')
 					.attr('data-sort','sortkey_'+index)
@@ -563,14 +576,17 @@ $(document).ready( function() {
 
 			options_valuenames.push( { name:'sortkey_'+index, attr:'data-sortval' } );
 		});
-		var trs = jtable.find('tbody tr');
 		trs.each(function(){
-			var tds = $(this).find('td');
+			var tds = $(this).children('td');
 			if( tds.length != th_count ) {
 				// exit if different number of cells than headers, possibly colspan, etc
 				return;
 			}
 			tds.each(function(index){
+				if( exclude_index.indexOf(index) >= 0 ) {
+					// if this column was marked as no-sorting, skip.
+					return;
+				}
 				$(this).addClass( 'sortkey_'+index ).attr( 'data-sortval', $(this).text() );
 			});
 		});
