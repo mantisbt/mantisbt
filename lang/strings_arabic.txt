@@ -663,6 +663,7 @@ $s_configuration_corrupted = 'الإعدادات في  قاعدة البيانا
 $s_set_configuration_option_action_create = 'إنشاء خيار التكوين';
 $s_set_configuration_option_action_edit = 'تعديل خيار التكوين';
 $s_set_configuration_option_action_clone = 'خيار تكوين الاستنساخ';
+$s_set_configuration_option_action_view = 'عرض خيار التكوين';
 $s_plugin = 'إضافة';
 $s_plugins_installed = 'الإضافات المنصبة';
 $s_plugins_available = 'الإضافات المتوفرة';
