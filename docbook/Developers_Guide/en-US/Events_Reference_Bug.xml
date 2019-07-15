@@ -413,6 +413,21 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.noteaction.data">
+			<title>EVENT_BUGNOTE_DATA (Chained)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to preprocess bugnote contents.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: Bugnote text</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.noteaction.add">
 			<title>EVENT_BUGNOTE_ADD (Execute)</title>
 
