@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Excel (2003 SP2 and above) export page for billing information
+ * Export billing information to csv
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -25,17 +25,21 @@
  * @uses core.php
  * @uses billing_api.php
  * @uses bug_api.php
- * @uses excel_api.php
+ * @uses csv_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'billing_api.php' );
 require_api( 'bug_api.php' );
-require_api( 'excel_api.php' );
+require_api( 'export_api.php' );
+
+use Mantis\Export;
+
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
 helper_begin_long_process();
 
-$t_filename = excel_get_default_filename();
 $t_date_format = config_get( 'normal_date_format' );
 
 $f_project_id = gpc_get_int( 'project_id' );
@@ -43,6 +47,7 @@ $f_cost = gpc_get_int( 'cost' );
 $f_from = gpc_get_string( 'from' );
 $f_to = gpc_get_string( 'to' );
 $f_include_subprojects = gpc_get_bool( 'include_subprojects' );
+$f_export_type = gpc_get_string( 'type' );
 
 billing_ensure_reporting_access( $f_project_id );
 
@@ -50,46 +55,49 @@ $t_show_cost = ON == config_get( 'time_tracking_with_billing' ) && $f_cost != 0;
 
 $t_billing_rows = billing_get_for_project( $f_project_id, $f_from, $f_to, $f_cost, $f_include_subprojects );
 
-header( 'Content-Type: application/vnd.ms-excel; charset=UTF-8' );
-header( 'Pragma: public' );
-header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_name( $t_filename ) ) . '.xml"' ) ;
-
-echo excel_get_header( $t_filename );
-echo excel_get_start_row();
-echo excel_format_column_title( lang_get( 'issue_id' ) );
-echo excel_format_column_title( lang_get( 'project_name' ) );
-echo excel_format_column_title( lang_get( 'category' ) );
-echo excel_format_column_title( lang_get( 'summary' ) );
-echo excel_format_column_title( lang_get( 'username' ) );
-echo excel_format_column_title( lang_get( 'timestamp' ) );
-echo excel_format_column_title( lang_get( 'minutes' ) );
-echo excel_format_column_title( lang_get( 'time_tracking_time_spent' ) );
-
-if( $t_show_cost ) {
-	echo excel_format_column_title( 'cost' );
+$t_provider = Export\TableWriterFactory::getProviderByType( $f_export_type );
+if( !$t_provider ) {
+	# @TODO error
+	exit();
 }
 
-echo excel_format_column_title( 'note' );
-echo '</Row>';
+$t_filename = export_get_default_filename() . '.' . $t_provider->file_extension;
+$t_writer = Export\TableWriterFactory::createWriterFromProvider( $t_provider );
+$t_writer->openToBrowser( $t_filename );
+
+$t_titles = array();
+$t_titles[] = lang_get( 'issue_id' );
+$t_titles[] = lang_get( 'project_name' );
+$t_titles[] = lang_get( 'category' );
+$t_titles[] = lang_get( 'summary' );
+$t_titles[] = lang_get( 'username' );
+$t_titles[] = lang_get( 'timestamp' );
+$t_titles[] = lang_get( 'minutes' );
+$t_titles[] = lang_get( 'time_tracking_time_spent' );
+if( $t_show_cost ) {
+	$t_titles[] = 'cost';
+}
+$t_titles[] = 'note';
+
+$t_writer->addRowFromArray( $t_titles );
 
 foreach( $t_billing_rows as $t_billing ) {
-	echo "\n<Row>\n";
-	echo excel_prepare_number( $t_billing['bug_id'] );
-	echo excel_prepare_string( $t_billing['project_name'] );
-	echo excel_prepare_string( $t_billing['bug_category'] );
-	echo excel_prepare_string( $t_billing['bug_summary'] );
-	echo excel_prepare_string( $t_billing['reporter_name'] );
-	echo excel_prepare_string( date( $t_date_format, $t_billing['date_submitted'] ) );
-	echo excel_prepare_number( $t_billing['minutes'] );
-	echo excel_prepare_string( $t_billing['duration'] );
-
+	$t_values = array();
+	$t_values[] = bug_format_id( $t_billing['bug_id'] );
+	$t_values[] = $t_billing['project_name'];
+	$t_values[] = $t_billing['bug_category'];
+	$t_values[] = $t_billing['bug_summary'];
+	$t_values[] = $t_billing['reporter_name'];
+	$t_values[] = date( $t_date_format, $t_billing['date_submitted'] );
+	$t_values[] = $t_billing['minutes'];
+	$t_values[] = $t_billing['duration'];
 	if( $t_show_cost ) {
-		echo excel_prepare_string( $t_billing['cost'] );
+		$t_values[] = $t_billing['cost'];
 	}
-
-	echo excel_prepare_string( $t_billing['note'] );
-	echo "</Row>\n";
+	$t_values[] = $t_billing['note'];
+	$t_writer->addRowFromArray( $t_values );
 }
 
-echo excel_get_footer();
+$t_writer->close();
+
 
