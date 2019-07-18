@@ -653,6 +653,7 @@ $s_configuration_corrupted = 'Поставката на базата е нару
 $s_set_configuration_option_action_create = 'Можност за создавање поставеност';
 $s_set_configuration_option_action_edit = 'Можност за менување поставеност';
 $s_set_configuration_option_action_clone = 'Можност за клонирање поставеност';
+$s_set_configuration_option_action_view = 'Погл. можност за менување поставеност';
 $s_plugin = 'Приклучок';
 $s_plugins_installed = 'Воспоставени приклучоци';
 $s_plugins_available = 'Приклучоци на располагање';

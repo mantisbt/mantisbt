@@ -42,6 +42,7 @@
  * @author Alexey Chumakov
  * @author Amdei
  * @author DCamer
+ * @author DevilishSkull
  * @author Diralik
  * @author Edible Melon
  * @author Eleferen
@@ -84,12 +85,12 @@ $s_actiongroup_menu_update_field = 'Изменить %1$s';
 $s_actiongroup_menu_update_product_version = 'Изменить версию продукта';
 $s_actiongroup_menu_update_target_version = 'Изменить целевую версию';
 $s_actiongroup_menu_update_fixed_in_version = 'Изменить "решена в версии"';
-$s_actiongroup_menu_update_product_build = 'Изменить сборку продукта';
+$s_actiongroup_menu_update_product_build = 'Изменить версию сборки продукта';
 $s_actiongroup_menu_update_due_date = 'Обновление даты оплаты';
 $s_actiongroup_menu_add_note = 'Добавить заметку';
 $s_actiongroup_menu_attach_tags = 'Добавить метки';
 $s_actiongroup_bugs = 'Выбранные задачи';
-$s_actiongroup_error_issue_is_readonly = 'Задача закрыта для редактирования.';
+$s_actiongroup_error_issue_is_readonly = 'Задача открыта только для чтения.';
 $s_all_projects = 'Все проекты';
 $s_move_bugs = 'Переместить задачи';
 $s_operation_successful = 'Действие успешно выполнено.';
@@ -100,7 +101,7 @@ $s_print_all_bug_page_link = 'Печать отчетов';
 $s_csv_export = 'Экспорт в CSV';
 $s_excel_export = 'Экспорт в Excel';
 $s_login_anonymously = 'Войти анонимно';
-$s_anonymous = 'Аноним';
+$s_anonymous = 'Анонимный Пользователь';
 $s_jump_to_bugnotes = 'Перейти к комментариям';
 $s_jump_to_history = 'Перейти к истории';
 $s_display_history = 'Показать историю';
@@ -673,9 +674,10 @@ $s_all_users = 'Все пользователи';
 $s_set_configuration_option = 'Установить параметр';
 $s_delete_config_sure_msg = 'Вы уверены, что хотите удалить этот параметр?';
 $s_configuration_corrupted = 'Конфигурация в базе данных нарушена.';
-$s_set_configuration_option_action_create = 'Создать вариант конфигурации';
+$s_set_configuration_option_action_create = 'Создать параметр';
 $s_set_configuration_option_action_edit = 'Изменение параметра конфигурации';
-$s_set_configuration_option_action_clone = 'Клонировать опцию конфигурации';
+$s_set_configuration_option_action_clone = 'Клонировать параметр';
+$s_set_configuration_option_action_view = 'Просмотр параметра конфигурации';
 $s_plugin = 'Плагин';
 $s_plugins_installed = 'Установленные плагины';
 $s_plugins_available = 'Доступные плагины';

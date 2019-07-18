@@ -665,6 +665,7 @@ $s_configuration_corrupted = 'A configuração na base de dados está corrompida
 $s_set_configuration_option_action_create = 'Criar uma opção de configuração';
 $s_set_configuration_option_action_edit = 'Editar uma opção de configuração';
 $s_set_configuration_option_action_clone = 'Duplicar uma opção de configuração';
+$s_set_configuration_option_action_view = 'Ver opção de configuração';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins instalados';
 $s_plugins_available = 'Plugins disponíveis';

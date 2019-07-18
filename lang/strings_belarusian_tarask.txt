@@ -655,6 +655,7 @@ $s_configuration_corrupted = 'Канфігурацыя ў базе зьвест�
 $s_set_configuration_option_action_create = 'Стварыць опцыю канфігурацыі';
 $s_set_configuration_option_action_edit = 'Рэдагаваць опцыю канфігурацыі';
 $s_set_configuration_option_action_clone = 'Кланаваць опцыю канфігурацыі';
+$s_set_configuration_option_action_view = 'Прагляд парамэтру канфігурацыі';
 $s_plugin = 'Дапаўненьне';
 $s_plugins_installed = 'Усталяваныя пашырэньні';
 $s_plugins_available = 'Даступныя пашырэньні';
