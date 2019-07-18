@@ -127,20 +127,10 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			}
 
 			$t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
+			$t_menu_options = event_process_result_type_default( $t_event_menu_options,
+					function ( $p_item ) { echo $p_item; }
+					);
 
-			foreach ($t_event_menu_options as $t_plugin => $t_plugin_menu_options) {
-				foreach ($t_plugin_menu_options as $t_callback => $t_callback_menu_options) {
-					if (!is_array($t_callback_menu_options)) {
-						$t_callback_menu_options = array($t_callback_menu_options);
-					}
-
-					foreach ($t_callback_menu_options as $t_menu_option) {
-						if ($t_menu_option) {
-							echo $t_menu_option;
-						}
-					}
-				}
-			}
 		?>
 		</div>
 		<div class="btn-group pull-right"><?php

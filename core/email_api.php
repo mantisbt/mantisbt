@@ -367,18 +367,17 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	}
 
 	# add users as specified by plugins
-	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', array( $p_bug_id, $p_notify_type ) );
-	foreach( $t_recipients_include_data as $t_plugin => $t_recipients_include_data2 ) {
-		foreach( $t_recipients_include_data2 as $t_callback => $t_recipients_included ) {
-			# only handle if we get an array from the callback
-			if( is_array( $t_recipients_included ) ) {
-				foreach( $t_recipients_included as $t_user_id ) {
-					$t_recipients[$t_user_id] = true;
-					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (by %s plugin)', $p_bug_id, $t_user_id, $t_plugin );
-				}
+	$fn_include = function( $p_item, $p_plugin ) use ( &$t_recipients, $p_bug_id ) {
+		# only handle if we get an array from the callback
+		if( is_array( $p_item ) ) {
+			foreach( $p_item as $t_user_id ) {
+				$t_recipients[$t_user_id] = true;
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (by %s plugin)', $p_bug_id, $t_user_id, $p_plugin );
 			}
 		}
-	}
+	};
+	$t_recipients_include_data = event_signal( 'EVENT_NOTIFY_USER_INCLUDE', array( $p_bug_id, $p_notify_type ) );
+	event_process_result_type_default( $t_recipients_include_data, $fn_include );
 
 	# FIXME: the value of $p_notify_type could at this stage be either a status
 	# or a built-in actions such as 'owner and 'sponsor'. We have absolutely no
@@ -470,18 +469,16 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		}
 
 		# check to exclude users as specified by plugins
-		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', array( $p_bug_id, $p_notify_type, $t_id ) );
 		$t_exclude = false;
-		foreach( $t_recipient_exclude_data as $t_plugin => $t_recipient_exclude_data2 ) {
-			foreach( $t_recipient_exclude_data2 as $t_callback => $t_recipient_excluded ) {
-				# exclude if any plugin returns true (excludes the user)
-				if( $t_recipient_excluded ) {
-					$t_exclude = true;
-					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (by %s plugin)', $p_bug_id, $t_id, $t_plugin );
-				}
+		$fn_exclude = function( $p_item, $p_plugin ) use ( &$t_exclude, $p_bug_id, $t_id ) {
+			# exclude if any plugin returns true (excludes the user)
+			if( $p_item ) {
+				$t_exclude = true;
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (by %s plugin)', $p_bug_id, $t_id, $p_plugin );
 			}
-		}
-
+		};
+		$t_recipient_exclude_data = event_signal( 'EVENT_NOTIFY_USER_EXCLUDE', array( $p_bug_id, $p_notify_type, $t_id ) );
+		event_process_result_type_default( $t_recipient_exclude_data, $fn_exclude );
 		# user was excluded by a plugin
 		if( $t_exclude ) {
 			continue;

@@ -834,20 +834,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
  * @return array containing sidebar items
  */
 function layout_plugin_menu_options_for_sidebar( $p_plugin_event_response ) {
-	$t_menu_options = array();
-
-	foreach( $p_plugin_event_response as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
-
+	$t_menu_options = event_process_result_type_default( $p_plugin_event_response );
 	return $t_menu_options;
 }
 

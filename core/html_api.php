@@ -570,18 +570,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 function print_summary_submenu() {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	if( count($t_menu_options) > 0 ) {
 		echo '<div class="space-10"></div>';
@@ -636,18 +625,7 @@ function print_manage_menu( $p_page = '' ) {
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 	foreach( $t_pages AS $t_page ) {
@@ -713,18 +691,7 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
-	$t_menu_options = array();
-	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<div class="space-10"></div>' . "\n";
 	echo '<div class="center">' . "\n";
@@ -771,18 +738,7 @@ function print_account_menu( $p_page = '' ) {
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 	foreach ( $t_pages as $t_page ) {
@@ -864,18 +820,7 @@ function print_doc_menu( $p_page = '' ) {
 function print_summary_menu( $p_page = '', array $p_filter = null ) {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 
