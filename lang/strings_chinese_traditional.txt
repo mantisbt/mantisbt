@@ -665,6 +665,7 @@ $s_configuration_corrupted = '資料庫中的設定資訊已損毀。';
 $s_set_configuration_option_action_create = '建立設置選項';
 $s_set_configuration_option_action_edit = '編輯設置選項';
 $s_set_configuration_option_action_clone = '複製設置選項';
+$s_set_configuration_option_action_view = '檢視設置選項';
 $s_plugin = '套件';
 $s_plugins_installed = '已安裝的套件';
 $s_plugins_available = '可用的套件';
