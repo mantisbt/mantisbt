@@ -352,3 +352,44 @@ function event_type_default( $p_event, array $p_callbacks, $p_data ) {
 	}
 	return $t_output;
 }
+
+/**
+ * Process the result of calling an EVENT_TYPE_DEFAULT event. In it's basic usage,
+ * extracs and builds an array containing the final items from the plugin responses.
+ * An optional parameter can be provided with a callback function for processing
+ * each item to accomodate more complex scenarios. This function can be used to
+ * validate the items before returning them, or to directly trigger actions for
+ * the items.
+ *
+ * This callback function will receive 3 parameters:
+ * - The item.
+ * - The name of the plugin which provided the item.
+ * - The name of the plugin's callback function that provided the item.
+ * The returned value from this function will be added to the main result array.
+ * If the returned value is null, the ittem will not be added to the main result.
+ *
+ * @param array $p_event_results	Response data from calling `event_signal`
+ * @param callable $fn_process		Callback function to process each item
+ * @return array
+ */
+function event_process_result_type_default( $p_event_results, callable $fn_process = null ) {
+	$t_items = array();
+	foreach( $p_event_results as $t_plugin => $t_plugin_responses ) {
+		foreach( $t_plugin_responses as $t_callback_function => $t_callback_result ) {
+			if( !is_array( $t_callback_result ) ) {
+				$t_callback_result = array( $t_callback_result );
+			}
+			if( null !== $fn_process ) {
+				foreach( $t_callback_result as $t_result_item ) {
+					$t_processed = $fn_process( $t_result_item, $t_plugin, $t_callback_function );
+					if( null !== $t_processed ) {
+						$t_items[] = $t_processed;
+					}
+				}
+			} else {
+				$t_items += $t_callback_result;
+			}
+		}
+	}
+	return $t_items;
+}
