@@ -81,40 +81,56 @@ function bug_activity_get_all( $p_bug_id, $p_include_attachments = true ) {
 	}
 
 	$t_activities = array();
+	$t_bugnote_attachments = array();
 
 	foreach( $t_attachments as $t_attachment ) {
-		$t_activity = array(
-			'type' => ENTRY_TYPE_ATTACHMENT,
-			'timestamp' => $t_attachment['date_added'],
-			'modified' => false,
-			'last_modified' => $t_attachment['date_added'],
-			'id' => $t_attachment['id'],
-			'id_formatted' => $t_attachment['id'],
-			'user_id' => $t_attachment['user_id'],
-			'private' => false,
-			'style' => 'bugnote-note',
-			'attachment' => $t_attachment );
+		$t_bugnote_id = (int)$t_attachment['bugnote_id'];
+		if( $t_bugnote_id == 0 ) {
+			$t_activity = array(
+				'type' => ENTRY_TYPE_ATTACHMENT,
+				'timestamp' => $t_attachment['date_added'],
+				'modified' => false,
+				'last_modified' => $t_attachment['date_added'],
+				'id' => $t_attachment['id'],
+				'id_formatted' => $t_attachment['id'],
+				'user_id' => $t_attachment['user_id'],
+				'private' => false,
+				'style' => 'bugnote-note',
+				'attachment' => $t_attachment );
+	
+			$t_activity['can_edit'] = false;
+			$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
+			$t_activity['can_change_view_state'] = false;
+	
+			$t_activities[] = $t_activity;
+		} else {
+			if( !isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {
+				$t_bugnote_attachments[$t_bugnote_id] = array();
+			}
 
-		$t_activity['can_edit'] = false;
-		$t_activity['can_delete'] = !$t_bug_readonly && $t_attachment['can_delete'];
-		$t_activity['can_change_view_state'] = false;
-
-		$t_activities[] = $t_activity;
+			$t_bugnote_attachments[$t_bugnote_id][] = $t_attachment;
+		}
 	}
 
 	foreach( $t_bugnotes as $t_bugnote ) {
+		$t_bugnote_id = (int)$t_bugnote->id;
 		$t_activity = array(
 			'type' => ENTRY_TYPE_NOTE,
 			'timestamp' => $t_bugnote->date_submitted,
 			'last_modified' => $t_bugnote->last_modified,
 			'modified' => $t_bugnote->date_submitted != $t_bugnote->last_modified,
-			'id' => $t_bugnote->id,
-			'id_formatted' => bugnote_format_id( $t_bugnote->id ),
+			'id' => $t_bugnote_id,
+			'id_formatted' => bugnote_format_id( $t_bugnote_id ),
 			'user_id' => $t_bugnote->reporter_id,
 			'private' => $t_bugnote->view_state != VS_PUBLIC,
 			'style' => 'bugnote-note',
 			'attachments' => array(),
 			'note' => $t_bugnote );
+
+		if( isset( $t_bugnote_attachments[$t_bugnote_id] ) ) {
+			$t_activity['attachments'] = $t_bugnote_attachments[$t_bugnote_id];
+			unset( $t_bugnote_attachments[$t_bugnote_id] );
+		}
 
 		if( $t_activity['private'] ) {
 			$t_activity['style'] .= ' bugnote-private';
