@@ -242,9 +242,6 @@ class IssueNoteAddCommand extends Command {
 			$g_project_override = $this->issue->project_id;
 		}
 
-		# Handle the file upload
-		$t_file_infos = file_attach_files( $this->issue->id, $this->files );
-
 		# We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 		# if time tracking is not 0 and the time tracking feature is enabled.
 		$t_note_id = bugnote_add(
@@ -256,9 +253,13 @@ class IssueNoteAddCommand extends Command {
 			/* attr */ '',
 			/* user_id */ $this->reporterId,
 			/* send_email */ false );
+
 		if( !$t_note_id ) {
 			throw new ClientException( "Unable to add note", ERROR_GENERIC );
 		}
+
+		# Handle the file upload
+		$t_file_infos = file_attach_files( $this->issue->id, $this->files, $t_note_id );
 
 		# Process the mentions in the added note
 		$t_user_ids_that_got_mention_notifications = bugnote_process_mentions( $this->issue->id, $t_note_id, $this->payload( 'text' ) );

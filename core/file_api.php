@@ -60,9 +60,10 @@ $g_cache_file_count = array();
  *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
+ * @param int $p_bugnote_id The bugnote id, or 0 if issue attachments.
  * @return array Array of file info arrays.
  */
-function file_attach_files( $p_bug_id, $p_files ) {
+function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 	if( $p_files === null || count( $p_files ) == 0 ) {
 		return array();
 	}
@@ -70,7 +71,17 @@ function file_attach_files( $p_bug_id, $p_files ) {
 	$t_file_infos = array();
 	foreach( $p_files as $t_file ) {
 		if( !empty( $t_file['name'] ) ) {
-			$t_file_infos[] = file_add( $p_bug_id, $t_file, 'bug' );
+			# $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0
+			$t_file_infos[] = file_add(
+				$p_bug_id,
+				$t_file,
+				'bug',
+				'', /* title */
+				'', /* desc */
+				0, /* user_id */
+				0, /* date_added */
+				0, /* skip_bug_update */
+				$p_bugnote_id );
 		}
 	}
 
@@ -687,9 +698,10 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
  * @param integer $p_user_id         User id (defaults to current user).
  * @param integer $p_date_added      Date added.
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bug attachments).
+ * @param int     $p_bugnote_id      The bugnote id or 0 if associated with the issue.
  * @return array The file info array (keys: name, size)
  */
-function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
+function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false, $p_bugnote_id = 0 ) {
 	$t_file_info = array();
 
 	if( !isset( $p_file['error'] ) ) {
@@ -839,11 +851,14 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		'file_type'   => $p_file['type'],
 		'date_added'  => $p_date_added,
 		'user_id'     => (int)$p_user_id,
+		'bugnote_id'  => (int)$p_bugnote_id
 	);
+
 	# Oracle has to update BLOBs separately
 	if( !db_is_oracle() ) {
 		$t_param['content'] = $c_content;
 	}
+
 	$t_query_param = db_param();
 	for( $i = 1; $i < count( $t_param ); $i++ ) {
 		$t_query_param .= ', ' . db_param();
