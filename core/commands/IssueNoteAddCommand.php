@@ -150,18 +150,6 @@ class IssueNoteAddCommand extends Command {
 
 		$t_files_included = !empty( $this->files );
 
-		if( $t_files_included ) {
-			# The UI hides the attach controls when the note is marked as private to avoid disclosure of
-			# attachments.  Attaching files to private notes can be re-enabled as proper support for protecting
-			# private attachments is implemented.
-			if( $this->private && count( $this->files ) > 0 ) {
-				throw new ClientException(
-					'Private notes with attachments not allowed',
-					ERROR_INVALID_FIELD_VALUE,
-					array( 'files' ) );
-			}
-		}
-
 		$t_time_tracking = $this->payload( 'time_tracking' );
 		if( is_array( $t_time_tracking ) && isset( $t_time_tracking['duration'] ) ) {
 			$this->time_tracking = $t_time_tracking['duration'];
