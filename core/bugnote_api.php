@@ -34,6 +34,7 @@
  * @uses email_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses file_api.php
  * @uses helper_api.php
  * @uses history_api.php
  * @uses lang_api.php
@@ -53,6 +54,7 @@ require_api( 'database_api.php' );
 require_api( 'email_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'file_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
@@ -370,6 +372,9 @@ function bugnote_delete( $p_bugnote_id ) {
 
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
+
+	# Delete attachments linked to bugnote in the db (i.e. bugnote_id is set)
+	file_delete_bugnote_attachments( $t_bug_id, $p_bugnote_id );
 
 	# Event integration
 	event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $p_bugnote_id ) );
