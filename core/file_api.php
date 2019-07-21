@@ -471,6 +471,25 @@ function file_delete_attachments( $p_bug_id ) {
 }
 
 /**
+ * Delete all files that are associated with the given bug note.
+ * @param integer $p_bug_id A bug identifier.
+ * @param integer $p_bugnote_id A bugnote identifier.
+ * @return boolean
+ */
+function file_delete_bugnote_attachments( $p_bug_id, $p_bugnote_id ) {
+	db_param_push();
+	$t_query = 'SELECT id, diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param() . ' AND bugnote_id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_bug_id, $p_bugnote_id ) );
+
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		file_delete( (int)$t_row['id'] );
+	}
+
+	# db_query() errors on failure so:
+	return true;
+}
+
+/**
  * Delete files by project
  * @param integer $p_project_id A project identifier.
  * @return void
