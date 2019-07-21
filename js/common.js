@@ -531,10 +531,8 @@ $(document).ready( function() {
 	$('input[name=private].ace').bind("click", function() {
 		if ($(this).is(":checked")){
 			$('textarea[name=bugnote_text]').addClass("bugnote-private");
-			$('tr[id=bugnote-attach-files]').hide();
 		} else {
 			$('textarea[name=bugnote_text]').removeClass("bugnote-private");
-			$('tr[id=bugnote-attach-files]').show();
 		}
 	});
 
