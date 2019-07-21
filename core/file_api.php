@@ -482,7 +482,7 @@ function file_delete_bugnote_attachments( $p_bug_id, $p_bugnote_id ) {
 	$t_result = db_query( $t_query, array( $p_bug_id, $p_bugnote_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		file_delete( (int)$t_row['id'] );
+		file_delete( (int)$t_row['id'], 'bug', $p_bugnote_id );
 	}
 
 	# db_query() errors on failure so:
@@ -556,9 +556,10 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
  * Delete File
  * @param integer $p_file_id File identifier.
  * @param string  $p_table   Table identifier.
+ * @param integer $p_bugnote_id The bugnote id the file is attached to or 0 if attached to issue.
  * @return boolean
  */
-function file_delete( $p_file_id, $p_table = 'bug' ) {
+function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	$t_upload_method = config_get( 'file_upload_method' );
 
 	$c_file_id = (int)$p_file_id;
@@ -581,7 +582,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 
 	if( 'bug' == $p_table ) {
 		# log file deletion
-		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name( $t_filename ) );
+		history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name( $t_filename ), $p_bugnote_id );
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
@@ -901,7 +902,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		}
 
 		# log file added to bug history
-		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
+		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name, $p_bugnote_id );
 	}
 
 	return $t_file_info;
