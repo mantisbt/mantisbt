@@ -269,3 +269,22 @@ function bug_activity_combine( $p_entries ) {
 	return $t_combined_entries;
 }
 
+/**
+ * Link attachments that are part of the bugnote activity.
+ * This converts heuristic links into explicit ones.
+ *
+ * @param integer $p_bugnote_id The bugnote id.
+ * @return void
+ */
+function bug_activity_bugnote_link_attachments( $p_bugnote_id ) {
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	$t_activities = bug_activity_get_all( $t_bug_id, /* include_attachments */ true );
+	foreach( $t_activities['activities'] as $t_activity ) {
+		if( (int)$t_activity['id'] == (int)$p_bugnote_id && count( $t_activity['attachments'] ) > 0 ) {
+			foreach( $t_activity['attachments'] as $t_attachment ) {
+				file_link_to_bugnote( $t_attachment['id'], $p_bugnote_id );
+			}
+		}
+	}
+}
+
