@@ -981,3 +981,22 @@ function history_delete( $p_bug_id ) {
 	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
 	db_query( $t_query, array( $p_bug_id ) );
 }
+
+/**
+ * Link the file added/deleted history events that match the specified bug_id and filename
+ * with the specified bugnote id.
+ *
+ * @param integer $p_bug_id The bug id.
+ * @param string $p_filename The filename dot extension (display name).
+ * @param integer $p_bugnote_id The bugnote id.
+ * @return void
+ */
+function history_link_file_to_bugnote( $p_bug_id, $p_filename, $p_bugnote_id ) {
+	db_param_push();
+	$t_query = 'UPDATE {bug_history} SET new_value = ' . db_param() .
+		' WHERE bug_id=' . db_param() . ' AND old_value=' . db_param() .
+		' AND (type=' . db_param() . ' OR type=' . db_param() . ')';
+
+	db_query( $t_query, array( (int)$p_bugnote_id, (int)$p_bug_id, $p_filename, FILE_ADDED, FILE_DELETED ) );
+}
+
