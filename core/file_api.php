@@ -382,7 +382,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 			continue;
 		}
 
-		$t_id = $t_row['id'];
+		$t_id = (int)$t_row['id'];
 		$t_filename = $t_row['filename'];
 		$t_filesize = $t_row['filesize'];
 		$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
@@ -392,11 +392,11 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['id'] = $t_id;
 		$t_attachment['user_id'] = $t_user_id;
 		$t_attachment['display_name'] = file_get_display_name( $t_filename );
-		$t_attachment['size'] = $t_filesize;
+		$t_attachment['size'] = (int)$t_filesize;
 		$t_attachment['date_added'] = $t_date_added;
 		$t_attachment['diskfile'] = $t_diskfile;
 		$t_attachment['file_type'] = $t_row['file_type'];
-		$t_attachment['bugnote_id'] = $t_row['bugnote_id'];
+		$t_attachment['bugnote_id'] = (int)$t_row['bugnote_id'];
 
 		$t_attachment['can_download'] = file_can_download_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
 		$t_attachment['can_delete'] = file_can_delete_bug_attachments( $p_bug_id, (int)$t_row['user_id'] );
