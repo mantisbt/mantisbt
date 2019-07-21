@@ -279,12 +279,21 @@ function bug_activity_combine( $p_entries ) {
 function bug_activity_bugnote_link_attachments( $p_bugnote_id ) {
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_activities = bug_activity_get_all( $t_bug_id, /* include_attachments */ true );
+
+	$t_files = array();
 	foreach( $t_activities['activities'] as $t_activity ) {
-		if( (int)$t_activity['id'] == (int)$p_bugnote_id && count( $t_activity['attachments'] ) > 0 ) {
+		if( (int)$t_activity['id'] == (int)$p_bugnote_id ) {
 			foreach( $t_activity['attachments'] as $t_attachment ) {
-				file_link_to_bugnote( $t_attachment['id'], $p_bugnote_id );
+				file_link_to_bugnote( (int)$t_attachment['id'], $p_bugnote_id );
+				$t_files[] = $t_attachment;
 			}
 		}
+	}
+
+	# explicitly link the attached files history events to the bugnote to control
+	# there visibility based on the view state of the bugnote.
+	foreach( $t_files as $t_file ) {
+		history_link_file_to_bugnote( $t_bug_id, $t_file['display_name'], $p_bugnote_id );
 	}
 }
 
