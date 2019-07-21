@@ -26,6 +26,7 @@
  * @uses access_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
+ * @uses bug_activity_api.php
  * @uses bugnote_api.php
  * @uses config_api.php
  * @uses constant_inc.php
@@ -39,6 +40,7 @@
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
+require_api( 'bug_activity_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'bugnote_api.php' );
@@ -80,6 +82,7 @@ if( $t_user_id == auth_get_current_user_id() ) {
 	access_ensure_bugnote_level( config_get( 'change_view_status_threshold' ), $f_bugnote_id );
 }
 
+bug_activity_bugnote_link_attachments( $f_bugnote_id );
 bugnote_set_view_state( $f_bugnote_id, $f_private );
 
 form_security_purge( 'bugnote_set_view_state' );

@@ -490,6 +490,20 @@ function file_delete_bugnote_attachments( $p_bug_id, $p_bugnote_id ) {
 }
 
 /**
+ * Link the specified file to the specified bugnote.
+ * 
+ * @param integer $p_file_id The file id.
+ * @param integer $p_bugnote_id A bugnote identifier.
+ * @return void
+ */
+function file_link_to_bugnote( $p_file_id, $p_bugnote_id ) {
+	db_param_push();
+
+	$t_query = 'UPDATE {bug_file} SET bugnote_id=' . db_param() . ' WHERE id=' . db_param();
+	db_query( $t_query, array( $p_bugnote_id, $p_file_id ) );
+}
+
+/**
  * Delete files by project
  * @param integer $p_project_id A project identifier.
  * @return void
