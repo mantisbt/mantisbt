@@ -654,6 +654,7 @@ $s_configuration_corrupted = '데이터베이스 설정이 손상되었습니다
 $s_set_configuration_option_action_create = '구성 옵션 만들기';
 $s_set_configuration_option_action_edit = '구성 옵션 편집';
 $s_set_configuration_option_action_clone = '구성 옵션 복사';
+$s_set_configuration_option_action_view = '구성 옵션 보기';
 $s_plugin = '플러그인';
 $s_plugins_installed = '설치된 플러그인';
 $s_plugins_available = '사용 가능 플러그인';
