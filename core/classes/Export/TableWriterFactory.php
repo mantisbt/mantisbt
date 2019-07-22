@@ -14,13 +14,20 @@ class TableWriterFactory {
 		}
 	}
 
-	public static function createWriterFromProvider( $p_provider ) {
+	public static function createWriterFromProvider( $p_provider, array $p_context = array() ) {
 		if( $p_provider instanceof TableExportProvider ) {
 			$t_id = $p_provider->unique_id;
 		} else {
 			$t_id = $p_provider;
 		}
-		$t_object = event_signal( 'EVENT_EXPORT_REQUEST', array( $t_id ) );
+		$t_default_context = array(
+				'unique_id' => $t_id,
+				'user_id' => auth_get_current_user_id(),
+				'project_id' => helper_get_current_project(),
+				'request' => array_merge( $_GET, $_POST ),
+			);
+		$t_context = $p_context + $t_default_context;
+		$t_object = event_signal( 'EVENT_EXPORT_REQUEST', array( $t_id, $t_context ) );
 		return $t_object;
 	}
 

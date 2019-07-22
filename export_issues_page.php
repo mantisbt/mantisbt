@@ -24,7 +24,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'export_api.php' );
 
-
+require_js( 'export_options.js' );
 layout_page_header( 'EXPORT PAGE' );
 layout_page_begin( 'export_issues_page.php.php' );
 
@@ -32,6 +32,7 @@ layout_page_begin( 'export_issues_page.php.php' );
 <div class="col-md-12 col-xs-12">
 	<form id="export_issues_form" method="post"	action="export_issues.php">
 		<?php echo form_security_field( 'export_issues' ) ?>
+		<input type="hidden" id="input_project_id" name="project_id" value="<?php echo helper_get_current_project() ?>" />
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -42,7 +43,7 @@ layout_page_begin( 'export_issues_page.php.php' );
 
 			<div class="widget-body dz-clickable">
 				<div class="widget-main no-padding">
-					<div class="table-responsive">
+					<div id="div_export_options" class="table-responsive">
 
 <table class="table table-bordered table-condensed">
 	<tr>
@@ -50,7 +51,7 @@ layout_page_begin( 'export_issues_page.php.php' );
 			<label for="provider"><?php echo 'FORMAT_TYPE' ?></label>
 		</th>
 		<td>
-			<select <?php echo helper_get_tab_index() ?> id="provider" name="provider" class="input-sm">
+			<select <?php echo helper_get_tab_index() ?> id="input_provider" name="provider" class="input-sm">
 			<?php export_print_format_option_list() ?>
 			</select>
 		</td>
@@ -65,6 +66,8 @@ layout_page_begin( 'export_issues_page.php.php' );
 	</tr>
 </table>
 
+					</div>
+					<div id="div_export_plugin_options" class="table-responsive">
 					</div>
 				</div>
 				<div class="widget-toolbox padding-8 clearfix">
