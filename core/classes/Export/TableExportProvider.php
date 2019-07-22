@@ -18,5 +18,7 @@ class TableExportProvider {
 	public $file_extension;
 	public $short_name;
 	public $provider_name;
-	public $config_page_for_user;
+	public $config_page_for_user = null;
+	public $config_page_for_admin = null;
+	public $enabled_by_default = true;
 }

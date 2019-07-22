@@ -202,7 +202,7 @@ function export_get_default_filename() {
 }
 
 function export_print_format_option_list() {
-	$t_providers = TableWriterFactory::getAllProviders();
+	$t_providers = TableWriterFactory::getProviders();
 	$fn_sort = function ( $p1, $p2 ) {
 		return strcmp($p1->short_name, $p2->short_name);
 	};
@@ -212,4 +212,11 @@ function export_print_format_option_list() {
 		$t_line = $t_provider->short_name . ' (.' . $t_provider->file_extension . ') [' . $t_provider->provider_name . ']';
 		echo '<option value="',  $t_provider->unique_id, '">', $t_line, '</option>';
 	}
+}
+
+function export_can_manage_global_config( $p_user_id = null ) {
+	if( null === $p_user_id ) {
+		$p_user_id = auth_get_current_user_id();
+	}
+	return access_has_global_level( config_get( 'manage_configuration_threshold' , null, ALL_USERS, ALL_PROJECTS ), $p_user_id );
 }

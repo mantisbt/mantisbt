@@ -4,6 +4,7 @@ namespace Mantis\Export;
 
 class TableWriterFactory {
 	protected static $providers = null;
+	protected static $providers_enabled = null;
 
 	public static function createFromType( $p_type ) {
 		switch( $p_type ) {
@@ -44,7 +45,7 @@ class TableWriterFactory {
 			'csv' => array( 'csv' ),
 			'excel' => array( 'xlsx', 'xls', 'ods' ),
 			);
-		$t_providers = self::getAllProviders();
+		$t_providers = self::getProviders();
 		if( isset( $t_map[$p_type] ) ) {
 			$t_targets = $t_map[$p_type];
 			foreach( $t_providers as $t_prov ) {
@@ -56,19 +57,41 @@ class TableWriterFactory {
 		return null;
 	}
 
+	public static function getProviders() {
+		if( null === self::$providers_enabled ) {
+			self::getAllProviders();
+		}
+		return self::$providers_enabled;
+	}
+
 	public static function getAllProviders() {
 		if( self::$providers === null ) {
+			$t_config = config_get( 'export_plugins', array(), ALL_USERS, ALL_PROJECTS );
 			$t_plugin_items = event_signal( 'EVENT_EXPORT_DISCOVERY' );
 			$t_providers = array();
+			$t_providers_enabled = array();
+			$t_config_updated = false;
 
-			$fn_collect = function( $t_item ) use( &$t_providers ) {
+			$fn_collect = function( $t_item ) use( &$t_providers, &$t_providers_enabled, &$t_config, &$t_config_updated ) {
 				if( $t_item instanceof TableExportProvider ) {
-					$t_providers[$t_item->unique_id] = $t_item;
+					$t_id = $t_item->unique_id;
+					$t_providers[$t_id] = $t_item;
+					if( !isset( $t_config[$t_id] ) ) {
+						$t_config[$t_id] = array( 'enabled' => $t_item->enabled_by_default );
+						$t_config_updated = true;
+					}
+					if( $t_config[$t_id]['enabled'] ) {
+						$t_providers_enabled[$t_id] = $t_item;
+					}
 				}
 				return null;
 			};
 			event_process_result_type_default( $t_plugin_items, $fn_collect );
 			self::$providers = $t_providers;
+			self::$providers_enabled = $t_providers_enabled;
+			if( $t_config_updated ) {
+				config_set( 'export_plugins', $t_config, ALL_USERS, ALL_PROJECTS );
+			}
 		}
 		return self::$providers;
 	}

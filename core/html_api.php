@@ -51,6 +51,7 @@
  * @uses utility_api.php
  * @uses layout_api.php
  * @uses api_token_api.php
+ * @uses export_api.php
  */
 
 require_api( 'access_api.php' );
@@ -78,6 +79,7 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'layout_api.php' );
 require_api( 'api_token_api.php' );
+require_api( 'export_api.php' );
 
 $g_rss_feed_url = null;
 
@@ -688,6 +690,11 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
 	                                                    'label' => 'manage_columns_config' );
+
+	if( export_can_manage_global_config() ) {
+		$t_pages['manage_config_export_page.php'] = array( 'url'   => 'manage_config_export_page.php',
+														   'label' => 'export_configuration' );
+	}
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
