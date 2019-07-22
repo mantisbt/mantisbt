@@ -23,6 +23,7 @@
  */
 
 require_api( 'helper_api.php' );
+require_api( 'event_api.php' );
 
 /**
  * WARNING: All APIs under the internal route are considered private and can break anytime.
@@ -30,6 +31,7 @@ require_api( 'helper_api.php' );
 $g_app->group('/internal', function() use ( $g_app ) {
 	$g_app->any( '/autocomplete', 'rest_internal_autocomplete' );
 	$g_app->any( '/config_display', 'rest_internal_config_display' );
+	$g_app->any( '/export_plugin_options', 'rest_internal_export_plugin_options' );
 });
 
 /**
@@ -94,5 +96,13 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 
 	$t_output = config_get_value_as_string( $t_row['type'], $t_row['value'], true );
 
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->write( $t_output );
+}
+
+function rest_internal_export_plugin_options( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_provider_id = $p_request->getParam( 'provider_id' );
+	$t_project_id = $p_request->getParam( 'project_id' );
+	$t_context = array( 'project_id' => $t_project_id );
+	$t_output = event_signal( 'EVENT_EXPORT_OPTIONS_FORM', array( $t_provider_id, $t_context ) );
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->write( $t_output );
 }
