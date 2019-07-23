@@ -98,7 +98,7 @@ function print_export_section( $p_list, $p_label, $p_type ) {
 		return;
 	}
 	echo '<div><h4>', $p_label, '</h4></div>';
-	echo '<div class="table-responsive sortable listjs-table"">';
+	echo '<div class="table-responsive sortable listjs-table">';
 	echo '<table class="table table-bordered table-condensed table-striped">';
 	echo '<colgroup>';
 	echo '<col class="col-md-3">';
