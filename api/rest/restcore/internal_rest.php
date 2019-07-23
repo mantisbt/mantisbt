@@ -103,6 +103,8 @@ function rest_internal_export_plugin_options( \Slim\Http\Request $p_request, \Sl
 	$t_provider_id = $p_request->getParam( 'provider_id' );
 	$t_project_id = $p_request->getParam( 'project_id' );
 	$t_context = array( 'project_id' => $t_project_id );
-	$t_output = event_signal( 'EVENT_EXPORT_OPTIONS_FORM', array( $t_provider_id, $t_context ) );
+	ob_start();
+	event_signal( 'EVENT_EXPORT_OPTIONS_FORM', array( $t_provider_id, $t_context ) );
+	$t_output = ob_get_clean();
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->write( $t_output );
 }
