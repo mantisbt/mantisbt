@@ -1,5 +1,7 @@
 <?php
 
+use Mantis\Export\TableWriterFactory;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'current_user_api.php' );
@@ -28,6 +30,12 @@ require_js( 'export_options.js' );
 layout_page_header( 'EXPORT PAGE' );
 layout_page_begin( 'export_issues_page.php.php' );
 
+$t_default_provider = TableWriterFactory::getDefaultProvider();
+if( $t_default_provider ) {
+	$t_default_provider_id = $t_default_provider->unique_id;
+} else {
+	$t_default_provider_id = null;
+}
 ?>
 <div class="col-md-12 col-xs-12">
 	<form id="export_issues_form" method="post"	action="export_issues.php">
@@ -52,7 +60,8 @@ layout_page_begin( 'export_issues_page.php.php' );
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> id="input_provider" name="provider" class="input-sm">
-			<?php export_print_format_option_list() ?>
+				<option selected disabled value=""><?php echo '[', 'SELECT', ']' ?></option>
+				<?php export_print_format_option_list( $t_default_provider_id ) ?>
 			</select>
 		</td>
 	</tr>

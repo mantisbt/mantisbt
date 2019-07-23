@@ -13,7 +13,9 @@ auth_reauthenticate();
 
 current_user_ensure_unprotected();
 
+$t_user_id = auth_get_current_user_id();
 $t_providers = TableWriterFactory::getProviders();
+$t_default_provider_id = config_get( 'export_default_plugin', null, $t_user_id, ALL_PROJECTS );
 $t_list = array();
 foreach( $t_providers as $t_id => $t_provider ) {
 	$t_row = array();
@@ -43,6 +45,47 @@ print_account_menu( 'account_export_page.php' );
 
 ?>
 <div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-columns "></i>
+				<?php echo 'DEFAULT_METHOD_CONFIG' ?>
+			</h4>
+		</div>
+		<div id="default-export-div" class="form-container">
+			<form method="post" action="account_export_update.php">
+				<?php echo form_security_field( 'account_export_update' ) ?>
+				<div class="widget-body">
+					<div class="widget-main no-padding">
+						<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<tbody>
+		<tr>
+			<td class="category">
+				<?php echo 'DEFAULT METHOD' ?>
+			</td>
+			<td>
+				<select id="input_default_provider" name="provider_id" class="input-sm" required>
+					<option selected disabled value=""><?php echo '[', 'SELECT', ']' ?></option>
+					<?php export_print_format_option_list( $t_default_provider_id ) ?>
+				</select>
+				<input type="hidden" name="action" value="DEFAULT" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+						</div>
+					</div>
+					<div class="widget-toolbox padding-8 clearfix">
+						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_default_method" value="<?php echo 'UPDATE' ?>">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
 	<div class="space-10"></div>
 
 	<div class="widget-box widget-color-blue2">

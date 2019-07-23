@@ -201,7 +201,7 @@ function export_get_default_filename() {
 	return $t_filename;
 }
 
-function export_print_format_option_list() {
+function export_print_format_option_list( $p_selected = null ) {
 	$t_providers = TableWriterFactory::getProviders();
 	$fn_sort = function ( $p1, $p2 ) {
 		return strcmp($p1->short_name, $p2->short_name);
@@ -210,7 +210,7 @@ function export_print_format_option_list() {
 
 	foreach( $t_providers as $t_provider ) {
 		$t_line = $t_provider->short_name . ' (.' . $t_provider->file_extension . ') [' . $t_provider->provider_name . ']';
-		echo '<option value="',  $t_provider->unique_id, '">', $t_line, '</option>';
+		echo '<option value="',  $t_provider->unique_id, '" ', check_selected( $t_provider->unique_id, $p_selected, false ) . ' >', $t_line, '</option>';
 	}
 }
 
