@@ -23,6 +23,8 @@ print_manage_config_menu( 'manage_config_export_page.php' );
 $t_providers = TableWriterFactory::getAllProviders();
 $t_export_config = config_get( 'export_plugins', array(), ALL_USERS, ALL_PROJECTS );
 
+$t_default_provider_id = config_get( 'export_default_plugin', null, ALL_USERS, ALL_PROJECTS );
+
 $t_config_rows = $t_export_config;
 $t_list_enabled = array();
 $t_list_disabled = array();
@@ -133,12 +135,51 @@ function print_export_section( $p_list, $p_label, $p_type ) {
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-columns "></i>
+				<?php echo 'DEFAULT_METHOD_CONFIG' ?>
+			</h4>
+		</div>
+		<div id="default-export-div" class="form-container">
+			<form method="post" action="manage_config_export_set.php">
+				<?php echo form_security_field( 'manage_config_export_set' ) ?>
+				<div class="widget-body">
+					<div class="widget-main no-padding">
+						<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<tbody>
+		<tr>
+			<td class="category">
+				<?php echo 'DEFAULT METHOD' ?>
+			</td>
+			<td>
+				<select id="input_default_provider" name="provider_id" class="input-sm" required>
+					<option selected disabled value=""><?php echo '[', 'SELECT', ']' ?></option>
+					<?php export_print_format_option_list( $t_default_provider_id ) ?>
+				</select>
+				<input type="hidden" name="action" value="DEFAULT" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+						</div>
+					</div>
+					<div class="widget-toolbox padding-8 clearfix">
+						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_default_method" value="<?php echo 'UPDATE' ?>">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="space-10"></div>
+
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-columns "></i>
 				<?php echo 'EXPORT_METHODS_CONFIG' ?>
 			</h4>
 		</div>
-
-		<div id="manage-columns-div" class="form-container">
-
+		<div id="manage-export-div" class="form-container">
 			<div class="widget-body">
 				<div class="widget-main">
 					<?php
