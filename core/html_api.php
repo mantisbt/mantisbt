@@ -743,6 +743,8 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
 	}
 
+	$t_pages['account_export_page.php'] = array( 'url'=>'account_export_page.php', 'label'=>'account_export_link' );
+
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
 	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
@@ -752,7 +754,7 @@ function print_account_menu( $p_page = '' ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
 		echo '<li class="' . $t_active . '">' . "\n";
 		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-		echo lang_get( $t_page['label'] );
+		echo lang_get_defaulted( $t_page['label'] );
 		echo '</a>' . "\n";
 		echo '</li>' . "\n";
 	}
