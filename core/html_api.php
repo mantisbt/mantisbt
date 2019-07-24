@@ -27,6 +27,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses api_token_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses config_api.php
@@ -35,12 +36,14 @@
  * @uses database_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses export_api.php
  * @uses file_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses form_api.php
  * @uses helper_api.php
  * @uses lang_api.php
+ * @uses layout_api.php
  * @uses news_api.php
  * @uses php_api.php
  * @uses print_api.php
@@ -49,12 +52,10 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
- * @uses layout_api.php
- * @uses api_token_api.php
- * @uses export_api.php
  */
 
 require_api( 'access_api.php' );
+require_api( 'api_token_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -63,12 +64,14 @@ require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'export_api.php' );
 require_api( 'file_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'layout_api.php' );
 require_api( 'news_api.php' );
 require_api( 'php_api.php' );
 require_api( 'print_api.php' );
@@ -77,9 +80,6 @@ require_api( 'rss_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
-require_api( 'layout_api.php' );
-require_api( 'api_token_api.php' );
-require_api( 'export_api.php' );
 
 $g_rss_feed_url = null;
 

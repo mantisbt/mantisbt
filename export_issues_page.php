@@ -1,30 +1,38 @@
 <?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package MantisBT
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses export_api.php
+ * @uses helper_api.php
+ * @uses html_api.php
+ * @uses layout_api.php
+ */
 
 use Mantis\Export\TableWriterFactory;
 
 require_once( 'core.php' );
-require_api( 'authentication_api.php' );
-require_api( 'current_user_api.php' );
-require_api( 'database_api.php' );
-require_api( 'html_api.php' );
-require_api( 'layout_api.php' );
-
-require_once( 'core.php' );
-require_api( 'access_api.php' );
-require_api( 'authentication_api.php' );
-require_api( 'config_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'database_api.php' );
-require_api( 'file_api.php' );
-require_api( 'gpc_api.php' );
+require_api( 'export_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'project_api.php' );
-require_api( 'string_api.php' );
-require_api( 'user_api.php' );
-require_api( 'export_api.php' );
+require_api( 'layout_api.php' );
 
 require_js( 'export_options.js' );
 layout_page_header( 'EXPORT PAGE' );

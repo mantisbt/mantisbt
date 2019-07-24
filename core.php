@@ -180,8 +180,10 @@ function autoload_mantis( $p_class ) {
 	global $g_core_path, $g_class_path;
 
 	# Search in subdirectory within classes path, following namespace
-	# this includes classes wihtout namespace, without "class.php" extension, only ".php"
+	# this would also match classes files with just a ".php" extension, instead
+	# of the ".class.php" extension (still matched later)
 	if( strpos( $p_class, 'Mantis\\' ) === 0 ) {
+		# Remove base "Mantis" part from namespace
 		$t_class = substr( $p_class, 7 );
 	} else {
 		$t_class = $p_class;
