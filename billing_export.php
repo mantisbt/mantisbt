@@ -15,23 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Export billing information to csv
+ * Export billing information
  *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
  * @uses billing_api.php
+ * @uses config_api.php
  * @uses bug_api.php
- * @uses csv_api.php
+ * @uses export_api.php
+ * @uses gpc_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'billing_api.php' );
+require_api( 'config_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'export_api.php' );
+require_api( 'gpc_api.php' );
 
 use Mantis\Export;
 
@@ -65,6 +68,7 @@ $t_filename = export_get_default_filename() . '.' . $t_provider->file_extension;
 $t_writer = Export\TableWriterFactory::createWriterFromProvider( $t_provider );
 $t_writer->openToBrowser( $t_filename );
 
+# generate the header row
 $t_titles = array();
 $t_titles[] = lang_get( 'issue_id' );
 $t_titles[] = lang_get( 'project_name' );
@@ -81,6 +85,7 @@ $t_titles[] = 'note';
 
 $t_writer->addRowFromArray( $t_titles );
 
+# generate the lines
 foreach( $t_billing_rows as $t_billing ) {
 	$t_values = array();
 	$t_values[] = bug_format_id( $t_billing['bug_id'] );
@@ -99,5 +104,3 @@ foreach( $t_billing_rows as $t_billing ) {
 }
 
 $t_writer->close();
-
-

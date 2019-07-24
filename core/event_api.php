@@ -380,6 +380,7 @@ function event_process_result_type_default( $p_event_results, callable $fn_proce
 				$t_callback_result = array( $t_callback_result );
 			}
 			if( null !== $fn_process ) {
+				# if theres a processing function, treat each item
 				foreach( $t_callback_result as $t_result_item ) {
 					$t_processed = $fn_process( $t_result_item, $t_plugin, $t_callback_function );
 					if( null !== $t_processed ) {
@@ -387,7 +388,8 @@ function event_process_result_type_default( $p_event_results, callable $fn_proce
 					}
 				}
 			} else {
-				$t_items += $t_callback_result;
+				# without function, append the whole array
+				$t_items = array_merge( $t_items, array_values( $t_callback_result ) );
 			}
 		}
 	}

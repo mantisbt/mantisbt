@@ -1,12 +1,42 @@
 <?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package MantisBT
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses core.php
+ * @uses authentication_api.php
+ * @uses config_api.php
+ * @uses export_api.php
+ * @uses form_api.php
+ * @uses html_api.php
+ * @uses layout_api.php
+ */
 
 use Mantis\Export\TableWriterFactory;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
+require_api( 'config_api.php' );
 require_api( 'export_api.php' );
+require_api( 'form_api.php' );
+require_api( 'html_api.php' );
+require_api( 'layout_api.php' );
 
 auth_reauthenticate();
 
@@ -25,6 +55,7 @@ $t_export_config = config_get( 'export_plugins', array(), ALL_USERS, ALL_PROJECT
 
 $t_default_provider_id = config_get( 'export_default_plugin', null, ALL_USERS, ALL_PROJECTS );
 
+# classify the entries in: enabled, disabled, and missing
 $t_config_rows = $t_export_config;
 $t_list_enabled = array();
 $t_list_disabled = array();
@@ -63,6 +94,11 @@ if( !empty( $t_config_rows ) ) {
 	}
 }
 
+/**
+ * Helper unction to print a row
+ * @param array $p_row	The row item  data
+ * @param string $p_type	Which section is this included in
+ */
 function print_export_row( $p_row, $p_type ) {
 	echo'<tr>';
 	echo '<td>', $p_row['id'], '</td>';
@@ -95,6 +131,13 @@ function print_export_row( $p_row, $p_type ) {
 	echo'</tr>';
 }
 
+/**
+ * Helper function to print a table for each section
+ * @param array $p_list		A list of rows
+ * @param string $p_label	The label for section hading
+ * @param string $p_type	The section being rendered. 'ENABLED', 'DISABLED', or 'MISSING'
+ * @return type
+ */
 function print_export_section( $p_list, $p_label, $p_type ) {
 	if( empty( $p_list ) ) {
 		return;

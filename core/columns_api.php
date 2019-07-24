@@ -165,6 +165,7 @@ function columns_get_plugin_columns() {
 		$s_column_array = array();
 		$t_event_results = event_signal( 'EVENT_FILTER_COLUMNS' );
 
+		# this function collects each of the items returned by the plugins.
 		$fn_collect = function( $p_item, $p_plugin ) use ( &$s_column_array ) {
 			if( is_object( $p_item ) && $p_item instanceof MantisColumn ) {
 				$t_column_object = $p_item;

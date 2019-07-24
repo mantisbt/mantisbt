@@ -15,21 +15,19 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file implements export functionality within MantisBT
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
  * @uses authentication_api.php
+ * @uses bug_api.php
  * @uses columns_api.php
- * @uses constant_inc.php
- * @uses csv_api.php
- * @uses file_api.php
+ * @uses database_api.php
+ * @uses export_api.php
  * @uses filter_api.php
+ * @uses gpc_api.php
  * @uses helper_api.php
- * @uses print_api.php
  */
 
 # Prevent output of HTML in the content if errors occur
@@ -37,14 +35,13 @@ define( 'DISABLE_INLINE_ERROR_REPORTING', true );
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
 require_api( 'columns_api.php' );
-require_api( 'constant_inc.php' );
-require_api( 'file_api.php' );
-require_api( 'filter_api.php' );
-require_api( 'helper_api.php' );
-require_api( 'print_api.php' );
-require_api( 'gpc_api.php' );
+require_api( 'database_api.php' );
 require_api( 'export_api.php' );
+require_api( 'filter_api.php' );
+require_api( 'gpc_api.php' );
+require_api( 'helper_api.php' );
 
 use Mantis\Export;
 
@@ -93,7 +90,6 @@ foreach ( $t_columns as $t_column ) {
 }
 # Fixed for a problem in Excel where it prompts error message "SYLK: File Format Is Not Valid"
 # See Microsoft Knowledge Base Article - 323626
-# http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
 if( isset( $t_titles[0] ) ) {
 	if( $t_titles[0] == 'ID' ) {
 		$t_titles[0] = 'Id';

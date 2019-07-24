@@ -1,8 +1,62 @@
 <?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package MantisBT
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ *
+ * @uses access_api.php
+ * @uses authentication_api.php
+ * @uses bug_api.php
+ * @uses bugnote_api.php
+ * @uses category_api.php
+ * @uses columns_api.php
+ * @uses config_api.php
+ * @uses custom_field_api.php
+ * @uses file_api.php
+ * @uses helper_api.php
+ * @uses project_api.php
+ * @uses tag_api.php
+ * @uses user_api.php
+ */
 
 use Mantis\Export\Cell;
 use Mantis\Export\TableWriterFactory;
 
+require_api( 'access_api.php' );
+require_api( 'authentication_api.php' );
+require_api( 'bug_api.php' );
+require_api( 'bugnote_api.php' );
+require_api( 'category_api.php' );
+require_api( 'columns_api.php' );
+require_api( 'config_api.php' );
+require_api( 'custom_field_api.php' );
+require_api( 'file_api.php' );
+require_api( 'helper_api.php' );
+require_api( 'project_api.php' );
+require_api( 'tag_api.php' );
+require_api( 'user_api.php' );
+
+/**
+ * For exporting bug related fields, returns the suitable value type for each
+ * of the bug fields.
+ * @param string $p_fieldname	Bug field name
+ * @return integer	One of the TYPE_ constants defined in Cell class
+ */
 function export_bugfield_type( $p_fieldname ) {
 	# standard bug fields
 	switch( $p_fieldname ) {
@@ -72,6 +126,16 @@ function export_bugfield_type( $p_fieldname ) {
 	return Cell::TYPE_STRING;
 }
 
+/**
+ * For exporting bug related data, translates and maps the value of each field into
+ * a final representation of its value.
+ * For example: translate user ids to names, enum values, ...
+ *
+ * @param string $p_fieldname	Bug field
+ * @param BugData $p_bug		BugData object of the issue to get data from
+ * @param integer $p_user_id	User id to use for access checks, and presentation options
+ * @return mixed		The translated value of the requested field.
+ */
 function export_bugfield_prepare_value( $p_fieldname, BugData $p_bug, $p_user_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -180,6 +244,12 @@ function export_bugfield_prepare_value( $p_fieldname, BugData $p_bug, $p_user_id
 	return '';
 }
 
+/**
+ * Returns the set of columns configured by the user for each type of export.
+ *
+ * @param string $p_type	The export type, possible values as "csv" or "excel"
+ * @return array	Array of column names
+ */
 function export_get_columns ( $p_type = null ) {
 	if( 'csv' == $p_type ) {
 		$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE );
@@ -189,6 +259,10 @@ function export_get_columns ( $p_type = null ) {
 	return $t_columns;
 }
 
+/**
+ * Builds a filename (without extension) for an export result.
+ * @return string	The composed file name
+ */
 function export_get_default_filename() {
 	$t_current_project_id = helper_get_current_project();
 
@@ -201,6 +275,10 @@ function export_get_default_filename() {
 	return $t_filename;
 }
 
+/**
+ * Build and print the html option list for an export selection form
+ * @param string $p_selected	The provider id which should be marked as selected by default.
+ */
 function export_print_format_option_list( $p_selected = null ) {
 	$t_providers = TableWriterFactory::getProviders();
 	$fn_sort = function ( $p1, $p2 ) {
@@ -214,6 +292,12 @@ function export_print_format_option_list( $p_selected = null ) {
 	}
 }
 
+/**
+ * Helper function to check if the user is authorized to change global configurations
+ * related to the expoort system.
+ * @param type $p_user_id
+ * @return type
+ */
 function export_can_manage_global_config( $p_user_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
