@@ -886,6 +886,7 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 	foreach( $p_menu_options as $t_menu_option ) {
 		$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
 		if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
+			layout_sidebar_dropdown_menu($t_menu_option);
 			continue;
 		}
 
@@ -899,6 +900,38 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 	}
 }
 
+/**
+ * Print dropdown menu item
+ * @param array  $p_menu_options menu item of group
+ * @return void
+ */
+function layout_sidebar_dropdown_menu( $p_menu_options ) {
+	echo '<li class="dropdown">' . "\n";
+   	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . "\n";
+   	echo '<i class="menu-icon fa fa-plug"></i>' . "\n";
+   	echo '<span class="menu-text">Plugins</span>' . "\n";
+   	echo '<span class="caret"></span>';
+   	echo '</a>' . "\n";
+        echo '<ul class="dropdown-menu" >';
+	foreach( $p_menu_options as $t_menu_option ) {
+		
+			$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
+			if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
+				continue;
+			}
+
+			if( isset( $t_menu_option['access_level'] ) ) {
+				if( !access_has_project_level( $t_menu_option['access_level'] ) ) {
+					continue;
+				}
+			}
+
+			layout_sidebar_menu( $t_menu_option['url'], $t_menu_option['title'], $t_icon, $p_active_sidebar_page );
+		
+	}
+	echo '</ul>';
+	echo '</li>' . "\n";
+}
 /**
  * Print sidebar opening elements
  * @return void
