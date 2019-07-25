@@ -35,6 +35,7 @@ if (a!= -1) {
 style_display = 'block';
 
 $(document).ready( function() {
+    $('.dropdown-toggle').dropdown();
     $('.collapse-open').show();
     $('.collapse-closed').hide();
     $('.collapse-link').click( function(event) {
