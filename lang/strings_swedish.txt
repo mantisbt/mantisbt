@@ -668,6 +668,7 @@ $s_configuration_corrupted = 'Konfigurationen i databasen är skadad.';
 $s_set_configuration_option_action_create = 'Skapa konfigurationsalternativ';
 $s_set_configuration_option_action_edit = 'Redigera konfigurationsalternativ';
 $s_set_configuration_option_action_clone = 'Klona konfigurationsalternativ';
+$s_set_configuration_option_action_view = 'Visa konfigurationsalternativ';
 $s_plugin = 'Insticksprogram';
 $s_plugins_installed = 'Installerade insticksprogram';
 $s_plugins_available = 'Tillgängliga insticksprogram';
