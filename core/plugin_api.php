@@ -1021,6 +1021,13 @@ function plugin_init( $p_basename ) {
 	}
 }
 
+/**
+ * Log a plugin-specific event.
+ *
+ * @param string|array $p_msg       Either a string, or an array structured as
+ *                                  (string,execution time).
+ * @param string        $p_basename Plugin's basename (defaults to current plugin)
+ */
 function plugin_log_event( $p_msg, $p_basename = null ) {
 	$t_current_plugin = plugin_get_current();
 	if( is_null( $p_basename ) ) {
