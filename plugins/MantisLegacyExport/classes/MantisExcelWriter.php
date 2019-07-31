@@ -22,8 +22,6 @@ namespace MantisLegacyExport;
 use \Mantis\Export\TableWriterAbstract;
 use \Mantis\Export\Cell;
 
-# legacy excel_api is included by this plugin init() routine
-
 /**
  * A writer object that implement the mantis Table Writer interface.
  * Provides the functionality of legacy core excel/sml export format.

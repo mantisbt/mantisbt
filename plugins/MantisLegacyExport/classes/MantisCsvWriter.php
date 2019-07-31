@@ -22,8 +22,6 @@ namespace MantisLegacyExport;
 use \Mantis\Export\TableWriterAbstract;
 use \Mantis\Export\Cell;
 
-# legacy csv_api is included by this plugin init() routine
-
 /**
  * A writer object that implement the mantis Table Writer interface.
  * Provides the functionality of legacy core csv export format.
@@ -33,7 +31,7 @@ class MantisCsvWriter extends TableWriterAbstract {
 	public $separator;
 
 	public function __construct() {
-		$this->newline = csv_get_newline();
+		$this->newline = "\r\n";
 		$this->separator = config_get( 'csv_separator' );
 	}
 
@@ -62,7 +60,7 @@ class MantisCsvWriter extends TableWriterAbstract {
 				echo $this->separator;
 			}
 			if( !$p_types_array ) {
-				echo csv_escape_string( $t_value );
+				echo $this->escapeString( $t_value );
 			} else {
 				switch( $p_types_array[$t_index] ) {
 					case Cell::TYPE_NUMERIC:
@@ -74,7 +72,7 @@ class MantisCsvWriter extends TableWriterAbstract {
 						}
 						break;
 					default:
-						echo csv_escape_string( $t_value );
+						echo $this->escapeString( $t_value );
 				}
 			}
 			$t_first_column = false;
@@ -85,5 +83,17 @@ class MantisCsvWriter extends TableWriterAbstract {
 	public function close() {
 	}
 
+	protected function escapeString( $p_string ) {
+			$t_escaped = str_split( '"' . $this->separator . $this->newline );
+			$t_must_escape = false;
+			while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
+				$t_must_escape = strpos( $p_string, $t_char ) !== false;
+				next( $t_escaped );
+			}
+			if( $t_must_escape ) {
+				$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
+			}
 
+			return $p_string;
+	}
 }
