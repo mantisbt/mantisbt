@@ -19,7 +19,7 @@
  */
 
 namespace MantisLegacyExport;
-use \Mantis\Export\TableWriterInterface;
+use \Mantis\Export\TableWriterAbstract;
 use \Mantis\Export\Cell;
 
 # legacy csv_api is included by this plugin init() routine
@@ -28,15 +28,13 @@ use \Mantis\Export\Cell;
  * A writer object that implement the mantis Table Writer interface.
  * Provides the functionality of legacy core csv export format.
  */
-class MantisCsvWriter implements TableWriterInterface {
+class MantisCsvWriter extends TableWriterAbstract {
 	public $newline;
 	public $separator;
-	public $date_format;
 
 	public function __construct() {
 		$this->newline = csv_get_newline();
 		$this->separator = config_get( 'csv_separator' );
-		$this->date_format = config_get( 'short_date_format' );
 	}
 
 	public function openToBrowser( $p_filename ) {
@@ -72,7 +70,7 @@ class MantisCsvWriter implements TableWriterInterface {
 						break;
 					case Cell::TYPE_DATE:
 						if( !date_is_null( $t_value ) ) {
-							echo date( $this->date_format, $t_value );
+							echo $this->convertTimestampToString( $t_value );
 						}
 						break;
 					default:

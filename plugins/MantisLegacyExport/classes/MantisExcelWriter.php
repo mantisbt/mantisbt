@@ -30,11 +30,6 @@ use \Mantis\Export\Cell;
  */
 class MantisExcelWriter implements TableWriterInterface {
 	protected $worksheet_title ='';
-	protected $date_format;
-
-	public function __construct() {
-		$this->date_format = config_get( 'short_date_format' );
-	}
 
 	public function addRowFromArray( array $p_data_array, array $p_types_array = null ) {
 		echo '<Row>';
@@ -46,7 +41,7 @@ class MantisExcelWriter implements TableWriterInterface {
 					break;
 				case Cell::TYPE_DATE:
 					$t_xmlcelltype = 'String';
-					$t_value = date( $this->date_format, $t_value );
+					$t_value = $this->convertTimestampToString( $t_value );
 					break;
 				default:
 					$t_xmlcelltype = 'String';
