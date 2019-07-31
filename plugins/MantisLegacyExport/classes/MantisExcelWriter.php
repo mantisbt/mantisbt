@@ -19,7 +19,7 @@
  */
 
 namespace MantisLegacyExport;
-use \Mantis\Export\TableWriterInterface;
+use \Mantis\Export\TableWriterAbstract;
 use \Mantis\Export\Cell;
 
 # legacy excel_api is included by this plugin init() routine
@@ -28,13 +28,8 @@ use \Mantis\Export\Cell;
  * A writer object that implement the mantis Table Writer interface.
  * Provides the functionality of legacy core excel/sml export format.
  */
-class MantisExcelWriter implements TableWriterInterface {
+class MantisExcelWriter extends TableWriterAbstract {
 	protected $worksheet_title ='';
-	protected $date_format;
-
-	public function __construct() {
-		$this->date_format = config_get( 'short_date_format' );
-	}
 
 	public function addRowFromArray( array $p_data_array, array $p_types_array = null ) {
 		echo '<Row>';
@@ -46,7 +41,7 @@ class MantisExcelWriter implements TableWriterInterface {
 					break;
 				case Cell::TYPE_DATE:
 					$t_xmlcelltype = 'String';
-					$t_value = date( $this->date_format, $t_value );
+					$t_value = $this->convertTimestampToString( $t_value );
 					break;
 				default:
 					$t_xmlcelltype = 'String';
