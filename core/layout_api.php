@@ -909,7 +909,7 @@ function layout_sidebar_dropdown_menu( $p_menu_options ) {
 	echo '<li class="dropdown">' . "\n";
    	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . "\n";
    	echo '<i class="menu-icon fa fa-plug"></i>' . "\n";
-   	echo '<span class="menu-text">Plugins</span>' . "\n";
+   	echo '<span class="menu-text">' . lang_get( "plugins" ) . '</span>' . "\n";
    	echo '<span class="caret"></span>';
    	echo '</a>' . "\n";
         echo '<ul class="dropdown-menu" >';
