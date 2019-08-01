@@ -644,13 +644,7 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 			$t_active = $p_current_page && strpos( $t_item, $p_current_page ) !== false
 				? 'active'
 				: '';
-			printf( $t_btn_template,
-				$t_active,
-				$t_item['url'],
-				/* icon */ '',
-				lang_get_defaulted( $t_item['label'] )
-			);
-			echo '<li class="' . $t_active . '">', $t_item, '</li>', "\n";
+			echo $t_item;
 		}
 
 		echo '</div></div>', "\n";
@@ -659,13 +653,12 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 
 /**
  * Print the Summary page's submenu.
- *
  * The submenu is only printed if there is at least one plugin-defined link, in
  * which case a 'Synthesis' button is added for the summary page itself.
- *
+ * @param string $p_current_page Current page's file name to highlight active menu item
  * @return void
  */
-function print_summary_submenu() {
+function print_summary_submenu( $p_current_page = '' ) {
 	# Plugin / Event added options
 	$t_menu_items = plugin_menu_items( 'EVENT_SUBMENU_SUMMARY' );
 
@@ -678,7 +671,10 @@ function print_summary_submenu() {
 			'label' => 'synthesis',
 		);
 
-		print_submenu( array_merge( $t_synthesis, $t_menu_items ), '' );
+		if( $p_current_page == '' ) {
+			$p_current_page = 'summary_page.php';
+		}
+		print_submenu( array_merge( $t_synthesis, $t_menu_items ), $p_current_page );
 	}
 }
 
