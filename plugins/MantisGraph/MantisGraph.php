@@ -24,6 +24,15 @@
 class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
+	 * Chart JS
+	 * @see https://www.chartjs.org/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
+	 */
+	const CHARTJS_VERSION = '2.7.3';
+	const CHARTJS_HASH = 'sha384-WJu6cbQvbPRsw+66L1nOomDAZzhTALnUlpchFlWHimhJ9o95CMue7xEZXXDRKV2S';
+	const CHARTJSBUNDLE_HASH = 'sha384-e4YKd0O/y4TmH7qskMQzKnOrqN83RJ7TmJ4RsBLHodJ6jHOE30I7J1uZfLdvybhc';
+
+	/**
 	 * ChartJS colorschemes plugin
 	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/
 	 */
@@ -140,12 +149,12 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
+				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . self::CHARTJS_VERSION . '/Chart.min.js', self::CHARTJS_HASH);
+				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . self::CHARTJS_VERSION . '/Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH);
 				html_javascript_cdn_link('https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@' . self::CHARTJS_COLORSCHEMES_VERSION . '/dist/chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
-				echo '<script type="text/javascript" src="' . plugin_file('Chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file('Chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
 				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes.min.js' ) . '"></script>';
 			}
 			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
