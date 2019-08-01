@@ -46,34 +46,34 @@ $t_mantisgraph->print_submenu();
 			</h4>
 		</div>
 
-        <div class="col-md-6 col-xs-12" style="padding: 20px;">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart"></i>
-                    <?php echo plugin_lang_get('graph_topdev') ?>
-                </h4>
-            </div>
+		<div class="col-md-6 col-xs-12" style="padding: 20px;">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-bar-chart"></i>
+					<?php echo plugin_lang_get('graph_topdev') ?>
+				</h4>
+			</div>
 
 <?php
-            $t_metrics = create_developer_resolved_summary( $t_filter );
-            graph_bar( $t_metrics );
+			$t_metrics = create_developer_resolved_summary( $t_filter );
+			graph_bar( $t_metrics );
 ?>
-        </div>
+		</div>
 
-        <div class="col-md-6 col-xs-12" style="padding: 20px;">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart"></i>
-                    <?php echo plugin_lang_get('graph_opendev') ?>
-                </h4>
-            </div>
+		<div class="col-md-6 col-xs-12" style="padding: 20px;">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-bar-chart"></i>
+					<?php echo plugin_lang_get('graph_opendev') ?>
+				</h4>
+			</div>
 
 <?php
-            $t_metrics = create_developer_open_summary( $t_filter );
-            graph_bar( $t_metrics );
+			$t_metrics = create_developer_open_summary( $t_filter );
+			graph_bar( $t_metrics );
 ?>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 
 <?php

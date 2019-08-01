@@ -37,25 +37,25 @@ $t_mantisgraph->print_submenu();
 $t_metrics = create_bug_status_summary( $t_filter );
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
+		<div class="space-10"></div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart-o"></i>
-                    <?php echo plugin_lang_get( 'graph_imp_status_title' ) ?>
-                </h4>
-            </div>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-bar-chart-o"></i>
+					<?php echo plugin_lang_get( 'graph_imp_status_title' ) ?>
+				</h4>
+			</div>
 
-            <div class="col-md-6 col-xs-12">
-            <?php graph_bar( $t_metrics ); ?>
-            </div>
+			<div class="col-md-6 col-xs-12">
+			<?php graph_bar( $t_metrics ); ?>
+			</div>
 
-            <div class="col-md-6 col-xs-12">
-            <?php graph_pie( $t_metrics, true ); ?>
-            </div>
-        </div>
-    </div>
+			<div class="col-md-6 col-xs-12">
+			<?php graph_pie( $t_metrics, true ); ?>
+			</div>
+		</div>
+	</div>
 <?php
 layout_page_end();

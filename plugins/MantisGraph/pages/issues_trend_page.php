@@ -50,36 +50,36 @@ $t_types = array(
 		   );
 ?>
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
-    <form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
-        <div class="widget-box widget-color-blue2">
-        <div class="widget-body">
-        <div class="widget-main no-padding">
-            <div class="table-responsive">
-            <table class="table table-condensed">
-                <tr>
-                    <td class="center">
-                    <div class="form-group">
+	<div class="space-10"></div>
+	<form id="graph_form" method="post" action="<?php echo plugin_page( 'issues_trend_page.php' ); ?>" class="form-inline">
+		<div class="widget-box widget-color-blue2">
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+			<table class="table table-condensed">
+				<tr>
+					<td class="center">
+					<div class="form-group">
 						<?php echo get_dropdown( $t_types, 'graph_type', $f_type ); ?>
 					</div>
-                    </td>
-                    <td class="center">
-                    <div class="form-group">
+					</td>
+					<td class="center">
+					<div class="form-group">
 						<?php echo $t_period->period_selector( 'interval' ); ?>
 					</div>
-                    </td>
-                    <td class="center">
-                    <div class="form-group">
+					</td>
+					<td class="center">
+					<div class="form-group">
 						<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" name="show" value="<?php echo lang_get( 'proceed' ); ?>"/>
 					</div>
-                    </td>
+					</td>
 				</tr>
 			</table>
-            </div>
-        </div>
-        </div>
-        </div>
-    </form>
+			</div>
+		</div>
+		</div>
+		</div>
+	</form>
 <?php
 # build the graphs if both an interval and graph type are selected
 if( ( 0 != $f_type ) && ( $f_interval > 0 ) ) {
