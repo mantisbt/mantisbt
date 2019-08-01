@@ -602,45 +602,83 @@ function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null 
 }
 
 /**
- * Print the menu for the graph summary section
+ * Print a generic submenu (buttons group).
+ *
+ * @param array  $p_menu_items   List of menu items
+ * @param string $p_current_page Current page's file name to highlight active tab
+ * @param string $p_event        Optional event to signal,
+ */
+function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = null ) {
+	# Plugin / Event added options
+	$t_plugin_menu_items = plugin_menu_items( $p_event );
+
+	if( $p_menu_items || $t_plugin_menu_items ) {
+		echo '<div class="space-10"></div>';
+		echo '<div class="col-md-12 col-xs-12 center">';
+		echo '<div class="btn-group">', "\n";
+
+		$t_btn_template = '<a class="btn btn-sm btn-primary btn-white %s" href="%s">%s%s</a>' . "\n";
+
+		foreach( $p_menu_items as $t_item ) {
+			if( is_array( $t_item ) ) {
+				$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false
+					? 'active' : '';
+				$t_icon = array_key_exists( 'icon', $t_item )
+					? '<i class="fa ' . $t_item['icon'] . '"></i>&nbsp;'
+					: '';
+
+				printf( $t_btn_template,
+					$t_active,
+					$t_item['url'],
+					$t_icon,
+					lang_get_defaulted( $t_item['label'] )
+				);
+			} else {
+				# Cooked link
+				echo $t_item;
+			}
+		}
+
+		# Plugins menu items - these are html hyperlinks (<a> tags)
+		foreach( plugin_menu_items( $p_event ) as $t_item ) {
+			$t_active = $p_current_page && strpos( $t_item, $p_current_page ) !== false
+				? 'active'
+				: '';
+			printf( $t_btn_template,
+				$t_active,
+				$t_item['url'],
+				/* icon */ '',
+				lang_get_defaulted( $t_item['label'] )
+			);
+			echo '<li class="' . $t_active . '">', $t_item, '</li>', "\n";
+		}
+
+		echo '</div></div>', "\n";
+	}
+}
+
+/**
+ * Print the Summary page's submenu.
+ *
+ * The submenu is only printed if there is at least one plugin-defined link, in
+ * which case a 'Synthesis' button is added for the summary page itself.
+ *
  * @return void
  */
 function print_summary_submenu() {
 	# Plugin / Event added options
-	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_items = plugin_menu_items( 'EVENT_SUBMENU_SUMMARY' );
 
-	if( count($t_menu_options) > 0 ) {
-		echo '<div class="space-10"></div>';
-		echo '<div class="col-md-12 col-xs-12 center">';
-		echo '<div class="btn-group">';
-
-		# If there is at least one plugin-defined link, add a submenu item
-		# for the summary page itself
-		# @TODO active page check
+	if( $t_menu_items ) {
 		$t_filter_param = filter_get_temporary_key_param( summary_get_filter() );
-		echo '<a class="btn btn-sm btn-primary btn-white active" href="'
-			. helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param )
-			. '"><i class="fa fa-table"></i> '
-			. lang_get( 'synthesis' )
-			. '</a>';
 
-		# Plugins menu items - these are cooked links
-		foreach ($t_menu_options as $t_menu_item) {
-			echo $t_menu_item;
-		}
-		echo '</div></div>';
+		$t_synthesis['summary_page.php'] = array(
+			'url' => helper_url_combine( helper_mantis_url( 'summary_page.php' ), $t_filter_param ),
+			'icon' => 'fa-table',
+			'label' => 'synthesis',
+		);
+
+		print_submenu( array_merge( $t_synthesis, $t_menu_items ), '' );
 	}
 }
 
