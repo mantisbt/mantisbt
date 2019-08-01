@@ -29,8 +29,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
 	 */
 	const CHARTJS_VERSION = '2.7.3';
-	const CHARTJS_HASH = 'sha384-WJu6cbQvbPRsw+66L1nOomDAZzhTALnUlpchFlWHimhJ9o95CMue7xEZXXDRKV2S';
-	const CHARTJSBUNDLE_HASH = 'sha384-e4YKd0O/y4TmH7qskMQzKnOrqN83RJ7TmJ4RsBLHodJ6jHOE30I7J1uZfLdvybhc';
+	const CHARTJS_HASH = 'sha256-oSgtFCCmHWRPQ/JmR4OoZ3Xke1Pw4v50uh6pLcu+fIc=';
+	const CHARTJSBUNDLE_HASH = 'sha256-MZo5XY1Ah7Z2Aui4/alkfeiq3CopMdV/bbkc/Sh41+s=';
 
 	/**
 	 * ChartJS colorschemes plugin
@@ -124,7 +124,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
 			http_csp_add( 'script-src', 'https://cdn.jsdelivr.net' );
 		}
 	}
@@ -149,9 +148,16 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . self::CHARTJS_VERSION . '/Chart.min.js', self::CHARTJS_HASH);
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . self::CHARTJS_VERSION . '/Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH);
-				html_javascript_cdn_link('https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@' . self::CHARTJS_COLORSCHEMES_VERSION . '/dist/chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
+				$t_cdn = 'https://cdn.jsdelivr.net/npm/%s@%s/dist/';
+
+				# Chart.js library
+				$t_link = sprintf( $t_cdn, 'chart.js', self::CHARTJS_VERSION );
+				html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+				html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
+
+				# Chart.js color schemes plugin
+				$t_link = sprintf( $t_cdn, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+				html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
 				echo '<script type="text/javascript" src="' . plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
 				echo '<script type="text/javascript" src="' . plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
