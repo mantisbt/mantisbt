@@ -569,6 +569,39 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 }
 
 /**
+ * Print a generic menu (tabs).
+ *
+ * @param array  $p_menu_items   List of menu items
+ * @param string $p_current_page Current page's file name to highlight active tab
+ * @param string $p_event        Optional event to signal,
+ */
+function print_menu( array $p_menu_items, $p_current_page = '', $p_event = null ) {
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+
+	foreach( $p_menu_items as $t_item ) {
+		$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false ? 'active' : '';
+
+		echo '<li class="' . $t_active .  '">';
+		if( $t_item['label'] == '' ) {
+			echo '<a href="'. lang_get_defaulted( $t_item['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
+		} else {
+			echo '<a href="'. helper_mantis_url( $t_item['url'] ) .'">' . lang_get_defaulted( $t_item['label'] ) . '</a>';
+		}
+		echo '</li>' . "\n";
+	}
+
+	# Plugins menu items - these are html hyperlinks (<a> tags)
+	foreach( plugin_menu_items( $p_event ) as $t_item ) {
+		$t_active = $p_current_page && strpos( $t_item, $p_current_page ) !== false
+			? 'active'
+			: '';
+		echo '<li class="' . $t_active . '">', $t_item, '</li>', "\n";
+	}
+
+	echo '</ul>' . "\n";
+}
+
+/**
  * Print the menu for the graph summary section
  * @return void
  */
@@ -649,42 +682,7 @@ function print_manage_menu( $p_page = '' ) {
 		);
 	}
 
-	# Plugin / Event added options
-	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
-
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
-	foreach( $t_pages AS $t_page ) {
-		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active .  '">' . "\n";
-		if( $t_page['label'] == '' ) {
-			echo '<a href="'. lang_get_defaulted( $t_page['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
-		} else {
-			echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get_defaulted( $t_page['label'] ) . '</a>';
-		}
-		echo '</li>' . "\n";
-	}
-
-	# Plugins menu items - these are html hyperlinks (<a> tags)
-	foreach( $t_menu_options as $t_menu_item ) {
-		$t_active = $p_page && strpos( $t_menu_item, $p_page ) !== false
-			? ' class="active"'
-			: '';
-		echo "<li{$t_active}>", $t_menu_item, '</li>';
-	}
-
-	echo '</ul>' . "\n";
+	print_menu( $t_pages, $p_page, 'EVENT_MENU_MANAGE' );
 }
 
 /**
@@ -784,36 +782,7 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
 	}
 
-	# Plugin / Event added options
-	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
-
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
-	foreach ( $t_pages as $t_page ) {
-		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-		echo lang_get( $t_page['label'] );
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
-	}
-
-	# Plugins menu items - these are cooked links
-	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>' . $t_menu_item . '</li>';
-	}
-	echo '</ul>' . "\n";
+	print_menu( $t_pages, $p_page, 'EVENT_MENU_ACCOUNT' );
 }
 
 /**
@@ -843,31 +812,19 @@ function print_doc_menu( $p_page = '' ) {
 
 	# Project Documentation
 	$t_pages['proj_doc_page.php'] = array(
-		'url'   => helper_mantis_url( 'proj_doc_page.php' ),
+		'url'   => 'proj_doc_page.php',
 		'label' => 'project_documentation'
 	);
 
 	# Add File
 	if( file_allow_project_upload() ) {
 		$t_pages['proj_doc_add_page.php'] = array(
-			'url'   => helper_mantis_url( 'proj_doc_add_page.php' ),
+			'url'   => 'proj_doc_add_page.php',
 			'label' => 'add_file'
 		);
 	}
 
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
-
-	foreach ( $t_pages as $key => $t_page ) {
-		$t_active =  $key == $p_page ? 'active' : '';
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="' . $t_page['url'] . '">' . "\n";
-		echo lang_get($t_page['label']);
-
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
-	}
-
-	echo '</ul>' . "\n";
+	print_menu( $t_pages, $p_page );
 }
 
 /**
@@ -877,45 +834,17 @@ function print_doc_menu( $p_page = '' ) {
  * @return void
  */
 function print_summary_menu( $p_page = '', array $p_filter = null ) {
-	# Plugin / Event added options
-	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
-
-	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
-
-	echo '<ul class="nav nav-tabs padding-18">' . "\n";
-
+	$t_link = 'summary_page.php';
 	$t_filter_param = $p_filter ? filter_get_temporary_key_param( $p_filter ) : null;
-	foreach ( $t_pages as $t_page ) {
-		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
-		$t_link = $t_filter_param ? helper_url_combine( $t_page['url'], $t_filter_param ) : $t_page['url'];
-		echo '<li class="' . $t_active . '">' . "\n";
-		echo '<a href="'. helper_mantis_url( $t_link ) .'">' . "\n";
-		echo lang_get( $t_page['label'] );
-		echo '</a>' . "\n";
-		echo '</li>' . "\n";
+	if( $t_filter_param ) {
+		$t_link = helper_url_combine( $t_link, $t_filter_param );
 	}
+	$t_pages['summary_page.php'] = array(
+		'url' => $t_link,
+		'label' => 'summary_link',
+	);
 
-	# Plugins menu items - these are cooked links
-	foreach ( $t_menu_options as $t_menu_item ) {
-		$t_active = $p_page && strpos( $t_menu_item, $p_page ) !== false
-			? ' class="active"'
-			: '';
-		echo "<li{$t_active}>{$t_menu_item}</li>";
-	}
-
-	echo '</ul>' . "\n";
+	print_menu( $t_pages, $p_page, 'EVENT_MENU_SUMMARY' );
 
 	summary_print_filter_info( $p_filter );
 }

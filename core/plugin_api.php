@@ -1044,3 +1044,34 @@ function plugin_log_event( $p_msg, $p_basename = null ) {
 		log_event( LOG_PLUGIN, $p_msg);
 	}
 }
+
+/**
+ * Retrieve plugin-defined menu items for a given event.
+ *
+ * These are HTML hyperlinks (<a> tags).
+ *
+ * @param string $p_event Plugin event to signal
+ * @return array
+ */
+function plugin_menu_items( $p_event ) {
+	$t_items = array();
+
+	if( $p_event ) {
+		$t_event_items = event_signal( $p_event );
+
+		foreach( $t_event_items as $t_plugin => $t_plugin_items ) {
+			foreach( $t_plugin_items as $t_callback => $t_callback_items ) {
+				if( is_array( $t_callback_items ) ) {
+					$t_items = array_merge( $t_items, $t_callback_items );
+				}
+				else {
+					if( $t_callback_items !== null ) {
+						$t_items[] = $t_callback_items;
+					}
+				}
+			}
+		}
+	}
+
+	return $t_items;
+}
