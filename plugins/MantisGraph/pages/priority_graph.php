@@ -30,7 +30,10 @@ layout_page_begin( 'summary_page.php' );
 
 $t_filter = summary_get_filter();
 print_summary_menu( 'developer_graph.php', $t_filter );
-print_summary_submenu();
+
+# Submenu
+$t_mantisgraph = plugin_get();
+$t_mantisgraph->print_submenu();
 
 $t_metrics = create_bug_enum_summary( lang_get( 'priority_enum_string' ), 'priority', array(), $t_filter );
 ?>
