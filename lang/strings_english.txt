@@ -93,6 +93,7 @@ $s_actiongroup_bugs = 'Selected Issues';
 $s_actiongroup_error_issue_is_readonly = 'Issue is readonly.';
 
 # new strings:
+$s_plugins = 'Plugins',
 $s_all_projects = 'All Projects';
 $s_move_bugs = 'Move Issues';
 $s_operation_successful = 'Operation successful.';
