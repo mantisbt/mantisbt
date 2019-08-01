@@ -886,7 +886,7 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 	foreach( $p_menu_options as $t_menu_option ) {
 		$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
 		if( !isset( $t_menu_option['url'] ) || !isset( $t_menu_option['title'] ) ) {
-			layout_sidebar_dropdown_menu($t_menu_option);
+			layout_sidebar_dropdown_menu( $t_menu_option );
 			continue;
 		}
 
