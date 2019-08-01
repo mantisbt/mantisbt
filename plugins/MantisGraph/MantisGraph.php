@@ -190,11 +190,29 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
+	 * Retrieve a link to a plugin page with temporary filter parameter.
+	 * @param string $p_page Plugin page name
+	 * @return string
+	 */
+	private function get_url_with_filter( $p_page ) {
+		static $s_filter_param;
+
+		if( $s_filter_param === null ) {
+			$t_filter = summary_get_filter();
+			$s_filter_param = filter_get_temporary_key_param( $t_filter );
+		}
+
+		return helper_url_combine( plugin_page( $p_page ), $s_filter_param );
+	}
+
+	/**
 	 * Event hook to add the plugin's tab to the Summary page menu.
 	 * @return array
 	 */
 	function summary_menu() {
-		$t_menu_items[] = '<a href="' . plugin_page( 'developer_graph.php' ) . '">'
+		$t_menu_items[] = '<a href="'
+			. $this->get_url_with_filter( 'developer_graph.php' )
+			. '">'
 			. plugin_lang_get( 'tab_label' )
 			. '</a>';
 		return $t_menu_items;
@@ -211,42 +229,42 @@ class MantisGraphPlugin extends MantisPlugin  {
 			'developer_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_developer' ),
-				'url' => helper_url_combine( plugin_page( 'developer_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'developer_graph.php' ),
 			),
 			'reporter_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => lang_get( 'by_reporter' ),
-				'url' => helper_url_combine( plugin_page( 'reporter_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'reporter_graph.php' ),
 			),
 			'status_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'status_link' ),
-				'url' => helper_url_combine( plugin_page( 'status_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'status_graph.php' ),
 			),
 			'resolution_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'resolution_link' ),
-				'url' => helper_url_combine( plugin_page( 'resolution_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'resolution_graph.php' ),
 			),
 			'priority_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'priority_link' ),
-				'url' => helper_url_combine( plugin_page( 'priority_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'priority_graph.php' ),
 			),
 			'severity_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'severity_link' ),
-				'url' => helper_url_combine( plugin_page( 'severity_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'severity_graph.php' ),
 			),
 			'category_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'category_link' ),
-				'url' => helper_url_combine( plugin_page( 'category_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'category_graph.php' ),
 			),
 			'issues_trend_graph.php' => array(
 				'icon' => 'fa-bar-chart',
 				'label' => plugin_lang_get( 'issue_trends_link' ),
-				'url' => helper_url_combine( plugin_page( 'issues_trend_graph.php' ), $t_filter_param ),
+				'url' => $this->get_url_with_filter( 'issues_trend_graph.php' ),
 			),
 		);
 
