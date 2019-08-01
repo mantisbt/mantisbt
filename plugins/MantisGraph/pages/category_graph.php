@@ -49,8 +49,8 @@ $t_pie_metrics = array_slice( $t_metrics, 0, $t_num_slices );
 if( count( $t_metrics ) > $t_num_slices ) {
 	$t_num_slices--;
 
-    # Remove last element and replace it with "others"
-    array_pop( $t_pie_metrics );
+	# Remove last element and replace it with "others"
+	array_pop( $t_pie_metrics );
 	$t_others = sprintf(
 		plugin_lang_get( 'other_categories' ),
 		count( $t_metrics ) - $t_num_slices
