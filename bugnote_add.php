@@ -44,38 +44,24 @@ $f_files = gpc_get_file( 'ufile', array() );
 
 $t_query = array( 'issue_id' => $f_bug_id );
 
-if( count( $f_files ) > 0 && is_blank( $f_text ) && helper_duration_to_minutes( $f_duration ) == 0 ) {
-	$t_payload = array(
-		'files' => helper_array_transpose( $f_files )
-	);
+$t_payload = array(
+	'text' => $f_text,
+	'view_state' => array(
+		'id' => gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC
+	),
+	'time_tracking' => array(
+		'duration' => $f_duration
+	),
+	'files' => helper_array_transpose( $f_files )
+);
 
-	$t_data = array(
-		'query' => $t_query,
-		'payload' => $t_payload,
-	);
+$t_data = array(
+	'query' => $t_query,
+	'payload' => $t_payload,
+);
 
-	$t_command = new IssueFileAddCommand( $t_data );
-	$t_command->execute();
-} else {
-	$t_payload = array(
-		'text' => $f_text,
-		'view_state' => array(
-			'id' => gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC
-		),
-		'time_tracking' => array(
-			'duration' => $f_duration
-		),
-		'files' => helper_array_transpose( $f_files )
-	);
-
-	$t_data = array(
-		'query' => $t_query,
-		'payload' => $t_payload,
-	);
-
-	$t_command = new IssueNoteAddCommand( $t_data );
-	$t_command->execute();
-}
+$t_command = new IssueNoteAddCommand( $t_data );
+$t_command->execute();
 
 form_security_purge( 'bugnote_add' );
 
