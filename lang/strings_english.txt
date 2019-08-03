@@ -1776,7 +1776,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
 
 # dropzone.js - placeholders format is defined by the library
-$s_dropzone_default_message = 'Drop files here to upload (or click)';
+$s_dropzone_default_message = 'Attach files by dragging & dropping, selecting or pasting them.';
 $s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
 $s_dropzone_fallback_text = '';
 $s_dropzone_file_too_big = 'File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.';
