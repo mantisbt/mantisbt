@@ -160,11 +160,17 @@ class MantisGraphPlugin extends MantisPlugin  {
 				$t_link = sprintf( $t_cdn, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
 				html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
-				echo '<script type="text/javascript" src="' . plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js' ) . '"></script>';
+				$t_scripts = array(
+					plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ),
+					plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ),
+					plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js' ),
+				);
 			}
-			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
+
+			$t_scripts[] = plugin_file( "MantisGraph.js" );
+			foreach( $t_scripts as $t_script ) {
+				echo "\t", '<script src="' . $t_script . '"></script>', "\n";
+			}
 		}
 	}
 
