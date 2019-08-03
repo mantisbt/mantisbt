@@ -68,7 +68,7 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 }
 
 /**
- * Convenience function for declare multiple events.
+ * Convenience function to declare multiple events.
  * @param array $p_events Events.
  * @access public
  * @return void
