@@ -35,7 +35,7 @@ define( 'GOOD', 1 );
 define( 'WARN', 2 );
 
 # PHP-related constants
-define( 'PHP_MIN_VERSION', '5.5.0' );
+define( 'PHP_MIN_VERSION', '7.0.0' );
 define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
