@@ -4,6 +4,10 @@
 
 language: php
 
+# Travis is migrating to Xenial, which does not support PHP 5.5 so we need to
+# force use of Trusty until we raise our minimum PHP version requirement.
+dist: trusty
+
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
 #
