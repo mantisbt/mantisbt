@@ -34,10 +34,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
 	 * ChartJS colorschemes plugin
-	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/
+	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.3.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-x/VBrVFabQZyhV1G+oKCy98gkqf/pW5aVAhaBRxJ/x4=';
+	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
 
 	/**
 	 * A method that populates the plugin information and minimum requirements.
@@ -161,7 +162,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			} else {
 				echo '<script type="text/javascript" src="' . plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
 				echo '<script type="text/javascript" src="' . plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ) . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes.min.js' ) . '"></script>';
+				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js' ) . '"></script>';
 			}
 			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
 		}
