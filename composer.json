@@ -3,7 +3,7 @@
     "description": "Mantis Bug Tracker",
     "type": "project",
     "require": {
-        "php": ">=5.5.0",
+        "php": "^7.0 || ^8.0",
         "ext-mbstring": "*",
         "ext-json": "*",
         "slim/slim": "^3.0",
@@ -33,7 +33,7 @@
     ],
     "config": {
         "platform": {
-            "php": "5.5.0"
+            "php": "7.0.0"
         }
     }
 }
