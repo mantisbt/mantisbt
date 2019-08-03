@@ -28,9 +28,9 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @see https://www.chartjs.org/ Home page
 	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
 	 */
-	const CHARTJS_VERSION = '2.7.3';
-	const CHARTJS_HASH = 'sha256-oSgtFCCmHWRPQ/JmR4OoZ3Xke1Pw4v50uh6pLcu+fIc=';
-	const CHARTJSBUNDLE_HASH = 'sha256-MZo5XY1Ah7Z2Aui4/alkfeiq3CopMdV/bbkc/Sh41+s=';
+	const CHARTJS_VERSION = '2.8.0';
+	const CHARTJS_HASH = 'sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=';
+	const CHARTJSBUNDLE_HASH = 'sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=';
 
 	/**
 	 * ChartJS colorschemes plugin
