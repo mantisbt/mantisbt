@@ -51,14 +51,29 @@ class AuthMiddleware {
 			}
 		} else {
 			# TODO: add an index on the token hash for the method below
-			$t_user_id = api_token_get_user( $t_authorization_header );
+
+			# Manage multiple authorization header (ex: Basic + token)
+			$t_authorization_headers = explode(', ', $t_authorization_header);
+			$t_user_id = false;
+			$t_api_token  = '';
+
+			# Search for the token among the different authorization headers. 
+			foreach( $t_authorization_headers as $value ) {
+				$t_user_id = api_token_get_user( $value );
+				if( $t_user_id !== false ) {
+					# Valid token found
+					$t_api_token = $value;
+					break;
+				}
+			}
+
 			if( $t_user_id === false ) {
 				return $response->withStatus( HTTP_STATUS_FORBIDDEN, 'API token not found' );
 			}
 
 			# use api token
 			$t_login_method = LOGIN_METHOD_API_TOKEN;
-			$t_password = $t_authorization_header;
+			$t_password = $t_api_token;
 			$t_username = user_get_username( $t_user_id );
 		}
 
