@@ -269,6 +269,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	<td class="<?php echo $t_activity['style'] ?>">
 	<?php
 		if( $t_activity['type'] == ENTRY_TYPE_NOTE ) {
+			$t_add_space = false;
+
 			switch ( $t_activity['note']->note_type ) {
 				case REMINDER:
 					echo '<strong>';
@@ -294,19 +296,24 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 					}
 
 					echo '</strong><br /><br />';
+					$t_add_space = true;
 					break;
 
 				case TIME_TRACKING:
 					if( $t_show_time_tracking ) {
 						echo '<div class="time-tracked label label-grey label-sm">', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm, '</div>';
 						echo '<div class="clearfix"></div>';
+						$t_add_space = true;
 					}
 					break;
 			}
 
-			echo string_display_links( $t_activity['note']->note );
+			if( !is_blank( $t_activity['note']->note ) ) {
+				echo string_display_links( $t_activity['note']->note );
+				$t_add_space = true;
+			}
 
-			if( isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {
+			if( $t_add_space && isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {
 				echo '<br /><br />';
 			}
 		} else {
