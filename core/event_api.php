@@ -86,7 +86,7 @@ function event_declare_many( array $p_events ) {
  * @param string         $p_callback Callback function.
  * @param integer|string $p_plugin   Plugin basename.
  * @access public
- * @return null
+ * @return void
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
@@ -94,7 +94,7 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	if( !event_is_declared( $p_name ) ) {
 		error_parameters( $p_name );
 		trigger_error( ERROR_EVENT_UNDECLARED, WARNING );
-		return null;
+		return;
 	}
 
 	$g_event_cache[$p_name]['callbacks'][$p_plugin][] = $p_callback;
