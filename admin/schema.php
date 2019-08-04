@@ -884,6 +884,10 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 
 # Release marker: 1.3.0
 
+$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'bug_file' ), "
+	bugnote_id			I		UNSIGNED NOTNULL DEFAULT '0' " ) );
+
+# Release marker: 2.23.0
 
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
