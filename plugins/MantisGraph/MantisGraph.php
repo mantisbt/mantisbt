@@ -100,8 +100,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	/**
 	 * Add the RESTful routes that are handled by this plugin.
 	 *
-	 * @param $p_event_name The event name
-	 * @param $p_event_args The event arguments
+	 * @param string $p_event_name The event name
+	 * @param array  $p_event_args The event arguments
 	 * @return void
 	 */
 	function routes( $p_event_name, $p_event_args ) {
@@ -143,7 +143,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' .
 				plugin_page( 'issues_trend_page.php' ) . '">' . plugin_lang_get( 'issue_trends_link' ) . '</a>', );
 		} else {
-			return '';
+			return array();
 		}
 	}
 
