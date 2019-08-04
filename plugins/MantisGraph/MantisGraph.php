@@ -41,6 +41,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
 
 	/**
+	 * CDN for Chart.JS libraries
+	 */
+	const CHARTJS_CDN = 'https://cdn.jsdelivr.net';
+
+	/**
 	 * A method that populates the plugin information and minimum requirements.
 	 * @return void
 	 */
@@ -125,7 +130,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdn.jsdelivr.net' );
+			http_csp_add( 'script-src', self::CHARTJS_CDN );
 		}
 	}
 
@@ -149,15 +154,15 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				$t_cdn = 'https://cdn.jsdelivr.net/npm/%s@%s/dist/';
+				$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
 
 				# Chart.js library
-				$t_link = sprintf( $t_cdn, 'chart.js', self::CHARTJS_VERSION );
+				$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
 				html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
 				html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
 
 				# Chart.js color schemes plugin
-				$t_link = sprintf( $t_cdn, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+				$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
 				html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
 				$t_scripts = array(
