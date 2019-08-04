@@ -240,7 +240,12 @@ class IssueNoteAddCommand extends Command {
 			BUGNOTE,
 			/* attr */ '',
 			/* user_id */ $this->reporterId,
-			/* send_email */ false );
+			/* send_email */ false,
+			/* date_submitted */ 0,
+			/* last_modified */ 0,
+			/* skip_bug_update */ false,
+			/* log_history */ true,
+			/* trigger_event */ false );
 
 		if( !$t_note_id ) {
 			throw new ClientException( "Unable to add note", ERROR_GENERIC );
@@ -251,10 +256,6 @@ class IssueNoteAddCommand extends Command {
 
 		# Process the mentions in the added note
 		$t_user_ids_that_got_mention_notifications = bugnote_process_mentions( $this->issue->id, $t_note_id, $this->payload( 'text' ) );
-
-		# Send email explicitly from here to have file support, this will move into the API once we have
-		# proper bugnote files support in db schema and object model.
-		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
 
 		# Handle the reassign on feedback feature. Note that this feature generally
 		# won't work very well with custom workflows as it makes a lot of assumptions
@@ -271,6 +272,13 @@ class IssueNoteAddCommand extends Command {
 				bug_set_field( $this->issue->id, 'status', config_get( 'bug_submit_status' ) );
 			}
 		}
+
+		# Send email explicitly from here to have file support, this will move into the API once we have
+		# proper bugnote files support in db schema and object model.
+		email_bugnote_add( $t_note_id, $t_file_infos, /* user_exclude_ids */ $t_user_ids_that_got_mention_notifications );
+
+		# Event integration
+		event_signal( 'EVENT_BUGNOTE_ADD', array( $this->issue->id, $t_note_id ) );
 
 		return array( 'id' => $t_note_id );
 	}
