@@ -905,6 +905,8 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );
 
+	$t_file_info['id'] = db_insert_id( $t_file_table );
+
 	if( db_is_oracle() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
 	}
