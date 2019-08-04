@@ -365,7 +365,7 @@ class IssueAddCommand extends Command {
 		}
 
 		# Handle the file upload
-		file_attach_files( $t_issue_id, $this->files );
+		file_attach_files( $t_issue_id, $this->files, /* bugnote_id */ null );
 
 		# Handle custom field submission
 		mci_issue_set_custom_fields( $t_issue_id, $t_issue['custom_fields'], /* history log insert */ false );
