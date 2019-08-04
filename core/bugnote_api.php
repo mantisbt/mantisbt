@@ -228,10 +228,11 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @param integer $p_last_modified   Last modification date (defaults to now()).
  * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bugs/bugnotes).
  * @param boolean $p_log_history     Log changes to bugnote history (defaults to true).
+ * @param boolean $p_trigger_event   Trigger extensibility event.
  * @return boolean|integer false or indicating bugnote id added
  * @access public
  */
-function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true ) {
+function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true, $p_trigger_event = true ) {
 	$c_bug_id = (int)$p_bug_id;
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
 	$c_type = (int)$p_type;
@@ -305,12 +306,14 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# log new bug
-	if( true == $p_log_history ) {
+	if( $p_log_history ) {
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 	}
 
 	# Event integration
-	event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );
+	if( $p_trigger_event ) {
+		event_signal( 'EVENT_BUGNOTE_ADD', array( $p_bug_id, $t_bugnote_id ) );
+	}
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( true == $p_send_email && !is_blank( $t_bugnote_text ) ) {
