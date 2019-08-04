@@ -445,8 +445,9 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
-					<listitem><para>&lt;Integer&gt;: Bugnote ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: (Key = 0) Bug ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: (Key = 1) Bugnote ID</para></listitem>
+					<listitem><para>&lt;array&gt;: (Key = "files") Files info (name, size, id), starting 2.23.0</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
