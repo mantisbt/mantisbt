@@ -53,6 +53,7 @@
  * @author Paopao
  * @author PhiLiP
  * @author Qiyue2001
+ * @author VulpesVulpes825
  * @author XanaduNWH
  * @author Xiaomingyan
  * @author Yanmiao liu
@@ -671,6 +672,7 @@ $s_configuration_corrupted = '在数据库中的配置已损坏。';
 $s_set_configuration_option_action_create = '创建配置选项';
 $s_set_configuration_option_action_edit = '编辑配置选项';
 $s_set_configuration_option_action_clone = '克隆配置选项';
+$s_set_configuration_option_action_view = '查看配置选项';
 $s_plugin = '插件';
 $s_plugins_installed = '已装插件';
 $s_plugins_available = '可用插件';
@@ -1114,6 +1116,8 @@ $s_update_issue_status = '修改问题状态';
 $s_set_view_status = '当报告一个新问题或说明时设置显示状态';
 $s_update_view_status = '更改现有问题或注释的显示状态';
 $s_show_list_of_users_monitoring_issue = '显示正在监视问题的用户列表';
+$s_add_users_monitoring_issue = '新增问题追踪';
+$s_remove_users_monitoring_issue = '移除问题追踪';
 $s_notes = '注释';
 $s_add_notes = '添加注释';
 $s_view_private_notes = '查看其他私人备注';
@@ -1411,6 +1415,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此问题被另一用户更新，�
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已经达到了可允许的活动极限 - %d 次事件，%d 秒内；您的行为已经被阻止以防止垃圾信息，请稍候再试。';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '字段“%1$s”必须小于等于%2$d个字符长度。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API令牌名称“%s”已被使用。请返回并选择另一个。';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '无法写入$g_log_destination的指定文件"%s"';
 $s_dropzone_default_message = '将文件放在这里上传（或点击）';
 $s_dropzone_fallback_message = '您的浏览器不支持拖放文件上传。';
 $s_dropzone_file_too_big = '文件太大（{{filesize}}MiB）。最大文件大小：{{maxFilesize}}MiB。';
