@@ -162,6 +162,7 @@ cat <<-EOF >> $MANTIS_CONFIG
 	\$g_allow_no_category = ON;
 	\$g_due_date_update_threshold = DEVELOPER;
 	\$g_due_date_view_threshold = DEVELOPER;
+	\$g_enable_product_build = ON;
 	\$g_enable_project_documentation = ON;
 	\$g_time_tracking_enabled = ON;
 	EOF
