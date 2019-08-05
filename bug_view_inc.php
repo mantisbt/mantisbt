@@ -233,7 +233,7 @@ $t_description = $t_show_description ? string_display_links( $t_bug->description
 $t_steps_to_reproduce = $t_show_steps_to_reproduce ? string_display_links( $t_bug->steps_to_reproduce ) : '';
 $t_additional_information = $t_show_additional_information ? string_display_links( $t_bug->additional_information ) : '';
 
-$t_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
+$t_event_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 
 #
 # Start of Template
@@ -262,21 +262,22 @@ if( !is_blank( $t_wiki_link ) ) {
 	print_small_button( $t_wiki_link, lang_get( 'wiki' ) );
 }
 
-foreach ( $t_links as $t_plugin => $t_hooks ) {
-	foreach( $t_hooks as $t_hook ) {
-		if( is_array( $t_hook ) ) {
-			foreach( $t_hook as $t_label => $t_href ) {
-				if( is_numeric( $t_label ) ) {
-					print_bracket_link_prepared( $t_href );
-				} else {
-					print_small_button( $t_href, $t_label );
-				}
+$fn_process_event_links = function( $p_item ) {
+	if( is_array( $p_item ) ) {
+		foreach( $p_item as $t_label => $t_href ) {
+			if( is_numeric( $t_label ) ) {
+				print_bracket_link_prepared( $t_href );
+			} else {
+				print_small_button( $t_href, $t_label );
 			}
-		} elseif( !empty( $t_hook ) ) {
-			print_bracket_link_prepared( $t_hook );
 		}
+	} elseif( !empty( $p_item ) ) {
+		print_bracket_link_prepared( $p_item );
 	}
-}
+	return null;
+};
+event_process_result_type_default( $t_event_links, $fn_process_event_links );
+
 
 # Jump to Bugnotes
 print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );

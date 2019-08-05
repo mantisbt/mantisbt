@@ -163,25 +163,22 @@ function columns_get_plugin_columns() {
 
 	if( is_null( $s_column_array ) ) {
 		$s_column_array = array();
+		$t_event_results = event_signal( 'EVENT_FILTER_COLUMNS' );
 
-		$t_all_plugin_columns = event_signal( 'EVENT_FILTER_COLUMNS' );
-		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
-			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
-				if( is_array( $t_plugin_column_array ) ) {
-					foreach( $t_plugin_column_array as $t_column_item ) {
-						if( is_object( $t_column_item ) && $t_column_item instanceof MantisColumn ) {
-							$t_column_object = $t_column_item;
-						} elseif( class_exists( $t_column_item ) && is_subclass_of( $t_column_item, 'MantisColumn' ) ) {
-							$t_column_object = new $t_column_item();
-						} else {
-							continue;
-						}
-						$t_column_name = mb_strtolower( $t_plugin . '_' . $t_column_object->column );
-						$s_column_array[$t_column_name] = $t_column_object;
-					}
-				}
+		# this function collects each of the items returned by the plugins.
+		$fn_collect = function( $p_item, $p_plugin ) use ( &$s_column_array ) {
+			if( is_object( $p_item ) && $p_item instanceof MantisColumn ) {
+				$t_column_object = $p_item;
+			} elseif( class_exists( $p_item ) && is_subclass_of( $p_item, 'MantisColumn' ) ) {
+				$t_column_object = new $p_item();
+			} else {
+				return null;
 			}
-		}
+			$t_column_name = mb_strtolower( $p_plugin . '_' . $t_column_object->column );
+			$s_column_array[$t_column_name] = $t_column_object;
+		};
+
+		event_process_result_type_default( $t_event_results, $fn_collect );
 	}
 
 	return $s_column_array;

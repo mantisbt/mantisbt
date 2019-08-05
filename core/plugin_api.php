@@ -161,16 +161,28 @@ function plugin_route_group( $p_base_name = null ) {
 }
 
 /**
+ * Returns the path to the root directory of the plugin
+ * @param string $p_base_name  Plugin base name (defaults to current plugin).
+ * @return string	Path to the specific plugin directory
+ */
+function plugin_path( $p_base_name = null ) {
+	if( is_null( $p_base_name ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_base_name;
+	}
+	$t_path = config_get_global( 'plugin_path' ) . $t_current . DIRECTORY_SEPARATOR;
+	return $t_path;
+}
+
+/**
  * Return a path to a plugin file.
  * @param string $p_filename  File name.
  * @param string $p_base_name Plugin base name.
  * @return mixed File path or false if FNF
  */
 function plugin_file_path( $p_filename, $p_base_name ) {
-	$t_file_path = config_get_global( 'plugin_path' );
-	$t_file_path .= $p_base_name . DIRECTORY_SEPARATOR;
-	$t_file_path .= 'files' . DIRECTORY_SEPARATOR . $p_filename;
-
+	$t_file_path = plugin_path( $p_base_name ) . 'files' . DIRECTORY_SEPARATOR . $p_filename;
 	return( is_file( $t_file_path ) ? $t_file_path : false );
 }
 

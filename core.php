@@ -177,7 +177,22 @@ function http_is_protocol_https() {
  * @return void
  */
 function autoload_mantis( $p_class ) {
-	global $g_core_path;
+	global $g_core_path, $g_class_path;
+
+	# Search in subdirectory within classes path, following namespace
+	# this would also match classes files with just a ".php" extension, instead
+	# of the ".class.php" extension (still matched later)
+	if( strpos( $p_class, 'Mantis\\' ) === 0 ) {
+		# Remove base "Mantis" part from namespace
+		$t_class = substr( $p_class, 7 );
+	} else {
+		$t_class = $p_class;
+	}
+	$t_require_path = $g_class_path . str_replace('\\', DIRECTORY_SEPARATOR, $t_class) . '.php';
+	if( is_readable( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
 
 	# Remove namespace from class name
 	$t_end_of_namespace = strrpos( $p_class, '\\' );
@@ -203,7 +218,6 @@ function autoload_mantis( $p_class ) {
 		}	
 	}
 
-	global $g_class_path;
 	global $g_library_path;
 
 	$t_require_path = $g_class_path . $p_class . '.class.php';

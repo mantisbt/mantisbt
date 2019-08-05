@@ -15,18 +15,19 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Excel (2003 SP2 and above) export page
- *
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2019  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- *
- * @uses core.php
- * @uses print_api.php
  */
 
-require_once( 'core.php' );
-require_api( 'print_api.php' );
+namespace Mantis\Export;
 
-print_header_redirect( 'export_issues.php?type=excel');
+/**
+ * Interface for TableWriter objects
+ */
+interface TableWriterInterface {
+	//public function openToFile( $p_output_file_path );
+	public function openToBrowser( $p_output_file_name );
+	public function close();
+	public function addRowFromArray( array $p_data_array, array $p_types_array = null );
+}

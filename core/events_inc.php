@@ -151,4 +151,9 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+
+	# Export plugin events
+	'EVENT_EXPORT_DISCOVERY' => EVENT_TYPE_DEFAULT,
+	'EVENT_EXPORT_REQUEST' => EVENT_TYPE_FIRST,
+	'EVENT_EXPORT_OPTIONS_FORM' => EVENT_TYPE_OUTPUT,
 ) );

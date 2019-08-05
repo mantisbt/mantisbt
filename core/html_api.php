@@ -27,6 +27,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses api_token_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses config_api.php
@@ -35,12 +36,14 @@
  * @uses database_api.php
  * @uses error_api.php
  * @uses event_api.php
+ * @uses export_api.php
  * @uses file_api.php
  * @uses filter_api.php
  * @uses filter_constants_inc.php
  * @uses form_api.php
  * @uses helper_api.php
  * @uses lang_api.php
+ * @uses layout_api.php
  * @uses news_api.php
  * @uses php_api.php
  * @uses print_api.php
@@ -49,11 +52,10 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
- * @uses layout_api.php
- * @uses api_token_api.php
  */
 
 require_api( 'access_api.php' );
+require_api( 'api_token_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -62,12 +64,14 @@ require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'event_api.php' );
+require_api( 'export_api.php' );
 require_api( 'file_api.php' );
 require_api( 'filter_api.php' );
 require_api( 'filter_constants_inc.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'layout_api.php' );
 require_api( 'news_api.php' );
 require_api( 'php_api.php' );
 require_api( 'print_api.php' );
@@ -76,8 +80,6 @@ require_api( 'rss_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
-require_api( 'layout_api.php' );
-require_api( 'api_token_api.php' );
 
 $g_rss_feed_url = null;
 
@@ -570,18 +572,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 function print_summary_submenu() {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	if( count($t_menu_options) > 0 ) {
 		echo '<div class="space-10"></div>';
@@ -636,18 +627,7 @@ function print_manage_menu( $p_page = '' ) {
 
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 	foreach( $t_pages AS $t_page ) {
@@ -711,20 +691,14 @@ function print_manage_config_menu( $p_page = '' ) {
 	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
 	                                                    'label' => 'manage_columns_config' );
 
+	if( export_can_manage_global_config() ) {
+		$t_pages['manage_config_export_page.php'] = array( 'url'   => 'manage_config_export_page.php',
+														   'label' => 'export_configuration' );
+	}
+
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
-	$t_menu_options = array();
-	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<div class="space-10"></div>' . "\n";
 	echo '<div class="center">' . "\n";
@@ -769,27 +743,18 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
 	}
 
+	$t_pages['account_export_page.php'] = array( 'url'=>'account_export_page.php', 'label'=>'account_export_link' );
+
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 	foreach ( $t_pages as $t_page ) {
 		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
 		echo '<li class="' . $t_active . '">' . "\n";
 		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-		echo lang_get( $t_page['label'] );
+		echo lang_get_defaulted( $t_page['label'] );
 		echo '</a>' . "\n";
 		echo '</li>' . "\n";
 	}
@@ -864,18 +829,7 @@ function print_doc_menu( $p_page = '' ) {
 function print_summary_menu( $p_page = '', array $p_filter = null ) {
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
-	$t_menu_options = array();
-	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if( is_array( $t_callback_menu_options ) ) {
-				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-			} else {
-				if( !is_null( $t_callback_menu_options ) ) {
-					$t_menu_options[] = $t_callback_menu_options;
-				}
-			}
-		}
-	}
+	$t_menu_options = event_process_result_type_default( $t_event_menu_options );
 
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 
