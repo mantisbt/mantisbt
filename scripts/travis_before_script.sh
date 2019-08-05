@@ -145,6 +145,8 @@ step "Post-installation steps"
 echo "Creating project"
 $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 
+echo "Creating API Token"
+TOKEN=$($myphp tests/travis_create_api_token.php)
 
 # enable SOAP tests
 echo "Creating PHPUnit Bootstrap file"
@@ -152,6 +154,9 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME:$PORT/api/soap/mantisconnect.php?wsdl';
+		\$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] = true;
+		\$GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://$HOSTNAME:$PORT/api/rest/';
+		\$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '$TOKEN';
 	EOF
 
 echo "Adding custom configuration options"
