@@ -32,6 +32,12 @@ require_once 'RestBase.php';
  * @group REST
  */
 class RestIssueAddTest extends RestBase {
+
+	/**
+	 * @var array $versions
+	 */
+	protected $versions;
+
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -145,10 +151,9 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionString() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
-		$t_target_version_name = '2.0.x';
-		$t_fixed_in_version_name = '2.0.0-beta.3';
+		$t_version_name = $this->versions[2]['version'];
+		$t_target_version_name = $this->versions[1]['version'];
+		$t_fixed_in_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionString' );
 		$t_issue_to_add['version'] = $t_version_name;
@@ -172,8 +177,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectName() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
+		$t_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectName' );
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
@@ -196,9 +200,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectId() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
-		$t_version_id = 255;
+		$t_version_name = $this->versions[0]['version'];
+		$t_version_id = $this->versions[0]['id'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectId' );
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
@@ -222,11 +225,9 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		# Here we are using id for '1.3.2' and name for '1.3.1'.  ID should be used.
-		$t_wrong_version_name = '1.3.1';
-		$t_correct_version_name = '1.3.2';
-		$t_version_id = 255;  # '1.3.2'
+		$t_version_id = $this->versions[0]['id'];
+		$t_wrong_version_name = $this->versions[1]['version'];
+		$t_correct_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdAndMistatchingName' );
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
@@ -366,5 +367,19 @@ class RestIssueAddTest extends RestBase {
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
+	}
+
+	public function setUp() {
+		parent::setUp();
+
+		# Retrieve the 3 most recent versions
+		$this->dbConnect();
+		$t_versions = version_get_all_rows( $this->projectId, null, true );
+		if( count( $t_versions ) < 3 ) {
+			throw new Exception( "There must be at least 3 active versions defined in project $this->projectId" );
+		}
+		for( $i = 0; $i < 3; $i++) {
+			$this->versions[] = array_shift( $t_versions );
+		}
 	}
 }
