@@ -197,7 +197,7 @@
 				<para>Show the users' avatar</para>
 				<para>In addition to enabling this configuration option it is
 					necessary to install an avatar plugin like the
-					<ulink url="http://www.gravatar.com">Gravatar</ulink>
+					<ulink url="https://www.gravatar.com">Gravatar</ulink>
 					plugin which is bundled out of the box.
 				</para>
 			</listitem>
