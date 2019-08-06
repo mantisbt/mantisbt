@@ -454,6 +454,19 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value, $p_requ
 	} else {
 		echo ' maxlength="255"';
 	}
+	if( !empty( $p_field_def['valid_regexp'] ) ) {
+		# the custom field regex is evaluated with preg_match and looks for a partial match in the string
+		# however, the html property is matched for the whole string.
+		# unless we have explicit start and end tokens, adapt the html regex to allow a substring match.
+		$t_cf_regex = $p_field_def['valid_regexp'];
+		if( substr( $t_cf_regex, 0, 1 ) != '^' ) {
+			$t_cf_regex = '.*' . $t_cf_regex;
+		}
+		if( substr( $t_cf_regex, -1 ) != '$' ) {
+			$t_cf_regex .= '.*';
+		}
+		echo ' pattern="' . $t_cf_regex . '"';
+	}
 	echo ' value="' . string_attribute( $p_custom_field_value ) .'" />';
 }
 
