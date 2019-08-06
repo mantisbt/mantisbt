@@ -356,12 +356,15 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoCategory() {
+		global $g_allow_no_category;
+		$t_result = $g_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
+
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoCategory' );
 		unset( $t_issue_to_add['category'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( $t_result, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoProject() {
