@@ -36,6 +36,11 @@ SQL_CREATE_VERSIONS="INSERT INTO mantis_project_version_table
 	(1, '1.0.0', 'Obsolete version', true, true, $(($TIMESTAMP - 120))),
 	(1, '1.1.0', 'Released version', true, false, $(($TIMESTAMP - 60))),
 	(1, '2.0.0', 'Future version', false, false, $TIMESTAMP);"
+SQL_CREATE_TAGS="INSERT INTO mantis_tag_table
+	(user_id, name, description, date_created, date_updated)
+	VALUES
+	(0, 'modern-ui', '', $TIMESTAMP, $TIMESTAMP),
+	(0, 'patch', '', $TIMESTAMP, $TIMESTAMP);"
 
 
 # -----------------------------------------------------------------------------
@@ -150,9 +155,10 @@ curl --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php
 # -----------------------------------------------------------------------------
 step "Post-installation steps"
 
-echo "Creating project and versions"
+echo "Creating project, versions and tags"
 $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 $DB_CMD "$SQL_CREATE_VERSIONS" $DB_CMD_SCHEMA
+$DB_CMD "$SQL_CREATE_TAGS" $DB_CMD_SCHEMA
 
 echo "Creating API Token"
 TOKEN=$($myphp tests/travis_create_api_token.php)
