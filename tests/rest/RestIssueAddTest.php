@@ -309,6 +309,9 @@ class RestIssueAddTest extends RestBase {
 
 		# TODO: 404 is returned here after issue is created.  We can improve this later.
 		$this->assertEquals( 404, $t_response->getStatusCode() );
+		# TODO: consequence of 404 is that the response does not contain an
+		# issue, but an exception - so there is no 'issue' key, and it is not
+		# possible to retrieve the created issue's ID to delete it after run.
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
@@ -325,6 +328,7 @@ class RestIssueAddTest extends RestBase {
 
 		# TODO: 404 is returned here after issue is created.  We can improve this later.
 		$this->assertEquals( 404, $t_response->getStatusCode() );
+		# TODO same comment as in testCreateIssueWithTagNameNotFound()
 		$t_body = json_decode( $t_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
