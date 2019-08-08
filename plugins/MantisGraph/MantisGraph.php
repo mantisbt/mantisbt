@@ -24,11 +24,26 @@
 class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
-	 * ChartJS colorschemes plugin
-	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/
+	 * Chart JS
+	 * @see https://www.chartjs.org/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
 	 */
-	const CHARTJS_COLORSCHEMES_VERSION = '0.3.0';
-	const CHARTJS_COLORSCHEMES_HASH = 'sha256-x/VBrVFabQZyhV1G+oKCy98gkqf/pW5aVAhaBRxJ/x4=';
+	const CHARTJS_VERSION = '2.8.0';
+	const CHARTJS_HASH = 'sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=';
+	const CHARTJSBUNDLE_HASH = 'sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=';
+
+	/**
+	 * ChartJS colorschemes plugin
+	 * @see https://nagix.github.io/chartjs-plugin-colorschemes/ Home page
+	 * @see https://www.jsdelivr.com/package/npm/chartjs-plugin-colorschemes CDN
+	 */
+	const CHARTJS_COLORSCHEMES_VERSION = '0.4.0';
+	const CHARTJS_COLORSCHEMES_HASH = 'sha256-Ctym065YsaugUvysT5nHayKynbiDGVpgNBqUePRAL+0=';
+
+	/**
+	 * CDN for Chart.JS libraries
+	 */
+	const CHARTJS_CDN = 'https://cdn.jsdelivr.net';
 
 	/**
 	 * A method that populates the plugin information and minimum requirements.
@@ -85,8 +100,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	/**
 	 * Add the RESTful routes that are handled by this plugin.
 	 *
-	 * @param $p_event_name The event name
-	 * @param $p_event_args The event arguments
+	 * @param string $p_event_name The event name
+	 * @param array  $p_event_args The event arguments
 	 * @return void
 	 */
 	function routes( $p_event_name, $p_event_args ) {
@@ -115,8 +130,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function csp_headers() {
 		if( config_get_global( 'cdn_enabled' ) == ON ) {
-			http_csp_add( 'script-src', 'https://cdnjs.cloudflare.com' );
-			http_csp_add( 'script-src', 'https://cdn.jsdelivr.net' );
+			http_csp_add( 'script-src', self::CHARTJS_CDN );
 		}
 	}
 
@@ -129,7 +143,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 			return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' .
 				plugin_page( 'issues_trend_page.php' ) . '">' . plugin_lang_get( 'issue_trends_link' ) . '</a>', );
 		} else {
-			return '';
+			return array();
 		}
 	}
 
@@ -140,15 +154,28 @@ class MantisGraphPlugin extends MantisPlugin  {
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
 			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.min.js', CHARTJS_HASH);
-				html_javascript_cdn_link('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/' . CHARTJS_VERSION . '/Chart.bundle.min.js', CHARTJSBUNDLE_HASH);
-				html_javascript_cdn_link('https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@' . self::CHARTJS_COLORSCHEMES_VERSION . '/dist/chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
+				$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
+
+				# Chart.js library
+				$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
+				html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+				html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
+
+				# Chart.js color schemes plugin
+				$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+				html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
 			} else {
-				echo '<script type="text/javascript" src="' . plugin_file('Chart-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file('Chart.bundle-' . CHARTJS_VERSION . '.min.js') . '"></script>';
-				echo '<script type="text/javascript" src="' . plugin_file( 'chartjs-plugin-colorschemes.min.js' ) . '"></script>';
+				$t_scripts = array(
+					plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ),
+					plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ),
+					plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js' ),
+				);
 			}
-			echo '<script type="text/javascript" src="' . plugin_file("MantisGraph.js") . '"></script>';
+
+			$t_scripts[] = plugin_file( "MantisGraph.js" );
+			foreach( $t_scripts as $t_script ) {
+				echo "\t", '<script src="' . $t_script . '"></script>', "\n";
+			}
 		}
 	}
 

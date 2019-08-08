@@ -23,8 +23,8 @@ ace-admin theme                   | 1.4.0     | customized
 moment.js                         | 2.15.2    | unpatched
 bootstrap-datetimepicker          | 4.17.47   | unpatched
 dropzone.js                       | 5.5.0     | unpatched
-chart.js                          | 2.7.3     | unpatched
-chartjs-plugin-colorschemes       | 0.3.0     | unpatched
+chart.js                          | 2.8.0     | unpatched
+chartjs-plugin-colorschemes       | 0.4.0     | unpatched
 typeahead.js                      | 1.1.1     | unpatched 
 list.js                           | 1.5.0     | unpatched
 
