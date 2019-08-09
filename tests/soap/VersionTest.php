@@ -33,7 +33,17 @@ require_once 'SoapBase.php';
  */
 class VersionTest extends SoapBase {
 
-	const DATE_ORDER = '2015-10-29T12:59:14+00:00';
+	/**
+	 * @var string $date_order Version date order
+	 */
+	protected $date_order;
+
+	/**
+	 * VersionTest constructor.
+	 */
+	public function __construct() {
+		$this->date_order = date( 'c' );
+	}
 
 	/**
 	 * Test Version
@@ -46,7 +56,7 @@ class VersionTest extends SoapBase {
 			'released' => true,
 			'description' => 'Test version',
 			'obsolete' => false,
-			'date_order'=> self::DATE_ORDER
+			'date_order'=> $this->date_order,
 		);
 	}
 
@@ -74,7 +84,7 @@ class VersionTest extends SoapBase {
 		$this->assertEquals( true, $t_version->released );
 		$this->assertEquals( 'Test version', $t_version->description );
 		$this->assertEquals( $this->getProjectId(), $t_version->project_id );
-		$this->assertEquals( $this->dateToUTC( self::DATE_ORDER ), $t_version_date );
+		$this->assertEquals( $this->dateToUTC( $this->date_order ), $t_version_date );
 		$this->assertEquals( false, $t_version->obsolete );
 	}
 
@@ -106,7 +116,7 @@ class VersionTest extends SoapBase {
 				$t_version_date = $this->dateToUTC( $t_version->date_order );
 
 				$this->assertEquals( '1.1', $t_version->name );
-				$this->assertEquals( $this->dateToUTC( self::DATE_ORDER ), $t_version_date );
+				$this->assertEquals( $this->dateToUTC( $this->date_order ), $t_version_date );
 				return;
 			}
 		}
