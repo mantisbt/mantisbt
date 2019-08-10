@@ -331,13 +331,6 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	}
 
 	# add users who contributed bugnotes
-	$t_bugnote_id = ( $p_bugnote_id === null ) ? bugnote_get_latest_id( $p_bug_id ) : $p_bugnote_id;
-	if( $t_bugnote_id !== 0 ) {
-		$t_bugnote_date = bugnote_get_field( $t_bugnote_id, 'last_modified' );
-	}
-	$t_bug = bug_get( $p_bug_id );
-	$t_bug_date = $t_bug->last_updated;
-
 	$t_notes_enabled = ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) );
 	db_param_push();
 	$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
@@ -393,6 +386,9 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'closed':
 		case 'bugnote':
 			$t_pref_field = 'email_on_' . $p_notify_type;
+			if( !$p_bugnote_id ) {
+				$p_bugnote_id = bugnote_get_latest_id( $p_bug_id );
+			}
 			break;
 		case 'owner':
 			# The email_on_assigned notification type is now effectively
@@ -419,6 +415,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	#  of user ids so we could pull them all in.  We'll see if it's necessary
 	$t_final_recipients = array();
 
+	$t_bug = bug_get( $p_bug_id );
 	$t_user_ids = array_keys( $t_recipients );
 	user_cache_array_rows( $t_user_ids );
 	user_pref_cache_array_rows( $t_user_ids );
@@ -461,9 +458,11 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
-		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $p_bug_id, $t_id )
-		 || ( $t_bugnote_id !== 0 &&
-				$t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id ) )
+		$t_view_bug_threshold = config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id );
+		if(   !access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_id )
+		   || (   $p_bugnote_id
+			   && !access_has_bugnote_level( $t_view_bug_threshold, $p_bugnote_id, $t_id )
+			  )
 		) {
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;
