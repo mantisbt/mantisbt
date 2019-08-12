@@ -3050,15 +3050,15 @@ $g_allow_no_category = OFF;
  * bugs that they report.
  * This feature is deprecated and is replaced with the option 'limit_view_unless_threshold'.
  * Set this option as OFF to be able to use the new one.
- * @see $g_limit_view_unless_threshold
+ * @deprecated 2.23.0 Use $g_limit_view_unless_threshold instead
  * @global integer $g_limit_reporters
  */
 $g_limit_reporters = OFF;
 
 /**
- * Threshold at wich a user can view all issues in the project (as allowed by other permissions)
- * Not meeting this threshold means the user can only see the issues reported, handled, or
- * monitored by him.
+ * Threshold at which a user can view all issues in the project (as allowed by other permissions)
+ * Not meeting this threshold means the user can only see the issues they reported,
+ * are handling or monitoring.
  * A value of ANYBODY means that all users have full visibility (as default)
  *
  * This is a replacement for old option 'limit_reporters'.

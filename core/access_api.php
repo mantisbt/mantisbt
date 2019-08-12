@@ -509,14 +509,14 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		return false;
 	}
 
-	# Check the requested access level, shotcut to fail if not satisfied
+	# Check the requested access level, shortcut to fail if not satisfied
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_access_level = access_get_project_level( $t_project_id, $p_user_id );
 	if( !access_compare_level( $t_access_level, $p_access_level ) ){
 		return false;
 	}
 
-	# If the level is met, we need to still verify access to the issue
+	# If the level is met, we still need to verify that user has access to the issue
 
 	# Check if the bug is private
 	$t_bug_is_user_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
@@ -896,11 +896,14 @@ function access_parse_array( array $p_access ) {
 }
 
 /**
- * Returns true if the user is limited for viewing issues, in the specified project,
- * accordint to 'limit_reporters' options
+ * Returns true if the user has limited view to issues in the specified project.
+ *
  * @param integer $p_project_id   Project id, or null for current project
  * @param integer $p_user_id      User id, or null for current user
  * @return boolean	Whether limited view applies
+ *
+ * @see $g_limit_view_unless_threshold
+ * @see $g_limit_reporters
  */
 function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
@@ -913,8 +916,9 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	if( ON != $t_old_limit_reporters ) {
 		$t_threshold_can_view = config_get( 'limit_view_unless_threshold', null, $t_user_id, $t_project_id );
 	} else {
-		# If old 'limit_reporters'  option is enabled, use that setting
-		# Note that the effective threshold can vary for each project, based on the reporting threshold configuration.
+		# If old 'limit_reporters' option is enabled, use that setting
+		# Note that the effective threshold can vary for each project, based on
+		# the reporting threshold configuration.
 		# To improve performance, esp. when processing for several projects, we
 		# build a static array holding that threshold for each project
 		static $s_thresholds = array();
