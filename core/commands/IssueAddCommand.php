@@ -221,7 +221,7 @@ class IssueAddCommand extends Command {
 			foreach( $t_issue['tags'] as $t_tag ) {
 				if( $t_tag['id'] === -1 ) {
 					throw new ClientException(
-						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_new_tag ),
+						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
 						ERROR_TAG_NOT_FOUND );
 					}
 			}
