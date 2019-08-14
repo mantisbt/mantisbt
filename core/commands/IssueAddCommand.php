@@ -346,6 +346,9 @@ class IssueAddCommand extends Command {
 			foreach( $t_issue['tags'] as $t_tag ) {
 				if( $t_tag['id'] === -1 ) {
 					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id );
+					log_event( LOG_WEBSERVICE,
+						"created new tag '" . $t_tag['name'] . "' id '" . $t_tag['id'] . "'"
+					);
 				}
 
 				$t_tags[] = $t_tag;
