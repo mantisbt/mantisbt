@@ -219,7 +219,7 @@ class IssueAddCommand extends Command {
 
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) && !tag_can_create( $this->user_id ) ) {
 			foreach( $t_issue['tags'] as $t_tag ) {
-				if( $t_tag['id'] === -1 ) {
+				if( isset( $t_tag['id'] ) && $t_tag['id'] === -1 ) {
 					throw new ClientException(
 						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
 						ERROR_TAG_NOT_FOUND );
@@ -344,7 +344,7 @@ class IssueAddCommand extends Command {
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			$t_tags = array();
 			foreach( $t_issue['tags'] as $t_tag ) {
-				if( $t_tag['id'] === -1 ) {
+				if( isset( $t_tag['id'] ) && $t_tag['id'] === -1 ) {
 					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id );
 					log_event( LOG_WEBSERVICE,
 						"created new tag '" . $t_tag['name'] . "' id '" . $t_tag['id'] . "'"
