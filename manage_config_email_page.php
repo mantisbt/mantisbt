@@ -359,6 +359,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 
 	get_capability_row_for_email( lang_get( 'email_on_relationship_changed' ), 'relation' );
+	get_capability_row_for_email( lang_get( 'email_on_monitor' ), 'monitor' );
 
 	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_statuses as $t_status => $t_label ) {

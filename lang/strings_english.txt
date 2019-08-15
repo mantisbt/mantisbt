@@ -1482,6 +1482,7 @@ $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
 $s_email_on_updated = 'E-mail on Updated';
+$s_email_on_monitor = 'E-mail when user starts monitoring';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';

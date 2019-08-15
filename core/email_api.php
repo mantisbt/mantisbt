@@ -2102,7 +2102,7 @@ function email_shutdown_function() {
  * @return array List of actions
  */
 function email_get_actions() {
-	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation', 'monitor' );
 
 	if( config_get( 'enable_sponsorship' ) == ON ) {
 		$t_actions[] = 'sponsor';
