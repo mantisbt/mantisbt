@@ -80,11 +80,11 @@ $t_all_defs = multi_sort( $t_all_defs, 'name' );
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
-				<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
-				<th class="category"><?php echo lang_get( 'custom_field_project_count' ) ?></th>
-				<th class="category"><?php echo lang_get( 'custom_field_type' ) ?></th>
-				<th class="category"><?php echo lang_get( 'custom_field_possible_values' ) ?></th>
-				<th class="category"><?php echo lang_get( 'custom_field_default_value' ) ?></th>
+				<th><?php echo lang_get( 'custom_field_name' ) ?></th>
+				<th><?php echo lang_get( 'custom_field_project_count' ) ?></th>
+				<th><?php echo lang_get( 'custom_field_type' ) ?></th>
+				<th><?php echo lang_get( 'custom_field_possible_values' ) ?></th>
+				<th><?php echo lang_get( 'custom_field_default_value' ) ?></th>
 			</tr>
 		</thead>
 		<tbody>
