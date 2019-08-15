@@ -73,7 +73,7 @@ class IssueAttachmentTimelineEvent extends TimelineEvent {
 			. sprintf( lang_get( $t_string ),
 				prepare_user_name( $this->user_id ),
 				$t_bug_link,
-				$this->filename
+				string_html_specialchars( $this->filename )
 			)
 			. '</div>';
 		$t_html .= $this->html_end();
