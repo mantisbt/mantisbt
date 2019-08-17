@@ -27,7 +27,7 @@ function build_docbook() {
 if [[ -z $DOCBOOK ]]
 then
 	echo "Executing MantisBT test scripts..."
-	phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+	vendor/bin/phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
 else
 	echo "Building DocBook..."
 	build_docbook
