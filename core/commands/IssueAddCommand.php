@@ -91,6 +91,7 @@ class IssueAddCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 * @throws ClientException
 	 */
 	protected function validate() {
 		$this->user_id = auth_get_current_user_id();
@@ -332,6 +333,7 @@ class IssueAddCommand extends Command {
 	 * Process the command.
 	 *
 	 * @returns array Command response
+	 * @throws ClientException
 	 */
 	protected function process() {
 		$t_issue = $this->payload( 'issue' );
