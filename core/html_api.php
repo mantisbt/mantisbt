@@ -227,11 +227,18 @@ function html_css() {
 		html_css_link( $t_stylesheet_path );
 	}
 
-	# dropzone css
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		# Dropzone
 		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.css' );
+
+		# Lightgallery
+		html_css_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/' . LIGHTGALLERY_VERSION . '/css/lightgallery.min.css' );
 	} else {
+		# Dropzone
 		html_css_link( 'dropzone-' . DROPZONE_VERSION . '.min.css' );
+
+		# Lightgallery
+		html_css_link( 'lightgallery-' . LIGHTGALLERY_VERSION . '.min.css' );
 	}
 }
 
@@ -332,12 +339,18 @@ function html_head_javascript() {
 
 		# Dropzone
 		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/' . DROPZONE_VERSION . '/min/dropzone.min.js', DROPZONE_HASH );
+
+		# Lightgallery
+		html_javascript_cdn_link( 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/' . LIGHTGALLERY_VERSION . '/js/lightgallery-all.min.js', LIGHTGALLERY_HASH );
 	} else {
 		# JQuery
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 
 		# Dropzone
 		html_javascript_link( 'dropzone-' . DROPZONE_VERSION . '.min.js' );
+
+		# Lightgallery
+		html_javascript_link( 'lightgallery-all-' . LIGHTGALLERY_VERSION . '.min.js' );
 	}
 
 	html_javascript_link( 'common.js' );
