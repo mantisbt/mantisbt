@@ -906,13 +906,14 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
  * @return void
  */
 function layout_sidebar_dropdown_menu( $p_menu_options ) {
-	echo '<li class="dropdown">' . "\n";
-   	echo '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . "\n";
+	echo '<li class="hover">' . "\n";
+   	echo '<a href="#">' . "\n";
    	echo '<i class="menu-icon fa fa-plug"></i>' . "\n";
    	echo '<span class="menu-text">' . lang_get( "plugins" ) . '</span>' . "\n";
    	echo '<span class="caret"></span>';
    	echo '</a>' . "\n";
-        echo '<ul class="dropdown-menu" >';
+	echo '<b class="arrow"></b>';
+        echo '<ul class="submenu" >';
 	foreach( $p_menu_options as $t_menu_option ) {
 		
 			$t_icon = isset( $t_menu_option['icon'] ) ? $t_menu_option['icon'] : 'fa-plug';
