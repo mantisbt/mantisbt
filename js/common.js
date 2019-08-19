@@ -48,6 +48,12 @@ $(document).ready( function() {
         ToggleDiv( t_div );
     });
 
+	$('div > #bugnotes').lightGallery({
+		selector: '.bug-attachment-preview-image > a',
+		share: false,
+		autoplayControls: false
+	});
+
 	/**
 	 * Manage the navbar project menu initializacion and events
 	 * for focus and key presses.

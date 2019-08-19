@@ -668,6 +668,10 @@ define( 'LISTJS_HASH', 'sha384-JDmRxRiXkNkskRM5AD4qHRGk9ItwZ9flbqOpsRYs8SOrIRwcM
 define( 'DROPZONE_VERSION', '5.5.0' );
 define( 'DROPZONE_HASH', 'sha384-TBYvJK9bRa7Ii3OZh+eaXb5r98Ad36+kotsxTD3tIEa9vgJOQ0lRMfZtWAJxPq4P' );
 
+# Lightgallery JS
+define( 'LIGHTGALLERY_VERSION', '1.6.12' );
+define( 'LIGHTGALLERY_HASH', '' );
+
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
 
