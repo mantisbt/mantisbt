@@ -301,40 +301,55 @@ class RestIssueAddTest extends RestBase {
 		$this->deleteAfterRun( $t_issue['id'] );
 	}
 
-	public function testCreateIssueWithTagNameNotFound() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
-		$t_issue_to_add['tags'] = array( array( 'name' => 'tag-not-found' ) );
+	/**
+	 * Tests creation of issues with invalid tags.
+	 *
+	 * @param mixed   $p_tag         Tag element
+	 * @param integer $p_status_code Expected status code
+	 *
+	 * @dataProvider providerTagsInvalid
+	 */
+	public function testCreateIssueWithTagInvalid( $p_tag, $p_status_code ) {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add['tags'] = array( $p_tag );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
-
-		# TODO: 404 is returned here after issue is created.  We can improve this later.
-		$this->assertEquals( 404, $t_response->getStatusCode() );
-		# TODO: consequence of 404 is that the response does not contain an
-		# issue, but an exception - so there is no 'issue' key, and it is not
-		# possible to retrieve the created issue's ID to delete it after run.
-		$t_body = json_decode( $t_response->getBody(), true );
-		$t_issue = $t_body['issue'];
-
-		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
-
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->assertEquals( $p_status_code, $t_response->getStatusCode() );
 	}
 
-	public function testCreateIssueWithTagIdNotFound() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
-		$t_issue_to_add['tags'] = array( array( 'id' => 100000 ) );
+	/**
+	 * Provide a series of invalid Tag elements.
+	 *
+	 * Test case structure:
+	 *   <case> => array( <tag element>, <error code> )
+	 *
+	 * Creating an issue with <tag element> should fail to with <error code>.
+	 *
+	 * @return array List of test cases
+	 *
+	 */
+	public function providerTagsInvalid() {
+		return array(
+			'EmptyTagElement' => array(
+				array(),
+				HTTP_STATUS_BAD_REQUEST
+			),
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+			'NotATagElement' => array(
+				array( 'what' => 'ever' ),
+				HTTP_STATUS_BAD_REQUEST
+			),
 
-		# TODO: 404 is returned here after issue is created.  We can improve this later.
-		$this->assertEquals( 404, $t_response->getStatusCode() );
-		# TODO same comment as in testCreateIssueWithTagNameNotFound()
-		$t_body = json_decode( $t_response->getBody(), true );
-		$t_issue = $t_body['issue'];
+			'InvalidTagId' => array(
+				array( 'id' => -1 ),
+				HTTP_STATUS_NOT_FOUND
+			),
 
-		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
-
-		$this->deleteAfterRun( $t_issue['id'] );
+			'EmptyTagName' => array(
+				array( 'name' => '' ),
+				HTTP_STATUS_BAD_REQUEST
+			),
+		);
 	}
 
 	public function testCreateIssueNoSummary() {
