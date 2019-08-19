@@ -135,7 +135,7 @@ class RestBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $p_relative_path The relative path under `/api/rest/` e.g. `/issues`.
-	 * @param string $p_payload The payload object, it will be json encoded before sending.
+	 * @param mixed $p_payload The payload object, it will be json encoded before sending.
 	 * @return mixed|string The response object.
 	 */
 	protected function post( $p_relative_path, $p_payload ) {
