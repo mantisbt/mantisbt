@@ -93,20 +93,20 @@ use Mantis\Exceptions\ClientException;
  * @property int category_id
  * @property int date_submitted
  * @property int last_updated
- * @property-read int eta
- * @property-read string os
- * @property-read string os_build
- * @property-read string platform
- * @property-read string version
+ * @property int eta
+ * @property string os
+ * @property string os_build
+ * @property string platform
+ * @property string version
  * @property string fixed_in_version
  * @property string target_version
  * @property string build
- * @property-read int view_state
+ * @property int view_state
  * @property string summary
- * @property-read float sponsorship_total
- * @property-read int sticky
+ * @property float sponsorship_total
+ * @property int sticky
  * @property int due_date
- * @property-read int profile_id
+ * @property int profile_id
  * @property string description
  * @property string steps_to_reproduce
  * @property string additional_information
