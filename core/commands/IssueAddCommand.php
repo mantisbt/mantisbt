@@ -92,7 +92,7 @@ class IssueAddCommand extends Command {
 	/**
 	 * Validate the data.
 	 */
-	function validate() {
+	protected function validate() {
 		$this->user_id = auth_get_current_user_id();
 		$t_clone_info = $this->option( 'clone_info', array() );
 
