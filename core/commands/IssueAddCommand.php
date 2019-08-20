@@ -222,7 +222,7 @@ class IssueAddCommand extends Command {
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			foreach( $t_issue['tags'] as $t_tag ) {
 				$t_tag_id = $this->get_tag_id( $t_tag );
-				if( $t_tag_id === -1  && !tag_can_create( $this->user_id ) ) {
+				if( $t_tag_id === false && !tag_can_create( $this->user_id ) ) {
 					throw new ClientException(
 						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
 						ERROR_TAG_NOT_FOUND );
@@ -348,7 +348,7 @@ class IssueAddCommand extends Command {
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			$t_tags = array();
 			foreach( $t_issue['tags'] as $t_tag ) {
-				if( $this->get_tag_id( $t_tag ) === -1 ) {
+				if( $this->get_tag_id( $t_tag ) === false ) {
 					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id );
 					log_event( LOG_WEBSERVICE,
 						"created new tag '" . $t_tag['name'] . "' id '" . $t_tag['id'] . "'"
@@ -467,14 +467,14 @@ class IssueAddCommand extends Command {
 	 * A tag element is an array with either an 'id', a 'name' key, or both.
 	 * If id is provided, check that it exists and return it;
 	 * if name is supplied, look it up and return the corresponding ID, or
-	 * -1 if not found (meaning Tag should be created).
+	 * false if not found.
 	 *
 	 * @param array $p_tag Tag element
-	 * @return integer Tag ID or -1 if tag must be created
+	 * @return integer|false Tag ID or false if tag does not exist
 	 * @throws ClientException
 	 */
 	private function get_tag_id( array $p_tag ) {
-		if( isset( $p_tag['id'] ) && $p_tag['id'] != -1 ) {
+		if( isset( $p_tag['id'] ) ) {
 			$t_tag_id = $p_tag['id'];
 			if( !tag_exists( $t_tag_id ) ) {
 				throw new ClientException(
@@ -483,15 +483,15 @@ class IssueAddCommand extends Command {
 				);
 			}
 		} elseif( isset( $p_tag['name'] ) ) {
-			$t_existing_tag = tag_get_by_name( $p_tag['name'] );
-			if( $t_existing_tag === false && isset( $p_tag['id'] ) && $p_tag['id'] != -1 ) {
+			$t_matches = array();
+			if( !tag_name_is_valid( $p_tag['name'], $t_matches )) {
 				throw new ClientException(
-					"Tag {$p_tag['name']} not found.",
-					ERROR_TAG_NOT_FOUND
+					"Tag name '{$p_tag['name']}' is not valid.",
+					ERROR_TAG_NAME_INVALID
 				);
 			}
-
-			$t_tag_id = $t_existing_tag['id'];
+			$t_existing_tag = tag_get_by_name( $p_tag['name'] );
+			$t_tag_id = $t_existing_tag === false ? false : $t_existing_tag['id'];
 		} else {
 			throw new ClientException(
 				'Tag without id or name.',
