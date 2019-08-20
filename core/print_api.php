@@ -1943,9 +1943,9 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 	}
 
 	if( $p_attachment['can_delete'] ) {
-		echo '<a class="noprint" href="bug_file_delete.php?file_id=' . $p_attachment['id'] .
+		echo '<a class="noprint red zoom-130 pull-right" href="bug_file_delete.php?file_id=' . $p_attachment['id'] .
 			form_security_param( 'bug_file_delete', $p_security_token ) . '">
-			<i class="1 ace-icon fa fa-trash-o"></i></a>';
+			<i class="1 ace-icon fa fa-trash-o bigger-115"></i></a>';
 	}
 
 }

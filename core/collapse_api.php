@@ -71,9 +71,9 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	}
 
 	if( $t_display ) {
-		$p_css_class .= ' collapse-open noprint';
+		$p_css_class .= ' well well-sm collapse-open noprint';
 	} else {
-		$p_css_class .= ' collapse-closed noprint';
+		$p_css_class .= ' well well-sm collapse-closed noprint';
 	}
 
 	$g_open_collapse_section = true;
@@ -109,7 +109,7 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	$t_div_id = $t_block . '_closed';
 	$t_collapse_status_class = $t_display ? 'collapse-open' : 'collapse-closed';
 	echo "\n" . '<div id="', $t_div_id,
-		'" class="collapse-section-closed ' . $t_collapse_status_class . '">';
+		'" class="well well-sm collapse-section-closed ' . $t_collapse_status_class . '">';
 }
 
 /**
@@ -124,11 +124,11 @@ function collapse_icon( $p_name, $p_section = '' ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
-		$t_icon = 'fa-minus-square-o';
+		$t_icon = 'fa-chevron-up bigger-120';
 		$t_alt = '-';
 		$t_id = $p_name . '_open_link';
 	} else {
-		$t_icon = 'fa-plus-square-o';
+		$t_icon = 'fa-chevron-down bigger-120';
 		$t_alt = '+';
 		$t_id = $p_name. '_closed_link';
 	}
