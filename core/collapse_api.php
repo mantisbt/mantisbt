@@ -71,9 +71,9 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	}
 
 	if( $t_display ) {
-		$p_css_class .= ' collapse-open noprint';
+		$p_css_class .= ' well well-sm collapse-open noprint';
 	} else {
-		$p_css_class .= ' collapse-closed noprint';
+		$p_css_class .= ' well well-sm collapse-closed noprint';
 	}
 
 	$g_open_collapse_section = true;
@@ -110,7 +110,7 @@ function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 	$t_div_id = $t_block . '_closed';
 	$p_css_class .= $t_display ? ' collapse-open' : ' collapse-closed';
 	echo "\n" . '<div id="', $t_div_id,
-		'" class="collapse-section-closed ' . $p_css_class . '">';
+		'" class="well well-sm collapse-section-closed ' . $p_css_class . '">';
 }
 
 /**
