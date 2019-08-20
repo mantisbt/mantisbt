@@ -499,7 +499,7 @@ function tag_get_name( $p_tag_id ) {
 /**
  * Return a tag row for the given name.
  * @param string $p_name The tag name to retrieve from the database.
- * @return array|boolean Tag row
+ * @return array|false Tag row
  */
 function tag_get_by_name( $p_name ) {
 	db_param_push();
