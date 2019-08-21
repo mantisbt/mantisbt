@@ -1364,23 +1364,28 @@ class BugFilterQuery extends DbQuery {
 				foreach( $t_field as $t_filter_member ) {
 					$t_filter_member = stripslashes( $t_filter_member );
 					if( filter_field_is_none( $t_filter_member ) ) {
-						# coerce filter value if selecting META_FILTER_NONE so it will match empty fields
-						$t_filter_member = '';
-
 						# but also add those _not_ present in the custom field string table
-						array_push( $t_filter_array, $t_table_name . '.value IS NULL' );
-					}
+						$t_filter_array[] = $t_table_name . '.value IS NULL';
 
-					switch( $t_def['type'] ) {
-						case CUSTOM_FIELD_TYPE_CHECKBOX:
-						case CUSTOM_FIELD_TYPE_MULTILIST:
-							$t_filter_array[] = $this->sql_like( $t_table_name . '.value', '%|' . $t_filter_member . '|%' );
-							break;
-						case CUSTOM_FIELD_TYPE_TEXTAREA:
-							$t_filter_array[] = $this->sql_like( $t_table_name . '.text', '%' . $t_filter_member . '%' );
-							break;
-						default:
-							$t_filter_array[] = $t_table_name . '.value = ' . $this->param( $t_filter_member );
+						switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								$t_filter_array[] = $t_table_name . '.text = ' . $this->param( '' );
+								break;
+							default;
+								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( '' );
+						}
+					} else {
+						switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_CHECKBOX:
+							case CUSTOM_FIELD_TYPE_MULTILIST:
+								$t_filter_array[] = $this->sql_like( $t_table_name . '.value', '%|' . $t_filter_member . '|%' );
+								break;
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								$t_filter_array[] = $this->sql_like( $t_table_name . '.text', '%' . $t_filter_member . '%' );
+								break;
+							default:
+								$t_filter_array[] = $t_table_name . '.value = ' . $this->param( $t_filter_member );
+						}
 					}
 				}
 				$t_custom_where_clause .= '(' . implode( ' OR ', $t_filter_array );
