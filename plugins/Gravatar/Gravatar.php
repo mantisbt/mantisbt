@@ -59,7 +59,7 @@ class GravatarPlugin extends MantisPlugin {
 	 */
 	function register() {
 		$this->name = plugin_lang_get( 'title' );
-		$this->description = lang_get( 'description' );
+		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
 
 		$this->version = MANTIS_VERSION;
