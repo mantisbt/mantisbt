@@ -636,7 +636,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_trace ) {
-			$t_full_id = implode( $p_parents, ";" ) . ';' . $t_id;
+			$t_full_id = implode( ";", $p_parents ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}

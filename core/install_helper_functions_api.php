@@ -130,7 +130,7 @@ function check_pgsql_bool_columns() {
 	foreach( $t_bool_columns as $t_table_name => $t_columns ) {
 		$t_table = db_get_table( $t_table_name );
 		$t_where .= 'table_name = \'' . $t_table . '\' AND column_name IN ( \''
-			. implode( $t_columns, '\', \'' )
+			. implode( "', '", $t_columns )
 			. '\' ) OR ';
 	}
 	$t_sql = 'SELECT table_name, column_name, data_type, column_default, is_nullable
