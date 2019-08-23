@@ -424,6 +424,12 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;String&gt;: Bugnote text</para></listitem>
+					<listitem><para>&lt;String&gt;: Bug Id</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return value</title>
+					<listitem><para>&lt;String&gt;: Updated Bugnote text</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
