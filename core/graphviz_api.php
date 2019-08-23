@@ -416,7 +416,7 @@ class Graph {
 			$t_result[] = $t_name . '=' . $t_value;
 		}
 
-		return '[ ' . join( ', ', $t_result ) . ' ]';
+		return '[ ' . implode( ', ', $t_result ) . ' ]';
 	}
 
 	/**

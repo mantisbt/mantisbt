@@ -489,7 +489,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 	} else if( 1 == count( $t_project_ids ) ) {
 		$t_project_filter = ' project_id=' . reset( $t_project_ids );
 	} else {
-		$t_project_filter = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
+		$t_project_filter = ' project_id IN (' . implode( ',', $t_project_ids ) . ')';
 	}
 
 	return $t_project_filter;

@@ -653,7 +653,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ';' ) . ';' . $t_id;
+			$t_full_id = implode( $p_parents, ';' ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}
