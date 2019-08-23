@@ -294,7 +294,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 		}
 
 		if( !empty( $t_clean_pairs ) ) {
-			$t_query = '?' . join( '&', $t_clean_pairs );
+			$t_query = '?' . implode( '&', $t_clean_pairs );
 		}
 	}
 

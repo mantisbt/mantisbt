@@ -529,7 +529,7 @@ function layout_navbar_projects_menu() {
 	echo '</a>' . "\n";
 
 	echo '<ul id="projects-list" class=" dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">' . "\n";
-	layout_navbar_projects_list( join( ';', helper_get_current_project_trace() ), true, null, true );
+	layout_navbar_projects_list( implode( ';', helper_get_current_project_trace() ), true, null, true );
 	echo '</ul>' . "\n";
 	echo '</li>' . "\n";
 }
@@ -636,7 +636,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 
 	foreach( $t_project_ids as $t_id ) {
 		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
+			$t_full_id = implode( $p_parents, ";" ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}

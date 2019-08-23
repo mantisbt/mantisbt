@@ -262,7 +262,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 		return true;
 	}
 
-	$t_category_ids = join( ',', $t_category_ids );
+	$t_category_ids = implode( ',', $t_category_ids );
 
 	# update bug history entries
 	$t_query = 'SELECT id, category_id FROM {bug} WHERE category_id IN ( ' . $t_category_ids . ' )';
