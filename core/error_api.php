@@ -497,7 +497,7 @@ function error_stack_trace_as_string( $p_exception = null ) {
 				$t_args[] = error_build_parameter_string( $t_value );
 			}
 
-			$t_output .= '( ' . implode( $t_args, ', ' ) . " )\n";
+			$t_output .= '( ' . implode( ', ', $t_args ) . " )\n";
 		} else {
 			$t_output .= "()\n";
 		}
@@ -550,7 +550,7 @@ function error_print_stack_trace( $p_exception = null ) {
 			isset( $t_frame['class'] ) ? $t_frame['class'] : '-',
 			isset( $t_frame['type'] ) ? $t_frame['type'] : '-',
 			isset( $t_frame['function'] ) ? $t_frame['function'] : '-',
-			htmlentities( implode( $t_args, ', ' ), ENT_COMPAT, 'UTF-8' )
+			htmlentities( implode( ', ', $t_args ), ENT_COMPAT, 'UTF-8' )
 		);
 
 	}
@@ -576,7 +576,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
+		return '<array> { ' . implode( ', ', $t_results ) . ' }';
 	} else if( is_object( $p_param ) ) {
 		$t_results = array();
 
@@ -587,7 +587,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . $t_name . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
+		return '<Object><' . $t_class_name . '> ( ' . implode( ', ', $t_results ) . ' )';
 	} else {
 		if( $p_showtype ) {
 			return '<' . gettype( $p_param ) . '>' . var_export( $p_param, true );

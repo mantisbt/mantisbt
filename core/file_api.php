@@ -850,7 +850,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	$t_query = 'INSERT INTO ' . $t_file_table . '
-		( ' . implode(', ', array_keys( $t_param ) ) . ' )
+		( ' . implode( ', ', array_keys( $t_param ) ) . ' )
 	VALUES
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );

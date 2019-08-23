@@ -163,7 +163,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_query = 'INSERT INTO ' . $t_file_table . '
-		( ' . implode(', ', array_keys( $t_param ) ) . ' )
+		( ' . implode( ', ', array_keys( $t_param ) ) . ' )
 	VALUES
 		( ' . $t_query_param . ' )';
 	db_query( $t_query, array_values( $t_param ) );

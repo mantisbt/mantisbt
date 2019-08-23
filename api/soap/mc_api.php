@@ -1201,7 +1201,7 @@ function error_get_stack_trace() {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( ', ', $t_args ) . ')';
 			} else {
 				$t_trace .= '()';
 			}
@@ -1223,7 +1223,7 @@ function error_get_stack_trace() {
 					$t_args[] = error_build_parameter_string( $t_value );
 				}
 
-				$t_trace .= '(' . implode( $t_args, ', ' ) . ')';
+				$t_trace .= '(' . implode( ', ', $t_args ) . ')';
 			} else {
 				$t_trace .= '()';
 			}
