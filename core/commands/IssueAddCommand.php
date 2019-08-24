@@ -225,7 +225,9 @@ class IssueAddCommand extends Command {
 				if( $t_tag_id === false && !tag_can_create( $this->user_id ) ) {
 					throw new ClientException(
 						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
-						ERROR_TAG_NOT_FOUND );
+						ERROR_TAG_NOT_FOUND,
+						array( $t_tag['name'] )
+					);
 				}
 			}
 		}
@@ -480,7 +482,8 @@ class IssueAddCommand extends Command {
 			if( !tag_exists( $t_tag_id ) ) {
 				throw new ClientException(
 					"Tag with id $t_tag_id not found.",
-					ERROR_TAG_NOT_FOUND
+					ERROR_TAG_NOT_FOUND,
+					array( $t_tag_id )
 				);
 			}
 		} elseif( isset( $p_tag['name'] ) ) {
@@ -488,7 +491,8 @@ class IssueAddCommand extends Command {
 			if( !tag_name_is_valid( $p_tag['name'], $t_matches )) {
 				throw new ClientException(
 					"Tag name '{$p_tag['name']}' is not valid.",
-					ERROR_TAG_NAME_INVALID
+					ERROR_TAG_NAME_INVALID,
+					array( $p_tag['name'] )
 				);
 			}
 			$t_existing_tag = tag_get_by_name( $p_tag['name'] );
