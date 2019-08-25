@@ -71,9 +71,9 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	}
 
 	if( $t_display ) {
-		$p_css_class .= ' well well-sm collapse-open noprint';
+		$p_css_class .= ' collapse-open noprint';
 	} else {
-		$p_css_class .= ' well well-sm collapse-closed noprint';
+		$p_css_class .= ' collapse-closed noprint';
 	}
 
 	$g_open_collapse_section = true;
@@ -89,9 +89,10 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
  * This will be visible if the block is collapsed and javascript is enabled.
  * @param string $p_name    Collapse block name.
  * @param string $p_section Collapse block section.
+ * @param string $p_css_class CSS class to apply to the div (defaults to none).
  * @return void
  */
-function collapse_closed( $p_name, $p_section = '' ) {
+function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
@@ -107,9 +108,9 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	$g_open_collapse_section = false;
 
 	$t_div_id = $t_block . '_closed';
-	$t_collapse_status_class = $t_display ? 'collapse-open' : 'collapse-closed';
+	$p_css_class .= $t_display ? ' collapse-open' : ' collapse-closed';
 	echo "\n" . '<div id="', $t_div_id,
-		'" class="well well-sm collapse-section-closed ' . $t_collapse_status_class . '">';
+		'" class="collapse-section-closed ' . $p_css_class . '">';
 }
 
 /**

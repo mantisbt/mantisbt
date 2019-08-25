@@ -1881,7 +1881,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
 		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
-		collapse_open( $t_collapse_id );
+		collapse_open( $t_collapse_id, '', 'well well-sm' );
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -1894,7 +1894,7 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		} else if( $p_attachment['type'] === 'image' ) {
 			print_bug_attachment_preview_image( $p_attachment );
 		}
-		collapse_closed( $t_collapse_id );
+		collapse_closed( $t_collapse_id, '', 'well well-sm' );
 		print_bug_attachment_header( $p_attachment, $p_security_token );
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
