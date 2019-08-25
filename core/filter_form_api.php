@@ -2112,20 +2112,14 @@ function print_filter_custom_field_date( $p_field_id, array $p_filter = null ) {
 	$t_included_projects = filter_get_included_projects( $p_filter );
 	$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
 
-	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
-	# may be wrong for dates before early 2001.
-	if( is_array( $t_values ) ) {
-		array_multisort( $t_values, SORT_NUMERIC, SORT_ASC );
-	}
-
 	$t_sel_start_year = null;
 	$t_sel_end_year = null;
-	if( isset( $t_values[0] ) ) {
-		$t_sel_start_year = date( 'Y', $t_values[0] );
-	}
-	$t_count = count( $t_values );
-	if( isset( $t_values[$t_count - 1] ) ) {
-		$t_sel_end_year = date( 'Y', $t_values[$t_count - 1] );
+	if( is_array( $t_values ) && !empty( $t_values ) ) {
+		# Sort the values so they are ordered numerically
+		# (otherwise they are treated as strings, which may be wrong for dates before early 2001)
+		array_multisort( $t_values, SORT_NUMERIC, SORT_ASC );
+		$t_sel_start_year = date( 'Y', reset( $t_values ) );
+		$t_sel_end_year = date( 'Y', end( $t_values ) );
 	}
 
 	$t_start = date( 'U' );
