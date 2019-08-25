@@ -27,7 +27,13 @@ use \Mantis\Export\Cell;
  * Provides the functionality of legacy core excel/sml export format.
  */
 class MantisExcelWriter extends TableWriterAbstract {
+	use ObFileWriter;
+
+	const BROWSER = 0;
+	const FILE = 1;
+
 	protected $worksheet_title ='';
+	protected $destination = null;
 
 	public function addRowFromArray( array $p_data_array, array $p_types_array = null ) {
 		echo '<Row>';
@@ -53,6 +59,7 @@ class MantisExcelWriter extends TableWriterAbstract {
 	}
 
 	public function openToBrowser( $p_output_file_name ) {
+		$this->destination = self::BROWSER;
 		$t_filename = pathinfo( $p_output_file_name, PATHINFO_FILENAME );
 		$t_title = preg_replace( '/[\/:*?"<>|]/', '', $t_filename );
 		$this->worksheet_title = $t_title;
@@ -64,8 +71,18 @@ class MantisExcelWriter extends TableWriterAbstract {
 		echo $this->xml_header();
 	}
 
+	public function openToFile( $p_output_file_path ) {
+		$this->destination = self::FILE;
+		$this->file_start( $p_output_file_path );
+
+		echo $this->xml_header();
+	}
+
 	public function close() {
 		echo $this->xml_footer();
+		if( $this->destination == self::FILE ) {
+			$this->file_end();
+		}
 	}
 
 	protected function xml_header() {

@@ -86,6 +86,7 @@ class MantisLegacyExportPlugin extends \MantisPlugin {
 	 * @return \Mantis\Export\TableWriterInterface	An instantiated writer object
 	 */
 	function ev_export_request( $p_event, $p_id ) {
+		plugin_require_api( 'classes/ObFileWriter.php' );
 		switch( $p_id ) {
 			case 'MantisLegacyExport_csv':
 				plugin_require_api( 'classes/MantisCsvWriter.php' );

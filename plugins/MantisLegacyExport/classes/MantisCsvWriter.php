@@ -27,8 +27,14 @@ use \Mantis\Export\Cell;
  * Provides the functionality of legacy core csv export format.
  */
 class MantisCsvWriter extends TableWriterAbstract {
+	use ObFileWriter;
+
+	const BROWSER = 0;
+	const FILE = 1;
+
 	public $newline;
 	public $separator;
+	protected $destination = null;
 
 	public function __construct() {
 		$this->newline = "\r\n";
@@ -36,6 +42,7 @@ class MantisCsvWriter extends TableWriterAbstract {
 	}
 
 	public function openToBrowser( $p_filename ) {
+		$this->destination = self::BROWSER;
 		$t_filename = pathinfo( $p_filename, PATHINFO_FILENAME );
 		$t_filename = urlencode( file_clean_name( $t_filename ) );
 		http_caching_headers( false );
@@ -51,6 +58,12 @@ class MantisCsvWriter extends TableWriterAbstract {
 		}
 		echo UTF8_BOM;
 
+	}
+
+	public function openToFile( $p_output_file_path ) {
+		$this->destination = self::FILE;
+		$this->file_start( $p_output_file_path );
+		echo UTF8_BOM;
 	}
 
 	public function addRowFromArray( array $p_data_array, array $p_types_array = null ) {
@@ -81,6 +94,9 @@ class MantisCsvWriter extends TableWriterAbstract {
 	}
 
 	public function close() {
+		if( $this->destination == self::FILE ) {
+			$this->file_end();
+		}
 	}
 
 	protected function escapeString( $p_string ) {
