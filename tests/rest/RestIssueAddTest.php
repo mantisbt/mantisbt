@@ -313,6 +313,27 @@ class RestIssueAddTest extends RestBase {
 		$this->deleteAfterRun( $t_issue_id );
 	}
 
+	public function testCreateIssueWithTagExisting() {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+
+		# Tag by name
+		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+
+		$this->deleteAfterRun( $t_issue_id );
+
+		# Tag by id
+		$t_tag = tag_get_by_name( $this->tag_name );
+		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+
+		$this->deleteAfterRun( $t_issue_id );
+	}
+
 	/**
 	 * Checks that the issue was created successfully and the tag was properly attached.
 	 *
