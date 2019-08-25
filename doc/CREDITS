@@ -55,8 +55,8 @@ Victor Boctor
 Damien Regad
 Paul Richards
 Kenzaburo Ito
-Glenn Henshaw
 Carlos Proensa
+Glenn Henshaw
 Julian Fitzell
 David Hicks
 John Reese
@@ -64,8 +64,8 @@ Roland Becker
 Rafik Robeal
 Jeroen Latour
 Siebrand Mazeland
-Robert Munteanu
 translatewiki.net
+Robert Munteanu
 Gianluca Sforna
 André Eisenbach
 Daryn Warriner
@@ -74,136 +74,110 @@ Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
-Joel C. Llano
-Vladimir Shulev
-Bastian Pfenningschmidt
 Kornel Lesinski
+Bastian Pfenningschmidt
+Vladimir Shulev
+Joel C. Llano
 Adrian Spinei
-zakman
 Martin Fuchs
+zakman
 jbrugger
 jctrosset
 Kirill Krasnov
 ryandesign
 Bob Le Bricodeur
 rufinus
-jhuggins
-Rasmus Lerdorf
 David Newcomb
-atrol
+Rasmus Lerdorf
+jhuggins
 yarick123
-robertjf
 jotel
-Frank Rodgers
+robertjf
 Luke Lee
-davidu
+Frank Rodgers
 Martin Schleußer
-planser
 Chris Fitch
+planser
 Johan Guilbaud
 Tamás Gulácsi
-myplacedk
-Franck Villaume
-Matej Habrnal
-Véronique Maginot
+davidu
 dependabot[bot]
+myplacedk
+Matej Habrnal
+Franck Villaume
+Véronique Maginot
 smhanson
 vwegert
 Stefan Pettersson
+luzpaz
 Daniel Tschinder
+James Crickmere
+Manilal
 Vincent Sels
-torija
-Betsy Gamrat
-Dominik Blunk
-Jim Hanley
-Giovanni Giacobbi
-scoates
-cyclespersecond
-Val Kulkov
 Stéphane Veyret
-Dan Moore
-Christian Weiske
+torija
+Jim Hanley
+Dominik Blunk
+cyclespersecond
+Betsy Gamrat
+Val Kulkov
+Giovanni Giacobbi
+Zipher04
+scoates
+Allan Brazute
+elmarculino
+jeckyhl
+mfoXen
+Alexander Menk
 puklos
+Tarik Sedlarevic
+Dan Moore
+Markus Schneider
 Sebastian Limbach
 Matt McCutchen
-Anders Sandblad
-Markus Schneider
-CasN
-Alexander Menk
-elmarculino
-Tarik Sedlarevic
-Romain CABASSOT
-Justin Theberge
-Manilal
-Alexander Ishmuradov
-jeckyhl
 Raimund Herbert
-libregeek
-luz.paz
-luzpaz
-Zipher
-mfoXen
 Saga Musix
-EthraZa
-Sergei Kuznetcov
-Sergio Del Franco
-Dmitriy V Kuranov
-Dawit Ayalew
-The Gitter Badger
-Todd Whitesel
-David W. Juntgen
-wapznw
-Zipher04
-Daniel N
-cheesecracker
-cybd
-cybernet
-davethegr8
-watergad
-dwethell
-elen-ayanyan
-elpoutro
-epenet
-ermolaev
-gcompagnon
-greenius
-Brian Wrightson
-Bob Clough
-Bill Stidham
-mbaranski
-Benjamin Renard
+Grigoriy Ermolaev
+Anders Sandblad
+Christian Weiske
+Romain CABASSOT
+Alexander Ishmuradov
+Cas Nuy
+Justin Theberge
 naveenbali
-petertc
-Andreas Stieger
-rainflood
-rk4n3
-Andreas Schopper
-Allan Brazute
 Alexander Maringer
-spidgorny
-talentant
-tfromm
+Andreas Schopper
+Andreas Stieger
+Benjamin Renard
+Bill Stidham
+Bob Clough
+Brian Wrightson
+Daniel N
+David W. Juntgen
+Dawit Ayalew
+Dmitriy V Kuranov
+Edward Rudd
+Florent Daigniere
+Gulacsi Tamas
+Heiko Schneider-Lange
+Henning Eiben
+Ian MacKenzie
+Jacky Alcine
+Jacob Hoover
+Jadran Josimovic
+Jeremy Vriens
 Jingshao Chen
 Jonas Nockert
 José D. Grieco
-Jeremy Vriens
 Karl Wiggisser
-Jadran Josimovic
-Jacob Hoover
-Jacky Alcine
 Larry Lewis
 Laszlo Kovacs
 LeoZandvliet
-Ian MacKenzie
-Henning Eiben
 MS-Astra
-Heiko Schneider-Lange
 Marcin Kłeczek
 Marco Dings
 Marco Ribeiro
 Martin Dennhardt
-Gulacsi Tamas
-Grigoriy
 MatthieuR
 Maurycy13
 Michael Lorer
@@ -214,14 +188,36 @@ Olivier Mengué
 Patrick Massot
 Peter Dave Hello
 Pier-Luc Duchaine
-Florent Daigniere
 Raul Baldner junior
 Raymond van Asperen
-Edward Rudd
 Ross Nelson
 Ryan Rafe Lee
 SL-Gundam
 Sebastian Kayser
+Sergei Kuznetcov
+Sergio Del Franco
+The Gitter Badger
+Todd Whitesel
+cheesecracker
+cybd
+cybernet
+davethegr8
+dwethell
+elen-ayanyan
+elpoutro
+epenet
+gcompagnon
+greenius
+l2m83
+mbaranski
+petertc
+rainflood
+rk4n3
+spidgorny
+talentant
+tfromm
+wapznw
+watergad
 Adrian Spinei
 
 Other Contributors
