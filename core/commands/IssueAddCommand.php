@@ -358,6 +358,7 @@ class IssueAddCommand extends Command {
 				$t_tags[] = $t_tag;
 			}
 
+			# @TODO should this be replaced by TagAttachCommand, as suggested in #24441 ?
 			mci_tag_set_for_issue( $t_issue_id, $t_tags, $this->user_id );
 		}
 
