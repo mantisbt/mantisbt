@@ -38,6 +38,11 @@ class RestIssueAddTest extends RestBase {
 	 */
 	protected $versions;
 
+	/**
+	 * @var string $tag_name
+	 */
+	protected $tag_name;
+
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -283,22 +288,49 @@ class RestIssueAddTest extends RestBase {
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
-	public function testCreateIssueWithTags() {
-		# TODO: Create/cleanup tags once supported by the API, till then use dump from official bug tracker
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTags' );
-		$t_issue_to_add['tags'] = array( array( 'name' => 'modern-ui' ), array( 'name' => 'patch' ) );
+	/**
+	 * New tag should be created and attached to a new issue
+	 */
+	public function testCreateIssueWithTagNotExisting() {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+
+		# Change threshold to disable tag creation
+		$t_threshold = config_set( 'tag_create_threshold', NOBODY );
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$this->assertEquals(
+			HTTP_STATUS_NOT_FOUND,
+			$t_response->getStatusCode(),
+			'New issue with non-existing tag while not allowed to create tags'
+		);
+
+		# Reset threshold and try again
+		config_set( 'tag_create_threshold', $t_threshold );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
-		$t_body = json_decode( $t_response->getBody(), true );
+		$this->deleteAfterRun( $t_issue_id );
+	}
+
+	/**
+	 * Checks that the issue was created successfully and the tag was properly attached.
+	 *
+	 * @param string $p_tag_name
+	 * @param \GuzzleHttp\Psr7\Response $p_response
+	 *
+	 * @return integer Created issue Id
+	 */
+	protected function assertIssueCreatedWithTag( $p_tag_name, $p_response ) {
+		$this->assertEquals( 201, $p_response->getStatusCode() );
+
+		$t_body = json_decode( $p_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
 		$this->assertTrue( isset( $t_issue['tags'] ), 'tags set' );
-		$this->assertEquals( 'modern-ui', $t_issue['tags'][0]['name'] );
-		$this->assertEquals( 'patch', $t_issue['tags'][1]['name'] );
+		$this->assertEquals( $this->tag_name, $t_issue['tags'][0]['name'] );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		return $t_issue['id'];
 	}
 
 	/**
@@ -403,5 +435,12 @@ class RestIssueAddTest extends RestBase {
 		for( $i = 0; $i < 3; $i++) {
 			$this->versions[] = array_shift( $t_versions );
 		}
+
+		# Generate a unique tag name
+		do {
+			$this->tag_name = 'new-tag-' . rand();
+		} while( !tag_is_unique( $this->tag_name ) );
 	}
+
+
 }
