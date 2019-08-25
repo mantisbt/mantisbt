@@ -354,7 +354,6 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 ?>
 	<form method="post" action="tag_attach.php" class="form-inline">
 	<?php echo form_security_field( 'tag_attach' )?>
-	<label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
 	<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
 	<?php print_tag_input( $p_bug_id, $p_string ); ?>
 	<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
@@ -371,6 +370,7 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 ?>
+	<label class="inline small"><?php printf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
 	<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 	<input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
 	<select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
