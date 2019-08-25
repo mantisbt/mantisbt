@@ -108,6 +108,22 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</select>
 		</td>
 	</tr>
+  <tr>
+      <td class="category">
+          <?php echo lang_get( 'custom_field_color_foreground' ) ?>
+      </td>
+      <td>
+          <input type="color" id="custom-field-color-foreground" name="color_foreground" size="8" value="<?php echo $t_definition['color_foreground'] != '' ? $t_definition['color_foreground'] : '#000000' ?>" />
+      </td>
+  </tr>
+  <tr>
+      <td class="category">
+          <?php echo lang_get( 'custom_field_color_background' ) ?>
+      </td>
+      <td>
+          <input type="color" id="custom-field-color-background" name="color_background" size="8" value="<?php echo $t_definition['color_background'] != '' ? $t_definition['color_background'] : '#ffffff' ?>" />
+      </td>
+  </tr>
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>

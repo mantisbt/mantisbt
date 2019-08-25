@@ -713,8 +713,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
 	echo '<tr>';
-	echo '<th class="bug-custom-field category">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
-	echo '<td class="bug-custom-field" colspan="5">';
+	echo '<th class="bug-custom-field category" style="', custom_field_style ( $t_def ), '">', string_display_line( lang_get_defaulted( $t_def['name'] ) ), '</th>';
+	echo '<td class="bug-custom-field" colspan="5" style="', custom_field_style ( $t_def ), '">';
 	print_custom_field_value( $t_def, $t_id, $f_bug_id );
 	echo '</td></tr>';
 }
