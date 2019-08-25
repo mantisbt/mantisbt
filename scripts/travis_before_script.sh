@@ -23,11 +23,24 @@ MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 MANTIS_CONFIG=config/config_inc.php
 
+TIMESTAMP=$(date "+%s")
+
 SQL_CREATE_DB="CREATE DATABASE $MANTIS_DB_NAME;"
 SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
 	(name, inherit_global, description)
 	VALUES
 	('Test Project',true,'Travis-CI Test Project');"
+SQL_CREATE_VERSIONS="INSERT INTO mantis_project_version_table
+	(project_id, version, description, released, obsolete, date_order)
+	VALUES
+	(1, '1.0.0', 'Obsolete version', true, true, $(($TIMESTAMP - 120))),
+	(1, '1.1.0', 'Released version', true, false, $(($TIMESTAMP - 60))),
+	(1, '2.0.0', 'Future version', false, false, $TIMESTAMP);"
+SQL_CREATE_TAGS="INSERT INTO mantis_tag_table
+	(user_id, name, description, date_created, date_updated)
+	VALUES
+	(0, 'modern-ui', '', $TIMESTAMP, $TIMESTAMP),
+	(0, 'patch', '', $TIMESTAMP, $TIMESTAMP);"
 
 
 # -----------------------------------------------------------------------------
@@ -142,9 +155,13 @@ curl --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php
 # -----------------------------------------------------------------------------
 step "Post-installation steps"
 
-echo "Creating project"
+echo "Creating project, versions and tags"
 $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
+$DB_CMD "$SQL_CREATE_VERSIONS" $DB_CMD_SCHEMA
+$DB_CMD "$SQL_CREATE_TAGS" $DB_CMD_SCHEMA
 
+echo "Creating API Token"
+TOKEN=$($myphp tests/travis_create_api_token.php)
 
 # enable SOAP tests
 echo "Creating PHPUnit Bootstrap file"
@@ -152,6 +169,9 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME:$PORT/api/soap/mantisconnect.php?wsdl';
+		\$GLOBALS['MANTIS_TESTSUITE_REST_ENABLED'] = true;
+		\$GLOBALS['MANTIS_TESTSUITE_REST_HOST'] = 'http://$HOSTNAME:$PORT/api/rest/';
+		\$GLOBALS['MANTIS_TESTSUITE_API_TOKEN'] = '$TOKEN';
 	EOF
 
 echo "Adding custom configuration options"
@@ -162,6 +182,7 @@ cat <<-EOF >> $MANTIS_CONFIG
 	\$g_allow_no_category = ON;
 	\$g_due_date_update_threshold = DEVELOPER;
 	\$g_due_date_view_threshold = DEVELOPER;
+	\$g_enable_product_build = ON;
 	\$g_enable_project_documentation = ON;
 	\$g_time_tracking_enabled = ON;
 	EOF

@@ -84,6 +84,24 @@ function api_token_hash( $p_token ) {
 }
 
 /**
+ * Checks that the specified token name is unique to the user.
+ *
+ * @param string $p_token_name The token name.
+ * @param string $p_user_id    The user id.
+ *
+ * @return bool True if unique, False if token already exists
+ */
+function api_token_name_is_unique( $p_token_name, $p_user_id ) {
+	db_param_push();
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
+	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
+
+	$t_row = db_fetch_array( $t_result );
+
+	return $t_row === false;
+}
+
+/**
  * Ensure that the specified token name is unique to the user, otherwise,
  * prompt the user with an error.
  *
@@ -91,13 +109,7 @@ function api_token_hash( $p_token ) {
  * @param string $p_user_id The user id.
  */
 function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
-	db_param_push();
-	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if ( $t_row ) {
+	if ( !api_token_name_is_unique( $p_token_name, $p_user_id ) ) {
 		error_parameters( $p_token_name );
 		trigger_error( ERROR_API_TOKEN_NAME_NOT_UNIQUE, ERROR );
 	}

@@ -32,6 +32,17 @@ require_once 'RestBase.php';
  * @group REST
  */
 class RestIssueAddTest extends RestBase {
+
+	/**
+	 * @var array $versions
+	 */
+	protected $versions;
+
+	/**
+	 * @var string $tag_name
+	 */
+	protected $tag_name;
+
 	public function testCreateIssueWithMinimalFields() {
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithMinimalFields' );
 		$t_response = $this->post( '/issues', $t_issue_to_add );
@@ -145,10 +156,9 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionString() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
-		$t_target_version_name = '2.0.x';
-		$t_fixed_in_version_name = '2.0.0-beta.3';
+		$t_version_name = $this->versions[2]['version'];
+		$t_target_version_name = $this->versions[1]['version'];
+		$t_fixed_in_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionString' );
 		$t_issue_to_add['version'] = $t_version_name;
@@ -172,8 +182,7 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectName() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
+		$t_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectName' );
 		$t_issue_to_add['version'] = array( 'name' => $t_version_name );
@@ -196,9 +205,8 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectId() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		$t_version_name = '1.3.2';
-		$t_version_id = 255;
+		$t_version_name = $this->versions[0]['version'];
+		$t_version_id = $this->versions[0]['id'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectId' );
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id );
@@ -222,11 +230,9 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueWithVersionObjectIdAndMistatchingName() {
-		# TODO: Use version APIs to get create/get test values from DB.  For now use data from dump of official bugtracker
-		# Here we are using id for '1.3.2' and name for '1.3.1'.  ID should be used.
-		$t_wrong_version_name = '1.3.1';
-		$t_correct_version_name = '1.3.2';
-		$t_version_id = 255;  # '1.3.2'
+		$t_version_id = $this->versions[0]['id'];
+		$t_wrong_version_name = $this->versions[1]['version'];
+		$t_correct_version_name = $this->versions[0]['version'];
 
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithVersionObjectIdAndMistatchingName' );
 		$t_issue_to_add['version'] = array( 'id' => $t_version_id, 'name' => $t_wrong_version_name );
@@ -282,54 +288,121 @@ class RestIssueAddTest extends RestBase {
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
 
-	public function testCreateIssueWithTags() {
-		# TODO: Create/cleanup tags once supported by the API, till then use dump from official bug tracker
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTags' );
-		$t_issue_to_add['tags'] = array( array( 'name' => 'modern-ui' ), array( 'name' => 'patch' ) );
+	/**
+	 * New tag should be created and attached to a new issue
+	 */
+	public function testCreateIssueWithTagNotExisting() {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+
+		# Change threshold to disable tag creation
+		$t_threshold = config_set( 'tag_create_threshold', NOBODY );
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$this->assertEquals(
+			HTTP_STATUS_NOT_FOUND,
+			$t_response->getStatusCode(),
+			'New issue with non-existing tag while not allowed to create tags'
+		);
+
+		# Reset threshold and try again
+		config_set( 'tag_create_threshold', $t_threshold );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
 
-		$this->assertEquals( 201, $t_response->getStatusCode() );
-		$t_body = json_decode( $t_response->getBody(), true );
+		$this->deleteAfterRun( $t_issue_id );
+	}
+
+	public function testCreateIssueWithTagExisting() {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+
+		# Tag by name
+		$t_issue_to_add['tags'] = array( array( 'name' => $this->tag_name ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+
+		$this->deleteAfterRun( $t_issue_id );
+
+		# Tag by id
+		$t_tag = tag_get_by_name( $this->tag_name );
+		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag['id'] ) );
+
+		$t_response = $this->post( '/issues', $t_issue_to_add );
+		$t_issue_id = $this->assertIssueCreatedWithTag( $this->tag_name, $t_response );
+
+		$this->deleteAfterRun( $t_issue_id );
+	}
+
+	/**
+	 * Checks that the issue was created successfully and the tag was properly attached.
+	 *
+	 * @param string $p_tag_name
+	 * @param \GuzzleHttp\Psr7\Response $p_response
+	 *
+	 * @return integer Created issue Id
+	 */
+	protected function assertIssueCreatedWithTag( $p_tag_name, $p_response ) {
+		$this->assertEquals( 201, $p_response->getStatusCode() );
+
+		$t_body = json_decode( $p_response->getBody(), true );
 		$t_issue = $t_body['issue'];
 
 		$this->assertTrue( isset( $t_issue['tags'] ), 'tags set' );
-		$this->assertEquals( 'modern-ui', $t_issue['tags'][0]['name'] );
-		$this->assertEquals( 'patch', $t_issue['tags'][1]['name'] );
+		$this->assertEquals( $this->tag_name, $t_issue['tags'][0]['name'] );
 
-		$this->deleteAfterRun( $t_issue['id'] );
+		return $t_issue['id'];
 	}
 
-	public function testCreateIssueWithTagNameNotFound() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
-		$t_issue_to_add['tags'] = array( array( 'name' => 'tag-not-found' ) );
+	/**
+	 * Tests creation of issues with invalid tags.
+	 *
+	 * @param mixed   $p_tag         Tag element
+	 * @param integer $p_status_code Expected status code
+	 *
+	 * @dataProvider providerTagsInvalid
+	 */
+	public function testCreateIssueWithTagInvalid( $p_tag, $p_status_code ) {
+		$t_issue_to_add = $this->getIssueToAdd( __METHOD__ );
+		$t_issue_to_add['tags'] = array( $p_tag );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
-
-		# TODO: 404 is returned here after issue is created.  We can improve this later.
-		$this->assertEquals( 404, $t_response->getStatusCode() );
-		$t_body = json_decode( $t_response->getBody(), true );
-		$t_issue = $t_body['issue'];
-
-		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
-
-		$this->deleteAfterRun( $t_issue['id'] );
+		$this->assertEquals( $p_status_code, $t_response->getStatusCode() );
 	}
 
-	public function testCreateIssueWithTagIdNotFound() {
-		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueWithTagsNotFound' );
-		$t_issue_to_add['tags'] = array( array( 'id' => 100000 ) );
+	/**
+	 * Provide a series of invalid Tag elements.
+	 *
+	 * Test case structure:
+	 *   <case> => array( <tag element>, <error code> )
+	 *
+	 * Creating an issue with <tag element> should fail to with <error code>.
+	 *
+	 * @return array List of test cases
+	 *
+	 */
+	public function providerTagsInvalid() {
+		return array(
+			'EmptyTagElement' => array(
+				array(),
+				HTTP_STATUS_BAD_REQUEST
+			),
 
-		$t_response = $this->post( '/issues', $t_issue_to_add );
+			'NotATagElement' => array(
+				array( 'what' => 'ever' ),
+				HTTP_STATUS_BAD_REQUEST
+			),
 
-		# TODO: 404 is returned here after issue is created.  We can improve this later.
-		$this->assertEquals( 404, $t_response->getStatusCode() );
-		$t_body = json_decode( $t_response->getBody(), true );
-		$t_issue = $t_body['issue'];
+			'InvalidTagId' => array(
+				array( 'id' => -1 ),
+				HTTP_STATUS_NOT_FOUND
+			),
 
-		$this->assertFalse( isset( $t_issue['tags'] ), 'tags set' );
-
-		$this->deleteAfterRun( $t_issue['id'] );
+			'EmptyTagName' => array(
+				array( 'name' => '' ),
+				HTTP_STATUS_BAD_REQUEST
+			),
+		);
 	}
 
 	public function testCreateIssueNoSummary() {
@@ -351,12 +424,15 @@ class RestIssueAddTest extends RestBase {
 	}
 
 	public function testCreateIssueNoCategory() {
+		global $g_allow_no_category;
+		$t_result = $g_allow_no_category ? HTTP_STATUS_CREATED : HTTP_STATUS_BAD_REQUEST;
+
 		$t_issue_to_add = $this->getIssueToAdd( 'RestIssueAddTest.testCreateIssueNoCategory' );
 		unset( $t_issue_to_add['category'] );
 
 		$t_response = $this->post( '/issues', $t_issue_to_add );
 
-		$this->assertEquals( 400, $t_response->getStatusCode() );
+		$this->assertEquals( $t_result, $t_response->getStatusCode() );
 	}
 
 	public function testCreateIssueNoProject() {
@@ -367,4 +443,25 @@ class RestIssueAddTest extends RestBase {
 
 		$this->assertEquals( 400, $t_response->getStatusCode() );
 	}
+
+	public function setUp() {
+		parent::setUp();
+
+		# Retrieve the 3 most recent versions
+		$this->dbConnect();
+		$t_versions = version_get_all_rows( $this->projectId, null, true );
+		if( count( $t_versions ) < 3 ) {
+			throw new Exception( "There must be at least 3 active versions defined in project $this->projectId" );
+		}
+		for( $i = 0; $i < 3; $i++) {
+			$this->versions[] = array_shift( $t_versions );
+		}
+
+		# Generate a unique tag name
+		do {
+			$this->tag_name = 'new-tag-' . rand();
+		} while( !tag_is_unique( $this->tag_name ) );
+	}
+
+
 }
