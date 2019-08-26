@@ -4361,7 +4361,7 @@ $g_global_settings = array(
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
-	'impersonate_user_threshold', 'email_retry_in_days'
+	'impersonate_user_threshold', 'email_retry_in_days','export_to_file_root_directory'
 );
 
 /**
@@ -4524,6 +4524,7 @@ $g_public_config_names = array(
 	'enable_sponsorship',
 	'eta_enum_string',
 	'excel_columns',
+	'export_to_file_allowed',
 	'fallback_language',
 	'favicon_image',
 	'file_download_content_type_overrides',
@@ -4876,3 +4877,17 @@ $g_webservice_rest_enabled = ON;
  * the attachment is linked to the note.  Or 0 for disabling this feature.
  */
 $g_issue_activity_note_attachments_seconds_threshold = 3;
+
+/**
+ * Whether export functionality is allowed to write local files.
+ */
+$g_export_to_file_allowed = OFF;
+
+/**
+ * When export is allowed to write files, this path will be:
+ * - The default directory for output files, when another path is not explicitly specified.
+ * - The base directory when the output file path is relative.
+ * - The root directory allowed for output file paths, so that it's only allowed to write in
+ *   this directory, or subdirectory (avoiding accessing upper levels with ../.. ).
+ */
+$g_export_to_file_root_directory = sys_get_temp_dir();

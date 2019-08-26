@@ -36,6 +36,8 @@
 
 use Mantis\Export\Cell;
 use Mantis\Export\TableWriterFactory;
+use Mantis\Export\Exceptions\ExportFileIOException;
+use Mantis\Exceptions\ServiceException;
 
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -303,4 +305,74 @@ function export_can_manage_global_config( $p_user_id = null ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 	return access_has_global_level( config_get( 'manage_configuration_threshold' , null, ALL_USERS, ALL_PROJECTS ), $p_user_id );
+}
+
+/**
+ * Returns true if the user is allowed to export to local files.
+ * @return boolean
+ */
+function export_file_is_allowed() {
+	$t_user_id = auth_get_current_user_id();
+	return ON == config_get( 'export_to_file_allowed', null, $t_user_id, ALL_PROJECTS );
+}
+
+/**
+ * Checks if the user is allowed to export to local files, and if not allowed, throws
+ * an exception.
+ * @throws ServiceException
+ */
+function export_ensure_file_is_allowed() {
+	if( !export_file_is_allowed() ) {
+		throw new ServiceException( 'Unknown file upload method', ERROR_GENERIC );
+	}
+}
+
+/**
+ * Validates and returns an absolute local file path (including directories and filename)
+ * and verify that the target directoy exists, is accessible, and is within the allowed
+ * boundaries set in confg option 'export_to_file_root_directory'.
+ * If the provided path is relative (no training directory separator), the returned path
+ * is built relative to the configured root.
+ * If any validation fails where the directories are not accessible or allowed, an
+ * exception will be thown.
+ * The input path parameter may copntain relative, or empty, directories parts. In that case
+ * the returned path will be an absolute route to the actual file to be used, according to
+ * configuration.
+ *
+ * @param string $p_filepath	File path to validate, including directories and filename
+ * @return string	New valid, canonical absolute path
+ * @throws ServiceException
+ * @throws ExportFileIOException
+ */
+function export_real_file_path( $p_filepath ) {
+	$t_rootdir = config_get_global( 'export_to_file_root_directory' );
+	$t_realrootdir = realpath( $t_rootdir );
+	if( false === $t_realrootdir ) {
+		#error, the directory must exist
+		throw new ServiceException( 'Export root directory not valid', ERROR_GENERIC );
+	}
+
+	$t_pathinfo = pathinfo( $p_filepath );
+	if( $t_pathinfo['dirname'] === '.' ) {
+		# this is, no directory path was provided
+		$t_build_dir = $t_realrootdir;
+	} elseif( strncmp( $t_pathinfo['dirname'], DIRECTORY_SEPARATOR, strlen( DIRECTORY_SEPARATOR ) ) !== 0 ) {
+		# if not start with '/', is a relative path
+		$t_build_dir = file_path_combine( $t_realrootdir, $t_pathinfo['dirname'] );
+	} else {
+		# starts with '/', is an absolute path
+		# check if it's within bounds
+		$t_realfiledir = realpath( $t_pathinfo['dirname'] );
+		if( false === $t_realfiledir ) {
+			#todo error, the directory must exist
+			throw new ExportFileIOException( 'Export directory not valid', ERROR_GENERIC );
+		}
+		if( strncmp( $t_realfiledir, $t_realrootdir, strlen( $t_realrootdir ) ) !== 0 ) {
+			# the requested path is not contained within the configured root, error
+			throw new ExportFileIOException( 'Export directory not valid', ERROR_GENERIC );
+		}
+		$t_build_dir = $t_pathinfo['dirname'];
+	}
+	file_ensure_valid_upload_path( $t_build_dir );
+	return file_path_combine( $t_build_dir, $t_pathinfo['basename'] );
 }

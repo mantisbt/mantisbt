@@ -30,5 +30,23 @@ abstract class TableWriterAbstract  implements TableWriterInterface {
 		return date( $t_date_format, $p_time );
 	}
 
-
+	/**
+	 * Always use this method to get a secure output file path.
+	 * Returns a validated, and transformed file path for the target output file. The resulting
+	 * path is a complete, absolute, path including the file name. Also checks if the system
+	 * configuration allows exporting to files.
+	 * If any validation fails, an exception will be thrown.
+	 * The input path parameter may copntain relative, or empty, directories parts. In that case
+	 * the returned path will be an absolute route to the actual file to be used, according to
+	 * configuration.
+	 *
+	 * @param string $p_filepath	Requested file path for the output file.
+	 * @return string		A valid file path, according to configuration.
+	 * @throws ServiceException
+	 * @throws ExportFileIOException
+	 */
+	function ensureLocalFilePath( $p_filepath ){
+		export_ensure_file_is_allowed();
+		return export_real_file_path( $p_filepath );
+	}
 }

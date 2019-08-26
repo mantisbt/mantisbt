@@ -73,7 +73,7 @@ class MantisExcelWriter extends TableWriterAbstract {
 
 	public function openToFile( $p_output_file_path ) {
 		$this->destination = self::FILE;
-		$this->file_start( $p_output_file_path );
+		$this->file_start( $this->ensureLocalFilePath( $p_output_file_path ) );
 
 		echo $this->xml_header();
 	}
