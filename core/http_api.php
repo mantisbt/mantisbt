@@ -185,6 +185,12 @@ function http_csp_value() {
 
 	$t_csp_value = '';
 
+	# frame-ancestors can't have 'none' together with other values.
+	if( count( $g_csp['frame-ancestors'] ) > 1 ) {
+		$t_key_none = array_search( "'none'", $g_csp['frame-ancestors'] );
+		unset( $g_csp['frame-ancestors'][$t_key_none] );
+	}
+
 	foreach ( $g_csp as $t_key => $t_values ) {
 		$t_csp_value .= $t_key . ' ' . implode( ' ', $t_values ) . '; ';
 	}
