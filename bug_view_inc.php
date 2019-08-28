@@ -218,12 +218,14 @@ if( $t_bottom_buttons_enabled ) {
 echo '<tbody>';
 
 if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
-    isset( $t_issue['view_state'] ) || isset( $t_issue_view['created_at'] ) || isset( $t_issue_view['updated_at'] ) ) {
+    isset( $t_issue['view_state'] ) || isset( $t_issue_view['created_at'] ) || isset( $t_issue_view['updated_at'] )
+) {
+
 	# Labels
 	echo '<tr class="bug-header">';
 	echo '<th class="bug-id category" width="15%">', isset( $t_issue['id'] ) ? lang_get( 'id' ) : '', '</th>';
 	echo '<th class="bug-project category" width="20%">', isset( $t_issue['project'] ) && isset( $t_issue['project']['name'] ) ? lang_get( 'email_project' ) : '', '</th>';
-	echo '<th class="bug-category category" width="15%">', isset( $t_issue['category'] ) && isset( $t_issue['category']['name'] ) ? lang_get( 'category' ) : '', '</th>';
+	echo '<th class="bug-category category" width="15%">', $t_flags['category_show'] ? lang_get( 'category' ) : '', '</th>';
 	echo '<th class="bug-view-status category" width="15%">', isset( $t_issue['view_state'] ) ? lang_get( 'view_status' ) : '', '</th>';
 	echo '<th class="bug-date-submitted category" width="15%">', isset( $t_issue_view['created_at'] ) ? lang_get( 'date_submitted' ) : '', '</th>';
 	echo '<th class="bug-last-modified category" width="20%">', isset( $t_issue_view['updated_at'] ) ? lang_get( 'last_update' ) : '','</th>';
@@ -238,7 +240,11 @@ if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show']
 	echo '<td class="bug-project">', $t_flags['project_show'] && isset( $t_issue['project']['name'] ) ? string_display_line( $t_issue['project']['name'] ) : '', '</td>';
 
 	# Category
-	echo '<td class="bug-category">', $t_flags['category_show'] ? string_display_line( $t_issue['category']['name'] ) : '', '</td>';
+	echo '<td class="bug-category">',
+		$t_flags['category_show'] && isset( $t_issue['category']['name'] )
+			? string_display_line( $t_issue['category']['name'] )
+			: '',
+		'</td>';
 
 	# View Status
 	echo '<td class="bug-view-status">', $t_flags['view_state_show'] && isset( $t_issue['view_state']['label'] ) ? string_display_line( $t_issue['view_state']['label'] ) : '', '</td>';
