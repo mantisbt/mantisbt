@@ -22,10 +22,8 @@
  * enough just to support relationship_graph_api.php. They don't
  * support subgraphs yet.
  *
- * The original Graphviz package is available at:
- * 	- http://www.graphviz.org/
- * Additional documentation can be found at:
- * 	- http://www.graphviz.org/Documentation.html
+ * The original Graphviz package including documentation is available at:
+ * 	- https://www.graphviz.org/
  *
  * @package CoreAPI
  * @subpackage GraphVizAPI

@@ -20,9 +20,7 @@
  * This uses GraphViz utilities to generate relationship graphs for
  * issues. GraphViz must be installed in order to use this feature.
  *
- * Graphviz is available at:
- * 	- http://www.graphviz.org/
- * 	- http://www.research.att.com/sw/tools/graphviz/
+ * Graphviz is available at: https://www.graphviz.org/
  *
  * Most Linux distributions already have a GraphViz package
  * conveniently available for download and install. Refer to
