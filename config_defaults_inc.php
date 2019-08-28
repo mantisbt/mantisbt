@@ -3789,8 +3789,7 @@ $g_rss_enabled = ON;
  * Show issue relationships using graphs.
  *
  * In order to use this feature, you must first install GraphViz.
- *
- * Graphviz homepage:    http://www.research.att.com/sw/tools/graphviz/
+ * @see https://www.graphviz.org/ Graphviz homepage
  *
  * Refer to the notes near the top of core/graphviz_api.php and
  * core/relationship_graph_api.php for more information.

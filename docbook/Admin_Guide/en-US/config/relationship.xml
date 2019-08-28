@@ -14,13 +14,13 @@
 					nodes and relationships as links between such nodes.  Possible values are ON or OFF.
 					Default is OFF.
 				</para>
-
-				<para>
-					This feature requires installing <ulink url="http://www.research.att.com/sw/tools/graphviz/">GraphViz</ulink>
-					(all OSes except Windows) or <ulink url="http://home.so-net.net.tw/oodtsen/wingraphviz/">WinGraphviz</ulink> (only Windows).
-					Refer to the notes near the top of core/graphviz_api.php and
-					core/relationship_graph_api.php for more information.
-				</para>
+				<note>
+					<para>This feature requires installing the
+						<ulink url="https://www.graphviz.org/">GraphViz</ulink> library.
+						Refer to the notes near the top of <filename>core/graphviz_api.php</filename>
+						and <filename>core/relationship_graph_api.php</filename> for more information.
+					</para>
+				</note>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
