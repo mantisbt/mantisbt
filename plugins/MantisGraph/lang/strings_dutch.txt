@@ -88,3 +88,4 @@ $s_plugin_MantisGraph_graph_page = 'Meldingsgeschiedenis als grafiek';
 $s_plugin_MantisGraph_graph_topdev = 'Top ontwikkelaars van opgeloste meldingen';
 $s_plugin_MantisGraph_graph_opendev = 'Ontwikkelaars van open meldingen';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Top Ontwikkelaars van Opgeloste Meldingen';
+$s_plugin_MantisGraph_other_categories = 'andere categorieën (%d)';

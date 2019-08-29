@@ -40,6 +40,7 @@
  *
  * @author Claw eg
  * @author DRIHEM
+ * @author HitomiAkane
  * @author Maroen1990
  * @author Meno25
  * @author Mido
@@ -1369,9 +1370,9 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'مسار التأكي
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'العدد الأقصى من طلبات العمق تم الوصول إليه. من فضلك اتصل بإداري النظام.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'أنت لا يمكنك إزالة آخر حساب إداري. لتنفيذ الفعل الذي طلبته، تحتاج إلى إنشاء حساب إداري آخر.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'خطأ تحويل صفحة، تأكد من أنه لا توجد فراغات خارج قطعة PHP (&lt;?php ?&gt;) في ملفات config_inc.php أو custom_*.php.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'لم يمكن العثور على وسم بهذا الاسم.';
-$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'وسم بهذا الاسم موجود بالفعل.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'اسم الوسم هذا غير صحيح.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'لم يتم العثور على الوسم "%1$s".';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'الوسم "%1$s" موجود مسبقاً.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'الوسم "%1$s" غير صالح.';
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'هذا الوسم ليس ملحقا بهذه العلة.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'هذا الوسم ملحق بالفعل بهذه العلة.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'النص لم يمكن العثور عليه.';
