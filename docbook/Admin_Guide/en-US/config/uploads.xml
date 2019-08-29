@@ -101,6 +101,20 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_preview_text_extensions</term>
+			<listitem>
+				<para>An array of file extensions (not including dots) for text files that can be previewed inline.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_preview_image_extensions</term>
+			<listitem>
+				<para>An array of file extensions (not including dots) for image files that can be previewed inline.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_fileinfo_magic_db_file</term>
 			<listitem>
 				<para>Specify the filename of the magic database file.
