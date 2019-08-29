@@ -2308,6 +2308,14 @@ $g_preview_image_extensions = array(
 );
 
 /**
+ * Extensions for audio files that can be played inline.
+ * @global array $g_preview_audio_extensions
+ */
+$g_preview_audio_extensions = array(
+	'mp3', 'wav', 'ogg'
+);
+
+/**
  * Specifies the maximum width for the auto-preview feature. If no maximum
  * width should be imposed then it should be set to 0.
  * @global integer $g_preview_max_width
@@ -4593,6 +4601,7 @@ $g_public_config_names = array(
 	'plugins_enabled',
 	'plugins_force_installed',
 	'preview_attachments_inline_max_size',
+	'preview_audio_extensions',
 	'preview_image_extensions',
 	'preview_max_height',
 	'preview_max_width',

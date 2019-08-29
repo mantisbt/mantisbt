@@ -1894,6 +1894,8 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 			print_bug_attachment_preview_text( $p_attachment );
 		} else if( $p_attachment['type'] === 'image' ) {
 			print_bug_attachment_preview_image( $p_attachment );
+		} else if( $p_attachment['type'] === 'audio' ) {
+			print_bug_attachment_preview_audio( $p_attachment );
 		}
 		collapse_closed( $t_collapse_id, '' );
 		print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -2002,6 +2004,23 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" style="' . string_attribute( $t_preview_style ) . '" />';
 	echo '</a></div>';
+}
+
+/**
+ * Prints the preview of an audio file attachment.
+ * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @return void
+ */
+function print_bug_attachment_preview_audio( array $p_attachment ) {
+	$t_file_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
+
+	echo "\n<div class=\"bug-attachment-preview-audio\">";
+	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+	echo "<audio controls>";
+	echo "<source src=\"" . string_attribute( $t_file_url ) . "\" type=\"audio/mpeg\">";
+  	echo lang_get( 'browser_does_not_support_audio' );
+	echo "</audio>";
+	echo "</a></div>";
 }
 
 /**
