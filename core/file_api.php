@@ -372,7 +372,6 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
-	$t_preview_audio_ext = config_get( 'preview_audio_extensions' );
 
 	$t_image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
@@ -420,13 +419,13 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_attachment['alt'] = $t_ext;
 
 		if( $t_attachment['exists'] && $t_attachment['can_download'] && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
-			if( in_array( $t_ext, $t_preview_text_ext, true ) ) {
+			if( stripos( $t_attachment['file_type'], 'text/' ) === 0 || in_array( $t_ext, $t_preview_text_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'text';
-			} else if( in_array( $t_ext, $t_preview_image_ext, true ) ) {
+			} else if( stripos( $t_attachment['file_type'], 'image/' ) === 0 || in_array( $t_ext, $t_preview_image_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
-			} else if( in_array( $t_ext, $t_preview_audio_ext, true ) ) {
+			} else if( stripos( $t_attachment['file_type'], 'audio/' ) === 0 ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'audio';
 			}
