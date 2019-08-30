@@ -114,7 +114,7 @@ function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 }
 
 /**
- * Marks the location where a +/- icon is placed in output
+ * Marks the location where a down/up-arrow icon is placed in output
  * for the user to toggle the collapse block status.
  * This should appear in both the open and closed phase of a block.
  * @param string $p_name    Collapse block name.
@@ -134,7 +134,7 @@ function collapse_icon( $p_name, $p_section = '' ) {
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" class="collapse-link noprint"><i class="fa ', $t_icon, '" title="', $t_alt, '"></i></a>';
+	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint"><i class="fa ', $t_icon, '" title="', $t_alt, '"></i></a>';
 }
 
 /**
