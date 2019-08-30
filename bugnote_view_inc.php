@@ -312,10 +312,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo string_display_links( $t_activity['note']->note );
 				$t_add_space = true;
 			}
-
-			if( $t_add_space && isset( $t_activity['attachments'] ) && count( $t_activity['attachments'] ) > 0 ) {
-				echo '<br /><br />';
-			}
 		} else {
 			if ( !$t_security_token_attachments_delete ) {
 				$t_security_token_attachments_delete = form_security_token( 'bug_file_delete' );

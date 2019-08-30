@@ -1877,11 +1877,12 @@ function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
  * @return void
  */
 function print_bug_attachment( array $p_attachment, $p_security_token ) {
+	echo '<div class="well well-xs">';
 	if( $p_attachment['preview'] ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
 		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
-		collapse_open( $t_collapse_id, '', 'well well-sm' );
+		collapse_open( $t_collapse_id, '');
 	}
 
 	print_bug_attachment_header( $p_attachment, $p_security_token );
@@ -1894,14 +1895,13 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 		} else if( $p_attachment['type'] === 'image' ) {
 			print_bug_attachment_preview_image( $p_attachment );
 		}
-		collapse_closed( $t_collapse_id, '', 'well well-sm' );
+		collapse_closed( $t_collapse_id, '' );
 		print_bug_attachment_header( $p_attachment, $p_security_token );
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
 		collapse_end( $t_collapse_id );
-	} else {
-		echo '<br />';
 	}
+	echo '</div>';
 }
 
 /**
@@ -1917,7 +1917,6 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
  * @return void
  */
 function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
-	echo "\n";
 	if( $p_attachment['exists'] ) {
 		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
@@ -1947,7 +1946,6 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 			form_security_param( 'bug_file_delete', $p_security_token ) . '">
 			<i class="1 ace-icon fa fa-trash-o bigger-115"></i></a>';
 	}
-
 }
 
 /**
