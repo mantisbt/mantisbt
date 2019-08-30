@@ -1283,7 +1283,8 @@ $s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
 $s_add_user_to_monitor = 'Add';
-$s_browser_does_not_support_audio = 'Your browser does not support playing audio files of this format.';
+$s_browser_does_not_support_audio = 'Your browser does not support audio tag.';
+$s_browser_does_not_support_video = 'Your browser does not support video tag.';
 
 # view_bug_page.php
 $s_bug_view_title = 'View Issue Details';

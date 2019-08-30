@@ -1878,10 +1878,15 @@ function print_bug_attachments_list( $p_bug_id, $p_security_token ) {
  */
 function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	echo '<div class="well well-xs">';
-	if( $p_attachment['preview'] ) {
+
+	if( $p_attachment['preview'] || $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
-		$g_collapse_cache_token[$t_collapse_id] = $p_attachment['type'] == 'image';
+		$g_collapse_cache_token[$t_collapse_id] = 
+			$p_attachment['type'] == 'image' ||
+			$p_attachment['type'] == 'audio' ||
+			$p_attachment['type'] == 'video';
+
 		collapse_open( $t_collapse_id, '');
 	}
 
@@ -1890,18 +1895,43 @@ function print_bug_attachment( array $p_attachment, $p_security_token ) {
 	if( $p_attachment['preview'] ) {
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
+
 		if( $p_attachment['type'] == 'text' ) {
 			print_bug_attachment_preview_text( $p_attachment );
 		} else if( $p_attachment['type'] === 'image' ) {
 			print_bug_attachment_preview_image( $p_attachment );
 		} else if( $p_attachment['type'] === 'audio' ) {
-			print_bug_attachment_preview_audio( $p_attachment );
+			print_bug_attachment_preview_audio( $p_attachment, $p_attachment['file_type'], $p_attachment['preview'] );
+		} else if( $p_attachment['type'] === 'video' ) {
+			print_bug_attachment_preview_video( $p_attachment, $p_attachment['file_type'], $p_attachment['preview'] );
 		}
+
 		collapse_closed( $t_collapse_id, '' );
+
 		print_bug_attachment_header( $p_attachment, $p_security_token );
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
 		collapse_end( $t_collapse_id );
+	} else {
+		# Audio / Video support showing control without preloading.
+		if( $p_attachment['type'] === 'audio' || $p_attachment['type'] === 'video' ) {
+			echo lang_get( 'word_separator' );
+			collapse_icon( $t_collapse_id );
+	
+			if( $p_attachment['type'] === 'audio' ) {
+				print_bug_attachment_preview_audio( $p_attachment, $p_attachment['file_type'], $p_attachment['preview'] );
+			} else if( $p_attachment['type'] === 'video' ) {
+				print_bug_attachment_preview_video( $p_attachment, $p_attachment['file_type'], $p_attachment['preview'] );
+			}
+	
+			collapse_closed( $t_collapse_id );
+			print_bug_attachment_header( $p_attachment, $p_security_token );
+			echo lang_get( 'word_separator' );
+			collapse_icon( $t_collapse_id );
+			collapse_end( $t_collapse_id );	
+		} else {
+			echo '<br />';
+		}
 	}
 	echo '</div>';
 }
@@ -2009,17 +2039,40 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 /**
  * Prints the preview of an audio file attachment.
  * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @param string $p_file_type mime type
+ * @param boolean $p_preload true to preload audio, false otherwise.
  * @return void
  */
-function print_bug_attachment_preview_audio( array $p_attachment ) {
+function print_bug_attachment_preview_audio( array $p_attachment, $p_file_type, $p_preload ) {
 	$t_file_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
+	$t_preload = $p_preload ? '' : ' preload="none"';
 
 	echo "\n<div class=\"bug-attachment-preview-audio\">";
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
-	echo "<audio controls>";
-	echo "<source src=\"" . string_attribute( $t_file_url ) . "\" type=\"audio/mpeg\">";
+	echo '<audio controls="controls"' . $t_preload . '>';
+	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
   	echo lang_get( 'browser_does_not_support_audio' );
 	echo "</audio>";
+	echo "</a></div>";
+}
+
+/**
+ * Prints the preview of an video file attachment.
+ * @param array $p_attachment An attachment array from within the array returned by the file_get_visible_attachments() function.
+ * @param string $p_file_type mime type
+ * @param boolean $p_preload true to preload video, false otherwise.
+ * @return void
+ */
+function print_bug_attachment_preview_video( array $p_attachment, $p_file_type, $p_preload ) {
+	$t_file_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
+	$t_preload = $p_preload ? '' : ' preload="none"';
+
+	echo "\n<div class=\"bug-attachment-preview-video\">";
+	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+	echo '<video controls="controls"' . $t_preload . '>';
+	echo '<source src="' . string_attribute( $t_file_url ) . '" type="' . string_attribute( $p_file_type ) . '">';
+  	echo lang_get( 'browser_does_not_support_video' );
+	echo "</video>";
 	echo "</a></div>";
 }
 
