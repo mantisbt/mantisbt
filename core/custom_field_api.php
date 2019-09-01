@@ -620,7 +620,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		$t_params[] = $p_field_id;
 		db_query( $t_query, $t_params );
 
-      custom_field_clear_cache( $p_field_id );
+			custom_field_clear_cache( $p_field_id );
 
 		return true;
 	}
