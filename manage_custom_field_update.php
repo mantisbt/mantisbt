@@ -70,8 +70,8 @@ $t_values['require_update']		= gpc_get_bool( 'require_update' );
 $t_values['require_resolved']	= gpc_get_bool( 'require_resolved' );
 $t_values['require_closed']		= gpc_get_bool( 'require_closed' );
 $t_values['filter_by']			= gpc_get_bool( 'filter_by' );
-$t_values['color_foreground'] = gpc_get_string( 'color_foreground' );
-$t_values['color_background'] = gpc_get_string( 'color_background' );
+$t_values['foreground_color']   = gpc_get_string( 'foreground_color' );
+$t_values['background_color']   = gpc_get_string( 'background_color' );
 
 $t_def = custom_field_get_definition( $f_field_id );
 if( $t_def['type'] != $t_values['type'] && custom_field_has_data( $f_field_id ) ) {

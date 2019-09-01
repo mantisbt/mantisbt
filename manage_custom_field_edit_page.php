@@ -108,22 +108,22 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</select>
 		</td>
 	</tr>
-  <tr>
-      <td class="category">
-          <?php echo lang_get( 'custom_field_color_foreground' ) ?>
-      </td>
-      <td>
-          <input type="color" id="custom-field-color-foreground" name="color_foreground" size="8" value="<?php echo $t_definition['color_foreground'] != '' ? $t_definition['color_foreground'] : '#000000' ?>" />
-      </td>
-  </tr>
-  <tr>
-      <td class="category">
-          <?php echo lang_get( 'custom_field_color_background' ) ?>
-      </td>
-      <td>
-          <input type="color" id="custom-field-color-background" name="color_background" size="8" value="<?php echo $t_definition['color_background'] != '' ? $t_definition['color_background'] : '#ffffff' ?>" />
-      </td>
-  </tr>
+    <tr>
+        <td class="category">
+            <?php echo lang_get( 'custom_field_foreground_color' ) ?>
+        </td>
+        <td>
+			<input type="text" id="custom-field-foreground-color" name="foreground_color" class="input-sm" size="32" maxlength="7" value="<?php echo string_attribute( $t_definition['foreground_color'] ) ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td class="category">
+            <?php echo lang_get( 'custom_field_background_color' ) ?>
+        </td>
+        <td>
+			<input type="text" id="custom-field-background-color" name="background_color" class="input-sm" size="32" maxlength="7" value="<?php echo string_attribute( $t_definition['background_color'] ) ?>" />
+        </td>
+    </tr>
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
@@ -142,10 +142,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 				<input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
 			</div>
 			<div class="textarea">
-				<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-				<textarea disabled="disabled" id="custom-field-default-value-textarea" name="default_value" class="form-control" cols="80" rows="10">
-<?php echo string_attribute( $t_definition['default_value'] ) ?>
-</textarea>
+				<textarea disabled="disabled" id="custom-field-default-value-textarea" name="default_value" class="form-control" cols="80" rows="10"><?php echo string_attribute( $t_definition['default_value'] ) ?></textarea>
 			</div>
 		</td>
 	</tr>

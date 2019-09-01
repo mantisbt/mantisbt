@@ -571,16 +571,6 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
 
-  # if foreground color is set to default (black), do not store it
-  if ( $p_def_array['color_foreground'] == '#000000') {
-      $p_def_array['color_foreground'] = '';    	
-  }
-
-  # if background color is set to default (white), do not store it
-  if ( $p_def_array['color_background'] == '#ffffff') {
-      $p_def_array['color_background'] = '';    	
-  }
-
 	db_param_push();
 
 	# Build fields update statement
@@ -591,8 +581,8 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'possible_values':
 			case 'default_value':
 			case 'valid_regexp':
-			case 'color_foreground':
-			case 'color_background':
+			case 'foreground_color':
+			case 'background_color':
 				# Possible values doesn't apply to textarea fields
 				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';
@@ -627,10 +617,11 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	# If there are fields to update, execute SQL
 	if( $t_update !== '' ) {
 		$t_query = 'UPDATE {custom_field} SET ' . rtrim( $t_update, ', ' ) . ' WHERE id = ' . db_param();
+
 		$t_params[] = $p_field_id;
 		db_query( $t_query, $t_params );
 
-		custom_field_clear_cache( $p_field_id );
+   		custom_field_clear_cache( $p_field_id );
 
 		return true;
 	}
@@ -1543,19 +1534,27 @@ function custom_field_has_data( $p_field_id ) {
 
 /**
  * Returns inline style containing colors for a custom field id.
+ * Empty values are ignored
  * @param array   $p_def      Contains the definition of the custom field.
- * @return string value containing inline styles
+ * @return string value containing inline style
  * @access public
  */
 function custom_field_style ( array $p_def ) {
     $t_style = '';
 
-    if ( $p_def['color_background'] != '') {
-        $t_style .= 'background-color:'. $p_def['color_background'] .' !important;';     
+    if ( $p_def['background_color'] != '') {
+        $t_style .= 'background-color:'. $p_def['background_color'] .' !important;';     
     }
-    if ( $p_def['color_foreground'] != '') {
-        $t_style .= 'color:'. $p_def['color_foreground'] .' !important;';     
+    if ( $p_def['foreground_color'] != '') {
+        $t_style .= 'color:'. $p_def['foreground_color'] .' !important;';     
     }
 
     return $t_style;
 }
+
+
+
+
+
+
+
