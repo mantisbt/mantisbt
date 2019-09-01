@@ -1551,10 +1551,3 @@ function custom_field_style ( array $p_def ) {
 
     return $t_style;
 }
-
-
-
-
-
-
-
