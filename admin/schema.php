@@ -884,9 +884,9 @@ $g_upgrade[209] = array( 'AlterColumnSQL', array( db_get_table( 'api_token' ), "
 
 # Release marker: 1.3.0
 
-$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'mantis_custom_field_table' ), "
-	color_background     C(8)		NOTNULL DEFAULT \" '' \",
-	color_foreground     C(8)		NOTNULL DEFAULT \" '' \"
+$g_upgrade[210] = array( 'AddColumnSQL', array( db_get_table( 'custom_field' ), "
+	color_background     C(7)		NULL,
+	color_foreground     C(7)		NULL
 	" ) );
   
 
