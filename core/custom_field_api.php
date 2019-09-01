@@ -617,11 +617,10 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	# If there are fields to update, execute SQL
 	if( $t_update !== '' ) {
 		$t_query = 'UPDATE {custom_field} SET ' . rtrim( $t_update, ', ' ) . ' WHERE id = ' . db_param();
-
 		$t_params[] = $p_field_id;
 		db_query( $t_query, $t_params );
 
-   		custom_field_clear_cache( $p_field_id );
+      custom_field_clear_cache( $p_field_id );
 
 		return true;
 	}
