@@ -59,7 +59,7 @@ form_security_validate( 'bug_reminder' );
 
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_to			= gpc_get_int_array( 'to' );
-$f_body			= gpc_get_string( 'body' );
+$f_body			= gpc_get_string( 'bugnote_text' );
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
