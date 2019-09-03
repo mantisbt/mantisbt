@@ -85,7 +85,42 @@ layout_page_begin();
 <div class="widget-body">
 	<div class="widget-main no-padding">
 		<div class="table-responsive">
+
 <table class="table table-bordered table-condensed table-striped">
+<?php
+	$t_store_reminders = ON == config_get( 'store_reminders' );
+
+	# Only display view status checkbox/info if reminders are stored as bugnotes
+	if( $t_store_reminders ) {
+		$t_default_reminder_view_status = config_get( 'default_reminder_view_status' );
+		$t_bugnote_class = $t_default_reminder_view_status == VS_PRIVATE
+			? 'bugnote-private'
+			: '';
+?>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'view_status' ) ?>
+		</th>
+		<td></td>
+		<td>
+<?php
+		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+			?>
+			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
+				<?php check_checked( $t_default_reminder_view_status, VS_PRIVATE ); ?> />
+			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
+			<?php
+		} else {
+			echo get_enum_element( 'view_state', $t_default_reminder_view_status );
+		}
+?>
+		</td>
+	</tr>
+<?php
+	} else {
+		$t_bugnote_class = '';
+	}
+?>
 	<tr>
 		<th class="category">
 			<?php echo lang_get( 'to' ) ?>
@@ -107,10 +142,12 @@ layout_page_begin();
 			</select>
 		</td>
 		<td class="center">
-			<textarea class="form-control" name="body" cols="65" rows="10"></textarea>
+			<textarea name="bugnote_text" cols="65" rows="10"
+					  class="form-control <?php echo $t_bugnote_class; ?>"></textarea>
 		</td>
-</tr>
+	</tr>
 </table>
+
 	</div>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
@@ -119,6 +156,7 @@ layout_page_begin();
 	</div>
 	</div>
 	</form>
+	<br>
 	<div class="alert alert-info">
 		<p><i class="fa fa-info-circle fa-lg"> </i>
 		<?php
@@ -126,7 +164,7 @@ layout_page_begin();
 			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';
 			}
-			if( ON == config_get( 'store_reminders' ) ) {
+			if( $t_store_reminders ) {
 				echo lang_get( 'reminder_store' );
 			}
 
