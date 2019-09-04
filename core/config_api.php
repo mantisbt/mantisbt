@@ -745,7 +745,7 @@ function config_cache_all() {
  * @param integer $p_type        Configuration type id.
  * @param mixed   $p_value       Configuration value.
  * @param boolean $p_for_display Whether to pass the value via string attribute for web browser display.
- * @return void
+ * @return string
  */
 function config_get_value_as_string( $p_type, $p_value, $p_for_display = true ) {
 	$t_corrupted = false;
