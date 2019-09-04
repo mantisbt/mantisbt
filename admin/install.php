@@ -257,6 +257,7 @@ if( $t_config_exists ) {
 		}
 	}
 
+	/** @var ADOConnection $g_db */
 	$g_db = ADONewConnection( $f_db_type );
 	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 	if( $g_db->IsConnected() ) {
@@ -780,6 +781,7 @@ if( 3 == $t_install_state ) {
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
+			/** @var ADODB_DataDict $t_dict */
 			$t_dict = NewDataDictionary( $g_db );
 
 			$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array(
@@ -863,6 +865,7 @@ if( 3 == $t_install_state ) {
 			# fake out database access routines used by config_get
 		}
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
+		/** @var array $g_upgrade Upgrade steps defined in schema.php */
 		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
@@ -874,6 +877,7 @@ if( 3 == $t_install_state ) {
 			$g_db->execute( 'SET NAMES UTF8' );
 		}
 
+		/** @var ADODB_DataDict $t_dict */
 		$t_dict = NewDataDictionary( $g_db );
 
 		# Special processing for specific schema versions
@@ -902,6 +906,12 @@ if( 3 == $t_install_state ) {
 
 				# Convert the columns
 				foreach( $t_bool_columns as $t_row ) {
+					/**
+					 * @var string $v_table_name
+					 * @var string $v_column_name
+					 * @var boolean $v_is_nullable
+					 * @var boolean $v_column_default
+					 */
 					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
 					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
