@@ -38,7 +38,7 @@ $('#db_type').change(
 
 		$('#default_' + db + ' span').each(
 			function (i, el) {
-				var target = $('#' + $(el).attr('name'));
+				var target = $('#' + el.id);
 				var oldVal = target.data('defval');
 				// Only change the value if not changed from default
 				if (typeof oldVal === 'undefined' || oldVal == target.val()) {
