@@ -516,7 +516,6 @@ if( 2 == $t_install_state ) {
 ?>
 
 </table>
-</table>
 </div>
 </div>
 </div>
@@ -569,7 +568,7 @@ if( !$g_database_upgrade ) {
 	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
 		echo '<div id="default_' . $t_db_type . '" class="hidden">';
 		foreach( $t_defaults as $t_key => $t_value ) {
-			echo "\n\t" . '<span name="' . $t_key . '">' . $t_value . '</span>';
+			echo "\n\t" . '<span id="' . $t_key . '">' . $t_value . '</span>';
 		}
 		echo "\n" . '</div>' . "\n";
 	}
@@ -1181,7 +1180,7 @@ if( 5 == $t_install_state ) {
 ?>
 <tr>
 	<td colspan="2">
-		<table width="50%" cellpadding="10" cellspacing="1">
+		<table>
 			<tr>
 				<td>
 					Please add the following lines to
