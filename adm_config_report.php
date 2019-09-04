@@ -184,6 +184,10 @@ $t_result = db_query( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
 while( $t_row = db_fetch_array( $t_result ) ) {
+	/**
+	 * @var integer $v_project_id
+	 * @var string  $v_project_name
+	 */
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_projects_list[$v_project_id] = $v_project_name;
 }
@@ -197,6 +201,9 @@ if( $t_filter_config_value != META_FILTER_NONE ) {
 	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
 }
 while( $t_row = db_fetch_array( $t_result ) ) {
+	/**
+	 * @var string $v_config_id
+	 */
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
@@ -349,6 +356,14 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
 while( $t_row = $t_config_query->fetch() ) {
+	/**
+	 * @var integer $v_type
+	 * @var integer $v_user_id
+	 * @var integer $v_project_id
+	 * @var string  $v_config_id
+	 * @var mixed   $v_value
+	 * @var integer $v_access_reqd
+	 */
 	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 	# For complex values, the content is not rendered
