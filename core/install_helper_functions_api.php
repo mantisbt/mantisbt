@@ -121,7 +121,7 @@ function check_pgsql_bool_columns() {
 		'project'         => array( 'enabled' ),
 		'project_version' => array( 'released' ),
 		'sponsorship'     => array( 'paid' ),
-		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'redirect_delay', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
+		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
 		'user'            => array( 'enabled', 'protected' ),
 	);
 
