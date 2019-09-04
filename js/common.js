@@ -176,7 +176,7 @@ $(document).ready( function() {
 				var params = {};
 				params['field'] = $this[0].id;
 				params['prefix'] = query;
-				$.getJSON('api/rest/internal/autocomplete', params, function (data) {
+				$.getJSON('api/rest/index.php/internal/autocomplete', params, function (data) {
 					var results = [];
 					$.each(data, function (i, value) {
 						results.push(value);
