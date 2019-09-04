@@ -42,7 +42,7 @@ $(document).ready( function() {
 						'project_id': container.data('project_id'),
 						'user_id': container.data('user_id')
 					};
-					content.load('api/rest/internal/config_display',req_data);
+					content.load('api/rest/index.php/internal/config_display',req_data);
 				}
 				content.show();
 			});
