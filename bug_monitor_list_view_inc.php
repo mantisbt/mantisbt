@@ -93,12 +93,12 @@ if( $t_can_see_monitors || $t_can_add_others ) {
 			$t_can_delete_others = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
 			if( $t_can_delete_others ) {
 				$t_button = '&nbsp;'
-					. '<a class="btn btn-xs btn-primary btn-white btn-round" '
+					. '<a class="red noprint zoom-130" '
 					. 'href="' . helper_mantis_url( 'bug_monitor_delete.php' )
 						. '?bug_id=' . $f_bug_id . '&amp;'
 						. 'user_id=%s'
 						. htmlspecialchars( form_security_param( 'bug_monitor_delete' ) )
-					. '"><i class="fa fa-times"></i></a>';
+					. '"><i class="ace-icon fa fa-trash-o bigger-115"></i></a>';
 			}
 
 			foreach( $t_users as $t_user ) {
