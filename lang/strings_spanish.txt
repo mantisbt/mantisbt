@@ -57,6 +57,7 @@
  * @author Macofe
  * @author MarcoAurelio
  * @author McDutchie
+ * @author Nicolas Ramirez
  * @author Pertile
  * @author Peter17
  * @author Sanbec
@@ -674,6 +675,7 @@ $s_configuration_corrupted = 'La configuración en la base de datos está dañad
 $s_set_configuration_option_action_create = 'Crear opción de configuración';
 $s_set_configuration_option_action_edit = 'Editar opción de configuración';
 $s_set_configuration_option_action_clone = 'Clonar opción de configuración';
+$s_set_configuration_option_action_view = 'Ver opción de configuración';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins Instalados';
 $s_plugins_available = 'Plugins Disponibles';
@@ -738,6 +740,8 @@ $s_create_new_subproject_link = 'Crear subproyecto nuevo';
 $s_unlink_link = 'Quitar enlace';
 $s_show_global_users = 'Mostrar Usuarios con Acceso Global';
 $s_hide_global_users = 'Ocultar Usuarios con Acceso Global';
+$s_review_changes = 'Revisar cambios';
+$s_review_changes_confirmation = '¿Está seguro de que desea aplicar los siguientes cambios?';
 $s_review_changes_empty = 'No se seleccionó ningún cambio';
 $s_add_project_title = 'Agregar proyecto';
 $s_upload_file_path = 'Ruta para subida de archivos';
@@ -847,6 +851,8 @@ $s_add_user_button = 'Agregar usuario';
 $s_project_selection_title = 'Selección de Proyecto';
 $s_remove_link = 'Eliminar';
 $s_remove_all_link = 'Eliminar todos';
+$s_remove_project_user_title = 'Eliminar el acceso de usuario del proyecto';
+$s_modify_project_user_title = 'Modificar acceso de usuario en proyecto';
 $s_updated_user_msg = 'Usuario actualizado';
 $s_must_enter_category = 'Debe seleccionar una categoría';
 $s_must_enter_severity = 'Debe seleccionar un nivel de severidad';
@@ -917,6 +923,7 @@ $s_developer_stats = 'Estadísticas por Desarrollador';
 $s_reporter_stats = 'Estadísticas por Informador';
 $s_orct = '(Abiertas/Resueltas/Cerradas/Total)';
 $s_summary_header = 'abiertas/resueltas/cerradas/total/proporción de resueltas/proporción';
+$s_summary_notice_filter_is_applied = 'Un filtro ha sido aplicado';
 $s_any = 'Cualquiera';
 $s_all = 'todas';
 $s_show = 'Ver';
@@ -976,6 +983,7 @@ $s_manage_filter_edit_page_title = 'Editar filtro';
 $s_delete_filter_button = 'Borrar';
 $s_apply_filter_button = 'Aplicar';
 $s_temporary_filter = 'Filtro temporal';
+$s_set_as_persistent_filter = 'Establecer como filtro persistente';
 $s_view_simple_link = 'Cambiar a Vista Simple';
 $s_product_build = 'Compilación del Producto';
 $s_system_profile = 'Descripción del Sistema';
@@ -1112,6 +1120,8 @@ $s_update_issue_status = 'Actualizar estado de incidencia';
 $s_set_view_status = 'Establecer visibilidad al registrar una nueva incidencia o nota';
 $s_update_view_status = 'Cambiar visibilidad de incidencias o notas existentes';
 $s_show_list_of_users_monitoring_issue = 'Ver lista de usuarios que monitorizan la incidencia';
+$s_add_users_monitoring_issue = 'Agregar monitores a un asunto';
+$s_remove_users_monitoring_issue = 'Eliminar monitores de un asunto';
 $s_notes = 'NOTAS';
 $s_add_notes = 'Añadir notas';
 $s_view_private_notes = 'Ver notas privadas de los demás';
@@ -1410,6 +1420,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Otro usuario actualizó la incidenc
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Has alcanzado el límite de actividad permitida de %d eventos en los últimos %d segundos; tu acción se ha bloqueado para evitar el spam. Inténtalo de nuevo más tarde.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'El campo "%1$s" debe ser menor o igual a %2$d caracteres.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'El nombre de token "%s" ya está en uso. Por favor, vuelva atrás y seleccione otro.';
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'El archivo especificado en $g_log_destination "%s" no se puede escribir.';
 $s_dropzone_default_message = 'Adjunta archivos arrastrándolos y colocándolos aquí, seleccionándolos o pegándolos.';
 $s_dropzone_fallback_message = 'Tu navegador no admite subir archivos arrastrando y soltando.';
 $s_dropzone_file_too_big = 'El archivo es demasiado grande ({{filesize}}MiB). Tamaño máximo: {{maxFilesize}}MiB.';
