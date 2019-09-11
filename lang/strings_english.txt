@@ -1483,6 +1483,13 @@ $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
 $s_email_on_updated = 'E-mail on Updated';
 $s_email_on_monitor = 'E-mail when user starts monitoring';
+$s_view_tags = 'View tags attached to a bug';
+$s_attach_tags = 'Attach tags to a bug';
+$s_detach_tags = 'Detach tags from a bug';
+$s_detach_own_tags = 'Detach tags attached by the same user';
+$s_create_new_tags = 'Create new tags';
+$s_edit_tags = 'Edit tag names and descriptions';
+$s_edit_own_tags = 'Edit tags created by the same user';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';
