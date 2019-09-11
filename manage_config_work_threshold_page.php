@@ -408,6 +408,17 @@ get_capability_row( lang_get( 'view_private_notes' ), 'private_bugnote_threshold
 get_capability_row( lang_get( 'change_view_state_own_bugnotes' ), 'bugnote_user_change_view_state_threshold' );
 get_section_end();
 
+# Tags
+get_section_begin_mcwt( lang_get( 'tags' ) );
+get_capability_row( lang_get( 'view_tags' ), 'tag_view_threshold' );
+get_capability_row( lang_get( 'attach_tags' ), 'tag_attach_threshold' );
+get_capability_row( lang_get( 'detach_tags' ), 'tag_detach_threshold' );
+get_capability_row( lang_get( 'detach_own_tags' ), 'tag_detach_own_threshold' );
+get_capability_row( lang_get( 'create_new_tags' ), 'tag_create_threshold' );
+get_capability_row( lang_get( 'edit_tags' ), 'tag_edit_threshold' );
+get_capability_row( lang_get( 'edit_own_tags' ), 'tag_edit_own_threshold' );
+get_section_end();
+
 # Others
 get_section_begin_mcwt( lang_get( 'others' ) );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), 'view_changelog_threshold' );

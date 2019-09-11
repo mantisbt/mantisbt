@@ -189,6 +189,16 @@ set_capability_row( 'bugnote_user_delete_threshold' );
 set_capability_row( 'private_bugnote_threshold' );
 set_capability_row( 'bugnote_user_change_view_state_threshold' );
 
+# Tags
+
+set_capability_row( 'tag_view_threshold' );
+set_capability_row( 'tag_attach_threshold' );
+set_capability_row( 'tag_detach_threshold' );
+set_capability_row( 'tag_detach_own_threshold' );
+set_capability_row( 'tag_create_threshold' );
+set_capability_row( 'tag_edit_threshold' );
+set_capability_row( 'tag_edit_own_threshold' );
+
 # Others
 set_capability_row( 'view_changelog_threshold' );
 set_capability_row( 'roadmap_view_threshold' );
