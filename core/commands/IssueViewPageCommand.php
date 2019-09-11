@@ -216,6 +216,12 @@ class IssueViewPageCommand extends Command {
 			$t_flags['monitor_can_add'] = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $t_issue_id ) ? true : false;
 		}
 
+		$t_monitor_flag = !$t_force_readonly && !$t_anonymous_user;
+		$t_is_monitoring = user_is_monitoring_bug( $t_user_id, $t_issue_id );
+		$t_flags['can_monitor'] = $t_monitor_flag && !$t_is_monitoring &&
+			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $t_issue_id );
+		$t_flags['can_unmonitor'] = $t_monitor_flag && $t_is_monitoring;
+
 		$t_flags['attachments_show'] = in_array( 'attachments', $t_fields );
 		$t_flags['category_show'] = in_array( 'category_id', $t_fields );
 		$t_flags['eta_show'] = in_array( 'eta', $t_fields );
@@ -234,12 +240,6 @@ class IssueViewPageCommand extends Command {
 		$t_flags['can_assign'] = !$t_issue_readonly &&
 			access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_issue_id );
 		$t_flags['can_change_status'] = !$t_issue_readonly && access_has_bug_level( config_get( 'update_bug_status_threshold' ), $t_issue_id );
-
-		$t_monitor_flag = !$t_force_readonly && !$t_anonymous_user;
-		$t_is_monitoring = user_is_monitoring_bug( $t_user_id, $t_issue_id );
-		$t_flags['can_monitor'] = $t_monitor_flag && !$t_is_monitoring &&
-			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $t_issue_id );
-		$t_flags['can_unmonitor'] = $t_monitor_flag && $t_is_monitoring;
 
 		$t_flags['can_clone'] = !$t_issue_readonly && access_has_bug_level( config_get( 'report_bug_threshold' ), $t_issue_id );
 		$t_flags['can_reopen'] = !$t_force_readonly && access_can_reopen_bug( $t_issue_data );
