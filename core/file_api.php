@@ -78,7 +78,7 @@ function file_attach_files( $p_bug_id, $p_files, $p_bugnote_id = 0 ) {
 				'bug',
 				'', /* title */
 				'', /* desc */
-				0, /* user_id */
+				null, /* user_id */
 				0, /* date_added */
 				0, /* skip_bug_update */
 				$p_bugnote_id );
