@@ -790,7 +790,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 				FROM {user} u, {bugnote} bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = ' . db_param() . $t_from_where . $t_to_where .
-				' GROUP BY u.username, u.realname';
+				' GROUP BY u.id, u.username, u.realname';
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
