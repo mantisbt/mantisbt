@@ -68,7 +68,8 @@ require_api( 'user_api.php' );
 #precache access levels
 access_cache_matrix_project( helper_get_current_project() );
 
-$t_show_time_tracking = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
+$t_show_time_tracking = config_get( 'time_tracking_enabled' )
+	&& access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
 
 # get attachments data
 if( !isset( $t_fields ) ) {
