@@ -884,7 +884,7 @@ if( 3 == $t_install_state ) {
 		# not a Mantis schema upgrade but nevertheless required due to
 		# changes in the code
 
-		if( $t_last_update > 51 && $t_last_update < 189 ) {
+		if( $f_db_type == 'pgsql' && $t_last_update > 51 && $t_last_update < 189 ) {
 			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
 			# 'L' columns are BOOLEAN instead of SMALLINT
 			# Check for any DB discrepancies and update columns if needed
