@@ -934,6 +934,45 @@ if( 3 == $t_install_state ) {
 				}
 			}
 		}
+		# Follow-up fix for user_pref.redirect_delay, which was incorrectly
+		# set to boolean in check_pgsql_bool_columns() before MantisBT 2.23.0,
+		# so we need to check its type and convert it back to integer if needed.
+		# See issue #26109.
+		elseif( $f_db_type == 'pgsql' && $t_last_update > 43
+			&& version_compare( MANTIS_VERSION, '2.23.0', '<=' )
+		) {
+			$t_table = db_get_table( 'user_pref' );
+			$t_column = 'redirect_delay';
+
+			try {
+				$t_is_integer = pgsql_get_column_type( $t_table, $t_column ) == 'integer';
+				$t_msg = "Column must be converted to INTEGER";
+				$t_exception_occured = false;
+			}
+			catch( Exception $e ) {
+				$t_exception_occured = true;
+				$t_msg = $e->getMessage();
+			}
+
+			print_test(
+				"PostgreSQL: check column '$t_table.$t_column' data type",
+				!$t_exception_occured && $t_is_integer,
+				/* hard fail */ $t_exception_occured,
+				$t_msg
+			);
+			if( !$t_exception_occured && !$t_is_integer ) {
+				$t_sqlarray = $t_dict->AlterColumnSQL( $t_table,
+					'redirect_delay  I  NOTNULL  DEFAULT 0'
+				);
+				print_test(
+					"Converting column '$t_table.$t_column'' to INTEGER",
+					2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
+					true,
+					print_r( $t_sqlarray, true )
+				);
+			}
+		}
+
 		# End of special processing for specific schema versions
 
 		while( ( $i <= $t_last_id ) && !$g_failed ) {
