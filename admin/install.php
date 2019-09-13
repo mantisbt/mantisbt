@@ -893,39 +893,44 @@ if( 3 == $t_install_state ) {
 				# Some columns need converting
 				$t_msg = "PostgreSQL: check Boolean columns' actual type";
 				if( is_array( $t_bool_columns ) ) {
+					$t_count = count( $t_bool_columns );
 					print_test(
 						$t_msg,
-						count( $t_bool_columns ) == 0,
+						$t_count == 0,
 						false,
-						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN' );
+						"$t_count columns must be converted to BOOLEAN"
+					);
+
+					# Convert the columns
+					foreach( $t_bool_columns as $t_row ) {
+						/**
+						 * @var string $v_table_name
+						 * @var string $v_column_name
+						 * @var boolean $v_is_nullable
+						 * @var boolean $v_column_default
+						 */
+						extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+
+						$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
+						$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
+						$t_sqlarray = $t_dict->AlterColumnSQL(
+							$v_table_name,
+							$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default
+						);
+						print_test(
+							'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
+							2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
+							true,
+							print_r( $t_sqlarray, true )
+						);
+						if( $g_failed ) {
+							# Error occurred, bail out
+							break;
+						}
+					}
 				} else {
 					# We did not get an array => error occurred
 					print_test( $t_msg, false, true, $t_bool_columns );
-				}
-
-				# Convert the columns
-				foreach( $t_bool_columns as $t_row ) {
-					/**
-					 * @var string $v_table_name
-					 * @var string $v_column_name
-					 * @var boolean $v_is_nullable
-					 * @var boolean $v_column_default
-					 */
-					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
-					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
-					$t_sqlarray = $t_dict->AlterColumnSQL(
-						$v_table_name,
-						$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default );
-					print_test(
-						'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
-						2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
-						true,
-						print_r( $t_sqlarray, true ) );
-					if( $g_failed ) {
-						# Error occurred, bail out
-						break;
-					}
 				}
 			}
 		}
