@@ -152,6 +152,45 @@ function check_pgsql_bool_columns() {
 }
 
 /**
+ * Get pgsql column's data type
+ *
+ * @param string $p_table  Table name
+ * @param string $p_column Column name
+ *
+ * @return string column data_type
+ *
+ * @throws Exception
+ */
+function pgsql_get_column_type( $p_table, $p_column ) {
+	global $f_database_name;
+	/** @var ADOConnection $g_db */
+	global $g_db;
+
+	# Generate SQL to check columns against schema
+	$t_sql = 'SELECT data_type
+		FROM information_schema.columns
+		WHERE table_catalog = $1 
+		AND table_name = $2
+		AND column_name = $3';
+	$t_param = array(
+		$f_database_name,
+		db_get_table( $p_table ),
+		$p_column,
+	);
+
+	/** @var ADORecordSet $t_result */
+	$t_result = @$g_db->execute( $t_sql, $t_param );
+	if( $t_result === false ) {
+		throw new Exception( 'Unable to check information_schema' );
+	} else if( $t_result->recordCount() == 0 ) {
+		throw new Exception( "Column '$p_column' not found in table '$p_table'" );
+	}
+
+	$t_rows = $t_result->getAll();
+	return reset( $t_rows[0] );
+}
+
+/**
  * Set the value of $g_db_log_queries as specified
  * This is used by install callback functions to ensure that only the relevant
  * queries are logged
