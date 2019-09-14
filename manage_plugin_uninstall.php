@@ -59,7 +59,20 @@ plugin_register_installed();
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
-helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), string_display_line( $t_plugin->name ) ), lang_get( 'plugin_uninstall' ) );
+if(    $t_plugin instanceof MissingPlugin
+	|| $t_plugin instanceof MissingClassPlugin
+) {
+	$t_message = 'plugin_remove_message';
+	$t_button = 'remove_link';
+} else {
+	$t_message = 'plugin_uninstall_message';
+	$t_button = 'plugin_uninstall';
+}
+
+helper_ensure_confirmed(
+	sprintf( lang_get( $t_message ), string_display_line( $t_plugin->name ) ),
+	lang_get( $t_button )
+);
 
 if( !is_null( $t_plugin ) ) {
 	plugin_uninstall( $t_plugin );

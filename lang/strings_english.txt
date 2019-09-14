@@ -830,6 +830,7 @@ $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
 $s_plugin_manual_fix = 'Manual intervention required';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the "%1$s" plugin?';
+$s_plugin_remove_message = 'Are you sure you want to remove the invalid or missing "%1$s" plugin?';
 $s_plugin_key_label = 'Key:';
 $s_plugin_key_met = 'plugin ready';
 $s_plugin_key_unmet = 'unmet dependencies';
