@@ -222,9 +222,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * Print the plugin's submenu
 	 */
 	function print_submenu() {
-		$t_filter = summary_get_filter();
-		$t_filter_param = filter_get_temporary_key_param( $t_filter );
-
 		$t_menu_items = array(
 			'developer_graph.php' => array(
 				'icon' => 'fa-bar-chart',
