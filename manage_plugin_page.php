@@ -56,22 +56,14 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
-# Get list of all available and installed plugins, sorted by name
-$t_plugins = plugin_find_all();
-uasort( $t_plugins,
-	function ( $p_p1, $p_p2 ) {
-		return strcasecmp( $p_p1->name, $p_p2->name );
-	}
-);
+$t_plugins = new ListPluginsForDisplay();
 ?>
 
 <div class="col-md-12 col-xs-12">
 
 <?php
 # Installed plugins section
-# @TODO use constants or a class
-$t_plugins_installed = prepare_for_display( 1 );
-if( 0 < count( $t_plugins_installed ) ) {
+if( $t_plugins->countInstalled() ) {
 ?>
 
 <div class="space-10"></div>
@@ -117,7 +109,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 
 								<tbody>
 <?php
-	foreach( $t_plugins_installed as $t_basename => $t_data ) {
+	foreach( $t_plugins->getInstalled() as $t_basename => $t_data ) {
 		echo '<tr>';
 		echo '<td>',
 			$t_data['plugin'],
@@ -175,8 +167,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 } # End Installed plugins section
 
 # Invalid plugins section
-$t_plugins_invalid = prepare_for_display( 2 );
-if( 0 < count( $t_plugins_invalid ) ) {
+if( $t_plugins->countInvalid() ) {
 ?>
 	<div class="space-10"></div>
 	<a id="invalid"></a>
@@ -213,7 +204,7 @@ if( 0 < count( $t_plugins_invalid ) ) {
 						</thead>
 						<tbody>
 <?php
-	foreach( $t_plugins_invalid as $t_basename => $t_data ) {
+	foreach( $t_plugins->getInvalid() as $t_basename => $t_data ) {
 		echo '<tr>';
 		echo '<td>', $t_data['plugin'], '</td>';
 		echo '<td>', $t_data['description'], '</td>';
@@ -245,8 +236,7 @@ if( 0 < count( $t_plugins_invalid ) ) {
 } # End Invalid plugins section
 
 # Available plugins section
-$t_plugins_available = prepare_for_display( 0 );
-if( 0 < count( $t_plugins_available ) ) {
+if( $t_plugins->countAvailable() ) {
 ?>
 
 <a id="available"></a>
@@ -282,7 +272,7 @@ if( 0 < count( $t_plugins_available ) ) {
 
 					<tbody>
 <?php
-foreach( $t_plugins_available as $t_basename => $t_data ) {
+foreach( $t_plugins->getAvailable() as $t_basename => $t_data ) {
 	echo '<tr>';
 	echo '<td>',
 	$t_data['plugin'],
@@ -298,7 +288,6 @@ foreach( $t_plugins_available as $t_basename => $t_data ) {
 			lang_get( 'plugin_install' ) );
 	}
 	echo '</td>';
-
 	echo "</tr>\n";
 }
 ?>
@@ -331,136 +320,245 @@ foreach( $t_plugins_available as $t_basename => $t_data ) {
 layout_page_end();
 
 /**
- * Prepare plugin information for display.
+ * Class ListPluginsForDisplay
  *
- * @param bool $p_install_status 0=available, 1=installed, 2=invalid
- *
- * @return array Data to display
+ * Collects all Plugins and dispatches them in 3 categories: available,
+ * installed and invalid. Provides functions to return each sub-list in a
+ * display-ready format depending on the category.
  */
-function prepare_for_display( $p_install_status ) {
-	global $t_plugins;
+class ListPluginsForDisplay {
+	/**
+	 * Plugin status constants
+	 */
+	const AVAILABLE = 0;
+	const INSTALLED = 1;
+	const INVALID = 2;
 
-	$t_display_data = array();
+	/**
+	 * @var array List of available plugins (i.e. valid and not installed)
+	 */
+	protected $available = array();
 
-	foreach( $t_plugins as $t_basename => $t_plugin) {
-		# Skip plugins not matching the desired install status
-		$t_registered = plugin_is_registered( $t_basename );
-		$t_invalid = $t_plugin instanceof InvalidPlugin;
-		if(    $p_install_status != 2 && $t_invalid
-			|| $p_install_status != 1 && $t_registered
-			|| $p_install_status != 0 && !$t_registered && !$t_invalid
-		) {
-			continue;
-		}
+	/**
+	 * @var array List of installed (registered) plugins
+	 */
+	protected $installed = array();
 
-		$t_name = $t_plugin->name . ' ' . $t_plugin->version;
-		$t_upgrade_needed = plugin_needs_upgrade( $t_plugin );
+	/**
+	 * @var array List of invalid plugins
+	 */
+	protected $invalid = array();
 
-		# Plugin Author
-		$t_author = $t_plugin->author;
-		if( !empty( $t_author ) ) {
-			if( is_array( $t_author ) ) {
-				$t_author = implode( ', ', $t_author );
+	/**
+	 * PluginsListForDisplay constructor.
+	 */
+	public function __construct() {
+		# Get list of all available and installed plugins, sorted by name
+		$t_plugins = plugin_find_all();
+		uasort( $t_plugins,
+			function ( $p_p1, $p_p2 ) {
+				return strcasecmp( $p_p1->name, $p_p2->name );
 			}
-			if( !is_blank( $t_plugin->contact ) ) {
-				$t_subject = lang_get( 'plugin' ) . ' - ' . $t_name;
-				$t_author = '<br />'
-					. sprintf( lang_get( 'plugin_author' ),
-						prepare_email_link( $t_plugin->contact, $t_author, $t_subject )
-					);
+		);
+
+		foreach( $t_plugins as $t_basename => $t_plugin ) {
+			if( $t_plugin instanceof InvalidPlugin ) {
+				$this->invalid[$t_basename] = $t_plugin;
+			} elseif( plugin_is_registered( $t_basename ) ) {
+				$this->installed[$t_basename] = $t_plugin;
 			} else {
-				$t_author = '<br />' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+				$this->available[$t_basename] = $t_plugin;
 			}
 		}
 
-		# Plugin name / page
-		# If plugin is installed and has a config page, we create a link to it
-		if( $p_install_status && !is_blank( $t_plugin->page ) ) {
-			$t_name = '<a href="'
-				. string_attribute( plugin_page( $t_plugin->page, false, $t_basename ) )
-				. '">'
-				. string_display_line( $t_name )
-				. '</a>';
-		}
+	}
 
-		# Plugin Website URL
-		$t_url = $t_plugin->url;
-		if( !is_blank( $t_url ) ) {
-			$t_url = '<br />'
-				. lang_get( 'plugin_url' )
-				. lang_get( 'word_separator' )
-				. '<a href="' . $t_url . '">' . $t_url . '</a>';
-		}
+	/**
+	 * @return int Number of available plugins
+	 */
+	public function countAvailable() {
+		return count( $this->available );
+	}
 
-		# Description
-		if( $p_install_status != 2 ) {
-			$t_description = string_display_line_links( $t_plugin->description )
-				. '<span class="small">' . $t_author . $t_url . '</span>';
-		} else {
-			# Description from InvalidPlugin classes are trusted input
-			$t_description = $t_plugin->description;
-		}
+	/**
+	 * @return int Number of installed plugins
+	 */
+	public function countInstalled() {
+		return count( $this->installed );
+	}
 
-		# Dependencies
-		$t_can_install = true;
-		if( is_array( $t_plugin->requires ) ) {
-			$t_depends = array();
-			foreach( $t_plugin->requires as $t_required_basename => $t_version ) {
-				$t_dependency_name = array_key_exists( $t_required_basename, $t_plugins )
-					? $t_plugins[$t_required_basename]->name
-					: $t_required_basename;
-				$t_dependency_name .= ' ' . $t_version;
+	/**
+	 * @return int Number of invalid plugins
+	 */
+	public function countInvalid() {
+		return count( $this->invalid );
+	}
 
-				switch( plugin_dependency( $t_required_basename, $t_version ) ) {
-					case 1:
-						if( $t_upgrade_needed ) {
-							$t_class = 'dependency_upgrade';
-							$t_tooltip = lang_get( 'plugin_key_upgrade' );
-						} else {
-							$t_class = 'dependency_met';
-							$t_tooltip = lang_get( 'plugin_key_met' );
-						}
-						break;
-					case -1:
-						$t_class = 'dependency_dated';
-						$t_tooltip = lang_get( 'plugin_key_dated' );
-						$t_can_install = false;
-						break;
-					case 0:
-					default:
-						$t_class = 'dependency_unmet';
-						$t_tooltip = lang_get( 'plugin_key_unmet' );
-						$t_can_install = false;
-						break;
+	/**
+	 * Return the list of available plugins for display
+	 * @return array Plugins list
+	 */
+	public function getAvailable() {
+		return $this->getDisplayList( $this->available, self::AVAILABLE );
+	}
+
+	/**
+	 * Return the list of installed plugins for display
+	 * @return array Plugins list
+	 */
+	public function getInstalled() {
+		return $this->getDisplayList( $this->installed, self::INSTALLED );
+	}
+
+	/**
+	 * Return the list of invalid plugins for display
+	 * @return array Plugins list
+	 */
+	public function getInvalid() {
+		return $this->getDisplayList( $this->invalid, self::INVALID );
+	}
+
+	/**
+	 * Prepare plugin information for display.
+	 *
+	 * Returns a list of Plugins. Each element has the following structure:
+	 * - plugin       Basename
+	 * - description
+	 * - dependencies
+	 * - upgrade      True if a schema upgrade is needed
+	 * - install      True if plugin can be installed (i.e. dependencies are met)
+	 * - remove       True if (invalid) Plugin can be removed
+	 * Installed plugins have 2 additional fields:
+	 * - priority     Plugin priority (1..5)
+	 * - protected    True if plugin is protected
+	 *
+	 * @param array $p_plugins List of plugins to process
+	 * @param int   $p_status  One of AVAILABLE, INSTALLED or INVALID
+	 *
+	 * @return array
+	 */
+	protected function getDisplayList( $p_plugins, $p_status ) {
+		$t_display_data = array();
+		foreach( $p_plugins as $t_basename => $t_plugin) {
+			$t_name = $t_plugin->name . ' ' . $t_plugin->version;
+			$t_upgrade_needed = plugin_needs_upgrade( $t_plugin );
+
+			# Plugin Author
+			$t_author = $t_plugin->author;
+			if( !empty( $t_author ) ) {
+				if( is_array( $t_author ) ) {
+					$t_author = implode( ', ', $t_author );
 				}
+				if( !is_blank( $t_plugin->contact ) ) {
+					$t_subject = lang_get( 'plugin' ) . ' - ' . $t_name;
+					$t_author = '<br>'
+						. sprintf( lang_get( 'plugin_author' ),
+							prepare_email_link( $t_plugin->contact, $t_author, $t_subject )
+						);
+				} else {
+					$t_author = '<br>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
+				}
+			}
 
-				$t_depends[] = sprintf( '<span class="%s" title="%s">%s</span>',
-					$t_class,
-					$t_tooltip,
-					string_display_line( $t_dependency_name )
+			# Plugin name / page
+			# If plugin is installed and has a config page, we create a link to it
+			if( $p_status == self::INSTALLED && !is_blank( $t_plugin->page ) ) {
+				$t_name = '<a href="'
+					. string_attribute( plugin_page( $t_plugin->page, false, $t_basename ) )
+					. '">'
+					. string_display_line( $t_name )
+					. '</a>';
+			}
+
+			# Plugin Website URL
+			$t_url = $t_plugin->url;
+			if( !is_blank( $t_url ) ) {
+				$t_url = '<br>'
+					. lang_get( 'plugin_url' )
+					. lang_get( 'word_separator' )
+					. '<a href="' . $t_url . '">' . $t_url . '</a>';
+			}
+
+			# Description
+			if( $p_status == self::INVALID ) {
+				# Descriptions from InvalidPlugin classes are trusted input
+				$t_description = $t_plugin->description;
+			} else {
+				$t_description = string_display_line_links( $t_plugin->description )
+					. '<span class="small">' . $t_author . $t_url . '</span>';
+			}
+
+			# Dependencies (for valid plugins only)
+			$t_can_install = $p_status != self::INVALID;
+			if( $t_can_install ) {
+				$t_can_remove = false;
+				if( is_array( $t_plugin->requires ) ) {
+					$t_depends = array();
+					foreach( $t_plugin->requires as $t_required_basename => $t_version ) {
+						$t_dependency_name = array_key_exists( $t_required_basename, $p_plugins )
+							? $p_plugins[$t_required_basename]->name
+							: $t_required_basename;
+						$t_dependency_name .= ' ' . $t_version;
+
+						switch( plugin_dependency( $t_required_basename, $t_version ) ) {
+							case 1:
+								if( $t_upgrade_needed ) {
+									$t_class = 'dependency_upgrade';
+									$t_tooltip = lang_get( 'plugin_key_upgrade' );
+								} else {
+									$t_class = 'dependency_met';
+									$t_tooltip = lang_get( 'plugin_key_met' );
+								}
+								break;
+							case -1:
+								$t_class = 'dependency_dated';
+								$t_tooltip = lang_get( 'plugin_key_dated' );
+								$t_can_install = false;
+								break;
+							case 0:
+							default:
+								$t_class = 'dependency_unmet';
+								$t_tooltip = lang_get( 'plugin_key_unmet' );
+								$t_can_install = false;
+								break;
+						}
+
+						$t_depends[] = sprintf( '<span class="%s" title="%s">%s</span>',
+							$t_class,
+							$t_tooltip,
+							string_display_line( $t_dependency_name )
+						);
+					}
+					$t_depends = implode( '<br>', $t_depends );
+				} else {
+					$t_depends = '<span class="dependency_met">'
+						. lang_get( 'plugin_no_depends' )
+						. '</span>';
+				}
+			} else {
+				$t_can_remove = !( $t_plugin instanceof MissingClassPlugin );
+				$t_depends = null;
+			}
+
+			$t_display_data[$t_basename] = array(
+				'plugin' => $t_name,
+				'description' => $t_description,
+				'dependencies' => $t_depends,
+				'upgrade' => $t_upgrade_needed,
+				'install' => $t_can_install,
+				'remove' => $t_can_remove,
+			);
+
+			# Additional data for installed plugins
+			if( $p_status == self::INSTALLED ) {
+				$t_display_data[$t_basename] += array(
+					'priority' => plugin_priority( $t_basename ),
+					'protected' =>  plugin_protected( $t_basename ),
 				);
 			}
-			$t_depends = implode( '<br>', $t_depends );
-		} else {
-			$t_depends = '<span class="dependency_met">'
-				. lang_get( 'plugin_no_depends' )
-				. '</span>';
 		}
 
-		$t_display_data[$t_basename] = array(
-			'plugin' => $t_name,
-			'description' => $t_description,
-			'dependencies' => $t_depends,
-			'upgrade' => $t_upgrade_needed,
-			'install' => $t_can_install,
-			'remove' => $t_invalid && ! $t_plugin instanceof MissingClassPlugin,
-		);
-		if( $p_install_status == 1 ) {
-			$t_display_data[$t_basename] += array(
-				'priority' => plugin_priority( $t_basename ),
-				'protected' =>  plugin_protected( $t_basename ),
-			);
-		}
+		return $t_display_data;
 	}
-	return $t_display_data;
+
 }
