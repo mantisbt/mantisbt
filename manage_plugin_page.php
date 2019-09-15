@@ -108,48 +108,7 @@ if( $t_plugins->countInstalled() ) {
 								</thead>
 
 								<tbody>
-<?php
-	foreach( $t_plugins->getInstalled() as $t_basename => $t_data ) {
-		echo '<tr>';
-		echo '<td>',
-			$t_data['plugin'],
-			'<input type="hidden" name="change_', $t_basename, '" value="1"/></td>';
-		echo '<td>', $t_data['description'], '</td>';
-		echo '<td class="center">', $t_data['dependencies'], '</td>';
-
-		if( $t_basename == 'MantisCore' ) {
-			echo '<td>&nbsp;</td><td>&nbsp;</td>';
-		} else {
-			echo '<td class="center">',
-				'<select name="priority_' . $t_basename . '" class="input-sm">';
-			print_plugin_priority_list( $t_data['priority'] );
-			echo '</select>', '</td>';
-			echo '<td class="center">',
-				'<label>',
-				'<input type="checkbox" class="ace" name="protected_' . $t_basename . '"';
-			check_checked( $t_data['protected'] );
-			echo ' />',
-				'<span class="lbl"></span>',
-				'</label>',
-				'</select>','</td>';
-		}
-
-		# Actions
-		echo '<td class="center">';
-		if( $t_data['upgrade'] ) {
-			print_link_button(
-				'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ),
-				lang_get( 'plugin_upgrade' ), 'btn-xs' );
-		}
-		if( !$t_data['protected'] ) {
-			print_link_button(
-				'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ),
-				lang_get( 'plugin_uninstall' ),  'btn-xs' );
-		}
-		echo '</td>';
-		echo "</tr>\n";
-	}
-?>
+									<?php $t_plugins->printInstalled(); ?>
 								</tbody>
 						</table>
 					</div>
@@ -203,29 +162,7 @@ if( $t_plugins->countInvalid() ) {
 						</tr>
 						</thead>
 						<tbody>
-<?php
-	foreach( $t_plugins->getInvalid() as $t_basename => $t_data ) {
-		echo '<tr>';
-		echo '<td>', $t_data['plugin'], '</td>';
-		echo '<td>', $t_data['description'], '</td>';
-
-		# Actions
-		echo '<td class="center">';
-		if( $t_data['remove'] ) {
-			print_link_button(
-				'manage_plugin_uninstall.php?name=' . $t_basename
-				. form_security_param( 'manage_plugin_uninstall'
-				),
-				lang_get( 'remove_link' ),
-				'btn-xs'
-			);
-		} else {
-			echo lang_get( 'plugin_manual_fix' );
-		}
-		echo '</td>';
-		echo "</tr>\n";
-	}
-?>
+							<?php $t_plugins->printInvalid(); ?>
 						</tbody>
 					</table>
 				</div>
@@ -271,26 +208,7 @@ if( $t_plugins->countAvailable() ) {
 					</thead>
 
 					<tbody>
-<?php
-foreach( $t_plugins->getAvailable() as $t_basename => $t_data ) {
-	echo '<tr>';
-	echo '<td>',
-	$t_data['plugin'],
-	'<input type="hidden" name="change_', $t_basename, '" value="1"/></td>';
-	echo '<td>', $t_data['description'], '</td>';
-	echo '<td class="center">', $t_data['dependencies'], '</td>';
-
-	# Actions
-	echo '<td class="center">';
-	if( $t_data['install'] ) {
-		print_small_button(
-			'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ),
-			lang_get( 'plugin_install' ) );
-	}
-	echo '</td>';
-	echo "</tr>\n";
-}
-?>
+						<?php $t_plugins->printAvailable(); ?>
 					</tbody>
 				</table>
 			</div>
@@ -323,29 +241,22 @@ layout_page_end();
  * Class ListPluginsForDisplay
  *
  * Collects all Plugins and dispatches them in 3 categories: available,
- * installed and invalid. Provides functions to return each sub-list in a
- * display-ready format depending on the category.
+ * installed and invalid. Provides functions to print each sub-list in the
+ * appropriate format, depending on the category.
  */
 class ListPluginsForDisplay {
 	/**
-	 * Plugin status constants
-	 */
-	const AVAILABLE = 0;
-	const INSTALLED = 1;
-	const INVALID = 2;
-
-	/**
-	 * @var array List of available plugins (i.e. valid and not installed)
+	 * @var AvailablePlugin[] List of available plugins (i.e. valid and not installed)
 	 */
 	protected $available = array();
 
 	/**
-	 * @var array List of installed (registered) plugins
+	 * @var InstalledPlugin[] List of installed (registered) plugins
 	 */
 	protected $installed = array();
 
 	/**
-	 * @var array List of invalid plugins
+	 * @var InvalidPluginForDisplay[] List of invalid plugins
 	 */
 	protected $invalid = array();
 
@@ -363,14 +274,13 @@ class ListPluginsForDisplay {
 
 		foreach( $t_plugins as $t_basename => $t_plugin ) {
 			if( $t_plugin instanceof InvalidPlugin ) {
-				$this->invalid[$t_basename] = $t_plugin;
+				$this->invalid[$t_basename] = new InvalidPluginForDisplay( $t_plugin );
 			} elseif( plugin_is_registered( $t_basename ) ) {
-				$this->installed[$t_basename] = $t_plugin;
+				$this->installed[$t_basename] = new InstalledPlugin( $t_plugin );
 			} else {
-				$this->available[$t_basename] = $t_plugin;
+				$this->available[$t_basename] = new AvailablePlugin( $t_plugin );
 			}
 		}
-
 	}
 
 	/**
@@ -395,170 +305,266 @@ class ListPluginsForDisplay {
 	}
 
 	/**
-	 * Return the list of available plugins for display
-	 * @return array Plugins list
+	 * Prints the list of available plugins
 	 */
-	public function getAvailable() {
-		return $this->getDisplayList( $this->available, self::AVAILABLE );
+	public function printAvailable() {
+		foreach( $this->available as $t_plugin ) {
+			$t_plugin->render();
+		}
 	}
 
 	/**
-	 * Return the list of installed plugins for display
-	 * @return array Plugins list
+	 * Prints the list of installed plugins
 	 */
-	public function getInstalled() {
-		return $this->getDisplayList( $this->installed, self::INSTALLED );
+	public function printInstalled() {
+		foreach( $this->installed as $t_plugin ) {
+			$t_plugin->render();
+		}
 	}
 
 	/**
-	 * Return the list of invalid plugins for display
-	 * @return array Plugins list
+	 * Print the list of invalid plugins
 	 */
-	public function getInvalid() {
-		return $this->getDisplayList( $this->invalid, self::INVALID );
+	public function printInvalid() {
+		foreach( $this->invalid as $t_plugin ) {
+			$t_plugin->render();
+		}
+	}
+}
+
+abstract class PluginForDisplay {
+	protected $basename = '';
+	protected $name = '';
+	protected $description = '';
+
+	public function __construct( MantisPlugin $p_plugin ) {
+		$this->basename = $p_plugin->basename;
+		$this->name = $p_plugin->name;
+		if( $p_plugin->version ) {
+			$this->name .= ' ' . $p_plugin->version;
+		}
 	}
 
-	/**
-	 * Prepare plugin information for display.
-	 *
-	 * Returns a list of Plugins. Each element has the following structure:
-	 * - plugin       Basename
-	 * - description
-	 * - dependencies
-	 * - upgrade      True if a schema upgrade is needed
-	 * - install      True if plugin can be installed (i.e. dependencies are met)
-	 * - remove       True if (invalid) Plugin can be removed
-	 * Installed plugins have 2 additional fields:
-	 * - priority     Plugin priority (1..5)
-	 * - protected    True if plugin is protected
-	 *
-	 * @param array $p_plugins List of plugins to process
-	 * @param int   $p_status  One of AVAILABLE, INSTALLED or INVALID
-	 *
-	 * @return array
-	 */
-	protected function getDisplayList( $p_plugins, $p_status ) {
-		$t_display_data = array();
-		foreach( $p_plugins as $t_basename => $t_plugin) {
-			$t_name = $t_plugin->name . ' ' . $t_plugin->version;
-			$t_upgrade_needed = plugin_needs_upgrade( $t_plugin );
+	public function render() {
+		echo "<tr>\n";
+		$this->renderColumns();
+		echo "</tr>\n";
+	}
 
-			# Plugin Author
-			$t_author = $t_plugin->author;
-			if( !empty( $t_author ) ) {
-				if( is_array( $t_author ) ) {
-					$t_author = implode( ', ', $t_author );
-				}
-				if( !is_blank( $t_plugin->contact ) ) {
-					$t_subject = lang_get( 'plugin' ) . ' - ' . $t_name;
-					$t_author = '<br>'
-						. sprintf( lang_get( 'plugin_author' ),
-							prepare_email_link( $t_plugin->contact, $t_author, $t_subject )
-						);
-				} else {
-					$t_author = '<br>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
-				}
-			}
+	protected function renderColumns() {
+		echo "<td>$this->name</td>\n";
+		echo "<td>$this->description</td>\n";
+	}
+}
 
-			# Plugin name / page
-			# If plugin is installed and has a config page, we create a link to it
-			if( $p_status == self::INSTALLED && !is_blank( $t_plugin->page ) ) {
-				$t_name = '<a href="'
-					. string_attribute( plugin_page( $t_plugin->page, false, $t_basename ) )
-					. '">'
-					. string_display_line( $t_name )
-					. '</a>';
-			}
+class InvalidPluginForDisplay extends PluginForDisplay {
+	protected $can_remove = false;
 
-			# Plugin Website URL
-			$t_url = $t_plugin->url;
-			if( !is_blank( $t_url ) ) {
-				$t_url = '<br>'
-					. lang_get( 'plugin_url' )
-					. lang_get( 'word_separator' )
-					. '<a href="' . $t_url . '">' . $t_url . '</a>';
-			}
+	public function __construct( MantisPlugin $p_plugin ) {
+		parent::__construct( $p_plugin );
 
-			# Description
-			if( $p_status == self::INVALID ) {
-				# Descriptions from InvalidPlugin classes are trusted input
-				$t_description = $t_plugin->description;
-			} else {
-				$t_description = string_display_line_links( $t_plugin->description )
-					. '<span class="small">' . $t_author . $t_url . '</span>';
-			}
+		# Descriptions from InvalidPlugin classes are trusted input
+		$this->description = $p_plugin->description;
 
-			# Dependencies (for valid plugins only)
-			$t_can_install = $p_status != self::INVALID;
-			if( $t_can_install ) {
-				$t_can_remove = false;
-				if( is_array( $t_plugin->requires ) ) {
-					$t_depends = array();
-					foreach( $t_plugin->requires as $t_required_basename => $t_version ) {
-						$t_dependency_name = array_key_exists( $t_required_basename, $p_plugins )
-							? $p_plugins[$t_required_basename]->name
-							: $t_required_basename;
-						$t_dependency_name .= ' ' . $t_version;
+		$this->can_remove = ! $p_plugin instanceof MissingClassPlugin;
+	}
 
-						switch( plugin_dependency( $t_required_basename, $t_version ) ) {
-							case 1:
-								if( $t_upgrade_needed ) {
-									$t_class = 'dependency_upgrade';
-									$t_tooltip = lang_get( 'plugin_key_upgrade' );
-								} else {
-									$t_class = 'dependency_met';
-									$t_tooltip = lang_get( 'plugin_key_met' );
-								}
-								break;
-							case -1:
-								$t_class = 'dependency_dated';
-								$t_tooltip = lang_get( 'plugin_key_dated' );
-								$t_can_install = false;
-								break;
-							case 0:
-							default:
-								$t_class = 'dependency_unmet';
-								$t_tooltip = lang_get( 'plugin_key_unmet' );
-								$t_can_install = false;
-								break;
-						}
+	protected function renderColumns() {
+		parent::renderColumns();
 
-						$t_depends[] = sprintf( '<span class="%s" title="%s">%s</span>',
-							$t_class,
-							$t_tooltip,
-							string_display_line( $t_dependency_name )
-						);
-					}
-					$t_depends = implode( '<br>', $t_depends );
-				} else {
-					$t_depends = '<span class="dependency_met">'
-						. lang_get( 'plugin_no_depends' )
-						. '</span>';
-				}
-			} else {
-				$t_can_remove = !( $t_plugin instanceof MissingClassPlugin );
-				$t_depends = null;
-			}
-
-			$t_display_data[$t_basename] = array(
-				'plugin' => $t_name,
-				'description' => $t_description,
-				'dependencies' => $t_depends,
-				'upgrade' => $t_upgrade_needed,
-				'install' => $t_can_install,
-				'remove' => $t_can_remove,
+		# Actions
+		echo '<td class="center">';
+		if( $this->can_remove ) {
+			print_link_button(
+				'manage_plugin_uninstall.php?name=' . $this->basename
+				. form_security_param( 'manage_plugin_uninstall'
+				),
+				lang_get( 'remove_link' ),
+				'btn-xs'
 			);
+		} else {
+			echo lang_get( 'plugin_manual_fix' );
+		}
+		echo '</td>', "\n";
+	}
+}
 
-			# Additional data for installed plugins
-			if( $p_status == self::INSTALLED ) {
-				$t_display_data[$t_basename] += array(
-					'priority' => plugin_priority( $t_basename ),
-					'protected' =>  plugin_protected( $t_basename ),
-				);
+class AvailablePlugin extends PluginForDisplay {
+	protected $dependencies = array();
+	protected $upgrade_needed = false;
+	protected $can_install = false;
+
+	public function __construct( MantisPlugin $p_plugin ) {
+		parent::__construct( $p_plugin );
+
+		$t_plugin_name = $p_plugin->name . ' ' . $p_plugin->version;
+
+		# Plugin Author
+		$t_author = $p_plugin->author;
+		if( !empty( $t_author ) ) {
+			if( is_array( $t_author ) ) {
+				$t_author = implode( ', ', $t_author );
+			}
+			if( !is_blank( $p_plugin->contact ) ) {
+				$t_subject = lang_get( 'plugin' ) . ' - ' . $t_plugin_name;
+				$t_author = '<br>'
+					. sprintf( lang_get( 'plugin_author' ),
+						prepare_email_link( $p_plugin->contact, $t_author, $t_subject )
+					);
+			} else {
+				$t_author = '<br>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 			}
 		}
 
-		return $t_display_data;
+		# Plugin Website URL
+		$t_url = $p_plugin->url;
+		if( !is_blank( $t_url ) ) {
+			$t_url = '<br>'
+				. lang_get( 'plugin_url' )
+				. lang_get( 'word_separator' )
+				. '<a href="' . $t_url . '">' . $t_url . '</a>';
+		}
+
+		# Description
+		$this->description = string_display_line_links( $p_plugin->description )
+			. '<span class="small">' . $t_author . $t_url . '</span>';
+
+		# Dependencies
+		if( is_array( $p_plugin->requires ) ) {
+			$_all_plugins = plugin_find_all();
+			foreach( $p_plugin->requires as $t_required_basename => $t_version ) {
+				$this->can_install = false;
+
+				switch( plugin_dependency( $t_required_basename, $t_version ) ) {
+					case 1:
+						$t_upgrade_needed = plugin_is_registered( $t_required_basename )
+							&& plugin_needs_upgrade( plugin_get( $t_required_basename ) );
+						if( $t_upgrade_needed ) {
+							$t_class = 'dependency_upgrade';
+							$t_tooltip = lang_get( 'plugin_key_upgrade' );
+						} else {
+							$t_class = 'dependency_met';
+							$t_tooltip = lang_get( 'plugin_key_met' );
+							$this->can_install = true;
+						}
+						break;
+					case -1:
+						$t_class = 'dependency_dated';
+						$t_tooltip = lang_get( 'plugin_key_dated' );
+						break;
+					case 0:
+					default:
+						$t_class = 'dependency_unmet';
+						$t_tooltip = lang_get( 'plugin_key_unmet' );
+						break;
+				}
+
+				$t_dependency_name = array_key_exists( $t_required_basename, $_all_plugins )
+					? $_all_plugins[$t_required_basename]->name
+					: $t_required_basename;
+				$t_dependency_name .= ' ' . $t_version;
+
+				$this->dependencies[] = sprintf( '<span class="%s" title="%s">%s</span>',
+					$t_class,
+					$t_tooltip,
+					string_display_line( $t_dependency_name )
+				);
+			}
+		} else {
+			$this->dependencies[] = '<span class="dependency_met">'
+				. lang_get( 'plugin_no_depends' )
+				. '</span>';
+		}
+
+		$this->upgrade_needed = plugin_needs_upgrade( $p_plugin );
 	}
 
+	protected function renderColumns() {
+		parent::renderColumns();
+
+		# Dependencies
+		echo '<td>', implode( '<br>', $this->dependencies ), '</td>', "\n";
+
+		# Actions
+		# Only displayed if current object is of AvailablePlugin class
+		if( get_class( $this ) == 'AvailablePlugin' ) {
+			echo '<td class="center">';
+			if( $this->can_install ) {
+				print_small_button(
+					'manage_plugin_install.php?name=' . $this->basename
+					. form_security_param( 'manage_plugin_install' ),
+					lang_get( 'plugin_install' )
+				);
+			}
+			echo '</td>', "\n";
+		}
+	}
+}
+
+class InstalledPlugin extends AvailablePlugin {
+	protected $priority;
+	protected $protected;
+
+	public function __construct( MantisPlugin $p_plugin ) {
+		parent::__construct( $p_plugin );
+
+		# Plugin name / page
+		# If plugin is installed and has a config page, we create a link to it
+		if( !is_blank( $p_plugin->page ) ) {
+			$this->name = '<a href="'
+				. string_attribute( plugin_page( $p_plugin->page, false, $p_plugin->basename ) )
+				. '">'
+				. string_display_line( $this->name )
+				. '</a>';
+		}
+
+		$this->priority = plugin_priority( $p_plugin->basename );
+		$this->protected =  plugin_protected( $p_plugin->basename );
+	}
+
+	protected function renderColumns() {
+		parent::renderColumns();
+
+		if( $this->basename == 'MantisCore' ) {
+			echo "<td>&nbsp;</td>\n<td>&nbsp;</td>\n";
+		} else {
+			echo '<input type="hidden" name="change_', $this->basename, '" value="1"/>';
+
+			# Priority
+			echo '<td class="center">',
+				'<select name="priority_' . $this->basename . '" class="input-sm">';
+			print_plugin_priority_list( $this->priority );
+			echo '</select>', '</td>', "\n";
+
+			# Protected
+			echo '<td class="center">';
+			echo '<label>',
+				'<input type="checkbox" class="ace" name="protected_' . $this->basename . '"';
+			check_checked( $this->protected );
+			echo ' />',
+				'<span class="lbl"></span>',
+				'</label>';
+			echo '</td>', "\n";
+		}
+
+		# Actions
+		echo '<td class="center">';
+		if( $this->upgrade_needed ) {
+			print_link_button(
+				'manage_plugin_upgrade.php?name=' . $this->basename
+				. form_security_param( 'manage_plugin_upgrade' ),
+				lang_get( 'plugin_upgrade' ),
+				'btn-xs'
+			);
+		}
+		if( !$this->protected ) {
+			print_link_button(
+				'manage_plugin_uninstall.php?name=' . $this->basename
+				. form_security_param( 'manage_plugin_uninstall' ),
+				lang_get( 'plugin_uninstall' ),
+				'btn-xs'
+			);
+		}
+		echo '</td>', "\n";
+	}
 }
