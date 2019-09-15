@@ -52,20 +52,27 @@ require_api( 'lang_api.php' );
 require_api( 'logging_api.php' );
 
 /**
- * Plugins cache
- * @global MantisPlugin[] $g_plugin_cache
+ * Installed Plugins cache
+ * @global MantisPlugin[] $g_plugin_cache Basename is used as key.
  */
 $g_plugin_cache = array();
 
 /**
+ * Initialized Plugins cache
+ * @global boolean[] $g_plugin_cache True if plugin is loaded; Basename is used as key.
+ * @see plugin_is_loaded()
+ */
+$g_plugin_cache_init = array();
+
+/**
  * Plugins priority cache
- * @global int[] $g_plugin_cache_priority
+ * @global int[] $g_plugin_cache_priority Basename is used as key.
  */
 $g_plugin_cache_priority = array();
 
 /**
  * Plugins protected status cache
- * @global int[] $g_plugin_cache_protected
+ * @global boolean[] $g_plugin_cache_protected Basename is used as key.
  */
 $g_plugin_cache_protected = array();
 
@@ -122,7 +129,7 @@ function plugin_get_force_installed() {
  * Returns an object representing the specified plugin
  * Triggers an error if the plugin is not registered
  * @param string|null $p_basename Plugin base name (defaults to current plugin).
- * @return object Plugin Object
+ * @return MantisPlugin Plugin Object
  */
 function plugin_get( $p_basename = null ) {
 	global $g_plugin_cache;
@@ -481,7 +488,7 @@ function plugin_event_hook_many( array $p_hooks ) {
  * Allows a plugin to declare a 'child plugin' that
  * can be loaded from the same parent directory.
  * @param string $p_child Child plugin basename.
- * @return mixed
+ * @return MantisPlugin
  */
 function plugin_child( $p_child ) {
 	$t_base_name = plugin_get_current();
@@ -1112,8 +1119,8 @@ function plugin_init( $p_basename ) {
 /**
  * Log a plugin-specific event.
  *
- * @param string|array $p_msg       Either a string, or an array structured as
- *                                  (string,execution time).
+ * @param string|array $p_msg       Log message - either a string, or an array
+ *                                  structured as (string,execution time).
  * @param string        $p_basename Plugin's basename (defaults to current plugin)
  */
 function plugin_log_event( $p_msg, $p_basename = null ) {
