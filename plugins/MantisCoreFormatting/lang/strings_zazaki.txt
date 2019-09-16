@@ -52,5 +52,6 @@ $s_plugin_format_process_urls = 'URL Karfinayış';
 $s_plugin_format_process_buglinks = 'Gıreyê MantisBTi (Mesele/Nota Meseleyi)';
 $s_plugin_format_process_buglinks_info = 'Sazkerdışê to etiketê <em>Issue</em>- zey „<literal>%s</literal>“ u etiketê <em>Issue Note</em>- zey „<literal>%s</literal>“ şınasneno';
 $s_plugin_format_process_markdown = 'Markdown Vıraştış';
+$s_plugin_format_process_markdown_info = 'Terzê Markdowni ra peşniyayo, formatkerdışê metıni ra rêza çekuya, tadayışê HTMLyi ra gore dizayn biyo.';
 $s_plugin_format_enabled = 'Ake';
 $s_plugin_format_disabled = 'Racne';
