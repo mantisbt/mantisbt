@@ -39,6 +39,7 @@
  * @file
  *
  * @author Abedini
+ * @author Ahmad252
  * @author Alifakoor
  * @author Alirezaaa
  * @author Atefe
@@ -595,7 +596,7 @@ $s_change_configuration = 'روزآمدسازی پیکربندی';
 $s_message = 'پیام';
 $s_notify_defaults_change_access = 'کسی که می‌تواند پیش‌فرض‌های اعلان را تغییر دهد';
 $s_notify_actions_change_access = 'کسی که می​تواند اعلان​ها را تغییر دهد:';
-$s_revert_to_system = 'حذف همۀ تنظیمات پروژه​ها';
+$s_revert_to_system = 'حذف همهٔ تنظیمات پروژه‌​ها';
 $s_revert_to_all_project = 'حذف تنظیمات مخصوص پروژه';
 $s_current_status = 'وضعیت فعلی';
 $s_next_status = 'وضعیت بعدی';
