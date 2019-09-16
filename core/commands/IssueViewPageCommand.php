@@ -216,11 +216,15 @@ class IssueViewPageCommand extends Command {
 			$t_flags['monitor_can_add'] = access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $t_issue_id ) ? true : false;
 		}
 
-		$t_monitor_flag = !$t_force_readonly && !$t_anonymous_user;
-		$t_is_monitoring = user_is_monitoring_bug( $t_user_id, $t_issue_id );
-		$t_flags['can_monitor'] = $t_monitor_flag && !$t_is_monitoring &&
-			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $t_issue_id );
-		$t_flags['can_unmonitor'] = $t_monitor_flag && $t_is_monitoring;
+		if( !$t_force_readonly && !$t_anonymous_user ) {
+			$t_is_monitoring = user_is_monitoring_bug( $t_user_id, $t_issue_id );
+			$t_flags['can_monitor'] =  !$t_is_monitoring &&
+				access_has_bug_level( config_get( 'monitor_bug_threshold' ), $t_issue_id );
+			$t_flags['can_unmonitor'] = $t_is_monitoring;
+		} else {
+			$t_flags['can_monitor'] = false;
+			$t_flags['can_unmonitor'] = false;
+		}
 
 		$t_flags['attachments_show'] = in_array( 'attachments', $t_fields );
 		$t_flags['category_show'] = in_array( 'category_id', $t_fields );
