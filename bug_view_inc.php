@@ -638,9 +638,7 @@ if( $t_flags['relationships_show'] ) {
 }
 
 # User list monitoring the bug
-if( $t_flags['monitor_show'] && isset( $t_issue['monitors'] ) ) {
-	$t_num_users = sizeof( $t_issue['monitors'] );
-
+if( $t_flags['monitor_show'] ) {
 	echo '<div class="col-md-12 col-xs-12">';
 	echo '<a id="monitors"></a>';
 	echo '<div class="space-10"></div>';
@@ -673,7 +671,7 @@ if( $t_flags['monitor_show'] && isset( $t_issue['monitors'] ) ) {
 		</th>
 		<td>
 	<?php
-			if( 0 == $t_num_users ) {
+			if( !isset( $t_issue['monitors'] ) || count( $t_issue['monitors'] ) == 0 ) {
 				echo lang_get( 'no_users_monitoring_bug' );
 			} else {
 				$t_first_user = true;
