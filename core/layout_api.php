@@ -903,6 +903,7 @@ function layout_options_for_sidebar( $p_menu_options, $p_active_sidebar_page ) {
 /**
  * Print dropdown menu item
  * @param array  $p_menu_options menu item of group
+ * @param string $p_active_sidebar_page The active page on the sidebar.
  * @return void
  */
 function layout_sidebar_dropdown_menu( $p_menu_options , $p_active_sidebar_page ) {
