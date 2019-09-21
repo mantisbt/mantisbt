@@ -67,10 +67,12 @@ if( 'relation' == $f_type ) {
 	$t_graph_type = 'relation';
 	$t_graph_type_switch = 'dependency';
 	$t_graph_relation = true;
+	$t_title = lang_get( 'relation_graph' );
 } else {
 	$t_graph_type = 'dependency';
 	$t_graph_type_switch = 'relation';
 	$t_graph_relation = false;
+	$t_title = lang_get( 'dependency_graph' );
 }
 
 if( 'horizontal' == $f_orientation ) {
@@ -82,7 +84,6 @@ if( 'horizontal' == $f_orientation ) {
 	$t_graph_orientation_switch = 'horizontal';
 	$t_graph_horizontal = false;
 }
-
 
 $t_bug = bug_get( $f_bug_id, true );
 
@@ -98,8 +99,6 @@ compress_enable();
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 layout_page_begin();
-
-$t_title = $t_graph_relation ? 'viewing_bug_relationship_graph_title' : 'viewing_bug_dependency_graph_title';
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -107,7 +106,7 @@ $t_title = $t_graph_relation ? 'viewing_bug_relationship_graph_title' : 'viewing
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
 				<i class="ace-icon fa fa-sitemap"></i>
-				<?php echo lang_get( $t_title ); ?>
+				<?php echo $t_title ?>
 			</h4>
 		</div>
 
@@ -156,7 +155,7 @@ $t_title = $t_graph_relation ? 'viewing_bug_relationship_graph_title' : 'viewing
 ?>
 				<img src="<?php echo $t_graph_src ?>"
 					 usemap="#<?php echo $t_map_name ?>"
-					 alt="<?php echo lang_get( $t_title ); ?>"
+					 alt="<?php echo $t_title ?>"
 				/>
 			</div>
 

@@ -1412,9 +1412,7 @@ $s_copy_attachments_from_parent = 'Copy attachments';
 $s_with = 'with';
 
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = 'Relationship Graph';
-$s_viewing_bug_dependency_graph_title = 'Dependency Graph';
-$s_relation_graph = 'Relation Graph';
+$s_relation_graph = 'Relationship Graph';
 $s_dependency_graph = 'Dependency Graph';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
