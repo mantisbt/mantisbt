@@ -62,6 +62,7 @@ if( ON != config_get( 'relationship_graph_enable' ) ) {
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_type			= gpc_get_string( 'graph', 'relation' );
 $f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
+$f_show_summary	= gpc_get_bool( 'summary', false );
 
 if( 'relation' == $f_type ) {
 	$t_graph_type = 'relation';
@@ -122,7 +123,8 @@ layout_page_begin();
 	# Relation/Dependency Graph Switch
 	print_link_button(
 		'bug_relationship_graph.php?bug_id=' . $f_bug_id
-		. '&graph=' . $t_graph_type_switch,
+		. '&graph=' . $t_graph_type_switch
+		. '&summary=' . $f_show_summary,
 		lang_get( $t_graph_relation ? 'dependency_graph' : 'relation_graph' )
 	);
 
@@ -131,10 +133,19 @@ layout_page_begin();
 		print_link_button(
 			'bug_relationship_graph.php?bug_id=' . $f_bug_id
 			. '&graph=' . $t_graph_type
-			. '&orientation=' . $t_graph_orientation_switch,
+			. '&orientation=' . $t_graph_orientation_switch
+			. '&summary=' . $f_show_summary,
 			lang_get( $t_graph_orientation_switch )
 		);
 	}
+
+	print_link_button(
+		'bug_relationship_graph.php?bug_id=' . $f_bug_id
+		. '&graph=' . $t_graph_type
+		. '&orientation=' . $t_graph_orientation
+		. '&summary=' . !$f_show_summary,
+		lang_get( $f_show_summary ? 'hide_summary' : 'show_summary' )
+	);
 ?>
 				</div>
 			</div>
@@ -143,15 +154,15 @@ layout_page_begin();
 			<div class="center padding-8">
 <?php
 	if( $t_graph_relation ) {
-		$t_graph = relgraph_generate_rel_graph( $f_bug_id );
+		$t_graph = relgraph_generate_rel_graph( $f_bug_id, $f_show_summary );
 	} else {
-		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
+		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal, $f_show_summary );
 	}
 
 	$t_map_name = 'relationship_graph_map';
 	relgraph_output_map( $t_graph, $t_map_name );
 
-	$t_graph_src = "bug_relationship_graph_img.php?bug_id=$f_bug_id&graph=$t_graph_type&orientation=$t_graph_orientation";
+	$t_graph_src = "bug_relationship_graph_img.php?bug_id=$f_bug_id&graph=$t_graph_type&orientation=$t_graph_orientation&summary=$f_show_summary";
 ?>
 				<img src="<?php echo $t_graph_src ?>"
 					 usemap="#<?php echo $t_map_name ?>"

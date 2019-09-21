@@ -1417,6 +1417,8 @@ $s_dependency_graph = 'Dependency Graph';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'View Issue';
+$s_show_summary = 'Show Summary';
+$s_hide_summary = 'Hide Summary';
 
 # Permissions report
 $s_perm_rpt_capability = 'Capability';

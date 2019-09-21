@@ -78,9 +78,10 @@ function relgraph_bug_format_id( $p_bug_id ) {
  * Generate a relationship graph for the given issue.
  *
  * @param integer $p_bug_id A bug identifier.
+ * @param boolean $p_show_summary Whether to include the Summary in the nodes
  * @return Graph
  */
-function relgraph_generate_rel_graph( $p_bug_id ) {
+function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	# List of visited issues and their data.
 	$v_bug_list = array();
 	$v_rel_list = array();
@@ -191,7 +192,7 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&graph=relation';
 		}
 
-		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_bug, $t_url, $t_id == $p_bug_id );
+		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_bug, $t_url, $t_id == $p_bug_id, $p_show_summary );
 
 		# Now add all relationship edges to the graph.
 		if( isset( $v_rel_list[$t_id] ) ) {
@@ -228,10 +229,11 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
  * Generate a dependency relationship graph for the given issue.
  * @param integer $p_bug_id     Bug identifier.
  * @param boolean $p_horizontal Graph orientation - horizontal if true.
+ * @param boolean $p_show_summary Whether to include the Summary in the nodes
  * @todo duplicate bug/bugid
  * @return Digraph
  */
-function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
+function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false, $p_show_summary = false ) {
 	# List of visited issues and their data.
 	$v_bug_list = array();
 
@@ -321,7 +323,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
 			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&graph=dependency&orientation=' . $t_graph_orientation;
 		}
 
-		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_related_bug, $t_url, $t_related_bug_id == $p_bug_id );
+		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_related_bug, $t_url, $t_related_bug_id == $p_bug_id, $p_show_summary );
 
 		# Now add all relationship edges to the graph.
 		foreach( $v_bug_list[$t_related_bug_id]->parents as $t_parent_id ) {
@@ -501,11 +503,21 @@ function relgraph_output_map( Graph $p_graph, $p_name ) {
  * @param BugData $p_bug       A BugData object.
  * @param string  $p_url       URL.
  * @param boolean $p_highlight Highlight.
+ * @param boolean $p_show_summary Whether to include the Summary in the nodes
  * @return void
  */
-function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, $p_url = null, $p_highlight = false ) {
+function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, $p_url = null, $p_highlight = false, $p_show_summary = false ) {
+	$t_summary = string_display_line_links( $p_bug->summary );
+	$t_status = get_enum_element( 'status', $p_bug->status );
+	$t_label = $p_bug_id;
+	if( $p_show_summary ) {
+		# Truncate summary to 30 chars, to avoid nodes being too wide
+		$t_label .= "\n" . mb_strimwidth( $t_summary, 0, 30, "..." );
+	}
+
 	$t_node_attributes = array();
-	$t_node_attributes['label'] = $p_bug_id;
+	$t_node_attributes['label'] = $t_label;
+	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . $t_summary;
 
 	if( $p_highlight ) {
 		$t_node_attributes['color'] = '#0000FF';
@@ -520,10 +532,6 @@ function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, 
 	if( null !== $p_url ) {
 		$t_node_attributes['URL'] = $p_url;
 	}
-
-	$t_summary = string_display_line_links( $p_bug->summary );
-	$t_status = get_enum_element( 'status', $p_bug->status );
-	$t_node_attributes['tooltip'] = '[' . $t_status . '] ' . $t_summary;
 
 	$p_graph->add_node( $p_bug_id, $t_node_attributes );
 }
