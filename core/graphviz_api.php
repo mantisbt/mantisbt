@@ -350,7 +350,7 @@ class Graph {
 
 		# Start dot process
 
-		$t_command = $this->graphviz_tool . ' -T' . $p_format;
+		$t_command = escapeshellcmd( $this->graphviz_tool . ' -T' . $p_format );
 		$t_descriptors = array(
 			0 => array( 'pipe', 'r', ),
 			1 => array( 'pipe', 'w', ),
