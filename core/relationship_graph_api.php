@@ -158,7 +158,10 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_show_summary = false ) {
 	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
 	$t_neato_tool = config_get_global( 'neato_tool' );
 
-	$t_graph_attributes = array();
+	$t_graph_attributes = array(
+		'overlap'	=> 'false',
+		'overlap_scaling' => '0',
+	);
 
 	if( !empty( $t_graph_fontpath ) ) {
 		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
