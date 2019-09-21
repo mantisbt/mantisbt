@@ -240,6 +240,34 @@ array( '&lt;a href="' . plugin_page( 'mypage' ) . '">' . plugin_lang_get( 'mypag
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.menu.issue.relationship">
+			<title>EVENT_MENU_ISSUE_RELATIONSHIP (Default)</title>
+			<blockquote>
+				<para>
+					This event allows plugins to add new links to the menu
+					under the <emphasis>Relationships</emphasis> section
+					in the View Issue Details page.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: bug ID</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem>
+						<para>&lt;Array&gt;: List of elements to add to the menu.</para>
+						<para>This is an associative array, with the link's label as key
+							and the link target as value, e.g. <programlisting>
+array( plugin_lang_get( 'mypage_label' ) => plugin_page( 'mypage' );
+</programlisting>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.menu.main">
 			<title>EVENT_MENU_MAIN (Default)</title>
 			<blockquote>
