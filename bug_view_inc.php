@@ -941,16 +941,16 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 	}
 
 	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
-	$t_show_top_div = $p_can_update || $t_relationship_graph;
-	?>
+	$t_event_buttons = event_signal( 'EVENT_MENU_ISSUE_RELATIONSHIP', $p_bug_id );
+	$t_show_top_div = $p_can_update || $t_relationship_graph || !empty( $t_event_buttons );
+?>
 	<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-
-	<?php
+<?php
 	$t_collapse_block = is_collapsed( 'relationships' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-	?>
+?>
 	<div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
@@ -964,22 +964,41 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		</div>
 	</div>
 	<div class="widget-body">
-		<?php if( $t_show_top_div ) { ?>
+<?php
+	if( $t_show_top_div ) {
+?>
 		<div class="widget-toolbox padding-8 clearfix">
-		<?php
-			if( $t_relationship_graph ) {
-		?>
+<?php
+		# Default relationship buttons
+		$t_buttons = array();
+		if( $t_relationship_graph ) {
+			$t_buttons[lang_get( 'relation_graph' )] =
+				'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation';
+			$t_buttons[lang_get( 'dependency_graph' )] =
+				'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency';
+		}
+
+		# Plugin-added buttons
+		foreach( $t_event_buttons as $t_plugin => $t_plugin_buttons ) {
+			foreach( $t_plugin_buttons as $t_callback => $t_callback_buttons ) {
+				if( is_array( $t_callback_buttons ) ) {
+					$t_buttons = array_merge( $t_buttons, $t_callback_buttons );
+				}
+			}
+		}
+?>
 		<div class="btn-group pull-right noprint">
 <?php
-	print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) );
-	print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) );
+		# Print the buttons, if any
+		foreach( $t_buttons as $t_label => $t_url ) {
+			print_small_button( $t_url, $t_label );
+		}
 ?>
 		</div>
-		<?php
-			} # $t_relationship_graph
 
-			if( $p_can_update ) {
-			?>
+<?php
+		if( $p_can_update ) {
+?>
 		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
@@ -988,11 +1007,13 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		<input type="text" class="input-sm" name="dest_bug_id" value="" />
 		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
 		</form>
-			<?php
-			} # can update
-			?>
+<?php
+		} # can update
+?>
 		</div>
-		<?php } # show top div ?>
+<?php
+	} # show top div
+?>
 
 		<div class="widget-main no-padding">
 			<div class="table-responsive">
