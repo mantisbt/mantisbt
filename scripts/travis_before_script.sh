@@ -89,7 +89,10 @@ step "Web server setup"
 
 if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	# install Apache as PHP 5.3 does not come with an embedded web server
-	sudo apt-get update -qq
+	# apt-get fails to get MongoDB packages on Travis Precise builds, but this
+	# should not affect us so we display a message and continue
+	sudo apt-get update -qq ||
+		echo "ERROR(s) occurred while running apt-get update"
 	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
 
 	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
