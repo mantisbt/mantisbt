@@ -109,6 +109,8 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 
 	$t_history = array();
 
+	$t_files = file_get_visible_attachments( $p_issue_id );
+
 	foreach( $t_history_rows as $t_history_row ) {
 		$t_type = (int)$t_history_row['type'];
 
@@ -203,8 +205,6 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 				$t_new_value_name = 'issue';
 				break;
 		}
-
-		$t_files = file_get_visible_attachments( $p_issue_id );
 
 		$fn_process_value = function( $p_issue_id, $p_type, $p_field, $p_value, $p_lang, $p_new_value ) use ( $t_files ) {
 			if( is_blank( $p_value ) ) {
