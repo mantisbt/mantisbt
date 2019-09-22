@@ -234,15 +234,15 @@ function http_security_headers() {
 		# White list the CDN urls (if enabled)
 		if ( config_get_global( 'cdn_enabled' ) == ON ) {
 			http_csp_add( 'style-src', 'ajax.googleapis.com' );
-			http_csp_add( 'style-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'style-src', 'stackpath.bootstrapcdn.com' );
 			http_csp_add( 'style-src', 'fonts.googleapis.com' );
 			http_csp_add( 'style-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'font-src', 'fonts.gstatic.com' );
-			http_csp_add( 'font-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'font-src', 'stackpath.bootstrapcdn.com' );
 
 			http_csp_add( 'script-src', 'ajax.googleapis.com' );
-			http_csp_add( 'script-src', 'maxcdn.bootstrapcdn.com' );
+			http_csp_add( 'script-src', 'stackpath.bootstrapcdn.com' );
 			http_csp_add( 'script-src', 'cdnjs.cloudflare.com' );
 
 			http_csp_add( 'img-src', 'ajax.googleapis.com' );
