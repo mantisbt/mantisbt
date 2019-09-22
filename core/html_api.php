@@ -640,10 +640,8 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 		}
 
 		# Plugins menu items - these are html hyperlinks (<a> tags)
+		# The plugin is responsible for setting the 'active' class as appropriate
 		foreach( plugin_menu_items( $p_event ) as $t_item ) {
-			$t_active = $p_current_page && strpos( $t_item, $p_current_page ) !== false
-				? 'active'
-				: '';
 			echo $t_item;
 		}
 
