@@ -647,14 +647,17 @@ define( 'JQUERY_HASH', 'sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' );
 
 # Bootstrap & FontAwesome
 define( 'BOOTSTRAP_VERSION', '3.4.1' );
-define( 'BOOTSTRAP_HASH', 'sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu' );
+define( 'BOOTSTRAP_HASH_JS', 'sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd' );
+define( 'BOOTSTRAP_HASH_CSS', 'sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu' );
 define( 'FONT_AWESOME_VERSION', '4.6.3' );
+define( 'FONT_AWESOME_HASH', 'sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' );
 
 # Moment & DateTimePicker
 define( 'MOMENT_VERSION', '2.15.2' );
 define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
 define( 'DATETIME_PICKER_VERSION', '4.17.47' );
-define( 'DATETIME_PICKER_HASH', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
+define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
+define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
 
 # Tyeahead JS
 define( 'TYPEAHEAD_VERSION', '1.1.1' );
