@@ -462,30 +462,36 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 
 	$t_custom_fields = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+	custom_field_cache_array_rows( $t_related_custom_field_ids );
+
+	# filter out fields not accesible by the user
+	foreach( $t_related_custom_field_ids as $t_index => $t_id ) {
+		if( !custom_field_has_read_access( $t_id, $p_issue_id ) ) {
+			unset( $t_related_custom_field_ids[$t_index] );
+		}
+	}
+	custom_field_cache_values( array( $p_issue_id ), $t_related_custom_field_ids );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 
-		if( custom_field_has_read_access( $t_id, $p_issue_id ) ) {
-			# user has not access to read this custom field.
-			$t_value = custom_field_get_value( $t_id, $p_issue_id );
-			if( $t_value === false ) {
-				continue;
-			}
-
-			# return a blank string if the custom field value is undefined
-			if( $t_value === null ) {
-				$t_value = '';
-			}
-
-			$t_custom_field_value = array();
-			$t_custom_field_value['field'] = array();
-			$t_custom_field_value['field']['id'] = (int)$t_id;
-			$t_custom_field_value['field']['name'] = $t_def['name'];
-			$t_custom_field_value['value'] = $t_value;
-
-			$t_custom_fields[] = $t_custom_field_value;
+		$t_value = custom_field_get_value( $t_id, $p_issue_id );
+		if( $t_value === false ) {
+			continue;
 		}
+
+		# return a blank string if the custom field value is undefined
+		if( $t_value === null ) {
+			$t_value = '';
+		}
+
+		$t_custom_field_value = array();
+		$t_custom_field_value['field'] = array();
+		$t_custom_field_value['field']['id'] = (int)$t_id;
+		$t_custom_field_value['field']['name'] = $t_def['name'];
+		$t_custom_field_value['value'] = $t_value;
+
+		$t_custom_fields[] = $t_custom_field_value;
 	}
 
 	return count( $t_custom_fields ) == 0 ? null : $t_custom_fields;
