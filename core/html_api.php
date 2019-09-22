@@ -251,10 +251,15 @@ function html_css_link( $p_filename ) {
 /**
  * Prints a CSS link for CDN
  * @param string $p_url fully qualified domain name to the js file name
+ * @param string $p_hash resource hash to perform subresource integrity check
  * @return void
  */
-function html_css_cdn_link( $p_url ) {
-	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" crossorigin="anonymous" />', "\n";
+function html_css_cdn_link( $p_url, $p_hash = '' ) {
+	$t_integrity = '';
+	if( $p_hash !== '' ) {
+		$t_integrity = 'integrity="' . $p_hash . '" ';
+	}
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', $p_url, '" ', $t_integrity, ' crossorigin="anonymous" />', "\n";
 }
 
 /**
