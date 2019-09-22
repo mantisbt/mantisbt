@@ -424,7 +424,7 @@ function relgraph_add_child( array &$p_bug_list, $p_bug_id ) {
 			$p_bug_list[$p_bug_id]->is_descendant = true;
 
 			foreach( $p_bug_list[$p_bug_id]->children as $t_child ) {
-				relgraph_add_child( $p_bug_id, $t_child );
+				relgraph_add_child( $p_bug_list, $t_child );
 			}
 		}
 	} else {
