@@ -1130,6 +1130,42 @@ function bug_is_closed( $p_bug_id ) {
 }
 
 /**
+ * Return a bug's overdue warning level.
+ * Determines the level based on the difference between the bug's due date
+ * and the current date/time, based on the defined delays
+ * @see $g_due_date_warning_levels
+ *
+ * @param $p_bug_id
+ *
+ * @return int|false Warning level (0 = overdue), false if N/A.
+ */
+function bug_overdue_level( $p_bug_id ) {
+	if( bug_is_resolved( $p_bug_id ) ) {
+		return false;
+	}
+
+	$t_bug = bug_get( $p_bug_id );
+	$t_due_date = $t_bug->due_date;
+
+	if( date_is_null( $t_due_date ) ) {
+		return false;
+	}
+
+	$t_warning_levels = config_get( 'due_date_warning_levels', null, null, $t_bug->project_id );
+	if( !empty( $t_warning_levels ) && !is_array( $t_warning_levels ) ) {
+		trigger_error( ERROR_GENERIC );
+	}
+
+	$t_now = db_now();
+	foreach( $t_warning_levels as $t_level => $t_delay ) {
+		if( $t_now > $t_due_date - $t_delay ) {
+			return $t_level;
+		}
+	}
+	return false;
+}
+
+/**
  * Check if a given bug is overdue
  * @param integer $p_bug_id Integer representing bug identifier.
  * @return boolean true if bug is overdue, false otherwise
@@ -1137,16 +1173,7 @@ function bug_is_closed( $p_bug_id ) {
  * @uses database_api.php
  */
 function bug_is_overdue( $p_bug_id ) {
-	$t_due_date = bug_get_field( $p_bug_id, 'due_date' );
-	if( !date_is_null( $t_due_date ) ) {
-		$t_now = db_now();
-		if( $t_now > $t_due_date ) {
-			if( !bug_is_resolved( $p_bug_id ) ) {
-				return true;
-			}
-		}
-	}
-	return false;
+	return bug_overdue_level( $p_bug_id ) === 0;
 }
 
 /**
