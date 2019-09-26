@@ -182,7 +182,7 @@ class IssueViewPageCommand extends Command {
 		# Due date
 		$t_flags['due_date_show'] = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_issue_id );
 		if( $t_flags['due_date_show'] ) {
-			$t_issue_view['overdue'] = bug_is_overdue( $t_issue_id );
+			$t_issue_view['overdue'] = bug_overdue_level( $t_issue_id );
 
 			if( isset( $t_issue['due_date'] ) ) {
 				$t_issue_view['due_date'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['due_date'] ) );

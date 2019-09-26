@@ -292,11 +292,11 @@ if( $t_flags['reporter_show'] || $t_flags['handler_show'] || $t_flags['due_date_
 	if( $t_flags['due_date_show'] ) {
 		echo '<th class="bug-due-date category">', lang_get( 'due_date' ), '</th>';
 
-		if( $t_issue_view['overdue'] ) {
-			echo '<td class="bug-due-date overdue">', $t_issue_view['due_date'], '</td>';
-		} else {
-			echo '<td class="bug-due-date">', $t_issue_view['due_date'], '</td>';
+		$t_css = 'bug-due-date';
+		if( $t_issue_view['overdue'] !== false ) {
+			$t_css .= ' due-' . $t_issue_view['overdue'];
 		}
+		echo '<td class="' . $t_css . '">', $t_issue_view['due_date'], '</td>';
 	} else {
 		$t_spacer += 2;
 	}

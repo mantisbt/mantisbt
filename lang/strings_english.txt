@@ -1585,6 +1585,8 @@ $s_copy_columns_to = 'Copy Columns To';
 $s_due_date = 'Due Date';
 $s_overdue = 'Overdue';
 $s_overdue_since = 'Overdue since %1$s';
+$s_overdue_one_day = 'Overdue in less than a day';
+$s_overdue_days = 'Overdue in %1$d days';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';

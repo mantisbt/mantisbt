@@ -1634,20 +1634,17 @@ function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
  * @access public
  */
 function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_overdue = '';
-
 	if( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
 		date_is_null( $p_bug->due_date )
 	) {
+		$t_css = '';
 		$t_value = '&#160;';
 	} else {
-		if( bug_is_overdue( $p_bug->id ) ) {
-			$t_overdue = ' overdue';
-		}
+		$t_css = " due-" . bug_overdue_level( $p_bug->id );
 		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 
-	printf( '<td class="column-due-date%s">%s</td>', $t_overdue, $t_value );
+	printf( '<td class="column-due-date%s">%s</td>', $t_css, $t_value );
 }
 
 /**
@@ -1663,10 +1660,29 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	echo '<td class="column-overdue">';
 
 	if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
-		!date_is_null( $p_bug->due_date ) &&
-		bug_is_overdue( $p_bug->id ) ) {
-		$t_overdue_text_hover = sprintf( lang_get( 'overdue_since' ), date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-		echo '<i class="fa fa-times-circle-o" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
+		!date_is_null( $p_bug->due_date )
+	) {
+		$t_level = bug_overdue_level( $p_bug->id );
+		if( $t_level === 0 ) {
+			$t_icon = 'fa-times-circle-o';
+			$t_overdue_text_hover = sprintf(
+				lang_get( 'overdue_since' ),
+				date( config_get( 'short_date_format' ), $p_bug->due_date )
+			);
+		} else {
+			$t_icon = $t_level === false ? 'fa-info-circle' : 'fa-warning';
+
+			$t_duration = $p_bug->due_date - db_now();
+			if( $t_duration <= SECONDS_PER_DAY ) {
+				$t_overdue_text_hover = lang_get( 'overdue_one_day' );
+			} else {
+				$t_overdue_text_hover = sprintf(
+					lang_get( 'overdue_days' ),
+					ceil( $t_duration / SECONDS_PER_DAY )
+				);
+			}
+		}
+		echo '<i class="fa ' . $t_icon . '" title="' . string_display_line( $t_overdue_text_hover ) . '"></i>';
 	} else {
 		echo '&#160;';
 	}
