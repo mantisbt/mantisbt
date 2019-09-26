@@ -102,6 +102,8 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 			$p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
 		} else {
 			$t_filter_id = trim( $p_request->getParam( 'filter_id', '' ) );
+			# set the current project to correctly account for user permissions
+			helper_set_current_project( $t_project_id );
 
 			if( !empty( $t_filter_id ) ) {
 				$t_issues = mc_filter_get_issues(
