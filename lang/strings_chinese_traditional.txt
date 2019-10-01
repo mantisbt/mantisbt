@@ -54,6 +54,7 @@
  * @author Smarky
  * @author Wehwei
  * @author Wwycheuk
+ * @author Xiplus
  */
 
 $s_actiongroup_menu_move = '移動';

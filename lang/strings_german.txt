@@ -59,6 +59,7 @@
  * @author Revolus
  * @author Smeuser
  * @author The Evil IP address
+ * @author Tobi 406
  * @author Umherirrender
  */
 
@@ -673,6 +674,7 @@ $s_configuration_corrupted = 'Ungültige Konfiguration in der Datenbank';
 $s_set_configuration_option_action_create = 'Konfigurationsoption erstellen';
 $s_set_configuration_option_action_edit = 'Konfigurationsoption bearbeiten';
 $s_set_configuration_option_action_clone = 'Konfigurationsoption klonen';
+$s_set_configuration_option_action_view = 'Konfigurations-Option ansehen';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Installierte Plugins';
 $s_plugins_available = 'Verfügbare Plugins';
