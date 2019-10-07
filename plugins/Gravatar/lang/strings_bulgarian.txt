@@ -39,6 +39,8 @@
  * @file
  *
  * @author ShockD
+ * @author StanProg
  */
 
 $s_plugin_Gravatar_title = 'Аватари чрез Gravatar';
+$s_plugin_Gravatar_description = 'Плъгин, който показва потребителски аватари на база на адреса на тяхната ел. поща чрез услуга за аватари.';
