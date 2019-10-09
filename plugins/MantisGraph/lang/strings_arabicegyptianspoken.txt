@@ -41,7 +41,7 @@
  * @author Meno25
  */
 
-$s_plugin_graph_description = 'الملحق الرسومى الرسمى.';
+$s_plugin_MantisGraph_description = 'الملحق الرسومى الرسمى.';
 $s_plugin_MantisGraph_config = 'ضبط';
 $s_plugin_MantisGraph_status_link = 'حسب الحاله';
 $s_plugin_MantisGraph_priority_link = 'حسب الاهميه';

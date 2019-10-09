@@ -47,11 +47,9 @@
  * @author АдмиралАнимЕ
  */
 
-$s_plugin_graph_title = 'MantisBT - Графики';
-$s_plugin_graph_description = 'Официален плъгин за графики.';
 $s_plugin_MantisGraph_title = 'MantisBT - Графики';
+$s_plugin_MantisGraph_description = 'Официален плъгин за графики.';
 $s_plugin_MantisGraph_config = 'Конфигурация';
-$s_plugin_MantisGraph_synthesis_link = 'Синтез';
 $s_plugin_MantisGraph_status_link = 'По състояние';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По значимост';
