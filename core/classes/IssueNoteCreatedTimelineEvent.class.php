@@ -33,7 +33,7 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp     Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id       An user identifier.
+	 * @param integer $p_user_id       A user identifier.
 	 * @param integer $p_issue_id      A issue identifier.
 	 * @param integer $p_issue_note_id A issue note identifier.
 	 */

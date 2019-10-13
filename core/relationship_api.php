@@ -42,7 +42,7 @@
  * - Email notification sent to the users of both the bugs based based on the 'updated' bug notify type.
  * --------------------------------------------------------
  * RESOLVE/CLOSE BUGS WITH BLOCKING CHILD BUGS STILL OPEN
- * Just a warning is print out on the form when an user attempts to resolve or close a bug with
+ * Just a warning is print out on the form when a user attempts to resolve or close a bug with
  * related bugs in relation BUG_DEPENDANT still not resolved.
  * Anyway the user can force the resolving/closing action.
  * --------------------------------------------------------

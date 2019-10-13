@@ -399,7 +399,7 @@ function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs )
  * perform an insert of a preference object into the DB
  * @param integer         $p_user_id    A valid user identifier.
  * @param integer         $p_project_id A valid project identifier.
- * @param UserPreferences $p_prefs      An UserPrefences Object.
+ * @param UserPreferences $p_prefs      A UserPrefences Object.
  * @return boolean
  */
 function user_pref_db_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
@@ -440,7 +440,7 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
  * perform an update of a preference object into the DB
  * @param integer         $p_user_id    A valid user identifier.
  * @param integer         $p_project_id A valid project identifier.
- * @param UserPreferences $p_prefs      An UserPrefences Object.
+ * @param UserPreferences $p_prefs      A UserPrefences Object.
  * @return void
  */
 function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {

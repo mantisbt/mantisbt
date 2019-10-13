@@ -69,7 +69,7 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 }
 
 /**
- * Delete an user given its id.
+ * Delete a user given its id.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.

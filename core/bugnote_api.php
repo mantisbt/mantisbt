@@ -201,7 +201,7 @@ function bugnote_ensure_exists( $p_bugnote_id ) {
  * Check if the given user is the reporter of the bugnote
  * return true if the user is the reporter, false otherwise
  * @param integer $p_bugnote_id A bugnote identifier.
- * @param integer $p_user_id    An user identifier.
+ * @param integer $p_user_id    A user identifier.
  * @return boolean
  * @access public
  */
@@ -458,7 +458,7 @@ function bugnote_get_latest_id( $p_bug_id ) {
  * @param integer $p_bug_id             A bug identifier.
  * @param integer $p_user_bugnote_order Sort order.
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
- * @param integer $p_user_id            An user identifier.
+ * @param integer $p_user_id            A user identifier.
  * @return array array of bugnotes
  * @access public
  */
@@ -520,7 +520,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
  * @param integer $p_bug_id             A bug identifier.
  * @param integer $p_user_bugnote_order Sort order.
  * @param integer $p_user_bugnote_limit Number of bugnotes to display to user.
- * @param integer $p_user_id            An user identifier.
+ * @param integer $p_user_id            A user identifier.
  * @return string The string containing all visible notes.
  * @access public
  */

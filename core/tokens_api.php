@@ -113,7 +113,7 @@ function token_get_value( $p_type, $p_user_id = null ) {
  * @param integer $p_type    The token type.
  * @param string  $p_value   The token value.
  * @param integer $p_expiry  Token expiration in seconds.
- * @param integer $p_user_id An user identifier.
+ * @param integer $p_user_id A user identifier.
  * @return int Token ID
  */
 function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
@@ -144,7 +144,7 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 /**
  * Delete a token.
  * @param integer $p_type    The token type.
- * @param integer $p_user_id An user identifier or null for current logged in user.
+ * @param integer $p_user_id A user identifier or null for current logged in user.
  * @return void
  */
 function token_delete( $p_type, $p_user_id = null ) {
@@ -161,7 +161,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 
 /**
  * Delete all tokens owned by a specified user.
- * @param integer $p_user_id An user identifier or null for current logged in user.
+ * @param integer $p_user_id A user identifier or null for current logged in user.
  * @return void
  */
 function token_delete_by_owner( $p_user_id = null ) {
