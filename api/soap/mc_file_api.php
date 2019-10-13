@@ -26,7 +26,7 @@
 /**
  * Check if the current user can download attachments for the specified bug.
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id An user identifier.
+ * @param integer $p_user_id A user identifier.
  * @return boolean
  */
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {

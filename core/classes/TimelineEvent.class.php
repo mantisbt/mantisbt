@@ -33,7 +33,7 @@ class TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id     An user identifier.
+	 * @param integer $p_user_id     A user identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id ) {
 		$this->timestamp = $p_timestamp;

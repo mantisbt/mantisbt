@@ -829,7 +829,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
 /**
  * Set login cookies for the user
  * If $p_perm_login is true, a long-term cookie is created
- * @param integer $p_user_id    An user identifier.
+ * @param integer $p_user_id    A user identifier.
  * @param boolean $p_perm_login Indicates whether to generate a long-term cookie.
  * @access public
  * @return void

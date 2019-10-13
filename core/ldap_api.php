@@ -300,7 +300,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 }
 
 /**
- * Authenticates an user via LDAP given the username and password.
+ * Authenticates a user via LDAP given the username and password.
  *
  * @param string $p_username The user name.
  * @param string $p_password The password.

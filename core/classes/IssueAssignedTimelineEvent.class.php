@@ -33,9 +33,9 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_user_id    A user identifier.
 	 * @param integer $p_issue_id   A issue identifier.
-	 * @param integer $p_handler_id An user identifier.
+	 * @param integer $p_handler_id A user identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
 		parent::__construct( $p_timestamp, $p_user_id );
