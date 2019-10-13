@@ -209,7 +209,7 @@ function file_bug_has_attachments( $p_bug_id ) {
 /**
  * Check if the current user can view attachments for the specified bug.
  * @param integer $p_bug_id           A bug identifier.
- * @param integer $p_uploader_user_id An user identifier.
+ * @param integer $p_uploader_user_id A user identifier.
  * @return boolean
  */
 function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
@@ -222,7 +222,7 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
 /**
  * Check if the current user can download attachments for the specified bug.
  * @param integer $p_bug_id           A bug identifier.
- * @param integer $p_uploader_user_id An user identifier.
+ * @param integer $p_uploader_user_id A user identifier.
  * @return boolean
  */
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
@@ -235,7 +235,7 @@ function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = nul
 /**
  * Check if the current user can delete attachments from the specified bug.
  * @param integer $p_bug_id           A bug identifier.
- * @param integer $p_uploader_user_id An user identifier.
+ * @param integer $p_uploader_user_id A user identifier.
  * @return boolean
  */
 function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {

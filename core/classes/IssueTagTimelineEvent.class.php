@@ -34,7 +34,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_user_id   A user identifier.
 	 * @param integer $p_issue_id  A issue identifier.
 	 * @param string  $p_tag_name  Tag name linked to the issue.
 	 * @param boolean $p_tag       Whether tag was being linked or unlinked from the issue.

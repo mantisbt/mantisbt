@@ -44,7 +44,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 
 	/**
 	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
-	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_user_id    A user identifier.
 	 * @param integer $p_issue_id   A issue identifier.
 	 * @param integer $p_old_status Old status value of issue.
 	 * @param integer $p_new_status New status value of issue.

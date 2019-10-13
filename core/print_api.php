@@ -428,7 +428,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 }
 
 /**
- * Get current headlines and id  prefix with v_
+ * Get current headlines and id prefix with v_
  * @return void
  */
 function print_news_item_option_list() {
