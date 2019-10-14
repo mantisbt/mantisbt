@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Antur
  * @author Bithunter
  * @author Crazymadlover
@@ -51,6 +52,7 @@
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
 $s_plugin_MantisGraph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_config = 'Configuración';
+$s_plugin_MantisGraph_tab_label = 'Gráficos Mantis';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridad';
 $s_plugin_MantisGraph_severity_link = 'Por severidad';

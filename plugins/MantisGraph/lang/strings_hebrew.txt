@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Amire80
  * @author Guycn2
  */
@@ -45,6 +46,7 @@
 $s_plugin_MantisGraph_title = 'מנטיס תרשימים';
 $s_plugin_MantisGraph_description = 'תוסף תרשימים רשמי.';
 $s_plugin_MantisGraph_config = 'הגדרות';
+$s_plugin_MantisGraph_tab_label = 'מנטיס תרשימים';
 $s_plugin_MantisGraph_status_link = 'לפי מצב';
 $s_plugin_MantisGraph_priority_link = 'לפי עדיפות';
 $s_plugin_MantisGraph_severity_link = 'לפי חומרה';

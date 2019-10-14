@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Jopparn
  * @author Lokal Profil
  * @author Tobulos1
@@ -49,6 +50,7 @@
 $s_plugin_MantisGraph_title = 'Mantis-grafer';
 $s_plugin_MantisGraph_description = 'Officiell insticksmodul för grafer.';
 $s_plugin_MantisGraph_config = 'Konfiguration';
+$s_plugin_MantisGraph_tab_label = 'Mantis-grafer';
 $s_plugin_MantisGraph_status_link = 'Efter status';
 $s_plugin_MantisGraph_priority_link = 'Efter prioritet';
 $s_plugin_MantisGraph_severity_link = 'Efter storlek';

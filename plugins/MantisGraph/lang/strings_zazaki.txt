@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Asmen
  * @author Erdemaslancan
  * @author Gambollar
@@ -49,6 +50,7 @@
 $s_plugin_MantisGraph_title = 'Grafikê Mantisi';
 $s_plugin_MantisGraph_description = 'Olena grafik de resimi';
 $s_plugin_MantisGraph_config = 'Vıraştış';
+$s_plugin_MantisGraph_tab_label = 'Grafiki';
 $s_plugin_MantisGraph_status_link = 'Weziyeti heta';
 $s_plugin_MantisGraph_priority_link = 'Veroren heta';
 $s_plugin_MantisGraph_severity_link = 'Ciddiyeti heta';

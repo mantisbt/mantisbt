@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Elisardojm
  * @author Toliño
  */
@@ -45,6 +46,7 @@
 $s_plugin_MantisGraph_title = 'Gráficas de Mantis';
 $s_plugin_MantisGraph_description = 'Complemento oficial de gráficas.';
 $s_plugin_MantisGraph_config = 'Configuración';
+$s_plugin_MantisGraph_tab_label = 'Gráficos Mantis';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por gravidade';

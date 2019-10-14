@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author EugeneZelenko
  * @author Jim-by
  * @author Red Winged Duck
@@ -47,6 +48,7 @@
 $s_plugin_MantisGraph_title = 'Графікі MantisBT';
 $s_plugin_MantisGraph_description = 'Афіцыйнае дапаўненьне для графікаў.';
 $s_plugin_MantisGraph_config = 'Канфігурацыя';
+$s_plugin_MantisGraph_tab_label = 'Графікі MantisBT';
 $s_plugin_MantisGraph_status_link = 'Па статусе';
 $s_plugin_MantisGraph_priority_link = 'Па прыярытэце';
 $s_plugin_MantisGraph_severity_link = 'Па сур’ёзнасьці';

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Mraedis
  * @author Rienkwind
  * @author Siebrand
@@ -46,6 +47,7 @@
 $s_plugin_MantisGraph_title = 'Mantis grafieken';
 $s_plugin_MantisGraph_description = 'Officiële plugin voor grafieken.';
 $s_plugin_MantisGraph_config = 'Instellingen';
+$s_plugin_MantisGraph_tab_label = 'Mantis grafieken';
 $s_plugin_MantisGraph_status_link = 'Op status';
 $s_plugin_MantisGraph_priority_link = 'Op prioriteit';
 $s_plugin_MantisGraph_severity_link = 'Op impact';

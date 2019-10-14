@@ -455,6 +455,7 @@ $s_fixed_in_version = 'Поправен во верзија';
 $s_target_version = 'Целна верзија';
 $s_votes = 'Гласови';
 $s_summary = 'Краток опис';
+$s_synthesis = 'Синтеза';
 $s_description = 'Опис';
 $s_steps_to_reproduce = 'Чекори за повикување';
 $s_update_information_button = 'Поднови информации';

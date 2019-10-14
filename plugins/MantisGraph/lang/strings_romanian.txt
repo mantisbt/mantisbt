@@ -38,12 +38,14 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Saturnian
  */
 
 $s_plugin_MantisGraph_title = 'Grafice Mantis';
 $s_plugin_MantisGraph_description = 'Plugin-ul grafic oficial.';
 $s_plugin_MantisGraph_config = 'Configurație';
+$s_plugin_MantisGraph_tab_label = 'Grafice Mantis';
 $s_plugin_MantisGraph_status_link = 'După stare';
 $s_plugin_MantisGraph_priority_link = 'După prioritate';
 $s_plugin_MantisGraph_severity_link = 'După gravitate';

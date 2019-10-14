@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Borichèt
  * @author Dragonòt
  */
@@ -45,6 +46,7 @@
 $s_plugin_MantisGraph_title = 'Gràfich ëd Mantis';
 $s_plugin_MantisGraph_description = 'Prèisa ëd gràfich ofissiaj.';
 $s_plugin_MantisGraph_config = 'Configurassion';
+$s_plugin_MantisGraph_tab_label = 'Gràfich Mantis';
 $s_plugin_MantisGraph_status_link = 'Për stat';
 $s_plugin_MantisGraph_priority_link = 'Për priorità';
 $s_plugin_MantisGraph_severity_link = 'Për severità';

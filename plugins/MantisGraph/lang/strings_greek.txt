@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author FirehawkV17
  * @author Nikosgranturismogt
  * @author Omnipaedista
@@ -47,6 +48,7 @@
 $s_plugin_MantisGraph_title = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_description = 'Επίσημο πρόσθετο γραφήματος.';
 $s_plugin_MantisGraph_config = 'Διαμόρφωση';
+$s_plugin_MantisGraph_tab_label = 'Γράφημα Mantis';
 $s_plugin_MantisGraph_status_link = 'Ανά Κατάσταση';
 $s_plugin_MantisGraph_priority_link = 'Ανά Προτεραιότητα';
 $s_plugin_MantisGraph_severity_link = 'Ανά Σπουδαιότητα';

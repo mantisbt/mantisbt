@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author BeginaFelicysym
  * @author Stojex
  * @author Woytecr
@@ -46,6 +47,7 @@
 $s_plugin_MantisGraph_title = 'Wykresy Mantis';
 $s_plugin_MantisGraph_description = 'Oficjalna wtyczka wykresów.';
 $s_plugin_MantisGraph_config = 'Konfiguracja';
+$s_plugin_MantisGraph_tab_label = 'Wykresy Mantis';
 $s_plugin_MantisGraph_status_link = 'Według statusu';
 $s_plugin_MantisGraph_priority_link = 'Według priorytetu';
 $s_plugin_MantisGraph_severity_link = 'Według ważności';

@@ -48,6 +48,7 @@
  * @author ShockD
  * @author StanProg
  * @author Svetoslav.dragoev
+ * @author Ted Masters
  * @author Vlad5250
  * @author Vodnokon4e
  * @author АдмиралАнимЕ
@@ -1405,7 +1406,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Действието което се оп
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Полето „%1$s“ трябва да бъде не по-дълъг от %2$d знака.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Избраното име „%s“ за API Token вече се използва. Върнете се и изберете друго.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Указаният файл в $g_log_destination „%s“ не е отворен за писане.';
-$s_dropzone_default_message = 'Прикрепете файлове като ги влачите и пускате, избирате ги или ги поставяте.';
+$s_dropzone_default_message = 'Прикрепете файлове, като ги влачите и пускате, избирате ги или ги поставяте.';
 $s_dropzone_fallback_message = 'Вашият браузър не поддържа качване на файлове чрез влачене.';
 $s_dropzone_file_too_big = 'Файлът е твърде голям ({{filesize}}MiB). Максимална големина: {{maxFilesize}}MiB.';
 $s_dropzone_invalid_file_type = 'Не може да качвате файлове от този тип.';

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Changwoo
  * @author Hong3e
  * @author Jerrykim306
@@ -50,6 +51,7 @@
 $s_plugin_MantisGraph_title = '맨티스 그래프';
 $s_plugin_MantisGraph_description = '공식 그래프 플러그인.';
 $s_plugin_MantisGraph_config = '설정';
+$s_plugin_MantisGraph_tab_label = '맨티스 그래프';
 $s_plugin_MantisGraph_status_link = '상태별';
 $s_plugin_MantisGraph_priority_link = '우선 순위별';
 $s_plugin_MantisGraph_severity_link = '심각도별';
