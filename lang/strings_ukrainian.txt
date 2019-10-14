@@ -469,6 +469,7 @@ $s_fixed_in_version = 'Виправлена у версії';
 $s_target_version = 'Цільова версія';
 $s_votes = 'Голосів';
 $s_summary = 'Статистика';
+$s_synthesis = 'Синтез';
 $s_description = 'Опис';
 $s_steps_to_reproduce = 'Кроки для відтворення';
 $s_update_information_button = 'Зберегти інформацію';

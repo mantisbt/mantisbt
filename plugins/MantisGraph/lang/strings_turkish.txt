@@ -38,12 +38,14 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Korayal
  */
 
 $s_plugin_MantisGraph_title = 'Mantis grafikleri';
 $s_plugin_MantisGraph_description = 'Resmi grafik eklentisi.';
 $s_plugin_MantisGraph_config = 'Yapılandırma';
+$s_plugin_MantisGraph_tab_label = 'Mantis grafikleri';
 $s_plugin_MantisGraph_status_link = 'Duruma Göre';
 $s_plugin_MantisGraph_priority_link = 'Önceliğe Göre';
 $s_plugin_MantisGraph_severity_link = 'Öneme Göre';

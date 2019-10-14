@@ -38,12 +38,14 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author McDutchie
  */
 
 $s_plugin_MantisGraph_title = 'Graphicos de Mantis';
 $s_plugin_MantisGraph_description = 'Plug-in official de graphicos.';
 $s_plugin_MantisGraph_config = 'Configuration';
+$s_plugin_MantisGraph_tab_label = 'Graphicos de Mantis';
 $s_plugin_MantisGraph_status_link = 'Per stato';
 $s_plugin_MantisGraph_priority_link = 'Per prioritate';
 $s_plugin_MantisGraph_severity_link = 'Per severitate';

@@ -275,6 +275,7 @@ $s_eta = 'ETA';
 $s_product_version = 'Versiyonê mali';
 $s_build = 'Versiyono bınên';
 $s_summary = 'Xulasa';
+$s_synthesis = 'Sentez';
 $s_description = 'Şınasnayış';
 $s_profile = 'Profile';
 $s_revision = 'Revizyon';

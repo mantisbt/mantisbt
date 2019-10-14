@@ -209,6 +209,7 @@ $s_status = 'Status';
 $s_product_version = 'Produktversioun';
 $s_votes = 'Stëmmen';
 $s_summary = 'Resumé';
+$s_synthesis = 'Synthees';
 $s_description = 'Beschreiwung';
 $s_update_information_button = 'Informatioun aktualiséieren';
 $s_profile = 'Profil';

@@ -465,6 +465,7 @@ $s_fixed_in_version = 'أصلحت في النسخة';
 $s_target_version = 'النسخة الهدف';
 $s_votes = 'أصوات';
 $s_summary = 'ملخص';
+$s_synthesis = 'تركيب';
 $s_description = 'الوصف';
 $s_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
 $s_update_information_button = 'تحديث المعلومات';

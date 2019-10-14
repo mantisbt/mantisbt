@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Hydra
  * @author Hzy980512
  * @author Liuxinyu970226
@@ -48,6 +49,7 @@
 $s_plugin_MantisGraph_title = 'Mantis图表';
 $s_plugin_MantisGraph_description = '官方图表插件。';
 $s_plugin_MantisGraph_config = '配置';
+$s_plugin_MantisGraph_tab_label = 'Mantis图表';
 $s_plugin_MantisGraph_status_link = '按状态';
 $s_plugin_MantisGraph_priority_link = '按优先权';
 $s_plugin_MantisGraph_severity_link = '按严重性';

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Fohanno
  * @author Gwenn-Ael
  */
@@ -45,6 +46,7 @@
 $s_plugin_MantisGraph_title = 'Grafikoù Mantis';
 $s_plugin_MantisGraph_description = 'Lugant ofisiel evit ar grafikoù.';
 $s_plugin_MantisGraph_config = 'Kefluniadur';
+$s_plugin_MantisGraph_tab_label = 'Grafikoù Mantis';
 $s_plugin_MantisGraph_status_link = 'Dre statud';
 $s_plugin_MantisGraph_priority_link = 'Dre briorezh';
 $s_plugin_MantisGraph_severity_link = 'Dre live grevusted';

@@ -38,10 +38,12 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author DCLXVI
  * @author Emostoyanov
  * @author StanProg
  * @author Svetoslav.dragoev
+ * @author Ted Masters
  * @author Vlad5250
  * @author Vodnokon4e
  * @author АдмиралАнимЕ
@@ -50,6 +52,7 @@
 $s_plugin_MantisGraph_title = 'MantisBT - Графики';
 $s_plugin_MantisGraph_description = 'Официален плъгин за графики.';
 $s_plugin_MantisGraph_config = 'Конфигурация';
+$s_plugin_MantisGraph_tab_label = 'Графики';
 $s_plugin_MantisGraph_status_link = 'По състояние';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По значимост';

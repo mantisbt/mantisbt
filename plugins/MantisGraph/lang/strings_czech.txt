@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Dvorapa
  * @author FikusModry
  * @author Kuvaly
@@ -49,6 +50,7 @@
 $s_plugin_MantisGraph_title = 'Grafy Mantis';
 $s_plugin_MantisGraph_description = 'Oficiální grafový plugin.';
 $s_plugin_MantisGraph_config = 'Konfigurace';
+$s_plugin_MantisGraph_tab_label = 'Grafy Mantis';
 $s_plugin_MantisGraph_status_link = 'Podle stavu';
 $s_plugin_MantisGraph_priority_link = 'Podle priority';
 $s_plugin_MantisGraph_severity_link = 'Podle závažnosti';

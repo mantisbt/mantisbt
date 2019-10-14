@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Abijeet Patro
  * @author Dj
  * @author Glanthor Reviol
  * @author MeskoBalazs
@@ -47,6 +48,7 @@
 $s_plugin_MantisGraph_title = 'Mantis diagramok';
 $s_plugin_MantisGraph_description = 'Hivatalos diagram bővítmény.';
 $s_plugin_MantisGraph_config = 'Beállítás';
+$s_plugin_MantisGraph_tab_label = 'Mantis diagramok';
 $s_plugin_MantisGraph_status_link = 'Állapot szerint';
 $s_plugin_MantisGraph_priority_link = 'Prioritás szerint';
 $s_plugin_MantisGraph_severity_link = 'Súlyosság szerint';
