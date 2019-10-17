@@ -47,7 +47,7 @@
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
 $s_plugin_MantisGraph_description = '\'\'Plugin\'\' oficial de gráficos.';
 $s_plugin_MantisGraph_config = 'Configuração';
-$s_plugin_MantisGraph_tab_label = 'Gráficos do Mantis';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridade';
 $s_plugin_MantisGraph_severity_link = 'Por importância';

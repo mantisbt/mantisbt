@@ -49,6 +49,7 @@
  * @author Mazab IZW
  * @author MojaEdukacja
  * @author Py64
+ * @author Rail
  * @author Rambro
  * @author Rezonansowy
  * @author Sp5uhe
@@ -973,6 +974,8 @@ $s_move_bug_button = 'Przenieś';
 $s_attached_files = 'Dołączone pliki';
 $s_publish = 'Opublikuj';
 $s_add_user_to_monitor = 'Dodaj';
+$s_browser_does_not_support_audio = 'Twoja przeglądarka nie obsługuje tagu audio.';
+$s_browser_does_not_support_video = 'Twoja przeglądarka nie obsługuje tagu video.';
 $s_bug_view_title = 'Wyświetl szczegóły problemu';
 $s_no_users_monitoring_bug = 'Nikt nie obserwuje tego zgłoszenia.';
 $s_users_monitoring_bug = 'Użytkownicy obserwujący to zgłoszenie';

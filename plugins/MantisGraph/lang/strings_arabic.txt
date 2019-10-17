@@ -48,7 +48,7 @@
 $s_plugin_MantisGraph_title = 'رسومات مانتيس';
 $s_plugin_MantisGraph_description = 'الملحق الرسومي الرسمي.';
 $s_plugin_MantisGraph_config = 'ضبط';
-$s_plugin_MantisGraph_tab_label = 'رسومات مانتيس';
+$s_plugin_MantisGraph_tab_label = 'الرسوم البيانية';
 $s_plugin_MantisGraph_status_link = 'حسب الحالة';
 $s_plugin_MantisGraph_priority_link = 'حسب الأهمية';
 $s_plugin_MantisGraph_severity_link = 'حسب الخطورة';

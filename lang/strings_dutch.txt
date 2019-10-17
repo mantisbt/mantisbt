@@ -42,6 +42,7 @@
  * @author Gerardwijngaarden
  * @author HanV
  * @author Hansmuller
+ * @author LongJohn nl
  * @author McDutchie
  * @author MedShot
  * @author Mraedis
@@ -466,6 +467,7 @@ $s_fixed_in_version = 'Opgelost in versie';
 $s_target_version = 'Geplande versie';
 $s_votes = 'Stemmen';
 $s_summary = 'Samenvatting';
+$s_synthesis = 'Synthese';
 $s_description = 'Beschrijving';
 $s_steps_to_reproduce = 'Stappen om te reproduceren';
 $s_update_information_button = 'Gegevens bijwerken';
@@ -625,7 +627,7 @@ $s_superfluous = 'Een statuswijziging naar dezelfde status is impliciet en hoeft
 $s_unreachable = 'Een melding kan niet op deze status ingesteld worden';
 $s_no_exit = 'Een melding kan niet van deze status worden gehaald';
 $s_access_levels = 'Toegangsniveau\'s';
-$s_access_change = 'Minimaal toegangsniveau om deze status te wijzigen';
+$s_access_change = 'Minimaal toegangsniveau om naar deze status te kunnen wijzigen';
 $s_desc_bug_submit_status = 'Status voor nieuwe nieuwe melding';
 $s_desc_bug_reopen_status = 'Status voor heropende melding';
 $s_desc_bug_resolved_status_threshold = 'Status waarbij een melding als opgelost wordt beschouwd';
@@ -986,6 +988,8 @@ $s_move_bug_button = 'Verplaatsen';
 $s_attached_files = 'Bijgevoegde bestanden';
 $s_publish = 'Publiceren';
 $s_add_user_to_monitor = 'Toevoegen';
+$s_browser_does_not_support_audio = 'Uw browser ondersteund geen audio tag.';
+$s_browser_does_not_support_video = 'Uw browser ondersteund geen video tag.';
 $s_bug_view_title = 'Details melding bekijken';
 $s_no_users_monitoring_bug = 'Niemand volgt deze melding.';
 $s_users_monitoring_bug = 'Gebruikers die deze melding volgen';
