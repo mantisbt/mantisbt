@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author BaRaN6161 TURK
  * @author Hedda Gabler
  * @author Khutuck
  * @author Korayal
@@ -48,6 +49,9 @@ $s_plugin_XmlImportExport_title = 'Sorun Al/Ver';
 $s_plugin_XmlImportExport_description = 'MantisBT\'ye XML tabanlı yetenek ekler ve çıkarır.';
 $s_plugin_XmlImportExport_import = 'Alma Sorunları';
 $s_plugin_XmlImportExport_export = 'XML Ver';
+$s_plugin_XmlImportExport_config_title = 'XML Alma/Verme Erişim Seviyeleri Yapılandırması';
+$s_plugin_XmlImportExport_import_threshold = 'İçe aktarma sorunları';
+$s_plugin_XmlImportExport_export_threshold = 'Dışa aktarma sorunları';
 $s_plugin_XmlImportExport_action_update = 'Güncelleme';
 $s_plugin_XmlImportExport_importing_in_project = 'Projedeki Aktarma Sorunları:';
 $s_plugin_XmlImportExport_import_options = 'Alma seçenekleri';

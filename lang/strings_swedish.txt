@@ -469,6 +469,7 @@ $s_fixed_in_version = 'Rättad i version';
 $s_target_version = 'Målversion';
 $s_votes = 'Röster';
 $s_summary = 'Sammanfattning';
+$s_synthesis = 'Syntes';
 $s_description = 'Beskrivning';
 $s_steps_to_reproduce = 'Steg för att upprepa';
 $s_update_information_button = 'Uppdatera information';
