@@ -673,7 +673,7 @@ define( 'DROPZONE_HASH', 'sha384-TBYvJK9bRa7Ii3OZh+eaXb5r98Ad36+kotsxTD3tIEa9vgJ
 
 # Lightgallery JS
 define( 'LIGHTGALLERY_VERSION', '1.6.12' );
-define( 'LIGHTGALLERY_HASH', '' );
+define( 'LIGHTGALLERY_HASH', 'Y7GT2Q0NRkodPeLAZIyvJiFuGyZ/qlhMPPLLkGUEpeM=' );
 
 # Byte Order Markers
 define( 'UTF8_BOM', "\xEF\xBB\xBF" );
