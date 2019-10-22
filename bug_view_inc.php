@@ -1205,7 +1205,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	}
 
 	# CLONE button
-	if( $p_flags['can_close'] ) {
+	if( $p_flags['can_clone'] ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 		echo '</div>';
