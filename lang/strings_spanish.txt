@@ -476,6 +476,7 @@ $s_fixed_in_version = 'Resuelta en versión';
 $s_target_version = 'Previsto para versión';
 $s_votes = 'Votos';
 $s_summary = 'Resumen';
+$s_synthesis = 'Síntesis';
 $s_description = 'Descripción';
 $s_steps_to_reproduce = 'Pasos para reproducir';
 $s_update_information_button = 'Actualizar información';
