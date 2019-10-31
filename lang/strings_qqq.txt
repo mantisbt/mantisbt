@@ -62,6 +62,7 @@
  * @author Silraks
  * @author SkyDaisy9
  * @author Umherirrender
+ * @author Verdy p
  * @author Vincent
  * @author Vuh
  * @author Waldir
@@ -284,7 +285,7 @@ $s_plugin_key_label = '{{Identical|Key}}';
 $s_delete_category_button = '{{Identical|Delete category}}';
 $s_update_category_button = '{{Identical|Update category}}';
 $s_project_name = '{{Identical|Project name}}';
-$s_view_status = 'Modifié la traduction "Afficher les statuts" en "Visibilité". L\'état d\'un projet est "public" ou "privé" ce qui conditionne sa visibilité. C\'est aussi la traduction de "View Status".';
+$s_view_status = '* [fr]: Modifier la traduction "Afficher les statuts" en "Visibilité". L\'état d\'un projet est "public" ou "privé" ce qui conditionne sa visibilité. C\'est aussi la traduction de "View Status".';
 $s_public = '{{Identical|Public}}';
 $s_private = '{{Identical|Private}}';
 $s_categories = '{{Identical|Category}}';
