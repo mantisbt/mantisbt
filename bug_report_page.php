@@ -605,7 +605,20 @@ if( $t_show_attachments ) {
 			<label for="attach_tag"><?php echo lang_get( 'tag_attach_long' ) ?></label>
 		</th>
 		<td>
-			<?php print_tag_input( '' ); ?>
+			<?php
+				if( $f_master_bug_id > 0 ) {
+					// pre-fill tag string when cloning from master bug
+					$tags = [];
+					foreach(tag_bug_get_attached($f_master_bug_id) as $tag) {
+						array_push($tags, $tag["name"]);
+					}
+					$tag_string = implode(config_get('tag_separator'), $tags);
+					print_tag_input( $f_master_bug_id, $tag_string );
+				} else {
+					// otherwise show just the default empty string
+					print_tag_input( '' );
+				}
+			?>
 		</td>
 	</tr>
 <?php
