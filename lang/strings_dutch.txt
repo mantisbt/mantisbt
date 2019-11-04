@@ -1159,6 +1159,7 @@ $s_email_on_deleted = 'E-mail bij verwijderen';
 $s_email_on_sponsorship_changed = 'E-mail bij wijziging sponsoring';
 $s_email_on_relationship_changed = 'E-mail bij wijziging relaties';
 $s_email_on_updated = 'E-mail bij bijwerken';
+$s_email_on_monitor = 'E-mailadres voor als de gebruiker wordt bewaakt';
 $s_loading = 'Bezig met laden…';
 $s_between_date = 'Tussen';
 $s_on_or_before_date = 'Op of voor';
