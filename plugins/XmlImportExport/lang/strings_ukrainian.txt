@@ -39,6 +39,7 @@
  * @file
  *
  * @author Andriykopanytsia
+ * @author Movses
  * @author SteveR
  * @author Ypryima
  */
@@ -51,7 +52,7 @@ $s_plugin_XmlImportExport_config_title = 'XML імпорт/експорт кон
 $s_plugin_XmlImportExport_import_threshold = 'Імпорт питань';
 $s_plugin_XmlImportExport_export_threshold = 'Експорт питань';
 $s_plugin_XmlImportExport_action_update = 'Оновити';
-$s_plugin_XmlImportExport_importing_in_project = 'Імпортуються питання у проект:';
+$s_plugin_XmlImportExport_importing_in_project = 'Проблеми імпортуються у проект: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Параметри імпорту';
 $s_plugin_XmlImportExport_cross_references = 'Перехресне посилання';
 $s_plugin_XmlImportExport_default_strategy = 'Типова стратегія перетворення:';

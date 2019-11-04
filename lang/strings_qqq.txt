@@ -62,6 +62,7 @@
  * @author Silraks
  * @author SkyDaisy9
  * @author Umherirrender
+ * @author Urhixidur
  * @author Verdy p
  * @author Vincent
  * @author Vuh
@@ -116,6 +117,7 @@ $s_login_link = '{{Identical|Login}}';
 $s_opensearch_id_short = '{{Identical|ID}}';
 $s_opensearch_text_short = '{{Identical|Text}}';
 $s_select_option = '{{Identical|Select}}';
+$s_view_status_bugs_conf_msg = 'Something to do with public vs. private bugs...';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
 $s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
 $s_go_back = '{{Identical|Go back}}';

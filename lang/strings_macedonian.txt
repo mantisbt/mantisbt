@@ -1147,6 +1147,7 @@ $s_email_on_deleted = 'Извести при Бришење';
 $s_email_on_sponsorship_changed = 'Извести при промена на Спонзорство';
 $s_email_on_relationship_changed = 'Извести при промена на Однос';
 $s_email_on_updated = 'Е-пошта при поднова';
+$s_email_on_monitor = 'Испрати е-пошта кога корисникот ќе почне со надзор';
 $s_loading = 'Вчитувам...';
 $s_between_date = 'Помеѓу';
 $s_on_or_before_date = 'На или пред';

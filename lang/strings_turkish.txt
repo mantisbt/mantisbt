@@ -1166,6 +1166,7 @@ $s_email_on_deleted = 'Silinen e-postada';
 $s_email_on_sponsorship_changed = 'Üstlenme değişikliği e-postası';
 $s_email_on_relationship_changed = 'İlişki değiştirildi e-postası';
 $s_email_on_updated = 'Güncelleme Tarihinde E-posta';
+$s_email_on_monitor = 'Kullanıcı izlemeye başladığında e-posta gönder';
 $s_loading = 'Yükleniyor...';
 $s_between_date = 'Arasında';
 $s_on_or_before_date = 'Üstünde ya da Öncesinde';

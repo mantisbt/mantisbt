@@ -1158,6 +1158,7 @@ $s_email_on_deleted = '刪除時以 E-Mail 通知';
 $s_email_on_sponsorship_changed = '贊助資料更動時發出 E-Mail';
 $s_email_on_relationship_changed = '相關問題更動時以 E-Mail 通知';
 $s_email_on_updated = '更新時以電郵通知';
+$s_email_on_monitor = '當使用者開始追蹤的電子郵件';
 $s_loading = '讀取中…';
 $s_between_date = '之間';
 $s_on_or_before_date = '於此或之前';

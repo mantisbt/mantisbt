@@ -1154,6 +1154,7 @@ $s_email_on_deleted = 'Писмо при изтриване';
 $s_email_on_sponsorship_changed = 'Изпращане на еmail при смяна на спонсорството';
 $s_email_on_relationship_changed = 'Изпращане на еmail при смяна на релацията';
 $s_email_on_updated = 'Писмо при обновяване';
+$s_email_on_monitor = 'Изпрати писмо, когато потребителя започне да наблюдава';
 $s_loading = 'Зареждане...';
 $s_between_date = 'Между';
 $s_on_or_before_date = 'На или преди';

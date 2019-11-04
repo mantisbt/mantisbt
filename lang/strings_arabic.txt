@@ -1157,6 +1157,7 @@ $s_email_on_deleted = 'أرسل رسالة عند الحذف';
 $s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
 $s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
 $s_email_on_updated = 'يتم تحديث البريد الإلكتروني';
+$s_email_on_monitor = 'البريد الإلكتروني عندما يبدأ المستخدم الرصد';
 $s_loading = 'جارٍ التحميل...';
 $s_between_date = 'بين';
 $s_on_or_before_date = 'في أو قبل';
