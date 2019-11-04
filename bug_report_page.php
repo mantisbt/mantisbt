@@ -607,15 +607,17 @@ if( $t_show_attachments ) {
 		<td>
 			<?php
 				if( $f_master_bug_id > 0 ) {
-					// pre-fill tag string when cloning from master bug
-					$tags = [];
-					foreach(tag_bug_get_attached($f_master_bug_id) as $tag) {
-						array_push($tags, $tag["name"]);
+					# pre-fill tag string when cloning from master bug
+					$t_tags = [];
+					foreach( tag_bug_get_attached( $f_master_bug_id ) as $t_tag ) {
+						array_push( $t_tags, $t_tag["name"] );
 					}
-					$tag_string = implode(config_get('tag_separator'), $tags);
-					print_tag_input( $f_master_bug_id, $tag_string );
+					$t_tag_string = implode(
+						config_get( 'tag_separator' ), $t_tags
+					);
+					print_tag_input( $f_master_bug_id, $t_tag_string );
 				} else {
-					// otherwise show just the default empty string
+					# otherwise show just the default empty string
 					print_tag_input( '' );
 				}
 			?>
