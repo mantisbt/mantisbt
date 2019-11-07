@@ -42,6 +42,7 @@
  * @author Herr Mlinka
  * @author Janjko
  * @author KWiki
+ * @author Obsuser
  * @author Teoo3
  */
 
@@ -422,7 +423,7 @@ $s_recently_visited = 'Nedavno pogledani';
 $s_none = 'ništa';
 $s_search = 'Traži';
 $s_view_prev_link = 'Vidi prethodno';
-$s_view_next_link = 'Vidi slijedeće';
+$s_view_next_link = 'Vidi sljedeće';
 $s_open_queries = 'Uredi filtere';
 $s_available_filter_for_project = 'Dostupni filteri za projekt';
 $s_view_simple_link = 'Vidi jednostavno';
