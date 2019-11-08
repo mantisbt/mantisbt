@@ -345,10 +345,9 @@ class FilterTest extends SoapBase {
 	 */
 	public function testGetProjectClosedIssues() {
 		$t_initial_issues = $this->getProjectIssues();
-
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetProjectClosedIssues' );
-		$t_issue_to_add['status'] = 'closed';
-		$t_issue_to_add['resolution'] = 'fixed';
+		$t_issue_to_add['status'] = array( 'id' => CLOSED );
+		$t_issue_to_add['resolution'] = array( 'id' => FIXED );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
