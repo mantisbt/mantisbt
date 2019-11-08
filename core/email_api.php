@@ -1096,6 +1096,8 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	}
 	$t_email_data->metadata['hostname'] = $t_hostname;
 
+	$t_email_data = event_signal( 'EVENT_EMAIL_READY_TO_SEND', $t_email_data, EVENT_TYPE_CHAIN );
+	
 	$t_email_id = email_queue_add( $t_email_data );
 
 	# Set the email processing flag for the shutdown function

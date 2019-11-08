@@ -57,6 +57,27 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
+		
+		<blockquote id="dev.eventref.email.ready.to.send">
+			<title>EVENT_EMAIL_READY_TO_SEND (Chain)</title>
+
+			<blockquote>
+				<para>
+					This event allows a plugin to modify or copy an email
+					right before sending the email.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Complex&gt;: email data structure (see <filename>core/email_queue_api.php</filename></para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Complex&gt;: email data structure</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
 
 	</section>
 
