@@ -657,6 +657,13 @@ $g_smtp_connection_mode = '';
 $g_smtp_port = 25;
 
 /**
+ * Default SMTP timeout in seconds, as set in PHPMailer
+ * Can be used to resolve issues with SMTP timeout-related errors
+ * @global integer $g_smtp_timeout
+ */
+$g_smtp_timeout = 300;
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
