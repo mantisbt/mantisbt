@@ -154,8 +154,8 @@ if( $t_account_page ) {
 				</td>
 				<td>
 					<textarea class="form-control" id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5">
-						<?php echo $t_excel ?>
-					</textarea>
+<?php echo $t_excel ?>
+</textarea>
 				</td>
 			</tr>
 		</fieldset>
