@@ -364,8 +364,13 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 
 /**
  * Print the separator comment, input box, and existing tag dropdown menu.
- * @param integer $p_bug_id A bug identifier.
+ *
+ * @param integer $p_bug_id A bug identifier. If not specified or 0, the
+ *                          dropdown list will include all available tags;
+ *                          otherwise tags attached to the given bug will
+ *                          be excluded.
  * @param string  $p_string Default contents of the input box.
+ *
  * @return void
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
