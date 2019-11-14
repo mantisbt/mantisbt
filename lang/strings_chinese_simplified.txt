@@ -61,6 +61,7 @@
  * @author 乌拉跨氪
  * @author 佛壁灯
  * @author 夢蝶葬花
+ * @author 沈澄心
  */
 
 $s_actiongroup_menu_move = '移动';
@@ -474,6 +475,7 @@ $s_fixed_in_version = '修正版本';
 $s_target_version = '目标版本';
 $s_votes = '投票';
 $s_summary = '摘要';
+$s_synthesis = '总览';
 $s_description = '描述';
 $s_steps_to_reproduce = '问题重现步骤';
 $s_update_information_button = '更新信息';
@@ -992,6 +994,8 @@ $s_move_bug_button = '移动';
 $s_attached_files = '附件';
 $s_publish = '发布';
 $s_add_user_to_monitor = '添加';
+$s_browser_does_not_support_audio = '您的浏览器不支持audio标签。';
+$s_browser_does_not_support_video = '您的浏览器不支持video标签。';
 $s_bug_view_title = '查看问题详情';
 $s_no_users_monitoring_bug = '当前没有用户监视这个问题。';
 $s_users_monitoring_bug = '正在监视该问题的用户';
