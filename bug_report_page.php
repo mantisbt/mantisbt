@@ -618,7 +618,7 @@ if( $t_show_attachments ) {
 					print_tag_input( 0, $t_tag_string );
 				} else {
 					# otherwise show just the default empty string
-					print_tag_input( '' );
+					print_tag_input();
 				}
 			?>
 		</td>
