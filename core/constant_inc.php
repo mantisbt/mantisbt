@@ -653,8 +653,8 @@ define( 'FONT_AWESOME_VERSION', '4.6.3' );
 define( 'FONT_AWESOME_HASH', 'sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' );
 
 # Moment & DateTimePicker
-define( 'MOMENT_VERSION', '2.15.2' );
-define( 'MOMENT_HASH', 'sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=' );
+define( 'MOMENT_VERSION', '2.24.0' );
+define( 'MOMENT_HASH', 'sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=' );
 define( 'DATETIME_PICKER_VERSION', '4.17.47' );
 define( 'DATETIME_PICKER_HASH_JS', 'sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=' );
 define( 'DATETIME_PICKER_HASH_CSS', 'sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=' );
