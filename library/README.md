@@ -25,7 +25,7 @@ bootstrap-datetimepicker          | 4.17.47   | unpatched
 dropzone.js                       | 5.5.0     | unpatched
 chart.js                          | 2.8.0     | unpatched
 chartjs-plugin-colorschemes       | 0.4.0     | unpatched
-typeahead.js                      | 1.1.1     | unpatched 
+typeahead.js                      | 1.3.0     | unpatched 
 list.js                           | 1.5.0     | unpatched
 
   
@@ -48,5 +48,5 @@ datetimepicker  | https://github.com/Eonasdan/bootstrap-datetimepicker
 dropzone.js     | http://www.dropzonejs.com/ - https://github.com/enyo/dropzone
 chart.js        | http://www.chartjs.org/ - https://github.com/chartjs/Chart.js
 chartjs-plugin-colorschemes | https://github.com/nagix/chartjs-plugin-colorschemes/
-typeahead.js    | https://github.com/twitter/typeahead.js
+typeahead.js    | https://github.com/corejavascript/typeahead.js
 list.js         | http://listjs.com/ - https://github.com/javve/list.js
