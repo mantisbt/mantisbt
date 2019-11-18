@@ -42,6 +42,7 @@
  * @author Jim-by
  * @author Macofe
  * @author Red Winged Duck
+ * @author Renessaince
  * @author Wizardist
  * @author Zedlik
  */
@@ -1359,9 +1360,9 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL-спасылка 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Дасягнутая максымальная колькасьць няскончаных запытаў. Калі ласка, зьвяжыцеся з сыстэмным адміністратарам.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Вы ня можаце выдаліць ці зьмяніць узровень апошняга рахунку адміністратара. Каб выканаць запытанае дзеяньне, спачатку Вам трэба стварыць яшчэ адзін рахунак адміністратара.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Памылка перанакіраваньня старонкі, упэўніцеся, што па-за межамі блёку PHP (&lt;?php ?&gt;) у config_inc.php ці файлаў custom_*.php няма прагалаў.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Немагчыма знайсьці тэг з такой назвай.';
-$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Тэг з такой назвай ужо існуе.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Няслушная назва меткі.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Немагчыма знайсьці тэг «%1$s».';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Тэг з назвай «%1$s» ужо існуе.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Назва меткі «%1$s» няслушная.';
 $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Гэты тэг не далучаны да гэтай праблемы.';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Гэты тэг ужо далучаны да гэтай праблемы.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Прыкмета ня можа быць знойдзеная.';
@@ -1398,7 +1399,7 @@ $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Вы дасягнулі ліміту да
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Поле «%1$s» мусіць мець даўжыню карацей за або роўную %2$d сымбалям.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Назва API-жэтону «%s» ужо выкарыстоўваецца. Калі ласка, вярніцеся і абярыце іншую.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Файл пазначаны ў $g_log_destination «%s» ня мае дазволу на запіс.';
-$s_dropzone_default_message = 'Кідайце файлы сюды для загрузкі (або націсьніце)';
+$s_dropzone_default_message = 'Дадавайце файлы, перацягваючы, вылучаючы ці ўстаўляючы іх.';
 $s_dropzone_fallback_message = 'Ваш браўзэр не падтрымлівае загрузку файлаў празь перацягваньне.';
 $s_dropzone_file_too_big = 'Файл мае завялікі памер ({{filesize}}MiB). Максымальны памер файлу: {{maxFilesize}}MiB.';
 $s_dropzone_invalid_file_type = 'Вы ня можаце загружаць файлы гэтага тыпу.';
