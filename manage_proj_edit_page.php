@@ -254,7 +254,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			<fieldset>
 				<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-				<select name="subproject_id" class="input-sm"><?php
+				<select name="subproject_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option><?php
 				$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
 				$t_all_subprojects[] = $f_project_id;
 				$t_manage_access = config_get( 'manage_project_threshold' );
