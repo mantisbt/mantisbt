@@ -702,8 +702,6 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			$t_where = " WHERE id NOT IN ($t_assoc_tags_query)";
 		}
 		$t_query .= $t_where;
-	} else {
-		$t_query = 'SELECT id, name, description FROM {tag}';
 	}
 
 	$t_query .= ' ORDER BY name ASC ';
