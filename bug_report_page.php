@@ -615,7 +615,7 @@ if( $t_show_attachments ) {
 					$t_tag_string = implode(
 						config_get( 'tag_separator' ), $t_tags
 					);
-					print_tag_input( $f_master_bug_id, $t_tag_string );
+					print_tag_input( 0, $t_tag_string );
 				} else {
 					# otherwise show just the default empty string
 					print_tag_input( '' );
