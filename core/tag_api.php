@@ -667,48 +667,41 @@ function tag_delete( $p_tag_id ) {
 }
 
 /**
- * Gets the candidates for the specified bug.  These are existing tags
- * that are not associated with the bug already.
+ * Gets the tags that are not associated with the specified bug.
  *
- * @param integer $p_bug_id The bug id, if 0 returns all tags.
- * @return array The array of tag rows, each with id, name, and description.
+ * @param integer $p_bug_id The bug id, if 0 returns all available tags.
+ *
+ * @return array List of tag rows, each with id, name, and description.
  */
 function tag_get_candidates_for_bug( $p_bug_id ) {
 	db_param_push();
+	$t_query = 'SELECT id, name, description FROM {tag}';
 	$t_params = array();
+
 	if( 0 != $p_bug_id ) {
+		$t_assoc_tags_query = 'SELECT tag_id FROM {bug_tag} WHERE bug_id = ' . db_param();
 		$t_params[] = $p_bug_id;
 
+		# Define specific where clause to exclude tags already attached to the bug
+		# Special handling for odbc_mssql which does not support bound subqueries (#14774)
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			db_param_push();
-			$t_query = 'SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
-			$t_result = db_query( $t_query, $t_params );
-
-			$t_params = null;
+			$t_result = db_query( $t_assoc_tags_query, $t_params );
 
 			$t_subquery_results = array();
-
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				$t_subquery_results[] = (int)$t_row['id'];
+				$t_subquery_results[] = (int)$t_row['tag_id'];
 			}
-
-			if( count( $t_subquery_results ) == 0 ) {
-				db_param_pop();
-				return array();
+			if( $t_subquery_results ) {
+				$t_where = ' WHERE id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
+			} else {
+				$t_where = '';
 			}
-
-			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN ( ' . implode( ', ', $t_subquery_results ) . ')';
+			$t_params = null;
 		} else {
-			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
-					SELECT t.id FROM {tag} t
-					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
-					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param() .
-				')';
+			$t_where = " WHERE id NOT IN ($t_assoc_tags_query)";
 		}
-	} else {
-		$t_query = 'SELECT id, name, description FROM {tag}';
+		$t_query .= $t_where;
 	}
 
 	$t_query .= ' ORDER BY name ASC ';
