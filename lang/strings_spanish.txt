@@ -1166,6 +1166,7 @@ $s_email_on_deleted = 'Envío de correo al producirse eliminaciones';
 $s_email_on_sponsorship_changed = 'Enviar correo en cambios de Patrocinios';
 $s_email_on_relationship_changed = 'Enviar correo en cambios sobre Relaciones';
 $s_email_on_updated = 'Enviar un correo electrónico sobre incidencias actualizadas';
+$s_create_new_tags = 'Crear etiquetas nuevas';
 $s_loading = 'Cargando..';
 $s_between_date = 'Entre';
 $s_on_or_before_date = 'Antes o Durante';

@@ -1138,6 +1138,7 @@ $s_email_on_sponsorship_changed = '후원 변경에 대한 이메일';
 $s_email_on_relationship_changed = '관계 변경에 대한 이메일';
 $s_email_on_updated = '갱신할 때 이메일';
 $s_email_on_monitor = '사용자가 모니터링을 시작할 때 이메일을 보냅니다';
+$s_create_new_tags = '새 태그 만들기';
 $s_loading = '불러오는 중...';
 $s_between_date = '사이';
 $s_on_or_before_date = '동안 또는 이전';
