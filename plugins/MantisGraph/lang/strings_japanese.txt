@@ -41,6 +41,7 @@
  * @author Abijeet Patro
  * @author Fryed-peach
  * @author Gulpin
+ * @author Mfuji
  * @author Omotecho
  * @author Otokoume
  * @author Ryoon
@@ -50,7 +51,7 @@
 $s_plugin_MantisGraph_title = 'Mantis グラフ';
 $s_plugin_MantisGraph_description = '公式のグラフ プラグイン。';
 $s_plugin_MantisGraph_config = '設定';
-$s_plugin_MantisGraph_tab_label = 'Mantis グラフ';
+$s_plugin_MantisGraph_tab_label = 'グラフ';
 $s_plugin_MantisGraph_status_link = 'ステータスによる';
 $s_plugin_MantisGraph_priority_link = '優先度による';
 $s_plugin_MantisGraph_severity_link = '重要度による';
@@ -91,3 +92,4 @@ $s_plugin_MantisGraph_graph_page = '課題履歴グラフ';
 $s_plugin_MantisGraph_graph_topdev = 'トップ開発者(解決済み課題順)';
 $s_plugin_MantisGraph_graph_opendev = '開発者(課題登録順)';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'トップ報告者(解決済み課題順)';
+$s_plugin_MantisGraph_other_categories = '他のカテゴリ (%d件)';
