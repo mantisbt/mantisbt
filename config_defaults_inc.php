@@ -1305,6 +1305,7 @@ $g_short_date_format = 'Y-m-d';
 /**
  * Date format strings defaults to ISO 8601 formatting.
  * For detailed instructions on date formatting
+ * The datetime picker widget uses this format string.
  * @see http://www.php.net/manual/en/function.date.php
  * @global string $g_normal_date_format
  */
@@ -1317,15 +1318,6 @@ $g_normal_date_format = 'Y-m-d H:i';
  * @global string $g_complete_date_format
  */
 $g_complete_date_format = 'Y-m-d H:i T';
-
-/**
- * Datetime picker widget format string.
- * This format needs needs to match the one defined in {@see $g_normal_date_format}
- * For detailed instructions on date formatting
- * @see http://momentjs.com/docs/#/displaying/format/
- * @global string $g_datetime_picker_format
- */
-$g_datetime_picker_format = 'Y-MM-DD HH:mm';
 
 
 ##############################
@@ -4407,7 +4399,6 @@ $g_public_config_names = array(
 	'custom_group_actions',
 	'custom_headers',
 	'date_partitions',
-	'datetime_picker_format',
 	'default_bug_additional_info',
 	'default_bug_description',
 	'default_bug_eta',

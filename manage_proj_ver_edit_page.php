@@ -99,7 +99,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 				<td>
 					<input type="text" id="proj-version-date-order" name="date_order" class="datetimepicker input-sm"
 						data-picker-locale="<?php echo lang_get_current_datetime_locale() ?>"
-						data-picker-format="<?php echo config_get( 'datetime_picker_format' ) ?>"
+						data-picker-format="<?php echo convert_php_to_momentjs_datetime_format( config_get( 'normal_date_format' ) )  ?>"
 						size="16" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'normal_date_format' ), $t_version->date_order ) ) ) ?>" />
 					<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 				</td>

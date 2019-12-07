@@ -280,3 +280,62 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 	}
 }
 
+/**
+ * Convert php date time format string to moment.js compatible format
+ * moment.js is a popular date time handling JS library. It is used by datetime picker library
+ * see https://stackoverflow.com/questions/30186611/php-dateformat-to-moment-js-format
+ * Moment.js date time format: https://momentjs.com/docs/#/parsing/string-format/
+ * Php date time format: https://www.php.net/manual/en/function.date.php
+ * @param string $p_php_format     	Datetime php format
+ * @return string 					Date time format string understood by moment.js based components
+ * @access public
+ */
+function convert_php_to_momentjs_datetime_format( string $p_php_format ) {
+	$t_replacements = [
+		'A' => 'A',      # for the sake of escaping below
+		'a' => 'a',      # for the sake of escaping below
+		'B' => '',       # Swatch internet time (.beats), no equivalent
+		'c' => 'YYYY-MM-DD[T]HH:mm:ssZ', // ISO 8601
+		'D' => 'ddd',
+		'd' => 'DD',
+		'e' => 'zz',     # deprecated since version 1.6.0 of moment.js
+		'F' => 'MMMM',
+		'G' => 'H',
+		'g' => 'h',
+		'H' => 'HH',
+		'h' => 'hh',
+		'I' => '',       # Daylight Saving Time? => moment().isDST();
+		'i' => 'mm',
+		'j' => 'D',
+		'L' => '',       # Leap year? => moment().isLeapYear();
+		'l' => 'dddd',
+		'M' => 'MMM',
+		'm' => 'MM',
+		'N' => 'E',
+		'n' => 'M',
+		'O' => 'ZZ',
+		'o' => 'YYYY',
+		'P' => 'Z',
+		'r' => 'ddd, DD MMM YYYY HH:mm:ss ZZ', # RFC 2822
+		'S' => 'o',
+		's' => 'ss',
+		'T' => 'z',      # deprecated since version 1.6.0 of moment.js
+		't' => '',       # days in the month => moment().daysInMonth();
+		'U' => 'X',
+		'u' => 'SSSSSS', # microseconds
+		'v' => 'SSS',    # milliseconds (from PHP 7.0.0)
+		'W' => 'W',      # for the sake of escaping below
+		'w' => 'e',
+		'Y' => 'YYYY',
+		'y' => 'YY',
+		'Z' => '',       # time zone offset in minutes => moment().zone();
+		'z' => 'DDD',
+	];
+
+	# Converts escaped characters.
+	foreach( $t_replacements as $from => $to ) {
+		$t_replacements['\\' . $from] = '[' . $from . ']';
+	}
+
+	return strtr( $p_php_format, $t_replacements );
+}
