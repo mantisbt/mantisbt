@@ -359,7 +359,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			echo '<div class="space-4"></div>';
 			echo '<div class="col-md-7 col-xs-12 no-padding">';
-			echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
+			echo '<div class="progress progress-large progress-striped" data-percent="' . $t_progress . '%" >';
 			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
 			echo '</div></div>';
 			echo '<div class="clearfix"></div>';

@@ -546,6 +546,18 @@ input.typeahead.scrollable ~ .tt-menu {
 	font-size: 60%;
 	vertical-align: top;
 }
+
+.progress {
+    background:#bbb;
+}
+.progress.progress-large {
+    height: 32px;
+}
+.progress.progress-large[data-percent]:after {
+    line-height:32px;
+    font-size:18px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
