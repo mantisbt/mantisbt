@@ -1481,12 +1481,6 @@ class BugFilterQuery extends DbQuery {
 		}
 		$t_textsearch_where_clause .= ' ) )';
 
-
-		log_event(LOG_FILTERING,'Clause'.$t_textsearch_where_clause);
-
-
-
-
 		# add text query elements to arrays
 		if( !$t_first ) {
 			# join with bugnote table has already been created or reused
