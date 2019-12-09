@@ -453,6 +453,7 @@ $s_status_changed_to = 'Weziyeti bıvurne';
 $s_email_on_deleted = 'E-postayê ke besterneyayê';
 $s_email_on_sponsorship_changed = 'Sponsori sero e-mail vıriyo.';
 $s_email_on_relationship_changed = 'E-postaya elekeya  vurnayışan';
+$s_create_new_tags = 'Etiketanê neweyan vıraze';
 $s_loading = 'Bar beno...';
 $s_between_date = 'Ared';
 $s_on_or_before_date = 'Cı ser dı yana Veror dê cı';
