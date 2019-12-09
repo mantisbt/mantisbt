@@ -1694,7 +1694,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
  * associated with the bug was modified and the total bugnote
  * count in one db query
  * @param integer $p_bug_id Integer representing bug identifier.
- * @return object consisting of bugnote stats
+ * @return array|false Bugnote stats, false if no bugnotes
  * @access public
  * @uses database_api.php
  */

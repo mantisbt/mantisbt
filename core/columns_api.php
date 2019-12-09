@@ -1232,7 +1232,7 @@ function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMN
 
 	# grab the bugnote count
 	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
-	if( null !== $t_bugnote_stats ) {
+	if( is_array( $t_bugnote_stats ) ) {
 		$t_bugnote_count = $t_bugnote_stats['count'];
 		$v_bugnote_updated = $t_bugnote_stats['last_modified'];
 	} else {
