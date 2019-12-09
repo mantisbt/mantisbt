@@ -1165,6 +1165,7 @@ $s_email_on_deleted = '删除时发送 Email';
 $s_email_on_sponsorship_changed = '资助改变时发送 Email';
 $s_email_on_relationship_changed = '关联改变时发送 Email';
 $s_email_on_updated = '更新时的电子邮件';
+$s_create_new_tags = '创建新标签';
 $s_loading = '正在载入...';
 $s_between_date = '介于';
 $s_on_or_before_date = '不晚于';
