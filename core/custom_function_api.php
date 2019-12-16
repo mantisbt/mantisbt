@@ -343,7 +343,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-			echo '<th class="column-custom-' . $t_custom_field . '">';
+			echo '<th class="column-' . custom_field_css_name( $t_custom_field ) . '">';
 		}
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
@@ -408,7 +408,7 @@ function custom_function_default_print_column_value( $p_column, BugData $p_bug, 
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
-		printf( $t_column_start, 'custom-' . $t_custom_field );
+		printf( $t_column_start, custom_field_css_name( $t_custom_field ) );
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 		if( $t_field_id === false ) {
