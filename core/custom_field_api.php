@@ -1433,6 +1433,21 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 	}
 }
 
+/*
+ * Returns a valid CSS identifier for the given custom field.
+ *
+ * The string is built based on the custom field's name, replacing any potentially
+ * unsupported character(s) by dashes `-` to ensure its validity. The resulting
+ * identifier can be used as part of a custom CSS class.
+ *
+ * @param string $p_custom_field_name The custom field's name
+ *
+ * @return string The CSS identifier
+ */
+function custom_field_css_name( $p_custom_field_name ) {
+    return 'custom-' . preg_replace( '/[^a-zA-Z0-9_-]+/', '-', $p_custom_field_name );
+}
+
 /**
  * Constructs the name of a field used as a flag to indicate that a custom field is present on the form
  * @param integer $p_custom_field_id  The custom field id to create the field name for.
