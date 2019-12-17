@@ -1397,6 +1397,39 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
+	 * Build custom field free text filter. The query starts with "OR ...", which is okay for build_prop_search.
+	 * Only textarea and strings that are marked as "filter by" are searched.
+	 * @param array $p_search_term	Substring to search in textarea and string custom fields
+	 * @return querylist
+	 */
+	protected function build_custom_field_search( $p_search_term ) {
+		$t_custom_fields = custom_field_get_linked_ids( $this->rt_included_projects );
+		$c_search = '%' . $p_search_term . '%';
+		$t_custom_field_where_clause = '';
+
+		foreach( $t_custom_fields as $t_cfid ) {
+			$t_field_info = custom_field_cache_row( $t_cfid, true );
+			if( !$t_field_info['filter_by'] ) {
+				continue;
+			}
+
+			$t_def = custom_field_get_definition( $t_cfid );
+			if ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA || $t_def['type'] == CUSTOM_FIELD_TYPE_STRING ) {
+				$t_table_name = $this->helper_table_alias_for_cf( $t_def );
+				if( !$t_table_name ) {
+					# Ignore, if no view access
+					continue;
+				}
+				if ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
+					$t_custom_field_where_clause .= ' OR ' . $this->sql_like( $t_table_name . '.text', $c_search );
+				} else {
+					$t_custom_field_where_clause .= ' OR ' . $this->sql_like( $t_table_name . '.value', $c_search );
+				}
+			}
+		} # foreach cf
+		return $t_custom_field_where_clause;
+	}
+	/**
 	 * Build the query parts for the filter property "text search"
 	 * @return void
 	 */
@@ -1415,6 +1448,8 @@ class BugFilterQuery extends DbQuery {
 		$t_first = true;
 		$t_after_or = false; # if we are after an OR 
 		$t_textsearch_where_clause = "( ( "; # second ( for OR
+		$t_allow_custom_field_search = ( ON == config_get( 'filter_by_custom_fields' ) );
+
 		foreach( $t_matches as $t_match ) {
 			# analyse search term
 			$t_search_term = trim( $t_match[2], "\'\"" );
@@ -1465,9 +1500,8 @@ class BugFilterQuery extends DbQuery {
 				}
 			}
 
-			if ( $t_custom_field_only ) {
-				$t_textsearch_where_clause .=
-					' OR ' . "({bug}.id IN ( SELECT DISTINCT bug_id from " . db_get_table( 'custom_field_string' ) . " where " . $this->sql_like( "value", $c_search )."))";
+			if ( $t_custom_field_only && $t_allow_custom_field_search ) {
+				$t_textsearch_where_clause .= $this->build_custom_field_search( $t_search_term );
 			}
 			$t_textsearch_where_clause .= ' )';
 			$t_first = false;
