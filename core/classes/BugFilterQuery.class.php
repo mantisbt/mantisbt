@@ -1409,8 +1409,6 @@ class BugFilterQuery extends DbQuery {
 		# optional "s:, i:, c:" for faster summary only requests
 		preg_match_all( "/-?([sic]:)?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $this->filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
-
-		$t_bug_table = $this->helper_table_alias_for_bugnote();
 		$t_bugnote_table = $this->helper_table_alias_for_bugnote();
 
 		# build a big where-clause and param list for all search terms, including negations
@@ -1469,7 +1467,7 @@ class BugFilterQuery extends DbQuery {
 
 			if ( $t_custom_field_only ) {
 				$t_textsearch_where_clause .=
-					' OR ' . "({bug}.id IN ( SELECT DISTINCT bug_id from " . db_get_table( 'mantis_custom_field_string_table' ) . " where " . $this->sql_like( "value", $c_search )."))";
+					' OR ' . "({bug}.id IN ( SELECT DISTINCT bug_id from " . db_get_table( 'custom_field_string' ) . " where " . $this->sql_like( "value", $c_search )."))";
 			}
 			$t_textsearch_where_clause .= ' )';
 			$t_first = false;
@@ -1480,12 +1478,6 @@ class BugFilterQuery extends DbQuery {
 			$t_textsearch_where_clause .= ' FALSE ';
 		}
 		$t_textsearch_where_clause .= ' ) )';
-
-
-		log_event(LOG_FILTERING,'Clause'.$t_textsearch_where_clause);
-
-
-
 
 		# add text query elements to arrays
 		if( !$t_first ) {
