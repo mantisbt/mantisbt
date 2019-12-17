@@ -1477,7 +1477,9 @@ class BugFilterQuery extends DbQuery {
 			if ( !$t_id_only && !$t_custom_field_only ) {
 				$t_textsearch_where_clause .= $this->sql_like( '{bug}.summary', $c_search );
                         } else {
-				$t_textsearch_where_clause .= '0';
+				# To make the joining of clauses together with OR easier, we assume that each following
+				# clause starts with OR. If no summary search, the result will be "False OR this OR that"
+				$t_textsearch_where_clause .= '1=0';
 			}
 			if ( !$t_summary_only && !$t_id_only && !$t_custom_field_only ) {
 				$t_textsearch_where_clause .=
