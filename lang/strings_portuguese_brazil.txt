@@ -1169,6 +1169,7 @@ $s_email_on_sponsorship_changed = 'Enviar e-mail para mudança de patrocínio';
 $s_email_on_relationship_changed = 'Enviar e-mail para mudança de relações';
 $s_email_on_updated = 'Enviar e-mail com o que foi atualizado';
 $s_email_on_monitor = 'Enviar e-mail quando o usuário iniciar o monitoramento';
+$s_create_new_tags = 'Criar novas etiquetas';
 $s_loading = 'Carregando...';
 $s_between_date = 'Entre';
 $s_on_or_before_date = 'Em ou Antes';
