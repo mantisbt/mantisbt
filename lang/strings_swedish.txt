@@ -1158,6 +1158,7 @@ $s_email_on_deleted = 'E-post vid borttagning';
 $s_email_on_sponsorship_changed = 'E-post vid ändring av sponsorskap';
 $s_email_on_relationship_changed = 'E-post vid ändring av förhållande';
 $s_email_on_updated = 'E-post vid uppdatering';
+$s_attach_tags = 'Bifoga taggar till en bugg';
 $s_create_new_tags = 'Skapa nya taggar';
 $s_loading = 'Laddar...';
 $s_between_date = 'Mellan';
