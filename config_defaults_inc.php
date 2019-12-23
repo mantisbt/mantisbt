@@ -3485,13 +3485,13 @@ $g_top_include_page = '%absolute_path%';
  * CSS file
  * @global string $g_css_include_file
  */
-$g_css_include_file = 'default.css';
+$g_css_include_file = '';
 
 /**
  * RTL CSS file
  * @global string $g_css_rtl_include_file
  */
-$g_css_rtl_include_file = 'rtl.css';
+$g_css_rtl_include_file = '';
 
 /**
  * A flag that indicates whether to use CDN (content delivery networks) for loading
