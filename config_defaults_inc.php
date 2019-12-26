@@ -4531,6 +4531,7 @@ $g_public_config_names = array(
 	'due_date_default',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
+	'due_date_warning_levels',
 	'email_ensure_unique',
 	'email_dkim_domain',
 	'email_dkim_enable',
