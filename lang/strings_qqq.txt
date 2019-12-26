@@ -46,6 +46,7 @@
  * @author Desertwaste
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Hamilton Abreu
  * @author Kingu
  * @author Liuxinyu970226
  * @author Lloffiwr
@@ -89,7 +90,7 @@ $s_actiongroup_menu_update_category = '{{Identical|Update category}}';
 $s_actiongroup_menu_update_field = '{{Identical|Update}}';
 $s_actiongroup_menu_add_note = '{{Identical|Add note}}';
 $s_actiongroup_menu_attach_tags = '{{Identical|Attach tag}}';
-$s_actiongroup_error_issue_is_readonly = 'SOLO / SÓLO: El primer caso expresa soledad y no lleva tilde (Ej.: Estaba solo en el aula). El segundo caso cumple la función de adverbio, funciona como “solamente” o “únicamente” (Ej.: Puedo comer sólo frutas y verduras), y lleva tilde. El uso adverbial se acentúa para evitar ambigüedades.';
+$s_actiongroup_error_issue_is_readonly = '';
 $s_date_order = '[[File:MantisBT-filter.png|150px|right]]
 Option in bug report filter. See screenshot.';
 $s_print_all_bug_page_link = '[[File:MantisBT-filter.png|150px|right]]
