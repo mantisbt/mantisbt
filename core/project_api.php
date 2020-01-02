@@ -772,7 +772,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
  * @param integer $p_project_id   A project identifier.
  * @param integer $p_user_id      A user identifier.
  * @param integer $p_access_level Project Access level to grant the user.
- * @return boolean
+ * @return void
  */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	project_add_users( $p_project_id, array( $p_user_id => $p_access_level ) );
@@ -843,7 +843,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  * Remove multiple users from project.
  * @param integer $p_project_id  A project identifier.
  * @param array $p_user_ids      Array of user identifiers.
- * @return type
+ * @return void
  */
 function project_remove_users( $p_project_id, array $p_user_ids ) {
 	# normalize input

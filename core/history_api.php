@@ -279,7 +279,7 @@ function history_query_result( array $p_query_options ) {
  * @param  integer $p_start_time     The start time to filter by, or null for all.
  * @param  integer $p_end_time       The end time to filter by, or null for all.
  * @param  string  $p_history_order  The sort order.
- * @return database result to pass into history_get_event_from_row().
+ * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
  * @deprecated		Use history_query_result() instead
  */
 function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {

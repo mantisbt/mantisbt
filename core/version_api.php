@@ -215,7 +215,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 
 /**
  * Cache version information for an array of project id's
- * @param array $p_project_id_array An array of project identifiers.
+ * @param array $p_project_ids An array of project identifiers.
  * @return void
  */
 function version_cache_array_rows( array $p_project_ids ) {

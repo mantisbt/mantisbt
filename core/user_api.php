@@ -724,7 +724,7 @@ function user_get_id_by_name( $p_username, $p_throw = false ) {
  *
  * @param string $p_email The email address to retrieve data for.
  * @param boolean $p_throw true to throw exception when not found, false otherwise.
- * @return array
+ * @return integer|boolean
  */
 function user_get_id_by_email( $p_email, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
@@ -782,7 +782,7 @@ function user_get_enabled_ids_by_email( $p_email ) {
  *
  * @param string $p_realname The realname to retrieve data for.
  * @param boolean $p_throw true to throw if not found, false otherwise.
- * @return array
+ * @return integer|boolean
  */
 function user_get_id_by_realname( $p_realname, $p_throw = false ) {
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
