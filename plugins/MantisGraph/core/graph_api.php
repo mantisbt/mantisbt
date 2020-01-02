@@ -360,7 +360,6 @@ function create_developer_open_summary( array $p_filter = null ) {
 /**
  * Create summary table of reporters
  * @param array $p_filter    Filter array.
- * @param integer $p_limit   Number of records to return.
  * @return array
  */
 function create_reporter_summary( array $p_filter = null ) {
