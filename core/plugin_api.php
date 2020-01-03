@@ -674,8 +674,6 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 			return false;
 		}
 
-		$t_target = $t_schema[$i][1][0];
-
 		switch( $t_schema[$i][0] ) {
 			case 'InsertData':
 				$t_sqlarray = array(
@@ -687,7 +685,6 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 				$t_sqlarray = array(
 					'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
 				);
-				$t_target = $t_schema[$i][1];
 				break;
 
 			case 'UpdateFunction':

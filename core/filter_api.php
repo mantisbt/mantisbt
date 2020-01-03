@@ -1486,7 +1486,6 @@ function filter_get_bug_rows_query_clauses( array $p_filter, $p_project_id = nul
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
 
 	$t_current_user_id = auth_get_current_user_id();
 

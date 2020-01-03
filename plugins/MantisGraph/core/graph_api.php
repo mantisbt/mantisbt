@@ -554,7 +554,6 @@ function create_cumulative_bydate( array $p_filter = null ) {
 
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
-	$t_last_still_open = 0;
 	foreach( $t_calc_metrics as $i => $t_values ) {
 		$t_date = $i * SECONDS_PER_DAY;
 		$t_metrics[0][$t_date] = $t_last_opened = $t_last_opened + $t_calc_metrics[$i][0];

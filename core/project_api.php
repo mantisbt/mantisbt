@@ -594,7 +594,6 @@ function project_get_local_user_rows( $p_project_id ) {
 	$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 
 	$t_user_rows = array();
-	$t_row_count = db_num_rows( $t_result );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		array_push( $t_user_rows, $t_row );
