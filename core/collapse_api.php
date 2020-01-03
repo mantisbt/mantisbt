@@ -118,10 +118,9 @@ function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
  * for the user to toggle the collapse block status.
  * This should appear in both the open and closed phase of a block.
  * @param string $p_name    Collapse block name.
- * @param string $p_section Collapse block section.
  * @return void
  */
-function collapse_icon( $p_name, $p_section = '' ) {
+function collapse_icon( $p_name ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
