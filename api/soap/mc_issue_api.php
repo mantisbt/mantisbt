@@ -1283,7 +1283,6 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		}
 
 		if( isset( $p_note['reporter'] ) ) {
-			$t_reporter_id = mci_get_user_id( $p_note['reporter'] );
 			$t_payload['reporter'] = array( 'id' => mci_get_user_id( $p_note['reporter'] ) );
 		}
 
@@ -1439,8 +1438,6 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_fault_access_denied( $t_user_id );
 	}
-
-	$t_issue_author_id = bugnote_get_field( $t_issue_note_id, 'reporter_id' );
 
 	# Check if the user owns the bugnote and is allowed to update their own bugnotes
 	# regardless of the update_bugnote_threshold level.

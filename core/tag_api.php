@@ -1016,7 +1016,6 @@ function tag_stats_attached( $p_tag_id ) {
  * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
-	$c_user_id = auth_get_current_user_id();
 
 	# Use a filter to get all visible issues for this tag id
 	$t_filter = array(
