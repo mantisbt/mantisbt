@@ -41,7 +41,7 @@ $g_app->group('/internal', function() use ( $g_app ) {
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_internal_autocomplete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_field = $p_request->getParam( 'field' );;
+	$t_field = $p_request->getParam( 'field' );
 	$t_prefix = $p_request->getParam( 'prefix' );
 
 	switch( $t_field ) {

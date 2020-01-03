@@ -141,7 +141,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			if( !$t_allow_passwd_change ) {
 				echo '<div class="space-10"></div>';
 				echo '<div class="alert alert-danger">';
-				echo lang_get( 'no_password_change' );;
+				echo lang_get( 'no_password_change' );
 				echo '</div>';
 			}
 ?>
