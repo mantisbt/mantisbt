@@ -71,7 +71,7 @@ class EmailData {
 	 * Submitted
 	 */
 	public $submitted = '';
-};
+}
 
 /**
  * Return a copy of the bug structure with all the instvars prepared for database insertion
