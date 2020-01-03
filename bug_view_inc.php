@@ -1160,7 +1160,6 @@ function bug_view_button_bug_assign_to( BugData $p_bug ) {
  * @return void
  */
 function bug_view_action_buttons( $p_bug_id, $p_flags ) {
-	$t_readonly = bug_is_readonly( $p_bug_id );
 	$t_bug = bug_get( $p_bug_id );
 
 	echo '<div class="btn-group">';
