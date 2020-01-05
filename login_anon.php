@@ -45,7 +45,7 @@ require_api( 'string_api.php' );
 
 $f_return = gpc_get_string( 'return', '' );
 
-$t_anonymous_account = config_get( 'anonymous_account' );
+$t_anonymous_account = auth_anonymous_account();
 
 if( $f_return !== '' ) {
 	$t_return = string_url( string_sanitize_url( $f_return ) );
