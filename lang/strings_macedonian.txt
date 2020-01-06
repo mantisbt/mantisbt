@@ -509,7 +509,7 @@ $s_warning_integrity_hazard = 'Со ова ќе му наложите на Manti
 $s_warning_debug_email = '<strong>Предупредување:</strong> „<code>debug_email</code>“ не е наместено на <code>OFF</code>. Сите соопштенија по е-пошта ќе се испраќаат на „%1$s“.';
 $s_error_database_no_schema_version = '<strong>Грешка:</strong> Верзијата на вашата базна шема е 0. Ова може да биде бидејќи базата е расипана, не може да се добие вредноста на „database_version“ од табелата со поставки, или пак базната структура е од застарена верзија на MantisBT (пред 1.0.0).';
 $s_error_database_version_out_of_date_2 = '<strong>Предупредување:</strong> Структурата на базата на податоци може да е застарена. Подновете ја <a href="admin/install.php">тука</a> пред да се најавите.';
-$s_error_code_version_out_of_date = '<strong>Предупредување:</strong> Структурата на базата на податоци е понова од востановениот код. Подновете го кодот.';
+$s_error_code_version_out_of_date = '<strong>Предупредување:</strong> Структурата на базата е понова од воспоставениот код. Подновете го кодот.';
 $s_login_page_info = 'Добре дојдовте на Системот за следење на проблеми';
 $s_login_title = 'Најава';
 $s_save_login = 'Задржи ме најавен';
