@@ -1126,7 +1126,14 @@ if( 3 == $t_install_state ) {
 					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
 					. PHP_EOL;
 			}
-			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
+			echo '</pre>';
+
+			echo '<div class="space-6"></div>';
+			echo '<div class="alert alert-danger">';
+			echo "<strong>Your database is not ready yet !</strong> "
+				. "Please create it, then install the tables and data using the above script before proceeding.";
+			echo '</div>';
+			echo '</td></tr>';
 		}
 	}
 	if( false == $g_failed ) {
