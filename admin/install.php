@@ -1078,7 +1078,17 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $t_last_id . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
+			if( $t_last_update == -1 ) {
+				echo "INSERT INTO " . db_get_table( 'config' )
+					. " ( value, type, access_reqd, config_id, project_id, user_id )"
+					. " VALUES ($t_last_id, 1, 90, 'database_version', 0, 0 );"
+					. PHP_EOL;
+			} else {
+				echo "UPDATE " . db_get_table( 'config' )
+					. " SET value = $t_last_id"
+					. " WHERE config_id = 'database_version' AND project_id = 0 AND user_id = 0;"
+					. PHP_EOL;
+			}
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
