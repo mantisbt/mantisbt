@@ -873,6 +873,16 @@ if( 3 == $t_install_state ) {
 		if( $f_log_queries ) {
 			echo '<tr><td><span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span>';
 
+			echo '<div class="space-6"></div>';
+			echo '<div class="alert alert-warning">';
+			echo "Please note that executing the generated script below <strong>may not result in a fully functional "
+				. "database</strong>, particularly in upgrade scenarios. This is due to the fact that some upgrade "
+				. "steps require the execution of PHP code; these <em>Upgrade Functions</em> are defined in "
+				. '<a href="https://github.com/mantisbt/mantisbt/blob/master/core/install_helper_functions_api.php">install_helper_functions_api.php</a>'
+				. " and cannot be translated to SQL statements. Use at your own risk.";
+			echo '</div>';
+
+			echo '<pre>';
 			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
 			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
 		}
