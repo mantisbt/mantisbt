@@ -82,6 +82,7 @@ $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 $t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
+$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -95,6 +96,7 @@ if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
 
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
@@ -335,7 +337,6 @@ layout_page_begin();
 	}
 ?>
 <?php
-	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
 	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
 
@@ -386,6 +387,33 @@ layout_page_begin();
 <?php
 	}
 
+	if( $t_allow_file_upload ) {
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+		$t_max_file_size = file_get_max_file_size();
+
+		$t_attach_style = ( $t_default_bugnote_view_status != VS_PUBLIC ) ? 'display: none;' : '';
+?>
+			<tr id="bugnote-attach-files" style="<?php echo $t_attach_style ?>">
+				<th class="category">
+					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<br />
+					<?php print_max_filesize( $t_max_file_size ); ?>
+				</th>
+				<td>
+					<?php print_dropzone_template() ?>
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
+						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
+					</div>
+					<div class="fallback">
+						<input id="ufile[]" name="ufile[]" type="file" size="50" />
+					</div>
+				</td>
+			</tr>
+<?php
+	}
 	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
 ?>
 

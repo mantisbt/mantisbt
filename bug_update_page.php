@@ -141,6 +141,7 @@ if( NO_USER == $t_bug->handler_id ) {
 }
 
 $t_can_change_view_state = $t_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
+$t_allow_file_upload = file_allow_bug_upload( $t_bug_id );
 
 if( $t_show_product_version ) {
 	$t_product_version_released_mask = VERSION_RELEASED;
@@ -740,6 +741,35 @@ if( config_get( 'time_tracking_enabled' ) ) {
 		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
 	}
 }
+
+# File attachments
+	if( $t_allow_file_upload ) {
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+		$t_max_file_size = file_get_max_file_size();
+
+		$t_attach_style = ( $t_default_bugnote_view_status != VS_PUBLIC ) ? 'display: none;' : '';
+?>
+			<tr id="bugnote-attach-files" style="<?php echo $t_attach_style ?>">
+				<th class="category">
+					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<br />
+					<?php print_max_filesize( $t_max_file_size ); ?>
+				</th>
+				<td colspan="5">
+					<?php print_dropzone_template() ?>
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
+						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
+					</div>
+					<div class="fallback">
+						<input id="ufile[]" name="ufile[]" type="file" size="50" />
+					</div>
+				</td>
+			</tr>
+<?php
+	}
 
 event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
 
