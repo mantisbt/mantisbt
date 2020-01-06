@@ -871,7 +871,10 @@ if( 3 == $t_install_state ) {
 		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
-			echo '<tr><td> <span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span> <pre>';
+			echo '<tr><td><span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span>';
+
+			echo "-- MantisBT " . MANTIS_VERSION . " Database creation script". PHP_EOL;
+			echo "-- " . date("c") . PHP_EOL . PHP_EOL;
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
@@ -1010,6 +1013,8 @@ if( 3 == $t_install_state ) {
 					break;
 
 				case null:
+					$t_sqlarray = array();
+					$t_sql = false;
 					# No-op upgrade step - required for oci8
 					break;
 
@@ -1029,17 +1034,38 @@ if( 3 == $t_install_state ) {
 					break;
 			}
 			if( $f_log_queries ) {
+				echo "-- Schema step $i" . PHP_EOL;
 				if( $t_sql ) {
-					foreach( $t_sqlarray as $t_sql ) {
+					foreach( $t_sqlarray as $t_statement ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if( $f_db_type == 'oci8' && stripos( $t_sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+						if( $f_db_type == 'oci8' && stripos( $t_statement, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
 							$t_sql_end = PHP_EOL . '/';
 						} else {
 							$t_sql_end = ';';
 						}
-						echo htmlentities( $t_sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
+						echo htmlentities( $t_statement ) . $t_sql_end;
 					}
+				} elseif( $t_sqlarray ) {
+					echo "-- Execute PHP Update Function: install_" . htmlentities( $t_sqlarray[0] ) . "(";
+					# Convert the parameters array to a printable string
+					if( isset( $t_sqlarray[1] ) ) {
+						$t_params = array();
+						foreach( $t_sqlarray[1] as $t_param ) {
+							$t_value = var_export( $t_param, true );
+							if( is_array( $t_param ) ) {
+								# Remove unnecessary array keys, newlines and the trailing comma
+								$t_value = preg_replace( '/\s*[0-9]+ => /', ' ', $t_value );
+								$t_value = str_replace( ",\n", ' ', $t_value );
+							}
+							$t_params[] = $t_value;
+						}
+						echo htmlentities( implode( ', ', $t_params ) );
+					}
+					echo ")";
+				} else {
+					echo "-- No operation";
 				}
+				echo PHP_EOL . PHP_EOL;
 			} else {
 				echo 'Schema step ' . $i . ': ';
 				if( is_null( $g_upgrade[$i][0] ) ) {
@@ -1078,6 +1104,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
+			echo "-- Set database version" . PHP_EOL;
 			if( $t_last_update == -1 ) {
 				echo "INSERT INTO " . db_get_table( 'config' )
 					. " ( value, type, access_reqd, config_id, project_id, user_id )"
