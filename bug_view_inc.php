@@ -218,17 +218,17 @@ if( $t_bottom_buttons_enabled ) {
 echo '<tbody>';
 
 if( $t_flags['id_show'] || $t_flags['project_show'] || $t_flags['category_show'] ||
-    isset( $t_issue['view_state'] ) || isset( $t_issue_view['created_at'] ) || isset( $t_issue_view['updated_at'] )
+    $t_flags['view_state_show'] || $t_flags['created_at_show'] || $t_flags['updated_at_show']
 ) {
 
 	# Labels
 	echo '<tr class="bug-header">';
-	echo '<th class="bug-id category" width="15%">', isset( $t_issue['id'] ) ? lang_get( 'id' ) : '', '</th>';
-	echo '<th class="bug-project category" width="20%">', isset( $t_issue['project'] ) && isset( $t_issue['project']['name'] ) ? lang_get( 'email_project' ) : '', '</th>';
+	echo '<th class="bug-id category" width="15%">', $t_flags['id_show'] ? lang_get( 'id' ) : '', '</th>';
+	echo '<th class="bug-project category" width="20%">', $t_flags['project_show'] ? lang_get( 'email_project' ) : '', '</th>';
 	echo '<th class="bug-category category" width="15%">', $t_flags['category_show'] ? lang_get( 'category' ) : '', '</th>';
-	echo '<th class="bug-view-status category" width="15%">', isset( $t_issue['view_state'] ) ? lang_get( 'view_status' ) : '', '</th>';
-	echo '<th class="bug-date-submitted category" width="15%">', isset( $t_issue_view['created_at'] ) ? lang_get( 'date_submitted' ) : '', '</th>';
-	echo '<th class="bug-last-modified category" width="20%">', isset( $t_issue_view['updated_at'] ) ? lang_get( 'last_update' ) : '','</th>';
+	echo '<th class="bug-view-status category" width="15%">', $t_flags['view_state_show'] ? lang_get( 'view_status' ) : '', '</th>';
+	echo '<th class="bug-date-submitted category" width="15%">', $t_flags['created_at_show'] ? lang_get( 'date_submitted' ) : '', '</th>';
+	echo '<th class="bug-last-modified category" width="20%">', $t_flags['updated_at_show'] ? lang_get( 'last_update' ) : '','</th>';
 	echo '</tr>';
 
 	echo '<tr class="bug-header-data">';
@@ -547,7 +547,7 @@ echo '<tr class="hidden"></tr>';
 if( $t_flags['summary_show'] && isset( $t_issue['summary'] ) ) {
 	echo '<tr>';
 	echo '<th class="bug-summary category">', lang_get( 'summary' ), '</th>';
-	echo '<td class="bug-summary" colspan="5">', string_display_line( $t_issue_view['id_formatted'] . ': ' . $t_issue['summary'] ), '</td>';
+	echo '<td class="bug-summary" colspan="5">', string_display_line( bug_format_id( $f_issue_id ) . ': ' . $t_issue['summary'] ), '</td>';
 	echo '</tr>';
 }
 
