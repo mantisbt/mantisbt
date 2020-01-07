@@ -36,16 +36,17 @@ $('#db_type').change(
 			$('#oracle_size_warning').hide();
 		}
 
+		// Loop over the selected DB's default values for each pre/suffix
 		$('#default_' + db + ' span').each(
-			function (i, el) {
-				var target = $('#' + el.id);
+			function () {
+				var target = $("#" + this.className);
 				var oldVal = target.data('defval');
 				// Only change the value if not changed from default
 				if (typeof oldVal === 'undefined' || oldVal == target.val()) {
-					target.val($(el).text());
+					target.val(this.textContent);
 				}
 				// Store default value
-				target.data('defval', $(el).text());
+				target.data('defval', this.textContent);
 			}
 		);
 
@@ -56,7 +57,7 @@ $('#db_type').change(
 /**
  * Populate sample table names based on given prefix/suffix
  */
-$('.db-table-prefix').on('input', update_sample_table_names);
+$('input.table-prefix').on('input', update_sample_table_names);
 
 update_sample_table_names();
 });
