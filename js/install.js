@@ -18,8 +18,8 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 $(document).ready( function() {
+'use strict';
 
 /**
  * On Change event for database type selection list
@@ -28,7 +28,7 @@ $(document).ready( function() {
 $('#db_type').change(
 	function () {
 		var db;
-		if ($(this).val() == 'oci8') {
+		if ($(this).val() === 'oci8') {
 			db = 'oci8';
 			$('#oracle_size_warning').show();
 		} else {
@@ -42,7 +42,7 @@ $('#db_type').change(
 				var target = $("#" + this.className);
 				var oldVal = target.data('defval');
 				// Only change the value if not changed from default
-				if (typeof oldVal === 'undefined' || oldVal == target.val()) {
+				if (typeof oldVal === 'undefined' || oldVal === target.val()) {
 					target.val(this.textContent);
 				}
 				// Store default value
@@ -52,7 +52,7 @@ $('#db_type').change(
 
 		update_sample_table_names();
 	}
-).change();
+);
 
 /**
  * Populate sample table names based on given prefix/suffix
@@ -60,22 +60,23 @@ $('#db_type').change(
 $('input.table-prefix').on('input', update_sample_table_names);
 
 update_sample_table_names();
-});
 
 function update_sample_table_names() {
 	var prefix = $('#db_table_prefix').val().trim();
-	if(prefix && prefix.substr(-1) != '_') {
+	if(prefix && prefix.substr(-1) !== '_') {
 		prefix += '_';
 	}
 	var suffix = $('#db_table_suffix').val().trim();
-	if(suffix && suffix.substr(0,1) != '_') {
+	if(suffix && suffix.substr(0,1) !== '_') {
 		suffix = '_' + suffix;
 	}
 	var plugin = $('#db_table_plugin_prefix').val().trim();
-	if(plugin && plugin.substr(-1) != '_') {
+	if(plugin && plugin.substr(-1) !== '_') {
 		plugin += '_';
 	}
 
 	$('#db_table_prefix_sample').val(prefix + '<CORE TABLE>' + suffix);
 	$('#db_table_plugin_prefix_sample').val(prefix + plugin + '<PLUGIN>_<TABLE>' + suffix);
 }
+
+});
