@@ -681,6 +681,11 @@ if( !$g_database_upgrade ) {
 			${'f_' . $t_key} // The actual value of the corresponding form variable
 		);
 		echo "\n&nbsp;";
+		printf( '<button id="%s" type="button" class="btn btn-sm btn-primary btn-white btn-round reset-prefix">%s</button>',
+			"btn_$t_key",
+			lang_get( 'reset' )
+		);
+		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
 			$t_id_sample = $t_key. '_sample';
 			echo '<label for="' . $t_id_sample . '">Sample table name:</label>';
