@@ -4316,9 +4316,6 @@ $g_log_level = LOG_NONE;
  * - 'file':    Log to a specific file, specified as an absolute path, e.g.
  *              'file:/var/log/mantis.log' (Unix) or
  *              'file:c:/temp/mantisbt.log' (Windows)
- * - 'firebug': make use of Firefox {@link http://getfirebug.com/ Firebug Add-on}.
- *              If user is not running firefox, this options falls back to
- *              the default php error log settings.
  * - 'page':    Display log output at bottom of the page. See also
  *              {@link $g_show_log_threshold} to restrict who can see log data.
  *
