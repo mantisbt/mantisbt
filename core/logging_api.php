@@ -132,22 +132,6 @@ function log_event( $p_level, $p_msg ) {
 			global $g_log_events;
 			$g_log_events[] = array( time(), $p_level, $t_event, $t_caller);
 			break;
-		case 'firebug':
-			if( !class_exists( 'FirePHP' ) ) {
-				if( file_exists( config_get_global( 'library_path' ) . 'FirePHPCore/FirePHP.class.php' ) ) {
-					require_lib( 'FirePHPCore/FirePHP.class.php' );
-				}
-			}
-			if( class_exists( 'FirePHP' ) ) {
-				static $s_firephp;
-				if( $s_firephp === null ) {
-					$s_firephp = FirePHP::getInstance( true );
-				}
-				# Don't use $t_msg, let FirePHP format the message
-				$s_firephp->log( $p_msg, $t_now . ' ' . $t_level );
-				return;
-			}
-			# if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
 			error_log( $t_php_event . PHP_EOL );
