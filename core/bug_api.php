@@ -1875,8 +1875,10 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
-		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
-		bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+		if( !is_blank( $p_bugnote_text ) ) {
+			$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', null, false );
+			bugnote_process_mentions( $p_bug_id, $t_bugnote_id, $p_bugnote_text );
+		}
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
