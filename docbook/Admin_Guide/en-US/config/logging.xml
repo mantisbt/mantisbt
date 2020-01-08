@@ -319,17 +319,6 @@ or
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>'firebug'</term>
-						<listitem>
-							<para>make use of Firefox
-								<ulink url="http://getfirebug.com/">
-									Firebug Add-on</ulink>.
-								If user is not running firefox, this options
-								falls back to the default php error log settings.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
 						<term>'page'</term>
 						<listitem>
 							<para>Display log output at bottom of the page.

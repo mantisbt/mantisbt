@@ -76,8 +76,8 @@ check_print_test_warn_row( 'Check whether diagnostic logging is enabled',
 );
 
 check_print_test_warn_row( 'Check whether log output is sent to end user',
-	!($g_log_destination == 'firebug' || $g_log_destination == 'page'),
-	array( false => 'Diagnostic output destination is currently sent to end users browser' )
+	$g_log_destination !== 'page',
+	array( false => "Diagnostics output destination is currently set to end-user's browser" )
 );
 
 check_print_test_warn_row( 'Detailed errors should be OFF',
