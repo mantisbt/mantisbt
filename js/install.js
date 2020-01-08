@@ -22,6 +22,65 @@ $(document).ready( function() {
 'use strict';
 
 /**
+ * PrefixInput object
+ * @param input
+ * @constructor
+ */
+function PrefixInput (inputId) {
+	this.input = $('#' + inputId);
+	this.button = $('#btn_' + inputId);
+
+	/** Corresponding reset button */
+	this.resetButton = function () { return this.button; };
+	this.enableButton = function () { this.button.removeAttr('disabled');};
+	this.disableButton = function () { this.button.attr('disabled', true);};
+
+	/** Default value (data attribute) */
+	this.getDefault = function () { return this.input.data('defval'); };
+	this.setDefault = function (value) {
+		this.input.data('defval', value);
+		if (this.isValueDefault()) {
+			this.disableButton();
+		}
+	};
+
+	this.getValue = function () { return this.input.val(); };
+	this.isValueDefault = function () { return this.getValue() === this.getDefault(); };
+
+	/**
+	 *
+	 * @param value
+	 */
+	this.setValue = function (value) {
+		this.input.val(value);
+		if (this.isValueDefault()) {
+			this.disableButton();
+		}
+	};
+
+	/**
+	 * Reset the input's value to default
+	 * Set focus to the input, select the whole text and disable the reset button.
+	 */
+	this.resetValue = function () {
+		this.input.val(this.getDefault());
+		this.input.focus()[0].setSelectionRange(0, this.getValue().length);
+		this.disableButton();
+	};
+}
+
+var reset_buttons = $('button.reset-prefix');
+
+/**
+ * Initialize all input's default values and disable the reset buttons
+ */
+var inputs = $('input.table-prefix').each(function () {
+	var input = new PrefixInput(this.id);
+	input.setDefault(input.getValue());
+	input.disableButton();
+});
+
+/**
  * On Change event for database type selection list
  * Preset prefix, plugin prefix and suffix fields when changing db type
  */
@@ -39,14 +98,13 @@ $('#db_type').change(
 		// Loop over the selected DB's default values for each pre/suffix
 		$('#default_' + db + ' span').each(
 			function () {
-				var target = $("#" + this.className);
-				var oldVal = target.data('defval');
+				var input = new PrefixInput(this.className);
+
 				// Only change the value if not changed from default
-				if (typeof oldVal === 'undefined' || oldVal === target.val()) {
-					target.val(this.textContent);
+				if (input.isValueDefault()) {
+					input.setValue(this.textContent);
 				}
-				// Store default value
-				target.data('defval', this.textContent);
+				input.setDefault(this.textContent);
 			}
 		);
 
@@ -55,12 +113,35 @@ $('#db_type').change(
 );
 
 /**
- * Populate sample table names based on given prefix/suffix
+ * Process changes to prefix/suffix inputs
  */
-$('input.table-prefix').on('input', update_sample_table_names);
+inputs.on('input', function () {
+	var input = new PrefixInput(this.id);
+
+	// Enable / disable the Reset button as appropriate
+	if(input.isValueDefault()) {
+		input.disableButton();
+	} else {
+		input.enableButton();
+	}
+
+	update_sample_table_names();
+});
+
+/**
+ * Buttons to reset the prefix/suffix to the current default value
+ */
+reset_buttons.click(function () {
+	var input = new PrefixInput($(this).prev('input.table-prefix')[0].id);
+	input.resetValue();
+	update_sample_table_names();
+});
 
 update_sample_table_names();
 
+/**
+ * Populate sample table names based on given prefix/suffix
+ */
 function update_sample_table_names() {
 	var prefix = $('#db_table_prefix').val().trim();
 	if(prefix && prefix.substr(-1) !== '_') {
