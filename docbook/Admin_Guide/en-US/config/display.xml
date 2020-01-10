@@ -47,7 +47,7 @@
 					'opensearch_XXX_short' language string, the resulting text
 					is 16 characters or less, to be compliant with the limit for
 					the ShortName element as defined in the
-					<ulink url="http://www.opensearch.org/Specifications/OpenSearch/1.1">
+					<ulink url="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md">
 						OpenSearch specification
 					</ulink>.
 				</para>

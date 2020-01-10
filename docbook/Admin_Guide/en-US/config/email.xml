@@ -202,7 +202,7 @@ $g_notify_flags['new'] = array(
 				</para>
 				<para>When ON (default), validation is performed using the
 					pattern given by the
-					<ulink url="http://www.w3.org/TR/html5/forms.html#valid-e-mail-address">
+					<ulink url="https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address">
 						HTML5 specification for <emphasis>email</emphasis>
 						type form input elements</ulink>.
 					When OFF, validation is disabled.
