@@ -288,19 +288,6 @@ ldaps://ldap.example.com:3269/
 					</warning>
 				</listitem>
 			</varlistentry>
-
-			<varlistentry>
-				<term>$g_ldap_port</term>
-
-				<listitem>
-					<para><emphasis>Deprecated since MantisBT release
-					1.2.0a1.</emphasis></para>
-
-					<para>The LDAP server port number should be defined as
-					part of the URI in $g_ldap_server instead (see
-					above).</para>
-				</listitem>
-			</varlistentry>
 		</variablelist>
 	</section>
 </section>
