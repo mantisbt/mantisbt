@@ -126,7 +126,7 @@ $s_CODE = STRING;
 					<para>Caption variable name.
 						This value is supplied to the lang_get() API; it is
 						therefore mandatory to set this to a
-						<ulink url="http://php.net/language.variables.basics.php">valid PHP identifier</ulink>
+						<ulink url="https://www.php.net/language.variables.basics.php">valid PHP identifier</ulink>
 						(i.e. only letters, numbers and underscores; no spaces)
 						if you intend to translate the field label
 						(see <xref linkend="admin.customize.customfields.localize" />).
@@ -171,7 +171,7 @@ $s_CODE = STRING;
                     </para>
                 </listitem>
                 <listitem>
-                    <para>Regular expression to use for validating user input (use <ulink url="http://www.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE syntax</ulink>).
+                    <para>Regular expression to use for validating user input (use <ulink url="https://www.php.net/manual/en/reference.pcre.pattern.syntax.php">PCRE syntax</ulink>).
                     </para>
                 </listitem>
                 <listitem>
@@ -343,7 +343,7 @@ $s_CODE = STRING;
 					<para>Define the custom field
 						(see <xref linkend="admin.customize.customfields.definitions" />),
 						keeping in mind that its name must be a
-						<ulink url="http://php.net/language.variables.basics.php">valid PHP identifier</ulink>.
+						<ulink url="https://www.php.net/language.variables.basics.php">valid PHP identifier</ulink>.
 					</para>
 					<para>As an example, we will use
 						<emphasis>my_start_date</emphasis>
@@ -408,16 +408,16 @@ switch( $g_active_language ) {
 				</para>
 				<para>The format for specific dates is an integer which
 					indicates the number of seconds since the
-					<ulink url="http://en.wikipedia.org/wiki/Unix_time">
+					<ulink url="https://en.wikipedia.org/wiki/Unix_time">
 						Unix Epoch</ulink> (January 1 1970 00:00:00 UTC),
 					which is the format consumed by the PHP
-					<ulink url="http://www.php.net/date">date()</ulink> method.
+					<ulink url="https://www.php.net/date">date()</ulink> method.
 				</para>
 				<para>The relative scenario expects default values like
 					{tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.
 					The curly brackets indicate that this is a logical value
 					which is then evaluated using the PHP
-					<ulink url="http://www.php.net/strtotime">strtotime()</ulink>
+					<ulink url="https://www.php.net/strtotime">strtotime()</ulink>
 					function.
 				</para>
             </section>

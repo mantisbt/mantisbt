@@ -10,16 +10,16 @@
 			<term>Content Security Policy</term>
 			<listitem>
 				<para>Amongst other things, MantisBT relies on
-					<ulink url="http://en.wikipedia.org/wiki/Content_Security_Policy">
+					<ulink url="https://en.wikipedia.org/wiki/Content_Security_Policy">
 						Content Security Policy</ulink> (CSP), which is a
-					<ulink url="http://www.w3.org/TR/CSP/">
+					<ulink url="https://www.w3.org/TR/CSP/">
 						W3C candidate recommendation</ulink>
 					improving the system's security against
-					<ulink url="http://en.wikipedia.org/wiki/Cross-site_scripting">
+					<ulink url="https://en.wikipedia.org/wiki/Cross-site_scripting">
 						cross-site scripting (XSS)</ulink>
 					and other, similar types of attacks.
 					It is  currently supported in
-					<ulink url="http://caniuse.com/#feat=contentsecuritypolicy">
+					<ulink url="https://caniuse.com/#feat=contentsecuritypolicy">
 						recent versions of many browsers</ulink>.
 				</para>
 				<note>

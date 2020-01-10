@@ -12,7 +12,7 @@
 		uploaded to the path that is configured in the project
 		properties. In case of problems getting the file upload feature to
 		work, check the following resources:
-		<ulink url="http://www.php.net/manual/en/features.file-upload.php">PHP
+		<ulink url="https://www.php.net/manual/en/features.file-upload.php">PHP
 			Manual
 		</ulink>
 		.

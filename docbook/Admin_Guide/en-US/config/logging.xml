@@ -54,7 +54,7 @@
 			<term>$g_display_errors</term>
 			<listitem>
 				<para>Errors Display Method.
-					Defines what <ulink url="http://php.net/errorfunc.constants">
+					Defines what <ulink url="https://www.php.net/errorfunc.constants">
 						errors</ulink>
 					are displayed and how.
 					Available options are:
@@ -84,7 +84,7 @@
 						<listitem>
 							<para>Suppress the error (no display).
 								This is the default behavior for unspecified
-								<ulink url="http://php.net/errorfunc.constants">
+								<ulink url="https://www.php.net/errorfunc.constants">
 									errors constants</ulink>.
 							</para>
 						</listitem>
@@ -266,7 +266,7 @@ $g_display_errors = array(
 				</variablelist>
 				<para>Default is LOG_NONE.</para>
 				<note><para>Multiple log channels can be combined using
-					<ulink url="http://php.net/language.operators.bitwise">
+					<ulink url="https://www.php.net/language.operators.bitwise">
 						PHP bitwise operators
 					</ulink>, e.g.
 <programlisting>$g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT;</programlisting>
@@ -288,7 +288,7 @@ or
 						<term>''</term>
 						<listitem>
 							<para>The empty string means
-								<ulink url="http://php.net/error_log">
+								<ulink url="https://www.php.net/error_log">
 									default PHP error log settings
 								</ulink>
 							</para>
