@@ -1461,12 +1461,17 @@ if( 7 == $t_install_state ) {
 <tr>
 	<td>
 		<span class="bigger-130">
+<?php if( $f_log_queries ) { ?>
+		SQL script generated successfully.
+		Use it to manually create or upgrade your database.
+<?php } else { ?>
 		MantisBT was installed successfully.
-<?php if( $f_db_exists ) {?>
+<?php if( $f_db_exists ) { ?>
 		<a href="../login_page.php">Continue</a> to log in.
 <?php } else { ?>
 		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
 		</span>
+<?php } ?>
 <?php } ?>
 	</td>
 	<?php print_test_result( GOOD ); ?>
