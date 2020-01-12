@@ -73,7 +73,7 @@ print_manage_menu( 'manage_overview_page.php' );
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
-			<td><?php echo config_get( 'database_version' ) ?></td>
+			<td><?php echo config_get( 'database_version', 0, ALL_USERS, ALL_PROJECTS ) ?></td>
 		</tr>
 		<tr class="spacer">
 			<td colspan="2"></td>
