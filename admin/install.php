@@ -264,7 +264,7 @@ if( $t_config_exists ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1 );
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS);
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
@@ -1101,7 +1101,7 @@ if( 3 == $t_install_state ) {
 				echo '</td>';
 				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
-					config_set( 'database_version', $i );
+					config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
 				} else {
 					$t_all_sql = '';
 					if( $t_sql ) {
