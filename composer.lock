@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.15",
+            "version": "v5.20.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "7bb34029f4d6995b6bf1dd3cb58de69a16cfce87"
+                "reference": "b3cbd53be811f8307493f387ca5831143c1925c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/7bb34029f4d6995b6bf1dd3cb58de69a16cfce87",
-                "reference": "7bb34029f4d6995b6bf1dd3cb58de69a16cfce87",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/b3cbd53be811f8307493f387ca5831143c1925c1",
+                "reference": "b3cbd53be811f8307493f387ca5831143c1925c1",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 "library",
                 "php"
             ],
-            "time": "2019-11-24T10:59:54+00:00"
+            "time": "2020-01-12T17:37:13+00:00"
         },
         {
             "name": "dapphp/securimage",
