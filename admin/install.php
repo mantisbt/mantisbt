@@ -568,7 +568,7 @@ if( !$g_database_upgrade ) {
 	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
 		echo '<div id="default_' . $t_db_type . '" class="hidden">';
 		foreach( $t_defaults as $t_key => $t_value ) {
-			echo "\n\t" . '<span id="' . $t_key . '">' . $t_value . '</span>';
+			echo "\n\t" . '<span class="' . $t_key . '">' . $t_value . '</span>';
 		}
 		echo "\n" . '</div>' . "\n";
 	}
@@ -676,7 +676,10 @@ if( !$g_database_upgrade ) {
 		echo "<tr>\n\t<td>\n";
 		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
-		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="text" class="db-table-prefix" value="' . $f_db_table_prefix . '">';
+		printf( '<input id="%1$s" name="%1$s" type="text" class="table-prefix" value="%2$s">',
+			$t_key,
+			${'f_' . $t_key} // The actual value of the corresponding form variable
+		);
 		echo "\n&nbsp;";
 		if( $t_key != 'db_table_suffix' ) {
 			$t_id_sample = $t_key. '_sample';
