@@ -56,6 +56,7 @@
  * @author 赤城。
  */
 
+$s_directionality = '左書き';
 $s_actiongroup_menu_move = '移動';
 $s_actiongroup_menu_copy = 'コピー';
 $s_actiongroup_menu_assign = '担当者決定';
@@ -914,7 +915,7 @@ $s_total_time = '合計完了日数';
 $s_developer_stats = '開発者';
 $s_reporter_stats = '報告者';
 $s_orct = '(新規/解決済/完了/合計)';
-$s_summary_header = '未解決/解決済み/完了/合計/解決率/割合';
+$s_summary_header = '未解決/解決済み/完了/合計/解決率/構成比';
 $s_summary_notice_filter_is_applied = 'フィルターが適用されました';
 $s_any = 'どれでも';
 $s_all = 'すべて';
