@@ -138,7 +138,6 @@ class IssueViewPageCommand extends Command {
 		}
 
 		$t_flags['history_show'] =
-			config_get( 'history_default_visible' ) &&
 			access_has_bug_level( config_get( 'view_history_threshold' ), $t_issue_id );
 
 		$t_flags['reminder_can_add'] =
