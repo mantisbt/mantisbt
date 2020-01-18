@@ -84,7 +84,7 @@ if( $t_due_date !== null ) {
 	if( is_blank( $t_due_date ) ) {
 		$t_updated_bug->due_date = 1;
 	} else {
-		$t_updated_bug->due_date = strtotime( $t_due_date );
+		$t_updated_bug->due_date = date_strtotime( $t_due_date );
 	}
 }
 $t_updated_bug->duplicate_id = gpc_get_int( 'duplicate_id', 0 );

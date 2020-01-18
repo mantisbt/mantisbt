@@ -29,7 +29,8 @@
 			<term>$g_normal_date_format</term>
 			<listitem>
 				<para>This format is used in the view/update bug pages, bug notes,
-					manage section, and news section.
+					manage section, and news section. Datetime picker widget uses
+					this format for displaying or editing dateime values.
 					Default is <literal>Y-m-d H:i</literal>.
 				</para>
 			</listitem>

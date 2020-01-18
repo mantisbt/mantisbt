@@ -78,7 +78,7 @@ class IssueNoteTest extends SoapBase {
 		$this->assertEquals( 0, $t_note->note_type );
 		$this->assertEquals( '', $t_note->note_attr );
 
-		# $timestamp = strtotime( $note->date_submitted );
+		# $timestamp = date_strtotime( $note->date_submitted );
 		# $t_submited_date = date( "ymd", $timestamp );
 		# $t_today_date = date( "ymd" );
 

@@ -762,8 +762,8 @@ function bugnote_format_id( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
-	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
-	$c_from = strtotime( $p_from );
+	$c_to = date_strtotime( $p_to ) + SECONDS_PER_DAY - 1;
+	$c_from = date_strtotime( $p_from );
 
 	if( !is_blank( $c_from ) ) {
 		$t_from_where = ' AND bn.date_submitted >= ' . $c_from;

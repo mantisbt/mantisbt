@@ -364,7 +364,7 @@ if( $t_show_attachments ) {
 		<td>
 			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . convert_php_to_momentjs_datetime_format( config_get( 'normal_date_format' ) )  . '" ' .
+				'" data-picker-format="' . date_get_datetime_picker_format() . '" ' .
 				'size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 			<i class="fa fa-calendar fa-xlg datetimepicker"></i>
 		</td>

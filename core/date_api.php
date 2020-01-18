@@ -73,7 +73,21 @@ function date_strtotime( $p_date ) {
 	if( is_blank( $p_date ) ) {
 		return date_get_null();
 	}
-	return strtotime( $p_date );
+
+	# Start by converting date string to match configured date_format
+	$t_datetime = DateTime::createFromFormat( config_get('normal_date_format' ), $p_date );
+
+	# Fall back to classic strtotime() if configured date_format fails
+	$t_timestamp = $t_datetime === false ? strtotime( $p_date ) : $t_datetime->getTimestamp();
+
+	if( $t_timestamp === false ) {
+		throw new ClientException(
+			"Invalid date format '$p_date'",
+			ERROR_INVALID_DATE_FORMAT,
+			array( $p_date ) );
+	}
+
+	return $t_timestamp;
 }
 
 /**
@@ -290,7 +304,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  * @return string 					Date time format string understood by moment.js based components
  * @access public
  */
-function convert_php_to_momentjs_datetime_format( string $p_php_format ) {
+function date_convert_format_from_php_to_momentjs( $p_php_format ) {
 	$t_replacements = [
 		'A' => 'A',      # for the sake of escaping below
 		'a' => 'a',      # for the sake of escaping below
@@ -338,4 +352,13 @@ function convert_php_to_momentjs_datetime_format( string $p_php_format ) {
 	}
 
 	return strtr( $p_php_format, $t_replacements );
+}
+
+/**
+ * Utility function to fetch format string that works with the datetime picker widget
+ * @return void
+ * @access public
+ */
+function date_get_datetime_picker_format() {
+	return date_convert_format_from_php_to_momentjs( config_get('normal_date_format' ) );
 }

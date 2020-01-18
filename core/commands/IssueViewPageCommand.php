@@ -152,12 +152,12 @@ class IssueViewPageCommand extends Command {
 
 		$t_flags['created_at_show'] = in_array( 'date_submitted', $t_fields );
 		if( $t_flags['created_at_show'] ) {
-			$t_issue_view['created_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['created_at'] ) );
+			$t_issue_view['created_at'] = date( config_get( 'normal_date_format' ), date_strtotime( $t_issue['created_at'] ) );
 		}
 
 		$t_flags['updated_at_show'] = in_array( 'last_updated', $t_fields );
 		if( $t_flags['updated_at_show'] ) {
-			$t_issue_view['updated_at'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['updated_at'] ) );
+			$t_issue_view['updated_at'] = date( config_get( 'normal_date_format' ), date_strtotime( $t_issue['updated_at'] ) );
 		}
 
 		$t_flags['additional_information_show'] =
@@ -185,7 +185,7 @@ class IssueViewPageCommand extends Command {
 			$t_issue_view['overdue'] = bug_overdue_level( $t_issue_id );
 
 			if( isset( $t_issue['due_date'] ) ) {
-				$t_issue_view['due_date'] = date( config_get( 'normal_date_format' ), strtotime( $t_issue['due_date'] ) );
+				$t_issue_view['due_date'] = date( config_get( 'normal_date_format' ), date_strtotime( $t_issue['due_date'] ) );
 			} else {
 				$t_issue_view['due_date'] = '';
 			}

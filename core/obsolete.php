@@ -209,6 +209,7 @@ config_obsolete( 'bug_print_page_fields' );
 config_obsolete( 'calendar_js_date_format', 'datetime_picker_format' );
 config_obsolete( 'calendar_date_format', 'normal_date_format' );
 
+
 # changes in 2.8.0
 config_obsolete( 'inline_file_exts' );
 

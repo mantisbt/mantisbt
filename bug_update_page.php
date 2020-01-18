@@ -340,7 +340,7 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			}
 			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . convert_php_to_momentjs_datetime_format( config_get( 'normal_date_format' ) )  . '" ' .
+				'" data-picker-format="' . date_get_datetime_picker_format() . '" ' .
 				'maxlength="16" value="' . $t_date_to_display . '" />';
 			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
