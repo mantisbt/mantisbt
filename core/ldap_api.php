@@ -476,7 +476,7 @@ function ldap_simulatiom_realname_from_username( $p_username ) {
 		return '';
 	}
 
-	log_event( LOG_LDAP, 'ldap_simulatiom_realname_from_username: user \'' . $p_username . '\' has email \'' . $t_user['realname'] . '\'.' );
+	log_event( LOG_LDAP, 'ldap_simulatiom_realname_from_username: user \'' . $p_username . '\' has real name \'' . $t_user['realname'] . '\'.' );
 	return $t_user['realname'];
 }
 
