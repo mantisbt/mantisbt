@@ -106,18 +106,6 @@ $t_action_button_position = config_get( 'action_button_position' );
 
 $t_bugslist = gpc_get_cookie( config_get_global( 'bug_list_cookie' ), false );
 
-if( $t_flags['history_show'] ) {
-	if( $f_history ) {
-		$t_history_link = '#history';
-		$t_history_label = lang_get( 'jump_to_history' );
-	} else {
-		$t_history_link = 'view.php?id=' . $f_issue_id . '&history=1#history';
-		$t_history_label = lang_get( 'display_history' );
-	}
-} else {
-	$t_history_link = '';
-}
-
 $t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 $t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
 
@@ -169,7 +157,14 @@ foreach ( $t_issue_view['links'] as $t_plugin => $t_hooks ) {
 print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
 
 # Display or Jump to History
-if( !is_blank( $t_history_link ) ) {
+if( $t_flags['history_show'] ) {
+	if( $f_history ) {
+		$t_history_link = '#history';
+		$t_history_label = lang_get( 'jump_to_history' );
+	} else {
+		$t_history_link = 'view.php?id=' . $f_issue_id . '&history=1#history';
+		$t_history_label = lang_get( 'display_history' );
+	}
 	print_small_button( $t_history_link, $t_history_label );
 }
 
@@ -733,7 +728,7 @@ if( config_get( 'time_tracking_enabled' ) &&
 }
 
 # History
-if( $t_flags['history_show'] ) {
+if( $t_flags['history_show'] && $f_history ) {
 ?>
 	<div class="col-md-12 col-xs-12">
 		<a id="history"></a>
