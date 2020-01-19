@@ -1694,6 +1694,9 @@ class BugFilterQuery extends DbQuery {
 
 				$t_clauses = $t_column_object->sortquery( $c_dir );
 				if( is_array( $t_clauses ) ) {
+					if( isset( $t_clauses['select'] ) ) {
+						$this->add_select( $t_clauses['select'] );
+					}
 					if( isset( $t_clauses['join'] ) ) {
 						$this->add_join( $t_clauses['join'] );
 					}
