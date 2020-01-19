@@ -86,6 +86,13 @@ require_api( 'utility_api.php' );
  *   $main_query = new DbQuery( 'SELECT * FROM {bug} WHERE id IN :filter_ids' );
  *   $main_query->bind( 'filter_ids', $subquery );
  *   $main_query->execute();
+ *
+ * Right after the BugFilterQuery object is created, all the internal query parts
+ * are constructed based on the filter, and the actual DbQuery sql is built based
+ * on the query type.
+ * If at a later time, externally new parts are added (where, join, order, etc),
+ * the actual sql will be rebuilt once the DbQuery 'execute' method is used, or
+ * build_query() is explicitly called.
  */
 
 class BugFilterQuery extends DbQuery {
@@ -102,6 +109,7 @@ class BugFilterQuery extends DbQuery {
 	public $use_sticky;
 
 	# internal storage for intermediate data
+	protected $query_type;
 	protected $parts_select = array();
 	protected $parts_from = array();
 	protected $parts_join = array();
@@ -115,6 +123,7 @@ class BugFilterQuery extends DbQuery {
 	protected $rt_included_projects;
 	protected $rt_table_alias_cf;
 	protected $table_alias_bugnote = null;
+	protected $needs_rebuild;
 
 	/**
 	 * Constructor.
@@ -174,6 +183,8 @@ class BugFilterQuery extends DbQuery {
 		} else {
 			$t_query_type = $p_config;
 		}
+		$this->query_type = $t_query_type;
+		$this->needs_rebuild = true;
 
 		# The query string must be built here to have a valid DbQuery object ready for use
 		$this->build_main();
@@ -191,7 +202,17 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	public function set_query_type( $p_query_type ) {
-		switch( $p_query_type ) {
+		$this->query_type = (int)$p_query_type;
+		$this->build_query();
+	}
+
+	/**
+	 * Builds the actual DbQuery object based on the current query type and query parts
+	 *
+	 * @return void
+	 */
+	public function build_query() {
+		switch( $this->query_type ) {
 			case self::QUERY_TYPE_COUNT:
 				$this->sql( $this->string_query_count() );
 				break;
@@ -206,7 +227,24 @@ class BugFilterQuery extends DbQuery {
 				$this->sql( $this->string_query_list() );
 				break;
 		}
+		$this->needs_rebuild = false;
 		$this->db_result = null;
+	}
+
+	/**
+	 * Override DbQuery execute method to check first if the query is already buils and up to date
+	 * with current query parts.
+	 *
+	 * @param array $p_bind_array	Array for binding values
+	 * @param integer $p_limit		Limit value
+	 * @param integer $p_offset		Offset value
+	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
+	 */
+	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+		if( $this->needs_rebuild ) {
+			$this->build_query();
+		}
+		return parent::execute( $p_bind_array, $p_limit, $p_offset );
 	}
 
 	/**
@@ -236,6 +274,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_select( $p_string ) {
 		$this->parts_select[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -245,6 +284,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_from( $p_string ) {
 		$this->parts_from[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -254,6 +294,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_join( $p_string ) {
 		$this->parts_join[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -264,6 +305,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_where( $p_string ) {
 		$this->parts_where[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -274,6 +316,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_fixed_where( $p_string ) {
 		$this->fixed_where[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
@@ -283,6 +326,7 @@ class BugFilterQuery extends DbQuery {
 	 */
 	public function add_order( $p_string ) {
 		$this->parts_order[] = $p_string;
+		$this->needs_rebuild = true;
 	}
 
 	/**
