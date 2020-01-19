@@ -119,11 +119,11 @@ class BugFilterQuery extends DbQuery {
 	protected $filter_operator;
 
 	# runtime variables for building the filter query
-	protected $rt_stop_build;
-	protected $rt_included_projects;
-	protected $rt_table_alias_cf;
-	protected $table_alias_bugnote = null;
-	protected $needs_rebuild;
+	protected $rt_stop_build; # flag to stop building the query parts, if there is no need to.
+	protected $rt_included_projects; # calculated list of projects in the filter scope, to be reused at each build step
+	protected $rt_table_alias_cf; # keep track of the custom field table joins, to reuse them in order by, or serach matching.
+	protected $rt_table_alias_bugnote = null; # keep track of the bugnote table joins.
+	protected $needs_rebuild; # flag to force a rebuild of the final sql when additions are made after the object is first created.
 
 	/**
 	 * Constructor.
@@ -134,7 +134,7 @@ class BugFilterQuery extends DbQuery {
 	 * - An array of options, for more advanced configuration.
 	 *
 	 * Option array uses "option => value" pairs, supported as:
-	 * - 'query_type':	Any of QUERY_TYPE_xxx class constants, meaning.
+	 * - 'query_type':	Any of QUERY_TYPE_xxx class constants, meaning:
 	 *					QUERY_TYPE_LIST, query listing all fields of matched bugs. This is the default.
 	 *					QUERY_TYPE_COUNT, query to return number of matched bugs.
 	 *					QUERY_TYPE_IDS, query to return only matched bug ids, which may not
@@ -1043,8 +1043,8 @@ class BugFilterQuery extends DbQuery {
 	 * @return string	A table alias for this join clause
 	 */
 	protected function helper_table_alias_for_bugnote() {
-		if( $this->table_alias_bugnote ) {
-			return $this->table_alias_bugnote;
+		if( $this->rt_table_alias_bugnote ) {
+			return $this->rt_table_alias_bugnote;
 		}
 		# Build a condition for determining note visibility, the user can view:
 		# - public notes
@@ -1069,8 +1069,8 @@ class BugFilterQuery extends DbQuery {
 				. $t_view_condition;
 
 		$this->add_join( $t_join );
-		$this->table_alias_bugnote = $t_table_alias;
-		return $this->table_alias_bugnote;
+		$this->rt_table_alias_bugnote = $t_table_alias;
+		return $this->rt_table_alias_bugnote;
 	}
 
 	/**
