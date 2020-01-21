@@ -129,17 +129,7 @@ $g_cache_ldap_email = array();
  * @return string
  */
 function ldap_email( $p_user_id ) {
-	global $g_cache_ldap_email;
-
-	if( isset( $g_cache_ldap_email[(int)$p_user_id] ) ) {
-		return $g_cache_ldap_email[(int)$p_user_id];
-	}
-
-	$t_username = user_get_username( $p_user_id );
-	$t_email = ldap_email_from_username( $t_username );
-
-	$g_cache_ldap_email[(int)$p_user_id] = $t_email;
-	return $t_email;
+	return ldap_email_from_username( user_get_username( $p_user_id ) );
 }
 
 /**
@@ -148,15 +138,18 @@ function ldap_email( $p_user_id ) {
  * @return string
  */
 function ldap_email_from_username( $p_username ) {
+	global $g_cache_ldap_email;
+	if( isset( $g_cache_ldap_email[$p_username]['mail'] ) ) {
+		return $g_cache_ldap_email[$p_username]['mail'];
+	}
+
 	if( ldap_simulation_is_enabled() ) {
-		return ldap_simulation_email_from_username( $p_username );
+		$t_email = ldap_simulation_email_from_username( $p_username );
+	} else {
+		$t_email = (string)ldap_get_field_from_username( $p_username, 'mail' );
 	}
 
-	$t_email = ldap_get_field_from_username( $p_username, 'mail' );
-	if( $t_email === null ) {
-		return '';
-	}
-
+	$g_cache_ldap_email[$p_username]['mail'] = $t_email;
 	return $t_email;
 }
 
