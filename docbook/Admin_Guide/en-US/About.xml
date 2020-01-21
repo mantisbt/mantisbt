@@ -59,7 +59,7 @@
             has a package for MantisBT.  If not, or if the package is
             not up-to-date with the latest MantisBT version, then you may want
             to download it directly from
-            <ulink url="https://www.mantisbt.org/download.php">here</ulink>.
+            <ulink url="https://mantisbt.org/download.php">here</ulink>.
         </para>
 
         <para>
@@ -136,7 +136,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="https://www.mantisbt.org/forums/">Forums</ulink> - The
+                    <ulink url="https://mantisbt.org/forums/">Forums</ulink> - The
                     forums are one of the most popular destinations for getting
                     MantisBT support.  Start off by searching the forums for your
                     questions, if not found, then go ahead and submit a question.
@@ -221,7 +221,7 @@
             <listitem>
                 <para>
                     We send release announcements and important updates to users registered
-                    on our <ulink url="https://www.mantisbt.org/bugs">official bugtracker</ulink>.
+                    on our <ulink url="https://mantisbt.org/bugs">official bugtracker</ulink>.
                     To get onto our mailing list, users will have to signup there and verify
                     their email address. This same account can also be used to report, monitor,
                     and comment on issues relating to MantisBT.
@@ -229,7 +229,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="https://www.mantisbt.org/blog/">MantisBT Blog</ulink>
+                    <ulink url="https://mantisbt.org/blog/">MantisBT Blog</ulink>
                     is used to communicate announcements about new releases, topics
                     relating to MantisBT, etc.  Users are encouraged to subscribe to
                     the RSS feed to know when new posts are posted there.

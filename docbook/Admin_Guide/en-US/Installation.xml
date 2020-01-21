@@ -676,7 +676,7 @@ find -maxdepth 1 ! -path . -type d -o -type l |
 				repeat this several times, until normal completion.
 			</para>
 			<para>Reference: MantisBT issue
-				<ulink url="https://www.mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
+				<ulink url="https://mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
 			</para>
 		</note>
 	</section>
