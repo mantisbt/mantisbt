@@ -487,7 +487,7 @@ phing test
 					<listitem>
 						<para>
 							Your code follows the
-							<ulink url="https://www.mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
+							<ulink url="https://mantisbt.org/wiki/doku.php/mantisbt:coding_guidelines">
 								MantisBT coding guidelines
 							</ulink>
 						</para>
