@@ -36,6 +36,10 @@ require_api( 'logging_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * @var array $g_cache_ldap_data LDAP attributes cache, indexed by username
+ */
+$g_cache_ldap_data = array();
 
 /**
  * Logs the most recent LDAP error
@@ -121,8 +125,6 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	return $t_ds;
 }
 
-$g_cache_ldap_email = array();
-
 /**
  * returns an email address from LDAP, given a userid
  * @param integer $p_user_id A valid user identifier.
@@ -138,9 +140,9 @@ function ldap_email( $p_user_id ) {
  * @return string
  */
 function ldap_email_from_username( $p_username ) {
-	global $g_cache_ldap_email;
-	if( isset( $g_cache_ldap_email[$p_username]['mail'] ) ) {
-		return $g_cache_ldap_email[$p_username]['mail'];
+	global $g_cache_ldap_data;
+	if( isset( $g_cache_ldap_data[$p_username]['mail'] ) ) {
+		return $g_cache_ldap_data[$p_username]['mail'];
 	}
 
 	if( ldap_simulation_is_enabled() ) {
@@ -149,7 +151,7 @@ function ldap_email_from_username( $p_username ) {
 		$t_email = (string)ldap_get_field_from_username( $p_username, 'mail' );
 	}
 
-	$g_cache_ldap_email[$p_username]['mail'] = $t_email;
+	$g_cache_ldap_data[$p_username]['mail'] = $t_email;
 	return $t_email;
 }
 
@@ -160,8 +162,7 @@ function ldap_email_from_username( $p_username ) {
  * @return string real name.
  */
 function ldap_realname( $p_user_id ) {
-	$t_username = user_get_username( $p_user_id );
-	return ldap_realname_from_username( $t_username );
+	return ldap_realname_from_username( user_get_username( $p_user_id ) );
 }
 
 /**
@@ -171,16 +172,19 @@ function ldap_realname( $p_user_id ) {
  * @return string The user's real name.
  */
 function ldap_realname_from_username( $p_username ) {
+	global $g_cache_ldap_data;
+	if( isset( $g_cache_ldap_data[$p_username]['realname'] ) ) {
+		return $g_cache_ldap_data[$p_username]['realname'];
+	}
+
 	if( ldap_simulation_is_enabled() ) {
-		return ldap_simulatiom_realname_from_username( $p_username );
+		$t_realname = ldap_simulatiom_realname_from_username( $p_username );
+	} else {
+		$t_ldap_realname_field = config_get( 'ldap_realname_field' );
+		$t_realname = (string)ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
 	}
 
-	$t_ldap_realname_field	= config_get( 'ldap_realname_field' );
-	$t_realname = ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
-	if( $t_realname === null ) {
-		return '';
-	}
-
+	$g_cache_ldap_data[$p_username]['realname'] = $t_realname;
 	return $t_realname;
 }
 
