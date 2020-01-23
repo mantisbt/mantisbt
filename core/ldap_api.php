@@ -189,44 +189,45 @@ function ldap_escape_string( $p_string ) {
 }
 
 /**
- * Gets the value of a specific field from LDAP given the user name
- * and LDAP field name.
+ * Retrieves user data from LDAP and stores it in cache.
  *
- * @todo Implement caching by retrieving all needed information in one query.
- * @todo Implement logging to LDAP queries same way like DB queries.
+ * Uses a single LDAP query to retrieve the following fields:
+ * - email (mail)
+ * - realname {@see $g_ldap_realname_field}
  *
- * @param string $p_username The user name.
- * @param string $p_field    The LDAP field name.
- * @return string The field value or null if not found.
+ * @param string $p_username The username.
+ *
+ * @return array|false User data, false if not found or errors occurred
  */
-function ldap_get_field_from_username( $p_username, $p_field ) {
+function ldap_cache_user_data( $p_username ) {
 	global $g_cache_ldap_data;
 
-	# Returned cached data if available
-	if( isset( $g_cache_ldap_data[$p_username][$p_field] ) ) {
-		log_event(LOG_LDAP, "Retrieving field '$p_field' for '$p_username' from cache");
-		return $g_cache_ldap_data[$p_username][$p_field];
+	# Returne cached data if available
+	if( isset( $g_cache_ldap_data[$p_username] ) ) {
+		return $g_cache_ldap_data[$p_username];
 	}
 
-	$t_ldap_organization    = config_get( 'ldap_organization' );
-	$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
-	$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
-
-	$c_username = ldap_escape_string( $p_username );
-
-	log_event( LOG_LDAP, 'Retrieving field \'' . $p_field . '\' for \'' . $p_username . '\'' );
+	log_event( LOG_LDAP, "Retrieving data for '$p_username' from LDAP server" );
 
 	# Bind
 	log_event( LOG_LDAP, 'Binding to LDAP server' );
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
 		ldap_log_error( $t_ds );
-		return null;
+		return false;
 	}
 
 	# Search
-	$t_search_filter        = '(&' . $t_ldap_organization . '(' . $t_ldap_uid_field . '=' . $c_username . '))';
-	$t_search_attrs         = array( $t_ldap_uid_field, $p_field, 'dn' );
+	$t_ldap_organization = config_get( 'ldap_organization' );
+	$t_ldap_root_dn      = config_get( 'ldap_root_dn' );
+	$t_ldap_uid_field    = config_get( 'ldap_uid_field' );
+
+	$t_search_filter = '(&' . $t_ldap_organization
+		. '(' . $t_ldap_uid_field . '=' . ldap_escape_string( $p_username ) . '))';
+	$t_search_attrs = array(
+		'mail',
+		config_get( 'ldap_realname_field' )
+	);
 
 	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
@@ -234,41 +235,61 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 		ldap_log_error( $t_ds );
 		ldap_unbind( $t_ds );
 		log_event( LOG_LDAP, 'ldap search failed' );
-		return null;
+		return false;
 	}
 
 	# Get results
-	$t_info = ldap_get_entries( $t_ds, $t_sr );
-	if( $t_info === false ) {
-		ldap_log_error( $t_ds );
-		log_event( LOG_LDAP, 'ldap_get_entries() returned false.' );
-		return null;
+	$t_entry = ldap_first_entry( $t_ds, $t_sr );
+	if( $t_entry === false ) {
+		log_event( LOG_LDAP, 'No matches found.' );
+		$g_cache_ldap_data[$p_username] = false;
+		return false;
 	}
+
+	$t_data = false;
+	foreach( $t_search_attrs as $t_attr ) {
+		# Suppress error to avoid Warning in case an invalid attribute was specified
+		$t_value = @ldap_get_values( $t_ds, $t_entry, $t_attr );
+		if( $t_value === false ) {
+			log_event( LOG_LDAP, "WARNING: field '$t_attr' does not exist" );
+			continue;
+		}
+		$t_data[$t_attr] = $t_value[0];
+	}
+
+	# Store data in the cache
+	$g_cache_ldap_data[$p_username] = $t_data;
 
 	# Free results / unbind
+	# According to documentation, calling ldap_free_result() is not strictly necessary
 	log_event( LOG_LDAP, 'Unbinding from LDAP server' );
-	ldap_free_result( $t_sr );
+	# ldap_free_result( $t_sr );
 	ldap_unbind( $t_ds );
 
-	# If no matches, return null.
-	if( $t_info['count'] == 0 ) {
-		log_event( LOG_LDAP, 'No matches found.' );
+	return $t_data;
+}
+
+/**
+ * Gets the value of a specific LDAP field given the user name.
+ *
+ * Values are retrieved from the LDAP cache.
+ * {@see ldap_cache_user_data()} for the list of valid field names.
+ *
+ * @param string $p_username The user name.
+ * @param string $p_field    The LDAP field name.
+ *
+ * @return string The field value or null if not found.
+ */
+function ldap_get_field_from_username( $p_username, $p_field ) {
+	log_event(LOG_LDAP, "Retrieving field '$p_field' for '$p_username'");
+	$t_ldap_data = ldap_cache_user_data( $p_username );
+
+	# Make sure LDAP data is available and the requested field exists
+	if( !$t_ldap_data || !isset( $t_ldap_data[$p_field] ) ) {
 		return null;
 	}
 
-	# Make sure the requested field exists
-	$t_field_lowercase = strtolower( $p_field );
-	if( is_array( $t_info[0] ) && array_key_exists( $t_field_lowercase, $t_info[0] ) ) {
-		$t_value = $t_info[0][$t_field_lowercase][0];
-		log_event( LOG_LDAP, 'Found value \'' . $t_value . '\' for field \'' . $p_field . '\'.' );
-	} else {
-		log_event( LOG_LDAP, 'WARNING: field \'' . $p_field . '\' does not exist' );
-		return null;
-	}
-
-	# Cache the field's value
-	$g_cache_ldap_data[$p_username][$p_field] = $t_value;
-	return $t_value;
+	return $t_ldap_data[$p_field];
 }
 
 /**
