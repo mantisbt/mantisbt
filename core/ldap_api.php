@@ -140,18 +140,11 @@ function ldap_email( $p_user_id ) {
  * @return string
  */
 function ldap_email_from_username( $p_username ) {
-	global $g_cache_ldap_data;
-	if( isset( $g_cache_ldap_data[$p_username]['mail'] ) ) {
-		return $g_cache_ldap_data[$p_username]['mail'];
-	}
-
 	if( ldap_simulation_is_enabled() ) {
 		$t_email = ldap_simulation_email_from_username( $p_username );
 	} else {
 		$t_email = (string)ldap_get_field_from_username( $p_username, 'mail' );
 	}
-
-	$g_cache_ldap_data[$p_username]['mail'] = $t_email;
 	return $t_email;
 }
 
@@ -167,24 +160,16 @@ function ldap_realname( $p_user_id ) {
 
 /**
  * Gets a user real name given their user name.
- *
  * @param string $p_username The user's name.
  * @return string The user's real name.
  */
 function ldap_realname_from_username( $p_username ) {
-	global $g_cache_ldap_data;
-	if( isset( $g_cache_ldap_data[$p_username]['realname'] ) ) {
-		return $g_cache_ldap_data[$p_username]['realname'];
-	}
-
 	if( ldap_simulation_is_enabled() ) {
 		$t_realname = ldap_simulatiom_realname_from_username( $p_username );
 	} else {
 		$t_ldap_realname_field = config_get( 'ldap_realname_field' );
 		$t_realname = (string)ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
 	}
-
-	$g_cache_ldap_data[$p_username]['realname'] = $t_realname;
 	return $t_realname;
 }
 
@@ -215,6 +200,14 @@ function ldap_escape_string( $p_string ) {
  * @return string The field value or null if not found.
  */
 function ldap_get_field_from_username( $p_username, $p_field ) {
+	global $g_cache_ldap_data;
+
+	# Returned cached data if available
+	if( isset( $g_cache_ldap_data[$p_username][$p_field] ) ) {
+		log_event(LOG_LDAP, "Retrieving field '$p_field' for '$p_username' from cache");
+		return $g_cache_ldap_data[$p_username][$p_field];
+	}
+
 	$t_ldap_organization    = config_get( 'ldap_organization' );
 	$t_ldap_root_dn         = config_get( 'ldap_root_dn' );
 	$t_ldap_uid_field		= config_get( 'ldap_uid_field' );
@@ -273,6 +266,8 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 		return null;
 	}
 
+	# Cache the field's value
+	$g_cache_ldap_data[$p_username][$p_field] = $t_value;
 	return $t_value;
 }
 
