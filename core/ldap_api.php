@@ -102,7 +102,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		}
 
 		if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
-			log_event( LOG_LDAP, 'Attempting bind to ldap server with username and password' );
+			log_event( LOG_LDAP, "Attempting bind to ldap server as '$p_binddn'" );
 			$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 		} else {
 			# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
