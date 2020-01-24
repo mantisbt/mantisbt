@@ -71,10 +71,16 @@ print_account_menu( 'api_tokens_page.php' );
 
 <tr>
 	<td class="category">
-		<?php echo lang_get( 'api_token_name' ) ?>
+		<span class="required">*</span>
+		<label for="token_name" class="required">
+			<?php echo lang_get( 'api_token_name' ) ?>
+		</label>
 	</td>
 	<td>
-		<input class="input-sm" id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" />
+		<input id="token_name" name="token_name"
+			   type="text" required class="input-sm" size="64"
+			   maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>"
+		/>
 	</td>
 </tr>
 
