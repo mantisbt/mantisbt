@@ -281,7 +281,7 @@ function ldap_cache_user_data( $p_username ) {
  * @return string The field value or null if not found.
  */
 function ldap_get_field_from_username( $p_username, $p_field ) {
-	log_event(LOG_LDAP, "Retrieving field '$p_field' for '$p_username'");
+	log_event( LOG_LDAP, "Retrieving field '$p_field' for '$p_username'" );
 	$t_ldap_data = ldap_cache_user_data( $p_username );
 
 	# Make sure LDAP data is available and the requested field exists
