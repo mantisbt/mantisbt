@@ -1112,6 +1112,7 @@ class BugFilterQuery extends DbQuery {
 		}
 		$t_table_dst = 'rel_dst';
 		$t_table_src = 'rel_src';
+		$t_use_join = true;
 
 		# build conditions for relation type and bug match
 		if( BUG_REL_NONE == $c_rel_type ) {
@@ -1121,11 +1122,13 @@ class BugFilterQuery extends DbQuery {
 				$t_where = $t_table_dst . '.relationship_type IS NULL AND ' . $t_table_src . '.relationship_type IS NULL';
 			} else {
 				# rel NONE, bug ID, those bugs that are not related in any way to bug ID
-				# map to a non-existent relation type -1 to include nulls
-				# not including the self id
-				$t_where = 'NOT COALESCE(' . $t_table_dst . '.source_bug_id, -1) = ' . $this->param( $c_rel_bug )
-						. ' AND NOT COALESCE(' . $t_table_src . '.destination_bug_id, -1) = ' . $this->param( $c_rel_bug )
+				# also, exclude target id from results
+				$t_where = 'NOT EXISTS ( SELECT 1 FROM {bug_relationship} WHERE source_bug_id = ' . $this->param( $c_rel_bug )
+						. ' AND destination_bug_id = {bug}.id'
+						. ' OR destination_bug_id = ' . $this->param( $c_rel_bug )
+						. ' AND source_bug_id = {bug}.id )'
 						. ' AND NOT {bug}.id = ' . $this->param( $c_rel_bug );
+				$t_use_join = false;
 			}
 		} elseif( BUG_REL_ANY == $c_rel_type ) {
 			if( META_FILTER_NONE == $c_rel_bug ) {
@@ -1162,8 +1165,10 @@ class BugFilterQuery extends DbQuery {
 			}
 		}
 
-		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
-		$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
+		if( $t_use_join ) {
+			$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
+			$this->add_join( 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
+		}
 		$this->add_where( $t_where );
 	}
 
