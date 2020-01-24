@@ -90,7 +90,9 @@ print_account_menu( 'api_tokens_page.php' );
 		</div>
 	</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'api_token_create_button' ) ?>" />
+			<button class="btn btn-primary btn-white btn-round">
+				<?php echo lang_get( 'api_token_create_button' ) ?>
+			</button>
 		</div>
 	</div>
 </div>
