@@ -260,10 +260,8 @@ function ldap_cache_user_data( $p_username ) {
 	# Store data in the cache
 	$g_cache_ldap_data[$p_username] = $t_data;
 
-	# Free results / unbind
-	# According to documentation, calling ldap_free_result() is not strictly necessary
+	# Unbind
 	log_event( LOG_LDAP, 'Unbinding from LDAP server' );
-	# ldap_free_result( $t_sr );
 	ldap_unbind( $t_ds );
 
 	return $t_data;
@@ -357,7 +355,6 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
 		if( $t_info === false ) {
 			ldap_log_error( $t_ds );
-			ldap_free_result( $t_sr );
 			ldap_unbind( $t_ds );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
@@ -381,7 +378,6 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		}
 
 		log_event( LOG_LDAP, 'Unbinding from LDAP server' );
-		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
 	}
 
