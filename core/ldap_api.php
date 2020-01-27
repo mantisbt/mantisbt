@@ -214,7 +214,7 @@ function ldap_cache_user_data( $p_username ) {
 	# Bind
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
-		ldap_log_error( $t_ds );
+		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
 		return false;
 	}
 
@@ -337,10 +337,6 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		# Bind
 		$t_ds = ldap_connect_bind();
-		if( $t_ds === false ) {
-			ldap_log_error( $t_ds );
-			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
-		}
 
 		# Search for the user id
 		log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
