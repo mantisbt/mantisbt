@@ -211,7 +211,9 @@ function ldap_cache_user_data( $p_username ) {
 
 	log_event( LOG_LDAP, "Retrieving data for '$p_username' from LDAP server" );
 
-	# Bind
+	# Bind and connect.
+	# We suppress errors, because failing to connect is not blocking in this
+	# context, it just means we won't be able to retrieve user data from LDAP.
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
 		log_event( LOG_LDAP, "ERROR: could not bind to LDAP server" );
@@ -335,7 +337,9 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 			'dn',
 		);
 
-		# Bind
+		# Bind and connect.
+		# No need to check for failures, as ldap_connect_bind() throws errors.
+		log_event( LOG_LDAP, 'Binding to LDAP server' );
 		$t_ds = ldap_connect_bind();
 
 		# Search for the user id
