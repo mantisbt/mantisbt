@@ -194,6 +194,7 @@
 								<listitem><para><emphasis>GD</emphasis> -
 									required for the captcha feature
 								</para></listitem>
+
 								<listitem>
 									<para><emphasis>Fileinfo</emphasis> -
 										Required for file attachments and most of the plugins
@@ -203,7 +204,14 @@
 										as MantisBT won't be able to send
 										the Content-Type header to a browser
 										requesting an attachment.
-									</para></listitem>
+									</para>
+								</listitem>
+
+								<listitem><para><emphasis>LDAP</emphasis> -
+									required for LDAP or Active Directory authentication
+									(see <xref linkend="admin.auth.ldap" />).
+								</para></listitem>
+
 							</itemizedlist></listitem>
 						</varlistentry>
 
