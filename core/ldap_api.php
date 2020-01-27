@@ -66,60 +66,62 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	log_event( LOG_LDAP, 'Attempting connection to LDAP server/URI \'' . $t_ldap_server . '\'.' );
 	$t_ds = @ldap_connect( $t_ldap_server );
-	if( $t_ds !== false && $t_ds > 0 ) {
-		log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
+	if( $t_ds === false ) {
+		log_event( LOG_LDAP, 'Connection to LDAP server failed' );
+		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+		# Return required as function may be called with error suppressed
+		return false;
+	}
 
-		$t_network_timeout = config_get( 'ldap_network_timeout' );
-		if( $t_network_timeout > 0 ) {
-			log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
-			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
-			if( !$t_result ) {
-				ldap_log_error( $t_ds );
-			}
-		}
+	log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
 
-		$t_protocol_version = config_get( 'ldap_protocol_version' );
-		if( $t_protocol_version > 0 ) {
-			log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
-			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
-			if( !$t_result ) {
-				ldap_log_error( $t_ds );
-			}
-		}
-
-		# Set referrals flag.
-		$t_follow_referrals = ON == config_get( 'ldap_follow_referrals' );
-		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
+	$t_network_timeout = config_get( 'ldap_network_timeout' );
+	if( $t_network_timeout > 0 ) {
+		log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
 		if( !$t_result ) {
 			ldap_log_error( $t_ds );
 		}
+	}
 
-		# If no Bind DN and Password is set, attempt to login as the configured
-		#  Bind DN.
-		if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
-			$p_binddn = config_get( 'ldap_bind_dn', '' );
-			$p_password = config_get( 'ldap_bind_passwd', '' );
-		}
-
-		if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
-			log_event( LOG_LDAP, "Attempting bind to ldap server as '$p_binddn'" );
-			$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
-		} else {
-			# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
-			log_event( LOG_LDAP, 'Attempting anonymous bind to ldap server' );
-			$t_br = @ldap_bind( $t_ds );
-		}
-
-		if( !$t_br ) {
+	$t_protocol_version = config_get( 'ldap_protocol_version' );
+	if( $t_protocol_version > 0 ) {
+		log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
+		$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
+		if( !$t_result ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, 'Bind to ldap server failed' );
-			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
-		} else {
-			log_event( LOG_LDAP, 'Bind to ldap server successful' );
 		}
+	}
+
+	# Set referrals flag.
+	$t_follow_referrals = ON == config_get( 'ldap_follow_referrals' );
+	$t_result = @ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, $t_follow_referrals );
+	if( !$t_result ) {
+		ldap_log_error( $t_ds );
+	}
+
+	# If no Bind DN and Password is set, attempt to login as the configured
+	#  Bind DN.
+	if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
+		$p_binddn = config_get( 'ldap_bind_dn', '' );
+		$p_password = config_get( 'ldap_bind_passwd', '' );
+	}
+
+	if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
+		log_event( LOG_LDAP, "Attempting bind to ldap server as '$p_binddn'" );
+		$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 	} else {
-		log_event( LOG_LDAP, 'Connection to ldap server failed' );
+		# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
+		log_event( LOG_LDAP, 'Attempting anonymous bind to ldap server' );
+		$t_br = @ldap_bind( $t_ds );
+	}
+
+	if( !$t_br ) {
+		ldap_log_error( $t_ds );
+		log_event( LOG_LDAP, 'Bind to ldap server failed' );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
+	} else {
+		log_event( LOG_LDAP, 'Bind to ldap server successful' );
 	}
 
 	return $t_ds;
