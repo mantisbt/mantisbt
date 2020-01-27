@@ -212,7 +212,6 @@ function ldap_cache_user_data( $p_username ) {
 	log_event( LOG_LDAP, "Retrieving data for '$p_username' from LDAP server" );
 
 	# Bind
-	log_event( LOG_LDAP, 'Binding to LDAP server' );
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
 		ldap_log_error( $t_ds );
@@ -337,7 +336,6 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		);
 
 		# Bind
-		log_event( LOG_LDAP, 'Binding to LDAP server' );
 		$t_ds = ldap_connect_bind();
 		if( $t_ds === false ) {
 			ldap_log_error( $t_ds );
