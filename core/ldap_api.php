@@ -237,7 +237,7 @@ function ldap_cache_user_data( $p_username ) {
 	if( $t_sr === false ) {
 		ldap_log_error( $t_ds );
 		ldap_unbind( $t_ds );
-		log_event( LOG_LDAP, 'ldap search failed' );
+		log_event( LOG_LDAP, "Search '$t_search_filter' failed" );
 		return false;
 	}
 
@@ -348,7 +348,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		if( $t_sr === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
-			log_event( LOG_LDAP, 'ldap search failed' );
+			log_event( LOG_LDAP, "Search '$t_search_filter' failed" );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
 
