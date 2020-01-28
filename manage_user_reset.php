@@ -56,20 +56,12 @@ $f_user_id = gpc_get_int( 'user_id' );
 
 user_ensure_exists( $f_user_id );
 
-$t_user = user_get_row( $f_user_id );
+$t_data = array(
+	'query' => array( 'id' => $f_user_id )
+);
 
-# Ensure that the account to be reset is of equal or lower access to the
-# current user.
-access_ensure_global_level( $t_user['access_level'] );
-
-# If the password can be changed, we reset it, otherwise we unlock
-# the account (i.e. reset failed login count)
-$t_reset = auth_can_set_password( $f_user_id );
-if( $t_reset ) {
-	$t_result = user_reset_password( $f_user_id );
-} else {
-	$t_result = user_reset_failed_login_count_to_zero( $f_user_id );
-}
+$t_command = new UserResetPasswordCommand( $t_data );
+$t_command->execute();
 
 $t_redirect_url = 'manage_user_page.php';
 
