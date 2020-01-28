@@ -23,12 +23,12 @@ require_api( 'user_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
- * A command that deletes a user account.
+ * A command that resets the password of the specified user account.
  *
  * Sample:
  * {
  *   "query": {
- *      "id": 1234
+ *	  "id": 1234
  *   }
  * }
  */
@@ -52,7 +52,7 @@ class UserResetPasswordCommand extends Command {
 	 */
 	function validate() {
 		$this->user_id_reset = (int)$this->query( 'id', null );
-		if( $this->user_id_reset <= 0 ) {
+		if( $this->user_id_reset <= 0 || !user_exists( $this->user_id_reset ) ) {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
@@ -62,6 +62,9 @@ class UserResetPasswordCommand extends Command {
 		}
 
 		$t_user = user_get_row( $this->user_id_reset );
+		if( $t_user === false ) { // cannot be
+			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+		}
 
 		# Ensure that the account to be reset is of equal or lower access to the
 		# current user.
@@ -74,7 +77,7 @@ class UserResetPasswordCommand extends Command {
 		if( user_is_administrator( $this->user_id_reset ) &&
 			user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
 			throw new ClientException(
-				'Reseting last administrator not allowed',
+				'Resetting last administrator not allowed',
 				ERROR_USER_CHANGE_LAST_ADMIN );
 		}
 	}
