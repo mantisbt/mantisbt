@@ -58,7 +58,7 @@ require_css( 'login.css' );
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
-$f_username              = gpc_get_string( 'username', '' );
+$f_username              = trim( gpc_get_string( 'username', '' ) );
 $f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
 $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
