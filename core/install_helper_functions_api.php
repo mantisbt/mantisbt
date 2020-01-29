@@ -409,10 +409,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
 		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = \'' . $c_value . '\'
-			WHERE field_id = ' . $c_field_id . '
-				AND bug_id = ' . $c_bug_id;
-		db_query( $t_update_query );
+			SET value = ' . db_param() . '
+			WHERE field_id = ' . db_param() . '
+				AND bug_id = ' . db_param();
+		$t_param = array( $c_value, $c_field_id, $c_bug_id );
+		db_query( $t_update_query, $t_param );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
@@ -429,10 +430,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
 		$t_update_query = 'UPDATE {custom_field_string}
-			SET value = \'' . $c_value . '\'
-			WHERE field_id = ' . $c_field_id . '
-				AND bug_id = ' . $c_bug_id;
-		db_query( $t_update_query );
+			SET value = ' . db_param() . '
+			WHERE field_id = ' . db_param() . '
+		 ]		AND bug_id = ' . db_param();
+		$t_param = array( $c_value, $c_field_id, $c_bug_id );
+		db_query( $t_update_query, $t_param );
 	}
 
 	# Re-enable query logging if we disabled it
