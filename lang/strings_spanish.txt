@@ -49,6 +49,7 @@
  * @author Fitoschido
  * @author Guidored
  * @author Jelou
+ * @author Joanmp17
  * @author Ktranz
  * @author Lemondoge
  * @author Leshurex
@@ -1438,6 +1439,7 @@ $s_dropzone_max_files_exceeded = 'No puedes subir más archivos.';
 $s_dropzone_not_supported = 'Dropzone.js no admite navegadores antiguos.';
 $s_save = 'Guardar';
 $s_reset = 'Restablecer';
+$s_persist = 'Persiste';
 $s_load = 'Cargar';
 $s_apply_changes = 'Aplicar cambios';
 $s_undo = 'Deshacer';
