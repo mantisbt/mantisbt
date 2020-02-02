@@ -23,7 +23,6 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses access_api.php
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
@@ -31,12 +30,9 @@
  * @uses gpc_api.php
  * @uses html_api.php
  * @uses lang_api.php
- * @uses print_api.php
- * @uses user_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -44,32 +40,19 @@ require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'user_api.php' );
 
 form_security_validate( 'manage_user_reset' );
 
 auth_reauthenticate();
-access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $f_user_id = gpc_get_int( 'user_id' );
 
-user_ensure_exists( $f_user_id );
+$t_data = array(
+	'query' => array( 'id' => $f_user_id )
+);
 
-$t_user = user_get_row( $f_user_id );
-
-# Ensure that the account to be reset is of equal or lower access to the
-# current user.
-access_ensure_global_level( $t_user['access_level'] );
-
-# If the password can be changed, we reset it, otherwise we unlock
-# the account (i.e. reset failed login count)
-$t_reset = auth_can_set_password( $f_user_id );
-if( $t_reset ) {
-	$t_result = user_reset_password( $f_user_id );
-} else {
-	$t_result = user_reset_failed_login_count_to_zero( $f_user_id );
-}
+$t_command = new UserResetPasswordCommand( $t_data );
+$t_command->execute();
 
 $t_redirect_url = 'manage_user_page.php';
 
