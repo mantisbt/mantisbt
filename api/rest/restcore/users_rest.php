@@ -30,6 +30,8 @@ $g_app->group('/users', function() use ( $g_app ) {
 
 	$g_app->delete( '/{id}', 'rest_user_delete' );
 	$g_app->delete( '/{id}/', 'rest_user_delete' );
+
+	$g_app->put( '/{id}/reset', 'rest_user_reset_password' );
 });
 
 /**
@@ -86,5 +88,26 @@ function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 	$t_command = new UserDeleteCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );	
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
+}
+
+/**
+ * Reset a user's password given its id.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_user_id = $p_args['id'];
+
+	$t_data = array(
+		'query' => array( 'id' => $t_user_id )
+	);
+
+	$t_command = new UserResetPasswordCommand( $t_data );
+	$t_command->execute();
+
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
