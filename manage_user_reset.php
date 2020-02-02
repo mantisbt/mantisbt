@@ -23,7 +23,6 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses access_api.php
  * @uses authentication_api.php
  * @uses config_api.php
  * @uses constant_inc.php
@@ -31,12 +30,9 @@
  * @uses gpc_api.php
  * @uses html_api.php
  * @uses lang_api.php
- * @uses print_api.php
- * @uses user_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -44,17 +40,12 @@ require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
-require_api( 'print_api.php' );
-require_api( 'user_api.php' );
 
 form_security_validate( 'manage_user_reset' );
 
 auth_reauthenticate();
-access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $f_user_id = gpc_get_int( 'user_id' );
-
-user_ensure_exists( $f_user_id );
 
 $t_data = array(
 	'query' => array( 'id' => $f_user_id )
