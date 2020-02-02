@@ -660,7 +660,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field has no value specified.',
 					ERROR_EMPTY_FIELD,
-					"custom_field['value']"
+					array( "custom_field['value']" )
 				);
 			}
 
@@ -668,7 +668,7 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 				throw new ClientException(
 					'Custom field with no specified id or name.',
 					ERROR_EMPTY_FIELD,
-					"custom_field['field']"
+					array( "custom_field['field']" )
 				);
 			}
 
