@@ -319,10 +319,11 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 		# Due Date
 		echo '<th class="category"><label for="due_date">' . lang_get( 'due_date' ) . '</label></th>';
 
-		if( bug_is_overdue( $t_bug_id ) ) {
-			echo '<td class="overdue">';
-		} else {	
+		$t_level = bug_overdue_level( $t_bug_id );
+		if( $t_level === false ) {
 			echo '<td>';
+		} else {
+			echo '<td class="due-', $t_level, '">';
 		}
 
 		if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {

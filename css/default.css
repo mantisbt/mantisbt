@@ -92,8 +92,10 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 .color-global		{ background-color: LightBlue; }
 .color-project		{ background-color: LightGreen; }
 
-td.overdue        	{ background-color: #d15b47; color: #ffffff; font-weight: bold; }
-td.print-overdue    { font-weight: bold; }
+td.due-0, td.overdue { background-color: red; color: #ffffff; font-weight: bold; }
+td.due-1             { background-color: darkorange; color: #ffffff; font-weight: bold; }
+td.due-2             { background-color: green; color: #ffffff; font-weight: bold; }
+td.print-overdue     { font-weight: bold; }
 
 .collapse-link { cursor: pointer; }
 

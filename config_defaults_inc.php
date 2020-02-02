@@ -4165,6 +4165,33 @@ $g_due_date_view_threshold = NOBODY;
  */
 $g_due_date_default = '';
 
+/**
+ * Due date warning levels.
+ *
+ * A variable number of Levels (defined as a number of seconds going backwards
+ * from the current timestamp, compared to an issue's due date) can be defined.
+ * Levels must be defined in ascending order.
+ *
+ * - The first entry (array key 0) defines "Overdue". Normally and by default,
+ *   its value is `0` meaning that issues will be marked overdue as soon as
+ *   their due date has passed. However, it is also possible to set it to a
+ *   higher value to flag overdue issues earlier, or even use a negative value
+ *   to allow a "grace period" after due date.
+ * - Array keys 1 and 2 offer two levels of "Due soon": orange and green.
+ *   By default, only the first one is set, to 7 days.
+ *
+ * Out of the box, MantisBT allows for 3 warning levels. Additional ones may
+ * be defined, but in that case new `due-N` CSS rules (where N is the
+ * array's index) must be created otherwise the extra levels will not be
+ * highlighted in the UI.
+ *
+ * @global  array $g_due_date_warning_levels
+ */
+$g_due_date_warning_levels = array(
+	0,
+	7 * SECONDS_PER_DAY,
+);
+
 ################
 # Sub-projects #
 ################
@@ -4504,6 +4531,7 @@ $g_public_config_names = array(
 	'due_date_default',
 	'due_date_update_threshold',
 	'due_date_view_threshold',
+	'due_date_warning_levels',
 	'email_ensure_unique',
 	'email_dkim_domain',
 	'email_dkim_enable',
