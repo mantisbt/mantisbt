@@ -647,6 +647,12 @@ function mci_project_custom_fields_validate( $p_project_id, &$p_custom_fields ) 
 
 	$t_custom_field_values = array();
 	if( isset( $p_custom_fields ) ) {
+		if( !is_array( $p_custom_fields ) ) {
+			throw new ClientException(
+				"Invalid Custom Field '$p_custom_fields'",
+				ERROR_CUSTOM_FIELD_NOT_FOUND
+			);
+		}
 		foreach( $p_custom_fields as $t_custom_field ) {
 			$t_custom_field = ApiObjectFactory::objectToArray( $t_custom_field );
 
