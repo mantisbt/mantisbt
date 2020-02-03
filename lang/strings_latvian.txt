@@ -734,7 +734,6 @@ $s_delete_relationship_sure_msg = 'Vai esat pārliecināti, ka vēlaties dzēst 
 $s_create_child_bug_button = 'Klonēt';
 $s_bug_cloned_to = 'Bugs klonēts';
 $s_copy_attachments_from_parent = 'Kopēt pielikumus no vecāka';
-$s_viewing_bug_relationship_graph_title = 'Saistību grafiks';
 $s_view = 'Skatīt';
 $s_monitor_issue = 'Uzraudzīt';
 $s_show_list_of_users_monitoring_issue = 'Rādīt lietotājus, kuri uzrauga bugu';

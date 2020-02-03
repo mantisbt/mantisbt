@@ -39,6 +39,7 @@
  * @file
  *
  * @author Fwolff
+ * @author Joris Darlington Quarshie
  * @author Naudefj
  */
 
@@ -495,6 +496,8 @@ $s_csv_columns_title = 'Kolomme vir CVS';
 $s_excel_columns_title = 'Kolomme vir Excel';
 $s_copy_columns_from = 'Kopieer kolomme van';
 $s_copy_columns_to = 'Kopieer kolomme na';
+$s_overdue_one_day = 'Agterstallig binne minder as \'n dag';
+$s_overdue_days = 'Agterstallig in %1$d dae';
 $s_month_january = 'Januarie';
 $s_month_february = 'Februarie';
 $s_month_march = 'Maart';

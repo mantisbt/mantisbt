@@ -1068,8 +1068,6 @@ $s_copy_from_parent = 'رونوشت اطلاعات تکمیلی از مسئله�
 $s_copy_notes_from_parent = 'رونوشتِ یادداشت‌های مسئله';
 $s_copy_attachments_from_parent = 'رونوشتِ پیوست‌ها';
 $s_with = 'با';
-$s_viewing_bug_relationship_graph_title = 'نمودار نسبت‌ها';
-$s_viewing_bug_dependency_graph_title = 'نمودار وابستگی‌ها';
 $s_relation_graph = 'نمودار نسبت‌ها';
 $s_dependency_graph = 'نمودار وابستگی‌ها';
 $s_vertical = 'عمودی';

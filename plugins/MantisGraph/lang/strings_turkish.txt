@@ -43,7 +43,7 @@
  * @author Korayal
  */
 
-$s_plugin_MantisGraph_title = 'Mantis grafikleri';
+$s_plugin_MantisGraph_title = 'Mantis Grafikleri';
 $s_plugin_MantisGraph_description = 'Resmi grafik eklentisi.';
 $s_plugin_MantisGraph_config = 'Yapılandırma';
 $s_plugin_MantisGraph_tab_label = 'Grafikler';
@@ -71,14 +71,14 @@ $s_plugin_MantisGraph_by_priority_mix = 'Önceliğe ve duruma göre';
 $s_plugin_MantisGraph_by_resolution_mix = 'Çözüme ve duruma göre';
 $s_plugin_MantisGraph_legend_still_open = 'Halâ Açık';
 $s_plugin_MantisGraph_legend_resolved = 'Çözüldü';
-$s_plugin_MantisGraph_legend_reported = 'Bildirilen';
+$s_plugin_MantisGraph_legend_reported = 'Rapor edildi';
 $s_plugin_MantisGraph_period_none = 'Hiçbiri';
-$s_plugin_MantisGraph_period_this_week = 'Bu hafta';
+$s_plugin_MantisGraph_period_this_week = 'Bu Hafta';
 $s_plugin_MantisGraph_period_last_week = 'Geçen Hafta';
 $s_plugin_MantisGraph_period_two_weeks = 'Son İki Hafta';
 $s_plugin_MantisGraph_period_this_month = 'Bu Ay';
 $s_plugin_MantisGraph_period_last_month = 'Geçen Ay';
-$s_plugin_MantisGraph_period_this_quarter = 'Bu Mevsim';
+$s_plugin_MantisGraph_period_this_quarter = 'Bu Çeyrek';
 $s_plugin_MantisGraph_period_last_quarter = 'Geçen Çeyrek';
 $s_plugin_MantisGraph_period_year_to_date = 'Tarih Yılı';
 $s_plugin_MantisGraph_period_select = 'Rastgele Tarih';
@@ -86,5 +86,5 @@ $s_plugin_MantisGraph_period_last_year = 'Geçen Sene';
 $s_plugin_MantisGraph_graph_page = 'Sorun Geçmişi Grafiği';
 $s_plugin_MantisGraph_graph_topdev = 'Sabit Konularla En İyi Geliştiriciler';
 $s_plugin_MantisGraph_graph_opendev = 'Açık Konuya Göre Geliştiriciler';
-$s_plugin_MantisGraph_graph_topreporter_fixed = 'Giderilen Sorunlara Göre En İyi Muhabirler';
+$s_plugin_MantisGraph_graph_topreporter_fixed = 'Giderilen Sorunlara Göre En İyi Bildirenler';
 $s_plugin_MantisGraph_other_categories = 'diğer kategoriler (%d)';
