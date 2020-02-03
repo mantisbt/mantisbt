@@ -823,7 +823,6 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>توجا دیں<
 $s_create_child_bug_button = 'کاپی بناو';
 $s_bug_cloned_to = 'ایشوذ کی کاپی بناو';
 $s_bug_created_from = '  ایشوذ اس سے بن رھے ھیں';
-$s_viewing_bug_relationship_graph_title = 'تعلق کا گراف';
 $s_relation_graph = ' تعلق کا گراف';
 $s_dependency_graph = 'دارو مدار کا گراف';
 $s_vertical = 'ویرٹیکل';
