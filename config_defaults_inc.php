@@ -3050,7 +3050,7 @@ $g_allow_no_category = OFF;
  * bugs that they report.
  * This feature is deprecated and is replaced with the option 'limit_view_unless_threshold'.
  * Set this option as OFF to be able to use the new one.
- * @deprecated 2.23.0 Use $g_limit_view_unless_threshold instead
+ * @deprecated 2.24.0 Use $g_limit_view_unless_threshold instead
  * @global integer $g_limit_reporters
  */
 $g_limit_reporters = OFF;
