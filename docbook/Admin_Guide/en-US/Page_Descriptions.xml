@@ -808,10 +808,16 @@
                                 <entry>status to use when an issue is auto-assigned</entry>
                             </row>
                             <row>
-                                <entry>Limit reporter's access to their own issues</entry>
+                                <entry>Limit reporter's access to their own issues (deprecated option)</entry>
                                 <entry>$g_limit_reporters</entry>
                                 <entry>reporters can see only issues they reported. This setting is
                                     for all projects.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>Limit access only to those issues reported, handled, or monitored by the user</entry>
+                                <entry>$g_limit_view_unless_threshold</entry>
+                                <entry>threshold that, if not met, hides other users' issues.
                                 </entry>
                             </row>
                         </tbody>

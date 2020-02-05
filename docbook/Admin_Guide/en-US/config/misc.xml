@@ -65,14 +65,6 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_limit_reporters</term>
-			<listitem>
-				<para>Limit reporters to only viewing bugs that they
-					report.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_allow_reporter_close</term>
 			<listitem>
 				<para>Allow reporters to close the bugs they reported.</para>

@@ -95,5 +95,11 @@ check_print_test_row( 'Default move category must exists ("default_category_for_
 	array( false => 'Issues moved may end up with invalid category id.' )
 );
 
+# Deprecated Settings
+check_print_test_warn_row( 'Deprecated "limit_reporters" setting should no longer be used',
+	$g_limit_reporters == OFF,
+	array( false => 'Use "limit_view_unless_threshold" instead.' )
+);
+
 # Obsolete Settings
 require_api( 'obsolete.php' );
