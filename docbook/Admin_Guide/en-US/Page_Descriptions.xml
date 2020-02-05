@@ -817,7 +817,7 @@
                             <row>
                                 <entry>Limit access only to those issues reported, handled, or monitored by the user</entry>
                                 <entry>$g_limit_view_unless_threshold</entry>
-                                <entry>threshold that, if not met, hides other users's issues.
+                                <entry>threshold that, if not met, hides other users' issues.
                                 </entry>
                             </row>
                         </tbody>
