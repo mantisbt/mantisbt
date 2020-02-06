@@ -665,6 +665,7 @@ $s_resolved_status = 'État quand une anomalie est considérée comme résolue';
 $s_readonly_status = 'État dans lequel une anomalie ne peut plus être modifiée';
 $s_reopen_status = 'État à positionner pour une anomalie rouverte';
 $s_reopen_resolution = 'Résolution à positionner pour une anomalie rouverte';
+$s_limit_view_unless_threshold_option = 'Afficher les problèmes des autres utilisateurs (si non positionné, l’accès sera limité aux problèmes signalés, gérés ou suivis par l’utilisateur)';
 $s_config_delete_sure = 'Voulez-vous vraiment supprimer la configuration pour :';
 $s_in_project = 'du projet';
 $s_delete_config_button = 'Supprimer la configuration';
