@@ -48,6 +48,7 @@
  * @author Uziel302
  * @author YaronSh
  * @author Yona b
+ * @author דגש חזק
  */
 
 $s_directionality = 'rtl';
