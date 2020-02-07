@@ -412,25 +412,21 @@ foreach ( $t_custom_fields_to_set as $t_custom_field_to_set ) {
 	custom_field_set_value( $t_custom_field_to_set['id'], $f_bug_id, $t_custom_field_to_set['value'] );
 }
 
-# Add a bug note and attachments if there are any.
-$f_files = gpc_get_file( 'ufile', array() );
-$t_note_query = array( 'issue_id' => $f_bug_id );
-$t_note_payload = array(
-	'text' => $t_bug_note->note,
-	'view_state' => array(
-		'id' => $t_bug_note->view_state
-	),
-	'time_tracking' => array(
-		'duration' => $t_bug_note->time_tracking
-	),
-	'files' => helper_array_transpose( $f_files )
-);
-$t_note_data = array(
-	'query' => $t_note_query,
-	'payload' => $t_note_payload,
-);
-$t_note_command = new IssueNoteAddCommand( $t_note_data );
-$t_note_command->execute();
+# Add a bug note if there is one.
+$t_bugnote_id = null;
+if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking ) > 0 ) {
+	$t_bugnote_id = bugnote_add( $f_bug_id, $t_bug_note->note, $t_bug_note->time_tracking, $t_bug_note->view_state == VS_PRIVATE, 0, '', null, false );
+	bugnote_process_mentions( $f_bug_id, $t_bugnote_id, $t_bug_note->note );
+}
+
+# Add attachments
+if( file_allow_bug_upload( $f_bug_id, $t_current_user_id ) ) {
+	$f_files = gpc_get_file( 'ufile', array() );
+	if( !empty( $f_files ) ) {
+		$t_files = helper_array_transpose( $f_files );
+		file_attach_files( $f_bug_id, $t_files, $t_bugnote_id );
+	}
+}
 
 # Add a duplicate relationship if requested.
 if( $t_updated_bug->duplicate_id != 0 ) {
