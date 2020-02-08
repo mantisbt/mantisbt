@@ -669,17 +669,21 @@ if( $t_show_additional_information ) {
 	echo '</td></tr>';
 }
 
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
 echo '<tr class="hidden"></tr>';
 
 # Custom Fields
 $t_custom_fields_found = false;
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 
+$t_cf_row_spacer = false;
 foreach ( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 	if( ( $t_def['display_update'] || $t_def['require_update'] ) && custom_field_has_write_access( $t_id, $t_bug_id ) ) {
 		$t_custom_fields_found = true;
+		if( !$t_cf_row_spacer ) {
+			$t_cf_row_spacer = true;
+			echo '<tr class="spacer"><td colspan="6"></td></tr>';
+		}
 
 		$t_required_class = $t_def['require_update'] ? ' class="required" ' : '';
 
@@ -701,82 +705,27 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 } # foreach( $t_related_custom_field_ids as $t_id )
 
 if( $t_custom_fields_found ) {
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
 	echo '<tr class="hidden"></tr>';
 }
-
-# Bugnote Text Box
-$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
-
-echo '<tr>';
-echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
-
-# Bugnote Private Checkbox (if permitted)
-if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
-	echo '<tr>';
-	echo '<th class="category">' . lang_get( 'private' ) . '</th>';
-	echo '<td colspan="5">';
-
-	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_bug_id ) ) {
-		echo '<label>';
-		echo '<input ', helper_get_tab_index(), ' type="checkbox" class="ace" id="private" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
-		echo '<span class="lbl"></span>';
-		echo '</label>';
-	} else {
-		echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
-	}
-
-	echo '</td></tr>';
-}
-
-# Time Tracking (if permitted)
-if( config_get( 'time_tracking_enabled' ) ) {
-	if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
-		echo '<tr>';
-		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
-		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
-	}
-}
-
-# File attachments
-	if( $t_allow_file_upload ) {
-		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-		$t_max_file_size = file_get_max_file_size();
-
 ?>
-			<tr id="bugnote-attach-files">
-				<th class="category">
-					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-					<br />
-					<?php print_max_filesize( $t_max_file_size ); ?>
-				</th>
-				<td colspan="5">
-					<?php print_dropzone_template() ?>
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
-						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
-					</div>
-					<div class="fallback">
-						<input id="ufile[]" name="ufile[]" type="file" size="50" />
-					</div>
-				</td>
-			</tr>
+</table>
+</div>
+
+<div class="space-6"></div>
+<div class="widget-toolbox padding-8 clearfix">
+	<span class="bold">
+	<?php echo lang_get( 'actiongroup_menu_add_note' ) ?>
+	</span>
+</div>
+
+<?php print_bugnote_form_content( $f_bug_id ) ?>
+
+<div class="space-6"></div>
+
+</div>
+</div>
+
 <?php
-	}
-
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
-
-echo '</table>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-
 # Submit Button
 if( $t_bottom_buttons_enabled ) {
 ?>

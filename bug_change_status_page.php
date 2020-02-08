@@ -336,91 +336,22 @@ layout_page_begin();
 		printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
 	}
 ?>
-<?php
-	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
-
-	if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'view_status' ) ?>
-				</th>
-				<td>
-<?php
-		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-?>
-			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
-				<?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
-<?php
-		} else {
-			echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
-		}
-?>
-				</td>
-			</tr>
-<?php } ?>
-			<!-- Bugnote -->
-			<tr id="bug-change-status-note">
-				<th class="category">
-					<?php echo lang_get( 'add_bugnote_title' ) ?>
-				</th>
-				<td>
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
-				</td>
-			</tr>
-<?php
-	if( config_get( 'time_tracking_enabled' )
-		&& access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id )
-		&& access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id )
-	) {
-	?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'time_tracking' ) ?>
-				</th>
-				<td>
-					<input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
-				</td>
-			</tr>
-
-<?php
-	}
-
-	if( $t_allow_file_upload ) {
-		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-		$t_max_file_size = file_get_max_file_size();
-
-?>
-			<tr id="bugnote-attach-files">
-				<th class="category">
-					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-					<br />
-					<?php print_max_filesize( $t_max_file_size ); ?>
-				</th>
-				<td>
-					<?php print_dropzone_template() ?>
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
-						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
-					</div>
-					<div class="fallback">
-						<input id="ufile[]" name="ufile[]" type="file" size="50" />
-					</div>
-				</td>
-			</tr>
-<?php
-	}
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
-?>
-
 </tbody>
 </table>
 <input type="hidden" name="action_type" value="<?php echo string_attribute( $f_change_type ); ?>" />
-
 </div>
+
+<div class="space-6"></div>
+<div class="widget-toolbox padding-8 clearfix">
+	<span class="bold">
+	<?php echo lang_get( 'actiongroup_menu_add_note' ) ?>
+	</span>
+</div>
+
+<?php print_bugnote_form_content( $f_bug_id ) ?>
+
+<div class="space-6"></div>
+
 </div>
 <div class="widget-toolbox padding-8 clearfix">
 	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>

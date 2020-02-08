@@ -62,7 +62,6 @@ require_api( 'lang_api.php' );
 	$t_collapse_block = is_collapsed( 'bugnote_add' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-	$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
 ?>
 <form id="bugnoteadd"
 	method="post"
@@ -85,101 +84,16 @@ require_api( 'lang_api.php' );
 		</div>
 
 		<div class="widget-body">
-		<div class="widget-main no-padding">
+			<div class="widget-main no-padding">
 
-		<div class="table-responsive">
-		<table class="table table-bordered table-condensed">
-		<tbody>
+			<?php print_bugnote_form_content( $f_bug_id ) ?>
 
-<?php
-	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
-
-	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'view_status' ) ?>
-				</th>
-				<td>
-				<label for="bugnote_add_view_status">
-					<input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-					<span class="lbl padding-6"><?php echo lang_get( 'private' ) ?></span>
-				</label>
-				</td>
-			</tr>
-<?php }?>
-
-			<tr>
-				<th class="category" width="15%">
-					<?php echo lang_get( 'bugnote' ) ?>
-				</th>
-				<td width="85%">
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" rows="7"></textarea>
-				</td>
-			</tr>
-
-<?php
-	if( config_get( 'time_tracking_enabled' ) ) {
-		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
-?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'time_tracking' ) ?>
-				</th>
-				<td>
-					<?php if( config_get( 'time_tracking_stopwatch' ) ) { ?>
-					<input type="text" name="time_tracking" class="stopwatch_time input-sm" size="8" placeholder="hh:mm:ss" />
-					<input type="button" name="time_tracking_toggle" class="stopwatch_toggle btn btn-sm btn-white btn-round" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
-					<input type="button" name="time_tracking_reset" class="stopwatch_reset btn btn-sm btn-white btn-round" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />
-					<?php } else { ?>
-					<input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
-					<?php } ?>
-				</td>
-			</tr>
-<?php
-		}
-	}
-
-	if( $t_allow_file_upload ) {
-		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-		$t_max_file_size = file_get_max_file_size();
-
-?>
-			<tr id="bugnote-attach-files">
-				<th class="category">
-					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-					<br />
-					<?php print_max_filesize( $t_max_file_size ); ?>
-				</th>
-				<td>
-					<?php print_dropzone_template() ?>
-					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-					<div class="dropzone center" <?php print_dropzone_form_data() ?>>
-						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
-						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
-					</div>
-					<div class="fallback">
-						<input id="ufile[]" name="ufile[]" type="file" size="50" />
-					</div>
-				</td>
-			</tr>
-<?php
-	}
-
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
-?>
-		</tbody>
-</table>
-</div>
-</div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
+			</div>
+		</div>
 	</div>
-</div>
-</div>
 </form>
 </div>
 <?php
