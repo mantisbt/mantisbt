@@ -342,13 +342,8 @@ layout_page_begin();
 </div>
 
 <div class="space-6"></div>
-<div class="widget-toolbox padding-8 clearfix">
-	<span class="bold">
-	<?php echo lang_get( 'actiongroup_menu_add_note' ) ?>
-	</span>
-</div>
 
-<?php print_bugnote_form_content( $f_bug_id ) ?>
+<?php print_bugnote_form_content_collapse( $f_bug_id ) ?>
 
 <div class="space-6"></div>
 

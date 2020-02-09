@@ -158,3 +158,24 @@ table.filters td.category {
 .listjs-table .sort:hover {
 	text-decoration: underline;
 }
+
+.collapse-panel-heading {
+	cursor: pointer;
+}
+
+.collapse-panel-heading > a:hover {
+	text-decoration: none;
+}
+
+.collapse-panel-heading .collapse-panel-title:after {
+	font-family: Fontawesome;
+	content: '\f077';
+	font-size: 15px;
+	font-weight: 300;
+	padding-left: 6px;
+}
+
+.collapse-panel-heading.collapsed .collapse-panel-title:after {
+	font-family:Fontawesome;
+	content:' \f078';
+}

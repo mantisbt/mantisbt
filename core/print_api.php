@@ -2244,12 +2244,32 @@ function print_relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_sele
 <?php
 }
 
-function print_bugnote_form_content( $p_bug_id ) {
+function print_bugnote_form_content_collapse( $p_bug_id, $p_closed = true ) {
+	if( $p_closed ) {
+		$t_panel_class = 'collapsed';
+		$t_div_class = 'collapse';
+	} else {
+		$t_panel_class = '';
+		$t_div_class = 'collapse in';
+	}
+	?>
+	<div class="widget-toolbox padding-8 clearfix collapse-panel-heading <?php echo $t_panel_class ?>" data-toggle="collapse" data-target="#bugnote_add_form_content" role="button">
+		<a data-toggle="collapse" href="#bugnote_add_form_content">
+			<span class="bold collapse-panel-title">
+			<?php echo lang_get( 'actiongroup_menu_add_note' ) ?>
+			</span>
+		</a>
+	</div>
+	<?php
+	print_bugnote_form_content( $p_bug_id, $t_div_class );
+}
+
+function print_bugnote_form_content( $p_bug_id, $p_div_class = '' ) {
 	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
 	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
 	?>
-	<div class="table-responsive">
+	<div class="table-responsive <?php echo $p_div_class ?>" id="bugnote_add_form_content">
 		<table class="table table-bordered table-condensed">
 			<tbody>
 
