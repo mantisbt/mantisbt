@@ -206,7 +206,13 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<tr>';
 	echo '<td width="15%" class="category">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
 	echo '<td width="20%" class="category">', $t_show_project ? lang_get( 'email_project' ) : '', '</td>';
-	echo '<td width="15%" class="category">', $t_show_category ? '<label for="category_id">' . lang_get( 'category' ) . '</label>' : '', '</td>';
+	echo '<td width="15%" class="category">';
+	if( $t_show_category ) {
+		$t_allow_no_category = config_get( 'allow_no_category' );
+		echo $t_allow_no_category ? '' : '<span class="required">*</span> ';
+		echo '<label for="category_id">' . lang_get( 'category' ) . '</label>';
+	}
+	echo '</td>';
 	echo '<td width="20%" class="category">', $t_show_view_state ? '<label for="view_state">' . lang_get( 'view_status' ) . '</label>' : '', '</td>';
 	echo '<td width="15%" class="category">', $t_show_date_submitted ? lang_get( 'date_submitted' ) : '', '</td>';
 	echo '<td width="15%" class="category">', $t_show_last_updated ? lang_get( 'last_update' ) : '', '</td>';
@@ -228,7 +234,9 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 	echo '<td>';
 
 	if( $t_show_category ) {
-		echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id" class="input-sm">';
+		echo '<select ' . helper_get_tab_index()
+			. ( $t_allow_no_category ? '' : ' required' )
+			. ' id="category_id" name="category_id" class="input-sm">';
 		print_category_option_list( $t_bug->category_id, $t_bug->project_id );
 		echo '</select>';
 	}
@@ -629,17 +637,26 @@ echo '<tr class="hidden"></tr>';
 # Summary
 if( $t_show_summary ) {
 	echo '<tr>';
-	echo '<th class="category"><label for="summary">' . lang_get( 'summary' ) . '</label></th>';
-	echo '<td colspan="5">', '<input ', helper_get_tab_index(), ' type="text" id="summary" name="summary" size="105" maxlength="128" value="', $t_summary_attribute, '" />';
+	echo '<th class="category">';
+	echo '<span class="required">*</span> ';
+	echo '<label for="summary">' . lang_get( 'summary' ) . '</label>';
+	echo '</th>';
+	echo '<td colspan="5">';
+	echo '<input ', helper_get_tab_index(),
+		' type="text" required id="summary" name="summary" size="105" maxlength="128" value="',
+		$t_summary_attribute, '" />';
 	echo '</td></tr>';
 }
 
 # Description
 if( $t_show_description ) {
 	echo '<tr>';
-	echo '<th class="category"><label for="description">' . lang_get( 'description' ) . '</label></th>';
+	echo '<th class="category">';
+	echo '<span class="required">*</span> ';
+	echo '<label for="description">' . lang_get( 'description' ) . '</label>';
+	echo '</th>';
 	echo '<td colspan="5">';
-	echo '<textarea class="form-control" ', helper_get_tab_index(),
+	echo '<textarea class="form-control" required ', helper_get_tab_index(),
 		' cols="80" rows="10" id="description" name="description">', "\n",
 		$t_description_textarea, '</textarea>';
 	echo '</td></tr>';
