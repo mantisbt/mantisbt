@@ -228,7 +228,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		case 'UP_CATEGORY':
 			$f_category_id = gpc_get_int( 'category' );
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-				if( category_exists( $f_category_id ) ) {
+				if( category_exists( $f_category_id )
+					|| $f_category_id == 0 && config_get( 'allow_no_category' )
+				) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'category_id', $f_category_id );
 					email_bug_updated( $t_bug_id );
