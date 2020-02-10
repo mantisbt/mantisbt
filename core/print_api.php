@@ -759,25 +759,32 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		echo '<option value="0"';
 		check_selected( $p_category_id, 0 );
 		echo '>';
-		echo category_full_name( 0, false ), '</option>';
+		echo category_full_name( 0, false );
+		echo '</option>', PHP_EOL;
 	} else {
 		if( 0 == $p_category_id ) {
 			if( count( $t_cat_arr ) == 1 ) {
 				$p_category_id = (int) $t_cat_arr[0]['id'];
 			} else {
-				echo '<option value="0"';
-				echo check_selected( $p_category_id, 0 );
+				echo '<option value="0" disabled hidden';
+				check_selected( $p_category_id, 0 );
 				echo '>';
-				echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+				echo string_attribute( lang_get( 'select_option' ) );
+				echo '</option>', PHP_EOL;
 			}
 		}
 	}
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
+		$t_category_name = category_full_name(
+			$t_category_id,
+			$t_category_row['project_id'] != $t_project_id
+		);
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
-		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ) . '</option>';
+		echo '>';
+		echo string_attribute( $t_category_name ), '</option>', PHP_EOL;
 	}
 }
 
