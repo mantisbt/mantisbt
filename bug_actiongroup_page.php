@@ -303,7 +303,7 @@ if( $t_multiple_projects ) {
 				'" value="' . $t_date_to_display . '" />';
 			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
 		} else {
-			echo '<select name="' . $t_form . '" class="input-sm">';
+			echo '<select name="' . $t_form . '" class="input-sm" required>';
 
 			switch( $f_action ) {
 				case 'COPY':
