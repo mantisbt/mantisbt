@@ -42,6 +42,7 @@
  * @author Herr Mlinka
  * @author Janjko
  * @author KWiki
+ * @author Neptune, the Mystic
  * @author Obsuser
  * @author Teoo3
  */
@@ -435,6 +436,8 @@ $s_attached_files = 'Pridružene datoteke';
 $s_advanced_filters = 'Napredni filteri';
 $s_roadmap = 'Plan razvoja';
 $s_roadmap_empty = 'Nema informacija o planu razvoja';
+$s_show_summary = 'Prikaži sažetak';
+$s_hide_summary = 'Skrij sažetak';
 $s_filters = 'Filteri';
 $s_save_filters_as_shared = 'Spremi filtere kao dijeljene';
 $s_due_date = 'Krajnji rok';
