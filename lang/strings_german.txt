@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author 1233qwer1234qwer4
  * @author Als-Holder
  * @author Atrol
  * @author Ayonik
@@ -1100,6 +1101,8 @@ $s_dependency_graph = 'Grafik der Abhängigkeiten';
 $s_vertical = 'Vertikal';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'Eintrag ansehen';
+$s_show_summary = 'Zusammenfassung einblenden';
+$s_hide_summary = 'Zusammenfassung ausblenden';
 $s_perm_rpt_capability = 'Fähigkeiten';
 $s_view = 'Ansehen';
 $s_issues = 'Einträge';
