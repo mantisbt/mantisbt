@@ -662,6 +662,7 @@ $s_resolved_status = 'Status no qual uma tarefa é considerada resolvida';
 $s_readonly_status = 'Status no qual uma tarefa se torna somente-leitura';
 $s_reopen_status = 'Status para o qual tarefas reabertas são ajustadas';
 $s_reopen_resolution = 'Resolução para a qual tarefas reabertas são ajustadas';
+$s_limit_view_unless_threshold_option = 'Visualizar os problemas de outros usuários (se não definido, o acesso será limitado aos problemas relatados, manipulados ou monitorados pelo usuário)';
 $s_config_delete_sure = 'Você tem certeza que deseja apagar as configurações para:';
 $s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar Configurações';
