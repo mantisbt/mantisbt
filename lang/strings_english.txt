@@ -844,6 +844,7 @@ $s_set_configuration_option_action_create = 'Create Configuration Option';
 $s_set_configuration_option_action_edit = 'Edit Configuration Option';
 $s_set_configuration_option_action_clone = 'Clone Configuration Option';
 $s_set_configuration_option_action_view = 'View Configuration Option';
+$s_show_all_complex = 'Show Value for all "%1$s" Options';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
