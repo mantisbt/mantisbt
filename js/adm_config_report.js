@@ -19,6 +19,8 @@
  */
 
 $(document).ready( function() {
+	"use strict";
+
 	/**
 	 * Display the complex element and load its contents if necessary.
 	 *
@@ -29,7 +31,7 @@ $(document).ready( function() {
 		container.find('.expand_show').hide();
 		// Load contents if not already done and display
 		var content = container.find('.expand_content');
-		if (content[0].childElementCount == 0) {
+		if (content[0].childElementCount === 0) {
 			var req_data = {
 				'config_id': container.data('config_id'),
 				'project_id': container.data('project_id'),
