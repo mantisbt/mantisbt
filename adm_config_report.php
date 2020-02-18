@@ -316,6 +316,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
+<a id="database_configuration"></a>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
@@ -331,6 +332,12 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 		$t_url_new = 'adm_config_page.php?action=' . MANAGE_CONFIG_ACTION_CREATE;
 		$t_label = lang_get( 'set_configuration_option_action_' . MANAGE_CONFIG_ACTION_CREATE );
 		print_link_button( $t_url_new, $t_label );
+
+		print_link_button(
+			'#database_configuration',
+			sprintf( lang_get( 'show_all_complex' ), config_get_type_string( CONFIG_TYPE_COMPLEX ) ),
+			'expand_all'
+		);
 		?>
 	</div>
 <div class="table-responsive sortable">
