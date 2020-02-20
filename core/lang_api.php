@@ -299,16 +299,13 @@ function lang_get( $p_string, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];
+	} elseif( $t_lang != 'english' ) {
+		# If the string was not found in the foreign language, then retry with English.
+		return lang_get( $p_string, 'english' );
 	} else {
-		if( $t_lang == 'english' ) {
-			error_parameters( $p_string );
-			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-			return '';
-		} else {
-
-			# if string is not found in a language other than english, then retry using the english language.
-			return lang_get( $p_string, 'english' );
-		}
+		error_parameters( $p_string );
+		trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
+		return '';
 	}
 }
 
