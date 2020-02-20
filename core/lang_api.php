@@ -343,12 +343,13 @@ function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
 
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return lang_get( $p_string );
+	} elseif( $t_lang != 'english' ) {
+		# If the string was not found in the foreign language, then retry with English.
+		return lang_get_defaulted( $p_string, $p_default, 'english' );
 	} else {
-		if( null === $p_default ) {
-			return $p_string;
-		} else {
-			return $p_default;
-		}
+		# English string was not found either, return the default,
+		# or the original string if no default was provided
+		return $p_default !== null ? $p_default : $p_string;
 	}
 }
 
