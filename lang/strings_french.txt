@@ -682,6 +682,7 @@ $s_set_configuration_option_action_create = 'Créer une option de configuration'
 $s_set_configuration_option_action_edit = 'Modifier une option de configuration';
 $s_set_configuration_option_action_clone = 'Dupliquer une option de configuration';
 $s_set_configuration_option_action_view = 'Afficher l’option de configuration';
+$s_show_all_complex = 'Afficher la valeur pour toutes les options « %1$s »';
 $s_plugin = 'Greffon';
 $s_plugins_installed = 'Greffons installés';
 $s_plugins_available = 'Greffons disponibles';
