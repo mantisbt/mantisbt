@@ -677,6 +677,7 @@ $s_set_configuration_option_action_create = 'Yapılandırma Seçeneği Oluştur'
 $s_set_configuration_option_action_edit = 'Yapılandırma Seçeneğini Düzenle';
 $s_set_configuration_option_action_clone = 'Yapılandırma Seçeneğini Kopyala';
 $s_set_configuration_option_action_view = 'Yapılandırma Seçeneğini Görüntüle';
+$s_show_all_complex = 'Tüm "%1$s" Seçeneklerinin Değerini Göster';
 $s_plugin = 'Eklenti';
 $s_plugins_installed = 'Yüklenen Eklentiler';
 $s_plugins_available = 'Mevcut Eklentiler';
