@@ -60,6 +60,7 @@ form_security_validate( 'bug_reminder' );
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_to			= gpc_get_int_array( 'to' );
 $f_body			= gpc_get_string( 'bugnote_text' );
+$f_view_state	= gpc_get_bool( 'private' ) ? VS_PRIVATE : VS_PUBLIC;
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
@@ -109,7 +110,7 @@ if( ON == config_get( 'store_reminders' ) ) {
 		$t_attr .= $t_recipient;
 	}
 
-	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
+	bugnote_add( $f_bug_id, $f_body, 0, $f_view_state == VS_PRIVATE, REMINDER, $t_attr, null, false );
 
 	# Note: we won't trigger mentions here since reminders are triggered.
 }
