@@ -170,28 +170,28 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	$g_cache_project_inheritance = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		if( null === $t_row['parent_id'] ) {
-			$t_row['parent_id'] = ALL_PROJECTS;
-		}
+		$t_project_id = (int)$t_row['id'];
+		$t_parent_id = ( null === $t_row['parent_id'] ) ? ALL_PROJECTS : (int)$t_row['parent_id'];
 
-		if( isset( $g_cache_project_hierarchy[(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']][] = (int)$t_row['id'];
+		if( isset( $g_cache_project_hierarchy[$t_parent_id] ) ) {
+			$g_cache_project_hierarchy[$t_parent_id][] = $t_project_id;
 		} else {
-			$g_cache_project_hierarchy[(int)$t_row['parent_id']] = array(
-				(int)$t_row['id'],
+			$g_cache_project_hierarchy[$t_parent_id] = array(
+				$t_project_id,
 			);
 		}
 
-		if( !isset( $g_cache_project_inheritance[(int)$t_row['id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']] = array();
+
+		if( !isset( $g_cache_project_inheritance[$t_project_id] ) ) {
+			$g_cache_project_inheritance[$t_project_id] = array();
 		}
 
-		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][ALL_PROJECTS] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = ALL_PROJECTS;
+		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[$t_project_id][ALL_PROJECTS] ) ) {
+			$g_cache_project_inheritance[$t_project_id][ALL_PROJECTS] = ALL_PROJECTS;
 		}
 
-		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][(int)$t_row['parent_id']] ) ) {
-			$g_cache_project_inheritance[(int)$t_row['id']][] = (int)$t_row['parent_id'];
+		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[$t_project_id][$t_parent_id] ) ) {
+			$g_cache_project_inheritance[$t_project_id][$t_parent_id] = $t_parent_id;
 		}
 	}
 }
