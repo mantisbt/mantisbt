@@ -173,14 +173,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 		$t_project_id = (int)$t_row['id'];
 		$t_parent_id = ( null === $t_row['parent_id'] ) ? ALL_PROJECTS : (int)$t_row['parent_id'];
 
-		if( isset( $g_cache_project_hierarchy[$t_parent_id] ) ) {
-			$g_cache_project_hierarchy[$t_parent_id][] = $t_project_id;
-		} else {
-			$g_cache_project_hierarchy[$t_parent_id] = array(
-				$t_project_id,
-			);
-		}
-
+		$g_cache_project_hierarchy[$t_parent_id][] = $t_project_id;
 
 		if( !isset( $g_cache_project_inheritance[$t_project_id] ) ) {
 			$g_cache_project_inheritance[$t_project_id] = array();
