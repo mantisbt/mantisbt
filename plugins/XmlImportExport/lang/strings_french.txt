@@ -67,4 +67,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Désactiver le lien';
 $s_plugin_XmlImportExport_fallback = 'Stratégie de repli (quand la renumérotation ne s’applique pas) :';
 $s_plugin_XmlImportExport_fallback_category = 'Catégorie de repli :';
 $s_plugin_XmlImportExport_keep_same_category = 'Essayer de garder les mêmes catégories';
-$s_plugin_XmlImportExport_error_no_xml = 'impossible de trouver les extensions <em>xmlreader</em> et <em>xmlwriter</em>';
+$s_plugin_XmlImportExport_error_no_xml = 'impossible de trouver les greffons <em>xmlreader</em> et <em>xmlwriter</em>';

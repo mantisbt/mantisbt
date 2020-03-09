@@ -42,3 +42,4 @@
  */
 
 $s_plugin_Gravatar_title = 'Gravatar sera avatari';
+$s_plugin_Gravatar_description = 'Yew ilaweyo ke be xızmeta avatari gurenayışi ra goreyê adresanê e-posteyi ra avataranê karberan mocneno.';

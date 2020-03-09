@@ -257,6 +257,7 @@ $s_configuration_option_type = 'Typ';
 $s_configuration_option_value = 'Wäert';
 $s_all_users = 'All Benotzer';
 $s_set_configuration_option_action_edit = 'Optioun vun der Konfiguratioun änneren';
+$s_show_all_complex = 'Wäert fir all "%1$s" Optioune weisen';
 $s_plugin = 'Plugin';
 $s_plugin_description = 'Beschreiwung';
 $s_plugin_author = 'Auteur: %1$s';
