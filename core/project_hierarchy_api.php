@@ -131,9 +131,9 @@ function project_hierarchy_get_parent( $p_project_id, $p_show_disabled = false )
 		return 0;
 	}
 
-	foreach( $g_cache_project_hierarchy as $t_key => $t_value ) {
-		if( in_array( $p_project_id, $g_cache_project_hierarchy[$t_key] ) ) {
-			return $t_key;
+	foreach( $g_cache_project_hierarchy as $t_parent_id => $t_child_projects ) {
+		if( in_array( $p_project_id, $t_child_projects ) ) {
+			return $t_parent_id;
 		}
 	}
 
