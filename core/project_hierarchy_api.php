@@ -49,7 +49,7 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 
 	db_param_push();
 	$t_query = 'INSERT INTO {project_hierarchy}
-		                ( child_id, parent_id, inherit_parent )
+						( child_id, parent_id, inherit_parent )
 						VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
