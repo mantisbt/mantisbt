@@ -178,11 +178,11 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 			$g_cache_project_inheritance[$t_project_id] = array();
 		}
 
-		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[$t_project_id][ALL_PROJECTS] ) ) {
+		if( $t_row['inherit_global'] ) {
 			$g_cache_project_inheritance[$t_project_id][ALL_PROJECTS] = ALL_PROJECTS;
 		}
 
-		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[$t_project_id][$t_parent_id] ) ) {
+		if( $t_row['inherit_parent'] ) {
 			$g_cache_project_inheritance[$t_project_id][$t_parent_id] = $t_parent_id;
 		}
 	}
