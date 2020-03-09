@@ -39,6 +39,7 @@
  * @file
  *
  * @author Albe Albe 460
+ * @author Albe Albe460
  * @author Alexmar983
  * @author Beta16
  * @author Darth Kule
@@ -473,6 +474,7 @@ $s_fixed_in_version = 'Risolta nella versione';
 $s_target_version = 'Assegnata alla versione';
 $s_votes = 'Voti';
 $s_summary = 'Riassunto';
+$s_synthesis = 'Sintesi';
 $s_description = 'Descrizione';
 $s_steps_to_reproduce = 'Passaggi per riprodurre l\'anomalia';
 $s_update_information_button = 'Aggiorna informazione';
@@ -656,6 +658,7 @@ $s_resolved_status = 'Stato per cui anomalia si considera risolta';
 $s_readonly_status = 'Stato per cui anomalia si considera di sola-lettura';
 $s_reopen_status = 'Stato assegnato ad anomalia riaperta';
 $s_reopen_resolution = 'Risoluzione assegnata ad anomalia riaperta';
+$s_limit_view_unless_threshold_option = 'Visualizza i problemi degli altri utenti (se non impostato, l\'accesso sarà limitato ai problemi segnalati, gestiti o monitorati dall\'utente)';
 $s_config_delete_sure = 'Sei sicuro di voler cancellare le impostazioni per:';
 $s_in_project = 'nel progetto';
 $s_delete_config_button = 'Rimuovi impostazioni';
@@ -671,6 +674,8 @@ $s_configuration_corrupted = 'La configurazione del database é danneggiata.';
 $s_set_configuration_option_action_create = 'Crea opzione di configurazione';
 $s_set_configuration_option_action_edit = 'Modifica opzione di configurazione';
 $s_set_configuration_option_action_clone = 'Clona opzione di configurazione';
+$s_set_configuration_option_action_view = 'Visualizza opzione di configurazione';
+$s_show_all_complex = 'Mostra valore per tutte le opzioni "%1$s"';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugin installati';
 $s_plugins_available = 'Plugin disponibili';
@@ -990,6 +995,8 @@ $s_move_bug_button = 'Sposta';
 $s_attached_files = 'File allegati';
 $s_publish = 'Pubblica';
 $s_add_user_to_monitor = 'Aggiungi';
+$s_browser_does_not_support_audio = 'Il tuo browser non supporta i tag audio.';
+$s_browser_does_not_support_video = 'Il tuo browser non supporta i tag video.';
 $s_bug_view_title = 'Visualizza dettagli anomalia';
 $s_no_users_monitoring_bug = 'Nessuno ha chiesto di essere notificato su questa anomalia.';
 $s_users_monitoring_bug = 'Utenti che tengono sotto controllo questa anomalia';
@@ -1096,6 +1103,8 @@ $s_dependency_graph = 'Grafico dipendenze';
 $s_vertical = 'Verticale';
 $s_horizontal = 'Orizzontale';
 $s_view_issue = 'Dettaglio anomalia';
+$s_show_summary = 'Mostra riepilogo';
+$s_hide_summary = 'Nascondi riepilogo';
 $s_perm_rpt_capability = 'Funzionalità';
 $s_view = 'Visualizzare';
 $s_issues = 'Anomalie';
@@ -1112,6 +1121,8 @@ $s_update_issue_status = 'Aggiorna stato anomalia';
 $s_set_view_status = 'Imposta lo stato di visualizzazione quando si segnala un nuovo problema o nota';
 $s_update_view_status = 'Modifica lo stato di visualizzazione di un nuovo problema o nota esistente';
 $s_show_list_of_users_monitoring_issue = 'Visualizza lista degli utenti che tengono sotto controllo anomalia';
+$s_add_users_monitoring_issue = 'Aggiungi dei monitor a un problema';
+$s_remove_users_monitoring_issue = 'Rimuovi i monitor da un problema';
 $s_notes = 'Note';
 $s_add_notes = 'Aggiunge nota';
 $s_view_private_notes = 'Visualizza note private di altri';
@@ -1155,6 +1166,14 @@ $s_email_on_deleted = 'Email su "Eliminazione"';
 $s_email_on_sponsorship_changed = 'Email su variazione di sponsorizzazione';
 $s_email_on_relationship_changed = 'Email su variazione delle relazioni';
 $s_email_on_updated = 'Email sull\'aggiornamento';
+$s_email_on_monitor = 'E-mail quando l\'utente inizia il monitoraggio';
+$s_view_tags = 'Visualizza i tag allegati a un bug';
+$s_attach_tags = 'Allega dei tag a un bug';
+$s_detach_tags = 'Scollega i tag da un bug';
+$s_detach_own_tags = 'Scollega i tag allegati dallo stesso utente';
+$s_create_new_tags = 'Crea dei nuovi tag';
+$s_edit_tags = 'Modifica i nomi e le descrizioni dei tag';
+$s_edit_own_tags = 'Modifica i tag creati dallo stesso utente';
 $s_loading = 'In caricamento...';
 $s_between_date = 'Tra';
 $s_on_or_before_date = 'Il o prima del';
@@ -1229,6 +1248,8 @@ $s_copy_columns_to = 'Copia colonne a';
 $s_due_date = 'Data di scadenza';
 $s_overdue = 'In ritardo';
 $s_overdue_since = 'In ritardo dal %1$s';
+$s_overdue_one_day = 'Scaduto in meno di un giorno';
+$s_overdue_days = 'Scaduto tra %1$d giorni';
 $s_view_account_title = 'Informazioni utente';
 $s_manage_user = 'Gestisci Utente';
 $s_install_information = 'MantisBT Informazioni d\'installazione';
