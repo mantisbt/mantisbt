@@ -49,6 +49,7 @@
  * @author Hercule
  * @author IAlex
  * @author Jean-Frédéric
+ * @author Jeromedl
  * @author Kropotkine 113
  * @author Lapinkiller
  * @author Lbayle
@@ -83,7 +84,7 @@ $s_actiongroup_menu_update_category = 'Mettre à jour la catégorie';
 $s_actiongroup_menu_set_sticky = 'Activer / désactiver l’épinglage';
 $s_actiongroup_menu_update_field = 'Mettre à jour %1$s';
 $s_actiongroup_menu_update_product_version = 'Mettre à jour la version du produit';
-$s_actiongroup_menu_update_target_version = 'Mettre à jour la version cible';
+$s_actiongroup_menu_update_target_version = 'Mettre à jour la version ciblée';
 $s_actiongroup_menu_update_fixed_in_version = 'Mettre à jour la version résolue';
 $s_actiongroup_menu_update_product_build = 'Mettre à jour la compilation';
 $s_actiongroup_menu_update_due_date = 'Mettre à jour la date d’échéance';
@@ -640,7 +641,7 @@ $s_superfluous = 'La connexion d’un état vers lui-même est implicite, il n�
 $s_unreachable = 'Vous ne pouvez pas positionner une anomalie à cet état';
 $s_no_exit = 'Vous ne pouvez pas positionner une anomalie hors de cet état';
 $s_access_levels = 'Niveaux d’accès';
-$s_access_change = 'Niveau d’accès minimal pour modifier cet état';
+$s_access_change = 'Niveau d’accès minimal pour atteindre cet état';
 $s_desc_bug_submit_status = 'État à positionner pour un nouvelle anomalie';
 $s_desc_bug_reopen_status = 'État des anomalies rouvertes';
 $s_desc_bug_resolved_status_threshold = 'État dans lequel une anomalie est considérée comme résolue';
