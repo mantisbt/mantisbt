@@ -61,6 +61,8 @@ class MantisMarkdown extends Parsedown
 	 */
 	public function __construct() {
 
+		$this->safeLinksWhitelist = plugin_config_get( 'safe_links', null, true );
+
 		# enable line break by default
 		$this->breaksEnabled = true;
 
