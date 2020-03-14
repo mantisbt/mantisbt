@@ -178,7 +178,6 @@ layout_page_begin();
 
 <?php
 $_GET['id'] = $f_bug_id;
-$t_fields_config_option = 'bug_view_page_fields';
 $t_show_page_header = false;
 $t_force_readonly = true;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
