@@ -72,10 +72,8 @@ $t_show_time_tracking = config_get( 'time_tracking_enabled' )
 	&& access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
 
 # get attachments data
-if( !isset( $t_fields ) ) {
-	$t_fields = config_get( $t_fields_config_option );
-	$t_fields = columns_filter_disabled( $t_fields );
-}
+$t_fields = config_get( 'bug_view_page_fields' );
+$t_fields = columns_filter_disabled( $t_fields );
 
 $t_show_attachments = in_array( 'attachments', $t_fields );
 
