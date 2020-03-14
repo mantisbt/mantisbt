@@ -28,9 +28,6 @@
 					Users can override the default timezone under user
 					their preferences.
 				</para>
-				<note><para>Note that this function's behavior was modified in
-					PHP 5.4.0.
-				</para></note>
 			</listitem>
 		</varlistentry>
 	</variablelist>

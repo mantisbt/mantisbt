@@ -21,8 +21,8 @@
         <para>Note: while technically unlimited, the password's length is arbitrarily restricted to 1024 characters (PASSWORD_MAX_SIZE_BEFORE_HASH constant).</para>
         <para>Values for $g_login_method:
             <itemizedlist>
-                <listitem><para><emphasis><ulink url="https://en.wikipedia.org/wiki/MD5">MD5</ulink></emphasis> is the default - and recommended - method</para></listitem>
-                <listitem><para>Support for additional methods (e.g. <ulink url="https://en.wikipedia.org/wiki/SHA-1">SHA-1</ulink>) could be added in the future</para></listitem>
+                <listitem><para><emphasis><ulink url="https://en.wikipedia.org/wiki/MD5">MD5</ulink></emphasis> is the default  method</para></listitem>
+                <listitem><para>Support for additional methods could be added in the future</para></listitem>
             </itemizedlist>
         </para>
 
