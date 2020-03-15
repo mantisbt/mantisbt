@@ -357,6 +357,34 @@ function plugin_lang_get( $p_name, $p_basename = null ) {
 }
 
 /**
+ * Get a defaulted language string for the plugin.
+ * - If found, return the appropriate string.
+ * - If not found, no default supplied, return the supplied string as is.
+ * - If not found, default supplied, return default.
+ * Automatically prepends plugin_<basename> to the string requested.
+ * @see lang_get_defaulted()
+ *
+ * @param string $p_name     Language string name.
+ * @param string $p_default  The default value to return.
+ * @param string $p_basename Plugin basename.
+ *
+ * @return string Language string
+ */
+function plugin_lang_get_defaulted( $p_name, $p_default = null, $p_basename = null ) {
+	if( !is_null( $p_basename ) ) {
+		plugin_push_current( $p_basename );
+	}
+	$t_basename = plugin_get_current();
+	$t_name = 'plugin_' . $t_basename . '_' . $p_name;
+	$t_string = lang_get_defaulted( $t_name, $p_default );
+
+	if( !is_null( $p_basename ) ) {
+		plugin_pop_current();
+	}
+	return $t_string;
+}
+
+/**
  * log history event from plugin
  * @param integer $p_bug_id     A bug identifier.
  * @param string  $p_field_name A field name.
