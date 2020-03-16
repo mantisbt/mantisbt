@@ -47,12 +47,13 @@
  * @author Koavf
  * @author Locos epraix
  * @author Macofe
+ * @author Zobook
  */
 
 $s_plugin_MantisGraph_title = 'Gráficos Mantis';
 $s_plugin_MantisGraph_description = 'Plugin oficial de gráficos.';
 $s_plugin_MantisGraph_config = 'Configuración';
-$s_plugin_MantisGraph_tab_label = 'Gráficos Mantis';
+$s_plugin_MantisGraph_tab_label = 'Gráficos';
 $s_plugin_MantisGraph_status_link = 'Por estado';
 $s_plugin_MantisGraph_priority_link = 'Por prioridad';
 $s_plugin_MantisGraph_severity_link = 'Por severidad';

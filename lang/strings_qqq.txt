@@ -47,6 +47,7 @@
  * @author EugeneZelenko
  * @author Fryed-peach
  * @author Hamilton Abreu
+ * @author Jeromedl
  * @author Kingu
  * @author Liuxinyu970226
  * @author Lloffiwr
@@ -269,6 +270,7 @@ $s_current_status = '{{Identical|Current status}}';
 $s_workflow = '{{Identical|Workflow}}';
 $s_status_level = '{{Identical|Status}}';
 $s_access_levels = '{{Identical|Access level}}';
+$s_access_change = 'Niveau d’accès minimal pour atteindre cet état';
 $s_limit_access = '{{doc-singularthey}}';
 $s_configuration_option_type = '{{Identical|Type}}';
 $s_configuration_option_value = '{{Identical|Value}}';
