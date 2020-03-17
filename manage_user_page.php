@@ -357,7 +357,7 @@ $t_user_count = count( $t_users );
 	# Print column headers with sort links
 	$t_columns = array(
 		'username', 'realname', 'email', 'access_level',
-		'enabled', 'protected', 'date_created', 'last_visit'
+		'enabled', 'protected', 'date_created', 'last_visit', 'failed_login_count'
 	);
 
 	foreach( $t_columns as $t_col ) {
@@ -436,6 +436,7 @@ $t_user_count = count( $t_users );
 				</td>
 				<td><?php echo $v_date_created ?></td>
 				<td><?php echo $v_last_visit ?></td>
+				<td><?php echo $v_failed_login_count ?></td>
 			</tr>
 <?php
 	}  # end for
