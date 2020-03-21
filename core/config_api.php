@@ -608,11 +608,15 @@ function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 }
 
 /**
- * check for recursion in defining configuration variables
- * If there is a %text% in the returned value, re-evaluate the "text" part and replace the string
+ * Check for recursion in defining configuration variables.
+ *
+ * If there is a %text% in the returned value, re-evaluate the "text" part and
+ * replace the string. It is possible to escape the '%' with backslash when
+ * evaluation is not wanted, e.g. '\%test\%'.
  *
  * @param string  $p_value  Configuration variable to evaluate.
  * @param boolean $p_global If true, gets %text% as a global configuration, defaults to false.
+ *
  * @return string
  */
 function config_eval( $p_value, $p_global = false ) {
@@ -641,6 +645,7 @@ function config_eval( $p_value, $p_global = false ) {
 				$t_value = str_replace( $t_matches[1][$i], $t_repl, $t_value );
 			}
 		}
+		# Remove escaped '%'
 		$t_value = str_replace( '\\%', '%', $t_value );
 	}
 	return $t_value;
