@@ -231,5 +231,5 @@ config_obsolete( 'my_view_boxes_fixed_position' );
 # changes in 2.24.0
 config_obsolete( 'bug_change_status_page_fields', 'bug_view_page_fields' );
 
-# changes in 2.23.0
+# changes in 2.25.0
 config_obsolete( 'datetime_picker_format' );
