@@ -145,10 +145,8 @@ require_api( 'lang_api.php' );
 	if( $t_allow_file_upload ) {
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 		$t_max_file_size = file_get_max_file_size();
-
-		$t_attach_style = ( $t_default_bugnote_view_status != VS_PUBLIC ) ? 'display: none;' : '';
 ?>
-			<tr id="bugnote-attach-files" style="<?php echo $t_attach_style ?>">
+			<tr id="bugnote-attach-files">
 				<th class="category">
 					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 					<br />
