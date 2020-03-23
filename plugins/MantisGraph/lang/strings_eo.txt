@@ -39,13 +39,14 @@
  * @file
  *
  * @author Abijeet Patro
+ * @author Fitoschido
  * @author Mirin
  */
 
 $s_plugin_MantisGraph_title = 'Mantis-Grafoj';
 $s_plugin_MantisGraph_description = 'Oficiala grafa kromprogramo.';
 $s_plugin_MantisGraph_config = 'Agordo';
-$s_plugin_MantisGraph_tab_label = 'Mantis-Grafoj';
+$s_plugin_MantisGraph_tab_label = 'Grafoj';
 $s_plugin_MantisGraph_status_link = 'Laŭ Stato';
 $s_plugin_MantisGraph_priority_link = 'Laŭ Prioritato';
 $s_plugin_MantisGraph_severity_link = 'Laŭ Severeco';

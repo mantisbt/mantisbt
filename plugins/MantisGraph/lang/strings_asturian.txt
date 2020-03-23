@@ -39,13 +39,14 @@
  * @file
  *
  * @author Abijeet Patro
+ * @author Fitoschido
  * @author Xuacu
  */
 
 $s_plugin_MantisGraph_title = 'Gráfiques Mantis';
 $s_plugin_MantisGraph_description = 'Complementu oficial de gráfiques.';
 $s_plugin_MantisGraph_config = 'Configuración';
-$s_plugin_MantisGraph_tab_label = 'Gráfiques Mantis';
+$s_plugin_MantisGraph_tab_label = 'Gráfiques';
 $s_plugin_MantisGraph_status_link = 'Per estáu';
 $s_plugin_MantisGraph_priority_link = 'Per prioridá';
 $s_plugin_MantisGraph_severity_link = 'Per severidá';
