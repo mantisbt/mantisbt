@@ -227,9 +227,12 @@ function ldap_cache_user_data( $p_username ) {
 
 	$t_search_filter = '(&' . $t_ldap_organization
 		. '(' . $t_ldap_uid_field . '=' . ldap_escape_string( $p_username ) . '))';
-	$t_search_attrs = array(
-		'mail',
-		config_get( 'ldap_realname_field' )
+	$t_search_attrs = array_merge(
+		array(
+			'mail',
+			config_get( 'ldap_realname_field' )
+		),
+		config_get( 'ldap_cache_fields' )
 	);
 
 	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );
