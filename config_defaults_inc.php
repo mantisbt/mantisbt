@@ -2157,9 +2157,7 @@ $g_ldap_simulation_file_path = '';
  * The LDAP fields of a user to be cached
  * @global array $g_ldap_cache_fields
 **/
-$g_ldap_cache_fields = array(
-	'mail'
-);
+$g_ldap_cache_fields = array();
 
 ###################
 # Status Settings #
@@ -4522,6 +4520,7 @@ $g_public_config_names = array(
 	'issue_activity_note_attachments_seconds_threshold',
 	'language_auto_map',
 	'language_choices_arr',
+	'ldap_cache_fields',
 	'limit_email_domains',
 	'limit_reporters',
 	'limit_view_unless_threshold',
