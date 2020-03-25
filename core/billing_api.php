@@ -59,8 +59,8 @@ function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = nul
  */
 function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hour, $p_include_subprojects = false ) {
 	$t_params = array();
-	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
-	$c_from = strtotime( $p_from );
+	$c_to = date_strtotime( $p_to ) + SECONDS_PER_DAY - 1;
+	$c_from = date_strtotime( $p_from );
 
 	if( $c_to === false || $c_from === false ) {
 		error_parameters( array( $p_from, $p_to ) );

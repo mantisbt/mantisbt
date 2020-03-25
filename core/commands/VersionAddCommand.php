@@ -81,7 +81,7 @@ class VersionAddCommand extends Command {
 		if( is_blank( $t_timestamp ) ) {
 			$t_timestamp = null;
 		} else {
-			$t_timestamp = strtotime( $t_timestamp );
+			$t_timestamp = date_strtotime( $t_timestamp );
 		}
 
 		$t_version_id = version_add(

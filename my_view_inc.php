@@ -389,7 +389,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	echo '<span class="small">', string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
 
 	echo '<span class="small"> - ';
-	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
+	if( $t_bug->last_updated > date_strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo '<strong>' . $t_last_updated . '</strong>';
 	} else {
 		echo $t_last_updated;

@@ -735,8 +735,8 @@ class BugFilterQuery extends DbQuery {
 					. ' 23:59:59';
 
 			$t_query_created_at = '{bug}.date_submitted BETWEEN '
-					. $this->param( strtotime( $t_start_string ) ) . ' AND '
-					. $this->param( strtotime( $t_end_string ) ) ;
+					. $this->param( date_strtotime( $t_start_string ) ) . ' AND '
+					. $this->param( date_strtotime( $t_end_string ) ) ;
 			$this->add_fixed_where( $t_query_created_at );
 		}
 	}
@@ -764,8 +764,8 @@ class BugFilterQuery extends DbQuery {
 					. ' 23:59:59';
 
 			$t_query_updated_at = '{bug}.last_updated BETWEEN '
-					. $this->param( strtotime( $t_start_string ) ) . ' AND '
-					. $this->param( strtotime( $t_end_string ) ) ;
+					. $this->param( date_strtotime( $t_start_string ) ) . ' AND '
+					. $this->param( date_strtotime( $t_end_string ) ) ;
 			$this->add_fixed_where( $t_query_updated_at );
 		}
 	}

@@ -29,7 +29,8 @@
 			<term>$g_normal_date_format</term>
 			<listitem>
 				<para>This format is used in the view/update bug pages, bug notes,
-					manage section, and news section.
+					manage section, and news section. Datetime picker widget uses
+					this format for displaying or editing datetime values.
 					Default is <literal>Y-m-d H:i</literal>.
 				</para>
 			</listitem>
@@ -41,31 +42,6 @@
 					and the emails that are sent out.
 					Default is <literal>Y-m-d H:i T</literal>.
 				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
-			<term>$g_datetime_picker_format</term>
-			<listitem>
-				<para>This format is used with the datetime picker widget.
-					Default is <literal>Y-MM-DD HH:mm</literal>.
-				</para>
-				<note><para>The formatting convention for the DateTime picker is
-					different from the one used for the other date settings
-					described above; see
-					<ulink url="http://momentjs.com/docs/#/displaying/format/">
-						Moment.js documentation
-					</ulink>
-					for details.
-				</para></note>
-				<warning><para>This format needs to match the one defined in
-					<emphasis>$g_normal_date_format</emphasis>.
-					Inconsistencies between these two settings, e.g. using
-					different date ordering (DMY, MDY or YMD) or displaying the
-					month as a number vs a word or abbreviation,
-					may result in unexpected behavior such as an invalid
-					interpretation of the date by the DateTime picker widget,
-					or errors trying to save a modified date.
-				</para></warning>
 			</listitem>
 		</varlistentry>
 	</variablelist>

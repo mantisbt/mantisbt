@@ -63,5 +63,4 @@ if( gpc_isset( 'cache_key' ) ) {
 # should only be known internally to the server.
 
 echo "var config = new Array();\n";
-print_config_value( 'datetime_picker_format' );
 print_config_value( 'short_path' );
