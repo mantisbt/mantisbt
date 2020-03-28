@@ -27,7 +27,7 @@
 			<listitem>
 				<para>Default due date value for newly submitted issues:
  					Empty string for no due date set.
- 					Related date that is accepted by <ulink url="http://php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
+ 					Related date that is accepted by <ulink url="https://www.php.net/manual/en/function.strtotime.php">strtotime()</ulink>, 
  					e.g. 'today' or '+2 days'. Default is ''.
 				</para>
 			</listitem>

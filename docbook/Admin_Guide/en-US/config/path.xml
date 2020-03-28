@@ -15,8 +15,7 @@
 			<listitem>
 				<para>URL to your installation as seen from the web browser; this
 					is what you type into the URL field. Requires trailing '/'
-					character. eg. 'http://www.example.com/mantisbt/'.  In the following example
-					https protocol is used: eg. 'https://www.example.com/mantisbt/'.  MantisBT will default this to
+					character. eg. 'https://www.example.com/mantisbt/'.  MantisBT will default this to
 					the correct value. However, in some cases it might be necessary to
 					override the default.  This is typically needed when an installation can be
 					accessed by multiple URLs (internal vs external).

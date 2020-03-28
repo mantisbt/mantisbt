@@ -42,10 +42,10 @@
 
         <para>
             MantisBT is released under the terms of
-            <ulink url="http://www.gnu.org/copyleft/gpl.html">GNU General
+            <ulink url="https://www.gnu.org/copyleft/gpl.html">GNU General
             Public License (GPL)</ulink>.  MantisBT is free to use and modify.
             It is free to redistribute as long as you abide by the distribution
-            terms of the <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>.
+            terms of the <ulink url="https://www.gnu.org/copyleft/gpl.html">GPL</ulink>.
         </para>
     </section>
 
@@ -59,14 +59,14 @@
             has a package for MantisBT.  If not, or if the package is
             not up-to-date with the latest MantisBT version, then you may want
             to download it directly from
-            <ulink url="http://www.mantisbt.org/download.php">here</ulink>.
+            <ulink url="https://mantisbt.org/download.php">here</ulink>.
         </para>
 
         <para>
             For Windows, macOS and other operating systems, use the link provided
             above to download MantisBT.  The download is compressed in tar.gz
             or zip format.  Both formats can be unpacked using tools like
-            <ulink url="http://www.7-zip.org/">7-Zip</ulink> (in case of Windows).
+            <ulink url="https://www.7-zip.org/">7-Zip</ulink> (in case of Windows).
         </para>
 
 
@@ -136,7 +136,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://www.mantisbt.org/forums/">Forums</ulink> - The
+                    <ulink url="https://mantisbt.org/forums/">Forums</ulink> - The
                     forums are one of the most popular destinations for getting
                     MantisBT support.  Start off by searching the forums for your
                     questions, if not found, then go ahead and submit a question.
@@ -182,7 +182,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://www.mantisbt.org">Wiki</ulink> - The
+                    <ulink url="https://mantisbt.org/wiki/doku.php/mantisbt:start">Wiki</ulink> - The
                     MantisBT Wiki has information related to "How To (recipes)",
                     FAQ, feature requirements, plugins etc.
                 </para>
@@ -193,8 +193,8 @@
                     or finding more information about a topic is to search across
                     all MantisBT website and the Internet via your favorite
                     search engine, e.g.
-                    <ulink url="http://www.google.com">Google</ulink> or
-                    <ulink url="http://www.bing.com">Bing</ulink>.
+                    <ulink url="https://www.google.com">Google</ulink> or
+                    <ulink url="https://www.bing.com">Bing</ulink>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -203,7 +203,7 @@
             <para>Support questions should not be sent directly to MantisBT
                 developers or through the MantisBT website's contact pages.
         </para>
-        <para>Also, our <ulink url="http://mantisbt.org/bugs/">bug tracker</ulink>
+        <para>Also, our <ulink url="https://mantisbt.org/bugs/">bug tracker</ulink>
             is reserved for reporting issues with the software, and
             <emphasis>must not be used for support requests</emphasis>.
         </para></note>
@@ -221,7 +221,7 @@
             <listitem>
                 <para>
                     We send release announcements and important updates to users registered
-                    on our <ulink url="http://www.mantisbt.org/bugs">official bugtracker</ulink>.
+                    on our <ulink url="https://mantisbt.org/bugs">official bugtracker</ulink>.
                     To get onto our mailing list, users will have to signup there and verify
                     their email address. This same account can also be used to report, monitor,
                     and comment on issues relating to MantisBT.
@@ -229,7 +229,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://www.mantisbt.org/blog/">MantisBT Blog</ulink>
+                    <ulink url="https://mantisbt.org/blog/">MantisBT Blog</ulink>
                     is used to communicate announcements about new releases, topics
                     relating to MantisBT, etc.  Users are encouraged to subscribe to
                     the RSS feed to know when new posts are posted there.
@@ -237,7 +237,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://twitter.com/mantisbt">Twitter</ulink> is used to
+                    <ulink url="https://twitter.com/mantisbt">Twitter</ulink> is used to
                     notify users about up-to-date details about what is happening with MantisBT development.
                     Twitter users are encouraged to follow "@mantisbt".
                 </para>
@@ -250,7 +250,7 @@
 
        <para>
            Our release numbering convention follows the guidelines of
-           <ulink url="http://semver.org/">Semantic Versioning</ulink>.
+           <ulink url="https://semver.org/">Semantic Versioning</ulink>.
            Given a version number <emphasis>Major.Minor.Patch</emphasis>
            and an optional <emphasis>Suffix</emphasis> (eg. 1.3.0-rc.1):
        </para>

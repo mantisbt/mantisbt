@@ -32,7 +32,7 @@
 			<term>$g_form_security_validation</term>
 			<listitem>
 				<para>Form security validation, defaults to <emphasis>ON</emphasis>.
-				This protects against <ulink url="http://en.wikipedia.org/wiki/Cross-site_request_forgery">
+				This protects against <ulink url="https://en.wikipedia.org/wiki/Cross-site_request_forgery">
 					Cross-Site Request Forgery</ulink>.
 				Some proxy servers may not correctly work with this option enabled
 				because they cache pages incorrectly.

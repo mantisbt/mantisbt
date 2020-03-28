@@ -12,7 +12,7 @@
 		uploaded to the path that is configured in the project
 		properties. In case of problems getting the file upload feature to
 		work, check the following resources:
-		<ulink url="http://www.php.net/manual/en/features.file-upload.php">PHP
+		<ulink url="https://www.php.net/manual/en/features.file-upload.php">PHP
 			Manual
 		</ulink>
 		.
@@ -118,8 +118,7 @@
 			<term>$g_fileinfo_magic_db_file</term>
 			<listitem>
 				<para>Specify the filename of the magic database file.
-					This is used by PHP 5.3.0 (or earlier versions with the
-					fileinfo PECL extension) to guess what the MIME type of a
+					This is used by PHP to guess what the MIME type of a
 					file is. Usually it is safe to leave this setting as the
 					default (blank) as PHP is usually able to find this file
 					by itself.
