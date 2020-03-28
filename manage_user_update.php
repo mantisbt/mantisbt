@@ -106,14 +106,14 @@ user_ensure_name_valid( $f_username );
 
 $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
-if( $t_ldap && config_get( 'use_ldap_realname' ) ) {
+if( $t_ldap && config_get_global( 'use_ldap_realname' ) ) {
 	$t_realname = ldap_realname_from_username( $f_username );
 } else {
 	# strip extra space from real name
 	$t_realname = string_normalize( $f_realname );
 }
 
-if( $t_ldap && config_get( 'use_ldap_email' ) ) {
+if( $t_ldap && config_get_global( 'use_ldap_email' ) ) {
 	$t_email = ldap_email( $f_user_id );
 } else {
 	$t_email = trim( $f_email );

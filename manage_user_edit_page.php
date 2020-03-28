@@ -129,7 +129,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 			<!-- Realname -->
 			<tr><?php
-			if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+			if( $t_ldap && ON == config_get_global( 'use_ldap_realname' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'realname_label' ) . '</td>';
 				echo '<td>';
@@ -144,7 +144,7 @@ print_manage_menu( 'manage_user_page.php' );
 			</tr>
 			<!-- Email -->
 			<tr><?php
-			if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+			if( $t_ldap && ON == config_get_global( 'use_ldap_email' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
 				echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
