@@ -100,7 +100,7 @@ $t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
 # Do not update email for a user verification
-if( !( $t_ldap && config_get( 'use_ldap_email' ) )
+if( !( $t_ldap && config_get_global( 'use_ldap_email' ) )
 	&& !$t_account_verification ) {
 	if( !is_blank( $f_email ) && $f_email != user_get_email( $t_user_id ) ) {
 		$t_update_email = true;
@@ -108,7 +108,7 @@ if( !( $t_ldap && config_get( 'use_ldap_email' ) )
 }
 
 # Update real name (but only if LDAP isn't being used)
-if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
+if( !( $t_ldap && config_get_global( 'use_ldap_realname' ) ) ) {
 	# strip extra spaces from real name
 	$t_realname = string_normalize( $f_realname );
 	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
