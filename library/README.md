@@ -18,7 +18,7 @@ library / plugin                  | version   | status
 ----------------------------------|-----------|---------------
 jquery                            | 2.2.4     | unpatched
 bootstrap                         | 3.3.6     | unpatched
-fontawesome                       | 4.6.3     | unpatched
+fontawesome                       | 4.7.0     | unpatched
 ace-admin theme                   | 1.4.0     | customized
 moment.js                         | 2.24.0    | unpatched
 bootstrap-datetimepicker          | 4.17.47   | unpatched
@@ -42,7 +42,7 @@ project         | URL
 rssbuilder      | http://code.google.com/p/flaimo-php/
 jquery          | https://jquery.com/
 bootstrap       | http://getbootstrap.com/
-fontawesome     | http://fontawesome.io/
+fontawesome     | https://fontawesome.com/v4.7.0/
 moment.js       | https://momentjs.com/ - https://github.com/moment/moment/
 datetimepicker  | https://github.com/Eonasdan/bootstrap-datetimepicker
 dropzone.js     | http://www.dropzonejs.com/ - https://github.com/enyo/dropzone
