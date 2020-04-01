@@ -204,7 +204,7 @@ class IssueViewPageCommand extends Command {
 		$t_flags['profiles_show'] = config_get( 'enable_profiles' ) != OFF;
 		$t_flags['profiles_platform_show'] = $t_flags['profiles_show'] && in_array( 'platform', $t_fields );
 		$t_flags['profiles_os_show'] = $t_flags['profiles_show'] && in_array( 'os', $t_fields );
-		$t_flags['profiles_os_version_show'] = $t_flags['profiles_show'] && in_array( 'os_version', $t_fields );
+		$t_flags['profiles_os_build_show'] = $t_flags['profiles_show'] && in_array( 'os_build', $t_fields );
 
 		$t_flags['monitor_show'] =
 			!$t_force_readonly &&
