@@ -412,15 +412,16 @@ $(document).ready( function() {
 		var zoneObj = enableDropzone( classPrefix, autoUpload );
 		if( zoneObj ) {
 			/* Attach image paste handler to report-bug & add-note forms */
-			$( '#bugnoteadd, #report_bug_form' ).bind( 'paste', function( event ) {
-				var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
-				for( index in items ) {
-					var item = items[index];
-					if( item.kind === 'file' ) {
-						zoneObj.addFile( item.getAsFile() )
+			$( '#bugnoteadd, #report_bug_form, #update_bug_form, #bug-change-status-form' )
+				.bind( 'paste', function( event ) {
+					var items = ( event.clipboardData || event.originalEvent.clipboardData ).items;
+					for( index in items ) {
+						var item = items[index];
+						if( item.kind === 'file' ) {
+							zoneObj.addFile( item.getAsFile() )
+						}
 					}
-				}
-			});
+				});
 		}
 	});
 

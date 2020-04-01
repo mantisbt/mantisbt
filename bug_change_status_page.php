@@ -81,6 +81,7 @@ $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
 $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->project_id );
 $t_resolution_fixed = config_get( 'bug_resolution_fixed_threshold', null, null, $t_bug->project_id );
+$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
@@ -94,6 +95,7 @@ if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
+$t_allow_file_upload = file_allow_bug_upload( $f_bug_id );
 
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
@@ -333,66 +335,17 @@ layout_page_begin();
 		printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
 	}
 ?>
-<?php
-	$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-	$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-	$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
-
-	if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'view_status' ) ?>
-				</th>
-				<td>
-<?php
-		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-?>
-			<input type="checkbox" id="bugnote_add_view_status" class="ace" name="private"
-				<?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-			<label class="lbl padding-6" for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
-<?php
-		} else {
-			echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
-		}
-?>
-				</td>
-			</tr>
-<?php } ?>
-			<!-- Bugnote -->
-			<tr id="bug-change-status-note">
-				<th class="category">
-					<?php echo lang_get( 'add_bugnote_title' ) ?>
-				</th>
-				<td>
-					<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>" cols="80" rows="7"></textarea>
-				</td>
-			</tr>
-<?php
-	if( config_get( 'time_tracking_enabled' )
-		&& access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id )
-		&& access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id )
-	) {
-	?>
-			<tr>
-				<th class="category">
-					<?php echo lang_get( 'time_tracking' ) ?>
-				</th>
-				<td>
-					<input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
-				</td>
-			</tr>
-
-<?php
-	}
-
-	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
-?>
-
 </tbody>
 </table>
 <input type="hidden" name="action_type" value="<?php echo string_attribute( $f_change_type ); ?>" />
-
 </div>
+
+<div class="space-6"></div>
+
+<?php print_bugnote_form_content_collapse( $f_bug_id ) ?>
+
+<div class="space-6"></div>
+
 </div>
 <div class="widget-toolbox padding-8 clearfix">
 	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>

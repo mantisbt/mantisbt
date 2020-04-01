@@ -141,6 +141,7 @@ if( NO_USER == $t_bug->handler_id ) {
 }
 
 $t_can_change_view_state = $t_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
+$t_allow_file_upload = file_allow_bug_upload( $t_bug_id );
 
 if( $t_show_product_version ) {
 	$t_product_version_released_mask = VERSION_RELEASED;
@@ -684,17 +685,21 @@ if( $t_show_additional_information ) {
 	echo '</td></tr>';
 }
 
-echo '<tr class="spacer"><td colspan="6"></td></tr>';
 echo '<tr class="hidden"></tr>';
 
 # Custom Fields
 $t_custom_fields_found = false;
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 
+$t_cf_row_spacer = false;
 foreach ( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 	if( ( $t_def['display_update'] || $t_def['require_update'] ) && custom_field_has_write_access( $t_id, $t_bug_id ) ) {
 		$t_custom_fields_found = true;
+		if( !$t_cf_row_spacer ) {
+			$t_cf_row_spacer = true;
+			echo '<tr class="spacer"><td colspan="6"></td></tr>';
+		}
 
 		$t_required_class = $t_def['require_update'] ? ' class="required" ' : '';
 
@@ -716,54 +721,22 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 } # foreach( $t_related_custom_field_ids as $t_id )
 
 if( $t_custom_fields_found ) {
-	# spacer
-	echo '<tr class="spacer"><td colspan="6"></td></tr>';
 	echo '<tr class="hidden"></tr>';
 }
+?>
+</table>
+</div>
 
-# Bugnote Text Box
-$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-$t_bugnote_private = $t_default_bugnote_view_status == VS_PRIVATE;
-$t_bugnote_class = $t_bugnote_private ? 'form-control bugnote-private' : 'form-control';
+<div class="space-6"></div>
 
-echo '<tr>';
-echo '<th class="category"><label for="bugnote_text">' . lang_get( 'add_bugnote_title' ) . '</label></th>';
-echo '<td colspan="5"><textarea ', helper_get_tab_index(), ' id="bugnote_text" name="bugnote_text" class="', $t_bugnote_class, '" cols="80" rows="7"></textarea></td></tr>';
+<?php print_bugnote_form_content_collapse( $f_bug_id ) ?>
 
-# Bugnote Private Checkbox (if permitted)
-if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id ) ) {
-	echo '<tr>';
-	echo '<th class="category">' . lang_get( 'private' ) . '</th>';
-	echo '<td colspan="5">';
+<div class="space-6"></div>
 
-	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $t_bug_id ) ) {
-		echo '<label>';
-		echo '<input ', helper_get_tab_index(), ' type="checkbox" class="ace" id="private" name="private" ', check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ), ' />';
-		echo '<span class="lbl"></span>';
-		echo '</label>';
-	} else {
-		echo get_enum_element( 'view_state', $t_default_bugnote_view_status );
-	}
+</div>
+</div>
 
-	echo '</td></tr>';
-}
-
-# Time Tracking (if permitted)
-if( config_get( 'time_tracking_enabled' ) ) {
-	if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
-		echo '<tr>';
-		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
-		echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
-	}
-}
-
-event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $t_bug_id ) );
-
-echo '</table>';
-echo '</div>';
-echo '</div>';
-echo '</div>';
-
+<?php
 # Submit Button
 if( $t_bottom_buttons_enabled ) {
 ?>
