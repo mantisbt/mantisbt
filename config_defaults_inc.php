@@ -2500,7 +2500,7 @@ $g_bug_view_page_fields = array(
 	'id',
 	'last_updated',
 	'os',
-	'os_version',
+	'os_build',
 	'platform',
 	'priority',
 	'product_build',
