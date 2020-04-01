@@ -233,7 +233,7 @@ function ldap_cache_user_data( $p_username ) {
 			'mail',
 			config_get_global( 'ldap_realname_field' )
 		),
-		config_get( 'ldap_cache_fields' )
+		config_get_global( 'ldap_cache_fields' )
 	);
 
 	log_event( LOG_LDAP, 'Searching for ' . $t_search_filter );

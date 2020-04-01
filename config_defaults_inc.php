@@ -4334,7 +4334,8 @@ $g_global_settings = array(
 	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool',
 	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
 	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
-	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email'
+	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email',
+	'ldap_cache_fields'
 );
 
 /**
@@ -4523,7 +4524,6 @@ $g_public_config_names = array(
 	'issue_activity_note_attachments_seconds_threshold',
 	'language_auto_map',
 	'language_choices_arr',
-	'ldap_cache_fields',
 	'limit_email_domains',
 	'limit_reporters',
 	'limit_view_unless_threshold',
