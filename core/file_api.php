@@ -893,10 +893,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		'filesize'    => $t_file_size,
 		'file_type'   => $p_file['type'],
 		'date_added'  => $p_date_added,
-		'user_id'     => (int)$p_user_id,
-		'bugnote_id'  => is_null( $p_bugnote_id ) ? null : (int)$p_bugnote_id
+		'user_id'     => (int)$p_user_id
 	);
-
+	if( 'bug' == $p_table ) {
+		$t_param['bugnote_id'] = is_null( $p_bugnote_id ) ? null : (int)$p_bugnote_id;
+	}
 	# Oracle has to update BLOBs separately
 	if( !db_is_oracle() ) {
 		$t_param['content'] = $c_content;
