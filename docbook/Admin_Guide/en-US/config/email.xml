@@ -202,7 +202,7 @@ $g_notify_flags['new'] = array(
 				</para>
 				<para>When ON (default), validation is performed using the
 					pattern given by the
-					<ulink url="http://www.w3.org/TR/html5/forms.html#valid-e-mail-address">
+					<ulink url="https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address">
 						HTML5 specification for <emphasis>email</emphasis>
 						type form input elements</ulink>.
 					When OFF, validation is disabled.
@@ -265,7 +265,7 @@ $g_notify_flags['new'] = array(
 			<listitem>
 				<para>Only allow and send email to addresses in the given domain(s).
 					This is useful as a security feature and it is also useful in cases
-					like Sourceforge where its servers are only limited to send emails
+					like Sourceforge where its servers are limited to only sending emails
 					to SourceForge email addresses in order to avoid
 					spam. $g_limit_email_domains =
 					array( 'users.sourceforge.net', 'sourceforge.net' );

@@ -71,7 +71,7 @@
 		<varlistentry>
 			<term>$g_create_short_url</term>
 			<listitem>
-				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default http://www.tinyurl service is used to shorten URLs.</para>
+				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default https://www.tinyurl service is used to shorten URLs.</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

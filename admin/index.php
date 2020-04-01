@@ -79,7 +79,7 @@ function print_info_row( $p_description, $p_value ) {
 			</td>
 		</tr>
 <?php
-	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
+	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version', 0,  ALL_USERS, ALL_PROJECTS ) );
 	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
 		<tr>

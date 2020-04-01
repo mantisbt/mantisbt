@@ -106,7 +106,7 @@
 			issues on RDBMS restricting the size of its identifiers, such as
 			Oracle (which imposed a maximum size of 30 characters until version
 			12.1; starting with 12cR2 this
-			<ulink url="http://docs.oracle.com/database/122/SQLRF/Database-Object-Names-and-Qualifiers.htm#SQLRF51129">
+			<ulink url="https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/Database-Object-Names-and-Qualifiers.html#GUID-75337742-67FD-4EC0-985F-741C93D918DA">
 				limit has been increased to 128</ulink>).
 		</para>
 	</warning>

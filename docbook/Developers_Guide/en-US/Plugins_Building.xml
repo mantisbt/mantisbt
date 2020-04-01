@@ -174,10 +174,10 @@ class ExamplePlugin extends MantisPlugin {
 						<para>Your plugin's version string.
 							<emphasis>Required value.</emphasis>
 							We recommend following the
-							<ulink url="http://semver.org/">Semantic Versioning</ulink>
+							<ulink url="https://semver.org/">Semantic Versioning</ulink>
 							specification, but you are free to use any
 							versioning scheme that can be handled by PHP's
-							<ulink url="http://php.net/manual/en/function.version-compare.php">
+							<ulink url="https://www.php.net/manual/en/function.version-compare.php">
 								version_compare()
 							</ulink> function.
 						</para>

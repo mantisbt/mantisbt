@@ -88,7 +88,7 @@ if( false == $t_result ) {
 
 # TODO: Enhance this check to support the mode where this script is called on an empty database.
 # check to see if the new installer was used
-if( -1 == config_get( 'database_version', -1 ) ) {
+if( -1 == config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) {
 		echo 'Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.';
 		exit( 1 );
 }
@@ -180,7 +180,7 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 
 	if( $t_ret == 2 ) {
 		print_test_result( GOOD );
-		config_set( 'database_version', $i );
+		config_set( 'database_version', $i, ALL_USERS, ALL_PROJECTS );
 	} else {
 		$t_msg = $t_sqlarray[0];
 		if( !is_blank( $g_db->ErrorMsg() ) ) {

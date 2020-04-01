@@ -93,7 +93,7 @@
 						<listitem>
 							<para>Protocol can be either
 								<filename>ldap</filename> or
-								<filename>ldaps</filename> (for SSL encryption).
+								<filename>ldaps</filename> (for SSL/TLS encryption).
 								If omitted, then an unencrypted connection will be established on port 389.
 							</para>
 						</listitem>

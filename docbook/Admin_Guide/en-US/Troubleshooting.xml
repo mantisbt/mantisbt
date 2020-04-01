@@ -11,9 +11,9 @@
 	</para>
 
 	<para>Useful additional reference information and support may also be
-	found on the <ulink url="http://www.mantisbt.org/">MantisBT website</ulink>,
-	more specifically the <ulink url="http://www.mantisbt.org/forums/">Forums</ulink>
-	and the <ulink url="http://www.mantisbt.org/bugs/">Bugtracker</ulink>.
+	found on the <ulink url="https://mantisbt.org/">MantisBT website</ulink>,
+	more specifically the <ulink url="https://mantisbt.org/forums/">Forums</ulink>
+	and the <ulink url="https://mantisbt.org/bugs/">Bugtracker</ulink>.
 	</para>
 
 	<section id="admin.troubleshooting.errors">
@@ -45,17 +45,17 @@
 				What happens is driven by several php.ini configuration settings:
 				<itemizedlist>
 					<listitem><para>The ratio
-						<ulink url="http://php.net/session.gc-probability">
+						<ulink url="https://www.php.net/session.gc-probability">
 							session.gc_probability</ulink>
 						divided by
-						<ulink url="http://php.net/session.gc-divisor">
+						<ulink url="https://www.php.net/session.gc-divisor">
 							session.gc_divisor</ulink>,
 						which determines the probability that the garbage collection process
 						will start when a session is initialized.
 						</para>
 					</listitem>
 					<listitem><para>
-						<ulink url="http://php.net/session.gc-maxlifetime">
+						<ulink url="https://www.php.net/session.gc-maxlifetime">
 							session.gc_maxlifetime</ulink> which specifies (as the name does not indicate)
 							the <emphasis>minimum</emphasis> validity of session data.
 						</para>
@@ -73,7 +73,7 @@
 			<para>As a workaround, the Administrator can
 				<itemizedlist>
 					<listitem><para>Increase the value of
-						<ulink url="http://php.net/session.gc-maxlifetime">session.gc_maxlifetime</ulink></para>
+						<ulink url="https://www.php.net/session.gc-maxlifetime">session.gc_maxlifetime</ulink></para>
 					</listitem>
 					<listitem><para>Set $g_form_security_validation = OFF.
 						<emphasis>Note that for security reasons, it is strongly recommended not to do this.</emphasis>
@@ -93,15 +93,15 @@
 				<itemizedlist>
 					<listitem>
 						<para>MantisBT issues
-						<ulink url="http://www.mantisbt.org/bugs/view.php?id=12381">12381</ulink>,
-						<ulink url="http://www.mantisbt.org/bugs/view.php?id=12492">12492</ulink>,
-						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13106">13106</ulink>,
-						<ulink url="http://www.mantisbt.org/bugs/view.php?id=13246">13246</ulink>
+						<ulink url="https://mantisbt.org/bugs/view.php?id=12381">12381</ulink>,
+						<ulink url="https://mantisbt.org/bugs/view.php?id=12492">12492</ulink>,
+						<ulink url="https://mantisbt.org/bugs/view.php?id=13106">13106</ulink>,
+						<ulink url="https://mantisbt.org/bugs/view.php?id=13246">13246</ulink>
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							<ulink url="https://www.mantisbt.org/forums/search.php?keywords=2800">MantisBT forums</ulink>
+							<ulink url="https://mantisbt.org/forums/search.php?keywords=2800">MantisBT forums</ulink>
 						</para>
 					</listitem>
 				</itemizedlist>

@@ -3085,7 +3085,7 @@ $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=' . FILTER_ACTION_PARSE_N
  * http://rubular.com/.
  * @global string $g_user_login_valid_regex
  */
-$g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
+$g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,18})?)$/i';
 
 /**
  * Default tag prefix used to filter the list of tags in
@@ -4331,7 +4331,10 @@ $g_global_settings = array(
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 	'cdn_enabled', 'public_config_names', 'email_login_enabled', 'email_ensure_unique',
-	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool'
+	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool',
+	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
+	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
+	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email'
 );
 
 /**
