@@ -196,6 +196,7 @@ function ldap_escape_string( $p_string ) {
  * Uses a single LDAP query to retrieve the following fields:
  * - email (mail)
  * - realname {@see $g_ldap_realname_field}
+ * + custom fields list {@see $g_ldap_cache_fields}
  *
  * @param string $p_username The username.
  *
