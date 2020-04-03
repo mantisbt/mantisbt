@@ -2156,7 +2156,7 @@ $g_ldap_simulation_file_path = '';
 /**
  * The LDAP fields of a user to be cached
  * @global array $g_ldap_cache_fields
-**/
+ */
 $g_ldap_cache_fields = array();
 
 ###################
