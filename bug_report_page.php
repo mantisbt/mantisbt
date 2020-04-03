@@ -215,7 +215,7 @@ $t_show_monitors = in_array( 'monitors', $t_fields )
 $t_show_profiles = config_get( 'enable_profiles' );
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
 $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
-$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
+$t_show_os_build = $t_show_profiles && in_array( 'os_build', $t_fields );
 $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_show_status = in_array( 'status', $t_fields );
 $t_show_tags =
@@ -377,7 +377,7 @@ if( $t_show_attachments ) {
 		</td>
 	</tr>
 <?php } ?>
-<?php if( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
+<?php if( $t_show_platform || $t_show_os || $t_show_os_build ) { ?>
 	<tr>
 		<th class="category">
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>

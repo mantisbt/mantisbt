@@ -118,7 +118,7 @@ $t_show_eta = in_array( 'eta', $t_fields ) && config_get( 'enable_eta' ) == ON;
 $t_show_profiles = config_get( 'enable_profiles' ) == ON;
 $t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
 $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
-$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
+$t_show_os_build = $t_show_profiles && in_array( 'os_build', $t_fields );
 $t_show_versions = version_should_show_product_version( $t_bug->project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
 $t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields ) && ( config_get( 'enable_product_build' ) == ON );
@@ -490,7 +490,7 @@ if( $t_show_projection || $t_show_eta ) {
 # Platform, OS, OS Version
 #
 
-if( $t_show_platform || $t_show_os || $t_show_os_version ) {
+if( $t_show_platform || $t_show_os || $t_show_os_build ) {
 	echo '<tr>';
 
 	$t_spacer = 0;
@@ -531,7 +531,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 		$t_spacer += 2;
 	}
 
-	if( $t_show_os_version ) {
+	if( $t_show_os_build ) {
 		# OS Version
 		echo '<th class="category"><label for="os_build">' . lang_get( 'os_version' ) . '</label></th>';
 		echo '<td>';
