@@ -235,8 +235,9 @@ ldaps://ldap.example.com:3269/
 				<term>$g_ldap_cache_fields</term>
 				<listitem>
 					<para>Choose which fields will be add to the cache for
-						a user from LDAP. $g_ldap_cache_fields =
-						array( 'mail', 'roomNumer' );
+						a user from LDAP. This fields can be used from
+						plugins. $g_ldap_cache_fields =
+						array( 'mobile', 'photo', 'roomNumer' );
 					</para>
 				</listitem>
 			</varlistentry>
