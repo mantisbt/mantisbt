@@ -2394,7 +2394,7 @@ $g_enable_product_build = OFF;
  *   - handler
  *   - monitors
  *   - os
- *   - os_version
+ *   - os_build
  *   - platform
  *   - priority
  *   - product_build
@@ -2431,7 +2431,7 @@ $g_bug_report_page_fields = array(
 	'due_date',
 	'handler',
 	'os',
-	'os_version',
+	'os_build',
 	'platform',
 	'priority',
 	'product_build',
@@ -2460,7 +2460,7 @@ $g_bug_report_page_fields = array(
  *   - id
  *   - last_updated
  *   - os
- *   - os_version
+ *   - os_build
  *   - platform
  *   - priority
  *   - product_build
@@ -2534,7 +2534,7 @@ $g_bug_view_page_fields = array(
  *   - id
  *   - last_updated
  *   - os
- *   - os_version
+ *   - os_build
  *   - platform
  *   - priority
  *   - product_build
@@ -2572,7 +2572,7 @@ $g_bug_update_page_fields = array(
 	'id',
 	'last_updated',
 	'os',
-	'os_version',
+	'os_build',
 	'platform',
 	'priority',
 	'product_build',
