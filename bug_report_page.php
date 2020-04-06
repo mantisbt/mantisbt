@@ -420,7 +420,7 @@ if( $t_show_attachments ) {
 				</tr>
 				<tr>
 					<th class="category">
-						<label for="os_build"><?php echo lang_get( 'os_version' ) ?></label>
+						<label for="os_build"><?php echo lang_get( 'os_build' ) ?></label>
 					</th>
 					<td>
 						<?php

@@ -2583,7 +2583,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 				'os_filter_target' /* content id */
 				));
 		$t_row3->add_item( new TableFieldsItem(
-				$get_field_header( 'os_build_filter', lang_get( 'os_version' ) ),
+				$get_field_header( 'os_build_filter', lang_get( 'os_build' ) ),
 				filter_form_get_input( $t_filter, 'os_build', $t_show_inputs ),
 				1 /* colspan */,
 				null /* class */,

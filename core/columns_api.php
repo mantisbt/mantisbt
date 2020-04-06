@@ -425,7 +425,7 @@ function column_get_title( $p_column ) {
 		case 'last_updated':
 			return lang_get( 'updated' );
 		case 'os_build':
-			return lang_get( 'os_version' );
+			return lang_get( 'os_build' );
 		case 'project_id':
 			return lang_get( 'email_project' );
 		case 'reporter_id':
@@ -762,7 +762,7 @@ function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
  */
 function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-os-build">';
-	print_view_bug_sort_link( lang_get( 'os_version' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
+	print_view_bug_sort_link( lang_get( 'os_build' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'os_build' );
 	echo '</th>';
 }

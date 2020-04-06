@@ -533,7 +533,7 @@ if( $t_show_platform || $t_show_os || $t_show_os_build ) {
 
 	if( $t_show_os_build ) {
 		# OS Version
-		echo '<th class="category"><label for="os_build">' . lang_get( 'os_version' ) . '</label></th>';
+		echo '<th class="category"><label for="os_build">' . lang_get( 'os_build' ) . '</label></th>';
 		echo '<td>';
 
 		if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
