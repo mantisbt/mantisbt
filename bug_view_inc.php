@@ -446,8 +446,8 @@ if( ( $t_flags['profiles_platform_show'] && isset( $t_issue['platform'] ) && !is
 
 	# OS Version
 	if( $t_flags['profiles_os_build_show'] && isset( $t_issue['os_build'] ) && !is_blank( $t_issue['os_build'] ) ) {
-		echo '<th class="bug-os-version category">', lang_get( 'os_build' ), '</th>';
-		echo '<td class="bug-os-version">', string_display_line( $t_issue['os_build'] ), '</td>';
+		echo '<th class="bug-os-build category">', lang_get( 'os_build' ), '</th>';
+		echo '<td class="bug-os-build">', string_display_line( $t_issue['os_build'] ), '</td>';
 	} else {
 		$t_spacer += 2;
 	}
