@@ -115,7 +115,7 @@ if( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr>
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'os_build' ) ?>
 	</th>
 	<td>
 		<input type="text" name="os_build" class="input-sm" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" required />
