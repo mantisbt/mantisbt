@@ -577,7 +577,7 @@ function history_localize_field_name( $p_field_name ) {
 			$t_field_localized = lang_get( 'os' );
 			break;
 		case 'os_build':
-			$t_field_localized = lang_get( 'os_version' );
+			$t_field_localized = lang_get( 'os_build' );
 			break;
 		case 'build':
 			$t_field_localized = lang_get( 'build' );

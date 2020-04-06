@@ -127,7 +127,7 @@ if( $g_global_profiles ) {
 			</tr>
 			<tr>
 				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'os_version' ) ?>
+					<span class="required">*</span> <?php echo lang_get( 'os_build' ) ?>
 				</td>
 				<td>
 					<input id="os-version" type="text" name="os_build" class="input-sm" size="16" maxlength="16" required />
