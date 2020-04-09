@@ -679,6 +679,7 @@ $s_set_configuration_option_action_create = 'Criar Opção de Configuração';
 $s_set_configuration_option_action_edit = 'Editar Opção de Configuração';
 $s_set_configuration_option_action_clone = 'Clonar Opção de Configuração';
 $s_set_configuration_option_action_view = 'Ver opção de configuração';
+$s_show_all_complex = 'Mostrar valor para todas as opções "%1$s"';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins Instalados';
 $s_plugins_available = 'Plugins Disponíveis';
