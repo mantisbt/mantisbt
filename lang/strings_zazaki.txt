@@ -319,6 +319,7 @@ $s_status_level = 'Weziyet';
 $s_configuration_option_value = 'Erc';
 $s_plugin = 'Oleken';
 $s_plugin_description = 'Şınasnayış';
+$s_plugin_url = 'Keyepele:';
 $s_plugin_priority = 'Sıfteyıniye';
 $s_plugin_protected = 'Şeveknaye';
 $s_plugin_actions = 'Kerdışi';

@@ -48,6 +48,7 @@
  * @author Nghtwlkr
  * @author Sannab
  * @author Skalman
+ * @author Technic2
  * @author Thosjo
  * @author Tor.klingberg
  * @author Umeaboy
@@ -654,6 +655,7 @@ $s_resolved_status = 'Status där ett ärende betraktas som löst';
 $s_readonly_status = 'Status där ett ärende blir skrivskyddat';
 $s_reopen_status = 'Status att sätta ett återöppnat ärende till';
 $s_reopen_resolution = 'Lösning som ett återöppnat ärende sätts till';
+$s_limit_view_unless_threshold_option = 'Visa andra användares rapporter (om inte inställt kommer åtkomsten att begränsas till rapporter rapporterade, hanterade eller visade av användaren)';
 $s_config_delete_sure = 'Är du säker på att du vill ta bort inställningarna för:';
 $s_in_project = 'i projektet';
 $s_delete_config_button = 'Ta bort inställningar';
@@ -670,6 +672,7 @@ $s_set_configuration_option_action_create = 'Skapa konfigurationsalternativ';
 $s_set_configuration_option_action_edit = 'Redigera konfigurationsalternativ';
 $s_set_configuration_option_action_clone = 'Klona konfigurationsalternativ';
 $s_set_configuration_option_action_view = 'Visa konfigurationsalternativ';
+$s_show_all_complex = 'Visa värde för alla "%1$s"-alternativ';
 $s_plugin = 'Insticksprogram';
 $s_plugins_installed = 'Installerade insticksprogram';
 $s_plugins_available = 'Tillgängliga insticksprogram';
@@ -990,6 +993,8 @@ $s_move_bug_button = 'Flytta';
 $s_attached_files = 'Bifogade filer';
 $s_publish = 'Publicera';
 $s_add_user_to_monitor = 'Lägg till';
+$s_browser_does_not_support_audio = 'Din webbläsare stödjer inte ljud-taggen.';
+$s_browser_does_not_support_video = 'Din webbläsare stödjer inte video-taggen.';
 $s_bug_view_title = 'Visa problemdetaljer';
 $s_no_users_monitoring_bug = 'Inga användare bevakar detta ärende.';
 $s_users_monitoring_bug = 'Användare som bevakar detta ärende';
@@ -1115,6 +1120,8 @@ $s_update_issue_status = 'Uppdatera ett ärendes status';
 $s_set_view_status = 'Ange visningsstatus när du rapporterar en ny fråga eller anteckning';
 $s_update_view_status = 'Ändra visningsstatus av befintliga frågor eller anteckningar';
 $s_show_list_of_users_monitoring_issue = 'Visa användare som bevakar ett ärende';
+$s_add_users_monitoring_issue = 'Lägg till visare till en rapport';
+$s_remove_users_monitoring_issue = 'Ta bort visare från en rapport';
 $s_notes = 'Meddelanden';
 $s_add_notes = 'Lägg till meddelanden';
 $s_view_private_notes = 'Visa andras privata anteckningar';
@@ -1158,8 +1165,14 @@ $s_email_on_deleted = 'E-post vid borttagning';
 $s_email_on_sponsorship_changed = 'E-post vid ändring av sponsorskap';
 $s_email_on_relationship_changed = 'E-post vid ändring av förhållande';
 $s_email_on_updated = 'E-post vid uppdatering';
+$s_email_on_monitor = 'Skicka e-post när användaren börjar visa';
+$s_view_tags = 'Visa taggar tillagda till en bugg';
 $s_attach_tags = 'Bifoga taggar till en bugg';
+$s_detach_tags = 'Ta bort taggar från en bygg';
+$s_detach_own_tags = 'Ta bort taggar tillagda av samma användare';
 $s_create_new_tags = 'Skapa nya taggar';
+$s_edit_tags = 'Redigera taggnamn och beskrivningar';
+$s_edit_own_tags = 'Redigera taggar skapade av samma användare';
 $s_loading = 'Laddar...';
 $s_between_date = 'Mellan';
 $s_on_or_before_date = 'Till och med';
@@ -1234,6 +1247,8 @@ $s_copy_columns_to = 'Kopiera kolumner till';
 $s_due_date = 'Skall vara klar vid datum';
 $s_overdue = 'Är försenad';
 $s_overdue_since = 'Förfallen sedan %1$s';
+$s_overdue_one_day = 'Försenat i mindre än en dag';
+$s_overdue_days = 'Försenat om %1$d dagar';
 $s_view_account_title = 'Användarinformation';
 $s_manage_user = 'Hantera användare';
 $s_word_separator = '&#32;';
