@@ -251,7 +251,8 @@ class IssueViewPageCommand extends Command {
 		$t_flags['can_close'] = !$t_issue_readonly &&
 			access_can_close_bug( $t_issue_data ) && bug_check_workflow( $t_issue_data->status, $t_closed_status );
 
-		$t_flags['can_move'] = !$t_issue_readonly && access_has_bug_level( config_get( 'move_bug_threshold' ), $t_issue_id );
+		$t_flags['can_move'] = !$t_issue_readonly && user_has_more_than_one_project( $t_user_id ) &&
+			access_has_bug_level( config_get( 'move_bug_threshold' ), $t_issue_id );
 		$t_flags['can_delete'] = !$t_issue_readonly && access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_issue_id );
 
 		if( $t_force_readonly ) {
