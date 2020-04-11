@@ -2,6 +2,7 @@
     "schedule": "daily",
     "ignoredFiles": [
         "css/images/*",
+        "fonts/*",
     ],
     "aggressiveCompression": "false"
 }
