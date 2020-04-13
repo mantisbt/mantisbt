@@ -95,6 +95,22 @@ check_print_test_row( 'Default move category must exists ("default_category_for_
 	array( false => 'Issues moved may end up with invalid category id.' )
 );
 
+$t_field_options = array(
+	'bug_report_page_fields',
+	'bug_view_page_fields',
+	'bug_update_page_fields'
+);
+
+foreach( $t_field_options as $t_field_option ) {
+	$t_fields = config_get( $t_field_option, null, ALL_USERS, ALL_PROJECTS );
+	check_print_test_warn_row(
+		$t_field_option . ' configuration option does not contain "os_version"',
+		!in_array ( 'os_version', $t_fields ),
+		array( false => 'You need to replace "os_version" by "os_build" for the ' . $t_field_option . ' configuration option '
+			. '(see issue <a href="https://mantisbt.org/bugs/view.php?id=26840">#26840</a>).')
+	);
+}
+
 # Deprecated Settings
 check_print_test_warn_row( 'Deprecated "limit_reporters" setting should no longer be used',
 	$g_limit_reporters == OFF,
