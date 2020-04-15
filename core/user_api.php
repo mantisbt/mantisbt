@@ -1758,7 +1758,7 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		if( $p_send_email ) {
 			$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
 			token_set( TOKEN_ACCOUNT_ACTIVATION, $t_confirm_hash, TOKEN_EXPIRY_ACCOUNT_ACTIVATION, $p_user_id );
-			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
+			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash, true );
 		}
 	} else {
 		# use blank password, no emailing
