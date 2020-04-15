@@ -1282,6 +1282,12 @@ $g_cookie_time_length = 60 * 60 * 24 * 365;
 $g_allow_permanent_cookie = ON;
 
 /**
+ * Makes the MANTIS_collapse_settings cookie a session cookie
+ * @global integer $g_collapse_settings_session_cookie
+ */
+$g_collapse_settings_session_cookie = OFF;
+
+/**
  * The time (in seconds) to allow for page execution during long processes
  *  such as upgrading your database.
  * The default value of 0 indicates that the page should be allowed to
