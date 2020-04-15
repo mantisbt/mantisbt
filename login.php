@@ -74,9 +74,12 @@ if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 } else {
 	$t_query_args = array(
 		'error' => 1,
-		'username' => $f_username,
 		'return' => $t_return,
 	);
+
+	if (config_get_global('remember_username') == ON){
+		$t_query_args['username'] = $f_username;
+	}
 
 	if( $f_reauthenticate ) {
 		$t_query_args['reauthenticate'] = 1;
