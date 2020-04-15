@@ -34,6 +34,13 @@ use Mantis\Exceptions\ClientException;
  */
 class UserResetPasswordCommand extends Command {
 	/**
+	 * Constants for execute() method's return value.
+	 */
+	const RESULT_FAILURE = 0;
+	const RESULT_RESET = 1;
+	const RESULT_UNLOCK = 2;
+
+	/**
 	 * @var integer The id of the user to delete.
 	 */
 	private $user_id_reset;
@@ -90,13 +97,15 @@ class UserResetPasswordCommand extends Command {
 	protected function process() {
 		# If the password can be changed, we reset it, otherwise we unlock
 		# the account (i.e. reset failed login count)
-		$t_reset = auth_can_set_password( $this->user_id_reset );
-		if( $t_reset ) {
-			$t_result = user_reset_password( $this->user_id_reset );
+		if( auth_can_set_password( $this->user_id_reset ) ) {
+			$t_result = user_reset_password( $this->user_id_reset )
+				? self::RESULT_RESET
+				: self::RESULT_FAILURE; # Shouldn't we throw an exception in this case ?
 		} else {
-			$t_result = user_reset_failed_login_count_to_zero( $this->user_id_reset );
+			user_reset_failed_login_count_to_zero( $this->user_id_reset );
+			$t_result = self::RESULT_UNLOCK;
 		}
-		return array();
+
+		return array( 'result' =>  $t_result );
 	}
 }
-
