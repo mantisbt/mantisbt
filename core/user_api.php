@@ -1719,12 +1719,11 @@ function user_set_name( $p_user_id, $p_username ) {
  *   - if it is ON, generate a random password and send an email
  *      (unless the second parameter is false)
  *   - if it is OFF, set the password to blank
- *  Return false if the user is protected, true if the password was
- *   successfully reset
  *
  * @param integer $p_user_id    A valid user identifier.
  * @param boolean $p_send_email Whether to send confirmation email.
- * @return boolean
+ * @return boolean True if the password was successfully reset
+ *                 False if the user is protected.
  * @throws ClientException
  */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
