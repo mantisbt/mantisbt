@@ -541,12 +541,16 @@ function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 }
 
 /**
- * Send confirm_hash URL to user forgets the password
- * @param integer $p_user_id      A valid user identifier.
- * @param string  $p_confirm_hash Confirmation hash.
+ * Send confirm_hash URL to let user reset their password.
+ *
+ * @param integer $p_user_id        A valid user identifier.
+ * @param string  $p_confirm_hash   Confirmation hash.
+ * @param bool    $p_reset_by_admin True if password was reset by admin,
+ *                                  False (default) for user request (lost password)
+ *
  * @return void
  */
-function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
+function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash, $p_reset_by_admin = false ) {
 	if( OFF == config_get( 'send_reset_password' ) ) {
 		log_event( LOG_EMAIL_VERBOSE, 'Password reset email notifications disabled.' );
 		return;
@@ -567,7 +571,16 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
-	$t_message = lang_get( 'reset_request_msg' ) . " \n\n" . string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" . lang_get( 'new_account_username' ) . ' ' . $t_username . " \n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . " \n\n" . lang_get( 'new_account_do_not_reply' );
+	if( $p_reset_by_admin ) {
+		$t_message = lang_get( 'reset_request_admin_msg' );
+	} else {
+		$t_message = lang_get( 'reset_request_msg' );
+	}
+	$t_message .= "\n\n"
+		. string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n"
+		. lang_get( 'new_account_username' ) . ' ' . $t_username . "\n"
+		. lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . "\n\n"
+		. lang_get( 'new_account_do_not_reply' );
 
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
