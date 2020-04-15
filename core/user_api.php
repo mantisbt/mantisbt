@@ -1727,13 +1727,11 @@ function user_set_name( $p_user_id, $p_username ) {
  * @throws ClientException
  */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
-	$t_protected = user_get_field( $p_user_id, 'protected' );
-
-	# Go with random password and email it to the user
-	if( ON == $t_protected ) {
+	if( user_is_protected( $p_user_id ) ) {
 		return false;
 	}
 
+	# Go with random password and email it to the user
 	# @@@ do we want to force blank password instead of random if
 	#      email notifications are turned off?
 	#     How would we indicate that we had done this with a return value?
