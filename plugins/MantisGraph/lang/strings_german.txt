@@ -48,7 +48,7 @@
 $s_plugin_MantisGraph_title = 'MantisBT-Grafiken';
 $s_plugin_MantisGraph_description = 'Offizielles Grafik-Plugin.';
 $s_plugin_MantisGraph_config = 'Konfiguration';
-$s_plugin_MantisGraph_tab_label = 'MantisBT-Grafiken';
+$s_plugin_MantisGraph_tab_label = 'Diagramme';
 $s_plugin_MantisGraph_status_link = 'Nach Status';
 $s_plugin_MantisGraph_priority_link = 'Nach Priorität';
 $s_plugin_MantisGraph_severity_link = 'Nach Schweregrad';
