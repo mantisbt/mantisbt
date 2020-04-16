@@ -107,7 +107,13 @@ function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Res
 	);
 
 	$t_command = new UserResetPasswordCommand( $t_data );
-	$t_command->execute();
+	$t_result = $t_command->execute();
+
+	if( $t_result['result'] == UserResetPasswordCommand::RESULT_FAILURE ) {
+		return $p_response
+			->withStatus( HTTP_STATUS_FORBIDDEN )
+			->withJson( array( 'message' => "Cannot reset a protected user's password") );
+	}
 
 	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
