@@ -208,7 +208,7 @@ $s_status = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
-$s_os_version = 'J\'ai ajouté - de l\'OS- à l\'ancienne traduction car plusieurs champs version existent :
+$s_os_build = 'J\'ai ajouté - de l\'OS- à l\'ancienne traduction car plusieurs champs version existent :
 "Product Version", "Fixed in Version", "Target Version"';
 $s_build = '{{Identical|Build}}';
 $s_votes = '{{Identical|Vote}}';
