@@ -936,3 +936,39 @@ function project_format_id( $p_project_id ) {
 	$t_padding = config_get( 'display_project_padding' );
 	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 }
+
+
+/**
+ * Returns the project name as a link formatted for display in menus and buttons.
+ *
+ * The link is formatted as a link to set_project.php, which can be used to
+ * display project selection menus:
+ * - projects list in navbar {@see layout_navbar_projects_menu()}
+ * - project menu bar {@see print_project_menu_bar()}
+ *
+ * @param integer $p_project_id Project Id to display
+ * @param bool    $p_active     True if it's the currently active project
+ * @param string  $p_class      CSS classes to apply
+ * @param array   $p_parents    Array of parent projects (empty if top-level)
+ * @param string  $p_indent     String to use to indent the subprojects
+ *
+ * @return string Fully formatted HTML link to the project
+ */
+function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '', array $p_parents = array(), $p_indent = '' ) {
+	if( $p_parents ) {
+		$t_full_id = implode( ";", $p_parents ) . ';' . $p_project_id;
+		$t_indent = str_repeat( $p_indent, count( $p_parents ) ) . '&nbsp;';
+	} else {
+		$t_full_id = $p_project_id;
+		$t_indent = '';
+	}
+
+	$t_url = helper_mantis_url( 'set_project.php?project_id=' . $t_full_id );
+	$t_label = $t_indent . string_html_specialchars( project_get_name( $p_project_id ) );
+
+	if( $p_active ) {
+		$p_class .= ' active';
+	}
+
+	return sprintf('<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
+}

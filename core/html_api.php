@@ -520,24 +520,31 @@ function html_end() {
 
 /**
  * Print the menu bar with a list of projects to which the user has access
+ *
+ * @see $g_show_project_menu_bar
+ *
  * @return void
  */
 function print_project_menu_bar() {
 	$t_project_ids = current_user_get_accessible_projects();
 	$t_current_project_id = helper_get_current_project();
+	$t_button_classes = 'btn btn-xs btn-white btn-info';
 
 	echo '<div class="col-md-12 col-xs-12">' . "\n";
 	echo '<div class="btn-group">' . "\n";
 
-	$t_active = ALL_PROJECTS == $t_current_project_id ? 'active' : '';
-	echo '<a class="btn btn-xs btn-white btn-info ' . $t_active .
-		'" href="' . helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ) . '">', lang_get( 'all_projects' ), '</a>' . "\n";
-
+	echo project_link_for_menu(
+			ALL_PROJECTS,
+			$t_current_project_id == ALL_PROJECTS,
+			$t_button_classes
+		);
 	foreach( $t_project_ids as $t_id ) {
-		$t_active = $t_id == $t_current_project_id ? 'active' : '';
-		echo '<a class="btn btn-xs btn-white btn-info ' . $t_active .
-			'" href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . '">', string_html_specialchars( project_get_field( $t_id, 'name' ) ), '</a>' . "\n";
-		print_subproject_menu_bar( $t_current_project_id, $t_id, $t_id . ';' );
+		echo project_link_for_menu(
+				$t_id,
+				$t_current_project_id == $t_id,
+				$t_button_classes
+			);
+		print_subproject_menu_bar( $t_current_project_id, $t_id, array( $t_id ) );
 	}
 
 	echo '</div>' . "\n";
@@ -546,25 +553,32 @@ function print_project_menu_bar() {
 }
 
 /**
- * Print the menu bar with a list of projects to which the user has access
- * @todo check parents param - set_project.php?project_id=' . $p_parents . $t_subproject
+ * Print the menu bar with a list of subprojects to which the user has access
+ *
  * @param integer $p_current_project_id Selected project id.
- * @param integer $p_parent_project_id Parent project id.
- * @param string  $p_parents    Parent project identifiers.
+ * @param integer $p_parent_project_id  Parent project id.
+ * @param array   $p_parents            Parent project identifiers.
+ *
  * @return void
  */
-function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id, $p_parents = '' ) {
+function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id, array $p_parents = array() ) {
 	$t_subprojects = current_user_get_accessible_subprojects( $p_parent_project_id );
 
 	foreach( $t_subprojects as $t_subproject_id ) {
-		$t_active = $p_current_project_id == $t_subproject_id ? 'active' : '';
-		echo '<a class="btn btn-xs btn-white btn-default ' . $t_active .
-			'" href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject_id ) .
-			'"><i class="ace-icon fa fa-angle-double-right"></i> ' .
-			string_html_specialchars( project_get_field( $t_subproject_id, 'name' ) ) . '</a>';
+		echo project_link_for_menu(
+				$t_subproject_id,
+				$t_subproject_id == $p_current_project_id,
+				'btn btn-xs btn-white btn-info',
+				$p_parents,
+				'<i class="ace-icon fa fa-angle-double-right"></i>'
+			);
 
-		# Render this subproject's subprojects ... passing current project id to highlight selected project
-		print_subproject_menu_bar( $p_current_project_id, $t_subproject_id, $p_parents . $t_subproject_id . ';' );
+		# Recursive call to render this subproject's subprojects
+		print_subproject_menu_bar(
+			$p_current_project_id,
+			$t_subproject_id,
+			array_merge( $p_parents, array( $t_subproject_id) )
+		);
 	}
 }
 
