@@ -73,7 +73,7 @@ function rest_config_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_
 			return $p_response->withStatus( HTTP_STATUS_FORBIDDEN, 'Admin access required to get configs for other users' );
 		}
 
-		if( $t_user_id != ALL_USERS && user_exists( $t_user_id ) ) {
+		if( $t_user_id != ALL_USERS && !user_exists( $t_user_id ) ) {
 			return $p_response->withStatus( HTTP_STATUS_NOT_FOUND, "User with id '$t_user_id' not found" );
 		}
 	}
