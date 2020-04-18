@@ -538,12 +538,14 @@ function print_project_menu_bar() {
 			$t_current_project_id == ALL_PROJECTS,
 			$t_button_classes
 		);
+	echo "\n";
 	foreach( $t_project_ids as $t_id ) {
 		echo project_link_for_menu(
 				$t_id,
 				$t_current_project_id == $t_id,
 				$t_button_classes
 			);
+		echo "\n";
 		print_subproject_menu_bar( $t_current_project_id, $t_id, array( $t_id ) );
 	}
 
@@ -572,6 +574,7 @@ function print_subproject_menu_bar( $p_current_project_id, $p_parent_project_id,
 				$p_parents,
 				'<i class="ace-icon fa fa-angle-double-right"></i>'
 			);
+		echo "\n";
 
 		# Recursive call to render this subproject's subprojects
 		print_subproject_menu_bar(

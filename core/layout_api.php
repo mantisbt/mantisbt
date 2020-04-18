@@ -515,7 +515,7 @@ function layout_navbar_projects_menu() {
 	if( !layout_navbar_can_show_projects_menu() ) {
 		return;
 	}
-	echo '<li class="grey" id="dropdown_projects_menu">' . "\n";
+	echo "\n" . '<li class="grey" id="dropdown_projects_menu">' . "\n";
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
 	$t_current_project_id = helper_get_current_project();
@@ -594,11 +594,13 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 	echo '<div class="projects-searchbox">';
 	echo '<input class="search form-control input-md" placeholder="' . lang_get( 'search' ) . '" />';
 	echo '</div>';
-	echo '</li>';
+	echo "</li>\n";
+
 	echo '<li class="divider"></li>' . "\n";
+
 	echo '<li>';
-	echo '<div class="scrollable-menu">';
-	echo '<ul class="list dropdown-yellow no-margin">';
+	echo '<div class="scrollable-menu">' . "\n";
+	echo '<ul class="list dropdown-yellow no-margin">' . "\n";
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<li>';
@@ -614,9 +616,9 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 	}
 
-	echo '</ul>';
-	echo '</div>';
-	echo '</li>';
+	echo "</ul>\n";
+	echo "</div>\n";
+	echo "</li>\n";
 }
 
 /**
