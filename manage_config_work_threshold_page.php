@@ -427,6 +427,16 @@ get_capability_row( lang_get( 'edit_tags' ), 'tag_edit_threshold' );
 get_capability_row( lang_get( 'edit_own_tags' ), 'tag_edit_own_threshold' );
 get_section_end();
 
+# Attachments
+if( config_get( 'allow_file_upload' ) == ON ) {
+	get_section_begin_mcwt( lang_get( 'attachments' ) );
+	get_capability_row( lang_get( 'view_list_of_attachments' ), 'view_attachments_threshold' );
+	get_capability_row( lang_get( 'download_attachments' ), 'download_attachments_threshold' );
+	get_capability_row( lang_get( 'delete_attachments' ), 'delete_attachments_threshold' );
+	get_capability_row( lang_get( 'upload_issue_attachments' ), 'upload_bug_file_threshold' );
+	get_section_end();
+}
+
 # Others
 get_section_begin_mcwt( lang_get( 'others' ) );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), 'view_changelog_threshold' );
