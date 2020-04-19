@@ -221,6 +221,14 @@ set_capability_row( 'tag_create_threshold' );
 set_capability_row( 'tag_edit_threshold' );
 set_capability_row( 'tag_edit_own_threshold' );
 
+# Attachments
+if( config_get( 'allow_file_upload' ) == ON ) {
+	set_capability_row( 'view_attachments_threshold' );
+	set_capability_row( 'download_attachments_threshold' );
+	set_capability_row( 'delete_attachments_threshold' );
+	set_capability_row( 'upload_bug_file_threshold' );
+}
+
 # Others
 set_capability_row( 'view_changelog_threshold' );
 set_capability_row( 'roadmap_view_threshold' );
