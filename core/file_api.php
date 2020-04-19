@@ -372,14 +372,26 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
+	$t_attachments_view_threshold = config_get( 'view_attachments_threshold' );
 
 	$t_image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
 		$t_row = $t_attachment_rows[$i];
 		$t_user_id = (int)$t_row['user_id'];
 
+		# This covers access checks for issue attachments
 		if( !file_can_view_bug_attachments( $p_bug_id, $t_user_id ) ) {
 			continue;
+		}
+
+		# This covers access checks for issue note attachments
+		$t_attachment_note_id = (int)$t_row['bugnote_id'];
+		if( $t_attachment_note_id !== 0 ) {
+			if( bugnote_get_field( $t_attachment_note_id, 'view_state' ) != VS_PUBLIC ) {
+				if( !access_has_bugnote_level( $t_attachments_view_threshold, $t_attachment_note_id ) ) {
+					continue;
+				}
+			}
 		}
 
 		$t_id = (int)$t_row['id'];
