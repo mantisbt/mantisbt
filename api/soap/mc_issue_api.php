@@ -501,9 +501,10 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  * Get the attachments of an issue.
  *
  * @param integer $p_issue_id The id of the issue to retrieve the attachments for.
+ * @param integer $p_note_id 0 for issue attachments, an id for note attachments, null for all
  * @return array that represents an AttachmentData structure
  */
-function mci_issue_get_attachments( $p_issue_id ) {
+function mci_issue_get_attachments( $p_issue_id, $p_note_id = null ) {
 	$t_attachment_rows = file_get_visible_attachments( $p_issue_id );
 	if( $t_attachment_rows == null ) {
 		return array();
@@ -511,6 +512,11 @@ function mci_issue_get_attachments( $p_issue_id ) {
 
 	$t_result = array();
 	foreach( $t_attachment_rows as $t_attachment_row ) {
+		# Filter out attachments that are not requested by caller
+		if( !is_null( $p_note_id ) && (int)$t_attachment_row['bugnote_id'] != (int)$p_note_id ) {
+			continue;
+		}
+
 		$t_attachment = array();
 		$t_attachment['id'] = (int)$t_attachment_row['id'];
 
@@ -636,6 +642,8 @@ function mci_issue_note_data_as_array( $p_bugnote_row ) {
 		$t_bugnote['date_submitted'] = $t_created_at;
 		$t_bugnote['last_modified'] = $t_modified_at;
 	} else {
+		$t_bugnote['attachments'] = mci_issue_get_attachments( $p_bugnote_row->bug_id, $p_bugnote_row->id );
+
 		switch( $p_bugnote_row->note_type ) {
 			case REMINDER:
 				$t_type = 'reminder';
@@ -1685,7 +1693,7 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	}
 
 	# Get attachments - access checked as part of returning attachments
-	$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
+	$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id, /* note_id */ 0 );
 
 	# Get notes - access checked as part of returning notes.
 	$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
