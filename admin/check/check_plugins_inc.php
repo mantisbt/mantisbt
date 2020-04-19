@@ -89,25 +89,38 @@ $t_invalid_plugins = array_filter(
 	function( $p ) { return $p instanceof InvalidPlugin; }
 );
 foreach( $t_invalid_plugins as $t_plugin ) {
-	if( $t_plugin instanceof MissingPlugin ) {
-		check_print_test_row(
-			"'$t_plugin->name': $t_plugin->description",
-			false,
-			array(
-				false => "The plugin is installed in the Mantis database, but could not be loaded; "
-					. sprintf( $t_manage_plugins_link, '#invalid', 'remove the Plugin' )
-					. " or reinstall its source code."
-			)
-		);
-	} else {
-		$t_msg = "Contact the Plugin's author.";
-		if( $t_plugin instanceof MissingClassPlugin ) {
-			$t_msg = "Rename the Plugin's directory or " . $t_msg;
-		}
-		check_print_test_row(
-			"'$t_plugin->name': $t_plugin->description",
-			false,
-			array( false => $t_msg )
-		);
+	$t_description = "'$t_plugin->name': $t_plugin->description";
+	$t_msg_contact = "Contact the Plugin's author.";
+
+	switch( get_class( $t_plugin ) ) {
+		case 'MissingPlugin':
+			check_print_test_row(
+				$t_description,
+				false,
+				array(
+					false => "The plugin is installed in the Mantis database, but could not be loaded; "
+						. sprintf( $t_manage_plugins_link, '#invalid', 'remove the Plugin' )
+						. " or reinstall its source code."
+				)
+			);
+			break;
+		case 'MissingClassPlugin':
+			# Issue a warning instead of a failure, to cover the case of a directory
+			# created under plugins/ for other purposes than storing a plugin.
+			# https://github.com/mantisbt/mantisbt/pull/1565#discussion_r329311260
+			check_print_test_warn_row(
+				$t_description,
+				false,
+				array(
+					false => "Rename the Plugin's directory or " . $t_msg_contact
+				)
+			);
+			break;
+		default:
+			check_print_test_row(
+				$t_description,
+				false,
+				array( false => $t_msg_contact )
+			);
 	}
 }
