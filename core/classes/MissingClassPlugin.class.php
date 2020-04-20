@@ -34,6 +34,8 @@
 final class MissingClassPlugin extends InvalidPlugin {
 	function register() {
 		$this->name = $this->basename;
-		$this->description = lang_get( 'plugin_missing_class_description' );
+		$this->description = lang_get( 'plugin_missing_class_description' )
+			. '<br>'
+			. lang_get( 'plugin_missing_class_description_details' );
 	}
 }
