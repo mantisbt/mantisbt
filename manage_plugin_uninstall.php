@@ -59,14 +59,15 @@ plugin_register_installed();
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
-if(    $t_plugin instanceof MissingPlugin
-	|| $t_plugin instanceof MissingClassPlugin
-) {
-	$t_message = 'plugin_remove_message';
-	$t_button = 'remove_link';
-} else {
-	$t_message = 'plugin_uninstall_message';
-	$t_button = 'plugin_uninstall';
+switch( $t_plugin->status ) {
+	case MantisPlugin::STATUS_MISSING_PLUGIN:
+	case MantisPlugin::STATUS_MISSING_BASE_CLASS:
+		$t_message = 'plugin_remove_message';
+		$t_button = 'remove_link';
+		break;
+	default:
+		$t_message = 'plugin_uninstall_message';
+		$t_button = 'plugin_uninstall';
 }
 
 helper_ensure_confirmed(

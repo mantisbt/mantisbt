@@ -34,5 +34,7 @@ final class MissingPlugin extends InvalidPlugin {
 	function register() {
 		$this->name = $this->basename;
 		$this->description = lang_get( 'plugin_missing_description' );
+
+		$this->status = self::STATUS_MISSING_PLUGIN;
 	}
 }

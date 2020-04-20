@@ -273,7 +273,7 @@ class ListPluginsForDisplay {
 		);
 
 		foreach( $t_plugins as $t_basename => $t_plugin ) {
-			if( $t_plugin instanceof InvalidPlugin ) {
+			if( !$t_plugin->isValid() ) {
 				$this->invalid[$t_basename] = new InvalidPluginForDisplay( $t_plugin );
 			} elseif( plugin_is_registered( $t_basename ) ) {
 				$this->installed[$t_basename] = new InstalledPlugin( $t_plugin );
@@ -365,8 +365,11 @@ class InvalidPluginForDisplay extends PluginForDisplay {
 
 		# Descriptions from InvalidPlugin classes are trusted input
 		$this->description = $p_plugin->description;
+		if( $p_plugin->status_message ) {
+			$this->description .= '<br>' . $p_plugin->status_message;
+		}
 
-		$this->can_remove = ! $p_plugin instanceof MissingClassPlugin;
+		$this->can_remove = $p_plugin->removable;
 	}
 
 	protected function renderColumns() {

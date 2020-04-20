@@ -86,14 +86,19 @@ foreach( $t_forced_plugins as $t_basename => $t_priority ) {
 # Check for invalid or missing plugins
 $t_invalid_plugins = array_filter(
 	$t_plugins,
-	function( $p ) { return $p instanceof InvalidPlugin; }
+	function( $p ) {
+		return $p instanceof InvalidPlugin;
+	}
 );
 foreach( $t_invalid_plugins as $t_plugin ) {
 	$t_description = "'$t_plugin->name': $t_plugin->description";
+	if( $t_plugin->status_message ) {
+		$t_description .= "<br>$t_plugin->status_message";
+	}
 	$t_msg_contact = "Contact the Plugin's author.";
 
-	switch( get_class( $t_plugin ) ) {
-		case 'MissingPlugin':
+	switch( $t_plugin->status ) {
+		case MantisPlugin::STATUS_MISSING_PLUGIN:
 			check_print_test_row(
 				$t_description,
 				false,
@@ -104,7 +109,7 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 				)
 			);
 			break;
-		case 'MissingClassPlugin':
+		case MantisPlugin::STATUS_MISSING_BASE_CLASS:
 			# Issue a warning instead of a failure, to cover the case of a directory
 			# created under plugins/ for other purposes than storing a plugin.
 			# https://github.com/mantisbt/mantisbt/pull/1565#discussion_r329311260
