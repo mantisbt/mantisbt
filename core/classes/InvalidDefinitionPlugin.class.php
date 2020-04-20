@@ -57,7 +57,7 @@ class InvalidDefinitionPlugin extends InvalidPlugin {
 
 		if( !empty( $t_missing ) ) {
 			$this->status_message = sprintf(
-					lang_get( 'plugin_invalid_description_details' ),
+					lang_get( 'plugin_invalid_status_message' ),
 					implode( ', ', $t_missing )
 				);
 		}
