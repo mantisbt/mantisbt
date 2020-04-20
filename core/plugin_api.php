@@ -797,7 +797,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 function plugin_uninstall( MantisPlugin $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
-	if( !$p_plugin instanceof MissingClassPlugin &&
+	if( !$p_plugin->status == MantisPlugin::STATUS_MISSING_BASE_CLASS &&
 		( !plugin_is_installed( $p_plugin->basename ) || plugin_protected( $p_plugin->basename ) )
 	) {
 		return;
@@ -951,19 +951,17 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 		# Make sure the class exists and that it's of the right type.
 		if( class_exists( $t_classname ) && is_subclass_of( $t_classname, 'MantisPlugin' ) ) {
 			plugin_push_current( $t_basename );
+			/** @var MantisPlugin $t_plugin */
 			$t_plugin = new $t_classname( $t_basename );
 			plugin_pop_current();
 
 			# Final check on the class
-			if( is_null( $t_plugin->name ) || is_null( $t_plugin->version ) ) {
-				$t_invalid = new InvalidPlugin( $t_basename);
-				$t_invalid->set( $t_plugin );
-
+			if( !$t_plugin->isValid() ) {
 				log_event(
 					LOG_PLUGIN,
 					"Plugin '$t_basename' is invalid (undefined Name or Version)"
 				);
-				return $t_invalid;
+				return $t_plugin->getInvalidPlugin();
 			}
 
 			if( $p_return ) {
