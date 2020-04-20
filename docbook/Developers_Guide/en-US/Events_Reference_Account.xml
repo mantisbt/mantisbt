@@ -62,6 +62,21 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.user.fields">
+			<title>EVENT_LDAP_USER_FIELDS (Default)</title>
+
+			<blockquote>
+				<para>
+					This event allow to add LDAP fields in cached user attributes
+				</para>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: List of LDAP fields</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 	</section>
 
 </section>
