@@ -563,3 +563,12 @@ function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
 	log_event( LOG_LDAP, 'ldap_simulation_authenticate: authentication successful for user \'' . $p_username . '\'.' );
 	return true;
 }
+
+/**
+ * Allow plugins to add fields in chached data from LDAP users
+ * @return array of fields name
+ */
+#function field_get_plugin_fields() {
+#	$t_all_plugin_fields = event_signal( 'EVENT_LDAP_USER_FIELDS' );
+#	return $t_all_plugin_fields;
+#}
