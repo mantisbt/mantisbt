@@ -152,4 +152,7 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+
+	# LDAP Events
+	'EVENT_LDAP_USER_FIELDS' => EVENT_TYPE_DEFAULT,
 ) );
