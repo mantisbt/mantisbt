@@ -36,6 +36,6 @@ final class MissingPlugin extends InvalidPlugin {
 		$this->description = lang_get( 'plugin_missing_description' );
 
 		$this->status = self::STATUS_MISSING_PLUGIN;
-		$this->status_message = lang_get( 'plugin_missing_description_details' );
+		$this->status_message = lang_get( 'plugin_missing_status_message' );
 	}
 }
