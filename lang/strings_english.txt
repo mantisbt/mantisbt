@@ -839,6 +839,7 @@ $s_plugin_key_upgrade = 'upgrade needed';
 $s_plugin_invalid_description = 'Invalid Plugin';
 $s_plugin_invalid_description_details = 'The following required properties are not defined in the Plugin Base Class: %s.';
 $s_plugin_missing_description = 'Missing Plugin';
+$s_plugin_missing_description_details = 'The plugin is installed in the Mantis database, but could not be loaded.';
 $s_plugin_missing_class_description = 'Missing Plugin Base Class';
 $s_plugin_missing_class_description_details = 'A directory for this Plugin was found, but there was no corresponding Plugin code inside of it. Make sure that the directory\'s name matches the Plugin\'s base name (case sensitive)';
 
