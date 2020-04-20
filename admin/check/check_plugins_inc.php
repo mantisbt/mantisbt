@@ -103,8 +103,7 @@ foreach( $t_invalid_plugins as $t_plugin ) {
 				$t_description,
 				false,
 				array(
-					false => "The plugin is installed in the Mantis database, but could not be loaded; "
-						. sprintf( $t_manage_plugins_link, '#invalid', 'remove the Plugin' )
+					false => sprintf( $t_manage_plugins_link, '#invalid', 'Remove the Plugin' )
 						. " or reinstall its source code."
 				)
 			);
