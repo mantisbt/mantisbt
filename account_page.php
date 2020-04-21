@@ -261,6 +261,7 @@ print_account_menu( 'account_page.php' );
 					<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?>
 				</td>
 			</tr>
+			<?php event_signal( 'EVENT_USER_ADDITIONAL_ATTRIBUTES', $u_username ); ?>
 				</fieldset>
 			</table>
 		</div>
