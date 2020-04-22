@@ -42,5 +42,3 @@
  */
 
 $s_plugin_MantisGraph_config = 'Voorkeure';
-$s_plugin_MantisGraph_enabled = 'Aangeskakel';
-$s_plugin_MantisGraph_disabled = 'Afgeskakel';
