@@ -17,10 +17,10 @@ before_install:
   - if php -r "exit( (int)! version_compare( '$TRAVIS_PHP_VERSION', '7.0', '>=' ) );"; then mkdir -p ~/bin && wget -O ~/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar && chmod +x ~/bin/phpunit; fi
 
 before_script:
-  - ./scripts/travis_before_script.sh
+  - ./build-scripts/travis_before_script.sh
 
 script:
-  - ./scripts/travis_script.sh
+  - ./build-scripts/travis_script.sh
 
 # -----------------------------------------------------------------------------
 # What to build, and on which platforms
