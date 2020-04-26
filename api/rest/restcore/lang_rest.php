@@ -28,17 +28,7 @@ $g_app->group('/lang', function() use ( $g_app ) {
 });
 
 /**
- * A method that does the work to handle getting a set of configs via REST API.
- *
- * The following query string parameters are supported:
- * - string/string[]: can be a string or an array
- *
- * The response will include a config key that is an array of requested configs.  Configs
- * that are not public or are not defined will be filtered out, and request will still succeed.
- * This is to make it easier to request configs that maybe defined in some versions of MantisBT
- * but not others.
- *
- * Note that only users with ADMINISTRATOR access can fetch configuration for other users.
+ * A method that does the work to handle getting a set of localized strings via REST API.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
