@@ -15,7 +15,13 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A command that gets a set of localized strings.
+ * A command that gets a set of localized strings in user's language.
+ *
+ * This command can retrieve one or more localized strings that are
+ * specified via query parameter. If a requested localized string
+ * doesn't exist, it will be silently ignored.
+ * 
+ * The string query parameter can be a string or array of strings.
  */
 class LocalizedStringsGetCommand extends Command {
 	/**
