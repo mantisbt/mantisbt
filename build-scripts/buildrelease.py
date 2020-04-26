@@ -23,6 +23,9 @@ exclude_list = (
     ".mailmap",
     ".travis.yml",
     "build.xml",
+	"composer.json",
+	"composer.lock",
+	"test_langs.php",
     # User custom files
     "config_inc.php",
     "custom_constant*_inc.php",
@@ -33,6 +36,7 @@ exclude_list = (
     "mc_config_inc.php",
     # Directories
     "docbook/",
+	"build-scripts/"
     "javascript/dev/",
     "packages/",
     "phing/",

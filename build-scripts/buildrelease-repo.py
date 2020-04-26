@@ -10,10 +10,9 @@ import sys
 import tempfile
 
 # clone URL for MantisBT repository
-clone_url = 'git://github.com/mantisbt/mantisbt.git'
+clone_url = 'https://github.com/mantisbt/mantisbt.git'
 
-# Absolute path to buildrelease.py
-buildscript = path.dirname(path.abspath(__file__)) + '/buildrelease.py'
+build_script_name = 'buildrelease.py'
 
 # Regular expressions of refs to ignore
 ignorelist = map(re.compile, [
@@ -47,7 +46,7 @@ The following options are passed on to '%s':
     -c | --clean                 Remove build directories when completed
     -d | --docbook               Build the docbook manuals
     -s | --suffix <suffix>       Include version suffix in config files
-''' % (path.basename(__file__), path.basename(buildscript))
+''' % (path.basename(__file__), build_script_name)
 #end usage()
 
 
@@ -114,6 +113,9 @@ def main():
 
     if len(args) > 1:
         repo_path = path.abspath(args[1])
+
+	# Absolute path to buildrelease.py
+	buildscript = repo_path + '/scripts/' + build_script_name
 
     # Create a new repo clone
     if fresh_clone:
