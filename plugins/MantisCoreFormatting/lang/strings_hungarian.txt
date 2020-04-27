@@ -45,12 +45,12 @@
  */
 
 $s_plugin_format_title = 'MantisBT formázás';
-$s_plugin_format_description = 'Hivatalos szövegfeldolgozó és formázó plugin.';
-$s_plugin_format_config = 'Beállítás';
+$s_plugin_format_description = 'Hivatalos szövegfeldolgozó és formázó bővítmény.';
+$s_plugin_format_config = 'Beállítások';
 $s_plugin_format_process_text = 'Szövegfeldolgozás';
-$s_plugin_format_process_text_warning_notice = 'Ne kapcsold ki, hacsak tényleg nem tudod, mit is csinálsz. Kikapcsolt állapotban lehetségesek webhelyközi (cross site scripting, XSS) támadások.';
+$s_plugin_format_process_text_warning_notice = 'Ne kapcsolja ki, csak ha tényleg tudja, hogy mit csinál. Kikapcsolt állapotban webhelyközi (cross site scripting, XSS) támadások fordulhatnak elő.';
 $s_plugin_format_process_urls = 'URL-feldolgozás';
-$s_plugin_format_process_buglinks = 'MantisBT belső hivatkozások (probléma/probléma feljegyzés)';
+$s_plugin_format_process_buglinks = 'MantisBT belső hivatkozások (ügyek és ügymegjegyzések)';
 $s_plugin_format_process_buglinks_info = 'A konfiguráció az <em>Issue</em> címkét „<literal>%s</literal>” értékként, az <em>Issue Note</em> címkét pedig „<literal>%s</literal>” értékként határozza meg.';
 $s_plugin_format_process_markdown = 'Markdown feldolgozás';
 $s_plugin_format_process_markdown_info = 'Formázás Markdown támogatással, amely egy olyan szövegformázási szintaxis, amely HTML-re alakítható';

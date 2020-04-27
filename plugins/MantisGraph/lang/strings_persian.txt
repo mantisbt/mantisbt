@@ -38,12 +38,14 @@
  * @ingroup Language
  * @file
  *
+ * @author FarsiNevis
  * @author Reza1615
  * @author Sjazz
  * @author جواد
  */
 
 $s_plugin_MantisGraph_config = 'تنظیمات';
+$s_plugin_MantisGraph_tab_label = 'نمودارها';
 $s_plugin_MantisGraph_status_link = 'براساس وضعیت';
 $s_plugin_MantisGraph_priority_link = 'براساس اولویت';
 $s_plugin_MantisGraph_severity_link = 'براساس شدت';
@@ -69,8 +71,10 @@ $s_plugin_MantisGraph_period_this_month = 'این ماه';
 $s_plugin_MantisGraph_period_last_month = 'ماه گذشته';
 $s_plugin_MantisGraph_period_this_quarter = 'این فصل';
 $s_plugin_MantisGraph_period_last_quarter = 'فصل گذشته';
+$s_plugin_MantisGraph_period_select = 'تاریخ‌های اختیاری';
 $s_plugin_MantisGraph_period_last_year = 'سال پیش';
 $s_plugin_MantisGraph_graph_page = 'نمودار تاریخچه مسائل';
 $s_plugin_MantisGraph_graph_topdev = 'برترین برنامه‌نویس ها براساس مسائل حل شده';
 $s_plugin_MantisGraph_graph_opendev = 'برنامه‌نویس ها براساس مسائل باز';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'برترین گزارش دهنده ها براساس مسائل حل شده';
+$s_plugin_MantisGraph_other_categories = 'رده‌های دیگر(%d)';

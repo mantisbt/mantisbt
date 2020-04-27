@@ -40,27 +40,28 @@
  *
  * @author Dj
  * @author Glanthor Reviol
+ * @author MeskoBalazs
  */
 
 $s_plugin_XmlImportExport_title = 'Ügyek importálása/exportálása';
-$s_plugin_XmlImportExport_description = 'XML alapú importálási és exportálási képességek a MantisBT-hez.';
+$s_plugin_XmlImportExport_description = 'XML-alapú importálási és exportálási képességek a MantisBT-hez.';
 $s_plugin_XmlImportExport_import = 'Ügyek importálása';
 $s_plugin_XmlImportExport_export = 'XML exportálás';
-$s_plugin_XmlImportExport_config_title = 'XML Export/Import hozzáférési szintek konfigurációja';
+$s_plugin_XmlImportExport_config_title = 'XML importálás/exportálás hozzáférési szintek beállítása';
 $s_plugin_XmlImportExport_import_threshold = 'Ügyek importálása';
 $s_plugin_XmlImportExport_export_threshold = 'Ügyek exportálása';
 $s_plugin_XmlImportExport_action_update = 'Frissítés';
-$s_plugin_XmlImportExport_importing_in_project = 'Ügyek importálása projektbe:';
-$s_plugin_XmlImportExport_import_options = 'Import-beállítások';
+$s_plugin_XmlImportExport_importing_in_project = 'Ügyek importálása projektbe: „%s”';
+$s_plugin_XmlImportExport_import_options = 'Importálási beállítások';
 $s_plugin_XmlImportExport_cross_references = 'Kereszthivatkozások';
-$s_plugin_XmlImportExport_default_strategy = 'Alapértelmezett konvertálási stratégia:';
+$s_plugin_XmlImportExport_default_strategy = 'Alapértelmezett átalakítási stratégia:';
 $s_plugin_XmlImportExport_renumber = 'Újraszámozás';
-$s_plugin_XmlImportExport_renumber_desc = 'Próbáld meg frissíteni a hivatkozásokat az új számozás szerint';
+$s_plugin_XmlImportExport_renumber_desc = 'A hivatkozások átalakításának kísérlete az új számozás szerint';
 $s_plugin_XmlImportExport_link = 'Hivatkozás';
-$s_plugin_XmlImportExport_link_desc = 'Hivatkozássá konvertálás az eredeti elemre';
+$s_plugin_XmlImportExport_link_desc = 'Az eredeti elemre mutató hivatkozássá alakítás';
 $s_plugin_XmlImportExport_disable = 'Letiltás';
 $s_plugin_XmlImportExport_disable_desc = 'Hivatkozás letiltása';
-$s_plugin_XmlImportExport_fallback = 'Fallback stratégia (ha az „újraszámozás” nem alkalmazható):';
-$s_plugin_XmlImportExport_fallback_category = 'Fallback kategória:';
-$s_plugin_XmlImportExport_keep_same_category = 'Próbáld ugyanazon kategóriában tartani';
-$s_plugin_XmlImportExport_error_no_xml = 'nem találhatók az xmlreader és xmlwriter bővítmények';
+$s_plugin_XmlImportExport_fallback = 'Tartalék stratégia (ha az „újraszámozás” nem alkalmazható):';
+$s_plugin_XmlImportExport_fallback_category = 'Tartalék kategória:';
+$s_plugin_XmlImportExport_keep_same_category = 'Próbálja ugyanazon kategóriában tartani';
+$s_plugin_XmlImportExport_error_no_xml = 'az xmlreader és xmlwriter bővítmények nem találhatók';
