@@ -79,7 +79,7 @@ $f_hide_obsolet = gpc_get_bool( 'hideobsolet' );
 
 # OFF = show obsolet versions, anything else = hide them
 $c_hide_obsolet = ( $f_hide_obsolet == OFF ) ? OFF : ON;
-$t_hide_obsolet_filter = '&amp;hideobsolet=' . $c_hide_obsolet;
+$t_hide_obsolet_filter = '&hideobsolet=' . $c_hide_obsolet;
 
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
