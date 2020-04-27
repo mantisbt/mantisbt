@@ -451,7 +451,8 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true ); ?>
 					<tr>
 						<td>
-							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] . $t_show_obsolete_filter ?>">
+							<a href="manage_proj_edit_page.php?project_id=<?
+								php echo $t_subproject['id'] . $t_show_obsolete_filter ?>">
 								<?php echo string_display_line( $t_subproject['name'] ) ?>
 							</a>
 						</td>
@@ -676,7 +677,8 @@ print_manage_menu( 'manage_proj_edit_page.php' );
     <form id="manage-project-version-filter" method="post" action="manage_proj_edit_page.php?project_id=<?php echo $f_project_id ?>#project-versions-div" class="form-inline">
         <fieldset>
 			<label class="inline">
-				<input type="checkbox" class="ace" name="showobsolete" value="<?php echo ON ?>" <?php check_checked( (int)$f_show_obsolete, ON ); ?> />
+				<input type="checkbox" class="ace" name="showobsolete" value="<?php echo ON ?>"
+					<?php check_checked( (int)$f_show_obsolete, ON ); ?> />
 				<span class="lbl padding-6"><?php echo lang_get( 'show_obsolete' ) ?></span>
 			</label>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
@@ -1164,11 +1166,12 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true" . $t_show_obsolete_filter, lang_get( 'show_global_users' ),
-			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+		print_form_button(
+			"manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true" . $t_show_obsolete_filter,
+			lang_get( 'show_global_users' ),null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	} else {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id" . $t_show_obsolete_filter, lang_get( 'hide_global_users' ),
-			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
+		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id" . $t_show_obsolete_filter,
+			lang_get( 'hide_global_users' ),null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	}
 	?>
 			</div>
