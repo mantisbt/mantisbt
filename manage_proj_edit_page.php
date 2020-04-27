@@ -75,11 +75,10 @@ auth_reauthenticate();
 
 $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
-$f_hide_obsolet = gpc_get_bool( 'hideobsolet' );
+$f_show_obsolete = gpc_get_bool( 'showobsolete' );
 
-# OFF = show obsolet versions, anything else = hide them
-$c_hide_obsolet = ( $f_hide_obsolet == OFF ) ? OFF : ON;
-$t_hide_obsolet_filter = '&hideobsolet=' . $c_hide_obsolet;
+# true = show obsolete versions, anything else = hide them
+$t_show_obsolete_filter = '&showobsolete=' . $f_show_obsolete;
 
 project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
@@ -322,7 +321,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 			$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true ); ?>
 					<tr>
 						<td>
-							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] . $t_hide_obsolet_filter ?>">
+							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] . $t_show_obsolete_filter ?>">
 								<?php echo string_display_line( $t_subproject['name'] ) ?>
 							</a>
 						</td>
@@ -348,7 +347,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 						<td class="center">
 							<div class="inline">
 							<?php print_link_button(
-								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'] . $t_hide_obsolet_filter ,
+								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'] . $t_show_obsolete_filter ,
 								lang_get( 'edit_link' ), 'btn-xs' );
 							?>
 							<?php print_link_button(
@@ -504,8 +503,8 @@ if ( config_get( 'subprojects_enabled') == ON ) {
     <form id="manage-project-version-filter" method="post" action="manage_proj_edit_page.php?project_id=<?php echo $f_project_id ?>#project-versions-div" class="form-inline">
         <fieldset>
 			<label class="inline">
-				<input type="checkbox" class="ace" name="hideobsolet" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_obsolet, ON ); ?> />
-				<span class="lbl padding-6"><?php echo lang_get( 'hide_obsolete' ) ?></span>
+				<input type="checkbox" class="ace" name="showobsolete" value="<?php echo ON ?>" <?php check_checked( (int)$f_show_obsolete, ON ); ?> />
+				<span class="lbl padding-6"><?php echo lang_get( 'show_obsolete' ) ?></span>
 			</label>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>
@@ -516,7 +515,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
-	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, helper_check_variables_equal( (int)$c_hide_obsolet, OFF, false ) );
+	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, $f_show_obsolete );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
 		<table id="versions" class="table table-striped table-bordered table-condensed">
@@ -895,10 +894,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true" . $t_hide_obsolet_filter, lang_get( 'show_global_users' ),
+		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true" . $t_show_obsolete_filter, lang_get( 'show_global_users' ),
 			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	} else {
-		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id" . $t_hide_obsolet_filter, lang_get( 'hide_global_users' ),
+		print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id" . $t_show_obsolete_filter, lang_get( 'hide_global_users' ),
 			null, OFF, 'btn btn-sm btn-primary btn-white btn-round' );
 	}
 	?>
