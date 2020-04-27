@@ -674,7 +674,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 	</form>
 				</div>
 				<div class="pull-right">
-    <form id="manage-project-version-filter" method="post" action="manage_proj_edit_page.php?project_id=<?php echo $f_project_id ?>" class="form-inline">
+    <form id="manage-project-version-filter" method="post" action="manage_proj_edit_page.php?project_id=<?php echo $f_project_id ?>#project-versions-div" class="form-inline">
         <fieldset>
 			<label class="inline">
 				<input type="checkbox" class="ace" name="hideobsolet" value="<?php echo ON ?>" <?php check_checked( (int)$c_hide_obsolet, ON ); ?> />
