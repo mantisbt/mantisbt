@@ -899,6 +899,7 @@ $s_add_and_edit_version_button = 'Add and Edit Version';
 $s_actions = 'Actions';
 $s_version = 'Version';
 $s_version_label = 'Version:';
+$s_show_all_versions = 'All';
 $s_timestamp = 'Timestamp';
 $s_subprojects = 'Subprojects';
 $s_add_subproject = 'Add as Subproject';
