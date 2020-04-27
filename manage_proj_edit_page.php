@@ -76,6 +76,7 @@ auth_reauthenticate();
 $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
 $f_show_obsolete = gpc_get_bool( 'showobsolete' );
+$f_release_type = gpc_get_int( 'release_type', 2 );
 
 # true = show obsolete versions, anything else = hide them
 $t_show_obsolete_filter = '&showobsolete=' . $f_show_obsolete;
@@ -679,6 +680,19 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php check_checked( (int)$f_show_obsolete, ON ); ?> />
 				<span class="lbl padding-6"><?php echo lang_get( 'show_obsolete' ) ?></span>
 			</label>
+            <select name="release_type" class="input-sm" required>
+				<option value=2 selected>
+					<?php echo lang_get( 'show_all_versions' ) ?>
+				</option>
+				<option value=<?php echo (int)VERSION_FUTURE;
+									check_selected( $f_release_type, (int)VERSION_FUTURE ) ?> >
+					<?php echo lang_get( 'not_released' ) ?>
+				</option>
+				<option value=<?php echo (int)VERSION_RELEASED;
+									check_selected( $f_release_type, (int)VERSION_RELEASED ) ?> >
+					<?php echo lang_get( 'released' ) ?>
+				</option>
+            </select>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>
 	</form>
@@ -688,7 +702,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 	<?php
-	$t_versions = version_get_all_rows( $f_project_id, VERSION_ALL, $f_show_obsolete );
+	$t_versions = version_get_all_rows( $f_project_id,
+					( ( $f_release_type == 2) ? null : $f_release_type ),
+					$f_show_obsolete );
 	if( count( $t_versions ) > 0 ) { ?>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed">
