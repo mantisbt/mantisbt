@@ -925,6 +925,7 @@ $s_edit_link = 'Edit';
 $s_actions = 'Actions';
 $s_version = 'Version';
 $s_version_label = 'Version:';
+$s_show_all_versions = 'All';
 $s_timestamp = 'Timestamp';
 $s_update = 'Update';
 $s_subprojects = 'Subprojects';
