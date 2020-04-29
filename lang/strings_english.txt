@@ -997,7 +997,6 @@ $s_users_unused = 'Unused';
 $s_users_new = 'New';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = 'Account protected. Cannot reset the password.';
 $s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Account password has been set to blank...';
 $s_account_unlock_msg = 'The account has been unlocked.';
@@ -1659,7 +1658,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check 
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field "%1$s" was empty. Please recheck your inputs.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Invalid value for \'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to access this until the account protection is lifted.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to perform the requested operation until the account protection is lifted.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
