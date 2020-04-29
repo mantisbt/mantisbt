@@ -52,20 +52,18 @@ $t_data = array(
 );
 
 $t_command = new UserResetPasswordCommand( $t_data );
+# The case of trying to reset a protected account now causes the Command to
+# trigger an exception, so we do not need any special handling here.
 $t_result = $t_command->execute();
-$t_result = $t_result['result'];
 
 $t_redirect_url = 'manage_user_page.php';
 
 form_security_purge( 'manage_user_reset' );
 
-layout_page_header(
-	null,
-	$t_result != UserResetPasswordCommand::RESULT_FAILURE ? $t_redirect_url : null
-);
+layout_page_header( null, $t_redirect_url );
 layout_page_begin( 'manage_overview_page.php' );
 
-switch( $t_result ) {
+switch( $t_result['action'] ) {
 	case UserResetPasswordCommand::RESULT_RESET:
 		if(    ( ON == config_get( 'send_reset_password' ) )
 			&& ( ON == config_get( 'enable_email_notification' ) )
@@ -80,9 +78,6 @@ switch( $t_result ) {
 	case UserResetPasswordCommand::RESULT_UNLOCK:
 		html_operation_successful( $t_redirect_url, lang_get( 'account_unlock_msg' ) );
 		break;
-	case UserResetPasswordCommand::RESULT_FAILURE:
-		# Protected account
-		html_operation_failure( $t_redirect_url, lang_get( 'account_reset_protected_msg' ) );
 }
 
 layout_page_end();
