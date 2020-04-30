@@ -109,7 +109,5 @@ function rest_user_reset_password( \Slim\Http\Request $p_request, \Slim\Http\Res
 	$t_command = new UserResetPasswordCommand( $t_data );
 	$t_result = $t_command->execute();
 
-	return $p_response
-		->withStatus( HTTP_STATUS_SUCCESS )
-		->withJson( $t_result );
+	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
 }
