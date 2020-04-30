@@ -59,7 +59,10 @@ class UserResetPasswordCommand extends Command {
 	 */
 	function validate() {
 		$this->user_id_reset = (int)$this->query( 'id', null );
-		if( $this->user_id_reset <= 0 || !user_exists( $this->user_id_reset ) ) {
+
+		# Make sure the account exists
+		$t_user = user_get_row( $this->user_id_reset );
+		if( $t_user === false ) {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
@@ -78,12 +81,6 @@ class UserResetPasswordCommand extends Command {
 				'Password reset not allowed for protected accounts',
 				ERROR_PROTECTED_ACCOUNT
 			);
-		}
-
-		# @TODO this seems redundant with the check at beginning of function
-		$t_user = user_get_row( $this->user_id_reset );
-		if( $t_user === false ) { // cannot be
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
 		# Ensure that the account to be reset is of equal or lower access than
