@@ -58,17 +58,17 @@ class UserResetPasswordCommand extends Command {
 	 * @throws ClientException
 	 */
 	function validate() {
+		# Ensure user has the required access level to reset passwords
+		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
+			throw new ClientException( 'Access denied to reset user password', ERROR_ACCESS_DENIED );
+		}
+
 		$this->user_id_reset = (int)$this->query( 'id', null );
 
 		# Make sure the account exists
 		$t_user = user_get_row( $this->user_id_reset );
 		if( $t_user === false ) {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
-		}
-
-		# Ensure user has access level to delete users
-		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
-			throw new ClientException( 'Access denied to reset user password', ERROR_ACCESS_DENIED );
 		}
 
 		# Mantis can't reset protected accounts' passwords, but if the
