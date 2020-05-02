@@ -139,7 +139,8 @@ def main():
     # Consolidate refs/branches
     if all_branches:
         os.system('git remote prune origin')
-        refs.extend(os.popen('git branch -r').read().split())
+        cmd = 'git for-each-ref --format="%(refname:short)" refs/remotes'
+        refs.extend(os.popen(cmd).read().split())
 
     if len(refs) < 1:
         refs.append(os.popen('git log --pretty="format:%h" -n1').read())
