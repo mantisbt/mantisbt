@@ -131,7 +131,8 @@ def main():
 
     if not current and refs is None:
         # List refs from remote branches and tags
-        branches = os.popen('git branch -r').read().split()
+        cmd = 'git for-each-ref --format="%(refname:short)" refs/remotes'
+        branches = os.popen(cmd).read().split()
         tags = os.popen('git tag -l').read().split()
 
         # Filter refs using ignore()
