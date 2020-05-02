@@ -1725,6 +1725,7 @@ function user_set_name( $p_user_id, $p_username ) {
  * @param integer $p_user_id    A valid user identifier.
  * @param boolean $p_send_email Whether to send confirmation email.
  * @return boolean
+ * @throws ClientException
  */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
 	$t_protected = user_get_field( $p_user_id, 'protected' );
@@ -1743,6 +1744,11 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 		if( is_blank( $t_email ) ) {
 			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+			throw new ClientException(
+				sprintf( "User id '%d' does not have an e-mail address.", (int)$p_user_id ),
+				ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED,
+				array( (int)$p_user_id )
+			);
 		}
 
 		# Create random password

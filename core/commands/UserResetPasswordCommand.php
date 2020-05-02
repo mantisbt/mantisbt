@@ -34,6 +34,12 @@ use Mantis\Exceptions\ClientException;
  */
 class UserResetPasswordCommand extends Command {
 	/**
+	 * Constants for execute() method's return value.
+	 */
+	const RESULT_RESET = 'reset';
+	const RESULT_UNLOCK = 'unlock';
+
+	/**
 	 * @var integer The id of the user to delete.
 	 */
 	private $user_id_reset;
@@ -49,30 +55,41 @@ class UserResetPasswordCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 * @throws ClientException
 	 */
 	function validate() {
-		$this->user_id_reset = (int)$this->query( 'id', null );
-		if( $this->user_id_reset <= 0 || !user_exists( $this->user_id_reset ) ) {
-			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
-		}
-
-		# Ensure user has access level to delete users
+		# Ensure user has the required access level to reset passwords
 		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
 			throw new ClientException( 'Access denied to reset user password', ERROR_ACCESS_DENIED );
 		}
 
+		$this->user_id_reset = (int)$this->query( 'id', null );
+
+		# Make sure the account exists
 		$t_user = user_get_row( $this->user_id_reset );
-		if( $t_user === false ) { // cannot be
+		if( $t_user === false ) {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
-		# Ensure that the account to be reset is of equal or lower access to the
-		# current user.
+		# Mantis can't reset protected accounts' passwords, but if the
+		# account is locked, we allow the operation as Unlock
+		if( auth_can_set_password( $this->user_id_reset )
+			&& user_is_protected( $this->user_id_reset )
+			&& user_is_login_request_allowed( $this->user_id_reset )
+		) {
+			throw new ClientException(
+				'Password reset not allowed for protected accounts',
+				ERROR_PROTECTED_ACCOUNT
+			);
+		}
+
+		# Ensure that the account to be reset is of equal or lower access than
+		# the current user.
 		if( !access_has_global_level( $t_user['access_level'] ) ) {
 			throw new ClientException( 'Access denied to reset user password with higher access level', ERROR_ACCESS_DENIED );
 		}
 
-		# Check that we are not reseting the last administrator account
+		# Check that we are not resetting the last administrator account
 		$t_admin_threshold = config_get_global( 'admin_site_threshold' );
 		if( user_is_administrator( $this->user_id_reset ) &&
 			user_count_level( $t_admin_threshold, /* enabled */ true ) <= 1 ) {
@@ -86,17 +103,19 @@ class UserResetPasswordCommand extends Command {
 	 * Process the command.
 	 *
 	 * @returns array Command response
+	 * @throws ClientException
 	 */
 	protected function process() {
-		# If the password can be changed, we reset it, otherwise we unlock
-		# the account (i.e. reset failed login count)
-		$t_reset = auth_can_set_password( $this->user_id_reset );
-		if( $t_reset ) {
-			$t_result = user_reset_password( $this->user_id_reset );
-		} else {
-			$t_result = user_reset_failed_login_count_to_zero( $this->user_id_reset );
+		# If the password can be changed, reset it
+		if( auth_can_set_password( $this->user_id_reset )
+			&& user_reset_password( $this->user_id_reset )
+		) {
+			return array( 'action' => self::RESULT_RESET );
 		}
-		return array();
+
+		# Password can't be changed, unlock the account
+		# the account (i.e. reset failed login count)
+		user_reset_failed_login_count_to_zero( $this->user_id_reset );
+		return array( 'action' =>  self::RESULT_UNLOCK );
 	}
 }
-
