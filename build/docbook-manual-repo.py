@@ -42,7 +42,7 @@ def usage():
                    --release        Build single file types used for
                                     release tarballs
               -a | --all            Build all manual types'''
-#end usage()
+# end usage()
 
 
 def ignore(ref):
@@ -54,7 +54,7 @@ def ignore(ref):
         if len(regex.findall(ref)) > 0:
             ignore = True
     return ignore
-#end ignore()
+# end ignore()
 
 
 def git_current_branch():
@@ -194,7 +194,7 @@ def main():
         print "\nRestoring originally checked-out branch"
         git_checkout(curbranch)
 
-#end main
+# end main()
 
 if __name__ == '__main__':
     main()

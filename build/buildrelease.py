@@ -23,9 +23,9 @@ exclude_list = (
     ".mailmap",
     ".travis.yml",
     "build.xml",
-	"composer.json",
-	"composer.lock",
-	"test_langs.php",
+    "composer.json",
+    "composer.lock",
+    "test_langs.php",
     # User custom files
     "config_inc.php",
     "custom_constant*_inc.php",
@@ -57,7 +57,7 @@ Options:
     -v | --version <version>  Override version name detection
     -s | --suffix <suffix>    Include version suffix in config file
 ''' % path.basename(__file__)
-#end usage()
+# end usage()
 
 
 def gpg_sign_tarball(filename):
@@ -249,7 +249,7 @@ def main():
 
     print "Done!\n"
 
-#end main()
+# end main()
 
 if __name__ == "__main__":
     main()

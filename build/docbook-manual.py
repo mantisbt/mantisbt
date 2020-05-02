@@ -16,7 +16,16 @@ PUBLICAN = 'publican'
 
 # Script options
 options = "hda"
-long_options = ["help", "delete", "epub", "html", "pdf", "txt", "release", "all"]
+long_options = [
+    "help",
+    "delete",
+    "epub",
+    "html",
+    "pdf",
+    "txt",
+    "release",
+    "all"
+    ]
 
 
 def usage():
@@ -31,7 +40,7 @@ def usage():
                    --release        Build single file types used for
                                     release tarballs
               -a | --all            Build all manual types'''
-#end usage()
+# end usage()
 
 
 def main():
@@ -149,7 +158,8 @@ def main():
                     print rsync
                     ret = subprocess.call(rsync, shell=True)
                     if ret != 0:
-                        print 'ERROR: rsync call failed with exit code %i' % ret
+                        print 'ERROR: rsync call failed with exit code ' % \
+                            ret
 
                 # Copy single file manuals (PDF, TXT and EPUB)
                 for filetype in ['epub', 'pdf', 'txt']:
@@ -196,8 +206,7 @@ def main():
 
     print "Done - %s docbooks built.\n" % buildcount
 
-
-#end main
+# end main()
 
 if __name__ == '__main__':
     main()

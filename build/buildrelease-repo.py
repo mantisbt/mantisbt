@@ -47,7 +47,7 @@ The following options are passed on to '%s':
     -d | --docbook               Build the docbook manuals
     -s | --suffix <suffix>       Include version suffix in config files
 ''' % (path.basename(__file__), build_script_name)
-#end usage()
+# end usage()
 
 
 def ignore(ref):
@@ -59,7 +59,7 @@ def ignore(ref):
         if len(regex.findall(ref)) > 0:
             ignore = True
     return ignore
-#end ignore()
+# end ignore()
 
 
 def main():
@@ -114,8 +114,8 @@ def main():
     if len(args) > 1:
         repo_path = path.abspath(args[1])
 
-	# Absolute path to buildrelease.py
-	buildscript = repo_path + '/scripts/' + build_script_name
+    # Absolute path to buildrelease.py
+    buildscript = repo_path + '/scripts/' + build_script_name
 
     # Create a new repo clone
     if fresh_clone:
@@ -163,7 +163,9 @@ def main():
         # Composer
         if path.isfile('composer.json'):
             print "Installing Composer packages"
-            if subprocess.call('composer install --no-plugins --no-scripts --no-dev', shell=True):
+            if subprocess.call(
+                    'composer install --no-plugins --no-scripts --no-dev',
+                    shell=True):
                 continue
             print
 
@@ -198,7 +200,7 @@ def main():
     # Done
     print "\nAll builds completed."
 
-#end main()
+# end main()
 
 if __name__ == "__main__":
     main()
