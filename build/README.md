@@ -7,7 +7,7 @@
 These steps typically happen from developer's machine.
 
 ```bash
-php -q ./build-scripts/check_lineterm.php -c
+php -q ./build/check_lineterm.php -c
 ```
 
 - Update to `MANTIS_VERSION` in `core/constant_inc.php`
