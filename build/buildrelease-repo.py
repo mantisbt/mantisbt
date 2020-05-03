@@ -1,4 +1,4 @@
-#!/usr/bin/python -u
+#!/usr/bin/python3 -u
 
 import getopt
 import re
@@ -31,10 +31,10 @@ long_options = ["help", "fresh", "ref=", "branches", "auto-suffix", "clean",
 
 
 def usage():
-    print '''Builds one or more releases (zip/tarball) for the specified
+    print('''Builds one or more releases (zip/tarball) for the specified
 references or for all branches.
 
-Usage: %s [options] /path/for/tarballs [/path/to/repo]
+Usage: {0} [options] /path/for/tarballs [/path/to/repo]
 
 Options:
     -h | --help                  Show this usage message
@@ -46,11 +46,11 @@ Options:
     -a | --auto-suffix           Automatically append the HEAD commit's sha1
                                  to the version suffix
 
-The following options are passed on to '%s':
+The following options are passed on to '{1}':
     -c | --clean                 Remove build directories when completed
     -d | --docbook               Build the docbook manuals
     -s | --suffix <suffix>       Include version suffix in config files
-''' % (path.basename(__file__), build_script_name)
+'''.format(path.basename(__file__), build_script_name))
 # end usage()
 
 
@@ -67,8 +67,8 @@ def ignore(ref):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], options, long_options)
-    except getopt.GetoptError, err:
-        print str(err)
+    except getopt.GetoptError as err:
+        print(err)
         usage()
         sys.exit(2)
 
@@ -121,14 +121,14 @@ def main():
 
     # Create a new repo clone
     if fresh_clone:
-        print "Origin MantisBT repository:", clone_url
+        print("Origin MantisBT repository:", clone_url)
         if repo_path == ".":
             repo_path = tempfile.mkdtemp(prefix="mantisbt-", suffix=".git")
             delete_clone = True
-        ret = subprocess.call('git clone %s %s' % (clone_url, repo_path),
+        ret = subprocess.call('git clone {} {}'.format(clone_url, repo_path),
                               shell=True)
         if ret != 0:
-            print "ERROR: clone failed"
+            print("ERROR: clone failed")
             sys.exit(1)
 
     # Change to the repo path
@@ -150,30 +150,30 @@ def main():
     refs = [ref for ref in refs if not ignore(ref)]
 
     # Info
-    print "\nWill build the following releases:"
+    print("\nWill build the following releases:")
     for ref in refs:
-        print "  %s" % ref
+        print("  " + ref)
 
     # Regex to strip 'origin/' from ref names
     refnameregex = re.compile('(?:[a-zA-Z0-9-.]+/)?(.*)')
 
     for ref in refs:
-        print "\nChecking out '%s'" % ref
-        os.system("git checkout -f -q %s" % ref)
+        print("\nChecking out '{}'".format(ref))
+        os.system("git checkout -f -q {}".format(ref))
         os.system("git log -n1 --pretty='HEAD is now at %h... %s'")
-        print
+        print()
 
         # Composer
         if path.isfile('composer.json'):
-            print "Installing Composer packages"
+            print("Installing Composer packages")
             if subprocess.call(
                     'composer install --no-plugins --no-scripts --no-dev',
                     shell=True):
                 continue
-            print
+            print()
 
         # Update and reset submodules
-        print "Updating submodules"
+        print("Updating submodules")
         subprocess.call('git submodule update --init', shell=True)
         subprocess.call('git submodule foreach git checkout -- .', shell=True)
 
@@ -181,27 +181,28 @@ def main():
         hash = os.popen('git log --pretty="format:%h" -n1').read()
         if hash != ref:
             ref = refnameregex.search(ref).group(1)
-            hash = "%s-%s" % (ref, hash)
+            hash = "{}-{}".format(ref, hash)
 
-        suffix = ""
         if auto_suffix and version_suffix:
-            suffix = "--suffix %s-%s" % (version_suffix, hash)
+            suffix = "--suffix {}-{}".format(version_suffix, hash)
         elif auto_suffix:
-            suffix = "--suffix %s" % hash
+            suffix = "--suffix " + hash
         elif version_suffix:
-            suffix = "--suffix %s" % version_suffix
+            suffix = "--suffix " + version_suffix
+        else:
+            suffix = ""
 
         # Start building
-        os.system("%s %s %s %s %s" % (buildscript, pass_opts, suffix,
-                                      release_path, repo_path))
+        os.system("{} {} {} {} {}".format(buildscript, pass_opts, suffix,
+                                          release_path, repo_path))
 
     # Cleanup temporary repo if needed
     if delete_clone:
-        print "\nRemoving temporary clone."
+        print("\nRemoving temporary clone.")
         shutil.rmtree(repo_path)
 
     # Done
-    print "\nAll builds completed."
+    print("\nAll builds completed.")
 
 # end main()
 
