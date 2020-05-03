@@ -36,7 +36,7 @@ exclude_list = (
     "mc_config_inc.php",
     # Directories
     "docbook/",
-    "build-scripts/"
+    "build/",
     "javascript/dev/",
     "packages/",
     "phing/",
