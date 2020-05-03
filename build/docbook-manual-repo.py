@@ -14,13 +14,15 @@ import time
 # Absolute path to docbook-manual.py
 manualscript = path.dirname(path.abspath(__file__)) + '/docbook-manual.py'
 
-# Regular expressions of refs to ignore
-ignorelist = map(re.compile, [
+# List of refs to ignore (regular expressions)
+# - HEAD (generally the same as master)
+# - 1.x refs
+ignorelist = [
     'HEAD',
     '->',
     '-1\.0\.[\w\d]+',
     '-1\.1\.[\w\d]+'
-])
+]
 
 # Script options
 options = "hr:cfda"
@@ -48,12 +50,10 @@ def usage():
 def ignore(ref):
     '''Decide which refs to ignore based on regexen listed in 'ignorelist'.
     '''
-
-    ignore = False
-    for regex in ignorelist:
+    for regex in [re.compile(r) for r in ignorelist]:
         if len(regex.findall(ref)) > 0:
-            ignore = True
-    return ignore
+            return True
+    return False
 # end ignore()
 
 
