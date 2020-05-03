@@ -22,25 +22,25 @@
  * @link http://www.mantisbt.org
  */
 
-use Mantis\Exceptions\ClientException;
-
 $g_app->group('/pages', function() use ( $g_app ) {
-	$g_app->get( '/issues/view/{id}/', 'rest_pages_issue_view' );
-	$g_app->get( '/issues/view/{id}', 'rest_pages_issue_view' );
+	$g_app->get( '/issues/{id}/view', 'rest_page_issue_view' );
 });
 
 /**
- * Get information necessary about an issue to render an issue view page.
+ * A method that retrieve information needed to render issue view page.
  *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
  * @return \Slim\Http\Response The augmented response.
  */
-function rest_pages_issue_view( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_page_issue_view( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
 
-	$t_data = array( 'query' => array( 'id' => $t_issue_id ) );
+	$t_data = array(
+		'query' => array( 'id' => $t_issue_id )
+	);
+
 	$t_command = new IssueViewPageCommand( $t_data );
 	$t_result = $t_command->execute();
 

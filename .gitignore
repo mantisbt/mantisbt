@@ -61,3 +61,16 @@ custom_functions_inc.php
 custom_relationships_inc.php
 custom_strings_inc.php
 api/soap/mc_config_inc.php
+
+
+# React
+client/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Bundled files
+js/mantis.*
+
+# Dependency directories
+node_modules/

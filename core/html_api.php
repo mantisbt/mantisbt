@@ -503,6 +503,7 @@ function html_body_end() {
 	# before the actual body ends (see #20084)
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
+	html_javascript_link( 'mantis.min.js' );
 	echo '</body>', "\n";
 }
 

@@ -197,6 +197,10 @@ class IssueViewPageCommand extends Command {
 			!bug_is_readonly( $t_issue_id ) &&
 			access_has_bug_level( config_get( 'update_bug_threshold' ), $t_issue_id );
 
+		$t_block_resolving = $this->block_resolving( $t_issue );
+		$t_issue_view['relationships_warning'] =
+			$t_block_resolving ? lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) : '';
+
 		$t_flags['sponsorships_show'] =
 			config_get( 'enable_sponsorship' ) &&
 			access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $t_issue_id );
@@ -247,9 +251,18 @@ class IssueViewPageCommand extends Command {
 		$t_flags['can_clone'] = !$t_issue_readonly && access_has_bug_level( config_get( 'report_bug_threshold' ), $t_issue_id );
 		$t_flags['can_reopen'] = !$t_force_readonly && access_can_reopen_bug( $t_issue_data );
 
-		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_issue_data->project_id );
-		$t_flags['can_close'] = !$t_issue_readonly &&
-			access_can_close_bug( $t_issue_data ) && bug_check_workflow( $t_issue_data->status, $t_closed_status );
+		if( !$t_issue_readonly && !$t_block_resolving ) {
+			$t_resolved_status = config_get( 'bug_resolved_status_threshold', null, null, $t_issue_data->project_id );
+			$t_flags['can_resolve'] = $t_issue_data->status != $t_resolved_status &&
+				bug_check_workflow( $t_issue_data->status, $t_resolved_status );
+
+			$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_issue_data->project_id );
+			$t_flags['can_close'] = $t_issue_data->status != $t_closed_status &&
+				access_can_close_bug( $t_issue_data ) && bug_check_workflow( $t_issue_data->status, $t_closed_status );
+		} else {
+			$t_flags['can_resolve'] = false;
+			$t_flags['can_close'] = false;
+		}
 
 		$t_flags['can_move'] = !$t_issue_readonly && user_has_more_than_one_project( $t_user_id ) &&
 			access_has_bug_level( config_get( 'move_bug_threshold' ), $t_issue_id );
@@ -278,6 +291,40 @@ class IssueViewPageCommand extends Command {
 			'issue' => $t_issue,
 			'issue_view' => $t_issue_view,
 			'flags' => $t_flags );
+	}
+
+	/**
+	 * Determine if the specific issue can be resolved or closed based on
+	 * relationships it has.
+	 *
+	 * @param $p_issue The issue data.
+	 * @returns true if it can be resolved/closed, false otherwise.
+	 */
+	private function block_resolving( $p_issue ) {
+		if( !isset( $p_issue['relationships'] ) || empty( $p_issue['relationships'] ) ) {
+			return false;
+		}
+
+		$t_project_resolved_status = array();
+
+		foreach( $p_issue['relationships'] as $t_relationship ) {
+			# Only issues that the current issue is dependant on can block it from being resolved/closed.
+			if( $t_relationship['type']['id'] == BUG_DEPENDANT ) {
+				$t_related_issue_id = $t_relationship['issue']['id'];
+				$t_related_project_id = bug_get_field( $t_related_issue_id, 'project_id' );
+
+				if( !isset( $t_project_resolved_status[$t_related_project_id] ) ) {
+					$t_project_resolved_status[$t_related_project_id] =
+						config_get( 'bug_resolved_status_threshold', null, null, $t_related_project_id );
+				}
+
+				if( $t_relationship['issue']['status']['id'] < $t_project_resolved_status[$t_related_project_id] ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
 

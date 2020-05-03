@@ -89,11 +89,39 @@ $t_data = array(
 );
 
 $t_cmd = new IssueViewPageCommand( $t_data );
-$t_result = $t_cmd->execute();
+$t_view_command_result = $t_cmd->execute();
 
-$t_issue = $t_result['issue'];
-$t_issue_view = $t_result['issue_view'];
-$t_flags = $t_result['flags'];
+$t_issue = $t_view_command_result['issue'];
+$t_issue_view = $t_view_command_result['issue_view'];
+$t_flags = $t_view_command_result['flags'];
+
+# Get localized strings
+$t_strings = array(
+	'relation_graph',
+	'dependency_graph',
+	'this_bug',
+	'add_new_relationship_button',
+	'related_to',
+	'duplicate_of',
+	'has_duplicate',
+	'dependant_on',
+	'blocks',
+	'delete_relationship_sure_msg'
+);
+
+$t_data = array( 'query' => array( 'string' => $t_strings ) );
+$t_cmd = new LocalizedStringsGetCommand( $t_data );
+$t_strings_command_results = $t_cmd->execute();
+
+# Get config options
+$t_configs = array(
+	'bug_resolved_status_threshold',
+	'relationship_graph_view_on_click',
+	'display_bug_padding',
+);
+$t_data = array( 'query' => array( 'option' => $t_configs ) );
+$t_cmd = new ConfigsGetCommand( $t_data );
+$t_configs_command_results = $t_cmd->execute();
 
 compress_enable();
 
@@ -108,6 +136,17 @@ $t_bugslist = gpc_get_cookie( config_get_global( 'bug_list_cookie' ), false );
 
 $t_top_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_TOP || $t_action_button_position == POSITION_BOTH );
 $t_bottom_buttons_enabled = !$t_force_readonly && ( $t_action_button_position == POSITION_BOTTOM || $t_action_button_position == POSITION_BOTH );
+
+$t_relationship_buttons = relationship_buttons( $f_issue_id );
+
+#
+# Emit issue information to hidden div
+#
+
+echo '<div class="hidden" id="issue-data" data-issue="' . string_attribute( json_encode( $t_view_command_result ) ). '"></div>';
+echo '<div class="hidden" id="strings-data" data-strings="' . string_attribute( json_encode( $t_strings_command_results ) ) . '"></div>';
+echo '<div class="hidden" id="configs-data" data-configs="' . string_attribute( json_encode( $t_configs_command_results ) ) . '"></div>';
+echo '<div class="hidden" id="relationship-buttons-data" data-relationship-buttons="' . string_attribute( json_encode( $t_relationship_buttons ) ) . '"></div>';
 
 #
 # Start of Template
@@ -808,123 +847,34 @@ if( $t_flags['history_show'] && $f_history ) {
 layout_page_end();
 
 /**
- * return formatted string with all the details on the requested relationship
- * @param integer             $p_bug_id       A bug identifier.
- * @param BugRelationshipData $p_relationship A bug relationship object.
- * @param boolean             $p_html_preview Whether to include style/hyperlinks - if preview is false, we prettify the output.
- * @param boolean             $p_show_project Show Project details.
- * @return string
+ * Get array of buttons to show in the relationship box.  This will involve buttons for core
+ * features that are controlled by config options, as well as buttons added by Mantis extensions.
+ * 
+ * @return array The array of buttons with key being label, and value being link.
  */
-function bug_view_relationship_get_details( $p_bug_id, BugRelationshipData $p_relationship, $p_html_preview = false, $p_show_project = false ) {
-	if( $p_bug_id == $p_relationship->src_bug_id ) {
-		# root bug is in the source side, related bug in the destination side
-		$t_related_project_id = $p_relationship->dest_bug_id;
-		$t_related_project_name = project_get_name( $p_relationship->dest_project_id );
-		$t_related_bug_id = $p_relationship->dest_bug_id;
-		$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
-	} else {
-		# root bug is in the dest side, related bug in the source side
-		$t_related_project_id = $p_relationship->src_bug_id;
-		$t_related_bug_id = $p_relationship->src_bug_id;
-		$t_related_project_name = project_get_name( $p_relationship->src_project_id );
-		$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
+function relationship_buttons( $p_issue_id ) {
+	$t_event_buttons = event_signal( 'EVENT_MENU_ISSUE_RELATIONSHIP', $p_issue_id );
+	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
+
+	# Default relationship buttons
+	$t_buttons = array();
+	if( $t_relationship_graph ) {
+		$t_buttons[lang_get( 'relation_graph' )] =
+			'bug_relationship_graph.php?bug_id=' . $p_issue_id . '&graph=relation';
+		$t_buttons[lang_get( 'dependency_graph' )] =
+			'bug_relationship_graph.php?bug_id=' . $p_issue_id . '&graph=dependency';
 	}
 
-	# related bug not existing...
-	if( !bug_exists( $t_related_bug_id ) ) {
-		return '';
-	}
-
-	# user can access to the related bug at least as a viewer
-	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_related_project_id ), $t_related_bug_id ) ) {
-		return '';
-	}
-
-	if( $p_html_preview == false ) {
-		$t_td = '<td>';
-	} else {
-		$t_td = '<td class="print">';
-	}
-
-	# get the information from the related bug and prepare the link
-	$t_bug = bug_get( $t_related_bug_id, false );
-	$t_status_string = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-	$t_resolution_string = get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id );
-
-	$t_relationship_info_html = $t_td . string_no_break( $t_relationship_descr ) . '&#160;</td>';
-	if( $p_html_preview == false ) {
-		# choose color based on status
-		$t_status_css = html_get_status_css_fg( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
-		$t_relationship_info_html .= '<td><i class="fa fa-square fa-status-box ' . $t_status_css . '"></i> ';
-		$t_relationship_info_html .= '<span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
-	} else {
-		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
-		$t_relationship_info_html .= $t_td . string_display_line( $t_status_string ) . '&#160;</td>';
-	}
-
-	# get the handler name of the related bug
-	$t_relationship_info_html .= $t_td;
-	if( $t_bug->handler_id > 0 ) {
-		$t_relationship_info_html .= string_no_break( prepare_user_name( $t_bug->handler_id ) );
-	}
-
-	$t_relationship_info_html .= '&#160;</td>';
-
-	# add project name
-	if( $p_show_project ) {
-		$t_relationship_info_html .= $t_td . string_display_line( $t_related_project_name ) . '&#160;</td>';
-	}
-
-	# add summary
-	$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
-	if( VS_PRIVATE == $t_bug->view_state ) {
-		$t_relationship_info_html .= sprintf( ' <i class="fa fa-lock" title="%s" ></i>', lang_get( 'private' ) );
-	}
-
-	# add delete link if bug not read only and user has access level
-	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			$t_relationship_info_html .= ' <a class="red noprint zoom-130"
-			href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '"><i class="ace-icon fa fa-trash-o bigger-115"></i></a>';
+	# Plugin-added buttons
+	foreach( $t_event_buttons as $t_plugin => $t_plugin_buttons ) {
+		foreach( $t_plugin_buttons as $t_callback => $t_callback_buttons ) {
+			if( is_array( $t_callback_buttons ) ) {
+				$t_buttons = array_merge( $t_buttons, $t_callback_buttons );
+			}
 		}
 	}
 
-	$t_relationship_info_html .= '&#160;</td>';
-	$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
-
-	return $t_relationship_info_html;
-}
-
-/**
- * print ALL the RELATIONSHIPS OF A SPECIFIC BUG
- * @param integer $p_bug_id A bug identifier.
- * @return string
- */
-function bug_view_relationship_get_summary_html( $p_bug_id ) {
-	$t_summary = '';
-
-	# A variable that will be set by the following call to indicate if relationships belong
-	# to multiple projects.
-	$t_show_project = false;
-
-	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
-	$t_relationship_all_count = count( $t_relationship_all );
-
-	# prepare the relationships table
-	for( $i = 0; $i < $t_relationship_all_count; $i++ ) {
-		$t_summary .= bug_view_relationship_get_details( $p_bug_id, $t_relationship_all[$i], /* html_preview */ false, $t_show_project );
-	}
-
-	if( !is_blank( $t_summary ) ) {
-		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
-				lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
-		}
-		$t_summary = '<table class="table table-bordered table-condensed table-hover">' . $t_summary . '</table>';
-	}
-
-	return $t_summary;
+	return $t_buttons;
 }
 
 /**
@@ -934,15 +884,11 @@ function bug_view_relationship_get_summary_html( $p_bug_id ) {
  * @return void
  */
 function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
-	$t_relationships_html = bug_view_relationship_get_summary_html( $p_bug_id );
+	$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
 
-	if( !$p_can_update && empty( $t_relationships_html ) ) {
+	if( !$p_can_update && empty( $t_relationship_all ) ) {
 		return;
 	}
-
-	$t_relationship_graph = ON == config_get( 'relationship_graph_enable' );
-	$t_event_buttons = event_signal( 'EVENT_MENU_ISSUE_RELATIONSHIP', $p_bug_id );
-	$t_show_top_div = $p_can_update || $t_relationship_graph || !empty( $t_event_buttons );
 ?>
 	<div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -963,64 +909,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 			</a>
 		</div>
 	</div>
-	<div class="widget-body">
-<?php
-	if( $t_show_top_div ) {
-?>
-		<div class="widget-toolbox padding-8 clearfix">
-<?php
-		# Default relationship buttons
-		$t_buttons = array();
-		if( $t_relationship_graph ) {
-			$t_buttons[lang_get( 'relation_graph' )] =
-				'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation';
-			$t_buttons[lang_get( 'dependency_graph' )] =
-				'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency';
-		}
-
-		# Plugin-added buttons
-		foreach( $t_event_buttons as $t_plugin => $t_plugin_buttons ) {
-			foreach( $t_plugin_buttons as $t_callback => $t_callback_buttons ) {
-				if( is_array( $t_callback_buttons ) ) {
-					$t_buttons = array_merge( $t_buttons, $t_callback_buttons );
-				}
-			}
-		}
-?>
-		<div class="btn-group pull-right noprint">
-<?php
-		# Print the buttons, if any
-		foreach( $t_buttons as $t_label => $t_url ) {
-			print_small_button( $t_url, $t_label );
-		}
-?>
-		</div>
-
-<?php
-		if( $p_can_update ) {
-?>
-		<form method="post" action="bug_relationship_add.php" class="form-inline noprint">
-		<?php echo form_security_field( 'bug_relationship_add' ) ?>
-		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" />
-		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
-		<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
-		<input type="text" class="input-sm" name="dest_bug_id" value="" />
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
-		</form>
-<?php
-		} # can update
-?>
-		</div>
-<?php
-	} # show top div
-?>
-
-		<div class="widget-main no-padding">
-			<div class="table-responsive">
-				<?php echo $t_relationships_html; ?>
-			</div>
-		</div>
-	</div>
+	<div class="widget-body" id="relationships-body"></div>
 	</div>
 	</div>
 <?php

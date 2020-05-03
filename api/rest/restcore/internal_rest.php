@@ -30,6 +30,7 @@ require_api( 'helper_api.php' );
 $g_app->group('/internal', function() use ( $g_app ) {
 	$g_app->any( '/autocomplete', 'rest_internal_autocomplete' );
 	$g_app->any( '/config_display', 'rest_internal_config_display' );
+	$g_app->get( '/issues/{id}/basic', 'rest_internal_issue_basic' );
 });
 
 /**
@@ -55,6 +56,10 @@ function rest_internal_autocomplete( \Slim\Http\Request $p_request, \Slim\Http\R
 			break;
 		case 'os_build':
 			$t_unique_entries = profile_get_field_all_for_user( 'os_build' );
+			$t_matches = helper_filter_by_prefix( $t_unique_entries, $t_prefix );
+			break;
+		case 'related_issue_id':
+			$t_unique_entries = last_visited_get_array();
 			$t_matches = helper_filter_by_prefix( $t_unique_entries, $t_prefix );
 			break;
 		default:
@@ -96,3 +101,20 @@ function rest_internal_config_display( \Slim\Http\Request $p_request, \Slim\Http
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->write( $t_output );
 }
+
+function rest_internal_issue_basic( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+
+	$t_issue = array();
+	$t_lang = lang_get_current();
+
+	if( !empty( $t_issue_id ) && bug_exists( $t_issue_id ) && access_has_bug_level( VIEWER, $t_issue_id ) ) {
+		$t_issue['title'] = bug_get_field( $t_issue_id, 'summary' );
+		$t_issue['status'] = mci_enum_get_array_by_id( bug_get_field( $t_issue_id, 'status' ), 'status', $t_lang );
+	}
+
+	$t_result = array( 'issue' => $t_issue );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+}
+
