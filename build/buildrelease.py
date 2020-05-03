@@ -1,6 +1,7 @@
 #!/usr/bin/python3 -u
 
 import getopt
+import hashlib
 import os
 from os import path
 import re
@@ -76,12 +77,23 @@ def gpg_sign_tarball(filename):
 def generate_checksum(filename):
     ''' Generate digest file with checksums for the given filename
     '''
+    # Initialize hash objects for each checksum type
+    checksums = dict()
+    for method in checksum_types:
+        checksums[method] = hashlib.new(method)
+
+    # Read the file and calculate checksums
+    with open(filename, 'rb') as file:
+        for chunk in file:
+            for method in checksum_types:
+                checksums[method].update(chunk)
+
+    # Print results and generate digests file
     f = open(filename + ".digests", 'w')
     for method in checksum_types:
-        checksum_cmd = "{}sum --binary ".format(method)
-        checksum = os.popen(checksum_cmd + filename).read()
-        f.write(checksum)
-        print("      {}: {}".format(method, checksum.rstrip()))
+        checksum = checksums[method].hexdigest()
+        print("      {method}: {hash}".format(method=method, hash=checksum))
+        f.write("{hash} *{file}\n".format(file=filename, hash=checksum))
     f.close()
 
 
