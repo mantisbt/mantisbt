@@ -14,11 +14,14 @@ clone_url = 'https://github.com/mantisbt/mantisbt.git'
 
 build_script_name = 'buildrelease.py'
 
-# Regular expressions of refs to ignore
-ignorelist = map(re.compile, [
-                 'HEAD',
-                 '-1\.0\.[\w\d]+',
-                 ])
+# List of refs to ignore (regular expressions)
+#  - HEAD
+#  - 1.x branches
+#  - dependabot branches
+ignorelist = [
+              'HEAD',
+              '-1\.0\.[\w\d]+',
+             ]
 
 # Script options
 options = "hfr:bacds:"
@@ -53,12 +56,10 @@ The following options are passed on to '%s':
 def ignore(ref):
     '''Decide which refs to ignore based on regexen listed in 'ignorelist'.
     '''
-
-    ignore = False
-    for regex in ignorelist:
+    for regex in [re.compile(r) for r in ignorelist]:
         if len(regex.findall(ref)) > 0:
-            ignore = True
-    return ignore
+            return True
+    return False
 # end ignore()
 
 
