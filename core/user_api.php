@@ -111,10 +111,11 @@ function user_cache_array_rows( array $p_user_id_array ) {
 	$c_user_id_array = array();
 
 	foreach( $p_user_id_array as $t_user_id ) {
-		if( !isset( $g_cache_user[(int)$t_user_id] ) ) {
+		if( (int)$t_user_id != 0 && !isset( $g_cache_user[(int)$t_user_id] ) ) {
 			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
 		}
 	}
+
 	if( empty( $c_user_id_array ) ) {
 		return;
 	}

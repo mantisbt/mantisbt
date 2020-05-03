@@ -690,8 +690,18 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
 
 	$t_result = array();
-	foreach( bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 ) as $t_value ) {
-		$t_bugnote = mci_issue_note_data_as_array( $t_value );
+	$t_notes = bugnote_get_all_visible_bugnotes( $p_issue_id, $t_user_bugnote_order, 0 );
+
+	$t_author_ids = array();
+	foreach( $t_notes as $t_note ) {
+		$t_author_id = (int)$t_note->reporter_id;
+		$t_author_ids[$t_author_id] = $t_author_id;
+	}
+
+	user_cache_array_rows( $t_author_ids );
+
+	foreach( $t_notes as $t_note ) {
+		$t_bugnote = mci_issue_note_data_as_array( $t_note );
 		$t_result[] = $t_bugnote;
 	}
 
@@ -1628,6 +1638,8 @@ function mci_issue_data_as_array( BugData $p_issue_data, $p_user_id, $p_lang ) {
 	if( access_has_bug_level( config_get( 'roadmap_view_threshold' ), $t_id ) ) {
 		$t_issue['target_version'] = mci_get_version( $p_issue_data->target_version, $p_issue_data->project_id );
 	}
+
+	user_cache_array_rows( array( $p_issue_data->reporter_id, $p_issue_data->handler_id ) );
 
 	$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
 
