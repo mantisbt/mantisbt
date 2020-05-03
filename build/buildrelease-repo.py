@@ -117,7 +117,7 @@ def main():
         repo_path = path.abspath(args[1])
 
     # Absolute path to buildrelease.py
-    buildscript = repo_path + '/scripts/' + build_script_name
+    buildscript = repo_path + '/build/' + build_script_name
 
     # Create a new repo clone
     if fresh_clone:
