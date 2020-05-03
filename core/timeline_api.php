@@ -48,16 +48,26 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events, $p_filter =
 	$t_query_options['start_time'] = $p_start_time;
 	$t_query_options['end_time'] = $p_end_time;
 	$t_query_options['order'] = 'DESC';
+
 	if( null !== $p_filter ) {
 		$t_query_options['filter'] = $p_filter;
 	}
+
 	if( null !== $p_user_id ) {
 		$t_query_options['user_id'] = $p_user_id;
 	}
+
 	$t_result = history_query_result( $t_query_options );
 	$t_count = 0;
 
-	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
+	$t_current_user_id = auth_get_current_user_id();
+
+	while ( $t_event_row = db_fetch_array( $t_result ) ) {
+		$t_history_event = history_get_event_from_row( $t_event_row, /* $p_user_id */ $t_current_user_id, /* $p_check_access_to_issue */ true );
+		if( $t_history_event === false ) {
+			continue;
+		}
+
 		$t_event = null;
 		$t_user_id = (int)$t_history_event['userid'];
 		$t_timestamp = $t_history_event['date'];
