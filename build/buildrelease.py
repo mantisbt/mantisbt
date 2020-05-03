@@ -43,6 +43,9 @@ exclude_list = (
     "tests/"
     )
 
+# Checksum types to includ in digest filese
+checksum_types = ['sha1', 'md5']
+
 
 def usage():
     print('''Builds a release (zip/tarball)
@@ -71,9 +74,10 @@ def gpg_sign_tarball(filename):
 
 
 def generate_checksum(filename):
-    ''' Generate MD5 and SHA1 checksums for the file '''
+    ''' Generate digest file with checksums for the given filename
+    '''
     f = open(filename + ".digests", 'w')
-    for method in ("md5", "sha1"):
+    for method in checksum_types:
         checksum_cmd = "{}sum --binary ".format(method)
         checksum = os.popen(checksum_cmd + filename).read()
         f.write(checksum)
