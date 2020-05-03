@@ -738,6 +738,8 @@ function mci_project_get_custom_fields( $p_project_id ) {
 
 	$t_result = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $p_project_id );
+	custom_field_cache_array_rows( $t_related_custom_field_ids );
+
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 
