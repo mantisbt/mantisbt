@@ -44,7 +44,7 @@ exclude_list = (
     )
 
 # Checksum types to includ in digest filese
-checksum_types = ['sha1', 'md5']
+checksum_types = ['sha512', 'sha256', 'sha1', 'md5']
 
 
 def usage():
