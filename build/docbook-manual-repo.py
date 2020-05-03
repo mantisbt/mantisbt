@@ -16,13 +16,13 @@ manualscript = path.dirname(path.abspath(__file__)) + '/docbook-manual.py'
 
 # List of refs to ignore (regular expressions)
 # - HEAD (generally the same as master)
-# - 1.x refs
+# - dependabot branches
+# - 1.x refs except 1.3.x
 ignorelist = [
-    'HEAD',
-    '->',
-    '-1\.0\.[\w\d]+',
-    '-1\.1\.[\w\d]+'
-]
+              '^origin\/HEAD$',
+              '-1\.[012]+\.[\w\d]+',
+              '^origin\/dependabot\/',
+             ]
 
 # Script options
 options = "hr:cfda"

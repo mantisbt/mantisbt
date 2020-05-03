@@ -15,12 +15,13 @@ clone_url = 'https://github.com/mantisbt/mantisbt.git'
 build_script_name = 'buildrelease.py'
 
 # List of refs to ignore (regular expressions)
-#  - HEAD
-#  - 1.x branches
-#  - dependabot branches
+# - HEAD (generally the same as master)
+# - dependabot branches
+# - 1.x refs
 ignorelist = [
-              'HEAD',
-              '-1\.0\.[\w\d]+',
+              '^origin\/HEAD$',
+              '-1\.[\d]+\.[\w\d]+',
+              '^origin\/dependabot\/',
              ]
 
 # Script options
