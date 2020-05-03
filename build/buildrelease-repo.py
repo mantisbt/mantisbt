@@ -116,9 +116,6 @@ def main():
     if len(args) > 1:
         repo_path = path.abspath(args[1])
 
-    # Absolute path to buildrelease.py
-    buildscript = repo_path + '/build/' + build_script_name
-
     # Create a new repo clone
     if fresh_clone:
         print("Origin MantisBT repository:", clone_url)
@@ -132,6 +129,7 @@ def main():
             sys.exit(1)
 
     # Change to the repo path
+    script_dir = path.dirname(path.abspath(__file__))
     os.chdir(repo_path)
 
     # Update the repository
@@ -191,6 +189,15 @@ def main():
             suffix = "--suffix " + version_suffix
         else:
             suffix = ""
+
+        # Absolute path to buildrelease.py in the target repository, with a
+        # fallback to the directory of the currently executing script
+        buildscript = path.join(repo_path, 'build', build_script_name)
+        if not path.exists(buildscript):
+            buildscript = path.join(script_dir, build_script_name)
+            print("Build script ({file}) not found in {ref}"
+                  .format(file=build_script_name, ref=ref))
+            print("Using '{}' instead.".format(buildscript))
 
         # Start building
         os.system("{} {} {} {} {}".format(buildscript, pass_opts, suffix,
