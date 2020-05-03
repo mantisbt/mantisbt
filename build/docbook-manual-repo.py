@@ -1,8 +1,7 @@
-#!/usr/bin/python -u
+#!/usr/bin/python3 -u
 
 # Integrates with docbook-manual.py to build manuals for all tagged
 # versions and development branches in the Git repo
-
 
 import getopt
 import os
@@ -31,8 +30,7 @@ long_options = ["help", "ref=", "current", "force", "delete",
 
 
 def usage():
-    print '''Usage: docbook-manual-repo /path/to/mantisbt/repo \
-/path/to/install [<lang> ...]
+    print('''Usage: {} /path/to/mantisbt/repo /path/to/install [<lang> ...]
 
     Options:  -h | --help           Print this usage message
               -r | --ref            Select what refs to build
@@ -43,7 +41,8 @@ def usage():
                    --pdf            Build PDF manual
                    --release        Build single file types used for
                                     release tarballs
-              -a | --all            Build all manual types'''
+              -a | --all            Build all manual types
+'''.format(path.basename(__file__)))
 # end usage()
 
 
@@ -66,14 +65,14 @@ def git_current_branch():
 
 
 def git_checkout(branch):
-    os.system('git checkout -f %s >/dev/null' % branch)
+    os.system('git checkout -f {} >/dev/null'.format(branch))
 
 
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], options, long_options)
-    except getopt.GetoptError, err:
-        print str(err)
+    except getopt.GetoptError as err:
+        print(err)
         usage()
         sys.exit(2)
 
@@ -124,7 +123,7 @@ def main():
 
     if not current:
         # Update repo from default remote
-        print "Updating repository in '%s' from default remote" % repo
+        print("Updating repository in '{}' from default remote".format(repo))
         os.chdir(repo)
         os.system('git fetch')
         os.system('git remote prune origin')
@@ -149,7 +148,7 @@ def main():
     # docbook-manual.py, tracking last build timestamp to prevent
     # building a manual if there have been no commits since last build
     for ref in refs:
-        print "\nGenerating documentation for '%s'" % ref
+        print("\nGenerating documentation for '{}'".format(ref))
 
         manualpath = path.join(installroot, refnameregex.search(ref).group(1))
 
@@ -157,42 +156,42 @@ def main():
             git_checkout(ref)
 
         # Get timestamp of last change to docbook sources from git
-        lastchange = os.popen('git log --pretty="format:%ct" -n1 -- docbook'
-                              ).read()
+        lastchange = int(
+            os.popen('git log --pretty="format:%ct" -n1 -- docbook').read())
 
         buildfile = path.join(manualpath, '.build')
         lastbuild = 0
         if path.exists(buildfile):
             f = open(buildfile, 'r')
-            lastbuild = f.read()
+            lastbuild = int(f.read())
             f.close()
 
         if lastchange > lastbuild or force or current:
-            buildcommand = '%s %s %s %s %s' % (
+            buildcommand = '{} {} {} {} {}'.format(
                 manualscript,
                 pass_opts,
                 path.abspath('docbook'),
                 manualpath, ' '.join(languages)
             )
-            print "Calling: " + buildcommand
+            print("Calling: " + buildcommand)
             if(os.system(buildcommand)):
-                print 'here'
+                print('here')
 
             f = open(buildfile, 'w')
-            f.write(lastchange)
+            f.write(str(lastchange))
             f.close()
         else:
             # Get last build's timestamp from buildfile's modified time
             mtime = float(os.path.getmtime(buildfile))
-            print("Docbook source unchanged since last build (%s)" %
-                  time.strftime("%a %Y-%m-%d %H:%M:%S", time.localtime(mtime))
-                  )
+            print("Docbook source unchanged since last build ({})".format(
+                  time.strftime("%a %Y-%m-%d %H:%M:%S",
+                                time.localtime(mtime))))
             # 'touch' the flag file to bump the modified time
             os.utime(buildfile, None)
 
     # Reset repository to originally checked-out branch
     if curbranch != git_current_branch():
-        print "\nRestoring originally checked-out branch"
+        print("\nRestoring originally checked-out branch")
         git_checkout(curbranch)
 
 # end main()
