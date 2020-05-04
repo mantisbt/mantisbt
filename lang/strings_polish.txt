@@ -762,7 +762,6 @@ $s_reset_password_msg2 = 'Po operacji \'Nowe hasło\' użytkownik nie będzie mu
 $s_show_all_users = 'WSZYSCY';
 $s_users_unused = 'NIEUŻYWANY';
 $s_users_new = 'NOWY';
-$s_account_reset_protected_msg = 'Konto zostało zabezpieczone. Nie można przypisać nowego hasła.';
 $s_account_reset_msg = 'Wiadomość potwierdzającą wysłano na adres e-mail wybranego użytkownika. Postępując zgodnie z jej zawartością użytkownik będzie mógł zmienić swoje hasło.';
 $s_account_reset_msg2 = 'Konto nie wymaga podawania hasła...';
 $s_account_unlock_msg = 'Konto zostało odblokowane.';

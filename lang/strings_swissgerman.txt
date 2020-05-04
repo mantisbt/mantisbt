@@ -684,7 +684,6 @@ $s_reset_password_msg2 = 'Passwort zrucksetze schickt e läär Passwort.';
 $s_show_all_users = 'ALLI';
 $s_users_unused = 'NIT BRUCHT';
 $s_users_new = 'NEJ';
-$s_account_reset_protected_msg = 'Konto gschitzt. Passwort cha nit glescht wäre.';
 $s_account_reset_msg = 'Bstätigungsnochricht isch an Dyy E-Mail-Adräss gschickt wore …';
 $s_account_reset_msg2 = 'Läär Passwort isch gsetzt wore …';
 $s_account_unlock_msg = 'S Benutzerkonto isch entsperrt wore';

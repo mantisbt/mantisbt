@@ -747,7 +747,6 @@ $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
 $s_show_all_users = 'Alle';
 $s_users_unused = 'IKKE I BRUK';
 $s_users_new = 'NY';
-$s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';
 $s_account_reset_msg = 'En bekreftelse har blitt sendt til epostadressen din ...';
 $s_account_reset_msg2 = 'Kontopassordet er satt til blank ...';
 $s_account_unlock_msg = 'Kontoen har blitt låst opp.';

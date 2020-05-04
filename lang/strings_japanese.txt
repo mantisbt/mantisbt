@@ -771,7 +771,6 @@ $s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワ
 $s_show_all_users = 'すべて';
 $s_users_unused = '未使用';
 $s_users_new = '新規';
-$s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
 $s_account_reset_msg = '選択したユーザーのメールアドレスに、確認のメールを送付しました。メールの指示に従うとパスワードを変更できます。';
 $s_account_reset_msg2 = 'アカウントのパスワードを空にしました...';
 $s_account_unlock_msg = 'アカウントのロックを解除しました。';

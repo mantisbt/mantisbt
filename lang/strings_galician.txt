@@ -758,7 +758,6 @@ $s_reset_password_msg2 = '"Restablecer o contrasinal" establece o contrasinal en
 $s_show_all_users = 'Todos';
 $s_users_unused = 'SEN USO';
 $s_users_new = 'Novo';
-$s_account_reset_protected_msg = 'Conta protexida. Non se pode restablecer o contrasinal.';
 $s_account_reset_msg = 'Unha solicitude de confirmación foi enviada ao enderezo de correo electrónico do usuario seleccionado. Mediante isto, o usuario será capaz de cambiar o seu contrasinal.';
 $s_account_reset_msg2 = 'O contrasinal da conta foi establecido en branco...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';

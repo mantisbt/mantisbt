@@ -770,7 +770,6 @@ $s_reset_password_msg2 = 'Instellen van wachtwoord op begininstellingen stelt he
 $s_show_all_users = 'Alle';
 $s_users_unused = 'Ongebruikt';
 $s_users_new = 'Nieuw';
-$s_account_reset_protected_msg = 'Deze account is beschermd. Het wachtwoord kan niet opnieuw worden ingesteld.';
 $s_account_reset_msg = 'Er is een bevestigingsbericht verstuurd naar het e-mailadres van gebruiker. Hiermee kan de gebruiker het wachtwoord wijzigen.';
 $s_account_reset_msg2 = 'Het wachtwoord voor de gebruiker ingesteld op leeg.';
 $s_account_unlock_msg = 'De account is ontgrendeld.';

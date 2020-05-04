@@ -669,7 +669,6 @@ $s_reset_password_msg2 = 'Parooli algseade taastamine annab kasutajale tühja pa
 $s_show_all_users = 'Kõik';
 $s_users_unused = 'Pole kasutuses';
 $s_users_new = 'Uus';
-$s_account_reset_protected_msg = 'Kasutajatunnus kaitstud. Parooli algseade taastamine pole võimalik.';
 $s_account_reset_msg = 'Kinnitusteade on saadetud kasutajakonto e-posti aadressile...';
 $s_account_reset_msg2 = 'Kasutajale on antud tühi parool...';
 $s_manage_user_protected_msg = 'Kasutajatunnus on kaitstud. Juurdepääsu ja kasutusõiguste tase kaitstud. Teised kasutaja andmed uuendatud...';

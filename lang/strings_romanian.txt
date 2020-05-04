@@ -692,7 +692,6 @@ $s_reset_password_msg2 = 'Înțializarea parolei va face ca parola să fie nulă
 $s_show_all_users = 'Toți';
 $s_users_unused = 'Nefolosit';
 $s_users_new = 'Nou';
-$s_account_reset_protected_msg = 'Cont protejat. Parola nu poate fi resetată.';
 $s_account_reset_msg = 'Mesajul de confirmare a fost trimis pe adresa dumneavoastră de e-mail...';
 $s_account_reset_msg2 = 'Noua parolă este nulă...';
 $s_account_unlock_msg = 'Contul a fost deblocat.';

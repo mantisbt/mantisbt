@@ -312,7 +312,6 @@ $s_reset_password_msg2 = '„Dönuvälön letavödi“ vagükon letavödi.';
 $s_show_all_users = 'VALIKS';
 $s_users_unused = 'NO PAGEBÖL';
 $s_users_new = 'NULIK';
-$s_account_reset_protected_msg = 'Kal pejalon. Letavödi no dalon padönuvälön.';
 $s_account_reset_msg2 = 'Kalaletavöd pevagükon...';
 $s_back_link = 'Geikön';
 $s_file_uploaded_msg = 'Ragivilöpükam eplöpon.';

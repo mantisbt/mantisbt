@@ -761,7 +761,6 @@ $s_reset_password_msg2 = 'Adderaouekaat ar ger-tremen a laka ar ger-tremen goull
 $s_show_all_users = 'An holl';
 $s_users_unused = 'Dizimplij';
 $s_users_new = 'Nevez';
-$s_account_reset_protected_msg = 'Kont gwarezet. Ne c\'haller ket adderaouekaat ar ger-tremen.';
 $s_account_reset_msg = 'Kaset ez eus bet ur goulenn kadarnaat da chomlec\'h postel an implijer diuzet. Gant se e c\'hallo an implijer cheñch e c\'her-tremen.';
 $s_account_reset_msg2 = 'Goulloet eo bet ger-tremen ar gont...';
 $s_account_unlock_msg = 'Dibrennet eo bet ar gont.';

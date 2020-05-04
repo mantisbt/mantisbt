@@ -707,7 +707,6 @@ $s_reset_password_msg2 = 'Reïnicializar lo senhal o daissa void.';
 $s_show_all_users = 'TOTES';
 $s_users_unused = 'INUTILIZAT';
 $s_users_new = 'NOVÈL';
-$s_account_reset_protected_msg = 'Aqueste compte es protegit. Podètz pas reïnicializar lo senhal.';
 $s_account_reset_msg = 'Lo messatge de confirmacion es estat mandat a vòstra adreça de corrièr electronic...';
 $s_account_reset_msg2 = 'Lo senhal del compte es estat mes a void...';
 $s_account_unlock_msg = 'Lo compte es estat desverrolhat.';

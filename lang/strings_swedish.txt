@@ -775,7 +775,6 @@ $s_reset_password_msg2 = 'Nollställ lösenord sätter ett tomt lösenord.';
 $s_show_all_users = 'Alla';
 $s_users_unused = 'Oanvänd';
 $s_users_new = 'Ny';
-$s_account_reset_protected_msg = 'Kontot skyddat. Kan inte återställa lösenordet.';
 $s_account_reset_msg = 'Godkännandelänk har blivit skickat till angiven användares e-postadress. Med hjälp av denna kommer användaren att kunna ändra sitt lösenord.';
 $s_account_reset_msg2 = 'Lösenordet för kontot är tomt...';
 $s_account_unlock_msg = 'Kontot har låsts upp.';

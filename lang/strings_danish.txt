@@ -757,7 +757,6 @@ $s_reset_password_msg2 = 'Nulstil adgangskode stiller adgangskoden til at være 
 $s_show_all_users = 'Alle';
 $s_users_unused = 'Ubrugt';
 $s_users_new = 'Ny';
-$s_account_reset_protected_msg = 'Beskyttet konto. Kan ikke nulstille adgangskode.';
 $s_account_reset_msg = 'En bekræftigelsesmeddelelse er blevet sendt til den valgte brugers e-mailadresse. Ved hjælp af den kan brugeren ændre sin adgangskode.';
 $s_account_reset_msg2 = 'Kontoens adgangskode nulstillet...';
 $s_account_unlock_msg = 'Kontoen er blevet låst op.';

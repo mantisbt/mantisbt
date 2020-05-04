@@ -664,7 +664,6 @@ $s_reset_password_msg2 = 'Muling itinatakda ng Muling Itakda ang Hudyat papunta 
 $s_show_all_users = 'LAHAT';
 $s_users_unused = 'HINDI PA NAGAGAMIT';
 $s_users_new = 'BAGO';
-$s_account_reset_protected_msg = 'Nakasanggalang ang akawnt. Hindi maitatakdang muli ang hudyat.';
 $s_account_reset_msg = 'Ipinadala na ang isang kahilingan ng pagpapatunay patungo sa napiling adres ng e-liham ng tagagamit. Sa paggamit nito, magkakaroon ng kakayahan ang tagagamit na baguhin ang kanilang hudyat.';
 $s_account_reset_msg2 = 'Nakatakda bilang walang laman ang hudyat...';
 $s_account_unlock_msg = 'Tinanggal na ang kandado at nabuksan na ang akawnt.';

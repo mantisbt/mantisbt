@@ -770,7 +770,6 @@ $s_reset_password_msg2 = 'Repor Palavra-chave configura uma senha em branco.';
 $s_show_all_users = 'Todos';
 $s_users_unused = 'Não usado';
 $s_users_new = 'Novo';
-$s_account_reset_protected_msg = 'Conta protegida. Não é possível limpar a palavra-chave.';
 $s_account_reset_msg = 'Um pedido de confirmação foi enviado para o email do utilizador. Através deste pedido, o utilizador poderá modificar a sua palavra-passe.';
 $s_account_reset_msg2 = 'Palavra-chave da conta definida para vazia...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';

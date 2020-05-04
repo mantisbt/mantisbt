@@ -757,7 +757,6 @@ $s_reset_password_msg2 = 'Pasahitza Berrezarrik pasahitz hutsa berrezartzen du.'
 $s_show_all_users = 'Denak';
 $s_users_unused = 'Erabili gabea';
 $s_users_new = 'Berriak';
-$s_account_reset_protected_msg = 'Kontu babestua. Ezin da pasahitza berrezarri.';
 $s_account_reset_msg = 'Aukeratutako erabiltzailearen e-posta helbidera egiaztapen mezu bat bidali da. Hau erabiliz, erabiltzaileak bere pasahitza aldatzeko aukera izango du.';
 $s_account_reset_msg2 = 'Kontuaren pasahitza hutsik moduan ezarri da...';
 $s_account_unlock_msg = 'Kontua desblokeatu egin da.';

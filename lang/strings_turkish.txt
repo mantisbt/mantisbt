@@ -248,6 +248,7 @@ $s_new_account_signup_msg = 'Aşağıdaki hesap oluşturuldu:';
 $s_reset_request_msg = 'Birisi (muhtemelen siz) e-posta yoluyla bir şifre değiştirme talebinde bulundu. Bu siz yapmadıysanız, bu mesajı yok sayın, hiç bir şey olmayacaktır. 
 
 Eğer doğrulama İstenirse, şifrenizi değiştirmek için aşağıdaki URL\'yi ziyaret edin:';
+$s_reset_request_admin_msg = 'Parolanız sıfırlandı. Yeni bir URL ayarlamak için lütfen aşağıdaki URL\'yi ziyaret edin:';
 $s_reset_request_in_progress_msg = 'Eğer hesabınız için doğru kullanıcı adı ve e-posta adresi belirttiyseniz, bize vermiş olduğunuz e-posta adresine bir onay mesajı gönderilecektir. Bu mesajı alındıktan sonra, hesabınıza şifre değiştirmek için verilen yönergeleri izleyin.';
 $s_email_notification_title_for_status_bug_new = 'Aşağıdaki sorunun durumu YENİ (tekrar)';
 $s_email_notification_title_for_status_bug_feedback = 'Aşağıdaki sorun için GERİ BİLDİRİM yapmalısınız.';
@@ -780,7 +781,6 @@ $s_reset_password_msg2 = 'Parolayı Sıfırlamak parolanın boş olmasını sıf
 $s_show_all_users = 'Hepsi';
 $s_users_unused = 'Kullanılmamış';
 $s_users_new = 'Yeni';
-$s_account_reset_protected_msg = 'Hesap korumalı. Parola sıfırlanamıyor.';
 $s_account_reset_msg = 'Seçilen kullanıcının e-posta adresine bir onay isteği gönderildi. Bunu kullanarak kullanıcı parolayı değiştirebilecektir.';
 $s_account_reset_msg2 = 'Hesap şifresi boş olarak düzenlendi...';
 $s_account_unlock_msg = 'Hesap kilidi açıldı.';
@@ -1301,7 +1301,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadı. Lütfen proje ayarların
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Bu isimde bir proje zaten mevcut.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli olan "%1$s" girdi alanı boş bırakıldı. Lütfen girdilerinizi kontrol ediniz.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '\'%1$s\' için geçersiz değer';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanıcı hesabı koruma altında. Koruma kaldırılana kadar erişime izin verilmeyecektir.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu hesap korunuyor. Hesap koruması kaldırılana kadar istenen işlemi gerçekleştirmenize izin verilmiyor.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Erişim Engellendi.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Dosya yükleme başarısız oldu. Dosya MantisBT tarafından okunamaz. Proje ayarlarını gözden geçirin.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dosya yükleme başarısız oldu. Bu büyük ihtimalle PHP kurulumunun izin verdiğinden daha büyük boyutta dosya kullanıldığından kaynaklanmaktadır.';

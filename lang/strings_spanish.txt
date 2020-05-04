@@ -785,7 +785,6 @@ $s_reset_password_msg2 = 'Reinicializar Contraseña establece la misma en blanco
 $s_show_all_users = 'TODOS';
 $s_users_unused = 'NO USADO';
 $s_users_new = 'NUEVO';
-$s_account_reset_protected_msg = 'La cuenta está protegida. No es posible restablecer la contraseña.';
 $s_account_reset_msg = 'Se ha enviado un correo electrónico de solicitud de confirmación a las direcciones de correo electrónico del usuario seleccionado. Utilizándolo, el usuario podrá cambiar si contraseña.';
 $s_account_reset_msg2 = 'La contraseña de la cuenta fue establecida en blanco...';
 $s_account_unlock_msg = 'Se ha desbloqueado la cuenta.';

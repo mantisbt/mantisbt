@@ -749,7 +749,6 @@ $s_reset_password_msg2 = 'Reaniciar la contraseña pon la mesma en blancu.';
 $s_show_all_users = 'Toes';
 $s_users_unused = 'Sin usar';
 $s_users_new = 'Nuevu';
-$s_account_reset_protected_msg = 'Cunta protexida. Nun puede reaniciase la contraseña.';
 $s_account_reset_msg = 'Unvióse una solicitú de confirmación a les direcciones de corréu electrónicu del usuariu escoyíu. Utilizándolo, l\'usuariu podrá camudar la contraseña.';
 $s_account_reset_msg2 = 'La contraseña de la cuenta púnxose\'n blancu...';
 $s_account_unlock_msg = 'Desbloquióse la cuenta.';

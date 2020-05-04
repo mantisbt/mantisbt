@@ -765,7 +765,6 @@ $s_reset_password_msg2 = 'A jelszó-visszaállítás üresre állítja a jelszó
 $s_show_all_users = 'Mind';
 $s_users_unused = 'Nem használt';
 $s_users_new = 'Új';
-$s_account_reset_protected_msg = 'Védett fiók, a jelszó nem állítható vissza.';
 $s_account_reset_msg = 'Egy megerősítési kérés lett küldve a kiválasztott felhasználó e-mail címére, melynek használatával megváltoztathatja a jelszavát.';
 $s_account_reset_msg2 = 'A fiók jelszava üresre lett állítva…';
 $s_account_unlock_msg = 'A fiók zárolása feloldva.';

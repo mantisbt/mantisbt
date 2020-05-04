@@ -518,7 +518,6 @@ $s_delete_user_button = 'Dzēst lietotāju';
 $s_reset_password_msg = 'Paroles atiestatīšana nosūta apstiprinājuma saiti, izmantojot e-pastu.';
 $s_reset_password_msg2 = 'šobrīd lietotājam nav paroles (tukša).';
 $s_show_all_users = 'Visi';
-$s_account_reset_protected_msg = 'Lietotāja konts ir aizsargāts. Paroli nevar atcelt.';
 $s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Parole tagad ir tukša...';
 $s_manage_user_protected_msg = 'Konts aizsargāts; Laukus "Piekļuves līmenis" un "Iespējots" nevar mainīt. Citi lauki veiksmīgi atjaunināti.';

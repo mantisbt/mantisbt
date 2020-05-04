@@ -662,7 +662,6 @@ $s_reset_password_msg2 = '„Obnovi lozinku“ postavlja lozinku kao praznu.';
 $s_show_all_users = 'Sve';
 $s_users_unused = 'Nekorišćeno';
 $s_users_new = 'Novo';
-$s_account_reset_protected_msg = 'Nalog je zaštićen. Ne mogu da obnovim lozinku.';
 $s_account_reset_msg = 'Na e-adresu izabranog korisnika je poslat zahtev za potvrdu. Uz pomoć ovog zahteva, korisnik može da promeni svoju lozinku.';
 $s_account_reset_msg2 = 'Lozinka je postavljena kao prazna.';
 $s_account_unlock_msg = 'Nalog je otključan.';
