@@ -685,7 +685,6 @@ $s_reset_password_msg2 = 'Resetoi salasana asettaa käyttäjälle tyhjän salasa
 $s_show_all_users = 'Kaikki';
 $s_users_unused = 'Ei käytössä';
 $s_users_new = 'Uusi';
-$s_account_reset_protected_msg = 'Käyttäjätunnus on suojattu. Salasanaa ei voida resetoida.';
 $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...';
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
 $s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Kenttiö ”käyttöoikeustaso” ja ”käytössä” ei voi muuttaa. Muut kentät päivitettiin.';

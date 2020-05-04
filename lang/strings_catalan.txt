@@ -699,7 +699,6 @@ $s_reset_password_msg2 = 'Restableix la contrasenya deixant-la en blanc.';
 $s_show_all_users = 'Tots';
 $s_users_unused = 'No usat';
 $s_users_new = 'Nou';
-$s_account_reset_protected_msg = 'Compte protegit. No és possible restablir la contrasenya.';
 $s_account_reset_msg = 'S\'ha enviat un correu de confirmació a l\'adreça de correu electrònic...';
 $s_account_reset_msg2 = 'La contrasenya s\'ha establert en blanc...';
 $s_account_unlock_msg = 'El compta ha estat desbloquejat.';

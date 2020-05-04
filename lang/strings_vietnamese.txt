@@ -677,7 +677,6 @@ $s_reset_password_msg2 = 'Thiết lập lại mật khẩu thiết lập lại m
 $s_show_all_users = 'Tất cả';
 $s_users_unused = 'Không sử dụng';
 $s_users_new = 'Mới';
-$s_account_reset_protected_msg = 'Tài khoản được bảo vệ. Không thể đặt lại mật khẩu.';
 $s_account_reset_msg = 'Một yêu cầu xác nhận đã được gửi tới địa chỉ e-mail của người sử dụng lựa chọn. Sử dụng này, người sử dụng sẽ có thể thay đổi mật khẩu của họ.';
 $s_account_reset_msg2 = 'Mật khẩu của tài khoản đã được thiết lập để trống...';
 $s_account_unlock_msg = 'Tài khoản đã được mở khóa';

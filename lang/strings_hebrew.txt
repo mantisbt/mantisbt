@@ -744,7 +744,6 @@ $s_reset_password_msg2 = 'איפוס הססמה מוחק את הססמה הקי�
 $s_show_all_users = 'כולם';
 $s_users_unused = 'לא בשימוש';
 $s_users_new = 'חדש';
-$s_account_reset_protected_msg = 'החשבון מוגן. לא ניתן לאפס את הססמה.';
 $s_account_reset_msg = 'הודעת אישור נשלחה בדוא״ל למשתמש בחשבון. ההודעה תפנה את המשתמש לתהליך בחירת ססמה.';
 $s_account_reset_msg2 = 'הוגדרה ססמה ריקה...';
 $s_account_unlock_msg = 'הנעילה של החשבון הזה בוטלה.';

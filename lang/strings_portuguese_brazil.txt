@@ -782,7 +782,6 @@ $s_reset_password_msg2 = 'Redefinir Senha deixará a senha em branco.';
 $s_show_all_users = 'TODOS';
 $s_users_unused = 'NÃO UTILIZADO';
 $s_users_new = 'NOVO';
-$s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.';
 $s_account_reset_msg = 'Uma solicitação de confirmação foi enviada ao endereço de e-mail do usuário selecionado. Através deste, o usuário será capaz de alterar sua senha.';
 $s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';

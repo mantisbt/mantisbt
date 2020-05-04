@@ -751,7 +751,6 @@ $s_reset_password_msg2 = 'Endurstillt lykilorð er núllstillt.';
 $s_show_all_users = 'Allir';
 $s_users_unused = 'Ónotað';
 $s_users_new = 'Nýtt';
-$s_account_reset_protected_msg = 'Aðgangur varinn. Ekki er hægt að endurstilla lykilorð.';
 $s_account_reset_msg = 'Beiðni um staðfestingu hefur verið send í tölvupósti til notandans. Notandinn getur því breytt lykilorði sínu.';
 $s_account_reset_msg2 = 'Aðgangs lykilorðið hefur verið núllstillt...';
 $s_account_unlock_msg = 'Aðgangnum hefur verið aflæst.';

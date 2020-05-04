@@ -774,7 +774,6 @@ $s_reset_password_msg2 = 'Změna hesla nastaví prázdné heslo.';
 $s_show_all_users = 'všichni';
 $s_users_unused = 'Nepoužité';
 $s_users_new = 'Nové';
-$s_account_reset_protected_msg = 'Účet je chráněn. Není možné změnit heslo.';
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
 $s_account_unlock_msg = 'Účet byl odemčen.';

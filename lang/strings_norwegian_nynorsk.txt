@@ -300,7 +300,6 @@ $s_edit_user_title = 'Endra brukar';
 $s_show_all_users = 'Alle';
 $s_users_unused = 'UNYTTA';
 $s_users_new = 'NYE';
-$s_account_reset_protected_msg = 'Brukarkontoen er verna. Kan ikkje nullstilla passord.';
 $s_account_link = 'Kontoen min';
 $s_my_view_link = 'Oversynet mitt';
 $s_my_view_title_unassigned = 'Utildelte';

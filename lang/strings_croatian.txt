@@ -311,7 +311,6 @@ $s_edit_user_title = 'Editiraj korisnika';
 $s_reset_password_button = 'Resetiraj zaporku';
 $s_delete_user_button = 'Obriši korisnika';
 $s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
-$s_account_reset_protected_msg = 'Korisnički račun zaštićen. Ne mogu resetirati zaporku.';
 $s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Postavljena je prazna korisnička zaporka...';
 $s_manage_user_protected_msg = 'Korisnički račun zaštićen; polja \'Razina pristupa\' i \'Omogućeno\' ne mogu se promijeniti. Ostala polja su uspješno ažurirana.';

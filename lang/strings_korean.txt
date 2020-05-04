@@ -756,7 +756,6 @@ $s_reset_password_msg2 = '비밀번호 초기화는 비밀번호를 공백으로
 $s_show_all_users = '모두';
 $s_users_unused = '사용하지 않음';
 $s_users_new = '새 사용자';
-$s_account_reset_protected_msg = '보호된 계정입니다. 비밀번호를 재설정할 수 없습니다.';
 $s_account_reset_msg = '지정된 사용자 이메일 주소로 확인 요청을 보냈습니다. 사용자는 이 정보를 이용하여 비밀번호를 변경할 수 있습니다.';
 $s_account_reset_msg2 = '계정을 비밀번호가 없는 상태로 초기화합니다...';
 $s_account_unlock_msg = '계정 잠금 상태가 해제되었습니다.';

@@ -254,6 +254,7 @@ $s_new_account_signup_msg = 'Le compte suivant a été créé :';
 $s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par courriel. Si ce n’était pas vous, ignorez ce message et il n’arrivera rien.
 
 Si vous avez demandé cette vérification, visitez l’URL suivante pour changer votre mot de passe :';
+$s_reset_request_admin_msg = 'Votre mot de passe a été réinitialisé. Veuillez aller sur l’URL suivant pour en définir un nouveau :';
 $s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d’utilisateur et l’adresse de courriel corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse de courriel. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
 $s_email_notification_title_for_status_bug_new = 'L’anomalie suivante est maintenant au statut NOUVELLE (encore)';
 $s_email_notification_title_for_status_bug_feedback = 'L’anomalie suivante nécessite votre AVIS.';
@@ -786,7 +787,6 @@ $s_reset_password_msg2 = 'Réinitialiser le mot de passe le laisse à blanc : 
 $s_show_all_users = 'Tous';
 $s_users_unused = 'Inutilisé';
 $s_users_new = 'Nouveau';
-$s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
 $s_account_reset_msg = 'Un message de confirmation a été envoyé à l’adresse courriel de l’utilisateur sélectionné. Grace à ceci, l’utilisateur sera en mesure de modifier son mot de passe.';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à blanc...';
 $s_account_unlock_msg = 'Le compte a été déverrouillé.';
@@ -1309,7 +1309,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n’existe pas. Veuillez vé
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le champ obligatoire « %1$s » n’est pas renseigné. Veuillez vérifier à nouveau votre saisie.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valeur non valide pour « %1$s »';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé. Vous n’êtes pas autorisé à accéder à ceci tant que la protection du compte n’est pas levée.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé. Vous n’êtes pas autorisé à effectuer l’opération demandée tant que la protection du compte n’est pas levée.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accès interdit.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier. Le fichier n’est pas lisible par MantisBT. Vérifiez la configuration du projet.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Échec du téléversement de fichier. La taille du fichier était vraisemblablement plus grande que ce qui est actuellement permis par cette installation de PHP.';

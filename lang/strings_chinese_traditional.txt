@@ -241,6 +241,7 @@ $s_new_account_signup_msg = '下列帳號已經建立完成：';
 $s_reset_request_msg = '不明人士 (可能是你自己) 提出更改密碼的請求，若您沒有提出這個請求，您可以直接忽略這封確認信件。
 
 若這個請求確定是您提出的，請進入下列的網址來更改您的密碼：';
+$s_reset_request_admin_msg = '您的密碼已被重新設定。請訪問以下 URL 來設定新密碼：';
 $s_reset_request_in_progress_msg = '若您提供的帳號及電子郵件信箱正確，系統將會自動寄發一封確認信到你的電子郵件信箱。當你收到這封確認信，請依照信中的指示的步驟更改您的密碼。';
 $s_email_notification_title_for_status_bug_new = '下列問題現在被重設為 [新問題] 狀態。';
 $s_email_notification_title_for_status_bug_feedback = '下列問題需要您的 [回覆]。';
@@ -772,7 +773,6 @@ $s_reset_password_msg2 = '重新設定密碼為空白。';
 $s_show_all_users = '全部';
 $s_users_unused = '未使用';
 $s_users_new = '新增';
-$s_account_reset_protected_msg = '帳號受保護。無法重設密碼。';
 $s_account_reset_msg = '確認訊息已寄送至選擇使用者的電子郵件信箱，
 使用此功能，使用者將可以更改自己的密碼。';
 $s_account_reset_msg2 = '此帳號的密碼已設為空白...';
@@ -1293,7 +1293,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = '該目錄不存在。 請檢查專案設定
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = '此專案名稱已存在。';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = '必填欄位 \'%1$s\' 是空值。 請重新檢查你輸入的資料。';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = '用於「%1$s」的無效值';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '此帳號目前被保護。 您不被允許執行此作業直到帳號保護解除之前。';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = '此帳號目前被保護。直到帳號保護解除之前，您不被允許執行請求的操作。';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '拒絕存取。';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = '檔案上傳失敗，MantisBT 無法讀取檔案。 請檢查該專案設定。';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '檔案上傳失敗。 可能因檔案大小超過目前 PHP 所允許的範圍。';

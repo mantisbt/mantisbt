@@ -415,7 +415,6 @@ $s_delete_user_button = 'Briši uporabnika';
 $s_reset_password_msg = 'Ponastavljanje gesla ustvari naključno ustvarjeno geslo.';
 $s_reset_password_msg2 = 'Ponastavljanje gesla nastavi prazno geslo.';
 $s_show_all_users = 'Vsi';
-$s_account_reset_protected_msg = 'Račun je zaščiten. Ne morem ponastaviti gesla.';
 $s_account_reset_msg = 'Ustvaril sem novo geslo in ga poslal uporabniku..';
 $s_account_reset_msg2 = 'Geslo je bilo postavljeno na prazno...';
 $s_manage_user_protected_msg = 'Račun je zaščiten, zato polji »Raven dostopa« in »Omogočeno« ni mogoče spremeniti. Druga polja smo uspešno posodobili.';
