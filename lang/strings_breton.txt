@@ -230,6 +230,7 @@ $s_new_account_signup_msg = 'Krouet eo bet ar gont-mañ :';
 $s_reset_request_msg = 'Unan bennak (c\'hwi, moarvat) en deus goulennet ur cheñchamant ger-tremen da wiriañ dre bostel. Ma ne oa ket c\'hwi, lezit ar gemennadenn-mañ a-gostez ha ne c\'hoarvezo netra.
 
 M\'hoc\'h eus goulennet ar gwiriadur-mañ, kit d\'an URL-mañ evit cheñch ho ker-tremen :';
+$s_reset_request_admin_msg = 'Adderaouekaet eo bet ho ker-tremen. Kit war an URL da heul evit spisaat unan nevez :';
 $s_reset_request_in_progress_msg = 'M\'hoc\'h eus pourchaset an anv implijer hag ar chomlec\'h postel reizh evit ho kont, hon eus kaset deoc\'h ur postel kadarnaat d\'ar chomlec\'h-se. Ur wech ma vo resevet ar gemennadenn, grit diouzh an titouroù pourchaset evit cheñch ger-tremen ho kont.';
 $s_email_notification_title_for_status_bug_new = 'An draen-mañ zo bremañ er statud NEVEZ (adarre)';
 $s_email_notification_title_for_status_bug_feedback = 'An draen-mañ en deus ezhomm eus hoc\'h evezhiadenn.';
@@ -1280,7 +1281,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'N\'eus ket eus ar c\'havlec\'h. Gwiriit arv
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ur raktres en anv-se zo anezhañ dija.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Goullo e oa ur vaezienn rekis. Gwiriit ho roadennoù, mar plij.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Talvoud direizh evit\'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Gwarezet eo ar gont-mañ. N\'oc\'h ket aotreet da vont dezhañ keit ha ma\'z eo gwarezet.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Gwarezet eo ar gont-mañ. N\'oc\'h ket aotreet da seveniñ an oberiadenn goulennet e-keit ha ma chomo evel-se.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Moned nac\'het.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'C\'hwitet eo kargadenn ar restr. Ne c\'hall ket ar restr bezañ lennet gant MantisBT. Gwiriit arventennoù ar raktres, mar plij.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'C\'hwitet eo kargadenn ar restr. Moarvat e oa re vras ment ar restr evit ho kefluniadur PHP.';

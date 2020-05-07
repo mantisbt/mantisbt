@@ -251,6 +251,7 @@ $s_new_account_signup_msg = 'A seguinte conta foi criada:';
 $s_reset_request_msg = 'Alguém (presumidamente você) solicitou uma troca de senha através da verificação de e-mail. Se este não foi você, ignore esta mensagem e nada irá acontecer.
 
 Se você solicitou esta verificação, visite o seguinte endereço para alterar a sua senha:';
+$s_reset_request_admin_msg = 'Sua senha foi alterada. Visite o seguinte URL para definir um novo:';
 $s_reset_request_in_progress_msg = 'Se você forneceu o nome de usuário e endereço de e-mail corretos para a sua conta, nós teremos enviado agora uma mensagem de confirmação para este endereço de e-mail. Assim que a mensagem for recebida, siga as instruções fornecidas para mudar a senha da sua conta.';
 $s_email_notification_title_for_status_bug_new = 'A seguinte tarefa está agora com status NOVO (novamente).';
 $s_email_notification_title_for_status_bug_feedback = 'A seguinte tarefa requer seu RETORNO.';
@@ -1302,7 +1303,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O diretório não existe. Por favor, verifi
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário \'%1$s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor inválido de \'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para executar a operação solicitada até que a proteção da conta seja levantada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou. O arquivo não pôde ser lido pelo MantisBT. Por favor, verifique as configurações do projeto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavelmente é devido ao tamanho do arquivo ser maior do que o permitido atualmente por esta instalação PHP.';
