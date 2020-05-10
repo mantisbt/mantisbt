@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Developers_Guide.ent">
+%BOOK_ENTITIES;
+]>
+
+<chapter id="restapi">
+	<title>MantisBT REST API</title>
+
+	<para>
+		The primary means of integrating with MantisBT with web services is
+		with the bundled REST API, which is accessible at
+
+		<literal>https://server.com/mantis/api/rest/</literal>.
+	</para>
+
+	<section id="restapi.postman">
+		<title>Postman</title>
+
+		<para>
+			Postman is a tool to enable REST API development and collaboration.
+			It is used by MantisBT team to share the API definitions
+			and enables the community to experiment with the API.
+
+			<ulink url="https://www.postman.com/">Download Postman</ulink>.
+		</para>
+
+		<para>
+			Once Postman is installed, you should be able to bootstrap it with the
+			MantisBT API collection via the MantisBT API documentation posted on Postman.
+
+			<ulink url="https://documenter.getpostman.com/view/29959/7Lt6zkP">Download Collection</ulink>.
+		</para>
+
+		<para>
+			The MantisBT API Postman collection is also distributed with MantisBT in the
+			`api/rest/api.postman_collection.json`. The Postman environment template is also
+			available at `api/rest/env.postman_environment.json`.
+		</para>
+	</section>
+
+	<section id="restapi.export">
+		<title>Exporting Postman Collection</title>
+
+		<para>
+			The bundled Postman collection can be updated by clicking on the "..." next
+			to "Mantis Bug Tracker REST API" and choosing "Export...". Then select
+			"Collection v2.1" and click "Export" and select `api/rest/api.postman_collection.json`.
+			Then follow the standard pull request and checkin process.
+		</para>
+	</section>
+</chapter>
