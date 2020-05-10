@@ -34,12 +34,15 @@ class DiagnosticsMiddleware {
 
 		if( auth_is_user_authenticated() && config_get_global( 'show_queries_count' ) ) {
 			global $g_queries_array, $g_request_time, $g_db_log_queries;
-			$t_response = $t_response->withHeader( HEADER_QUERIES_COUNT, count( $g_queries_array ) );
-			$t_response = $t_response->withHeader( HEADER_EXECUTION_TIME, number_format( microtime( true ) - $g_request_time, 4 ) );
+			$t_include_queries = $g_db_log_queries && current_user_is_administrator();
 
-			if( $g_db_log_queries && current_user_is_administrator() ) {
+			$t_response = $t_response->withHeader( HEADER_QUERIES_COUNT, count( $g_queries_array ) );
+
+			if( $t_include_queries ) {
 				$t_response = $t_response->withHeader( HEADER_QUERIES, json_encode( $g_queries_array ) );
 			}
+
+			$t_response = $t_response->withHeader( HEADER_EXECUTION_TIME, number_format( microtime( true ) - $g_request_time, 4 ) );
 		}
 
 		return $t_response;
