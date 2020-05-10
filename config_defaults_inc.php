@@ -3283,6 +3283,13 @@ $g_create_permalink_threshold = DEVELOPER;
  */
 $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
+/**
+ * Include disabled users in filters
+ *
+ * @global integer $g_show_disabled_users
+ */
+$g_show_disabled_users = ON;
+
 #########################
 # MantisBT Enum Strings #
 #########################

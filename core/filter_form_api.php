@@ -205,7 +205,7 @@ function print_filter_reporter_id( array $p_filter = null ) {
 				check_selected( $p_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
-		print_reporter_option_list( $p_filter[FILTER_PROPERTY_REPORTER_ID] );
+		print_reporter_option_list( $p_filter[FILTER_PROPERTY_REPORTER_ID], null, ( ON == config_get( 'show_disabled_users' ) ) );
 	}?>
 		</select>
 		<?php
@@ -283,7 +283,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
 
 	if( access_has_project_level( $t_threshold ) ) {
-		print_user_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], null, config_get( 'monitor_bug_threshold' ) );
+		print_user_option_list( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], null, config_get( 'monitor_bug_threshold' ), ( ON == config_get( 'show_disabled_users' ) ) );
 	}
 	?>
 		</select>
@@ -358,7 +358,7 @@ function print_filter_handler_id( array $p_filter = null ) {
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $p_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( $p_filter[FILTER_PROPERTY_HANDLER_ID], null, null, ( ON == config_get( 'show_disabled_users' ) ) );
 	}?>
 		</select>
 		<?php
@@ -1704,7 +1704,7 @@ function print_filter_note_user_id( array $p_filter = null ) {
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
 
-			print_note_option_list( $p_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			print_note_option_list( $p_filter[FILTER_PROPERTY_NOTE_USER_ID], null, null, ( ON == config_get( 'show_disabled_users' ) ) );
 		}
 	?>
 	</select>
