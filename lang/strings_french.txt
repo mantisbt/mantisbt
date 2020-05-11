@@ -254,7 +254,7 @@ $s_new_account_signup_msg = 'Le compte suivant a été créé :';
 $s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par courriel. Si ce n’était pas vous, ignorez ce message et il n’arrivera rien.
 
 Si vous avez demandé cette vérification, visitez l’URL suivante pour changer votre mot de passe :';
-$s_reset_request_admin_msg = 'Votre mot de passe a été réinitialisé. Veuillez aller sur l’URL suivant pour en définir un nouveau :';
+$s_reset_request_admin_msg = 'Votre mot de passe a été réinitialisé. Veuillez aller sur l’URL suivante pour en définir un nouveau :';
 $s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d’utilisateur et l’adresse de courriel corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse de courriel. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
 $s_email_notification_title_for_status_bug_new = 'L’anomalie suivante est maintenant au statut NOUVELLE (encore)';
 $s_email_notification_title_for_status_bug_feedback = 'L’anomalie suivante nécessite votre AVIS.';
