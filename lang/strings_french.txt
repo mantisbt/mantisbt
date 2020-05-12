@@ -1458,3 +1458,4 @@ $s_persist = 'Rendre persitant';
 $s_load = 'Charger';
 $s_apply_changes = 'Appliquer les modifications';
 $s_undo = 'Annuler';
+$s_not_empty = 'non vide';

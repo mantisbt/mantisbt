@@ -830,7 +830,8 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	protected function build_prop_handler() {
-		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
+		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) || 
+			( filter_field_is_not_empty( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) && filter_field_is_none( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) ) ) {
 			return;
 		}
 
@@ -850,10 +851,17 @@ class BugFilterQuery extends DbQuery {
 			$t_view_condition = ' AND ' . $t_view_condition;
 		}
 
-		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_HANDLER_ID] );
-		$t_query = $this->sql_in( '{bug}.handler_id', $t_user_ids ) . $t_view_condition;
-		log_event( LOG_FILTERING, 'handler query = ' . $t_query );
-		$this->add_where( $t_query );
+		if( filter_field_is_not_empty( $this->filter[FILTER_PROPERTY_HANDLER_ID] ) ) {
+			//if empty, handler_id value is 0
+			$t_query = '{bug}.handler_id <> 0 ' . $t_view_condition;
+			log_event( LOG_FILTERING, 'handler query = ' . $t_query );
+			$this->add_where( $t_query );
+		} else {
+			$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_HANDLER_ID] );
+			$t_query = $this->sql_in( '{bug}.handler_id', $t_user_ids ) . $t_view_condition;
+			log_event( LOG_FILTERING, 'handler query = ' . $t_query );
+			$this->add_where( $t_query );
+		}
 	}
 
 	/**
@@ -1074,11 +1082,10 @@ class BugFilterQuery extends DbQuery {
 	 * @return void
 	 */
 	protected function build_prop_monitor_by() {
-		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
+		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] )  || 
+			( filter_field_is_not_empty( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] ) && filter_field_is_none( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) ) {
 			return;
 		}
-		$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] );
-		$t_use_none = ( in_array( 0, $t_user_ids ) );
 
 		# Build a condition for determining monitoring visibility, the user can view:
 		# - his own monitored issues
@@ -1098,14 +1105,21 @@ class BugFilterQuery extends DbQuery {
 		}
 
 		$this->add_join( 'LEFT JOIN {bug_monitor} ON {bug}.id = {bug_monitor}.bug_id' . $t_view_condition );
-		if( $t_use_none ) {
-			$t_expr = 'COALESCE( {bug_monitor}.user_id, 0 )';
-		} else {
-			$t_expr = '{bug_monitor}.user_id';
+		if (filter_field_is_not_empty( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
+			$this->add_where('{bug_monitor}.user_id <> 0 ' );
+		} else { 
+			$t_user_ids = $this->helper_process_users_property( $this->filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+			$t_use_none = ( in_array( 0, $t_user_ids ) );
+
+			if( $t_use_none ) {
+				$t_expr = 'COALESCE( {bug_monitor}.user_id, 0 )';
+			} else {
+				$t_expr = '{bug_monitor}.user_id';
+			}
+			$t_where = $this->sql_in( $t_expr, $t_user_ids );
+			$this->add_where( $t_where );
 		}
 
-		$t_where = $this->sql_in( $t_expr, $t_user_ids );
-		$this->add_where( $t_where );
 	}
 
 	/**
@@ -1456,7 +1470,9 @@ class BugFilterQuery extends DbQuery {
 				continue;
 			}
 			# Ignore custom fields that are not set, or that are set to '' or "any"
-			if( filter_field_is_any( $t_field ) ) {
+			# Also ignore if "none" and "not empty" are both selected
+			if( filter_field_is_any( $t_field ) 
+				|| ( filter_field_is_not_empty( $t_field ) && filter_field_is_none( $t_field ) )) {
 				continue;
 			}
 
@@ -1488,8 +1504,18 @@ class BugFilterQuery extends DbQuery {
 				$t_filter_array = array();
 				foreach( $t_field as $t_filter_member ) {
 					$t_filter_member = stripslashes( $t_filter_member );
-					if( filter_field_is_none( $t_filter_member ) ) {
+					if( filter_field_is_not_empty( $t_filter_member ) ) {
+						switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_TEXTAREA:
+								array_push( $t_filter_array, $t_table_name . '.text <> "" AND ' . $t_table_name . '.text IS NOT NULL' );
+								break;
+							default;
+								array_push( $t_filter_array, $t_table_name . '.value <> "" AND ' . $t_table_name . '.value IS NOT NULL' );
+						}
+						continue;
+					} else if( filter_field_is_none( $t_filter_member ) ) {
 						# but also add those _not_ present in the custom field string table
+						#Note: custom_field_string_table.value is never null
 						$t_filter_array[] = $t_table_name . '.value IS NULL';
 
 						switch( $t_def['type'] ) {

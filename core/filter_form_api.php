@@ -133,31 +133,38 @@ function filter_select_modifier( array $p_filter ) {
 }
 
 /**
- * Print the current value of this filter field, as visible string, and as a hidden form input.
- * @param array $p_filter Filter array
+ * @internal Print the current value of this filter field, as visible string, and as a hidden form input.
+ * This function is used for reporter, handler and monitor filter
+ * @param array $p_filter	Filter array
+ * @param string $p_filter_property property associated to the wanted field
+ * @param string $p_treshold the matching project level threshold  
  * @return void
  */
-function print_filter_values_reporter_id( array $p_filter ) {
+function print_filter_values_user_common( array $p_filter, $p_filter_property, $p_treshold) {
 	$t_filter = $p_filter;
 	$t_output = '';
 	$t_any_found = false;
-	if( count( $t_filter[FILTER_PROPERTY_REPORTER_ID] ) == 0 ) {
+	$t_none_found = false;
+	$t_not_empty_found = false;
+	if( count( $t_filter[$p_filter_property] ) == 0 ) {
 		echo lang_get( 'any' );
 	} else {
 		$t_first_flag = true;
-		foreach( $t_filter[FILTER_PROPERTY_REPORTER_ID] as $t_current ) {
+		foreach( $t_filter[$p_filter_property] as $t_current ) {
+			echo '<input type="hidden" name="', $p_filter_property, '[]" value="', string_attribute( $t_current ), '" />';
 			$t_this_name = '';
-			echo '<input type="hidden" name="', FILTER_PROPERTY_REPORTER_ID, '[]" value="', string_attribute( $t_current ), '" />';
 			if( filter_field_is_any( $t_current ) ) {
 				$t_any_found = true;
+			} else if( filter_field_is_not_empty( $t_current ) ) {
+				$t_not_empty_found = true;
+			} else if( filter_field_is_none( $t_current ) ) {
+				$t_none_found = true;
 			} else if( filter_field_is_myself( $t_current ) ) {
-				if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+				if( access_has_project_level( config_get( $p_treshold ) ) ) {
 					$t_this_name = '[' . lang_get( 'myself' ) . ']';
 				} else {
 					$t_any_found = true;
 				}
-			} else if( filter_field_is_none( $t_current ) ) {
-				$t_this_name = lang_get( 'none' );
 			} else {
 				$t_this_name = user_get_name( $t_current );
 			}
@@ -168,12 +175,26 @@ function print_filter_values_reporter_id( array $p_filter ) {
 			}
 			$t_output = $t_output . string_display_line( $t_this_name );
 		}
-		if( true == $t_any_found ) {
+		#if none and not_empty are selected, any will be displayed
+		if( true == $t_any_found || (true == $t_none_found && true == $t_not_empty_found)  ) {
 			echo lang_get( 'any' );
+		} else if( true == $t_none_found ) {
+			echo lang_get( 'none' );
+		} else if( true == $t_not_empty_found ) {
+			echo lang_get( 'not_empty' );
 		} else {
-			echo $t_output;
+			echo string_display( $t_output );
 		}
 	}
+}
+
+/**
+ * Print the current value of this filter field, as visible string, and as a hidden form input.
+ * @param array $p_filter Filter array
+ * @return void
+ */
+function print_filter_values_reporter_id( array $p_filter ) {
+	print_filter_values_user_common($p_filter, FILTER_PROPERTY_REPORTER_ID, 'report_bug_threshold');
 }
 
 /**
@@ -190,8 +211,8 @@ function print_filter_reporter_id( array $p_filter = null ) {
 	?>
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
 		<?php
-	# if current user is a reporter, and limited_reporters is set to ON, only display that name
-	if( access_has_limited_view() ) {
+		# if current user is a reporter, and limited_reporters is set to ON, only display that name
+		if( access_has_limited_view() ) {
 		$t_id = auth_get_current_user_id();
 		$t_username = user_get_name( $t_id );
 		$t_display_name = string_attribute( $t_username );
@@ -217,45 +238,7 @@ function print_filter_reporter_id( array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_user_monitor( array $p_filter ) {
-	$t_filter = $p_filter;
-	$t_output = '';
-	$t_any_found = false;
-	$t_none_found = false;
-	if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
-		echo lang_get( 'any' );
-	} else {
-		$t_first_flag = true;
-		foreach( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] as $t_current ) {
-			echo '<input type="hidden" name="', FILTER_PROPERTY_MONITOR_USER_ID, '[]" value="', string_attribute( $t_current ), '" />';
-			$t_this_name = '';
-			if( filter_field_is_any( $t_current ) ) {
-				$t_any_found = true;
-			} else if( filter_field_is_none( $t_current ) ) {
-				$t_none_found = true;
-			} else if( filter_field_is_myself( $t_current ) ) {
-				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
-					$t_this_name = '[' . lang_get( 'myself' ) . ']';
-				} else {
-					$t_any_found = true;
-				}
-			} else {
-				$t_this_name = user_get_name( $t_current );
-			}
-			if( $t_first_flag != true ) {
-				$t_output = $t_output . '<br />';
-			} else {
-				$t_first_flag = false;
-			}
-			$t_output = $t_output . string_display_line( $t_this_name );
-		}
-		if( true == $t_any_found ) {
-			echo lang_get( 'any' );
-		} else if( true == $t_none_found ) {
-			echo lang_get( 'none' );
-		} else {
-			echo string_display( $t_output );
-		}
-	}
+	print_filter_values_user_common($p_filter, FILTER_PROPERTY_MONITOR_USER_ID, 'monitor_bug_threshold');
 }
 
 /**
@@ -273,6 +256,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
 	<!-- Monitored by -->
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NOT_EMPTY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_NOT_EMPTY );?>>[<?php echo lang_get( 'not_empty' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -296,42 +280,7 @@ function print_filter_user_monitor( array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_handler_id( array $p_filter ) {
-	$t_filter = $p_filter;
-	$t_output = '';
-	$t_any_found = false;
-	if( count( $t_filter[FILTER_PROPERTY_HANDLER_ID] ) == 0 ) {
-		echo lang_get( 'any' );
-	} else {
-		$t_first_flag = true;
-		foreach( $t_filter[FILTER_PROPERTY_HANDLER_ID] as $t_current ) {
-			echo '<input type="hidden" name="', FILTER_PROPERTY_HANDLER_ID, '[]" value="', string_attribute( $t_current ), '" />';
-			$t_this_name = '';
-			if( filter_field_is_none( $t_current ) ) {
-				$t_this_name = lang_get( 'none' );
-			} else if( filter_field_is_any( $t_current ) ) {
-				$t_any_found = true;
-			} else if( filter_field_is_myself( $t_current ) ) {
-				if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-					$t_this_name = '[' . lang_get( 'myself' ) . ']';
-				} else {
-					$t_any_found = true;
-				}
-			} else {
-				$t_this_name = user_get_name( $t_current );
-			}
-			if( $t_first_flag != true ) {
-				$t_output = $t_output . '<br />';
-			} else {
-				$t_first_flag = false;
-			}
-			$t_output = $t_output . string_display_line( $t_this_name );
-		}
-		if( true == $t_any_found ) {
-			echo lang_get( 'any' );
-		} else {
-			echo string_display( $t_output );
-		}
-	}
+	print_filter_values_user_common($p_filter, FILTER_PROPERTY_HANDLER_ID, 'handle_bug_threshold');
 }
 
 /**
@@ -350,6 +299,7 @@ function print_filter_handler_id( array $p_filter = null ) {
 		<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
+			<option value="<?php echo META_FILTER_NOT_EMPTY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NOT_EMPTY );?>>[<?php echo lang_get( 'not_empty' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $p_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -1854,6 +1804,8 @@ function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 			$t_val = stripslashes( $t_val );
 			if( filter_field_is_none( $t_val ) ) {
 				$t_strings[] = lang_get( 'none' );
+			} else if( filter_field_is_not_empty( $t_val ) ) {
+				$t_strings[] = lang_get( 'not_empty' );
 			} else {
 				$t_strings[] = $t_val;
 			}
@@ -1954,19 +1906,22 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			echo '<option value="' . META_FILTER_ANY . '"';
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
-			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ) ) ) {
+			# don't show META_FILTER_NONE and META_FILTER_NOT_EMPTY for custom fields that are required at bug report
+			if(!$t_cfdef['require_report']) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
-			}
+				echo '<option value="' . META_FILTER_NOT_EMPTY . '"';
+				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NOT_EMPTY, false );
+				echo '>[' . lang_get( 'not_empty' ) . ']</option>';
+			} 
 			# Print possible values
 			$t_included_projects = filter_get_included_projects( $p_filter );
 			$t_values = custom_field_distinct_values( $t_cfdef, $t_included_projects );
 			if( is_array( $t_values ) ){
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_values as $t_val ) {
-					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) ) {
+					if( filter_field_is_any($t_val) || filter_field_is_none( $t_val ) || filter_field_is_not_empty( $t_val ) ) {
 						continue;
 					}
 					echo '<option value="' . string_attribute( $t_val ) . '"';

@@ -1226,6 +1226,7 @@ $s_filter_match_any = 'Any Condition';
 
 # view_all_inc.php
 $s_none = 'none';
+$s_not_empty = 'not empty';
 $s_current = 'current';
 $s_search = 'Search';
 $s_view_prev_link = 'View Prev';
