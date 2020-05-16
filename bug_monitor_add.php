@@ -42,7 +42,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'bug_monitor_add' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
-$f_usernames = trim( gpc_get_string( 'username', '' ) );
+$f_usernames = trim( gpc_get_string( 'user_to_add', '' ) );
 
 $t_payload = array();
 
