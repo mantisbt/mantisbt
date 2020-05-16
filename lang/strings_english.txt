@@ -1289,10 +1289,8 @@ $s_add_user_to_monitor = 'Add';
 $s_browser_does_not_support_audio = 'Your browser does not support audio tag.';
 $s_browser_does_not_support_video = 'Your browser does not support video tag.';
 
-# view_bug_page.php
+# view.php
 $s_bug_view_title = 'View Issue Details';
-
-# bug_monitor_list_view_inc.php
 $s_no_users_monitoring_bug = 'There are no users monitoring this issue.';
 $s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
