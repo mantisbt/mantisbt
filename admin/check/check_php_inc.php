@@ -115,18 +115,6 @@ check_print_test_row(
 	array( false => 'The value of this directive is currently: ' . $t_variables_order )
 );
 
-check_print_test_row(
-	'magic_quotes_gpc php.ini directive is disabled',
-	!( function_exists( 'get_magic_quotes_gpc' ) && @get_magic_quotes_gpc() ),
-	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
-);
-
-check_print_test_row(
-	'magic_quotes_runtime php.ini directive is disabled',
-	!( function_exists( 'get_magic_quotes_runtime' ) && @get_magic_quotes_runtime() ),
-	array( false => 'PHP\'s magic quotes feature is <a href="http://www.php.net/manual/en/security.magicquotes.whynot.php">deprecated in PHP 5.3.0</a> and should not be used.' )
-);
-
 check_print_test_warn_row(
 	'register_argc_argv php.ini directive is disabled',
 	!ini_get_bool( 'register_argc_argv' ),
