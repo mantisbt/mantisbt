@@ -47,6 +47,7 @@
  * @author Dgstranz
  * @author Dtamajon
  * @author Fitoschido
+ * @author Geryescalier
  * @author Guidored
  * @author Jelou
  * @author Joanmp17
@@ -253,6 +254,7 @@ $s_new_account_signup_msg = 'Se ha creado la cuenta siguiente:';
 $s_reset_request_msg = 'Alguien (quizá usted) ha solicitado un cambio de contraseña a través de la verificación del correo electrónico. Si no ha sido usted, ignore este mensaje y no pasará nada.
 
 Si ha solicitado esta verificación, visite el URL siguiente para cambiar su contraseña:';
+$s_reset_request_admin_msg = 'Tu contraseña ha sido restablecida. Visita la siguiente URL para configurar una nueva:';
 $s_reset_request_in_progress_msg = 'Si ha proporcionado un usuario y contraseña correctos recibirá un mensaje de confirmación en su dirección de correo electrónico. Cuando reciba este mensaje siga las instrucciones para cambiar la contraseña de su cuenta.';
 $s_email_notification_title_for_status_bug_new = 'La siguiente incidencia tiene ahora el estado NUEVA (nuevamente)';
 $s_email_notification_title_for_status_bug_feedback = 'La siguiente incidencia requiere MÁS INFORMACIÓN (opinión).';
@@ -1307,7 +1309,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'El directorio no existe. Por favor revise l
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ya existe un proyecto con este nombre.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'El campo requerido «%1$s» está vacío. Por favor, verifique los datos.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor no válido para «%1$s»';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta cuenta está protegida. No está autorizado a utilizarla hasta que la protección de la cuenta haya sido retirada.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta cuenta está protegida. No tiene permiso para realizar la operación solicitada hasta que se elimine la protección de la cuenta.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acceso denegado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ha fallado el proceso de carga del archivo.  El archivo no puede ser leído por MantisBT. Verifique la configuración del proyecto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ha fallado el proceso de carga del archivo.  Posiblemente el tamaño del archivo sea mayor de lo que actualmente está permitido en esta instalación de PHP.';

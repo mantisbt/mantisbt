@@ -44,6 +44,7 @@
  * @author Hiro884
  * @author Macofe
  * @author Mfuji
+ * @author Object＊tofu
  * @author Omotecho
  * @author Otokoume
  * @author Ryoon
@@ -241,6 +242,7 @@ $s_new_account_signup_msg = '以下のアカウントを作成しました:';
 $s_reset_request_msg = '誰か (おそらくあなた) がメール検証でパスワード変更を申請しました。もし覚えがない場合は、このメッセージは無視してください。そうすれば何も起こりません。
 
 この申請をしたのがあなたであれば、パスワードを変更するために次の URL を参照してください:';
+$s_reset_request_admin_msg = 'あなたのパスワードはリセットされました。このURLを入力し、新しいパスワードを設定して下さい。';
 $s_reset_request_in_progress_msg = 'あなたのアカウントに対応する正しいユーザー名とメールアドレスを指定していただければ、今すぐ、そのメールアドレスに確認メッセージを送ります。そのメッセージを受け取ったら、指示に従ってあなたのアカウントのパスワードを変更してください。';
 $s_email_notification_title_for_status_bug_new = '次の課題のステータスが再び新規になりました。';
 $s_email_notification_title_for_status_bug_feedback = '次の課題について、もっと情報が必要です。';
@@ -653,6 +655,7 @@ $s_resolved_status = '解決済とするステータス';
 $s_readonly_status = '編集不可にするステータス';
 $s_reopen_status = '差し戻しされた課題に設定するステータス';
 $s_reopen_resolution = '差し戻された課題に設定する解決状況';
+$s_limit_view_unless_threshold_option = '他の利用者の課題を見る。(もし、課題が設定されていない場合、報告、処理、監視されている課題に限定されます。)';
 $s_config_delete_sure = '以下の設定を本当に削除しますか:';
 $s_in_project = 'プロジェクト:';
 $s_delete_config_button = '設定を削除';
@@ -669,6 +672,7 @@ $s_set_configuration_option_action_create = '設定オプションを作成す�
 $s_set_configuration_option_action_edit = '設定オプションを編集する';
 $s_set_configuration_option_action_clone = '設定オプションをコピーする';
 $s_set_configuration_option_action_view = '設定オプションの確認';
+$s_show_all_complex = '全ての%1$sオプションを表示';
 $s_plugin = 'プラグイン';
 $s_plugins_installed = 'インストール済みプラグイン';
 $s_plugins_available = '利用できるプラグイン';
@@ -1095,6 +1099,8 @@ $s_dependency_graph = '依存グラフ';
 $s_vertical = '縦';
 $s_horizontal = '横';
 $s_view_issue = '課題を表示';
+$s_show_summary = '概要を見る';
+$s_hide_summary = '概要を隠す';
 $s_perm_rpt_capability = '機能';
 $s_view = '参照';
 $s_issues = '課題';
@@ -1238,6 +1244,8 @@ $s_copy_columns_to = '指定したプロジェクトへコピー';
 $s_due_date = '期日';
 $s_overdue = '期限超過';
 $s_overdue_since = '期限切れ %1$s';
+$s_overdue_one_day = '1日以内に延滞';
+$s_overdue_days = '%1$d 以内に延滞';
 $s_view_account_title = 'ユーザー情報';
 $s_manage_user = 'ユーザー管理';
 $s_install_information = 'MantisBT のインストール情報';
