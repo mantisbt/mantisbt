@@ -5,6 +5,7 @@
     "require": {
         "php": ">=5.5.0",
         "ext-mbstring": "*",
+        "ext-json": "*",
         "slim/slim": "^3.0",
         "guzzlehttp/guzzle": "^6.2",
         "vboctor/disposable_email_checker": "^3.0",
