@@ -51,7 +51,8 @@ $t_extensions_required = array(
 	'pcre',
 	'Reflection',
 	'session',
-	'mbstring'
+	'mbstring',
+	'json'
 );
 
 foreach( $t_extensions_required as $t_extension ) {
