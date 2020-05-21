@@ -181,6 +181,9 @@
 								<listitem><para><emphasis>mbstring</emphasis> -
 									Required for Unicode (UTF-8) support.
 								</para></listitem>
+								<listitem><para><emphasis>date, hash, json, pcre, Reflection, session</emphasis> -
+									Required to run MantisBT in general.
+								</para></listitem>
 							</itemizedlist></listitem>
 						</varlistentry>
 
