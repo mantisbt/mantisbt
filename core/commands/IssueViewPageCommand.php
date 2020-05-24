@@ -248,7 +248,7 @@ class IssueViewPageCommand extends Command {
 		$t_flags['can_reopen'] = !$t_force_readonly && access_can_reopen_bug( $t_issue_data );
 
 		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $t_issue_data->project_id );
-		$t_flags['can_close'] = !$t_issue_readonly &&
+		$t_flags['can_close'] = !$t_force_readonly &&
 			access_can_close_bug( $t_issue_data ) && bug_check_workflow( $t_issue_data->status, $t_closed_status );
 
 		$t_flags['can_move'] = !$t_issue_readonly && user_has_more_than_one_project( $t_user_id ) &&
