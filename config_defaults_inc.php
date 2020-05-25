@@ -392,6 +392,13 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
+/**
+ * Remember username after failed login, username will be pass to login page
+ * after failed loging attempt
+ * @global integer $g_remember_username
+ */
+$g_remember_username = ON;
+
 #############
 # Anti-Spam #
 #############
