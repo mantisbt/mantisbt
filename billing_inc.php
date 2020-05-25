@@ -268,6 +268,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
+	uksort ( $t_bugnote_stats['users'], function ($a, $b) { return strcmp(user_get_username($a), user_get_username($b)); } ); // _cis_
+
 	foreach ( $t_bugnote_stats['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
