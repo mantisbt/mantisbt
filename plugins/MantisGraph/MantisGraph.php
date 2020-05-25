@@ -158,34 +158,49 @@ class MantisGraphPlugin extends MantisPlugin  {
 	}
 
 	/**
+	 * Include Chart.js and plugins.
+	 *
+	 * This function can be called by other plugins that may need to use
+	 * Chart.js.
+	 *
+	 * @return void
+	 */
+	function include_chartjs() {
+		if( config_get_global( 'cdn_enabled' ) == ON ) {
+			$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
+
+			# Chart.js library
+			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
+			html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
+			html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
+
+			# Chart.js color schemes plugin
+			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
+			html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
+		} else {
+			$t_scripts = array(
+				'Chart-' . self::CHARTJS_VERSION . '.min.js',
+				'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js',
+				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
+			);
+			foreach( $t_scripts as $t_script ) {
+				printf( "\t<script src=\"%s\"></script>\n",
+					plugin_file( $t_script, false, $this->basename )
+				);
+			}
+		}
+	}
+
+	/**
 	 * Include javascript files for chart.js
 	 * @return void
 	 */
 	function resources() {
 		if( current( explode( '/', gpc_get_string( 'page', '' ) ) ) === $this->basename ) {
-			if( config_get_global( 'cdn_enabled' ) == ON ) {
-				$t_cdn_url = self::CHARTJS_CDN . '/npm/%s@%s/dist/';
-
-				# Chart.js library
-				$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
-				html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
-				html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
-
-				# Chart.js color schemes plugin
-				$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
-				html_javascript_cdn_link( $t_link . 'chartjs-plugin-colorschemes.min.js', self::CHARTJS_COLORSCHEMES_HASH );
-			} else {
-				$t_scripts = array(
-					plugin_file( 'Chart-' . self::CHARTJS_VERSION . '.min.js' ),
-					plugin_file( 'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js' ),
-					plugin_file( 'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js' ),
-				);
-			}
-
-			$t_scripts[] = plugin_file( "MantisGraph.js" );
-			foreach( $t_scripts as $t_script ) {
-				echo "\t", '<script src="' . $t_script . '"></script>', "\n";
-			}
+			$this->include_chartjs();
+			printf( "\t<script src=\"%s\"></script>\n",
+				plugin_file( 'MantisGraph.js' )
+			);
 		}
 	}
 
