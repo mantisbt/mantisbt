@@ -27,10 +27,13 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * Chart JS
 	 * @see https://www.chartjs.org/ Home page
 	 * @see https://www.jsdelivr.com/package/npm/chart.js CDN
+	 *
+	 * Not using the bundled build anymore, as MantisBT Layout API already
+	 * includes Moment.js, and per documentation this could cause issues.
+	 * @see https://www.chartjs.org/docs/latest/getting-started/installation.html#bundled-build
 	 */
 	const CHARTJS_VERSION = '2.8.0';
 	const CHARTJS_HASH = 'sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=';
-	const CHARTJSBUNDLE_HASH = 'sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=';
 
 	/**
 	 * ChartJS colorschemes plugin
@@ -172,7 +175,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 			# Chart.js library
 			$t_link = sprintf( $t_cdn_url, 'chart.js', self::CHARTJS_VERSION );
 			html_javascript_cdn_link( $t_link . 'Chart.min.js', self::CHARTJS_HASH );
-			html_javascript_cdn_link( $t_link . 'Chart.bundle.min.js', self::CHARTJSBUNDLE_HASH );
 
 			# Chart.js color schemes plugin
 			$t_link = sprintf( $t_cdn_url, 'chartjs-plugin-colorschemes', self::CHARTJS_COLORSCHEMES_VERSION );
@@ -180,7 +182,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 		} else {
 			$t_scripts = array(
 				'Chart-' . self::CHARTJS_VERSION . '.min.js',
-				'Chart.bundle-' . self::CHARTJS_VERSION . '.min.js',
 				'chartjs-plugin-colorschemes-' . self::CHARTJS_COLORSCHEMES_VERSION . '.min.js',
 			);
 			foreach( $t_scripts as $t_script ) {
