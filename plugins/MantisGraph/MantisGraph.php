@@ -32,8 +32,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * includes Moment.js, and per documentation this could cause issues.
 	 * @see https://www.chartjs.org/docs/latest/getting-started/installation.html#bundled-build
 	 */
-	const CHARTJS_VERSION = '2.8.0';
-	const CHARTJS_HASH = 'sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=';
+	const CHARTJS_VERSION = '2.9.3';
+	const CHARTJS_HASH = 'sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=';
 
 	/**
 	 * ChartJS colorschemes plugin
