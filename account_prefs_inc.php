@@ -129,7 +129,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		$t_num_proj += count( current_user_get_accessible_subprojects( $t_projects[0] ) );
 	}
 	# Don't display "All projects" in selection list if there is only 1
-	print_project_option_list( (int)$t_pref->default_project, $t_num_proj != 1 );
+	print_project_option_list( (int)$t_pref->default_project, $t_num_proj != 1, null, false, false, $p_user_id );
 ?>
 					</select>
 		</td>
