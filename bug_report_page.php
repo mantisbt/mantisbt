@@ -138,6 +138,13 @@ if( $f_master_bug_id > 0 ) {
 		$t_project_id = $t_default_project;
 	}
 
+	# Check for bug report threshold
+	if( !access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+		# If can't report on current project, show project selector if there is any other allowed project
+		access_ensure_any_project_level( 'report_bug_threshold' );
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
+	}
+
 	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
 		&& $t_project_id != $t_current_project
 		&& project_enabled( $t_project_id ) ) {
@@ -152,12 +159,6 @@ if( $f_master_bug_id > 0 ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
-	# Check for bug report threshold
-	if( !access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
-		# If can't report on current project, show project selector if there is any other allowed project
-		access_ensure_any_project_level( 'report_bug_threshold' );
-		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
-	}
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
