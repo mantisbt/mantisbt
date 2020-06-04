@@ -234,6 +234,7 @@ $s_new_account_signup_msg = 'A következő fiók lett létrehozva:';
 $s_reset_request_msg = 'Valaki (remélhetőleg Ön) jelszóváltoztatást kért, e-mailes megerősítéssel. Ha nem Ön volt, hagyja figyelmen kívül ezt az üzenetet, és semmi sem történik.
 
 Ha Ön kérte ezt a megerősítést, látogassa meg a következő címet a jelszóváltáshoz:';
+$s_reset_request_admin_msg = 'A jelszava visszaállításra került. Új beállításához keresse fel a következő URL-t:';
 $s_reset_request_in_progress_msg = 'Ha megadja a helyes felhasználónevét és e-mail címét, azonnal küldünk egy megerősítő üzenetet. Mihelyt megkapja, kövesse a benne található utasításokat a jelszavának megváltoztatásához.';
 $s_email_notification_title_for_status_bug_new = 'A következő ügy ÚJ állapotba került (újra)';
 $s_email_notification_title_for_status_bug_feedback = 'A következő ügy VISSZAJELZÉSÉRE vár.';
@@ -1285,7 +1286,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A könyvtár nem létezik. Ellenőrizze a p
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Már létezik ilyen nevű projekt.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A kötelező „%1$s” mező üres volt. Ellenőrizze a megadott adatokat.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Érvénytelen érték ehhez: „%1$s”';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett fiók. Hozzáférés a fiókvédelem megszüntetéséig megtagadva.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ez egy védett fiók. A kért műveletet nem végezheti el, amíg a fiókvédelem nincs kikapcsolva.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Hozzáférés megtagadva.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Sikertelen fájlfeltöltés: a MantisBT nem tudja olvasni a fájlt. Ellenőrizze a projekt beállításait.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Sikertelen fájlfeltöltés: a fájl mérete valószínűleg nagyobb, mint amit a jelenlegi PHP beállítások megengednek.';
