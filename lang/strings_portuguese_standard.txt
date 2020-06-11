@@ -50,6 +50,7 @@
  * @author M42
  * @author Malafaya
  * @author Mansil
+ * @author Mansil alfalb
  * @author McDutchie
  * @author Mmgseabra
  * @author Vitorvicentevalente
@@ -241,6 +242,7 @@ $s_new_account_signup_msg = 'A seguinte conta foi criada:';
 $s_reset_request_msg = 'Alguém (provavelmente você) pediu uma alteração de palavra-chave através da verificação de email. Se não foi você, ignore esta mensagem e nada irá acontecer.
 
 Caso você tenha solicitado esta verificação, visite o seguinte URL para alterar a sua palavra-chave:';
+$s_reset_request_admin_msg = 'A sua palavra-pase foi redefinida. Por favor, visite o URL seguinte para definir uma nova:';
 $s_reset_request_in_progress_msg = 'Se você forneceu o nome de utilizador e endereço de email corretos para a sua conta, teremos a esta altura enviado uma mensagem de confirmação para esse endereço de email. Assim que a mensagem for recebida, siga as instruções fornecidas para alterar a palavra-chave da sua conta.';
 $s_email_notification_title_for_status_bug_new = 'O problema seguinte passou para o estado NOVO (novamente)';
 $s_email_notification_title_for_status_bug_feedback = 'O problema seguinte requer o seu COMENTÁRIO.';
@@ -1089,11 +1091,13 @@ $s_copy_from_parent = 'Copiar os dados adicionais do problema principal';
 $s_copy_notes_from_parent = 'Copiar as notas da incidência';
 $s_copy_attachments_from_parent = 'Copiar anexos';
 $s_with = 'com';
-$s_relation_graph = 'Gráfico de relacionamentos';
+$s_relation_graph = 'Gráfico de Relacionamentos';
 $s_dependency_graph = 'Gráfico de dependências';
 $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'Ver problema';
+$s_show_summary = 'Mostrar Resumo';
+$s_hide_summary = 'Ocultar Resumo';
 $s_perm_rpt_capability = 'Capacidade';
 $s_view = 'Ver';
 $s_issues = 'Problemas';
