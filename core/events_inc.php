@@ -152,4 +152,6 @@ event_declare_many( array(
 
 	# Authentication Events
 	'EVENT_AUTH_USER_FLAGS' => EVENT_TYPE_FIRST,
+
+	'EVENT_CRONJOB' => EVENT_TYPE_EXECUTE
 ) );
