@@ -57,6 +57,7 @@
  * @author Szmyk
  * @author Tszypowski
  * @author Ty221
+ * @author WaldiSt
  * @author Woytecr
  */
 
@@ -245,6 +246,7 @@ $s_new_account_signup_msg = 'Następujące konto zostało założone:';
 $s_reset_request_msg = 'Ktoś (prawdopodobnie Ty) zażądał zmiany hasła przez weryfikację emailem. Jeśli to nie Ty, zignoruj tę wiadomość.
 
 Jeśli prosiłeś o to, odwiedź poniższy adres aby zmienić hasło:';
+$s_reset_request_admin_msg = 'Twoje hasło zostało zresetowane. Odwiedź następujący adres URL, aby ustawić nowy:';
 $s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres email dla twojego konta są prawidłowe to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
 $s_email_notification_title_for_status_bug_new = 'Następujące zgłoszenie ma ustawiony status NOWY (ponownie)';
 $s_email_notification_title_for_status_bug_feedback = 'Następujące zgłoszenie wymaga OBSŁUGI.';
