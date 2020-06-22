@@ -1855,7 +1855,7 @@ function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 			if( filter_field_is_none( $t_val ) ) {
 				$t_strings[] = lang_get( 'none' );
 			} else {
-				$t_strings[] = $t_val;
+				$t_strings[] = string_attribute( $t_val );
 			}
 			$t_inputs[] = '<input type="hidden" name="custom_field_' . $p_field_id . '[]" value="' . string_attribute( $t_val ) . '" />';
 		}
