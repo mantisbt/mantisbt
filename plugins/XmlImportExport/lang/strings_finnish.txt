@@ -40,12 +40,16 @@
  *
  * @author Centerlink
  * @author Nike
+ * @author Thurenius
  * @author Tkh
  */
 
+$s_plugin_XmlImportExport_title = 'Tuo/vie tapahtumia';
 $s_plugin_XmlImportExport_import = 'Tuo tapahtumia';
 $s_plugin_XmlImportExport_export = 'XML-vienti';
 $s_plugin_XmlImportExport_import_threshold = 'Tuo ongelmia';
+$s_plugin_XmlImportExport_export_threshold = 'Tuo tapahtumia';
+$s_plugin_XmlImportExport_action_update = 'Päivitä';
 $s_plugin_XmlImportExport_import_options = 'Tuontivalitsimet';
 $s_plugin_XmlImportExport_cross_references = 'Ristiviitteet';
 $s_plugin_XmlImportExport_default_strategy = 'Oletusmuunnosstrategia:';
