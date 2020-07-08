@@ -69,6 +69,7 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
+	//$g_app->get( '/username', 'rest_issue_get_by_username' );
 });
 
 /**
@@ -81,6 +82,10 @@ $g_app->group('/issues', function() use ( $g_app ) {
  */
 function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+	$username = isset( $p_args['username'] ) ? $p_args['username'] : $p_request->getParam( 'username' );
+	$username = strtolower($username);
+	$user_id = user_get_id_by_name($username);
+    $status = strtolower(trim( $p_request->getParam( 'status', '' ) ));
 
 	if( !is_blank( $t_issue_id ) ) {
 		# Get Issue By Id
@@ -105,10 +110,19 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 			# set the current project to correctly account for user permissions
 			helper_set_current_project( $t_project_id );
 
-			if( !empty( $t_filter_id ) ) {
+			if( !empty( $t_filter_id ) && empty($user_id)) {
 				$t_issues = mc_filter_get_issues(
 					'', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size );
-			} else {
+			}
+			elseif (!empty( $status ) && !empty($user_id)){
+                $t_issues = mc_filter_get_issues(
+                    '', '', $t_project_id, $status, $t_page_number, $t_page_size, $user_id );
+            }
+			elseif (!empty($user_id) && empty($status)) {
+                $t_issues = mc_filter_get_issues(
+                    '', '', $t_project_id, 'any_for_user', $t_page_number, $t_page_size, $user_id );
+            }
+			else {
 				$t_issues = mc_filter_get_issues(
 					'', '', $t_project_id, FILTER_STANDARD_ANY, $t_page_number, $t_page_size );
 			}
@@ -535,4 +549,67 @@ function files_base64_to_temp( $p_files ) {
 	}
 
 	return $t_files;
+}
+
+
+/**
+ * A method that does the work to handle getting an issue via REST API.
+ *
+ * @param \Slim\Http\Request $p_request   The request.
+ * @param \Slim\Http\Response $p_response The response.
+ * @param array $p_args Arguments
+ * @return \Slim\Http\Response The augmented response.
+ */
+function rest_issue_get_by_username( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+    $t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+
+    if( !is_blank( $t_issue_id ) ) {
+        # Get Issue By Id
+
+        # Username and password below are ignored, since middleware already done the auth.
+        $t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+        ApiObjectFactory::throwIfFault( $t_issue );
+
+        $t_result = array( 'issues' => array( $t_issue ) );
+    } else {
+        $t_page_number = $p_request->getParam( 'page', 1 );
+        $t_page_size = $p_request->getParam( 'page_size', 50 );
+
+        # Get a set of issues
+        $t_project_id = (int)$p_request->getParam( 'project_id', ALL_PROJECTS );
+        if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
+            $t_result = null;
+            $t_message = "Project '$t_project_id' doesn't exist";
+            $p_response = $p_response->withStatus( HTTP_STATUS_NOT_FOUND, $t_message );
+        } else {
+            $t_filter_id = trim( $p_request->getParam( 'filter_id', '' ) );
+            # set the current project to correctly account for user permissions
+            helper_set_current_project( $t_project_id );
+
+            if( !empty( $t_filter_id ) ) {
+                $t_issues = mc_filter_get_issues(
+                    '', '', $t_project_id, $t_filter_id, $t_page_number, $t_page_size );
+            } else {
+                $t_issues = mc_filter_get_issues(
+                    '', '', $t_project_id, FILTER_STANDARD_ANY, $t_page_number, $t_page_size );
+            }
+
+            $t_result = array( 'issues' => $t_issues );
+        }
+    }
+
+    $t_etag = mc_issue_hash( $t_issue_id, $t_result );
+    if( $p_request->hasHeader( HEADER_IF_NONE_MATCH ) ) {
+        $t_match_etag = $p_request->getHeaderLine( HEADER_IF_NONE_MATCH );
+        if( $t_etag == $t_match_etag ) {
+            return $p_response->withStatus( HTTP_STATUS_NOT_MODIFIED, 'Not Modified' )
+                ->withHeader( HEADER_ETAG, $t_etag );
+        }
+    }
+
+    if( $t_result !== null ) {
+        $p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
+    }
+
+    return $p_response->withHeader( HEADER_ETAG, $t_etag );
 }

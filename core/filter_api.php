@@ -2572,6 +2572,15 @@ function filter_standard_get( $p_filter_name, $p_user_id = null, $p_project_id =
 		case FILTER_STANDARD_MONITORED:
 			$t_filter = filter_create_monitored_by( $t_project_id, $t_user_id );
 			break;
+        case FILTER_STANDARD_RESOLVED:
+            $t_filter = filter_create_resolved_by_user( $t_project_id, $t_user_id );
+            break;
+        case FILTER_STANDARD_ANY_FOR_USER:
+            $t_filter = filter_create_any_by_user( $t_project_id, $t_user_id );
+            break;
+        case FILTER_STANDARD_CLOSED:
+            $t_filter = filter_create_closed_by_user( $t_project_id, $t_user_id );
+            break;
 		default:
 			return null;
 	}
@@ -2804,4 +2813,56 @@ function filter_cache_subquery( array $p_filter ) {
  */
 function filter_user_can_use_persistent( $p_user_id = null ) {
 	return !user_is_anonymous( $p_user_id );
+}
+
+function filter_create_resolved_by_user( $p_project_id, $p_user_id ) {
+    $t_filter = filter_get_default();
+
+    if( $p_user_id == 0 ) {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => META_FILTER_NONE );
+    } else {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
+    }
+
+    $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', null, $p_user_id, $p_project_id );
+    $t_filter[FILTER_PROPERTY_STATUS] = array( '0' => $t_bug_resolved_status_threshold );
+
+    if( $p_project_id != ALL_PROJECTS ) {
+        $t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+    }
+
+    return filter_ensure_valid_filter( $t_filter );
+}
+
+function filter_create_any_by_user( $p_project_id, $p_user_id ) {
+    $t_filter = filter_get_default();
+    if( $p_user_id == 0 ) {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => META_FILTER_NONE );
+    } else {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
+    }
+    if( $p_project_id != ALL_PROJECTS ) {
+        $t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+    }
+
+    return filter_ensure_valid_filter( $t_filter );
+
+}
+
+function filter_create_closed_by_user( $p_project_id, $p_user_id )
+{
+    $t_filter = filter_get_default();
+    if ($p_user_id == 0) {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array('0' => META_FILTER_NONE);
+    } else {
+        $t_filter[FILTER_PROPERTY_HANDLER_ID] = array('0' => $p_user_id);
+    }
+
+    $t_bug_closed_status_threshold = config_get( 'bug_closed_status_threshold', null, $p_user_id, $p_project_id );
+    $t_filter[FILTER_PROPERTY_STATUS] = array( '0' => $t_bug_closed_status_threshold );
+    if ($p_project_id != ALL_PROJECTS) {
+        $t_filter[FILTER_PROPERTY_PROJECT_ID] = array('0' => $p_project_id);
+    }
+
+    return filter_ensure_valid_filter($t_filter);
 }

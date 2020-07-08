@@ -166,7 +166,7 @@ function mci_filter_delete( $p_filter_id ) {
  * @param integer $p_per_page    Number of issues to display per page.
  * @return array that represents an IssueDataArray structure
  */
-function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
+function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page, $custom_user_id = null ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_fault_login_failed();
@@ -181,6 +181,9 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	if( is_numeric( $p_filter_id ) ) {
 		$t_filter = filter_get( $p_filter_id );
 	} else {
+	    if (!empty($custom_user_id)) {
+	        $t_user_id = $custom_user_id;
+        }
 		$t_filter = filter_standard_get( $p_filter_id, $t_user_id, $p_project_id );
 	}
 

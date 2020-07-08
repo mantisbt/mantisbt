@@ -493,6 +493,12 @@ define( 'FILTER_STANDARD_ASSIGNED', 'assigned' );
 define( 'FILTER_STANDARD_UNASSIGNED', 'unassigned' );
 define( 'FILTER_STANDARD_REPORTED', 'reported' );
 define( 'FILTER_STANDARD_MONITORED', 'monitored' );
+define( 'FILTER_STANDARD_CLOSED', 'closed' );
+define( 'FILTER_STANDARD_FEEDBACK', 'feedback' );
+define( 'FILTER_STANDARD_RESOLVED', 'resolved' );
+define( 'FILTER_STANDARD_ACKNOWLEDGED', 'acknowledged');
+define( 'FILTER_STANDARD_CONFIRMED', 'confirmed');
+define( 'FILTER_STANDARD_ANY_FOR_USER', 'any_for_user');
 
 # Filter actions, refactored from view_all_set.php
 define( 'FILTER_ACTION_RESET', 0 );
