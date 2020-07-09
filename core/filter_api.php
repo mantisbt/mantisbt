@@ -2841,6 +2841,9 @@ function filter_create_any_by_user( $p_project_id, $p_user_id ) {
     } else {
         $t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
     }
+
+    $t_filter[FILTER_PROPERTY_HIDE_STATUS] = META_FILTER_NONE;
+
     if( $p_project_id != ALL_PROJECTS ) {
         $t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
     }
