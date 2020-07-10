@@ -79,7 +79,11 @@ function rest_user_create( \Slim\Http\Request $p_request, \Slim\Http\Response $p
  * @return \Slim\Http\Response The augmented response.
  */
 function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_user_id = $p_args['id'];
+	$t_user_id = is_numeric($p_args['id']) ? (int)$p_args['id'] : (string)$p_args['id'];
+
+	if(gettype($t_user_id) === 'string') {
+        $t_user_id = user_get_id_by_name(strtolower($t_user_id));
+    }
 
 	$t_data = array(
 		'query' => array( 'id' => $t_user_id )
@@ -88,7 +92,9 @@ function rest_user_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p
 	$t_command = new UserDeleteCommand( $t_data );
 	$t_command->execute();
 
-	return $p_response->withStatus( HTTP_STATUS_NO_CONTENT );
+    return $p_response->withStatus( HTTP_STATUS_NO_CONTENT )->withJson([
+            'success' => true,
+        ]);
 }
 
 /**
