@@ -46,6 +46,7 @@
  * @author Marfuas
  * @author Najami
  * @author Nghtwlkr
+ * @author Sabelöga
  * @author Sannab
  * @author Skalman
  * @author Technic2
@@ -242,6 +243,7 @@ $s_new_account_signup_msg = 'Följande användarkonto har skapats:';
 $s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenordet genom e-postverifikation. Om det inte var du, ignorera då detta meddelande så kommer inget att hända.
 
 Om du begärde denna verifikation, gå till följande webbadress för att ändra ditt lösenord:';
+$s_reset_request_admin_msg = 'Ditt lösenord har återställts. Gå till följande URL för att sätta ett nytt:';
 $s_reset_request_in_progress_msg = 'Om du lämnat rätt användarnamn och e-postadress för ditt konto, så har vi nu skickat en bekräftelse till den e-postadressen. När meddelandet har tagits emot, följ anvisningarna för att ändra lösenord på ditt konto.';
 $s_email_notification_title_for_status_bug_new = 'Följande ärende har nu fått statusen NYTT (igen)';
 $s_email_notification_title_for_status_bug_feedback = 'Följande ärende kräver din ÅTERKOPPLING.';
@@ -1299,7 +1301,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogen finns inte. Var god kontrollera p
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ett projekt med det namnet finns redan.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Det obligatoriska fältet "%1$s" var tomt. Var god kontrollera din inmatning.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ogiltigt värde för "%1$s"';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Detta konto är skyddat. Du har inte tillgång till det innan skyddet är borttaget.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Detta konto är skyddat. Du får inte utföra den begärda handlingen förrän skyddet är borttaget.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Åtkomst nekas.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Uppladdning av filen misslyckades. Filen kan inte läsas av MantisBT, Kontrollera projektinställningarna.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Uppladdning av filen misslyckades. Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
