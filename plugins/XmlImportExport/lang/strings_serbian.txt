@@ -41,6 +41,7 @@
  * @author Obsuser
  * @author Rancher
  * @author Srdjan m
+ * @author Srđan
  */
 
 $s_plugin_XmlImportExport_title = 'Проблеми у увозу/извозу';

@@ -40,6 +40,7 @@
  *
  * @author Rancher
  * @author Srdjan m
+ * @author Srđan
  */
 
 $s_plugin_format_title = 'Обликовање за MantisBT';
