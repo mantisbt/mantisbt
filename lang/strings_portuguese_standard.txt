@@ -42,6 +42,7 @@
  * @author Bithunter
  * @author Crazymadlover
  * @author Giro720
+ * @author GoEThe
  * @author Gusta
  * @author Hamilton Abreu
  * @author Imperadeiro90
@@ -654,6 +655,7 @@ $s_resolved_status = 'Estado no qual um problema é considerado resolvido';
 $s_readonly_status = 'Estado no qual um problema se torna apenas de leitura';
 $s_reopen_status = 'Estado para o qual se define um problema reaberto';
 $s_reopen_resolution = 'Resolução atribuída a um problema reaberto';
+$s_limit_view_unless_threshold_option = 'Ver incidentes de outros utentes (se não estabelecido, o acesso será limitado aos incidentes reportados, alocados ou monitorizados pelo utente)';
 $s_config_delete_sure = 'Tem a certeza que quer apagar as configurações para:';
 $s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar configurações';
@@ -670,6 +672,7 @@ $s_set_configuration_option_action_create = 'Criar uma opção de configuração
 $s_set_configuration_option_action_edit = 'Editar uma opção de configuração';
 $s_set_configuration_option_action_clone = 'Duplicar uma opção de configuração';
 $s_set_configuration_option_action_view = 'Ver opção de configuração';
+$s_show_all_complex = 'Mostrar valor para todas as opções "%1$s"';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins instalados';
 $s_plugins_available = 'Plugins disponíveis';
@@ -1241,6 +1244,8 @@ $s_copy_columns_to = 'Copia colunas para';
 $s_due_date = 'Data de vencimento';
 $s_overdue = 'Vencido';
 $s_overdue_since = 'Atrasado desde %1$s';
+$s_overdue_one_day = 'Menos de um dia de atraso.';
+$s_overdue_days = 'Com %1$d dias de atraso.';
 $s_view_account_title = 'Informação do utilizador';
 $s_manage_user = 'Gerir utilizador';
 $s_install_information = 'Informação da instalação MantisBT';
@@ -1290,7 +1295,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A pasta não existe. Por favor verifique as
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'O campo necessário "%1$s" estava vazio. Por favor, verifique novamente as entradas.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valor inválido de \'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para aceder a isto até que a proteção seja removida.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para realizar esta operação até que a proteção seja removida.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Carregamento de ficheiro mal-sucedido. Ficheiro não é legível pelo MantisBT. Por favor verifique as definições do projeto.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Carregamento de ficheiro mal-sucedido. Isto foi provavelmente causado pelo tamanho do ficheiro ser superior ao limite permitido por esta instalação do PHP.';
