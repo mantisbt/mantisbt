@@ -669,6 +669,7 @@ class BugData {
 		#  as unix timestamps which could confuse the history log and they
 		#  shouldn't get updated like this anyway.  If you really need to change
 		#  them use bug_set_field()
+		$targetversionupdate = access_has_project_level( config_get( 'roadmap_update_threshold' ) );
 		db_param_push();
 		$t_query = 'UPDATE {bug}
 					SET project_id=' . db_param() . ', reporter_id=' . db_param() . ',
@@ -693,7 +694,7 @@ class BugData {
 			$this->build, $this->fixed_in_version,
 		);
 		$t_roadmap_updated = false;
-		if( access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
+		if ( $targetversionupdate ) {
 			$t_query .= '
 						target_version=' . db_param() . ',';
 			$t_fields[] = $this->target_version;
