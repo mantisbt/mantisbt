@@ -211,9 +211,11 @@ if( $f_search !== '' ) {
 
 	# build a big where-clause and param list for all search terms, including negations
 	$t_first = true;
-	$t_where .= ' AND ( ';
 	foreach( $t_search_terms as $t_search_term => $t_negate ) {
-		if( !$t_first ) {
+		if( $t_first ) {
+			$t_where .= ' AND ( ';
+			$t_first = false;
+		} else {
 			$t_where .= ' AND ';
 		}
 
@@ -231,9 +233,10 @@ if( $f_search !== '' ) {
 		$t_where_params[] = $c_search;
 
 		$t_where .= ' )';
-		$t_first = false;
 	}
-	$t_where .= ' )';
+	if( !$t_first ) {
+		$t_where .= ' )';
+	}
 }
 
 $p_per_page = 50;
