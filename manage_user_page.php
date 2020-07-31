@@ -200,40 +200,40 @@ if( $f_filter === 'ALL' ) {
 }
 
 if( $f_search !== '' ) {
-    # break up search terms by spacing or quoting
-    preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
+	# break up search terms by spacing or quoting
+	preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
 
-    # organize terms without quoting, paying attention to negation
-    $t_search_terms = array();
-    foreach( $t_matches as $t_match ) {
-        $t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
-    }
+	# organize terms without quoting, paying attention to negation
+	$t_search_terms = array();
+	foreach( $t_matches as $t_match ) {
+		$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
+	}
 
-    # build a big where-clause and param list for all search terms, including negations
-    $t_first = true;
-    $t_where .= ' AND ( ';
-    foreach( $t_search_terms as $t_search_term => $t_negate ) {
-        if( !$t_first ) {
-            $t_where .= ' AND ';
-        }
+	# build a big where-clause and param list for all search terms, including negations
+	$t_first = true;
+	$t_where .= ' AND ( ';
+	foreach( $t_search_terms as $t_search_term => $t_negate ) {
+		if( !$t_first ) {
+			$t_where .= ' AND ';
+		}
 
-        if( $t_negate ) {
-            $t_where .= 'NOT ';
-        }
+		if( $t_negate ) {
+			$t_where .= 'NOT ';
+		}
 
-        $c_search = '%' . $t_search_term . '%';
-        $t_where .= '( ' . db_helper_like( 'realname' ) .
-            ' OR ' . db_helper_like( 'username' ) .
-            ' OR ' . db_helper_like( 'email' );
+		$c_search = '%' . $t_search_term . '%';
+		$t_where .= '( ' . db_helper_like( 'realname' ) .
+			' OR ' . db_helper_like( 'username' ) .
+			' OR ' . db_helper_like( 'email' );
 
-        $t_where_params[] = $c_search;
-        $t_where_params[] = $c_search;
-        $t_where_params[] = $c_search;
+		$t_where_params[] = $c_search;
+		$t_where_params[] = $c_search;
+		$t_where_params[] = $c_search;
 
-        $t_where .= ' )';
-        $t_first = false;
-    }
-    $t_where .= ' )';
+		$t_where .= ' )';
+		$t_first = false;
+	}
+	$t_where .= ' )';
 }
 
 $p_per_page = 50;
