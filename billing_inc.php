@@ -214,6 +214,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_issue_id ) ) . lang_get( 'word_separator' ) . $t_project_info . string_display_line( $t_issue['summary'] );
 			echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 
+			uksort(
+				$t_issue['users'],
+				function ( $a, $b ) {
+					return strcasecmp( user_get_name( $a ), user_get_name( $b ) );
+				}
+			);
+
 			foreach( $t_issue['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
@@ -268,6 +275,13 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	</tr>
 
 <?php
+	uksort(
+		$t_bugnote_stats['users'],
+		function ( $a, $b ) {
+			return strcasecmp( user_get_name( $a ), user_get_name( $b ) );
+		}
+	);
+
 	foreach ( $t_bugnote_stats['users'] as $t_user_id => $t_user_info ) {
 ?>
 	<tr>
