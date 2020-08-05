@@ -90,7 +90,7 @@ if( !is_blank( $c_ref ) ) {
 
 		# if view_all_bug_page, pass on filter
 		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
-			$t_source_filter_id = filter_db_get_project_current( $f_project_id );
+			$t_source_filter_id = filter_db_get_project_current( $t_bottom );
 			$t_redirect_url = 'view_all_set.php?type=' . FILTER_ACTION_GENERALIZE;
 
 			if( $t_source_filter_id !== null ) {
