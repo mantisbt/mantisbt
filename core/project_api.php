@@ -391,6 +391,9 @@ function project_delete( $p_project_id ) {
 	# Delete the project files
 	project_delete_all_files( $p_project_id );
 
+	# Set default to ALL_PROJECTS for all users who had the project as default
+	user_pref_clear_project_default( $p_project_id );
+
 	# Delete the records assigning users to this project
 	project_remove_all_users( $p_project_id );
 
@@ -473,6 +476,10 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	# so we add them to the project with their previous access level
 	if( $t_is_becoming_private && !access_has_project_level( $t_manage_project_threshold, $p_project_id ) ) {
 		project_add_user( $p_project_id, $t_user_id, $t_access_level );
+	}
+	
+	if( $t_is_becoming_private ) {
+		user_pref_clear_invalid_project_default( $p_project_id );
 	}
 }
 
@@ -840,6 +847,10 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 
 /**
  * Remove multiple users from project.
+ *
+ * The user's default_project preference will be set to ALL_PROJECTS if they
+ * no longer have access to the project.
+
  * @param integer $p_project_id  A project identifier.
  * @param array $p_user_ids      Array of user identifiers.
  * @return void
@@ -859,6 +870,8 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
 			. ' AND ' . $t_query->sql_in( 'user_id', $t_user_ids );
 	$t_query->sql( $t_sql );
 	$t_query->execute();
+
+	user_pref_clear_invalid_project_default( $p_project_id );
 }
 
 /**
@@ -866,6 +879,10 @@ function project_remove_users( $p_project_id, array $p_user_ids ) {
  * useful when deleting or closing a project. The $p_access_level_limit
  * parameter can be used to only remove users from a project if their access
  * level is below or equal to the limit.
+ *
+ * The user's default_project preference will be set to ALL_PROJECTS if they
+ * no longer have access to the project.
+ *
  * @param integer $p_project_id         A project identifier.
  * @param integer $p_access_level_limit Access level limit (null = no limit).
  * @return void
@@ -880,6 +897,8 @@ function project_remove_all_users( $p_project_id, $p_access_level_limit = null )
 	} else {
 		db_query( $t_query, array( (int)$p_project_id ) );
 	}
+
+	user_pref_clear_invalid_project_default( $p_project_id );
 }
 
 /**
