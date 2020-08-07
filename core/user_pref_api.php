@@ -521,6 +521,64 @@ function user_pref_db_delete_user( $p_user_id ) {
 }
 
 /**
+ * Sets project default to ALL_PROJECTS.
+ *
+ * @param integer $p_project_id A valid project identifier.
+ * @param array   $p_users      A list of users (empty = all users).
+ *
+ * @return void
+ */
+function user_pref_clear_project_default( $p_project_id, array $p_users = array() ) {
+	$t_query = new DbQuery( 'UPDATE {user_pref}'
+		. ' SET default_project = ' . ALL_PROJECTS
+		. ' WHERE default_project = :default'
+	);
+	$t_query->bind( 'default', (int)$p_project_id );
+	if( $p_users ) {
+		$t_query->append_sql( ' AND ' . $t_query->sql_in( 'user_id', 'users' ) );
+		$t_query->bind( 'users', $p_users );
+	}
+	$t_query->execute();
+}
+
+/**
+ * Sets project default to ALL_PROJECTS if current default is not valid.
+ *
+ * When users are removed from a project, the ones having that project as
+ * default but who are no longer authorized to access it, need to have their
+ * now-invalid preference updated.
+ *
+ * @param integer $p_project_id A valid project identifier.
+ * @param array   $p_users      A list of users (empty = all users).
+ *
+ * @return void
+ */
+function user_pref_clear_invalid_project_default( $p_project_id, array $p_users = array() ) {
+	# Get all users having the project as default
+	$t_query = new DbQuery( 'SELECT user_id FROM {user_pref} WHERE default_project = :default' );
+	$t_query->bind( 'default', (int)$p_project_id );
+	if( $p_users ) {
+		$t_query->append_sql( ' AND ' . $t_query->sql_in( 'user_id', 'users' ) );
+		$t_query->bind( 'users', $p_users );
+	}
+	$t_query->execute();
+
+	$t_users_having_project_as_default = array_column( $t_query->fetch_all(), 'user_id' );
+
+	# Users who can't access the project anymore must have the default cleared
+	$t_users_to_clear = array();
+	foreach( $t_users_having_project_as_default as $t_id ) {
+		if( access_get_project_level( $p_project_id, $t_id ) == ANYBODY ) {
+			$t_users_to_clear[] = $t_id;
+		}
+	}
+
+	if( !empty( $t_users_to_clear ) ) {
+		user_pref_clear_project_default( $p_project_id, $t_users_to_clear );
+	}
+}
+
+/**
  * delete all preferences for a project for all users (part of deleting the project)
  * returns true if the prefs were successfully deleted
  *
