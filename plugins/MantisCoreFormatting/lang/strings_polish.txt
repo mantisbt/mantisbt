@@ -41,6 +41,7 @@
  * @author BeginaFelicysym
  * @author Cysioland
  * @author Sp5uhe
+ * @author WaldiSt
  * @author Woytecr
  */
 
@@ -51,5 +52,7 @@ $s_plugin_format_process_text = 'Edycja tekstu';
 $s_plugin_format_process_text_warning_notice = 'Nie wyłączaj, chyba że dobrze wiesz, co robisz. Jeśli wyłączone, możliwe są ataki cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Przetwarzanie adresu URL';
 $s_plugin_format_process_buglinks = 'Linki wewnętrzne MantisBT (Zgłoszenia i Komentarze do zgłoszeń)';
+$s_plugin_format_process_markdown = 'Przetwarzanie Markdown';
+$s_plugin_format_process_markdown_info = 'Stylowanie z obsługą Markdown, składnia formatowania tekstu zaprojektowana tak, aby można było ją przekonwertować na kod HTML.';
 $s_plugin_format_enabled = 'zał.';
 $s_plugin_format_disabled = 'wył.';
