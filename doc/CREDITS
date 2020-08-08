@@ -63,8 +63,8 @@ John Reese
 Roland Becker
 Rafik Robeal
 Jeroen Latour
-Siebrand Mazeland
 translatewiki.net
+Siebrand Mazeland
 Robert Munteanu
 Gianluca Sforna
 André Eisenbach
@@ -74,18 +74,19 @@ Lincoln Maskey
 Marcello Scata
 Alexey Chumakov
 beerfrick
-Kornel Lesinski
 Bastian Pfenningschmidt
-Vladimir Shulev
 Joel C. Llano
+Kornel Lesinski
+Vladimir Shulev
 Adrian Spinei
 Martin Fuchs
 zakman
 jbrugger
 jctrosset
 Kirill Krasnov
-ryandesign
+dependabot[bot]
 Bob Le Bricodeur
+ryandesign
 rufinus
 David Newcomb
 Rasmus Lerdorf
@@ -93,58 +94,57 @@ jhuggins
 yarick123
 jotel
 robertjf
-Luke Lee
 Frank Rodgers
-Martin Schleußer
-Chris Fitch
-planser
-Johan Guilbaud
+Luke Lee
 Tamás Gulácsi
+Chris Fitch
+Johan Guilbaud
+Martin Schleußer
 davidu
-dependabot[bot]
-myplacedk
-Matej Habrnal
+planser
 Franck Villaume
+Matej Habrnal
 Véronique Maginot
+luzpaz
+myplacedk
 smhanson
 vwegert
-Stefan Pettersson
-luzpaz
 Daniel Tschinder
 James Crickmere
 Manilal
+Stefan Pettersson
 Vincent Sels
-Stéphane Veyret
-torija
-Jim Hanley
-Dominik Blunk
-cyclespersecond
-Betsy Gamrat
-Val Kulkov
-Giovanni Giacobbi
-Zipher04
-scoates
 Allan Brazute
+Betsy Gamrat
+Dominik Blunk
+Giovanni Giacobbi
+Jim Hanley
+Stéphane Veyret
+Val Kulkov
+Zipher04
+cyclespersecond
+scoates
+torija
+Alexander Ishmuradov
+Alexander Menk
+Anders Sandblad
+Cas Nuy
+Christian Weiske
+Dan Moore
+Grigoriy Ermolaev
+Justin Theberge
+Markus Schneider
+Matt McCutchen
+Miloslav Nenadál
+Raimund Herbert
+Romain CABASSOT
+Saga Musix
+Sebastian Limbach
+Tarik Sedlarevic
 elmarculino
 jeckyhl
 mfoXen
-Alexander Menk
 puklos
-Tarik Sedlarevic
-Dan Moore
-Markus Schneider
-Sebastian Limbach
-Matt McCutchen
-Raimund Herbert
-Saga Musix
-Grigoriy Ermolaev
-Anders Sandblad
-Christian Weiske
-Romain CABASSOT
-Alexander Ishmuradov
-Cas Nuy
-Justin Theberge
-naveenbali
 Alexander Maringer
 Andreas Schopper
 Andreas Stieger
@@ -162,6 +162,7 @@ Gulacsi Tamas
 Heiko Schneider-Lange
 Henning Eiben
 Ian MacKenzie
+ImgBotApp
 Jacky Alcine
 Jacob Hoover
 Jadran Josimovic
@@ -186,6 +187,7 @@ Murray Crane
 Nikolay Raspopov
 Olivier Mengué
 Patrick Massot
+Peter Badida
 Peter Dave Hello
 Pier-Luc Duchaine
 Raul Baldner junior
@@ -210,6 +212,7 @@ gcompagnon
 greenius
 l2m83
 mbaranski
+naveenbali
 petertc
 rainflood
 rk4n3
