@@ -95,14 +95,16 @@ function project_table_empty() {
  */
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	global $g_cache_project, $g_cache_project_missing;
+	$c_project_id = (int)$p_project_id;
 
-	if( $p_project_id == ALL_PROJECTS ) {
+	if( $c_project_id == ALL_PROJECTS ) {
 		return false;
 	}
 
-	if( isset( $g_cache_project[(int)$p_project_id] ) ) {
-		return $g_cache_project[(int)$p_project_id];
-	} else if( isset( $g_cache_project_missing[(int)$p_project_id] ) ) {
+
+	if( isset( $g_cache_project[$c_project_id] ) ) {
+		return $g_cache_project[$c_project_id];
+	} else if( isset( $g_cache_project_missing[$c_project_id] ) ) {
 		return false;
 	}
 
@@ -111,7 +113,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	$t_row = $t_query->fetch();
 
 	if( $t_row === false ) {
-		$g_cache_project_missing[(int)$p_project_id] = true;
+		$g_cache_project_missing[$c_project_id] = true;
 
 		if( $p_trigger_errors ) {
 			throw new ClientException( "Project #$p_project_id not found", ERROR_PROJECT_NOT_FOUND, array( $p_project_id ) );
@@ -120,7 +122,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		return false;
 	}
 
-	$g_cache_project[(int)$p_project_id] = $t_row;
+	$g_cache_project[$c_project_id] = $t_row;
 	return $t_row;
 }
 
@@ -133,10 +135,10 @@ function project_cache_array_rows( array $p_project_id_array ) {
 	global $g_cache_project, $g_cache_project_missing;
 
 	$c_project_id_array = array();
-
 	foreach( $p_project_id_array as $t_project_id ) {
-		if( !isset( $g_cache_project[(int)$t_project_id] ) && !isset( $g_cache_project_missing[(int)$t_project_id] ) ) {
-			$c_project_id_array[] = (int)$t_project_id;
+		$c_id = (int)$t_project_id;
+		if( !isset( $g_cache_project[$c_id] ) && !isset( $g_cache_project_missing[$c_id] ) ) {
+			$c_project_id_array[] = $c_id;
 		}
 	}
 
@@ -160,7 +162,7 @@ function project_cache_array_rows( array $p_project_id_array ) {
 
 	foreach ( $c_project_id_array as $c_project_id ) {
 		if( !isset( $t_projects_found[$c_project_id] ) ) {
-			$g_cache_project_missing[(int)$c_project_id] = true;
+			$g_cache_project_missing[$c_project_id] = true;
 		}
 	}
 }
