@@ -451,22 +451,18 @@ function user_pref_db_update( $p_user_id, $p_project_id, UserPreferences $p_pref
 	}
 
 	$t_pairs = array();
-	$t_values = array();
-
-	db_param_push();
-
 	foreach( $s_vars as $t_var => $t_val ) {
-		array_push( $t_pairs, $t_var . ' = ' . db_param() ) ;
-		array_push( $t_values, $p_prefs->$t_var );
+		$t_pairs[] = "$t_var = :$t_var";
+		$t_param[$t_var] = $p_prefs->$t_var;
 	}
 
-	$t_pairs_string = implode( ', ', $t_pairs );
-	$t_values[] = $p_user_id;
-	$t_values[] = $p_project_id;
-
-	$t_query = 'UPDATE {user_pref} SET ' . $t_pairs_string . '
-				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
-	db_query( $t_query, $t_values );
+	$t_query = new DbQuery( 'UPDATE {user_pref}
+		SET ' . implode( ', ', $t_pairs ) . '
+		WHERE user_id = :user_id AND project_id = :project_id' );
+	$t_query->bind( $t_param );
+	$t_query->bind( 'user_id', $p_user_id );
+	$t_query->bind( 'project_id', $p_project_id );
+	$t_query->execute();
 }
 
 /**
@@ -487,11 +483,12 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @return void
  */
 function user_pref_db_delete( $p_user_id, $p_project_id ) {
-	db_param_push();
-	$t_query = 'DELETE FROM {user_pref}
-				  WHERE user_id=' . db_param() . ' AND
-				  		project_id=' . db_param();
-	db_query( $t_query, array( (int)$p_user_id, (int)$p_project_id ) );
+	$t_query = new DbQuery( 'DELETE FROM {user_pref}'
+		. ' WHERE user_id=:user_id AND project_id=:project_id'
+	);
+	$t_query->bind( 'user_id', (int)$p_user_id );
+	$t_query->bind( '$p_project_id', (int)$p_project_id );
+	$t_query->execute();
 }
 
 /**
@@ -515,9 +512,9 @@ function user_pref_delete_all( $p_user_id ) {
  * @return void
  */
 function user_pref_db_delete_user( $p_user_id ) {
-	db_param_push();
-	$t_query = 'DELETE FROM {user_pref} WHERE user_id=' . db_param();
-	db_query( $t_query, array( $p_user_id ) );
+	$t_query = new DbQuery( 'DELETE FROM {user_pref} WHERE user_id=:user_id' );
+	$t_query->bind( 'user_id', (int)$p_user_id );
+	$t_query->execute();
 }
 
 /**
@@ -588,9 +585,9 @@ function user_pref_clear_invalid_project_default( $p_project_id, array $p_users 
  * @return void
  */
 function user_pref_db_delete_project( $p_project_id ) {
-	db_param_push();
-	$t_query = 'DELETE FROM {user_pref} WHERE project_id=' . db_param();
-	db_query( $t_query, array( $p_project_id ) );
+	$t_query = new DbQuery( 'DELETE FROM {user_pref} WHERE project_id=:project_id' );
+	$t_query->bind( 'project_id', (int)$p_project_id );
+	$t_query->execute();
 }
 
 /**
