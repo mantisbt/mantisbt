@@ -92,6 +92,7 @@ function project_table_empty() {
  * @param integer $p_project_id     A project identifier.
  * @param boolean $p_trigger_errors Whether to trigger errors.
  * @return array|boolean
+ * @throws ClientException
  */
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	global $g_cache_project, $g_cache_project_missing;

@@ -270,9 +270,9 @@ function current_user_has_more_than_one_project() {
  * - If default project is ALL_PROJECTS, sets the visible project as his default
  *   project for future sessions.
  * - If default project is not the visible one, modify it to be that project,
- *   or ALL_PROJECTS if the user has no accesible projects.
+ *   or ALL_PROJECTS if the user has no accessible projects.
  *
- * These changes only apply to user who can't use the project selection.
+ * These changes only apply to users who can't use the project selection.
  *
  * @return void
  */
