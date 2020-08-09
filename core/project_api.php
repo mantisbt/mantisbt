@@ -823,22 +823,33 @@ function project_add_users( $p_project_id, array $p_changes ) {
 
 	$t_project_id = (int)$p_project_id;
 	$t_query = new DbQuery();
-	$t_sql = 'SELECT user_id FROM {project_user_list} WHERE project_id = ' . $t_query->param( $t_project_id )
-			. ' AND ' . $t_query->sql_in( 'user_id', $t_user_ids );
+	$t_sql = 'SELECT user_id FROM {project_user_list} 
+		WHERE project_id = ' . $t_query->param( $t_project_id ) . ' 
+		AND ' . $t_query->sql_in( 'user_id', $t_user_ids );
 	$t_query->sql( $t_sql );
 	$t_updating = array_column( $t_query->fetch_all(), 'user_id' );
 
 	if( !empty( $t_updating ) ) {
-		$t_update = new DbQuery( 'UPDATE {project_user_list} SET access_level = :new_value WHERE user_id = :user_id AND project_id = :project_id' );
+		$t_update = new DbQuery( 'UPDATE {project_user_list} 
+			SET access_level = :new_value 
+			WHERE user_id = :user_id AND project_id = :project_id'
+		);
 		foreach( $t_updating as $t_id ) {
-			$t_params = array( 'project_id' => $t_project_id, 'user_id' => (int)$t_id, 'new_value' => $t_changes[$t_id] );
+			$t_params = array(
+				'project_id' => $t_project_id,
+				'user_id' => (int)$t_id,
+				'new_value' => $t_changes[$t_id]
+			);
 			$t_update->execute( $t_params );
 			unset( $t_changes[$t_id] );
 		}
 	}
 	# remaining items are for insert
 	if( !empty( $t_changes ) ) {
-		$t_insert = new DbQuery( 'INSERT INTO {project_user_list} ( project_id, user_id, access_level ) VALUES :params' );
+		$t_insert = new DbQuery( 'INSERT INTO {project_user_list} 
+			( project_id, user_id, access_level ) 
+			VALUES :params'
+		);
 		foreach( $t_changes as $t_id => $t_value ) {
 			$t_insert->bind( 'params', array( $t_project_id, $t_id, $t_value ) );
 			$t_insert->execute();
