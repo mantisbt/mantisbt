@@ -9,9 +9,6 @@ docbook/*/*/install
 docbook/*/tmp
 !docbook/Admin_Guide/*/config
 
-# Build output
-build/
-
 # Untracked plugins
 plugins/*
 !plugins/MantisCoreFormatting
