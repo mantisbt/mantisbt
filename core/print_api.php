@@ -2049,7 +2049,7 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 
 	echo "\n<div class=\"bug-attachment-preview-image\">";
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
-	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" style="' . string_attribute( $t_preview_style ) . '" />';
+	echo '<img src="' . string_attribute( $t_image_url ) . '" alt="' . string_attribute( $t_title ) . '" loading="lazy" style="' . string_attribute( $t_preview_style ) . '" />';
 	echo '</a></div>';
 }
 
