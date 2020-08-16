@@ -145,13 +145,37 @@ function project_cache_array_rows( array $p_project_id_array ) {
 		return;
 	}
 
-	$t_query = 'SELECT * FROM {project} WHERE id IN (' . implode( ',', $c_project_id_array ) . ')';
-	$t_result = db_query( $t_query );
-
 	$t_projects_found = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$g_cache_project[(int)$t_row['id']] = $t_row;
-		$t_projects_found[(int)$t_row['id']] = true;
+	$t_project_list = implode( ',', $c_project_id_array );
+
+	# With oracle database, ADOdb maps column type "L" to clob.
+	# Because reading clobs is significantly slower, cast them to varchar for faster query execution
+	# Standard max size for varchar is 4000 bytes, so a safe limit is used as 1000 charancters
+	# for multibyte strings (up to 4 bytes per char)
+	if( db_is_oracle() ) {
+		$t_query = 'SELECT id, name, status, enabled, view_state, access_min, file_path, CAST(description AS VARCHAR(4000)) AS description, category_id, inherit_global'
+				. ' FROM {project} WHERE dbms_lob.getlength(description)<=1000'
+				. ' AND id IN (' . $t_project_list . ')';
+		$t_result = db_query( $t_query );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$g_cache_project[(int)$t_row['id']] = $t_row;
+			$t_projects_found[(int)$t_row['id']] = true;
+		}
+		$t_query = 'SELECT id, name, status, enabled, view_state, access_min, file_path, description, category_id, inherit_global'
+				. ' FROM {project} WHERE dbms_lob.getlength(description)>1000'
+				. ' AND id IN (' . $t_project_list . ')';
+		$t_result = db_query( $t_query );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$g_cache_project[(int)$t_row['id']] = $t_row;
+			$t_projects_found[(int)$t_row['id']] = true;
+		}
+	} else {
+		$t_query = 'SELECT * FROM {project} WHERE id IN (' . $t_project_list . ')';
+		$t_result = db_query( $t_query );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$g_cache_project[(int)$t_row['id']] = $t_row;
+			$t_projects_found[(int)$t_row['id']] = true;
+		}
 	}
 
 	foreach ( $c_project_id_array as $c_project_id ) {
