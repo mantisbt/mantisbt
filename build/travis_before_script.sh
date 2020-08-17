@@ -121,10 +121,6 @@ chmod 777 config
 sleep 10
 
 # -----------------------------------------------------------------------------
-step "Install Composer Components"
-composer install
-
-# -----------------------------------------------------------------------------
 step "MantisBT Installation"
 
 # Define parameters for MantisBT installer
