@@ -3,6 +3,8 @@
 # -----------------------------------------------------------------------------
 
 language: php
+os: linux
+dist: xenial
 
 # -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
@@ -38,10 +40,11 @@ env:
   - DB=mysql
   - DB=pgsql
 
-matrix:
+jobs:
   include:
     # Add a specific build for Documentation
-    - env: DOCBOOK=1
+    - name: Documentation
+      env: DOCBOOK=1
       # Using Ruby as it's preinstalled and we don't need PHP to build docs
       language: ruby
       addons:
