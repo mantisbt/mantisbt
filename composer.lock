@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "5.20.18",
+            "version": "v5.20.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
@@ -66,17 +66,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantisbt/securimage.git",
-                "reference": "65d446e137db4fe84e7f7edb9e7b06fce521a63b"
+                "reference": "01d5860a023382b4076cb98e143828357e679874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantisbt/securimage/zipball/65d446e137db4fe84e7f7edb9e7b06fce521a63b",
-                "reference": "65d446e137db4fe84e7f7edb9e7b06fce521a63b",
+                "url": "https://api.github.com/repos/mantisbt/securimage/zipball/01d5860a023382b4076cb98e143828357e679874",
+                "reference": "01d5860a023382b4076cb98e143828357e679874",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
-                "php": ">=5.2.0"
+                "php": ">=5.4"
             },
             "suggest": {
                 "ext-pdo": "For database storage support",
@@ -90,7 +90,7 @@
                 ]
             },
             "license": [
-                "BSD"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -101,13 +101,15 @@
             "description": "PHP CAPTCHA Library",
             "homepage": "https://www.phpcaptcha.org",
             "keywords": [
+                "anti-spam",
                 "captcha",
+                "forms",
                 "security"
             ],
             "support": {
                 "source": "https://github.com/mantisbt/securimage/tree/mantis"
             },
-            "time": "2017-01-13T17:01:24+00:00"
+            "time": "2020-08-19T09:34:22+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -450,12 +452,6 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "funding": [
-                {
-                    "url": "https://github.com/synchro",
-                    "type": "github"
-                }
-            ],
             "time": "2020-07-14T18:50:27+00:00"
         },
         {
@@ -1493,6 +1489,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2017-12-04T08:55:13+00:00"
         },
         {
