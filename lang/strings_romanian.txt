@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Adsbn
  * @author Danutz
  * @author KlaudiuMihaila
  * @author Minisarm
@@ -786,9 +787,9 @@ $s_selected_project = 'Proiect selectat';
 $s_valid_project_msg = 'Trebuie să alegeți un proiect valid.';
 $s_signup_done_title = 'Înregistrarea contului a fost realizată.';
 $s_password_emailed_msg = 'Felicitări! V-ați înregistrat cu succes. Vi s-a trimis un e-mail de confirmare pentru a verifica adresa care ați introdus-o. Vizitând adresa trimisă prin e-mail vă veți activa contul.';
-$s_no_reponse_msg = 'Aveți șapte zile pentru a încheai procesul de confirmare a contului. Dacă eșuați confirmarea contului în aceste șapte zile acest cont va fi șters.';
+$s_no_reponse_msg = 'Aveți șapte zile pentru a încheia procesul de confirmare a contului. Dacă eșuați confirmarea contului în aceste șapte zile acest cont va fi șters.';
 $s_signup_info = 'După completarea acestui formular și verificarea datelor veți primi un e-mail de confirmare la adresa specificată. Utilizând e-mailul de confirmare veți putea să vă activați contul. Dacă activarea contului va eșua timp de 7 zile, înregistrarea dumneavoastră va fi ștearsă. Este obligatoriu să specificați o adresă de e-mail validă pentru a primi e-mailul de confirmare.';
-$s_signup_title = 'Întergistrare utilizator';
+$s_signup_title = 'Înregistrare utilizator';
 $s_signup_button = 'Înscriere';
 $s_no_password_request = 'Parola dumneavoastră este gestionată de alt sistem. Contactați administratorul.';
 $s_edit_site_settings_title = 'Modificare parametri site';
