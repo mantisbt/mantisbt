@@ -443,6 +443,7 @@ $s_add_profile_button = 'Add Profile';
 $s_edit_or_delete_profiles_title = 'Edit or Delete Profiles';
 $s_edit_profile = 'Edit Profile';
 $s_make_default = 'Make Default';
+$s_clear_default = 'Clear Default';
 $s_delete_profile = 'Delete Profile';
 $s_select_profile = 'Select Profile';
 $s_submit_button = 'Submit';
