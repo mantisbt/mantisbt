@@ -108,7 +108,7 @@ if( $g_global_profiles ) {
 		<div class="table-responsive">
 			<table class="table table-bordered table-condensed table-striped">
 				<fieldset>
-			<?php  echo form_security_field( 'profile_update' )?>
+			<?php  echo form_security_field( 'account_prof_update' )?>
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
 			<tr>
@@ -303,7 +303,7 @@ if( $g_global_profiles ) {
 					<div class="table-responsive">
 						<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<?php  echo form_security_field( 'profile_update' )?>
+			<?php  echo form_security_field( 'account_prof_update' )?>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'edit_profile' ) ?>
