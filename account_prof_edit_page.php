@@ -94,7 +94,7 @@ if( profile_is_global( $f_profile_id ) ) {
 <div class="widget-main no-padding">
 <div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed">
-		<?php  echo form_security_field( 'profile_update' )?>
+		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
 <tr>
