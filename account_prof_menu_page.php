@@ -91,70 +91,88 @@ if( $g_global_profiles ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
+	
 <div id="account-profile-div" class="form-container">
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
 		<fieldset>
-
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-file-o"></i>
-		<?php echo lang_get( 'add_profile_title' ) ?>
-	</h4>
-</div>
-
-<div class="widget-body">
-	<div class="widget-main no-padding">
-		<div class="table-responsive">
-			<table class="table table-bordered table-condensed table-striped">
-				<fieldset>
 			<?php  echo form_security_field( 'account_prof_update' )?>
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
-			<tr>
-				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'platform' ) ?>
-				</td>
-				<td>
-					<input id="platform" type="text" name="platform" class="input-sm" size="32" maxlength="32" required />
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'os' ) ?>
-				</td>
-				<td>
-					<input id="os" type="text" name="os" class="input-sm" size="32" maxlength="32" required />
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<span class="required">*</span> <?php echo lang_get( 'os_build' ) ?>
-				</td>
-				<td>
-					<input id="os-build" type="text" name="os_build" class="input-sm" size="16" maxlength="16" required />
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'additional_description' ) ?>
-				</td>
-				<td>
-					<textarea class="form-control" id="description" name="description" cols="80" rows="8"></textarea>
-				</td>
-			</tr>
+
+			<div class="widget-box widget-color-blue2">
+
+				<div class="widget-header widget-header-small">
+					<h4 class="widget-title lighter">
+						<i class="ace-icon fa fa-file-o"></i>
+						<?php echo lang_get( 'add_profile_title' ) ?>
+					</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main no-padding">
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed table-striped">
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'platform' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="platform" name="platform"
+											   size="32" maxlength="32" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="os" name="os"
+											   size="32" maxlength="32" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os_build' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="os_build" name="os_build"
+											   size="16" maxlength="16" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<?php echo lang_get( 'additional_description' ) ?>
+									</td>
+									<td>
+										<textarea  id="description" name="description"
+												   class="form-control"
+												   cols="80" rows="8"></textarea>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="widget-toolbox padding-8 clearfix">
+					<span class="required pull-right">
+						* <?php echo lang_get( 'required' ); ?>
+					</span>
+					<button class="btn btn-primary btn-white btn-round">
+						<?php echo lang_get('add_profile_button'); ?>
+					</button>
+				</div>
+			</div>
 		</fieldset>
-	</table>
-</div>
-</div>
-<div class="widget-toolbox padding-8 clearfix">
-				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get('add_profile_button') ?>"/>
-</div>
-</div>
-</div>
 	</form>
 </div>
+
 <?php
 	# Add Profile Form END
 
