@@ -224,6 +224,7 @@ if( $g_global_profiles ) {
 				# Common POST parameters for action buttons
 				$t_param = array(
 					'profile_id' => $v_id,
+					'redirect' => basename( $_SERVER["SCRIPT_FILENAME"] ),
 				);
 
 				# Print the Edit and Delete buttons for local profiles, or
