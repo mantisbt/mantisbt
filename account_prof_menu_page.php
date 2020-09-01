@@ -84,99 +84,14 @@ if( $g_global_profiles ) {
 	$t_user_id = ALL_USERS;
 } else {
 	$t_user_id = auth_get_current_user_id();
-    print_account_menu( 'account_prof_menu_page.php' );
+	print_account_menu( 'account_prof_menu_page.php' );
 }
-
-# Add Profile Form BEGIN
 ?>
+
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
-	
-<div id="account-profile-div" class="form-container">
-	<form id="account-profile-form" method="post" action="account_prof_update.php">
-		<fieldset>
-			<?php  echo form_security_field( 'account_prof_update' )?>
-			<input type="hidden" name="action" value="add" />
-			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
-
-			<div class="widget-box widget-color-blue2">
-
-				<div class="widget-header widget-header-small">
-					<h4 class="widget-title lighter">
-						<i class="ace-icon fa fa-file-o"></i>
-						<?php echo lang_get( 'add_profile_title' ) ?>
-					</h4>
-				</div>
-
-				<div class="widget-body">
-					<div class="widget-main no-padding">
-						<div class="table-responsive">
-							<table class="table table-bordered table-condensed table-striped">
-								<tr>
-									<td class="category">
-										<span class="required">*</span>
-										<?php echo lang_get( 'platform' ) ?>
-									</td>
-									<td>
-										<input type="text" class="input-sm"
-											   id="platform" name="platform"
-											   size="32" maxlength="32" required />
-									</td>
-								</tr>
-								<tr>
-									<td class="category">
-										<span class="required">*</span>
-										<?php echo lang_get( 'os' ) ?>
-									</td>
-									<td>
-										<input type="text" class="input-sm"
-											   id="os" name="os"
-											   size="32" maxlength="32" required />
-									</td>
-								</tr>
-								<tr>
-									<td class="category">
-										<span class="required">*</span>
-										<?php echo lang_get( 'os_build' ) ?>
-									</td>
-									<td>
-										<input type="text" class="input-sm"
-											   id="os_build" name="os_build"
-											   size="16" maxlength="16" required />
-									</td>
-								</tr>
-								<tr>
-									<td class="category">
-										<?php echo lang_get( 'additional_description' ) ?>
-									</td>
-									<td>
-										<textarea  id="description" name="description"
-												   class="form-control"
-												   cols="80" rows="8"></textarea>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<div class="widget-toolbox padding-8 clearfix">
-					<span class="required pull-right">
-						* <?php echo lang_get( 'required' ); ?>
-					</span>
-					<button class="btn btn-primary btn-white btn-round">
-						<?php echo lang_get('add_profile_button'); ?>
-					</button>
-				</div>
-			</div>
-		</fieldset>
-	</form>
-</div>
 
 <?php
-	# Add Profile Form END
-
-	# Edit or Delete Profile Form BEGIN
+	# Profiles list BEGIN
 	$t_profiles = profile_get_all_for_user( $t_user_id );
 	if( $t_profiles ) {
 ?>
@@ -301,9 +216,92 @@ if( $g_global_profiles ) {
 
 <?php
 	} # end if profiles
+	# Profiles list END
 
-	# Edit or Delete Profile Form END
+	# Add Profile Form BEGIN
 ?>
+
+<div class="space-10"></div>
+<div id="account-profile-div" class="form-container">
+	<form id="account-profile-form" method="post" action="account_prof_update.php">
+		<fieldset>
+			<?php  echo form_security_field( 'account_prof_update' )?>
+			<input type="hidden" name="action" value="add" />
+			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
+
+			<div class="widget-box widget-color-blue2">
+
+				<div class="widget-header widget-header-small">
+					<h4 class="widget-title lighter">
+						<i class="ace-icon fa fa-file-o"></i>
+						<?php echo lang_get( 'add_profile_title' ) ?>
+					</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main no-padding">
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed table-striped">
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'platform' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="platform" name="platform"
+											   size="32" maxlength="32" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="os" name="os"
+											   size="32" maxlength="32" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os_build' ) ?>
+									</td>
+									<td>
+										<input type="text" class="input-sm"
+											   id="os_build" name="os_build"
+											   size="16" maxlength="16" required />
+									</td>
+								</tr>
+								<tr>
+									<td class="category">
+										<?php echo lang_get( 'additional_description' ) ?>
+									</td>
+									<td>
+									<textarea  id="description" name="description"
+											   class="form-control"
+											   cols="80" rows="8"></textarea>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="widget-toolbox padding-8 clearfix">
+				<span class="required pull-right">
+					* <?php echo lang_get( 'required' ); ?>
+				</span>
+					<button class="btn btn-primary btn-white btn-round">
+						<?php echo lang_get('add_profile_button'); ?>
+					</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
 
 </div>
 <?php
