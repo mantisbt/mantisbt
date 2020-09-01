@@ -64,8 +64,10 @@ auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
 
+$t_manage_global_profile_threshold = config_get( 'manage_global_profile_threshold' );
+$t_can_manage_global_profile = access_has_global_level( $t_manage_global_profile_threshold );
 if( $g_global_profiles ) {
-	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+	access_ensure_global_level( $t_manage_global_profile_threshold );
 } else {
 	access_ensure_global_level( config_get( 'add_profile_threshold' ) );
 }
@@ -155,9 +157,120 @@ if( $g_global_profiles ) {
 </div>
 <?php
 	# Add Profile Form END
-	# Edit or Delete Profile Form BEGIN
 
+	# Edit or Delete Profile Form BEGIN
 	$t_profiles = profile_get_all_for_user( $t_user_id );
+	if( $t_profiles ) {
+?>
+<div class="space-10"></div>
+<div id="categories" class="form-container">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-file-o"></i>
+				<?php echo lang_get( 'manage_profiles_link' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						<thead>
+							<tr>
+								<th><?php echo lang_get( 'platform' ) ?></th>
+								<th><?php echo lang_get( 'os' ) ?></th>
+								<th><?php echo lang_get( 'os_build' ) ?></th>
+								<th class="center"><?php echo lang_get( 'actions' ) ?></th>
+							</tr>
+						</thead>
+
+						<tbody>
+<?php
+			$t_security_token = form_security_token( 'account_prof_update' );
+			$t_default_profile = current_user_get_pref( 'default_profile' );
+
+			foreach( $t_profiles as $t_profile ) {
+				/**
+				 * @var $v_id
+				 * @var $v_user_id
+				 * @var $v_platform
+				 * @var $v_os
+				 * @var $v_os_build
+				 */
+				extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
+				$t_is_global_profile = $v_user_id == ALL_USERS;
+				$t_is_default_profile = $t_default_profile == $v_id
+?>
+							<tr>
+								<td><?php echo string_display_line( $v_platform ); ?></td>
+								<td><?php echo string_display_line( $v_os ); ?></td>
+								<td><?php echo string_display_line( $v_os_build );  ?></td>
+
+								<td class="center">
+									<div class="btn-group inline">
+<?php
+				# Common POST parameters for action buttons
+				$t_param = array(
+					'profile_id' => $v_id,
+				);
+
+				# Print the Edit and Delete buttons for local profiles, or
+				# if user can manage global ones.
+				if( !$t_is_global_profile || $t_can_manage_global_profile ) {
+					echo '<div class="pull-left">';
+					print_form_button(
+						'account_prof_edit_page.php',
+						lang_get( 'edit_link' ),
+						$t_param
+					);
+					echo '</div>';
+
+					echo '<div class="pull-left">';
+					print_form_button(
+						'account_prof_update.php',
+						lang_get( 'delete_link' ),
+						array_merge( $t_param, array( 'action' => 'delete' ) ),
+						$t_security_token
+					);
+					echo '</div>';
+				}
+
+				# Make Default button
+				if( !$g_global_profiles ) {
+					echo '<div class="pull-left">';
+					print_form_button(
+						'account_prof_update.php',
+						lang_get( 'make_default' ),
+						array_merge( $t_param, array( 'action' => 'make_default' ) ),
+						$t_security_token
+					);
+					echo '</div>';
+				}
+
+
+				echo '<div class="pull-left">';
+				echo '</div>';
+?>
+									</div>
+								</td>
+							</tr>
+<?php
+			} # end foreach profile
+?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php
+	} # end if profiles
+
+	# Edit or Delete Profile Form END
+
+# @TODO delete the old "Edit or Delete Profiles" section
 	if( $t_profiles ) {
 ?>
 
