@@ -180,6 +180,7 @@ if( $g_global_profiles ) {
 								<th><?php echo lang_get( 'platform' ) ?></th>
 								<th><?php echo lang_get( 'os' ) ?></th>
 								<th><?php echo lang_get( 'os_build' ) ?></th>
+								<th><?php echo lang_get( 'global_profile' ) ?></th>
 								<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 							</tr>
 						</thead>
@@ -205,6 +206,11 @@ if( $g_global_profiles ) {
 								<td><?php echo string_display_line( $v_platform ); ?></td>
 								<td><?php echo string_display_line( $v_os ); ?></td>
 								<td><?php echo string_display_line( $v_os_build );  ?></td>
+								<td class="center">
+									<?php if( $t_is_global_profile ) { ?>
+									<i class="ace-icon fa fa-check fa-lg"></i>
+									<?php } ?>
+								</td>
 
 								<td class="center">
 									<div class="btn-group inline">
