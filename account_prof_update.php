@@ -58,6 +58,7 @@ auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
 
 $f_action = gpc_get_string( 'action' );
+$f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
@@ -71,7 +72,7 @@ if( $f_action != 'add' ) {
 
 switch( $f_action ) {
 	case 'edit':
-		$t_redirect_page = 'account_prof_edit_page.php?profile_id=' . $f_profile_id;
+		$f_redirect_page = 'account_prof_edit_page.php?profile_id=' . $f_profile_id;
 		break;
 
 	case 'add':
@@ -94,9 +95,9 @@ switch( $f_action ) {
 		profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
 
 		if( ALL_USERS == $t_user_id ) {
-			$t_redirect_page = 'manage_prof_menu_page.php';
+			$f_redirect_page = 'manage_prof_menu_page.php';
 		} else {
-			$t_redirect_page = 'account_prof_menu_page.php';
+			$f_redirect_page = 'account_prof_menu_page.php';
 		}
 		break;
 
@@ -110,10 +111,8 @@ switch( $f_action ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 			profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-			$t_redirect_page = 'manage_prof_menu_page.php';
 		} else {
 			profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-			$t_redirect_page = 'account_prof_menu_page.php';
 		}
 		break;
 
@@ -122,18 +121,15 @@ switch( $f_action ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 			profile_delete( ALL_USERS, $f_profile_id );
-			$t_redirect_page = 'manage_prof_menu_page.php';
 		} else {
 			profile_delete( auth_get_current_user_id(), $f_profile_id );
-			$t_redirect_page = 'account_prof_menu_page.php';
 		}
 		break;
 
 	case 'make_default':
 		current_user_set_pref( 'default_profile', $f_profile_id );
-		$t_redirect_page = 'account_prof_menu_page.php';
 		break;
 }
 
 form_security_purge( $t_form_name );
-print_header_redirect( $t_redirect_page );
+print_header_redirect( $f_redirect_page );

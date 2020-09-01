@@ -59,6 +59,7 @@ auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
 
 $f_profile_id	= gpc_get_int( 'profile_id' );
+$f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( profile_is_global( $f_profile_id ) ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
@@ -97,6 +98,7 @@ if( profile_is_global( $f_profile_id ) ) {
 		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="redirect" value="<?php echo $f_redirect_page ?>" />
 <tr>
 	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
