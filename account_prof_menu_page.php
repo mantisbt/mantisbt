@@ -256,7 +256,9 @@ if( $g_global_profiles ) {
 								<tr>
 									<td class="category">
 										<span class="required">*</span>
-										<?php echo lang_get( 'platform' ) ?>
+										<label for="platform">
+											<?php echo lang_get( 'platform' ) ?>
+										</label>
 									</td>
 									<td>
 										<input type="text" class="input-sm"
@@ -267,7 +269,9 @@ if( $g_global_profiles ) {
 								<tr>
 									<td class="category">
 										<span class="required">*</span>
-										<?php echo lang_get( 'os' ) ?>
+										<label for="os">
+											<?php echo lang_get( 'os' ) ?>
+										</label>
 									</td>
 									<td>
 										<input type="text" class="input-sm"
@@ -278,7 +282,9 @@ if( $g_global_profiles ) {
 								<tr>
 									<td class="category">
 										<span class="required">*</span>
-										<?php echo lang_get( 'os_build' ) ?>
+										<label for="os_build">
+											<?php echo lang_get( 'os_build' ) ?>
+										</label>
 									</td>
 									<td>
 										<input type="text" class="input-sm"
@@ -288,7 +294,9 @@ if( $g_global_profiles ) {
 								</tr>
 								<tr>
 									<td class="category">
-										<?php echo lang_get( 'additional_description' ) ?>
+										<label for="description">
+											<?php echo lang_get( 'additional_description' ) ?>
+										</label>
 									</td>
 									<td>
 									<textarea  id="description" name="description"
