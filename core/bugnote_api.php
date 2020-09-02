@@ -808,9 +808,12 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 		$g_cache_bugnotes_by_id = array();
 		$g_cache_bugnotes_by_bug_id = array();
 	} else {
-		if( isset( $g_cache_bugnotes_by_id[(int)$p_bugnote_id] ) ) {
-			$t_note_obj = $g_cache_bugnotes_by_id[(int)$p_bugnote_id];
-			# current note id will be unset in the following call
+		$p_bugnote_id = (int)$p_bugnote_id;
+		if( isset( $g_cache_bugnotes_by_id[$p_bugnote_id] ) ) {
+			$t_note_obj = $g_cache_bugnotes_by_id[$p_bugnote_id];
+			unset($g_cache_bugnotes_by_id[$p_bugnote_id]);
+
+			# Clear the bug-level cache for the bugnote's parent bug
 			bugnote_clear_bug_cache( $t_note_obj->bug_id );
 		}
 	}
