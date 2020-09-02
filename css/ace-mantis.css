@@ -341,6 +341,11 @@ textarea.input-xs, select.input-xs[multiple] {
     padding: 1px 3px;
 }
 
+th > label,
+td > label {
+    font-weight: bold;
+}
+
 .scrollable-menu {
     height: auto;
     max-height: 435px;
