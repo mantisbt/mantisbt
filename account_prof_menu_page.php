@@ -113,8 +113,14 @@ if( $g_global_profiles ) {
 								<th><?php echo lang_get( 'platform' ) ?></th>
 								<th><?php echo lang_get( 'os' ) ?></th>
 								<th><?php echo lang_get( 'os_build' ) ?></th>
+<?php
+			if( !$g_global_profiles ) {
+?>
 								<th><?php echo lang_get( 'global_profile' ) ?></th>
 								<th><?php echo lang_get( 'default_profile' ) ?></th>
+<?php
+			}
+?>
 								<th class="center"><?php echo lang_get( 'actions' ) ?></th>
 							</tr>
 						</thead>
@@ -140,6 +146,9 @@ if( $g_global_profiles ) {
 								<td><?php echo string_display_line( $v_platform ); ?></td>
 								<td><?php echo string_display_line( $v_os ); ?></td>
 								<td><?php echo string_display_line( $v_os_build );  ?></td>
+<?php
+				if( !$g_global_profiles ) {
+?>
 								<td class="center">
 									<?php if( $t_is_global_profile ) { ?>
 									<i class="ace-icon fa fa-check fa-lg"></i>
@@ -150,7 +159,9 @@ if( $g_global_profiles ) {
 									<i class="ace-icon fa fa-check fa-lg"></i>
 									<?php } ?>
 								</td>
-
+<?php
+				}
+?>
 								<td class="center">
 									<div class="btn-group inline">
 <?php
