@@ -108,7 +108,8 @@ if( $t_global_profile ) {
 		<input type="hidden" name="redirect" value="<?php echo $f_redirect_page ?>" />
 <tr>
 	<th class="category" width="25%">
-		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
+		<span class="required">*</span>
+		<?php echo lang_get( 'platform' ) ?>
 	</th>
 	<td width="75%">
 		<input type="text" name="platform" class="input-sm" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" required />
@@ -116,7 +117,8 @@ if( $t_global_profile ) {
 </tr>
 <tr>
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'os' ) ?>
+		<span class="required">*</span>
+		<?php echo lang_get( 'os' ) ?>
 	</th>
 	<td>
 		<input type="text" name="os" class="input-sm"  size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" required />
@@ -124,7 +126,8 @@ if( $t_global_profile ) {
 </tr>
 <tr>
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'os_build' ) ?>
+		<span class="required">*</span>
+		<?php echo lang_get( 'os_build' ) ?>
 	</th>
 	<td>
 		<input type="text" name="os_build" class="input-sm" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" required />
