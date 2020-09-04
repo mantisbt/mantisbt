@@ -61,6 +61,7 @@ current_user_ensure_unprotected();
 $f_profile_id	= gpc_get_int( 'profile_id' );
 $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
+/** @noinspection PhpUnhandledExceptionInspection */
 $t_global_profile = profile_is_global( $f_profile_id );
 if( $t_global_profile ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );

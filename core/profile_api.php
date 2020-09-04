@@ -312,9 +312,9 @@ function profile_get_default( $p_user_id ) {
  * Returns whether the specified profile is global
  * @param integer $p_profile_id A valid profile identifier.
  * @return boolean
+ * @throws ClientException if the profile ID does not exist
  */
 function profile_is_global( $p_profile_id ) {
-	$t_row = profile_get_row( ALL_USERS, $p_profile_id );
-	return( $t_row !== false );
+	$t_row = profile_get_row_direct( $p_profile_id );
+	return $t_row['user_id'] == ALL_USERS;
 }
-
