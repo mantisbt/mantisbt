@@ -179,7 +179,7 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 		</div>
 		</div>
 			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit' ) ?>" />
 			</div>
 		</div>
 		</div>

@@ -105,7 +105,7 @@ if( $t_global_profile ) {
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
 					<i class="ace-icon fa fa-user"></i>
-					<?php echo lang_get( 'edit_profile_title' ) ?>
+					<?php echo lang_get( 'edit_profile' ) ?>
 				</h4>
 			</div>
 
@@ -158,7 +158,7 @@ if( $t_global_profile ) {
 							<tr>
 								<th class="category">
 									<label for="description">
-										<?php echo lang_get( 'additional_description' ) ?>
+										<?php echo lang_get( 'profile_description' ) ?>
 									</label>
 								</th>
 								<td>
@@ -180,7 +180,7 @@ if( $t_global_profile ) {
 						<?php echo lang_get( 'required' ) ?>
 					</span>
 					<button class="btn btn-primary btn-white btn-round">
-						<?php echo lang_get( 'update_profile_button' ) ?>
+						<?php echo lang_get( 'update_profile' ) ?>
 					</button>
 				</div>
 			</div>

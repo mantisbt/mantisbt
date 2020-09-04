@@ -245,7 +245,7 @@ if( $g_global_profiles ) {
 				<div class="widget-header widget-header-small">
 					<h4 class="widget-title lighter">
 						<i class="ace-icon fa fa-file-o"></i>
-						<?php echo lang_get( 'add_profile_title' ) ?>
+						<?php echo lang_get( 'add_profile' ) ?>
 					</h4>
 				</div>
 
@@ -295,7 +295,7 @@ if( $g_global_profiles ) {
 								<tr>
 									<td class="category">
 										<label for="description">
-											<?php echo lang_get( 'additional_description' ) ?>
+											<?php echo lang_get( 'profile_description' ) ?>
 										</label>
 									</td>
 									<td>
@@ -314,7 +314,7 @@ if( $g_global_profiles ) {
 					* <?php echo lang_get( 'required' ); ?>
 				</span>
 					<button class="btn btn-primary btn-white btn-round">
-						<?php echo lang_get('add_profile_button'); ?>
+						<?php echo lang_get('add_profile'); ?>
 					</button>
 				</div>
 			</div>

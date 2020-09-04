@@ -109,7 +109,7 @@ layout_login_page_begin();
 				<div class="space-10"></div>
 				<?php echo lang_get( 'lost_password_info' ); ?>
 				<div class="space-10"></div>
-				<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110"  value="<?php echo lang_get( 'submit_button' ) ?>" />
+				<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110"  value="<?php echo lang_get( 'submit' ) ?>" />
 			<?php
 			} else {
 				echo '<div class="space-10"></div>';
