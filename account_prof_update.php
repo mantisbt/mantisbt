@@ -127,4 +127,9 @@ switch( $f_action ) {
 }
 
 form_security_purge( $t_form_name );
-print_header_redirect( $f_redirect_page );
+
+layout_page_header( null, $f_redirect_page );
+layout_page_begin();
+html_operation_successful( $f_redirect_page );
+layout_page_end();
+
