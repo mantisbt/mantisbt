@@ -84,6 +84,8 @@ layout_page_header();
 if( $t_global_profile ) {
 	layout_page_begin( 'manage_overview_page.php' );
 	print_manage_menu( 'manage_prof_menu_page.php' );
+} else {
+	layout_page_begin();
 }
 ?>
 
