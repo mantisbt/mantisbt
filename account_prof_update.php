@@ -75,50 +75,43 @@ switch( $f_action ) {
 		$f_os			= gpc_get_string( 'os' );
 		$f_os_build		= gpc_get_string( 'os_build' );
 		$f_description	= gpc_get_string( 'description' );
-
 		$t_user_id		= gpc_get_int( 'user_id' );
-		if( ALL_USERS != $t_user_id ) {
-			$t_user_id = auth_get_current_user_id();
-		}
 
 		if( ALL_USERS == $t_user_id ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 		} else {
 			access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+			$t_user_id = auth_get_current_user_id();
 		}
 
 		profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
-
-		if( ALL_USERS == $t_user_id ) {
-			$f_redirect_page = 'manage_prof_menu_page.php';
-		} else {
-			$f_redirect_page = 'account_prof_menu_page.php';
-		}
 		break;
 
 	case 'update':
+		if( profile_is_global( $f_profile_id ) ) {
+			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+			$t_user_id = ALL_USERS;
+		} else {
+			$t_user_id = auth_get_current_user_id();
+		}
+
 		$f_platform = gpc_get_string( 'platform' );
 		$f_os = gpc_get_string( 'os' );
 		$f_os_build = gpc_get_string( 'os_build' );
 		$f_description = gpc_get_string( 'description' );
 
-		if( profile_is_global( $f_profile_id ) ) {
-			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-
-			profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-		} else {
-			profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
-		}
+		profile_update( $t_user_id, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
 		break;
 
 	case 'delete':
 		if( profile_is_global( $f_profile_id ) ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-
-			profile_delete( ALL_USERS, $f_profile_id );
+			$t_user_id = ALL_USERS;
 		} else {
-			profile_delete( auth_get_current_user_id(), $f_profile_id );
+			$t_user_id = auth_get_current_user_id();
 		}
+
+		profile_delete( $t_user_id, $f_profile_id );
 		break;
 
 	case 'make_default':
