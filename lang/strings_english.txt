@@ -433,6 +433,7 @@ $s_additional_description = 'Additional Description';
 $s_update_profile_button = 'Update Profile';
 $s_global_profile = 'Global Profile';
 $s_default_profile = 'Default Profile';
+$s_delete_profile_confirm_msg = 'Are you sure you want to delete profile "%1$s"?';
 
 # account_profile_make_default.php
 $s_profile_defaulted_msg = 'Default profile updated...';
