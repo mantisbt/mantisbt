@@ -88,75 +88,97 @@ if( $t_global_profile ) {
 } else {
 	layout_page_begin();
 }
+
+# Edit Profile Form BEGIN
 ?>
 
-<?php # Edit Profile Form BEGIN ?>
 <div class="col-md-12 col-xs-12">
-<div class="space-10"></div>
-<form method="post" action="account_prof_update.php">
-<div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-user"></i>
-		<?php echo lang_get('edit_profile_title') ?>
-	</h4>
-</div>
-<div class="widget-body">
-<div class="widget-main no-padding">
-<div class="table-responsive">
-	<table class="table table-striped table-bordered table-condensed">
+	<div class="space-10"></div>
+	<form method="post" action="account_prof_update.php">
 		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
 		<input type="hidden" name="redirect" value="<?php echo $f_redirect_page ?>" />
-<tr>
-	<th class="category" width="25%">
-		<span class="required">*</span>
-		<?php echo lang_get( 'platform' ) ?>
-	</th>
-	<td width="75%">
-		<input type="text" name="platform" class="input-sm" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" required />
-	</td>
-</tr>
-<tr>
-	<th class="category">
-		<span class="required">*</span>
-		<?php echo lang_get( 'os' ) ?>
-	</th>
-	<td>
-		<input type="text" name="os" class="input-sm"  size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" required />
-	</td>
-</tr>
-<tr>
-	<th class="category">
-		<span class="required">*</span>
-		<?php echo lang_get( 'os_build' ) ?>
-	</th>
-	<td>
-		<input type="text" name="os_build" class="input-sm" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" required />
-	</td>
-</tr>
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'additional_description' ) ?>
-	</th>
-	<td>
-		<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-		<textarea class="form-control" name="description" cols="60" rows="8">
+
+		<div class="widget-box widget-color-blue2">
+
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-user"></i>
+					<?php echo lang_get( 'edit_profile_title' ) ?>
+				</h4>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-condensed">
+							<tr>
+								<th class="category">
+									<span class="required">*</span>
+									<?php echo lang_get( 'platform' ) ?>
+								</th>
+								<td>
+									<input name="platform" type="text" required
+										   class="input-sm" size="32" maxlength="32"
+										   value="<?php echo string_attribute( $v_platform ) ?>"
+									/>
+								</td>
+							</tr>
+							<tr>
+								<th class="category">
+									<span class="required">*</span>
+									<?php echo lang_get( 'os' ) ?>
+								</th>
+								<td>
+									<input name="os" type="text" required
+										   class="input-sm" size="32" maxlength="32"
+										   value="<?php echo string_attribute( $v_os ) ?>"
+									/>
+								</td>
+							</tr>
+							<tr>
+								<th class="category">
+									<span class="required">*</span>
+									<?php echo lang_get( 'os_build' ) ?>
+								</th>
+								<td>
+									<input name="os_build" type="text" required
+										   class="input-sm" size="16" maxlength="16"
+										   value="<?php echo string_attribute( $v_os_build ) ?>"
+									/>
+								</td>
+							</tr>
+							<tr>
+								<th class="category">
+									<?php echo lang_get( 'additional_description' ) ?>
+								</th>
+								<td>
+									<?php # Newline after opening textarea tag is intentional, see #25839 ?>
+									<textarea name="description"
+											  class="form-control"
+											  cols="60" rows="8">
 <?php echo string_textarea( $v_description ) ?>
 </textarea>
-	</td>
-</tr>
-</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="widget-toolbox padding-8 clearfix">
+					<span class="required pull-right">
+						*
+						<?php echo lang_get( 'required' ) ?>
+					</span>
+					<button class="btn btn-primary btn-white btn-round">
+						<?php echo lang_get( 'update_profile_button' ) ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
-</div>
-<div class="widget-toolbox padding-8 clearfix">
-	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
-</div>
-</div>
-</div>
-</form>
-</div>
+
 <?php
 layout_page_end();
