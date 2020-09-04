@@ -193,6 +193,22 @@ function profile_get_row_direct( $p_profile_id ) {
 }
 
 /**
+ * Return the profile's name as concatenation of platform, os and build.
+ * @param int $p_profile_id
+ * @return string
+ */
+function profile_get_name( $p_profile_id ) {
+	$t_profile = profile_get_row_direct( $p_profile_id );
+	/**
+	 * @var string $v_platform
+	 * @var string $v_os
+	 * @var string $v_os_build
+	 */
+	extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
+	return "$v_platform $v_os $v_os_build";
+}
+
+/**
  * Return an array containing all rows for a given user
  * @param integer $p_user_id   A valid user identifier.
  * @param boolean $p_all_users Include profiles for all users.
