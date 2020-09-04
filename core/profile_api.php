@@ -42,6 +42,8 @@ require_api( 'lang_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Create a new profile for the user, return the ID of the new profile
  * @param integer $p_user_id     A valid user identifier.
@@ -170,6 +172,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
  * Return a profile row from the database
  * @param integer $p_profile_id A profile identifier.
  * @return array
+ * @throws ClientException if the profile ID does not exist
  * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
@@ -177,7 +180,16 @@ function profile_get_row_direct( $p_profile_id ) {
 	$t_query = 'SELECT * FROM {user_profile} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_profile_id ) );
 
-	return db_fetch_array( $t_result );
+	$t_row = db_fetch_array( $t_result );
+	if( !$t_row ) {
+		throw new ClientException(
+			"Profile #$p_profile_id not found",
+			ERROR_USER_PROFILE_NOT_FOUND,
+			array( $p_profile_id )
+		);
+	}
+
+	return $t_row;
 }
 
 /**

@@ -647,8 +647,9 @@ function mci_profile_as_array_by_id( $p_profile_id ) {
 		return null;
 	}
 
-	$t_profile = profile_get_row_direct( $t_profile_id );
-	if( $t_profile === false ) {
+	try {
+		$t_profile = profile_get_row_direct( $t_profile_id );
+	} catch (ClientException $e) {
 		return null;
 	}
 
