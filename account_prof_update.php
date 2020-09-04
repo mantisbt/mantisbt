@@ -111,6 +111,13 @@ switch( $f_action ) {
 			$t_user_id = auth_get_current_user_id();
 		}
 
+		helper_ensure_confirmed(
+			sprintf( lang_get( 'delete_profile_confirm_msg' ),
+				string_attribute( profile_get_name( $f_profile_id ) )
+			),
+			lang_get( 'delete_profile' )
+		);
+
 		profile_delete( $t_user_id, $f_profile_id );
 		break;
 
