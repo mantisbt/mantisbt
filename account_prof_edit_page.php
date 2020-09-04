@@ -115,11 +115,13 @@ if( $t_global_profile ) {
 						<table class="table table-striped table-bordered table-condensed">
 							<tr>
 								<th class="category">
-									<span class="required">*</span>
-									<?php echo lang_get( 'platform' ) ?>
+									<label for="platform">
+										<span class="required">*</span>
+										<?php echo lang_get( 'platform' ) ?>
+									</label>
 								</th>
 								<td>
-									<input name="platform" type="text" required
+									<input id="platform" name="platform" type="text" required
 										   class="input-sm" size="32" maxlength="32"
 										   value="<?php echo string_attribute( $v_platform ) ?>"
 									/>
@@ -127,11 +129,13 @@ if( $t_global_profile ) {
 							</tr>
 							<tr>
 								<th class="category">
-									<span class="required">*</span>
-									<?php echo lang_get( 'os' ) ?>
+									<label for="os">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os' ) ?>
+									</label>
 								</th>
 								<td>
-									<input name="os" type="text" required
+									<input id="os" name="os" type="text" required
 										   class="input-sm" size="32" maxlength="32"
 										   value="<?php echo string_attribute( $v_os ) ?>"
 									/>
@@ -139,11 +143,13 @@ if( $t_global_profile ) {
 							</tr>
 							<tr>
 								<th class="category">
-									<span class="required">*</span>
-									<?php echo lang_get( 'os_build' ) ?>
+									<label for="os_build">
+										<span class="required">*</span>
+										<?php echo lang_get( 'os_build' ) ?>
+									</label>
 								</th>
 								<td>
-									<input name="os_build" type="text" required
+									<input id="os_build" name="os_build" type="text" required
 										   class="input-sm" size="16" maxlength="16"
 										   value="<?php echo string_attribute( $v_os_build ) ?>"
 									/>
@@ -151,11 +157,13 @@ if( $t_global_profile ) {
 							</tr>
 							<tr>
 								<th class="category">
-									<?php echo lang_get( 'additional_description' ) ?>
+									<label for="description">
+										<?php echo lang_get( 'additional_description' ) ?>
+									</label>
 								</th>
 								<td>
 									<?php # Newline after opening textarea tag is intentional, see #25839 ?>
-									<textarea name="description"
+									<textarea id="description" name="description"
 											  class="form-control"
 											  cols="60" rows="8">
 <?php echo string_textarea( $v_description ) ?>
