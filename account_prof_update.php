@@ -54,7 +54,6 @@ $t_form_name = 'account_prof_update';
 form_security_validate( $t_form_name );
 
 auth_ensure_user_authenticated();
-
 current_user_ensure_unprotected();
 
 $f_action = gpc_get_string( 'action' );
@@ -71,10 +70,6 @@ if( $f_action != 'add' ) {
 }
 
 switch( $f_action ) {
-	case 'edit':
-		$f_redirect_page = 'account_prof_edit_page.php?profile_id=' . $f_profile_id;
-		break;
-
 	case 'add':
 		$f_platform		= gpc_get_string( 'platform' );
 		$f_os			= gpc_get_string( 'os' );
