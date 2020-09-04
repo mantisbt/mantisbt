@@ -61,12 +61,6 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
 if( $f_action != 'add' ) {
 	$f_profile_id = gpc_get_int( 'profile_id' );
-
-	# Make sure user did select an existing profile from the list
-	if( $f_action != 'make_default' && $f_profile_id == 0 ) {
-		error_parameters( lang_get( 'select_profile' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
 }
 
 switch( $f_action ) {
