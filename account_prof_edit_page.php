@@ -61,9 +61,9 @@ current_user_ensure_unprotected();
 $f_profile_id	= gpc_get_int( 'profile_id' );
 $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 
-if( profile_is_global( $f_profile_id ) ) {
+$t_global_profile = profile_is_global( $f_profile_id );
+if( $t_global_profile ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-
 	$t_row = profile_get_row( ALL_USERS, $f_profile_id );
 } else {
 	$t_row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
@@ -81,9 +81,8 @@ extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 layout_page_header();
 
-layout_page_begin( 'manage_overview_page.php' );
-
-if( profile_is_global( $f_profile_id ) ) {
+if( $t_global_profile ) {
+	layout_page_begin( 'manage_overview_page.php' );
 	print_manage_menu( 'manage_prof_menu_page.php' );
 }
 ?>
