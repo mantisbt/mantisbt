@@ -69,6 +69,14 @@ if( profile_is_global( $f_profile_id ) ) {
 	$t_row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
 }
 
+/**
+ * @var $v_id
+ * @var $v_user_id
+ * @var $v_platform
+ * @var $v_os
+ * @var $v_os_build
+ * @var $v_description
+ */
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 layout_page_header();
