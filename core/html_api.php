@@ -405,14 +405,16 @@ function html_top_banner() {
  * Outputs a message to confirm an operation's result.
  * @param array   $p_buttons     Array of (URL, label) pairs used to generate
  *                               the buttons; if label is null or unspecified,
- *                               the default 'proceed' text will be displayed.
+ *                               the default 'proceed' text will be displayed;
+ *                               If the array is empty or not provided, no
+ *                               buttons will be printed.
  * @param string  $p_message     Message to display to the user. If none is
  *                               provided, a default message will be printed
  * @param integer $p_type        One of the constants CONFIRMATION_TYPE_SUCCESS,
  *                               CONFIRMATION_TYPE_WARNING, CONFIRMATION_TYPE_FAILURE
  * @return void
  */
-function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
+function html_operation_confirmation( array $p_buttons = null, $p_message = '', $p_type = CONFIRMATION_TYPE_SUCCESS ) {
 	switch( $p_type ) {
 		case CONFIRMATION_TYPE_FAILURE:
 			$t_alert_css = 'alert-danger';
@@ -440,17 +442,20 @@ function html_operation_confirmation( array $p_buttons, $p_message = '', $p_type
 	} else {
 		$t_message = $p_message;
 	}
-	echo '<p class="bold bigger-110">' . $t_message  . '</p><br />';
+	echo '<p class="bold bigger-110">' . $t_message  . '</p>';
 
 	# Print buttons
-	echo '<div class="btn-group">';
-	foreach( $p_buttons as $t_button ) {
-		$t_url = string_sanitize_url( $t_button[0] );
-		$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
+	if( !empty( $p_buttons ) ) {
+		echo '<br />';
+		echo '<div class="btn-group">';
+		foreach( $p_buttons as $t_button ) {
+			$t_url = string_sanitize_url( $t_button[0] );
+			$t_label = isset( $t_button[1] ) ? $t_button[1] : lang_get( 'proceed' );
 
-		print_link_button( $t_url, $t_label );
+			print_link_button( $t_url, $t_label );
+		}
+		echo '</div>';
 	}
-	echo '</div>';
 
 	echo '</div></div></div>', PHP_EOL;
 }
