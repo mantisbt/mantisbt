@@ -305,7 +305,7 @@ function lang_get( $p_string, $p_lang = null ) {
 	} else {
 		error_parameters( $p_string );
 		trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-		return '';
+		return $p_string;
 	}
 }
 
