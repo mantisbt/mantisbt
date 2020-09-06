@@ -186,7 +186,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
  *
  * @throws ClientException if the profile ID does not exist
  */
-function profile_get_row_direct( $p_profile_id ) {
+function profile_get_row( $p_profile_id ) {
 	$t_query = new DbQuery();
 	$t_query->sql( 'SELECT * FROM {user_profile} WHERE id=:profile_id' );
 	$t_query->bind( 'profile_id',  $p_profile_id );
@@ -213,7 +213,7 @@ function profile_get_row_direct( $p_profile_id ) {
  * @throws ClientException if the profile ID does not exist
  */
 function profile_get_name( $p_profile_id ) {
-	$t_profile = profile_get_row_direct( $p_profile_id );
+	$t_profile = profile_get_row( $p_profile_id );
 	/**
 	 * @var string $v_platform
 	 * @var string $v_os
@@ -329,6 +329,6 @@ function profile_get_default( $p_user_id ) {
  * @throws ClientException if the profile ID does not exist
  */
 function profile_is_global( $p_profile_id ) {
-	$t_row = profile_get_row_direct( $p_profile_id );
+	$t_row = profile_get_row( $p_profile_id );
 	return $t_row['user_id'] == ALL_USERS;
 }

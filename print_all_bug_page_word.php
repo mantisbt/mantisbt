@@ -449,7 +449,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 	# account profile description
 	if( $t_bug->profile_id > 0 ) {
-		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
+		$t_profile_row = profile_get_row( $t_bug->profile_id );
 		$t_profile_description = string_display( $t_profile_row['description'] );
 
 ?>
