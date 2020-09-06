@@ -183,6 +183,27 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 		$t_method = DISPLAY_ERROR_HALT;
 	}
 
+	# Special handling for missing language strings, as we do not want to
+	# display information about lang_get() call; instead, we need details
+	# about the actual location of the missing string.
+	if( $p_error == ERROR_LANG_STRING_NOT_FOUND ) {
+		# Loop through the call stack, until we find the first call to
+		# lang_get() outside of lang API.
+		foreach( error_stack_trace() as $t_error ) {
+			/**
+			 * @var string $v_file
+			 * @var string $v_line
+			 * @var string $v_function
+			 */
+			extract( $t_error, EXTR_PREFIX_ALL, 'v' );
+			if( basename( $v_file ) != 'lang_api.php' && $v_function == 'lang_get' ) {
+				$p_file = $v_file;
+				$p_line = $v_line;
+				break;
+			}
+		}
+	}
+
 	# build an appropriate error string
 	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
 	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
