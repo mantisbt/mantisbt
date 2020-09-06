@@ -117,20 +117,20 @@ function error_stack_trace( $p_exception = null ) {
 }
 
 /**
- * Default error handler
+ * Default error handler.
  *
  * This handler will not receive E_ERROR, E_PARSE, E_CORE_*, or E_COMPILE_*
- *  errors.
+ * errors.
  *
- * E_USER_* are triggered by us and will contain an error constant in $p_error
- * The others, being system errors, will come with a string in $p_error
- *
- * @access private
- * @param integer $p_type    Contains the level of the error raised, as an integer.
- * @param string  $p_error   Contains the error message, as a string.
- * @param string  $p_file    Contains the filename that the error was raised in, as a string.
- * @param integer $p_line    Contains the line number the error was raised at, as an integer.
+ * @internal
+ * @param integer    $p_type  Contains the level of the error raised, as an integer.
+ * @param int|string $p_error For Mantis internal errors (i.e. of type E_USER_*),
+ *                            contains the error number (see ERROR_* constants);
+ *                            otherwise (system errors), the error message as a string.
+ * @param string     $p_file  Contains the filename that the error was raised in, as a string.
+ * @param integer    $p_line  Contains the line number the error was raised at, as an integer.
  * @return void
+ *
  * @uses lang_api.php
  * @uses config_api.php
  * @uses compress_api.php
