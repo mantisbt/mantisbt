@@ -65,10 +65,8 @@ $f_redirect_page = gpc_get_string( 'redirect', 'account_prof_menu_page.php' );
 $t_global_profile = profile_is_global( $f_profile_id );
 if( $t_global_profile ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
-	$t_row = profile_get_row( ALL_USERS, $f_profile_id );
-} else {
-	$t_row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
 }
+$t_row = profile_get_row_direct( $f_profile_id );
 
 /**
  * @var $v_id
