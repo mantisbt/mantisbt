@@ -179,29 +179,12 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 }
 
 /**
- * Return a profile row from the database
- * @param integer $p_user_id    A valid user identifier.
- * @param integer $p_profile_id A profile identifier.
- * @return array
- */
-function profile_get_row( $p_user_id, $p_profile_id ) {
-	$t_query = new DbQuery();
-	$t_query->sql( 'SELECT * FROM {user_profile} WHERE id=:profile_id AND user_id=:user_id' );
-	$t_query->bind( 'profile_id',  $p_profile_id );
-	$t_query->bind( 'user_id',  $p_user_id );
-	$t_query->execute();
-
-	return $t_query->fetch();
-}
-
-/**
  * Return a profile row from the database.
  *
  * @param integer $p_profile_id A profile identifier.
  * @return array
  *
  * @throws ClientException if the profile ID does not exist
- * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
 	$t_query = new DbQuery();
