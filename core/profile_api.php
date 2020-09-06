@@ -59,27 +59,7 @@ use Mantis\Exceptions\ClientException;
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$p_user_id = (int)$p_user_id;
 
-	if( ALL_USERS != $p_user_id ) {
-		user_ensure_unprotected( $p_user_id );
-	}
-
-	# platform cannot be blank
-	if( is_blank( $p_platform ) ) {
-		error_parameters( lang_get( 'platform' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
-
-	# os cannot be blank
-	if( is_blank( $p_os ) ) {
-		error_parameters( lang_get( 'os' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
-
-	# os_build cannot be blank
-	if( is_blank( $p_os_build ) ) {
-		error_parameters( lang_get( 'version' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
-	}
+	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build );
 
 	# Add profile
 	$t_query = new DbQuery();
@@ -138,6 +118,38 @@ function profile_delete( $p_user_id, $p_profile_id ) {
  * @throws ClientException if user is protected
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
+	profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build );
+
+	# Update profile
+	$t_query = new DbQuery();
+	$t_query->sql( 'UPDATE {user_profile}
+		SET platform=:platform, 
+			os=:os,
+			os_build=:os_build,
+			description=:description
+		WHERE id=:profile_id AND user_id=:user_id'
+	);
+	$t_query->bind( 'platform',  $p_platform );
+	$t_query->bind( 'os',  $p_os );
+	$t_query->bind( 'os_build',  $p_os_build );
+	$t_query->bind( 'description',  $p_description );
+	$t_query->bind( 'profile_id',  $p_profile_id );
+	$t_query->bind( 'user_id',  $p_user_id );
+	$t_query->execute();
+}
+
+/**
+ * Validates that the given profile data is valid, throw errors if not.
+ * @internal
+ *
+ * @param $p_user_id
+ * @param $p_platform
+ * @param $p_os
+ * @param $p_os_build
+ *
+ * @throws ClientException
+ */
+function profile_validate_before_update( $p_user_id, $p_platform, $p_os, $p_os_build ) {
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
@@ -159,23 +171,6 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 		error_parameters( lang_get( 'version' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
-
-	# Add item
-	$t_query = new DbQuery();
-	$t_query->sql( 'UPDATE {user_profile}
-		SET platform=:platform, 
-			os=:os,
-			os_build=:os_build,
-			description=:description
-		WHERE id=:profile_id AND user_id=:user_id'
-	);
-	$t_query->bind( 'platform',  $p_platform );
-	$t_query->bind( 'os',  $p_os );
-	$t_query->bind( 'os_build',  $p_os_build );
-	$t_query->bind( 'description',  $p_description );
-	$t_query->bind( 'profile_id',  $p_profile_id );
-	$t_query->bind( 'user_id',  $p_user_id );
-	$t_query->execute();
 }
 
 /**
