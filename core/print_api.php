@@ -1940,12 +1940,16 @@ function print_recently_visited() {
 function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false ) {
 	if( $p_multiple ) {
 		$t_size = ' size="5"';
-		$t_multiple = ' multiple="multiple"';
+		$t_multiple = ' multiple';
 	} else {
 		$t_size = '';
 		$t_multiple = '';
 	}
-	$t_info = sprintf( '<select class="input-sm" %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
+	$t_info = sprintf( '<select class="input-sm" name="%1$s" id="%1$s"%2$s%3$s>',
+		$p_control_name,
+		$t_multiple,
+		$t_size
+	);
 	if( $p_add_any ) {
 		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );
 	}
@@ -1953,11 +1957,11 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 		$t_sel = '';
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		} else {
 			if( ( $t_name === $p_match ) || ( $t_desc === $p_match ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		}
 		$t_info .= sprintf( '<option%s value="%s">%s</option>', $t_sel, $t_name, $t_desc );
