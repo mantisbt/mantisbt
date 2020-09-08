@@ -32,7 +32,7 @@ class Period {
 	/**
 	 * Period types constants.
 	 */
-	const PERIOD_NONE = 0;
+	const PERIOD_NONE = null;
 	const PERIOD_MONTH_TO_DATE = 1;
 	const PERIOD_MONTH_PREVIOUS = 2;
 	const PERIOD_QUARTER_TO_DATE = 3;
@@ -52,9 +52,9 @@ class Period {
 	const BUCKET_WEEKLY = 7 * self::BUCKET_DAILY;
 
 	/**
-	 * @var int Period type (see PERIOD_* constants).
+	 * @var int|null Period type (see PERIOD_* constants).
 	 */
-	private int $type;
+	private ?int $type;
 
 	/**
 	 * @var DateTimeImmutable Start Date.
@@ -326,7 +326,7 @@ class Period {
 			self::PERIOD_ARBITRARY_DATES => plugin_lang_get( 'period_select' ),
 		);
 
-		$t_dropdown = get_dropdown( $t_periods, $p_control_name, $this->type );
+		$t_dropdown = get_dropdown( $t_periods, $p_control_name, $this->type, false, false, true );
 		$t_formatted_start = $this->get_start_formatted();
 		$t_formatted_end = $this->get_end_formatted();
 		$t_date_input_pattern = '<span class="inline"><label for="%1$s" class="padding-right-4">%2$s</label>%3$s</span>';
