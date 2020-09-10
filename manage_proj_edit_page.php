@@ -485,7 +485,7 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 					'manage_proj_cat_edit_page.php',
 					lang_get( 'edit' ),
 					array(
-						'id' => $t_id,
+						'category_id' => $t_id,
 						'project_id' => $f_project_id,
 					),
 					OFF,
@@ -496,7 +496,7 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 					'manage_proj_cat_delete.php',
 					lang_get( 'delete' ),
 					array(
-						'id' => $t_id,
+						'category_id' => $t_id,
 						'project_id' => $f_project_id,
 					),
 					$t_security_token,
@@ -528,7 +528,7 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 			<button class="btn btn-sm btn-primary btn-white btn-round">
 				<?php echo lang_get( 'add_category_button' ) ?>
 			</button>
-			<button name="add_and_edit_category"
+			<button name="add_and_edit_category" value="1"
 					class="btn btn-sm btn-primary btn-white btn-round">
 				<?php echo lang_get( 'add_and_edit_category_button' ) ?>
 			</button>

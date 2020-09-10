@@ -51,7 +51,7 @@ require_api( 'string_api.php' );
 
 auth_reauthenticate();
 
-$f_category_id		= gpc_get_int( 'id' );
+$f_category_id		= gpc_get_int( 'category_id' );
 $f_project_id		= gpc_get_int( 'project_id' );
 
 $t_row = category_get_row( $f_category_id );
