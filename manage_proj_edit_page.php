@@ -512,7 +512,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<tbody>
 <?php
 		foreach ( $t_versions as $t_version ) {
-			$t_inherited = ( $t_version['project_id'] != $f_project_id ?  true : false );
+			$t_inherited = $t_version['project_id'] != $f_project_id;
 			$t_name = version_full_name( $t_version['id'], $t_inherited, $f_project_id );
 			$t_released = $t_version['released'];
 			$t_obsolete = $t_version['obsolete'];
@@ -790,7 +790,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 			$t_username =  $t_user['display_name'];
 			$t_can_manage_this_user = $t_can_manage_users
 					&& access_has_project_level( $t_user['access_level'], $f_project_id )
-					&& ( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) );
+					&& ( !$f_show_global_users || isset( $t_local_users[$t_user['id']]) );
 		?>
 		<tr>
 			<td class="key-name" data-sortvalue="<?php echo $t_username ?>">
