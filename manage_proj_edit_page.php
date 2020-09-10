@@ -225,29 +225,21 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<button class="btn btn-primary btn-white btn-round">
 				<?php echo lang_get( 'update_project_button' ) ?>
 			</button>
+<?php
+	# You must have global permissions to delete projects
+	if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) {
+?>
+			<button class="btn btn-primary btn-white btn-round"
+					formaction="manage_proj_delete.php">
+				<?php echo lang_get( 'delete_project_button' ) ?>
+			</button>
+<?php
+	}
+?>
 		</div>
 	</div>
 	</form>
 </div>
-</div>
-
-<!-- PROJECT DELETE -->
-<div class="col-md-12 col-xs-12">
-<?php
-# You must have global permissions to delete projects
-if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
-<div id="project-delete-div" class="form-container">
-	<form id="project-delete-form" method="post" action="manage_proj_delete.php" class="pull-right">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_delete' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<button class="btn btn-primary btn-sm btn-white btn-round">
-				<?php echo lang_get( 'delete_project_button' ) ?>
-			</button>
-		</fieldset>
-	</form>
-</div>
-<?php } ?>
 </div>
 
 <!-- CREATE/ADD SUBPROJECTS -->

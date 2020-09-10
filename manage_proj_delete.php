@@ -47,7 +47,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 
-form_security_validate( 'manage_proj_delete' );
+form_security_validate( 'manage_proj_update' );
 
 auth_reauthenticate();
 
@@ -63,7 +63,7 @@ helper_ensure_confirmed( $t_message, lang_get( 'project_delete_button' ) );
 
 project_delete( $f_project_id );
 
-form_security_purge( 'manage_proj_delete' );
+form_security_purge( 'manage_proj_update' );
 
 # Don't leave the current project set to a deleted project -
 #  set it to All Projects
