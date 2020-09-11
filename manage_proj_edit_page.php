@@ -242,9 +242,9 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 </div>
 </div>
 
-<!-- CREATE/ADD SUBPROJECTS -->
+<!-- SUBPROJECTS -->
 <?php
-if ( config_get_global( 'subprojects_enabled') == ON ) {
+if ( config_get_global( 'subprojects_enabled' ) == ON ) {
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
@@ -256,36 +256,40 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 					<?php echo lang_get( 'subprojects' ); ?>
 				</h4>
 			</div>
+
 			<div class="widget-toolbox padding-8 clearfix">
-		<?php
-		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-			print_form_button(
-				'manage_proj_create_page.php',
-				lang_get( 'create_new_subproject_link' ),
-				array( 'parent_id' => $f_project_id ),
-				null,
-				'btn btn-sm btn-primary btn-white btn-round'
-			);
-		} ?>
-	</div>
-		<form id="manage-project-subproject-add-form" method="post" action="manage_proj_subproj_add.php" class="form-inline">
-			<div class="widget-body">
-			<div class="widget-main">
-			<fieldset>
-				<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
-				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-				<!--suppress HtmlFormInputWithoutLabel -->
-				<select name="subproject_id" class="input-sm" required>
-					<option selected disabled value="">
-						<?php echo '[', lang_get( 'select_project_button' ), ']' ?>
-					</option>
+				<div class="pull-left padding-right-8">
+<?php
+	# Check the user's global access level before allowing project creation
+	if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+		print_form_button(
+			'manage_proj_create_page.php',
+			lang_get( 'create_new_subproject_link' ),
+			array( 'parent_id' => $f_project_id ),
+			null,
+			'btn btn-sm btn-primary btn-white btn-round'
+		);
+	}
+?>
+				</div>
+				<form id="manage-project-subproject-add-form"
+					  action="manage_proj_subproj_add.php"
+					  class="form-inline pull-left">
+					<fieldset>
+						<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
+						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+						<!--suppress HtmlFormInputWithoutLabel -->
+						<select name="subproject_id" class="input-sm" required>
+							<option selected disabled value="">
+								<?php echo '[', lang_get( 'select_project_button' ), ']' ?>
+							</option>
 <?php
 	$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
 	$t_all_subprojects[] = $f_project_id;
 	$t_manage_access = config_get( 'manage_project_threshold' );
 	$t_projects = project_get_all_rows();
 	$t_projects = multi_sort( $t_projects, 'name' );
+
 	foreach ( $t_projects as $t_project ) {
 		if( in_array( $t_project['id'], $t_all_subprojects ) ||
 			in_array( $f_project_id, project_hierarchy_get_all_subprojects( $t_project['id'] ) ) ||
@@ -294,130 +298,118 @@ if ( config_get_global( 'subprojects_enabled') == ON ) {
 			continue;
 		}
 ?>
-					<option value="<?php echo $t_project['id'] ?>">
-						<?php echo string_attribute( $t_project['name'] ) ?>
-					</option>
+							<option value="<?php echo $t_project['id'] ?>">
+								<?php echo string_attribute( $t_project['name'] ) ?>
+							</option>
 <?php
 	} # End looping over projects
 ?>
-				</select>
-				<button class="btn btn-sm btn-primary btn-white btn-round">
-					<?php echo lang_get( 'add_subproject' ); ?>
+						</select>
+
+						<button class="btn btn-sm btn-primary btn-white btn-round">
+							<?php echo lang_get( 'add_subproject' ); ?>
+						</button>
+					</fieldset>
+				</form>
+			</div>
+
+<?php
+		$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
+		if( !empty( $t_subproject_ids ) ) {
+?>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<form id="manage-project-update-subprojects-form"
+						  action="manage_proj_update_children.php" method="post">
+
+						<?php echo form_security_field( 'manage_proj_update_children' ) ?>
+						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-condensed">
+								<thead>
+								<tr>
+									<th><?php echo lang_get( 'name' ) ?></th>
+									<th><?php echo lang_get( 'status' ) ?></th>
+									<th><?php echo lang_get( 'enabled' ) ?></th>
+									<th><?php echo lang_get( 'inherit' ) ?></th>
+									<th><?php echo lang_get( 'view_status' ) ?></th>
+									<th><?php echo lang_get( 'description' ) ?></th>
+									<th colspan="2"><?php echo lang_get( 'actions' ) ?></th>
+								</tr>
+								</thead>
+
+								<tbody>
+<?php
+			foreach( $t_subproject_ids as $t_subproject_id ) {
+				$t_subproject = project_get_row( $t_subproject_id );
+				$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true );
+?>
+									<tr>
+										<td>
+											<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
+												<?php echo string_display_line( $t_subproject['name'] ) ?>
+											</a>
+										</td>
+										<td class="center">
+											<?php echo get_enum_element( 'project_status', $t_subproject['status'] ) ?>
+										</td>
+										<td class="center">
+											<?php echo trans_bool( $t_subproject['enabled'] ) ?>
+										</td>
+										<td class="center">
+											<label>
+												<input type="checkbox" class="ace" name="inherit_child_<?php echo $t_subproject_id ?>"
+													<?php echo ( $t_inherit_parent ? 'checked="checked"' : '' ) ?>  />
+												<span class="lbl"></span>
+											</label>
+										</td>
+										<td class="center">
+											<?php echo get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ?>
+										</td>
+										<td>
+											<?php echo string_display_links( $t_subproject['description'] ) ?>
+										</td>
+										<td class="center">
+<?php
+			print_link_button(
+				'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
+				lang_get( 'edit' ),
+				'btn-xs'
+			);
+			print_link_button(
+				"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id']
+				. form_security_param( 'manage_proj_subproj_delete' ),
+				lang_get( 'unlink_link' ),
+				'btn-xs'
+			);
+?>
+										</td>
+									</tr>
+<?php
+			} # End foreach subproject
+?>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="widget-toolbox padding-8 clearfix">
+				<button class="btn btn-primary btn-white btn-round"
+						form="manage-project-update-subprojects-form">
+					<?php echo lang_get( 'update_subproject_inheritance' ) ?>
 				</button>
-			</fieldset>
 			</div>
-			</div>
-		</form>
+			</form>
 		</div>
 	</div>
 </div>
 
-<!-- SUBPROJECTS -->
 <?php
-	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
-	if( array() != $t_subproject_ids ) {
-?>
-<div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-	<form id="manage-project-update-subprojects-form" action="manage_proj_update_children.php" method="post">
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
-				<?php echo lang_get( 'subprojects' ); ?>
-			</h4>
-		</div>
-		<div class="widget-body">
-		<div class="widget-main no-padding">
-		<fieldset>
-			<?php echo form_security_field( 'manage_proj_update_children' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-condensed">
-				<thead>
-					<tr>
-						<th><?php echo lang_get( 'name' ) ?></th>
-						<th><?php echo lang_get( 'status' ) ?></th>
-						<th><?php echo lang_get( 'enabled' ) ?></th>
-						<th><?php echo lang_get( 'inherit' ) ?></th>
-						<th><?php echo lang_get( 'view_status' ) ?></th>
-						<th><?php echo lang_get( 'description' ) ?></th>
-						<th colspan="2"><?php echo lang_get( 'actions' ) ?></th>
-					</tr>
-				</thead>
-				<tbody>
-<?php
-		foreach ( $t_subproject_ids as $t_subproject_id ) {
-			$t_subproject = project_get_row( $t_subproject_id );
-			$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true ); ?>
-					<tr>
-						<td>
-							<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>">
-								<?php echo string_display_line( $t_subproject['name'] ) ?>
-							</a>
-						</td>
-						<td class="center">
-							<?php echo get_enum_element( 'project_status', $t_subproject['status'] ) ?>
-						</td>
-						<td class="center">
-							<?php echo trans_bool( $t_subproject['enabled'] ) ?>
-						</td>
-						<td class="center">
-						<label>
-							<input type="checkbox" class="ace" name="inherit_child_<?php echo $t_subproject_id ?>"
-								<?php echo ( $t_inherit_parent ? 'checked="checked"' : '' ) ?>  />
-								<span class="lbl"></span>
-						</label>
-						</td>
-						<td class="center">
-							<?php echo get_enum_element( 'project_view_state', $t_subproject['view_state'] ) ?>
-						</td>
-						<td>
-							<?php echo string_display_links( $t_subproject['description'] ) ?>
-						</td>
-						<td class="center">
-							<div class="inline">
-<?php
-	print_link_button(
-		'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-		lang_get( 'edit' ), 'btn-xs'
-	);
-	print_link_button(
-		"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id="
-		. $t_subproject['id']
-		. form_security_param( 'manage_proj_subproj_delete' ),
-		lang_get( 'unlink_link' ), 'btn-xs'
-	);
-?>
-							</div>
-						</td>
-					</tr>
-<?php
-		} # End of foreach loop over subprojects
-?>
-				</tbody>
-			</table>
-		</div>
-		</fieldset>
-		</div>
-		</div>
-			<div class="widget-toolbox padding-8 clearfix">
-				<button class="btn btn-primary btn-white btn-round">
-					<?php echo lang_get( 'update_subproject_inheritance' ) ?>
-				</button>
-			</div>
-		</div>
-	</form>
-</div>
-<?php
-		# End of subprojects listing / update form
-	} else {
-		# If there are no subprojects, clear floats to h2 overlap on div border
-?>
-		<br />
-<?php }
-
-	} # are sub-projects enabled?
+		} # End of subprojects listing / update form
+	} # Subprojects enabled?
 ?>
 
 <!-- CATEGORIES -->
