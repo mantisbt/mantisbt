@@ -218,12 +218,13 @@ function file_bug_has_attachments( $p_bug_id ) {
  * @param string   $p_action            'view' or 'download'
  * @param int      $p_bug_id            A bug identifier
  * @param int      $p_uploader_user_id  The user who uploaded the attachment
+ * @param int|null $p_bugnote_id        If specified, will check at bugnote level
  *
  * @return bool
  *
  * @internal Should not be used outside of File API.
  */
-function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id ) {
+function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id, $p_bugnote_id = null ) {
 	switch( $p_action ) {
 		case 'view':
 			$t_threshold_global = 'view_attachments_threshold';
@@ -240,7 +241,11 @@ function file_can_view_or_download( $p_action, $p_bug_id, $p_uploader_user_id ) 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_access_global = config_get( $t_threshold_global,null, null, $t_project_id );
 
-	$t_can_access = access_has_bug_level( $t_access_global, $p_bug_id );
+	if( $p_bugnote_id === null ) {
+		$t_can_access = access_has_bug_level( $t_access_global, $p_bug_id );
+	} else {
+		$t_can_access = access_has_bugnote_level( $t_access_global, $p_bugnote_id );
+	}
 	if( $t_can_access ) {
 		return true;
 	}
@@ -263,6 +268,22 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
 }
 
 /**
+ * Check if the current user can view attachments for the specified bug note.
+ *
+ * @param integer $p_bugnote_id       A bugnote identifier.
+ * @param integer $p_uploader_user_id The user who uploaded the attachment.
+ *
+ * @return boolean
+ */
+function file_can_view_bugnote_attachments( $p_bugnote_id, $p_uploader_user_id = null ) {
+	if( $p_bugnote_id == 0 ) {
+		return true;
+	}
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	return file_can_view_or_download( 'view', $t_bug_id, $p_uploader_user_id );
+}
+
+/**
  * Check if the current user can download attachments for the specified bug.
  *
  * @param integer $p_bug_id           A bug identifier.
@@ -272,6 +293,22 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
  */
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	return file_can_view_or_download( 'download', $p_bug_id, $p_uploader_user_id );
+}
+
+/**
+ * Check if the current user can download attachments for the specified bug note.
+ *
+ * @param integer $p_bugnote_id       A bugnote identifier.
+ * @param integer $p_uploader_user_id The user who uploaded the attachment.
+ *
+ * @return boolean
+ */
+function file_can_download_bugnote_attachments( $p_bugnote_id, $p_uploader_user_id = null ) {
+	if( $p_bugnote_id == 0 ) {
+		return true;
+	}
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	return file_can_view_or_download( 'download', $t_bug_id, $p_uploader_user_id, $p_bugnote_id );
 }
 
 /**
