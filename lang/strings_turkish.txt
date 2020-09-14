@@ -55,6 +55,7 @@
  * @author Korayal
  * @author McAang
  * @author Meelo
+ * @author MuratTheTurkish
  * @author Rapsar
  * @author Sayginer
  * @author Thinkfast
@@ -685,7 +686,7 @@ $s_plugins_available = 'Mevcut Eklentiler';
 $s_plugin_description = 'Açıklama';
 $s_plugin_author = 'Yazar: %1$s';
 $s_plugin_url = 'Web sitesi:';
-$s_plugin_depends = 'Bağımlılıkları';
+$s_plugin_depends = 'Bağımlılıklar';
 $s_plugin_no_depends = 'Bağımlılık yok';
 $s_plugin_priority = 'Öncelik';
 $s_plugin_protected = 'Korumalı';
