@@ -148,7 +148,7 @@ $t_lang_description = lang_get( 'description' );
 $t_lang_steps_to_reproduce = lang_get( 'steps_to_reproduce' );
 $t_lang_additional_information = lang_get( 'additional_information' );
 $t_lang_bug_notes_title = lang_get( 'bug_notes_title' );
-$t_lang_system_profile = lang_get( 'system_profile' );
+$t_lang_system_profile = lang_get( 'profile_description' );
 $t_lang_attached_files = lang_get( 'attached_files' );
 $t_lang_tags = lang_get( 'tags' );
 
@@ -449,7 +449,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <?php
 	# account profile description
 	if( $t_bug->profile_id > 0 ) {
-		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
+		$t_profile_row = profile_get_row( $t_bug->profile_id );
 		$t_profile_description = string_display( $t_profile_row['description'] );
 
 ?>
