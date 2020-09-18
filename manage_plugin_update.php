@@ -64,6 +64,11 @@ foreach( $t_query->fetch_all() as $t_row ) {
 	}
 
 	$f_priority = gpc_get_int( 'priority_'.$t_basename, 3 );
+	if( $f_priority < 1 || $f_priority > 5 ) {
+		error_parameters( 'priority_' . $t_basename );
+		trigger_error( ERROR_INVALID_FIELD_VALUE, ERROR );
+	}
+
 	$f_protected = gpc_get_bool( 'protected_'.$t_basename, 0 );
 
 	$t_update_query->bind( 'basename', $t_basename );
