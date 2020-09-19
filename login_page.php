@@ -233,7 +233,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 
 			<div class="space-10"></div>
 
-			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login_button' ) ?>" />
+			<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110" value="<?php echo lang_get( 'login' ) ?>" />
 		</fieldset>
 	</form>
 
