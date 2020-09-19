@@ -224,7 +224,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 		if( !isset( $t_commands['MOVE'] ) &&
 			user_has_more_than_one_project( $t_user_id ) &&
 			access_has_project_level( config_get( 'move_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['MOVE'] = lang_get( 'actiongroup_menu_move' );
+			$t_commands['MOVE'] = lang_get( 'move' );
 		}
 
 		if( !isset( $t_commands['COPY'] ) &&

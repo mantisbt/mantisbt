@@ -1261,7 +1261,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# MOVE button
 	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
 		echo '</div>';
 	}
 
