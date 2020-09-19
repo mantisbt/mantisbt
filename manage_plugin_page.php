@@ -214,7 +214,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 		</table>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
-			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get('plugin_update') ?>"/>
+			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' ) ?>"/>
 		</div>
 	</div>
 </div>
