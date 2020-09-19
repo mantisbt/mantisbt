@@ -245,7 +245,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 
 		if( !isset( $t_commands['DELETE'] ) &&
 			access_has_project_level( config_get( 'delete_bug_threshold', null, $t_user_id, $t_project_id ), $t_project_id ) ) {
-			$t_commands['DELETE'] = lang_get( 'actiongroup_menu_delete' );
+			$t_commands['DELETE'] = lang_get( 'delete' );
 		}
 
 		if( !isset( $t_commands['RESOLVE'] ) && $t_update_bug_status_allowed &&

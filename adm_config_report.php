@@ -434,7 +434,7 @@ while( $t_row = $t_config_query->fetch() ) {
 			echo '<div class="pull-left">';
 			print_form_button(
 				'adm_config_delete.php',
-				lang_get( 'delete_link' ),
+				lang_get( 'delete' ),
 				array(
 					'user_id'       => $v_user_id,
 					'project_id'    => $v_project_id,

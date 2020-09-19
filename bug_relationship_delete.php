@@ -50,7 +50,7 @@ $t_data = array(
 	)
 );
 
-helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete_relationship_button' ) );
+helper_ensure_confirmed( lang_get( 'delete_relationship_sure_msg' ), lang_get( 'delete' ) );
 
 $t_command = new IssueRelationshipDeleteCommand( $t_data );
 $t_command->execute();

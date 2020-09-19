@@ -438,7 +438,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 					} ?>
 					<?php if( !$t_inherited ) {
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ),
+						print_form_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete' ),
 							null, null, 'btn btn-xs btn-primary btn-white btn-round' );
 						echo '</div>';
 					} ?>
@@ -537,7 +537,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 						echo '</div>';
 
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+						print_form_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete' ) );
 						echo '</div>';
 					} ?>
 					</div>
