@@ -231,7 +231,7 @@ print_manage_menu( 'manage_proj_page.php' );
 					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit' ) );
 					echo '</div>';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete' ) );
 					echo '</div>';
 ?>
 				</td>

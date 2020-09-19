@@ -73,7 +73,6 @@ $s_actiongroup_menu_move = 'Move';
 $s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Assign';
 $s_actiongroup_menu_close = 'Close';
-$s_actiongroup_menu_delete = 'Delete';
 $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
@@ -482,7 +481,6 @@ $s_bug_deleted_msg = 'Issue has been deleted...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Are you sure you wish to delete this issue?';
-$s_delete_bug_button = 'Delete';
 
 # bug_monitor_add.php
 $s_monitor_bug_button = 'Monitor';
@@ -608,7 +606,6 @@ $s_edit_bugnote_title = 'Edit Note';
 
 # bugnote_inc.php
 $s_no_bugnotes_msg = 'There are no notes attached to this issue.';
-$s_delete_link = 'Delete';
 $s_add_bugnote_title = 'Add Note';
 $s_add_bugnote_button = 'Add Note';
 $s_closed_bug_button = 'Close Issue';
@@ -1250,7 +1247,6 @@ $s_stored_project = 'Stored project';
 $s_available_filter_for_project = 'Available filters for project';
 $s_manage_filter_page_title = 'Manage Filters';
 $s_manage_filter_edit_page_title = 'Edit filter';
-$s_delete_filter_button = 'Delete';
 $s_apply_filter_button = 'Apply';
 $s_temporary_filter = 'Temporary filter';
 $s_set_as_persistent_filter = 'Set as persistent filter';
@@ -1380,7 +1376,6 @@ $s_no_relationship = 'no relationship';
 $s_relationship_replaced = 'Relationship replaced';
 $s_replace_relationship_button = 'Replace';
 $s_relationship_with_parent = 'Relationship with the parent issue';
-$s_delete_relationship_button = 'Delete';
 $s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Not all the children of this issue are yet resolved or closed.';
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Attention:</strong> Not all the children of this issue are yet resolved or closed.<br />Before <strong>resolving/closing</strong> a parent issue, all the issues related as child with this one should be resolved or closed.';
@@ -1429,7 +1424,6 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = 'Delete';
 $s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'Filters';
@@ -1793,5 +1787,6 @@ $s_apply_changes = 'Apply changes';
 $s_undo = 'Undo';
 $s_edit = 'Edit';
 $s_submit = 'Submit';
+$s_delete = 'Delete';
 $s_make_default = 'Make Default';
 $s_clear_default = 'Clear Default';
