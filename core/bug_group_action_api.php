@@ -240,7 +240,7 @@ function bug_group_action_get_commands( array $p_project_ids = null ) {
 		if( !isset( $t_commands['CLOSE'] ) && $t_update_bug_status_allowed &&
 			( access_has_project_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold', null, $t_user_id, $t_project_id ), $t_project_id ), $t_project_id ) ||
 				access_has_project_level( config_get( 'allow_reporter_close', null, $t_user_id, $t_project_id ), $t_project_id ) ) ) {
-			$t_commands['CLOSE'] = lang_get( 'actiongroup_menu_close' );
+			$t_commands['CLOSE'] = lang_get( 'close' );
 		}
 
 		if( !isset( $t_commands['DELETE'] ) &&
