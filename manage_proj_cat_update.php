@@ -84,9 +84,6 @@ if( $f_project_id == ALL_PROJECTS ) {
 }
 
 layout_page_header( null, $t_redirect_url );
-
 layout_page_begin( 'manage_overview_page.php' );
-
 html_operation_successful( $t_redirect_url );
-
 layout_page_end();
