@@ -168,8 +168,6 @@ $s_make_public = 'Make Public';
 
 $s_create_new_project_link = 'Create New Project';
 
-$s_login_link = 'Login';
-
 # Browser Search - %s is the Search Engine title (@see $g_search_title)
 $s_opensearch_id_short = '%s Id';
 $s_opensearch_id_description = '%s: search by Issue Id';
@@ -627,9 +625,6 @@ $s_log_page_event = 'Event';
 # print_api.php
 $s_please_report = 'Please report this to the %1$s.';
 
-# index.php
-$s_click_to_login = 'Login';
-
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
@@ -649,7 +644,6 @@ $s_save_login = 'Keep me logged in';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
-$s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';
 $s_lost_password_link = 'Lost your password?';
 $s_username_or_email = 'Username or email address';
@@ -1785,3 +1779,4 @@ $s_proceed = 'Proceed';
 $s_move = 'Move';
 $s_close = 'Close';
 $s_add = 'Add';
+$s_login = 'Login';

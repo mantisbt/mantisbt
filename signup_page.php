@@ -157,7 +157,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 </div>
 
 	<div class="toolbar center">
-		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login_link' ); ?></a>
+		<a class="back-to-login-link pull-left" href="<?php echo AUTH_PAGE_USERNAME; ?>"><?php echo lang_get( 'login' ); ?></a>
 		<?php
 		# lost password feature disabled or reset password via email disabled
 		if( ( LDAP != config_get_global( 'login_method' ) ) &&
