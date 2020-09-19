@@ -691,7 +691,7 @@ if( $t_flags['monitor_show'] ) {
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
-				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add' ) ?>" />
 			</form>
 			<?php } ?>
 		</td>
@@ -1013,7 +1013,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
 		<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
 		<input type="text" class="input-sm" name="dest_bug_id" value="" />
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add' )?>" />
 		</form>
 <?php
 		} # can update
