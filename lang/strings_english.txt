@@ -113,8 +113,6 @@ $s_view_submitted_bug_link = 'View Submitted Issue %1$s';
 $s_assigned_projects = 'Assigned Projects';
 $s_assigned_projects_label = 'Assigned Projects';
 $s_unassigned_projects_label = 'Unassigned Projects';
-$s_print = 'Print';
-$s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
@@ -128,7 +126,6 @@ $s_old_value = 'Old Value';
 $s_new_value = 'New Value';
 $s_date_modified = 'Date Modified';
 $s_bugnote = 'Note';
-$s_change = 'Change';
 $s_bugnote_view_state = 'Note View State';
 $s_bug_monitor = 'Issue Monitored';
 $s_bug_end_monitor = 'Issue End Monitor';
@@ -241,9 +238,6 @@ $s_login_error = 'Your account may be disabled or blocked or the username/passwo
 $s_login_cookies_disabled = 'Your browser either does not know how to handle cookies, or refuses to handle them.';
 
 # General Strings
-$s_go_back = 'Go Back';
-$s_proceed = 'Proceed';
-
 $s_switch = 'Switch';
 $s_logged_in_as = 'Logged in as';
 
@@ -1789,3 +1783,8 @@ $s_update = 'Update';
 $s_delete = 'Delete';
 $s_make_default = 'Make Default';
 $s_clear_default = 'Clear Default';
+$s_print = 'Print';
+$s_jump = 'Jump';
+$s_change = 'Change';
+$s_go_back = 'Go Back';
+$s_proceed = 'Proceed';
