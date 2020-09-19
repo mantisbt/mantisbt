@@ -420,7 +420,7 @@ while( $t_row = $t_config_query->fetch() ) {
 			$t_action_params['action'] = MANAGE_CONFIG_ACTION_EDIT;
 			$t_url_edit = helper_url_combine( 'adm_config_page.php', http_build_query( $t_action_params ) );
 			echo '<div class="pull-left">';
-			print_link_button( $t_url_edit, lang_get( 'edit_link' ), 'btn-xs' );
+			print_link_button( $t_url_edit, lang_get( 'edit' ), 'btn-xs' );
 			echo '</div>';
 
 			# Clone button
