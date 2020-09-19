@@ -61,6 +61,7 @@ $f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 if( is_blank( $f_name ) ) {
+	error_parameters( 'name' );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
