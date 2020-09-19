@@ -1253,7 +1253,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button(
 			'bug_change_status_page.php',
-			lang_get( 'close_bug_button' ),
+			lang_get( 'close' ),
 			array( 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
 		echo '</div>';
 	}
