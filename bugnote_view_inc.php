@@ -205,7 +205,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo '<div class="pull-left">';
 				print_form_button(
 					'bugnote_edit_page.php',
-					lang_get( 'bugnote_edit_link' ),
+					lang_get( 'edit' ),
 					array( 'bugnote_id' => $t_activity['id'] ),
 					OFF );
 				echo '</div>';

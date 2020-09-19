@@ -344,7 +344,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 							<div class="inline">
 							<?php print_link_button(
 								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-								lang_get( 'edit_link' ), 'btn-xs' );
+								lang_get( 'edit' ), 'btn-xs' );
 							?>
 							<?php print_link_button(
 								"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
@@ -432,7 +432,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 						$t_id = urlencode( $t_id );
 						$t_project_id = urlencode( $f_project_id );
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ),
+						print_form_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit' ),
 							null, null, 'btn btn-xs btn-primary btn-white btn-round' );
 						echo '</div>';
 					} ?>
@@ -533,7 +533,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 					if( !$t_inherited ) {
 						echo '<div class="pull-left">';
-						print_form_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+						print_form_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit' ) );
 						echo '</div>';
 
 						echo '<div class="pull-left">';

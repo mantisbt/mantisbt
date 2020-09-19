@@ -177,7 +177,7 @@ if( $g_global_profiles ) {
 					echo '<div class="pull-left">';
 					print_form_button(
 						'account_prof_edit_page.php',
-						lang_get( 'edit_link' ),
+						lang_get( 'edit' ),
 						$t_param
 					);
 					echo '</div>';

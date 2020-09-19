@@ -611,7 +611,6 @@ $s_no_bugnotes_msg = 'There are no notes attached to this issue.';
 $s_delete_link = 'Delete';
 $s_add_bugnote_title = 'Add Note';
 $s_add_bugnote_button = 'Add Note';
-$s_bugnote_edit_link = 'Edit';
 $s_closed_bug_button = 'Close Issue';
 
 # bugnote_update.php
@@ -905,7 +904,6 @@ $s_add_and_edit_category_button = 'Add and Edit Category';
 $s_versions = 'Versions';
 $s_add_version_button = 'Add Version';
 $s_add_and_edit_version_button = 'Add and Edit Version';
-$s_edit_link = 'Edit';
 $s_actions = 'Actions';
 $s_version = 'Version';
 $s_version_label = 'Version:';
@@ -1260,7 +1258,6 @@ $s_set_as_persistent_filter = 'Set as persistent filter';
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
 $s_product_build = 'Product Build';
-$s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Reopen';
@@ -1794,6 +1791,7 @@ $s_persist = 'Persist';
 $s_load = 'Load';
 $s_apply_changes = 'Apply changes';
 $s_undo = 'Undo';
+$s_edit = 'Edit';
 $s_submit = 'Submit';
 $s_make_default = 'Make Default';
 $s_clear_default = 'Clear Default';
