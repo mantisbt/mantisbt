@@ -206,6 +206,7 @@ function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 		#   META_FILTER_MYSELF = -1
 		#   META_FILTER_NONE = -2
 		#   META_FILTER_CURRENT = -3
+		#   META_FILTER_NOT_EMPTY = -4
 		#   META_FILTER_ANY = 0
 		#
 		# For these reasons, a === comparison is required.

@@ -470,6 +470,7 @@ define( 'CUSTOM_FIELD_TYPE_TEXTAREA', 10 );
 define( 'META_FILTER_MYSELF', -1 );
 define( 'META_FILTER_NONE', - 2 );
 define( 'META_FILTER_CURRENT', - 3 );
+define( 'META_FILTER_NOT_EMPTY', - 4 );
 define( 'META_FILTER_ANY', 0 );
 
 # Filter view types

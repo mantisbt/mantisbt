@@ -465,6 +465,32 @@ function filter_field_is_none( $p_field_value ) {
 }
 
 /**
+ * Checks the supplied value to see if it is a NOT_EMPTY value.
+ * @param string $p_field_value The value to check.
+ * @return boolean true for "NOT_EMPTY" values and false for others.
+ * @todo is a check for these necessary?  if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) )
+ */
+function filter_field_is_not_empty( $p_field_value ) {
+	if( is_array( $p_field_value ) ) {
+		foreach( $p_field_value as $t_value ) {
+			if( ( META_FILTER_NOT_EMPTY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+				return true;
+			}
+		}
+	} else {
+		if( is_string( $p_field_value ) && is_blank( $p_field_value ) ) {
+			return false;
+		}
+
+		if( ( META_FILTER_NOT_EMPTY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  *  Checks the supplied value to see if it is a MYSELF value.
  * @param string $p_field_value The value to check.
  * @return boolean true for "MYSELF" values and false for others.
@@ -672,6 +698,9 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		}
 		if( ( $t_value === 'none' ) || ( $t_value === '[none]' ) ) {
 			$t_value = META_FILTER_NONE;
+		}
+		if( ( $t_value === 'not empty' ) || ( $t_value === '[not empty]' ) ) {
+			$t_value = META_FILTER_EMPTY;
 		}
 		# Ensure the filter property has the right type - see #20087
 		switch( $p_type ) {
