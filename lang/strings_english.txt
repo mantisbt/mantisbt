@@ -234,7 +234,6 @@ $s_login_error = 'Your account may be disabled or blocked or the username/passwo
 $s_login_cookies_disabled = 'Your browser either does not know how to handle cookies, or refuses to handle them.';
 
 # General Strings
-$s_switch = 'Switch';
 $s_logged_in_as = 'Logged in as';
 
 $s_prefix_for_deleted_users = 'user';
@@ -580,9 +579,6 @@ $s_all_revisions = 'All Revisions';
 $s_back_to_issue = 'Back to Issue';
 $s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
 $s_activities_title = 'Activities';
-
-# bug_vote_add.php
-$s_vote_added_msg = 'Vote has been added...';
 
 # bugnote_add.php
 $s_bugnote_attached_files = 'Attached Files:';
@@ -1460,10 +1456,6 @@ $s_on_or_after_date = 'On Or After';
 $s_from_date = 'From';
 $s_to_date = 'To';
 $s_on_date = 'On';
-
-# Switch constants
-$s_on = 'On';
-$s_off = 'Off';
 
 # wiki related strings
 $s_wiki = 'Wiki';
