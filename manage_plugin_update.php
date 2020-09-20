@@ -64,7 +64,7 @@ foreach( $t_query->fetch_all() as $t_row ) {
 	}
 
 	$f_priority = gpc_get_int( 'priority_'.$t_basename, 3 );
-	if( $f_priority < 1 || $f_priority > 5 ) {
+	if( $f_priority < PLUGIN_PRIORITY_LOW || $f_priority > PLUGIN_PRIORITY_HIGH ) {
 		error_parameters( 'priority_' . $t_basename );
 		trigger_error( ERROR_INVALID_FIELD_VALUE, ERROR );
 	}
