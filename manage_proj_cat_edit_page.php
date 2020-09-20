@@ -85,7 +85,6 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
 			<tr>
 				<td class="category">
@@ -124,7 +123,6 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' );
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_delete' ) ?>
 			<input type="hidden" name="id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
 			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 		</fieldset>
 	</form>
