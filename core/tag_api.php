@@ -589,9 +589,11 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
  * Update a tag with given name, creator, and description.
  * @param integer $p_tag_id      The tag ID which is being updated.
  * @param string  $p_name        The name of the tag.
- * @param integer $p_user_id     The user ID to set when updating the tag. Note: This replaces the existing user id.
+ * @param integer $p_user_id     The user ID to set when updating the tag.
+ *                               Note: This replaces the existing user id.
  * @param string  $p_description An updated description for the tag.
  * @return boolean
+ * @throws ClientException
  */
 function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$t_tag_row = tag_get( $p_tag_id );
@@ -611,10 +613,14 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
 	}
-
 	access_ensure_global_level( $t_update_level );
 
 	tag_ensure_name_is_valid( $p_name );
+
+	# Do not allow assigning a tag to a user who is not allowed to create one
+	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
+		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+	}
 
 	$t_rename = false;
 	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
