@@ -924,18 +924,22 @@ function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
 
 	# register plugins specified in the site configuration
-	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
+	$t_plugins_to_register = plugin_get_force_installed();
+	arsort( $t_plugins_to_register );
+	foreach( $t_plugins_to_register as $t_basename => $t_priority ) {
 		plugin_register( $t_basename );
 		$g_plugin_cache_priority[$t_basename] = $t_priority;
 		$g_plugin_cache_protected[$t_basename] = true;
 	}
 
 	# register plugins installed via the interface/database
-	db_param_push();
-	$t_query = 'SELECT basename, priority, protected FROM {plugin} WHERE enabled=' . db_param() . ' ORDER BY priority DESC';
-	$t_result = db_query( $t_query, array( true ) );
-
-	while( $t_row = db_fetch_array( $t_result ) ) {
+	$t_query = new DbQuery( 'SELECT basename, priority, protected 
+		FROM {plugin} 
+		WHERE enabled=:enabled
+		ORDER BY priority DESC'
+	);
+	$t_query->bind( 'enabled', true );
+	foreach( $t_query->fetch_all() as $t_row ) {
 		$t_basename = $t_row['basename'];
 		if( !plugin_is_registered( $t_basename ) ) {
 			plugin_register( $t_basename );
