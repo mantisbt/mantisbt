@@ -233,6 +233,10 @@ define( 'CONFIRMATION_TYPE_SUCCESS', 0 );
 define( 'CONFIRMATION_TYPE_WARNING', 1 );
 define( 'CONFIRMATION_TYPE_FAILURE', 2 );
 
+# Plugin management
+define( 'PLUGIN_PRIORITY_LOW', 1 );
+define( 'PLUGIN_PRIORITY_HIGH', 5 );
+
 # error messages
 define( 'ERROR_PHP', -1 );
 define( 'ERROR_GENERIC', 0 );

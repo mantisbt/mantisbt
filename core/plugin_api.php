@@ -95,8 +95,8 @@ function plugin_pop_current() {
 function plugin_get_force_installed() {
 	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
 
-	# MantisCore pseudo-plugin is force-installed by definition, with priority 3
-	$t_forced_plugins['MantisCore'] = 3;
+	# MantisCore pseudo-plugin is force-installed by definition
+	$t_forced_plugins['MantisCore'] = PLUGIN_PRIORITY_HIGH;
 
 	return $t_forced_plugins;
 }
