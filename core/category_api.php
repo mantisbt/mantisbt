@@ -173,6 +173,20 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	}
 
 	$t_old_category = category_get_row( $p_category_id );
+	$t_project_id = (int)$t_old_category['project_id'];
+
+	# Ensure target user exists and is allowed to handle bugs
+	if( $p_assigned_to != NO_USER ) {
+		if( user_exists( $p_assigned_to ) ) {
+			$t_handle_bugs = config_get( 'handle_bug_threshold' );
+			if( !access_has_project_level( $t_handle_bugs, $t_project_id, $p_assigned_to ) ) {
+				trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+			}
+		} else {
+			error_parameters( $p_assigned_to );
+			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+		}
+	}
 
 	db_param_push();
 	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
