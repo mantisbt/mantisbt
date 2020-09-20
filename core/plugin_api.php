@@ -624,20 +624,19 @@ function plugin_is_installed( $p_basename ) {
 /**
  * Install a plugin to the database.
  * @param MantisPlugin $p_plugin Plugin basename.
- * @return null
+ * @return void
  */
 function plugin_install( MantisPlugin $p_plugin ) {
 	if( plugin_is_installed( $p_plugin->basename ) ) {
 		error_parameters( $p_plugin->basename );
 		trigger_error( ERROR_PLUGIN_ALREADY_INSTALLED, WARNING );
-		return null;
 	}
 
 	plugin_push_current( $p_plugin->basename );
 
 	if( !$p_plugin->install() ) {
 		plugin_pop_current();
-		return null;
+		return;
 	}
 
 	db_param_push();
@@ -701,6 +700,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 			plugin_pop_current();
 			return false;
 		}
+		$t_status = false;
 
 		switch( $t_schema[$i][0] ) {
 			case 'InsertData':
@@ -735,7 +735,6 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 					array( $t_dict, $t_schema[$i][0] ),
 					$t_schema[$i][1]
 				);
-				$t_status = false;
 		}
 
 		if( $t_sqlarray ) {
@@ -829,6 +828,7 @@ function plugin_include( $p_basename, $p_child = null ) {
 	}
 	$t_included = false;
 	if( is_file( $t_plugin_file ) ) {
+		/** @noinspection PhpIncludeInspection */
 		include_once( $t_plugin_file );
 		$t_included = true;
 	}
@@ -851,6 +851,7 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
+	/** @noinspection PhpIncludeInspection */
 	require_once( $t_path . $p_file );
 }
 
