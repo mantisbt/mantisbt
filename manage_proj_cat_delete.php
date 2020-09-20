@@ -57,7 +57,6 @@ form_security_validate( 'manage_proj_cat_delete' );
 auth_reauthenticate();
 
 $f_category_id = gpc_get_int( 'id' );
-$f_project_id = gpc_get_int( 'project_id' );
 
 $t_row = category_get_row( $f_category_id );
 $t_name = category_full_name( $f_category_id );
@@ -79,16 +78,13 @@ category_remove( $f_category_id );
 
 form_security_purge( 'manage_proj_cat_delete' );
 
-if( $f_project_id == ALL_PROJECTS ) {
+if( $t_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_project_id;
 }
 
 layout_page_header( null, $t_redirect_url );
-
 layout_page_begin( 'manage_overview_page.php' );
-
 html_operation_successful( $t_redirect_url );
-
 layout_page_end();
