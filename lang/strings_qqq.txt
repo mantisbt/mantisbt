@@ -164,11 +164,9 @@ $s_bugnote_order_asc = '{{Identical|Ascending}}';
 $s_bugnote_order_desc = '{{Identical|Descending}}';
 $s_language = '{{Identical|Language}}';
 $s_timezone = '{{Identical|Time zone}}';
-$s_edit_profile_title = '{{Identical|Edit profile}}';
-$s_edit_profile = '{{Identical|Edit profile}}';
 $s_select_profile = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 Legend for drop-down box. See screenshot.';
-$s_submit_button = '{{Identical|Submit}}';
+$s_edit_profile = '{{Identical|Edit profile}}';
 $s_sponsor = '{{Identical|Sponsor}}';
 $s_sponsor_verb = '{{Identical|Sponsor}}';
 $s_amount = '{{Identical|Amount}}';
