@@ -45,7 +45,7 @@
 $s_plugin_MantisGraph_title = 'Gröf/línurit Mantis';
 $s_plugin_MantisGraph_description = 'Opinber forritsviðbót fyrir gröf/línurit.';
 $s_plugin_MantisGraph_config = 'Uppsetning';
-$s_plugin_MantisGraph_tab_label = 'Gröf/línurit Mantis';
+$s_plugin_MantisGraph_tab_label = 'Gröf/línurit';
 $s_plugin_MantisGraph_status_link = 'Eftir stöðu';
 $s_plugin_MantisGraph_priority_link = 'Eftir forgangi';
 $s_plugin_MantisGraph_severity_link = 'Eftir mikilvægi';
