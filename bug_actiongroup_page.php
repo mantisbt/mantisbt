@@ -225,7 +225,9 @@ switch( $f_action ) {
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ),
+			string_attribute( lang_get_defaulted( $t_custom_field_def['name'] ) )
+		);
 		$t_button_title = $t_question_title;
 		$t_form = 'custom_field_' . $t_custom_field_id;
 		$t_event_params['custom_field_id'] = $t_custom_field_id;
