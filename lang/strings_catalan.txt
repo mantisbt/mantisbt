@@ -343,6 +343,7 @@ $s_select_profile = 'Selecciona Perfil';
 $s_edit_profile = 'Edita Perfil';
 $s_delete_profile = 'Elimina Perfil';
 $s_delete_profile_confirm_msg = 'Segur que voleu suprimir el perfil «%1$s»?';
+$s_global_profile = 'Perfil global';
 $s_my_sponsorship = 'Els meus Patrocinadors';
 $s_update_sponsorship_button = 'Canvia l\'estat del pagament';
 $s_no_sponsored = 'No se li han trobat incidències patrocinades assignades';
