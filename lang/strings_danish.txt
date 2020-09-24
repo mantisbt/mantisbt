@@ -351,6 +351,7 @@ $s_select_profile = 'Vælg profil';
 $s_edit_profile = 'Rediger profil';
 $s_delete_profile = 'Slet profil';
 $s_global_profile = 'Global profil';
+$s_default_profile = 'Standardprofil';
 $s_my_sponsorship = 'Mine sponsorater';
 $s_update_sponsorship_button = 'Ændring af betalingsstatus';
 $s_no_sponsored = 'Der blev ikke fundet nogen sponsorerede emner tildelt til dig selv.';
