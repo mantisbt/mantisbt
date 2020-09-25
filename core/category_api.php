@@ -173,6 +173,20 @@ function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	}
 
 	$t_old_category = category_get_row( $p_category_id );
+	$t_project_id = (int)$t_old_category['project_id'];
+
+	# Ensure target user exists and is allowed to handle bugs
+	if( $p_assigned_to != NO_USER ) {
+		if( user_exists( $p_assigned_to ) ) {
+			$t_handle_bugs = config_get( 'handle_bug_threshold' );
+			if( !access_has_project_level( $t_handle_bugs, $t_project_id, $p_assigned_to ) ) {
+				trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+			}
+		} else {
+			error_parameters( $p_assigned_to );
+			trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+		}
+	}
 
 	db_param_push();
 	$t_query = 'UPDATE {category} SET name=' . db_param() . ', user_id=' . db_param() . '
@@ -289,7 +303,7 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
  * Return the definition row for the category
  * @param integer $p_category_id Category identifier.
  * @param boolean $p_error_if_not_exists true: error if not exists, otherwise return false.
- * @return array An array containing category details.
+ * @return array|false An array containing category details.
  * @access public
  */
 function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
@@ -390,7 +404,6 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
 	foreach( $t_rows as $t_project_id => $t_row ) {
 		$g_cache_category_project[(int)$t_project_id] = $t_row;
 	}
-	return;
 }
 
 /**
@@ -449,6 +462,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[(int)$p_project_id] ) ) {
+		$t_categories = array();
 		if( !empty( $g_cache_category_project[(int)$p_project_id]) ) {
 			foreach( $g_cache_category_project[(int)$p_project_id] as $t_id ) {
 				$t_categories[] = category_get_row( $t_id );
@@ -459,10 +473,8 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 				usort( $t_categories, 'category_sort_rows_by_project' );
 				category_sort_rows_by_project( null );
 			}
-			return $t_categories;
-		} else {
-			return array();
 		}
+		return $t_categories;
 	}
 
 	$c_project_id = (int)$p_project_id;
@@ -533,7 +545,6 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$g_category_cache[(int)$t_row['id']] = $t_row;
 	}
-	return;
 }
 
 /**
