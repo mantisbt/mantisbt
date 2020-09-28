@@ -54,6 +54,7 @@
  * @author M42
  * @author Mazab IZW
  * @author McDutchie
+ * @author MuratTheTurkish
  * @author Nike
  * @author Noe
  * @author Paul Richards
@@ -167,8 +168,8 @@ $s_timezone = '{{Identical|Time zone}}';
 $s_select_profile = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 Legend for drop-down box. See screenshot.';
 $s_edit_profile = '{{Identical|Edit profile}}';
-$s_sponsor = '{{Identical|Sponsor}}';
-$s_sponsor_verb = '{{Identical|Sponsor}}';
+$s_sponsor = '';
+$s_sponsor_verb = '';
 $s_amount = '{{Identical|Amount}}';
 $s_sponsor_show = '{{Identical|Show all}}';
 $s_delete_bug_button = '{{Identical|Delete}}';
