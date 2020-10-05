@@ -49,6 +49,66 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
+function section_begin( $p_section_name ) {
+	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter">';
+	echo '            <i class="ace-icon fa fa-random"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
+	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
+	echo "\t\t<thead>\n";
+	echo "\t\t" . '<tr>' . "\n";
+	echo "\t\t\t" . '<th class="bold" rowspan="2">' . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . count( $t_enum_statuses ) . '">'
+		. lang_get( 'status' ) . '</th>';
+	echo "\n\t\t" . '</tr>'. "\n";
+	echo "\t\t" . '<tr>' . "\n";
+
+	foreach( $t_enum_statuses as $t_status ) {
+		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
+			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
+			. '&#160;</th>' ."\n";
+	}
+
+	echo "\t\t" . '</tr>' . "\n";
+	echo "\t\t</thead>\n";
+	echo "\t\t<tbody>\n";
+}
+
+function show_flag( $p_prefix, $p_status_id, $p_is_checked ) {
+	$t_value = '<td class="center ">';
+
+	$t_flag_name = $p_status_id;
+	$t_set = $p_is_checked ? 'checked="checked"' : '';
+	$t_value .= '<label><input type="checkbox" class="ace" name="' . $p_prefix. '[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
+	$t_value .= '</td>';
+
+	return $t_value;
+}
+
+function capability_row( $p_label, $p_prefix, $p_current_vector ) {
+	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+	echo "\t\t" .'<tr><td>' . $p_label . '</td>' . "\n";
+
+	foreach ( $t_enum_statuses as $t_status_id ) {
+		echo show_flag( $p_prefix, $t_status_id, in_array( $t_status_id, unserialize( $p_current_vector ) ) );
+	}
+
+	echo "\t\t" . '</tr>' . "\n";
+}
+
+function section_end() {
+	echo '</tbody></table></div>' . "\n";
+	echo '</div></div></div>' . "\n";
+}
+
 auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -289,6 +349,18 @@ $t_definition = custom_field_get_definition( $f_field_id );
 </div>
 </div>
 </div>
+
+<?php
+$t_current_project_id = helper_get_current_project();
+if( in_array( $t_current_project_id, $t_definition['linked_projects'] ) ) {
+	$t_index = array_search( $t_current_project_id, $t_definition['linked_projects'] );
+	section_begin( lang_get( 'custom_field_fine_tuning' ) );
+	capability_row( lang_get( 'custom_field_fine_display' ), 'disp', $t_definition['status_vector_disp'][$t_index] );
+	capability_row( lang_get( 'custom_field_fine_require' ), 'req', $t_definition['status_vector_req'][$t_index] );
+	section_end();
+}
+?>
+
 <div class="widget-toolbox padding-8 clearfix">
 	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 </div>

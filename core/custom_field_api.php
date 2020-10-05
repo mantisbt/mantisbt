@@ -170,22 +170,26 @@ function custom_field_cache_array_rows( array $p_cf_id_array = null ) {
 		$c_id = (int)$t_row['id'];
 		$g_cache_custom_field[$c_id] = $t_row;
 		$g_cache_name_to_id_map[$t_row['name']] = $c_id;
+		$g_cache_custom_field[$c_id]['status_vector_req'] = array();
+		$g_cache_custom_field[$c_id]['status_vector_disp'] = array();
 		$g_cache_custom_field[$c_id]['linked_projects'] = array();
 		unset( $t_ids_not_found[$c_id] );
 	}
 
 	# cache linked projects
 	if( $t_cache_all ) {
-		$t_query = 'SELECT field_id, project_id FROM {custom_field_project}';
+		$t_query = 'SELECT field_id, project_id, status_vector_req, status_vector_disp FROM {custom_field_project}';
 		$t_result = db_query( $t_query );
 	} else {
 		db_param_push();
 		# reuse previous db_params and $t_params array, since the query is structurally the same
-		$t_query = 'SELECT field_id, project_id FROM {custom_field_project} WHERE field_id' . $t_where_id_in;
+		$t_query = 'SELECT field_id, project_id, status_vector_req, status_vector_disp FROM {custom_field_project} WHERE field_id' . $t_where_id_in;
 		$t_result = db_query( $t_query, $t_params );
 	}
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$g_cache_custom_field[(int)$t_row['field_id']]['linked_projects'][] = (int)$t_row['project_id'];
+		$g_cache_custom_field[(int)$t_row['field_id']]['status_vector_req'][] = (string)$t_row['status_vector_req'];
+		$g_cache_custom_field[(int)$t_row['field_id']]['status_vector_disp'][] = (string)$t_row['status_vector_disp'];
 	}
 
 	# set the remaining ids as not found
@@ -575,13 +579,19 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 
 	# Build fields update statement
 	$t_update = '';
+	$t_update_vectors = '';
 	foreach( $p_def_array as $t_field => $t_value ) {
 		switch( $t_field ) {
+			case 'status_vector_req':
+			case 'status_vector_disp':
+				$t_update_vectors .= $t_field . '=' . db_param() . ', ';
+				$t_vector_params[] = (string)$t_value;
+				break;
 			case 'name':
 			case 'possible_values':
 			case 'default_value':
 			case 'valid_regexp':
-				# Possible values doesn't apply to textarea fields
+				# Possible values don't apply to textarea fields
 				if( $p_def_array['type'] == CUSTOM_FIELD_TYPE_TEXTAREA && $t_field == 'possible_values' ) {
 					$t_value = '';
 				}
@@ -617,6 +627,16 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 		$t_query = 'UPDATE {custom_field} SET ' . rtrim( $t_update, ', ' ) . ' WHERE id = ' . db_param();
 		$t_params[] = $p_field_id;
 		db_query( $t_query, $t_params );
+	}
+
+	if( $t_update_vectors !== '' ) {
+		$t_query = 'UPDATE {custom_field_project} SET ' . rtrim( $t_update_vectors, ', ' ) . ' WHERE field_id = ' . db_param() . ' AND project_id = ' . db_param();
+		$t_vector_params[] = $p_field_id;
+		$t_vector_params[] = helper_get_current_project();
+		db_query( $t_query, $t_vector_params );
+	}
+
+	if( $t_update !== '' || $t_update_vectors !== '' ) {
 
 		custom_field_clear_cache( $p_field_id );
 

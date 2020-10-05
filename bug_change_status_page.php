@@ -276,7 +276,20 @@ layout_page_begin();
 		$t_display = $t_def['display_' . $t_custom_status_label];
 		$t_require = $t_def['require_' . $t_custom_status_label];
 
-		if( ( 'update' == $t_custom_status_label ) && ( !$t_require ) ) {
+		$t_index = array_search( $t_bug->project_id, $t_def['linked_projects'] );
+		$t_disp_vector = unserialize( $t_def['status_vector_disp'][$t_index] );
+		$t_req_vector = unserialize( $t_def['status_vector_req'][$t_index] );
+		$t_override_display = false;
+
+		if( is_array( $t_disp_vector ) ) {
+			$t_display = in_array( $f_new_status, $t_disp_vector );
+			if( array_count_values( $t_disp_vector ) > 0 ) $t_override_display = true;
+		}
+		if( is_array( $t_req_vector ) ) {
+			$t_require = in_array( $f_new_status, $t_req_vector );
+		}
+		
+		if( ( 'update' == $t_custom_status_label ) && ( !( $t_require || ( $t_override_display && $t_display ) ) ) ) {
 			continue;
 		}
 		if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && !( $t_display || $t_require ) ) {
