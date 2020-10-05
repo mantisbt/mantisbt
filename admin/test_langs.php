@@ -29,9 +29,6 @@ $t_mantis_dir = dirname( dirname( __FILE__ ) ) . '/';
 
 require_once( $t_mantis_dir . 'core.php' );
 
-# Load schema version needed to render admin menu bar
-require_once( 'schema.php' );
-
 /**
  * Class CheckLangFile.
  *
