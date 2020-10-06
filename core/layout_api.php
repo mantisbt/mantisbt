@@ -604,14 +604,14 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<li>';
-		echo project_link_for_menu( ALL_PROJECTS, false, 'project_link' );
+		echo project_link_for_menu( ALL_PROJECTS, false, 'project-link' );
 		echo "</li>\n";
 		echo '<li class="divider"></li>' . "\n";
 	}
 
 	foreach( $t_project_ids as $t_id ) {
 		echo 0 == strcmp( $t_id, $p_project_id ) ? '<li class="active">' : '<li>';
-		echo project_link_for_menu( $t_id, false, 'project_link' );
+		echo project_link_for_menu( $t_id, false, 'project-link' );
 		echo "</li>\n";
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
 	}
@@ -645,7 +645,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
 		}
 
 		echo 0 == strcmp( $p_project_id, $t_full_id ) ? '<li class="active">' : '<li>';
-		echo project_link_for_menu( $t_id, false, 'project_link', $p_parents, $t_indent );
+		echo project_link_for_menu( $t_id, false, 'project-link', $p_parents, $t_indent );
 		echo "</li>\n";
 
 		layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
