@@ -22,8 +22,9 @@ exclude_list = (
     # System / build files
     ".git*",
     ".mailmap",
+    ".imgbotconfig",
     ".travis.yml",
-    "build.xml",
+    "build/",
     "composer.json",
     "composer.lock",
     # User custom files
@@ -36,10 +37,6 @@ exclude_list = (
     "mc_config_inc.php",
     # Directories
     "docbook/",
-    "build/",
-    "javascript/dev/",
-    "packages/",
-    "phing/",
     "tests/"
     )
 
