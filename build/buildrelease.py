@@ -26,7 +26,6 @@ exclude_list = (
     "build.xml",
     "composer.json",
     "composer.lock",
-    "test_langs.php",
     # User custom files
     "config_inc.php",
     "custom_constant*_inc.php",
