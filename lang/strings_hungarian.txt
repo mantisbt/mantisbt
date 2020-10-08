@@ -42,6 +42,7 @@
  * @author Csega
  * @author Dj
  * @author Glanthor Reviol
+ * @author Hanna Tardos
  * @author Leiric
  * @author MeskoBalazs
  * @author Misibacsi
@@ -353,6 +354,9 @@ $s_prefs_updated_msg = 'A beállítások frissítve…';
 $s_select_profile = 'Profil kiválasztása';
 $s_edit_profile = 'Profil szerkesztése';
 $s_delete_profile = 'Profil törlése';
+$s_delete_profile_confirm_msg = 'Biztos törölni akarod a "%1$s" profilt?';
+$s_global_profile = 'Globális profil';
+$s_default_profile = 'Alapprofil';
 $s_my_sponsorship = 'Támogatásaim';
 $s_update_sponsorship_button = 'Fizetés állapotának megváltoztatása';
 $s_no_sponsored = 'Nincs Önhöz rendelt támogatott ügy.';
