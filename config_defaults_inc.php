@@ -340,13 +340,13 @@ $g_crypto_master_salt = '';
 $g_allow_signup			= ON;
 
 /**
- * Max. attempts to login using a wrong password before lock the account.
- * When locked, it's required to reset the password (lost password)
- * Value resets to zero at each successfully login
- * Set to OFF to disable this control
+ * Maximum number of failed login attempts before the user's account is locked.
+ * Once locked, it is required to reset the password (lost password).
+ * The counter is reset to zero after each successful login.
+ * Set to OFF to disable this feature and allow unlimited failed login attempts.
  * @global integer $g_max_failed_login_count
  */
-$g_max_failed_login_count = OFF;
+$g_max_failed_login_count = 5;
 
 /**
  * access level required to be notified when a new user has been created using
