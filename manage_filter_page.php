@@ -115,10 +115,10 @@ function table_print_filter_row( $p_filter_id ) {
 	echo '</div>';
 	if( $t_editable ) {
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit_link' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_edit_page.php', lang_get( 'edit' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 		echo '<div class="pull-left">';
-		print_form_button( 'manage_filter_delete.php', lang_get( 'delete_filter_button' ), array( 'filter_id' =>  $p_filter_id ) );
+		print_form_button( 'manage_filter_delete.php', lang_get( 'delete' ), array( 'filter_id' =>  $p_filter_id ) );
 		echo '</div>';
 	}
 	echo '</div>';

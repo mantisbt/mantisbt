@@ -228,10 +228,10 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_project_id = urlencode( ALL_PROJECTS );
 					echo '<div class="btn-group inline">';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+					print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit' ) );
 					echo '</div>';
 					echo '<div class="pull-left">';
-					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete' ) );
 					echo '</div>';
 ?>
 				</td>

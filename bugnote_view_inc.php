@@ -205,7 +205,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 				echo '<div class="pull-left">';
 				print_form_button(
 					'bugnote_edit_page.php',
-					lang_get( 'bugnote_edit_link' ),
+					lang_get( 'edit' ),
 					array( 'bugnote_id' => $t_activity['id'] ),
 					OFF );
 				echo '</div>';
@@ -222,7 +222,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 					print_form_button(
 						'bugnote_delete.php',
-						lang_get( 'delete_link' ),
+						lang_get( 'delete' ),
 						array( 'bugnote_id' => $t_activity['id'] ),
 						$t_security_token_notes_delete );
 				} else {
@@ -232,7 +232,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 					if( $t_activity['can_delete'] ) {
 						print_link_button( 'bug_file_delete.php?file_id=' . $t_activity['id'] . form_security_param( 'bug_file_delete', $t_security_token_attachments_delete ),
-							lang_get( 'delete_link' ), 'btn-xs' );
+							lang_get( 'delete' ), 'btn-xs' );
 					}
 				}
 

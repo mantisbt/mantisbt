@@ -69,11 +69,8 @@
 $s_directionality = 'ltr';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Move';
 $s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Assign';
-$s_actiongroup_menu_close = 'Close';
-$s_actiongroup_menu_delete = 'Delete';
 $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
@@ -114,8 +111,6 @@ $s_view_submitted_bug_link = 'View Submitted Issue %1$s';
 $s_assigned_projects = 'Assigned Projects';
 $s_assigned_projects_label = 'Assigned Projects';
 $s_unassigned_projects_label = 'Unassigned Projects';
-$s_print = 'Print';
-$s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
@@ -129,7 +124,6 @@ $s_old_value = 'Old Value';
 $s_new_value = 'New Value';
 $s_date_modified = 'Date Modified';
 $s_bugnote = 'Note';
-$s_change = 'Change';
 $s_bugnote_view_state = 'Note View State';
 $s_bug_monitor = 'Issue Monitored';
 $s_bug_end_monitor = 'Issue End Monitor';
@@ -173,8 +167,6 @@ $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
 
 $s_create_new_project_link = 'Create New Project';
-
-$s_login_link = 'Login';
 
 # Browser Search - %s is the Search Engine title (@see $g_search_title)
 $s_opensearch_id_short = '%s Id';
@@ -242,10 +234,6 @@ $s_login_error = 'Your account may be disabled or blocked or the username/passwo
 $s_login_cookies_disabled = 'Your browser either does not know how to handle cookies, or refuses to handle them.';
 
 # General Strings
-$s_go_back = 'Go Back';
-$s_proceed = 'Proceed';
-
-$s_switch = 'Switch';
 $s_logged_in_as = 'Logged in as';
 
 $s_prefix_for_deleted_users = 'user';
@@ -482,7 +470,6 @@ $s_bug_deleted_msg = 'Issue has been deleted...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Are you sure you wish to delete this issue?';
-$s_delete_bug_button = 'Delete';
 
 # bug_monitor_add.php
 $s_monitor_bug_button = 'Monitor';
@@ -593,9 +580,6 @@ $s_back_to_issue = 'Back to Issue';
 $s_confirm_revision_drop = 'Are you sure you want to drop this issue revision?';
 $s_activities_title = 'Activities';
 
-# bug_vote_add.php
-$s_vote_added_msg = 'Vote has been added...';
-
 # bugnote_add.php
 $s_bugnote_attached_files = 'Attached Files:';
 
@@ -608,10 +592,8 @@ $s_edit_bugnote_title = 'Edit Note';
 
 # bugnote_inc.php
 $s_no_bugnotes_msg = 'There are no notes attached to this issue.';
-$s_delete_link = 'Delete';
 $s_add_bugnote_title = 'Add Note';
 $s_add_bugnote_button = 'Add Note';
-$s_bugnote_edit_link = 'Edit';
 $s_closed_bug_button = 'Close Issue';
 
 # bugnote_update.php
@@ -639,9 +621,6 @@ $s_log_page_event = 'Event';
 # print_api.php
 $s_please_report = 'Please report this to the %1$s.';
 
-# index.php
-$s_click_to_login = 'Login';
-
 # login.php
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
@@ -661,7 +640,6 @@ $s_save_login = 'Keep me logged in';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
-$s_login_button = 'Login';
 $s_signup_link = 'Signup for a new account';
 $s_lost_password_link = 'Lost your password?';
 $s_username_or_email = 'Username or email address';
@@ -843,7 +821,6 @@ $s_plugin_depends = 'Dependencies';
 $s_plugin_no_depends = 'No dependencies';
 $s_plugin_priority = 'Priority';
 $s_plugin_protected = 'Protected';
-$s_plugin_update = 'Update';
 $s_plugin_actions = 'Actions';
 $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
@@ -905,12 +882,10 @@ $s_add_and_edit_category_button = 'Add and Edit Category';
 $s_versions = 'Versions';
 $s_add_version_button = 'Add Version';
 $s_add_and_edit_version_button = 'Add and Edit Version';
-$s_edit_link = 'Edit';
 $s_actions = 'Actions';
 $s_version = 'Version';
 $s_version_label = 'Version:';
 $s_timestamp = 'Timestamp';
-$s_update = 'Update';
 $s_subprojects = 'Subprojects';
 $s_add_subproject = 'Add as Subproject';
 $s_create_new_subproject_link = 'Create New Subproject';
@@ -1252,7 +1227,6 @@ $s_stored_project = 'Stored project';
 $s_available_filter_for_project = 'Available filters for project';
 $s_manage_filter_page_title = 'Manage Filters';
 $s_manage_filter_edit_page_title = 'Edit filter';
-$s_delete_filter_button = 'Delete';
 $s_apply_filter_button = 'Apply';
 $s_temporary_filter = 'Temporary filter';
 $s_set_as_persistent_filter = 'Set as persistent filter';
@@ -1260,15 +1234,11 @@ $s_set_as_persistent_filter = 'Set as persistent filter';
 # bug_view_advanced_page.php
 $s_view_simple_link = 'View Simple';
 $s_product_build = 'Product Build';
-$s_update_bug_button = 'Edit';
 $s_bug_assign_to_button = 'Assign To:';
 $s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Reopen';
-$s_close_bug_button = 'Close';
-$s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
-$s_add_user_to_monitor = 'Add';
 $s_browser_does_not_support_audio = 'Your browser does not support audio tag.';
 $s_browser_does_not_support_video = 'Your browser does not support video tag.';
 
@@ -1375,7 +1345,6 @@ $s_http_auth_realm = 'MantisBT Login';
 $s_bug = 'issue';
 $s_bugs = 'issues';
 $s_add_new_relationship = 'New relationship';
-$s_add_new_relationship_button = 'Add';
 $s_this_bug = 'Current issue';
 $s_relationship_added = 'Relationship added';
 $s_relationship_deleted = 'Relationship deleted';
@@ -1383,7 +1352,6 @@ $s_no_relationship = 'no relationship';
 $s_relationship_replaced = 'Relationship replaced';
 $s_replace_relationship_button = 'Replace';
 $s_relationship_with_parent = 'Relationship with the parent issue';
-$s_delete_relationship_button = 'Delete';
 $s_delete_relationship_sure_msg = 'Are you sure you wish to delete this relationship?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Not all the children of this issue are yet resolved or closed.';
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Attention:</strong> Not all the children of this issue are yet resolved or closed.<br />Before <strong>resolving/closing</strong> a parent issue, all the issues related as child with this one should be resolved or closed.';
@@ -1432,7 +1400,6 @@ $s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
-$s_delete_attachment_button = 'Delete';
 $s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
 $s_filters = 'Filters';
@@ -1489,10 +1456,6 @@ $s_on_or_after_date = 'On Or After';
 $s_from_date = 'From';
 $s_to_date = 'To';
 $s_on_date = 'On';
-
-# Switch constants
-$s_on = 'On';
-$s_off = 'Off';
 
 # wiki related strings
 $s_wiki = 'Wiki';
@@ -1794,6 +1757,18 @@ $s_persist = 'Persist';
 $s_load = 'Load';
 $s_apply_changes = 'Apply changes';
 $s_undo = 'Undo';
+$s_edit = 'Edit';
 $s_submit = 'Submit';
+$s_update = 'Update';
+$s_delete = 'Delete';
 $s_make_default = 'Make Default';
 $s_clear_default = 'Clear Default';
+$s_print = 'Print';
+$s_jump = 'Jump';
+$s_change = 'Change';
+$s_go_back = 'Go Back';
+$s_proceed = 'Proceed';
+$s_move = 'Move';
+$s_close = 'Close';
+$s_add = 'Add';
+$s_login = 'Login';

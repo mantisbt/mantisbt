@@ -682,7 +682,7 @@ if( $t_flags['monitor_show'] ) {
 			<?php echo form_security_field( 'bug_monitor_add' ) ?>
 				<input type="hidden" name="bug_id" value="<?php echo (integer)$f_issue_id; ?>" />
 				<input type="text" class="input-sm" id="bug_monitor_list_user_to_add" name="user_to_add" />
-				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
+				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add' ) ?>" />
 			</form>
 			<?php } ?>
 		</td>
@@ -1004,7 +1004,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
 		<?php print_relationship_list_box( config_get( 'default_bug_relationship' ) )?>
 		<input type="text" class="input-sm" name="dest_bug_id" value="" />
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add' )?>" />
 		</form>
 <?php
 		} # can update
@@ -1174,7 +1174,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# UPDATE button
 	if( $p_flags['can_update'] ) {
 		echo '<div class="pull-left padding-right-8">';
-		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+		html_button( string_get_bug_update_page(), lang_get( 'edit' ), array( 'bug_id' => $p_bug_id ) );
 		echo '</div>';
 	}
 
@@ -1244,7 +1244,7 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 		echo '<div class="pull-left padding-right-2">';
 		html_button(
 			'bug_change_status_page.php',
-			lang_get( 'close_bug_button' ),
+			lang_get( 'close' ),
 			array( 'id' => $t_bug->id, 'new_status' => $t_closed_status, 'change_type' => BUG_UPDATE_TYPE_CLOSE ) );
 		echo '</div>';
 	}
@@ -1252,14 +1252,14 @@ function bug_view_action_buttons( $p_bug_id, $p_flags ) {
 	# MOVE button
 	if( $p_flags['can_move'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
 		echo '</div>';
 	}
 
 	# DELETE button
 	if( $p_flags['can_delete'] ) {
 		echo '<div class="pull-left padding-right-2">';
-		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
 		echo '</div>';
 	}
 
