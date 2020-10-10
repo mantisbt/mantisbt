@@ -271,6 +271,23 @@ print_manage_menu( 'manage_user_page.php' );
 						</td>
 					</tr>
 
+					<!-- Failed Login count / locked account -->
+					<tr>
+						<td class="category">
+							<?php echo lang_get( 'failed_login_count' ) ?>
+						</td>
+						<td>
+<?php
+							$t_max_failed = config_get( 'max_failed_login_count' );
+							$t_failed_login_count = (int)$t_user['failed_login_count'];
+							echo $t_failed_login_count;
+							if( OFF != $t_max_failed && $t_failed_login_count >= $t_max_failed ) {
+								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
+							}
+?>
+						</td>
+					</tr>
+
 					<?php event_signal( 'EVENT_MANAGE_USER_UPDATE_FORM', array( $t_user['id'] ) ); ?>
 				</table>
 			</div>
