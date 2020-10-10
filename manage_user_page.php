@@ -391,12 +391,18 @@ $t_user_count = count( $t_users );
 			$t_access_level[$v_access_level] = get_enum_element( 'access_levels', $v_access_level );
 		} ?>
 			<tr>
-				<td><?php
-					if( access_has_global_level( $v_access_level ) ) { ?>
-						<a href="manage_user_edit_page.php?user_id=<?php echo $v_id ?>"><?php echo string_display_line( $v_username ) ?></a><?php
-					} else {
-						echo string_display_line( $v_username );
-					} ?>
+				<td>
+<?php
+		if( access_has_global_level( $v_access_level ) ) {
+			/** @noinspection HtmlUnknownTarget */
+			printf( '<a href="%s">%s</a>',
+				'manage_user_edit_page.php?user_id=' . $v_id,
+				string_display_line( $v_username )
+			);
+		} else {
+			echo string_display_line( $v_username );
+		}
+?>
 				</td>
 				<td><?php echo string_display_line( $v_realname ) ?></td>
 				<td><?php print_email_link( $v_email, $v_email ) ?></td>
