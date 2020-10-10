@@ -366,9 +366,18 @@ $t_user_count = count( $t_users );
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_access_level = array();
 	for( $i=0; $i<$t_user_count; $i++ ) {
-		# prefix user data with u_
-		$t_user = $t_users[$i];
-		extract( $t_user, EXTR_PREFIX_ALL, 'u' );
+		/**
+		 * @var int $u_id
+		 * @var string $u_username
+		 * @var string $u_realname
+		 * @var string $u_email
+		 * @var int $u_date_created
+		 * @var int $u_last_visit
+		 * @var int $u_access_level
+		 * @var bool $u_enabled
+		 * @var bool $u_protected
+		 */
+		extract( $t_users[$i], EXTR_PREFIX_ALL, 'u' );
 
 		$u_date_created  = date( $t_date_format, $u_date_created );
 		$u_last_visit    = date( $t_date_format, $u_last_visit );
