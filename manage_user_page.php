@@ -88,6 +88,8 @@ if( !$f_save && !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
 	# Show Disabled
 	if ( isset( $t_manage_arr[3] ) ) {
 		$f_show_disabled = $t_manage_arr[3];
+	} else {
+		$f_show_disabled = false;
 	}
 } else {
 	$f_sort          = gpc_get_string( 'sort', 'username' );
