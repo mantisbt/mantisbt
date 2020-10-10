@@ -157,12 +157,15 @@ for( $i = 0; $i <= 9; $i++ ) {
 }
 $t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 $t_prefix_array['NEW'] = lang_get( 'users_new' );
+?>
 
-echo '<div class="col-md-12 col-xs-12">';
-echo '<div class = "space-10"></div>';
-echo '<div class="center" >';
-echo '  <div class="btn-toolbar inline" >';
-echo '    <div class="btn-group" >';
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="center">
+	<div class="btn-toolbar inline">
+		<div class="btn-group">
+
+<?php
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	if( $t_prefix === 'UNUSED' ) {
 		$t_search = '';
@@ -181,11 +184,13 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 			$c_dir, null, $c_hide_inactive, $t_prefix, $t_search, $c_show_disabled,
 			'btn btn-xs btn-white btn-primary ' . $t_active );
 }
-echo '</div>';
-echo '</div>';
-echo '</div>';
-echo '<div class="space-10"></div >';
+?>
+		</div>
+	</div>
+</div>
+<div class="space-10"></div>
 
+<?php
 $t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
