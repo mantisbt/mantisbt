@@ -370,7 +370,7 @@ $t_user_count = count( $t_users );
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_access_level = array();
-	for( $i=0; $i<$t_user_count; $i++ ) {
+	foreach( $t_users as $t_user ) {
 		/**
 		 * @var int $v_id
 		 * @var string $v_username
@@ -382,7 +382,7 @@ $t_user_count = count( $t_users );
 		 * @var bool $v_enabled
 		 * @var bool $v_protected
 		 */
-		extract( $t_users[$i], EXTR_PREFIX_ALL, 'v' );
+		extract( $t_user, EXTR_PREFIX_ALL, 'v' );
 
 		$v_date_created  = date( $t_date_format, $v_date_created );
 		$v_last_visit    = date( $t_date_format, $v_last_visit );
