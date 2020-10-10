@@ -367,45 +367,45 @@ $t_user_count = count( $t_users );
 	$t_access_level = array();
 	for( $i=0; $i<$t_user_count; $i++ ) {
 		/**
-		 * @var int $u_id
-		 * @var string $u_username
-		 * @var string $u_realname
-		 * @var string $u_email
-		 * @var int $u_date_created
-		 * @var int $u_last_visit
-		 * @var int $u_access_level
-		 * @var bool $u_enabled
-		 * @var bool $u_protected
+		 * @var int $v_id
+		 * @var string $v_username
+		 * @var string $v_realname
+		 * @var string $v_email
+		 * @var int $v_date_created
+		 * @var int $v_last_visit
+		 * @var int $v_access_level
+		 * @var bool $v_enabled
+		 * @var bool $v_protected
 		 */
-		extract( $t_users[$i], EXTR_PREFIX_ALL, 'u' );
+		extract( $t_users[$i], EXTR_PREFIX_ALL, 'v' );
 
-		$u_date_created  = date( $t_date_format, $u_date_created );
-		$u_last_visit    = date( $t_date_format, $u_last_visit );
+		$v_date_created  = date( $t_date_format, $v_date_created );
+		$v_last_visit    = date( $t_date_format, $v_last_visit );
 
-		if( !isset( $t_access_level[$u_access_level] ) ) {
-			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
+		if( !isset( $t_access_level[$v_access_level] ) ) {
+			$t_access_level[$v_access_level] = get_enum_element( 'access_levels', $v_access_level );
 		} ?>
 			<tr>
 				<td><?php
-					if( access_has_global_level( $u_access_level ) ) { ?>
-						<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
+					if( access_has_global_level( $v_access_level ) ) { ?>
+						<a href="manage_user_edit_page.php?user_id=<?php echo $v_id ?>"><?php echo string_display_line( $v_username ) ?></a><?php
 					} else {
-						echo string_display_line( $u_username );
+						echo string_display_line( $v_username );
 					} ?>
 				</td>
-				<td><?php echo string_display_line( $u_realname ) ?></td>
-				<td><?php print_email_link( $u_email, $u_email ) ?></td>
-				<td><?php echo $t_access_level[$u_access_level] ?></td>
-				<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
+				<td><?php echo string_display_line( $v_realname ) ?></td>
+				<td><?php print_email_link( $v_email, $v_email ) ?></td>
+				<td><?php echo $t_access_level[$v_access_level] ?></td>
+				<td class="center"><?php echo trans_bool( $v_enabled ) ?></td>
 				<td class="center"><?php
-					if( $u_protected ) {
+					if( $v_protected ) {
 						echo ' ' . $t_lock_image;
 					} else {
 						echo '&#160;';
 					} ?>
 				</td>
-				<td><?php echo $u_date_created ?></td>
-				<td><?php echo $u_last_visit ?></td>
+				<td><?php echo $v_date_created ?></td>
+				<td><?php echo $v_last_visit ?></td>
 			</tr>
 <?php
 	}  # end for
