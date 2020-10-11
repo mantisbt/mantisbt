@@ -85,13 +85,13 @@ if( $f_mail_test ) {
 
 	if( !$t_result ) {
 		echo '<div class="alert alert-sm alert-danger">';
-		echo '<i class="ace-icon fa fa-times fa-lg"></i> ';
+		print_icon( 'fa-times', 'ace-icon fa-lg' );
 		echo '<strong>Testing Mail</strong> - ';
 		echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.';
 		echo '</div>';
 	} else {
 		echo '<div class="alert alert-sm alert-success">';
-		echo '<i class="ace-icon fa fa-check fa-lg"></i> ';
+		print_icon( 'fa-check', 'ace-icon fa-lg' );
 		echo '<strong>Testing Mail</strong> - ';
 		echo ' mail() send successful.';
 		echo '</div>';
@@ -105,8 +105,8 @@ if( count( $t_ids ) > 0 ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-envelope"></i>
-	Email Queue
+		<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
+		Email Queue
 	</h4>
 </div>
 <div class="widget-body">

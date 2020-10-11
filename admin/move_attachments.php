@@ -309,14 +309,15 @@ if( null == $f_project_to_move ) {
 			echo '<div class="widget-box widget-color-blue2">';
 			echo '<div class="widget-header widget-header-small">';
 			echo '<h4 class="widget-title lighter">';
-			echo '<i class="ace-icon fa fa-paperclip"></i>';
-				printf(
-					"Project '%s' : %d attachments %s",
-					$t_row['name'],
-					$t_row['rows'],
-					( 0 == $t_row['failed']
-						? 'moved successfully'
-						: 'to move, ' . $t_row['failed'] . ' failures') );
+			print_icon( 'fa-paperclip', 'ace-icon' );
+			printf(
+				"Project '%s' : %d attachments %s",
+				$t_row['name'],
+				$t_row['rows'],
+				( 0 == $t_row['failed']
+					? 'moved successfully'
+					: 'to move, ' . $t_row['failed'] . ' failures')
+			);
 			echo '</h4>';
 			echo '</div>';
 			echo '<div class="widget-body">';
