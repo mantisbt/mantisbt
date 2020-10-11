@@ -406,17 +406,25 @@ $t_user_count = count( $t_users );
 </div>
 </div>
 
+<?php
+	# Do not display the section's footer if we have only one page of users,
+	# otherwise it will be empty as the navigation controls won't be shown.
+	if( $t_total_user_count > $p_per_page ) {
+?>
 <div class="widget-toolbox padding-8 clearfix">
 	<div class="btn-toolbar pull-right">
-		<?php
+<?php
 		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
 		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number,
 			$f_filter . "&amp;search=$f_search" . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
-		?>
+?>
 	</div>
 </div>
+<?php } ?>
+
 </div>
 </div>
 </div>
+
 <?php
 layout_page_end();
