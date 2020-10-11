@@ -102,7 +102,7 @@ layout_login_page_begin();
 					<div class="widget-body">
 						<div class="widget-main">
 							<h4 class="header lighter bigger">
-								<i class="ace-icon fa fa-pencil"></i>
+								<?php print_icon( 'fa-pencil', 'ace-icon' ); ?>
 								<?php echo lang_get( 'signup_title' ) ?>
 							</h4>
 							<div class="space-10"></div>

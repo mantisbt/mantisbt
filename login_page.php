@@ -203,7 +203,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -227,7 +227,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 					<input id="username" name="username" type="text" placeholder="<?php echo $t_username_label ?>"
 						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $t_username ); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				</span>
 			</label>
 

@@ -197,7 +197,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 		<div class="widget-body">
 			<div class="widget-main">
 				<h4 class="header lighter bigger">
-					<i class="ace-icon fa fa-sign-in"></i>
+					<?php print_icon( 'fa-sign-in', 'ace-icon' ); ?>
 					<?php echo $t_form_title ?>
 				</h4>
 				<div class="space-10"></div>
@@ -224,7 +224,7 @@ if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ 
 					<input id="password" name="password" type="password" placeholder="<?php echo lang_get( 'password' ) ?>"
 						   size="32" maxlength="<?php echo auth_get_password_max_size(); ?>"
 						   class="form-control autofocus">
-					<i class="ace-icon fa fa-lock"></i>
+					<?php print_icon( 'fa-lock', 'ace-icon' ); ?>
 				</span>
 			</label>
 

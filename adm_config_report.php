@@ -242,7 +242,7 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-filter"></i>
+	<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 	<?php echo lang_get( 'filters' ) ?>
 </h4>
 </div>
@@ -320,8 +320,8 @@ $t_config_query = new DbQuery( $t_sql, $t_params );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-<i class="ace-icon fa fa-database"></i>
-<?php echo lang_get( 'database_configuration' ) ?>
+	<?php print_icon( 'fa-database', 'ace-icon' ); ?>
+	<?php echo lang_get( 'database_configuration' ) ?>
 </h4>
 </div>
 

@@ -101,7 +101,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-puzzle-piece "></i>
+	<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 	<?php echo lang_get('edit_project_title') ?>
 </h4>
 </div>
@@ -236,7 +236,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-share-alt"></i>
+					<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 					<?php echo lang_get( 'subprojects' ); ?>
 				</h4>
 			</div>
@@ -288,7 +288,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-share-alt"></i>
+				<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 				<?php echo lang_get( 'subprojects' ); ?>
 			</h4>
 		</div>
@@ -385,7 +385,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-sitemap"></i>
+				<?php print_icon( 'fa-sitemap', 'ace-icon' ); ?>
 				<?php echo lang_get( 'categories' ); ?>
 			</h4>
 		</div>
@@ -475,7 +475,7 @@ if ( config_get( 'subprojects_enabled') == ON ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-share-alt"></i>
+				<?php print_icon( 'fa-share-alt', 'ace-icon' ); ?>
 				<?php echo lang_get( 'versions' ); ?>
 			</h4>
 		</div>
@@ -582,7 +582,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-flask"></i>
+			<?php print_icon( 'fa-flask', 'ace-icon' ); ?>
 			<?php echo lang_get( 'custom_fields_setup' ); ?>
 		</h4>
 	</div>
@@ -687,8 +687,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	<div class="space-10"></div>
 	<div class="alert alert-info">
 		<div class="center bigger-110">
-			<i class="fa fa-info-circle"></i>
 	<?php
+	print_icon( 'fa-info-circle' );
+	echo ' ';
 	if( VS_PUBLIC == project_get_field( $f_project_id, 'view_state' ) ) {
 		echo lang_get( 'public_project_msg' );
 	} else {
@@ -704,7 +705,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-users"></i>
+					<?php print_icon( 'fa-users', 'ace-icon' ); ?>
 					<?php echo lang_get( 'manage_accounts_title' ); ?>
 				</h4>
 			</div>
@@ -815,7 +816,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					echo ' <a href="#" class="edit_link">[' . lang_get( 'edit_link' ) . ']</a>';
 					echo '</span>';
 					$t_arrow = layout_is_rtl() ? 'fa-long-arrow-left' : 'fa-long-arrow-right';
-					echo '<span class="changed_to"> <i class="fa fa-lg ' . $t_arrow . '"></i> ';
+					echo ' <span class="changed_to">';
+					print_icon( $t_arrow, 'fa-lg' );
 					echo '</span>';
 					echo '<select name="user_access_level[' . $t_user['id'] . ']" class="input-xs user_access_level"'
 							. ' data-original_val="' . $t_user['access_level'] . '" data-user_id="' . $t_user['id'] . '">';
@@ -900,7 +902,7 @@ if( count( $t_users ) > 0 ) { ?>
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-user"></i>
+				<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 				<?php echo lang_get( 'add_user_title' ); ?>
 			</h4>
 		</div>

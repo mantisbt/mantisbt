@@ -140,7 +140,7 @@ layout_login_page_begin();
 						<label class="block clearfix">
 							<span class="block input-icon input-icon-right">
 								<input id="realname" class="form-control" placeholder="<?php echo lang_get( 'realname' ) ?>" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME ?>" name="realname" value="<?php echo string_attribute( $u_realname ) ?>" />
-								<i class="ace-icon fa fa-user"></i>
+								<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 							</span>
 						</label>
 						<span class="label-style"></span>
@@ -150,7 +150,7 @@ layout_login_page_begin();
 						<label class="block clearfix">
 							<span class="block input-icon input-icon-right">
 								<input id="password" class="form-control" placeholder="<?php echo lang_get( 'password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password"/>
-								<i class="ace-icon fa fa-lock"></i>
+								<?php print_icon( 'fa-lock', 'ace-icon' ); ?>
 							</span>
 						</label>
 						<span class="label-style"></span>
@@ -160,7 +160,7 @@ layout_login_page_begin();
 						<label class="block clearfix">
 							<span class="block input-icon input-icon-right">
 								<input id="password-confirm" class="form-control" placeholder="<?php echo lang_get( 'confirm_password' ) ?>" type="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" name="password_confirm"/>
-								<i class="ace-icon fa fa-lock"></i>
+								<?php print_icon( 'fa-lock', 'ace-icon' ); ?>
 							</span>
 						</label>
 						<span class="label-style"></span>

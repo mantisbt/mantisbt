@@ -76,7 +76,7 @@ layout_page_begin();
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-tag"></i>
+	<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
 	<?php echo sprintf( lang_get( 'tag_details' ), $t_name ) ?>
 </h4>
 </div>

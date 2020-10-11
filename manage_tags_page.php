@@ -129,7 +129,7 @@ print_manage_menu( 'manage_tags_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-tags"></i>
+			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
 			<?php echo lang_get('manage_tags_link') ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
@@ -197,7 +197,7 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-tag"></i>
+				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
 				<?php echo lang_get('tag_create') ?>
 			</h4>
 		</div>

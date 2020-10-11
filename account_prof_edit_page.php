@@ -102,7 +102,7 @@ if( $t_global_profile ) {
 
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 					<?php echo lang_get( 'edit_profile' ) ?>
 				</h4>
 			</div>

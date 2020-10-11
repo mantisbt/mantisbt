@@ -107,7 +107,7 @@ print_manage_menu( 'manage_user_page.php' );
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 					<?php echo lang_get('edit_user_title') ?>
 				</h4>
 			</div>
@@ -287,8 +287,8 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="col-md-6 col-xs-12 no-padding">
 <div class="space-4"></div>
 <div class="alert alert-info">
-	<i class="fa fa-info-circle"></i>
 <?php
+	print_icon( 'fa-info-circle' );
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
@@ -310,10 +310,10 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 <div class="space-10"></div>
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
-<h4 class="widget-title lighter">
-<i class="ace-icon fa fa-puzzle-piece"></i>
-<?php echo lang_get('add_user_title') ?>
-</h4>
+	<h4 class="widget-title lighter">
+		<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
+		<?php echo lang_get('add_user_title') ?>
+	</h4>
 </div>
 
 <div class="widget-body">

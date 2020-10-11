@@ -204,7 +204,7 @@ layout_page_begin();
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-history"></i>
+				<?php print_icon( 'fa-history', 'ace-icon' ); ?>
 				<?php echo lang_get( 'view_revisions' ), ': ', $t_title ?>
 			</h4>
 		</div>
