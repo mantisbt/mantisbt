@@ -89,7 +89,10 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_end() {
-		$t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+		$t_html = '<div class="time">'
+			. icon_get( 'fa-clock-o', 'ace-icon bigger-110' )
+			. ' ' . $this->format_timestamp( $this->timestamp )
+			. '</div>';
 		$t_html .= '</div>';
 		return $t_html;
 	}

@@ -499,21 +499,23 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 	<div class="widget-box <?php echo $t_news_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-edit"></i>
+				<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 				<?php echo $t_headline ?>
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="ace-icon fa fa-chevron-up bigger-125"></i>
+					<?php print_icon( 'fa-chevron-up', 'ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-toolbox padding-8 clearfix">
-				<i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
+				<?php print_icon( 'fa-user' ); ?>
+				<?php echo prepare_user_name( $p_poster_id ); ?>
 				&#160;&#160;&#160;&#160;
-				<i class="fa fa-clock-o"></i> <?php echo $t_date_posted; ?>
+				<?php print_icon( 'fa-clock-o' ); ?>
+				<?php echo $t_date_posted; ?>
 			</div>
 			<div class="widget-main">
 				<?php
@@ -1791,7 +1793,9 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><i class="fa fa-rss fa-lg orange" title="', $p_title, '"></i></a>';
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '">';
+	print_icon( 'fa-rss', 'fa-lg orange', $p_title );
+	echo '</a>';
 }
 
 /**
@@ -1992,9 +1996,11 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 	}
 
 	if( $p_attachment['can_delete'] ) {
-		echo '<a class="noprint red zoom-130 pull-right" href="bug_file_delete.php?file_id=' . $p_attachment['id'] .
-			form_security_param( 'bug_file_delete', $p_security_token ) . '">
-			<i class="1 ace-icon fa fa-trash-o bigger-115"></i></a>';
+		echo '<a class="noprint red zoom-130 pull-right" '
+			. 'href="bug_file_delete.php?file_id=' . $p_attachment['id']
+			. form_security_param( 'bug_file_delete', $p_security_token ) . '">';
+		print_icon( 'fa-trash-o', '1 ace-icon bigger-115' );
+		echo '</a>';
 	}
 }
 

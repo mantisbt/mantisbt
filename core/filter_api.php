@@ -1225,7 +1225,7 @@ function filter_draw_selection_area() {
 
 	# further use of this icon must be inlined to avoid spaces in rendered html
 	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
-		'<i class="fa fa-clock-o fa-xs-top" title="' . lang_get( 'temporary_filter' ) . '"></i>'
+		icon_get( 'fa-clock-o', 'fa-xs-top', lang_get( 'temporary_filter' ) )
 		: '';
 	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
 	$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
@@ -1248,7 +1248,7 @@ function filter_draw_selection_area() {
 						count( $t_stored_queries_arr ) > 0 ) { ?>
 					<div class="widget-menu">
 						<a href="#" data-action="settings" data-toggle="dropdown">
-							<i class="ace-icon fa fa-bars bigger-125"></i>
+							<?php print_icon( 'fa-bars', 'ace-icon bigger-125'); ?>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
 							<?php
@@ -1263,21 +1263,24 @@ function filter_draw_selection_area() {
 									. form_security_param( 'permalink' );
 								echo '<li>';
 								echo '<a href="permalink_page.php?url=' . $t_permalink_url . '">';
-								echo '<i class="ace-icon fa fa-link"></i>&#160;&#160;' . lang_get( 'create_filter_link' );
+								print_icon( 'fa-link', 'ace-icon' );
+								echo '&#160;&#160;' . lang_get( 'create_filter_link' );
 								echo '</a>';
 								echo '</li>';
 							}
 							if( count( $t_stored_queries_arr ) > 0 ) {
 								echo '<li>';
 								echo '<a href="manage_filter_page.php">';
-								echo '<i class="ace-icon fa fa-wrench"></i>&#160;&#160;' . lang_get( 'open_queries' );
+								print_icon( 'fa-wrench', 'ace-icon' );
+								echo '&#160;&#160;' . lang_get( 'open_queries' );
 								echo '</a>';
 								echo '</li>';
 							}
 							if( $t_is_temporary && $t_can_persist ) {
 								echo '<li>';
 								echo '<a href="' . $t_url_persist_filter . '">';
-								echo '<i class="ace-icon fa fa-thumb-tack"></i>&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
+								print_icon( 'fa-thumb-tack', 'ace-icon' );
+								echo '&#160;&#160;' . lang_get( 'set_as_persistent_filter' );
 								echo '</a>';
 								echo '</li>';
 							}
@@ -1297,7 +1300,7 @@ function filter_draw_selection_area() {
 					<a class="btn btn-primary btn-white btn-round btn-xs"
 					   title="<?php echo lang_get( 'set_as_persistent_filter' ) ?>"
 					   href="<?php echo $t_url_persist_filter ?>">
-						<i class="ace-icon fa fa-thumb-tack"></i>
+						<?php print_icon( 'fa-thumb-tack', 'ace-icon' ); ?>
 					</a>
 				<?php
 				}
@@ -1305,7 +1308,7 @@ function filter_draw_selection_area() {
 					<a class="btn btn-primary btn-white btn-round btn-xs"
 					   title="<?php echo lang_get( 'reset_query' ) ?>"
 					   href="<?php echo $t_url_reset_filter ?>">
-						<i class="ace-icon fa fa-times"></i>
+						<?php print_icon( 'fa-times', 'ace-icon' ); ?>
 					</a>
 				</div>
 				<?php if( count( $t_stored_queries_arr ) > 0 ) { ?>
@@ -1336,7 +1339,7 @@ function filter_draw_selection_area() {
 							   value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ); ?>" />
 						<button id="filter-bar-search-btn" type="submit" name="filter_submit" class="btn btn-primary btn-white btn-round btn-xs"
 								title="<?php echo lang_get( 'filter_button' ) ?>">
-							<i class="ace-icon fa fa-search"></i>
+							<?php print_icon( 'fa-search', 'ace-icon' ); ?>
 						</button>
 					</form>
 
@@ -1356,14 +1359,14 @@ function filter_draw_selection_area() {
 	if( $t_is_temporary && $t_can_persist ) {
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_persist_filter ?>">
-								<i class="ace-icon fa fa-thumb-tack"></i>
+								<?php print_icon( 'fa-thumb-tack', 'ace-icon' ); ?>
 								<?php echo lang_get( 'persist' ) ?>
 							</a>
 	<?php
 	}
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_reset_filter ?>">
-								<i class="ace-icon fa fa-times"></i>
+								<?php print_icon( 'fa-times', 'ace-icon' ); ?>
 								<?php echo lang_get( 'reset' ) ?>
 							</a>
 
@@ -1375,7 +1378,7 @@ function filter_draw_selection_area() {
 		}
 	?>
 							<a class="btn btn-sm btn-primary btn-white btn-round" href="<?php echo $t_url_save_filter ?>">
-								<i class="ace-icon fa fa-floppy-o"></i>
+								<?php print_icon( 'fa-floppy-o', 'ace-icon' ); ?>
 								<?php echo lang_get( 'save' ) ?>
 							</a>
 	<?php
@@ -2383,9 +2386,9 @@ function filter_print_view_type_toggle( $p_url, $p_view_type ) {
 	}
 
 	echo '<li>';
-	printf( '<a href="%s"><i class="ace-icon fa %s"></i>&#160;&#160;%s</a>',
+	printf( '<a href="%s">%s</i>&#160;&#160;%s</a>',
 		$t_url,
-		$t_icon,
+		icon_get( $t_icon, 'ace-icon' ),
 		lang_get( $t_lang_string )
 	);
 	echo '</li>';

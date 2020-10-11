@@ -480,10 +480,10 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 		echo '<span class="user-info">';
 		echo $t_username;
 		echo '</span>';
-		echo '<i class="ace-icon fa fa-angle-down"></i>';
+		print_icon( 'fa-angle-down', 'ace-icon' );
 	} else {
 		echo '&#160;' . $t_username . '&#160;' . "\n";
-		echo '<i class="ace-icon fa fa-angle-down bigger-110"></i>';
+		print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
 	}
 	echo '</a>';
 	echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
@@ -528,8 +528,8 @@ function layout_navbar_projects_menu() {
 		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
 	}
 
-	echo ' <i class="ace-icon fa fa-angle-down bigger-110"></i>' . "\n";
-	echo '</a>' . "\n";
+	print_icon( 'fa-angle-down', 'ace-icon bigger-110' );
+	echo "\n" . '</a>' . "\n";
 
 	echo '<ul id="projects-list" class=" dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">' . "\n";
 	layout_navbar_projects_list( implode( ';', helper_get_current_project_trace() ), true, null, true );
@@ -561,13 +561,15 @@ function layout_navbar_button_bar() {
 	if( $t_show_report_bug_button )  {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
-		echo '<i class="fa fa-edit"></i> ' . lang_get( 'report_bug_link' );
+		print_icon( 'fa-edit');
+		echo lang_get( 'report_bug_link' );
 		echo '</a>';
 	}
 
 	if( $t_show_invite_user_button ) {
 		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		echo '<i class="fa fa-user-plus"></i> ' . lang_get( 'invite_users' );
+		print_icon( 'fa-fa-user-plus');
+		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';
 	}
 
@@ -662,7 +664,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
  * @return void
  */
 function layout_navbar_user_avatar( $p_img_class = 'nav' ) {
-	$t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
+	$t_default_avatar = icon_get( 'fa-user', 'ace-icon fa-2x white' ) . ' ';
 
 	if( OFF === config_get( 'show_avatar' ) ) {
 		echo $t_default_avatar;
@@ -1048,7 +1050,9 @@ function layout_breadcrumbs() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo ' <li><i class="fa fa-user home-icon active"></i> ' . lang_get( 'anonymous' ) . ' </li>' . "\n";
+		echo ' <li>';
+		print_icon( 'fa-user', 'home-icon active' );
+		echo lang_get( 'anonymous' ) . ' </li>' . "\n";
 
 		echo '<div class="btn-group btn-corner">' . "\n";
 		echo '	<a href="' . helper_mantis_url( auth_login_page( 'return=' . $t_return_page ) ) .
@@ -1066,7 +1070,8 @@ function layout_breadcrumbs() {
 		$t_realname = current_user_get_field( 'realname' );
 		$t_display_realname = is_blank( $t_realname ) ? '' : ' ( ' . string_html_specialchars( $t_realname ) . ' ) ';
 
-		echo '  <li><i class="fa fa-user home-icon active"></i>';
+		echo '  <li>';
+		print_icon( 'fa-user', 'home-icon active' );
 		$t_page = ( OFF == $t_protected ) ? 'account_page.php' : 'my_view_page.php';
 		echo '  <a href="' . helper_mantis_url( $t_page ) . '">' .
 			$t_display_username . $t_display_realname . '</a>' . "\n";
@@ -1103,7 +1108,7 @@ function layout_breadcrumbs() {
 	echo '<form class="form-search" method="post" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
 	echo '<span class="input-icon">';
 	echo '<input type="text" name="bug_id" autocomplete="off" class="nav-search-input" placeholder="' . lang_get( 'issue_id' ) . '">';
-	echo '<i class="ace-icon fa fa-search nav-search-icon"></i>';
+	print_icon( 'fa-search', 'ace-icon nav-search-icon' );
 	echo '</span>';
 	echo '</form>';
 	echo '</div>';
@@ -1194,13 +1199,17 @@ function layout_footer() {
 	# Print the page execution time
 	if( $t_show_timer ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-		echo '<small><i class="fa fa-clock-o"></i> ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-clock-o' );
+		echo ' ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Print the page memory usage
 	if( $t_show_memory_usage ) {
 		$t_page_memory_usage = sprintf( lang_get( 'memory_usage' ), number_format( memory_get_peak_usage() / 1024 ) );
-		echo '<small><i class="fa fa-bolt"></i> ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-bolt' );
+		echo ' ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	# Determine number of unique queries executed
@@ -1221,13 +1230,19 @@ function layout_footer() {
 		}
 
 		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-		echo '<small><i class="fa fa-database"></i> ' . $t_total_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-database' );
+		echo ' ' . $t_total_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
 		if( config_get_global( 'db_log_queries' ) ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo '<small><i class="fa fa-database"></i> ' . $t_unique_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
+			echo '<small>';
+			print_icon( 'fa-database' );
+			echo ' ' . $t_unique_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
 		}
 		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-		echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
+		echo '<small>';
+		print_icon( 'fa-fa-clock-o' );
+		echo ' ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
 	if( $t_display_debug_info ) {
@@ -1266,8 +1281,8 @@ function layout_footer_end() {
  */
 function layout_scroll_up_button() {
 	echo '<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">' . "\n";
-	echo '<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>' . "\n";
-	echo '</a>' . "\n";
+	print_icon( 'fa-angle-double-up', 'ace-icon icon-only bigger-110');
+	echo "\n" . '</a>' . "\n";
 }
 
 /**

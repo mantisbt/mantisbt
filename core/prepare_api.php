@@ -96,7 +96,8 @@ function prepare_email_link( $p_email, $p_text, $p_subject = '', $p_tooltip ='',
 
 	if( $p_show_as_button ) {
 		$t_class = ' class="noprint blue zoom-130"';
-		$t_text = '<i class="fa fa-envelope-o bigger-115"></i>' . ( $t_text ? "&nbsp;$t_text" : '' );
+		$t_text = icon_get( 'fa-envelope-o', 'bigger-115' )
+			. ( $t_text ? "&nbsp;$t_text" : '' );
 	} else {
 		$t_class = '';
 	}
