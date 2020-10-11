@@ -55,7 +55,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-<i class="ace-icon fa fa-upload"></i>
+<?php print_icon( 'fa-upload', 'ace-icon' ); ?>
 <?php
 	printf(
 		plugin_lang_get( 'importing_in_project' ),
