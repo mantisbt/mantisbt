@@ -41,7 +41,7 @@ $t_mantisgraph->print_submenu();
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-bar-chart-o"></i>
+				<?php print_icon( 'fa-bar-chart-o', 'ace-icon' ); ?>
 				<?php echo plugin_lang_get( 'graph_developer_title' ) ?>
 			</h4>
 		</div>
@@ -49,7 +49,7 @@ $t_mantisgraph->print_submenu();
 		<div class="col-md-6 col-xs-12" style="padding: 20px;">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-bar-chart"></i>
+					<?php print_icon( 'fa-bar-chart', 'ace-icon' ); ?>
 					<?php echo plugin_lang_get('graph_topdev') ?>
 				</h4>
 			</div>
@@ -63,7 +63,7 @@ $t_mantisgraph->print_submenu();
 		<div class="col-md-6 col-xs-12" style="padding: 20px;">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-bar-chart"></i>
+					<?php print_icon( 'fa-bar-chart', 'ace-icon' ); ?>
 					<?php echo plugin_lang_get('graph_opendev') ?>
 				</h4>
 			</div>
