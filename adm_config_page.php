@@ -146,7 +146,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 			<div class="widget-box widget-color-blue2">
 				<div class="widget-header widget-header-small">
 					<h4 class="widget-title lighter">
-						<i class="ace-icon fa fa-sliders"></i>
+						<?php print_icon( 'fa-sliders', 'ace-icon' ); ?>
 						<?php echo $t_action_label; ?>
 					</h4>
 				</div>

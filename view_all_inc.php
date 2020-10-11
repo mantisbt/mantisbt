@@ -90,7 +90,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-columns"></i>
+		<?php print_icon( 'fa-columns', 'ace-icon' ); ?>
 		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
 			# -- Viewing range info --

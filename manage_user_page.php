@@ -299,7 +299,7 @@ $t_user_count = count( $t_users );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-users"></i>
+	<?php print_icon( 'fa-users', 'ace-icon' ); ?>
 	<?php echo lang_get('manage_accounts_title') ?>
 	<span class="badge"><?php echo $t_total_user_count ?></span>
 </h4>

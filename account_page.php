@@ -130,7 +130,7 @@ print_account_menu( 'account_page.php' );
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-user"></i>
+			<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 			<?php echo lang_get( 'edit_account_title' ) ?>
 		</h4>
 	</div>
@@ -275,7 +275,7 @@ if( !empty( $t_projects ) ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php print_icon( 'fa-puzzle-piece', 'ace-icon' ); ?>
 				<?php echo lang_get( 'assigned_projects' ) ?>
 			</h4>
 		</div>

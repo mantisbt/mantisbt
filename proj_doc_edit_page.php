@@ -89,7 +89,7 @@ print_doc_menu();
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-edit"></i>
+			<?php print_icon( 'fa-edit', 'ace-icon' ); ?>
 			<?php echo lang_get('upload_file_title') ?>
 		</h4>
 	</div>

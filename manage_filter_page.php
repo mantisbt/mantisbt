@@ -151,7 +151,7 @@ function table_print_filters( array $p_filter_array ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"></i>
+				<?php print_icon( 'fa-filter', 'ace-icon' ); ?>
 				<?php echo lang_get('available_filter_for_project') . ': ' . string_display_line( project_get_name( $t_project_id ) ) ?>
 			</h4>
 		</div>

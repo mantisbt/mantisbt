@@ -139,7 +139,7 @@ if( !$f_confirmed ) {
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-bar-chart"></i>
+					<?php print_icon( 'fa-bar-chart', 'ace-icon' ); ?>
 					<?php echo lang_get( 'review_changes' ) ?>
 				</h4>
 			</div>
@@ -198,7 +198,7 @@ if( !$f_confirmed ) {
 		<div class="widget-box widget-color-grey">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user-times"></i>
+					<?php print_icon( 'fa-user-times', 'ace-icon' ); ?>
 					<?php echo lang_get( 'remove_project_user_title' ) ?>
 				</h4>
 			</div>
@@ -249,7 +249,7 @@ if( !$f_confirmed ) {
 		<div class="widget-box widget-color-grey">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
+					<?php print_icon( 'fa-user', 'ace-icon' ); ?>
 					<?php echo lang_get( 'modify_project_user_title' ) ?>
 				</h4>
 			</div>

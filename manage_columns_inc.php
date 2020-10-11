@@ -88,7 +88,7 @@ if( $t_account_page ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-columns "></i>
+		<?php print_icon( 'fa-columns', 'ace-icon' ); ?>
 		<?php echo lang_get( 'manage_columns_config' ) ?>
 	</h4>
 </div>
