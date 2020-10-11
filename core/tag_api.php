@@ -951,7 +951,7 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
 		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
-		echo '<i class="fa fa-times"></i>';
+		print_icon( 'fa-times' );
 		echo '</a>';
 	}
 
