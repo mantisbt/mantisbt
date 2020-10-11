@@ -75,6 +75,15 @@ if( $t_count > 0 ) { ?>
 	<?php
 	# Loop through results
 	for( $i=0; $i < $t_count; $i++ ) {
+		/**
+		 * @var int $v_id
+		 * @var int $v_project_id
+		 * @var int $v_poster_id
+		 * @var int $v_view_state
+		 * @var int $v_announcement
+		 * @var string $v_headline
+		 * @var int $v_date_posted
+		 */
 		extract( $t_rows[$i], EXTR_PREFIX_ALL, 'v' );
 		if( VS_PRIVATE == $v_view_state && !access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) {
 			continue;
@@ -90,12 +99,13 @@ if( $t_count > 0 ) { ?>
 			if( 1 == $v_announcement ) { ?>
 				<?php echo lang_get( 'announcement' ); ?><?php
 			}
-			if( VS_PRIVATE == $v_view_state ) { ?>
-				<div class="label label-info"><?php echo lang_get( 'private' ); ?></div><?php
-			} ?>
-		</p><?php
-	}  	# end for loop ?>
+			if( VS_PRIVATE == $v_view_state ) {
+		?>
+				<span class="label label-info"><?php echo lang_get( 'private' ); ?></span>
+		<?php } ?>
+		</p>
 <?php
+	}  	# end for loop
 }
 ?>
 	</div>
