@@ -79,11 +79,8 @@ This message define the directionality to be used for the given language.
 The only two possible values are:
 * ltr : for left-to-right scripts
 * rtl : for right-to-left scripts (eg: arabic, hebrew,...)';
-$s_actiongroup_menu_move = '{{Identical|Move}}';
 $s_actiongroup_menu_copy = '{{Identical|Copy}}';
 $s_actiongroup_menu_assign = '{{Identical|Assign}}';
-$s_actiongroup_menu_close = '{{Identical|Close}}';
-$s_actiongroup_menu_delete = '{{Identical|Delete}}';
 $s_actiongroup_menu_resolve = '{{Identical|Resolve}}';
 $s_actiongroup_menu_update_severity = 'in View issues, in a dropdown list of mass issue actions right below the issue list';
 $s_actiongroup_menu_update_view_status = 'Isto refere-se à visibilidade do bug (Privado ou público).
@@ -107,27 +104,18 @@ Link on bug report. See screenshot.
 $s_anonymous = '{{Identical|Anonymous}}';
 $s_assigned_projects = '{{Identical|Assigned project}}';
 $s_assigned_projects_label = '{{Identical|Assigned project}}';
-$s_print = '{{Identical|Print}}';
-$s_jump = 'Usado no contexto de escrever um nº de problema e ir para a página correspondente.
-{{Identical|Jump}}';
 $s_copy_versions_from = 'No es un lugar, es un objeto al que se hace referencia. No es "desde", es "de".';
 $s_field = '{{Identical|Field}}';
 $s_bugnote = '{{Identical|Note}}';
-$s_change = '{{Identical|Change}}';
 $s_announcement = '{{Identical|Announcement}}';
 $s_bug_relationships = '{{Identical|Relationship}}';
 $s_global_categories = '{{Identical|Global category}}';
-$s_login_link = '{{Identical|Login}}';
 $s_opensearch_id_short = '{{Identical|ID}}';
 $s_opensearch_text_short = '{{Identical|Text}}';
 $s_select_option = '{{Identical|Select}}';
 $s_view_status_bugs_conf_msg = 'Something to do with public vs. private bugs...';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
 $s_login_cookies_disabled = 'J\'ai mis "cookies" au lieu de "témoins" car c\'est le terme utilisé dans les paramètres des navigateurs (firefox, chrome).';
-$s_go_back = '{{Identical|Go back}}';
-$s_proceed = 'Message displayed after adding/editing/deleting something
-{{Identical|Proceed}}';
-$s_switch = '{{Identical|Switch}}';
 $s_prefix_for_deleted_users = '{{Identical|User}}';
 $s_administrator = '{{Identical|Administrator}}';
 $s_myself = '{{Identical|Myself}}';
@@ -173,7 +161,6 @@ $s_sponsor = '';
 $s_sponsor_verb = '';
 $s_amount = '{{Identical|Amount}}';
 $s_sponsor_show = '{{Identical|Show all}}';
-$s_delete_bug_button = '{{Identical|Delete}}';
 $s_monitor_bug_button = '{{Identical|Monitor}}';
 $s_upload_file = '{{Identical|Upload file}}';
 $s_upload_files = '{{Identical|Upload file}}';
@@ -223,20 +210,16 @@ $s_revision_by = 'Parameters:
 $s_revision_drop = '{{Identical|Drop}}';
 $s_activities_title = '{{Identical|Activity}}';
 $s_bug_notes_title = '{{Identical|Note}}';
-$s_delete_link = '{{Identical|Delete}}';
 $s_add_bugnote_title = '{{Identical|Add note}}';
 $s_add_bugnote_button = '{{Identical|Add note}}';
-$s_bugnote_edit_link = '{{Identical|Edit}}';
 $s_hide_content = '{{identical|Hide content}}';
 $s_show_content = '{{identical|Show content}}';
 $s_log_page_number = '{{Identical|Number}}';
 $s_log_page_event = '{{Identical|Event}}';
 $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
-$s_click_to_login = '{{Identical|Login}}';
 $s_login_title = '{{Identical|Login}}';
 $s_save_login = '';
-$s_login_button = '{{Identical|Login}}';
 $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';
 $s_archives = '{{Identical|Archive}}';
@@ -281,7 +264,6 @@ $s_plugin_author = '{{Identical|Author}}';
 $s_plugin_url = '{{Identical|Website}}';
 $s_plugin_priority = '{{Identical|Priority}}';
 $s_plugin_protected = '{{Identical|Protected}}';
-$s_plugin_update = '{{Identical|Update}}';
 $s_plugin_actions = '{{Identical|Action}}';
 $s_plugin_install = '{{Identical|Install}}';
 $s_plugin_upgrade = '{{Identical|Upgrade}}';
@@ -296,12 +278,10 @@ $s_private = '{{Identical|Private}}';
 $s_categories = '{{Identical|Category}}';
 $s_add_category_button = '{{Identical|Add category}}';
 $s_versions = '{{Identical|Version}}';
-$s_edit_link = '{{Identical|Edit}}';
 $s_actions = '{{Identical|Action}}';
 $s_version = '{{Identical|Version}}';
 $s_version_label = '{{Identical|Version}}';
 $s_timestamp = '{{Identical|Timestamp}}';
-$s_update = '{{Identical|Update}}';
 $s_unlink_link = '{{Identical|Unlink}}';
 $s_projects_title = '{{Identical|Project}}';
 $s_projects_title_label = '{{Identical|Project}}';
@@ -405,12 +385,7 @@ Button label on bug report filter screen. See screenshot.';
 $s_open_queries = '[[File:MantisBT-filter.png|150px|right]]
 Button label on bug report filter screen. See screenshot.';
 $s_owner = '{{Identical|Owner}}';
-$s_delete_filter_button = '{{Identical|Delete}}';
-$s_update_bug_button = '{{Identical|Edit}}';
-$s_close_bug_button = '{{Identical|Close}}';
-$s_move_bug_button = '{{Identical|Move}}';
 $s_publish = '{{Identical|Publish}}';
-$s_add_user_to_monitor = '{{Identical|Add}}';
 $s_custom_field = '{{Identical|Field}}';
 $s_custom_field_label = '{{Identical|Field}}';
 $s_custom_field_name = '{{Identical|Name}}';
@@ -429,9 +404,7 @@ $s_changelog = '{{Identical|Change log}}';
 $s_resolved_progress = '<code>%3$d%%</code> is a percentage with a % escaped with %. Maybe you have to add a blank for your language (<code>{{int:percent|%3$d}}%</code>)';
 $s_bug = '{{Identical|Issue}}';
 $s_bugs = '{{Identical|Issue}}';
-$s_add_new_relationship_button = '{{Identical|Add}}';
 $s_replace_relationship_button = '{{Identical|Replace}}';
-$s_delete_relationship_button = '{{Identical|Delete}}';
 $s_create_child_bug_button = '{{Identical|Clone}}';
 $s_copy_notes_from_parent = 'MantisBT HP:
 https://en.wikipedia.org/wiki/Mantis_Bug_Tracker
@@ -446,7 +419,6 @@ $s_update_view_status = 'This is a button text for the "private/public" toggle f
 $s_notes = '{{Identical|Note}}';
 $s_add_notes = '{{Identical|Add note}}';
 $s_news = '{{Identical|News}}';
-$s_delete_attachment_button = '{{Identical|Delete}}';
 $s_filters = '{{Identical|Filter}}';
 $s_create_project = '{{Identical|Create project}}';
 $s_others = '{{Identical|Other}}';
@@ -459,12 +431,6 @@ $s_after_date = '{{Identical|After}}';
 $s_from_date = '{{Identical|From}}';
 $s_to_date = '{{Identical|To}}';
 $s_on_date = '{{Identical|On}}';
-$s_on = 'Switch condition (for filter, for example)
-
-{{Identical|On}}';
-$s_off = 'Switch condition (for filter, for example)
-
-{{Identical|Off}}';
 $s_wiki = '{{Identical|Wiki}}';
 $s_tags = '{{Identical|Tag}}';
 $s_tag_name = '{{Identical|Name}}';
@@ -514,3 +480,17 @@ $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expec
 $s_save = '{{Identical|Save}}';
 $s_reset = '{{Identical|Reset}}';
 $s_load = '{{Identical|Load}}';
+$s_edit = '{{Identical|Edit}}';
+$s_update = '{{Identical|Update}}';
+$s_delete = '{{Identical|Delete}}';
+$s_print = '{{Identical|Print}}';
+$s_jump = 'Usado no contexto de escrever um nº de problema e ir para a página correspondente.
+{{Identical|Jump}}';
+$s_change = '{{Identical|Change}}';
+$s_go_back = '{{Identical|Go back}}';
+$s_proceed = 'Message displayed after adding/editing/deleting something
+{{Identical|Proceed}}';
+$s_move = '{{Identical|Move}}';
+$s_close = '{{Identical|Close}}';
+$s_add = '{{Identical|Add}}';
+$s_login = '{{Identical|Login}}';

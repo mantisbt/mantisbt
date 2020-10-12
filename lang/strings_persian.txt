@@ -59,11 +59,8 @@
  */
 
 $s_directionality = 'rtl';
-$s_actiongroup_menu_move = 'انتقال';
 $s_actiongroup_menu_copy = 'رونوشت';
 $s_actiongroup_menu_assign = 'اختصاص دادن';
-$s_actiongroup_menu_close = 'بستن';
-$s_actiongroup_menu_delete = 'حذف';
 $s_actiongroup_menu_resolve = 'حل‌کردن';
 $s_actiongroup_menu_update_priority = 'روزآمدسازی اولویت';
 $s_actiongroup_menu_update_status = 'روزآمدسازی وضعیت';
@@ -102,8 +99,6 @@ $s_view_submitted_bug_link = 'نمایش مسئله‌ی %1$s (الان ثبت�
 $s_assigned_projects = 'پروژه‌های اختصاص‌داده‌شده';
 $s_assigned_projects_label = 'پروژه‌های اختصاص‌داده‌شده';
 $s_unassigned_projects_label = 'پروژه‌های بدون‌اختصاص';
-$s_print = 'چاپ';
-$s_jump = 'پرش';
 $s_copy_users = 'رونوشت کاربران';
 $s_copy_categories_from = 'رونوشت دسته‌ها از';
 $s_copy_categories_to = 'رونوشت دسته‌ها به';
@@ -117,7 +112,6 @@ $s_old_value = 'مقدار قبلی';
 $s_new_value = 'مقدار جدید';
 $s_date_modified = 'تاریخ ویرایش‌شده';
 $s_bugnote = 'یادداشت';
-$s_change = 'تغییر';
 $s_bugnote_view_state = 'حالت نمایش یادداشت';
 $s_bug_monitor = 'مسئلۀ پیگیری‌شده';
 $s_bug_end_monitor = 'پایان پیگیری مسئله';
@@ -156,7 +150,6 @@ $s_bug_deleted = 'مسئله حذف شد';
 $s_make_private = 'خصوصی کردن';
 $s_make_public = 'عمومی کردن';
 $s_create_new_project_link = 'ایجاد پروژه جدید';
-$s_login_link = 'ورود';
 $s_opensearch_id_short = '%s شناسه';
 $s_opensearch_id_description = '%s: جستجو با شناسه مسئله';
 $s_opensearch_text_short = '%s متن';
@@ -209,9 +202,6 @@ $s_bugnote_description = 'توضیحات نوشته';
 $s_error_no_proceed = 'لطفا از کلید "Back" مرورگر خود برای بازگشت به صفحه ی قبل استفاده کنید. مشکلاتی که در این اخطار شناسایی شده را می توانید اصلاح کنید یا فعالیت دیگری انجام دهید. همچنین می توانید یک گزینه را از نوار منو انتخاب کنید تا مستقیماً به بخش دیگری بروید.';
 $s_login_error = 'حساب شما ممکن است غیرفعال یا بسته شده باشد و یا نام کاربری/رمز عبور واردشده نادرست است.';
 $s_login_cookies_disabled = 'مرورگر شما یا نمی‌داند که چطور به کوکی‌ها رسیدگی کند، یا رسیدگی به آن‌ها را قبول نمی‌کند.';
-$s_go_back = 'بازگشت';
-$s_proceed = 'ادامه';
-$s_switch = 'سوئیچ';
 $s_logged_in_as = 'وارد شدید با عنوان';
 $s_prefix_for_deleted_users = 'کاربر';
 $s_administrator = 'مدیریت';
@@ -395,7 +385,6 @@ $s_close_immediately = 'بستن سریع:';
 $s_closed_bug_title = 'بستن مسئله';
 $s_bug_deleted_msg = 'مسئله حذف شده است...';
 $s_delete_bug_sure_msg = 'مطمئنید می‌خواهید این مسئله را حذف کنید؟';
-$s_delete_bug_button = 'حذف';
 $s_monitor_bug_button = 'پیگیری';
 $s_unmonitor_bug_button = 'لغو پیگیری';
 $s_upload_file = 'بارگذاری پرونده';
@@ -468,16 +457,13 @@ $s_revision_by = '%1$s همراه %2$s';
 $s_all_revisions = 'همهٔ نسخه‌ها';
 $s_back_to_issue = 'بازگشت به مسئله';
 $s_activities_title = 'فعالیت​ها';
-$s_vote_added_msg = 'رأی اضافه شد...';
 $s_bugnote_attached_files = 'پرونده​های پیوست​شده:';
 $s_bugnote_deleted_msg = 'یادداشت با موفقیت حذف شد...';
 $s_bug_notes_title = 'یادداشت ها';
 $s_edit_bugnote_title = 'ویرایش یادداشت';
 $s_no_bugnotes_msg = 'هیچ یادداشتی به این مسئله پیوست نشده است.';
-$s_delete_link = 'حذف';
 $s_add_bugnote_title = 'افزودن یادداشت';
 $s_add_bugnote_button = 'افزودن یادداشت';
-$s_bugnote_edit_link = 'ویرایش';
 $s_closed_bug_button = 'بستن مسئله';
 $s_bugnote_updated_msg = 'یادداشت با موفقیت روزآمد شد...';
 $s_last_edited = 'آخرین ویرایش:';
@@ -491,7 +477,6 @@ $s_log_page_time = 'مدت زمان اجرا';
 $s_log_page_caller = 'تماس‌گیرنده';
 $s_log_page_event = 'رویداد';
 $s_please_report = 'لطفا این مورد را به %1$s گزارش دهید.';
-$s_click_to_login = 'ورود';
 $s_warning_plain_password_authentication = '<strong>هشدار:</strong> از گذرواژه آشکار استفاده شده، این کار گذرواژه خود را برای مدیران نمایان می‌کند.';
 $s_warning_default_administrator_account_present = '<strong>هشدار:</strong> شما باید حساب کاربری \'administrator\' پیش‌فرض را غیرفعال یا گذرواژه آن را تغییر دهید.';
 $s_warning_admin_directory_present = '<strong>هشدار:</strong> پوشه "admin" باید حذف شود، یا دسترسی به آن محدود شود.';
@@ -507,7 +492,6 @@ $s_save_login = 'ورود مرا به سیستم حفظ کن';
 $s_secure_session = 'جلسۀ امن';
 $s_secure_session_long = 'فقط ورود شما(این جلسه) از این IP اجازه داده شود.';
 $s_choose_project = 'انتخاب کردن پروژه';
-$s_login_button = 'ورود';
 $s_signup_link = 'ثبت نام حساب کاربری جدید';
 $s_lost_password_link = 'گذرواژه‌تان را فراموش کردید؟';
 $s_username_or_email = 'نام کاربری یا آدرس ایمیل';
@@ -649,7 +633,6 @@ $s_plugin_depends = 'پیش‌نیازها';
 $s_plugin_no_depends = 'بدون پیش‌نیاز';
 $s_plugin_priority = 'اولویت';
 $s_plugin_protected = 'محافظت‌شده';
-$s_plugin_update = 'روزآمدسازی';
 $s_plugin_actions = 'اقدامات';
 $s_plugin_install = 'نصب';
 $s_plugin_upgrade = 'ارتقاء';
@@ -691,12 +674,10 @@ $s_add_and_edit_category_button = 'افزودن و ویرایش دسته';
 $s_versions = 'نسخه‌ها';
 $s_add_version_button = 'افزودن نسخه';
 $s_add_and_edit_version_button = 'افزودن و ویرایش نسخه';
-$s_edit_link = 'ویرایش';
 $s_actions = 'اقدامات';
 $s_version = 'نسخه';
 $s_version_label = 'نسخه:';
 $s_timestamp = 'برچسب زمان';
-$s_update = 'روزآمدسازی';
 $s_subprojects = 'پروژه فرعی';
 $s_add_subproject = 'افزودن به عنوان پروژه فرعی';
 $s_create_new_subproject_link = 'ایجاد پروژه فرعی جدید';
@@ -941,21 +922,16 @@ $s_stored_project = 'پروژه ذخیره‌شده';
 $s_available_filter_for_project = 'پالایه‌های موجود برای پروژه';
 $s_manage_filter_page_title = 'مدیریت پالایه‌ها';
 $s_manage_filter_edit_page_title = 'ویرایش پالایه';
-$s_delete_filter_button = 'حذف';
 $s_apply_filter_button = 'اعمال';
 $s_temporary_filter = 'پالایه‌ی موقت';
 $s_set_as_persistent_filter = 'تنظیم به عنوان پالایه پیش‌فرض';
 $s_view_simple_link = 'نمایش ساده';
 $s_product_build = 'Build محصول';
-$s_update_bug_button = 'ویرایش';
 $s_bug_assign_to_button = 'اختصاص به:';
 $s_bug_status_to_button = 'تغییر وضعیت به:';
 $s_reopen_bug_button = 'بازگشایی';
-$s_close_bug_button = 'بستن';
-$s_move_bug_button = 'انتقال';
 $s_attached_files = 'پرونده​های پیوست​شده';
 $s_publish = 'انتشار';
-$s_add_user_to_monitor = 'افزودن';
 $s_bug_view_title = 'نمایش جزئیات مسئله';
 $s_no_users_monitoring_bug = 'هیچ کسی این مسئله را پیگیری نمی‌کند.';
 $s_users_monitoring_bug = 'کابرانِ پیگیری‌کننده‌ی این مسئله';
@@ -1038,7 +1014,6 @@ $s_http_auth_realm = 'ورود MantisBT';
 $s_bug = 'مسئله';
 $s_bugs = 'مسائل';
 $s_add_new_relationship = 'نسبت جدید';
-$s_add_new_relationship_button = 'افزودن';
 $s_this_bug = 'مسئله‌ی فعلی';
 $s_relationship_added = 'نسبت اضافه شد';
 $s_relationship_deleted = 'نسبت حذف شد';
@@ -1046,7 +1021,6 @@ $s_no_relationship = 'هیچ نسبتی نیست';
 $s_relationship_replaced = 'نسبت جایگزین شد';
 $s_replace_relationship_button = 'جایگزینی';
 $s_relationship_with_parent = 'نسبت با مسئله والد';
-$s_delete_relationship_button = 'حذف';
 $s_delete_relationship_sure_msg = 'آیا مطمئنید می‌خواهید این نسبت را حذف کنید؟';
 $s_relationship_warning_blocking_bugs_not_resolved = 'هنوز هیچ فرزندی از این مسئله حل یا بسته نشده.';
 $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>توجه:</strong> هنوز هیچ فرزندی از این مسئله حل یا بسته نشده است.<br />قبل از <strong>حل‌کردن/بستن</strong> یک مسئله والد، تمام مسائلی که نسبت فرزند با این مسئله دارند باید حل یا بسته شوند.';
@@ -1089,7 +1063,6 @@ $s_manage_news = 'مدیریت اخبار';
 $s_view_list_of_attachments = 'نمایش لیستی از پیوست‌ها';
 $s_download_attachments = 'بارگیری پیوست‌ها';
 $s_delete_attachments = 'حذف پیوست‌ها';
-$s_delete_attachment_button = 'حذف';
 $s_delete_attachment_sure_msg = 'آیا مطمئنید می‌خواهید این پیوست را حذف کنید؟';
 $s_upload_issue_attachments = 'بارگذاری پیوست‌های مسئله';
 $s_filters = 'پالایه‌ها';
@@ -1134,8 +1107,6 @@ $s_on_or_after_date = 'در تاریخ یا بعد';
 $s_from_date = 'از';
 $s_to_date = 'به';
 $s_on_date = 'روشن';
-$s_on = 'روشن';
-$s_off = 'خاموش';
 $s_wiki = 'ویکی';
 $s_tags = 'برچسب‌ها';
 $s_tag_details = 'جزئیات برچسب: %1$s';
@@ -1290,4 +1261,16 @@ $s_dropzone_remove_file = 'حذف پرونده';
 $s_dropzone_max_files_exceeded = 'شما نمی‌توانید پروندهٔ دیگری بارگذاری کنید.';
 $s_save = 'ذخیره';
 $s_reset = 'بازنشانی';
+$s_edit = 'ویرایش';
+$s_update = 'روزآمدسازی';
+$s_delete = 'حذف';
 $s_make_default = 'تنظیم به عنوان پیش​فرض';
+$s_print = 'چاپ';
+$s_jump = 'پرش';
+$s_change = 'تغییر';
+$s_go_back = 'بازگشت';
+$s_proceed = 'ادامه';
+$s_move = 'انتقال';
+$s_close = 'بستن';
+$s_add = 'افزودن';
+$s_login = 'ورود';
