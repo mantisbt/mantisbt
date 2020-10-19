@@ -59,6 +59,7 @@
  * @author Macofe
  * @author MarcoAurelio
  * @author McDutchie
+ * @author Mpayansilva
  * @author Nicolas Ramirez
  * @author Pertile
  * @author Peter17
@@ -361,7 +362,9 @@ $s_timezone = 'Huso horario';
 $s_prefs_reset_msg = 'Las preferencias han sido restablecidas…';
 $s_prefs_updated_msg = 'Las preferencias han sido actualizadas…';
 $s_select_profile = 'Seleccionar perfil';
+$s_add_profile = 'Añadir perfil';
 $s_edit_profile = 'Editar perfil';
+$s_update_profile = 'Actualizar perfil';
 $s_delete_profile = 'Eliminar perfil';
 $s_delete_profile_confirm_msg = '¿Confirmas que quieres eliminar el perfil «%1$s»?';
 $s_global_profile = 'Perfil global';
