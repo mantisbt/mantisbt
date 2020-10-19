@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author A2y4
  * @author Aotake
  * @author Fryed-peach
  * @author Gulpin
@@ -349,8 +350,14 @@ $s_timezone = 'タイムゾーン';
 $s_prefs_reset_msg = '設定をリセットしました...';
 $s_prefs_updated_msg = '設定を更新しました...';
 $s_select_profile = 'プロフィールを選択';
+$s_add_profile = 'プロフィールの追加';
 $s_edit_profile = 'プロフィールを編集';
+$s_update_profile = 'プロフィールを更新';
 $s_delete_profile = 'プロフィールを削除';
+$s_delete_profile_confirm_msg = '本当にプロフィール "%1$s" を削除しますか？';
+$s_global_profile = 'グローバルプロフィール';
+$s_default_profile = '既定のプロフィール';
+$s_profile_description = 'システムの詳細説明';
 $s_my_sponsorship = '自分の支援';
 $s_update_sponsorship_button = '支払のステータスの変更';
 $s_no_sponsored = 'あなたが担当する課題には支援されているものはありません。';
@@ -1403,9 +1410,11 @@ $s_load = '読み込み';
 $s_apply_changes = '変更を適用';
 $s_undo = '元に戻す';
 $s_edit = '編集';
+$s_submit = '送信';
 $s_update = '更新';
 $s_delete = '削除';
 $s_make_default = '既定にする';
+$s_clear_default = '既定にクリア';
 $s_print = '印刷';
 $s_jump = 'ジャンプ';
 $s_change = '変更内容';

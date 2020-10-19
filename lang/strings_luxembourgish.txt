@@ -163,6 +163,7 @@ $s_timezone = 'Zäitzon';
 $s_prefs_reset_msg = 'D\'Astellunge goufen zeréckgesat...';
 $s_select_profile = 'Profil eraussichen';
 $s_edit_profile = 'Profil änneren';
+$s_update_profile = 'Profil aktualiséieren';
 $s_delete_profile = 'Profil läschen';
 $s_global_profile = 'Globale Profil';
 $s_default_profile = 'Standard-profil';

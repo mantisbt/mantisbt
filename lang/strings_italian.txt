@@ -50,6 +50,7 @@
  * @author Giallu
  * @author Gianfranco
  * @author Greis
+ * @author Luca.favorido
  * @author Massimo itaca
  * @author Massimo1403
  * @author McDutchie
@@ -353,9 +354,12 @@ $s_timezone = 'Fuso orario';
 $s_prefs_reset_msg = 'Le preferenze sono state resettate...';
 $s_prefs_updated_msg = 'Le tue preferenze sono state modificate...';
 $s_select_profile = 'Seleziona il profilo';
+$s_add_profile = 'Aggiungi profilo';
 $s_edit_profile = 'Modifica il profilo';
+$s_update_profile = 'Aggiorna il profilo';
 $s_delete_profile = 'Elimina il profilo';
 $s_global_profile = 'Profilo globale';
+$s_profile_description = 'Descrizione del sistema';
 $s_my_sponsorship = 'Mie sponsorizzazioni';
 $s_update_sponsorship_button = 'Modifica lo stato del pagamento';
 $s_no_sponsored = 'Non vi sono anomalie sponsorizzate assegnate a te.';
@@ -1407,6 +1411,7 @@ $s_load = 'Carica';
 $s_apply_changes = 'Applica modifiche';
 $s_undo = 'Annulla';
 $s_edit = 'Modifica';
+$s_submit = 'Invia';
 $s_update = 'Aggiorna';
 $s_delete = 'Cancella';
 $s_make_default = 'Imposta come default';

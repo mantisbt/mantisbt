@@ -346,6 +346,7 @@ $s_prefs_reset_msg = 'التفضيلات تمت إعادة ضبطها...';
 $s_prefs_updated_msg = 'التفضيلات تم حذفها...';
 $s_select_profile = 'اختر الملف';
 $s_edit_profile = 'عدل الملف';
+$s_update_profile = 'تحديث الملف الشخصي';
 $s_delete_profile = 'حذف الملف';
 $s_my_sponsorship = 'عمليات رعايتي';
 $s_update_sponsorship_button = 'تغيير حالة الدفع';
