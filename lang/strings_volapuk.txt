@@ -39,6 +39,7 @@
  * @file
  *
  * @author Malafaya
+ * @author Robin van der Vliet
  * @author Smeira
  */
 
@@ -403,6 +404,18 @@ $s_tag_created = 'Jafadät';
 $s_tag_statistics = 'Gebamastatits';
 $s_copy_columns_from = 'Kopiedön Padülis Se';
 $s_copy_columns_to = 'Kopiedön Padülis Lü';
+$s_month_january = 'yanul';
+$s_month_february = 'febul';
+$s_month_march = 'mäzul';
+$s_month_april = 'prilul';
+$s_month_may = 'mayul';
+$s_month_june = 'yunul';
+$s_month_july = 'yulul';
+$s_month_august = 'gustul';
+$s_month_september = 'setul';
+$s_month_october = 'tobul';
+$s_month_november = 'novul';
+$s_month_december = 'dekul';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Pöl ejenon dü dun at. Nunolös, begö! pöli at guvane topik ola.';
 $MANTIS_ERROR[ERROR_SQL] = 'Pöl-SQL petuvon.';
 $MANTIS_ERROR[ERROR_REPORT] = 'In nunod oli ädabinon pöl.';
