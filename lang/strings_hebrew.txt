@@ -49,6 +49,7 @@
  * @author YaronSh
  * @author Yona b
  * @author דגש חזק
+ * @author ישראל קלר
  */
 
 $s_directionality = 'rtl';
@@ -338,6 +339,7 @@ $s_prefs_reset_msg = 'ההעדפות שוחזרו לברירת המחדל';
 $s_prefs_updated_msg = 'ההעדפות עודכנו';
 $s_select_profile = 'בחירת פרופיל';
 $s_edit_profile = 'עריכת פרופיל';
+$s_update_profile = 'עדכן פרופיל';
 $s_delete_profile = 'מחיקת פרופיל';
 $s_my_sponsorship = 'חסויות שלי';
 $s_update_sponsorship_button = 'לשנות מצב תשלום';
