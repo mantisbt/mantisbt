@@ -1520,7 +1520,7 @@ if( $g_failed && $t_install_state != 1 ) {
 				? CONFIGURED_PASSWORD
 				: string_attribute( $f_db_password );
 		?>">
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username )?>">
 		<input name="admin_password" type="hidden" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
