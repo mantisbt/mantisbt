@@ -43,6 +43,7 @@
  * @author HanV
  * @author Hansmuller
  * @author LongJohn nl
+ * @author Marcelhospers
  * @author McDutchie
  * @author MedShot
  * @author Mraedis
@@ -230,6 +231,7 @@ $s_new_account_signup_msg = 'De volgende account is aangemaakt:';
 $s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoordwijziging aangevraagd met e-mailbevestiging. Als u dit niet was, dan kunt u dit bericht negeren.
 
 Als u deze wijziging wilt voortzetten, bezoek dan de volgende URL om uw wachtwoord te wijzigen:';
+$s_reset_request_admin_msg = 'Je wachtwoord is gereset. Bezoek de volgende URL om een nieuwe aan te maken:';
 $s_reset_request_in_progress_msg = 'Als u de gebruikersnaam en e-mailadres juist heeft opgegeven, sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kunt wijzigen.';
 $s_email_notification_title_for_status_bug_new = 'De volgende melding is NIEUW (opnieuw)';
 $s_email_notification_title_for_status_bug_feedback = 'De volgende melding wacht op uw TERUGKOPPELING.';
@@ -346,8 +348,11 @@ $s_timezone = 'Tijdzone';
 $s_prefs_reset_msg = 'Instellingen zijn teruggezet op begininstellingen.';
 $s_prefs_updated_msg = 'Instellingen zijn aangepast...';
 $s_select_profile = 'Profiel selecteren';
+$s_add_profile = 'Profiel toevoegen';
 $s_edit_profile = 'Profiel bewerken';
+$s_update_profile = 'Profiel bijwerken';
 $s_delete_profile = 'Profiel verwijderen';
+$s_profile_description = 'Systeembeschrijving';
 $s_my_sponsorship = 'Door mij gespronsord';
 $s_update_sponsorship_button = 'Betalingsstatus wijzigen';
 $s_no_sponsored = 'Er zijn geen gesponsorde meldingen aan u toegewezen.';
@@ -1117,6 +1122,7 @@ $s_email_on_sponsorship_changed = 'E-mail bij wijziging sponsoring';
 $s_email_on_relationship_changed = 'E-mail bij wijziging relaties';
 $s_email_on_updated = 'E-mail bij bijwerken';
 $s_email_on_monitor = 'E-mailadres voor als de gebruiker wordt bewaakt';
+$s_create_new_tags = 'Een nieuwe tag aanmaken';
 $s_loading = 'Bezig met laden…';
 $s_between_date = 'Tussen';
 $s_on_or_before_date = 'Op of voor';
@@ -1189,6 +1195,8 @@ $s_copy_columns_to = 'Kolommen kopiëren naar';
 $s_due_date = 'Plandatum';
 $s_overdue = 'Uit planning';
 $s_overdue_since = 'Achterstallig sinds %1$s';
+$s_overdue_one_day = 'Achterstallig in een dag';
+$s_overdue_days = 'Achterstallig in %1$d dagen';
 $s_view_account_title = 'Gebruikersgegevens';
 $s_manage_user = 'Gebruiker beheren';
 $s_label = '%1$s:';
@@ -1239,7 +1247,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'De map bestaat niet. Controleer de projecti
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Een verplicht veld ("%1$s") is niet ingevuld. Controleer uw invoer.';
 $MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Ongeldige waarde voor \'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Deze gebruiker is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Dit account is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Toegang geweigerd.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Toevoegen bestand mislukt omdat het niet door MantisBT gelezen kon worden. Controleer de projectinstellingen.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Toevoegen bestand mislukt.  Dit komt waarschijnlijk doordat het bestand groter is dan toegestaan door deze PHP-installatie.';
@@ -1389,6 +1397,7 @@ $s_load = 'Laden';
 $s_apply_changes = 'Wijzigingen toepassen';
 $s_undo = 'Ongedaan maken';
 $s_edit = 'Bewerken';
+$s_submit = 'Verzenden';
 $s_update = 'Bijwerken';
 $s_delete = 'Verwijderen';
 $s_make_default = 'Als standaard instellen';

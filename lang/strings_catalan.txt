@@ -280,6 +280,7 @@ $s_email_summary = 'Resum';
 $s_email_description = 'Descripció';
 $s_email_additional_information = 'Informació addicional';
 $s_email_steps_to_reproduce = 'Passos per reproduir-ho';
+$s_email_tag = 'Etiquetes';
 $s_account_protected_msg = 'Compte protegit. No és possible canviar-ne la configuració...';
 $s_account_removed_msg = 'El seu compte ha estat eliminat...';
 $s_confirm_delete_msg = 'Esteu segur que voleu suprimir el vostre compte?';
