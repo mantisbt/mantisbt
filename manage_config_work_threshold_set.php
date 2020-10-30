@@ -190,6 +190,7 @@ set_capability_row( 'update_readonly_bug_threshold' );
 set_capability_row( 'update_bug_status_threshold' );
 set_capability_row( 'set_view_status_threshold' );
 set_capability_row( 'change_view_status_threshold' );
+set_capability_row( 'set_bug_sticky_threshold' );
 set_capability_row( 'show_monitor_list_threshold' );
 set_capability_row( 'monitor_add_others_bug_threshold' );
 set_capability_row( 'monitor_delete_others_bug_threshold' );
