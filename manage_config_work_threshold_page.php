@@ -393,6 +393,7 @@ get_capability_row( lang_get( 'update_issue_status' ), 'update_bug_status_thresh
 get_capability_row( lang_get( 'view_private_issues' ), 'private_bug_threshold' );
 get_capability_row( lang_get( 'set_view_status' ), 'set_view_status_threshold' );
 get_capability_row( lang_get( 'update_view_status' ), 'change_view_status_threshold' );
+get_capability_row( lang_get( 'set_sticky' ), 'set_bug_sticky_threshold' );
 get_capability_row( lang_get( 'show_list_of_users_monitoring_issue' ), 'show_monitor_list_threshold' );
 get_capability_row( lang_get( 'add_users_monitoring_issue' ), 'monitor_add_others_bug_threshold' );
 get_capability_row( lang_get( 'remove_users_monitoring_issue' ), 'monitor_delete_others_bug_threshold' );
