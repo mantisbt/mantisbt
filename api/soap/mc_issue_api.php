@@ -388,7 +388,7 @@ function mci_issue_get_due_date( BugData $p_bug ) {
  * @param boolean $p_log_insert     Create history logs for new values.
  * @return boolean|SoapFault|RestFault true for success, otherwise fault.
  */
-function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert ) {
+function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = null, $p_log_insert = true ) {
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
