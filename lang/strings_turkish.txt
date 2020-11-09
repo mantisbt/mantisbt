@@ -1092,6 +1092,7 @@ $s_update_readonly_issues = 'Yalnızca okunabilir sorunları güncelle';
 $s_update_issue_status = 'Sorun durumunu güncelle';
 $s_set_view_status = 'Yeni bir sorun veya not bildirirken görünüm durumunu ayarla';
 $s_update_view_status = 'Mevcut sayının veya notun görünüm durumunu değiştir';
+$s_set_sticky = 'Bir sorunu yapıştırın / çıkartın';
 $s_show_list_of_users_monitoring_issue = 'Bu sorunu izleyenlerin listesini göster';
 $s_add_users_monitoring_issue = 'Bir soruna monitör ekle';
 $s_remove_users_monitoring_issue = 'Bir sorundan monitörleri kaldırın';

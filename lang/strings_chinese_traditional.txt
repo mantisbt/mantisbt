@@ -1081,6 +1081,7 @@ $s_update_readonly_issues = '更新唯讀問題';
 $s_update_issue_status = '更新問題狀態';
 $s_set_view_status = '當回報新問題或說明時設定檢視狀態';
 $s_update_view_status = '更改現有問題或說明的檢視狀態';
+$s_set_sticky = '置頂/取消置頂問題';
 $s_show_list_of_users_monitoring_issue = '顯示追蹤此問題的使用者清單';
 $s_add_users_monitoring_issue = '新增追蹤到問題裡';
 $s_remove_users_monitoring_issue = '從問題上移除追蹤';
