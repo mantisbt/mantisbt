@@ -86,17 +86,12 @@ function auth_flags( $p_user_id = null, $p_username = '' ) {
 		# If user id is not provided and user is not authenticated return default flags.
 		# Otherwise, we can get into a loop as in #22740
 		if( !auth_is_user_authenticated() ) {
-			return new AuthFlags();
+			$t_user_id = NO_USER;
+		} else {
+			$t_user_id = auth_get_current_user_id();
 		}
-
-		$t_user_id = auth_get_current_user_id();
 	} else {
 		$t_user_id = (int)$p_user_id;
-	}
-
-	if( !$t_user_id && is_blank( $p_username ) ) {
-		# If user is not in db, must supply the name.
-		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
 	if( $t_user_id ) {
