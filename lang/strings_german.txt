@@ -1090,6 +1090,7 @@ $s_update_readonly_issues = 'Schreibgeschützte Einträge aktualisieren';
 $s_update_issue_status = 'Eintragsstatus aktualisieren';
 $s_set_view_status = 'Sichtbarkeitsstatus beim Erfassen eines neuen Eintrags oder einer Notiz festlegen';
 $s_update_view_status = 'Sichtbarkeitsstatus eines vorhandenen Eintrags oder einer Notiz ändern';
+$s_set_sticky = 'Fixierung setzen / lösen';
 $s_show_list_of_users_monitoring_issue = 'Liste der Benutzer anzeigen, die einen Eintrag beobachten';
 $s_add_users_monitoring_issue = 'Benutzer als Beobachter eines Eintrags hinzufügen';
 $s_remove_users_monitoring_issue = 'Benutzer als Beobachter eines Eintrags entfernen';

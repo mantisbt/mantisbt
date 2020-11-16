@@ -1091,6 +1091,7 @@ $s_update_readonly_issues = 'Atualizar tarefas somente-leitura';
 $s_update_issue_status = 'Atualizar status da tarefa';
 $s_set_view_status = 'Estabelecer visibilidade quando estiver reportando um problema ou nota';
 $s_update_view_status = 'Mudar visibilidade de um problema ou nota existente';
+$s_set_sticky = 'Fixar / desvincular um problema';
 $s_show_list_of_users_monitoring_issue = 'Ver lista de usuários monitorando a tarefa';
 $s_add_users_monitoring_issue = 'Adicione monitores a um problema';
 $s_remove_users_monitoring_issue = 'Remover monitores de um problema';
