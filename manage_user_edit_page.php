@@ -367,10 +367,21 @@ if( $t_reset || $t_unlock || $t_delete || $t_impersonate ) {
 
 <?php
 } # End of PROJECT ACCESS conditional section
-echo '</div>';
+?>
 
+<!-- ACCOUNT PREFERENCES -->
+<?php
 define( 'ACCOUNT_PREFS_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/account_prefs_inc.php' );
-edit_account_prefs( $t_user['id'], false, false, 'manage_user_edit_page.php?user_id=' . $t_user_id );
+edit_account_prefs(
+	$t_user['id'],
+	false,
+	false,
+	'manage_user_edit_page.php?user_id=' . $t_user_id
+);
+?>
 
+</div>
+
+<?php
 layout_page_end();
