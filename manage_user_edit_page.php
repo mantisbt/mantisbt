@@ -98,7 +98,6 @@ $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& auth_can_set_password( $t_user['id'] )
 	&& user_is_enabled( $t_user['id'] )
 	&& !user_is_protected( $t_user['id'] );
-$t_unlock = !user_is_login_request_allowed( $t_user['id'] );
 $t_delete = !( user_is_administrator( $t_user_id )
 	&& user_count_level( config_get_global( 'admin_site_threshold' ) ) <= 1
 );
@@ -280,8 +279,9 @@ print_manage_menu( 'manage_user_page.php' );
 <?php
 							$t_max_failed = config_get( 'max_failed_login_count' );
 							$t_failed_login_count = (int)$t_user['failed_login_count'];
+							$t_is_locked =  $t_failed_login_count >= $t_max_failed;
 							echo $t_failed_login_count;
-							if( OFF != $t_max_failed && $t_failed_login_count >= $t_max_failed ) {
+							if( OFF != $t_max_failed && $t_is_locked) {
 								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
 							}
 ?>
@@ -342,11 +342,12 @@ print_manage_menu( 'manage_user_page.php' );
 	}
 
 	# Unlock account button
-	if( $t_unlock ) {
+	if( $t_failed_login_count > 0 ) {
+		$t_btn_label = $t_is_locked ? 'account_unlock_button' : 'clear_failed_logins';
 ?>
 				<button name="unlock" formaction="manage_user_reset.php"
 						class="btn btn-primary btn-white btn-round">
-					<?php echo lang_get( 'account_unlock_button' ) ?>
+					<?php echo lang_get( $t_btn_label ); ?>
 				</button>
 <?php
 	}

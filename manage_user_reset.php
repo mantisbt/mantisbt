@@ -86,6 +86,9 @@ switch( $t_result['action'] ) {
 	case UserResetPasswordCommand::UNLOCK:
 		html_operation_successful( $t_redirect_url, lang_get( 'account_unlock_msg' ) );
 		break;
+	case UserResetPasswordCommand::CLEAR:
+		html_operation_successful( $t_redirect_url, lang_get( 'clear_failed_logins_msg' ) );
+		break;
 }
 
 layout_page_end();
