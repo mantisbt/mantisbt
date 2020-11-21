@@ -80,6 +80,10 @@ if( is_blank( $f_username ) ) {
 }
 
 $t_user = user_get_row( $t_user_id );
+if( !$t_user ) {
+	error_parameters( $t_user_id );
+	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR);
+}
 
 # Ensure that the account to be updated is of equal or lower access to the
 # current user.
