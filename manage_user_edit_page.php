@@ -309,6 +309,7 @@ print_manage_menu( 'manage_user_page.php' );
 					<?php echo lang_get( 'notify_user' ) ?>
 				</span>
 			</label>
+
 <?php } ?>
 			<div class="btn-group pull-right">
 <?php
@@ -329,13 +330,23 @@ print_manage_menu( 'manage_user_page.php' );
 <?php
 	}
 
-	# Reset/Unlock Button
-	if( $t_reset || $t_unlock ) {
+	# Reset Password Button
+	if( $t_reset ) {
 ?>
-				<button formaction="manage_user_reset.php"
+				<button name="reset" formaction="manage_user_reset.php"
 						title="<?php echo $t_reset_password_msg ?>"
 						class="btn btn-primary btn-white btn-round">
-					<?php echo lang_get( $t_reset ? 'reset_password_button' : 'account_unlock_button' ) ?>
+					<?php echo lang_get( 'reset_password_button' ) ?>
+				</button>
+<?php
+	}
+
+	# Unlock account button
+	if( $t_unlock ) {
+?>
+				<button name="unlock" formaction="manage_user_reset.php"
+						class="btn btn-primary btn-white btn-round">
+					<?php echo lang_get( 'account_unlock_button' ) ?>
 				</button>
 <?php
 	}
