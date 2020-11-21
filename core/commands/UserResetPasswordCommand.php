@@ -40,6 +40,7 @@ class UserResetPasswordCommand extends Command {
 	 */
 	const RESET = 'reset';
 	const UNLOCK = 'unlock';
+	const CLEAR = 'clear';
 
 	/**
 	 * @var string The action to perform (reset or unlock)
@@ -79,8 +80,8 @@ class UserResetPasswordCommand extends Command {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
 		}
 
-		# Remaining checks to not apply when unlocking account
-		if( $this->action == self::UNLOCK ) {
+		# Remaining checks only apply when resetting password
+		if( $this->action != self::RESET ) {
 			return;
 		}
 
@@ -120,7 +121,7 @@ class UserResetPasswordCommand extends Command {
 	 */
 	protected function process() {
 		# If the password can be changed, reset it
-		if( $this->action != self::UNLOCK
+		if( $this->action == self::RESET
 			&& auth_can_set_password( $this->user_id_reset )
 			&& user_reset_password( $this->user_id_reset )
 		) {
@@ -129,7 +130,12 @@ class UserResetPasswordCommand extends Command {
 
 		# Password can't be changed, unlock the account
 		# the account (i.e. reset failed login count)
+		if( user_is_login_request_allowed( $this->user_id_reset ) ) {
+			$t_action = self::CLEAR;
+		} else {
+			$t_action = self::UNLOCK;
+		}
 		user_reset_failed_login_count_to_zero( $this->user_id_reset );
-		return array( 'action' =>  self::UNLOCK );
+		return array( 'action' => $t_action );
 	}
 }
