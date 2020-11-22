@@ -97,7 +97,19 @@ $t_updated_bug->os_build = gpc_get_string( 'os_build', $t_existing_bug->os_build
 $t_updated_bug->platform = gpc_get_string( 'platform', $t_existing_bug->platform );
 $t_updated_bug->priority = gpc_get_int( 'priority', $t_existing_bug->priority );
 $t_updated_bug->projection = gpc_get_int( 'projection', $t_existing_bug->projection );
-$t_updated_bug->reporter_id = gpc_get_int( 'reporter_id', $t_existing_bug->reporter_id );
+
+$t_reporter_id = gpc_get_int( 'reporter_id', $t_existing_bug->reporter_id );
+user_ensure_exists( $t_reporter_id );
+$t_can_report = access_has_project_level(
+	config_get( 'report_bug_threshold', null, $t_reporter_id, $t_existing_bug->project_id ),
+	$t_existing_bug->project_id,
+	$t_reporter_id
+);
+if( !$t_can_report ) {
+	trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+}
+$t_updated_bug->reporter_id = $t_reporter_id;
+
 $t_updated_bug->reproducibility = gpc_get_int( 'reproducibility', $t_existing_bug->reproducibility );
 $t_updated_bug->resolution = gpc_get_int( 'resolution', $t_existing_bug->resolution );
 $t_updated_bug->severity = gpc_get_int( 'severity', $t_existing_bug->severity );
