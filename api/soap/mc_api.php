@@ -1015,6 +1015,16 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			"Category '{$t_cat_desc}' not found." );
 	}
 
+	# Make sure the category belongs to the given project's hierarchy
+	$t_categories = array_column( category_get_all_rows( $p_project_id ), 'id' );
+	if( !in_array( $t_category_id, $t_categories ) ) {
+		throw new ClientException(
+			"Category '$t_category_id' not available in project '$p_project_id'.",
+			ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT,
+			array( $t_category_id, $p_project_id )
+		);
+	}
+
 	return $t_category_id;
 }
 
