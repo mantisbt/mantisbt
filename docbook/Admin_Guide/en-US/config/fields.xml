@@ -42,6 +42,7 @@
 					attachments,
 					category_id,
 					due_date,
+					eta,
 					handler,
 					monitors,
 					os,

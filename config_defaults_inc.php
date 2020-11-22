@@ -2391,6 +2391,7 @@ $g_enable_product_build = OFF;
  *   - attachments
  *   - category_id
  *   - due_date
+ *   - eta
  *   - handler
  *   - monitors
  *   - os
@@ -2404,6 +2405,7 @@ $g_enable_product_build = OFF;
  *   - severity
  *   - status
  *   - steps_to_reproduce
+ *   - tags
  *   - target_version
  *   - view_state
  *
