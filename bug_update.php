@@ -61,6 +61,25 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_api.php' );
 
+/**
+ * Retrieves a version from form data and ensures it is valid.
+ *
+ * @param BugData $p_bug  Reference issue
+ * @param string $p_field Field name (used for GPC var and BugData property)
+ *
+ * @return string|null
+ */
+function get_valid_version( BugData $p_bug, $p_field ) {
+	$t_version = gpc_get_string( $p_field, $p_bug->$p_field );
+	if( !is_blank( $t_version )
+		&& version_get_id( $t_version, $p_bug->project_id ) === false
+	) {
+		error_parameters( $t_version );
+		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+	}
+	return $t_version;
+}
+
 form_security_validate( 'bug_update' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
@@ -89,7 +108,6 @@ if( $t_due_date !== null ) {
 }
 $t_updated_bug->duplicate_id = gpc_get_int( 'duplicate_id', 0 );
 $t_updated_bug->eta = gpc_get_int( 'eta', $t_existing_bug->eta );
-$t_updated_bug->fixed_in_version = gpc_get_string( 'fixed_in_version', $t_existing_bug->fixed_in_version );
 $t_updated_bug->handler_id = gpc_get_int( 'handler_id', $t_existing_bug->handler_id );
 $t_updated_bug->last_updated = gpc_get_string( 'last_updated' );
 $t_updated_bug->os = gpc_get_string( 'os', $t_existing_bug->os );
@@ -116,8 +134,11 @@ $t_updated_bug->severity = gpc_get_int( 'severity', $t_existing_bug->severity );
 $t_updated_bug->status = gpc_get_int( 'status', $t_existing_bug->status );
 $t_updated_bug->steps_to_reproduce = gpc_get_string( 'steps_to_reproduce', $t_existing_bug->steps_to_reproduce );
 $t_updated_bug->summary = gpc_get_string( 'summary', $t_existing_bug->summary );
-$t_updated_bug->target_version = gpc_get_string( 'target_version', $t_existing_bug->target_version );
-$t_updated_bug->version = gpc_get_string( 'version', $t_existing_bug->version );
+
+$t_updated_bug->fixed_in_version = get_valid_version( $t_existing_bug, 'fixed_in_version' );
+$t_updated_bug->target_version = get_valid_version( $t_existing_bug, 'target_version' );
+$t_updated_bug->version = get_valid_version( $t_existing_bug, 'version' );
+
 $t_updated_bug->view_state = gpc_get_int( 'view_state', $t_existing_bug->view_state );
 
 $t_bug_note = new BugNoteData();
