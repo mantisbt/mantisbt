@@ -119,14 +119,24 @@ $t_updated_bug->priority = gpc_get_int( 'priority', $t_existing_bug->priority );
 $t_updated_bug->projection = gpc_get_int( 'projection', $t_existing_bug->projection );
 
 $t_reporter_id = gpc_get_int( 'reporter_id', $t_existing_bug->reporter_id );
-user_ensure_exists( $t_reporter_id );
-$t_can_report = access_has_project_level(
-	config_get( 'report_bug_threshold', null, $t_reporter_id, $t_existing_bug->project_id ),
-	$t_existing_bug->project_id,
-	$t_reporter_id
-);
-if( !$t_can_report ) {
-	trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+# Only validate the reporter if different from the recorded one; this avoids
+# blocking the update when changing another field and the original reporter's
+# account no longer exists.
+if( $t_reporter_id != $t_existing_bug->reporter_id ) {
+	user_ensure_exists( $t_reporter_id );
+	$t_report_bug_threshold = config_get( 'report_bug_threshold',
+		null,
+		$t_reporter_id,
+		$t_existing_bug->project_id
+	);
+	$t_can_report = access_has_project_level(
+		$t_report_bug_threshold,
+		$t_existing_bug->project_id,
+		$t_reporter_id
+	);
+	if( !$t_can_report ) {
+		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+	}
 }
 $t_updated_bug->reporter_id = $t_reporter_id;
 
