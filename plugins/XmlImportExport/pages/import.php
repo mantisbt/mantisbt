@@ -72,7 +72,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 <tr>
 	<th class="category" width="25%">
 		<?php echo lang_get( 'select_file' )?><br />
-		<?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ' ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
+		<?php print_max_filesize( $t_max_file_size ); ?>
 	</th>
 	<td width="85%">
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />

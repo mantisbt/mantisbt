@@ -1898,11 +1898,15 @@ $g_dropzone_enabled = ON;
 $g_attachments_file_permissions = 0400;
 
 /**
- * Maximum file size (bytes) that can be uploaded.
- * Also check your PHP settings (default is usually 2MBs)
+ * Maximum file size that can be uploaded (in bytes).
+ *
+ * Defaults to 5 MiB. Also check your PHP settings for upload_max_filesize and
+ * post_max_size (defaulted to 2 MiB and 8 MiB respectively), as well as
+ * memory_limit.
+ *
  * @global integer $g_max_file_size
  */
-$g_max_file_size = 5000000;
+$g_max_file_size = 5 * 1024 * 1024;
 
 /**
  * Maximum number of files that can be uploaded simultaneously

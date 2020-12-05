@@ -484,8 +484,7 @@ $s_select_file = 'Select File';
 $s_select_files = 'Select Files';
 $s_upload_file_button = 'Upload File';
 $s_upload_files_button = 'Upload Files';
-$s_max_file_size_label = 'Maximum size:';
-$s_file_size_info = '%1$s %2$s'; # $1 = size, $2 = unit (e.g. kb, bytes)
+$s_max_file_size_info = 'Maximum size: %1$s %2$s'; # $1 = size, $2 = unit (e.g. kb, bytes)
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -610,7 +609,7 @@ $s_total_queries_executed = 'Total queries executed: %1$d';
 $s_unique_queries_executed = 'Unique queries executed: %1$d';
 $s_total_query_execution_time = 'Total query execution time: %1$s seconds';
 $s_page_execution_time = 'Page execution time: %1$s seconds';
-$s_memory_usage_in_kb = 'Memory usage: %1$s KiB';
+$s_memory_usage = 'Memory usage: %1$s KiB';
 
 # log_api.php
 $s_log_page_number = 'Number';
@@ -1304,7 +1303,7 @@ $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 $s_attachments = 'attachment(s)';
 $s_bytes = 'bytes';
-$s_kb = 'KB';
+$s_kib = 'KiB';
 $s_attachment_missing = 'Attachment missing';
 $s_attachment_count = 'Attachment count';
 $s_view_attachments_for_issue = 'View %1$d attachment(s) for issue #%2$d';
@@ -1739,7 +1738,7 @@ $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destin
 $s_dropzone_default_message = 'Attach files by dragging & dropping, selecting or pasting them.';
 $s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
 $s_dropzone_fallback_text = '';
-$s_dropzone_file_too_big = 'File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.';
+$s_dropzone_file_too_big = 'File is too big ({{filesize}} MiB). Maximum size: {{maxFilesize}} MiB.';
 $s_dropzone_invalid_file_type = 'You cannot upload files of this type.';
 $s_dropzone_response_error = 'Server responded with {{statusCode}} code.';
 $s_dropzone_cancel_upload = 'Cancel upload';
@@ -1748,7 +1747,7 @@ $s_dropzone_remove_file = 'Remove file';
 $s_dropzone_remove_file_confirmation = '';
 $s_dropzone_max_files_exceeded = 'You cannot upload any more files.';
 $s_dropzone_not_supported = 'Dropzone.js does not support older browsers!';
-$s_dropzone_multiple_files_too_big = 'The following files:{{files}}Exceed the maximum allowed file size ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'The following files:{{files}}exceed the maximum allowed file size ({{maxFilesize}} MiB)';
 
 # Generic actions, short names
 $s_save = 'Save';
