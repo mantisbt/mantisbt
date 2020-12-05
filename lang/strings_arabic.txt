@@ -391,7 +391,6 @@ $s_select_files = 'اختر الملفّات';
 $s_upload_file_button = 'رفع ملف';
 $s_upload_files_button = 'رفع الملفات';
 $s_max_file_size_label = 'الحجم الأقصى:';
-$s_file_size_info = '%1$s %2$s';
 $s_bug_reopened_msg = 'القضية تمت إعادة فتحها...';
 $s_reopen_add_bugnote_title = 'إضافة ملاحظة كسبب لإعادة فتح القضية';
 $s_bugnote_add_reopen_button = 'إضافة ملاحظة وإعادة فتح القضية';
