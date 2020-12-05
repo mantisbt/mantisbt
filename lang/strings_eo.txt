@@ -376,7 +376,7 @@ $s_last_edited = 'Laste redaktita:';
 $s_hide_content = 'Kaŝi Enhavon';
 $s_show_content = 'Montri Enhavon';
 $s_webmaster_contact_information = 'Kontaktu <a href="mailto:%1$s" title="Kontakti la administranton per retpoŝto.">administranton</a> por asistado';
-$s_memory_usage_in_kb = 'Uzata memoro: %1$s KiB';
+$s_memory_usage = 'Uzata memoro: %1$s KiB';
 $s_log_page_number = 'Numero';
 $s_log_page_time = 'Daŭro de rulado';
 $s_log_page_caller = 'Vokanto';

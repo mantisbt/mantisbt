@@ -494,3 +494,4 @@ $s_move = '{{Identical|Move}}';
 $s_close = '{{Identical|Close}}';
 $s_add = '{{Identical|Add}}';
 $s_login = '{{Identical|Login}}';
+$s_kib = 'IEEE 1541 unit kibibytes (1024 bytes), see https://en.wikipedia.org/wiki/Kibibyte';
