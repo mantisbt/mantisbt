@@ -968,10 +968,14 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$t_change = $p_old_value . ' => ' . $p_new_value;
 					break;
 				case BUG_REVISION_DROPPED:
-					$t_note = lang_get( 'bug_revision_dropped_history' ) . ': ' . bug_revision_get_type_name( $p_new_value ) . ': ' . $p_old_value;
+					$t_note = lang_get( 'bug_revision_dropped_history' ) . ': '
+						. bug_revision_get_type_name( $p_new_value ) . ': '
+						. $p_old_value;
 					break;
 				case BUGNOTE_REVISION_DROPPED:
-					$t_note = lang_get( 'bugnote_revision_dropped_history' ) . ': ' . $p_new_value . ': ' . $p_old_value;
+					$t_note = lang_get( 'bugnote_revision_dropped_history' ) . ': '
+						. $p_new_value . ': '
+						. $p_old_value;
 					break;
 			}
 	}

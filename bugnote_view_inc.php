@@ -192,7 +192,16 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_activity['id'] );
 			if( $t_revision_count >= 1 ) {
 				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
-				echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_activity['id'] . '">' . $t_view_num_revisions_text . '</a></span></p>';
+?>
+		<p class="no-margin">
+			<span class="small bugnote-revisions-link">
+				<a href="bug_revision_view_page.php?bugnote_id=<?php echo $t_activity['id'] ?>">
+					<?php echo $t_view_num_revisions_text ?>
+				</a>
+			</span>
+		</p>
+<?php
+				}
 			}
 		}
 		?>
