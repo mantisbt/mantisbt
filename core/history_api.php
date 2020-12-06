@@ -162,6 +162,15 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_history = array();
 
 	foreach( $t_raw_history as $k => $t_item ) {
+		/**
+		 * @var int $v_userid
+		 * @var string $v_username
+		 * @var string $v_field
+		 * @var string $v_old_value
+		 * @var string $v_new_value
+		 * @var int $v_type
+		 * @var int $v_date
+		 */
 		extract( $t_item, EXTR_PREFIX_ALL, 'v' );
 		$t_history[$k] = history_localize_item( $v_field, $v_type, $v_old_value, $v_new_value );
 		$t_history[$k]['date'] = date( $t_normal_date_format, $v_date );
@@ -269,8 +278,8 @@ function history_query_result( array $p_query_options ) {
 
 	# Order history lines by date. Use the storing sequence as 2nd order field for lines with the same date.
 	$t_query->append_sql( ' ORDER BY {bug_history}.date_modified ' . $t_history_order . ', {bug_history}.id ' . $t_history_order );
-	$t_result = $t_query->execute();
-	return $t_result;
+
+	return $t_query->execute();
 }
 
 /**
@@ -337,13 +346,22 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
  * @param  integer $p_user_id     The user id or null for logged in user.
  * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
  *                                          false otherwise.
- * @return array containing the history event or false if no more matches.
+ * @return array|false containing the history event or false if no more matches.
  */
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 
 	while ( $t_row = db_fetch_array( $p_result ) ) {
+		/**
+		 * @var int $v_user_id
+		 * @var int $v_bug_id
+		 * @var string $v_field_name
+		 * @var string $v_old_value
+		 * @var string $v_new_value
+		 * @var int $v_type
+		 * @var int $v_date_modified
+		 */
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 		# Ignore entries related to non-existing bugs (see #20727)
@@ -431,7 +449,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 				if( !bugnote_exists( $v_new_value ) ) {
 					continue;
 				}
-	
+
 				if( !access_has_bug_level( config_get( 'private_bugnote_threshold', null, $t_user_id, $t_project_id ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
@@ -798,9 +816,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			}
 			break;
 		case 'date_submitted':
-			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
-			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
-			break;
 		case 'last_updated':
 			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
 			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
