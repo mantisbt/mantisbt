@@ -158,22 +158,25 @@ function show_revision( array $p_revision ) {
 
 	<tr>
 		<th class="category"><?php echo lang_get( 'revision' ) ?></th>
-		<td colspan="2"><?php echo $t_by_string ?></td>
-		<td class="center" width="5%">
+		<td>
 <?php
+	echo $t_by_string;
+
 	if( $s_can_drop ) {
 		$t_drop_token = form_security_param( 'bug_revision_drop' );
-		print_small_button(
+		print_link_button(
 			'bug_revision_drop.php?id=' . $p_revision['id'] . $t_drop_token,
-			lang_get( 'revision_drop' )
+			lang_get( 'revision_drop' ),
+			'btn-sm pull-right'
 		);
 	}
 ?>
+		</td>
 	</tr>
 
 	<tr>
 		<th class="category"><?php echo $t_label ?></th>
-		<td colspan="3">
+		<td>
 			<?php echo string_display_links( $p_revision['value'] ) ?>
 		</td>
 	</tr>
@@ -212,10 +215,10 @@ print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 				<div class="table-responsive">
 					<table class="table table-bordered table-condensed table-striped">
 						<tr>
-							<th class="category" width="15%">
+							<th class="category width-20">
 								<?php echo lang_get( 'summary' ) ?>
 							</th>
-							<td colspan="3">
+							<td>
 								<?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?>
 							</td>
 						</tr>
