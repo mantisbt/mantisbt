@@ -64,7 +64,7 @@ $t_title = '';
 if( $f_bug_id ) {
 	$t_bug_id = $f_bug_id;
 	$t_bug_data = bug_get( $t_bug_id, true );
-	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id ), true );
+	$t_bug_revisions = bug_revision_list( $t_bug_id );
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
