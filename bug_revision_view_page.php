@@ -62,29 +62,30 @@ $f_rev_id = gpc_get_int( 'rev_id', 0 );
 $t_title = '';
 
 if( $f_bug_id ) {
-	$t_bug_id = $f_bug_id;
-	$t_bug_data = bug_get( $t_bug_id, true );
+	$t_bug_id = (int)$f_bug_id;
+	$t_bugnote_id = false;
 	$t_bug_revisions = bug_revision_list( $t_bug_id );
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
-} else if( $f_bugnote_id ) {
-	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	$t_bug_data = bug_get( $t_bug_id, true );
+} elseif( $f_bugnote_id ) {
+	$t_bugnote_id = (int)$f_bugnote_id;
+	$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
 
 	$t_bug_revisions = bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id );
 
 	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
 
-} else if( $f_rev_id ) {
+} elseif( $f_rev_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if( count( $t_bug_revisions ) < 1 ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_bug_id = $t_bug_revisions[$f_rev_id]['bug_id'];
-	$t_bug_data = bug_get( $t_bug_id, true );
+	$t_rev = $t_bug_revisions[$f_rev_id];
+	$t_bug_id = $t_rev['bug_id'];
+	$t_bugnote_id = $t_rev['bugnote_id'];
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
@@ -93,6 +94,24 @@ if( $f_bug_id ) {
 	exit;
 }
 
+$t_bug_data = bug_get( $t_bug_id, true );
+$t_project_id = $t_bug_data->project_id;
+
+$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+
+# Make sure user is allowed to view revisions
+# If processing a bugnote, we don't need to check bug-level access as it is
+# already done at the lower level, and in fact we must not do it as a user may
+# be allowed to view their own bugnote's history, but not the parent issue's.
+if( $t_bugnote_id ) {
+	if( !access_can_view_bugnote_revisions( $t_bugnote_id ) ) {
+		access_denied();
+	}
+} elseif( $t_bug_id && !access_can_view_bug_revisions( $t_bug_id ) ) {
+	access_denied();
+}
+
+
 /**
  * Show Bug revision
  *
@@ -100,8 +119,8 @@ if( $f_bug_id ) {
  * @return null
  */
 function show_revision( array $p_revision ) {
+	global $t_view_bug_threshold;
 	static $s_can_drop = null;
-	static $s_user_access = null;
 
 	if( is_null( $s_can_drop ) ) {
 		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
@@ -118,11 +137,7 @@ function show_revision( array $p_revision ) {
 			$t_label = lang_get( 'additional_information' );
 			break;
 		case REV_BUGNOTE:
-			if( is_null( $s_user_access ) ) {
-				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_revision['bug_id'] );
-			}
-
-			if( !$s_user_access ) {
+			if( !access_has_bugnote_level( $t_view_bug_threshold, $p_revision['bugnote_id'] ) ) {
 				return null;
 			}
 
