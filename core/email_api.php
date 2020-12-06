@@ -1850,7 +1850,14 @@ function email_format_bug_message( array $p_visible_bug_data ) {
 		$t_message .= $t_email_separator1 . " \n";
 
 		foreach( $p_visible_bug_data['history'] as $t_raw_history_item ) {
-			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
+			$t_localized_item = history_localize_item(
+				$t_raw_history_item['bug_id'],
+				$t_raw_history_item['field'],
+				$t_raw_history_item['type'],
+				$t_raw_history_item['old_value'],
+				$t_raw_history_item['new_value'],
+				false
+			);
 
 			$t_message .= utf8_str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . utf8_str_pad( $t_raw_history_item['username'], 15 ) . utf8_str_pad( $t_localized_item['note'], 25 ) . utf8_str_pad( $t_localized_item['change'], 20 ) . "\n";
 		}

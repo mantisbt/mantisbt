@@ -305,11 +305,13 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 		}
 
 		$t_localized_row = history_localize_item(
+			$p_issue_id,
 			$t_history_row['field'],
 			$t_history_row['type'],
 			$t_history_row['old_value'],
 			$t_history_row['new_value'],
-			false );
+			false
+		);
 
 		$t_event['message'] = $t_localized_row['note'];
 
