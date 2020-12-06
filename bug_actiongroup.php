@@ -101,6 +101,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		config_flush_cache(); # flush the config cache so that configs are refetched
 	}
 
+	# Make sure user has access to the bug
+	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $t_bug_id );
+
 	$t_status = $t_bug->status;
 
 	switch( $f_action ) {
