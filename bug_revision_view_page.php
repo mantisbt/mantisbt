@@ -90,6 +90,7 @@ if( $f_bug_id ) {
 
 } else {
 	trigger_error( ERROR_GENERIC, ERROR );
+	exit;
 }
 
 /**
