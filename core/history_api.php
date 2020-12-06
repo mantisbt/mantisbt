@@ -839,145 +839,145 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 
 				$p_new_value = string_custom_field_value_for_email( $p_new_value, $t_cf_type );
 			}
-		}
+	}
 
-		if( NORMAL_TYPE != $p_type ) {
-			switch( $p_type ) {
-				case NEW_BUG:
-					$t_note = lang_get( 'new_bug' );
-					break;
-				case BUGNOTE_ADDED:
-					$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
-					break;
-				case BUGNOTE_UPDATED:
-					$t_note = lang_get( 'bugnote_edited' ) . ': ' . $p_old_value;
-					$t_old_value = (int)$p_old_value;
-					$t_new_value = (int)$p_new_value;
-					if( $p_linkify && bug_revision_exists( $t_new_value ) ) {
-						if( bugnote_exists( $t_old_value ) ) {
-							$t_bug_revision_view_page_argument = 'bugnote_id=' . $t_old_value . '#r' . $t_new_value;
-						} else {
-							$t_bug_revision_view_page_argument = 'rev_id=' . $t_new_value;
-						}
-						$t_change = '<a href="bug_revision_view_page.php?' . $t_bug_revision_view_page_argument . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
-						$t_raw = false;
-					}
-					break;
-				case BUGNOTE_DELETED:
-					$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
-					break;
-				case DESCRIPTION_UPDATED:
-					$t_note = lang_get( 'description_updated' );
-					$t_old_value = (int)$p_old_value;
-					if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
-						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
-						$t_raw = false;
-					}
-					break;
-				case ADDITIONAL_INFO_UPDATED:
-					$t_note = lang_get( 'additional_information_updated' );
-					$t_old_value = (int)$p_old_value;
-					if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
-						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
-						$t_raw = false;
-					}
-					break;
-				case STEP_TO_REPRODUCE_UPDATED:
-					$t_note = lang_get( 'steps_to_reproduce_updated' );
-					$t_old_value = (int)$p_old_value;
-					if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
-						$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-							lang_get( 'view_revisions' ) . '</a>';
-						$t_raw = false;
-					}
-					break;
-				case FILE_ADDED:
-					$t_note = lang_get( 'file_added' ) . ': ' . $p_old_value;
-					break;
-				case FILE_DELETED:
-					$t_note = lang_get( 'file_deleted' ) . ': ' . $p_old_value;
-					break;
-				case BUGNOTE_STATE_CHANGED:
-					$p_old_value = get_enum_element( 'view_state', $p_old_value );
-					$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_new_value . ': ' . $p_old_value;
-					break;
-				case BUG_MONITOR:
-					$p_old_value = user_get_name( $p_old_value );
-					$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
-					break;
-				case BUG_UNMONITOR:
-					if( $p_old_value !== '' ) {
-						$p_old_value = user_get_name( $p_old_value );
-					}
-					$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;
-					break;
-				case BUG_DELETED:
-					$t_note = lang_get( 'bug_deleted' ) . ': ' . $p_old_value;
-					break;
-				case BUG_ADD_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_added' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
-					break;
-				case BUG_UPDATE_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_updated' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
-					break;
-				case BUG_DELETE_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_deleted' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
-					break;
-				case BUG_PAID_SPONSORSHIP:
-					$t_note = lang_get( 'sponsorship_paid' );
-					$t_change = user_get_name( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
-					break;
-				case BUG_ADD_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_added' );
-					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
-					break;
-				case BUG_REPLACE_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_replaced' );
-					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
-					break;
-				case BUG_DEL_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_deleted' );
-
-					# Fix for #7846: There are some cases where old value is empty, this may be due to an old bug.
-					if( !is_blank( $p_old_value ) && $p_old_value > 0 ) {
-						$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+	if( NORMAL_TYPE != $p_type ) {
+		switch( $p_type ) {
+			case NEW_BUG:
+				$t_note = lang_get( 'new_bug' );
+				break;
+			case BUGNOTE_ADDED:
+				$t_note = lang_get( 'bugnote_added' ) . ': ' . $p_old_value;
+				break;
+			case BUGNOTE_UPDATED:
+				$t_note = lang_get( 'bugnote_edited' ) . ': ' . $p_old_value;
+				$t_old_value = (int)$p_old_value;
+				$t_new_value = (int)$p_new_value;
+				if( $p_linkify && bug_revision_exists( $t_new_value ) ) {
+					if( bugnote_exists( $t_old_value ) ) {
+						$t_bug_revision_view_page_argument = 'bugnote_id=' . $t_old_value . '#r' . $t_new_value;
 					} else {
-						$t_change = bug_format_id( $p_new_value );
+						$t_bug_revision_view_page_argument = 'rev_id=' . $t_new_value;
 					}
-					break;
-				case BUG_CLONED_TO:
-					$t_note = lang_get( 'bug_cloned_to' ) . ': ' . bug_format_id( $p_new_value );
-					break;
-				case BUG_CREATED_FROM:
-					$t_note = lang_get( 'bug_created_from' ) . ': ' . bug_format_id( $p_new_value );
-					break;
-				case TAG_ATTACHED:
-					$t_note = lang_get( 'tag_history_attached' ) . ': ' . $p_old_value;
-					break;
-				case TAG_DETACHED:
-					$t_note = lang_get( 'tag_history_detached' ) . ': ' . $p_old_value;
-					break;
-				case TAG_RENAMED:
-					$t_note = lang_get( 'tag_history_renamed' );
-					$t_change = $p_old_value . ' => ' . $p_new_value;
-					break;
-				case BUG_REVISION_DROPPED:
-					$t_note = lang_get( 'bug_revision_dropped_history' ) . ': '
-						. bug_revision_get_type_name( $p_new_value ) . ': '
-						. $p_old_value;
-					break;
-				case BUGNOTE_REVISION_DROPPED:
-					$t_note = lang_get( 'bugnote_revision_dropped_history' ) . ': '
-						. $p_new_value . ': '
-						. $p_old_value;
-					break;
-			}
+					$t_change = '<a href="bug_revision_view_page.php?' . $t_bug_revision_view_page_argument . '">' .
+						lang_get( 'view_revisions' ) . '</a>';
+					$t_raw = false;
+				}
+				break;
+			case BUGNOTE_DELETED:
+				$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
+				break;
+			case DESCRIPTION_UPDATED:
+				$t_note = lang_get( 'description_updated' );
+				$t_old_value = (int)$p_old_value;
+				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
+					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
+						lang_get( 'view_revisions' ) . '</a>';
+					$t_raw = false;
+				}
+				break;
+			case ADDITIONAL_INFO_UPDATED:
+				$t_note = lang_get( 'additional_information_updated' );
+				$t_old_value = (int)$p_old_value;
+				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
+					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
+						lang_get( 'view_revisions' ) . '</a>';
+					$t_raw = false;
+				}
+				break;
+			case STEP_TO_REPRODUCE_UPDATED:
+				$t_note = lang_get( 'steps_to_reproduce_updated' );
+				$t_old_value = (int)$p_old_value;
+				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
+					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
+						lang_get( 'view_revisions' ) . '</a>';
+					$t_raw = false;
+				}
+				break;
+			case FILE_ADDED:
+				$t_note = lang_get( 'file_added' ) . ': ' . $p_old_value;
+				break;
+			case FILE_DELETED:
+				$t_note = lang_get( 'file_deleted' ) . ': ' . $p_old_value;
+				break;
+			case BUGNOTE_STATE_CHANGED:
+				$p_old_value = get_enum_element( 'view_state', $p_old_value );
+				$t_note = lang_get( 'bugnote_view_state' ) . ': ' . $p_new_value . ': ' . $p_old_value;
+				break;
+			case BUG_MONITOR:
+				$p_old_value = user_get_name( $p_old_value );
+				$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
+				break;
+			case BUG_UNMONITOR:
+				if( $p_old_value !== '' ) {
+					$p_old_value = user_get_name( $p_old_value );
+				}
+				$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;
+				break;
+			case BUG_DELETED:
+				$t_note = lang_get( 'bug_deleted' ) . ': ' . $p_old_value;
+				break;
+			case BUG_ADD_SPONSORSHIP:
+				$t_note = lang_get( 'sponsorship_added' );
+				$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+				break;
+			case BUG_UPDATE_SPONSORSHIP:
+				$t_note = lang_get( 'sponsorship_updated' );
+				$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+				break;
+			case BUG_DELETE_SPONSORSHIP:
+				$t_note = lang_get( 'sponsorship_deleted' );
+				$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+				break;
+			case BUG_PAID_SPONSORSHIP:
+				$t_note = lang_get( 'sponsorship_paid' );
+				$t_change = user_get_name( $p_old_value ) . ': ' . get_enum_element( 'sponsorship', $p_new_value );
+				break;
+			case BUG_ADD_RELATIONSHIP:
+				$t_note = lang_get( 'relationship_added' );
+				$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+				break;
+			case BUG_REPLACE_RELATIONSHIP:
+				$t_note = lang_get( 'relationship_replaced' );
+				$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+				break;
+			case BUG_DEL_RELATIONSHIP:
+				$t_note = lang_get( 'relationship_deleted' );
+
+				# Fix for #7846: There are some cases where old value is empty, this may be due to an old bug.
+				if( !is_blank( $p_old_value ) && $p_old_value > 0 ) {
+					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+				} else {
+					$t_change = bug_format_id( $p_new_value );
+				}
+				break;
+			case BUG_CLONED_TO:
+				$t_note = lang_get( 'bug_cloned_to' ) . ': ' . bug_format_id( $p_new_value );
+				break;
+			case BUG_CREATED_FROM:
+				$t_note = lang_get( 'bug_created_from' ) . ': ' . bug_format_id( $p_new_value );
+				break;
+			case TAG_ATTACHED:
+				$t_note = lang_get( 'tag_history_attached' ) . ': ' . $p_old_value;
+				break;
+			case TAG_DETACHED:
+				$t_note = lang_get( 'tag_history_detached' ) . ': ' . $p_old_value;
+				break;
+			case TAG_RENAMED:
+				$t_note = lang_get( 'tag_history_renamed' );
+				$t_change = $p_old_value . ' => ' . $p_new_value;
+				break;
+			case BUG_REVISION_DROPPED:
+				$t_note = lang_get( 'bug_revision_dropped_history' ) . ': '
+					. bug_revision_get_type_name( $p_new_value ) . ': '
+					. $p_old_value;
+				break;
+			case BUGNOTE_REVISION_DROPPED:
+				$t_note = lang_get( 'bugnote_revision_dropped_history' ) . ': '
+					. $p_new_value . ': '
+					. $p_old_value;
+				break;
+		}
 	}
 
 	# output special cases
