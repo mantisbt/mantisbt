@@ -519,7 +519,10 @@ function layout_navbar_projects_menu() {
 	echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
 	$t_current_project_id = helper_get_current_project();
-	if( ALL_PROJECTS == $t_current_project_id) {
+
+	# Check user's access to the project, and if not authorized select display
+	# ALL PROJECTS to avoid disclosing the private project's name.
+	if( ALL_PROJECTS == $t_current_project_id || !access_get_project_level( $t_current_project_id ) ) {
 		echo '&#160;' . string_attribute( lang_get( 'all_projects' ) ) . '&#160;' . "\n";
 	} else {
 		echo '&#160;' . string_attribute( project_get_field( $t_current_project_id, 'name' ) ) . '&#160;' . "\n";
