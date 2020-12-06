@@ -132,7 +132,10 @@ function show_revision( array $p_revision ) {
 			$t_label = '';
 	}
 
-	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), prepare_user_name( $p_revision['user_id'] ) );
+	$t_by_string = sprintf( lang_get( 'revision_by' ),
+		string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ),
+		prepare_user_name( $p_revision['user_id'] )
+	);
 
 ?>
 <tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
