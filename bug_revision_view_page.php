@@ -116,7 +116,6 @@ if( $t_bugnote_id ) {
  * Show Bug revision
  *
  * @param array $p_revision Bug Revision Data.
- * @return null
  */
 function show_revision( array $p_revision ) {
 	global $t_view_bug_threshold;
@@ -138,7 +137,7 @@ function show_revision( array $p_revision ) {
 			break;
 		case REV_BUGNOTE:
 			if( !access_has_bugnote_level( $t_view_bug_threshold, $p_revision['bugnote_id'] ) ) {
-				return null;
+				return;
 			}
 
 			$t_label = lang_get( 'bugnote' );
