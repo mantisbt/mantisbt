@@ -1121,10 +1121,9 @@ EOL;
  * @param string  $p_error   Contains the error message, as a string.
  * @param string  $p_file    Contains the filename that the error was raised in, as a string.
  * @param integer $p_line    Contains the line number the error was raised at, as an integer.
- * @param array   $p_context To the active symbol table at the point the error occurred (optional).
  * @return void
  */
-function mc_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
+function mc_error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	# check if errors were disabled with @ somewhere in this call chain
 	# also suppress php 5 strict warnings
 	if( 0 == error_reporting() || 2048 == $p_type ) {
