@@ -73,16 +73,17 @@ if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 $t_project_id = ALL_PROJECTS;
 $t_multiple_projects = false;
 $t_projects = array();
-
-# Array of parameters to be used with plugin event
-$t_event_params = array();
-$t_event_params['bug_ids'] = $f_bug_arr;
-$t_event_params['action'] = $f_action;
-$t_event_params['has_bugnote'] = false;
+$t_view_bug_threshold = config_get( 'view_bug_threshold' );
 
 bug_cache_array_rows( $f_bug_arr );
 
-foreach( $f_bug_arr as $t_bug_id ) {
+foreach( $f_bug_arr as $t_key => $t_bug_id ) {
+	# Remove any issues the user doesn't have access to
+	if( !access_has_bug_level( $t_view_bug_threshold, $t_bug_id ) ) {
+		unset( $f_bug_arr[$t_key] );
+		continue;
+	}
+
 	$t_bug = bug_get( $t_bug_id );
 	if( $t_project_id != $t_bug->project_id ) {
 		if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
@@ -93,6 +94,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		}
 	}
 }
+
+# Array of parameters to be used with plugin event
+$t_event_params = array();
+$t_event_params['bug_ids'] = $f_bug_arr;
+$t_event_params['action'] = $f_action;
+$t_event_params['has_bugnote'] = false;
 $t_event_params['multiple_projects'] = $t_multiple_projects;
 
 if( $t_multiple_projects ) {
