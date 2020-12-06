@@ -2702,7 +2702,14 @@ $g_view_history_threshold = VIEWER;
 $g_bug_reminder_threshold = DEVELOPER;
 
 /**
- * Access lever required to drop bug history revisions
+ * Access level required to view bug history revisions.
+ * Users can always see revisions for the issues and bugnote they reported.
+ * @global integer $g_bug_revision_view_threshold
+ */
+$g_bug_revision_view_threshold = DEVELOPER;
+
+/**
+ * Access level required to drop bug history revisions.
  * @global integer $g_bug_revision_drop_threshold
  */
 $g_bug_revision_drop_threshold = MANAGER;
@@ -4378,6 +4385,7 @@ $g_public_config_names = array(
 	'bug_resolution_fixed_threshold',
 	'bug_resolution_not_fixed_threshold',
 	'bug_resolved_status_threshold',
+	'bug_revision_view_threshold',
 	'bug_revision_drop_threshold',
 	'bug_submit_status',
 	'bug_update_page_fields',

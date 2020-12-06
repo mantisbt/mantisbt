@@ -936,3 +936,57 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	$t_project_level = access_get_project_level( $p_project_id, $p_user_id );
 	return !access_compare_level( $t_project_level, $t_threshold_can_view );
 }
+
+/**
+ * Return true if user is allowed to view bug revisions.
+ *
+ * User must have $g_bug_revision_view_threshold or be the bug's reporter.
+ *
+ * @param int $p_bug_id
+ * @param int $p_user_id
+ *
+ * @return bool
+ */
+function access_can_view_bug_revisions( $p_bug_id, $p_user_id = null ) {
+	if( !bug_exists( $p_bug_id ) ) {
+		return false;
+	}
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_user_id = null === $p_user_id ? auth_get_current_user_id() : $p_user_id;
+
+	$t_has_access = access_has_bug_level(
+		config_get( 'bug_revision_view_threshold', null, $t_user_id, $t_project_id ),
+		$p_bug_id,
+		$t_user_id
+	);
+
+	return $t_has_access || bug_is_user_reporter( $p_bug_id, $t_user_id );
+}
+
+/**
+ * Return true if user is allowed to view bugnote revisions.
+ *
+ * User must have $g_bug_revision_view_threshold or be the bugnote's reporter.
+ *
+ * @param int $p_bugnote_id
+ * @param int $p_user_id
+ *
+ * @return bool
+ */
+function access_can_view_bugnote_revisions( $p_bugnote_id, $p_user_id = null ) {
+	if( !bugnote_exists( $p_bugnote_id ) ) {
+		return false;
+	}
+	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+	$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
+	$t_user_id = null === $p_user_id ? auth_get_current_user_id() : $p_user_id;
+
+	$t_has_access = access_has_bugnote_level(
+		config_get( 'bug_revision_view_threshold', null, $t_user_id, $t_project_id ),
+		$p_bugnote_id,
+		$t_user_id
+	);
+
+
+	return $t_has_access || bugnote_is_user_reporter( $p_bugnote_id, $t_user_id );
+}
