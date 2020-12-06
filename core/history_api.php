@@ -172,7 +172,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 		 * @var int $v_date
 		 */
 		extract( $t_item, EXTR_PREFIX_ALL, 'v' );
-		$t_history[$k] = history_localize_item( $v_field, $v_type, $v_old_value, $v_new_value );
+		$t_history[$k] = history_localize_item( $p_bug_id, $v_field, $v_type, $v_old_value, $v_new_value );
 		$t_history[$k]['date'] = date( $t_normal_date_format, $v_date );
 		$t_history[$k]['userid'] = $v_userid;
 		$t_history[$k]['username'] = $v_username;
@@ -474,6 +474,12 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 			}
 		}
 
+		if( $v_type == BUG_REVISION_DROPPED || $v_type == BUGNOTE_REVISION_DROPPED ) {
+			if( !access_can_view_bug_revisions( $v_bug_id ) ) {
+				continue;
+			}
+		}
+
 		$t_event = array();
 		$t_event['bug_id'] = $v_bug_id;
 		$t_event['date'] = $v_date_modified;
@@ -727,16 +733,18 @@ function history_get_type_name( $p_type ) {
 }
 
 /**
- * Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
- * Returns array with two elements indexed as 'note' and 'change'
+ * Localizes one raw history item.
+ *
+ * @param int     $p_bug_id     Parent bug id
  * @param string  $p_field_name The field name of the field being localized.
  * @param integer $p_type       The type of the history entry.
  * @param string  $p_old_value  The old value of the field.
  * @param string  $p_new_value  The new value of the field.
  * @param boolean $p_linkify    Whether to return a string containing hyperlinks.
- * @return array
+ *
+ * @return array with two elements indexed as 'note' and 'change'
  */
-function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
+function history_localize_item( $p_bug_id, $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
 	$t_note = '';
 	$t_change = '';
 	$t_raw = true;
@@ -751,36 +759,15 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 	$t_field_localized = history_localize_field_name( $p_field_name );
 	switch( $p_field_name ) {
 		case 'status':
-			$p_old_value = get_enum_element( 'status', $p_old_value );
-			$p_new_value = get_enum_element( 'status', $p_new_value );
-			break;
 		case 'severity':
-			$p_old_value = get_enum_element( 'severity', $p_old_value );
-			$p_new_value = get_enum_element( 'severity', $p_new_value );
-			break;
 		case 'reproducibility':
-			$p_old_value = get_enum_element( 'reproducibility', $p_old_value );
-			$p_new_value = get_enum_element( 'reproducibility', $p_new_value );
-			break;
 		case 'resolution':
-			$p_old_value = get_enum_element( 'resolution', $p_old_value );
-			$p_new_value = get_enum_element( 'resolution', $p_new_value );
-			break;
 		case 'priority':
-			$p_old_value = get_enum_element( 'priority', $p_old_value );
-			$p_new_value = get_enum_element( 'priority', $p_new_value );
-			break;
 		case 'eta':
-			$p_old_value = get_enum_element( 'eta', $p_old_value );
-			$p_new_value = get_enum_element( 'eta', $p_new_value );
-			break;
 		case 'view_state':
-			$p_old_value = get_enum_element( 'view_state', $p_old_value );
-			$p_new_value = get_enum_element( 'view_state', $p_new_value );
-			break;
 		case 'projection':
-			$p_old_value = get_enum_element( 'projection', $p_old_value );
-			$p_new_value = get_enum_element( 'projection', $p_new_value );
+			$p_old_value = get_enum_element( $p_field_name, $p_old_value );
+			$p_new_value = get_enum_element( $p_field_name, $p_new_value );
 			break;
 		case 'sticky':
 			$p_old_value = gpc_string_to_bool( $p_old_value ) ? lang_get( 'yes' ) : lang_get( 'no' );
@@ -853,7 +840,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 				$t_note = lang_get( 'bugnote_edited' ) . ': ' . $p_old_value;
 				$t_old_value = (int)$p_old_value;
 				$t_new_value = (int)$p_new_value;
-				if( $p_linkify && bug_revision_exists( $t_new_value ) ) {
+				if( $p_linkify
+					&& bug_revision_exists( $t_new_value )
+					&& access_can_view_bugnote_revisions( $t_old_value )
+				) {
 					if( bugnote_exists( $t_old_value ) ) {
 						$t_bug_revision_view_page_argument = 'bugnote_id=' . $t_old_value . '#r' . $t_new_value;
 					} else {
@@ -868,27 +858,24 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 				$t_note = lang_get( 'bugnote_deleted' ) . ': ' . $p_old_value;
 				break;
 			case DESCRIPTION_UPDATED:
-				$t_note = lang_get( 'description_updated' );
-				$t_old_value = (int)$p_old_value;
-				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
-					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-						lang_get( 'view_revisions' ) . '</a>';
-					$t_raw = false;
-				}
-				break;
-			case ADDITIONAL_INFO_UPDATED:
-				$t_note = lang_get( 'additional_information_updated' );
-				$t_old_value = (int)$p_old_value;
-				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
-					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
-						lang_get( 'view_revisions' ) . '</a>';
-					$t_raw = false;
-				}
-				break;
 			case STEP_TO_REPRODUCE_UPDATED:
-				$t_note = lang_get( 'steps_to_reproduce_updated' );
+			case ADDITIONAL_INFO_UPDATED:
+				switch( $p_type ) {
+					case DESCRIPTION_UPDATED:
+						$t_note = lang_get( 'description_updated' );
+						break;
+					case STEP_TO_REPRODUCE_UPDATED:
+						$t_note = lang_get( 'steps_to_reproduce_updated' );
+						break;
+					case ADDITIONAL_INFO_UPDATED:
+						$t_note = lang_get( 'additional_information_updated' );
+						break;
+				}
 				$t_old_value = (int)$p_old_value;
-				if( $p_linkify && bug_revision_exists( $t_old_value ) ) {
+				if( $p_linkify
+					&& bug_revision_exists( $t_old_value )
+					&& access_can_view_bug_revisions( $p_bug_id )
+				) {
 					$t_change = '<a href="bug_revision_view_page.php?rev_id=' . $t_old_value . '#r' . $t_old_value . '">' .
 						lang_get( 'view_revisions' ) . '</a>';
 					$t_raw = false;

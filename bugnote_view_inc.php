@@ -189,9 +189,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		<?php
 		if( $t_activity['modified'] ) {
 			echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_activity['last_modified'] ) . '</p>';
-			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_activity['id'] );
-			if( $t_revision_count >= 1 ) {
-				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
+			if( access_can_view_bugnote_revisions( $t_activity['id'] ) ) {
+				$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_activity['id'] );
+				if( $t_revision_count >= 1 ) {
+					$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
 ?>
 		<p class="no-margin">
 			<span class="small bugnote-revisions-link">
