@@ -296,6 +296,12 @@ if( $t_existing_bug->category_id != $t_updated_bug->category_id ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
+
+	# Make sure the category belongs to the given project's hierarchy
+	category_ensure_exists_in_project(
+		$t_updated_bug->category_id,
+		$t_updated_bug->project_id
+	);
 }
 
 # Don't allow changing the Resolution in the following cases:
