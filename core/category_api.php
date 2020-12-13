@@ -35,6 +35,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
@@ -50,7 +52,8 @@ require_api( 'utility_api.php' );
 $g_category_cache = array();
 
 /**
- * Check whether the category exists in the project
+ * Check whether the category exists globally.
+ *
  * @param integer $p_category_id A Category identifier.
  * @return boolean Return true if the category exists, false otherwise
  * @access public
@@ -61,8 +64,8 @@ function category_exists( $p_category_id ) {
 }
 
 /**
- * Check whether the category exists in the project
- * Trigger an error if it does not
+ * Trigger an error if category does not exist globally.
+ *
  * @param integer $p_category_id A Category identifier.
  * @return void
  * @access public
@@ -70,6 +73,37 @@ function category_exists( $p_category_id ) {
 function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+	}
+}
+
+/**
+ * Check whether the category exists within the project hierarchy.
+ *
+ * @param int $p_category_id Category identifier.
+ * @param int $p_project_id  Project identifier.
+ *
+ * @return bool True if the category exists, false otherwise.
+ */
+function category_exists_in_project( $p_category_id, $p_project_id ) {
+	$t_categories = array_column( category_get_all_rows( $p_project_id ), 'id' );
+	return in_array( $p_category_id, $t_categories );
+}
+
+/**
+ * Trigger an error if the category does not exist within the project hierarchy.
+ *
+ * @param int $p_category_id Category identifier.
+ * @param int $p_project_id  Project identifier.
+ *
+ * @throws ClientException
+ */
+function category_ensure_exists_in_project( $p_category_id, $p_project_id ) {
+	if( !category_exists_in_project( $p_category_id, $p_project_id ) ) {
+		throw new ClientException(
+			"Category '$p_category_id' not available in project '$p_project_id'.",
+			ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT,
+			array( $p_category_id, $p_project_id )
+		);
 	}
 }
 
@@ -654,4 +688,3 @@ function category_ensure_can_delete( $p_category_id ) {
 		trigger_error( ERROR_CATEGORY_CANNOT_DELETE_HAS_ISSUES, ERROR );
 	}
 }
-
