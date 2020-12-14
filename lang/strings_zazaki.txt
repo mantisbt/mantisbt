@@ -317,6 +317,7 @@ $s_projects_title_label = 'Proceyi';
 $s_name = 'Name';
 $s_update_version_button = 'Versiyoni Anewen ke';
 $s_released = 'Vıradeya';
+$s_reset_password_button = 'Parola newe ke';
 $s_show_all_users = 'Pêro';
 $s_users_unused = 'Nêkaryayo';
 $s_users_new = 'Newe';
