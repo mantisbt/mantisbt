@@ -2703,7 +2703,7 @@ $g_bug_reminder_threshold = DEVELOPER;
 
 /**
  * Access level required to view bug history revisions.
- * Users can always see revisions for the issues and bugnote they reported.
+ * Users can always see revisions for the issues and bugnotes they reported.
  * @global integer $g_bug_revision_view_threshold
  */
 $g_bug_revision_view_threshold = DEVELOPER;
