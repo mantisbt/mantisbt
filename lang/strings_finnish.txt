@@ -604,7 +604,6 @@ $s_plugin_key_upgrade = 'tarvittava päivitys';
 $s_project_added_msg = 'Projekti lisätty...';
 $s_category_added_msg = 'Kategoria lisätty...';
 $s_category_deleted_msg = 'Kategoria poistettu...';
-Luokassa %1$s on %2$d virheilmoitusta.';
 $s_category_delete_confirm_msg = 'Haluatko varmasti poistaa luokan "%1$s"?';
 $s_delete_category_button = 'Poista kategoria';
 $s_edit_project_category_title = 'Muokkaa projektin kategoriaa';
