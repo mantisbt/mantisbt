@@ -471,7 +471,7 @@ $s_hide_content = 'مخفی کردن محتوا';
 $s_show_content = 'نمایش محتوا';
 $s_webmaster_contact_information = 'تماس با <a href="mailto:%1$s" title="تماس با مدیر سایت از طریق ایمیل.">مدیریت</a> برای دریافت راهنمایی';
 $s_page_execution_time = 'زمان اجرای صفحه: %1$s ثانیه';
-$s_memory_usage_in_kb = 'استفادۀ حافظه: %1$s کیلوبایت';
+$s_memory_usage = 'استفادۀ حافظه: %1$s کیلوبایت';
 $s_log_page_number = 'شماره';
 $s_log_page_time = 'مدت زمان اجرا';
 $s_log_page_caller = 'تماس‌گیرنده';
