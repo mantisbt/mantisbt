@@ -654,7 +654,6 @@ $s_plugin_key_upgrade = 'actualización necesaria';
 $s_project_added_msg = 'O proxecto foi engadido con éxito...';
 $s_category_added_msg = 'A categoría foi engadida con éxito...';
 $s_category_deleted_msg = 'A categoría foi borrada con éxito...';
-$s_category_delete_sure_msg = 'Está seguro de querer borrar esta categoría?<br />A categoría "%1$s" contén %2$d erros.';
 $s_category_delete_confirm_msg = 'Está seguro de que quere eliminar a categoría "%1$s"?';
 $s_delete_category_button = 'Borrar a categoría';
 $s_edit_project_category_title = 'Editar a categoría do proxecto';

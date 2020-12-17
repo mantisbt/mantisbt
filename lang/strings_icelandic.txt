@@ -648,7 +648,6 @@ $s_plugin_key_upgrade = 'uppfærsla er nauðsynleg';
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
 $s_category_added_msg = 'Verkþættinum hefur verið bætt við...';
 $s_category_deleted_msg = 'Verkþættinum hefur verið eytt...';
-$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?<br />Verkþátturinn "%1$s" inniheldur %2$d villur.';
 $s_category_delete_confirm_msg = 'Ertu viss um að þú viljir eyða "%1$s" verkþættinum?';
 $s_delete_category_button = 'Eyða verkþætti';
 $s_edit_project_category_title = 'Skrifa verkþátt';

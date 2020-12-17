@@ -674,7 +674,6 @@ $s_plugin_key_upgrade = '需要升级';
 $s_project_added_msg = '已添加项目...';
 $s_category_added_msg = '已添加分类...';
 $s_category_deleted_msg = '已删除分类...';
-$s_category_delete_sure_msg = '您确定要删除此分类吗？?<br />分类"%1$s"仍然包含%2$d错误。';
 $s_category_delete_confirm_msg = '您确定要删除“%1$s”分类吗？';
 $s_delete_category_button = '删除分类';
 $s_edit_project_category_title = '编辑项目分类';

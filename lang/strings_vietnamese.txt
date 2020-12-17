@@ -579,7 +579,6 @@ $s_plugin_key_upgrade = 'cần được nâng cấp';
 $s_project_added_msg = 'Dự án đã được thêm thành công ...';
 $s_category_added_msg = 'Chuyên mục đã được thêm thành công ...';
 $s_category_deleted_msg = 'Chuyên mục đã bị xoá thành công ...';
-$s_category_delete_sure_msg = 'Bạn có chắc chắn muốn xóa chuyên mục này? <br /> Chuyên mục "%1$s" có chứa %2$d issue.';
 $s_delete_category_button = 'Xóa chuyên mục';
 $s_edit_project_category_title = 'Chỉnh sửa chuyên mục dự án';
 $s_update_category_button = 'Cập nhật chuyên mục';

@@ -596,7 +596,6 @@ $s_plugin_key_upgrade = 'Upgrade necesar';
 $s_project_added_msg = 'Proiectul a fost adăugat cu succes...';
 $s_category_added_msg = 'Categorie adaugată cu succes...';
 $s_category_deleted_msg = 'Categorie ștearsă cu succes...';
-$s_category_delete_sure_msg = 'Ești sigur că dorești să ștergi această categorie?<br/>Categoria „%1$s” conține %2$d probleme.';
 $s_delete_category_button = 'Sterge categoria';
 $s_edit_project_category_title = 'Modificarea categoriei unui proiect';
 $s_update_category_button = 'Modificare categorie';

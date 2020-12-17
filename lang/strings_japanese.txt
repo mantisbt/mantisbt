@@ -675,7 +675,6 @@ $s_plugin_key_upgrade = '要アップグレード';
 $s_project_added_msg = 'プロジェクトを追加しました...';
 $s_category_added_msg = 'カテゴリを追加しました...';
 $s_category_deleted_msg = 'カテゴリを削除しました...';
-$s_category_delete_sure_msg = 'このカテゴリを本当に削除しますか?<br />カテゴリ「%1$s」には課題が %2$d 個あります。';
 $s_category_delete_confirm_msg = '本当に「%1$s」カテゴリを削除しますか?';
 $s_delete_category_button = 'カテゴリを削除';
 $s_edit_project_category_title = 'プロジェクトのカテゴリの編集';

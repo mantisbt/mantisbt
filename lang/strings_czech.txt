@@ -667,7 +667,6 @@ $s_plugin_key_upgrade = 'vyžadován upgrade';
 $s_project_added_msg = 'Projekt byl úspěšně přidán...';
 $s_category_added_msg = 'Kategorie byla úspěšně přidána...';
 $s_category_deleted_msg = 'Kategorie byla úspěšně smazána...';
-$s_category_delete_sure_msg = 'Skutečně chcete smazat tuto kategorii?<br />Kategorie "%1$s" obsahuje %2$d problémů.';
 $s_category_delete_confirm_msg = 'Opravdu chcete odstranit kategorii "%1$s"?';
 $s_delete_category_button = 'Smazat kategorii';
 $s_edit_project_category_title = 'Aktualizace kategorií projektu';

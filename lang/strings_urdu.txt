@@ -480,7 +480,6 @@ $s_delete_config_sure_msg = ' کیا آپ واقعی ڈیزاہن کی آپشن 
 $s_project_added_msg = '  منصو بہ کامیابی کے ساتھ جمع ھو گیا ھے...';
 $s_category_added_msg = 'کيٹگری کامیابی کے ساتھ جمع ھو گی ھے ...';
 $s_category_deleted_msg = 'کيٹگری کامیابی کے ساتھ خارج ھو گی ھے...';
-$s_category_delete_sure_msg = 'کیا آپ واقعی اس کيٹگری کو خارج کرنا چاھتے ھیں ?';
 $s_delete_category_button = 'کيٹگری کو خارج کرو';
 $s_edit_project_category_title = ' منصو بہ کی کيٹگری کو تبدیل کرو';
 $s_update_category_button = 'کيٹگری کو تبدیل کر کے نیا کرو';

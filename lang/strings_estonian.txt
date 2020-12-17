@@ -570,7 +570,6 @@ $s_plugin_key_upgrade = 'uuendamine on vajalik';
 $s_project_added_msg = 'Projekt lisatud...';
 $s_category_added_msg = 'Kategooria lisatud...';
 $s_category_deleted_msg = 'Kategooria kustutatud...';
-$s_category_delete_sure_msg = 'Kas oled kindel, et soovid kustutada selle kategooria?<br />Kategooria "%1$s" sisaldab %2$d kannet.';
 $s_delete_category_button = 'Kustuta kategooria';
 $s_edit_project_category_title = 'Redigeeri projekti kategooriat';
 $s_update_category_button = 'Uuenda kategooriat';

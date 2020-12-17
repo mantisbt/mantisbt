@@ -565,7 +565,6 @@ $s_plugin_key_upgrade = 'potrebna je dogradnja';
 $s_project_added_msg = 'Projekat je dodat.';
 $s_category_added_msg = 'Kategorija je dodata.';
 $s_category_deleted_msg = 'Kategorija je obrisana.';
-$s_category_delete_sure_msg = 'Želite li da obrišete ovu kategoriju?<br />Kategorija „%1$s“ sadrži %2$d grešaka.';
 $s_delete_category_button = 'Obriši kategoriju';
 $s_edit_project_category_title = 'Izmena kategorije projekta';
 $s_update_category_button = 'Ažuriraj kategoriju';

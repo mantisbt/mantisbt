@@ -660,7 +660,6 @@ $s_plugin_key_upgrade = 'Необходимо обновяване';
 $s_project_added_msg = 'Проектът е добавен успешно...';
 $s_category_added_msg = 'Категорията е добавена успешно...';
 $s_category_deleted_msg = 'Категорията е изтрита успешно...';
-$s_category_delete_sure_msg = 'Изтриване на категорията?<br />Категория „%1$s“ съдържа %2$d проблема.';
 $s_category_delete_confirm_msg = 'Сигурен ли сте, че искате да изтриете категория „%1$s“?';
 $s_delete_category_button = 'Изтриване на категорията';
 $s_edit_project_category_title = 'Редакция на категорията на проекта';

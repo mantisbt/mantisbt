@@ -655,7 +655,6 @@ $s_plugin_key_upgrade = 'Ezhomm zo da lakaat a-live';
 $s_project_added_msg = 'Ouzhpennet-mat eo bet ar raktres...';
 $s_category_added_msg = 'Ouzhpennet-mat eo bet ar rummad...';
 $s_category_deleted_msg = 'Dilamet-mat eo bet ar rummad...';
-$s_category_delete_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar rummad-mañ ?<br />Er rummad « %1$s » ez eus %2$d draen.';
 $s_category_delete_confirm_msg = 'Ha sur oc\'h e fell deoc\'h dilemel ar rummad "%1$s" ?';
 $s_delete_category_button = 'Dilemel ar rummad';
 $s_edit_project_category_title = 'Aozañ rummad ar raktres';

@@ -683,7 +683,6 @@ $s_plugin_key_upgrade = 'yükseltme gerekli';
 $s_project_added_msg = 'Proje başarıyla eklendi...';
 $s_category_added_msg = 'Kategori başarıyla eklendi...';
 $s_category_deleted_msg = 'Kategori başarıyla silindi...';
-$s_category_delete_sure_msg = 'Bu kategoriyi silmek istediğinizden emin misiniz?<br />"%1$s" Kategorisi %2$d adet sorun içermektedir.';
 $s_category_delete_confirm_msg = '"%1$s" kategorisini silmek istediğinizde emin misiniz?';
 $s_delete_category_button = 'Kategori Sil';
 $s_edit_project_category_title = 'Proje Kategorisi Düzenle';
