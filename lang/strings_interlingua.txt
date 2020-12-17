@@ -650,7 +650,6 @@ $s_plugin_key_upgrade = 'actualisation necessari';
 $s_project_added_msg = 'Le projecto ha essite addite con successo...';
 $s_category_added_msg = 'Le categoria ha essite addite con successo...';
 $s_category_deleted_msg = 'Le categoria ha essite delite con successo...';
-$s_category_delete_sure_msg = 'Es tu secur de voler deler iste categoria?<br />Le categoria "%1$s" contine %2$d problemas.';
 $s_category_delete_confirm_msg = 'Es tu secur de voler deler le categoria "%1$s"?';
 $s_delete_category_button = 'Deler categoria';
 $s_edit_project_category_title = 'Modificar le categoria del projecto';

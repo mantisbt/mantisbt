@@ -645,7 +645,6 @@ $s_plugin_key_upgrade = 'anovamientu riquíu';
 $s_project_added_msg = 'El proyectu amestóse correutamente...';
 $s_category_added_msg = 'La categoría amestóse correutamente...';
 $s_category_deleted_msg = 'La categoría desanicióse correutamente...';
-$s_category_delete_sure_msg = '¿Ta seguru de que desees desaniciar esta categoría?La categoría "%1$s" contien %2$d incidencies.<br />';
 $s_category_delete_confirm_msg = '¿Tas seguro de que quies desaniciar la categoría "%1$s"?';
 $s_delete_category_button = 'Desaniciar categoría';
 $s_edit_project_category_title = 'Editar categoría del proyectu';

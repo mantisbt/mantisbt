@@ -665,7 +665,6 @@ $s_plugin_key_upgrade = 'frissítés szükséges';
 $s_project_added_msg = 'Projekt sikeresen hozzáadva…';
 $s_category_added_msg = 'Kategória sikeresen hozzáadva…';
 $s_category_deleted_msg = 'Kategória sikeresen törölve…';
-$s_category_delete_sure_msg = 'Valóban törli ezt a kategóriát?<br />A(z) „%1$s” kategória %2$d ügyet tartalmaz.';
 $s_category_delete_confirm_msg = 'Valóban törli a(z) „%1$s” kategóriát?';
 $s_delete_category_button = 'Kategória törlése';
 $s_edit_project_category_title = 'Projektkategória szerkesztése';

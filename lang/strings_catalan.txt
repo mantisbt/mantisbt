@@ -617,7 +617,6 @@ $s_plugin_key_upgrade = 'actualització requerida';
 $s_project_added_msg = 'El projecte ha estat agregat...';
 $s_category_added_msg = 'La categoria ha estat agregada...';
 $s_category_deleted_msg = 'La categoria ha estat eliminada...';
-$s_category_delete_sure_msg = 'Està segur que desitja eliminar la categoria?<br />La categoria "%1$s" conté %2$d incidències.';
 $s_delete_category_button = 'Elimina Categoria';
 $s_edit_project_category_title = 'Edita la Categoria del Projecte';
 $s_update_category_button = 'Actualitza Categoria';

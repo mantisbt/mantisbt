@@ -661,7 +661,6 @@ $s_plugin_key_upgrade = 'потребно е надградување';
 $s_project_added_msg = 'Проектот е успешно додаден...';
 $s_category_added_msg = 'Категоријата е успешно додадена...';
 $s_category_deleted_msg = 'Категоријата е успешно избришана...';
-$s_category_delete_sure_msg = 'Дали сте сигурни дека сакате да ја избришете оваа категорија?<br />Категоријата "%1$s" содржи %2$d проблеми.';
 $s_category_delete_confirm_msg = 'Дали сте сигурни дека сакате да ја избришете категоријата „%1$s“?';
 $s_delete_category_button = 'Избриши категорија';
 $s_edit_project_category_title = 'Уреди проектна категорија';

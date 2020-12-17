@@ -584,7 +584,6 @@ $s_plugin_key_upgrade = 'Upgrade notwändig';
 $s_project_added_msg = 'Projäkt isch zuegfiegt wore …';
 $s_category_added_msg = 'Kategorii isch zuegfiegt wore …';
 $s_category_deleted_msg = 'Kategorii isch glescht wore …';
-$s_category_delete_sure_msg = 'Soll die Kategorii wirkli glescht wäre?<br />In dr Kategorii „%1$s“ het s %2$d Bugs.';
 $s_delete_category_button = 'Kategorii lesche';
 $s_edit_project_category_title = 'Projäktkategorii bearbeite';
 $s_update_category_button = 'Kategorii aktualisiere';

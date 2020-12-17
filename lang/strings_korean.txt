@@ -665,7 +665,6 @@ $s_plugin_key_upgrade = '업그레이드 필요';
 $s_project_added_msg = '프로젝트가 추가되었습니다....';
 $s_category_added_msg = '분류가 추가되었습니다...';
 $s_category_deleted_msg = '분류가 삭제되었습니다...';
-$s_category_delete_sure_msg = '이 분류를 삭제하시겠습니까?<br />"%1$s" 분류에 이슈 %2$d개가 들어 있습니다.';
 $s_category_delete_confirm_msg = '"%1$s" 분류를 삭제하시겠습니까?';
 $s_delete_category_button = '분류 삭제';
 $s_edit_project_category_title = '프로젝트 분류 편집';

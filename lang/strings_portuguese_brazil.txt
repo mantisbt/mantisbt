@@ -682,7 +682,6 @@ $s_plugin_key_upgrade = 'atualização necessária';
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
 $s_category_added_msg = 'A categoria foi adicionada com sucesso...';
 $s_category_deleted_msg = 'A categoria foi apagada com sucesso...';
-$s_category_delete_sure_msg = 'Você tem certeza que deseja apagar esta categoria?<br />A categoria "%1$s" contém %2$d bugs.';
 $s_category_delete_confirm_msg = 'Você tem certeza que deseja deletar a categoria "%1$s"?';
 $s_delete_category_button = 'Apagar Categoria';
 $s_edit_project_category_title = 'Alterar Categoria do Projeto';

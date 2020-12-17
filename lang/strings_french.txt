@@ -686,7 +686,6 @@ $s_plugin_key_upgrade = 'mise à niveau requise';
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
 $s_category_added_msg = 'Nouvelle catégorie créée avec succès...';
 $s_category_deleted_msg = 'Catégorie effacée avec succès...';
-$s_category_delete_sure_msg = 'Voulez-vous vraiment supprimer cette catégorie ?<br /> La catégorie « %1$s » contient %2$d anomalies.';
 $s_category_delete_confirm_msg = 'Êtes-vous sûr de vouloir supprimer la catégorie « %1$s » ?';
 $s_delete_category_button = 'Supprimer la catégorie';
 $s_edit_project_category_title = 'Modifier la catégorie du projet';

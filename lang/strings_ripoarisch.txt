@@ -479,7 +479,6 @@ $s_configuration_option_type = 'Zoot';
 $s_project_added_msg = 'Dat Projäk wood derbei jedonn...';
 $s_category_added_msg = 'Di Saachjropp wood derbei jedonn...';
 $s_category_deleted_msg = 'Di Saachjropp wood fott jeschmeße...';
-$s_category_delete_sure_msg = 'Wells De di Saachjropp „%1$s“ verhaftesh fott schmiiße? <br /> Do sin %2$d Aanjelääjeheite dren.';
 $s_categories = 'Saachjroppe';
 $s_add_category_button = 'Donn en Saachjropp derbei';
 $s_versions = 'Väsjohne';

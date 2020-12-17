@@ -606,7 +606,6 @@ $s_plugin_key_upgrade = 'reikalingas atnaujinimas';
 $s_project_added_msg = 'Projektas sėkmingai sukurtas...';
 $s_category_added_msg = 'Kategorija sėkmingai sukurta...';
 $s_category_deleted_msg = 'Kategorija sėkmingai ištrinta...';
-$s_category_delete_sure_msg = 'Ar tikrai norite ištrinti šią kategoriją? <br /> Kategorija " %1$s "yra %2$d klausimus.';
 $s_delete_category_button = 'Ištrinti kategoriją';
 $s_edit_project_category_title = 'Projekto kategorijos redagavimas';
 $s_update_category_button = 'Atnaujinti kategoriją';

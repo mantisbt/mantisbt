@@ -567,7 +567,6 @@ $s_plugin_key_upgrade = 'kailangan ang pagtataas ng uri/kalidad';
 $s_project_added_msg = 'Matagumpay na naidagdag ang proyekto...';
 $s_category_added_msg = 'Matagumpay na naidagdag ang kaurian...';
 $s_category_deleted_msg = 'Matagumpay na nabura ang kaurian...';
-$s_category_delete_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang kauriang ito?<br />Naglalaman ng %2$d mga depekto (\'\'bug\'\') ang kauriang "%1$s".';
 $s_delete_category_button = 'Burahin ang Kaurian';
 $s_edit_project_category_title = 'Baguhin ang Kaurian ng Proyekto';
 $s_update_category_button = 'Isapanahon ang Kaurian';

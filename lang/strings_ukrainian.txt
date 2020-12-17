@@ -668,7 +668,6 @@ $s_plugin_key_upgrade = 'оновлення необхідні';
 $s_project_added_msg = 'Проект був успішно створений...';
 $s_category_added_msg = 'Категорія була успішно створена...';
 $s_category_deleted_msg = 'Категорія була успішно видалена...';
-$s_category_delete_sure_msg = 'Ви впевнені, що хочете вилучити цю категорію?<br />Категорія "%1$s" містить %2$d інцидентів.';
 $s_category_delete_confirm_msg = 'Ви справді хочете видалити "%1$s" категорію?';
 $s_delete_category_button = 'Видалити категорію';
 $s_edit_project_category_title = 'Редагування категорії проекту';

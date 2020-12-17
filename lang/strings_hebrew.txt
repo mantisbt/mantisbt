@@ -640,7 +640,6 @@ $s_plugin_key_upgrade = 'נדרש שדרוג';
 $s_project_added_msg = 'הפרויקט נוסף בהצלחה...';
 $s_category_added_msg = 'הקטגוריה נוספה בהצלחה...';
 $s_category_deleted_msg = 'הקטגוריה נמחקה בהצלחה...';
-$s_category_delete_sure_msg = 'האם ברצונך למחוק את הקטגוריה?<br />בקטגוריה „%1$s” יש %2$d באגים.';
 $s_category_delete_confirm_msg = 'האם ברצונך למחוק את הקטגוריה "%1$s"?';
 $s_delete_category_button = 'מחיקת קטגוריה';
 $s_edit_project_category_title = 'עריכת קטגורייה';

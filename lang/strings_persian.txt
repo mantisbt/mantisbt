@@ -646,7 +646,6 @@ $s_plugin_key_upgrade = 'نیازمند ارتقا';
 $s_project_added_msg = 'پروژه با موفقیت اضافه شد...';
 $s_category_added_msg = 'دسته با موفقیت اضافه شد...';
 $s_category_deleted_msg = 'دسته با موفقیت حذف شد...';
-$s_category_delete_sure_msg = 'آیا مطمئنید که این دسته را حذف کنید؟<br /> دسته "%1$s" شامل این مسائل است: %2$d';
 $s_category_delete_confirm_msg = 'آیا مطمئنید می‌خواهید دستۀ "%1$s" را حذف کنید؟';
 $s_delete_category_button = 'حذف دسته';
 $s_edit_project_category_title = 'ویرایش دسته‌های پروژه';

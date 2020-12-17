@@ -239,7 +239,6 @@ $s_edit_user_link = 'Editiraj korisnika';
 $s_project_added_msg = 'Projekt je uspješno dodan...';
 $s_category_added_msg = 'Kategorija je uspješno dodana...';
 $s_category_deleted_msg = 'Kategorija je uspješno obrisana...';
-$s_category_delete_sure_msg = 'Jeste li sigurni da želite obrisati kategoriju?<br />Kategorija "%1$s" sadrži %2$d komponenata.';
 $s_delete_category_button = 'Obriši kategoriju';
 $s_edit_project_category_title = 'Editiraj kategoriju projekta';
 $s_update_category_button = 'Ažuriraj kategoriju';

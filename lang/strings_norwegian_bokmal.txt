@@ -643,7 +643,6 @@ $s_plugin_key_upgrade = 'oppgradering nødvendig';
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
 $s_category_added_msg = 'Kategorien har blitt lagt til ...';
 $s_category_deleted_msg = 'Kategorien har blitt slettet ...';
-$s_category_delete_sure_msg = 'Er du sikker på at du ønsker å slette denne kategorien? Kategorien "%1$s" inneholder %2$d saker';
 $s_category_delete_confirm_msg = 'Er du sikker på at du vil slette kategorien «%1$s»?';
 $s_delete_category_button = 'Slett kategori';
 $s_edit_project_category_title = 'Redigere prosjektkategorier';

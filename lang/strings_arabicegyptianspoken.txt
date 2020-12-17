@@ -562,7 +562,6 @@ $s_plugin_key_upgrade = 'الترقيه مطلوبة';
 $s_project_added_msg = 'المشروع تمت إضافته بنجاح...';
 $s_category_added_msg = 'التصنيف تمت إضافته بنجاح...';
 $s_category_deleted_msg = 'التصنيف تم حذفه بنجاح...';
-$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%1$s" يحتوى على %2$d عله.';
 $s_delete_category_button = 'حذف التصنيف';
 $s_edit_project_category_title = 'عدل تصنيف المشروع';
 $s_update_category_button = 'تحديث التصنيف';

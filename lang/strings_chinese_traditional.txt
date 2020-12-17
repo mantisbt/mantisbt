@@ -672,7 +672,6 @@ $s_plugin_key_upgrade = '需要升級';
 $s_project_added_msg = '已成功新增專案...';
 $s_category_added_msg = '類別已新增成功...';
 $s_category_deleted_msg = '類別已刪除成功...';
-$s_category_delete_sure_msg = '您確定要刪除此類別?<br />類別 "%1$s" 中尚有 %2$d 個問題。';
 $s_category_delete_confirm_msg = '您確定要刪除分類 "%1$s" ？';
 $s_delete_category_button = '刪除類別';
 $s_edit_project_category_title = '編輯專案類別';

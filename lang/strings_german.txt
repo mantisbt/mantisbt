@@ -681,7 +681,6 @@ $s_plugin_key_upgrade = 'Upgrade notwendig';
 $s_project_added_msg = 'Projekt wurde hinzugefügt …';
 $s_category_added_msg = 'Kategorie wurde hinzugefügt …';
 $s_category_deleted_msg = 'Kategorie wurde gelöscht …';
-$s_category_delete_sure_msg = 'Soll diese Kategorie wirklich gelöscht werden?<br />Die Kategorie „%1$s“ enthält %2$d Bugs.';
 $s_category_delete_confirm_msg = 'Sind Sie sicher, dass Sie die Kategorie „%1$s“ löschen möchten?';
 $s_delete_category_button = 'Kategorie löschen';
 $s_edit_project_category_title = 'Projektkategorie bearbeiten';

@@ -237,7 +237,6 @@ $s_plugin_actions = 'Duns';
 $s_project_added_msg = 'Proyeg peläükon benosekiko...';
 $s_category_added_msg = 'Klad peläükon benosekiko...';
 $s_category_deleted_msg = 'Klad pemoükon benosekiko...';
-$s_category_delete_sure_msg = 'Vilol-li fümiko moükön kladi at?<br />Klad: „%1$s“ labons säkädis %2$d.';
 $s_delete_category_button = 'Moükön Kladi';
 $s_edit_project_category_title = 'Bevobön proyegakladi';
 $s_update_category_button = 'Bevobön Kladi';

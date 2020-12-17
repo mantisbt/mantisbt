@@ -630,7 +630,6 @@ $s_plugin_key_upgrade = 'vyžadovaný upgrade';
 $s_project_added_msg = 'Projekt bol úspešne pridaný...';
 $s_category_added_msg = 'Kategória bola úspešne pridaná...';
 $s_category_deleted_msg = 'Kategória bola úspešne zmazaná...';
-$s_category_delete_sure_msg = 'Naozaj chcete zmazať túto kategóriu?<br />Kategória „%1$s“ obsahuje %2$d problémov.';
 $s_delete_category_button = 'Zmazať kategóriu';
 $s_edit_project_category_title = 'Aktualizácia kategórií projektu';
 $s_update_category_button = 'Aktualizovať kategóriu';

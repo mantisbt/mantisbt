@@ -658,7 +658,6 @@ $s_plugin_key_upgrade = 'opgradering nødvendig';
 $s_project_added_msg = 'Projektet er tilføjet...';
 $s_category_added_msg = 'Kategorien er blevet tilføjet...';
 $s_category_deleted_msg = 'Kategorien er blevet slettet...';
-$s_category_delete_sure_msg = 'Er du sikker på, du vil slette denne kategori?<br />Kategorien "%1$s" indeholder %2$d rapporter.';
 $s_category_delete_confirm_msg = 'Er du sikker på, at du ønsker at slette kategorien »%1$s«?';
 $s_delete_category_button = 'Slet kategori';
 $s_edit_project_category_title = 'Rediger projektkategori';

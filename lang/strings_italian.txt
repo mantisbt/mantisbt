@@ -676,7 +676,6 @@ $s_plugin_key_upgrade = 'Richiede aggiornamento';
 $s_project_added_msg = 'Il progetto è stato inserito...';
 $s_category_added_msg = 'La categoria è stata inserita...';
 $s_category_deleted_msg = 'La categoria è stata eliminata...';
-$s_category_delete_sure_msg = 'Sei sicuro di voler cancellare questa categoria?<br />La categoria "%1$s" contiene %2$d bug.';
 $s_category_delete_confirm_msg = 'Sei sicuro di voler cancellare la categoria "%1$s"?';
 $s_delete_category_button = 'Cancella categoria';
 $s_edit_project_category_title = 'Modifica categoria del progetto';

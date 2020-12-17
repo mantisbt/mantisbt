@@ -606,7 +606,6 @@ $s_plugin_key_upgrade = 'Mesa a nivèl requerida';
 $s_project_added_msg = 'Lo projècte es estat apondut amb succès...';
 $s_category_added_msg = 'Categoria novèla creada amb succès...';
 $s_category_deleted_msg = 'Categoria escafada amb succès...';
-$s_category_delete_sure_msg = 'Sètz segur que volètz suprimir aquesta categoria ?<br />La categoria « %1$s » conten %2$d bugs.';
 $s_delete_category_button = 'Suprimir la categoria';
 $s_edit_project_category_title = 'Modificar las categorias del projècte';
 $s_update_category_button = 'Metre a jorn la categoria';

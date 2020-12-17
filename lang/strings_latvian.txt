@@ -434,7 +434,6 @@ $s_plugin_key_met = 'spraudnis gatavs';
 $s_project_added_msg = 'Projekts pievienots...';
 $s_category_added_msg = 'Kategorija pievienota...';
 $s_category_deleted_msg = 'Kategorija nodzēsta...';
-$s_category_delete_sure_msg = 'Vai esat pārliecināti par kategorijas dzēšanu? <br />Kategorija "%1$s" satur %2$d bugus.';
 $s_delete_category_button = 'Dzēst kategoriju';
 $s_edit_project_category_title = 'Projekta kategoriju labošana';
 $s_update_category_button = 'Saglabāt kategoriju';

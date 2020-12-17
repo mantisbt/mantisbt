@@ -653,7 +653,6 @@ $s_plugin_key_upgrade = 'berriztea behar da';
 $s_project_added_msg = 'Proiektua arazorik gabe gehitu da...';
 $s_category_added_msg = 'Kategoria arazorik gabe gehitu da...';
 $s_category_deleted_msg = 'Kategoria arazorik gabe ezabatu da...';
-$s_category_delete_sure_msg = 'Ziur kategoria hau ezabatu nahi duzula?<br />"%1$s" kategoriak %2$d arazo ditu.';
 $s_category_delete_confirm_msg = '"%1$s" kategoria ezabatzeaz ziur al zaude?';
 $s_delete_category_button = 'Kategoria ezabatu';
 $s_edit_project_category_title = 'Proeiktu Kategoria Editatu';

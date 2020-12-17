@@ -676,7 +676,6 @@ $s_plugin_key_upgrade = 'uppgradering behövs';
 $s_project_added_msg = 'Projektet har lagts till...';
 $s_category_added_msg = 'Kategorin har lagts till...';
 $s_category_deleted_msg = 'Kategorin har tagits bort...';
-$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin?<br />Kategorin "%1$s" innehåller %2$d ärenden.';
 $s_category_delete_confirm_msg = 'Är du säker på att du vill radera kategorin "%1$s"?';
 $s_delete_category_button = 'Ta bort kategori';
 $s_edit_project_category_title = 'Redigera projektkategori';

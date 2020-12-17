@@ -657,7 +657,6 @@ $s_plugin_key_upgrade = 'неабходнае абнаўленьне';
 $s_project_added_msg = 'Праект дададзены пасьпяхова…';
 $s_category_added_msg = 'Катэгорыя дададзеная пасьпяхова…';
 $s_category_deleted_msg = 'Катэгорыя выдаленая пасьпяхова…';
-$s_category_delete_sure_msg = 'Вы ўпэўнены, што жадаеце выдаліць гэтую катэгорыю?<br />Катэгорыя «%1$s» утрымлівае %2$d праблемаў.';
 $s_category_delete_confirm_msg = 'Вы ўпэўненыя, што хочаце выдаліць катэгорыю «%1$s»?';
 $s_delete_category_button = 'Выдаліць катэгорыю';
 $s_edit_project_category_title = 'Рэдагаваць катэгорыю праекту';

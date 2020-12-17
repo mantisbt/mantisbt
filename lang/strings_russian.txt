@@ -676,7 +676,6 @@ $s_plugin_key_upgrade = 'необходимо обновление';
 $s_project_added_msg = 'Проект добавлен...';
 $s_category_added_msg = 'Категория добавлена...';
 $s_category_deleted_msg = 'Категория удалена...';
-$s_category_delete_sure_msg = 'Вы уверены, что хотите удалить категорию?<br />Категория "%1$s" содержит %2$d задач.';
 $s_category_delete_confirm_msg = 'Вы уверены, что хотите удалить категорию "%1$s"?';
 $s_delete_category_button = 'Удалить категорию';
 $s_edit_project_category_title = 'Изменение категорий проекта';

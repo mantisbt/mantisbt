@@ -666,7 +666,6 @@ $s_plugin_key_upgrade = 'الترقية مطلوبة';
 $s_project_added_msg = 'المشروع تمت إضافته بنجاح...';
 $s_category_added_msg = 'التصنيف تمت إضافته بنجاح...';
 $s_category_deleted_msg = 'التصنيف تم حذفه بنجاح...';
-$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%1$s" يحتوي على %2$d علة.';
 $s_category_delete_confirm_msg = 'هل أنت متأكد من حذف الفئة "%1$s" ؟';
 $s_delete_category_button = 'حذف التصنيف';
 $s_edit_project_category_title = 'عدل تصنيف المشروع';

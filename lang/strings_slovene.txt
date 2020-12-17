@@ -336,7 +336,6 @@ $s_status_level = 'Stanje';
 $s_project_added_msg = 'Projekt je bila uspešno dodan...';
 $s_category_added_msg = 'Kategorija je bila uspešno dodana...';
 $s_category_deleted_msg = 'Kategorija je bila uspešno izbrisana...';
-$s_category_delete_sure_msg = 'Ste prepričani, da želite izbrisati to kategorijo?<br />Kategorija »%1$s« vsebuje %2$d objav.';
 $s_delete_category_button = 'Izbriši kategorijo';
 $s_edit_project_category_title = 'Urejanje kategorije';
 $s_update_category_button = 'Posodobi kategorijo';

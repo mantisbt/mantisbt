@@ -588,7 +588,6 @@ $s_plugin_key_upgrade = 'χρειάζεται αναβάθμιση';
 $s_project_added_msg = 'Η εφαρμογή προστέθηκε επιτυχώς...';
 $s_category_added_msg = 'Η κατηγορία προστέθηκε επιτυχώς...';
 $s_category_deleted_msg = 'Η κατηγορία διαγράφηκε επιτυχώς...';
-$s_category_delete_sure_msg = 'Είστε σίγουρος πως θέλετε να γίνει η διαγραφή αυτἠς της κατηγορίας;<br />Η κατηγορία "%1$s" περιέχει %2$d σφάλματα.';
 $s_delete_category_button = 'Διαγραφή Κατηγορίας';
 $s_edit_project_category_title = 'Επεξεργασία Κατηγορίας ΕφαρμοEdit Project Category';
 $s_update_category_button = 'Ενημέρωση Κατηγορίας';
