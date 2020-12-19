@@ -97,8 +97,6 @@ if( $f_bug_id ) {
 $t_bug_data = bug_get( $t_bug_id, true );
 $t_project_id = $t_bug_data->project_id;
 
-$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
-
 # Make sure user is allowed to view revisions
 # If processing a bugnote, we don't need to check bug-level access as it is
 # already done at the lower level, and in fact we must not do it as a user may
@@ -118,8 +116,9 @@ if( $t_bugnote_id ) {
  * @param array $p_revision Bug Revision Data.
  */
 function show_revision( array $p_revision ) {
-	global $t_view_bug_threshold;
+	static $s_view_bug_threshold = null;
 	static $s_can_drop = null;
+	static $s_date_format = null;
 
 	/**
 	 * @var int    $v_id
@@ -133,7 +132,12 @@ function show_revision( array $p_revision ) {
 	extract( $p_revision, EXTR_PREFIX_ALL, 'v' );
 
 	if( is_null( $s_can_drop ) ) {
-		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $v_bug_id );
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
+		$t_bug_revision_drop_threshold = config_get( 'bug_revision_drop_threshold', null, null, $t_project_id );
+		$s_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+		$s_can_drop = access_has_bug_level( $t_bug_revision_drop_threshold, $v_bug_id );
+		$s_date_format = config_get( 'normal_date_format', null, null, $t_project_id );
 	}
 
 	switch( $v_type ) {
@@ -158,7 +162,7 @@ function show_revision( array $p_revision ) {
 	}
 
 	$t_by_string = sprintf( lang_get( 'revision_by' ),
-		string_display_line( date( config_get( 'normal_date_format' ), $v_timestamp ) ),
+		string_display_line( date( $s_date_format, $v_timestamp ) ),
 		prepare_user_name( $v_user_id )
 	);
 
