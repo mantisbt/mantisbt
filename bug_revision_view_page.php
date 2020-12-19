@@ -94,9 +94,6 @@ if( $f_bug_id ) {
 	exit;
 }
 
-$t_bug_data = bug_get( $t_bug_id, true );
-$t_project_id = $t_bug_data->project_id;
-
 # Make sure user is allowed to view revisions
 # If processing a bugnote, we don't need to check bug-level access as it is
 # already done at the lower level, and in fact we must not do it as a user may
