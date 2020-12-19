@@ -859,7 +859,7 @@ $s_add_subproject_title = 'Add Subproject';
 $s_project_deleted_msg = 'Project successfully removed...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Are you sure you want to delete this project and all attached issue reports?';
+$s_project_delete_msg = 'Are you sure you want to delete project "%1$s" ?<br>This will also delete %2$s attached issue reports.';
 $s_project_delete_button = 'Delete Project';
 
 # manage_proj_edit_page.php
