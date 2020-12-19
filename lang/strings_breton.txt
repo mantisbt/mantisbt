@@ -641,7 +641,6 @@ $s_readonly_status = 'Statud ma teu un draen da vezañ da lenn hepken';
 $s_reopen_status = 'Statud a vez lakaet d\'un draen addigoret';
 $s_reopen_resolution = 'Diskoulm a vez lakaet d\'un draen addigoret';
 $s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziverkañ an arventennoù evit :';
-$s_in_project = 'er raktres';
 $s_delete_config_button = 'Dilemel an arventennoù';
 $s_configuration_report = 'Danevell kefluniadur';
 $s_database_configuration = 'Kefluniadur an diaz roadennoù';

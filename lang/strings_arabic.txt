@@ -651,7 +651,6 @@ $s_readonly_status = 'الحالة حيث تصبح قضية ما للقراءة 
 $s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتحها إليها';
 $s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
 $s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
-$s_in_project = 'في المشروع';
 $s_delete_config_button = 'حذف الإعدادات';
 $s_configuration_report = 'تقرير الضبط';
 $s_database_configuration = 'ضبط قاعدة البيانات';

@@ -646,7 +646,6 @@ $s_readonly_status = 'Csak olvashatóvá vált ügyhöz beállítandó státusz'
 $s_reopen_status = 'Újranyitott ügyhöz beállítandó státusz';
 $s_reopen_resolution = 'Újranyitott ügyhöz beállítandó döntés';
 $s_config_delete_sure = 'Valóban törölni szeretné a következők beállításait:';
-$s_in_project = 'beállításait a következő projektben:';
 $s_delete_config_button = 'Beállítások törlése';
 $s_configuration_report = 'Konfigurációs jelentés';
 $s_database_configuration = 'Adatbázis konfigurációja';

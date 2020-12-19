@@ -653,7 +653,6 @@ $s_readonly_status = 'Estado no qual um problema se torna apenas de leitura';
 $s_reopen_status = 'Estado para o qual se define um problema reaberto';
 $s_reopen_resolution = 'Resolução atribuída a um problema reaberto';
 $s_config_delete_sure = 'Tem a certeza que quer apagar as configurações para:';
-$s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar configurações';
 $s_configuration_report = 'Relatório de configuração';
 $s_database_configuration = 'Configuração da base de dados';

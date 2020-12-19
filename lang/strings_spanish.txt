@@ -663,7 +663,6 @@ $s_readonly_status = 'Estado en el que una incidencia se establece como de solo 
 $s_reopen_status = 'Estado en el que se establece una incidencia reabierta';
 $s_reopen_resolution = 'Resolución que se establece al reabrir una incidencia';
 $s_config_delete_sure = '¿Confirmas que quieres eliminar la configuración de:';
-$s_in_project = 'en el proyecto';
 $s_delete_config_button = 'Borrar Configuración';
 $s_configuration_report = 'Reporte de Configuración';
 $s_database_configuration = 'Configuración de la Base de Datos';
