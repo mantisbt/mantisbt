@@ -647,7 +647,6 @@ $s_reopen_status = 'Estado en el que se establece una incidencia reabierta';
 $s_reopen_resolution = 'Resolución que se establece al reabrir una incidencia';
 $s_limit_view_unless_threshold_option = 'Ver incidencias de otros usuarios (si no se establece, el acceso se verá restringido a las incidencias reportadas, asignadas o monitoreadas por el usuario).';
 $s_config_delete_sure = '¿Confirmas que quieres eliminar la configuración de:';
-$s_in_project = 'en el proyecto';
 $s_delete_config_button = 'Borrar Configuración';
 $s_configuration_report = 'Reporte de Configuración';
 $s_database_configuration = 'Configuración de la Base de Datos';

@@ -570,7 +570,6 @@ $s_readonly_status = 'Tapahtuman tila, jolla tapahtumaa ei voida enää muokata 
 $s_reopen_status = 'Tapahtuman tila, jolle uudelleenavatut tapahtumat asetetaan';
 $s_reopen_resolution = 'Ratkaisuaste, jolle uudelleeavattu tapahtuma asetetaan';
 $s_config_delete_sure = 'Oletko varma, että haluat poistaa asetukset kohteelta';
-$s_in_project = 'projektissa';
 $s_delete_config_button = 'Poista asetukset';
 $s_configuration_report = 'Konfiguraatioraportti';
 $s_database_configuration = 'Tietokannan konfiguraatio';

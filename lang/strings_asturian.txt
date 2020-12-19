@@ -608,7 +608,6 @@ $s_readonly_status = 'Estáu nel qu\'una incidencia establezse como de sólo lle
 $s_reopen_status = 'Estáu que se-yos pon a les incidencies reabiertes';
 $s_reopen_resolution = 'Resolvimientu que se-yos pon a les incidencies reabiertes';
 $s_config_delete_sure = 'Tas seguru de que desees borrar la configuración de:';
-$s_in_project = 'nel proyectu';
 $s_delete_config_button = 'Desaniciar la configuración';
 $s_configuration_report = 'Informe de configuración';
 $s_database_configuration = 'Configuración de la Base de datos';

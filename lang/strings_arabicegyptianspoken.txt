@@ -528,7 +528,6 @@ $s_readonly_status = 'الحاله حيث تصبح قضيه ما للقراءه 
 $s_reopen_status = 'الحاله التى يتم ضبط قضيه معاد فتحها إليها';
 $s_reopen_resolution = 'الحل الذى يتم ضبط قضيه معاد فتحها إليه';
 $s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
-$s_in_project = 'فى المشروع';
 $s_delete_config_button = 'حذف الإعدادات';
 $s_configuration_report = 'تقرير الضبط';
 $s_database_configuration = 'ضبط قاعده البيانات';

@@ -617,7 +617,6 @@ $s_readonly_status = 'Estado no cal os problemas son considerados de só lectura
 $s_reopen_status = 'Estado no cal son establecidos os problemas reabertos';
 $s_reopen_resolution = 'Resolución na cal son establecidos os problemas reabertos';
 $s_config_delete_sure = 'Está seguro de querer borrar os axustes de:';
-$s_in_project = 'no proxecto';
 $s_delete_config_button = 'Borrar as características';
 $s_configuration_report = 'Informe da configuración';
 $s_database_configuration = 'Configuración da base de datos';

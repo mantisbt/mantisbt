@@ -634,7 +634,6 @@ $s_reopen_status = '重新打开的问题状态设置为';
 $s_reopen_resolution = '重新打开的问题的处理状况设置为';
 $s_limit_view_unless_threshold_option = '查看其他用户的问题 (如果没有设置，将仅限显示用户报告、处理或监控的问题)';
 $s_config_delete_sure = '您确实要删除的设置：';
-$s_in_project = '在项目';
 $s_delete_config_button = '删除设置';
 $s_configuration_report = '配置报告';
 $s_database_configuration = '数据库配置';

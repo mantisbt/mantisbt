@@ -546,7 +546,6 @@ $s_readonly_status = 'Trạng thái nơi một issue sẽ trở thành chỉ đ�
 $s_reopen_status = 'Trạng thái được lập đối với issue mở lại';
 $s_reopen_resolution = 'Giải quyết một vấn đề mở mà được thiết lập';
 $s_config_delete_sure = 'Bạn có chắc bạn muốn xóa các thiết đặt cho:';
-$s_in_project = 'trong dự án';
 $s_delete_config_button = 'Xoá các thiết đặt';
 $s_configuration_report = 'Cấu hình báo cáo';
 $s_database_configuration = 'Cấu hình cơ sở dữ liệu';

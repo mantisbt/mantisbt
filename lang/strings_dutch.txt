@@ -631,7 +631,6 @@ $s_readonly_status = 'Status waarbij een melding alleen-lezen wordt';
 $s_reopen_status = 'Status waarop een heropende melding wordt ingesteld';
 $s_reopen_resolution = 'Oplossing die voor een heropende melding wordt ingesteld';
 $s_config_delete_sure = 'Weet u zeker dat u de instellingen wilt verwijderen voor:';
-$s_in_project = 'in project';
 $s_delete_config_button = 'Instellingen verwijderen';
 $s_configuration_report = 'Instellingenrapport';
 $s_database_configuration = 'Instellingen database';

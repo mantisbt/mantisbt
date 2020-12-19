@@ -532,7 +532,6 @@ $s_readonly_status = 'Stanje pri kom problem postaje nedostupan za uređivanje';
 $s_reopen_status = 'Stanje na koje je naznačen ponovo otvoreni problem';
 $s_reopen_resolution = 'Rešenje na koje je naznačen ponovo otvoreni problem';
 $s_config_delete_sure = 'Želite li da obrišete postavke za:';
-$s_in_project = 'u projektu';
 $s_delete_config_button = 'Obriši postavke';
 $s_configuration_report = 'Izveštaj o postavkama';
 $s_database_configuration = 'Postavke baze podataka';

@@ -639,7 +639,6 @@ $s_readonly_status = 'Состояние для перевода задачи в
 $s_reopen_status = 'Состояние для переоткрытой задачи';
 $s_reopen_resolution = 'Вид решения для переоткрытой задачи';
 $s_config_delete_sure = 'Вы уверены, что хотите удалить настройки для:';
-$s_in_project = 'в проекте';
 $s_delete_config_button = 'Удалить настройки';
 $s_configuration_report = 'Отчет о конфигурации';
 $s_database_configuration = 'Конфигурация базы данных';

@@ -627,7 +627,6 @@ $s_readonly_status = '이슈가 읽기 전용이 되어 있는 상태';
 $s_reopen_status = '재발생된 이슈가 설정되어 있는 상태';
 $s_reopen_resolution = '재오픈된 이슈가 설정되어 있는 것에 대한 해결책';
 $s_config_delete_sure = '정말로 다음의 상태를 삭제하시겠습니까:';
-$s_in_project = '프로젝트에서';
 $s_delete_config_button = '설정 삭제';
 $s_configuration_report = '구성 보고서';
 $s_database_configuration = '데이터베이스 구성';

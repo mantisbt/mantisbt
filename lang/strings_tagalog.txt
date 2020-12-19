@@ -534,7 +534,6 @@ $s_readonly_status = 'Kalagayan kung saan nagiging mababasa lamang ang isang lab
 $s_reopen_status = 'Kalagayan kung saan nakatakda ang isang muling binuksang labas';
 $s_reopen_resolution = 'Kalutasan kung saan nakatakda ang isang muling binuksang labas';
 $s_config_delete_sure = 'Natitiyak mo bang nais mong burahin ang mga pagtatakda para sa:';
-$s_in_project = 'sa loob ng proyekto';
 $s_delete_config_button = 'Burahin ang mga Pagtatakda';
 $s_configuration_report = 'Ulat sa Pagkakaayos';
 $s_database_configuration = 'Pagkakaayos ng Kalipunan ng Dato';

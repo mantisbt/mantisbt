@@ -572,7 +572,6 @@ $s_readonly_status = 'Būsena, kuriai esant klaida tampa neredaguojama';
 $s_reopen_status = 'Būsena, kuri nustatoma pakartotinai atidaromai klaidai';
 $s_reopen_resolution = 'Sprendimas, kuris nustatomas pakartotinai atidarytai klaidai';
 $s_config_delete_sure = 'Ar tikrai norite ištrinti nustatymus:';
-$s_in_project = 'projekto';
 $s_delete_config_button = 'Ištrinti nustatymus';
 $s_configuration_report = 'Konfigūracijos ataskaita';
 $s_database_configuration = 'Duomenų bazės konfigūracija';

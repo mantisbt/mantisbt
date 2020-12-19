@@ -603,7 +603,6 @@ $s_readonly_status = 'מצב שבו הבאג יוגדר לקריאה בלבד';
 $s_reopen_status = 'מצב שיוגדר לבאג שנפתח מחדש';
 $s_reopen_resolution = 'פתרון שהוגדר לבאג שנפתח מחדש';
 $s_config_delete_sure = 'האם ברצונך למחוק את ההגדרות עבור:';
-$s_in_project = 'בפרויקט:';
 $s_delete_config_button = 'מחיקת הגדרות';
 $s_configuration_report = 'דו״ח תצורה';
 $s_database_configuration = 'תצורת מסד נתונים';

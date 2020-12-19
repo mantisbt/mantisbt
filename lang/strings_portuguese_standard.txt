@@ -629,7 +629,6 @@ $s_reopen_status = 'Estado para o qual se define um problema reaberto';
 $s_reopen_resolution = 'Resolução atribuída a um problema reaberto';
 $s_limit_view_unless_threshold_option = 'Ver incidentes de outros utentes (se não estabelecido, o acesso será limitado aos incidentes reportados, alocados ou monitorizados pelo utente)';
 $s_config_delete_sure = 'Tem a certeza que quer apagar as configurações para:';
-$s_in_project = 'no projeto';
 $s_delete_config_button = 'Apagar configurações';
 $s_configuration_report = 'Relatório de configuração';
 $s_database_configuration = 'Configuração da base de dados';

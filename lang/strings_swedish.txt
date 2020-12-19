@@ -636,7 +636,6 @@ $s_reopen_status = 'Status att sätta ett återöppnat ärende till';
 $s_reopen_resolution = 'Lösning som ett återöppnat ärende sätts till';
 $s_limit_view_unless_threshold_option = 'Visa andra användares rapporter (om inte inställt kommer åtkomsten att begränsas till rapporter rapporterade, hanterade eller visade av användaren)';
 $s_config_delete_sure = 'Är du säker på att du vill ta bort inställningarna för:';
-$s_in_project = 'i projektet';
 $s_delete_config_button = 'Ta bort inställningar';
 $s_configuration_report = 'Konfigurationsrapport';
 $s_database_configuration = 'Databaskonfiguration';

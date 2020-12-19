@@ -590,7 +590,6 @@ $s_readonly_status = 'Estat on una incidència només és per lectura';
 $s_reopen_status = 'Estat on s\'estableix una incidència reoberta';
 $s_reopen_resolution = 'Resolució que es posa a una incidència reoberta';
 $s_config_delete_sure = 'Esta segur que vol eliminar la configuració per:';
-$s_in_project = 'al projecte';
 $s_delete_config_button = 'Eliminar Configuració';
 $s_configuration_report = 'Informe de Configuració';
 $s_database_configuration = 'Configuració de la Base de Dades';

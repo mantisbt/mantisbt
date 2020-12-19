@@ -634,7 +634,6 @@ $s_reopen_status = '重新開啟問題後的預設狀態';
 $s_reopen_resolution = '重新開啟問題後的分析';
 $s_limit_view_unless_threshold_option = '檢視其他使用者的問題（若未設定，存取會限制於由使用者回報、處理、或監視的問題）';
 $s_config_delete_sure = '您確定要刪除以下的設定:';
-$s_in_project = '於專案';
 $s_delete_config_button = '刪除設定值';
 $s_configuration_report = '設置報表';
 $s_database_configuration = '資料庫設定';

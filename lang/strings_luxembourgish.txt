@@ -233,7 +233,6 @@ $s_email_notify_users = 'All Benotzer mat Zougangsrecht';
 $s_message = 'Message';
 $s_status_level = 'Status';
 $s_allowed_access_levels = 'Erlaabt fir all Benotzer mat Zougangsrechter';
-$s_in_project = 'am Projet';
 $s_delete_config_button = 'Astellungen läschen';
 $s_configuration_option_type = 'Typ';
 $s_configuration_option_value = 'Wäert';

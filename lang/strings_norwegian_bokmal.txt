@@ -606,7 +606,6 @@ $s_readonly_status = 'Status når en sak kun kan leses';
 $s_reopen_status = 'Status for en gjenåpnet sak settes til';
 $s_reopen_resolution = 'Løsningsstatus for en gjenåpnet sak settes til';
 $s_config_delete_sure = 'Er du sikker på at du vil slette innstillingene for:';
-$s_in_project = 'i prosjekt';
 $s_delete_config_button = 'Slette innstillinger';
 $s_configuration_report = 'Konfigurasjonsrapport';
 $s_database_configuration = 'Database-konfigurasjon';

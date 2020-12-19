@@ -449,7 +449,6 @@ $s_change_view_state_own_bugnotes = 'საკუთარი შენიშვ
 $s_limit_access = 'რეპორტერის თავის მოთხოვნებთან დაშვების შეზღუდვა';
 $s_submit_status = 'სტატუსი, რომლისთვისაც მინიჭებულია ახალი მოთხოვნა';
 $s_config_delete_sure = 'დარწმუნებული ხართ, რომ გსურთ პარამეტრების წაშლა:';
-$s_in_project = 'პროექტში';
 $s_delete_config_button = 'პარამეტრების წაშლა';
 $s_configuration_report = 'კონფიგურაციის რეპორტი';
 $s_database_configuration = 'მონაცემთა ბაზის კონფიგურაცია';

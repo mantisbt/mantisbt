@@ -596,7 +596,6 @@ $s_readonly_status = 'Stav pri ktorom bude problém len na čítenie';
 $s_reopen_status = 'Stav na ktorý je nastavený znovuotvorený problém';
 $s_reopen_resolution = 'Riešenie na ktoré je nastavený znovuotvorený problém';
 $s_config_delete_sure = 'Naozaj chcete odstrániť nastavenia pre:';
-$s_in_project = 'v projekte';
 $s_delete_config_button = 'Zmazať Nastavenia';
 $s_configuration_report = 'Správa o Konfigurácii';
 $s_database_configuration = 'Konfigurácia Databázy';

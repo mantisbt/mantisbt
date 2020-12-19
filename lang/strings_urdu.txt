@@ -467,7 +467,6 @@ $s_readonly_status = ' مقام جس جگہ صرف پٹراھا جا سکتا ھ
 $s_reopen_status = ' مقام جس جگہ پر دوبارہ کھولا گیا ایشوذ سیٹ کیاگیا ھے';
 $s_reopen_resolution = 'ساہز جس جگہ پر دوبارہ کھولا گیا ایشوذ سیٹ کیا گیا ھے';
 $s_config_delete_sure = ' کیا آپ واقعی سيٹنگز کو خارج کرنا چاھتے ھیں';
-$s_in_project = '  منصو بہ میں';
 $s_delete_config_button = 'سيٹنگز کو خارج کرو';
 $s_configuration_report = 'ڈیزاہن کی رپورٹ';
 $s_database_configuration = 'ڈیٹابیس کی کانفیگریشن';

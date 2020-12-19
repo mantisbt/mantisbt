@@ -572,7 +572,6 @@ $s_readonly_status = 'Estat alquin un bòg pòt èsser modificat';
 $s_reopen_status = 'Estat alquin un bògue redobert es iniciat';
 $s_reopen_resolution = 'Resolucion a laquina un bòg redobert es iniciat';
 $s_config_delete_sure = 'Sètz segur que volètz suprimir la configuracion per :';
-$s_in_project = 'del projècte';
 $s_delete_config_button = 'Suprimir la configuracion';
 $s_configuration_report = 'Rapòrt de configuracion';
 $s_database_configuration = 'Configuracion de la basa de donadas';
