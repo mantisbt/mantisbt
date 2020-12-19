@@ -1016,3 +1016,19 @@ function project_link_for_menu( $p_project_id, $p_active = false, $p_class = '',
 
 	return sprintf('<a class="%s" href="%s">%s</a>', $p_class, $t_url, $t_label );
 }
+
+/**
+ * Returns the number of issues associated with the given Project.
+ *
+ * @param int $p_project_id A project identifier.
+ *
+ * @return int
+ */
+function project_get_bug_count( $p_project_id ) {
+	$t_query = new DbQuery();
+	$t_query->sql( 'SELECT COUNT(*) FROM {bug} WHERE project_id='
+		. $t_query->param( $p_project_id )
+	);
+	$t_query->execute();
+	return $t_query->value();
+}

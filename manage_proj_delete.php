@@ -55,11 +55,11 @@ $f_project_id = gpc_get_int( 'project_id' );
 
 access_ensure_project_level( config_get( 'delete_project_threshold' ), $f_project_id );
 
-$t_project_name = project_get_name( $f_project_id );
-
-helper_ensure_confirmed( lang_get( 'project_delete_msg' ) .
-		'<br />' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
-		lang_get( 'project_delete_button' ) );
+$t_message = sprintf( lang_get( 'project_delete_msg' ),
+	string_attribute( project_get_name( $f_project_id ) ),
+	project_get_bug_count( $f_project_id )
+);
+helper_ensure_confirmed( $t_message, lang_get( 'project_delete_button' ) );
 
 project_delete( $f_project_id );
 
