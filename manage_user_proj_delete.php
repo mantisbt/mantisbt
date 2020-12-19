@@ -65,7 +65,7 @@ $t_project_name = project_get_name( $f_project_id );
 
 # Confirm with the user
 helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
-	'<br />' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
+	'<br />' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . string_attribute( $t_project_name ),
 	lang_get( 'remove_user_button' ) );
 
 project_remove_user( $f_project_id, $f_user_id );

@@ -56,7 +56,7 @@ if( !filter_db_can_delete_filter( $f_filter_id ) ) {
 	exit;
 }
 
-helper_ensure_confirmed( lang_get( 'query_delete_msg' ) . '<br>"' . filter_get_field( $f_filter_id, 'name' ) . '"',
+helper_ensure_confirmed( lang_get( 'query_delete_msg' ) . '<br>"' . string_attribute( filter_get_field( $f_filter_id, 'name' ) ) . '"',
 		lang_get( 'delete_query' ) );
 
 filter_db_delete_filter( $f_filter_id );
