@@ -400,7 +400,6 @@ $s_select_file = '选择文件';
 $s_select_files = '选择文件';
 $s_upload_file_button = '上传文件';
 $s_upload_files_button = '上传文件';
-$s_max_file_size_label = '最大尺寸：';
 $s_bug_reopened_msg = '问题已经被重新打开...';
 $s_reopen_add_bugnote_title = '为重启问题添加注释原因';
 $s_bugnote_add_reopen_button = '添加问题注释并重启问题';

@@ -344,7 +344,6 @@ $s_select_file = 'Datei wehle';
 $s_select_files = 'Dateie wehle';
 $s_upload_file_button = 'Datei uffelade';
 $s_upload_files_button = 'Dateie uffelade';
-$s_max_file_size_label = 'Maximali Greßi';
 $s_bug_reopened_msg = 'Problämmäldig reaktiviert …';
 $s_reopen_add_bugnote_title = 'Notiz fir Problämreaktivierig zuefiege';
 $s_bugnote_add_reopen_button = 'Notiz zuefiege un Probläm reaktiviere';

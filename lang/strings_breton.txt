@@ -1000,7 +1000,6 @@ $s_simple_filters = 'Siloù eeun';
 $s_monitored_by = 'Evezhiet gant';
 $s_attachments = 'pezh stag';
 $s_bytes = 'okted';
-$s_kb = 'Diaz anaoudegezh';
 $s_attachment_missing = 'Mankout a ra ar restr stag';
 $s_attachment_count = 'Niver a restroù da-heul';
 $s_view_attachments_for_issue = 'Gwelet %1$d pezh stag evit an draen #%2$d';

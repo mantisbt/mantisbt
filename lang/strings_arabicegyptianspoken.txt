@@ -337,7 +337,6 @@ $s_unmonitor_bug_button = 'إنهاء المراقبة';
 $s_upload_file = 'رفع ملف';
 $s_select_file = 'اختر ملفا';
 $s_upload_file_button = 'رفع ملف';
-$s_max_file_size_label = 'الحجم الأقصى:';
 $s_bug_reopened_msg = 'القضيه تمت إعاده فتحها...';
 $s_reopen_add_bugnote_title = 'إضافه ملاحظه كسبب لإعاده فتح القضية';
 $s_bugnote_add_reopen_button = 'إضافه ملاحظه وإعاده فتح القضية';

@@ -58,6 +58,7 @@
  * @author Lega4
  * @author Mailman
  * @author Movses
+ * @author MuratTheTurkish
  * @author Nitch
  * @author Okras
  * @author Ole Yves
@@ -1385,7 +1386,7 @@ $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Имя API token "%s" уже �
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Файл, указанный в переменной $g_log_destination "%s", недоступен для записи.';
 $s_dropzone_default_message = 'Добавьте файлы перетащив их или выделив и вставив.';
 $s_dropzone_fallback_message = 'Ваш браузер не поддерживает загрузку файлов через перетаскивание.';
-$s_dropzone_file_too_big = 'Файл слишком большой ({{filesize}}MiB). Максимальный размер файла: {{maxFilesize}}MiB.';
+$s_dropzone_file_too_big = 'Файл слишком большой ({{filesize}} MiB). Максимальный размер файла: {{maxFilesize}} MiB.';
 $s_dropzone_invalid_file_type = 'Вы не можете загружать файлы с этим расширением.';
 $s_dropzone_response_error = 'Сервер ответил с кодом {{statusCode}}.';
 $s_dropzone_cancel_upload = 'Отменить загрузку';
@@ -1393,7 +1394,7 @@ $s_dropzone_cancel_upload_confirmation = 'Вы уверены, что хотит
 $s_dropzone_remove_file = 'Удалить файл';
 $s_dropzone_max_files_exceeded = 'Вы не можете загрузить больше файлов.';
 $s_dropzone_not_supported = 'Dropzone.js не поддерживает старые браузеры!';
-$s_dropzone_multiple_files_too_big = 'Размер следующих файлов:{{files}} превышает максимально разрешённый ({{maxFilesize}} MiB)';
+$s_dropzone_multiple_files_too_big = 'Размер следующих файлов:{{files}}превышает максимально разрешённый ({{maxFilesize}} MiB)';
 $s_save = 'Сохранить';
 $s_reset = 'Сбросить';
 $s_persist = 'Запомнить';
