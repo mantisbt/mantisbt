@@ -181,6 +181,7 @@ $s_select_file = 'Fichier eraussichen';
 $s_select_files = 'Fichieren eraussichen';
 $s_upload_file_button = 'Fichier eroplueden';
 $s_upload_files_button = 'Fichieren eroplueden';
+$s_max_file_size_info = 'Maximal Gréisst: %1$s %2$s';
 $s_bugnote_add_resolve_button = 'Notiz derbäisetzen';
 $s_from = 'Vum';
 $s_bug_reminder = 'Eng Erënnerung schécken';

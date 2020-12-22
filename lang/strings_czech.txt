@@ -44,6 +44,7 @@
  * @author Dvorapa
  * @author FikusModry
  * @author Ilimanaq29
+ * @author Jan Myšák
  * @author Jezevec
  * @author Kuvaly
  * @author Luk
@@ -234,6 +235,7 @@ $s_new_account_signup_msg = 'Byl vytvořen následující účet:';
 $s_reset_request_msg = 'Někdo (nejspíš vy) požádal o změnu hesla s ověřením pomocí e-mailu. Pokud jste to vy nebyl, ignorujte tuto zprávu a nic se nestane.
 
 Pokud jste si skutečně přáli tuto změnu, navštivte následující stránku a dokončete změnu přístupového hesla:';
+$s_reset_request_admin_msg = 'Vaše heslo bylo vyresetováno. Navštivte prosím tuto URL adresu k nastavení nového:';
 $s_reset_request_in_progress_msg = 'Pokud byla zadána správná kombinace uživatelského jména a e-mailu u vášeho účtu, odešleme vám na tuto adresu potvrzovací zprávu. Až zprávu dostanete, řiďte se v něm uvedenými pokyny pro změnu hesla.';
 $s_email_notification_title_for_status_bug_new = 'Následující záznam je označen jako NOVÝ (znovu)';
 $s_email_notification_title_for_status_bug_feedback = 'Následující záznam vyžaduje vaši REAKCI.';
@@ -350,8 +352,14 @@ $s_timezone = 'Časové pásmo';
 $s_prefs_reset_msg = 'Nastavení bylo resetováno.';
 $s_prefs_updated_msg = 'Nastavení bylo upraveno...';
 $s_select_profile = 'Vybrat profil';
+$s_add_profile = 'Přidat profil';
 $s_edit_profile = 'Upravit profil';
+$s_update_profile = 'Upravit profil';
 $s_delete_profile = 'Smazat profil';
+$s_delete_profile_confirm_msg = 'Určitě chcete smazat profil „%1$s“?';
+$s_global_profile = 'Globální profil';
+$s_default_profile = 'Základní profil';
+$s_profile_description = 'Popis systému';
 $s_my_sponsorship = 'Mí sponzoři';
 $s_update_sponsorship_button = 'Změnit stav platby';
 $s_no_sponsored = 'Nebyly nalezeny žádné sponzorované záznamy přiřazené vám.';
@@ -1058,6 +1066,8 @@ $s_dependency_graph = 'Graf závislostí';
 $s_vertical = 'Vertikální';
 $s_horizontal = 'Horizontální';
 $s_view_issue = 'Zobrazit problém';
+$s_show_summary = 'Ukázat shrnutí';
+$s_hide_summary = 'Skrýt shrnutí';
 $s_perm_rpt_capability = 'Schopnost';
 $s_view = 'Zobrazit';
 $s_issues = 'Problémy';
