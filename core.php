@@ -269,9 +269,12 @@ require_api( 'config_api.php' );
 # Set the default timezone
 # To reduce overhead, we assume that the timezone configuration is valid,
 # i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
-# be raised. Use admin checks to validate configuration.
-@date_default_timezone_set( config_get_global( 'default_timezone' ) );
-$t_tz = @date_default_timezone_get();
+# be raised and we fall back to the system's default timezone.
+# Use admin checks to validate configuration.
+$t_tz = config_get_global( 'default_timezone' );
+if( empty( $t_tz ) || !date_default_timezone_set( $t_tz )) {
+	$t_tz = date_default_timezone_get();
+}
 config_set_global( 'default_timezone', $t_tz, true );
 
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
