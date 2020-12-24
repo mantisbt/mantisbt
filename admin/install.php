@@ -163,6 +163,7 @@ if( 0 == $t_install_state || 2 == $t_install_state ) {
 <?php
 }
 
+global $g_config_path;
 $t_config_filename = $g_config_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
@@ -179,6 +180,11 @@ foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
 	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
 }
 
+/**
+ * @var string $f_db_table_prefix'
+ * @var string $f_db_table_plugin_prefix
+ * @var string $f_db_table_suffix
+ */
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
 	$f_dsn                    = config_get( 'dsn', '' );
@@ -362,6 +368,7 @@ if( 2 == $t_install_state ) {
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
 	# ADOdb library version check
+	global $ADODB_vers;
 	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
 	print_test( 'Checking ADOdb Library version is at least ' . DB_MIN_VERSION_ADODB,
 		version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
@@ -557,7 +564,7 @@ if( !$g_database_upgrade ) {
 <!-- Database type selection list -->
 <tr>
 	<td>
-		Type of Database
+		<label for="db_type">Type of Database</label>
 	</td>
 	<td>
 		<!-- Default values for table prefix/suffix -->
@@ -586,7 +593,7 @@ if( !$g_database_upgrade ) {
 			);
 
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
-				echo '<option value="' . $t_db . '"' .
+				echo '<option value="' . $t_db . '" ' .
 					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
 					$t_db_descr . "</option>\n";
 			}
@@ -598,29 +605,29 @@ if( !$g_database_upgrade ) {
 <!-- Database server hostname -->
 <tr>
 	<td>
-		Hostname (for Database Server)
+		<label for="hostname">Hostname (for Database Server)</label>
 	</td>
 	<td>
-		<input name="hostname" type="text" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input id="hostname" name="hostname" type="text" value="<?php echo string_attribute( $f_hostname ) ?>">
 	</td>
 </tr>
 
 <!-- Database username and password -->
 <tr>
 	<td>
-		Username (for Database)
+		<label for="db_username">Username (for Database)</label>
 	</td>
 	<td>
-		<input name="db_username" type="text" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input id="db_username" name="db_username" type="text" value="<?php echo string_attribute( $f_db_username ) ?>">
 	</td>
 </tr>
 
 <tr>
 	<td>
-		Password (for Database)
+		<label for="db_password">Password (for Database)</label>
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php
+		<input id="db_password" name="db_password" type="password" value="<?php
 			echo !is_blank( $f_db_password ) && $t_config_exists
 				? CONFIGURED_PASSWORD
 				: $f_db_password;
@@ -631,10 +638,10 @@ if( !$g_database_upgrade ) {
 <!-- Database name -->
 <tr>
 	<td>
-		Database name (for Database)
+		<label for="database_name">Database name (for Database)</label>
 	</td>
 	<td>
-		<input name="database_name" type="text" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input id="database_name" name="database_name" type="text" value="<?php echo string_attribute( $f_database_name ) ?>">
 	</td>
 </tr>
 <?php
@@ -644,19 +651,27 @@ if( !$g_database_upgrade ) {
 <!-- Admin user and password -->
 <tr>
 	<td>
-		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
+		<label for="admin_username">
+			Admin Username (to
+			<?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?>
+			if required)
+		</label>
 	</td>
 	<td>
-		<input name="admin_username" type="text" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input id="admin_username" name="admin_username" type="text" value="<?php echo string_attribute( $f_admin_username ) ?>">
 	</td>
 </tr>
 
 <tr>
 	<td>
-		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
+		<label for="admin_password">
+			Admin Password (to
+			<?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?>
+			if required)
+		</label>
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php
+		<input id="admin_password" name="admin_password" type="password" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
 				: string_attribute( $f_admin_password );
@@ -708,7 +723,7 @@ if( !$g_database_upgrade ) {
 <!-- Timezone -->
 <tr>
 	<td>
-		Default Time Zone
+		<label for="timezone">Default Time Zone</label>
 	</td>
 	<td>
 		<select id="timezone" name="timezone">
@@ -723,10 +738,10 @@ if( !$g_database_upgrade ) {
 <!-- Printing SQL queries -->
 <tr>
 	<td>
-		Print SQL Queries instead of Writing to the Database
+		<label for="log_queries">Print SQL Queries instead of Writing to the Database</label>
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+		<input id="log_queries" name="log_queries" type="checkbox" class="ace" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
 		<span class="lbl"></span>
 	</td>
 </tr>
@@ -776,6 +791,7 @@ if( 3 == $t_install_state ) {
 		Create database if it does not exist
 	</td>
 	<?php
+		global $g_db;
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 
 		$t_db_open = false;
@@ -944,6 +960,7 @@ if( 3 == $t_install_state ) {
 							true,
 							print_r( $t_sqlarray, true )
 						);
+						/** @noinspection PhpExpressionAlwaysConstantInspection Set by print_test() */
 						if( $g_failed ) {
 							# Error occurred, bail out
 							break;
