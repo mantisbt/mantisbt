@@ -1001,52 +1001,57 @@ if( 3 == $t_install_state ) {
 				echo '<tr><td>';
 			}
 
-			$t_sql = true;
-			$t_target = $g_upgrade[$i][1][0];
+			# No-op upgrade step - required for oci8
+			if( $g_upgrade[$i] === null ) {
+				$t_sql = false;
+				$t_sqlarray = array();
+				$t_operation = 'No operation';
+				$t_target = null;
+			} else {
+				$t_sql = true;
+				$t_operation = $g_upgrade[$i][0];
+				$t_target = $g_upgrade[$i][1][0];
 
-			switch( $g_upgrade[$i][0] ) {
-				case 'InsertData':
-					$t_sqlarray = call_user_func_array( $g_upgrade[$i][0], $g_upgrade[$i][1] );
-					break;
+				switch( $t_operation ) {
+					case 'InsertData':
+						$t_sqlarray = call_user_func_array( $t_operation, $g_upgrade[$i][1] );
+						break;
 
-				case 'UpdateSQL':
-					$t_sqlarray = array(
-						$g_upgrade[$i][1],
-					);
-					$t_target = $g_upgrade[$i][1];
-					break;
+					case 'UpdateSQL':
+						$t_sqlarray = array(
+							$g_upgrade[$i][1],
+						);
+						$t_target = $g_upgrade[$i][1];
+						break;
 
-				case 'UpdateFunction':
-					$t_sqlarray = array(
-						$g_upgrade[$i][1],
-					);
-					if( isset( $g_upgrade[$i][2] ) ) {
-						$t_sqlarray[] = $g_upgrade[$i][2];
-					}
-					$t_sql = false;
-					$t_target = $g_upgrade[$i][1];
-					break;
-
-				case null:
-					$t_sqlarray = array();
-					$t_sql = false;
-					# No-op upgrade step - required for oci8
-					break;
-
-				default:
-					$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-
-					# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
-					if( isset( $g_upgrade[$i][2] ) ) {
-						if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-							$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-						} else {
-							$t_sqlarray = array();
+					case 'UpdateFunction':
+						$t_sqlarray = array(
+							$g_upgrade[$i][1],
+						);
+						if( isset( $g_upgrade[$i][2] ) ) {
+							$t_sqlarray[] = $g_upgrade[$i][2];
 						}
-					} else {
-						$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
-					}
-					break;
+						$t_sql = false;
+						$t_target = $g_upgrade[$i][1];
+						break;
+
+					default:
+						$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+
+						# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
+						if( isset( $g_upgrade[$i][2] ) ) {
+							if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
+								$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+							} else {
+								$t_sql = false;
+								$t_sqlarray = array();
+								$t_operation = "No operation";
+							}
+						} else {
+							$t_sqlarray = call_user_func_array( array( $t_dict, $t_operation ), $g_upgrade[$i][1] );
+						}
+						break;
+				}
 			}
 			if( $f_log_queries ) {
 				echo "-- Schema step $i" . PHP_EOL;
@@ -1078,16 +1083,15 @@ if( 3 == $t_install_state ) {
 					}
 					echo ")";
 				} else {
-					echo "-- No operation";
+					echo "-- $t_operation";
 				}
 				echo PHP_EOL . PHP_EOL;
 			} else {
-				echo 'Schema step ' . $i . ': ';
-				if( is_null( $g_upgrade[$i][0] ) ) {
-					echo 'No operation';
+				echo 'Schema step ' . $i . ': ' . $t_operation;
+				if( $t_target === null ) {
 					$t_ret = 2;
 				} else {
-					echo $g_upgrade[$i][0] . ' ( ' . $t_target . ' )';
+					echo ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
 						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
