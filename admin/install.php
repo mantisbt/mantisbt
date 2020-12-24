@@ -1249,7 +1249,10 @@ if( 5 == $t_install_state ) {
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
-		if( $t_fd = @fopen( $t_config_filename, 'w' ) ) {
+		# Try to create the config file
+		if( is_writable( $g_config_path )
+			&& $t_fd = fopen( $t_config_filename, 'w' )
+		) {
 			fwrite( $t_fd, $t_config );
 			fclose( $t_fd );
 		}
