@@ -1510,9 +1510,6 @@ $s_time_tracking_stopwatch_reset = 'Reset';
 
 $s_access_denied = 'Access Denied.';
 
-# Project Page
-$s_development_team = 'Development Team';
-
 # manage columns page
 $s_manage_columns_config = 'Manage Columns';
 $s_all_columns_title = 'All Available Columns';

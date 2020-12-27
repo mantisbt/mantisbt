@@ -2922,13 +2922,6 @@ $g_report_issues_for_unreleased_versions_threshold = DEVELOPER;
 $g_set_bug_sticky_threshold = MANAGER;
 
 /**
- * The minimum access level for someone to be a member of the development team
- * and appear on the project information page.
- * @global integer $g_development_team_threshold
- */
-$g_development_team_threshold = DEVELOPER;
-
-/**
  * this array sets the access thresholds needed to enter each status listed.
  * if a status is not listed, it falls back to $g_update_bug_status_threshold
  * example:
@@ -4463,7 +4456,6 @@ $g_public_config_names = array(
 	'delete_bug_threshold',
 	'delete_bugnote_threshold',
 	'delete_project_threshold',
-	'development_team_threshold',
 	'disallowed_files',
 	'display_bug_padding',
 	'display_bugnote_padding',
