@@ -121,11 +121,22 @@ function show_revision( array $p_revision ) {
 	global $t_view_bug_threshold;
 	static $s_can_drop = null;
 
+	/**
+	 * @var int    $v_id
+	 * @var int    $v_bug_id
+	 * @var int    $v_bugnote_id
+	 * @var int    $v_type
+	 * @var int    $v_user_id
+	 * @var int    $v_timestamp
+	 * @var string $v_value
+	 */
+	extract( $p_revision, EXTR_PREFIX_ALL, 'v' );
+
 	if( is_null( $s_can_drop ) ) {
-		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
+		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $v_bug_id );
 	}
 
-	switch( $p_revision['type'] ) {
+	switch( $v_type ) {
 		case REV_DESCRIPTION:
 			$t_label = lang_get( 'description' );
 			break;
@@ -136,7 +147,7 @@ function show_revision( array $p_revision ) {
 			$t_label = lang_get( 'additional_information' );
 			break;
 		case REV_BUGNOTE:
-			if( !access_has_bugnote_level( $t_view_bug_threshold, $p_revision['bugnote_id'] ) ) {
+			if( !access_has_bugnote_level( $s_view_bug_threshold, $v_bugnote_id ) ) {
 				return;
 			}
 
@@ -147,13 +158,13 @@ function show_revision( array $p_revision ) {
 	}
 
 	$t_by_string = sprintf( lang_get( 'revision_by' ),
-		string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ),
-		prepare_user_name( $p_revision['user_id'] )
+		string_display_line( date( config_get( 'normal_date_format' ), $v_timestamp ) ),
+		prepare_user_name( $v_user_id )
 	);
 
 ?>
 	<tr class="spacer">
-		<td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td>
+		<td><a id="revision-<?php echo $v_id ?>"></a></td>
 	</tr>
 
 	<tr>
@@ -165,7 +176,7 @@ function show_revision( array $p_revision ) {
 	if( $s_can_drop ) {
 		$t_drop_token = form_security_param( 'bug_revision_drop' );
 		print_link_button(
-			'bug_revision_drop.php?id=' . $p_revision['id'] . $t_drop_token,
+			'bug_revision_drop.php?id=' . $v_id . $t_drop_token,
 			lang_get( 'revision_drop' ),
 			'btn-sm pull-right'
 		);
@@ -177,7 +188,7 @@ function show_revision( array $p_revision ) {
 	<tr>
 		<th class="category"><?php echo $t_label ?></th>
 		<td>
-			<?php echo string_display_links( $p_revision['value'] ) ?>
+			<?php echo string_display_links( $v_value ) ?>
 		</td>
 	</tr>
 <?php
