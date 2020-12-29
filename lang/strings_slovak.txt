@@ -1102,7 +1102,6 @@ $s_time_tracking_stopwatch_start = 'Spustiť';
 $s_time_tracking_stopwatch_stop = 'Zastaviť';
 $s_time_tracking_stopwatch_reset = 'Resetovať';
 $s_access_denied = 'Prístup Zamietnutý.';
-$s_development_team = 'Vývojársky Tím';
 $s_manage_columns_config = 'Spravovať Stĺpce';
 $s_all_columns_title = 'Všetky dostupné stĺpce';
 $s_csv_columns_title = 'Stĺpce v CSV';

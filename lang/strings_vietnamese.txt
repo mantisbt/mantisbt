@@ -1035,7 +1035,6 @@ $s_time_tracking_stopwatch_start = 'Bắt đầu';
 $s_time_tracking_stopwatch_stop = 'Dừng';
 $s_time_tracking_stopwatch_reset = 'Thiết lập lại';
 $s_access_denied = 'Truy nhập bị cấm.';
-$s_development_team = 'Nhóm phát triển';
 $s_manage_columns_config = 'Quản lý cột';
 $s_all_columns_title = 'Tất cả các cột có sẵn';
 $s_csv_columns_title = 'Cột CSV';

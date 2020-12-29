@@ -1176,7 +1176,6 @@ $s_time_tracking_stopwatch_start = '시작';
 $s_time_tracking_stopwatch_stop = '중지';
 $s_time_tracking_stopwatch_reset = '초기화';
 $s_access_denied = '접근이 거부되었습니다.';
-$s_development_team = '개발팀';
 $s_manage_columns_config = '열 관리';
 $s_all_columns_title = '사용 가능한 열';
 $s_csv_columns_title = 'CSV 열';

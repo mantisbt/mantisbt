@@ -1085,7 +1085,6 @@ $s_time_tracking_stopwatch_start = 'Aviar';
 $s_time_tracking_stopwatch_stop = 'Arrèst';
 $s_time_tracking_stopwatch_reset = 'Reïnicializar';
 $s_access_denied = 'Accès refusat.';
-$s_development_team = 'Còla de desvolopament';
 $s_manage_columns_config = 'Gerir totas las colomnas';
 $s_all_columns_title = 'Totas las colomnas disponiblas';
 $s_csv_columns_title = 'Colomnas CSV';

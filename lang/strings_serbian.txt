@@ -1069,7 +1069,6 @@ $s_time_tracking_stopwatch_start = 'Почни';
 $s_time_tracking_stopwatch_stop = 'Заустави';
 $s_time_tracking_stopwatch_reset = 'Поништи';
 $s_access_denied = 'Приступ је одбијен.';
-$s_development_team = 'Развојни тим';
 $s_manage_columns_config = 'Управљање колонама';
 $s_all_columns_title = 'Све доступне колоне';
 $s_csv_columns_title = 'Колоне CSV';

@@ -1151,7 +1151,6 @@ $s_time_tracking_stopwatch_start = 'شروع';
 $s_time_tracking_stopwatch_stop = 'توقف';
 $s_time_tracking_stopwatch_reset = 'از نو';
 $s_access_denied = 'دسترسی ممنوع است.';
-$s_development_team = 'تیم توسعه';
 $s_manage_columns_config = 'مدیریت ستون‌ها';
 $s_all_columns_title = 'همه‌ی ستون‌های موجود';
 $s_csv_columns_title = 'ستون‌های CSV';

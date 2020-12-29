@@ -1024,7 +1024,6 @@ $s_time_tracking_stopwatch_start = 'Έναρξη';
 $s_time_tracking_stopwatch_stop = 'Διακοπή';
 $s_time_tracking_stopwatch_reset = 'Επαναφορά';
 $s_access_denied = 'Δεν επετράπη η πρόσβαση.';
-$s_development_team = 'Ομάδα ανάπτυξης';
 $s_manage_columns_config = 'Διαχείριση στηλών';
 $s_all_columns_title = 'Όλες οι διαθέσιμες στήλες';
 $s_csv_columns_title = 'Στήλες CSV';

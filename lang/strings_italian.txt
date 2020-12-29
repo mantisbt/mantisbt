@@ -1193,7 +1193,6 @@ $s_time_tracking_stopwatch_start = 'Inizio';
 $s_time_tracking_stopwatch_stop = 'Fine';
 $s_time_tracking_stopwatch_reset = 'Reimposta';
 $s_access_denied = 'Accesso Negato.';
-$s_development_team = 'Gruppo di sviluppo';
 $s_manage_columns_config = 'Gestisci colonne';
 $s_all_columns_title = 'Tutte le colonne disponibili';
 $s_csv_columns_title = 'Colonne CSV';

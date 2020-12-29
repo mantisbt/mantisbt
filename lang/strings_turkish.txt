@@ -1201,7 +1201,6 @@ $s_time_tracking_stopwatch_start = 'Başla';
 $s_time_tracking_stopwatch_stop = 'Durdur';
 $s_time_tracking_stopwatch_reset = 'Sıfırla';
 $s_access_denied = 'Erişim Engellendi.';
-$s_development_team = 'Geliştirme Ekibi';
 $s_manage_columns_config = 'Sütunları Yönet';
 $s_all_columns_title = 'Tüm Kullanılabilir Sütunlar';
 $s_csv_columns_title = 'CSV Sütunlar';

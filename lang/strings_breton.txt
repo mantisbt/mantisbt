@@ -1170,7 +1170,6 @@ $s_time_tracking_stopwatch_start = 'Deroù';
 $s_time_tracking_stopwatch_stop = 'Paouez';
 $s_time_tracking_stopwatch_reset = 'Adderaouekaat';
 $s_access_denied = 'Moned nac\'het.';
-$s_development_team = 'Skipailh diorren';
 $s_manage_columns_config = 'Merañ ar bannoù';
 $s_all_columns_title = 'An holl vannoù zo da gaout';
 $s_csv_columns_title = 'Bannoù CSV';

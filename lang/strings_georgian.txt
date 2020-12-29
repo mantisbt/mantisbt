@@ -798,7 +798,6 @@ $s_time_tracking_stopwatch_start = 'დაწყება';
 $s_time_tracking_stopwatch_stop = 'შეჩერება';
 $s_time_tracking_stopwatch_reset = 'გაუქმება';
 $s_access_denied = 'დაშვება აკრძალულია.';
-$s_development_team = 'დეველოპერების გუნდი';
 $s_manage_columns_config = 'სვეტების მენეჯმენტი';
 $s_all_columns_title = 'არსებული სვეტები';
 $s_csv_columns_title = 'CSV სვეტები';

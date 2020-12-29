@@ -1181,7 +1181,6 @@ $s_time_tracking_stopwatch_start = 'بداية';
 $s_time_tracking_stopwatch_stop = 'إيقاف';
 $s_time_tracking_stopwatch_reset = 'إعادة الضبط';
 $s_access_denied = 'السماح تم رفضه.';
-$s_development_team = 'فريق التطوير';
 $s_manage_columns_config = 'التحكم بالأعمدة';
 $s_all_columns_title = 'كل الأعمدة المتوفرة';
 $s_csv_columns_title = 'أعمدة CSV';
