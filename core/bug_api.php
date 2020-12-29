@@ -334,6 +334,7 @@ class BugData {
 			case 'reproducibility':
 			case 'status':
 			case 'resolution':
+			case 'eta':
 			case 'projection':
 			case 'category_id':
 				$p_value = (int)$p_value;
