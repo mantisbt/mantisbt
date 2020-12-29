@@ -70,8 +70,10 @@ require_api( 'relationship_api.php' );
  * @return string|null
  */
 function get_valid_version( BugData $p_bug, $p_field ) {
-	$t_version = gpc_get_string( $p_field, $p_bug->$p_field );
+	$t_reference_version = $p_bug->$p_field;
+	$t_version = gpc_get_string( $p_field, $t_reference_version );
 	if( !is_blank( $t_version )
+		&& $t_version != $t_reference_version
 		&& version_get_id( $t_version, $p_bug->project_id ) === false
 	) {
 		error_parameters( $t_version );
