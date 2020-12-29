@@ -72,19 +72,32 @@ if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 # run through the issues to see if they are all from one project
 $t_project_id = ALL_PROJECTS;
 $t_multiple_projects = false;
+$t_user = auth_get_current_user_id();
 $t_projects = array();
-$t_view_bug_threshold = config_get( 'view_bug_threshold' );
+$t_view_bug_threshold = array();
 
 bug_cache_array_rows( $f_bug_arr );
 
 foreach( $f_bug_arr as $t_key => $t_bug_id ) {
+	$t_bug = bug_get( $t_bug_id );
+
+	# Per-project cache of the access threshold
+	if( !isset( $t_view_bug_threshold[$t_bug->project_id] ) ) {
+		$t_view_bug_threshold[$t_bug->project_id] = config_get(
+			'view_bug_threshold',
+			null,
+			$t_user,
+			$t_bug->project_id
+		);
+	}
+
 	# Remove any issues the user doesn't have access to
-	if( !access_has_bug_level( $t_view_bug_threshold, $t_bug_id ) ) {
+	if( !access_has_bug_level( $t_view_bug_threshold[$t_bug->project_id], $t_bug_id ) ) {
 		unset( $f_bug_arr[$t_key] );
 		continue;
 	}
 
-	$t_bug = bug_get( $t_bug_id );
+	# Multiple projects check
 	if( $t_project_id != $t_bug->project_id ) {
 		if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
 			$t_multiple_projects = true;
