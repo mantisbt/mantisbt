@@ -1054,7 +1054,6 @@ $s_time_tracking_stopwatch_start = 'Start';
 $s_time_tracking_stopwatch_stop = 'Stop';
 $s_time_tracking_stopwatch_reset = 'Reset';
 $s_access_denied = 'Acces interzis.';
-$s_development_team = 'Echipa de dezvoltare';
 $s_manage_columns_config = 'Configurează coloane';
 $s_all_columns_title = 'Toate coloanele disponibile';
 $s_csv_columns_title = 'Coloane CSV';

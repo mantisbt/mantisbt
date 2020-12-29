@@ -1022,7 +1022,6 @@ $s_time_tracking_cost_label = 'Hind:';
 $s_total_time_for_issue = 'Kokku aega kandele = %1$s';
 $s_time_tracking_stopwatch_reset = 'Lähtesta';
 $s_access_denied = 'Pöördumine keelatud.';
-$s_development_team = 'Arendusmeeskond';
 $s_manage_columns_config = 'Halda veergusid';
 $s_all_columns_title = 'Kõik saadaval veerud';
 $s_csv_columns_title = 'CSV veerud';

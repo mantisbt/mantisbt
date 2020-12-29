@@ -1065,7 +1065,6 @@ $s_time_tracking_stopwatch_start = 'Pradėti';
 $s_time_tracking_stopwatch_stop = 'Sustabdyti';
 $s_time_tracking_stopwatch_reset = 'Iš naujo';
 $s_access_denied = 'Neleidžiama.';
-$s_development_team = 'Kūrimo komanda';
 $s_manage_columns_config = 'Valdyti stulpelius';
 $s_csv_columns_title = 'CSV stulpeliai';
 $s_update_columns_for_current_project = 'Atnaujinti stulpelius esamam projektui';

@@ -1011,7 +1011,6 @@ $s_time_tracking_cost = 'تكلفة';
 $s_time_tracking_cost_label = 'تمَن:';
 $s_total_time_for_issue = 'الوقت الإجمالى للقضيه = %1$s';
 $s_access_denied = 'السماح تم رفضه.';
-$s_development_team = 'فريق التطوير';
 $s_manage_columns_config = 'التحكم بالأعمدة';
 $s_all_columns_title = 'كل الأعمده المتوفرة';
 $s_csv_columns_title = 'أعمده CSV';

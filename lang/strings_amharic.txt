@@ -457,7 +457,6 @@ $s_time_tracking_cost_per_hour = 'ዋጋ / ሰዓት';
 $s_time_tracking_cost = 'ዋጋ';
 $s_time_tracking_cost_label = 'ዋጋ :';
 $s_access_denied = 'መግባት የተከለከለ';
-$s_development_team = 'የማጎልበቻ ቡድን';
 $s_manage_columns_config = 'አምዱን መንጅ';
 $s_all_columns_title = 'ሁሉም ያሉ  አምዶች';
 $s_csv_columns_title = 'ሲቪኤስ  አምድ';

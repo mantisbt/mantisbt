@@ -1198,7 +1198,6 @@ $s_time_tracking_stopwatch_start = 'Starten';
 $s_time_tracking_stopwatch_stop = 'Stoppen';
 $s_time_tracking_stopwatch_reset = 'Zurücksetzen';
 $s_access_denied = 'Zugriff verweigert.';
-$s_development_team = 'Entwicklungs-Team';
 $s_manage_columns_config = 'Spalten verwalten';
 $s_all_columns_title = 'Alle verfügbaren Spalten';
 $s_csv_columns_title = 'CSV-Spalten';

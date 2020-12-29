@@ -1192,7 +1192,6 @@ $s_time_tracking_stopwatch_start = '開始';
 $s_time_tracking_stopwatch_stop = '停止';
 $s_time_tracking_stopwatch_reset = 'リセット';
 $s_access_denied = 'アクセスが拒否されました。';
-$s_development_team = '開発チーム';
 $s_manage_columns_config = '表示項目管理';
 $s_all_columns_title = '全項目';
 $s_csv_columns_title = 'CSV 項目';

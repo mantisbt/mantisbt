@@ -1195,7 +1195,6 @@ $s_time_tracking_stopwatch_start = 'Starta';
 $s_time_tracking_stopwatch_stop = 'Stoppa';
 $s_time_tracking_stopwatch_reset = 'Återställ';
 $s_access_denied = 'Åtkomst nekad.';
-$s_development_team = 'Utvecklingsgrupp';
 $s_manage_columns_config = 'Hantera kolumner';
 $s_all_columns_title = 'Alla tillgänliga kolumner';
 $s_csv_columns_title = 'CSV-kolumner';

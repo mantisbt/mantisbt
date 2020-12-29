@@ -1186,7 +1186,6 @@ $s_time_tracking_stopwatch_start = 'Запустить';
 $s_time_tracking_stopwatch_stop = 'Остановить';
 $s_time_tracking_stopwatch_reset = 'Сбросить';
 $s_access_denied = 'В доступе отказано.';
-$s_development_team = 'Команда разработчиков';
 $s_manage_columns_config = 'Отображаемые столбцы';
 $s_all_columns_title = 'Все имеющиеся столбцы';
 $s_csv_columns_title = 'Столбцы CSV';

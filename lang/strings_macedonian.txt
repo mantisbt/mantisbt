@@ -1180,7 +1180,6 @@ $s_time_tracking_stopwatch_start = 'Почни';
 $s_time_tracking_stopwatch_stop = 'Запри';
 $s_time_tracking_stopwatch_reset = 'Одново';
 $s_access_denied = 'Пристапот е одбиен.';
-$s_development_team = 'Развојна екипа';
 $s_manage_columns_config = 'Раководење со столбови';
 $s_all_columns_title = 'Сите достапни столбови';
 $s_csv_columns_title = 'CSV-столбови';

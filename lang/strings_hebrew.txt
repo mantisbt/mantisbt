@@ -1133,7 +1133,6 @@ $s_time_tracking_stopwatch_start = 'התחלה';
 $s_time_tracking_stopwatch_stop = 'עצירה';
 $s_time_tracking_stopwatch_reset = 'איפוס';
 $s_access_denied = 'גישה חסומה';
-$s_development_team = 'צוות פיתוח';
 $s_manage_columns_config = 'ניהול עמודות';
 $s_all_columns_title = 'כל העמודות הקיימות';
 $s_csv_columns_title = 'עמודות CSV';

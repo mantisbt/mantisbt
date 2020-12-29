@@ -750,7 +750,6 @@ $s_time_tracking_billing_link = 'Et Afräschne';
 $s_time_tracking_cost_per_hour = 'Koste pro Shtund';
 $s_time_tracking_cost = 'Koste';
 $s_total_time_for_issue = 'De jesampte Zick för di Saach = %1$s';
-$s_development_team = 'Dä Entweckler-Schmolz';
 $s_manage_columns_config = 'Shpallde verwallde';
 $s_all_columns_title = 'All de Shpallde, di mer han';
 $s_csv_columns_title = '<i lang="en">CSV</i> Shpallde';

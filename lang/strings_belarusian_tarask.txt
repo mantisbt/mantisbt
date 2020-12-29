@@ -1173,7 +1173,6 @@ $s_time_tracking_stopwatch_start = 'Старт';
 $s_time_tracking_stopwatch_stop = 'Спыніць';
 $s_time_tracking_stopwatch_reset = 'Скінуць';
 $s_access_denied = 'Доступ забаронены.';
-$s_development_team = 'Каманда распрацоўшчыкаў';
 $s_manage_columns_config = 'Кіраваньне слупкамі';
 $s_all_columns_title = 'Усе даступныя слупкі';
 $s_csv_columns_title = 'Слупкі CSV';

@@ -1020,7 +1020,6 @@ $s_time_tracking_stopwatch_start = 'Magsimula';
 $s_time_tracking_stopwatch_stop = 'Tumigil';
 $s_time_tracking_stopwatch_reset = 'Muling itakda';
 $s_access_denied = 'Tinanggihan ang Pagpunta.';
-$s_development_team = 'Koponan ng Pagpapaunlad';
 $s_manage_columns_config = 'Pamahalaan ang Pababang mga Hanay';
 $s_all_columns_title = 'Lahat ng Makukuhang mga Pababang Hanay';
 $s_csv_columns_title = 'Mga Pababang Hanay na CSV';

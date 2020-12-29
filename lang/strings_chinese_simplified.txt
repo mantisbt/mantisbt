@@ -1190,7 +1190,6 @@ $s_time_tracking_stopwatch_start = '开始';
 $s_time_tracking_stopwatch_stop = '停止';
 $s_time_tracking_stopwatch_reset = '重置';
 $s_access_denied = '无权操作.';
-$s_development_team = '开发团队';
 $s_manage_columns_config = '管理列';
 $s_all_columns_title = '可用的列';
 $s_csv_columns_title = 'CSV列';

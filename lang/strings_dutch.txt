@@ -1181,7 +1181,6 @@ $s_time_tracking_stopwatch_start = 'Starten';
 $s_time_tracking_stopwatch_stop = 'Stoppen';
 $s_time_tracking_stopwatch_reset = 'Herinstellen';
 $s_access_denied = 'Geen toegang.';
-$s_development_team = 'Ontwikkelteam';
 $s_manage_columns_config = 'Kolommen beheren';
 $s_all_columns_title = 'Alle beschikbare kolommen';
 $s_csv_columns_title = 'Kolommen voor CSV';

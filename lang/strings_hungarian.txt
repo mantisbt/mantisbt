@@ -1182,7 +1182,6 @@ $s_time_tracking_stopwatch_start = 'Indítás';
 $s_time_tracking_stopwatch_stop = 'Leállítás';
 $s_time_tracking_stopwatch_reset = 'Visszaállítás';
 $s_access_denied = 'Hozzáférés megtagadva.';
-$s_development_team = 'Fejlesztőcsapat';
 $s_manage_columns_config = 'Oszlopok kezelése';
 $s_all_columns_title = 'Az összes elérhető oszlop';
 $s_csv_columns_title = 'CSV oszlopok';

@@ -450,7 +450,6 @@ $s_time_tracking_cost_per_hour = 'Tarief  / uur';
 $s_time_tracking_cost = 'Koste';
 $s_time_tracking_cost_label = 'Koste:';
 $s_access_denied = 'Geen toegang.';
-$s_development_team = 'Ontwikkelingspan';
 $s_manage_columns_config = 'Bestuur kolomme';
 $s_all_columns_title = 'Alle beskikbare kolomme';
 $s_csv_columns_title = 'Kolomme vir CVS';

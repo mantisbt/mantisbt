@@ -1200,7 +1200,6 @@ $s_time_tracking_stopwatch_start = 'Iniciar';
 $s_time_tracking_stopwatch_stop = 'Parar';
 $s_time_tracking_stopwatch_reset = 'Reiniciar';
 $s_access_denied = 'Acesso Negado.';
-$s_development_team = 'Equipe de desenvolvimento';
 $s_manage_columns_config = 'Gerenciar Colunas';
 $s_all_columns_title = 'Todas as Colunas Disponíveis';
 $s_csv_columns_title = 'Colunas das Tarefas no Arquivo CSV';
