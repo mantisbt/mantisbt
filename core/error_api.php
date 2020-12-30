@@ -142,7 +142,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line ) {
 	global $g_error_send_page_header;
 
 	# check if errors were disabled with @ somewhere in this call chain
-	if( 0 == error_reporting() ) {
+	if( !( error_reporting() & $p_type ) ) {
 		return;
 	}
 
