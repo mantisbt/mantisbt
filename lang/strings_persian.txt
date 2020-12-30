@@ -608,7 +608,6 @@ $s_readonly_status = 'وضعیتِ جایی که مسئله فقط خواندن�
 $s_reopen_status = 'وضعیتی که یک مسئله بازگشایی‌شده تنظیم می‌شود';
 $s_reopen_resolution = 'تحلیلی که یک مسئله‌ی بازگشایی‌شده تنظیم می‌شود';
 $s_config_delete_sure = 'آیا مطمئن هستید که می‌خواهید تنظیمات را حذف کنید؟ برای:';
-$s_in_project = 'در پروژه';
 $s_delete_config_button = 'حذف تنظیمات';
 $s_configuration_report = 'گزارش پیکربندی​ها';
 $s_database_configuration = 'پیکربندی دیتابیس';

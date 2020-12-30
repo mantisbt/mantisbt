@@ -273,7 +273,6 @@ $s_workflow = 'Werkvloei';
 $s_threshold = 'Drempelwaarde';
 $s_status_level = 'Status';
 $s_access_levels = 'Toegangvlakke';
-$s_in_project = 'in projek';
 $s_database_configuration = 'Databasiskonfigurasie';
 $s_configuration_option = 'Instelling';
 $s_configuration_option_type = 'Tipe';

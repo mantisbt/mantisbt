@@ -616,7 +616,6 @@ $s_readonly_status = 'Arazo bat irakurtzeko soilik izatera pasatzen den egoera';
 $s_reopen_status = 'Arazo berrirekientzako egoera lehenetsia';
 $s_reopen_resolution = 'Arazo berrirekiei ezarri beharreko Konponketa';
 $s_config_delete_sure = 'Ziurtatu honen hobespenak ezabatu nahi dituzula:';
-$s_in_project = 'honako proiektuan';
 $s_delete_config_button = 'Hobespenak Ezabatu';
 $s_configuration_report = 'Konfigurazioaren Txostena';
 $s_database_configuration = 'Datubasearen Konfigurazioa';

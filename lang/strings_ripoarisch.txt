@@ -474,7 +474,6 @@ $s_non_existent = 'Jidd_et nit';
 $s_current_status = 'Der aktoölle Zohschtand';
 $s_next_status = 'Der nähksde Zohschtand';
 $s_status_level = 'Zohschtand';
-$s_in_project = 'em Projäk';
 $s_configuration_option_type = 'Zoot';
 $s_project_added_msg = 'Dat Projäk wood derbei jedonn...';
 $s_category_added_msg = 'Di Saachjropp wood derbei jedonn...';

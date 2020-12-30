@@ -610,7 +610,6 @@ $s_readonly_status = 'Staða þar sem verkbeiðni verður aðeins lesanleg';
 $s_reopen_status = 'Staða sem enduropnuð verkbeiðni fær';
 $s_reopen_resolution = 'Úrlausn sem enduropnaðar verkbeiðnir fá';
 $s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir:';
-$s_in_project = 'í framkvæmd';
 $s_delete_config_button = 'Eyða stillingum';
 $s_configuration_report = 'Skýrsla um stillingar';
 $s_database_configuration = 'Gagnagrunns stillingar';

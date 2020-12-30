@@ -616,7 +616,6 @@ $s_reopen_status = 'Statud a vez lakaet d\'un draen addigoret';
 $s_reopen_resolution = 'Diskoulm a vez lakaet d\'un draen addigoret';
 $s_limit_view_unless_threshold_option = 'Diskouez kudennoù an implijerien all (ma n\'eo ket resisaet e vo bevennet ar moned ouzh ar c\'hudennoù titouret, meret pe heuliet gant an implijer)';
 $s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziverkañ an arventennoù evit :';
-$s_in_project = 'er raktres';
 $s_delete_config_button = 'Dilemel an arventennoù';
 $s_configuration_report = 'Danevell kefluniadur';
 $s_database_configuration = 'Kefluniadur an diaz roadennoù';

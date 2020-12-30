@@ -641,7 +641,6 @@ $s_reopen_status = 'Status, auf den ein wiedereröffneter Eintrag gesetzt wird';
 $s_reopen_resolution = 'Lösung, auf die ein wiedereröffneter Eintrag gesetzt wird';
 $s_limit_view_unless_threshold_option = 'Einträge anderer Benutzer ansehen (falls nicht gesetzt, ist der Zugriff auf selbst erfasste, zugewiesene und beobachtete Einträge beschränkt)';
 $s_config_delete_sure = 'Sind Sie sicher das Sie die Einstellungen löschen möchten für:';
-$s_in_project = 'im Projekt';
 $s_delete_config_button = 'Einstellungen löschen';
 $s_configuration_report = 'Konfigurations-Report';
 $s_database_configuration = 'Datenbank-Konfiguration';

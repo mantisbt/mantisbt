@@ -549,7 +549,6 @@ $s_readonly_status = 'Status, wu ne Probläm schrybgschitzt wird';
 $s_reopen_status = 'Status, wu ne wider ufgmacht Problem druf gsetzt wird';
 $s_reopen_resolution = 'Lesig, wu ne wider ufgmacht Probläm druf gsetzt wird';
 $s_config_delete_sure = 'Bisch sicher, ass Du d Yystellige witt lesche fir:';
-$s_in_project = 'im Projäkt';
 $s_delete_config_button = 'Yystellige lesche';
 $s_configuration_report = 'Konfigurations-Report';
 $s_database_configuration = 'Datebank-Konfiguration';

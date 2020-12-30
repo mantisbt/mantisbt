@@ -637,7 +637,6 @@ $s_reopen_status = 'Stato assegnato ad anomalia riaperta';
 $s_reopen_resolution = 'Risoluzione assegnata ad anomalia riaperta';
 $s_limit_view_unless_threshold_option = 'Visualizza i problemi degli altri utenti (se non impostato, l\'accesso sarà limitato ai problemi segnalati, gestiti o monitorati dall\'utente)';
 $s_config_delete_sure = 'Sei sicuro di voler cancellare le impostazioni per:';
-$s_in_project = 'nel progetto';
 $s_delete_config_button = 'Rimuovi impostazioni';
 $s_configuration_report = 'Report configurazione';
 $s_database_configuration = 'Configurazione database';

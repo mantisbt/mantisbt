@@ -625,7 +625,6 @@ $s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتح
 $s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
 $s_limit_view_unless_threshold_option = 'عرض مشكلات المستخدمين الآخرين (إذا لم يتم تعيينها، فسيقتصر الوصول على المشكلات التي تم الإبلاغ عنها أو معالجتها أو مراقبتها من قبل المستخدم)';
 $s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
-$s_in_project = 'في المشروع';
 $s_delete_config_button = 'حذف الإعدادات';
 $s_configuration_report = 'تقرير الضبط';
 $s_database_configuration = 'ضبط قاعدة البيانات';

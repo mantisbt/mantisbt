@@ -1015,6 +1015,9 @@ function mci_get_category_id( $p_category, $p_project_id ) {
 			"Category '{$t_cat_desc}' not found." );
 	}
 
+	# Make sure the category belongs to the given project's hierarchy
+	category_ensure_exists_in_project( $t_category_id, $p_project_id );
+
 	return $t_category_id;
 }
 

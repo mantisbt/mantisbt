@@ -648,7 +648,6 @@ $s_reopen_status = 'État à positionner pour une anomalie rouverte';
 $s_reopen_resolution = 'Résolution à positionner pour une anomalie rouverte';
 $s_limit_view_unless_threshold_option = 'Afficher les problèmes des autres utilisateurs (si non positionné, l’accès sera limité aux problèmes signalés, gérés ou suivis par l’utilisateur)';
 $s_config_delete_sure = 'Voulez-vous vraiment supprimer la configuration pour :';
-$s_in_project = 'du projet';
 $s_delete_config_button = 'Supprimer la configuration';
 $s_configuration_report = 'Rapport de configuration';
 $s_database_configuration = 'Configuration de la base de données';

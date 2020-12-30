@@ -636,7 +636,6 @@ $s_reopen_status = '差し戻しされた課題に設定するステータス';
 $s_reopen_resolution = '差し戻された課題に設定する解決状況';
 $s_limit_view_unless_threshold_option = '他の利用者の課題を見る。(もし、課題が設定されていない場合、報告、処理、監視されている課題に限定されます。)';
 $s_config_delete_sure = '以下の設定を本当に削除しますか:';
-$s_in_project = 'プロジェクト:';
 $s_delete_config_button = '設定を削除';
 $s_configuration_report = '設定の表示';
 $s_database_configuration = 'データベース設定';

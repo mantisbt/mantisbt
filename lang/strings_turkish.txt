@@ -644,7 +644,6 @@ $s_reopen_status = 'Yeniden açılan sorunun durumu';
 $s_reopen_resolution = 'Yeniden açılan sorunun çözümlenme durumu';
 $s_limit_view_unless_threshold_option = 'Diğer kullanıcıların sorunlarını görüntüle (ayarlanmadıysa, erişim kullanıcı tarafından bildirilen, ele alınan veya izlenen sorunlarla sınırlı olacaktır)';
 $s_config_delete_sure = 'Aşağıdakiler için ayarları silmek istediğinizden emin misiniz:';
-$s_in_project = 'projede';
 $s_delete_config_button = 'Ayarları Sil';
 $s_configuration_report = 'Yapılandırma Raporu';
 $s_database_configuration = 'Veritabanı Yapılandırması';

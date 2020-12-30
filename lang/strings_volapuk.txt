@@ -222,7 +222,6 @@ $s_next_status = 'Stad Fovik';
 $s_status_level = 'Stad';
 $s_alter_level = 'Kin dalon votükön völadi at';
 $s_config_delete_sure = 'Sevol-li fümiko, das vilol moükön parametami tefü';
-$s_in_project = 'in proyeg';
 $s_delete_config_button = 'Moükamaparamets';
 $s_configuration_report = 'Parametemanunod';
 $s_database_configuration = 'Parametem Nünodema';

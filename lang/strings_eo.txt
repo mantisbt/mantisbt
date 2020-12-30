@@ -455,7 +455,6 @@ $s_edit_others_bugnotes = 'Redakti aliulajn notojn';
 $s_edit_own_bugnotes = 'Redakti proprajn notojn';
 $s_delete_others_bugnotes = 'Forigi aliulajn notojn';
 $s_delete_own_bugnotes = 'Forigi proprajn notojn';
-$s_in_project = 'en projekto';
 $s_delete_config_button = 'Forigi Agordojn';
 $s_configuration_report = 'Raporto pri Agordado';
 $s_database_configuration = 'Agordado de Datenbanko';

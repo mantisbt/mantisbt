@@ -637,7 +637,6 @@ $s_readonly_status = 'Stav ve kterém se stává problém pouze ke čtení';
 $s_reopen_status = 'Stav na který je nastaven znovuotevřený problém';
 $s_reopen_resolution = 'Řešení na které je nastaven znovuotevřený problém.';
 $s_config_delete_sure = 'Jste si jistý, že chcete smazat nastavení pro:';
-$s_in_project = 'v projektu';
 $s_delete_config_button = 'Smazat nastavení';
 $s_configuration_report = 'Hlášení o konfiguraci';
 $s_database_configuration = 'Konfigurace databáze';

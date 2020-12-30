@@ -630,7 +630,6 @@ $s_reopen_status = 'Status na który jest ustawiane ponownie otwierane zgłoszen
 $s_reopen_resolution = 'Rozwiązanie na które jest ustawiane ponownie otwierane zgłoszenie';
 $s_limit_view_unless_threshold_option = 'Wyświetl problemy innych użytkowników (jeśli nie zostaną ustawione, dostęp będzie ograniczony do problemów zgłoszonych, obsługiwanych lub monitorowanych przez użytkownika)';
 $s_config_delete_sure = 'Czy jesteś pewien, że chcesz usunąć ustawienia dla';
-$s_in_project = 'w projekcie';
 $s_delete_config_button = 'Usuń ustawienia';
 $s_configuration_report = 'Raport z konfiguracji';
 $s_database_configuration = 'Konfiguracja bazy danych';

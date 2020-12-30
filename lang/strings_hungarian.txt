@@ -626,7 +626,6 @@ $s_reopen_status = 'Az újranyitott ügyekhez beállítandó állapot';
 $s_reopen_resolution = 'Az újranyitott ügyekhez beállítandó döntés';
 $s_limit_view_unless_threshold_option = 'Más felhasználók ügyeinek megtekintése (ha nincs megadva, akkor az ügyek csak a felhasználó által bejelentett, kezelt és figyelt ügyekre korlátozódnak)';
 $s_config_delete_sure = 'Valóban törölni szeretné a következők beállításait:';
-$s_in_project = 'a következő projektben:';
 $s_delete_config_button = 'Beállítások törlése';
 $s_configuration_report = 'Konfigurációs jelentés';
 $s_database_configuration = 'Adatbázis konfigurációja';

@@ -536,7 +536,6 @@ $s_readonly_status = 'Olek, milles kanne saab ainult loetavaks';
 $s_reopen_status = 'Olek, millesse taasavtud kanne pannakse';
 $s_reopen_resolution = 'Lahendus, millesse taasavatud kanne pannakse';
 $s_config_delete_sure = 'Kas oled kindel, et tahad kustutadda seaded:';
-$s_in_project = 'projektis';
 $s_delete_config_button = 'Kustuta seaded';
 $s_configuration_report = 'Konfiguratsiooni aruanne';
 $s_database_configuration = 'Andmebaasi konfiguratsioon';

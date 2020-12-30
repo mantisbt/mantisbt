@@ -563,7 +563,6 @@ $s_readonly_status = 'Starea în care o problemă devine accesibilă doar pentru
 $s_reopen_status = 'Starea în care e pusă o problemă redeschisă';
 $s_reopen_resolution = 'Rezoluția care este atribuită unei probleme redeschise';
 $s_config_delete_sure = 'Ești sigur că dorești să ștergi setările pentru:';
-$s_in_project = 'în proiect';
 $s_delete_config_button = 'Șterge configurări';
 $s_configuration_report = 'Raport configurare';
 $s_database_configuration = 'Configurare bază de date';

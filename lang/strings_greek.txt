@@ -558,7 +558,6 @@ $s_resolved_status = 'Κατάσταση στην οποία ένα θέμα θ�
 $s_readonly_status = 'Κατάσταση στην οποία ένα θέμα γίνεται μόνο προβαλλόμενο';
 $s_reopen_status = 'Κατάσταση στην οποία ενα επανεξεταζόμενο θέμα ορίζεται';
 $s_reopen_resolution = 'Επίλυση στην οποία ένα επανεξεταζόμενο θέμα ορίζεται';
-$s_in_project = 'στο εγχείρημα';
 $s_delete_config_button = 'Διαγραφή Ρυθμίσεων';
 $s_configuration_report = 'Ρύθμιση Αναφοράς';
 $s_database_configuration = 'Ρύθμιση Βάσης';

@@ -34,4 +34,37 @@
 		</varlistentry>
 	</variablelist>
 
+	<para>In this context, MantisBT records individual changes to text fields
+		(<emphasis>Description</emphasis>,
+		<emphasis>Steps to Reproduce</emphasis>,
+		<emphasis>Additional Information</emphasis> as well as
+		<emphasis>Bug Notes</emphasis>).
+		These revisions are controlled by the following settings.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_bug_revision_view_threshold</term>
+			<listitem>
+				<para>Access level required to view bug history revisions.
+					Defaults to DEVELOPER.
+				</para>
+				<note>
+					<para>Users can always see revisions for the issues
+						and bugnotes they reported.
+					</para>
+
+				</note>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_revision_drop_threshold</term>
+			<listitem>
+				<para>Access level required to drop bug history revisions.
+					Defaults to MANAGER.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
 </section>

@@ -622,7 +622,6 @@ $s_readonly_status = 'Статус, при който редакция на пр
 $s_reopen_status = 'Статус, назначен на повторно отворен проблем';
 $s_reopen_resolution = 'Резолюция, задавана на повторно отворен проблем';
 $s_config_delete_sure = 'Потвърдете изтриването на настройките на:';
-$s_in_project = 'в проект';
 $s_delete_config_button = 'Изтриване на настройките';
 $s_configuration_report = 'Конфигурационен репорт';
 $s_database_configuration = 'Конфигуриране на базата данни';

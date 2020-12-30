@@ -621,7 +621,6 @@ $s_readonly_status = 'Status hvor en rapport bliver skrivebeskyttet';
 $s_reopen_status = 'Status som en genåbnet rapport får';
 $s_reopen_resolution = 'Status som en genåbnet rapport får';
 $s_config_delete_sure = 'Er du sikker på, du vil slette indstillingerne for:';
-$s_in_project = 'i projektet';
 $s_delete_config_button = 'Slet indstillinger';
 $s_configuration_report = 'Konfigurationsrapport';
 $s_database_configuration = 'Databasekonfiguration';
