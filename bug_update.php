@@ -154,24 +154,25 @@ $t_reporter_reopening =
 if ( !$t_reporter_reopening && !$t_reporter_closing ) {
 	switch( $f_update_type ) {
 		case BUG_UPDATE_TYPE_ASSIGN:
-			access_ensure_bug_level( 'update_bug_assign_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_assign_threshold';
 			$t_check_readonly = true;
 			break;
 		case BUG_UPDATE_TYPE_CLOSE:
 		case BUG_UPDATE_TYPE_REOPEN:
-			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_status_threshold';
 			$t_check_readonly = false;
 			break;
 		case BUG_UPDATE_TYPE_CHANGE_STATUS:
-			access_ensure_bug_level( 'update_bug_status_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_status_threshold';
 			$t_check_readonly = true;
 			break;
 		case BUG_UPDATE_TYPE_NORMAL:
 		default:
-			access_ensure_bug_level( 'update_bug_threshold', $f_bug_id );
+			$t_threshold = 'update_bug_threshold';
 			$t_check_readonly = true;
 			break;
 	}
+	access_ensure_bug_level( config_get( $t_threshold ), $f_bug_id );
 
 	if( $t_check_readonly ) {
 		# Check if the bug is in a read-only state and whether the current user has
