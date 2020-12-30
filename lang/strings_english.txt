@@ -789,7 +789,7 @@ $s_reopen_resolution = 'Resolution to which a reopened issue is set';
 $s_limit_view_unless_threshold_option = 'View other users\' issues (if not set, access will be limited to issues reported, handled, or monitored by the user)';
 
 # manage_config_revert_page
-$s_config_delete_sure = 'Are you sure you want to delete the settings for: %1$s in project %2$s ?';
+$s_config_delete_sure = 'Are you sure you want to delete the settings for %1$s in project %2$s?';
 $s_delete_config_button = 'Delete Settings';
 
 # adm_config_report.php
@@ -858,7 +858,7 @@ $s_add_subproject_title = 'Add Subproject';
 $s_project_deleted_msg = 'Project successfully removed...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Are you sure you want to delete project "%1$s" ?<br>This will also delete %2$s attached issue reports.';
+$s_project_delete_msg = 'Are you sure you want to delete project "%1$s"?<br>This will also delete %2$s attached issue reports.';
 $s_project_delete_button = 'Delete Project';
 
 # manage_proj_edit_page.php
@@ -911,7 +911,7 @@ $s_version_added_msg = 'Version has been successfully added...';
 $s_version_deleted_msg = 'Version has been successfully deleted...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Are you sure you want to delete version "%1$s" ?';
+$s_version_delete_sure = 'Are you sure you want to delete version "%1$s"?';
 $s_delete_version_button = 'Delete Version';
 
 # manage_proj_version_edit_page.php
@@ -930,7 +930,7 @@ $s_account_delete_protected_msg = 'Account protected. Cannot delete this account
 $s_account_deleted_msg = 'Account deleted...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = 'Are you sure you wish to delete user account "%1$s" ?';
+$s_delete_account_sure_msg = 'Are you sure you wish to delete user account "%1$s"?';
 
 # manage_user_edit_page.php
 $s_notify_user = 'Notify user of this change';
@@ -1032,7 +1032,7 @@ $s_title = 'Title';
 $s_project_file_deleted_msg = 'Project file deleted.';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = 'Are you sure you wish to delete file "%1$s" ?';
+$s_confirm_file_delete_msg = 'Are you sure you wish to delete file "%1$s"?';
 
 # proj_doc_edit_page.php
 $s_filename = 'Filename';
@@ -1056,7 +1056,7 @@ $s_project_user_added_msg = 'Successfully added user to project.';
 $s_project_removed_user_msg = 'Successfully removed user from project.';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from projectz "%2$s" ?';
+$s_remove_user_sure_msg = 'Are you sure you wish to remove user "%1$s" from project "%2$s"?';
 $s_remove_user_button = 'Remove User';
 $s_remove_all_users_sure_msg = 'Are you sure you wish to remove all the users of this project?';
 $s_remove_all_users_button = 'Remove All Users';
@@ -1215,7 +1215,7 @@ $s_query_blank_name = 'You cannot store a filter without a name. Please give thi
 $s_query_name_too_long = 'You cannot store a filter name with more than 64 characters. Please give this filter a shorter name.';
 $s_query_store_error = 'There was an error saving this filter.';
 $s_open_queries = 'Manage Filters';
-$s_query_delete_msg = 'Are you sure you wish to delete filter "%1$s" ?';
+$s_query_delete_msg = 'Are you sure you wish to delete filter "%1$s"?';
 $s_edit_filter = 'Edit Filter';
 $s_owner = 'Owner';
 $s_update_filter = 'Update filter';
