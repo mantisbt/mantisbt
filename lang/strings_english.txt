@@ -602,6 +602,8 @@ $s_last_edited = 'Last edited:';
 # file_api.php
 $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';
+$s_file_icon_description = '%1$s file icon';
+$s_unknown_file_extension = 'unknown';
 
 # html_api.php
 $s_webmaster_contact_information = 'Contact <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">administrator</a> for assistance';

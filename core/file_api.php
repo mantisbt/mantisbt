@@ -341,8 +341,10 @@ function file_get_icon_url( $p_display_filename ) {
 		$t_ext = '?';
 	}
 
-	$t_name = $t_file_type_icons[$t_ext];
-	return array( 'url' => $t_name, 'alt' => $t_ext );
+	return array(
+		'url' => $t_file_type_icons[$t_ext],
+		'alt' => $t_ext == '?' ? lang_get( 'unknown_file_extension' ) : $t_ext
+	);
 }
 
 /**
