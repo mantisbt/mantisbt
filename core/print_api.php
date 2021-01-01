@@ -1785,7 +1785,7 @@ function print_file_icon( $p_filename ) {
 	print_icon(
 		string_attribute( $t_icon['url'] ),
 		'',
-		string_attribute( $t_icon['alt'] ) . ' file icon'
+		sprintf( lang_get( 'file_icon_description' ), string_attribute( $t_icon['alt'] ) )
 	);
 }
 
