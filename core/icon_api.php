@@ -37,13 +37,14 @@ require_api( 'utility_api.php' );
 /**
  * Returns HTML to display an icon with optional title pop-up.
  *
- * @param string $p_icon    Fontawesome icon name (fa-xxx)
- * @param string $p_classes Optional additional CSS classes
- * @param string $p_title   Optional pop-up text
+ * @param string $p_icon       Fontawesome icon name (fa-xxx)
+ * @param string $p_classes    Optional additional CSS classes
+ * @param string $p_title      Optional pop-up text
+ * @param string $p_inner_html Optional html to insert with the icon.
  *
  * @return string
  */
-function icon_get( $p_icon, $p_classes = '', $p_title = '' ) {
+function icon_get( $p_icon, $p_classes = '', $p_title = '', $p_inner_html = '' ) {
 	# Add 'fa-' prefix if missing
 	if( substr( $p_icon, 0, 3 ) != 'fa-' ) {
 		$p_icon = 'fa-' . $p_icon;
@@ -54,7 +55,7 @@ function icon_get( $p_icon, $p_classes = '', $p_title = '' ) {
 	}
 
 	/** @noinspection HtmlUnknownAttribute */
-	return sprintf( '<i class="fa %s %s" %s></i>', $p_icon, $p_classes, $p_title );
+	return sprintf( '<i class="fa %s %s" %s>%s</i>', $p_icon, $p_classes, $p_title, $p_inner_html );
 }
 
 /**
@@ -63,9 +64,10 @@ function icon_get( $p_icon, $p_classes = '', $p_title = '' ) {
  * @param string $p_icon    Fontawesome icon name (fa-xxx)
  * @param string $p_classes Optional additional CSS classes
  * @param string $p_title   Optional pop-up text
+ * @param string $p_inner_html Optional html to insert with the icon.
  */
-function print_icon( $p_icon, $p_classes = '', $p_title = '' ) {
-	echo icon_get( $p_icon, $p_classes, $p_title );
+function print_icon( $p_icon, $p_classes = '', $p_title = '', $p_inner_html = '' ) {
+	echo icon_get( $p_icon, $p_classes, $p_title, $p_inner_html );
 }
 
 /**

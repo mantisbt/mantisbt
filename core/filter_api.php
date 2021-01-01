@@ -1225,7 +1225,7 @@ function filter_draw_selection_area() {
 
 	# further use of this icon must be inlined to avoid spaces in rendered html
 	$t_temporary_icon_html = ( $t_is_temporary && $t_can_persist ) ?
-		icon_get( 'fa-clock-o', 'fa-xs-top', lang_get( 'temporary_filter' ) )
+		icon_get( 'fa-clock-o', 'fa-xs-top' )
 		: '';
 	$t_url_reset_filter = 'view_all_set.php?type=' . FILTER_ACTION_RESET;
 	$t_url_persist_filter = 'view_all_set.php?temporary=n' . $t_tmp_filter_param . '&set_project_id=' . helper_get_current_project();
@@ -1234,9 +1234,15 @@ function filter_draw_selection_area() {
 		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-filter"><?php echo $t_temporary_icon_html ?>
-				</i>
-				<?php echo lang_get( 'filters' ) ?>
+<?php
+				print_icon(
+					'fa-filter',
+					'ace-icon',
+					$t_temporary_icon_html ? lang_get( 'temporary_filter' ) : '',
+					$t_temporary_icon_html
+				);
+				echo lang_get( 'filters' )
+?>
 			</h4>
 
 			<div class="widget-toolbar">
