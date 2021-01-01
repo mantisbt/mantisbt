@@ -1782,7 +1782,11 @@ function print_lost_password_link() {
  */
 function print_file_icon( $p_filename ) {
 	$t_icon = file_get_icon_url( $p_filename );
-	echo '<i class="fa ' . string_attribute( $t_icon['url'] ) . '" title="' . string_attribute( $t_icon['alt'] ) . ' file icon" ></i>';
+	print_icon(
+		string_attribute( $t_icon['url'] ),
+		'',
+		string_attribute( $t_icon['alt'] ) . ' file icon'
+	);
 }
 
 /**

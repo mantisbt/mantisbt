@@ -456,8 +456,8 @@ function layout_navbar() {
 function layout_navbar_menu_item( $p_url, $p_title, $p_icon ) {
 	echo '<li>';
 	echo '<a href="' . $p_url . '">';
-	echo '<i class="ace-icon fa ' . $p_icon . '"> </i> ' . $p_title;
-	echo '</a>';
+	print_icon( $p_icon, 'ace-icon' );
+	echo ' ' . $p_title . '</a>';
 	echo '</li>';
 }
 
@@ -944,8 +944,8 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 	}
 
 	echo '<a href="' . $t_url . '">' . "\n";
-	echo '<i class="menu-icon fa ' . $p_icon . '"></i> ' . "\n";
-	echo '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
+	print_icon( $p_icon, 'menu-icon' );
+	echo "\n" . '<span class="menu-text"> ' . lang_get_defaulted( $p_title ) . ' </span>' . "\n";
 	echo '</a>' . "\n";
 	echo '<b class="arrow"></b>' . "\n";
 	echo '</li>' . "\n";

@@ -1295,7 +1295,7 @@ function filter_draw_selection_area() {
 					</div>
 				<?php } ?>
 				<a id="filter-toggle" data-action="collapse" href="#">
-					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
+					<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 			<div id="filter-bar-queries" class="widget-toolbar no-border" style="display: <?php echo $t_collapse_block ? 'block' : 'none' ?>">

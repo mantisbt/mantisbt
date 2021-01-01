@@ -106,7 +106,7 @@ function print_version_header( $p_version_id ) {
 	echo '</h4>';
 	echo '<div class="widget-toolbar">';
 	echo '<a data-action="collapse" href="#">';
-	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	print_icon( $t_block_icon, '1 ace-icon bigger-125' );
 	echo '</a>';
 	echo '</div>';
 	echo '</div>';
