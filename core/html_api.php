@@ -648,7 +648,7 @@ function print_submenu( array $p_menu_items, $p_current_page = '', $p_event = nu
 				$t_active = $p_current_page && strpos( $t_item['url'], $p_current_page ) !== false
 					? 'active' : '';
 				$t_icon = array_key_exists( 'icon', $t_item )
-					? '<i class="fa ' . $t_item['icon'] . '"></i>&nbsp;'
+					? icon_get( $t_item['icon'] ) . '&nbsp;'
 					: '';
 
 				printf( $t_btn_template,

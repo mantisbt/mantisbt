@@ -291,7 +291,7 @@ echo '<span class="badge"> ' . " $v_start - $v_end / $t_bug_count " . ' </span>'
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 		<div class="widget-toolbar no-border hidden-xs">

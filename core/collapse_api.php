@@ -124,16 +124,18 @@ function collapse_icon( $p_name ) {
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
-		$t_icon = 'fa-chevron-up bigger-120';
+		$t_icon = 'fa-chevron-up';
 		$t_alt = '-';
 		$t_id = $p_name . '_open_link';
 	} else {
-		$t_icon = 'fa-chevron-down bigger-120';
+		$t_icon = 'fa-chevron-down';
 		$t_alt = '+';
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint"><i class="fa ', $t_icon, '" title="', $t_alt, '"></i></a>';
+	echo '&nbsp;&nbsp;<a id="', $t_id, '" class="collapse-link noprint">';
+	print_icon( $t_icon, 'bigger-120', $t_alt);
+	echo '</a>';
 }
 
 /**

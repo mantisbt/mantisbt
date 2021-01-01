@@ -650,7 +650,7 @@ if( $t_flags['monitor_show'] ) {
 			</h4>
 			<div class="widget-toolbar">
 				<a data-action="collapse" href="#">
-					<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+					<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 				</a>
 			</div>
 		</div>
@@ -762,7 +762,7 @@ if( $t_flags['history_show'] && $f_history ) {
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 	</div>
@@ -978,7 +978,7 @@ function bug_view_relationship_view_box( $p_bug_id, $p_can_update ) {
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				<?php print_icon( $t_block_icon, '1 ace-icon bigger-125' ); ?>
 			</a>
 		</div>
 	</div>

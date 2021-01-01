@@ -159,8 +159,9 @@ $f_export = implode( ',', $f_bug_arr );
 			$t_params['filter'] = filter_get_temporary_key( $t_filter );
 		}
 
-		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>'
-			. '<i class="fa ' . $t_icon[3] . '" title="' . $t_icon[4] . '"></i></a> ';
+		echo '<a href="' . $t_icon[0] . '.php?' . http_build_query( $t_params ) . '" ' . $t_icon[2] . '>';
+		print_icon( $t_icon[3], '', $t_icon[4] );
+		echo '</a> ';
 	}
 ?>
 
