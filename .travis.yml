@@ -38,6 +38,7 @@ php:
   - 7.2
   - 7.3
   - 7.4
+  - 8.0
 
 env:
   - DB=mysql
@@ -56,6 +57,10 @@ jobs:
             - publican
 
   allow_failures:
+    # Known issue with deprecated pgsql function aliases, see #27830
+    - php: 8.0
+      env: DB=pgsql
+
 
 
 # -----------------------------------------------------------------------------
