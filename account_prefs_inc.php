@@ -90,6 +90,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 <?php
 	if( $p_accounts_menu ) {
 		print_account_menu( 'account_prefs_page.php' );
+		echo '<div class="col-md-12 col-xs-12">';
 	}
 ?>
 
@@ -418,4 +419,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 </div>
 
 <?php
+	if( $p_accounts_menu ) {
+		echo '</div>';
+	}
 } # end of edit_account_prefs()
