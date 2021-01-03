@@ -562,13 +562,13 @@ function layout_navbar_button_bar() {
 		$t_bug_url = string_get_bug_report_url();
 		echo '<a class="btn btn-primary btn-sm" href="' . $t_bug_url . '">';
 		print_icon( 'fa-edit');
-		echo lang_get( 'report_bug_link' );
+		echo ' ' . lang_get( 'report_bug_link' );
 		echo '</a>';
 	}
 
 	if( $t_show_invite_user_button ) {
 		echo '<a class="btn btn-primary btn-sm" href="manage_user_create_page.php">';
-		print_icon( 'fa-fa-user-plus');
+		print_icon( 'fa-user-plus' );
 		echo ' ' . lang_get( 'invite_users' );
 		echo '</a>';
 	}
@@ -1241,7 +1241,7 @@ function layout_footer() {
 		}
 		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
 		echo '<small>';
-		print_icon( 'fa-fa-clock-o' );
+		print_icon( 'fa-clock-o' );
 		echo ' ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
 	}
 
