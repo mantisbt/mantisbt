@@ -200,6 +200,7 @@ if( $t_sponsor_count === 0 ) {
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
 		if( VS_PRIVATE == $t_bug->view_state ) {
+			echo ' ';
 			print_icon( 'fa-lock', '', lang_get( 'private' ) );
 		}
 		echo '</td>';

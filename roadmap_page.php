@@ -111,7 +111,7 @@ function print_version_header( array $p_version_row ) {
 	if( $t_scheduled_release_date ) {
 		echo '<div class="pull-left">';
 		print_icon( 'fa-calendar-o', 'fa-lg' );
-		echo $t_scheduled_release_date . '</div>';
+		echo ' ' . $t_scheduled_release_date . '</div>';
 	}
 	echo '<div class="btn-toolbar pull-right">';
 	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
