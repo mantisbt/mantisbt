@@ -972,17 +972,6 @@ function project_delete_all_files( $p_project_id ) {
 }
 
 /**
- * Pads the project id with the appropriate number of zeros.
- * @param integer $p_project_id A project identifier.
- * @return string
- */
-function project_format_id( $p_project_id ) {
-	$t_padding = config_get( 'display_project_padding' );
-	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
-}
-
-
-/**
  * Returns the project name as a link formatted for display in menus and buttons.
  *
  * The link is formatted as a link to set_project.php, which can be used to

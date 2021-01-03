@@ -3145,13 +3145,6 @@ $g_status_colors = array(
 );
 
 /**
- * The padding level when displaying project ids
- *  The project id will be padded with 0's up to the size given
- * @global integer $g_display_project_padding
- */
-$g_display_project_padding = 3;
-
-/**
  * The padding level when displaying bug ids
  *  The bug id will be padded with 0's up to the size given
  * @global integer $g_display_bug_padding
@@ -4470,7 +4463,6 @@ $g_public_config_names = array(
 	'display_bug_padding',
 	'display_bugnote_padding',
 	'display_errors',
-	'display_project_padding',
 	'download_attachments_threshold',
 	'due_date_default',
 	'due_date_update_threshold',
