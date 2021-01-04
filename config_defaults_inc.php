@@ -2086,51 +2086,77 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
 
 /**
- * Specifies the LDAP or Active Directory server to connect to.
+ * Specifies the LDAP or Active Directory server(s) to connect to.
+ * Multiple servers can be specified as a space-separated list.
  *
  * This must be a full LDAP URI (ldap[s]://hostname:port)
- * - Protocol can be either ldap or ldaps (for SSL encryption). If omitted,
- *   then an unencrypted connection will be established on port 389.
+ * - Protocol must be either:
+ *   - ldap (unencrypted or opportunistic StartTLS)
+ *   - ldaps (for TLS encryption)
  * - Port number is optional, and defaults to 389. If this doesn't work, try
  *   using one of the following standard port numbers: 636 (ldaps); for Active
  *   Directory Global Catalog forest-wide search, use 3268 (ldap) or 3269 (ldaps)
  *
  * Examples of valid URI:
- *   ldap.example.com
  *   ldap://ldap.example.com
  *   ldaps://ldap.example.com:3269/
  *
  * @global string $g_ldap_server
  */
-$g_ldap_server = 'ldaps://ldap.example.com/';
+$g_ldap_server = 'ldap://ldap.example.com/';
 
 /**
- * The root distinguished name for LDAP searches
+ * Decides if the connection will attempt an opportunistic upgrade to
+ * a TLS connection (STARTTLS).
+ * Be sure to use the ldap:// scheme and not ldaps://
+ * if setting this to ON.  For security, a failure aborts the entire connection.
+ *
+ * @global integer $g_ldap_use_starttls
+ */
+$g_ldap_use_starttls = ON;
+
+/**
+ * The minimum version of the TLS protocol to allow.
+ * For example, LDAP_OPT_X_TLS_PROTOCOL_TLS1_2. If OFF, then the protocol version
+ * is not set. This maps to the LDAP_OPT_X_TLS_PROTOCOL_MIN ldap library option.
+ * Requires PHP 7.1 or later. For security, a failure aborts the entire connection.
+ * @see https://www.php.net/manual/en/ldap.constants.php#constant.ldap-opt-x-tls-protocol-min
+ *
+ * @global int $g_ldap_tls_protocol_min
+ */
+$g_ldap_tls_protocol_min = OFF;
+
+/**
+ * The root distinguished name for LDAP searches.
  * @global string $g_ldap_root_dn
  */
 $g_ldap_root_dn = 'dc=example,dc=com';
 
 /**
- * LDAP search filter for the organization
+ * LDAP search filter for the organization.
  * e.g. '(organizationname=*Traffic)'
  * @global string $g_ldap_organization
  */
 $g_ldap_organization = '';
 
 /**
- * The LDAP Protocol Version, if 0, then the protocol version is not set.
- * For Active Directory use version 3.
+ * The LDAP Protocol Version.
+ * If 0, then the protocol version is not set, and you get whatever default
+ * the underlying ldap library uses. This maps to the LDAP_OPT_PROTOCOL_VERSION
+ * ldap library option. In almost all cases you should use 3. LDAPv3 was
+ * introduced back in 1997. LDAPv2 was deprecated in 2003 by RFC3494.
  *
  * @global integer $g_ldap_protocol_version
  */
-$g_ldap_protocol_version = 0;
+$g_ldap_protocol_version = 3;
 
 /**
  * Duration of the timeout for TCP connection to the LDAP server (in seconds).
+ * This maps to the LDAP_OPT_NETWORK_TIMEOUT ldap library option.
  * Set this to a low value when the hostname defined in $g_ldap_server resolves
  * to multiple IP addresses, allowing rapid failover to the next available LDAP
  * server.
- * Defaults to 0 (infinite)
+ * Defaults to 0 (infinite).
  *
  * @global int $g_ldap_network_timeout
  */
@@ -2138,8 +2164,11 @@ $g_ldap_network_timeout = 0;
 
 /**
  * Determines whether the LDAP library automatically follows referrals returned
- * by LDAP servers or not. This maps to LDAP_OPT_REFERRALS ldap library option.
+ * by LDAP servers or not.
+ * This maps to the LDAP_OPT_REFERRALS ldap library option.
  * For Active Directory, this should be set to OFF.
+ * If you have only one LDAP server, setting to this to OFF is advisible to prevent
+ * any man-in-the-middle attacks.
  *
  * @global integer $g_ldap_follow_referrals
  */
@@ -2148,7 +2177,8 @@ $g_ldap_follow_referrals = ON;
 /**
  * The distinguished name of the service account to use for binding to the
  * LDAP server.
- * For example, 'CN=ldap,OU=Administrators,DC=example,DC=com'.
+ * For anonymous binding, leave empty.
+ * For example, 'cn=ldap,ou=Administrators,dc=example,dc=com'.
  *
  * @global string $g_ldap_bind_dn
  */
@@ -2157,14 +2187,15 @@ $g_ldap_bind_dn = '';
 /**
  * The password for the service account used to establish the connection to
  * the LDAP server.
+ * For anonymous binding, leave empty.
  *
  * @global string $g_ldap_bind_passwd
  */
 $g_ldap_bind_passwd = '';
 
 /**
- * The LDAP field for username
- * Use 'sAMAccountName' for Active Directory
+ * The LDAP field for username.
+ * Use 'sAMAccountName' for Active Directory.
  * @global string $g_ldap_uid_field
  */
 $g_ldap_uid_field = 'uid';
@@ -2178,6 +2209,8 @@ $g_ldap_realname_field = 'cn';
 /**
  * Use the realname specified in LDAP (ON) rather than the one stored in the
  * database (OFF).
+ * Note that MantisBT will update the database with the data retrieved
+ * from LDAP when ON.
  * @global integer $g_use_ldap_realname
  */
 $g_use_ldap_realname = OFF;
@@ -2185,12 +2218,14 @@ $g_use_ldap_realname = OFF;
 /**
  * Use the email address specified in LDAP (ON) rather than the one stored
  * in the database (OFF).
+ * Note that MantisBT will update the database with the data retrieved
+ * from LDAP when ON.
  * @global integer $g_use_ldap_email
  */
 $g_use_ldap_email = OFF;
 
 /**
- * This configuration option allows replacing the ldap server with a comma-
+ * This configuration option allows replacing the LDAP server with a comma-
  * delimited text file for development or testing purposes.
  * The LDAP simulation file format is as follows:
  *   - One line per user
@@ -2201,7 +2236,7 @@ $g_use_ldap_email = OFF;
  *        - password
  *   - Any extra fields are ignored
  * On production systems, this option should be set to ''.
- * @global integer $g_ldap_simulation_file_path
+ * @global string $g_ldap_simulation_file_path
  */
 $g_ldap_simulation_file_path = '';
 
@@ -4426,7 +4461,9 @@ $g_global_settings = array(
 	'ldap_root_dn',
 	'ldap_server',
 	'ldap_simulation_file_path',
+	'ldap_tls_protocol_min',
 	'ldap_uid_field',
+	'ldap_use_starttls',
 	'library_path',
 	'login_method',
 	'logo_image',
