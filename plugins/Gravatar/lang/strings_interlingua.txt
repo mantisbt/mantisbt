@@ -41,15 +41,5 @@
  * @author McDutchie
  */
 
-$s_plugin_format_title = 'Formatation de MantisBT';
-$s_plugin_format_description = 'Plug-in official de tractamento e formatation de texto.';
-$s_plugin_format_config = 'Configuration';
-$s_plugin_format_process_text = 'Tractamento de texto';
-$s_plugin_format_process_text_warning_notice = 'Non disactivar sin saper precisemente lo que tu face. In stato disactivate, attaccos de scripting trans sitos (XSS) es possibile.';
-$s_plugin_format_process_urls = 'Tractamento de URL';
-$s_plugin_format_process_buglinks = 'Ligamines interne de MantisBT (problemas e notas)';
-$s_plugin_format_process_buglinks_info = 'Tu configuration defini le etiquetta <em>Issue</em> como "<literal>%s</literal>" e le etiquetta <em>Issue Note</em> como "<literal>%s</literal>"';
-$s_plugin_format_process_markdown = 'Processamento Markdown';
-$s_plugin_format_process_markdown_info = 'Application de stilo con supporto de Markdown, un syntaxe pro formatar texto de maniera que pote esser convertite in HTML.';
-$s_plugin_format_enabled = 'Active';
-$s_plugin_format_disabled = 'Non active';
+$s_plugin_Gravatar_title = 'Avatares via Gravatar';
+$s_plugin_Gravatar_description = 'Un plug-in que monstra avatares de usatores a base de lor adresse de e-mail usante un servicio de avatar.';

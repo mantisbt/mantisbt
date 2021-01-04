@@ -42,6 +42,7 @@
  * @author Andriykopanytsia
  * @author Base
  * @author Choomaq
+ * @author Dovsienko
  * @author Green Zero
  * @author Igorko
  * @author Macofe
@@ -626,7 +627,7 @@ $s_assigned_status = 'Стан, присвоюваний автоматично 
 $s_resolved_status = 'Стан, за якого проблема вважається розв\'язаною';
 $s_readonly_status = 'Стан, за якого проблема доступна лише для читання';
 $s_reopen_status = 'Стан, який присвоюється проблемам, відкритим повторно';
-$s_reopen_resolution = 'Розв\'язок, призначуваний для повторно відритих проблем';
+$s_reopen_resolution = 'Розв\'язок, призначуваний для повторно відкритих проблем';
 $s_limit_view_unless_threshold_option = 'Перегляд проблем інших користувачів (якщо не встановлено, доступ буде обмежено лише до тих проблем, про які користувач повідомив, з якими мав справу, чи за якими стежить)';
 $s_config_delete_sure = 'Ви справді хочете видалити установки для:';
 $s_delete_config_button = 'Видалити Параметри';

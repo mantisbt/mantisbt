@@ -646,7 +646,8 @@ $s_update_category_button = 'שמירה';
 $s_category_updated_msg = 'הקטגוריה עודכנה';
 $s_add_subproject_title = 'הוספת תת־פרויקט';
 $s_project_deleted_msg = 'הפרויקט נמחק בהצלחה...';
-$s_project_delete_msg = 'האם ברצונך למחוק את הפרויקט, כל הבאגים שבו, וכל יתר המידע הקשור לפרויקט?';
+$s_project_delete_msg = 'האם ברצונך למחוק את הפרויקט"%1$s"? <br> זה ימחק גם את %2$s כל הבאגים שבו, וכל יתר המידע הקשור לפרויקט?
+!!FAZZY!!';
 $s_project_delete_button = 'מחיקת פרויקט';
 $s_edit_project_title = 'עריכת הפרויקט';
 $s_project_name = 'שם הפרויקט';
