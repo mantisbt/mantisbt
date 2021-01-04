@@ -117,5 +117,13 @@ check_print_test_warn_row( 'Deprecated "limit_reporters" setting should no longe
 	array( false => 'Use "limit_view_unless_threshold" instead.' )
 );
 
+# Check that 'ldap_server' is a proper URI, starting with either ldap:// or ldaps://
+$t_ldap_server = config_get_global( 'ldap_server' );
+check_print_test_row(
+	'"ldap_server" must be a valid, full LDAP URI',
+	( preg_match( '~^ldaps?://~', $t_ldap_server ) == 1 ),
+	array( false => '"ldap_server" must be a proper URI, starting with either "ldap://" or "ldaps://"' )
+);
+
 # Obsolete Settings
 require_api( 'obsolete.php' );
