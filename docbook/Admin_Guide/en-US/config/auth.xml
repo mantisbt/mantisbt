@@ -91,10 +91,15 @@
 
 					<itemizedlist>
 						<listitem>
-							<para>Protocol can be either
-								<filename>ldap</filename> or
-								<filename>ldaps</filename> (for SSL/TLS encryption).
-								If omitted, then an unencrypted connection will be established on port 389.
+							<para>Protocol must be either:
+								<itemizedlist>
+									<listitem>
+										<para>ldap - unencrypted or opportunistic StartTLS</para>
+									</listitem>
+									<listitem>
+										<para>ldaps - TLS encryption</para>
+									</listitem>
+								</itemizedlist>
 							</para>
 						</listitem>
 						<listitem>
@@ -109,10 +114,33 @@
 
 					<para>Examples of valid URI:</para>
 					<programlisting>
-ldap.example.com
 ldap://ldap.example.com/
 ldaps://ldap.example.com:3269/
 </programlisting>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_use_starttls</term>
+
+				<listitem>
+					<para>A boolean indicating if the connection will attempt opportunistic
+					upgrade to a TLS connection (STARTTLS).  Be sure to use the ldap:// scheme
+					and not ldaps:// if setting this to ON.  For security, a failure aborts
+					the entire connection. Defaults to <emphasis>ON</emphasis>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_tls_protocol_min</term>
+
+				<listitem>
+					<para>An integer indicating the minimum version of the
+					TLS protocol to allow. For example, LDAP_OPT_X_TLS_PROTOCOL_TLS1_2.
+					If 0, then the protocol version is not set.
+					This maps to LDAP_OPT_X_TLS_PROTOCOL_MIN ldap library option.
+					Requires PHP 7.1 or later.
+					Defaults to <emphasis>0</emphasis>.</para>
 				</listitem>
 			</varlistentry>
 
@@ -139,12 +167,12 @@ ldaps://ldap.example.com:3269/
 				<term>$g_ldap_protocol_version</term>
 
 				<listitem>
-					<para>The LDAP Protocol Version. If 0, then the
-					protocol version is not set. Defaults to
-					<emphasis>0</emphasis>.</para>
-
-					<para>For Active Directory use protocol version
-					3.</para>
+					<para>The LDAP Protocol Version. If 0, then the protocol version
+					is not set, and you get whatever default the underlying ldap
+					library uses. This maps to the LDAP_OPT_PROTOCOL_VERSION ldap
+					library option. In almost all cases you should use 3. LDAPv3 was
+					introduced back in 1997. LDAPv2 was deprecated in 2003 by RFC3494.
+					Defaults to <emphasis>3</emphasis>.</para>
 				</listitem>
 			</varlistentry>
 
@@ -153,7 +181,8 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>Duration of the timeout for TCP connection to the
-					LDAP server (in seconds). Defaults to
+					LDAP server (in seconds). This maps to LDAP_OPT_NETWORK_TIMEOUT ldap
+					library option. Defaults to
 					<emphasis>0</emphasis> (infinite).</para>
 
 					<para>Set this to a low value when the hostname defined
@@ -174,7 +203,9 @@ ldaps://ldap.example.com:3269/
 					<emphasis>ON</emphasis>.</para>
 
 					<para>For Active Directory, this should be set to
-					OFF.</para>
+					OFF. If you have only one LDAP server, setting to
+					this to OFF is advisible to prevent any
+					man-in-the-middle attacks.</para>
 				</listitem>
 			</varlistentry>
 
@@ -184,7 +215,8 @@ ldaps://ldap.example.com:3269/
 				<listitem>
 					<para>The distinguished name of the service account to
 					use for binding to the LDAP server. For example,
-					'CN=ldap,OU=Administrators,DC=example,DC=com'.</para>
+					'cn=ldap,ou=Administrators,dc=example,dc=com'.
+					For anonymous binding, leave empty.</para>
 				</listitem>
 			</varlistentry>
 
@@ -193,7 +225,8 @@ ldaps://ldap.example.com:3269/
 
 				<listitem>
 					<para>The password for the service account used to
-					establish the connection to the LDAP server.</para>
+					establish the connection to the LDAP server.
+					For anonymous binding, leave empty.</para>
 				</listitem>
 			</varlistentry>
 

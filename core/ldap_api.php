@@ -64,16 +64,16 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	$t_ldap_server = config_get_global( 'ldap_server' );
 
-	log_event( LOG_LDAP, 'Attempting connection to LDAP server/URI \'' . $t_ldap_server . '\'.' );
+	log_event( LOG_LDAP, 'Checking syntax of LDAP server URI \'' . $t_ldap_server . '\'.' );
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds === false ) {
-		log_event( LOG_LDAP, 'Connection to LDAP server failed' );
+		log_event( LOG_LDAP, 'LDAP server URI syntax check failed, make sure its in URI form' );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 		# Return required as function may be called with error suppressed
 		return false;
 	}
 
-	log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
+	log_event( LOG_LDAP, 'LDAP server URI syntax check succeeded' );
 
 	$t_network_timeout = config_get_global( 'ldap_network_timeout' );
 	if( $t_network_timeout > 0 ) {
@@ -100,8 +100,39 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		ldap_log_error( $t_ds );
 	}
 
+	# Set minimum TLS protocol version flag (ex: LDAP_OPT_X_TLS_PROTOCOL_TLS1_2).
+	if( version_compare( PHP_VERSION, '7.1.0', '>=' ) ) {
+		$t_tls_protocol_min = config_get_global( 'ldap_tls_protocol_min' );
+		if( $t_tls_protocol_min > 0 ) {
+			log_event( LOG_LDAP, 'Attempting to set minimum TLS protocol' );
+			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_X_TLS_PROTOCOL_MIN, $t_tls_protocol_min );
+			if( !$t_result ) {
+				ldap_log_error( $t_ds );
+				log_event( LOG_LDAP, "Error: Failed to set minimum TLS version on LDAP server" );
+				trigger_error( ERROR_LDAP_UNABLE_TO_SET_MIN_TLS, ERROR );
+
+				# Return required as function may be called with error suppressed
+				return false;
+			}
+		}
+	}
+
+	$t_use_starttls = config_get_global( 'ldap_use_starttls' );
+	if ( $t_use_starttls ) {
+		log_event( LOG_LDAP, 'Attempting StartTLS' );
+		$t_result = @ldap_start_tls( $t_ds );
+		if( !$t_result ) {
+			ldap_log_error( $t_ds );
+			log_event( LOG_LDAP, "Error: Cannot initiate StartTLS on LDAP server" );
+			trigger_error( ERROR_LDAP_UNABLE_TO_STARTTLS, ERROR );
+
+			# Return required as function may be called with error suppressed
+			return false;
+		}
+	}
+	
 	# If no Bind DN and Password is set, attempt to login as the configured
-	#  Bind DN.
+	# Bind DN.
 	if( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
 		$p_binddn = config_get_global( 'ldap_bind_dn', '' );
 		$p_password = config_get_global( 'ldap_bind_passwd', '' );
@@ -204,7 +235,7 @@ function ldap_escape_string( $p_string ) {
 function ldap_cache_user_data( $p_username ) {
 	global $g_cache_ldap_data;
 
-	# Returne cached data if available
+	# Return cached data if available
 	if( isset( $g_cache_ldap_data[$p_username] ) ) {
 		return $g_cache_ldap_data[$p_username];
 	}
