@@ -1033,7 +1033,6 @@ $s_sponsorship_deleted = 'Sponsring borttagen';
 $s_sponsorship_paid = 'Sponsring betald';
 $s_sponsorship_more_info = 'Mer information om sponsring';
 $s_sponsorship_total = 'Sponsring totalt';
-$s_sponsorship_process_url = '';
 $s_changelog = 'Ändringslogg';
 $s_changelog_empty = 'Det finns ingen ändringslogg';
 $s_changelog_empty_manager = 'Ingen information från förändringsloggen tillgänglig. Ärenden inkluderas när projekt har versioner och ärenden löses med "fixad i version" set.';

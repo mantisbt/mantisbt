@@ -968,7 +968,6 @@ $s_sponsorship_deleted = 'Patrocinador Eliminat';
 $s_sponsorship_paid = 'Patrocindaor Pagat';
 $s_sponsorship_more_info = 'Més informació sobre el patrocinador';
 $s_sponsorship_total = 'Total Patrocinadors';
-$s_sponsorship_process_url = '';
 $s_changelog = 'Log de canvis';
 $s_changelog_empty = 'Informació dels canvis no disponible';
 $s_roadmap = 'Full de ruta';

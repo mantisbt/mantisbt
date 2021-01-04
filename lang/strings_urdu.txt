@@ -765,7 +765,6 @@ $s_sponsorship_deleted = ' سپانسر شپ خارج ھو گی ھے';
 $s_sponsorship_paid = ' سپانسر شپ ادا ھو گی ھے';
 $s_sponsorship_more_info = '  سپانسر شپ سے متعلق اور معلومات';
 $s_sponsorship_total = 'مجموعی اسپانسر شپ';
-$s_sponsorship_process_url = ' سپانسر شپ کا یو آر ایل';
 $s_changelog = 'لاگ کو بدلو';
 $s_roadmap = 'روڈ میپ';
 $s_resolved_progress = '  ایشوذ حل ھو چکے ھیں پراگریس( ڈی)%ڈی کا %ڈی .';

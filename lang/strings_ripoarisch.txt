@@ -659,7 +659,6 @@ $s_sponsorship_deleted = 'Shponserschaff fottjeschmeße';
 $s_sponsorship_paid = 'De Shponserschaff es bezahlt';
 $s_sponsorship_more_info = 'Mih övver de Schponserschaff';
 $s_sponsorship_total = 'Jesamp för de Shponserschaff';
-$s_sponsorship_process_url = '';
 $s_changelog = 'Et Logbohch vun de Änderonge';
 $s_changelog_empty = 'Mer han kein Date övver de verjange Änderunge';
 $s_roadmap = 'Övverssesch udder Faaplan';
