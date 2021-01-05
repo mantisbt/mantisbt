@@ -344,7 +344,9 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
+				echo '<div class="alert alert-warning">',
+					string_display_links( $t_description ),
+					'</div>';
 			}
 
 			echo '<div class="space-4"></div>';
