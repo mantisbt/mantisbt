@@ -757,6 +757,36 @@ $g_email_dkim_passphrase = '';
 $g_email_dkim_identity = 'noreply@example.com';
 
 /**
+ * Path to mail certification file
+ *
+ * @global string $g_email_smime_cert_file
+ */
+$g_email_smime_cert_file = '';
+
+/**
+ * Path to mail private key file
+ *
+ * @see $g_email_smime_cert_file
+ *
+ * @global string $g_email_smime_key_file
+ */
+$g_email_smime_key_file = '';
+
+/**
+ * mail private key pass
+ *
+ * @global string $g_email_smime_key_password
+ */
+$g_email_smime_key_password = '';
+
+/**
+ * Path to mail extra certification file
+ *
+ * @global string $g_email_smime_extracerts_file
+ */
+$g_email_smime_extracerts_file = '';
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
@@ -4326,7 +4356,9 @@ $g_global_settings = array(
 	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool',
 	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
 	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
-	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email'
+	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email',
+	'email_smime_cert_file', 'email_smime_key_file', 'email_smime_key_password',
+	'email_smime_extracerts_file',
 );
 
 /**
