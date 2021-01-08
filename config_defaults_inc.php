@@ -757,6 +757,13 @@ $g_email_dkim_passphrase = '';
 $g_email_dkim_identity = 'noreply@example.com';
 
 /**
+ * Enable S/MIME signature.
+ *
+ * @global integer $g_email_smime_enable
+ */
+$g_email_smime_enable = OFF;
+
+/**
  * Path to the S/MIME certificate.
  *
  * The file must contain a PEM-encoded certificate.
@@ -4368,8 +4375,8 @@ $g_global_settings = array(
 	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
 	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
 	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email',
-	'email_smime_cert_file', 'email_smime_key_file', 'email_smime_key_password',
-	'email_smime_extracerts_file',
+	'email_smime_enable', 'email_smime_cert_file', 'email_smime_key_file',
+	'email_smime_key_password', 'email_smime_extracerts_file',
 );
 
 /**
