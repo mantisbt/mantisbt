@@ -100,7 +100,7 @@ if( $g_global_profiles ) {
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-file-o"></i>
+				<?php print_icon( 'fa-file-o', 'ace-icon' ); ?>
 				<?php echo lang_get( 'manage_profiles_link' ) ?>
 			</h4>
 		</div>
@@ -151,12 +151,12 @@ if( $g_global_profiles ) {
 ?>
 								<td class="center">
 									<?php if( $t_is_global_profile ) { ?>
-									<i class="ace-icon fa fa-check fa-lg"></i>
+									<?php print_icon( 'fa-check', 'ace-icon fa-lg' ); ?>
 									<?php } ?>
 								</td>
 								<td class="center">
 									<?php if( $t_is_default_profile ) { ?>
-									<i class="ace-icon fa fa-check fa-lg"></i>
+									<?php print_icon( 'fa-check', 'ace-icon fa-lg' ); ?>
 									<?php } ?>
 								</td>
 <?php
@@ -244,7 +244,7 @@ if( $g_global_profiles ) {
 
 				<div class="widget-header widget-header-small">
 					<h4 class="widget-title lighter">
-						<i class="ace-icon fa fa-file-o"></i>
+						<?php print_icon( 'fa-file-o', 'ace-icon' ); ?>
 						<?php echo lang_get( 'add_profile' ) ?>
 					</h4>
 				</div>

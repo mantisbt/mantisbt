@@ -139,7 +139,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 			$t_set = $t_flag ? 'checked="checked"' : '';
 			$t_value .= '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 		} else {
-			$t_value .= $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
+			$t_value .= $t_flag ? icon_get( 'fa-check', 'fa-lg blue' ) : '&#160;';
 		}
 
 		# Add 'reopened' label
@@ -166,7 +166,7 @@ function section_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-random"></i>';
+	echo '            ' . icon_get( 'fa-random', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -256,7 +256,7 @@ function threshold_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	echo '            ' . icon_get( 'fa-sliders', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -333,7 +333,7 @@ function access_begin( $p_section_name ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '   <div class="widget-header widget-header-small">';
 	echo '        <h4 class="widget-title lighter uppercase">';
-	echo '            <i class="ace-icon fa fa-lock"></i>';
+	echo '            ' . icon_get( 'fa-lock', 'ace-icon' );
 	echo $p_section_name;
 	echo '       </h4>';
 	echo '   </div>';
@@ -501,7 +501,7 @@ if( ALL_PROJECTS == $t_project ) {
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="well">' . "\n";
-echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
+echo '<p class="bold">' . icon_get( 'fa-info-circle' ) . " $t_project_title</p>\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
 	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
@@ -522,8 +522,8 @@ if( '' <> $t_validation_result ) {
 	echo '<div class="widget-box widget-color-blue2">';
 	echo '<div class="widget-header widget-header-small">';
 	echo '	<h4 class="widget-title lighter">';
-	echo '		<i class="ace-icon fa fa-hand-o-right"></i>';
-	echo 		lang_get( 'validation' );
+	echo '		' . icon_get( 'fa-hand-o-right', 'ace-icon' );
+	echo lang_get( 'validation' );
 	echo '	</h4>';
 	echo '</div>';
 	echo '<div class="widget-body">';

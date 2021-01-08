@@ -323,7 +323,7 @@ if( $t_multiple_projects ) {
 				'data-picker-locale="' . lang_get_current_datetime_locale() .
 				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
 				'" value="' . $t_date_to_display . '" />';
-			echo '<i class="fa fa-calendar fa-xlg datetimepicker"></i>';
+			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm" required>';
 

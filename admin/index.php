@@ -55,7 +55,7 @@ function print_info_row( $p_description, $p_value ) {
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-download"></i>
+		<?php print_icon( 'fa-download', 'ace-icon' ); ?>
 		<?php echo lang_get( 'install_information' ) ?>
 	</h4>
 </div>

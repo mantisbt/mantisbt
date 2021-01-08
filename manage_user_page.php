@@ -58,7 +58,7 @@ auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $t_cookie_name = config_get( 'manage_users_cookie' );
-$t_lock_image = '<i class="fa fa-lock fa-lg" title="' . lang_get( 'protected' ) . '" />';
+$t_lock_image = icon_get( 'fa-lock', 'fa-lg', lang_get( 'protected' ) );
 
 $f_save = gpc_get_bool( 'save' );
 $f_filter = gpc_get_string( 'filter', 'ALL' );
@@ -299,7 +299,7 @@ $t_user_count = count( $t_users );
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
-	<i class="ace-icon fa fa-users"></i>
+	<?php print_icon( 'fa-users', 'ace-icon' ); ?>
 	<?php echo lang_get('manage_accounts_title') ?>
 	<span class="badge"><?php echo $t_total_user_count ?></span>
 </h4>

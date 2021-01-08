@@ -88,7 +88,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-cubes"></i>
+			<?php print_icon( 'fa-cubes', 'ace-icon' ); ?>
 				<?php echo lang_get('plugins_installed') ?>
 		</h4>
 	</div>
@@ -231,7 +231,7 @@ if( 0 < count( $t_plugins_available ) ) {
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-cube"></i>
+			<?php print_icon( 'fa-cube', 'ace-icon' ); ?>
 			<?php echo lang_get('plugins_available') ?>
 		</h4>
 	</div>
@@ -333,7 +333,7 @@ if( 0 < count( $t_plugins_available ) ) {
 <div class="center">
 	<div class="space-10"></div>
 	<div class="well well-sm">
-		<i class="ace-icon fa fa-key"></i>
+		<?php print_icon( 'fa-key', 'ace-icon' ); ?>
 	<?php echo lang_get('plugin_key_label') ?>
 	<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
 	<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
