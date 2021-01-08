@@ -96,7 +96,7 @@ if( $t_global_profile ) {
 		<?php  echo form_security_field( 'account_prof_update' )?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
-		<input type="hidden" name="redirect" value="<?php echo $f_redirect_page ?>" />
+		<input type="hidden" name="redirect" value="<?php echo string_attribute( $f_redirect_page ) ?>" />
 
 		<div class="widget-box widget-color-blue2">
 
