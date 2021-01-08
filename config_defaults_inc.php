@@ -757,14 +757,18 @@ $g_email_dkim_passphrase = '';
 $g_email_dkim_identity = 'noreply@example.com';
 
 /**
- * Path to mail certification file
+ * Path to the S/MIME certificate.
+ *
+ * The file must contain a PEM-encoded certificate.
  *
  * @global string $g_email_smime_cert_file
  */
 $g_email_smime_cert_file = '';
 
 /**
- * Path to mail private key file
+ * Path to the S/MIME private key file.
+ *
+ * The file must contain a PEM-encoded private key matching the S/MIME certificate.
  *
  * @see $g_email_smime_cert_file
  *
@@ -773,14 +777,21 @@ $g_email_smime_cert_file = '';
 $g_email_smime_key_file = '';
 
 /**
- * mail private key pass
+ * Password for the S/MIME private key.
+ *
+ * Leave blank if the private key is not protected by a passphrase.
+ * @see $g_email_smime_key_file
  *
  * @global string $g_email_smime_key_password
  */
 $g_email_smime_key_password = '';
 
 /**
- * Path to mail extra certification file
+ * Optional path to S/MIME extra certificates.
+ *
+ * The file must contain one (or more) PEM-encoded certificates, which will be
+ * included in the signature to help the recipient verify the certificate
+ * specified in {@see $g_email_smime_cert_file} ("CA Chain").
  *
  * @global string $g_email_smime_extracerts_file
  */
