@@ -1332,6 +1332,13 @@ function email_send( EmailData $p_email_data ) {
 
 			$t_mail->Port = config_get( 'smtp_port' );
 
+			$t_mail->sign(
+				config_get_global( 'email_smime_cert_file' ),
+				config_get_global( 'email_smime_key_file' ),
+				config_get_global( 'email_smime_key_password' ),
+				config_get_global( 'email_smime_extracerts_file' )
+			);
+
 			break;
 	}
 
