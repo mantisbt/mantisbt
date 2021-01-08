@@ -160,6 +160,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		<p class="no-margin">
 			<?php
 			print_icon( 'fa-user', 'grey' );
+			echo ' ';
 			print_user( $t_activity['user_id'] );
 			?>
 		</p>
@@ -192,7 +193,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		if( $t_activity['modified'] ) {
 			echo '<p class="no-margin small lighter">';
 			print_icon( 'fa-retweet' );
-			echo lang_get( 'last_edited')
+			echo ' ' . lang_get( 'last_edited')
 				. lang_get( 'word_separator' )
 				. date( $t_normal_date_format, $t_activity['last_modified'] )
 				. '</p>';
