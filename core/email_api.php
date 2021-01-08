@@ -1336,12 +1336,14 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	# S/MIME signature
-	$t_mail->sign(
-		config_get_global( 'email_smime_cert_file' ),
-		config_get_global( 'email_smime_key_file' ),
-		config_get_global( 'email_smime_key_password' ),
-		config_get_global( 'email_smime_extracerts_file' )
-	);
+	if( ON == config_get_global( 'email_smime_enable' ) ) {
+		$t_mail->sign(
+			config_get_global( 'email_smime_cert_file' ),
+			config_get_global( 'email_smime_key_file' ),
+			config_get_global( 'email_smime_key_password' ),
+			config_get_global( 'email_smime_extracerts_file' )
+		);
+	}
 
 	#apply DKIM settings
 	if( config_get( 'email_dkim_enable' ) ) {
