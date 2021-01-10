@@ -757,6 +757,54 @@ $g_email_dkim_passphrase = '';
 $g_email_dkim_identity = 'noreply@example.com';
 
 /**
+ * Enable S/MIME signature.
+ *
+ * @global integer $g_email_smime_enable
+ */
+$g_email_smime_enable = OFF;
+
+/**
+ * Path to the S/MIME certificate.
+ *
+ * The file must contain a PEM-encoded certificate.
+ *
+ * @global string $g_email_smime_cert_file
+ */
+$g_email_smime_cert_file = '';
+
+/**
+ * Path to the S/MIME private key file.
+ *
+ * The file must contain a PEM-encoded private key matching the S/MIME certificate.
+ *
+ * @see $g_email_smime_cert_file
+ *
+ * @global string $g_email_smime_key_file
+ */
+$g_email_smime_key_file = '';
+
+/**
+ * Password for the S/MIME private key.
+ *
+ * Leave blank if the private key is not protected by a passphrase.
+ * @see $g_email_smime_key_file
+ *
+ * @global string $g_email_smime_key_password
+ */
+$g_email_smime_key_password = '';
+
+/**
+ * Optional path to S/MIME extra certificates.
+ *
+ * The file must contain one (or more) PEM-encoded certificates, which will be
+ * included in the signature to help the recipient verify the certificate
+ * specified in {@see $g_email_smime_cert_file} ("CA Chain").
+ *
+ * @global string $g_email_smime_extracerts_file
+ */
+$g_email_smime_extracerts_file = '';
+
+/**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
@@ -4326,7 +4374,9 @@ $g_global_settings = array(
 	'impersonate_user_threshold', 'email_retry_in_days', 'neato_tool', 'dot_tool',
 	'ldap_server', 'ldap_root_dn', 'ldap_organization', 'ldap_protocol_version',
 	'ldap_network_timeout', 'ldap_follow_referrals', 'ldap_bind_dn', 'ldap_bind_passwd',
-	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email'
+	'ldap_uid_field', 'ldap_realname_field', 'use_ldap_realname', 'use_ldap_email',
+	'email_smime_enable', 'email_smime_cert_file', 'email_smime_key_file',
+	'email_smime_key_password', 'email_smime_extracerts_file',
 );
 
 /**
