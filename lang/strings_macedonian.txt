@@ -470,6 +470,8 @@ $s_bugnote_updated_msg = 'Белешката е успешно подновен�
 $s_last_edited = 'Последно уредување:';
 $s_hide_content = 'Скриј содржина';
 $s_show_content = 'Прикажи содржина';
+$s_file_icon_description = 'Податотечна иконка на %1$s';
+$s_unknown_file_extension = 'непознато';
 $s_webmaster_contact_information = 'Обратете се кај <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">администраторот</a> за помош';
 $s_total_queries_executed = 'Вкупно извршени барања: %1$d';
 $s_unique_queries_executed = 'Извршени посебни барања: %1$d';

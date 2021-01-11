@@ -486,6 +486,7 @@ $s_bugnote_updated_msg = 'La nota sull\'anomalia è stata aggiornata con success
 $s_last_edited = 'Ultima modifica:';
 $s_hide_content = 'Nascondi il contenuto';
 $s_show_content = 'Mostra il contenuto';
+$s_unknown_file_extension = 'sconosciuto';
 $s_webmaster_contact_information = 'Contattare <a href="mailto:%1$s" title="Contatta il webmaster via e-mail.">amministratore</a> per assistenza';
 $s_total_queries_executed = 'Interrogazioni eseguite in totale: %1$d';
 $s_unique_queries_executed = 'Interrogazioni uniche eseguite: %1$d';

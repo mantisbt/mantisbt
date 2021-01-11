@@ -209,6 +209,7 @@ $s_add_bugnote_title = 'Notiz derbäisetzen';
 $s_add_bugnote_button = 'Notiz derbäisetzen';
 $s_hide_content = 'Inhalt verstoppen';
 $s_show_content = 'Inhalt weisen';
+$s_unknown_file_extension = 'onbekannt';
 $s_log_page_number = 'Zuel';
 $s_login_title = 'Aloggen';
 $s_save_login = 'Mech ageloggt halen';

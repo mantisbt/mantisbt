@@ -492,6 +492,8 @@ $s_bugnote_updated_msg = 'Sorun notu başarıyla güncellendi...';
 $s_last_edited = 'Son düzenleme:';
 $s_hide_content = 'İçeriği Gizle';
 $s_show_content = 'İçeriği Göster';
+$s_file_icon_description = '%1$s dosya ikonu';
+$s_unknown_file_extension = 'bilinmiyor';
 $s_webmaster_contact_information = 'Yardım için <a href="mailto:%1$s" title="E-posta yoluyla ağ yöneticisiyle iletişime geçin.">yöneticiyle</a> iletişime geçiniz';
 $s_total_queries_executed = 'Toplamda yapılan sorgu sayısı: %1$d';
 $s_unique_queries_executed = 'Yürütülen benzersiz sorgular: %1$d';
