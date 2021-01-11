@@ -470,6 +470,7 @@ $s_bugnote_updated_msg = 'Bemærkning er blevet opdateret ...';
 $s_last_edited = 'Sidst redigeret:';
 $s_hide_content = 'Skjul indhold';
 $s_show_content = 'Vis indhold';
+$s_unknown_file_extension = 'ukendt';
 $s_webmaster_contact_information = 'Kontakt <a href="mailto:%1$s" title="Kontakt administratoren via e-post.">administrator</a> for assistance';
 $s_total_queries_executed = 'Samlet antal udførte forespørgsler: %1$d';
 $s_unique_queries_executed = 'Antal udførte forespørgsler: %1$d';

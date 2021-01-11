@@ -59,6 +59,7 @@
  * @author Od1n
  * @author Peter17
  * @author Philou2024
+ * @author Seudo
  * @author Sherbrooke
  * @author Thibaut120094
  * @author Urhixidur
@@ -496,6 +497,8 @@ $s_bugnote_updated_msg = 'La note a été mise à jour avec succès...';
 $s_last_edited = 'Dernière modification :';
 $s_hide_content = 'Masquer le contenu';
 $s_show_content = 'Afficher le contenu';
+$s_file_icon_description = 'icône de fichier %1$s';
+$s_unknown_file_extension = 'inconnu';
 $s_webmaster_contact_information = 'Contactez <a href="mailto:%1$s"title ="Contacter le webmaster par courriel.">l’administrateur</a> pour une assistance.';
 $s_total_queries_executed = 'Requêtes exécutées au total : %1$d';
 $s_unique_queries_executed = 'Requêtes uniques exécutées : %1$d';
