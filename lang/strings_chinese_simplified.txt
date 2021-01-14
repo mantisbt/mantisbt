@@ -60,6 +60,7 @@
  * @author Yfdyh000
  * @author 乌拉跨氪
  * @author 佛壁灯
+ * @author 列维劳德
  * @author 夢蝶葬花
  * @author 沈澄心
  * @author 邢家朋
@@ -633,7 +634,7 @@ $s_readonly_status = '只读问题的状态设置为';
 $s_reopen_status = '重新打开的问题状态设置为';
 $s_reopen_resolution = '重新打开的问题的处理状况设置为';
 $s_limit_view_unless_threshold_option = '查看其他用户的问题 (如果没有设置，将仅限显示用户报告、处理或监控的问题)';
-$s_config_delete_sure = '您确实要删除的设置：';
+$s_config_delete_sure = '您确实要删除项目 %2$s 中的 %1$s 设置吗？';
 $s_delete_config_button = '删除设置';
 $s_configuration_report = '配置报告';
 $s_database_configuration = '数据库配置';
@@ -680,7 +681,7 @@ $s_category_updated_msg = '分类已经成功更新...';
 $s_create_first_project = '创建项目以便记载问题。';
 $s_add_subproject_title = '添加子项目';
 $s_project_deleted_msg = '项目已经成功删除...';
-$s_project_delete_msg = '确定要删除此项目和所有附属的问题吗？';
+$s_project_delete_msg = '确定要删除项目“%1$s”吗？<br>这也会删除 %2$s 附属的问题报告。';
 $s_project_delete_button = '删除项目';
 $s_edit_project_title = '编辑项目';
 $s_project_name = '项目名称';
@@ -721,7 +722,7 @@ $s_name = '名称';
 $s_project_updated_msg = '已经成功更新项目...';
 $s_version_added_msg = '已经成功添加版本...';
 $s_version_deleted_msg = '已经成功删除版本...';
-$s_version_delete_sure = '确定要删除此版本吗? 所有相关联的问题将会被删除!!';
+$s_version_delete_sure = '确定要删除版本“%1$s”吗?';
 $s_delete_version_button = '删除版本';
 $s_edit_project_version_title = '编辑项目版本';
 $s_update_version_button = '更新版本';
@@ -732,7 +733,7 @@ $s_obsolete = '已过期';
 $s_version_updated_msg = '版本已经成功更新...';
 $s_account_delete_protected_msg = '帐号受保护，无法删除此帐号';
 $s_account_deleted_msg = '已删除帐号...';
-$s_delete_account_sure_msg = '确定要删除此帐号吗？';
+$s_delete_account_sure_msg = '确定要删除帐号“%1$s”吗？';
 $s_notify_user = '通知此更改的用户';
 $s_accounts_pruned_msg = '已删除所有在一个星期以前注册，并且从来没有登录过的账号。';
 $s_prune_accounts_button = '删除';
@@ -798,7 +799,7 @@ $s_file_uploaded_msg = '文件上传成功';
 $s_upload_file_title = '上传文件';
 $s_title = '标题';
 $s_project_file_deleted_msg = '项目文件已经删除。';
-$s_confirm_file_delete_msg = '您确定要删除这些文件吗？';
+$s_confirm_file_delete_msg = '您确定要删除文件“%1$s”吗？';
 $s_filename = '文件名';
 $s_filename_label = '文件名：';
 $s_file_update_button = '更新文件';
@@ -810,7 +811,7 @@ $s_add_file = '添加文件';
 $s_project_document_updated = '更新项目成功';
 $s_project_user_added_msg = '成功添加用户至项目';
 $s_project_removed_user_msg = '从项目删除用户成功';
-$s_remove_user_sure_msg = '确定要删除该用户吗？';
+$s_remove_user_sure_msg = '确定要从项目“%2$s”中删除用户“%1$s”吗？';
 $s_remove_user_button = '删除用户';
 $s_remove_all_users_sure_msg = '确定要删除该项目的所有用户吗？';
 $s_remove_all_users_button = '删除所有用户';
@@ -938,7 +939,7 @@ $s_query_blank_name = '没有名称就不能保存过滤器，在保存前请给
 $s_query_name_too_long = '您不能存储超过 64 个字符的过滤器名称。请为此过滤器提供一个更短的名称。';
 $s_query_store_error = '保存此筛选器时出错。';
 $s_open_queries = '管理过滤器';
-$s_query_delete_msg = '您确实要删除此筛选器吗？';
+$s_query_delete_msg = '您确实要删除筛选器“%1$s”吗？';
 $s_edit_filter = '编辑过滤器';
 $s_owner = '所有者';
 $s_update_filter = '更新过滤器';
@@ -1001,10 +1002,10 @@ $s_linked_projects_label = '关联项目';
 $s_custom_field_sequence = '顺序';
 $s_custom_field_sequence_label = '顺序';
 $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:复选框,6:列表,7:多选列表,8:日期,9:单选框,10:多行文本';
-$s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“返回”按钮；点击下面的按钮继续删除。';
-$s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
+$s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了字段“%1$s”，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“返回”按钮；点击下面的按钮继续删除。';
+$s_confirm_custom_field_deletion = '你确定要删除这个自定义字段“%1$s”和所有相关联的值吗？';
 $s_field_delete_button = '删除字段';
-$s_confirm_custom_field_unlinking = '您确信您要从项目取消连接此自定义字段？只要自定义字段本身不被删除，这些值将不会被删除。';
+$s_confirm_custom_field_unlinking = '您确信您要从项目取消连接自定义字段“%1$s”？只要自定义字段本身不被删除，这些值将不会被删除。';
 $s_field_remove_button = '移除字段';
 $s_hide_status = '隐藏状态';
 $s_filter_closed = '已关闭';
