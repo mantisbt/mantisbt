@@ -30,6 +30,26 @@
  */
 abstract class MantisPlugin {
 	/**
+	 * Constants indicating the Plugin's validity status
+	 *
+	 * - VALID - Plugin is valid
+	 * - INVALID - Generic invalid status
+	 * - INCOMPLETE_DEFINITION - The plugin's definition is incomplete
+	 *   (i.e. required properties 'name' or 'version' are missing)
+	 * - MISSING_BASE_CLASS - Plugin directory exists but does not contain a
+	 *   matching Class
+	 * - MISSING_PLUGIN - The plugin has been installed, but its source code
+	 *   is no longer available in plugin_path directory
+	 *
+	 * @see MantisPlugin::$status
+	 */
+	const STATUS_VALID = 0;
+	const STATUS_INVALID = 1;
+	const STATUS_INCOMPLETE_DEFINITION = 2;
+	const STATUS_MISSING_BASE_CLASS = 3;
+	const STATUS_MISSING_PLUGIN = 4;
+
+	/**
 	 * name - Your plugin's full name. Required value.
 	 */
 	public $name		= null;
@@ -66,6 +86,18 @@ abstract class MantisPlugin {
 	 * url - A web address for your plugin.
 	 */
 	public $url			= null;
+
+	/**
+	 * Plugin's validity status
+	 * @var int $status
+	 */
+	public $status = self::STATUS_VALID;
+
+	/**
+	 * Explanation of the reason why the plugin is not valid
+	 * @var string $status_message
+	 */
+	public $status_message = '';
 
 	/**
 	 * this function registers your plugin - must set at least name and version
@@ -258,5 +290,32 @@ abstract class MantisPlugin {
 		plugin_event_hook_many( $this->hooks() );
 
 		$this->init();
+	}
+
+	/**
+	 * Check the plugin's validity status.
+	 *
+	 * @return bool True if the plugin is valid.
+	 */
+	public function isValid() {
+		return $this->name !== null && $this->version !== null;
+	}
+
+	/**
+	 * Creates an InvalidPlugin object from the current plugin.
+	 *
+	 * Invalid Plugin objects are used by manage_plugin_page.php to present
+	 * relevant information about the invalid plugin to the administrator so
+	 * they can take appropriate action to fix the problem.
+	 *
+	 * By default, it returns an InvalidDefinitionPlugin object.
+	 *
+	 * @return InvalidPlugin
+	 */
+	public function getInvalidPlugin() {
+		$t_plugin = new InvalidDefinitionPlugin( $this->basename );
+		$t_plugin->setInvalidPlugin( $this );
+
+		return $t_plugin;
 	}
 }

@@ -59,12 +59,24 @@ plugin_register_installed();
 $f_basename = gpc_get_string( 'name' );
 $t_plugin = plugin_register( $f_basename, true );
 
-helper_ensure_confirmed( sprintf( lang_get( 'plugin_uninstall_message' ), string_display_line( $t_plugin->name ) ), lang_get( 'plugin_uninstall' ) );
+switch( $t_plugin->status ) {
+	case MantisPlugin::STATUS_MISSING_PLUGIN:
+	case MantisPlugin::STATUS_MISSING_BASE_CLASS:
+		$t_message = 'plugin_remove_message';
+		$t_button = 'remove_link';
+		break;
+	default:
+		$t_message = 'plugin_uninstall_message';
+		$t_button = 'plugin_uninstall';
+}
+
+helper_ensure_confirmed(
+	sprintf( lang_get( $t_message ), string_display_line( $t_plugin->name ) ),
+	lang_get( $t_button )
+);
 
 if( !is_null( $t_plugin ) ) {
 	plugin_uninstall( $t_plugin );
-} else {
-	plugin_force_uninstall( $f_basename );
 }
 
 form_security_purge( 'manage_plugin_uninstall' );
