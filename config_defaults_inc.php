@@ -4428,6 +4428,7 @@ $g_global_settings = array(
 	'ldap_uid_field',
 	'library_path',
 	'login_method',
+	'logo_image',
 	'logo_url',
 	'logout_cookie',
 	'logout_redirect_page',
