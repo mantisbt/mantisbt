@@ -4461,6 +4461,7 @@ $g_global_settings = array(
 	'view_all_cookie',
 	'webmaster_email',
 	'wiki_enable',
+	'wiki_engine',
 	'wiki_engine_url',
 	'wiki_root_namespace',
 );
