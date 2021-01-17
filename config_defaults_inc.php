@@ -4449,6 +4449,7 @@ $g_global_settings = array(
 	'show_version',
 	'stop_on_errors',
 	'string_cookie',
+	'subprojects_enabled',
 	'top_include_page',
 	'use_ldap_email',
 	'use_ldap_realname',
