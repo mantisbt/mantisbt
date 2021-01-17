@@ -4458,6 +4458,7 @@ $g_global_settings = array(
 	'validate_email',
 	'version_suffix',
 	'view_all_cookie',
+	'webmaster_email',
 	'wiki_engine_url',
 );
 
