@@ -241,6 +241,12 @@ class DbQuery {
 	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
 	 */
 	public function execute( array $p_bind_array = null, $p_limit = null, $p_offset = null ) {
+		# For backwards compatibility with legacy code still relying on DB API,
+		# we need to save the parameters count before binding otherwise it will
+		# be reset after query execution, which will cause issues on RDBMS with
+		# numbered params (e.g. PostgreSQL).
+		db_param_push();
+
 		# bind values if provided
 		if( null !== $p_bind_array ) {
 			$this->bind_values( $p_bind_array );
@@ -251,7 +257,9 @@ class DbQuery {
 		$this->process_bind_params();
 		$this->process_sql_syntax();
 
-		return $this->db_execute( $p_limit, $p_offset );
+		$t_result = $this->db_execute($p_limit, $p_offset);
+		db_param_pop();
+		return $t_result;
 	}
 
 	/**
