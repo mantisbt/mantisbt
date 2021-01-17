@@ -1154,7 +1154,7 @@ function layout_footer() {
 	echo "<small>Copyright &copy;$t_copyright_years MantisBT Team</small>" . '<br>';
 
 	# Show optional user-specified custom copyright statement
-	$t_copyright_statement = config_get( 'copyright_statement' );
+	$t_copyright_statement = config_get_global( 'copyright_statement' );
 	if( $t_copyright_statement ) {
 		echo '<small>' . $t_copyright_statement . '</small>' . "\n";
 	}
