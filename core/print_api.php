@@ -643,7 +643,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
  * @return void
  */
 function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
-	if ( config_get( 'subprojects_enabled' ) == OFF ) {
+	if ( config_get_global( 'subprojects_enabled' ) == OFF ) {
 		return;
 	}
 
