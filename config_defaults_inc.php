@@ -4372,6 +4372,7 @@ $g_global_settings = array(
 	'cookie_path',
 	'cookie_prefix',
 	'cookie_time_length',
+	'copyright_statement',
 	'core_path',
 	'crypto_master_salt',
 	'css_include_file',
