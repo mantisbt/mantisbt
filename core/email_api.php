@@ -116,7 +116,7 @@ function email_regex_simple() {
  * @return boolean
  */
 function email_is_valid( $p_email ) {
-	$t_validate_email = config_get( 'validate_email' );
+	$t_validate_email = config_get_global( 'validate_email' );
 
 	# if we don't validate then just accept
 	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
