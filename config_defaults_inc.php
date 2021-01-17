@@ -4404,6 +4404,7 @@ $g_global_settings = array(
 	'email_smime_key_file',
 	'email_smime_key_password',
 	'fallback_language',
+	'favicon_image',
 	'file_type_icons',
 	'fileinfo_magic_db_file',
 	'form_security_validation',
