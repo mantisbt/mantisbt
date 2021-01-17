@@ -1145,7 +1145,7 @@ function layout_footer() {
 	# Show MantisBT version and copyright statement
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
-	if( config_get( 'show_version' ) == ON ) {
+	if( config_get_global( 'show_version' ) == ON ) {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 	echo '<div class="col-md-6 col-xs-12 no-padding">' . "\n";
