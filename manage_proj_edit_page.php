@@ -227,7 +227,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 </div>
 
 <?php
-if ( config_get( 'subprojects_enabled') == ON ) {
+if ( config_get_global( 'subprojects_enabled') == ON ) {
 ?>
 <!-- SUBPROJECTS -->
 <div class="col-md-12 col-xs-12">

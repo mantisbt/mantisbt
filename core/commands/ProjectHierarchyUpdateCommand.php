@@ -61,7 +61,7 @@ class ProjectHierarchyUpdateCommand extends Command {
 	 * Validate the data.
 	 */
 	function validate() {
-		if ( config_get( 'subprojects_enabled' ) == OFF ) {
+		if ( config_get_global( 'subprojects_enabled' ) == OFF ) {
 			throw new ClientException(
 				'Project hierarchy (subprojects) is disabled',
 				ERROR_PROJECT_HIERARCHY_DISABLED );
