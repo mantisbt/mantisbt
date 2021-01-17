@@ -4438,6 +4438,7 @@ $g_global_settings = array(
 	'show_memory_usage',
 	'show_queries_count',
 	'show_timer',
+	'show_version',
 	'stop_on_errors',
 	'string_cookie',
 	'top_include_page',
