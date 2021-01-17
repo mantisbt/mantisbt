@@ -4444,6 +4444,7 @@ $g_global_settings = array(
 	'top_include_page',
 	'use_ldap_email',
 	'use_ldap_realname',
+	'validate_email',
 	'version_suffix',
 	'view_all_cookie',
 	'wiki_engine_url',
