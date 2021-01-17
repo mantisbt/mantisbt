@@ -1161,7 +1161,7 @@ function layout_footer() {
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
-		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
+		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get_global( 'webmaster_email' ) ) );
 		echo '<small>' . $t_webmaster_contact_information . '</small>' . '<br>' . "\n";
 	}
 
