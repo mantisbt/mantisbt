@@ -82,7 +82,7 @@ function layout_page_header_begin( $p_page_title = null ) {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
@@ -357,7 +357,7 @@ function layout_login_page_begin() {
 	layout_head_css();
 	html_rss_link();
 
-	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image = config_get_global( 'favicon_image' );
 	if( !is_blank( $t_favicon_image ) ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
