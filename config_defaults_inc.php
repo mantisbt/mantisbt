@@ -4430,6 +4430,7 @@ $g_global_settings = array(
 	'logo_url',
 	'logout_cookie',
 	'logout_redirect_page',
+	'long_process_timeout',
 	'manage_config_cookie',
 	'manual_url',
 	'neato_tool',
