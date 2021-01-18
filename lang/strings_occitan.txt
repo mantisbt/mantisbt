@@ -39,6 +39,7 @@
  * @file
  *
  * @author Cedric31
+ * @author Nicolas Eynaud
  */
 
 $s_actiongroup_menu_copy = 'Copiar';
@@ -585,7 +586,9 @@ $s_configuration_corrupted = 'La configuracion dins la basa de donadas es corrom
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins installats';
 $s_plugins_available = 'Plugins disponibles';
+$s_plugins_missing = 'Plugins mancants ò invalids';
 $s_plugin_description = 'Descripcion';
+$s_plugin_problem_description = 'Descripcion dau problema';
 $s_plugin_author = 'Autor : %1$s';
 $s_plugin_url = 'Sit web :';
 $s_plugin_depends = 'Dependéncias';
@@ -596,12 +599,15 @@ $s_plugin_actions = 'Accions';
 $s_plugin_install = 'Installacion';
 $s_plugin_upgrade = 'Mesa a nivèl';
 $s_plugin_uninstall = 'Desinstallar';
+$s_plugin_manual_fix = 'Intervencion manuala necessària';
 $s_plugin_uninstall_message = 'Sètz segur que volètz desinstallar lo plugin « %1$s » ?';
 $s_plugin_key_label = 'Clau :';
 $s_plugin_key_met = 'Plugin prèst';
 $s_plugin_key_unmet = 'Dependéncias introbablas';
 $s_plugin_key_dated = 'Dependéncias perimidas';
 $s_plugin_key_upgrade = 'Mesa a nivèl requerida';
+$s_plugin_invalid_description = 'Plugin invalid';
+$s_plugin_invalid_status_message = 'Lei proprietats seguentas son pas definidas dins la classa dau plugin::%s';
 $s_project_added_msg = 'Lo projècte es estat apondut amb succès...';
 $s_category_added_msg = 'Categoria novèla creada amb succès...';
 $s_category_deleted_msg = 'Categoria escafada amb succès...';

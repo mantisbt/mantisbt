@@ -242,6 +242,7 @@ $s_set_configuration_option_action_edit = 'Optioun vun der Konfiguratioun änner
 $s_show_all_complex = 'Wäert fir all "%1$s" Optioune weisen';
 $s_plugin = 'Plugin';
 $s_plugin_description = 'Beschreiwung';
+$s_plugin_problem_description = 'Beschreiwung vum Problem';
 $s_plugin_author = 'Auteur: %1$s';
 $s_plugin_url = 'Internetsite:';
 $s_plugin_priority = 'Prioritéit';
