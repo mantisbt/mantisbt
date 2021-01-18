@@ -484,6 +484,8 @@ $s_bugnote_updated_msg = '已经被成功更新问题注释...';
 $s_last_edited = '最后编辑：';
 $s_hide_content = '隐藏内容';
 $s_show_content = '显示内容';
+$s_file_icon_description = '%1$s文件图标';
+$s_unknown_file_extension = '未知';
 $s_webmaster_contact_information = '联系<a href="mailto:%1$s" title="Contact the webmaster via e-mail.">管理员</a>获取援助';
 $s_total_queries_executed = '已执行查询总计：%1$d';
 $s_unique_queries_executed = '唯一已执行查询：%1$d';

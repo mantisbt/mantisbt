@@ -58,6 +58,7 @@
  * @author Luisangelrg
  * @author Macofe
  * @author MarcoAurelio
+ * @author MarleneR329
  * @author McDutchie
  * @author Mpayansilva
  * @author Nicolas Ramirez
@@ -495,6 +496,7 @@ $s_bugnote_updated_msg = 'La nota ha sido actualizada correctamente...';
 $s_last_edited = 'Última edición:';
 $s_hide_content = 'Ocultar contenido';
 $s_show_content = 'Mostrar contenido';
+$s_unknown_file_extension = 'desconocido';
 $s_webmaster_contact_information = 'Contacta con el <a href="mailto:%1$s" title="Contacto con webmaster vía correo electrónico.">administrador</a> por ayuda';
 $s_total_queries_executed = 'Total de consultas ejecutadas: %1$d';
 $s_unique_queries_executed = 'Consultas únicas ejecutadas: %1$d';
@@ -665,7 +667,10 @@ $s_show_all_complex = 'Mostrar valor para todas las opciones "%1$s"';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Plugins Instalados';
 $s_plugins_available = 'Plugins Disponibles';
+$s_plugins_missing = 'Complementos faltantes o no válidos';
+$s_plugins_missing_description = 'Los complementos que figuran en la lista siguiente están registrados, pero su código fuente no se encontró en, o no se cargó a partir de, «%s».<br>Puede intentarse reinstalarlos o eliminarlos.';
 $s_plugin_description = 'Descripción';
+$s_plugin_problem_description = 'Descripción del problema';
 $s_plugin_author = 'Autor: %1$s';
 $s_plugin_url = 'Sitio web:';
 $s_plugin_depends = 'Dependencias';
@@ -676,12 +681,17 @@ $s_plugin_actions = 'Acciones';
 $s_plugin_install = 'Instalar';
 $s_plugin_upgrade = 'Actualizar';
 $s_plugin_uninstall = 'Desinstalar';
+$s_plugin_manual_fix = 'Se necesita intervención manual';
 $s_plugin_uninstall_message = '¿Confirmas que quieres desinstalar el complemento «%1$s»?';
 $s_plugin_key_label = 'Clave:';
 $s_plugin_key_met = 'plugin listo';
 $s_plugin_key_unmet = 'dependencias no satisfechas';
 $s_plugin_key_dated = 'dependencies desactualizadas';
 $s_plugin_key_upgrade = 'actualización requerida';
+$s_plugin_invalid_description = 'El complemento no es válido';
+$s_plugin_invalid_status_message = 'Las propiedades requeridas siguientes no se han definido en la clase del complemento: %s.';
+$s_plugin_missing_description = 'Falta el complemento';
+$s_plugin_missing_status_message = 'El complemento se instaló en la base de datos de Mantis pero no pudo cargarse.';
 $s_project_added_msg = 'El proyecto ha sido agregado...';
 $s_category_added_msg = 'La categoría ha sido agregada...';
 $s_category_deleted_msg = 'La categoría ha sido eliminada correctamente…';
