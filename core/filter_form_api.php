@@ -1953,8 +1953,9 @@ function print_filter_custom_field( $p_field_id, array $p_filter = null ) {
 			echo '<option value="' . META_FILTER_ANY . '"';
 			check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
-			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
-			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ) ) ) {
+			$t_filter_show_none_for_enum = config_get( 'filter_show_none_for_enum' );
+			# don't show META_FILTER_NONE for enumerated types if not desired
+			if( !in_array( $t_cfdef['type'], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST ) ) or $t_filter_show_none_for_enum == ON ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
 				check_selected( $p_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';

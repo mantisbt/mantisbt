@@ -3330,6 +3330,12 @@ $g_create_permalink_threshold = DEVELOPER;
  */
 $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
+/**
+ * show [none] filter for enumerations custom fields
+ * @global integer $g_filter_show_none_for_enum
+ */
+$g_filter_show_none_for_enum = OFF;
+
 #########################
 # MantisBT Enum Strings #
 #########################
@@ -4615,6 +4621,7 @@ $g_public_config_names = array(
 	'filter_by_custom_fields',
 	'filter_custom_fields_per_row',
 	'filter_position',
+	'filter_show_none_for_enum',
 	'font_family',
 	'font_family_choices',
 	'font_family_choices_local',
