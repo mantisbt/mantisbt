@@ -1413,12 +1413,15 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null, $p_requ
 		$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 	} else {
 		$t_custom_field_value = custom_field_get_value( $p_field_def['id'], $p_bug_id );
-		# If the custom field value is undefined and the field cannot hold a null value, use the default value instead
+		# If the custom field value is undefined, and either the field cannot hold a null value
+		# or the field is a date and is required, then use the default value instead
 		if( $t_custom_field_value === null &&
 			( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_LIST ||
 				$p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ||
-				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ) ) {
+				$p_field_def['type'] == CUSTOM_FIELD_TYPE_RADIO ||
+				( $p_field_def['type'] == CUSTOM_FIELD_TYPE_DATE &&
+				  $p_required ) ) ) {
 			$t_custom_field_value = custom_field_default_to_value( $p_field_def['default_value'], $p_field_def['type'] );
 		}
 	}
